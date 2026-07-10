@@ -33,3 +33,5 @@ func DtcGetTransactionManagerEx(i_pwszHost string, i_pwszTmName string, i_riid *
 func DtcGetTransactionManagerExA(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_grfOptions uint32, i_pvConfigParams unsafe.Pointer, o_ppvObject *unsafe.Pointer) error {
 	return win32.HRESULTError(int32(systemdistributedtransactioncoordinator.DtcGetTransactionManagerExA(i_pszHost, i_pszTmName, i_riid, i_grfOptions, i_pvConfigParams, o_ppvObject)))
 }
+
+var DtcGetTransactionManagerExW = systemdistributedtransactioncoordinator.DtcGetTransactionManagerExW

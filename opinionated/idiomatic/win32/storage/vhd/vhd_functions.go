@@ -39,3 +39,29 @@ func QueryChangesVirtualDisk(VirtualDiskHandle foundation.HANDLE, ChangeTracking
 	_ChangeTrackingId := win32.UTF16Ptr(ChangeTrackingId)
 	return storagevhd.QueryChangesVirtualDisk(VirtualDiskHandle, foundation.PWSTR(_ChangeTrackingId), ByteOffset, ByteLength, Flags, Ranges, RangeCount, ProcessedLength)
 }
+
+var ApplySnapshotVhdSet = storagevhd.ApplySnapshotVhdSet
+var AttachVirtualDisk = storagevhd.AttachVirtualDisk
+var BreakMirrorVirtualDisk = storagevhd.BreakMirrorVirtualDisk
+var CompactVirtualDisk = storagevhd.CompactVirtualDisk
+var CompleteForkVirtualDisk = storagevhd.CompleteForkVirtualDisk
+var DeleteSnapshotVhdSet = storagevhd.DeleteSnapshotVhdSet
+var DeleteVirtualDiskMetadata = storagevhd.DeleteVirtualDiskMetadata
+var DetachVirtualDisk = storagevhd.DetachVirtualDisk
+var EnumerateVirtualDiskMetadata = storagevhd.EnumerateVirtualDiskMetadata
+var ExpandVirtualDisk = storagevhd.ExpandVirtualDisk
+var ForkVirtualDisk = storagevhd.ForkVirtualDisk
+var GetAllAttachedVirtualDiskPhysicalPaths = storagevhd.GetAllAttachedVirtualDiskPhysicalPaths
+var GetStorageDependencyInformation = storagevhd.GetStorageDependencyInformation
+var GetVirtualDiskInformation = storagevhd.GetVirtualDiskInformation
+var GetVirtualDiskMetadata = storagevhd.GetVirtualDiskMetadata
+var GetVirtualDiskOperationProgress = storagevhd.GetVirtualDiskOperationProgress
+var GetVirtualDiskPhysicalPath = storagevhd.GetVirtualDiskPhysicalPath
+var MergeVirtualDisk = storagevhd.MergeVirtualDisk
+var MirrorVirtualDisk = storagevhd.MirrorVirtualDisk
+var ModifyVhdSet = storagevhd.ModifyVhdSet
+var RawSCSIVirtualDisk = storagevhd.RawSCSIVirtualDisk
+var ResizeVirtualDisk = storagevhd.ResizeVirtualDisk
+var SetVirtualDiskInformation = storagevhd.SetVirtualDiskInformation
+var SetVirtualDiskMetadata = storagevhd.SetVirtualDiskMetadata
+var TakeSnapshotVhdSet = storagevhd.TakeSnapshotVhdSet

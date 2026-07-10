@@ -1232,3 +1232,15 @@ func WsWriteXmlnsAttribute(writer *networkingwindowswebservices.WS_XML_WRITER, p
 func WsXmlStringEquals(string1 *networkingwindowswebservices.WS_XML_STRING, string2 *networkingwindowswebservices.WS_XML_STRING, error_ *networkingwindowswebservices.WS_ERROR) error {
 	return win32.HRESULTError(int32(networkingwindowswebservices.WsXmlStringEquals(string1, string2, error_)))
 }
+
+var WsFreeChannel = networkingwindowswebservices.WsFreeChannel
+var WsFreeError = networkingwindowswebservices.WsFreeError
+var WsFreeHeap = networkingwindowswebservices.WsFreeHeap
+var WsFreeListener = networkingwindowswebservices.WsFreeListener
+var WsFreeMessage = networkingwindowswebservices.WsFreeMessage
+var WsFreeMetadata = networkingwindowswebservices.WsFreeMetadata
+var WsFreeReader = networkingwindowswebservices.WsFreeReader
+var WsFreeSecurityToken = networkingwindowswebservices.WsFreeSecurityToken
+var WsFreeServiceHost = networkingwindowswebservices.WsFreeServiceHost
+var WsFreeServiceProxy = networkingwindowswebservices.WsFreeServiceProxy
+var WsFreeWriter = networkingwindowswebservices.WsFreeWriter

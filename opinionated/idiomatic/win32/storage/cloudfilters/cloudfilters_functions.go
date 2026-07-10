@@ -195,3 +195,12 @@ func CfUpdatePlaceholder(FileHandle foundation.HANDLE, FsMetadata *storagecloudf
 func CfUpdateSyncProviderStatus(ConnectionKey storagecloudfilters.CF_CONNECTION_KEY, ProviderStatus storagecloudfilters.CF_SYNC_PROVIDER_STATUS) error {
 	return win32.HRESULTError(int32(storagecloudfilters.CfUpdateSyncProviderStatus(ConnectionKey, ProviderStatus)))
 }
+
+var CfCloseHandle = storagecloudfilters.CfCloseHandle
+var CfGetPlaceholderStateFromAttributeTag = storagecloudfilters.CfGetPlaceholderStateFromAttributeTag
+var CfGetPlaceholderStateFromFileInfo = storagecloudfilters.CfGetPlaceholderStateFromFileInfo
+var CfGetPlaceholderStateFromFindData = storagecloudfilters.CfGetPlaceholderStateFromFindData
+var CfGetWin32HandleFromProtectedHandle = storagecloudfilters.CfGetWin32HandleFromProtectedHandle
+var CfReferenceProtectedHandle = storagecloudfilters.CfReferenceProtectedHandle
+var CfReleaseProtectedHandle = storagecloudfilters.CfReleaseProtectedHandle
+var CfReleaseTransferKey = storagecloudfilters.CfReleaseTransferKey

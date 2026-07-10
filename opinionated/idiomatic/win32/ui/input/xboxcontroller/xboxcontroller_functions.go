@@ -22,3 +22,9 @@ func XInputEnable(enable bool) {
 func XInputGetKeystroke(dwUserIndex uint32, pKeystroke *uiinputxboxcontroller.XINPUT_KEYSTROKE) uint32 {
 	return uiinputxboxcontroller.XInputGetKeystroke(dwUserIndex, 0, pKeystroke)
 }
+
+var XInputGetAudioDeviceIds = uiinputxboxcontroller.XInputGetAudioDeviceIds
+var XInputGetBatteryInformation = uiinputxboxcontroller.XInputGetBatteryInformation
+var XInputGetCapabilities = uiinputxboxcontroller.XInputGetCapabilities
+var XInputGetState = uiinputxboxcontroller.XInputGetState
+var XInputSetState = uiinputxboxcontroller.XInputSetState

@@ -16,3 +16,10 @@ func ComDBClaimPort(HComDB devicesserialcommunication.HCOMDB, ComNumber uint32, 
 	_ForceClaim := foundation.BOOL(win32.Bool32(ForceClaim))
 	return devicesserialcommunication.ComDBClaimPort(HComDB, ComNumber, _ForceClaim, Forced)
 }
+
+var ComDBClaimNextFreePort = devicesserialcommunication.ComDBClaimNextFreePort
+var ComDBClose = devicesserialcommunication.ComDBClose
+var ComDBGetCurrentPortUsage = devicesserialcommunication.ComDBGetCurrentPortUsage
+var ComDBOpen = devicesserialcommunication.ComDBOpen
+var ComDBReleasePort = devicesserialcommunication.ComDBReleasePort
+var ComDBResizeDatabase = devicesserialcommunication.ComDBResizeDatabase

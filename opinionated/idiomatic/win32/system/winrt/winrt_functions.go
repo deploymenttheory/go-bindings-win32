@@ -325,3 +325,18 @@ func WindowsTrimStringEnd(string_ systemwinrt.HSTRING, trimString systemwinrt.HS
 func WindowsTrimStringStart(string_ systemwinrt.HSTRING, trimString systemwinrt.HSTRING, newString *systemwinrt.HSTRING) error {
 	return win32.HRESULTError(int32(systemwinrt.WindowsTrimStringStart(string_, trimString, newString)))
 }
+
+var HSTRING_UserFree = systemwinrt.HSTRING_UserFree
+var HSTRING_UserFree64 = systemwinrt.HSTRING_UserFree64
+var HSTRING_UserMarshal = systemwinrt.HSTRING_UserMarshal
+var HSTRING_UserMarshal64 = systemwinrt.HSTRING_UserMarshal64
+var HSTRING_UserSize = systemwinrt.HSTRING_UserSize
+var HSTRING_UserSize64 = systemwinrt.HSTRING_UserSize64
+var HSTRING_UserUnmarshal = systemwinrt.HSTRING_UserUnmarshal
+var HSTRING_UserUnmarshal64 = systemwinrt.HSTRING_UserUnmarshal64
+var RoClearError = systemwinrt.RoClearError
+var RoFailFastWithErrorContext = systemwinrt.RoFailFastWithErrorContext
+var RoRevokeActivationFactories = systemwinrt.RoRevokeActivationFactories
+var RoUninitialize = systemwinrt.RoUninitialize
+var WindowsGetStringLen = systemwinrt.WindowsGetStringLen
+var WindowsGetStringRawBuffer = systemwinrt.WindowsGetStringRawBuffer

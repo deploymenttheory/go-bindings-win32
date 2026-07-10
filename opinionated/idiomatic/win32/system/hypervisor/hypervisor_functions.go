@@ -661,3 +661,5 @@ func WHvUpdateTriggerParameters(Partition systemhypervisor.WHV_PARTITION_HANDLE,
 func WHvWriteVpciDeviceRegister(Partition systemhypervisor.WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Register *systemhypervisor.WHV_VPCI_DEVICE_REGISTER, Data unsafe.Pointer) error {
 	return win32.HRESULTError(int32(systemhypervisor.WHvWriteVpciDeviceRegister(Partition, LogicalDeviceId, Register, Data)))
 }
+
+var GetSavedStateSymbolProviderHandle = systemhypervisor.GetSavedStateSymbolProviderHandle

@@ -421,3 +421,12 @@ func UrlMkSetSessionOption(dwOption uint32, pBuffer unsafe.Pointer, dwBufferLeng
 func WriteHitLogging(lpLogginginfo *systemcomurlmon.HIT_LOGGING_INFO) bool {
 	return systemcomurlmon.WriteHitLogging(lpLogginginfo) != 0
 }
+
+var IEGetUserPrivateNamespaceName = systemcomurlmon.IEGetUserPrivateNamespaceName
+var IsLoggingEnabledW = systemcomurlmon.IsLoggingEnabledW
+var ReleaseBindInfo = systemcomurlmon.ReleaseBindInfo
+var URLDownloadToCacheFileW = systemcomurlmon.URLDownloadToCacheFileW
+var URLDownloadToFileW = systemcomurlmon.URLDownloadToFileW
+var URLOpenBlockingStreamW = systemcomurlmon.URLOpenBlockingStreamW
+var URLOpenPullStreamW = systemcomurlmon.URLOpenPullStreamW
+var URLOpenStreamW = systemcomurlmon.URLOpenStreamW

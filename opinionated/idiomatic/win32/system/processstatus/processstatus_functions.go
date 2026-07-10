@@ -177,3 +177,44 @@ func K32QueryWorkingSet(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32
 func K32QueryWorkingSetEx(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) bool {
 	return systemprocessstatus.K32QueryWorkingSetEx(hProcess, pv, cb) != 0
 }
+
+var EmptyWorkingSet = systemprocessstatus.EmptyWorkingSet
+var EnumDeviceDrivers = systemprocessstatus.EnumDeviceDrivers
+var EnumPageFilesA = systemprocessstatus.EnumPageFilesA
+var EnumPageFilesW = systemprocessstatus.EnumPageFilesW
+var EnumProcessModules = systemprocessstatus.EnumProcessModules
+var EnumProcessModulesEx = systemprocessstatus.EnumProcessModulesEx
+var EnumProcesses = systemprocessstatus.EnumProcesses
+var GetDeviceDriverBaseNameA = systemprocessstatus.GetDeviceDriverBaseNameA
+var GetDeviceDriverBaseNameW = systemprocessstatus.GetDeviceDriverBaseNameW
+var GetDeviceDriverFileNameA = systemprocessstatus.GetDeviceDriverFileNameA
+var GetDeviceDriverFileNameW = systemprocessstatus.GetDeviceDriverFileNameW
+var GetMappedFileNameA = systemprocessstatus.GetMappedFileNameA
+var GetMappedFileNameW = systemprocessstatus.GetMappedFileNameW
+var GetModuleBaseNameA = systemprocessstatus.GetModuleBaseNameA
+var GetModuleBaseNameW = systemprocessstatus.GetModuleBaseNameW
+var GetModuleFileNameExA = systemprocessstatus.GetModuleFileNameExA
+var GetModuleFileNameExW = systemprocessstatus.GetModuleFileNameExW
+var GetModuleInformation = systemprocessstatus.GetModuleInformation
+var GetPerformanceInfo = systemprocessstatus.GetPerformanceInfo
+var GetProcessImageFileNameA = systemprocessstatus.GetProcessImageFileNameA
+var GetProcessImageFileNameW = systemprocessstatus.GetProcessImageFileNameW
+var GetProcessMemoryInfo = systemprocessstatus.GetProcessMemoryInfo
+var GetWsChanges = systemprocessstatus.GetWsChanges
+var GetWsChangesEx = systemprocessstatus.GetWsChangesEx
+var InitializeProcessForWsWatch = systemprocessstatus.InitializeProcessForWsWatch
+var K32EnumPageFilesW = systemprocessstatus.K32EnumPageFilesW
+var K32GetDeviceDriverBaseNameA = systemprocessstatus.K32GetDeviceDriverBaseNameA
+var K32GetDeviceDriverBaseNameW = systemprocessstatus.K32GetDeviceDriverBaseNameW
+var K32GetDeviceDriverFileNameA = systemprocessstatus.K32GetDeviceDriverFileNameA
+var K32GetDeviceDriverFileNameW = systemprocessstatus.K32GetDeviceDriverFileNameW
+var K32GetMappedFileNameA = systemprocessstatus.K32GetMappedFileNameA
+var K32GetMappedFileNameW = systemprocessstatus.K32GetMappedFileNameW
+var K32GetModuleBaseNameA = systemprocessstatus.K32GetModuleBaseNameA
+var K32GetModuleBaseNameW = systemprocessstatus.K32GetModuleBaseNameW
+var K32GetModuleFileNameExA = systemprocessstatus.K32GetModuleFileNameExA
+var K32GetModuleFileNameExW = systemprocessstatus.K32GetModuleFileNameExW
+var K32GetProcessImageFileNameA = systemprocessstatus.K32GetProcessImageFileNameA
+var K32GetProcessImageFileNameW = systemprocessstatus.K32GetProcessImageFileNameW
+var QueryWorkingSet = systemprocessstatus.QueryWorkingSet
+var QueryWorkingSetEx = systemprocessstatus.QueryWorkingSetEx

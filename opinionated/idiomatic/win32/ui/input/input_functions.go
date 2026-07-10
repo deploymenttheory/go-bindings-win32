@@ -42,3 +42,11 @@ func RegisterRawInputDevices(pRawInputDevices []uiinput.RAWINPUTDEVICE, cbSize u
 	}
 	return uiinput.RegisterRawInputDevices(_pRawInputDevices, uint32(len(pRawInputDevices)), cbSize)
 }
+
+var GetCurrentInputMessageSource = uiinput.GetCurrentInputMessageSource
+var GetRawInputBuffer = uiinput.GetRawInputBuffer
+var GetRawInputData = uiinput.GetRawInputData
+var GetRawInputDeviceInfoA = uiinput.GetRawInputDeviceInfoA
+var GetRawInputDeviceInfoW = uiinput.GetRawInputDeviceInfoW
+var GetRawInputDeviceList = uiinput.GetRawInputDeviceList
+var GetRegisteredRawInputDevices = uiinput.GetRegisteredRawInputDevices

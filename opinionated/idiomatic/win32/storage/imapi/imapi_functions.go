@@ -37,3 +37,6 @@ func OpenIMsgSession(lpMalloc systemcomidiom.IMalloc, ulFlags uint32, lppMsgSess
 func SetAttribIMsgOnIStg(lpObject unsafe.Pointer, lpPropTags *systemaddressbook.SPropTagArray, lpPropAttrs *storageimapi.SPropAttrArray, lppPropProblems **systemaddressbook.SPropProblemArray) error {
 	return win32.HRESULTError(int32(storageimapi.SetAttribIMsgOnIStg(lpObject, lpPropTags, lpPropAttrs, lppPropProblems)))
 }
+
+var CloseIMsgSession = storageimapi.CloseIMsgSession
+var MapStorageSCode = storageimapi.MapStorageSCode

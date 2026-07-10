@@ -164,3 +164,21 @@ func HttpUpdateServiceConfiguration(ConfigId networkinghttpserver.HTTP_SERVICE_C
 func HttpWaitForDisconnectEx(RequestQueueHandle foundation.HANDLE, ConnectionId uint64, Overlapped *systemio.OVERLAPPED) uint32 {
 	return networkinghttpserver.HttpWaitForDisconnectEx(RequestQueueHandle, ConnectionId, 0, Overlapped)
 }
+
+var HttpCancelHttpRequest = networkinghttpserver.HttpCancelHttpRequest
+var HttpCloseRequestQueue = networkinghttpserver.HttpCloseRequestQueue
+var HttpCloseServerSession = networkinghttpserver.HttpCloseServerSession
+var HttpCloseUrlGroup = networkinghttpserver.HttpCloseUrlGroup
+var HttpDelegateRequestEx = networkinghttpserver.HttpDelegateRequestEx
+var HttpQueryRequestProperty = networkinghttpserver.HttpQueryRequestProperty
+var HttpQueryServerSessionProperty = networkinghttpserver.HttpQueryServerSessionProperty
+var HttpQueryUrlGroupProperty = networkinghttpserver.HttpQueryUrlGroupProperty
+var HttpReceiveClientCertificate = networkinghttpserver.HttpReceiveClientCertificate
+var HttpReceiveHttpRequest = networkinghttpserver.HttpReceiveHttpRequest
+var HttpReceiveRequestEntityBody = networkinghttpserver.HttpReceiveRequestEntityBody
+var HttpSetRequestProperty = networkinghttpserver.HttpSetRequestProperty
+var HttpSetServerSessionProperty = networkinghttpserver.HttpSetServerSessionProperty
+var HttpSetUrlGroupProperty = networkinghttpserver.HttpSetUrlGroupProperty
+var HttpShutdownRequestQueue = networkinghttpserver.HttpShutdownRequestQueue
+var HttpWaitForDemandStart = networkinghttpserver.HttpWaitForDemandStart
+var HttpWaitForDisconnect = networkinghttpserver.HttpWaitForDisconnect

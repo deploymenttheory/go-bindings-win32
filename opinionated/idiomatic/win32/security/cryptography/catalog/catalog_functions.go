@@ -178,3 +178,15 @@ func IsCatalogFile(hFile foundation.HANDLE, pwszFileName string) bool {
 	_pwszFileName := win32.UTF16Ptr(pwszFileName)
 	return securitycryptographycatalog.IsCatalogFile(hFile, foundation.PWSTR(_pwszFileName)) != 0
 }
+
+var CryptCATCDFEnumAttributes = securitycryptographycatalog.CryptCATCDFEnumAttributes
+var CryptCATCDFEnumCatAttributes = securitycryptographycatalog.CryptCATCDFEnumCatAttributes
+var CryptCATCDFEnumMembers = securitycryptographycatalog.CryptCATCDFEnumMembers
+var CryptCATCatalogInfoFromContext = securitycryptographycatalog.CryptCATCatalogInfoFromContext
+var CryptCATEnumerateAttr = securitycryptographycatalog.CryptCATEnumerateAttr
+var CryptCATEnumerateCatAttr = securitycryptographycatalog.CryptCATEnumerateCatAttr
+var CryptCATEnumerateMember = securitycryptographycatalog.CryptCATEnumerateMember
+var CryptCATFreeSortedMemberInfo = securitycryptographycatalog.CryptCATFreeSortedMemberInfo
+var CryptCATHandleFromStore = securitycryptographycatalog.CryptCATHandleFromStore
+var CryptCATPersistStore = securitycryptographycatalog.CryptCATPersistStore
+var CryptCATStoreFromHandle = securitycryptographycatalog.CryptCATStoreFromHandle

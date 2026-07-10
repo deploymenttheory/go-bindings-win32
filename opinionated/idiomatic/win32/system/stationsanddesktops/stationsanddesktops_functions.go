@@ -118,3 +118,30 @@ func OpenWindowStationA(lpszWinSta foundation.PSTR, fInherit bool, dwDesiredAcce
 func SetUserObjectInformation(hObj foundation.HANDLE, nIndex int32, pvInfo unsafe.Pointer, nLength uint32) error {
 	return systemstationsanddesktops.SetUserObjectInformationW(hObj, nIndex, pvInfo, nLength)
 }
+
+var BroadcastSystemMessageA = systemstationsanddesktops.BroadcastSystemMessageA
+var BroadcastSystemMessageExA = systemstationsanddesktops.BroadcastSystemMessageExA
+var BroadcastSystemMessageExW = systemstationsanddesktops.BroadcastSystemMessageExW
+var BroadcastSystemMessageW = systemstationsanddesktops.BroadcastSystemMessageW
+var CloseDesktop = systemstationsanddesktops.CloseDesktop
+var CloseWindowStation = systemstationsanddesktops.CloseWindowStation
+var CreateDesktopExW = systemstationsanddesktops.CreateDesktopExW
+var CreateDesktopW = systemstationsanddesktops.CreateDesktopW
+var CreateWindowStationA = systemstationsanddesktops.CreateWindowStationA
+var CreateWindowStationW = systemstationsanddesktops.CreateWindowStationW
+var EnumDesktopWindows = systemstationsanddesktops.EnumDesktopWindows
+var EnumDesktopsA = systemstationsanddesktops.EnumDesktopsA
+var EnumDesktopsW = systemstationsanddesktops.EnumDesktopsW
+var EnumWindowStationsA = systemstationsanddesktops.EnumWindowStationsA
+var EnumWindowStationsW = systemstationsanddesktops.EnumWindowStationsW
+var GetProcessWindowStation = systemstationsanddesktops.GetProcessWindowStation
+var GetThreadDesktop = systemstationsanddesktops.GetThreadDesktop
+var GetUserObjectInformationA = systemstationsanddesktops.GetUserObjectInformationA
+var GetUserObjectInformationW = systemstationsanddesktops.GetUserObjectInformationW
+var OpenDesktopW = systemstationsanddesktops.OpenDesktopW
+var OpenWindowStationW = systemstationsanddesktops.OpenWindowStationW
+var SetProcessWindowStation = systemstationsanddesktops.SetProcessWindowStation
+var SetThreadDesktop = systemstationsanddesktops.SetThreadDesktop
+var SetUserObjectInformationA = systemstationsanddesktops.SetUserObjectInformationA
+var SetUserObjectInformationW = systemstationsanddesktops.SetUserObjectInformationW
+var SwitchDesktop = systemstationsanddesktops.SwitchDesktop

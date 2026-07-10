@@ -632,3 +632,16 @@ func WindowPattern_SetWindowVisualState(hobj uiaccessibility.HUIAPATTERNOBJECT, 
 func WindowPattern_WaitForInputIdle(hobj uiaccessibility.HUIAPATTERNOBJECT, milliseconds int32, pResult *foundation.BOOL) error {
 	return win32.HRESULTError(int32(uiaccessibility.WindowPattern_WaitForInputIdle(hobj, milliseconds, pResult)))
 }
+
+var CreateStdAccessibleProxyW = uiaccessibility.CreateStdAccessibleProxyW
+var GetOleaccVersionInfo = uiaccessibility.GetOleaccVersionInfo
+var GetRoleTextA = uiaccessibility.GetRoleTextA
+var GetRoleTextW = uiaccessibility.GetRoleTextW
+var GetStateTextA = uiaccessibility.GetStateTextA
+var GetStateTextW = uiaccessibility.GetStateTextW
+var NotifyWinEvent = uiaccessibility.NotifyWinEvent
+var RegisterPointerInputTarget = uiaccessibility.RegisterPointerInputTarget
+var SetWinEventHook = uiaccessibility.SetWinEventHook
+var UiaLookupId = uiaccessibility.UiaLookupId
+var UiaRegisterProviderCallback = uiaccessibility.UiaRegisterProviderCallback
+var UnregisterPointerInputTarget = uiaccessibility.UnregisterPointerInputTarget

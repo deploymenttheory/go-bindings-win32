@@ -192,3 +192,6 @@ func MQSetQueueSecurity(lpwcsFormatName string, SecurityInformation security.OBJ
 	_lpwcsFormatName := win32.UTF16Ptr(lpwcsFormatName)
 	return win32.HRESULTError(int32(systemmessagequeuing.MQSetQueueSecurity(foundation.PWSTR(_lpwcsFormatName), SecurityInformation, pSecurityDescriptor)))
 }
+
+var MQFreeMemory = systemmessagequeuing.MQFreeMemory
+var MQFreeSecurityContext = systemmessagequeuing.MQFreeSecurityContext

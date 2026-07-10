@@ -1438,3 +1438,11 @@ func OPMXboxGetHDCPStatus(pHDCPStatus *mediamediafoundation.OPM_HDCP_STATUS) err
 func OPMXboxGetHDCPStatusAndType(pHDCPStatus *mediamediafoundation.OPM_HDCP_STATUS, pHDCPType *mediamediafoundation.OPM_HDCP_TYPE) error {
 	return win32.HRESULTError(int32(mediamediafoundation.OPMXboxGetHDCPStatusAndType(pHDCPStatus, pHDCPType)))
 }
+
+var MFGetSystemTime = mediamediafoundation.MFGetSystemTime
+var MFGetUncompressedVideoFormat = mediamediafoundation.MFGetUncompressedVideoFormat
+var MFHeapAlloc = mediamediafoundation.MFHeapAlloc
+var MFHeapFree = mediamediafoundation.MFHeapFree
+var MFMapDX9FormatToDXGIFormat = mediamediafoundation.MFMapDX9FormatToDXGIFormat
+var MFMapDXGIFormatToDX9Format = mediamediafoundation.MFMapDXGIFormatToDX9Format
+var MFllMulDiv = mediamediafoundation.MFllMulDiv

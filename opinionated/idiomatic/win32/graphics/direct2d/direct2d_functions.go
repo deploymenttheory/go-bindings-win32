@@ -42,3 +42,5 @@ func D2D1InvertMatrix(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) bool {
 func D2D1IsMatrixInvertible(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) bool {
 	return graphicsdirect2d.D2D1IsMatrixInvertible(matrix) != 0
 }
+
+var D2D1GetGradientMeshInteriorPointsFromCoonsPatch = graphicsdirect2d.D2D1GetGradientMeshInteriorPointsFromCoonsPatch

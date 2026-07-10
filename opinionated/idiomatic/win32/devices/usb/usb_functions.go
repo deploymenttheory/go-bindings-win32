@@ -53,3 +53,33 @@ func WinUsb_WriteIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Lengt
 	_ContinueStream := foundation.BOOL(win32.Bool32(ContinueStream))
 	return devicesusb.WinUsb_WriteIsochPipeAsap(BufferHandle, Offset, Length, _ContinueStream, Overlapped)
 }
+
+var WinUsb_AbortPipe = devicesusb.WinUsb_AbortPipe
+var WinUsb_ControlTransfer = devicesusb.WinUsb_ControlTransfer
+var WinUsb_FlushPipe = devicesusb.WinUsb_FlushPipe
+var WinUsb_GetAdjustedFrameNumber = devicesusb.WinUsb_GetAdjustedFrameNumber
+var WinUsb_GetAssociatedInterface = devicesusb.WinUsb_GetAssociatedInterface
+var WinUsb_GetCurrentAlternateSetting = devicesusb.WinUsb_GetCurrentAlternateSetting
+var WinUsb_GetCurrentFrameNumber = devicesusb.WinUsb_GetCurrentFrameNumber
+var WinUsb_GetCurrentFrameNumberAndQpc = devicesusb.WinUsb_GetCurrentFrameNumberAndQpc
+var WinUsb_GetDescriptor = devicesusb.WinUsb_GetDescriptor
+var WinUsb_GetPipePolicy = devicesusb.WinUsb_GetPipePolicy
+var WinUsb_GetPowerPolicy = devicesusb.WinUsb_GetPowerPolicy
+var WinUsb_Initialize = devicesusb.WinUsb_Initialize
+var WinUsb_ParseConfigurationDescriptor = devicesusb.WinUsb_ParseConfigurationDescriptor
+var WinUsb_ParseDescriptors = devicesusb.WinUsb_ParseDescriptors
+var WinUsb_QueryDeviceInformation = devicesusb.WinUsb_QueryDeviceInformation
+var WinUsb_QueryInterfaceSettings = devicesusb.WinUsb_QueryInterfaceSettings
+var WinUsb_QueryPipe = devicesusb.WinUsb_QueryPipe
+var WinUsb_QueryPipeEx = devicesusb.WinUsb_QueryPipeEx
+var WinUsb_ReadPipe = devicesusb.WinUsb_ReadPipe
+var WinUsb_RegisterIsochBuffer = devicesusb.WinUsb_RegisterIsochBuffer
+var WinUsb_ResetPipe = devicesusb.WinUsb_ResetPipe
+var WinUsb_SetCurrentAlternateSetting = devicesusb.WinUsb_SetCurrentAlternateSetting
+var WinUsb_SetPipePolicy = devicesusb.WinUsb_SetPipePolicy
+var WinUsb_SetPowerPolicy = devicesusb.WinUsb_SetPowerPolicy
+var WinUsb_StartTrackingForTimeSync = devicesusb.WinUsb_StartTrackingForTimeSync
+var WinUsb_StopTrackingForTimeSync = devicesusb.WinUsb_StopTrackingForTimeSync
+var WinUsb_UnregisterIsochBuffer = devicesusb.WinUsb_UnregisterIsochBuffer
+var WinUsb_WriteIsochPipe = devicesusb.WinUsb_WriteIsochPipe
+var WinUsb_WritePipe = devicesusb.WinUsb_WritePipe

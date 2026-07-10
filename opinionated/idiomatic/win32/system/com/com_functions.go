@@ -633,3 +633,16 @@ func StringFromCLSID(rclsid *win32.GUID, lplpsz *foundation.PWSTR) error {
 func StringFromIID(rclsid *win32.GUID, lplpsz *foundation.PWSTR) error {
 	return win32.HRESULTError(int32(systemcom.StringFromIID(rclsid, lplpsz)))
 }
+
+var CoAddRefServerProcess = systemcom.CoAddRefServerProcess
+var CoBuildVersion = systemcom.CoBuildVersion
+var CoFreeAllLibraries = systemcom.CoFreeAllLibraries
+var CoFreeLibrary = systemcom.CoFreeLibrary
+var CoFreeUnusedLibraries = systemcom.CoFreeUnusedLibraries
+var CoGetCurrentProcess = systemcom.CoGetCurrentProcess
+var CoReleaseServerProcess = systemcom.CoReleaseServerProcess
+var CoTaskMemAlloc = systemcom.CoTaskMemAlloc
+var CoTaskMemFree = systemcom.CoTaskMemFree
+var CoTaskMemRealloc = systemcom.CoTaskMemRealloc
+var CoUninitialize = systemcom.CoUninitialize
+var StringFromGUID2 = systemcom.StringFromGUID2

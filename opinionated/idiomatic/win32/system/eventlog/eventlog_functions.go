@@ -187,3 +187,44 @@ func ReportEventA(hEventLog foundation.HANDLE, wType systemeventlog.REPORT_EVENT
 	}
 	return systemeventlog.ReportEventA(hEventLog, wType, wCategory, dwEventID, lpUserSid, uint16(len(lpStrings)), dwDataSize, _lpStrings, lpRawData)
 }
+
+var BackupEventLogA = systemeventlog.BackupEventLogA
+var BackupEventLogW = systemeventlog.BackupEventLogW
+var ClearEventLogA = systemeventlog.ClearEventLogA
+var ClearEventLogW = systemeventlog.ClearEventLogW
+var CloseEventLog = systemeventlog.CloseEventLog
+var DeregisterEventSource = systemeventlog.DeregisterEventSource
+var EvtCancel = systemeventlog.EvtCancel
+var EvtClose = systemeventlog.EvtClose
+var EvtGetChannelConfigProperty = systemeventlog.EvtGetChannelConfigProperty
+var EvtGetEventInfo = systemeventlog.EvtGetEventInfo
+var EvtGetEventMetadataProperty = systemeventlog.EvtGetEventMetadataProperty
+var EvtGetExtendedStatus = systemeventlog.EvtGetExtendedStatus
+var EvtGetLogInfo = systemeventlog.EvtGetLogInfo
+var EvtGetObjectArrayProperty = systemeventlog.EvtGetObjectArrayProperty
+var EvtGetObjectArraySize = systemeventlog.EvtGetObjectArraySize
+var EvtGetPublisherMetadataProperty = systemeventlog.EvtGetPublisherMetadataProperty
+var EvtGetQueryInfo = systemeventlog.EvtGetQueryInfo
+var EvtNextChannelPath = systemeventlog.EvtNextChannelPath
+var EvtNextEventMetadata = systemeventlog.EvtNextEventMetadata
+var EvtNextPublisherId = systemeventlog.EvtNextPublisherId
+var EvtOpenChannelEnum = systemeventlog.EvtOpenChannelEnum
+var EvtOpenEventMetadataEnum = systemeventlog.EvtOpenEventMetadataEnum
+var EvtOpenPublisherEnum = systemeventlog.EvtOpenPublisherEnum
+var EvtRender = systemeventlog.EvtRender
+var EvtSaveChannelConfig = systemeventlog.EvtSaveChannelConfig
+var EvtSetChannelConfigProperty = systemeventlog.EvtSetChannelConfigProperty
+var EvtUpdateBookmark = systemeventlog.EvtUpdateBookmark
+var GetEventLogInformation = systemeventlog.GetEventLogInformation
+var GetNumberOfEventLogRecords = systemeventlog.GetNumberOfEventLogRecords
+var GetOldestEventLogRecord = systemeventlog.GetOldestEventLogRecord
+var NotifyChangeEventLog = systemeventlog.NotifyChangeEventLog
+var OpenBackupEventLogA = systemeventlog.OpenBackupEventLogA
+var OpenBackupEventLogW = systemeventlog.OpenBackupEventLogW
+var OpenEventLogA = systemeventlog.OpenEventLogA
+var OpenEventLogW = systemeventlog.OpenEventLogW
+var ReadEventLogA = systemeventlog.ReadEventLogA
+var ReadEventLogW = systemeventlog.ReadEventLogW
+var RegisterEventSourceA = systemeventlog.RegisterEventSourceA
+var RegisterEventSourceW = systemeventlog.RegisterEventSourceW
+var ReportEventW = systemeventlog.ReportEventW

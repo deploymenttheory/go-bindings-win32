@@ -16,3 +16,7 @@ func IsDestinationReachable(lpszDestination string, lpQOCInfo *systemeventnotifi
 	_lpszDestination := win32.UTF16Ptr(lpszDestination)
 	return systemeventnotificationservice.IsDestinationReachableW(foundation.PWSTR(_lpszDestination), lpQOCInfo)
 }
+
+var IsDestinationReachableA = systemeventnotificationservice.IsDestinationReachableA
+var IsDestinationReachableW = systemeventnotificationservice.IsDestinationReachableW
+var IsNetworkAlive = systemeventnotificationservice.IsNetworkAlive

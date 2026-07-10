@@ -18,3 +18,17 @@ func LocalFileTimeToLocalSystemTime(timeZoneInformation *systemtime.TIME_ZONE_IN
 func LocalSystemTimeToLocalFileTime(timeZoneInformation *systemtime.TIME_ZONE_INFORMATION, localSystemTime *foundation.SYSTEMTIME, localFileTime *foundation.FILETIME) bool {
 	return systemtime.LocalSystemTimeToLocalFileTime(timeZoneInformation, localSystemTime, localFileTime) != 0
 }
+
+var EnumDynamicTimeZoneInformation = systemtime.EnumDynamicTimeZoneInformation
+var FileTimeToSystemTime = systemtime.FileTimeToSystemTime
+var GetDynamicTimeZoneInformation = systemtime.GetDynamicTimeZoneInformation
+var GetDynamicTimeZoneInformationEffectiveYears = systemtime.GetDynamicTimeZoneInformationEffectiveYears
+var GetTimeZoneInformation = systemtime.GetTimeZoneInformation
+var GetTimeZoneInformationForYear = systemtime.GetTimeZoneInformationForYear
+var SetDynamicTimeZoneInformation = systemtime.SetDynamicTimeZoneInformation
+var SetTimeZoneInformation = systemtime.SetTimeZoneInformation
+var SystemTimeToFileTime = systemtime.SystemTimeToFileTime
+var SystemTimeToTzSpecificLocalTime = systemtime.SystemTimeToTzSpecificLocalTime
+var SystemTimeToTzSpecificLocalTimeEx = systemtime.SystemTimeToTzSpecificLocalTimeEx
+var TzSpecificLocalTimeToSystemTime = systemtime.TzSpecificLocalTimeToSystemTime
+var TzSpecificLocalTimeToSystemTimeEx = systemtime.TzSpecificLocalTimeToSystemTimeEx

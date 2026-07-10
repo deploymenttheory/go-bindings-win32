@@ -111,3 +111,18 @@ func PrintDlgExA(pPD *uicontrolsdialogs.PRINTDLGEXA) error {
 func ReplaceText(param0 *uicontrolsdialogs.FINDREPLACEW) foundation.HWND {
 	return uicontrolsdialogs.ReplaceTextW(param0)
 }
+
+var ChooseColorW = uicontrolsdialogs.ChooseColorW
+var ChooseFontW = uicontrolsdialogs.ChooseFontW
+var CommDlgExtendedError = uicontrolsdialogs.CommDlgExtendedError
+var FindTextA = uicontrolsdialogs.FindTextA
+var FindTextW = uicontrolsdialogs.FindTextW
+var GetFileTitleA = uicontrolsdialogs.GetFileTitleA
+var GetFileTitleW = uicontrolsdialogs.GetFileTitleW
+var GetOpenFileNameW = uicontrolsdialogs.GetOpenFileNameW
+var GetSaveFileNameW = uicontrolsdialogs.GetSaveFileNameW
+var PageSetupDlgW = uicontrolsdialogs.PageSetupDlgW
+var PrintDlgExW = uicontrolsdialogs.PrintDlgExW
+var PrintDlgW = uicontrolsdialogs.PrintDlgW
+var ReplaceTextA = uicontrolsdialogs.ReplaceTextA
+var ReplaceTextW = uicontrolsdialogs.ReplaceTextW

@@ -2088,3 +2088,52 @@ func VarXor(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, p
 func VectorFromBstr(bstr foundation.BSTR, ppsa **systemcom.SAFEARRAY) error {
 	return win32.HRESULTError(int32(systemole.VectorFromBstr(bstr, ppsa)))
 }
+
+var ClearCustData = systemole.ClearCustData
+var HRGN_UserFree = systemole.HRGN_UserFree
+var HRGN_UserFree64 = systemole.HRGN_UserFree64
+var HRGN_UserMarshal = systemole.HRGN_UserMarshal
+var HRGN_UserMarshal64 = systemole.HRGN_UserMarshal64
+var HRGN_UserSize = systemole.HRGN_UserSize
+var HRGN_UserSize64 = systemole.HRGN_UserSize64
+var HRGN_UserUnmarshal = systemole.HRGN_UserUnmarshal
+var HRGN_UserUnmarshal64 = systemole.HRGN_UserUnmarshal64
+var LHashValOfNameSysA = systemole.LHashValOfNameSysA
+var OaBuildVersion = systemole.OaBuildVersion
+var OaEnablePerUserTLibRegistration = systemole.OaEnablePerUserTLibRegistration
+var OleBuildVersion = systemole.OleBuildVersion
+var OleCreateMenuDescriptor = systemole.OleCreateMenuDescriptor
+var OleDuplicateData = systemole.OleDuplicateData
+var OleIconToCursor = systemole.OleIconToCursor
+var OleUIAddVerbMenuW = systemole.OleUIAddVerbMenuW
+var OleUIBusyA = systemole.OleUIBusyA
+var OleUIBusyW = systemole.OleUIBusyW
+var OleUIChangeIconA = systemole.OleUIChangeIconA
+var OleUIChangeIconW = systemole.OleUIChangeIconW
+var OleUIChangeSourceA = systemole.OleUIChangeSourceA
+var OleUIChangeSourceW = systemole.OleUIChangeSourceW
+var OleUIConvertA = systemole.OleUIConvertA
+var OleUIConvertW = systemole.OleUIConvertW
+var OleUIEditLinksA = systemole.OleUIEditLinksA
+var OleUIEditLinksW = systemole.OleUIEditLinksW
+var OleUIInsertObjectA = systemole.OleUIInsertObjectA
+var OleUIInsertObjectW = systemole.OleUIInsertObjectW
+var OleUIObjectPropertiesA = systemole.OleUIObjectPropertiesA
+var OleUIObjectPropertiesW = systemole.OleUIObjectPropertiesW
+var OleUIPasteSpecialA = systemole.OleUIPasteSpecialA
+var OleUIPasteSpecialW = systemole.OleUIPasteSpecialW
+var OleUIPromptUserA = systemole.OleUIPromptUserA
+var OleUIPromptUserW = systemole.OleUIPromptUserW
+var OleUIUpdateLinksW = systemole.OleUIUpdateLinksW
+var OleUninitialize = systemole.OleUninitialize
+var ReleaseStgMedium = systemole.ReleaseStgMedium
+var SafeArrayCreate = systemole.SafeArrayCreate
+var SafeArrayCreateEx = systemole.SafeArrayCreateEx
+var SafeArrayCreateVector = systemole.SafeArrayCreateVector
+var SafeArrayCreateVectorEx = systemole.SafeArrayCreateVectorEx
+var SafeArrayGetDim = systemole.SafeArrayGetDim
+var SafeArrayGetElemsize = systemole.SafeArrayGetElemsize
+var SafeArrayReleaseData = systemole.SafeArrayReleaseData
+var SafeArrayReleaseDescriptor = systemole.SafeArrayReleaseDescriptor
+var VarCmp = systemole.VarCmp
+var VarDecCmp = systemole.VarDecCmp

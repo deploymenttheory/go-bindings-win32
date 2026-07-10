@@ -1266,3 +1266,31 @@ func Dhcpv6RequestPrefix(adapterName string, pclassId *networkmanagementdhcp.DHC
 	_adapterName := win32.UTF16Ptr(adapterName)
 	return networkmanagementdhcp.Dhcpv6RequestPrefix(foundation.PWSTR(_adapterName), pclassId, prefixleaseInfo, pdwTimeToWait)
 }
+
+var DhcpAddServer = networkmanagementdhcp.DhcpAddServer
+var DhcpCApiCleanup = networkmanagementdhcp.DhcpCApiCleanup
+var DhcpCApiInitialize = networkmanagementdhcp.DhcpCApiInitialize
+var DhcpDeRegisterParamChange = networkmanagementdhcp.DhcpDeRegisterParamChange
+var DhcpDeleteServer = networkmanagementdhcp.DhcpDeleteServer
+var DhcpDsCleanup = networkmanagementdhcp.DhcpDsCleanup
+var DhcpDsInit = networkmanagementdhcp.DhcpDsInit
+var DhcpEnumServers = networkmanagementdhcp.DhcpEnumServers
+var DhcpGetThreadOptions = networkmanagementdhcp.DhcpGetThreadOptions
+var DhcpHlprAddV4PolicyExpr = networkmanagementdhcp.DhcpHlprAddV4PolicyExpr
+var DhcpHlprAddV4PolicyRange = networkmanagementdhcp.DhcpHlprAddV4PolicyRange
+var DhcpHlprFindV4DhcpProperty = networkmanagementdhcp.DhcpHlprFindV4DhcpProperty
+var DhcpHlprFreeV4DhcpProperty = networkmanagementdhcp.DhcpHlprFreeV4DhcpProperty
+var DhcpHlprFreeV4DhcpPropertyArray = networkmanagementdhcp.DhcpHlprFreeV4DhcpPropertyArray
+var DhcpHlprFreeV4Policy = networkmanagementdhcp.DhcpHlprFreeV4Policy
+var DhcpHlprFreeV4PolicyArray = networkmanagementdhcp.DhcpHlprFreeV4PolicyArray
+var DhcpHlprFreeV4PolicyEx = networkmanagementdhcp.DhcpHlprFreeV4PolicyEx
+var DhcpHlprFreeV4PolicyExArray = networkmanagementdhcp.DhcpHlprFreeV4PolicyExArray
+var DhcpHlprIsV4PolicyValid = networkmanagementdhcp.DhcpHlprIsV4PolicyValid
+var DhcpHlprModifyV4PolicyExpr = networkmanagementdhcp.DhcpHlprModifyV4PolicyExpr
+var DhcpHlprResetV4PolicyExpr = networkmanagementdhcp.DhcpHlprResetV4PolicyExpr
+var DhcpRemoveDNSRegistrations = networkmanagementdhcp.DhcpRemoveDNSRegistrations
+var DhcpRpcFreeMemory = networkmanagementdhcp.DhcpRpcFreeMemory
+var DhcpServerAuditlogParamsFree = networkmanagementdhcp.DhcpServerAuditlogParamsFree
+var DhcpSetThreadOptions = networkmanagementdhcp.DhcpSetThreadOptions
+var Dhcpv6CApiCleanup = networkmanagementdhcp.Dhcpv6CApiCleanup
+var Dhcpv6CApiInitialize = networkmanagementdhcp.Dhcpv6CApiInitialize

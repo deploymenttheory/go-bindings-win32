@@ -30,3 +30,15 @@ func PrintWindow(hwnd foundation.HWND, hdcBlt graphicsgdi.HDC, nFlags storagexps
 func StartDoc(hdc graphicsgdi.HDC, lpdi *storagexps.DOCINFOW) int32 {
 	return storagexps.StartDocW(hdc, lpdi)
 }
+
+var AbortDoc = storagexps.AbortDoc
+var DeviceCapabilitiesA = storagexps.DeviceCapabilitiesA
+var DeviceCapabilitiesW = storagexps.DeviceCapabilitiesW
+var EndDoc = storagexps.EndDoc
+var EndPage = storagexps.EndPage
+var Escape = storagexps.Escape
+var ExtEscape = storagexps.ExtEscape
+var SetAbortProc = storagexps.SetAbortProc
+var StartDocA = storagexps.StartDocA
+var StartDocW = storagexps.StartDocW
+var StartPage = storagexps.StartPage

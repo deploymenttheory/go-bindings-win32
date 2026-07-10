@@ -818,3 +818,12 @@ func WriteFmtUserTypeStg(pstg IStorage, cf uint16, lpszUserType string) error {
 	_lpszUserType := win32.UTF16Ptr(lpszUserType)
 	return win32.HRESULTError(int32(systemcomstructuredstorage.WriteFmtUserTypeStg(pstg.Raw, cf, foundation.PWSTR(_lpszUserType))))
 }
+
+var PropVariantCompareEx = systemcomstructuredstorage.PropVariantCompareEx
+var PropVariantGetElementCount = systemcomstructuredstorage.PropVariantGetElementCount
+var PropVariantToInt16WithDefault = systemcomstructuredstorage.PropVariantToInt16WithDefault
+var PropVariantToInt32WithDefault = systemcomstructuredstorage.PropVariantToInt32WithDefault
+var PropVariantToInt64WithDefault = systemcomstructuredstorage.PropVariantToInt64WithDefault
+var PropVariantToUInt16WithDefault = systemcomstructuredstorage.PropVariantToUInt16WithDefault
+var PropVariantToUInt32WithDefault = systemcomstructuredstorage.PropVariantToUInt32WithDefault
+var PropVariantToUInt64WithDefault = systemcomstructuredstorage.PropVariantToUInt64WithDefault

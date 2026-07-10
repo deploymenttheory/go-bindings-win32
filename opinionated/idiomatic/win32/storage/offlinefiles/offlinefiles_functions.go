@@ -16,3 +16,7 @@ func OfflineFilesEnable(bEnable bool, pbRebootRequired *foundation.BOOL) uint32 
 	_bEnable := foundation.BOOL(win32.Bool32(bEnable))
 	return storageofflinefiles.OfflineFilesEnable(_bEnable, pbRebootRequired)
 }
+
+var OfflineFilesQueryStatus = storageofflinefiles.OfflineFilesQueryStatus
+var OfflineFilesQueryStatusEx = storageofflinefiles.OfflineFilesQueryStatusEx
+var OfflineFilesStart = storageofflinefiles.OfflineFilesStart

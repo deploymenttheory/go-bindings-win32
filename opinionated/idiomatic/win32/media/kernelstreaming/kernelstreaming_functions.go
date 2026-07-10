@@ -62,3 +62,8 @@ func KsResolveRequiredAttributes(DataRange *mediakernelstreaming.KSDATAFORMAT, A
 func KsSynchronousDeviceControl(Handle foundation.HANDLE, IoControl uint32, InBuffer unsafe.Pointer, InLength uint32, OutBuffer unsafe.Pointer, OutLength uint32, BytesReturned *uint32) error {
 	return win32.HRESULTError(int32(mediakernelstreaming.KsSynchronousDeviceControl(Handle, IoControl, InBuffer, InLength, OutBuffer, OutLength, BytesReturned)))
 }
+
+var KsCreateAllocator = mediakernelstreaming.KsCreateAllocator
+var KsCreateClock = mediakernelstreaming.KsCreateClock
+var KsCreatePin = mediakernelstreaming.KsCreatePin
+var KsCreateTopologyNode = mediakernelstreaming.KsCreateTopologyNode

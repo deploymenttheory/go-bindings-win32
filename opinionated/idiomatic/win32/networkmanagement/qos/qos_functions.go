@@ -106,3 +106,24 @@ func TcSetFlow(pFlowName string, pGuidParam *win32.GUID, BufferSize uint32, Buff
 	_pFlowName := win32.UTF16Ptr(pFlowName)
 	return networkmanagementqos.TcSetFlowW(foundation.PWSTR(_pFlowName), pGuidParam, BufferSize, Buffer)
 }
+
+var TcAddFilter = networkmanagementqos.TcAddFilter
+var TcAddFlow = networkmanagementqos.TcAddFlow
+var TcCloseInterface = networkmanagementqos.TcCloseInterface
+var TcDeleteFilter = networkmanagementqos.TcDeleteFilter
+var TcDeleteFlow = networkmanagementqos.TcDeleteFlow
+var TcDeregisterClient = networkmanagementqos.TcDeregisterClient
+var TcEnumerateFlows = networkmanagementqos.TcEnumerateFlows
+var TcEnumerateInterfaces = networkmanagementqos.TcEnumerateInterfaces
+var TcGetFlowNameA = networkmanagementqos.TcGetFlowNameA
+var TcGetFlowNameW = networkmanagementqos.TcGetFlowNameW
+var TcModifyFlow = networkmanagementqos.TcModifyFlow
+var TcOpenInterfaceA = networkmanagementqos.TcOpenInterfaceA
+var TcOpenInterfaceW = networkmanagementqos.TcOpenInterfaceW
+var TcQueryFlowA = networkmanagementqos.TcQueryFlowA
+var TcQueryFlowW = networkmanagementqos.TcQueryFlowW
+var TcQueryInterface = networkmanagementqos.TcQueryInterface
+var TcRegisterClient = networkmanagementqos.TcRegisterClient
+var TcSetFlowA = networkmanagementqos.TcSetFlowA
+var TcSetFlowW = networkmanagementqos.TcSetFlowW
+var TcSetInterface = networkmanagementqos.TcSetInterface

@@ -54,3 +54,33 @@ func SetDefaultCommConfig(lpszName string, lpCC *devicescommunication.COMMCONFIG
 	_lpszName := win32.UTF16Ptr(lpszName)
 	return devicescommunication.SetDefaultCommConfigW(foundation.PWSTR(_lpszName), lpCC, dwSize)
 }
+
+var BuildCommDCBA = devicescommunication.BuildCommDCBA
+var BuildCommDCBAndTimeoutsA = devicescommunication.BuildCommDCBAndTimeoutsA
+var BuildCommDCBAndTimeoutsW = devicescommunication.BuildCommDCBAndTimeoutsW
+var BuildCommDCBW = devicescommunication.BuildCommDCBW
+var ClearCommBreak = devicescommunication.ClearCommBreak
+var ClearCommError = devicescommunication.ClearCommError
+var CommConfigDialogA = devicescommunication.CommConfigDialogA
+var CommConfigDialogW = devicescommunication.CommConfigDialogW
+var EscapeCommFunction = devicescommunication.EscapeCommFunction
+var GetCommConfig = devicescommunication.GetCommConfig
+var GetCommMask = devicescommunication.GetCommMask
+var GetCommModemStatus = devicescommunication.GetCommModemStatus
+var GetCommProperties = devicescommunication.GetCommProperties
+var GetCommState = devicescommunication.GetCommState
+var GetCommTimeouts = devicescommunication.GetCommTimeouts
+var GetDefaultCommConfigA = devicescommunication.GetDefaultCommConfigA
+var GetDefaultCommConfigW = devicescommunication.GetDefaultCommConfigW
+var OpenCommPort = devicescommunication.OpenCommPort
+var PurgeComm = devicescommunication.PurgeComm
+var SetCommBreak = devicescommunication.SetCommBreak
+var SetCommConfig = devicescommunication.SetCommConfig
+var SetCommMask = devicescommunication.SetCommMask
+var SetCommState = devicescommunication.SetCommState
+var SetCommTimeouts = devicescommunication.SetCommTimeouts
+var SetDefaultCommConfigA = devicescommunication.SetDefaultCommConfigA
+var SetDefaultCommConfigW = devicescommunication.SetDefaultCommConfigW
+var SetupComm = devicescommunication.SetupComm
+var TransmitCommChar = devicescommunication.TransmitCommChar
+var WaitCommEvent = devicescommunication.WaitCommEvent

@@ -25,16 +25,18 @@ go run ./cmd/generate/ ingest
 # Ingest a subset
 go run ./cmd/generate/ ingest --namespace System.Threading,Foundation
 
-# 2. Emit raw Go bindings (all 324 namespaces → bindings/win32/)
+# 2. Emit BOTH tiers in one command — raw (bindings/win32/) and idiomatic
+#    (opinionated/idiomatic/win32/) — each self-cleaning (all 324 namespaces).
 go run ./cmd/generate/ bindings
 
-# Emit one namespace plus the transitive closure of namespaces it references
+# One namespace plus the transitive closure it references (both tiers)
 go run ./cmd/generate/ bindings --namespace System.Threading
 
-# Verbose diagnostics (degradations, skips, cycle breaks)
+# Raw tier only; or verbose diagnostics (degradations, skips, cycle breaks)
+go run ./cmd/generate/ bindings --raw-only
 go run ./cmd/generate/ bindings -v
 
-# Emit the idiomatic wrapper tier (opinionated/idiomatic/win32/) over the raw bindings
+# Emit only the idiomatic layer (bindings already does both)
 go run ./cmd/generate/ idiomatic
 
 # Regenerate bindings AND the ABI layout acceptance test (acceptance/abi_generated_test.go)
@@ -165,6 +167,23 @@ resolve with `Context.QualifyOwn = true` so even same-namespace raw types are
 package-qualified. Selection mirrors the raw tier exactly (metadata order,
 first amd64 entry per name) so signatures always align (~8,200 function
 wrappers, 208 packages).
+
+**Self-contained (re-exports).** The idiomatic package is usable on its own —
+consumers never import `bindings/win32`. Every raw top-level identifier the
+idiomatic tier does not itself improve is re-exported: types as aliases
+(`type USER_INFO_1 = raw.USER_INFO_1`), constants as `const`/`var` aliases,
+and pass-through functions as `var Name = raw.Name`. Because the aliases keep
+type identity, a re-exported struct is still assignable to the raw calls the
+wrappers make. Re-exports are grouped into the same file names the raw tier
+uses — `<pkg>_types.go`, `<pkg>_constants.go`, and pass-through functions in
+`<pkg>_functions.go` — so every namespace emits an idiomatic package (324),
+not just those with improvable functions.
+
+**One command, both tiers.** `generate bindings` clears and re-emits *both*
+`bindings/win32/` and `opinionated/idiomatic/win32/` in a single run (the
+idiomatic pass reuses the raw pass's mapper and targets exactly the
+namespaces the raw pass emitted). Both trees are self-cleaning. `--raw-only`
+skips the idiomatic tier; `idiomatic` regenerates only the idiomatic layer.
 
 **Idiomatic COM** (`<pkg>_interfaces.go`): each raw COM interface gets a
 wrapper struct holding the raw pointer (`Raw *rawpkg.IFoo`) and embedding its

@@ -74,3 +74,6 @@ func RoResolveNamespace(name systemwinrt.HSTRING, windowsMetaDataDir systemwinrt
 	}
 	return win32.HRESULTError(int32(systemwinrtmetadata.RoResolveNamespace(name, windowsMetaDataDir, uint32(len(packageGraphDirs)), _packageGraphDirs, metaDataFilePathsCount, metaDataFilePaths, subNamespacesCount, subNamespaces)))
 }
+
+var RoFreeParameterizedTypeExtra = systemwinrtmetadata.RoFreeParameterizedTypeExtra
+var RoParameterizedTypeExtraGetTypeSignature = systemwinrtmetadata.RoParameterizedTypeExtraGetTypeSignature

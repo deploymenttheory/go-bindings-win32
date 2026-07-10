@@ -68,3 +68,13 @@ func WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes bool) {
 func WintrustSetRegPolicyFlags(dwPolicyFlags securitywintrust.WINTRUST_POLICY_FLAGS) bool {
 	return securitywintrust.WintrustSetRegPolicyFlags(dwPolicyFlags) != 0
 }
+
+var WTHelperGetProvCertFromChain = securitywintrust.WTHelperGetProvCertFromChain
+var WTHelperGetProvPrivateDataFromChain = securitywintrust.WTHelperGetProvPrivateDataFromChain
+var WTHelperProvDataFromStateData = securitywintrust.WTHelperProvDataFromStateData
+var WinVerifyTrust = securitywintrust.WinVerifyTrust
+var WinVerifyTrustEx = securitywintrust.WinVerifyTrustEx
+var WintrustAddActionID = securitywintrust.WintrustAddActionID
+var WintrustAddDefaultForUsage = securitywintrust.WintrustAddDefaultForUsage
+var WintrustGetDefaultForUsage = securitywintrust.WintrustGetDefaultForUsage
+var WintrustGetRegPolicyFlags = securitywintrust.WintrustGetRegPolicyFlags

@@ -101,3 +101,6 @@ func MagShowSystemCursor(fShowCursor bool) bool {
 func MagUninitialize() bool {
 	return uimagnification.MagUninitialize() != 0
 }
+
+var MagGetImageScalingCallback = uimagnification.MagGetImageScalingCallback
+var MagGetWindowFilterList = uimagnification.MagGetWindowFilterList

@@ -69,3 +69,6 @@ func WcmSetProperty(pInterface *win32.GUID, strProfileName string, Property netw
 	}
 	return networkmanagementwindowsconnectionmanager.WcmSetProperty(pInterface, foundation.PWSTR(_strProfileName), Property, nil, uint32(len(pbData)), _pbData)
 }
+
+var FreeInterfaceContextTable = networkmanagementwindowsconnectionmanager.FreeInterfaceContextTable
+var WcmFreeMemory = networkmanagementwindowsconnectionmanager.WcmFreeMemory

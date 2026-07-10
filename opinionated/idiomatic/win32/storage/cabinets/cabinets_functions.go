@@ -61,3 +61,6 @@ func FDIIsCabinet(hfdi unsafe.Pointer, hf uintptr, pfdici *storagecabinets.FDICA
 func FDITruncateCabinet(hfdi unsafe.Pointer, pszCabinetName foundation.PSTR, iFolderToDelete uint16) bool {
 	return storagecabinets.FDITruncateCabinet(hfdi, pszCabinetName, iFolderToDelete) != 0
 }
+
+var FCICreate = storagecabinets.FCICreate
+var FDICreate = storagecabinets.FDICreate

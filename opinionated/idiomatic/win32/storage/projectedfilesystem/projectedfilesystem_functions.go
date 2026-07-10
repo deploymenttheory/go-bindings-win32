@@ -122,3 +122,7 @@ func PrjWritePlaceholderInfo2(namespaceVirtualizationContext storageprojectedfil
 	_destinationFileName := win32.UTF16Ptr(destinationFileName)
 	return win32.HRESULTError(int32(storageprojectedfilesystem.PrjWritePlaceholderInfo2(namespaceVirtualizationContext, foundation.PWSTR(_destinationFileName), placeholderInfo, placeholderInfoSize, ExtendedInfo)))
 }
+
+var PrjAllocateAlignedBuffer = storageprojectedfilesystem.PrjAllocateAlignedBuffer
+var PrjFreeAlignedBuffer = storageprojectedfilesystem.PrjFreeAlignedBuffer
+var PrjStopVirtualizing = storageprojectedfilesystem.PrjStopVirtualizing

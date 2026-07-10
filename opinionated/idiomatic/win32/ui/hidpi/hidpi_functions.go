@@ -68,3 +68,24 @@ func PhysicalToLogicalPointForPerMonitorDPI(hWnd foundation.HWND, lpPoint *found
 func SetProcessDpiAwareness(value uihidpi.PROCESS_DPI_AWARENESS) error {
 	return win32.HRESULTError(int32(uihidpi.SetProcessDpiAwareness(value)))
 }
+
+var EnableNonClientDpiScaling = uihidpi.EnableNonClientDpiScaling
+var GetAwarenessFromDpiAwarenessContext = uihidpi.GetAwarenessFromDpiAwarenessContext
+var GetDialogControlDpiChangeBehavior = uihidpi.GetDialogControlDpiChangeBehavior
+var GetDialogDpiChangeBehavior = uihidpi.GetDialogDpiChangeBehavior
+var GetDpiAwarenessContextForProcess = uihidpi.GetDpiAwarenessContextForProcess
+var GetDpiForSystem = uihidpi.GetDpiForSystem
+var GetDpiForWindow = uihidpi.GetDpiForWindow
+var GetDpiFromDpiAwarenessContext = uihidpi.GetDpiFromDpiAwarenessContext
+var GetSystemDpiForProcess = uihidpi.GetSystemDpiForProcess
+var GetSystemMetricsForDpi = uihidpi.GetSystemMetricsForDpi
+var GetThreadDpiAwarenessContext = uihidpi.GetThreadDpiAwarenessContext
+var GetThreadDpiHostingBehavior = uihidpi.GetThreadDpiHostingBehavior
+var GetWindowDpiAwarenessContext = uihidpi.GetWindowDpiAwarenessContext
+var GetWindowDpiHostingBehavior = uihidpi.GetWindowDpiHostingBehavior
+var SetDialogControlDpiChangeBehavior = uihidpi.SetDialogControlDpiChangeBehavior
+var SetDialogDpiChangeBehavior = uihidpi.SetDialogDpiChangeBehavior
+var SetProcessDpiAwarenessContext = uihidpi.SetProcessDpiAwarenessContext
+var SetThreadDpiAwarenessContext = uihidpi.SetThreadDpiAwarenessContext
+var SetThreadDpiHostingBehavior = uihidpi.SetThreadDpiHostingBehavior
+var SystemParametersInfoForDpi = uihidpi.SystemParametersInfoForDpi

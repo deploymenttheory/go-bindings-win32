@@ -46,3 +46,26 @@ func WaitNamedPipe(lpNamedPipeName string, nTimeOut uint32) bool {
 	_lpNamedPipeName := win32.UTF16Ptr(lpNamedPipeName)
 	return systempipes.WaitNamedPipeW(foundation.PWSTR(_lpNamedPipeName), nTimeOut) != 0
 }
+
+var CallNamedPipeA = systempipes.CallNamedPipeA
+var CallNamedPipeW = systempipes.CallNamedPipeW
+var ConnectNamedPipe = systempipes.ConnectNamedPipe
+var CreateNamedPipeA = systempipes.CreateNamedPipeA
+var CreateNamedPipeW = systempipes.CreateNamedPipeW
+var CreatePipe = systempipes.CreatePipe
+var DisconnectNamedPipe = systempipes.DisconnectNamedPipe
+var GetNamedPipeClientComputerNameA = systempipes.GetNamedPipeClientComputerNameA
+var GetNamedPipeClientComputerNameW = systempipes.GetNamedPipeClientComputerNameW
+var GetNamedPipeClientProcessId = systempipes.GetNamedPipeClientProcessId
+var GetNamedPipeClientSessionId = systempipes.GetNamedPipeClientSessionId
+var GetNamedPipeHandleStateA = systempipes.GetNamedPipeHandleStateA
+var GetNamedPipeHandleStateW = systempipes.GetNamedPipeHandleStateW
+var GetNamedPipeInfo = systempipes.GetNamedPipeInfo
+var GetNamedPipeServerProcessId = systempipes.GetNamedPipeServerProcessId
+var GetNamedPipeServerSessionId = systempipes.GetNamedPipeServerSessionId
+var ImpersonateNamedPipeClient = systempipes.ImpersonateNamedPipeClient
+var PeekNamedPipe = systempipes.PeekNamedPipe
+var SetNamedPipeHandleState = systempipes.SetNamedPipeHandleState
+var TransactNamedPipe = systempipes.TransactNamedPipe
+var WaitNamedPipeA = systempipes.WaitNamedPipeA
+var WaitNamedPipeW = systempipes.WaitNamedPipeW

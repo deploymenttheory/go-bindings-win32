@@ -257,3 +257,8 @@ func WerUnregisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll string, pCo
 	_pwszOutOfProcessCallbackDll := win32.UTF16Ptr(pwszOutOfProcessCallbackDll)
 	return win32.HRESULTError(int32(systemerrorreporting.WerUnregisterRuntimeExceptionModule(foundation.PWSTR(_pwszOutOfProcessCallbackDll), pContext)))
 }
+
+var AddERExcludedApplicationA = systemerrorreporting.AddERExcludedApplicationA
+var AddERExcludedApplicationW = systemerrorreporting.AddERExcludedApplicationW
+var ReportFault = systemerrorreporting.ReportFault
+var WerStoreClose = systemerrorreporting.WerStoreClose

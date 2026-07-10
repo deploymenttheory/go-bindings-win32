@@ -81,3 +81,7 @@ func UnprotectFile(fileOrFolderPath string, options *securityenterprisedata.FILE
 	_fileOrFolderPath := win32.UTF16Ptr(fileOrFolderPath)
 	return win32.HRESULTError(int32(securityenterprisedata.UnprotectFile(foundation.PWSTR(_fileOrFolderPath), options)))
 }
+
+var SrpHostingTerminate = securityenterprisedata.SrpHostingTerminate
+var SrpIsAllowed = securityenterprisedata.SrpIsAllowed
+var SrpIsTokenService = securityenterprisedata.SrpIsTokenService

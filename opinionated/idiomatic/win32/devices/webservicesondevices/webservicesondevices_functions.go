@@ -220,3 +220,8 @@ func WSDXMLGetValueFromAny(pszNamespace string, pszName string, pAny *devicesweb
 	_pszName := win32.UTF16Ptr(pszName)
 	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDXMLGetValueFromAny(foundation.PWSTR(_pszNamespace), foundation.PWSTR(_pszName), pAny, ppszValue)))
 }
+
+var WSDAllocateLinkedMemory = deviceswebservicesondevices.WSDAllocateLinkedMemory
+var WSDAttachLinkedMemory = deviceswebservicesondevices.WSDAttachLinkedMemory
+var WSDDetachLinkedMemory = deviceswebservicesondevices.WSDDetachLinkedMemory
+var WSDFreeLinkedMemory = deviceswebservicesondevices.WSDFreeLinkedMemory

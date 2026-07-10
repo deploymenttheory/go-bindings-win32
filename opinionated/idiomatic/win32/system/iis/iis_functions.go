@@ -17,3 +17,6 @@ func GetExtensionVersion(pVer *systemiis.HSE_VERSION_INFO) bool {
 func GetFilterVersion(pVer *systemiis.HTTP_FILTER_VERSION) bool {
 	return systemiis.GetFilterVersion(pVer) != 0
 }
+
+var HttpExtensionProc = systemiis.HttpExtensionProc
+var HttpFilterProc = systemiis.HttpFilterProc

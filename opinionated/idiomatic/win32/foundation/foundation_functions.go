@@ -55,3 +55,19 @@ func SysReAllocStringLen(pbstr *foundation.BSTR, psz string, len_ uint32) int32 
 	_psz := win32.UTF16Ptr(psz)
 	return foundation.SysReAllocStringLen(pbstr, foundation.PWSTR(_psz), len_)
 }
+
+var CloseHandle = foundation.CloseHandle
+var FreeLibrary = foundation.FreeLibrary
+var GetHandleInformation = foundation.GetHandleInformation
+var GetLastError = foundation.GetLastError
+var GlobalFree = foundation.GlobalFree
+var LocalFree = foundation.LocalFree
+var RtlNtStatusToDosError = foundation.RtlNtStatusToDosError
+var SetHandleInformation = foundation.SetHandleInformation
+var SetLastError = foundation.SetLastError
+var SetLastErrorEx = foundation.SetLastErrorEx
+var SysAllocStringByteLen = foundation.SysAllocStringByteLen
+var SysFreeString = foundation.SysFreeString
+var SysReleaseString = foundation.SysReleaseString
+var SysStringByteLen = foundation.SysStringByteLen
+var SysStringLen = foundation.SysStringLen

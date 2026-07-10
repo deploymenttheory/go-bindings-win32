@@ -17,3 +17,8 @@ func CreateMailslot(lpName string, nMaxMessageSize uint32, lReadTimeout uint32, 
 	_lpName := win32.UTF16Ptr(lpName)
 	return systemmailslots.CreateMailslotW(foundation.PWSTR(_lpName), nMaxMessageSize, lReadTimeout, lpSecurityAttributes)
 }
+
+var CreateMailslotA = systemmailslots.CreateMailslotA
+var CreateMailslotW = systemmailslots.CreateMailslotW
+var GetMailslotInfo = systemmailslots.GetMailslotInfo
+var SetMailslotInfo = systemmailslots.SetMailslotInfo

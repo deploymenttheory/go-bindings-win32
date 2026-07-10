@@ -16,3 +16,10 @@ func McastEnumerateScopes(AddrFamily uint16, ReQuery bool, pScopeList *networkma
 	_ReQuery := foundation.BOOL(win32.Bool32(ReQuery))
 	return networkmanagementmulticast.McastEnumerateScopes(AddrFamily, _ReQuery, pScopeList, pScopeLen, pScopeCount)
 }
+
+var McastApiCleanup = networkmanagementmulticast.McastApiCleanup
+var McastApiStartup = networkmanagementmulticast.McastApiStartup
+var McastGenUID = networkmanagementmulticast.McastGenUID
+var McastReleaseAddress = networkmanagementmulticast.McastReleaseAddress
+var McastRenewAddress = networkmanagementmulticast.McastRenewAddress
+var McastRequestAddress = networkmanagementmulticast.McastRequestAddress

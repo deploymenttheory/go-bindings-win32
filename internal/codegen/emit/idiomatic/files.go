@@ -49,10 +49,15 @@ func writeRawFile(path string, content []byte) error {
 }
 
 // pruneGeneratedTree deletes DO-NOT-EDIT-headed .go files under root that are
-// not in written, then removes emptied directories.
-func pruneGeneratedTree(root string, written map[string]bool) error {
+// not in written, then removes emptied directories. When fullSweep is false,
+// only files in directories this run wrote into are considered.
+func pruneGeneratedTree(root string, written map[string]bool, fullSweep bool) error {
 	if _, err := os.Stat(root); err != nil {
 		return nil
+	}
+	writtenDirs := map[string]bool{}
+	for path := range written {
+		writtenDirs[filepath.Dir(path)] = true
 	}
 	var dirs []string
 	err := filepath.WalkDir(root, func(path string, entry os.DirEntry, err error) error {
@@ -64,6 +69,9 @@ func pruneGeneratedTree(root string, written map[string]bool) error {
 			return nil
 		}
 		if !strings.HasSuffix(path, ".go") || written[path] {
+			return nil
+		}
+		if !fullSweep && !writtenDirs[filepath.Dir(path)] {
 			return nil
 		}
 		content, readErr := os.ReadFile(path)

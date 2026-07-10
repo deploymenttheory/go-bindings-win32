@@ -53,3 +53,6 @@ func DirectDrawEnumerateEx(lpCallback graphicsdirectdraw.LPDDENUMCALLBACKEXW, lp
 func DirectDrawEnumerateExA(lpCallback graphicsdirectdraw.LPDDENUMCALLBACKEXA, lpContext unsafe.Pointer, dwFlags uint32) error {
 	return win32.HRESULTError(int32(graphicsdirectdraw.DirectDrawEnumerateExA(lpCallback, lpContext, dwFlags)))
 }
+
+var DirectDrawEnumerateExW = graphicsdirectdraw.DirectDrawEnumerateExW
+var DirectDrawEnumerateW = graphicsdirectdraw.DirectDrawEnumerateW

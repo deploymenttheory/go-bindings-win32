@@ -57,17 +57,15 @@ jobs:
             go run ./cmd/generate diff --old old-metadata --new metadata/win32 | head -c 60000
           } > pr-body.md
 
-      - name: Regenerate bindings + ABI test
-        if: steps.fetch.outputs.updated == 'true'
-        run: go run ./cmd/generate abitest
-
-      - name: Regenerate idiomatic tier
-        if: steps.fetch.outputs.updated == 'true'
-        run: go run ./cmd/generate idiomatic
-
-      - name: Rewrite the diagnostics baseline (reviewed via this PR)
+      # One command regenerates both tiers and rewrites the diagnostics
+      # baseline (reviewed via this PR).
+      - name: Regenerate bindings (raw + idiomatic) and baseline
         if: steps.fetch.outputs.updated == 'true'
         run: go run ./cmd/generate bindings --diagnostics metadata/diagnostics-baseline.json
+
+      - name: Regenerate the ABI acceptance test
+        if: steps.fetch.outputs.updated == 'true'
+        run: go run ./cmd/generate abitest
 
       - name: Build and test the regenerated tree
         if: steps.fetch.outputs.updated == 'true'

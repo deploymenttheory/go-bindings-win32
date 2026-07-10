@@ -40,3 +40,15 @@ func Process32Next(hSnapshot foundation.HANDLE, lppe *systemdiagnosticstoolhelp.
 func Toolhelp32ReadProcessMemory(th32ProcessID uint32, lpBaseAddress unsafe.Pointer, lpBuffer unsafe.Pointer, cbRead uintptr, lpNumberOfBytesRead *uintptr) bool {
 	return systemdiagnosticstoolhelp.Toolhelp32ReadProcessMemory(th32ProcessID, lpBaseAddress, lpBuffer, cbRead, lpNumberOfBytesRead) != 0
 }
+
+var CreateToolhelp32Snapshot = systemdiagnosticstoolhelp.CreateToolhelp32Snapshot
+var Heap32First = systemdiagnosticstoolhelp.Heap32First
+var Heap32ListFirst = systemdiagnosticstoolhelp.Heap32ListFirst
+var Heap32ListNext = systemdiagnosticstoolhelp.Heap32ListNext
+var Heap32Next = systemdiagnosticstoolhelp.Heap32Next
+var Module32FirstW = systemdiagnosticstoolhelp.Module32FirstW
+var Module32NextW = systemdiagnosticstoolhelp.Module32NextW
+var Process32FirstW = systemdiagnosticstoolhelp.Process32FirstW
+var Process32NextW = systemdiagnosticstoolhelp.Process32NextW
+var Thread32First = systemdiagnosticstoolhelp.Thread32First
+var Thread32Next = systemdiagnosticstoolhelp.Thread32Next

@@ -16,3 +16,6 @@ func HtmlHelp(hwndCaller foundation.HWND, pszFile string, uCommand uint32, dwDat
 	_pszFile := win32.UTF16Ptr(pszFile)
 	return datahtmlhelp.HtmlHelpW(hwndCaller, foundation.PWSTR(_pszFile), uCommand, dwData)
 }
+
+var HtmlHelpA = datahtmlhelp.HtmlHelpA
+var HtmlHelpW = datahtmlhelp.HtmlHelpW

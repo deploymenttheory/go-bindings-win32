@@ -55,3 +55,14 @@ func UserHandleGrantAccess(hUserHandle foundation.HANDLE, hJob foundation.HANDLE
 	_bGrant := foundation.BOOL(win32.Bool32(bGrant))
 	return systemjobobjects.UserHandleGrantAccess(hUserHandle, hJob, _bGrant)
 }
+
+var AssignProcessToJobObject = systemjobobjects.AssignProcessToJobObject
+var CreateJobObjectA = systemjobobjects.CreateJobObjectA
+var CreateJobObjectW = systemjobobjects.CreateJobObjectW
+var FreeMemoryJobObject = systemjobobjects.FreeMemoryJobObject
+var IsProcessInJob = systemjobobjects.IsProcessInJob
+var OpenJobObjectW = systemjobobjects.OpenJobObjectW
+var QueryInformationJobObject = systemjobobjects.QueryInformationJobObject
+var SetInformationJobObject = systemjobobjects.SetInformationJobObject
+var SetIoRateControlInformationJobObject = systemjobobjects.SetIoRateControlInformationJobObject
+var TerminateJobObject = systemjobobjects.TerminateJobObject

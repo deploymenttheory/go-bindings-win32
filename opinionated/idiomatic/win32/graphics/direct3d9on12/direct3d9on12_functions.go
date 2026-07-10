@@ -14,3 +14,5 @@ import (
 func Direct3DCreate9On12Ex(SDKVersion uint32, pOverrideList *graphicsdirect3d9on12.D3D9ON12_ARGS, NumOverrideEntries uint32, ppOutputInterface **graphicsdirect3d9.IDirect3D9Ex) error {
 	return win32.HRESULTError(int32(graphicsdirect3d9on12.Direct3DCreate9On12Ex(SDKVersion, pOverrideList, NumOverrideEntries, ppOutputInterface)))
 }
+
+var Direct3DCreate9On12 = graphicsdirect3d9on12.Direct3DCreate9On12

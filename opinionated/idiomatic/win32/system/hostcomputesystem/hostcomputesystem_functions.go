@@ -452,3 +452,14 @@ func HcsWaitForOperationResultAndProcessInfo(operation systemhostcomputesystem.H
 func HcsWaitForProcessExit(computeSystem systemhostcomputesystem.HCS_PROCESS, timeoutMs uint32, result *foundation.PWSTR) error {
 	return win32.HRESULTError(int32(systemhostcomputesystem.HcsWaitForProcessExit(computeSystem, timeoutMs, result)))
 }
+
+var HcsCloseComputeSystem = systemhostcomputesystem.HcsCloseComputeSystem
+var HcsCloseOperation = systemhostcomputesystem.HcsCloseOperation
+var HcsCloseProcess = systemhostcomputesystem.HcsCloseProcess
+var HcsCreateOperation = systemhostcomputesystem.HcsCreateOperation
+var HcsCreateOperationWithNotifications = systemhostcomputesystem.HcsCreateOperationWithNotifications
+var HcsGetComputeSystemFromOperation = systemhostcomputesystem.HcsGetComputeSystemFromOperation
+var HcsGetOperationContext = systemhostcomputesystem.HcsGetOperationContext
+var HcsGetOperationId = systemhostcomputesystem.HcsGetOperationId
+var HcsGetOperationType = systemhostcomputesystem.HcsGetOperationType
+var HcsGetProcessFromOperation = systemhostcomputesystem.HcsGetProcessFromOperation

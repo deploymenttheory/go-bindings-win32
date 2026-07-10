@@ -82,3 +82,5 @@ func IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment
 func IsProcessInWDAGContainer(Reserved unsafe.Pointer, isProcessInWDAGContainer *foundation.BOOL) error {
 	return win32.HRESULTError(int32(securityisolation.IsProcessInWDAGContainer(Reserved, isProcessInWDAGContainer)))
 }
+
+var GetAppContainerNamedObjectPath = securityisolation.GetAppContainerNamedObjectPath

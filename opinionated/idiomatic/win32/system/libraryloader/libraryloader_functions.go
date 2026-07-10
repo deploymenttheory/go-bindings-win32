@@ -185,3 +185,46 @@ func UpdateResource(hUpdate foundation.HANDLE, lpType string, lpName string, wLa
 	_lpName := win32.UTF16Ptr(lpName)
 	return systemlibraryloader.UpdateResourceW(hUpdate, foundation.PWSTR(_lpType), foundation.PWSTR(_lpName), wLanguage, lpData, cb)
 }
+
+var BeginUpdateResourceW = systemlibraryloader.BeginUpdateResourceW
+var DisableThreadLibraryCalls = systemlibraryloader.DisableThreadLibraryCalls
+var EndUpdateResourceW = systemlibraryloader.EndUpdateResourceW
+var EnumResourceLanguagesA = systemlibraryloader.EnumResourceLanguagesA
+var EnumResourceLanguagesExA = systemlibraryloader.EnumResourceLanguagesExA
+var EnumResourceLanguagesExW = systemlibraryloader.EnumResourceLanguagesExW
+var EnumResourceLanguagesW = systemlibraryloader.EnumResourceLanguagesW
+var EnumResourceNamesA = systemlibraryloader.EnumResourceNamesA
+var EnumResourceNamesExA = systemlibraryloader.EnumResourceNamesExA
+var EnumResourceNamesExW = systemlibraryloader.EnumResourceNamesExW
+var EnumResourceNamesW = systemlibraryloader.EnumResourceNamesW
+var EnumResourceTypesA = systemlibraryloader.EnumResourceTypesA
+var EnumResourceTypesExA = systemlibraryloader.EnumResourceTypesExA
+var EnumResourceTypesExW = systemlibraryloader.EnumResourceTypesExW
+var EnumResourceTypesW = systemlibraryloader.EnumResourceTypesW
+var FindResourceA = systemlibraryloader.FindResourceA
+var FindResourceExA = systemlibraryloader.FindResourceExA
+var FindResourceExW = systemlibraryloader.FindResourceExW
+var FindResourceW = systemlibraryloader.FindResourceW
+var FreeLibraryAndExitThread = systemlibraryloader.FreeLibraryAndExitThread
+var GetDllDirectoryA = systemlibraryloader.GetDllDirectoryA
+var GetDllDirectoryW = systemlibraryloader.GetDllDirectoryW
+var GetModuleFileNameA = systemlibraryloader.GetModuleFileNameA
+var GetModuleFileNameW = systemlibraryloader.GetModuleFileNameW
+var GetModuleHandleA = systemlibraryloader.GetModuleHandleA
+var GetModuleHandleExA = systemlibraryloader.GetModuleHandleExA
+var GetModuleHandleExW = systemlibraryloader.GetModuleHandleExW
+var GetModuleHandleW = systemlibraryloader.GetModuleHandleW
+var GetProcAddress = systemlibraryloader.GetProcAddress
+var LoadLibraryA = systemlibraryloader.LoadLibraryA
+var LoadLibraryExW = systemlibraryloader.LoadLibraryExW
+var LoadLibraryW = systemlibraryloader.LoadLibraryW
+var LoadModule = systemlibraryloader.LoadModule
+var LoadResource = systemlibraryloader.LoadResource
+var LockResource = systemlibraryloader.LockResource
+var RemoveDllDirectory = systemlibraryloader.RemoveDllDirectory
+var SetDefaultDllDirectories = systemlibraryloader.SetDefaultDllDirectories
+var SetDllDirectoryA = systemlibraryloader.SetDllDirectoryA
+var SetDllDirectoryW = systemlibraryloader.SetDllDirectoryW
+var SizeofResource = systemlibraryloader.SizeofResource
+var UpdateResourceA = systemlibraryloader.UpdateResourceA
+var UpdateResourceW = systemlibraryloader.UpdateResourceW

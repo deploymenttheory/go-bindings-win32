@@ -67,3 +67,15 @@ func ShutdownBlockReasonCreate(hWnd foundation.HWND, pwszReason string) error {
 	_pwszReason := win32.UTF16Ptr(pwszReason)
 	return systemshutdown.ShutdownBlockReasonCreate(hWnd, foundation.PWSTR(_pwszReason))
 }
+
+var AbortSystemShutdownA = systemshutdown.AbortSystemShutdownA
+var AbortSystemShutdownW = systemshutdown.AbortSystemShutdownW
+var CheckForHiberboot = systemshutdown.CheckForHiberboot
+var ExitWindowsEx = systemshutdown.ExitWindowsEx
+var InitiateShutdownA = systemshutdown.InitiateShutdownA
+var InitiateShutdownW = systemshutdown.InitiateShutdownW
+var InitiateSystemShutdownExW = systemshutdown.InitiateSystemShutdownExW
+var InitiateSystemShutdownW = systemshutdown.InitiateSystemShutdownW
+var LockWorkStation = systemshutdown.LockWorkStation
+var ShutdownBlockReasonDestroy = systemshutdown.ShutdownBlockReasonDestroy
+var ShutdownBlockReasonQuery = systemshutdown.ShutdownBlockReasonQuery

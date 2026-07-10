@@ -703,3 +703,38 @@ func WcsSetUsePerUserProfiles(pDeviceName string, dwDeviceClass uint32, usePerUs
 func WcsTranslateColors(hColorTransform uintptr, nColors uint32, nInputChannels uint32, cdtInput uicolorsystem.COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, nOutputChannels uint32, cdtOutput uicolorsystem.COLORDATATYPE, cbOutput uint32, pOutputData unsafe.Pointer) bool {
 	return uicolorsystem.WcsTranslateColors(hColorTransform, nColors, nInputChannels, cdtInput, cbInput, pInputData, nOutputChannels, cdtOutput, cbOutput, pOutputData) != 0
 }
+
+var AssociateColorProfileWithDeviceW = uicolorsystem.AssociateColorProfileWithDeviceW
+var CMCreateTransformExtW = uicolorsystem.CMCreateTransformExtW
+var CMCreateTransformW = uicolorsystem.CMCreateTransformW
+var CMGetInfo = uicolorsystem.CMGetInfo
+var CreateColorSpaceA = uicolorsystem.CreateColorSpaceA
+var CreateColorSpaceW = uicolorsystem.CreateColorSpaceW
+var CreateColorTransformA = uicolorsystem.CreateColorTransformA
+var CreateColorTransformW = uicolorsystem.CreateColorTransformW
+var CreateProfileFromLogColorSpaceW = uicolorsystem.CreateProfileFromLogColorSpaceW
+var DisassociateColorProfileFromDeviceW = uicolorsystem.DisassociateColorProfileFromDeviceW
+var EnumColorProfilesW = uicolorsystem.EnumColorProfilesW
+var EnumICMProfilesA = uicolorsystem.EnumICMProfilesA
+var EnumICMProfilesW = uicolorsystem.EnumICMProfilesW
+var GetCMMInfo = uicolorsystem.GetCMMInfo
+var GetColorDirectoryW = uicolorsystem.GetColorDirectoryW
+var GetColorSpace = uicolorsystem.GetColorSpace
+var GetICMProfileW = uicolorsystem.GetICMProfileW
+var GetLogColorSpaceW = uicolorsystem.GetLogColorSpaceW
+var GetStandardColorSpaceProfileW = uicolorsystem.GetStandardColorSpaceProfileW
+var InstallColorProfileW = uicolorsystem.InstallColorProfileW
+var OpenColorProfileA = uicolorsystem.OpenColorProfileA
+var OpenColorProfileW = uicolorsystem.OpenColorProfileW
+var RegisterCMMW = uicolorsystem.RegisterCMMW
+var SetColorSpace = uicolorsystem.SetColorSpace
+var SetICMMode = uicolorsystem.SetICMMode
+var SetICMProfileW = uicolorsystem.SetICMProfileW
+var SetStandardColorSpaceProfileW = uicolorsystem.SetStandardColorSpaceProfileW
+var SetupColorMatchingW = uicolorsystem.SetupColorMatchingW
+var UninstallColorProfileW = uicolorsystem.UninstallColorProfileW
+var UnregisterCMMW = uicolorsystem.UnregisterCMMW
+var UpdateICMRegKeyW = uicolorsystem.UpdateICMRegKeyW
+var WcsCreateIccProfile = uicolorsystem.WcsCreateIccProfile
+var WcsOpenColorProfileA = uicolorsystem.WcsOpenColorProfileA
+var WcsOpenColorProfileW = uicolorsystem.WcsOpenColorProfileW

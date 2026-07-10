@@ -161,3 +161,6 @@ func RunDll32ShimW(hwnd foundation.HWND, hinst foundation.HINSTANCE, lpszCmdLine
 	_lpszCmdLine := win32.UTF16Ptr(lpszCmdLine)
 	return win32.HRESULTError(int32(systemclrhosting.RunDll32ShimW(hwnd, hinst, foundation.PWSTR(_lpszCmdLine), nCmdShow)))
 }
+
+var CorExitProcess = systemclrhosting.CorExitProcess
+var CorMarkThreadInThreadPool = systemclrhosting.CorMarkThreadInThreadPool

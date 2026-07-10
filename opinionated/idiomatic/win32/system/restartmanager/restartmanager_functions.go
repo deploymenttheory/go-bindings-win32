@@ -62,3 +62,9 @@ func RmRestart(dwSessionHandle uint32, fnStatus systemrestartmanager.RM_WRITE_ST
 func RmStartSession(pSessionHandle *uint32, strSessionKey foundation.PWSTR) foundation.WIN32_ERROR {
 	return systemrestartmanager.RmStartSession(pSessionHandle, 0, strSessionKey)
 }
+
+var RmCancelCurrentTask = systemrestartmanager.RmCancelCurrentTask
+var RmEndSession = systemrestartmanager.RmEndSession
+var RmGetFilterList = systemrestartmanager.RmGetFilterList
+var RmGetList = systemrestartmanager.RmGetList
+var RmShutdown = systemrestartmanager.RmShutdown

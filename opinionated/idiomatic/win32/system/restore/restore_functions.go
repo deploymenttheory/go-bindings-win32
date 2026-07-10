@@ -21,3 +21,6 @@ func SRSetRestorePoint(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer
 func SRSetRestorePointA(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer) bool {
 	return systemrestore.SRSetRestorePointA(pRestorePtSpec, pSMgrStatus) != 0
 }
+
+var SRRemoveRestorePoint = systemrestore.SRRemoveRestorePoint
+var SRSetRestorePointW = systemrestore.SRSetRestorePointW

@@ -54,3 +54,8 @@ func SaferiIsExecutableFileType(szFullPathname string, bFromShellExecute foundat
 	_szFullPathname := win32.UTF16Ptr(szFullPathname)
 	return securityapplocker.SaferiIsExecutableFileType(foundation.PWSTR(_szFullPathname), bFromShellExecute) != 0
 }
+
+var SaferCloseLevel = securityapplocker.SaferCloseLevel
+var SaferComputeTokenFromLevel = securityapplocker.SaferComputeTokenFromLevel
+var SaferGetLevelInformation = securityapplocker.SaferGetLevelInformation
+var SaferSetLevelInformation = securityapplocker.SaferSetLevelInformation

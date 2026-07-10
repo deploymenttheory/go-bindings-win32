@@ -253,3 +253,56 @@ func WNetUseConnection(hwndOwner foundation.HWND, lpNetResource *networkmanageme
 func WNetUseConnection4(hwndOwner foundation.HWND, lpNetResource *networkmanagementwnet.NETRESOURCEW, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags uint32, lpUseOptions *byte, cbUseOptions uint32, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
 	return networkmanagementwnet.WNetUseConnection4W(hwndOwner, lpNetResource, pAuthBuffer, cbAuthBuffer, dwFlags, lpUseOptions, cbUseOptions, lpAccessName, lpBufferSize, lpResult)
 }
+
+var MultinetGetConnectionPerformanceA = networkmanagementwnet.MultinetGetConnectionPerformanceA
+var MultinetGetConnectionPerformanceW = networkmanagementwnet.MultinetGetConnectionPerformanceW
+var NPAddConnection4 = networkmanagementwnet.NPAddConnection4
+var NPCloseEnum = networkmanagementwnet.NPCloseEnum
+var NPEnumResource = networkmanagementwnet.NPEnumResource
+var NPGetCaps = networkmanagementwnet.NPGetCaps
+var NPGetResourceInformation = networkmanagementwnet.NPGetResourceInformation
+var NPGetResourceParent = networkmanagementwnet.NPGetResourceParent
+var NPOpenEnum = networkmanagementwnet.NPOpenEnum
+var WNetAddConnection2A = networkmanagementwnet.WNetAddConnection2A
+var WNetAddConnection2W = networkmanagementwnet.WNetAddConnection2W
+var WNetAddConnection3A = networkmanagementwnet.WNetAddConnection3A
+var WNetAddConnection3W = networkmanagementwnet.WNetAddConnection3W
+var WNetAddConnection4A = networkmanagementwnet.WNetAddConnection4A
+var WNetAddConnection4W = networkmanagementwnet.WNetAddConnection4W
+var WNetAddConnectionA = networkmanagementwnet.WNetAddConnectionA
+var WNetAddConnectionW = networkmanagementwnet.WNetAddConnectionW
+var WNetCancelConnection2W = networkmanagementwnet.WNetCancelConnection2W
+var WNetCancelConnectionW = networkmanagementwnet.WNetCancelConnectionW
+var WNetCloseEnum = networkmanagementwnet.WNetCloseEnum
+var WNetConnectionDialog = networkmanagementwnet.WNetConnectionDialog
+var WNetConnectionDialog1A = networkmanagementwnet.WNetConnectionDialog1A
+var WNetConnectionDialog1W = networkmanagementwnet.WNetConnectionDialog1W
+var WNetDisconnectDialog = networkmanagementwnet.WNetDisconnectDialog
+var WNetDisconnectDialog1A = networkmanagementwnet.WNetDisconnectDialog1A
+var WNetDisconnectDialog1W = networkmanagementwnet.WNetDisconnectDialog1W
+var WNetEnumResourceA = networkmanagementwnet.WNetEnumResourceA
+var WNetEnumResourceW = networkmanagementwnet.WNetEnumResourceW
+var WNetGetConnectionA = networkmanagementwnet.WNetGetConnectionA
+var WNetGetConnectionW = networkmanagementwnet.WNetGetConnectionW
+var WNetGetLastErrorA = networkmanagementwnet.WNetGetLastErrorA
+var WNetGetLastErrorW = networkmanagementwnet.WNetGetLastErrorW
+var WNetGetNetworkInformationA = networkmanagementwnet.WNetGetNetworkInformationA
+var WNetGetNetworkInformationW = networkmanagementwnet.WNetGetNetworkInformationW
+var WNetGetProviderNameA = networkmanagementwnet.WNetGetProviderNameA
+var WNetGetProviderNameW = networkmanagementwnet.WNetGetProviderNameW
+var WNetGetResourceInformationA = networkmanagementwnet.WNetGetResourceInformationA
+var WNetGetResourceInformationW = networkmanagementwnet.WNetGetResourceInformationW
+var WNetGetResourceParentA = networkmanagementwnet.WNetGetResourceParentA
+var WNetGetResourceParentW = networkmanagementwnet.WNetGetResourceParentW
+var WNetGetUniversalNameA = networkmanagementwnet.WNetGetUniversalNameA
+var WNetGetUniversalNameW = networkmanagementwnet.WNetGetUniversalNameW
+var WNetGetUserA = networkmanagementwnet.WNetGetUserA
+var WNetGetUserW = networkmanagementwnet.WNetGetUserW
+var WNetOpenEnumA = networkmanagementwnet.WNetOpenEnumA
+var WNetOpenEnumW = networkmanagementwnet.WNetOpenEnumW
+var WNetSetLastErrorA = networkmanagementwnet.WNetSetLastErrorA
+var WNetSetLastErrorW = networkmanagementwnet.WNetSetLastErrorW
+var WNetUseConnection4A = networkmanagementwnet.WNetUseConnection4A
+var WNetUseConnection4W = networkmanagementwnet.WNetUseConnection4W
+var WNetUseConnectionA = networkmanagementwnet.WNetUseConnectionA
+var WNetUseConnectionW = networkmanagementwnet.WNetUseConnectionW

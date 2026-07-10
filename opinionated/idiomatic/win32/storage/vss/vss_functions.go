@@ -39,3 +39,5 @@ func ShouldBlockRevertInternal(wszVolumeName string, pbBlock *bool) error {
 	_wszVolumeName := win32.UTF16Ptr(wszVolumeName)
 	return win32.HRESULTError(int32(storagevss.ShouldBlockRevertInternal(foundation.PWSTR(_wszVolumeName), pbBlock)))
 }
+
+var VssFreeSnapshotPropertiesInternal = storagevss.VssFreeSnapshotPropertiesInternal

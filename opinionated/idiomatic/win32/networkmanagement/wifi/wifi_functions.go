@@ -314,3 +314,18 @@ func WlanUIEditProfile(dwClientVersion uint32, wstrProfileName string, pInterfac
 	_wstrProfileName := win32.UTF16Ptr(wstrProfileName)
 	return networkmanagementwifi.WlanUIEditProfile(dwClientVersion, foundation.PWSTR(_wstrProfileName), pInterfaceGuid, hWnd, wlStartPage, nil, pWlanReasonCode)
 }
+
+var WFDCancelOpenSession = networkmanagementwifi.WFDCancelOpenSession
+var WFDCloseHandle = networkmanagementwifi.WFDCloseHandle
+var WFDCloseSession = networkmanagementwifi.WFDCloseSession
+var WFDOpenHandle = networkmanagementwifi.WFDOpenHandle
+var WFDOpenLegacySession = networkmanagementwifi.WFDOpenLegacySession
+var WFDStartOpenSession = networkmanagementwifi.WFDStartOpenSession
+var WFDUpdateDeviceVisibility = networkmanagementwifi.WFDUpdateDeviceVisibility
+var WlanAllocateMemory = networkmanagementwifi.WlanAllocateMemory
+var WlanDeviceServiceCommand = networkmanagementwifi.WlanDeviceServiceCommand
+var WlanFreeMemory = networkmanagementwifi.WlanFreeMemory
+var WlanGetSecuritySettings = networkmanagementwifi.WlanGetSecuritySettings
+var WlanGetSupportedDeviceServices = networkmanagementwifi.WlanGetSupportedDeviceServices
+var WlanIhvControl = networkmanagementwifi.WlanIhvControl
+var WlanRegisterDeviceServiceNotification = networkmanagementwifi.WlanRegisterDeviceServiceNotification

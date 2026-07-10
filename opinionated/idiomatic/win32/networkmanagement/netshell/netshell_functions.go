@@ -45,3 +45,8 @@ func PrintMessage(pwszFormat string) uint32 {
 	_pwszFormat := win32.UTF16Ptr(pwszFormat)
 	return networkmanagementnetshell.PrintMessage(foundation.PWSTR(_pwszFormat))
 }
+
+var PrintError = networkmanagementnetshell.PrintError
+var PrintMessageFromModule = networkmanagementnetshell.PrintMessageFromModule
+var RegisterContext = networkmanagementnetshell.RegisterContext
+var RegisterHelper = networkmanagementnetshell.RegisterHelper

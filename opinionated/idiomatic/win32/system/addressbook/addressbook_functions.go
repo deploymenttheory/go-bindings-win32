@@ -129,3 +129,37 @@ func WrapCompressedRTFStream(lpCompressedRTFStream systemcomidiom.IStream, ulFla
 func WrapStoreEntryID(ulFlags uint32, lpszDLLName *int8, cbOrigEntry uint32, lpOrigEntry *systemaddressbook.ENTRYID, lpcbWrappedEntry *uint32, lppWrappedEntry **systemaddressbook.ENTRYID) error {
 	return win32.HRESULTError(int32(systemaddressbook.WrapStoreEntryID(ulFlags, lpszDLLName, cbOrigEntry, lpOrigEntry, lpcbWrappedEntry, lppWrappedEntry)))
 }
+
+var ChangeIdleRoutine = systemaddressbook.ChangeIdleRoutine
+var CreateIProp = systemaddressbook.CreateIProp
+var CreateTable = systemaddressbook.CreateTable
+var DeinitMapiUtil = systemaddressbook.DeinitMapiUtil
+var DeregisterIdleRoutine = systemaddressbook.DeregisterIdleRoutine
+var FreePadrlist = systemaddressbook.FreePadrlist
+var FreeProws = systemaddressbook.FreeProws
+var FtgRegisterIdleRoutine = systemaddressbook.FtgRegisterIdleRoutine
+var LPropCompareProp = systemaddressbook.LPropCompareProp
+var LpValFindProp = systemaddressbook.LpValFindProp
+var MAPIDeinitIdle = systemaddressbook.MAPIDeinitIdle
+var MAPIGetDefaultMalloc = systemaddressbook.MAPIGetDefaultMalloc
+var MAPIInitIdle = systemaddressbook.MAPIInitIdle
+var PpropFindProp = systemaddressbook.PpropFindProp
+var PropCopyMore = systemaddressbook.PropCopyMore
+var ScCopyNotifications = systemaddressbook.ScCopyNotifications
+var ScCopyProps = systemaddressbook.ScCopyProps
+var ScCountNotifications = systemaddressbook.ScCountNotifications
+var ScCountProps = systemaddressbook.ScCountProps
+var ScCreateConversationIndex = systemaddressbook.ScCreateConversationIndex
+var ScDupPropset = systemaddressbook.ScDupPropset
+var ScInitMapiUtil = systemaddressbook.ScInitMapiUtil
+var ScLocalPathFromUNC = systemaddressbook.ScLocalPathFromUNC
+var ScRelocNotifications = systemaddressbook.ScRelocNotifications
+var ScRelocProps = systemaddressbook.ScRelocProps
+var ScUNCFromLocalPath = systemaddressbook.ScUNCFromLocalPath
+var SzFindCh = systemaddressbook.SzFindCh
+var SzFindLastCh = systemaddressbook.SzFindLastCh
+var SzFindSz = systemaddressbook.SzFindSz
+var UFromSz = systemaddressbook.UFromSz
+var UlAddRef = systemaddressbook.UlAddRef
+var UlPropSize = systemaddressbook.UlPropSize
+var UlRelease = systemaddressbook.UlRelease

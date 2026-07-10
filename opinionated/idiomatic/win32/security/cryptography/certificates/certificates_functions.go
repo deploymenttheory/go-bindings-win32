@@ -163,3 +163,9 @@ func PstValidate(pTargetName *foundation.UNICODE_STRING, bIsClient bool, pReques
 	_bIsClient := foundation.BOOL(win32.Bool32(bIsClient))
 	return securitycryptographycertificates.PstValidate(pTargetName, _bIsClient, pRequestedIssuancePolicy, phAdditionalCertStore, pCert, pProvGUID)
 }
+
+var CertSrvBackupFree = securitycryptographycertificates.CertSrvBackupFree
+var PstAcquirePrivateKey = securitycryptographycertificates.PstAcquirePrivateKey
+var PstGetCertificateChain = securitycryptographycertificates.PstGetCertificateChain
+var PstGetUserNameForCertificate = securitycryptographycertificates.PstGetUserNameForCertificate
+var PstMapCertificate = securitycryptographycertificates.PstMapCertificate

@@ -182,3 +182,16 @@ func UninstallApplication(ProductCode string, dwStatus uint32) uint32 {
 	_ProductCode := win32.UTF16Ptr(ProductCode)
 	return systemgrouppolicy.UninstallApplication(foundation.PWSTR(_ProductCode), dwStatus)
 }
+
+var FreeGPOListA = systemgrouppolicy.FreeGPOListA
+var FreeGPOListW = systemgrouppolicy.FreeGPOListW
+var GetAppliedGPOListA = systemgrouppolicy.GetAppliedGPOListA
+var GetAppliedGPOListW = systemgrouppolicy.GetAppliedGPOListW
+var GetGPOListA = systemgrouppolicy.GetGPOListA
+var GetGPOListW = systemgrouppolicy.GetGPOListW
+var GetManagedApplications = systemgrouppolicy.GetManagedApplications
+var InstallApplication = systemgrouppolicy.InstallApplication
+var LeaveCriticalPolicySection = systemgrouppolicy.LeaveCriticalPolicySection
+var ProcessGroupPolicyCompleted = systemgrouppolicy.ProcessGroupPolicyCompleted
+var ProcessGroupPolicyCompletedEx = systemgrouppolicy.ProcessGroupPolicyCompletedEx
+var UnregisterGPNotification = systemgrouppolicy.UnregisterGPNotification

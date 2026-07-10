@@ -63,14 +63,13 @@ jobs:
       - name: Validate metadata
         run: go run ./cmd/generate validate
 
-      - name: Regenerate bindings + ABI test
-        run: go run ./cmd/generate abitest
-
-      - name: Regenerate idiomatic tier
-        run: go run ./cmd/generate idiomatic
-
-      - name: Diagnostics ratchet
+      # One command clears and re-emits BOTH the raw bindings and the
+      # idiomatic layer, and enforces the diagnostics ratchet.
+      - name: Regenerate bindings (raw + idiomatic) with ratchet
         run: go run ./cmd/generate bindings --diagnostics-baseline metadata/diagnostics-baseline.json
+
+      - name: Regenerate the ABI acceptance test
+        run: go run ./cmd/generate abitest
 
       - name: Generated output must match the committed tree
         shell: bash

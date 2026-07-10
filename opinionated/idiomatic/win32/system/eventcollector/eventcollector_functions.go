@@ -99,3 +99,5 @@ func EcSetObjectArrayProperty(ObjectArray uintptr, PropertyId systemeventcollect
 func EcSetSubscriptionProperty(Subscription uintptr, PropertyId systemeventcollector.EC_SUBSCRIPTION_PROPERTY_ID, Flags uint32, PropertyValue *systemeventcollector.EC_VARIANT) bool {
 	return systemeventcollector.EcSetSubscriptionProperty(Subscription, PropertyId, Flags, PropertyValue) != 0
 }
+
+var EcOpenSubscriptionEnum = systemeventcollector.EcOpenSubscriptionEnum

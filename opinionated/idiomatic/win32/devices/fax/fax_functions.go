@@ -244,3 +244,49 @@ func SendToFaxRecipient(sndMode devicesfax.SendToMode, lpFileName string) uint32
 func StiCreateInstanceW(hinst foundation.HINSTANCE, dwVer uint32, ppSti **devicesfax.IStillImageW, punkOuter systemcomidiom.IUnknown) error {
 	return win32.HRESULTError(int32(devicesfax.StiCreateInstanceW(hinst, dwVer, ppSti, punkOuter.Raw)))
 }
+
+var FaxCompleteJobParamsW = devicesfax.FaxCompleteJobParamsW
+var FaxConnectFaxServerA = devicesfax.FaxConnectFaxServerA
+var FaxConnectFaxServerW = devicesfax.FaxConnectFaxServerW
+var FaxEnableRoutingMethodW = devicesfax.FaxEnableRoutingMethodW
+var FaxEnumGlobalRoutingInfoA = devicesfax.FaxEnumGlobalRoutingInfoA
+var FaxEnumGlobalRoutingInfoW = devicesfax.FaxEnumGlobalRoutingInfoW
+var FaxEnumJobsA = devicesfax.FaxEnumJobsA
+var FaxEnumJobsW = devicesfax.FaxEnumJobsW
+var FaxEnumPortsA = devicesfax.FaxEnumPortsA
+var FaxEnumPortsW = devicesfax.FaxEnumPortsW
+var FaxEnumRoutingMethodsA = devicesfax.FaxEnumRoutingMethodsA
+var FaxEnumRoutingMethodsW = devicesfax.FaxEnumRoutingMethodsW
+var FaxFreeBuffer = devicesfax.FaxFreeBuffer
+var FaxGetConfigurationA = devicesfax.FaxGetConfigurationA
+var FaxGetConfigurationW = devicesfax.FaxGetConfigurationW
+var FaxGetDeviceStatusA = devicesfax.FaxGetDeviceStatusA
+var FaxGetDeviceStatusW = devicesfax.FaxGetDeviceStatusW
+var FaxGetJobA = devicesfax.FaxGetJobA
+var FaxGetJobW = devicesfax.FaxGetJobW
+var FaxGetLoggingCategoriesA = devicesfax.FaxGetLoggingCategoriesA
+var FaxGetLoggingCategoriesW = devicesfax.FaxGetLoggingCategoriesW
+var FaxGetPortA = devicesfax.FaxGetPortA
+var FaxGetPortW = devicesfax.FaxGetPortW
+var FaxGetRoutingInfoA = devicesfax.FaxGetRoutingInfoA
+var FaxGetRoutingInfoW = devicesfax.FaxGetRoutingInfoW
+var FaxPrintCoverPageA = devicesfax.FaxPrintCoverPageA
+var FaxPrintCoverPageW = devicesfax.FaxPrintCoverPageW
+var FaxSendDocumentA = devicesfax.FaxSendDocumentA
+var FaxSendDocumentForBroadcastA = devicesfax.FaxSendDocumentForBroadcastA
+var FaxSendDocumentForBroadcastW = devicesfax.FaxSendDocumentForBroadcastW
+var FaxSendDocumentW = devicesfax.FaxSendDocumentW
+var FaxSetConfigurationA = devicesfax.FaxSetConfigurationA
+var FaxSetConfigurationW = devicesfax.FaxSetConfigurationW
+var FaxSetGlobalRoutingInfoA = devicesfax.FaxSetGlobalRoutingInfoA
+var FaxSetGlobalRoutingInfoW = devicesfax.FaxSetGlobalRoutingInfoW
+var FaxSetJobA = devicesfax.FaxSetJobA
+var FaxSetJobW = devicesfax.FaxSetJobW
+var FaxSetLoggingCategoriesA = devicesfax.FaxSetLoggingCategoriesA
+var FaxSetLoggingCategoriesW = devicesfax.FaxSetLoggingCategoriesW
+var FaxSetPortA = devicesfax.FaxSetPortA
+var FaxSetPortW = devicesfax.FaxSetPortW
+var FaxSetRoutingInfoA = devicesfax.FaxSetRoutingInfoA
+var FaxSetRoutingInfoW = devicesfax.FaxSetRoutingInfoW
+var FaxStartPrintJobA = devicesfax.FaxStartPrintJobA
+var FaxStartPrintJobW = devicesfax.FaxStartPrintJobW

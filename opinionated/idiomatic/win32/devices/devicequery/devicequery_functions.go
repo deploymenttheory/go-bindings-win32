@@ -188,3 +188,5 @@ func DevGetObjectsEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags u
 	}
 	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjectsEx(ObjectType, QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, uint32(len(pExtendedParameters)), _pExtendedParameters, pcObjectCount, ppObjects)))
 }
+
+var DevCloseObjectQuery = devicesdevicequery.DevCloseObjectQuery

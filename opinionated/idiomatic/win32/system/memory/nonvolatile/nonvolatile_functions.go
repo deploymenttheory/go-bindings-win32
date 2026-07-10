@@ -18,3 +18,10 @@ func RtlFlushNonVolatileMemoryRanges(NvToken unsafe.Pointer, NvRanges []systemme
 	}
 	return systemmemorynonvolatile.RtlFlushNonVolatileMemoryRanges(NvToken, _NvRanges, uintptr(len(NvRanges)), Flags)
 }
+
+var RtlDrainNonVolatileFlush = systemmemorynonvolatile.RtlDrainNonVolatileFlush
+var RtlFillNonVolatileMemory = systemmemorynonvolatile.RtlFillNonVolatileMemory
+var RtlFlushNonVolatileMemory = systemmemorynonvolatile.RtlFlushNonVolatileMemory
+var RtlFreeNonVolatileToken = systemmemorynonvolatile.RtlFreeNonVolatileToken
+var RtlGetNonVolatileToken = systemmemorynonvolatile.RtlGetNonVolatileToken
+var RtlWriteNonVolatileMemory = systemmemorynonvolatile.RtlWriteNonVolatileMemory

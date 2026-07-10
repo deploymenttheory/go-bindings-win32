@@ -512,3 +512,7 @@ func SHPropStgReadMultiple(pps systemcomstructuredstorageidiom.IPropertyStorage,
 func SHPropStgWriteMultiple(pps systemcomstructuredstorageidiom.IPropertyStorage, puCodePage *uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT, propidNameFirst uint32) error {
 	return win32.HRESULTError(int32(uishellpropertiessystem.SHPropStgWriteMultiple(pps.Raw, puCodePage, cpspec, rgpspec, rgvar, propidNameFirst)))
 }
+
+var PifMgr_CloseProperties = uishellpropertiessystem.PifMgr_CloseProperties
+var PifMgr_GetProperties = uishellpropertiessystem.PifMgr_GetProperties
+var PifMgr_SetProperties = uishellpropertiessystem.PifMgr_SetProperties

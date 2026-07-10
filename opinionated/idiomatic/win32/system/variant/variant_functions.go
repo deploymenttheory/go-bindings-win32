@@ -477,3 +477,23 @@ func VariantToUInt64Array(var_ *systemvariant.VARIANT, prgn []uint64, pcElem *ui
 func VariantToUInt64ArrayAlloc(var_ *systemvariant.VARIANT, pprgn **uint64, pcElem *uint32) error {
 	return win32.HRESULTError(int32(systemvariant.VariantToUInt64ArrayAlloc(var_, pprgn, pcElem)))
 }
+
+var DosDateTimeToVariantTime = systemvariant.DosDateTimeToVariantTime
+var SystemTimeToVariantTime = systemvariant.SystemTimeToVariantTime
+var VARIANT_UserFree = systemvariant.VARIANT_UserFree
+var VARIANT_UserFree64 = systemvariant.VARIANT_UserFree64
+var VARIANT_UserMarshal = systemvariant.VARIANT_UserMarshal
+var VARIANT_UserMarshal64 = systemvariant.VARIANT_UserMarshal64
+var VARIANT_UserSize = systemvariant.VARIANT_UserSize
+var VARIANT_UserSize64 = systemvariant.VARIANT_UserSize64
+var VARIANT_UserUnmarshal = systemvariant.VARIANT_UserUnmarshal
+var VARIANT_UserUnmarshal64 = systemvariant.VARIANT_UserUnmarshal64
+var VariantCompare = systemvariant.VariantCompare
+var VariantGetElementCount = systemvariant.VariantGetElementCount
+var VariantInit = systemvariant.VariantInit
+var VariantToInt16WithDefault = systemvariant.VariantToInt16WithDefault
+var VariantToInt32WithDefault = systemvariant.VariantToInt32WithDefault
+var VariantToInt64WithDefault = systemvariant.VariantToInt64WithDefault
+var VariantToUInt16WithDefault = systemvariant.VariantToUInt16WithDefault
+var VariantToUInt32WithDefault = systemvariant.VariantToUInt32WithDefault
+var VariantToUInt64WithDefault = systemvariant.VariantToUInt64WithDefault

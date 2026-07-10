@@ -281,3 +281,5 @@ func HcnUnregisterGuestNetworkServiceCallback(CallbackHandle unsafe.Pointer) err
 func HcnUnregisterServiceCallback(CallbackHandle unsafe.Pointer) error {
 	return win32.HRESULTError(int32(systemhostcomputenetwork.HcnUnregisterServiceCallback(CallbackHandle)))
 }
+
+var HcnFreeGuestNetworkPortReservations = systemhostcomputenetwork.HcnFreeGuestNetworkPortReservations

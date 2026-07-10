@@ -103,3 +103,7 @@ func WebSocketReceive(hWebSocket networkingwebsocket.WEB_SOCKET_HANDLE, pBuffer 
 func WebSocketSend(hWebSocket networkingwebsocket.WEB_SOCKET_HANDLE, BufferType networkingwebsocket.WEB_SOCKET_BUFFER_TYPE, pBuffer *networkingwebsocket.WEB_SOCKET_BUFFER, Context unsafe.Pointer) error {
 	return win32.HRESULTError(int32(networkingwebsocket.WebSocketSend(hWebSocket, BufferType, pBuffer, Context)))
 }
+
+var WebSocketAbortHandle = networkingwebsocket.WebSocketAbortHandle
+var WebSocketCompleteAction = networkingwebsocket.WebSocketCompleteAction
+var WebSocketDeleteHandle = networkingwebsocket.WebSocketDeleteHandle

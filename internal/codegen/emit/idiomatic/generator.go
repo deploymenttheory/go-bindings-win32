@@ -29,6 +29,9 @@ type Generator struct {
 	// metadata-index → emitted raw method name, so the idiomatic COM
 	// wrapper calls the exact (deduped, non-skipped) raw method.
 	emittedComMethods map[string]map[int]string
+	// reExports is the raw tier's per-namespace top-level identifiers the
+	// idiomatic package re-exports when it does not define them itself.
+	reExports map[string][]ReExport
 
 	modulePath string
 	outDir     string
@@ -41,23 +44,28 @@ type Generator struct {
 
 // New builds an idiomatic Generator sharing the raw tier's mapper (so type
 // degradation decisions match exactly) and its emitted-function set.
-func New(registry *pipeline.Registry, mapper *typemap.Mapper, emittedFunctions map[string]map[string]bool, emittedComMethods map[string]map[int]string, modulePath, outDir string) *Generator {
+func New(registry *pipeline.Registry, mapper *typemap.Mapper, emittedFunctions map[string]map[string]bool, emittedComMethods map[string]map[int]string, reExports map[string][]ReExport, modulePath, outDir string) *Generator {
 	return &Generator{
 		registry:          registry,
 		mapper:            mapper,
 		emittedFunctions:  emittedFunctions,
 		emittedComMethods: emittedComMethods,
+		reExports:         reExports,
 		modulePath:        modulePath,
 		outDir:            outDir,
 	}
 }
 
-// EmitAll generates the idiomatic tier for every namespace that produced at
-// least one wrapper. Returns the package count.
-func (g *Generator) EmitAll() (int, error) {
+// EmitAll generates the idiomatic tier. When filter is non-nil, only those
+// namespaces are emitted (used to mirror a filtered raw run exactly); nil
+// emits every namespace. Returns the package count.
+func (g *Generator) EmitAll(filter map[string]bool) (int, error) {
 	g.writtenFiles = map[string]bool{}
 	written := 0
 	for _, meta := range g.registry.Namespaces {
+		if filter != nil && !filter[meta.Namespace] {
+			continue
+		}
 		emitted, err := g.emitNamespace(meta)
 		if err != nil {
 			return written, fmt.Errorf("idiomatic %s: %w", meta.Namespace, err)
@@ -66,7 +74,9 @@ func (g *Generator) EmitAll() (int, error) {
 			written++
 		}
 	}
-	if err := g.pruneStale(); err != nil {
+	// A full run sweeps the whole idiomatic tree; a filtered run prunes only
+	// inside the packages it (re)emitted.
+	if err := g.pruneStale(filter == nil); err != nil {
 		return written, err
 	}
 	g.Diagnostics = append(g.Diagnostics, g.mapper.Diagnostics...)
@@ -88,7 +98,12 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 	// Close<Handle> helper can never shadow one of them.
 	handleImports := typemap.ImportSet{}
 	handleBody := g.buildHandleClosers(meta, handleImports)
-	if len(functionModels) == 0 && len(interfaceModels) == 0 && handleBody == "" {
+	// Re-exports come last so wrappers/improved functions win any name
+	// clash; they make the idiomatic package self-contained and are grouped
+	// into the same files the raw tier uses (types / constants / functions).
+	reExports := g.buildReExports(meta)
+	if len(functionModels) == 0 && len(interfaceModels) == 0 && handleBody == "" &&
+		reExports.types == "" && reExports.constants == "" && reExports.functions == "" {
 		return false, nil
 	}
 
@@ -106,7 +121,8 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 		}
 	}
 
-	if len(functionModels) > 0 {
+	// Functions file: idiomatic wrappers plus any pass-through re-exports.
+	if len(functionModels) > 0 || reExports.functions != "" {
 		var body strings.Builder
 		for _, model := range functionModels {
 			block, err := render.Function(model)
@@ -115,6 +131,10 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 			}
 			body.WriteString(block)
 		}
+		if reExports.functions != "" {
+			functionImports[reExports.rawAlias] = g.rawImportPath(meta.Namespace)
+			body.WriteString(reExports.functions)
+		}
 		if err := g.writeFile(packageDir, packageName+"_functions.go", packageName, functionImports, body.String()); err != nil {
 			return false, err
 		}
@@ -122,6 +142,20 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 
 	if handleBody != "" {
 		if err := g.writeFile(packageDir, packageName+"_handles.go", packageName, handleImports, handleBody); err != nil {
+			return false, err
+		}
+	}
+
+	// Re-exported types and constants mirror the raw tier's file names.
+	if reExports.types != "" {
+		imports := typemap.ImportSet{reExports.rawAlias: g.rawImportPath(meta.Namespace)}
+		if err := g.writeFile(packageDir, packageName+"_types.go", packageName, imports, reExports.types); err != nil {
+			return false, err
+		}
+	}
+	if reExports.constants != "" {
+		imports := typemap.ImportSet{reExports.rawAlias: g.rawImportPath(meta.Namespace)}
+		if err := g.writeFile(packageDir, packageName+"_constants.go", packageName, imports, reExports.constants); err != nil {
 			return false, err
 		}
 	}
@@ -176,7 +210,8 @@ func (g *Generator) diag(format string, args ...any) {
 	g.Diagnostics = append(g.Diagnostics, fmt.Sprintf(format, args...))
 }
 
-// pruneStale removes idiomatic generated files not written this run.
-func (g *Generator) pruneStale() error {
-	return pruneGeneratedTree(g.outDir, g.writtenFiles)
+// pruneStale removes idiomatic generated files not written this run. A full
+// sweep cleans the whole tree; otherwise only directories this run wrote into.
+func (g *Generator) pruneStale(fullSweep bool) error {
+	return pruneGeneratedTree(g.outDir, g.writtenFiles, fullSweep)
 }

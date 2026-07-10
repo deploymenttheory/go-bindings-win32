@@ -62,3 +62,27 @@ func InjectTouchInput(contacts []uiinputpointer.POINTER_TOUCH_INFO) error {
 func IsMouseInPointerEnabled() bool {
 	return uiinputpointer.IsMouseInPointerEnabled() != 0
 }
+
+var DestroySyntheticPointerDevice = uiinputpointer.DestroySyntheticPointerDevice
+var GetPointerCursorId = uiinputpointer.GetPointerCursorId
+var GetPointerDevice = uiinputpointer.GetPointerDevice
+var GetPointerDeviceCursors = uiinputpointer.GetPointerDeviceCursors
+var GetPointerDeviceProperties = uiinputpointer.GetPointerDeviceProperties
+var GetPointerDeviceRects = uiinputpointer.GetPointerDeviceRects
+var GetPointerDevices = uiinputpointer.GetPointerDevices
+var GetPointerFrameInfo = uiinputpointer.GetPointerFrameInfo
+var GetPointerFrameInfoHistory = uiinputpointer.GetPointerFrameInfoHistory
+var GetPointerFramePenInfo = uiinputpointer.GetPointerFramePenInfo
+var GetPointerFramePenInfoHistory = uiinputpointer.GetPointerFramePenInfoHistory
+var GetPointerFrameTouchInfo = uiinputpointer.GetPointerFrameTouchInfo
+var GetPointerFrameTouchInfoHistory = uiinputpointer.GetPointerFrameTouchInfoHistory
+var GetPointerInfo = uiinputpointer.GetPointerInfo
+var GetPointerInfoHistory = uiinputpointer.GetPointerInfoHistory
+var GetPointerPenInfo = uiinputpointer.GetPointerPenInfo
+var GetPointerPenInfoHistory = uiinputpointer.GetPointerPenInfoHistory
+var GetPointerTouchInfo = uiinputpointer.GetPointerTouchInfo
+var GetPointerTouchInfoHistory = uiinputpointer.GetPointerTouchInfoHistory
+var GetPointerType = uiinputpointer.GetPointerType
+var GetUnpredictedMessagePos = uiinputpointer.GetUnpredictedMessagePos
+var InitializeTouchInjection = uiinputpointer.InitializeTouchInjection
+var SkipPointerFrameMessages = uiinputpointer.SkipPointerFrameMessages

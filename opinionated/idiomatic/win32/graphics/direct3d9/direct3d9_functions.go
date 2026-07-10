@@ -42,3 +42,8 @@ func D3DPERF_SetRegion(col uint32, wszName string) {
 func Direct3DCreate9Ex(SDKVersion uint32, param1 **graphicsdirect3d9.IDirect3D9Ex) error {
 	return win32.HRESULTError(int32(graphicsdirect3d9.Direct3DCreate9Ex(SDKVersion, param1)))
 }
+
+var D3DPERF_EndEvent = graphicsdirect3d9.D3DPERF_EndEvent
+var D3DPERF_GetStatus = graphicsdirect3d9.D3DPERF_GetStatus
+var D3DPERF_SetOptions = graphicsdirect3d9.D3DPERF_SetOptions
+var Direct3DCreate9 = graphicsdirect3d9.Direct3DCreate9

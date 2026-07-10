@@ -183,3 +183,30 @@ func TerminateEnclave(lpAddress unsafe.Pointer, fWait bool) error {
 	_fWait := foundation.BOOL(win32.Bool32(fWait))
 	return systemenvironment.TerminateEnclave(lpAddress, _fWait)
 }
+
+var CreateEnclave = systemenvironment.CreateEnclave
+var DeleteEnclave = systemenvironment.DeleteEnclave
+var DestroyEnvironmentBlock = systemenvironment.DestroyEnvironmentBlock
+var EnclaveUsesAttestedKeys = systemenvironment.EnclaveUsesAttestedKeys
+var ExpandEnvironmentStringsA = systemenvironment.ExpandEnvironmentStringsA
+var ExpandEnvironmentStringsForUserA = systemenvironment.ExpandEnvironmentStringsForUserA
+var ExpandEnvironmentStringsForUserW = systemenvironment.ExpandEnvironmentStringsForUserW
+var ExpandEnvironmentStringsW = systemenvironment.ExpandEnvironmentStringsW
+var FreeEnvironmentStringsA = systemenvironment.FreeEnvironmentStringsA
+var FreeEnvironmentStringsW = systemenvironment.FreeEnvironmentStringsW
+var GetCommandLineA = systemenvironment.GetCommandLineA
+var GetCommandLineW = systemenvironment.GetCommandLineW
+var GetCurrentDirectoryA = systemenvironment.GetCurrentDirectoryA
+var GetCurrentDirectoryW = systemenvironment.GetCurrentDirectoryW
+var GetEnvironmentStringsW = systemenvironment.GetEnvironmentStringsW
+var GetEnvironmentVariableA = systemenvironment.GetEnvironmentVariableA
+var GetEnvironmentVariableW = systemenvironment.GetEnvironmentVariableW
+var InitializeEnclave = systemenvironment.InitializeEnclave
+var IsEnclaveTypeSupported = systemenvironment.IsEnclaveTypeSupported
+var LoadEnclaveData = systemenvironment.LoadEnclaveData
+var LoadEnclaveImageW = systemenvironment.LoadEnclaveImageW
+var NeedCurrentDirectoryForExePathW = systemenvironment.NeedCurrentDirectoryForExePathW
+var SetCurrentDirectoryW = systemenvironment.SetCurrentDirectoryW
+var SetEnvironmentStringsW = systemenvironment.SetEnvironmentStringsW
+var SetEnvironmentVariableA = systemenvironment.SetEnvironmentVariableA
+var SetEnvironmentVariableW = systemenvironment.SetEnvironmentVariableW

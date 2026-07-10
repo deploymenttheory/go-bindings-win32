@@ -77,3 +77,6 @@ func SwDevicePropertySet(hSwDevice devicesenumerationpnp.HSWDEVICE, pProperties 
 func SwDeviceSetLifetime(hSwDevice devicesenumerationpnp.HSWDEVICE, Lifetime devicesenumerationpnp.SW_DEVICE_LIFETIME) error {
 	return win32.HRESULTError(int32(devicesenumerationpnp.SwDeviceSetLifetime(hSwDevice, Lifetime)))
 }
+
+var SwDeviceClose = devicesenumerationpnp.SwDeviceClose
+var SwMemFree = devicesenumerationpnp.SwMemFree

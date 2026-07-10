@@ -318,3 +318,7 @@ func WinBioVerifyWithCallback(SessionHandle uint32, Identity *devicesbiometricfr
 func WinBioWait(SessionHandle uint32) error {
 	return win32.HRESULTError(int32(devicesbiometricframework.WinBioWait(SessionHandle)))
 }
+
+var WinBioGetDomainLogonSetting = devicesbiometricframework.WinBioGetDomainLogonSetting
+var WinBioGetEnabledSetting = devicesbiometricframework.WinBioGetEnabledSetting
+var WinBioGetLogonSetting = devicesbiometricframework.WinBioGetLogonSetting

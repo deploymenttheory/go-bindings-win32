@@ -24,9 +24,15 @@
 > excluded. The generator (M0–M5) is feature-complete for the raw + idiomatic
 > Win32 surface. **M6 (deeper ergonomics) is implemented**: array+count →
 > Go slices (~600 wrappers), `[out,retval]` elevation to return values
-> (~8,600 COM methods + flat functions), and handle RAII — `Close<Handle>`
-> helpers from `[RAIIFree]` (~107 closers) — all live-tested. See CLAUDE.md
-> for the as-built architecture.
+> (~8,600 COM methods + flat functions), handle RAII — `Close<Handle>`
+> helpers from `[RAIIFree]` (~107 closers), and COM interface params as
+> wrapper types — all live-tested. The **idiomatic layer is self-contained**
+> (re-exports every type/constant/pass-through it doesn't improve, into
+> `_types.go`/`_constants.go`/`_functions.go`), so consumers never import
+> `bindings/win32`; **one `bindings` command clears and re-emits both tiers**,
+> each self-cleaning. A runnable [`examples/localaccount`](../examples) drives
+> the local-account lifecycle through the idiomatic package alone. See
+> CLAUDE.md for the as-built architecture.
 
 Generate idiomatic Go bindings for the entire Win32 API from Microsoft's
 `win32metadata`, mirroring the architecture of the sibling

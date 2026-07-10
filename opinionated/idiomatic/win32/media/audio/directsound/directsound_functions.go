@@ -63,3 +63,6 @@ func DirectSoundFullDuplexCreate(pcGuidCaptureDevice *win32.GUID, pcGuidRenderDe
 func GetDeviceID(pGuidSrc *win32.GUID, pGuidDest *win32.GUID) error {
 	return win32.HRESULTError(int32(mediaaudiodirectsound.GetDeviceID(pGuidSrc, pGuidDest)))
 }
+
+var DirectSoundCaptureEnumerateW = mediaaudiodirectsound.DirectSoundCaptureEnumerateW
+var DirectSoundEnumerateW = mediaaudiodirectsound.DirectSoundEnumerateW

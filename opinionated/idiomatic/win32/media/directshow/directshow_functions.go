@@ -14,3 +14,6 @@ import (
 func AMGetErrorText(hr foundation.HRESULT, pbuffer foundation.PWSTR, MaxLen uint32) uint32 {
 	return mediadirectshow.AMGetErrorTextW(hr, pbuffer, MaxLen)
 }
+
+var AMGetErrorTextA = mediadirectshow.AMGetErrorTextA
+var AMGetErrorTextW = mediadirectshow.AMGetErrorTextW

@@ -72,3 +72,6 @@ func CryptUIWizImport(dwFlags securitycryptographyui.CRYPTUI_WIZ_FLAGS, hwndPare
 	_pwszWizardTitle := win32.UTF16Ptr(pwszWizardTitle)
 	return securitycryptographyui.CryptUIWizImport(dwFlags, hwndParent, foundation.PWSTR(_pwszWizardTitle), pImportSrc, hDestCertStore)
 }
+
+var CryptUIDlgViewCertificateA = securitycryptographyui.CryptUIDlgViewCertificateA
+var CryptUIDlgViewCertificateW = securitycryptographyui.CryptUIDlgViewCertificateW

@@ -34,3 +34,11 @@ func SetGestureConfig(hwnd foundation.HWND, dwReserved uint32, pGestureConfig []
 	}
 	return uiinputtouch.SetGestureConfig(hwnd, dwReserved, uint32(len(pGestureConfig)), _pGestureConfig, cbSize)
 }
+
+var CloseGestureInfoHandle = uiinputtouch.CloseGestureInfoHandle
+var CloseTouchInputHandle = uiinputtouch.CloseTouchInputHandle
+var GetGestureConfig = uiinputtouch.GetGestureConfig
+var GetGestureExtraArgs = uiinputtouch.GetGestureExtraArgs
+var GetGestureInfo = uiinputtouch.GetGestureInfo
+var RegisterTouchWindow = uiinputtouch.RegisterTouchWindow
+var UnregisterTouchWindow = uiinputtouch.UnregisterTouchWindow

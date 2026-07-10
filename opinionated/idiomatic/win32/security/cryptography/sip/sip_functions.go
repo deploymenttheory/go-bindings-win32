@@ -38,3 +38,12 @@ func CryptSIPRetrieveSubjectGuidForCatalogFile(FileName string, hFileIn foundati
 	_FileName := win32.UTF16Ptr(FileName)
 	return securitycryptographysip.CryptSIPRetrieveSubjectGuidForCatalogFile(foundation.PWSTR(_FileName), hFileIn, pgSubject)
 }
+
+var CryptSIPAddProvider = securitycryptographysip.CryptSIPAddProvider
+var CryptSIPCreateIndirectData = securitycryptographysip.CryptSIPCreateIndirectData
+var CryptSIPGetSignedDataMsg = securitycryptographysip.CryptSIPGetSignedDataMsg
+var CryptSIPLoad = securitycryptographysip.CryptSIPLoad
+var CryptSIPPutSignedDataMsg = securitycryptographysip.CryptSIPPutSignedDataMsg
+var CryptSIPRemoveProvider = securitycryptographysip.CryptSIPRemoveProvider
+var CryptSIPRemoveSignedDataMsg = securitycryptographysip.CryptSIPRemoveSignedDataMsg
+var CryptSIPVerifyIndirectData = securitycryptographysip.CryptSIPVerifyIndirectData

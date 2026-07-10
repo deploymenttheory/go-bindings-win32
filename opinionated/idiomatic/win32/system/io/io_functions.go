@@ -34,3 +34,12 @@ func GetQueuedCompletionStatusEx(CompletionPort foundation.HANDLE, lpCompletionP
 	_fAlertable := foundation.BOOL(win32.Bool32(fAlertable))
 	return systemio.GetQueuedCompletionStatusEx(CompletionPort, _lpCompletionPortEntries, uint32(len(lpCompletionPortEntries)), ulNumEntriesRemoved, dwMilliseconds, _fAlertable)
 }
+
+var BindIoCompletionCallback = systemio.BindIoCompletionCallback
+var CancelIo = systemio.CancelIo
+var CancelIoEx = systemio.CancelIoEx
+var CancelSynchronousIo = systemio.CancelSynchronousIo
+var CreateIoCompletionPort = systemio.CreateIoCompletionPort
+var DeviceIoControl = systemio.DeviceIoControl
+var GetQueuedCompletionStatus = systemio.GetQueuedCompletionStatus
+var PostQueuedCompletionStatus = systemio.PostQueuedCompletionStatus

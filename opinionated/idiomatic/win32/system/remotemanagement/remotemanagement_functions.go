@@ -122,3 +122,22 @@ func WSManSignalShell(shell systemremotemanagement.WSMAN_SHELL_HANDLE, command s
 	_code := win32.UTF16Ptr(code)
 	systemremotemanagement.WSManSignalShell(shell, command, flags, foundation.PWSTR(_code), async, signalOperation)
 }
+
+var WSManCloseCommand = systemremotemanagement.WSManCloseCommand
+var WSManCloseOperation = systemremotemanagement.WSManCloseOperation
+var WSManCloseSession = systemremotemanagement.WSManCloseSession
+var WSManCloseShell = systemremotemanagement.WSManCloseShell
+var WSManDeinitialize = systemremotemanagement.WSManDeinitialize
+var WSManDisconnectShell = systemremotemanagement.WSManDisconnectShell
+var WSManGetSessionOptionAsDword = systemremotemanagement.WSManGetSessionOptionAsDword
+var WSManGetSessionOptionAsString = systemremotemanagement.WSManGetSessionOptionAsString
+var WSManInitialize = systemremotemanagement.WSManInitialize
+var WSManPluginFreeRequestDetails = systemremotemanagement.WSManPluginFreeRequestDetails
+var WSManPluginGetConfiguration = systemremotemanagement.WSManPluginGetConfiguration
+var WSManPluginGetOperationParameters = systemremotemanagement.WSManPluginGetOperationParameters
+var WSManPluginReportCompletion = systemremotemanagement.WSManPluginReportCompletion
+var WSManPluginReportContext = systemremotemanagement.WSManPluginReportContext
+var WSManReceiveShellOutput = systemremotemanagement.WSManReceiveShellOutput
+var WSManReconnectShell = systemremotemanagement.WSManReconnectShell
+var WSManReconnectShellCommand = systemremotemanagement.WSManReconnectShellCommand
+var WSManSetSessionOption = systemremotemanagement.WSManSetSessionOption

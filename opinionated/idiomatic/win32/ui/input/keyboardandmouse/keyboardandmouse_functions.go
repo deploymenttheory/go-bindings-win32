@@ -115,3 +115,46 @@ func VkKeyScan(ch uint16) int16 {
 func VkKeyScanEx(ch uint16, dwhkl uiinputkeyboardandmouse.HKL) int16 {
 	return uiinputkeyboardandmouse.VkKeyScanExW(ch, dwhkl)
 }
+
+var ActivateKeyboardLayout = uiinputkeyboardandmouse.ActivateKeyboardLayout
+var GetActiveWindow = uiinputkeyboardandmouse.GetActiveWindow
+var GetAsyncKeyState = uiinputkeyboardandmouse.GetAsyncKeyState
+var GetCapture = uiinputkeyboardandmouse.GetCapture
+var GetDoubleClickTime = uiinputkeyboardandmouse.GetDoubleClickTime
+var GetFocus = uiinputkeyboardandmouse.GetFocus
+var GetKBCodePage = uiinputkeyboardandmouse.GetKBCodePage
+var GetKeyNameTextA = uiinputkeyboardandmouse.GetKeyNameTextA
+var GetKeyNameTextW = uiinputkeyboardandmouse.GetKeyNameTextW
+var GetKeyState = uiinputkeyboardandmouse.GetKeyState
+var GetKeyboardLayout = uiinputkeyboardandmouse.GetKeyboardLayout
+var GetKeyboardLayoutNameA = uiinputkeyboardandmouse.GetKeyboardLayoutNameA
+var GetKeyboardLayoutNameW = uiinputkeyboardandmouse.GetKeyboardLayoutNameW
+var GetKeyboardState = uiinputkeyboardandmouse.GetKeyboardState
+var GetKeyboardType = uiinputkeyboardandmouse.GetKeyboardType
+var Keybd_event = uiinputkeyboardandmouse.Keybd_event
+var LoadKeyboardLayoutA = uiinputkeyboardandmouse.LoadKeyboardLayoutA
+var LoadKeyboardLayoutW = uiinputkeyboardandmouse.LoadKeyboardLayoutW
+var MapVirtualKeyA = uiinputkeyboardandmouse.MapVirtualKeyA
+var MapVirtualKeyExA = uiinputkeyboardandmouse.MapVirtualKeyExA
+var MapVirtualKeyExW = uiinputkeyboardandmouse.MapVirtualKeyExW
+var MapVirtualKeyW = uiinputkeyboardandmouse.MapVirtualKeyW
+var Mouse_event = uiinputkeyboardandmouse.Mouse_event
+var OemKeyScan = uiinputkeyboardandmouse.OemKeyScan
+var RegisterHotKey = uiinputkeyboardandmouse.RegisterHotKey
+var ReleaseCapture = uiinputkeyboardandmouse.ReleaseCapture
+var SetActiveWindow = uiinputkeyboardandmouse.SetActiveWindow
+var SetCapture = uiinputkeyboardandmouse.SetCapture
+var SetDoubleClickTime = uiinputkeyboardandmouse.SetDoubleClickTime
+var SetFocus = uiinputkeyboardandmouse.SetFocus
+var SetKeyboardState = uiinputkeyboardandmouse.SetKeyboardState
+var ToAscii = uiinputkeyboardandmouse.ToAscii
+var ToAsciiEx = uiinputkeyboardandmouse.ToAsciiEx
+var ToUnicode = uiinputkeyboardandmouse.ToUnicode
+var ToUnicodeEx = uiinputkeyboardandmouse.ToUnicodeEx
+var TrackMouseEvent = uiinputkeyboardandmouse.TrackMouseEvent
+var UnloadKeyboardLayout = uiinputkeyboardandmouse.UnloadKeyboardLayout
+var UnregisterHotKey = uiinputkeyboardandmouse.UnregisterHotKey
+var VkKeyScanA = uiinputkeyboardandmouse.VkKeyScanA
+var VkKeyScanExA = uiinputkeyboardandmouse.VkKeyScanExA
+var VkKeyScanExW = uiinputkeyboardandmouse.VkKeyScanExW
+var VkKeyScanW = uiinputkeyboardandmouse.VkKeyScanW

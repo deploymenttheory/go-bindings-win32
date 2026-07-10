@@ -24,3 +24,16 @@ func GetDeviceIDString(pszWindowsAIK foundation.PWSTR, cchWindowsAIK uint32, pcc
 func Tbsi_Is_Tpm_Present() bool {
 	return systemtpmbaseservices.Tbsi_Is_Tpm_Present() != 0
 }
+
+var Tbsi_Context_Create = systemtpmbaseservices.Tbsi_Context_Create
+var Tbsi_Create_Windows_Key = systemtpmbaseservices.Tbsi_Create_Windows_Key
+var Tbsi_GetDeviceInfo = systemtpmbaseservices.Tbsi_GetDeviceInfo
+var Tbsi_Get_OwnerAuth = systemtpmbaseservices.Tbsi_Get_OwnerAuth
+var Tbsi_Get_TCG_Log = systemtpmbaseservices.Tbsi_Get_TCG_Log
+var Tbsi_Get_TCG_Log_Ex = systemtpmbaseservices.Tbsi_Get_TCG_Log_Ex
+var Tbsi_Physical_Presence_Command = systemtpmbaseservices.Tbsi_Physical_Presence_Command
+var Tbsi_Revoke_Attestation = systemtpmbaseservices.Tbsi_Revoke_Attestation
+var Tbsi_Tpm_Vendor_Maintenance_Mode = systemtpmbaseservices.Tbsi_Tpm_Vendor_Maintenance_Mode
+var Tbsip_Cancel_Commands = systemtpmbaseservices.Tbsip_Cancel_Commands
+var Tbsip_Context_Close = systemtpmbaseservices.Tbsip_Context_Close
+var Tbsip_Submit_Command = systemtpmbaseservices.Tbsip_Submit_Command

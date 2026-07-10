@@ -54,3 +54,9 @@ func DavInvalidateCache(URLName string) uint32 {
 	_URLName := win32.UTF16Ptr(URLName)
 	return networkmanagementwebdav.DavInvalidateCache(foundation.PWSTR(_URLName))
 }
+
+var DavDeleteConnection = networkmanagementwebdav.DavDeleteConnection
+var DavFlushFile = networkmanagementwebdav.DavFlushFile
+var DavGetExtendedError = networkmanagementwebdav.DavGetExtendedError
+var DavRegisterAuthCallback = networkmanagementwebdav.DavRegisterAuthCallback
+var DavUnregisterAuthCallback = networkmanagementwebdav.DavUnregisterAuthCallback

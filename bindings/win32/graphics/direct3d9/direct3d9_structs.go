@@ -87,12 +87,12 @@ type D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT struct {
 // D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS: https://learn.microsoft.com/windows/win32/medfound/d3dauthenticatedchannel-protection-flags
 type D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS struct {
-	Anonymous uintptr
+	Anonymous D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union
 }
 
 // D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT: https://learn.microsoft.com/windows/win32/medfound/d3dauthenticatedchannel-querychanneltype-output
@@ -608,9 +608,9 @@ type D3DHVERTEX_Anonymous3_e__Union struct {
 
 type D3DHVERTEX struct {
 	DwFlags    uint32
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
+	Anonymous1 D3DHVERTEX_Anonymous1_e__Union
+	Anonymous2 D3DHVERTEX_Anonymous2_e__Union
+	Anonymous3 D3DHVERTEX_Anonymous3_e__Union
 }
 
 // D3DINDEXBUFFER_DESC: https://learn.microsoft.com/windows/win32/direct3d9/d3dindexbuffer-desc
@@ -725,8 +725,8 @@ type D3DLINE_Anonymous2_e__Union struct {
 }
 
 type D3DLINE struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 D3DLINE_Anonymous1_e__Union
+	Anonymous2 D3DLINE_Anonymous2_e__Union
 }
 
 // D3DLOCKED_BOX: https://learn.microsoft.com/windows/win32/direct3d9/d3dlocked-box
@@ -785,14 +785,14 @@ type D3DLVERTEX_Anonymous7_e__Union struct {
 }
 
 type D3DLVERTEX struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
+	Anonymous1 D3DLVERTEX_Anonymous1_e__Union
+	Anonymous2 D3DLVERTEX_Anonymous2_e__Union
+	Anonymous3 D3DLVERTEX_Anonymous3_e__Union
 	DwReserved uint32
-	Anonymous4 uintptr
-	Anonymous5 uintptr
-	Anonymous6 uintptr
-	Anonymous7 uintptr
+	Anonymous4 D3DLVERTEX_Anonymous4_e__Union
+	Anonymous5 D3DLVERTEX_Anonymous5_e__Union
+	Anonymous6 D3DLVERTEX_Anonymous6_e__Union
+	Anonymous7 D3DLVERTEX_Anonymous7_e__Union
 }
 
 // D3DMATERIAL_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -827,11 +827,11 @@ type D3DMATERIAL_Anonymous5_e__Union struct {
 
 type D3DMATERIAL struct {
 	DwSize     uint32
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
-	Anonymous4 uintptr
-	Anonymous5 uintptr
+	Anonymous1 D3DMATERIAL_Anonymous1_e__Union
+	Anonymous2 D3DMATERIAL_Anonymous2_e__Union
+	Anonymous3 D3DMATERIAL_Anonymous3_e__Union
+	Anonymous4 D3DMATERIAL_Anonymous4_e__Union
+	Anonymous5 D3DMATERIAL_Anonymous5_e__Union
 	HTexture   uint32
 	DwRampSize uint32
 }
@@ -867,11 +867,11 @@ type D3DMATERIAL7_Anonymous5_e__Union struct {
 }
 
 type D3DMATERIAL7 struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
-	Anonymous4 uintptr
-	Anonymous5 uintptr
+	Anonymous1 D3DMATERIAL7_Anonymous1_e__Union
+	Anonymous2 D3DMATERIAL7_Anonymous2_e__Union
+	Anonymous3 D3DMATERIAL7_Anonymous3_e__Union
+	Anonymous4 D3DMATERIAL7_Anonymous4_e__Union
+	Anonymous5 D3DMATERIAL7_Anonymous5_e__Union
 }
 
 // D3DMATERIAL9: https://learn.microsoft.com/windows/win32/direct3d9/d3dmaterial9
@@ -1038,8 +1038,8 @@ type D3DSTATE_Anonymous2_e__Union struct {
 }
 
 type D3DSTATE struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 D3DSTATE_Anonymous1_e__Union
+	Anonymous2 D3DSTATE_Anonymous2_e__Union
 }
 
 type D3DSTATS struct {
@@ -1123,14 +1123,14 @@ type D3DTLVERTEX_Anonymous8_e__Union struct {
 }
 
 type D3DTLVERTEX struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
-	Anonymous4 uintptr
-	Anonymous5 uintptr
-	Anonymous6 uintptr
-	Anonymous7 uintptr
-	Anonymous8 uintptr
+	Anonymous1 D3DTLVERTEX_Anonymous1_e__Union
+	Anonymous2 D3DTLVERTEX_Anonymous2_e__Union
+	Anonymous3 D3DTLVERTEX_Anonymous3_e__Union
+	Anonymous4 D3DTLVERTEX_Anonymous4_e__Union
+	Anonymous5 D3DTLVERTEX_Anonymous5_e__Union
+	Anonymous6 D3DTLVERTEX_Anonymous6_e__Union
+	Anonymous7 D3DTLVERTEX_Anonymous7_e__Union
+	Anonymous8 D3DTLVERTEX_Anonymous8_e__Union
 }
 
 type D3DTRANSFORMCAPS struct {
@@ -1170,9 +1170,9 @@ type D3DTRIANGLE_Anonymous3_e__Union struct {
 }
 
 type D3DTRIANGLE struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
+	Anonymous1 D3DTRIANGLE_Anonymous1_e__Union
+	Anonymous2 D3DTRIANGLE_Anonymous2_e__Union
+	Anonymous3 D3DTRIANGLE_Anonymous3_e__Union
 	WFlags     uint16
 }
 
@@ -1233,14 +1233,14 @@ type D3DVERTEX_Anonymous8_e__Union struct {
 }
 
 type D3DVERTEX struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
-	Anonymous4 uintptr
-	Anonymous5 uintptr
-	Anonymous6 uintptr
-	Anonymous7 uintptr
-	Anonymous8 uintptr
+	Anonymous1 D3DVERTEX_Anonymous1_e__Union
+	Anonymous2 D3DVERTEX_Anonymous2_e__Union
+	Anonymous3 D3DVERTEX_Anonymous3_e__Union
+	Anonymous4 D3DVERTEX_Anonymous4_e__Union
+	Anonymous5 D3DVERTEX_Anonymous5_e__Union
+	Anonymous6 D3DVERTEX_Anonymous6_e__Union
+	Anonymous7 D3DVERTEX_Anonymous7_e__Union
+	Anonymous8 D3DVERTEX_Anonymous8_e__Union
 }
 
 type D3DVERTEXBUFFERDESC struct {

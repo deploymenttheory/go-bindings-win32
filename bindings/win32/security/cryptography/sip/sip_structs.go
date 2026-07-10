@@ -69,7 +69,7 @@ type SIP_CAP_SET_V3 struct {
 	CbSize      uint32
 	DwVersion   uint32
 	IsMultiSign foundation.BOOL
-	Anonymous   uintptr
+	Anonymous   SIP_CAP_SET_V3_Anonymous_e__Union
 }
 
 // SIP_DISPATCH_INFO: https://learn.microsoft.com/windows/win32/api/mssip/ns-mssip-sip_dispatch_info
@@ -114,6 +114,6 @@ type SIP_SUBJECTINFO struct {
 	FdwSecuritySettings uint32
 	DwIndex             uint32
 	DwUnionChoice       uint32
-	Anonymous           uintptr
+	Anonymous           SIP_SUBJECTINFO_Anonymous_e__Union
 	PClientData         unsafe.Pointer
 }

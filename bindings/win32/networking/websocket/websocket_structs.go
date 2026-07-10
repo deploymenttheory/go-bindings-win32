@@ -14,7 +14,7 @@ import (
 // WEB_SOCKET_BUFFER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WEB_SOCKET_BUFFER struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // WEB_SOCKET_HTTP_HEADER: https://learn.microsoft.com/windows/win32/api/websocket/ns-websocket-web_socket_http_header

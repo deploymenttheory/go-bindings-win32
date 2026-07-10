@@ -134,12 +134,12 @@ type SPPHRASEELEMENT struct {
 // SPPHRASEPROPERTY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SPPHRASEPROPERTY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type SPPHRASEPROPERTY struct {
 	PszName            foundation.PWSTR
-	Anonymous          uintptr
+	Anonymous          SPPHRASEPROPERTY_Anonymous_e__Union
 	PszValue           foundation.PWSTR
 	VValue             systemvariant.VARIANT
 	UlFirstElement     uint32
@@ -331,7 +331,7 @@ type SPTRANSITIONENTRY_Anonymous1_e__Struct struct {
 // SPTRANSITIONENTRY_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SPTRANSITIONENTRY_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 type SPTRANSITIONENTRY struct {
@@ -339,9 +339,9 @@ type SPTRANSITIONENTRY struct {
 	HNextState         SPSTATEHANDLE
 	Type               byte
 	RequiredConfidence byte
-	Anonymous1         uintptr
+	Anonymous1         SPTRANSITIONENTRY_Anonymous1_e__Struct
 	Weight             float32
-	Anonymous2         uintptr
+	Anonymous2         SPTRANSITIONENTRY_Anonymous2_e__Union
 }
 
 type SPTRANSITIONPROPERTY struct {

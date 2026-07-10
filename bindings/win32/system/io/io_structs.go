@@ -15,7 +15,7 @@ type IO_STATUS_BLOCK_Anonymous_e__Union struct {
 }
 
 type IO_STATUS_BLOCK struct {
-	Anonymous   uintptr
+	Anonymous   IO_STATUS_BLOCK_Anonymous_e__Union
 	Information uintptr
 }
 
@@ -29,7 +29,7 @@ type OVERLAPPED_Anonymous_e__Union struct {
 type OVERLAPPED struct {
 	Internal     uintptr
 	InternalHigh uintptr
-	Anonymous    uintptr
+	Anonymous    OVERLAPPED_Anonymous_e__Union
 	HEvent       foundation.HANDLE
 }
 

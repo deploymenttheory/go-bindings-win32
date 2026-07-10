@@ -146,7 +146,7 @@ type DTCTL struct {
 	CbNotif    uint32
 	LpszFilter *int8
 	UlItemID   uint32
-	Ctl        uintptr
+	Ctl        DTCTL_ctl_e__Union
 }
 
 // DTPAGE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -159,7 +159,7 @@ type DTPAGE_Anonymous_e__Union struct {
 type DTPAGE struct {
 	Cctl             uint32
 	LpszResourceName *int8
-	Anonymous        uintptr
+	Anonymous        DTPAGE_Anonymous_e__Union
 	Lpctl            *DTCTL
 }
 
@@ -229,7 +229,7 @@ type MAPINAMEID_Kind_e__Union struct {
 type MAPINAMEID struct {
 	Lpguid *win32.GUID
 	UlKind uint32
-	Kind   uintptr
+	Kind   MAPINAMEID_Kind_e__Union
 }
 
 // MAPIUID: https://learn.microsoft.com/office/client-developer/outlook/mapi/mapiuid
@@ -264,7 +264,7 @@ type NOTIFICATION_info_e__Union struct {
 type NOTIFICATION struct {
 	UlEventType uint32
 	UlAlignPad  uint32
-	Info        uintptr
+	Info        NOTIFICATION_info_e__Union
 }
 
 // NOTIFKEY: https://learn.microsoft.com/office/client-developer/outlook/mapi/notifkey
@@ -448,7 +448,7 @@ type SRestriction_res_e__Union struct {
 // SRestriction: https://learn.microsoft.com/office/client-developer/outlook/mapi/srestriction
 type SRestriction struct {
 	Rt  uint32
-	Res uintptr
+	Res SRestriction_res_e__Union
 }
 
 // SRow: https://learn.microsoft.com/office/client-developer/outlook/mapi/srow

@@ -197,9 +197,9 @@ type DS3DVECTOR_Anonymous3_e__Union struct {
 }
 
 type DS3DVECTOR struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
+	Anonymous1 DS3DVECTOR_Anonymous1_e__Union
+	Anonymous2 DS3DVECTOR_Anonymous2_e__Union
+	Anonymous3 DS3DVECTOR_Anonymous3_e__Union
 }
 
 type EVENTSETID_CROSSBAR struct {
@@ -279,11 +279,11 @@ type KSALLOCATOR_FRAMING_Anonymous2_e__Union struct {
 }
 
 type KSALLOCATOR_FRAMING struct {
-	Anonymous1 uintptr
+	Anonymous1 KSALLOCATOR_FRAMING_Anonymous1_e__Union
 	PoolType   uint32
 	Frames     uint32
 	FrameSize  uint32
-	Anonymous2 uintptr
+	Anonymous2 KSALLOCATOR_FRAMING_Anonymous2_e__Union
 	Reserved   uint32
 }
 
@@ -507,11 +507,11 @@ type KSAUDIOMODULE_DESCRIPTOR struct {
 // KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [5]uint64
 }
 
 type KSAUDIOMODULE_NOTIFICATION struct {
-	Anonymous uintptr
+	Anonymous KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union
 }
 
 type KSAUDIOMODULE_PROPERTY struct {
@@ -577,7 +577,7 @@ type KSAUDIO_MIX_CAPS struct {
 	Mute      foundation.BOOL
 	Minimum   int32
 	Maximum   int32
-	Anonymous uintptr
+	Anonymous KSAUDIO_MIX_CAPS_Anonymous_e__Union
 }
 
 type KSAUDIO_PACKETSIZE_CONSTRAINTS struct {
@@ -665,7 +665,7 @@ type KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS_MaxFrameRate_e__Str
 
 type KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS struct {
 	Resolution     foundation.SIZE
-	MaxFrameRate   uintptr
+	MaxFrameRate   KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS_MaxFrameRate_e__Struct
 	MaskResolution foundation.SIZE
 	SubType        win32.GUID
 }
@@ -805,7 +805,7 @@ type KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union struct {
 }
 
 type KSCAMERA_EXTENDEDPROP_VALUE struct {
-	Value uintptr
+	Value KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union
 }
 
 type KSCAMERA_EXTENDEDPROP_VIDEOPROCSETTING struct {
@@ -939,8 +939,8 @@ type KSCAMERA_PROFILE_MEDIAINFO_Resolution_e__Struct struct {
 }
 
 type KSCAMERA_PROFILE_MEDIAINFO struct {
-	Resolution   uintptr
-	MaxFrameRate uintptr
+	Resolution   KSCAMERA_PROFILE_MEDIAINFO_Resolution_e__Struct
+	MaxFrameRate KSCAMERA_PROFILE_MEDIAINFO_MaxFrameRate_e__Struct
 	Flags        uint64
 	Data0        uint32
 	Data1        uint32
@@ -951,12 +951,12 @@ type KSCAMERA_PROFILE_MEDIAINFO struct {
 // KSCAMERA_PROFILE_PININFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSCAMERA_PROFILE_PININFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type KSCAMERA_PROFILE_PININFO struct {
 	PinCategory    win32.GUID
-	Anonymous      uintptr
+	Anonymous      KSCAMERA_PROFILE_PININFO_Anonymous_e__Union
 	MediaInfoCount uint32
 	MediaInfos     *KSCAMERA_PROFILE_MEDIAINFO
 }
@@ -1096,7 +1096,7 @@ type KSCORRELATED_TIME struct {
 // KSDATAFORMAT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSDATAFORMAT struct {
-	Data [1]uint64
+	Data [8]uint64
 }
 
 type KSDATAFORMAT_SPECIFIER_AC3_AUDIO struct {
@@ -1497,13 +1497,13 @@ type KSDEGRADESETID_Standard struct {
 // KSDEVICE_PROFILE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSDEVICE_PROFILE_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [6]uint64
 }
 
 type KSDEVICE_PROFILE_INFO struct {
 	Type      uint32
 	Size      uint32
-	Anonymous uintptr
+	Anonymous KSDEVICE_PROFILE_INFO_Anonymous_e__Union
 }
 
 type KSDISPLAYCHANGE struct {
@@ -1596,12 +1596,12 @@ type KSERROR struct {
 // KSEVENTDATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSEVENTDATA_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 type KSEVENTDATA struct {
 	NotificationType uint32
-	Anonymous        uintptr
+	Anonymous        KSEVENTDATA_Anonymous_e__Union
 }
 
 type KSEVENTSETID_AudioControlChange struct {
@@ -1706,11 +1706,11 @@ type KSGOP_USERDATA struct {
 // KSIDENTIFIER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSIDENTIFIER_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 type KSIDENTIFIER struct {
-	Anonymous uintptr
+	Anonymous KSIDENTIFIER_Anonymous_e__Union
 }
 
 type KSINTERFACESETID_FileIo struct {
@@ -2307,13 +2307,13 @@ type KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S struct {
 // KSPROPERTY_BOUNDS_LONG is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSPROPERTY_BOUNDS_LONG struct {
-	Data [1]uint64
+	Data [2]uint32
 }
 
 // KSPROPERTY_BOUNDS_LONGLONG is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSPROPERTY_BOUNDS_LONGLONG struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 type KSPROPERTY_CAMERACONTROL_FLASH_S struct {
@@ -2366,7 +2366,7 @@ type KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S struct {
 	AutoFocusLock        foundation.BOOL
 	AutoExposureLock     foundation.BOOL
 	AutoWhitebalanceLock foundation.BOOL
-	Anonymous            uintptr
+	Anonymous            KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union
 }
 
 type KSPROPERTY_CAMERACONTROL_S struct {
@@ -2448,29 +2448,29 @@ type KSPROPERTY_EXTDEVICE_S_u_e__Union struct {
 
 type KSPROPERTY_EXTDEVICE_S struct {
 	Property KSIDENTIFIER
-	U        uintptr
+	U        KSPROPERTY_EXTDEVICE_S_u_e__Union
 }
 
 // KSPROPERTY_EXTXPORT_NODE_S_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSPROPERTY_EXTXPORT_NODE_S_u_e__Union struct {
-	Data [2]uint64
+	Data [129]uint32
 }
 
 type KSPROPERTY_EXTXPORT_NODE_S struct {
 	NodeProperty KSP_NODE
-	U            uintptr
+	U            KSPROPERTY_EXTXPORT_NODE_S_u_e__Union
 }
 
 // KSPROPERTY_EXTXPORT_S_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSPROPERTY_EXTXPORT_S_u_e__Union struct {
-	Data [2]uint64
+	Data [129]uint32
 }
 
 type KSPROPERTY_EXTXPORT_S struct {
 	Property KSIDENTIFIER
-	U        uintptr
+	U        KSPROPERTY_EXTXPORT_S_u_e__Union
 }
 
 type KSPROPERTY_MEDIAAVAILABLE struct {
@@ -3001,7 +3001,7 @@ type KSP_PIN_Anonymous_e__Union struct {
 type KSP_PIN struct {
 	Property  KSIDENTIFIER
 	PinId     uint32
-	Anonymous uintptr
+	Anonymous KSP_PIN_Anonymous_e__Union
 }
 
 type KSP_TIMEFORMAT struct {
@@ -3050,7 +3050,7 @@ type KSRELATIVEEVENT_Anonymous_e__Union struct {
 type KSRELATIVEEVENT struct {
 	Size      uint32
 	Flags     uint32
-	Anonymous uintptr
+	Anonymous KSRELATIVEEVENT_Anonymous_e__Union
 	Reserved  unsafe.Pointer
 	Event     KSIDENTIFIER
 	EventData KSEVENTDATA
@@ -3218,13 +3218,13 @@ type KSSTREAM_UVC_METADATA struct {
 // KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type KSSTREAM_UVC_METADATATYPE_TIMESTAMP struct {
 	PresentationTimeStamp uint32
 	SourceClockReference  uint32
-	Anonymous             uintptr
+	Anonymous             KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union
 	Reserved0             uint16
 	Reserved1             uint32
 }
@@ -3627,9 +3627,9 @@ type KS_FRAME_INFO struct {
 	HDirectDraw        foundation.HANDLE
 	HSurfaceHandle     foundation.HANDLE
 	DirectDrawRect     foundation.RECT
-	Anonymous1         uintptr
+	Anonymous1         KS_FRAME_INFO_Anonymous1_e__Union
 	Reserved2          uint32
-	Anonymous2         uintptr
+	Anonymous2         KS_FRAME_INFO_Anonymous2_e__Union
 }
 
 // KS_FRAMING_ITEM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -3645,7 +3645,7 @@ type KS_FRAMING_ITEM struct {
 	BusFlags         uint32
 	Flags            uint32
 	Frames           uint32
-	Anonymous        uintptr
+	Anonymous        KS_FRAMING_ITEM_Anonymous_e__Union
 	MemoryTypeWeight uint32
 	PhysicalRange    KS_FRAMING_RANGE
 	FramingRange     KS_FRAMING_RANGE_WEIGHTED
@@ -3787,7 +3787,7 @@ type KS_VIDEOINFO struct {
 	DwBitErrorRate  uint32
 	AvgTimePerFrame int64
 	BmiHeader       KS_BITMAPINFOHEADER
-	Anonymous       uintptr
+	Anonymous       KS_VIDEOINFO_Anonymous_e__Union
 }
 
 type KS_VIDEOINFOHEADER struct {
@@ -3815,7 +3815,7 @@ type KS_VIDEOINFOHEADER2 struct {
 	DwCopyProtectFlags uint32
 	DwPictAspectRatioX uint32
 	DwPictAspectRatioY uint32
-	Anonymous          uintptr
+	Anonymous          KS_VIDEOINFOHEADER2_Anonymous_e__Union
 	DwReserved2        uint32
 	BmiHeader          KS_BITMAPINFOHEADER
 }

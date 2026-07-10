@@ -30,7 +30,7 @@ type CMYKCOLOR struct {
 // COLOR is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type COLOR struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // COLORMATCHSETUPA: https://learn.microsoft.com/windows/win32/api/icm/ns-icm-colormatchsetupa

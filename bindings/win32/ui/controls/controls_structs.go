@@ -1414,11 +1414,11 @@ type PROPSHEETHEADERA_V1 struct {
 	DwFlags     uint32
 	HwndParent  foundation.HWND
 	HInstance   foundation.HINSTANCE
-	Anonymous1  uintptr
+	Anonymous1  PROPSHEETHEADERA_V1_Anonymous1_e__Union
 	PszCaption  foundation.PSTR
 	NPages      uint32
-	Anonymous2  uintptr
-	Anonymous3  uintptr
+	Anonymous2  PROPSHEETHEADERA_V1_Anonymous2_e__Union
+	Anonymous3  PROPSHEETHEADERA_V1_Anonymous3_e__Union
 	PfnCallback PFNPROPSHEETCALLBACK
 }
 
@@ -1458,15 +1458,15 @@ type PROPSHEETHEADERA_V2 struct {
 	DwFlags      uint32
 	HwndParent   foundation.HWND
 	HInstance    foundation.HINSTANCE
-	Anonymous1   uintptr
+	Anonymous1   PROPSHEETHEADERA_V2_Anonymous1_e__Union
 	PszCaption   foundation.PSTR
 	NPages       uint32
-	Anonymous2   uintptr
-	Anonymous3   uintptr
+	Anonymous2   PROPSHEETHEADERA_V2_Anonymous2_e__Union
+	Anonymous3   PROPSHEETHEADERA_V2_Anonymous3_e__Union
 	PfnCallback  PFNPROPSHEETCALLBACK
-	Anonymous4   uintptr
+	Anonymous4   PROPSHEETHEADERA_V2_Anonymous4_e__Union
 	HplWatermark graphicsgdi.HPALETTE
-	Anonymous5   uintptr
+	Anonymous5   PROPSHEETHEADERA_V2_Anonymous5_e__Union
 }
 
 // PROPSHEETHEADERW_V1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1492,11 +1492,11 @@ type PROPSHEETHEADERW_V1 struct {
 	DwFlags     uint32
 	HwndParent  foundation.HWND
 	HInstance   foundation.HINSTANCE
-	Anonymous1  uintptr
+	Anonymous1  PROPSHEETHEADERW_V1_Anonymous1_e__Union
 	PszCaption  foundation.PWSTR
 	NPages      uint32
-	Anonymous2  uintptr
-	Anonymous3  uintptr
+	Anonymous2  PROPSHEETHEADERW_V1_Anonymous2_e__Union
+	Anonymous3  PROPSHEETHEADERW_V1_Anonymous3_e__Union
 	PfnCallback PFNPROPSHEETCALLBACK
 }
 
@@ -1536,15 +1536,15 @@ type PROPSHEETHEADERW_V2 struct {
 	DwFlags      uint32
 	HwndParent   foundation.HWND
 	HInstance    foundation.HINSTANCE
-	Anonymous1   uintptr
+	Anonymous1   PROPSHEETHEADERW_V2_Anonymous1_e__Union
 	PszCaption   foundation.PWSTR
 	NPages       uint32
-	Anonymous2   uintptr
-	Anonymous3   uintptr
+	Anonymous2   PROPSHEETHEADERW_V2_Anonymous2_e__Union
+	Anonymous3   PROPSHEETHEADERW_V2_Anonymous3_e__Union
 	PfnCallback  PFNPROPSHEETCALLBACK
-	Anonymous4   uintptr
+	Anonymous4   PROPSHEETHEADERW_V2_Anonymous4_e__Union
 	HplWatermark graphicsgdi.HPALETTE
-	Anonymous5   uintptr
+	Anonymous5   PROPSHEETHEADERW_V2_Anonymous5_e__Union
 }
 
 // PROPSHEETPAGEA_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1569,8 +1569,8 @@ type PROPSHEETPAGEA struct {
 	DwSize            uint32
 	DwFlags           uint32
 	HInstance         foundation.HINSTANCE
-	Anonymous1        uintptr
-	Anonymous2        uintptr
+	Anonymous1        PROPSHEETPAGEA_Anonymous1_e__Union
+	Anonymous2        PROPSHEETPAGEA_Anonymous2_e__Union
 	PszTitle          foundation.PSTR
 	PfnDlgProc        uiwindowsandmessaging.DLGPROC
 	LParam            foundation.LPARAM
@@ -1579,7 +1579,7 @@ type PROPSHEETPAGEA struct {
 	PszHeaderTitle    foundation.PSTR
 	PszHeaderSubTitle foundation.PSTR
 	HActCtx           foundation.HANDLE
-	Anonymous3        uintptr
+	Anonymous3        PROPSHEETPAGEA_Anonymous3_e__Union
 }
 
 // PROPSHEETPAGEA_V1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1598,8 +1598,8 @@ type PROPSHEETPAGEA_V1 struct {
 	DwSize      uint32
 	DwFlags     uint32
 	HInstance   foundation.HINSTANCE
-	Anonymous1  uintptr
-	Anonymous2  uintptr
+	Anonymous1  PROPSHEETPAGEA_V1_Anonymous1_e__Union
+	Anonymous2  PROPSHEETPAGEA_V1_Anonymous2_e__Union
 	PszTitle    foundation.PSTR
 	PfnDlgProc  uiwindowsandmessaging.DLGPROC
 	LParam      foundation.LPARAM
@@ -1624,8 +1624,8 @@ type PROPSHEETPAGEA_V2 struct {
 	DwSize            uint32
 	DwFlags           uint32
 	HInstance         foundation.HINSTANCE
-	Anonymous1        uintptr
-	Anonymous2        uintptr
+	Anonymous1        PROPSHEETPAGEA_V2_Anonymous1_e__Union
+	Anonymous2        PROPSHEETPAGEA_V2_Anonymous2_e__Union
 	PszTitle          foundation.PSTR
 	PfnDlgProc        uiwindowsandmessaging.DLGPROC
 	LParam            foundation.LPARAM
@@ -1652,8 +1652,8 @@ type PROPSHEETPAGEA_V3 struct {
 	DwSize            uint32
 	DwFlags           uint32
 	HInstance         foundation.HINSTANCE
-	Anonymous1        uintptr
-	Anonymous2        uintptr
+	Anonymous1        PROPSHEETPAGEA_V3_Anonymous1_e__Union
+	Anonymous2        PROPSHEETPAGEA_V3_Anonymous2_e__Union
 	PszTitle          foundation.PSTR
 	PfnDlgProc        uiwindowsandmessaging.DLGPROC
 	LParam            foundation.LPARAM
@@ -1686,8 +1686,8 @@ type PROPSHEETPAGEW struct {
 	DwSize            uint32
 	DwFlags           uint32
 	HInstance         foundation.HINSTANCE
-	Anonymous1        uintptr
-	Anonymous2        uintptr
+	Anonymous1        PROPSHEETPAGEW_Anonymous1_e__Union
+	Anonymous2        PROPSHEETPAGEW_Anonymous2_e__Union
 	PszTitle          foundation.PWSTR
 	PfnDlgProc        uiwindowsandmessaging.DLGPROC
 	LParam            foundation.LPARAM
@@ -1696,7 +1696,7 @@ type PROPSHEETPAGEW struct {
 	PszHeaderTitle    foundation.PWSTR
 	PszHeaderSubTitle foundation.PWSTR
 	HActCtx           foundation.HANDLE
-	Anonymous3        uintptr
+	Anonymous3        PROPSHEETPAGEW_Anonymous3_e__Union
 }
 
 // PROPSHEETPAGEW_V1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1715,8 +1715,8 @@ type PROPSHEETPAGEW_V1 struct {
 	DwSize      uint32
 	DwFlags     uint32
 	HInstance   foundation.HINSTANCE
-	Anonymous1  uintptr
-	Anonymous2  uintptr
+	Anonymous1  PROPSHEETPAGEW_V1_Anonymous1_e__Union
+	Anonymous2  PROPSHEETPAGEW_V1_Anonymous2_e__Union
 	PszTitle    foundation.PWSTR
 	PfnDlgProc  uiwindowsandmessaging.DLGPROC
 	LParam      foundation.LPARAM
@@ -1741,8 +1741,8 @@ type PROPSHEETPAGEW_V2 struct {
 	DwSize            uint32
 	DwFlags           uint32
 	HInstance         foundation.HINSTANCE
-	Anonymous1        uintptr
-	Anonymous2        uintptr
+	Anonymous1        PROPSHEETPAGEW_V2_Anonymous1_e__Union
+	Anonymous2        PROPSHEETPAGEW_V2_Anonymous2_e__Union
 	PszTitle          foundation.PWSTR
 	PfnDlgProc        uiwindowsandmessaging.DLGPROC
 	LParam            foundation.LPARAM
@@ -1769,8 +1769,8 @@ type PROPSHEETPAGEW_V3 struct {
 	DwSize            uint32
 	DwFlags           uint32
 	HInstance         foundation.HINSTANCE
-	Anonymous1        uintptr
-	Anonymous2        uintptr
+	Anonymous1        PROPSHEETPAGEW_V3_Anonymous1_e__Union
+	Anonymous2        PROPSHEETPAGEW_V3_Anonymous2_e__Union
 	PszTitle          foundation.PWSTR
 	PfnDlgProc        uiwindowsandmessaging.DLGPROC
 	LParam            foundation.LPARAM
@@ -2122,7 +2122,7 @@ type TVINSERTSTRUCTA_Anonymous_e__Union struct {
 type TVINSERTSTRUCTA struct {
 	HParent      HTREEITEM
 	HInsertAfter HTREEITEM
-	Anonymous    uintptr
+	Anonymous    TVINSERTSTRUCTA_Anonymous_e__Union
 }
 
 // TVINSERTSTRUCTW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2135,7 +2135,7 @@ type TVINSERTSTRUCTW_Anonymous_e__Union struct {
 type TVINSERTSTRUCTW struct {
 	HParent      HTREEITEM
 	HInsertAfter HTREEITEM
-	Anonymous    uintptr
+	Anonymous    TVINSERTSTRUCTW_Anonymous_e__Union
 }
 
 // TVITEMA: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-tvitema

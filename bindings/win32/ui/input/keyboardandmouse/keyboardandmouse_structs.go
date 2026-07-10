@@ -30,7 +30,7 @@ type INPUT_Anonymous_e__Union struct {
 // INPUT: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-input
 type INPUT struct {
 	Type      INPUT_TYPE
-	Anonymous uintptr
+	Anonymous INPUT_Anonymous_e__Union
 }
 
 type KBDNLSTABLES struct {

@@ -45,7 +45,7 @@ type CONTROL_SERVICE struct {
 	Length    uint32
 	Service   uint32
 	Overrides AD_GENERAL_PARAMS
-	Anonymous uintptr
+	Anonymous CONTROL_SERVICE_Anonymous_e__Union
 }
 
 // ENUMERATION_BUFFER: https://learn.microsoft.com/windows/win32/api/traffic/ns-traffic-enumeration_buffer
@@ -94,14 +94,14 @@ type IPX_PATTERN_Src_e__Struct struct {
 
 // IPX_PATTERN: https://learn.microsoft.com/windows/win32/api/traffic/ns-traffic-ipx_pattern
 type IPX_PATTERN struct {
-	Src  uintptr
-	Dest uintptr
+	Src  IPX_PATTERN_Src_e__Struct
+	Dest IPX_PATTERN_Src_e__Struct
 }
 
 // IP_PATTERN_S_un_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IP_PATTERN_S_un_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // IP_PATTERN: https://learn.microsoft.com/windows/win32/api/traffic/ns-traffic-ip_pattern
@@ -110,7 +110,7 @@ type IP_PATTERN struct {
 	Reserved2  uint32
 	SrcAddr    uint32
 	DstAddr    uint32
-	S_un       uintptr
+	S_un       IP_PATTERN_S_un_e__Union
 	ProtocolId byte
 	Reserved3  [3]byte
 }
@@ -234,7 +234,7 @@ type RSVP_FILTERSPEC_Anonymous_e__Union struct {
 // RSVP_FILTERSPEC: https://learn.microsoft.com/windows/win32/api/qossp/ns-qossp-rsvp_filterspec
 type RSVP_FILTERSPEC struct {
 	Type      FilterType
-	Anonymous uintptr
+	Anonymous RSVP_FILTERSPEC_Anonymous_e__Union
 }
 
 // RSVP_FILTERSPEC_V4: https://learn.microsoft.com/windows/win32/api/qossp/ns-qossp-rsvp_filterspec_v4

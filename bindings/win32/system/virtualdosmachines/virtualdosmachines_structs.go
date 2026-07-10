@@ -90,13 +90,13 @@ type VDMCONTEXT_WITHOUT_XSAVE struct {
 // VDMLDT_ENTRY_HighWord_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type VDMLDT_ENTRY_HighWord_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type VDMLDT_ENTRY struct {
 	LimitLow uint16
 	BaseLow  uint16
-	HighWord uintptr
+	HighWord VDMLDT_ENTRY_HighWord_e__Union
 }
 
 type VDM_SEGINFO struct {

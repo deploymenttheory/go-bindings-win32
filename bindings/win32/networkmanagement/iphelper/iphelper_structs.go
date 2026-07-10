@@ -211,12 +211,12 @@ type IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union struct {
 // IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // IP_ADAPTER_ADDRESSES_LH: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_addresses_lh
 type IP_ADAPTER_ADDRESSES_LH struct {
-	Anonymous1             uintptr
+	Anonymous1             IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union
 	Next                   *IP_ADAPTER_ADDRESSES_LH
 	AdapterName            foundation.PSTR
 	FirstUnicastAddress    *IP_ADAPTER_UNICAST_ADDRESS_LH
@@ -228,7 +228,7 @@ type IP_ADAPTER_ADDRESSES_LH struct {
 	FriendlyName           foundation.PWSTR
 	PhysicalAddress        [8]byte
 	PhysicalAddressLength  uint32
-	Anonymous2             uintptr
+	Anonymous2             IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union
 	Mtu                    uint32
 	IfType                 uint32
 	OperStatus             networkmanagementndis.IF_OPER_STATUS
@@ -262,7 +262,7 @@ type IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union struct {
 
 // IP_ADAPTER_ADDRESSES_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_addresses_xp
 type IP_ADAPTER_ADDRESSES_XP struct {
-	Anonymous             uintptr
+	Anonymous             IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union
 	Next                  *IP_ADAPTER_ADDRESSES_XP
 	AdapterName           foundation.PSTR
 	FirstUnicastAddress   *IP_ADAPTER_UNICAST_ADDRESS_XP
@@ -291,7 +291,7 @@ type IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union struct {
 
 // IP_ADAPTER_ANYCAST_ADDRESS_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_anycast_address_xp
 type IP_ADAPTER_ANYCAST_ADDRESS_XP struct {
-	Anonymous uintptr
+	Anonymous IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union
 	Next      *IP_ADAPTER_ANYCAST_ADDRESS_XP
 	Address   networkingwinsock.SOCKET_ADDRESS
 }
@@ -304,7 +304,7 @@ type IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union struct {
 
 // IP_ADAPTER_DNS_SERVER_ADDRESS_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_dns_server_address_xp
 type IP_ADAPTER_DNS_SERVER_ADDRESS_XP struct {
-	Anonymous uintptr
+	Anonymous IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union
 	Next      *IP_ADAPTER_DNS_SERVER_ADDRESS_XP
 	Address   networkingwinsock.SOCKET_ADDRESS
 }
@@ -323,7 +323,7 @@ type IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union struct {
 
 // IP_ADAPTER_GATEWAY_ADDRESS_LH: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_gateway_address_lh
 type IP_ADAPTER_GATEWAY_ADDRESS_LH struct {
-	Anonymous uintptr
+	Anonymous IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union
 	Next      *IP_ADAPTER_GATEWAY_ADDRESS_LH
 	Address   networkingwinsock.SOCKET_ADDRESS
 }
@@ -364,7 +364,7 @@ type IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union struct {
 
 // IP_ADAPTER_MULTICAST_ADDRESS_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_multicast_address_xp
 type IP_ADAPTER_MULTICAST_ADDRESS_XP struct {
-	Anonymous uintptr
+	Anonymous IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union
 	Next      *IP_ADAPTER_MULTICAST_ADDRESS_XP
 	Address   networkingwinsock.SOCKET_ADDRESS
 }
@@ -383,7 +383,7 @@ type IP_ADAPTER_PREFIX_XP_Anonymous_e__Union struct {
 
 // IP_ADAPTER_PREFIX_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_prefix_xp
 type IP_ADAPTER_PREFIX_XP struct {
-	Anonymous    uintptr
+	Anonymous    IP_ADAPTER_PREFIX_XP_Anonymous_e__Union
 	Next         *IP_ADAPTER_PREFIX_XP
 	Address      networkingwinsock.SOCKET_ADDRESS
 	PrefixLength uint32
@@ -397,7 +397,7 @@ type IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union struct {
 
 // IP_ADAPTER_UNICAST_ADDRESS_LH: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_unicast_address_lh
 type IP_ADAPTER_UNICAST_ADDRESS_LH struct {
-	Anonymous          uintptr
+	Anonymous          IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union
 	Next               *IP_ADAPTER_UNICAST_ADDRESS_LH
 	Address            networkingwinsock.SOCKET_ADDRESS
 	PrefixOrigin       networkingwinsock.NL_PREFIX_ORIGIN
@@ -417,7 +417,7 @@ type IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union struct {
 
 // IP_ADAPTER_UNICAST_ADDRESS_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_unicast_address_xp
 type IP_ADAPTER_UNICAST_ADDRESS_XP struct {
-	Anonymous         uintptr
+	Anonymous         IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union
 	Next              *IP_ADAPTER_UNICAST_ADDRESS_XP
 	Address           networkingwinsock.SOCKET_ADDRESS
 	PrefixOrigin      networkingwinsock.NL_PREFIX_ORIGIN
@@ -436,7 +436,7 @@ type IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union struct {
 
 // IP_ADAPTER_WINS_SERVER_ADDRESS_LH: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_wins_server_address_lh
 type IP_ADAPTER_WINS_SERVER_ADDRESS_LH struct {
-	Anonymous uintptr
+	Anonymous IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union
 	Next      *IP_ADAPTER_WINS_SERVER_ADDRESS_LH
 	Address   networkingwinsock.SOCKET_ADDRESS
 }
@@ -698,7 +698,7 @@ type MIB_IF_ROW2 struct {
 	PhysicalMediumType          networkmanagementndis.NDIS_PHYSICAL_MEDIUM
 	AccessType                  networkmanagementndis.NET_IF_ACCESS_TYPE
 	DirectionType               networkmanagementndis.NET_IF_DIRECTION_TYPE
-	InterfaceAndOperStatusFlags uintptr
+	InterfaceAndOperStatusFlags MIB_IF_ROW2_InterfaceAndOperStatusFlags_e__Struct
 	OperStatus                  networkmanagementndis.IF_OPER_STATUS
 	AdminStatus                 networkmanagementndis.NET_IF_ADMIN_STATUS
 	MediaConnectState           networkmanagementndis.NET_IF_MEDIA_CONNECT_STATE
@@ -807,8 +807,8 @@ type MIB_IPFORWARDROW struct {
 	DwForwardPolicy    uint32
 	DwForwardNextHop   uint32
 	DwForwardIfIndex   uint32
-	Anonymous1         uintptr
-	Anonymous2         uintptr
+	Anonymous1         MIB_IPFORWARDROW_Anonymous1_e__Union
+	Anonymous2         MIB_IPFORWARDROW_Anonymous2_e__Union
 	DwForwardAge       uint32
 	DwForwardNextHopAS uint32
 	DwForwardMetric1   uint32
@@ -1054,7 +1054,7 @@ type MIB_IPNETROW_LH struct {
 	DwPhysAddrLen uint32
 	BPhysAddr     [8]byte
 	DwAddr        uint32
-	Anonymous     uintptr
+	Anonymous     MIB_IPNETROW_LH_Anonymous_e__Union
 }
 
 // MIB_IPNETROW_W2K: https://learn.microsoft.com/windows/win32/api/ipmib/ns-ipmib-mib_ipnetrow_w2k
@@ -1075,7 +1075,7 @@ type MIB_IPNETTABLE struct {
 // MIB_IPNET_ROW2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MIB_IPNET_ROW2_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // MIB_IPNET_ROW2_ReachabilityTime_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1092,8 +1092,8 @@ type MIB_IPNET_ROW2 struct {
 	PhysicalAddress       [32]byte
 	PhysicalAddressLength uint32
 	State                 networkingwinsock.NL_NEIGHBOR_STATE
-	Anonymous             uintptr
-	ReachabilityTime      uintptr
+	Anonymous             MIB_IPNET_ROW2_Anonymous_e__Union
+	ReachabilityTime      MIB_IPNET_ROW2_ReachabilityTime_e__Union
 }
 
 // MIB_IPNET_TABLE2: https://learn.microsoft.com/windows/win32/api/netioapi/ns-netioapi-mib_ipnet_table2
@@ -1118,7 +1118,7 @@ type MIB_IPPATH_ROW struct {
 	PathMtu           uint32
 	RttMean           uint32
 	RttDeviation      uint32
-	Anonymous         uintptr
+	Anonymous         MIB_IPPATH_ROW_Anonymous_e__Union
 	IsReachable       foundation.BOOLEAN
 	LinkTransmitSpeed uint64
 	LinkReceiveSpeed  uint64
@@ -1138,7 +1138,7 @@ type MIB_IPSTATS_LH_Anonymous_e__Union struct {
 
 // MIB_IPSTATS_LH: https://learn.microsoft.com/windows/win32/api/ipmib/ns-ipmib-mib_ipstats_lh
 type MIB_IPSTATS_LH struct {
-	Anonymous         uintptr
+	Anonymous         MIB_IPSTATS_LH_Anonymous_e__Union
 	DwDefaultTTL      uint32
 	DwInReceives      uint32
 	DwInHdrErrors     uint32
@@ -1243,7 +1243,7 @@ type MIB_OPAQUE_INFO_Anonymous_e__Union struct {
 // MIB_OPAQUE_INFO: https://learn.microsoft.com/windows/win32/api/iprtrmib/ns-iprtrmib-mib_opaque_info
 type MIB_OPAQUE_INFO struct {
 	DwId      uint32
-	Anonymous uintptr
+	Anonymous MIB_OPAQUE_INFO_Anonymous_e__Union
 }
 
 // MIB_OPAQUE_QUERY: https://learn.microsoft.com/windows/win32/api/iprtrmib/ns-iprtrmib-mib_opaque_query
@@ -1356,7 +1356,7 @@ type MIB_TCPROW_LH_Anonymous_e__Union struct {
 
 // MIB_TCPROW_LH: https://learn.microsoft.com/windows/win32/api/tcpmib/ns-tcpmib-mib_tcprow_lh
 type MIB_TCPROW_LH struct {
-	Anonymous    uintptr
+	Anonymous    MIB_TCPROW_LH_Anonymous_e__Union
 	DwLocalAddr  uint32
 	DwLocalPort  uint32
 	DwRemoteAddr uint32
@@ -1421,7 +1421,7 @@ type MIB_TCPSTATS_LH_Anonymous_e__Union struct {
 
 // MIB_TCPSTATS_LH: https://learn.microsoft.com/windows/win32/api/tcpmib/ns-tcpmib-mib_tcpstats_lh
 type MIB_TCPSTATS_LH struct {
-	Anonymous      uintptr
+	Anonymous      MIB_TCPSTATS_LH_Anonymous_e__Union
 	DwRtoMin       uint32
 	DwRtoMax       uint32
 	DwMaxConn      uint32
@@ -1491,7 +1491,7 @@ type MIB_UDP6ROW struct {
 // MIB_UDP6ROW2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MIB_UDP6ROW2_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type MIB_UDP6ROW2 struct {
@@ -1500,7 +1500,7 @@ type MIB_UDP6ROW2 struct {
 	DwLocalPort       uint32
 	DwOwningPid       uint32
 	LiCreateTimestamp int64
-	Anonymous         uintptr
+	Anonymous         MIB_UDP6ROW2_Anonymous_e__Union
 	OwningModuleInfo  [16]uint64
 	UcRemoteAddr      [16]byte
 	DwRemoteScopeId   uint32
@@ -1510,7 +1510,7 @@ type MIB_UDP6ROW2 struct {
 // MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // MIB_UDP6ROW_OWNER_MODULE: https://learn.microsoft.com/windows/win32/api/udpmib/ns-udpmib-mib_udp6row_owner_module
@@ -1520,7 +1520,7 @@ type MIB_UDP6ROW_OWNER_MODULE struct {
 	DwLocalPort       uint32
 	DwOwningPid       uint32
 	LiCreateTimestamp int64
-	Anonymous         uintptr
+	Anonymous         MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union
 	OwningModuleInfo  [16]uint64
 }
 
@@ -1564,7 +1564,7 @@ type MIB_UDPROW struct {
 // MIB_UDPROW2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MIB_UDPROW2_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type MIB_UDPROW2 struct {
@@ -1572,7 +1572,7 @@ type MIB_UDPROW2 struct {
 	DwLocalPort       uint32
 	DwOwningPid       uint32
 	LiCreateTimestamp int64
-	Anonymous         uintptr
+	Anonymous         MIB_UDPROW2_Anonymous_e__Union
 	OwningModuleInfo  [16]uint64
 	DwRemoteAddr      uint32
 	DwRemotePort      uint32
@@ -1581,7 +1581,7 @@ type MIB_UDPROW2 struct {
 // MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // MIB_UDPROW_OWNER_MODULE: https://learn.microsoft.com/windows/win32/api/udpmib/ns-udpmib-mib_udprow_owner_module
@@ -1590,7 +1590,7 @@ type MIB_UDPROW_OWNER_MODULE struct {
 	DwLocalPort       uint32
 	DwOwningPid       uint32
 	LiCreateTimestamp int64
-	Anonymous         uintptr
+	Anonymous         MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union
 	OwningModuleInfo  [16]uint64
 }
 
@@ -1667,13 +1667,13 @@ type MIB_UNICASTIPADDRESS_TABLE struct {
 // NET_ADDRESS_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NET_ADDRESS_INFO_Anonymous_e__Union struct {
-	Data [3]uint64
+	Data [131]uint32
 }
 
 // NET_ADDRESS_INFO: https://learn.microsoft.com/windows/win32/api/iphlpapi/ns-iphlpapi-net_address_info
 type NET_ADDRESS_INFO struct {
 	Format    NET_ADDRESS_FORMAT
-	Anonymous uintptr
+	Anonymous NET_ADDRESS_INFO_Anonymous_e__Union
 }
 
 type PFLOGFRAME struct {

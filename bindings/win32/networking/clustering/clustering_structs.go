@@ -42,7 +42,7 @@ type CLRES_FUNCTION_TABLE_Anonymous_e__Union struct {
 type CLRES_FUNCTION_TABLE struct {
 	TableSize uint32
 	Version   uint32
-	Anonymous uintptr
+	Anonymous CLRES_FUNCTION_TABLE_Anonymous_e__Union
 }
 
 // CLRES_V1_FUNCTIONS: https://learn.microsoft.com/windows/win32/api/resapi/ns-resapi-clres_v1_functions
@@ -205,7 +205,7 @@ type CLUSPROP_PARTITION_INFO_EX2 struct {
 // CLUSPROP_REQUIRED_DEPENDENCY is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CLUSPROP_REQUIRED_DEPENDENCY struct {
-	Data [3]uint64
+	Data [3]uint32
 }
 
 // CLUSPROP_RESOURCE_CLASS: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_resource_class
@@ -235,14 +235,14 @@ type CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union struct {
 // CLUSPROP_SECURITY_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_security_descriptor
 type CLUSPROP_SECURITY_DESCRIPTOR struct {
 	Base      CLUSPROP_VALUE
-	Anonymous uintptr
+	Anonymous CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union
 }
 
 // CLUSPROP_SYNTAX: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_syntax
 // CLUSPROP_SYNTAX is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CLUSPROP_SYNTAX struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // CLUSPROP_SZ: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_sz
@@ -432,7 +432,7 @@ type CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union struct {
 
 type CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME struct {
 	InputType CLUSTER_SHARED_VOLUME_RENAME_INPUT_TYPE
-	Anonymous uintptr
+	Anonymous CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union
 }
 
 // CLUSTER_SHARED_VOLUME_STATE_INFO: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-cluster_shared_volume_state_info
@@ -640,18 +640,18 @@ type CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union struct {
 
 // CLUS_RESOURCE_CLASS_INFO: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clus_resource_class_info
 type CLUS_RESOURCE_CLASS_INFO struct {
-	Anonymous uintptr
+	Anonymous CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union
 }
 
 // CLUS_SCSI_ADDRESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CLUS_SCSI_ADDRESS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // CLUS_SCSI_ADDRESS: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clus_scsi_address
 type CLUS_SCSI_ADDRESS struct {
-	Anonymous uintptr
+	Anonymous CLUS_SCSI_ADDRESS_Anonymous_e__Union
 }
 
 type CLUS_SET_MAINTENANCE_MODE_INPUT struct {
@@ -997,7 +997,7 @@ type RESUTIL_PROPERTY_ITEM struct {
 	Name      foundation.PWSTR
 	KeyName   foundation.PWSTR
 	Format    uint32
-	Anonymous uintptr
+	Anonymous RESUTIL_PROPERTY_ITEM_Anonymous_e__Union
 	Minimum   uint32
 	Maximum   uint32
 	Flags     uint32

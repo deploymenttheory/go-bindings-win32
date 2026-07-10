@@ -108,12 +108,12 @@ type ChannelIDTuningSpace struct {
 // ChannelInfo_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type ChannelInfo_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint32
 }
 
 type ChannelInfo struct {
 	LFrequency int32
-	Anonymous  uintptr
+	Anonymous  ChannelInfo_Anonymous_e__Union
 }
 
 type ChannelTuneRequest struct {
@@ -708,7 +708,7 @@ type KSM_BDA_PIN_Anonymous_e__Union struct {
 
 type KSM_BDA_PIN struct {
 	Method    mediakernelstreaming.KSIDENTIFIER
-	Anonymous uintptr
+	Anonymous KSM_BDA_PIN_Anonymous_e__Union
 	Reserved  uint32
 }
 
@@ -726,8 +726,8 @@ type KSM_BDA_PIN_PAIR_Anonymous2_e__Union struct {
 
 type KSM_BDA_PIN_PAIR struct {
 	Method     mediakernelstreaming.KSIDENTIFIER
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 KSM_BDA_PIN_PAIR_Anonymous1_e__Union
+	Anonymous2 KSM_BDA_PIN_PAIR_Anonymous2_e__Union
 }
 
 type KSM_BDA_SCAN_CAPABILTIES struct {
@@ -1285,6 +1285,19 @@ type SBE_PIN_DATA struct {
 	CTimestamps       uint64
 }
 
+// SECTION_Header_e__Union is a C union; the raw tier exposes its correctly sized
+// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+type SECTION_Header_e__Union struct {
+	Data [2]byte
+}
+
+// SECTION: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-section
+type SECTION struct {
+	TableId     byte
+	Header      SECTION_Header_e__Union
+	SectionData [1]byte
+}
+
 // STREAMBUFFER_ATTRIBUTE: https://learn.microsoft.com/windows/win32/api/sbe/ns-sbe-streambuffer_attribute
 type STREAMBUFFER_ATTRIBUTE struct {
 	PszName                   foundation.PWSTR
@@ -1334,7 +1347,7 @@ type TRANSPORT_PROPERTIES_Fields_e__Union struct {
 type TRANSPORT_PROPERTIES struct {
 	PID    uint32
 	PCR    int64
-	Fields uintptr
+	Fields TRANSPORT_PROPERTIES_Fields_e__Union
 }
 
 type TuneRequest struct {

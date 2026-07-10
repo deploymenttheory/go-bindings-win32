@@ -8,10 +8,22 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+// AsnAny_asnValue_e__Union is a C union; the raw tier exposes its correctly sized
+// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+type AsnAny_asnValue_e__Union struct {
+	Data [4]uint32
+}
+
+// AsnAny: https://learn.microsoft.com/windows/win32/api/snmp/ns-snmp-asnany
+type AsnAny struct {
+	AsnType  byte
+	AsnValue AsnAny_asnValue_e__Union
+}
+
 // SnmpVarBind: https://learn.microsoft.com/windows/win32/api/snmp/ns-snmp-snmpvarbind
 type SnmpVarBind struct {
 	Name  [3]uint32
-	Value [3]uint32
+	Value AsnAny
 }
 
 // SmiCNTR64: https://learn.microsoft.com/windows/win32/api/winsnmp/ns-winsnmp-smicntr64
@@ -41,7 +53,7 @@ type SmiVALUE_value_e__Union struct {
 // SmiVALUE: https://learn.microsoft.com/windows/win32/api/winsnmp/ns-winsnmp-smivalue
 type SmiVALUE struct {
 	Syntax uint32
-	Value  uintptr
+	Value  SmiVALUE_value_e__Union
 }
 
 // SmiVENDORINFO: https://learn.microsoft.com/windows/win32/api/winsnmp/ns-winsnmp-smivendorinfo

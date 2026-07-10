@@ -132,7 +132,7 @@ type MIDL_STUB_DESC struct {
 	RpcInterfaceInformation     unsafe.Pointer
 	PfnAllocate                 PFN_RPC_ALLOCATE
 	PfnFree                     PFN_RPC_FREE
-	IMPLICIT_HANDLE_INFO        uintptr
+	IMPLICIT_HANDLE_INFO        MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union
 	ApfnNdrRundownRoutines      *NDR_RUNDOWN
 	AGenericBindingRoutinePairs *GENERIC_BINDING_ROUTINE_PAIR
 	ApfnExprEval                *EXPR_EVAL
@@ -719,7 +719,7 @@ type NDR_USER_MARSHAL_INFO_Anonymous_e__Union struct {
 // NDR_USER_MARSHAL_INFO: https://learn.microsoft.com/windows/win32/api/rpcndr/ns-rpcndr-ndr_user_marshal_info
 type NDR_USER_MARSHAL_INFO struct {
 	InformationLevel uint32
-	Anonymous        uintptr
+	Anonymous        NDR_USER_MARSHAL_INFO_Anonymous_e__Union
 }
 
 // NDR_USER_MARSHAL_INFO_LEVEL1: https://learn.microsoft.com/windows/win32/api/rpcndr/ns-rpcndr-ndr_user_marshal_info_level1
@@ -753,7 +753,7 @@ type RDR_CALLOUT_STATE struct {
 // RPC_ASYNC_NOTIFICATION_INFO is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RPC_ASYNC_NOTIFICATION_INFO struct {
-	Data [1]uint64
+	Data [4]uint64
 }
 
 // RPC_ASYNC_STATE: https://learn.microsoft.com/windows/win32/api/rpcasync/ns-rpcasync-rpc_async_state
@@ -812,7 +812,7 @@ type RPC_BINDING_HANDLE_TEMPLATE_V1_A struct {
 	ProtocolSequence uint32
 	NetworkAddress   *byte
 	StringEndpoint   *byte
-	U1               uintptr
+	U1               RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union
 	ObjectUuid       win32.GUID
 }
 
@@ -829,7 +829,7 @@ type RPC_BINDING_HANDLE_TEMPLATE_V1_W struct {
 	ProtocolSequence uint32
 	NetworkAddress   *uint16
 	StringEndpoint   *uint16
-	U1               uintptr
+	U1               RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union
 	ObjectUuid       win32.GUID
 }
 
@@ -1005,7 +1005,7 @@ type RPC_EE_INFO_PARAM_u_e__Union struct {
 // RPC_EE_INFO_PARAM: https://learn.microsoft.com/windows/win32/api/rpcasync/ns-rpcasync-rpc_ee_info_param
 type RPC_EE_INFO_PARAM struct {
 	ParameterType ExtendedErrorParamTypes
-	U             uintptr
+	U             RPC_EE_INFO_PARAM_u_e__Union
 }
 
 // RPC_ENDPOINT_TEMPLATEA: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_endpoint_templatea
@@ -1044,7 +1044,7 @@ type RPC_EXTENDED_ERROR_INFO struct {
 	Version             uint32
 	ComputerName        foundation.PWSTR
 	ProcessID           uint32
-	U                   uintptr
+	U                   RPC_EXTENDED_ERROR_INFO_u_e__Union
 	GeneratingComponent uint32
 	Status              uint32
 	DetectionLocation   uint16
@@ -1232,7 +1232,7 @@ type RPC_SECURITY_QOS_V2_A struct {
 	IdentityTracking           RPC_C_QOS_IDENTITY
 	ImpersonationType          systemcom.RPC_C_IMP_LEVEL
 	AdditionalSecurityInfoType RPC_C_AUTHN_INFO_TYPE
-	U                          uintptr
+	U                          RPC_SECURITY_QOS_V2_A_u_e__Union
 }
 
 // RPC_SECURITY_QOS_V2_W_u_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1248,7 +1248,7 @@ type RPC_SECURITY_QOS_V2_W struct {
 	IdentityTracking           RPC_C_QOS_IDENTITY
 	ImpersonationType          systemcom.RPC_C_IMP_LEVEL
 	AdditionalSecurityInfoType RPC_C_AUTHN_INFO_TYPE
-	U                          uintptr
+	U                          RPC_SECURITY_QOS_V2_W_u_e__Union
 }
 
 // RPC_SECURITY_QOS_V3_A_u_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1264,7 +1264,7 @@ type RPC_SECURITY_QOS_V3_A struct {
 	IdentityTracking           RPC_C_QOS_IDENTITY
 	ImpersonationType          systemcom.RPC_C_IMP_LEVEL
 	AdditionalSecurityInfoType RPC_C_AUTHN_INFO_TYPE
-	U                          uintptr
+	U                          RPC_SECURITY_QOS_V3_A_u_e__Union
 	Sid                        unsafe.Pointer
 }
 
@@ -1281,7 +1281,7 @@ type RPC_SECURITY_QOS_V3_W struct {
 	IdentityTracking           RPC_C_QOS_IDENTITY
 	ImpersonationType          systemcom.RPC_C_IMP_LEVEL
 	AdditionalSecurityInfoType RPC_C_AUTHN_INFO_TYPE
-	U                          uintptr
+	U                          RPC_SECURITY_QOS_V3_W_u_e__Union
 	Sid                        unsafe.Pointer
 }
 
@@ -1298,7 +1298,7 @@ type RPC_SECURITY_QOS_V4_A struct {
 	IdentityTracking           RPC_C_QOS_IDENTITY
 	ImpersonationType          systemcom.RPC_C_IMP_LEVEL
 	AdditionalSecurityInfoType RPC_C_AUTHN_INFO_TYPE
-	U                          uintptr
+	U                          RPC_SECURITY_QOS_V4_A_u_e__Union
 	Sid                        unsafe.Pointer
 	EffectiveOnly              uint32
 }
@@ -1316,7 +1316,7 @@ type RPC_SECURITY_QOS_V4_W struct {
 	IdentityTracking           RPC_C_QOS_IDENTITY
 	ImpersonationType          systemcom.RPC_C_IMP_LEVEL
 	AdditionalSecurityInfoType RPC_C_AUTHN_INFO_TYPE
-	U                          uintptr
+	U                          RPC_SECURITY_QOS_V4_W_u_e__Union
 	Sid                        unsafe.Pointer
 	EffectiveOnly              uint32
 }
@@ -1334,7 +1334,7 @@ type RPC_SECURITY_QOS_V5_A struct {
 	IdentityTracking           RPC_C_QOS_IDENTITY
 	ImpersonationType          systemcom.RPC_C_IMP_LEVEL
 	AdditionalSecurityInfoType RPC_C_AUTHN_INFO_TYPE
-	U                          uintptr
+	U                          RPC_SECURITY_QOS_V5_A_u_e__Union
 	Sid                        unsafe.Pointer
 	EffectiveOnly              uint32
 	ServerSecurityDescriptor   unsafe.Pointer
@@ -1353,7 +1353,7 @@ type RPC_SECURITY_QOS_V5_W struct {
 	IdentityTracking           RPC_C_QOS_IDENTITY
 	ImpersonationType          systemcom.RPC_C_IMP_LEVEL
 	AdditionalSecurityInfoType RPC_C_AUTHN_INFO_TYPE
-	U                          uintptr
+	U                          RPC_SECURITY_QOS_V5_W_u_e__Union
 	Sid                        unsafe.Pointer
 	EffectiveOnly              uint32
 	ServerSecurityDescriptor   unsafe.Pointer

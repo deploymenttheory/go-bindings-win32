@@ -11,12 +11,12 @@ import (
 // D3DMATRIX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3DMATRIX_Anonymous_e__Union struct {
-	Data [8]uint64
+	Data [16]uint32
 }
 
 // D3DMATRIX: https://learn.microsoft.com/windows/win32/direct3d10/d3d10-d3dmatrix
 type D3DMATRIX struct {
-	Anonymous uintptr
+	Anonymous D3DMATRIX_Anonymous_e__Union
 }
 
 // D3DVECTOR: https://learn.microsoft.com/windows/win32/direct3d10/d3d10-d3dvector

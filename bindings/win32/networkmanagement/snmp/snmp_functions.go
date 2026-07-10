@@ -605,7 +605,7 @@ func SnmpSvcSetLogType(nLogType int32) {
 // SnmpUtilAsnAnyCpy calls snmpapi!SnmpUtilAsnAnyCpy.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputilasnanycpy
 // Minimum OS: windows5.0.
-func SnmpUtilAsnAnyCpy(pAnyDst unsafe.Pointer, pAnySrc unsafe.Pointer) int32 {
+func SnmpUtilAsnAnyCpy(pAnyDst *AsnAny, pAnySrc *AsnAny) int32 {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilAsnAnyCpy.Addr(), uintptr(unsafe.Pointer(pAnyDst)), uintptr(unsafe.Pointer(pAnySrc)))
 	return int32(r1)
 }
@@ -613,7 +613,7 @@ func SnmpUtilAsnAnyCpy(pAnyDst unsafe.Pointer, pAnySrc unsafe.Pointer) int32 {
 // SnmpUtilAsnAnyFree calls snmpapi!SnmpUtilAsnAnyFree.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputilasnanyfree
 // Minimum OS: windows5.0.
-func SnmpUtilAsnAnyFree(pAny unsafe.Pointer) {
+func SnmpUtilAsnAnyFree(pAny *AsnAny) {
 	syscall.SyscallN(procSnmpUtilAsnAnyFree.Addr(), uintptr(unsafe.Pointer(pAny)))
 }
 
@@ -739,7 +739,7 @@ func SnmpUtilOidToA(Oid unsafe.Pointer) foundation.PSTR {
 // SnmpUtilPrintAsnAny calls snmpapi!SnmpUtilPrintAsnAny.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputilprintasnany
 // Minimum OS: windows5.0.
-func SnmpUtilPrintAsnAny(pAny unsafe.Pointer) {
+func SnmpUtilPrintAsnAny(pAny *AsnAny) {
 	syscall.SyscallN(procSnmpUtilPrintAsnAny.Addr(), uintptr(unsafe.Pointer(pAny)))
 }
 

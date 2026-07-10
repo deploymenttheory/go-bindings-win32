@@ -259,19 +259,19 @@ type DWRITE_PAINT_COLOR struct {
 // DWRITE_PAINT_ELEMENT_PAINT_UNION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DWRITE_PAINT_ELEMENT_PAINT_UNION struct {
-	Data [4]uint64
+	Data [8]uint32
 }
 
 type DWRITE_PAINT_ELEMENT struct {
 	PaintType DWRITE_PAINT_TYPE
-	Paint     uintptr
+	Paint     DWRITE_PAINT_ELEMENT_PAINT_UNION
 }
 
 // DWRITE_PANOSE: https://learn.microsoft.com/windows/win32/api/dwrite_1/ns-dwrite_1-dwrite_panose
 // DWRITE_PANOSE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DWRITE_PANOSE struct {
-	Data [2]uint64
+	Data [10]byte
 }
 
 // DWRITE_SCRIPT_ANALYSIS: https://learn.microsoft.com/windows/win32/api/dwrite/ns-dwrite-dwrite_script_analysis

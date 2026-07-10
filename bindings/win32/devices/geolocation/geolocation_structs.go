@@ -36,7 +36,7 @@ type GNSS_AGNSS_INJECT struct {
 	InjectionStatus   foundation.NTSTATUS
 	InjectionDataSize uint32
 	Unused            [512]byte
-	Anonymous         uintptr
+	Anonymous         GNSS_AGNSS_INJECT_Anonymous_e__Union
 }
 
 type GNSS_AGNSS_INJECTBLOB struct {
@@ -96,7 +96,7 @@ type GNSS_BREADCRUMB_LIST struct {
 	Size      uint32
 	Version   uint32
 	NumCrumbs uint32
-	Anonymous uintptr
+	Anonymous GNSS_BREADCRUMB_LIST_Anonymous_e__Union
 }
 
 type GNSS_BREADCRUMB_V1 struct {
@@ -218,7 +218,7 @@ type GNSS_EVENT struct {
 	EventType     GNSS_EVENT_TYPE
 	EventDataSize uint32
 	Unused        [512]byte
-	Anonymous     uintptr
+	Anonymous     GNSS_EVENT_Anonymous_e__Union
 }
 
 // GNSS_EVENT_2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -233,7 +233,7 @@ type GNSS_EVENT_2 struct {
 	EventType     GNSS_EVENT_TYPE
 	EventDataSize uint32
 	Unused        [512]byte
-	Anonymous     uintptr
+	Anonymous     GNSS_EVENT_2_Anonymous_e__Union
 }
 
 type GNSS_FIXDATA struct {
@@ -345,7 +345,7 @@ type GNSS_FIXSESSION_PARAM struct {
 	HorizontalConfidence uint32
 	Reserved             [9]uint32
 	FixLevelOfDetails    uint32
-	Anonymous            uintptr
+	Anonymous            GNSS_FIXSESSION_PARAM_Anonymous_e__Union
 	Unused               [256]byte
 }
 
@@ -401,7 +401,7 @@ type GNSS_GEOREGION struct {
 	Size          uint32
 	Version       uint32
 	GeoRegionType GNSS_GEOREGIONTYPE
-	Anonymous     uintptr
+	Anonymous     GNSS_GEOREGION_Anonymous_e__Union
 }
 
 type GNSS_GEOREGION_CIRCLE struct {
@@ -428,7 +428,7 @@ type GNSS_NI_REQUEST_PARAM struct {
 	RequestType       GNSS_NI_REQUEST_TYPE
 	NotificationType  GNSS_NI_NOTIFICATION_TYPE
 	RequestPlaneType  GNSS_NI_PLANE_TYPE
-	Anonymous         uintptr
+	Anonymous         GNSS_NI_REQUEST_PARAM_Anonymous_e__Union
 	ResponseTimeInSec uint32
 	EmergencyLocation foundation.BOOL
 }

@@ -24,13 +24,13 @@ type RAWHID struct {
 // RAWINPUT_data_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RAWINPUT_data_e__Union struct {
-	Data [4]uint64
+	Data [6]uint32
 }
 
 // RAWINPUT: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-rawinput
 type RAWINPUT struct {
 	Header RAWINPUTHEADER
-	Data   uintptr
+	Data   RAWINPUT_data_e__Union
 }
 
 // RAWINPUTDEVICE: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-rawinputdevice
@@ -68,13 +68,13 @@ type RAWKEYBOARD struct {
 // RAWMOUSE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RAWMOUSE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // RAWMOUSE: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-rawmouse
 type RAWMOUSE struct {
 	UsFlags            MOUSE_STATE
-	Anonymous          uintptr
+	Anonymous          RAWMOUSE_Anonymous_e__Union
 	UlRawButtons       uint32
 	LLastX             int32
 	LLastY             int32
@@ -91,7 +91,7 @@ type RID_DEVICE_INFO_Anonymous_e__Union struct {
 type RID_DEVICE_INFO struct {
 	CbSize    uint32
 	DwType    RID_DEVICE_INFO_TYPE
-	Anonymous uintptr
+	Anonymous RID_DEVICE_INFO_Anonymous_e__Union
 }
 
 // RID_DEVICE_INFO_HID: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-rid_device_info_hid

@@ -289,7 +289,7 @@ type POWER_ADAPTER_CHARGE_REQUIREMENT struct {
 // POWER_ADAPTER_POWER_STATES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type POWER_ADAPTER_POWER_STATES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type POWER_ADAPTER_SET_STATUS_BUFFER struct {

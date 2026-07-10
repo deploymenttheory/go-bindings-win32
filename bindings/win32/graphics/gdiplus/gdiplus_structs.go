@@ -293,7 +293,7 @@ type MetafileHeader struct {
 	Y                 int32
 	Width             int32
 	Height            int32
-	Anonymous         uintptr
+	Anonymous         MetafileHeader_Anonymous_e__Union
 	EmfPlusHeaderSize int32
 	LogicalDpiX       int32
 	LogicalDpiY       int32

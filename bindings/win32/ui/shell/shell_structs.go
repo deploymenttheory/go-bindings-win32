@@ -676,7 +676,7 @@ type NOTIFYICONDATAA struct {
 	DwState          NOTIFY_ICON_STATE
 	DwStateMask      NOTIFY_ICON_STATE
 	SzInfo           [256]foundation.CHAR
-	Anonymous        uintptr
+	Anonymous        NOTIFYICONDATAA_Anonymous_e__Union
 	SzInfoTitle      [64]foundation.CHAR
 	DwInfoFlags      NOTIFY_ICON_INFOTIP_FLAGS
 	GuidItem         win32.GUID
@@ -701,7 +701,7 @@ type NOTIFYICONDATAW struct {
 	DwState          NOTIFY_ICON_STATE
 	DwStateMask      NOTIFY_ICON_STATE
 	SzInfo           [256]uint16
-	Anonymous        uintptr
+	Anonymous        NOTIFYICONDATAW_Anonymous_e__Union
 	SzInfoTitle      [64]uint16
 	DwInfoFlags      NOTIFY_ICON_INFOTIP_FLAGS
 	GuidItem         win32.GUID
@@ -1003,7 +1003,7 @@ type SHELLEXECUTEINFOA struct {
 	LpClass      foundation.PSTR
 	HkeyClass    systemregistry.HKEY
 	DwHotKey     uint32
-	Anonymous    uintptr
+	Anonymous    SHELLEXECUTEINFOA_Anonymous_e__Union
 	HProcess     foundation.HANDLE
 }
 
@@ -1028,7 +1028,7 @@ type SHELLEXECUTEINFOW struct {
 	LpClass      foundation.PWSTR
 	HkeyClass    systemregistry.HKEY
 	DwHotKey     uint32
-	Anonymous    uintptr
+	Anonymous    SHELLEXECUTEINFOW_Anonymous_e__Union
 	HProcess     foundation.HANDLE
 }
 

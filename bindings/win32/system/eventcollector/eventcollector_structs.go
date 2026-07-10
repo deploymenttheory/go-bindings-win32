@@ -12,7 +12,7 @@ type EC_VARIANT_Anonymous_e__Union struct {
 
 // EC_VARIANT: https://learn.microsoft.com/windows/win32/api/evcoll/ns-evcoll-ec_variant
 type EC_VARIANT struct {
-	Anonymous uintptr
+	Anonymous EC_VARIANT_Anonymous_e__Union
 	Count     uint32
 	Type      uint32
 }

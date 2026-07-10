@@ -306,7 +306,7 @@ type DOT11_BSS_ENTRY struct {
 // DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO struct {
-	Data [1]uint64
+	Data [3]uint32
 }
 
 type DOT11_BSS_LIST struct {
@@ -1053,7 +1053,7 @@ type DOT11_PHY_ATTRIBUTES struct {
 	UMPDUMaxLength              uint32
 	TempType                    DOT11_TEMP_TYPE
 	DiversitySupport            DOT11_DIVERSITY_SUPPORT
-	PhySpecificAttributes       uintptr
+	PhySpecificAttributes       DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union
 	UNumberSupportedPowerLevels uint32
 	TxPowerLevels               [8]uint32
 	UNumDataRateMappingEntries  uint32
@@ -1091,7 +1091,7 @@ type DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union struct {
 type DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS struct {
 	Header    networkmanagementndis.NDIS_OBJECT_HEADER
 	UlPhyId   uint32
-	Anonymous uintptr
+	Anonymous DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union
 }
 
 type DOT11_PHY_ID_LIST struct {
@@ -1359,7 +1359,7 @@ type DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union struct {
 }
 
 type DOT11_RECV_SENSITIVITY_LIST struct {
-	Anonymous            uintptr
+	Anonymous            DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union
 	UNumOfEntries        uint32
 	UTotalNumOfEntries   uint32
 	Dot11RecvSensitivity [1]DOT11_RECV_SENSITIVITY
@@ -2382,7 +2382,7 @@ type WLAN_RAW_DATA_LIST_Anonymous_e__Struct struct {
 type WLAN_RAW_DATA_LIST struct {
 	DwTotalSize     uint32
 	DwNumberOfItems uint32
-	DataList        [1]uintptr
+	DataList        [1]WLAN_RAW_DATA_LIST_Anonymous_e__Struct
 }
 
 type WLAN_REALTIME_CONNECTION_QUALITY struct {

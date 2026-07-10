@@ -36,7 +36,7 @@ type CATEGORIZATION_Anonymous_e__Union struct {
 
 type CATEGORIZATION struct {
 	UlCatType uint32
-	Anonymous uintptr
+	Anonymous CATEGORIZATION_Anonymous_e__Union
 	CsColumns COLUMNSET
 }
 
@@ -459,8 +459,8 @@ type ODBC_VS_ARGS_Anonymous2_e__Union struct {
 type ODBC_VS_ARGS struct {
 	PguidEvent *win32.GUID
 	DwFlags    uint32
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 ODBC_VS_ARGS_Anonymous1_e__Union
+	Anonymous2 ODBC_VS_ARGS_Anonymous2_e__Union
 	RetCode    int16
 }
 
@@ -498,13 +498,13 @@ type RANGECATEGORIZE struct {
 // RESTRICTION_URes is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RESTRICTION_URes struct {
-	Data [6]uint64
+	Data [8]uint64
 }
 
 type RESTRICTION struct {
 	Rt     uint32
 	Weight uint32
-	Res    uintptr
+	Res    RESTRICTION_URes
 }
 
 type RMTPACK struct {
@@ -630,7 +630,7 @@ type SQL_INTERVAL_STRUCT_intval_e__Union struct {
 type SQL_INTERVAL_STRUCT struct {
 	Interval_type SQLINTERVAL
 	Interval_sign int16
-	Intval        uintptr
+	Intval        SQL_INTERVAL_STRUCT_intval_e__Union
 }
 
 type SQL_NUMERIC_STRUCT struct {
@@ -658,14 +658,14 @@ type SSERRORINFO struct {
 // SSVARIANT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SSVARIANT_Anonymous_e__Union struct {
-	Data [3]uint64
+	Data [5]uint64
 }
 
 type SSVARIANT struct {
 	Vt          uint16
 	DwReserved1 uint32
 	DwReserved2 uint32
-	Anonymous   uintptr
+	Anonymous   SSVARIANT_Anonymous_e__Union
 }
 
 type SUBSCRIPTIONINFO struct {

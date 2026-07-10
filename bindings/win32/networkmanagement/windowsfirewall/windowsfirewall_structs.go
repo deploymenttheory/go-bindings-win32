@@ -51,7 +51,7 @@ type INET_FIREWALL_AC_CHANGE struct {
 	AppContainerSid *security.SID
 	UserSid         *security.SID
 	DisplayName     foundation.PWSTR
-	Anonymous       uintptr
+	Anonymous       INET_FIREWALL_AC_CHANGE_Anonymous_e__Union
 }
 
 // INET_FIREWALL_APP_CONTAINER: https://learn.microsoft.com/windows/win32/api/netfw/ns-netfw-inet_firewall_app_container

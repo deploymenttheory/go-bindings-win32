@@ -156,8 +156,8 @@ type WIAS_CHANGED_VALUE_INFO_Old_e__Union struct {
 type WIAS_CHANGED_VALUE_INFO struct {
 	BChanged foundation.BOOL
 	Vt       int32
-	Old      uintptr
-	Current  uintptr
+	Old      WIAS_CHANGED_VALUE_INFO_Old_e__Union
+	Current  WIAS_CHANGED_VALUE_INFO_Current_e__Union
 }
 
 type WIAS_DOWN_SAMPLE_INFO struct {
@@ -306,13 +306,13 @@ type WIA_PROPERTY_CONTEXT struct {
 // WIA_PROPERTY_INFO_ValidVal_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WIA_PROPERTY_INFO_ValidVal_e__Union struct {
-	Data [1]uint64
+	Data [4]uint64
 }
 
 type WIA_PROPERTY_INFO struct {
 	LAccessFlags uint32
 	Vt           systemvariant.VARENUM
-	ValidVal     uintptr
+	ValidVal     WIA_PROPERTY_INFO_ValidVal_e__Union
 }
 
 // WIA_PROPID_TO_NAME: https://learn.microsoft.com/windows/win32/api/wia_xp/ns-wia_xp-wia_propid_to_name

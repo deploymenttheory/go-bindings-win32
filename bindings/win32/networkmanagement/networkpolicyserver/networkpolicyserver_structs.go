@@ -15,7 +15,7 @@ type RADIUS_ATTRIBUTE struct {
 	DwAttrType   uint32
 	FDataType    RADIUS_DATA_TYPE
 	CbDataLength uint32
-	Anonymous    uintptr
+	Anonymous    RADIUS_ATTRIBUTE_Anonymous_e__Union
 }
 
 // RADIUS_ATTRIBUTE_ARRAY: https://learn.microsoft.com/windows/win32/api/authif/ns-authif-radius_attribute_array

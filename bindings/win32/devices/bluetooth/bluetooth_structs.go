@@ -17,7 +17,7 @@ type BLUETOOTH_ADDRESS_Anonymous_e__Union struct {
 }
 
 type BLUETOOTH_ADDRESS struct {
-	Anonymous uintptr
+	Anonymous BLUETOOTH_ADDRESS_Anonymous_e__Union
 }
 
 // BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -30,7 +30,7 @@ type BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union struct {
 type BLUETOOTH_AUTHENTICATE_RESPONSE struct {
 	BthAddressRemote BLUETOOTH_ADDRESS
 	AuthMethod       BLUETOOTH_AUTHENTICATION_METHOD
-	Anonymous        uintptr
+	Anonymous        BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union
 	NegativeResponse byte
 }
 
@@ -46,7 +46,7 @@ type BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS struct {
 	AuthenticationMethod       BLUETOOTH_AUTHENTICATION_METHOD
 	IoCapability               BLUETOOTH_IO_CAPABILITY
 	AuthenticationRequirements BLUETOOTH_AUTHENTICATION_REQUIREMENTS
-	Anonymous                  uintptr
+	Anonymous                  BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union
 }
 
 // BLUETOOTH_COD_PAIRS: https://learn.microsoft.com/windows/win32/api/bluetoothapis/ns-bluetoothapis-bluetooth_cod_pairs
@@ -212,14 +212,14 @@ type BTH_LE_GATT_DESCRIPTOR struct {
 // BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [12]uint32
 }
 
 // BTH_LE_GATT_DESCRIPTOR_VALUE: https://learn.microsoft.com/windows/win32/api/bthledef/ns-bthledef-bth_le_gatt_descriptor_value
 type BTH_LE_GATT_DESCRIPTOR_VALUE struct {
 	DescriptorType BTH_LE_GATT_DESCRIPTOR_TYPE
 	DescriptorUuid BTH_LE_UUID
-	Anonymous      uintptr
+	Anonymous      BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union
 	DataSize       uint32
 	Data           [1]byte
 }
@@ -239,7 +239,7 @@ type BTH_LE_UUID_Value_e__Union struct {
 // BTH_LE_UUID: https://learn.microsoft.com/windows/win32/api/bthledef/ns-bthledef-bth_le_uuid
 type BTH_LE_UUID struct {
 	IsShortUuid foundation.BOOLEAN
-	Value       uintptr
+	Value       BTH_LE_UUID_Value_e__Union
 }
 
 type BTH_PING_RSP struct {
@@ -282,7 +282,7 @@ type SDP_ELEMENT_DATA_data_e__Union struct {
 type SDP_ELEMENT_DATA struct {
 	Type         SDP_TYPE
 	SpecificType SDP_SPECIFICTYPE
-	Data         uintptr
+	Data         SDP_ELEMENT_DATA_data_e__Union
 }
 
 type SDP_LARGE_INTEGER_16 struct {

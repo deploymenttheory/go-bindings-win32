@@ -139,7 +139,7 @@ type PDH_COUNTER_INFO_A struct {
 	DwUserData      uintptr
 	DwQueryUserData uintptr
 	SzFullPath      foundation.PSTR
-	Anonymous       uintptr
+	Anonymous       PDH_COUNTER_INFO_A_Anonymous_e__Union
 	SzExplainText   foundation.PSTR
 	DataBuffer      [1]uint32
 }
@@ -161,7 +161,7 @@ type PDH_COUNTER_INFO_W struct {
 	DwUserData      uintptr
 	DwQueryUserData uintptr
 	SzFullPath      foundation.PWSTR
-	Anonymous       uintptr
+	Anonymous       PDH_COUNTER_INFO_W_Anonymous_e__Union
 	SzExplainText   foundation.PWSTR
 	DataBuffer      [1]uint32
 }
@@ -211,7 +211,7 @@ type PDH_FMT_COUNTERVALUE_Anonymous_e__Union struct {
 // PDH_FMT_COUNTERVALUE: https://learn.microsoft.com/windows/win32/api/pdh/ns-pdh-pdh_fmt_countervalue
 type PDH_FMT_COUNTERVALUE struct {
 	CStatus   uint32
-	Anonymous uintptr
+	Anonymous PDH_FMT_COUNTERVALUE_Anonymous_e__Union
 }
 
 // PDH_FMT_COUNTERVALUE_ITEM_A: https://learn.microsoft.com/windows/win32/api/pdh/ns-pdh-pdh_fmt_countervalue_item_a
@@ -229,7 +229,7 @@ type PDH_FMT_COUNTERVALUE_ITEM_W struct {
 // PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [6]uint64
 }
 
 type PDH_LOG_SERVICE_QUERY_INFO_A struct {
@@ -241,13 +241,13 @@ type PDH_LOG_SERVICE_QUERY_INFO_A struct {
 	SzBaseFileName   foundation.PSTR
 	DwFileType       uint32
 	DwReserved       uint32
-	Anonymous        uintptr
+	Anonymous        PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union
 }
 
 // PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [6]uint64
 }
 
 type PDH_LOG_SERVICE_QUERY_INFO_W struct {
@@ -259,7 +259,7 @@ type PDH_LOG_SERVICE_QUERY_INFO_W struct {
 	SzBaseFileName   foundation.PWSTR
 	DwFileType       uint32
 	DwReserved       uint32
-	Anonymous        uintptr
+	Anonymous        PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union
 }
 
 // PDH_RAW_COUNTER: https://learn.microsoft.com/windows/win32/api/pdh/ns-pdh-pdh_raw_counter

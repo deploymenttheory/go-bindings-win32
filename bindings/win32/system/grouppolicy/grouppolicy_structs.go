@@ -207,7 +207,7 @@ type INSTALLDATA struct {
 // INSTALLSPEC is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type INSTALLSPEC struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // LOCALMANAGEDAPPLICATION: https://learn.microsoft.com/windows/win32/api/appmgmt/ns-appmgmt-localmanagedapplication

@@ -47,7 +47,7 @@ type PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union struct {
 // PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS: https://learn.microsoft.com/windows/win32/api/projectedfslib/ns-projectedfslib-prj_complete_command_extended_parameters
 type PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS struct {
 	CommandType PRJ_COMPLETE_COMMAND_TYPE
-	Anonymous   uintptr
+	Anonymous   PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union
 }
 
 // PRJ_EXTENDED_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -60,7 +60,7 @@ type PRJ_EXTENDED_INFO_Anonymous_e__Union struct {
 type PRJ_EXTENDED_INFO struct {
 	InfoType       PRJ_EXT_INFO_TYPE
 	NextInfoOffset uint32
-	Anonymous      uintptr
+	Anonymous      PRJ_EXTENDED_INFO_Anonymous_e__Union
 }
 
 // PRJ_FILE_BASIC_INFO: https://learn.microsoft.com/windows/win32/api/projectedfslib/ns-projectedfslib-prj_file_basic_info
@@ -84,7 +84,7 @@ type PRJ_NOTIFICATION_MAPPING struct {
 // PRJ_NOTIFICATION_PARAMETERS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PRJ_NOTIFICATION_PARAMETERS struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PRJ_PLACEHOLDER_INFO_EaInformation_e__Struct struct {
@@ -105,9 +105,9 @@ type PRJ_PLACEHOLDER_INFO_StreamsInformation_e__Struct struct {
 // PRJ_PLACEHOLDER_INFO: https://learn.microsoft.com/windows/win32/api/projectedfslib/ns-projectedfslib-prj_placeholder_info
 type PRJ_PLACEHOLDER_INFO struct {
 	FileBasicInfo       PRJ_FILE_BASIC_INFO
-	EaInformation       uintptr
-	SecurityInformation uintptr
-	StreamsInformation  uintptr
+	EaInformation       PRJ_PLACEHOLDER_INFO_EaInformation_e__Struct
+	SecurityInformation PRJ_PLACEHOLDER_INFO_SecurityInformation_e__Struct
+	StreamsInformation  PRJ_PLACEHOLDER_INFO_StreamsInformation_e__Struct
 	VersionInfo         PRJ_PLACEHOLDER_VERSION_INFO
 	VariableData        [1]byte
 }

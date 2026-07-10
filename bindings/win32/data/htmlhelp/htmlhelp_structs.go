@@ -25,7 +25,7 @@ type CProperty struct {
 	DwPropID  uint32
 	CbData    uint32
 	DwType    uint32
-	Anonymous uintptr
+	Anonymous CProperty_Anonymous_e__Union
 	FPersist  foundation.BOOL
 }
 

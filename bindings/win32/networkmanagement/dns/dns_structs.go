@@ -24,7 +24,7 @@ type DNS_ADDR_Data_e__Union struct {
 // DNS_ADDR: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_addr
 type DNS_ADDR struct {
 	MaxSa [32]foundation.CHAR
-	Data  uintptr
+	Data  DNS_ADDR_Data_e__Union
 }
 
 // DNS_APPLICATION_SETTINGS: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_application_settings
@@ -86,7 +86,7 @@ type DNS_CONNECTION_PROXY_ELEMENT struct {
 // DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [6]uint64
 }
 
 type DNS_CONNECTION_PROXY_INFO struct {
@@ -94,7 +94,7 @@ type DNS_CONNECTION_PROXY_INFO struct {
 	PwszFriendlyName foundation.PWSTR
 	Flags            uint32
 	Switch           DNS_CONNECTION_PROXY_INFO_SWITCH
-	Anonymous        uintptr
+	Anonymous        DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union
 }
 
 type DNS_CONNECTION_PROXY_INFO_EX struct {
@@ -126,8 +126,8 @@ type DNS_CUSTOM_SERVER_Anonymous2_e__Union struct {
 type DNS_CUSTOM_SERVER struct {
 	DwServerType uint32
 	UllFlags     uint64
-	Anonymous1   uintptr
-	Anonymous2   uintptr
+	Anonymous1   DNS_CUSTOM_SERVER_Anonymous1_e__Union
+	Anonymous2   DNS_CUSTOM_SERVER_Anonymous2_e__Union
 }
 
 // DNS_DHCID_DATA: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_dhcid_data
@@ -334,7 +334,7 @@ type DNS_QUERY_RAW_REQUEST struct {
 	CustomServersSize       uint32
 	CustomServers           *DNS_CUSTOM_SERVER
 	Protocol                uint32
-	Anonymous               uintptr
+	Anonymous               DNS_QUERY_RAW_REQUEST_Anonymous_e__Union
 }
 
 // DNS_QUERY_RAW_RESULT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -353,7 +353,7 @@ type DNS_QUERY_RAW_RESULT struct {
 	QueryRawResponse     *byte
 	QueryRecords         *DNS_RECORDA
 	Protocol             uint32
-	Anonymous            uintptr
+	Anonymous            DNS_QUERY_RAW_RESULT_Anonymous_e__Union
 }
 
 // DNS_QUERY_REQUEST: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_query_request
@@ -411,10 +411,10 @@ type DNS_RECORDA struct {
 	PName       foundation.PSTR
 	WType       uint16
 	WDataLength uint16
-	Flags       uintptr
+	Flags       DNS_RECORDA_Flags_e__Union
 	DwTtl       uint32
 	DwReserved  uint32
-	Data        uintptr
+	Data        DNS_RECORDA_Data_e__Union
 }
 
 // DNS_RECORDW_Data_e__Union is a C union; the raw tier exposes its correctly sized
@@ -435,10 +435,10 @@ type DNS_RECORDW struct {
 	PName       foundation.PWSTR
 	WType       uint16
 	WDataLength uint16
-	Flags       uintptr
+	Flags       DNS_RECORDW_Flags_e__Union
 	DwTtl       uint32
 	DwReserved  uint32
-	Data        uintptr
+	Data        DNS_RECORDW_Data_e__Union
 }
 
 // DNS_RECORD_FLAGS: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_record_flags
@@ -463,11 +463,11 @@ type DNS_RECORD_OPTW struct {
 	PName        foundation.PWSTR
 	WType        uint16
 	WDataLength  uint16
-	Flags        uintptr
+	Flags        DNS_RECORD_OPTW_Flags_e__Union
 	ExtHeader    DNS_HEADER_EXT
 	WPayloadSize uint16
 	WReserved    uint16
-	Data         uintptr
+	Data         DNS_RECORD_OPTW_Data_e__Union
 }
 
 // DNS_RRSET: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_rrset
@@ -487,7 +487,7 @@ type DNS_SERVICE_BROWSE_REQUEST struct {
 	Version        uint32
 	InterfaceIndex uint32
 	QueryName      foundation.PWSTR
-	Anonymous      uintptr
+	Anonymous      DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union
 	PQueryContext  unsafe.Pointer
 }
 
@@ -614,7 +614,7 @@ type DNS_SVCB_PARAM_Anonymous_e__Union struct {
 
 type DNS_SVCB_PARAM struct {
 	WSvcParamKey uint16
-	Anonymous    uintptr
+	Anonymous    DNS_SVCB_PARAM_Anonymous_e__Union
 }
 
 type DNS_SVCB_PARAM_ALPN struct {
@@ -822,9 +822,9 @@ type DnsRecordOptA struct {
 	PName        foundation.PSTR
 	WType        uint16
 	WDataLength  uint16
-	Flags        uintptr
+	Flags        DnsRecordOptA_Flags_e__Union
 	ExtHeader    DNS_HEADER_EXT
 	WPayloadSize uint16
 	WReserved    uint16
-	Data         uintptr
+	Data         DnsRecordOptA_Data_e__Union
 }

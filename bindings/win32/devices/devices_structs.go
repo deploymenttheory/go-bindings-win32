@@ -13,7 +13,7 @@ type IEEE1394_API_REQUEST_u_e__Union struct {
 type IEEE1394_API_REQUEST struct {
 	RequestNumber uint32
 	Flags         uint32
-	U             uintptr
+	U             IEEE1394_API_REQUEST_u_e__Union
 }
 
 type IEEE1394_VDEV_PNP_REQUEST struct {

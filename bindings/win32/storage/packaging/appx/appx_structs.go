@@ -88,7 +88,7 @@ type PACKAGE_VERSION_Anonymous_e__Union struct {
 
 // PACKAGE_VERSION: https://learn.microsoft.com/windows/win32/api/appmodel/ns-appmodel-package_version
 type PACKAGE_VERSION struct {
-	Anonymous uintptr
+	Anonymous PACKAGE_VERSION_Anonymous_e__Union
 }
 
 type PACKAGE_INFO_REFERENCE struct {

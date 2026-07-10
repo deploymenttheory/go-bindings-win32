@@ -125,7 +125,7 @@ type VM_PATCH_INFO struct {
 // WRDS_CONNECTION_SETTING is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WRDS_CONNECTION_SETTING struct {
-	Data [469]uint64
+	Data [470]uint64
 }
 
 // WRDS_CONNECTION_SETTINGS: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_connection_settings
@@ -802,7 +802,7 @@ type WTS_PROPERTY_VALUE_u_e__Union struct {
 // WTS_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_property_value
 type WTS_PROPERTY_VALUE struct {
 	Type uint16
-	U    uintptr
+	U    WTS_PROPERTY_VALUE_u_e__Union
 }
 
 // WTS_PROTOCOL_CACHE: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_protocol_cache
@@ -925,13 +925,13 @@ type WTS_SMALL_RECT struct {
 // WTS_SOCKADDR_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WTS_SOCKADDR_u_e__Union struct {
-	Data [1]uint64
+	Data [7]uint32
 }
 
 // WTS_SOCKADDR: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_sockaddr
 type WTS_SOCKADDR struct {
 	Sin_family uint16
-	U          uintptr
+	U          WTS_SOCKADDR_u_e__Union
 }
 
 // WTS_SYSTEMTIME: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_systemtime

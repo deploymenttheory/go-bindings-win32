@@ -318,7 +318,7 @@ type METADATA_GETALL_INTERNAL_RECORD struct {
 	DwMDUserType   uint32
 	DwMDDataType   uint32
 	DwMDDataLen    uint32
-	Anonymous      uintptr
+	Anonymous      METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union
 	DwMDDataTag    uint32
 }
 

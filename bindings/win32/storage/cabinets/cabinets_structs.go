@@ -48,13 +48,13 @@ type FDICABINETINFO struct {
 // FDIDECRYPT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type FDIDECRYPT_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [5]uint64
 }
 
 type FDIDECRYPT struct {
 	Fdidt     FDIDECRYPTTYPE
 	PvUser    unsafe.Pointer
-	Anonymous uintptr
+	Anonymous FDIDECRYPT_Anonymous_e__Union
 }
 
 // FDINOTIFICATION: https://learn.microsoft.com/windows/win32/api/fdi/ns-fdi-fdinotification

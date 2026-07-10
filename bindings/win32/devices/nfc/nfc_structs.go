@@ -68,7 +68,7 @@ type NFC_LLCP_SOCKET_CONNECT_INFO struct {
 	HRemoteDev   uintptr
 	HSocket      uintptr
 	EConnectType NFC_LLCP_SOCKET_CONNECT_TYPE
-	Anonymous    uintptr
+	Anonymous    NFC_LLCP_SOCKET_CONNECT_INFO_Anonymous_e__Union
 }
 
 type NFC_LLCP_SOCKET_ERROR_INFO struct {
@@ -199,7 +199,7 @@ type NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union struct {
 
 type NFC_SE_ROUTING_TABLE_ENTRY struct {
 	ERoutingType SECURE_ELEMENT_ROUTING_TYPE
-	Anonymous    uintptr
+	Anonymous    NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union
 }
 
 type NFC_SE_TECH_ROUTING_INFO struct {
@@ -318,7 +318,7 @@ type SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union struct {
 
 type SECURE_ELEMENT_ROUTING_TABLE_ENTRY struct {
 	ERoutingType SECURE_ELEMENT_ROUTING_TYPE
-	Anonymous    uintptr
+	Anonymous    SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union
 }
 
 type SECURE_ELEMENT_SET_CARD_EMULATION_MODE_INFO struct {

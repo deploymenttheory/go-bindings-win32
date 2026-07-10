@@ -180,7 +180,7 @@ type CRYPTUI_VIEWCERTIFICATE_STRUCTA struct {
 	PCertContext                    *securitycryptography.CERT_CONTEXT
 	RgszPurposes                    *foundation.PSTR
 	CPurposes                       uint32
-	Anonymous                       uintptr
+	Anonymous                       CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union
 	FpCryptProviderDataTrustedUsage foundation.BOOL
 	IdxSigner                       uint32
 	IdxCert                         uint32
@@ -208,7 +208,7 @@ type CRYPTUI_VIEWCERTIFICATE_STRUCTW struct {
 	PCertContext                    *securitycryptography.CERT_CONTEXT
 	RgszPurposes                    *foundation.PSTR
 	CPurposes                       uint32
-	Anonymous                       uintptr
+	Anonymous                       CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union
 	FpCryptProviderDataTrustedUsage foundation.BOOL
 	IdxSigner                       uint32
 	IdxCert                         uint32
@@ -241,7 +241,7 @@ type CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO struct {
 	DwSize                  uint32
 	PwszSigningCertFileName foundation.PWSTR
 	DwPvkChoice             CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION
-	Anonymous               uintptr
+	Anonymous               CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union
 }
 
 // CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT: https://learn.microsoft.com/windows/win32/api/cryptuiapi/ns-cryptuiapi-cryptui_wiz_digital_sign_context
@@ -280,9 +280,9 @@ type CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union struct {
 type CRYPTUI_WIZ_DIGITAL_SIGN_INFO struct {
 	DwSize                 uint32
 	DwSubjectChoice        CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT
-	Anonymous1             uintptr
+	Anonymous1             CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union
 	DwSigningCertChoice    CRYPTUI_WIZ_DIGITAL_SIGN
-	Anonymous2             uintptr
+	Anonymous2             CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union
 	PwszTimestampURL       foundation.PWSTR
 	DwAdditionalCertChoice CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE
 	PSignExtInfo           *CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
@@ -326,7 +326,7 @@ type CRYPTUI_WIZ_EXPORT_INFO struct {
 	DwSize             uint32
 	PwszExportFileName foundation.PWSTR
 	DwSubjectChoice    CRYPTUI_WIZ_EXPORT_SUBJECT
-	Anonymous          uintptr
+	Anonymous          CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union
 	CStores            uint32
 	RghStores          *securitycryptography.HCERTSTORE
 }
@@ -341,7 +341,7 @@ type CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union struct {
 type CRYPTUI_WIZ_IMPORT_SRC_INFO struct {
 	DwSize          uint32
 	DwSubjectChoice CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION
-	Anonymous       uintptr
+	Anonymous       CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union
 	DwFlags         securitycryptography.CRYPT_KEY_FLAGS
 	PwszPassword    foundation.PWSTR
 }

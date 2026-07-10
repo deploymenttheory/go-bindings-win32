@@ -48,7 +48,7 @@ type DRT_DATA struct {
 // DRT_EVENT_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DRT_EVENT_DATA_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [5]uint64
 }
 
 // DRT_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/drt/ns-drt-drt_event_data
@@ -56,7 +56,7 @@ type DRT_EVENT_DATA struct {
 	Type      DRT_EVENT_TYPE
 	Hr        foundation.HRESULT
 	PvContext unsafe.Pointer
-	Anonymous uintptr
+	Anonymous DRT_EVENT_DATA_Anonymous_e__Union
 }
 
 // DRT_REGISTRATION: https://learn.microsoft.com/windows/win32/api/drt/ns-drt-drt_registration
@@ -185,7 +185,7 @@ type PEER_COLLAB_EVENT_DATA_Anonymous_e__Union struct {
 // PEER_COLLAB_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_collab_event_data~r1
 type PEER_COLLAB_EVENT_DATA struct {
 	EventType PEER_COLLAB_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous PEER_COLLAB_EVENT_DATA_Anonymous_e__Union
 }
 
 // PEER_COLLAB_EVENT_REGISTRATION: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_collab_event_registration
@@ -345,7 +345,7 @@ type PEER_GRAPH_EVENT_DATA_Anonymous_e__Union struct {
 // PEER_GRAPH_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_graph_event_data
 type PEER_GRAPH_EVENT_DATA struct {
 	EventType PEER_GRAPH_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous PEER_GRAPH_EVENT_DATA_Anonymous_e__Union
 }
 
 // PEER_GRAPH_EVENT_REGISTRATION: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_graph_event_registration
@@ -377,7 +377,7 @@ type PEER_GROUP_EVENT_DATA_Anonymous_e__Union struct {
 // PEER_GROUP_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_group_event_data~r1
 type PEER_GROUP_EVENT_DATA struct {
 	EventType PEER_GROUP_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous PEER_GROUP_EVENT_DATA_Anonymous_e__Union
 }
 
 // PEER_GROUP_EVENT_REGISTRATION: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_group_event_registration
@@ -592,7 +592,7 @@ type PNRPINFO_V2 struct {
 	SaHint                networkingwinsock.SOCKET_ADDRESS
 	EnNameState           PNRP_REGISTERED_ID_STATE
 	EnExtendedPayloadType PNRP_EXTENDED_PAYLOAD_TYPE
-	Anonymous             uintptr
+	Anonymous             PNRPINFO_V2_Anonymous_e__Union
 }
 
 // PNRP_CLOUD_ID: https://learn.microsoft.com/windows/win32/api/pnrpdef/ns-pnrpdef-pnrp_cloud_id

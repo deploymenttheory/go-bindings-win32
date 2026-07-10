@@ -145,7 +145,7 @@ type COLORSPACE_TRANSFORM_Data_e__Union struct {
 
 type COLORSPACE_TRANSFORM struct {
 	Type COLORSPACE_TRANSFORM_TYPE
-	Data uintptr
+	Data COLORSPACE_TRANSFORM_Data_e__Union
 }
 
 type COLORSPACE_TRANSFORM_1DLUT_CAP struct {
@@ -162,12 +162,12 @@ type COLORSPACE_TRANSFORM_3x4 struct {
 // COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type COLORSPACE_TRANSFORM_DATA_CAP struct {
 	DataType        COLORSPACE_TRANSFORM_DATA_TYPE
-	Anonymous       uintptr
+	Anonymous       COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union
 	NumericRangeMin float32
 	NumericRangeMax float32
 }
@@ -175,11 +175,11 @@ type COLORSPACE_TRANSFORM_DATA_CAP struct {
 // COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type COLORSPACE_TRANSFORM_MATRIX_CAP struct {
-	Anonymous uintptr
+	Anonymous COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union
 	DataCap   COLORSPACE_TRANSFORM_DATA_CAP
 }
 
@@ -266,12 +266,12 @@ type DISPLAYCONFIG_DEVICE_INFO_HEADER struct {
 // DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO struct {
 	Header              DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous           uintptr
+	Anonymous           DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union
 	ColorEncoding       graphicsgdi.DISPLAYCONFIG_COLOR_ENCODING
 	BitsPerColorChannel uint32
 }
@@ -279,12 +279,12 @@ type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO struct {
 // DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2 struct {
 	Header              DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous           uintptr
+	Anonymous           DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union
 	ColorEncoding       graphicsgdi.DISPLAYCONFIG_COLOR_ENCODING
 	BitsPerColorChannel uint32
 	ActiveColorMode     graphicsgdi.DISPLAYCONFIG_ADVANCED_COLOR_MODE
@@ -293,18 +293,18 @@ type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2 struct {
 // DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION struct {
 	Header    DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous uintptr
+	Anonymous DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union
 }
 
 // DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union struct {
-	Data [7]uint64
+	Data [6]uint64
 }
 
 // DISPLAYCONFIG_MODE_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_mode_info
@@ -312,7 +312,7 @@ type DISPLAYCONFIG_MODE_INFO struct {
 	InfoType  DISPLAYCONFIG_MODE_INFO_TYPE
 	Id        uint32
 	AdapterId foundation.LUID
-	Anonymous uintptr
+	Anonymous DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union
 }
 
 // DISPLAYCONFIG_PATH_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_path_info
@@ -325,28 +325,28 @@ type DISPLAYCONFIG_PATH_INFO struct {
 // DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DISPLAYCONFIG_PATH_SOURCE_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_path_source_info
 type DISPLAYCONFIG_PATH_SOURCE_INFO struct {
 	AdapterId   foundation.LUID
 	Id          uint32
-	Anonymous   uintptr
+	Anonymous   DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union
 	StatusFlags uint32
 }
 
 // DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DISPLAYCONFIG_PATH_TARGET_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_path_target_info
 type DISPLAYCONFIG_PATH_TARGET_INFO struct {
 	AdapterId        foundation.LUID
 	Id               uint32
-	Anonymous        uintptr
+	Anonymous        DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union
 	OutputTechnology DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY
 	Rotation         DISPLAYCONFIG_ROTATION
 	Scaling          DISPLAYCONFIG_SCALING
@@ -371,34 +371,34 @@ type DISPLAYCONFIG_SDR_WHITE_LEVEL struct {
 // DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE struct {
 	Header    DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous uintptr
+	Anonymous DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union
 }
 
 // DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DISPLAYCONFIG_SET_HDR_STATE struct {
 	Header    DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous uintptr
+	Anonymous DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union
 }
 
 // DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION struct {
 	Header                        DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous                     uintptr
+	Anonymous                     DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union
 	SpecializationType            win32.GUID
 	SpecializationSubType         win32.GUID
 	SpecializationApplicationName [128]uint16
@@ -407,24 +407,24 @@ type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION struct {
 // DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DISPLAYCONFIG_SET_TARGET_PERSISTENCE: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_set_target_persistence
 type DISPLAYCONFIG_SET_TARGET_PERSISTENCE struct {
 	Header    DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous uintptr
+	Anonymous DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union
 }
 
 // DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DISPLAYCONFIG_SET_WCG_STATE struct {
 	Header    DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous uintptr
+	Anonymous DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union
 }
 
 // DISPLAYCONFIG_SOURCE_DEVICE_NAME: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_source_device_name
@@ -444,13 +444,13 @@ type DISPLAYCONFIG_SOURCE_MODE struct {
 // DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_support_virtual_resolution
 type DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION struct {
 	Header    DISPLAYCONFIG_DEVICE_INFO_HEADER
-	Anonymous uintptr
+	Anonymous DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union
 }
 
 // DISPLAYCONFIG_TARGET_BASE_TYPE: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_target_base_type
@@ -474,12 +474,12 @@ type DISPLAYCONFIG_TARGET_DEVICE_NAME struct {
 // DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_target_device_name_flags
 type DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS struct {
-	Anonymous uintptr
+	Anonymous DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union
 }
 
 // DISPLAYCONFIG_TARGET_MODE: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_target_mode
@@ -498,7 +498,7 @@ type DISPLAYCONFIG_TARGET_PREFERRED_MODE struct {
 // DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DISPLAYCONFIG_VIDEO_SIGNAL_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_video_signal_info
@@ -508,7 +508,7 @@ type DISPLAYCONFIG_VIDEO_SIGNAL_INFO struct {
 	VSyncFreq        DISPLAYCONFIG_RATIONAL
 	ActiveSize       DISPLAYCONFIG_2DREGION
 	TotalSize        DISPLAYCONFIG_2DREGION
-	Anonymous        uintptr
+	Anonymous        DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union
 	ScanLineOrdering DISPLAYCONFIG_SCANLINE_ORDERING
 }
 
@@ -1001,18 +1001,18 @@ type MIPI_DSI_CAPS struct {
 // MIPI_DSI_PACKET_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MIPI_DSI_PACKET_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // MIPI_DSI_PACKET_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MIPI_DSI_PACKET_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type MIPI_DSI_PACKET struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 MIPI_DSI_PACKET_Anonymous1_e__Union
+	Anonymous2 MIPI_DSI_PACKET_Anonymous2_e__Union
 	EccFiller  byte
 	Payload    [8]byte
 }
@@ -1020,12 +1020,12 @@ type MIPI_DSI_PACKET struct {
 // MIPI_DSI_RESET_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MIPI_DSI_RESET_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type MIPI_DSI_RESET struct {
 	Flags     uint32
-	Anonymous uintptr
+	Anonymous MIPI_DSI_RESET_Anonymous_e__Union
 }
 
 type MIPI_DSI_TRANSMISSION_Anonymous_e__Struct struct {
@@ -1036,7 +1036,7 @@ type MIPI_DSI_TRANSMISSION struct {
 	TotalBufferSize          uint32
 	PacketCount              byte
 	FailedPacket             byte
-	Anonymous                uintptr
+	Anonymous                MIPI_DSI_TRANSMISSION_Anonymous_e__Struct
 	ReadWordCount            uint16
 	FinalCommandExtraPayload uint16
 	MipiErrors               uint16
@@ -1057,11 +1057,11 @@ type PALOBJ struct {
 // PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PANEL_BRIGHTNESS_SENSOR_DATA struct {
-	Anonymous              uintptr
+	Anonymous              PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union
 	AlsReading             float32
 	ChromaticityCoordinate CHROMATICITY_COORDINATE
 	ColorTemperature       float32
@@ -1076,23 +1076,23 @@ type PANEL_GET_BACKLIGHT_REDUCTION struct {
 // PANEL_GET_BRIGHTNESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PANEL_GET_BRIGHTNESS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint32
 }
 
 type PANEL_GET_BRIGHTNESS struct {
 	Version   BRIGHTNESS_INTERFACE_VERSION
-	Anonymous uintptr
+	Anonymous PANEL_GET_BRIGHTNESS_Anonymous_e__Union
 }
 
 // PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PANEL_QUERY_BRIGHTNESS_CAPS struct {
 	Version   BRIGHTNESS_INTERFACE_VERSION
-	Anonymous uintptr
+	Anonymous PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union
 }
 
 // PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1103,7 +1103,7 @@ type PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union struct {
 
 type PANEL_QUERY_BRIGHTNESS_RANGES struct {
 	Version   BRIGHTNESS_INTERFACE_VERSION
-	Anonymous uintptr
+	Anonymous PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union
 }
 
 type PANEL_SET_BACKLIGHT_OPTIMIZATION struct {
@@ -1113,22 +1113,22 @@ type PANEL_SET_BACKLIGHT_OPTIMIZATION struct {
 // PANEL_SET_BRIGHTNESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PANEL_SET_BRIGHTNESS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [7]uint32
 }
 
 type PANEL_SET_BRIGHTNESS struct {
 	Version   BRIGHTNESS_INTERFACE_VERSION
-	Anonymous uintptr
+	Anonymous PANEL_SET_BRIGHTNESS_Anonymous_e__Union
 }
 
 // PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PANEL_SET_BRIGHTNESS_STATE struct {
-	Anonymous uintptr
+	Anonymous PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union
 }
 
 // PATHDATA: https://learn.microsoft.com/windows/win32/api/winddi/ns-winddi-pathdata
@@ -1281,7 +1281,7 @@ type VIDEO_BRIGHTNESS_POLICY_Anonymous_e__Struct struct {
 type VIDEO_BRIGHTNESS_POLICY struct {
 	DefaultToBiosPolicy foundation.BOOLEAN
 	LevelCount          byte
-	Level               [1]uintptr
+	Level               [1]VIDEO_BRIGHTNESS_POLICY_Anonymous_e__Struct
 }
 
 // VIDEO_CLUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1293,7 +1293,7 @@ type VIDEO_CLUT_Anonymous_e__Union struct {
 type VIDEO_CLUT struct {
 	NumEntries  uint16
 	FirstEntry  uint16
-	LookupTable [1]uintptr
+	LookupTable [1]VIDEO_CLUT_Anonymous_e__Union
 }
 
 type VIDEO_CLUTDATA struct {

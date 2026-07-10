@@ -105,14 +105,14 @@ type WMDM_PROP_CONFIG struct {
 // WMDM_PROP_DESC_ValidValues_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WMDM_PROP_DESC_ValidValues_e__Union struct {
-	Data [3]uint64
+	Data [9]uint64
 }
 
 // WMDM_PROP_DESC: https://learn.microsoft.com/windows/win32/WMDM/wmdm-prop-desc
 type WMDM_PROP_DESC struct {
 	PwszPropName    foundation.PWSTR
 	ValidValuesForm WMDM_ENUM_PROP_VALID_VALUES_FORM
-	ValidValues     uintptr
+	ValidValues     WMDM_PROP_DESC_ValidValues_e__Union
 }
 
 // WMDM_PROP_VALUES_ENUM: https://learn.microsoft.com/windows/win32/WMDM/wmdm-prop-values-enum

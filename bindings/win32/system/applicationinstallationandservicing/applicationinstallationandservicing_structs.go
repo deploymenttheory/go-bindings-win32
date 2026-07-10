@@ -160,7 +160,7 @@ type DELTA_INPUT_Anonymous_e__Union struct {
 }
 
 type DELTA_INPUT struct {
-	Anonymous uintptr
+	Anonymous DELTA_INPUT_Anonymous_e__Union
 	USize     uintptr
 	Editable  foundation.BOOL
 }
@@ -217,7 +217,7 @@ type PATCH_INTERLEAVE_MAP_Anonymous_e__Struct struct {
 
 type PATCH_INTERLEAVE_MAP struct {
 	CountRanges uint32
-	Range       [1]uintptr
+	Range       [1]PATCH_INTERLEAVE_MAP_Anonymous_e__Struct
 }
 
 // PATCH_OLD_FILE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -228,7 +228,7 @@ type PATCH_OLD_FILE_INFO_Anonymous_e__Union struct {
 
 type PATCH_OLD_FILE_INFO struct {
 	SizeOfThisStruct uint32
-	Anonymous        uintptr
+	Anonymous        PATCH_OLD_FILE_INFO_Anonymous_e__Union
 	IgnoreRangeCount uint32
 	IgnoreRangeArray *PATCH_IGNORE_RANGE
 	RetainRangeCount uint32
@@ -310,7 +310,7 @@ type PM_ENUM_FILTER_FilterParameter_e__Union struct {
 
 type PM_ENUM_FILTER struct {
 	FilterType      int32
-	FilterParameter uintptr
+	FilterParameter PM_ENUM_FILTER_FilterParameter_e__Union
 }
 
 type PM_EXTENSIONCONSUMER struct {

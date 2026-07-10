@@ -24,7 +24,7 @@ type LDAP_ld_sb_e__Struct struct {
 
 // LDAP: https://learn.microsoft.com/windows/win32/api/winldap/ns-winldap-ldap
 type LDAP struct {
-	Ld_sb                   uintptr
+	Ld_sb                   LDAP_ld_sb_e__Struct
 	Ld_host                 foundation.PSTR
 	Ld_version              uint32
 	Ld_lberoptions          byte
@@ -118,7 +118,7 @@ type LDAPModA_mod_vals_e__Union struct {
 type LDAPModA struct {
 	Mod_op   uint32
 	Mod_type foundation.PSTR
-	Mod_vals uintptr
+	Mod_vals LDAPModA_mod_vals_e__Union
 }
 
 // LDAPModW_mod_vals_e__Union is a C union; the raw tier exposes its correctly sized
@@ -131,7 +131,7 @@ type LDAPModW_mod_vals_e__Union struct {
 type LDAPModW struct {
 	Mod_op   uint32
 	Mod_type foundation.PWSTR
-	Mod_vals uintptr
+	Mod_vals LDAPModW_mod_vals_e__Union
 }
 
 // LDAPSortKeyA: https://learn.microsoft.com/windows/win32/api/winldap/ns-winldap-ldapsortkeya

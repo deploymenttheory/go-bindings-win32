@@ -643,7 +643,7 @@ type PROJECTION_INFO_Anonymous_e__Union struct {
 // PROJECTION_INFO: https://learn.microsoft.com/windows/win32/api/mprapi/ns-mprapi-projection_info
 type PROJECTION_INFO struct {
 	ProjectionInfoType byte
-	Anonymous          uintptr
+	Anonymous          PROJECTION_INFO_Anonymous_e__Union
 }
 
 // PROJECTION_INFO2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -655,7 +655,7 @@ type PROJECTION_INFO2_Anonymous_e__Union struct {
 // PROJECTION_INFO2: https://learn.microsoft.com/windows/win32/api/mprapi/ns-mprapi-projection_info2
 type PROJECTION_INFO2 struct {
 	ProjectionInfoType byte
-	Anonymous          uintptr
+	Anonymous          PROJECTION_INFO2_Anonymous_e__Union
 }
 
 type RASAMBA struct {
@@ -1083,12 +1083,12 @@ type RASSUBENTRYW struct {
 // RASTUNNELENDPOINT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RASTUNNELENDPOINT_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 type RASTUNNELENDPOINT struct {
 	DwType    uint32
-	Anonymous uintptr
+	Anonymous RASTUNNELENDPOINT_Anonymous_e__Union
 }
 
 type RASUPDATECONN struct {
@@ -1287,14 +1287,14 @@ type RAS_PORT_2 struct {
 // RAS_PROJECTION_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RAS_PROJECTION_INFO_Anonymous_e__Union struct {
-	Data [14]uint64
+	Data [25]uint32
 }
 
 // RAS_PROJECTION_INFO: https://learn.microsoft.com/windows/win32/api/ras/ns-ras-ras_projection_info
 type RAS_PROJECTION_INFO struct {
 	Version   RASAPIVERSION
 	Type      RASPROJECTION_INFO_TYPE
-	Anonymous uintptr
+	Anonymous RAS_PROJECTION_INFO_Anonymous_e__Union
 }
 
 // RAS_SECURITY_INFO: https://learn.microsoft.com/windows/win32/api/rasshost/ns-rasshost-ras_security_info
@@ -1410,7 +1410,7 @@ type RTM_DEST_INFO struct {
 	LastChanged    foundation.FILETIME
 	BelongsToViews uint32
 	NumberOfViews  uint32
-	ViewInfo       [1]uintptr
+	ViewInfo       [1]RTM_DEST_INFO_Anonymous_e__Struct
 }
 
 // RTM_ENTITY_EXPORT_METHODS: https://learn.microsoft.com/windows/win32/api/rtmv2/ns-rtmv2-rtm_entity_export_methods
@@ -1427,7 +1427,7 @@ type RTM_ENTITY_ID_Anonymous_e__Union struct {
 
 // RTM_ENTITY_ID: https://learn.microsoft.com/windows/win32/api/rtmv2/ns-rtmv2-rtm_entity_id
 type RTM_ENTITY_ID struct {
-	Anonymous uintptr
+	Anonymous RTM_ENTITY_ID_Anonymous_e__Union
 }
 
 // RTM_ENTITY_INFO: https://learn.microsoft.com/windows/win32/api/rtmv2/ns-rtmv2-rtm_entity_info
@@ -1539,10 +1539,10 @@ type SSTP_CONFIG_PARAMS struct {
 // VPN_TS_IP_ADDRESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type VPN_TS_IP_ADDRESS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 type VPN_TS_IP_ADDRESS struct {
 	Type      uint16
-	Anonymous uintptr
+	Anonymous VPN_TS_IP_ADDRESS_Anonymous_e__Union
 }

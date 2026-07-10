@@ -11186,7 +11186,7 @@ func (self ISectionList) GetNumberOfSections(pCount *uint16) error {
 }
 
 // GetSectionData wraps the raw GetSectionData call.
-func (self ISectionList) GetSectionData(sectionNumber uint16, pdwRawPacketLength *uint32, ppSection *unsafe.Pointer) error {
+func (self ISectionList) GetSectionData(sectionNumber uint16, pdwRawPacketLength *uint32, ppSection **mediadirectshowtv.SECTION) error {
 	return win32.HRESULTError(int32(self.Raw.GetSectionData(sectionNumber, pdwRawPacketLength, ppSection)))
 }
 

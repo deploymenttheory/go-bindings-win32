@@ -62,7 +62,7 @@ type IMAGE_COR_ILMETHOD_FAT struct {
 // IMAGE_COR_ILMETHOD_SECT_EH is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_COR_ILMETHOD_SECT_EH struct {
-	Data [5]uint64
+	Data [7]uint32
 }
 
 // IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -77,7 +77,7 @@ type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT struct {
 	TryLength     uint32
 	HandlerOffset uint32
 	HandlerLength uint32
-	Anonymous     uintptr
+	Anonymous     IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union
 }
 
 // IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -89,7 +89,7 @@ type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union struct {
 type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL struct {
 	Bitfield1 uint32
 	Bitfield2 uint32
-	Anonymous uintptr
+	Anonymous IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union
 }
 
 type IMAGE_COR_ILMETHOD_SECT_EH_FAT struct {

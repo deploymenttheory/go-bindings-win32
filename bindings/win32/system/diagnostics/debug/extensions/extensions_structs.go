@@ -225,7 +225,7 @@ type DEBUG_DRIVER_OBJECT_INFO struct {
 	DriverStart      uint64
 	DriverExtension  uint64
 	DeviceObject     uint64
-	DriverName       uintptr
+	DriverName       DEBUG_DRIVER_OBJECT_INFO_DriverName_e__Struct
 }
 
 type DEBUG_EVENT_CONTEXT struct {
@@ -374,7 +374,7 @@ type DEBUG_POOLTAG_DESCRIPTION struct {
 // DEBUG_POOL_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DEBUG_POOL_DATA_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DEBUG_POOL_DATA struct {
@@ -385,7 +385,7 @@ type DEBUG_POOL_DATA struct {
 	Size               uint32
 	PoolTag            uint32
 	ProcessBilled      uint64
-	Anonymous          uintptr
+	Anonymous          DEBUG_POOL_DATA_Anonymous_e__Union
 	Reserved2          [4]uint64
 	PoolTagDescription [64]foundation.CHAR
 }
@@ -598,7 +598,7 @@ type DEBUG_VALUE_Anonymous_e__Union struct {
 }
 
 type DEBUG_VALUE struct {
-	Anonymous      uintptr
+	Anonymous      DEBUG_VALUE_Anonymous_e__Union
 	TailOfRawBytes uint32
 	Type           uint32
 }
@@ -644,7 +644,7 @@ type EXT_CAB_XML_DATA struct {
 	SizeOfStruct uint32
 	XmlObjectTag foundation.PWSTR
 	NumSubTags   uint32
-	SubTags      [1]uintptr
+	SubTags      [1]EXT_CAB_XML_DATA_SUBTAGS
 }
 
 type EXT_FIND_FILE struct {
@@ -718,11 +718,11 @@ type FIELD_INFO struct {
 	Size        uint32
 	FOptions    uint32
 	Address     uint64
-	Anonymous   uintptr
+	Anonymous   FIELD_INFO_Anonymous_e__Union
 	TypeId      uint32
 	FieldOffset uint32
 	BufferSize  uint32
-	BitField    uintptr
+	BitField    FIELD_INFO_BitField
 	Bitfield    uint32
 }
 
@@ -774,7 +774,7 @@ type GET_TEB_ADDRESS struct {
 // INLINE_FRAME_CONTEXT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type INLINE_FRAME_CONTEXT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type IOSPACE struct {
@@ -1133,7 +1133,7 @@ type OS_INFO struct {
 	ProductType       uint32
 	Suite             uint32
 	Revision          uint32
-	S                 uintptr
+	S                 OS_INFO_s_e__Struct
 	SrvPackNumber     uint32
 	ServicePackBuild  uint32
 	Architecture      uint32
@@ -1157,10 +1157,10 @@ type OS_INFO_v1_s_e__Struct struct {
 
 type OS_INFO_v1 struct {
 	Type              OS_TYPE
-	Anonymous         uintptr
+	Anonymous         OS_INFO_v1_Anonymous_e__Union
 	ProductType       uint32
 	Suite             uint32
-	S                 uintptr
+	S                 OS_INFO_v1_s_e__Struct
 	SrvPackNumber     uint32
 	Language          [30]foundation.CHAR
 	OsString          [64]foundation.CHAR
@@ -1200,7 +1200,7 @@ type POINTER_SEARCH_PHYSICAL struct {
 // POOL_HEADER_SIZE_64 is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type POOL_HEADER_SIZE_64 struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PROCESSORINFO struct {
@@ -1294,7 +1294,7 @@ type SYM_DUMP_PARAM struct {
 	Options         uint32
 	Addr            uint64
 	ListLink        *FIELD_INFO
-	Anonymous       uintptr
+	Anonymous       SYM_DUMP_PARAM_Anonymous_e__Union
 	CallbackRoutine PSYM_DUMP_FIELD_CALLBACK
 	NFields         uint32
 	Fields          *FIELD_INFO
@@ -1315,7 +1315,7 @@ type ScriptDebugEventInformation struct {
 	DebugEvent    ScriptDebugEvent
 	EventPosition ScriptDebugPosition
 	EventSpanEnd  ScriptDebugPosition
-	U             uintptr
+	U             ScriptDebugEventInformation_u_e__Union
 }
 
 type ScriptDebugPosition struct {

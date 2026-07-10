@@ -39,13 +39,13 @@ type CF_CALLBACK_INFO struct {
 // CF_CALLBACK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CF_CALLBACK_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [7]uint64
 }
 
 // CF_CALLBACK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/cfapi/ns-cfapi-cf_callback_parameters
 type CF_CALLBACK_PARAMETERS struct {
 	ParamSize uint32
-	Anonymous uintptr
+	Anonymous CF_CALLBACK_PARAMETERS_Anonymous_e__Union
 }
 
 // CF_CALLBACK_REGISTRATION: https://learn.microsoft.com/windows/win32/api/cfapi/ns-cfapi-cf_callback_registration
@@ -86,13 +86,13 @@ type CF_OPERATION_INFO struct {
 // CF_OPERATION_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CF_OPERATION_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [5]uint64
 }
 
 // CF_OPERATION_PARAMETERS: https://learn.microsoft.com/windows/win32/api/cfapi/ns-cfapi-cf_operation_parameters
 type CF_OPERATION_PARAMETERS struct {
 	ParamSize uint32
-	Anonymous uintptr
+	Anonymous CF_OPERATION_PARAMETERS_Anonymous_e__Union
 }
 
 // CF_PLACEHOLDER_BASIC_INFO: https://learn.microsoft.com/windows/win32/api/cfapi/ns-cfapi-cf_placeholder_basic_info

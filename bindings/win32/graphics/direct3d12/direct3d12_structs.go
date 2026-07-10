@@ -65,7 +65,7 @@ type D3D12_BARRIER_GROUP_Anonymous_e__Union struct {
 type D3D12_BARRIER_GROUP struct {
 	Type        D3D12_BARRIER_TYPE
 	NumBarriers uint32
-	Anonymous   uintptr
+	Anonymous   D3D12_BARRIER_GROUP_Anonymous_e__Union
 }
 
 // D3D12_BARRIER_SUBRESOURCE_RANGE: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_barrier_subresource_range
@@ -175,7 +175,7 @@ type D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS struct {
 	Flags       D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAGS
 	NumDescs    uint32
 	DescsLayout D3D12_ELEMENTS_LAYOUT
-	Anonymous   uintptr
+	Anonymous   D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_Anonymous_e__Union
 }
 
 // D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_TOOLS_VISUALIZATION_HEADER: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_build_raytracing_acceleration_structure_tools_visualization_header
@@ -199,7 +199,7 @@ type D3D12_CLEAR_VALUE_Anonymous_e__Union struct {
 // D3D12_CLEAR_VALUE: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_clear_value
 type D3D12_CLEAR_VALUE struct {
 	Format    graphicsdxgicommon.DXGI_FORMAT
-	Anonymous uintptr
+	Anonymous D3D12_CLEAR_VALUE_Anonymous_e__Union
 }
 
 type D3D12_COALESCING_LAUNCH_OVERRIDES struct {
@@ -399,7 +399,7 @@ type D3D12_DEPTH_STENCIL_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D12_DSV_DIMENSION
 	Flags         D3D12_DSV_FLAGS
-	Anonymous     uintptr
+	Anonymous     D3D12_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D12_DESCRIPTOR_HEAP_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_descriptor_heap_desc
@@ -485,7 +485,7 @@ type D3D12_DISPATCH_GRAPH_DESC_Anonymous_e__Union struct {
 
 type D3D12_DISPATCH_GRAPH_DESC struct {
 	Mode      D3D12_DISPATCH_MODE
-	Anonymous uintptr
+	Anonymous D3D12_DISPATCH_GRAPH_DESC_Anonymous_e__Union
 }
 
 type D3D12_DISPATCH_MESH_ARGUMENTS struct {
@@ -1101,13 +1101,13 @@ type D3D12_INDEX_BUFFER_VIEW struct {
 // D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint32
 }
 
 // D3D12_INDIRECT_ARGUMENT_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_indirect_argument_desc
 type D3D12_INDIRECT_ARGUMENT_DESC struct {
 	Type      D3D12_INDIRECT_ARGUMENT_TYPE
-	Anonymous uintptr
+	Anonymous D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union
 }
 
 // D3D12_INFO_QUEUE_FILTER: https://learn.microsoft.com/windows/win32/api/d3d12sdklayers/ns-d3d12sdklayers-d3d12_info_queue_filter
@@ -1218,7 +1218,7 @@ type D3D12_NODE_Anonymous_e__Union struct {
 
 type D3D12_NODE struct {
 	NodeType  D3D12_NODE_TYPE
-	Anonymous uintptr
+	Anonymous D3D12_NODE_Anonymous_e__Union
 }
 
 type D3D12_NODE_CPU_INPUT struct {
@@ -1443,7 +1443,7 @@ type D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC_A
 // D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_raytracing_acceleration_structure_postbuild_info_serialization_desc
 type D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC struct {
 	SerializedSizeInBytes uint64
-	Anonymous             uintptr
+	Anonymous             D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC_Anonymous_e__Union
 }
 
 // D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TOOLS_VISUALIZATION_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_raytracing_acceleration_structure_postbuild_info_tools_visualization_desc
@@ -1479,7 +1479,7 @@ type D3D12_RAYTRACING_GEOMETRY_DESC_Anonymous_e__Union struct {
 type D3D12_RAYTRACING_GEOMETRY_DESC struct {
 	Type      D3D12_RAYTRACING_GEOMETRY_TYPE
 	Flags     D3D12_RAYTRACING_GEOMETRY_FLAGS
-	Anonymous uintptr
+	Anonymous D3D12_RAYTRACING_GEOMETRY_DESC_Anonymous_e__Union
 }
 
 type D3D12_RAYTRACING_GEOMETRY_OMM_LINKAGE_DESC struct {
@@ -1575,13 +1575,13 @@ type D3D12_REGISTER_TRIM_NOTIFICATION struct {
 // D3D12_RENDER_PASS_BEGINNING_ACCESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D12_RENDER_PASS_BEGINNING_ACCESS_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [5]uint32
 }
 
 // D3D12_RENDER_PASS_BEGINNING_ACCESS: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_render_pass_beginning_access
 type D3D12_RENDER_PASS_BEGINNING_ACCESS struct {
 	Type      D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE
-	Anonymous uintptr
+	Anonymous D3D12_RENDER_PASS_BEGINNING_ACCESS_Anonymous_e__Union
 }
 
 // D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_render_pass_beginning_access_clear_parameters
@@ -1612,7 +1612,7 @@ type D3D12_RENDER_PASS_ENDING_ACCESS_Anonymous_e__Union struct {
 // D3D12_RENDER_PASS_ENDING_ACCESS: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_render_pass_ending_access
 type D3D12_RENDER_PASS_ENDING_ACCESS struct {
 	Type      D3D12_RENDER_PASS_ENDING_ACCESS_TYPE
-	Anonymous uintptr
+	Anonymous D3D12_RENDER_PASS_ENDING_ACCESS_Anonymous_e__Union
 }
 
 type D3D12_RENDER_PASS_ENDING_ACCESS_PRESERVE_LOCAL_PARAMETERS struct {
@@ -1671,7 +1671,7 @@ type D3D12_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union struct {
 type D3D12_RENDER_TARGET_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D12_RTV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D12_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D12_RESOURCE_ALIASING_BARRIER: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_resource_aliasing_barrier
@@ -1703,7 +1703,7 @@ type D3D12_RESOURCE_BARRIER_Anonymous_e__Union struct {
 type D3D12_RESOURCE_BARRIER struct {
 	Type      D3D12_RESOURCE_BARRIER_TYPE
 	Flags     D3D12_RESOURCE_BARRIER_FLAGS
-	Anonymous uintptr
+	Anonymous D3D12_RESOURCE_BARRIER_Anonymous_e__Union
 }
 
 // D3D12_RESOURCE_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_resource_desc
@@ -1789,7 +1789,7 @@ type D3D12_ROOT_PARAMETER_Anonymous_e__Union struct {
 // D3D12_ROOT_PARAMETER: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_root_parameter
 type D3D12_ROOT_PARAMETER struct {
 	ParameterType    D3D12_ROOT_PARAMETER_TYPE
-	Anonymous        uintptr
+	Anonymous        D3D12_ROOT_PARAMETER_Anonymous_e__Union
 	ShaderVisibility D3D12_SHADER_VISIBILITY
 }
 
@@ -1802,7 +1802,7 @@ type D3D12_ROOT_PARAMETER1_Anonymous_e__Union struct {
 // D3D12_ROOT_PARAMETER1: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_root_parameter1
 type D3D12_ROOT_PARAMETER1 struct {
 	ParameterType    D3D12_ROOT_PARAMETER_TYPE
-	Anonymous        uintptr
+	Anonymous        D3D12_ROOT_PARAMETER1_Anonymous_e__Union
 	ShaderVisibility D3D12_SHADER_VISIBILITY
 }
 
@@ -1866,7 +1866,7 @@ type D3D12_SAMPLER_DESC2 struct {
 	MipLODBias     float32
 	MaxAnisotropy  uint32
 	ComparisonFunc D3D12_COMPARISON_FUNC
-	Anonymous      uintptr
+	Anonymous      D3D12_SAMPLER_DESC2_Anonymous_e__Union
 	MinLOD         float32
 	MaxLOD         float32
 	Flags          D3D12_SAMPLER_FLAGS
@@ -1906,7 +1906,7 @@ type D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER1 struct {
 	DriverMatchingIdentifier             D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER
 	SerializedSizeInBytesIncludingHeader uint64
 	DeserializedSizeInBytes              uint64
-	Anonymous                            uintptr
+	Anonymous                            D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER1_Anonymous_e__Union
 	HeaderPostambleType                  D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER_POSTAMBLE_TYPE
 }
 
@@ -1927,7 +1927,7 @@ type D3D12_SET_PROGRAM_DESC_Anonymous_e__Union struct {
 
 type D3D12_SET_PROGRAM_DESC struct {
 	Type      D3D12_PROGRAM_TYPE
-	Anonymous uintptr
+	Anonymous D3D12_SET_PROGRAM_DESC_Anonymous_e__Union
 }
 
 type D3D12_SET_RAYTRACING_PIPELINE_DESC struct {
@@ -2032,7 +2032,7 @@ type D3D12_SHADER_NODE_Anonymous_e__Union struct {
 type D3D12_SHADER_NODE struct {
 	Shader        foundation.PWSTR
 	OverridesType D3D12_NODE_OVERRIDES_TYPE
-	Anonymous     uintptr
+	Anonymous     D3D12_SHADER_NODE_Anonymous_e__Union
 }
 
 // D3D12_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2046,7 +2046,7 @@ type D3D12_SHADER_RESOURCE_VIEW_DESC struct {
 	Format                  graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension           D3D12_SRV_DIMENSION
 	Shader4ComponentMapping uint32
-	Anonymous               uintptr
+	Anonymous               D3D12_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D12_SHADER_TYPE_DESC: https://learn.microsoft.com/windows/win32/api/d3d12shader/ns-d3d12shader-d3d12_shader_type_desc
@@ -2427,7 +2427,7 @@ type D3D12_TEXTURE_COPY_LOCATION_Anonymous_e__Union struct {
 type D3D12_TEXTURE_COPY_LOCATION struct {
 	PResource *ID3D12Resource
 	Type      D3D12_TEXTURE_COPY_TYPE
-	Anonymous uintptr
+	Anonymous D3D12_TEXTURE_COPY_LOCATION_Anonymous_e__Union
 }
 
 type D3D12_THREAD_LAUNCH_OVERRIDES struct {
@@ -2479,7 +2479,7 @@ type D3D12_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union struct {
 type D3D12_UNORDERED_ACCESS_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D12_UAV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D12_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2491,7 +2491,7 @@ type D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union struct {
 // D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_versioned_device_removed_extended_data
 type D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA struct {
 	Version   D3D12_DRED_VERSION
-	Anonymous uintptr
+	Anonymous D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union
 }
 
 // D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2503,7 +2503,7 @@ type D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union struct {
 // D3D12_VERSIONED_ROOT_SIGNATURE_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_versioned_root_signature_desc
 type D3D12_VERSIONED_ROOT_SIGNATURE_DESC struct {
 	Version   D3D_ROOT_SIGNATURE_VERSION
-	Anonymous uintptr
+	Anonymous D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union
 }
 
 // D3D12_VERSION_NUMBER is a C union; the raw tier exposes its correctly sized

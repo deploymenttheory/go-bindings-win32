@@ -100,17 +100,17 @@ type DDBLTFX struct {
 	DwZBufferHigh            uint32
 	DwZBufferBaseDest        uint32
 	DwZDestConstBitDepth     uint32
-	Anonymous1               uintptr
+	Anonymous1               DDBLTFX_Anonymous1_e__Union
 	DwZSrcConstBitDepth      uint32
-	Anonymous2               uintptr
+	Anonymous2               DDBLTFX_Anonymous2_e__Union
 	DwAlphaEdgeBlendBitDepth uint32
 	DwAlphaEdgeBlend         uint32
 	DwReserved               uint32
 	DwAlphaDestConstBitDepth uint32
-	Anonymous3               uintptr
+	Anonymous3               DDBLTFX_Anonymous3_e__Union
 	DwAlphaSrcConstBitDepth  uint32
-	Anonymous4               uintptr
-	Anonymous5               uintptr
+	Anonymous4               DDBLTFX_Anonymous4_e__Union
+	Anonymous5               DDBLTFX_Anonymous5_e__Union
 	DdckDestColorkey         DDCOLORKEY
 	DdckSrcColorkey          DDCOLORKEY
 }
@@ -993,7 +993,7 @@ type DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union struct {
 
 type DDHAL_GETDRIVERSTATEDATA struct {
 	DwFlags    uint32
-	Anonymous  uintptr
+	Anonymous  DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union
 	LpdwStates *uint32
 	DwLength   uint32
 	DdRVal     foundation.HRESULT
@@ -1411,7 +1411,7 @@ type DDMORESURFACECAPS_ExtendedHeapRestrictions struct {
 type DDMORESURFACECAPS struct {
 	DwSize                      uint32
 	DdsCapsMore                 DDSCAPSEX
-	DdsExtendedHeapRestrictions [1]uintptr
+	DdsExtendedHeapRestrictions [1]DDMORESURFACECAPS_ExtendedHeapRestrictions
 }
 
 type DDNONLOCALVIDMEMCAPS struct {
@@ -1509,9 +1509,9 @@ type DDOVERLAYFX struct {
 	DwAlphaEdgeBlend         uint32
 	DwReserved               uint32
 	DwAlphaDestConstBitDepth uint32
-	Anonymous1               uintptr
+	Anonymous1               DDOVERLAYFX_Anonymous1_e__Union
 	DwAlphaSrcConstBitDepth  uint32
-	Anonymous2               uintptr
+	Anonymous2               DDOVERLAYFX_Anonymous2_e__Union
 	DckDestColorkey          DDCOLORKEY
 	DckSrcColorkey           DDCOLORKEY
 	DwDDFX                   uint32
@@ -1533,7 +1533,7 @@ type DDPIXELFORMAT_Anonymous2_e__Union struct {
 // DDPIXELFORMAT_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DDPIXELFORMAT_Anonymous3_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DDPIXELFORMAT_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1553,11 +1553,11 @@ type DDPIXELFORMAT struct {
 	DwSize     uint32
 	DwFlags    uint32
 	DwFourCC   uint32
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
-	Anonymous4 uintptr
-	Anonymous5 uintptr
+	Anonymous1 DDPIXELFORMAT_Anonymous1_e__Union
+	Anonymous2 DDPIXELFORMAT_Anonymous2_e__Union
+	Anonymous3 DDPIXELFORMAT_Anonymous3_e__Union
+	Anonymous4 DDPIXELFORMAT_Anonymous4_e__Union
+	Anonymous5 DDPIXELFORMAT_Anonymous5_e__Union
 }
 
 type DDRAWI_DDMOTIONCOMP_INT struct {
@@ -1625,7 +1625,7 @@ type DDRAWI_DDRAWPALETTE_GBL struct {
 	LpDD_lcl         *DDRAWI_DIRECTDRAW_LCL
 	DwProcessId      uint32
 	LpColorTable     *graphicsgdi.PALETTEENTRY
-	Anonymous        uintptr
+	Anonymous        DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union
 	DwDriverReserved uint32
 	DwContentsStamp  uint32
 	DwSaveStamp      uint32
@@ -1679,11 +1679,11 @@ type DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union struct {
 type DDRAWI_DDRAWSURFACE_GBL struct {
 	DwRefCnt      uint32
 	DwGlobalFlags uint32
-	Anonymous1    uintptr
-	Anonymous2    uintptr
-	Anonymous3    uintptr
+	Anonymous1    DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union
+	Anonymous2    DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union
+	Anonymous3    DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union
 	FpVidMem      uintptr
-	Anonymous4    uintptr
+	Anonymous4    DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union
 	WHeight       uint16
 	WWidth        uint16
 	DwUsageCount  uint32
@@ -1699,7 +1699,7 @@ type DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union struct {
 
 type DDRAWI_DDRAWSURFACE_GBL_MORE struct {
 	DwSize                     uint32
-	Anonymous                  uintptr
+	Anonymous                  DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union
 	PPageTable                 *uint32
 	CPages                     uint32
 	DwSavedDCContext           uintptr
@@ -1748,8 +1748,8 @@ type DDRAWI_DDRAWSURFACE_LCL struct {
 	DwProcessId         uint32
 	DwFlags             uint32
 	DdsCaps             DDSCAPS
-	Anonymous1          uintptr
-	Anonymous2          uintptr
+	Anonymous1          DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union
+	Anonymous2          DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union
 	DwModeCreatedIn     uint32
 	DwBackBufferCount   uint32
 	DdckCKDestBlt       DDCOLORKEY
@@ -1967,7 +1967,7 @@ type DDSCAPS2 struct {
 	DwCaps    uint32
 	DwCaps2   uint32
 	DwCaps3   uint32
-	Anonymous uintptr
+	Anonymous DDSCAPS2_Anonymous_e__Union
 }
 
 // DDSCAPSEX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1979,7 +1979,7 @@ type DDSCAPSEX_Anonymous_e__Union struct {
 type DDSCAPSEX struct {
 	DwCaps2   uint32
 	DwCaps3   uint32
-	Anonymous uintptr
+	Anonymous DDSCAPSEX_Anonymous_e__Union
 }
 
 // DDSETSTATEININFO: https://learn.microsoft.com/windows/win32/api/dxmini/ns-dxmini-ddsetstateininfo
@@ -2055,9 +2055,9 @@ type DDSURFACEDESC struct {
 	DwFlags           uint32
 	DwHeight          uint32
 	DwWidth           uint32
-	Anonymous1        uintptr
+	Anonymous1        DDSURFACEDESC_Anonymous1_e__Union
 	DwBackBufferCount uint32
-	Anonymous2        uintptr
+	Anonymous2        DDSURFACEDESC_Anonymous2_e__Union
 	DwAlphaBitDepth   uint32
 	DwReserved        uint32
 	LpSurface         unsafe.Pointer
@@ -2096,7 +2096,7 @@ type DDSURFACEDESC2_Anonymous4_e__Union struct {
 // DDSURFACEDESC2_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DDSURFACEDESC2_Anonymous5_e__Union struct {
-	Data [7]uint64
+	Data [8]uint32
 }
 
 // DDSURFACEDESC2: https://learn.microsoft.com/windows/win32/api/ddraw/ns-ddraw-ddsurfacedesc2
@@ -2105,17 +2105,17 @@ type DDSURFACEDESC2 struct {
 	DwFlags          uint32
 	DwHeight         uint32
 	DwWidth          uint32
-	Anonymous1       uintptr
-	Anonymous2       uintptr
-	Anonymous3       uintptr
+	Anonymous1       DDSURFACEDESC2_Anonymous1_e__Union
+	Anonymous2       DDSURFACEDESC2_Anonymous2_e__Union
+	Anonymous3       DDSURFACEDESC2_Anonymous3_e__Union
 	DwAlphaBitDepth  uint32
 	DwReserved       uint32
 	LpSurface        unsafe.Pointer
-	Anonymous4       uintptr
+	Anonymous4       DDSURFACEDESC2_Anonymous4_e__Union
 	DdckCKDestBlt    DDCOLORKEY
 	DdckCKSrcOverlay DDCOLORKEY
 	DdckCKSrcBlt     DDCOLORKEY
-	Anonymous5       uintptr
+	Anonymous5       DDSURFACEDESC2_Anonymous5_e__Union
 	DdsCaps          DDSCAPS2
 	DwTextureStage   uint32
 }
@@ -2559,7 +2559,7 @@ type DD_GETDRIVERSTATEDATA_Anonymous_e__Union struct {
 // DD_GETDRIVERSTATEDATA: https://learn.microsoft.com/windows/win32/api/ddrawint/ns-ddrawint-dd_getdriverstatedata
 type DD_GETDRIVERSTATEDATA struct {
 	DwFlags    uint32
-	Anonymous  uintptr
+	Anonymous  DD_GETDRIVERSTATEDATA_Anonymous_e__Union
 	LpdwStates *uint32
 	DwLength   uint32
 	DdRVal     foundation.HRESULT
@@ -2800,7 +2800,7 @@ type DD_MORESURFACECAPS_NTExtendedHeapRestrictions struct {
 type DD_MORESURFACECAPS struct {
 	DwSize                      uint32
 	DdsCapsMore                 DDSCAPSEX
-	DdsExtendedHeapRestrictions [1]uintptr
+	DdsExtendedHeapRestrictions [1]DD_MORESURFACECAPS_NTExtendedHeapRestrictions
 }
 
 // DD_MOTIONCOMPCALLBACKS: https://learn.microsoft.com/windows/win32/api/ddrawint/ns-ddrawint-dd_motioncompcallbacks
@@ -3009,10 +3009,10 @@ type DD_SURFACE_GLOBAL_Anonymous3_e__Union struct {
 
 // DD_SURFACE_GLOBAL: https://learn.microsoft.com/windows/win32/api/ddrawint/ns-ddrawint-dd_surface_global
 type DD_SURFACE_GLOBAL struct {
-	Anonymous1      uintptr
-	Anonymous2      uintptr
+	Anonymous1      DD_SURFACE_GLOBAL_Anonymous1_e__Union
+	Anonymous2      DD_SURFACE_GLOBAL_Anonymous2_e__Union
 	FpVidMem        uintptr
-	Anonymous3      uintptr
+	Anonymous3      DD_SURFACE_GLOBAL_Anonymous3_e__Union
 	YHint           int32
 	XHint           int32
 	WHeight         uint32
@@ -3046,8 +3046,8 @@ type DD_SURFACE_LOCAL struct {
 	DwFlags          uint32
 	DdsCaps          DDSCAPS
 	DwReserved1      uintptr
-	Anonymous1       uintptr
-	Anonymous2       uintptr
+	Anonymous1       DD_SURFACE_LOCAL_Anonymous1_e__Union
+	Anonymous2       DD_SURFACE_LOCAL_Anonymous2_e__Union
 	LpSurfMore       *DD_SURFACE_MORE
 	LpAttachList     *DD_ATTACHLIST
 	LpAttachListFrom *DD_ATTACHLIST
@@ -3275,12 +3275,12 @@ type PROCESS_LIST struct {
 // SURFACEALIGNMENT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SURFACEALIGNMENT_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 // SURFACEALIGNMENT: https://learn.microsoft.com/windows/win32/api/dmemmgr/ns-dmemmgr-surfacealignment
 type SURFACEALIGNMENT struct {
-	Anonymous uintptr
+	Anonymous SURFACEALIGNMENT_Anonymous_e__Union
 }
 
 // VIDEOMEMORY_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -3299,10 +3299,10 @@ type VIDEOMEMORY_Anonymous2_e__Union struct {
 type VIDEOMEMORY struct {
 	DwFlags    uint32
 	FpStart    uintptr
-	Anonymous1 uintptr
+	Anonymous1 VIDEOMEMORY_Anonymous1_e__Union
 	DdsCaps    DDSCAPS
 	DdsCapsAlt DDSCAPS
-	Anonymous2 uintptr
+	Anonymous2 VIDEOMEMORY_Anonymous2_e__Union
 }
 
 // VIDEOMEMORYINFO: https://learn.microsoft.com/windows/win32/api/ddrawint/ns-ddrawint-videomemoryinfo
@@ -3336,10 +3336,10 @@ type VIDMEM_Anonymous2_e__Union struct {
 type VIDMEM struct {
 	DwFlags    uint32
 	FpStart    uintptr
-	Anonymous1 uintptr
+	Anonymous1 VIDMEM_Anonymous1_e__Union
 	DdsCaps    DDSCAPS
 	DdsCapsAlt DDSCAPS
-	Anonymous2 uintptr
+	Anonymous2 VIDMEM_Anonymous2_e__Union
 }
 
 type VIDMEMINFO struct {

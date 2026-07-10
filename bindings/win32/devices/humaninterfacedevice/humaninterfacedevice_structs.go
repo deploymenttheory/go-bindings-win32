@@ -27,7 +27,7 @@ type DIACTIONA struct {
 	UAppData     uintptr
 	DwSemantic   uint32
 	DwFlags      uint32
-	Anonymous    uintptr
+	Anonymous    DIACTIONA_Anonymous_e__Union
 	GuidInstance win32.GUID
 	DwObjID      uint32
 	DwHow        uint32
@@ -77,7 +77,7 @@ type DIACTIONW struct {
 	UAppData     uintptr
 	DwSemantic   uint32
 	DwFlags      uint32
-	Anonymous    uintptr
+	Anonymous    DIACTIONW_Anonymous_e__Union
 	GuidInstance win32.GUID
 	DwObjID      uint32
 	DwHow        uint32
@@ -672,7 +672,7 @@ type HIDP_BUTTON_ARRAY_DATA struct {
 // HIDP_BUTTON_CAPS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type HIDP_BUTTON_CAPS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [8]uint16
 }
 
 type HIDP_BUTTON_CAPS struct {
@@ -690,7 +690,7 @@ type HIDP_BUTTON_CAPS struct {
 	ReportCount       uint16
 	Reserved2         uint16
 	Reserved          [9]uint32
-	Anonymous         uintptr
+	Anonymous         HIDP_BUTTON_CAPS_Anonymous_e__Union
 }
 
 type HIDP_CAPS struct {
@@ -721,17 +721,17 @@ type HIDP_DATA_Anonymous_e__Union struct {
 type HIDP_DATA struct {
 	DataIndex uint16
 	Reserved  uint16
-	Anonymous uintptr
+	Anonymous HIDP_DATA_Anonymous_e__Union
 }
 
 // HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type HIDP_KEYBOARD_MODIFIER_STATE struct {
-	Anonymous uintptr
+	Anonymous HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union
 }
 
 type HIDP_UNKNOWN_TOKEN struct {
@@ -743,7 +743,7 @@ type HIDP_UNKNOWN_TOKEN struct {
 // HIDP_VALUE_CAPS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type HIDP_VALUE_CAPS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [8]uint16
 }
 
 type HIDP_VALUE_CAPS struct {
@@ -769,7 +769,7 @@ type HIDP_VALUE_CAPS struct {
 	LogicalMax        int32
 	PhysicalMin       int32
 	PhysicalMax       int32
-	Anonymous         uintptr
+	Anonymous         HIDP_VALUE_CAPS_Anonymous_e__Union
 }
 
 type HID_COLLECTION_INFORMATION struct {
@@ -930,14 +930,14 @@ type MOUSE_ATTRIBUTES struct {
 // MOUSE_INPUT_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MOUSE_INPUT_DATA_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // MOUSE_INPUT_DATA: https://learn.microsoft.com/windows/win32/api/ntddmou/ns-ntddmou-mouse_input_data
 type MOUSE_INPUT_DATA struct {
 	UnitId           uint16
 	Flags            uint16
-	Anonymous        uintptr
+	Anonymous        MOUSE_INPUT_DATA_Anonymous_e__Union
 	RawButtons       uint32
 	LastX            int32
 	LastY            int32

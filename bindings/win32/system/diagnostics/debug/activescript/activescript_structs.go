@@ -63,7 +63,7 @@ type PROFILER_HEAP_OBJECT_Anonymous_e__Union struct {
 
 type PROFILER_HEAP_OBJECT struct {
 	Size              uint32
-	Anonymous         uintptr
+	Anonymous         PROFILER_HEAP_OBJECT_Anonymous_e__Union
 	TypeNameId        uint32
 	Flags             uint32
 	Unused            uint16
@@ -78,7 +78,7 @@ type PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union struct {
 
 type PROFILER_HEAP_OBJECT_OPTIONAL_INFO struct {
 	InfoType  PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE
-	Anonymous uintptr
+	Anonymous PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union
 }
 
 // PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -90,7 +90,7 @@ type PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union struct {
 type PROFILER_HEAP_OBJECT_RELATIONSHIP struct {
 	RelationshipId   uint32
 	RelationshipInfo PROFILER_RELATIONSHIP_INFO
-	Anonymous        uintptr
+	Anonymous        PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union
 }
 
 type PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST struct {

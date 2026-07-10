@@ -32,7 +32,7 @@ type WINBIO_ANTI_SPOOF_POLICY struct {
 // WINBIO_ASYNC_RESULT_Parameters_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINBIO_ASYNC_RESULT_Parameters_e__Union struct {
-	Data [1]uint64
+	Data [40]uint64
 }
 
 // WINBIO_ASYNC_RESULT: https://learn.microsoft.com/windows/win32/api/winbio/ns-winbio-winbio_async_result
@@ -44,7 +44,7 @@ type WINBIO_ASYNC_RESULT struct {
 	ApiStatus      foundation.HRESULT
 	UnitId         uint32
 	UserData       unsafe.Pointer
-	Parameters     uintptr
+	Parameters     WINBIO_ASYNC_RESULT_Parameters_e__Union
 }
 
 // WINBIO_BDB_ANSI_381_HEADER: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-bdb-ansi-381-header
@@ -109,7 +109,7 @@ type WINBIO_BIR_HEADER struct {
 	Purpose             byte
 	DataQuality         int8
 	CreationDate        int64
-	ValidityPeriod      uintptr
+	ValidityPeriod      WINBIO_BIR_HEADER_ValidityPeriod_e__Struct
 	BiometricDataFormat WINBIO_REGISTERED_FORMAT
 	ProductId           WINBIO_REGISTERED_FORMAT
 }
@@ -228,26 +228,26 @@ type WINBIO_ENGINE_INTERFACE struct {
 // WINBIO_EVENT_Parameters_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINBIO_EVENT_Parameters_e__Union struct {
-	Data [1]uint64
+	Data [22]uint32
 }
 
 // WINBIO_EVENT: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-event-constants
 type WINBIO_EVENT struct {
 	Type       uint32
-	Parameters uintptr
+	Parameters WINBIO_EVENT_Parameters_e__Union
 }
 
 // WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union struct {
-	Data [1]uint64
+	Data [7]uint32
 }
 
 // WINBIO_EXTENDED_ENGINE_INFO: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-engine-info
 type WINBIO_EXTENDED_ENGINE_INFO struct {
 	GenericEngineCapabilities uint32
 	Factor                    uint32
-	Specific                  uintptr
+	Specific                  WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union
 }
 
 // WINBIO_EXTENDED_ENROLLMENT_PARAMETERS: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-enrollment-parameters
@@ -259,7 +259,7 @@ type WINBIO_EXTENDED_ENROLLMENT_PARAMETERS struct {
 // WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union struct {
-	Data [1]uint64
+	Data [44]uint64
 }
 
 // WINBIO_EXTENDED_ENROLLMENT_STATUS: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-enrollment-status
@@ -269,33 +269,33 @@ type WINBIO_EXTENDED_ENROLLMENT_STATUS struct {
 	PercentComplete uint32
 	Factor          uint32
 	SubFactor       byte
-	Specific        uintptr
+	Specific        WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union
 }
 
 // WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union struct {
-	Data [1]uint64
+	Data [268]uint32
 }
 
 // WINBIO_EXTENDED_SENSOR_INFO: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-sensor-info
 type WINBIO_EXTENDED_SENSOR_INFO struct {
 	GenericSensorCapabilities uint32
 	Factor                    uint32
-	Specific                  uintptr
+	Specific                  WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union
 }
 
 // WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // WINBIO_EXTENDED_STORAGE_INFO: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-storage-info
 type WINBIO_EXTENDED_STORAGE_INFO struct {
 	GenericStorageCapabilities uint32
 	Factor                     uint32
-	Specific                   uintptr
+	Specific                   WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union
 }
 
 type WINBIO_EXTENDED_UNIT_STATUS struct {
@@ -375,13 +375,13 @@ type WINBIO_GET_INDICATOR struct {
 // WINBIO_IDENTITY_Value_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINBIO_IDENTITY_Value_e__Union struct {
-	Data [4]uint64
+	Data [18]uint32
 }
 
 // WINBIO_IDENTITY: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-identity
 type WINBIO_IDENTITY struct {
 	Type  uint32
-	Value uintptr
+	Value WINBIO_IDENTITY_Value_e__Union
 }
 
 type WINBIO_NOTIFY_WAKE struct {
@@ -419,14 +419,14 @@ type WINBIO_PRESENCE struct {
 	TrackingId    uint64
 	Ticket        uint64
 	Properties    WINBIO_PRESENCE_PROPERTIES
-	Authorization uintptr
+	Authorization WINBIO_PRESENCE_Authorization_e__Struct
 }
 
 // WINBIO_PRESENCE_PROPERTIES: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-presence-properties
 // WINBIO_PRESENCE_PROPERTIES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINBIO_PRESENCE_PROPERTIES struct {
-	Data [1]uint64
+	Data [87]uint32
 }
 
 type WINBIO_PRIVATE_SENSOR_TYPE_INFO struct {

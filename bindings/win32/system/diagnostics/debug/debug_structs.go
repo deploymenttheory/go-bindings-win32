@@ -27,19 +27,19 @@ type ADDRESS64 struct {
 // AER_BRIDGE_DESCRIPTOR_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type AER_BRIDGE_DESCRIPTOR_FLAGS struct {
-	Data [8]byte
+	Data [2]byte
 }
 
 // AER_ENDPOINT_DESCRIPTOR_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type AER_ENDPOINT_DESCRIPTOR_FLAGS struct {
-	Data [8]byte
+	Data [2]byte
 }
 
 // AER_ROOTPORT_DESCRIPTOR_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type AER_ROOTPORT_DESCRIPTOR_FLAGS struct {
-	Data [8]byte
+	Data [2]byte
 }
 
 // APC_CALLBACK_DATA: https://learn.microsoft.com/windows/win32/api/processthreadsapi/ns-processthreadsapi-apc_callback_data
@@ -68,7 +68,7 @@ type ARM64_NT_CONTEXT_Anonymous_e__Union struct {
 type ARM64_NT_CONTEXT struct {
 	ContextFlags uint32
 	Cpsr         uint32
-	Anonymous    uintptr
+	Anonymous    ARM64_NT_CONTEXT_Anonymous_e__Union
 	Sp           uint64
 	Pc           uint64
 	V            [32]ARM64_NT_NEON128
@@ -132,7 +132,7 @@ type CONTEXT struct {
 	R14                  uint64
 	R15                  uint64
 	Rip                  uint64
-	Anonymous            uintptr
+	Anonymous            CONTEXT_Anonymous_e__Union
 	VectorRegister       [26]M128A
 	VectorControl        uint64
 	DebugControl         uint64
@@ -145,7 +145,7 @@ type CONTEXT struct {
 // CPU_INFORMATION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CPU_INFORMATION struct {
-	Data [1]uint64
+	Data [6]uint32
 }
 
 // CREATE_PROCESS_DEBUG_INFO: https://learn.microsoft.com/windows/win32/api/minwinbase/ns-minwinbase-create_process_debug_info
@@ -185,13 +185,13 @@ type DEBUG_EVENT struct {
 	DwDebugEventCode DEBUG_EVENT_CODE
 	DwProcessId      uint32
 	DwThreadId       uint32
-	U                uintptr
+	U                DEBUG_EVENT_u_e__Union
 }
 
 // DIMM_ADDRESS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DIMM_ADDRESS struct {
-	Data [1]uint64
+	Data [24]byte
 }
 
 // DIMM_ADDR_VALID_BITS is a C union; the raw tier exposes its correctly sized
@@ -227,7 +227,7 @@ type DISPATCHER_CONTEXT struct {
 // DUMP_FILE_ATTRIBUTES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DUMP_FILE_ATTRIBUTES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DUMP_HEADER32_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -257,7 +257,7 @@ type DUMP_HEADER32 struct {
 	KdSecondaryVersion  byte
 	Spare3              [2]byte
 	KdDebuggerDataBlock uint32
-	Anonymous           uintptr
+	Anonymous           DUMP_HEADER32_Anonymous_e__Union
 	ContextRecord       [1200]byte
 	Exception           EXCEPTION_RECORD32
 	Comment             [128]foundation.CHAR
@@ -301,7 +301,7 @@ type DUMP_HEADER64 struct {
 	BugCheckParameter4  uint64
 	VersionUser         [32]foundation.CHAR
 	KdDebuggerDataBlock uint64
-	Anonymous           uintptr
+	Anonymous           DUMP_HEADER64_Anonymous_e__Union
 	ContextRecord       [3000]byte
 	Exception           EXCEPTION_RECORD64
 	DumpType            uint32
@@ -631,12 +631,12 @@ type IMAGEHLP_SYMBOL_SRC struct {
 // IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY struct {
 	BeginAddress uint32
-	Anonymous    uintptr
+	Anonymous    IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
 }
 
 // IMAGE_COFF_SYMBOLS_HEADER: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-image_coff_symbols_header
@@ -663,7 +663,7 @@ type IMAGE_COR20_HEADER struct {
 	MinorRuntimeVersion     uint16
 	MetaData                IMAGE_DATA_DIRECTORY
 	Flags                   uint32
-	Anonymous               uintptr
+	Anonymous               IMAGE_COR20_HEADER_Anonymous_e__Union
 	Resources               IMAGE_DATA_DIRECTORY
 	StrongNameSignature     IMAGE_DATA_DIRECTORY
 	CodeManagerTable        IMAGE_DATA_DIRECTORY
@@ -848,7 +848,7 @@ type IMAGE_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union struct {
 type IMAGE_RUNTIME_FUNCTION_ENTRY struct {
 	BeginAddress uint32
 	EndAddress   uint32
-	Anonymous    uintptr
+	Anonymous    IMAGE_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
 }
 
 // IMAGE_SECTION_HEADER_Misc_e__Union is a C union; the raw tier exposes its correctly sized
@@ -860,7 +860,7 @@ type IMAGE_SECTION_HEADER_Misc_e__Union struct {
 // IMAGE_SECTION_HEADER: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-image_section_header
 type IMAGE_SECTION_HEADER struct {
 	Name                 [8]byte
-	Misc                 uintptr
+	Misc                 IMAGE_SECTION_HEADER_Misc_e__Union
 	VirtualAddress       uint32
 	SizeOfRawData        uint32
 	PointerToRawData     uint32
@@ -905,21 +905,21 @@ type KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union struct {
 }
 
 type KNONVOLATILE_CONTEXT_POINTERS struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union
+	Anonymous2 KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union
 }
 
 // LDT_ENTRY_HighWord_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type LDT_ENTRY_HighWord_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // LDT_ENTRY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-ldt_entry
 type LDT_ENTRY struct {
 	LimitLow uint16
 	BaseLow  uint16
-	HighWord uintptr
+	HighWord LDT_ENTRY_HighWord_e__Union
 }
 
 // LOADED_IMAGE: https://learn.microsoft.com/windows/win32/api/dbghelp/ns-dbghelp-loaded_image
@@ -1119,6 +1119,33 @@ type MINIDUMP_STRING struct {
 	Buffer [1]uint16
 }
 
+// MINIDUMP_SYSTEM_INFO_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
+// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+type MINIDUMP_SYSTEM_INFO_Anonymous1_e__Union struct {
+	Data [1]uint16
+}
+
+// MINIDUMP_SYSTEM_INFO_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
+// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+type MINIDUMP_SYSTEM_INFO_Anonymous2_e__Union struct {
+	Data [1]uint32
+}
+
+// MINIDUMP_SYSTEM_INFO: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_system_info
+type MINIDUMP_SYSTEM_INFO struct {
+	ProcessorArchitecture systemsysteminformation.PROCESSOR_ARCHITECTURE
+	ProcessorLevel        uint16
+	ProcessorRevision     uint16
+	Anonymous1            MINIDUMP_SYSTEM_INFO_Anonymous1_e__Union
+	MajorVersion          uint32
+	MinorVersion          uint32
+	BuildNumber           uint32
+	PlatformId            VER_PLATFORM
+	CSDVersionRva         uint32
+	Anonymous2            MINIDUMP_SYSTEM_INFO_Anonymous2_e__Union
+	Cpu                   CPU_INFORMATION
+}
+
 type MINIDUMP_SYSTEM_MEMORY_INFO_1 struct {
 	Revision      uint16
 	Flags         uint16
@@ -1226,7 +1253,7 @@ type OUTPUT_DEBUG_STRING_INFO struct {
 // PAGE_OFFLINE_VALID_BITS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PAGE_OFFLINE_VALID_BITS struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type PHYSICAL_MEMORY_DESCRIPTOR32 struct {
@@ -1442,43 +1469,43 @@ type UNWIND_HISTORY_TABLE_ENTRY struct {
 // WAITCHAIN_NODE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WAITCHAIN_NODE_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [34]uint64
 }
 
 // WAITCHAIN_NODE_INFO: https://learn.microsoft.com/windows/win32/api/wct/ns-wct-waitchain_node_info
 type WAITCHAIN_NODE_INFO struct {
 	ObjectType   WCT_OBJECT_TYPE
 	ObjectStatus WCT_OBJECT_STATUS
-	Anonymous    uintptr
+	Anonymous    WAITCHAIN_NODE_INFO_Anonymous_e__Union
 }
 
 // WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union struct {
-	Data [1]uint64
+	Data [24]byte
 }
 
 type WHEA_NOTIFICATION_DESCRIPTOR struct {
 	Type   byte
 	Length byte
 	Flags  WHEA_NOTIFICATION_FLAGS
-	U      uintptr
+	U      WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union
 }
 
 // WHEA_NOTIFICATION_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHEA_NOTIFICATION_FLAGS struct {
-	Data [8]byte
+	Data [2]byte
 }
 
 // WHEA_PCI_SLOT_NUMBER_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHEA_PCI_SLOT_NUMBER_u_e__Union struct {
-	Data [8]byte
+	Data [4]byte
 }
 
 type WHEA_PCI_SLOT_NUMBER struct {
-	U uintptr
+	U WHEA_PCI_SLOT_NUMBER_u_e__Union
 }
 
 // WOW64_CONTEXT: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-wow64_context
@@ -1531,26 +1558,26 @@ type WOW64_FLOATING_SAVE_AREA struct {
 // WOW64_LDT_ENTRY_HighWord_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WOW64_LDT_ENTRY_HighWord_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // WOW64_LDT_ENTRY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-wow64_ldt_entry
 type WOW64_LDT_ENTRY struct {
 	LimitLow uint16
 	BaseLow  uint16
-	HighWord uintptr
+	HighWord WOW64_LDT_ENTRY_HighWord_e__Union
 }
 
 // XPF_MCE_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type XPF_MCE_FLAGS struct {
-	Data [8]byte
+	Data [4]byte
 }
 
 // XPF_MC_BANK_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type XPF_MC_BANK_FLAGS struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type XSAVE_AREA struct {
@@ -1586,14 +1613,14 @@ type XSAVE_FORMAT struct {
 // XSTATE_CONFIGURATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type XSTATE_CONFIGURATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type XSTATE_CONFIGURATION struct {
 	EnabledFeatures                      uint64
 	EnabledVolatileFeatures              uint64
 	Size                                 uint32
-	Anonymous                            uintptr
+	Anonymous                            XSTATE_CONFIGURATION_Anonymous_e__Union
 	Features                             [64]XSTATE_FEATURE
 	EnabledSupervisorFeatures            uint64
 	AlignedFeatures                      uint64

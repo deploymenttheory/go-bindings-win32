@@ -88,7 +88,7 @@ type BIDI_DATA_u_e__Union struct {
 
 type BIDI_DATA struct {
 	DwBidiType uint32
-	U          uintptr
+	U          BIDI_DATA_u_e__Union
 }
 
 type BIDI_REQUEST_CONTAINER struct {
@@ -141,7 +141,7 @@ type BranchOfficeJobData_JobInfo_e__Union struct {
 type BranchOfficeJobData struct {
 	EEventType EBranchOfficeJobEventType
 	JobId      uint32
-	JobInfo    uintptr
+	JobInfo    BranchOfficeJobData_JobInfo_e__Union
 }
 
 type BranchOfficeJobDataContainer struct {
@@ -249,7 +249,7 @@ type CPSUICBPARAM struct {
 	COptItem  uint16
 	Flags     uint16
 	PCurItem  *OPTITEM
-	Anonymous uintptr
+	Anonymous CPSUICBPARAM_Anonymous_e__Union
 	UserData  uintptr
 	Result    uintptr
 }
@@ -319,7 +319,7 @@ type DLGPAGE struct {
 	DlgProc   uiwindowsandmessaging.DLGPROC
 	PTabName  *int8
 	IconID    uintptr
-	Anonymous uintptr
+	Anonymous DLGPAGE_Anonymous_e__Union
 }
 
 type DOCEVENT_CREATEDCPRE struct {
@@ -672,9 +672,9 @@ type EXTPUSH struct {
 	CbSize     uint16
 	Flags      uint16
 	PTitle     *int8
-	Anonymous1 uintptr
+	Anonymous1 EXTPUSH_Anonymous1_e__Union
 	IconID     uintptr
-	Anonymous2 uintptr
+	Anonymous2 EXTPUSH_Anonymous2_e__Union
 	DwReserved [3]uintptr
 }
 
@@ -1191,8 +1191,8 @@ type OPTITEM struct {
 	Flags      uint32
 	UserData   uintptr
 	PName      *int8
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 OPTITEM_Anonymous1_e__Union
+	Anonymous2 OPTITEM_Anonymous2_e__Union
 	POptType   *OPTTYPE
 	HelpIndex  uint32
 	DMPubID    byte
@@ -1505,7 +1505,7 @@ type PRINTER_NOTIFY_INFO struct {
 // PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // PRINTER_NOTIFY_INFO_DATA: https://learn.microsoft.com/windows/win32/printdocs/printer-notify-info-data
@@ -1514,7 +1514,7 @@ type PRINTER_NOTIFY_INFO_DATA struct {
 	Field      uint16
 	Reserved   uint32
 	Id         uint32
-	NotifyData uintptr
+	NotifyData PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union
 }
 
 type PRINTER_NOTIFY_INIT struct {
@@ -1808,7 +1808,7 @@ type PROPSHEETUI_INFO_HEADER struct {
 	PTitle     *int8
 	HWndParent foundation.HWND
 	HInst      foundation.HINSTANCE
-	Anonymous  uintptr
+	Anonymous  PROPSHEETUI_INFO_HEADER_Anonymous_e__Union
 }
 
 // PROVIDOR_INFO_1A: https://learn.microsoft.com/windows/win32/printdocs/providor-info-1
@@ -1867,12 +1867,12 @@ type PrintPropertiesCollection struct {
 // PrintPropertyValue_value_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PrintPropertyValue_value_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 type PrintPropertyValue struct {
 	EPropertyType EPrintPropertyType
-	Value         uintptr
+	Value         PrintPropertyValue_value_e__Union
 }
 
 type PrintSchemaAsyncOperation struct {
@@ -1962,7 +1962,7 @@ type TRANSDATA_uCode_e__Union struct {
 type TRANSDATA struct {
 	UbCodePageID byte
 	UbType       byte
-	UCode        uintptr
+	UCode        TRANSDATA_uCode_e__Union
 }
 
 type UFF_FILEHEADER struct {

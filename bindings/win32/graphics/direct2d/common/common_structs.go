@@ -46,45 +46,45 @@ type D2D_COLOR_F struct {
 // D2D_MATRIX_3X2_F_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D2D_MATRIX_3X2_F_Anonymous_e__Union struct {
-	Data [3]uint64
+	Data [6]uint32
 }
 
 // D2D_MATRIX_3X2_F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_3x2_f
 type D2D_MATRIX_3X2_F struct {
-	Anonymous uintptr
+	Anonymous D2D_MATRIX_3X2_F_Anonymous_e__Union
 }
 
 // D2D_MATRIX_4X3_F_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D2D_MATRIX_4X3_F_Anonymous_e__Union struct {
-	Data [6]uint64
+	Data [12]uint32
 }
 
 // D2D_MATRIX_4X3_F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_4x3_f
 type D2D_MATRIX_4X3_F struct {
-	Anonymous uintptr
+	Anonymous D2D_MATRIX_4X3_F_Anonymous_e__Union
 }
 
 // D2D_MATRIX_4X4_F_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D2D_MATRIX_4X4_F_Anonymous_e__Union struct {
-	Data [8]uint64
+	Data [16]uint32
 }
 
 // D2D_MATRIX_4X4_F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_4x4_f
 type D2D_MATRIX_4X4_F struct {
-	Anonymous uintptr
+	Anonymous D2D_MATRIX_4X4_F_Anonymous_e__Union
 }
 
 // D2D_MATRIX_5X4_F_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D2D_MATRIX_5X4_F_Anonymous_e__Union struct {
-	Data [10]uint64
+	Data [20]uint32
 }
 
 // D2D_MATRIX_5X4_F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_5x4_f
 type D2D_MATRIX_5X4_F struct {
-	Anonymous uintptr
+	Anonymous D2D_MATRIX_5X4_F_Anonymous_e__Union
 }
 
 // D2D_POINT_2F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_point_2f

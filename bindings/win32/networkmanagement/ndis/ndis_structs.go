@@ -198,7 +198,7 @@ type NDIS_802_11_TEST_Anonymous_e__Union struct {
 type NDIS_802_11_TEST struct {
 	Length    uint32
 	Type      uint32
-	Anonymous uintptr
+	Anonymous NDIS_802_11_TEST_Anonymous_e__Union
 }
 
 type NDIS_802_11_VARIABLE_IEs struct {
@@ -258,7 +258,7 @@ type NDIS_GUID_Anonymous_e__Union struct {
 
 type NDIS_GUID struct {
 	Guid      win32.GUID
-	Anonymous uintptr
+	Anonymous NDIS_GUID_Anonymous_e__Union
 	Size      uint32
 	Flags     uint32
 }
@@ -330,9 +330,9 @@ type NDIS_IPSEC_OFFLOAD_V1_Supported_e__Struct struct {
 }
 
 type NDIS_IPSEC_OFFLOAD_V1 struct {
-	Supported uintptr
-	IPv4AH    uintptr
-	IPv4ESP   uintptr
+	Supported NDIS_IPSEC_OFFLOAD_V1_Supported_e__Struct
+	IPv4AH    NDIS_IPSEC_OFFLOAD_V1_IPv4AH_e__Struct
+	IPv4ESP   NDIS_IPSEC_OFFLOAD_V1_IPv4ESP_e__Struct
 }
 
 type NDIS_IP_OPER_STATE struct {
@@ -600,10 +600,10 @@ type NDIS_TCP_IP_CHECKSUM_OFFLOAD_IPv6Transmit_e__Struct struct {
 }
 
 type NDIS_TCP_IP_CHECKSUM_OFFLOAD struct {
-	IPv4Transmit uintptr
-	IPv4Receive  uintptr
-	IPv6Transmit uintptr
-	IPv6Receive  uintptr
+	IPv4Transmit NDIS_TCP_IP_CHECKSUM_OFFLOAD_IPv4Transmit_e__Struct
+	IPv4Receive  NDIS_TCP_IP_CHECKSUM_OFFLOAD_IPv4Receive_e__Struct
+	IPv6Transmit NDIS_TCP_IP_CHECKSUM_OFFLOAD_IPv6Transmit_e__Struct
+	IPv6Receive  NDIS_TCP_IP_CHECKSUM_OFFLOAD_IPv6Receive_e__Struct
 }
 
 type NDIS_TCP_LARGE_SEND_OFFLOAD_V1_IPv4_e__Struct struct {
@@ -614,7 +614,7 @@ type NDIS_TCP_LARGE_SEND_OFFLOAD_V1_IPv4_e__Struct struct {
 }
 
 type NDIS_TCP_LARGE_SEND_OFFLOAD_V1 struct {
-	IPv4 uintptr
+	IPv4 NDIS_TCP_LARGE_SEND_OFFLOAD_V1_IPv4_e__Struct
 }
 
 type NDIS_TCP_LARGE_SEND_OFFLOAD_V2_IPv4_e__Struct struct {
@@ -631,8 +631,8 @@ type NDIS_TCP_LARGE_SEND_OFFLOAD_V2_IPv6_e__Struct struct {
 }
 
 type NDIS_TCP_LARGE_SEND_OFFLOAD_V2 struct {
-	IPv4 uintptr
-	IPv6 uintptr
+	IPv4 NDIS_TCP_LARGE_SEND_OFFLOAD_V2_IPv4_e__Struct
+	IPv6 NDIS_TCP_LARGE_SEND_OFFLOAD_V2_IPv6_e__Struct
 }
 
 type NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES struct {
@@ -755,9 +755,9 @@ type NDIS_WMI_IPSEC_OFFLOAD_V1_Supported_e__Struct struct {
 }
 
 type NDIS_WMI_IPSEC_OFFLOAD_V1 struct {
-	Supported uintptr
-	IPv4AH    uintptr
-	IPv4ESP   uintptr
+	Supported NDIS_WMI_IPSEC_OFFLOAD_V1_Supported_e__Struct
+	IPv4AH    NDIS_WMI_IPSEC_OFFLOAD_V1_IPv4AH_e__Struct
+	IPv4ESP   NDIS_WMI_IPSEC_OFFLOAD_V1_IPv4ESP_e__Struct
 }
 
 type NDIS_WMI_METHOD_HEADER struct {
@@ -840,10 +840,10 @@ type NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_IPv6Transmit_e__Struct struct {
 }
 
 type NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD struct {
-	IPv4Transmit uintptr
-	IPv4Receive  uintptr
-	IPv6Transmit uintptr
-	IPv6Receive  uintptr
+	IPv4Transmit NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_IPv4Transmit_e__Struct
+	IPv4Receive  NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_IPv4Receive_e__Struct
+	IPv6Transmit NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_IPv6Transmit_e__Struct
+	IPv6Receive  NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_IPv6Receive_e__Struct
 }
 
 type NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_IPv4_e__Struct struct {
@@ -855,7 +855,7 @@ type NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_IPv4_e__Struct struct {
 }
 
 type NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 struct {
-	IPv4 uintptr
+	IPv4 NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_IPv4_e__Struct
 }
 
 type NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_IPv4_e__Struct struct {
@@ -873,8 +873,8 @@ type NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_IPv6_e__Struct struct {
 }
 
 type NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 struct {
-	IPv4 uintptr
-	IPv6 uintptr
+	IPv4 NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_IPv4_e__Struct
+	IPv6 NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_IPv6_e__Struct
 }
 
 // NDK_ADAPTER_INFO: https://learn.microsoft.com/windows/win32/api/ndkinfo/ns-ndkinfo-ndk_adapter_info

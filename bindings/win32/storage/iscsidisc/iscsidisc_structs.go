@@ -176,7 +176,7 @@ type HYBRID_INFORMATION_Priorities_e__Struct struct {
 	Reserved                byte
 	DirtyThresholdLow       uint32
 	DirtyThresholdHigh      uint32
-	SupportedCommands       uintptr
+	SupportedCommands       HYBRID_INFORMATION_Priorities_e__Struct_SupportedCommands_e__Struct
 	Priority                [1]NVCACHE_PRIORITY_LEVEL_DESCRIPTOR
 }
 
@@ -189,8 +189,8 @@ type HYBRID_INFORMATION struct {
 	CacheTypeDefault   NVCACHE_TYPE
 	FractionBase       uint32
 	CacheSize          uint64
-	Attributes         uintptr
-	Priorities         uintptr
+	Attributes         HYBRID_INFORMATION_Attributes_e__Struct
+	Priorities         HYBRID_INFORMATION_Priorities_e__Struct
 }
 
 type HYBRID_REQUEST_BLOCK struct {
@@ -220,7 +220,7 @@ type IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union struct {
 // IKE_AUTHENTICATION_INFORMATION: https://learn.microsoft.com/windows/win32/api/iscsidsc/ns-iscsidsc-ike_authentication_information
 type IKE_AUTHENTICATION_INFORMATION struct {
 	AuthMethod IKE_AUTHENTICATION_METHOD
-	Anonymous  uintptr
+	Anonymous  IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union
 }
 
 // IKE_AUTHENTICATION_PRESHARED_KEY: https://learn.microsoft.com/windows/win32/api/iscsidsc/ns-iscsidsc-ike_authentication_preshared_key
@@ -597,13 +597,13 @@ type NV_FEATURE_PARAMETER struct {
 // NV_SEP_CACHE_PARAMETER_Flags_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NV_SEP_CACHE_PARAMETER_Flags_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NV_SEP_CACHE_PARAMETER struct {
 	Version                 uint32
 	Size                    uint32
-	Flags                   uintptr
+	Flags                   NV_SEP_CACHE_PARAMETER_Flags_e__Union
 	WriteCacheType          byte
 	WriteCacheTypeEffective byte
 	ParameterReserve1       [3]byte
@@ -841,7 +841,7 @@ type STORAGE_ENDURANCE_INFO_Flags_e__Struct struct {
 type STORAGE_ENDURANCE_INFO struct {
 	ValidFields    uint32
 	GroupId        uint32
-	Flags          uintptr
+	Flags          STORAGE_ENDURANCE_INFO_Flags_e__Struct
 	LifePercentage uint32
 	BytesReadCount [16]byte
 	ByteWriteCount [16]byte
@@ -908,7 +908,7 @@ type STORAGE_FIRMWARE_SLOT_INFO struct {
 	SlotNumber byte
 	ReadOnly   foundation.BOOLEAN
 	Reserved   [6]byte
-	Revision   uintptr
+	Revision   STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union
 }
 
 type STORAGE_FIRMWARE_SLOT_INFO_V2 struct {

@@ -102,11 +102,11 @@ type SERVICE_CONTROL_STATUS_REASON_PARAMSW struct {
 // SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union struct {
-	Data [1]uint64
+	Data [2]uint32
 }
 
 type SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM struct {
-	U uintptr
+	U SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union
 }
 
 // SERVICE_DELAYED_AUTO_START_INFO: https://learn.microsoft.com/windows/win32/api/winsvc/ns-winsvc-service_delayed_auto_start_info

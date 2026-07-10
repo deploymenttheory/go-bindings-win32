@@ -23,7 +23,7 @@ type UI_EVENTPARAMS_Anonymous_e__Union struct {
 // UI_EVENTPARAMS: https://learn.microsoft.com/windows/win32/api/uiribbon/ns-uiribbon-ui_eventparams
 type UI_EVENTPARAMS struct {
 	EventType UI_EVENTTYPE
-	Anonymous uintptr
+	Anonymous UI_EVENTPARAMS_Anonymous_e__Union
 }
 
 // UI_EVENTPARAMS_COMMAND: https://learn.microsoft.com/windows/win32/api/uiribbon/ns-uiribbon-ui_eventparams_command

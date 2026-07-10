@@ -11,25 +11,25 @@ import (
 // FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 type FILTER_AGGREGATE_BASIC_INFORMATION struct {
 	NextEntryOffset uint32
 	Flags           uint32
-	Type            uintptr
+	Type            FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union
 }
 
 // FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union struct {
-	Data [1]uint64
+	Data [5]uint32
 }
 
 type FILTER_AGGREGATE_STANDARD_INFORMATION struct {
 	NextEntryOffset uint32
 	Flags           uint32
-	Type            uintptr
+	Type            FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union
 }
 
 type FILTER_FULL_INFORMATION struct {
@@ -67,13 +67,13 @@ type FILTER_VOLUME_STANDARD_INFORMATION struct {
 // INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union struct {
-	Data [1]uint64
+	Data [8]uint32
 }
 
 type INSTANCE_AGGREGATE_STANDARD_INFORMATION struct {
 	NextEntryOffset uint32
 	Flags           uint32
-	Type            uintptr
+	Type            INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union
 }
 
 type INSTANCE_BASIC_INFORMATION struct {

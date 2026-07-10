@@ -203,7 +203,7 @@ type DESIGNVECTOR struct {
 // DEVMODEA_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DEVMODEA_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 // DEVMODEA_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
@@ -220,7 +220,7 @@ type DEVMODEA struct {
 	DmSize             uint16
 	DmDriverExtra      uint16
 	DmFields           DEVMODE_FIELD_FLAGS
-	Anonymous1         uintptr
+	Anonymous1         DEVMODEA_Anonymous1_e__Union
 	DmColor            DEVMODE_COLOR
 	DmDuplex           DEVMODE_DUPLEX
 	DmYResolution      int16
@@ -231,7 +231,7 @@ type DEVMODEA struct {
 	DmBitsPerPel       uint32
 	DmPelsWidth        uint32
 	DmPelsHeight       uint32
-	Anonymous2         uintptr
+	Anonymous2         DEVMODEA_Anonymous2_e__Union
 	DmDisplayFrequency uint32
 	DmICMMethod        uint32
 	DmICMIntent        uint32
@@ -246,7 +246,7 @@ type DEVMODEA struct {
 // DEVMODEW_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DEVMODEW_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 // DEVMODEW_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
@@ -263,7 +263,7 @@ type DEVMODEW struct {
 	DmSize             uint16
 	DmDriverExtra      uint16
 	DmFields           DEVMODE_FIELD_FLAGS
-	Anonymous1         uintptr
+	Anonymous1         DEVMODEW_Anonymous1_e__Union
 	DmColor            DEVMODE_COLOR
 	DmDuplex           DEVMODE_DUPLEX
 	DmYResolution      int16
@@ -274,7 +274,7 @@ type DEVMODEW struct {
 	DmBitsPerPel       uint32
 	DmPelsWidth        uint32
 	DmPelsHeight       uint32
-	Anonymous2         uintptr
+	Anonymous2         DEVMODEW_Anonymous2_e__Union
 	DmDisplayFrequency uint32
 	DmICMMethod        uint32
 	DmICMIntent        uint32

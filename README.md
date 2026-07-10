@@ -1,75 +1,102 @@
-# Template
+# go-bindings-win32
 
-This repository serves as a **Default Template Repository** according official [GitHub Contributing Guidelines][ProjectSetup] for healthy contributions. It brings you clean default Templates for several areas:
+Idiomatic Go bindings for the **Win32 API**, generated from Microsoft's
+[win32metadata](https://github.com/microsoft/win32metadata). Every function,
+struct, enum, constant, and COM interface in the metadata — hundreds of
+namespaces — surfaced as Go you can actually enjoy calling: Go strings, Go
+errors, Go slices, and typed COM wrappers.
 
-- [Azure DevOps Pull Requests](.azuredevops/PULL_REQUEST_TEMPLATE.md) ([`.azuredevops\PULL_REQUEST_TEMPLATE.md`](`.azuredevops\PULL_REQUEST_TEMPLATE.md`))
-- [Azure Pipelines](.pipelines/pipeline.yml) ([`.pipelines/pipeline.yml`](`.pipelines/pipeline.yml`))
-- [GitHub Workflows](.github/workflows/)
-  - [Super Linter](.github/workflows/linter.yml) ([`.github/workflows/linter.yml`](`.github/workflows/linter.yml`))
-  - [Sample Workflows](.github/workflows/workflow.yml) ([`.github/workflows/workflow.yml`](`.github/workflows/workflow.yml`))
-- [GitHub Pull Requests](.github/PULL_REQUEST_TEMPLATE.md) ([`.github/PULL_REQUEST_TEMPLATE.md`](`.github/PULL_REQUEST_TEMPLATE.md`))
-- [GitHub Issues](.github/ISSUE_TEMPLATE/)
-  - [Feature Requests](.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md) ([`.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md`](`.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md`))
-  - [Bug Reports](.github/ISSUE_TEMPLATE/BUG_REPORT.md) ([`.github/ISSUE_TEMPLATE/BUG_REPORT.md`](`.github/ISSUE_TEMPLATE/BUG_REPORT.md`))
-- [Codeowners](.github/CODEOWNERS) ([`.github/CODEOWNERS`](`.github/CODEOWNERS`)) _adjust usernames once cloned_
-- [Wiki and Documentation](docs/) ([`docs/`](`docs/`))
-- [gitignore](.gitignore) ([`.gitignore`](.gitignore))
-- [gitattributes](.gitattributes) ([`.gitattributes`](.gitattributes))
-- [Changelog](CHANGELOG.md) ([`CHANGELOG.md`](`CHANGELOG.md`))
-- [Code of Conduct](CODE_OF_CONDUCT.md) ([`CODE_OF_CONDUCT.md`](`CODE_OF_CONDUCT.md`))
-- [Contribution](CONTRIBUTING.md) ([`CONTRIBUTING.md`](`CONTRIBUTING.md`))
-- [License](LICENSE) ([`LICENSE`](`LICENSE`)) _adjust projectname once cloned_
-- [Readme](README.md) ([`README.md`](`README.md`))
-- [Security](SECURITY.md) ([`SECURITY.md`](`SECURITY.md`))
+```go
+//go:build windows
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/threading"
+)
 
-## Status
+event, err := threading.CreateEvent(nil, true, false, "my-event") // (HANDLE, error)
+if err != nil {
+	return err
+}
+defer foundation.CloseHANDLE(event) // generated RAII closer
+threading.SetEvent(event)
+```
 
-[![Super Linter](<https://github.com/segraef/Template/actions/workflows/linter.yml/badge.svg>)](<https://github.com/segraef/Template/actions/workflows/linter.yml>)
+## Why
 
-[![Sample Workflow](<https://github.com/segraef/Template/actions/workflows/workflow.yml/badge.svg>)](<https://github.com/segraef/Template/actions/workflows/workflow.yml>)
+`golang.org/x/sys/windows` is hand-curated and covers a small slice of Win32.
+This project generates the **whole** surface from the same metadata Microsoft's
+own C#/Rust projections use — kept honest by a regenerate-and-diff gate and
+live ABI/round-trip tests — so the coverage is broad and the mapping is
+faithful.
 
-## Creating a repository from a template
+## Two layers
 
-You can [generate](https://github.com/segraef/Template/generate) a new repository with the same directory structure and files as an existing repository. More details can be found [here][CreateFromTemplate].
+| Layer | Import | What you get |
+|---|---|---|
+| **Idiomatic** *(use this)* | `opinionated/idiomatic/win32/<namespace>` | Go `string` for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to returns, `Close<Handle>` RAII helpers, COM interfaces as method-bearing wrappers. **Self-contained** — it re-exports every type/constant/pass-through it doesn't improve, so you never import the raw package. |
+| **Raw** | `bindings/win32/<namespace>` | The 1:1 `syscall` surface, for the rare un-adapted signature. |
+| **Runtime** | `bindings/runtime/win32` | Shared helpers: `UTF16Ptr`, `UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. |
 
-## Reporting Issues and Feedback
+Rule of thumb: **import only the idiomatic package and the runtime.**
 
-### Issues and Bugs
+## Install
 
-If you find any bugs, please file an issue in the [GitHub Issues][GitHubIssues] page. Please fill out the provided template with the appropriate information.
+```sh
+go get github.com/deploymenttheory/go-bindings-win32@latest
+```
 
-If you are taking the time to mention a problem, even a seemingly minor one, it is greatly appreciated, and a totally valid contribution to this project. **Thank you!**
+Targets **Windows on amd64 or arm64** (they share Win32's LLP64 layout); the
+one external dependency is `golang.org/x/sys/windows`.
 
-## Feedback
+## Examples
 
-If there is a feature you would like to see in here, please file an issue or feature request in the [GitHub Issues][GitHubIssues] page to provide direct feedback.
+Runnable programs, each with its own README, under [`examples/`](examples):
 
-## Contribution
+- **[`sysinfo`](examples/sysinfo)** — read-only host info (no admin): computer
+  name, user, CPU/memory, OS version. Size-probe strings, self-sized structs,
+  a C union.
+- **[`localaccount`](examples/localaccount)** — the full local user account
+  lifecycle (`NetUserAdd`/`GetInfo`/`Enum`/`Del`); mutation gated behind
+  `-apply` (needs Administrator), safe dry run by default.
 
-If you would like to become an active contributor to this repository or project, please follow the instructions provided in [`CONTRIBUTING.md`][Contributing].
+## Documentation
 
-## Learn More
+- [Getting started](docs/getting-started.md)
+- [Error handling](docs/errors.md) — the four Win32 error domains
+- [Strings, structs, and memory](docs/strings-and-memory.md) — UTF-16,
+  self-sized structs, buffer ownership, handles
+- [Using COM interfaces](docs/com.md)
+- [Implementation plan / architecture](docs/IMPLEMENTATION_PLAN.md) — how the
+  generator works
+- [`CLAUDE.md`](CLAUDE.md) — the as-built generator internals
 
-* [GitHub Documentation][GitHubDocs]
-* [Azure DevOps Documentation][AzureDevOpsDocs]
-* [Microsoft Azure Documentation][MicrosoftAzureDocs]
+## How it's built
 
-<!-- References -->
+A native Go reader parses the committed `Windows.Win32.winmd` (ECMA-335, no
+Clang, no .NET) into an intermediate model, then a template-based emitter
+produces the raw and idiomatic trees. One command clears and re-emits both:
 
-<!-- Local -->
-[ProjectSetup]: <https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions>
-[CreateFromTemplate]: <https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template>
-[GitHubDocs]: <https://docs.github.com/>
-[AzureDevOpsDocs]: <https://docs.microsoft.com/en-us/azure/devops/?view=azure-devops>
-[GitHubIssues]: <https://github.com/segraef/Template/issues>
-[Contributing]: CONTRIBUTING.md
+```sh
+go run ./cmd/generate ingest    # winmd → per-namespace IR
+go run ./cmd/generate bindings  # IR → raw + idiomatic (both self-cleaning)
+```
 
-<!-- External -->
-[Az]: <https://img.shields.io/powershellgallery/v/Az.svg?style=flat-square&label=Az>
-[AzGallery]: <https://www.powershellgallery.com/packages/Az/>
-[PowerShellCore]: <https://github.com/PowerShell/PowerShell/releases/latest>
+Regeneration is byte-deterministic and gated in CI, and a scheduled workflow
+opens a PR when Microsoft ships a new winmd. See
+[`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md) for the full
+pipeline.
 
-<!-- Docs -->
-[MicrosoftAzureDocs]: <https://docs.microsoft.com/en-us/azure/>
-[PowerShellDocs]: <https://docs.microsoft.com/en-us/powershell/>
+## Status & contributing
+
+The generator covers the flat Win32 surface, COM interfaces, and the idiomatic
+layer across all namespaces on amd64/arm64. Constructs that can't be faithfully
+represented (e.g. some packed structs) are deliberately skipped rather than
+emitted wrong; these are tracked in `metadata/diagnostics-baseline.json`.
+
+Generated code (`bindings/`, `opinionated/`) is never hand-edited — fix the
+generator under `internal/` and regenerate. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE).

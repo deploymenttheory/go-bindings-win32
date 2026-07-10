@@ -31,7 +31,7 @@ type HELPER_ATTRIBUTE_Anonymous_e__Union struct {
 type HELPER_ATTRIBUTE struct {
 	PwszName  foundation.PWSTR
 	Type      ATTRIBUTE_TYPE
-	Anonymous uintptr
+	Anonymous HELPER_ATTRIBUTE_Anonymous_e__Union
 }
 
 // HYPOTHESIS: https://learn.microsoft.com/windows/win32/api/ndhelper/ns-ndhelper-hypothesis
@@ -114,5 +114,5 @@ type UiInfo_Anonymous_e__Union struct {
 // UiInfo: https://learn.microsoft.com/windows/win32/api/ndattrib/ns-ndattrib-uiinfo
 type UiInfo struct {
 	Type      UI_INFO_TYPE
-	Anonymous uintptr
+	Anonymous UiInfo_Anonymous_e__Union
 }

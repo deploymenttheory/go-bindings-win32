@@ -12,13 +12,13 @@ type TBS_CONTEXT_PARAMS struct {
 // TBS_CONTEXT_PARAMS2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TBS_CONTEXT_PARAMS2_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // TBS_CONTEXT_PARAMS2: https://learn.microsoft.com/windows/win32/api/tbs/ns-tbs-tbs_context_params2
 type TBS_CONTEXT_PARAMS2 struct {
 	Version   uint32
-	Anonymous uintptr
+	Anonymous TBS_CONTEXT_PARAMS2_Anonymous_e__Union
 }
 
 // TPM_DEVICE_INFO: https://learn.microsoft.com/windows/win32/api/tbs/ns-tbs-tpm_device_info

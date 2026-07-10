@@ -75,7 +75,7 @@ type D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT struct {
 // D3D11_AUTHENTICATED_PROTECTION_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D11_AUTHENTICATED_PROTECTION_FLAGS struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_accessibility_encryption_guid_count_output
@@ -272,8 +272,8 @@ type D3D11_BUFFER_RTV_Anonymous2_e__Union struct {
 
 // D3D11_BUFFER_RTV: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_rtv
 type D3D11_BUFFER_RTV struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 D3D11_BUFFER_RTV_Anonymous1_e__Union
+	Anonymous2 D3D11_BUFFER_RTV_Anonymous2_e__Union
 }
 
 // D3D11_BUFFER_SRV_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -290,8 +290,8 @@ type D3D11_BUFFER_SRV_Anonymous2_e__Union struct {
 
 // D3D11_BUFFER_SRV: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_srv
 type D3D11_BUFFER_SRV struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 D3D11_BUFFER_SRV_Anonymous1_e__Union
+	Anonymous2 D3D11_BUFFER_SRV_Anonymous2_e__Union
 }
 
 // D3D11_BUFFER_UAV: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_uav
@@ -364,7 +364,7 @@ type D3D11_DEPTH_STENCIL_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D11_DSV_DIMENSION
 	Flags         uint32
-	Anonymous     uintptr
+	Anonymous     D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D11_DOMAIN_SHADER_TRACE_DESC: https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_domain_shader_trace_desc
@@ -817,27 +817,27 @@ type D3D11_RENDER_TARGET_BLEND_DESC1 struct {
 // D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [3]uint32
 }
 
 // D3D11_RENDER_TARGET_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_render_target_view_desc
 type D3D11_RENDER_TARGET_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D11_RTV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [4]uint32
 }
 
 // D3D11_RENDER_TARGET_VIEW_DESC1: https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_render_target_view_desc1
 type D3D11_RENDER_TARGET_VIEW_DESC1 struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D11_RTV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union
 }
 
 // D3D11_SAMPLER_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_sampler_desc
@@ -920,27 +920,27 @@ type D3D11_SHADER_INPUT_BIND_DESC struct {
 // D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [4]uint32
 }
 
 // D3D11_SHADER_RESOURCE_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_shader_resource_view_desc
 type D3D11_SHADER_RESOURCE_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension graphicsdirect3d.D3D_SRV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union struct {
-	Data [3]uint64
+	Data [5]uint32
 }
 
 // D3D11_SHADER_RESOURCE_VIEW_DESC1: https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_shader_resource_view_desc1
 type D3D11_SHADER_RESOURCE_VIEW_DESC1 struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension graphicsdirect3d.D3D_SRV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union
 }
 
 // D3D11_SHADER_TRACE_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -953,7 +953,7 @@ type D3D11_SHADER_TRACE_DESC_Anonymous_e__Union struct {
 type D3D11_SHADER_TRACE_DESC struct {
 	Type      D3D11_SHADER_TYPE
 	Flags     uint32
-	Anonymous uintptr
+	Anonymous D3D11_SHADER_TRACE_DESC_Anonymous_e__Union
 }
 
 // D3D11_SHADER_TYPE_DESC: https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_type_desc
@@ -1354,7 +1354,7 @@ type D3D11_TRACE_REGISTER_Anonymous_e__Union struct {
 // D3D11_TRACE_REGISTER: https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_trace_register
 type D3D11_TRACE_REGISTER struct {
 	RegType      D3D11_TRACE_REGISTER_TYPE
-	Anonymous    uintptr
+	Anonymous    D3D11_TRACE_REGISTER_Anonymous_e__Union
 	OperandIndex byte
 	Flags        byte
 }
@@ -1413,7 +1413,7 @@ type D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union struct {
 type D3D11_UNORDERED_ACCESS_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D11_UAV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1426,7 +1426,7 @@ type D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union struct {
 type D3D11_UNORDERED_ACCESS_VIEW_DESC1 struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D11_UAV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union
 }
 
 // D3D11_VERTEX_SHADER_TRACE_DESC: https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_vertex_shader_trace_desc
@@ -1442,7 +1442,7 @@ type D3D11_VIDEO_COLOR_Anonymous_e__Union struct {
 
 // D3D11_VIDEO_COLOR: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_color
 type D3D11_VIDEO_COLOR struct {
-	Anonymous uintptr
+	Anonymous D3D11_VIDEO_COLOR_Anonymous_e__Union
 }
 
 // D3D11_VIDEO_COLOR_RGBA: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_color_rgba
@@ -1570,7 +1570,7 @@ type D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union struct {
 type D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC struct {
 	DecodeProfile win32.GUID
 	ViewDimension D3D11_VDOV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK: https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_video_decoder_sub_sample_mapping_block
@@ -1635,7 +1635,7 @@ type D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union struct {
 type D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC struct {
 	FourCC        uint32
 	ViewDimension D3D11_VPIV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1647,7 +1647,7 @@ type D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union struct {
 // D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_output_view_desc
 type D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC struct {
 	ViewDimension D3D11_VPOV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_rate_conversion_caps

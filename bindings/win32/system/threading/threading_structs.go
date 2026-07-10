@@ -180,14 +180,14 @@ type PROCESS_PROTECTION_LEVEL_INFORMATION struct {
 // REASON_CONTEXT_Reason_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type REASON_CONTEXT_Reason_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // REASON_CONTEXT: https://learn.microsoft.com/windows/win32/api/minwinbase/ns-minwinbase-reason_context
 type REASON_CONTEXT struct {
 	Version uint32
 	Flags   POWER_REQUEST_CONTEXT_FLAGS
-	Reason  uintptr
+	Reason  REASON_CONTEXT_Reason_e__Union
 }
 
 // RTL_USER_PROCESS_PARAMETERS: https://learn.microsoft.com/windows/win32/api/winternl/ns-winternl-rtl_user_process_parameters
@@ -290,7 +290,7 @@ type THREAD_POWER_THROTTLING_STATE struct {
 // TP_CALLBACK_ENVIRON_V3_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TP_CALLBACK_ENVIRON_V3_u_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type TP_CALLBACK_ENVIRON_V3 struct {
@@ -301,7 +301,7 @@ type TP_CALLBACK_ENVIRON_V3 struct {
 	RaceDll                    unsafe.Pointer
 	ActivationContext          uintptr
 	FinalizationCallback       PTP_SIMPLE_CALLBACK
-	U                          uintptr
+	U                          TP_CALLBACK_ENVIRON_V3_u_e__Union
 	CallbackPriority           TP_CALLBACK_PRIORITY
 	Size                       uint32
 }
@@ -322,11 +322,11 @@ type UMS_SCHEDULER_STARTUP_INFO struct {
 // UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // UMS_SYSTEM_THREAD_INFORMATION: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-ums_system_thread_information
 type UMS_SYSTEM_THREAD_INFORMATION struct {
 	UmsVersion uint32
-	Anonymous  uintptr
+	Anonymous  UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union
 }

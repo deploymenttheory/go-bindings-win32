@@ -92,14 +92,14 @@ type MEM_EXTENDED_PARAMETER_Anonymous2_e__Union struct {
 
 // MEM_EXTENDED_PARAMETER: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-mem_extended_parameter
 type MEM_EXTENDED_PARAMETER struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 MEM_EXTENDED_PARAMETER_Anonymous1_e__Struct
+	Anonymous2 MEM_EXTENDED_PARAMETER_Anonymous2_e__Union
 }
 
 // PROCESS_HEAP_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_HEAP_ENTRY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // PROCESS_HEAP_ENTRY: https://learn.microsoft.com/windows/win32/api/minwinbase/ns-minwinbase-process_heap_entry
@@ -109,7 +109,7 @@ type PROCESS_HEAP_ENTRY struct {
 	CbOverhead   byte
 	IRegionIndex byte
 	WFlags       uint16
-	Anonymous    uintptr
+	Anonymous    PROCESS_HEAP_ENTRY_Anonymous_e__Union
 }
 
 type WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY_Flags_e__Struct struct {
@@ -120,7 +120,7 @@ type WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY struct {
 	InitiatorNodeNumber    uint32
 	TargetNodeNumber       uint32
 	DataType               byte
-	Flags                  uintptr
+	Flags                  WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY_Flags_e__Struct
 	MinTransferSizeInBytes uint64
 	EntryValue             uint64
 }
@@ -159,14 +159,14 @@ type WIN32_MEMORY_RANGE_ENTRY struct {
 // WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // WIN32_MEMORY_REGION_INFORMATION: https://learn.microsoft.com/windows/win32/api/memoryapi/ns-memoryapi-win32_memory_region_information
 type WIN32_MEMORY_REGION_INFORMATION struct {
 	AllocationBase    unsafe.Pointer
 	AllocationProtect uint32
-	Anonymous         uintptr
+	Anonymous         WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union
 	RegionSize        uintptr
 	CommitSize        uintptr
 }

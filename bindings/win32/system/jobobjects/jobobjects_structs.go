@@ -64,13 +64,13 @@ type JOBOBJECT_BASIC_UI_RESTRICTIONS struct {
 // JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // JOBOBJECT_CPU_RATE_CONTROL_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_cpu_rate_control_information
 type JOBOBJECT_CPU_RATE_CONTROL_INFORMATION struct {
 	ControlFlags JOB_OBJECT_CPU_RATE_CONTROL
-	Anonymous    uintptr
+	Anonymous    JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union
 }
 
 // JOBOBJECT_END_OF_JOB_TIME_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_end_of_job_time_information
@@ -208,9 +208,9 @@ type JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 struct {
 	PerJobUserTime               int64
 	PerJobUserTimeLimit          int64
 	JobMemory                    uint64
-	Anonymous1                   uintptr
-	Anonymous2                   uintptr
-	Anonymous3                   uintptr
+	Anonymous1                   JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union
+	Anonymous2                   JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union
+	Anonymous3                   JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union
 	JobLowMemoryLimit            uint64
 	IoRateControlTolerance       JOBOBJECT_RATE_CONTROL_TOLERANCE
 	IoRateControlToleranceLimit  JOBOBJECT_RATE_CONTROL_TOLERANCE
@@ -259,9 +259,9 @@ type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 struct {
 	IoReadBytesLimit                uint64
 	IoWriteBytesLimit               uint64
 	PerJobUserTimeLimit             int64
-	Anonymous1                      uintptr
-	Anonymous2                      uintptr
-	Anonymous3                      uintptr
+	Anonymous1                      JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union
+	Anonymous2                      JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union
+	Anonymous3                      JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union
 	LimitFlags                      JOB_OBJECT_LIMIT
 	IoRateControlTolerance          JOBOBJECT_RATE_CONTROL_TOLERANCE
 	JobLowMemoryLimit               uint64

@@ -173,7 +173,7 @@ type WS_CHANNEL_PROPERTY_CONSTRAINT struct {
 	Id                WS_CHANNEL_PROPERTY_ID
 	AllowedValues     unsafe.Pointer
 	AllowedValuesSize uint32
-	Out               uintptr
+	Out               WS_CHANNEL_PROPERTY_CONSTRAINT_out_e__Struct
 }
 
 // WS_CHAR_ARRAY_DESCRIPTION: https://learn.microsoft.com/windows/win32/api/webservices/ns-webservices-ws_char_array_description
@@ -347,7 +347,7 @@ type WS_ENDPOINT_POLICY_EXTENSION struct {
 	PolicyExtension WS_POLICY_EXTENSION
 	AssertionName   *WS_XML_STRING
 	AssertionNs     *WS_XML_STRING
-	Out             uintptr
+	Out             WS_ENDPOINT_POLICY_EXTENSION_out_e__Struct
 }
 
 // WS_ENUM_DESCRIPTION: https://learn.microsoft.com/windows/win32/api/webservices/ns-webservices-ws_enum_description
@@ -675,7 +675,7 @@ type WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT struct {
 	ClaimConstraintCount                        uint32
 	RequestSecurityTokenPropertyConstraints     *WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT
 	RequestSecurityTokenPropertyConstraintCount uint32
-	Out                                         uintptr
+	Out                                         WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT_out_e__Struct
 }
 
 // WS_ITEM_RANGE: https://learn.microsoft.com/windows/win32/api/webservices/ns-webservices-ws_item_range
@@ -890,7 +890,7 @@ type WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT struct {
 	Id                WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID
 	AllowedValues     unsafe.Pointer
 	AllowedValuesSize uint32
-	Out               uintptr
+	Out               WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT_out_e__Struct
 }
 
 // WS_RSA_ENDPOINT_IDENTITY: https://learn.microsoft.com/windows/win32/api/webservices/ns-webservices-ws_rsa_endpoint_identity
@@ -973,7 +973,7 @@ type WS_SECURITY_BINDING_PROPERTY_CONSTRAINT struct {
 	Id                WS_SECURITY_BINDING_PROPERTY_ID
 	AllowedValues     unsafe.Pointer
 	AllowedValuesSize uint32
-	Out               uintptr
+	Out               WS_SECURITY_BINDING_PROPERTY_CONSTRAINT_out_e__Struct
 }
 
 // WS_SECURITY_CONSTRAINTS: https://learn.microsoft.com/windows/win32/api/webservices/ns-webservices-ws_security_constraints
@@ -1063,7 +1063,7 @@ type WS_SECURITY_PROPERTY_CONSTRAINT struct {
 	Id                WS_SECURITY_PROPERTY_ID
 	AllowedValues     unsafe.Pointer
 	AllowedValuesSize uint32
-	Out               uintptr
+	Out               WS_SECURITY_PROPERTY_CONSTRAINT_out_e__Struct
 }
 
 // WS_SERVICE_CONTRACT: https://learn.microsoft.com/windows/win32/api/webservices/ns-webservices-ws_service_contract
@@ -1167,7 +1167,7 @@ type WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT_out_e__Struct struct {
 // WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT: https://learn.microsoft.com/windows/win32/api/webservices/ns-webservices-ws_ssl_transport_security_binding_constraint
 type WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT struct {
 	BindingConstraint WS_SECURITY_BINDING_CONSTRAINT
-	Out               uintptr
+	Out               WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT_out_e__Struct
 }
 
 // WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION: https://learn.microsoft.com/windows/win32/api/webservices/ns-webservices-ws_ssl_transport_security_binding_policy_description

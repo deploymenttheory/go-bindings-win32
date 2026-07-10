@@ -8,6 +8,8 @@ import (
 	networkmanagementsnmp "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networkmanagement/snmp"
 )
 
+type AsnAny = networkmanagementsnmp.AsnAny
+type AsnAny_asnValue_e__Union = networkmanagementsnmp.AsnAny_asnValue_e__Union
 type SmiCNTR64 = networkmanagementsnmp.SmiCNTR64
 type SmiOCTETS = networkmanagementsnmp.SmiOCTETS
 type SmiOID = networkmanagementsnmp.SmiOID

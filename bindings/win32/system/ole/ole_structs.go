@@ -618,14 +618,14 @@ type PARAMDESCEX struct {
 // PICTDESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PICTDESC_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // PICTDESC: https://learn.microsoft.com/windows/win32/api/olectl/ns-olectl-pictdesc
 type PICTDESC struct {
 	CbSizeofstruct uint32
 	PicType        uint32
-	Anonymous      uintptr
+	Anonymous      PICTDESC_Anonymous_e__Union
 }
 
 // POINTF: https://learn.microsoft.com/windows/win32/api/ocidl/ns-ocidl-pointf
@@ -682,7 +682,7 @@ type SAFEARRAYUNION_u_e__Struct struct {
 
 type SAFEARRAYUNION struct {
 	SfType uint32
-	U      uintptr
+	U      SAFEARRAYUNION_u_e__Struct
 }
 
 type SAFEARR_BRECORD struct {
@@ -740,7 +740,7 @@ type WireSAFEARRAY struct {
 // WireVARIANT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WireVARIANT_Anonymous_e__Union struct {
-	Data [4]uint64
+	Data [2]uint64
 }
 
 type WireVARIANT struct {
@@ -750,5 +750,5 @@ type WireVARIANT struct {
 	WReserved1  uint16
 	WReserved2  uint16
 	WReserved3  uint16
-	Anonymous   uintptr
+	Anonymous   WireVARIANT_Anonymous_e__Union
 }

@@ -51,7 +51,7 @@ type CLFS_MGMT_POLICY struct {
 	LengthInBytes    uint32
 	PolicyFlags      uint32
 	PolicyType       CLFS_MGMT_POLICY_TYPE
-	PolicyParameters uintptr
+	PolicyParameters CLFS_MGMT_POLICY_PolicyParameters_e__Union
 }
 
 // CLFS_NODE_ID: https://learn.microsoft.com/windows/win32/api/clfs/ns-clfs-clfs_node_id
@@ -200,14 +200,14 @@ type COPYFILE2_EXTENDED_PARAMETERS_V2 struct {
 // COPYFILE2_MESSAGE_Info_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type COPYFILE2_MESSAGE_Info_e__Union struct {
-	Data [1]uint64
+	Data [9]uint64
 }
 
 // COPYFILE2_MESSAGE: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-copyfile2_message
 type COPYFILE2_MESSAGE struct {
 	Type      COPYFILE2_MESSAGE_TYPE
 	DwPadding uint32
-	Info      uintptr
+	Info      COPYFILE2_MESSAGE_Info_e__Union
 }
 
 // CREATEFILE2_EXTENDED_PARAMETERS: https://learn.microsoft.com/windows/win32/api/fileapi/ns-fileapi-createfile2_extended_parameters
@@ -472,7 +472,7 @@ type FILE_ID_DESCRIPTOR_Anonymous_e__Union struct {
 type FILE_ID_DESCRIPTOR struct {
 	DwSize    uint32
 	Type      FILE_ID_TYPE
-	Anonymous uintptr
+	Anonymous FILE_ID_DESCRIPTOR_Anonymous_e__Union
 }
 
 // FILE_ID_EXTD_DIR_INFO: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-file_id_extd_dir_info
@@ -541,7 +541,7 @@ type FILE_NOTIFY_EXTENDED_INFORMATION struct {
 	AllocatedLength      int64
 	FileSize             int64
 	FileAttributes       uint32
-	Anonymous            uintptr
+	Anonymous            FILE_NOTIFY_EXTENDED_INFORMATION_Anonymous_e__Union
 	FileId               int64
 	ParentFileId         int64
 	FileNameLength       uint32
@@ -563,7 +563,7 @@ type FILE_REMOTE_PROTOCOL_INFO_GenericReserved_e__Struct struct {
 // FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union struct {
-	Data [8]uint64
+	Data [16]uint32
 }
 
 // FILE_REMOTE_PROTOCOL_INFO: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-file_remote_protocol_info
@@ -576,8 +576,8 @@ type FILE_REMOTE_PROTOCOL_INFO struct {
 	ProtocolRevision     uint16
 	Reserved             uint16
 	Flags                uint32
-	GenericReserved      uintptr
-	ProtocolSpecific     uintptr
+	GenericReserved      FILE_REMOTE_PROTOCOL_INFO_GenericReserved_e__Struct
+	ProtocolSpecific     FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union
 }
 
 // FILE_RENAME_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -588,7 +588,7 @@ type FILE_RENAME_INFO_Anonymous_e__Union struct {
 
 // FILE_RENAME_INFO: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-file_rename_info
 type FILE_RENAME_INFO struct {
-	Anonymous      uintptr
+	Anonymous      FILE_RENAME_INFO_Anonymous_e__Union
 	RootDirectory  foundation.HANDLE
 	FileNameLength uint32
 	FileName       [1]uint16
@@ -671,7 +671,7 @@ type IORING_BUFFER_REF_BufferUnion struct {
 // IORING_BUFFER_REF: https://learn.microsoft.com/windows/win32/api/ioringapi/ns-ioringapi-ioring_buffer_ref
 type IORING_BUFFER_REF struct {
 	Kind   IORING_REF_KIND
-	Buffer uintptr
+	Buffer IORING_BUFFER_REF_BufferUnion
 }
 
 // IORING_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/ioringapi/ns-ioringapi-ioring_capabilities
@@ -704,7 +704,7 @@ type IORING_HANDLE_REF_HandleUnion struct {
 // IORING_HANDLE_REF: https://learn.microsoft.com/windows/win32/api/ioringapi/ns-ioringapi-ioring_handle_ref
 type IORING_HANDLE_REF struct {
 	Kind   IORING_REF_KIND
-	Handle uintptr
+	Handle IORING_HANDLE_REF_HandleUnion
 }
 
 // IORING_INFO: https://learn.microsoft.com/windows/win32/api/ioringapi/ns-ioringapi-ioring_info
@@ -968,7 +968,7 @@ type NTMS_I1_OBJECTINFORMATIONA struct {
 	DwOperationalState uint32
 	SzName             [64]foundation.CHAR
 	SzDescription      [127]foundation.CHAR
-	Info               uintptr
+	Info               NTMS_I1_OBJECTINFORMATIONA_Info_e__Union
 }
 
 // NTMS_I1_OBJECTINFORMATIONW_Info_e__Union is a C union; the raw tier exposes its correctly sized
@@ -987,7 +987,7 @@ type NTMS_I1_OBJECTINFORMATIONW struct {
 	DwOperationalState uint32
 	SzName             [64]uint16
 	SzDescription      [127]uint16
-	Info               uintptr
+	Info               NTMS_I1_OBJECTINFORMATIONW_Info_e__Union
 }
 
 type NTMS_I1_OPREQUESTINFORMATIONA struct {
@@ -1211,7 +1211,7 @@ type NTMS_OBJECTINFORMATIONA struct {
 	DwOperationalState uint32
 	SzName             [64]foundation.CHAR
 	SzDescription      [127]foundation.CHAR
-	Info               uintptr
+	Info               NTMS_OBJECTINFORMATIONA_Info_e__Union
 }
 
 // NTMS_OBJECTINFORMATIONW_Info_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1231,7 +1231,7 @@ type NTMS_OBJECTINFORMATIONW struct {
 	DwOperationalState uint32
 	SzName             [64]uint16
 	SzDescription      [127]uint16
-	Info               uintptr
+	Info               NTMS_OBJECTINFORMATIONW_Info_e__Union
 }
 
 // NTMS_OPREQUESTINFORMATIONA: https://learn.microsoft.com/windows/win32/api/ntmsapi/ns-ntmsapi-ntms_oprequestinformationa
@@ -1357,7 +1357,7 @@ type REPARSE_GUID_DATA_BUFFER struct {
 	ReparseDataLength    uint16
 	Reserved             uint16
 	ReparseGuid          win32.GUID
-	GenericReparseBuffer uintptr
+	GenericReparseBuffer REPARSE_GUID_DATA_BUFFER_GenericReparseBuffer_e__Struct
 }
 
 type SERVER_ALIAS_INFO_0 struct {
@@ -1638,7 +1638,7 @@ type TXF_LOG_RECORD_AFFECTED_FILE struct {
 	Version                       uint16
 	RecordLength                  uint32
 	Flags                         uint32
-	TxfFileId                     [2]uint32
+	TxfFileId                     [4]uint32
 	KtmGuid                       win32.GUID
 	FileNameLength                uint32
 	FileNameByteOffsetInStructure uint32

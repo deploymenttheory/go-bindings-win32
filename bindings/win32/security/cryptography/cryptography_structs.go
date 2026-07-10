@@ -593,7 +593,7 @@ type CERT_ALT_NAME_ENTRY_Anonymous_e__Union struct {
 // CERT_ALT_NAME_ENTRY: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_alt_name_entry
 type CERT_ALT_NAME_ENTRY struct {
 	DwAltNameChoice uint32
-	Anonymous       uintptr
+	Anonymous       CERT_ALT_NAME_ENTRY_Anonymous_e__Union
 }
 
 // CERT_ALT_NAME_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_alt_name_info
@@ -647,7 +647,7 @@ type CERT_BIOMETRIC_DATA_Anonymous_e__Union struct {
 // CERT_BIOMETRIC_DATA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_biometric_data
 type CERT_BIOMETRIC_DATA struct {
 	DwTypeOfBiometricDataChoice CERT_BIOMETRIC_DATA_TYPE
-	Anonymous                   uintptr
+	Anonymous                   CERT_BIOMETRIC_DATA_Anonymous_e__Union
 	HashedUrl                   CERT_HASHED_URL
 }
 
@@ -832,7 +832,7 @@ type CERT_ID_Anonymous_e__Union struct {
 // CERT_ID: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_id
 type CERT_ID struct {
 	DwIdChoice CERT_ID_OPTION
-	Anonymous  uintptr
+	Anonymous  CERT_ID_Anonymous_e__Union
 }
 
 // CERT_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_info
@@ -880,7 +880,7 @@ type CERT_KEY_CONTEXT_Anonymous_e__Union struct {
 // CERT_KEY_CONTEXT: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_key_context
 type CERT_KEY_CONTEXT struct {
 	CbSize    uint32
-	Anonymous uintptr
+	Anonymous CERT_KEY_CONTEXT_Anonymous_e__Union
 	DwKeySpec uint32
 }
 
@@ -956,7 +956,7 @@ type CERT_LOGOTYPE_IMAGE_INFO struct {
 	DwXSize                         uint32
 	DwYSize                         uint32
 	DwLogotypeImageResolutionChoice CERT_LOGOTYPE_CHOICE
-	Anonymous                       uintptr
+	Anonymous                       CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union
 	PwszLanguage                    foundation.PWSTR
 }
 
@@ -969,7 +969,7 @@ type CERT_LOGOTYPE_INFO_Anonymous_e__Union struct {
 // CERT_LOGOTYPE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_logotype_info
 type CERT_LOGOTYPE_INFO struct {
 	DwLogotypeInfoChoice CERT_LOGOTYPE_OPTION
-	Anonymous            uintptr
+	Anonymous            CERT_LOGOTYPE_INFO_Anonymous_e__Union
 }
 
 // CERT_LOGOTYPE_REFERENCE: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_logotype_reference
@@ -1290,7 +1290,7 @@ type CERT_STRONG_SIGN_PARA_Anonymous_e__Union struct {
 type CERT_STRONG_SIGN_PARA struct {
 	CbSize       uint32
 	DwInfoChoice uint32
-	Anonymous    uintptr
+	Anonymous    CERT_STRONG_SIGN_PARA_Anonymous_e__Union
 }
 
 // CERT_STRONG_SIGN_SERIALIZED_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_strong_sign_serialized_info
@@ -1325,8 +1325,8 @@ type CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union struct {
 
 // CERT_SYSTEM_STORE_RELOCATE_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_system_store_relocate_para
 type CERT_SYSTEM_STORE_RELOCATE_PARA struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union
+	Anonymous2 CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union
 }
 
 // CERT_TEMPLATE_EXT: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_template_ext
@@ -1463,7 +1463,7 @@ type CMC_STATUS_INFO struct {
 	RgdwBodyList      *uint32
 	PwszStatusString  foundation.PWSTR
 	DwOtherInfoChoice uint32
-	Anonymous         uintptr
+	Anonymous         CMC_STATUS_INFO_Anonymous_e__Union
 }
 
 // CMC_TAGGED_ATTRIBUTE: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmc_tagged_attribute
@@ -1500,7 +1500,7 @@ type CMC_TAGGED_REQUEST_Anonymous_e__Union struct {
 // CMC_TAGGED_REQUEST: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmc_tagged_request
 type CMC_TAGGED_REQUEST struct {
 	DwTaggedRequestChoice uint32
-	Anonymous             uintptr
+	Anonymous             CMC_TAGGED_REQUEST_Anonymous_e__Union
 }
 
 type CMSCEPSetup struct {
@@ -1515,7 +1515,7 @@ type CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union struct {
 // CMSG_CMS_RECIPIENT_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_cms_recipient_info
 type CMSG_CMS_RECIPIENT_INFO struct {
 	DwRecipientChoice uint32
-	Anonymous         uintptr
+	Anonymous         CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union
 }
 
 // CMSG_CMS_SIGNER_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_cms_signer_info
@@ -1559,7 +1559,7 @@ type CMSG_CONTENT_ENCRYPT_INFO struct {
 	PfnAlloc                     PFN_CMSG_ALLOC
 	PfnFree                      PFN_CMSG_FREE
 	DwEncryptFlags               uint32
-	Anonymous                    uintptr
+	Anonymous                    CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union
 	DwFlags                      uint32
 	FCNG                         foundation.BOOL
 	PbCNGContentEncryptKeyObject *byte
@@ -1583,7 +1583,7 @@ type CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union struct {
 // CMSG_CTRL_DECRYPT_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_ctrl_decrypt_para
 type CMSG_CTRL_DECRYPT_PARA struct {
 	CbSize           uint32
-	Anonymous        uintptr
+	Anonymous        CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union
 	DwKeySpec        uint32
 	DwRecipientIndex uint32
 }
@@ -1604,7 +1604,7 @@ type CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union struct {
 // CMSG_CTRL_KEY_AGREE_DECRYPT_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_ctrl_key_agree_decrypt_para
 type CMSG_CTRL_KEY_AGREE_DECRYPT_PARA struct {
 	CbSize                       uint32
-	Anonymous                    uintptr
+	Anonymous                    CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union
 	DwKeySpec                    uint32
 	PKeyAgree                    *CMSG_KEY_AGREE_RECIPIENT_INFO
 	DwRecipientIndex             uint32
@@ -1621,7 +1621,7 @@ type CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union struct {
 // CMSG_CTRL_KEY_TRANS_DECRYPT_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_ctrl_key_trans_decrypt_para
 type CMSG_CTRL_KEY_TRANS_DECRYPT_PARA struct {
 	CbSize           uint32
-	Anonymous        uintptr
+	Anonymous        CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union
 	DwKeySpec        uint32
 	PKeyTrans        *CMSG_KEY_TRANS_RECIPIENT_INFO
 	DwRecipientIndex uint32
@@ -1640,7 +1640,7 @@ type CMSG_CTRL_MAIL_LIST_DECRYPT_PARA struct {
 	PMailList        *CMSG_MAIL_LIST_RECIPIENT_INFO
 	DwRecipientIndex uint32
 	DwKeyChoice      uint32
-	Anonymous        uintptr
+	Anonymous        CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union
 }
 
 // CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_ctrl_verify_signature_ex_para
@@ -1689,7 +1689,7 @@ type CMSG_KEY_AGREE_ENCRYPT_INFO struct {
 	KeyEncryptionAlgorithm    CRYPT_ALGORITHM_IDENTIFIER
 	UserKeyingMaterial        CRYPT_INTEGER_BLOB
 	DwOriginatorChoice        CMSG_KEY_AGREE_ORIGINATOR
-	Anonymous                 uintptr
+	Anonymous                 CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union
 	CKeyAgreeKeyEncryptInfo   uint32
 	RgpKeyAgreeKeyEncryptInfo **CMSG_KEY_AGREE_KEY_ENCRYPT_INFO
 	DwFlags                   uint32
@@ -1717,7 +1717,7 @@ type CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO struct {
 	HCryptProv                HCRYPTPROV_LEGACY
 	DwKeySpec                 uint32
 	DwKeyChoice               CMSG_KEY_AGREE_OPTION
-	Anonymous                 uintptr
+	Anonymous                 CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
 	UserKeyingMaterial        CRYPT_INTEGER_BLOB
 	CRecipientEncryptedKeys   uint32
 	RgpRecipientEncryptedKeys **CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO
@@ -1733,7 +1733,7 @@ type CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union struct {
 type CMSG_KEY_AGREE_RECIPIENT_INFO struct {
 	DwVersion                 uint32
 	DwOriginatorChoice        CMSG_KEY_AGREE_ORIGINATOR
-	Anonymous                 uintptr
+	Anonymous                 CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union
 	UserKeyingMaterial        CRYPT_INTEGER_BLOB
 	KeyEncryptionAlgorithm    CRYPT_ALGORITHM_IDENTIFIER
 	CRecipientEncryptedKeys   uint32
@@ -1789,7 +1789,7 @@ type CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO struct {
 	PvKeyEncryptionAuxInfo unsafe.Pointer
 	HCryptProv             uintptr
 	DwKeyChoice            uint32
-	Anonymous              uintptr
+	Anonymous              CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
 	KeyId                  CRYPT_INTEGER_BLOB
 	Date                   foundation.FILETIME
 	POtherAttr             *CRYPT_ATTRIBUTE_TYPE_VALUE
@@ -1826,7 +1826,7 @@ type CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union struct {
 // CMSG_RECIPIENT_ENCODE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_recipient_encode_info
 type CMSG_RECIPIENT_ENCODE_INFO struct {
 	DwRecipientChoice uint32
-	Anonymous         uintptr
+	Anonymous         CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
 }
 
 // CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_recipient_encrypted_key_encode_info
@@ -1873,7 +1873,7 @@ type CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union struct {
 type CMSG_SIGNER_ENCODE_INFO struct {
 	CbSize        uint32
 	PCertInfo     *CERT_INFO
-	Anonymous     uintptr
+	Anonymous     CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union
 	DwKeySpec     uint32
 	HashAlgorithm CRYPT_ALGORITHM_IDENTIFIER
 	PvHashAuxInfo unsafe.Pointer
@@ -1979,7 +1979,7 @@ type CRL_DIST_POINT_NAME_Anonymous_e__Union struct {
 // CRL_DIST_POINT_NAME: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-crl_dist_point_name
 type CRL_DIST_POINT_NAME struct {
 	DwDistPointNameChoice uint32
-	Anonymous             uintptr
+	Anonymous             CRL_DIST_POINT_NAME_Anonymous_e__Union
 }
 
 // CRL_ENTRY: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-crl_entry
@@ -2343,7 +2343,7 @@ type CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union struct {
 type CRYPT_KEY_SIGN_MESSAGE_PARA struct {
 	CbSize                   uint32
 	DwMsgAndCertEncodingType CERT_QUERY_ENCODING_TYPE
-	Anonymous                uintptr
+	Anonymous                CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union
 	DwKeySpec                CERT_KEY_SPEC
 	HashAlgorithm            CRYPT_ALGORITHM_IDENTIFIER
 	PvHashAuxInfo            unsafe.Pointer
@@ -2396,7 +2396,7 @@ type CRYPT_OID_INFO struct {
 	PszOID    foundation.PSTR
 	PwszName  foundation.PWSTR
 	DwGroupId uint32
-	Anonymous uintptr
+	Anonymous CRYPT_OID_INFO_Anonymous_e__Union
 	ExtraInfo CRYPT_INTEGER_BLOB
 }
 
@@ -2802,13 +2802,13 @@ type CRYPT_XML_KEY_INFO struct {
 // CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [15]uint64
 }
 
 // CRYPT_XML_KEY_INFO_ITEM: https://learn.microsoft.com/windows/win32/api/cryptxml/ns-cryptxml-crypt_xml_key_info_item
 type CRYPT_XML_KEY_INFO_ITEM struct {
 	DwType    CRYPT_XML_KEYINFO_TYPE
-	Anonymous uintptr
+	Anonymous CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union
 }
 
 // CRYPT_XML_KEY_RSA_KEY_VALUE: https://learn.microsoft.com/windows/win32/api/cryptxml/ns-cryptxml-crypt_xml_key_rsa_key_value
@@ -2826,7 +2826,7 @@ type CRYPT_XML_KEY_VALUE_Anonymous_e__Union struct {
 // CRYPT_XML_KEY_VALUE: https://learn.microsoft.com/windows/win32/api/cryptxml/ns-cryptxml-crypt_xml_key_value
 type CRYPT_XML_KEY_VALUE struct {
 	DwType    CRYPT_XML_KEY_VALUE_TYPE
-	Anonymous uintptr
+	Anonymous CRYPT_XML_KEY_VALUE_Anonymous_e__Union
 }
 
 // CRYPT_XML_OBJECT: https://learn.microsoft.com/windows/win32/api/cryptxml/ns-cryptxml-crypt_xml_object
@@ -2927,7 +2927,7 @@ type CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union struct {
 // CRYPT_XML_X509DATA_ITEM: https://learn.microsoft.com/windows/win32/api/cryptxml/ns-cryptxml-crypt_xml_x509data_item
 type CRYPT_XML_X509DATA_ITEM struct {
 	DwType    CRYPT_XML_X509DATA_TYPE
-	Anonymous uintptr
+	Anonymous CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union
 }
 
 // CTL_ANY_SUBJECT_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-ctl_any_subject_info
@@ -3076,7 +3076,7 @@ type HTTPSPolicyCallbackData_Anonymous_e__Union struct {
 
 // HTTPSPolicyCallbackData: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-httpspolicycallbackdata
 type HTTPSPolicyCallbackData struct {
-	Anonymous      uintptr
+	Anonymous      HTTPSPolicyCallbackData_Anonymous_e__Union
 	DwAuthType     HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE
 	FdwChecks      uint32
 	PwszServerName foundation.PWSTR
@@ -3494,7 +3494,7 @@ type OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union struct {
 type OCSP_BASIC_RESPONSE_ENTRY struct {
 	CertId       OCSP_CERT_ID
 	DwCertStatus uint32
-	Anonymous    uintptr
+	Anonymous    OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union
 	ThisUpdate   foundation.FILETIME
 	NextUpdate   foundation.FILETIME
 	CExtension   uint32
@@ -3511,7 +3511,7 @@ type OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union struct {
 type OCSP_BASIC_RESPONSE_INFO struct {
 	DwVersion           uint32
 	DwResponderIdChoice uint32
-	Anonymous           uintptr
+	Anonymous           OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union
 	ProducedAt          foundation.FILETIME
 	CResponseEntry      uint32
 	RgResponseEntry     *OCSP_BASIC_RESPONSE_ENTRY
@@ -3740,7 +3740,7 @@ type SIGNER_CERT_Anonymous_e__Union struct {
 type SIGNER_CERT struct {
 	CbSize       uint32
 	DwCertChoice SIGNER_CERT_CHOICE
-	Anonymous    uintptr
+	Anonymous    SIGNER_CERT_Anonymous_e__Union
 	Hwnd         foundation.HWND
 }
 
@@ -3769,7 +3769,7 @@ type SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union struct {
 type SIGNER_DIGEST_SIGN_INFO struct {
 	CbSize             uint32
 	DwDigestSignChoice uint32
-	Anonymous          uintptr
+	Anonymous          SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union
 	PMetadataBlob      *CRYPT_INTEGER_BLOB
 	DwReserved         uint32
 	DwReserved2        uint32
@@ -3811,7 +3811,7 @@ type SIGNER_PROVIDER_INFO struct {
 	DwProviderType   uint32
 	DwKeySpec        uint32
 	DwPvkChoice      SIGNER_PRIVATE_KEY_CHOICE
-	Anonymous        uintptr
+	Anonymous        SIGNER_PROVIDER_INFO_Anonymous_e__Union
 }
 
 // SIGNER_SIGNATURE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -3825,7 +3825,7 @@ type SIGNER_SIGNATURE_INFO struct {
 	CbSize            uint32
 	AlgidHash         ALG_ID
 	DwAttrChoice      SIGNER_SIGNATURE_ATTRIBUTE_CHOICE
-	Anonymous         uintptr
+	Anonymous         SIGNER_SIGNATURE_INFO_Anonymous_e__Union
 	PsAuthenticated   *CRYPT_ATTRIBUTES
 	PsUnauthenticated *CRYPT_ATTRIBUTES
 }
@@ -3849,7 +3849,7 @@ type SIGNER_SUBJECT_INFO struct {
 	CbSize          uint32
 	PdwIndex        *uint32
 	DwSubjectChoice SIGNER_SUBJECT_CHOICE
-	Anonymous       uintptr
+	Anonymous       SIGNER_SUBJECT_INFO_Anonymous_e__Union
 }
 
 type SSL_ECCKEY_BLOB struct {

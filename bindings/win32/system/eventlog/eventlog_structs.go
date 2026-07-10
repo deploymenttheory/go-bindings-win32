@@ -57,7 +57,7 @@ type EVT_VARIANT_Anonymous_e__Union struct {
 
 // EVT_VARIANT: https://learn.microsoft.com/windows/win32/api/winevt/ns-winevt-evt_variant
 type EVT_VARIANT struct {
-	Anonymous uintptr
+	Anonymous EVT_VARIANT_Anonymous_e__Union
 	Count     uint32
 	Type      uint32
 }

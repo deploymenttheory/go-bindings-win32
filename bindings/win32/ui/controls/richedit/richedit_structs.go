@@ -46,7 +46,7 @@ type CHARFORMAT2A struct {
 	SSpacing        int16
 	CrBackColor     foundation.COLORREF
 	Lcid            uint32
-	Anonymous       uintptr
+	Anonymous       CHARFORMAT2A_Anonymous_e__Union
 	SStyle          int16
 	WKerning        uint16
 	BUnderlineType  byte
@@ -68,7 +68,7 @@ type CHARFORMAT2W struct {
 	SSpacing        int16
 	CrBackColor     foundation.COLORREF
 	Lcid            uint32
-	Anonymous       uintptr
+	Anonymous       CHARFORMAT2W_Anonymous_e__Union
 	SStyle          int16
 	WKerning        uint16
 	BUnderlineType  byte
@@ -146,7 +146,7 @@ type PARAFORMAT struct {
 	CbSize        uint32
 	DwMask        PARAFORMAT_MASK
 	WNumbering    PARAFORMAT_NUMBERING
-	Anonymous     uintptr
+	Anonymous     PARAFORMAT_Anonymous_e__Union
 	DxStartIndent int32
 	DxRightIndent int32
 	DxOffset      int32

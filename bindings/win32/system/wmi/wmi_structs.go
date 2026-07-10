@@ -514,7 +514,7 @@ type MI_Datetime_u_e__Union struct {
 // MI_Datetime: https://learn.microsoft.com/windows/win32/api/mi/ns-mi-mi_datetime
 type MI_Datetime struct {
 	IsTimestamp uint32
-	U           uintptr
+	U           MI_Datetime_u_e__Union
 }
 
 // MI_DatetimeA: https://learn.microsoft.com/windows/win32/api/mi/ns-mi-mi_datetimea
@@ -1247,7 +1247,7 @@ type MI_UserCredentials_credentials_e__Union struct {
 // MI_UserCredentials: https://learn.microsoft.com/windows/win32/api/mi/ns-mi-mi_usercredentials
 type MI_UserCredentials struct {
 	AuthenticationType *uint16
-	Credentials        uintptr
+	Credentials        MI_UserCredentials_credentials_e__Union
 }
 
 // MI_UsernamePasswordCreds: https://learn.microsoft.com/windows/win32/api/mi/ns-mi-mi_usernamepasswordcreds
@@ -1267,7 +1267,7 @@ type MI_UtilitiesFT struct {
 // MI_Value is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MI_Value struct {
-	Data [2]uint64
+	Data [5]uint64
 }
 
 // MofCompiler: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-imofcompiler

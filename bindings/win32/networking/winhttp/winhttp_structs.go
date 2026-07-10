@@ -121,8 +121,8 @@ type WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union struct {
 
 // WINHTTP_EXTENDED_HEADER: https://learn.microsoft.com/windows/win32/api/winhttp/ns-winhttp-winhttp_extended_header
 type WINHTTP_EXTENDED_HEADER struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union
+	Anonymous2 WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union
 }
 
 type WINHTTP_FAILED_CONNECTION_RETRIES struct {

@@ -7,10 +7,10 @@ package variant
 // VARIANT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type VARIANT_Anonymous_e__Union struct {
-	Data [4]uint64
+	Data [3]uint64
 }
 
 // VARIANT: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-variant
 type VARIANT struct {
-	Anonymous uintptr
+	Anonymous VARIANT_Anonymous_e__Union
 }

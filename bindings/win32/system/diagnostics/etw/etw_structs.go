@@ -51,12 +51,12 @@ type ETW_BUFFER_CALLBACK_INFORMATION struct {
 // ETW_BUFFER_CONTEXT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type ETW_BUFFER_CONTEXT_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // ETW_BUFFER_CONTEXT: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-etw_buffer_context
 type ETW_BUFFER_CONTEXT struct {
-	Anonymous uintptr
+	Anonymous ETW_BUFFER_CONTEXT_Anonymous_e__Union
 	LoggerId  uint16
 }
 
@@ -118,14 +118,14 @@ type ETW_TRACE_PARTITION_INFORMATION_V2 struct {
 // EVENT_DATA_DESCRIPTOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_DATA_DESCRIPTOR_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // EVENT_DATA_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/evntprov/ns-evntprov-event_data_descriptor
 type EVENT_DATA_DESCRIPTOR struct {
 	Ptr       uint64
 	Size      uint32
-	Anonymous uintptr
+	Anonymous EVENT_DATA_DESCRIPTOR_Anonymous_e__Union
 }
 
 // EVENT_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/evntprov/ns-evntprov-event_descriptor
@@ -261,7 +261,7 @@ type EVENT_HEADER struct {
 	TimeStamp       int64
 	ProviderId      win32.GUID
 	EventDescriptor EVENT_DESCRIPTOR
-	Anonymous       uintptr
+	Anonymous       EVENT_HEADER_Anonymous_e__Union
 	ActivityId      win32.GUID
 }
 
@@ -273,7 +273,7 @@ type EVENT_HEADER_EXTENDED_DATA_ITEM_Anonymous_e__Struct struct {
 type EVENT_HEADER_EXTENDED_DATA_ITEM struct {
 	Reserved1 uint16
 	ExtType   uint16
-	Anonymous uintptr
+	Anonymous EVENT_HEADER_EXTENDED_DATA_ITEM_Anonymous_e__Struct
 	DataSize  uint16
 	DataPtr   uint64
 }
@@ -281,13 +281,13 @@ type EVENT_HEADER_EXTENDED_DATA_ITEM struct {
 // EVENT_INSTANCE_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_INSTANCE_HEADER_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // EVENT_INSTANCE_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_INSTANCE_HEADER_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // EVENT_INSTANCE_HEADER_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
@@ -299,15 +299,15 @@ type EVENT_INSTANCE_HEADER_Anonymous3_e__Union struct {
 // EVENT_INSTANCE_HEADER: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_instance_header
 type EVENT_INSTANCE_HEADER struct {
 	Size             uint16
-	Anonymous1       uintptr
-	Anonymous2       uintptr
+	Anonymous1       EVENT_INSTANCE_HEADER_Anonymous1_e__Union
+	Anonymous2       EVENT_INSTANCE_HEADER_Anonymous2_e__Union
 	ThreadId         uint32
 	ProcessId        uint32
 	TimeStamp        int64
 	RegHandle        uint64
 	InstanceId       uint32
 	ParentInstanceId uint32
-	Anonymous3       uintptr
+	Anonymous3       EVENT_INSTANCE_HEADER_Anonymous3_e__Union
 	ParentRegHandle  uint64
 }
 
@@ -326,7 +326,7 @@ type EVENT_MAP_ENTRY_Anonymous_e__Union struct {
 // EVENT_MAP_ENTRY: https://learn.microsoft.com/windows/win32/api/tdh/ns-tdh-event_map_entry
 type EVENT_MAP_ENTRY struct {
 	OutputOffset uint32
-	Anonymous    uintptr
+	Anonymous    EVENT_MAP_ENTRY_Anonymous_e__Union
 }
 
 // EVENT_MAP_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -340,14 +340,14 @@ type EVENT_MAP_INFO struct {
 	NameOffset    uint32
 	Flag          MAP_FLAGS
 	EntryCount    uint32
-	Anonymous     uintptr
+	Anonymous     EVENT_MAP_INFO_Anonymous_e__Union
 	MapEntryArray [1]EVENT_MAP_ENTRY
 }
 
 // EVENT_PROPERTY_INFO_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_PROPERTY_INFO_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [2]uint32
 }
 
 // EVENT_PROPERTY_INFO_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
@@ -365,17 +365,17 @@ type EVENT_PROPERTY_INFO_Anonymous3_e__Union struct {
 // EVENT_PROPERTY_INFO_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_PROPERTY_INFO_Anonymous4_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // EVENT_PROPERTY_INFO: https://learn.microsoft.com/windows/win32/api/tdh/ns-tdh-event_property_info
 type EVENT_PROPERTY_INFO struct {
 	Flags      PROPERTY_FLAGS
 	NameOffset uint32
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
-	Anonymous4 uintptr
+	Anonymous1 EVENT_PROPERTY_INFO_Anonymous1_e__Union
+	Anonymous2 EVENT_PROPERTY_INFO_Anonymous2_e__Union
+	Anonymous3 EVENT_PROPERTY_INFO_Anonymous3_e__Union
+	Anonymous4 EVENT_PROPERTY_INFO_Anonymous4_e__Union
 }
 
 // EVENT_RECORD: https://learn.microsoft.com/windows/win32/api/evntcons/ns-evntcons-event_record
@@ -392,7 +392,7 @@ type EVENT_RECORD struct {
 // EVENT_TRACE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_TRACE_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [1]uint32
 }
 
 // EVENT_TRACE: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_trace
@@ -403,19 +403,19 @@ type EVENT_TRACE struct {
 	ParentGuid       win32.GUID
 	MofData          unsafe.Pointer
 	MofLength        uint32
-	Anonymous        uintptr
+	Anonymous        EVENT_TRACE_Anonymous_e__Union
 }
 
 // EVENT_TRACE_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_TRACE_HEADER_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // EVENT_TRACE_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_TRACE_HEADER_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // EVENT_TRACE_HEADER_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
@@ -433,13 +433,13 @@ type EVENT_TRACE_HEADER_Anonymous4_e__Union struct {
 // EVENT_TRACE_HEADER: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_trace_header
 type EVENT_TRACE_HEADER struct {
 	Size       uint16
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 EVENT_TRACE_HEADER_Anonymous1_e__Union
+	Anonymous2 EVENT_TRACE_HEADER_Anonymous2_e__Union
 	ThreadId   uint32
 	ProcessId  uint32
 	TimeStamp  int64
-	Anonymous3 uintptr
-	Anonymous4 uintptr
+	Anonymous3 EVENT_TRACE_HEADER_Anonymous3_e__Union
+	Anonymous4 EVENT_TRACE_HEADER_Anonymous4_e__Union
 }
 
 // EVENT_TRACE_LOGFILEA_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -460,14 +460,14 @@ type EVENT_TRACE_LOGFILEA struct {
 	LoggerName     foundation.PSTR
 	CurrentTime    int64
 	BuffersRead    uint32
-	Anonymous1     uintptr
+	Anonymous1     EVENT_TRACE_LOGFILEA_Anonymous1_e__Union
 	CurrentEvent   EVENT_TRACE
 	LogfileHeader  TRACE_LOGFILE_HEADER
 	BufferCallback PEVENT_TRACE_BUFFER_CALLBACKA
 	BufferSize     uint32
 	Filled         uint32
 	EventsLost     uint32
-	Anonymous2     uintptr
+	Anonymous2     EVENT_TRACE_LOGFILEA_Anonymous2_e__Union
 	IsKernelTrace  uint32
 	Context        unsafe.Pointer
 }
@@ -490,14 +490,14 @@ type EVENT_TRACE_LOGFILEW struct {
 	LoggerName     foundation.PWSTR
 	CurrentTime    int64
 	BuffersRead    uint32
-	Anonymous1     uintptr
+	Anonymous1     EVENT_TRACE_LOGFILEW_Anonymous1_e__Union
 	CurrentEvent   EVENT_TRACE
 	LogfileHeader  TRACE_LOGFILE_HEADER
 	BufferCallback PEVENT_TRACE_BUFFER_CALLBACKW
 	BufferSize     uint32
 	Filled         uint32
 	EventsLost     uint32
-	Anonymous2     uintptr
+	Anonymous2     EVENT_TRACE_LOGFILEW_Anonymous2_e__Union
 	IsKernelTrace  uint32
 	Context        unsafe.Pointer
 }
@@ -518,7 +518,7 @@ type EVENT_TRACE_PROPERTIES struct {
 	LogFileMode         uint32
 	FlushTimer          uint32
 	EnableFlags         EVENT_TRACE_FLAG
-	Anonymous           uintptr
+	Anonymous           EVENT_TRACE_PROPERTIES_Anonymous_e__Union
 	NumberOfBuffers     uint32
 	FreeBuffers         uint32
 	EventsLost          uint32
@@ -539,7 +539,7 @@ type EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union struct {
 // EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
@@ -558,7 +558,7 @@ type EVENT_TRACE_PROPERTIES_V2 struct {
 	LogFileMode         uint32
 	FlushTimer          uint32
 	EnableFlags         EVENT_TRACE_FLAG
-	Anonymous1          uintptr
+	Anonymous1          EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union
 	NumberOfBuffers     uint32
 	FreeBuffers         uint32
 	EventsLost          uint32
@@ -568,10 +568,10 @@ type EVENT_TRACE_PROPERTIES_V2 struct {
 	LoggerThreadId      foundation.HANDLE
 	LogFileNameOffset   uint32
 	LoggerNameOffset    uint32
-	Anonymous2          uintptr
+	Anonymous2          EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union
 	FilterDescCount     uint32
 	FilterDesc          *EVENT_FILTER_DESCRIPTOR
-	Anonymous3          uintptr
+	Anonymous3          EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union
 }
 
 // MOF_FIELD: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-mof_field
@@ -686,7 +686,7 @@ type TRACE_EVENT_INFO_Anonymous2_e__Union struct {
 // TRACE_EVENT_INFO_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TRACE_EVENT_INFO_Anonymous3_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // TRACE_EVENT_INFO: https://learn.microsoft.com/windows/win32/api/tdh/ns-tdh-trace_event_info
@@ -705,11 +705,11 @@ type TRACE_EVENT_INFO struct {
 	ProviderMessageOffset  uint32
 	BinaryXMLOffset        uint32
 	BinaryXMLSize          uint32
-	Anonymous1             uintptr
-	Anonymous2             uintptr
+	Anonymous1             TRACE_EVENT_INFO_Anonymous1_e__Union
+	Anonymous2             TRACE_EVENT_INFO_Anonymous2_e__Union
 	PropertyCount          uint32
 	TopLevelPropertyCount  uint32
-	Anonymous3             uintptr
+	Anonymous3             TRACE_EVENT_INFO_Anonymous3_e__Union
 	EventPropertyInfoArray [1]EVENT_PROPERTY_INFO
 }
 
@@ -738,19 +738,19 @@ type TRACE_GUID_REGISTRATION struct {
 // TRACE_LOGFILE_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TRACE_LOGFILE_HEADER_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // TRACE_LOGFILE_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TRACE_LOGFILE_HEADER_Anonymous2_e__Union struct {
-	Data [2]uint64
+	Data [4]uint32
 }
 
 // TRACE_LOGFILE_HEADER: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-trace_logfile_header
 type TRACE_LOGFILE_HEADER struct {
 	BufferSize         uint32
-	Anonymous1         uintptr
+	Anonymous1         TRACE_LOGFILE_HEADER_Anonymous1_e__Union
 	ProviderVersion    uint32
 	NumberOfProcessors uint32
 	EndTime            int64
@@ -758,7 +758,7 @@ type TRACE_LOGFILE_HEADER struct {
 	MaximumFileSize    uint32
 	LogFileMode        uint32
 	BuffersWritten     uint32
-	Anonymous2         uintptr
+	Anonymous2         TRACE_LOGFILE_HEADER_Anonymous2_e__Union
 	LoggerName         foundation.PWSTR
 	LogFileName        foundation.PWSTR
 	TimeZone           systemtime.TIME_ZONE_INFORMATION
@@ -772,18 +772,18 @@ type TRACE_LOGFILE_HEADER struct {
 // TRACE_LOGFILE_HEADER32_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TRACE_LOGFILE_HEADER32_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // TRACE_LOGFILE_HEADER32_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TRACE_LOGFILE_HEADER32_Anonymous2_e__Union struct {
-	Data [2]uint64
+	Data [4]uint32
 }
 
 type TRACE_LOGFILE_HEADER32 struct {
 	BufferSize         uint32
-	Anonymous1         uintptr
+	Anonymous1         TRACE_LOGFILE_HEADER32_Anonymous1_e__Union
 	ProviderVersion    uint32
 	NumberOfProcessors uint32
 	EndTime            int64
@@ -791,7 +791,7 @@ type TRACE_LOGFILE_HEADER32 struct {
 	MaximumFileSize    uint32
 	LogFileMode        uint32
 	BuffersWritten     uint32
-	Anonymous2         uintptr
+	Anonymous2         TRACE_LOGFILE_HEADER32_Anonymous2_e__Union
 	LoggerName         uint32
 	LogFileName        uint32
 	TimeZone           systemtime.TIME_ZONE_INFORMATION
@@ -805,18 +805,18 @@ type TRACE_LOGFILE_HEADER32 struct {
 // TRACE_LOGFILE_HEADER64_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TRACE_LOGFILE_HEADER64_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // TRACE_LOGFILE_HEADER64_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TRACE_LOGFILE_HEADER64_Anonymous2_e__Union struct {
-	Data [2]uint64
+	Data [4]uint32
 }
 
 type TRACE_LOGFILE_HEADER64 struct {
 	BufferSize         uint32
-	Anonymous1         uintptr
+	Anonymous1         TRACE_LOGFILE_HEADER64_Anonymous1_e__Union
 	ProviderVersion    uint32
 	NumberOfProcessors uint32
 	EndTime            int64
@@ -824,7 +824,7 @@ type TRACE_LOGFILE_HEADER64 struct {
 	MaximumFileSize    uint32
 	LogFileMode        uint32
 	BuffersWritten     uint32
-	Anonymous2         uintptr
+	Anonymous2         TRACE_LOGFILE_HEADER64_Anonymous2_e__Union
 	LoggerName         uint64
 	LogFileName        uint64
 	TimeZone           systemtime.TIME_ZONE_INFORMATION
@@ -884,7 +884,7 @@ type WMIREGGUIDW struct {
 	Guid          win32.GUID
 	Flags         uint32
 	InstanceCount uint32
-	Anonymous     uintptr
+	Anonymous     WMIREGGUIDW_Anonymous_e__Union
 }
 
 type WMIREGINFOW struct {
@@ -907,7 +907,7 @@ type WNODE_ALL_DATA struct {
 	DataBlockOffset           uint32
 	InstanceCount             uint32
 	OffsetInstanceNameOffsets uint32
-	Anonymous                 uintptr
+	Anonymous                 WNODE_ALL_DATA_Anonymous_e__Union
 }
 
 type WNODE_EVENT_ITEM struct {
@@ -924,7 +924,7 @@ type WNODE_EVENT_REFERENCE struct {
 	WnodeHeader         WNODE_HEADER
 	TargetGuid          win32.GUID
 	TargetDataBlockSize uint32
-	Anonymous           uintptr
+	Anonymous           WNODE_EVENT_REFERENCE_Anonymous_e__Union
 }
 
 // WNODE_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -943,8 +943,8 @@ type WNODE_HEADER_Anonymous2_e__Union struct {
 type WNODE_HEADER struct {
 	BufferSize    uint32
 	ProviderId    uint32
-	Anonymous1    uintptr
-	Anonymous2    uintptr
+	Anonymous1    WNODE_HEADER_Anonymous1_e__Union
+	Anonymous2    WNODE_HEADER_Anonymous2_e__Union
 	Guid          win32.GUID
 	ClientContext uint32
 	Flags         uint32

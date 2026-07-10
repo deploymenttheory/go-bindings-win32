@@ -123,6 +123,14 @@ func (in *Ingester) typeRefOf(sig *winmd.TypeSig) win32meta.TypeRef {
 			in.Diagnostics = append(in.Diagnostics, "unmapped System type "+sig.Name)
 			return win32meta.TypeRef{Kind: "Native", Name: "UIntPtr", IsConst: sig.IsConst}
 		}
+		if sig.Namespace == "" {
+			// A nested anonymous type (union/struct) declared inside a
+			// struct. Nested CLR types carry no namespace; the field
+			// references the nested type by name. Api "" tells the struct
+			// emitter and the layout calculator to resolve it against the
+			// enclosing struct's nested types.
+			return win32meta.TypeRef{Kind: "ApiRef", Name: sig.Name, Api: "", TargetKind: "Struct", IsConst: sig.IsConst}
+		}
 		if !strings.HasPrefix(sig.Namespace, namespacePrefix) {
 			// WinRT types (Windows.Foundation.*, Windows.UI.*) referenced
 			// from Win32 interop APIs: pointer-sized object references the

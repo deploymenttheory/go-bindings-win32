@@ -207,7 +207,7 @@ type GameInputForceFeedbackParams_data_e__Union struct {
 
 type GameInputForceFeedbackParams struct {
 	Kind GameInputForceFeedbackEffectKind
-	Data uintptr
+	Data GameInputForceFeedbackParams_data_e__Union
 }
 
 type GameInputForceFeedbackPeriodicParams struct {

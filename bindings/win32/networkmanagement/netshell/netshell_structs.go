@@ -39,7 +39,7 @@ type NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union struct {
 
 // NS_CONTEXT_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/netsh/ns-netsh-ns_context_attributes
 type NS_CONTEXT_ATTRIBUTES struct {
-	Anonymous         uintptr
+	Anonymous         NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union
 	PwszContext       foundation.PWSTR
 	GuidHelper        win32.GUID
 	DwFlags           uint32
@@ -63,7 +63,7 @@ type NS_HELPER_ATTRIBUTES_Anonymous_e__Union struct {
 
 // NS_HELPER_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/netsh/ns-netsh-ns_helper_attributes
 type NS_HELPER_ATTRIBUTES struct {
-	Anonymous  uintptr
+	Anonymous  NS_HELPER_ATTRIBUTES_Anonymous_e__Union
 	GuidHelper win32.GUID
 	PfnStart   PNS_HELPER_START_FN
 	PfnStop    PNS_HELPER_STOP_FN

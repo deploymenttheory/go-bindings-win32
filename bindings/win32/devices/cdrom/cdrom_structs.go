@@ -162,7 +162,7 @@ type CDROM_TOC_CD_TEXT_DATA_BLOCK struct {
 	Bitfield1      byte
 	SequenceNumber byte
 	Bitfield2      byte
-	Anonymous      uintptr
+	Anonymous      CDROM_TOC_CD_TEXT_DATA_BLOCK_Anonymous_e__Union
 	CRC            [2]byte
 }
 

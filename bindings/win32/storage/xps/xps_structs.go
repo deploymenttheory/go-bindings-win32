@@ -59,13 +59,13 @@ type PSINJECTDATA struct {
 // XPS_COLOR_XPS_COLOR_VALUE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type XPS_COLOR_XPS_COLOR_VALUE struct {
-	Data [1]uint64
+	Data [10]uint32
 }
 
 // XPS_COLOR: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ns-xpsobjectmodel-xps_color
 type XPS_COLOR struct {
 	ColorType XPS_COLOR_TYPE
-	Value     uintptr
+	Value     XPS_COLOR_XPS_COLOR_VALUE
 }
 
 // XPS_DASH: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ns-xpsobjectmodel-xps_dash

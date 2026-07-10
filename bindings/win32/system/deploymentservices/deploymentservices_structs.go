@@ -20,7 +20,7 @@ type PXE_ADDRESS_Anonymous_e__Union struct {
 // PXE_ADDRESS: https://learn.microsoft.com/windows/win32/api/wdspxe/ns-wdspxe-pxe_address
 type PXE_ADDRESS struct {
 	UFlags    uint32
-	Anonymous uintptr
+	Anonymous PXE_ADDRESS_Anonymous_e__Union
 	UAddrLen  uint32
 	UPort     uint16
 }

@@ -97,13 +97,13 @@ type HTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO struct {
 // HTTP_DATA_CHUNK_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type HTTP_DATA_CHUNK_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // HTTP_DATA_CHUNK: https://learn.microsoft.com/windows/win32/api/http/ns-http-http_data_chunk
 type HTTP_DATA_CHUNK struct {
 	DataChunkType HTTP_DATA_CHUNK_TYPE
-	Anonymous     uintptr
+	Anonymous     HTTP_DATA_CHUNK_Anonymous_e__Union
 }
 
 // HTTP_DELEGATE_REQUEST_PROPERTY_INFO: https://learn.microsoft.com/windows/win32/api/http/ns-http-http_delegate_request_property_info
@@ -574,7 +574,7 @@ type HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union struct {
 type HTTP_SERVICE_CONFIG_SSL_PARAM_EX struct {
 	ParamType HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
 	Flags     uint64
-	Anonymous uintptr
+	Anonymous HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union
 }
 
 // HTTP_SERVICE_CONFIG_SSL_QUERY: https://learn.microsoft.com/windows/win32/api/http/ns-http-http_service_config_ssl_query

@@ -28,5 +28,5 @@ type STRRET_Anonymous_e__Union struct {
 // STRRET: https://learn.microsoft.com/windows/win32/api/shtypes/ns-shtypes-strret
 type STRRET struct {
 	UType     uint32
-	Anonymous uintptr
+	Anonymous STRRET_Anonymous_e__Union
 }

@@ -51,7 +51,7 @@ type INTERACTION_CONTEXT_OUTPUT struct {
 	InputType        uiwindowsandmessaging.POINTER_INPUT_TYPE
 	X                float32
 	Y                float32
-	Arguments        uintptr
+	Arguments        INTERACTION_CONTEXT_OUTPUT_arguments_e__Union
 }
 
 // INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union is a C union; the raw tier exposes its correctly sized
@@ -68,7 +68,7 @@ type INTERACTION_CONTEXT_OUTPUT2 struct {
 	CurrentContactCount uint32
 	X                   float32
 	Y                   float32
-	Arguments           uintptr
+	Arguments           INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union
 }
 
 // MANIPULATION_TRANSFORM: https://learn.microsoft.com/windows/win32/api/interactioncontext/ns-interactioncontext-manipulation_transform

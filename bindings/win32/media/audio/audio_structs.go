@@ -29,7 +29,7 @@ type AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union struct {
 // AUDIOCLIENT_ACTIVATION_PARAMS: https://learn.microsoft.com/windows/win32/api/audioclientactivationparams/ns-audioclientactivationparams-audioclient_activation_params
 type AUDIOCLIENT_ACTIVATION_PARAMS struct {
 	ActivationType AUDIOCLIENT_ACTIVATION_TYPE
-	Anonymous      uintptr
+	Anonymous      AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union
 }
 
 // AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS: https://learn.microsoft.com/windows/win32/api/audioclientactivationparams/ns-audioclientactivationparams-audioclient_process_loopback_params

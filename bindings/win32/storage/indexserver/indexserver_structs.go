@@ -42,9 +42,9 @@ type DBID_uName_e__Union struct {
 
 // DBID: https://learn.microsoft.com/windows/win32/api/oledbguid/ns-oledbguid-dbid
 type DBID struct {
-	UGuid uintptr
+	UGuid DBID_uGuid_e__Union
 	EKind uint32
-	UName uintptr
+	UName DBID_uName_e__Union
 }
 
 // FILTERREGION: https://learn.microsoft.com/windows/win32/api/filter/ns-filter-filterregion

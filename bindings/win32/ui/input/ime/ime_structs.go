@@ -237,7 +237,7 @@ type INPUTCONTEXT struct {
 	PtSoftKbdPos   foundation.POINT
 	FdwConversion  uint32
 	FdwSentence    uint32
-	LfFont         uintptr
+	LfFont         INPUTCONTEXT_lfFont_e__Union
 	CfCompForm     COMPOSITIONFORM
 	CfCandForm     [4]CANDIDATEFORM
 	HCompStr       HIMCC

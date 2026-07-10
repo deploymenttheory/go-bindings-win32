@@ -41,20 +41,20 @@ type CABINET_INFO_W struct {
 // CM_NOTIFY_EVENT_DATA_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CM_NOTIFY_EVENT_DATA_u_e__Union struct {
-	Data [1]uint64
+	Data [7]uint32
 }
 
 // CM_NOTIFY_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-cm_notify_event_data
 type CM_NOTIFY_EVENT_DATA struct {
 	FilterType CM_NOTIFY_FILTER_TYPE
 	Reserved   uint32
-	U          uintptr
+	U          CM_NOTIFY_EVENT_DATA_u_e__Union
 }
 
 // CM_NOTIFY_FILTER_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CM_NOTIFY_FILTER_u_e__Union struct {
-	Data [1]uint64
+	Data [50]uint64
 }
 
 // CM_NOTIFY_FILTER: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-cm_notify_filter
@@ -63,7 +63,7 @@ type CM_NOTIFY_FILTER struct {
 	Flags      uint32
 	FilterType CM_NOTIFY_FILTER_TYPE
 	Reserved   uint32
-	U          uintptr
+	U          CM_NOTIFY_FILTER_u_e__Union
 }
 
 type COINSTALLER_CONTEXT_DATA struct {
@@ -262,7 +262,7 @@ type SP_ALTPLATFORM_INFO_V2 struct {
 	MajorVersion               uint32
 	MinorVersion               uint32
 	ProcessorArchitecture      systemsysteminformation.PROCESSOR_ARCHITECTURE
-	Anonymous                  uintptr
+	Anonymous                  SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union
 	FirstValidatedMajorVersion uint32
 	FirstValidatedMinorVersion uint32
 }
@@ -279,7 +279,7 @@ type SP_ALTPLATFORM_INFO_V3 struct {
 	MajorVersion               uint32
 	MinorVersion               uint32
 	ProcessorArchitecture      uint16
-	Anonymous                  uintptr
+	Anonymous                  SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union
 	FirstValidatedMajorVersion uint32
 	FirstValidatedMinorVersion uint32
 	ProductType                byte

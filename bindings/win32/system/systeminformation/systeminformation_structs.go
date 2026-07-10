@@ -34,7 +34,7 @@ type CACHE_RELATIONSHIP struct {
 	Type          PROCESSOR_CACHE_TYPE
 	Reserved      [18]byte
 	GroupCount    uint16
-	Anonymous     uintptr
+	Anonymous     CACHE_RELATIONSHIP_Anonymous_e__Union
 }
 
 // GROUP_AFFINITY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-group_affinity
@@ -100,7 +100,7 @@ type NUMA_NODE_RELATIONSHIP struct {
 	NodeNumber uint32
 	Reserved   [18]byte
 	GroupCount uint16
-	Anonymous  uintptr
+	Anonymous  NUMA_NODE_RELATIONSHIP_Anonymous_e__Union
 }
 
 // OSVERSIONINFOA: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-osversioninfoa
@@ -173,25 +173,25 @@ type PROCESSOR_RELATIONSHIP struct {
 // SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // SYSTEM_CPU_SET_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-system_cpu_set_information
 type SYSTEM_CPU_SET_INFORMATION struct {
 	Size      uint32
 	Type      CPU_SET_INFORMATION_TYPE
-	Anonymous uintptr
+	Anonymous SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union
 }
 
 // SYSTEM_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SYSTEM_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // SYSTEM_INFO: https://learn.microsoft.com/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info
 type SYSTEM_INFO struct {
-	Anonymous                   uintptr
+	Anonymous                   SYSTEM_INFO_Anonymous_e__Union
 	DwPageSize                  uint32
 	LpMinimumApplicationAddress unsafe.Pointer
 	LpMaximumApplicationAddress unsafe.Pointer
@@ -213,7 +213,7 @@ type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union struct {
 type SYSTEM_LOGICAL_PROCESSOR_INFORMATION struct {
 	ProcessorMask uintptr
 	Relationship  LOGICAL_PROCESSOR_RELATIONSHIP
-	Anonymous     uintptr
+	Anonymous     SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union
 }
 
 // SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -226,7 +226,7 @@ type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union struct {
 type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX struct {
 	Relationship LOGICAL_PROCESSOR_RELATIONSHIP
 	Size         uint32
-	Anonymous    uintptr
+	Anonymous    SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union
 }
 
 type SYSTEM_POOL_ZEROING_INFORMATION struct {

@@ -15,7 +15,7 @@ type APP_LOCAL_DEVICE_ID struct {
 // DECIMAL_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DECIMAL_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // DECIMAL_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
@@ -27,9 +27,9 @@ type DECIMAL_Anonymous2_e__Union struct {
 // DECIMAL: https://learn.microsoft.com/windows/win32/api/wtypes/ns-wtypes-decimal~r1
 type DECIMAL struct {
 	WReserved  uint16
-	Anonymous1 uintptr
+	Anonymous1 DECIMAL_Anonymous1_e__Union
 	Hi32       uint32
-	Anonymous2 uintptr
+	Anonymous2 DECIMAL_Anonymous2_e__Union
 }
 
 type DEVPROPKEY struct {

@@ -30,7 +30,7 @@ type CHAR_INFO_Char_e__Union struct {
 
 // CHAR_INFO: https://learn.microsoft.com/windows/console/char-info-str
 type CHAR_INFO struct {
-	Char       uintptr
+	Char       CHAR_INFO_Char_e__Union
 	Attributes uint16
 }
 
@@ -161,13 +161,13 @@ type FOCUS_EVENT_RECORD struct {
 // INPUT_RECORD_Event_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type INPUT_RECORD_Event_e__Union struct {
-	Data [4]uint64
+	Data [4]uint32
 }
 
 // INPUT_RECORD: https://learn.microsoft.com/windows/console/input-record-str
 type INPUT_RECORD struct {
 	EventType uint16
-	Event     uintptr
+	Event     INPUT_RECORD_Event_e__Union
 }
 
 // KEY_EVENT_RECORD_uChar_e__Union is a C union; the raw tier exposes its correctly sized
@@ -182,7 +182,7 @@ type KEY_EVENT_RECORD struct {
 	WRepeatCount      uint16
 	WVirtualKeyCode   uint16
 	WVirtualScanCode  uint16
-	UChar             uintptr
+	UChar             KEY_EVENT_RECORD_uChar_e__Union
 	DwControlKeyState uint32
 }
 

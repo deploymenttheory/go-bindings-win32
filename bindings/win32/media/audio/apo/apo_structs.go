@@ -85,7 +85,7 @@ type APO_NOTIFICATION_Anonymous_e__Union struct {
 // APO_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-apo_notification
 type APO_NOTIFICATION struct {
 	Type      APO_NOTIFICATION_TYPE
-	Anonymous uintptr
+	Anonymous APO_NOTIFICATION_Anonymous_e__Union
 }
 
 // APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -97,7 +97,7 @@ type APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union struct {
 // APO_NOTIFICATION_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-apo_notification_descriptor
 type APO_NOTIFICATION_DESCRIPTOR struct {
 	Type      APO_NOTIFICATION_TYPE
-	Anonymous uintptr
+	Anonymous APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union
 }
 
 // APO_REG_PROPERTIES: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/ns-audioenginebaseapo-apo_reg_properties

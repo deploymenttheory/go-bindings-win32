@@ -2217,7 +2217,7 @@ type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union struct {
 // D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_configuration
 type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_configuration_h264
@@ -2247,7 +2247,7 @@ type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union struct {
 // D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_configuration_support
 type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_configuration_support_h264
@@ -2294,7 +2294,7 @@ type D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union struct
 // D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_picture_control_support
 type D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_picture_control_support_h264
@@ -2329,7 +2329,7 @@ type D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union struct {
 
 type D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1 struct {
 	NotificationMode D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM_NOTIFICATION_MODE
-	Anonymous        uintptr
+	Anonymous        D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_DESC: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_desc
@@ -2359,7 +2359,7 @@ type D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union struct {
 
 type D3D12_VIDEO_ENCODER_DIRTY_REGIONS struct {
 	MapSource D3D12_VIDEO_ENCODER_INPUT_MAP_SOURCE
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union
 }
 
 type D3D12_VIDEO_ENCODER_DIRTY_REGIONS_CONFIGURATION struct {
@@ -2430,7 +2430,7 @@ type D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union struct {
 
 type D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS struct {
 	MapSource D3D12_VIDEO_ENCODER_INPUT_MAP_SOURCE
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2441,7 +2441,7 @@ type D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Unio
 
 type D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_FRAME_SUBREGION_METADATA: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_frame_subregion_metadata
@@ -2481,7 +2481,7 @@ type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union struct {
 
 type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA struct {
 	MapType   D3D12_VIDEO_ENCODER_INPUT_MAP_TYPE
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union
 }
 
 type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_DIRTY_REGIONS struct {
@@ -2532,7 +2532,7 @@ type D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union struct {
 // D3D12_VIDEO_ENCODER_LEVEL_SETTING: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_level_setting
 type D3D12_VIDEO_ENCODER_LEVEL_SETTING struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_level_tier_constraints_hevc
@@ -2589,7 +2589,7 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union struct {
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_picture_control_codec_data
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2600,7 +2600,7 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union struct {
 
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1 struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_picture_control_codec_data_h264
@@ -2750,7 +2750,7 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Uni
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_picture_control_subregions_layout_data
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2761,7 +2761,7 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_picture_control_subregions_layout_data_slices
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES struct {
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_picture_resolution_desc
@@ -2785,7 +2785,7 @@ type D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union struct {
 // D3D12_VIDEO_ENCODER_PROFILE_DESC: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_profile_desc
 type D3D12_VIDEO_ENCODER_PROFILE_DESC struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union
 }
 
 type D3D12_VIDEO_ENCODER_QPMAP_CONFIGURATION struct {
@@ -2840,7 +2840,7 @@ type D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union st
 // D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_rate_control_configuration_params
 type D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_rate_control_cqp
@@ -2998,7 +2998,7 @@ type D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union struct {
 // D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_sequence_gop_structure
 type D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE struct {
 	DataSize  uint32
-	Anonymous uintptr
+	Anonymous D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union
 }
 
 // D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_sequence_gop_structure_h264
@@ -3338,12 +3338,12 @@ type DXVA2_DecodeExtensionData struct {
 // DXVA2_ExtendedFormat_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DXVA2_ExtendedFormat_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DXVA2_ExtendedFormat: https://learn.microsoft.com/windows/win32/api/dxva2api/ns-dxva2api-dxva2_extendedformat
 type DXVA2_ExtendedFormat struct {
-	Anonymous uintptr
+	Anonymous DXVA2_ExtendedFormat_Anonymous_e__Union
 }
 
 // DXVA2_FilterValues: https://learn.microsoft.com/windows/win32/api/dxva2api/ns-dxva2api-dxva2_filtervalues
@@ -3356,12 +3356,12 @@ type DXVA2_FilterValues struct {
 // DXVA2_Fixed32_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DXVA2_Fixed32_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DXVA2_Fixed32: https://learn.microsoft.com/windows/win32/api/dxva2api/ns-dxva2api-dxva2_fixed32
 type DXVA2_Fixed32 struct {
-	Anonymous uintptr
+	Anonymous DXVA2_Fixed32_Anonymous_e__Union
 }
 
 // DXVA2_Frequency: https://learn.microsoft.com/windows/win32/api/dxva2api/ns-dxva2api-dxva2_frequency
@@ -3552,12 +3552,12 @@ type DXVAHD_BLT_STATE_CONSTRICTION_DATA struct {
 // DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_blt_state_output_color_space_data
 type DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA struct {
-	Anonymous uintptr
+	Anonymous DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union
 }
 
 // DXVAHD_BLT_STATE_PRIVATE_DATA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_blt_state_private_data
@@ -3679,12 +3679,12 @@ type DXVAHD_STREAM_STATE_FRAME_FORMAT_DATA struct {
 // DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_stream_state_input_color_space_data
 type DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA struct {
-	Anonymous uintptr
+	Anonymous DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union
 }
 
 // DXVAHD_STREAM_STATE_LUMA_KEY_DATA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_stream_state_luma_key_data
@@ -4342,7 +4342,7 @@ type MFTOPONODE_ATTRIBUTE_UPDATE struct {
 	NodeId           uint64
 	GuidAttributeKey win32.GUID
 	AttrType         MF_ATTRIBUTE_TYPE
-	Anonymous        uintptr
+	Anonymous        MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union
 }
 
 // MFT_INPUT_STREAM_INFO: https://learn.microsoft.com/windows/win32/api/mftransform/ns-mftransform-mft_input_stream_info
@@ -4410,7 +4410,7 @@ type MFVideoAlphaBitmap_bitmap_e__Union struct {
 // MFVideoAlphaBitmap: https://learn.microsoft.com/windows/win32/api/evr9/ns-evr9-mfvideoalphabitmap
 type MFVideoAlphaBitmap struct {
 	GetBitmapFromDC foundation.BOOL
-	Bitmap          uintptr
+	Bitmap          MFVideoAlphaBitmap_bitmap_e__Union
 	Params          MFVideoAlphaBitmapParams
 }
 
@@ -4694,7 +4694,7 @@ type VIDEOINFOHEADER2 struct {
 	DwCopyProtectFlags uint32
 	DwPictAspectRatioX uint32
 	DwPictAspectRatioY uint32
-	Anonymous          uintptr
+	Anonymous          VIDEOINFOHEADER2_Anonymous_e__Union
 	DwReserved2        uint32
 	BmiHeader          graphicsgdi.BITMAPINFOHEADER
 }

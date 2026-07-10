@@ -83,7 +83,7 @@ type ACTRL_OVERLAPPED_Anonymous_e__Union struct {
 }
 
 type ACTRL_OVERLAPPED struct {
-	Anonymous uintptr
+	Anonymous ACTRL_OVERLAPPED_Anonymous_e__Union
 	Reserved2 uint32
 	HEvent    foundation.HANDLE
 }
@@ -135,8 +135,8 @@ type AUDIT_PARAM struct {
 	Type       AUDIT_PARAM_TYPE
 	Length     uint32
 	Flags      uint32
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 AUDIT_PARAM_Anonymous1_e__Union
+	Anonymous2 AUDIT_PARAM_Anonymous2_e__Union
 }
 
 type AUDIT_PARAMS struct {
@@ -223,7 +223,7 @@ type AUTHZ_SECURITY_ATTRIBUTES_INFORMATION struct {
 	Version        uint16
 	Reserved       uint16
 	AttributeCount uint32
-	Attribute      uintptr
+	Attribute      AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union
 }
 
 // AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE: https://learn.microsoft.com/windows/win32/api/authz/ns-authz-authz_security_attribute_fqbn_value
@@ -251,7 +251,7 @@ type AUTHZ_SECURITY_ATTRIBUTE_V1 struct {
 	Reserved   uint16
 	Flags      AUTHZ_SECURITY_ATTRIBUTE_FLAGS
 	ValueCount uint32
-	Values     uintptr
+	Values     AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union
 }
 
 // AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -268,7 +268,7 @@ type AUTHZ_SOURCE_SCHEMA_REGISTRATION struct {
 	SzEventSourceXmlSchemaFile foundation.PWSTR
 	SzEventAccessStringsFile   foundation.PWSTR
 	SzExecutableImagePath      foundation.PWSTR
-	Anonymous                  uintptr
+	Anonymous                  AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union
 	DwObjectTypeNameCount      uint32
 	ObjectTypeNames            [1]AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET
 }

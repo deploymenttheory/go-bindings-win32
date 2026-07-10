@@ -78,7 +78,7 @@ type SOCKADDR_HV struct {
 // VIRTUAL_PROCESSOR_REGISTER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type VIRTUAL_PROCESSOR_REGISTER struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // VM_GENCOUNTER: https://learn.microsoft.com/windows/win32/api/vmgenerationcounter/ns-vmgenerationcounter-vm_gencounter
@@ -96,7 +96,7 @@ type WHV_ACCESS_GPA_CONTROLS struct {
 // WHV_ADVISE_GPA_RANGE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_ADVISE_GPA_RANGE struct {
-	Data [2]uint64
+	Data [2]uint32
 }
 
 type WHV_ADVISE_GPA_RANGE_POPULATE struct {
@@ -107,7 +107,7 @@ type WHV_ADVISE_GPA_RANGE_POPULATE struct {
 // WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // WHV_CAPABILITY is a C union; the raw tier exposes its correctly sized
@@ -171,7 +171,7 @@ type WHV_EMULATOR_MEMORY_ACCESS_INFO struct {
 // WHV_EMULATOR_STATUS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_EMULATOR_STATUS struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // WHV_EXTENDED_VM_EXITS is a C union; the raw tier exposes its correctly sized
@@ -217,7 +217,7 @@ type WHV_MEMORY_ACCESS_CONTEXT struct {
 // WHV_MEMORY_ACCESS_INFO is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_MEMORY_ACCESS_INFO struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type WHV_MEMORY_RANGE_ENTRY struct {
@@ -241,7 +241,7 @@ type WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union struct {
 type WHV_NOTIFICATION_PORT_PARAMETERS struct {
 	NotificationPortType WHV_NOTIFICATION_PORT_TYPE
 	Reserved             uint32
-	Anonymous            uintptr
+	Anonymous            WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union
 }
 
 type WHV_PARTITION_MEMORY_COUNTERS struct {
@@ -291,7 +291,7 @@ type WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union struct {
 type WHV_PROCESSOR_FEATURES_BANKS struct {
 	BanksCount uint32
 	Reserved0  uint32
-	Anonymous  uintptr
+	Anonymous  WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union
 }
 
 type WHV_PROCESSOR_INTERCEPT_COUNTER struct {
@@ -345,7 +345,7 @@ type WHV_PROCESSOR_XSAVE_FEATURES struct {
 // WHV_REGISTER_VALUE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_REGISTER_VALUE struct {
-	Data [3]uint64
+	Data [2]uint64
 }
 
 type WHV_RUN_VP_CANCELED_CONTEXT struct {
@@ -362,7 +362,7 @@ type WHV_RUN_VP_EXIT_CONTEXT struct {
 	ExitReason WHV_RUN_VP_EXIT_REASON
 	Reserved   uint32
 	VpContext  WHV_VP_EXIT_CONTEXT
-	Anonymous  uintptr
+	Anonymous  WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union
 }
 
 // WHV_SCHEDULER_FEATURES is a C union; the raw tier exposes its correctly sized
@@ -406,7 +406,7 @@ type WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union struct {
 type WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS struct {
 	BanksCount uint32
 	Reserved0  uint32
-	Anonymous  uintptr
+	Anonymous  WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union
 }
 
 type WHV_TRANSLATE_GVA_RESULT struct {
@@ -417,13 +417,13 @@ type WHV_TRANSLATE_GVA_RESULT struct {
 // WHV_TRIGGER_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_TRIGGER_PARAMETERS_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [3]uint64
 }
 
 type WHV_TRIGGER_PARAMETERS struct {
 	TriggerType WHV_TRIGGER_TYPE
 	Reserved    uint32
-	Anonymous   uintptr
+	Anonymous   WHV_TRIGGER_PARAMETERS_Anonymous_e__Union
 }
 
 // WHV_UINT128 is a C union; the raw tier exposes its correctly sized
@@ -441,7 +441,7 @@ type WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union struct {
 type WHV_VIRTUAL_PROCESSOR_PROPERTY struct {
 	PropertyCode WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE
 	Reserved     uint32
-	Anonymous    uintptr
+	Anonymous    WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union
 }
 
 // WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -453,7 +453,7 @@ type WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union struct {
 type WHV_VPCI_DEVICE_NOTIFICATION struct {
 	NotificationType WHV_VPCI_DEVICE_NOTIFICATION_TYPE
 	Reserved1        uint32
-	Anonymous        uintptr
+	Anonymous        WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union
 }
 
 type WHV_VPCI_DEVICE_REGISTER struct {
@@ -506,7 +506,7 @@ type WHV_VP_EXCEPTION_CONTEXT struct {
 // WHV_VP_EXCEPTION_INFO is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_VP_EXCEPTION_INFO struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type WHV_VP_EXIT_CONTEXT struct {
@@ -612,7 +612,7 @@ type WHV_X64_IO_PORT_ACCESS_CONTEXT struct {
 // WHV_X64_IO_PORT_ACCESS_INFO is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_X64_IO_PORT_ACCESS_INFO struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type WHV_X64_MSR_ACCESS_CONTEXT struct {
@@ -625,7 +625,7 @@ type WHV_X64_MSR_ACCESS_CONTEXT struct {
 // WHV_X64_MSR_ACCESS_INFO is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_X64_MSR_ACCESS_INFO struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // WHV_X64_MSR_EXIT_BITMAP is a C union; the raw tier exposes its correctly sized
@@ -675,14 +675,14 @@ type WHV_X64_RDTSC_INFO struct {
 // WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type WHV_X64_SEGMENT_REGISTER struct {
 	Base      uint64
 	Limit     uint32
 	Selector  uint16
-	Anonymous uintptr
+	Anonymous WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union
 }
 
 type WHV_X64_TABLE_REGISTER struct {
@@ -700,7 +700,7 @@ type WHV_X64_UNSUPPORTED_FEATURE_CONTEXT struct {
 // WHV_X64_VP_EXECUTION_STATE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WHV_X64_VP_EXECUTION_STATE struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // WHV_X64_XMM_CONTROL_STATUS_REGISTER is a C union; the raw tier exposes its correctly sized

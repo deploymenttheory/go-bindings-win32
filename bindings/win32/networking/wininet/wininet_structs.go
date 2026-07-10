@@ -99,7 +99,7 @@ type GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union struct {
 type GOPHER_ATTRIBUTE_TYPE struct {
 	CategoryId    uint32
 	AttributeId   uint32
-	AttributeType uintptr
+	AttributeType GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union
 }
 
 // GOPHER_FIND_DATAA: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-gopher_find_dataa
@@ -253,7 +253,7 @@ type INTERNET_BUFFERSW struct {
 // INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union struct {
-	Data [33]uint64
+	Data [66]uint32
 }
 
 // INTERNET_CACHE_CONFIG_INFOA: https://learn.microsoft.com/windows/win32/api/winineti/ns-winineti-internet_cache_config_infoa
@@ -265,7 +265,7 @@ type INTERNET_CACHE_CONFIG_INFOA struct {
 	FPerUser        foundation.BOOL
 	DwSyncMode      uint32
 	DwNumCachePaths uint32
-	Anonymous       uintptr
+	Anonymous       INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union
 	DwNormalUsage   uint32
 	DwExemptUsage   uint32
 }
@@ -273,7 +273,7 @@ type INTERNET_CACHE_CONFIG_INFOA struct {
 // INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union struct {
-	Data [66]uint64
+	Data [131]uint32
 }
 
 // INTERNET_CACHE_CONFIG_INFOW: https://learn.microsoft.com/windows/win32/api/winineti/ns-winineti-internet_cache_config_infow
@@ -285,7 +285,7 @@ type INTERNET_CACHE_CONFIG_INFOW struct {
 	FPerUser        foundation.BOOL
 	DwSyncMode      uint32
 	DwNumCachePaths uint32
-	Anonymous       uintptr
+	Anonymous       INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union
 	DwNormalUsage   uint32
 	DwExemptUsage   uint32
 }
@@ -339,7 +339,7 @@ type INTERNET_CACHE_ENTRY_INFOA struct {
 	LpHeaderInfo      foundation.PSTR
 	DwHeaderInfoSize  uint32
 	LpszFileExtension foundation.PSTR
-	Anonymous         uintptr
+	Anonymous         INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union
 }
 
 // INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -365,7 +365,7 @@ type INTERNET_CACHE_ENTRY_INFOW struct {
 	LpHeaderInfo      foundation.PWSTR
 	DwHeaderInfoSize  uint32
 	LpszFileExtension foundation.PWSTR
-	Anonymous         uintptr
+	Anonymous         INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union
 }
 
 // INTERNET_CACHE_GROUP_INFOA: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_group_infoa
@@ -449,7 +449,7 @@ type INTERNET_COOKIE2 struct {
 // INTERNET_CREDENTIALS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type INTERNET_CREDENTIALS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 type INTERNET_CREDENTIALS struct {
@@ -459,7 +459,7 @@ type INTERNET_CREDENTIALS struct {
 	LpcwszUrl      foundation.PWSTR
 	LpcwszRealm    foundation.PWSTR
 	FAuthIdentity  foundation.BOOL
-	Anonymous      uintptr
+	Anonymous      INTERNET_CREDENTIALS_Anonymous_e__Union
 }
 
 // INTERNET_DIAGNOSTIC_SOCKET_INFO: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_diagnostic_socket_info
@@ -489,7 +489,7 @@ type INTERNET_PER_CONN_OPTIONA_Value_e__Union struct {
 // INTERNET_PER_CONN_OPTIONA: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_per_conn_optiona
 type INTERNET_PER_CONN_OPTIONA struct {
 	DwOption INTERNET_PER_CONN
-	Value    uintptr
+	Value    INTERNET_PER_CONN_OPTIONA_Value_e__Union
 }
 
 // INTERNET_PER_CONN_OPTIONW_Value_e__Union is a C union; the raw tier exposes its correctly sized
@@ -501,7 +501,7 @@ type INTERNET_PER_CONN_OPTIONW_Value_e__Union struct {
 // INTERNET_PER_CONN_OPTIONW: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_per_conn_optionw
 type INTERNET_PER_CONN_OPTIONW struct {
 	DwOption INTERNET_PER_CONN
-	Value    uintptr
+	Value    INTERNET_PER_CONN_OPTIONW_Value_e__Union
 }
 
 // INTERNET_PER_CONN_OPTION_LISTA: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_per_conn_option_lista

@@ -19,31 +19,31 @@ type CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union struct {
 // CHANGE_ATTRIBUTES_PARAMETERS: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-change_attributes_parameters
 type CHANGE_ATTRIBUTES_PARAMETERS struct {
 	Style     VDS_PARTITION_STYLE
-	Anonymous uintptr
+	Anonymous CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union
 }
 
 // CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 // CHANGE_PARTITION_TYPE_PARAMETERS: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-change_partition_type_parameters
 type CHANGE_PARTITION_TYPE_PARAMETERS struct {
 	Style     VDS_PARTITION_STYLE
-	Anonymous uintptr
+	Anonymous CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union
 }
 
 // CREATE_PARTITION_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CREATE_PARTITION_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [14]uint64
 }
 
 // CREATE_PARTITION_PARAMETERS: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-create_partition_parameters
 type CREATE_PARTITION_PARAMETERS struct {
 	Style     VDS_PARTITION_STYLE
-	Anonymous uintptr
+	Anonymous CREATE_PARTITION_PARAMETERS_Anonymous_e__Union
 }
 
 // VDS_ADVANCEDDISK_PROP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -73,7 +73,7 @@ type VDS_ADVANCEDDISK_PROP struct {
 	Health               VDS_HEALTH
 	BusType              VDS_STORAGE_BUS_TYPE
 	PartitionStyle       VDS_PARTITION_STYLE
-	Anonymous            uintptr
+	Anonymous            VDS_ADVANCEDDISK_PROP_Anonymous_e__Union
 	UlFlags              uint32
 	DwDeviceType         uint32
 }
@@ -81,13 +81,13 @@ type VDS_ADVANCEDDISK_PROP struct {
 // VDS_ASYNC_OUTPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type VDS_ASYNC_OUTPUT_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // VDS_ASYNC_OUTPUT: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_async_output
 type VDS_ASYNC_OUTPUT struct {
 	Type      VDS_ASYNC_OUTPUT_TYPE
-	Anonymous uintptr
+	Anonymous VDS_ASYNC_OUTPUT_Anonymous_e__Union
 }
 
 // VDS_CONTROLLER_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_controller_notification
@@ -161,7 +161,7 @@ type VDS_DISK_PROP struct {
 	UlFlags             uint32
 	BusType             VDS_STORAGE_BUS_TYPE
 	PartitionStyle      VDS_PARTITION_STYLE
-	Anonymous           uintptr
+	Anonymous           VDS_DISK_PROP_Anonymous_e__Union
 	PwszDiskAddress     foundation.PWSTR
 	PwszName            foundation.PWSTR
 	PwszFriendlyName    foundation.PWSTR
@@ -191,7 +191,7 @@ type VDS_DISK_PROP2 struct {
 	UlFlags             uint32
 	BusType             VDS_STORAGE_BUS_TYPE
 	PartitionStyle      VDS_PARTITION_STYLE
-	Anonymous           uintptr
+	Anonymous           VDS_DISK_PROP2_Anonymous_e__Union
 	PwszDiskAddress     foundation.PWSTR
 	PwszName            foundation.PWSTR
 	PwszFriendlyName    foundation.PWSTR
@@ -503,7 +503,7 @@ type VDS_NOTIFICATION_Anonymous_e__Union struct {
 // VDS_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_notification
 type VDS_NOTIFICATION struct {
 	ObjectType VDS_NOTIFICATION_TARGET_TYPE
-	Anonymous  uintptr
+	Anonymous  VDS_NOTIFICATION_Anonymous_e__Union
 }
 
 // VDS_PACK_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_pack_notification
@@ -533,7 +533,7 @@ type VDS_PARTITION_INFORMATION_EX struct {
 	UllPartitionLength uint64
 	DwPartitionNumber  uint32
 	BRewritePartition  foundation.BOOLEAN
-	Anonymous          uintptr
+	Anonymous          VDS_PARTITION_INFORMATION_EX_Anonymous_e__Union
 }
 
 // VDS_PARTITION_INFO_GPT: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-vds_partition_info_gpt
@@ -572,7 +572,7 @@ type VDS_PARTITION_PROP struct {
 	UlPartitionNumber uint32
 	UllOffset         uint64
 	UllSize           uint64
-	Anonymous         uintptr
+	Anonymous         VDS_PARTITION_PROP_Anonymous_e__Union
 }
 
 // VDS_PATH_ID: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_path_id
@@ -604,9 +604,9 @@ type VDS_PATH_INFO struct {
 	PathId     VDS_PATH_ID
 	Type       VDS_HWPROVIDER_TYPE
 	Status     VDS_PATH_STATUS
-	Anonymous1 uintptr
-	Anonymous2 uintptr
-	Anonymous3 uintptr
+	Anonymous1 VDS_PATH_INFO_Anonymous1_e__Union
+	Anonymous2 VDS_PATH_INFO_Anonymous2_e__Union
+	Anonymous3 VDS_PATH_INFO_Anonymous3_e__Union
 }
 
 // VDS_PATH_POLICY: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_path_policy

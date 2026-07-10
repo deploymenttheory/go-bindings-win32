@@ -33,7 +33,7 @@ type AAL_PARAMETERS_IE_AALSpecificParameters_e__Union struct {
 
 type AAL_PARAMETERS_IE struct {
 	AALType               AAL_TYPE
-	AALSpecificParameters uintptr
+	AALSpecificParameters AAL_PARAMETERS_IE_AALSpecificParameters_e__Union
 }
 
 // ADDRINFOA: https://learn.microsoft.com/windows/win32/api/ws2def/ns-ws2def-addrinfoa
@@ -239,7 +239,7 @@ type ADDRINFO_DNS_SERVER struct {
 	Ai_flags      uint64
 	Ai_addrlen    uint32
 	Ai_addr       *SOCKADDR
-	Anonymous     uintptr
+	Anonymous     ADDRINFO_DNS_SERVER_Anonymous_e__Union
 }
 
 // AFPROTOCOLS: https://learn.microsoft.com/windows/win32/api/winsock2/ns-winsock2-afprotocols
@@ -385,7 +385,7 @@ type DL_EI64 struct {
 // DL_EUI48 is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DL_EUI48 struct {
-	Data [1]uint64
+	Data [6]byte
 }
 
 // DL_EUI64 is a C union; the raw tier exposes its correctly sized
@@ -397,7 +397,29 @@ type DL_EUI64 struct {
 // DL_OUI is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DL_OUI struct {
-	Data [1]uint64
+	Data [3]byte
+}
+
+// DL_TEREDO_ADDRESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
+// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+type DL_TEREDO_ADDRESS_Anonymous_e__Union struct {
+	Data [8]byte
+}
+
+type DL_TEREDO_ADDRESS struct {
+	Reserved  [6]byte
+	Anonymous DL_TEREDO_ADDRESS_Anonymous_e__Union
+}
+
+// DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
+// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+type DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union struct {
+	Data [24]byte
+}
+
+type DL_TEREDO_ADDRESS_PRV struct {
+	Reserved  [6]byte
+	Anonymous DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union
 }
 
 type DL_TUNNEL_ADDRESS struct {
@@ -415,7 +437,7 @@ type ETHERNET_HEADER_Anonymous_e__Union struct {
 type ETHERNET_HEADER struct {
 	Destination DL_EUI48
 	Source      DL_EUI48
-	Anonymous   uintptr
+	Anonymous   ETHERNET_HEADER_Anonymous_e__Union
 }
 
 // FD_SET: https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-fd_set
@@ -514,28 +536,28 @@ type ICMP_MESSAGE_Data_e__Union struct {
 
 type ICMP_MESSAGE struct {
 	Header ICMP_HEADER
-	Data   uintptr
+	Data   ICMP_MESSAGE_Data_e__Union
 }
 
 // IGMPV3_QUERY_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IGMPV3_QUERY_HEADER_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // IGMPV3_QUERY_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IGMPV3_QUERY_HEADER_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type IGMPV3_QUERY_HEADER struct {
 	Type             byte
-	Anonymous1       uintptr
+	Anonymous1       IGMPV3_QUERY_HEADER_Anonymous1_e__Union
 	Checksum         uint16
 	MulticastAddress IN_ADDR
 	Bitfield         byte
-	Anonymous2       uintptr
+	Anonymous2       IGMPV3_QUERY_HEADER_Anonymous2_e__Union
 	SourceCount      uint16
 }
 
@@ -557,7 +579,7 @@ type IGMPV3_REPORT_RECORD_HEADER struct {
 // IGMP_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IGMP_HEADER_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // IGMP_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
@@ -567,8 +589,8 @@ type IGMP_HEADER_Anonymous2_e__Union struct {
 }
 
 type IGMP_HEADER struct {
-	Anonymous1       uintptr
-	Anonymous2       uintptr
+	Anonymous1       IGMP_HEADER_Anonymous1_e__Union
+	Anonymous2       IGMP_HEADER_Anonymous2_e__Union
 	Checksum         uint16
 	MulticastAddress IN_ADDR
 }
@@ -581,7 +603,7 @@ type IN6_ADDR_u_e__Union struct {
 
 // IN6_ADDR: https://learn.microsoft.com/windows/win32/api/in6addr/ns-in6addr-in6_addr
 type IN6_ADDR struct {
-	U uintptr
+	U IN6_ADDR_u_e__Union
 }
 
 // IN6_PKTINFO: https://learn.microsoft.com/windows/win32/api/ws2ipdef/ns-ws2ipdef-in6_pktinfo
@@ -635,12 +657,12 @@ type INTERFACE_INFO_EX struct {
 // IN_ADDR_S_un_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IN_ADDR_S_un_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // IN_ADDR: https://learn.microsoft.com/windows/win32/api/inaddr/ns-inaddr-in_addr
 type IN_ADDR struct {
-	S_un uintptr
+	S_un IN_ADDR_S_un_e__Union
 }
 
 // IN_PKTINFO: https://learn.microsoft.com/windows/win32/api/ws2ipdef/ns-ws2ipdef-in_pktinfo
@@ -664,27 +686,27 @@ type IN_RECVERR struct {
 // IPV4_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV4_HEADER_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // IPV4_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV4_HEADER_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // IPV4_HEADER_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV4_HEADER_Anonymous3_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type IPV4_HEADER struct {
-	Anonymous1         uintptr
-	Anonymous2         uintptr
+	Anonymous1         IPV4_HEADER_Anonymous1_e__Union
+	Anonymous2         IPV4_HEADER_Anonymous2_e__Union
 	TotalLength        uint16
 	Identification     uint16
-	Anonymous3         uintptr
+	Anonymous3         IPV4_HEADER_Anonymous3_e__Union
 	TimeToLive         byte
 	Protocol           byte
 	HeaderChecksum     uint16
@@ -695,11 +717,11 @@ type IPV4_HEADER struct {
 // IPV4_OPTION_HEADER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV4_OPTION_HEADER_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type IPV4_OPTION_HEADER struct {
-	Anonymous    uintptr
+	Anonymous    IPV4_OPTION_HEADER_Anonymous_e__Union
 	OptionLength byte
 }
 
@@ -711,13 +733,13 @@ type IPV4_ROUTING_HEADER struct {
 // IPV4_TIMESTAMP_OPTION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV4_TIMESTAMP_OPTION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type IPV4_TIMESTAMP_OPTION struct {
 	OptionHeader IPV4_OPTION_HEADER
 	Pointer      byte
-	Anonymous    uintptr
+	Anonymous    IPV4_TIMESTAMP_OPTION_Anonymous_e__Union
 }
 
 type IPV6_EXTENSION_HEADER struct {
@@ -728,24 +750,24 @@ type IPV6_EXTENSION_HEADER struct {
 // IPV6_FRAGMENT_HEADER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV6_FRAGMENT_HEADER_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type IPV6_FRAGMENT_HEADER struct {
 	NextHeader byte
 	Reserved   byte
-	Anonymous  uintptr
+	Anonymous  IPV6_FRAGMENT_HEADER_Anonymous_e__Union
 	Id         uint32
 }
 
 // IPV6_HEADER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV6_HEADER_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type IPV6_HEADER struct {
-	Anonymous          uintptr
+	Anonymous          IPV6_HEADER_Anonymous_e__Union
 	PayloadLength      uint16
 	NextHeader         byte
 	HopLimit           byte
@@ -762,7 +784,7 @@ type IPV6_MREQ struct {
 // IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type IPV6_OPTION_HEADER struct {
@@ -783,7 +805,7 @@ type IPV6_OPTION_ROUTER_ALERT struct {
 // IPV6_ROUTER_ADVERTISEMENT_FLAGS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IPV6_ROUTER_ADVERTISEMENT_FLAGS struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type IPV6_ROUTING_HEADER struct {
@@ -878,22 +900,22 @@ type LM_IRPARMS struct {
 // MLDV2_QUERY_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MLDV2_QUERY_HEADER_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // MLDV2_QUERY_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MLDV2_QUERY_HEADER_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type MLDV2_QUERY_HEADER struct {
 	IcmpHeader       ICMP_HEADER
-	Anonymous1       uintptr
+	Anonymous1       MLDV2_QUERY_HEADER_Anonymous1_e__Union
 	Reserved         uint16
 	MulticastAddress IN6_ADDR
 	Bitfield         byte
-	Anonymous2       uintptr
+	Anonymous2       MLDV2_QUERY_HEADER_Anonymous2_e__Union
 	SourceCount      uint16
 }
 
@@ -966,36 +988,36 @@ type ND_OPTION_MTU struct {
 // ND_OPTION_PREF64_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type ND_OPTION_PREF64_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type ND_OPTION_PREF64 struct {
 	Nd_opt_p64_type   byte
 	Nd_opt_p64_len    byte
-	Anonymous         uintptr
+	Anonymous         ND_OPTION_PREF64_Anonymous_e__Union
 	Nd_opt_p64_prefix [12]byte
 }
 
 // ND_OPTION_PREFIX_INFO_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type ND_OPTION_PREFIX_INFO_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // ND_OPTION_PREFIX_INFO_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type ND_OPTION_PREFIX_INFO_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type ND_OPTION_PREFIX_INFO struct {
 	Nd_opt_pi_type           byte
 	Nd_opt_pi_len            byte
 	Nd_opt_pi_prefix_len     byte
-	Anonymous1               uintptr
+	Anonymous1               ND_OPTION_PREFIX_INFO_Anonymous1_e__Union
 	Nd_opt_pi_valid_time     uint32
 	Nd_opt_pi_preferred_time uint32
-	Anonymous2               uintptr
+	Anonymous2               ND_OPTION_PREFIX_INFO_Anonymous2_e__Union
 	Nd_opt_pi_prefix         IN6_ADDR
 }
 
@@ -1016,14 +1038,14 @@ type ND_OPTION_RD_HDR struct {
 // ND_OPTION_ROUTE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type ND_OPTION_ROUTE_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type ND_OPTION_ROUTE_INFO struct {
 	Nd_opt_ri_type           byte
 	Nd_opt_ri_len            byte
 	Nd_opt_ri_prefix_len     byte
-	Anonymous                uintptr
+	Anonymous                ND_OPTION_ROUTE_INFO_Anonymous_e__Union
 	Nd_opt_ri_route_lifetime uint32
 	Nd_opt_ri_prefix         IN6_ADDR
 }
@@ -1075,7 +1097,7 @@ type NETRESOURCE2W struct {
 // NLA_BLOB_data_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NLA_BLOB_data_e__Union struct {
-	Data [1]uint64
+	Data [259]uint32
 }
 
 type NLA_BLOB_header_e__Struct struct {
@@ -1085,8 +1107,8 @@ type NLA_BLOB_header_e__Struct struct {
 }
 
 type NLA_BLOB struct {
-	Header uintptr
-	Data   uintptr
+	Header NLA_BLOB_header_e__Struct
+	Data   NLA_BLOB_data_e__Union
 }
 
 // NL_BANDWIDTH_INFORMATION: https://learn.microsoft.com/windows/win32/api/nldef/ns-nldef-nl_bandwidth_information
@@ -1125,7 +1147,7 @@ type NPI_MODULEID_Anonymous_e__Union struct {
 type NPI_MODULEID struct {
 	Length    uint16
 	Type      NPI_MODULEID_TYPE
-	Anonymous uintptr
+	Anonymous NPI_MODULEID_Anonymous_e__Union
 }
 
 // NSPV2_ROUTINE: https://learn.microsoft.com/windows/win32/api/ws2spi/ns-ws2spi-nspv2_routine
@@ -1293,13 +1315,13 @@ type RIO_EXTENSION_FUNCTION_TABLE struct {
 // RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // RIO_NOTIFICATION_COMPLETION: https://learn.microsoft.com/windows/win32/api/mswsock/ns-mswsock-rio_notification_completion
 type RIO_NOTIFICATION_COMPLETION struct {
 	Type      RIO_NOTIFICATION_COMPLETION_TYPE
-	Anonymous uintptr
+	Anonymous RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union
 }
 
 // RM_FEC_INFO: https://learn.microsoft.com/windows/win32/api/wsrm/ns-wsrm-rm_fec_info
@@ -1363,11 +1385,11 @@ type RSS_SCALABILITY_INFO struct {
 // SCOPE_ID_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SCOPE_ID_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type SCOPE_ID struct {
-	Anonymous uintptr
+	Anonymous SCOPE_ID_Anonymous_e__Union
 }
 
 // SERVENT: https://learn.microsoft.com/windows/win32/api/winsock/ns-winsock-servent
@@ -1512,7 +1534,7 @@ type SOCKADDR_IN struct {
 // SOCKADDR_IN6_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SOCKADDR_IN6_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type SOCKADDR_IN6 struct {
@@ -1520,7 +1542,7 @@ type SOCKADDR_IN6 struct {
 	Sin6_port     uint16
 	Sin6_flowinfo uint32
 	Sin6_addr     IN6_ADDR
-	Anonymous     uintptr
+	Anonymous     SOCKADDR_IN6_Anonymous_e__Union
 }
 
 // SOCKADDR_IN6_PAIR: https://learn.microsoft.com/windows/win32/api/ws2ipdef/ns-ws2ipdef-sockaddr_in6_pair
@@ -1542,7 +1564,7 @@ type SOCKADDR_IN6_W2KSP1 struct {
 // SOCKADDR_INET is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SOCKADDR_INET struct {
-	Data [3]uint64
+	Data [7]uint32
 }
 
 type SOCKADDR_IPX struct {
@@ -1843,14 +1865,14 @@ type TRANSMIT_FILE_BUFFERS struct {
 // TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // TRANSMIT_PACKETS_ELEMENT: https://learn.microsoft.com/windows/win32/api/mswsock/ns-mswsock-transmit_packets_element
 type TRANSMIT_PACKETS_ELEMENT struct {
 	DwElFlags uint32
 	CLength   uint32
-	Anonymous uintptr
+	Anonymous TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union
 }
 
 // TRANSPORT_SETTING_ID: https://learn.microsoft.com/windows/win32/api/mstcpip/ns-mstcpip-transport_setting_id
@@ -1861,11 +1883,11 @@ type TRANSPORT_SETTING_ID struct {
 // VLAN_TAG_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type VLAN_TAG_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type VLAN_TAG struct {
-	Anonymous uintptr
+	Anonymous VLAN_TAG_Anonymous_e__Union
 	Type      uint16
 }
 
@@ -1888,7 +1910,7 @@ type WINDOWS_DEVICELIST struct {
 // WINDOWS_IAS_QUERY_irdaAttribute_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINDOWS_IAS_QUERY_irdaAttribute_e__Union struct {
-	Data [1]uint64
+	Data [257]uint32
 }
 
 type WINDOWS_IAS_QUERY struct {
@@ -1896,20 +1918,20 @@ type WINDOWS_IAS_QUERY struct {
 	IrdaClassName  [64]foundation.CHAR
 	IrdaAttribName [256]foundation.CHAR
 	IrdaAttribType uint32
-	IrdaAttribute  uintptr
+	IrdaAttribute  WINDOWS_IAS_QUERY_irdaAttribute_e__Union
 }
 
 // WINDOWS_IAS_SET_irdaAttribute_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WINDOWS_IAS_SET_irdaAttribute_e__Union struct {
-	Data [1]uint64
+	Data [257]uint32
 }
 
 type WINDOWS_IAS_SET struct {
 	IrdaClassName  [64]foundation.CHAR
 	IrdaAttribName [256]foundation.CHAR
 	IrdaAttribType uint32
-	IrdaAttribute  uintptr
+	IrdaAttribute  WINDOWS_IAS_SET_irdaAttribute_e__Union
 }
 
 type WINDOWS_IRDA_DEVICE_INFO struct {
@@ -1929,13 +1951,13 @@ type WSABUF struct {
 // WSACOMPLETION_Parameters_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WSACOMPLETION_Parameters_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // WSACOMPLETION: https://learn.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsacompletion
 type WSACOMPLETION struct {
 	Type       WSACOMPLETIONTYPE
-	Parameters uintptr
+	Parameters WSACOMPLETION_Parameters_e__Union
 }
 
 // WSADATA: https://learn.microsoft.com/windows/win32/api/winsock/ns-winsock-wsadata
@@ -2281,7 +2303,7 @@ type Netent struct {
 // Sockaddr_gen is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type Sockaddr_gen struct {
-	Data [3]uint64
+	Data [6]uint32
 }
 
 // Sockaddr_in6_old: https://learn.microsoft.com/windows/win32/api/ws2ipdef/ns-ws2ipdef-sockaddr_in6_old

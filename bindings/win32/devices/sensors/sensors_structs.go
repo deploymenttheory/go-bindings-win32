@@ -12,11 +12,11 @@ import (
 // MATRIX3X3_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MATRIX3X3_Anonymous_e__Union struct {
-	Data [5]uint64
+	Data [9]uint32
 }
 
 type MATRIX3X3 struct {
-	Anonymous uintptr
+	Anonymous MATRIX3X3_Anonymous_e__Union
 }
 
 type QUATERNION struct {

@@ -122,7 +122,7 @@ type CLAIM_SECURITY_ATTRIBUTES_INFORMATION struct {
 	Version        uint16
 	Reserved       uint16
 	AttributeCount uint32
-	Attribute      uintptr
+	Attribute      CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union
 }
 
 // CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-claim_security_attribute_fqbn_value
@@ -150,7 +150,7 @@ type CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 struct {
 	Reserved   uint16
 	Flags      CLAIM_SECURITY_ATTRIBUTE_FLAGS
 	ValueCount uint32
-	Values     uintptr
+	Values     CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union
 }
 
 // CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union is a C union; the raw tier exposes its correctly sized
@@ -166,7 +166,7 @@ type CLAIM_SECURITY_ATTRIBUTE_V1 struct {
 	Reserved   uint16
 	Flags      uint32
 	ValueCount uint32
-	Values     uintptr
+	Values     CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union
 }
 
 // GENERIC_MAPPING: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-generic_mapping
@@ -184,7 +184,7 @@ type LLFILETIME_Anonymous_e__Union struct {
 }
 
 type LLFILETIME struct {
-	Anonymous uintptr
+	Anonymous LLFILETIME_Anonymous_e__Union
 }
 
 // LUID_AND_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-luid_and_attributes

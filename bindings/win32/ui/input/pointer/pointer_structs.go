@@ -21,12 +21,12 @@ type INPUT_INJECTION_VALUE struct {
 // INPUT_TRANSFORM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type INPUT_TRANSFORM_Anonymous_e__Union struct {
-	Data [8]uint64
+	Data [16]uint32
 }
 
 // INPUT_TRANSFORM: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-input_transform
 type INPUT_TRANSFORM struct {
-	Anonymous uintptr
+	Anonymous INPUT_TRANSFORM_Anonymous_e__Union
 }
 
 // POINTER_DEVICE_CURSOR_INFO: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-pointer_device_cursor_info
@@ -109,5 +109,5 @@ type POINTER_TYPE_INFO_Anonymous_e__Union struct {
 // POINTER_TYPE_INFO: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-pointer_type_info
 type POINTER_TYPE_INFO struct {
 	Type      uiwindowsandmessaging.POINTER_INPUT_TYPE
-	Anonymous uintptr
+	Anonymous POINTER_TYPE_INFO_Anonymous_e__Union
 }

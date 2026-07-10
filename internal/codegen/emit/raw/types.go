@@ -241,14 +241,33 @@ func (g *Generator) buildStructTree(meta *win32meta.NamespaceMeta, name string, 
 		return nil
 	}
 
+	// Emit anonymous nested types as siblings first (they precede the parent
+	// in output), recording which actually emitted. A nested type that is
+	// itself unrepresentable (e.g. packed) is skipped, and a by-value field
+	// referencing it must not dangle — see fieldGoType.
+	nestedNames := make([]string, 0, len(definition.NestedTypes))
+	for nested := range definition.NestedTypes {
+		nestedNames = append(nestedNames, nested)
+	}
+	sort.Strings(nestedNames)
+	emittedNested := map[string]bool{}
+	for _, nested := range nestedNames {
+		nestedDefinition := definition.NestedTypes[nested]
+		sub := g.buildStructTree(meta, nestedTypeName(name, nested), &nestedDefinition, imports, true)
+		if len(sub) > 0 {
+			models = append(models, sub...)
+			emittedNested[nested] = true
+		}
+	}
+
 	fieldNames := map[string]bool{}
 	for i := range definition.Fields {
 		field := &definition.Fields[i]
-		goType, ok := g.fieldGoType(meta, name, definition, &field.Type, imports)
+		goType, ok := g.fieldGoType(meta, name, definition, &field.Type, emittedNested, imports)
 		if !ok {
 			g.diag("struct %s: field %s type unresolved, struct skipped", name, field.Name)
 			g.unclaimName(name)
-			return nil
+			return models // keep the already-emitted nested siblings
 		}
 		fieldName := exportName(field.Name)
 		if len(field.Bitfields) > 0 {
@@ -263,16 +282,6 @@ func (g *Generator) buildStructTree(meta *win32meta.NamespaceMeta, name string, 
 		model.Fields = append(model.Fields, view.StructFieldModel{Name: fieldName, GoType: goType})
 	}
 
-	// Emit anonymous nested types as siblings (post-order keeps deps first).
-	nestedNames := make([]string, 0, len(definition.NestedTypes))
-	for nested := range definition.NestedTypes {
-		nestedNames = append(nestedNames, nested)
-	}
-	sort.Strings(nestedNames)
-	for _, nested := range nestedNames {
-		nestedDefinition := definition.NestedTypes[nested]
-		models = append(models, g.buildStructTree(meta, nestedTypeName(name, nested), &nestedDefinition, imports, true)...)
-	}
 	g.recordABI(meta.Namespace, name, definition, model.Fields)
 	return append(models, model)
 }
@@ -291,22 +300,25 @@ func sameLayout(a, b structLayout) bool {
 }
 
 // fieldGoType resolves a struct field type, mapping anonymous nested
-// references onto their emitted sibling names.
-func (g *Generator) fieldGoType(meta *win32meta.NamespaceMeta, parentName string, parent *win32meta.Struct, ref *win32meta.TypeRef, imports typemap.ImportSet) (string, bool) {
+// references onto their emitted sibling names. emittedNested reports which of
+// the parent's nested types actually emitted; a by-value reference to a
+// nested type that did not (e.g. a packed one) fails so the parent is skipped
+// rather than dangling — a pointer to it degrades to unsafe.Pointer.
+func (g *Generator) fieldGoType(meta *win32meta.NamespaceMeta, parentName string, parent *win32meta.Struct, ref *win32meta.TypeRef, emittedNested map[string]bool, imports typemap.ImportSet) (string, bool) {
 	if ref.Kind == "ApiRef" && ref.Api == "" {
-		if _, ok := parent.NestedTypes[ref.Name]; ok {
+		if emittedNested[ref.Name] {
 			return nestedTypeName(parentName, ref.Name), true
 		}
 		return "", false
 	}
 	if ref.Kind == "PointerTo" && ref.Child != nil && ref.Child.Kind == "ApiRef" && ref.Child.Api == "" {
-		if _, ok := parent.NestedTypes[ref.Child.Name]; ok {
+		if emittedNested[ref.Child.Name] {
 			return "*" + nestedTypeName(parentName, ref.Child.Name), true
 		}
-		return "", false
+		return "unsafe.Pointer", true // pointee unrepresentable; the pointer is fine
 	}
 	if ref.Kind == "Array" && ref.Child != nil && ref.Child.Kind == "ApiRef" && ref.Child.Api == "" {
-		if _, ok := parent.NestedTypes[ref.Child.Name]; ok {
+		if emittedNested[ref.Child.Name] {
 			return fmt.Sprintf("[%d]%s", ref.ArrayLen, nestedTypeName(parentName, ref.Child.Name)), true
 		}
 		return "", false

@@ -775,7 +775,7 @@ type DVD_TitleAttributes_Anonymous_e__Union struct {
 
 // DVD_TitleAttributes: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-dvd_titleattributes
 type DVD_TitleAttributes struct {
-	Anonymous                   uintptr
+	Anonymous                   DVD_TitleAttributes_Anonymous_e__Union
 	VideoAttributes             DVD_VideoAttributes
 	UlNumberOfAudioStreams      uint32
 	AudioAttributes             [8]DVD_AudioAttributes
@@ -1096,14 +1096,14 @@ type REGFILTER struct {
 // REGFILTER2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type REGFILTER2_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // REGFILTER2: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-regfilter2
 type REGFILTER2 struct {
 	DwVersion uint32
 	DwMerit   uint32
-	Anonymous uintptr
+	Anonymous REGFILTER2_Anonymous_e__Union
 }
 
 // REGFILTERPINS: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-regfilterpins
@@ -1184,7 +1184,7 @@ type VIDEOINFO struct {
 	DwBitErrorRate  uint32
 	AvgTimePerFrame int64
 	BmiHeader       graphicsgdi.BITMAPINFOHEADER
-	Anonymous       uintptr
+	Anonymous       VIDEOINFO_Anonymous_e__Union
 }
 
 // VIDEO_STREAM_CONFIG_CAPS: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-video_stream_config_caps

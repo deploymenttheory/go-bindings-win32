@@ -34,7 +34,7 @@ type AACS_READ_BINDING_NONCE struct {
 	SessionId       uint32
 	NumberOfSectors uint32
 	StartLba        uint64
-	Anonymous       uintptr
+	Anonymous       AACS_READ_BINDING_NONCE_Anonymous_e__Union
 }
 
 type AACS_SEND_CERTIFICATE struct {
@@ -96,23 +96,23 @@ type DVD_BD_SPARE_AREA_INFORMATION struct {
 // DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR struct {
-	Anonymous uintptr
+	Anonymous DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union
 	Reserved0 [3]byte
 }
 
 // DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union struct {
-	Data [1]uint64
+	Data [4]byte
 }
 
 type DVD_DISC_CONTROL_BLOCK_HEADER struct {
 	ContentDescriptor [4]byte
-	ProhibitedActions uintptr
+	ProhibitedActions DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union
 	VendorId          [32]byte
 }
 
@@ -146,13 +146,13 @@ type DVD_DISC_CONTROL_BLOCK_SESSION_ITEM struct {
 // DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union struct {
-	Data [1]uint64
+	Data [4]byte
 }
 
 type DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT struct {
 	Header              DVD_DISC_CONTROL_BLOCK_HEADER
 	UpdateCount         [4]byte
-	WriteProtectActions uintptr
+	WriteProtectActions DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union
 	Reserved0           [16]byte
 	UpdatePassword      [32]byte
 	Reserved1           [32672]byte

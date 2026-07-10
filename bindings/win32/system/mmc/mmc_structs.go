@@ -150,7 +150,7 @@ type MMC_TASK struct {
 	SzText         foundation.PWSTR
 	SzHelpString   foundation.PWSTR
 	EActionType    MMC_ACTION_TYPE
-	Anonymous      uintptr
+	Anonymous      MMC_TASK_Anonymous_e__Union
 }
 
 // MMC_TASK_DISPLAY_BITMAP: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-mmc_task_display_bitmap
@@ -168,7 +168,7 @@ type MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union struct {
 // MMC_TASK_DISPLAY_OBJECT: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-mmc_task_display_object
 type MMC_TASK_DISPLAY_OBJECT struct {
 	EDisplayType MMC_TASK_DISPLAY_TYPE
-	Anonymous    uintptr
+	Anonymous    MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union
 }
 
 // MMC_TASK_DISPLAY_SYMBOL: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-mmc_task_display_symbol
@@ -225,7 +225,7 @@ type RESULTFINDINFO struct {
 // RESULT_VIEW_TYPE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RESULT_VIEW_TYPE_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // RESULT_VIEW_TYPE_INFO: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-result_view_type_info
@@ -233,7 +233,7 @@ type RESULT_VIEW_TYPE_INFO struct {
 	PstrPersistableViewDescription foundation.PWSTR
 	EViewType                      MMC_VIEW_TYPE
 	DwMiscOptions                  uint32
-	Anonymous                      uintptr
+	Anonymous                      RESULT_VIEW_TYPE_INFO_Anonymous_e__Union
 }
 
 // SCOPEDATAITEM: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-scopedataitem

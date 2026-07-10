@@ -159,18 +159,18 @@ type PROPSPEC_Anonymous_e__Union struct {
 // PROPSPEC: https://learn.microsoft.com/windows/win32/api/propidlbase/ns-propidlbase-propspec
 type PROPSPEC struct {
 	UlKind    PROPSPEC_KIND
-	Anonymous uintptr
+	Anonymous PROPSPEC_Anonymous_e__Union
 }
 
 // PROPVARIANT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROPVARIANT_Anonymous_e__Union struct {
-	Data [4]uint64
+	Data [3]uint64
 }
 
 // PROPVARIANT: https://learn.microsoft.com/windows/win32/api/propidlbase/ns-propidlbase-propvariant
 type PROPVARIANT struct {
-	Anonymous uintptr
+	Anonymous PROPVARIANT_Anonymous_e__Union
 }
 
 // RemSNB: https://learn.microsoft.com/windows/win32/api/objidl/ns-objidl-remsnb

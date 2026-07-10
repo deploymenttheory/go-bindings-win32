@@ -734,7 +734,7 @@ type LSA_FOREST_TRUST_RECORD struct {
 	Flags           uint32
 	ForestTrustType LSA_FOREST_TRUST_RECORD_TYPE
 	Time            int64
-	ForestTrustData uintptr
+	ForestTrustData LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union
 }
 
 // LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union is a C union; the raw tier exposes its correctly sized
@@ -747,7 +747,7 @@ type LSA_FOREST_TRUST_RECORD2 struct {
 	Flags           uint32
 	ForestTrustType LSA_FOREST_TRUST_RECORD_TYPE
 	Time            int64
-	ForestTrustData uintptr
+	ForestTrustData LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union
 }
 
 type LSA_FOREST_TRUST_SCANNER_INFO struct {
@@ -1571,7 +1571,7 @@ type SECPKG_EXTENDED_INFORMATION_Info_e__Union struct {
 // SECPKG_EXTENDED_INFORMATION: https://learn.microsoft.com/windows/win32/api/ntsecpkg/ns-ntsecpkg-secpkg_extended_information
 type SECPKG_EXTENDED_INFORMATION struct {
 	Class SECPKG_EXTENDED_INFORMATION_CLASS
-	Info  uintptr
+	Info  SECPKG_EXTENDED_INFORMATION_Info_e__Union
 }
 
 // SECPKG_EXTRA_OIDS: https://learn.microsoft.com/windows/win32/api/ntsecpkg/ns-ntsecpkg-secpkg_extra_oids

@@ -8,13 +8,15 @@ Everything here is Windows-only, amd64/arm64 (`//go:build windows`).
 
 ## The examples
 
-| Example | What it shows | Bindings it uses |
+| Example | What it shows | Needs admin? |
 |---|---|---|
-| [`localaccount`](localaccount) | Full lifecycle of a local user account — create, query, enumerate, delete (`NetUserAdd`/`NetUserGetInfo`/`NetUserEnum`/`NetUserDel`) | the **idiomatic** `NetworkManagement.NetManagement` package (only) |
+| [`sysinfo`](sysinfo) | Read-only host info — computer name, user, CPU topology, memory, OS version. Size-probe strings, self-sized structs, and a C union. | No |
+| [`localaccount`](localaccount) | Full lifecycle of a local user account — create, query, enumerate, delete (`NetUserAdd`/`GetInfo`/`Enum`/`Del`). Structs, constants, `NetApiBuffer` ownership, handle-free cleanup. | Only with `-apply` |
 
-Run one with `go run ./examples/<name>`. Some do system-modifying work behind
-an explicit flag (e.g. `localaccount` needs `-apply` and Administrator to
-create an account); by default they do a safe, read-only dry run.
+Both import **only** the idiomatic packages (plus the runtime). Run one with
+`go run ./examples/<name>`. `sysinfo` is entirely read-only; `localaccount`
+does a safe read-only dry run unless you pass `-apply` (which needs
+Administrator to create an account) and self-cleans what it creates.
 
 ## Which layer should I use, and why?
 

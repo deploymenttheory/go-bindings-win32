@@ -61,7 +61,7 @@ type NT_TIB struct {
 	StackBase            unsafe.Pointer
 	StackLimit           unsafe.Pointer
 	SubSystemTib         unsafe.Pointer
-	Anonymous            uintptr
+	Anonymous            NT_TIB_Anonymous_e__Union
 	ArbitraryUserPointer unsafe.Pointer
 	Self                 *NT_TIB
 }
@@ -85,7 +85,7 @@ type QUAD_Anonymous_e__Union struct {
 }
 
 type QUAD struct {
-	Anonymous uintptr
+	Anonymous QUAD_Anonymous_e__Union
 }
 
 // RTL_BALANCED_NODE_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -101,8 +101,8 @@ type RTL_BALANCED_NODE_Anonymous2_e__Union struct {
 }
 
 type RTL_BALANCED_NODE struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 RTL_BALANCED_NODE_Anonymous1_e__Union
+	Anonymous2 RTL_BALANCED_NODE_Anonymous2_e__Union
 }
 
 // SINGLE_LIST_ENTRY: https://learn.microsoft.com/windows/win32/api/ntdef/ns-ntdef-single_list_entry
@@ -122,7 +122,7 @@ type SLIST_ENTRY struct {
 // SLIST_HEADER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SLIST_HEADER struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // STRING: https://learn.microsoft.com/windows/win32/api/ntdef/ns-ntdef-string

@@ -103,7 +103,7 @@ type CRYPT_PROVIDER_DATA struct {
 	CsProvPrivData        uint32
 	PasProvPrivData       *CRYPT_PROVIDER_PRIVDATA
 	DwSubjectChoice       uint32
-	Anonymous             uintptr
+	Anonymous             CRYPT_PROVIDER_DATA_Anonymous_e__Union
 	PszUsageOID           foundation.PSTR
 	FRecallWithState      foundation.BOOL
 	SftSystemTime         foundation.FILETIME
@@ -311,7 +311,7 @@ type SPC_LINK_Anonymous_e__Union struct {
 
 type SPC_LINK struct {
 	DwLinkChoice uint32
-	Anonymous    uintptr
+	Anonymous    SPC_LINK_Anonymous_e__Union
 }
 
 type SPC_PE_IMAGE_DATA struct {
@@ -402,7 +402,7 @@ type WINTRUST_DATA struct {
 	DwUIChoice          WINTRUST_DATA_UICHOICE
 	FdwRevocationChecks WINTRUST_DATA_REVOCATION_CHECKS
 	DwUnionChoice       WINTRUST_DATA_UNION_CHOICE
-	Anonymous           uintptr
+	Anonymous           WINTRUST_DATA_Anonymous_e__Union
 	DwStateAction       WINTRUST_DATA_STATE_ACTION
 	HWVTStateData       foundation.HANDLE
 	PwszURLReference    foundation.PWSTR
@@ -432,7 +432,7 @@ type WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union struct {
 type WINTRUST_DETACHED_SIG_INFO struct {
 	CbStruct      uint32
 	DwUnionChoice uint32
-	Anonymous     uintptr
+	Anonymous     WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union
 }
 
 // WINTRUST_FILE_INFO: https://learn.microsoft.com/windows/win32/api/wintrust/ns-wintrust-wintrust_file_info
@@ -504,7 +504,7 @@ type WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union struct {
 }
 
 type WTD_GENERIC_CHAIN_POLICY_CREATE_INFO struct {
-	Anonymous    uintptr
+	Anonymous    WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union
 	HChainEngine securitycryptography.HCERTCHAINENGINE
 	PChainPara   *securitycryptography.CERT_CHAIN_PARA
 	DwFlags      uint32
@@ -518,7 +518,7 @@ type WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union struct {
 }
 
 type WTD_GENERIC_CHAIN_POLICY_DATA struct {
-	Anonymous               uintptr
+	Anonymous               WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union
 	PSignerChainInfo        *WTD_GENERIC_CHAIN_POLICY_CREATE_INFO
 	PCounterSignerChainInfo *WTD_GENERIC_CHAIN_POLICY_CREATE_INFO
 	PfnPolicyCallback       PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK
@@ -532,7 +532,7 @@ type WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union struct {
 }
 
 type WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO struct {
-	Anonymous        uintptr
+	Anonymous        WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union
 	PChainContext    *securitycryptography.CERT_CHAIN_CONTEXT
 	DwSignerType     uint32
 	PMsgSignerInfo   *securitycryptography.CMSG_SIGNER_INFO

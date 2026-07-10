@@ -11447,7 +11447,7 @@ func (self *ISectionList) GetNumberOfSections(pCount *uint16) foundation.HRESULT
 }
 
 // GetSectionData dispatches through ISectionList's vtable slot 7.
-func (self *ISectionList) GetSectionData(sectionNumber uint16, pdwRawPacketLength *uint32, ppSection *unsafe.Pointer) foundation.HRESULT {
+func (self *ISectionList) GetSectionData(sectionNumber uint16, pdwRawPacketLength *uint32, ppSection **SECTION) foundation.HRESULT {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(sectionNumber), uintptr(unsafe.Pointer(pdwRawPacketLength)), uintptr(unsafe.Pointer(ppSection)))
 	return foundation.HRESULT(r1)
 }

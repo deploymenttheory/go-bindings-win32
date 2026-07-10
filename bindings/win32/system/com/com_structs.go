@@ -200,7 +200,7 @@ type ELEMDESC_Anonymous_e__Union struct {
 // ELEMDESC: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-elemdesc~r1
 type ELEMDESC struct {
 	Tdesc     TYPEDESC
-	Anonymous uintptr
+	Anonymous ELEMDESC_Anonymous_e__Union
 }
 
 // EXCEPINFO: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-excepinfo
@@ -267,7 +267,7 @@ type GDI_OBJECT_u_e__Struct struct {
 
 type GDI_OBJECT struct {
 	ObjectType uint32
-	U          uintptr
+	U          GDI_OBJECT_u_e__Struct
 }
 
 type HYPER_SIZEDARR struct {
@@ -400,7 +400,7 @@ type STGMEDIUM_u_e__Union struct {
 
 type STGMEDIUM struct {
 	Tymed          uint32
-	U              uintptr
+	U              STGMEDIUM_u_e__Union
 	PUnkForRelease *IUnknown
 }
 
@@ -452,7 +452,7 @@ type TYPEDESC_Anonymous_e__Union struct {
 
 // TYPEDESC: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-typedesc
 type TYPEDESC struct {
-	Anonymous uintptr
+	Anonymous TYPEDESC_Anonymous_e__Union
 	Vt        systemvariant.VARENUM
 }
 
@@ -466,7 +466,7 @@ type VARDESC_Anonymous_e__Union struct {
 type VARDESC struct {
 	Memid       int32
 	LpstrSchema foundation.PWSTR
-	Anonymous   uintptr
+	Anonymous   VARDESC_Anonymous_e__Union
 	ElemdescVar ELEMDESC
 	WVarFlags   VARFLAGS
 	Varkind     VARKIND
@@ -485,12 +485,12 @@ type WORD_SIZEDARR struct {
 // UCLSSPEC_tagged_union_e__Struct is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type UCLSSPEC_tagged_union_e__Struct struct {
-	Data [2]uint64
+	Data [4]uint64
 }
 
 type UCLSSPEC struct {
 	Tyspec       uint32
-	Tagged_union uintptr
+	Tagged_union UCLSSPEC_tagged_union_e__Struct
 }
 
 type UserFLAG_STGMEDIUM struct {
@@ -507,10 +507,10 @@ type UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct struct {
 
 type UserSTGMEDIUM_STGMEDIUM_UNION struct {
 	Tymed uint32
-	U     uintptr
+	U     UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct
 }
 
 type UserSTGMEDIUM struct {
-	U              uintptr
+	U              UserSTGMEDIUM_STGMEDIUM_UNION
 	PUnkForRelease *IUnknown
 }

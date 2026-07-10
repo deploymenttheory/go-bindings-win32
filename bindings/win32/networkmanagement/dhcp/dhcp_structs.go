@@ -220,7 +220,7 @@ type DHCP_ALL_OPTIONS struct {
 	Flags            uint32
 	NonVendorOptions *DHCP_OPTION_ARRAY
 	NumVendorOptions uint32
-	VendorOptions    *uintptr
+	VendorOptions    *DHCP_ALL_OPTIONS_Anonymous_e__Struct
 }
 
 type DHCP_ALL_OPTION_VALUES_Anonymous_e__Struct struct {
@@ -234,7 +234,7 @@ type DHCP_ALL_OPTION_VALUES_Anonymous_e__Struct struct {
 type DHCP_ALL_OPTION_VALUES struct {
 	Flags       uint32
 	NumElements uint32
-	Options     *uintptr
+	Options     *DHCP_ALL_OPTION_VALUES_Anonymous_e__Struct
 }
 
 type DHCP_ALL_OPTION_VALUES_PB_Anonymous_e__Struct struct {
@@ -248,7 +248,7 @@ type DHCP_ALL_OPTION_VALUES_PB_Anonymous_e__Struct struct {
 type DHCP_ALL_OPTION_VALUES_PB struct {
 	Flags       uint32
 	NumElements uint32
-	Options     *uintptr
+	Options     *DHCP_ALL_OPTION_VALUES_PB_Anonymous_e__Struct
 }
 
 // DHCP_ATTRIB_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -261,7 +261,7 @@ type DHCP_ATTRIB_Anonymous_e__Union struct {
 type DHCP_ATTRIB struct {
 	DhcpAttribId   uint32
 	DhcpAttribType uint32
-	Anonymous      uintptr
+	Anonymous      DHCP_ATTRIB_Anonymous_e__Union
 }
 
 // DHCP_ATTRIB_ARRAY: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_attrib_array
@@ -757,7 +757,7 @@ type DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION struct {
 // DHCP_OPTION_DATA_ELEMENT: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_option_data_element
 type DHCP_OPTION_DATA_ELEMENT struct {
 	OptionType DHCP_OPTION_DATA_TYPE
-	Element    uintptr
+	Element    DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION
 }
 
 // DHCP_OPTION_LIST: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_option_list
@@ -775,7 +775,7 @@ type DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION struct {
 // DHCP_OPTION_SCOPE_INFO: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_option_scope_info
 type DHCP_OPTION_SCOPE_INFO struct {
 	ScopeType DHCP_OPTION_SCOPE_TYPE
-	ScopeInfo uintptr
+	ScopeInfo DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION
 }
 
 // DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 is a C union; the raw tier exposes its correctly sized
@@ -787,7 +787,7 @@ type DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 struct {
 // DHCP_OPTION_SCOPE_INFO6: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_option_scope_info6
 type DHCP_OPTION_SCOPE_INFO6 struct {
 	ScopeType DHCP_OPTION_SCOPE_TYPE6
-	ScopeInfo uintptr
+	ScopeInfo DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6
 }
 
 // DHCP_OPTION_VALUE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_option_value
@@ -900,7 +900,7 @@ type DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION struct {
 type DHCP_PROPERTY struct {
 	ID    DHCP_PROPERTY_ID
 	Type  DHCP_PROPERTY_TYPE
-	Value uintptr
+	Value DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION
 }
 
 type DHCP_PROPERTY_ARRAY struct {
@@ -946,7 +946,7 @@ type DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION struct {
 // DHCP_SEARCH_INFO: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_search_info
 type DHCP_SEARCH_INFO struct {
 	SearchType DHCP_SEARCH_INFO_TYPE
-	SearchInfo uintptr
+	SearchInfo DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION
 }
 
 // DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6 is a C union; the raw tier exposes its correctly sized
@@ -958,7 +958,7 @@ type DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6 struct {
 // DHCP_SEARCH_INFO_V6: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_search_info_v6
 type DHCP_SEARCH_INFO_V6 struct {
 	SearchType DHCP_SEARCH_INFO_TYPE_V6
-	SearchInfo uintptr
+	SearchInfo DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6
 }
 
 // DHCP_SERVER_CONFIG_INFO: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_server_config_info
@@ -1068,7 +1068,7 @@ type DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION struct {
 // DHCP_SUBNET_ELEMENT_DATA: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_data
 type DHCP_SUBNET_ELEMENT_DATA struct {
 	ElementType DHCP_SUBNET_ELEMENT_TYPE
-	Element     uintptr
+	Element     DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 is a C union; the raw tier exposes its correctly sized
@@ -1080,7 +1080,7 @@ type DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 struct {
 // DHCP_SUBNET_ELEMENT_DATA_V4: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_data_v4
 type DHCP_SUBNET_ELEMENT_DATA_V4 struct {
 	ElementType DHCP_SUBNET_ELEMENT_TYPE
-	Element     uintptr
+	Element     DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5 is a C union; the raw tier exposes its correctly sized
@@ -1092,7 +1092,7 @@ type DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5 struct {
 // DHCP_SUBNET_ELEMENT_DATA_V5: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_data_v5
 type DHCP_SUBNET_ELEMENT_DATA_V5 struct {
 	ElementType DHCP_SUBNET_ELEMENT_TYPE
-	Element     uintptr
+	Element     DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 is a C union; the raw tier exposes its correctly sized
@@ -1104,7 +1104,7 @@ type DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 struct {
 // DHCP_SUBNET_ELEMENT_DATA_V6: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_data_v6
 type DHCP_SUBNET_ELEMENT_DATA_V6 struct {
 	ElementType DHCP_SUBNET_ELEMENT_TYPE_V6
-	Element     uintptr
+	Element     DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6
 }
 
 // DHCP_SUBNET_ELEMENT_INFO_ARRAY: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_info_array

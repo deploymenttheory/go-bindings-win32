@@ -19,7 +19,7 @@ type RM_FILTER_INFO struct {
 	FilterAction  RM_FILTER_ACTION
 	FilterTrigger RM_FILTER_TRIGGER
 	CbNextOffset  uint32
-	Anonymous     uintptr
+	Anonymous     RM_FILTER_INFO_Anonymous_e__Union
 }
 
 // RM_PROCESS_INFO: https://learn.microsoft.com/windows/win32/api/restartmanager/ns-restartmanager-rm_process_info

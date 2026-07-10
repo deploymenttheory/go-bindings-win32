@@ -19,7 +19,7 @@ type FWPM_ACTION0_Anonymous_e__Union struct {
 // FWPM_ACTION0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_action0
 type FWPM_ACTION0 struct {
 	Type      FWP_ACTION_TYPE
-	Anonymous uintptr
+	Anonymous FWPM_ACTION0_Anonymous_e__Union
 }
 
 // FWPM_CALLOUT0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_callout0
@@ -81,8 +81,8 @@ type FWPM_CONNECTION0_Anonymous2_e__Union struct {
 type FWPM_CONNECTION0 struct {
 	ConnectionId          uint64
 	IpVersion             FWP_IP_VERSION
-	Anonymous1            uintptr
-	Anonymous2            uintptr
+	Anonymous1            FWPM_CONNECTION0_Anonymous1_e__Union
+	Anonymous2            FWPM_CONNECTION0_Anonymous2_e__Union
 	ProviderKey           *win32.GUID
 	IpsecTrafficModeType  IPSEC_TRAFFIC_TYPE
 	KeyModuleType         IKEEXT_KEY_MODULE_TYPE
@@ -140,7 +140,7 @@ type FWPM_FILTER0 struct {
 	NumFilterConditions uint32
 	FilterCondition     *FWPM_FILTER_CONDITION0
 	Action              FWPM_ACTION0
-	Anonymous           uintptr
+	Anonymous           FWPM_FILTER0_Anonymous_e__Union
 	Reserved            *win32.GUID
 	FilterId            uint64
 	EffectiveWeight     FWP_VALUE0
@@ -235,7 +235,7 @@ type FWPM_NET_EVENT0_Anonymous_e__Union struct {
 type FWPM_NET_EVENT0 struct {
 	Header    FWPM_NET_EVENT_HEADER0
 	Type      FWPM_NET_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous FWPM_NET_EVENT0_Anonymous_e__Union
 }
 
 // FWPM_NET_EVENT1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -248,7 +248,7 @@ type FWPM_NET_EVENT1_Anonymous_e__Union struct {
 type FWPM_NET_EVENT1 struct {
 	Header    FWPM_NET_EVENT_HEADER1
 	Type      FWPM_NET_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous FWPM_NET_EVENT1_Anonymous_e__Union
 }
 
 // FWPM_NET_EVENT2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -261,7 +261,7 @@ type FWPM_NET_EVENT2_Anonymous_e__Union struct {
 type FWPM_NET_EVENT2 struct {
 	Header    FWPM_NET_EVENT_HEADER2
 	Type      FWPM_NET_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous FWPM_NET_EVENT2_Anonymous_e__Union
 }
 
 // FWPM_NET_EVENT3_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -274,7 +274,7 @@ type FWPM_NET_EVENT3_Anonymous_e__Union struct {
 type FWPM_NET_EVENT3 struct {
 	Header    FWPM_NET_EVENT_HEADER3
 	Type      FWPM_NET_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous FWPM_NET_EVENT3_Anonymous_e__Union
 }
 
 // FWPM_NET_EVENT4_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -286,7 +286,7 @@ type FWPM_NET_EVENT4_Anonymous_e__Union struct {
 type FWPM_NET_EVENT4 struct {
 	Header    FWPM_NET_EVENT_HEADER3
 	Type      FWPM_NET_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous FWPM_NET_EVENT4_Anonymous_e__Union
 }
 
 // FWPM_NET_EVENT5_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -298,7 +298,7 @@ type FWPM_NET_EVENT5_Anonymous_e__Union struct {
 type FWPM_NET_EVENT5 struct {
 	Header    FWPM_NET_EVENT_HEADER3
 	Type      FWPM_NET_EVENT_TYPE
-	Anonymous uintptr
+	Anonymous FWPM_NET_EVENT5_Anonymous_e__Union
 }
 
 // FWPM_NET_EVENT_CAPABILITY_ALLOW0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_capability_allow0
@@ -406,8 +406,8 @@ type FWPM_NET_EVENT_HEADER0 struct {
 	Flags      uint32
 	IpVersion  FWP_IP_VERSION
 	IpProtocol byte
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union
+	Anonymous2 FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union
 	LocalPort  uint16
 	RemotePort uint16
 	ScopeId    uint32
@@ -430,7 +430,7 @@ type FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union struct {
 // FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union struct {
-	Data [1]uint64
+	Data [7]uint64
 }
 
 // FWPM_NET_EVENT_HEADER1: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_header1
@@ -439,14 +439,14 @@ type FWPM_NET_EVENT_HEADER1 struct {
 	Flags      uint32
 	IpVersion  FWP_IP_VERSION
 	IpProtocol byte
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union
+	Anonymous2 FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union
 	LocalPort  uint16
 	RemotePort uint16
 	ScopeId    uint32
 	AppId      FWP_BYTE_BLOB
 	UserId     *security.SID
-	Anonymous3 uintptr
+	Anonymous3 FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union
 }
 
 // FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -467,8 +467,8 @@ type FWPM_NET_EVENT_HEADER2 struct {
 	Flags         uint32
 	IpVersion     FWP_IP_VERSION
 	IpProtocol    byte
-	Anonymous1    uintptr
-	Anonymous2    uintptr
+	Anonymous1    FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union
+	Anonymous2    FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union
 	LocalPort     uint16
 	RemotePort    uint16
 	ScopeId       uint32
@@ -496,8 +496,8 @@ type FWPM_NET_EVENT_HEADER3 struct {
 	Flags         uint32
 	IpVersion     FWP_IP_VERSION
 	IpProtocol    byte
-	Anonymous1    uintptr
-	Anonymous2    uintptr
+	Anonymous1    FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union
+	Anonymous2    FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union
 	LocalPort     uint16
 	RemotePort    uint16
 	ScopeId       uint32
@@ -617,8 +617,8 @@ type FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 struct {
 	QmState          IKEEXT_QM_SA_STATE
 	SaRole           IKEEXT_SA_ROLE
 	SaTrafficType    IPSEC_TRAFFIC_TYPE
-	Anonymous1       uintptr
-	Anonymous2       uintptr
+	Anonymous1       FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union
+	Anonymous2       FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union
 	QmFilterId       uint64
 }
 
@@ -641,8 +641,8 @@ type FWPM_NET_EVENT_IKEEXT_QM_FAILURE1 struct {
 	QmState              IKEEXT_QM_SA_STATE
 	SaRole               IKEEXT_SA_ROLE
 	SaTrafficType        IPSEC_TRAFFIC_TYPE
-	Anonymous1           uintptr
-	Anonymous2           uintptr
+	Anonymous1           FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous1_e__Union
+	Anonymous2           FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous2_e__Union
 	QmFilterId           uint64
 	MmSaLuid             uint64
 	MmProviderContextKey win32.GUID
@@ -663,8 +663,8 @@ type FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union struct {
 // FWPM_NET_EVENT_IPSEC_DOSP_DROP0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_ipsec_dosp_drop0
 type FWPM_NET_EVENT_IPSEC_DOSP_DROP0 struct {
 	IpVersion     FWP_IP_VERSION
-	Anonymous1    uintptr
-	Anonymous2    uintptr
+	Anonymous1    FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union
+	Anonymous2    FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union
 	FailureStatus int32
 	Direction     FWP_DIRECTION
 }
@@ -718,7 +718,7 @@ type FWPM_PROVIDER_CONTEXT0 struct {
 	ProviderKey        *win32.GUID
 	ProviderData       FWP_BYTE_BLOB
 	Type               FWPM_PROVIDER_CONTEXT_TYPE
-	Anonymous          uintptr
+	Anonymous          FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union
 	ProviderContextId  uint64
 }
 
@@ -736,7 +736,7 @@ type FWPM_PROVIDER_CONTEXT1 struct {
 	ProviderKey        *win32.GUID
 	ProviderData       FWP_BYTE_BLOB
 	Type               FWPM_PROVIDER_CONTEXT_TYPE
-	Anonymous          uintptr
+	Anonymous          FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union
 	ProviderContextId  uint64
 }
 
@@ -754,7 +754,7 @@ type FWPM_PROVIDER_CONTEXT2 struct {
 	ProviderKey        *win32.GUID
 	ProviderData       FWP_BYTE_BLOB
 	Type               FWPM_PROVIDER_CONTEXT_TYPE
-	Anonymous          uintptr
+	Anonymous          FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union
 	ProviderContextId  uint64
 }
 
@@ -771,7 +771,7 @@ type FWPM_PROVIDER_CONTEXT3 struct {
 	ProviderKey        *win32.GUID
 	ProviderData       FWP_BYTE_BLOB
 	Type               FWPM_PROVIDER_CONTEXT_TYPE
-	Anonymous          uintptr
+	Anonymous          FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union
 	ProviderContextId  uint64
 }
 
@@ -947,14 +947,14 @@ type FWPM_SYSTEM_PORTS_BY_TYPE0 struct {
 // FWPM_VSWITCH_EVENT0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type FWPM_VSWITCH_EVENT0_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // FWPM_VSWITCH_EVENT0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_vswitch_event0
 type FWPM_VSWITCH_EVENT0 struct {
 	EventType FWPM_VSWITCH_EVENT_TYPE
 	VSwitchId foundation.PWSTR
-	Anonymous uintptr
+	Anonymous FWPM_VSWITCH_EVENT0_Anonymous_e__Union
 }
 
 // FWPM_VSWITCH_EVENT_SUBSCRIPTION0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_vswitch_event_subscription0
@@ -988,7 +988,7 @@ type FWP_CONDITION_VALUE0_Anonymous_e__Union struct {
 // FWP_CONDITION_VALUE0: https://learn.microsoft.com/windows/win32/api/fwptypes/ns-fwptypes-fwp_condition_value0
 type FWP_CONDITION_VALUE0 struct {
 	Type      FWP_DATA_TYPE
-	Anonymous uintptr
+	Anonymous FWP_CONDITION_VALUE0_Anonymous_e__Union
 }
 
 // FWP_RANGE0: https://learn.microsoft.com/windows/win32/api/fwptypes/ns-fwptypes-fwp_range0
@@ -1026,84 +1026,84 @@ type FWP_VALUE0_Anonymous_e__Union struct {
 // FWP_VALUE0: https://learn.microsoft.com/windows/win32/api/fwptypes/ns-fwptypes-fwp_value0
 type FWP_VALUE0 struct {
 	Type      FWP_DATA_TYPE
-	Anonymous uintptr
+	Anonymous FWP_VALUE0_Anonymous_e__Union
 }
 
 // IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union struct {
-	Data [5]uint64
+	Data [7]uint64
 }
 
 // IKEEXT_AUTHENTICATION_METHOD0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_authentication_method0
 type IKEEXT_AUTHENTICATION_METHOD0 struct {
 	AuthenticationMethodType IKEEXT_AUTHENTICATION_METHOD_TYPE
-	Anonymous                uintptr
+	Anonymous                IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union
 }
 
 // IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union struct {
-	Data [7]uint64
+	Data [9]uint64
 }
 
 // IKEEXT_AUTHENTICATION_METHOD1: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_authentication_method1
 type IKEEXT_AUTHENTICATION_METHOD1 struct {
 	AuthenticationMethodType IKEEXT_AUTHENTICATION_METHOD_TYPE
-	Anonymous                uintptr
+	Anonymous                IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union
 }
 
 // IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union struct {
-	Data [7]uint64
+	Data [9]uint64
 }
 
 // IKEEXT_AUTHENTICATION_METHOD2: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_authentication_method2
 type IKEEXT_AUTHENTICATION_METHOD2 struct {
 	AuthenticationMethodType IKEEXT_AUTHENTICATION_METHOD_TYPE
-	Anonymous                uintptr
+	Anonymous                IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_certificate_authentication0
 type IKEEXT_CERTIFICATE_AUTHENTICATION0 struct {
 	InboundConfigType  IKEEXT_CERT_CONFIG_TYPE
-	Anonymous1         uintptr
+	Anonymous1         IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union
 	OutboundConfigType IKEEXT_CERT_CONFIG_TYPE
-	Anonymous2         uintptr
+	Anonymous2         IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union
 	Flags              IKEEXT_CERT_AUTH
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION1: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_certificate_authentication1
 type IKEEXT_CERTIFICATE_AUTHENTICATION1 struct {
 	InboundConfigType    IKEEXT_CERT_CONFIG_TYPE
-	Anonymous1           uintptr
+	Anonymous1           IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union
 	OutboundConfigType   IKEEXT_CERT_CONFIG_TYPE
-	Anonymous2           uintptr
+	Anonymous2           IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union
 	Flags                IKEEXT_CERT_AUTH
 	LocalCertLocationUrl FWP_BYTE_BLOB
 }
@@ -1111,21 +1111,21 @@ type IKEEXT_CERTIFICATE_AUTHENTICATION1 struct {
 // IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION2: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_certificate_authentication2
 type IKEEXT_CERTIFICATE_AUTHENTICATION2 struct {
 	InboundConfigType    IKEEXT_CERT_CONFIG_TYPE
-	Anonymous1           uintptr
+	Anonymous1           IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union
 	OutboundConfigType   IKEEXT_CERT_CONFIG_TYPE
-	Anonymous2           uintptr
+	Anonymous2           IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union
 	Flags                IKEEXT_CERT_AUTH
 	LocalCertLocationUrl FWP_BYTE_BLOB
 }
@@ -1213,7 +1213,7 @@ type IKEEXT_CREDENTIAL0_Anonymous_e__Union struct {
 type IKEEXT_CREDENTIAL0 struct {
 	AuthenticationMethodType IKEEXT_AUTHENTICATION_METHOD_TYPE
 	ImpersonationType        IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
-	Anonymous                uintptr
+	Anonymous                IKEEXT_CREDENTIAL0_Anonymous_e__Union
 }
 
 // IKEEXT_CREDENTIAL1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1226,7 +1226,7 @@ type IKEEXT_CREDENTIAL1_Anonymous_e__Union struct {
 type IKEEXT_CREDENTIAL1 struct {
 	AuthenticationMethodType IKEEXT_AUTHENTICATION_METHOD_TYPE
 	ImpersonationType        IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
-	Anonymous                uintptr
+	Anonymous                IKEEXT_CREDENTIAL1_Anonymous_e__Union
 }
 
 // IKEEXT_CREDENTIAL2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1239,7 +1239,7 @@ type IKEEXT_CREDENTIAL2_Anonymous_e__Union struct {
 type IKEEXT_CREDENTIAL2 struct {
 	AuthenticationMethodType IKEEXT_AUTHENTICATION_METHOD_TYPE
 	ImpersonationType        IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE
-	Anonymous                uintptr
+	Anonymous                IKEEXT_CREDENTIAL2_Anonymous_e__Union
 }
 
 // IKEEXT_CREDENTIALS0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_credentials0
@@ -1489,7 +1489,7 @@ type IKEEXT_SA_DETAILS0 struct {
 	SaId              uint64
 	KeyModuleType     IKEEXT_KEY_MODULE_TYPE
 	IpVersion         FWP_IP_VERSION
-	Anonymous         uintptr
+	Anonymous         IKEEXT_SA_DETAILS0_Anonymous_e__Union
 	IkeTraffic        IKEEXT_TRAFFIC0
 	IkeProposal       IKEEXT_PROPOSAL0
 	CookiePair        IKEEXT_COOKIE_PAIR0
@@ -1509,7 +1509,7 @@ type IKEEXT_SA_DETAILS1 struct {
 	SaId              uint64
 	KeyModuleType     IKEEXT_KEY_MODULE_TYPE
 	IpVersion         FWP_IP_VERSION
-	Anonymous         uintptr
+	Anonymous         IKEEXT_SA_DETAILS1_Anonymous_e__Union
 	IkeTraffic        IKEEXT_TRAFFIC0
 	IkeProposal       IKEEXT_PROPOSAL0
 	CookiePair        IKEEXT_COOKIE_PAIR0
@@ -1530,7 +1530,7 @@ type IKEEXT_SA_DETAILS2 struct {
 	SaId              uint64
 	KeyModuleType     IKEEXT_KEY_MODULE_TYPE
 	IpVersion         FWP_IP_VERSION
-	Anonymous         uintptr
+	Anonymous         IKEEXT_SA_DETAILS2_Anonymous_e__Union
 	IkeTraffic        IKEEXT_TRAFFIC0
 	IkeProposal       IKEEXT_PROPOSAL0
 	CookiePair        IKEEXT_COOKIE_PAIR0
@@ -1577,8 +1577,8 @@ type IKEEXT_TRAFFIC0_Anonymous2_e__Union struct {
 // IKEEXT_TRAFFIC0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_traffic0
 type IKEEXT_TRAFFIC0 struct {
 	IpVersion      FWP_IP_VERSION
-	Anonymous1     uintptr
-	Anonymous2     uintptr
+	Anonymous1     IKEEXT_TRAFFIC0_Anonymous1_e__Union
+	Anonymous2     IKEEXT_TRAFFIC0_Anonymous2_e__Union
 	AuthIpFilterId uint64
 }
 
@@ -1748,7 +1748,7 @@ type IPSEC_GETSPI0_Anonymous_e__Union struct {
 type IPSEC_GETSPI0 struct {
 	InboundIpsecTraffic IPSEC_TRAFFIC0
 	IpVersion           FWP_IP_VERSION
-	Anonymous           uintptr
+	Anonymous           IPSEC_GETSPI0_Anonymous_e__Union
 	RngCryptoModuleID   *win32.GUID
 }
 
@@ -1762,7 +1762,7 @@ type IPSEC_GETSPI1_Anonymous_e__Union struct {
 type IPSEC_GETSPI1 struct {
 	InboundIpsecTraffic IPSEC_TRAFFIC1
 	IpVersion           FWP_IP_VERSION
-	Anonymous           uintptr
+	Anonymous           IPSEC_GETSPI1_Anonymous_e__Union
 	RngCryptoModuleID   *win32.GUID
 }
 
@@ -1830,7 +1830,7 @@ type IPSEC_SA0_Anonymous_e__Union struct {
 type IPSEC_SA0 struct {
 	Spi             uint32
 	SaTransformType IPSEC_TRANSFORM_TYPE
-	Anonymous       uintptr
+	Anonymous       IPSEC_SA0_Anonymous_e__Union
 }
 
 // IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_sa_auth_and_cipher_information0
@@ -1864,7 +1864,7 @@ type IPSEC_SA_BUNDLE0 struct {
 	SaList                     *IPSEC_SA0
 	KeyModuleState             *IPSEC_KEYMODULE_STATE0
 	IpVersion                  FWP_IP_VERSION
-	Anonymous                  uintptr
+	Anonymous                  IPSEC_SA_BUNDLE0_Anonymous_e__Union
 	MmSaId                     uint64
 	PfsGroup                   IPSEC_PFS_GROUP
 }
@@ -1888,7 +1888,7 @@ type IPSEC_SA_BUNDLE1 struct {
 	SaList                     *IPSEC_SA0
 	KeyModuleState             *IPSEC_KEYMODULE_STATE0
 	IpVersion                  FWP_IP_VERSION
-	Anonymous                  uintptr
+	Anonymous                  IPSEC_SA_BUNDLE1_Anonymous_e__Union
 	MmSaId                     uint64
 	PfsGroup                   IPSEC_PFS_GROUP
 	SaLookupContext            win32.GUID
@@ -1946,7 +1946,7 @@ type IPSEC_SA_DETAILS0 struct {
 	SaDirection     FWP_DIRECTION
 	Traffic         IPSEC_TRAFFIC0
 	SaBundle        IPSEC_SA_BUNDLE0
-	Anonymous       uintptr
+	Anonymous       IPSEC_SA_DETAILS0_Anonymous_e__Union
 	TransportFilter *FWPM_FILTER0
 }
 
@@ -1962,7 +1962,7 @@ type IPSEC_SA_DETAILS1 struct {
 	SaDirection         FWP_DIRECTION
 	Traffic             IPSEC_TRAFFIC1
 	SaBundle            IPSEC_SA_BUNDLE1
-	Anonymous           uintptr
+	Anonymous           IPSEC_SA_DETAILS1_Anonymous_e__Union
 	TransportFilter     *FWPM_FILTER0
 	VirtualIfTunnelInfo IPSEC_VIRTUAL_IF_TUNNEL_INFO0
 }
@@ -1994,7 +1994,7 @@ type IPSEC_SA_TRANSFORM0_Anonymous_e__Union struct {
 // IPSEC_SA_TRANSFORM0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_sa_transform0
 type IPSEC_SA_TRANSFORM0 struct {
 	IpsecTransformType IPSEC_TRANSFORM_TYPE
-	Anonymous          uintptr
+	Anonymous          IPSEC_SA_TRANSFORM0_Anonymous_e__Union
 }
 
 // IPSEC_STATISTICS0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_statistics0
@@ -2046,10 +2046,10 @@ type IPSEC_TRAFFIC0_Anonymous3_e__Union struct {
 // IPSEC_TRAFFIC0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_traffic0
 type IPSEC_TRAFFIC0 struct {
 	IpVersion   FWP_IP_VERSION
-	Anonymous1  uintptr
-	Anonymous2  uintptr
+	Anonymous1  IPSEC_TRAFFIC0_Anonymous1_e__Union
+	Anonymous2  IPSEC_TRAFFIC0_Anonymous2_e__Union
 	TrafficType IPSEC_TRAFFIC_TYPE
-	Anonymous3  uintptr
+	Anonymous3  IPSEC_TRAFFIC0_Anonymous3_e__Union
 	RemotePort  uint16
 }
 
@@ -2074,10 +2074,10 @@ type IPSEC_TRAFFIC1_Anonymous3_e__Union struct {
 // IPSEC_TRAFFIC1: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_traffic1
 type IPSEC_TRAFFIC1 struct {
 	IpVersion       FWP_IP_VERSION
-	Anonymous1      uintptr
-	Anonymous2      uintptr
+	Anonymous1      IPSEC_TRAFFIC1_Anonymous1_e__Union
+	Anonymous2      IPSEC_TRAFFIC1_Anonymous2_e__Union
 	TrafficType     IPSEC_TRAFFIC_TYPE
-	Anonymous3      uintptr
+	Anonymous3      IPSEC_TRAFFIC1_Anonymous3_e__Union
 	RemotePort      uint16
 	LocalPort       uint16
 	IpProtocol      byte
@@ -2102,8 +2102,8 @@ type IPSEC_TRAFFIC_SELECTOR0 struct {
 	PortStart  uint16
 	PortEnd    uint16
 	IpVersion  FWP_IP_VERSION
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 IPSEC_TRAFFIC_SELECTOR0_Anonymous1_e__Union
+	Anonymous2 IPSEC_TRAFFIC_SELECTOR0_Anonymous2_e__Union
 }
 
 type IPSEC_TRAFFIC_SELECTOR_POLICY0 struct {
@@ -2174,7 +2174,7 @@ type IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union struct {
 // IPSEC_TUNNEL_ENDPOINT0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_tunnel_endpoint0
 type IPSEC_TUNNEL_ENDPOINT0 struct {
 	IpVersion FWP_IP_VERSION
-	Anonymous uintptr
+	Anonymous IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union
 }
 
 // IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2192,8 +2192,8 @@ type IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union struct {
 // IPSEC_TUNNEL_ENDPOINTS0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_tunnel_endpoints0
 type IPSEC_TUNNEL_ENDPOINTS0 struct {
 	IpVersion  FWP_IP_VERSION
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union
+	Anonymous2 IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union
 }
 
 // IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2211,8 +2211,8 @@ type IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union struct {
 // IPSEC_TUNNEL_ENDPOINTS1: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_tunnel_endpoints1
 type IPSEC_TUNNEL_ENDPOINTS1 struct {
 	IpVersion   FWP_IP_VERSION
-	Anonymous1  uintptr
-	Anonymous2  uintptr
+	Anonymous1  IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union
+	Anonymous2  IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union
 	LocalIfLuid uint64
 }
 
@@ -2231,8 +2231,8 @@ type IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union struct {
 // IPSEC_TUNNEL_ENDPOINTS2: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_tunnel_endpoints2
 type IPSEC_TUNNEL_ENDPOINTS2 struct {
 	IpVersion       FWP_IP_VERSION
-	Anonymous1      uintptr
-	Anonymous2      uintptr
+	Anonymous1      IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union
+	Anonymous2      IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union
 	LocalIfLuid     uint64
 	RemoteFqdn      foundation.PWSTR
 	NumAddresses    uint32

@@ -21,12 +21,12 @@ type WNV_CUSTOMER_ADDRESS_CHANGE_PARAM struct {
 // WNV_IP_ADDRESS_IP_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WNV_IP_ADDRESS_IP_e__Union struct {
-	Data [2]uint64
+	Data [4]uint32
 }
 
 // WNV_IP_ADDRESS: https://learn.microsoft.com/windows/win32/api/wnvapi/ns-wnvapi-wnv_ip_address
 type WNV_IP_ADDRESS struct {
-	IP uintptr
+	IP WNV_IP_ADDRESS_IP_e__Union
 }
 
 // WNV_NOTIFICATION_PARAM: https://learn.microsoft.com/windows/win32/api/wnvapi/ns-wnvapi-wnv_notification_param
@@ -40,13 +40,13 @@ type WNV_NOTIFICATION_PARAM struct {
 // WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union struct {
-	Data [6]uint64
+	Data [13]uint32
 }
 
 // WNV_OBJECT_CHANGE_PARAM: https://learn.microsoft.com/windows/win32/api/wnvapi/ns-wnvapi-wnv_object_change_param
 type WNV_OBJECT_CHANGE_PARAM struct {
 	ObjectType  WNV_OBJECT_TYPE
-	ObjectParam uintptr
+	ObjectParam WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union
 }
 
 // WNV_OBJECT_HEADER: https://learn.microsoft.com/windows/win32/api/wnvapi/ns-wnvapi-wnv_object_header

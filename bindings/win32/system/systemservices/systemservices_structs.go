@@ -75,7 +75,7 @@ type DISPATCHER_CONTEXT_NONVOLREG_ARM64 struct {
 // DRIVER_INFO_ENTRY_Flags_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DRIVER_INFO_ENTRY_Flags_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type DRIVER_INFO_ENTRY struct {
@@ -87,20 +87,20 @@ type DRIVER_INFO_ENTRY struct {
 	LoadCount                        uint16
 	OemNameSize                      uint16
 	OemNameOffset                    uint32
-	Flags                            uintptr
+	Flags                            DRIVER_INFO_ENTRY_Flags_e__Union
 	Padding                          uint16
 }
 
 // DRIVER_RUNTIME_REPORT_Flags_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DRIVER_RUNTIME_REPORT_Flags_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type DRIVER_RUNTIME_REPORT struct {
 	Header          RUNTIME_REPORT_HEADER
 	NumberOfDrivers uint16
-	Flags           uintptr
+	Flags           DRIVER_RUNTIME_REPORT_Flags_e__Union
 	DriverEntries   [1]DRIVER_INFO_ENTRY
 }
 
@@ -136,7 +136,7 @@ type FILE_NOTIFY_FULL_INFORMATION struct {
 	AllocatedLength      int64
 	FileSize             int64
 	FileAttributes       uint32
-	Anonymous            uintptr
+	Anonymous            FILE_NOTIFY_FULL_INFORMATION_Anonymous_e__Union
 	FileId               int64
 	ParentFileId         int64
 	FileNameLength       uint16
@@ -187,7 +187,7 @@ type GDI_NONREMOTE_u_e__Struct struct {
 
 type GDI_NONREMOTE struct {
 	FContext int32
-	U        uintptr
+	U        GDI_NONREMOTE_u_e__Struct
 }
 
 // HEAP_OPTIMIZE_RESOURCES_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-heap_optimize_resources_information
@@ -232,42 +232,42 @@ type IMAGE_ARCHIVE_MEMBER_HEADER struct {
 // IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type IMAGE_ARM_RUNTIME_FUNCTION_ENTRY struct {
 	BeginAddress uint32
-	Anonymous    uintptr
+	Anonymous    IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
 }
 
 // IMAGE_AUX_SYMBOL is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_AUX_SYMBOL struct {
-	Data [3]uint64
+	Data [9]uint16
 }
 
 // IMAGE_AUX_SYMBOL_EX is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_AUX_SYMBOL_EX struct {
-	Data [1]uint64
+	Data [10]uint16
 }
 
 type IMAGE_BASE_RELOCATION struct {
@@ -352,7 +352,7 @@ type IMAGE_HOT_PATCH_MACHINE_Anonymous_e__Struct struct {
 }
 
 type IMAGE_HOT_PATCH_MACHINE struct {
-	Anonymous uintptr
+	Anonymous IMAGE_HOT_PATCH_MACHINE_Anonymous_e__Struct
 }
 
 type IMAGE_IMPORT_BY_NAME struct {
@@ -367,7 +367,7 @@ type IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union struct {
 }
 
 type IMAGE_IMPORT_DESCRIPTOR struct {
-	Anonymous      uintptr
+	Anonymous      IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union
 	TimeDateStamp  uint32
 	ForwarderChain uint32
 	Name           uint32
@@ -381,7 +381,7 @@ type IMAGE_LINENUMBER_Type_e__Union struct {
 }
 
 type IMAGE_LINENUMBER struct {
-	Type       uintptr
+	Type       IMAGE_LINENUMBER_Type_e__Union
 	Linenumber uint16
 }
 
@@ -394,7 +394,7 @@ type IMAGE_POLICY_ENTRY_u_e__Union struct {
 type IMAGE_POLICY_ENTRY struct {
 	Type     IMAGE_POLICY_ENTRY_TYPE
 	PolicyId IMAGE_POLICY_ID
-	U        uintptr
+	U        IMAGE_POLICY_ENTRY_u_e__Union
 }
 
 type IMAGE_POLICY_METADATA struct {
@@ -427,18 +427,18 @@ type IMAGE_RESOURCE_DIRECTORY struct {
 // IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type IMAGE_RESOURCE_DIRECTORY_ENTRY struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union
+	Anonymous2 IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union
 }
 
 type IMAGE_RESOURCE_DIRECTORY_STRING struct {
@@ -470,7 +470,7 @@ type IMAGE_SEPARATE_DEBUG_HEADER struct {
 // IMAGE_TLS_DIRECTORY32_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_TLS_DIRECTORY32_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type IMAGE_TLS_DIRECTORY32 struct {
@@ -479,7 +479,7 @@ type IMAGE_TLS_DIRECTORY32 struct {
 	AddressOfIndex        uint32
 	AddressOfCallBacks    uint32
 	SizeOfZeroFill        uint32
-	Anonymous             uintptr
+	Anonymous             IMAGE_TLS_DIRECTORY32_Anonymous_e__Union
 }
 
 // IMPORT_OBJECT_HEADER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -495,7 +495,7 @@ type IMPORT_OBJECT_HEADER struct {
 	Machine       uint16
 	TimeDateStamp uint32
 	SizeOfData    uint32
-	Anonymous     uintptr
+	Anonymous     IMPORT_OBJECT_HEADER_Anonymous_e__Union
 	Bitfield      uint16
 }
 
@@ -507,14 +507,14 @@ type JOBOBJECT_NETWORK_ACCOUNTING_INFORMATION struct {
 // KERNEL_CET_CONTEXT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type KERNEL_CET_CONTEXT_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type KERNEL_CET_CONTEXT struct {
 	Ssp       uint64
 	Rip       uint64
 	SegCs     uint16
-	Anonymous uintptr
+	Anonymous KERNEL_CET_CONTEXT_Anonymous_e__Union
 	Fill      [2]uint16
 }
 
@@ -548,7 +548,7 @@ type NT_TIB32 struct {
 	StackBase            uint32
 	StackLimit           uint32
 	SubSystemTib         uint32
-	Anonymous            uintptr
+	Anonymous            NT_TIB32_Anonymous_e__Union
 	ArbitraryUserPointer uint32
 	Self                 uint32
 }
@@ -564,7 +564,7 @@ type NT_TIB64 struct {
 	StackBase            uint64
 	StackLimit           uint64
 	SubSystemTib         uint64
-	Anonymous            uintptr
+	Anonymous            NT_TIB64_Anonymous_e__Union
 	ArbitraryUserPointer uint64
 	Self                 uint64
 }
@@ -578,7 +578,7 @@ type PACKEDEVENTINFO struct {
 // POWER_LIMIT_ATTRIBUTES_Flags_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type POWER_LIMIT_ATTRIBUTES_Flags_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type POWER_LIMIT_ATTRIBUTES struct {
@@ -590,7 +590,7 @@ type POWER_LIMIT_ATTRIBUTES struct {
 	MaxTimeParameter uint32
 	DefaultACValue   uint32
 	DefaultDCValue   uint32
-	Flags            uintptr
+	Flags            POWER_LIMIT_ATTRIBUTES_Flags_e__Union
 }
 
 type POWER_LIMIT_VALUE struct {
@@ -610,12 +610,12 @@ type PROCESSOR_IDLESTATE_INFO struct {
 // PROCESSOR_IDLESTATE_POLICY_Flags_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESSOR_IDLESTATE_POLICY_Flags_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type PROCESSOR_IDLESTATE_POLICY struct {
 	Revision    uint16
-	Flags       uintptr
+	Flags       PROCESSOR_IDLESTATE_POLICY_Flags_e__Union
 	PolicyCount uint32
 	Policy      [3]PROCESSOR_IDLESTATE_INFO
 }
@@ -623,7 +623,7 @@ type PROCESSOR_IDLESTATE_POLICY struct {
 // PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type PROCESSOR_PERFSTATE_POLICY struct {
@@ -631,7 +631,7 @@ type PROCESSOR_PERFSTATE_POLICY struct {
 	MaxThrottle      byte
 	MinThrottle      byte
 	BusyAdjThreshold byte
-	Anonymous        uintptr
+	Anonymous        PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union
 	TimeCheck        uint32
 	IncreaseTime     uint32
 	DecreaseTime     uint32
@@ -642,195 +642,195 @@ type PROCESSOR_PERFSTATE_POLICY struct {
 // PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_ASLR_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_aslr_policy
 type PROCESS_MITIGATION_ASLR_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_binary_signature_policy
 type PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PROCESS_MITIGATION_CHILD_PROCESS_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_control_flow_guard_policy
 type PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_DEP_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_dep_policy
 type PROCESS_MITIGATION_DEP_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union
 	Permanent foundation.BOOLEAN
 }
 
 // PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_DYNAMIC_CODE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_dynamic_code_policy
 type PROCESS_MITIGATION_DYNAMIC_CODE_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_extension_point_disable_policy
 type PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_FONT_DISABLE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_font_disable_policy
 type PROCESS_MITIGATION_FONT_DISABLE_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_IMAGE_LOAD_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_image_load_policy
 type PROCESS_MITIGATION_IMAGE_LOAD_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process-mitigation-redirection-trust-policy
 type PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PROCESS_MITIGATION_SEHOP_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_side_channel_isolation_policy
 type PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_strict_handle_check_policy
 type PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_system_call_disable_policy
 type PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union
 }
 
 // PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_user_shadow_stack_policy
 type PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY struct {
-	Anonymous uintptr
+	Anonymous PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union
 }
 
 type PROCESS_NETWORK_COUNTERS struct {
@@ -856,7 +856,7 @@ type QUOTA_LIMITS_EX struct {
 // RATE_QUOTA_LIMIT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RATE_QUOTA_LIMIT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type REARRANGE_FILE_DATA struct {
@@ -961,7 +961,7 @@ type RemotableHandle_u_e__Struct struct {
 
 type RemotableHandle struct {
 	FContext int32
-	U        uintptr
+	U        RemotableHandle_u_e__Struct
 }
 
 type SCOPE_TABLE_AMD64_Anonymous_e__Struct struct {
@@ -973,7 +973,7 @@ type SCOPE_TABLE_AMD64_Anonymous_e__Struct struct {
 
 type SCOPE_TABLE_AMD64 struct {
 	Count       uint32
-	ScopeRecord [1]uintptr
+	ScopeRecord [1]SCOPE_TABLE_AMD64_Anonymous_e__Struct
 }
 
 type SCOPE_TABLE_ARM_Anonymous_e__Struct struct {
@@ -985,7 +985,7 @@ type SCOPE_TABLE_ARM_Anonymous_e__Struct struct {
 
 type SCOPE_TABLE_ARM struct {
 	Count       uint32
-	ScopeRecord [1]uintptr
+	ScopeRecord [1]SCOPE_TABLE_ARM_Anonymous_e__Struct
 }
 
 type SCOPE_TABLE_ARM64_Anonymous_e__Struct struct {
@@ -997,7 +997,7 @@ type SCOPE_TABLE_ARM64_Anonymous_e__Struct struct {
 
 type SCOPE_TABLE_ARM64 struct {
 	Count       uint32
-	ScopeRecord [1]uintptr
+	ScopeRecord [1]SCOPE_TABLE_ARM64_Anonymous_e__Struct
 }
 
 type SCRUB_DATA_INPUT struct {
@@ -1088,8 +1088,8 @@ type SE_TOKEN_USER_Anonymous2_e__Union struct {
 }
 
 type SE_TOKEN_USER struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 SE_TOKEN_USER_Anonymous1_e__Union
+	Anonymous2 SE_TOKEN_USER_Anonymous2_e__Union
 }
 
 type SHARED_VIRTUAL_DISK_SUPPORT struct {
@@ -1313,7 +1313,7 @@ type UserCLIPFORMAT_u_e__Struct struct {
 
 type UserCLIPFORMAT struct {
 	FContext int32
-	U        uintptr
+	U        UserCLIPFORMAT_u_e__Struct
 }
 
 // UserHBITMAP_u_e__Struct is a C union; the raw tier exposes its correctly sized
@@ -1324,7 +1324,7 @@ type UserHBITMAP_u_e__Struct struct {
 
 type UserHBITMAP struct {
 	FContext int32
-	U        uintptr
+	U        UserHBITMAP_u_e__Struct
 }
 
 // UserHENHMETAFILE_u_e__Struct is a C union; the raw tier exposes its correctly sized
@@ -1335,7 +1335,7 @@ type UserHENHMETAFILE_u_e__Struct struct {
 
 type UserHENHMETAFILE struct {
 	FContext int32
-	U        uintptr
+	U        UserHENHMETAFILE_u_e__Struct
 }
 
 // UserHGLOBAL_u_e__Struct is a C union; the raw tier exposes its correctly sized
@@ -1346,7 +1346,7 @@ type UserHGLOBAL_u_e__Struct struct {
 
 type UserHGLOBAL struct {
 	FContext int32
-	U        uintptr
+	U        UserHGLOBAL_u_e__Struct
 }
 
 // UserHMETAFILE_u_e__Struct is a C union; the raw tier exposes its correctly sized
@@ -1357,7 +1357,7 @@ type UserHMETAFILE_u_e__Struct struct {
 
 type UserHMETAFILE struct {
 	FContext int32
-	U        uintptr
+	U        UserHMETAFILE_u_e__Struct
 }
 
 // UserHMETAFILEPICT_u_e__Struct is a C union; the raw tier exposes its correctly sized
@@ -1368,7 +1368,7 @@ type UserHMETAFILEPICT_u_e__Struct struct {
 
 type UserHMETAFILEPICT struct {
 	FContext int32
-	U        uintptr
+	U        UserHMETAFILEPICT_u_e__Struct
 }
 
 // UserHPALETTE_u_e__Struct is a C union; the raw tier exposes its correctly sized
@@ -1379,5 +1379,5 @@ type UserHPALETTE_u_e__Struct struct {
 
 type UserHPALETTE struct {
 	FContext int32
-	U        uintptr
+	U        UserHPALETTE_u_e__Struct
 }

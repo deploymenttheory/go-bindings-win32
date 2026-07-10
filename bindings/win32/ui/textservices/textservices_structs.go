@@ -38,7 +38,7 @@ type TF_DA_COLOR_Anonymous_e__Union struct {
 // TF_DA_COLOR: https://learn.microsoft.com/windows/win32/api/msctf/ns-msctf-tf_da_color
 type TF_DA_COLOR struct {
 	Type      TF_DA_COLORTYPE
-	Anonymous uintptr
+	Anonymous TF_DA_COLOR_Anonymous_e__Union
 }
 
 // TF_DISPLAYATTRIBUTE: https://learn.microsoft.com/windows/win32/api/msctf/ns-msctf-tf_displayattribute
@@ -106,7 +106,7 @@ type TF_LMLATTELEMENT struct {
 	DwFrameStart uint32
 	DwFrameLen   uint32
 	DwFlags      uint32
-	Anonymous    uintptr
+	Anonymous    TF_LMLATTELEMENT_Anonymous_e__Union
 	BstrText     foundation.BSTR
 }
 

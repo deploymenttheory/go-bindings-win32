@@ -13,13 +13,13 @@ import (
 // JET_BKLOGTIME_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JET_BKLOGTIME_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // JET_BKLOGTIME_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JET_BKLOGTIME_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // JET_BKLOGTIME: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-bklogtime-structure
@@ -30,8 +30,8 @@ type JET_BKLOGTIME struct {
 	BDay       int8
 	BMonth     int8
 	BYear      int8
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 JET_BKLOGTIME_Anonymous1_e__Union
+	Anonymous2 JET_BKLOGTIME_Anonymous2_e__Union
 }
 
 type JET_COLUMNBASE_A struct {
@@ -124,7 +124,7 @@ type JET_COLUMNLIST struct {
 
 // JET_COMMIT_ID: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-commit-id-class
 type JET_COMMIT_ID struct {
-	SignLog  [44]byte
+	SignLog  [28]byte
 	Reserved int32
 	CommitId int64
 }
@@ -144,30 +144,30 @@ type JET_CONDITIONALCOLUMN_W struct {
 // JET_CONVERT_A_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JET_CONVERT_A_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type JET_CONVERT_A struct {
 	SzOldDll  *int8
-	Anonymous uintptr
+	Anonymous JET_CONVERT_A_Anonymous_e__Union
 }
 
 // JET_CONVERT_W_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JET_CONVERT_W_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type JET_CONVERT_W struct {
 	SzOldDll  *uint16
-	Anonymous uintptr
+	Anonymous JET_CONVERT_W_Anonymous_e__Union
 }
 
 // JET_DBINFOMISC: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-dbinfomisc-constructor
 type JET_DBINFOMISC struct {
 	UlVersion          uint32
 	UlUpdate           uint32
-	SignDb             [44]byte
+	SignDb             [28]byte
 	Dbstate            uint32
 	LgposConsistent    [8]byte
 	LogtimeConsistent  JET_LOGTIME
@@ -175,7 +175,7 @@ type JET_DBINFOMISC struct {
 	LgposAttach        [8]byte
 	LogtimeDetach      JET_LOGTIME
 	LgposDetach        [8]byte
-	SignLog            [44]byte
+	SignLog            [28]byte
 	BkinfoFullPrev     [24]byte
 	BkinfoIncPrev      [24]byte
 	BkinfoFullCur      [24]byte
@@ -192,7 +192,7 @@ type JET_DBINFOMISC struct {
 type JET_DBINFOMISC2 struct {
 	UlVersion            uint32
 	UlUpdate             uint32
-	SignDb               [44]byte
+	SignDb               [28]byte
 	Dbstate              uint32
 	LgposConsistent      [8]byte
 	LogtimeConsistent    JET_LOGTIME
@@ -200,7 +200,7 @@ type JET_DBINFOMISC2 struct {
 	LgposAttach          [8]byte
 	LogtimeDetach        JET_LOGTIME
 	LgposDetach          [8]byte
-	SignLog              [44]byte
+	SignLog              [28]byte
 	BkinfoFullPrev       [24]byte
 	BkinfoIncPrev        [24]byte
 	BkinfoFullCur        [24]byte
@@ -232,7 +232,7 @@ type JET_DBINFOMISC2 struct {
 type JET_DBINFOMISC3 struct {
 	UlVersion            uint32
 	UlUpdate             uint32
-	SignDb               [44]byte
+	SignDb               [28]byte
 	Dbstate              uint32
 	LgposConsistent      [8]byte
 	LogtimeConsistent    JET_LOGTIME
@@ -240,7 +240,7 @@ type JET_DBINFOMISC3 struct {
 	LgposAttach          [8]byte
 	LogtimeDetach        JET_LOGTIME
 	LgposDetach          [8]byte
-	SignLog              [44]byte
+	SignLog              [28]byte
 	BkinfoFullPrev       [24]byte
 	BkinfoIncPrev        [24]byte
 	BkinfoFullCur        [24]byte
@@ -273,7 +273,7 @@ type JET_DBINFOMISC3 struct {
 type JET_DBINFOMISC4 struct {
 	UlVersion            uint32
 	UlUpdate             uint32
-	SignDb               [44]byte
+	SignDb               [28]byte
 	Dbstate              uint32
 	LgposConsistent      [8]byte
 	LogtimeConsistent    JET_LOGTIME
@@ -281,7 +281,7 @@ type JET_DBINFOMISC4 struct {
 	LgposAttach          [8]byte
 	LogtimeDetach        JET_LOGTIME
 	LgposDetach          [8]byte
-	SignLog              [44]byte
+	SignLog              [28]byte
 	BkinfoFullPrev       [24]byte
 	BkinfoIncPrev        [24]byte
 	BkinfoFullCur        [24]byte
@@ -315,7 +315,7 @@ type JET_DBINFOMISC4 struct {
 // JET_DBINFOUPGRADE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JET_DBINFOUPGRADE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // JET_DBINFOUPGRADE: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-dbinfoupgrade-structure
@@ -326,20 +326,20 @@ type JET_DBINFOUPGRADE struct {
 	CbFreeSpaceRequiredLow  uint32
 	CbFreeSpaceRequiredHigh uint32
 	CsecToUpgrade           uint32
-	Anonymous               uintptr
+	Anonymous               JET_DBINFOUPGRADE_Anonymous_e__Union
 }
 
 // JET_ENUMCOLUMN_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JET_ENUMCOLUMN_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // JET_ENUMCOLUMN: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-enumcolumn-class
 type JET_ENUMCOLUMN struct {
 	Columnid  uint32
 	Err       int32
-	Anonymous uintptr
+	Anonymous JET_ENUMCOLUMN_Anonymous_e__Union
 }
 
 // JET_ENUMCOLUMNID: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-enumcolumnid-structure
@@ -385,8 +385,8 @@ type JET_INDEXCREATE2_A struct {
 	CbKey               uint32
 	Grbit               uint32
 	UlDensity           uint32
-	Anonymous1          uintptr
-	Anonymous2          uintptr
+	Anonymous1          JET_INDEXCREATE2_A_Anonymous1_e__Union
+	Anonymous2          JET_INDEXCREATE2_A_Anonymous2_e__Union
 	Rgconditionalcolumn *JET_CONDITIONALCOLUMN_A
 	CConditionalColumn  uint32
 	Err                 int32
@@ -413,8 +413,8 @@ type JET_INDEXCREATE2_W struct {
 	CbKey               uint32
 	Grbit               uint32
 	UlDensity           uint32
-	Anonymous1          uintptr
-	Anonymous2          uintptr
+	Anonymous1          JET_INDEXCREATE2_W_Anonymous1_e__Union
+	Anonymous2          JET_INDEXCREATE2_W_Anonymous2_e__Union
 	Rgconditionalcolumn *JET_CONDITIONALCOLUMN_W
 	CConditionalColumn  uint32
 	Err                 int32
@@ -436,7 +436,7 @@ type JET_INDEXCREATE3_A struct {
 	Grbit               uint32
 	UlDensity           uint32
 	Pidxunicode         *JET_UNICODEINDEX2
-	Anonymous           uintptr
+	Anonymous           JET_INDEXCREATE3_A_Anonymous_e__Union
 	Rgconditionalcolumn *JET_CONDITIONALCOLUMN_A
 	CConditionalColumn  uint32
 	Err                 int32
@@ -458,7 +458,7 @@ type JET_INDEXCREATE3_W struct {
 	Grbit               uint32
 	UlDensity           uint32
 	Pidxunicode         *JET_UNICODEINDEX2
-	Anonymous           uintptr
+	Anonymous           JET_INDEXCREATE3_W_Anonymous_e__Union
 	Rgconditionalcolumn *JET_CONDITIONALCOLUMN_W
 	CConditionalColumn  uint32
 	Err                 int32
@@ -485,8 +485,8 @@ type JET_INDEXCREATE_A struct {
 	CbKey               uint32
 	Grbit               uint32
 	UlDensity           uint32
-	Anonymous1          uintptr
-	Anonymous2          uintptr
+	Anonymous1          JET_INDEXCREATE_A_Anonymous1_e__Union
+	Anonymous2          JET_INDEXCREATE_A_Anonymous2_e__Union
 	Rgconditionalcolumn *JET_CONDITIONALCOLUMN_A
 	CConditionalColumn  uint32
 	Err                 int32
@@ -512,8 +512,8 @@ type JET_INDEXCREATE_W struct {
 	CbKey               uint32
 	Grbit               uint32
 	UlDensity           uint32
-	Anonymous1          uintptr
-	Anonymous2          uintptr
+	Anonymous1          JET_INDEXCREATE_W_Anonymous1_e__Union
+	Anonymous2          JET_INDEXCREATE_W_Anonymous2_e__Union
 	Rgconditionalcolumn *JET_CONDITIONALCOLUMN_W
 	CConditionalColumn  uint32
 	Err                 int32
@@ -608,13 +608,13 @@ type JET_LOGINFO_W struct {
 // JET_LOGTIME_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JET_LOGTIME_Anonymous1_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // JET_LOGTIME_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type JET_LOGTIME_Anonymous2_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // JET_LOGTIME: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-logtime-structure
@@ -625,8 +625,8 @@ type JET_LOGTIME struct {
 	BDay       int8
 	BMonth     int8
 	BYear      int8
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 JET_LOGTIME_Anonymous1_e__Union
+	Anonymous2 JET_LOGTIME_Anonymous2_e__Union
 }
 
 // JET_OBJECTINFO: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-objectinfo-constructor

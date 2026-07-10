@@ -32,7 +32,7 @@ type LINEREQMAKECALL struct {
 // MSP_EVENT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MSP_EVENT_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [4]uint64
 }
 
 // MSP_EVENT_INFO: https://learn.microsoft.com/windows/win32/api/msp/ns-msp-msp_event_info
@@ -40,7 +40,7 @@ type MSP_EVENT_INFO struct {
 	DwSize    uint32
 	Event     MSP_EVENT
 	HCall     *int32
-	Anonymous uintptr
+	Anonymous MSP_EVENT_INFO_Anonymous_e__Union
 }
 
 type McastAddressAllocation struct {
@@ -57,7 +57,7 @@ type NSID struct {
 	UchType [16]byte
 	Xtype   uint32
 	LTime   int32
-	Address uintptr
+	Address NSID_address_e__Union
 }
 
 type Rendezvous struct {

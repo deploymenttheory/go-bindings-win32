@@ -27,7 +27,7 @@ type MLOperatorAttributeNameValue struct {
 	Name       foundation.PSTR
 	Type       MLOperatorAttributeType
 	ValueCount uint32
-	Anonymous  uintptr
+	Anonymous  MLOperatorAttributeNameValue_Anonymous_e__Union
 }
 
 // MLOperatorEdgeDescription_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -38,7 +38,7 @@ type MLOperatorEdgeDescription_Anonymous_e__Union struct {
 
 type MLOperatorEdgeDescription struct {
 	EdgeType  MLOperatorEdgeType
-	Anonymous uintptr
+	Anonymous MLOperatorEdgeDescription_Anonymous_e__Union
 }
 
 type MLOperatorEdgeTypeConstraint struct {
@@ -84,7 +84,7 @@ type MLOperatorSchemaEdgeDescription_Anonymous_e__Union struct {
 type MLOperatorSchemaEdgeDescription struct {
 	Options    MLOperatorParameterOptions
 	TypeFormat MLOperatorSchemaEdgeTypeFormat
-	Anonymous  uintptr
+	Anonymous  MLOperatorSchemaEdgeDescription_Anonymous_e__Union
 }
 
 type MLOperatorSetId struct {
@@ -102,7 +102,7 @@ type WINML_BINDING_DESC_Anonymous_e__Union struct {
 type WINML_BINDING_DESC struct {
 	Name      foundation.PWSTR
 	BindType  WINML_BINDING_TYPE
-	Anonymous uintptr
+	Anonymous WINML_BINDING_DESC_Anonymous_e__Union
 }
 
 // WINML_IMAGE_BINDING_DESC: https://learn.microsoft.com/windows/win32/api/winml/ns-winml-winml_image_binding_desc
@@ -137,9 +137,9 @@ type WINML_MAP_BINDING_DESC_Anonymous2_e__Union struct {
 type WINML_MAP_BINDING_DESC struct {
 	ElementCount uint32
 	KeyType      WINML_TENSOR_DATA_TYPE
-	Anonymous1   uintptr
+	Anonymous1   WINML_MAP_BINDING_DESC_Anonymous1_e__Union
 	Fields       WINML_TENSOR_DATA_TYPE
-	Anonymous2   uintptr
+	Anonymous2   WINML_MAP_BINDING_DESC_Anonymous2_e__Union
 }
 
 // WINML_MAP_VARIABLE_DESC: https://learn.microsoft.com/windows/win32/api/winml/ns-winml-winml_map_variable_desc
@@ -175,7 +175,7 @@ type WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union struct {
 type WINML_SEQUENCE_BINDING_DESC struct {
 	ElementCount uint32
 	ElementType  WINML_TENSOR_DATA_TYPE
-	Anonymous    uintptr
+	Anonymous    WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union
 }
 
 // WINML_SEQUENCE_VARIABLE_DESC: https://learn.microsoft.com/windows/win32/api/winml/ns-winml-winml_sequence_variable_desc
@@ -211,5 +211,5 @@ type WINML_VARIABLE_DESC struct {
 	Description foundation.PWSTR
 	FeatureType WINML_FEATURE_TYPE
 	Required    foundation.BOOL
-	Anonymous   uintptr
+	Anonymous   WINML_VARIABLE_DESC_Anonymous_e__Union
 }

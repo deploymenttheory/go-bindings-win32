@@ -65,8 +65,8 @@ type D3D10_BUFFER_RTV_Anonymous2_e__Union struct {
 
 // D3D10_BUFFER_RTV: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_buffer_rtv
 type D3D10_BUFFER_RTV struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 D3D10_BUFFER_RTV_Anonymous1_e__Union
+	Anonymous2 D3D10_BUFFER_RTV_Anonymous2_e__Union
 }
 
 // D3D10_BUFFER_SRV_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -83,8 +83,8 @@ type D3D10_BUFFER_SRV_Anonymous2_e__Union struct {
 
 // D3D10_BUFFER_SRV: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_buffer_srv
 type D3D10_BUFFER_SRV struct {
-	Anonymous1 uintptr
-	Anonymous2 uintptr
+	Anonymous1 D3D10_BUFFER_SRV_Anonymous1_e__Union
+	Anonymous2 D3D10_BUFFER_SRV_Anonymous2_e__Union
 }
 
 // D3D10_COUNTER_DESC: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_counter_desc
@@ -130,7 +130,7 @@ type D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union struct {
 type D3D10_DEPTH_STENCIL_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D10_DSV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D10_EFFECT_DESC: https://learn.microsoft.com/windows/win32/api/d3d10effect/ns-d3d10effect-d3d10_effect_desc
@@ -303,14 +303,14 @@ type D3D10_RENDER_TARGET_BLEND_DESC1 struct {
 // D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [3]uint32
 }
 
 // D3D10_RENDER_TARGET_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_render_target_view_desc
 type D3D10_RENDER_TARGET_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension D3D10_RTV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D10_SAMPLER_DESC: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_sampler_desc
@@ -507,27 +507,27 @@ type D3D10_SHADER_INPUT_BIND_DESC struct {
 // D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [4]uint32
 }
 
 // D3D10_SHADER_RESOURCE_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_shader_resource_view_desc
 type D3D10_SHADER_RESOURCE_VIEW_DESC struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension graphicsdirect3d.D3D_SRV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
 }
 
 // D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [4]uint32
 }
 
 // D3D10_SHADER_RESOURCE_VIEW_DESC1: https://learn.microsoft.com/windows/win32/api/d3d10_1/ns-d3d10_1-d3d10_shader_resource_view_desc1
 type D3D10_SHADER_RESOURCE_VIEW_DESC1 struct {
 	Format        graphicsdxgicommon.DXGI_FORMAT
 	ViewDimension graphicsdirect3d.D3D_SRV_DIMENSION
-	Anonymous     uintptr
+	Anonymous     D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union
 }
 
 // D3D10_SHADER_TYPE_DESC: https://learn.microsoft.com/windows/win32/api/d3d10shader/ns-d3d10shader-d3d10_shader_type_desc

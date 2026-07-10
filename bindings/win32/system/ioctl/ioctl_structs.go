@@ -45,7 +45,7 @@ type BOOT_AREA_INFO_Anonymous_e__Struct struct {
 // BOOT_AREA_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-boot_area_info
 type BOOT_AREA_INFO struct {
 	BootSectorCount uint32
-	BootSectors     [2]uintptr
+	BootSectors     [2]BOOT_AREA_INFO_Anonymous_e__Struct
 }
 
 type BULK_SECURITY_TEST_DATA struct {
@@ -186,7 +186,7 @@ type CREATE_DISK_Anonymous_e__Union struct {
 // CREATE_DISK: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-create_disk
 type CREATE_DISK struct {
 	PartitionStyle PARTITION_STYLE
-	Anonymous      uintptr
+	Anonymous      CREATE_DISK_Anonymous_e__Union
 }
 
 // CREATE_DISK_GPT: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-create_disk_gpt
@@ -532,7 +532,7 @@ type DEVICE_LB_PROVISIONING_DESCRIPTOR struct {
 // DEVICE_LOCATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DEVICE_LOCATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint32
 }
 
 type DEVICE_LOCATION struct {
@@ -540,7 +540,7 @@ type DEVICE_LOCATION struct {
 	Slot      uint32
 	Adapter   uint32
 	Port      uint32
-	Anonymous uintptr
+	Anonymous DEVICE_LOCATION_Anonymous_e__Union
 }
 
 // DEVICE_MANAGE_DATA_SET_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-device_manage_data_set_attributes
@@ -570,12 +570,12 @@ type DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT struct {
 // DEVICE_MEDIA_INFO_DeviceSpecific_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DEVICE_MEDIA_INFO_DeviceSpecific_e__Union struct {
-	Data [1]uint64
+	Data [4]uint64
 }
 
 // DEVICE_MEDIA_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-device_media_info
 type DEVICE_MEDIA_INFO struct {
-	DeviceSpecific uintptr
+	DeviceSpecific DEVICE_MEDIA_INFO_DeviceSpecific_e__Union
 }
 
 // DEVICE_POWER_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-device_power_descriptor
@@ -607,12 +607,12 @@ type DEVICE_STORAGE_ADDRESS_RANGE struct {
 // DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type DEVICE_STORAGE_RANGE_ATTRIBUTES struct {
 	LengthInBytes uint64
-	Anonymous     uintptr
+	Anonymous     DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union
 	Reserved      uint32
 }
 
@@ -633,7 +633,7 @@ type DEVICE_WRITE_AGGREGATION_DESCRIPTOR struct {
 // DISK_CACHE_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISK_CACHE_INFORMATION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [3]uint16
 }
 
 // DISK_CACHE_INFORMATION: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-disk_cache_information
@@ -645,7 +645,7 @@ type DISK_CACHE_INFORMATION struct {
 	WriteRetentionPriority        DISK_CACHE_RETENTION_PRIORITY
 	DisablePrefetchTransferLength uint16
 	PrefetchScalar                foundation.BOOLEAN
-	Anonymous                     uintptr
+	Anonymous                     DISK_CACHE_INFORMATION_Anonymous_e__Union
 }
 
 type DISK_CONTROLLER_NUMBER struct {
@@ -656,14 +656,14 @@ type DISK_CONTROLLER_NUMBER struct {
 // DISK_DETECTION_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISK_DETECTION_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [6]uint64
 }
 
 // DISK_DETECTION_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-disk_detection_info
 type DISK_DETECTION_INFO struct {
 	SizeOfDetectInfo uint32
 	DetectionType    DETECTION_TYPE
-	Anonymous        uintptr
+	Anonymous        DISK_DETECTION_INFO_Anonymous_e__Union
 }
 
 // DISK_EXTENT: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-disk_extent
@@ -739,14 +739,14 @@ type DISK_LOGGING struct {
 // DISK_PARTITION_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DISK_PARTITION_INFO_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 // DISK_PARTITION_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-disk_partition_info
 type DISK_PARTITION_INFO struct {
 	SizeOfPartitionInfo uint32
 	PartitionStyle      PARTITION_STYLE
-	Anonymous           uintptr
+	Anonymous           DISK_PARTITION_INFO_Anonymous_e__Union
 }
 
 // DISK_PERFORMANCE: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-disk_performance
@@ -792,7 +792,7 @@ type DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union struct {
 type DRIVE_LAYOUT_INFORMATION_EX struct {
 	PartitionStyle uint32
 	PartitionCount uint32
-	Anonymous      uintptr
+	Anonymous      DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union
 	PartitionEntry [1]PARTITION_INFORMATION_EX
 }
 
@@ -989,7 +989,7 @@ type FILE_LAYOUT_INFO_ENTRY_BasicInformation_e__Struct struct {
 }
 
 type FILE_LAYOUT_INFO_ENTRY struct {
-	BasicInformation uintptr
+	BasicInformation FILE_LAYOUT_INFO_ENTRY_BasicInformation_e__Struct
 	OwnerId          uint32
 	SecurityId       uint32
 	Usn              int64
@@ -1031,13 +1031,13 @@ type FILE_MAKE_COMPATIBLE_BUFFER struct {
 // FILE_OBJECTID_BUFFER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type FILE_OBJECTID_BUFFER_Anonymous_e__Union struct {
-	Data [6]uint64
+	Data [48]byte
 }
 
 // FILE_OBJECTID_BUFFER: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-file_objectid_buffer
 type FILE_OBJECTID_BUFFER struct {
 	ObjectId  [16]byte
-	Anonymous uintptr
+	Anonymous FILE_OBJECTID_BUFFER_Anonymous_e__Union
 }
 
 type FILE_PREFETCH struct {
@@ -1314,7 +1314,7 @@ type FS_BPIO_OUTPUT struct {
 	OutFlags  FS_BPIO_OUTFLAGS
 	Reserved1 uint64
 	Reserved2 uint64
-	Anonymous uintptr
+	Anonymous FS_BPIO_OUTPUT_Anonymous_e__Union
 }
 
 type FS_BPIO_RESULTS struct {
@@ -1454,7 +1454,7 @@ type MARK_HANDLE_INFO_Anonymous_e__Union struct {
 
 // MARK_HANDLE_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-mark_handle_info
 type MARK_HANDLE_INFO struct {
-	Anonymous    uintptr
+	Anonymous    MARK_HANDLE_INFO_Anonymous_e__Union
 	VolumeHandle foundation.HANDLE
 	HandleInfo   uint32
 }
@@ -1467,7 +1467,7 @@ type MARK_HANDLE_INFO32_Anonymous_e__Union struct {
 
 // MARK_HANDLE_INFO32: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-mark_handle_info32
 type MARK_HANDLE_INFO32 struct {
-	Anonymous    uintptr
+	Anonymous    MARK_HANDLE_INFO32_Anonymous_e__Union
 	VolumeHandle uint32
 	HandleInfo   uint32
 }
@@ -1583,13 +1583,13 @@ type NTFS_STATISTICS struct {
 	MftReadBytes                       uint32
 	MftWrites                          uint32
 	MftWriteBytes                      uint32
-	MftWritesUserLevel                 uintptr
+	MftWritesUserLevel                 NTFS_STATISTICS_MftWritesUserLevel_e__Struct
 	MftWritesFlushForLogFileFull       uint16
 	MftWritesLazyWriter                uint16
 	MftWritesUserRequest               uint16
 	Mft2Writes                         uint32
 	Mft2WriteBytes                     uint32
-	Mft2WritesUserLevel                uintptr
+	Mft2WritesUserLevel                NTFS_STATISTICS_Mft2WritesUserLevel_e__Struct
 	Mft2WritesFlushForLogFileFull      uint16
 	Mft2WritesLazyWriter               uint16
 	Mft2WritesUserRequest              uint16
@@ -1604,7 +1604,7 @@ type NTFS_STATISTICS struct {
 	BitmapWritesFlushForLogFileFull    uint16
 	BitmapWritesLazyWriter             uint16
 	BitmapWritesUserRequest            uint16
-	BitmapWritesUserLevel              uintptr
+	BitmapWritesUserLevel              NTFS_STATISTICS_BitmapWritesUserLevel_e__Struct
 	MftBitmapReads                     uint32
 	MftBitmapReadBytes                 uint32
 	MftBitmapWrites                    uint32
@@ -1612,7 +1612,7 @@ type NTFS_STATISTICS struct {
 	MftBitmapWritesFlushForLogFileFull uint16
 	MftBitmapWritesLazyWriter          uint16
 	MftBitmapWritesUserRequest         uint16
-	MftBitmapWritesUserLevel           uintptr
+	MftBitmapWritesUserLevel           NTFS_STATISTICS_MftBitmapWritesUserLevel_e__Struct
 	UserIndexReads                     uint32
 	UserIndexReadBytes                 uint32
 	UserIndexWrites                    uint32
@@ -1621,7 +1621,7 @@ type NTFS_STATISTICS struct {
 	LogFileReadBytes                   uint32
 	LogFileWrites                      uint32
 	LogFileWriteBytes                  uint32
-	Allocate                           uintptr
+	Allocate                           NTFS_STATISTICS_Allocate_e__Struct
 	DiskResourcesExhausted             uint32
 }
 
@@ -1674,13 +1674,13 @@ type NTFS_STATISTICS_EX struct {
 	MftReadBytes                                                        uint64
 	MftWrites                                                           uint64
 	MftWriteBytes                                                       uint64
-	MftWritesUserLevel                                                  uintptr
+	MftWritesUserLevel                                                  NTFS_STATISTICS_EX_MftWritesUserLevel_e__Struct
 	MftWritesFlushForLogFileFull                                        uint32
 	MftWritesLazyWriter                                                 uint32
 	MftWritesUserRequest                                                uint32
 	Mft2Writes                                                          uint64
 	Mft2WriteBytes                                                      uint64
-	Mft2WritesUserLevel                                                 uintptr
+	Mft2WritesUserLevel                                                 NTFS_STATISTICS_EX_Mft2WritesUserLevel_e__Struct
 	Mft2WritesFlushForLogFileFull                                       uint32
 	Mft2WritesLazyWriter                                                uint32
 	Mft2WritesUserRequest                                               uint32
@@ -1695,7 +1695,7 @@ type NTFS_STATISTICS_EX struct {
 	BitmapWritesFlushForLogFileFull                                     uint32
 	BitmapWritesLazyWriter                                              uint32
 	BitmapWritesUserRequest                                             uint32
-	BitmapWritesUserLevel                                               uintptr
+	BitmapWritesUserLevel                                               NTFS_STATISTICS_EX_BitmapWritesUserLevel_e__Struct
 	MftBitmapReads                                                      uint64
 	MftBitmapReadBytes                                                  uint64
 	MftBitmapWrites                                                     uint64
@@ -1703,7 +1703,7 @@ type NTFS_STATISTICS_EX struct {
 	MftBitmapWritesFlushForLogFileFull                                  uint32
 	MftBitmapWritesLazyWriter                                           uint32
 	MftBitmapWritesUserRequest                                          uint32
-	MftBitmapWritesUserLevel                                            uintptr
+	MftBitmapWritesUserLevel                                            NTFS_STATISTICS_EX_MftBitmapWritesUserLevel_e__Struct
 	UserIndexReads                                                      uint64
 	UserIndexReadBytes                                                  uint64
 	UserIndexWrites                                                     uint64
@@ -1712,7 +1712,7 @@ type NTFS_STATISTICS_EX struct {
 	LogFileReadBytes                                                    uint64
 	LogFileWrites                                                       uint64
 	LogFileWriteBytes                                                   uint64
-	Allocate                                                            uintptr
+	Allocate                                                            NTFS_STATISTICS_EX_Allocate_e__Struct
 	DiskResourcesExhausted                                              uint32
 	VolumeTrimCount                                                     uint64
 	VolumeTrimTime                                                      uint64
@@ -1771,7 +1771,7 @@ type PARTITION_INFORMATION_EX struct {
 	PartitionNumber    uint32
 	RewritePartition   foundation.BOOLEAN
 	IsServicePartition foundation.BOOLEAN
-	Anonymous          uintptr
+	Anonymous          PARTITION_INFORMATION_EX_Anonymous_e__Union
 }
 
 // PARTITION_INFORMATION_GPT: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-partition_information_gpt
@@ -1805,13 +1805,13 @@ type PERF_BIN struct {
 // PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint16
 }
 
 type PERSISTENT_RESERVE_COMMAND struct {
 	Version   uint32
 	Size      uint32
-	Anonymous uintptr
+	Anonymous PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union
 }
 
 type PHYSICAL_ELEMENT_STATUS struct {
@@ -1894,11 +1894,11 @@ type QUERY_FILE_LAYOUT_INPUT_Filter_e__Union struct {
 }
 
 type QUERY_FILE_LAYOUT_INPUT struct {
-	Anonymous  uintptr
+	Anonymous  QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union
 	Flags      uint32
 	FilterType QUERY_FILE_LAYOUT_FILTER_TYPE
 	Reserved   uint32
-	Filter     uintptr
+	Filter     QUERY_FILE_LAYOUT_INPUT_Filter_e__Union
 }
 
 type QUERY_FILE_LAYOUT_OUTPUT struct {
@@ -2055,7 +2055,7 @@ type RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER_Anonymous_e__Struct struct {
 type RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER struct {
 	ExtentCount uint32
 	StartingVcn int64
-	Extents     [1]uintptr
+	Extents     [1]RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER_Anonymous_e__Struct
 }
 
 type RETRIEVAL_POINTERS_BUFFER_Anonymous_e__Struct struct {
@@ -2067,7 +2067,7 @@ type RETRIEVAL_POINTERS_BUFFER_Anonymous_e__Struct struct {
 type RETRIEVAL_POINTERS_BUFFER struct {
 	ExtentCount uint32
 	StartingVcn int64
-	Extents     [1]uintptr
+	Extents     [1]RETRIEVAL_POINTERS_BUFFER_Anonymous_e__Struct
 }
 
 // RETRIEVAL_POINTER_BASE: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-retrieval_pointer_base
@@ -2093,7 +2093,7 @@ type SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO_Flags_e__Struct struct {
 type SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO struct {
 	DeviceGuid   win32.GUID
 	DeviceNumber uint32
-	Flags        uintptr
+	Flags        SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO_Flags_e__Struct
 	DeviceSize   uint64
 }
 
@@ -2126,7 +2126,7 @@ type SCM_BUS_RUNTIME_FW_ACTIVATION_INFO struct {
 	Size                                           uint32
 	RuntimeFwActivationSupported                   foundation.BOOLEAN
 	FirmwareActivationState                        SCM_BUS_FIRMWARE_ACTIVATION_STATE
-	FirmwareActivationCapability                   uintptr
+	FirmwareActivationCapability                   SCM_BUS_RUNTIME_FW_ACTIVATION_INFO_FirmwareActivationCapability_e__Struct
 	EstimatedFirmwareActivationTimeInUSecs         uint64
 	EstimatedProcessorAccessQuiesceTimeInUSecs     uint64
 	EstimatedIOAccessQuiesceTimeInUSecs            uint64
@@ -2323,7 +2323,7 @@ type SCM_PD_REINITIALIZE_MEDIA_INPUT_Options_e__Struct struct {
 type SCM_PD_REINITIALIZE_MEDIA_INPUT struct {
 	Version uint32
 	Size    uint32
-	Options uintptr
+	Options SCM_PD_REINITIALIZE_MEDIA_INPUT_Options_e__Struct
 }
 
 type SCM_PD_REINITIALIZE_MEDIA_OUTPUT struct {
@@ -2425,7 +2425,7 @@ type SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union struct {
 type SD_GLOBAL_CHANGE_INPUT struct {
 	Flags      uint32
 	ChangeType uint32
-	Anonymous  uintptr
+	Anonymous  SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union
 }
 
 // SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -2437,7 +2437,7 @@ type SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union struct {
 type SD_GLOBAL_CHANGE_OUTPUT struct {
 	Flags      uint32
 	ChangeType uint32
-	Anonymous  uintptr
+	Anonymous  SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union
 }
 
 type SD_QUERY_STATS_INPUT struct {
@@ -2485,7 +2485,7 @@ type SET_PARTITION_INFORMATION_EX_Anonymous_e__Union struct {
 
 type SET_PARTITION_INFORMATION_EX struct {
 	PartitionStyle PARTITION_STYLE
-	Anonymous      uintptr
+	Anonymous      SET_PARTITION_INFORMATION_EX_Anonymous_e__Union
 }
 
 type SET_PURGE_FAILURE_MODE_INPUT struct {
@@ -2607,7 +2607,7 @@ type STORAGE_COUNTER_Value_e__Union struct {
 
 type STORAGE_COUNTER struct {
 	Type  STORAGE_COUNTER_TYPE
-	Value uintptr
+	Value STORAGE_COUNTER_Value_e__Union
 }
 
 type STORAGE_COUNTERS struct {
@@ -2660,7 +2660,7 @@ type STORAGE_CRYPTO_DESCRIPTOR_V2 struct {
 // STORAGE_CRYPTO_KEY_TYPE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STORAGE_CRYPTO_KEY_TYPE struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // STORAGE_DESCRIPTOR_HEADER: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_descriptor_header
@@ -2857,7 +2857,7 @@ type STORAGE_FEATURE_SUPPORT_Flags_e__Union struct {
 type STORAGE_FEATURE_SUPPORT struct {
 	Size     uint32
 	Version  uint32
-	Flags    uintptr
+	Flags    STORAGE_FEATURE_SUPPORT_Flags_e__Union
 	Reserved [6]uint64
 }
 
@@ -2922,7 +2922,7 @@ type STORAGE_HW_ENDURANCE_INFO_Flags_e__Struct struct {
 type STORAGE_HW_ENDURANCE_INFO struct {
 	ValidFields    uint32
 	GroupId        uint32
-	Flags          uintptr
+	Flags          STORAGE_HW_ENDURANCE_INFO_Flags_e__Struct
 	LifePercentage uint32
 	BytesReadCount [16]byte
 	ByteWriteCount [16]byte
@@ -3044,7 +3044,7 @@ type STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR struct {
 // STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // STORAGE_MINIPORT_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_miniport_descriptor
@@ -3056,7 +3056,7 @@ type STORAGE_MINIPORT_DESCRIPTOR struct {
 	TargetResetSupported foundation.BOOLEAN
 	IoTimeoutValue       uint16
 	ExtraIoInfoSupported foundation.BOOLEAN
-	Flags                uintptr
+	Flags                STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union
 	Reserved0            [2]byte
 	Reserved1            uint32
 }
@@ -3073,7 +3073,7 @@ type STORAGE_OFFLOAD_READ_OUTPUT struct {
 // STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union struct {
-	Data [63]uint64
+	Data [504]byte
 }
 
 // STORAGE_OFFLOAD_TOKEN: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_offload_token
@@ -3081,7 +3081,7 @@ type STORAGE_OFFLOAD_TOKEN struct {
 	TokenType     [4]byte
 	Reserved      [2]byte
 	TokenIdLength [2]byte
-	Anonymous     uintptr
+	Anonymous     STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union
 }
 
 // STORAGE_OFFLOAD_WRITE_OUTPUT: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_offload_write_output
@@ -3094,14 +3094,14 @@ type STORAGE_OFFLOAD_WRITE_OUTPUT struct {
 // STORAGE_OPERATIONAL_REASON_RawBytes_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STORAGE_OPERATIONAL_REASON_RawBytes_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type STORAGE_OPERATIONAL_REASON struct {
 	Version  uint32
 	Size     uint32
 	Reason   STORAGE_OPERATIONAL_STATUS_REASON
-	RawBytes uintptr
+	RawBytes STORAGE_OPERATIONAL_REASON_RawBytes_e__Union
 }
 
 // STORAGE_PHYSICAL_ADAPTER_DATA: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_physical_adapter_data
@@ -3218,7 +3218,7 @@ type STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT struct {
 // STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // STORAGE_PROTOCOL_SPECIFIC_DATA: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_protocol_specific_data
@@ -3288,7 +3288,7 @@ type STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union struct {
 type STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE struct {
 	ResponseLevel uint32
 	NumberEntries uint32
-	Anonymous     uintptr
+	Anonymous     STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union
 }
 
 // STORAGE_READ_CAPACITY: https://learn.microsoft.com/windows/win32/DevIO/storage-read-capacity
@@ -3308,7 +3308,7 @@ type STORAGE_REINITIALIZE_MEDIA struct {
 	Version          uint32
 	Size             uint32
 	TimeoutInSeconds uint32
-	SanitizeOption   uintptr
+	SanitizeOption   STORAGE_REINITIALIZE_MEDIA_SanitizeOption_e__Struct
 }
 
 // STORAGE_RPMB_DATA_FRAME: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_rpmb_data_frame
@@ -3336,14 +3336,14 @@ type STORAGE_RPMB_DESCRIPTOR struct {
 // STORAGE_SECURITY_COMPLIANCE_BITMASK is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STORAGE_SECURITY_COMPLIANCE_BITMASK struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // STORAGE_SPEC_VERSION: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_spec_version
 // STORAGE_SPEC_VERSION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STORAGE_SPEC_VERSION struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type STORAGE_STACK_DESCRIPTOR struct {
@@ -3420,7 +3420,7 @@ type STORAGE_WRITE_CACHE_PROPERTY struct {
 // STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union struct {
-	Data [1]uint64
+	Data [2]uint32
 }
 
 type STORAGE_ZONED_DEVICE_DESCRIPTOR struct {
@@ -3428,7 +3428,7 @@ type STORAGE_ZONED_DEVICE_DESCRIPTOR struct {
 	Size           uint32
 	DeviceType     STORAGE_ZONED_DEVICE_TYPES
 	ZoneCount      uint32
-	ZoneAttributes uintptr
+	ZoneAttributes STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union
 	ZoneGroupCount uint32
 	ZoneGroup      [1]STORAGE_ZONE_GROUP
 }
@@ -3468,24 +3468,24 @@ type STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER struct {
 // STREAM_EXTENT_ENTRY_ExtentInformation_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STREAM_EXTENT_ENTRY_ExtentInformation_e__Union struct {
-	Data [3]uint64
+	Data [4]uint64
 }
 
 type STREAM_EXTENT_ENTRY struct {
 	Flags             uint32
-	ExtentInformation uintptr
+	ExtentInformation STREAM_EXTENT_ENTRY_ExtentInformation_e__Union
 }
 
 // STREAM_INFORMATION_ENTRY_StreamInformation is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type STREAM_INFORMATION_ENTRY_StreamInformation struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 type STREAM_INFORMATION_ENTRY struct {
 	Version           uint32
 	Flags             uint32
-	StreamInformation uintptr
+	StreamInformation STREAM_INFORMATION_ENTRY_StreamInformation
 }
 
 type STREAM_LAYOUT_ENTRY struct {
@@ -3532,7 +3532,7 @@ type TXFS_GET_METADATA_INFO_OUT_TxfFileId_e__Struct struct {
 
 // TXFS_GET_METADATA_INFO_OUT: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-txfs_get_metadata_info_out
 type TXFS_GET_METADATA_INFO_OUT struct {
-	TxfFileId          uintptr
+	TxfFileId          TXFS_GET_METADATA_INFO_OUT_TxfFileId_e__Struct
 	LockingTransaction win32.GUID
 	LastLsn            uint64
 	TransactionState   uint32
@@ -3631,7 +3631,7 @@ type TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union struct {
 
 // TXFS_READ_BACKUP_INFORMATION_OUT: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-txfs_read_backup_information_out
 type TXFS_READ_BACKUP_INFORMATION_OUT struct {
-	Anonymous uintptr
+	Anonymous TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union
 }
 
 type TXFS_ROLLFORWARD_REDO_INFORMATION struct {

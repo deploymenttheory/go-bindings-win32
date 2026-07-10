@@ -19,7 +19,7 @@ type WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union struct {
 // WSMAN_AUTHENTICATION_CREDENTIALS: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_authentication_credentials
 type WSMAN_AUTHENTICATION_CREDENTIALS struct {
 	AuthenticationMechanism uint32
-	Anonymous               uintptr
+	Anonymous               WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union
 }
 
 // WSMAN_AUTHZ_QUOTA: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_authz_quota
@@ -61,7 +61,7 @@ type WSMAN_DATA_Anonymous_e__Union struct {
 // WSMAN_DATA: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_data
 type WSMAN_DATA struct {
 	Type      WSManDataType
-	Anonymous uintptr
+	Anonymous WSMAN_DATA_Anonymous_e__Union
 }
 
 // WSMAN_DATA_BINARY: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_data_binary
@@ -185,7 +185,7 @@ type WSMAN_RECEIVE_DATA_RESULT struct {
 // WSMAN_RESPONSE_DATA is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type WSMAN_RESPONSE_DATA struct {
-	Data [5]uint64
+	Data [6]uint64
 }
 
 // WSMAN_SELECTOR_SET: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_selector_set

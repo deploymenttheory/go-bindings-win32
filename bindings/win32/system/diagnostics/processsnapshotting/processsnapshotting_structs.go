@@ -36,7 +36,7 @@ type PSS_AUXILIARY_PAGE_ENTRY struct {
 // PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union struct {
-	Data [1]uint64
+	Data [6]uint64
 }
 
 // PSS_HANDLE_ENTRY: https://learn.microsoft.com/windows/win32/api/processsnapshot/ns-processsnapshot-pss_handle_entry
@@ -56,7 +56,7 @@ type PSS_HANDLE_ENTRY struct {
 	TypeName                foundation.PWSTR
 	ObjectNameLength        uint16
 	ObjectName              foundation.PWSTR
-	TypeSpecificInformation uintptr
+	TypeSpecificInformation PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union
 }
 
 // PSS_HANDLE_INFORMATION: https://learn.microsoft.com/windows/win32/api/processsnapshot/ns-processsnapshot-pss_handle_information

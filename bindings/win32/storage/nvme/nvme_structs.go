@@ -11,11 +11,11 @@ import (
 // ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union struct {
-	Data [8]byte
+	Data [2]byte
 }
 
 type ACTIVE_LATENCY_CONFIGURATION struct {
-	Anonymous uintptr
+	Anonymous ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union
 }
 
 type DSSD_POWER_STATE_DESCRIPTOR struct {
@@ -29,11 +29,11 @@ type IO_COMMAND_SET_VECTOR struct {
 // LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type LATENCY_MONITOR_FEATURE_STATUS struct {
-	Anonymous uintptr
+	Anonymous LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union
 }
 
 type NVMEOF_AUTH_DHCHAP_CHALLENGE struct {
@@ -156,7 +156,7 @@ type NVMEOF_AUTH_SEND_RESPONSE struct {
 // NVMEOF_CONNECT_COMMAND_CATTR_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVMEOF_CONNECT_COMMAND_CATTR_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVMEOF_CONNECT_COMMAND struct {
@@ -169,7 +169,7 @@ type NVMEOF_CONNECT_COMMAND struct {
 	RECFMT    uint16
 	QID       uint16
 	SQSIZE    uint16
-	CATTR     uintptr
+	CATTR     NVMEOF_CONNECT_COMMAND_CATTR_e__Union
 	Reserved2 byte
 	KATO      uint32
 	Reserved3 [12]byte
@@ -187,11 +187,11 @@ type NVMEOF_CONNECT_DATA struct {
 // NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type NVMEOF_CONNECT_RESPONSE struct {
-	SCSpecific uintptr
+	SCSpecific NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union
 	Reserved0  uint32
 	SQHD       uint16
 	Reserved1  uint16
@@ -245,7 +245,7 @@ type NVMEOF_PROPERTY_GET_COMMAND struct {
 	CID       uint16
 	FCTYPE    byte
 	Reserved1 [35]byte
-	ATTRIB    uintptr
+	ATTRIB    NVMEOF_PROPERTY_GET_COMMAND_ATTRIB_e__Struct
 	Reserved2 [3]byte
 	OFST      uint32
 	Reserved3 [16]byte
@@ -258,7 +258,7 @@ type NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union struct {
 }
 
 type NVMEOF_PROPERTY_GET_RESPONSE struct {
-	VALUE     uintptr
+	VALUE     NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union
 	SQHD      uint16
 	Reserved0 uint16
 	CID       uint16
@@ -281,10 +281,10 @@ type NVMEOF_PROPERTY_SET_COMMAND struct {
 	CID       uint16
 	FCTYPE    byte
 	Reserved1 [35]byte
-	ATTRIB    uintptr
+	ATTRIB    NVMEOF_PROPERTY_SET_COMMAND_ATTRIB_e__Struct
 	Reserved2 [3]byte
 	OFST      uint32
-	VALUE     uintptr
+	VALUE     NVMEOF_PROPERTY_SET_COMMAND_VALUE_e__Union
 	Reserved3 [8]byte
 }
 
@@ -311,7 +311,7 @@ type NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS struct {
 // NVME_ADMIN_QUEUE_ATTRIBUTES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_ADMIN_QUEUE_ATTRIBUTES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_admin_submission_queue_base_address
@@ -330,25 +330,25 @@ type NVME_AUTO_POWER_STATE_TRANSITION_ENTRY struct {
 // NVME_CDW0_FEATURE_DSSD_POWER_STATE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW0_FEATURE_DSSD_POWER_STATE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW0_FEATURE_ERROR_INJECTION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW0_FEATURE_ERROR_INJECTION struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type NVME_CDW0_RESERVATION_PERSISTENCE struct {
@@ -359,33 +359,33 @@ type NVME_CDW0_RESERVATION_PERSISTENCE struct {
 // NVME_CDW10_ABORT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_ABORT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_CREATE_IO_QUEUE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_create_io_queue
 // NVME_CDW10_CREATE_IO_QUEUE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_CREATE_IO_QUEUE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_DATASET_MANAGEMENT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_dataset_management
 // NVME_CDW10_DATASET_MANAGEMENT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_DATASET_MANAGEMENT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_DELETE_IO_QUEUE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_DELETE_IO_QUEUE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_DEVICE_SELF_TEST is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_DEVICE_SELF_TEST struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_DIRECTIVE_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_directive_receive
@@ -401,14 +401,14 @@ type NVME_CDW10_DIRECTIVE_SEND struct {
 // NVME_CDW10_DISCOVERY_INFO_MGMT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_DISCOVERY_INFO_MGMT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_FIRMWARE_ACTIVATE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_firmware_activate
 // NVME_CDW10_FIRMWARE_ACTIVATE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_FIRMWARE_ACTIVATE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_FIRMWARE_DOWNLOAD: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_firmware_download
@@ -420,91 +420,91 @@ type NVME_CDW10_FIRMWARE_DOWNLOAD struct {
 // NVME_CDW10_FORMAT_NVM is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_FORMAT_NVM struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_GET_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_get_features
 // NVME_CDW10_GET_FEATURES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_GET_FEATURES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_GET_LOG_PAGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_get_log_page
 // NVME_CDW10_GET_LOG_PAGE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_GET_LOG_PAGE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_GET_LOG_PAGE_V121 is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_GET_LOG_PAGE_V121 struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_GET_LOG_PAGE_V13: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_get_log_page_v13
 // NVME_CDW10_GET_LOG_PAGE_V13 is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_GET_LOG_PAGE_V13 struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_GET_LOG_PAGE_V20 is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_GET_LOG_PAGE_V20 struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_IDENTIFY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_identify
 // NVME_CDW10_IDENTIFY is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_IDENTIFY struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_RESERVATION_ACQUIRE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_RESERVATION_ACQUIRE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_RESERVATION_REGISTER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_RESERVATION_REGISTER struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_RESERVATION_RELEASE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_RESERVATION_RELEASE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_RESERVATION_REPORT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_RESERVATION_REPORT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_SANITIZE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_SANITIZE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_SECURITY_SEND_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_security_send_receive
 // NVME_CDW10_SECURITY_SEND_RECEIVE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_SECURITY_SEND_RECEIVE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW10_SET_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_set_features
 // NVME_CDW10_SET_FEATURES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW10_SET_FEATURES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type NVME_CDW10_ZONE_APPEND struct {
@@ -523,93 +523,93 @@ type NVME_CDW10_ZONE_MANAGEMENT_SEND struct {
 // NVME_CDW11_CREATE_IO_CQ is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_CREATE_IO_CQ struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_CREATE_IO_SQ: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_create_io_sq
 // NVME_CDW11_CREATE_IO_SQ is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_CREATE_IO_SQ struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_DATASET_MANAGEMENT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_dataset_management
 // NVME_CDW11_DATASET_MANAGEMENT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_DATASET_MANAGEMENT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_DIRECTIVE_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_directive_receive
 // NVME_CDW11_DIRECTIVE_RECEIVE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_DIRECTIVE_RECEIVE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_DIRECTIVE_SEND: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_directive_send
 // NVME_CDW11_DIRECTIVE_SEND is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_DIRECTIVE_SEND struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_features
 // NVME_CDW11_FEATURES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_ARBITRATION: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_arbitration
 // NVME_CDW11_FEATURE_ARBITRATION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_ARBITRATION struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_async_event_config
 // NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_auto_power_state_transition
 // NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_ERROR_RECOVERY is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_ERROR_RECOVERY struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_GET_HOST_METADATA is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_GET_HOST_METADATA struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type NVME_CDW11_FEATURE_HOST_IDENTIFIER struct {
@@ -620,61 +620,61 @@ type NVME_CDW11_FEATURE_HOST_IDENTIFIER struct {
 // NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_INTERRUPT_COALESCING: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_interrupt_coalescing
 // NVME_CDW11_FEATURE_INTERRUPT_COALESCING is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_INTERRUPT_COALESCING struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_interrupt_vector_config
 // NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_LBA_RANGE_TYPE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_lba_range_type
 // NVME_CDW11_FEATURE_LBA_RANGE_TYPE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_LBA_RANGE_TYPE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_non_operational_power_state
 // NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_NUMBER_OF_QUEUES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_number_of_queues
 // NVME_CDW11_FEATURE_NUMBER_OF_QUEUES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_NUMBER_OF_QUEUES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_POWER_MANAGEMENT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_power_management
 // NVME_CDW11_FEATURE_POWER_MANAGEMENT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_POWER_MANAGEMENT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK struct {
@@ -688,35 +688,35 @@ type NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE struct {
 // NVME_CDW11_FEATURE_SET_HOST_METADATA is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_SET_HOST_METADATA struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_supported_capability
 // NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_temperature_threshold
 // NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_volatile_write_cache
 // NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_write_atomicity_normal
 // NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_FIRMWARE_DOWNLOAD: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_firmware_download
@@ -728,26 +728,26 @@ type NVME_CDW11_FIRMWARE_DOWNLOAD struct {
 // NVME_CDW11_GET_LOG_PAGE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_GET_LOG_PAGE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_IDENTIFY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_identify
 // NVME_CDW11_IDENTIFY is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_IDENTIFY struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_RESERVATION_REPORT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_RESERVATION_REPORT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_SANITIZE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW11_SANITIZE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW11_SECURITY_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_security_receive
@@ -764,42 +764,42 @@ type NVME_CDW11_SECURITY_SEND struct {
 // NVME_CDW12_DIRECTIVE_RECEIVE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_DIRECTIVE_RECEIVE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_directive_receive_streams_allocate_resources
 // NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW12_DIRECTIVE_SEND: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_directive_send
 // NVME_CDW12_DIRECTIVE_SEND is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_DIRECTIVE_SEND struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_directive_send_identify_enable_directive
 // NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW12_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_features
 // NVME_CDW12_FEATURES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_FEATURES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_feature_host_memory_buffer
 // NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW12_GET_LOG_PAGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_get_log_page
@@ -813,33 +813,33 @@ type NVME_CDW12_GET_LOG_PAGE struct {
 // NVME_CDW12_READ_WRITE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_READ_WRITE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW12_VERIFYCOMMAND is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_VERIFYCOMMAND struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW12_ZONE_APPEND is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW12_ZONE_APPEND struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW13_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw13_features
 // NVME_CDW13_FEATURES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW13_FEATURES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw13_feature_host_memory_buffer
 // NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW13_GET_LOG_PAGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw13_get_log_page
@@ -853,84 +853,84 @@ type NVME_CDW13_GET_LOG_PAGE struct {
 // NVME_CDW13_READ_WRITE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW13_READ_WRITE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW13_ZONE_MANAGEMENT_RECEIVE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW13_ZONE_MANAGEMENT_RECEIVE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW13_ZONE_MANAGEMENT_SEND is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW13_ZONE_MANAGEMENT_SEND struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW14_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw14_features
 // NVME_CDW14_FEATURES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW14_FEATURES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw14_feature_host_memory_buffer
 // NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW14_GET_LOG_PAGE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW14_GET_LOG_PAGE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW14_GET_LOG_PAGE_V20 is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW14_GET_LOG_PAGE_V20 struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW14_IDENTIFY is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW14_IDENTIFY struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW15_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw15_features
 // NVME_CDW15_FEATURES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW15_FEATURES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw15_feature_host_memory_buffer
 // NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW15_READ_WRITE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw15_read_write
 // NVME_CDW15_READ_WRITE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW15_READ_WRITE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW15_VERIFY_COMMAND is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW15_VERIFY_COMMAND struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CDW15_ZONE_APPEND is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CDW15_ZONE_APPEND struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CHANGED_NAMESPACE_LIST_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_changed_namespace_list_log
@@ -953,7 +953,7 @@ type NVME_COMMAND_Anonymous_e__Union struct {
 // NVME_COMMAND_u_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_COMMAND_u_e__Union struct {
-	Data [1]uint64
+	Data [3]uint64
 }
 
 // NVME_COMMAND: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command
@@ -962,22 +962,22 @@ type NVME_COMMAND struct {
 	NSID      uint32
 	Reserved0 [2]uint32
 	MPTR      uint64
-	Anonymous uintptr
-	U         uintptr
+	Anonymous NVME_COMMAND_Anonymous_e__Union
+	U         NVME_COMMAND_u_e__Union
 }
 
 // NVME_COMMAND_DWORD0: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command_dword0
 // NVME_COMMAND_DWORD0 is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_COMMAND_DWORD0 struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_COMMAND_EFFECTS_DATA: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command_effects_data
 // NVME_COMMAND_EFFECTS_DATA is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_COMMAND_EFFECTS_DATA struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_COMMAND_EFFECTS_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command_effects_log
@@ -991,7 +991,7 @@ type NVME_COMMAND_EFFECTS_LOG struct {
 // NVME_COMMAND_STATUS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_COMMAND_STATUS struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // NVME_COMPLETION_DW0_ASYNC_EVENT_REQUEST: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_completion_dw0_async_event_request
@@ -1005,42 +1005,42 @@ type NVME_COMPLETION_DW0_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES_Anonymous_
 
 // NVME_COMPLETION_DW0_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_completion_dw0_directive_receive_streams_allocate_resources
 type NVME_COMPLETION_DW0_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES struct {
-	Anonymous uintptr
+	Anonymous NVME_COMPLETION_DW0_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES_Anonymous_e__Struct
 	AsUlong   uint32
 }
 
 // NVME_COMPLETION_ENTRY_DW2_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_COMPLETION_ENTRY_DW2_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_COMPLETION_ENTRY_DW3_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_COMPLETION_ENTRY_DW3_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_COMPLETION_ENTRY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_completion_entry
 type NVME_COMPLETION_ENTRY struct {
 	DW0 uint32
 	DW1 uint32
-	DW2 uintptr
-	DW3 uintptr
+	DW2 NVME_COMPLETION_ENTRY_DW2_e__Union
+	DW3 NVME_COMPLETION_ENTRY_DW3_e__Union
 }
 
 // NVME_COMPLETION_QUEUE_HEAD_DOORBELL: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_completion_queue_head_doorbell
 // NVME_COMPLETION_QUEUE_HEAD_DOORBELL is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_COMPLETION_QUEUE_HEAD_DOORBELL struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CONTEXT_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_context_attributes
 // NVME_CONTEXT_ATTRIBUTES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CONTEXT_ATTRIBUTES struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CONTROLLER_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_capabilities
@@ -1054,7 +1054,7 @@ type NVME_CONTROLLER_CAPABILITIES struct {
 // NVME_CONTROLLER_CONFIGURATION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CONTROLLER_CONFIGURATION struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CONTROLLER_LIST: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_list
@@ -1067,20 +1067,20 @@ type NVME_CONTROLLER_LIST struct {
 // NVME_CONTROLLER_MEMORY_BUFFER_LOCATION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CONTROLLER_MEMORY_BUFFER_LOCATION struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CONTROLLER_MEMORY_BUFFER_SIZE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_memory_buffer_size
 // NVME_CONTROLLER_MEMORY_BUFFER_SIZE is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CONTROLLER_MEMORY_BUFFER_SIZE struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CONTROLLER_READY_TIMEOUTS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CONTROLLER_READY_TIMEOUTS struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_CONTROLLER_REGISTERS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_registers
@@ -1110,7 +1110,7 @@ type NVME_CONTROLLER_REGISTERS struct {
 // NVME_CONTROLLER_STATUS is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_CONTROLLER_STATUS struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type NVME_DEVICE_SELF_TEST_LOG_CurrentCompletion_e__Struct struct {
@@ -1123,10 +1123,10 @@ type NVME_DEVICE_SELF_TEST_LOG_CurrentOperation_e__Struct struct {
 
 // NVME_DEVICE_SELF_TEST_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_device_self_test_log
 type NVME_DEVICE_SELF_TEST_LOG struct {
-	CurrentOperation  uintptr
-	CurrentCompletion uintptr
+	CurrentOperation  NVME_DEVICE_SELF_TEST_LOG_CurrentOperation_e__Struct
+	CurrentCompletion NVME_DEVICE_SELF_TEST_LOG_CurrentCompletion_e__Struct
 	Reserved          [2]byte
-	ResultData        [980]byte
+	ResultData        [560]byte
 }
 
 // NVME_DIRECTIVE_IDENTIFY_RETURN_PARAMETERS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_directive_identify_return_parameters
@@ -1163,24 +1163,24 @@ type NVME_DIRECTIVE_STREAMS_RETURN_PARAMETERS struct {
 // NVME_DISCOVERY_ENTRY_EFLAGS_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_DISCOVERY_ENTRY_EFLAGS_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // NVME_DISCOVERY_ENTRY_TREQ_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_DISCOVERY_ENTRY_TREQ_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_DISCOVERY_ENTRY struct {
 	TRTYPE    byte
 	ADRFAM    byte
 	SUBTYPE   byte
-	TREQ      uintptr
+	TREQ      NVME_DISCOVERY_ENTRY_TREQ_e__Union
 	PORTID    uint16
 	CNTLID    uint16
 	ASQSZ     uint16
-	EFLAGS    uintptr
+	EFLAGS    NVME_DISCOVERY_ENTRY_EFLAGS_e__Union
 	Reserved0 [20]byte
 	TRSVCID   [32]byte
 	Reserved1 [192]byte
@@ -1192,14 +1192,14 @@ type NVME_DISCOVERY_ENTRY struct {
 // NVME_DISCOVERY_HEADER_DLPF_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_DISCOVERY_HEADER_DLPF_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_DISCOVERY_HEADER struct {
 	GENCTR    uint64
 	NUMREC    uint64
 	RECFMT    uint16
-	DLPF      uintptr
+	DLPF      NVME_DISCOVERY_HEADER_DLPF_e__Union
 	Reserved0 byte
 	TDLPL     uint32
 	Reserved1 [1000]byte
@@ -1208,7 +1208,7 @@ type NVME_DISCOVERY_HEADER struct {
 // NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 type NVME_DISCOVERY_INFO_MGMT_HEADER struct {
@@ -1219,7 +1219,7 @@ type NVME_DISCOVERY_INFO_MGMT_HEADER struct {
 	ETYPE     uint16
 	PORTLCL   byte
 	Reserved1 byte
-	EKTYPE    uintptr
+	EKTYPE    NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union
 	EID       [256]byte
 	ENAME     [256]byte
 	EVER      [64]byte
@@ -1236,7 +1236,7 @@ type NVME_ERROR_INFO_LOG struct {
 	SQID                      uint16
 	CMDID                     uint16
 	Status                    NVME_COMMAND_STATUS
-	ParameterErrorLocation    uintptr
+	ParameterErrorLocation    NVME_ERROR_INFO_LOG_ParameterErrorLocation_e__Struct
 	Lba                       uint64
 	NameSpace                 uint32
 	VendorInfoAvailable       byte
@@ -1250,11 +1250,11 @@ type NVME_ERROR_INFO_LOG struct {
 // NVME_ERROR_INJECTION_ENTRY_Flags_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_ERROR_INJECTION_ENTRY_Flags_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_ERROR_INJECTION_ENTRY struct {
-	Flags                      uintptr
+	Flags                      NVME_ERROR_INJECTION_ENTRY_Flags_e__Union
 	Reserved1                  byte
 	ErrorInjectionType         uint16
 	ErrorInjectionTypeSpecific [28]byte
@@ -1269,24 +1269,24 @@ type NVME_EXTENDED_ATTR struct {
 // NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union struct {
-	Data [1]uint64
+	Data [1]uint16
 }
 
 // NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_EXTENDED_DISCOVERY_ENTRY struct {
 	TRTYPE    byte
 	ADRFAM    byte
 	SUBTYPE   byte
-	TREQ      uintptr
+	TREQ      NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union
 	PORTID    uint16
 	CNTLID    uint16
 	ASQSZ     uint16
-	EFLAGS    uintptr
+	EFLAGS    NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union
 	Reserved0 [20]byte
 	TRSVCID   [32]byte
 	Reserved1 [192]byte
@@ -1328,7 +1328,7 @@ type NVME_FIRMWARE_SLOT_INFO_LOG_AFI_e__Struct struct {
 
 // NVME_FIRMWARE_SLOT_INFO_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_firmware_slot_info_log
 type NVME_FIRMWARE_SLOT_INFO_LOG struct {
-	AFI       uintptr
+	AFI       NVME_FIRMWARE_SLOT_INFO_LOG_AFI_e__Struct
 	Reserved0 [7]byte
 	FRS       [7]uint64
 	Reserved1 [448]byte
@@ -1339,19 +1339,19 @@ type NVME_GET_FEATURE_TIMESTAMP_Anonymous_e__Struct struct {
 }
 
 type NVME_GET_FEATURE_TIMESTAMP struct {
-	Anonymous   uintptr
+	Anonymous   NVME_GET_FEATURE_TIMESTAMP_Anonymous_e__Struct
 	AsUlonglong uint64
 }
 
 // NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // NVME_HEALTH_INFO_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_health_info_log
 type NVME_HEALTH_INFO_LOG struct {
-	CriticalWarning                  uintptr
+	CriticalWarning                  NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union
 	Temperature                      [2]byte
 	AvailableSpare                   byte
 	AvailableSpareThreshold          byte
@@ -1504,15 +1504,15 @@ type NVME_IDENTIFY_CONTROLLER_DATA struct {
 	FR                    [8]byte
 	RAB                   byte
 	IEEE                  [3]byte
-	CMIC                  uintptr
+	CMIC                  NVME_IDENTIFY_CONTROLLER_DATA_CMIC_e__Struct
 	MDTS                  byte
 	CNTLID                uint16
 	VER                   uint32
 	RTD3R                 uint32
 	RTD3E                 uint32
-	OAES                  uintptr
-	CTRATT                uintptr
-	RRLS                  uintptr
+	OAES                  NVME_IDENTIFY_CONTROLLER_DATA_OAES_e__Struct
+	CTRATT                NVME_IDENTIFY_CONTROLLER_DATA_CTRATT_e__Struct
+	RRLS                  NVME_IDENTIFY_CONTROLLER_DATA_RRLS_e__Struct
 	Reserved0             [9]byte
 	CNTRLTYPE             byte
 	FGUID                 [16]byte
@@ -1524,15 +1524,15 @@ type NVME_IDENTIFY_CONTROLLER_DATA struct {
 	NVMSR                 byte
 	VWCI                  byte
 	MEC                   byte
-	OACS                  uintptr
+	OACS                  NVME_IDENTIFY_CONTROLLER_DATA_OACS_e__Struct
 	ACL                   byte
 	AERL                  byte
-	FRMW                  uintptr
-	LPA                   uintptr
+	FRMW                  NVME_IDENTIFY_CONTROLLER_DATA_FRMW_e__Struct
+	LPA                   NVME_IDENTIFY_CONTROLLER_DATA_LPA_e__Struct
 	ELPE                  byte
 	NPSS                  byte
-	AVSCC                 uintptr
-	APSTA                 uintptr
+	AVSCC                 NVME_IDENTIFY_CONTROLLER_DATA_AVSCC_e__Struct
+	APSTA                 NVME_IDENTIFY_CONTROLLER_DATA_APSTA_e__Struct
 	WCTEMP                uint16
 	CCTEMP                uint16
 	MTFA                  uint16
@@ -1540,21 +1540,21 @@ type NVME_IDENTIFY_CONTROLLER_DATA struct {
 	HMMIN                 uint32
 	TNVMCAP               [16]byte
 	UNVMCAP               [16]byte
-	RPMBS                 uintptr
+	RPMBS                 NVME_IDENTIFY_CONTROLLER_DATA_RPMBS_e__Struct
 	EDSTT                 uint16
 	DSTO                  byte
 	FWUG                  byte
 	KAS                   uint16
-	HCTMA                 uintptr
+	HCTMA                 NVME_IDENTIFY_CONTROLLER_DATA_HCTMA_e__Struct
 	MNTMT                 uint16
 	MXTMT                 uint16
-	SANICAP               uintptr
+	SANICAP               NVME_IDENTIFY_CONTROLLER_DATA_SANICAP_e__Struct
 	HMMINDS               uint32
 	HMMAXD                uint16
 	NSETIDMAX             uint16
 	ENDGIDMAX             uint16
 	ANATT                 byte
-	ANACAP                uintptr
+	ANACAP                NVME_IDENTIFY_CONTROLLER_DATA_ANACAP_e__Struct
 	ANAGRPMAX             uint32
 	NANAGRPID             uint32
 	PELS                  uint32
@@ -1565,21 +1565,21 @@ type NVME_IDENTIFY_CONTROLLER_DATA struct {
 	Reserved3             byte
 	CQT                   uint16
 	Reserved4             [124]byte
-	SQES                  uintptr
-	CQES                  uintptr
+	SQES                  NVME_IDENTIFY_CONTROLLER_DATA_SQES_e__Struct
+	CQES                  NVME_IDENTIFY_CONTROLLER_DATA_CQES_e__Struct
 	MAXCMD                uint16
 	NN                    uint32
-	ONCS                  uintptr
-	FUSES                 uintptr
-	FNA                   uintptr
-	VWC                   uintptr
+	ONCS                  NVME_IDENTIFY_CONTROLLER_DATA_ONCS_e__Struct
+	FUSES                 NVME_IDENTIFY_CONTROLLER_DATA_FUSES_e__Struct
+	FNA                   NVME_IDENTIFY_CONTROLLER_DATA_FNA_e__Struct
+	VWC                   NVME_IDENTIFY_CONTROLLER_DATA_VWC_e__Struct
 	AWUN                  uint16
 	AWUPF                 uint16
-	NVSCC                 uintptr
-	NWPC                  uintptr
+	NVSCC                 NVME_IDENTIFY_CONTROLLER_DATA_NVSCC_e__Struct
+	NWPC                  NVME_IDENTIFY_CONTROLLER_DATA_NWPC_e__Struct
 	ACWU                  uint16
 	CopyDescFormats       uint16
-	SGLS                  uintptr
+	SGLS                  NVME_IDENTIFY_CONTROLLER_DATA_SGLS_e__Struct
 	MNAN                  uint32
 	MAXDNA                [16]byte
 	MAXCNA                uint32
@@ -1589,9 +1589,9 @@ type NVME_IDENTIFY_CONTROLLER_DATA struct {
 	IOCCSZ                uint32
 	IORCSZ                uint32
 	ICDOFF                uint16
-	FCATT                 uintptr
+	FCATT                 NVME_IDENTIFY_CONTROLLER_DATA_FCATT_e__Struct
 	MSDBD                 byte
-	OFCS                  uintptr
+	OFCS                  NVME_IDENTIFY_CONTROLLER_DATA_OFCS_e__Struct
 	DCTYPE                byte
 	Reserved8             [241]byte
 	PDS                   [32]NVME_POWER_STATE_DESC
@@ -1643,16 +1643,16 @@ type NVME_IDENTIFY_NAMESPACE_DATA struct {
 	NSZE      uint64
 	NCAP      uint64
 	NUSE      uint64
-	NSFEAT    uintptr
+	NSFEAT    NVME_IDENTIFY_NAMESPACE_DATA_NSFEAT_e__Struct
 	NLBAF     byte
-	FLBAS     uintptr
-	MC        uintptr
-	DPC       uintptr
-	DPS       uintptr
-	NMIC      uintptr
+	FLBAS     NVME_IDENTIFY_NAMESPACE_DATA_FLBAS_e__Struct
+	MC        NVME_IDENTIFY_NAMESPACE_DATA_MC_e__Struct
+	DPC       NVME_IDENTIFY_NAMESPACE_DATA_DPC_e__Struct
+	DPS       NVME_IDENTIFY_NAMESPACE_DATA_DPS_e__Struct
+	NMIC      NVME_IDENTIFY_NAMESPACE_DATA_NMIC_e__Struct
 	RESCAP    NVM_RESERVATION_CAPABILITIES
-	FPI       uintptr
-	DLFEAT    uintptr
+	FPI       NVME_IDENTIFY_NAMESPACE_DATA_FPI_e__Struct
+	DLFEAT    NVME_IDENTIFY_NAMESPACE_DATA_DLFEAT_e__Struct
 	NAWUN     uint16
 	NAWUPF    uint16
 	NACWU     uint16
@@ -1672,7 +1672,7 @@ type NVME_IDENTIFY_NAMESPACE_DATA struct {
 	Reserved2 [11]byte
 	ANAGRPID  uint32
 	Reserved3 [3]byte
-	NSATTR    uintptr
+	NSATTR    NVME_IDENTIFY_NAMESPACE_DATA_NSATTR_e__Struct
 	NVMSETID  uint16
 	ENDGID    uint16
 	NGUID     [16]byte
@@ -1707,8 +1707,8 @@ type NVME_IDENTIFY_SPECIFIC_NAMESPACE_IO_COMMAND_SET_ZOC_e__Struct struct {
 }
 
 type NVME_IDENTIFY_SPECIFIC_NAMESPACE_IO_COMMAND_SET struct {
-	ZOC       uintptr
-	OZCS      uintptr
+	ZOC       NVME_IDENTIFY_SPECIFIC_NAMESPACE_IO_COMMAND_SET_ZOC_e__Struct
+	OZCS      NVME_IDENTIFY_SPECIFIC_NAMESPACE_IO_COMMAND_SET_OZCS_e__Struct
 	MAR       uint32
 	MOR       uint32
 	RRL       uint32
@@ -1728,7 +1728,7 @@ type NVME_IDENTIFY_ZNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET struct {
 // NVME_LBA_FORMAT is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_LBA_FORMAT struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_LBA_RANGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_lba_range
@@ -1745,7 +1745,7 @@ type NVME_LBA_RANGET_TYPE_ENTRY_Attributes_e__Struct struct {
 // NVME_LBA_RANGET_TYPE_ENTRY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_lba_ranget_type_entry
 type NVME_LBA_RANGET_TYPE_ENTRY struct {
 	Type       byte
-	Attributes uintptr
+	Attributes NVME_LBA_RANGET_TYPE_ENTRY_Attributes_e__Struct
 	Reserved0  [14]byte
 	SLBA       uint64
 	NLB        uint64
@@ -1817,7 +1817,7 @@ type NVME_REGISTERED_CONTROLLER_DATA_RCSTS_e__Struct struct {
 
 type NVME_REGISTERED_CONTROLLER_DATA struct {
 	CNTLID   uint16
-	RCSTS    uintptr
+	RCSTS    NVME_REGISTERED_CONTROLLER_DATA_RCSTS_e__Struct
 	Reserved [5]byte
 	HOSTID   [8]byte
 	RKEY     uint64
@@ -1829,7 +1829,7 @@ type NVME_REGISTERED_CONTROLLER_EXTENDED_DATA_RCSTS_e__Struct struct {
 
 type NVME_REGISTERED_CONTROLLER_EXTENDED_DATA struct {
 	CNTLID    uint16
-	RCSTS     uintptr
+	RCSTS     NVME_REGISTERED_CONTROLLER_EXTENDED_DATA_RCSTS_e__Struct
 	Reserved  [5]byte
 	RKEY      uint64
 	HOSTID    [16]byte
@@ -1917,96 +1917,96 @@ type NVME_SET_ATTRIBUTES_ENTRY struct {
 // NVME_SGL_BITBUCKET_DESC_Identifier_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_SGL_BITBUCKET_DESC_Identifier_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_SGL_BITBUCKET_DESC struct {
 	Reserved0  uint64
 	Length     uint32
 	Reserved1  [3]byte
-	Identifier uintptr
+	Identifier NVME_SGL_BITBUCKET_DESC_Identifier_e__Union
 }
 
 // NVME_SGL_DATABLOCK_DESC_Identifier_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_SGL_DATABLOCK_DESC_Identifier_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_SGL_DATABLOCK_DESC struct {
 	Address    uint64
 	Length     uint32
 	Reserved0  [3]byte
-	Identifier uintptr
+	Identifier NVME_SGL_DATABLOCK_DESC_Identifier_e__Union
 }
 
 // NVME_SGL_DESC_Identifier_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_SGL_DESC_Identifier_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_SGL_DESC struct {
 	Reserved0  [15]byte
-	Identifier uintptr
+	Identifier NVME_SGL_DESC_Identifier_e__Union
 }
 
 // NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_SGL_KEYDATABLOCK_DESC struct {
 	Address    uint64
 	Length     [3]byte
 	Key        [4]byte
-	Identifier uintptr
+	Identifier NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union
 }
 
 // NVME_SGL_LASTSEG_DESC_Identifier_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_SGL_LASTSEG_DESC_Identifier_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_SGL_LASTSEG_DESC struct {
 	Address    uint64
 	Length     uint32
 	Reserved0  [3]byte
-	Identifier uintptr
+	Identifier NVME_SGL_LASTSEG_DESC_Identifier_e__Union
 }
 
 // NVME_SGL_SEGMENT_DESC_Identifier_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_SGL_SEGMENT_DESC_Identifier_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_SGL_SEGMENT_DESC struct {
 	Address    uint64
 	Length     uint32
 	Reserved0  [3]byte
-	Identifier uintptr
+	Identifier NVME_SGL_SEGMENT_DESC_Identifier_e__Union
 }
 
 // NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_SGL_TRANSPORTDATA_DESC struct {
 	Reserved0  uint64
 	Length     uint32
 	Reserved1  [3]byte
-	Identifier uintptr
+	Identifier NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union
 }
 
 // NVME_SUBMISSION_QUEUE_TAIL_DOORBELL is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_SUBMISSION_QUEUE_TAIL_DOORBELL struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type NVME_SUPPORTED_LOG_PAGES_LOG struct {
@@ -2059,27 +2059,27 @@ type NVME_UUID_LIST_ENTRY struct {
 // NVME_VERSION is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_VERSION struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type NVME_WCS_DEVICE_CAPABILITIES struct {
-	Anonymous uintptr
+	Anonymous NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union
 }
 
 // NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 type NVME_WCS_DEVICE_RESET_ACTION struct {
-	Anonymous uintptr
+	Anonymous NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union
 }
 
 type NVME_ZONE_DESCRIPTOR_Anonymous1_e__Struct struct {
@@ -2095,9 +2095,9 @@ type NVME_ZONE_DESCRIPTOR_ZA_e__Struct struct {
 }
 
 type NVME_ZONE_DESCRIPTOR struct {
-	Anonymous1   uintptr
-	Anonymous2   uintptr
-	ZA           uintptr
+	Anonymous1   NVME_ZONE_DESCRIPTOR_Anonymous1_e__Struct
+	Anonymous2   NVME_ZONE_DESCRIPTOR_Anonymous2_e__Struct
+	ZA           NVME_ZONE_DESCRIPTOR_ZA_e__Struct
 	Reserved3    [5]byte
 	ZCAP         uint64
 	ZSLBA        uint64
@@ -2117,7 +2117,7 @@ type NVME_ZONE_EXTENDED_REPORT_ZONE_DESC struct {
 // NVM_RESERVATION_CAPABILITIES is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type NVM_RESERVATION_CAPABILITIES struct {
-	Data [1]uint64
+	Data [1]byte
 }
 
 // NVM_SET_LIST: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvm_set_list

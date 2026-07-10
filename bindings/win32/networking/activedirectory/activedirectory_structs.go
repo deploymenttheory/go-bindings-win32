@@ -44,7 +44,7 @@ type ADSVALUE_Anonymous_e__Union struct {
 // ADSVALUE: https://learn.microsoft.com/windows/win32/api/iads/ns-iads-adsvalue
 type ADSVALUE struct {
 	DwType    ADSTYPE
-	Anonymous uintptr
+	Anonymous ADSVALUE_Anonymous_e__Union
 }
 
 // ADS_ATTR_DEF: https://learn.microsoft.com/windows/win32/api/iads/ns-iads-ads_attr_def
@@ -1122,7 +1122,7 @@ type OPENQUERYWINDOW struct {
 	PHandlerParameters unsafe.Pointer
 	ClsidDefaultForm   win32.GUID
 	PPersistQuery      *IPersistQuery
-	Anonymous          uintptr
+	Anonymous          OPENQUERYWINDOW_Anonymous_e__Union
 }
 
 type OctetList struct {

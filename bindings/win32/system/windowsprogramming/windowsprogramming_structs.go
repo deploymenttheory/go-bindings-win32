@@ -155,7 +155,7 @@ type DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union struct {
 
 type DELAYLOAD_PROC_DESCRIPTOR struct {
 	ImportDescribedByName uint32
-	Description           uintptr
+	Description           DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union
 }
 
 type DefaultBrowserSyncSettings struct {
@@ -202,11 +202,11 @@ type HW_PROFILE_INFOW struct {
 // IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type IMAGE_DELAYLOAD_DESCRIPTOR struct {
-	Attributes                 uintptr
+	Attributes                 IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union
 	DllNameRVA                 uint32
 	ModuleHandleRVA            uint32
 	ImportAddressTableRVA      uint32
@@ -223,7 +223,7 @@ type IMAGE_THUNK_DATA32_u1_e__Union struct {
 }
 
 type IMAGE_THUNK_DATA32 struct {
-	U1 uintptr
+	U1 IMAGE_THUNK_DATA32_u1_e__Union
 }
 
 // IMAGE_THUNK_DATA64_u1_e__Union is a C union; the raw tier exposes its correctly sized
@@ -233,7 +233,7 @@ type IMAGE_THUNK_DATA64_u1_e__Union struct {
 }
 
 type IMAGE_THUNK_DATA64 struct {
-	U1 uintptr
+	U1 IMAGE_THUNK_DATA64_u1_e__Union
 }
 
 type IMEPROA struct {
@@ -307,7 +307,7 @@ type LDR_DATA_TABLE_ENTRY struct {
 	FullDllName        foundation.UNICODE_STRING
 	Reserved4          [8]byte
 	Reserved5          [3]unsafe.Pointer
-	Anonymous          uintptr
+	Anonymous          LDR_DATA_TABLE_ENTRY_Anonymous_e__Union
 	TimeDateStamp      uint32
 }
 
@@ -336,7 +336,7 @@ type PERUSERSECTIONW struct {
 // PROCESS_CREATION_SVE_VECTOR_LENGTH is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type PROCESS_CREATION_SVE_VECTOR_LENGTH struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 type PUBLIC_OBJECT_BASIC_INFORMATION struct {
@@ -532,7 +532,7 @@ type TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union struct {
 type TDI_TL_IO_CONTROL_ENDPOINT struct {
 	Type               TDI_TL_IO_CONTROL_TYPE
 	Level              uint32
-	Anonymous          uintptr
+	Anonymous          TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union
 	InputBuffer        unsafe.Pointer
 	InputBufferLength  uint32
 	OutputBuffer       unsafe.Pointer

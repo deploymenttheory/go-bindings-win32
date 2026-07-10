@@ -69,7 +69,7 @@ type CustomDumpItem_Anonymous_e__Union struct {
 
 type CustomDumpItem struct {
 	ItemKind  ECustomDumpItemKind
-	Anonymous uintptr
+	Anonymous CustomDumpItem_Anonymous_e__Union
 }
 
 type MDAInfo struct {

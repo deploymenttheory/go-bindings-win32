@@ -12,61 +12,61 @@ import (
 // APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [8]uint32
 }
 
 // APPLY_SNAPSHOT_VHDSET_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-apply_snapshot_vhdset_parameters
 type APPLY_SNAPSHOT_VHDSET_PARAMETERS struct {
 	Version   APPLY_SNAPSHOT_VHDSET_VERSION
-	Anonymous uintptr
+	Anonymous APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
 // ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint64
 }
 
 // ATTACH_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-attach_virtual_disk_parameters
 type ATTACH_VIRTUAL_DISK_PARAMETERS struct {
 	Version   ATTACH_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [1]uint32
 }
 
 // COMPACT_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-compact_virtual_disk_parameters
 type COMPACT_VIRTUAL_DISK_PARAMETERS struct {
 	Version   COMPACT_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [22]uint64
 }
 
 // CREATE_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-create_virtual_disk_parameters
 type CREATE_VIRTUAL_DISK_PARAMETERS struct {
 	Version   CREATE_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 // DELETE_SNAPSHOT_VHDSET_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-delete_snapshot_vhdset_parameters
 type DELETE_SNAPSHOT_VHDSET_PARAMETERS struct {
 	Version   DELETE_SNAPSHOT_VHDSET_VERSION
-	Anonymous uintptr
+	Anonymous DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
 // EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -78,7 +78,7 @@ type EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 // EXPAND_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-expand_virtual_disk_parameters
 type EXPAND_VIRTUAL_DISK_PARAMETERS struct {
 	Version   EXPAND_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -89,7 +89,7 @@ type FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 
 type FORK_VIRTUAL_DISK_PARAMETERS struct {
 	Version   FORK_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // GET_VIRTUAL_DISK_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -101,19 +101,19 @@ type GET_VIRTUAL_DISK_INFO_Anonymous_e__Union struct {
 // GET_VIRTUAL_DISK_INFO: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-get_virtual_disk_info
 type GET_VIRTUAL_DISK_INFO struct {
 	Version   GET_VIRTUAL_DISK_INFO_VERSION
-	Anonymous uintptr
+	Anonymous GET_VIRTUAL_DISK_INFO_Anonymous_e__Union
 }
 
 // MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint32
 }
 
 // MERGE_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-merge_virtual_disk_parameters
 type MERGE_VIRTUAL_DISK_PARAMETERS struct {
 	Version   MERGE_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -125,31 +125,31 @@ type MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 // MIRROR_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-mirror_virtual_disk_parameters
 type MIRROR_VIRTUAL_DISK_PARAMETERS struct {
 	Version   MIRROR_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [3]uint64
 }
 
 // MODIFY_VHDSET_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-modify_vhdset_parameters
 type MODIFY_VHDSET_PARAMETERS struct {
 	Version   MODIFY_VHDSET_VERSION
-	Anonymous uintptr
+	Anonymous MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
 // OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [10]uint32
 }
 
 // OPEN_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-open_virtual_disk_parameters
 type OPEN_VIRTUAL_DISK_PARAMETERS struct {
 	Version   OPEN_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // QUERY_CHANGES_VIRTUAL_DISK_RANGE: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-query_changes_virtual_disk_range
@@ -162,25 +162,25 @@ type QUERY_CHANGES_VIRTUAL_DISK_RANGE struct {
 // RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [5]uint64
 }
 
 // RAW_SCSI_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-raw_scsi_virtual_disk_parameters
 type RAW_SCSI_VIRTUAL_DISK_PARAMETERS struct {
 	Version   RAW_SCSI_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [2]uint32
 }
 
 // RAW_SCSI_VIRTUAL_DISK_RESPONSE: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-raw_scsi_virtual_disk_response
 type RAW_SCSI_VIRTUAL_DISK_RESPONSE struct {
 	Version   RAW_SCSI_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union
 }
 
 // RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -192,19 +192,19 @@ type RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 // RESIZE_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-resize_virtual_disk_parameters
 type RESIZE_VIRTUAL_DISK_PARAMETERS struct {
 	Version   RESIZE_VIRTUAL_DISK_VERSION
-	Anonymous uintptr
+	Anonymous RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
 // SET_VIRTUAL_DISK_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type SET_VIRTUAL_DISK_INFO_Anonymous_e__Union struct {
-	Data [2]uint64
+	Data [3]uint64
 }
 
 // SET_VIRTUAL_DISK_INFO: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-set_virtual_disk_info
 type SET_VIRTUAL_DISK_INFO struct {
 	Version   SET_VIRTUAL_DISK_INFO_VERSION
-	Anonymous uintptr
+	Anonymous SET_VIRTUAL_DISK_INFO_Anonymous_e__Union
 }
 
 // STORAGE_DEPENDENCY_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -217,7 +217,7 @@ type STORAGE_DEPENDENCY_INFO_Anonymous_e__Union struct {
 type STORAGE_DEPENDENCY_INFO struct {
 	Version       STORAGE_DEPENDENCY_INFO_VERSION
 	NumberEntries uint32
-	Anonymous     uintptr
+	Anonymous     STORAGE_DEPENDENCY_INFO_Anonymous_e__Union
 }
 
 // STORAGE_DEPENDENCY_INFO_TYPE_1: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-storage_dependency_info_type_1
@@ -242,13 +242,13 @@ type STORAGE_DEPENDENCY_INFO_TYPE_2 struct {
 // TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
 // and aligned backing storage. Typed accessors arrive with the idiomatic tier.
 type TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
-	Data [1]uint64
+	Data [4]uint32
 }
 
 // TAKE_SNAPSHOT_VHDSET_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-take_snapshot_vhdset_parameters
 type TAKE_SNAPSHOT_VHDSET_PARAMETERS struct {
 	Version   TAKE_SNAPSHOT_VHDSET_VERSION
-	Anonymous uintptr
+	Anonymous TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
 // VIRTUAL_DISK_PROGRESS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-virtual_disk_progress

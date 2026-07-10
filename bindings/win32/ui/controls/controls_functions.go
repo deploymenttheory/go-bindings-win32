@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uiinputpointer "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input/pointer"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
@@ -528,8 +529,8 @@ func DPA_InsertPtr(hdpa HDPA, i int32, p unsafe.Pointer) int32 {
 // DPA_LoadStream calls COMCTL32!DPA_LoadStream.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_loadstream
 // Minimum OS: windows6.0.6000.
-func DPA_LoadStream(phdpa *HDPA, pfn PFNDPASTREAM, pstream uintptr, pvInstData unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDPA_LoadStream.Addr(), uintptr(unsafe.Pointer(phdpa)), uintptr(pfn), uintptr(pstream), uintptr(unsafe.Pointer(pvInstData)))
+func DPA_LoadStream(phdpa *HDPA, pfn PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDPA_LoadStream.Addr(), uintptr(unsafe.Pointer(phdpa)), uintptr(pfn), uintptr(unsafe.Pointer(pstream)), uintptr(unsafe.Pointer(pvInstData)))
 	return foundation.HRESULT(r1)
 }
 
@@ -544,8 +545,8 @@ func DPA_Merge(hdpaDest HDPA, hdpaSrc HDPA, dwFlags uint32, pfnCompare PFNDACOMP
 // DPA_SaveStream calls COMCTL32!DPA_SaveStream.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_savestream
 // Minimum OS: windows6.0.6000.
-func DPA_SaveStream(hdpa HDPA, pfn PFNDPASTREAM, pstream uintptr, pvInstData unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDPA_SaveStream.Addr(), uintptr(hdpa), uintptr(pfn), uintptr(pstream), uintptr(unsafe.Pointer(pvInstData)))
+func DPA_SaveStream(hdpa HDPA, pfn PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDPA_SaveStream.Addr(), uintptr(hdpa), uintptr(pfn), uintptr(unsafe.Pointer(pstream)), uintptr(unsafe.Pointer(pvInstData)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1408,8 +1409,8 @@ func ImageList_BeginDrag(himlTrack HIMAGELIST, iTrack int32, dxHotspot int32, dy
 // ImageList_CoCreateInstance calls COMCTL32!ImageList_CoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/commoncontrols/nf-commoncontrols-imagelist_cocreateinstance
 // Minimum OS: windows6.0.6000.
-func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procImageList_CoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(punkOuter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procImageList_CoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1583,16 +1584,16 @@ func ImageList_Merge(himl1 HIMAGELIST, i1 int32, himl2 HIMAGELIST, i2 int32, dx 
 // ImageList_Read calls COMCTL32!ImageList_Read.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_read
 // Minimum OS: windows6.0.6000.
-func ImageList_Read(pstm uintptr) HIMAGELIST {
-	r1, _, _ := syscall.SyscallN(procImageList_Read.Addr(), uintptr(pstm))
+func ImageList_Read(pstm *systemcom.IStream) HIMAGELIST {
+	r1, _, _ := syscall.SyscallN(procImageList_Read.Addr(), uintptr(unsafe.Pointer(pstm)))
 	return HIMAGELIST(r1)
 }
 
 // ImageList_ReadEx calls COMCTL32!ImageList_ReadEx.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_readex
 // Minimum OS: windows6.0.6000.
-func ImageList_ReadEx(dwFlags uint32, pstm uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procImageList_ReadEx.Addr(), uintptr(dwFlags), uintptr(pstm), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func ImageList_ReadEx(dwFlags uint32, pstm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procImageList_ReadEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1663,16 +1664,16 @@ func ImageList_SetOverlayImage(himl HIMAGELIST, iImage int32, iOverlay int32) fo
 // ImageList_Write calls COMCTL32!ImageList_Write.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_write
 // Minimum OS: windows6.0.6000.
-func ImageList_Write(himl HIMAGELIST, pstm uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImageList_Write.Addr(), uintptr(himl), uintptr(pstm))
+func ImageList_Write(himl HIMAGELIST, pstm *systemcom.IStream) foundation.BOOL {
+	r1, _, _ := syscall.SyscallN(procImageList_Write.Addr(), uintptr(himl), uintptr(unsafe.Pointer(pstm)))
 	return foundation.BOOL(r1)
 }
 
 // ImageList_WriteEx calls COMCTL32!ImageList_WriteEx.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_writeex
 // Minimum OS: windows6.0.6000.
-func ImageList_WriteEx(himl HIMAGELIST, dwFlags IMAGE_LIST_WRITE_STREAM_FLAGS, pstm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procImageList_WriteEx.Addr(), uintptr(himl), uintptr(dwFlags), uintptr(pstm))
+func ImageList_WriteEx(himl HIMAGELIST, dwFlags IMAGE_LIST_WRITE_STREAM_FLAGS, pstm *systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procImageList_WriteEx.Addr(), uintptr(himl), uintptr(dwFlags), uintptr(unsafe.Pointer(pstm)))
 	return foundation.HRESULT(r1)
 }
 

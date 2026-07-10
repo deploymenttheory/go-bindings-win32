@@ -9,10 +9,12 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
 	systemsysteminformation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/systeminformation"
 	systemthreading "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 	systemtime "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/time"
+	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
 type ADDRESS_MODE int32
@@ -1949,7 +1951,7 @@ type DebugPropertyInfo struct {
 	M_bstrValue     foundation.BSTR
 	M_bstrFullName  foundation.BSTR
 	M_dwAttrib      uint32
-	M_pDebugProp    [1]uint64
+	M_pDebugProp    *IDebugProperty
 }
 
 // EXCEPTION_DEBUG_INFO: https://learn.microsoft.com/windows/win32/api/minwinbase/ns-minwinbase-exception_debug_info
@@ -2011,12 +2013,12 @@ type ExtendedDebugPropertyInfo struct {
 	PszValue      foundation.PWSTR
 	PszFullName   foundation.PWSTR
 	DwAttrib      uint32
-	PDebugProp    [1]uint64
+	PDebugProp    *IDebugProperty
 	NDISPID       uint32
 	NType         uint32
-	VarValue      [1]uint64
-	PlbValue      [1]uint64
-	PDebugExtProp [1]uint64
+	VarValue      systemvariant.VARIANT
+	PlbValue      *systemcomstructuredstorage.ILockBytes
+	PDebugExtProp *IDebugExtendedProperty
 }
 
 // FPO_DATA: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-fpo_data

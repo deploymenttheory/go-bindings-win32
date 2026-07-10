@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type PHIDP_PREPARSED_DATA uintptr
@@ -151,7 +152,7 @@ type DICONFIGUREDEVICESPARAMSA struct {
 	LprgFormats    *DIACTIONFORMATA
 	Hwnd           foundation.HWND
 	Dics           DICOLORSET
-	LpUnkDDSTarget [1]uint64
+	LpUnkDDSTarget *systemcom.IUnknown
 }
 
 type DICONFIGUREDEVICESPARAMSW struct {
@@ -162,7 +163,7 @@ type DICONFIGUREDEVICESPARAMSW struct {
 	LprgFormats    *DIACTIONFORMATW
 	Hwnd           foundation.HWND
 	Dics           DICOLORSET
-	LpUnkDDSTarget [1]uint64
+	LpUnkDDSTarget *systemcom.IUnknown
 }
 
 type DICONSTANTFORCE struct {
@@ -994,11 +995,11 @@ type USAGE_AND_PAGE struct {
 }
 
 // LPDICONFIGUREDEVICESCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(*systemcom.IUnknown, unsafe.Pointer) foundation.BOOL.
 type LPDICONFIGUREDEVICESCALLBACK uintptr
 
 // LPDIENUMCREATEDEFFECTOBJECTSCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(*IDirectInputEffect, unsafe.Pointer) foundation.BOOL.
 type LPDIENUMCREATEDEFFECTOBJECTSCALLBACK uintptr
 
 // LPDIENUMDEVICEOBJECTSCALLBACKA is a callback pointer: create one with NewCallback (package
@@ -1010,11 +1011,11 @@ type LPDIENUMDEVICEOBJECTSCALLBACKA uintptr
 type LPDIENUMDEVICEOBJECTSCALLBACKW uintptr
 
 // LPDIENUMDEVICESBYSEMANTICSCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIDEVICEINSTANCEA, uintptr, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(*DIDEVICEINSTANCEA, *IDirectInputDevice8A, uint32, uint32, unsafe.Pointer) foundation.BOOL.
 type LPDIENUMDEVICESBYSEMANTICSCBA uintptr
 
 // LPDIENUMDEVICESBYSEMANTICSCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIDEVICEINSTANCEW, uintptr, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(*DIDEVICEINSTANCEW, *IDirectInputDevice8W, uint32, uint32, unsafe.Pointer) foundation.BOOL.
 type LPDIENUMDEVICESBYSEMANTICSCBW uintptr
 
 // LPDIENUMDEVICESCALLBACKA is a callback pointer: create one with NewCallback (package

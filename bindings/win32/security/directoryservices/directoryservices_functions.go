@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	securityauthorizationui "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/authorization/ui"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 )
 
@@ -27,16 +28,16 @@ var (
 // DSCreateISecurityInfoObject calls DSSEC!DSCreateISecurityInfoObject.
 // https://learn.microsoft.com/windows/win32/api/dssec/nf-dssec-dscreateisecurityinfoobject
 // Minimum OS: windowsserver2008.
-func DSCreateISecurityInfoObject(pwszObjectPath foundation.PWSTR, pwszObjectClass foundation.PWSTR, dwFlags uint32, ppSI uintptr, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObject.Addr(), uintptr(unsafe.Pointer(pwszObjectPath)), uintptr(unsafe.Pointer(pwszObjectClass)), uintptr(dwFlags), uintptr(ppSI), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
+func DSCreateISecurityInfoObject(pwszObjectPath foundation.PWSTR, pwszObjectClass foundation.PWSTR, dwFlags uint32, ppSI **securityauthorizationui.ISecurityInformation, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObject.Addr(), uintptr(unsafe.Pointer(pwszObjectPath)), uintptr(unsafe.Pointer(pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSI)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
 	return foundation.HRESULT(r1)
 }
 
 // DSCreateISecurityInfoObjectEx calls DSSEC!DSCreateISecurityInfoObjectEx.
 // https://learn.microsoft.com/windows/win32/api/dssec/nf-dssec-dscreateisecurityinfoobjectex
 // Minimum OS: windowsserver2008.
-func DSCreateISecurityInfoObjectEx(pwszObjectPath foundation.PWSTR, pwszObjectClass foundation.PWSTR, pwszServer foundation.PWSTR, pwszUserName foundation.PWSTR, pwszPassword foundation.PWSTR, dwFlags uint32, ppSI uintptr, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObjectEx.Addr(), uintptr(unsafe.Pointer(pwszObjectPath)), uintptr(unsafe.Pointer(pwszObjectClass)), uintptr(unsafe.Pointer(pwszServer)), uintptr(unsafe.Pointer(pwszUserName)), uintptr(unsafe.Pointer(pwszPassword)), uintptr(dwFlags), uintptr(ppSI), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
+func DSCreateISecurityInfoObjectEx(pwszObjectPath foundation.PWSTR, pwszObjectClass foundation.PWSTR, pwszServer foundation.PWSTR, pwszUserName foundation.PWSTR, pwszPassword foundation.PWSTR, dwFlags uint32, ppSI **securityauthorizationui.ISecurityInformation, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObjectEx.Addr(), uintptr(unsafe.Pointer(pwszObjectPath)), uintptr(unsafe.Pointer(pwszObjectClass)), uintptr(unsafe.Pointer(pwszServer)), uintptr(unsafe.Pointer(pwszUserName)), uintptr(unsafe.Pointer(pwszPassword)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSI)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
 	return foundation.HRESULT(r1)
 }
 

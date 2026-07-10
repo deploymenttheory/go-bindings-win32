@@ -32,8 +32,8 @@ var (
 
 // DMOEnum calls msdmo!DMOEnum.
 // https://learn.microsoft.com/windows/win32/api/dmoreg/nf-dmoreg-dmoenum
-func DMOEnum(guidCategory *win32.GUID, dwFlags uint32, cInTypes uint32, pInTypes *DMO_PARTIAL_MEDIATYPE, cOutTypes uint32, pOutTypes *DMO_PARTIAL_MEDIATYPE, ppEnum uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDMOEnum.Addr(), uintptr(unsafe.Pointer(guidCategory)), uintptr(dwFlags), uintptr(cInTypes), uintptr(unsafe.Pointer(pInTypes)), uintptr(cOutTypes), uintptr(unsafe.Pointer(pOutTypes)), uintptr(ppEnum))
+func DMOEnum(guidCategory *win32.GUID, dwFlags uint32, cInTypes uint32, pInTypes *DMO_PARTIAL_MEDIATYPE, cOutTypes uint32, pOutTypes *DMO_PARTIAL_MEDIATYPE, ppEnum **IEnumDMO) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDMOEnum.Addr(), uintptr(unsafe.Pointer(guidCategory)), uintptr(dwFlags), uintptr(cInTypes), uintptr(unsafe.Pointer(pInTypes)), uintptr(cOutTypes), uintptr(unsafe.Pointer(pOutTypes)), uintptr(unsafe.Pointer(ppEnum)))
 	return foundation.HRESULT(r1)
 }
 

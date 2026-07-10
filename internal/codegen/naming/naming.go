@@ -25,6 +25,7 @@ var goReservedWords = map[string]bool{
 	"min": true, "max": true, "clear": true,
 	// names bound by generated code
 	"unsafe": true, "syscall": true, "win32": true, "err": true, "ret": true,
+	"self": true, // COM method receiver
 }
 
 // Export makes a metadata identifier usable as an exported Go package-level

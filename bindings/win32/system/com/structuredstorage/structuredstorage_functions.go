@@ -157,40 +157,40 @@ func ClearPropVariantArray(rgPropVar *PROPVARIANT, cVars uint32) {
 // CoGetInstanceFromFile calls OLE32!CoGetInstanceFromFile.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetinstancefromfile
 // Minimum OS: windows5.0.
-func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter uintptr, dwClsCtx systemcom.CLSCTX, grfMode uint32, pwszName foundation.PWSTR, dwCount uint32, pResults *systemcom.MULTI_QI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromFile.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(punkOuter), uintptr(dwClsCtx), uintptr(grfMode), uintptr(unsafe.Pointer(pwszName)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
+func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, grfMode uint32, pwszName foundation.PWSTR, dwCount uint32, pResults *systemcom.MULTI_QI) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromFile.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(grfMode), uintptr(unsafe.Pointer(pwszName)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
 	return foundation.HRESULT(r1)
 }
 
 // CoGetInstanceFromIStorage calls OLE32!CoGetInstanceFromIStorage.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetinstancefromistorage
 // Minimum OS: windows5.0.
-func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter uintptr, dwClsCtx systemcom.CLSCTX, pstg uintptr, dwCount uint32, pResults *systemcom.MULTI_QI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromIStorage.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(punkOuter), uintptr(dwClsCtx), uintptr(pstg), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
+func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pstg *IStorage, dwCount uint32, pResults *systemcom.MULTI_QI) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromIStorage.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pstg)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
 	return foundation.HRESULT(r1)
 }
 
 // CoGetInterfaceAndReleaseStream calls OLE32!CoGetInterfaceAndReleaseStream.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetinterfaceandreleasestream
 // Minimum OS: windows5.0.
-func CoGetInterfaceAndReleaseStream(pStm uintptr, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetInterfaceAndReleaseStream.Addr(), uintptr(pStm), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
+func CoGetInterfaceAndReleaseStream(pStm *systemcom.IStream, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetInterfaceAndReleaseStream.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateILockBytesOnHGlobal calls OLE32!CreateILockBytesOnHGlobal.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-createilockbytesonhglobal
 // Minimum OS: windows5.0.
-func CreateILockBytesOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease foundation.BOOL, pplkbyt uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateILockBytesOnHGlobal.Addr(), uintptr(hGlobal), uintptr(fDeleteOnRelease), uintptr(pplkbyt))
+func CreateILockBytesOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease foundation.BOOL, pplkbyt **ILockBytes) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateILockBytesOnHGlobal.Addr(), uintptr(hGlobal), uintptr(fDeleteOnRelease), uintptr(unsafe.Pointer(pplkbyt)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateStreamOnHGlobal calls OLE32!CreateStreamOnHGlobal.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-createstreamonhglobal
 // Minimum OS: windows5.0.
-func CreateStreamOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease foundation.BOOL, ppstm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateStreamOnHGlobal.Addr(), uintptr(hGlobal), uintptr(fDeleteOnRelease), uintptr(ppstm))
+func CreateStreamOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease foundation.BOOL, ppstm **systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateStreamOnHGlobal.Addr(), uintptr(hGlobal), uintptr(fDeleteOnRelease), uintptr(unsafe.Pointer(ppstm)))
 	return foundation.HRESULT(r1)
 }
 
@@ -213,24 +213,24 @@ func FreePropVariantArray(cVariants uint32, rgvars *PROPVARIANT) foundation.HRES
 // GetConvertStg calls OLE32!GetConvertStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-getconvertstg
 // Minimum OS: windows5.0.
-func GetConvertStg(pStg uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetConvertStg.Addr(), uintptr(pStg))
+func GetConvertStg(pStg *IStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetConvertStg.Addr(), uintptr(unsafe.Pointer(pStg)))
 	return foundation.HRESULT(r1)
 }
 
 // GetHGlobalFromILockBytes calls OLE32!GetHGlobalFromILockBytes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-gethglobalfromilockbytes
 // Minimum OS: windows5.0.
-func GetHGlobalFromILockBytes(plkbyt uintptr, phglobal *foundation.HGLOBAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetHGlobalFromILockBytes.Addr(), uintptr(plkbyt), uintptr(unsafe.Pointer(phglobal)))
+func GetHGlobalFromILockBytes(plkbyt *ILockBytes, phglobal *foundation.HGLOBAL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetHGlobalFromILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(unsafe.Pointer(phglobal)))
 	return foundation.HRESULT(r1)
 }
 
 // GetHGlobalFromStream calls OLE32!GetHGlobalFromStream.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-gethglobalfromstream
 // Minimum OS: windows5.0.
-func GetHGlobalFromStream(pstm uintptr, phglobal *foundation.HGLOBAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetHGlobalFromStream.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(phglobal)))
+func GetHGlobalFromStream(pstm *systemcom.IStream, phglobal *foundation.HGLOBAL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetHGlobalFromStream.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(phglobal)))
 	return foundation.HRESULT(r1)
 }
 
@@ -381,32 +381,32 @@ func InitPropVariantVectorFromPropVariant(propvarSingle *PROPVARIANT, ppropvarVe
 // OleConvertIStorageToOLESTREAM calls ole32!OleConvertIStorageToOLESTREAM.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertistoragetoolestream
 // Minimum OS: windows5.0.
-func OleConvertIStorageToOLESTREAM(pstg uintptr, lpolestream *OLESTREAM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleConvertIStorageToOLESTREAM.Addr(), uintptr(pstg), uintptr(unsafe.Pointer(lpolestream)))
+func OleConvertIStorageToOLESTREAM(pstg *IStorage, lpolestream *OLESTREAM) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procOleConvertIStorageToOLESTREAM.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(lpolestream)))
 	return foundation.HRESULT(r1)
 }
 
 // OleConvertIStorageToOLESTREAMEx calls ole32!OleConvertIStorageToOLESTREAMEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertistoragetoolestreamex
 // Minimum OS: windows5.0.
-func OleConvertIStorageToOLESTREAMEx(pstg uintptr, cfFormat uint16, lWidth int32, lHeight int32, dwSize uint32, pmedium *systemcom.STGMEDIUM, polestm *OLESTREAM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleConvertIStorageToOLESTREAMEx.Addr(), uintptr(pstg), uintptr(cfFormat), uintptr(lWidth), uintptr(lHeight), uintptr(dwSize), uintptr(unsafe.Pointer(pmedium)), uintptr(unsafe.Pointer(polestm)))
+func OleConvertIStorageToOLESTREAMEx(pstg *IStorage, cfFormat uint16, lWidth int32, lHeight int32, dwSize uint32, pmedium *systemcom.STGMEDIUM, polestm *OLESTREAM) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procOleConvertIStorageToOLESTREAMEx.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(cfFormat), uintptr(lWidth), uintptr(lHeight), uintptr(dwSize), uintptr(unsafe.Pointer(pmedium)), uintptr(unsafe.Pointer(polestm)))
 	return foundation.HRESULT(r1)
 }
 
 // OleConvertOLESTREAMToIStorage calls ole32!OleConvertOLESTREAMToIStorage.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertolestreamtoistorage
 // Minimum OS: windows5.0.
-func OleConvertOLESTREAMToIStorage(lpolestream *OLESTREAM, pstg uintptr, ptd *systemcom.DVTARGETDEVICE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorage.Addr(), uintptr(unsafe.Pointer(lpolestream)), uintptr(pstg), uintptr(unsafe.Pointer(ptd)))
+func OleConvertOLESTREAMToIStorage(lpolestream *OLESTREAM, pstg *IStorage, ptd *systemcom.DVTARGETDEVICE) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorage.Addr(), uintptr(unsafe.Pointer(lpolestream)), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(ptd)))
 	return foundation.HRESULT(r1)
 }
 
 // OleConvertOLESTREAMToIStorageEx calls ole32!OleConvertOLESTREAMToIStorageEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertolestreamtoistorageex
 // Minimum OS: windows5.0.
-func OleConvertOLESTREAMToIStorageEx(polestm *OLESTREAM, pstg uintptr, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorageEx.Addr(), uintptr(unsafe.Pointer(polestm)), uintptr(pstg), uintptr(unsafe.Pointer(pcfFormat)), uintptr(unsafe.Pointer(plwWidth)), uintptr(unsafe.Pointer(plHeight)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(pmedium)))
+func OleConvertOLESTREAMToIStorageEx(polestm *OLESTREAM, pstg *IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorageEx.Addr(), uintptr(unsafe.Pointer(polestm)), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(pcfFormat)), uintptr(unsafe.Pointer(plwWidth)), uintptr(unsafe.Pointer(plHeight)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(pmedium)))
 	return foundation.HRESULT(r1)
 }
 
@@ -893,40 +893,40 @@ func PropVariantToWinRTPropertyValue(propvar *PROPVARIANT, riid *win32.GUID, ppv
 // ReadClassStg calls OLE32!ReadClassStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-readclassstg
 // Minimum OS: windows5.0.
-func ReadClassStg(pStg uintptr, pclsid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procReadClassStg.Addr(), uintptr(pStg), uintptr(unsafe.Pointer(pclsid)))
+func ReadClassStg(pStg *IStorage, pclsid *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procReadClassStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(pclsid)))
 	return foundation.HRESULT(r1)
 }
 
 // ReadClassStm calls OLE32!ReadClassStm.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-readclassstm
 // Minimum OS: windows5.0.
-func ReadClassStm(pStm uintptr, pclsid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procReadClassStm.Addr(), uintptr(pStm), uintptr(unsafe.Pointer(pclsid)))
+func ReadClassStm(pStm *systemcom.IStream, pclsid *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procReadClassStm.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(pclsid)))
 	return foundation.HRESULT(r1)
 }
 
 // ReadFmtUserTypeStg calls OLE32!ReadFmtUserTypeStg.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-readfmtusertypestg
 // Minimum OS: windows5.0.
-func ReadFmtUserTypeStg(pstg uintptr, pcf *uint16, lplpszUserType *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procReadFmtUserTypeStg.Addr(), uintptr(pstg), uintptr(unsafe.Pointer(pcf)), uintptr(unsafe.Pointer(lplpszUserType)))
+func ReadFmtUserTypeStg(pstg *IStorage, pcf *uint16, lplpszUserType *foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procReadFmtUserTypeStg.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(pcf)), uintptr(unsafe.Pointer(lplpszUserType)))
 	return foundation.HRESULT(r1)
 }
 
 // SetConvertStg calls OLE32!SetConvertStg.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-setconvertstg
 // Minimum OS: windows5.0.
-func SetConvertStg(pStg uintptr, fConvert foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetConvertStg.Addr(), uintptr(pStg), uintptr(fConvert))
+func SetConvertStg(pStg *IStorage, fConvert foundation.BOOL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSetConvertStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(fConvert))
 	return foundation.HRESULT(r1)
 }
 
 // StgConvertPropertyToVariant calls ole32!StgConvertPropertyToVariant.
 // https://learn.microsoft.com/windows/win32/api/propidl/nf-propidl-stgconvertpropertytovariant
 // Minimum OS: windows5.0.
-func StgConvertPropertyToVariant(pprop *SERIALIZEDPROPERTYVALUE, CodePage uint16, pvar *PROPVARIANT, pma uintptr) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procStgConvertPropertyToVariant.Addr(), uintptr(unsafe.Pointer(pprop)), uintptr(CodePage), uintptr(unsafe.Pointer(pvar)), uintptr(pma))
+func StgConvertPropertyToVariant(pprop *SERIALIZEDPROPERTYVALUE, CodePage uint16, pvar *PROPVARIANT, pma *IMemoryAllocator) foundation.BOOLEAN {
+	r1, _, _ := syscall.SyscallN(procStgConvertPropertyToVariant.Addr(), uintptr(unsafe.Pointer(pprop)), uintptr(CodePage), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(pma)))
 	return foundation.BOOLEAN(r1)
 }
 
@@ -941,32 +941,32 @@ func StgConvertVariantToProperty(pvar *PROPVARIANT, CodePage uint16, pprop *SERI
 // StgCreateDocfile calls OLE32!StgCreateDocfile.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatedocfile
 // Minimum OS: windows5.0.
-func StgCreateDocfile(pwcsName foundation.PWSTR, grfMode systemcom.STGM, reserved uint32, ppstgOpen uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgCreateDocfile.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(grfMode), uintptr(reserved), uintptr(ppstgOpen))
+func StgCreateDocfile(pwcsName foundation.PWSTR, grfMode systemcom.STGM, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgCreateDocfile.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
 	return foundation.HRESULT(r1)
 }
 
 // StgCreateDocfileOnILockBytes calls OLE32!StgCreateDocfileOnILockBytes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatedocfileonilockbytes
 // Minimum OS: windows5.0.
-func StgCreateDocfileOnILockBytes(plkbyt uintptr, grfMode systemcom.STGM, reserved uint32, ppstgOpen uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgCreateDocfileOnILockBytes.Addr(), uintptr(plkbyt), uintptr(grfMode), uintptr(reserved), uintptr(ppstgOpen))
+func StgCreateDocfileOnILockBytes(plkbyt *ILockBytes, grfMode systemcom.STGM, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgCreateDocfileOnILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
 	return foundation.HRESULT(r1)
 }
 
 // StgCreatePropSetStg calls OLE32!StgCreatePropSetStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatepropsetstg
 // Minimum OS: windows5.0.
-func StgCreatePropSetStg(pStorage uintptr, dwReserved uint32, ppPropSetStg uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgCreatePropSetStg.Addr(), uintptr(pStorage), uintptr(dwReserved), uintptr(ppPropSetStg))
+func StgCreatePropSetStg(pStorage *IStorage, dwReserved uint32, ppPropSetStg **IPropertySetStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgCreatePropSetStg.Addr(), uintptr(unsafe.Pointer(pStorage)), uintptr(dwReserved), uintptr(unsafe.Pointer(ppPropSetStg)))
 	return foundation.HRESULT(r1)
 }
 
 // StgCreatePropStg calls OLE32!StgCreatePropStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatepropstg
 // Minimum OS: windows5.0.
-func StgCreatePropStg(pUnk uintptr, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, dwReserved uint32, ppPropStg uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgCreatePropStg.Addr(), uintptr(pUnk), uintptr(unsafe.Pointer(fmtid)), uintptr(unsafe.Pointer(pclsid)), uintptr(grfFlags), uintptr(dwReserved), uintptr(ppPropStg))
+func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, dwReserved uint32, ppPropStg **IPropertyStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgCreatePropStg.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(fmtid)), uintptr(unsafe.Pointer(pclsid)), uintptr(grfFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppPropStg)))
 	return foundation.HRESULT(r1)
 }
 
@@ -988,15 +988,15 @@ func StgDeserializePropVariant(pprop *SERIALIZEDPROPERTYVALUE, cbMax uint32, ppr
 
 // StgGetIFillLockBytesOnFile calls ole32!StgGetIFillLockBytesOnFile.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stggetifilllockbytesonfile
-func StgGetIFillLockBytesOnFile(pwcsName foundation.PWSTR, ppflb uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnFile.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(ppflb))
+func StgGetIFillLockBytesOnFile(pwcsName foundation.PWSTR, ppflb **IFillLockBytes) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnFile.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(unsafe.Pointer(ppflb)))
 	return foundation.HRESULT(r1)
 }
 
 // StgGetIFillLockBytesOnILockBytes calls ole32!StgGetIFillLockBytesOnILockBytes.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stggetifilllockbytesonilockbytes
-func StgGetIFillLockBytesOnILockBytes(pilb uintptr, ppflb uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnILockBytes.Addr(), uintptr(pilb), uintptr(ppflb))
+func StgGetIFillLockBytesOnILockBytes(pilb *ILockBytes, ppflb **IFillLockBytes) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnILockBytes.Addr(), uintptr(unsafe.Pointer(pilb)), uintptr(unsafe.Pointer(ppflb)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1011,38 +1011,38 @@ func StgIsStorageFile(pwcsName foundation.PWSTR) foundation.HRESULT {
 // StgIsStorageILockBytes calls OLE32!StgIsStorageILockBytes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgisstorageilockbytes
 // Minimum OS: windows5.0.
-func StgIsStorageILockBytes(plkbyt uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgIsStorageILockBytes.Addr(), uintptr(plkbyt))
+func StgIsStorageILockBytes(plkbyt *ILockBytes) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgIsStorageILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)))
 	return foundation.HRESULT(r1)
 }
 
 // StgOpenAsyncDocfileOnIFillLockBytes calls ole32!StgOpenAsyncDocfileOnIFillLockBytes.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stgopenasyncdocfileonifilllockbytes
-func StgOpenAsyncDocfileOnIFillLockBytes(pflb uintptr, grfMode uint32, asyncFlags uint32, ppstgOpen uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenAsyncDocfileOnIFillLockBytes.Addr(), uintptr(pflb), uintptr(grfMode), uintptr(asyncFlags), uintptr(ppstgOpen))
+func StgOpenAsyncDocfileOnIFillLockBytes(pflb *IFillLockBytes, grfMode uint32, asyncFlags uint32, ppstgOpen **IStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgOpenAsyncDocfileOnIFillLockBytes.Addr(), uintptr(unsafe.Pointer(pflb)), uintptr(grfMode), uintptr(asyncFlags), uintptr(unsafe.Pointer(ppstgOpen)))
 	return foundation.HRESULT(r1)
 }
 
 // StgOpenLayoutDocfile calls dflayout!StgOpenLayoutDocfile.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stgopenlayoutdocfile
-func StgOpenLayoutDocfile(pwcsDfName foundation.PWSTR, grfMode uint32, reserved uint32, ppstgOpen uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenLayoutDocfile.Addr(), uintptr(unsafe.Pointer(pwcsDfName)), uintptr(grfMode), uintptr(reserved), uintptr(ppstgOpen))
+func StgOpenLayoutDocfile(pwcsDfName foundation.PWSTR, grfMode uint32, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgOpenLayoutDocfile.Addr(), uintptr(unsafe.Pointer(pwcsDfName)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
 	return foundation.HRESULT(r1)
 }
 
 // StgOpenPropStg calls OLE32!StgOpenPropStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenpropstg
 // Minimum OS: windows5.0.
-func StgOpenPropStg(pUnk uintptr, fmtid *win32.GUID, grfFlags uint32, dwReserved uint32, ppPropStg uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenPropStg.Addr(), uintptr(pUnk), uintptr(unsafe.Pointer(fmtid)), uintptr(grfFlags), uintptr(dwReserved), uintptr(ppPropStg))
+func StgOpenPropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, grfFlags uint32, dwReserved uint32, ppPropStg **IPropertyStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgOpenPropStg.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(fmtid)), uintptr(grfFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppPropStg)))
 	return foundation.HRESULT(r1)
 }
 
 // StgOpenStorage calls OLE32!StgOpenStorage.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorage
 // Minimum OS: windows5.0.
-func StgOpenStorage(pwcsName foundation.PWSTR, pstgPriority uintptr, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenStorage.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(pstgPriority), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(ppstgOpen))
+func StgOpenStorage(pwcsName foundation.PWSTR, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgOpenStorage.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1057,8 +1057,8 @@ func StgOpenStorageEx(pwcsName foundation.PWSTR, grfMode systemcom.STGM, stgfmt 
 // StgOpenStorageOnILockBytes calls OLE32!StgOpenStorageOnILockBytes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorageonilockbytes
 // Minimum OS: windows5.0.
-func StgOpenStorageOnILockBytes(plkbyt uintptr, pstgPriority uintptr, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenStorageOnILockBytes.Addr(), uintptr(plkbyt), uintptr(pstgPriority), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(ppstgOpen))
+func StgOpenStorageOnILockBytes(plkbyt *ILockBytes, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgOpenStorageOnILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1097,31 +1097,31 @@ func VariantToPropVariant(pVar *systemvariant.VARIANT, pPropVar *PROPVARIANT) fo
 // WinRTPropertyValueToPropVariant calls PROPSYS!WinRTPropertyValueToPropVariant.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-winrtpropertyvaluetopropvariant
 // Minimum OS: windows8.0.
-func WinRTPropertyValueToPropVariant(punkPropertyValue uintptr, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWinRTPropertyValueToPropVariant.Addr(), uintptr(punkPropertyValue), uintptr(unsafe.Pointer(ppropvar)))
+func WinRTPropertyValueToPropVariant(punkPropertyValue *systemcom.IUnknown, ppropvar *PROPVARIANT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWinRTPropertyValueToPropVariant.Addr(), uintptr(unsafe.Pointer(punkPropertyValue)), uintptr(unsafe.Pointer(ppropvar)))
 	return foundation.HRESULT(r1)
 }
 
 // WriteClassStg calls OLE32!WriteClassStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-writeclassstg
 // Minimum OS: windows5.0.
-func WriteClassStg(pStg uintptr, rclsid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWriteClassStg.Addr(), uintptr(pStg), uintptr(unsafe.Pointer(rclsid)))
+func WriteClassStg(pStg *IStorage, rclsid *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWriteClassStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(rclsid)))
 	return foundation.HRESULT(r1)
 }
 
 // WriteClassStm calls OLE32!WriteClassStm.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-writeclassstm
 // Minimum OS: windows5.0.
-func WriteClassStm(pStm uintptr, rclsid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWriteClassStm.Addr(), uintptr(pStm), uintptr(unsafe.Pointer(rclsid)))
+func WriteClassStm(pStm *systemcom.IStream, rclsid *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWriteClassStm.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(rclsid)))
 	return foundation.HRESULT(r1)
 }
 
 // WriteFmtUserTypeStg calls OLE32!WriteFmtUserTypeStg.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-writefmtusertypestg
 // Minimum OS: windows5.0.
-func WriteFmtUserTypeStg(pstg uintptr, cf uint16, lpszUserType foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWriteFmtUserTypeStg.Addr(), uintptr(pstg), uintptr(cf), uintptr(unsafe.Pointer(lpszUserType)))
+func WriteFmtUserTypeStg(pstg *IStorage, cf uint16, lpszUserType foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWriteFmtUserTypeStg.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(cf), uintptr(unsafe.Pointer(lpszUserType)))
 	return foundation.HRESULT(r1)
 }

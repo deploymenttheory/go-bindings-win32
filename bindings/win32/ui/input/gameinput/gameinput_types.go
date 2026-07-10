@@ -1000,17 +1000,17 @@ type GameInputVersion struct {
 }
 
 // GameInputDeviceCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer, uintptr, uint64, GameInputDeviceStatus, GameInputDeviceStatus).
+// syscall) using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, GameInputDeviceStatus, GameInputDeviceStatus).
 type GameInputDeviceCallback uintptr
 
 // GameInputKeyboardLayoutCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer, uintptr, uint64, uint32, uint32).
+// syscall) using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, uint32, uint32).
 type GameInputKeyboardLayoutCallback uintptr
 
 // GameInputReadingCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer, uintptr, bool).
+// syscall) using the shape func(uint64, unsafe.Pointer, *IGameInputReading, bool).
 type GameInputReadingCallback uintptr
 
 // GameInputSystemButtonCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer, uintptr, uint64, GameInputSystemButtons, GameInputSystemButtons).
+// syscall) using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, GameInputSystemButtons, GameInputSystemButtons).
 type GameInputSystemButtonCallback uintptr

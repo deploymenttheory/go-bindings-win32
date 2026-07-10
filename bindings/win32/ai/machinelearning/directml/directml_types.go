@@ -661,7 +661,7 @@ type DML_BINDING_PROPERTIES struct {
 
 // DML_BINDING_TABLE_DESC: https://learn.microsoft.com/windows/win32/api/directml/ns-directml-dml_binding_table_desc
 type DML_BINDING_TABLE_DESC struct {
-	Dispatchable        [1]uint64
+	Dispatchable        *IDMLDispatchable
 	CPUDescriptorHandle graphicsdirect3d12.D3D12_CPU_DESCRIPTOR_HANDLE
 	GPUDescriptorHandle graphicsdirect3d12.D3D12_GPU_DESCRIPTOR_HANDLE
 	SizeInDescriptors   uint32
@@ -675,7 +675,7 @@ type DML_BUFFER_ARRAY_BINDING struct {
 
 // DML_BUFFER_BINDING: https://learn.microsoft.com/windows/win32/api/directml/ns-directml-dml_buffer_binding
 type DML_BUFFER_BINDING struct {
-	Buffer      [1]uint64
+	Buffer      *graphicsdirect3d12.ID3D12Resource
 	Offset      uint64
 	SizeInBytes uint64
 }
@@ -1579,7 +1579,7 @@ type DML_OPERATOR_DESC struct {
 
 // DML_OPERATOR_GRAPH_NODE_DESC: https://learn.microsoft.com/windows/win32/api/directml/ns-directml-dml_operator_graph_node_desc
 type DML_OPERATOR_GRAPH_NODE_DESC struct {
-	Operator [1]uint64
+	Operator *IDMLOperator
 	Name     foundation.PSTR
 }
 

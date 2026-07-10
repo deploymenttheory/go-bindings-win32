@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
+	systemdistributedtransactioncoordinator "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/distributedtransactioncoordinator"
 	systemio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/io"
 )
 
@@ -63,8 +64,8 @@ func MQADsPathToFormatName(lpwcsADsPath foundation.PWSTR, lpwcsFormatName founda
 }
 
 // MQBeginTransaction calls mqrt!MQBeginTransaction.
-func MQBeginTransaction(ppTransaction uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQBeginTransaction.Addr(), uintptr(ppTransaction))
+func MQBeginTransaction(ppTransaction **systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMQBeginTransaction.Addr(), uintptr(unsafe.Pointer(ppTransaction)))
 	return foundation.HRESULT(r1)
 }
 
@@ -199,8 +200,8 @@ func MQMgmtGetInfo(pComputerName foundation.PWSTR, pObjectName foundation.PWSTR,
 }
 
 // MQMoveMessage calls mqrt!MQMoveMessage.
-func MQMoveMessage(hSourceQueue uintptr, hDestinationQueue uintptr, ullLookupId uint64, pTransaction uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQMoveMessage.Addr(), uintptr(hSourceQueue), uintptr(hDestinationQueue), uintptr(ullLookupId), uintptr(pTransaction))
+func MQMoveMessage(hSourceQueue uintptr, hDestinationQueue uintptr, ullLookupId uint64, pTransaction *systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMQMoveMessage.Addr(), uintptr(hSourceQueue), uintptr(hDestinationQueue), uintptr(ullLookupId), uintptr(unsafe.Pointer(pTransaction)))
 	return foundation.HRESULT(r1)
 }
 
@@ -223,14 +224,14 @@ func MQPurgeQueue(hQueue uintptr) foundation.HRESULT {
 }
 
 // MQReceiveMessage calls mqrt!MQReceiveMessage.
-func MQReceiveMessage(hSource uintptr, dwTimeout uint32, dwAction uint32, pMessageProps *MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback PMQRECEIVECALLBACK, hCursor foundation.HANDLE, pTransaction uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQReceiveMessage.Addr(), uintptr(hSource), uintptr(dwTimeout), uintptr(dwAction), uintptr(unsafe.Pointer(pMessageProps)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(fnReceiveCallback), uintptr(hCursor), uintptr(pTransaction))
+func MQReceiveMessage(hSource uintptr, dwTimeout uint32, dwAction uint32, pMessageProps *MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback PMQRECEIVECALLBACK, hCursor foundation.HANDLE, pTransaction *systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMQReceiveMessage.Addr(), uintptr(hSource), uintptr(dwTimeout), uintptr(dwAction), uintptr(unsafe.Pointer(pMessageProps)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(fnReceiveCallback), uintptr(hCursor), uintptr(unsafe.Pointer(pTransaction)))
 	return foundation.HRESULT(r1)
 }
 
 // MQReceiveMessageByLookupId calls mqrt!MQReceiveMessageByLookupId.
-func MQReceiveMessageByLookupId(hSource uintptr, ullLookupId uint64, dwLookupAction uint32, pMessageProps *MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback PMQRECEIVECALLBACK, pTransaction uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQReceiveMessageByLookupId.Addr(), uintptr(hSource), uintptr(ullLookupId), uintptr(dwLookupAction), uintptr(unsafe.Pointer(pMessageProps)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(fnReceiveCallback), uintptr(pTransaction))
+func MQReceiveMessageByLookupId(hSource uintptr, ullLookupId uint64, dwLookupAction uint32, pMessageProps *MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback PMQRECEIVECALLBACK, pTransaction *systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMQReceiveMessageByLookupId.Addr(), uintptr(hSource), uintptr(ullLookupId), uintptr(dwLookupAction), uintptr(unsafe.Pointer(pMessageProps)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(fnReceiveCallback), uintptr(unsafe.Pointer(pTransaction)))
 	return foundation.HRESULT(r1)
 }
 
@@ -241,8 +242,8 @@ func MQRegisterCertificate(dwFlags uint32, lpCertBuffer unsafe.Pointer, dwCertBu
 }
 
 // MQSendMessage calls mqrt!MQSendMessage.
-func MQSendMessage(hDestinationQueue uintptr, pMessageProps *MQMSGPROPS, pTransaction uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQSendMessage.Addr(), uintptr(hDestinationQueue), uintptr(unsafe.Pointer(pMessageProps)), uintptr(pTransaction))
+func MQSendMessage(hDestinationQueue uintptr, pMessageProps *MQMSGPROPS, pTransaction *systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMQSendMessage.Addr(), uintptr(hDestinationQueue), uintptr(unsafe.Pointer(pMessageProps)), uintptr(unsafe.Pointer(pTransaction)))
 	return foundation.HRESULT(r1)
 }
 

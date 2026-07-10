@@ -10,6 +10,8 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemaddressbook "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/addressbook"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
 
@@ -275,22 +277,22 @@ var (
 
 // GetTnefStreamCodepage calls MAPI32!GetTnefStreamCodepage.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/gettnefstreamcodepage
-func GetTnefStreamCodepage(lpStream uintptr, lpulCodepage *uint32, lpulSubCodepage *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetTnefStreamCodepage.Addr(), uintptr(lpStream), uintptr(unsafe.Pointer(lpulCodepage)), uintptr(unsafe.Pointer(lpulSubCodepage)))
+func GetTnefStreamCodepage(lpStream *systemcom.IStream, lpulCodepage *uint32, lpulSubCodepage *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetTnefStreamCodepage.Addr(), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpulCodepage)), uintptr(unsafe.Pointer(lpulSubCodepage)))
 	return foundation.HRESULT(r1)
 }
 
 // OpenTnefStream calls MAPI32!OpenTnefStream.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstream
-func OpenTnefStream(lpvSupport unsafe.Pointer, lpStream uintptr, lpszStreamName *int8, ulFlags uint32, lpMessage uintptr, wKeyVal uint16, lppTNEF uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOpenTnefStream.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(lpStream), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(lpMessage), uintptr(wKeyVal), uintptr(lppTNEF))
+func OpenTnefStream(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lppTNEF **ITnef) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procOpenTnefStream.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMessage)), uintptr(wKeyVal), uintptr(unsafe.Pointer(lppTNEF)))
 	return foundation.HRESULT(r1)
 }
 
 // OpenTnefStreamEx calls MAPI32!OpenTnefStreamEx.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstreamex
-func OpenTnefStreamEx(lpvSupport unsafe.Pointer, lpStream uintptr, lpszStreamName *int8, ulFlags uint32, lpMessage uintptr, wKeyVal uint16, lpAdressBook uintptr, lppTNEF uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOpenTnefStreamEx.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(lpStream), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(lpMessage), uintptr(wKeyVal), uintptr(lpAdressBook), uintptr(lppTNEF))
+func OpenTnefStreamEx(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lpAdressBook *systemaddressbook.IAddrBook, lppTNEF **ITnef) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procOpenTnefStreamEx.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMessage)), uintptr(wKeyVal), uintptr(unsafe.Pointer(lpAdressBook)), uintptr(unsafe.Pointer(lppTNEF)))
 	return foundation.HRESULT(r1)
 }
 

@@ -14,6 +14,7 @@ import (
 	networkmanagementwnet "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networkmanagement/wnet"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	systemthreading "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
@@ -3741,7 +3742,7 @@ type BANDINFOSFB struct {
 	CrBtnDk     foundation.COLORREF
 	WViewMode   uint16
 	WAlign      uint16
-	Psf         [1]uint64
+	Psf         *IShellFolder
 	Pidl        *uishellcommon.ITEMIDLIST
 }
 
@@ -3761,24 +3762,24 @@ type BANNER_NOTIFICATION struct {
 // BASEBROWSERDATALH: https://learn.microsoft.com/windows/win32/api/shdeprecated/ns-shdeprecated-basebrowserdatalh
 type BASEBROWSERDATALH struct {
 	Hwnd                  foundation.HWND
-	Ptl                   [1]uint64
-	Phlf                  [1]uint64
-	PautoWB2              [1]uint64
-	PautoEDS              [1]uint64
-	PautoSS               [1]uint64
+	Ptl                   *ITravelLog
+	Phlf                  *IHlinkFrame
+	PautoWB2              *IWebBrowser2
+	PautoEDS              *IExpDispSupport
+	PautoSS               *IShellService
 	ESecureLockIcon       int32
 	Bitfield              uint32
 	UActivateState        uint32
 	PidlViewState         *uishellcommon.ITEMIDLIST
-	PctView               [1]uint64
+	PctView               *systemole.IOleCommandTarget
 	PidlCur               *uishellcommon.ITEMIDLIST
-	Psv                   [1]uint64
-	Psf                   [1]uint64
+	Psv                   *IShellView
+	Psf                   *IShellFolder
 	HwndView              foundation.HWND
 	PszTitleCur           foundation.PWSTR
 	PidlPending           *uishellcommon.ITEMIDLIST
-	PsvPending            [1]uint64
-	PsfPending            [1]uint64
+	PsvPending            *IShellView
+	PsfPending            *IShellFolder
 	HwndViewPending       foundation.HWND
 	PszTitlePending       foundation.PWSTR
 	FIsViewMSHTML         foundation.BOOL
@@ -3792,24 +3793,24 @@ type BASEBROWSERDATALH struct {
 // BASEBROWSERDATAXP: https://learn.microsoft.com/windows/win32/api/shdeprecated/ns-shdeprecated-basebrowserdataxp
 type BASEBROWSERDATAXP struct {
 	Hwnd             foundation.HWND
-	Ptl              [1]uint64
-	Phlf             [1]uint64
-	PautoWB2         [1]uint64
-	PautoEDS         [1]uint64
-	PautoSS          [1]uint64
+	Ptl              *ITravelLog
+	Phlf             *IHlinkFrame
+	PautoWB2         *IWebBrowser2
+	PautoEDS         *IExpDispSupportXP
+	PautoSS          *IShellService
 	ESecureLockIcon  int32
 	Bitfield         uint32
 	UActivateState   uint32
 	PidlViewState    *uishellcommon.ITEMIDLIST
-	PctView          [1]uint64
+	PctView          *systemole.IOleCommandTarget
 	PidlCur          *uishellcommon.ITEMIDLIST
-	Psv              [1]uint64
-	Psf              [1]uint64
+	Psv              *IShellView
+	Psf              *IShellFolder
 	HwndView         foundation.HWND
 	PszTitleCur      foundation.PWSTR
 	PidlPending      *uishellcommon.ITEMIDLIST
-	PsvPending       [1]uint64
-	PsfPending       [1]uint64
+	PsvPending       *IShellView
+	PsfPending       *IShellFolder
 	HwndViewPending  foundation.HWND
 	PszTitlePending  foundation.PWSTR
 	FIsViewMSHTML    foundation.BOOL
@@ -3916,7 +3917,7 @@ type CM_COLUMNINFO struct {
 
 // CONFIRM_CONFLICT_ITEM: https://learn.microsoft.com/windows/win32/api/syncmgr/ns-syncmgr-confirm_conflict_item
 type CONFIRM_CONFLICT_ITEM struct {
-	PShellItem       [1]uint64
+	PShellItem       *IShellItem2
 	PszOriginalName  foundation.PWSTR
 	PszAlternateName foundation.PWSTR
 	PszLocationShort foundation.PWSTR
@@ -3949,8 +3950,8 @@ type CREDENTIAL_PROVIDER_FIELD_DESCRIPTOR struct {
 // CSFV: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-csfv
 type CSFV struct {
 	CbSize      uint32
-	Pshf        [1]uint64
-	PsvOuter    [1]uint64
+	Pshf        *IShellFolder
+	PsvOuter    *IShellView
 	Pidl        *uishellcommon.ITEMIDLIST
 	LEvents     int32
 	PfnCallback LPFNVIEWCALLBACK
@@ -3966,12 +3967,12 @@ type ConflictFolder struct {
 // DEFCONTEXTMENU: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-defcontextmenu
 type DEFCONTEXTMENU struct {
 	Hwnd                foundation.HWND
-	Pcmcb               [1]uint64
+	Pcmcb               *IContextMenuCB
 	PidlFolder          *uishellcommon.ITEMIDLIST
-	Psf                 [1]uint64
+	Psf                 *IShellFolder
 	Cidl                uint32
 	Apidl               **uishellcommon.ITEMIDLIST
-	PunkAssociationInfo [1]uint64
+	PunkAssociationInfo *systemcom.IUnknown
 	CKeys               uint32
 	AKeys               *systemregistry.HKEY
 }
@@ -4005,7 +4006,7 @@ type DFMICS struct {
 	IdCmdFirst uint32
 	IdDefMax   uint32
 	Pici       *CMINVOKECOMMANDINFO
-	PunkSite   [1]uint64
+	PunkSite   *systemcom.IUnknown
 }
 
 // DLLVERSIONINFO: https://learn.microsoft.com/windows/win32/api/shlwapi/ns-shlwapi-dllversioninfo
@@ -4330,7 +4331,7 @@ type NRESARRAY struct {
 
 // NSTCCUSTOMDRAW: https://learn.microsoft.com/windows/win32/api/shobjidl/ns-shobjidl-nstccustomdraw
 type NSTCCUSTOMDRAW struct {
-	Psi        [1]uint64
+	Psi        *IShellItem
 	UItemState uint32
 	Nstcis     uint32
 	PszText    foundation.PWSTR
@@ -4527,9 +4528,9 @@ type SFVM_PROPPAGE_DATA struct {
 // SFV_CREATE: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-sfv_create
 type SFV_CREATE struct {
 	CbSize   uint32
-	Pshf     [1]uint64
-	PsvOuter [1]uint64
-	Psfvcb   [1]uint64
+	Pshf     *IShellFolder
+	PsvOuter *IShellView
+	Psfvcb   *IShellFolderViewCB
 }
 
 // SFV_SETITEMPOS: https://learn.microsoft.com/windows/win32/api/shlobj/ns-shlobj-sfv_setitempos
@@ -4758,10 +4759,10 @@ type SMDATA struct {
 	UId         uint32
 	UIdParent   uint32
 	UIdAncestor uint32
-	Punk        [1]uint64
+	Punk        *systemcom.IUnknown
 	PidlFolder  *uishellcommon.ITEMIDLIST
 	PidlItem    *uishellcommon.ITEMIDLIST
-	Psf         [1]uint64
+	Psf         *IShellFolder
 	PvUserData  unsafe.Pointer
 }
 
@@ -4782,9 +4783,9 @@ type SORTCOLUMN struct {
 // SV2CVW2_PARAMS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-sv2cvw2_params
 type SV2CVW2_PARAMS struct {
 	CbSize   uint32
-	PsvPrev  [1]uint64
+	PsvPrev  *IShellView
 	Pfs      *FOLDERSETTINGS
-	PsbOwner [1]uint64
+	PsbOwner *IShellBrowser
 	PrcView  *foundation.RECT
 	Pvid     *win32.GUID
 	HwndView foundation.HWND
@@ -4970,7 +4971,7 @@ type THUMBBUTTON struct {
 
 // TOOLBARITEM: https://learn.microsoft.com/windows/win32/api/shdeprecated/ns-shdeprecated-toolbaritem
 type TOOLBARITEM struct {
-	Ptbar        [1]uint64
+	Ptbar        *IDockingWindow
 	RcBorderTool foundation.RECT
 	PwszItem     foundation.PWSTR
 	FShow        foundation.BOOL
@@ -5069,11 +5070,11 @@ type BFFCALLBACK uintptr
 type DLLGETVERSIONPROC uintptr
 
 // LPFNDFMCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.HWND, uintptr, uint32, foundation.WPARAM, foundation.LPARAM) foundation.HRESULT.
+// syscall) using the shape func(*IShellFolder, foundation.HWND, *systemcom.IDataObject, uint32, foundation.WPARAM, foundation.LPARAM) foundation.HRESULT.
 type LPFNDFMCALLBACK uintptr
 
 // LPFNVIEWCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) foundation.HRESULT.
+// syscall) using the shape func(*IShellView, *IShellFolder, foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) foundation.HRESULT.
 type LPFNVIEWCALLBACK uintptr
 
 // PAPPCONSTRAIN_CHANGE_ROUTINE is a callback pointer: create one with NewCallback (package

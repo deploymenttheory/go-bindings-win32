@@ -2004,7 +2004,7 @@ type UserHPALETTE struct {
 }
 
 // PEXCEPTION_FILTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemdiagnosticsdebug.EXCEPTION_POINTERS, unsafe.Pointer) int32.
+// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer) int32.
 type PEXCEPTION_FILTER uintptr
 
 // PIMAGE_TLS_CALLBACK is a callback pointer: create one with NewCallback (package
@@ -2012,7 +2012,7 @@ type PEXCEPTION_FILTER uintptr
 type PIMAGE_TLS_CALLBACK uintptr
 
 // POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, *uint32, **systemdiagnosticsdebug.IMAGE_RUNTIME_FUNCTION_ENTRY) uint32.
+// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, *uint32, *unsafe.Pointer) uint32.
 type POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK uintptr
 
 // PTERMINATION_HANDLER is a callback pointer: create one with NewCallback (package

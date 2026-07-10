@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
 	systemsysteminformation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/systeminformation"
 )
@@ -2563,8 +2564,8 @@ func ResumeThread(hThread foundation.HANDLE) (uint32, error) {
 // RtwqAddPeriodicCallback calls RTWorkQ!RtwqAddPeriodicCallback.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqaddperiodiccallback
 // Minimum OS: windows8.1.
-func RtwqAddPeriodicCallback(Callback RTWQPERIODICCALLBACK, context uintptr, key *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqAddPeriodicCallback.Addr(), uintptr(Callback), uintptr(context), uintptr(unsafe.Pointer(key)))
+func RtwqAddPeriodicCallback(Callback RTWQPERIODICCALLBACK, context *systemcom.IUnknown, key *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqAddPeriodicCallback.Addr(), uintptr(Callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(key)))
 	return foundation.HRESULT(r1)
 }
 
@@ -2587,16 +2588,16 @@ func RtwqAllocateWorkQueue(WorkQueueType RTWQ_WORKQUEUE_TYPE, workQueueId *uint3
 // RtwqBeginRegisterWorkQueueWithMMCSS calls RTWorkQ!RtwqBeginRegisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqbeginregisterworkqueuewithmmcss
 // Minimum OS: windows8.1.
-func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId uint32, usageClass foundation.PWSTR, dwTaskId uint32, lPriority int32, doneCallback uintptr, doneState uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqBeginRegisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(usageClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(doneCallback), uintptr(doneState))
+func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId uint32, usageClass foundation.PWSTR, dwTaskId uint32, lPriority int32, doneCallback *IRtwqAsyncCallback, doneState *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqBeginRegisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(usageClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(doneCallback)), uintptr(unsafe.Pointer(doneState)))
 	return foundation.HRESULT(r1)
 }
 
 // RtwqBeginUnregisterWorkQueueWithMMCSS calls RTWorkQ!RtwqBeginUnregisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqbeginunregisterworkqueuewithmmcss
 // Minimum OS: windows8.1.
-func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId uint32, doneCallback uintptr, doneState uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqBeginUnregisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(doneCallback), uintptr(doneState))
+func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId uint32, doneCallback *IRtwqAsyncCallback, doneState *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqBeginUnregisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(doneCallback)), uintptr(unsafe.Pointer(doneState)))
 	return foundation.HRESULT(r1)
 }
 
@@ -2618,16 +2619,16 @@ func RtwqCancelWorkItem(Key uint64) foundation.HRESULT {
 // RtwqCreateAsyncResult calls RTWorkQ!RtwqCreateAsyncResult.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqcreateasyncresult
 // Minimum OS: windows8.1.
-func RtwqCreateAsyncResult(appObject uintptr, callback uintptr, appState uintptr, asyncResult uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqCreateAsyncResult.Addr(), uintptr(appObject), uintptr(callback), uintptr(appState), uintptr(asyncResult))
+func RtwqCreateAsyncResult(appObject *systemcom.IUnknown, callback *IRtwqAsyncCallback, appState *systemcom.IUnknown, asyncResult **IRtwqAsyncResult) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqCreateAsyncResult.Addr(), uintptr(unsafe.Pointer(appObject)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(appState)), uintptr(unsafe.Pointer(asyncResult)))
 	return foundation.HRESULT(r1)
 }
 
 // RtwqEndRegisterWorkQueueWithMMCSS calls RTWorkQ!RtwqEndRegisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqendregisterworkqueuewithmmcss
 // Minimum OS: windows8.1.
-func RtwqEndRegisterWorkQueueWithMMCSS(result uintptr, taskId *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqEndRegisterWorkQueueWithMMCSS.Addr(), uintptr(result), uintptr(unsafe.Pointer(taskId)))
+func RtwqEndRegisterWorkQueueWithMMCSS(result *IRtwqAsyncResult, taskId *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqEndRegisterWorkQueueWithMMCSS.Addr(), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(taskId)))
 	return foundation.HRESULT(r1)
 }
 
@@ -2658,8 +2659,8 @@ func RtwqGetWorkQueueMMCSSTaskId(workQueueId uint32, taskId *uint32) foundation.
 // RtwqInvokeCallback calls RTWorkQ!RtwqInvokeCallback.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqinvokecallback
 // Minimum OS: windows8.1.
-func RtwqInvokeCallback(result uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqInvokeCallback.Addr(), uintptr(result))
+func RtwqInvokeCallback(result *IRtwqAsyncResult) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqInvokeCallback.Addr(), uintptr(unsafe.Pointer(result)))
 	return foundation.HRESULT(r1)
 }
 
@@ -2698,24 +2699,24 @@ func RtwqLockWorkQueue(workQueueId uint32) foundation.HRESULT {
 // RtwqPutWaitingWorkItem calls RTWorkQ!RtwqPutWaitingWorkItem.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqputwaitingworkitem
 // Minimum OS: windows8.1.
-func RtwqPutWaitingWorkItem(hEvent foundation.HANDLE, lPriority int32, result uintptr, key *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqPutWaitingWorkItem.Addr(), uintptr(hEvent), uintptr(lPriority), uintptr(result), uintptr(unsafe.Pointer(key)))
+func RtwqPutWaitingWorkItem(hEvent foundation.HANDLE, lPriority int32, result *IRtwqAsyncResult, key *uint64) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqPutWaitingWorkItem.Addr(), uintptr(hEvent), uintptr(lPriority), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(key)))
 	return foundation.HRESULT(r1)
 }
 
 // RtwqPutWorkItem calls RTWorkQ!RtwqPutWorkItem.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqputworkitem
 // Minimum OS: windows8.1.
-func RtwqPutWorkItem(dwQueue uint32, lPriority int32, result uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqPutWorkItem.Addr(), uintptr(dwQueue), uintptr(lPriority), uintptr(result))
+func RtwqPutWorkItem(dwQueue uint32, lPriority int32, result *IRtwqAsyncResult) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqPutWorkItem.Addr(), uintptr(dwQueue), uintptr(lPriority), uintptr(unsafe.Pointer(result)))
 	return foundation.HRESULT(r1)
 }
 
 // RtwqRegisterPlatformEvents calls RTWorkQ!RtwqRegisterPlatformEvents.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqregisterplatformevents
 // Minimum OS: windows8.1.
-func RtwqRegisterPlatformEvents(platformEvents uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqRegisterPlatformEvents.Addr(), uintptr(platformEvents))
+func RtwqRegisterPlatformEvents(platformEvents *IRtwqPlatformEvents) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqRegisterPlatformEvents.Addr(), uintptr(unsafe.Pointer(platformEvents)))
 	return foundation.HRESULT(r1)
 }
 
@@ -2738,8 +2739,8 @@ func RtwqRemovePeriodicCallback(dwKey uint32) foundation.HRESULT {
 // RtwqScheduleWorkItem calls RTWorkQ!RtwqScheduleWorkItem.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqscheduleworkitem
 // Minimum OS: windows8.1.
-func RtwqScheduleWorkItem(result uintptr, Timeout int64, key *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqScheduleWorkItem.Addr(), uintptr(result), uintptr(Timeout), uintptr(unsafe.Pointer(key)))
+func RtwqScheduleWorkItem(result *IRtwqAsyncResult, Timeout int64, key *uint64) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqScheduleWorkItem.Addr(), uintptr(unsafe.Pointer(result)), uintptr(Timeout), uintptr(unsafe.Pointer(key)))
 	return foundation.HRESULT(r1)
 }
 
@@ -2810,8 +2811,8 @@ func RtwqUnlockWorkQueue(workQueueId uint32) foundation.HRESULT {
 // RtwqUnregisterPlatformEvents calls RTWorkQ!RtwqUnregisterPlatformEvents.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqunregisterplatformevents
 // Minimum OS: windows8.1.
-func RtwqUnregisterPlatformEvents(platformEvents uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqUnregisterPlatformEvents.Addr(), uintptr(platformEvents))
+func RtwqUnregisterPlatformEvents(platformEvents *IRtwqPlatformEvents) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRtwqUnregisterPlatformEvents.Addr(), uintptr(unsafe.Pointer(platformEvents)))
 	return foundation.HRESULT(r1)
 }
 

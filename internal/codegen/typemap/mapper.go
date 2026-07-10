@@ -32,6 +32,7 @@ const (
 	KindArray                     // fixed array by value
 	KindFuncPtr                   // callback (uintptr-backed named type)
 	KindGUID                      // win32.GUID by value
+	KindComPtr                    // COM interface pointer (*IFoo)
 	KindUnsupported               // degraded; see Diagnostics
 )
 
@@ -143,8 +144,8 @@ func (m *Mapper) resolveApiRef(ref *win32meta.TypeRef, ctx Context, imports Impo
 	case "Typedef":
 		return m.resolveTypedefRef(ref, goType, ctx)
 	case "Com":
-		// COM interface pointers arrive with the M3 vtable pipeline.
-		return m.degrade(ctx, "COM interface %s.%s (M3)", ref.Api, ref.Name)
+		// A COM interface reference is an interface pointer.
+		return Resolved{GoType: "*" + goType, Kind: KindComPtr}
 	}
 	return m.degrade(ctx, "ApiRef %s.%s with unknown target kind %q", ref.Api, ref.Name, ref.TargetKind)
 }
@@ -173,6 +174,9 @@ func (m *Mapper) resolveBlockedRef(ref *win32meta.TypeRef, ctx Context, imports 
 	case "FunctionPointer":
 		m.note("[%s] cycle break: callback %s.%s flattened to uintptr", ctx.Namespace, ref.Api, ref.Name)
 		return Resolved{GoType: "uintptr", Kind: KindFuncPtr}
+	case "Com":
+		m.note("[%s] cycle break: COM pointer %s.%s flattened to unsafe.Pointer", ctx.Namespace, ref.Api, ref.Name)
+		return Resolved{GoType: "unsafe.Pointer", Kind: KindPointer}
 	}
 	return m.degrade(ctx, "cycle break: %s %s.%s not representable without import", ref.TargetKind, ref.Api, ref.Name)
 }
@@ -205,10 +209,6 @@ func (m *Mapper) resolvePointer(ref *win32meta.TypeRef, ctx Context, imports Imp
 	}
 	if child.Kind == "Native" && child.Name == "Void" {
 		return Resolved{GoType: "unsafe.Pointer", Kind: KindPointer}
-	}
-	// Pointer to COM interface: deferred to M3 alongside the vtable runtime.
-	if child.Kind == "ApiRef" && child.TargetKind == "Com" {
-		return m.degrade(ctx, "pointer to COM interface %s.%s (M3)", child.Api, child.Name)
 	}
 	childCtx := ctx
 	childCtx.IsReturn = false
@@ -295,7 +295,7 @@ func ArgClassOf(resolved Resolved, goType string) ArgClass {
 		return ArgScalar
 	case KindEnum, KindHandleTypedef, KindScalarTypedef, KindFuncPtr, KindUnsupported:
 		return ArgScalar
-	case KindPointer, KindPointerTypedef:
+	case KindPointer, KindPointerTypedef, KindComPtr:
 		return ArgPointer
 	}
 	return ArgUnsupported

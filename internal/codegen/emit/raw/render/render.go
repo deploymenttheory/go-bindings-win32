@@ -47,3 +47,6 @@ func DLL(models []view.DLLModel) (string, error) { return execute("dll", models)
 
 // Function renders one function wrapper.
 func Function(model view.FunctionModel) (string, error) { return execute("function", model) }
+
+// Interface renders one COM interface: type, IID, and vtable methods.
+func Interface(model view.InterfaceModel) (string, error) { return execute("interface", model) }

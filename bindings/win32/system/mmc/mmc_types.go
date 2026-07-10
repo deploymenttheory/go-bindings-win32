@@ -7,6 +7,7 @@ package mmc
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
@@ -540,7 +541,7 @@ type SColumnSetID struct {
 // SMMCDataObjects: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-smmcdataobjects
 type SMMCDataObjects struct {
 	Count        uint32
-	LpDataObject [1]uint64
+	LpDataObject [1]*systemcom.IDataObject
 }
 
 // SMMCObjectTypes: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-smmcobjecttypes

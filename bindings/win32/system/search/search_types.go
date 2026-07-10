@@ -1701,7 +1701,7 @@ type DBBINDING struct {
 	ObValue    uintptr
 	ObLength   uintptr
 	ObStatus   uintptr
-	PTypeInfo  [1]uint64
+	PTypeInfo  *systemcom.ITypeInfo
 	PObject    *DBOBJECT
 	PBindExt   *DBBINDEXT
 	DwPart     uint32
@@ -1728,7 +1728,7 @@ type DBCOLUMNACCESS struct {
 
 type DBCOLUMNDESC struct {
 	PwszTypeName   foundation.PWSTR
-	PTypeInfo      [1]uint64
+	PTypeInfo      *systemcom.ITypeInfo
 	RgPropertySets *DBPROPSET
 	Pclsid         *win32.GUID
 	CPropertySets  uint32
@@ -1741,7 +1741,7 @@ type DBCOLUMNDESC struct {
 
 type DBCOLUMNINFO struct {
 	PwszName     foundation.PWSTR
-	PTypeInfo    [1]uint64
+	PTypeInfo    *systemcom.ITypeInfo
 	IOrdinal     uintptr
 	DwFlags      uint32
 	UlColumnSize uintptr
@@ -1797,9 +1797,9 @@ type DBFAILUREINFO struct {
 }
 
 type DBIMPLICITSESSION struct {
-	PUnkOuter [1]uint64
+	PUnkOuter *systemcom.IUnknown
 	Piid      *win32.GUID
-	PSession  [1]uint64
+	PSession  *systemcom.IUnknown
 }
 
 type DBINDEXCOLUMNDESC struct {
@@ -1839,7 +1839,7 @@ type DBPARAMINFO struct {
 	DwFlags     uint32
 	IOrdinal    uintptr
 	PwszName    foundation.PWSTR
-	PTypeInfo   [1]uint64
+	PTypeInfo   *systemcom.ITypeInfo
 	UlParamSize uintptr
 	WType       uint16
 	BPrecision  byte
@@ -2115,6 +2115,23 @@ type RESTRICTION struct {
 	Rt     uint32
 	Weight uint32
 	Res    uintptr
+}
+
+type RMTPACK struct {
+	PISeqStream   *systemcom.ISequentialStream
+	CbData        uint32
+	CBSTR         uint32
+	RgBSTR        *foundation.BSTR
+	CVARIANT      uint32
+	RgVARIANT     *systemvariant.VARIANT
+	CIDISPATCH    uint32
+	RgIDISPATCH   **systemcom.IDispatch
+	CIUNKNOWN     uint32
+	RgIUNKNOWN    **systemcom.IUnknown
+	CPROPVARIANT  uint32
+	RgPROPVARIANT *systemcomstructuredstorage.PROPVARIANT
+	CArray        uint32
+	RgArray       *systemvariant.VARIANT
 }
 
 type RootBinder struct {

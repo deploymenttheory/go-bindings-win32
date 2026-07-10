@@ -1307,7 +1307,7 @@ type UIAutomationPatternInfo struct {
 	PMethods            *UIAutomationMethodInfo
 	CEvents             uint32
 	PEvents             *UIAutomationEventInfo
-	PPatternHandler     [1]uint64
+	PPatternHandler     *IUIAutomationPatternHandler
 }
 
 // UIAutomationPropertyInfo: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ns-uiautomationcore-uiautomationpropertyinfo
@@ -1438,11 +1438,11 @@ type UiaWindowClosedEventArgs struct {
 }
 
 // LPFNACCESSIBLECHILDREN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, int32, int32, *systemvariant.VARIANT, *int32) foundation.HRESULT.
+// syscall) using the shape func(*IAccessible, int32, int32, *systemvariant.VARIANT, *int32) foundation.HRESULT.
 type LPFNACCESSIBLECHILDREN uintptr
 
 // LPFNACCESSIBLEOBJECTFROMPOINT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.POINT, uintptr, *systemvariant.VARIANT) foundation.HRESULT.
+// syscall) using the shape func(foundation.POINT, **IAccessible, *systemvariant.VARIANT) foundation.HRESULT.
 type LPFNACCESSIBLEOBJECTFROMPOINT uintptr
 
 // LPFNACCESSIBLEOBJECTFROMWINDOW is a callback pointer: create one with NewCallback (package
@@ -1454,7 +1454,7 @@ type LPFNACCESSIBLEOBJECTFROMWINDOW uintptr
 type LPFNCREATESTDACCESSIBLEOBJECT uintptr
 
 // LPFNLRESULTFROMOBJECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.WPARAM, uintptr) foundation.LRESULT.
+// syscall) using the shape func(*win32.GUID, foundation.WPARAM, *systemcom.IUnknown) foundation.LRESULT.
 type LPFNLRESULTFROMOBJECT uintptr
 
 // LPFNOBJECTFROMLRESULT is a callback pointer: create one with NewCallback (package

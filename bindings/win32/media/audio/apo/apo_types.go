@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
 )
 
 // APO_BUFFER_FLAGS: https://learn.microsoft.com/windows/win32/api/audioapotypes/ne-audioapotypes-apo_buffer_flags
@@ -119,19 +121,19 @@ type APOInitBaseStruct struct {
 // APOInitSystemEffects: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/ns-audioenginebaseapo-apoinitsystemeffects
 type APOInitSystemEffects struct {
 	APOInit                     APOInitBaseStruct
-	PAPOEndpointProperties      [1]uint64
-	PAPOSystemEffectsProperties [1]uint64
+	PAPOEndpointProperties      *uishellpropertiessystem.IPropertyStore
+	PAPOSystemEffectsProperties *uishellpropertiessystem.IPropertyStore
 	PReserved                   unsafe.Pointer
-	PDeviceCollection           [1]uint64
+	PDeviceCollection           *mediaaudio.IMMDeviceCollection
 }
 
 // APOInitSystemEffects2: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/ns-audioenginebaseapo-apoinitsystemeffects2
 type APOInitSystemEffects2 struct {
 	APOInit                       APOInitBaseStruct
-	PAPOEndpointProperties        [1]uint64
-	PAPOSystemEffectsProperties   [1]uint64
+	PAPOEndpointProperties        *uishellpropertiessystem.IPropertyStore
+	PAPOSystemEffectsProperties   *uishellpropertiessystem.IPropertyStore
 	PReserved                     unsafe.Pointer
-	PDeviceCollection             [1]uint64
+	PDeviceCollection             *mediaaudio.IMMDeviceCollection
 	NSoftwareIoDeviceInCollection uint32
 	NSoftwareIoConnectorIndex     uint32
 	AudioProcessingMode           win32.GUID
@@ -141,9 +143,9 @@ type APOInitSystemEffects2 struct {
 // APOInitSystemEffects3: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-apoinitsystemeffects3
 type APOInitSystemEffects3 struct {
 	APOInit                       APOInitBaseStruct
-	PAPOEndpointProperties        [1]uint64
-	PServiceProvider              [1]uint64
-	PDeviceCollection             [1]uint64
+	PAPOEndpointProperties        *uishellpropertiessystem.IPropertyStore
+	PServiceProvider              *systemcom.IServiceProvider
+	PDeviceCollection             *mediaaudio.IMMDeviceCollection
 	NSoftwareIoDeviceInCollection uint32
 	NSoftwareIoConnectorIndex     uint32
 	AudioProcessingMode           win32.GUID
@@ -154,7 +156,7 @@ type APO_CONNECTION_DESCRIPTOR struct {
 	Type             APO_CONNECTION_BUFFER_TYPE
 	PBuffer          uintptr
 	U32MaxFrameCount uint32
-	PFormat          [1]uint64
+	PFormat          *IAudioMediaType
 	U32Signature     uint32
 }
 
@@ -215,46 +217,46 @@ type APO_REG_PROPERTIES struct {
 
 // AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_endpoint_property_change_apo_notification_descriptor
 type AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR struct {
-	Device [1]uint64
+	Device *mediaaudio.IMMDevice
 }
 
 // AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_endpoint_property_change_notification
 type AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION struct {
-	Endpoint      [1]uint64
-	PropertyStore [1]uint64
+	Endpoint      *mediaaudio.IMMDevice
+	PropertyStore *uishellpropertiessystem.IPropertyStore
 	PropertyKey   foundation.PROPERTYKEY
 }
 
 // AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_endpoint_volume_apo_notification_descriptor
 type AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR struct {
-	Device [1]uint64
+	Device *mediaaudio.IMMDevice
 }
 
 // AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_endpoint_volume_change_notification
 type AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION struct {
-	Endpoint [1]uint64
+	Endpoint *mediaaudio.IMMDevice
 	Volume   *mediaaudio.AUDIO_VOLUME_NOTIFICATION_DATA
 }
 
 // AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_endpoint_volume_change_notification2
 type AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 struct {
-	Endpoint [1]uint64
+	Endpoint *mediaaudio.IMMDevice
 	Volume   *AUDIO_VOLUME_NOTIFICATION_DATA2
 }
 
 type AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION struct {
-	PropertyStore [1]uint64
+	PropertyStore *uishellpropertiessystem.IPropertyStore
 	PropertyKey   foundation.PROPERTYKEY
 }
 
 // AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_microphone_boost_apo_notification_descriptor
 type AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR struct {
-	Device [1]uint64
+	Device *mediaaudio.IMMDevice
 }
 
 // AUDIO_MICROPHONE_BOOST_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_microphone_boost_notification
 type AUDIO_MICROPHONE_BOOST_NOTIFICATION struct {
-	Endpoint               [1]uint64
+	Endpoint               *mediaaudio.IMMDevice
 	EventContext           win32.GUID
 	MicrophoneBoostEnabled foundation.BOOL
 	LevelInDb              float32
@@ -274,16 +276,16 @@ type AUDIO_SYSTEMEFFECT struct {
 
 // AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_systemeffects_property_change_apo_notification_descriptor
 type AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR struct {
-	Device               [1]uint64
+	Device               *mediaaudio.IMMDevice
 	PropertyStoreContext win32.GUID
 }
 
 // AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-audio_systemeffects_property_change_notification
 type AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION struct {
-	Endpoint             [1]uint64
+	Endpoint             *mediaaudio.IMMDevice
 	PropertyStoreContext win32.GUID
 	PropertyStoreType    mediaaudio.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE
-	PropertyStore        [1]uint64
+	PropertyStore        *uishellpropertiessystem.IPropertyStore
 	PropertyKey          foundation.PROPERTYKEY
 }
 
@@ -308,7 +310,7 @@ type AcousticEchoCanceller_Reference_Input struct {
 type AudioFXExtensionParams struct {
 	AddPageParam    foundation.LPARAM
 	PwstrEndpointID foundation.PWSTR
-	PFxProperties   [1]uint64
+	PFxProperties   *uishellpropertiessystem.IPropertyStore
 }
 
 // UNCOMPRESSEDAUDIOFORMAT: https://learn.microsoft.com/windows/win32/api/audiomediatype/ns-audiomediatype-uncompressedaudioformat

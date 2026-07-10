@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -69,8 +70,8 @@ var (
 )
 
 // DirectInput8Create calls DINPUT8!DirectInput8Create.
-func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut *unsafe.Pointer, punkOuter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirectInput8Create.Addr(), uintptr(hinst), uintptr(dwVersion), uintptr(unsafe.Pointer(riidltf)), uintptr(unsafe.Pointer(ppvOut)), uintptr(punkOuter))
+func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut *unsafe.Pointer, punkOuter *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDirectInput8Create.Addr(), uintptr(hinst), uintptr(dwVersion), uintptr(unsafe.Pointer(riidltf)), uintptr(unsafe.Pointer(ppvOut)), uintptr(unsafe.Pointer(punkOuter)))
 	return foundation.HRESULT(r1)
 }
 

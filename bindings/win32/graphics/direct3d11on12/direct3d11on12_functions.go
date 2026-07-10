@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
+	graphicsdirect3d11 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d11"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -23,7 +25,7 @@ var (
 
 // D3D11On12CreateDevice calls d3d11!D3D11On12CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d11on12/nf-d3d11on12-d3d11on12createdevice
-func D3D11On12CreateDevice(pDevice uintptr, Flags uint32, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, ppCommandQueues uintptr, NumQueues uint32, NodeMask uint32, ppDevice uintptr, ppImmediateContext uintptr, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D11On12CreateDevice.Addr(), uintptr(pDevice), uintptr(Flags), uintptr(unsafe.Pointer(pFeatureLevels)), uintptr(FeatureLevels), uintptr(ppCommandQueues), uintptr(NumQueues), uintptr(NodeMask), uintptr(ppDevice), uintptr(ppImmediateContext), uintptr(unsafe.Pointer(pChosenFeatureLevel)))
+func D3D11On12CreateDevice(pDevice *systemcom.IUnknown, Flags uint32, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, ppCommandQueues **systemcom.IUnknown, NumQueues uint32, NodeMask uint32, ppDevice **graphicsdirect3d11.ID3D11Device, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procD3D11On12CreateDevice.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(Flags), uintptr(unsafe.Pointer(pFeatureLevels)), uintptr(FeatureLevels), uintptr(unsafe.Pointer(ppCommandQueues)), uintptr(NumQueues), uintptr(NodeMask), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(ppImmediateContext)), uintptr(unsafe.Pointer(pChosenFeatureLevel)))
 	return foundation.HRESULT(r1)
 }

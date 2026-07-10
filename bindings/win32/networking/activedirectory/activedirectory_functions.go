@@ -13,6 +13,8 @@ import (
 	networkingwinsock "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networking/winsock"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	securityauthenticationidentity "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/authentication/identity"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
@@ -189,8 +191,8 @@ var (
 // ADsBuildEnumerator calls ACTIVEDS!ADsBuildEnumerator.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsbuildenumerator
 // Minimum OS: windows6.0.6000.
-func ADsBuildEnumerator(pADsContainer uintptr, ppEnumVariant uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procADsBuildEnumerator.Addr(), uintptr(pADsContainer), uintptr(ppEnumVariant))
+func ADsBuildEnumerator(pADsContainer *IADsContainer, ppEnumVariant **systemole.IEnumVARIANT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procADsBuildEnumerator.Addr(), uintptr(unsafe.Pointer(pADsContainer)), uintptr(unsafe.Pointer(ppEnumVariant)))
 	return foundation.HRESULT(r1)
 }
 
@@ -227,16 +229,16 @@ func ADsEncodeBinaryData(pbSrcData *byte, dwSrcLen uint32, ppszDestData *foundat
 // ADsEnumerateNext calls ACTIVEDS!ADsEnumerateNext.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsenumeratenext
 // Minimum OS: windows6.0.6000.
-func ADsEnumerateNext(pEnumVariant uintptr, cElements uint32, pvar *systemvariant.VARIANT, pcElementsFetched *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procADsEnumerateNext.Addr(), uintptr(pEnumVariant), uintptr(cElements), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(pcElementsFetched)))
+func ADsEnumerateNext(pEnumVariant *systemole.IEnumVARIANT, cElements uint32, pvar *systemvariant.VARIANT, pcElementsFetched *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procADsEnumerateNext.Addr(), uintptr(unsafe.Pointer(pEnumVariant)), uintptr(cElements), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(pcElementsFetched)))
 	return foundation.HRESULT(r1)
 }
 
 // ADsFreeEnumerator calls ACTIVEDS!ADsFreeEnumerator.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsfreeenumerator
 // Minimum OS: windows6.0.6000.
-func ADsFreeEnumerator(pEnumVariant uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procADsFreeEnumerator.Addr(), uintptr(pEnumVariant))
+func ADsFreeEnumerator(pEnumVariant *systemole.IEnumVARIANT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procADsFreeEnumerator.Addr(), uintptr(unsafe.Pointer(pEnumVariant)))
 	return foundation.HRESULT(r1)
 }
 
@@ -278,8 +280,8 @@ func ADsPropCheckIfWritable(pwzAttr foundation.PWSTR, pWritableAttrs *ADS_ATTR_I
 // ADsPropCreateNotifyObj calls dsprop!ADsPropCreateNotifyObj.
 // https://learn.microsoft.com/windows/win32/api/adsprop/nf-adsprop-adspropcreatenotifyobj
 // Minimum OS: windows6.0.6000.
-func ADsPropCreateNotifyObj(pAppThdDataObj uintptr, pwzADsObjName foundation.PWSTR, phNotifyObj *foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procADsPropCreateNotifyObj.Addr(), uintptr(pAppThdDataObj), uintptr(unsafe.Pointer(pwzADsObjName)), uintptr(unsafe.Pointer(phNotifyObj)))
+func ADsPropCreateNotifyObj(pAppThdDataObj *systemcom.IDataObject, pwzADsObjName foundation.PWSTR, phNotifyObj *foundation.HWND) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procADsPropCreateNotifyObj.Addr(), uintptr(unsafe.Pointer(pAppThdDataObj)), uintptr(unsafe.Pointer(pwzADsObjName)), uintptr(unsafe.Pointer(phNotifyObj)))
 	return foundation.HRESULT(r1)
 }
 

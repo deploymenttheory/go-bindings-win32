@@ -1492,7 +1492,7 @@ type CHARACTER_RANGE struct {
 
 type DYNAMIC_RENDERER_CACHED_DATA struct {
 	StrokeId        int32
-	DynamicRenderer [1]uint64
+	DynamicRenderer *IDynamicRenderer
 }
 
 type DynamicRenderer struct {
@@ -1524,22 +1524,22 @@ type HandwrittenTextInsertion struct {
 // IEC_GESTUREINFO: https://learn.microsoft.com/windows/win32/api/inked/ns-inked-iec_gestureinfo
 type IEC_GESTUREINFO struct {
 	Nmhdr    uicontrols.NMHDR
-	Cursor   [1]uint64
-	Strokes  [1]uint64
+	Cursor   *IInkCursor
+	Strokes  *IInkStrokes
 	Gestures systemvariant.VARIANT
 }
 
 // IEC_RECOGNITIONRESULTINFO: https://learn.microsoft.com/windows/win32/api/inked/ns-inked-iec_recognitionresultinfo
 type IEC_RECOGNITIONRESULTINFO struct {
 	Nmhdr             uicontrols.NMHDR
-	RecognitionResult [1]uint64
+	RecognitionResult *IInkRecognitionResult
 }
 
 // IEC_STROKEINFO: https://learn.microsoft.com/windows/win32/api/inked/ns-inked-iec_strokeinfo
 type IEC_STROKEINFO struct {
 	Nmhdr  uicontrols.NMHDR
-	Cursor [1]uint64
-	Stroke [1]uint64
+	Cursor *IInkCursor
+	Stroke *IInkStrokeDisp
 }
 
 // INKMETRIC: https://learn.microsoft.com/windows/win32/api/msinkaut/ns-msinkaut-inkmetric

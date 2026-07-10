@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -26,37 +27,37 @@ var (
 )
 
 // CreateXmlReader calls XmlLite!CreateXmlReader.
-func CreateXmlReader(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateXmlReader.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(pMalloc))
+func CreateXmlReader(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc *systemcom.IMalloc) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateXmlReader.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(pMalloc)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateXmlReaderInputWithEncodingCodePage calls XmlLite!CreateXmlReaderInputWithEncodingCodePage.
-func CreateXmlReaderInputWithEncodingCodePage(pInputStream uintptr, pMalloc uintptr, nEncodingCodePage uint32, fEncodingHint foundation.BOOL, pwszBaseUri foundation.PWSTR, ppInput uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingCodePage.Addr(), uintptr(pInputStream), uintptr(pMalloc), uintptr(nEncodingCodePage), uintptr(fEncodingHint), uintptr(unsafe.Pointer(pwszBaseUri)), uintptr(ppInput))
+func CreateXmlReaderInputWithEncodingCodePage(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, fEncodingHint foundation.BOOL, pwszBaseUri foundation.PWSTR, ppInput **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingCodePage.Addr(), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(nEncodingCodePage), uintptr(fEncodingHint), uintptr(unsafe.Pointer(pwszBaseUri)), uintptr(unsafe.Pointer(ppInput)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateXmlReaderInputWithEncodingName calls XmlLite!CreateXmlReaderInputWithEncodingName.
-func CreateXmlReaderInputWithEncodingName(pInputStream uintptr, pMalloc uintptr, pwszEncodingName foundation.PWSTR, fEncodingHint foundation.BOOL, pwszBaseUri foundation.PWSTR, ppInput uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingName.Addr(), uintptr(pInputStream), uintptr(pMalloc), uintptr(unsafe.Pointer(pwszEncodingName)), uintptr(fEncodingHint), uintptr(unsafe.Pointer(pwszBaseUri)), uintptr(ppInput))
+func CreateXmlReaderInputWithEncodingName(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName foundation.PWSTR, fEncodingHint foundation.BOOL, pwszBaseUri foundation.PWSTR, ppInput **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingName.Addr(), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(unsafe.Pointer(pwszEncodingName)), uintptr(fEncodingHint), uintptr(unsafe.Pointer(pwszBaseUri)), uintptr(unsafe.Pointer(ppInput)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateXmlWriter calls XmlLite!CreateXmlWriter.
-func CreateXmlWriter(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateXmlWriter.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(pMalloc))
+func CreateXmlWriter(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc *systemcom.IMalloc) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateXmlWriter.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(pMalloc)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateXmlWriterOutputWithEncodingCodePage calls XmlLite!CreateXmlWriterOutputWithEncodingCodePage.
-func CreateXmlWriterOutputWithEncodingCodePage(pOutputStream uintptr, pMalloc uintptr, nEncodingCodePage uint32, ppOutput uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateXmlWriterOutputWithEncodingCodePage.Addr(), uintptr(pOutputStream), uintptr(pMalloc), uintptr(nEncodingCodePage), uintptr(ppOutput))
+func CreateXmlWriterOutputWithEncodingCodePage(pOutputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, ppOutput **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateXmlWriterOutputWithEncodingCodePage.Addr(), uintptr(unsafe.Pointer(pOutputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(nEncodingCodePage), uintptr(unsafe.Pointer(ppOutput)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateXmlWriterOutputWithEncodingName calls XmlLite!CreateXmlWriterOutputWithEncodingName.
-func CreateXmlWriterOutputWithEncodingName(pOutputStream uintptr, pMalloc uintptr, pwszEncodingName foundation.PWSTR, ppOutput uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateXmlWriterOutputWithEncodingName.Addr(), uintptr(pOutputStream), uintptr(pMalloc), uintptr(unsafe.Pointer(pwszEncodingName)), uintptr(ppOutput))
+func CreateXmlWriterOutputWithEncodingName(pOutputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName foundation.PWSTR, ppOutput **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateXmlWriterOutputWithEncodingName.Addr(), uintptr(unsafe.Pointer(pOutputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(unsafe.Pointer(pwszEncodingName)), uintptr(unsafe.Pointer(ppOutput)))
 	return foundation.HRESULT(r1)
 }

@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -42,48 +43,48 @@ func PTCloseProvider(hProvider HPTPROVIDER) foundation.HRESULT {
 // PTConvertDevModeToPrintTicket calls prntvpt!PTConvertDevModeToPrintTicket.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptconvertdevmodetoprintticket
 // Minimum OS: windows5.1.2600.
-func PTConvertDevModeToPrintTicket(hProvider HPTPROVIDER, cbDevmode uint32, pDevmode *graphicsgdi.DEVMODEA, scope EPrintTicketScope, pPrintTicket uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTConvertDevModeToPrintTicket.Addr(), uintptr(hProvider), uintptr(cbDevmode), uintptr(unsafe.Pointer(pDevmode)), uintptr(scope), uintptr(pPrintTicket))
+func PTConvertDevModeToPrintTicket(hProvider HPTPROVIDER, cbDevmode uint32, pDevmode *graphicsgdi.DEVMODEA, scope EPrintTicketScope, pPrintTicket *systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procPTConvertDevModeToPrintTicket.Addr(), uintptr(hProvider), uintptr(cbDevmode), uintptr(unsafe.Pointer(pDevmode)), uintptr(scope), uintptr(unsafe.Pointer(pPrintTicket)))
 	return foundation.HRESULT(r1)
 }
 
 // PTConvertPrintTicketToDevMode calls prntvpt!PTConvertPrintTicketToDevMode.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptconvertprinttickettodevmode
 // Minimum OS: windows5.1.2600.
-func PTConvertPrintTicketToDevMode(hProvider HPTPROVIDER, pPrintTicket uintptr, baseDevmodeType EDefaultDevmodeType, scope EPrintTicketScope, pcbDevmode *uint32, ppDevmode **graphicsgdi.DEVMODEA, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTConvertPrintTicketToDevMode.Addr(), uintptr(hProvider), uintptr(pPrintTicket), uintptr(baseDevmodeType), uintptr(scope), uintptr(unsafe.Pointer(pcbDevmode)), uintptr(unsafe.Pointer(ppDevmode)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
+func PTConvertPrintTicketToDevMode(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, baseDevmodeType EDefaultDevmodeType, scope EPrintTicketScope, pcbDevmode *uint32, ppDevmode **graphicsgdi.DEVMODEA, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procPTConvertPrintTicketToDevMode.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(baseDevmodeType), uintptr(scope), uintptr(unsafe.Pointer(pcbDevmode)), uintptr(unsafe.Pointer(ppDevmode)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
 	return foundation.HRESULT(r1)
 }
 
 // PTGetPrintCapabilities calls prntvpt!PTGetPrintCapabilities.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintcapabilities
 // Minimum OS: windows5.1.2600.
-func PTGetPrintCapabilities(hProvider HPTPROVIDER, pPrintTicket uintptr, pCapabilities uintptr, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTGetPrintCapabilities.Addr(), uintptr(hProvider), uintptr(pPrintTicket), uintptr(pCapabilities), uintptr(unsafe.Pointer(pbstrErrorMessage)))
+func PTGetPrintCapabilities(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, pCapabilities *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procPTGetPrintCapabilities.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(unsafe.Pointer(pCapabilities)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
 	return foundation.HRESULT(r1)
 }
 
 // PTGetPrintDeviceCapabilities calls prntvpt!PTGetPrintDeviceCapabilities.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintdevicecapabilities
 // Minimum OS: windows10.0.15063.
-func PTGetPrintDeviceCapabilities(hProvider HPTPROVIDER, pPrintTicket uintptr, pDeviceCapabilities uintptr, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTGetPrintDeviceCapabilities.Addr(), uintptr(hProvider), uintptr(pPrintTicket), uintptr(pDeviceCapabilities), uintptr(unsafe.Pointer(pbstrErrorMessage)))
+func PTGetPrintDeviceCapabilities(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, pDeviceCapabilities *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procPTGetPrintDeviceCapabilities.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(unsafe.Pointer(pDeviceCapabilities)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
 	return foundation.HRESULT(r1)
 }
 
 // PTGetPrintDeviceResources calls prntvpt!PTGetPrintDeviceResources.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintdeviceresources
 // Minimum OS: windows10.0.15063.
-func PTGetPrintDeviceResources(hProvider HPTPROVIDER, pszLocaleName foundation.PWSTR, pPrintTicket uintptr, pDeviceResources uintptr, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTGetPrintDeviceResources.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pszLocaleName)), uintptr(pPrintTicket), uintptr(pDeviceResources), uintptr(unsafe.Pointer(pbstrErrorMessage)))
+func PTGetPrintDeviceResources(hProvider HPTPROVIDER, pszLocaleName foundation.PWSTR, pPrintTicket *systemcom.IStream, pDeviceResources *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procPTGetPrintDeviceResources.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pszLocaleName)), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(unsafe.Pointer(pDeviceResources)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
 	return foundation.HRESULT(r1)
 }
 
 // PTMergeAndValidatePrintTicket calls prntvpt!PTMergeAndValidatePrintTicket.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptmergeandvalidateprintticket
 // Minimum OS: windows5.1.2600.
-func PTMergeAndValidatePrintTicket(hProvider HPTPROVIDER, pBaseTicket uintptr, pDeltaTicket uintptr, scope EPrintTicketScope, pResultTicket uintptr, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTMergeAndValidatePrintTicket.Addr(), uintptr(hProvider), uintptr(pBaseTicket), uintptr(pDeltaTicket), uintptr(scope), uintptr(pResultTicket), uintptr(unsafe.Pointer(pbstrErrorMessage)))
+func PTMergeAndValidatePrintTicket(hProvider HPTPROVIDER, pBaseTicket *systemcom.IStream, pDeltaTicket *systemcom.IStream, scope EPrintTicketScope, pResultTicket *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procPTMergeAndValidatePrintTicket.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pBaseTicket)), uintptr(unsafe.Pointer(pDeltaTicket)), uintptr(scope), uintptr(unsafe.Pointer(pResultTicket)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
 	return foundation.HRESULT(r1)
 }
 

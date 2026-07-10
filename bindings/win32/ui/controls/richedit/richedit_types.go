@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
+	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 )
 
 type CARET_FLAGS int32
@@ -1181,9 +1183,9 @@ type REOBJECT struct {
 	CbStruct uint32
 	Cp       int32
 	Clsid    win32.GUID
-	Poleobj  [1]uint64
-	Pstg     [1]uint64
-	Polesite [1]uint64
+	Poleobj  *systemole.IOleObject
+	Pstg     *systemcomstructuredstorage.IStorage
+	Polesite *systemole.IOleClientSite
 	Sizel    foundation.SIZE
 	Dvaspect uint32
 	DwFlags  REOBJECT_FLAGS
@@ -1241,9 +1243,9 @@ type EDITSTREAMCALLBACK uintptr
 type EDITWORDBREAKPROCEX uintptr
 
 // PCreateTextServices is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IUnknown, *ITextHost, **systemcom.IUnknown) foundation.HRESULT.
 type PCreateTextServices uintptr
 
 // PShutdownTextServices is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IUnknown) foundation.HRESULT.
 type PShutdownTextServices uintptr

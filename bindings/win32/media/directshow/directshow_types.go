@@ -3332,7 +3332,7 @@ type EALocationCodeType struct {
 // FILTER_INFO: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-filter_info
 type FILTER_INFO struct {
 	AchName [128]uint16
-	PGraph  [1]uint64
+	PGraph  *IFilterGraph
 }
 
 type FilgraphManager struct {
@@ -3411,7 +3411,7 @@ type PID_MAP struct {
 
 // PIN_INFO: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-pin_info
 type PIN_INFO struct {
-	PFilter [1]uint64
+	PFilter *IBaseFilter
 	Dir     PIN_DIRECTION
 	AchName [128]uint16
 }
@@ -3564,7 +3564,7 @@ type VMR9AllocationInfo struct {
 type VMR9AlphaBitmap struct {
 	DwFlags      uint32
 	Hdc          graphicsgdi.HDC
-	PDDS         [1]uint64
+	PDDS         *graphicsdirect3d9.IDirect3DSurface9
 	RSrc         foundation.RECT
 	RDest        VMR9NormalizedRect
 	FAlpha       float32
@@ -3613,7 +3613,7 @@ type VMR9NormalizedRect struct {
 // VMR9PresentationInfo: https://learn.microsoft.com/windows/win32/api/vmr9/ns-vmr9-vmr9presentationinfo
 type VMR9PresentationInfo struct {
 	DwFlags       uint32
-	LpSurf        [1]uint64
+	LpSurf        *graphicsdirect3d9.IDirect3DSurface9
 	RtStart       int64
 	RtEnd         int64
 	SzAspectRatio foundation.SIZE
@@ -3656,7 +3656,7 @@ type VMR9VideoDesc struct {
 
 // VMR9VideoStreamInfo: https://learn.microsoft.com/windows/win32/api/vmr9/ns-vmr9-vmr9videostreaminfo
 type VMR9VideoStreamInfo struct {
-	PddsVideoSurface [1]uint64
+	PddsVideoSurface *graphicsdirect3d9.IDirect3DSurface9
 	DwWidth          uint32
 	DwHeight         uint32
 	DwStrmID         uint32
@@ -3683,7 +3683,7 @@ type VMRALLOCATIONINFO struct {
 type VMRALPHABITMAP struct {
 	DwFlags   uint32
 	Hdc       graphicsgdi.HDC
-	PDDS      [1]uint64
+	PDDS      *graphicsdirectdraw.IDirectDrawSurface7
 	RSrc      foundation.RECT
 	RDest     NORMALIZEDRECT
 	FAlpha    float32
@@ -3729,7 +3729,7 @@ type VMRMONITORINFO struct {
 // VMRPRESENTATIONINFO: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-vmrpresentationinfo
 type VMRPRESENTATIONINFO struct {
 	DwFlags             uint32
-	LpSurf              [1]uint64
+	LpSurf              *graphicsdirectdraw.IDirectDrawSurface7
 	RtStart             int64
 	RtEnd               int64
 	SzAspectRatio       foundation.SIZE
@@ -3741,7 +3741,7 @@ type VMRPRESENTATIONINFO struct {
 
 // VMRVIDEOSTREAMINFO: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-vmrvideostreaminfo
 type VMRVIDEOSTREAMINFO struct {
-	PddsVideoSurface [1]uint64
+	PddsVideoSurface *graphicsdirectdraw.IDirectDrawSurface7
 	DwWidth          uint32
 	DwHeight         uint32
 	DwStrmID         uint32
@@ -3770,7 +3770,7 @@ type AMGETERRORTEXTPROCA uintptr
 type AMGETERRORTEXTPROCW uintptr
 
 // PDXVA2SW_CREATEVIDEOPROCESSDEVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *foundation.HANDLE) foundation.HRESULT.
+// syscall) using the shape func(*graphicsdirect3d9.IDirect3DDevice9, *mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *foundation.HANDLE) foundation.HRESULT.
 type PDXVA2SW_CREATEVIDEOPROCESSDEVICE uintptr
 
 // PDXVA2SW_DESTROYVIDEOPROCESSDEVICE is a callback pointer: create one with NewCallback (package
@@ -3818,5 +3818,5 @@ type PDXVA2SW_VIDEOPROCESSBLT uintptr
 type PDXVA2SW_VIDEOPROCESSENDFRAME uintptr
 
 // PDXVA2SW_VIDEOPROCESSSETRENDERTARGET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uintptr) foundation.HRESULT.
+// syscall) using the shape func(foundation.HANDLE, *graphicsdirect3d9.IDirect3DSurface9) foundation.HRESULT.
 type PDXVA2SW_VIDEOPROCESSSETRENDERTARGET uintptr

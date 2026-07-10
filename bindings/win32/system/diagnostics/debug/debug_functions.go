@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securitywintrust "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/wintrust"
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
+	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
 
 var (
@@ -1051,7 +1052,7 @@ func MapFileAndCheckSumW(Filename foundation.PWSTR, HeaderSum *uint32, CheckSum 
 // MessageBeep calls USER32!MessageBeep.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messagebeep
 // Minimum OS: windows5.1.2600.
-func MessageBeep(uType uint32) error {
+func MessageBeep(uType uiwindowsandmessaging.MESSAGEBOX_STYLE) error {
 	r1, _, e1 := syscall.SyscallN(procMessageBeep.Addr(), uintptr(uType))
 	if r1 == 0 {
 		return win32.LastError(e1)

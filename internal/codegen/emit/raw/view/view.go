@@ -93,6 +93,40 @@ const (
 	RetValLast = 4 // value + SetLastError, unknown sentinel → (T, error); err advisory
 )
 
+// InterfaceModel is one COM interface: a pointer-sized struct dispatching
+// through its vtable.
+type InterfaceModel struct {
+	TypeName string
+	DocURL   string
+	// GUID is the IID string for the doc comment ("" when absent).
+	GUID string
+	// IIDVar/IIDLiteral declare the IID constant (skipped when GUID is "").
+	IIDVar     string
+	IIDLiteral string
+	// BaseType is the embedded base interface type ("com.IUnknown"); ""
+	// makes this a root that declares the raw vtable field itself.
+	BaseType string
+	// BaseNote documents a severed base embedding ("" when none).
+	BaseNote string
+	Methods  []ComMethodModel
+}
+
+// ComMethodModel is one vtable method, shaped like FunctionModel but
+// dispatched through a vtable slot.
+type ComMethodModel struct {
+	CommentLines []string
+	GoName       string
+	ParamStr     string
+	ReturnSig    string
+	// Slot is the absolute vtable index (base chain included).
+	Slot     int
+	ArgExprs []string
+	// ReturnKind reuses the Ret* constants (RetVoid / RetVal only: COM
+	// methods carry status in their HRESULT return, not GetLastError).
+	ReturnKind int
+	RetExpr    string
+}
+
 // FunctionModel is one flat DLL function, fully resolved for rendering.
 type FunctionModel struct {
 	CommentLines []string

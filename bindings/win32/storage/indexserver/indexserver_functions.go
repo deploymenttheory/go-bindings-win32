@@ -10,6 +10,8 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 )
 
 var (
@@ -26,24 +28,24 @@ var (
 // BindIFilterFromStorage calls query!BindIFilterFromStorage.
 // https://learn.microsoft.com/windows/win32/api/ntquery/nf-ntquery-bindifilterfromstorage
 // Minimum OS: windows5.0.
-func BindIFilterFromStorage(pStg uintptr, pUnkOuter uintptr, ppIUnk *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBindIFilterFromStorage.Addr(), uintptr(pStg), uintptr(pUnkOuter), uintptr(unsafe.Pointer(ppIUnk)))
+func BindIFilterFromStorage(pStg *systemcomstructuredstorage.IStorage, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procBindIFilterFromStorage.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppIUnk)))
 	return foundation.HRESULT(r1)
 }
 
 // BindIFilterFromStream calls query!BindIFilterFromStream.
 // https://learn.microsoft.com/windows/win32/api/ntquery/nf-ntquery-bindifilterfromstream
 // Minimum OS: windows5.0.
-func BindIFilterFromStream(pStm uintptr, pUnkOuter uintptr, ppIUnk *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBindIFilterFromStream.Addr(), uintptr(pStm), uintptr(pUnkOuter), uintptr(unsafe.Pointer(ppIUnk)))
+func BindIFilterFromStream(pStm *systemcom.IStream, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procBindIFilterFromStream.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppIUnk)))
 	return foundation.HRESULT(r1)
 }
 
 // LoadIFilter calls query!LoadIFilter.
 // https://learn.microsoft.com/windows/win32/api/ntquery/nf-ntquery-loadifilter
 // Minimum OS: windows5.0.
-func LoadIFilter(pwcsPath foundation.PWSTR, pUnkOuter uintptr, ppIUnk *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadIFilter.Addr(), uintptr(unsafe.Pointer(pwcsPath)), uintptr(pUnkOuter), uintptr(unsafe.Pointer(ppIUnk)))
+func LoadIFilter(pwcsPath foundation.PWSTR, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procLoadIFilter.Addr(), uintptr(unsafe.Pointer(pwcsPath)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppIUnk)))
 	return foundation.HRESULT(r1)
 }
 

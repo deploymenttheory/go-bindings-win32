@@ -6,6 +6,7 @@ package activescript
 
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type APPLICATION_NODE_EVENT_FILTER int32
@@ -307,19 +308,19 @@ type DebugHelper struct {
 }
 
 type DebugStackFrameDescriptor struct {
-	Pdsf      [1]uint64
+	Pdsf      *IDebugStackFrame
 	DwMin     uint32
 	DwLim     uint32
 	FFinal    foundation.BOOL
-	PunkFinal [1]uint64
+	PunkFinal *systemcom.IUnknown
 }
 
 type DebugStackFrameDescriptor64 struct {
-	Pdsf      [1]uint64
+	Pdsf      *IDebugStackFrame
 	DwMin     uint64
 	DwLim     uint64
 	FFinal    foundation.BOOL
-	PunkFinal [1]uint64
+	PunkFinal *systemcom.IUnknown
 }
 
 type DefaultDebugSessionProvider struct {
@@ -405,4 +406,9 @@ type PROFILER_PROPERTY_TYPE_SUBSTRING_INFO struct {
 }
 
 type ProcessDebugManager struct {
+}
+
+type TEXT_DOCUMENT_ARRAY struct {
+	DwCount uint32
+	Members **IDebugDocumentText
 }

@@ -10,9 +10,11 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdirectdraw "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directdraw"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	storagefilesystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/filesystem"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	systemthreading "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 )
@@ -87,26 +89,26 @@ func ComputeInvCMAP(pRGBColors *graphicsgdi.RGBQUAD, nColors uint32, pInvTable *
 }
 
 // CreateDDrawSurfaceOnDIB calls ImgUtil!CreateDDrawSurfaceOnDIB.
-func CreateDDrawSurfaceOnDIB(hbmDib graphicsgdi.HBITMAP, ppSurface uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDDrawSurfaceOnDIB.Addr(), uintptr(hbmDib), uintptr(ppSurface))
+func CreateDDrawSurfaceOnDIB(hbmDib graphicsgdi.HBITMAP, ppSurface **graphicsdirectdraw.IDirectDrawSurface) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateDDrawSurfaceOnDIB.Addr(), uintptr(hbmDib), uintptr(unsafe.Pointer(ppSurface)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateMIMEMap calls ImgUtil!CreateMIMEMap.
-func CreateMIMEMap(ppMap uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateMIMEMap.Addr(), uintptr(ppMap))
+func CreateMIMEMap(ppMap **IMapMIMEToCLSID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateMIMEMap.Addr(), uintptr(unsafe.Pointer(ppMap)))
 	return foundation.HRESULT(r1)
 }
 
 // DecodeImage calls ImgUtil!DecodeImage.
-func DecodeImage(pStream uintptr, pMap uintptr, pEventSink uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDecodeImage.Addr(), uintptr(pStream), uintptr(pMap), uintptr(pEventSink))
+func DecodeImage(pStream *systemcom.IStream, pMap *IMapMIMEToCLSID, pEventSink *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDecodeImage.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pMap)), uintptr(unsafe.Pointer(pEventSink)))
 	return foundation.HRESULT(r1)
 }
 
 // DecodeImageEx calls ImgUtil!DecodeImageEx.
-func DecodeImageEx(pStream uintptr, pMap uintptr, pEventSink uintptr, pszMIMETypeParam foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDecodeImageEx.Addr(), uintptr(pStream), uintptr(pMap), uintptr(pEventSink), uintptr(unsafe.Pointer(pszMIMETypeParam)))
+func DecodeImageEx(pStream *systemcom.IStream, pMap *IMapMIMEToCLSID, pEventSink *systemcom.IUnknown, pszMIMETypeParam foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDecodeImageEx.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pMap)), uintptr(unsafe.Pointer(pEventSink)), uintptr(unsafe.Pointer(pszMIMETypeParam)))
 	return foundation.HRESULT(r1)
 }
 
@@ -399,7 +401,7 @@ func RatingSetupUIW(hDlg foundation.HWND, pszUsername foundation.PWSTR) foundati
 }
 
 // SniffStream calls ImgUtil!SniffStream.
-func SniffStream(pInStream uintptr, pnFormat *uint32, ppOutStream uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSniffStream.Addr(), uintptr(pInStream), uintptr(unsafe.Pointer(pnFormat)), uintptr(ppOutStream))
+func SniffStream(pInStream *systemcom.IStream, pnFormat *uint32, ppOutStream **systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSniffStream.Addr(), uintptr(unsafe.Pointer(pInStream)), uintptr(unsafe.Pointer(pnFormat)), uintptr(unsafe.Pointer(ppOutStream)))
 	return foundation.HRESULT(r1)
 }

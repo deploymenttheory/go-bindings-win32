@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -538,24 +539,24 @@ func DceErrorInqTextW(RpcStatus RPC_STATUS, ErrorText foundation.PWSTR) RPC_STAT
 // IUnknown_AddRef_Proxy calls RPCRT4!IUnknown_AddRef_Proxy.
 // https://learn.microsoft.com/windows/win32/api/unknwnbase/nf-unknwnbase-iunknown_addref_proxy
 // Minimum OS: windows5.0.
-func IUnknown_AddRef_Proxy(This uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procIUnknown_AddRef_Proxy.Addr(), uintptr(This))
+func IUnknown_AddRef_Proxy(This *systemcom.IUnknown) uint32 {
+	r1, _, _ := syscall.SyscallN(procIUnknown_AddRef_Proxy.Addr(), uintptr(unsafe.Pointer(This)))
 	return uint32(r1)
 }
 
 // IUnknown_QueryInterface_Proxy calls RPCRT4!IUnknown_QueryInterface_Proxy.
 // https://learn.microsoft.com/windows/win32/api/unknwnbase/nf-unknwnbase-iunknown_queryinterface_proxy
 // Minimum OS: windows5.0.
-func IUnknown_QueryInterface_Proxy(This uintptr, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIUnknown_QueryInterface_Proxy.Addr(), uintptr(This), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
+func IUnknown_QueryInterface_Proxy(This *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIUnknown_QueryInterface_Proxy.Addr(), uintptr(unsafe.Pointer(This)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
 	return foundation.HRESULT(r1)
 }
 
 // IUnknown_Release_Proxy calls RPCRT4!IUnknown_Release_Proxy.
 // https://learn.microsoft.com/windows/win32/api/unknwnbase/nf-unknwnbase-iunknown_release_proxy
 // Minimum OS: windows5.0.
-func IUnknown_Release_Proxy(This uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procIUnknown_Release_Proxy.Addr(), uintptr(This))
+func IUnknown_Release_Proxy(This *systemcom.IUnknown) uint32 {
+	r1, _, _ := syscall.SyscallN(procIUnknown_Release_Proxy.Addr(), uintptr(unsafe.Pointer(This)))
 	return uint32(r1)
 }
 
@@ -1113,8 +1114,8 @@ func Ndr64AsyncServerCallAll(pRpcMsg *RPC_MESSAGE) {
 }
 
 // Ndr64DcomAsyncStubCall calls RPCRT4!Ndr64DcomAsyncStubCall.
-func Ndr64DcomAsyncStubCall(pThis uintptr, pChannel uintptr, pRpcMsg *RPC_MESSAGE, pdwStubPhase *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procNdr64DcomAsyncStubCall.Addr(), uintptr(pThis), uintptr(pChannel), uintptr(unsafe.Pointer(pRpcMsg)), uintptr(unsafe.Pointer(pdwStubPhase)))
+func Ndr64DcomAsyncStubCall(pThis *systemcom.IRpcStubBuffer, pChannel *systemcom.IRpcChannelBuffer, pRpcMsg *RPC_MESSAGE, pdwStubPhase *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procNdr64DcomAsyncStubCall.Addr(), uintptr(unsafe.Pointer(pThis)), uintptr(unsafe.Pointer(pChannel)), uintptr(unsafe.Pointer(pRpcMsg)), uintptr(unsafe.Pointer(pdwStubPhase)))
 	return int32(r1)
 }
 
@@ -1436,14 +1437,14 @@ func NdrCorrelationPass(pStubMsg *MIDL_STUB_MESSAGE) {
 }
 
 // NdrCreateServerInterfaceFromStub calls RPCRT4!NdrCreateServerInterfaceFromStub.
-func NdrCreateServerInterfaceFromStub(pStub uintptr, pServerIf *RPC_SERVER_INTERFACE) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procNdrCreateServerInterfaceFromStub.Addr(), uintptr(pStub), uintptr(unsafe.Pointer(pServerIf)))
+func NdrCreateServerInterfaceFromStub(pStub *systemcom.IRpcStubBuffer, pServerIf *RPC_SERVER_INTERFACE) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procNdrCreateServerInterfaceFromStub.Addr(), uintptr(unsafe.Pointer(pStub)), uintptr(unsafe.Pointer(pServerIf)))
 	return RPC_STATUS(r1)
 }
 
 // NdrDcomAsyncStubCall calls RPCRT4!NdrDcomAsyncStubCall.
-func NdrDcomAsyncStubCall(pThis uintptr, pChannel uintptr, pRpcMsg *RPC_MESSAGE, pdwStubPhase *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procNdrDcomAsyncStubCall.Addr(), uintptr(pThis), uintptr(pChannel), uintptr(unsafe.Pointer(pRpcMsg)), uintptr(unsafe.Pointer(pdwStubPhase)))
+func NdrDcomAsyncStubCall(pThis *systemcom.IRpcStubBuffer, pChannel *systemcom.IRpcChannelBuffer, pRpcMsg *RPC_MESSAGE, pdwStubPhase *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procNdrDcomAsyncStubCall.Addr(), uintptr(unsafe.Pointer(pThis)), uintptr(unsafe.Pointer(pChannel)), uintptr(unsafe.Pointer(pRpcMsg)), uintptr(unsafe.Pointer(pdwStubPhase)))
 	return int32(r1)
 }
 

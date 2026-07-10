@@ -10,22 +10,28 @@ import (
 // import cycles, and returns the edge set to sever: blocked[src][dst] means
 // references from src to dst must degrade to raw types instead of importing.
 // Edges are broken lowest-reference-count first (fewest degradations),
-// deterministically.
-//
-// Only constructs the raw tier emits contribute edges (functions, structs,
-// typedefs, delegates, constants). COM interface references join the graph
-// with the M3 vtable pipeline.
+// deterministically — except base-interface embedding edges, which carry a
+// large weight bonus because severing one demotes a whole interface to a
+// rootless vtable (losing its inherited method set).
 func ComputeBlockedImports(registry *Registry) map[string]map[string]bool {
+	const baseEmbedWeight = 1000
+
 	// Weighted edges: references from one namespace to another.
 	edges := map[string]map[string]int{}
 	for _, meta := range registry.Namespaces {
 		weights := map[string]int{}
 		count := func(ref *win32meta.TypeRef) {
-			if ref.Kind == "ApiRef" && ref.Api != "" && ref.Api != meta.Namespace && ref.TargetKind != "Com" {
+			if ref.Kind == "ApiRef" && ref.Api != "" && ref.Api != meta.Namespace {
 				weights[ref.Api]++
 			}
 		}
 		WalkNamespaceRefs(meta, count)
+		for name := range meta.Interfaces {
+			comInterface := meta.Interfaces[name]
+			if comInterface.BaseInterfaceApi != "" && comInterface.BaseInterfaceApi != meta.Namespace {
+				weights[comInterface.BaseInterfaceApi] += baseEmbedWeight
+			}
+		}
 		if len(weights) > 0 {
 			edges[meta.Namespace] = weights
 		}
@@ -47,7 +53,8 @@ func ComputeBlockedImports(registry *Registry) map[string]map[string]bool {
 }
 
 // WalkNamespaceRefs visits every TypeRef in a namespace (functions, structs
-// incl. nested and arch variants, typedefs, delegates, constants).
+// incl. nested and arch variants, typedefs, delegates, constants, and COM
+// interface method signatures).
 func WalkNamespaceRefs(meta *win32meta.NamespaceMeta, visit func(*win32meta.TypeRef)) {
 	var walkRef func(*win32meta.TypeRef)
 	walkRef = func(ref *win32meta.TypeRef) {
@@ -95,6 +102,16 @@ func WalkNamespaceRefs(meta *win32meta.NamespaceMeta, visit func(*win32meta.Type
 	}
 	for i := range meta.Constants {
 		walkRef(&meta.Constants[i].Type)
+	}
+	for name := range meta.Interfaces {
+		comInterface := meta.Interfaces[name]
+		for i := range comInterface.Methods {
+			method := &comInterface.Methods[i]
+			walkRef(&method.Return)
+			for j := range method.Params {
+				walkRef(&method.Params[j].Type)
+			}
+		}
 	}
 }
 

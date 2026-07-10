@@ -10,7 +10,9 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdirectdraw "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directdraw"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
 
@@ -851,14 +853,14 @@ func GdipConvertToEmfPlusToFile(refGraphics *GpGraphics, metafile *GpMetafile, c
 }
 
 // GdipConvertToEmfPlusToStream calls gdiplus!GdipConvertToEmfPlusToStream.
-func GdipConvertToEmfPlusToStream(refGraphics *GpGraphics, metafile *GpMetafile, conversionFailureFlag *int32, stream uintptr, emfType EmfType, description foundation.PWSTR, out_metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipConvertToEmfPlusToStream.Addr(), uintptr(unsafe.Pointer(refGraphics)), uintptr(unsafe.Pointer(metafile)), uintptr(unsafe.Pointer(conversionFailureFlag)), uintptr(stream), uintptr(emfType), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(out_metafile)))
+func GdipConvertToEmfPlusToStream(refGraphics *GpGraphics, metafile *GpMetafile, conversionFailureFlag *int32, stream *systemcom.IStream, emfType EmfType, description foundation.PWSTR, out_metafile **GpMetafile) Status {
+	r1, _, _ := syscall.SyscallN(procGdipConvertToEmfPlusToStream.Addr(), uintptr(unsafe.Pointer(refGraphics)), uintptr(unsafe.Pointer(metafile)), uintptr(unsafe.Pointer(conversionFailureFlag)), uintptr(unsafe.Pointer(stream)), uintptr(emfType), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(out_metafile)))
 	return Status(r1)
 }
 
 // GdipCreateBitmapFromDirectDrawSurface calls gdiplus!GdipCreateBitmapFromDirectDrawSurface.
-func GdipCreateBitmapFromDirectDrawSurface(surface uintptr, bitmap **GpBitmap) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromDirectDrawSurface.Addr(), uintptr(surface), uintptr(unsafe.Pointer(bitmap)))
+func GdipCreateBitmapFromDirectDrawSurface(surface *graphicsdirectdraw.IDirectDrawSurface7, bitmap **GpBitmap) Status {
+	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromDirectDrawSurface.Addr(), uintptr(unsafe.Pointer(surface)), uintptr(unsafe.Pointer(bitmap)))
 	return Status(r1)
 }
 
@@ -911,14 +913,14 @@ func GdipCreateBitmapFromScan0(width int32, height int32, stride int32, format i
 }
 
 // GdipCreateBitmapFromStream calls gdiplus!GdipCreateBitmapFromStream.
-func GdipCreateBitmapFromStream(stream uintptr, bitmap **GpBitmap) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromStream.Addr(), uintptr(stream), uintptr(unsafe.Pointer(bitmap)))
+func GdipCreateBitmapFromStream(stream *systemcom.IStream, bitmap **GpBitmap) Status {
+	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(bitmap)))
 	return Status(r1)
 }
 
 // GdipCreateBitmapFromStreamICM calls gdiplus!GdipCreateBitmapFromStreamICM.
-func GdipCreateBitmapFromStreamICM(stream uintptr, bitmap **GpBitmap) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromStreamICM.Addr(), uintptr(stream), uintptr(unsafe.Pointer(bitmap)))
+func GdipCreateBitmapFromStreamICM(stream *systemcom.IStream, bitmap **GpBitmap) Status {
+	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromStreamICM.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(bitmap)))
 	return Status(r1)
 }
 
@@ -1061,8 +1063,8 @@ func GdipCreateMetafileFromFile(file foundation.PWSTR, metafile **GpMetafile) St
 }
 
 // GdipCreateMetafileFromStream calls gdiplus!GdipCreateMetafileFromStream.
-func GdipCreateMetafileFromStream(stream uintptr, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromStream.Addr(), uintptr(stream), uintptr(unsafe.Pointer(metafile)))
+func GdipCreateMetafileFromStream(stream *systemcom.IStream, metafile **GpMetafile) Status {
+	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
@@ -1163,8 +1165,8 @@ func GdipCreateSolidFill(color uint32, brush **GpSolidFill) Status {
 }
 
 // GdipCreateStreamOnFile calls gdiplus!GdipCreateStreamOnFile.
-func GdipCreateStreamOnFile(filename foundation.PWSTR, access uint32, stream uintptr) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateStreamOnFile.Addr(), uintptr(unsafe.Pointer(filename)), uintptr(access), uintptr(stream))
+func GdipCreateStreamOnFile(filename foundation.PWSTR, access uint32, stream **systemcom.IStream) Status {
+	r1, _, _ := syscall.SyscallN(procGdipCreateStreamOnFile.Addr(), uintptr(unsafe.Pointer(filename)), uintptr(access), uintptr(unsafe.Pointer(stream)))
 	return Status(r1)
 }
 
@@ -2122,8 +2124,8 @@ func GdipGetMetafileHeaderFromMetafile(metafile *GpMetafile, header *MetafileHea
 }
 
 // GdipGetMetafileHeaderFromStream calls gdiplus!GdipGetMetafileHeaderFromStream.
-func GdipGetMetafileHeaderFromStream(stream uintptr, header *MetafileHeader) Status {
-	r1, _, _ := syscall.SyscallN(procGdipGetMetafileHeaderFromStream.Addr(), uintptr(stream), uintptr(unsafe.Pointer(header)))
+func GdipGetMetafileHeaderFromStream(stream *systemcom.IStream, header *MetafileHeader) Status {
+	r1, _, _ := syscall.SyscallN(procGdipGetMetafileHeaderFromStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(header)))
 	return Status(r1)
 }
 
@@ -2638,8 +2640,8 @@ func GdipGraphicsClear(graphics *GpGraphics, color uint32) Status {
 }
 
 // GdipGraphicsSetAbort calls gdiplus!GdipGraphicsSetAbort.
-func GdipGraphicsSetAbort(pGraphics *GpGraphics, pIAbort uintptr) Status {
-	r1, _, _ := syscall.SyscallN(procGdipGraphicsSetAbort.Addr(), uintptr(unsafe.Pointer(pGraphics)), uintptr(pIAbort))
+func GdipGraphicsSetAbort(pGraphics *GpGraphics, pIAbort *GdiplusAbort) Status {
+	r1, _, _ := syscall.SyscallN(procGdipGraphicsSetAbort.Addr(), uintptr(unsafe.Pointer(pGraphics)), uintptr(unsafe.Pointer(pIAbort)))
 	return Status(r1)
 }
 
@@ -2680,8 +2682,8 @@ func GdipImageSelectActiveFrame(image *GpImage, dimensionID *win32.GUID, frameIn
 }
 
 // GdipImageSetAbort calls gdiplus!GdipImageSetAbort.
-func GdipImageSetAbort(pImage *GpImage, pIAbort uintptr) Status {
-	r1, _, _ := syscall.SyscallN(procGdipImageSetAbort.Addr(), uintptr(unsafe.Pointer(pImage)), uintptr(pIAbort))
+func GdipImageSetAbort(pImage *GpImage, pIAbort *GdiplusAbort) Status {
+	r1, _, _ := syscall.SyscallN(procGdipImageSetAbort.Addr(), uintptr(unsafe.Pointer(pImage)), uintptr(unsafe.Pointer(pIAbort)))
 	return Status(r1)
 }
 
@@ -2800,14 +2802,14 @@ func GdipLoadImageFromFileICM(filename foundation.PWSTR, image **GpImage) Status
 }
 
 // GdipLoadImageFromStream calls gdiplus!GdipLoadImageFromStream.
-func GdipLoadImageFromStream(stream uintptr, image **GpImage) Status {
-	r1, _, _ := syscall.SyscallN(procGdipLoadImageFromStream.Addr(), uintptr(stream), uintptr(unsafe.Pointer(image)))
+func GdipLoadImageFromStream(stream *systemcom.IStream, image **GpImage) Status {
+	r1, _, _ := syscall.SyscallN(procGdipLoadImageFromStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(image)))
 	return Status(r1)
 }
 
 // GdipLoadImageFromStreamICM calls gdiplus!GdipLoadImageFromStreamICM.
-func GdipLoadImageFromStreamICM(stream uintptr, image **GpImage) Status {
-	r1, _, _ := syscall.SyscallN(procGdipLoadImageFromStreamICM.Addr(), uintptr(stream), uintptr(unsafe.Pointer(image)))
+func GdipLoadImageFromStreamICM(stream *systemcom.IStream, image **GpImage) Status {
+	r1, _, _ := syscall.SyscallN(procGdipLoadImageFromStreamICM.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(image)))
 	return Status(r1)
 }
 
@@ -2992,14 +2994,14 @@ func GdipRecordMetafileI(referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect 
 }
 
 // GdipRecordMetafileStream calls gdiplus!GdipRecordMetafileStream.
-func GdipRecordMetafileStream(stream uintptr, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *RectF, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileStream.Addr(), uintptr(stream), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
+func GdipRecordMetafileStream(stream *systemcom.IStream, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *RectF, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
+	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipRecordMetafileStreamI calls gdiplus!GdipRecordMetafileStreamI.
-func GdipRecordMetafileStreamI(stream uintptr, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *Rect, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileStreamI.Addr(), uintptr(stream), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
+func GdipRecordMetafileStreamI(stream *systemcom.IStream, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *Rect, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
+	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileStreamI.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
@@ -3106,8 +3108,8 @@ func GdipSaveImageToFile(image *GpImage, filename foundation.PWSTR, clsidEncoder
 }
 
 // GdipSaveImageToStream calls gdiplus!GdipSaveImageToStream.
-func GdipSaveImageToStream(image *GpImage, stream uintptr, clsidEncoder *win32.GUID, encoderParams *EncoderParameters) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSaveImageToStream.Addr(), uintptr(unsafe.Pointer(image)), uintptr(stream), uintptr(unsafe.Pointer(clsidEncoder)), uintptr(unsafe.Pointer(encoderParams)))
+func GdipSaveImageToStream(image *GpImage, stream *systemcom.IStream, clsidEncoder *win32.GUID, encoderParams *EncoderParameters) Status {
+	r1, _, _ := syscall.SyscallN(procGdipSaveImageToStream.Addr(), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(clsidEncoder)), uintptr(unsafe.Pointer(encoderParams)))
 	return Status(r1)
 }
 

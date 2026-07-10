@@ -292,5 +292,5 @@ type STGOPTIONS struct {
 
 type VERSIONEDSTREAM struct {
 	GuidVersion win32.GUID
-	PStream     [1]uint64
+	PStream     *systemcom.IStream
 }

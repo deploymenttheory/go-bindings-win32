@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
 // Release with CoRevokeDeviceCatalog.
@@ -816,7 +817,7 @@ type BINDINFO struct {
 	DwCodePage         uint32
 	SecurityAttributes security.SECURITY_ATTRIBUTES
 	Iid                win32.GUID
-	PUnk               [1]uint64
+	PUnk               *IUnknown
 	DwReserved         uint32
 }
 
@@ -897,7 +898,7 @@ type COAUTHINFO struct {
 
 // CONNECTDATA: https://learn.microsoft.com/windows/win32/api/ocidl/ns-ocidl-connectdata
 type CONNECTDATA struct {
-	PUnk     [1]uint64
+	PUnk     *IUnknown
 	DwCookie uint32
 }
 
@@ -926,7 +927,7 @@ type CUSTDATA struct {
 // CUSTDATAITEM: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-custdataitem
 type CUSTDATAITEM struct {
 	Guid     win32.GUID
-	VarValue [1]uint64
+	VarValue systemvariant.VARIANT
 }
 
 // CY: https://learn.microsoft.com/windows/win32/api/wtypes/ns-wtypes-cy~r1
@@ -945,12 +946,12 @@ type ComCallData struct {
 type ContextProperty struct {
 	PolicyId win32.GUID
 	Flags    uint32
-	PUnk     [1]uint64
+	PUnk     *IUnknown
 }
 
 // DISPPARAMS: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-dispparams
 type DISPPARAMS struct {
-	Rgvarg            unsafe.Pointer
+	Rgvarg            *systemvariant.VARIANT
 	RgdispidNamedArgs *int32
 	CArgs             uint32
 	CNamedArgs        uint32
@@ -1067,7 +1068,7 @@ type IDLDESC struct {
 
 // INTERFACEINFO: https://learn.microsoft.com/windows/win32/api/objidl/ns-objidl-interfaceinfo
 type INTERFACEINFO struct {
-	PUnk    [1]uint64
+	PUnk    *IUnknown
 	Iid     win32.GUID
 	WMethod uint16
 }
@@ -1075,7 +1076,7 @@ type INTERFACEINFO struct {
 // MULTI_QI: https://learn.microsoft.com/windows/win32/api/objidlbase/ns-objidlbase-multi_qi
 type MULTI_QI struct {
 	PIID *win32.GUID
-	PItf [1]uint64
+	PItf *IUnknown
 	Hr   foundation.HRESULT
 }
 
@@ -1158,7 +1159,7 @@ type SOLE_AUTHENTICATION_SERVICE struct {
 type STATDATA struct {
 	Formatetc    FORMATETC
 	Advf         uint32
-	PAdvSink     [1]uint64
+	PAdvSink     *IAdviseSink
 	DwConnection uint32
 }
 
@@ -1186,7 +1187,7 @@ type STGMEDIUM_u_e__Union struct {
 type STGMEDIUM struct {
 	Tymed          uint32
 	U              uintptr
-	PUnkForRelease [1]uint64
+	PUnkForRelease *IUnknown
 }
 
 // StorageLayout: https://learn.microsoft.com/windows/win32/api/objidl/ns-objidl-storagelayout
@@ -1238,7 +1239,7 @@ type TYPEDESC_Anonymous_e__Union struct {
 // TYPEDESC: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-typedesc
 type TYPEDESC struct {
 	Anonymous uintptr
-	Vt        uint16
+	Vt        systemvariant.VARENUM
 }
 
 // VARDESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1297,7 +1298,7 @@ type UserSTGMEDIUM_STGMEDIUM_UNION struct {
 
 type UserSTGMEDIUM struct {
 	U              uintptr
-	PUnkForRelease [1]uint64
+	PUnkForRelease *IUnknown
 }
 
 // LPEXCEPFINO_DEFERRED_FILLIN is a callback pointer: create one with NewCallback (package

@@ -26,8 +26,8 @@ var (
 )
 
 // CreateDataModelManager calls dbgmodel!CreateDataModelManager.
-func CreateDataModelManager(debugHost uintptr, manager uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDataModelManager.Addr(), uintptr(debugHost), uintptr(manager))
+func CreateDataModelManager(debugHost *IDebugHost, manager **IDataModelManager) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateDataModelManager.Addr(), uintptr(unsafe.Pointer(debugHost)), uintptr(unsafe.Pointer(manager)))
 	return foundation.HRESULT(r1)
 }
 

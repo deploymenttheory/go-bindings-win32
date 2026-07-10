@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 	uicontrolsdialogs "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls/dialogs"
@@ -1058,7 +1059,7 @@ type CAUUID struct {
 }
 
 type CLEANLOCALSTORAGE struct {
-	PInterface [1]uint64
+	PInterface *systemcom.IUnknown
 	PStorage   unsafe.Pointer
 	Flags      uint32
 }
@@ -1141,6 +1142,21 @@ type OBJECTDESCRIPTOR struct {
 	DwStatus           uint32
 	DwFullUserTypeName uint32
 	DwSrcOfCopy        uint32
+}
+
+// OCPFIPARAMS: https://learn.microsoft.com/windows/win32/api/olectl/ns-olectl-ocpfiparams
+type OCPFIPARAMS struct {
+	CbStructSize          uint32
+	HWndOwner             foundation.HWND
+	X                     int32
+	Y                     int32
+	LpszCaption           foundation.PWSTR
+	CObjects              uint32
+	LplpUnk               **systemcom.IUnknown
+	CPages                uint32
+	LpPages               *win32.GUID
+	Lcid                  uint32
+	DispidInitialProperty int32
 }
 
 // OLECMD: https://learn.microsoft.com/windows/win32/api/docobj/ns-docobj-olecmd
@@ -1248,7 +1264,7 @@ type OLEUICHANGESOURCEA struct {
 	HResource            foundation.HRSRC
 	LpOFN                *uicontrolsdialogs.OPENFILENAMEA
 	DwReserved1          [4]uint32
-	LpOleUILinkContainer [1]uint64
+	LpOleUILinkContainer *IOleUILinkContainerA
 	DwLink               uint32
 	LpszDisplayName      foundation.PSTR
 	NFileLength          uint32
@@ -1269,7 +1285,7 @@ type OLEUICHANGESOURCEW struct {
 	HResource            foundation.HRSRC
 	LpOFN                *uicontrolsdialogs.OPENFILENAMEW
 	DwReserved1          [4]uint32
-	LpOleUILinkContainer [1]uint64
+	LpOleUILinkContainer *IOleUILinkContainerW
 	DwLink               uint32
 	LpszDisplayName      foundation.PWSTR
 	NFileLength          uint32
@@ -1340,7 +1356,7 @@ type OLEUIEDITLINKSA struct {
 	HInstance            foundation.HINSTANCE
 	LpszTemplate         foundation.PSTR
 	HResource            foundation.HRSRC
-	LpOleUILinkContainer [1]uint64
+	LpOleUILinkContainer *IOleUILinkContainerA
 }
 
 // OLEUIEDITLINKSW: https://learn.microsoft.com/windows/win32/api/oledlg/ns-oledlg-oleuieditlinksw
@@ -1354,7 +1370,7 @@ type OLEUIEDITLINKSW struct {
 	HInstance            foundation.HINSTANCE
 	LpszTemplate         foundation.PWSTR
 	HResource            foundation.HRSRC
-	LpOleUILinkContainer [1]uint64
+	LpOleUILinkContainer *IOleUILinkContainerW
 }
 
 // OLEUIGNRLPROPSA: https://learn.microsoft.com/windows/win32/api/oledlg/ns-oledlg-oleuignrlpropsa
@@ -1398,8 +1414,8 @@ type OLEUIINSERTOBJECTA struct {
 	Iid              win32.GUID
 	OleRender        uint32
 	LpFormatEtc      *systemcom.FORMATETC
-	LpIOleClientSite [1]uint64
-	LpIStorage       [1]uint64
+	LpIOleClientSite *IOleClientSite
+	LpIStorage       *systemcomstructuredstorage.IStorage
 	PpvObj           *unsafe.Pointer
 	Sc               int32
 	HMetaPict        foundation.HGLOBAL
@@ -1424,8 +1440,8 @@ type OLEUIINSERTOBJECTW struct {
 	Iid              win32.GUID
 	OleRender        uint32
 	LpFormatEtc      *systemcom.FORMATETC
-	LpIOleClientSite [1]uint64
-	LpIStorage       [1]uint64
+	LpIOleClientSite *IOleClientSite
+	LpIStorage       *systemcomstructuredstorage.IStorage
 	PpvObj           *unsafe.Pointer
 	Sc               int32
 	HMetaPict        foundation.HGLOBAL
@@ -1459,9 +1475,9 @@ type OLEUIOBJECTPROPSA struct {
 	DwFlags    OBJECT_PROPERTIES_FLAGS
 	LpPS       *uicontrols.PROPSHEETHEADERA_V2
 	DwObject   uint32
-	LpObjInfo  [1]uint64
+	LpObjInfo  *IOleUIObjInfoA
 	DwLink     uint32
-	LpLinkInfo [1]uint64
+	LpLinkInfo *IOleUILinkInfoA
 	LpGP       *OLEUIGNRLPROPSA
 	LpVP       *OLEUIVIEWPROPSA
 	LpLP       *OLEUILINKPROPSA
@@ -1473,9 +1489,9 @@ type OLEUIOBJECTPROPSW struct {
 	DwFlags    OBJECT_PROPERTIES_FLAGS
 	LpPS       *uicontrols.PROPSHEETHEADERW_V2
 	DwObject   uint32
-	LpObjInfo  [1]uint64
+	LpObjInfo  *IOleUIObjInfoW
 	DwLink     uint32
-	LpLinkInfo [1]uint64
+	LpLinkInfo *IOleUILinkInfoW
 	LpGP       *OLEUIGNRLPROPSW
 	LpVP       *OLEUIVIEWPROPSW
 	LpLP       *OLEUILINKPROPSW
@@ -1510,7 +1526,7 @@ type OLEUIPASTESPECIALA struct {
 	HInstance       foundation.HINSTANCE
 	LpszTemplate    foundation.PSTR
 	HResource       foundation.HRSRC
-	LpSrcDataObj    [1]uint64
+	LpSrcDataObj    *systemcom.IDataObject
 	ArrPasteEntries *OLEUIPASTEENTRYA
 	CPasteEntries   int32
 	ArrLinkTypes    *uint32
@@ -1534,7 +1550,7 @@ type OLEUIPASTESPECIALW struct {
 	HInstance       foundation.HINSTANCE
 	LpszTemplate    foundation.PWSTR
 	HResource       foundation.HRSRC
-	LpSrcDataObj    [1]uint64
+	LpSrcDataObj    *systemcom.IDataObject
 	ArrPasteEntries *OLEUIPASTEENTRYW
 	CPasteEntries   int32
 	ArrLinkTypes    *uint32
@@ -1646,21 +1662,21 @@ type PROPPAGEINFO struct {
 // QACONTAINER: https://learn.microsoft.com/windows/win32/api/ocidl/ns-ocidl-qacontainer
 type QACONTAINER struct {
 	CbSize              uint32
-	PClientSite         [1]uint64
-	PAdviseSink         [1]uint64
-	PPropertyNotifySink [1]uint64
-	PUnkEventSink       [1]uint64
+	PClientSite         *IOleClientSite
+	PAdviseSink         *IAdviseSinkEx
+	PPropertyNotifySink *IPropertyNotifySink
+	PUnkEventSink       *systemcom.IUnknown
 	DwAmbientFlags      uint32
 	ColorFore           uint32
 	ColorBack           uint32
-	PFont               [1]uint64
-	PUndoMgr            [1]uint64
+	PFont               *IFont
+	PUndoMgr            *IOleUndoManager
 	DwAppearance        uint32
 	Lcid                int32
 	Hpal                graphicsgdi.HPALETTE
-	PBindHost           [1]uint64
-	POleControlSite     [1]uint64
-	PServiceProvider    [1]uint64
+	PBindHost           *systemcom.IBindHost
+	POleControlSite     *IOleControlSite
+	PServiceProvider    *systemcom.IServiceProvider
 }
 
 // QACONTROL: https://learn.microsoft.com/windows/win32/api/ocidl/ns-ocidl-qacontrol
@@ -1694,6 +1710,22 @@ type SAFEARR_BSTR struct {
 	ABstr **systemcom.FLAGGED_WORD_BLOB
 }
 
+type SAFEARR_DISPATCH struct {
+	Size       uint32
+	ApDispatch **systemcom.IDispatch
+}
+
+type SAFEARR_HAVEIID struct {
+	Size      uint32
+	ApUnknown **systemcom.IUnknown
+	Iid       win32.GUID
+}
+
+type SAFEARR_UNKNOWN struct {
+	Size      uint32
+	ApUnknown **systemcom.IUnknown
+}
+
 type SAFEARR_VARIANT struct {
 	Size     uint32
 	AVariant **WireVARIANT
@@ -1707,7 +1739,7 @@ type UDATE struct {
 type WireBRECORD struct {
 	FFlags   uint32
 	ClSize   uint32
-	PRecInfo [1]uint64
+	PRecInfo *IRecordInfo
 	PRecord  *byte
 }
 

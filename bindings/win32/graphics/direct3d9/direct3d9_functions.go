@@ -76,14 +76,14 @@ func D3DPERF_SetRegion(col uint32, wszName foundation.PWSTR) {
 
 // Direct3DCreate9 calls d3d9!Direct3DCreate9.
 // https://learn.microsoft.com/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9
-func Direct3DCreate9(SDKVersion uint32) uintptr {
+func Direct3DCreate9(SDKVersion uint32) *IDirect3D9 {
 	r1, _, _ := syscall.SyscallN(procDirect3DCreate9.Addr(), uintptr(SDKVersion))
-	return uintptr(r1)
+	return (*IDirect3D9)(unsafe.Pointer(r1))
 }
 
 // Direct3DCreate9Ex calls d3d9!Direct3DCreate9Ex.
 // https://learn.microsoft.com/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex
-func Direct3DCreate9Ex(SDKVersion uint32, param1 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirect3DCreate9Ex.Addr(), uintptr(SDKVersion), uintptr(param1))
+func Direct3DCreate9Ex(SDKVersion uint32, param1 **IDirect3D9Ex) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDirect3DCreate9Ex.Addr(), uintptr(SDKVersion), uintptr(unsafe.Pointer(param1)))
 	return foundation.HRESULT(r1)
 }

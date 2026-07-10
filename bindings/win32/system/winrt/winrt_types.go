@@ -143,7 +143,7 @@ type ServerInformation struct {
 }
 
 // PFNGETACTIVATIONFACTORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HSTRING, uintptr) foundation.HRESULT.
+// syscall) using the shape func(HSTRING, **IActivationFactory) foundation.HRESULT.
 type PFNGETACTIVATIONFACTORY uintptr
 
 // PINSPECT_HSTRING_CALLBACK is a callback pointer: create one with NewCallback (package

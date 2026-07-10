@@ -1201,7 +1201,7 @@ type DWRITE_GLYPH_OFFSET struct {
 
 // DWRITE_GLYPH_RUN: https://learn.microsoft.com/windows/win32/api/dwrite/ns-dwrite-dwrite_glyph_run
 type DWRITE_GLYPH_RUN struct {
-	FontFace      [1]uint64
+	FontFace      *IDWriteFontFace
 	FontEmSize    float32
 	GlyphCount    uint32
 	GlyphIndices  *uint16

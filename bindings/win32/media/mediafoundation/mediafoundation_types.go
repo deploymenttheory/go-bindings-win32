@@ -13,6 +13,8 @@ import (
 	graphicsdirect3d9 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9"
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
 )
 
 type AEC_INPUT_STREAM int32
@@ -5010,7 +5012,7 @@ type AM_MEDIA_TYPE struct {
 	BTemporalCompression foundation.BOOL
 	LSampleSize          uint32
 	Formattype           win32.GUID
-	PUnk                 [1]uint64
+	PUnk                 *systemcom.IUnknown
 	CbFormat             uint32
 	PbFormat             *byte
 }
@@ -6890,14 +6892,14 @@ type D3D12_QUERY_DATA_VIDEO_DECODE_STATISTICS struct {
 
 // D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_resolve_video_motion_vector_heap_input
 type D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT struct {
-	PMotionVectorHeap [1]uint64
+	PMotionVectorHeap *ID3D12VideoMotionVectorHeap
 	PixelWidth        uint32
 	PixelHeight       uint32
 }
 
 // D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_resolve_video_motion_vector_heap_output
 type D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT struct {
-	PMotionVectorTexture2D [1]uint64
+	PMotionVectorTexture2D *graphicsdirect3d12.ID3D12Resource
 	MotionVectorCoordinate D3D12_RESOURCE_COORDINATE
 }
 
@@ -6929,7 +6931,7 @@ type D3D12_VIDEO_DECODER_HEAP_DESC struct {
 
 // D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_decode_compressed_bitstream
 type D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM struct {
-	PBuffer [1]uint64
+	PBuffer *graphicsdirect3d12.ID3D12Resource
 	Offset  uint64
 	Size    uint64
 }
@@ -6944,7 +6946,7 @@ type D3D12_VIDEO_DECODE_CONFIGURATION struct {
 // D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_decode_conversion_arguments
 type D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS struct {
 	Enable               foundation.BOOL
-	PReferenceTexture2D  [1]uint64
+	PReferenceTexture2D  *graphicsdirect3d12.ID3D12Resource
 	ReferenceSubresource uint32
 	OutputColorSpace     graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE
 	DecodeColorSpace     graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE
@@ -6953,7 +6955,7 @@ type D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS struct {
 // D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_decode_conversion_arguments1
 type D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1 struct {
 	Enable               foundation.BOOL
-	PReferenceTexture2D  [1]uint64
+	PReferenceTexture2D  *graphicsdirect3d12.ID3D12Resource
 	ReferenceSubresource uint32
 	OutputColorSpace     graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE
 	DecodeColorSpace     graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE
@@ -6972,30 +6974,38 @@ type D3D12_VIDEO_DECODE_FRAME_ARGUMENT struct {
 type D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS struct {
 	NumFrameArguments   uint32
 	FrameArguments      [10]D3D12_VIDEO_DECODE_FRAME_ARGUMENT
-	ReferenceFrames     [4]uint64
+	ReferenceFrames     D3D12_VIDEO_DECODE_REFERENCE_FRAMES
 	CompressedBitstream D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM
-	PHeap               [1]uint64
+	PHeap               *ID3D12VideoDecoderHeap
 }
 
 // D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_decode_output_histogram
 type D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM struct {
 	Offset  uint64
-	PBuffer [1]uint64
+	PBuffer *graphicsdirect3d12.ID3D12Resource
 }
 
 // D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_decode_output_stream_arguments
 type D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS struct {
-	POutputTexture2D    [1]uint64
+	POutputTexture2D    *graphicsdirect3d12.ID3D12Resource
 	OutputSubresource   uint32
 	ConversionArguments D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS
 }
 
 // D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_decode_output_stream_arguments1
 type D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1 struct {
-	POutputTexture2D    [1]uint64
+	POutputTexture2D    *graphicsdirect3d12.ID3D12Resource
 	OutputSubresource   uint32
 	ConversionArguments D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1
 	Histograms          [4]D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM
+}
+
+// D3D12_VIDEO_DECODE_REFERENCE_FRAMES: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_decode_reference_frames
+type D3D12_VIDEO_DECODE_REFERENCE_FRAMES struct {
+	NumTexture2Ds uint32
+	PpTexture2Ds  **graphicsdirect3d12.ID3D12Resource
+	PSubresources *uint32
+	PpHeaps       **ID3D12VideoDecoderHeap
 }
 
 type D3D12_VIDEO_ENCODER_AV1_CDEF_CONFIG struct {
@@ -7288,7 +7298,7 @@ type D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC struct {
 
 // D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_compressed_bitstream
 type D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM struct {
-	PBuffer          [1]uint64
+	PBuffer          *graphicsdirect3d12.ID3D12Resource
 	FrameStartOffset uint64
 }
 
@@ -7343,7 +7353,7 @@ type D3D12_VIDEO_ENCODER_DIRTY_REGIONS_CONFIGURATION struct {
 type D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS struct {
 	SequenceControlDesc               D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC
 	PictureControlDesc                D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC
-	PInputFrame                       [1]uint64
+	PInputFrame                       *graphicsdirect3d12.ID3D12Resource
 	InputFrameSubresource             uint32
 	CurrentFrameBitstreamMetadataSize uint32
 }
@@ -7351,7 +7361,7 @@ type D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS struct {
 type D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS1 struct {
 	SequenceControlDesc               D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC
 	PictureControlDesc                D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC1
-	PInputFrame                       [1]uint64
+	PInputFrame                       *graphicsdirect3d12.ID3D12Resource
 	InputFrameSubresource             uint32
 	CurrentFrameBitstreamMetadataSize uint32
 	OptionalMetadata                  D3D12_VIDEO_ENCODER_OPTIONAL_METADATA_ENABLE_FLAGS
@@ -7373,14 +7383,14 @@ type D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS1 struct {
 
 // D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_encode_operation_metadata_buffer
 type D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER struct {
-	PBuffer [1]uint64
+	PBuffer *graphicsdirect3d12.ID3D12Resource
 	Offset  uint64
 }
 
 type D3D12_VIDEO_ENCODER_FRAME_ANALYSIS struct {
-	PDownscaledFrame     [1]uint64
+	PDownscaledFrame     *graphicsdirect3d12.ID3D12Resource
 	Subresource          uint64
-	DownscaledReferences [3]uint64
+	DownscaledReferences D3D12_VIDEO_ENCODE_REFERENCE_FRAMES
 }
 
 type D3D12_VIDEO_ENCODER_FRAME_ANALYSIS_CONFIGURATION struct {
@@ -7458,12 +7468,23 @@ type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA struct {
 type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_DIRTY_REGIONS struct {
 	FullFrameIdentical      foundation.BOOL
 	MapValuesType           D3D12_VIDEO_ENCODER_DIRTY_REGIONS_MAP_VALUES_MODE
-	PDirtyRegionsMap        [1]uint64
+	PDirtyRegionsMap        *graphicsdirect3d12.ID3D12Resource
 	SourceDPBFrameReference uint32
 }
 
+type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_MOTION_VECTORS struct {
+	MotionSearchModeConfiguration         D3D12_VIDEO_ENCODER_FRAME_MOTION_SEARCH_MODE_CONFIG
+	NumHintsPerPixel                      uint32
+	PpMotionVectorMaps                    **graphicsdirect3d12.ID3D12Resource
+	PMotionVectorMapsSubresources         *uint32
+	PpMotionVectorMapsMetadata            **graphicsdirect3d12.ID3D12Resource
+	PMotionVectorMapsMetadataSubresources *uint32
+	MotionUnitPrecision                   D3D12_VIDEO_ENCODER_FRAME_INPUT_MOTION_UNIT_PRECISION
+	PictureControlConfiguration           D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1
+}
+
 type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_QUANTIZATION_MATRIX struct {
-	PQuantizationMap [1]uint64
+	PQuantizationMap *graphicsdirect3d12.ID3D12Resource
 }
 
 type D3D12_VIDEO_ENCODER_INPUT_MAP_SESSION_INFO struct {
@@ -7687,14 +7708,14 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC struct {
 	IntraRefreshFrameIndex  uint32
 	Flags                   D3D12_VIDEO_ENCODER_PICTURE_CONTROL_FLAGS
 	PictureControlCodecData D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA
-	ReferenceFrames         [3]uint64
+	ReferenceFrames         D3D12_VIDEO_ENCODE_REFERENCE_FRAMES
 }
 
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC1 struct {
 	IntraRefreshFrameIndex  uint32
 	Flags                   D3D12_VIDEO_ENCODER_PICTURE_CONTROL_FLAGS
 	PictureControlCodecData D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1
-	ReferenceFrames         [3]uint64
+	ReferenceFrames         D3D12_VIDEO_ENCODE_REFERENCE_FRAMES
 	MotionVectors           D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS
 	DirtyRects              D3D12_VIDEO_ENCODER_DIRTY_REGIONS
 	QuantizationTextureMap  D3D12_VIDEO_ENCODER_QUANTIZATION_OPAQUE_MAP
@@ -7754,7 +7775,7 @@ type D3D12_VIDEO_ENCODER_QPMAP_CONFIGURATION struct {
 }
 
 type D3D12_VIDEO_ENCODER_QUANTIZATION_OPAQUE_MAP struct {
-	POpaqueQuantizationMap [1]uint64
+	POpaqueQuantizationMap *graphicsdirect3d12.ID3D12Resource
 }
 
 // D3D12_VIDEO_ENCODER_RATE_CONTROL: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_rate_control
@@ -7867,7 +7888,7 @@ type D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR1 struct {
 
 // D3D12_VIDEO_ENCODER_RECONSTRUCTED_PICTURE: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_reconstructed_picture
 type D3D12_VIDEO_ENCODER_RECONSTRUCTED_PICTURE struct {
-	PReconstructedPicture           [1]uint64
+	PReconstructedPicture           *graphicsdirect3d12.ID3D12Resource
 	ReconstructedPictureSubresource uint32
 }
 
@@ -7896,7 +7917,7 @@ type D3D12_VIDEO_ENCODER_RESOLVE_INPUT_PARAM_LAYOUT_INPUT_ARGUMENTS struct {
 }
 
 type D3D12_VIDEO_ENCODER_RESOLVE_INPUT_PARAM_LAYOUT_OUTPUT_ARGUMENTS struct {
-	POpaqueLayoutBuffer [1]uint64
+	POpaqueLayoutBuffer *graphicsdirect3d12.ID3D12Resource
 }
 
 // D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_resolve_metadata_input_arguments
@@ -7925,9 +7946,9 @@ type D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS struct {
 
 type D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS1 struct {
 	ResolvedLayoutMetadata     D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
-	POutputQPMap               [1]uint64
-	POutputSATDMap             [1]uint64
-	POutputBitAllocationMap    [1]uint64
+	POutputQPMap               *graphicsdirect3d12.ID3D12Resource
+	POutputSATDMap             *graphicsdirect3d12.ID3D12Resource
+	POutputBitAllocationMap    *graphicsdirect3d12.ID3D12Resource
 	ResolvedFramePSNRData      D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
 	ResolvedSubregionsPSNRData D3D12_VIDEO_ENCODER_ENCODE_OPERATION_METADATA_BUFFER
 }
@@ -7977,6 +7998,24 @@ type D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC struct {
 	Log2_max_pic_order_cnt_lsb_minus4 byte
 }
 
+type D3D12_VIDEO_ENCODER_SUBREGION_COMPRESSED_BITSTREAM struct {
+	BufferMode                      D3D12_VIDEO_ENCODER_SUBREGION_COMPRESSED_BITSTREAM_BUFFER_MODE
+	ExpectedSubregionCount          uint32
+	PSubregionBitstreamsBaseOffsets *uint64
+	PpSubregionBitstreams           **graphicsdirect3d12.ID3D12Resource
+	PpSubregionSizes                **graphicsdirect3d12.ID3D12Resource
+	PpSubregionOffsets              **graphicsdirect3d12.ID3D12Resource
+	PpSubregionFences               **graphicsdirect3d12.ID3D12Fence
+	PSubregionFenceValues           *uint64
+}
+
+// D3D12_VIDEO_ENCODE_REFERENCE_FRAMES: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encode_reference_frames
+type D3D12_VIDEO_ENCODE_REFERENCE_FRAMES struct {
+	NumTexture2Ds uint32
+	PpTexture2Ds  **graphicsdirect3d12.ID3D12Resource
+	PSubresources *uint32
+}
+
 // D3D12_VIDEO_EXTENSION_COMMAND_DESC: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_extension_command_desc
 type D3D12_VIDEO_EXTENSION_COMMAND_DESC struct {
 	NodeMask  uint32
@@ -8014,16 +8053,16 @@ type D3D12_VIDEO_MOTION_ESTIMATOR_DESC struct {
 
 // D3D12_VIDEO_MOTION_ESTIMATOR_INPUT: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_motion_estimator_input
 type D3D12_VIDEO_MOTION_ESTIMATOR_INPUT struct {
-	PInputTexture2D           [1]uint64
+	PInputTexture2D           *graphicsdirect3d12.ID3D12Resource
 	InputSubresourceIndex     uint32
-	PReferenceTexture2D       [1]uint64
+	PReferenceTexture2D       *graphicsdirect3d12.ID3D12Resource
 	ReferenceSubresourceIndex uint32
-	PHintMotionVectorHeap     [1]uint64
+	PHintMotionVectorHeap     *ID3D12VideoMotionVectorHeap
 }
 
 // D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_motion_estimator_output
 type D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT struct {
-	PMotionVectorHeap [1]uint64
+	PMotionVectorHeap *ID3D12VideoMotionVectorHeap
 }
 
 // D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_motion_vector_heap_desc
@@ -8051,9 +8090,9 @@ type D3D12_VIDEO_PROCESS_FILTER_RANGE struct {
 
 // D3D12_VIDEO_PROCESS_INPUT_STREAM: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_process_input_stream
 type D3D12_VIDEO_PROCESS_INPUT_STREAM struct {
-	PTexture2D   [1]uint64
+	PTexture2D   *graphicsdirect3d12.ID3D12Resource
 	Subresource  uint32
-	ReferenceSet [6]uint64
+	ReferenceSet D3D12_VIDEO_PROCESS_REFERENCE_SET
 }
 
 // D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_process_input_stream_arguments
@@ -8113,7 +8152,7 @@ type D3D12_VIDEO_PROCESS_LUMA_KEY struct {
 
 // D3D12_VIDEO_PROCESS_OUTPUT_STREAM: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_process_output_stream
 type D3D12_VIDEO_PROCESS_OUTPUT_STREAM struct {
-	PTexture2D  [1]uint64
+	PTexture2D  *graphicsdirect3d12.ID3D12Resource
 	Subresource uint32
 }
 
@@ -8132,6 +8171,16 @@ type D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC struct {
 	BackgroundColor                [4]float32
 	FrameRate                      graphicsdxgicommon.DXGI_RATIONAL
 	EnableStereo                   foundation.BOOL
+}
+
+// D3D12_VIDEO_PROCESS_REFERENCE_SET: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_process_reference_set
+type D3D12_VIDEO_PROCESS_REFERENCE_SET struct {
+	NumPastFrames       uint32
+	PpPastFrames        **graphicsdirect3d12.ID3D12Resource
+	PPastSubresources   *uint32
+	NumFutureFrames     uint32
+	PpFutureFrames      **graphicsdirect3d12.ID3D12Resource
+	PFutureSubresources *uint32
 }
 
 // D3D12_VIDEO_PROCESS_TRANSFORM: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_process_transform
@@ -8366,7 +8415,7 @@ type DXVA2_VideoSample struct {
 	Start        int64
 	End          int64
 	SampleFormat DXVA2_ExtendedFormat
-	SrcSurface   [1]uint64
+	SrcSurface   *graphicsdirect3d9.IDirect3DSurface9
 	SrcRect      foundation.RECT
 	DstRect      foundation.RECT
 	Pal          [16]DXVA2_AYUVSample8
@@ -8559,6 +8608,18 @@ type DXVAHD_FILTER_RANGE_DATA struct {
 type DXVAHD_RATIONAL struct {
 	Numerator   uint32
 	Denominator uint32
+}
+
+// DXVAHD_STREAM_DATA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_stream_data
+type DXVAHD_STREAM_DATA struct {
+	Enable            foundation.BOOL
+	OutputIndex       uint32
+	InputFrameOrField uint32
+	PastFrames        uint32
+	FutureFrames      uint32
+	PpPastSurfaces    **graphicsdirect3d9.IDirect3DSurface9
+	PInputSurface     *graphicsdirect3d9.IDirect3DSurface9
+	PpFutureSurfaces  **graphicsdirect3d9.IDirect3DSurface9
 }
 
 // DXVAHD_STREAM_STATE_ALPHA_DATA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_stream_state_alpha_data
@@ -9116,7 +9177,7 @@ type MFP_ACQUIRE_USER_CREDENTIAL_EVENT struct {
 	PwszPackage                foundation.PWSTR
 	NRetries                   int32
 	Flags                      uint32
-	PCredential                [1]uint64
+	PCredential                *IMFNetCredential
 }
 
 // MFP_ERROR_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_error_event
@@ -9128,79 +9189,79 @@ type MFP_ERROR_EVENT struct {
 type MFP_EVENT_HEADER struct {
 	EEventType     MFP_EVENT_TYPE
 	HrEvent        foundation.HRESULT
-	PMediaPlayer   [1]uint64
+	PMediaPlayer   *IMFPMediaPlayer
 	EState         MFP_MEDIAPLAYER_STATE
-	PPropertyStore [1]uint64
+	PPropertyStore *uishellpropertiessystem.IPropertyStore
 }
 
 // MFP_FRAME_STEP_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_frame_step_event
 type MFP_FRAME_STEP_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 }
 
 // MFP_MEDIAITEM_CLEARED_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_mediaitem_cleared_event
 type MFP_MEDIAITEM_CLEARED_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 }
 
 // MFP_MEDIAITEM_CREATED_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_mediaitem_created_event
 type MFP_MEDIAITEM_CREATED_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 	DwUserData uintptr
 }
 
 // MFP_MEDIAITEM_SET_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_mediaitem_set_event
 type MFP_MEDIAITEM_SET_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 }
 
 // MFP_MF_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_mf_event
 type MFP_MF_EVENT struct {
 	Header        MFP_EVENT_HEADER
 	MFEventType   uint32
-	PMFMediaEvent [1]uint64
-	PMediaItem    [1]uint64
+	PMFMediaEvent *IMFMediaEvent
+	PMediaItem    *IMFPMediaItem
 }
 
 // MFP_PAUSE_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_pause_event
 type MFP_PAUSE_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 }
 
 // MFP_PLAYBACK_ENDED_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_playback_ended_event
 type MFP_PLAYBACK_ENDED_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 }
 
 // MFP_PLAY_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_play_event
 type MFP_PLAY_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 }
 
 // MFP_POSITION_SET_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_position_set_event
 type MFP_POSITION_SET_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 }
 
 // MFP_RATE_SET_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_rate_set_event
 type MFP_RATE_SET_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 	FlRate     float32
 }
 
 // MFP_STOP_EVENT: https://learn.microsoft.com/windows/win32/api/mfplay/ns-mfplay-mfp_stop_event
 type MFP_STOP_EVENT struct {
 	Header     MFP_EVENT_HEADER
-	PMediaItem [1]uint64
+	PMediaItem *IMFPMediaItem
 }
 
 // MFPaletteEntry: https://learn.microsoft.com/windows/win32/api/mfobjects/ns-mfobjects-mfpaletteentry
@@ -9277,9 +9338,9 @@ type MFT_INPUT_STREAM_INFO struct {
 // MFT_OUTPUT_DATA_BUFFER: https://learn.microsoft.com/windows/win32/api/mftransform/ns-mftransform-mft_output_data_buffer
 type MFT_OUTPUT_DATA_BUFFER struct {
 	DwStreamID uint32
-	PSample    [1]uint64
+	PSample    *IMFSample
 	DwStatus   uint32
-	PEvents    [1]uint64
+	PEvents    *IMFCollection
 }
 
 // MFT_OUTPUT_STREAM_INFO: https://learn.microsoft.com/windows/win32/api/mftransform/ns-mftransform-mft_output_stream_info
@@ -9456,9 +9517,9 @@ type MF_SINK_WRITER_STATISTICS struct {
 // MF_TRANSCODE_SINK_INFO: https://learn.microsoft.com/windows/win32/api/mfidl/ns-mfidl-mf_transcode_sink_info
 type MF_TRANSCODE_SINK_INFO struct {
 	DwVideoStreamID uint32
-	PVideoMediaType [1]uint64
+	PVideoMediaType *IMFMediaType
 	DwAudioStreamID uint32
-	PAudioMediaType [1]uint64
+	PAudioMediaType *IMFMediaType
 }
 
 type MF_VIDEO_SPHERICAL_VIEWDIRECTION struct {
@@ -9623,11 +9684,11 @@ type VorbisDecoderMFT struct {
 }
 
 // MFPERIODICCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// syscall) using the shape func(*systemcom.IUnknown).
 type MFPERIODICCALLBACK uintptr
 
 // PDXVAHDSW_CreateDevice is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *foundation.HANDLE) foundation.HRESULT.
+// syscall) using the shape func(*graphicsdirect3d9.IDirect3DDevice9Ex, *foundation.HANDLE) foundation.HRESULT.
 type PDXVAHDSW_CreateDevice uintptr
 
 // PDXVAHDSW_CreateVideoProcessor is a callback pointer: create one with NewCallback (package
@@ -9691,9 +9752,9 @@ type PDXVAHDSW_SetVideoProcessBltState uintptr
 type PDXVAHDSW_SetVideoProcessStreamState uintptr
 
 // PDXVAHDSW_VideoProcessBltHD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uintptr, uint32, uint32, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(foundation.HANDLE, *graphicsdirect3d9.IDirect3DSurface9, uint32, uint32, *DXVAHD_STREAM_DATA) foundation.HRESULT.
 type PDXVAHDSW_VideoProcessBltHD uintptr
 
 // PDXVAHD_CreateDevice is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, PDXVAHDSW_Plugin, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*graphicsdirect3d9.IDirect3DDevice9Ex, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, PDXVAHDSW_Plugin, **IDXVAHD_Device) foundation.HRESULT.
 type PDXVAHD_CreateDevice uintptr

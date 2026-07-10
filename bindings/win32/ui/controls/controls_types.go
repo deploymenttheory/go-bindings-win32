@@ -6024,7 +6024,7 @@ type PFNDPAMERGE uintptr
 type PFNDPAMERGECONST uintptr
 
 // PFNDPASTREAM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DPASTREAMINFO, uintptr, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*DPASTREAMINFO, *systemcom.IStream, unsafe.Pointer) foundation.HRESULT.
 type PFNDPASTREAM uintptr
 
 // PFNLVCOMPARE is a callback pointer: create one with NewCallback (package

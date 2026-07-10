@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type PACKAGEDEPENDENCY_CONTEXT uintptr
@@ -309,14 +310,14 @@ type APPX_ENCRYPTED_PACKAGE_SETTINGS struct {
 	KeyLength             uint32
 	EncryptionAlgorithm   foundation.PWSTR
 	UseDiffusion          foundation.BOOL
-	BlockMapHashAlgorithm [1]uint64
+	BlockMapHashAlgorithm *systemcom.IUri
 }
 
 // APPX_ENCRYPTED_PACKAGE_SETTINGS2: https://learn.microsoft.com/windows/win32/api/appxpackaging/ns-appxpackaging-appx_encrypted_package_settings2
 type APPX_ENCRYPTED_PACKAGE_SETTINGS2 struct {
 	KeyLength             uint32
 	EncryptionAlgorithm   foundation.PWSTR
-	BlockMapHashAlgorithm [1]uint64
+	BlockMapHashAlgorithm *systemcom.IUri
 	Options               uint32
 }
 
@@ -331,12 +332,12 @@ type APPX_KEY_INFO struct {
 // APPX_PACKAGE_SETTINGS: https://learn.microsoft.com/windows/win32/api/appxpackaging/ns-appxpackaging-appx_package_settings
 type APPX_PACKAGE_SETTINGS struct {
 	ForceZip32 foundation.BOOL
-	HashMethod [1]uint64
+	HashMethod *systemcom.IUri
 }
 
 // APPX_PACKAGE_WRITER_PAYLOAD_STREAM: https://learn.microsoft.com/windows/win32/api/appxpackaging/ns-appxpackaging-appx_package_writer_payload_stream
 type APPX_PACKAGE_WRITER_PAYLOAD_STREAM struct {
-	InputStream       [1]uint64
+	InputStream       *systemcom.IStream
 	FileName          foundation.PWSTR
 	ContentType       foundation.PWSTR
 	CompressionOption APPX_COMPRESSION_OPTION

@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 )
 
 var (
@@ -69,8 +70,8 @@ func NetworkIsolationEnumAppContainers(Flags uint32, pdwNumPublicAppCs *uint32, 
 // NetworkIsolationEnumerateAppContainerRules calls Firewallapi!NetworkIsolationEnumerateAppContainerRules.
 // https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationenumerateappcontainerrules
 // Minimum OS: windows8.0.
-func NetworkIsolationEnumerateAppContainerRules(newEnum uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNetworkIsolationEnumerateAppContainerRules.Addr(), uintptr(newEnum))
+func NetworkIsolationEnumerateAppContainerRules(newEnum **systemole.IEnumVARIANT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procNetworkIsolationEnumerateAppContainerRules.Addr(), uintptr(unsafe.Pointer(newEnum)))
 	return foundation.HRESULT(r1)
 }
 

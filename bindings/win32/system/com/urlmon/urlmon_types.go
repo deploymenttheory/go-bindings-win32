@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type AUTHENTICATEF int32
@@ -536,7 +537,7 @@ type CODEBASEHOLD struct {
 
 type CONFIRMSAFETY struct {
 	Clsid   win32.GUID
-	PUnk    [1]uint64
+	PUnk    *systemcom.IUnknown
 	DwFlags uint32
 }
 
@@ -564,9 +565,9 @@ type PROTOCOLDATA struct {
 
 type PROTOCOLFILTERDATA struct {
 	CbSize        uint32
-	PProtocolSink [1]uint64
-	PProtocol     [1]uint64
-	PUnk          [1]uint64
+	PProtocolSink *IInternetProtocolSink
+	PProtocol     *IInternetProtocol
+	PUnk          *systemcom.IUnknown
 	DwFilterFlags uint32
 }
 
@@ -593,7 +594,7 @@ type RemBINDINFO struct {
 	DwCodePage         uint32
 	SecurityAttributes REMSECURITY_ATTRIBUTES
 	Iid                win32.GUID
-	PUnk               [1]uint64
+	PUnk               *systemcom.IUnknown
 	DwReserved         uint32
 }
 
@@ -624,8 +625,8 @@ type SOFTDISTINFO struct {
 
 type StartParam struct {
 	Iid       win32.GUID
-	PIBindCtx [1]uint64
-	PItf      [1]uint64
+	PIBindCtx *systemcom.IBindCtx
+	PItf      *systemcom.IUnknown
 }
 
 type ZONEATTRIBUTES struct {

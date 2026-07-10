@@ -437,5 +437,5 @@ type FLockClrVersionCallback uintptr
 type PTLS_CALLBACK_FUNCTION uintptr
 
 // RuntimeLoadedCallbackFnPtr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, CallbackThreadSetFnPtr, CallbackThreadUnsetFnPtr).
+// syscall) using the shape func(*ICLRRuntimeInfo, CallbackThreadSetFnPtr, CallbackThreadUnsetFnPtr).
 type RuntimeLoadedCallbackFnPtr uintptr

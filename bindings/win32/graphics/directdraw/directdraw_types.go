@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type LPDDFXROP uintptr
@@ -59,7 +60,7 @@ type DDARGB struct {
 // DDBLTBATCH: https://learn.microsoft.com/windows/win32/api/ddraw/ns-ddraw-ddbltbatch
 type DDBLTBATCH struct {
 	LprDest   *foundation.RECT
-	LpDDSSrc  [1]uint64
+	LpDDSSrc  *IDirectDrawSurface
 	LprSrc    *foundation.RECT
 	DwFlags   uint32
 	LpDDBltFx *DDBLTFX
@@ -1614,10 +1615,10 @@ type DDRAWI_DDRAWCLIPPER_LCL struct {
 	LpGbl              *DDRAWI_DDRAWCLIPPER_GBL
 	LpDD_lcl           *DDRAWI_DIRECTDRAW_LCL
 	DwLocalRefCnt      uint32
-	PUnkOuter          [1]uint64
+	PUnkOuter          *systemcom.IUnknown
 	LpDD_int           *DDRAWI_DIRECTDRAW_INT
 	DwReserved1        uintptr
-	PAddrefedThisOwner [1]uint64
+	PAddrefedThisOwner *systemcom.IUnknown
 }
 
 // DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -1651,7 +1652,7 @@ type DDRAWI_DDRAWPALETTE_LCL struct {
 	LpGbl            *DDRAWI_DDRAWPALETTE_GBL
 	DwUnused0        uintptr
 	DwLocalRefCnt    uint32
-	PUnkOuter        [1]uint64
+	PUnkOuter        *systemcom.IUnknown
 	LpDD_lcl         *DDRAWI_DIRECTDRAW_LCL
 	DwReserved1      uintptr
 	DwDDRAWReserved1 uintptr
@@ -1929,7 +1930,7 @@ type DDRAWI_DIRECTDRAW_LCL struct {
 	DwLocalFlags      uint32
 	DwLocalRefCnt     uint32
 	DwProcessId       uint32
-	PUnkOuter         [1]uint64
+	PUnkOuter         *systemcom.IUnknown
 	DwObsolete1       uint32
 	HWnd              uintptr
 	HDC               uintptr
@@ -1938,7 +1939,7 @@ type DDRAWI_DIRECTDRAW_LCL struct {
 	LpCB              *DDRAWI_DDRAWSURFACE_INT
 	DwPreferredMode   uint32
 	HD3DInstance      foundation.HINSTANCE
-	PD3DIUnknown      [1]uint64
+	PD3DIUnknown      *systemcom.IUnknown
 	LpDDCB            *DDHAL_CALLBACKS
 	HDDVxd            uintptr
 	DwAppHackFlags    uint32
@@ -3268,7 +3269,7 @@ type HEAPALIGNMENT struct {
 type IUNKNOWN_LIST struct {
 	LpLink     *IUNKNOWN_LIST
 	LpGuid     *win32.GUID
-	LpIUnknown [1]uint64
+	LpIUnknown *systemcom.IUnknown
 }
 
 type PROCESS_LIST struct {
@@ -3412,7 +3413,7 @@ type VMEMR struct {
 }
 
 // LPCLIPPERCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.HWND, uint32, unsafe.Pointer) uint32.
+// syscall) using the shape func(*IDirectDrawClipper, foundation.HWND, uint32, unsafe.Pointer) uint32.
 type LPCLIPPERCALLBACK uintptr
 
 // LPDD32BITDRIVERINIT is a callback pointer: create one with NewCallback (package
@@ -3444,15 +3445,15 @@ type LPDDENUMMODESCALLBACK uintptr
 type LPDDENUMMODESCALLBACK2 uintptr
 
 // LPDDENUMSURFACESCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *DDSURFACEDESC, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*IDirectDrawSurface, *DDSURFACEDESC, unsafe.Pointer) foundation.HRESULT.
 type LPDDENUMSURFACESCALLBACK uintptr
 
 // LPDDENUMSURFACESCALLBACK2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *DDSURFACEDESC2, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*IDirectDrawSurface4, *DDSURFACEDESC2, unsafe.Pointer) foundation.HRESULT.
 type LPDDENUMSURFACESCALLBACK2 uintptr
 
 // LPDDENUMSURFACESCALLBACK7 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *DDSURFACEDESC2, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*IDirectDrawSurface7, *DDSURFACEDESC2, unsafe.Pointer) foundation.HRESULT.
 type LPDDENUMSURFACESCALLBACK7 uintptr
 
 // LPDDENUMVIDEOCALLBACK is a callback pointer: create one with NewCallback (package

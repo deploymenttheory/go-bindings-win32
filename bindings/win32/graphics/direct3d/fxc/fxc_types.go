@@ -49,13 +49,13 @@ type D3D_SHADER_DATA struct {
 }
 
 // PD3DCompile is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, foundation.PSTR, *graphicsdirect3d.D3D_SHADER_MACRO, uintptr, foundation.PSTR, foundation.PSTR, uint32, uint32, uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(unsafe.Pointer, uintptr, foundation.PSTR, *graphicsdirect3d.D3D_SHADER_MACRO, *graphicsdirect3d.ID3DInclude, foundation.PSTR, foundation.PSTR, uint32, uint32, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
 type PD3DCompile uintptr
 
 // PD3DDisassemble is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, uint32, foundation.PSTR, uintptr) foundation.HRESULT.
+// syscall) using the shape func(unsafe.Pointer, uintptr, uint32, foundation.PSTR, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
 type PD3DDisassemble uintptr
 
 // PD3DPreprocess is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, foundation.PSTR, *graphicsdirect3d.D3D_SHADER_MACRO, uintptr, uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(unsafe.Pointer, uintptr, foundation.PSTR, *graphicsdirect3d.D3D_SHADER_MACRO, *graphicsdirect3d.ID3DInclude, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
 type PD3DPreprocess uintptr

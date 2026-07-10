@@ -474,9 +474,9 @@ type AudioClientProperties struct {
 // AudioExtensionParams: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/ns-mmdeviceapi-audioextensionparams
 type AudioExtensionParams struct {
 	AddPageParam  foundation.LPARAM
-	PEndpoint     [1]uint64
-	PPnpInterface [1]uint64
-	PPnpDevnode   [1]uint64
+	PEndpoint     *IMMDevice
+	PPnpInterface *IMMDevice
+	PPnpDevnode   *IMMDevice
 }
 
 // DIRECTX_AUDIO_ACTIVATION_PARAMS: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/ns-mmdeviceapi-directx_audio_activation_params
@@ -574,5 +574,5 @@ type LPMIDICALLBACK uintptr
 type LPWAVECALLBACK uintptr
 
 // PAudioStateMonitorCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer).
+// syscall) using the shape func(*IAudioStateMonitor, unsafe.Pointer).
 type PAudioStateMonitorCallback uintptr

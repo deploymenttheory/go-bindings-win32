@@ -825,7 +825,7 @@ type PWLDP_CANEXECUTEFILEFROMDETACHEDSIGNATURE_API uintptr
 type PWLDP_CANEXECUTEFILE_API uintptr
 
 // PWLDP_CANEXECUTESTREAM_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, uintptr, foundation.PWSTR, *WLDP_EXECUTION_POLICY) foundation.HRESULT.
+// syscall) using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, *systemcom.IStream, foundation.PWSTR, *WLDP_EXECUTION_POLICY) foundation.HRESULT.
 type PWLDP_CANEXECUTESTREAM_API uintptr
 
 // PWLDP_GETAPPLICATIONSETTINGBOOLEAN_API is a callback pointer: create one with NewCallback (package

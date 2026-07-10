@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 )
 
 type MLOperatorAttributeType uint32
@@ -280,7 +281,7 @@ type WINML_RESOURCE_BINDING_DESC struct {
 	ElementType   WINML_TENSOR_DATA_TYPE
 	NumDimensions uint32
 	PShape        *int64
-	PResource     [1]uint64
+	PResource     *graphicsdirect3d12.ID3D12Resource
 }
 
 // WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized

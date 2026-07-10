@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 // NETSOURCE_URLCREDPOLICY_SETTINGS: https://learn.microsoft.com/windows/win32/api/wmsinternaladminnetsource/ne-wmsinternaladminnetsource-netsource_urlcredpolicy_settings
@@ -437,7 +438,7 @@ type WMSCRIPTFORMAT struct {
 
 // WMT_BUFFER_SEGMENT: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wmt_buffer_segment
 type WMT_BUFFER_SEGMENT struct {
-	PBuffer  [1]uint64
+	PBuffer  *INSSBuffer
 	CbOffset uint32
 	CbLength uint32
 }
@@ -599,7 +600,7 @@ type WM_MEDIA_TYPE struct {
 	BTemporalCompression foundation.BOOL
 	LSampleSize          uint32
 	Formattype           win32.GUID
-	PUnk                 [1]uint64
+	PUnk                 *systemcom.IUnknown
 	CbFormat             uint32
 	PbFormat             *byte
 }

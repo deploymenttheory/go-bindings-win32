@@ -22,7 +22,7 @@ var (
 
 // CreateDeviceAccessInstance calls deviceaccess!CreateDeviceAccessInstance.
 // https://learn.microsoft.com/windows/win32/api/deviceaccess/nf-deviceaccess-createdeviceaccessinstance
-func CreateDeviceAccessInstance(deviceInterfacePath foundation.PWSTR, desiredAccess uint32, createAsync uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDeviceAccessInstance.Addr(), uintptr(unsafe.Pointer(deviceInterfacePath)), uintptr(desiredAccess), uintptr(createAsync))
+func CreateDeviceAccessInstance(deviceInterfacePath foundation.PWSTR, desiredAccess uint32, createAsync **ICreateDeviceAccessAsync) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateDeviceAccessInstance.Addr(), uintptr(unsafe.Pointer(deviceInterfacePath)), uintptr(desiredAccess), uintptr(unsafe.Pointer(createAsync)))
 	return foundation.HRESULT(r1)
 }

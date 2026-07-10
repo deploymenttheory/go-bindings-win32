@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type DeviceDiscoveryMechanism int32
@@ -264,6 +265,12 @@ type WSD_BYE struct {
 	Any               *WSDXML_ELEMENT
 }
 
+// WSD_CONFIG_ADDRESSES: https://learn.microsoft.com/windows/win32/api/wsdbase/ns-wsdbase-wsd_config_addresses
+type WSD_CONFIG_ADDRESSES struct {
+	Addresses      **IWSDAddress
+	DwAddressCount uint32
+}
+
 // WSD_CONFIG_PARAM: https://learn.microsoft.com/windows/win32/api/wsdbase/ns-wsdbase-wsd_config_param
 type WSD_CONFIG_PARAM struct {
 	ConfigParamType  WSD_CONFIG_PARAM_TYPE
@@ -323,7 +330,7 @@ type WSD_EVENT struct {
 	HandlerContext    WSD_HANDLER_CONTEXT
 	Soap              *WSD_SOAP_MESSAGE
 	Operation         *WSD_OPERATION
-	MessageParameters [1]uint64
+	MessageParameters *IWSDMessageParameters
 }
 
 // WSD_EVENTING_DELIVERY_MODE: https://learn.microsoft.com/windows/win32/api/wsdtypes/ns-wsdtypes-wsd_eventing_delivery_mode
@@ -360,7 +367,7 @@ type WSD_EVENTING_FILTER_ACTION struct {
 type WSD_HANDLER_CONTEXT struct {
 	Handler PWSD_SOAP_MESSAGE_HANDLER
 	PVoid   unsafe.Pointer
-	Unknown [1]uint64
+	Unknown *systemcom.IUnknown
 }
 
 // WSD_HEADER_RELATESTO: https://learn.microsoft.com/windows/win32/api/wsdtypes/ns-wsdtypes-wsd_header_relatesto
@@ -601,7 +608,7 @@ type WSD_SOAP_MESSAGE struct {
 type WSD_SYNCHRONOUS_RESPONSE_CONTEXT struct {
 	Hr                foundation.HRESULT
 	EventHandle       foundation.HANDLE
-	MessageParameters [1]uint64
+	MessageParameters *IWSDMessageParameters
 	Results           unsafe.Pointer
 }
 
@@ -636,9 +643,9 @@ type WSD_URI_LIST struct {
 }
 
 // PWSD_SOAP_MESSAGE_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *WSD_EVENT) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IUnknown, *WSD_EVENT) foundation.HRESULT.
 type PWSD_SOAP_MESSAGE_HANDLER uintptr
 
 // WSD_STUB_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *WSD_EVENT) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IUnknown, *IWSDServiceMessaging, *WSD_EVENT) foundation.HRESULT.
 type WSD_STUB_FUNCTION uintptr

@@ -516,8 +516,8 @@ func ConnectToPrinterDlg(hwnd foundation.HWND, Flags uint32) foundation.HANDLE {
 // CreatePrintAsyncNotifyChannel calls winspool.drv!CreatePrintAsyncNotifyChannel.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-createprintasyncnotifychannel
 // Minimum OS: windows6.0.6000.
-func CreatePrintAsyncNotifyChannel(pszName foundation.PWSTR, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback uintptr, ppIAsynchNotification uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreatePrintAsyncNotifyChannel.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(pCallback), uintptr(ppIAsynchNotification))
+func CreatePrintAsyncNotifyChannel(pszName foundation.PWSTR, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreatePrintAsyncNotifyChannel.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1424,8 +1424,8 @@ func ReadPrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pNo
 // RegisterForPrintAsyncNotifications calls winspool.drv!RegisterForPrintAsyncNotifications.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-registerforprintasyncnotifications
 // Minimum OS: windows6.0.6000.
-func RegisterForPrintAsyncNotifications(pszName foundation.PWSTR, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback uintptr, phNotify *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterForPrintAsyncNotifications.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(pCallback), uintptr(unsafe.Pointer(phNotify)))
+func RegisterForPrintAsyncNotifications(pszName foundation.PWSTR, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRegisterForPrintAsyncNotifications.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(phNotify)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1493,8 +1493,8 @@ func RouterAllocPrinterNotifyInfo(cPrinterNotifyInfoData uint32) *PRINTER_NOTIFY
 }
 
 // RouterCreatePrintAsyncNotificationChannel calls SPOOLSS!RouterCreatePrintAsyncNotificationChannel.
-func RouterCreatePrintAsyncNotificationChannel(pName foundation.PWSTR, pNotificationType *win32.GUID, eNotifyFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback uintptr, ppIAsynchNotification uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRouterCreatePrintAsyncNotificationChannel.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eNotifyFilter), uintptr(eConversationStyle), uintptr(pCallback), uintptr(ppIAsynchNotification))
+func RouterCreatePrintAsyncNotificationChannel(pName foundation.PWSTR, pNotificationType *win32.GUID, eNotifyFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRouterCreatePrintAsyncNotificationChannel.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eNotifyFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
 	return foundation.HRESULT(r1)
 }
 

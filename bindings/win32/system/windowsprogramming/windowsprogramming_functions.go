@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 )
@@ -1573,8 +1574,8 @@ func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXEC
 
 // WldpCanExecuteStream calls Wldp!WldpCanExecuteStream.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutestream
-func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream uintptr, auditInfo foundation.PWSTR, result *WLDP_EXECUTION_POLICY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpCanExecuteStream.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(stream), uintptr(unsafe.Pointer(auditInfo)), uintptr(unsafe.Pointer(result)))
+func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo foundation.PWSTR, result *WLDP_EXECUTION_POLICY) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWldpCanExecuteStream.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(auditInfo)), uintptr(unsafe.Pointer(result)))
 	return foundation.HRESULT(r1)
 }
 

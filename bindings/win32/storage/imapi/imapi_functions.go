@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemaddressbook "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/addressbook"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 )
 
 var (
@@ -48,15 +50,15 @@ func MapStorageSCode(StgSCode int32) int32 {
 
 // OpenIMsgOnIStg calls MAPI32!OpenIMsgOnIStg.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/openimsgonistg
-func OpenIMsgOnIStg(lpMsgSess LPMSGSESS, lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpAllocateMore systemaddressbook.LPALLOCATEMORE, lpFreeBuffer systemaddressbook.LPFREEBUFFER, lpMalloc uintptr, lpMapiSup unsafe.Pointer, lpStg uintptr, lpfMsgCallRelease *MSGCALLRELEASE, ulCallerData uint32, ulFlags uint32, lppMsg uintptr) int32 {
-	r1, _, _ := syscall.SyscallN(procOpenIMsgOnIStg.Addr(), uintptr(lpMsgSess), uintptr(lpAllocateBuffer), uintptr(lpAllocateMore), uintptr(lpFreeBuffer), uintptr(lpMalloc), uintptr(unsafe.Pointer(lpMapiSup)), uintptr(lpStg), uintptr(unsafe.Pointer(lpfMsgCallRelease)), uintptr(ulCallerData), uintptr(ulFlags), uintptr(lppMsg))
+func OpenIMsgOnIStg(lpMsgSess LPMSGSESS, lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpAllocateMore systemaddressbook.LPALLOCATEMORE, lpFreeBuffer systemaddressbook.LPFREEBUFFER, lpMalloc *systemcom.IMalloc, lpMapiSup unsafe.Pointer, lpStg *systemcomstructuredstorage.IStorage, lpfMsgCallRelease *MSGCALLRELEASE, ulCallerData uint32, ulFlags uint32, lppMsg **systemaddressbook.IMessage) int32 {
+	r1, _, _ := syscall.SyscallN(procOpenIMsgOnIStg.Addr(), uintptr(lpMsgSess), uintptr(lpAllocateBuffer), uintptr(lpAllocateMore), uintptr(lpFreeBuffer), uintptr(unsafe.Pointer(lpMalloc)), uintptr(unsafe.Pointer(lpMapiSup)), uintptr(unsafe.Pointer(lpStg)), uintptr(unsafe.Pointer(lpfMsgCallRelease)), uintptr(ulCallerData), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMsg)))
 	return int32(r1)
 }
 
 // OpenIMsgSession calls MAPI32!OpenIMsgSession.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/openimsgsession
-func OpenIMsgSession(lpMalloc uintptr, ulFlags uint32, lppMsgSess *LPMSGSESS) int32 {
-	r1, _, _ := syscall.SyscallN(procOpenIMsgSession.Addr(), uintptr(lpMalloc), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMsgSess)))
+func OpenIMsgSession(lpMalloc *systemcom.IMalloc, ulFlags uint32, lppMsgSess *LPMSGSESS) int32 {
+	r1, _, _ := syscall.SyscallN(procOpenIMsgSession.Addr(), uintptr(unsafe.Pointer(lpMalloc)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMsgSess)))
 	return int32(r1)
 }
 

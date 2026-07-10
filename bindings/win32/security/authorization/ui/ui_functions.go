@@ -6,6 +6,7 @@ package ui
 
 import (
 	"syscall"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
@@ -25,8 +26,8 @@ var (
 // CreateSecurityPage calls ACLUI!CreateSecurityPage.
 // https://learn.microsoft.com/windows/win32/api/aclui/nf-aclui-createsecuritypage
 // Minimum OS: windows5.1.2600.
-func CreateSecurityPage(psi uintptr) (uicontrols.HPROPSHEETPAGE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateSecurityPage.Addr(), uintptr(psi))
+func CreateSecurityPage(psi *ISecurityInformation) (uicontrols.HPROPSHEETPAGE, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateSecurityPage.Addr(), uintptr(unsafe.Pointer(psi)))
 	ret := uicontrols.HPROPSHEETPAGE(r1)
 	if ret == ^uicontrols.HPROPSHEETPAGE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -37,8 +38,8 @@ func CreateSecurityPage(psi uintptr) (uicontrols.HPROPSHEETPAGE, error) {
 // EditSecurity calls ACLUI!EditSecurity.
 // https://learn.microsoft.com/windows/win32/api/aclui/nf-aclui-editsecurity
 // Minimum OS: windows5.1.2600.
-func EditSecurity(hwndOwner foundation.HWND, psi uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procEditSecurity.Addr(), uintptr(hwndOwner), uintptr(psi))
+func EditSecurity(hwndOwner foundation.HWND, psi *ISecurityInformation) error {
+	r1, _, e1 := syscall.SyscallN(procEditSecurity.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(psi)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -48,7 +49,7 @@ func EditSecurity(hwndOwner foundation.HWND, psi uintptr) error {
 // EditSecurityAdvanced calls ACLUI!EditSecurityAdvanced.
 // https://learn.microsoft.com/windows/win32/api/aclui/nf-aclui-editsecurityadvanced
 // Minimum OS: windows6.0.6000.
-func EditSecurityAdvanced(hwndOwner foundation.HWND, psi uintptr, uSIPage SI_PAGE_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditSecurityAdvanced.Addr(), uintptr(hwndOwner), uintptr(psi), uintptr(uSIPage))
+func EditSecurityAdvanced(hwndOwner foundation.HWND, psi *ISecurityInformation, uSIPage SI_PAGE_TYPE) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditSecurityAdvanced.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(psi)), uintptr(uSIPage))
 	return foundation.HRESULT(r1)
 }

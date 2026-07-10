@@ -19,5 +19,5 @@ type PDF_RENDER_PARAMS struct {
 }
 
 // PFN_PDF_CREATE_RENDERER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*graphicsdxgi.IDXGIDevice, **IPdfRendererNative) foundation.HRESULT.
 type PFN_PDF_CREATE_RENDERER uintptr

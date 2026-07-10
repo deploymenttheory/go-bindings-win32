@@ -172,8 +172,8 @@ func JsCreateArray(length uint32, result *unsafe.Pointer) JsErrorCode {
 }
 
 // JsCreateContext calls chakra!JsCreateContext.
-func JsCreateContext(runtime unsafe.Pointer, debugApplication uintptr, newContext *unsafe.Pointer) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsCreateContext.Addr(), uintptr(unsafe.Pointer(runtime)), uintptr(debugApplication), uintptr(unsafe.Pointer(newContext)))
+func JsCreateContext(runtime unsafe.Pointer, debugApplication *systemdiagnosticsdebugactivescript.IDebugApplication64, newContext *unsafe.Pointer) JsErrorCode {
+	r1, _, _ := syscall.SyscallN(procJsCreateContext.Addr(), uintptr(unsafe.Pointer(runtime)), uintptr(unsafe.Pointer(debugApplication)), uintptr(unsafe.Pointer(newContext)))
 	return JsErrorCode(r1)
 }
 
@@ -274,8 +274,8 @@ func JsEnableRuntimeExecution(runtime unsafe.Pointer) JsErrorCode {
 }
 
 // JsEnumerateHeap calls chakra!JsEnumerateHeap.
-func JsEnumerateHeap(enumerator uintptr) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsEnumerateHeap.Addr(), uintptr(enumerator))
+func JsEnumerateHeap(enumerator **systemdiagnosticsdebugactivescript.IActiveScriptProfilerHeapEnum) JsErrorCode {
+	r1, _, _ := syscall.SyscallN(procJsEnumerateHeap.Addr(), uintptr(unsafe.Pointer(enumerator)))
 	return JsErrorCode(r1)
 }
 
@@ -568,14 +568,14 @@ func JsSetRuntimeMemoryLimit(runtime unsafe.Pointer, memoryLimit uintptr) JsErro
 }
 
 // JsStartDebugging calls chakra!JsStartDebugging.
-func JsStartDebugging(debugApplication uintptr) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsStartDebugging.Addr(), uintptr(debugApplication))
+func JsStartDebugging(debugApplication *systemdiagnosticsdebugactivescript.IDebugApplication64) JsErrorCode {
+	r1, _, _ := syscall.SyscallN(procJsStartDebugging.Addr(), uintptr(unsafe.Pointer(debugApplication)))
 	return JsErrorCode(r1)
 }
 
 // JsStartProfiling calls chakra!JsStartProfiling.
-func JsStartProfiling(callback uintptr, eventMask systemdiagnosticsdebugactivescript.PROFILER_EVENT_MASK, context uint32) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsStartProfiling.Addr(), uintptr(callback), uintptr(eventMask), uintptr(context))
+func JsStartProfiling(callback *systemdiagnosticsdebugactivescript.IActiveScriptProfilerCallback, eventMask systemdiagnosticsdebugactivescript.PROFILER_EVENT_MASK, context uint32) JsErrorCode {
+	r1, _, _ := syscall.SyscallN(procJsStartProfiling.Addr(), uintptr(unsafe.Pointer(callback)), uintptr(eventMask), uintptr(context))
 	return JsErrorCode(r1)
 }
 

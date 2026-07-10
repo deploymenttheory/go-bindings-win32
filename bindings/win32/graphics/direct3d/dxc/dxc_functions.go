@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -28,7 +29,7 @@ func DxcCreateInstance(rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer
 }
 
 // DxcCreateInstance2 calls dxcompiler!DxcCreateInstance2.
-func DxcCreateInstance2(pMalloc uintptr, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDxcCreateInstance2.Addr(), uintptr(pMalloc), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func DxcCreateInstance2(pMalloc *systemcom.IMalloc, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDxcCreateInstance2.Addr(), uintptr(unsafe.Pointer(pMalloc)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }

@@ -939,15 +939,15 @@ type LINECALLBACK uintptr
 type LINEEVENT uintptr
 
 // LPGETTNEFSTREAMCODEPAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *uint32, *uint32) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IStream, *uint32, *uint32) foundation.HRESULT.
 type LPGETTNEFSTREAMCODEPAGE uintptr
 
 // LPOPENTNEFSTREAM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, *int8, uint32, uintptr, uint16, uintptr) foundation.HRESULT.
+// syscall) using the shape func(unsafe.Pointer, *systemcom.IStream, *int8, uint32, *systemaddressbook.IMessage, uint16, **ITnef) foundation.HRESULT.
 type LPOPENTNEFSTREAM uintptr
 
 // LPOPENTNEFSTREAMEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, *int8, uint32, uintptr, uint16, uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(unsafe.Pointer, *systemcom.IStream, *int8, uint32, *systemaddressbook.IMessage, uint16, *systemaddressbook.IAddrBook, **ITnef) foundation.HRESULT.
 type LPOPENTNEFSTREAMEX uintptr
 
 // PHONECALLBACK is a callback pointer: create one with NewCallback (package

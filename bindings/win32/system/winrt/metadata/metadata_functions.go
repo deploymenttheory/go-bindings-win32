@@ -64,16 +64,16 @@ func RoFreeParameterizedTypeExtra(extra ROPARAMIIDHANDLE) {
 // RoGetMetaDataFile calls api-ms-win-ro-typeresolution-l1-1-0!RoGetMetaDataFile.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 // Minimum OS: windows8.0.
-func RoGetMetaDataFile(name systemwinrt.HSTRING, metaDataDispenser uintptr, metaDataFilePath *systemwinrt.HSTRING, metaDataImport uintptr, typeDefToken *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoGetMetaDataFile.Addr(), uintptr(name), uintptr(metaDataDispenser), uintptr(unsafe.Pointer(metaDataFilePath)), uintptr(metaDataImport), uintptr(unsafe.Pointer(typeDefToken)))
+func RoGetMetaDataFile(name systemwinrt.HSTRING, metaDataDispenser *IMetaDataDispenserEx, metaDataFilePath *systemwinrt.HSTRING, metaDataImport **IMetaDataImport2, typeDefToken *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoGetMetaDataFile.Addr(), uintptr(name), uintptr(unsafe.Pointer(metaDataDispenser)), uintptr(unsafe.Pointer(metaDataFilePath)), uintptr(unsafe.Pointer(metaDataImport)), uintptr(unsafe.Pointer(typeDefToken)))
 	return foundation.HRESULT(r1)
 }
 
 // RoGetParameterizedTypeInstanceIID calls api-ms-win-core-winrt-roparameterizediid-l1-1-0!RoGetParameterizedTypeInstanceIID.
 // https://learn.microsoft.com/windows/win32/api/roparameterizediid/nf-roparameterizediid-rogetparameterizedtypeinstanceiid
 // Minimum OS: windows8.0.
-func RoGetParameterizedTypeInstanceIID(nameElementCount uint32, nameElements *foundation.PWSTR, metaDataLocator uintptr, iid *win32.GUID, pExtra *ROPARAMIIDHANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoGetParameterizedTypeInstanceIID.Addr(), uintptr(nameElementCount), uintptr(unsafe.Pointer(nameElements)), uintptr(metaDataLocator), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pExtra)))
+func RoGetParameterizedTypeInstanceIID(nameElementCount uint32, nameElements *foundation.PWSTR, metaDataLocator *IRoMetaDataLocator, iid *win32.GUID, pExtra *ROPARAMIIDHANDLE) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoGetParameterizedTypeInstanceIID.Addr(), uintptr(nameElementCount), uintptr(unsafe.Pointer(nameElements)), uintptr(unsafe.Pointer(metaDataLocator)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pExtra)))
 	return foundation.HRESULT(r1)
 }
 

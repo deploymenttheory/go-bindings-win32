@@ -80,6 +80,34 @@ func (r *Registry) Typedef(api, name string) *win32meta.Typedef {
 	return r.TypedefIndex[qualified(api, name)]
 }
 
+// Interface resolves a COM interface reference, or nil.
+func (r *Registry) Interface(api, name string) *win32meta.ComInterface {
+	return r.InterfaceIndex[qualified(api, name)]
+}
+
+// VtableStartSlot returns the vtable slot index where the named interface's
+// OWN methods begin: the total method count of its base-interface chain.
+// ok is false on a dangling or cyclic base chain.
+func (r *Registry) VtableStartSlot(api, name string) (int, bool) {
+	slot := 0
+	seen := map[string]bool{}
+	current := r.Interface(api, name)
+	for current != nil && current.BaseInterface != "" {
+		key := qualified(current.BaseInterfaceApi, current.BaseInterface)
+		if seen[key] {
+			return 0, false // cyclic inheritance: malformed metadata
+		}
+		seen[key] = true
+		base := r.InterfaceIndex[key]
+		if base == nil {
+			return 0, false
+		}
+		slot += len(base.Methods)
+		current = base
+	}
+	return slot, true
+}
+
 // EnumBase resolves an enum's Go base type, or "".
 func (r *Registry) EnumBase(api, name string) string {
 	return r.EnumBaseIndex[qualified(api, name)]

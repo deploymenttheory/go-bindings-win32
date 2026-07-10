@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -33,80 +34,80 @@ var (
 // WMCreateBackupRestorer calls WMVCore!WMCreateBackupRestorer.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatebackuprestorer
 // Minimum OS: windows5.0.
-func WMCreateBackupRestorer(pCallback uintptr, ppBackup uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateBackupRestorer.Addr(), uintptr(pCallback), uintptr(ppBackup))
+func WMCreateBackupRestorer(pCallback *systemcom.IUnknown, ppBackup **IWMLicenseBackup) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateBackupRestorer.Addr(), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppBackup)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateEditor calls WMVCore!WMCreateEditor.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreateeditor
 // Minimum OS: windows5.0.
-func WMCreateEditor(ppEditor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateEditor.Addr(), uintptr(ppEditor))
+func WMCreateEditor(ppEditor **IWMMetadataEditor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateEditor.Addr(), uintptr(unsafe.Pointer(ppEditor)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateIndexer calls WMVCore!WMCreateIndexer.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreateindexer
 // Minimum OS: windows5.0.
-func WMCreateIndexer(ppIndexer uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateIndexer.Addr(), uintptr(ppIndexer))
+func WMCreateIndexer(ppIndexer **IWMIndexer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateIndexer.Addr(), uintptr(unsafe.Pointer(ppIndexer)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateProfileManager calls WMVCore!WMCreateProfileManager.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreateprofilemanager
 // Minimum OS: windows5.0.
-func WMCreateProfileManager(ppProfileManager uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateProfileManager.Addr(), uintptr(ppProfileManager))
+func WMCreateProfileManager(ppProfileManager **IWMProfileManager) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateProfileManager.Addr(), uintptr(unsafe.Pointer(ppProfileManager)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateReader calls WMVCore!WMCreateReader.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatereader
 // Minimum OS: windows5.0.
-func WMCreateReader(pUnkCert uintptr, dwRights uint32, ppReader uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateReader.Addr(), uintptr(pUnkCert), uintptr(dwRights), uintptr(ppReader))
+func WMCreateReader(pUnkCert *systemcom.IUnknown, dwRights uint32, ppReader **IWMReader) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateReader.Addr(), uintptr(unsafe.Pointer(pUnkCert)), uintptr(dwRights), uintptr(unsafe.Pointer(ppReader)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateSyncReader calls WMVCore!WMCreateSyncReader.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatesyncreader
 // Minimum OS: windows5.0.
-func WMCreateSyncReader(pUnkCert uintptr, dwRights uint32, ppSyncReader uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateSyncReader.Addr(), uintptr(pUnkCert), uintptr(dwRights), uintptr(ppSyncReader))
+func WMCreateSyncReader(pUnkCert *systemcom.IUnknown, dwRights uint32, ppSyncReader **IWMSyncReader) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateSyncReader.Addr(), uintptr(unsafe.Pointer(pUnkCert)), uintptr(dwRights), uintptr(unsafe.Pointer(ppSyncReader)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateWriter calls WMVCore!WMCreateWriter.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatewriter
 // Minimum OS: windows5.0.
-func WMCreateWriter(pUnkCert uintptr, ppWriter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateWriter.Addr(), uintptr(pUnkCert), uintptr(ppWriter))
+func WMCreateWriter(pUnkCert *systemcom.IUnknown, ppWriter **IWMWriter) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateWriter.Addr(), uintptr(unsafe.Pointer(pUnkCert)), uintptr(unsafe.Pointer(ppWriter)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateWriterFileSink calls WMVCore!WMCreateWriterFileSink.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatewriterfilesink
 // Minimum OS: windows5.0.
-func WMCreateWriterFileSink(ppSink uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateWriterFileSink.Addr(), uintptr(ppSink))
+func WMCreateWriterFileSink(ppSink **IWMWriterFileSink) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateWriterFileSink.Addr(), uintptr(unsafe.Pointer(ppSink)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateWriterNetworkSink calls WMVCore!WMCreateWriterNetworkSink.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatewriternetworksink
 // Minimum OS: windows5.0.
-func WMCreateWriterNetworkSink(ppSink uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateWriterNetworkSink.Addr(), uintptr(ppSink))
+func WMCreateWriterNetworkSink(ppSink **IWMWriterNetworkSink) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateWriterNetworkSink.Addr(), uintptr(unsafe.Pointer(ppSink)))
 	return foundation.HRESULT(r1)
 }
 
 // WMCreateWriterPushSink calls WMVCore!WMCreateWriterPushSink.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatewriterpushsink
 // Minimum OS: windows5.0.
-func WMCreateWriterPushSink(ppSink uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWMCreateWriterPushSink.Addr(), uintptr(ppSink))
+func WMCreateWriterPushSink(ppSink **IWMWriterPushSink) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWMCreateWriterPushSink.Addr(), uintptr(unsafe.Pointer(ppSink)))
 	return foundation.HRESULT(r1)
 }
 

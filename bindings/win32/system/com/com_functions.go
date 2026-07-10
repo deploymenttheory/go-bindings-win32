@@ -135,8 +135,8 @@ var (
 // BindMoniker calls OLE32!BindMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-bindmoniker
 // Minimum OS: windows5.0.
-func BindMoniker(pmk uintptr, grfOpt uint32, iidResult *win32.GUID, ppvResult *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBindMoniker.Addr(), uintptr(pmk), uintptr(grfOpt), uintptr(unsafe.Pointer(iidResult)), uintptr(unsafe.Pointer(ppvResult)))
+func BindMoniker(pmk *IMoniker, grfOpt uint32, iidResult *win32.GUID, ppvResult *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procBindMoniker.Addr(), uintptr(unsafe.Pointer(pmk)), uintptr(grfOpt), uintptr(unsafe.Pointer(iidResult)), uintptr(unsafe.Pointer(ppvResult)))
 	return foundation.HRESULT(r1)
 }
 
@@ -175,8 +175,8 @@ func CoAddRefServerProcess() uint32 {
 // CoAllowSetForegroundWindow calls OLE32!CoAllowSetForegroundWindow.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coallowsetforegroundwindow
 // Minimum OS: windows5.0.
-func CoAllowSetForegroundWindow(pUnk uintptr, lpvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoAllowSetForegroundWindow.Addr(), uintptr(pUnk), uintptr(unsafe.Pointer(lpvReserved)))
+func CoAllowSetForegroundWindow(pUnk *IUnknown, lpvReserved unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoAllowSetForegroundWindow.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(lpvReserved)))
 	return foundation.HRESULT(r1)
 }
 
@@ -205,16 +205,16 @@ func CoCancelCall(dwThreadId uint32, ulTimeout uint32) foundation.HRESULT {
 // CoCopyProxy calls OLE32!CoCopyProxy.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocopyproxy
 // Minimum OS: windows5.0.
-func CoCopyProxy(pProxy uintptr, ppCopy uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoCopyProxy.Addr(), uintptr(pProxy), uintptr(ppCopy))
+func CoCopyProxy(pProxy *IUnknown, ppCopy **IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoCopyProxy.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(unsafe.Pointer(ppCopy)))
 	return foundation.HRESULT(r1)
 }
 
 // CoCreateFreeThreadedMarshaler calls OLE32!CoCreateFreeThreadedMarshaler.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreatefreethreadedmarshaler
 // Minimum OS: windows5.0.
-func CoCreateFreeThreadedMarshaler(punkOuter uintptr, ppunkMarshal uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoCreateFreeThreadedMarshaler.Addr(), uintptr(punkOuter), uintptr(ppunkMarshal))
+func CoCreateFreeThreadedMarshaler(punkOuter *IUnknown, ppunkMarshal **IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoCreateFreeThreadedMarshaler.Addr(), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(ppunkMarshal)))
 	return foundation.HRESULT(r1)
 }
 
@@ -229,24 +229,24 @@ func CoCreateGuid(pguid *win32.GUID) foundation.HRESULT {
 // CoCreateInstance calls OLE32!CoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance
 // Minimum OS: windows5.0.
-func CoCreateInstance(rclsid *win32.GUID, pUnkOuter uintptr, dwClsContext CLSCTX, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(pUnkOuter), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func CoCreateInstance(rclsid *win32.GUID, pUnkOuter *IUnknown, dwClsContext CLSCTX, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // CoCreateInstanceEx calls OLE32!CoCreateInstanceEx.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstanceex
 // Minimum OS: windows5.0.
-func CoCreateInstanceEx(Clsid *win32.GUID, punkOuter uintptr, dwClsCtx CLSCTX, pServerInfo *COSERVERINFO, dwCount uint32, pResults *MULTI_QI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoCreateInstanceEx.Addr(), uintptr(unsafe.Pointer(Clsid)), uintptr(punkOuter), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pServerInfo)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
+func CoCreateInstanceEx(Clsid *win32.GUID, punkOuter *IUnknown, dwClsCtx CLSCTX, pServerInfo *COSERVERINFO, dwCount uint32, pResults *MULTI_QI) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoCreateInstanceEx.Addr(), uintptr(unsafe.Pointer(Clsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pServerInfo)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
 	return foundation.HRESULT(r1)
 }
 
 // CoCreateInstanceFromApp calls OLE32!CoCreateInstanceFromApp.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstancefromapp
 // Minimum OS: windows8.0.
-func CoCreateInstanceFromApp(Clsid *win32.GUID, punkOuter uintptr, dwClsCtx CLSCTX, reserved unsafe.Pointer, dwCount uint32, pResults *MULTI_QI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoCreateInstanceFromApp.Addr(), uintptr(unsafe.Pointer(Clsid)), uintptr(punkOuter), uintptr(dwClsCtx), uintptr(unsafe.Pointer(reserved)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
+func CoCreateInstanceFromApp(Clsid *win32.GUID, punkOuter *IUnknown, dwClsCtx CLSCTX, reserved unsafe.Pointer, dwCount uint32, pResults *MULTI_QI) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoCreateInstanceFromApp.Addr(), uintptr(unsafe.Pointer(Clsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(reserved)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
 	return foundation.HRESULT(r1)
 }
 
@@ -276,8 +276,8 @@ func CoDisconnectContext(dwTimeout uint32) foundation.HRESULT {
 // CoDisconnectObject calls OLE32!CoDisconnectObject.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-codisconnectobject
 // Minimum OS: windows5.0.
-func CoDisconnectObject(pUnk uintptr, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoDisconnectObject.Addr(), uintptr(pUnk), uintptr(dwReserved))
+func CoDisconnectObject(pUnk *IUnknown, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoDisconnectObject.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -408,8 +408,8 @@ func CoGetCurrentProcess() uint32 {
 // CoGetMalloc calls OLE32!CoGetMalloc.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetmalloc
 // Minimum OS: windows5.0.
-func CoGetMalloc(dwMemContext uint32, ppMalloc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetMalloc.Addr(), uintptr(dwMemContext), uintptr(ppMalloc))
+func CoGetMalloc(dwMemContext uint32, ppMalloc **IMalloc) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetMalloc.Addr(), uintptr(dwMemContext), uintptr(unsafe.Pointer(ppMalloc)))
 	return foundation.HRESULT(r1)
 }
 
@@ -494,8 +494,8 @@ func CoInitializeSecurity(pSecDesc security.PSECURITY_DESCRIPTOR, cAuthSvc int32
 
 // CoInstall calls ole32!CoInstall.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coinstall
-func CoInstall(pbc uintptr, dwFlags uint32, pClassSpec *UCLSSPEC, pQuery *QUERYCONTEXT, pszCodeBase foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInstall.Addr(), uintptr(pbc), uintptr(dwFlags), uintptr(unsafe.Pointer(pClassSpec)), uintptr(unsafe.Pointer(pQuery)), uintptr(unsafe.Pointer(pszCodeBase)))
+func CoInstall(pbc *IBindCtx, dwFlags uint32, pClassSpec *UCLSSPEC, pQuery *QUERYCONTEXT, pszCodeBase foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInstall.Addr(), uintptr(unsafe.Pointer(pbc)), uintptr(dwFlags), uintptr(unsafe.Pointer(pClassSpec)), uintptr(unsafe.Pointer(pQuery)), uintptr(unsafe.Pointer(pszCodeBase)))
 	return foundation.HRESULT(r1)
 }
 
@@ -510,8 +510,8 @@ func CoInvalidateRemoteMachineBindings(pszMachineName foundation.PWSTR) foundati
 // CoIsHandlerConnected calls OLE32!CoIsHandlerConnected.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coishandlerconnected
 // Minimum OS: windows5.0.
-func CoIsHandlerConnected(pUnk uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCoIsHandlerConnected.Addr(), uintptr(pUnk))
+func CoIsHandlerConnected(pUnk *IUnknown) foundation.BOOL {
+	r1, _, _ := syscall.SyscallN(procCoIsHandlerConnected.Addr(), uintptr(unsafe.Pointer(pUnk)))
 	return foundation.BOOL(r1)
 }
 
@@ -534,8 +534,8 @@ func CoLoadLibrary(lpszLibName foundation.PWSTR, bAutoFree foundation.BOOL) foun
 // CoLockObjectExternal calls OLE32!CoLockObjectExternal.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-colockobjectexternal
 // Minimum OS: windows5.0.
-func CoLockObjectExternal(pUnk uintptr, fLock foundation.BOOL, fLastUnlockReleases foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoLockObjectExternal.Addr(), uintptr(pUnk), uintptr(fLock), uintptr(fLastUnlockReleases))
+func CoLockObjectExternal(pUnk *IUnknown, fLock foundation.BOOL, fLastUnlockReleases foundation.BOOL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoLockObjectExternal.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(fLock), uintptr(fLastUnlockReleases))
 	return foundation.HRESULT(r1)
 }
 
@@ -558,31 +558,31 @@ func CoQueryClientBlanket(pAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName
 // CoQueryProxyBlanket calls OLE32!CoQueryProxyBlanket.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coqueryproxyblanket
 // Minimum OS: windows5.0.
-func CoQueryProxyBlanket(pProxy uintptr, pwAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName *foundation.PWSTR, pAuthnLevel *uint32, pImpLevel *uint32, pAuthInfo *unsafe.Pointer, pCapabilites *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoQueryProxyBlanket.Addr(), uintptr(pProxy), uintptr(unsafe.Pointer(pwAuthnSvc)), uintptr(unsafe.Pointer(pAuthzSvc)), uintptr(unsafe.Pointer(pServerPrincName)), uintptr(unsafe.Pointer(pAuthnLevel)), uintptr(unsafe.Pointer(pImpLevel)), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(unsafe.Pointer(pCapabilites)))
+func CoQueryProxyBlanket(pProxy *IUnknown, pwAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName *foundation.PWSTR, pAuthnLevel *uint32, pImpLevel *uint32, pAuthInfo *unsafe.Pointer, pCapabilites *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoQueryProxyBlanket.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(unsafe.Pointer(pwAuthnSvc)), uintptr(unsafe.Pointer(pAuthzSvc)), uintptr(unsafe.Pointer(pServerPrincName)), uintptr(unsafe.Pointer(pAuthnLevel)), uintptr(unsafe.Pointer(pImpLevel)), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(unsafe.Pointer(pCapabilites)))
 	return foundation.HRESULT(r1)
 }
 
 // CoRegisterActivationFilter calls OLE32!CoRegisterActivationFilter.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coregisteractivationfilter
 // Minimum OS: windows5.1.2600.
-func CoRegisterActivationFilter(pActivationFilter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoRegisterActivationFilter.Addr(), uintptr(pActivationFilter))
+func CoRegisterActivationFilter(pActivationFilter *IActivationFilter) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoRegisterActivationFilter.Addr(), uintptr(unsafe.Pointer(pActivationFilter)))
 	return foundation.HRESULT(r1)
 }
 
 // CoRegisterChannelHook calls ole32!CoRegisterChannelHook.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregisterchannelhook
-func CoRegisterChannelHook(ExtensionUuid *win32.GUID, pChannelHook uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoRegisterChannelHook.Addr(), uintptr(unsafe.Pointer(ExtensionUuid)), uintptr(pChannelHook))
+func CoRegisterChannelHook(ExtensionUuid *win32.GUID, pChannelHook *IChannelHook) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoRegisterChannelHook.Addr(), uintptr(unsafe.Pointer(ExtensionUuid)), uintptr(unsafe.Pointer(pChannelHook)))
 	return foundation.HRESULT(r1)
 }
 
 // CoRegisterClassObject calls OLE32!CoRegisterClassObject.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coregisterclassobject
 // Minimum OS: windows5.0.
-func CoRegisterClassObject(rclsid *win32.GUID, pUnk uintptr, dwClsContext CLSCTX, flags uint32, lpdwRegister *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoRegisterClassObject.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(pUnk), uintptr(dwClsContext), uintptr(flags), uintptr(unsafe.Pointer(lpdwRegister)))
+func CoRegisterClassObject(rclsid *win32.GUID, pUnk *IUnknown, dwClsContext CLSCTX, flags uint32, lpdwRegister *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoRegisterClassObject.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwClsContext), uintptr(flags), uintptr(unsafe.Pointer(lpdwRegister)))
 	return foundation.HRESULT(r1)
 }
 
@@ -596,16 +596,16 @@ func CoRegisterDeviceCatalog(deviceInstanceId foundation.PWSTR, cookie *CO_DEVIC
 // CoRegisterInitializeSpy calls OLE32!CoRegisterInitializeSpy.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregisterinitializespy
 // Minimum OS: windows5.1.2600.
-func CoRegisterInitializeSpy(pSpy uintptr, puliCookie *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoRegisterInitializeSpy.Addr(), uintptr(pSpy), uintptr(unsafe.Pointer(puliCookie)))
+func CoRegisterInitializeSpy(pSpy *IInitializeSpy, puliCookie *uint64) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoRegisterInitializeSpy.Addr(), uintptr(unsafe.Pointer(pSpy)), uintptr(unsafe.Pointer(puliCookie)))
 	return foundation.HRESULT(r1)
 }
 
 // CoRegisterMallocSpy calls OLE32!CoRegisterMallocSpy.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregistermallocspy
 // Minimum OS: windows5.0.
-func CoRegisterMallocSpy(pMallocSpy uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoRegisterMallocSpy.Addr(), uintptr(pMallocSpy))
+func CoRegisterMallocSpy(pMallocSpy *IMallocSpy) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoRegisterMallocSpy.Addr(), uintptr(unsafe.Pointer(pMallocSpy)))
 	return foundation.HRESULT(r1)
 }
 
@@ -620,8 +620,8 @@ func CoRegisterPSClsid(riid *win32.GUID, rclsid *win32.GUID) foundation.HRESULT 
 // CoRegisterSurrogate calls OLE32!CoRegisterSurrogate.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coregistersurrogate
 // Minimum OS: windows5.0.
-func CoRegisterSurrogate(pSurrogate uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoRegisterSurrogate.Addr(), uintptr(pSurrogate))
+func CoRegisterSurrogate(pSurrogate *ISurrogate) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoRegisterSurrogate.Addr(), uintptr(unsafe.Pointer(pSurrogate)))
 	return foundation.HRESULT(r1)
 }
 
@@ -683,16 +683,16 @@ func CoRevokeMallocSpy() foundation.HRESULT {
 // CoSetCancelObject calls OLE32!CoSetCancelObject.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cosetcancelobject
 // Minimum OS: windows5.0.
-func CoSetCancelObject(pUnk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoSetCancelObject.Addr(), uintptr(pUnk))
+func CoSetCancelObject(pUnk *IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoSetCancelObject.Addr(), uintptr(unsafe.Pointer(pUnk)))
 	return foundation.HRESULT(r1)
 }
 
 // CoSetProxyBlanket calls OLE32!CoSetProxyBlanket.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cosetproxyblanket
 // Minimum OS: windows5.0.
-func CoSetProxyBlanket(pProxy uintptr, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName foundation.PWSTR, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoSetProxyBlanket.Addr(), uintptr(pProxy), uintptr(dwAuthnSvc), uintptr(dwAuthzSvc), uintptr(unsafe.Pointer(pServerPrincName)), uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(dwCapabilities))
+func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName foundation.PWSTR, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoSetProxyBlanket.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(dwAuthnSvc), uintptr(dwAuthzSvc), uintptr(unsafe.Pointer(pServerPrincName)), uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(dwCapabilities))
 	return foundation.HRESULT(r1)
 }
 
@@ -707,8 +707,8 @@ func CoSuspendClassObjects() foundation.HRESULT {
 // CoSwitchCallContext calls OLE32!CoSwitchCallContext.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coswitchcallcontext
 // Minimum OS: windows5.0.
-func CoSwitchCallContext(pNewObject uintptr, ppOldObject uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoSwitchCallContext.Addr(), uintptr(pNewObject), uintptr(ppOldObject))
+func CoSwitchCallContext(pNewObject *IUnknown, ppOldObject **IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoSwitchCallContext.Addr(), uintptr(unsafe.Pointer(pNewObject)), uintptr(unsafe.Pointer(ppOldObject)))
 	return foundation.HRESULT(r1)
 }
 
@@ -776,110 +776,110 @@ func CoWaitForMultipleObjects(dwFlags uint32, dwTimeout uint32, cHandles uint32,
 // CreateAntiMoniker calls OLE32!CreateAntiMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createantimoniker
 // Minimum OS: windows5.0.
-func CreateAntiMoniker(ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateAntiMoniker.Addr(), uintptr(ppmk))
+func CreateAntiMoniker(ppmk **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateAntiMoniker.Addr(), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateBindCtx calls OLE32!CreateBindCtx.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createbindctx
 // Minimum OS: windows5.0.
-func CreateBindCtx(reserved uint32, ppbc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateBindCtx.Addr(), uintptr(reserved), uintptr(ppbc))
+func CreateBindCtx(reserved uint32, ppbc **IBindCtx) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateBindCtx.Addr(), uintptr(reserved), uintptr(unsafe.Pointer(ppbc)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateClassMoniker calls OLE32!CreateClassMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createclassmoniker
 // Minimum OS: windows5.0.
-func CreateClassMoniker(rclsid *win32.GUID, ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateClassMoniker.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(ppmk))
+func CreateClassMoniker(rclsid *win32.GUID, ppmk **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateClassMoniker.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateDataAdviseHolder calls OLE32!CreateDataAdviseHolder.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-createdataadviseholder
 // Minimum OS: windows5.0.
-func CreateDataAdviseHolder(ppDAHolder uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDataAdviseHolder.Addr(), uintptr(ppDAHolder))
+func CreateDataAdviseHolder(ppDAHolder **IDataAdviseHolder) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateDataAdviseHolder.Addr(), uintptr(unsafe.Pointer(ppDAHolder)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateDataCache calls OLE32!CreateDataCache.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createdatacache
 // Minimum OS: windows5.0.
-func CreateDataCache(pUnkOuter uintptr, rclsid *win32.GUID, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDataCache.Addr(), uintptr(pUnkOuter), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
+func CreateDataCache(pUnkOuter *IUnknown, rclsid *win32.GUID, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateDataCache.Addr(), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateFileMoniker calls OLE32!CreateFileMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createfilemoniker
 // Minimum OS: windows5.0.
-func CreateFileMoniker(lpszPathName foundation.PWSTR, ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateFileMoniker.Addr(), uintptr(unsafe.Pointer(lpszPathName)), uintptr(ppmk))
+func CreateFileMoniker(lpszPathName foundation.PWSTR, ppmk **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateFileMoniker.Addr(), uintptr(unsafe.Pointer(lpszPathName)), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateGenericComposite calls OLE32!CreateGenericComposite.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-creategenericcomposite
 // Minimum OS: windows5.0.
-func CreateGenericComposite(pmkFirst uintptr, pmkRest uintptr, ppmkComposite uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateGenericComposite.Addr(), uintptr(pmkFirst), uintptr(pmkRest), uintptr(ppmkComposite))
+func CreateGenericComposite(pmkFirst *IMoniker, pmkRest *IMoniker, ppmkComposite **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateGenericComposite.Addr(), uintptr(unsafe.Pointer(pmkFirst)), uintptr(unsafe.Pointer(pmkRest)), uintptr(unsafe.Pointer(ppmkComposite)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateIUriBuilder calls URLMON!CreateIUriBuilder.
-func CreateIUriBuilder(pIUri uintptr, dwFlags uint32, dwReserved uintptr, ppIUriBuilder uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateIUriBuilder.Addr(), uintptr(pIUri), uintptr(dwFlags), uintptr(dwReserved), uintptr(ppIUriBuilder))
+func CreateIUriBuilder(pIUri *IUri, dwFlags uint32, dwReserved uintptr, ppIUriBuilder **IUriBuilder) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateIUriBuilder.Addr(), uintptr(unsafe.Pointer(pIUri)), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppIUriBuilder)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateItemMoniker calls OLE32!CreateItemMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createitemmoniker
 // Minimum OS: windows5.0.
-func CreateItemMoniker(lpszDelim foundation.PWSTR, lpszItem foundation.PWSTR, ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateItemMoniker.Addr(), uintptr(unsafe.Pointer(lpszDelim)), uintptr(unsafe.Pointer(lpszItem)), uintptr(ppmk))
+func CreateItemMoniker(lpszDelim foundation.PWSTR, lpszItem foundation.PWSTR, ppmk **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateItemMoniker.Addr(), uintptr(unsafe.Pointer(lpszDelim)), uintptr(unsafe.Pointer(lpszItem)), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateObjrefMoniker calls OLE32!CreateObjrefMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createobjrefmoniker
 // Minimum OS: windows5.0.
-func CreateObjrefMoniker(punk uintptr, ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateObjrefMoniker.Addr(), uintptr(punk), uintptr(ppmk))
+func CreateObjrefMoniker(punk *IUnknown, ppmk **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateObjrefMoniker.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
 // CreatePointerMoniker calls OLE32!CreatePointerMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createpointermoniker
 // Minimum OS: windows5.0.
-func CreatePointerMoniker(punk uintptr, ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreatePointerMoniker.Addr(), uintptr(punk), uintptr(ppmk))
+func CreatePointerMoniker(punk *IUnknown, ppmk **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreatePointerMoniker.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateStdProgressIndicator calls ole32!CreateStdProgressIndicator.
-func CreateStdProgressIndicator(hwndParent foundation.HWND, pszTitle foundation.PWSTR, pIbscCaller uintptr, ppIbsc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateStdProgressIndicator.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(pszTitle)), uintptr(pIbscCaller), uintptr(ppIbsc))
+func CreateStdProgressIndicator(hwndParent foundation.HWND, pszTitle foundation.PWSTR, pIbscCaller *IBindStatusCallback, ppIbsc **IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateStdProgressIndicator.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pIbscCaller)), uintptr(unsafe.Pointer(ppIbsc)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateUri calls URLMON!CreateUri.
-func CreateUri(pwzURI foundation.PWSTR, dwFlags URI_CREATE_FLAGS, dwReserved uintptr, ppURI uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateUri.Addr(), uintptr(unsafe.Pointer(pwzURI)), uintptr(dwFlags), uintptr(dwReserved), uintptr(ppURI))
+func CreateUri(pwzURI foundation.PWSTR, dwFlags URI_CREATE_FLAGS, dwReserved uintptr, ppURI **IUri) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateUri.Addr(), uintptr(unsafe.Pointer(pwzURI)), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppURI)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateUriFromMultiByteString calls urlmon!CreateUriFromMultiByteString.
-func CreateUriFromMultiByteString(pszANSIInputUri foundation.PSTR, dwEncodingFlags uint32, dwCodePage uint32, dwCreateFlags uint32, dwReserved uintptr, ppUri uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateUriFromMultiByteString.Addr(), uintptr(unsafe.Pointer(pszANSIInputUri)), uintptr(dwEncodingFlags), uintptr(dwCodePage), uintptr(dwCreateFlags), uintptr(dwReserved), uintptr(ppUri))
+func CreateUriFromMultiByteString(pszANSIInputUri foundation.PSTR, dwEncodingFlags uint32, dwCodePage uint32, dwCreateFlags uint32, dwReserved uintptr, ppUri **IUri) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateUriFromMultiByteString.Addr(), uintptr(unsafe.Pointer(pszANSIInputUri)), uintptr(dwEncodingFlags), uintptr(dwCodePage), uintptr(dwCreateFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppUri)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateUriWithFragment calls URLMON!CreateUriWithFragment.
-func CreateUriWithFragment(pwzURI foundation.PWSTR, pwzFragment foundation.PWSTR, dwFlags uint32, dwReserved uintptr, ppURI uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateUriWithFragment.Addr(), uintptr(unsafe.Pointer(pwzURI)), uintptr(unsafe.Pointer(pwzFragment)), uintptr(dwFlags), uintptr(dwReserved), uintptr(ppURI))
+func CreateUriWithFragment(pwzURI foundation.PWSTR, pwzFragment foundation.PWSTR, dwFlags uint32, dwReserved uintptr, ppURI **IUri) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateUriWithFragment.Addr(), uintptr(unsafe.Pointer(pwzURI)), uintptr(unsafe.Pointer(pwzFragment)), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppURI)))
 	return foundation.HRESULT(r1)
 }
 
@@ -899,16 +899,16 @@ func GetClassFile(szFilename foundation.PWSTR, pclsid *win32.GUID) foundation.HR
 
 // GetErrorInfo calls OLEAUT32!GetErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-geterrorinfo
-func GetErrorInfo(dwReserved uint32, pperrinfo uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetErrorInfo.Addr(), uintptr(dwReserved), uintptr(pperrinfo))
+func GetErrorInfo(dwReserved uint32, pperrinfo **IErrorInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetErrorInfo.Addr(), uintptr(dwReserved), uintptr(unsafe.Pointer(pperrinfo)))
 	return foundation.HRESULT(r1)
 }
 
 // GetRunningObjectTable calls OLE32!GetRunningObjectTable.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-getrunningobjecttable
 // Minimum OS: windows5.0.
-func GetRunningObjectTable(reserved uint32, pprot uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetRunningObjectTable.Addr(), uintptr(reserved), uintptr(pprot))
+func GetRunningObjectTable(reserved uint32, pprot **IRunningObjectTable) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetRunningObjectTable.Addr(), uintptr(reserved), uintptr(unsafe.Pointer(pprot)))
 	return foundation.HRESULT(r1)
 }
 
@@ -923,24 +923,24 @@ func IIDFromString(lpsz foundation.PWSTR, lpiid *win32.GUID) foundation.HRESULT 
 // MkParseDisplayName calls OLE32!MkParseDisplayName.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-mkparsedisplayname
 // Minimum OS: windows5.0.
-func MkParseDisplayName(pbc uintptr, szUserName foundation.PWSTR, pchEaten *uint32, ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMkParseDisplayName.Addr(), uintptr(pbc), uintptr(unsafe.Pointer(szUserName)), uintptr(unsafe.Pointer(pchEaten)), uintptr(ppmk))
+func MkParseDisplayName(pbc *IBindCtx, szUserName foundation.PWSTR, pchEaten *uint32, ppmk **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMkParseDisplayName.Addr(), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(szUserName)), uintptr(unsafe.Pointer(pchEaten)), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
 // MonikerCommonPrefixWith calls ole32!MonikerCommonPrefixWith.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-monikercommonprefixwith
 // Minimum OS: windows5.0.
-func MonikerCommonPrefixWith(pmkThis uintptr, pmkOther uintptr, ppmkCommon uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMonikerCommonPrefixWith.Addr(), uintptr(pmkThis), uintptr(pmkOther), uintptr(ppmkCommon))
+func MonikerCommonPrefixWith(pmkThis *IMoniker, pmkOther *IMoniker, ppmkCommon **IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMonikerCommonPrefixWith.Addr(), uintptr(unsafe.Pointer(pmkThis)), uintptr(unsafe.Pointer(pmkOther)), uintptr(unsafe.Pointer(ppmkCommon)))
 	return foundation.HRESULT(r1)
 }
 
 // MonikerRelativePathTo calls ole32!MonikerRelativePathTo.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-monikerrelativepathto
 // Minimum OS: windows5.0.
-func MonikerRelativePathTo(pmkSrc uintptr, pmkDest uintptr, ppmkRelPath uintptr, dwReserved foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMonikerRelativePathTo.Addr(), uintptr(pmkSrc), uintptr(pmkDest), uintptr(ppmkRelPath), uintptr(dwReserved))
+func MonikerRelativePathTo(pmkSrc *IMoniker, pmkDest *IMoniker, ppmkRelPath **IMoniker, dwReserved foundation.BOOL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMonikerRelativePathTo.Addr(), uintptr(unsafe.Pointer(pmkSrc)), uintptr(unsafe.Pointer(pmkDest)), uintptr(unsafe.Pointer(ppmkRelPath)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -954,8 +954,8 @@ func ProgIDFromCLSID(clsid *win32.GUID, lplpszProgID *foundation.PWSTR) foundati
 
 // SetErrorInfo calls OLEAUT32!SetErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-seterrorinfo
-func SetErrorInfo(dwReserved uint32, perrinfo uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetErrorInfo.Addr(), uintptr(dwReserved), uintptr(perrinfo))
+func SetErrorInfo(dwReserved uint32, perrinfo *IErrorInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSetErrorInfo.Addr(), uintptr(dwReserved), uintptr(unsafe.Pointer(perrinfo)))
 	return foundation.HRESULT(r1)
 }
 

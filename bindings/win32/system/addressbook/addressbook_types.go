@@ -535,9 +535,9 @@ type TABLE_NOTIFICATION struct {
 // WABEXTDISPLAY: https://learn.microsoft.com/windows/win32/api/wabapi/ns-wabapi-wabextdisplay
 type WABEXTDISPLAY struct {
 	CbSize       uint32
-	LpWABObject  [1]uint64
-	LpAdrBook    [1]uint64
-	LpPropObj    [1]uint64
+	LpWABObject  *IWABObject
+	LpAdrBook    *IAddrBook
+	LpPropObj    *IMAPIProp
 	FReadOnly    foundation.BOOL
 	FDataChanged foundation.BOOL
 	UlFlags      uint32
@@ -548,7 +548,7 @@ type WABEXTDISPLAY struct {
 // WABIMPORTPARAM: https://learn.microsoft.com/windows/win32/api/wabapi/ns-wabapi-wabimportparam
 type WABIMPORTPARAM struct {
 	CbSize       uint32
-	LpAdrBook    [1]uint64
+	LpAdrBook    *IAddrBook
 	HWnd         foundation.HWND
 	UlFlags      uint32
 	LpszFileName foundation.PSTR
@@ -570,7 +570,7 @@ type UPV struct {
 }
 
 // CALLERRELEASE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uintptr, uintptr).
+// syscall) using the shape func(uint32, *ITableData, *IMAPITable).
 type CALLERRELEASE uintptr
 
 // LPALLOCATEBUFFER is a callback pointer: create one with NewCallback (package
@@ -610,27 +610,27 @@ type LPFREEBUFFER uintptr
 type LPNOTIFCALLBACK uintptr
 
 // LPOPENSTREAMONFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(LPALLOCATEBUFFER, LPFREEBUFFER, uint32, *int8, *int8, uintptr) foundation.HRESULT.
+// syscall) using the shape func(LPALLOCATEBUFFER, LPFREEBUFFER, uint32, *int8, *int8, **systemcom.IStream) foundation.HRESULT.
 type LPOPENSTREAMONFILE uintptr
 
 // LPWABALLOCATEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, *unsafe.Pointer) int32.
+// syscall) using the shape func(*IWABObject, uint32, *unsafe.Pointer) int32.
 type LPWABALLOCATEBUFFER uintptr
 
 // LPWABALLOCATEMORE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer, *unsafe.Pointer) int32.
+// syscall) using the shape func(*IWABObject, uint32, unsafe.Pointer, *unsafe.Pointer) int32.
 type LPWABALLOCATEMORE uintptr
 
 // LPWABFREEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer) uint32.
+// syscall) using the shape func(*IWABObject, unsafe.Pointer) uint32.
 type LPWABFREEBUFFER uintptr
 
 // LPWABOPEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *WAB_PARAM, uint32) foundation.HRESULT.
+// syscall) using the shape func(**IAddrBook, **IWABObject, *WAB_PARAM, uint32) foundation.HRESULT.
 type LPWABOPEN uintptr
 
 // LPWABOPENEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *WAB_PARAM, uint32, LPALLOCATEBUFFER, LPALLOCATEMORE, LPFREEBUFFER) foundation.HRESULT.
+// syscall) using the shape func(**IAddrBook, **IWABObject, *WAB_PARAM, uint32, LPALLOCATEBUFFER, LPALLOCATEMORE, LPFREEBUFFER) foundation.HRESULT.
 type LPWABOPENEX uintptr
 
 // PFNIDLE is a callback pointer: create one with NewCallback (package

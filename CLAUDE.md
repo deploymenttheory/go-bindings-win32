@@ -171,8 +171,13 @@ DO-NOT-EDIT header are never touched.
 - **amd64-only for now**: arch-specific structs/functions emit the amd64
   variant (`chooseArchVariant`); arm64/x86 build-tag emission is a later
   milestone (M5).
-- **COM interfaces are not yet emitted** (M3): references to COM types
-  degrade to `unsafe.Pointer`/`uintptr` with diagnostics.
+- **COM interfaces are emitted** (`<pkg>_interfaces.go`): one Go struct per
+  interface (roots carry `LpVtbl *[1024]uintptr`; derived interfaces embed
+  their base, promoting its methods), methods dispatch through absolute
+  vtable slots computed from the metadata base chain, `IID_*` GUID vars are
+  generated, and raw `HRESULT` returns convert via `win32.Succeeded`/
+  `win32.HRESULTError`. Severed base embeddings (import cycles) demote to a
+  rootless vtable with a doc note; slots stay correct.
 - **Skipped constructs are tracked**: functions with by-value struct/float
   params, packed structs, struct-initializer constants → diagnostics, never
   broken output. A pre-pass (`computeSkippedTypes`) guarantees no reference

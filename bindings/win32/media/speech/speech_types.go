@@ -1800,7 +1800,7 @@ type SPPHRASE struct {
 }
 
 type SPPHRASEALT struct {
-	PPhrase                [1]uint64
+	PPhrase                *ISpPhraseBuilder
 	UlStartElementInParent uint32
 	CElementsInParent      uint32
 	CElementsInAlternate   uint32
@@ -1814,8 +1814,8 @@ type SPPHRASEALTREQUEST struct {
 	UlRequestAltCount uint32
 	PvResultExtra     unsafe.Pointer
 	CbResultExtra     uint32
-	PPhrase           [1]uint64
-	PRecoContext      [1]uint64
+	PPhrase           *ISpPhrase
+	PRecoContext      *ISpRecoContext
 }
 
 type SPPHRASEELEMENT struct {
@@ -1927,7 +1927,7 @@ type SPRECORESULTINFO struct {
 	HGrammar              SPGRAMMARHANDLE
 	UlSizeEngineData      uint32
 	PvEngineData          unsafe.Pointer
-	PPhrase               [1]uint64
+	PPhrase               *ISpPhraseBuilder
 	APhraseAlts           *SPPHRASEALT
 	UlNumAlts             uint32
 }

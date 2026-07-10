@@ -7,6 +7,7 @@ package dxmediaobjects
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 // DMO_ENUM_FLAGS: https://learn.microsoft.com/windows/win32/api/dmoreg/ne-dmoreg-dmo_enum_flags
@@ -114,14 +115,14 @@ type DMO_MEDIA_TYPE struct {
 	BTemporalCompression foundation.BOOL
 	LSampleSize          uint32
 	Formattype           win32.GUID
-	PUnk                 [1]uint64
+	PUnk                 *systemcom.IUnknown
 	CbFormat             uint32
 	PbFormat             *byte
 }
 
 // DMO_OUTPUT_DATA_BUFFER: https://learn.microsoft.com/windows/win32/api/mediaobj/ns-mediaobj-dmo_output_data_buffer
 type DMO_OUTPUT_DATA_BUFFER struct {
-	PBuffer      [1]uint64
+	PBuffer      *IMediaBuffer
 	DwStatus     uint32
 	RtTimestamp  int64
 	RtTimelength int64

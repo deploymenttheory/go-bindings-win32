@@ -6,6 +6,7 @@ package gameinput
 
 import (
 	"syscall"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
@@ -20,7 +21,7 @@ var (
 )
 
 // GameInputCreate calls GameInput!GameInputCreate.
-func GameInputCreate(gameInput uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGameInputCreate.Addr(), uintptr(gameInput))
+func GameInputCreate(gameInput **IGameInput) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGameInputCreate.Addr(), uintptr(unsafe.Pointer(gameInput)))
 	return foundation.HRESULT(r1)
 }

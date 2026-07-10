@@ -2717,11 +2717,11 @@ type ENTRY_CALLBACK uintptr
 type EXTDLL_ITERATERTLBALANCEDNODES uintptr
 
 // EXTDLL_QUERYDATABYTAG is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer, *byte, uint32) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4, uint32, unsafe.Pointer, *byte, uint32) foundation.HRESULT.
 type EXTDLL_QUERYDATABYTAG uintptr
 
 // EXTDLL_QUERYDATABYTAGEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer, *byte, uint32, *byte, uint32) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4, uint32, unsafe.Pointer, *byte, uint32, *byte, uint32) foundation.HRESULT.
 type EXTDLL_QUERYDATABYTAGEX uintptr
 
 // EXTS_JOB_PROCESS_CALLBACK is a callback pointer: create one with NewCallback (package
@@ -2733,11 +2733,11 @@ type EXTS_JOB_PROCESS_CALLBACK uintptr
 type EXTS_TABLE_ENTRY_CALLBACK uintptr
 
 // EXT_ANALYSIS_PLUGIN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, FA_EXTENSION_PLUGIN_PHASE, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4, FA_EXTENSION_PLUGIN_PHASE, *IDebugFailureAnalysis2) foundation.HRESULT.
 type EXT_ANALYSIS_PLUGIN uintptr
 
 // EXT_ANALYZER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PSTR, uint32, foundation.PSTR, uint32, *uint32, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, foundation.PSTR, uint32, foundation.PSTR, uint32, *uint32, *IDebugFailureAnalysis) foundation.HRESULT.
 type EXT_ANALYZER uintptr
 
 // EXT_DECODE_ERROR is a callback pointer: create one with NewCallback (package
@@ -2745,7 +2745,7 @@ type EXT_ANALYZER uintptr
 type EXT_DECODE_ERROR uintptr
 
 // EXT_GET_DEBUG_FAILURE_ANALYSIS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, win32.GUID, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4, uint32, win32.GUID, **IDebugFailureAnalysis2) foundation.HRESULT.
 type EXT_GET_DEBUG_FAILURE_ANALYSIS uintptr
 
 // EXT_GET_ENVIRONMENT_VARIABLE is a callback pointer: create one with NewCallback (package
@@ -2753,31 +2753,31 @@ type EXT_GET_DEBUG_FAILURE_ANALYSIS uintptr
 type EXT_GET_ENVIRONMENT_VARIABLE uintptr
 
 // EXT_GET_FAILURE_ANALYSIS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4, uint32, **IDebugFailureAnalysis) foundation.HRESULT.
 type EXT_GET_FAILURE_ANALYSIS uintptr
 
 // EXT_GET_FA_ENTRIES_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *uint32, **FA_ENTRY) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4, *uint32, **FA_ENTRY) foundation.HRESULT.
 type EXT_GET_FA_ENTRIES_DATA uintptr
 
 // EXT_GET_HANDLE_TRACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, uint32, *uint64, *uint64, uint32) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint32, uint32, *uint64, *uint64, uint32) foundation.HRESULT.
 type EXT_GET_HANDLE_TRACE uintptr
 
 // EXT_RELOAD_TRIAGER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4) foundation.HRESULT.
 type EXT_RELOAD_TRIAGER uintptr
 
 // EXT_TARGET_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *TARGET_DEBUG_INFO) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4, *TARGET_DEBUG_INFO) foundation.HRESULT.
 type EXT_TARGET_INFO uintptr
 
 // EXT_TRIAGE_FOLLOWUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PSTR, *DEBUG_TRIAGE_FOLLOWUP_INFO) uint32.
+// syscall) using the shape func(*IDebugClient4, foundation.PSTR, *DEBUG_TRIAGE_FOLLOWUP_INFO) uint32.
 type EXT_TRIAGE_FOLLOWUP uintptr
 
 // EXT_XML_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *EXT_CAB_XML_DATA) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient4, *EXT_CAB_XML_DATA) foundation.HRESULT.
 type EXT_XML_DATA uintptr
 
 // KDEXTS_LOCK_CALLBACKROUTINE is a callback pointer: create one with NewCallback (package
@@ -2789,7 +2789,7 @@ type KDEXTS_LOCK_CALLBACKROUTINE uintptr
 type KDEXT_DUMP_HANDLE_CALLBACK uintptr
 
 // PDEBUG_EXTENSION_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PSTR) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, foundation.PSTR) foundation.HRESULT.
 type PDEBUG_EXTENSION_CALL uintptr
 
 // PDEBUG_EXTENSION_CANUNLOAD is a callback pointer: create one with NewCallback (package
@@ -2805,7 +2805,7 @@ type PDEBUG_EXTENSION_INITIALIZE uintptr
 type PDEBUG_EXTENSION_KNOWN_STRUCT uintptr
 
 // PDEBUG_EXTENSION_KNOWN_STRUCT_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, uint64, foundation.PSTR, foundation.PSTR, *uint32) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint32, uint64, foundation.PSTR, foundation.PSTR, *uint32) foundation.HRESULT.
 type PDEBUG_EXTENSION_KNOWN_STRUCT_EX uintptr
 
 // PDEBUG_EXTENSION_NOTIFY is a callback pointer: create one with NewCallback (package
@@ -2813,11 +2813,11 @@ type PDEBUG_EXTENSION_KNOWN_STRUCT_EX uintptr
 type PDEBUG_EXTENSION_NOTIFY uintptr
 
 // PDEBUG_EXTENSION_PROVIDE_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, foundation.PWSTR, *uint64, *uint64, *uint32, *uint32) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint32, foundation.PWSTR, *uint64, *uint64, *uint32, *uint32) foundation.HRESULT.
 type PDEBUG_EXTENSION_PROVIDE_VALUE uintptr
 
 // PDEBUG_EXTENSION_QUERY_VALUE_NAMES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, foundation.PWSTR, uint32, *uint32) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint32, foundation.PWSTR, uint32, *uint32) foundation.HRESULT.
 type PDEBUG_EXTENSION_QUERY_VALUE_NAMES uintptr
 
 // PDEBUG_EXTENSION_UNINITIALIZE is a callback pointer: create one with NewCallback (package
@@ -2845,67 +2845,67 @@ type PDEBUG_STACK_PROVIDER_FREESTACKSYMFRAMES uintptr
 type PDEBUG_STACK_PROVIDER_RECONSTRUCTSTACK uintptr
 
 // PENUMERATE_HANDLES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, uint64, uint32, KDEXT_DUMP_HANDLE_CALLBACK, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, uint64, uint32, KDEXT_DUMP_HANDLE_CALLBACK, unsafe.Pointer) foundation.HRESULT.
 type PENUMERATE_HANDLES uintptr
 
 // PENUMERATE_HASH_TABLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, EXTS_TABLE_ENTRY_CALLBACK, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, EXTS_TABLE_ENTRY_CALLBACK, unsafe.Pointer) foundation.HRESULT.
 type PENUMERATE_HASH_TABLE uintptr
 
 // PENUMERATE_JOB_PROCESSES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, EXTS_JOB_PROCESS_CALLBACK, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, EXTS_JOB_PROCESS_CALLBACK, unsafe.Pointer) foundation.HRESULT.
 type PENUMERATE_JOB_PROCESSES uintptr
 
 // PENUMERATE_SYSTEM_LOCKS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, KDEXTS_LOCK_CALLBACKROUTINE, unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint32, KDEXTS_LOCK_CALLBACKROUTINE, unsafe.Pointer) foundation.HRESULT.
 type PENUMERATE_SYSTEM_LOCKS uintptr
 
 // PFIND_FILELOCK_OWNERINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *KDEXT_FILELOCK_OWNER) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, *KDEXT_FILELOCK_OWNER) foundation.HRESULT.
 type PFIND_FILELOCK_OWNERINFO uintptr
 
 // PFIND_MATCHING_PROCESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *KDEXT_PROCESS_FIND_PARAMS, *uint64) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, *KDEXT_PROCESS_FIND_PARAMS, *uint64) foundation.HRESULT.
 type PFIND_MATCHING_PROCESS uintptr
 
 // PFIND_MATCHING_THREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *KDEXT_THREAD_FIND_PARAMS) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, *KDEXT_THREAD_FIND_PARAMS) foundation.HRESULT.
 type PFIND_MATCHING_THREAD uintptr
 
 // PGET_CPU_MICROCODE_VERSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *DEBUG_CPU_MICROCODE_VERSION) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, *DEBUG_CPU_MICROCODE_VERSION) foundation.HRESULT.
 type PGET_CPU_MICROCODE_VERSION uintptr
 
 // PGET_CPU_PSPEED_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *DEBUG_CPU_SPEED_INFO) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, *DEBUG_CPU_SPEED_INFO) foundation.HRESULT.
 type PGET_CPU_PSPEED_INFO uintptr
 
 // PGET_DEVICE_OBJECT_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, *DEBUG_DEVICE_OBJECT_INFO) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, *DEBUG_DEVICE_OBJECT_INFO) foundation.HRESULT.
 type PGET_DEVICE_OBJECT_INFO uintptr
 
 // PGET_DRIVER_OBJECT_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, *DEBUG_DRIVER_OBJECT_INFO) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, *DEBUG_DRIVER_OBJECT_INFO) foundation.HRESULT.
 type PGET_DRIVER_OBJECT_INFO uintptr
 
 // PGET_FULL_IMAGE_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, *foundation.PSTR) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, *foundation.PSTR) foundation.HRESULT.
 type PGET_FULL_IMAGE_NAME uintptr
 
 // PGET_IRP_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, *DEBUG_IRP_INFO) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, *DEBUG_IRP_INFO) foundation.HRESULT.
 type PGET_IRP_INFO uintptr
 
 // PGET_PNP_TRIAGE_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *DEBUG_PNP_TRIAGE_INFO) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, *DEBUG_PNP_TRIAGE_INFO) foundation.HRESULT.
 type PGET_PNP_TRIAGE_INFO uintptr
 
 // PGET_POOL_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, *DEBUG_POOL_DATA) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, *DEBUG_POOL_DATA) foundation.HRESULT.
 type PGET_POOL_DATA uintptr
 
 // PGET_POOL_REGION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, *DEBUG_POOL_REGION) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, *DEBUG_POOL_REGION) foundation.HRESULT.
 type PGET_POOL_REGION uintptr
 
 // PGET_POOL_TAG_DESCRIPTION is a callback pointer: create one with NewCallback (package
@@ -2913,15 +2913,15 @@ type PGET_POOL_REGION uintptr
 type PGET_POOL_TAG_DESCRIPTION uintptr
 
 // PGET_PROCESS_COMMIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *uint64, *uint32, **PROCESS_COMMIT_USAGE) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, *uint64, *uint32, **PROCESS_COMMIT_USAGE) foundation.HRESULT.
 type PGET_PROCESS_COMMIT uintptr
 
 // PGET_SMBIOS_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *DEBUG_SMBIOS_INFO) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, *DEBUG_SMBIOS_INFO) foundation.HRESULT.
 type PGET_SMBIOS_INFO uintptr
 
 // PKDEXTS_GET_PTE_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, *KDEXTS_PTE_INFO) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, uint64, *KDEXTS_PTE_INFO) foundation.HRESULT.
 type PKDEXTS_GET_PTE_INFO uintptr
 
 // PSYM_DUMP_FIELD_CALLBACK is a callback pointer: create one with NewCallback (package
@@ -3069,5 +3069,5 @@ type PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32 uintptr
 type PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64 uintptr
 
 // FnDebugFailureAnalysisCreateInstance is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PWSTR, uint32, *win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*IDebugClient, foundation.PWSTR, uint32, *win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
 type FnDebugFailureAnalysisCreateInstance uintptr

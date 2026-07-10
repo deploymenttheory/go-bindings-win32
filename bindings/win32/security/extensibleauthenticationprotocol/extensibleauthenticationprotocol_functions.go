@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+	dataxmlmsxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/msxml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -55,16 +56,16 @@ func EapHostPeerClearConnection(pConnectionId *win32.GUID, ppEapError **EAP_ERRO
 // EapHostPeerConfigXml2Blob calls eappcfg!EapHostPeerConfigXml2Blob.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerconfigxml2blob
 // Minimum OS: windows6.0.6000.
-func EapHostPeerConfigXml2Blob(dwFlags uint32, pConfigDoc uintptr, pdwSizeOfConfigOut *uint32, ppConfigOut **byte, pEapMethodType *EAP_METHOD_TYPE, ppEapError **EAP_ERROR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerConfigXml2Blob.Addr(), uintptr(dwFlags), uintptr(pConfigDoc), uintptr(unsafe.Pointer(pdwSizeOfConfigOut)), uintptr(unsafe.Pointer(ppConfigOut)), uintptr(unsafe.Pointer(pEapMethodType)), uintptr(unsafe.Pointer(ppEapError)))
+func EapHostPeerConfigXml2Blob(dwFlags uint32, pConfigDoc *dataxmlmsxml.IXMLDOMNode, pdwSizeOfConfigOut *uint32, ppConfigOut **byte, pEapMethodType *EAP_METHOD_TYPE, ppEapError **EAP_ERROR) uint32 {
+	r1, _, _ := syscall.SyscallN(procEapHostPeerConfigXml2Blob.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pConfigDoc)), uintptr(unsafe.Pointer(pdwSizeOfConfigOut)), uintptr(unsafe.Pointer(ppConfigOut)), uintptr(unsafe.Pointer(pEapMethodType)), uintptr(unsafe.Pointer(ppEapError)))
 	return uint32(r1)
 }
 
 // EapHostPeerCredentialsXml2Blob calls eappcfg!EapHostPeerCredentialsXml2Blob.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeercredentialsxml2blob
 // Minimum OS: windows6.0.6000.
-func EapHostPeerCredentialsXml2Blob(dwFlags uint32, pCredentialsDoc uintptr, dwSizeOfConfigIn uint32, pConfigIn *byte, pdwSizeOfCredentialsOut *uint32, ppCredentialsOut **byte, pEapMethodType *EAP_METHOD_TYPE, ppEapError **EAP_ERROR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerCredentialsXml2Blob.Addr(), uintptr(dwFlags), uintptr(pCredentialsDoc), uintptr(dwSizeOfConfigIn), uintptr(unsafe.Pointer(pConfigIn)), uintptr(unsafe.Pointer(pdwSizeOfCredentialsOut)), uintptr(unsafe.Pointer(ppCredentialsOut)), uintptr(unsafe.Pointer(pEapMethodType)), uintptr(unsafe.Pointer(ppEapError)))
+func EapHostPeerCredentialsXml2Blob(dwFlags uint32, pCredentialsDoc *dataxmlmsxml.IXMLDOMNode, dwSizeOfConfigIn uint32, pConfigIn *byte, pdwSizeOfCredentialsOut *uint32, ppCredentialsOut **byte, pEapMethodType *EAP_METHOD_TYPE, ppEapError **EAP_ERROR) uint32 {
+	r1, _, _ := syscall.SyscallN(procEapHostPeerCredentialsXml2Blob.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pCredentialsDoc)), uintptr(dwSizeOfConfigIn), uintptr(unsafe.Pointer(pConfigIn)), uintptr(unsafe.Pointer(pdwSizeOfCredentialsOut)), uintptr(unsafe.Pointer(ppCredentialsOut)), uintptr(unsafe.Pointer(pEapMethodType)), uintptr(unsafe.Pointer(ppEapError)))
 	return uint32(r1)
 }
 

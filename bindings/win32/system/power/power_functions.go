@@ -11,7 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
-	systemthreading "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
 
@@ -332,7 +331,7 @@ func PowerCreatePossibleSetting(RootSystemPowerKey systemregistry.HKEY, SubGroup
 // PowerCreateRequest calls KERNEL32!PowerCreateRequest.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-powercreaterequest
 // Minimum OS: windows6.1.
-func PowerCreateRequest(Context *systemthreading.REASON_CONTEXT) (foundation.HANDLE, error) {
+func PowerCreateRequest(Context unsafe.Pointer) (foundation.HANDLE, error) {
 	r1, _, e1 := syscall.SyscallN(procPowerCreateRequest.Addr(), uintptr(unsafe.Pointer(Context)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {

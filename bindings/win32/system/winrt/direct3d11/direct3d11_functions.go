@@ -6,9 +6,12 @@ package direct3d11
 
 import (
 	"syscall"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
+	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 )
 
 var (
@@ -22,14 +25,14 @@ var (
 
 // CreateDirect3D11DeviceFromDXGIDevice calls d3d11!CreateDirect3D11DeviceFromDXGIDevice.
 // https://learn.microsoft.com/windows/win32/api/windows.graphics.directx.direct3d11.interop/nf-windows-graphics-directx-direct3d11-interop-createdirect3d11devicefromdxgidevice
-func CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice uintptr, graphicsDevice uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDirect3D11DeviceFromDXGIDevice.Addr(), uintptr(dxgiDevice), uintptr(graphicsDevice))
+func CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, graphicsDevice **systemwinrt.IInspectable) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateDirect3D11DeviceFromDXGIDevice.Addr(), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(graphicsDevice)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateDirect3D11SurfaceFromDXGISurface calls d3d11!CreateDirect3D11SurfaceFromDXGISurface.
 // https://learn.microsoft.com/windows/win32/api/windows.graphics.directx.direct3d11.interop/nf-windows-graphics-directx-direct3d11-interop-createdirect3d11surfacefromdxgisurface
-func CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface uintptr, graphicsSurface uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDirect3D11SurfaceFromDXGISurface.Addr(), uintptr(dgxiSurface), uintptr(graphicsSurface))
+func CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface *graphicsdxgi.IDXGISurface, graphicsSurface **systemwinrt.IInspectable) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateDirect3D11SurfaceFromDXGISurface.Addr(), uintptr(unsafe.Pointer(dgxiSurface)), uintptr(unsafe.Pointer(graphicsSurface)))
 	return foundation.HRESULT(r1)
 }

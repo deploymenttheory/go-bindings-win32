@@ -10,7 +10,9 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -33,15 +35,15 @@ var (
 
 // DCompositionAttachMouseDragToHwnd calls dcomp!DCompositionAttachMouseDragToHwnd.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionattachmousedragtohwnd
-func DCompositionAttachMouseDragToHwnd(visual uintptr, hwnd foundation.HWND, enable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseDragToHwnd.Addr(), uintptr(visual), uintptr(hwnd), uintptr(enable))
+func DCompositionAttachMouseDragToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable foundation.BOOL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseDragToHwnd.Addr(), uintptr(unsafe.Pointer(visual)), uintptr(hwnd), uintptr(enable))
 	return foundation.HRESULT(r1)
 }
 
 // DCompositionAttachMouseWheelToHwnd calls dcomp!DCompositionAttachMouseWheelToHwnd.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionattachmousewheeltohwnd
-func DCompositionAttachMouseWheelToHwnd(visual uintptr, hwnd foundation.HWND, enable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseWheelToHwnd.Addr(), uintptr(visual), uintptr(hwnd), uintptr(enable))
+func DCompositionAttachMouseWheelToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable foundation.BOOL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseWheelToHwnd.Addr(), uintptr(unsafe.Pointer(visual)), uintptr(hwnd), uintptr(enable))
 	return foundation.HRESULT(r1)
 }
 
@@ -55,23 +57,23 @@ func DCompositionBoostCompositorClock(enable foundation.BOOL) foundation.HRESULT
 // DCompositionCreateDevice calls dcomp!DCompositionCreateDevice.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice
 // Minimum OS: windows8.0.
-func DCompositionCreateDevice(dxgiDevice uintptr, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice.Addr(), uintptr(dxgiDevice), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
+func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice.Addr(), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
 	return foundation.HRESULT(r1)
 }
 
 // DCompositionCreateDevice2 calls dcomp!DCompositionCreateDevice2.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice2
 // Minimum OS: windows8.1.
-func DCompositionCreateDevice2(renderingDevice uintptr, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice2.Addr(), uintptr(renderingDevice), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
+func DCompositionCreateDevice2(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice2.Addr(), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
 	return foundation.HRESULT(r1)
 }
 
 // DCompositionCreateDevice3 calls dcomp!DCompositionCreateDevice3.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice3
-func DCompositionCreateDevice3(renderingDevice uintptr, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice3.Addr(), uintptr(renderingDevice), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
+func DCompositionCreateDevice3(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice3.Addr(), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
 	return foundation.HRESULT(r1)
 }
 

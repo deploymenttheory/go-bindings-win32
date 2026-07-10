@@ -624,7 +624,7 @@ type ADSPROPINITPARAMS struct {
 	DwSize         uint32
 	DwFlags        uint32
 	Hr             foundation.HRESULT
-	PDsObj         [1]uint64
+	PDsObj         *IDirectoryObject
 	PwzCN          foundation.PWSTR
 	PWritableAttrs *ADS_ATTR_INFO
 }
@@ -1715,7 +1715,7 @@ type OPENQUERYWINDOW struct {
 	ClsidHandler       win32.GUID
 	PHandlerParameters unsafe.Pointer
 	ClsidDefaultForm   win32.GUID
-	PPersistQuery      [1]uint64
+	PPersistQuery      *IPersistQuery
 	Anonymous          uintptr
 }
 

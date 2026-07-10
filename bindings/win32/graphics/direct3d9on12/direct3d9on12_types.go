@@ -6,20 +6,21 @@ package direct3d9on12
 
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type D3D9ON12_ARGS struct {
 	Enable9On12   foundation.BOOL
-	PD3D12Device  [1]uint64
-	PpD3D12Queues [2]uint64
+	PD3D12Device  *systemcom.IUnknown
+	PpD3D12Queues [2]*systemcom.IUnknown
 	NumQueues     uint32
 	NodeMask      uint32
 }
 
 // PFN_Direct3DCreate9On12 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *D3D9ON12_ARGS, uint32) uintptr.
+// syscall) using the shape func(uint32, *D3D9ON12_ARGS, uint32) *graphicsdirect3d9.IDirect3D9.
 type PFN_Direct3DCreate9On12 uintptr
 
 // PFN_Direct3DCreate9On12Ex is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *D3D9ON12_ARGS, uint32, uintptr) foundation.HRESULT.
+// syscall) using the shape func(uint32, *D3D9ON12_ARGS, uint32, **graphicsdirect3d9.IDirect3D9Ex) foundation.HRESULT.
 type PFN_Direct3DCreate9On12Ex uintptr

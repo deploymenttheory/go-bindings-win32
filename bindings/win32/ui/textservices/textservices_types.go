@@ -366,7 +366,7 @@ type TF_DISPLAYATTRIBUTE struct {
 
 // TF_HALTCOND: https://learn.microsoft.com/windows/win32/api/msctf/ns-msctf-tf_haltcond
 type TF_HALTCOND struct {
-	PHaltRange [1]uint64
+	PHaltRange *ITfRange
 	AHaltPos   TfAnchor
 	DwFlags    uint32
 }
@@ -447,7 +447,7 @@ type TF_PROPERTYVAL struct {
 
 // TF_SELECTION: https://learn.microsoft.com/windows/win32/api/msctf/ns-msctf-tf_selection
 type TF_SELECTION struct {
-	Range [1]uint64
+	Range *ITfRange
 	Style TF_SELECTIONSTYLE
 }
 
@@ -485,8 +485,8 @@ type TS_SELECTION_ACP struct {
 
 // TS_SELECTION_ANCHOR: https://learn.microsoft.com/windows/win32/api/textstor/ns-textstor-ts_selection_anchor
 type TS_SELECTION_ANCHOR struct {
-	PaStart [1]uint64
-	PaEnd   [1]uint64
+	PaStart *IAnchor
+	PaEnd   *IAnchor
 	Style   TS_SELECTIONSTYLE
 }
 

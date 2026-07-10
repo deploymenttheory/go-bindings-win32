@@ -4226,13 +4226,13 @@ type IEISXMLNSREGISTEREDFN uintptr
 type IEREGISTERXMLNSFN uintptr
 
 // SHOWHTMLDIALOGEXFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uintptr, uint32, *systemvariant.VARIANT, foundation.PWSTR, *systemvariant.VARIANT) foundation.HRESULT.
+// syscall) using the shape func(foundation.HWND, *systemcom.IMoniker, uint32, *systemvariant.VARIANT, foundation.PWSTR, *systemvariant.VARIANT) foundation.HRESULT.
 type SHOWHTMLDIALOGEXFN uintptr
 
 // SHOWHTMLDIALOGFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uintptr, *systemvariant.VARIANT, foundation.PWSTR, *systemvariant.VARIANT) foundation.HRESULT.
+// syscall) using the shape func(foundation.HWND, *systemcom.IMoniker, *systemvariant.VARIANT, foundation.PWSTR, *systemvariant.VARIANT) foundation.HRESULT.
 type SHOWHTMLDIALOGFN uintptr
 
 // SHOWMODELESSHTMLDIALOGFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uintptr, *systemvariant.VARIANT, *systemvariant.VARIANT, uintptr) foundation.HRESULT.
+// syscall) using the shape func(foundation.HWND, *systemcom.IMoniker, *systemvariant.VARIANT, *systemvariant.VARIANT, **IHTMLWindow2) foundation.HRESULT.
 type SHOWMODELESSHTMLDIALOGFN uintptr

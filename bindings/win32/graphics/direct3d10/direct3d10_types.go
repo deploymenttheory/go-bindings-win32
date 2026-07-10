@@ -1266,7 +1266,7 @@ type D3D10_PASS_DESC struct {
 
 // D3D10_PASS_SHADER_DESC: https://learn.microsoft.com/windows/win32/api/d3d10effect/ns-d3d10effect-d3d10_pass_shader_desc
 type D3D10_PASS_SHADER_DESC struct {
-	PShaderVariable [1]uint64
+	PShaderVariable *ID3D10EffectShaderVariable
 	ShaderIndex     uint32
 }
 
@@ -1824,9 +1824,9 @@ type D3D10_VIEWPORT struct {
 }
 
 // PFN_D3D10_CREATE_DEVICE1 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, D3D10_DRIVER_TYPE, foundation.HMODULE, uint32, D3D10_FEATURE_LEVEL1, uint32, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*graphicsdxgi.IDXGIAdapter, D3D10_DRIVER_TYPE, foundation.HMODULE, uint32, D3D10_FEATURE_LEVEL1, uint32, **ID3D10Device1) foundation.HRESULT.
 type PFN_D3D10_CREATE_DEVICE1 uintptr
 
 // PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, D3D10_DRIVER_TYPE, foundation.HMODULE, uint32, D3D10_FEATURE_LEVEL1, uint32, *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*graphicsdxgi.IDXGIAdapter, D3D10_DRIVER_TYPE, foundation.HMODULE, uint32, D3D10_FEATURE_LEVEL1, uint32, *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, **graphicsdxgi.IDXGISwapChain, **ID3D10Device1) foundation.HRESULT.
 type PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 uintptr

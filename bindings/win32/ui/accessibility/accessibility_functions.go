@@ -145,16 +145,16 @@ func AccSetRunningUtilityState(hwndApp foundation.HWND, dwUtilityStateMask uint3
 // AccessibleChildren calls OLEACC!AccessibleChildren.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessiblechildren
 // Minimum OS: windows5.0.
-func AccessibleChildren(paccContainer uintptr, iChildStart int32, cChildren int32, rgvarChildren *systemvariant.VARIANT, pcObtained *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAccessibleChildren.Addr(), uintptr(paccContainer), uintptr(iChildStart), uintptr(cChildren), uintptr(unsafe.Pointer(rgvarChildren)), uintptr(unsafe.Pointer(pcObtained)))
+func AccessibleChildren(paccContainer *IAccessible, iChildStart int32, cChildren int32, rgvarChildren *systemvariant.VARIANT, pcObtained *int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAccessibleChildren.Addr(), uintptr(unsafe.Pointer(paccContainer)), uintptr(iChildStart), uintptr(cChildren), uintptr(unsafe.Pointer(rgvarChildren)), uintptr(unsafe.Pointer(pcObtained)))
 	return foundation.HRESULT(r1)
 }
 
 // AccessibleObjectFromEvent calls OLEACC!AccessibleObjectFromEvent.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessibleobjectfromevent
 // Minimum OS: windows5.0.
-func AccessibleObjectFromEvent(hwnd foundation.HWND, dwId uint32, dwChildId uint32, ppacc uintptr, pvarChild *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromEvent.Addr(), uintptr(hwnd), uintptr(dwId), uintptr(dwChildId), uintptr(ppacc), uintptr(unsafe.Pointer(pvarChild)))
+func AccessibleObjectFromEvent(hwnd foundation.HWND, dwId uint32, dwChildId uint32, ppacc **IAccessible, pvarChild *systemvariant.VARIANT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromEvent.Addr(), uintptr(hwnd), uintptr(dwId), uintptr(dwChildId), uintptr(unsafe.Pointer(ppacc)), uintptr(unsafe.Pointer(pvarChild)))
 	return foundation.HRESULT(r1)
 }
 
@@ -300,8 +300,8 @@ func LegacyIAccessiblePattern_DoDefaultAction(hobj HUIAPATTERNOBJECT) foundation
 // LegacyIAccessiblePattern_GetIAccessible calls UIAutomationCore!LegacyIAccessiblePattern_GetIAccessible.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-legacyiaccessiblepattern_getiaccessible
 // Minimum OS: windows6.1.
-func LegacyIAccessiblePattern_GetIAccessible(hobj HUIAPATTERNOBJECT, pAccessible uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_GetIAccessible.Addr(), uintptr(hobj), uintptr(pAccessible))
+func LegacyIAccessiblePattern_GetIAccessible(hobj HUIAPATTERNOBJECT, pAccessible **IAccessible) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_GetIAccessible.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pAccessible)))
 	return foundation.HRESULT(r1)
 }
 
@@ -324,8 +324,8 @@ func LegacyIAccessiblePattern_SetValue(hobj HUIAPATTERNOBJECT, szValue foundatio
 // LresultFromObject calls OLEACC!LresultFromObject.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-lresultfromobject
 // Minimum OS: windows5.0.
-func LresultFromObject(riid *win32.GUID, wParam foundation.WPARAM, punk uintptr) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procLresultFromObject.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(wParam), uintptr(punk))
+func LresultFromObject(riid *win32.GUID, wParam foundation.WPARAM, punk *systemcom.IUnknown) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procLresultFromObject.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(wParam), uintptr(unsafe.Pointer(punk)))
 	return foundation.LRESULT(r1)
 }
 
@@ -654,8 +654,8 @@ func UiaDisconnectAllProviders() foundation.HRESULT {
 // UiaDisconnectProvider calls UIAutomationCore!UiaDisconnectProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiadisconnectprovider
 // Minimum OS: windows8.0.
-func UiaDisconnectProvider(pProvider uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaDisconnectProvider.Addr(), uintptr(pProvider))
+func UiaDisconnectProvider(pProvider *IRawElementProviderSimple) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaDisconnectProvider.Addr(), uintptr(unsafe.Pointer(pProvider)))
 	return foundation.HRESULT(r1)
 }
 
@@ -710,16 +710,16 @@ func UiaGetPropertyValue(hnode HUIANODE, propertyId int32, pValue *systemvariant
 // UiaGetReservedMixedAttributeValue calls UIAutomationCore!UiaGetReservedMixedAttributeValue.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetreservedmixedattributevalue
 // Minimum OS: windows5.1.2600.
-func UiaGetReservedMixedAttributeValue(punkMixedAttributeValue uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaGetReservedMixedAttributeValue.Addr(), uintptr(punkMixedAttributeValue))
+func UiaGetReservedMixedAttributeValue(punkMixedAttributeValue **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaGetReservedMixedAttributeValue.Addr(), uintptr(unsafe.Pointer(punkMixedAttributeValue)))
 	return foundation.HRESULT(r1)
 }
 
 // UiaGetReservedNotSupportedValue calls UIAutomationCore!UiaGetReservedNotSupportedValue.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetreservednotsupportedvalue
 // Minimum OS: windows5.1.2600.
-func UiaGetReservedNotSupportedValue(punkNotSupportedValue uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaGetReservedNotSupportedValue.Addr(), uintptr(punkNotSupportedValue))
+func UiaGetReservedNotSupportedValue(punkNotSupportedValue **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaGetReservedNotSupportedValue.Addr(), uintptr(unsafe.Pointer(punkNotSupportedValue)))
 	return foundation.HRESULT(r1)
 }
 
@@ -782,16 +782,16 @@ func UiaHasServerSideProvider(hwnd foundation.HWND) foundation.BOOL {
 // UiaHostProviderFromHwnd calls UIAutomationCore!UiaHostProviderFromHwnd.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiahostproviderfromhwnd
 // Minimum OS: windows5.1.2600.
-func UiaHostProviderFromHwnd(hwnd foundation.HWND, ppProvider uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaHostProviderFromHwnd.Addr(), uintptr(hwnd), uintptr(ppProvider))
+func UiaHostProviderFromHwnd(hwnd foundation.HWND, ppProvider **IRawElementProviderSimple) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaHostProviderFromHwnd.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(ppProvider)))
 	return foundation.HRESULT(r1)
 }
 
 // UiaIAccessibleFromProvider calls UIAutomationCore!UiaIAccessibleFromProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaiaccessiblefromprovider
 // Minimum OS: windows8.0.
-func UiaIAccessibleFromProvider(pProvider uintptr, dwFlags uint32, ppAccessible uintptr, pvarChild *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaIAccessibleFromProvider.Addr(), uintptr(pProvider), uintptr(dwFlags), uintptr(ppAccessible), uintptr(unsafe.Pointer(pvarChild)))
+func UiaIAccessibleFromProvider(pProvider *IRawElementProviderSimple, dwFlags uint32, ppAccessible **IAccessible, pvarChild *systemvariant.VARIANT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaIAccessibleFromProvider.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAccessible)), uintptr(unsafe.Pointer(pvarChild)))
 	return foundation.HRESULT(r1)
 }
 
@@ -830,8 +830,8 @@ func UiaNodeFromHandle(hwnd foundation.HWND, phnode *HUIANODE) foundation.HRESUL
 // UiaNodeFromProvider calls UIAutomationCore!UiaNodeFromProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianodefromprovider
 // Minimum OS: windows5.1.2600.
-func UiaNodeFromProvider(pProvider uintptr, phnode *HUIANODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaNodeFromProvider.Addr(), uintptr(pProvider), uintptr(unsafe.Pointer(phnode)))
+func UiaNodeFromProvider(pProvider *IRawElementProviderSimple, phnode *HUIANODE) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaNodeFromProvider.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(unsafe.Pointer(phnode)))
 	return foundation.HRESULT(r1)
 }
 
@@ -854,64 +854,64 @@ func UiaPatternRelease(hobj HUIAPATTERNOBJECT) foundation.BOOL {
 // UiaProviderForNonClient calls UIAutomationCore!UiaProviderForNonClient.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaproviderfornonclient
 // Minimum OS: windows8.0.
-func UiaProviderForNonClient(hwnd foundation.HWND, idObject int32, idChild int32, ppProvider uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaProviderForNonClient.Addr(), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(ppProvider))
+func UiaProviderForNonClient(hwnd foundation.HWND, idObject int32, idChild int32, ppProvider **IRawElementProviderSimple) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaProviderForNonClient.Addr(), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(ppProvider)))
 	return foundation.HRESULT(r1)
 }
 
 // UiaProviderFromIAccessible calls UIAutomationCore!UiaProviderFromIAccessible.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaproviderfromiaccessible
 // Minimum OS: windows8.0.
-func UiaProviderFromIAccessible(pAccessible uintptr, idChild int32, dwFlags uint32, ppProvider uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaProviderFromIAccessible.Addr(), uintptr(pAccessible), uintptr(idChild), uintptr(dwFlags), uintptr(ppProvider))
+func UiaProviderFromIAccessible(pAccessible *IAccessible, idChild int32, dwFlags uint32, ppProvider **IRawElementProviderSimple) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaProviderFromIAccessible.Addr(), uintptr(unsafe.Pointer(pAccessible)), uintptr(idChild), uintptr(dwFlags), uintptr(unsafe.Pointer(ppProvider)))
 	return foundation.HRESULT(r1)
 }
 
 // UiaRaiseActiveTextPositionChangedEvent calls UIAutomationCore!UiaRaiseActiveTextPositionChangedEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseactivetextpositionchangedevent
 // Minimum OS: windows8.1.
-func UiaRaiseActiveTextPositionChangedEvent(provider uintptr, textRange uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaRaiseActiveTextPositionChangedEvent.Addr(), uintptr(provider), uintptr(textRange))
+func UiaRaiseActiveTextPositionChangedEvent(provider *IRawElementProviderSimple, textRange *ITextRangeProvider) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaRaiseActiveTextPositionChangedEvent.Addr(), uintptr(unsafe.Pointer(provider)), uintptr(unsafe.Pointer(textRange)))
 	return foundation.HRESULT(r1)
 }
 
 // UiaRaiseAutomationEvent calls UIAutomationCore!UiaRaiseAutomationEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseautomationevent
 // Minimum OS: windows5.1.2600.
-func UiaRaiseAutomationEvent(pProvider uintptr, id UIA_EVENT_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaRaiseAutomationEvent.Addr(), uintptr(pProvider), uintptr(id))
+func UiaRaiseAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_ID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaRaiseAutomationEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(id))
 	return foundation.HRESULT(r1)
 }
 
 // UiaRaiseChangesEvent calls UIAutomationCore!UiaRaiseChangesEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisechangesevent
 // Minimum OS: windows10.0.10240.
-func UiaRaiseChangesEvent(pProvider uintptr, eventIdCount int32, pUiaChanges *UiaChangeInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaRaiseChangesEvent.Addr(), uintptr(pProvider), uintptr(eventIdCount), uintptr(unsafe.Pointer(pUiaChanges)))
+func UiaRaiseChangesEvent(pProvider *IRawElementProviderSimple, eventIdCount int32, pUiaChanges *UiaChangeInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaRaiseChangesEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(eventIdCount), uintptr(unsafe.Pointer(pUiaChanges)))
 	return foundation.HRESULT(r1)
 }
 
 // UiaRaiseNotificationEvent calls UIAutomationCore!UiaRaiseNotificationEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisenotificationevent
 // Minimum OS: windows10.0.16299.
-func UiaRaiseNotificationEvent(provider uintptr, notificationKind NotificationKind, notificationProcessing NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaRaiseNotificationEvent.Addr(), uintptr(provider), uintptr(notificationKind), uintptr(notificationProcessing), uintptr(unsafe.Pointer(displayString)), uintptr(unsafe.Pointer(activityId)))
+func UiaRaiseNotificationEvent(provider *IRawElementProviderSimple, notificationKind NotificationKind, notificationProcessing NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaRaiseNotificationEvent.Addr(), uintptr(unsafe.Pointer(provider)), uintptr(notificationKind), uintptr(notificationProcessing), uintptr(unsafe.Pointer(displayString)), uintptr(unsafe.Pointer(activityId)))
 	return foundation.HRESULT(r1)
 }
 
 // UiaRaiseStructureChangedEvent calls UIAutomationCore!UiaRaiseStructureChangedEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisestructurechangedevent
 // Minimum OS: windows5.1.2600.
-func UiaRaiseStructureChangedEvent(pProvider uintptr, structureChangeType StructureChangeType, pRuntimeId *int32, cRuntimeIdLen int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaRaiseStructureChangedEvent.Addr(), uintptr(pProvider), uintptr(structureChangeType), uintptr(unsafe.Pointer(pRuntimeId)), uintptr(cRuntimeIdLen))
+func UiaRaiseStructureChangedEvent(pProvider *IRawElementProviderSimple, structureChangeType StructureChangeType, pRuntimeId *int32, cRuntimeIdLen int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaRaiseStructureChangedEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(structureChangeType), uintptr(unsafe.Pointer(pRuntimeId)), uintptr(cRuntimeIdLen))
 	return foundation.HRESULT(r1)
 }
 
 // UiaRaiseTextEditTextChangedEvent calls UIAutomationCore!UiaRaiseTextEditTextChangedEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisetextedittextchangedevent
 // Minimum OS: windows8.1.
-func UiaRaiseTextEditTextChangedEvent(pProvider uintptr, textEditChangeType TextEditChangeType, pChangedData *systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaRaiseTextEditTextChangedEvent.Addr(), uintptr(pProvider), uintptr(textEditChangeType), uintptr(unsafe.Pointer(pChangedData)))
+func UiaRaiseTextEditTextChangedEvent(pProvider *IRawElementProviderSimple, textEditChangeType TextEditChangeType, pChangedData *systemcom.SAFEARRAY) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaRaiseTextEditTextChangedEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(textEditChangeType), uintptr(unsafe.Pointer(pChangedData)))
 	return foundation.HRESULT(r1)
 }
 
@@ -933,8 +933,8 @@ func UiaRemoveEvent(hEvent HUIAEVENT) foundation.HRESULT {
 // UiaReturnRawElementProvider calls UIAutomationCore!UiaReturnRawElementProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiareturnrawelementprovider
 // Minimum OS: windows5.1.2600.
-func UiaReturnRawElementProvider(hwnd foundation.HWND, wParam foundation.WPARAM, lParam foundation.LPARAM, el uintptr) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procUiaReturnRawElementProvider.Addr(), uintptr(hwnd), uintptr(wParam), uintptr(lParam), uintptr(el))
+func UiaReturnRawElementProvider(hwnd foundation.HWND, wParam foundation.WPARAM, lParam foundation.LPARAM, el *IRawElementProviderSimple) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procUiaReturnRawElementProvider.Addr(), uintptr(hwnd), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(el)))
 	return foundation.LRESULT(r1)
 }
 
@@ -1000,8 +1000,8 @@ func VirtualizedItemPattern_Realize(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
 // WindowFromAccessibleObject calls OLEACC!WindowFromAccessibleObject.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-windowfromaccessibleobject
 // Minimum OS: windows5.0.
-func WindowFromAccessibleObject(param0 uintptr, phwnd *foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWindowFromAccessibleObject.Addr(), uintptr(param0), uintptr(unsafe.Pointer(phwnd)))
+func WindowFromAccessibleObject(param0 *IAccessible, phwnd *foundation.HWND) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWindowFromAccessibleObject.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(phwnd)))
 	return foundation.HRESULT(r1)
 }
 

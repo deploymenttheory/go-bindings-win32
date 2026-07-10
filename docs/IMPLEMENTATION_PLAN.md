@@ -11,8 +11,12 @@
 > macOS generator), and `fetch-metadata` + GitHub Actions (`ci.yml`
 > regen/ratchet gate; `winmd-update.yml` scheduled NuGet watcher that opens a
 > diff-annotated PR on new winmd releases).
-> Remaining: M3 COM vtables, M4 idiomatic tier, M5 arch build tags
-> (amd64-only today). See CLAUDE.md for the as-built architecture.
+> **M3 (COM) is implemented**: all 7,900+ interfaces emit as vtable-dispatch
+> wrappers (43,656 methods) with base-chain embedding, absolute slot
+> numbering, and IID constants; a live acceptance test drives IStream
+> end-to-end (create/write/seek/read/QueryInterface/Release).
+> Remaining: M4 idiomatic tier, M5 arch build tags (amd64-only today).
+> See CLAUDE.md for the as-built architecture.
 
 Generate idiomatic Go bindings for the entire Win32 API from Microsoft's
 `win32metadata`, mirroring the architecture of the sibling

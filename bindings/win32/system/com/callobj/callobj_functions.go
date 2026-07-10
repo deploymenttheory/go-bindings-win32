@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -24,13 +25,13 @@ var (
 // CoGetInterceptor calls ole32!CoGetInterceptor.
 // https://learn.microsoft.com/windows/win32/api/callobj/nf-callobj-cogetinterceptor
 // Minimum OS: windows5.0.
-func CoGetInterceptor(iidIntercepted *win32.GUID, punkOuter uintptr, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetInterceptor.Addr(), uintptr(unsafe.Pointer(iidIntercepted)), uintptr(punkOuter), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
+func CoGetInterceptor(iidIntercepted *win32.GUID, punkOuter *systemcom.IUnknown, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetInterceptor.Addr(), uintptr(unsafe.Pointer(iidIntercepted)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // CoGetInterceptorFromTypeInfo calls ole32!CoGetInterceptorFromTypeInfo.
-func CoGetInterceptorFromTypeInfo(iidIntercepted *win32.GUID, punkOuter uintptr, typeInfo uintptr, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetInterceptorFromTypeInfo.Addr(), uintptr(unsafe.Pointer(iidIntercepted)), uintptr(punkOuter), uintptr(typeInfo), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
+func CoGetInterceptorFromTypeInfo(iidIntercepted *win32.GUID, punkOuter *systemcom.IUnknown, typeInfo *systemcom.ITypeInfo, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetInterceptorFromTypeInfo.Addr(), uintptr(unsafe.Pointer(iidIntercepted)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(typeInfo)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }

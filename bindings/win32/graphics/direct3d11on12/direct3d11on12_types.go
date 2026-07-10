@@ -13,5 +13,5 @@ type D3D11_RESOURCE_FLAGS struct {
 }
 
 // PFN_D3D11ON12_CREATE_DEVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, *graphicsdirect3d.D3D_FEATURE_LEVEL, uint32, uintptr, uint32, uint32, uintptr, uintptr, *graphicsdirect3d.D3D_FEATURE_LEVEL) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IUnknown, uint32, *graphicsdirect3d.D3D_FEATURE_LEVEL, uint32, **systemcom.IUnknown, uint32, uint32, **graphicsdirect3d11.ID3D11Device, **graphicsdirect3d11.ID3D11DeviceContext, *graphicsdirect3d.D3D_FEATURE_LEVEL) foundation.HRESULT.
 type PFN_D3D11ON12_CREATE_DEVICE uintptr

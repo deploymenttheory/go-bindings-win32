@@ -1689,6 +1689,30 @@ const (
 	Tuner_LockType_Locked                    TunerLockType = 2
 )
 
+type ALLOCATOR_PROPERTIES_EX struct {
+	CBuffers          int32
+	CbBuffer          int32
+	CbAlign           int32
+	CbPrefix          int32
+	MemoryType        win32.GUID
+	BusType           win32.GUID
+	State             PIPE_STATE
+	Input             PIPE_TERMINATION
+	Output            PIPE_TERMINATION
+	Strategy          uint32
+	Flags             uint32
+	Weight            uint32
+	LogicalMemoryType KS_LogicalMemoryType
+	AllocatorPlace    PIPE_ALLOCATOR_PLACE
+	Dimensions        PIPE_DIMENSIONS
+	PhysicalRange     KS_FRAMING_RANGE
+	PrevSegment       *IKsAllocatorEx
+	CountNextSegments uint32
+	NextSegments      **IKsAllocatorEx
+	InsideFactors     uint32
+	NumberPins        uint32
+}
+
 type APO_CLASS_UUID struct {
 }
 
@@ -4857,8 +4881,8 @@ type KSSTREAM_METADATA_INFO struct {
 }
 
 type KSSTREAM_SEGMENT struct {
-	KsInterfaceHandler [1]uint64
-	KsDataTypeHandler  [1]uint64
+	KsInterfaceHandler *IKsInterfaceHandler
+	KsDataTypeHandler  *IKsDataTypeHandler
 	IoOperation        KSIOOPERATION
 	CompletionEvent    foundation.HANDLE
 }

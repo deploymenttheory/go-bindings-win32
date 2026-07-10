@@ -620,5 +620,5 @@ type TagIMMPID_RP_STRUCT struct {
 }
 
 // MSGCALLRELEASE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uintptr).
+// syscall) using the shape func(uint32, *systemaddressbook.IMessage).
 type MSGCALLRELEASE uintptr

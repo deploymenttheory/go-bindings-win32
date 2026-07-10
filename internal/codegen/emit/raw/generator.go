@@ -233,6 +233,18 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 		return err
 	}
 
+	// COM interfaces file.
+	interfaceImports := typemap.ImportSet{}
+	var interfaceBody strings.Builder
+	for _, model := range g.buildInterfaceModels(meta, interfaceImports) {
+		if err := renderInto(&interfaceBody, render.Interface, model); err != nil {
+			return err
+		}
+	}
+	if err := g.writeFile(packageDir, packageName+"_interfaces.go", packageName, interfaceImports, interfaceBody.String()); err != nil {
+		return err
+	}
+
 	// Constants file.
 	constImports := typemap.ImportSet{}
 	var constBody strings.Builder
@@ -365,6 +377,9 @@ func (g *Generator) prepareNamespaceClaims(meta *win32meta.NamespaceMeta) {
 		claimType(name)
 	}
 	for name := range meta.Delegates {
+		claimType(name)
+	}
+	for name := range meta.Interfaces {
 		claimType(name)
 	}
 }

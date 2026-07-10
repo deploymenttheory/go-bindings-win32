@@ -202,5 +202,5 @@ type DXCoreProcessMemoryQueryOutput struct {
 }
 
 // PFN_DXCORE_NOTIFICATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DXCoreNotificationType, uintptr, unsafe.Pointer).
+// syscall) using the shape func(DXCoreNotificationType, *systemcom.IUnknown, unsafe.Pointer).
 type PFN_DXCORE_NOTIFICATION_CALLBACK uintptr

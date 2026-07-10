@@ -5,11 +5,11 @@
 package directoryservices
 
 // PFNDSCREATEISECINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, uintptr, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) foundation.HRESULT.
+// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, **securityauthorizationui.ISecurityInformation, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) foundation.HRESULT.
 type PFNDSCREATEISECINFO uintptr
 
 // PFNDSCREATEISECINFOEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, uintptr, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) foundation.HRESULT.
+// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, **securityauthorizationui.ISecurityInformation, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) foundation.HRESULT.
 type PFNDSCREATEISECINFOEX uintptr
 
 // PFNDSCREATESECPAGE is a callback pointer: create one with NewCallback (package

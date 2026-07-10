@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemwmi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/wmi"
 	uishell "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell"
 )
 
@@ -306,16 +307,16 @@ func RsopFileAccessCheck(pszFileName foundation.PWSTR, pRsopToken unsafe.Pointer
 // RsopResetPolicySettingStatus calls USERENV!RsopResetPolicySettingStatus.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopresetpolicysettingstatus
 // Minimum OS: windows6.0.6000.
-func RsopResetPolicySettingStatus(dwFlags uint32, pServices uintptr, pSettingInstance uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRsopResetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(pServices), uintptr(pSettingInstance))
+func RsopResetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRsopResetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pSettingInstance)))
 	return foundation.HRESULT(r1)
 }
 
 // RsopSetPolicySettingStatus calls USERENV!RsopSetPolicySettingStatus.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopsetpolicysettingstatus
 // Minimum OS: windows6.0.6000.
-func RsopSetPolicySettingStatus(dwFlags uint32, pServices uintptr, pSettingInstance uintptr, nInfo uint32, pStatus *POLICYSETTINGSTATUSINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRsopSetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(pServices), uintptr(pSettingInstance), uintptr(nInfo), uintptr(unsafe.Pointer(pStatus)))
+func RsopSetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject, nInfo uint32, pStatus *POLICYSETTINGSTATUSINFO) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRsopSetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pSettingInstance)), uintptr(nInfo), uintptr(unsafe.Pointer(pStatus)))
 	return foundation.HRESULT(r1)
 }
 

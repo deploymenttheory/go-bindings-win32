@@ -60,6 +60,21 @@ func LastError(errno Errno) error {
 	return windows.ERROR_INVALID_PARAMETER
 }
 
+// Succeeded reports whether an HRESULT indicates success (top bit clear).
+// Generated COM methods return raw HRESULT values (as the typed
+// foundation.HRESULT); pass them here as int32.
+func Succeeded(hresult int32) bool {
+	return hresult >= 0
+}
+
+// HRESULTError converts a failed HRESULT to a Go error (nil on success).
+func HRESULTError(hresult int32) error {
+	if hresult >= 0 {
+		return nil
+	}
+	return windows.Errno(uint32(hresult))
+}
+
 // GUID is the Win32 GUID structure.
 type GUID struct {
 	Data1 uint32

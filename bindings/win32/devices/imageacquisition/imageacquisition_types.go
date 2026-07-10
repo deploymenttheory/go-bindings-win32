@@ -24,17 +24,28 @@ const (
 	WIAVIDEO_DESTROYING_VIDEO WIAVIDEO_STATE = 6
 )
 
+// DEVICEDIALOGDATA: https://learn.microsoft.com/windows/win32/wia/-wia-devicedialogdata
+type DEVICEDIALOGDATA struct {
+	CbSize        uint32
+	HwndParent    foundation.HWND
+	PIWiaItemRoot *IWiaItem
+	DwFlags       uint32
+	LIntent       int32
+	LItemCount    int32
+	PpWiaItems    **IWiaItem
+}
+
 // DEVICEDIALOGDATA2: https://learn.microsoft.com/windows/win32/wia/-wia-devicedialogdata2
 type DEVICEDIALOGDATA2 struct {
 	CbSize         uint32
-	PIWiaItemRoot  [1]uint64
+	PIWiaItemRoot  *IWiaItem2
 	DwFlags        uint32
 	HwndParent     foundation.HWND
 	BstrFolderName foundation.BSTR
 	BstrFilename   foundation.BSTR
 	LNumFiles      int32
 	PbstrFilePaths *foundation.BSTR
-	PWiaItem       [1]uint64
+	PWiaItem       *IWiaItem2
 }
 
 type MINIDRV_TRANSFER_CONTEXT struct {
@@ -57,7 +68,7 @@ type MINIDRV_TRANSFER_CONTEXT struct {
 	BTransferDataCB      foundation.BOOL
 	BClassDrvAllocBuf    foundation.BOOL
 	LClientAddress       uintptr
-	PIWiaMiniDrvCallBack [1]uint64
+	PIWiaMiniDrvCallBack *IWiaMiniDrvCallBack
 	LImageSize           int32
 	LHeaderSize          int32
 	LItemSize            int32
@@ -366,5 +377,5 @@ type WiaVideo struct {
 }
 
 // DeviceDialogFunction is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*DEVICEDIALOGDATA) foundation.HRESULT.
 type DeviceDialogFunction uintptr

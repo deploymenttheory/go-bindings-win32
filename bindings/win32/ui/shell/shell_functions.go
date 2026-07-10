@@ -746,8 +746,8 @@ func AssocCreateForClasses(rgClasses *ASSOCIATIONELEMENT, cClasses uint32, riid 
 // AssocGetDetailsOfPropKey calls SHELL32!AssocGetDetailsOfPropKey.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-assocgetdetailsofpropkey
 // Minimum OS: windows6.0.6000.
-func AssocGetDetailsOfPropKey(psf uintptr, pidl *uishellcommon.ITEMIDLIST, pkey *foundation.PROPERTYKEY, pv *systemvariant.VARIANT, pfFoundPropKey *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAssocGetDetailsOfPropKey.Addr(), uintptr(psf), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pkey)), uintptr(unsafe.Pointer(pv)), uintptr(unsafe.Pointer(pfFoundPropKey)))
+func AssocGetDetailsOfPropKey(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, pkey *foundation.PROPERTYKEY, pv *systemvariant.VARIANT, pfFoundPropKey *foundation.BOOL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAssocGetDetailsOfPropKey.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pkey)), uintptr(unsafe.Pointer(pv)), uintptr(unsafe.Pointer(pfFoundPropKey)))
 	return foundation.HRESULT(r1)
 }
 
@@ -818,16 +818,16 @@ func AssocQueryStringW(flags ASSOCF, str ASSOCSTR, pszAssoc foundation.PWSTR, ps
 // CDefFolderMenu_Create2 calls SHELL32!CDefFolderMenu_Create2.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-cdeffoldermenu_create2
 // Minimum OS: windows5.0.
-func CDefFolderMenu_Create2(pidlFolder *uishellcommon.ITEMIDLIST, hwnd foundation.HWND, cidl uint32, apidl **uishellcommon.ITEMIDLIST, psf uintptr, pfn LPFNDFMCALLBACK, nKeys uint32, ahkeys *systemregistry.HKEY, ppcm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCDefFolderMenu_Create2.Addr(), uintptr(unsafe.Pointer(pidlFolder)), uintptr(hwnd), uintptr(cidl), uintptr(unsafe.Pointer(apidl)), uintptr(psf), uintptr(pfn), uintptr(nKeys), uintptr(unsafe.Pointer(ahkeys)), uintptr(ppcm))
+func CDefFolderMenu_Create2(pidlFolder *uishellcommon.ITEMIDLIST, hwnd foundation.HWND, cidl uint32, apidl **uishellcommon.ITEMIDLIST, psf *IShellFolder, pfn LPFNDFMCALLBACK, nKeys uint32, ahkeys *systemregistry.HKEY, ppcm **IContextMenu) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCDefFolderMenu_Create2.Addr(), uintptr(unsafe.Pointer(pidlFolder)), uintptr(hwnd), uintptr(cidl), uintptr(unsafe.Pointer(apidl)), uintptr(unsafe.Pointer(psf)), uintptr(pfn), uintptr(nKeys), uintptr(unsafe.Pointer(ahkeys)), uintptr(unsafe.Pointer(ppcm)))
 	return foundation.HRESULT(r1)
 }
 
 // CIDLData_CreateFromIDArray calls SHELL32!CIDLData_CreateFromIDArray.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-cidldata_createfromidarray
 // Minimum OS: windows5.0.
-func CIDLData_CreateFromIDArray(pidlFolder *uishellcommon.ITEMIDLIST, cidl uint32, apidl **uishellcommon.ITEMIDLIST, ppdtobj uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCIDLData_CreateFromIDArray.Addr(), uintptr(unsafe.Pointer(pidlFolder)), uintptr(cidl), uintptr(unsafe.Pointer(apidl)), uintptr(ppdtobj))
+func CIDLData_CreateFromIDArray(pidlFolder *uishellcommon.ITEMIDLIST, cidl uint32, apidl **uishellcommon.ITEMIDLIST, ppdtobj **systemcom.IDataObject) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCIDLData_CreateFromIDArray.Addr(), uintptr(unsafe.Pointer(pidlFolder)), uintptr(cidl), uintptr(unsafe.Pointer(apidl)), uintptr(unsafe.Pointer(ppdtobj)))
 	return foundation.HRESULT(r1)
 }
 
@@ -885,8 +885,8 @@ func CommandLineToArgvW(lpCmdLine foundation.PWSTR, pNumArgs *int32) (*foundatio
 // ConnectToConnectionPoint calls SHLWAPI!ConnectToConnectionPoint.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-connecttoconnectionpoint
 // Minimum OS: windows5.0.
-func ConnectToConnectionPoint(punk uintptr, riidEvent *win32.GUID, fConnect foundation.BOOL, punkTarget uintptr, pdwCookie *uint32, ppcpOut uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procConnectToConnectionPoint.Addr(), uintptr(punk), uintptr(unsafe.Pointer(riidEvent)), uintptr(fConnect), uintptr(punkTarget), uintptr(unsafe.Pointer(pdwCookie)), uintptr(ppcpOut))
+func ConnectToConnectionPoint(punk *systemcom.IUnknown, riidEvent *win32.GUID, fConnect foundation.BOOL, punkTarget *systemcom.IUnknown, pdwCookie *uint32, ppcpOut **systemcom.IConnectionPoint) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procConnectToConnectionPoint.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(riidEvent)), uintptr(fConnect), uintptr(unsafe.Pointer(punkTarget)), uintptr(unsafe.Pointer(pdwCookie)), uintptr(unsafe.Pointer(ppcpOut)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1365,50 +1365,50 @@ func HashData(pbData *byte, cbData uint32, pbHash *byte, cbHash uint32) foundati
 }
 
 // HlinkClone calls hlink!HlinkClone.
-func HlinkClone(pihl uintptr, riid *win32.GUID, pihlsiteForClone uintptr, dwSiteData uint32, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkClone.Addr(), uintptr(pihl), uintptr(unsafe.Pointer(riid)), uintptr(pihlsiteForClone), uintptr(dwSiteData), uintptr(unsafe.Pointer(ppvObj)))
+func HlinkClone(pihl *IHlink, riid *win32.GUID, pihlsiteForClone *IHlinkSite, dwSiteData uint32, ppvObj *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkClone.Addr(), uintptr(unsafe.Pointer(pihl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pihlsiteForClone)), uintptr(dwSiteData), uintptr(unsafe.Pointer(ppvObj)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkCreateBrowseContext calls hlink!HlinkCreateBrowseContext.
-func HlinkCreateBrowseContext(piunkOuter uintptr, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkCreateBrowseContext.Addr(), uintptr(piunkOuter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
+func HlinkCreateBrowseContext(piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkCreateBrowseContext.Addr(), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkCreateExtensionServices calls hlink!HlinkCreateExtensionServices.
-func HlinkCreateExtensionServices(pwzAdditionalHeaders foundation.PWSTR, phwnd foundation.HWND, pszUsername foundation.PWSTR, pszPassword foundation.PWSTR, piunkOuter uintptr, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkCreateExtensionServices.Addr(), uintptr(unsafe.Pointer(pwzAdditionalHeaders)), uintptr(phwnd), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszPassword)), uintptr(piunkOuter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
+func HlinkCreateExtensionServices(pwzAdditionalHeaders foundation.PWSTR, phwnd foundation.HWND, pszUsername foundation.PWSTR, pszPassword foundation.PWSTR, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkCreateExtensionServices.Addr(), uintptr(unsafe.Pointer(pwzAdditionalHeaders)), uintptr(phwnd), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszPassword)), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkCreateFromData calls hlink!HlinkCreateFromData.
-func HlinkCreateFromData(piDataObj uintptr, pihlsite uintptr, dwSiteData uint32, piunkOuter uintptr, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkCreateFromData.Addr(), uintptr(piDataObj), uintptr(pihlsite), uintptr(dwSiteData), uintptr(piunkOuter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
+func HlinkCreateFromData(piDataObj *systemcom.IDataObject, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkCreateFromData.Addr(), uintptr(unsafe.Pointer(piDataObj)), uintptr(unsafe.Pointer(pihlsite)), uintptr(dwSiteData), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkCreateFromMoniker calls hlink!HlinkCreateFromMoniker.
-func HlinkCreateFromMoniker(pimkTrgt uintptr, pwzLocation foundation.PWSTR, pwzFriendlyName foundation.PWSTR, pihlsite uintptr, dwSiteData uint32, piunkOuter uintptr, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkCreateFromMoniker.Addr(), uintptr(pimkTrgt), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzFriendlyName)), uintptr(pihlsite), uintptr(dwSiteData), uintptr(piunkOuter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
+func HlinkCreateFromMoniker(pimkTrgt *systemcom.IMoniker, pwzLocation foundation.PWSTR, pwzFriendlyName foundation.PWSTR, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkCreateFromMoniker.Addr(), uintptr(unsafe.Pointer(pimkTrgt)), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzFriendlyName)), uintptr(unsafe.Pointer(pihlsite)), uintptr(dwSiteData), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkCreateFromString calls hlink!HlinkCreateFromString.
-func HlinkCreateFromString(pwzTarget foundation.PWSTR, pwzLocation foundation.PWSTR, pwzFriendlyName foundation.PWSTR, pihlsite uintptr, dwSiteData uint32, piunkOuter uintptr, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkCreateFromString.Addr(), uintptr(unsafe.Pointer(pwzTarget)), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzFriendlyName)), uintptr(pihlsite), uintptr(dwSiteData), uintptr(piunkOuter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
+func HlinkCreateFromString(pwzTarget foundation.PWSTR, pwzLocation foundation.PWSTR, pwzFriendlyName foundation.PWSTR, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkCreateFromString.Addr(), uintptr(unsafe.Pointer(pwzTarget)), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzFriendlyName)), uintptr(unsafe.Pointer(pihlsite)), uintptr(dwSiteData), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkCreateShortcut calls hlink!HlinkCreateShortcut.
-func HlinkCreateShortcut(grfHLSHORTCUTF uint32, pihl uintptr, pwzDir foundation.PWSTR, pwzFileName foundation.PWSTR, ppwzShortcutFile *foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkCreateShortcut.Addr(), uintptr(grfHLSHORTCUTF), uintptr(pihl), uintptr(unsafe.Pointer(pwzDir)), uintptr(unsafe.Pointer(pwzFileName)), uintptr(unsafe.Pointer(ppwzShortcutFile)), uintptr(dwReserved))
+func HlinkCreateShortcut(grfHLSHORTCUTF uint32, pihl *IHlink, pwzDir foundation.PWSTR, pwzFileName foundation.PWSTR, ppwzShortcutFile *foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkCreateShortcut.Addr(), uintptr(grfHLSHORTCUTF), uintptr(unsafe.Pointer(pihl)), uintptr(unsafe.Pointer(pwzDir)), uintptr(unsafe.Pointer(pwzFileName)), uintptr(unsafe.Pointer(ppwzShortcutFile)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkCreateShortcutFromMoniker calls hlink!HlinkCreateShortcutFromMoniker.
-func HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF uint32, pimkTarget uintptr, pwzLocation foundation.PWSTR, pwzDir foundation.PWSTR, pwzFileName foundation.PWSTR, ppwzShortcutFile *foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkCreateShortcutFromMoniker.Addr(), uintptr(grfHLSHORTCUTF), uintptr(pimkTarget), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzDir)), uintptr(unsafe.Pointer(pwzFileName)), uintptr(unsafe.Pointer(ppwzShortcutFile)), uintptr(dwReserved))
+func HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF uint32, pimkTarget *systemcom.IMoniker, pwzLocation foundation.PWSTR, pwzDir foundation.PWSTR, pwzFileName foundation.PWSTR, ppwzShortcutFile *foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkCreateShortcutFromMoniker.Addr(), uintptr(grfHLSHORTCUTF), uintptr(unsafe.Pointer(pimkTarget)), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzDir)), uintptr(unsafe.Pointer(pwzFileName)), uintptr(unsafe.Pointer(ppwzShortcutFile)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -1437,62 +1437,62 @@ func HlinkIsShortcut(pwzFileName foundation.PWSTR) foundation.HRESULT {
 }
 
 // HlinkNavigate calls hlink!HlinkNavigate.
-func HlinkNavigate(pihl uintptr, pihlframe uintptr, grfHLNF uint32, pbc uintptr, pibsc uintptr, pihlbc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkNavigate.Addr(), uintptr(pihl), uintptr(pihlframe), uintptr(grfHLNF), uintptr(pbc), uintptr(pibsc), uintptr(pihlbc))
+func HlinkNavigate(pihl *IHlink, pihlframe *IHlinkFrame, grfHLNF uint32, pbc *systemcom.IBindCtx, pibsc *systemcom.IBindStatusCallback, pihlbc *IHlinkBrowseContext) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkNavigate.Addr(), uintptr(unsafe.Pointer(pihl)), uintptr(unsafe.Pointer(pihlframe)), uintptr(grfHLNF), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(pibsc)), uintptr(unsafe.Pointer(pihlbc)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkNavigateToStringReference calls hlink!HlinkNavigateToStringReference.
-func HlinkNavigateToStringReference(pwzTarget foundation.PWSTR, pwzLocation foundation.PWSTR, pihlsite uintptr, dwSiteData uint32, pihlframe uintptr, grfHLNF uint32, pibc uintptr, pibsc uintptr, pihlbc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkNavigateToStringReference.Addr(), uintptr(unsafe.Pointer(pwzTarget)), uintptr(unsafe.Pointer(pwzLocation)), uintptr(pihlsite), uintptr(dwSiteData), uintptr(pihlframe), uintptr(grfHLNF), uintptr(pibc), uintptr(pibsc), uintptr(pihlbc))
+func HlinkNavigateToStringReference(pwzTarget foundation.PWSTR, pwzLocation foundation.PWSTR, pihlsite *IHlinkSite, dwSiteData uint32, pihlframe *IHlinkFrame, grfHLNF uint32, pibc *systemcom.IBindCtx, pibsc *systemcom.IBindStatusCallback, pihlbc *IHlinkBrowseContext) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkNavigateToStringReference.Addr(), uintptr(unsafe.Pointer(pwzTarget)), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pihlsite)), uintptr(dwSiteData), uintptr(unsafe.Pointer(pihlframe)), uintptr(grfHLNF), uintptr(unsafe.Pointer(pibc)), uintptr(unsafe.Pointer(pibsc)), uintptr(unsafe.Pointer(pihlbc)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkOnNavigate calls hlink!HlinkOnNavigate.
-func HlinkOnNavigate(pihlframe uintptr, pihlbc uintptr, grfHLNF uint32, pimkTarget uintptr, pwzLocation foundation.PWSTR, pwzFriendlyName foundation.PWSTR, puHLID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkOnNavigate.Addr(), uintptr(pihlframe), uintptr(pihlbc), uintptr(grfHLNF), uintptr(pimkTarget), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzFriendlyName)), uintptr(unsafe.Pointer(puHLID)))
+func HlinkOnNavigate(pihlframe *IHlinkFrame, pihlbc *IHlinkBrowseContext, grfHLNF uint32, pimkTarget *systemcom.IMoniker, pwzLocation foundation.PWSTR, pwzFriendlyName foundation.PWSTR, puHLID *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkOnNavigate.Addr(), uintptr(unsafe.Pointer(pihlframe)), uintptr(unsafe.Pointer(pihlbc)), uintptr(grfHLNF), uintptr(unsafe.Pointer(pimkTarget)), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzFriendlyName)), uintptr(unsafe.Pointer(puHLID)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkOnRenameDocument calls hlink!HlinkOnRenameDocument.
-func HlinkOnRenameDocument(dwReserved uint32, pihlbc uintptr, pimkOld uintptr, pimkNew uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkOnRenameDocument.Addr(), uintptr(dwReserved), uintptr(pihlbc), uintptr(pimkOld), uintptr(pimkNew))
+func HlinkOnRenameDocument(dwReserved uint32, pihlbc *IHlinkBrowseContext, pimkOld *systemcom.IMoniker, pimkNew *systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkOnRenameDocument.Addr(), uintptr(dwReserved), uintptr(unsafe.Pointer(pihlbc)), uintptr(unsafe.Pointer(pimkOld)), uintptr(unsafe.Pointer(pimkNew)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkParseDisplayName calls hlink!HlinkParseDisplayName.
-func HlinkParseDisplayName(pibc uintptr, pwzDisplayName foundation.PWSTR, fNoForceAbs foundation.BOOL, pcchEaten *uint32, ppimk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkParseDisplayName.Addr(), uintptr(pibc), uintptr(unsafe.Pointer(pwzDisplayName)), uintptr(fNoForceAbs), uintptr(unsafe.Pointer(pcchEaten)), uintptr(ppimk))
+func HlinkParseDisplayName(pibc *systemcom.IBindCtx, pwzDisplayName foundation.PWSTR, fNoForceAbs foundation.BOOL, pcchEaten *uint32, ppimk **systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkParseDisplayName.Addr(), uintptr(unsafe.Pointer(pibc)), uintptr(unsafe.Pointer(pwzDisplayName)), uintptr(fNoForceAbs), uintptr(unsafe.Pointer(pcchEaten)), uintptr(unsafe.Pointer(ppimk)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkPreprocessMoniker calls hlink!HlinkPreprocessMoniker.
-func HlinkPreprocessMoniker(pibc uintptr, pimkIn uintptr, ppimkOut uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkPreprocessMoniker.Addr(), uintptr(pibc), uintptr(pimkIn), uintptr(ppimkOut))
+func HlinkPreprocessMoniker(pibc *systemcom.IBindCtx, pimkIn *systemcom.IMoniker, ppimkOut **systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkPreprocessMoniker.Addr(), uintptr(unsafe.Pointer(pibc)), uintptr(unsafe.Pointer(pimkIn)), uintptr(unsafe.Pointer(ppimkOut)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkQueryCreateFromData calls hlink!HlinkQueryCreateFromData.
-func HlinkQueryCreateFromData(piDataObj uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkQueryCreateFromData.Addr(), uintptr(piDataObj))
+func HlinkQueryCreateFromData(piDataObj *systemcom.IDataObject) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkQueryCreateFromData.Addr(), uintptr(unsafe.Pointer(piDataObj)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkResolveMonikerForData calls hlink!HlinkResolveMonikerForData.
-func HlinkResolveMonikerForData(pimkReference uintptr, reserved uint32, pibc uintptr, cFmtetc uint32, rgFmtetc *systemcom.FORMATETC, pibsc uintptr, pimkBase uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkResolveMonikerForData.Addr(), uintptr(pimkReference), uintptr(reserved), uintptr(pibc), uintptr(cFmtetc), uintptr(unsafe.Pointer(rgFmtetc)), uintptr(pibsc), uintptr(pimkBase))
+func HlinkResolveMonikerForData(pimkReference *systemcom.IMoniker, reserved uint32, pibc *systemcom.IBindCtx, cFmtetc uint32, rgFmtetc *systemcom.FORMATETC, pibsc *systemcom.IBindStatusCallback, pimkBase *systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkResolveMonikerForData.Addr(), uintptr(unsafe.Pointer(pimkReference)), uintptr(reserved), uintptr(unsafe.Pointer(pibc)), uintptr(cFmtetc), uintptr(unsafe.Pointer(rgFmtetc)), uintptr(unsafe.Pointer(pibsc)), uintptr(unsafe.Pointer(pimkBase)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkResolveShortcut calls hlink!HlinkResolveShortcut.
-func HlinkResolveShortcut(pwzShortcutFileName foundation.PWSTR, pihlsite uintptr, dwSiteData uint32, piunkOuter uintptr, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkResolveShortcut.Addr(), uintptr(unsafe.Pointer(pwzShortcutFileName)), uintptr(pihlsite), uintptr(dwSiteData), uintptr(piunkOuter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
+func HlinkResolveShortcut(pwzShortcutFileName foundation.PWSTR, pihlsite *IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkResolveShortcut.Addr(), uintptr(unsafe.Pointer(pwzShortcutFileName)), uintptr(unsafe.Pointer(pihlsite)), uintptr(dwSiteData), uintptr(unsafe.Pointer(piunkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObj)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkResolveShortcutToMoniker calls hlink!HlinkResolveShortcutToMoniker.
-func HlinkResolveShortcutToMoniker(pwzShortcutFileName foundation.PWSTR, ppimkTarget uintptr, ppwzLocation *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkResolveShortcutToMoniker.Addr(), uintptr(unsafe.Pointer(pwzShortcutFileName)), uintptr(ppimkTarget), uintptr(unsafe.Pointer(ppwzLocation)))
+func HlinkResolveShortcutToMoniker(pwzShortcutFileName foundation.PWSTR, ppimkTarget **systemcom.IMoniker, ppwzLocation *foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkResolveShortcutToMoniker.Addr(), uintptr(unsafe.Pointer(pwzShortcutFileName)), uintptr(unsafe.Pointer(ppimkTarget)), uintptr(unsafe.Pointer(ppwzLocation)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1503,8 +1503,8 @@ func HlinkResolveShortcutToString(pwzShortcutFileName foundation.PWSTR, ppwzTarg
 }
 
 // HlinkResolveStringForData calls hlink!HlinkResolveStringForData.
-func HlinkResolveStringForData(pwzReference foundation.PWSTR, reserved uint32, pibc uintptr, cFmtetc uint32, rgFmtetc *systemcom.FORMATETC, pibsc uintptr, pimkBase uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkResolveStringForData.Addr(), uintptr(unsafe.Pointer(pwzReference)), uintptr(reserved), uintptr(pibc), uintptr(cFmtetc), uintptr(unsafe.Pointer(rgFmtetc)), uintptr(pibsc), uintptr(pimkBase))
+func HlinkResolveStringForData(pwzReference foundation.PWSTR, reserved uint32, pibc *systemcom.IBindCtx, cFmtetc uint32, rgFmtetc *systemcom.FORMATETC, pibsc *systemcom.IBindStatusCallback, pimkBase *systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkResolveStringForData.Addr(), uintptr(unsafe.Pointer(pwzReference)), uintptr(reserved), uintptr(unsafe.Pointer(pibc)), uintptr(cFmtetc), uintptr(unsafe.Pointer(rgFmtetc)), uintptr(unsafe.Pointer(pibsc)), uintptr(unsafe.Pointer(pimkBase)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1521,8 +1521,8 @@ func HlinkTranslateURL(pwzURL foundation.PWSTR, grfFlags uint32, ppwzTranslatedU
 }
 
 // HlinkUpdateStackItem calls hlink!HlinkUpdateStackItem.
-func HlinkUpdateStackItem(pihlframe uintptr, pihlbc uintptr, uHLID uint32, pimkTrgt uintptr, pwzLocation foundation.PWSTR, pwzFriendlyName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkUpdateStackItem.Addr(), uintptr(pihlframe), uintptr(pihlbc), uintptr(uHLID), uintptr(pimkTrgt), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzFriendlyName)))
+func HlinkUpdateStackItem(pihlframe *IHlinkFrame, pihlbc *IHlinkBrowseContext, uHLID uint32, pimkTrgt *systemcom.IMoniker, pwzLocation foundation.PWSTR, pwzFriendlyName foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkUpdateStackItem.Addr(), uintptr(unsafe.Pointer(pihlframe)), uintptr(unsafe.Pointer(pihlbc)), uintptr(uHLID), uintptr(unsafe.Pointer(pimkTrgt)), uintptr(unsafe.Pointer(pwzLocation)), uintptr(unsafe.Pointer(pwzFriendlyName)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1632,8 +1632,8 @@ func ILIsParent(pidl1 *uishellcommon.ITEMIDLIST, pidl2 *uishellcommon.ITEMIDLIST
 // ILLoadFromStreamEx calls SHELL32!ILLoadFromStreamEx.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-illoadfromstreamex
 // Minimum OS: windows6.0.6000.
-func ILLoadFromStreamEx(pstm uintptr, pidl **uishellcommon.ITEMIDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procILLoadFromStreamEx.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(pidl)))
+func ILLoadFromStreamEx(pstm *systemcom.IStream, pidl **uishellcommon.ITEMIDLIST) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procILLoadFromStreamEx.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(pidl)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1648,80 +1648,80 @@ func ILRemoveLastID(pidl *uishellcommon.ITEMIDLIST) foundation.BOOL {
 // ILSaveToStream calls SHELL32!ILSaveToStream.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-ilsavetostream
 // Minimum OS: windows5.1.2600.
-func ILSaveToStream(pstm uintptr, pidl *uishellcommon.ITEMIDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procILSaveToStream.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(pidl)))
+func ILSaveToStream(pstm *systemcom.IStream, pidl *uishellcommon.ITEMIDLIST) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procILSaveToStream.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(pidl)))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_Copy calls SHLWAPI!IStream_Copy.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_copy
 // Minimum OS: windows6.0.6000.
-func IStream_Copy(pstmFrom uintptr, pstmTo uintptr, cb uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_Copy.Addr(), uintptr(pstmFrom), uintptr(pstmTo), uintptr(cb))
+func IStream_Copy(pstmFrom *systemcom.IStream, pstmTo *systemcom.IStream, cb uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_Copy.Addr(), uintptr(unsafe.Pointer(pstmFrom)), uintptr(unsafe.Pointer(pstmTo)), uintptr(cb))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_Read calls SHLWAPI!IStream_Read.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_read
 // Minimum OS: windows5.0.
-func IStream_Read(pstm uintptr, pv unsafe.Pointer, cb uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_Read.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func IStream_Read(pstm *systemcom.IStream, pv unsafe.Pointer, cb uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_Read.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(pv)), uintptr(cb))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_ReadPidl calls SHLWAPI!IStream_ReadPidl.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_readpidl
 // Minimum OS: windows6.0.6000.
-func IStream_ReadPidl(pstm uintptr, ppidlOut **uishellcommon.ITEMIDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_ReadPidl.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(ppidlOut)))
+func IStream_ReadPidl(pstm *systemcom.IStream, ppidlOut **uishellcommon.ITEMIDLIST) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_ReadPidl.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(ppidlOut)))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_ReadStr calls SHLWAPI!IStream_ReadStr.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_readstr
 // Minimum OS: windows6.0.6000.
-func IStream_ReadStr(pstm uintptr, ppsz *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_ReadStr.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(ppsz)))
+func IStream_ReadStr(pstm *systemcom.IStream, ppsz *foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_ReadStr.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(ppsz)))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_Reset calls SHLWAPI!IStream_Reset.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_reset
 // Minimum OS: windows5.0.
-func IStream_Reset(pstm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_Reset.Addr(), uintptr(pstm))
+func IStream_Reset(pstm *systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_Reset.Addr(), uintptr(unsafe.Pointer(pstm)))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_Size calls SHLWAPI!IStream_Size.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_size
 // Minimum OS: windows5.0.
-func IStream_Size(pstm uintptr, pui *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_Size.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(pui)))
+func IStream_Size(pstm *systemcom.IStream, pui *uint64) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_Size.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(pui)))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_Write calls SHLWAPI!IStream_Write.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_write
 // Minimum OS: windows6.0.6000.
-func IStream_Write(pstm uintptr, pv unsafe.Pointer, cb uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_Write.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func IStream_Write(pstm *systemcom.IStream, pv unsafe.Pointer, cb uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_Write.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(pv)), uintptr(cb))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_WritePidl calls SHLWAPI!IStream_WritePidl.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_writepidl
 // Minimum OS: windows6.0.6000.
-func IStream_WritePidl(pstm uintptr, pidlWrite *uishellcommon.ITEMIDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_WritePidl.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(pidlWrite)))
+func IStream_WritePidl(pstm *systemcom.IStream, pidlWrite *uishellcommon.ITEMIDLIST) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_WritePidl.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(pidlWrite)))
 	return foundation.HRESULT(r1)
 }
 
 // IStream_WriteStr calls SHLWAPI!IStream_WriteStr.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_writestr
 // Minimum OS: windows6.0.6000.
-func IStream_WriteStr(pstm uintptr, psz foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIStream_WriteStr.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(psz)))
+func IStream_WriteStr(pstm *systemcom.IStream, psz foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIStream_WriteStr.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(psz)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1735,39 +1735,39 @@ func IUnknown_AtomicRelease(ppunk *unsafe.Pointer) {
 // IUnknown_GetSite calls SHLWAPI!IUnknown_GetSite.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_getsite
 // Minimum OS: windows5.0.
-func IUnknown_GetSite(punk uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIUnknown_GetSite.Addr(), uintptr(punk), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func IUnknown_GetSite(punk *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIUnknown_GetSite.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // IUnknown_GetWindow calls SHLWAPI!IUnknown_GetWindow.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_getwindow
 // Minimum OS: windows5.0.
-func IUnknown_GetWindow(punk uintptr, phwnd *foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIUnknown_GetWindow.Addr(), uintptr(punk), uintptr(unsafe.Pointer(phwnd)))
+func IUnknown_GetWindow(punk *systemcom.IUnknown, phwnd *foundation.HWND) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIUnknown_GetWindow.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(phwnd)))
 	return foundation.HRESULT(r1)
 }
 
 // IUnknown_QueryService calls SHLWAPI!IUnknown_QueryService.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_queryservice
 // Minimum OS: windows5.0.
-func IUnknown_QueryService(punk uintptr, guidService *win32.GUID, riid *win32.GUID, ppvOut *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIUnknown_QueryService.Addr(), uintptr(punk), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvOut)))
+func IUnknown_QueryService(punk *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvOut *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIUnknown_QueryService.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvOut)))
 	return foundation.HRESULT(r1)
 }
 
 // IUnknown_Set calls SHLWAPI!IUnknown_Set.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_set
 // Minimum OS: windows5.0.
-func IUnknown_Set(ppunk uintptr, punk uintptr) {
-	syscall.SyscallN(procIUnknown_Set.Addr(), uintptr(ppunk), uintptr(punk))
+func IUnknown_Set(ppunk **systemcom.IUnknown, punk *systemcom.IUnknown) {
+	syscall.SyscallN(procIUnknown_Set.Addr(), uintptr(unsafe.Pointer(ppunk)), uintptr(unsafe.Pointer(punk)))
 }
 
 // IUnknown_SetSite calls SHLWAPI!IUnknown_SetSite.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_setsite
 // Minimum OS: windows5.0.
-func IUnknown_SetSite(punk uintptr, punkSite uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIUnknown_SetSite.Addr(), uintptr(punk), uintptr(punkSite))
+func IUnknown_SetSite(punk *systemcom.IUnknown, punkSite *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIUnknown_SetSite.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(punkSite)))
 	return foundation.HRESULT(r1)
 }
 
@@ -1900,17 +1900,17 @@ func LoadUserProfileW(hToken foundation.HANDLE, lpProfileInfo *PROFILEINFOW) err
 }
 
 // OleSaveToStreamEx calls hlink!OleSaveToStreamEx.
-func OleSaveToStreamEx(piunk uintptr, pistm uintptr, fClearDirty foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleSaveToStreamEx.Addr(), uintptr(piunk), uintptr(pistm), uintptr(fClearDirty))
+func OleSaveToStreamEx(piunk *systemcom.IUnknown, pistm *systemcom.IStream, fClearDirty foundation.BOOL) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procOleSaveToStreamEx.Addr(), uintptr(unsafe.Pointer(piunk)), uintptr(unsafe.Pointer(pistm)), uintptr(fClearDirty))
 	return foundation.HRESULT(r1)
 }
 
 // OpenRegStream calls SHELL32!OpenRegStream.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-openregstream
 // Minimum OS: windows5.1.2600.
-func OpenRegStream(hkey systemregistry.HKEY, pszSubkey foundation.PWSTR, pszValue foundation.PWSTR, grfMode uint32) uintptr {
+func OpenRegStream(hkey systemregistry.HKEY, pszSubkey foundation.PWSTR, pszValue foundation.PWSTR, grfMode uint32) *systemcom.IStream {
 	r1, _, _ := syscall.SyscallN(procOpenRegStream.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(pszSubkey)), uintptr(unsafe.Pointer(pszValue)), uintptr(grfMode))
-	return uintptr(r1)
+	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
 
 // ParseURLA calls SHLWAPI!ParseURLA.
@@ -3239,8 +3239,8 @@ func SHAppBarMessage(dwMessage uint32, pData *APPBARDATA) uintptr {
 // SHAssocEnumHandlers calls SHELL32!SHAssocEnumHandlers.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shassocenumhandlers
 // Minimum OS: windows6.0.6000.
-func SHAssocEnumHandlers(pszExtra foundation.PWSTR, afFilter ASSOC_FILTER, ppEnumHandler uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHAssocEnumHandlers.Addr(), uintptr(unsafe.Pointer(pszExtra)), uintptr(afFilter), uintptr(ppEnumHandler))
+func SHAssocEnumHandlers(pszExtra foundation.PWSTR, afFilter ASSOC_FILTER, ppEnumHandler **IEnumAssocHandlers) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHAssocEnumHandlers.Addr(), uintptr(unsafe.Pointer(pszExtra)), uintptr(afFilter), uintptr(unsafe.Pointer(ppEnumHandler)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3263,24 +3263,24 @@ func SHAutoComplete(hwndEdit foundation.HWND, dwFlags SHELL_AUTOCOMPLETE_FLAGS) 
 // SHBindToFolderIDListParent calls SHELL32!SHBindToFolderIDListParent.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtofolderidlistparent
 // Minimum OS: windows6.0.6000.
-func SHBindToFolderIDListParent(psfRoot uintptr, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHBindToFolderIDListParent.Addr(), uintptr(psfRoot), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(ppidlLast)))
+func SHBindToFolderIDListParent(psfRoot *IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHBindToFolderIDListParent.Addr(), uintptr(unsafe.Pointer(psfRoot)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(ppidlLast)))
 	return foundation.HRESULT(r1)
 }
 
 // SHBindToFolderIDListParentEx calls SHELL32!SHBindToFolderIDListParentEx.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtofolderidlistparentex
 // Minimum OS: windows6.0.6000.
-func SHBindToFolderIDListParentEx(psfRoot uintptr, pidl *uishellcommon.ITEMIDLIST, ppbc uintptr, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHBindToFolderIDListParentEx.Addr(), uintptr(psfRoot), uintptr(unsafe.Pointer(pidl)), uintptr(ppbc), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(ppidlLast)))
+func SHBindToFolderIDListParentEx(psfRoot *IShellFolder, pidl *uishellcommon.ITEMIDLIST, ppbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHBindToFolderIDListParentEx.Addr(), uintptr(unsafe.Pointer(psfRoot)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(ppbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(ppidlLast)))
 	return foundation.HRESULT(r1)
 }
 
 // SHBindToObject calls SHELL32!SHBindToObject.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtoobject
 // Minimum OS: windows6.0.6000.
-func SHBindToObject(psf uintptr, pidl *uishellcommon.ITEMIDLIST, pbc uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHBindToObject.Addr(), uintptr(psf), uintptr(unsafe.Pointer(pidl)), uintptr(pbc), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHBindToObject(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHBindToObject.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3373,8 +3373,8 @@ func SHCloneSpecialIDList(hwnd foundation.HWND, csidl int32, fCreate foundation.
 // SHCoCreateInstance calls SHELL32!SHCoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcocreateinstance
 // Minimum OS: windows5.1.2600.
-func SHCoCreateInstance(pszCLSID foundation.PWSTR, pclsid *win32.GUID, pUnkOuter uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCoCreateInstance.Addr(), uintptr(unsafe.Pointer(pszCLSID)), uintptr(unsafe.Pointer(pclsid)), uintptr(pUnkOuter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHCoCreateInstance(pszCLSID foundation.PWSTR, pclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCoCreateInstance.Addr(), uintptr(unsafe.Pointer(pszCLSID)), uintptr(unsafe.Pointer(pclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3405,8 +3405,8 @@ func SHCreateAssociationRegistration(riid *win32.GUID, ppv *unsafe.Pointer) foun
 // SHCreateDataObject calls SHELL32!SHCreateDataObject.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreatedataobject
 // Minimum OS: windows6.0.6000.
-func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, cidl uint32, apidl **uishellcommon.ITEMIDLIST, pdtInner uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateDataObject.Addr(), uintptr(unsafe.Pointer(pidlFolder)), uintptr(cidl), uintptr(unsafe.Pointer(apidl)), uintptr(pdtInner), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, cidl uint32, apidl **uishellcommon.ITEMIDLIST, pdtInner *systemcom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateDataObject.Addr(), uintptr(unsafe.Pointer(pidlFolder)), uintptr(cidl), uintptr(unsafe.Pointer(apidl)), uintptr(unsafe.Pointer(pdtInner)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3429,8 +3429,8 @@ func SHCreateDefaultExtractIcon(riid *win32.GUID, ppv *unsafe.Pointer) foundatio
 // SHCreateDefaultPropertiesOp calls SHELL32!SHCreateDefaultPropertiesOp.
 // https://learn.microsoft.com/windows/win32/api/shobjidl/nf-shobjidl-shcreatedefaultpropertiesop
 // Minimum OS: windows6.0.6000.
-func SHCreateDefaultPropertiesOp(psi uintptr, ppFileOp uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateDefaultPropertiesOp.Addr(), uintptr(psi), uintptr(ppFileOp))
+func SHCreateDefaultPropertiesOp(psi *IShellItem, ppFileOp **IFileOperation) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateDefaultPropertiesOp.Addr(), uintptr(unsafe.Pointer(psi)), uintptr(unsafe.Pointer(ppFileOp)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3477,16 +3477,16 @@ func SHCreateItemFromIDList(pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, pp
 // SHCreateItemFromParsingName calls SHELL32!SHCreateItemFromParsingName.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemfromparsingname
 // Minimum OS: windows6.0.6000.
-func SHCreateItemFromParsingName(pszPath foundation.PWSTR, pbc uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateItemFromParsingName.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(pbc), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHCreateItemFromParsingName(pszPath foundation.PWSTR, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateItemFromParsingName.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateItemFromRelativeName calls SHELL32!SHCreateItemFromRelativeName.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemfromrelativename
 // Minimum OS: windows6.0.6000.
-func SHCreateItemFromRelativeName(psiParent uintptr, pszName foundation.PWSTR, pbc uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateItemFromRelativeName.Addr(), uintptr(psiParent), uintptr(unsafe.Pointer(pszName)), uintptr(pbc), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHCreateItemFromRelativeName(psiParent *IShellItem, pszName foundation.PWSTR, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateItemFromRelativeName.Addr(), uintptr(unsafe.Pointer(psiParent)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3501,17 +3501,17 @@ func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem found
 // SHCreateItemWithParent calls SHELL32!SHCreateItemWithParent.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemwithparent
 // Minimum OS: windows6.0.6000.
-func SHCreateItemWithParent(pidlParent *uishellcommon.ITEMIDLIST, psfParent uintptr, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppvItem *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateItemWithParent.Addr(), uintptr(unsafe.Pointer(pidlParent)), uintptr(psfParent), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvItem)))
+func SHCreateItemWithParent(pidlParent *uishellcommon.ITEMIDLIST, psfParent *IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppvItem *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateItemWithParent.Addr(), uintptr(unsafe.Pointer(pidlParent)), uintptr(unsafe.Pointer(psfParent)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvItem)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateMemStream calls SHLWAPI!SHCreateMemStream.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcreatememstream
 // Minimum OS: windows5.0.
-func SHCreateMemStream(pInit *byte, cbInit uint32) uintptr {
+func SHCreateMemStream(pInit *byte, cbInit uint32) *systemcom.IStream {
 	r1, _, _ := syscall.SyscallN(procSHCreateMemStream.Addr(), uintptr(unsafe.Pointer(pInit)), uintptr(cbInit))
-	return uintptr(r1)
+	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
 
 // SHCreateProcessAsUserW calls SHELL32!SHCreateProcessAsUserW.
@@ -3536,64 +3536,64 @@ func SHCreatePropSheetExtArray(hKey systemregistry.HKEY, pszSubKey foundation.PW
 // SHCreateQueryCancelAutoPlayMoniker calls SHELL32!SHCreateQueryCancelAutoPlayMoniker.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shcreatequerycancelautoplaymoniker
 // Minimum OS: windows5.1.2600.
-func SHCreateQueryCancelAutoPlayMoniker(ppmoniker uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateQueryCancelAutoPlayMoniker.Addr(), uintptr(ppmoniker))
+func SHCreateQueryCancelAutoPlayMoniker(ppmoniker **systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateQueryCancelAutoPlayMoniker.Addr(), uintptr(unsafe.Pointer(ppmoniker)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateShellFolderView calls SHELL32!SHCreateShellFolderView.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreateshellfolderview
 // Minimum OS: windows5.0.
-func SHCreateShellFolderView(pcsfv *SFV_CREATE, ppsv uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateShellFolderView.Addr(), uintptr(unsafe.Pointer(pcsfv)), uintptr(ppsv))
+func SHCreateShellFolderView(pcsfv *SFV_CREATE, ppsv **IShellView) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateShellFolderView.Addr(), uintptr(unsafe.Pointer(pcsfv)), uintptr(unsafe.Pointer(ppsv)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateShellFolderViewEx calls SHELL32!SHCreateShellFolderViewEx.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreateshellfolderviewex
 // Minimum OS: windows5.0.
-func SHCreateShellFolderViewEx(pcsfv *CSFV, ppsv uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateShellFolderViewEx.Addr(), uintptr(unsafe.Pointer(pcsfv)), uintptr(ppsv))
+func SHCreateShellFolderViewEx(pcsfv *CSFV, ppsv **IShellView) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateShellFolderViewEx.Addr(), uintptr(unsafe.Pointer(pcsfv)), uintptr(unsafe.Pointer(ppsv)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateShellItem calls SHELL32!SHCreateShellItem.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreateshellitem
 // Minimum OS: windows5.1.2600.
-func SHCreateShellItem(pidlParent *uishellcommon.ITEMIDLIST, psfParent uintptr, pidl *uishellcommon.ITEMIDLIST, ppsi uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateShellItem.Addr(), uintptr(unsafe.Pointer(pidlParent)), uintptr(psfParent), uintptr(unsafe.Pointer(pidl)), uintptr(ppsi))
+func SHCreateShellItem(pidlParent *uishellcommon.ITEMIDLIST, psfParent *IShellFolder, pidl *uishellcommon.ITEMIDLIST, ppsi **IShellItem) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateShellItem.Addr(), uintptr(unsafe.Pointer(pidlParent)), uintptr(unsafe.Pointer(psfParent)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(ppsi)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateShellItemArray calls SHELL32!SHCreateShellItemArray.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarray
 // Minimum OS: windows6.0.6000.
-func SHCreateShellItemArray(pidlParent *uishellcommon.ITEMIDLIST, psf uintptr, cidl uint32, ppidl **uishellcommon.ITEMIDLIST, ppsiItemArray uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArray.Addr(), uintptr(unsafe.Pointer(pidlParent)), uintptr(psf), uintptr(cidl), uintptr(unsafe.Pointer(ppidl)), uintptr(ppsiItemArray))
+func SHCreateShellItemArray(pidlParent *uishellcommon.ITEMIDLIST, psf *IShellFolder, cidl uint32, ppidl **uishellcommon.ITEMIDLIST, ppsiItemArray **IShellItemArray) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArray.Addr(), uintptr(unsafe.Pointer(pidlParent)), uintptr(unsafe.Pointer(psf)), uintptr(cidl), uintptr(unsafe.Pointer(ppidl)), uintptr(unsafe.Pointer(ppsiItemArray)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateShellItemArrayFromDataObject calls SHELL32!SHCreateShellItemArrayFromDataObject.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarrayfromdataobject
 // Minimum OS: windows6.0.6000.
-func SHCreateShellItemArrayFromDataObject(pdo uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArrayFromDataObject.Addr(), uintptr(pdo), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHCreateShellItemArrayFromDataObject(pdo *systemcom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArrayFromDataObject.Addr(), uintptr(unsafe.Pointer(pdo)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateShellItemArrayFromIDLists calls SHELL32!SHCreateShellItemArrayFromIDLists.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarrayfromidlists
 // Minimum OS: windows6.0.6000.
-func SHCreateShellItemArrayFromIDLists(cidl uint32, rgpidl **uishellcommon.ITEMIDLIST, ppsiItemArray uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArrayFromIDLists.Addr(), uintptr(cidl), uintptr(unsafe.Pointer(rgpidl)), uintptr(ppsiItemArray))
+func SHCreateShellItemArrayFromIDLists(cidl uint32, rgpidl **uishellcommon.ITEMIDLIST, ppsiItemArray **IShellItemArray) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArrayFromIDLists.Addr(), uintptr(cidl), uintptr(unsafe.Pointer(rgpidl)), uintptr(unsafe.Pointer(ppsiItemArray)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateShellItemArrayFromShellItem calls SHELL32!SHCreateShellItemArrayFromShellItem.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarrayfromshellitem
 // Minimum OS: windows6.0.6000.
-func SHCreateShellItemArrayFromShellItem(psi uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArrayFromShellItem.Addr(), uintptr(psi), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHCreateShellItemArrayFromShellItem(psi *IShellItem, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateShellItemArrayFromShellItem.Addr(), uintptr(unsafe.Pointer(psi)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3608,32 +3608,32 @@ func SHCreateShellPalette(hdc graphicsgdi.HDC) graphicsgdi.HPALETTE {
 // SHCreateStdEnumFmtEtc calls SHELL32!SHCreateStdEnumFmtEtc.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreatestdenumfmtetc
 // Minimum OS: windows5.1.2600.
-func SHCreateStdEnumFmtEtc(cfmt uint32, afmt *systemcom.FORMATETC, ppenumFormatEtc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateStdEnumFmtEtc.Addr(), uintptr(cfmt), uintptr(unsafe.Pointer(afmt)), uintptr(ppenumFormatEtc))
+func SHCreateStdEnumFmtEtc(cfmt uint32, afmt *systemcom.FORMATETC, ppenumFormatEtc **systemcom.IEnumFORMATETC) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateStdEnumFmtEtc.Addr(), uintptr(cfmt), uintptr(unsafe.Pointer(afmt)), uintptr(unsafe.Pointer(ppenumFormatEtc)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateStreamOnFileA calls SHLWAPI!SHCreateStreamOnFileA.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcreatestreamonfilea
 // Minimum OS: windows5.1.2600.
-func SHCreateStreamOnFileA(pszFile foundation.PSTR, grfMode uint32, ppstm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateStreamOnFileA.Addr(), uintptr(unsafe.Pointer(pszFile)), uintptr(grfMode), uintptr(ppstm))
+func SHCreateStreamOnFileA(pszFile foundation.PSTR, grfMode uint32, ppstm **systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateStreamOnFileA.Addr(), uintptr(unsafe.Pointer(pszFile)), uintptr(grfMode), uintptr(unsafe.Pointer(ppstm)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateStreamOnFileEx calls SHLWAPI!SHCreateStreamOnFileEx.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcreatestreamonfileex
 // Minimum OS: windows5.1.2600.
-func SHCreateStreamOnFileEx(pszFile foundation.PWSTR, grfMode uint32, dwAttributes uint32, fCreate foundation.BOOL, pstmTemplate uintptr, ppstm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateStreamOnFileEx.Addr(), uintptr(unsafe.Pointer(pszFile)), uintptr(grfMode), uintptr(dwAttributes), uintptr(fCreate), uintptr(pstmTemplate), uintptr(ppstm))
+func SHCreateStreamOnFileEx(pszFile foundation.PWSTR, grfMode uint32, dwAttributes uint32, fCreate foundation.BOOL, pstmTemplate *systemcom.IStream, ppstm **systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateStreamOnFileEx.Addr(), uintptr(unsafe.Pointer(pszFile)), uintptr(grfMode), uintptr(dwAttributes), uintptr(fCreate), uintptr(unsafe.Pointer(pstmTemplate)), uintptr(unsafe.Pointer(ppstm)))
 	return foundation.HRESULT(r1)
 }
 
 // SHCreateStreamOnFileW calls SHLWAPI!SHCreateStreamOnFileW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcreatestreamonfilew
 // Minimum OS: windows5.1.2600.
-func SHCreateStreamOnFileW(pszFile foundation.PWSTR, grfMode uint32, ppstm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateStreamOnFileW.Addr(), uintptr(unsafe.Pointer(pszFile)), uintptr(grfMode), uintptr(ppstm))
+func SHCreateStreamOnFileW(pszFile foundation.PWSTR, grfMode uint32, ppstm **systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateStreamOnFileW.Addr(), uintptr(unsafe.Pointer(pszFile)), uintptr(grfMode), uintptr(unsafe.Pointer(ppstm)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3651,8 +3651,8 @@ func SHCreateThread(pfnThreadProc systemthreading.LPTHREAD_START_ROUTINE, pData 
 // SHCreateThreadRef calls SHLWAPI!SHCreateThreadRef.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcreatethreadref
 // Minimum OS: windows5.1.2600.
-func SHCreateThreadRef(pcRef *int32, ppunk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHCreateThreadRef.Addr(), uintptr(unsafe.Pointer(pcRef)), uintptr(ppunk))
+func SHCreateThreadRef(pcRef *int32, ppunk **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHCreateThreadRef.Addr(), uintptr(unsafe.Pointer(pcRef)), uintptr(unsafe.Pointer(ppunk)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3741,8 +3741,8 @@ func SHDestroyPropSheetExtArray(hpsxa HPSXA) {
 // SHDoDragDrop calls SHELL32!SHDoDragDrop.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shdodragdrop
 // Minimum OS: windows5.1.2600.
-func SHDoDragDrop(hwnd foundation.HWND, pdata uintptr, pdsrc uintptr, dwEffect systemole.DROPEFFECT, pdwEffect *systemole.DROPEFFECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHDoDragDrop.Addr(), uintptr(hwnd), uintptr(pdata), uintptr(pdsrc), uintptr(dwEffect), uintptr(unsafe.Pointer(pdwEffect)))
+func SHDoDragDrop(hwnd foundation.HWND, pdata *systemcom.IDataObject, pdsrc *systemole.IDropSource, dwEffect systemole.DROPEFFECT, pdwEffect *systemole.DROPEFFECT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHDoDragDrop.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pdata)), uintptr(unsafe.Pointer(pdsrc)), uintptr(dwEffect), uintptr(unsafe.Pointer(pdwEffect)))
 	return foundation.HRESULT(r1)
 }
 
@@ -3843,9 +3843,9 @@ func SHFindFiles(pidlFolder *uishellcommon.ITEMIDLIST, pidlSaveFile *uishellcomm
 // SHFind_InitMenuPopup calls SHELL32!SHFind_InitMenuPopup.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shfind_initmenupopup
 // Minimum OS: windows5.1.2600.
-func SHFind_InitMenuPopup(hmenu uiwindowsandmessaging.HMENU, hwndOwner foundation.HWND, idCmdFirst uint32, idCmdLast uint32) uintptr {
+func SHFind_InitMenuPopup(hmenu uiwindowsandmessaging.HMENU, hwndOwner foundation.HWND, idCmdFirst uint32, idCmdLast uint32) *IContextMenu {
 	r1, _, _ := syscall.SyscallN(procSHFind_InitMenuPopup.Addr(), uintptr(hmenu), uintptr(hwndOwner), uintptr(idCmdFirst), uintptr(idCmdLast))
-	return uintptr(r1)
+	return (*IContextMenu)(unsafe.Pointer(r1))
 }
 
 // SHFlushSFCache calls SHELL32!SHFlushSFCache.
@@ -3907,32 +3907,32 @@ func SHFreeShared(hData foundation.HANDLE, dwProcessId uint32) error {
 // SHGetAttributesFromDataObject calls SHELL32!SHGetAttributesFromDataObject.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetattributesfromdataobject
 // Minimum OS: windows5.1.2600.
-func SHGetAttributesFromDataObject(pdo uintptr, dwAttributeMask uint32, pdwAttributes *uint32, pcItems *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetAttributesFromDataObject.Addr(), uintptr(pdo), uintptr(dwAttributeMask), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pcItems)))
+func SHGetAttributesFromDataObject(pdo *systemcom.IDataObject, dwAttributeMask uint32, pdwAttributes *uint32, pcItems *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetAttributesFromDataObject.Addr(), uintptr(unsafe.Pointer(pdo)), uintptr(dwAttributeMask), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pcItems)))
 	return foundation.HRESULT(r1)
 }
 
 // SHGetDataFromIDListA calls SHELL32!SHGetDataFromIDListA.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetdatafromidlista
 // Minimum OS: windows5.1.2600.
-func SHGetDataFromIDListA(psf uintptr, pidl *uishellcommon.ITEMIDLIST, nFormat SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetDataFromIDListA.Addr(), uintptr(psf), uintptr(unsafe.Pointer(pidl)), uintptr(nFormat), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func SHGetDataFromIDListA(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetDataFromIDListA.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(nFormat), uintptr(unsafe.Pointer(pv)), uintptr(cb))
 	return foundation.HRESULT(r1)
 }
 
 // SHGetDataFromIDListW calls SHELL32!SHGetDataFromIDListW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetdatafromidlistw
 // Minimum OS: windows5.1.2600.
-func SHGetDataFromIDListW(psf uintptr, pidl *uishellcommon.ITEMIDLIST, nFormat SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetDataFromIDListW.Addr(), uintptr(psf), uintptr(unsafe.Pointer(pidl)), uintptr(nFormat), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func SHGetDataFromIDListW(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetDataFromIDListW.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(nFormat), uintptr(unsafe.Pointer(pv)), uintptr(cb))
 	return foundation.HRESULT(r1)
 }
 
 // SHGetDesktopFolder calls SHELL32!SHGetDesktopFolder.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetdesktopfolder
 // Minimum OS: windows5.1.2600.
-func SHGetDesktopFolder(ppshf uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetDesktopFolder.Addr(), uintptr(ppshf))
+func SHGetDesktopFolder(ppshf **IShellFolder) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetDesktopFolder.Addr(), uintptr(unsafe.Pointer(ppshf)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4019,8 +4019,8 @@ func SHGetFolderPathW(hwnd foundation.HWND, csidl int32, hToken foundation.HANDL
 // SHGetIDListFromObject calls SHELL32!SHGetIDListFromObject.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetidlistfromobject
 // Minimum OS: windows6.0.6000.
-func SHGetIDListFromObject(punk uintptr, ppidl **uishellcommon.ITEMIDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetIDListFromObject.Addr(), uintptr(punk), uintptr(unsafe.Pointer(ppidl)))
+func SHGetIDListFromObject(punk *systemcom.IUnknown, ppidl **uishellcommon.ITEMIDLIST) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetIDListFromObject.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(ppidl)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4051,8 +4051,8 @@ func SHGetImageList(iImageList int32, riid *win32.GUID, ppvObj *unsafe.Pointer) 
 // SHGetInstanceExplorer calls SHELL32!SHGetInstanceExplorer.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetinstanceexplorer
 // Minimum OS: windows5.1.2600.
-func SHGetInstanceExplorer(ppunk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetInstanceExplorer.Addr(), uintptr(ppunk))
+func SHGetInstanceExplorer(ppunk **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetInstanceExplorer.Addr(), uintptr(unsafe.Pointer(ppunk)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4067,16 +4067,16 @@ func SHGetInverseCMAP(pbMap *byte, cbMap uint32) foundation.HRESULT {
 // SHGetItemFromDataObject calls SHELL32!SHGetItemFromDataObject.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetitemfromdataobject
 // Minimum OS: windows6.1.
-func SHGetItemFromDataObject(pdtobj uintptr, dwFlags DATAOBJ_GET_ITEM_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetItemFromDataObject.Addr(), uintptr(pdtobj), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHGetItemFromDataObject(pdtobj *systemcom.IDataObject, dwFlags DATAOBJ_GET_ITEM_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetItemFromDataObject.Addr(), uintptr(unsafe.Pointer(pdtobj)), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // SHGetItemFromObject calls SHELL32!SHGetItemFromObject.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetitemfromobject
 // Minimum OS: windows6.1.
-func SHGetItemFromObject(punk uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetItemFromObject.Addr(), uintptr(punk), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func SHGetItemFromObject(punk *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetItemFromObject.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4115,8 +4115,8 @@ func SHGetLocalizedName(pszPath foundation.PWSTR, pszResModule foundation.PWSTR,
 // SHGetMalloc calls SHELL32!SHGetMalloc.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetmalloc
 // Minimum OS: windows5.1.2600.
-func SHGetMalloc(ppMalloc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetMalloc.Addr(), uintptr(ppMalloc))
+func SHGetMalloc(ppMalloc **systemcom.IMalloc) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetMalloc.Addr(), uintptr(unsafe.Pointer(ppMalloc)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4171,8 +4171,8 @@ func SHGetPathFromIDListW(pidl *uishellcommon.ITEMIDLIST, pszPath foundation.PWS
 // SHGetRealIDL calls SHELL32!SHGetRealIDL.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetrealidl
 // Minimum OS: windows5.1.2600.
-func SHGetRealIDL(psf uintptr, pidlSimple *uishellcommon.ITEMIDLIST, ppidlReal **uishellcommon.ITEMIDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetRealIDL.Addr(), uintptr(psf), uintptr(unsafe.Pointer(pidlSimple)), uintptr(unsafe.Pointer(ppidlReal)))
+func SHGetRealIDL(psf *IShellFolder, pidlSimple *uishellcommon.ITEMIDLIST, ppidlReal **uishellcommon.ITEMIDLIST) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetRealIDL.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidlSimple)), uintptr(unsafe.Pointer(ppidlReal)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4233,16 +4233,16 @@ func SHGetStockIconInfo(siid SHSTOCKICONID, uFlags SHGSI_FLAGS, psii *SHSTOCKICO
 // SHGetTemporaryPropertyForItem calls SHELL32!SHGetTemporaryPropertyForItem.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgettemporarypropertyforitem
 // Minimum OS: windows6.0.6000.
-func SHGetTemporaryPropertyForItem(psi uintptr, propkey *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetTemporaryPropertyForItem.Addr(), uintptr(psi), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(ppropvar)))
+func SHGetTemporaryPropertyForItem(psi *IShellItem, propkey *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetTemporaryPropertyForItem.Addr(), uintptr(unsafe.Pointer(psi)), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(ppropvar)))
 	return foundation.HRESULT(r1)
 }
 
 // SHGetThreadRef calls SHLWAPI!SHGetThreadRef.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shgetthreadref
 // Minimum OS: windows5.0.
-func SHGetThreadRef(ppunk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetThreadRef.Addr(), uintptr(ppunk))
+func SHGetThreadRef(ppunk **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHGetThreadRef.Addr(), uintptr(unsafe.Pointer(ppunk)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4353,8 +4353,8 @@ func SHIsLowMemoryMachine(dwType uint32) foundation.BOOL {
 // SHLimitInputEdit calls SHELL32!SHLimitInputEdit.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shlimitinputedit
 // Minimum OS: windows5.0.
-func SHLimitInputEdit(hwndEdit foundation.HWND, psf uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHLimitInputEdit.Addr(), uintptr(hwndEdit), uintptr(psf))
+func SHLimitInputEdit(hwndEdit foundation.HWND, psf *IShellFolder) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHLimitInputEdit.Addr(), uintptr(hwndEdit), uintptr(unsafe.Pointer(psf)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4393,8 +4393,8 @@ func SHLockShared(hData foundation.HANDLE, dwProcessId uint32) unsafe.Pointer {
 // SHMapPIDLToSystemImageListIndex calls SHELL32!SHMapPIDLToSystemImageListIndex.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shmappidltosystemimagelistindex
 // Minimum OS: windows5.1.2600.
-func SHMapPIDLToSystemImageListIndex(pshf uintptr, pidl *uishellcommon.ITEMIDLIST, piIndexSel *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procSHMapPIDLToSystemImageListIndex.Addr(), uintptr(pshf), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(piIndexSel)))
+func SHMapPIDLToSystemImageListIndex(pshf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, piIndexSel *int32) int32 {
+	r1, _, _ := syscall.SyscallN(procSHMapPIDLToSystemImageListIndex.Addr(), uintptr(unsafe.Pointer(pshf)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(piIndexSel)))
 	return int32(r1)
 }
 
@@ -4417,8 +4417,8 @@ func SHMessageBoxCheckW(hwnd foundation.HWND, pszText foundation.PWSTR, pszCapti
 // SHMultiFileProperties calls SHELL32!SHMultiFileProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shmultifileproperties
 // Minimum OS: windows5.0.
-func SHMultiFileProperties(pdtobj uintptr, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHMultiFileProperties.Addr(), uintptr(pdtobj), uintptr(dwFlags))
+func SHMultiFileProperties(pdtobj *systemcom.IDataObject, dwFlags uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHMultiFileProperties.Addr(), uintptr(unsafe.Pointer(pdtobj)), uintptr(dwFlags))
 	return foundation.HRESULT(r1)
 }
 
@@ -4441,41 +4441,41 @@ func SHOpenFolderAndSelectItems(pidlFolder *uishellcommon.ITEMIDLIST, cidl uint3
 // SHOpenPropSheetW calls SHELL32!SHOpenPropSheetW.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shopenpropsheetw
 // Minimum OS: windows5.1.2600.
-func SHOpenPropSheetW(pszCaption foundation.PWSTR, ahkeys *systemregistry.HKEY, ckeys uint32, pclsidDefault *win32.GUID, pdtobj uintptr, psb uintptr, pStartPage foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSHOpenPropSheetW.Addr(), uintptr(unsafe.Pointer(pszCaption)), uintptr(unsafe.Pointer(ahkeys)), uintptr(ckeys), uintptr(unsafe.Pointer(pclsidDefault)), uintptr(pdtobj), uintptr(psb), uintptr(unsafe.Pointer(pStartPage)))
+func SHOpenPropSheetW(pszCaption foundation.PWSTR, ahkeys *systemregistry.HKEY, ckeys uint32, pclsidDefault *win32.GUID, pdtobj *systemcom.IDataObject, psb *IShellBrowser, pStartPage foundation.PWSTR) foundation.BOOL {
+	r1, _, _ := syscall.SyscallN(procSHOpenPropSheetW.Addr(), uintptr(unsafe.Pointer(pszCaption)), uintptr(unsafe.Pointer(ahkeys)), uintptr(ckeys), uintptr(unsafe.Pointer(pclsidDefault)), uintptr(unsafe.Pointer(pdtobj)), uintptr(unsafe.Pointer(psb)), uintptr(unsafe.Pointer(pStartPage)))
 	return foundation.BOOL(r1)
 }
 
 // SHOpenRegStream2A calls SHLWAPI!SHOpenRegStream2A.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shopenregstream2a
 // Minimum OS: windows5.0.
-func SHOpenRegStream2A(hkey systemregistry.HKEY, pszSubkey foundation.PSTR, pszValue foundation.PSTR, grfMode uint32) uintptr {
+func SHOpenRegStream2A(hkey systemregistry.HKEY, pszSubkey foundation.PSTR, pszValue foundation.PSTR, grfMode uint32) *systemcom.IStream {
 	r1, _, _ := syscall.SyscallN(procSHOpenRegStream2A.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(pszSubkey)), uintptr(unsafe.Pointer(pszValue)), uintptr(grfMode))
-	return uintptr(r1)
+	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
 
 // SHOpenRegStream2W calls SHLWAPI!SHOpenRegStream2W.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shopenregstream2w
 // Minimum OS: windows5.0.
-func SHOpenRegStream2W(hkey systemregistry.HKEY, pszSubkey foundation.PWSTR, pszValue foundation.PWSTR, grfMode uint32) uintptr {
+func SHOpenRegStream2W(hkey systemregistry.HKEY, pszSubkey foundation.PWSTR, pszValue foundation.PWSTR, grfMode uint32) *systemcom.IStream {
 	r1, _, _ := syscall.SyscallN(procSHOpenRegStream2W.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(pszSubkey)), uintptr(unsafe.Pointer(pszValue)), uintptr(grfMode))
-	return uintptr(r1)
+	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
 
 // SHOpenRegStreamA calls SHLWAPI!SHOpenRegStreamA.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shopenregstreama
 // Minimum OS: windows5.0.
-func SHOpenRegStreamA(hkey systemregistry.HKEY, pszSubkey foundation.PSTR, pszValue foundation.PSTR, grfMode uint32) uintptr {
+func SHOpenRegStreamA(hkey systemregistry.HKEY, pszSubkey foundation.PSTR, pszValue foundation.PSTR, grfMode uint32) *systemcom.IStream {
 	r1, _, _ := syscall.SyscallN(procSHOpenRegStreamA.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(pszSubkey)), uintptr(unsafe.Pointer(pszValue)), uintptr(grfMode))
-	return uintptr(r1)
+	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
 
 // SHOpenRegStreamW calls SHLWAPI!SHOpenRegStreamW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shopenregstreamw
 // Minimum OS: windows5.0.
-func SHOpenRegStreamW(hkey systemregistry.HKEY, pszSubkey foundation.PWSTR, pszValue foundation.PWSTR, grfMode uint32) uintptr {
+func SHOpenRegStreamW(hkey systemregistry.HKEY, pszSubkey foundation.PWSTR, pszValue foundation.PWSTR, grfMode uint32) *systemcom.IStream {
 	r1, _, _ := syscall.SyscallN(procSHOpenRegStreamW.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(pszSubkey)), uintptr(unsafe.Pointer(pszValue)), uintptr(grfMode))
-	return uintptr(r1)
+	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
 
 // SHOpenWithDialog calls SHELL32!SHOpenWithDialog.
@@ -4489,24 +4489,24 @@ func SHOpenWithDialog(hwndParent foundation.HWND, poainfo *OPENASINFO) foundatio
 // SHParseDisplayName calls SHELL32!SHParseDisplayName.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shparsedisplayname
 // Minimum OS: windows5.1.2600.
-func SHParseDisplayName(pszName foundation.PWSTR, pbc uintptr, ppidl **uishellcommon.ITEMIDLIST, sfgaoIn uint32, psfgaoOut *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHParseDisplayName.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(pbc), uintptr(unsafe.Pointer(ppidl)), uintptr(sfgaoIn), uintptr(unsafe.Pointer(psfgaoOut)))
+func SHParseDisplayName(pszName foundation.PWSTR, pbc *systemcom.IBindCtx, ppidl **uishellcommon.ITEMIDLIST, sfgaoIn uint32, psfgaoOut *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHParseDisplayName.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(ppidl)), uintptr(sfgaoIn), uintptr(unsafe.Pointer(psfgaoOut)))
 	return foundation.HRESULT(r1)
 }
 
 // SHPathPrepareForWriteA calls SHELL32!SHPathPrepareForWriteA.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpathprepareforwritea
 // Minimum OS: windows5.0.
-func SHPathPrepareForWriteA(hwnd foundation.HWND, punkEnableModless uintptr, pszPath foundation.PSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHPathPrepareForWriteA.Addr(), uintptr(hwnd), uintptr(punkEnableModless), uintptr(unsafe.Pointer(pszPath)), uintptr(dwFlags))
+func SHPathPrepareForWriteA(hwnd foundation.HWND, punkEnableModless *systemcom.IUnknown, pszPath foundation.PSTR, dwFlags uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHPathPrepareForWriteA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(punkEnableModless)), uintptr(unsafe.Pointer(pszPath)), uintptr(dwFlags))
 	return foundation.HRESULT(r1)
 }
 
 // SHPathPrepareForWriteW calls SHELL32!SHPathPrepareForWriteW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpathprepareforwritew
 // Minimum OS: windows5.0.
-func SHPathPrepareForWriteW(hwnd foundation.HWND, punkEnableModless uintptr, pszPath foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHPathPrepareForWriteW.Addr(), uintptr(hwnd), uintptr(punkEnableModless), uintptr(unsafe.Pointer(pszPath)), uintptr(dwFlags))
+func SHPathPrepareForWriteW(hwnd foundation.HWND, punkEnableModless *systemcom.IUnknown, pszPath foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHPathPrepareForWriteW.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(punkEnableModless)), uintptr(unsafe.Pointer(pszPath)), uintptr(dwFlags))
 	return foundation.HRESULT(r1)
 }
 
@@ -4865,8 +4865,8 @@ func SHReplaceFromPropSheetExtArray(hpsxa HPSXA, uPageID uint32, lpfnReplaceWith
 // SHResolveLibrary calls SHELL32!SHResolveLibrary.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shresolvelibrary
 // Minimum OS: windows6.1.
-func SHResolveLibrary(psiLibrary uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHResolveLibrary.Addr(), uintptr(psiLibrary))
+func SHResolveLibrary(psiLibrary *IShellItem) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHResolveLibrary.Addr(), uintptr(unsafe.Pointer(psiLibrary)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4897,8 +4897,8 @@ func SHSendMessageBroadcastW(uMsg uint32, wParam foundation.WPARAM, lParam found
 // SHSetDefaultProperties calls SHELL32!SHSetDefaultProperties.
 // https://learn.microsoft.com/windows/win32/api/shobjidl/nf-shobjidl-shsetdefaultproperties
 // Minimum OS: windows6.0.6000.
-func SHSetDefaultProperties(hwnd foundation.HWND, psi uintptr, dwFileOpFlags uint32, pfops uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHSetDefaultProperties.Addr(), uintptr(hwnd), uintptr(psi), uintptr(dwFileOpFlags), uintptr(pfops))
+func SHSetDefaultProperties(hwnd foundation.HWND, psi *IShellItem, dwFileOpFlags uint32, pfops *IFileOperationProgressSink) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHSetDefaultProperties.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(psi)), uintptr(dwFileOpFlags), uintptr(unsafe.Pointer(pfops)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4921,8 +4921,8 @@ func SHSetFolderPathW(csidl int32, hToken foundation.HANDLE, dwFlags uint32, psz
 // SHSetInstanceExplorer calls SHELL32!SHSetInstanceExplorer.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shsetinstanceexplorer
 // Minimum OS: windows5.1.2600.
-func SHSetInstanceExplorer(punk uintptr) {
-	syscall.SyscallN(procSHSetInstanceExplorer.Addr(), uintptr(punk))
+func SHSetInstanceExplorer(punk *systemcom.IUnknown) {
+	syscall.SyscallN(procSHSetInstanceExplorer.Addr(), uintptr(unsafe.Pointer(punk)))
 }
 
 // SHSetKnownFolderPath calls SHELL32!SHSetKnownFolderPath.
@@ -4944,16 +4944,16 @@ func SHSetLocalizedName(pszPath foundation.PWSTR, pszResModule foundation.PWSTR,
 // SHSetTemporaryPropertyForItem calls SHELL32!SHSetTemporaryPropertyForItem.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shsettemporarypropertyforitem
 // Minimum OS: windows6.0.6000.
-func SHSetTemporaryPropertyForItem(psi uintptr, propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHSetTemporaryPropertyForItem.Addr(), uintptr(psi), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(propvar)))
+func SHSetTemporaryPropertyForItem(psi *IShellItem, propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHSetTemporaryPropertyForItem.Addr(), uintptr(unsafe.Pointer(psi)), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(propvar)))
 	return foundation.HRESULT(r1)
 }
 
 // SHSetThreadRef calls SHLWAPI!SHSetThreadRef.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shsetthreadref
 // Minimum OS: windows5.0.
-func SHSetThreadRef(punk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHSetThreadRef.Addr(), uintptr(punk))
+func SHSetThreadRef(punk *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHSetThreadRef.Addr(), uintptr(unsafe.Pointer(punk)))
 	return foundation.HRESULT(r1)
 }
 
@@ -4992,8 +4992,8 @@ func SHShellFolderView_Message(hwndMain foundation.HWND, uMsg uint32, lParam fou
 // SHShowManageLibraryUI calls SHELL32!SHShowManageLibraryUI.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shshowmanagelibraryui
 // Minimum OS: windows6.1.
-func SHShowManageLibraryUI(psiLibrary uintptr, hwndOwner foundation.HWND, pszTitle foundation.PWSTR, pszInstruction foundation.PWSTR, lmdOptions LIBRARYMANAGEDIALOGOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHShowManageLibraryUI.Addr(), uintptr(psiLibrary), uintptr(hwndOwner), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszInstruction)), uintptr(lmdOptions))
+func SHShowManageLibraryUI(psiLibrary *IShellItem, hwndOwner foundation.HWND, pszTitle foundation.PWSTR, pszInstruction foundation.PWSTR, lmdOptions LIBRARYMANAGEDIALOGOPTIONS) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSHShowManageLibraryUI.Addr(), uintptr(unsafe.Pointer(psiLibrary)), uintptr(hwndOwner), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszInstruction)), uintptr(lmdOptions))
 	return foundation.HRESULT(r1)
 }
 
@@ -5008,8 +5008,8 @@ func SHSimpleIDListFromPath(pszPath foundation.PWSTR) *uishellcommon.ITEMIDLIST 
 // SHSkipJunction calls SHLWAPI!SHSkipJunction.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shskipjunction
 // Minimum OS: windows5.0.
-func SHSkipJunction(pbc uintptr, pclsid *win32.GUID) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSHSkipJunction.Addr(), uintptr(pbc), uintptr(unsafe.Pointer(pclsid)))
+func SHSkipJunction(pbc *systemcom.IBindCtx, pclsid *win32.GUID) foundation.BOOL {
+	r1, _, _ := syscall.SyscallN(procSHSkipJunction.Addr(), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(pclsid)))
 	return foundation.BOOL(r1)
 }
 
@@ -5307,8 +5307,8 @@ func SoftwareUpdateMessageBox(hWnd foundation.HWND, pszDistUnit foundation.PWSTR
 // StgMakeUniqueName calls SHELL32!StgMakeUniqueName.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-stgmakeuniquename
 // Minimum OS: windows6.1.
-func StgMakeUniqueName(pstgParent uintptr, pszFileSpec foundation.PWSTR, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgMakeUniqueName.Addr(), uintptr(pstgParent), uintptr(unsafe.Pointer(pszFileSpec)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func StgMakeUniqueName(pstgParent *systemcomstructuredstorage.IStorage, pszFileSpec foundation.PWSTR, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStgMakeUniqueName.Addr(), uintptr(unsafe.Pointer(pstgParent)), uintptr(unsafe.Pointer(pszFileSpec)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 

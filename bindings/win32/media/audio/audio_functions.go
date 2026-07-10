@@ -185,64 +185,64 @@ var (
 // ActivateAudioInterfaceAsync calls MMDevAPI!ActivateAudioInterfaceAsync.
 // https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-activateaudiointerfaceasync
 // Minimum OS: windows8.0.
-func ActivateAudioInterfaceAsync(deviceInterfacePath foundation.PWSTR, riid *win32.GUID, activationParams *systemcomstructuredstorage.PROPVARIANT, completionHandler uintptr, activationOperation uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procActivateAudioInterfaceAsync.Addr(), uintptr(unsafe.Pointer(deviceInterfacePath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(activationParams)), uintptr(completionHandler), uintptr(activationOperation))
+func ActivateAudioInterfaceAsync(deviceInterfacePath foundation.PWSTR, riid *win32.GUID, activationParams *systemcomstructuredstorage.PROPVARIANT, completionHandler *IActivateAudioInterfaceCompletionHandler, activationOperation **IActivateAudioInterfaceAsyncOperation) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procActivateAudioInterfaceAsync.Addr(), uintptr(unsafe.Pointer(deviceInterfacePath)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(activationParams)), uintptr(unsafe.Pointer(completionHandler)), uintptr(unsafe.Pointer(activationOperation)))
 	return foundation.HRESULT(r1)
 }
 
 // CoRegisterMessageFilter calls OLE32!CoRegisterMessageFilter.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregistermessagefilter
 // Minimum OS: windows5.0.
-func CoRegisterMessageFilter(lpMessageFilter uintptr, lplpMessageFilter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoRegisterMessageFilter.Addr(), uintptr(lpMessageFilter), uintptr(lplpMessageFilter))
+func CoRegisterMessageFilter(lpMessageFilter *IMessageFilter, lplpMessageFilter **IMessageFilter) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoRegisterMessageFilter.Addr(), uintptr(unsafe.Pointer(lpMessageFilter)), uintptr(unsafe.Pointer(lplpMessageFilter)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateCaptureAudioStateMonitor calls Windows.Media.MediaControl!CreateCaptureAudioStateMonitor.
-func CreateCaptureAudioStateMonitor(audioStateMonitor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitor.Addr(), uintptr(audioStateMonitor))
+func CreateCaptureAudioStateMonitor(audioStateMonitor **IAudioStateMonitor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitor.Addr(), uintptr(unsafe.Pointer(audioStateMonitor)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateCaptureAudioStateMonitorForCategory calls Windows.Media.MediaControl!CreateCaptureAudioStateMonitorForCategory.
-func CreateCaptureAudioStateMonitorForCategory(category AUDIO_STREAM_CATEGORY, audioStateMonitor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategory.Addr(), uintptr(category), uintptr(audioStateMonitor))
+func CreateCaptureAudioStateMonitorForCategory(category AUDIO_STREAM_CATEGORY, audioStateMonitor **IAudioStateMonitor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategory.Addr(), uintptr(category), uintptr(unsafe.Pointer(audioStateMonitor)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateCaptureAudioStateMonitorForCategoryAndDeviceId calls Windows.Media.MediaControl!CreateCaptureAudioStateMonitorForCategoryAndDeviceId.
-func CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category AUDIO_STREAM_CATEGORY, deviceId foundation.PWSTR, audioStateMonitor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategoryAndDeviceId.Addr(), uintptr(category), uintptr(unsafe.Pointer(deviceId)), uintptr(audioStateMonitor))
+func CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category AUDIO_STREAM_CATEGORY, deviceId foundation.PWSTR, audioStateMonitor **IAudioStateMonitor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategoryAndDeviceId.Addr(), uintptr(category), uintptr(unsafe.Pointer(deviceId)), uintptr(unsafe.Pointer(audioStateMonitor)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateCaptureAudioStateMonitorForCategoryAndDeviceRole calls Windows.Media.MediaControl!CreateCaptureAudioStateMonitorForCategoryAndDeviceRole.
-func CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category AUDIO_STREAM_CATEGORY, role ERole, audioStateMonitor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategoryAndDeviceRole.Addr(), uintptr(category), uintptr(role), uintptr(audioStateMonitor))
+func CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category AUDIO_STREAM_CATEGORY, role ERole, audioStateMonitor **IAudioStateMonitor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateCaptureAudioStateMonitorForCategoryAndDeviceRole.Addr(), uintptr(category), uintptr(role), uintptr(unsafe.Pointer(audioStateMonitor)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateRenderAudioStateMonitor calls Windows.Media.MediaControl!CreateRenderAudioStateMonitor.
-func CreateRenderAudioStateMonitor(audioStateMonitor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitor.Addr(), uintptr(audioStateMonitor))
+func CreateRenderAudioStateMonitor(audioStateMonitor **IAudioStateMonitor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitor.Addr(), uintptr(unsafe.Pointer(audioStateMonitor)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateRenderAudioStateMonitorForCategory calls Windows.Media.MediaControl!CreateRenderAudioStateMonitorForCategory.
-func CreateRenderAudioStateMonitorForCategory(category AUDIO_STREAM_CATEGORY, audioStateMonitor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategory.Addr(), uintptr(category), uintptr(audioStateMonitor))
+func CreateRenderAudioStateMonitorForCategory(category AUDIO_STREAM_CATEGORY, audioStateMonitor **IAudioStateMonitor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategory.Addr(), uintptr(category), uintptr(unsafe.Pointer(audioStateMonitor)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateRenderAudioStateMonitorForCategoryAndDeviceId calls Windows.Media.MediaControl!CreateRenderAudioStateMonitorForCategoryAndDeviceId.
-func CreateRenderAudioStateMonitorForCategoryAndDeviceId(category AUDIO_STREAM_CATEGORY, deviceId foundation.PWSTR, audioStateMonitor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategoryAndDeviceId.Addr(), uintptr(category), uintptr(unsafe.Pointer(deviceId)), uintptr(audioStateMonitor))
+func CreateRenderAudioStateMonitorForCategoryAndDeviceId(category AUDIO_STREAM_CATEGORY, deviceId foundation.PWSTR, audioStateMonitor **IAudioStateMonitor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategoryAndDeviceId.Addr(), uintptr(category), uintptr(unsafe.Pointer(deviceId)), uintptr(unsafe.Pointer(audioStateMonitor)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateRenderAudioStateMonitorForCategoryAndDeviceRole calls Windows.Media.MediaControl!CreateRenderAudioStateMonitorForCategoryAndDeviceRole.
-func CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category AUDIO_STREAM_CATEGORY, role ERole, audioStateMonitor uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategoryAndDeviceRole.Addr(), uintptr(category), uintptr(role), uintptr(audioStateMonitor))
+func CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category AUDIO_STREAM_CATEGORY, role ERole, audioStateMonitor **IAudioStateMonitor) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateRenderAudioStateMonitorForCategoryAndDeviceRole.Addr(), uintptr(category), uintptr(role), uintptr(unsafe.Pointer(audioStateMonitor)))
 	return foundation.HRESULT(r1)
 }
 

@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type D3D12_APPLICATION_SPECIFIC_DRIVER_BLOB_STATUS int32
@@ -3339,8 +3340,8 @@ type D3D12_AUTO_BREADCRUMB_NODE struct {
 	PCommandListDebugNameW  foundation.PWSTR
 	PCommandQueueDebugNameA *byte
 	PCommandQueueDebugNameW foundation.PWSTR
-	PCommandList            [1]uint64
-	PCommandQueue           [1]uint64
+	PCommandList            *ID3D12GraphicsCommandList
+	PCommandQueue           *ID3D12CommandQueue
 	BreadcrumbCount         uint32
 	PLastBreadcrumbValue    *uint32
 	PCommandHistory         *D3D12_AUTO_BREADCRUMB_OP
@@ -3352,8 +3353,8 @@ type D3D12_AUTO_BREADCRUMB_NODE1 struct {
 	PCommandListDebugNameW  foundation.PWSTR
 	PCommandQueueDebugNameA *byte
 	PCommandQueueDebugNameW foundation.PWSTR
-	PCommandList            [1]uint64
-	PCommandQueue           [1]uint64
+	PCommandList            *ID3D12GraphicsCommandList
+	PCommandQueue           *ID3D12CommandQueue
 	BreadcrumbCount         uint32
 	PLastBreadcrumbValue    *uint32
 	PCommandHistory         *D3D12_AUTO_BREADCRUMB_OP
@@ -3419,7 +3420,7 @@ type D3D12_BUFFER_BARRIER struct {
 	SyncAfter    D3D12_BARRIER_SYNC
 	AccessBefore D3D12_BARRIER_ACCESS
 	AccessAfter  D3D12_BARRIER_ACCESS
-	PResource    [1]uint64
+	PResource    *ID3D12Resource
 	Offset       uint64
 	Size         uint64
 }
@@ -3579,7 +3580,7 @@ type D3D12_COMPILER_DATABASE_PATH struct {
 }
 
 type D3D12_COMPILER_EXISTING_COLLECTION_DESC struct {
-	PExistingCollection [1]uint64
+	PExistingCollection *ID3D12CompilerStateObject
 	NumExports          uint32
 	PExports            *D3D12_EXPORT_DESC
 }
@@ -3591,7 +3592,7 @@ type D3D12_COMPILER_TARGET struct {
 
 // D3D12_COMPUTE_PIPELINE_STATE_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_compute_pipeline_state_desc
 type D3D12_COMPUTE_PIPELINE_STATE_DESC struct {
-	PRootSignature [1]uint64
+	PRootSignature *ID3D12RootSignature
 	CS             D3D12_SHADER_BYTECODE
 	NodeMask       uint32
 	CachedPSO      D3D12_CACHED_PIPELINE_STATE
@@ -3842,7 +3843,7 @@ type D3D12_DRED_ALLOCATION_NODE1 struct {
 	ObjectNameW    foundation.PWSTR
 	AllocationType D3D12_DRED_ALLOCATION_TYPE
 	PNext          *D3D12_DRED_ALLOCATION_NODE1
-	PObject        [1]uint64
+	PObject        *systemcom.IUnknown
 }
 
 // D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_dred_auto_breadcrumbs_output
@@ -3902,7 +3903,7 @@ type D3D12_EXISTING_COLLECTION_BY_KEY_DESC struct {
 
 // D3D12_EXISTING_COLLECTION_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_existing_collection_desc
 type D3D12_EXISTING_COLLECTION_DESC struct {
-	PExistingCollection [1]uint64
+	PExistingCollection *ID3D12StateObject
 	NumExports          uint32
 	PExports            *D3D12_EXPORT_DESC
 }
@@ -4312,7 +4313,7 @@ type D3D12_GLOBAL_BARRIER struct {
 
 // D3D12_GLOBAL_ROOT_SIGNATURE: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_global_root_signature
 type D3D12_GLOBAL_ROOT_SIGNATURE struct {
-	PGlobalRootSignature [1]uint64
+	PGlobalRootSignature *ID3D12RootSignature
 }
 
 type D3D12_GLOBAL_SERIALIZED_ROOT_SIGNATURE struct {
@@ -4345,7 +4346,7 @@ type D3D12_GPU_VIRTUAL_ADDRESS_RANGE_AND_STRIDE struct {
 
 // D3D12_GRAPHICS_PIPELINE_STATE_DESC: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_graphics_pipeline_state_desc
 type D3D12_GRAPHICS_PIPELINE_STATE_DESC struct {
-	PRootSignature        [1]uint64
+	PRootSignature        *ID3D12RootSignature
 	VS                    D3D12_SHADER_BYTECODE
 	PS                    D3D12_SHADER_BYTECODE
 	DS                    D3D12_SHADER_BYTECODE
@@ -4459,7 +4460,7 @@ type D3D12_LIBRARY_DESC struct {
 
 // D3D12_LOCAL_ROOT_SIGNATURE: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_local_root_signature
 type D3D12_LOCAL_ROOT_SIGNATURE struct {
-	PLocalRootSignature [1]uint64
+	PLocalRootSignature *ID3D12RootSignature
 }
 
 type D3D12_LOCAL_SERIALIZED_ROOT_SIGNATURE struct {
@@ -4929,8 +4930,8 @@ type D3D12_RENDER_PASS_ENDING_ACCESS_PRESERVE_LOCAL_PARAMETERS struct {
 
 // D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_render_pass_ending_access_resolve_parameters
 type D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS struct {
-	PSrcResource           [1]uint64
-	PDstResource           [1]uint64
+	PSrcResource           *ID3D12Resource
+	PDstResource           *ID3D12Resource
 	SubresourceCount       uint32
 	PSubresourceParameters *D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS
 	Format                 graphicsdxgicommon.DXGI_FORMAT
@@ -4983,8 +4984,8 @@ type D3D12_RENDER_TARGET_VIEW_DESC struct {
 
 // D3D12_RESOURCE_ALIASING_BARRIER: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_resource_aliasing_barrier
 type D3D12_RESOURCE_ALIASING_BARRIER struct {
-	PResourceBefore [1]uint64
-	PResourceAfter  [1]uint64
+	PResourceBefore *ID3D12Resource
+	PResourceAfter  *ID3D12Resource
 }
 
 // D3D12_RESOURCE_ALLOCATION_INFO: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_resource_allocation_info
@@ -5044,7 +5045,7 @@ type D3D12_RESOURCE_DESC1 struct {
 
 // D3D12_RESOURCE_TRANSITION_BARRIER: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_resource_transition_barrier
 type D3D12_RESOURCE_TRANSITION_BARRIER struct {
-	PResource   [1]uint64
+	PResource   *ID3D12Resource
 	Subresource uint32
 	StateBefore D3D12_RESOURCE_STATES
 	StateAfter  D3D12_RESOURCE_STATES
@@ -5052,7 +5053,7 @@ type D3D12_RESOURCE_TRANSITION_BARRIER struct {
 
 // D3D12_RESOURCE_UAV_BARRIER: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_resource_uav_barrier
 type D3D12_RESOURCE_UAV_BARRIER struct {
-	PResource [1]uint64
+	PResource *ID3D12Resource
 }
 
 // D3D12_ROOT_CONSTANTS: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_root_constants
@@ -5719,7 +5720,7 @@ type D3D12_TEXTURE_BARRIER struct {
 	AccessAfter  D3D12_BARRIER_ACCESS
 	LayoutBefore D3D12_BARRIER_LAYOUT
 	LayoutAfter  D3D12_BARRIER_LAYOUT
-	PResource    [1]uint64
+	PResource    *ID3D12Resource
 	Subresources D3D12_BARRIER_SUBRESOURCE_RANGE
 	Flags        D3D12_TEXTURE_BARRIER_FLAGS
 }
@@ -5732,7 +5733,7 @@ type D3D12_TEXTURE_COPY_LOCATION_Anonymous_e__Union struct {
 
 // D3D12_TEXTURE_COPY_LOCATION: https://learn.microsoft.com/windows/win32/api/d3d12/ns-d3d12-d3d12_texture_copy_location
 type D3D12_TEXTURE_COPY_LOCATION struct {
-	PResource [1]uint64
+	PResource *ID3D12Resource
 	Type      D3D12_TEXTURE_COPY_TYPE
 	Anonymous uintptr
 }
@@ -5907,11 +5908,11 @@ type D3D12_PFN_TRIM_NOTIFICATION_CALLBACK uintptr
 type PFN_D3D12_COMPILER_CREATE_FACTORY uintptr
 
 // PFN_D3D12_COMPILER_SERIALIZE_VERSIONED_ROOT_SIGNATURE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_VERSIONED_ROOT_SIGNATURE_DESC, uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*D3D12_VERSIONED_ROOT_SIGNATURE_DESC, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
 type PFN_D3D12_COMPILER_SERIALIZE_VERSIONED_ROOT_SIGNATURE uintptr
 
 // PFN_D3D12_CREATE_DEVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, graphicsdirect3d.D3D_FEATURE_LEVEL, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IUnknown, graphicsdirect3d.D3D_FEATURE_LEVEL, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
 type PFN_D3D12_CREATE_DEVICE uintptr
 
 // PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER is a callback pointer: create one with NewCallback (package
@@ -5935,9 +5936,9 @@ type PFN_D3D12_GET_DEBUG_INTERFACE uintptr
 type PFN_D3D12_GET_INTERFACE uintptr
 
 // PFN_D3D12_SERIALIZE_ROOT_SIGNATURE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_ROOT_SIGNATURE_DESC, D3D_ROOT_SIGNATURE_VERSION, uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*D3D12_ROOT_SIGNATURE_DESC, D3D_ROOT_SIGNATURE_VERSION, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
 type PFN_D3D12_SERIALIZE_ROOT_SIGNATURE uintptr
 
 // PFN_D3D12_SERIALIZE_VERSIONED_ROOT_SIGNATURE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_VERSIONED_ROOT_SIGNATURE_DESC, uintptr, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*D3D12_VERSIONED_ROOT_SIGNATURE_DESC, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
 type PFN_D3D12_SERIALIZE_VERSIONED_ROOT_SIGNATURE uintptr

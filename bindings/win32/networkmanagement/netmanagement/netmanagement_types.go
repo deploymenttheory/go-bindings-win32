@@ -913,7 +913,7 @@ type NetProvisioning struct {
 
 type OBO_TOKEN struct {
 	Type             OBO_TOKEN_TYPE
-	Pncc             [1]uint64
+	Pncc             *INetCfgComponent
 	PszwManufacturer foundation.PWSTR
 	PszwProduct      foundation.PWSTR
 	PszwDisplayName  foundation.PWSTR

@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdirect3d9 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9"
 )
 
 var (
@@ -22,13 +23,13 @@ var (
 )
 
 // Direct3DCreate9On12 calls d3d9!Direct3DCreate9On12.
-func Direct3DCreate9On12(SDKVersion uint32, pOverrideList *D3D9ON12_ARGS, NumOverrideEntries uint32) uintptr {
+func Direct3DCreate9On12(SDKVersion uint32, pOverrideList *D3D9ON12_ARGS, NumOverrideEntries uint32) *graphicsdirect3d9.IDirect3D9 {
 	r1, _, _ := syscall.SyscallN(procDirect3DCreate9On12.Addr(), uintptr(SDKVersion), uintptr(unsafe.Pointer(pOverrideList)), uintptr(NumOverrideEntries))
-	return uintptr(r1)
+	return (*graphicsdirect3d9.IDirect3D9)(unsafe.Pointer(r1))
 }
 
 // Direct3DCreate9On12Ex calls d3d9!Direct3DCreate9On12Ex.
-func Direct3DCreate9On12Ex(SDKVersion uint32, pOverrideList *D3D9ON12_ARGS, NumOverrideEntries uint32, ppOutputInterface uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirect3DCreate9On12Ex.Addr(), uintptr(SDKVersion), uintptr(unsafe.Pointer(pOverrideList)), uintptr(NumOverrideEntries), uintptr(ppOutputInterface))
+func Direct3DCreate9On12Ex(SDKVersion uint32, pOverrideList *D3D9ON12_ARGS, NumOverrideEntries uint32, ppOutputInterface **graphicsdirect3d9.IDirect3D9Ex) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDirect3DCreate9On12Ex.Addr(), uintptr(SDKVersion), uintptr(unsafe.Pointer(pOverrideList)), uintptr(NumOverrideEntries), uintptr(unsafe.Pointer(ppOutputInterface)))
 	return foundation.HRESULT(r1)
 }

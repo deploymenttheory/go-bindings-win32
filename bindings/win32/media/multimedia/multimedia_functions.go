@@ -222,32 +222,32 @@ func AVIClearClipboard() foundation.HRESULT {
 // AVIFileAddRef calls AVIFIL32!AVIFileAddRef.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileaddref
 // Minimum OS: windows5.0.
-func AVIFileAddRef(pfile uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procAVIFileAddRef.Addr(), uintptr(pfile))
+func AVIFileAddRef(pfile *IAVIFile) uint32 {
+	r1, _, _ := syscall.SyscallN(procAVIFileAddRef.Addr(), uintptr(unsafe.Pointer(pfile)))
 	return uint32(r1)
 }
 
 // AVIFileCreateStreamA calls AVIFIL32!AVIFileCreateStreamA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilecreatestreama
 // Minimum OS: windows5.0.
-func AVIFileCreateStreamA(pfile uintptr, ppavi uintptr, psi *AVISTREAMINFOA) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileCreateStreamA.Addr(), uintptr(pfile), uintptr(ppavi), uintptr(unsafe.Pointer(psi)))
+func AVIFileCreateStreamA(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFOA) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileCreateStreamA.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(psi)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIFileCreateStreamW calls AVIFIL32!AVIFileCreateStreamW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilecreatestreamw
 // Minimum OS: windows5.0.
-func AVIFileCreateStreamW(pfile uintptr, ppavi uintptr, psi *AVISTREAMINFOW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileCreateStreamW.Addr(), uintptr(pfile), uintptr(ppavi), uintptr(unsafe.Pointer(psi)))
+func AVIFileCreateStreamW(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFOW) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileCreateStreamW.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(psi)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIFileEndRecord calls AVIFIL32!AVIFileEndRecord.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileendrecord
 // Minimum OS: windows5.0.
-func AVIFileEndRecord(pfile uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileEndRecord.Addr(), uintptr(pfile))
+func AVIFileEndRecord(pfile *IAVIFile) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileEndRecord.Addr(), uintptr(unsafe.Pointer(pfile)))
 	return foundation.HRESULT(r1)
 }
 
@@ -261,24 +261,24 @@ func AVIFileExit() {
 // AVIFileGetStream calls AVIFIL32!AVIFileGetStream.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilegetstream
 // Minimum OS: windows5.0.
-func AVIFileGetStream(pfile uintptr, ppavi uintptr, fccType uint32, lParam int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileGetStream.Addr(), uintptr(pfile), uintptr(ppavi), uintptr(fccType), uintptr(lParam))
+func AVIFileGetStream(pfile *IAVIFile, ppavi **IAVIStream, fccType uint32, lParam int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileGetStream.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(fccType), uintptr(lParam))
 	return foundation.HRESULT(r1)
 }
 
 // AVIFileInfoA calls AVIFIL32!AVIFileInfoA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileinfoa
 // Minimum OS: windows5.0.
-func AVIFileInfoA(pfile uintptr, pfi *AVIFILEINFOA, lSize int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileInfoA.Addr(), uintptr(pfile), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
+func AVIFileInfoA(pfile *IAVIFile, pfi *AVIFILEINFOA, lSize int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileInfoA.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
 	return foundation.HRESULT(r1)
 }
 
 // AVIFileInfoW calls AVIFIL32!AVIFileInfoW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileinfow
 // Minimum OS: windows5.0.
-func AVIFileInfoW(pfile uintptr, pfi *AVIFILEINFOW, lSize int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileInfoW.Addr(), uintptr(pfile), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
+func AVIFileInfoW(pfile *IAVIFile, pfi *AVIFILEINFOW, lSize int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileInfoW.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
 	return foundation.HRESULT(r1)
 }
 
@@ -292,96 +292,96 @@ func AVIFileInit() {
 // AVIFileOpenA calls AVIFIL32!AVIFileOpenA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileopena
 // Minimum OS: windows5.0.
-func AVIFileOpenA(ppfile uintptr, szFile foundation.PSTR, uMode uint32, lpHandler *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileOpenA.Addr(), uintptr(ppfile), uintptr(unsafe.Pointer(szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
+func AVIFileOpenA(ppfile **IAVIFile, szFile foundation.PSTR, uMode uint32, lpHandler *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileOpenA.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(unsafe.Pointer(szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIFileOpenW calls AVIFIL32!AVIFileOpenW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileopenw
 // Minimum OS: windows5.0.
-func AVIFileOpenW(ppfile uintptr, szFile foundation.PWSTR, uMode uint32, lpHandler *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileOpenW.Addr(), uintptr(ppfile), uintptr(unsafe.Pointer(szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
+func AVIFileOpenW(ppfile **IAVIFile, szFile foundation.PWSTR, uMode uint32, lpHandler *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileOpenW.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(unsafe.Pointer(szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIFileReadData calls AVIFIL32!AVIFileReadData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilereaddata
 // Minimum OS: windows5.0.
-func AVIFileReadData(pfile uintptr, ckid uint32, lpData unsafe.Pointer, lpcbData *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileReadData.Addr(), uintptr(pfile), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(lpcbData)))
+func AVIFileReadData(pfile *IAVIFile, ckid uint32, lpData unsafe.Pointer, lpcbData *int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileReadData.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(lpcbData)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIFileRelease calls AVIFIL32!AVIFileRelease.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilerelease
 // Minimum OS: windows5.0.
-func AVIFileRelease(pfile uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procAVIFileRelease.Addr(), uintptr(pfile))
+func AVIFileRelease(pfile *IAVIFile) uint32 {
+	r1, _, _ := syscall.SyscallN(procAVIFileRelease.Addr(), uintptr(unsafe.Pointer(pfile)))
 	return uint32(r1)
 }
 
 // AVIFileWriteData calls AVIFIL32!AVIFileWriteData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilewritedata
 // Minimum OS: windows5.0.
-func AVIFileWriteData(pfile uintptr, ckid uint32, lpData unsafe.Pointer, cbData int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileWriteData.Addr(), uintptr(pfile), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+func AVIFileWriteData(pfile *IAVIFile, ckid uint32, lpData unsafe.Pointer, cbData int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIFileWriteData.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
 	return foundation.HRESULT(r1)
 }
 
 // AVIGetFromClipboard calls AVIFIL32!AVIGetFromClipboard.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avigetfromclipboard
 // Minimum OS: windows5.0.
-func AVIGetFromClipboard(lppf uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIGetFromClipboard.Addr(), uintptr(lppf))
+func AVIGetFromClipboard(lppf **IAVIFile) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIGetFromClipboard.Addr(), uintptr(unsafe.Pointer(lppf)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIMakeCompressedStream calls AVIFIL32!AVIMakeCompressedStream.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avimakecompressedstream
 // Minimum OS: windows5.0.
-func AVIMakeCompressedStream(ppsCompressed uintptr, ppsSource uintptr, lpOptions *AVICOMPRESSOPTIONS, pclsidHandler *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIMakeCompressedStream.Addr(), uintptr(ppsCompressed), uintptr(ppsSource), uintptr(unsafe.Pointer(lpOptions)), uintptr(unsafe.Pointer(pclsidHandler)))
+func AVIMakeCompressedStream(ppsCompressed **IAVIStream, ppsSource *IAVIStream, lpOptions *AVICOMPRESSOPTIONS, pclsidHandler *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIMakeCompressedStream.Addr(), uintptr(unsafe.Pointer(ppsCompressed)), uintptr(unsafe.Pointer(ppsSource)), uintptr(unsafe.Pointer(lpOptions)), uintptr(unsafe.Pointer(pclsidHandler)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIMakeFileFromStreams calls AVIFIL32!AVIMakeFileFromStreams.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avimakefilefromstreams
 // Minimum OS: windows5.0.
-func AVIMakeFileFromStreams(ppfile uintptr, nStreams int32, papStreams uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIMakeFileFromStreams.Addr(), uintptr(ppfile), uintptr(nStreams), uintptr(papStreams))
+func AVIMakeFileFromStreams(ppfile **IAVIFile, nStreams int32, papStreams **IAVIStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIMakeFileFromStreams.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(nStreams), uintptr(unsafe.Pointer(papStreams)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIMakeStreamFromClipboard calls AVIFIL32!AVIMakeStreamFromClipboard.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avimakestreamfromclipboard
 // Minimum OS: windows5.0.
-func AVIMakeStreamFromClipboard(cfFormat uint32, hGlobal foundation.HANDLE, ppstream uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIMakeStreamFromClipboard.Addr(), uintptr(cfFormat), uintptr(hGlobal), uintptr(ppstream))
+func AVIMakeStreamFromClipboard(cfFormat uint32, hGlobal foundation.HANDLE, ppstream **IAVIStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIMakeStreamFromClipboard.Addr(), uintptr(cfFormat), uintptr(hGlobal), uintptr(unsafe.Pointer(ppstream)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIPutFileOnClipboard calls AVIFIL32!AVIPutFileOnClipboard.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-aviputfileonclipboard
 // Minimum OS: windows5.0.
-func AVIPutFileOnClipboard(pf uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIPutFileOnClipboard.Addr(), uintptr(pf))
+func AVIPutFileOnClipboard(pf *IAVIFile) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIPutFileOnClipboard.Addr(), uintptr(unsafe.Pointer(pf)))
 	return foundation.HRESULT(r1)
 }
 
 // AVISaveA calls AVIFIL32!AVISaveA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavea
 // Minimum OS: windows5.0.
-func AVISaveA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile uintptr, lpOptions *AVICOMPRESSOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVISaveA.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(pfile), uintptr(unsafe.Pointer(lpOptions)))
+func AVISaveA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile *IAVIStream, lpOptions *AVICOMPRESSOPTIONS) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVISaveA.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(lpOptions)))
 	return foundation.HRESULT(r1)
 }
 
 // AVISaveOptions calls AVIFIL32!AVISaveOptions.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisaveoptions
 // Minimum OS: windows5.0.
-func AVISaveOptions(hwnd foundation.HWND, uiFlags uint32, nStreams int32, ppavi uintptr, plpOptions **AVICOMPRESSOPTIONS) uintptr {
-	r1, _, _ := syscall.SyscallN(procAVISaveOptions.Addr(), uintptr(hwnd), uintptr(uiFlags), uintptr(nStreams), uintptr(ppavi), uintptr(unsafe.Pointer(plpOptions)))
+func AVISaveOptions(hwnd foundation.HWND, uiFlags uint32, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) uintptr {
+	r1, _, _ := syscall.SyscallN(procAVISaveOptions.Addr(), uintptr(hwnd), uintptr(uiFlags), uintptr(nStreams), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(plpOptions)))
 	return uintptr(r1)
 }
 
@@ -396,208 +396,208 @@ func AVISaveOptionsFree(nStreams int32, plpOptions **AVICOMPRESSOPTIONS) foundat
 // AVISaveVA calls AVIFIL32!AVISaveVA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisaveva
 // Minimum OS: windows5.0.
-func AVISaveVA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi uintptr, plpOptions **AVICOMPRESSOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVISaveVA.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(ppavi), uintptr(unsafe.Pointer(plpOptions)))
+func AVISaveVA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVISaveVA.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(plpOptions)))
 	return foundation.HRESULT(r1)
 }
 
 // AVISaveVW calls AVIFIL32!AVISaveVW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavevw
 // Minimum OS: windows5.0.
-func AVISaveVW(szFile foundation.PWSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi uintptr, plpOptions **AVICOMPRESSOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVISaveVW.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(ppavi), uintptr(unsafe.Pointer(plpOptions)))
+func AVISaveVW(szFile foundation.PWSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVISaveVW.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(plpOptions)))
 	return foundation.HRESULT(r1)
 }
 
 // AVISaveW calls AVIFIL32!AVISaveW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavew
 // Minimum OS: windows5.0.
-func AVISaveW(szFile foundation.PWSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile uintptr, lpOptions *AVICOMPRESSOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVISaveW.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(pfile), uintptr(unsafe.Pointer(lpOptions)))
+func AVISaveW(szFile foundation.PWSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile *IAVIStream, lpOptions *AVICOMPRESSOPTIONS) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVISaveW.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(lpOptions)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamAddRef calls AVIFIL32!AVIStreamAddRef.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamaddref
 // Minimum OS: windows5.0.
-func AVIStreamAddRef(pavi uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procAVIStreamAddRef.Addr(), uintptr(pavi))
+func AVIStreamAddRef(pavi *IAVIStream) uint32 {
+	r1, _, _ := syscall.SyscallN(procAVIStreamAddRef.Addr(), uintptr(unsafe.Pointer(pavi)))
 	return uint32(r1)
 }
 
 // AVIStreamBeginStreaming calls AVIFIL32!AVIStreamBeginStreaming.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreambeginstreaming
 // Minimum OS: windows5.0.
-func AVIStreamBeginStreaming(pavi uintptr, lStart int32, lEnd int32, lRate int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamBeginStreaming.Addr(), uintptr(pavi), uintptr(lStart), uintptr(lEnd), uintptr(lRate))
+func AVIStreamBeginStreaming(pavi *IAVIStream, lStart int32, lEnd int32, lRate int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamBeginStreaming.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lEnd), uintptr(lRate))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamCreate calls AVIFIL32!AVIStreamCreate.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamcreate
 // Minimum OS: windows5.0.
-func AVIStreamCreate(ppavi uintptr, lParam1 int32, lParam2 int32, pclsidHandler *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamCreate.Addr(), uintptr(ppavi), uintptr(lParam1), uintptr(lParam2), uintptr(unsafe.Pointer(pclsidHandler)))
+func AVIStreamCreate(ppavi **IAVIStream, lParam1 int32, lParam2 int32, pclsidHandler *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamCreate.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(lParam1), uintptr(lParam2), uintptr(unsafe.Pointer(pclsidHandler)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamEndStreaming calls AVIFIL32!AVIStreamEndStreaming.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamendstreaming
 // Minimum OS: windows5.0.
-func AVIStreamEndStreaming(pavi uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamEndStreaming.Addr(), uintptr(pavi))
+func AVIStreamEndStreaming(pavi *IAVIStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamEndStreaming.Addr(), uintptr(unsafe.Pointer(pavi)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamFindSample calls AVIFIL32!AVIStreamFindSample.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamfindsample
 // Minimum OS: windows5.0.
-func AVIStreamFindSample(pavi uintptr, lPos int32, lFlags int32) int32 {
-	r1, _, _ := syscall.SyscallN(procAVIStreamFindSample.Addr(), uintptr(pavi), uintptr(lPos), uintptr(lFlags))
+func AVIStreamFindSample(pavi *IAVIStream, lPos int32, lFlags int32) int32 {
+	r1, _, _ := syscall.SyscallN(procAVIStreamFindSample.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(lFlags))
 	return int32(r1)
 }
 
 // AVIStreamGetFrame calls AVIFIL32!AVIStreamGetFrame.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamgetframe
 // Minimum OS: windows5.0.
-func AVIStreamGetFrame(pg uintptr, lPos int32) unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procAVIStreamGetFrame.Addr(), uintptr(pg), uintptr(lPos))
+func AVIStreamGetFrame(pg *IGetFrame, lPos int32) unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procAVIStreamGetFrame.Addr(), uintptr(unsafe.Pointer(pg)), uintptr(lPos))
 	return unsafe.Pointer(r1)
 }
 
 // AVIStreamGetFrameClose calls AVIFIL32!AVIStreamGetFrameClose.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamgetframeclose
 // Minimum OS: windows5.0.
-func AVIStreamGetFrameClose(pg uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamGetFrameClose.Addr(), uintptr(pg))
+func AVIStreamGetFrameClose(pg *IGetFrame) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamGetFrameClose.Addr(), uintptr(unsafe.Pointer(pg)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamGetFrameOpen calls AVIFIL32!AVIStreamGetFrameOpen.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamgetframeopen
 // Minimum OS: windows5.0.
-func AVIStreamGetFrameOpen(pavi uintptr, lpbiWanted *graphicsgdi.BITMAPINFOHEADER) uintptr {
-	r1, _, _ := syscall.SyscallN(procAVIStreamGetFrameOpen.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(lpbiWanted)))
-	return uintptr(r1)
+func AVIStreamGetFrameOpen(pavi *IAVIStream, lpbiWanted *graphicsgdi.BITMAPINFOHEADER) *IGetFrame {
+	r1, _, _ := syscall.SyscallN(procAVIStreamGetFrameOpen.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpbiWanted)))
+	return (*IGetFrame)(unsafe.Pointer(r1))
 }
 
 // AVIStreamInfoA calls AVIFIL32!AVIStreamInfoA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreaminfoa
 // Minimum OS: windows5.0.
-func AVIStreamInfoA(pavi uintptr, psi *AVISTREAMINFOA, lSize int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamInfoA.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
+func AVIStreamInfoA(pavi *IAVIStream, psi *AVISTREAMINFOA, lSize int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamInfoA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamInfoW calls AVIFIL32!AVIStreamInfoW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreaminfow
 // Minimum OS: windows5.0.
-func AVIStreamInfoW(pavi uintptr, psi *AVISTREAMINFOW, lSize int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamInfoW.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
+func AVIStreamInfoW(pavi *IAVIStream, psi *AVISTREAMINFOW, lSize int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamInfoW.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamLength calls AVIFIL32!AVIStreamLength.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamlength
 // Minimum OS: windows5.0.
-func AVIStreamLength(pavi uintptr) int32 {
-	r1, _, _ := syscall.SyscallN(procAVIStreamLength.Addr(), uintptr(pavi))
+func AVIStreamLength(pavi *IAVIStream) int32 {
+	r1, _, _ := syscall.SyscallN(procAVIStreamLength.Addr(), uintptr(unsafe.Pointer(pavi)))
 	return int32(r1)
 }
 
 // AVIStreamOpenFromFileA calls AVIFIL32!AVIStreamOpenFromFileA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamopenfromfilea
 // Minimum OS: windows5.0.
-func AVIStreamOpenFromFileA(ppavi uintptr, szFile foundation.PSTR, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFileA.Addr(), uintptr(ppavi), uintptr(unsafe.Pointer(szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
+func AVIStreamOpenFromFileA(ppavi **IAVIStream, szFile foundation.PSTR, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFileA.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamOpenFromFileW calls AVIFIL32!AVIStreamOpenFromFileW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamopenfromfilew
 // Minimum OS: windows5.0.
-func AVIStreamOpenFromFileW(ppavi uintptr, szFile foundation.PWSTR, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFileW.Addr(), uintptr(ppavi), uintptr(unsafe.Pointer(szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
+func AVIStreamOpenFromFileW(ppavi **IAVIStream, szFile foundation.PWSTR, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFileW.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamRead calls AVIFIL32!AVIStreamRead.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamread
 // Minimum OS: windows5.0.
-func AVIStreamRead(pavi uintptr, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamRead.Addr(), uintptr(pavi), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
+func AVIStreamRead(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamRead.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamReadData calls AVIFIL32!AVIStreamReadData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamreaddata
 // Minimum OS: windows5.0.
-func AVIStreamReadData(pavi uintptr, fcc uint32, lp unsafe.Pointer, lpcb *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamReadData.Addr(), uintptr(pavi), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(unsafe.Pointer(lpcb)))
+func AVIStreamReadData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, lpcb *int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamReadData.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(unsafe.Pointer(lpcb)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamReadFormat calls AVIFIL32!AVIStreamReadFormat.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamreadformat
 // Minimum OS: windows5.0.
-func AVIStreamReadFormat(pavi uintptr, lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamReadFormat.Addr(), uintptr(pavi), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpcbFormat)))
+func AVIStreamReadFormat(pavi *IAVIStream, lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamReadFormat.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpcbFormat)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamRelease calls AVIFIL32!AVIStreamRelease.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamrelease
 // Minimum OS: windows5.0.
-func AVIStreamRelease(pavi uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procAVIStreamRelease.Addr(), uintptr(pavi))
+func AVIStreamRelease(pavi *IAVIStream) uint32 {
+	r1, _, _ := syscall.SyscallN(procAVIStreamRelease.Addr(), uintptr(unsafe.Pointer(pavi)))
 	return uint32(r1)
 }
 
 // AVIStreamSampleToTime calls AVIFIL32!AVIStreamSampleToTime.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamsampletotime
 // Minimum OS: windows5.0.
-func AVIStreamSampleToTime(pavi uintptr, lSample int32) int32 {
-	r1, _, _ := syscall.SyscallN(procAVIStreamSampleToTime.Addr(), uintptr(pavi), uintptr(lSample))
+func AVIStreamSampleToTime(pavi *IAVIStream, lSample int32) int32 {
+	r1, _, _ := syscall.SyscallN(procAVIStreamSampleToTime.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lSample))
 	return int32(r1)
 }
 
 // AVIStreamSetFormat calls AVIFIL32!AVIStreamSetFormat.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamsetformat
 // Minimum OS: windows5.0.
-func AVIStreamSetFormat(pavi uintptr, lPos int32, lpFormat unsafe.Pointer, cbFormat int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamSetFormat.Addr(), uintptr(pavi), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(cbFormat))
+func AVIStreamSetFormat(pavi *IAVIStream, lPos int32, lpFormat unsafe.Pointer, cbFormat int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamSetFormat.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(cbFormat))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamStart calls AVIFIL32!AVIStreamStart.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamstart
 // Minimum OS: windows5.0.
-func AVIStreamStart(pavi uintptr) int32 {
-	r1, _, _ := syscall.SyscallN(procAVIStreamStart.Addr(), uintptr(pavi))
+func AVIStreamStart(pavi *IAVIStream) int32 {
+	r1, _, _ := syscall.SyscallN(procAVIStreamStart.Addr(), uintptr(unsafe.Pointer(pavi)))
 	return int32(r1)
 }
 
 // AVIStreamTimeToSample calls AVIFIL32!AVIStreamTimeToSample.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamtimetosample
 // Minimum OS: windows5.0.
-func AVIStreamTimeToSample(pavi uintptr, lTime int32) int32 {
-	r1, _, _ := syscall.SyscallN(procAVIStreamTimeToSample.Addr(), uintptr(pavi), uintptr(lTime))
+func AVIStreamTimeToSample(pavi *IAVIStream, lTime int32) int32 {
+	r1, _, _ := syscall.SyscallN(procAVIStreamTimeToSample.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lTime))
 	return int32(r1)
 }
 
 // AVIStreamWrite calls AVIFIL32!AVIStreamWrite.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamwrite
 // Minimum OS: windows5.0.
-func AVIStreamWrite(pavi uintptr, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamWrite.Addr(), uintptr(pavi), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
+func AVIStreamWrite(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamWrite.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
 	return foundation.HRESULT(r1)
 }
 
 // AVIStreamWriteData calls AVIFIL32!AVIStreamWriteData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamwritedata
 // Minimum OS: windows5.0.
-func AVIStreamWriteData(pavi uintptr, fcc uint32, lp unsafe.Pointer, cb int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamWriteData.Addr(), uintptr(pavi), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(cb))
+func AVIStreamWriteData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, cb int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procAVIStreamWriteData.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(cb))
 	return foundation.HRESULT(r1)
 }
 
@@ -612,8 +612,8 @@ func CloseDriver(hDriver HDRVR, lParam1 foundation.LPARAM, lParam2 foundation.LP
 // CreateEditableStream calls AVIFIL32!CreateEditableStream.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-createeditablestream
 // Minimum OS: windows5.0.
-func CreateEditableStream(ppsEditable uintptr, psSource uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateEditableStream.Addr(), uintptr(ppsEditable), uintptr(psSource))
+func CreateEditableStream(ppsEditable **IAVIStream, psSource *IAVIStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateEditableStream.Addr(), uintptr(unsafe.Pointer(ppsEditable)), uintptr(unsafe.Pointer(psSource)))
 	return foundation.HRESULT(r1)
 }
 
@@ -756,64 +756,64 @@ func DrvGetModuleHandle(hDriver HDRVR) foundation.HMODULE {
 // EditStreamClone calls AVIFIL32!EditStreamClone.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamclone
 // Minimum OS: windows5.0.
-func EditStreamClone(pavi uintptr, ppResult uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamClone.Addr(), uintptr(pavi), uintptr(ppResult))
+func EditStreamClone(pavi *IAVIStream, ppResult **IAVIStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditStreamClone.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(ppResult)))
 	return foundation.HRESULT(r1)
 }
 
 // EditStreamCopy calls AVIFIL32!EditStreamCopy.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamcopy
 // Minimum OS: windows5.0.
-func EditStreamCopy(pavi uintptr, plStart *int32, plLength *int32, ppResult uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamCopy.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(ppResult))
+func EditStreamCopy(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult **IAVIStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditStreamCopy.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(ppResult)))
 	return foundation.HRESULT(r1)
 }
 
 // EditStreamCut calls AVIFIL32!EditStreamCut.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamcut
 // Minimum OS: windows5.0.
-func EditStreamCut(pavi uintptr, plStart *int32, plLength *int32, ppResult uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamCut.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(ppResult))
+func EditStreamCut(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult **IAVIStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditStreamCut.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(ppResult)))
 	return foundation.HRESULT(r1)
 }
 
 // EditStreamPaste calls AVIFIL32!EditStreamPaste.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreampaste
 // Minimum OS: windows5.0.
-func EditStreamPaste(pavi uintptr, plPos *int32, plLength *int32, pstream uintptr, lStart int32, lEnd int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamPaste.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(plPos)), uintptr(unsafe.Pointer(plLength)), uintptr(pstream), uintptr(lStart), uintptr(lEnd))
+func EditStreamPaste(pavi *IAVIStream, plPos *int32, plLength *int32, pstream *IAVIStream, lStart int32, lEnd int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditStreamPaste.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plPos)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(pstream)), uintptr(lStart), uintptr(lEnd))
 	return foundation.HRESULT(r1)
 }
 
 // EditStreamSetInfoA calls AVIFIL32!EditStreamSetInfoA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetinfoa
 // Minimum OS: windows5.0.
-func EditStreamSetInfoA(pavi uintptr, lpInfo *AVISTREAMINFOA, cbInfo int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamSetInfoA.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
+func EditStreamSetInfoA(pavi *IAVIStream, lpInfo *AVISTREAMINFOA, cbInfo int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditStreamSetInfoA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
 	return foundation.HRESULT(r1)
 }
 
 // EditStreamSetInfoW calls AVIFIL32!EditStreamSetInfoW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetinfow
 // Minimum OS: windows5.0.
-func EditStreamSetInfoW(pavi uintptr, lpInfo *AVISTREAMINFOW, cbInfo int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamSetInfoW.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
+func EditStreamSetInfoW(pavi *IAVIStream, lpInfo *AVISTREAMINFOW, cbInfo int32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditStreamSetInfoW.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
 	return foundation.HRESULT(r1)
 }
 
 // EditStreamSetNameA calls AVIFIL32!EditStreamSetNameA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetnamea
 // Minimum OS: windows5.0.
-func EditStreamSetNameA(pavi uintptr, lpszName foundation.PSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamSetNameA.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(lpszName)))
+func EditStreamSetNameA(pavi *IAVIStream, lpszName foundation.PSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditStreamSetNameA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpszName)))
 	return foundation.HRESULT(r1)
 }
 
 // EditStreamSetNameW calls AVIFIL32!EditStreamSetNameW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetnamew
 // Minimum OS: windows5.0.
-func EditStreamSetNameW(pavi uintptr, lpszName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamSetNameW.Addr(), uintptr(pavi), uintptr(unsafe.Pointer(lpszName)))
+func EditStreamSetNameW(pavi *IAVIStream, lpszName foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procEditStreamSetNameW.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpszName)))
 	return foundation.HRESULT(r1)
 }
 

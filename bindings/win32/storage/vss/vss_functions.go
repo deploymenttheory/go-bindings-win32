@@ -28,24 +28,24 @@ var (
 // CreateVssBackupComponentsInternal calls VSSAPI!CreateVssBackupComponentsInternal.
 // https://learn.microsoft.com/windows/win32/api/vsbackup/nf-vsbackup-createvssbackupcomponentsinternal
 // Minimum OS: windows5.1.2600.
-func CreateVssBackupComponentsInternal(ppBackup uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateVssBackupComponentsInternal.Addr(), uintptr(ppBackup))
+func CreateVssBackupComponentsInternal(ppBackup **IVssBackupComponents) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateVssBackupComponentsInternal.Addr(), uintptr(unsafe.Pointer(ppBackup)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateVssExamineWriterMetadataInternal calls VSSAPI!CreateVssExamineWriterMetadataInternal.
 // https://learn.microsoft.com/windows/win32/api/vsbackup/nf-vsbackup-createvssexaminewritermetadatainternal
 // Minimum OS: windows5.1.2600.
-func CreateVssExamineWriterMetadataInternal(bstrXML foundation.BSTR, ppMetadata uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateVssExamineWriterMetadataInternal.Addr(), uintptr(unsafe.Pointer(bstrXML)), uintptr(ppMetadata))
+func CreateVssExamineWriterMetadataInternal(bstrXML foundation.BSTR, ppMetadata **IVssExamineWriterMetadata) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateVssExamineWriterMetadataInternal.Addr(), uintptr(unsafe.Pointer(bstrXML)), uintptr(unsafe.Pointer(ppMetadata)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateVssExpressWriterInternal calls VSSAPI!CreateVssExpressWriterInternal.
 // https://learn.microsoft.com/windows/win32/api/vswriter/nf-vswriter-createvssexpresswriterinternal
 // Minimum OS: windows6.1.
-func CreateVssExpressWriterInternal(ppWriter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateVssExpressWriterInternal.Addr(), uintptr(ppWriter))
+func CreateVssExpressWriterInternal(ppWriter **IVssExpressWriter) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateVssExpressWriterInternal.Addr(), uintptr(unsafe.Pointer(ppWriter)))
 	return foundation.HRESULT(r1)
 }
 

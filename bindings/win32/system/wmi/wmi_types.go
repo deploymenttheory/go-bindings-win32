@@ -2483,7 +2483,7 @@ type SWbemAssocQueryInf struct {
 	M_uVersion                  uint32
 	M_uAnalysisType             uint32
 	M_uFeatureMask              uint32
-	M_pPath                     [1]uint64
+	M_pPath                     *IWbemPath
 	M_pszPath                   foundation.PWSTR
 	M_pszQueryText              foundation.PWSTR
 	M_pszResultClass            foundation.PWSTR

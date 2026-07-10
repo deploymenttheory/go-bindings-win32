@@ -6,9 +6,11 @@ package pdf
 
 import (
 	"syscall"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 )
 
 var (
@@ -21,7 +23,7 @@ var (
 
 // PdfCreateRenderer calls Windows.Data.Pdf!PdfCreateRenderer.
 // https://learn.microsoft.com/windows/win32/api/windows.data.pdf.interop/nf-windows-data-pdf-interop-pdfcreaterenderer
-func PdfCreateRenderer(pDevice uintptr, ppRenderer uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPdfCreateRenderer.Addr(), uintptr(pDevice), uintptr(ppRenderer))
+func PdfCreateRenderer(pDevice *graphicsdxgi.IDXGIDevice, ppRenderer **IPdfRendererNative) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procPdfCreateRenderer.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(ppRenderer)))
 	return foundation.HRESULT(r1)
 }

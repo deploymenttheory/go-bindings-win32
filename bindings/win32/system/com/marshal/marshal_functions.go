@@ -251,72 +251,72 @@ func CLIPFORMAT_UserUnmarshal64(param0 *uint32, param1 *byte, param2 *uint16) *b
 // CoGetMarshalSizeMax calls OLE32!CoGetMarshalSizeMax.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetmarshalsizemax
 // Minimum OS: windows5.0.
-func CoGetMarshalSizeMax(pulSize *uint32, riid *win32.GUID, pUnk uintptr, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetMarshalSizeMax.Addr(), uintptr(unsafe.Pointer(pulSize)), uintptr(unsafe.Pointer(riid)), uintptr(pUnk), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags))
+func CoGetMarshalSizeMax(pulSize *uint32, riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetMarshalSizeMax.Addr(), uintptr(unsafe.Pointer(pulSize)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags))
 	return foundation.HRESULT(r1)
 }
 
 // CoGetStandardMarshal calls OLE32!CoGetStandardMarshal.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetstandardmarshal
 // Minimum OS: windows5.0.
-func CoGetStandardMarshal(riid *win32.GUID, pUnk uintptr, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32, ppMarshal uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetStandardMarshal.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(pUnk), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags), uintptr(ppMarshal))
+func CoGetStandardMarshal(riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32, ppMarshal **IMarshal) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetStandardMarshal.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags), uintptr(unsafe.Pointer(ppMarshal)))
 	return foundation.HRESULT(r1)
 }
 
 // CoGetStdMarshalEx calls OLE32!CoGetStdMarshalEx.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetstdmarshalex
 // Minimum OS: windows5.0.
-func CoGetStdMarshalEx(pUnkOuter uintptr, smexflags uint32, ppUnkInner uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetStdMarshalEx.Addr(), uintptr(pUnkOuter), uintptr(smexflags), uintptr(ppUnkInner))
+func CoGetStdMarshalEx(pUnkOuter *systemcom.IUnknown, smexflags uint32, ppUnkInner **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetStdMarshalEx.Addr(), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(smexflags), uintptr(unsafe.Pointer(ppUnkInner)))
 	return foundation.HRESULT(r1)
 }
 
 // CoMarshalHresult calls OLE32!CoMarshalHresult.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-comarshalhresult
 // Minimum OS: windows5.0.
-func CoMarshalHresult(pstm uintptr, hresult foundation.HRESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoMarshalHresult.Addr(), uintptr(pstm), uintptr(hresult))
+func CoMarshalHresult(pstm *systemcom.IStream, hresult foundation.HRESULT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoMarshalHresult.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(hresult))
 	return foundation.HRESULT(r1)
 }
 
 // CoMarshalInterThreadInterfaceInStream calls OLE32!CoMarshalInterThreadInterfaceInStream.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-comarshalinterthreadinterfaceinstream
 // Minimum OS: windows5.0.
-func CoMarshalInterThreadInterfaceInStream(riid *win32.GUID, pUnk uintptr, ppStm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoMarshalInterThreadInterfaceInStream.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(pUnk), uintptr(ppStm))
+func CoMarshalInterThreadInterfaceInStream(riid *win32.GUID, pUnk *systemcom.IUnknown, ppStm **systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoMarshalInterThreadInterfaceInStream.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(ppStm)))
 	return foundation.HRESULT(r1)
 }
 
 // CoMarshalInterface calls OLE32!CoMarshalInterface.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-comarshalinterface
 // Minimum OS: windows5.0.
-func CoMarshalInterface(pStm uintptr, riid *win32.GUID, pUnk uintptr, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoMarshalInterface.Addr(), uintptr(pStm), uintptr(unsafe.Pointer(riid)), uintptr(pUnk), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags))
+func CoMarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoMarshalInterface.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(mshlflags))
 	return foundation.HRESULT(r1)
 }
 
 // CoReleaseMarshalData calls OLE32!CoReleaseMarshalData.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coreleasemarshaldata
 // Minimum OS: windows5.0.
-func CoReleaseMarshalData(pStm uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoReleaseMarshalData.Addr(), uintptr(pStm))
+func CoReleaseMarshalData(pStm *systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoReleaseMarshalData.Addr(), uintptr(unsafe.Pointer(pStm)))
 	return foundation.HRESULT(r1)
 }
 
 // CoUnmarshalHresult calls OLE32!CoUnmarshalHresult.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-counmarshalhresult
 // Minimum OS: windows5.0.
-func CoUnmarshalHresult(pstm uintptr, phresult *foundation.HRESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoUnmarshalHresult.Addr(), uintptr(pstm), uintptr(unsafe.Pointer(phresult)))
+func CoUnmarshalHresult(pstm *systemcom.IStream, phresult *foundation.HRESULT) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoUnmarshalHresult.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(phresult)))
 	return foundation.HRESULT(r1)
 }
 
 // CoUnmarshalInterface calls OLE32!CoUnmarshalInterface.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-counmarshalinterface
 // Minimum OS: windows5.0.
-func CoUnmarshalInterface(pStm uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoUnmarshalInterface.Addr(), uintptr(pStm), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func CoUnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoUnmarshalInterface.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 

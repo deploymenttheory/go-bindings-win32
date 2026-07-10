@@ -1713,7 +1713,7 @@ type D2D1_BITMAP_PROPERTIES1 struct {
 	DpiX          float32
 	DpiY          float32
 	BitmapOptions D2D1_BITMAP_OPTIONS
-	ColorContext  [1]uint64
+	ColorContext  *ID2D1ColorContext
 }
 
 // D2D1_BLEND_DESCRIPTION: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/ns-d2d1effectauthor-d2d1_blend_description
@@ -1771,7 +1771,7 @@ type D2D1_DRAWING_STATE_DESCRIPTION1 struct {
 
 // D2D1_EFFECT_INPUT_DESCRIPTION: https://learn.microsoft.com/windows/win32/api/d2d1_1/ns-d2d1_1-d2d1_effect_input_description
 type D2D1_EFFECT_INPUT_DESCRIPTION struct {
-	Effect         [1]uint64
+	Effect         *ID2D1Effect
 	InputIndex     uint32
 	InputRectangle graphicsdirect2dcommon.D2D_RECT_F
 }
@@ -1879,22 +1879,22 @@ type D2D1_INPUT_ELEMENT_DESC struct {
 // D2D1_LAYER_PARAMETERS: https://learn.microsoft.com/windows/win32/api/d2d1/ns-d2d1-d2d1_layer_parameters
 type D2D1_LAYER_PARAMETERS struct {
 	ContentBounds     graphicsdirect2dcommon.D2D_RECT_F
-	GeometricMask     [1]uint64
+	GeometricMask     *ID2D1Geometry
 	MaskAntialiasMode D2D1_ANTIALIAS_MODE
 	MaskTransform     graphicsdirect2dcommon.D2D_MATRIX_3X2_F
 	Opacity           float32
-	OpacityBrush      [1]uint64
+	OpacityBrush      *ID2D1Brush
 	LayerOptions      D2D1_LAYER_OPTIONS
 }
 
 // D2D1_LAYER_PARAMETERS1: https://learn.microsoft.com/windows/win32/api/d2d1_1/ns-d2d1_1-d2d1_layer_parameters1
 type D2D1_LAYER_PARAMETERS1 struct {
 	ContentBounds     graphicsdirect2dcommon.D2D_RECT_F
-	GeometricMask     [1]uint64
+	GeometricMask     *ID2D1Geometry
 	MaskAntialiasMode D2D1_ANTIALIAS_MODE
 	MaskTransform     graphicsdirect2dcommon.D2D_MATRIX_3X2_F
 	Opacity           float32
-	OpacityBrush      [1]uint64
+	OpacityBrush      *ID2D1Brush
 	LayerOptions      D2D1_LAYER_OPTIONS1
 }
 
@@ -2064,13 +2064,13 @@ type D2D1_VERTEX_RANGE struct {
 }
 
 // PD2D1_EFFECT_FACTORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) foundation.HRESULT.
+// syscall) using the shape func(**systemcom.IUnknown) foundation.HRESULT.
 type PD2D1_EFFECT_FACTORY uintptr
 
 // PD2D1_PROPERTY_GET_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *byte, uint32, *uint32) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IUnknown, *byte, uint32, *uint32) foundation.HRESULT.
 type PD2D1_PROPERTY_GET_FUNCTION uintptr
 
 // PD2D1_PROPERTY_SET_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *byte, uint32) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IUnknown, *byte, uint32) foundation.HRESULT.
 type PD2D1_PROPERTY_SET_FUNCTION uintptr

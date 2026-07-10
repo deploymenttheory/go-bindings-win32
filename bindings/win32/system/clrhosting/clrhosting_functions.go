@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemthreading "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 )
 
@@ -78,8 +79,8 @@ func CorBindToRuntime(pwszVersion foundation.PWSTR, pwszBuildFlavor foundation.P
 }
 
 // CorBindToRuntimeByCfg calls MSCorEE!CorBindToRuntimeByCfg.
-func CorBindToRuntimeByCfg(pCfgStream uintptr, reserved uint32, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeByCfg.Addr(), uintptr(pCfgStream), uintptr(reserved), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func CorBindToRuntimeByCfg(pCfgStream *systemcom.IStream, reserved uint32, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeByCfg.Addr(), uintptr(unsafe.Pointer(pCfgStream)), uintptr(reserved), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -112,14 +113,14 @@ func CorMarkThreadInThreadPool() {
 }
 
 // CreateDebuggingInterfaceFromVersion calls MSCorEE!CreateDebuggingInterfaceFromVersion.
-func CreateDebuggingInterfaceFromVersion(iDebuggerVersion int32, szDebuggeeVersion foundation.PWSTR, ppCordb uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDebuggingInterfaceFromVersion.Addr(), uintptr(iDebuggerVersion), uintptr(unsafe.Pointer(szDebuggeeVersion)), uintptr(ppCordb))
+func CreateDebuggingInterfaceFromVersion(iDebuggerVersion int32, szDebuggeeVersion foundation.PWSTR, ppCordb **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateDebuggingInterfaceFromVersion.Addr(), uintptr(iDebuggerVersion), uintptr(unsafe.Pointer(szDebuggeeVersion)), uintptr(unsafe.Pointer(ppCordb)))
 	return foundation.HRESULT(r1)
 }
 
 // GetCLRIdentityManager calls MSCorEE!GetCLRIdentityManager.
-func GetCLRIdentityManager(riid *win32.GUID, ppManager uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetCLRIdentityManager.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(ppManager))
+func GetCLRIdentityManager(riid *win32.GUID, ppManager **systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetCLRIdentityManager.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppManager)))
 	return foundation.HRESULT(r1)
 }
 

@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 )
 
@@ -550,7 +551,7 @@ type PRINTDLGEXA struct {
 	NCopies             uint32
 	HInstance           foundation.HINSTANCE
 	LpPrintTemplateName foundation.PSTR
-	LpCallback          [1]uint64
+	LpCallback          *systemcom.IUnknown
 	NPropertyPages      uint32
 	LphPropertyPages    *uicontrols.HPROPSHEETPAGE
 	NStartPage          uint32
@@ -575,7 +576,7 @@ type PRINTDLGEXW struct {
 	NCopies             uint32
 	HInstance           foundation.HINSTANCE
 	LpPrintTemplateName foundation.PWSTR
-	LpCallback          [1]uint64
+	LpCallback          *systemcom.IUnknown
 	NPropertyPages      uint32
 	LphPropertyPages    *uicontrols.HPROPSHEETPAGE
 	NStartPage          uint32

@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -666,7 +667,7 @@ func SendToFaxRecipient(sndMode SendToMode, lpFileName foundation.PWSTR) uint32 
 }
 
 // StiCreateInstanceW calls STI!StiCreateInstanceW.
-func StiCreateInstanceW(hinst foundation.HINSTANCE, dwVer uint32, ppSti uintptr, punkOuter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStiCreateInstanceW.Addr(), uintptr(hinst), uintptr(dwVer), uintptr(ppSti), uintptr(punkOuter))
+func StiCreateInstanceW(hinst foundation.HINSTANCE, dwVer uint32, ppSti **IStillImageW, punkOuter *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procStiCreateInstanceW.Addr(), uintptr(hinst), uintptr(dwVer), uintptr(unsafe.Pointer(ppSti)), uintptr(unsafe.Pointer(punkOuter)))
 	return foundation.HRESULT(r1)
 }

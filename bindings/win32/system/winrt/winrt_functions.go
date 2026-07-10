@@ -10,6 +10,8 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcommarshal "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/marshal"
 )
 
 var (
@@ -109,8 +111,8 @@ func CreateControlInput(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESUL
 
 // CreateControlInputEx calls Windows.UI!CreateControlInputEx.
 // https://learn.microsoft.com/windows/win32/api/corewindow/nf-corewindow-createcontrolinputex
-func CreateControlInputEx(pCoreWindow uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateControlInputEx.Addr(), uintptr(pCoreWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateControlInputEx.Addr(), uintptr(unsafe.Pointer(pCoreWindow)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
@@ -125,24 +127,24 @@ func CreateRandomAccessStreamOnFile(filePath foundation.PWSTR, accessMode uint32
 // CreateRandomAccessStreamOverStream calls api-ms-win-shcore-stream-winrt-l1-1-0!CreateRandomAccessStreamOverStream.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createrandomaccessstreamoverstream
 // Minimum OS: windows8.0.
-func CreateRandomAccessStreamOverStream(stream uintptr, options BSOS_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateRandomAccessStreamOverStream.Addr(), uintptr(stream), uintptr(options), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func CreateRandomAccessStreamOverStream(stream *systemcom.IStream, options BSOS_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateRandomAccessStreamOverStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(options), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateStreamOverRandomAccessStream calls api-ms-win-shcore-stream-winrt-l1-1-0!CreateStreamOverRandomAccessStream.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createstreamoverrandomaccessstream
 // Minimum OS: windows8.0.
-func CreateStreamOverRandomAccessStream(randomAccessStream uintptr, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateStreamOverRandomAccessStream.Addr(), uintptr(randomAccessStream), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func CreateStreamOverRandomAccessStream(randomAccessStream *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateStreamOverRandomAccessStream.Addr(), uintptr(unsafe.Pointer(randomAccessStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // GetRestrictedErrorInfo calls api-ms-win-core-winrt-error-l1-1-0!GetRestrictedErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-getrestrictederrorinfo
 // Minimum OS: windows8.0.
-func GetRestrictedErrorInfo(ppRestrictedErrorInfo uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetRestrictedErrorInfo.Addr(), uintptr(ppRestrictedErrorInfo))
+func GetRestrictedErrorInfo(ppRestrictedErrorInfo **IRestrictedErrorInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetRestrictedErrorInfo.Addr(), uintptr(unsafe.Pointer(ppRestrictedErrorInfo)))
 	return foundation.HRESULT(r1)
 }
 
@@ -219,8 +221,8 @@ func IsErrorPropagationEnabled() foundation.BOOL {
 // RoActivateInstance calls api-ms-win-core-winrt-l1-1-0!RoActivateInstance.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-roactivateinstance
 // Minimum OS: windows8.0.
-func RoActivateInstance(activatableClassId HSTRING, instance uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoActivateInstance.Addr(), uintptr(activatableClassId), uintptr(instance))
+func RoActivateInstance(activatableClassId HSTRING, instance **IInspectable) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoActivateInstance.Addr(), uintptr(activatableClassId), uintptr(unsafe.Pointer(instance)))
 	return foundation.HRESULT(r1)
 }
 
@@ -257,8 +259,8 @@ func RoGetActivationFactory(activatableClassId HSTRING, iid *win32.GUID, factory
 // RoGetAgileReference calls OLE32!RoGetAgileReference.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-rogetagilereference
 // Minimum OS: windows8.1.
-func RoGetAgileReference(options AgileReferenceOptions, riid *win32.GUID, pUnk uintptr, ppAgileReference uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoGetAgileReference.Addr(), uintptr(options), uintptr(unsafe.Pointer(riid)), uintptr(pUnk), uintptr(ppAgileReference))
+func RoGetAgileReference(options AgileReferenceOptions, riid *win32.GUID, pUnk *systemcom.IUnknown, ppAgileReference **IAgileReference) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoGetAgileReference.Addr(), uintptr(options), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(ppAgileReference)))
 	return foundation.HRESULT(r1)
 }
 
@@ -273,8 +275,8 @@ func RoGetApartmentIdentifier(apartmentIdentifier *uint64) foundation.HRESULT {
 // RoGetBufferMarshaler calls api-ms-win-core-winrt-robuffer-l1-1-0!RoGetBufferMarshaler.
 // https://learn.microsoft.com/windows/win32/api/robuffer/nf-robuffer-rogetbuffermarshaler
 // Minimum OS: windows8.0.
-func RoGetBufferMarshaler(bufferMarshaler uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoGetBufferMarshaler.Addr(), uintptr(bufferMarshaler))
+func RoGetBufferMarshaler(bufferMarshaler **systemcommarshal.IMarshal) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoGetBufferMarshaler.Addr(), uintptr(unsafe.Pointer(bufferMarshaler)))
 	return foundation.HRESULT(r1)
 }
 
@@ -288,8 +290,8 @@ func RoGetErrorReportingFlags(pflags *uint32) foundation.HRESULT {
 
 // RoGetMatchingRestrictedErrorInfo calls api-ms-win-core-winrt-error-l1-1-1!RoGetMatchingRestrictedErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rogetmatchingrestrictederrorinfo
-func RoGetMatchingRestrictedErrorInfo(hrIn foundation.HRESULT, ppRestrictedErrorInfo uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoGetMatchingRestrictedErrorInfo.Addr(), uintptr(hrIn), uintptr(ppRestrictedErrorInfo))
+func RoGetMatchingRestrictedErrorInfo(hrIn foundation.HRESULT, ppRestrictedErrorInfo **IRestrictedErrorInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoGetMatchingRestrictedErrorInfo.Addr(), uintptr(hrIn), uintptr(unsafe.Pointer(ppRestrictedErrorInfo)))
 	return foundation.HRESULT(r1)
 }
 
@@ -344,8 +346,8 @@ func RoOriginateErrorW(error_ foundation.HRESULT, cchMax uint32, message foundat
 // RoOriginateLanguageException calls api-ms-win-core-winrt-error-l1-1-1!RoOriginateLanguageException.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rooriginatelanguageexception
 // Minimum OS: windows8.1.
-func RoOriginateLanguageException(error_ foundation.HRESULT, message HSTRING, languageException uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRoOriginateLanguageException.Addr(), uintptr(error_), uintptr(message), uintptr(languageException))
+func RoOriginateLanguageException(error_ foundation.HRESULT, message HSTRING, languageException *systemcom.IUnknown) foundation.BOOL {
+	r1, _, _ := syscall.SyscallN(procRoOriginateLanguageException.Addr(), uintptr(error_), uintptr(message), uintptr(unsafe.Pointer(languageException)))
 	return foundation.BOOL(r1)
 }
 
@@ -360,30 +362,30 @@ func RoRegisterActivationFactories(activatableClassIds *HSTRING, activationFacto
 // RoRegisterForApartmentShutdown calls api-ms-win-core-winrt-l1-1-0!RoRegisterForApartmentShutdown.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-roregisterforapartmentshutdown
 // Minimum OS: windows8.0.
-func RoRegisterForApartmentShutdown(callbackObject uintptr, apartmentIdentifier *uint64, regCookie *APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoRegisterForApartmentShutdown.Addr(), uintptr(callbackObject), uintptr(unsafe.Pointer(apartmentIdentifier)), uintptr(unsafe.Pointer(regCookie)))
+func RoRegisterForApartmentShutdown(callbackObject *IApartmentShutdown, apartmentIdentifier *uint64, regCookie *APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoRegisterForApartmentShutdown.Addr(), uintptr(unsafe.Pointer(callbackObject)), uintptr(unsafe.Pointer(apartmentIdentifier)), uintptr(unsafe.Pointer(regCookie)))
 	return foundation.HRESULT(r1)
 }
 
 // RoReportFailedDelegate calls api-ms-win-core-winrt-error-l1-1-1!RoReportFailedDelegate.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roreportfaileddelegate
-func RoReportFailedDelegate(punkDelegate uintptr, pRestrictedErrorInfo uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoReportFailedDelegate.Addr(), uintptr(punkDelegate), uintptr(pRestrictedErrorInfo))
+func RoReportFailedDelegate(punkDelegate *systemcom.IUnknown, pRestrictedErrorInfo *IRestrictedErrorInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoReportFailedDelegate.Addr(), uintptr(unsafe.Pointer(punkDelegate)), uintptr(unsafe.Pointer(pRestrictedErrorInfo)))
 	return foundation.HRESULT(r1)
 }
 
 // RoReportUnhandledError calls api-ms-win-core-winrt-error-l1-1-1!RoReportUnhandledError.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roreportunhandlederror
-func RoReportUnhandledError(pRestrictedErrorInfo uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoReportUnhandledError.Addr(), uintptr(pRestrictedErrorInfo))
+func RoReportUnhandledError(pRestrictedErrorInfo *IRestrictedErrorInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoReportUnhandledError.Addr(), uintptr(unsafe.Pointer(pRestrictedErrorInfo)))
 	return foundation.HRESULT(r1)
 }
 
 // RoResolveRestrictedErrorInfoReference calls api-ms-win-core-winrt-error-l1-1-0!RoResolveRestrictedErrorInfoReference.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roresolverestrictederrorinforeference
 // Minimum OS: windows8.0.
-func RoResolveRestrictedErrorInfoReference(reference foundation.PWSTR, ppRestrictedErrorInfo uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoResolveRestrictedErrorInfoReference.Addr(), uintptr(unsafe.Pointer(reference)), uintptr(ppRestrictedErrorInfo))
+func RoResolveRestrictedErrorInfoReference(reference foundation.PWSTR, ppRestrictedErrorInfo **IRestrictedErrorInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRoResolveRestrictedErrorInfoReference.Addr(), uintptr(unsafe.Pointer(reference)), uintptr(unsafe.Pointer(ppRestrictedErrorInfo)))
 	return foundation.HRESULT(r1)
 }
 
@@ -436,8 +438,8 @@ func RoUnregisterForApartmentShutdown(regCookie APARTMENT_SHUTDOWN_REGISTRATION_
 // SetRestrictedErrorInfo calls api-ms-win-core-winrt-error-l1-1-0!SetRestrictedErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-setrestrictederrorinfo
 // Minimum OS: windows8.0.
-func SetRestrictedErrorInfo(pRestrictedErrorInfo uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetRestrictedErrorInfo.Addr(), uintptr(pRestrictedErrorInfo))
+func SetRestrictedErrorInfo(pRestrictedErrorInfo *IRestrictedErrorInfo) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procSetRestrictedErrorInfo.Addr(), uintptr(unsafe.Pointer(pRestrictedErrorInfo)))
 	return foundation.HRESULT(r1)
 }
 

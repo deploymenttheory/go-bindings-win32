@@ -591,7 +591,7 @@ type MIDL_STUB_MESSAGE struct {
 	PvDestContext          unsafe.Pointer
 	SavedContextHandles    **NDR_SCONTEXT
 	ParamNumber            int32
-	PRpcChannelBuffer      [1]uint64
+	PRpcChannelBuffer      *systemcom.IRpcChannelBuffer
 	PArrayInfo             *ARRAY_INFO
 	SizePtrCountArray      *uint32
 	SizePtrOffsetArray     *uint32
@@ -1129,7 +1129,7 @@ type NDR_USER_MARSHAL_INFO_LEVEL1 struct {
 	BufferSize        uint32
 	PfnAllocate       uintptr
 	PfnFree           uintptr
-	PRpcChannelBuffer [1]uint64
+	PRpcChannelBuffer *systemcom.IRpcChannelBuffer
 	Reserved          [5]uintptr
 }
 

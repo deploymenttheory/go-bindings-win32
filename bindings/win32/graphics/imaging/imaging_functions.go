@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -31,32 +32,32 @@ var (
 // WICConvertBitmapSource calls WindowsCodecs!WICConvertBitmapSource.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wicconvertbitmapsource
 // Minimum OS: windows5.1.2600.
-func WICConvertBitmapSource(dstFormat *win32.GUID, pISrc uintptr, ppIDst uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWICConvertBitmapSource.Addr(), uintptr(unsafe.Pointer(dstFormat)), uintptr(pISrc), uintptr(ppIDst))
+func WICConvertBitmapSource(dstFormat *win32.GUID, pISrc *IWICBitmapSource, ppIDst **IWICBitmapSource) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWICConvertBitmapSource.Addr(), uintptr(unsafe.Pointer(dstFormat)), uintptr(unsafe.Pointer(pISrc)), uintptr(unsafe.Pointer(ppIDst)))
 	return foundation.HRESULT(r1)
 }
 
 // WICCreateBitmapFromSection calls WindowsCodecs!WICCreateBitmapFromSection.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wiccreatebitmapfromsection
 // Minimum OS: windows5.1.2600.
-func WICCreateBitmapFromSection(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, ppIBitmap uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWICCreateBitmapFromSection.Addr(), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(pixelFormat)), uintptr(hSection), uintptr(stride), uintptr(offset), uintptr(ppIBitmap))
+func WICCreateBitmapFromSection(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, ppIBitmap **IWICBitmap) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWICCreateBitmapFromSection.Addr(), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(pixelFormat)), uintptr(hSection), uintptr(stride), uintptr(offset), uintptr(unsafe.Pointer(ppIBitmap)))
 	return foundation.HRESULT(r1)
 }
 
 // WICCreateBitmapFromSectionEx calls WindowsCodecs!WICCreateBitmapFromSectionEx.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wiccreatebitmapfromsectionex
 // Minimum OS: windows6.1.
-func WICCreateBitmapFromSectionEx(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, desiredAccessLevel WICSectionAccessLevel, ppIBitmap uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWICCreateBitmapFromSectionEx.Addr(), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(pixelFormat)), uintptr(hSection), uintptr(stride), uintptr(offset), uintptr(desiredAccessLevel), uintptr(ppIBitmap))
+func WICCreateBitmapFromSectionEx(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, desiredAccessLevel WICSectionAccessLevel, ppIBitmap **IWICBitmap) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWICCreateBitmapFromSectionEx.Addr(), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(pixelFormat)), uintptr(hSection), uintptr(stride), uintptr(offset), uintptr(desiredAccessLevel), uintptr(unsafe.Pointer(ppIBitmap)))
 	return foundation.HRESULT(r1)
 }
 
 // WICGetMetadataContentSize calls WindowsCodecs!WICGetMetadataContentSize.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicgetmetadatacontentsize
 // Minimum OS: windows5.1.2600.
-func WICGetMetadataContentSize(guidContainerFormat *win32.GUID, pIWriter uintptr, pcbSize *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWICGetMetadataContentSize.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(pIWriter), uintptr(unsafe.Pointer(pcbSize)))
+func WICGetMetadataContentSize(guidContainerFormat *win32.GUID, pIWriter *IWICMetadataWriter, pcbSize *uint64) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWICGetMetadataContentSize.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pIWriter)), uintptr(unsafe.Pointer(pcbSize)))
 	return foundation.HRESULT(r1)
 }
 
@@ -87,15 +88,15 @@ func WICMapShortNameToGuid(wzName foundation.PWSTR, pguid *win32.GUID) foundatio
 // WICMatchMetadataContent calls WindowsCodecs!WICMatchMetadataContent.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicmatchmetadatacontent
 // Minimum OS: windows5.1.2600.
-func WICMatchMetadataContent(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, pIStream uintptr, pguidMetadataFormat *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWICMatchMetadataContent.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(pIStream), uintptr(unsafe.Pointer(pguidMetadataFormat)))
+func WICMatchMetadataContent(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, pIStream *systemcom.IStream, pguidMetadataFormat *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWICMatchMetadataContent.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(unsafe.Pointer(pIStream)), uintptr(unsafe.Pointer(pguidMetadataFormat)))
 	return foundation.HRESULT(r1)
 }
 
 // WICSerializeMetadataContent calls WindowsCodecs!WICSerializeMetadataContent.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicserializemetadatacontent
 // Minimum OS: windows5.1.2600.
-func WICSerializeMetadataContent(guidContainerFormat *win32.GUID, pIWriter uintptr, dwPersistOptions uint32, pIStream uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWICSerializeMetadataContent.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(pIWriter), uintptr(dwPersistOptions), uintptr(pIStream))
+func WICSerializeMetadataContent(guidContainerFormat *win32.GUID, pIWriter *IWICMetadataWriter, dwPersistOptions uint32, pIStream *systemcom.IStream) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procWICSerializeMetadataContent.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pIWriter)), uintptr(dwPersistOptions), uintptr(unsafe.Pointer(pIStream)))
 	return foundation.HRESULT(r1)
 }

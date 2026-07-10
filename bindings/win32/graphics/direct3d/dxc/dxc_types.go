@@ -63,7 +63,7 @@ type DxcShaderHash struct {
 }
 
 // DxcCreateInstance2Proc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// syscall) using the shape func(*systemcom.IMalloc, *win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
 type DxcCreateInstance2Proc uintptr
 
 // DxcCreateInstanceProc is a callback pointer: create one with NewCallback (package

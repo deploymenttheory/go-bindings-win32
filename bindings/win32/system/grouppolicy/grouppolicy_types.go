@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemwmi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/wmi"
 )
 
 type APPSTATE int32
@@ -462,7 +463,7 @@ type RSOP_TARGET struct {
 	PsaSecurityGroups *systemcom.SAFEARRAY
 	PRsopToken        unsafe.Pointer
 	PGPOList          *GROUP_POLICY_OBJECTA
-	PWbemServices     [1]uint64
+	PWbemServices     *systemwmi.IWbemServices
 }
 
 // PFNGENERATEGROUPPOLICY is a callback pointer: create one with NewCallback (package
@@ -474,7 +475,7 @@ type PFNGENERATEGROUPPOLICY uintptr
 type PFNPROCESSGROUPPOLICY uintptr
 
 // PFNPROCESSGROUPPOLICYEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.HANDLE, systemregistry.HKEY, *GROUP_POLICY_OBJECTA, *GROUP_POLICY_OBJECTA, uintptr, *foundation.BOOL, PFNSTATUSMESSAGECALLBACK, uintptr, *foundation.HRESULT) uint32.
+// syscall) using the shape func(uint32, foundation.HANDLE, systemregistry.HKEY, *GROUP_POLICY_OBJECTA, *GROUP_POLICY_OBJECTA, uintptr, *foundation.BOOL, PFNSTATUSMESSAGECALLBACK, *systemwmi.IWbemServices, *foundation.HRESULT) uint32.
 type PFNPROCESSGROUPPOLICYEX uintptr
 
 // PFNSTATUSMESSAGECALLBACK is a callback pointer: create one with NewCallback (package

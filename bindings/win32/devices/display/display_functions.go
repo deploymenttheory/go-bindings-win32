@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdirect3d9 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 )
 
@@ -791,8 +792,8 @@ func GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, pdwN
 // GetNumberOfPhysicalMonitorsFromIDirect3DDevice9 calls dxva2!GetNumberOfPhysicalMonitorsFromIDirect3DDevice9.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getnumberofphysicalmonitorsfromidirect3ddevice9
 // Minimum OS: windows6.0.6000.
-func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 uintptr, pdwNumberOfPhysicalMonitors *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetNumberOfPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(pDirect3DDevice9), uintptr(unsafe.Pointer(pdwNumberOfPhysicalMonitors)))
+func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, pdwNumberOfPhysicalMonitors *uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetNumberOfPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(unsafe.Pointer(pdwNumberOfPhysicalMonitors)))
 	return foundation.HRESULT(r1)
 }
 
@@ -810,8 +811,8 @@ func GetPhysicalMonitorsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, dwPhysicalMo
 // GetPhysicalMonitorsFromIDirect3DDevice9 calls dxva2!GetPhysicalMonitorsFromIDirect3DDevice9.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getphysicalmonitorsfromidirect3ddevice9
 // Minimum OS: windows6.0.6000.
-func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 uintptr, dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(pDirect3DDevice9), uintptr(dwPhysicalMonitorArraySize), uintptr(unsafe.Pointer(pPhysicalMonitorArray)))
+func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(dwPhysicalMonitorArraySize), uintptr(unsafe.Pointer(pPhysicalMonitorArray)))
 	return foundation.HRESULT(r1)
 }
 

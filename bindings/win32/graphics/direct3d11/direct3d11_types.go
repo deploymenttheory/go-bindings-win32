@@ -4082,7 +4082,7 @@ type D3D11_VIDEO_CONTENT_PROTECTION_CAPS struct {
 
 // D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION: https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_video_decoder_begin_frame_crypto_session
 type D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION struct {
-	PCryptoSession  [1]uint64
+	PCryptoSession  *ID3D11CryptoSession
 	BlobSize        uint32
 	PBlob           unsafe.Pointer
 	PKeyInfoId      *win32.GUID
@@ -4158,6 +4158,17 @@ type D3D11_VIDEO_DECODER_DESC struct {
 	SampleWidth  uint32
 	SampleHeight uint32
 	OutputFormat graphicsdxgicommon.DXGI_FORMAT
+}
+
+// D3D11_VIDEO_DECODER_EXTENSION: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_decoder_extension
+type D3D11_VIDEO_DECODER_EXTENSION struct {
+	Function              uint32
+	PPrivateInputData     unsafe.Pointer
+	PrivateInputDataSize  uint32
+	PPrivateOutputData    unsafe.Pointer
+	PrivateOutputDataSize uint32
+	ResourceCount         uint32
+	PpResourceList        **ID3D11Resource
 }
 
 // D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
@@ -4259,6 +4270,21 @@ type D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS struct {
 	CustomRateCount uint32
 }
 
+// D3D11_VIDEO_PROCESSOR_STREAM: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_stream
+type D3D11_VIDEO_PROCESSOR_STREAM struct {
+	Enable                foundation.BOOL
+	OutputIndex           uint32
+	InputFrameOrField     uint32
+	PastFrames            uint32
+	FutureFrames          uint32
+	PpPastSurfaces        **ID3D11VideoProcessorInputView
+	PInputSurface         *ID3D11VideoProcessorInputView
+	PpFutureSurfaces      **ID3D11VideoProcessorInputView
+	PpPastSurfacesRight   **ID3D11VideoProcessorInputView
+	PInputSurfaceRight    *ID3D11VideoProcessorInputView
+	PpFutureSurfacesRight **ID3D11VideoProcessorInputView
+}
+
 // D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT: https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_video_processor_stream_behavior_hint
 type D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT struct {
 	Enable foundation.BOOL
@@ -4302,9 +4328,9 @@ type D3DX11_FFT_DESC struct {
 }
 
 // PFN_D3D11_CREATE_DEVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, graphicsdirect3d.D3D_DRIVER_TYPE, foundation.HMODULE, uint32, *graphicsdirect3d.D3D_FEATURE_LEVEL, uint32, uint32, uintptr, *graphicsdirect3d.D3D_FEATURE_LEVEL, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*graphicsdxgi.IDXGIAdapter, graphicsdirect3d.D3D_DRIVER_TYPE, foundation.HMODULE, uint32, *graphicsdirect3d.D3D_FEATURE_LEVEL, uint32, uint32, **ID3D11Device, *graphicsdirect3d.D3D_FEATURE_LEVEL, **ID3D11DeviceContext) foundation.HRESULT.
 type PFN_D3D11_CREATE_DEVICE uintptr
 
 // PFN_D3D11_CREATE_DEVICE_AND_SWAP_CHAIN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, graphicsdirect3d.D3D_DRIVER_TYPE, foundation.HMODULE, uint32, *graphicsdirect3d.D3D_FEATURE_LEVEL, uint32, uint32, *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, uintptr, uintptr, *graphicsdirect3d.D3D_FEATURE_LEVEL, uintptr) foundation.HRESULT.
+// syscall) using the shape func(*graphicsdxgi.IDXGIAdapter, graphicsdirect3d.D3D_DRIVER_TYPE, foundation.HMODULE, uint32, *graphicsdirect3d.D3D_FEATURE_LEVEL, uint32, uint32, *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, **graphicsdxgi.IDXGISwapChain, **ID3D11Device, *graphicsdirect3d.D3D_FEATURE_LEVEL, **ID3D11DeviceContext) foundation.HRESULT.
 type PFN_D3D11_CREATE_DEVICE_AND_SWAP_CHAIN uintptr

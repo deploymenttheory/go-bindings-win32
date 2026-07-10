@@ -228,7 +228,7 @@ func (g *Generator) failureChecks(resolved typemap.Resolved) []string {
 			checks = append(checks, "ret == "+value)
 		}
 		return checks
-	case typemap.KindPointer, typemap.KindPointerTypedef:
+	case typemap.KindPointer, typemap.KindPointerTypedef, typemap.KindComPtr:
 		return []string{"ret == nil"}
 	}
 	return nil
@@ -237,7 +237,7 @@ func (g *Generator) failureChecks(resolved typemap.Resolved) []string {
 // returnConversion renders the r1 → Go value conversion.
 func returnConversion(resolved typemap.Resolved) string {
 	switch resolved.Kind {
-	case typemap.KindPointer:
+	case typemap.KindPointer, typemap.KindComPtr:
 		if resolved.GoType == "unsafe.Pointer" {
 			return "unsafe.Pointer(r1)"
 		}

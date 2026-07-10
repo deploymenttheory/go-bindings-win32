@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -30,8 +31,8 @@ var (
 
 // D3D12CreateDevice calls d3d12!D3D12CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createdevice
-func D3D12CreateDevice(pAdapter uintptr, MinimumFeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppDevice *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D12CreateDevice.Addr(), uintptr(pAdapter), uintptr(MinimumFeatureLevel), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDevice)))
+func D3D12CreateDevice(pAdapter *systemcom.IUnknown, MinimumFeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppDevice *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procD3D12CreateDevice.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(MinimumFeatureLevel), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDevice)))
 	return foundation.HRESULT(r1)
 }
 
@@ -72,14 +73,14 @@ func D3D12GetInterface(rclsid *win32.GUID, riid *win32.GUID, ppvDebug *unsafe.Po
 
 // D3D12SerializeRootSignature calls d3d12!D3D12SerializeRootSignature.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12serializerootsignature
-func D3D12SerializeRootSignature(pRootSignature *D3D12_ROOT_SIGNATURE_DESC, Version D3D_ROOT_SIGNATURE_VERSION, ppBlob uintptr, ppErrorBlob uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D12SerializeRootSignature.Addr(), uintptr(unsafe.Pointer(pRootSignature)), uintptr(Version), uintptr(ppBlob), uintptr(ppErrorBlob))
+func D3D12SerializeRootSignature(pRootSignature *D3D12_ROOT_SIGNATURE_DESC, Version D3D_ROOT_SIGNATURE_VERSION, ppBlob **graphicsdirect3d.ID3DBlob, ppErrorBlob **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procD3D12SerializeRootSignature.Addr(), uintptr(unsafe.Pointer(pRootSignature)), uintptr(Version), uintptr(unsafe.Pointer(ppBlob)), uintptr(unsafe.Pointer(ppErrorBlob)))
 	return foundation.HRESULT(r1)
 }
 
 // D3D12SerializeVersionedRootSignature calls d3d12!D3D12SerializeVersionedRootSignature.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12serializeversionedrootsignature
-func D3D12SerializeVersionedRootSignature(pRootSignature *D3D12_VERSIONED_ROOT_SIGNATURE_DESC, ppBlob uintptr, ppErrorBlob uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D12SerializeVersionedRootSignature.Addr(), uintptr(unsafe.Pointer(pRootSignature)), uintptr(ppBlob), uintptr(ppErrorBlob))
+func D3D12SerializeVersionedRootSignature(pRootSignature *D3D12_VERSIONED_ROOT_SIGNATURE_DESC, ppBlob **graphicsdirect3d.ID3DBlob, ppErrorBlob **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procD3D12SerializeVersionedRootSignature.Addr(), uintptr(unsafe.Pointer(pRootSignature)), uintptr(unsafe.Pointer(ppBlob)), uintptr(unsafe.Pointer(ppErrorBlob)))
 	return foundation.HRESULT(r1)
 }

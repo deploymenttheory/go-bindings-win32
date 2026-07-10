@@ -1,0 +1,32 @@
+{{define "interface"}}
+{{- if .DocURL}}// {{.TypeName}}: {{.DocURL}}
+{{end -}}
+{{- if .GUID}}// IID: {{.GUID}}
+{{end -}}
+{{- if .BaseNote}}// {{.BaseNote}}
+{{end -}}
+type {{.TypeName}} struct {
+{{- if .BaseType}}
+	{{.BaseType}}
+{{- else}}
+	LpVtbl *[1024]uintptr
+{{- end}}
+}
+
+{{if .IIDVar}}// {{.IIDVar}} is the interface identifier for {{.TypeName}}.
+var {{.IIDVar}} = {{.IIDLiteral}}
+
+{{end -}}
+{{range .Methods}}
+{{- range .CommentLines}}// {{.}}
+{{end -}}
+func (self *{{$.TypeName}}) {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
+{{- if eq .ReturnKind 0}}
+	syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
+{{- else}}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
+	return {{.RetExpr}}
+{{- end}}
+}
+
+{{end}}{{end}}

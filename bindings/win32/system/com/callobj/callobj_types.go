@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 // CALLFRAME_COPY: https://learn.microsoft.com/windows/win32/api/callobj/ne-callobj-callframe_copy
@@ -80,6 +81,6 @@ type CALLFRAME_MARSHALCONTEXT struct {
 	FIn                foundation.BOOLEAN
 	DwDestContext      uint32
 	PvDestContext      unsafe.Pointer
-	PunkReserved       [1]uint64
+	PunkReserved       *systemcom.IUnknown
 	GuidTransferSyntax win32.GUID
 }

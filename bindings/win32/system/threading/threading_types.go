@@ -877,7 +877,7 @@ type PINIT_ONCE_FN uintptr
 type PPS_POST_PROCESS_INIT_ROUTINE uintptr
 
 // PRTL_UMS_SCHEDULER_ENTRY_POINT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, uintptr, unsafe.Pointer).
+// syscall) using the shape func(systemsystemservices.RTL_UMS_SCHEDULER_REASON, uintptr, unsafe.Pointer).
 type PRTL_UMS_SCHEDULER_ENTRY_POINT uintptr
 
 // PTIMERAPCROUTINE is a callback pointer: create one with NewCallback (package
@@ -909,7 +909,7 @@ type PTP_WIN32_IO_CALLBACK uintptr
 type PTP_WORK_CALLBACK uintptr
 
 // RTWQPERIODICCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// syscall) using the shape func(*systemcom.IUnknown).
 type RTWQPERIODICCALLBACK uintptr
 
 // WAITORTIMERCALLBACK is a callback pointer: create one with NewCallback (package

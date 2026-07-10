@@ -94,14 +94,14 @@ var (
 )
 
 // CoGetClassObjectFromURL calls urlmon!CoGetClassObjectFromURL.
-func CoGetClassObjectFromURL(rCLASSID *win32.GUID, szCODE foundation.PWSTR, dwFileVersionMS uint32, dwFileVersionLS uint32, szTYPE foundation.PWSTR, pBindCtx uintptr, dwClsContext systemcom.CLSCTX, pvReserved unsafe.Pointer, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetClassObjectFromURL.Addr(), uintptr(unsafe.Pointer(rCLASSID)), uintptr(unsafe.Pointer(szCODE)), uintptr(dwFileVersionMS), uintptr(dwFileVersionLS), uintptr(unsafe.Pointer(szTYPE)), uintptr(pBindCtx), uintptr(dwClsContext), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func CoGetClassObjectFromURL(rCLASSID *win32.GUID, szCODE foundation.PWSTR, dwFileVersionMS uint32, dwFileVersionLS uint32, szTYPE foundation.PWSTR, pBindCtx *systemcom.IBindCtx, dwClsContext systemcom.CLSCTX, pvReserved unsafe.Pointer, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoGetClassObjectFromURL.Addr(), uintptr(unsafe.Pointer(rCLASSID)), uintptr(unsafe.Pointer(szCODE)), uintptr(dwFileVersionMS), uintptr(dwFileVersionLS), uintptr(unsafe.Pointer(szTYPE)), uintptr(unsafe.Pointer(pBindCtx)), uintptr(dwClsContext), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return foundation.HRESULT(r1)
 }
 
 // CoInternetCombineIUri calls urlmon!CoInternetCombineIUri.
-func CoInternetCombineIUri(pBaseUri uintptr, pRelativeUri uintptr, dwCombineFlags uint32, ppCombinedUri uintptr, dwReserved uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetCombineIUri.Addr(), uintptr(pBaseUri), uintptr(pRelativeUri), uintptr(dwCombineFlags), uintptr(ppCombinedUri), uintptr(dwReserved))
+func CoInternetCombineIUri(pBaseUri *systemcom.IUri, pRelativeUri *systemcom.IUri, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetCombineIUri.Addr(), uintptr(unsafe.Pointer(pBaseUri)), uintptr(unsafe.Pointer(pRelativeUri)), uintptr(dwCombineFlags), uintptr(unsafe.Pointer(ppCombinedUri)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -112,8 +112,8 @@ func CoInternetCombineUrl(pwzBaseUrl foundation.PWSTR, pwzRelativeUrl foundation
 }
 
 // CoInternetCombineUrlEx calls urlmon!CoInternetCombineUrlEx.
-func CoInternetCombineUrlEx(pBaseUri uintptr, pwzRelativeUrl foundation.PWSTR, dwCombineFlags uint32, ppCombinedUri uintptr, dwReserved uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetCombineUrlEx.Addr(), uintptr(pBaseUri), uintptr(unsafe.Pointer(pwzRelativeUrl)), uintptr(dwCombineFlags), uintptr(ppCombinedUri), uintptr(dwReserved))
+func CoInternetCombineUrlEx(pBaseUri *systemcom.IUri, pwzRelativeUrl foundation.PWSTR, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetCombineUrlEx.Addr(), uintptr(unsafe.Pointer(pBaseUri)), uintptr(unsafe.Pointer(pwzRelativeUrl)), uintptr(dwCombineFlags), uintptr(unsafe.Pointer(ppCombinedUri)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -124,14 +124,14 @@ func CoInternetCompareUrl(pwzUrl1 foundation.PWSTR, pwzUrl2 foundation.PWSTR, dw
 }
 
 // CoInternetCreateSecurityManager calls urlmon!CoInternetCreateSecurityManager.
-func CoInternetCreateSecurityManager(pSP uintptr, ppSM uintptr, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetCreateSecurityManager.Addr(), uintptr(pSP), uintptr(ppSM), uintptr(dwReserved))
+func CoInternetCreateSecurityManager(pSP *systemcom.IServiceProvider, ppSM **IInternetSecurityManager, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetCreateSecurityManager.Addr(), uintptr(unsafe.Pointer(pSP)), uintptr(unsafe.Pointer(ppSM)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
 // CoInternetCreateZoneManager calls urlmon!CoInternetCreateZoneManager.
-func CoInternetCreateZoneManager(pSP uintptr, ppZM uintptr, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetCreateZoneManager.Addr(), uintptr(pSP), uintptr(ppZM), uintptr(dwReserved))
+func CoInternetCreateZoneManager(pSP *systemcom.IServiceProvider, ppZM **IInternetZoneManager, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetCreateZoneManager.Addr(), uintptr(unsafe.Pointer(pSP)), uintptr(unsafe.Pointer(ppZM)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -148,14 +148,14 @@ func CoInternetGetSecurityUrl(pwszUrl foundation.PWSTR, ppwszSecUrl *foundation.
 }
 
 // CoInternetGetSecurityUrlEx calls urlmon!CoInternetGetSecurityUrlEx.
-func CoInternetGetSecurityUrlEx(pUri uintptr, ppSecUri uintptr, psuAction PSUACTION, dwReserved uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetGetSecurityUrlEx.Addr(), uintptr(pUri), uintptr(ppSecUri), uintptr(psuAction), uintptr(dwReserved))
+func CoInternetGetSecurityUrlEx(pUri *systemcom.IUri, ppSecUri **systemcom.IUri, psuAction PSUACTION, dwReserved uintptr) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetGetSecurityUrlEx.Addr(), uintptr(unsafe.Pointer(pUri)), uintptr(unsafe.Pointer(ppSecUri)), uintptr(psuAction), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
 // CoInternetGetSession calls urlmon!CoInternetGetSession.
-func CoInternetGetSession(dwSessionMode uint32, ppIInternetSession uintptr, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetGetSession.Addr(), uintptr(dwSessionMode), uintptr(ppIInternetSession), uintptr(dwReserved))
+func CoInternetGetSession(dwSessionMode uint32, ppIInternetSession **IInternetSession, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetGetSession.Addr(), uintptr(dwSessionMode), uintptr(unsafe.Pointer(ppIInternetSession)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -166,26 +166,26 @@ func CoInternetIsFeatureEnabled(FeatureEntry INTERNETFEATURELIST, dwFlags uint32
 }
 
 // CoInternetIsFeatureEnabledForIUri calls urlmon!CoInternetIsFeatureEnabledForIUri.
-func CoInternetIsFeatureEnabledForIUri(FeatureEntry INTERNETFEATURELIST, dwFlags uint32, pIUri uintptr, pSecMgr uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureEnabledForIUri.Addr(), uintptr(FeatureEntry), uintptr(dwFlags), uintptr(pIUri), uintptr(pSecMgr))
+func CoInternetIsFeatureEnabledForIUri(FeatureEntry INTERNETFEATURELIST, dwFlags uint32, pIUri *systemcom.IUri, pSecMgr *IInternetSecurityManagerEx2) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureEnabledForIUri.Addr(), uintptr(FeatureEntry), uintptr(dwFlags), uintptr(unsafe.Pointer(pIUri)), uintptr(unsafe.Pointer(pSecMgr)))
 	return foundation.HRESULT(r1)
 }
 
 // CoInternetIsFeatureEnabledForUrl calls urlmon!CoInternetIsFeatureEnabledForUrl.
-func CoInternetIsFeatureEnabledForUrl(FeatureEntry INTERNETFEATURELIST, dwFlags uint32, szURL foundation.PWSTR, pSecMgr uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureEnabledForUrl.Addr(), uintptr(FeatureEntry), uintptr(dwFlags), uintptr(unsafe.Pointer(szURL)), uintptr(pSecMgr))
+func CoInternetIsFeatureEnabledForUrl(FeatureEntry INTERNETFEATURELIST, dwFlags uint32, szURL foundation.PWSTR, pSecMgr *IInternetSecurityManager) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureEnabledForUrl.Addr(), uintptr(FeatureEntry), uintptr(dwFlags), uintptr(unsafe.Pointer(szURL)), uintptr(unsafe.Pointer(pSecMgr)))
 	return foundation.HRESULT(r1)
 }
 
 // CoInternetIsFeatureZoneElevationEnabled calls urlmon!CoInternetIsFeatureZoneElevationEnabled.
-func CoInternetIsFeatureZoneElevationEnabled(szFromURL foundation.PWSTR, szToURL foundation.PWSTR, pSecMgr uintptr, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureZoneElevationEnabled.Addr(), uintptr(unsafe.Pointer(szFromURL)), uintptr(unsafe.Pointer(szToURL)), uintptr(pSecMgr), uintptr(dwFlags))
+func CoInternetIsFeatureZoneElevationEnabled(szFromURL foundation.PWSTR, szToURL foundation.PWSTR, pSecMgr *IInternetSecurityManager, dwFlags uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureZoneElevationEnabled.Addr(), uintptr(unsafe.Pointer(szFromURL)), uintptr(unsafe.Pointer(szToURL)), uintptr(unsafe.Pointer(pSecMgr)), uintptr(dwFlags))
 	return foundation.HRESULT(r1)
 }
 
 // CoInternetParseIUri calls urlmon!CoInternetParseIUri.
-func CoInternetParseIUri(pIUri uintptr, ParseAction PARSEACTION, dwFlags uint32, pwzResult foundation.PWSTR, cchResult uint32, pcchResult *uint32, dwReserved uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoInternetParseIUri.Addr(), uintptr(pIUri), uintptr(ParseAction), uintptr(dwFlags), uintptr(unsafe.Pointer(pwzResult)), uintptr(cchResult), uintptr(unsafe.Pointer(pcchResult)), uintptr(dwReserved))
+func CoInternetParseIUri(pIUri *systemcom.IUri, ParseAction PARSEACTION, dwFlags uint32, pwzResult foundation.PWSTR, cchResult uint32, pcchResult *uint32, dwReserved uintptr) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoInternetParseIUri.Addr(), uintptr(unsafe.Pointer(pIUri)), uintptr(ParseAction), uintptr(dwFlags), uintptr(unsafe.Pointer(pwzResult)), uintptr(cchResult), uintptr(unsafe.Pointer(pcchResult)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -234,40 +234,40 @@ func CopyStgMedium(pcstgmedSrc *systemcom.STGMEDIUM, pstgmedDest *systemcom.STGM
 // CreateAsyncBindCtx calls urlmon!CreateAsyncBindCtx.
 // https://learn.microsoft.com/windows/win32/api/urlmon/nf-urlmon-createasyncbindctx
 // Minimum OS: windows5.0.
-func CreateAsyncBindCtx(reserved uint32, pBSCb uintptr, pEFetc uintptr, ppBC uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateAsyncBindCtx.Addr(), uintptr(reserved), uintptr(pBSCb), uintptr(pEFetc), uintptr(ppBC))
+func CreateAsyncBindCtx(reserved uint32, pBSCb *systemcom.IBindStatusCallback, pEFetc *systemcom.IEnumFORMATETC, ppBC **systemcom.IBindCtx) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateAsyncBindCtx.Addr(), uintptr(reserved), uintptr(unsafe.Pointer(pBSCb)), uintptr(unsafe.Pointer(pEFetc)), uintptr(unsafe.Pointer(ppBC)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateAsyncBindCtxEx calls urlmon!CreateAsyncBindCtxEx.
-func CreateAsyncBindCtxEx(pbc uintptr, dwOptions uint32, pBSCb uintptr, pEnum uintptr, ppBC uintptr, reserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateAsyncBindCtxEx.Addr(), uintptr(pbc), uintptr(dwOptions), uintptr(pBSCb), uintptr(pEnum), uintptr(ppBC), uintptr(reserved))
+func CreateAsyncBindCtxEx(pbc *systemcom.IBindCtx, dwOptions uint32, pBSCb *systemcom.IBindStatusCallback, pEnum *systemcom.IEnumFORMATETC, ppBC **systemcom.IBindCtx, reserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateAsyncBindCtxEx.Addr(), uintptr(unsafe.Pointer(pbc)), uintptr(dwOptions), uintptr(unsafe.Pointer(pBSCb)), uintptr(unsafe.Pointer(pEnum)), uintptr(unsafe.Pointer(ppBC)), uintptr(reserved))
 	return foundation.HRESULT(r1)
 }
 
 // CreateFormatEnumerator calls urlmon!CreateFormatEnumerator.
 // https://learn.microsoft.com/windows/win32/api/urlmon/nf-urlmon-createformatenumerator
 // Minimum OS: windows5.0.
-func CreateFormatEnumerator(cfmtetc uint32, rgfmtetc *systemcom.FORMATETC, ppenumfmtetc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateFormatEnumerator.Addr(), uintptr(cfmtetc), uintptr(unsafe.Pointer(rgfmtetc)), uintptr(ppenumfmtetc))
+func CreateFormatEnumerator(cfmtetc uint32, rgfmtetc *systemcom.FORMATETC, ppenumfmtetc **systemcom.IEnumFORMATETC) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateFormatEnumerator.Addr(), uintptr(cfmtetc), uintptr(unsafe.Pointer(rgfmtetc)), uintptr(unsafe.Pointer(ppenumfmtetc)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateURLMoniker calls urlmon!CreateURLMoniker.
-func CreateURLMoniker(pMkCtx uintptr, szURL foundation.PWSTR, ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateURLMoniker.Addr(), uintptr(pMkCtx), uintptr(unsafe.Pointer(szURL)), uintptr(ppmk))
+func CreateURLMoniker(pMkCtx *systemcom.IMoniker, szURL foundation.PWSTR, ppmk **systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateURLMoniker.Addr(), uintptr(unsafe.Pointer(pMkCtx)), uintptr(unsafe.Pointer(szURL)), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
 // CreateURLMonikerEx calls urlmon!CreateURLMonikerEx.
-func CreateURLMonikerEx(pMkCtx uintptr, szURL foundation.PWSTR, ppmk uintptr, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateURLMonikerEx.Addr(), uintptr(pMkCtx), uintptr(unsafe.Pointer(szURL)), uintptr(ppmk), uintptr(dwFlags))
+func CreateURLMonikerEx(pMkCtx *systemcom.IMoniker, szURL foundation.PWSTR, ppmk **systemcom.IMoniker, dwFlags uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateURLMonikerEx.Addr(), uintptr(unsafe.Pointer(pMkCtx)), uintptr(unsafe.Pointer(szURL)), uintptr(unsafe.Pointer(ppmk)), uintptr(dwFlags))
 	return foundation.HRESULT(r1)
 }
 
 // CreateURLMonikerEx2 calls urlmon!CreateURLMonikerEx2.
-func CreateURLMonikerEx2(pMkCtx uintptr, pUri uintptr, ppmk uintptr, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateURLMonikerEx2.Addr(), uintptr(pMkCtx), uintptr(pUri), uintptr(ppmk), uintptr(dwFlags))
+func CreateURLMonikerEx2(pMkCtx *systemcom.IMoniker, pUri *systemcom.IUri, ppmk **systemcom.IMoniker, dwFlags uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCreateURLMonikerEx2.Addr(), uintptr(unsafe.Pointer(pMkCtx)), uintptr(unsafe.Pointer(pUri)), uintptr(unsafe.Pointer(ppmk)), uintptr(dwFlags))
 	return foundation.HRESULT(r1)
 }
 
@@ -284,20 +284,20 @@ func FindMediaType(rgszTypes foundation.PSTR, rgcfTypes *uint16) foundation.HRES
 }
 
 // FindMediaTypeClass calls urlmon!FindMediaTypeClass.
-func FindMediaTypeClass(pBC uintptr, szType foundation.PSTR, pclsID *win32.GUID, reserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFindMediaTypeClass.Addr(), uintptr(pBC), uintptr(unsafe.Pointer(szType)), uintptr(unsafe.Pointer(pclsID)), uintptr(reserved))
+func FindMediaTypeClass(pBC *systemcom.IBindCtx, szType foundation.PSTR, pclsID *win32.GUID, reserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procFindMediaTypeClass.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(szType)), uintptr(unsafe.Pointer(pclsID)), uintptr(reserved))
 	return foundation.HRESULT(r1)
 }
 
 // FindMimeFromData calls urlmon!FindMimeFromData.
-func FindMimeFromData(pBC uintptr, pwzUrl foundation.PWSTR, pBuffer unsafe.Pointer, cbSize uint32, pwzMimeProposed foundation.PWSTR, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFindMimeFromData.Addr(), uintptr(pBC), uintptr(unsafe.Pointer(pwzUrl)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbSize), uintptr(unsafe.Pointer(pwzMimeProposed)), uintptr(dwMimeFlags), uintptr(unsafe.Pointer(ppwzMimeOut)), uintptr(dwReserved))
+func FindMimeFromData(pBC *systemcom.IBindCtx, pwzUrl foundation.PWSTR, pBuffer unsafe.Pointer, cbSize uint32, pwzMimeProposed foundation.PWSTR, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procFindMimeFromData.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(pwzUrl)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbSize), uintptr(unsafe.Pointer(pwzMimeProposed)), uintptr(dwMimeFlags), uintptr(unsafe.Pointer(ppwzMimeOut)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
 // GetClassFileOrMime calls urlmon!GetClassFileOrMime.
-func GetClassFileOrMime(pBC uintptr, szFilename foundation.PWSTR, pBuffer unsafe.Pointer, cbSize uint32, szMime foundation.PWSTR, dwReserved uint32, pclsid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetClassFileOrMime.Addr(), uintptr(pBC), uintptr(unsafe.Pointer(szFilename)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbSize), uintptr(unsafe.Pointer(szMime)), uintptr(dwReserved), uintptr(unsafe.Pointer(pclsid)))
+func GetClassFileOrMime(pBC *systemcom.IBindCtx, szFilename foundation.PWSTR, pBuffer unsafe.Pointer, cbSize uint32, szMime foundation.PWSTR, dwReserved uint32, pclsid *win32.GUID) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetClassFileOrMime.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(szFilename)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbSize), uintptr(unsafe.Pointer(szMime)), uintptr(dwReserved), uintptr(unsafe.Pointer(pclsid)))
 	return foundation.HRESULT(r1)
 }
 
@@ -320,38 +320,38 @@ func GetSoftwareUpdateInfo(szDistUnit foundation.PWSTR, psdi *SOFTDISTINFO) foun
 }
 
 // HlinkGoBack calls urlmon!HlinkGoBack.
-func HlinkGoBack(pUnk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkGoBack.Addr(), uintptr(pUnk))
+func HlinkGoBack(pUnk *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkGoBack.Addr(), uintptr(unsafe.Pointer(pUnk)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkGoForward calls urlmon!HlinkGoForward.
-func HlinkGoForward(pUnk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkGoForward.Addr(), uintptr(pUnk))
+func HlinkGoForward(pUnk *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkGoForward.Addr(), uintptr(unsafe.Pointer(pUnk)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkNavigateMoniker calls urlmon!HlinkNavigateMoniker.
-func HlinkNavigateMoniker(pUnk uintptr, pmkTarget uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkNavigateMoniker.Addr(), uintptr(pUnk), uintptr(pmkTarget))
+func HlinkNavigateMoniker(pUnk *systemcom.IUnknown, pmkTarget *systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkNavigateMoniker.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(pmkTarget)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkNavigateString calls urlmon!HlinkNavigateString.
-func HlinkNavigateString(pUnk uintptr, szTarget foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkNavigateString.Addr(), uintptr(pUnk), uintptr(unsafe.Pointer(szTarget)))
+func HlinkNavigateString(pUnk *systemcom.IUnknown, szTarget foundation.PWSTR) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkNavigateString.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(szTarget)))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkSimpleNavigateToMoniker calls urlmon!HlinkSimpleNavigateToMoniker.
-func HlinkSimpleNavigateToMoniker(pmkTarget uintptr, szLocation foundation.PWSTR, szTargetFrameName foundation.PWSTR, pUnk uintptr, pbc uintptr, param5 uintptr, grfHLNF uint32, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkSimpleNavigateToMoniker.Addr(), uintptr(pmkTarget), uintptr(unsafe.Pointer(szLocation)), uintptr(unsafe.Pointer(szTargetFrameName)), uintptr(pUnk), uintptr(pbc), uintptr(param5), uintptr(grfHLNF), uintptr(dwReserved))
+func HlinkSimpleNavigateToMoniker(pmkTarget *systemcom.IMoniker, szLocation foundation.PWSTR, szTargetFrameName foundation.PWSTR, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkSimpleNavigateToMoniker.Addr(), uintptr(unsafe.Pointer(pmkTarget)), uintptr(unsafe.Pointer(szLocation)), uintptr(unsafe.Pointer(szTargetFrameName)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(param5)), uintptr(grfHLNF), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
 // HlinkSimpleNavigateToString calls urlmon!HlinkSimpleNavigateToString.
-func HlinkSimpleNavigateToString(szTarget foundation.PWSTR, szLocation foundation.PWSTR, szTargetFrameName foundation.PWSTR, pUnk uintptr, pbc uintptr, param5 uintptr, grfHLNF uint32, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHlinkSimpleNavigateToString.Addr(), uintptr(unsafe.Pointer(szTarget)), uintptr(unsafe.Pointer(szLocation)), uintptr(unsafe.Pointer(szTargetFrameName)), uintptr(pUnk), uintptr(pbc), uintptr(param5), uintptr(grfHLNF), uintptr(dwReserved))
+func HlinkSimpleNavigateToString(szTarget foundation.PWSTR, szLocation foundation.PWSTR, szTargetFrameName foundation.PWSTR, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procHlinkSimpleNavigateToString.Addr(), uintptr(unsafe.Pointer(szTarget)), uintptr(unsafe.Pointer(szLocation)), uintptr(unsafe.Pointer(szTargetFrameName)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(param5)), uintptr(grfHLNF), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -368,8 +368,8 @@ func IEInstallScope(pdwScope *uint32) foundation.HRESULT {
 }
 
 // IsAsyncMoniker calls urlmon!IsAsyncMoniker.
-func IsAsyncMoniker(pmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIsAsyncMoniker.Addr(), uintptr(pmk))
+func IsAsyncMoniker(pmk *systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIsAsyncMoniker.Addr(), uintptr(unsafe.Pointer(pmk)))
 	return foundation.HRESULT(r1)
 }
 
@@ -386,14 +386,14 @@ func IsLoggingEnabledW(pwszUrl foundation.PWSTR) foundation.BOOL {
 }
 
 // IsValidURL calls urlmon!IsValidURL.
-func IsValidURL(pBC uintptr, szURL foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIsValidURL.Addr(), uintptr(pBC), uintptr(unsafe.Pointer(szURL)), uintptr(dwReserved))
+func IsValidURL(pBC *systemcom.IBindCtx, szURL foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procIsValidURL.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(szURL)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
 // MkParseDisplayNameEx calls urlmon!MkParseDisplayNameEx.
-func MkParseDisplayNameEx(pbc uintptr, szDisplayName foundation.PWSTR, pchEaten *uint32, ppmk uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMkParseDisplayNameEx.Addr(), uintptr(pbc), uintptr(unsafe.Pointer(szDisplayName)), uintptr(unsafe.Pointer(pchEaten)), uintptr(ppmk))
+func MkParseDisplayNameEx(pbc *systemcom.IBindCtx, szDisplayName foundation.PWSTR, pchEaten *uint32, ppmk **systemcom.IMoniker) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procMkParseDisplayNameEx.Addr(), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(szDisplayName)), uintptr(unsafe.Pointer(pchEaten)), uintptr(unsafe.Pointer(ppmk)))
 	return foundation.HRESULT(r1)
 }
 
@@ -404,20 +404,20 @@ func ObtainUserAgentString(dwOption uint32, pszUAOut foundation.PSTR, cbSize *ui
 }
 
 // RegisterBindStatusCallback calls urlmon!RegisterBindStatusCallback.
-func RegisterBindStatusCallback(pBC uintptr, pBSCb uintptr, ppBSCBPrev uintptr, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterBindStatusCallback.Addr(), uintptr(pBC), uintptr(pBSCb), uintptr(ppBSCBPrev), uintptr(dwReserved))
+func RegisterBindStatusCallback(pBC *systemcom.IBindCtx, pBSCb *systemcom.IBindStatusCallback, ppBSCBPrev **systemcom.IBindStatusCallback, dwReserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRegisterBindStatusCallback.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(pBSCb)), uintptr(unsafe.Pointer(ppBSCBPrev)), uintptr(dwReserved))
 	return foundation.HRESULT(r1)
 }
 
 // RegisterFormatEnumerator calls urlmon!RegisterFormatEnumerator.
-func RegisterFormatEnumerator(pBC uintptr, pEFetc uintptr, reserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterFormatEnumerator.Addr(), uintptr(pBC), uintptr(pEFetc), uintptr(reserved))
+func RegisterFormatEnumerator(pBC *systemcom.IBindCtx, pEFetc *systemcom.IEnumFORMATETC, reserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRegisterFormatEnumerator.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(pEFetc)), uintptr(reserved))
 	return foundation.HRESULT(r1)
 }
 
 // RegisterMediaTypeClass calls urlmon!RegisterMediaTypeClass.
-func RegisterMediaTypeClass(pBC uintptr, ctypes uint32, rgszTypes *foundation.PSTR, rgclsID *win32.GUID, reserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterMediaTypeClass.Addr(), uintptr(pBC), uintptr(ctypes), uintptr(unsafe.Pointer(rgszTypes)), uintptr(unsafe.Pointer(rgclsID)), uintptr(reserved))
+func RegisterMediaTypeClass(pBC *systemcom.IBindCtx, ctypes uint32, rgszTypes *foundation.PSTR, rgclsID *win32.GUID, reserved uint32) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRegisterMediaTypeClass.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(ctypes), uintptr(unsafe.Pointer(rgszTypes)), uintptr(unsafe.Pointer(rgclsID)), uintptr(reserved))
 	return foundation.HRESULT(r1)
 }
 
@@ -433,14 +433,14 @@ func ReleaseBindInfo(pbindinfo *systemcom.BINDINFO) {
 }
 
 // RevokeBindStatusCallback calls urlmon!RevokeBindStatusCallback.
-func RevokeBindStatusCallback(pBC uintptr, pBSCb uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRevokeBindStatusCallback.Addr(), uintptr(pBC), uintptr(pBSCb))
+func RevokeBindStatusCallback(pBC *systemcom.IBindCtx, pBSCb *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRevokeBindStatusCallback.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(pBSCb)))
 	return foundation.HRESULT(r1)
 }
 
 // RevokeFormatEnumerator calls urlmon!RevokeFormatEnumerator.
-func RevokeFormatEnumerator(pBC uintptr, pEFetc uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRevokeFormatEnumerator.Addr(), uintptr(pBC), uintptr(pEFetc))
+func RevokeFormatEnumerator(pBC *systemcom.IBindCtx, pEFetc *systemcom.IEnumFORMATETC) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procRevokeFormatEnumerator.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(pEFetc)))
 	return foundation.HRESULT(r1)
 }
 
@@ -457,62 +457,62 @@ func SetSoftwareUpdateAdvertisementState(szDistUnit foundation.PWSTR, dwAdState 
 }
 
 // URLDownloadToCacheFileA calls urlmon!URLDownloadToCacheFileA.
-func URLDownloadToCacheFileA(param0 uintptr, param1 foundation.PSTR, param2 foundation.PSTR, cchFileName uint32, param4 uint32, param5 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLDownloadToCacheFileA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(cchFileName), uintptr(param4), uintptr(param5))
+func URLDownloadToCacheFileA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 foundation.PSTR, cchFileName uint32, param4 uint32, param5 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLDownloadToCacheFileA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(cchFileName), uintptr(param4), uintptr(unsafe.Pointer(param5)))
 	return foundation.HRESULT(r1)
 }
 
 // URLDownloadToCacheFileW calls urlmon!URLDownloadToCacheFileW.
-func URLDownloadToCacheFileW(param0 uintptr, param1 foundation.PWSTR, param2 foundation.PWSTR, cchFileName uint32, param4 uint32, param5 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLDownloadToCacheFileW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(cchFileName), uintptr(param4), uintptr(param5))
+func URLDownloadToCacheFileW(param0 *systemcom.IUnknown, param1 foundation.PWSTR, param2 foundation.PWSTR, cchFileName uint32, param4 uint32, param5 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLDownloadToCacheFileW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(cchFileName), uintptr(param4), uintptr(unsafe.Pointer(param5)))
 	return foundation.HRESULT(r1)
 }
 
 // URLDownloadToFileA calls urlmon!URLDownloadToFileA.
-func URLDownloadToFileA(param0 uintptr, param1 foundation.PSTR, param2 foundation.PSTR, param3 uint32, param4 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLDownloadToFileA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(param4))
+func URLDownloadToFileA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 foundation.PSTR, param3 uint32, param4 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLDownloadToFileA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
 	return foundation.HRESULT(r1)
 }
 
 // URLDownloadToFileW calls urlmon!URLDownloadToFileW.
-func URLDownloadToFileW(param0 uintptr, param1 foundation.PWSTR, param2 foundation.PWSTR, param3 uint32, param4 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLDownloadToFileW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(param4))
+func URLDownloadToFileW(param0 *systemcom.IUnknown, param1 foundation.PWSTR, param2 foundation.PWSTR, param3 uint32, param4 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLDownloadToFileW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
 	return foundation.HRESULT(r1)
 }
 
 // URLOpenBlockingStreamA calls urlmon!URLOpenBlockingStreamA.
-func URLOpenBlockingStreamA(param0 uintptr, param1 foundation.PSTR, param2 uintptr, param3 uint32, param4 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLOpenBlockingStreamA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3), uintptr(param4))
+func URLOpenBlockingStreamA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 **systemcom.IStream, param3 uint32, param4 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLOpenBlockingStreamA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
 	return foundation.HRESULT(r1)
 }
 
 // URLOpenBlockingStreamW calls urlmon!URLOpenBlockingStreamW.
-func URLOpenBlockingStreamW(param0 uintptr, param1 foundation.PWSTR, param2 uintptr, param3 uint32, param4 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLOpenBlockingStreamW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3), uintptr(param4))
+func URLOpenBlockingStreamW(param0 *systemcom.IUnknown, param1 foundation.PWSTR, param2 **systemcom.IStream, param3 uint32, param4 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLOpenBlockingStreamW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
 	return foundation.HRESULT(r1)
 }
 
 // URLOpenPullStreamA calls urlmon!URLOpenPullStreamA.
-func URLOpenPullStreamA(param0 uintptr, param1 foundation.PSTR, param2 uint32, param3 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLOpenPullStreamA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
+func URLOpenPullStreamA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 uint32, param3 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLOpenPullStreamA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)))
 	return foundation.HRESULT(r1)
 }
 
 // URLOpenPullStreamW calls urlmon!URLOpenPullStreamW.
-func URLOpenPullStreamW(param0 uintptr, param1 foundation.PWSTR, param2 uint32, param3 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLOpenPullStreamW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
+func URLOpenPullStreamW(param0 *systemcom.IUnknown, param1 foundation.PWSTR, param2 uint32, param3 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLOpenPullStreamW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)))
 	return foundation.HRESULT(r1)
 }
 
 // URLOpenStreamA calls urlmon!URLOpenStreamA.
-func URLOpenStreamA(param0 uintptr, param1 foundation.PSTR, param2 uint32, param3 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLOpenStreamA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
+func URLOpenStreamA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 uint32, param3 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLOpenStreamA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)))
 	return foundation.HRESULT(r1)
 }
 
 // URLOpenStreamW calls urlmon!URLOpenStreamW.
-func URLOpenStreamW(param0 uintptr, param1 foundation.PWSTR, param2 uint32, param3 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procURLOpenStreamW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
+func URLOpenStreamW(param0 *systemcom.IUnknown, param1 foundation.PWSTR, param2 uint32, param3 *systemcom.IBindStatusCallback) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procURLOpenStreamW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)))
 	return foundation.HRESULT(r1)
 }
 

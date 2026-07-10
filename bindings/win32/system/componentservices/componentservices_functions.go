@@ -34,16 +34,16 @@ var (
 // CoCreateActivity calls comsvcs!CoCreateActivity.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-cocreateactivity
 // Minimum OS: windows5.1.2600.
-func CoCreateActivity(pIUnknown uintptr, riid *win32.GUID, ppObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoCreateActivity.Addr(), uintptr(pIUnknown), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObj)))
+func CoCreateActivity(pIUnknown *systemcom.IUnknown, riid *win32.GUID, ppObj *unsafe.Pointer) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoCreateActivity.Addr(), uintptr(unsafe.Pointer(pIUnknown)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObj)))
 	return foundation.HRESULT(r1)
 }
 
 // CoEnterServiceDomain calls comsvcs!CoEnterServiceDomain.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-coenterservicedomain
 // Minimum OS: windows5.1.2600.
-func CoEnterServiceDomain(pConfigObject uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoEnterServiceDomain.Addr(), uintptr(pConfigObject))
+func CoEnterServiceDomain(pConfigObject *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procCoEnterServiceDomain.Addr(), uintptr(unsafe.Pointer(pConfigObject)))
 	return foundation.HRESULT(r1)
 }
 
@@ -58,15 +58,15 @@ func CoGetDefaultContext(aptType systemcom.APTTYPE, riid *win32.GUID, ppv *unsaf
 // CoLeaveServiceDomain calls comsvcs!CoLeaveServiceDomain.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-coleaveservicedomain
 // Minimum OS: windows5.1.2600.
-func CoLeaveServiceDomain(pUnkStatus uintptr) {
-	syscall.SyscallN(procCoLeaveServiceDomain.Addr(), uintptr(pUnkStatus))
+func CoLeaveServiceDomain(pUnkStatus *systemcom.IUnknown) {
+	syscall.SyscallN(procCoLeaveServiceDomain.Addr(), uintptr(unsafe.Pointer(pUnkStatus)))
 }
 
 // GetDispenserManager calls MTxDM!GetDispenserManager.
 // https://learn.microsoft.com/windows/win32/api/mtxdm/nf-mtxdm-getdispensermanager
 // Minimum OS: windows5.0.
-func GetDispenserManager(param0 uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetDispenserManager.Addr(), uintptr(param0))
+func GetDispenserManager(param0 **IDispenserManager) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procGetDispenserManager.Addr(), uintptr(unsafe.Pointer(param0)))
 	return foundation.HRESULT(r1)
 }
 
@@ -97,7 +97,7 @@ func RecycleSurrogate(lReasonCode int32) foundation.HRESULT {
 // SafeRef calls comsvcs!SafeRef.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-saferef
 // Minimum OS: windows5.0.
-func SafeRef(rid *win32.GUID, pUnk uintptr) unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procSafeRef.Addr(), uintptr(unsafe.Pointer(rid)), uintptr(pUnk))
+func SafeRef(rid *win32.GUID, pUnk *systemcom.IUnknown) unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procSafeRef.Addr(), uintptr(unsafe.Pointer(rid)), uintptr(unsafe.Pointer(pUnk)))
 	return unsafe.Pointer(r1)
 }

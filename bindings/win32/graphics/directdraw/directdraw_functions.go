@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -28,22 +29,22 @@ var (
 
 // DirectDrawCreate calls DDRAW!DirectDrawCreate.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreate
-func DirectDrawCreate(lpGUID *win32.GUID, lplpDD uintptr, pUnkOuter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirectDrawCreate.Addr(), uintptr(unsafe.Pointer(lpGUID)), uintptr(lplpDD), uintptr(pUnkOuter))
+func DirectDrawCreate(lpGUID *win32.GUID, lplpDD **IDirectDraw, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDirectDrawCreate.Addr(), uintptr(unsafe.Pointer(lpGUID)), uintptr(unsafe.Pointer(lplpDD)), uintptr(unsafe.Pointer(pUnkOuter)))
 	return foundation.HRESULT(r1)
 }
 
 // DirectDrawCreateClipper calls DDRAW!DirectDrawCreateClipper.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreateclipper
-func DirectDrawCreateClipper(dwFlags uint32, lplpDDClipper uintptr, pUnkOuter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirectDrawCreateClipper.Addr(), uintptr(dwFlags), uintptr(lplpDDClipper), uintptr(pUnkOuter))
+func DirectDrawCreateClipper(dwFlags uint32, lplpDDClipper **IDirectDrawClipper, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDirectDrawCreateClipper.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lplpDDClipper)), uintptr(unsafe.Pointer(pUnkOuter)))
 	return foundation.HRESULT(r1)
 }
 
 // DirectDrawCreateEx calls DDRAW!DirectDrawCreateEx.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreateex
-func DirectDrawCreateEx(lpGuid *win32.GUID, lplpDD *unsafe.Pointer, iid *win32.GUID, pUnkOuter uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirectDrawCreateEx.Addr(), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(lplpDD)), uintptr(unsafe.Pointer(iid)), uintptr(pUnkOuter))
+func DirectDrawCreateEx(lpGuid *win32.GUID, lplpDD *unsafe.Pointer, iid *win32.GUID, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+	r1, _, _ := syscall.SyscallN(procDirectDrawCreateEx.Addr(), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(lplpDD)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pUnkOuter)))
 	return foundation.HRESULT(r1)
 }
 

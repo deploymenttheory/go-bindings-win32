@@ -9,7 +9,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uiinputgameinput "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input/gameinput"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -31,38 +30,38 @@ func (self IGameInput) GetCurrentTimestamp() uint64 {
 }
 
 // GetCurrentReading wraps the raw GetCurrentReading call.
-func (self IGameInput) GetCurrentReading(inputKind uiinputgameinput.GameInputKind, device *uiinputgameinput.IGameInputDevice, reading **uiinputgameinput.IGameInputReading) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentReading(inputKind, device, reading)))
+func (self IGameInput) GetCurrentReading(inputKind uiinputgameinput.GameInputKind, device IGameInputDevice, reading **uiinputgameinput.IGameInputReading) error {
+	return win32.HRESULTError(int32(self.Raw.GetCurrentReading(inputKind, device.Raw, reading)))
 }
 
 // GetNextReading wraps the raw GetNextReading call.
-func (self IGameInput) GetNextReading(referenceReading *uiinputgameinput.IGameInputReading, inputKind uiinputgameinput.GameInputKind, device *uiinputgameinput.IGameInputDevice, reading **uiinputgameinput.IGameInputReading) error {
-	return win32.HRESULTError(int32(self.Raw.GetNextReading(referenceReading, inputKind, device, reading)))
+func (self IGameInput) GetNextReading(referenceReading IGameInputReading, inputKind uiinputgameinput.GameInputKind, device IGameInputDevice, reading **uiinputgameinput.IGameInputReading) error {
+	return win32.HRESULTError(int32(self.Raw.GetNextReading(referenceReading.Raw, inputKind, device.Raw, reading)))
 }
 
 // GetPreviousReading wraps the raw GetPreviousReading call.
-func (self IGameInput) GetPreviousReading(referenceReading *uiinputgameinput.IGameInputReading, inputKind uiinputgameinput.GameInputKind, device *uiinputgameinput.IGameInputDevice, reading **uiinputgameinput.IGameInputReading) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreviousReading(referenceReading, inputKind, device, reading)))
+func (self IGameInput) GetPreviousReading(referenceReading IGameInputReading, inputKind uiinputgameinput.GameInputKind, device IGameInputDevice, reading **uiinputgameinput.IGameInputReading) error {
+	return win32.HRESULTError(int32(self.Raw.GetPreviousReading(referenceReading.Raw, inputKind, device.Raw, reading)))
 }
 
 // GetTemporalReading wraps the raw GetTemporalReading call.
-func (self IGameInput) GetTemporalReading(timestamp uint64, device *uiinputgameinput.IGameInputDevice, reading **uiinputgameinput.IGameInputReading) error {
-	return win32.HRESULTError(int32(self.Raw.GetTemporalReading(timestamp, device, reading)))
+func (self IGameInput) GetTemporalReading(timestamp uint64, device IGameInputDevice, reading **uiinputgameinput.IGameInputReading) error {
+	return win32.HRESULTError(int32(self.Raw.GetTemporalReading(timestamp, device.Raw, reading)))
 }
 
 // RegisterDeviceCallback wraps the raw RegisterDeviceCallback call.
-func (self IGameInput) RegisterDeviceCallback(device *uiinputgameinput.IGameInputDevice, inputKind uiinputgameinput.GameInputKind, statusFilter uiinputgameinput.GameInputDeviceStatus, enumerationKind uiinputgameinput.GameInputEnumerationKind, context unsafe.Pointer, callbackFunc uiinputgameinput.GameInputDeviceCallback, callbackToken *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterDeviceCallback(device, inputKind, statusFilter, enumerationKind, context, callbackFunc, callbackToken)))
+func (self IGameInput) RegisterDeviceCallback(device IGameInputDevice, inputKind uiinputgameinput.GameInputKind, statusFilter uiinputgameinput.GameInputDeviceStatus, enumerationKind uiinputgameinput.GameInputEnumerationKind, context unsafe.Pointer, callbackFunc uiinputgameinput.GameInputDeviceCallback, callbackToken *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterDeviceCallback(device.Raw, inputKind, statusFilter, enumerationKind, context, callbackFunc, callbackToken)))
 }
 
 // RegisterSystemButtonCallback wraps the raw RegisterSystemButtonCallback call.
-func (self IGameInput) RegisterSystemButtonCallback(device *uiinputgameinput.IGameInputDevice, buttonFilter uiinputgameinput.GameInputSystemButtons, context unsafe.Pointer, callbackFunc uiinputgameinput.GameInputSystemButtonCallback, callbackToken *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterSystemButtonCallback(device, buttonFilter, context, callbackFunc, callbackToken)))
+func (self IGameInput) RegisterSystemButtonCallback(device IGameInputDevice, buttonFilter uiinputgameinput.GameInputSystemButtons, context unsafe.Pointer, callbackFunc uiinputgameinput.GameInputSystemButtonCallback, callbackToken *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterSystemButtonCallback(device.Raw, buttonFilter, context, callbackFunc, callbackToken)))
 }
 
 // RegisterKeyboardLayoutCallback wraps the raw RegisterKeyboardLayoutCallback call.
-func (self IGameInput) RegisterKeyboardLayoutCallback(device *uiinputgameinput.IGameInputDevice, context unsafe.Pointer, callbackFunc uiinputgameinput.GameInputKeyboardLayoutCallback, callbackToken *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterKeyboardLayoutCallback(device, context, callbackFunc, callbackToken)))
+func (self IGameInput) RegisterKeyboardLayoutCallback(device IGameInputDevice, context unsafe.Pointer, callbackFunc uiinputgameinput.GameInputKeyboardLayoutCallback, callbackToken *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterKeyboardLayoutCallback(device.Raw, context, callbackFunc, callbackToken)))
 }
 
 // StopCallback wraps the raw StopCallback call.
@@ -86,8 +85,8 @@ func (self IGameInput) FindDeviceFromId(value *foundation.APP_LOCAL_DEVICE_ID, d
 }
 
 // FindDeviceFromObject wraps the raw FindDeviceFromObject call.
-func (self IGameInput) FindDeviceFromObject(value *systemcom.IUnknown, device **uiinputgameinput.IGameInputDevice) error {
-	return win32.HRESULTError(int32(self.Raw.FindDeviceFromObject(value, device)))
+func (self IGameInput) FindDeviceFromObject(value systemcomidiom.IUnknown, device **uiinputgameinput.IGameInputDevice) error {
+	return win32.HRESULTError(int32(self.Raw.FindDeviceFromObject(value.Raw, device)))
 }
 
 // FindDeviceFromPlatformHandle wraps the raw FindDeviceFromPlatformHandle call.
@@ -178,18 +177,18 @@ func (self IGameInputDevice) GetRawDeviceFeature(reportId uint32, report **uiinp
 }
 
 // SetRawDeviceFeature wraps the raw SetRawDeviceFeature call.
-func (self IGameInputDevice) SetRawDeviceFeature(report *uiinputgameinput.IGameInputRawDeviceReport) error {
-	return win32.HRESULTError(int32(self.Raw.SetRawDeviceFeature(report)))
+func (self IGameInputDevice) SetRawDeviceFeature(report IGameInputRawDeviceReport) error {
+	return win32.HRESULTError(int32(self.Raw.SetRawDeviceFeature(report.Raw)))
 }
 
 // SendRawDeviceOutput wraps the raw SendRawDeviceOutput call.
-func (self IGameInputDevice) SendRawDeviceOutput(report *uiinputgameinput.IGameInputRawDeviceReport) error {
-	return win32.HRESULTError(int32(self.Raw.SendRawDeviceOutput(report)))
+func (self IGameInputDevice) SendRawDeviceOutput(report IGameInputRawDeviceReport) error {
+	return win32.HRESULTError(int32(self.Raw.SendRawDeviceOutput(report.Raw)))
 }
 
 // SendRawDeviceOutputWithResponse wraps the raw SendRawDeviceOutputWithResponse call.
-func (self IGameInputDevice) SendRawDeviceOutputWithResponse(requestReport *uiinputgameinput.IGameInputRawDeviceReport, responseReport **uiinputgameinput.IGameInputRawDeviceReport) error {
-	return win32.HRESULTError(int32(self.Raw.SendRawDeviceOutputWithResponse(requestReport, responseReport)))
+func (self IGameInputDevice) SendRawDeviceOutputWithResponse(requestReport IGameInputRawDeviceReport, responseReport **uiinputgameinput.IGameInputRawDeviceReport) error {
+	return win32.HRESULTError(int32(self.Raw.SendRawDeviceOutputWithResponse(requestReport.Raw, responseReport)))
 }
 
 // ExecuteRawDeviceIoControl wraps the raw ExecuteRawDeviceIoControl call.

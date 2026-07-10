@@ -31,18 +31,18 @@ func RoCreatePropertySetSerializer(ppPropertySetSerializer *uintptr) error {
 
 // RoGetMetaDataFile wraps the raw RoGetMetaDataFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
-func RoGetMetaDataFile(name systemwinrt.HSTRING, metaDataDispenser *systemwinrtmetadata.IMetaDataDispenserEx, metaDataFilePath *systemwinrt.HSTRING, metaDataImport **systemwinrtmetadata.IMetaDataImport2, typeDefToken *uint32) error {
-	return win32.HRESULTError(int32(systemwinrtmetadata.RoGetMetaDataFile(name, metaDataDispenser, metaDataFilePath, metaDataImport, typeDefToken)))
+func RoGetMetaDataFile(name systemwinrt.HSTRING, metaDataDispenser IMetaDataDispenserEx, metaDataFilePath *systemwinrt.HSTRING, metaDataImport **systemwinrtmetadata.IMetaDataImport2, typeDefToken *uint32) error {
+	return win32.HRESULTError(int32(systemwinrtmetadata.RoGetMetaDataFile(name, metaDataDispenser.Raw, metaDataFilePath, metaDataImport, typeDefToken)))
 }
 
 // RoGetParameterizedTypeInstanceIID wraps the raw RoGetParameterizedTypeInstanceIID call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/roparameterizediid/nf-roparameterizediid-rogetparameterizedtypeinstanceiid
-func RoGetParameterizedTypeInstanceIID(nameElements []foundation.PWSTR, metaDataLocator *systemwinrtmetadata.IRoMetaDataLocator, iid *win32.GUID, pExtra *systemwinrtmetadata.ROPARAMIIDHANDLE) error {
+func RoGetParameterizedTypeInstanceIID(nameElements []foundation.PWSTR, metaDataLocator IRoMetaDataLocator, iid *win32.GUID, pExtra *systemwinrtmetadata.ROPARAMIIDHANDLE) error {
 	var _nameElements *foundation.PWSTR
 	if len(nameElements) > 0 {
 		_nameElements = &nameElements[0]
 	}
-	return win32.HRESULTError(int32(systemwinrtmetadata.RoGetParameterizedTypeInstanceIID(uint32(len(nameElements)), _nameElements, metaDataLocator, iid, pExtra)))
+	return win32.HRESULTError(int32(systemwinrtmetadata.RoGetParameterizedTypeInstanceIID(uint32(len(nameElements)), _nameElements, metaDataLocator.Raw, iid, pExtra)))
 }
 
 // RoIsApiContractMajorVersionPresent wraps the raw RoIsApiContractMajorVersionPresent call with idiomatic Go types.

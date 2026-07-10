@@ -8,7 +8,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uishellcommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/common"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -46,13 +45,13 @@ func WrapIObjectCollection(raw *uishellcommon.IObjectCollection) IObjectCollecti
 }
 
 // AddObject wraps the raw AddObject call.
-func (self IObjectCollection) AddObject(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddObject(punk)))
+func (self IObjectCollection) AddObject(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddObject(punk.Raw)))
 }
 
 // AddFromArray wraps the raw AddFromArray call.
-func (self IObjectCollection) AddFromArray(poaSource *uishellcommon.IObjectArray) error {
-	return win32.HRESULTError(int32(self.Raw.AddFromArray(poaSource)))
+func (self IObjectCollection) AddFromArray(poaSource IObjectArray) error {
+	return win32.HRESULTError(int32(self.Raw.AddFromArray(poaSource.Raw)))
 }
 
 // RemoveObjectAt wraps the raw RemoveObjectAt call.

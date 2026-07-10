@@ -6,10 +6,10 @@ package xml
 
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	dataxmlmsxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/msxml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	mediadirectshow "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/directshow"
 	mediadirectshowxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/directshow/xml"
+	dataxmlmsxmlidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/data/xml/msxml"
+	mediadirectshowidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/directshow"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -25,18 +25,18 @@ func WrapIXMLGraphBuilder(raw *mediadirectshowxml.IXMLGraphBuilder) IXMLGraphBui
 }
 
 // BuildFromXML wraps the raw BuildFromXML call.
-func (self IXMLGraphBuilder) BuildFromXML(pGraph *mediadirectshow.IGraphBuilder, pxml *dataxmlmsxml.IXMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.BuildFromXML(pGraph, pxml)))
+func (self IXMLGraphBuilder) BuildFromXML(pGraph mediadirectshowidiom.IGraphBuilder, pxml dataxmlmsxmlidiom.IXMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.BuildFromXML(pGraph.Raw, pxml.Raw)))
 }
 
 // SaveToXML wraps the raw SaveToXML call.
-func (self IXMLGraphBuilder) SaveToXML(pGraph *mediadirectshow.IGraphBuilder, pbstrxml *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.SaveToXML(pGraph, pbstrxml)))
+func (self IXMLGraphBuilder) SaveToXML(pGraph mediadirectshowidiom.IGraphBuilder, pbstrxml *foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.SaveToXML(pGraph.Raw, pbstrxml)))
 }
 
 // BuildFromXMLFile wraps the raw BuildFromXMLFile call.
-func (self IXMLGraphBuilder) BuildFromXMLFile(pGraph *mediadirectshow.IGraphBuilder, wszFileName string, wszBaseURL string) error {
+func (self IXMLGraphBuilder) BuildFromXMLFile(pGraph mediadirectshowidiom.IGraphBuilder, wszFileName string, wszBaseURL string) error {
 	_wszFileName := win32.UTF16Ptr(wszFileName)
 	_wszBaseURL := win32.UTF16Ptr(wszBaseURL)
-	return win32.HRESULTError(int32(self.Raw.BuildFromXMLFile(pGraph, foundation.PWSTR(_wszFileName), foundation.PWSTR(_wszBaseURL))))
+	return win32.HRESULTError(int32(self.Raw.BuildFromXMLFile(pGraph.Raw, foundation.PWSTR(_wszFileName), foundation.PWSTR(_wszBaseURL))))
 }

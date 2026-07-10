@@ -8,13 +8,13 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	mediawindowsmediaformat "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/windowsmediaformat"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // WMCreateBackupRestorer wraps the raw WMCreateBackupRestorer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatebackuprestorer
-func WMCreateBackupRestorer(pCallback *systemcom.IUnknown, ppBackup **mediawindowsmediaformat.IWMLicenseBackup) error {
-	return win32.HRESULTError(int32(mediawindowsmediaformat.WMCreateBackupRestorer(pCallback, ppBackup)))
+func WMCreateBackupRestorer(pCallback systemcomidiom.IUnknown, ppBackup **mediawindowsmediaformat.IWMLicenseBackup) error {
+	return win32.HRESULTError(int32(mediawindowsmediaformat.WMCreateBackupRestorer(pCallback.Raw, ppBackup)))
 }
 
 // WMCreateEditor wraps the raw WMCreateEditor call with idiomatic Go types.
@@ -37,20 +37,20 @@ func WMCreateProfileManager(ppProfileManager **mediawindowsmediaformat.IWMProfil
 
 // WMCreateReader wraps the raw WMCreateReader call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatereader
-func WMCreateReader(pUnkCert *systemcom.IUnknown, dwRights uint32, ppReader **mediawindowsmediaformat.IWMReader) error {
-	return win32.HRESULTError(int32(mediawindowsmediaformat.WMCreateReader(pUnkCert, dwRights, ppReader)))
+func WMCreateReader(pUnkCert systemcomidiom.IUnknown, dwRights uint32, ppReader **mediawindowsmediaformat.IWMReader) error {
+	return win32.HRESULTError(int32(mediawindowsmediaformat.WMCreateReader(pUnkCert.Raw, dwRights, ppReader)))
 }
 
 // WMCreateSyncReader wraps the raw WMCreateSyncReader call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatesyncreader
-func WMCreateSyncReader(pUnkCert *systemcom.IUnknown, dwRights uint32, ppSyncReader **mediawindowsmediaformat.IWMSyncReader) error {
-	return win32.HRESULTError(int32(mediawindowsmediaformat.WMCreateSyncReader(pUnkCert, dwRights, ppSyncReader)))
+func WMCreateSyncReader(pUnkCert systemcomidiom.IUnknown, dwRights uint32, ppSyncReader **mediawindowsmediaformat.IWMSyncReader) error {
+	return win32.HRESULTError(int32(mediawindowsmediaformat.WMCreateSyncReader(pUnkCert.Raw, dwRights, ppSyncReader)))
 }
 
 // WMCreateWriter wraps the raw WMCreateWriter call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatewriter
-func WMCreateWriter(pUnkCert *systemcom.IUnknown, ppWriter **mediawindowsmediaformat.IWMWriter) error {
-	return win32.HRESULTError(int32(mediawindowsmediaformat.WMCreateWriter(pUnkCert, ppWriter)))
+func WMCreateWriter(pUnkCert systemcomidiom.IUnknown, ppWriter **mediawindowsmediaformat.IWMWriter) error {
+	return win32.HRESULTError(int32(mediawindowsmediaformat.WMCreateWriter(pUnkCert.Raw, ppWriter)))
 }
 
 // WMCreateWriterFileSink wraps the raw WMCreateWriterFileSink call with idiomatic Go types.

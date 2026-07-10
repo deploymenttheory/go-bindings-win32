@@ -10,13 +10,13 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // D3D12CreateDevice wraps the raw D3D12CreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createdevice
-func D3D12CreateDevice(pAdapter *systemcom.IUnknown, MinimumFeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppDevice *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(graphicsdirect3d12.D3D12CreateDevice(pAdapter, MinimumFeatureLevel, riid, ppDevice)))
+func D3D12CreateDevice(pAdapter systemcomidiom.IUnknown, MinimumFeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppDevice *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(graphicsdirect3d12.D3D12CreateDevice(pAdapter.Raw, MinimumFeatureLevel, riid, ppDevice)))
 }
 
 // D3D12CreateRootSignatureDeserializer wraps the raw D3D12CreateRootSignatureDeserializer call with idiomatic Go types.

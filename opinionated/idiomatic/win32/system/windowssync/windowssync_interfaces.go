@@ -33,18 +33,18 @@ func (self IAsynchronousDataRetriever) GetIdParameters(pIdParameters *systemwind
 }
 
 // RegisterCallback wraps the raw RegisterCallback call.
-func (self IAsynchronousDataRetriever) RegisterCallback(pDataRetrieverCallback *systemwindowssync.IDataRetrieverCallback) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterCallback(pDataRetrieverCallback)))
+func (self IAsynchronousDataRetriever) RegisterCallback(pDataRetrieverCallback IDataRetrieverCallback) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterCallback(pDataRetrieverCallback.Raw)))
 }
 
 // RevokeCallback wraps the raw RevokeCallback call.
-func (self IAsynchronousDataRetriever) RevokeCallback(pDataRetrieverCallback *systemwindowssync.IDataRetrieverCallback) error {
-	return win32.HRESULTError(int32(self.Raw.RevokeCallback(pDataRetrieverCallback)))
+func (self IAsynchronousDataRetriever) RevokeCallback(pDataRetrieverCallback IDataRetrieverCallback) error {
+	return win32.HRESULTError(int32(self.Raw.RevokeCallback(pDataRetrieverCallback.Raw)))
 }
 
 // LoadChangeData wraps the raw LoadChangeData call.
-func (self IAsynchronousDataRetriever) LoadChangeData(pLoadChangeContext *systemwindowssync.ILoadChangeContext) error {
-	return win32.HRESULTError(int32(self.Raw.LoadChangeData(pLoadChangeContext)))
+func (self IAsynchronousDataRetriever) LoadChangeData(pLoadChangeContext ILoadChangeContext) error {
+	return win32.HRESULTError(int32(self.Raw.LoadChangeData(pLoadChangeContext.Raw)))
 }
 
 // IChangeConflict is an idiomatic wrapper over the raw COM interface System.WindowsSync.IChangeConflict with error-returning methods.
@@ -89,13 +89,13 @@ func (self IChangeConflict) SetResolveActionForChange(resolveAction systemwindow
 }
 
 // GetResolveActionForChangeUnit wraps the raw GetResolveActionForChangeUnit call.
-func (self IChangeConflict) GetResolveActionForChangeUnit(pChangeUnit *systemwindowssync.ISyncChangeUnit, pResolveAction *systemwindowssync.SYNC_RESOLVE_ACTION) error {
-	return win32.HRESULTError(int32(self.Raw.GetResolveActionForChangeUnit(pChangeUnit, pResolveAction)))
+func (self IChangeConflict) GetResolveActionForChangeUnit(pChangeUnit ISyncChangeUnit, pResolveAction *systemwindowssync.SYNC_RESOLVE_ACTION) error {
+	return win32.HRESULTError(int32(self.Raw.GetResolveActionForChangeUnit(pChangeUnit.Raw, pResolveAction)))
 }
 
 // SetResolveActionForChangeUnit wraps the raw SetResolveActionForChangeUnit call.
-func (self IChangeConflict) SetResolveActionForChangeUnit(pChangeUnit *systemwindowssync.ISyncChangeUnit, resolveAction systemwindowssync.SYNC_RESOLVE_ACTION) error {
-	return win32.HRESULTError(int32(self.Raw.SetResolveActionForChangeUnit(pChangeUnit, resolveAction)))
+func (self IChangeConflict) SetResolveActionForChangeUnit(pChangeUnit ISyncChangeUnit, resolveAction systemwindowssync.SYNC_RESOLVE_ACTION) error {
+	return win32.HRESULTError(int32(self.Raw.SetResolveActionForChangeUnit(pChangeUnit.Raw, resolveAction)))
 }
 
 // IChangeUnitException is an idiomatic wrapper over the raw COM interface System.WindowsSync.IChangeUnitException with error-returning methods.
@@ -270,13 +270,13 @@ func (self IConstraintConflict) SetConstraintResolveActionForChange(constraintRe
 }
 
 // GetConstraintResolveActionForChangeUnit wraps the raw GetConstraintResolveActionForChangeUnit call.
-func (self IConstraintConflict) GetConstraintResolveActionForChangeUnit(pChangeUnit *systemwindowssync.ISyncChangeUnit, pConstraintResolveAction *systemwindowssync.SYNC_CONSTRAINT_RESOLVE_ACTION) error {
-	return win32.HRESULTError(int32(self.Raw.GetConstraintResolveActionForChangeUnit(pChangeUnit, pConstraintResolveAction)))
+func (self IConstraintConflict) GetConstraintResolveActionForChangeUnit(pChangeUnit ISyncChangeUnit, pConstraintResolveAction *systemwindowssync.SYNC_CONSTRAINT_RESOLVE_ACTION) error {
+	return win32.HRESULTError(int32(self.Raw.GetConstraintResolveActionForChangeUnit(pChangeUnit.Raw, pConstraintResolveAction)))
 }
 
 // SetConstraintResolveActionForChangeUnit wraps the raw SetConstraintResolveActionForChangeUnit call.
-func (self IConstraintConflict) SetConstraintResolveActionForChangeUnit(pChangeUnit *systemwindowssync.ISyncChangeUnit, constraintResolveAction systemwindowssync.SYNC_CONSTRAINT_RESOLVE_ACTION) error {
-	return win32.HRESULTError(int32(self.Raw.SetConstraintResolveActionForChangeUnit(pChangeUnit, constraintResolveAction)))
+func (self IConstraintConflict) SetConstraintResolveActionForChangeUnit(pChangeUnit ISyncChangeUnit, constraintResolveAction systemwindowssync.SYNC_CONSTRAINT_RESOLVE_ACTION) error {
+	return win32.HRESULTError(int32(self.Raw.SetConstraintResolveActionForChangeUnit(pChangeUnit.Raw, constraintResolveAction)))
 }
 
 // GetConstraintConflictReason wraps the raw GetConstraintConflictReason call.
@@ -390,8 +390,8 @@ func WrapIDataRetrieverCallback(raw *systemwindowssync.IDataRetrieverCallback) I
 }
 
 // LoadChangeDataComplete wraps the raw LoadChangeDataComplete call.
-func (self IDataRetrieverCallback) LoadChangeDataComplete(pUnkData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.LoadChangeDataComplete(pUnkData)))
+func (self IDataRetrieverCallback) LoadChangeDataComplete(pUnkData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.LoadChangeDataComplete(pUnkData.Raw)))
 }
 
 // LoadChangeDataError wraps the raw LoadChangeDataError call.
@@ -753,8 +753,8 @@ func (self IFilterKeyMap) GetCount(pdwCount *uint32) error {
 }
 
 // AddFilter wraps the raw AddFilter call.
-func (self IFilterKeyMap) AddFilter(pISyncFilter *systemwindowssync.ISyncFilter, pdwFilterKey *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddFilter(pISyncFilter, pdwFilterKey)))
+func (self IFilterKeyMap) AddFilter(pISyncFilter ISyncFilter, pdwFilterKey *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddFilter(pISyncFilter.Raw, pdwFilterKey)))
 }
 
 // GetFilter wraps the raw GetFilter call.
@@ -779,8 +779,8 @@ func WrapIFilterRequestCallback(raw *systemwindowssync.IFilterRequestCallback) I
 }
 
 // RequestFilter wraps the raw RequestFilter call.
-func (self IFilterRequestCallback) RequestFilter(pFilter *systemcom.IUnknown, filteringType systemwindowssync.FILTERING_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.RequestFilter(pFilter, filteringType)))
+func (self IFilterRequestCallback) RequestFilter(pFilter systemcomidiom.IUnknown, filteringType systemwindowssync.FILTERING_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.RequestFilter(pFilter.Raw, filteringType)))
 }
 
 // IFilterTrackingProvider is an idiomatic wrapper over the raw COM interface System.WindowsSync.IFilterTrackingProvider with error-returning methods.
@@ -795,13 +795,13 @@ func WrapIFilterTrackingProvider(raw *systemwindowssync.IFilterTrackingProvider)
 }
 
 // SpecifyTrackedFilters wraps the raw SpecifyTrackedFilters call.
-func (self IFilterTrackingProvider) SpecifyTrackedFilters(pCallback *systemwindowssync.IFilterTrackingRequestCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SpecifyTrackedFilters(pCallback)))
+func (self IFilterTrackingProvider) SpecifyTrackedFilters(pCallback IFilterTrackingRequestCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SpecifyTrackedFilters(pCallback.Raw)))
 }
 
 // AddTrackedFilter wraps the raw AddTrackedFilter call.
-func (self IFilterTrackingProvider) AddTrackedFilter(pFilter *systemwindowssync.ISyncFilter) error {
-	return win32.HRESULTError(int32(self.Raw.AddTrackedFilter(pFilter)))
+func (self IFilterTrackingProvider) AddTrackedFilter(pFilter ISyncFilter) error {
+	return win32.HRESULTError(int32(self.Raw.AddTrackedFilter(pFilter.Raw)))
 }
 
 // IFilterTrackingRequestCallback is an idiomatic wrapper over the raw COM interface System.WindowsSync.IFilterTrackingRequestCallback with error-returning methods.
@@ -816,8 +816,8 @@ func WrapIFilterTrackingRequestCallback(raw *systemwindowssync.IFilterTrackingRe
 }
 
 // RequestTrackedFilter wraps the raw RequestTrackedFilter call.
-func (self IFilterTrackingRequestCallback) RequestTrackedFilter(pFilter *systemwindowssync.ISyncFilter) error {
-	return win32.HRESULTError(int32(self.Raw.RequestTrackedFilter(pFilter)))
+func (self IFilterTrackingRequestCallback) RequestTrackedFilter(pFilter ISyncFilter) error {
+	return win32.HRESULTError(int32(self.Raw.RequestTrackedFilter(pFilter.Raw)))
 }
 
 // IFilterTrackingSyncChangeBuilder is an idiomatic wrapper over the raw COM interface System.WindowsSync.IFilterTrackingSyncChangeBuilder with error-returning methods.
@@ -853,8 +853,8 @@ func WrapIForgottenKnowledge(raw *systemwindowssync.IForgottenKnowledge) IForgot
 }
 
 // ForgetToVersion wraps the raw ForgetToVersion call.
-func (self IForgottenKnowledge) ForgetToVersion(pKnowledge *systemwindowssync.ISyncKnowledge, pVersion *systemwindowssync.SYNC_VERSION) error {
-	return win32.HRESULTError(int32(self.Raw.ForgetToVersion(pKnowledge, pVersion)))
+func (self IForgottenKnowledge) ForgetToVersion(pKnowledge ISyncKnowledge, pVersion *systemwindowssync.SYNC_VERSION) error {
+	return win32.HRESULTError(int32(self.Raw.ForgetToVersion(pKnowledge.Raw, pVersion)))
 }
 
 // IKnowledgeSyncProvider is an idiomatic wrapper over the raw COM interface System.WindowsSync.IKnowledgeSyncProvider with error-returning methods.
@@ -869,8 +869,8 @@ func WrapIKnowledgeSyncProvider(raw *systemwindowssync.IKnowledgeSyncProvider) I
 }
 
 // BeginSession wraps the raw BeginSession call.
-func (self IKnowledgeSyncProvider) BeginSession(role systemwindowssync.SYNC_PROVIDER_ROLE, pSessionState *systemwindowssync.ISyncSessionState) error {
-	return win32.HRESULTError(int32(self.Raw.BeginSession(role, pSessionState)))
+func (self IKnowledgeSyncProvider) BeginSession(role systemwindowssync.SYNC_PROVIDER_ROLE, pSessionState ISyncSessionState) error {
+	return win32.HRESULTError(int32(self.Raw.BeginSession(role, pSessionState.Raw)))
 }
 
 // GetSyncBatchParameters wraps the raw GetSyncBatchParameters call.
@@ -879,28 +879,28 @@ func (self IKnowledgeSyncProvider) GetSyncBatchParameters(ppSyncKnowledge **syst
 }
 
 // GetChangeBatch wraps the raw GetChangeBatch call.
-func (self IKnowledgeSyncProvider) GetChangeBatch(dwBatchSize uint32, pSyncKnowledge *systemwindowssync.ISyncKnowledge, ppSyncChangeBatch **systemwindowssync.ISyncChangeBatch, ppUnkDataRetriever **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetChangeBatch(dwBatchSize, pSyncKnowledge, ppSyncChangeBatch, ppUnkDataRetriever)))
+func (self IKnowledgeSyncProvider) GetChangeBatch(dwBatchSize uint32, pSyncKnowledge ISyncKnowledge, ppSyncChangeBatch **systemwindowssync.ISyncChangeBatch, ppUnkDataRetriever **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GetChangeBatch(dwBatchSize, pSyncKnowledge.Raw, ppSyncChangeBatch, ppUnkDataRetriever)))
 }
 
 // GetFullEnumerationChangeBatch wraps the raw GetFullEnumerationChangeBatch call.
-func (self IKnowledgeSyncProvider) GetFullEnumerationChangeBatch(dwBatchSize uint32, pbLowerEnumerationBound *byte, pSyncKnowledge *systemwindowssync.ISyncKnowledge, ppSyncChangeBatch **systemwindowssync.ISyncFullEnumerationChangeBatch, ppUnkDataRetriever **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetFullEnumerationChangeBatch(dwBatchSize, pbLowerEnumerationBound, pSyncKnowledge, ppSyncChangeBatch, ppUnkDataRetriever)))
+func (self IKnowledgeSyncProvider) GetFullEnumerationChangeBatch(dwBatchSize uint32, pbLowerEnumerationBound *byte, pSyncKnowledge ISyncKnowledge, ppSyncChangeBatch **systemwindowssync.ISyncFullEnumerationChangeBatch, ppUnkDataRetriever **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GetFullEnumerationChangeBatch(dwBatchSize, pbLowerEnumerationBound, pSyncKnowledge.Raw, ppSyncChangeBatch, ppUnkDataRetriever)))
 }
 
 // ProcessChangeBatch wraps the raw ProcessChangeBatch call.
-func (self IKnowledgeSyncProvider) ProcessChangeBatch(resolutionPolicy systemwindowssync.CONFLICT_RESOLUTION_POLICY, pSourceChangeBatch *systemwindowssync.ISyncChangeBatch, pUnkDataRetriever *systemcom.IUnknown, pCallback *systemwindowssync.ISyncCallback, pSyncSessionStatistics *systemwindowssync.SYNC_SESSION_STATISTICS) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessChangeBatch(resolutionPolicy, pSourceChangeBatch, pUnkDataRetriever, pCallback, pSyncSessionStatistics)))
+func (self IKnowledgeSyncProvider) ProcessChangeBatch(resolutionPolicy systemwindowssync.CONFLICT_RESOLUTION_POLICY, pSourceChangeBatch ISyncChangeBatch, pUnkDataRetriever systemcomidiom.IUnknown, pCallback ISyncCallback, pSyncSessionStatistics *systemwindowssync.SYNC_SESSION_STATISTICS) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessChangeBatch(resolutionPolicy, pSourceChangeBatch.Raw, pUnkDataRetriever.Raw, pCallback.Raw, pSyncSessionStatistics)))
 }
 
 // ProcessFullEnumerationChangeBatch wraps the raw ProcessFullEnumerationChangeBatch call.
-func (self IKnowledgeSyncProvider) ProcessFullEnumerationChangeBatch(resolutionPolicy systemwindowssync.CONFLICT_RESOLUTION_POLICY, pSourceChangeBatch *systemwindowssync.ISyncFullEnumerationChangeBatch, pUnkDataRetriever *systemcom.IUnknown, pCallback *systemwindowssync.ISyncCallback, pSyncSessionStatistics *systemwindowssync.SYNC_SESSION_STATISTICS) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessFullEnumerationChangeBatch(resolutionPolicy, pSourceChangeBatch, pUnkDataRetriever, pCallback, pSyncSessionStatistics)))
+func (self IKnowledgeSyncProvider) ProcessFullEnumerationChangeBatch(resolutionPolicy systemwindowssync.CONFLICT_RESOLUTION_POLICY, pSourceChangeBatch ISyncFullEnumerationChangeBatch, pUnkDataRetriever systemcomidiom.IUnknown, pCallback ISyncCallback, pSyncSessionStatistics *systemwindowssync.SYNC_SESSION_STATISTICS) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessFullEnumerationChangeBatch(resolutionPolicy, pSourceChangeBatch.Raw, pUnkDataRetriever.Raw, pCallback.Raw, pSyncSessionStatistics)))
 }
 
 // EndSession wraps the raw EndSession call.
-func (self IKnowledgeSyncProvider) EndSession(pSessionState *systemwindowssync.ISyncSessionState) error {
-	return win32.HRESULTError(int32(self.Raw.EndSession(pSessionState)))
+func (self IKnowledgeSyncProvider) EndSession(pSessionState ISyncSessionState) error {
+	return win32.HRESULTError(int32(self.Raw.EndSession(pSessionState.Raw)))
 }
 
 // ILoadChangeContext is an idiomatic wrapper over the raw COM interface System.WindowsSync.ILoadChangeContext with error-returning methods.
@@ -920,13 +920,13 @@ func (self ILoadChangeContext) GetSyncChange(ppSyncChange **systemwindowssync.IS
 }
 
 // SetRecoverableErrorOnChange wraps the raw SetRecoverableErrorOnChange call.
-func (self ILoadChangeContext) SetRecoverableErrorOnChange(hrError foundation.HRESULT, pErrorData *systemwindowssync.IRecoverableErrorData) error {
-	return win32.HRESULTError(int32(self.Raw.SetRecoverableErrorOnChange(hrError, pErrorData)))
+func (self ILoadChangeContext) SetRecoverableErrorOnChange(hrError foundation.HRESULT, pErrorData IRecoverableErrorData) error {
+	return win32.HRESULTError(int32(self.Raw.SetRecoverableErrorOnChange(hrError, pErrorData.Raw)))
 }
 
 // SetRecoverableErrorOnChangeUnit wraps the raw SetRecoverableErrorOnChangeUnit call.
-func (self ILoadChangeContext) SetRecoverableErrorOnChangeUnit(hrError foundation.HRESULT, pChangeUnit *systemwindowssync.ISyncChangeUnit, pErrorData *systemwindowssync.IRecoverableErrorData) error {
-	return win32.HRESULTError(int32(self.Raw.SetRecoverableErrorOnChangeUnit(hrError, pChangeUnit, pErrorData)))
+func (self ILoadChangeContext) SetRecoverableErrorOnChangeUnit(hrError foundation.HRESULT, pChangeUnit ISyncChangeUnit, pErrorData IRecoverableErrorData) error {
+	return win32.HRESULTError(int32(self.Raw.SetRecoverableErrorOnChangeUnit(hrError, pChangeUnit.Raw, pErrorData.Raw)))
 }
 
 // IProviderConverter is an idiomatic wrapper over the raw COM interface System.WindowsSync.IProviderConverter with error-returning methods.
@@ -941,8 +941,8 @@ func WrapIProviderConverter(raw *systemwindowssync.IProviderConverter) IProvider
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IProviderConverter) Initialize(pISyncProvider *systemwindowssync.ISyncProvider) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pISyncProvider)))
+func (self IProviderConverter) Initialize(pISyncProvider ISyncProvider) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pISyncProvider.Raw)))
 }
 
 // IRangeException is an idiomatic wrapper over the raw COM interface System.WindowsSync.IRangeException with error-returning methods.
@@ -1003,8 +1003,8 @@ func (self IRecoverableError) GetRecoverableErrorDataForChange(phrError *foundat
 }
 
 // GetRecoverableErrorDataForChangeUnit wraps the raw GetRecoverableErrorDataForChangeUnit call.
-func (self IRecoverableError) GetRecoverableErrorDataForChangeUnit(pChangeUnit *systemwindowssync.ISyncChangeUnit, phrError *foundation.HRESULT, ppErrorData **systemwindowssync.IRecoverableErrorData) error {
-	return win32.HRESULTError(int32(self.Raw.GetRecoverableErrorDataForChangeUnit(pChangeUnit, phrError, ppErrorData)))
+func (self IRecoverableError) GetRecoverableErrorDataForChangeUnit(pChangeUnit ISyncChangeUnit, phrError *foundation.HRESULT, ppErrorData **systemwindowssync.IRecoverableErrorData) error {
+	return win32.HRESULTError(int32(self.Raw.GetRecoverableErrorDataForChangeUnit(pChangeUnit.Raw, phrError, ppErrorData)))
 }
 
 // IRecoverableErrorData is an idiomatic wrapper over the raw COM interface System.WindowsSync.IRecoverableErrorData with error-returning methods.
@@ -1049,8 +1049,8 @@ func WrapIRegisteredSyncProvider(raw *systemwindowssync.IRegisteredSyncProvider)
 }
 
 // Init wraps the raw Init call.
-func (self IRegisteredSyncProvider) Init(pguidInstanceId *win32.GUID, pguidContentType *win32.GUID, pContextPropertyStore *uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.Init(pguidInstanceId, pguidContentType, pContextPropertyStore)))
+func (self IRegisteredSyncProvider) Init(pguidInstanceId *win32.GUID, pguidContentType *win32.GUID, pContextPropertyStore uishellpropertiessystemidiom.IPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.Init(pguidInstanceId, pguidContentType, pContextPropertyStore.Raw)))
 }
 
 // GetInstanceId wraps the raw GetInstanceId call.
@@ -1101,8 +1101,8 @@ func WrapIRequestFilteredSync(raw *systemwindowssync.IRequestFilteredSync) IRequ
 }
 
 // SpecifyFilter wraps the raw SpecifyFilter call.
-func (self IRequestFilteredSync) SpecifyFilter(pCallback *systemwindowssync.IFilterRequestCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SpecifyFilter(pCallback)))
+func (self IRequestFilteredSync) SpecifyFilter(pCallback IFilterRequestCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SpecifyFilter(pCallback.Raw)))
 }
 
 // ISingleItemException is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISingleItemException with error-returning methods.
@@ -1138,8 +1138,8 @@ func WrapISupportFilteredSync(raw *systemwindowssync.ISupportFilteredSync) ISupp
 }
 
 // AddFilter wraps the raw AddFilter call.
-func (self ISupportFilteredSync) AddFilter(pFilter *systemcom.IUnknown, filteringType systemwindowssync.FILTERING_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.AddFilter(pFilter, filteringType)))
+func (self ISupportFilteredSync) AddFilter(pFilter systemcomidiom.IUnknown, filteringType systemwindowssync.FILTERING_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.AddFilter(pFilter.Raw, filteringType)))
 }
 
 // ISupportLastWriteTime is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISupportLastWriteTime with error-returning methods.
@@ -1180,13 +1180,13 @@ func (self ISyncCallback) OnProgress(provider systemwindowssync.SYNC_PROVIDER_RO
 }
 
 // OnChange wraps the raw OnChange call.
-func (self ISyncCallback) OnChange(pSyncChange *systemwindowssync.ISyncChange) error {
-	return win32.HRESULTError(int32(self.Raw.OnChange(pSyncChange)))
+func (self ISyncCallback) OnChange(pSyncChange ISyncChange) error {
+	return win32.HRESULTError(int32(self.Raw.OnChange(pSyncChange.Raw)))
 }
 
 // OnConflict wraps the raw OnConflict call.
-func (self ISyncCallback) OnConflict(pConflict *systemwindowssync.IChangeConflict) error {
-	return win32.HRESULTError(int32(self.Raw.OnConflict(pConflict)))
+func (self ISyncCallback) OnConflict(pConflict IChangeConflict) error {
+	return win32.HRESULTError(int32(self.Raw.OnConflict(pConflict.Raw)))
 }
 
 // OnFullEnumerationNeeded wraps the raw OnFullEnumerationNeeded call.
@@ -1195,8 +1195,8 @@ func (self ISyncCallback) OnFullEnumerationNeeded(pFullEnumerationAction *system
 }
 
 // OnRecoverableError wraps the raw OnRecoverableError call.
-func (self ISyncCallback) OnRecoverableError(pRecoverableError *systemwindowssync.IRecoverableError) error {
-	return win32.HRESULTError(int32(self.Raw.OnRecoverableError(pRecoverableError)))
+func (self ISyncCallback) OnRecoverableError(pRecoverableError IRecoverableError) error {
+	return win32.HRESULTError(int32(self.Raw.OnRecoverableError(pRecoverableError.Raw)))
 }
 
 // ISyncCallback2 is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncCallback2 with error-returning methods.
@@ -1298,14 +1298,14 @@ func (self ISyncChangeBatch) BeginUnorderedGroup() error {
 }
 
 // EndUnorderedGroup wraps the raw EndUnorderedGroup call.
-func (self ISyncChangeBatch) EndUnorderedGroup(pMadeWithKnowledge *systemwindowssync.ISyncKnowledge, fAllChangesForKnowledge bool) error {
+func (self ISyncChangeBatch) EndUnorderedGroup(pMadeWithKnowledge ISyncKnowledge, fAllChangesForKnowledge bool) error {
 	_fAllChangesForKnowledge := foundation.BOOL(win32.Bool32(fAllChangesForKnowledge))
-	return win32.HRESULTError(int32(self.Raw.EndUnorderedGroup(pMadeWithKnowledge, _fAllChangesForKnowledge)))
+	return win32.HRESULTError(int32(self.Raw.EndUnorderedGroup(pMadeWithKnowledge.Raw, _fAllChangesForKnowledge)))
 }
 
 // AddLoggedConflict wraps the raw AddLoggedConflict call.
-func (self ISyncChangeBatch) AddLoggedConflict(pbOwnerReplicaId *byte, pbItemId *byte, pChangeVersion *systemwindowssync.SYNC_VERSION, pCreationVersion *systemwindowssync.SYNC_VERSION, dwFlags uint32, dwWorkForChange uint32, pConflictKnowledge *systemwindowssync.ISyncKnowledge, ppChangeBuilder **systemwindowssync.ISyncChangeBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.AddLoggedConflict(pbOwnerReplicaId, pbItemId, pChangeVersion, pCreationVersion, dwFlags, dwWorkForChange, pConflictKnowledge, ppChangeBuilder)))
+func (self ISyncChangeBatch) AddLoggedConflict(pbOwnerReplicaId *byte, pbItemId *byte, pChangeVersion *systemwindowssync.SYNC_VERSION, pCreationVersion *systemwindowssync.SYNC_VERSION, dwFlags uint32, dwWorkForChange uint32, pConflictKnowledge ISyncKnowledge, ppChangeBuilder **systemwindowssync.ISyncChangeBuilder) error {
+	return win32.HRESULTError(int32(self.Raw.AddLoggedConflict(pbOwnerReplicaId, pbItemId, pChangeVersion, pCreationVersion, dwFlags, dwWorkForChange, pConflictKnowledge.Raw, ppChangeBuilder)))
 }
 
 // ISyncChangeBatch2 is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncChangeBatch2 with error-returning methods.
@@ -1325,8 +1325,8 @@ func (self ISyncChangeBatch2) AddMergeTombstoneMetadataToGroup(pbOwnerReplicaId 
 }
 
 // AddMergeTombstoneLoggedConflict wraps the raw AddMergeTombstoneLoggedConflict call.
-func (self ISyncChangeBatch2) AddMergeTombstoneLoggedConflict(pbOwnerReplicaId *byte, pbWinnerItemId *byte, pbItemId *byte, pChangeVersion *systemwindowssync.SYNC_VERSION, pCreationVersion *systemwindowssync.SYNC_VERSION, dwWorkForChange uint32, pConflictKnowledge *systemwindowssync.ISyncKnowledge, ppChangeBuilder **systemwindowssync.ISyncChangeBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.AddMergeTombstoneLoggedConflict(pbOwnerReplicaId, pbWinnerItemId, pbItemId, pChangeVersion, pCreationVersion, dwWorkForChange, pConflictKnowledge, ppChangeBuilder)))
+func (self ISyncChangeBatch2) AddMergeTombstoneLoggedConflict(pbOwnerReplicaId *byte, pbWinnerItemId *byte, pbItemId *byte, pChangeVersion *systemwindowssync.SYNC_VERSION, pCreationVersion *systemwindowssync.SYNC_VERSION, dwWorkForChange uint32, pConflictKnowledge ISyncKnowledge, ppChangeBuilder **systemwindowssync.ISyncChangeBuilder) error {
+	return win32.HRESULTError(int32(self.Raw.AddMergeTombstoneLoggedConflict(pbOwnerReplicaId, pbWinnerItemId, pbItemId, pChangeVersion, pCreationVersion, dwWorkForChange, pConflictKnowledge.Raw, ppChangeBuilder)))
 }
 
 // ISyncChangeBatchAdvanced is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncChangeBatchAdvanced with error-returning methods.
@@ -1397,8 +1397,8 @@ func (self ISyncChangeBatchBase) BeginOrderedGroup(pbLowerBound *byte) error {
 }
 
 // EndOrderedGroup wraps the raw EndOrderedGroup call.
-func (self ISyncChangeBatchBase) EndOrderedGroup(pbUpperBound *byte, pMadeWithKnowledge *systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.EndOrderedGroup(pbUpperBound, pMadeWithKnowledge)))
+func (self ISyncChangeBatchBase) EndOrderedGroup(pbUpperBound *byte, pMadeWithKnowledge ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.EndOrderedGroup(pbUpperBound, pMadeWithKnowledge.Raw)))
 }
 
 // AddItemMetadataToGroup wraps the raw AddItemMetadataToGroup call.
@@ -1474,38 +1474,38 @@ func (self ISyncChangeBatchWithFilterKeyMap) GetFilterKeyMap(ppIFilterKeyMap **s
 }
 
 // SetFilterKeyMap wraps the raw SetFilterKeyMap call.
-func (self ISyncChangeBatchWithFilterKeyMap) SetFilterKeyMap(pIFilterKeyMap *systemwindowssync.IFilterKeyMap) error {
-	return win32.HRESULTError(int32(self.Raw.SetFilterKeyMap(pIFilterKeyMap)))
+func (self ISyncChangeBatchWithFilterKeyMap) SetFilterKeyMap(pIFilterKeyMap IFilterKeyMap) error {
+	return win32.HRESULTError(int32(self.Raw.SetFilterKeyMap(pIFilterKeyMap.Raw)))
 }
 
 // SetFilterForgottenKnowledge wraps the raw SetFilterForgottenKnowledge call.
-func (self ISyncChangeBatchWithFilterKeyMap) SetFilterForgottenKnowledge(dwFilterKey uint32, pFilterForgottenKnowledge *systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.SetFilterForgottenKnowledge(dwFilterKey, pFilterForgottenKnowledge)))
+func (self ISyncChangeBatchWithFilterKeyMap) SetFilterForgottenKnowledge(dwFilterKey uint32, pFilterForgottenKnowledge ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.SetFilterForgottenKnowledge(dwFilterKey, pFilterForgottenKnowledge.Raw)))
 }
 
 // GetFilteredReplicaLearnedKnowledge wraps the raw GetFilteredReplicaLearnedKnowledge call.
-func (self ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge, pNewMoveins, ppLearnedForgottenKnowledge)))
+func (self ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge.Raw, pNewMoveins.Raw, ppLearnedForgottenKnowledge)))
 }
 
 // GetLearnedFilterForgottenKnowledge wraps the raw GetLearnedFilterForgottenKnowledge call.
-func (self ISyncChangeBatchWithFilterKeyMap) GetLearnedFilterForgottenKnowledge(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetLearnedFilterForgottenKnowledge(pDestinationKnowledge, pNewMoveins, dwFilterKey, ppLearnedFilterForgottenKnowledge)))
+func (self ISyncChangeBatchWithFilterKeyMap) GetLearnedFilterForgottenKnowledge(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetLearnedFilterForgottenKnowledge(pDestinationKnowledge.Raw, pNewMoveins.Raw, dwFilterKey, ppLearnedFilterForgottenKnowledge)))
 }
 
 // GetFilteredReplicaLearnedForgottenKnowledge wraps the raw GetFilteredReplicaLearnedForgottenKnowledge call.
-func (self ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge, pNewMoveins, ppLearnedForgottenKnowledge)))
+func (self ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge.Raw, pNewMoveins.Raw, ppLearnedForgottenKnowledge)))
 }
 
 // GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete wraps the raw GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete call.
-func (self ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge, pNewMoveins, ppLearnedForgottenKnowledge)))
+func (self ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge.Raw, pNewMoveins.Raw, ppLearnedForgottenKnowledge)))
 }
 
 // GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete wraps the raw GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete call.
-func (self ISyncChangeBatchWithFilterKeyMap) GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge, pNewMoveins, dwFilterKey, ppLearnedFilterForgottenKnowledge)))
+func (self ISyncChangeBatchWithFilterKeyMap) GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge.Raw, pNewMoveins.Raw, dwFilterKey, ppLearnedFilterForgottenKnowledge)))
 }
 
 // ISyncChangeBatchWithPrerequisite is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncChangeBatchWithPrerequisite with error-returning methods.
@@ -1520,13 +1520,13 @@ func WrapISyncChangeBatchWithPrerequisite(raw *systemwindowssync.ISyncChangeBatc
 }
 
 // SetPrerequisiteKnowledge wraps the raw SetPrerequisiteKnowledge call.
-func (self ISyncChangeBatchWithPrerequisite) SetPrerequisiteKnowledge(pPrerequisiteKnowledge *systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrerequisiteKnowledge(pPrerequisiteKnowledge)))
+func (self ISyncChangeBatchWithPrerequisite) SetPrerequisiteKnowledge(pPrerequisiteKnowledge ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrerequisiteKnowledge(pPrerequisiteKnowledge.Raw)))
 }
 
 // GetLearnedKnowledgeWithPrerequisite wraps the raw GetLearnedKnowledgeWithPrerequisite call.
-func (self ISyncChangeBatchWithPrerequisite) GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, ppLearnedWithPrerequisiteKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge, ppLearnedWithPrerequisiteKnowledge)))
+func (self ISyncChangeBatchWithPrerequisite) GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge ISyncKnowledge, ppLearnedWithPrerequisiteKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge.Raw, ppLearnedWithPrerequisiteKnowledge)))
 }
 
 // GetLearnedForgottenKnowledge wraps the raw GetLearnedForgottenKnowledge call.
@@ -1608,28 +1608,28 @@ func (self ISyncChangeWithFilterKeyMap) GetFilterForgottenKnowledge(dwFilterKey 
 }
 
 // GetFilteredReplicaLearnedKnowledge wraps the raw GetFilteredReplicaLearnedKnowledge call.
-func (self ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, ppLearnedKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge, pNewMoveins, ppLearnedKnowledge)))
+func (self ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, ppLearnedKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge.Raw, pNewMoveins.Raw, ppLearnedKnowledge)))
 }
 
 // GetLearnedFilterForgottenKnowledge wraps the raw GetLearnedFilterForgottenKnowledge call.
-func (self ISyncChangeWithFilterKeyMap) GetLearnedFilterForgottenKnowledge(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetLearnedFilterForgottenKnowledge(pDestinationKnowledge, pNewMoveins, dwFilterKey, ppLearnedFilterForgottenKnowledge)))
+func (self ISyncChangeWithFilterKeyMap) GetLearnedFilterForgottenKnowledge(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetLearnedFilterForgottenKnowledge(pDestinationKnowledge.Raw, pNewMoveins.Raw, dwFilterKey, ppLearnedFilterForgottenKnowledge)))
 }
 
 // GetFilteredReplicaLearnedForgottenKnowledge wraps the raw GetFilteredReplicaLearnedForgottenKnowledge call.
-func (self ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge, pNewMoveins, ppLearnedForgottenKnowledge)))
+func (self ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge.Raw, pNewMoveins.Raw, ppLearnedForgottenKnowledge)))
 }
 
 // GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete wraps the raw GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete call.
-func (self ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge, pNewMoveins, ppLearnedForgottenKnowledge)))
+func (self ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, ppLearnedForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge.Raw, pNewMoveins.Raw, ppLearnedForgottenKnowledge)))
 }
 
 // GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete wraps the raw GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete call.
-func (self ISyncChangeWithFilterKeyMap) GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, pNewMoveins *systemwindowssync.IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge, pNewMoveins, dwFilterKey, ppLearnedFilterForgottenKnowledge)))
+func (self ISyncChangeWithFilterKeyMap) GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge ISyncKnowledge, pNewMoveins IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge.Raw, pNewMoveins.Raw, dwFilterKey, ppLearnedFilterForgottenKnowledge)))
 }
 
 // ISyncChangeWithPrerequisite is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncChangeWithPrerequisite with error-returning methods.
@@ -1649,8 +1649,8 @@ func (self ISyncChangeWithPrerequisite) GetPrerequisiteKnowledge(ppPrerequisiteK
 }
 
 // GetLearnedKnowledgeWithPrerequisite wraps the raw GetLearnedKnowledgeWithPrerequisite call.
-func (self ISyncChangeWithPrerequisite) GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge *systemwindowssync.ISyncKnowledge, ppLearnedKnowledgeWithPrerequisite **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge, ppLearnedKnowledgeWithPrerequisite)))
+func (self ISyncChangeWithPrerequisite) GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge ISyncKnowledge, ppLearnedKnowledgeWithPrerequisite **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge.Raw, ppLearnedKnowledgeWithPrerequisite)))
 }
 
 // ISyncConstraintCallback is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncConstraintCallback with error-returning methods.
@@ -1665,8 +1665,8 @@ func WrapISyncConstraintCallback(raw *systemwindowssync.ISyncConstraintCallback)
 }
 
 // OnConstraintConflict wraps the raw OnConstraintConflict call.
-func (self ISyncConstraintCallback) OnConstraintConflict(pConflict *systemwindowssync.IConstraintConflict) error {
-	return win32.HRESULTError(int32(self.Raw.OnConstraintConflict(pConflict)))
+func (self ISyncConstraintCallback) OnConstraintConflict(pConflict IConstraintConflict) error {
+	return win32.HRESULTError(int32(self.Raw.OnConstraintConflict(pConflict.Raw)))
 }
 
 // ISyncDataConverter is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncDataConverter with error-returning methods.
@@ -1681,23 +1681,23 @@ func WrapISyncDataConverter(raw *systemwindowssync.ISyncDataConverter) ISyncData
 }
 
 // ConvertDataRetrieverFromProviderFormat wraps the raw ConvertDataRetrieverFromProviderFormat call.
-func (self ISyncDataConverter) ConvertDataRetrieverFromProviderFormat(pUnkDataRetrieverIn *systemcom.IUnknown, pEnumSyncChanges *systemwindowssync.IEnumSyncChanges, ppUnkDataOut **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertDataRetrieverFromProviderFormat(pUnkDataRetrieverIn, pEnumSyncChanges, ppUnkDataOut)))
+func (self ISyncDataConverter) ConvertDataRetrieverFromProviderFormat(pUnkDataRetrieverIn systemcomidiom.IUnknown, pEnumSyncChanges IEnumSyncChanges, ppUnkDataOut **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertDataRetrieverFromProviderFormat(pUnkDataRetrieverIn.Raw, pEnumSyncChanges.Raw, ppUnkDataOut)))
 }
 
 // ConvertDataRetrieverToProviderFormat wraps the raw ConvertDataRetrieverToProviderFormat call.
-func (self ISyncDataConverter) ConvertDataRetrieverToProviderFormat(pUnkDataRetrieverIn *systemcom.IUnknown, pEnumSyncChanges *systemwindowssync.IEnumSyncChanges, ppUnkDataOut **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertDataRetrieverToProviderFormat(pUnkDataRetrieverIn, pEnumSyncChanges, ppUnkDataOut)))
+func (self ISyncDataConverter) ConvertDataRetrieverToProviderFormat(pUnkDataRetrieverIn systemcomidiom.IUnknown, pEnumSyncChanges IEnumSyncChanges, ppUnkDataOut **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertDataRetrieverToProviderFormat(pUnkDataRetrieverIn.Raw, pEnumSyncChanges.Raw, ppUnkDataOut)))
 }
 
 // ConvertDataFromProviderFormat wraps the raw ConvertDataFromProviderFormat call.
-func (self ISyncDataConverter) ConvertDataFromProviderFormat(pDataContext *systemwindowssync.ILoadChangeContext, pUnkDataIn *systemcom.IUnknown, ppUnkDataOut **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertDataFromProviderFormat(pDataContext, pUnkDataIn, ppUnkDataOut)))
+func (self ISyncDataConverter) ConvertDataFromProviderFormat(pDataContext ILoadChangeContext, pUnkDataIn systemcomidiom.IUnknown, ppUnkDataOut **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertDataFromProviderFormat(pDataContext.Raw, pUnkDataIn.Raw, ppUnkDataOut)))
 }
 
 // ConvertDataToProviderFormat wraps the raw ConvertDataToProviderFormat call.
-func (self ISyncDataConverter) ConvertDataToProviderFormat(pDataContext *systemwindowssync.ILoadChangeContext, pUnkDataOut *systemcom.IUnknown, ppUnkDataout **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertDataToProviderFormat(pDataContext, pUnkDataOut, ppUnkDataout)))
+func (self ISyncDataConverter) ConvertDataToProviderFormat(pDataContext ILoadChangeContext, pUnkDataOut systemcomidiom.IUnknown, ppUnkDataout **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertDataToProviderFormat(pDataContext.Raw, pUnkDataOut.Raw, ppUnkDataout)))
 }
 
 // ISyncFilter is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncFilter with error-returning methods.
@@ -1712,8 +1712,8 @@ func WrapISyncFilter(raw *systemwindowssync.ISyncFilter) ISyncFilter {
 }
 
 // IsIdentical wraps the raw IsIdentical call.
-func (self ISyncFilter) IsIdentical(pSyncFilter *systemwindowssync.ISyncFilter) error {
-	return win32.HRESULTError(int32(self.Raw.IsIdentical(pSyncFilter)))
+func (self ISyncFilter) IsIdentical(pSyncFilter ISyncFilter) error {
+	return win32.HRESULTError(int32(self.Raw.IsIdentical(pSyncFilter.Raw)))
 }
 
 // Serialize wraps the raw Serialize call.
@@ -1885,18 +1885,18 @@ func (self ISyncKnowledge) Clone(ppClonedKnowledge **systemwindowssync.ISyncKnow
 }
 
 // ConvertVersion wraps the raw ConvertVersion call.
-func (self ISyncKnowledge) ConvertVersion(pKnowledgeIn *systemwindowssync.ISyncKnowledge, pbCurrentOwnerId *byte, pVersionIn *systemwindowssync.SYNC_VERSION, pbNewOwnerId *byte, pcbIdSize *uint32, pVersionOut *systemwindowssync.SYNC_VERSION) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertVersion(pKnowledgeIn, pbCurrentOwnerId, pVersionIn, pbNewOwnerId, pcbIdSize, pVersionOut)))
+func (self ISyncKnowledge) ConvertVersion(pKnowledgeIn ISyncKnowledge, pbCurrentOwnerId *byte, pVersionIn *systemwindowssync.SYNC_VERSION, pbNewOwnerId *byte, pcbIdSize *uint32, pVersionOut *systemwindowssync.SYNC_VERSION) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertVersion(pKnowledgeIn.Raw, pbCurrentOwnerId, pVersionIn, pbNewOwnerId, pcbIdSize, pVersionOut)))
 }
 
 // MapRemoteToLocal wraps the raw MapRemoteToLocal call.
-func (self ISyncKnowledge) MapRemoteToLocal(pRemoteKnowledge *systemwindowssync.ISyncKnowledge, ppMappedKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.MapRemoteToLocal(pRemoteKnowledge, ppMappedKnowledge)))
+func (self ISyncKnowledge) MapRemoteToLocal(pRemoteKnowledge ISyncKnowledge, ppMappedKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.MapRemoteToLocal(pRemoteKnowledge.Raw, ppMappedKnowledge)))
 }
 
 // Union wraps the raw Union call.
-func (self ISyncKnowledge) Union(pKnowledge *systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.Union(pKnowledge)))
+func (self ISyncKnowledge) Union(pKnowledge ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.Union(pKnowledge.Raw)))
 }
 
 // ProjectOntoItem wraps the raw ProjectOntoItem call.
@@ -1925,8 +1925,8 @@ func (self ISyncKnowledge) ExcludeChangeUnit(pbItemId *byte, pbChangeUnitId *byt
 }
 
 // ContainsKnowledge wraps the raw ContainsKnowledge call.
-func (self ISyncKnowledge) ContainsKnowledge(pKnowledge *systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.ContainsKnowledge(pKnowledge)))
+func (self ISyncKnowledge) ContainsKnowledge(pKnowledge ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.ContainsKnowledge(pKnowledge.Raw)))
 }
 
 // FindMinTickCountForReplica wraps the raw FindMinTickCountForReplica call.
@@ -1991,8 +1991,8 @@ func (self ISyncKnowledge2) SerializeWithOptions(targetFormatVersion systemwindo
 }
 
 // GetLowestUncontainedId wraps the raw GetLowestUncontainedId call.
-func (self ISyncKnowledge2) GetLowestUncontainedId(piSyncKnowledge *systemwindowssync.ISyncKnowledge2, pbItemId *byte, pcbItemIdSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetLowestUncontainedId(piSyncKnowledge, pbItemId, pcbItemIdSize)))
+func (self ISyncKnowledge2) GetLowestUncontainedId(piSyncKnowledge ISyncKnowledge2, pbItemId *byte, pcbItemIdSize *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetLowestUncontainedId(piSyncKnowledge.Raw, pbItemId, pcbItemIdSize)))
 }
 
 // GetInspector wraps the raw GetInspector call.
@@ -2011,28 +2011,28 @@ func (self ISyncKnowledge2) GetStatistics(which systemwindowssync.SYNC_STATISTIC
 }
 
 // ContainsKnowledgeForItem wraps the raw ContainsKnowledgeForItem call.
-func (self ISyncKnowledge2) ContainsKnowledgeForItem(pKnowledge *systemwindowssync.ISyncKnowledge, pbItemId *byte) error {
-	return win32.HRESULTError(int32(self.Raw.ContainsKnowledgeForItem(pKnowledge, pbItemId)))
+func (self ISyncKnowledge2) ContainsKnowledgeForItem(pKnowledge ISyncKnowledge, pbItemId *byte) error {
+	return win32.HRESULTError(int32(self.Raw.ContainsKnowledgeForItem(pKnowledge.Raw, pbItemId)))
 }
 
 // ContainsKnowledgeForChangeUnit wraps the raw ContainsKnowledgeForChangeUnit call.
-func (self ISyncKnowledge2) ContainsKnowledgeForChangeUnit(pKnowledge *systemwindowssync.ISyncKnowledge, pbItemId *byte, pbChangeUnitId *byte) error {
-	return win32.HRESULTError(int32(self.Raw.ContainsKnowledgeForChangeUnit(pKnowledge, pbItemId, pbChangeUnitId)))
+func (self ISyncKnowledge2) ContainsKnowledgeForChangeUnit(pKnowledge ISyncKnowledge, pbItemId *byte, pbChangeUnitId *byte) error {
+	return win32.HRESULTError(int32(self.Raw.ContainsKnowledgeForChangeUnit(pKnowledge.Raw, pbItemId, pbChangeUnitId)))
 }
 
 // ProjectOntoKnowledgeWithPrerequisite wraps the raw ProjectOntoKnowledgeWithPrerequisite call.
-func (self ISyncKnowledge2) ProjectOntoKnowledgeWithPrerequisite(pPrerequisiteKnowledge *systemwindowssync.ISyncKnowledge, pTemplateKnowledge *systemwindowssync.ISyncKnowledge, ppProjectedKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.ProjectOntoKnowledgeWithPrerequisite(pPrerequisiteKnowledge, pTemplateKnowledge, ppProjectedKnowledge)))
+func (self ISyncKnowledge2) ProjectOntoKnowledgeWithPrerequisite(pPrerequisiteKnowledge ISyncKnowledge, pTemplateKnowledge ISyncKnowledge, ppProjectedKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.ProjectOntoKnowledgeWithPrerequisite(pPrerequisiteKnowledge.Raw, pTemplateKnowledge.Raw, ppProjectedKnowledge)))
 }
 
 // Complement wraps the raw Complement call.
-func (self ISyncKnowledge2) Complement(pSyncKnowledge *systemwindowssync.ISyncKnowledge, ppComplementedKnowledge **systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.Complement(pSyncKnowledge, ppComplementedKnowledge)))
+func (self ISyncKnowledge2) Complement(pSyncKnowledge ISyncKnowledge, ppComplementedKnowledge **systemwindowssync.ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.Complement(pSyncKnowledge.Raw, ppComplementedKnowledge)))
 }
 
 // IntersectsWithKnowledge wraps the raw IntersectsWithKnowledge call.
-func (self ISyncKnowledge2) IntersectsWithKnowledge(pSyncKnowledge *systemwindowssync.ISyncKnowledge) error {
-	return win32.HRESULTError(int32(self.Raw.IntersectsWithKnowledge(pSyncKnowledge)))
+func (self ISyncKnowledge2) IntersectsWithKnowledge(pSyncKnowledge ISyncKnowledge) error {
+	return win32.HRESULTError(int32(self.Raw.IntersectsWithKnowledge(pSyncKnowledge.Raw)))
 }
 
 // GetKnowledgeCookie wraps the raw GetKnowledgeCookie call.
@@ -2041,8 +2041,8 @@ func (self ISyncKnowledge2) GetKnowledgeCookie(ppKnowledgeCookie **systemcom.IUn
 }
 
 // CompareToKnowledgeCookie wraps the raw CompareToKnowledgeCookie call.
-func (self ISyncKnowledge2) CompareToKnowledgeCookie(pKnowledgeCookie *systemcom.IUnknown, pResult *systemwindowssync.KNOWLEDGE_COOKIE_COMPARISON_RESULT) error {
-	return win32.HRESULTError(int32(self.Raw.CompareToKnowledgeCookie(pKnowledgeCookie, pResult)))
+func (self ISyncKnowledge2) CompareToKnowledgeCookie(pKnowledgeCookie systemcomidiom.IUnknown, pResult *systemwindowssync.KNOWLEDGE_COOKIE_COMPARISON_RESULT) error {
+	return win32.HRESULTError(int32(self.Raw.CompareToKnowledgeCookie(pKnowledgeCookie.Raw, pResult)))
 }
 
 // ISyncMergeTombstoneChange is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncMergeTombstoneChange with error-returning methods.
@@ -2089,8 +2089,8 @@ func WrapISyncProviderConfigUI(raw *systemwindowssync.ISyncProviderConfigUI) ISy
 }
 
 // Init wraps the raw Init call.
-func (self ISyncProviderConfigUI) Init(pguidInstanceId *win32.GUID, pguidContentType *win32.GUID, pConfigurationProperties *uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.Init(pguidInstanceId, pguidContentType, pConfigurationProperties)))
+func (self ISyncProviderConfigUI) Init(pguidInstanceId *win32.GUID, pguidContentType *win32.GUID, pConfigurationProperties uishellpropertiessystemidiom.IPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.Init(pguidInstanceId, pguidContentType, pConfigurationProperties.Raw)))
 }
 
 // GetRegisteredProperties wraps the raw GetRegisteredProperties call.
@@ -2099,13 +2099,13 @@ func (self ISyncProviderConfigUI) GetRegisteredProperties(ppConfigUIProperties *
 }
 
 // CreateAndRegisterNewSyncProvider wraps the raw CreateAndRegisterNewSyncProvider call.
-func (self ISyncProviderConfigUI) CreateAndRegisterNewSyncProvider(hwndParent foundation.HWND, pUnkContext *systemcom.IUnknown, ppProviderInfo **systemwindowssync.ISyncProviderInfo) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAndRegisterNewSyncProvider(hwndParent, pUnkContext, ppProviderInfo)))
+func (self ISyncProviderConfigUI) CreateAndRegisterNewSyncProvider(hwndParent foundation.HWND, pUnkContext systemcomidiom.IUnknown, ppProviderInfo **systemwindowssync.ISyncProviderInfo) error {
+	return win32.HRESULTError(int32(self.Raw.CreateAndRegisterNewSyncProvider(hwndParent, pUnkContext.Raw, ppProviderInfo)))
 }
 
 // ModifySyncProvider wraps the raw ModifySyncProvider call.
-func (self ISyncProviderConfigUI) ModifySyncProvider(hwndParent foundation.HWND, pUnkContext *systemcom.IUnknown, pProviderInfo *systemwindowssync.ISyncProviderInfo) error {
-	return win32.HRESULTError(int32(self.Raw.ModifySyncProvider(hwndParent, pUnkContext, pProviderInfo)))
+func (self ISyncProviderConfigUI) ModifySyncProvider(hwndParent foundation.HWND, pUnkContext systemcomidiom.IUnknown, pProviderInfo ISyncProviderInfo) error {
+	return win32.HRESULTError(int32(self.Raw.ModifySyncProvider(hwndParent, pUnkContext.Raw, pProviderInfo.Raw)))
 }
 
 // ISyncProviderConfigUIInfo is an idiomatic wrapper over the raw COM interface System.WindowsSync.ISyncProviderConfigUIInfo with error-returning methods.
@@ -2353,6 +2353,6 @@ func (self ISynchronousDataRetriever) GetIdParameters(pIdParameters *systemwindo
 }
 
 // LoadChangeData wraps the raw LoadChangeData call.
-func (self ISynchronousDataRetriever) LoadChangeData(pLoadChangeContext *systemwindowssync.ILoadChangeContext, ppUnkData **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.LoadChangeData(pLoadChangeContext, ppUnkData)))
+func (self ISynchronousDataRetriever) LoadChangeData(pLoadChangeContext ILoadChangeContext, ppUnkData **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.LoadChangeData(pLoadChangeContext.Raw, ppUnkData)))
 }

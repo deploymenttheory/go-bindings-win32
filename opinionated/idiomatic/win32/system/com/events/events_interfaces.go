@@ -223,8 +223,8 @@ func WrapIEventControl(raw *systemcomevents.IEventControl) IEventControl {
 }
 
 // SetPublisherFilter wraps the raw SetPublisherFilter call.
-func (self IEventControl) SetPublisherFilter(methodName foundation.BSTR, pPublisherFilter *systemcomevents.IPublisherFilter) error {
-	return win32.HRESULTError(int32(self.Raw.SetPublisherFilter(methodName, pPublisherFilter)))
+func (self IEventControl) SetPublisherFilter(methodName foundation.BSTR, pPublisherFilter IPublisherFilter) error {
+	return win32.HRESULTError(int32(self.Raw.SetPublisherFilter(methodName, pPublisherFilter.Raw)))
 }
 
 // Get_AllowInprocActivation wraps the raw Get_AllowInprocActivation call.
@@ -241,10 +241,10 @@ func (self IEventControl) Put_AllowInprocActivation(fAllowInprocActivation bool)
 }
 
 // GetSubscriptions wraps the raw GetSubscriptions call.
-func (self IEventControl) GetSubscriptions(methodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32) (*systemcomevents.IEventObjectCollection, error) {
+func (self IEventControl) GetSubscriptions(methodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32) (IEventObjectCollection, error) {
 	var _ppCollection *systemcomevents.IEventObjectCollection
 	_hr := self.Raw.GetSubscriptions(methodName, optionalCriteria, optionalErrorIndex, &_ppCollection)
-	return _ppCollection, win32.HRESULTError(int32(_hr))
+	return WrapIEventObjectCollection(_ppCollection), win32.HRESULTError(int32(_hr))
 }
 
 // SetDefaultQuery wraps the raw SetDefaultQuery call.
@@ -313,10 +313,10 @@ func WrapIEventObjectCollection(raw *systemcomevents.IEventObjectCollection) IEv
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IEventObjectCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IEventObjectCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppUnkEnum *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppUnkEnum)
-	return _ppUnkEnum, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppUnkEnum), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
@@ -327,10 +327,10 @@ func (self IEventObjectCollection) Get_Item(objectID foundation.BSTR) (systemvar
 }
 
 // Get_NewEnum wraps the raw Get_NewEnum call.
-func (self IEventObjectCollection) Get_NewEnum() (*systemcomevents.IEnumEventObject, error) {
+func (self IEventObjectCollection) Get_NewEnum() (IEnumEventObject, error) {
 	var _ppEnum *systemcomevents.IEnumEventObject
 	_hr := self.Raw.Get_NewEnum(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumEventObject(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -474,10 +474,10 @@ func (self IEventPublisher) RemoveDefaultProperty(bstrPropertyName foundation.BS
 }
 
 // GetDefaultPropertyCollection wraps the raw GetDefaultPropertyCollection call.
-func (self IEventPublisher) GetDefaultPropertyCollection() (*systemcomevents.IEventObjectCollection, error) {
+func (self IEventPublisher) GetDefaultPropertyCollection() (IEventObjectCollection, error) {
 	var _collection *systemcomevents.IEventObjectCollection
 	_hr := self.Raw.GetDefaultPropertyCollection(&_collection)
-	return _collection, win32.HRESULTError(int32(_hr))
+	return WrapIEventObjectCollection(_collection), win32.HRESULTError(int32(_hr))
 }
 
 // IEventSubscription is an idiomatic wrapper over the raw COM interface System.Com.Events.IEventSubscription with error-returning methods.
@@ -564,15 +564,15 @@ func (self IEventSubscription) Put_SubscriberCLSID(bstrSubscriberCLSID foundatio
 }
 
 // Get_SubscriberInterface wraps the raw Get_SubscriberInterface call.
-func (self IEventSubscription) Get_SubscriberInterface() (*systemcom.IUnknown, error) {
+func (self IEventSubscription) Get_SubscriberInterface() (systemcomidiom.IUnknown, error) {
 	var _ppSubscriberInterface *systemcom.IUnknown
 	_hr := self.Raw.Get_SubscriberInterface(&_ppSubscriberInterface)
-	return _ppSubscriberInterface, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppSubscriberInterface), win32.HRESULTError(int32(_hr))
 }
 
 // Put_SubscriberInterface wraps the raw Put_SubscriberInterface call.
-func (self IEventSubscription) Put_SubscriberInterface(pSubscriberInterface *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SubscriberInterface(pSubscriberInterface)))
+func (self IEventSubscription) Put_SubscriberInterface(pSubscriberInterface systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SubscriberInterface(pSubscriberInterface.Raw)))
 }
 
 // Get_PerUser wraps the raw Get_PerUser call.
@@ -655,10 +655,10 @@ func (self IEventSubscription) RemovePublisherProperty(bstrPropertyName foundati
 }
 
 // GetPublisherPropertyCollection wraps the raw GetPublisherPropertyCollection call.
-func (self IEventSubscription) GetPublisherPropertyCollection() (*systemcomevents.IEventObjectCollection, error) {
+func (self IEventSubscription) GetPublisherPropertyCollection() (IEventObjectCollection, error) {
 	var _collection *systemcomevents.IEventObjectCollection
 	_hr := self.Raw.GetPublisherPropertyCollection(&_collection)
-	return _collection, win32.HRESULTError(int32(_hr))
+	return WrapIEventObjectCollection(_collection), win32.HRESULTError(int32(_hr))
 }
 
 // GetSubscriberProperty wraps the raw GetSubscriberProperty call.
@@ -679,10 +679,10 @@ func (self IEventSubscription) RemoveSubscriberProperty(bstrPropertyName foundat
 }
 
 // GetSubscriberPropertyCollection wraps the raw GetSubscriberPropertyCollection call.
-func (self IEventSubscription) GetSubscriberPropertyCollection() (*systemcomevents.IEventObjectCollection, error) {
+func (self IEventSubscription) GetSubscriberPropertyCollection() (IEventObjectCollection, error) {
 	var _collection *systemcomevents.IEventObjectCollection
 	_hr := self.Raw.GetSubscriberPropertyCollection(&_collection)
-	return _collection, win32.HRESULTError(int32(_hr))
+	return WrapIEventObjectCollection(_collection), win32.HRESULTError(int32(_hr))
 }
 
 // Get_InterfaceID wraps the raw Get_InterfaceID call.
@@ -709,15 +709,15 @@ func WrapIEventSystem(raw *systemcomevents.IEventSystem) IEventSystem {
 }
 
 // Query wraps the raw Query call.
-func (self IEventSystem) Query(progID foundation.BSTR, queryCriteria foundation.BSTR, errorIndex *int32) (*systemcom.IUnknown, error) {
+func (self IEventSystem) Query(progID foundation.BSTR, queryCriteria foundation.BSTR, errorIndex *int32) (systemcomidiom.IUnknown, error) {
 	var _ppInterface *systemcom.IUnknown
 	_hr := self.Raw.Query(progID, queryCriteria, errorIndex, &_ppInterface)
-	return _ppInterface, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppInterface), win32.HRESULTError(int32(_hr))
 }
 
 // Store wraps the raw Store call.
-func (self IEventSystem) Store(ProgID foundation.BSTR, pInterface *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Store(ProgID, pInterface)))
+func (self IEventSystem) Store(ProgID foundation.BSTR, pInterface systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Store(ProgID, pInterface.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -733,10 +733,10 @@ func (self IEventSystem) Get_EventObjectChangeEventClassID() (foundation.BSTR, e
 }
 
 // QueryS wraps the raw QueryS call.
-func (self IEventSystem) QueryS(progID foundation.BSTR, queryCriteria foundation.BSTR) (*systemcom.IUnknown, error) {
+func (self IEventSystem) QueryS(progID foundation.BSTR, queryCriteria foundation.BSTR) (systemcomidiom.IUnknown, error) {
 	var _ppInterface *systemcom.IUnknown
 	_hr := self.Raw.QueryS(progID, queryCriteria, &_ppInterface)
-	return _ppInterface, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppInterface), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveS wraps the raw RemoveS call.
@@ -756,8 +756,8 @@ func WrapIFiringControl(raw *systemcomevents.IFiringControl) IFiringControl {
 }
 
 // FireSubscription wraps the raw FireSubscription call.
-func (self IFiringControl) FireSubscription(subscription *systemcomevents.IEventSubscription) error {
-	return win32.HRESULTError(int32(self.Raw.FireSubscription(subscription)))
+func (self IFiringControl) FireSubscription(subscription IEventSubscription) error {
+	return win32.HRESULTError(int32(self.Raw.FireSubscription(subscription.Raw)))
 }
 
 // IMultiInterfaceEventControl is an idiomatic wrapper over the raw COM interface System.Com.Events.IMultiInterfaceEventControl with error-returning methods.
@@ -772,15 +772,15 @@ func WrapIMultiInterfaceEventControl(raw *systemcomevents.IMultiInterfaceEventCo
 }
 
 // SetMultiInterfacePublisherFilter wraps the raw SetMultiInterfacePublisherFilter call.
-func (self IMultiInterfaceEventControl) SetMultiInterfacePublisherFilter(classFilter *systemcomevents.IMultiInterfacePublisherFilter) error {
-	return win32.HRESULTError(int32(self.Raw.SetMultiInterfacePublisherFilter(classFilter)))
+func (self IMultiInterfaceEventControl) SetMultiInterfacePublisherFilter(classFilter IMultiInterfacePublisherFilter) error {
+	return win32.HRESULTError(int32(self.Raw.SetMultiInterfacePublisherFilter(classFilter.Raw)))
 }
 
 // GetSubscriptions wraps the raw GetSubscriptions call.
-func (self IMultiInterfaceEventControl) GetSubscriptions(eventIID *win32.GUID, bstrMethodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32) (*systemcomevents.IEventObjectCollection, error) {
+func (self IMultiInterfaceEventControl) GetSubscriptions(eventIID *win32.GUID, bstrMethodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32) (IEventObjectCollection, error) {
 	var _ppCollection *systemcomevents.IEventObjectCollection
 	_hr := self.Raw.GetSubscriptions(eventIID, bstrMethodName, optionalCriteria, optionalErrorIndex, &_ppCollection)
-	return _ppCollection, win32.HRESULTError(int32(_hr))
+	return WrapIEventObjectCollection(_ppCollection), win32.HRESULTError(int32(_hr))
 }
 
 // SetDefaultQuery wraps the raw SetDefaultQuery call.
@@ -828,13 +828,13 @@ func WrapIMultiInterfacePublisherFilter(raw *systemcomevents.IMultiInterfacePubl
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IMultiInterfacePublisherFilter) Initialize(pEIC *systemcomevents.IMultiInterfaceEventControl) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pEIC)))
+func (self IMultiInterfacePublisherFilter) Initialize(pEIC IMultiInterfaceEventControl) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pEIC.Raw)))
 }
 
 // PrepareToFire wraps the raw PrepareToFire call.
-func (self IMultiInterfacePublisherFilter) PrepareToFire(iid *win32.GUID, methodName foundation.BSTR, firingControl *systemcomevents.IFiringControl) error {
-	return win32.HRESULTError(int32(self.Raw.PrepareToFire(iid, methodName, firingControl)))
+func (self IMultiInterfacePublisherFilter) PrepareToFire(iid *win32.GUID, methodName foundation.BSTR, firingControl IFiringControl) error {
+	return win32.HRESULTError(int32(self.Raw.PrepareToFire(iid, methodName, firingControl.Raw)))
 }
 
 // IPublisherFilter is an idiomatic wrapper over the raw COM interface System.Com.Events.IPublisherFilter with error-returning methods.
@@ -849,11 +849,11 @@ func WrapIPublisherFilter(raw *systemcomevents.IPublisherFilter) IPublisherFilte
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IPublisherFilter) Initialize(methodName foundation.BSTR, dispUserDefined *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(methodName, dispUserDefined)))
+func (self IPublisherFilter) Initialize(methodName foundation.BSTR, dispUserDefined systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(methodName, dispUserDefined.Raw)))
 }
 
 // PrepareToFire wraps the raw PrepareToFire call.
-func (self IPublisherFilter) PrepareToFire(methodName foundation.BSTR, firingControl *systemcomevents.IFiringControl) error {
-	return win32.HRESULTError(int32(self.Raw.PrepareToFire(methodName, firingControl)))
+func (self IPublisherFilter) PrepareToFire(methodName foundation.BSTR, firingControl IFiringControl) error {
+	return win32.HRESULTError(int32(self.Raw.PrepareToFire(methodName, firingControl.Raw)))
 }

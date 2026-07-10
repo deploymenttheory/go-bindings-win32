@@ -25,11 +25,11 @@ func WrapIComprehensiveSpellCheckProvider(raw *globalization.IComprehensiveSpell
 }
 
 // ComprehensiveCheck wraps the raw ComprehensiveCheck call.
-func (self IComprehensiveSpellCheckProvider) ComprehensiveCheck(text string) (*globalization.IEnumSpellingError, error) {
+func (self IComprehensiveSpellCheckProvider) ComprehensiveCheck(text string) (IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
 	var _value *globalization.IEnumSpellingError
 	_hr := self.Raw.ComprehensiveCheck(foundation.PWSTR(_text), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapIEnumSpellingError(_value), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumCodePage is an idiomatic wrapper over the raw COM interface Globalization.IEnumCodePage with error-returning methods.
@@ -137,10 +137,10 @@ func WrapIEnumSpellingError(raw *globalization.IEnumSpellingError) IEnumSpelling
 }
 
 // Next wraps the raw Next call.
-func (self IEnumSpellingError) Next() (*globalization.ISpellingError, error) {
+func (self IEnumSpellingError) Next() (ISpellingError, error) {
 	var _value *globalization.ISpellingError
 	_hr := self.Raw.Next(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapISpellingError(_value), win32.HRESULTError(int32(_hr))
 }
 
 // IMLangCodePages is an idiomatic wrapper over the raw COM interface Globalization.IMLangCodePages with error-returning methods.
@@ -311,8 +311,8 @@ func WrapIMLangLineBreakConsole(raw *globalization.IMLangLineBreakConsole) IMLan
 }
 
 // BreakLineML wraps the raw BreakLineML call.
-func (self IMLangLineBreakConsole) BreakLineML(pSrcMLStr *globalization.IMLangString, lSrcPos int32, lSrcLen int32, cMinColumns int32, cMaxColumns int32, plLineLen *int32, plSkipLen *int32) error {
-	return win32.HRESULTError(int32(self.Raw.BreakLineML(pSrcMLStr, lSrcPos, lSrcLen, cMinColumns, cMaxColumns, plLineLen, plSkipLen)))
+func (self IMLangLineBreakConsole) BreakLineML(pSrcMLStr IMLangString, lSrcPos int32, lSrcLen int32, cMinColumns int32, cMaxColumns int32, plLineLen *int32, plSkipLen *int32) error {
+	return win32.HRESULTError(int32(self.Raw.BreakLineML(pSrcMLStr.Raw, lSrcPos, lSrcLen, cMinColumns, cMaxColumns, plLineLen, plSkipLen)))
 }
 
 // BreakLineW wraps the raw BreakLineW call.
@@ -349,13 +349,13 @@ func (self IMLangString) GetLength(plLen *int32) error {
 }
 
 // SetMLStr wraps the raw SetMLStr call.
-func (self IMLangString) SetMLStr(lDestPos int32, lDestLen int32, pSrcMLStr *systemcom.IUnknown, lSrcPos int32, lSrcLen int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetMLStr(lDestPos, lDestLen, pSrcMLStr, lSrcPos, lSrcLen)))
+func (self IMLangString) SetMLStr(lDestPos int32, lDestLen int32, pSrcMLStr systemcomidiom.IUnknown, lSrcPos int32, lSrcLen int32) error {
+	return win32.HRESULTError(int32(self.Raw.SetMLStr(lDestPos, lDestLen, pSrcMLStr.Raw, lSrcPos, lSrcLen)))
 }
 
 // GetMLStr wraps the raw GetMLStr call.
-func (self IMLangString) GetMLStr(lSrcPos int32, lSrcLen int32, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, piid *win32.GUID, ppDestMLStr **systemcom.IUnknown, plDestPos *int32, plDestLen *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetMLStr(lSrcPos, lSrcLen, pUnkOuter, dwClsContext, piid, ppDestMLStr, plDestPos, plDestLen)))
+func (self IMLangString) GetMLStr(lSrcPos int32, lSrcLen int32, pUnkOuter systemcomidiom.IUnknown, dwClsContext uint32, piid *win32.GUID, ppDestMLStr **systemcom.IUnknown, plDestPos *int32, plDestLen *int32) error {
+	return win32.HRESULTError(int32(self.Raw.GetMLStr(lSrcPos, lSrcLen, pUnkOuter.Raw, dwClsContext, piid, ppDestMLStr, plDestPos, plDestLen)))
 }
 
 // IMLangStringAStr is an idiomatic wrapper over the raw COM interface Globalization.IMLangStringAStr with error-returning methods.
@@ -375,8 +375,8 @@ func (self IMLangStringAStr) SetAStr(lDestPos int32, lDestLen int32, uCodePage u
 }
 
 // SetStrBufA wraps the raw SetStrBufA call.
-func (self IMLangStringAStr) SetStrBufA(lDestPos int32, lDestLen int32, uCodePage uint32, pSrcBuf *globalization.IMLangStringBufA, pcchActual *int32, plActualLen *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetStrBufA(lDestPos, lDestLen, uCodePage, pSrcBuf, pcchActual, plActualLen)))
+func (self IMLangStringAStr) SetStrBufA(lDestPos int32, lDestLen int32, uCodePage uint32, pSrcBuf IMLangStringBufA, pcchActual *int32, plActualLen *int32) error {
+	return win32.HRESULTError(int32(self.Raw.SetStrBufA(lDestPos, lDestLen, uCodePage, pSrcBuf.Raw, pcchActual, plActualLen)))
 }
 
 // GetAStr wraps the raw GetAStr call.
@@ -500,8 +500,8 @@ func (self IMLangStringWStr) SetWStr(lDestPos int32, lDestLen int32, pszSrc stri
 }
 
 // SetStrBufW wraps the raw SetStrBufW call.
-func (self IMLangStringWStr) SetStrBufW(lDestPos int32, lDestLen int32, pSrcBuf *globalization.IMLangStringBufW, pcchActual *int32, plActualLen *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetStrBufW(lDestPos, lDestLen, pSrcBuf, pcchActual, plActualLen)))
+func (self IMLangStringWStr) SetStrBufW(lDestPos int32, lDestLen int32, pSrcBuf IMLangStringBufW, pcchActual *int32, plActualLen *int32) error {
+	return win32.HRESULTError(int32(self.Raw.SetStrBufW(lDestPos, lDestLen, pSrcBuf.Raw, pcchActual, plActualLen)))
 }
 
 // GetWStr wraps the raw GetWStr call.
@@ -710,9 +710,9 @@ func (self IMultiLanguage2) CreateConvertCharset(uiSrcCodePage uint32, uiDstCode
 }
 
 // ConvertStringInIStream wraps the raw ConvertStringInIStream call.
-func (self IMultiLanguage2) ConvertStringInIStream(pdwMode *uint32, dwFlag uint32, lpFallBack string, dwSrcEncoding uint32, dwDstEncoding uint32, pstmIn *systemcom.IStream, pstmOut *systemcom.IStream) error {
+func (self IMultiLanguage2) ConvertStringInIStream(pdwMode *uint32, dwFlag uint32, lpFallBack string, dwSrcEncoding uint32, dwDstEncoding uint32, pstmIn systemcomidiom.IStream, pstmOut systemcomidiom.IStream) error {
 	_lpFallBack := win32.UTF16Ptr(lpFallBack)
-	return win32.HRESULTError(int32(self.Raw.ConvertStringInIStream(pdwMode, dwFlag, foundation.PWSTR(_lpFallBack), dwSrcEncoding, dwDstEncoding, pstmIn, pstmOut)))
+	return win32.HRESULTError(int32(self.Raw.ConvertStringInIStream(pdwMode, dwFlag, foundation.PWSTR(_lpFallBack), dwSrcEncoding, dwDstEncoding, pstmIn.Raw, pstmOut.Raw)))
 }
 
 // ConvertStringToUnicodeEx wraps the raw ConvertStringToUnicodeEx call.
@@ -729,8 +729,8 @@ func (self IMultiLanguage2) ConvertStringFromUnicodeEx(pdwMode *uint32, dwEncodi
 }
 
 // DetectCodepageInIStream wraps the raw DetectCodepageInIStream call.
-func (self IMultiLanguage2) DetectCodepageInIStream(dwFlag uint32, dwPrefWinCodePage uint32, pstmIn *systemcom.IStream, lpEncoding *globalization.DetectEncodingInfo, pnScores *int32) error {
-	return win32.HRESULTError(int32(self.Raw.DetectCodepageInIStream(dwFlag, dwPrefWinCodePage, pstmIn, lpEncoding, pnScores)))
+func (self IMultiLanguage2) DetectCodepageInIStream(dwFlag uint32, dwPrefWinCodePage uint32, pstmIn systemcomidiom.IStream, lpEncoding *globalization.DetectEncodingInfo, pnScores *int32) error {
+	return win32.HRESULTError(int32(self.Raw.DetectCodepageInIStream(dwFlag, dwPrefWinCodePage, pstmIn.Raw, lpEncoding, pnScores)))
 }
 
 // DetectInputCodepage wraps the raw DetectInputCodepage call.
@@ -792,9 +792,9 @@ func (self IMultiLanguage3) DetectOutboundCodePage(dwFlags uint32, lpWideCharStr
 }
 
 // DetectOutboundCodePageInIStream wraps the raw DetectOutboundCodePageInIStream call.
-func (self IMultiLanguage3) DetectOutboundCodePageInIStream(dwFlags uint32, pStrIn *systemcom.IStream, puiPreferredCodePages *uint32, nPreferredCodePages uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar string) error {
+func (self IMultiLanguage3) DetectOutboundCodePageInIStream(dwFlags uint32, pStrIn systemcomidiom.IStream, puiPreferredCodePages *uint32, nPreferredCodePages uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar string) error {
 	_lpSpecialChar := win32.UTF16Ptr(lpSpecialChar)
-	return win32.HRESULTError(int32(self.Raw.DetectOutboundCodePageInIStream(dwFlags, pStrIn, puiPreferredCodePages, nPreferredCodePages, puiDetectedCodePages, pnDetectedCodePages, foundation.PWSTR(_lpSpecialChar))))
+	return win32.HRESULTError(int32(self.Raw.DetectOutboundCodePageInIStream(dwFlags, pStrIn.Raw, puiPreferredCodePages, nPreferredCodePages, puiDetectedCodePages, pnDetectedCodePages, foundation.PWSTR(_lpSpecialChar))))
 }
 
 // IOptionDescription is an idiomatic wrapper over the raw COM interface Globalization.IOptionDescription with error-returning methods.
@@ -830,10 +830,10 @@ func (self IOptionDescription) Get_Description() (foundation.PWSTR, error) {
 }
 
 // Get_Labels wraps the raw Get_Labels call.
-func (self IOptionDescription) Get_Labels() (*systemcom.IEnumString, error) {
+func (self IOptionDescription) Get_Labels() (systemcomidiom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	_hr := self.Raw.Get_Labels(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumString(_value), win32.HRESULTError(int32(_hr))
 }
 
 // ISpellCheckProvider is an idiomatic wrapper over the raw COM interface Globalization.ISpellCheckProvider with error-returning methods.
@@ -855,19 +855,19 @@ func (self ISpellCheckProvider) Get_LanguageTag() (foundation.PWSTR, error) {
 }
 
 // Check wraps the raw Check call.
-func (self ISpellCheckProvider) Check(text string) (*globalization.IEnumSpellingError, error) {
+func (self ISpellCheckProvider) Check(text string) (IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
 	var _value *globalization.IEnumSpellingError
 	_hr := self.Raw.Check(foundation.PWSTR(_text), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapIEnumSpellingError(_value), win32.HRESULTError(int32(_hr))
 }
 
 // Suggest wraps the raw Suggest call.
-func (self ISpellCheckProvider) Suggest(word string) (*systemcom.IEnumString, error) {
+func (self ISpellCheckProvider) Suggest(word string) (systemcomidiom.IEnumString, error) {
 	_word := win32.UTF16Ptr(word)
 	var _value *systemcom.IEnumString
 	_hr := self.Raw.Suggest(foundation.PWSTR(_word), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumString(_value), win32.HRESULTError(int32(_hr))
 }
 
 // GetOptionValue wraps the raw GetOptionValue call.
@@ -885,10 +885,10 @@ func (self ISpellCheckProvider) SetOptionValue(optionId string, value byte) erro
 }
 
 // Get_OptionIds wraps the raw Get_OptionIds call.
-func (self ISpellCheckProvider) Get_OptionIds() (*systemcom.IEnumString, error) {
+func (self ISpellCheckProvider) Get_OptionIds() (systemcomidiom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	_hr := self.Raw.Get_OptionIds(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumString(_value), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
@@ -906,16 +906,16 @@ func (self ISpellCheckProvider) Get_LocalizedName() (foundation.PWSTR, error) {
 }
 
 // GetOptionDescription wraps the raw GetOptionDescription call.
-func (self ISpellCheckProvider) GetOptionDescription(optionId string) (*globalization.IOptionDescription, error) {
+func (self ISpellCheckProvider) GetOptionDescription(optionId string) (IOptionDescription, error) {
 	_optionId := win32.UTF16Ptr(optionId)
 	var _value *globalization.IOptionDescription
 	_hr := self.Raw.GetOptionDescription(foundation.PWSTR(_optionId), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapIOptionDescription(_value), win32.HRESULTError(int32(_hr))
 }
 
 // InitializeWordlist wraps the raw InitializeWordlist call.
-func (self ISpellCheckProvider) InitializeWordlist(wordlistType globalization.WORDLIST_TYPE, words *systemcom.IEnumString) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeWordlist(wordlistType, words)))
+func (self ISpellCheckProvider) InitializeWordlist(wordlistType globalization.WORDLIST_TYPE, words systemcomidiom.IEnumString) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeWordlist(wordlistType, words.Raw)))
 }
 
 // ISpellCheckProviderFactory is an idiomatic wrapper over the raw COM interface Globalization.ISpellCheckProviderFactory with error-returning methods.
@@ -930,10 +930,10 @@ func WrapISpellCheckProviderFactory(raw *globalization.ISpellCheckProviderFactor
 }
 
 // Get_SupportedLanguages wraps the raw Get_SupportedLanguages call.
-func (self ISpellCheckProviderFactory) Get_SupportedLanguages() (*systemcom.IEnumString, error) {
+func (self ISpellCheckProviderFactory) Get_SupportedLanguages() (systemcomidiom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	_hr := self.Raw.Get_SupportedLanguages(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumString(_value), win32.HRESULTError(int32(_hr))
 }
 
 // IsSupported wraps the raw IsSupported call.
@@ -945,11 +945,11 @@ func (self ISpellCheckProviderFactory) IsSupported(languageTag string) (foundati
 }
 
 // CreateSpellCheckProvider wraps the raw CreateSpellCheckProvider call.
-func (self ISpellCheckProviderFactory) CreateSpellCheckProvider(languageTag string) (*globalization.ISpellCheckProvider, error) {
+func (self ISpellCheckProviderFactory) CreateSpellCheckProvider(languageTag string) (ISpellCheckProvider, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
 	var _value *globalization.ISpellCheckProvider
 	_hr := self.Raw.CreateSpellCheckProvider(foundation.PWSTR(_languageTag), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapISpellCheckProvider(_value), win32.HRESULTError(int32(_hr))
 }
 
 // ISpellChecker is an idiomatic wrapper over the raw COM interface Globalization.ISpellChecker with error-returning methods.
@@ -971,19 +971,19 @@ func (self ISpellChecker) Get_LanguageTag() (foundation.PWSTR, error) {
 }
 
 // Check wraps the raw Check call.
-func (self ISpellChecker) Check(text string) (*globalization.IEnumSpellingError, error) {
+func (self ISpellChecker) Check(text string) (IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
 	var _value *globalization.IEnumSpellingError
 	_hr := self.Raw.Check(foundation.PWSTR(_text), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapIEnumSpellingError(_value), win32.HRESULTError(int32(_hr))
 }
 
 // Suggest wraps the raw Suggest call.
-func (self ISpellChecker) Suggest(word string) (*systemcom.IEnumString, error) {
+func (self ISpellChecker) Suggest(word string) (systemcomidiom.IEnumString, error) {
 	_word := win32.UTF16Ptr(word)
 	var _value *systemcom.IEnumString
 	_hr := self.Raw.Suggest(foundation.PWSTR(_word), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumString(_value), win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -1014,10 +1014,10 @@ func (self ISpellChecker) GetOptionValue(optionId string) (byte, error) {
 }
 
 // Get_OptionIds wraps the raw Get_OptionIds call.
-func (self ISpellChecker) Get_OptionIds() (*systemcom.IEnumString, error) {
+func (self ISpellChecker) Get_OptionIds() (systemcomidiom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	_hr := self.Raw.Get_OptionIds(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumString(_value), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
@@ -1035,9 +1035,9 @@ func (self ISpellChecker) Get_LocalizedName() (foundation.PWSTR, error) {
 }
 
 // Add_SpellCheckerChanged wraps the raw Add_SpellCheckerChanged call.
-func (self ISpellChecker) Add_SpellCheckerChanged(handler *globalization.ISpellCheckerChangedEventHandler) (uint32, error) {
+func (self ISpellChecker) Add_SpellCheckerChanged(handler ISpellCheckerChangedEventHandler) (uint32, error) {
 	var _eventCookie uint32
-	_hr := self.Raw.Add_SpellCheckerChanged(handler, &_eventCookie)
+	_hr := self.Raw.Add_SpellCheckerChanged(handler.Raw, &_eventCookie)
 	return _eventCookie, win32.HRESULTError(int32(_hr))
 }
 
@@ -1047,19 +1047,19 @@ func (self ISpellChecker) Remove_SpellCheckerChanged(eventCookie uint32) error {
 }
 
 // GetOptionDescription wraps the raw GetOptionDescription call.
-func (self ISpellChecker) GetOptionDescription(optionId string) (*globalization.IOptionDescription, error) {
+func (self ISpellChecker) GetOptionDescription(optionId string) (IOptionDescription, error) {
 	_optionId := win32.UTF16Ptr(optionId)
 	var _value *globalization.IOptionDescription
 	_hr := self.Raw.GetOptionDescription(foundation.PWSTR(_optionId), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapIOptionDescription(_value), win32.HRESULTError(int32(_hr))
 }
 
 // ComprehensiveCheck wraps the raw ComprehensiveCheck call.
-func (self ISpellChecker) ComprehensiveCheck(text string) (*globalization.IEnumSpellingError, error) {
+func (self ISpellChecker) ComprehensiveCheck(text string) (IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
 	var _value *globalization.IEnumSpellingError
 	_hr := self.Raw.ComprehensiveCheck(foundation.PWSTR(_text), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapIEnumSpellingError(_value), win32.HRESULTError(int32(_hr))
 }
 
 // ISpellChecker2 is an idiomatic wrapper over the raw COM interface Globalization.ISpellChecker2 with error-returning methods.
@@ -1091,8 +1091,8 @@ func WrapISpellCheckerChangedEventHandler(raw *globalization.ISpellCheckerChange
 }
 
 // Invoke wraps the raw Invoke call.
-func (self ISpellCheckerChangedEventHandler) Invoke(sender *globalization.ISpellChecker) error {
-	return win32.HRESULTError(int32(self.Raw.Invoke(sender)))
+func (self ISpellCheckerChangedEventHandler) Invoke(sender ISpellChecker) error {
+	return win32.HRESULTError(int32(self.Raw.Invoke(sender.Raw)))
 }
 
 // ISpellCheckerFactory is an idiomatic wrapper over the raw COM interface Globalization.ISpellCheckerFactory with error-returning methods.
@@ -1107,10 +1107,10 @@ func WrapISpellCheckerFactory(raw *globalization.ISpellCheckerFactory) ISpellChe
 }
 
 // Get_SupportedLanguages wraps the raw Get_SupportedLanguages call.
-func (self ISpellCheckerFactory) Get_SupportedLanguages() (*systemcom.IEnumString, error) {
+func (self ISpellCheckerFactory) Get_SupportedLanguages() (systemcomidiom.IEnumString, error) {
 	var _value *systemcom.IEnumString
 	_hr := self.Raw.Get_SupportedLanguages(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumString(_value), win32.HRESULTError(int32(_hr))
 }
 
 // IsSupported wraps the raw IsSupported call.
@@ -1122,11 +1122,11 @@ func (self ISpellCheckerFactory) IsSupported(languageTag string) (foundation.BOO
 }
 
 // CreateSpellChecker wraps the raw CreateSpellChecker call.
-func (self ISpellCheckerFactory) CreateSpellChecker(languageTag string) (*globalization.ISpellChecker, error) {
+func (self ISpellCheckerFactory) CreateSpellChecker(languageTag string) (ISpellChecker, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
 	var _value *globalization.ISpellChecker
 	_hr := self.Raw.CreateSpellChecker(foundation.PWSTR(_languageTag), &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapISpellChecker(_value), win32.HRESULTError(int32(_hr))
 }
 
 // ISpellingError is an idiomatic wrapper over the raw COM interface Globalization.ISpellingError with error-returning methods.

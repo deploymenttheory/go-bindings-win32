@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 	systemwinrtholographic "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/holographic"
+	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
 	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
 )
 
@@ -23,32 +24,32 @@ func WrapIHolographicCameraInterop(raw *systemwinrtholographic.IHolographicCamer
 }
 
 // CreateDirect3D12BackBufferResource wraps the raw CreateDirect3D12BackBufferResource call.
-func (self IHolographicCameraInterop) CreateDirect3D12BackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (*graphicsdirect3d12.ID3D12Resource, error) {
+func (self IHolographicCameraInterop) CreateDirect3D12BackBufferResource(pDevice graphicsdirect3d12idiom.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (graphicsdirect3d12idiom.ID3D12Resource, error) {
 	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
-	_hr := self.Raw.CreateDirect3D12BackBufferResource(pDevice, pTexture2DDesc, &_ppCreatedTexture2DResource)
-	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDirect3D12BackBufferResource(pDevice.Raw, pTexture2DDesc, &_ppCreatedTexture2DResource)
+	return graphicsdirect3d12idiom.WrapID3D12Resource(_ppCreatedTexture2DResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDirect3D12HardwareProtectedBackBufferResource wraps the raw CreateDirect3D12HardwareProtectedBackBufferResource call.
-func (self IHolographicCameraInterop) CreateDirect3D12HardwareProtectedBackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) (*graphicsdirect3d12.ID3D12Resource, error) {
+func (self IHolographicCameraInterop) CreateDirect3D12HardwareProtectedBackBufferResource(pDevice graphicsdirect3d12idiom.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession) (graphicsdirect3d12idiom.ID3D12Resource, error) {
 	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
-	_hr := self.Raw.CreateDirect3D12HardwareProtectedBackBufferResource(pDevice, pTexture2DDesc, pProtectedResourceSession, &_ppCreatedTexture2DResource)
-	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDirect3D12HardwareProtectedBackBufferResource(pDevice.Raw, pTexture2DDesc, pProtectedResourceSession.Raw, &_ppCreatedTexture2DResource)
+	return graphicsdirect3d12idiom.WrapID3D12Resource(_ppCreatedTexture2DResource), win32.HRESULTError(int32(_hr))
 }
 
 // AcquireDirect3D12BufferResource wraps the raw AcquireDirect3D12BufferResource call.
-func (self IHolographicCameraInterop) AcquireDirect3D12BufferResource(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
-	return win32.HRESULTError(int32(self.Raw.AcquireDirect3D12BufferResource(pResourceToAcquire, pCommandQueue)))
+func (self IHolographicCameraInterop) AcquireDirect3D12BufferResource(pResourceToAcquire graphicsdirect3d12idiom.ID3D12Resource, pCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue) error {
+	return win32.HRESULTError(int32(self.Raw.AcquireDirect3D12BufferResource(pResourceToAcquire.Raw, pCommandQueue.Raw)))
 }
 
 // AcquireDirect3D12BufferResourceWithTimeout wraps the raw AcquireDirect3D12BufferResourceWithTimeout call.
-func (self IHolographicCameraInterop) AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, duration uint64) error {
-	return win32.HRESULTError(int32(self.Raw.AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire, pCommandQueue, duration)))
+func (self IHolographicCameraInterop) AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire graphicsdirect3d12idiom.ID3D12Resource, pCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue, duration uint64) error {
+	return win32.HRESULTError(int32(self.Raw.AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire.Raw, pCommandQueue.Raw, duration)))
 }
 
 // UnacquireDirect3D12BufferResource wraps the raw UnacquireDirect3D12BufferResource call.
-func (self IHolographicCameraInterop) UnacquireDirect3D12BufferResource(pResourceToUnacquire *graphicsdirect3d12.ID3D12Resource) error {
-	return win32.HRESULTError(int32(self.Raw.UnacquireDirect3D12BufferResource(pResourceToUnacquire)))
+func (self IHolographicCameraInterop) UnacquireDirect3D12BufferResource(pResourceToUnacquire graphicsdirect3d12idiom.ID3D12Resource) error {
+	return win32.HRESULTError(int32(self.Raw.UnacquireDirect3D12BufferResource(pResourceToUnacquire.Raw)))
 }
 
 // IHolographicCameraRenderingParametersInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Holographic.IHolographicCameraRenderingParametersInterop with error-returning methods.
@@ -63,13 +64,13 @@ func WrapIHolographicCameraRenderingParametersInterop(raw *systemwinrtholographi
 }
 
 // CommitDirect3D12Resource wraps the raw CommitDirect3D12Resource call.
-func (self IHolographicCameraRenderingParametersInterop) CommitDirect3D12Resource(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64) error {
-	return win32.HRESULTError(int32(self.Raw.CommitDirect3D12Resource(pColorResourceToCommit, pColorResourceFence, colorResourceFenceSignalValue)))
+func (self IHolographicCameraRenderingParametersInterop) CommitDirect3D12Resource(pColorResourceToCommit graphicsdirect3d12idiom.ID3D12Resource, pColorResourceFence graphicsdirect3d12idiom.ID3D12Fence, colorResourceFenceSignalValue uint64) error {
+	return win32.HRESULTError(int32(self.Raw.CommitDirect3D12Resource(pColorResourceToCommit.Raw, pColorResourceFence.Raw, colorResourceFenceSignalValue)))
 }
 
 // CommitDirect3D12ResourceWithDepthData wraps the raw CommitDirect3D12ResourceWithDepthData call.
-func (self IHolographicCameraRenderingParametersInterop) CommitDirect3D12ResourceWithDepthData(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64, pDepthResourceToCommit *graphicsdirect3d12.ID3D12Resource, pDepthResourceFence *graphicsdirect3d12.ID3D12Fence, depthResourceFenceSignalValue uint64) error {
-	return win32.HRESULTError(int32(self.Raw.CommitDirect3D12ResourceWithDepthData(pColorResourceToCommit, pColorResourceFence, colorResourceFenceSignalValue, pDepthResourceToCommit, pDepthResourceFence, depthResourceFenceSignalValue)))
+func (self IHolographicCameraRenderingParametersInterop) CommitDirect3D12ResourceWithDepthData(pColorResourceToCommit graphicsdirect3d12idiom.ID3D12Resource, pColorResourceFence graphicsdirect3d12idiom.ID3D12Fence, colorResourceFenceSignalValue uint64, pDepthResourceToCommit graphicsdirect3d12idiom.ID3D12Resource, pDepthResourceFence graphicsdirect3d12idiom.ID3D12Fence, depthResourceFenceSignalValue uint64) error {
+	return win32.HRESULTError(int32(self.Raw.CommitDirect3D12ResourceWithDepthData(pColorResourceToCommit.Raw, pColorResourceFence.Raw, colorResourceFenceSignalValue, pDepthResourceToCommit.Raw, pDepthResourceFence.Raw, depthResourceFenceSignalValue)))
 }
 
 // IHolographicQuadLayerInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Holographic.IHolographicQuadLayerInterop with error-returning methods.
@@ -84,32 +85,32 @@ func WrapIHolographicQuadLayerInterop(raw *systemwinrtholographic.IHolographicQu
 }
 
 // CreateDirect3D12ContentBufferResource wraps the raw CreateDirect3D12ContentBufferResource call.
-func (self IHolographicQuadLayerInterop) CreateDirect3D12ContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (*graphicsdirect3d12.ID3D12Resource, error) {
+func (self IHolographicQuadLayerInterop) CreateDirect3D12ContentBufferResource(pDevice graphicsdirect3d12idiom.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (graphicsdirect3d12idiom.ID3D12Resource, error) {
 	var _ppTexture2DResource *graphicsdirect3d12.ID3D12Resource
-	_hr := self.Raw.CreateDirect3D12ContentBufferResource(pDevice, pTexture2DDesc, &_ppTexture2DResource)
-	return _ppTexture2DResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDirect3D12ContentBufferResource(pDevice.Raw, pTexture2DDesc, &_ppTexture2DResource)
+	return graphicsdirect3d12idiom.WrapID3D12Resource(_ppTexture2DResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDirect3D12HardwareProtectedContentBufferResource wraps the raw CreateDirect3D12HardwareProtectedContentBufferResource call.
-func (self IHolographicQuadLayerInterop) CreateDirect3D12HardwareProtectedContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) (*graphicsdirect3d12.ID3D12Resource, error) {
+func (self IHolographicQuadLayerInterop) CreateDirect3D12HardwareProtectedContentBufferResource(pDevice graphicsdirect3d12idiom.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession) (graphicsdirect3d12idiom.ID3D12Resource, error) {
 	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
-	_hr := self.Raw.CreateDirect3D12HardwareProtectedContentBufferResource(pDevice, pTexture2DDesc, pProtectedResourceSession, &_ppCreatedTexture2DResource)
-	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDirect3D12HardwareProtectedContentBufferResource(pDevice.Raw, pTexture2DDesc, pProtectedResourceSession.Raw, &_ppCreatedTexture2DResource)
+	return graphicsdirect3d12idiom.WrapID3D12Resource(_ppCreatedTexture2DResource), win32.HRESULTError(int32(_hr))
 }
 
 // AcquireDirect3D12BufferResource wraps the raw AcquireDirect3D12BufferResource call.
-func (self IHolographicQuadLayerInterop) AcquireDirect3D12BufferResource(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
-	return win32.HRESULTError(int32(self.Raw.AcquireDirect3D12BufferResource(pResourceToAcquire, pCommandQueue)))
+func (self IHolographicQuadLayerInterop) AcquireDirect3D12BufferResource(pResourceToAcquire graphicsdirect3d12idiom.ID3D12Resource, pCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue) error {
+	return win32.HRESULTError(int32(self.Raw.AcquireDirect3D12BufferResource(pResourceToAcquire.Raw, pCommandQueue.Raw)))
 }
 
 // AcquireDirect3D12BufferResourceWithTimeout wraps the raw AcquireDirect3D12BufferResourceWithTimeout call.
-func (self IHolographicQuadLayerInterop) AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, duration uint64) error {
-	return win32.HRESULTError(int32(self.Raw.AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire, pCommandQueue, duration)))
+func (self IHolographicQuadLayerInterop) AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire graphicsdirect3d12idiom.ID3D12Resource, pCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue, duration uint64) error {
+	return win32.HRESULTError(int32(self.Raw.AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire.Raw, pCommandQueue.Raw, duration)))
 }
 
 // UnacquireDirect3D12BufferResource wraps the raw UnacquireDirect3D12BufferResource call.
-func (self IHolographicQuadLayerInterop) UnacquireDirect3D12BufferResource(pResourceToUnacquire *graphicsdirect3d12.ID3D12Resource) error {
-	return win32.HRESULTError(int32(self.Raw.UnacquireDirect3D12BufferResource(pResourceToUnacquire)))
+func (self IHolographicQuadLayerInterop) UnacquireDirect3D12BufferResource(pResourceToUnacquire graphicsdirect3d12idiom.ID3D12Resource) error {
+	return win32.HRESULTError(int32(self.Raw.UnacquireDirect3D12BufferResource(pResourceToUnacquire.Raw)))
 }
 
 // IHolographicQuadLayerUpdateParametersInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Holographic.IHolographicQuadLayerUpdateParametersInterop with error-returning methods.
@@ -124,6 +125,6 @@ func WrapIHolographicQuadLayerUpdateParametersInterop(raw *systemwinrtholographi
 }
 
 // CommitDirect3D12Resource wraps the raw CommitDirect3D12Resource call.
-func (self IHolographicQuadLayerUpdateParametersInterop) CommitDirect3D12Resource(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64) error {
-	return win32.HRESULTError(int32(self.Raw.CommitDirect3D12Resource(pColorResourceToCommit, pColorResourceFence, colorResourceFenceSignalValue)))
+func (self IHolographicQuadLayerUpdateParametersInterop) CommitDirect3D12Resource(pColorResourceToCommit graphicsdirect3d12idiom.ID3D12Resource, pColorResourceFence graphicsdirect3d12idiom.ID3D12Fence, colorResourceFenceSignalValue uint64) error {
+	return win32.HRESULTError(int32(self.Raw.CommitDirect3D12Resource(pColorResourceToCommit.Raw, pColorResourceFence.Raw, colorResourceFenceSignalValue)))
 }

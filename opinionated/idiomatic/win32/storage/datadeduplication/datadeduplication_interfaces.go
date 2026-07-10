@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	storagedatadeduplication "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/datadeduplication"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -24,8 +23,8 @@ func WrapIDedupBackupSupport(raw *storagedatadeduplication.IDedupBackupSupport) 
 }
 
 // RestoreFiles wraps the raw RestoreFiles call.
-func (self IDedupBackupSupport) RestoreFiles(NumberOfFiles uint32, FileFullPaths *foundation.BSTR, Store *storagedatadeduplication.IDedupReadFileCallback, Flags uint32, FileResults *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.RestoreFiles(NumberOfFiles, FileFullPaths, Store, Flags, FileResults)))
+func (self IDedupBackupSupport) RestoreFiles(NumberOfFiles uint32, FileFullPaths *foundation.BSTR, Store IDedupReadFileCallback, Flags uint32, FileResults *foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.RestoreFiles(NumberOfFiles, FileFullPaths, Store.Raw, Flags, FileResults)))
 }
 
 // IDedupChunkLibrary is an idiomatic wrapper over the raw COM interface Storage.DataDeduplication.IDedupChunkLibrary with error-returning methods.
@@ -76,8 +75,8 @@ func (self IDedupDataPort) InsertChunks(ChunkCount uint32, pChunkMetadata *stora
 }
 
 // InsertChunksWithStream wraps the raw InsertChunksWithStream call.
-func (self IDedupDataPort) InsertChunksWithStream(ChunkCount uint32, pChunkMetadata *storagedatadeduplication.DedupChunk, DataByteCount uint32, pChunkDataStream *systemcom.IStream, pRequestId *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.InsertChunksWithStream(ChunkCount, pChunkMetadata, DataByteCount, pChunkDataStream, pRequestId)))
+func (self IDedupDataPort) InsertChunksWithStream(ChunkCount uint32, pChunkMetadata *storagedatadeduplication.DedupChunk, DataByteCount uint32, pChunkDataStream systemcomidiom.IStream, pRequestId *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.InsertChunksWithStream(ChunkCount, pChunkMetadata, DataByteCount, pChunkDataStream.Raw, pRequestId)))
 }
 
 // CommitStreams wraps the raw CommitStreams call.
@@ -86,8 +85,8 @@ func (self IDedupDataPort) CommitStreams(StreamCount uint32, pStreams *storageda
 }
 
 // CommitStreamsWithStream wraps the raw CommitStreamsWithStream call.
-func (self IDedupDataPort) CommitStreamsWithStream(StreamCount uint32, pStreams *storagedatadeduplication.DedupStream, EntryCount uint32, pEntriesStream *systemcom.IStream, pRequestId *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.CommitStreamsWithStream(StreamCount, pStreams, EntryCount, pEntriesStream, pRequestId)))
+func (self IDedupDataPort) CommitStreamsWithStream(StreamCount uint32, pStreams *storagedatadeduplication.DedupStream, EntryCount uint32, pEntriesStream systemcomidiom.IStream, pRequestId *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.CommitStreamsWithStream(StreamCount, pStreams, EntryCount, pEntriesStream.Raw, pRequestId)))
 }
 
 // GetStreams wraps the raw GetStreams call.

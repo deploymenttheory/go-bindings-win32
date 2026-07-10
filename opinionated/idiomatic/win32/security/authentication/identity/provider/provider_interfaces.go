@@ -13,6 +13,7 @@ import (
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	uishellpropertiessystemidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/ui/shell/propertiessystem"
 )
 
 // AsyncIAssociatedIdentityProvider is an idiomatic wrapper over the raw COM interface Security.Authentication.Identity.Provider.AsyncIAssociatedIdentityProvider with error-returning methods.
@@ -100,8 +101,8 @@ func (self AsyncIConnectedIdentityProvider) Finish_IsConnected(Connected *founda
 }
 
 // Begin_GetUrl wraps the raw Begin_GetUrl call.
-func (self AsyncIConnectedIdentityProvider) Begin_GetUrl(Identifier securityauthenticationidentityprovider.IDENTITY_URL, Context *systemcom.IBindCtx) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_GetUrl(Identifier, Context)))
+func (self AsyncIConnectedIdentityProvider) Begin_GetUrl(Identifier securityauthenticationidentityprovider.IDENTITY_URL, Context systemcomidiom.IBindCtx) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_GetUrl(Identifier, Context.Raw)))
 }
 
 // Finish_GetUrl wraps the raw Finish_GetUrl call.
@@ -205,8 +206,8 @@ func (self AsyncIIdentityProvider) Finish_Create(ppPropertyStore **uishellproper
 }
 
 // Begin_Import wraps the raw Begin_Import call.
-func (self AsyncIIdentityProvider) Begin_Import(pPropertyStore *uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_Import(pPropertyStore)))
+func (self AsyncIIdentityProvider) Begin_Import(pPropertyStore uishellpropertiessystemidiom.IPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_Import(pPropertyStore.Raw)))
 }
 
 // Finish_Import wraps the raw Finish_Import call.
@@ -247,8 +248,8 @@ func (self AsyncIIdentityProvider) Finish_GetProviderPropertyStore(ppPropertySto
 }
 
 // Begin_Advise wraps the raw Begin_Advise call.
-func (self AsyncIIdentityProvider) Begin_Advise(pIdentityAdvise *securityauthenticationidentityprovider.IIdentityAdvise, dwIdentityUpdateEvents uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_Advise(pIdentityAdvise, dwIdentityUpdateEvents)))
+func (self AsyncIIdentityProvider) Begin_Advise(pIdentityAdvise IIdentityAdvise, dwIdentityUpdateEvents uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_Advise(pIdentityAdvise.Raw, dwIdentityUpdateEvents)))
 }
 
 // Finish_Advise wraps the raw Finish_Advise call.
@@ -428,8 +429,8 @@ func (self IConnectedIdentityProvider) IsConnected(Connected *foundation.BOOL) e
 }
 
 // GetUrl wraps the raw GetUrl call.
-func (self IConnectedIdentityProvider) GetUrl(Identifier securityauthenticationidentityprovider.IDENTITY_URL, Context *systemcom.IBindCtx, PostData *systemvariant.VARIANT, Url *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetUrl(Identifier, Context, PostData, Url)))
+func (self IConnectedIdentityProvider) GetUrl(Identifier securityauthenticationidentityprovider.IDENTITY_URL, Context systemcomidiom.IBindCtx, PostData *systemvariant.VARIANT, Url *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.GetUrl(Identifier, Context.Raw, PostData, Url)))
 }
 
 // GetAccountState wraps the raw GetAccountState call.
@@ -498,8 +499,8 @@ func (self IIdentityProvider) Create(lpszUserName string, ppPropertyStore **uish
 }
 
 // Import wraps the raw Import call.
-func (self IIdentityProvider) Import(pPropertyStore *uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.Import(pPropertyStore)))
+func (self IIdentityProvider) Import(pPropertyStore uishellpropertiessystemidiom.IPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.Import(pPropertyStore.Raw)))
 }
 
 // Delete wraps the raw Delete call.
@@ -520,8 +521,8 @@ func (self IIdentityProvider) GetProviderPropertyStore(ppPropertyStore **uishell
 }
 
 // Advise wraps the raw Advise call.
-func (self IIdentityProvider) Advise(pIdentityAdvise *securityauthenticationidentityprovider.IIdentityAdvise, dwIdentityUpdateEvents uint32, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pIdentityAdvise, dwIdentityUpdateEvents, pdwCookie)))
+func (self IIdentityProvider) Advise(pIdentityAdvise IIdentityAdvise, dwIdentityUpdateEvents uint32, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pIdentityAdvise.Raw, dwIdentityUpdateEvents, pdwCookie)))
 }
 
 // UnAdvise wraps the raw UnAdvise call.

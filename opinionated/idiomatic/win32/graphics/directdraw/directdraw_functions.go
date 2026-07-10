@@ -9,25 +9,25 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	graphicsdirectdraw "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directdraw"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // DirectDrawCreate wraps the raw DirectDrawCreate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreate
-func DirectDrawCreate(lpGUID *win32.GUID, lplpDD **graphicsdirectdraw.IDirectDraw, pUnkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(graphicsdirectdraw.DirectDrawCreate(lpGUID, lplpDD, pUnkOuter)))
+func DirectDrawCreate(lpGUID *win32.GUID, lplpDD **graphicsdirectdraw.IDirectDraw, pUnkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(graphicsdirectdraw.DirectDrawCreate(lpGUID, lplpDD, pUnkOuter.Raw)))
 }
 
 // DirectDrawCreateClipper wraps the raw DirectDrawCreateClipper call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreateclipper
-func DirectDrawCreateClipper(dwFlags uint32, lplpDDClipper **graphicsdirectdraw.IDirectDrawClipper, pUnkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(graphicsdirectdraw.DirectDrawCreateClipper(dwFlags, lplpDDClipper, pUnkOuter)))
+func DirectDrawCreateClipper(dwFlags uint32, lplpDDClipper **graphicsdirectdraw.IDirectDrawClipper, pUnkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(graphicsdirectdraw.DirectDrawCreateClipper(dwFlags, lplpDDClipper, pUnkOuter.Raw)))
 }
 
 // DirectDrawCreateEx wraps the raw DirectDrawCreateEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreateex
-func DirectDrawCreateEx(lpGuid *win32.GUID, lplpDD *unsafe.Pointer, iid *win32.GUID, pUnkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(graphicsdirectdraw.DirectDrawCreateEx(lpGuid, lplpDD, iid, pUnkOuter)))
+func DirectDrawCreateEx(lpGuid *win32.GUID, lplpDD *unsafe.Pointer, iid *win32.GUID, pUnkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(graphicsdirectdraw.DirectDrawCreateEx(lpGuid, lplpDD, iid, pUnkOuter.Raw)))
 }
 
 // DirectDrawEnumerate wraps the raw DirectDrawEnumerateW call with idiomatic Go types.

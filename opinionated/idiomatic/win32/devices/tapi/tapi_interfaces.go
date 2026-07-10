@@ -15,6 +15,7 @@ import (
 	systemaddressbook "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/addressbook"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
+	systemaddressbookidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/addressbook"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -76,10 +77,10 @@ func (self IEnumAddress) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumAddress) Clone() (*devicestapi.IEnumAddress, error) {
+func (self IEnumAddress) Clone() (IEnumAddress, error) {
 	var _ppEnum *devicestapi.IEnumAddress
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumAddress(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumAgent is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumAgent with error-returning methods.
@@ -202,10 +203,10 @@ func (self IEnumBstr) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumBstr) Clone() (*devicestapi.IEnumBstr, error) {
+func (self IEnumBstr) Clone() (IEnumBstr, error) {
 	var _ppEnum *devicestapi.IEnumBstr
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumBstr(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumCall is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumCall with error-returning methods.
@@ -235,10 +236,10 @@ func (self IEnumCall) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumCall) Clone() (*devicestapi.IEnumCall, error) {
+func (self IEnumCall) Clone() (IEnumCall, error) {
 	var _ppEnum *devicestapi.IEnumCall
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumCall(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumCallHub is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumCallHub with error-returning methods.
@@ -268,10 +269,10 @@ func (self IEnumCallHub) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumCallHub) Clone() (*devicestapi.IEnumCallHub, error) {
+func (self IEnumCallHub) Clone() (IEnumCallHub, error) {
 	var _ppEnum *devicestapi.IEnumCallHub
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumCallHub(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumCallingCard is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumCallingCard with error-returning methods.
@@ -301,10 +302,10 @@ func (self IEnumCallingCard) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumCallingCard) Clone() (*devicestapi.IEnumCallingCard, error) {
+func (self IEnumCallingCard) Clone() (IEnumCallingCard, error) {
 	var _ppEnum *devicestapi.IEnumCallingCard
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumCallingCard(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumDialableAddrs is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumDialableAddrs with error-returning methods.
@@ -334,10 +335,10 @@ func (self IEnumDialableAddrs) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumDialableAddrs) Clone() (*devicestapi.IEnumDialableAddrs, error) {
+func (self IEnumDialableAddrs) Clone() (IEnumDialableAddrs, error) {
 	var _ppEnum *devicestapi.IEnumDialableAddrs
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumDialableAddrs(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumDirectory is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumDirectory with error-returning methods.
@@ -367,10 +368,10 @@ func (self IEnumDirectory) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumDirectory) Clone() (*devicestapi.IEnumDirectory, error) {
+func (self IEnumDirectory) Clone() (IEnumDirectory, error) {
 	var _ppEnum *devicestapi.IEnumDirectory
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumDirectory(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumDirectoryObject is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumDirectoryObject with error-returning methods.
@@ -400,10 +401,10 @@ func (self IEnumDirectoryObject) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumDirectoryObject) Clone() (*devicestapi.IEnumDirectoryObject, error) {
+func (self IEnumDirectoryObject) Clone() (IEnumDirectoryObject, error) {
 	var _ppEnum *devicestapi.IEnumDirectoryObject
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumDirectoryObject(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumLocation is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumLocation with error-returning methods.
@@ -433,10 +434,10 @@ func (self IEnumLocation) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumLocation) Clone() (*devicestapi.IEnumLocation, error) {
+func (self IEnumLocation) Clone() (IEnumLocation, error) {
 	var _ppEnum *devicestapi.IEnumLocation
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumLocation(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumMcastScope is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumMcastScope with error-returning methods.
@@ -497,10 +498,10 @@ func (self IEnumPhone) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumPhone) Clone() (*devicestapi.IEnumPhone, error) {
+func (self IEnumPhone) Clone() (IEnumPhone, error) {
 	var _ppEnum *devicestapi.IEnumPhone
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumPhone(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumPluggableSuperclassInfo is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumPluggableSuperclassInfo with error-returning methods.
@@ -530,10 +531,10 @@ func (self IEnumPluggableSuperclassInfo) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumPluggableSuperclassInfo) Clone() (*devicestapi.IEnumPluggableSuperclassInfo, error) {
+func (self IEnumPluggableSuperclassInfo) Clone() (IEnumPluggableSuperclassInfo, error) {
 	var _ppEnum *devicestapi.IEnumPluggableSuperclassInfo
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumPluggableSuperclassInfo(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumPluggableTerminalClassInfo is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumPluggableTerminalClassInfo with error-returning methods.
@@ -563,10 +564,10 @@ func (self IEnumPluggableTerminalClassInfo) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumPluggableTerminalClassInfo) Clone() (*devicestapi.IEnumPluggableTerminalClassInfo, error) {
+func (self IEnumPluggableTerminalClassInfo) Clone() (IEnumPluggableTerminalClassInfo, error) {
 	var _ppEnum *devicestapi.IEnumPluggableTerminalClassInfo
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumPluggableTerminalClassInfo(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumQueue is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumQueue with error-returning methods.
@@ -627,10 +628,10 @@ func (self IEnumStream) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumStream) Clone() (*devicestapi.IEnumStream, error) {
+func (self IEnumStream) Clone() (IEnumStream, error) {
 	var _ppEnum *devicestapi.IEnumStream
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumStream(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumSubStream is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumSubStream with error-returning methods.
@@ -660,10 +661,10 @@ func (self IEnumSubStream) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumSubStream) Clone() (*devicestapi.IEnumSubStream, error) {
+func (self IEnumSubStream) Clone() (IEnumSubStream, error) {
 	var _ppEnum *devicestapi.IEnumSubStream
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumSubStream(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumTerminal is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumTerminal with error-returning methods.
@@ -693,10 +694,10 @@ func (self IEnumTerminal) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumTerminal) Clone() (*devicestapi.IEnumTerminal, error) {
+func (self IEnumTerminal) Clone() (IEnumTerminal, error) {
 	var _ppEnum *devicestapi.IEnumTerminal
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumTerminal(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumTerminalClass is an idiomatic wrapper over the raw COM interface Devices.Tapi.IEnumTerminalClass with error-returning methods.
@@ -726,10 +727,10 @@ func (self IEnumTerminalClass) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumTerminalClass) Clone() (*devicestapi.IEnumTerminalClass, error) {
+func (self IEnumTerminalClass) Clone() (IEnumTerminalClass, error) {
 	var _ppEnum *devicestapi.IEnumTerminalClass
 	_hr := self.Raw.Clone(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumTerminalClass(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IMcastAddressAllocation is an idiomatic wrapper over the raw COM interface Devices.Tapi.IMcastAddressAllocation with error-returning methods.
@@ -754,13 +755,13 @@ func (self IMcastAddressAllocation) EnumerateScopes(ppEnumMcastScope **devicesta
 }
 
 // RenewAddress wraps the raw RenewAddress call.
-func (self IMcastAddressAllocation) RenewAddress(lReserved int32, pRenewRequest *devicestapi.IMcastLeaseInfo, ppRenewResponse **devicestapi.IMcastLeaseInfo) error {
-	return win32.HRESULTError(int32(self.Raw.RenewAddress(lReserved, pRenewRequest, ppRenewResponse)))
+func (self IMcastAddressAllocation) RenewAddress(lReserved int32, pRenewRequest IMcastLeaseInfo, ppRenewResponse **devicestapi.IMcastLeaseInfo) error {
+	return win32.HRESULTError(int32(self.Raw.RenewAddress(lReserved, pRenewRequest.Raw, ppRenewResponse)))
 }
 
 // ReleaseAddress wraps the raw ReleaseAddress call.
-func (self IMcastAddressAllocation) ReleaseAddress(pReleaseRequest *devicestapi.IMcastLeaseInfo) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseAddress(pReleaseRequest)))
+func (self IMcastAddressAllocation) ReleaseAddress(pReleaseRequest IMcastLeaseInfo) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseAddress(pReleaseRequest.Raw)))
 }
 
 // IMcastLeaseInfo is an idiomatic wrapper over the raw COM interface Devices.Tapi.IMcastLeaseInfo with error-returning methods.
@@ -930,17 +931,17 @@ func WrapITASRTerminalEvent(raw *devicestapi.ITASRTerminalEvent) ITASRTerminalEv
 }
 
 // Get_Terminal wraps the raw Get_Terminal call.
-func (self ITASRTerminalEvent) Get_Terminal() (*devicestapi.ITTerminal, error) {
+func (self ITASRTerminalEvent) Get_Terminal() (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.Get_Terminal(&_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITASRTerminalEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITASRTerminalEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Error wraps the raw Get_Error call.
@@ -983,17 +984,17 @@ func (self ITAddress) Get_ServiceProviderName() (foundation.BSTR, error) {
 }
 
 // Get_TAPIObject wraps the raw Get_TAPIObject call.
-func (self ITAddress) Get_TAPIObject() (*devicestapi.ITTAPI, error) {
+func (self ITAddress) Get_TAPIObject() (ITTAPI, error) {
 	var _ppTapiObject *devicestapi.ITTAPI
 	_hr := self.Raw.Get_TAPIObject(&_ppTapiObject)
-	return _ppTapiObject, win32.HRESULTError(int32(_hr))
+	return WrapITTAPI(_ppTapiObject), win32.HRESULTError(int32(_hr))
 }
 
 // CreateCall wraps the raw CreateCall call.
-func (self ITAddress) CreateCall(pDestAddress foundation.BSTR, lAddressType int32, lMediaTypes int32) (*devicestapi.ITBasicCallControl, error) {
+func (self ITAddress) CreateCall(pDestAddress foundation.BSTR, lAddressType int32, lMediaTypes int32) (ITBasicCallControl, error) {
 	var _ppCall *devicestapi.ITBasicCallControl
 	_hr := self.Raw.CreateCall(pDestAddress, lAddressType, lMediaTypes, &_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITBasicCallControl(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Calls wraps the raw Get_Calls call.
@@ -1004,10 +1005,10 @@ func (self ITAddress) Get_Calls() (systemvariant.VARIANT, error) {
 }
 
 // EnumerateCalls wraps the raw EnumerateCalls call.
-func (self ITAddress) EnumerateCalls() (*devicestapi.IEnumCall, error) {
+func (self ITAddress) EnumerateCalls() (IEnumCall, error) {
 	var _ppCallEnum *devicestapi.IEnumCall
 	_hr := self.Raw.EnumerateCalls(&_ppCallEnum)
-	return _ppCallEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumCall(_ppCallEnum), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DialableAddress wraps the raw Get_DialableAddress call.
@@ -1018,22 +1019,22 @@ func (self ITAddress) Get_DialableAddress() (foundation.BSTR, error) {
 }
 
 // CreateForwardInfoObject wraps the raw CreateForwardInfoObject call.
-func (self ITAddress) CreateForwardInfoObject() (*devicestapi.ITForwardInformation, error) {
+func (self ITAddress) CreateForwardInfoObject() (ITForwardInformation, error) {
 	var _ppForwardInfo *devicestapi.ITForwardInformation
 	_hr := self.Raw.CreateForwardInfoObject(&_ppForwardInfo)
-	return _ppForwardInfo, win32.HRESULTError(int32(_hr))
+	return WrapITForwardInformation(_ppForwardInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Forward wraps the raw Forward call.
-func (self ITAddress) Forward(pForwardInfo *devicestapi.ITForwardInformation, pCall *devicestapi.ITBasicCallControl) error {
-	return win32.HRESULTError(int32(self.Raw.Forward(pForwardInfo, pCall)))
+func (self ITAddress) Forward(pForwardInfo ITForwardInformation, pCall ITBasicCallControl) error {
+	return win32.HRESULTError(int32(self.Raw.Forward(pForwardInfo.Raw, pCall.Raw)))
 }
 
 // Get_CurrentForwardInfo wraps the raw Get_CurrentForwardInfo call.
-func (self ITAddress) Get_CurrentForwardInfo() (*devicestapi.ITForwardInformation, error) {
+func (self ITAddress) Get_CurrentForwardInfo() (ITForwardInformation, error) {
 	var _ppForwardInfo *devicestapi.ITForwardInformation
 	_hr := self.Raw.Get_CurrentForwardInfo(&_ppForwardInfo)
-	return _ppForwardInfo, win32.HRESULTError(int32(_hr))
+	return WrapITForwardInformation(_ppForwardInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Put_MessageWaiting wraps the raw Put_MessageWaiting call.
@@ -1079,17 +1080,17 @@ func (self ITAddress2) Get_Phones() (systemvariant.VARIANT, error) {
 }
 
 // EnumeratePhones wraps the raw EnumeratePhones call.
-func (self ITAddress2) EnumeratePhones() (*devicestapi.IEnumPhone, error) {
+func (self ITAddress2) EnumeratePhones() (IEnumPhone, error) {
 	var _ppEnumPhone *devicestapi.IEnumPhone
 	_hr := self.Raw.EnumeratePhones(&_ppEnumPhone)
-	return _ppEnumPhone, win32.HRESULTError(int32(_hr))
+	return WrapIEnumPhone(_ppEnumPhone), win32.HRESULTError(int32(_hr))
 }
 
 // GetPhoneFromTerminal wraps the raw GetPhoneFromTerminal call.
-func (self ITAddress2) GetPhoneFromTerminal(pTerminal *devicestapi.ITTerminal) (*devicestapi.ITPhone, error) {
+func (self ITAddress2) GetPhoneFromTerminal(pTerminal ITTerminal) (ITPhone, error) {
 	var _ppPhone *devicestapi.ITPhone
-	_hr := self.Raw.GetPhoneFromTerminal(pTerminal, &_ppPhone)
-	return _ppPhone, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetPhoneFromTerminal(pTerminal.Raw, &_ppPhone)
+	return WrapITPhone(_ppPhone), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PreferredPhones wraps the raw Get_PreferredPhones call.
@@ -1100,10 +1101,10 @@ func (self ITAddress2) Get_PreferredPhones() (systemvariant.VARIANT, error) {
 }
 
 // EnumeratePreferredPhones wraps the raw EnumeratePreferredPhones call.
-func (self ITAddress2) EnumeratePreferredPhones() (*devicestapi.IEnumPhone, error) {
+func (self ITAddress2) EnumeratePreferredPhones() (IEnumPhone, error) {
 	var _ppEnumPhone *devicestapi.IEnumPhone
 	_hr := self.Raw.EnumeratePreferredPhones(&_ppEnumPhone)
-	return _ppEnumPhone, win32.HRESULTError(int32(_hr))
+	return WrapIEnumPhone(_ppEnumPhone), win32.HRESULTError(int32(_hr))
 }
 
 // Get_EventFilter wraps the raw Get_EventFilter call.
@@ -1119,8 +1120,8 @@ func (self ITAddress2) Put_EventFilter(TapiEvent devicestapi.TAPI_EVENT, lSubEve
 }
 
 // DeviceSpecific wraps the raw DeviceSpecific call.
-func (self ITAddress2) DeviceSpecific(pCall *devicestapi.ITCallInfo, pParams *byte, dwSize uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DeviceSpecific(pCall, pParams, dwSize)))
+func (self ITAddress2) DeviceSpecific(pCall ITCallInfo, pParams *byte, dwSize uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DeviceSpecific(pCall.Raw, pParams, dwSize)))
 }
 
 // NegotiateExtVersion wraps the raw NegotiateExtVersion call.
@@ -1163,10 +1164,10 @@ func (self ITAddressCapabilities) Get_CallTreatments() (systemvariant.VARIANT, e
 }
 
 // EnumerateCallTreatments wraps the raw EnumerateCallTreatments call.
-func (self ITAddressCapabilities) EnumerateCallTreatments() (*devicestapi.IEnumBstr, error) {
+func (self ITAddressCapabilities) EnumerateCallTreatments() (IEnumBstr, error) {
 	var _ppEnumCallTreatment *devicestapi.IEnumBstr
 	_hr := self.Raw.EnumerateCallTreatments(&_ppEnumCallTreatment)
-	return _ppEnumCallTreatment, win32.HRESULTError(int32(_hr))
+	return WrapIEnumBstr(_ppEnumCallTreatment), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CompletionMessages wraps the raw Get_CompletionMessages call.
@@ -1177,10 +1178,10 @@ func (self ITAddressCapabilities) Get_CompletionMessages() (systemvariant.VARIAN
 }
 
 // EnumerateCompletionMessages wraps the raw EnumerateCompletionMessages call.
-func (self ITAddressCapabilities) EnumerateCompletionMessages() (*devicestapi.IEnumBstr, error) {
+func (self ITAddressCapabilities) EnumerateCompletionMessages() (IEnumBstr, error) {
 	var _ppEnumCompletionMessage *devicestapi.IEnumBstr
 	_hr := self.Raw.EnumerateCompletionMessages(&_ppEnumCompletionMessage)
-	return _ppEnumCompletionMessage, win32.HRESULTError(int32(_hr))
+	return WrapIEnumBstr(_ppEnumCompletionMessage), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DeviceClasses wraps the raw Get_DeviceClasses call.
@@ -1191,10 +1192,10 @@ func (self ITAddressCapabilities) Get_DeviceClasses() (systemvariant.VARIANT, er
 }
 
 // EnumerateDeviceClasses wraps the raw EnumerateDeviceClasses call.
-func (self ITAddressCapabilities) EnumerateDeviceClasses() (*devicestapi.IEnumBstr, error) {
+func (self ITAddressCapabilities) EnumerateDeviceClasses() (IEnumBstr, error) {
 	var _ppEnumDeviceClass *devicestapi.IEnumBstr
 	_hr := self.Raw.EnumerateDeviceClasses(&_ppEnumDeviceClass)
-	return _ppEnumDeviceClass, win32.HRESULTError(int32(_hr))
+	return WrapIEnumBstr(_ppEnumDeviceClass), win32.HRESULTError(int32(_hr))
 }
 
 // ITAddressDeviceSpecificEvent is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITAddressDeviceSpecificEvent with error-returning methods.
@@ -1209,17 +1210,17 @@ func WrapITAddressDeviceSpecificEvent(raw *devicestapi.ITAddressDeviceSpecificEv
 }
 
 // Get_Address wraps the raw Get_Address call.
-func (self ITAddressDeviceSpecificEvent) Get_Address() (*devicestapi.ITAddress, error) {
+func (self ITAddressDeviceSpecificEvent) Get_Address() (ITAddress, error) {
 	var _ppAddress *devicestapi.ITAddress
 	_hr := self.Raw.Get_Address(&_ppAddress)
-	return _ppAddress, win32.HRESULTError(int32(_hr))
+	return WrapITAddress(_ppAddress), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITAddressDeviceSpecificEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITAddressDeviceSpecificEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_lParam1 wraps the raw Get_lParam1 call.
@@ -1255,10 +1256,10 @@ func WrapITAddressEvent(raw *devicestapi.ITAddressEvent) ITAddressEvent {
 }
 
 // Get_Address wraps the raw Get_Address call.
-func (self ITAddressEvent) Get_Address() (*devicestapi.ITAddress, error) {
+func (self ITAddressEvent) Get_Address() (ITAddress, error) {
 	var _ppAddress *devicestapi.ITAddress
 	_hr := self.Raw.Get_Address(&_ppAddress)
-	return _ppAddress, win32.HRESULTError(int32(_hr))
+	return WrapITAddress(_ppAddress), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Event wraps the raw Get_Event call.
@@ -1269,10 +1270,10 @@ func (self ITAddressEvent) Get_Event() (devicestapi.ADDRESS_EVENT, error) {
 }
 
 // Get_Terminal wraps the raw Get_Terminal call.
-func (self ITAddressEvent) Get_Terminal() (*devicestapi.ITTerminal, error) {
+func (self ITAddressEvent) Get_Terminal() (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.Get_Terminal(&_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // ITAddressTranslation is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITAddressTranslation with error-returning methods.
@@ -1287,10 +1288,10 @@ func WrapITAddressTranslation(raw *devicestapi.ITAddressTranslation) ITAddressTr
 }
 
 // TranslateAddress wraps the raw TranslateAddress call.
-func (self ITAddressTranslation) TranslateAddress(pAddressToTranslate foundation.BSTR, lCard int32, lTranslateOptions int32) (*devicestapi.ITAddressTranslationInfo, error) {
+func (self ITAddressTranslation) TranslateAddress(pAddressToTranslate foundation.BSTR, lCard int32, lTranslateOptions int32) (ITAddressTranslationInfo, error) {
 	var _ppTranslated *devicestapi.ITAddressTranslationInfo
 	_hr := self.Raw.TranslateAddress(pAddressToTranslate, lCard, lTranslateOptions, &_ppTranslated)
-	return _ppTranslated, win32.HRESULTError(int32(_hr))
+	return WrapITAddressTranslationInfo(_ppTranslated), win32.HRESULTError(int32(_hr))
 }
 
 // TranslateDialog wraps the raw TranslateDialog call.
@@ -1299,10 +1300,10 @@ func (self ITAddressTranslation) TranslateDialog(hwndOwner uintptr, pAddressIn f
 }
 
 // EnumerateLocations wraps the raw EnumerateLocations call.
-func (self ITAddressTranslation) EnumerateLocations() (*devicestapi.IEnumLocation, error) {
+func (self ITAddressTranslation) EnumerateLocations() (IEnumLocation, error) {
 	var _ppEnumLocation *devicestapi.IEnumLocation
 	_hr := self.Raw.EnumerateLocations(&_ppEnumLocation)
-	return _ppEnumLocation, win32.HRESULTError(int32(_hr))
+	return WrapIEnumLocation(_ppEnumLocation), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Locations wraps the raw Get_Locations call.
@@ -1313,10 +1314,10 @@ func (self ITAddressTranslation) Get_Locations() (systemvariant.VARIANT, error) 
 }
 
 // EnumerateCallingCards wraps the raw EnumerateCallingCards call.
-func (self ITAddressTranslation) EnumerateCallingCards() (*devicestapi.IEnumCallingCard, error) {
+func (self ITAddressTranslation) EnumerateCallingCards() (IEnumCallingCard, error) {
 	var _ppEnumCallingCard *devicestapi.IEnumCallingCard
 	_hr := self.Raw.EnumerateCallingCards(&_ppEnumCallingCard)
-	return _ppEnumCallingCard, win32.HRESULTError(int32(_hr))
+	return WrapIEnumCallingCard(_ppEnumCallingCard), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CallingCards wraps the raw Get_CallingCards call.
@@ -1389,13 +1390,13 @@ func (self ITAgent) EnumerateAgentSessions(ppEnumAgentSession **devicestapi.IEnu
 }
 
 // CreateSession wraps the raw CreateSession call.
-func (self ITAgent) CreateSession(pACDGroup *devicestapi.ITACDGroup, pAddress *devicestapi.ITAddress, ppAgentSession **devicestapi.ITAgentSession) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSession(pACDGroup, pAddress, ppAgentSession)))
+func (self ITAgent) CreateSession(pACDGroup ITACDGroup, pAddress ITAddress, ppAgentSession **devicestapi.ITAgentSession) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSession(pACDGroup.Raw, pAddress.Raw, ppAgentSession)))
 }
 
 // CreateSessionWithPIN wraps the raw CreateSessionWithPIN call.
-func (self ITAgent) CreateSessionWithPIN(pACDGroup *devicestapi.ITACDGroup, pAddress *devicestapi.ITAddress, pPIN foundation.BSTR, ppAgentSession **devicestapi.ITAgentSession) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSessionWithPIN(pACDGroup, pAddress, pPIN, ppAgentSession)))
+func (self ITAgent) CreateSessionWithPIN(pACDGroup ITACDGroup, pAddress ITAddress, pPIN foundation.BSTR, ppAgentSession **devicestapi.ITAgentSession) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSessionWithPIN(pACDGroup.Raw, pAddress.Raw, pPIN, ppAgentSession)))
 }
 
 // Get_ID wraps the raw Get_ID call.
@@ -1893,20 +1894,20 @@ func (self ITAutomatedPhoneControl) Get_AutoVolumeControlRepeatPeriod() (int32, 
 }
 
 // SelectCall wraps the raw SelectCall call.
-func (self ITAutomatedPhoneControl) SelectCall(pCall *devicestapi.ITCallInfo, fSelectDefaultTerminals foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.SelectCall(pCall, fSelectDefaultTerminals)))
+func (self ITAutomatedPhoneControl) SelectCall(pCall ITCallInfo, fSelectDefaultTerminals foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.SelectCall(pCall.Raw, fSelectDefaultTerminals)))
 }
 
 // UnselectCall wraps the raw UnselectCall call.
-func (self ITAutomatedPhoneControl) UnselectCall(pCall *devicestapi.ITCallInfo) error {
-	return win32.HRESULTError(int32(self.Raw.UnselectCall(pCall)))
+func (self ITAutomatedPhoneControl) UnselectCall(pCall ITCallInfo) error {
+	return win32.HRESULTError(int32(self.Raw.UnselectCall(pCall.Raw)))
 }
 
 // EnumerateSelectedCalls wraps the raw EnumerateSelectedCalls call.
-func (self ITAutomatedPhoneControl) EnumerateSelectedCalls() (*devicestapi.IEnumCall, error) {
+func (self ITAutomatedPhoneControl) EnumerateSelectedCalls() (IEnumCall, error) {
 	var _ppCallEnum *devicestapi.IEnumCall
 	_hr := self.Raw.EnumerateSelectedCalls(&_ppCallEnum)
-	return _ppCallEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumCall(_ppCallEnum), win32.HRESULTError(int32(_hr))
 }
 
 // Get_SelectedCalls wraps the raw Get_SelectedCalls call.
@@ -1993,13 +1994,13 @@ func (self ITBasicCallControl) HandoffIndirect(lMediaType int32) error {
 }
 
 // Conference wraps the raw Conference call.
-func (self ITBasicCallControl) Conference(pCall *devicestapi.ITBasicCallControl, fSync foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Conference(pCall, fSync)))
+func (self ITBasicCallControl) Conference(pCall ITBasicCallControl, fSync foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Conference(pCall.Raw, fSync)))
 }
 
 // Transfer wraps the raw Transfer call.
-func (self ITBasicCallControl) Transfer(pCall *devicestapi.ITBasicCallControl, fSync foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Transfer(pCall, fSync)))
+func (self ITBasicCallControl) Transfer(pCall ITBasicCallControl, fSync foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Transfer(pCall.Raw, fSync)))
 }
 
 // BlindTransfer wraps the raw BlindTransfer call.
@@ -2008,8 +2009,8 @@ func (self ITBasicCallControl) BlindTransfer(pDestAddress foundation.BSTR) error
 }
 
 // SwapHold wraps the raw SwapHold call.
-func (self ITBasicCallControl) SwapHold(pCall *devicestapi.ITBasicCallControl) error {
-	return win32.HRESULTError(int32(self.Raw.SwapHold(pCall)))
+func (self ITBasicCallControl) SwapHold(pCall ITBasicCallControl) error {
+	return win32.HRESULTError(int32(self.Raw.SwapHold(pCall.Raw)))
 }
 
 // ParkDirect wraps the raw ParkDirect call.
@@ -2066,20 +2067,20 @@ func WrapITBasicCallControl2(raw *devicestapi.ITBasicCallControl2) ITBasicCallCo
 }
 
 // RequestTerminal wraps the raw RequestTerminal call.
-func (self ITBasicCallControl2) RequestTerminal(bstrTerminalClassGUID foundation.BSTR, lMediaType int32, Direction devicestapi.TERMINAL_DIRECTION) (*devicestapi.ITTerminal, error) {
+func (self ITBasicCallControl2) RequestTerminal(bstrTerminalClassGUID foundation.BSTR, lMediaType int32, Direction devicestapi.TERMINAL_DIRECTION) (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.RequestTerminal(bstrTerminalClassGUID, lMediaType, Direction, &_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // SelectTerminalOnCall wraps the raw SelectTerminalOnCall call.
-func (self ITBasicCallControl2) SelectTerminalOnCall(pTerminal *devicestapi.ITTerminal) error {
-	return win32.HRESULTError(int32(self.Raw.SelectTerminalOnCall(pTerminal)))
+func (self ITBasicCallControl2) SelectTerminalOnCall(pTerminal ITTerminal) error {
+	return win32.HRESULTError(int32(self.Raw.SelectTerminalOnCall(pTerminal.Raw)))
 }
 
 // UnselectTerminalOnCall wraps the raw UnselectTerminalOnCall call.
-func (self ITBasicCallControl2) UnselectTerminalOnCall(pTerminal *devicestapi.ITTerminal) error {
-	return win32.HRESULTError(int32(self.Raw.UnselectTerminalOnCall(pTerminal)))
+func (self ITBasicCallControl2) UnselectTerminalOnCall(pTerminal ITTerminal) error {
+	return win32.HRESULTError(int32(self.Raw.UnselectTerminalOnCall(pTerminal.Raw)))
 }
 
 // ITCallHub is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITCallHub with error-returning methods.
@@ -2099,10 +2100,10 @@ func (self ITCallHub) Clear() error {
 }
 
 // EnumerateCalls wraps the raw EnumerateCalls call.
-func (self ITCallHub) EnumerateCalls() (*devicestapi.IEnumCall, error) {
+func (self ITCallHub) EnumerateCalls() (IEnumCall, error) {
 	var _ppEnumCall *devicestapi.IEnumCall
 	_hr := self.Raw.EnumerateCalls(&_ppEnumCall)
-	return _ppEnumCall, win32.HRESULTError(int32(_hr))
+	return WrapIEnumCall(_ppEnumCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Calls wraps the raw Get_Calls call.
@@ -2145,17 +2146,17 @@ func (self ITCallHubEvent) Get_Event() (devicestapi.CALLHUB_EVENT, error) {
 }
 
 // Get_CallHub wraps the raw Get_CallHub call.
-func (self ITCallHubEvent) Get_CallHub() (*devicestapi.ITCallHub, error) {
+func (self ITCallHubEvent) Get_CallHub() (ITCallHub, error) {
 	var _ppCallHub *devicestapi.ITCallHub
 	_hr := self.Raw.Get_CallHub(&_ppCallHub)
-	return _ppCallHub, win32.HRESULTError(int32(_hr))
+	return WrapITCallHub(_ppCallHub), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITCallHubEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITCallHubEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // ITCallInfo is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITCallInfo with error-returning methods.
@@ -2170,10 +2171,10 @@ func WrapITCallInfo(raw *devicestapi.ITCallInfo) ITCallInfo {
 }
 
 // Get_Address wraps the raw Get_Address call.
-func (self ITCallInfo) Get_Address() (*devicestapi.ITAddress, error) {
+func (self ITCallInfo) Get_Address() (ITAddress, error) {
 	var _ppAddress *devicestapi.ITAddress
 	_hr := self.Raw.Get_Address(&_ppAddress)
-	return _ppAddress, win32.HRESULTError(int32(_hr))
+	return WrapITAddress(_ppAddress), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CallState wraps the raw Get_CallState call.
@@ -2191,10 +2192,10 @@ func (self ITCallInfo) Get_Privilege() (devicestapi.CALL_PRIVILEGE, error) {
 }
 
 // Get_CallHub wraps the raw Get_CallHub call.
-func (self ITCallInfo) Get_CallHub() (*devicestapi.ITCallHub, error) {
+func (self ITCallInfo) Get_CallHub() (ITCallHub, error) {
 	var _ppCallHub *devicestapi.ITCallHub
 	_hr := self.Raw.Get_CallHub(&_ppCallHub)
-	return _ppCallHub, win32.HRESULTError(int32(_hr))
+	return WrapITCallHub(_ppCallHub), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CallInfoLong wraps the raw Get_CallInfoLong call.
@@ -2278,10 +2279,10 @@ func WrapITCallInfoChangeEvent(raw *devicestapi.ITCallInfoChangeEvent) ITCallInf
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITCallInfoChangeEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITCallInfoChangeEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Cause wraps the raw Get_Cause call.
@@ -2310,10 +2311,10 @@ func WrapITCallMediaEvent(raw *devicestapi.ITCallMediaEvent) ITCallMediaEvent {
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITCallMediaEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITCallMediaEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCallInfo *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCallInfo)
-	return _ppCallInfo, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCallInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Event wraps the raw Get_Event call.
@@ -2331,17 +2332,17 @@ func (self ITCallMediaEvent) Get_Error() (foundation.HRESULT, error) {
 }
 
 // Get_Terminal wraps the raw Get_Terminal call.
-func (self ITCallMediaEvent) Get_Terminal() (*devicestapi.ITTerminal, error) {
+func (self ITCallMediaEvent) Get_Terminal() (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.Get_Terminal(&_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Stream wraps the raw Get_Stream call.
-func (self ITCallMediaEvent) Get_Stream() (*devicestapi.ITStream, error) {
+func (self ITCallMediaEvent) Get_Stream() (ITStream, error) {
 	var _ppStream *devicestapi.ITStream
 	_hr := self.Raw.Get_Stream(&_ppStream)
-	return _ppStream, win32.HRESULTError(int32(_hr))
+	return WrapITStream(_ppStream), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Cause wraps the raw Get_Cause call.
@@ -2363,10 +2364,10 @@ func WrapITCallNotificationEvent(raw *devicestapi.ITCallNotificationEvent) ITCal
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITCallNotificationEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITCallNotificationEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Event wraps the raw Get_Event call.
@@ -2395,10 +2396,10 @@ func WrapITCallStateEvent(raw *devicestapi.ITCallStateEvent) ITCallStateEvent {
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITCallStateEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITCallStateEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCallInfo *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCallInfo)
-	return _ppCallInfo, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCallInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
@@ -2508,10 +2509,10 @@ func (self ITCollection) Get_Item(Index int32) (systemvariant.VARIANT, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ITCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ITCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppNewEnum *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppNewEnum)
-	return _ppNewEnum, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppNewEnum), win32.HRESULTError(int32(_hr))
 }
 
 // ITCollection2 is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITCollection2 with error-returning methods.
@@ -2653,10 +2654,10 @@ func WrapITDigitDetectionEvent(raw *devicestapi.ITDigitDetectionEvent) ITDigitDe
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITDigitDetectionEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITDigitDetectionEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCallInfo *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCallInfo)
-	return _ppCallInfo, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCallInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Digit wraps the raw Get_Digit call.
@@ -2699,10 +2700,10 @@ func WrapITDigitGenerationEvent(raw *devicestapi.ITDigitGenerationEvent) ITDigit
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITDigitGenerationEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITDigitGenerationEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCallInfo *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCallInfo)
-	return _ppCallInfo, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCallInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Get_GenerationTermination wraps the raw Get_GenerationTermination call.
@@ -2738,10 +2739,10 @@ func WrapITDigitsGatheredEvent(raw *devicestapi.ITDigitsGatheredEvent) ITDigitsG
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITDigitsGatheredEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITDigitsGatheredEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCallInfo *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCallInfo)
-	return _ppCallInfo, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCallInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Digits wraps the raw Get_Digits call.
@@ -2832,23 +2833,23 @@ func (self ITDirectory) Bind(pDomainName foundation.BSTR, pUserName foundation.B
 }
 
 // AddDirectoryObject wraps the raw AddDirectoryObject call.
-func (self ITDirectory) AddDirectoryObject(pDirectoryObject *devicestapi.ITDirectoryObject) error {
-	return win32.HRESULTError(int32(self.Raw.AddDirectoryObject(pDirectoryObject)))
+func (self ITDirectory) AddDirectoryObject(pDirectoryObject ITDirectoryObject) error {
+	return win32.HRESULTError(int32(self.Raw.AddDirectoryObject(pDirectoryObject.Raw)))
 }
 
 // ModifyDirectoryObject wraps the raw ModifyDirectoryObject call.
-func (self ITDirectory) ModifyDirectoryObject(pDirectoryObject *devicestapi.ITDirectoryObject) error {
-	return win32.HRESULTError(int32(self.Raw.ModifyDirectoryObject(pDirectoryObject)))
+func (self ITDirectory) ModifyDirectoryObject(pDirectoryObject ITDirectoryObject) error {
+	return win32.HRESULTError(int32(self.Raw.ModifyDirectoryObject(pDirectoryObject.Raw)))
 }
 
 // RefreshDirectoryObject wraps the raw RefreshDirectoryObject call.
-func (self ITDirectory) RefreshDirectoryObject(pDirectoryObject *devicestapi.ITDirectoryObject) error {
-	return win32.HRESULTError(int32(self.Raw.RefreshDirectoryObject(pDirectoryObject)))
+func (self ITDirectory) RefreshDirectoryObject(pDirectoryObject ITDirectoryObject) error {
+	return win32.HRESULTError(int32(self.Raw.RefreshDirectoryObject(pDirectoryObject.Raw)))
 }
 
 // DeleteDirectoryObject wraps the raw DeleteDirectoryObject call.
-func (self ITDirectory) DeleteDirectoryObject(pDirectoryObject *devicestapi.ITDirectoryObject) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteDirectoryObject(pDirectoryObject)))
+func (self ITDirectory) DeleteDirectoryObject(pDirectoryObject ITDirectoryObject) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteDirectoryObject(pDirectoryObject.Raw)))
 }
 
 // Get_DirectoryObjects wraps the raw Get_DirectoryObjects call.
@@ -2906,15 +2907,15 @@ func (self ITDirectoryObject) EnumerateDialableAddrs(dwAddressType uint32, ppEnu
 }
 
 // Get_SecurityDescriptor wraps the raw Get_SecurityDescriptor call.
-func (self ITDirectoryObject) Get_SecurityDescriptor() (*systemcom.IDispatch, error) {
+func (self ITDirectoryObject) Get_SecurityDescriptor() (systemcomidiom.IDispatch, error) {
 	var _ppSecDes *systemcom.IDispatch
 	_hr := self.Raw.Get_SecurityDescriptor(&_ppSecDes)
-	return _ppSecDes, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppSecDes), win32.HRESULTError(int32(_hr))
 }
 
 // Put_SecurityDescriptor wraps the raw Put_SecurityDescriptor call.
-func (self ITDirectoryObject) Put_SecurityDescriptor(pSecDes *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SecurityDescriptor(pSecDes)))
+func (self ITDirectoryObject) Put_SecurityDescriptor(pSecDes systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SecurityDescriptor(pSecDes.Raw)))
 }
 
 // ITDirectoryObjectConference is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITDirectoryObjectConference with error-returning methods.
@@ -3044,10 +3045,10 @@ func WrapITDispatchMapper(raw *devicestapi.ITDispatchMapper) ITDispatchMapper {
 }
 
 // QueryDispatchInterface wraps the raw QueryDispatchInterface call.
-func (self ITDispatchMapper) QueryDispatchInterface(pIID foundation.BSTR, pInterfaceToMap *systemcom.IDispatch) (*systemcom.IDispatch, error) {
+func (self ITDispatchMapper) QueryDispatchInterface(pIID foundation.BSTR, pInterfaceToMap systemcomidiom.IDispatch) (systemcomidiom.IDispatch, error) {
 	var _ppReturnedInterface *systemcom.IDispatch
-	_hr := self.Raw.QueryDispatchInterface(pIID, pInterfaceToMap, &_ppReturnedInterface)
-	return _ppReturnedInterface, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.QueryDispatchInterface(pIID, pInterfaceToMap.Raw, &_ppReturnedInterface)
+	return systemcomidiom.WrapIDispatch(_ppReturnedInterface), win32.HRESULTError(int32(_hr))
 }
 
 // ITFileTerminalEvent is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITFileTerminalEvent with error-returning methods.
@@ -3062,24 +3063,24 @@ func WrapITFileTerminalEvent(raw *devicestapi.ITFileTerminalEvent) ITFileTermina
 }
 
 // Get_Terminal wraps the raw Get_Terminal call.
-func (self ITFileTerminalEvent) Get_Terminal() (*devicestapi.ITTerminal, error) {
+func (self ITFileTerminalEvent) Get_Terminal() (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.Get_Terminal(&_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Track wraps the raw Get_Track call.
-func (self ITFileTerminalEvent) Get_Track() (*devicestapi.ITFileTrack, error) {
+func (self ITFileTerminalEvent) Get_Track() (ITFileTrack, error) {
 	var _ppTrackTerminal *devicestapi.ITFileTrack
 	_hr := self.Raw.Get_Track(&_ppTrackTerminal)
-	return _ppTrackTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITFileTrack(_ppTrackTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITFileTerminalEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITFileTerminalEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
@@ -3127,29 +3128,29 @@ func (self ITFileTrack) Put_Format(pmt *mediamediafoundation.AM_MEDIA_TYPE) erro
 }
 
 // Get_ControllingTerminal wraps the raw Get_ControllingTerminal call.
-func (self ITFileTrack) Get_ControllingTerminal() (*devicestapi.ITTerminal, error) {
+func (self ITFileTrack) Get_ControllingTerminal() (ITTerminal, error) {
 	var _ppControllingTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.Get_ControllingTerminal(&_ppControllingTerminal)
-	return _ppControllingTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppControllingTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_AudioFormatForScripting wraps the raw Get_AudioFormatForScripting call.
-func (self ITFileTrack) Get_AudioFormatForScripting() (*devicestapi.ITScriptableAudioFormat, error) {
+func (self ITFileTrack) Get_AudioFormatForScripting() (ITScriptableAudioFormat, error) {
 	var _ppAudioFormat *devicestapi.ITScriptableAudioFormat
 	_hr := self.Raw.Get_AudioFormatForScripting(&_ppAudioFormat)
-	return _ppAudioFormat, win32.HRESULTError(int32(_hr))
+	return WrapITScriptableAudioFormat(_ppAudioFormat), win32.HRESULTError(int32(_hr))
 }
 
 // Put_AudioFormatForScripting wraps the raw Put_AudioFormatForScripting call.
-func (self ITFileTrack) Put_AudioFormatForScripting(pAudioFormat *devicestapi.ITScriptableAudioFormat) error {
-	return win32.HRESULTError(int32(self.Raw.Put_AudioFormatForScripting(pAudioFormat)))
+func (self ITFileTrack) Put_AudioFormatForScripting(pAudioFormat ITScriptableAudioFormat) error {
+	return win32.HRESULTError(int32(self.Raw.Put_AudioFormatForScripting(pAudioFormat.Raw)))
 }
 
 // Get_EmptyAudioFormatForScripting wraps the raw Get_EmptyAudioFormatForScripting call.
-func (self ITFileTrack) Get_EmptyAudioFormatForScripting() (*devicestapi.ITScriptableAudioFormat, error) {
+func (self ITFileTrack) Get_EmptyAudioFormatForScripting() (ITScriptableAudioFormat, error) {
 	var _ppAudioFormat *devicestapi.ITScriptableAudioFormat
 	_hr := self.Raw.Get_EmptyAudioFormatForScripting(&_ppAudioFormat)
-	return _ppAudioFormat, win32.HRESULTError(int32(_hr))
+	return WrapITScriptableAudioFormat(_ppAudioFormat), win32.HRESULTError(int32(_hr))
 }
 
 // ITForwardInformation is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITForwardInformation with error-returning methods.
@@ -3372,8 +3373,8 @@ func (self ITLegacyCallMediaControl2) DetectTones(pToneList *devicestapi.TAPI_DE
 }
 
 // DetectTonesByCollection wraps the raw DetectTonesByCollection call.
-func (self ITLegacyCallMediaControl2) DetectTonesByCollection(pDetectToneCollection *devicestapi.ITCollection2) error {
-	return win32.HRESULTError(int32(self.Raw.DetectTonesByCollection(pDetectToneCollection)))
+func (self ITLegacyCallMediaControl2) DetectTonesByCollection(pDetectToneCollection ITCollection2) error {
+	return win32.HRESULTError(int32(self.Raw.DetectTonesByCollection(pDetectToneCollection.Raw)))
 }
 
 // GenerateTone wraps the raw GenerateTone call.
@@ -3387,22 +3388,22 @@ func (self ITLegacyCallMediaControl2) GenerateCustomTones(pToneList *devicestapi
 }
 
 // GenerateCustomTonesByCollection wraps the raw GenerateCustomTonesByCollection call.
-func (self ITLegacyCallMediaControl2) GenerateCustomTonesByCollection(pCustomToneCollection *devicestapi.ITCollection2, lDuration int32) error {
-	return win32.HRESULTError(int32(self.Raw.GenerateCustomTonesByCollection(pCustomToneCollection, lDuration)))
+func (self ITLegacyCallMediaControl2) GenerateCustomTonesByCollection(pCustomToneCollection ITCollection2, lDuration int32) error {
+	return win32.HRESULTError(int32(self.Raw.GenerateCustomTonesByCollection(pCustomToneCollection.Raw, lDuration)))
 }
 
 // CreateDetectToneObject wraps the raw CreateDetectToneObject call.
-func (self ITLegacyCallMediaControl2) CreateDetectToneObject() (*devicestapi.ITDetectTone, error) {
+func (self ITLegacyCallMediaControl2) CreateDetectToneObject() (ITDetectTone, error) {
 	var _ppDetectTone *devicestapi.ITDetectTone
 	_hr := self.Raw.CreateDetectToneObject(&_ppDetectTone)
-	return _ppDetectTone, win32.HRESULTError(int32(_hr))
+	return WrapITDetectTone(_ppDetectTone), win32.HRESULTError(int32(_hr))
 }
 
 // CreateCustomToneObject wraps the raw CreateCustomToneObject call.
-func (self ITLegacyCallMediaControl2) CreateCustomToneObject() (*devicestapi.ITCustomTone, error) {
+func (self ITLegacyCallMediaControl2) CreateCustomToneObject() (ITCustomTone, error) {
 	var _ppCustomTone *devicestapi.ITCustomTone
 	_hr := self.Raw.CreateCustomToneObject(&_ppCustomTone)
-	return _ppCustomTone, win32.HRESULTError(int32(_hr))
+	return WrapITCustomTone(_ppCustomTone), win32.HRESULTError(int32(_hr))
 }
 
 // GetIDAsVariant wraps the raw GetIDAsVariant call.
@@ -3538,18 +3539,18 @@ func (self ITMSPAddress) Shutdown() error {
 }
 
 // CreateMSPCall wraps the raw CreateMSPCall call.
-func (self ITMSPAddress) CreateMSPCall(hCall *int32, dwReserved uint32, dwMediaType uint32, pOuterUnknown *systemcom.IUnknown, ppStreamControl **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateMSPCall(hCall, dwReserved, dwMediaType, pOuterUnknown, ppStreamControl)))
+func (self ITMSPAddress) CreateMSPCall(hCall *int32, dwReserved uint32, dwMediaType uint32, pOuterUnknown systemcomidiom.IUnknown, ppStreamControl **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateMSPCall(hCall, dwReserved, dwMediaType, pOuterUnknown.Raw, ppStreamControl)))
 }
 
 // ShutdownMSPCall wraps the raw ShutdownMSPCall call.
-func (self ITMSPAddress) ShutdownMSPCall(pStreamControl *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ShutdownMSPCall(pStreamControl)))
+func (self ITMSPAddress) ShutdownMSPCall(pStreamControl systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ShutdownMSPCall(pStreamControl.Raw)))
 }
 
 // ReceiveTSPData wraps the raw ReceiveTSPData call.
-func (self ITMSPAddress) ReceiveTSPData(pMSPCall *systemcom.IUnknown, pBuffer *byte, dwSize uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ReceiveTSPData(pMSPCall, pBuffer, dwSize)))
+func (self ITMSPAddress) ReceiveTSPData(pMSPCall systemcomidiom.IUnknown, pBuffer *byte, dwSize uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ReceiveTSPData(pMSPCall.Raw, pBuffer, dwSize)))
 }
 
 // GetEvent wraps the raw GetEvent call.
@@ -3675,17 +3676,17 @@ func (self ITMultiTrackTerminal) Get_TrackTerminals() (systemvariant.VARIANT, er
 }
 
 // EnumerateTrackTerminals wraps the raw EnumerateTrackTerminals call.
-func (self ITMultiTrackTerminal) EnumerateTrackTerminals() (*devicestapi.IEnumTerminal, error) {
+func (self ITMultiTrackTerminal) EnumerateTrackTerminals() (IEnumTerminal, error) {
 	var _ppEnumTerminal *devicestapi.IEnumTerminal
 	_hr := self.Raw.EnumerateTrackTerminals(&_ppEnumTerminal)
-	return _ppEnumTerminal, win32.HRESULTError(int32(_hr))
+	return WrapIEnumTerminal(_ppEnumTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTrackTerminal wraps the raw CreateTrackTerminal call.
-func (self ITMultiTrackTerminal) CreateTrackTerminal(MediaType int32, TerminalDirection devicestapi.TERMINAL_DIRECTION) (*devicestapi.ITTerminal, error) {
+func (self ITMultiTrackTerminal) CreateTrackTerminal(MediaType int32, TerminalDirection devicestapi.TERMINAL_DIRECTION) (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.CreateTrackTerminal(MediaType, TerminalDirection, &_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_MediaTypesInUse wraps the raw Get_MediaTypesInUse call.
@@ -3703,8 +3704,8 @@ func (self ITMultiTrackTerminal) Get_DirectionsInUse() (devicestapi.TERMINAL_DIR
 }
 
 // RemoveTrackTerminal wraps the raw RemoveTrackTerminal call.
-func (self ITMultiTrackTerminal) RemoveTrackTerminal(pTrackTerminalToRemove *devicestapi.ITTerminal) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveTrackTerminal(pTrackTerminalToRemove)))
+func (self ITMultiTrackTerminal) RemoveTrackTerminal(pTrackTerminalToRemove ITTerminal) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveTrackTerminal(pTrackTerminalToRemove.Raw)))
 }
 
 // ITPhone is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITPhone with error-returning methods.
@@ -3736,10 +3737,10 @@ func (self ITPhone) Get_Addresses() (systemvariant.VARIANT, error) {
 }
 
 // EnumerateAddresses wraps the raw EnumerateAddresses call.
-func (self ITPhone) EnumerateAddresses() (*devicestapi.IEnumAddress, error) {
+func (self ITPhone) EnumerateAddresses() (IEnumAddress, error) {
 	var _ppEnumAddress *devicestapi.IEnumAddress
 	_hr := self.Raw.EnumerateAddresses(&_ppEnumAddress)
-	return _ppEnumAddress, win32.HRESULTError(int32(_hr))
+	return WrapIEnumAddress(_ppEnumAddress), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PhoneCapsLong wraps the raw Get_PhoneCapsLong call.
@@ -3757,17 +3758,17 @@ func (self ITPhone) Get_PhoneCapsString(pcsCap devicestapi.PHONECAPS_STRING) (fo
 }
 
 // Get_Terminals wraps the raw Get_Terminals call.
-func (self ITPhone) Get_Terminals(pAddress *devicestapi.ITAddress) (systemvariant.VARIANT, error) {
+func (self ITPhone) Get_Terminals(pAddress ITAddress) (systemvariant.VARIANT, error) {
 	var _pTerminals systemvariant.VARIANT
-	_hr := self.Raw.Get_Terminals(pAddress, &_pTerminals)
+	_hr := self.Raw.Get_Terminals(pAddress.Raw, &_pTerminals)
 	return _pTerminals, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerateTerminals wraps the raw EnumerateTerminals call.
-func (self ITPhone) EnumerateTerminals(pAddress *devicestapi.ITAddress) (*devicestapi.IEnumTerminal, error) {
+func (self ITPhone) EnumerateTerminals(pAddress ITAddress) (IEnumTerminal, error) {
 	var _ppEnumTerminal *devicestapi.IEnumTerminal
-	_hr := self.Raw.EnumerateTerminals(pAddress, &_ppEnumTerminal)
-	return _ppEnumTerminal, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.EnumerateTerminals(pAddress.Raw, &_ppEnumTerminal)
+	return WrapIEnumTerminal(_ppEnumTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ButtonMode wraps the raw Get_ButtonMode call.
@@ -3900,10 +3901,10 @@ func (self ITPhone) Get_PreferredAddresses() (systemvariant.VARIANT, error) {
 }
 
 // EnumeratePreferredAddresses wraps the raw EnumeratePreferredAddresses call.
-func (self ITPhone) EnumeratePreferredAddresses() (*devicestapi.IEnumAddress, error) {
+func (self ITPhone) EnumeratePreferredAddresses() (IEnumAddress, error) {
 	var _ppEnumAddress *devicestapi.IEnumAddress
 	_hr := self.Raw.EnumeratePreferredAddresses(&_ppEnumAddress)
-	return _ppEnumAddress, win32.HRESULTError(int32(_hr))
+	return WrapIEnumAddress(_ppEnumAddress), win32.HRESULTError(int32(_hr))
 }
 
 // DeviceSpecific wraps the raw DeviceSpecific call.
@@ -3930,10 +3931,10 @@ func WrapITPhoneDeviceSpecificEvent(raw *devicestapi.ITPhoneDeviceSpecificEvent)
 }
 
 // Get_Phone wraps the raw Get_Phone call.
-func (self ITPhoneDeviceSpecificEvent) Get_Phone() (*devicestapi.ITPhone, error) {
+func (self ITPhoneDeviceSpecificEvent) Get_Phone() (ITPhone, error) {
 	var _ppPhone *devicestapi.ITPhone
 	_hr := self.Raw.Get_Phone(&_ppPhone)
-	return _ppPhone, win32.HRESULTError(int32(_hr))
+	return WrapITPhone(_ppPhone), win32.HRESULTError(int32(_hr))
 }
 
 // Get_lParam1 wraps the raw Get_lParam1 call.
@@ -3969,10 +3970,10 @@ func WrapITPhoneEvent(raw *devicestapi.ITPhoneEvent) ITPhoneEvent {
 }
 
 // Get_Phone wraps the raw Get_Phone call.
-func (self ITPhoneEvent) Get_Phone() (*devicestapi.ITPhone, error) {
+func (self ITPhoneEvent) Get_Phone() (ITPhone, error) {
 	var _ppPhone *devicestapi.ITPhone
 	_hr := self.Raw.Get_Phone(&_ppPhone)
-	return _ppPhone, win32.HRESULTError(int32(_hr))
+	return WrapITPhone(_ppPhone), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Event wraps the raw Get_Event call.
@@ -4025,10 +4026,10 @@ func (self ITPhoneEvent) Get_NumberGathered() (foundation.BSTR, error) {
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITPhoneEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITPhoneEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCallInfo *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCallInfo)
-	return _ppCallInfo, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCallInfo), win32.HRESULTError(int32(_hr))
 }
 
 // ITPluggableTerminalClassInfo is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITPluggableTerminalClassInfo with error-returning methods.
@@ -4119,8 +4120,8 @@ func WrapITPluggableTerminalEventSinkRegistration(raw *devicestapi.ITPluggableTe
 }
 
 // RegisterSink wraps the raw RegisterSink call.
-func (self ITPluggableTerminalEventSinkRegistration) RegisterSink(pEventSink *devicestapi.ITPluggableTerminalEventSink) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterSink(pEventSink)))
+func (self ITPluggableTerminalEventSinkRegistration) RegisterSink(pEventSink ITPluggableTerminalEventSink) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterSink(pEventSink.Raw)))
 }
 
 // UnregisterSink wraps the raw UnregisterSink call.
@@ -4165,24 +4166,24 @@ func WrapITPrivateEvent(raw *devicestapi.ITPrivateEvent) ITPrivateEvent {
 }
 
 // Get_Address wraps the raw Get_Address call.
-func (self ITPrivateEvent) Get_Address() (*devicestapi.ITAddress, error) {
+func (self ITPrivateEvent) Get_Address() (ITAddress, error) {
 	var _ppAddress *devicestapi.ITAddress
 	_hr := self.Raw.Get_Address(&_ppAddress)
-	return _ppAddress, win32.HRESULTError(int32(_hr))
+	return WrapITAddress(_ppAddress), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITPrivateEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITPrivateEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCallInfo *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCallInfo)
-	return _ppCallInfo, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCallInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CallHub wraps the raw Get_CallHub call.
-func (self ITPrivateEvent) Get_CallHub() (*devicestapi.ITCallHub, error) {
+func (self ITPrivateEvent) Get_CallHub() (ITCallHub, error) {
 	var _ppCallHub *devicestapi.ITCallHub
 	_hr := self.Raw.Get_CallHub(&_ppCallHub)
-	return _ppCallHub, win32.HRESULTError(int32(_hr))
+	return WrapITCallHub(_ppCallHub), win32.HRESULTError(int32(_hr))
 }
 
 // Get_EventCode wraps the raw Get_EventCode call.
@@ -4193,10 +4194,10 @@ func (self ITPrivateEvent) Get_EventCode() (int32, error) {
 }
 
 // Get_EventInterface wraps the raw Get_EventInterface call.
-func (self ITPrivateEvent) Get_EventInterface() (*systemcom.IDispatch, error) {
+func (self ITPrivateEvent) Get_EventInterface() (systemcomidiom.IDispatch, error) {
 	var _pEventInterface *systemcom.IDispatch
 	_hr := self.Raw.Get_EventInterface(&_pEventInterface)
-	return _pEventInterface, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_pEventInterface), win32.HRESULTError(int32(_hr))
 }
 
 // ITQOSEvent is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITQOSEvent with error-returning methods.
@@ -4211,10 +4212,10 @@ func WrapITQOSEvent(raw *devicestapi.ITQOSEvent) ITQOSEvent {
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITQOSEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITQOSEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Event wraps the raw Get_Event call.
@@ -4347,17 +4348,17 @@ func (self ITRendezvous) EnumerateDefaultDirectories(ppEnumDirectory **devicesta
 }
 
 // CreateDirectory wraps the raw CreateDirectory call.
-func (self ITRendezvous) CreateDirectory(DirectoryType devicestapi.DIRECTORY_TYPE, pName foundation.BSTR) (*devicestapi.ITDirectory, error) {
+func (self ITRendezvous) CreateDirectory(DirectoryType devicestapi.DIRECTORY_TYPE, pName foundation.BSTR) (ITDirectory, error) {
 	var _ppDir *devicestapi.ITDirectory
 	_hr := self.Raw.CreateDirectory(DirectoryType, pName, &_ppDir)
-	return _ppDir, win32.HRESULTError(int32(_hr))
+	return WrapITDirectory(_ppDir), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDirectoryObject wraps the raw CreateDirectoryObject call.
-func (self ITRendezvous) CreateDirectoryObject(DirectoryObjectType devicestapi.DIRECTORY_OBJECT_TYPE, pName foundation.BSTR) (*devicestapi.ITDirectoryObject, error) {
+func (self ITRendezvous) CreateDirectoryObject(DirectoryObjectType devicestapi.DIRECTORY_OBJECT_TYPE, pName foundation.BSTR) (ITDirectoryObject, error) {
 	var _ppDirectoryObject *devicestapi.ITDirectoryObject
 	_hr := self.Raw.CreateDirectoryObject(DirectoryObjectType, pName, &_ppDirectoryObject)
-	return _ppDirectoryObject, win32.HRESULTError(int32(_hr))
+	return WrapITDirectoryObject(_ppDirectoryObject), win32.HRESULTError(int32(_hr))
 }
 
 // ITRequest is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITRequest with error-returning methods.
@@ -4578,13 +4579,13 @@ func (self ITStream) StopStream() error {
 }
 
 // SelectTerminal wraps the raw SelectTerminal call.
-func (self ITStream) SelectTerminal(pTerminal *devicestapi.ITTerminal) error {
-	return win32.HRESULTError(int32(self.Raw.SelectTerminal(pTerminal)))
+func (self ITStream) SelectTerminal(pTerminal ITTerminal) error {
+	return win32.HRESULTError(int32(self.Raw.SelectTerminal(pTerminal.Raw)))
 }
 
 // UnselectTerminal wraps the raw UnselectTerminal call.
-func (self ITStream) UnselectTerminal(pTerminal *devicestapi.ITTerminal) error {
-	return win32.HRESULTError(int32(self.Raw.UnselectTerminal(pTerminal)))
+func (self ITStream) UnselectTerminal(pTerminal ITTerminal) error {
+	return win32.HRESULTError(int32(self.Raw.UnselectTerminal(pTerminal.Raw)))
 }
 
 // EnumerateTerminals wraps the raw EnumerateTerminals call.
@@ -4611,15 +4612,15 @@ func WrapITStreamControl(raw *devicestapi.ITStreamControl) ITStreamControl {
 }
 
 // CreateStream wraps the raw CreateStream call.
-func (self ITStreamControl) CreateStream(lMediaType int32, td devicestapi.TERMINAL_DIRECTION) (*devicestapi.ITStream, error) {
+func (self ITStreamControl) CreateStream(lMediaType int32, td devicestapi.TERMINAL_DIRECTION) (ITStream, error) {
 	var _ppStream *devicestapi.ITStream
 	_hr := self.Raw.CreateStream(lMediaType, td, &_ppStream)
-	return _ppStream, win32.HRESULTError(int32(_hr))
+	return WrapITStream(_ppStream), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveStream wraps the raw RemoveStream call.
-func (self ITStreamControl) RemoveStream(pStream *devicestapi.ITStream) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveStream(pStream)))
+func (self ITStreamControl) RemoveStream(pStream ITStream) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveStream(pStream.Raw)))
 }
 
 // EnumerateStreams wraps the raw EnumerateStreams call.
@@ -4661,13 +4662,13 @@ func (self ITSubStream) StopSubStream() error {
 }
 
 // SelectTerminal wraps the raw SelectTerminal call.
-func (self ITSubStream) SelectTerminal(pTerminal *devicestapi.ITTerminal) error {
-	return win32.HRESULTError(int32(self.Raw.SelectTerminal(pTerminal)))
+func (self ITSubStream) SelectTerminal(pTerminal ITTerminal) error {
+	return win32.HRESULTError(int32(self.Raw.SelectTerminal(pTerminal.Raw)))
 }
 
 // UnselectTerminal wraps the raw UnselectTerminal call.
-func (self ITSubStream) UnselectTerminal(pTerminal *devicestapi.ITTerminal) error {
-	return win32.HRESULTError(int32(self.Raw.UnselectTerminal(pTerminal)))
+func (self ITSubStream) UnselectTerminal(pTerminal ITTerminal) error {
+	return win32.HRESULTError(int32(self.Raw.UnselectTerminal(pTerminal.Raw)))
 }
 
 // EnumerateTerminals wraps the raw EnumerateTerminals call.
@@ -4683,10 +4684,10 @@ func (self ITSubStream) Get_Terminals() (systemvariant.VARIANT, error) {
 }
 
 // Get_Stream wraps the raw Get_Stream call.
-func (self ITSubStream) Get_Stream() (*devicestapi.ITStream, error) {
+func (self ITSubStream) Get_Stream() (ITStream, error) {
 	var _ppITStream *devicestapi.ITStream
 	_hr := self.Raw.Get_Stream(&_ppITStream)
-	return _ppITStream, win32.HRESULTError(int32(_hr))
+	return WrapITStream(_ppITStream), win32.HRESULTError(int32(_hr))
 }
 
 // ITSubStreamControl is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITSubStreamControl with error-returning methods.
@@ -4701,15 +4702,15 @@ func WrapITSubStreamControl(raw *devicestapi.ITSubStreamControl) ITSubStreamCont
 }
 
 // CreateSubStream wraps the raw CreateSubStream call.
-func (self ITSubStreamControl) CreateSubStream() (*devicestapi.ITSubStream, error) {
+func (self ITSubStreamControl) CreateSubStream() (ITSubStream, error) {
 	var _ppSubStream *devicestapi.ITSubStream
 	_hr := self.Raw.CreateSubStream(&_ppSubStream)
-	return _ppSubStream, win32.HRESULTError(int32(_hr))
+	return WrapITSubStream(_ppSubStream), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveSubStream wraps the raw RemoveSubStream call.
-func (self ITSubStreamControl) RemoveSubStream(pSubStream *devicestapi.ITSubStream) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveSubStream(pSubStream)))
+func (self ITSubStreamControl) RemoveSubStream(pSubStream ITSubStream) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveSubStream(pSubStream.Raw)))
 }
 
 // EnumerateSubStreams wraps the raw EnumerateSubStreams call.
@@ -4753,16 +4754,16 @@ func (self ITTAPI) Get_Addresses() (systemvariant.VARIANT, error) {
 }
 
 // EnumerateAddresses wraps the raw EnumerateAddresses call.
-func (self ITTAPI) EnumerateAddresses() (*devicestapi.IEnumAddress, error) {
+func (self ITTAPI) EnumerateAddresses() (IEnumAddress, error) {
 	var _ppEnumAddress *devicestapi.IEnumAddress
 	_hr := self.Raw.EnumerateAddresses(&_ppEnumAddress)
-	return _ppEnumAddress, win32.HRESULTError(int32(_hr))
+	return WrapIEnumAddress(_ppEnumAddress), win32.HRESULTError(int32(_hr))
 }
 
 // RegisterCallNotifications wraps the raw RegisterCallNotifications call.
-func (self ITTAPI) RegisterCallNotifications(pAddress *devicestapi.ITAddress, fMonitor foundation.VARIANT_BOOL, fOwner foundation.VARIANT_BOOL, lMediaTypes int32, lCallbackInstance int32) (int32, error) {
+func (self ITTAPI) RegisterCallNotifications(pAddress ITAddress, fMonitor foundation.VARIANT_BOOL, fOwner foundation.VARIANT_BOOL, lMediaTypes int32, lCallbackInstance int32) (int32, error) {
 	var _plRegister int32
-	_hr := self.Raw.RegisterCallNotifications(pAddress, fMonitor, fOwner, lMediaTypes, lCallbackInstance, &_plRegister)
+	_hr := self.Raw.RegisterCallNotifications(pAddress.Raw, fMonitor, fOwner, lMediaTypes, lCallbackInstance, &_plRegister)
 	return _plRegister, win32.HRESULTError(int32(_hr))
 }
 
@@ -4779,10 +4780,10 @@ func (self ITTAPI) Get_CallHubs() (systemvariant.VARIANT, error) {
 }
 
 // EnumerateCallHubs wraps the raw EnumerateCallHubs call.
-func (self ITTAPI) EnumerateCallHubs() (*devicestapi.IEnumCallHub, error) {
+func (self ITTAPI) EnumerateCallHubs() (IEnumCallHub, error) {
 	var _ppEnumCallHub *devicestapi.IEnumCallHub
 	_hr := self.Raw.EnumerateCallHubs(&_ppEnumCallHub)
-	return _ppEnumCallHub, win32.HRESULTError(int32(_hr))
+	return WrapIEnumCallHub(_ppEnumCallHub), win32.HRESULTError(int32(_hr))
 }
 
 // EnumeratePrivateTAPIObjects wraps the raw EnumeratePrivateTAPIObjects call.
@@ -4843,17 +4844,17 @@ func (self ITTAPI2) Get_Phones() (systemvariant.VARIANT, error) {
 }
 
 // EnumeratePhones wraps the raw EnumeratePhones call.
-func (self ITTAPI2) EnumeratePhones() (*devicestapi.IEnumPhone, error) {
+func (self ITTAPI2) EnumeratePhones() (IEnumPhone, error) {
 	var _ppEnumPhone *devicestapi.IEnumPhone
 	_hr := self.Raw.EnumeratePhones(&_ppEnumPhone)
-	return _ppEnumPhone, win32.HRESULTError(int32(_hr))
+	return WrapIEnumPhone(_ppEnumPhone), win32.HRESULTError(int32(_hr))
 }
 
 // CreateEmptyCollectionObject wraps the raw CreateEmptyCollectionObject call.
-func (self ITTAPI2) CreateEmptyCollectionObject() (*devicestapi.ITCollection2, error) {
+func (self ITTAPI2) CreateEmptyCollectionObject() (ITCollection2, error) {
 	var _ppCollection *devicestapi.ITCollection2
 	_hr := self.Raw.CreateEmptyCollectionObject(&_ppCollection)
-	return _ppCollection, win32.HRESULTError(int32(_hr))
+	return WrapITCollection2(_ppCollection), win32.HRESULTError(int32(_hr))
 }
 
 // ITTAPICallCenter is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITTAPICallCenter with error-returning methods.
@@ -4900,8 +4901,8 @@ func WrapITTAPIEventNotification(raw *devicestapi.ITTAPIEventNotification) ITTAP
 }
 
 // Event wraps the raw Event call.
-func (self ITTAPIEventNotification) Event(TapiEvent devicestapi.TAPI_EVENT, pEvent *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Event(TapiEvent, pEvent)))
+func (self ITTAPIEventNotification) Event(TapiEvent devicestapi.TAPI_EVENT, pEvent systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Event(TapiEvent, pEvent.Raw)))
 }
 
 // ITTAPIObjectEvent is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITTAPIObjectEvent with error-returning methods.
@@ -4916,10 +4917,10 @@ func WrapITTAPIObjectEvent(raw *devicestapi.ITTAPIObjectEvent) ITTAPIObjectEvent
 }
 
 // Get_TAPIObject wraps the raw Get_TAPIObject call.
-func (self ITTAPIObjectEvent) Get_TAPIObject() (*devicestapi.ITTAPI, error) {
+func (self ITTAPIObjectEvent) Get_TAPIObject() (ITTAPI, error) {
 	var _ppTAPIObject *devicestapi.ITTAPI
 	_hr := self.Raw.Get_TAPIObject(&_ppTAPIObject)
-	return _ppTAPIObject, win32.HRESULTError(int32(_hr))
+	return WrapITTAPI(_ppTAPIObject), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Event wraps the raw Get_Event call.
@@ -4930,10 +4931,10 @@ func (self ITTAPIObjectEvent) Get_Event() (devicestapi.TAPIOBJECT_EVENT, error) 
 }
 
 // Get_Address wraps the raw Get_Address call.
-func (self ITTAPIObjectEvent) Get_Address() (*devicestapi.ITAddress, error) {
+func (self ITTAPIObjectEvent) Get_Address() (ITAddress, error) {
 	var _ppAddress *devicestapi.ITAddress
 	_hr := self.Raw.Get_Address(&_ppAddress)
-	return _ppAddress, win32.HRESULTError(int32(_hr))
+	return WrapITAddress(_ppAddress), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CallbackInstance wraps the raw Get_CallbackInstance call.
@@ -4955,10 +4956,10 @@ func WrapITTAPIObjectEvent2(raw *devicestapi.ITTAPIObjectEvent2) ITTAPIObjectEve
 }
 
 // Get_Phone wraps the raw Get_Phone call.
-func (self ITTAPIObjectEvent2) Get_Phone() (*devicestapi.ITPhone, error) {
+func (self ITTAPIObjectEvent2) Get_Phone() (ITPhone, error) {
 	var _ppPhone *devicestapi.ITPhone
 	_hr := self.Raw.Get_Phone(&_ppPhone)
-	return _ppPhone, win32.HRESULTError(int32(_hr))
+	return WrapITPhone(_ppPhone), win32.HRESULTError(int32(_hr))
 }
 
 // ITTTSTerminalEvent is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITTTSTerminalEvent with error-returning methods.
@@ -4973,17 +4974,17 @@ func WrapITTTSTerminalEvent(raw *devicestapi.ITTTSTerminalEvent) ITTTSTerminalEv
 }
 
 // Get_Terminal wraps the raw Get_Terminal call.
-func (self ITTTSTerminalEvent) Get_Terminal() (*devicestapi.ITTerminal, error) {
+func (self ITTTSTerminalEvent) Get_Terminal() (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.Get_Terminal(&_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITTTSTerminalEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITTTSTerminalEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Error wraps the raw Get_Error call.
@@ -5065,10 +5066,10 @@ func (self ITTerminalSupport) Get_StaticTerminals() (systemvariant.VARIANT, erro
 }
 
 // EnumerateStaticTerminals wraps the raw EnumerateStaticTerminals call.
-func (self ITTerminalSupport) EnumerateStaticTerminals() (*devicestapi.IEnumTerminal, error) {
+func (self ITTerminalSupport) EnumerateStaticTerminals() (IEnumTerminal, error) {
 	var _ppTerminalEnumerator *devicestapi.IEnumTerminal
 	_hr := self.Raw.EnumerateStaticTerminals(&_ppTerminalEnumerator)
-	return _ppTerminalEnumerator, win32.HRESULTError(int32(_hr))
+	return WrapIEnumTerminal(_ppTerminalEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DynamicTerminalClasses wraps the raw Get_DynamicTerminalClasses call.
@@ -5079,24 +5080,24 @@ func (self ITTerminalSupport) Get_DynamicTerminalClasses() (systemvariant.VARIAN
 }
 
 // EnumerateDynamicTerminalClasses wraps the raw EnumerateDynamicTerminalClasses call.
-func (self ITTerminalSupport) EnumerateDynamicTerminalClasses() (*devicestapi.IEnumTerminalClass, error) {
+func (self ITTerminalSupport) EnumerateDynamicTerminalClasses() (IEnumTerminalClass, error) {
 	var _ppTerminalClassEnumerator *devicestapi.IEnumTerminalClass
 	_hr := self.Raw.EnumerateDynamicTerminalClasses(&_ppTerminalClassEnumerator)
-	return _ppTerminalClassEnumerator, win32.HRESULTError(int32(_hr))
+	return WrapIEnumTerminalClass(_ppTerminalClassEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTerminal wraps the raw CreateTerminal call.
-func (self ITTerminalSupport) CreateTerminal(pTerminalClass foundation.BSTR, lMediaType int32, Direction devicestapi.TERMINAL_DIRECTION) (*devicestapi.ITTerminal, error) {
+func (self ITTerminalSupport) CreateTerminal(pTerminalClass foundation.BSTR, lMediaType int32, Direction devicestapi.TERMINAL_DIRECTION) (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.CreateTerminal(pTerminalClass, lMediaType, Direction, &_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // GetDefaultStaticTerminal wraps the raw GetDefaultStaticTerminal call.
-func (self ITTerminalSupport) GetDefaultStaticTerminal(lMediaType int32, Direction devicestapi.TERMINAL_DIRECTION) (*devicestapi.ITTerminal, error) {
+func (self ITTerminalSupport) GetDefaultStaticTerminal(lMediaType int32, Direction devicestapi.TERMINAL_DIRECTION) (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.GetDefaultStaticTerminal(lMediaType, Direction, &_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // ITTerminalSupport2 is an idiomatic wrapper over the raw COM interface Devices.Tapi.ITTerminalSupport2 with error-returning methods.
@@ -5118,10 +5119,10 @@ func (self ITTerminalSupport2) Get_PluggableSuperclasses() (systemvariant.VARIAN
 }
 
 // EnumeratePluggableSuperclasses wraps the raw EnumeratePluggableSuperclasses call.
-func (self ITTerminalSupport2) EnumeratePluggableSuperclasses() (*devicestapi.IEnumPluggableSuperclassInfo, error) {
+func (self ITTerminalSupport2) EnumeratePluggableSuperclasses() (IEnumPluggableSuperclassInfo, error) {
 	var _ppSuperclassEnumerator *devicestapi.IEnumPluggableSuperclassInfo
 	_hr := self.Raw.EnumeratePluggableSuperclasses(&_ppSuperclassEnumerator)
-	return _ppSuperclassEnumerator, win32.HRESULTError(int32(_hr))
+	return WrapIEnumPluggableSuperclassInfo(_ppSuperclassEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PluggableTerminalClasses wraps the raw Get_PluggableTerminalClasses call.
@@ -5143,10 +5144,10 @@ func WrapITToneDetectionEvent(raw *devicestapi.ITToneDetectionEvent) ITToneDetec
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITToneDetectionEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITToneDetectionEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCallInfo *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCallInfo)
-	return _ppCallInfo, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCallInfo), win32.HRESULTError(int32(_hr))
 }
 
 // Get_AppSpecific wraps the raw Get_AppSpecific call.
@@ -5182,17 +5183,17 @@ func WrapITToneTerminalEvent(raw *devicestapi.ITToneTerminalEvent) ITToneTermina
 }
 
 // Get_Terminal wraps the raw Get_Terminal call.
-func (self ITToneTerminalEvent) Get_Terminal() (*devicestapi.ITTerminal, error) {
+func (self ITToneTerminalEvent) Get_Terminal() (ITTerminal, error) {
 	var _ppTerminal *devicestapi.ITTerminal
 	_hr := self.Raw.Get_Terminal(&_ppTerminal)
-	return _ppTerminal, win32.HRESULTError(int32(_hr))
+	return WrapITTerminal(_ppTerminal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Call wraps the raw Get_Call call.
-func (self ITToneTerminalEvent) Get_Call() (*devicestapi.ITCallInfo, error) {
+func (self ITToneTerminalEvent) Get_Call() (ITCallInfo, error) {
 	var _ppCall *devicestapi.ITCallInfo
 	_hr := self.Raw.Get_Call(&_ppCall)
-	return _ppCall, win32.HRESULTError(int32(_hr))
+	return WrapITCallInfo(_ppCall), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Error wraps the raw Get_Error call.
@@ -5229,8 +5230,8 @@ func (self ITnef) Finish(ulFlags uint32, lpKey *uint16, lpProblems **devicestapi
 }
 
 // OpenTaggedBody wraps the raw OpenTaggedBody call.
-func (self ITnef) OpenTaggedBody(lpMessage *systemaddressbook.IMessage, ulFlags uint32, lppStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.OpenTaggedBody(lpMessage, ulFlags, lppStream)))
+func (self ITnef) OpenTaggedBody(lpMessage systemaddressbookidiom.IMessage, ulFlags uint32, lppStream **systemcom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.OpenTaggedBody(lpMessage.Raw, ulFlags, lppStream)))
 }
 
 // SetProps wraps the raw SetProps call.
@@ -5239,8 +5240,8 @@ func (self ITnef) SetProps(ulFlags uint32, ulElemID uint32, cValues uint32, lpPr
 }
 
 // EncodeRecips wraps the raw EncodeRecips call.
-func (self ITnef) EncodeRecips(ulFlags uint32, lpRecipientTable *systemaddressbook.IMAPITable) error {
-	return win32.HRESULTError(int32(self.Raw.EncodeRecips(ulFlags, lpRecipientTable)))
+func (self ITnef) EncodeRecips(ulFlags uint32, lpRecipientTable systemaddressbookidiom.IMAPITable) error {
+	return win32.HRESULTError(int32(self.Raw.EncodeRecips(ulFlags, lpRecipientTable.Raw)))
 }
 
 // FinishComponent wraps the raw FinishComponent call.

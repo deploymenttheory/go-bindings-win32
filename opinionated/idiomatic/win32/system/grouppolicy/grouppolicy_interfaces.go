@@ -14,6 +14,7 @@ import (
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // IGPEInformation is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPEInformation with error-returning methods.
@@ -86,80 +87,80 @@ func WrapIGPM(raw *systemgrouppolicy.IGPM) IGPM {
 }
 
 // GetDomain wraps the raw GetDomain call.
-func (self IGPM) GetDomain(bstrDomain foundation.BSTR, bstrDomainController foundation.BSTR, lDCFlags int32) (*systemgrouppolicy.IGPMDomain, error) {
+func (self IGPM) GetDomain(bstrDomain foundation.BSTR, bstrDomainController foundation.BSTR, lDCFlags int32) (IGPMDomain, error) {
 	var _pIGPMDomain *systemgrouppolicy.IGPMDomain
 	_hr := self.Raw.GetDomain(bstrDomain, bstrDomainController, lDCFlags, &_pIGPMDomain)
-	return _pIGPMDomain, win32.HRESULTError(int32(_hr))
+	return WrapIGPMDomain(_pIGPMDomain), win32.HRESULTError(int32(_hr))
 }
 
 // GetBackupDir wraps the raw GetBackupDir call.
-func (self IGPM) GetBackupDir(bstrBackupDir foundation.BSTR) (*systemgrouppolicy.IGPMBackupDir, error) {
+func (self IGPM) GetBackupDir(bstrBackupDir foundation.BSTR) (IGPMBackupDir, error) {
 	var _pIGPMBackupDir *systemgrouppolicy.IGPMBackupDir
 	_hr := self.Raw.GetBackupDir(bstrBackupDir, &_pIGPMBackupDir)
-	return _pIGPMBackupDir, win32.HRESULTError(int32(_hr))
+	return WrapIGPMBackupDir(_pIGPMBackupDir), win32.HRESULTError(int32(_hr))
 }
 
 // GetSitesContainer wraps the raw GetSitesContainer call.
-func (self IGPM) GetSitesContainer(bstrForest foundation.BSTR, bstrDomain foundation.BSTR, bstrDomainController foundation.BSTR, lDCFlags int32) (*systemgrouppolicy.IGPMSitesContainer, error) {
+func (self IGPM) GetSitesContainer(bstrForest foundation.BSTR, bstrDomain foundation.BSTR, bstrDomainController foundation.BSTR, lDCFlags int32) (IGPMSitesContainer, error) {
 	var _ppIGPMSitesContainer *systemgrouppolicy.IGPMSitesContainer
 	_hr := self.Raw.GetSitesContainer(bstrForest, bstrDomain, bstrDomainController, lDCFlags, &_ppIGPMSitesContainer)
-	return _ppIGPMSitesContainer, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSitesContainer(_ppIGPMSitesContainer), win32.HRESULTError(int32(_hr))
 }
 
 // GetRSOP wraps the raw GetRSOP call.
-func (self IGPM) GetRSOP(gpmRSoPMode systemgrouppolicy.GPMRSOPMode, bstrNamespace foundation.BSTR, lFlags int32) (*systemgrouppolicy.IGPMRSOP, error) {
+func (self IGPM) GetRSOP(gpmRSoPMode systemgrouppolicy.GPMRSOPMode, bstrNamespace foundation.BSTR, lFlags int32) (IGPMRSOP, error) {
 	var _ppIGPMRSOP *systemgrouppolicy.IGPMRSOP
 	_hr := self.Raw.GetRSOP(gpmRSoPMode, bstrNamespace, lFlags, &_ppIGPMRSOP)
-	return _ppIGPMRSOP, win32.HRESULTError(int32(_hr))
+	return WrapIGPMRSOP(_ppIGPMRSOP), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePermission wraps the raw CreatePermission call.
-func (self IGPM) CreatePermission(bstrTrustee foundation.BSTR, perm systemgrouppolicy.GPMPermissionType, bInheritable foundation.VARIANT_BOOL) (*systemgrouppolicy.IGPMPermission, error) {
+func (self IGPM) CreatePermission(bstrTrustee foundation.BSTR, perm systemgrouppolicy.GPMPermissionType, bInheritable foundation.VARIANT_BOOL) (IGPMPermission, error) {
 	var _ppPerm *systemgrouppolicy.IGPMPermission
 	_hr := self.Raw.CreatePermission(bstrTrustee, perm, bInheritable, &_ppPerm)
-	return _ppPerm, win32.HRESULTError(int32(_hr))
+	return WrapIGPMPermission(_ppPerm), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSearchCriteria wraps the raw CreateSearchCriteria call.
-func (self IGPM) CreateSearchCriteria() (*systemgrouppolicy.IGPMSearchCriteria, error) {
+func (self IGPM) CreateSearchCriteria() (IGPMSearchCriteria, error) {
 	var _ppIGPMSearchCriteria *systemgrouppolicy.IGPMSearchCriteria
 	_hr := self.Raw.CreateSearchCriteria(&_ppIGPMSearchCriteria)
-	return _ppIGPMSearchCriteria, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSearchCriteria(_ppIGPMSearchCriteria), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTrustee wraps the raw CreateTrustee call.
-func (self IGPM) CreateTrustee(bstrTrustee foundation.BSTR) (*systemgrouppolicy.IGPMTrustee, error) {
+func (self IGPM) CreateTrustee(bstrTrustee foundation.BSTR) (IGPMTrustee, error) {
 	var _ppIGPMTrustee *systemgrouppolicy.IGPMTrustee
 	_hr := self.Raw.CreateTrustee(bstrTrustee, &_ppIGPMTrustee)
-	return _ppIGPMTrustee, win32.HRESULTError(int32(_hr))
+	return WrapIGPMTrustee(_ppIGPMTrustee), win32.HRESULTError(int32(_hr))
 }
 
 // GetClientSideExtensions wraps the raw GetClientSideExtensions call.
-func (self IGPM) GetClientSideExtensions() (*systemgrouppolicy.IGPMCSECollection, error) {
+func (self IGPM) GetClientSideExtensions() (IGPMCSECollection, error) {
 	var _ppIGPMCSECollection *systemgrouppolicy.IGPMCSECollection
 	_hr := self.Raw.GetClientSideExtensions(&_ppIGPMCSECollection)
-	return _ppIGPMCSECollection, win32.HRESULTError(int32(_hr))
+	return WrapIGPMCSECollection(_ppIGPMCSECollection), win32.HRESULTError(int32(_hr))
 }
 
 // GetConstants wraps the raw GetConstants call.
-func (self IGPM) GetConstants() (*systemgrouppolicy.IGPMConstants, error) {
+func (self IGPM) GetConstants() (IGPMConstants, error) {
 	var _ppIGPMConstants *systemgrouppolicy.IGPMConstants
 	_hr := self.Raw.GetConstants(&_ppIGPMConstants)
-	return _ppIGPMConstants, win32.HRESULTError(int32(_hr))
+	return WrapIGPMConstants(_ppIGPMConstants), win32.HRESULTError(int32(_hr))
 }
 
 // GetMigrationTable wraps the raw GetMigrationTable call.
-func (self IGPM) GetMigrationTable(bstrMigrationTablePath foundation.BSTR) (*systemgrouppolicy.IGPMMigrationTable, error) {
+func (self IGPM) GetMigrationTable(bstrMigrationTablePath foundation.BSTR) (IGPMMigrationTable, error) {
 	var _ppMigrationTable *systemgrouppolicy.IGPMMigrationTable
 	_hr := self.Raw.GetMigrationTable(bstrMigrationTablePath, &_ppMigrationTable)
-	return _ppMigrationTable, win32.HRESULTError(int32(_hr))
+	return WrapIGPMMigrationTable(_ppMigrationTable), win32.HRESULTError(int32(_hr))
 }
 
 // CreateMigrationTable wraps the raw CreateMigrationTable call.
-func (self IGPM) CreateMigrationTable() (*systemgrouppolicy.IGPMMigrationTable, error) {
+func (self IGPM) CreateMigrationTable() (IGPMMigrationTable, error) {
 	var _ppMigrationTable *systemgrouppolicy.IGPMMigrationTable
 	_hr := self.Raw.CreateMigrationTable(&_ppMigrationTable)
-	return _ppMigrationTable, win32.HRESULTError(int32(_hr))
+	return WrapIGPMMigrationTable(_ppMigrationTable), win32.HRESULTError(int32(_hr))
 }
 
 // InitializeReporting wraps the raw InitializeReporting call.
@@ -179,10 +180,10 @@ func WrapIGPM2(raw *systemgrouppolicy.IGPM2) IGPM2 {
 }
 
 // GetBackupDirEx wraps the raw GetBackupDirEx call.
-func (self IGPM2) GetBackupDirEx(bstrBackupDir foundation.BSTR, backupDirType systemgrouppolicy.GPMBackupType) (*systemgrouppolicy.IGPMBackupDirEx, error) {
+func (self IGPM2) GetBackupDirEx(bstrBackupDir foundation.BSTR, backupDirType systemgrouppolicy.GPMBackupType) (IGPMBackupDirEx, error) {
 	var _ppIGPMBackupDirEx *systemgrouppolicy.IGPMBackupDirEx
 	_hr := self.Raw.GetBackupDirEx(bstrBackupDir, backupDirType, &_ppIGPMBackupDirEx)
-	return _ppIGPMBackupDirEx, win32.HRESULTError(int32(_hr))
+	return WrapIGPMBackupDirEx(_ppIGPMBackupDirEx), win32.HRESULTError(int32(_hr))
 }
 
 // InitializeReportingEx wraps the raw InitializeReportingEx call.
@@ -218,8 +219,8 @@ func WrapIGPMAsyncProgress(raw *systemgrouppolicy.IGPMAsyncProgress) IGPMAsyncPr
 }
 
 // Status wraps the raw Status call.
-func (self IGPMAsyncProgress) Status(lProgressNumerator int32, lProgressDenominator int32, hrStatus foundation.HRESULT, pResult *systemvariant.VARIANT, ppIGPMStatusMsgCollection *systemgrouppolicy.IGPMStatusMsgCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Status(lProgressNumerator, lProgressDenominator, hrStatus, pResult, ppIGPMStatusMsgCollection)))
+func (self IGPMAsyncProgress) Status(lProgressNumerator int32, lProgressDenominator int32, hrStatus foundation.HRESULT, pResult *systemvariant.VARIANT, ppIGPMStatusMsgCollection IGPMStatusMsgCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Status(lProgressNumerator, lProgressDenominator, hrStatus, pResult, ppIGPMStatusMsgCollection.Raw)))
 }
 
 // IGPMBackup is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMBackup with error-returning methods.
@@ -288,17 +289,17 @@ func (self IGPMBackup) Delete() error {
 }
 
 // GenerateReport wraps the raw GenerateReport call.
-func (self IGPMBackup) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMBackup) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReport(gpmReportType, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GenerateReportToFile wraps the raw GenerateReportToFile call.
-func (self IGPMBackup) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMBackup) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReportToFile(gpmReportType, bstrTargetFilePath, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMBackupCollection is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMBackupCollection with error-returning methods.
@@ -327,10 +328,10 @@ func (self IGPMBackupCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, 
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMBackupCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMBackupCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppIGPMBackup *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppIGPMBackup)
-	return _ppIGPMBackup, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppIGPMBackup), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMBackupDir is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMBackupDir with error-returning methods.
@@ -352,17 +353,17 @@ func (self IGPMBackupDir) Get_BackupDirectory() (foundation.BSTR, error) {
 }
 
 // GetBackup wraps the raw GetBackup call.
-func (self IGPMBackupDir) GetBackup(bstrID foundation.BSTR) (*systemgrouppolicy.IGPMBackup, error) {
+func (self IGPMBackupDir) GetBackup(bstrID foundation.BSTR) (IGPMBackup, error) {
 	var _ppBackup *systemgrouppolicy.IGPMBackup
 	_hr := self.Raw.GetBackup(bstrID, &_ppBackup)
-	return _ppBackup, win32.HRESULTError(int32(_hr))
+	return WrapIGPMBackup(_ppBackup), win32.HRESULTError(int32(_hr))
 }
 
 // SearchBackups wraps the raw SearchBackups call.
-func (self IGPMBackupDir) SearchBackups(pIGPMSearchCriteria *systemgrouppolicy.IGPMSearchCriteria) (*systemgrouppolicy.IGPMBackupCollection, error) {
+func (self IGPMBackupDir) SearchBackups(pIGPMSearchCriteria IGPMSearchCriteria) (IGPMBackupCollection, error) {
 	var _ppIGPMBackupCollection *systemgrouppolicy.IGPMBackupCollection
-	_hr := self.Raw.SearchBackups(pIGPMSearchCriteria, &_ppIGPMBackupCollection)
-	return _ppIGPMBackupCollection, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SearchBackups(pIGPMSearchCriteria.Raw, &_ppIGPMBackupCollection)
+	return WrapIGPMBackupCollection(_ppIGPMBackupCollection), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMBackupDirEx is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMBackupDirEx with error-returning methods.
@@ -398,9 +399,9 @@ func (self IGPMBackupDirEx) GetBackup(bstrID foundation.BSTR) (systemvariant.VAR
 }
 
 // SearchBackups wraps the raw SearchBackups call.
-func (self IGPMBackupDirEx) SearchBackups(pIGPMSearchCriteria *systemgrouppolicy.IGPMSearchCriteria) (systemvariant.VARIANT, error) {
+func (self IGPMBackupDirEx) SearchBackups(pIGPMSearchCriteria IGPMSearchCriteria) (systemvariant.VARIANT, error) {
 	var _pvarBackupCollection systemvariant.VARIANT
-	_hr := self.Raw.SearchBackups(pIGPMSearchCriteria, &_pvarBackupCollection)
+	_hr := self.Raw.SearchBackups(pIGPMSearchCriteria.Raw, &_pvarBackupCollection)
 	return _pvarBackupCollection, win32.HRESULTError(int32(_hr))
 }
 
@@ -430,10 +431,10 @@ func (self IGPMCSECollection) Get_Item(lIndex int32) (systemvariant.VARIANT, err
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMCSECollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMCSECollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppIGPMCSEs *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppIGPMCSEs)
-	return _ppIGPMCSEs, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppIGPMCSEs), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMClientSideExtension is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMClientSideExtension with error-returning methods.
@@ -1048,59 +1049,59 @@ func (self IGPMDomain) Get_Domain() (foundation.BSTR, error) {
 }
 
 // CreateGPO wraps the raw CreateGPO call.
-func (self IGPMDomain) CreateGPO() (*systemgrouppolicy.IGPMGPO, error) {
+func (self IGPMDomain) CreateGPO() (IGPMGPO, error) {
 	var _ppNewGPO *systemgrouppolicy.IGPMGPO
 	_hr := self.Raw.CreateGPO(&_ppNewGPO)
-	return _ppNewGPO, win32.HRESULTError(int32(_hr))
+	return WrapIGPMGPO(_ppNewGPO), win32.HRESULTError(int32(_hr))
 }
 
 // GetGPO wraps the raw GetGPO call.
-func (self IGPMDomain) GetGPO(bstrGuid foundation.BSTR) (*systemgrouppolicy.IGPMGPO, error) {
+func (self IGPMDomain) GetGPO(bstrGuid foundation.BSTR) (IGPMGPO, error) {
 	var _ppGPO *systemgrouppolicy.IGPMGPO
 	_hr := self.Raw.GetGPO(bstrGuid, &_ppGPO)
-	return _ppGPO, win32.HRESULTError(int32(_hr))
+	return WrapIGPMGPO(_ppGPO), win32.HRESULTError(int32(_hr))
 }
 
 // SearchGPOs wraps the raw SearchGPOs call.
-func (self IGPMDomain) SearchGPOs(pIGPMSearchCriteria *systemgrouppolicy.IGPMSearchCriteria) (*systemgrouppolicy.IGPMGPOCollection, error) {
+func (self IGPMDomain) SearchGPOs(pIGPMSearchCriteria IGPMSearchCriteria) (IGPMGPOCollection, error) {
 	var _ppIGPMGPOCollection *systemgrouppolicy.IGPMGPOCollection
-	_hr := self.Raw.SearchGPOs(pIGPMSearchCriteria, &_ppIGPMGPOCollection)
-	return _ppIGPMGPOCollection, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SearchGPOs(pIGPMSearchCriteria.Raw, &_ppIGPMGPOCollection)
+	return WrapIGPMGPOCollection(_ppIGPMGPOCollection), win32.HRESULTError(int32(_hr))
 }
 
 // RestoreGPO wraps the raw RestoreGPO call.
-func (self IGPMDomain) RestoreGPO(pIGPMBackup *systemgrouppolicy.IGPMBackup, lDCFlags int32, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMDomain) RestoreGPO(pIGPMBackup IGPMBackup, lDCFlags int32, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
-	_hr := self.Raw.RestoreGPO(pIGPMBackup, lDCFlags, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.RestoreGPO(pIGPMBackup.Raw, lDCFlags, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetSOM wraps the raw GetSOM call.
-func (self IGPMDomain) GetSOM(bstrPath foundation.BSTR) (*systemgrouppolicy.IGPMSOM, error) {
+func (self IGPMDomain) GetSOM(bstrPath foundation.BSTR) (IGPMSOM, error) {
 	var _ppSOM *systemgrouppolicy.IGPMSOM
 	_hr := self.Raw.GetSOM(bstrPath, &_ppSOM)
-	return _ppSOM, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSOM(_ppSOM), win32.HRESULTError(int32(_hr))
 }
 
 // SearchSOMs wraps the raw SearchSOMs call.
-func (self IGPMDomain) SearchSOMs(pIGPMSearchCriteria *systemgrouppolicy.IGPMSearchCriteria) (*systemgrouppolicy.IGPMSOMCollection, error) {
+func (self IGPMDomain) SearchSOMs(pIGPMSearchCriteria IGPMSearchCriteria) (IGPMSOMCollection, error) {
 	var _ppIGPMSOMCollection *systemgrouppolicy.IGPMSOMCollection
-	_hr := self.Raw.SearchSOMs(pIGPMSearchCriteria, &_ppIGPMSOMCollection)
-	return _ppIGPMSOMCollection, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SearchSOMs(pIGPMSearchCriteria.Raw, &_ppIGPMSOMCollection)
+	return WrapIGPMSOMCollection(_ppIGPMSOMCollection), win32.HRESULTError(int32(_hr))
 }
 
 // GetWMIFilter wraps the raw GetWMIFilter call.
-func (self IGPMDomain) GetWMIFilter(bstrPath foundation.BSTR) (*systemgrouppolicy.IGPMWMIFilter, error) {
+func (self IGPMDomain) GetWMIFilter(bstrPath foundation.BSTR) (IGPMWMIFilter, error) {
 	var _ppWMIFilter *systemgrouppolicy.IGPMWMIFilter
 	_hr := self.Raw.GetWMIFilter(bstrPath, &_ppWMIFilter)
-	return _ppWMIFilter, win32.HRESULTError(int32(_hr))
+	return WrapIGPMWMIFilter(_ppWMIFilter), win32.HRESULTError(int32(_hr))
 }
 
 // SearchWMIFilters wraps the raw SearchWMIFilters call.
-func (self IGPMDomain) SearchWMIFilters(pIGPMSearchCriteria *systemgrouppolicy.IGPMSearchCriteria) (*systemgrouppolicy.IGPMWMIFilterCollection, error) {
+func (self IGPMDomain) SearchWMIFilters(pIGPMSearchCriteria IGPMSearchCriteria) (IGPMWMIFilterCollection, error) {
 	var _ppIGPMWMIFilterCollection *systemgrouppolicy.IGPMWMIFilterCollection
-	_hr := self.Raw.SearchWMIFilters(pIGPMSearchCriteria, &_ppIGPMWMIFilterCollection)
-	return _ppIGPMWMIFilterCollection, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SearchWMIFilters(pIGPMSearchCriteria.Raw, &_ppIGPMWMIFilterCollection)
+	return WrapIGPMWMIFilterCollection(_ppIGPMWMIFilterCollection), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMDomain2 is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMDomain2 with error-returning methods.
@@ -1115,45 +1116,45 @@ func WrapIGPMDomain2(raw *systemgrouppolicy.IGPMDomain2) IGPMDomain2 {
 }
 
 // CreateStarterGPO wraps the raw CreateStarterGPO call.
-func (self IGPMDomain2) CreateStarterGPO() (*systemgrouppolicy.IGPMStarterGPO, error) {
+func (self IGPMDomain2) CreateStarterGPO() (IGPMStarterGPO, error) {
 	var _ppnewTemplate *systemgrouppolicy.IGPMStarterGPO
 	_hr := self.Raw.CreateStarterGPO(&_ppnewTemplate)
-	return _ppnewTemplate, win32.HRESULTError(int32(_hr))
+	return WrapIGPMStarterGPO(_ppnewTemplate), win32.HRESULTError(int32(_hr))
 }
 
 // CreateGPOFromStarterGPO wraps the raw CreateGPOFromStarterGPO call.
-func (self IGPMDomain2) CreateGPOFromStarterGPO(pGPOTemplate *systemgrouppolicy.IGPMStarterGPO) (*systemgrouppolicy.IGPMGPO, error) {
+func (self IGPMDomain2) CreateGPOFromStarterGPO(pGPOTemplate IGPMStarterGPO) (IGPMGPO, error) {
 	var _ppnewGPO *systemgrouppolicy.IGPMGPO
-	_hr := self.Raw.CreateGPOFromStarterGPO(pGPOTemplate, &_ppnewGPO)
-	return _ppnewGPO, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateGPOFromStarterGPO(pGPOTemplate.Raw, &_ppnewGPO)
+	return WrapIGPMGPO(_ppnewGPO), win32.HRESULTError(int32(_hr))
 }
 
 // GetStarterGPO wraps the raw GetStarterGPO call.
-func (self IGPMDomain2) GetStarterGPO(bstrGuid foundation.BSTR) (*systemgrouppolicy.IGPMStarterGPO, error) {
+func (self IGPMDomain2) GetStarterGPO(bstrGuid foundation.BSTR) (IGPMStarterGPO, error) {
 	var _ppTemplate *systemgrouppolicy.IGPMStarterGPO
 	_hr := self.Raw.GetStarterGPO(bstrGuid, &_ppTemplate)
-	return _ppTemplate, win32.HRESULTError(int32(_hr))
+	return WrapIGPMStarterGPO(_ppTemplate), win32.HRESULTError(int32(_hr))
 }
 
 // SearchStarterGPOs wraps the raw SearchStarterGPOs call.
-func (self IGPMDomain2) SearchStarterGPOs(pIGPMSearchCriteria *systemgrouppolicy.IGPMSearchCriteria) (*systemgrouppolicy.IGPMStarterGPOCollection, error) {
+func (self IGPMDomain2) SearchStarterGPOs(pIGPMSearchCriteria IGPMSearchCriteria) (IGPMStarterGPOCollection, error) {
 	var _ppIGPMTemplateCollection *systemgrouppolicy.IGPMStarterGPOCollection
-	_hr := self.Raw.SearchStarterGPOs(pIGPMSearchCriteria, &_ppIGPMTemplateCollection)
-	return _ppIGPMTemplateCollection, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SearchStarterGPOs(pIGPMSearchCriteria.Raw, &_ppIGPMTemplateCollection)
+	return WrapIGPMStarterGPOCollection(_ppIGPMTemplateCollection), win32.HRESULTError(int32(_hr))
 }
 
 // LoadStarterGPO wraps the raw LoadStarterGPO call.
-func (self IGPMDomain2) LoadStarterGPO(bstrLoadFile foundation.BSTR, bOverwrite foundation.VARIANT_BOOL, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMDomain2) LoadStarterGPO(bstrLoadFile foundation.BSTR, bOverwrite foundation.VARIANT_BOOL, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.LoadStarterGPO(bstrLoadFile, bOverwrite, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // RestoreStarterGPO wraps the raw RestoreStarterGPO call.
-func (self IGPMDomain2) RestoreStarterGPO(pIGPMTmplBackup *systemgrouppolicy.IGPMStarterGPOBackup, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMDomain2) RestoreStarterGPO(pIGPMTmplBackup IGPMStarterGPOBackup, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
-	_hr := self.Raw.RestoreStarterGPO(pIGPMTmplBackup, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.RestoreStarterGPO(pIGPMTmplBackup.Raw, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMDomain3 is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMDomain3 with error-returning methods.
@@ -1168,10 +1169,10 @@ func WrapIGPMDomain3(raw *systemgrouppolicy.IGPMDomain3) IGPMDomain3 {
 }
 
 // GenerateReport wraps the raw GenerateReport call.
-func (self IGPMDomain3) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMDomain3) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReport(gpmReportType, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // Get_InfrastructureDC wraps the raw Get_InfrastructureDC call.
@@ -1278,15 +1279,15 @@ func (self IGPMGPO) Get_ComputerSysvolVersionNumber() (int32, error) {
 }
 
 // GetWMIFilter wraps the raw GetWMIFilter call.
-func (self IGPMGPO) GetWMIFilter() (*systemgrouppolicy.IGPMWMIFilter, error) {
+func (self IGPMGPO) GetWMIFilter() (IGPMWMIFilter, error) {
 	var _ppIGPMWMIFilter *systemgrouppolicy.IGPMWMIFilter
 	_hr := self.Raw.GetWMIFilter(&_ppIGPMWMIFilter)
-	return _ppIGPMWMIFilter, win32.HRESULTError(int32(_hr))
+	return WrapIGPMWMIFilter(_ppIGPMWMIFilter), win32.HRESULTError(int32(_hr))
 }
 
 // SetWMIFilter wraps the raw SetWMIFilter call.
-func (self IGPMGPO) SetWMIFilter(pIGPMWMIFilter *systemgrouppolicy.IGPMWMIFilter) error {
-	return win32.HRESULTError(int32(self.Raw.SetWMIFilter(pIGPMWMIFilter)))
+func (self IGPMGPO) SetWMIFilter(pIGPMWMIFilter IGPMWMIFilter) error {
+	return win32.HRESULTError(int32(self.Raw.SetWMIFilter(pIGPMWMIFilter.Raw)))
 }
 
 // SetUserEnabled wraps the raw SetUserEnabled call.
@@ -1314,15 +1315,15 @@ func (self IGPMGPO) IsComputerEnabled() (foundation.VARIANT_BOOL, error) {
 }
 
 // GetSecurityInfo wraps the raw GetSecurityInfo call.
-func (self IGPMGPO) GetSecurityInfo() (*systemgrouppolicy.IGPMSecurityInfo, error) {
+func (self IGPMGPO) GetSecurityInfo() (IGPMSecurityInfo, error) {
 	var _ppSecurityInfo *systemgrouppolicy.IGPMSecurityInfo
 	_hr := self.Raw.GetSecurityInfo(&_ppSecurityInfo)
-	return _ppSecurityInfo, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSecurityInfo(_ppSecurityInfo), win32.HRESULTError(int32(_hr))
 }
 
 // SetSecurityInfo wraps the raw SetSecurityInfo call.
-func (self IGPMGPO) SetSecurityInfo(pSecurityInfo *systemgrouppolicy.IGPMSecurityInfo) error {
-	return win32.HRESULTError(int32(self.Raw.SetSecurityInfo(pSecurityInfo)))
+func (self IGPMGPO) SetSecurityInfo(pSecurityInfo IGPMSecurityInfo) error {
+	return win32.HRESULTError(int32(self.Raw.SetSecurityInfo(pSecurityInfo.Raw)))
 }
 
 // Delete wraps the raw Delete call.
@@ -1331,50 +1332,50 @@ func (self IGPMGPO) Delete() error {
 }
 
 // Backup wraps the raw Backup call.
-func (self IGPMGPO) Backup(bstrBackupDir foundation.BSTR, bstrComment foundation.BSTR, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMGPO) Backup(bstrBackupDir foundation.BSTR, bstrComment foundation.BSTR, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.Backup(bstrBackupDir, bstrComment, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // Import wraps the raw Import call.
-func (self IGPMGPO) Import(lFlags int32, pIGPMBackup *systemgrouppolicy.IGPMBackup, pvarMigrationTable *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMGPO) Import(lFlags int32, pIGPMBackup IGPMBackup, pvarMigrationTable *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
-	_hr := self.Raw.Import(lFlags, pIGPMBackup, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Import(lFlags, pIGPMBackup.Raw, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GenerateReport wraps the raw GenerateReport call.
-func (self IGPMGPO) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMGPO) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReport(gpmReportType, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GenerateReportToFile wraps the raw GenerateReportToFile call.
-func (self IGPMGPO) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMGPO) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReportToFile(gpmReportType, bstrTargetFilePath, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // CopyTo wraps the raw CopyTo call.
-func (self IGPMGPO) CopyTo(lFlags int32, pIGPMDomain *systemgrouppolicy.IGPMDomain, pvarNewDisplayName *systemvariant.VARIANT, pvarMigrationTable *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMGPO) CopyTo(lFlags int32, pIGPMDomain IGPMDomain, pvarNewDisplayName *systemvariant.VARIANT, pvarMigrationTable *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
-	_hr := self.Raw.CopyTo(lFlags, pIGPMDomain, pvarNewDisplayName, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CopyTo(lFlags, pIGPMDomain.Raw, pvarNewDisplayName, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // SetSecurityDescriptor wraps the raw SetSecurityDescriptor call.
-func (self IGPMGPO) SetSecurityDescriptor(lFlags int32, pSD *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SetSecurityDescriptor(lFlags, pSD)))
+func (self IGPMGPO) SetSecurityDescriptor(lFlags int32, pSD systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SetSecurityDescriptor(lFlags, pSD.Raw)))
 }
 
 // GetSecurityDescriptor wraps the raw GetSecurityDescriptor call.
-func (self IGPMGPO) GetSecurityDescriptor(lFlags int32) (*systemcom.IDispatch, error) {
+func (self IGPMGPO) GetSecurityDescriptor(lFlags int32) (systemcomidiom.IDispatch, error) {
 	var _ppSD *systemcom.IDispatch
 	_hr := self.Raw.GetSecurityDescriptor(lFlags, &_ppSD)
-	return _ppSD, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppSD), win32.HRESULTError(int32(_hr))
 }
 
 // IsACLConsistent wraps the raw IsACLConsistent call.
@@ -1466,10 +1467,10 @@ func (self IGPMGPOCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, err
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMGPOCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMGPOCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppIGPMGPOs *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppIGPMGPOs)
-	return _ppIGPMGPOs, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppIGPMGPOs), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMGPOLink is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMGPOLink with error-returning methods.
@@ -1529,10 +1530,10 @@ func (self IGPMGPOLink) Get_SOMLinkOrder() (int32, error) {
 }
 
 // Get_SOM wraps the raw Get_SOM call.
-func (self IGPMGPOLink) Get_SOM() (*systemgrouppolicy.IGPMSOM, error) {
+func (self IGPMGPOLink) Get_SOM() (IGPMSOM, error) {
 	var _ppIGPMSOM *systemgrouppolicy.IGPMSOM
 	_hr := self.Raw.Get_SOM(&_ppIGPMSOM)
-	return _ppIGPMSOM, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSOM(_ppIGPMSOM), win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -1566,10 +1567,10 @@ func (self IGPMGPOLinksCollection) Get_Item(lIndex int32) (systemvariant.VARIANT
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMGPOLinksCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMGPOLinksCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppIGPMLinks *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppIGPMLinks)
-	return _ppIGPMLinks, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppIGPMLinks), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMMapEntry is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMMapEntry with error-returning methods.
@@ -1637,10 +1638,10 @@ func (self IGPMMapEntryCollection) Get_Item(lIndex int32) (systemvariant.VARIANT
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMMapEntryCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMMapEntryCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _pVal *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_pVal)
-	return _pVal, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_pVal), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMMigrationTable is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMMigrationTable with error-returning methods.
@@ -1660,17 +1661,17 @@ func (self IGPMMigrationTable) Save(bstrMigrationTablePath foundation.BSTR) erro
 }
 
 // AddEntry wraps the raw AddEntry call.
-func (self IGPMMigrationTable) AddEntry(bstrSource foundation.BSTR, gpmEntryType systemgrouppolicy.GPMEntryType, pvarDestination *systemvariant.VARIANT) (*systemgrouppolicy.IGPMMapEntry, error) {
+func (self IGPMMigrationTable) AddEntry(bstrSource foundation.BSTR, gpmEntryType systemgrouppolicy.GPMEntryType, pvarDestination *systemvariant.VARIANT) (IGPMMapEntry, error) {
 	var _ppEntry *systemgrouppolicy.IGPMMapEntry
 	_hr := self.Raw.AddEntry(bstrSource, gpmEntryType, pvarDestination, &_ppEntry)
-	return _ppEntry, win32.HRESULTError(int32(_hr))
+	return WrapIGPMMapEntry(_ppEntry), win32.HRESULTError(int32(_hr))
 }
 
 // GetEntry wraps the raw GetEntry call.
-func (self IGPMMigrationTable) GetEntry(bstrSource foundation.BSTR) (*systemgrouppolicy.IGPMMapEntry, error) {
+func (self IGPMMigrationTable) GetEntry(bstrSource foundation.BSTR) (IGPMMapEntry, error) {
 	var _ppEntry *systemgrouppolicy.IGPMMapEntry
 	_hr := self.Raw.GetEntry(bstrSource, &_ppEntry)
-	return _ppEntry, win32.HRESULTError(int32(_hr))
+	return WrapIGPMMapEntry(_ppEntry), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteEntry wraps the raw DeleteEntry call.
@@ -1679,24 +1680,24 @@ func (self IGPMMigrationTable) DeleteEntry(bstrSource foundation.BSTR) error {
 }
 
 // UpdateDestination wraps the raw UpdateDestination call.
-func (self IGPMMigrationTable) UpdateDestination(bstrSource foundation.BSTR, pvarDestination *systemvariant.VARIANT) (*systemgrouppolicy.IGPMMapEntry, error) {
+func (self IGPMMigrationTable) UpdateDestination(bstrSource foundation.BSTR, pvarDestination *systemvariant.VARIANT) (IGPMMapEntry, error) {
 	var _ppEntry *systemgrouppolicy.IGPMMapEntry
 	_hr := self.Raw.UpdateDestination(bstrSource, pvarDestination, &_ppEntry)
-	return _ppEntry, win32.HRESULTError(int32(_hr))
+	return WrapIGPMMapEntry(_ppEntry), win32.HRESULTError(int32(_hr))
 }
 
 // Validate wraps the raw Validate call.
-func (self IGPMMigrationTable) Validate() (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMMigrationTable) Validate() (IGPMResult, error) {
 	var _ppResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.Validate(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetEntries wraps the raw GetEntries call.
-func (self IGPMMigrationTable) GetEntries() (*systemgrouppolicy.IGPMMapEntryCollection, error) {
+func (self IGPMMigrationTable) GetEntries() (IGPMMapEntryCollection, error) {
 	var _ppEntries *systemgrouppolicy.IGPMMapEntryCollection
 	_hr := self.Raw.GetEntries(&_ppEntries)
-	return _ppEntries, win32.HRESULTError(int32(_hr))
+	return WrapIGPMMapEntryCollection(_ppEntries), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMPermission is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMPermission with error-returning methods.
@@ -1739,10 +1740,10 @@ func (self IGPMPermission) Get_Permission() (systemgrouppolicy.GPMPermissionType
 }
 
 // Get_Trustee wraps the raw Get_Trustee call.
-func (self IGPMPermission) Get_Trustee() (*systemgrouppolicy.IGPMTrustee, error) {
+func (self IGPMPermission) Get_Trustee() (IGPMTrustee, error) {
 	var _ppIGPMTrustee *systemgrouppolicy.IGPMTrustee
 	_hr := self.Raw.Get_Trustee(&_ppIGPMTrustee)
-	return _ppIGPMTrustee, win32.HRESULTError(int32(_hr))
+	return WrapIGPMTrustee(_ppIGPMTrustee), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMRSOP is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMRSOP with error-returning methods.
@@ -1936,17 +1937,17 @@ func (self IGPMRSOP) ReleaseQueryResults() error {
 }
 
 // GenerateReport wraps the raw GenerateReport call.
-func (self IGPMRSOP) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMRSOP) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReport(gpmReportType, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GenerateReportToFile wraps the raw GenerateReportToFile call.
-func (self IGPMRSOP) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMRSOP) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReportToFile(gpmReportType, bstrTargetFilePath, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMResult is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMResult with error-returning methods.
@@ -1961,10 +1962,10 @@ func WrapIGPMResult(raw *systemgrouppolicy.IGPMResult) IGPMResult {
 }
 
 // Get_Status wraps the raw Get_Status call.
-func (self IGPMResult) Get_Status() (*systemgrouppolicy.IGPMStatusMsgCollection, error) {
+func (self IGPMResult) Get_Status() (IGPMStatusMsgCollection, error) {
 	var _ppIGPMStatusMsgCollection *systemgrouppolicy.IGPMStatusMsgCollection
 	_hr := self.Raw.Get_Status(&_ppIGPMStatusMsgCollection)
-	return _ppIGPMStatusMsgCollection, win32.HRESULTError(int32(_hr))
+	return WrapIGPMStatusMsgCollection(_ppIGPMStatusMsgCollection), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Result wraps the raw Get_Result call.
@@ -2017,10 +2018,10 @@ func (self IGPMSOM) Get_Path() (foundation.BSTR, error) {
 }
 
 // CreateGPOLink wraps the raw CreateGPOLink call.
-func (self IGPMSOM) CreateGPOLink(lLinkPos int32, pGPO *systemgrouppolicy.IGPMGPO) (*systemgrouppolicy.IGPMGPOLink, error) {
+func (self IGPMSOM) CreateGPOLink(lLinkPos int32, pGPO IGPMGPO) (IGPMGPOLink, error) {
 	var _ppNewGPOLink *systemgrouppolicy.IGPMGPOLink
-	_hr := self.Raw.CreateGPOLink(lLinkPos, pGPO, &_ppNewGPOLink)
-	return _ppNewGPOLink, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateGPOLink(lLinkPos, pGPO.Raw, &_ppNewGPOLink)
+	return WrapIGPMGPOLink(_ppNewGPOLink), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
@@ -2031,29 +2032,29 @@ func (self IGPMSOM) Get_Type() (systemgrouppolicy.GPMSOMType, error) {
 }
 
 // GetGPOLinks wraps the raw GetGPOLinks call.
-func (self IGPMSOM) GetGPOLinks() (*systemgrouppolicy.IGPMGPOLinksCollection, error) {
+func (self IGPMSOM) GetGPOLinks() (IGPMGPOLinksCollection, error) {
 	var _ppGPOLinks *systemgrouppolicy.IGPMGPOLinksCollection
 	_hr := self.Raw.GetGPOLinks(&_ppGPOLinks)
-	return _ppGPOLinks, win32.HRESULTError(int32(_hr))
+	return WrapIGPMGPOLinksCollection(_ppGPOLinks), win32.HRESULTError(int32(_hr))
 }
 
 // GetInheritedGPOLinks wraps the raw GetInheritedGPOLinks call.
-func (self IGPMSOM) GetInheritedGPOLinks() (*systemgrouppolicy.IGPMGPOLinksCollection, error) {
+func (self IGPMSOM) GetInheritedGPOLinks() (IGPMGPOLinksCollection, error) {
 	var _ppGPOLinks *systemgrouppolicy.IGPMGPOLinksCollection
 	_hr := self.Raw.GetInheritedGPOLinks(&_ppGPOLinks)
-	return _ppGPOLinks, win32.HRESULTError(int32(_hr))
+	return WrapIGPMGPOLinksCollection(_ppGPOLinks), win32.HRESULTError(int32(_hr))
 }
 
 // GetSecurityInfo wraps the raw GetSecurityInfo call.
-func (self IGPMSOM) GetSecurityInfo() (*systemgrouppolicy.IGPMSecurityInfo, error) {
+func (self IGPMSOM) GetSecurityInfo() (IGPMSecurityInfo, error) {
 	var _ppSecurityInfo *systemgrouppolicy.IGPMSecurityInfo
 	_hr := self.Raw.GetSecurityInfo(&_ppSecurityInfo)
-	return _ppSecurityInfo, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSecurityInfo(_ppSecurityInfo), win32.HRESULTError(int32(_hr))
 }
 
 // SetSecurityInfo wraps the raw SetSecurityInfo call.
-func (self IGPMSOM) SetSecurityInfo(pSecurityInfo *systemgrouppolicy.IGPMSecurityInfo) error {
-	return win32.HRESULTError(int32(self.Raw.SetSecurityInfo(pSecurityInfo)))
+func (self IGPMSOM) SetSecurityInfo(pSecurityInfo IGPMSecurityInfo) error {
+	return win32.HRESULTError(int32(self.Raw.SetSecurityInfo(pSecurityInfo.Raw)))
 }
 
 // IGPMSOMCollection is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMSOMCollection with error-returning methods.
@@ -2082,10 +2083,10 @@ func (self IGPMSOMCollection) Get_Item(lIndex int32) (systemvariant.VARIANT, err
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMSOMCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMSOMCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppIGPMSOM *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppIGPMSOM)
-	return _ppIGPMSOM, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppIGPMSOM), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMSearchCriteria is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMSearchCriteria with error-returning methods.
@@ -2125,20 +2126,20 @@ func (self IGPMSecurityInfo) Get_Item(lIndex int32) (systemvariant.VARIANT, erro
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMSecurityInfo) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMSecurityInfo) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppEnum *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self IGPMSecurityInfo) Add(pPerm *systemgrouppolicy.IGPMPermission) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pPerm)))
+func (self IGPMSecurityInfo) Add(pPerm IGPMPermission) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pPerm.Raw)))
 }
 
 // Remove wraps the raw Remove call.
-func (self IGPMSecurityInfo) Remove(pPerm *systemgrouppolicy.IGPMPermission) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(pPerm)))
+func (self IGPMSecurityInfo) Remove(pPerm IGPMPermission) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(pPerm.Raw)))
 }
 
 // RemoveTrustee wraps the raw RemoveTrustee call.
@@ -2179,17 +2180,17 @@ func (self IGPMSitesContainer) Get_Forest() (foundation.BSTR, error) {
 }
 
 // GetSite wraps the raw GetSite call.
-func (self IGPMSitesContainer) GetSite(bstrSiteName foundation.BSTR) (*systemgrouppolicy.IGPMSOM, error) {
+func (self IGPMSitesContainer) GetSite(bstrSiteName foundation.BSTR) (IGPMSOM, error) {
 	var _ppSOM *systemgrouppolicy.IGPMSOM
 	_hr := self.Raw.GetSite(bstrSiteName, &_ppSOM)
-	return _ppSOM, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSOM(_ppSOM), win32.HRESULTError(int32(_hr))
 }
 
 // SearchSites wraps the raw SearchSites call.
-func (self IGPMSitesContainer) SearchSites(pIGPMSearchCriteria *systemgrouppolicy.IGPMSearchCriteria) (*systemgrouppolicy.IGPMSOMCollection, error) {
+func (self IGPMSitesContainer) SearchSites(pIGPMSearchCriteria IGPMSearchCriteria) (IGPMSOMCollection, error) {
 	var _ppIGPMSOMCollection *systemgrouppolicy.IGPMSOMCollection
-	_hr := self.Raw.SearchSites(pIGPMSearchCriteria, &_ppIGPMSOMCollection)
-	return _ppIGPMSOMCollection, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SearchSites(pIGPMSearchCriteria.Raw, &_ppIGPMSOMCollection)
+	return WrapIGPMSOMCollection(_ppIGPMSOMCollection), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMStarterGPO is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMStarterGPO with error-returning methods.
@@ -2296,50 +2297,50 @@ func (self IGPMStarterGPO) Delete() error {
 }
 
 // Save wraps the raw Save call.
-func (self IGPMStarterGPO) Save(bstrSaveFile foundation.BSTR, bOverwrite foundation.VARIANT_BOOL, bSaveAsSystem foundation.VARIANT_BOOL, bstrLanguage *systemvariant.VARIANT, bstrAuthor *systemvariant.VARIANT, bstrProduct *systemvariant.VARIANT, bstrUniqueID *systemvariant.VARIANT, bstrVersion *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMStarterGPO) Save(bstrSaveFile foundation.BSTR, bOverwrite foundation.VARIANT_BOOL, bSaveAsSystem foundation.VARIANT_BOOL, bstrLanguage *systemvariant.VARIANT, bstrAuthor *systemvariant.VARIANT, bstrProduct *systemvariant.VARIANT, bstrUniqueID *systemvariant.VARIANT, bstrVersion *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.Save(bstrSaveFile, bOverwrite, bSaveAsSystem, bstrLanguage, bstrAuthor, bstrProduct, bstrUniqueID, bstrVersion, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // Backup wraps the raw Backup call.
-func (self IGPMStarterGPO) Backup(bstrBackupDir foundation.BSTR, bstrComment foundation.BSTR, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMStarterGPO) Backup(bstrBackupDir foundation.BSTR, bstrComment foundation.BSTR, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.Backup(bstrBackupDir, bstrComment, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // CopyTo wraps the raw CopyTo call.
-func (self IGPMStarterGPO) CopyTo(pvarNewDisplayName *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMStarterGPO) CopyTo(pvarNewDisplayName *systemvariant.VARIANT, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.CopyTo(pvarNewDisplayName, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GenerateReport wraps the raw GenerateReport call.
-func (self IGPMStarterGPO) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMStarterGPO) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReport(gpmReportType, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GenerateReportToFile wraps the raw GenerateReportToFile call.
-func (self IGPMStarterGPO) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMStarterGPO) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReportToFile(gpmReportType, bstrTargetFilePath, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetSecurityInfo wraps the raw GetSecurityInfo call.
-func (self IGPMStarterGPO) GetSecurityInfo() (*systemgrouppolicy.IGPMSecurityInfo, error) {
+func (self IGPMStarterGPO) GetSecurityInfo() (IGPMSecurityInfo, error) {
 	var _ppSecurityInfo *systemgrouppolicy.IGPMSecurityInfo
 	_hr := self.Raw.GetSecurityInfo(&_ppSecurityInfo)
-	return _ppSecurityInfo, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSecurityInfo(_ppSecurityInfo), win32.HRESULTError(int32(_hr))
 }
 
 // SetSecurityInfo wraps the raw SetSecurityInfo call.
-func (self IGPMStarterGPO) SetSecurityInfo(pSecurityInfo *systemgrouppolicy.IGPMSecurityInfo) error {
-	return win32.HRESULTError(int32(self.Raw.SetSecurityInfo(pSecurityInfo)))
+func (self IGPMStarterGPO) SetSecurityInfo(pSecurityInfo IGPMSecurityInfo) error {
+	return win32.HRESULTError(int32(self.Raw.SetSecurityInfo(pSecurityInfo.Raw)))
 }
 
 // IGPMStarterGPOBackup is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMStarterGPOBackup with error-returning methods.
@@ -2415,17 +2416,17 @@ func (self IGPMStarterGPOBackup) Delete() error {
 }
 
 // GenerateReport wraps the raw GenerateReport call.
-func (self IGPMStarterGPOBackup) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMStarterGPOBackup) GenerateReport(gpmReportType systemgrouppolicy.GPMReportType, pvarGPMProgress *systemvariant.VARIANT, pvarGPMCancel *systemvariant.VARIANT) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReport(gpmReportType, pvarGPMProgress, pvarGPMCancel, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // GenerateReportToFile wraps the raw GenerateReportToFile call.
-func (self IGPMStarterGPOBackup) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (*systemgrouppolicy.IGPMResult, error) {
+func (self IGPMStarterGPOBackup) GenerateReportToFile(gpmReportType systemgrouppolicy.GPMReportType, bstrTargetFilePath foundation.BSTR) (IGPMResult, error) {
 	var _ppIGPMResult *systemgrouppolicy.IGPMResult
 	_hr := self.Raw.GenerateReportToFile(gpmReportType, bstrTargetFilePath, &_ppIGPMResult)
-	return _ppIGPMResult, win32.HRESULTError(int32(_hr))
+	return WrapIGPMResult(_ppIGPMResult), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMStarterGPOBackupCollection is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMStarterGPOBackupCollection with error-returning methods.
@@ -2454,10 +2455,10 @@ func (self IGPMStarterGPOBackupCollection) Get_Item(lIndex int32) (systemvariant
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMStarterGPOBackupCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMStarterGPOBackupCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppIGPMTmplBackup *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppIGPMTmplBackup)
-	return _ppIGPMTmplBackup, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppIGPMTmplBackup), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMStarterGPOCollection is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMStarterGPOCollection with error-returning methods.
@@ -2486,10 +2487,10 @@ func (self IGPMStarterGPOCollection) Get_Item(lIndex int32) (systemvariant.VARIA
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMStarterGPOCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMStarterGPOCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppIGPMTemplates *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppIGPMTemplates)
-	return _ppIGPMTemplates, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppIGPMTemplates), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMStatusMessage is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMStatusMessage with error-returning methods.
@@ -2567,10 +2568,10 @@ func (self IGPMStatusMsgCollection) Get_Item(lIndex int32) (systemvariant.VARIAN
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMStatusMsgCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMStatusMsgCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _pVal *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_pVal)
-	return _pVal, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_pVal), win32.HRESULTError(int32(_hr))
 }
 
 // IGPMTrustee is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMTrustee with error-returning methods.
@@ -2669,15 +2670,15 @@ func (self IGPMWMIFilter) GetQueryList() (systemvariant.VARIANT, error) {
 }
 
 // GetSecurityInfo wraps the raw GetSecurityInfo call.
-func (self IGPMWMIFilter) GetSecurityInfo() (*systemgrouppolicy.IGPMSecurityInfo, error) {
+func (self IGPMWMIFilter) GetSecurityInfo() (IGPMSecurityInfo, error) {
 	var _ppSecurityInfo *systemgrouppolicy.IGPMSecurityInfo
 	_hr := self.Raw.GetSecurityInfo(&_ppSecurityInfo)
-	return _ppSecurityInfo, win32.HRESULTError(int32(_hr))
+	return WrapIGPMSecurityInfo(_ppSecurityInfo), win32.HRESULTError(int32(_hr))
 }
 
 // SetSecurityInfo wraps the raw SetSecurityInfo call.
-func (self IGPMWMIFilter) SetSecurityInfo(pSecurityInfo *systemgrouppolicy.IGPMSecurityInfo) error {
-	return win32.HRESULTError(int32(self.Raw.SetSecurityInfo(pSecurityInfo)))
+func (self IGPMWMIFilter) SetSecurityInfo(pSecurityInfo IGPMSecurityInfo) error {
+	return win32.HRESULTError(int32(self.Raw.SetSecurityInfo(pSecurityInfo.Raw)))
 }
 
 // IGPMWMIFilterCollection is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGPMWMIFilterCollection with error-returning methods.
@@ -2706,10 +2707,10 @@ func (self IGPMWMIFilterCollection) Get_Item(lIndex int32) (systemvariant.VARIAN
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IGPMWMIFilterCollection) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IGPMWMIFilterCollection) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _pVal *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_pVal)
-	return _pVal, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_pVal), win32.HRESULTError(int32(_hr))
 }
 
 // IGroupPolicyObject is an idiomatic wrapper over the raw COM interface System.GroupPolicy.IGroupPolicyObject with error-returning methods.

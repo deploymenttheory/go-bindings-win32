@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	mediaaudioapo "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/apo"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -63,8 +62,8 @@ func (self IApoAuxiliaryInputConfiguration) RemoveAuxiliaryInput(dwInputId uint3
 }
 
 // IsInputFormatSupported wraps the raw IsInputFormatSupported call.
-func (self IApoAuxiliaryInputConfiguration) IsInputFormatSupported(pRequestedInputFormat *mediaaudioapo.IAudioMediaType, ppSupportedInputFormat **mediaaudioapo.IAudioMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.IsInputFormatSupported(pRequestedInputFormat, ppSupportedInputFormat)))
+func (self IApoAuxiliaryInputConfiguration) IsInputFormatSupported(pRequestedInputFormat IAudioMediaType, ppSupportedInputFormat **mediaaudioapo.IAudioMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.IsInputFormatSupported(pRequestedInputFormat.Raw, ppSupportedInputFormat)))
 }
 
 // IApoAuxiliaryInputRT is an idiomatic wrapper over the raw COM interface Media.Audio.Apo.IApoAuxiliaryInputRT with error-returning methods.
@@ -95,8 +94,8 @@ func WrapIAudioDeviceModulesClient(raw *mediaaudioapo.IAudioDeviceModulesClient)
 }
 
 // SetAudioDeviceModulesManager wraps the raw SetAudioDeviceModulesManager call.
-func (self IAudioDeviceModulesClient) SetAudioDeviceModulesManager(pAudioDeviceModulesManager *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetAudioDeviceModulesManager(pAudioDeviceModulesManager)))
+func (self IAudioDeviceModulesClient) SetAudioDeviceModulesManager(pAudioDeviceModulesManager systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetAudioDeviceModulesManager(pAudioDeviceModulesManager.Raw)))
 }
 
 // IAudioMediaType is an idiomatic wrapper over the raw COM interface Media.Audio.Apo.IAudioMediaType with error-returning methods.
@@ -116,8 +115,8 @@ func (self IAudioMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) er
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IAudioMediaType) IsEqual(pIAudioType *mediaaudioapo.IAudioMediaType, pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pIAudioType, pdwFlags)))
+func (self IAudioMediaType) IsEqual(pIAudioType IAudioMediaType, pdwFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pIAudioType.Raw, pdwFlags)))
 }
 
 // GetAudioFormat wraps the raw GetAudioFormat call.
@@ -162,13 +161,13 @@ func (self IAudioProcessingObject) Initialize(cbDataSize uint32, pbyData *byte) 
 }
 
 // IsInputFormatSupported wraps the raw IsInputFormatSupported call.
-func (self IAudioProcessingObject) IsInputFormatSupported(pOppositeFormat *mediaaudioapo.IAudioMediaType, pRequestedInputFormat *mediaaudioapo.IAudioMediaType, ppSupportedInputFormat **mediaaudioapo.IAudioMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.IsInputFormatSupported(pOppositeFormat, pRequestedInputFormat, ppSupportedInputFormat)))
+func (self IAudioProcessingObject) IsInputFormatSupported(pOppositeFormat IAudioMediaType, pRequestedInputFormat IAudioMediaType, ppSupportedInputFormat **mediaaudioapo.IAudioMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.IsInputFormatSupported(pOppositeFormat.Raw, pRequestedInputFormat.Raw, ppSupportedInputFormat)))
 }
 
 // IsOutputFormatSupported wraps the raw IsOutputFormatSupported call.
-func (self IAudioProcessingObject) IsOutputFormatSupported(pOppositeFormat *mediaaudioapo.IAudioMediaType, pRequestedOutputFormat *mediaaudioapo.IAudioMediaType, ppSupportedOutputFormat **mediaaudioapo.IAudioMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.IsOutputFormatSupported(pOppositeFormat, pRequestedOutputFormat, ppSupportedOutputFormat)))
+func (self IAudioProcessingObject) IsOutputFormatSupported(pOppositeFormat IAudioMediaType, pRequestedOutputFormat IAudioMediaType, ppSupportedOutputFormat **mediaaudioapo.IAudioMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.IsOutputFormatSupported(pOppositeFormat.Raw, pRequestedOutputFormat.Raw, ppSupportedOutputFormat)))
 }
 
 // GetInputChannelCount wraps the raw GetInputChannelCount call.
@@ -263,13 +262,13 @@ func WrapIAudioProcessingObjectPreferredFormatSupport(raw *mediaaudioapo.IAudioP
 }
 
 // GetPreferredInputFormat wraps the raw GetPreferredInputFormat call.
-func (self IAudioProcessingObjectPreferredFormatSupport) GetPreferredInputFormat(outputFormat *mediaaudioapo.IAudioMediaType, preferredFormat **mediaaudioapo.IAudioMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreferredInputFormat(outputFormat, preferredFormat)))
+func (self IAudioProcessingObjectPreferredFormatSupport) GetPreferredInputFormat(outputFormat IAudioMediaType, preferredFormat **mediaaudioapo.IAudioMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.GetPreferredInputFormat(outputFormat.Raw, preferredFormat)))
 }
 
 // GetPreferredOutputFormat wraps the raw GetPreferredOutputFormat call.
-func (self IAudioProcessingObjectPreferredFormatSupport) GetPreferredOutputFormat(inputFormat *mediaaudioapo.IAudioMediaType, preferredFormat **mediaaudioapo.IAudioMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreferredOutputFormat(inputFormat, preferredFormat)))
+func (self IAudioProcessingObjectPreferredFormatSupport) GetPreferredOutputFormat(inputFormat IAudioMediaType, preferredFormat **mediaaudioapo.IAudioMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.GetPreferredOutputFormat(inputFormat.Raw, preferredFormat)))
 }
 
 // IAudioProcessingObjectRT is an idiomatic wrapper over the raw COM interface Media.Audio.Apo.IAudioProcessingObjectRT with error-returning methods.

@@ -10,9 +10,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // BeginPanningFeedback wraps the raw BeginPanningFeedback call with idiomatic Go types.
@@ -96,8 +96,8 @@ func DPA_Grow(pdpa uicontrols.HDPA, cp int32) bool {
 
 // DPA_LoadStream wraps the raw DPA_LoadStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_loadstream
-func DPA_LoadStream(phdpa *uicontrols.HDPA, pfn uicontrols.PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uicontrols.DPA_LoadStream(phdpa, pfn, pstream, pvInstData)))
+func DPA_LoadStream(phdpa *uicontrols.HDPA, pfn uicontrols.PFNDPASTREAM, pstream systemcomidiom.IStream, pvInstData unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uicontrols.DPA_LoadStream(phdpa, pfn, pstream.Raw, pvInstData)))
 }
 
 // DPA_Merge wraps the raw DPA_Merge call with idiomatic Go types.
@@ -108,8 +108,8 @@ func DPA_Merge(hdpaDest uicontrols.HDPA, hdpaSrc uicontrols.HDPA, dwFlags uint32
 
 // DPA_SaveStream wraps the raw DPA_SaveStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_savestream
-func DPA_SaveStream(hdpa uicontrols.HDPA, pfn uicontrols.PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uicontrols.DPA_SaveStream(hdpa, pfn, pstream, pvInstData)))
+func DPA_SaveStream(hdpa uicontrols.HDPA, pfn uicontrols.PFNDPASTREAM, pstream systemcomidiom.IStream, pvInstData unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uicontrols.DPA_SaveStream(hdpa, pfn, pstream.Raw, pvInstData)))
 }
 
 // DPA_SetPtr wraps the raw DPA_SetPtr call with idiomatic Go types.
@@ -578,8 +578,8 @@ func ImageList_BeginDrag(himlTrack uicontrols.HIMAGELIST, iTrack int32, dxHotspo
 
 // ImageList_CoCreateInstance wraps the raw ImageList_CoCreateInstance call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/commoncontrols/nf-commoncontrols-imagelist_cocreateinstance
-func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uicontrols.ImageList_CoCreateInstance(rclsid, punkOuter, riid, ppv)))
+func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uicontrols.ImageList_CoCreateInstance(rclsid, punkOuter.Raw, riid, ppv)))
 }
 
 // ImageList_Copy wraps the raw ImageList_Copy call with idiomatic Go types.
@@ -656,10 +656,16 @@ func ImageList_LoadImage(hi foundation.HINSTANCE, lpbmp string, cx int32, cGrow 
 	return uicontrols.ImageList_LoadImageW(hi, foundation.PWSTR(_lpbmp), cx, cGrow, crMask, uType, uFlags)
 }
 
+// ImageList_Read wraps the raw ImageList_Read call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_read
+func ImageList_Read(pstm systemcomidiom.IStream) uicontrols.HIMAGELIST {
+	return uicontrols.ImageList_Read(pstm.Raw)
+}
+
 // ImageList_ReadEx wraps the raw ImageList_ReadEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_readex
-func ImageList_ReadEx(dwFlags uint32, pstm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uicontrols.ImageList_ReadEx(dwFlags, pstm, riid, ppv)))
+func ImageList_ReadEx(dwFlags uint32, pstm systemcomidiom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uicontrols.ImageList_ReadEx(dwFlags, pstm.Raw, riid, ppv)))
 }
 
 // ImageList_Remove wraps the raw ImageList_Remove call with idiomatic Go types.
@@ -700,14 +706,14 @@ func ImageList_SetOverlayImage(himl uicontrols.HIMAGELIST, iImage int32, iOverla
 
 // ImageList_Write wraps the raw ImageList_Write call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_write
-func ImageList_Write(himl uicontrols.HIMAGELIST, pstm *systemcom.IStream) bool {
-	return uicontrols.ImageList_Write(himl, pstm) != 0
+func ImageList_Write(himl uicontrols.HIMAGELIST, pstm systemcomidiom.IStream) bool {
+	return uicontrols.ImageList_Write(himl, pstm.Raw) != 0
 }
 
 // ImageList_WriteEx wraps the raw ImageList_WriteEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_writeex
-func ImageList_WriteEx(himl uicontrols.HIMAGELIST, dwFlags uicontrols.IMAGE_LIST_WRITE_STREAM_FLAGS, pstm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(uicontrols.ImageList_WriteEx(himl, dwFlags, pstm)))
+func ImageList_WriteEx(himl uicontrols.HIMAGELIST, dwFlags uicontrols.IMAGE_LIST_WRITE_STREAM_FLAGS, pstm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(uicontrols.ImageList_WriteEx(himl, dwFlags, pstm.Raw)))
 }
 
 // InitCommonControlsEx wraps the raw InitCommonControlsEx call with idiomatic Go types.

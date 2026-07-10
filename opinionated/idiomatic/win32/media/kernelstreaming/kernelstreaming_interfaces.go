@@ -12,7 +12,7 @@ import (
 	mediadirectshow "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/directshow"
 	mediakernelstreaming "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/kernelstreaming"
 	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	mediadirectshowidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/directshow"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -95,8 +95,8 @@ func (self IKsAllocatorEx) KsSetAllocatorHandle(AllocatorHandle foundation.HANDL
 }
 
 // KsCreateAllocatorAndGetHandle wraps the raw KsCreateAllocatorAndGetHandle call.
-func (self IKsAllocatorEx) KsCreateAllocatorAndGetHandle(KsPin *mediakernelstreaming.IKsPin) foundation.HANDLE {
-	return self.Raw.KsCreateAllocatorAndGetHandle(KsPin)
+func (self IKsAllocatorEx) KsCreateAllocatorAndGetHandle(KsPin IKsPin) foundation.HANDLE {
+	return self.Raw.KsCreateAllocatorAndGetHandle(KsPin.Raw)
 }
 
 // IKsClockPropertySet is an idiomatic wrapper over the raw COM interface Media.KernelStreaming.IKsClockPropertySet with error-returning methods.
@@ -214,9 +214,9 @@ func WrapIKsDataTypeHandler(raw *mediakernelstreaming.IKsDataTypeHandler) IKsDat
 }
 
 // KsCompleteIoOperation wraps the raw KsCompleteIoOperation call.
-func (self IKsDataTypeHandler) KsCompleteIoOperation(Sample *mediadirectshow.IMediaSample, StreamHeader unsafe.Pointer, IoOperation mediakernelstreaming.KSIOOPERATION, Cancelled bool) error {
+func (self IKsDataTypeHandler) KsCompleteIoOperation(Sample mediadirectshowidiom.IMediaSample, StreamHeader unsafe.Pointer, IoOperation mediakernelstreaming.KSIOOPERATION, Cancelled bool) error {
 	_Cancelled := foundation.BOOL(win32.Bool32(Cancelled))
-	return win32.HRESULTError(int32(self.Raw.KsCompleteIoOperation(Sample, StreamHeader, IoOperation, _Cancelled)))
+	return win32.HRESULTError(int32(self.Raw.KsCompleteIoOperation(Sample.Raw, StreamHeader, IoOperation, _Cancelled)))
 }
 
 // KsIsMediaTypeInRanges wraps the raw KsIsMediaTypeInRanges call.
@@ -225,8 +225,8 @@ func (self IKsDataTypeHandler) KsIsMediaTypeInRanges(DataRanges unsafe.Pointer) 
 }
 
 // KsPrepareIoOperation wraps the raw KsPrepareIoOperation call.
-func (self IKsDataTypeHandler) KsPrepareIoOperation(Sample *mediadirectshow.IMediaSample, StreamHeader unsafe.Pointer, IoOperation mediakernelstreaming.KSIOOPERATION) error {
-	return win32.HRESULTError(int32(self.Raw.KsPrepareIoOperation(Sample, StreamHeader, IoOperation)))
+func (self IKsDataTypeHandler) KsPrepareIoOperation(Sample mediadirectshowidiom.IMediaSample, StreamHeader unsafe.Pointer, IoOperation mediakernelstreaming.KSIOOPERATION) error {
+	return win32.HRESULTError(int32(self.Raw.KsPrepareIoOperation(Sample.Raw, StreamHeader, IoOperation)))
 }
 
 // KsQueryExtendedSize wraps the raw KsQueryExtendedSize call.
@@ -272,13 +272,13 @@ func WrapIKsInterfaceHandler(raw *mediakernelstreaming.IKsInterfaceHandler) IKsI
 }
 
 // KsSetPin wraps the raw KsSetPin call.
-func (self IKsInterfaceHandler) KsSetPin(KsPin *mediakernelstreaming.IKsPin) error {
-	return win32.HRESULTError(int32(self.Raw.KsSetPin(KsPin)))
+func (self IKsInterfaceHandler) KsSetPin(KsPin IKsPin) error {
+	return win32.HRESULTError(int32(self.Raw.KsSetPin(KsPin.Raw)))
 }
 
 // KsProcessMediaSamples wraps the raw KsProcessMediaSamples call.
-func (self IKsInterfaceHandler) KsProcessMediaSamples(KsDataTypeHandler *mediakernelstreaming.IKsDataTypeHandler, SampleList **mediadirectshow.IMediaSample, SampleCount *int32, IoOperation mediakernelstreaming.KSIOOPERATION, StreamSegment **mediakernelstreaming.KSSTREAM_SEGMENT) error {
-	return win32.HRESULTError(int32(self.Raw.KsProcessMediaSamples(KsDataTypeHandler, SampleList, SampleCount, IoOperation, StreamSegment)))
+func (self IKsInterfaceHandler) KsProcessMediaSamples(KsDataTypeHandler IKsDataTypeHandler, SampleList **mediadirectshow.IMediaSample, SampleCount *int32, IoOperation mediakernelstreaming.KSIOOPERATION, StreamSegment **mediakernelstreaming.KSSTREAM_SEGMENT) error {
+	return win32.HRESULTError(int32(self.Raw.KsProcessMediaSamples(KsDataTypeHandler.Raw, SampleList, SampleCount, IoOperation, StreamSegment)))
 }
 
 // KsCompleteIo wraps the raw KsCompleteIo call.
@@ -471,8 +471,8 @@ func (self IKsPin) KsPropagateAcquire() error {
 }
 
 // KsDeliver wraps the raw KsDeliver call.
-func (self IKsPin) KsDeliver(Sample *mediadirectshow.IMediaSample, Flags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.KsDeliver(Sample, Flags)))
+func (self IKsPin) KsDeliver(Sample mediadirectshowidiom.IMediaSample, Flags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.KsDeliver(Sample.Raw, Flags)))
 }
 
 // KsMediaSamplesCompleted wraps the raw KsMediaSamplesCompleted call.
@@ -486,8 +486,8 @@ func (self IKsPin) KsPeekAllocator(Operation mediakernelstreaming.KSPEEKOPERATIO
 }
 
 // KsReceiveAllocator wraps the raw KsReceiveAllocator call.
-func (self IKsPin) KsReceiveAllocator(MemAllocator *mediadirectshow.IMemAllocator) error {
-	return win32.HRESULTError(int32(self.Raw.KsReceiveAllocator(MemAllocator)))
+func (self IKsPin) KsReceiveAllocator(MemAllocator mediadirectshowidiom.IMemAllocator) error {
+	return win32.HRESULTError(int32(self.Raw.KsReceiveAllocator(MemAllocator.Raw)))
 }
 
 // KsRenegotiateAllocator wraps the raw KsRenegotiateAllocator call.
@@ -522,8 +522,8 @@ func WrapIKsPinEx(raw *mediakernelstreaming.IKsPinEx) IKsPinEx {
 }
 
 // KsNotifyError wraps the raw KsNotifyError call.
-func (self IKsPinEx) KsNotifyError(Sample *mediadirectshow.IMediaSample, hr foundation.HRESULT) {
-	self.Raw.KsNotifyError(Sample, hr)
+func (self IKsPinEx) KsNotifyError(Sample mediadirectshowidiom.IMediaSample, hr foundation.HRESULT) {
+	self.Raw.KsNotifyError(Sample.Raw, hr)
 }
 
 // IKsPinFactory is an idiomatic wrapper over the raw COM interface Media.KernelStreaming.IKsPinFactory with error-returning methods.
@@ -574,8 +574,8 @@ func (self IKsPinPipe) KsGetPipe(Operation mediakernelstreaming.KSPEEKOPERATION)
 }
 
 // KsSetPipe wraps the raw KsSetPipe call.
-func (self IKsPinPipe) KsSetPipe(KsAllocator *mediakernelstreaming.IKsAllocatorEx) error {
-	return win32.HRESULTError(int32(self.Raw.KsSetPipe(KsAllocator)))
+func (self IKsPinPipe) KsSetPipe(KsAllocator IKsAllocatorEx) error {
+	return win32.HRESULTError(int32(self.Raw.KsSetPipe(KsAllocator.Raw)))
 }
 
 // KsGetPipeAllocatorFlag wraps the raw KsGetPipeAllocatorFlag call.
@@ -636,8 +636,8 @@ func WrapIKsQualityForwarder(raw *mediakernelstreaming.IKsQualityForwarder) IKsQ
 }
 
 // KsFlushClient wraps the raw KsFlushClient call.
-func (self IKsQualityForwarder) KsFlushClient(Pin *mediakernelstreaming.IKsPin) {
-	self.Raw.KsFlushClient(Pin)
+func (self IKsQualityForwarder) KsFlushClient(Pin IKsPin) {
+	self.Raw.KsFlushClient(Pin.Raw)
 }
 
 // IKsTopology is an idiomatic wrapper over the raw COM interface Media.KernelStreaming.IKsTopology with error-returning methods.
@@ -652,8 +652,8 @@ func WrapIKsTopology(raw *mediakernelstreaming.IKsTopology) IKsTopology {
 }
 
 // CreateNodeInstance wraps the raw CreateNodeInstance call.
-func (self IKsTopology) CreateNodeInstance(NodeId uint32, Flags uint32, DesiredAccess uint32, UnkOuter *systemcom.IUnknown, InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateNodeInstance(NodeId, Flags, DesiredAccess, UnkOuter, InterfaceId, Interface)))
+func (self IKsTopology) CreateNodeInstance(NodeId uint32, Flags uint32, DesiredAccess uint32, UnkOuter systemcomidiom.IUnknown, InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateNodeInstance(NodeId, Flags, DesiredAccess, UnkOuter.Raw, InterfaceId, Interface)))
 }
 
 // IKsTopologyInfo is an idiomatic wrapper over the raw COM interface Media.KernelStreaming.IKsTopologyInfo with error-returning methods.

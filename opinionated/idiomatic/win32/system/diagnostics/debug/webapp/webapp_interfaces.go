@@ -7,11 +7,11 @@ package webapp
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
-	systemdiagnosticsdebugactivescript "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/diagnostics/debug/activescript"
 	systemdiagnosticsdebugwebapp "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/diagnostics/debug/webapp"
 	webmshtml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/web/mshtml"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemdiagnosticsdebugactivescriptidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/diagnostics/debug/activescript"
+	webmshtmlidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/web/mshtml"
 )
 
 // IWebApplicationActivation is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.WebApp.IWebApplicationActivation with error-returning methods.
@@ -73,8 +73,8 @@ func (self IWebApplicationHost) Refresh() error {
 }
 
 // Advise wraps the raw Advise call.
-func (self IWebApplicationHost) Advise(interfaceId *win32.GUID, callback *systemcom.IUnknown, cookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(interfaceId, callback, cookie)))
+func (self IWebApplicationHost) Advise(interfaceId *win32.GUID, callback systemcomidiom.IUnknown, cookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(interfaceId, callback.Raw, cookie)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -94,29 +94,29 @@ func WrapIWebApplicationNavigationEvents(raw *systemdiagnosticsdebugwebapp.IWebA
 }
 
 // BeforeNavigate wraps the raw BeforeNavigate call.
-func (self IWebApplicationNavigationEvents) BeforeNavigate(htmlWindow *webmshtml.IHTMLWindow2, url string, navigationFlags uint32, targetFrameName string) error {
+func (self IWebApplicationNavigationEvents) BeforeNavigate(htmlWindow webmshtmlidiom.IHTMLWindow2, url string, navigationFlags uint32, targetFrameName string) error {
 	_url := win32.UTF16Ptr(url)
 	_targetFrameName := win32.UTF16Ptr(targetFrameName)
-	return win32.HRESULTError(int32(self.Raw.BeforeNavigate(htmlWindow, foundation.PWSTR(_url), navigationFlags, foundation.PWSTR(_targetFrameName))))
+	return win32.HRESULTError(int32(self.Raw.BeforeNavigate(htmlWindow.Raw, foundation.PWSTR(_url), navigationFlags, foundation.PWSTR(_targetFrameName))))
 }
 
 // NavigateComplete wraps the raw NavigateComplete call.
-func (self IWebApplicationNavigationEvents) NavigateComplete(htmlWindow *webmshtml.IHTMLWindow2, url string) error {
+func (self IWebApplicationNavigationEvents) NavigateComplete(htmlWindow webmshtmlidiom.IHTMLWindow2, url string) error {
 	_url := win32.UTF16Ptr(url)
-	return win32.HRESULTError(int32(self.Raw.NavigateComplete(htmlWindow, foundation.PWSTR(_url))))
+	return win32.HRESULTError(int32(self.Raw.NavigateComplete(htmlWindow.Raw, foundation.PWSTR(_url))))
 }
 
 // NavigateError wraps the raw NavigateError call.
-func (self IWebApplicationNavigationEvents) NavigateError(htmlWindow *webmshtml.IHTMLWindow2, url string, targetFrameName string, statusCode uint32) error {
+func (self IWebApplicationNavigationEvents) NavigateError(htmlWindow webmshtmlidiom.IHTMLWindow2, url string, targetFrameName string, statusCode uint32) error {
 	_url := win32.UTF16Ptr(url)
 	_targetFrameName := win32.UTF16Ptr(targetFrameName)
-	return win32.HRESULTError(int32(self.Raw.NavigateError(htmlWindow, foundation.PWSTR(_url), foundation.PWSTR(_targetFrameName), statusCode)))
+	return win32.HRESULTError(int32(self.Raw.NavigateError(htmlWindow.Raw, foundation.PWSTR(_url), foundation.PWSTR(_targetFrameName), statusCode)))
 }
 
 // DocumentComplete wraps the raw DocumentComplete call.
-func (self IWebApplicationNavigationEvents) DocumentComplete(htmlWindow *webmshtml.IHTMLWindow2, url string) error {
+func (self IWebApplicationNavigationEvents) DocumentComplete(htmlWindow webmshtmlidiom.IHTMLWindow2, url string) error {
 	_url := win32.UTF16Ptr(url)
-	return win32.HRESULTError(int32(self.Raw.DocumentComplete(htmlWindow, foundation.PWSTR(_url))))
+	return win32.HRESULTError(int32(self.Raw.DocumentComplete(htmlWindow.Raw, foundation.PWSTR(_url))))
 }
 
 // DownloadBegin wraps the raw DownloadBegin call.
@@ -141,15 +141,15 @@ func WrapIWebApplicationScriptEvents(raw *systemdiagnosticsdebugwebapp.IWebAppli
 }
 
 // BeforeScriptExecute wraps the raw BeforeScriptExecute call.
-func (self IWebApplicationScriptEvents) BeforeScriptExecute(htmlWindow *webmshtml.IHTMLWindow2) error {
-	return win32.HRESULTError(int32(self.Raw.BeforeScriptExecute(htmlWindow)))
+func (self IWebApplicationScriptEvents) BeforeScriptExecute(htmlWindow webmshtmlidiom.IHTMLWindow2) error {
+	return win32.HRESULTError(int32(self.Raw.BeforeScriptExecute(htmlWindow.Raw)))
 }
 
 // ScriptError wraps the raw ScriptError call.
-func (self IWebApplicationScriptEvents) ScriptError(htmlWindow *webmshtml.IHTMLWindow2, scriptError *systemdiagnosticsdebugactivescript.IActiveScriptError, url string, errorHandled bool) error {
+func (self IWebApplicationScriptEvents) ScriptError(htmlWindow webmshtmlidiom.IHTMLWindow2, scriptError systemdiagnosticsdebugactivescriptidiom.IActiveScriptError, url string, errorHandled bool) error {
 	_url := win32.UTF16Ptr(url)
 	_errorHandled := foundation.BOOL(win32.Bool32(errorHandled))
-	return win32.HRESULTError(int32(self.Raw.ScriptError(htmlWindow, scriptError, foundation.PWSTR(_url), _errorHandled)))
+	return win32.HRESULTError(int32(self.Raw.ScriptError(htmlWindow.Raw, scriptError.Raw, foundation.PWSTR(_url), _errorHandled)))
 }
 
 // IWebApplicationUIEvents is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.WebApp.IWebApplicationUIEvents with error-returning methods.

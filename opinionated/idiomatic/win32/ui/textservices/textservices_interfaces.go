@@ -87,18 +87,18 @@ func WrapIAccServerDocMgr(raw *uitextservices.IAccServerDocMgr) IAccServerDocMgr
 }
 
 // NewDocument wraps the raw NewDocument call.
-func (self IAccServerDocMgr) NewDocument(riid *win32.GUID, punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.NewDocument(riid, punk)))
+func (self IAccServerDocMgr) NewDocument(riid *win32.GUID, punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.NewDocument(riid, punk.Raw)))
 }
 
 // RevokeDocument wraps the raw RevokeDocument call.
-func (self IAccServerDocMgr) RevokeDocument(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RevokeDocument(punk)))
+func (self IAccServerDocMgr) RevokeDocument(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RevokeDocument(punk.Raw)))
 }
 
 // OnDocumentFocus wraps the raw OnDocumentFocus call.
-func (self IAccServerDocMgr) OnDocumentFocus(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnDocumentFocus(punk)))
+func (self IAccServerDocMgr) OnDocumentFocus(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnDocumentFocus(punk.Raw)))
 }
 
 // IAccStore is an idiomatic wrapper over the raw COM interface UI.TextServices.IAccStore with error-returning methods.
@@ -113,13 +113,13 @@ func WrapIAccStore(raw *uitextservices.IAccStore) IAccStore {
 }
 
 // Register wraps the raw Register call.
-func (self IAccStore) Register(riid *win32.GUID, punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Register(riid, punk)))
+func (self IAccStore) Register(riid *win32.GUID, punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Register(riid, punk.Raw)))
 }
 
 // Unregister wraps the raw Unregister call.
-func (self IAccStore) Unregister(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Unregister(punk)))
+func (self IAccStore) Unregister(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Unregister(punk.Raw)))
 }
 
 // GetDocuments wraps the raw GetDocuments call.
@@ -133,8 +133,8 @@ func (self IAccStore) LookupByHWND(hWnd foundation.HWND, riid *win32.GUID, ppunk
 }
 
 // OnDocumentFocus wraps the raw OnDocumentFocus call.
-func (self IAccStore) OnDocumentFocus(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnDocumentFocus(punk)))
+func (self IAccStore) OnDocumentFocus(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnDocumentFocus(punk.Raw)))
 }
 
 // GetFocused wraps the raw GetFocused call.
@@ -164,23 +164,23 @@ func (self IAnchor) GetGravity(pgravity *uitextservices.TsGravity) error {
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IAnchor) IsEqual(paWith *uitextservices.IAnchor, pfEqual *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(paWith, pfEqual)))
+func (self IAnchor) IsEqual(paWith IAnchor, pfEqual *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(paWith.Raw, pfEqual)))
 }
 
 // Compare wraps the raw Compare call.
-func (self IAnchor) Compare(paWith *uitextservices.IAnchor, plResult *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Compare(paWith, plResult)))
+func (self IAnchor) Compare(paWith IAnchor, plResult *int32) error {
+	return win32.HRESULTError(int32(self.Raw.Compare(paWith.Raw, plResult)))
 }
 
 // Shift wraps the raw Shift call.
-func (self IAnchor) Shift(dwFlags uint32, cchReq int32, pcch *int32, paHaltAnchor *uitextservices.IAnchor) error {
-	return win32.HRESULTError(int32(self.Raw.Shift(dwFlags, cchReq, pcch, paHaltAnchor)))
+func (self IAnchor) Shift(dwFlags uint32, cchReq int32, pcch *int32, paHaltAnchor IAnchor) error {
+	return win32.HRESULTError(int32(self.Raw.Shift(dwFlags, cchReq, pcch, paHaltAnchor.Raw)))
 }
 
 // ShiftTo wraps the raw ShiftTo call.
-func (self IAnchor) ShiftTo(paSite *uitextservices.IAnchor) error {
-	return win32.HRESULTError(int32(self.Raw.ShiftTo(paSite)))
+func (self IAnchor) ShiftTo(paSite IAnchor) error {
+	return win32.HRESULTError(int32(self.Raw.ShiftTo(paSite.Raw)))
 }
 
 // ShiftRegion wraps the raw ShiftRegion call.
@@ -258,8 +258,8 @@ func WrapIDocWrap(raw *uitextservices.IDocWrap) IDocWrap {
 }
 
 // SetDoc wraps the raw SetDoc call.
-func (self IDocWrap) SetDoc(riid *win32.GUID, punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetDoc(riid, punk)))
+func (self IDocWrap) SetDoc(riid *win32.GUID, punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetDoc(riid, punk.Raw)))
 }
 
 // GetWrappedDoc wraps the raw GetWrappedDoc call.
@@ -813,13 +813,13 @@ func WrapITextStoreACP(raw *uitextservices.ITextStoreACP) ITextStoreACP {
 }
 
 // AdviseSink wraps the raw AdviseSink call.
-func (self ITextStoreACP) AdviseSink(riid *win32.GUID, punk *systemcom.IUnknown, dwMask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseSink(riid, punk, dwMask)))
+func (self ITextStoreACP) AdviseSink(riid *win32.GUID, punk systemcomidiom.IUnknown, dwMask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseSink(riid, punk.Raw, dwMask)))
 }
 
 // UnadviseSink wraps the raw UnadviseSink call.
-func (self ITextStoreACP) UnadviseSink(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.UnadviseSink(punk)))
+func (self ITextStoreACP) UnadviseSink(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.UnadviseSink(punk.Raw)))
 }
 
 // RequestLock wraps the raw RequestLock call.
@@ -874,8 +874,8 @@ func (self ITextStoreACP) QueryInsertEmbedded(pguidService *win32.GUID, pFormatE
 }
 
 // InsertEmbedded wraps the raw InsertEmbedded call.
-func (self ITextStoreACP) InsertEmbedded(dwFlags uint32, acpStart int32, acpEnd int32, pDataObject *systemcom.IDataObject, pChange *uitextservices.TS_TEXTCHANGE) error {
-	return win32.HRESULTError(int32(self.Raw.InsertEmbedded(dwFlags, acpStart, acpEnd, pDataObject, pChange)))
+func (self ITextStoreACP) InsertEmbedded(dwFlags uint32, acpStart int32, acpEnd int32, pDataObject systemcomidiom.IDataObject, pChange *uitextservices.TS_TEXTCHANGE) error {
+	return win32.HRESULTError(int32(self.Raw.InsertEmbedded(dwFlags, acpStart, acpEnd, pDataObject.Raw, pChange)))
 }
 
 // InsertTextAtSelection wraps the raw InsertTextAtSelection call.
@@ -885,8 +885,8 @@ func (self ITextStoreACP) InsertTextAtSelection(dwFlags uint32, pchText string, 
 }
 
 // InsertEmbeddedAtSelection wraps the raw InsertEmbeddedAtSelection call.
-func (self ITextStoreACP) InsertEmbeddedAtSelection(dwFlags uint32, pDataObject *systemcom.IDataObject, pacpStart *int32, pacpEnd *int32, pChange *uitextservices.TS_TEXTCHANGE) error {
-	return win32.HRESULTError(int32(self.Raw.InsertEmbeddedAtSelection(dwFlags, pDataObject, pacpStart, pacpEnd, pChange)))
+func (self ITextStoreACP) InsertEmbeddedAtSelection(dwFlags uint32, pDataObject systemcomidiom.IDataObject, pacpStart *int32, pacpEnd *int32, pChange *uitextservices.TS_TEXTCHANGE) error {
+	return win32.HRESULTError(int32(self.Raw.InsertEmbeddedAtSelection(dwFlags, pDataObject.Raw, pacpStart, pacpEnd, pChange)))
 }
 
 // RequestSupportedAttrs wraps the raw RequestSupportedAttrs call.
@@ -956,13 +956,13 @@ func WrapITextStoreACP2(raw *uitextservices.ITextStoreACP2) ITextStoreACP2 {
 }
 
 // AdviseSink wraps the raw AdviseSink call.
-func (self ITextStoreACP2) AdviseSink(riid *win32.GUID, punk *systemcom.IUnknown, dwMask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseSink(riid, punk, dwMask)))
+func (self ITextStoreACP2) AdviseSink(riid *win32.GUID, punk systemcomidiom.IUnknown, dwMask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseSink(riid, punk.Raw, dwMask)))
 }
 
 // UnadviseSink wraps the raw UnadviseSink call.
-func (self ITextStoreACP2) UnadviseSink(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.UnadviseSink(punk)))
+func (self ITextStoreACP2) UnadviseSink(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.UnadviseSink(punk.Raw)))
 }
 
 // RequestLock wraps the raw RequestLock call.
@@ -1017,8 +1017,8 @@ func (self ITextStoreACP2) QueryInsertEmbedded(pguidService *win32.GUID, pFormat
 }
 
 // InsertEmbedded wraps the raw InsertEmbedded call.
-func (self ITextStoreACP2) InsertEmbedded(dwFlags uint32, acpStart int32, acpEnd int32, pDataObject *systemcom.IDataObject, pChange *uitextservices.TS_TEXTCHANGE) error {
-	return win32.HRESULTError(int32(self.Raw.InsertEmbedded(dwFlags, acpStart, acpEnd, pDataObject, pChange)))
+func (self ITextStoreACP2) InsertEmbedded(dwFlags uint32, acpStart int32, acpEnd int32, pDataObject systemcomidiom.IDataObject, pChange *uitextservices.TS_TEXTCHANGE) error {
+	return win32.HRESULTError(int32(self.Raw.InsertEmbedded(dwFlags, acpStart, acpEnd, pDataObject.Raw, pChange)))
 }
 
 // InsertTextAtSelection wraps the raw InsertTextAtSelection call.
@@ -1028,8 +1028,8 @@ func (self ITextStoreACP2) InsertTextAtSelection(dwFlags uint32, pchText string,
 }
 
 // InsertEmbeddedAtSelection wraps the raw InsertEmbeddedAtSelection call.
-func (self ITextStoreACP2) InsertEmbeddedAtSelection(dwFlags uint32, pDataObject *systemcom.IDataObject, pacpStart *int32, pacpEnd *int32, pChange *uitextservices.TS_TEXTCHANGE) error {
-	return win32.HRESULTError(int32(self.Raw.InsertEmbeddedAtSelection(dwFlags, pDataObject, pacpStart, pacpEnd, pChange)))
+func (self ITextStoreACP2) InsertEmbeddedAtSelection(dwFlags uint32, pDataObject systemcomidiom.IDataObject, pacpStart *int32, pacpEnd *int32, pChange *uitextservices.TS_TEXTCHANGE) error {
+	return win32.HRESULTError(int32(self.Raw.InsertEmbeddedAtSelection(dwFlags, pDataObject.Raw, pacpStart, pacpEnd, pChange)))
 }
 
 // RequestSupportedAttrs wraps the raw RequestSupportedAttrs call.
@@ -1105,18 +1105,18 @@ func WrapITextStoreACPServices(raw *uitextservices.ITextStoreACPServices) ITextS
 }
 
 // Serialize wraps the raw Serialize call.
-func (self ITextStoreACPServices) Serialize(pProp *uitextservices.ITfProperty, pRange *uitextservices.ITfRange, pHdr *uitextservices.TF_PERSISTENT_PROPERTY_HEADER_ACP, pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Serialize(pProp, pRange, pHdr, pStream)))
+func (self ITextStoreACPServices) Serialize(pProp ITfProperty, pRange ITfRange, pHdr *uitextservices.TF_PERSISTENT_PROPERTY_HEADER_ACP, pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Serialize(pProp.Raw, pRange.Raw, pHdr, pStream.Raw)))
 }
 
 // Unserialize wraps the raw Unserialize call.
-func (self ITextStoreACPServices) Unserialize(pProp *uitextservices.ITfProperty, pHdr *uitextservices.TF_PERSISTENT_PROPERTY_HEADER_ACP, pStream *systemcom.IStream, pLoader *uitextservices.ITfPersistentPropertyLoaderACP) error {
-	return win32.HRESULTError(int32(self.Raw.Unserialize(pProp, pHdr, pStream, pLoader)))
+func (self ITextStoreACPServices) Unserialize(pProp ITfProperty, pHdr *uitextservices.TF_PERSISTENT_PROPERTY_HEADER_ACP, pStream systemcomidiom.IStream, pLoader ITfPersistentPropertyLoaderACP) error {
+	return win32.HRESULTError(int32(self.Raw.Unserialize(pProp.Raw, pHdr, pStream.Raw, pLoader.Raw)))
 }
 
 // ForceLoadProperty wraps the raw ForceLoadProperty call.
-func (self ITextStoreACPServices) ForceLoadProperty(pProp *uitextservices.ITfProperty) error {
-	return win32.HRESULTError(int32(self.Raw.ForceLoadProperty(pProp)))
+func (self ITextStoreACPServices) ForceLoadProperty(pProp ITfProperty) error {
+	return win32.HRESULTError(int32(self.Raw.ForceLoadProperty(pProp.Raw)))
 }
 
 // CreateRange wraps the raw CreateRange call.
@@ -1203,13 +1203,13 @@ func WrapITextStoreAnchor(raw *uitextservices.ITextStoreAnchor) ITextStoreAnchor
 }
 
 // AdviseSink wraps the raw AdviseSink call.
-func (self ITextStoreAnchor) AdviseSink(riid *win32.GUID, punk *systemcom.IUnknown, dwMask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseSink(riid, punk, dwMask)))
+func (self ITextStoreAnchor) AdviseSink(riid *win32.GUID, punk systemcomidiom.IUnknown, dwMask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseSink(riid, punk.Raw, dwMask)))
 }
 
 // UnadviseSink wraps the raw UnadviseSink call.
-func (self ITextStoreAnchor) UnadviseSink(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.UnadviseSink(punk)))
+func (self ITextStoreAnchor) UnadviseSink(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.UnadviseSink(punk.Raw)))
 }
 
 // RequestLock wraps the raw RequestLock call.
@@ -1223,8 +1223,8 @@ func (self ITextStoreAnchor) GetStatus(pdcs *uitextservices.TS_STATUS) error {
 }
 
 // QueryInsert wraps the raw QueryInsert call.
-func (self ITextStoreAnchor) QueryInsert(paTestStart *uitextservices.IAnchor, paTestEnd *uitextservices.IAnchor, cch uint32, ppaResultStart **uitextservices.IAnchor, ppaResultEnd **uitextservices.IAnchor) error {
-	return win32.HRESULTError(int32(self.Raw.QueryInsert(paTestStart, paTestEnd, cch, ppaResultStart, ppaResultEnd)))
+func (self ITextStoreAnchor) QueryInsert(paTestStart IAnchor, paTestEnd IAnchor, cch uint32, ppaResultStart **uitextservices.IAnchor, ppaResultEnd **uitextservices.IAnchor) error {
+	return win32.HRESULTError(int32(self.Raw.QueryInsert(paTestStart.Raw, paTestEnd.Raw, cch, ppaResultStart, ppaResultEnd)))
 }
 
 // GetSelection wraps the raw GetSelection call.
@@ -1238,30 +1238,30 @@ func (self ITextStoreAnchor) SetSelection(ulCount uint32, pSelection *uitextserv
 }
 
 // GetText wraps the raw GetText call.
-func (self ITextStoreAnchor) GetText(dwFlags uint32, paStart *uitextservices.IAnchor, paEnd *uitextservices.IAnchor, pchText foundation.PWSTR, cchReq uint32, pcch *uint32, fUpdateAnchor bool) error {
+func (self ITextStoreAnchor) GetText(dwFlags uint32, paStart IAnchor, paEnd IAnchor, pchText foundation.PWSTR, cchReq uint32, pcch *uint32, fUpdateAnchor bool) error {
 	_fUpdateAnchor := foundation.BOOL(win32.Bool32(fUpdateAnchor))
-	return win32.HRESULTError(int32(self.Raw.GetText(dwFlags, paStart, paEnd, pchText, cchReq, pcch, _fUpdateAnchor)))
+	return win32.HRESULTError(int32(self.Raw.GetText(dwFlags, paStart.Raw, paEnd.Raw, pchText, cchReq, pcch, _fUpdateAnchor)))
 }
 
 // SetText wraps the raw SetText call.
-func (self ITextStoreAnchor) SetText(dwFlags uint32, paStart *uitextservices.IAnchor, paEnd *uitextservices.IAnchor, pchText string, cch uint32) error {
+func (self ITextStoreAnchor) SetText(dwFlags uint32, paStart IAnchor, paEnd IAnchor, pchText string, cch uint32) error {
 	_pchText := win32.UTF16Ptr(pchText)
-	return win32.HRESULTError(int32(self.Raw.SetText(dwFlags, paStart, paEnd, foundation.PWSTR(_pchText), cch)))
+	return win32.HRESULTError(int32(self.Raw.SetText(dwFlags, paStart.Raw, paEnd.Raw, foundation.PWSTR(_pchText), cch)))
 }
 
 // GetFormattedText wraps the raw GetFormattedText call.
-func (self ITextStoreAnchor) GetFormattedText(paStart *uitextservices.IAnchor, paEnd *uitextservices.IAnchor, ppDataObject **systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.GetFormattedText(paStart, paEnd, ppDataObject)))
+func (self ITextStoreAnchor) GetFormattedText(paStart IAnchor, paEnd IAnchor, ppDataObject **systemcom.IDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.GetFormattedText(paStart.Raw, paEnd.Raw, ppDataObject)))
 }
 
 // GetEmbedded wraps the raw GetEmbedded call.
-func (self ITextStoreAnchor) GetEmbedded(dwFlags uint32, paPos *uitextservices.IAnchor, rguidService *win32.GUID, riid *win32.GUID, ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetEmbedded(dwFlags, paPos, rguidService, riid, ppunk)))
+func (self ITextStoreAnchor) GetEmbedded(dwFlags uint32, paPos IAnchor, rguidService *win32.GUID, riid *win32.GUID, ppunk **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GetEmbedded(dwFlags, paPos.Raw, rguidService, riid, ppunk)))
 }
 
 // InsertEmbedded wraps the raw InsertEmbedded call.
-func (self ITextStoreAnchor) InsertEmbedded(dwFlags uint32, paStart *uitextservices.IAnchor, paEnd *uitextservices.IAnchor, pDataObject *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.InsertEmbedded(dwFlags, paStart, paEnd, pDataObject)))
+func (self ITextStoreAnchor) InsertEmbedded(dwFlags uint32, paStart IAnchor, paEnd IAnchor, pDataObject systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.InsertEmbedded(dwFlags, paStart.Raw, paEnd.Raw, pDataObject.Raw)))
 }
 
 // RequestSupportedAttrs wraps the raw RequestSupportedAttrs call.
@@ -1270,18 +1270,18 @@ func (self ITextStoreAnchor) RequestSupportedAttrs(dwFlags uint32, cFilterAttrs 
 }
 
 // RequestAttrsAtPosition wraps the raw RequestAttrsAtPosition call.
-func (self ITextStoreAnchor) RequestAttrsAtPosition(paPos *uitextservices.IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RequestAttrsAtPosition(paPos, cFilterAttrs, paFilterAttrs, dwFlags)))
+func (self ITextStoreAnchor) RequestAttrsAtPosition(paPos IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RequestAttrsAtPosition(paPos.Raw, cFilterAttrs, paFilterAttrs, dwFlags)))
 }
 
 // RequestAttrsTransitioningAtPosition wraps the raw RequestAttrsTransitioningAtPosition call.
-func (self ITextStoreAnchor) RequestAttrsTransitioningAtPosition(paPos *uitextservices.IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RequestAttrsTransitioningAtPosition(paPos, cFilterAttrs, paFilterAttrs, dwFlags)))
+func (self ITextStoreAnchor) RequestAttrsTransitioningAtPosition(paPos IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RequestAttrsTransitioningAtPosition(paPos.Raw, cFilterAttrs, paFilterAttrs, dwFlags)))
 }
 
 // FindNextAttrTransition wraps the raw FindNextAttrTransition call.
-func (self ITextStoreAnchor) FindNextAttrTransition(paStart *uitextservices.IAnchor, paHalt *uitextservices.IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32, pfFound *foundation.BOOL, plFoundOffset *int32) error {
-	return win32.HRESULTError(int32(self.Raw.FindNextAttrTransition(paStart, paHalt, cFilterAttrs, paFilterAttrs, dwFlags, pfFound, plFoundOffset)))
+func (self ITextStoreAnchor) FindNextAttrTransition(paStart IAnchor, paHalt IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32, pfFound *foundation.BOOL, plFoundOffset *int32) error {
+	return win32.HRESULTError(int32(self.Raw.FindNextAttrTransition(paStart.Raw, paHalt.Raw, cFilterAttrs, paFilterAttrs, dwFlags, pfFound, plFoundOffset)))
 }
 
 // RetrieveRequestedAttrs wraps the raw RetrieveRequestedAttrs call.
@@ -1310,8 +1310,8 @@ func (self ITextStoreAnchor) GetAnchorFromPoint(vcView uint32, ptScreen *foundat
 }
 
 // GetTextExt wraps the raw GetTextExt call.
-func (self ITextStoreAnchor) GetTextExt(vcView uint32, paStart *uitextservices.IAnchor, paEnd *uitextservices.IAnchor, prc *foundation.RECT, pfClipped *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetTextExt(vcView, paStart, paEnd, prc, pfClipped)))
+func (self ITextStoreAnchor) GetTextExt(vcView uint32, paStart IAnchor, paEnd IAnchor, prc *foundation.RECT, pfClipped *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.GetTextExt(vcView, paStart.Raw, paEnd.Raw, prc, pfClipped)))
 }
 
 // GetScreenExt wraps the raw GetScreenExt call.
@@ -1336,8 +1336,8 @@ func (self ITextStoreAnchor) InsertTextAtSelection(dwFlags uint32, pchText strin
 }
 
 // InsertEmbeddedAtSelection wraps the raw InsertEmbeddedAtSelection call.
-func (self ITextStoreAnchor) InsertEmbeddedAtSelection(dwFlags uint32, pDataObject *systemcom.IDataObject, ppaStart **uitextservices.IAnchor, ppaEnd **uitextservices.IAnchor) error {
-	return win32.HRESULTError(int32(self.Raw.InsertEmbeddedAtSelection(dwFlags, pDataObject, ppaStart, ppaEnd)))
+func (self ITextStoreAnchor) InsertEmbeddedAtSelection(dwFlags uint32, pDataObject systemcomidiom.IDataObject, ppaStart **uitextservices.IAnchor, ppaEnd **uitextservices.IAnchor) error {
+	return win32.HRESULTError(int32(self.Raw.InsertEmbeddedAtSelection(dwFlags, pDataObject.Raw, ppaStart, ppaEnd)))
 }
 
 // ITextStoreAnchorEx is an idiomatic wrapper over the raw COM interface UI.TextServices.ITextStoreAnchorEx with error-returning methods.
@@ -1363,8 +1363,8 @@ func WrapITextStoreAnchorSink(raw *uitextservices.ITextStoreAnchorSink) ITextSto
 }
 
 // OnTextChange wraps the raw OnTextChange call.
-func (self ITextStoreAnchorSink) OnTextChange(dwFlags uitextservices.TEXT_STORE_CHANGE_FLAGS, paStart *uitextservices.IAnchor, paEnd *uitextservices.IAnchor) error {
-	return win32.HRESULTError(int32(self.Raw.OnTextChange(dwFlags, paStart, paEnd)))
+func (self ITextStoreAnchorSink) OnTextChange(dwFlags uitextservices.TEXT_STORE_CHANGE_FLAGS, paStart IAnchor, paEnd IAnchor) error {
+	return win32.HRESULTError(int32(self.Raw.OnTextChange(dwFlags, paStart.Raw, paEnd.Raw)))
 }
 
 // OnSelectionChange wraps the raw OnSelectionChange call.
@@ -1383,8 +1383,8 @@ func (self ITextStoreAnchorSink) OnStatusChange(dwFlags uint32) error {
 }
 
 // OnAttrsChange wraps the raw OnAttrsChange call.
-func (self ITextStoreAnchorSink) OnAttrsChange(paStart *uitextservices.IAnchor, paEnd *uitextservices.IAnchor, cAttrs uint32, paAttrs *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.OnAttrsChange(paStart, paEnd, cAttrs, paAttrs)))
+func (self ITextStoreAnchorSink) OnAttrsChange(paStart IAnchor, paEnd IAnchor, cAttrs uint32, paAttrs *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.OnAttrsChange(paStart.Raw, paEnd.Raw, cAttrs, paAttrs)))
 }
 
 // OnLockGranted wraps the raw OnLockGranted call.
@@ -1679,8 +1679,8 @@ func WrapITfCleanupContextSink(raw *uitextservices.ITfCleanupContextSink) ITfCle
 }
 
 // OnCleanupContext wraps the raw OnCleanupContext call.
-func (self ITfCleanupContextSink) OnCleanupContext(ecWrite uint32, pic *uitextservices.ITfContext) error {
-	return win32.HRESULTError(int32(self.Raw.OnCleanupContext(ecWrite, pic)))
+func (self ITfCleanupContextSink) OnCleanupContext(ecWrite uint32, pic ITfContext) error {
+	return win32.HRESULTError(int32(self.Raw.OnCleanupContext(ecWrite, pic.Raw)))
 }
 
 // ITfClientId is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfClientId with error-returning methods.
@@ -1779,13 +1779,13 @@ func (self ITfComposition) GetRange(ppRange **uitextservices.ITfRange) error {
 }
 
 // ShiftStart wraps the raw ShiftStart call.
-func (self ITfComposition) ShiftStart(ecWrite uint32, pNewStart *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.ShiftStart(ecWrite, pNewStart)))
+func (self ITfComposition) ShiftStart(ecWrite uint32, pNewStart ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.ShiftStart(ecWrite, pNewStart.Raw)))
 }
 
 // ShiftEnd wraps the raw ShiftEnd call.
-func (self ITfComposition) ShiftEnd(ecWrite uint32, pNewEnd *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.ShiftEnd(ecWrite, pNewEnd)))
+func (self ITfComposition) ShiftEnd(ecWrite uint32, pNewEnd ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.ShiftEnd(ecWrite, pNewEnd.Raw)))
 }
 
 // EndComposition wraps the raw EndComposition call.
@@ -1805,8 +1805,8 @@ func WrapITfCompositionSink(raw *uitextservices.ITfCompositionSink) ITfCompositi
 }
 
 // OnCompositionTerminated wraps the raw OnCompositionTerminated call.
-func (self ITfCompositionSink) OnCompositionTerminated(ecWrite uint32, pComposition *uitextservices.ITfComposition) error {
-	return win32.HRESULTError(int32(self.Raw.OnCompositionTerminated(ecWrite, pComposition)))
+func (self ITfCompositionSink) OnCompositionTerminated(ecWrite uint32, pComposition ITfComposition) error {
+	return win32.HRESULTError(int32(self.Raw.OnCompositionTerminated(ecWrite, pComposition.Raw)))
 }
 
 // ITfCompositionView is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfCompositionView with error-returning methods.
@@ -1863,8 +1863,8 @@ func WrapITfContext(raw *uitextservices.ITfContext) ITfContext {
 }
 
 // RequestEditSession wraps the raw RequestEditSession call.
-func (self ITfContext) RequestEditSession(tid uint32, pes *uitextservices.ITfEditSession, dwFlags uitextservices.TF_CONTEXT_EDIT_CONTEXT_FLAGS, phrSession *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.RequestEditSession(tid, pes, dwFlags, phrSession)))
+func (self ITfContext) RequestEditSession(tid uint32, pes ITfEditSession, dwFlags uitextservices.TF_CONTEXT_EDIT_CONTEXT_FLAGS, phrSession *foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.RequestEditSession(tid, pes.Raw, dwFlags, phrSession)))
 }
 
 // InWriteSession wraps the raw InWriteSession call.
@@ -1933,8 +1933,8 @@ func (self ITfContext) GetDocumentMgr(ppDm **uitextservices.ITfDocumentMgr) erro
 }
 
 // CreateRangeBackup wraps the raw CreateRangeBackup call.
-func (self ITfContext) CreateRangeBackup(ec uint32, pRange *uitextservices.ITfRange, ppBackup **uitextservices.ITfRangeBackup) error {
-	return win32.HRESULTError(int32(self.Raw.CreateRangeBackup(ec, pRange, ppBackup)))
+func (self ITfContext) CreateRangeBackup(ec uint32, pRange ITfRange, ppBackup **uitextservices.ITfRangeBackup) error {
+	return win32.HRESULTError(int32(self.Raw.CreateRangeBackup(ec, pRange.Raw, ppBackup)))
 }
 
 // ITfContextComposition is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfContextComposition with error-returning methods.
@@ -1949,8 +1949,8 @@ func WrapITfContextComposition(raw *uitextservices.ITfContextComposition) ITfCon
 }
 
 // StartComposition wraps the raw StartComposition call.
-func (self ITfContextComposition) StartComposition(ecWrite uint32, pCompositionRange *uitextservices.ITfRange, pSink *uitextservices.ITfCompositionSink, ppComposition **uitextservices.ITfComposition) error {
-	return win32.HRESULTError(int32(self.Raw.StartComposition(ecWrite, pCompositionRange, pSink, ppComposition)))
+func (self ITfContextComposition) StartComposition(ecWrite uint32, pCompositionRange ITfRange, pSink ITfCompositionSink, ppComposition **uitextservices.ITfComposition) error {
+	return win32.HRESULTError(int32(self.Raw.StartComposition(ecWrite, pCompositionRange.Raw, pSink.Raw, ppComposition)))
 }
 
 // EnumCompositions wraps the raw EnumCompositions call.
@@ -1959,13 +1959,13 @@ func (self ITfContextComposition) EnumCompositions(ppEnum **uitextservices.IEnum
 }
 
 // FindComposition wraps the raw FindComposition call.
-func (self ITfContextComposition) FindComposition(ecRead uint32, pTestRange *uitextservices.ITfRange, ppEnum **uitextservices.IEnumITfCompositionView) error {
-	return win32.HRESULTError(int32(self.Raw.FindComposition(ecRead, pTestRange, ppEnum)))
+func (self ITfContextComposition) FindComposition(ecRead uint32, pTestRange ITfRange, ppEnum **uitextservices.IEnumITfCompositionView) error {
+	return win32.HRESULTError(int32(self.Raw.FindComposition(ecRead, pTestRange.Raw, ppEnum)))
 }
 
 // TakeOwnership wraps the raw TakeOwnership call.
-func (self ITfContextComposition) TakeOwnership(ecWrite uint32, pComposition *uitextservices.ITfCompositionView, pSink *uitextservices.ITfCompositionSink, ppComposition **uitextservices.ITfComposition) error {
-	return win32.HRESULTError(int32(self.Raw.TakeOwnership(ecWrite, pComposition, pSink, ppComposition)))
+func (self ITfContextComposition) TakeOwnership(ecWrite uint32, pComposition ITfCompositionView, pSink ITfCompositionSink, ppComposition **uitextservices.ITfComposition) error {
+	return win32.HRESULTError(int32(self.Raw.TakeOwnership(ecWrite, pComposition.Raw, pSink.Raw, ppComposition)))
 }
 
 // ITfContextKeyEventSink is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfContextKeyEventSink with error-returning methods.
@@ -2052,8 +2052,8 @@ func WrapITfContextOwnerCompositionServices(raw *uitextservices.ITfContextOwnerC
 }
 
 // TerminateComposition wraps the raw TerminateComposition call.
-func (self ITfContextOwnerCompositionServices) TerminateComposition(pComposition *uitextservices.ITfCompositionView) error {
-	return win32.HRESULTError(int32(self.Raw.TerminateComposition(pComposition)))
+func (self ITfContextOwnerCompositionServices) TerminateComposition(pComposition ITfCompositionView) error {
+	return win32.HRESULTError(int32(self.Raw.TerminateComposition(pComposition.Raw)))
 }
 
 // ITfContextOwnerCompositionSink is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfContextOwnerCompositionSink with error-returning methods.
@@ -2068,18 +2068,18 @@ func WrapITfContextOwnerCompositionSink(raw *uitextservices.ITfContextOwnerCompo
 }
 
 // OnStartComposition wraps the raw OnStartComposition call.
-func (self ITfContextOwnerCompositionSink) OnStartComposition(pComposition *uitextservices.ITfCompositionView, pfOk *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnStartComposition(pComposition, pfOk)))
+func (self ITfContextOwnerCompositionSink) OnStartComposition(pComposition ITfCompositionView, pfOk *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnStartComposition(pComposition.Raw, pfOk)))
 }
 
 // OnUpdateComposition wraps the raw OnUpdateComposition call.
-func (self ITfContextOwnerCompositionSink) OnUpdateComposition(pComposition *uitextservices.ITfCompositionView, pRangeNew *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.OnUpdateComposition(pComposition, pRangeNew)))
+func (self ITfContextOwnerCompositionSink) OnUpdateComposition(pComposition ITfCompositionView, pRangeNew ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.OnUpdateComposition(pComposition.Raw, pRangeNew.Raw)))
 }
 
 // OnEndComposition wraps the raw OnEndComposition call.
-func (self ITfContextOwnerCompositionSink) OnEndComposition(pComposition *uitextservices.ITfCompositionView) error {
-	return win32.HRESULTError(int32(self.Raw.OnEndComposition(pComposition)))
+func (self ITfContextOwnerCompositionSink) OnEndComposition(pComposition ITfCompositionView) error {
+	return win32.HRESULTError(int32(self.Raw.OnEndComposition(pComposition.Raw)))
 }
 
 // ITfContextOwnerServices is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfContextOwnerServices with error-returning methods.
@@ -2109,18 +2109,18 @@ func (self ITfContextOwnerServices) OnAttributeChange(rguidAttribute *win32.GUID
 }
 
 // Serialize wraps the raw Serialize call.
-func (self ITfContextOwnerServices) Serialize(pProp *uitextservices.ITfProperty, pRange *uitextservices.ITfRange, pHdr *uitextservices.TF_PERSISTENT_PROPERTY_HEADER_ACP, pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Serialize(pProp, pRange, pHdr, pStream)))
+func (self ITfContextOwnerServices) Serialize(pProp ITfProperty, pRange ITfRange, pHdr *uitextservices.TF_PERSISTENT_PROPERTY_HEADER_ACP, pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Serialize(pProp.Raw, pRange.Raw, pHdr, pStream.Raw)))
 }
 
 // Unserialize wraps the raw Unserialize call.
-func (self ITfContextOwnerServices) Unserialize(pProp *uitextservices.ITfProperty, pHdr *uitextservices.TF_PERSISTENT_PROPERTY_HEADER_ACP, pStream *systemcom.IStream, pLoader *uitextservices.ITfPersistentPropertyLoaderACP) error {
-	return win32.HRESULTError(int32(self.Raw.Unserialize(pProp, pHdr, pStream, pLoader)))
+func (self ITfContextOwnerServices) Unserialize(pProp ITfProperty, pHdr *uitextservices.TF_PERSISTENT_PROPERTY_HEADER_ACP, pStream systemcomidiom.IStream, pLoader ITfPersistentPropertyLoaderACP) error {
+	return win32.HRESULTError(int32(self.Raw.Unserialize(pProp.Raw, pHdr, pStream.Raw, pLoader.Raw)))
 }
 
 // ForceLoadProperty wraps the raw ForceLoadProperty call.
-func (self ITfContextOwnerServices) ForceLoadProperty(pProp *uitextservices.ITfProperty) error {
-	return win32.HRESULTError(int32(self.Raw.ForceLoadProperty(pProp)))
+func (self ITfContextOwnerServices) ForceLoadProperty(pProp ITfProperty) error {
+	return win32.HRESULTError(int32(self.Raw.ForceLoadProperty(pProp.Raw)))
 }
 
 // CreateRange wraps the raw CreateRange call.
@@ -2145,8 +2145,8 @@ func (self ITfContextView) GetRangeFromPoint(ec uint32, ppt *foundation.POINT, d
 }
 
 // GetTextExt wraps the raw GetTextExt call.
-func (self ITfContextView) GetTextExt(ec uint32, pRange *uitextservices.ITfRange, prc *foundation.RECT, pfClipped *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetTextExt(ec, pRange, prc, pfClipped)))
+func (self ITfContextView) GetTextExt(ec uint32, pRange ITfRange, prc *foundation.RECT, pfClipped *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.GetTextExt(ec, pRange.Raw, prc, pfClipped)))
 }
 
 // GetScreenExt wraps the raw GetScreenExt call.
@@ -2171,13 +2171,13 @@ func WrapITfCreatePropertyStore(raw *uitextservices.ITfCreatePropertyStore) ITfC
 }
 
 // IsStoreSerializable wraps the raw IsStoreSerializable call.
-func (self ITfCreatePropertyStore) IsStoreSerializable(guidProp *win32.GUID, pRange *uitextservices.ITfRange, pPropStore *uitextservices.ITfPropertyStore, pfSerializable *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsStoreSerializable(guidProp, pRange, pPropStore, pfSerializable)))
+func (self ITfCreatePropertyStore) IsStoreSerializable(guidProp *win32.GUID, pRange ITfRange, pPropStore ITfPropertyStore, pfSerializable *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsStoreSerializable(guidProp, pRange.Raw, pPropStore.Raw, pfSerializable)))
 }
 
 // CreatePropertyStore wraps the raw CreatePropertyStore call.
-func (self ITfCreatePropertyStore) CreatePropertyStore(guidProp *win32.GUID, pRange *uitextservices.ITfRange, cb uint32, pStream *systemcom.IStream, ppStore **uitextservices.ITfPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePropertyStore(guidProp, pRange, cb, pStream, ppStore)))
+func (self ITfCreatePropertyStore) CreatePropertyStore(guidProp *win32.GUID, pRange ITfRange, cb uint32, pStream systemcomidiom.IStream, ppStore **uitextservices.ITfPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePropertyStore(guidProp, pRange.Raw, cb, pStream.Raw, ppStore)))
 }
 
 // ITfDisplayAttributeInfo is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfDisplayAttributeInfo with error-returning methods.
@@ -2291,13 +2291,13 @@ func WrapITfDocumentMgr(raw *uitextservices.ITfDocumentMgr) ITfDocumentMgr {
 }
 
 // CreateContext wraps the raw CreateContext call.
-func (self ITfDocumentMgr) CreateContext(tidOwner uint32, dwFlags uint32, punk *systemcom.IUnknown, ppic **uitextservices.ITfContext, pecTextStore *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CreateContext(tidOwner, dwFlags, punk, ppic, pecTextStore)))
+func (self ITfDocumentMgr) CreateContext(tidOwner uint32, dwFlags uint32, punk systemcomidiom.IUnknown, ppic **uitextservices.ITfContext, pecTextStore *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CreateContext(tidOwner, dwFlags, punk.Raw, ppic, pecTextStore)))
 }
 
 // Push wraps the raw Push call.
-func (self ITfDocumentMgr) Push(pic *uitextservices.ITfContext) error {
-	return win32.HRESULTError(int32(self.Raw.Push(pic)))
+func (self ITfDocumentMgr) Push(pic ITfContext) error {
+	return win32.HRESULTError(int32(self.Raw.Push(pic.Raw)))
 }
 
 // Pop wraps the raw Pop call.
@@ -2369,13 +2369,13 @@ func WrapITfEditTransactionSink(raw *uitextservices.ITfEditTransactionSink) ITfE
 }
 
 // OnStartEditTransaction wraps the raw OnStartEditTransaction call.
-func (self ITfEditTransactionSink) OnStartEditTransaction(pic *uitextservices.ITfContext) error {
-	return win32.HRESULTError(int32(self.Raw.OnStartEditTransaction(pic)))
+func (self ITfEditTransactionSink) OnStartEditTransaction(pic ITfContext) error {
+	return win32.HRESULTError(int32(self.Raw.OnStartEditTransaction(pic.Raw)))
 }
 
 // OnEndEditTransaction wraps the raw OnEndEditTransaction call.
-func (self ITfEditTransactionSink) OnEndEditTransaction(pic *uitextservices.ITfContext) error {
-	return win32.HRESULTError(int32(self.Raw.OnEndEditTransaction(pic)))
+func (self ITfEditTransactionSink) OnEndEditTransaction(pic ITfContext) error {
+	return win32.HRESULTError(int32(self.Raw.OnEndEditTransaction(pic.Raw)))
 }
 
 // ITfFnAdviseText is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfFnAdviseText with error-returning methods.
@@ -2390,14 +2390,14 @@ func WrapITfFnAdviseText(raw *uitextservices.ITfFnAdviseText) ITfFnAdviseText {
 }
 
 // OnTextUpdate wraps the raw OnTextUpdate call.
-func (self ITfFnAdviseText) OnTextUpdate(pRange *uitextservices.ITfRange, pchText string, cch int32) error {
+func (self ITfFnAdviseText) OnTextUpdate(pRange ITfRange, pchText string, cch int32) error {
 	_pchText := win32.UTF16Ptr(pchText)
-	return win32.HRESULTError(int32(self.Raw.OnTextUpdate(pRange, foundation.PWSTR(_pchText), cch)))
+	return win32.HRESULTError(int32(self.Raw.OnTextUpdate(pRange.Raw, foundation.PWSTR(_pchText), cch)))
 }
 
 // OnLatticeUpdate wraps the raw OnLatticeUpdate call.
-func (self ITfFnAdviseText) OnLatticeUpdate(pRange *uitextservices.ITfRange, pLattice *uitextservices.ITfLMLattice) error {
-	return win32.HRESULTError(int32(self.Raw.OnLatticeUpdate(pRange, pLattice)))
+func (self ITfFnAdviseText) OnLatticeUpdate(pRange ITfRange, pLattice ITfLMLattice) error {
+	return win32.HRESULTError(int32(self.Raw.OnLatticeUpdate(pRange.Raw, pLattice.Raw)))
 }
 
 // ITfFnBalloon is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfFnBalloon with error-returning methods.
@@ -2477,8 +2477,8 @@ func WrapITfFnCustomSpeechCommand(raw *uitextservices.ITfFnCustomSpeechCommand) 
 }
 
 // SetSpeechCommandProvider wraps the raw SetSpeechCommandProvider call.
-func (self ITfFnCustomSpeechCommand) SetSpeechCommandProvider(pspcmdProvider *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetSpeechCommandProvider(pspcmdProvider)))
+func (self ITfFnCustomSpeechCommand) SetSpeechCommandProvider(pspcmdProvider systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetSpeechCommandProvider(pspcmdProvider.Raw)))
 }
 
 // ITfFnGetLinguisticAlternates is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfFnGetLinguisticAlternates with error-returning methods.
@@ -2493,8 +2493,8 @@ func WrapITfFnGetLinguisticAlternates(raw *uitextservices.ITfFnGetLinguisticAlte
 }
 
 // GetAlternates wraps the raw GetAlternates call.
-func (self ITfFnGetLinguisticAlternates) GetAlternates(pRange *uitextservices.ITfRange, ppCandidateList **uitextservices.ITfCandidateList) error {
-	return win32.HRESULTError(int32(self.Raw.GetAlternates(pRange, ppCandidateList)))
+func (self ITfFnGetLinguisticAlternates) GetAlternates(pRange ITfRange, ppCandidateList **uitextservices.ITfCandidateList) error {
+	return win32.HRESULTError(int32(self.Raw.GetAlternates(pRange.Raw, ppCandidateList)))
 }
 
 // ITfFnGetPreferredTouchKeyboardLayout is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfFnGetPreferredTouchKeyboardLayout with error-returning methods.
@@ -2541,8 +2541,8 @@ func WrapITfFnLMInternal(raw *uitextservices.ITfFnLMInternal) ITfFnLMInternal {
 }
 
 // ProcessLattice wraps the raw ProcessLattice call.
-func (self ITfFnLMInternal) ProcessLattice(pRange *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessLattice(pRange)))
+func (self ITfFnLMInternal) ProcessLattice(pRange ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessLattice(pRange.Raw)))
 }
 
 // ITfFnLMProcessor is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfFnLMProcessor with error-returning methods.
@@ -2557,8 +2557,8 @@ func WrapITfFnLMProcessor(raw *uitextservices.ITfFnLMProcessor) ITfFnLMProcessor
 }
 
 // QueryRange wraps the raw QueryRange call.
-func (self ITfFnLMProcessor) QueryRange(pRange *uitextservices.ITfRange, ppNewRange **uitextservices.ITfRange, pfAccepted *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.QueryRange(pRange, ppNewRange, pfAccepted)))
+func (self ITfFnLMProcessor) QueryRange(pRange ITfRange, ppNewRange **uitextservices.ITfRange, pfAccepted *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.QueryRange(pRange.Raw, ppNewRange, pfAccepted)))
 }
 
 // QueryLangID wraps the raw QueryLangID call.
@@ -2567,13 +2567,13 @@ func (self ITfFnLMProcessor) QueryLangID(langid uint16, pfAccepted *foundation.B
 }
 
 // GetReconversion wraps the raw GetReconversion call.
-func (self ITfFnLMProcessor) GetReconversion(pRange *uitextservices.ITfRange, ppCandList **uitextservices.ITfCandidateList) error {
-	return win32.HRESULTError(int32(self.Raw.GetReconversion(pRange, ppCandList)))
+func (self ITfFnLMProcessor) GetReconversion(pRange ITfRange, ppCandList **uitextservices.ITfCandidateList) error {
+	return win32.HRESULTError(int32(self.Raw.GetReconversion(pRange.Raw, ppCandList)))
 }
 
 // Reconvert wraps the raw Reconvert call.
-func (self ITfFnLMProcessor) Reconvert(pRange *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.Reconvert(pRange)))
+func (self ITfFnLMProcessor) Reconvert(pRange ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.Reconvert(pRange.Raw)))
 }
 
 // QueryKey wraps the raw QueryKey call.
@@ -2589,8 +2589,8 @@ func (self ITfFnLMProcessor) InvokeKey(fUp bool, vKey foundation.WPARAM, lparamK
 }
 
 // InvokeFunc wraps the raw InvokeFunc call.
-func (self ITfFnLMProcessor) InvokeFunc(pic *uitextservices.ITfContext, refguidFunc *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.InvokeFunc(pic, refguidFunc)))
+func (self ITfFnLMProcessor) InvokeFunc(pic ITfContext, refguidFunc *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.InvokeFunc(pic.Raw, refguidFunc)))
 }
 
 // ITfFnLangProfileUtil is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfFnLangProfileUtil with error-returning methods.
@@ -2626,13 +2626,13 @@ func WrapITfFnPlayBack(raw *uitextservices.ITfFnPlayBack) ITfFnPlayBack {
 }
 
 // QueryRange wraps the raw QueryRange call.
-func (self ITfFnPlayBack) QueryRange(pRange *uitextservices.ITfRange, ppNewRange **uitextservices.ITfRange, pfPlayable *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.QueryRange(pRange, ppNewRange, pfPlayable)))
+func (self ITfFnPlayBack) QueryRange(pRange ITfRange, ppNewRange **uitextservices.ITfRange, pfPlayable *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.QueryRange(pRange.Raw, ppNewRange, pfPlayable)))
 }
 
 // Play wraps the raw Play call.
-func (self ITfFnPlayBack) Play(pRange *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.Play(pRange)))
+func (self ITfFnPlayBack) Play(pRange ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.Play(pRange.Raw)))
 }
 
 // ITfFnPropertyUIStatus is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfFnPropertyUIStatus with error-returning methods.
@@ -2668,18 +2668,18 @@ func WrapITfFnReconversion(raw *uitextservices.ITfFnReconversion) ITfFnReconvers
 }
 
 // QueryRange wraps the raw QueryRange call.
-func (self ITfFnReconversion) QueryRange(pRange *uitextservices.ITfRange, ppNewRange **uitextservices.ITfRange, pfConvertable *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.QueryRange(pRange, ppNewRange, pfConvertable)))
+func (self ITfFnReconversion) QueryRange(pRange ITfRange, ppNewRange **uitextservices.ITfRange, pfConvertable *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.QueryRange(pRange.Raw, ppNewRange, pfConvertable)))
 }
 
 // GetReconversion wraps the raw GetReconversion call.
-func (self ITfFnReconversion) GetReconversion(pRange *uitextservices.ITfRange, ppCandList **uitextservices.ITfCandidateList) error {
-	return win32.HRESULTError(int32(self.Raw.GetReconversion(pRange, ppCandList)))
+func (self ITfFnReconversion) GetReconversion(pRange ITfRange, ppCandList **uitextservices.ITfCandidateList) error {
+	return win32.HRESULTError(int32(self.Raw.GetReconversion(pRange.Raw, ppCandList)))
 }
 
 // Reconvert wraps the raw Reconvert call.
-func (self ITfFnReconversion) Reconvert(pRange *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.Reconvert(pRange)))
+func (self ITfFnReconversion) Reconvert(pRange ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.Reconvert(pRange.Raw)))
 }
 
 // ITfFnSearchCandidateProvider is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfFnSearchCandidateProvider with error-returning methods.
@@ -3039,8 +3039,8 @@ func (self ITfInsertAtSelection) InsertTextAtSelection(ec uint32, dwFlags uitext
 }
 
 // InsertEmbeddedAtSelection wraps the raw InsertEmbeddedAtSelection call.
-func (self ITfInsertAtSelection) InsertEmbeddedAtSelection(ec uint32, dwFlags uint32, pDataObject *systemcom.IDataObject, ppRange **uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.InsertEmbeddedAtSelection(ec, dwFlags, pDataObject, ppRange)))
+func (self ITfInsertAtSelection) InsertEmbeddedAtSelection(ec uint32, dwFlags uint32, pDataObject systemcomidiom.IDataObject, ppRange **uitextservices.ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.InsertEmbeddedAtSelection(ec, dwFlags, pDataObject.Raw, ppRange)))
 }
 
 // ITfIntegratableCandidateListUIElement is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfIntegratableCandidateListUIElement with error-returning methods.
@@ -3092,28 +3092,28 @@ func (self ITfKeyEventSink) OnSetFocus(fForeground bool) error {
 }
 
 // OnTestKeyDown wraps the raw OnTestKeyDown call.
-func (self ITfKeyEventSink) OnTestKeyDown(pic *uitextservices.ITfContext, wParam foundation.WPARAM, lParam foundation.LPARAM, pfEaten *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnTestKeyDown(pic, wParam, lParam, pfEaten)))
+func (self ITfKeyEventSink) OnTestKeyDown(pic ITfContext, wParam foundation.WPARAM, lParam foundation.LPARAM, pfEaten *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnTestKeyDown(pic.Raw, wParam, lParam, pfEaten)))
 }
 
 // OnTestKeyUp wraps the raw OnTestKeyUp call.
-func (self ITfKeyEventSink) OnTestKeyUp(pic *uitextservices.ITfContext, wParam foundation.WPARAM, lParam foundation.LPARAM, pfEaten *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnTestKeyUp(pic, wParam, lParam, pfEaten)))
+func (self ITfKeyEventSink) OnTestKeyUp(pic ITfContext, wParam foundation.WPARAM, lParam foundation.LPARAM, pfEaten *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnTestKeyUp(pic.Raw, wParam, lParam, pfEaten)))
 }
 
 // OnKeyDown wraps the raw OnKeyDown call.
-func (self ITfKeyEventSink) OnKeyDown(pic *uitextservices.ITfContext, wParam foundation.WPARAM, lParam foundation.LPARAM, pfEaten *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnKeyDown(pic, wParam, lParam, pfEaten)))
+func (self ITfKeyEventSink) OnKeyDown(pic ITfContext, wParam foundation.WPARAM, lParam foundation.LPARAM, pfEaten *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnKeyDown(pic.Raw, wParam, lParam, pfEaten)))
 }
 
 // OnKeyUp wraps the raw OnKeyUp call.
-func (self ITfKeyEventSink) OnKeyUp(pic *uitextservices.ITfContext, wParam foundation.WPARAM, lParam foundation.LPARAM, pfEaten *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnKeyUp(pic, wParam, lParam, pfEaten)))
+func (self ITfKeyEventSink) OnKeyUp(pic ITfContext, wParam foundation.WPARAM, lParam foundation.LPARAM, pfEaten *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnKeyUp(pic.Raw, wParam, lParam, pfEaten)))
 }
 
 // OnPreservedKey wraps the raw OnPreservedKey call.
-func (self ITfKeyEventSink) OnPreservedKey(pic *uitextservices.ITfContext, rguid *win32.GUID, pfEaten *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnPreservedKey(pic, rguid, pfEaten)))
+func (self ITfKeyEventSink) OnPreservedKey(pic ITfContext, rguid *win32.GUID, pfEaten *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnPreservedKey(pic.Raw, rguid, pfEaten)))
 }
 
 // ITfKeyTraceEventSink is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfKeyTraceEventSink with error-returning methods.
@@ -3149,9 +3149,9 @@ func WrapITfKeystrokeMgr(raw *uitextservices.ITfKeystrokeMgr) ITfKeystrokeMgr {
 }
 
 // AdviseKeyEventSink wraps the raw AdviseKeyEventSink call.
-func (self ITfKeystrokeMgr) AdviseKeyEventSink(tid uint32, pSink *uitextservices.ITfKeyEventSink, fForeground bool) error {
+func (self ITfKeystrokeMgr) AdviseKeyEventSink(tid uint32, pSink ITfKeyEventSink, fForeground bool) error {
 	_fForeground := foundation.BOOL(win32.Bool32(fForeground))
-	return win32.HRESULTError(int32(self.Raw.AdviseKeyEventSink(tid, pSink, _fForeground)))
+	return win32.HRESULTError(int32(self.Raw.AdviseKeyEventSink(tid, pSink.Raw, _fForeground)))
 }
 
 // UnadviseKeyEventSink wraps the raw UnadviseKeyEventSink call.
@@ -3185,8 +3185,8 @@ func (self ITfKeystrokeMgr) KeyUp(wParam foundation.WPARAM, lParam foundation.LP
 }
 
 // GetPreservedKey wraps the raw GetPreservedKey call.
-func (self ITfKeystrokeMgr) GetPreservedKey(pic *uitextservices.ITfContext, pprekey *uitextservices.TF_PRESERVEDKEY, pguid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreservedKey(pic, pprekey, pguid)))
+func (self ITfKeystrokeMgr) GetPreservedKey(pic ITfContext, pprekey *uitextservices.TF_PRESERVEDKEY, pguid *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.GetPreservedKey(pic.Raw, pprekey, pguid)))
 }
 
 // IsPreservedKey wraps the raw IsPreservedKey call.
@@ -3217,8 +3217,8 @@ func (self ITfKeystrokeMgr) GetPreservedKeyDescription(rguid *win32.GUID, pbstrD
 }
 
 // SimulatePreservedKey wraps the raw SimulatePreservedKey call.
-func (self ITfKeystrokeMgr) SimulatePreservedKey(pic *uitextservices.ITfContext, rguid *win32.GUID, pfEaten *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.SimulatePreservedKey(pic, rguid, pfEaten)))
+func (self ITfKeystrokeMgr) SimulatePreservedKey(pic ITfContext, rguid *win32.GUID, pfEaten *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.SimulatePreservedKey(pic.Raw, rguid, pfEaten)))
 }
 
 // ITfLMLattice is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfLMLattice with error-returning methods.
@@ -3369,8 +3369,8 @@ func WrapITfLangBarItemBitmapButton(raw *uitextservices.ITfLangBarItemBitmapButt
 }
 
 // InitMenu wraps the raw InitMenu call.
-func (self ITfLangBarItemBitmapButton) InitMenu(pMenu *uitextservices.ITfMenu) error {
-	return win32.HRESULTError(int32(self.Raw.InitMenu(pMenu)))
+func (self ITfLangBarItemBitmapButton) InitMenu(pMenu ITfMenu) error {
+	return win32.HRESULTError(int32(self.Raw.InitMenu(pMenu.Raw)))
 }
 
 // OnMenuSelect wraps the raw OnMenuSelect call.
@@ -3405,8 +3405,8 @@ func WrapITfLangBarItemButton(raw *uitextservices.ITfLangBarItemButton) ITfLangB
 }
 
 // InitMenu wraps the raw InitMenu call.
-func (self ITfLangBarItemButton) InitMenu(pMenu *uitextservices.ITfMenu) error {
-	return win32.HRESULTError(int32(self.Raw.InitMenu(pMenu)))
+func (self ITfLangBarItemButton) InitMenu(pMenu ITfMenu) error {
+	return win32.HRESULTError(int32(self.Raw.InitMenu(pMenu.Raw)))
 }
 
 // OnMenuSelect wraps the raw OnMenuSelect call.
@@ -3446,18 +3446,18 @@ func (self ITfLangBarItemMgr) GetItem(rguid *win32.GUID, ppItem **uitextservices
 }
 
 // AddItem wraps the raw AddItem call.
-func (self ITfLangBarItemMgr) AddItem(punk *uitextservices.ITfLangBarItem) error {
-	return win32.HRESULTError(int32(self.Raw.AddItem(punk)))
+func (self ITfLangBarItemMgr) AddItem(punk ITfLangBarItem) error {
+	return win32.HRESULTError(int32(self.Raw.AddItem(punk.Raw)))
 }
 
 // RemoveItem wraps the raw RemoveItem call.
-func (self ITfLangBarItemMgr) RemoveItem(punk *uitextservices.ITfLangBarItem) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveItem(punk)))
+func (self ITfLangBarItemMgr) RemoveItem(punk ITfLangBarItem) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveItem(punk.Raw)))
 }
 
 // AdviseItemSink wraps the raw AdviseItemSink call.
-func (self ITfLangBarItemMgr) AdviseItemSink(punk *uitextservices.ITfLangBarItemSink, pdwCookie *uint32, rguidItem *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseItemSink(punk, pdwCookie, rguidItem)))
+func (self ITfLangBarItemMgr) AdviseItemSink(punk ITfLangBarItemSink, pdwCookie *uint32, rguidItem *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseItemSink(punk.Raw, pdwCookie, rguidItem)))
 }
 
 // UnadviseItemSink wraps the raw UnadviseItemSink call.
@@ -3523,8 +3523,8 @@ func WrapITfLangBarMgr(raw *uitextservices.ITfLangBarMgr) ITfLangBarMgr {
 }
 
 // AdviseEventSink wraps the raw AdviseEventSink call.
-func (self ITfLangBarMgr) AdviseEventSink(pSink *uitextservices.ITfLangBarEventSink, hwnd foundation.HWND, dwFlags uint32, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseEventSink(pSink, hwnd, dwFlags, pdwCookie)))
+func (self ITfLangBarMgr) AdviseEventSink(pSink ITfLangBarEventSink, hwnd foundation.HWND, dwFlags uint32, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseEventSink(pSink.Raw, hwnd, dwFlags, pdwCookie)))
 }
 
 // UnadviseEventSink wraps the raw UnadviseEventSink call.
@@ -3554,8 +3554,8 @@ func (self ITfLangBarMgr) RestoreLastFocus(pdwThreadId *uint32, fPrev bool) erro
 }
 
 // SetModalInput wraps the raw SetModalInput call.
-func (self ITfLangBarMgr) SetModalInput(pSink *uitextservices.ITfLangBarEventSink, dwThreadId uint32, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetModalInput(pSink, dwThreadId, dwFlags)))
+func (self ITfLangBarMgr) SetModalInput(pSink ITfLangBarEventSink, dwThreadId uint32, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetModalInput(pSink.Raw, dwThreadId, dwFlags)))
 }
 
 // ShowFloating wraps the raw ShowFloating call.
@@ -3686,8 +3686,8 @@ func WrapITfMouseTracker(raw *uitextservices.ITfMouseTracker) ITfMouseTracker {
 }
 
 // AdviseMouseSink wraps the raw AdviseMouseSink call.
-func (self ITfMouseTracker) AdviseMouseSink(range_ *uitextservices.ITfRange, pSink *uitextservices.ITfMouseSink, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseMouseSink(range_, pSink, pdwCookie)))
+func (self ITfMouseTracker) AdviseMouseSink(range_ ITfRange, pSink ITfMouseSink, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseMouseSink(range_.Raw, pSink.Raw, pdwCookie)))
 }
 
 // UnadviseMouseSink wraps the raw UnadviseMouseSink call.
@@ -3707,8 +3707,8 @@ func WrapITfMouseTrackerACP(raw *uitextservices.ITfMouseTrackerACP) ITfMouseTrac
 }
 
 // AdviseMouseSink wraps the raw AdviseMouseSink call.
-func (self ITfMouseTrackerACP) AdviseMouseSink(range_ *uitextservices.ITfRangeACP, pSink *uitextservices.ITfMouseSink, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseMouseSink(range_, pSink, pdwCookie)))
+func (self ITfMouseTrackerACP) AdviseMouseSink(range_ ITfRangeACP, pSink ITfMouseSink, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseMouseSink(range_.Raw, pSink.Raw, pdwCookie)))
 }
 
 // UnadviseMouseSink wraps the raw UnadviseMouseSink call.
@@ -3760,23 +3760,23 @@ func WrapITfProperty(raw *uitextservices.ITfProperty) ITfProperty {
 }
 
 // FindRange wraps the raw FindRange call.
-func (self ITfProperty) FindRange(ec uint32, pRange *uitextservices.ITfRange, ppRange **uitextservices.ITfRange, aPos uitextservices.TfAnchor) error {
-	return win32.HRESULTError(int32(self.Raw.FindRange(ec, pRange, ppRange, aPos)))
+func (self ITfProperty) FindRange(ec uint32, pRange ITfRange, ppRange **uitextservices.ITfRange, aPos uitextservices.TfAnchor) error {
+	return win32.HRESULTError(int32(self.Raw.FindRange(ec, pRange.Raw, ppRange, aPos)))
 }
 
 // SetValueStore wraps the raw SetValueStore call.
-func (self ITfProperty) SetValueStore(ec uint32, pRange *uitextservices.ITfRange, pPropStore *uitextservices.ITfPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.SetValueStore(ec, pRange, pPropStore)))
+func (self ITfProperty) SetValueStore(ec uint32, pRange ITfRange, pPropStore ITfPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.SetValueStore(ec, pRange.Raw, pPropStore.Raw)))
 }
 
 // SetValue wraps the raw SetValue call.
-func (self ITfProperty) SetValue(ec uint32, pRange *uitextservices.ITfRange, pvarValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.SetValue(ec, pRange, pvarValue)))
+func (self ITfProperty) SetValue(ec uint32, pRange ITfRange, pvarValue *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.SetValue(ec, pRange.Raw, pvarValue)))
 }
 
 // Clear wraps the raw Clear call.
-func (self ITfProperty) Clear(ec uint32, pRange *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.Clear(ec, pRange)))
+func (self ITfProperty) Clear(ec uint32, pRange ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.Clear(ec, pRange.Raw)))
 }
 
 // ITfPropertyStore is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfPropertyStore with error-returning methods.
@@ -3806,18 +3806,18 @@ func (self ITfPropertyStore) GetData(pvarValue *systemvariant.VARIANT) error {
 }
 
 // OnTextUpdated wraps the raw OnTextUpdated call.
-func (self ITfPropertyStore) OnTextUpdated(dwFlags uint32, pRangeNew *uitextservices.ITfRange, pfAccept *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnTextUpdated(dwFlags, pRangeNew, pfAccept)))
+func (self ITfPropertyStore) OnTextUpdated(dwFlags uint32, pRangeNew ITfRange, pfAccept *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnTextUpdated(dwFlags, pRangeNew.Raw, pfAccept)))
 }
 
 // Shrink wraps the raw Shrink call.
-func (self ITfPropertyStore) Shrink(pRangeNew *uitextservices.ITfRange, pfFree *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Shrink(pRangeNew, pfFree)))
+func (self ITfPropertyStore) Shrink(pRangeNew ITfRange, pfFree *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Shrink(pRangeNew.Raw, pfFree)))
 }
 
 // Divide wraps the raw Divide call.
-func (self ITfPropertyStore) Divide(pRangeThis *uitextservices.ITfRange, pRangeNew *uitextservices.ITfRange, ppPropStore **uitextservices.ITfPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.Divide(pRangeThis, pRangeNew, ppPropStore)))
+func (self ITfPropertyStore) Divide(pRangeThis ITfRange, pRangeNew ITfRange, ppPropStore **uitextservices.ITfPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.Divide(pRangeThis.Raw, pRangeNew.Raw, ppPropStore)))
 }
 
 // Clone wraps the raw Clone call.
@@ -3831,8 +3831,8 @@ func (self ITfPropertyStore) GetPropertyRangeCreator(pclsid *win32.GUID) error {
 }
 
 // Serialize wraps the raw Serialize call.
-func (self ITfPropertyStore) Serialize(pStream *systemcom.IStream, pcb *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Serialize(pStream, pcb)))
+func (self ITfPropertyStore) Serialize(pStream systemcomidiom.IStream, pcb *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Serialize(pStream.Raw, pcb)))
 }
 
 // ITfQueryEmbedded is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfQueryEmbedded with error-returning methods.
@@ -3884,8 +3884,8 @@ func (self ITfRange) GetEmbedded(ec uint32, rguidService *win32.GUID, riid *win3
 }
 
 // InsertEmbedded wraps the raw InsertEmbedded call.
-func (self ITfRange) InsertEmbedded(ec uint32, dwFlags uint32, pDataObject *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.InsertEmbedded(ec, dwFlags, pDataObject)))
+func (self ITfRange) InsertEmbedded(ec uint32, dwFlags uint32, pDataObject systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.InsertEmbedded(ec, dwFlags, pDataObject.Raw)))
 }
 
 // ShiftStart wraps the raw ShiftStart call.
@@ -3899,13 +3899,13 @@ func (self ITfRange) ShiftEnd(ec uint32, cchReq int32, pcch *int32, pHalt *uitex
 }
 
 // ShiftStartToRange wraps the raw ShiftStartToRange call.
-func (self ITfRange) ShiftStartToRange(ec uint32, pRange *uitextservices.ITfRange, aPos uitextservices.TfAnchor) error {
-	return win32.HRESULTError(int32(self.Raw.ShiftStartToRange(ec, pRange, aPos)))
+func (self ITfRange) ShiftStartToRange(ec uint32, pRange ITfRange, aPos uitextservices.TfAnchor) error {
+	return win32.HRESULTError(int32(self.Raw.ShiftStartToRange(ec, pRange.Raw, aPos)))
 }
 
 // ShiftEndToRange wraps the raw ShiftEndToRange call.
-func (self ITfRange) ShiftEndToRange(ec uint32, pRange *uitextservices.ITfRange, aPos uitextservices.TfAnchor) error {
-	return win32.HRESULTError(int32(self.Raw.ShiftEndToRange(ec, pRange, aPos)))
+func (self ITfRange) ShiftEndToRange(ec uint32, pRange ITfRange, aPos uitextservices.TfAnchor) error {
+	return win32.HRESULTError(int32(self.Raw.ShiftEndToRange(ec, pRange.Raw, aPos)))
 }
 
 // ShiftStartRegion wraps the raw ShiftStartRegion call.
@@ -3929,23 +3929,23 @@ func (self ITfRange) Collapse(ec uint32, aPos uitextservices.TfAnchor) error {
 }
 
 // IsEqualStart wraps the raw IsEqualStart call.
-func (self ITfRange) IsEqualStart(ec uint32, pWith *uitextservices.ITfRange, aPos uitextservices.TfAnchor, pfEqual *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqualStart(ec, pWith, aPos, pfEqual)))
+func (self ITfRange) IsEqualStart(ec uint32, pWith ITfRange, aPos uitextservices.TfAnchor, pfEqual *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqualStart(ec, pWith.Raw, aPos, pfEqual)))
 }
 
 // IsEqualEnd wraps the raw IsEqualEnd call.
-func (self ITfRange) IsEqualEnd(ec uint32, pWith *uitextservices.ITfRange, aPos uitextservices.TfAnchor, pfEqual *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqualEnd(ec, pWith, aPos, pfEqual)))
+func (self ITfRange) IsEqualEnd(ec uint32, pWith ITfRange, aPos uitextservices.TfAnchor, pfEqual *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqualEnd(ec, pWith.Raw, aPos, pfEqual)))
 }
 
 // CompareStart wraps the raw CompareStart call.
-func (self ITfRange) CompareStart(ec uint32, pWith *uitextservices.ITfRange, aPos uitextservices.TfAnchor, plResult *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CompareStart(ec, pWith, aPos, plResult)))
+func (self ITfRange) CompareStart(ec uint32, pWith ITfRange, aPos uitextservices.TfAnchor, plResult *int32) error {
+	return win32.HRESULTError(int32(self.Raw.CompareStart(ec, pWith.Raw, aPos, plResult)))
 }
 
 // CompareEnd wraps the raw CompareEnd call.
-func (self ITfRange) CompareEnd(ec uint32, pWith *uitextservices.ITfRange, aPos uitextservices.TfAnchor, plResult *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CompareEnd(ec, pWith, aPos, plResult)))
+func (self ITfRange) CompareEnd(ec uint32, pWith ITfRange, aPos uitextservices.TfAnchor, plResult *int32) error {
+	return win32.HRESULTError(int32(self.Raw.CompareEnd(ec, pWith.Raw, aPos, plResult)))
 }
 
 // AdjustForInsert wraps the raw AdjustForInsert call.
@@ -4006,8 +4006,8 @@ func WrapITfRangeBackup(raw *uitextservices.ITfRangeBackup) ITfRangeBackup {
 }
 
 // Restore wraps the raw Restore call.
-func (self ITfRangeBackup) Restore(ec uint32, pRange *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.Restore(ec, pRange)))
+func (self ITfRangeBackup) Restore(ec uint32, pRange ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.Restore(ec, pRange.Raw)))
 }
 
 // ITfReadOnlyProperty is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfReadOnlyProperty with error-returning methods.
@@ -4027,13 +4027,13 @@ func (self ITfReadOnlyProperty) GetType(pguid *win32.GUID) error {
 }
 
 // EnumRanges wraps the raw EnumRanges call.
-func (self ITfReadOnlyProperty) EnumRanges(ec uint32, ppEnum **uitextservices.IEnumTfRanges, pTargetRange *uitextservices.ITfRange) error {
-	return win32.HRESULTError(int32(self.Raw.EnumRanges(ec, ppEnum, pTargetRange)))
+func (self ITfReadOnlyProperty) EnumRanges(ec uint32, ppEnum **uitextservices.IEnumTfRanges, pTargetRange ITfRange) error {
+	return win32.HRESULTError(int32(self.Raw.EnumRanges(ec, ppEnum, pTargetRange.Raw)))
 }
 
 // GetValue wraps the raw GetValue call.
-func (self ITfReadOnlyProperty) GetValue(ec uint32, pRange *uitextservices.ITfRange, pvarValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetValue(ec, pRange, pvarValue)))
+func (self ITfReadOnlyProperty) GetValue(ec uint32, pRange ITfRange, pvarValue *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.GetValue(ec, pRange.Raw, pvarValue)))
 }
 
 // GetContext wraps the raw GetContext call.
@@ -4148,8 +4148,8 @@ func WrapITfSource(raw *uitextservices.ITfSource) ITfSource {
 }
 
 // AdviseSink wraps the raw AdviseSink call.
-func (self ITfSource) AdviseSink(riid *win32.GUID, punk *systemcom.IUnknown, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseSink(riid, punk, pdwCookie)))
+func (self ITfSource) AdviseSink(riid *win32.GUID, punk systemcomidiom.IUnknown, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseSink(riid, punk.Raw, pdwCookie)))
 }
 
 // UnadviseSink wraps the raw UnadviseSink call.
@@ -4169,8 +4169,8 @@ func WrapITfSourceSingle(raw *uitextservices.ITfSourceSingle) ITfSourceSingle {
 }
 
 // AdviseSingleSink wraps the raw AdviseSingleSink call.
-func (self ITfSourceSingle) AdviseSingleSink(tid uint32, riid *win32.GUID, punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseSingleSink(tid, riid, punk)))
+func (self ITfSourceSingle) AdviseSingleSink(tid uint32, riid *win32.GUID, punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseSingleSink(tid, riid, punk.Raw)))
 }
 
 // UnadviseSingleSink wraps the raw UnadviseSingleSink call.
@@ -4218,8 +4218,8 @@ func WrapITfStatusSink(raw *uitextservices.ITfStatusSink) ITfStatusSink {
 }
 
 // OnStatusChange wraps the raw OnStatusChange call.
-func (self ITfStatusSink) OnStatusChange(pic *uitextservices.ITfContext, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnStatusChange(pic, dwFlags)))
+func (self ITfStatusSink) OnStatusChange(pic ITfContext, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnStatusChange(pic.Raw, dwFlags)))
 }
 
 // ITfSystemDeviceTypeLangBarItem is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfSystemDeviceTypeLangBarItem with error-returning methods.
@@ -4277,8 +4277,8 @@ func WrapITfSystemLangBarItemSink(raw *uitextservices.ITfSystemLangBarItemSink) 
 }
 
 // InitMenu wraps the raw InitMenu call.
-func (self ITfSystemLangBarItemSink) InitMenu(pMenu *uitextservices.ITfMenu) error {
-	return win32.HRESULTError(int32(self.Raw.InitMenu(pMenu)))
+func (self ITfSystemLangBarItemSink) InitMenu(pMenu ITfMenu) error {
+	return win32.HRESULTError(int32(self.Raw.InitMenu(pMenu.Raw)))
 }
 
 // OnMenuSelect wraps the raw OnMenuSelect call.
@@ -4320,8 +4320,8 @@ func WrapITfTextEditSink(raw *uitextservices.ITfTextEditSink) ITfTextEditSink {
 }
 
 // OnEndEdit wraps the raw OnEndEdit call.
-func (self ITfTextEditSink) OnEndEdit(pic *uitextservices.ITfContext, ecReadOnly uint32, pEditRecord *uitextservices.ITfEditRecord) error {
-	return win32.HRESULTError(int32(self.Raw.OnEndEdit(pic, ecReadOnly, pEditRecord)))
+func (self ITfTextEditSink) OnEndEdit(pic ITfContext, ecReadOnly uint32, pEditRecord ITfEditRecord) error {
+	return win32.HRESULTError(int32(self.Raw.OnEndEdit(pic.Raw, ecReadOnly, pEditRecord.Raw)))
 }
 
 // ITfTextInputProcessor is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfTextInputProcessor with error-returning methods.
@@ -4336,8 +4336,8 @@ func WrapITfTextInputProcessor(raw *uitextservices.ITfTextInputProcessor) ITfTex
 }
 
 // Activate wraps the raw Activate call.
-func (self ITfTextInputProcessor) Activate(ptim *uitextservices.ITfThreadMgr, tid uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Activate(ptim, tid)))
+func (self ITfTextInputProcessor) Activate(ptim ITfThreadMgr, tid uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Activate(ptim.Raw, tid)))
 }
 
 // Deactivate wraps the raw Deactivate call.
@@ -4357,8 +4357,8 @@ func WrapITfTextInputProcessorEx(raw *uitextservices.ITfTextInputProcessorEx) IT
 }
 
 // ActivateEx wraps the raw ActivateEx call.
-func (self ITfTextInputProcessorEx) ActivateEx(ptim *uitextservices.ITfThreadMgr, tid uint32, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ActivateEx(ptim, tid, dwFlags)))
+func (self ITfTextInputProcessorEx) ActivateEx(ptim ITfThreadMgr, tid uint32, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ActivateEx(ptim.Raw, tid, dwFlags)))
 }
 
 // ITfTextLayoutSink is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfTextLayoutSink with error-returning methods.
@@ -4373,8 +4373,8 @@ func WrapITfTextLayoutSink(raw *uitextservices.ITfTextLayoutSink) ITfTextLayoutS
 }
 
 // OnLayoutChange wraps the raw OnLayoutChange call.
-func (self ITfTextLayoutSink) OnLayoutChange(pic *uitextservices.ITfContext, lcode uitextservices.TfLayoutCode, pView *uitextservices.ITfContextView) error {
-	return win32.HRESULTError(int32(self.Raw.OnLayoutChange(pic, lcode, pView)))
+func (self ITfTextLayoutSink) OnLayoutChange(pic ITfContext, lcode uitextservices.TfLayoutCode, pView ITfContextView) error {
+	return win32.HRESULTError(int32(self.Raw.OnLayoutChange(pic.Raw, lcode, pView.Raw)))
 }
 
 // ITfThreadFocusSink is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfThreadFocusSink with error-returning methods.
@@ -4435,13 +4435,13 @@ func (self ITfThreadMgr) GetFocus(ppdimFocus **uitextservices.ITfDocumentMgr) er
 }
 
 // SetFocus wraps the raw SetFocus call.
-func (self ITfThreadMgr) SetFocus(pdimFocus *uitextservices.ITfDocumentMgr) error {
-	return win32.HRESULTError(int32(self.Raw.SetFocus(pdimFocus)))
+func (self ITfThreadMgr) SetFocus(pdimFocus ITfDocumentMgr) error {
+	return win32.HRESULTError(int32(self.Raw.SetFocus(pdimFocus.Raw)))
 }
 
 // AssociateFocus wraps the raw AssociateFocus call.
-func (self ITfThreadMgr) AssociateFocus(hwnd foundation.HWND, pdimNew *uitextservices.ITfDocumentMgr, ppdimPrev **uitextservices.ITfDocumentMgr) error {
-	return win32.HRESULTError(int32(self.Raw.AssociateFocus(hwnd, pdimNew, ppdimPrev)))
+func (self ITfThreadMgr) AssociateFocus(hwnd foundation.HWND, pdimNew ITfDocumentMgr, ppdimPrev **uitextservices.ITfDocumentMgr) error {
+	return win32.HRESULTError(int32(self.Raw.AssociateFocus(hwnd, pdimNew.Raw, ppdimPrev)))
 }
 
 // IsThreadFocus wraps the raw IsThreadFocus call.
@@ -4501,8 +4501,8 @@ func (self ITfThreadMgr2) GetFocus(ppdimFocus **uitextservices.ITfDocumentMgr) e
 }
 
 // SetFocus wraps the raw SetFocus call.
-func (self ITfThreadMgr2) SetFocus(pdimFocus *uitextservices.ITfDocumentMgr) error {
-	return win32.HRESULTError(int32(self.Raw.SetFocus(pdimFocus)))
+func (self ITfThreadMgr2) SetFocus(pdimFocus ITfDocumentMgr) error {
+	return win32.HRESULTError(int32(self.Raw.SetFocus(pdimFocus.Raw)))
 }
 
 // IsThreadFocus wraps the raw IsThreadFocus call.
@@ -4557,28 +4557,28 @@ func WrapITfThreadMgrEventSink(raw *uitextservices.ITfThreadMgrEventSink) ITfThr
 }
 
 // OnInitDocumentMgr wraps the raw OnInitDocumentMgr call.
-func (self ITfThreadMgrEventSink) OnInitDocumentMgr(pdim *uitextservices.ITfDocumentMgr) error {
-	return win32.HRESULTError(int32(self.Raw.OnInitDocumentMgr(pdim)))
+func (self ITfThreadMgrEventSink) OnInitDocumentMgr(pdim ITfDocumentMgr) error {
+	return win32.HRESULTError(int32(self.Raw.OnInitDocumentMgr(pdim.Raw)))
 }
 
 // OnUninitDocumentMgr wraps the raw OnUninitDocumentMgr call.
-func (self ITfThreadMgrEventSink) OnUninitDocumentMgr(pdim *uitextservices.ITfDocumentMgr) error {
-	return win32.HRESULTError(int32(self.Raw.OnUninitDocumentMgr(pdim)))
+func (self ITfThreadMgrEventSink) OnUninitDocumentMgr(pdim ITfDocumentMgr) error {
+	return win32.HRESULTError(int32(self.Raw.OnUninitDocumentMgr(pdim.Raw)))
 }
 
 // OnSetFocus wraps the raw OnSetFocus call.
-func (self ITfThreadMgrEventSink) OnSetFocus(pdimFocus *uitextservices.ITfDocumentMgr, pdimPrevFocus *uitextservices.ITfDocumentMgr) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetFocus(pdimFocus, pdimPrevFocus)))
+func (self ITfThreadMgrEventSink) OnSetFocus(pdimFocus ITfDocumentMgr, pdimPrevFocus ITfDocumentMgr) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetFocus(pdimFocus.Raw, pdimPrevFocus.Raw)))
 }
 
 // OnPushContext wraps the raw OnPushContext call.
-func (self ITfThreadMgrEventSink) OnPushContext(pic *uitextservices.ITfContext) error {
-	return win32.HRESULTError(int32(self.Raw.OnPushContext(pic)))
+func (self ITfThreadMgrEventSink) OnPushContext(pic ITfContext) error {
+	return win32.HRESULTError(int32(self.Raw.OnPushContext(pic.Raw)))
 }
 
 // OnPopContext wraps the raw OnPopContext call.
-func (self ITfThreadMgrEventSink) OnPopContext(pic *uitextservices.ITfContext) error {
-	return win32.HRESULTError(int32(self.Raw.OnPopContext(pic)))
+func (self ITfThreadMgrEventSink) OnPopContext(pic ITfContext) error {
+	return win32.HRESULTError(int32(self.Raw.OnPopContext(pic.Raw)))
 }
 
 // ITfThreadMgrEx is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfThreadMgrEx with error-returning methods.
@@ -4630,8 +4630,8 @@ func WrapITfTransitoryExtensionSink(raw *uitextservices.ITfTransitoryExtensionSi
 }
 
 // OnTransitoryExtensionUpdated wraps the raw OnTransitoryExtensionUpdated call.
-func (self ITfTransitoryExtensionSink) OnTransitoryExtensionUpdated(pic *uitextservices.ITfContext, ecReadOnly uint32, pResultRange *uitextservices.ITfRange, pCompositionRange *uitextservices.ITfRange, pfDeleteResultRange *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnTransitoryExtensionUpdated(pic, ecReadOnly, pResultRange, pCompositionRange, pfDeleteResultRange)))
+func (self ITfTransitoryExtensionSink) OnTransitoryExtensionUpdated(pic ITfContext, ecReadOnly uint32, pResultRange ITfRange, pCompositionRange ITfRange, pfDeleteResultRange *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnTransitoryExtensionUpdated(pic.Raw, ecReadOnly, pResultRange.Raw, pCompositionRange.Raw, pfDeleteResultRange)))
 }
 
 // ITfTransitoryExtensionUIElement is an idiomatic wrapper over the raw COM interface UI.TextServices.ITfTransitoryExtensionUIElement with error-returning methods.
@@ -4694,8 +4694,8 @@ func WrapITfUIElementMgr(raw *uitextservices.ITfUIElementMgr) ITfUIElementMgr {
 }
 
 // BeginUIElement wraps the raw BeginUIElement call.
-func (self ITfUIElementMgr) BeginUIElement(pElement *uitextservices.ITfUIElement, pbShow *foundation.BOOL, pdwUIElementId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.BeginUIElement(pElement, pbShow, pdwUIElementId)))
+func (self ITfUIElementMgr) BeginUIElement(pElement ITfUIElement, pbShow *foundation.BOOL, pdwUIElementId *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.BeginUIElement(pElement.Raw, pbShow, pdwUIElementId)))
 }
 
 // UpdateUIElement wraps the raw UpdateUIElement call.

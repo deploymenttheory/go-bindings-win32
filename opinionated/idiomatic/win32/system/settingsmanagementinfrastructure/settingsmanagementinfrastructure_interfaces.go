@@ -9,7 +9,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemsettingsmanagementinfrastructure "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/settingsmanagementinfrastructure"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
@@ -57,14 +56,14 @@ func WrapISettingsContext(raw *systemsettingsmanagementinfrastructure.ISettingsC
 }
 
 // Serialize wraps the raw Serialize call.
-func (self ISettingsContext) Serialize(pStream *systemcom.IStream, pTarget *systemsettingsmanagementinfrastructure.ITargetInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Serialize(pStream, pTarget)))
+func (self ISettingsContext) Serialize(pStream systemcomidiom.IStream, pTarget ITargetInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Serialize(pStream.Raw, pTarget.Raw)))
 }
 
 // Deserialize wraps the raw Deserialize call.
-func (self ISettingsContext) Deserialize(pStream *systemcom.IStream, pTarget *systemsettingsmanagementinfrastructure.ITargetInfo, pppResults ***systemsettingsmanagementinfrastructure.ISettingsResult) (uintptr, error) {
+func (self ISettingsContext) Deserialize(pStream systemcomidiom.IStream, pTarget ITargetInfo, pppResults ***systemsettingsmanagementinfrastructure.ISettingsResult) (uintptr, error) {
 	var _pcResultCount uintptr
-	_hr := self.Raw.Deserialize(pStream, pTarget, pppResults, &_pcResultCount)
+	_hr := self.Raw.Deserialize(pStream.Raw, pTarget.Raw, pppResults, &_pcResultCount)
 	return _pcResultCount, win32.HRESULTError(int32(_hr))
 }
 
@@ -79,21 +78,21 @@ func (self ISettingsContext) GetUserData(pUserData *unsafe.Pointer) error {
 }
 
 // GetNamespaces wraps the raw GetNamespaces call.
-func (self ISettingsContext) GetNamespaces() (*systemsettingsmanagementinfrastructure.IItemEnumerator, error) {
+func (self ISettingsContext) GetNamespaces() (IItemEnumerator, error) {
 	var _ppNamespaceIds *systemsettingsmanagementinfrastructure.IItemEnumerator
 	_hr := self.Raw.GetNamespaces(&_ppNamespaceIds)
-	return _ppNamespaceIds, win32.HRESULTError(int32(_hr))
+	return WrapIItemEnumerator(_ppNamespaceIds), win32.HRESULTError(int32(_hr))
 }
 
 // GetStoredSettings wraps the raw GetStoredSettings call.
-func (self ISettingsContext) GetStoredSettings(pIdentity *systemsettingsmanagementinfrastructure.ISettingsIdentity, ppAddedSettings **systemsettingsmanagementinfrastructure.IItemEnumerator, ppModifiedSettings **systemsettingsmanagementinfrastructure.IItemEnumerator, ppDeletedSettings **systemsettingsmanagementinfrastructure.IItemEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetStoredSettings(pIdentity, ppAddedSettings, ppModifiedSettings, ppDeletedSettings)))
+func (self ISettingsContext) GetStoredSettings(pIdentity ISettingsIdentity, ppAddedSettings **systemsettingsmanagementinfrastructure.IItemEnumerator, ppModifiedSettings **systemsettingsmanagementinfrastructure.IItemEnumerator, ppDeletedSettings **systemsettingsmanagementinfrastructure.IItemEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.GetStoredSettings(pIdentity.Raw, ppAddedSettings, ppModifiedSettings, ppDeletedSettings)))
 }
 
 // RevertSetting wraps the raw RevertSetting call.
-func (self ISettingsContext) RevertSetting(pIdentity *systemsettingsmanagementinfrastructure.ISettingsIdentity, pwzSetting string) error {
+func (self ISettingsContext) RevertSetting(pIdentity ISettingsIdentity, pwzSetting string) error {
 	_pwzSetting := win32.UTF16Ptr(pwzSetting)
-	return win32.HRESULTError(int32(self.Raw.RevertSetting(pIdentity, foundation.PWSTR(_pwzSetting))))
+	return win32.HRESULTError(int32(self.Raw.RevertSetting(pIdentity.Raw, foundation.PWSTR(_pwzSetting))))
 }
 
 // ISettingsEngine is an idiomatic wrapper over the raw COM interface System.SettingsManagementInfrastructure.ISettingsEngine with error-returning methods.
@@ -108,17 +107,17 @@ func WrapISettingsEngine(raw *systemsettingsmanagementinfrastructure.ISettingsEn
 }
 
 // GetNamespaces wraps the raw GetNamespaces call.
-func (self ISettingsEngine) GetNamespaces(Flags systemsettingsmanagementinfrastructure.WcmNamespaceEnumerationFlags, Reserved unsafe.Pointer) (*systemsettingsmanagementinfrastructure.IItemEnumerator, error) {
+func (self ISettingsEngine) GetNamespaces(Flags systemsettingsmanagementinfrastructure.WcmNamespaceEnumerationFlags, Reserved unsafe.Pointer) (IItemEnumerator, error) {
 	var _Namespaces *systemsettingsmanagementinfrastructure.IItemEnumerator
 	_hr := self.Raw.GetNamespaces(Flags, Reserved, &_Namespaces)
-	return _Namespaces, win32.HRESULTError(int32(_hr))
+	return WrapIItemEnumerator(_Namespaces), win32.HRESULTError(int32(_hr))
 }
 
 // GetNamespace wraps the raw GetNamespace call.
-func (self ISettingsEngine) GetNamespace(SettingsID *systemsettingsmanagementinfrastructure.ISettingsIdentity, Access systemsettingsmanagementinfrastructure.WcmNamespaceAccess, Reserved unsafe.Pointer) (*systemsettingsmanagementinfrastructure.ISettingsNamespace, error) {
+func (self ISettingsEngine) GetNamespace(SettingsID ISettingsIdentity, Access systemsettingsmanagementinfrastructure.WcmNamespaceAccess, Reserved unsafe.Pointer) (ISettingsNamespace, error) {
 	var _NamespaceItem *systemsettingsmanagementinfrastructure.ISettingsNamespace
-	_hr := self.Raw.GetNamespace(SettingsID, Access, Reserved, &_NamespaceItem)
-	return _NamespaceItem, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetNamespace(SettingsID.Raw, Access, Reserved, &_NamespaceItem)
+	return WrapISettingsNamespace(_NamespaceItem), win32.HRESULTError(int32(_hr))
 }
 
 // GetErrorDescription wraps the raw GetErrorDescription call.
@@ -129,10 +128,10 @@ func (self ISettingsEngine) GetErrorDescription(HResult int32) (foundation.BSTR,
 }
 
 // CreateSettingsIdentity wraps the raw CreateSettingsIdentity call.
-func (self ISettingsEngine) CreateSettingsIdentity() (*systemsettingsmanagementinfrastructure.ISettingsIdentity, error) {
+func (self ISettingsEngine) CreateSettingsIdentity() (ISettingsIdentity, error) {
 	var _SettingsID *systemsettingsmanagementinfrastructure.ISettingsIdentity
 	_hr := self.Raw.CreateSettingsIdentity(&_SettingsID)
-	return _SettingsID, win32.HRESULTError(int32(_hr))
+	return WrapISettingsIdentity(_SettingsID), win32.HRESULTError(int32(_hr))
 }
 
 // GetStoreStatus wraps the raw GetStoreStatus call.
@@ -151,62 +150,62 @@ func (self ISettingsEngine) UnloadStore(Reserved unsafe.Pointer) error {
 }
 
 // RegisterNamespace wraps the raw RegisterNamespace call.
-func (self ISettingsEngine) RegisterNamespace(SettingsID *systemsettingsmanagementinfrastructure.ISettingsIdentity, Stream *systemcom.IStream, PushSettings bool) (systemvariant.VARIANT, error) {
+func (self ISettingsEngine) RegisterNamespace(SettingsID ISettingsIdentity, Stream systemcomidiom.IStream, PushSettings bool) (systemvariant.VARIANT, error) {
 	_PushSettings := foundation.BOOL(win32.Bool32(PushSettings))
 	var _Results systemvariant.VARIANT
-	_hr := self.Raw.RegisterNamespace(SettingsID, Stream, _PushSettings, &_Results)
+	_hr := self.Raw.RegisterNamespace(SettingsID.Raw, Stream.Raw, _PushSettings, &_Results)
 	return _Results, win32.HRESULTError(int32(_hr))
 }
 
 // UnregisterNamespace wraps the raw UnregisterNamespace call.
-func (self ISettingsEngine) UnregisterNamespace(SettingsID *systemsettingsmanagementinfrastructure.ISettingsIdentity, RemoveSettings bool) error {
+func (self ISettingsEngine) UnregisterNamespace(SettingsID ISettingsIdentity, RemoveSettings bool) error {
 	_RemoveSettings := foundation.BOOL(win32.Bool32(RemoveSettings))
-	return win32.HRESULTError(int32(self.Raw.UnregisterNamespace(SettingsID, _RemoveSettings)))
+	return win32.HRESULTError(int32(self.Raw.UnregisterNamespace(SettingsID.Raw, _RemoveSettings)))
 }
 
 // CreateTargetInfo wraps the raw CreateTargetInfo call.
-func (self ISettingsEngine) CreateTargetInfo() (*systemsettingsmanagementinfrastructure.ITargetInfo, error) {
+func (self ISettingsEngine) CreateTargetInfo() (ITargetInfo, error) {
 	var _Target *systemsettingsmanagementinfrastructure.ITargetInfo
 	_hr := self.Raw.CreateTargetInfo(&_Target)
-	return _Target, win32.HRESULTError(int32(_hr))
+	return WrapITargetInfo(_Target), win32.HRESULTError(int32(_hr))
 }
 
 // GetTargetInfo wraps the raw GetTargetInfo call.
-func (self ISettingsEngine) GetTargetInfo() (*systemsettingsmanagementinfrastructure.ITargetInfo, error) {
+func (self ISettingsEngine) GetTargetInfo() (ITargetInfo, error) {
 	var _Target *systemsettingsmanagementinfrastructure.ITargetInfo
 	_hr := self.Raw.GetTargetInfo(&_Target)
-	return _Target, win32.HRESULTError(int32(_hr))
+	return WrapITargetInfo(_Target), win32.HRESULTError(int32(_hr))
 }
 
 // SetTargetInfo wraps the raw SetTargetInfo call.
-func (self ISettingsEngine) SetTargetInfo(Target *systemsettingsmanagementinfrastructure.ITargetInfo) error {
-	return win32.HRESULTError(int32(self.Raw.SetTargetInfo(Target)))
+func (self ISettingsEngine) SetTargetInfo(Target ITargetInfo) error {
+	return win32.HRESULTError(int32(self.Raw.SetTargetInfo(Target.Raw)))
 }
 
 // CreateSettingsContext wraps the raw CreateSettingsContext call.
-func (self ISettingsEngine) CreateSettingsContext(Flags uint32, Reserved unsafe.Pointer) (*systemsettingsmanagementinfrastructure.ISettingsContext, error) {
+func (self ISettingsEngine) CreateSettingsContext(Flags uint32, Reserved unsafe.Pointer) (ISettingsContext, error) {
 	var _SettingsContext *systemsettingsmanagementinfrastructure.ISettingsContext
 	_hr := self.Raw.CreateSettingsContext(Flags, Reserved, &_SettingsContext)
-	return _SettingsContext, win32.HRESULTError(int32(_hr))
+	return WrapISettingsContext(_SettingsContext), win32.HRESULTError(int32(_hr))
 }
 
 // SetSettingsContext wraps the raw SetSettingsContext call.
-func (self ISettingsEngine) SetSettingsContext(SettingsContext *systemsettingsmanagementinfrastructure.ISettingsContext) error {
-	return win32.HRESULTError(int32(self.Raw.SetSettingsContext(SettingsContext)))
+func (self ISettingsEngine) SetSettingsContext(SettingsContext ISettingsContext) error {
+	return win32.HRESULTError(int32(self.Raw.SetSettingsContext(SettingsContext.Raw)))
 }
 
 // ApplySettingsContext wraps the raw ApplySettingsContext call.
-func (self ISettingsEngine) ApplySettingsContext(SettingsContext *systemsettingsmanagementinfrastructure.ISettingsContext, pppwzIdentities **foundation.PWSTR) (uintptr, error) {
+func (self ISettingsEngine) ApplySettingsContext(SettingsContext ISettingsContext, pppwzIdentities **foundation.PWSTR) (uintptr, error) {
 	var _pcIdentities uintptr
-	_hr := self.Raw.ApplySettingsContext(SettingsContext, pppwzIdentities, &_pcIdentities)
+	_hr := self.Raw.ApplySettingsContext(SettingsContext.Raw, pppwzIdentities, &_pcIdentities)
 	return _pcIdentities, win32.HRESULTError(int32(_hr))
 }
 
 // GetSettingsContext wraps the raw GetSettingsContext call.
-func (self ISettingsEngine) GetSettingsContext() (*systemsettingsmanagementinfrastructure.ISettingsContext, error) {
+func (self ISettingsEngine) GetSettingsContext() (ISettingsContext, error) {
 	var _SettingsContext *systemsettingsmanagementinfrastructure.ISettingsContext
 	_hr := self.Raw.GetSettingsContext(&_SettingsContext)
-	return _SettingsContext, win32.HRESULTError(int32(_hr))
+	return WrapISettingsContext(_SettingsContext), win32.HRESULTError(int32(_hr))
 }
 
 // ISettingsIdentity is an idiomatic wrapper over the raw COM interface System.SettingsManagementInfrastructure.ISettingsIdentity with error-returning methods.
@@ -311,34 +310,34 @@ func (self ISettingsItem) HasChild() (foundation.BOOL, error) {
 }
 
 // Children wraps the raw Children call.
-func (self ISettingsItem) Children() (*systemsettingsmanagementinfrastructure.IItemEnumerator, error) {
+func (self ISettingsItem) Children() (IItemEnumerator, error) {
 	var _Children *systemsettingsmanagementinfrastructure.IItemEnumerator
 	_hr := self.Raw.Children(&_Children)
-	return _Children, win32.HRESULTError(int32(_hr))
+	return WrapIItemEnumerator(_Children), win32.HRESULTError(int32(_hr))
 }
 
 // GetChild wraps the raw GetChild call.
-func (self ISettingsItem) GetChild(Name string) (*systemsettingsmanagementinfrastructure.ISettingsItem, error) {
+func (self ISettingsItem) GetChild(Name string) (ISettingsItem, error) {
 	_Name := win32.UTF16Ptr(Name)
 	var _Child *systemsettingsmanagementinfrastructure.ISettingsItem
 	_hr := self.Raw.GetChild(foundation.PWSTR(_Name), &_Child)
-	return _Child, win32.HRESULTError(int32(_hr))
+	return WrapISettingsItem(_Child), win32.HRESULTError(int32(_hr))
 }
 
 // GetSettingByPath wraps the raw GetSettingByPath call.
-func (self ISettingsItem) GetSettingByPath(Path string) (*systemsettingsmanagementinfrastructure.ISettingsItem, error) {
+func (self ISettingsItem) GetSettingByPath(Path string) (ISettingsItem, error) {
 	_Path := win32.UTF16Ptr(Path)
 	var _Setting *systemsettingsmanagementinfrastructure.ISettingsItem
 	_hr := self.Raw.GetSettingByPath(foundation.PWSTR(_Path), &_Setting)
-	return _Setting, win32.HRESULTError(int32(_hr))
+	return WrapISettingsItem(_Setting), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSettingByPath wraps the raw CreateSettingByPath call.
-func (self ISettingsItem) CreateSettingByPath(Path string) (*systemsettingsmanagementinfrastructure.ISettingsItem, error) {
+func (self ISettingsItem) CreateSettingByPath(Path string) (ISettingsItem, error) {
 	_Path := win32.UTF16Ptr(Path)
 	var _Setting *systemsettingsmanagementinfrastructure.ISettingsItem
 	_hr := self.Raw.CreateSettingByPath(foundation.PWSTR(_Path), &_Setting)
-	return _Setting, win32.HRESULTError(int32(_hr))
+	return WrapISettingsItem(_Setting), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveSettingByPath wraps the raw RemoveSettingByPath call.
@@ -355,10 +354,10 @@ func (self ISettingsItem) GetListKeyInformation(KeyName *foundation.BSTR) (syste
 }
 
 // CreateListElement wraps the raw CreateListElement call.
-func (self ISettingsItem) CreateListElement(KeyData *systemvariant.VARIANT) (*systemsettingsmanagementinfrastructure.ISettingsItem, error) {
+func (self ISettingsItem) CreateListElement(KeyData *systemvariant.VARIANT) (ISettingsItem, error) {
 	var _Child *systemsettingsmanagementinfrastructure.ISettingsItem
 	_hr := self.Raw.CreateListElement(KeyData, &_Child)
-	return _Child, win32.HRESULTError(int32(_hr))
+	return WrapISettingsItem(_Child), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveListElement wraps the raw RemoveListElement call.
@@ -368,10 +367,10 @@ func (self ISettingsItem) RemoveListElement(ElementName string) error {
 }
 
 // Attributes wraps the raw Attributes call.
-func (self ISettingsItem) Attributes() (*systemsettingsmanagementinfrastructure.IItemEnumerator, error) {
+func (self ISettingsItem) Attributes() (IItemEnumerator, error) {
 	var _Attributes *systemsettingsmanagementinfrastructure.IItemEnumerator
 	_hr := self.Raw.Attributes(&_Attributes)
-	return _Attributes, win32.HRESULTError(int32(_hr))
+	return WrapIItemEnumerator(_Attributes), win32.HRESULTError(int32(_hr))
 }
 
 // GetAttribute wraps the raw GetAttribute call.
@@ -422,41 +421,41 @@ func WrapISettingsNamespace(raw *systemsettingsmanagementinfrastructure.ISetting
 }
 
 // GetIdentity wraps the raw GetIdentity call.
-func (self ISettingsNamespace) GetIdentity() (*systemsettingsmanagementinfrastructure.ISettingsIdentity, error) {
+func (self ISettingsNamespace) GetIdentity() (ISettingsIdentity, error) {
 	var _SettingsID *systemsettingsmanagementinfrastructure.ISettingsIdentity
 	_hr := self.Raw.GetIdentity(&_SettingsID)
-	return _SettingsID, win32.HRESULTError(int32(_hr))
+	return WrapISettingsIdentity(_SettingsID), win32.HRESULTError(int32(_hr))
 }
 
 // Settings wraps the raw Settings call.
-func (self ISettingsNamespace) Settings() (*systemsettingsmanagementinfrastructure.IItemEnumerator, error) {
+func (self ISettingsNamespace) Settings() (IItemEnumerator, error) {
 	var _Settings *systemsettingsmanagementinfrastructure.IItemEnumerator
 	_hr := self.Raw.Settings(&_Settings)
-	return _Settings, win32.HRESULTError(int32(_hr))
+	return WrapIItemEnumerator(_Settings), win32.HRESULTError(int32(_hr))
 }
 
 // Save wraps the raw Save call.
-func (self ISettingsNamespace) Save(PushSettings bool) (*systemsettingsmanagementinfrastructure.ISettingsResult, error) {
+func (self ISettingsNamespace) Save(PushSettings bool) (ISettingsResult, error) {
 	_PushSettings := foundation.BOOL(win32.Bool32(PushSettings))
 	var _Result *systemsettingsmanagementinfrastructure.ISettingsResult
 	_hr := self.Raw.Save(_PushSettings, &_Result)
-	return _Result, win32.HRESULTError(int32(_hr))
+	return WrapISettingsResult(_Result), win32.HRESULTError(int32(_hr))
 }
 
 // GetSettingByPath wraps the raw GetSettingByPath call.
-func (self ISettingsNamespace) GetSettingByPath(Path string) (*systemsettingsmanagementinfrastructure.ISettingsItem, error) {
+func (self ISettingsNamespace) GetSettingByPath(Path string) (ISettingsItem, error) {
 	_Path := win32.UTF16Ptr(Path)
 	var _Setting *systemsettingsmanagementinfrastructure.ISettingsItem
 	_hr := self.Raw.GetSettingByPath(foundation.PWSTR(_Path), &_Setting)
-	return _Setting, win32.HRESULTError(int32(_hr))
+	return WrapISettingsItem(_Setting), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSettingByPath wraps the raw CreateSettingByPath call.
-func (self ISettingsNamespace) CreateSettingByPath(Path string) (*systemsettingsmanagementinfrastructure.ISettingsItem, error) {
+func (self ISettingsNamespace) CreateSettingByPath(Path string) (ISettingsItem, error) {
 	_Path := win32.UTF16Ptr(Path)
 	var _Setting *systemsettingsmanagementinfrastructure.ISettingsItem
 	_hr := self.Raw.CreateSettingByPath(foundation.PWSTR(_Path), &_Setting)
-	return _Setting, win32.HRESULTError(int32(_hr))
+	return WrapISettingsItem(_Setting), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveSettingByPath wraps the raw RemoveSettingByPath call.
@@ -600,10 +599,10 @@ func (self ITargetInfo) SetProperty(Offline bool, Property string, Value string)
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self ITargetInfo) GetEnumerator() (*systemsettingsmanagementinfrastructure.IItemEnumerator, error) {
+func (self ITargetInfo) GetEnumerator() (IItemEnumerator, error) {
 	var _Enumerator *systemsettingsmanagementinfrastructure.IItemEnumerator
 	_hr := self.Raw.GetEnumerator(&_Enumerator)
-	return _Enumerator, win32.HRESULTError(int32(_hr))
+	return WrapIItemEnumerator(_Enumerator), win32.HRESULTError(int32(_hr))
 }
 
 // ExpandTarget wraps the raw ExpandTarget call.

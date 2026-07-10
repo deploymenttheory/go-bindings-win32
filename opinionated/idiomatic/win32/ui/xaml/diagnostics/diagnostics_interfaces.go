@@ -10,6 +10,7 @@ import (
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 	uixamldiagnostics "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/xaml/diagnostics"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
 )
 
 // IBitmapData is an idiomatic wrapper over the raw COM interface UI.Xaml.Diagnostics.IBitmapData with error-returning methods.
@@ -55,13 +56,13 @@ func WrapIVisualTreeService(raw *uixamldiagnostics.IVisualTreeService) IVisualTr
 }
 
 // AdviseVisualTreeChange wraps the raw AdviseVisualTreeChange call.
-func (self IVisualTreeService) AdviseVisualTreeChange(pCallback *uixamldiagnostics.IVisualTreeServiceCallback) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseVisualTreeChange(pCallback)))
+func (self IVisualTreeService) AdviseVisualTreeChange(pCallback IVisualTreeServiceCallback) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseVisualTreeChange(pCallback.Raw)))
 }
 
 // UnadviseVisualTreeChange wraps the raw UnadviseVisualTreeChange call.
-func (self IVisualTreeService) UnadviseVisualTreeChange(pCallback *uixamldiagnostics.IVisualTreeServiceCallback) error {
-	return win32.HRESULTError(int32(self.Raw.UnadviseVisualTreeChange(pCallback)))
+func (self IVisualTreeService) UnadviseVisualTreeChange(pCallback IVisualTreeServiceCallback) error {
+	return win32.HRESULTError(int32(self.Raw.UnadviseVisualTreeChange(pCallback.Raw)))
 }
 
 // GetEnums wraps the raw GetEnums call.
@@ -222,44 +223,44 @@ func WrapIXamlDiagnostics(raw *uixamldiagnostics.IXamlDiagnostics) IXamlDiagnost
 }
 
 // GetDispatcher wraps the raw GetDispatcher call.
-func (self IXamlDiagnostics) GetDispatcher() (*systemwinrt.IInspectable, error) {
+func (self IXamlDiagnostics) GetDispatcher() (systemwinrtidiom.IInspectable, error) {
 	var _ppDispatcher *systemwinrt.IInspectable
 	_hr := self.Raw.GetDispatcher(&_ppDispatcher)
-	return _ppDispatcher, win32.HRESULTError(int32(_hr))
+	return systemwinrtidiom.WrapIInspectable(_ppDispatcher), win32.HRESULTError(int32(_hr))
 }
 
 // GetUiLayer wraps the raw GetUiLayer call.
-func (self IXamlDiagnostics) GetUiLayer() (*systemwinrt.IInspectable, error) {
+func (self IXamlDiagnostics) GetUiLayer() (systemwinrtidiom.IInspectable, error) {
 	var _ppLayer *systemwinrt.IInspectable
 	_hr := self.Raw.GetUiLayer(&_ppLayer)
-	return _ppLayer, win32.HRESULTError(int32(_hr))
+	return systemwinrtidiom.WrapIInspectable(_ppLayer), win32.HRESULTError(int32(_hr))
 }
 
 // GetApplication wraps the raw GetApplication call.
-func (self IXamlDiagnostics) GetApplication() (*systemwinrt.IInspectable, error) {
+func (self IXamlDiagnostics) GetApplication() (systemwinrtidiom.IInspectable, error) {
 	var _ppApplication *systemwinrt.IInspectable
 	_hr := self.Raw.GetApplication(&_ppApplication)
-	return _ppApplication, win32.HRESULTError(int32(_hr))
+	return systemwinrtidiom.WrapIInspectable(_ppApplication), win32.HRESULTError(int32(_hr))
 }
 
 // GetIInspectableFromHandle wraps the raw GetIInspectableFromHandle call.
-func (self IXamlDiagnostics) GetIInspectableFromHandle(instanceHandle uint64) (*systemwinrt.IInspectable, error) {
+func (self IXamlDiagnostics) GetIInspectableFromHandle(instanceHandle uint64) (systemwinrtidiom.IInspectable, error) {
 	var _ppInstance *systemwinrt.IInspectable
 	_hr := self.Raw.GetIInspectableFromHandle(instanceHandle, &_ppInstance)
-	return _ppInstance, win32.HRESULTError(int32(_hr))
+	return systemwinrtidiom.WrapIInspectable(_ppInstance), win32.HRESULTError(int32(_hr))
 }
 
 // GetHandleFromIInspectable wraps the raw GetHandleFromIInspectable call.
-func (self IXamlDiagnostics) GetHandleFromIInspectable(pInstance *systemwinrt.IInspectable) (uint64, error) {
+func (self IXamlDiagnostics) GetHandleFromIInspectable(pInstance systemwinrtidiom.IInspectable) (uint64, error) {
 	var _pHandle uint64
-	_hr := self.Raw.GetHandleFromIInspectable(pInstance, &_pHandle)
+	_hr := self.Raw.GetHandleFromIInspectable(pInstance.Raw, &_pHandle)
 	return _pHandle, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterInstance wraps the raw RegisterInstance call.
-func (self IXamlDiagnostics) RegisterInstance(pInstance *systemwinrt.IInspectable) (uint64, error) {
+func (self IXamlDiagnostics) RegisterInstance(pInstance systemwinrtidiom.IInspectable) (uint64, error) {
 	var _pInstanceHandle uint64
-	_hr := self.Raw.RegisterInstance(pInstance, &_pInstanceHandle)
+	_hr := self.Raw.RegisterInstance(pInstance.Raw, &_pInstanceHandle)
 	return _pInstanceHandle, win32.HRESULTError(int32(_hr))
 }
 

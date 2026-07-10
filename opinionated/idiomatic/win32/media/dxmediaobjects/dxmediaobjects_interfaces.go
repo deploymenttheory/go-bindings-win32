@@ -227,8 +227,8 @@ func (self IMediaObject) GetInputStatus(dwInputStreamIndex uint32, dwFlags *uint
 }
 
 // ProcessInput wraps the raw ProcessInput call.
-func (self IMediaObject) ProcessInput(dwInputStreamIndex uint32, pBuffer *mediadxmediaobjects.IMediaBuffer, dwFlags uint32, rtTimestamp int64, rtTimelength int64) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessInput(dwInputStreamIndex, pBuffer, dwFlags, rtTimestamp, rtTimelength)))
+func (self IMediaObject) ProcessInput(dwInputStreamIndex uint32, pBuffer IMediaBuffer, dwFlags uint32, rtTimestamp int64, rtTimelength int64) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessInput(dwInputStreamIndex, pBuffer.Raw, dwFlags, rtTimestamp, rtTimelength)))
 }
 
 // ProcessOutput wraps the raw ProcessOutput call.

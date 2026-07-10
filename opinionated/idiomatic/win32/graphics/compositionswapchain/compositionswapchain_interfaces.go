@@ -11,7 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicscompositionswapchain "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/compositionswapchain"
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -167,10 +166,10 @@ func (self IPresentationFactory) IsPresentationSupportedWithIndependentFlip() by
 }
 
 // CreatePresentationManager wraps the raw CreatePresentationManager call.
-func (self IPresentationFactory) CreatePresentationManager() (*graphicscompositionswapchain.IPresentationManager, error) {
+func (self IPresentationFactory) CreatePresentationManager() (IPresentationManager, error) {
 	var _ppPresentationManager *graphicscompositionswapchain.IPresentationManager
 	_hr := self.Raw.CreatePresentationManager(&_ppPresentationManager)
-	return _ppPresentationManager, win32.HRESULTError(int32(_hr))
+	return WrapIPresentationManager(_ppPresentationManager), win32.HRESULTError(int32(_hr))
 }
 
 // IPresentationFactory_SupportHdrAware is an idiomatic wrapper over the raw COM interface Graphics.CompositionSwapchain.IPresentationFactory_SupportHdrAware with error-returning methods.
@@ -196,17 +195,17 @@ func WrapIPresentationManager(raw *graphicscompositionswapchain.IPresentationMan
 }
 
 // AddBufferFromResource wraps the raw AddBufferFromResource call.
-func (self IPresentationManager) AddBufferFromResource(resource *systemcom.IUnknown) (*graphicscompositionswapchain.IPresentationBuffer, error) {
+func (self IPresentationManager) AddBufferFromResource(resource systemcomidiom.IUnknown) (IPresentationBuffer, error) {
 	var _presentationBuffer *graphicscompositionswapchain.IPresentationBuffer
-	_hr := self.Raw.AddBufferFromResource(resource, &_presentationBuffer)
-	return _presentationBuffer, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AddBufferFromResource(resource.Raw, &_presentationBuffer)
+	return WrapIPresentationBuffer(_presentationBuffer), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePresentationSurface wraps the raw CreatePresentationSurface call.
-func (self IPresentationManager) CreatePresentationSurface(compositionSurfaceHandle foundation.HANDLE) (*graphicscompositionswapchain.IPresentationSurface, error) {
+func (self IPresentationManager) CreatePresentationSurface(compositionSurfaceHandle foundation.HANDLE) (IPresentationSurface, error) {
 	var _presentationSurface *graphicscompositionswapchain.IPresentationSurface
 	_hr := self.Raw.CreatePresentationSurface(compositionSurfaceHandle, &_presentationSurface)
-	return _presentationSurface, win32.HRESULTError(int32(_hr))
+	return WrapIPresentationSurface(_presentationSurface), win32.HRESULTError(int32(_hr))
 }
 
 // GetNextPresentId wraps the raw GetNextPresentId call.
@@ -254,10 +253,10 @@ func (self IPresentationManager) EnablePresentStatisticsKind(presentStatisticsKi
 }
 
 // GetNextPresentStatistics wraps the raw GetNextPresentStatistics call.
-func (self IPresentationManager) GetNextPresentStatistics() (*graphicscompositionswapchain.IPresentStatistics, error) {
+func (self IPresentationManager) GetNextPresentStatistics() (IPresentStatistics, error) {
 	var _nextPresentStatistics *graphicscompositionswapchain.IPresentStatistics
 	_hr := self.Raw.GetNextPresentStatistics(&_nextPresentStatistics)
-	return _nextPresentStatistics, win32.HRESULTError(int32(_hr))
+	return WrapIPresentStatistics(_nextPresentStatistics), win32.HRESULTError(int32(_hr))
 }
 
 // IPresentationSurface is an idiomatic wrapper over the raw COM interface Graphics.CompositionSwapchain.IPresentationSurface with error-returning methods.
@@ -272,8 +271,8 @@ func WrapIPresentationSurface(raw *graphicscompositionswapchain.IPresentationSur
 }
 
 // SetBuffer wraps the raw SetBuffer call.
-func (self IPresentationSurface) SetBuffer(presentationBuffer *graphicscompositionswapchain.IPresentationBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.SetBuffer(presentationBuffer)))
+func (self IPresentationSurface) SetBuffer(presentationBuffer IPresentationBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.SetBuffer(presentationBuffer.Raw)))
 }
 
 // SetColorSpace wraps the raw SetColorSpace call.
@@ -297,8 +296,8 @@ func (self IPresentationSurface) SetTransform(transform *graphicscompositionswap
 }
 
 // RestrictToOutput wraps the raw RestrictToOutput call.
-func (self IPresentationSurface) RestrictToOutput(output *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RestrictToOutput(output)))
+func (self IPresentationSurface) RestrictToOutput(output systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RestrictToOutput(output.Raw)))
 }
 
 // SetDisableReadback wraps the raw SetDisableReadback call.

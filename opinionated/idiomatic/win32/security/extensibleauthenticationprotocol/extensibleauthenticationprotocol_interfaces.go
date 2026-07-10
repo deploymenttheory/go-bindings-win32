@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securityextensibleauthenticationprotocol "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/extensibleauthenticationprotocol"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -172,13 +171,13 @@ func WrapIRouterProtocolConfig(raw *securityextensibleauthenticationprotocol.IRo
 }
 
 // AddProtocol wraps the raw AddProtocol call.
-func (self IRouterProtocolConfig) AddProtocol(pszMachineName string, dwTransportId uint32, dwProtocolId uint32, hWnd foundation.HWND, dwFlags uint32, pRouter *systemcom.IUnknown, uReserved1 uintptr) error {
+func (self IRouterProtocolConfig) AddProtocol(pszMachineName string, dwTransportId uint32, dwProtocolId uint32, hWnd foundation.HWND, dwFlags uint32, pRouter systemcomidiom.IUnknown, uReserved1 uintptr) error {
 	_pszMachineName := win32.UTF16Ptr(pszMachineName)
-	return win32.HRESULTError(int32(self.Raw.AddProtocol(foundation.PWSTR(_pszMachineName), dwTransportId, dwProtocolId, hWnd, dwFlags, pRouter, uReserved1)))
+	return win32.HRESULTError(int32(self.Raw.AddProtocol(foundation.PWSTR(_pszMachineName), dwTransportId, dwProtocolId, hWnd, dwFlags, pRouter.Raw, uReserved1)))
 }
 
 // RemoveProtocol wraps the raw RemoveProtocol call.
-func (self IRouterProtocolConfig) RemoveProtocol(pszMachineName string, dwTransportId uint32, dwProtocolId uint32, hWnd foundation.HWND, dwFlags uint32, pRouter *systemcom.IUnknown, uReserved1 uintptr) error {
+func (self IRouterProtocolConfig) RemoveProtocol(pszMachineName string, dwTransportId uint32, dwProtocolId uint32, hWnd foundation.HWND, dwFlags uint32, pRouter systemcomidiom.IUnknown, uReserved1 uintptr) error {
 	_pszMachineName := win32.UTF16Ptr(pszMachineName)
-	return win32.HRESULTError(int32(self.Raw.RemoveProtocol(foundation.PWSTR(_pszMachineName), dwTransportId, dwProtocolId, hWnd, dwFlags, pRouter, uReserved1)))
+	return win32.HRESULTError(int32(self.Raw.RemoveProtocol(foundation.PWSTR(_pszMachineName), dwTransportId, dwProtocolId, hWnd, dwFlags, pRouter.Raw, uReserved1)))
 }

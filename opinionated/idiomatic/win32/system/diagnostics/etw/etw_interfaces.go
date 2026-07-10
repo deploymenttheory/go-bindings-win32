@@ -25,10 +25,10 @@ func WrapITraceEvent(raw *systemdiagnosticsetw.ITraceEvent) ITraceEvent {
 }
 
 // Clone wraps the raw Clone call.
-func (self ITraceEvent) Clone() (*systemdiagnosticsetw.ITraceEvent, error) {
+func (self ITraceEvent) Clone() (ITraceEvent, error) {
 	var _NewEvent *systemdiagnosticsetw.ITraceEvent
 	_hr := self.Raw.Clone(&_NewEvent)
-	return _NewEvent, win32.HRESULTError(int32(_hr))
+	return WrapITraceEvent(_NewEvent), win32.HRESULTError(int32(_hr))
 }
 
 // GetUserContext wraps the raw GetUserContext call.
@@ -100,18 +100,18 @@ func WrapITraceEventCallback(raw *systemdiagnosticsetw.ITraceEventCallback) ITra
 }
 
 // OnBeginProcessTrace wraps the raw OnBeginProcessTrace call.
-func (self ITraceEventCallback) OnBeginProcessTrace(HeaderEvent *systemdiagnosticsetw.ITraceEvent, Relogger *systemdiagnosticsetw.ITraceRelogger) error {
-	return win32.HRESULTError(int32(self.Raw.OnBeginProcessTrace(HeaderEvent, Relogger)))
+func (self ITraceEventCallback) OnBeginProcessTrace(HeaderEvent ITraceEvent, Relogger ITraceRelogger) error {
+	return win32.HRESULTError(int32(self.Raw.OnBeginProcessTrace(HeaderEvent.Raw, Relogger.Raw)))
 }
 
 // OnFinalizeProcessTrace wraps the raw OnFinalizeProcessTrace call.
-func (self ITraceEventCallback) OnFinalizeProcessTrace(Relogger *systemdiagnosticsetw.ITraceRelogger) error {
-	return win32.HRESULTError(int32(self.Raw.OnFinalizeProcessTrace(Relogger)))
+func (self ITraceEventCallback) OnFinalizeProcessTrace(Relogger ITraceRelogger) error {
+	return win32.HRESULTError(int32(self.Raw.OnFinalizeProcessTrace(Relogger.Raw)))
 }
 
 // OnEvent wraps the raw OnEvent call.
-func (self ITraceEventCallback) OnEvent(Event *systemdiagnosticsetw.ITraceEvent, Relogger *systemdiagnosticsetw.ITraceRelogger) error {
-	return win32.HRESULTError(int32(self.Raw.OnEvent(Event, Relogger)))
+func (self ITraceEventCallback) OnEvent(Event ITraceEvent, Relogger ITraceRelogger) error {
+	return win32.HRESULTError(int32(self.Raw.OnEvent(Event.Raw, Relogger.Raw)))
 }
 
 // ITraceRelogger is an idiomatic wrapper over the raw COM interface System.Diagnostics.Etw.ITraceRelogger with error-returning methods.
@@ -140,20 +140,20 @@ func (self ITraceRelogger) AddRealtimeTraceStream(LoggerName foundation.BSTR, Us
 }
 
 // RegisterCallback wraps the raw RegisterCallback call.
-func (self ITraceRelogger) RegisterCallback(Callback *systemdiagnosticsetw.ITraceEventCallback) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterCallback(Callback)))
+func (self ITraceRelogger) RegisterCallback(Callback ITraceEventCallback) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterCallback(Callback.Raw)))
 }
 
 // Inject wraps the raw Inject call.
-func (self ITraceRelogger) Inject(Event *systemdiagnosticsetw.ITraceEvent) error {
-	return win32.HRESULTError(int32(self.Raw.Inject(Event)))
+func (self ITraceRelogger) Inject(Event ITraceEvent) error {
+	return win32.HRESULTError(int32(self.Raw.Inject(Event.Raw)))
 }
 
 // CreateEventInstance wraps the raw CreateEventInstance call.
-func (self ITraceRelogger) CreateEventInstance(TraceStreamId uint64, Flags uint32) (*systemdiagnosticsetw.ITraceEvent, error) {
+func (self ITraceRelogger) CreateEventInstance(TraceStreamId uint64, Flags uint32) (ITraceEvent, error) {
 	var _Event *systemdiagnosticsetw.ITraceEvent
 	_hr := self.Raw.CreateEventInstance(TraceStreamId, Flags, &_Event)
-	return _Event, win32.HRESULTError(int32(_hr))
+	return WrapITraceEvent(_Event), win32.HRESULTError(int32(_hr))
 }
 
 // ProcessTrace wraps the raw ProcessTrace call.

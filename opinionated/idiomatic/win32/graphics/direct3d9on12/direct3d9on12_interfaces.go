@@ -9,8 +9,9 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
-	graphicsdirect3d9 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9"
 	graphicsdirect3d9on12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9on12"
+	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
+	graphicsdirect3d9idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d9"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -31,11 +32,11 @@ func (self IDirect3DDevice9On12) GetD3D12Device(riid *win32.GUID, ppvDevice *uns
 }
 
 // UnwrapUnderlyingResource wraps the raw UnwrapUnderlyingResource call.
-func (self IDirect3DDevice9On12) UnwrapUnderlyingResource(pResource *graphicsdirect3d9.IDirect3DResource9, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.UnwrapUnderlyingResource(pResource, pCommandQueue, riid, ppvResource12)))
+func (self IDirect3DDevice9On12) UnwrapUnderlyingResource(pResource graphicsdirect3d9idiom.IDirect3DResource9, pCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.UnwrapUnderlyingResource(pResource.Raw, pCommandQueue.Raw, riid, ppvResource12)))
 }
 
 // ReturnUnderlyingResource wraps the raw ReturnUnderlyingResource call.
-func (self IDirect3DDevice9On12) ReturnUnderlyingResource(pResource *graphicsdirect3d9.IDirect3DResource9, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) error {
-	return win32.HRESULTError(int32(self.Raw.ReturnUnderlyingResource(pResource, NumSync, pSignalValues, ppFences)))
+func (self IDirect3DDevice9On12) ReturnUnderlyingResource(pResource graphicsdirect3d9idiom.IDirect3DResource9, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) error {
+	return win32.HRESULTError(int32(self.Raw.ReturnUnderlyingResource(pResource.Raw, NumSync, pSignalValues, ppFences)))
 }

@@ -11,6 +11,7 @@ import (
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 	systemwinrtdisplay "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/display"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
 )
 
 // IDisplayDeviceInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Display.IDisplayDeviceInterop with error-returning methods.
@@ -25,9 +26,9 @@ func WrapIDisplayDeviceInterop(raw *systemwinrtdisplay.IDisplayDeviceInterop) ID
 }
 
 // CreateSharedHandle wraps the raw CreateSharedHandle call.
-func (self IDisplayDeviceInterop) CreateSharedHandle(pObject *systemwinrt.IInspectable, pSecurityAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name systemwinrt.HSTRING) (foundation.HANDLE, error) {
+func (self IDisplayDeviceInterop) CreateSharedHandle(pObject systemwinrtidiom.IInspectable, pSecurityAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name systemwinrt.HSTRING) (foundation.HANDLE, error) {
 	var _pHandle foundation.HANDLE
-	_hr := self.Raw.CreateSharedHandle(pObject, pSecurityAttributes, Access, Name, &_pHandle)
+	_hr := self.Raw.CreateSharedHandle(pObject.Raw, pSecurityAttributes, Access, Name, &_pHandle)
 	return _pHandle, win32.HRESULTError(int32(_hr))
 }
 

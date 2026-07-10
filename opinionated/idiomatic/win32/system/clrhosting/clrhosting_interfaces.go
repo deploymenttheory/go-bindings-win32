@@ -62,8 +62,8 @@ func WrapIAppDomainBinding(raw *systemclrhosting.IAppDomainBinding) IAppDomainBi
 }
 
 // OnAppDomain wraps the raw OnAppDomain call.
-func (self IAppDomainBinding) OnAppDomain(pAppdomain *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnAppDomain(pAppdomain)))
+func (self IAppDomainBinding) OnAppDomain(pAppdomain systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnAppDomain(pAppdomain.Raw)))
 }
 
 // ICLRAppDomainResourceMonitor is an idiomatic wrapper over the raw COM interface System.ClrHosting.ICLRAppDomainResourceMonitor with error-returning methods.
@@ -115,19 +115,19 @@ func (self ICLRAssemblyIdentityManager) GetBindingIdentityFromFile(pwzFilePath s
 }
 
 // GetBindingIdentityFromStream wraps the raw GetBindingIdentityFromStream call.
-func (self ICLRAssemblyIdentityManager) GetBindingIdentityFromStream(pStream *systemcom.IStream, dwFlags uint32, pwzBuffer foundation.PWSTR, pcchBufferSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetBindingIdentityFromStream(pStream, dwFlags, pwzBuffer, pcchBufferSize)))
+func (self ICLRAssemblyIdentityManager) GetBindingIdentityFromStream(pStream systemcomidiom.IStream, dwFlags uint32, pwzBuffer foundation.PWSTR, pcchBufferSize *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetBindingIdentityFromStream(pStream.Raw, dwFlags, pwzBuffer, pcchBufferSize)))
 }
 
 // GetReferencedAssembliesFromFile wraps the raw GetReferencedAssembliesFromFile call.
-func (self ICLRAssemblyIdentityManager) GetReferencedAssembliesFromFile(pwzFilePath string, dwFlags uint32, pExcludeAssembliesList *systemclrhosting.ICLRAssemblyReferenceList, ppReferenceEnum **systemclrhosting.ICLRReferenceAssemblyEnum) error {
+func (self ICLRAssemblyIdentityManager) GetReferencedAssembliesFromFile(pwzFilePath string, dwFlags uint32, pExcludeAssembliesList ICLRAssemblyReferenceList, ppReferenceEnum **systemclrhosting.ICLRReferenceAssemblyEnum) error {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
-	return win32.HRESULTError(int32(self.Raw.GetReferencedAssembliesFromFile(foundation.PWSTR(_pwzFilePath), dwFlags, pExcludeAssembliesList, ppReferenceEnum)))
+	return win32.HRESULTError(int32(self.Raw.GetReferencedAssembliesFromFile(foundation.PWSTR(_pwzFilePath), dwFlags, pExcludeAssembliesList.Raw, ppReferenceEnum)))
 }
 
 // GetReferencedAssembliesFromStream wraps the raw GetReferencedAssembliesFromStream call.
-func (self ICLRAssemblyIdentityManager) GetReferencedAssembliesFromStream(pStream *systemcom.IStream, dwFlags uint32, pExcludeAssembliesList *systemclrhosting.ICLRAssemblyReferenceList, ppReferenceEnum **systemclrhosting.ICLRReferenceAssemblyEnum) error {
-	return win32.HRESULTError(int32(self.Raw.GetReferencedAssembliesFromStream(pStream, dwFlags, pExcludeAssembliesList, ppReferenceEnum)))
+func (self ICLRAssemblyIdentityManager) GetReferencedAssembliesFromStream(pStream systemcomidiom.IStream, dwFlags uint32, pExcludeAssembliesList ICLRAssemblyReferenceList, ppReferenceEnum **systemclrhosting.ICLRReferenceAssemblyEnum) error {
+	return win32.HRESULTError(int32(self.Raw.GetReferencedAssembliesFromStream(pStream.Raw, dwFlags, pExcludeAssembliesList.Raw, ppReferenceEnum)))
 }
 
 // GetProbingAssembliesFromReference wraps the raw GetProbingAssembliesFromReference call.
@@ -160,8 +160,8 @@ func (self ICLRAssemblyReferenceList) IsStringAssemblyReferenceInList(pwzAssembl
 }
 
 // IsAssemblyReferenceInList wraps the raw IsAssemblyReferenceInList call.
-func (self ICLRAssemblyReferenceList) IsAssemblyReferenceInList(pName *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.IsAssemblyReferenceInList(pName)))
+func (self ICLRAssemblyReferenceList) IsAssemblyReferenceInList(pName systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.IsAssemblyReferenceInList(pName.Raw)))
 }
 
 // ICLRControl is an idiomatic wrapper over the raw COM interface System.ClrHosting.ICLRControl with error-returning methods.
@@ -246,8 +246,8 @@ func WrapICLRDebugging(raw *systemclrhosting.ICLRDebugging) ICLRDebugging {
 }
 
 // OpenVirtualProcess wraps the raw OpenVirtualProcess call.
-func (self ICLRDebugging) OpenVirtualProcess(moduleBaseAddress uint64, pDataTarget *systemcom.IUnknown, pLibraryProvider *systemclrhosting.ICLRDebuggingLibraryProvider, pMaxDebuggerSupportedVersion *systemclrhosting.CLR_DEBUGGING_VERSION, riidProcess *win32.GUID, ppProcess **systemcom.IUnknown, pVersion *systemclrhosting.CLR_DEBUGGING_VERSION, pdwFlags *systemclrhosting.CLR_DEBUGGING_PROCESS_FLAGS) error {
-	return win32.HRESULTError(int32(self.Raw.OpenVirtualProcess(moduleBaseAddress, pDataTarget, pLibraryProvider, pMaxDebuggerSupportedVersion, riidProcess, ppProcess, pVersion, pdwFlags)))
+func (self ICLRDebugging) OpenVirtualProcess(moduleBaseAddress uint64, pDataTarget systemcomidiom.IUnknown, pLibraryProvider ICLRDebuggingLibraryProvider, pMaxDebuggerSupportedVersion *systemclrhosting.CLR_DEBUGGING_VERSION, riidProcess *win32.GUID, ppProcess **systemcom.IUnknown, pVersion *systemclrhosting.CLR_DEBUGGING_VERSION, pdwFlags *systemclrhosting.CLR_DEBUGGING_PROCESS_FLAGS) error {
+	return win32.HRESULTError(int32(self.Raw.OpenVirtualProcess(moduleBaseAddress, pDataTarget.Raw, pLibraryProvider.Raw, pMaxDebuggerSupportedVersion, riidProcess, ppProcess, pVersion, pdwFlags)))
 }
 
 // CanUnloadNow wraps the raw CanUnloadNow call.
@@ -464,17 +464,17 @@ func (self ICLRMetaHost) GetVersionFromFile(pwzFilePath string, pwzBuffer founda
 }
 
 // EnumerateInstalledRuntimes wraps the raw EnumerateInstalledRuntimes call.
-func (self ICLRMetaHost) EnumerateInstalledRuntimes() (*systemcom.IEnumUnknown, error) {
+func (self ICLRMetaHost) EnumerateInstalledRuntimes() (systemcomidiom.IEnumUnknown, error) {
 	var _ppEnumerator *systemcom.IEnumUnknown
 	_hr := self.Raw.EnumerateInstalledRuntimes(&_ppEnumerator)
-	return _ppEnumerator, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumUnknown(_ppEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // EnumerateLoadedRuntimes wraps the raw EnumerateLoadedRuntimes call.
-func (self ICLRMetaHost) EnumerateLoadedRuntimes(hndProcess foundation.HANDLE) (*systemcom.IEnumUnknown, error) {
+func (self ICLRMetaHost) EnumerateLoadedRuntimes(hndProcess foundation.HANDLE) (systemcomidiom.IEnumUnknown, error) {
 	var _ppEnumerator *systemcom.IEnumUnknown
 	_hr := self.Raw.EnumerateLoadedRuntimes(hndProcess, &_ppEnumerator)
-	return _ppEnumerator, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumUnknown(_ppEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // RequestRuntimeLoadedNotification wraps the raw RequestRuntimeLoadedNotification call.
@@ -504,9 +504,9 @@ func WrapICLRMetaHostPolicy(raw *systemclrhosting.ICLRMetaHostPolicy) ICLRMetaHo
 }
 
 // GetRequestedRuntime wraps the raw GetRequestedRuntime call.
-func (self ICLRMetaHostPolicy) GetRequestedRuntime(dwPolicyFlags systemclrhosting.METAHOST_POLICY_FLAGS, pwzBinary string, pCfgStream *systemcom.IStream, pwzVersion foundation.PWSTR, pcchVersion *uint32, pwzImageVersion foundation.PWSTR, pcchImageVersion *uint32, pdwConfigFlags *uint32, riid *win32.GUID, ppRuntime *unsafe.Pointer) error {
+func (self ICLRMetaHostPolicy) GetRequestedRuntime(dwPolicyFlags systemclrhosting.METAHOST_POLICY_FLAGS, pwzBinary string, pCfgStream systemcomidiom.IStream, pwzVersion foundation.PWSTR, pcchVersion *uint32, pwzImageVersion foundation.PWSTR, pcchImageVersion *uint32, pdwConfigFlags *uint32, riid *win32.GUID, ppRuntime *unsafe.Pointer) error {
 	_pwzBinary := win32.UTF16Ptr(pwzBinary)
-	return win32.HRESULTError(int32(self.Raw.GetRequestedRuntime(dwPolicyFlags, foundation.PWSTR(_pwzBinary), pCfgStream, pwzVersion, pcchVersion, pwzImageVersion, pcchImageVersion, pdwConfigFlags, riid, ppRuntime)))
+	return win32.HRESULTError(int32(self.Raw.GetRequestedRuntime(dwPolicyFlags, foundation.PWSTR(_pwzBinary), pCfgStream.Raw, pwzVersion, pcchVersion, pwzImageVersion, pcchImageVersion, pdwConfigFlags, riid, ppRuntime)))
 }
 
 // ICLROnEventManager is an idiomatic wrapper over the raw COM interface System.ClrHosting.ICLROnEventManager with error-returning methods.
@@ -521,13 +521,13 @@ func WrapICLROnEventManager(raw *systemclrhosting.ICLROnEventManager) ICLROnEven
 }
 
 // RegisterActionOnEvent wraps the raw RegisterActionOnEvent call.
-func (self ICLROnEventManager) RegisterActionOnEvent(event systemclrhosting.EClrEvent, pAction *systemclrhosting.IActionOnCLREvent) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterActionOnEvent(event, pAction)))
+func (self ICLROnEventManager) RegisterActionOnEvent(event systemclrhosting.EClrEvent, pAction IActionOnCLREvent) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterActionOnEvent(event, pAction.Raw)))
 }
 
 // UnregisterActionOnEvent wraps the raw UnregisterActionOnEvent call.
-func (self ICLROnEventManager) UnregisterActionOnEvent(event systemclrhosting.EClrEvent, pAction *systemclrhosting.IActionOnCLREvent) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterActionOnEvent(event, pAction)))
+func (self ICLROnEventManager) UnregisterActionOnEvent(event systemclrhosting.EClrEvent, pAction IActionOnCLREvent) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterActionOnEvent(event, pAction.Raw)))
 }
 
 // ICLRPolicyManager is an idiomatic wrapper over the raw COM interface System.ClrHosting.ICLRPolicyManager with error-returning methods.
@@ -642,8 +642,8 @@ func (self ICLRRuntimeHost) Stop() error {
 }
 
 // SetHostControl wraps the raw SetHostControl call.
-func (self ICLRRuntimeHost) SetHostControl(pHostControl *systemclrhosting.IHostControl) error {
-	return win32.HRESULTError(int32(self.Raw.SetHostControl(pHostControl)))
+func (self ICLRRuntimeHost) SetHostControl(pHostControl IHostControl) error {
+	return win32.HRESULTError(int32(self.Raw.SetHostControl(pHostControl.Raw)))
 }
 
 // GetCLRControl wraps the raw GetCLRControl call.
@@ -1165,18 +1165,18 @@ func WrapICorConfiguration(raw *systemclrhosting.ICorConfiguration) ICorConfigur
 }
 
 // SetGCThreadControl wraps the raw SetGCThreadControl call.
-func (self ICorConfiguration) SetGCThreadControl(pGCThreadControl *systemclrhosting.IGCThreadControl) error {
-	return win32.HRESULTError(int32(self.Raw.SetGCThreadControl(pGCThreadControl)))
+func (self ICorConfiguration) SetGCThreadControl(pGCThreadControl IGCThreadControl) error {
+	return win32.HRESULTError(int32(self.Raw.SetGCThreadControl(pGCThreadControl.Raw)))
 }
 
 // SetGCHostControl wraps the raw SetGCHostControl call.
-func (self ICorConfiguration) SetGCHostControl(pGCHostControl *systemclrhosting.IGCHostControl) error {
-	return win32.HRESULTError(int32(self.Raw.SetGCHostControl(pGCHostControl)))
+func (self ICorConfiguration) SetGCHostControl(pGCHostControl IGCHostControl) error {
+	return win32.HRESULTError(int32(self.Raw.SetGCHostControl(pGCHostControl.Raw)))
 }
 
 // SetDebuggerThreadControl wraps the raw SetDebuggerThreadControl call.
-func (self ICorConfiguration) SetDebuggerThreadControl(pDebuggerThreadControl *systemclrhosting.IDebuggerThreadControl) error {
-	return win32.HRESULTError(int32(self.Raw.SetDebuggerThreadControl(pDebuggerThreadControl)))
+func (self ICorConfiguration) SetDebuggerThreadControl(pDebuggerThreadControl IDebuggerThreadControl) error {
+	return win32.HRESULTError(int32(self.Raw.SetDebuggerThreadControl(pDebuggerThreadControl.Raw)))
 }
 
 // AddDebuggerSpecialThread wraps the raw AddDebuggerSpecialThread call.
@@ -1241,9 +1241,9 @@ func (self ICorRuntimeHost) Stop() error {
 }
 
 // CreateDomain wraps the raw CreateDomain call.
-func (self ICorRuntimeHost) CreateDomain(pwzFriendlyName string, pIdentityArray *systemcom.IUnknown, pAppDomain **systemcom.IUnknown) error {
+func (self ICorRuntimeHost) CreateDomain(pwzFriendlyName string, pIdentityArray systemcomidiom.IUnknown, pAppDomain **systemcom.IUnknown) error {
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
-	return win32.HRESULTError(int32(self.Raw.CreateDomain(foundation.PWSTR(_pwzFriendlyName), pIdentityArray, pAppDomain)))
+	return win32.HRESULTError(int32(self.Raw.CreateDomain(foundation.PWSTR(_pwzFriendlyName), pIdentityArray.Raw, pAppDomain)))
 }
 
 // GetDefaultDomain wraps the raw GetDefaultDomain call.
@@ -1267,9 +1267,9 @@ func (self ICorRuntimeHost) CloseEnum(hEnum unsafe.Pointer) error {
 }
 
 // CreateDomainEx wraps the raw CreateDomainEx call.
-func (self ICorRuntimeHost) CreateDomainEx(pwzFriendlyName string, pSetup *systemcom.IUnknown, pEvidence *systemcom.IUnknown, pAppDomain **systemcom.IUnknown) error {
+func (self ICorRuntimeHost) CreateDomainEx(pwzFriendlyName string, pSetup systemcomidiom.IUnknown, pEvidence systemcomidiom.IUnknown, pAppDomain **systemcom.IUnknown) error {
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
-	return win32.HRESULTError(int32(self.Raw.CreateDomainEx(foundation.PWSTR(_pwzFriendlyName), pSetup, pEvidence, pAppDomain)))
+	return win32.HRESULTError(int32(self.Raw.CreateDomainEx(foundation.PWSTR(_pwzFriendlyName), pSetup.Raw, pEvidence.Raw, pAppDomain)))
 }
 
 // CreateDomainSetup wraps the raw CreateDomainSetup call.
@@ -1283,8 +1283,8 @@ func (self ICorRuntimeHost) CreateEvidence(pEvidence **systemcom.IUnknown) error
 }
 
 // UnloadDomain wraps the raw UnloadDomain call.
-func (self ICorRuntimeHost) UnloadDomain(pAppDomain *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.UnloadDomain(pAppDomain)))
+func (self ICorRuntimeHost) UnloadDomain(pAppDomain systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.UnloadDomain(pAppDomain.Raw)))
 }
 
 // CurrentDomain wraps the raw CurrentDomain call.
@@ -1576,8 +1576,8 @@ func (self IHostControl) GetHostManager(riid *win32.GUID, ppObject *unsafe.Point
 }
 
 // SetAppDomainManager wraps the raw SetAppDomainManager call.
-func (self IHostControl) SetAppDomainManager(dwAppDomainID uint32, pUnkAppDomainManager *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetAppDomainManager(dwAppDomainID, pUnkAppDomainManager)))
+func (self IHostControl) SetAppDomainManager(dwAppDomainID uint32, pUnkAppDomainManager systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetAppDomainManager(dwAppDomainID, pUnkAppDomainManager.Raw)))
 }
 
 // IHostCrst is an idiomatic wrapper over the raw COM interface System.ClrHosting.IHostCrst with error-returning methods.
@@ -1679,8 +1679,8 @@ func (self IHostIoCompletionManager) GetHostOverlappedSize(pcbSize *uint32) erro
 }
 
 // SetCLRIoCompletionManager wraps the raw SetCLRIoCompletionManager call.
-func (self IHostIoCompletionManager) SetCLRIoCompletionManager(pManager *systemclrhosting.ICLRIoCompletionManager) error {
-	return win32.HRESULTError(int32(self.Raw.SetCLRIoCompletionManager(pManager)))
+func (self IHostIoCompletionManager) SetCLRIoCompletionManager(pManager ICLRIoCompletionManager) error {
+	return win32.HRESULTError(int32(self.Raw.SetCLRIoCompletionManager(pManager.Raw)))
 }
 
 // InitializeHostOverlapped wraps the raw InitializeHostOverlapped call.
@@ -1797,8 +1797,8 @@ func (self IHostMemoryManager) GetMemoryLoad(pMemoryLoad *uint32, pAvailableByte
 }
 
 // RegisterMemoryNotificationCallback wraps the raw RegisterMemoryNotificationCallback call.
-func (self IHostMemoryManager) RegisterMemoryNotificationCallback(pCallback *systemclrhosting.ICLRMemoryNotificationCallback) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterMemoryNotificationCallback(pCallback)))
+func (self IHostMemoryManager) RegisterMemoryNotificationCallback(pCallback ICLRMemoryNotificationCallback) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterMemoryNotificationCallback(pCallback.Raw)))
 }
 
 // NeedsVirtualAddressSpace wraps the raw NeedsVirtualAddressSpace call.
@@ -1896,8 +1896,8 @@ func (self IHostSecurityManager) GetSecurityContext(eContextType systemclrhostin
 }
 
 // SetSecurityContext wraps the raw SetSecurityContext call.
-func (self IHostSecurityManager) SetSecurityContext(eContextType systemclrhosting.EContextType, pSecurityContext *systemclrhosting.IHostSecurityContext) error {
-	return win32.HRESULTError(int32(self.Raw.SetSecurityContext(eContextType, pSecurityContext)))
+func (self IHostSecurityManager) SetSecurityContext(eContextType systemclrhosting.EContextType, pSecurityContext IHostSecurityContext) error {
+	return win32.HRESULTError(int32(self.Raw.SetSecurityContext(eContextType, pSecurityContext.Raw)))
 }
 
 // IHostSemaphore is an idiomatic wrapper over the raw COM interface System.ClrHosting.IHostSemaphore with error-returning methods.
@@ -1933,8 +1933,8 @@ func WrapIHostSyncManager(raw *systemclrhosting.IHostSyncManager) IHostSyncManag
 }
 
 // SetCLRSyncManager wraps the raw SetCLRSyncManager call.
-func (self IHostSyncManager) SetCLRSyncManager(pManager *systemclrhosting.ICLRSyncManager) error {
-	return win32.HRESULTError(int32(self.Raw.SetCLRSyncManager(pManager)))
+func (self IHostSyncManager) SetCLRSyncManager(pManager ICLRSyncManager) error {
+	return win32.HRESULTError(int32(self.Raw.SetCLRSyncManager(pManager.Raw)))
 }
 
 // CreateCrst wraps the raw CreateCrst call.
@@ -2016,8 +2016,8 @@ func (self IHostTask) GetPriority(pPriority *int32) error {
 }
 
 // SetCLRTask wraps the raw SetCLRTask call.
-func (self IHostTask) SetCLRTask(pCLRTask *systemclrhosting.ICLRTask) error {
-	return win32.HRESULTError(int32(self.Raw.SetCLRTask(pCLRTask)))
+func (self IHostTask) SetCLRTask(pCLRTask ICLRTask) error {
+	return win32.HRESULTError(int32(self.Raw.SetCLRTask(pCLRTask.Raw)))
 }
 
 // IHostTaskManager is an idiomatic wrapper over the raw COM interface System.ClrHosting.IHostTaskManager with error-returning methods.
@@ -2117,8 +2117,8 @@ func (self IHostTaskManager) GetStackGuarantee(pGuarantee *uint32) error {
 }
 
 // SetCLRTaskManager wraps the raw SetCLRTaskManager call.
-func (self IHostTaskManager) SetCLRTaskManager(ppManager *systemclrhosting.ICLRTaskManager) error {
-	return win32.HRESULTError(int32(self.Raw.SetCLRTaskManager(ppManager)))
+func (self IHostTaskManager) SetCLRTaskManager(ppManager ICLRTaskManager) error {
+	return win32.HRESULTError(int32(self.Raw.SetCLRTaskManager(ppManager.Raw)))
 }
 
 // IHostThreadpoolManager is an idiomatic wrapper over the raw COM interface System.ClrHosting.IHostThreadpoolManager with error-returning methods.
@@ -2348,16 +2348,16 @@ func WrapITypeNameFactory(raw *systemclrhosting.ITypeNameFactory) ITypeNameFacto
 }
 
 // ParseTypeName wraps the raw ParseTypeName call.
-func (self ITypeNameFactory) ParseTypeName(szName string, pError *uint32) (*systemclrhosting.ITypeName, error) {
+func (self ITypeNameFactory) ParseTypeName(szName string, pError *uint32) (ITypeName, error) {
 	_szName := win32.UTF16Ptr(szName)
 	var _ppTypeName *systemclrhosting.ITypeName
 	_hr := self.Raw.ParseTypeName(foundation.PWSTR(_szName), pError, &_ppTypeName)
-	return _ppTypeName, win32.HRESULTError(int32(_hr))
+	return WrapITypeName(_ppTypeName), win32.HRESULTError(int32(_hr))
 }
 
 // GetTypeNameBuilder wraps the raw GetTypeNameBuilder call.
-func (self ITypeNameFactory) GetTypeNameBuilder() (*systemclrhosting.ITypeNameBuilder, error) {
+func (self ITypeNameFactory) GetTypeNameBuilder() (ITypeNameBuilder, error) {
 	var _ppTypeBuilder *systemclrhosting.ITypeNameBuilder
 	_hr := self.Raw.GetTypeNameBuilder(&_ppTypeBuilder)
-	return _ppTypeBuilder, win32.HRESULTError(int32(_hr))
+	return WrapITypeNameBuilder(_ppTypeBuilder), win32.HRESULTError(int32(_hr))
 }

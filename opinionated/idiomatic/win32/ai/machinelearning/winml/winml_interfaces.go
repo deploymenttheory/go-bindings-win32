@@ -10,8 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	aimachinelearningwinml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ai/machinelearning/winml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -58,8 +58,8 @@ func WrapIMLOperatorKernel(raw *aimachinelearningwinml.IMLOperatorKernel) IMLOpe
 }
 
 // Compute wraps the raw Compute call.
-func (self IMLOperatorKernel) Compute(context *aimachinelearningwinml.IMLOperatorKernelContext) error {
-	return win32.HRESULTError(int32(self.Raw.Compute(context)))
+func (self IMLOperatorKernel) Compute(context IMLOperatorKernelContext) error {
+	return win32.HRESULTError(int32(self.Raw.Compute(context.Raw)))
 }
 
 // IMLOperatorKernelContext is an idiomatic wrapper over the raw COM interface AI.MachineLearning.WinML.IMLOperatorKernelContext with error-returning methods.
@@ -151,8 +151,8 @@ func WrapIMLOperatorKernelFactory(raw *aimachinelearningwinml.IMLOperatorKernelF
 }
 
 // CreateKernel wraps the raw CreateKernel call.
-func (self IMLOperatorKernelFactory) CreateKernel(context *aimachinelearningwinml.IMLOperatorKernelCreationContext, kernel **aimachinelearningwinml.IMLOperatorKernel) error {
-	return win32.HRESULTError(int32(self.Raw.CreateKernel(context, kernel)))
+func (self IMLOperatorKernelFactory) CreateKernel(context IMLOperatorKernelCreationContext, kernel **aimachinelearningwinml.IMLOperatorKernel) error {
+	return win32.HRESULTError(int32(self.Raw.CreateKernel(context.Raw, kernel)))
 }
 
 // IMLOperatorRegistry is an idiomatic wrapper over the raw COM interface AI.MachineLearning.WinML.IMLOperatorRegistry with error-returning methods.
@@ -167,13 +167,13 @@ func WrapIMLOperatorRegistry(raw *aimachinelearningwinml.IMLOperatorRegistry) IM
 }
 
 // RegisterOperatorSetSchema wraps the raw RegisterOperatorSetSchema call.
-func (self IMLOperatorRegistry) RegisterOperatorSetSchema(operatorSetId *aimachinelearningwinml.MLOperatorSetId, baselineVersion int32, schema **aimachinelearningwinml.MLOperatorSchemaDescription, schemaCount uint32, typeInferrer *aimachinelearningwinml.IMLOperatorTypeInferrer, shapeInferrer *aimachinelearningwinml.IMLOperatorShapeInferrer) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterOperatorSetSchema(operatorSetId, baselineVersion, schema, schemaCount, typeInferrer, shapeInferrer)))
+func (self IMLOperatorRegistry) RegisterOperatorSetSchema(operatorSetId *aimachinelearningwinml.MLOperatorSetId, baselineVersion int32, schema **aimachinelearningwinml.MLOperatorSchemaDescription, schemaCount uint32, typeInferrer IMLOperatorTypeInferrer, shapeInferrer IMLOperatorShapeInferrer) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterOperatorSetSchema(operatorSetId, baselineVersion, schema, schemaCount, typeInferrer.Raw, shapeInferrer.Raw)))
 }
 
 // RegisterOperatorKernel wraps the raw RegisterOperatorKernel call.
-func (self IMLOperatorRegistry) RegisterOperatorKernel(operatorKernel *aimachinelearningwinml.MLOperatorKernelDescription, operatorKernelFactory *aimachinelearningwinml.IMLOperatorKernelFactory, shapeInferrer *aimachinelearningwinml.IMLOperatorShapeInferrer) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterOperatorKernel(operatorKernel, operatorKernelFactory, shapeInferrer)))
+func (self IMLOperatorRegistry) RegisterOperatorKernel(operatorKernel *aimachinelearningwinml.MLOperatorKernelDescription, operatorKernelFactory IMLOperatorKernelFactory, shapeInferrer IMLOperatorShapeInferrer) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterOperatorKernel(operatorKernel, operatorKernelFactory.Raw, shapeInferrer.Raw)))
 }
 
 // IMLOperatorShapeInferenceContext is an idiomatic wrapper over the raw COM interface AI.MachineLearning.WinML.IMLOperatorShapeInferenceContext with error-returning methods.
@@ -229,8 +229,8 @@ func WrapIMLOperatorShapeInferrer(raw *aimachinelearningwinml.IMLOperatorShapeIn
 }
 
 // InferOutputShapes wraps the raw InferOutputShapes call.
-func (self IMLOperatorShapeInferrer) InferOutputShapes(context *aimachinelearningwinml.IMLOperatorShapeInferenceContext) error {
-	return win32.HRESULTError(int32(self.Raw.InferOutputShapes(context)))
+func (self IMLOperatorShapeInferrer) InferOutputShapes(context IMLOperatorShapeInferenceContext) error {
+	return win32.HRESULTError(int32(self.Raw.InferOutputShapes(context.Raw)))
 }
 
 // IMLOperatorTensor is an idiomatic wrapper over the raw COM interface AI.MachineLearning.WinML.IMLOperatorTensor with error-returning methods.
@@ -343,8 +343,8 @@ func WrapIMLOperatorTypeInferrer(raw *aimachinelearningwinml.IMLOperatorTypeInfe
 }
 
 // InferOutputTypes wraps the raw InferOutputTypes call.
-func (self IMLOperatorTypeInferrer) InferOutputTypes(context *aimachinelearningwinml.IMLOperatorTypeInferenceContext) error {
-	return win32.HRESULTError(int32(self.Raw.InferOutputTypes(context)))
+func (self IMLOperatorTypeInferrer) InferOutputTypes(context IMLOperatorTypeInferenceContext) error {
+	return win32.HRESULTError(int32(self.Raw.InferOutputTypes(context.Raw)))
 }
 
 // IWinMLEvaluationContext is an idiomatic wrapper over the raw COM interface AI.MachineLearning.WinML.IWinMLEvaluationContext with error-returning methods.
@@ -423,13 +423,13 @@ func (self IWinMLRuntime) LoadModel(Path string, ppModel **aimachinelearningwinm
 }
 
 // CreateEvaluationContext wraps the raw CreateEvaluationContext call.
-func (self IWinMLRuntime) CreateEvaluationContext(device *graphicsdirect3d12.ID3D12Device, ppContext **aimachinelearningwinml.IWinMLEvaluationContext) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEvaluationContext(device, ppContext)))
+func (self IWinMLRuntime) CreateEvaluationContext(device graphicsdirect3d12idiom.ID3D12Device, ppContext **aimachinelearningwinml.IWinMLEvaluationContext) error {
+	return win32.HRESULTError(int32(self.Raw.CreateEvaluationContext(device.Raw, ppContext)))
 }
 
 // EvaluateModel wraps the raw EvaluateModel call.
-func (self IWinMLRuntime) EvaluateModel(pContext *aimachinelearningwinml.IWinMLEvaluationContext) error {
-	return win32.HRESULTError(int32(self.Raw.EvaluateModel(pContext)))
+func (self IWinMLRuntime) EvaluateModel(pContext IWinMLEvaluationContext) error {
+	return win32.HRESULTError(int32(self.Raw.EvaluateModel(pContext.Raw)))
 }
 
 // IWinMLRuntimeFactory is an idiomatic wrapper over the raw COM interface AI.MachineLearning.WinML.IWinMLRuntimeFactory with error-returning methods.

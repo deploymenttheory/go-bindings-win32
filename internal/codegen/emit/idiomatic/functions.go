@@ -99,15 +99,21 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		resolved := resolvedParams[i]
 
 		if retValMode != retValNone {
-			if element, ok := retValElement(param, resolved); ok {
-				local := "_" + naming.ParamName(param.Name)
-				preamble = append(preamble, "var "+local+" "+element)
-				rawArgs = append(rawArgs, "&"+local)
-				returnValues = append(returnValues, local)
-				returnTypes = append(returnTypes, element)
+			if decl, rawArg, returnExpr, returnType, ok := g.elevateRetValParam(param, resolved, meta.Namespace, scratch); ok {
+				preamble = append(preamble, decl)
+				rawArgs = append(rawArgs, rawArg)
+				returnValues = append(returnValues, returnExpr)
+				returnTypes = append(returnTypes, returnType)
 				improved = true
 				continue
 			}
+		}
+		// Input COM interface param → idiomatic wrapper value.
+		if decl, rawArg, ok := g.comInParam(param, resolved, meta.Namespace, scratch); ok {
+			decls = append(decls, decl)
+			rawArgs = append(rawArgs, rawArg)
+			improved = true
+			continue
 		}
 
 		// A count parameter collapsed into a slice: drop it, derive its

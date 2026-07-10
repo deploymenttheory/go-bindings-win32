@@ -1318,8 +1318,8 @@ func WrapIImePad(raw *uiinputime.IImePad) IImePad {
 }
 
 // Request wraps the raw Request call.
-func (self IImePad) Request(pIImePadApplet *uiinputime.IImePadApplet, reqId int32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
-	return win32.HRESULTError(int32(self.Raw.Request(pIImePadApplet, reqId, wParam, lParam)))
+func (self IImePad) Request(pIImePadApplet IImePadApplet, reqId int32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+	return win32.HRESULTError(int32(self.Raw.Request(pIImePadApplet.Raw, reqId, wParam, lParam)))
 }
 
 // IImePadApplet is an idiomatic wrapper over the raw COM interface UI.Input.Ime.IImePadApplet with error-returning methods.
@@ -1334,8 +1334,8 @@ func WrapIImePadApplet(raw *uiinputime.IImePadApplet) IImePadApplet {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IImePadApplet) Initialize(lpIImePad *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(lpIImePad)))
+func (self IImePadApplet) Initialize(lpIImePad systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(lpIImePad.Raw)))
 }
 
 // Terminate wraps the raw Terminate call.
@@ -1354,8 +1354,8 @@ func (self IImePadApplet) CreateUI(hwndParent foundation.HWND, lpImeAppletUI *ui
 }
 
 // Notify wraps the raw Notify call.
-func (self IImePadApplet) Notify(lpImePad *systemcom.IUnknown, notify int32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
-	return win32.HRESULTError(int32(self.Raw.Notify(lpImePad, notify, wParam, lParam)))
+func (self IImePadApplet) Notify(lpImePad systemcomidiom.IUnknown, notify int32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+	return win32.HRESULTError(int32(self.Raw.Notify(lpImePad.Raw, notify, wParam, lParam)))
 }
 
 // IImePlugInDictDictionaryList is an idiomatic wrapper over the raw COM interface UI.Input.Ime.IImePlugInDictDictionaryList with error-returning methods.

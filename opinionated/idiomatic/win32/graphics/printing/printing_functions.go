@@ -182,9 +182,9 @@ func ConfigurePortA(pName foundation.PSTR, hWnd foundation.HWND, pPortName found
 
 // CreatePrintAsyncNotifyChannel wraps the raw CreatePrintAsyncNotifyChannel call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-createprintasyncnotifychannel
-func CreatePrintAsyncNotifyChannel(pszName string, pNotificationType *win32.GUID, eUserFilter graphicsprinting.PrintAsyncNotifyUserFilter, eConversationStyle graphicsprinting.PrintAsyncNotifyConversationStyle, pCallback *graphicsprinting.IPrintAsyncNotifyCallback, ppIAsynchNotification **graphicsprinting.IPrintAsyncNotifyChannel) error {
+func CreatePrintAsyncNotifyChannel(pszName string, pNotificationType *win32.GUID, eUserFilter graphicsprinting.PrintAsyncNotifyUserFilter, eConversationStyle graphicsprinting.PrintAsyncNotifyConversationStyle, pCallback IPrintAsyncNotifyCallback, ppIAsynchNotification **graphicsprinting.IPrintAsyncNotifyChannel) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(graphicsprinting.CreatePrintAsyncNotifyChannel(foundation.PWSTR(_pszName), pNotificationType, eUserFilter, eConversationStyle, pCallback, ppIAsynchNotification)))
+	return win32.HRESULTError(int32(graphicsprinting.CreatePrintAsyncNotifyChannel(foundation.PWSTR(_pszName), pNotificationType, eUserFilter, eConversationStyle, pCallback.Raw, ppIAsynchNotification)))
 }
 
 // DeleteForm wraps the raw DeleteFormW call with idiomatic Go types.
@@ -843,9 +843,9 @@ func ReadPrinter(hPrinter graphicsprinting.PRINTER_HANDLE, pBuf unsafe.Pointer, 
 
 // RegisterForPrintAsyncNotifications wraps the raw RegisterForPrintAsyncNotifications call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-registerforprintasyncnotifications
-func RegisterForPrintAsyncNotifications(pszName string, pNotificationType *win32.GUID, eUserFilter graphicsprinting.PrintAsyncNotifyUserFilter, eConversationStyle graphicsprinting.PrintAsyncNotifyConversationStyle, pCallback *graphicsprinting.IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) error {
+func RegisterForPrintAsyncNotifications(pszName string, pNotificationType *win32.GUID, eUserFilter graphicsprinting.PrintAsyncNotifyUserFilter, eConversationStyle graphicsprinting.PrintAsyncNotifyConversationStyle, pCallback IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(graphicsprinting.RegisterForPrintAsyncNotifications(foundation.PWSTR(_pszName), pNotificationType, eUserFilter, eConversationStyle, pCallback, phNotify)))
+	return win32.HRESULTError(int32(graphicsprinting.RegisterForPrintAsyncNotifications(foundation.PWSTR(_pszName), pNotificationType, eUserFilter, eConversationStyle, pCallback.Raw, phNotify)))
 }
 
 // RemovePrintDeviceObject wraps the raw RemovePrintDeviceObject call with idiomatic Go types.
@@ -882,9 +882,9 @@ func ResetPrinterA(hPrinter graphicsprinting.PRINTER_HANDLE, pDefault *graphicsp
 }
 
 // RouterCreatePrintAsyncNotificationChannel wraps the raw RouterCreatePrintAsyncNotificationChannel call with idiomatic Go types.
-func RouterCreatePrintAsyncNotificationChannel(pName string, pNotificationType *win32.GUID, eNotifyFilter graphicsprinting.PrintAsyncNotifyUserFilter, eConversationStyle graphicsprinting.PrintAsyncNotifyConversationStyle, pCallback *graphicsprinting.IPrintAsyncNotifyCallback, ppIAsynchNotification **graphicsprinting.IPrintAsyncNotifyChannel) error {
+func RouterCreatePrintAsyncNotificationChannel(pName string, pNotificationType *win32.GUID, eNotifyFilter graphicsprinting.PrintAsyncNotifyUserFilter, eConversationStyle graphicsprinting.PrintAsyncNotifyConversationStyle, pCallback IPrintAsyncNotifyCallback, ppIAsynchNotification **graphicsprinting.IPrintAsyncNotifyChannel) error {
 	_pName := win32.UTF16Ptr(pName)
-	return win32.HRESULTError(int32(graphicsprinting.RouterCreatePrintAsyncNotificationChannel(foundation.PWSTR(_pName), pNotificationType, eNotifyFilter, eConversationStyle, pCallback, ppIAsynchNotification)))
+	return win32.HRESULTError(int32(graphicsprinting.RouterCreatePrintAsyncNotificationChannel(foundation.PWSTR(_pName), pNotificationType, eNotifyFilter, eConversationStyle, pCallback.Raw, ppIAsynchNotification)))
 }
 
 // RouterFreePrinterNotifyInfo wraps the raw RouterFreePrinterNotifyInfo call with idiomatic Go types.

@@ -10,8 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemrpc "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/rpc"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // DceErrorInqText wraps the raw DceErrorInqTextW call with idiomatic Go types.
@@ -20,10 +20,22 @@ func DceErrorInqText(RpcStatus systemrpc.RPC_STATUS, ErrorText foundation.PWSTR)
 	return systemrpc.DceErrorInqTextW(RpcStatus, ErrorText)
 }
 
+// IUnknown_AddRef_Proxy wraps the raw IUnknown_AddRef_Proxy call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/unknwnbase/nf-unknwnbase-iunknown_addref_proxy
+func IUnknown_AddRef_Proxy(This systemcomidiom.IUnknown) uint32 {
+	return systemrpc.IUnknown_AddRef_Proxy(This.Raw)
+}
+
 // IUnknown_QueryInterface_Proxy wraps the raw IUnknown_QueryInterface_Proxy call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/unknwnbase/nf-unknwnbase-iunknown_queryinterface_proxy
-func IUnknown_QueryInterface_Proxy(This *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemrpc.IUnknown_QueryInterface_Proxy(This, riid, ppvObject)))
+func IUnknown_QueryInterface_Proxy(This systemcomidiom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemrpc.IUnknown_QueryInterface_Proxy(This.Raw, riid, ppvObject)))
+}
+
+// IUnknown_Release_Proxy wraps the raw IUnknown_Release_Proxy call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/unknwnbase/nf-unknwnbase-iunknown_release_proxy
+func IUnknown_Release_Proxy(This systemcomidiom.IUnknown) uint32 {
+	return systemrpc.IUnknown_Release_Proxy(This.Raw)
 }
 
 // I_RpcBindingCreateNP wraps the raw I_RpcBindingCreateNP call with idiomatic Go types.
@@ -65,6 +77,21 @@ func I_RpcServerUseProtseqEp2(NetworkAddress string, Protseq string, MaxCalls ui
 	_Protseq := win32.UTF16Ptr(Protseq)
 	_Endpoint := win32.UTF16Ptr(Endpoint)
 	return systemrpc.I_RpcServerUseProtseqEp2W(foundation.PWSTR(_NetworkAddress), foundation.PWSTR(_Protseq), MaxCalls, foundation.PWSTR(_Endpoint), SecurityDescriptor, Policy)
+}
+
+// Ndr64DcomAsyncStubCall wraps the raw Ndr64DcomAsyncStubCall call with idiomatic Go types.
+func Ndr64DcomAsyncStubCall(pThis systemcomidiom.IRpcStubBuffer, pChannel systemcomidiom.IRpcChannelBuffer, pRpcMsg *systemrpc.RPC_MESSAGE, pdwStubPhase *uint32) int32 {
+	return systemrpc.Ndr64DcomAsyncStubCall(pThis.Raw, pChannel.Raw, pRpcMsg, pdwStubPhase)
+}
+
+// NdrCreateServerInterfaceFromStub wraps the raw NdrCreateServerInterfaceFromStub call with idiomatic Go types.
+func NdrCreateServerInterfaceFromStub(pStub systemcomidiom.IRpcStubBuffer, pServerIf *systemrpc.RPC_SERVER_INTERFACE) systemrpc.RPC_STATUS {
+	return systemrpc.NdrCreateServerInterfaceFromStub(pStub.Raw, pServerIf)
+}
+
+// NdrDcomAsyncStubCall wraps the raw NdrDcomAsyncStubCall call with idiomatic Go types.
+func NdrDcomAsyncStubCall(pThis systemcomidiom.IRpcStubBuffer, pChannel systemcomidiom.IRpcChannelBuffer, pRpcMsg *systemrpc.RPC_MESSAGE, pdwStubPhase *uint32) int32 {
+	return systemrpc.NdrDcomAsyncStubCall(pThis.Raw, pChannel.Raw, pRpcMsg, pdwStubPhase)
 }
 
 // NdrGetDcomProtocolVersion wraps the raw NdrGetDcomProtocolVersion call with idiomatic Go types.

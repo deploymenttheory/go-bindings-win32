@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdxcore "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxcore"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -88,8 +87,8 @@ func (self IDXCoreAdapterFactory) GetAdapterByLuid(adapterLUID *foundation.LUID,
 }
 
 // RegisterEventNotification wraps the raw RegisterEventNotification call.
-func (self IDXCoreAdapterFactory) RegisterEventNotification(dxCoreObject *systemcom.IUnknown, notificationType graphicsdxcore.DXCoreNotificationType, callbackFunction graphicsdxcore.PFN_DXCORE_NOTIFICATION_CALLBACK, callbackContext unsafe.Pointer, eventCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterEventNotification(dxCoreObject, notificationType, callbackFunction, callbackContext, eventCookie)))
+func (self IDXCoreAdapterFactory) RegisterEventNotification(dxCoreObject systemcomidiom.IUnknown, notificationType graphicsdxcore.DXCoreNotificationType, callbackFunction graphicsdxcore.PFN_DXCORE_NOTIFICATION_CALLBACK, callbackContext unsafe.Pointer, eventCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterEventNotification(dxCoreObject.Raw, notificationType, callbackFunction, callbackContext, eventCookie)))
 }
 
 // UnregisterEventNotification wraps the raw UnregisterEventNotification call.

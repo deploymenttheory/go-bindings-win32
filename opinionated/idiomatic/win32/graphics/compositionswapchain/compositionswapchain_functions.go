@@ -9,11 +9,11 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	graphicscompositionswapchain "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/compositionswapchain"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CreatePresentationFactory wraps the raw CreatePresentationFactory call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/presentation/nf-presentation-createpresentationfactory
-func CreatePresentationFactory(d3dDevice *systemcom.IUnknown, riid *win32.GUID, presentationFactory *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(graphicscompositionswapchain.CreatePresentationFactory(d3dDevice, riid, presentationFactory)))
+func CreatePresentationFactory(d3dDevice systemcomidiom.IUnknown, riid *win32.GUID, presentationFactory *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(graphicscompositionswapchain.CreatePresentationFactory(d3dDevice.Raw, riid, presentationFactory)))
 }

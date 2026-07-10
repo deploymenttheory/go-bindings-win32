@@ -14,91 +14,91 @@ import (
 
 // WSDCreateDeviceHost wraps the raw WSDCreateDeviceHost call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsdhost/nf-wsdhost-wsdcreatedevicehost
-func WSDCreateDeviceHost(pszLocalId string, pContext *deviceswebservicesondevices.IWSDXMLContext, ppDeviceHost **deviceswebservicesondevices.IWSDDeviceHost) error {
+func WSDCreateDeviceHost(pszLocalId string, pContext IWSDXMLContext, ppDeviceHost **deviceswebservicesondevices.IWSDDeviceHost) error {
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceHost(foundation.PWSTR(_pszLocalId), pContext, ppDeviceHost)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceHost(foundation.PWSTR(_pszLocalId), pContext.Raw, ppDeviceHost)))
 }
 
 // WSDCreateDeviceHost2 wraps the raw WSDCreateDeviceHost2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsdhost/nf-wsdhost-wsdcreatedevicehost2
-func WSDCreateDeviceHost2(pszLocalId string, pContext *deviceswebservicesondevices.IWSDXMLContext, pConfigParams []deviceswebservicesondevices.WSD_CONFIG_PARAM, ppDeviceHost **deviceswebservicesondevices.IWSDDeviceHost) error {
+func WSDCreateDeviceHost2(pszLocalId string, pContext IWSDXMLContext, pConfigParams []deviceswebservicesondevices.WSD_CONFIG_PARAM, ppDeviceHost **deviceswebservicesondevices.IWSDDeviceHost) error {
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
 	var _pConfigParams *deviceswebservicesondevices.WSD_CONFIG_PARAM
 	if len(pConfigParams) > 0 {
 		_pConfigParams = &pConfigParams[0]
 	}
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceHost2(foundation.PWSTR(_pszLocalId), pContext, _pConfigParams, uint32(len(pConfigParams)), ppDeviceHost)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceHost2(foundation.PWSTR(_pszLocalId), pContext.Raw, _pConfigParams, uint32(len(pConfigParams)), ppDeviceHost)))
 }
 
 // WSDCreateDeviceHostAdvanced wraps the raw WSDCreateDeviceHostAdvanced call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsdhost/nf-wsdhost-wsdcreatedevicehostadvanced
-func WSDCreateDeviceHostAdvanced(pszLocalId string, pContext *deviceswebservicesondevices.IWSDXMLContext, ppHostAddresses []*deviceswebservicesondevices.IWSDAddress, ppDeviceHost **deviceswebservicesondevices.IWSDDeviceHost) error {
+func WSDCreateDeviceHostAdvanced(pszLocalId string, pContext IWSDXMLContext, ppHostAddresses []*deviceswebservicesondevices.IWSDAddress, ppDeviceHost **deviceswebservicesondevices.IWSDDeviceHost) error {
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
 	var _ppHostAddresses **deviceswebservicesondevices.IWSDAddress
 	if len(ppHostAddresses) > 0 {
 		_ppHostAddresses = &ppHostAddresses[0]
 	}
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceHostAdvanced(foundation.PWSTR(_pszLocalId), pContext, _ppHostAddresses, uint32(len(ppHostAddresses)), ppDeviceHost)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceHostAdvanced(foundation.PWSTR(_pszLocalId), pContext.Raw, _ppHostAddresses, uint32(len(ppHostAddresses)), ppDeviceHost)))
 }
 
 // WSDCreateDeviceProxy wraps the raw WSDCreateDeviceProxy call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsdclient/nf-wsdclient-wsdcreatedeviceproxy
-func WSDCreateDeviceProxy(pszDeviceId string, pszLocalId string, pContext *deviceswebservicesondevices.IWSDXMLContext, ppDeviceProxy **deviceswebservicesondevices.IWSDDeviceProxy) error {
+func WSDCreateDeviceProxy(pszDeviceId string, pszLocalId string, pContext IWSDXMLContext, ppDeviceProxy **deviceswebservicesondevices.IWSDDeviceProxy) error {
 	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceProxy(foundation.PWSTR(_pszDeviceId), foundation.PWSTR(_pszLocalId), pContext, ppDeviceProxy)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceProxy(foundation.PWSTR(_pszDeviceId), foundation.PWSTR(_pszLocalId), pContext.Raw, ppDeviceProxy)))
 }
 
 // WSDCreateDeviceProxy2 wraps the raw WSDCreateDeviceProxy2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsdclient/nf-wsdclient-wsdcreatedeviceproxy2
-func WSDCreateDeviceProxy2(pszDeviceId string, pszLocalId string, pContext *deviceswebservicesondevices.IWSDXMLContext, pConfigParams []deviceswebservicesondevices.WSD_CONFIG_PARAM, ppDeviceProxy **deviceswebservicesondevices.IWSDDeviceProxy) error {
+func WSDCreateDeviceProxy2(pszDeviceId string, pszLocalId string, pContext IWSDXMLContext, pConfigParams []deviceswebservicesondevices.WSD_CONFIG_PARAM, ppDeviceProxy **deviceswebservicesondevices.IWSDDeviceProxy) error {
 	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
 	var _pConfigParams *deviceswebservicesondevices.WSD_CONFIG_PARAM
 	if len(pConfigParams) > 0 {
 		_pConfigParams = &pConfigParams[0]
 	}
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceProxy2(foundation.PWSTR(_pszDeviceId), foundation.PWSTR(_pszLocalId), pContext, _pConfigParams, uint32(len(pConfigParams)), ppDeviceProxy)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceProxy2(foundation.PWSTR(_pszDeviceId), foundation.PWSTR(_pszLocalId), pContext.Raw, _pConfigParams, uint32(len(pConfigParams)), ppDeviceProxy)))
 }
 
 // WSDCreateDeviceProxyAdvanced wraps the raw WSDCreateDeviceProxyAdvanced call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsdclient/nf-wsdclient-wsdcreatedeviceproxyadvanced
-func WSDCreateDeviceProxyAdvanced(pszDeviceId string, pDeviceAddress *deviceswebservicesondevices.IWSDAddress, pszLocalId string, pContext *deviceswebservicesondevices.IWSDXMLContext, ppDeviceProxy **deviceswebservicesondevices.IWSDDeviceProxy) error {
+func WSDCreateDeviceProxyAdvanced(pszDeviceId string, pDeviceAddress IWSDAddress, pszLocalId string, pContext IWSDXMLContext, ppDeviceProxy **deviceswebservicesondevices.IWSDDeviceProxy) error {
 	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceProxyAdvanced(foundation.PWSTR(_pszDeviceId), pDeviceAddress, foundation.PWSTR(_pszLocalId), pContext, ppDeviceProxy)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDeviceProxyAdvanced(foundation.PWSTR(_pszDeviceId), pDeviceAddress.Raw, foundation.PWSTR(_pszLocalId), pContext.Raw, ppDeviceProxy)))
 }
 
 // WSDCreateDiscoveryProvider wraps the raw WSDCreateDiscoveryProvider call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsddisco/nf-wsddisco-wsdcreatediscoveryprovider
-func WSDCreateDiscoveryProvider(pContext *deviceswebservicesondevices.IWSDXMLContext, ppProvider **deviceswebservicesondevices.IWSDiscoveryProvider) error {
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDiscoveryProvider(pContext, ppProvider)))
+func WSDCreateDiscoveryProvider(pContext IWSDXMLContext, ppProvider **deviceswebservicesondevices.IWSDiscoveryProvider) error {
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDiscoveryProvider(pContext.Raw, ppProvider)))
 }
 
 // WSDCreateDiscoveryProvider2 wraps the raw WSDCreateDiscoveryProvider2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsddisco/nf-wsddisco-wsdcreatediscoveryprovider2
-func WSDCreateDiscoveryProvider2(pContext *deviceswebservicesondevices.IWSDXMLContext, pConfigParams []deviceswebservicesondevices.WSD_CONFIG_PARAM, ppProvider **deviceswebservicesondevices.IWSDiscoveryProvider) error {
+func WSDCreateDiscoveryProvider2(pContext IWSDXMLContext, pConfigParams []deviceswebservicesondevices.WSD_CONFIG_PARAM, ppProvider **deviceswebservicesondevices.IWSDiscoveryProvider) error {
 	var _pConfigParams *deviceswebservicesondevices.WSD_CONFIG_PARAM
 	if len(pConfigParams) > 0 {
 		_pConfigParams = &pConfigParams[0]
 	}
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDiscoveryProvider2(pContext, _pConfigParams, uint32(len(pConfigParams)), ppProvider)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDiscoveryProvider2(pContext.Raw, _pConfigParams, uint32(len(pConfigParams)), ppProvider)))
 }
 
 // WSDCreateDiscoveryPublisher wraps the raw WSDCreateDiscoveryPublisher call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsddisco/nf-wsddisco-wsdcreatediscoverypublisher
-func WSDCreateDiscoveryPublisher(pContext *deviceswebservicesondevices.IWSDXMLContext, ppPublisher **deviceswebservicesondevices.IWSDiscoveryPublisher) error {
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDiscoveryPublisher(pContext, ppPublisher)))
+func WSDCreateDiscoveryPublisher(pContext IWSDXMLContext, ppPublisher **deviceswebservicesondevices.IWSDiscoveryPublisher) error {
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDiscoveryPublisher(pContext.Raw, ppPublisher)))
 }
 
 // WSDCreateDiscoveryPublisher2 wraps the raw WSDCreateDiscoveryPublisher2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsddisco/nf-wsddisco-wsdcreatediscoverypublisher2
-func WSDCreateDiscoveryPublisher2(pContext *deviceswebservicesondevices.IWSDXMLContext, pConfigParams []deviceswebservicesondevices.WSD_CONFIG_PARAM, ppPublisher **deviceswebservicesondevices.IWSDiscoveryPublisher) error {
+func WSDCreateDiscoveryPublisher2(pContext IWSDXMLContext, pConfigParams []deviceswebservicesondevices.WSD_CONFIG_PARAM, ppPublisher **deviceswebservicesondevices.IWSDiscoveryPublisher) error {
 	var _pConfigParams *deviceswebservicesondevices.WSD_CONFIG_PARAM
 	if len(pConfigParams) > 0 {
 		_pConfigParams = &pConfigParams[0]
 	}
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDiscoveryPublisher2(pContext, _pConfigParams, uint32(len(pConfigParams)), ppPublisher)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDCreateDiscoveryPublisher2(pContext.Raw, _pConfigParams, uint32(len(pConfigParams)), ppPublisher)))
 }
 
 // WSDCreateHttpAddress wraps the raw WSDCreateHttpAddress call with idiomatic Go types.
@@ -133,12 +133,12 @@ func WSDCreateUdpMessageParameters(ppTxParams **deviceswebservicesondevices.IWSD
 
 // WSDGenerateFault wraps the raw WSDGenerateFault call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgeneratefault
-func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDetail string, pContext *deviceswebservicesondevices.IWSDXMLContext, ppFault **deviceswebservicesondevices.WSD_SOAP_FAULT) error {
+func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDetail string, pContext IWSDXMLContext, ppFault **deviceswebservicesondevices.WSD_SOAP_FAULT) error {
 	_pszCode := win32.UTF16Ptr(pszCode)
 	_pszSubCode := win32.UTF16Ptr(pszSubCode)
 	_pszReason := win32.UTF16Ptr(pszReason)
 	_pszDetail := win32.UTF16Ptr(pszDetail)
-	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDGenerateFault(foundation.PWSTR(_pszCode), foundation.PWSTR(_pszSubCode), foundation.PWSTR(_pszReason), foundation.PWSTR(_pszDetail), pContext, ppFault)))
+	return win32.HRESULTError(int32(deviceswebservicesondevices.WSDGenerateFault(foundation.PWSTR(_pszCode), foundation.PWSTR(_pszSubCode), foundation.PWSTR(_pszReason), foundation.PWSTR(_pszDetail), pContext.Raw, ppFault)))
 }
 
 // WSDGenerateFaultEx wraps the raw WSDGenerateFaultEx call with idiomatic Go types.

@@ -182,18 +182,18 @@ func (self IDWriteFactory) GetSystemFontCollection(fontCollection **graphicsdire
 }
 
 // CreateCustomFontCollection wraps the raw CreateCustomFontCollection call.
-func (self IDWriteFactory) CreateCustomFontCollection(collectionLoader *graphicsdirectwrite.IDWriteFontCollectionLoader, collectionKey unsafe.Pointer, collectionKeySize uint32, fontCollection **graphicsdirectwrite.IDWriteFontCollection) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCustomFontCollection(collectionLoader, collectionKey, collectionKeySize, fontCollection)))
+func (self IDWriteFactory) CreateCustomFontCollection(collectionLoader IDWriteFontCollectionLoader, collectionKey unsafe.Pointer, collectionKeySize uint32, fontCollection **graphicsdirectwrite.IDWriteFontCollection) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCustomFontCollection(collectionLoader.Raw, collectionKey, collectionKeySize, fontCollection)))
 }
 
 // RegisterFontCollectionLoader wraps the raw RegisterFontCollectionLoader call.
-func (self IDWriteFactory) RegisterFontCollectionLoader(fontCollectionLoader *graphicsdirectwrite.IDWriteFontCollectionLoader) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterFontCollectionLoader(fontCollectionLoader)))
+func (self IDWriteFactory) RegisterFontCollectionLoader(fontCollectionLoader IDWriteFontCollectionLoader) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterFontCollectionLoader(fontCollectionLoader.Raw)))
 }
 
 // UnregisterFontCollectionLoader wraps the raw UnregisterFontCollectionLoader call.
-func (self IDWriteFactory) UnregisterFontCollectionLoader(fontCollectionLoader *graphicsdirectwrite.IDWriteFontCollectionLoader) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterFontCollectionLoader(fontCollectionLoader)))
+func (self IDWriteFactory) UnregisterFontCollectionLoader(fontCollectionLoader IDWriteFontCollectionLoader) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterFontCollectionLoader(fontCollectionLoader.Raw)))
 }
 
 // CreateFontFileReference wraps the raw CreateFontFileReference call.
@@ -203,8 +203,8 @@ func (self IDWriteFactory) CreateFontFileReference(filePath string, lastWriteTim
 }
 
 // CreateCustomFontFileReference wraps the raw CreateCustomFontFileReference call.
-func (self IDWriteFactory) CreateCustomFontFileReference(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, fontFileLoader *graphicsdirectwrite.IDWriteFontFileLoader, fontFile **graphicsdirectwrite.IDWriteFontFile) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCustomFontFileReference(fontFileReferenceKey, fontFileReferenceKeySize, fontFileLoader, fontFile)))
+func (self IDWriteFactory) CreateCustomFontFileReference(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, fontFileLoader IDWriteFontFileLoader, fontFile **graphicsdirectwrite.IDWriteFontFile) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCustomFontFileReference(fontFileReferenceKey, fontFileReferenceKeySize, fontFileLoader.Raw, fontFile)))
 }
 
 // CreateFontFace wraps the raw CreateFontFace call.
@@ -223,13 +223,13 @@ func (self IDWriteFactory) CreateMonitorRenderingParams(monitor graphicsgdi.HMON
 }
 
 // RegisterFontFileLoader wraps the raw RegisterFontFileLoader call.
-func (self IDWriteFactory) RegisterFontFileLoader(fontFileLoader *graphicsdirectwrite.IDWriteFontFileLoader) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterFontFileLoader(fontFileLoader)))
+func (self IDWriteFactory) RegisterFontFileLoader(fontFileLoader IDWriteFontFileLoader) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterFontFileLoader(fontFileLoader.Raw)))
 }
 
 // UnregisterFontFileLoader wraps the raw UnregisterFontFileLoader call.
-func (self IDWriteFactory) UnregisterFontFileLoader(fontFileLoader *graphicsdirectwrite.IDWriteFontFileLoader) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterFontFileLoader(fontFileLoader)))
+func (self IDWriteFactory) UnregisterFontFileLoader(fontFileLoader IDWriteFontFileLoader) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterFontFileLoader(fontFileLoader.Raw)))
 }
 
 // CreateTypography wraps the raw CreateTypography call.
@@ -243,8 +243,8 @@ func (self IDWriteFactory) GetGdiInterop(gdiInterop **graphicsdirectwrite.IDWrit
 }
 
 // CreateEllipsisTrimmingSign wraps the raw CreateEllipsisTrimmingSign call.
-func (self IDWriteFactory) CreateEllipsisTrimmingSign(textFormat *graphicsdirectwrite.IDWriteTextFormat, trimmingSign **graphicsdirectwrite.IDWriteInlineObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEllipsisTrimmingSign(textFormat, trimmingSign)))
+func (self IDWriteFactory) CreateEllipsisTrimmingSign(textFormat IDWriteTextFormat, trimmingSign **graphicsdirectwrite.IDWriteInlineObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateEllipsisTrimmingSign(textFormat.Raw, trimmingSign)))
 }
 
 // CreateTextAnalyzer wraps the raw CreateTextAnalyzer call.
@@ -309,8 +309,8 @@ func WrapIDWriteFactory3(raw *graphicsdirectwrite.IDWriteFactory3) IDWriteFactor
 }
 
 // CreateFontFaceReference wraps the raw CreateFontFaceReference call.
-func (self IDWriteFactory3) CreateFontFaceReference(fontFile *graphicsdirectwrite.IDWriteFontFile, faceIndex uint32, fontSimulations graphicsdirectwrite.DWRITE_FONT_SIMULATIONS, fontFaceReference **graphicsdirectwrite.IDWriteFontFaceReference) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFontFaceReference(fontFile, faceIndex, fontSimulations, fontFaceReference)))
+func (self IDWriteFactory3) CreateFontFaceReference(fontFile IDWriteFontFile, faceIndex uint32, fontSimulations graphicsdirectwrite.DWRITE_FONT_SIMULATIONS, fontFaceReference **graphicsdirectwrite.IDWriteFontFaceReference) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFontFaceReference(fontFile.Raw, faceIndex, fontSimulations, fontFaceReference)))
 }
 
 // CreateFontFaceReference wraps the raw CreateFontFaceReference_ call.
@@ -330,8 +330,8 @@ func (self IDWriteFactory3) CreateFontSetBuilder(fontSetBuilder **graphicsdirect
 }
 
 // CreateFontCollectionFromFontSet wraps the raw CreateFontCollectionFromFontSet call.
-func (self IDWriteFactory3) CreateFontCollectionFromFontSet(fontSet *graphicsdirectwrite.IDWriteFontSet, fontCollection **graphicsdirectwrite.IDWriteFontCollection1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFontCollectionFromFontSet(fontSet, fontCollection)))
+func (self IDWriteFactory3) CreateFontCollectionFromFontSet(fontSet IDWriteFontSet, fontCollection **graphicsdirectwrite.IDWriteFontCollection1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFontCollectionFromFontSet(fontSet.Raw, fontCollection)))
 }
 
 // GetSystemFontCollection wraps the raw GetSystemFontCollection call.
@@ -407,13 +407,13 @@ func WrapIDWriteFactory6(raw *graphicsdirectwrite.IDWriteFactory6) IDWriteFactor
 }
 
 // CreateFontFaceReference wraps the raw CreateFontFaceReference call.
-func (self IDWriteFactory6) CreateFontFaceReference(fontFile *graphicsdirectwrite.IDWriteFontFile, faceIndex uint32, fontSimulations graphicsdirectwrite.DWRITE_FONT_SIMULATIONS, fontAxisValues *graphicsdirectwrite.DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontFaceReference **graphicsdirectwrite.IDWriteFontFaceReference1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFontFaceReference(fontFile, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontFaceReference)))
+func (self IDWriteFactory6) CreateFontFaceReference(fontFile IDWriteFontFile, faceIndex uint32, fontSimulations graphicsdirectwrite.DWRITE_FONT_SIMULATIONS, fontAxisValues *graphicsdirectwrite.DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontFaceReference **graphicsdirectwrite.IDWriteFontFaceReference1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFontFaceReference(fontFile.Raw, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontFaceReference)))
 }
 
 // CreateFontResource wraps the raw CreateFontResource call.
-func (self IDWriteFactory6) CreateFontResource(fontFile *graphicsdirectwrite.IDWriteFontFile, faceIndex uint32, fontResource **graphicsdirectwrite.IDWriteFontResource) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFontResource(fontFile, faceIndex, fontResource)))
+func (self IDWriteFactory6) CreateFontResource(fontFile IDWriteFontFile, faceIndex uint32, fontResource **graphicsdirectwrite.IDWriteFontResource) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFontResource(fontFile.Raw, faceIndex, fontResource)))
 }
 
 // GetSystemFontSet wraps the raw GetSystemFontSet call.
@@ -429,8 +429,8 @@ func (self IDWriteFactory6) GetSystemFontCollection(includeDownloadableFonts boo
 }
 
 // CreateFontCollectionFromFontSet wraps the raw CreateFontCollectionFromFontSet call.
-func (self IDWriteFactory6) CreateFontCollectionFromFontSet(fontSet *graphicsdirectwrite.IDWriteFontSet, fontFamilyModel graphicsdirectwrite.DWRITE_FONT_FAMILY_MODEL, fontCollection **graphicsdirectwrite.IDWriteFontCollection2) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFontCollectionFromFontSet(fontSet, fontFamilyModel, fontCollection)))
+func (self IDWriteFactory6) CreateFontCollectionFromFontSet(fontSet IDWriteFontSet, fontFamilyModel graphicsdirectwrite.DWRITE_FONT_FAMILY_MODEL, fontCollection **graphicsdirectwrite.IDWriteFontCollection2) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFontCollectionFromFontSet(fontSet.Raw, fontFamilyModel, fontCollection)))
 }
 
 // CreateFontSetBuilder wraps the raw CreateFontSetBuilder call.
@@ -602,8 +602,8 @@ func (self IDWriteFont3) CreateFontFace(fontFace **graphicsdirectwrite.IDWriteFo
 }
 
 // Equals wraps the raw Equals call.
-func (self IDWriteFont3) Equals(font *graphicsdirectwrite.IDWriteFont) foundation.BOOL {
-	return self.Raw.Equals(font)
+func (self IDWriteFont3) Equals(font IDWriteFont) foundation.BOOL {
+	return self.Raw.Equals(font.Raw)
 }
 
 // GetFontFaceReference wraps the raw GetFontFaceReference call.
@@ -649,8 +649,8 @@ func (self IDWriteFontCollection) FindFamilyName(familyName string, index *uint3
 }
 
 // GetFontFromFontFace wraps the raw GetFontFromFontFace call.
-func (self IDWriteFontCollection) GetFontFromFontFace(fontFace *graphicsdirectwrite.IDWriteFontFace, font **graphicsdirectwrite.IDWriteFont) error {
-	return win32.HRESULTError(int32(self.Raw.GetFontFromFontFace(fontFace, font)))
+func (self IDWriteFontCollection) GetFontFromFontFace(fontFace IDWriteFontFace, font **graphicsdirectwrite.IDWriteFont) error {
+	return win32.HRESULTError(int32(self.Raw.GetFontFromFontFace(fontFace.Raw, font)))
 }
 
 // IDWriteFontCollection1 is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteFontCollection1 with error-returning methods.
@@ -734,8 +734,8 @@ func WrapIDWriteFontCollectionLoader(raw *graphicsdirectwrite.IDWriteFontCollect
 }
 
 // CreateEnumeratorFromKey wraps the raw CreateEnumeratorFromKey call.
-func (self IDWriteFontCollectionLoader) CreateEnumeratorFromKey(factory *graphicsdirectwrite.IDWriteFactory, collectionKey unsafe.Pointer, collectionKeySize uint32, fontFileEnumerator **graphicsdirectwrite.IDWriteFontFileEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEnumeratorFromKey(factory, collectionKey, collectionKeySize, fontFileEnumerator)))
+func (self IDWriteFontCollectionLoader) CreateEnumeratorFromKey(factory IDWriteFactory, collectionKey unsafe.Pointer, collectionKeySize uint32, fontFileEnumerator **graphicsdirectwrite.IDWriteFontFileEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.CreateEnumeratorFromKey(factory.Raw, collectionKey, collectionKeySize, fontFileEnumerator)))
 }
 
 // IDWriteFontDownloadListener is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteFontDownloadListener with error-returning methods.
@@ -750,8 +750,8 @@ func WrapIDWriteFontDownloadListener(raw *graphicsdirectwrite.IDWriteFontDownloa
 }
 
 // DownloadCompleted wraps the raw DownloadCompleted call.
-func (self IDWriteFontDownloadListener) DownloadCompleted(downloadQueue *graphicsdirectwrite.IDWriteFontDownloadQueue, context *systemcom.IUnknown, downloadResult foundation.HRESULT) {
-	self.Raw.DownloadCompleted(downloadQueue, context, downloadResult)
+func (self IDWriteFontDownloadListener) DownloadCompleted(downloadQueue IDWriteFontDownloadQueue, context systemcomidiom.IUnknown, downloadResult foundation.HRESULT) {
+	self.Raw.DownloadCompleted(downloadQueue.Raw, context.Raw, downloadResult)
 }
 
 // IDWriteFontDownloadQueue is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteFontDownloadQueue with error-returning methods.
@@ -766,8 +766,8 @@ func WrapIDWriteFontDownloadQueue(raw *graphicsdirectwrite.IDWriteFontDownloadQu
 }
 
 // AddListener wraps the raw AddListener call.
-func (self IDWriteFontDownloadQueue) AddListener(listener *graphicsdirectwrite.IDWriteFontDownloadListener, token *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddListener(listener, token)))
+func (self IDWriteFontDownloadQueue) AddListener(listener IDWriteFontDownloadListener, token *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddListener(listener.Raw, token)))
 }
 
 // RemoveListener wraps the raw RemoveListener call.
@@ -781,8 +781,8 @@ func (self IDWriteFontDownloadQueue) IsEmpty() foundation.BOOL {
 }
 
 // BeginDownload wraps the raw BeginDownload call.
-func (self IDWriteFontDownloadQueue) BeginDownload(context *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginDownload(context)))
+func (self IDWriteFontDownloadQueue) BeginDownload(context systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginDownload(context.Raw)))
 }
 
 // CancelDownload wraps the raw CancelDownload call.
@@ -1092,8 +1092,8 @@ func (self IDWriteFontFace5) GetFontResource(fontResource **graphicsdirectwrite.
 }
 
 // Equals wraps the raw Equals call.
-func (self IDWriteFontFace5) Equals(fontFace *graphicsdirectwrite.IDWriteFontFace) foundation.BOOL {
-	return self.Raw.Equals(fontFace)
+func (self IDWriteFontFace5) Equals(fontFace IDWriteFontFace) foundation.BOOL {
+	return self.Raw.Equals(fontFace.Raw)
 }
 
 // IDWriteFontFace6 is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteFontFace6 with error-returning methods.
@@ -1160,8 +1160,8 @@ func (self IDWriteFontFaceReference) CreateFontFaceWithSimulations(fontFaceSimul
 }
 
 // Equals wraps the raw Equals call.
-func (self IDWriteFontFaceReference) Equals(fontFaceReference *graphicsdirectwrite.IDWriteFontFaceReference) foundation.BOOL {
-	return self.Raw.Equals(fontFaceReference)
+func (self IDWriteFontFaceReference) Equals(fontFaceReference IDWriteFontFaceReference) foundation.BOOL {
+	return self.Raw.Equals(fontFaceReference.Raw)
 }
 
 // GetFontFaceIndex wraps the raw GetFontFaceIndex call.
@@ -1258,9 +1258,9 @@ func WrapIDWriteFontFallback(raw *graphicsdirectwrite.IDWriteFontFallback) IDWri
 }
 
 // MapCharacters wraps the raw MapCharacters call.
-func (self IDWriteFontFallback) MapCharacters(analysisSource *graphicsdirectwrite.IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection *graphicsdirectwrite.IDWriteFontCollection, baseFamilyName string, baseWeight graphicsdirectwrite.DWRITE_FONT_WEIGHT, baseStyle graphicsdirectwrite.DWRITE_FONT_STYLE, baseStretch graphicsdirectwrite.DWRITE_FONT_STRETCH, mappedLength *uint32, mappedFont **graphicsdirectwrite.IDWriteFont, scale *float32) error {
+func (self IDWriteFontFallback) MapCharacters(analysisSource IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection IDWriteFontCollection, baseFamilyName string, baseWeight graphicsdirectwrite.DWRITE_FONT_WEIGHT, baseStyle graphicsdirectwrite.DWRITE_FONT_STYLE, baseStretch graphicsdirectwrite.DWRITE_FONT_STRETCH, mappedLength *uint32, mappedFont **graphicsdirectwrite.IDWriteFont, scale *float32) error {
 	_baseFamilyName := win32.UTF16Ptr(baseFamilyName)
-	return win32.HRESULTError(int32(self.Raw.MapCharacters(analysisSource, textPosition, textLength, baseFontCollection, foundation.PWSTR(_baseFamilyName), baseWeight, baseStyle, baseStretch, mappedLength, mappedFont, scale)))
+	return win32.HRESULTError(int32(self.Raw.MapCharacters(analysisSource.Raw, textPosition, textLength, baseFontCollection.Raw, foundation.PWSTR(_baseFamilyName), baseWeight, baseStyle, baseStretch, mappedLength, mappedFont, scale)))
 }
 
 // IDWriteFontFallback1 is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteFontFallback1 with error-returning methods.
@@ -1275,9 +1275,9 @@ func WrapIDWriteFontFallback1(raw *graphicsdirectwrite.IDWriteFontFallback1) IDW
 }
 
 // MapCharacters wraps the raw MapCharacters call.
-func (self IDWriteFontFallback1) MapCharacters(analysisSource *graphicsdirectwrite.IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection *graphicsdirectwrite.IDWriteFontCollection, baseFamilyName string, fontAxisValues *graphicsdirectwrite.DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, mappedLength *uint32, scale *float32, mappedFontFace **graphicsdirectwrite.IDWriteFontFace5) error {
+func (self IDWriteFontFallback1) MapCharacters(analysisSource IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection IDWriteFontCollection, baseFamilyName string, fontAxisValues *graphicsdirectwrite.DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, mappedLength *uint32, scale *float32, mappedFontFace **graphicsdirectwrite.IDWriteFontFace5) error {
 	_baseFamilyName := win32.UTF16Ptr(baseFamilyName)
-	return win32.HRESULTError(int32(self.Raw.MapCharacters(analysisSource, textPosition, textLength, baseFontCollection, foundation.PWSTR(_baseFamilyName), fontAxisValues, fontAxisValueCount, mappedLength, scale, mappedFontFace)))
+	return win32.HRESULTError(int32(self.Raw.MapCharacters(analysisSource.Raw, textPosition, textLength, baseFontCollection.Raw, foundation.PWSTR(_baseFamilyName), fontAxisValues, fontAxisValueCount, mappedLength, scale, mappedFontFace)))
 }
 
 // IDWriteFontFallbackBuilder is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteFontFallbackBuilder with error-returning methods.
@@ -1292,8 +1292,8 @@ func WrapIDWriteFontFallbackBuilder(raw *graphicsdirectwrite.IDWriteFontFallback
 }
 
 // AddMappings wraps the raw AddMappings call.
-func (self IDWriteFontFallbackBuilder) AddMappings(fontFallback *graphicsdirectwrite.IDWriteFontFallback) error {
-	return win32.HRESULTError(int32(self.Raw.AddMappings(fontFallback)))
+func (self IDWriteFontFallbackBuilder) AddMappings(fontFallback IDWriteFontFallback) error {
+	return win32.HRESULTError(int32(self.Raw.AddMappings(fontFallback.Raw)))
 }
 
 // CreateFontFallback wraps the raw CreateFontFallback call.
@@ -1629,13 +1629,13 @@ func (self IDWriteFontSet) GetFontFaceReference(listIndex uint32, fontFaceRefere
 }
 
 // FindFontFaceReference wraps the raw FindFontFaceReference call.
-func (self IDWriteFontSet) FindFontFaceReference(fontFaceReference *graphicsdirectwrite.IDWriteFontFaceReference, listIndex *uint32, exists *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.FindFontFaceReference(fontFaceReference, listIndex, exists)))
+func (self IDWriteFontSet) FindFontFaceReference(fontFaceReference IDWriteFontFaceReference, listIndex *uint32, exists *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.FindFontFaceReference(fontFaceReference.Raw, listIndex, exists)))
 }
 
 // FindFontFace wraps the raw FindFontFace call.
-func (self IDWriteFontSet) FindFontFace(fontFace *graphicsdirectwrite.IDWriteFontFace, listIndex *uint32, exists *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.FindFontFace(fontFace, listIndex, exists)))
+func (self IDWriteFontSet) FindFontFace(fontFace IDWriteFontFace, listIndex *uint32, exists *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.FindFontFace(fontFace.Raw, listIndex, exists)))
 }
 
 // GetPropertyValues wraps the raw GetPropertyValues call.
@@ -1821,18 +1821,18 @@ func WrapIDWriteFontSetBuilder(raw *graphicsdirectwrite.IDWriteFontSetBuilder) I
 }
 
 // AddFontFaceReference wraps the raw AddFontFaceReference call.
-func (self IDWriteFontSetBuilder) AddFontFaceReference(fontFaceReference *graphicsdirectwrite.IDWriteFontFaceReference, properties *graphicsdirectwrite.DWRITE_FONT_PROPERTY, propertyCount uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddFontFaceReference(fontFaceReference, properties, propertyCount)))
+func (self IDWriteFontSetBuilder) AddFontFaceReference(fontFaceReference IDWriteFontFaceReference, properties *graphicsdirectwrite.DWRITE_FONT_PROPERTY, propertyCount uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddFontFaceReference(fontFaceReference.Raw, properties, propertyCount)))
 }
 
 // AddFontFaceReference wraps the raw AddFontFaceReference_ call.
-func (self IDWriteFontSetBuilder) AddFontFaceReference_(fontFaceReference *graphicsdirectwrite.IDWriteFontFaceReference) error {
-	return win32.HRESULTError(int32(self.Raw.AddFontFaceReference_(fontFaceReference)))
+func (self IDWriteFontSetBuilder) AddFontFaceReference_(fontFaceReference IDWriteFontFaceReference) error {
+	return win32.HRESULTError(int32(self.Raw.AddFontFaceReference_(fontFaceReference.Raw)))
 }
 
 // AddFontSet wraps the raw AddFontSet call.
-func (self IDWriteFontSetBuilder) AddFontSet(fontSet *graphicsdirectwrite.IDWriteFontSet) error {
-	return win32.HRESULTError(int32(self.Raw.AddFontSet(fontSet)))
+func (self IDWriteFontSetBuilder) AddFontSet(fontSet IDWriteFontSet) error {
+	return win32.HRESULTError(int32(self.Raw.AddFontSet(fontSet.Raw)))
 }
 
 // CreateFontSet wraps the raw CreateFontSet call.
@@ -1852,8 +1852,8 @@ func WrapIDWriteFontSetBuilder1(raw *graphicsdirectwrite.IDWriteFontSetBuilder1)
 }
 
 // AddFontFile wraps the raw AddFontFile call.
-func (self IDWriteFontSetBuilder1) AddFontFile(fontFile *graphicsdirectwrite.IDWriteFontFile) error {
-	return win32.HRESULTError(int32(self.Raw.AddFontFile(fontFile)))
+func (self IDWriteFontSetBuilder1) AddFontFile(fontFile IDWriteFontFile) error {
+	return win32.HRESULTError(int32(self.Raw.AddFontFile(fontFile.Raw)))
 }
 
 // IDWriteFontSetBuilder2 is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteFontSetBuilder2 with error-returning methods.
@@ -1868,8 +1868,8 @@ func WrapIDWriteFontSetBuilder2(raw *graphicsdirectwrite.IDWriteFontSetBuilder2)
 }
 
 // AddFont wraps the raw AddFont call.
-func (self IDWriteFontSetBuilder2) AddFont(fontFile *graphicsdirectwrite.IDWriteFontFile, fontFaceIndex uint32, fontSimulations graphicsdirectwrite.DWRITE_FONT_SIMULATIONS, fontAxisValues *graphicsdirectwrite.DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontAxisRanges *graphicsdirectwrite.DWRITE_FONT_AXIS_RANGE, fontAxisRangeCount uint32, properties *graphicsdirectwrite.DWRITE_FONT_PROPERTY, propertyCount uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddFont(fontFile, fontFaceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontAxisRanges, fontAxisRangeCount, properties, propertyCount)))
+func (self IDWriteFontSetBuilder2) AddFont(fontFile IDWriteFontFile, fontFaceIndex uint32, fontSimulations graphicsdirectwrite.DWRITE_FONT_SIMULATIONS, fontAxisValues *graphicsdirectwrite.DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontAxisRanges *graphicsdirectwrite.DWRITE_FONT_AXIS_RANGE, fontAxisRangeCount uint32, properties *graphicsdirectwrite.DWRITE_FONT_PROPERTY, propertyCount uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddFont(fontFile.Raw, fontFaceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontAxisRanges, fontAxisRangeCount, properties, propertyCount)))
 }
 
 // AddFontFile wraps the raw AddFontFile call.
@@ -1895,13 +1895,13 @@ func (self IDWriteGdiInterop) CreateFontFromLOGFONT(logFont *graphicsgdi.LOGFONT
 }
 
 // ConvertFontToLOGFONT wraps the raw ConvertFontToLOGFONT call.
-func (self IDWriteGdiInterop) ConvertFontToLOGFONT(font *graphicsdirectwrite.IDWriteFont, logFont *graphicsgdi.LOGFONTW, isSystemFont *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertFontToLOGFONT(font, logFont, isSystemFont)))
+func (self IDWriteGdiInterop) ConvertFontToLOGFONT(font IDWriteFont, logFont *graphicsgdi.LOGFONTW, isSystemFont *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertFontToLOGFONT(font.Raw, logFont, isSystemFont)))
 }
 
 // ConvertFontFaceToLOGFONT wraps the raw ConvertFontFaceToLOGFONT call.
-func (self IDWriteGdiInterop) ConvertFontFaceToLOGFONT(font *graphicsdirectwrite.IDWriteFontFace, logFont *graphicsgdi.LOGFONTW) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertFontFaceToLOGFONT(font, logFont)))
+func (self IDWriteGdiInterop) ConvertFontFaceToLOGFONT(font IDWriteFontFace, logFont *graphicsgdi.LOGFONTW) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertFontFaceToLOGFONT(font.Raw, logFont)))
 }
 
 // CreateFontFaceFromHdc wraps the raw CreateFontFaceFromHdc call.
@@ -1926,23 +1926,23 @@ func WrapIDWriteGdiInterop1(raw *graphicsdirectwrite.IDWriteGdiInterop1) IDWrite
 }
 
 // CreateFontFromLOGFONT wraps the raw CreateFontFromLOGFONT call.
-func (self IDWriteGdiInterop1) CreateFontFromLOGFONT(logFont *graphicsgdi.LOGFONTW, fontCollection *graphicsdirectwrite.IDWriteFontCollection, font **graphicsdirectwrite.IDWriteFont) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFontFromLOGFONT(logFont, fontCollection, font)))
+func (self IDWriteGdiInterop1) CreateFontFromLOGFONT(logFont *graphicsgdi.LOGFONTW, fontCollection IDWriteFontCollection, font **graphicsdirectwrite.IDWriteFont) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFontFromLOGFONT(logFont, fontCollection.Raw, font)))
 }
 
 // GetFontSignature wraps the raw GetFontSignature call.
-func (self IDWriteGdiInterop1) GetFontSignature(fontFace *graphicsdirectwrite.IDWriteFontFace, fontSignature *globalization.FONTSIGNATURE) error {
-	return win32.HRESULTError(int32(self.Raw.GetFontSignature(fontFace, fontSignature)))
+func (self IDWriteGdiInterop1) GetFontSignature(fontFace IDWriteFontFace, fontSignature *globalization.FONTSIGNATURE) error {
+	return win32.HRESULTError(int32(self.Raw.GetFontSignature(fontFace.Raw, fontSignature)))
 }
 
 // GetFontSignature wraps the raw GetFontSignature_ call.
-func (self IDWriteGdiInterop1) GetFontSignature_(font *graphicsdirectwrite.IDWriteFont, fontSignature *globalization.FONTSIGNATURE) error {
-	return win32.HRESULTError(int32(self.Raw.GetFontSignature_(font, fontSignature)))
+func (self IDWriteGdiInterop1) GetFontSignature_(font IDWriteFont, fontSignature *globalization.FONTSIGNATURE) error {
+	return win32.HRESULTError(int32(self.Raw.GetFontSignature_(font.Raw, fontSignature)))
 }
 
 // GetMatchingFontsByLOGFONT wraps the raw GetMatchingFontsByLOGFONT call.
-func (self IDWriteGdiInterop1) GetMatchingFontsByLOGFONT(logFont *graphicsgdi.LOGFONTA, fontSet *graphicsdirectwrite.IDWriteFontSet, filteredSet **graphicsdirectwrite.IDWriteFontSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetMatchingFontsByLOGFONT(logFont, fontSet, filteredSet)))
+func (self IDWriteGdiInterop1) GetMatchingFontsByLOGFONT(logFont *graphicsgdi.LOGFONTA, fontSet IDWriteFontSet, filteredSet **graphicsdirectwrite.IDWriteFontSet) error {
+	return win32.HRESULTError(int32(self.Raw.GetMatchingFontsByLOGFONT(logFont, fontSet.Raw, filteredSet)))
 }
 
 // IDWriteGlyphRunAnalysis is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteGlyphRunAnalysis with error-returning methods.
@@ -1967,8 +1967,8 @@ func (self IDWriteGlyphRunAnalysis) CreateAlphaTexture(textureType graphicsdirec
 }
 
 // GetAlphaBlendParams wraps the raw GetAlphaBlendParams call.
-func (self IDWriteGlyphRunAnalysis) GetAlphaBlendParams(renderingParams *graphicsdirectwrite.IDWriteRenderingParams, blendGamma *float32, blendEnhancedContrast *float32, blendClearTypeLevel *float32) error {
-	return win32.HRESULTError(int32(self.Raw.GetAlphaBlendParams(renderingParams, blendGamma, blendEnhancedContrast, blendClearTypeLevel)))
+func (self IDWriteGlyphRunAnalysis) GetAlphaBlendParams(renderingParams IDWriteRenderingParams, blendGamma *float32, blendEnhancedContrast *float32, blendClearTypeLevel *float32) error {
+	return win32.HRESULTError(int32(self.Raw.GetAlphaBlendParams(renderingParams.Raw, blendGamma, blendEnhancedContrast, blendClearTypeLevel)))
 }
 
 // IDWriteInMemoryFontFileLoader is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteInMemoryFontFileLoader with error-returning methods.
@@ -1983,8 +1983,8 @@ func WrapIDWriteInMemoryFontFileLoader(raw *graphicsdirectwrite.IDWriteInMemoryF
 }
 
 // CreateInMemoryFontFileReference wraps the raw CreateInMemoryFontFileReference call.
-func (self IDWriteInMemoryFontFileLoader) CreateInMemoryFontFileReference(factory *graphicsdirectwrite.IDWriteFactory, fontData unsafe.Pointer, fontDataSize uint32, ownerObject *systemcom.IUnknown, fontFile **graphicsdirectwrite.IDWriteFontFile) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInMemoryFontFileReference(factory, fontData, fontDataSize, ownerObject, fontFile)))
+func (self IDWriteInMemoryFontFileLoader) CreateInMemoryFontFileReference(factory IDWriteFactory, fontData unsafe.Pointer, fontDataSize uint32, ownerObject systemcomidiom.IUnknown, fontFile **graphicsdirectwrite.IDWriteFontFile) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInMemoryFontFileReference(factory.Raw, fontData, fontDataSize, ownerObject.Raw, fontFile)))
 }
 
 // GetFileCount wraps the raw GetFileCount call.
@@ -2201,10 +2201,10 @@ func (self IDWriteRemoteFontFileLoader) GetLocalityFromKey(fontFileReferenceKey 
 }
 
 // CreateFontFileReferenceFromUrl wraps the raw CreateFontFileReferenceFromUrl call.
-func (self IDWriteRemoteFontFileLoader) CreateFontFileReferenceFromUrl(factory *graphicsdirectwrite.IDWriteFactory, baseUrl string, fontFileUrl string, fontFile **graphicsdirectwrite.IDWriteFontFile) error {
+func (self IDWriteRemoteFontFileLoader) CreateFontFileReferenceFromUrl(factory IDWriteFactory, baseUrl string, fontFileUrl string, fontFile **graphicsdirectwrite.IDWriteFontFile) error {
 	_baseUrl := win32.UTF16Ptr(baseUrl)
 	_fontFileUrl := win32.UTF16Ptr(fontFileUrl)
-	return win32.HRESULTError(int32(self.Raw.CreateFontFileReferenceFromUrl(factory, foundation.PWSTR(_baseUrl), foundation.PWSTR(_fontFileUrl), fontFile)))
+	return win32.HRESULTError(int32(self.Raw.CreateFontFileReferenceFromUrl(factory.Raw, foundation.PWSTR(_baseUrl), foundation.PWSTR(_fontFileUrl), fontFile)))
 }
 
 // IDWriteRemoteFontFileStream is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteRemoteFontFileStream with error-returning methods.
@@ -2365,8 +2365,8 @@ func (self IDWriteTextAnalysisSink) SetBidiLevel(textPosition uint32, textLength
 }
 
 // SetNumberSubstitution wraps the raw SetNumberSubstitution call.
-func (self IDWriteTextAnalysisSink) SetNumberSubstitution(textPosition uint32, textLength uint32, numberSubstitution *graphicsdirectwrite.IDWriteNumberSubstitution) error {
-	return win32.HRESULTError(int32(self.Raw.SetNumberSubstitution(textPosition, textLength, numberSubstitution)))
+func (self IDWriteTextAnalysisSink) SetNumberSubstitution(textPosition uint32, textLength uint32, numberSubstitution IDWriteNumberSubstitution) error {
+	return win32.HRESULTError(int32(self.Raw.SetNumberSubstitution(textPosition, textLength, numberSubstitution.Raw)))
 }
 
 // IDWriteTextAnalysisSink1 is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteTextAnalysisSink1 with error-returning methods.
@@ -2451,32 +2451,32 @@ func WrapIDWriteTextAnalyzer(raw *graphicsdirectwrite.IDWriteTextAnalyzer) IDWri
 }
 
 // AnalyzeScript wraps the raw AnalyzeScript call.
-func (self IDWriteTextAnalyzer) AnalyzeScript(analysisSource *graphicsdirectwrite.IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, analysisSink *graphicsdirectwrite.IDWriteTextAnalysisSink) error {
-	return win32.HRESULTError(int32(self.Raw.AnalyzeScript(analysisSource, textPosition, textLength, analysisSink)))
+func (self IDWriteTextAnalyzer) AnalyzeScript(analysisSource IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, analysisSink IDWriteTextAnalysisSink) error {
+	return win32.HRESULTError(int32(self.Raw.AnalyzeScript(analysisSource.Raw, textPosition, textLength, analysisSink.Raw)))
 }
 
 // AnalyzeBidi wraps the raw AnalyzeBidi call.
-func (self IDWriteTextAnalyzer) AnalyzeBidi(analysisSource *graphicsdirectwrite.IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, analysisSink *graphicsdirectwrite.IDWriteTextAnalysisSink) error {
-	return win32.HRESULTError(int32(self.Raw.AnalyzeBidi(analysisSource, textPosition, textLength, analysisSink)))
+func (self IDWriteTextAnalyzer) AnalyzeBidi(analysisSource IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, analysisSink IDWriteTextAnalysisSink) error {
+	return win32.HRESULTError(int32(self.Raw.AnalyzeBidi(analysisSource.Raw, textPosition, textLength, analysisSink.Raw)))
 }
 
 // AnalyzeNumberSubstitution wraps the raw AnalyzeNumberSubstitution call.
-func (self IDWriteTextAnalyzer) AnalyzeNumberSubstitution(analysisSource *graphicsdirectwrite.IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, analysisSink *graphicsdirectwrite.IDWriteTextAnalysisSink) error {
-	return win32.HRESULTError(int32(self.Raw.AnalyzeNumberSubstitution(analysisSource, textPosition, textLength, analysisSink)))
+func (self IDWriteTextAnalyzer) AnalyzeNumberSubstitution(analysisSource IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, analysisSink IDWriteTextAnalysisSink) error {
+	return win32.HRESULTError(int32(self.Raw.AnalyzeNumberSubstitution(analysisSource.Raw, textPosition, textLength, analysisSink.Raw)))
 }
 
 // AnalyzeLineBreakpoints wraps the raw AnalyzeLineBreakpoints call.
-func (self IDWriteTextAnalyzer) AnalyzeLineBreakpoints(analysisSource *graphicsdirectwrite.IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, analysisSink *graphicsdirectwrite.IDWriteTextAnalysisSink) error {
-	return win32.HRESULTError(int32(self.Raw.AnalyzeLineBreakpoints(analysisSource, textPosition, textLength, analysisSink)))
+func (self IDWriteTextAnalyzer) AnalyzeLineBreakpoints(analysisSource IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, analysisSink IDWriteTextAnalysisSink) error {
+	return win32.HRESULTError(int32(self.Raw.AnalyzeLineBreakpoints(analysisSource.Raw, textPosition, textLength, analysisSink.Raw)))
 }
 
 // GetGlyphs wraps the raw GetGlyphs call.
-func (self IDWriteTextAnalyzer) GetGlyphs(textString string, textLength uint32, fontFace *graphicsdirectwrite.IDWriteFontFace, isSideways bool, isRightToLeft bool, scriptAnalysis *graphicsdirectwrite.DWRITE_SCRIPT_ANALYSIS, localeName string, numberSubstitution *graphicsdirectwrite.IDWriteNumberSubstitution, features **graphicsdirectwrite.DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, maxGlyphCount uint32, clusterMap *uint16, textProps *graphicsdirectwrite.DWRITE_SHAPING_TEXT_PROPERTIES, glyphIndices *uint16, glyphProps *graphicsdirectwrite.DWRITE_SHAPING_GLYPH_PROPERTIES, actualGlyphCount *uint32) error {
+func (self IDWriteTextAnalyzer) GetGlyphs(textString string, textLength uint32, fontFace IDWriteFontFace, isSideways bool, isRightToLeft bool, scriptAnalysis *graphicsdirectwrite.DWRITE_SCRIPT_ANALYSIS, localeName string, numberSubstitution IDWriteNumberSubstitution, features **graphicsdirectwrite.DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, maxGlyphCount uint32, clusterMap *uint16, textProps *graphicsdirectwrite.DWRITE_SHAPING_TEXT_PROPERTIES, glyphIndices *uint16, glyphProps *graphicsdirectwrite.DWRITE_SHAPING_GLYPH_PROPERTIES, actualGlyphCount *uint32) error {
 	_textString := win32.UTF16Ptr(textString)
 	_isSideways := foundation.BOOL(win32.Bool32(isSideways))
 	_isRightToLeft := foundation.BOOL(win32.Bool32(isRightToLeft))
 	_localeName := win32.UTF16Ptr(localeName)
-	return win32.HRESULTError(int32(self.Raw.GetGlyphs(foundation.PWSTR(_textString), textLength, fontFace, _isSideways, _isRightToLeft, scriptAnalysis, foundation.PWSTR(_localeName), numberSubstitution, features, featureRangeLengths, featureRanges, maxGlyphCount, clusterMap, textProps, glyphIndices, glyphProps, actualGlyphCount)))
+	return win32.HRESULTError(int32(self.Raw.GetGlyphs(foundation.PWSTR(_textString), textLength, fontFace.Raw, _isSideways, _isRightToLeft, scriptAnalysis, foundation.PWSTR(_localeName), numberSubstitution.Raw, features, featureRangeLengths, featureRanges, maxGlyphCount, clusterMap, textProps, glyphIndices, glyphProps, actualGlyphCount)))
 }
 
 // IDWriteTextAnalyzer1 is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteTextAnalyzer1 with error-returning methods.
@@ -2491,8 +2491,8 @@ func WrapIDWriteTextAnalyzer1(raw *graphicsdirectwrite.IDWriteTextAnalyzer1) IDW
 }
 
 // AnalyzeVerticalGlyphOrientation wraps the raw AnalyzeVerticalGlyphOrientation call.
-func (self IDWriteTextAnalyzer1) AnalyzeVerticalGlyphOrientation(analysisSource *graphicsdirectwrite.IDWriteTextAnalysisSource1, textPosition uint32, textLength uint32, analysisSink *graphicsdirectwrite.IDWriteTextAnalysisSink1) error {
-	return win32.HRESULTError(int32(self.Raw.AnalyzeVerticalGlyphOrientation(analysisSource, textPosition, textLength, analysisSink)))
+func (self IDWriteTextAnalyzer1) AnalyzeVerticalGlyphOrientation(analysisSource IDWriteTextAnalysisSource1, textPosition uint32, textLength uint32, analysisSink IDWriteTextAnalysisSink1) error {
+	return win32.HRESULTError(int32(self.Raw.AnalyzeVerticalGlyphOrientation(analysisSource.Raw, textPosition, textLength, analysisSink.Raw)))
 }
 
 // GetGlyphOrientationTransform wraps the raw GetGlyphOrientationTransform call.
@@ -2502,9 +2502,9 @@ func (self IDWriteTextAnalyzer1) GetGlyphOrientationTransform(glyphOrientationAn
 }
 
 // GetTextComplexity wraps the raw GetTextComplexity call.
-func (self IDWriteTextAnalyzer1) GetTextComplexity(textString string, textLength uint32, fontFace *graphicsdirectwrite.IDWriteFontFace, isTextSimple *foundation.BOOL, textLengthRead *uint32, glyphIndices *uint16) error {
+func (self IDWriteTextAnalyzer1) GetTextComplexity(textString string, textLength uint32, fontFace IDWriteFontFace, isTextSimple *foundation.BOOL, textLengthRead *uint32, glyphIndices *uint16) error {
 	_textString := win32.UTF16Ptr(textString)
-	return win32.HRESULTError(int32(self.Raw.GetTextComplexity(foundation.PWSTR(_textString), textLength, fontFace, isTextSimple, textLengthRead, glyphIndices)))
+	return win32.HRESULTError(int32(self.Raw.GetTextComplexity(foundation.PWSTR(_textString), textLength, fontFace.Raw, isTextSimple, textLengthRead, glyphIndices)))
 }
 
 // IDWriteTextAnalyzer2 is an idiomatic wrapper over the raw COM interface Graphics.DirectWrite.IDWriteTextAnalyzer2 with error-returning methods.
@@ -2555,8 +2555,8 @@ func (self IDWriteTextFormat) SetFlowDirection(flowDirection graphicsdirectwrite
 }
 
 // SetTrimming wraps the raw SetTrimming call.
-func (self IDWriteTextFormat) SetTrimming(trimmingOptions *graphicsdirectwrite.DWRITE_TRIMMING, trimmingSign *graphicsdirectwrite.IDWriteInlineObject) error {
-	return win32.HRESULTError(int32(self.Raw.SetTrimming(trimmingOptions, trimmingSign)))
+func (self IDWriteTextFormat) SetTrimming(trimmingOptions *graphicsdirectwrite.DWRITE_TRIMMING, trimmingSign IDWriteInlineObject) error {
+	return win32.HRESULTError(int32(self.Raw.SetTrimming(trimmingOptions, trimmingSign.Raw)))
 }
 
 // GetTextAlignment wraps the raw GetTextAlignment call.
@@ -2677,8 +2677,8 @@ func (self IDWriteTextFormat1) GetOpticalAlignment() graphicsdirectwrite.DWRITE_
 }
 
 // SetFontFallback wraps the raw SetFontFallback call.
-func (self IDWriteTextFormat1) SetFontFallback(fontFallback *graphicsdirectwrite.IDWriteFontFallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetFontFallback(fontFallback)))
+func (self IDWriteTextFormat1) SetFontFallback(fontFallback IDWriteFontFallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetFontFallback(fontFallback.Raw)))
 }
 
 // GetFontFallback wraps the raw GetFontFallback call.
@@ -2924,8 +2924,8 @@ func (self IDWriteTextLayout2) GetOpticalAlignment() graphicsdirectwrite.DWRITE_
 }
 
 // SetFontFallback wraps the raw SetFontFallback call.
-func (self IDWriteTextLayout2) SetFontFallback(fontFallback *graphicsdirectwrite.IDWriteFontFallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetFontFallback(fontFallback)))
+func (self IDWriteTextLayout2) SetFontFallback(fontFallback IDWriteFontFallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetFontFallback(fontFallback.Raw)))
 }
 
 // GetFontFallback wraps the raw GetFontFallback call.

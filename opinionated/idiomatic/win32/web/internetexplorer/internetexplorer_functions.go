@@ -17,6 +17,7 @@ import (
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	systemthreading "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 	webinternetexplorer "github.com/deploymenttheory/go-bindings-win32/bindings/win32/web/internetexplorer"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // ComputeInvCMAP wraps the raw ComputeInvCMAP call with idiomatic Go types.
@@ -35,14 +36,14 @@ func CreateMIMEMap(ppMap **webinternetexplorer.IMapMIMEToCLSID) error {
 }
 
 // DecodeImage wraps the raw DecodeImage call with idiomatic Go types.
-func DecodeImage(pStream *systemcom.IStream, pMap *webinternetexplorer.IMapMIMEToCLSID, pEventSink *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(webinternetexplorer.DecodeImage(pStream, pMap, pEventSink)))
+func DecodeImage(pStream systemcomidiom.IStream, pMap IMapMIMEToCLSID, pEventSink systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(webinternetexplorer.DecodeImage(pStream.Raw, pMap.Raw, pEventSink.Raw)))
 }
 
 // DecodeImageEx wraps the raw DecodeImageEx call with idiomatic Go types.
-func DecodeImageEx(pStream *systemcom.IStream, pMap *webinternetexplorer.IMapMIMEToCLSID, pEventSink *systemcom.IUnknown, pszMIMETypeParam string) error {
+func DecodeImageEx(pStream systemcomidiom.IStream, pMap IMapMIMEToCLSID, pEventSink systemcomidiom.IUnknown, pszMIMETypeParam string) error {
 	_pszMIMETypeParam := win32.UTF16Ptr(pszMIMETypeParam)
-	return win32.HRESULTError(int32(webinternetexplorer.DecodeImageEx(pStream, pMap, pEventSink, foundation.PWSTR(_pszMIMETypeParam))))
+	return win32.HRESULTError(int32(webinternetexplorer.DecodeImageEx(pStream.Raw, pMap.Raw, pEventSink.Raw, foundation.PWSTR(_pszMIMETypeParam))))
 }
 
 // DitherTo8 wraps the raw DitherTo8 call with idiomatic Go types.
@@ -328,6 +329,6 @@ func RatingSetupUIW(hDlg foundation.HWND, pszUsername string) error {
 }
 
 // SniffStream wraps the raw SniffStream call with idiomatic Go types.
-func SniffStream(pInStream *systemcom.IStream, pnFormat *uint32, ppOutStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(webinternetexplorer.SniffStream(pInStream, pnFormat, ppOutStream)))
+func SniffStream(pInStream systemcomidiom.IStream, pnFormat *uint32, ppOutStream **systemcom.IStream) error {
+	return win32.HRESULTError(int32(webinternetexplorer.SniffStream(pInStream.Raw, pnFormat, ppOutStream)))
 }

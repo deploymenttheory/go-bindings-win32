@@ -87,8 +87,8 @@ func WrapIDefaultLocation(raw *devicesgeolocation.IDefaultLocation) IDefaultLoca
 }
 
 // SetReport wraps the raw SetReport call.
-func (self IDefaultLocation) SetReport(reportType *win32.GUID, pLocationReport *devicesgeolocation.ILocationReport) error {
-	return win32.HRESULTError(int32(self.Raw.SetReport(reportType, pLocationReport)))
+func (self IDefaultLocation) SetReport(reportType *win32.GUID, pLocationReport ILocationReport) error {
+	return win32.HRESULTError(int32(self.Raw.SetReport(reportType, pLocationReport.Raw)))
 }
 
 // GetReport wraps the raw GetReport call.
@@ -252,8 +252,8 @@ func WrapILocation(raw *devicesgeolocation.ILocation) ILocation {
 }
 
 // RegisterForReport wraps the raw RegisterForReport call.
-func (self ILocation) RegisterForReport(pEvents *devicesgeolocation.ILocationEvents, reportType *win32.GUID, dwRequestedReportInterval uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterForReport(pEvents, reportType, dwRequestedReportInterval)))
+func (self ILocation) RegisterForReport(pEvents ILocationEvents, reportType *win32.GUID, dwRequestedReportInterval uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterForReport(pEvents.Raw, reportType, dwRequestedReportInterval)))
 }
 
 // UnregisterForReport wraps the raw UnregisterForReport call.
@@ -309,8 +309,8 @@ func WrapILocationEvents(raw *devicesgeolocation.ILocationEvents) ILocationEvent
 }
 
 // OnLocationChanged wraps the raw OnLocationChanged call.
-func (self ILocationEvents) OnLocationChanged(reportType *win32.GUID, pLocationReport *devicesgeolocation.ILocationReport) error {
-	return win32.HRESULTError(int32(self.Raw.OnLocationChanged(reportType, pLocationReport)))
+func (self ILocationEvents) OnLocationChanged(reportType *win32.GUID, pLocationReport ILocationReport) error {
+	return win32.HRESULTError(int32(self.Raw.OnLocationChanged(reportType, pLocationReport.Raw)))
 }
 
 // OnStatusChanged wraps the raw OnStatusChanged call.

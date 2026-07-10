@@ -11,7 +11,8 @@ import (
 	graphicsdirect3d11 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d11"
 	graphicsdirect3d11on12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d11on12"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	graphicsdirect3d11idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d11"
+	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -27,8 +28,8 @@ func WrapID3D11On12Device(raw *graphicsdirect3d11on12.ID3D11On12Device) ID3D11On
 }
 
 // CreateWrappedResource wraps the raw CreateWrappedResource call.
-func (self ID3D11On12Device) CreateWrappedResource(pResource12 *systemcom.IUnknown, pFlags11 *graphicsdirect3d11on12.D3D11_RESOURCE_FLAGS, InState graphicsdirect3d12.D3D12_RESOURCE_STATES, OutState graphicsdirect3d12.D3D12_RESOURCE_STATES, riid *win32.GUID, ppResource11 *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateWrappedResource(pResource12, pFlags11, InState, OutState, riid, ppResource11)))
+func (self ID3D11On12Device) CreateWrappedResource(pResource12 systemcomidiom.IUnknown, pFlags11 *graphicsdirect3d11on12.D3D11_RESOURCE_FLAGS, InState graphicsdirect3d12.D3D12_RESOURCE_STATES, OutState graphicsdirect3d12.D3D12_RESOURCE_STATES, riid *win32.GUID, ppResource11 *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateWrappedResource(pResource12.Raw, pFlags11, InState, OutState, riid, ppResource11)))
 }
 
 // ReleaseWrappedResources wraps the raw ReleaseWrappedResources call.
@@ -69,11 +70,11 @@ func WrapID3D11On12Device2(raw *graphicsdirect3d11on12.ID3D11On12Device2) ID3D11
 }
 
 // UnwrapUnderlyingResource wraps the raw UnwrapUnderlyingResource call.
-func (self ID3D11On12Device2) UnwrapUnderlyingResource(pResource11 *graphicsdirect3d11.ID3D11Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.UnwrapUnderlyingResource(pResource11, pCommandQueue, riid, ppvResource12)))
+func (self ID3D11On12Device2) UnwrapUnderlyingResource(pResource11 graphicsdirect3d11idiom.ID3D11Resource, pCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.UnwrapUnderlyingResource(pResource11.Raw, pCommandQueue.Raw, riid, ppvResource12)))
 }
 
 // ReturnUnderlyingResource wraps the raw ReturnUnderlyingResource call.
-func (self ID3D11On12Device2) ReturnUnderlyingResource(pResource11 *graphicsdirect3d11.ID3D11Resource, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) error {
-	return win32.HRESULTError(int32(self.Raw.ReturnUnderlyingResource(pResource11, NumSync, pSignalValues, ppFences)))
+func (self ID3D11On12Device2) ReturnUnderlyingResource(pResource11 graphicsdirect3d11idiom.ID3D11Resource, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) error {
+	return win32.HRESULTError(int32(self.Raw.ReturnUnderlyingResource(pResource11.Raw, NumSync, pSignalValues, ppFences)))
 }

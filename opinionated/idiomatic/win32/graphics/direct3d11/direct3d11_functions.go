@@ -12,84 +12,85 @@ import (
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
 	graphicsdirect3d11 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d11"
 	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
 )
 
 // D3D11CreateDevice wraps the raw D3D11CreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d11/nf-d3d11-d3d11createdevice
-func D3D11CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags graphicsdirect3d11.D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, ppDevice **graphicsdirect3d11.ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext) error {
+func D3D11CreateDevice(pAdapter graphicsdxgiidiom.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags graphicsdirect3d11.D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, ppDevice **graphicsdirect3d11.ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext) error {
 	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
 	if len(pFeatureLevels) > 0 {
 		_pFeatureLevels = &pFeatureLevels[0]
 	}
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3D11CreateDevice(pAdapter, DriverType, Software, Flags, _pFeatureLevels, uint32(len(pFeatureLevels)), SDKVersion, ppDevice, pFeatureLevel, ppImmediateContext)))
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3D11CreateDevice(pAdapter.Raw, DriverType, Software, Flags, _pFeatureLevels, uint32(len(pFeatureLevels)), SDKVersion, ppDevice, pFeatureLevel, ppImmediateContext)))
 }
 
 // D3D11CreateDeviceAndSwapChain wraps the raw D3D11CreateDeviceAndSwapChain call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d11/nf-d3d11-d3d11createdeviceandswapchain
-func D3D11CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags graphicsdirect3d11.D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **graphicsdirect3d11.ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext) error {
+func D3D11CreateDeviceAndSwapChain(pAdapter graphicsdxgiidiom.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags graphicsdirect3d11.D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **graphicsdirect3d11.ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext) error {
 	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
 	if len(pFeatureLevels) > 0 {
 		_pFeatureLevels = &pFeatureLevels[0]
 	}
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3D11CreateDeviceAndSwapChain(pAdapter, DriverType, Software, Flags, _pFeatureLevels, uint32(len(pFeatureLevels)), SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice, pFeatureLevel, ppImmediateContext)))
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3D11CreateDeviceAndSwapChain(pAdapter.Raw, DriverType, Software, Flags, _pFeatureLevels, uint32(len(pFeatureLevels)), SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice, pFeatureLevel, ppImmediateContext)))
 }
 
 // D3DDisassemble11Trace wraps the raw D3DDisassemble11Trace call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
-func D3DDisassemble11Trace(pSrcData unsafe.Pointer, SrcDataSize uintptr, pTrace *graphicsdirect3d11.ID3D11ShaderTrace, StartStep uint32, NumSteps uint32, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DDisassemble11Trace(pSrcData, SrcDataSize, pTrace, StartStep, NumSteps, Flags, ppDisassembly)))
+func D3DDisassemble11Trace(pSrcData unsafe.Pointer, SrcDataSize uintptr, pTrace ID3D11ShaderTrace, StartStep uint32, NumSteps uint32, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DDisassemble11Trace(pSrcData, SrcDataSize, pTrace.Raw, StartStep, NumSteps, Flags, ppDisassembly)))
 }
 
 // D3DX11CreateFFT wraps the raw D3DX11CreateFFT call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft
-func D3DX11CreateFFT(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, pDesc *graphicsdirect3d11.D3DX11_FFT_DESC, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT(pDeviceContext, pDesc, Flags, pBufferInfo, ppFFT)))
+func D3DX11CreateFFT(pDeviceContext ID3D11DeviceContext, pDesc *graphicsdirect3d11.D3DX11_FFT_DESC, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT(pDeviceContext.Raw, pDesc, Flags, pBufferInfo, ppFFT)))
 }
 
 // D3DX11CreateFFT1DComplex wraps the raw D3DX11CreateFFT1DComplex call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft1dcomplex
-func D3DX11CreateFFT1DComplex(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, X uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT1DComplex(pDeviceContext, X, Flags, pBufferInfo, ppFFT)))
+func D3DX11CreateFFT1DComplex(pDeviceContext ID3D11DeviceContext, X uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT1DComplex(pDeviceContext.Raw, X, Flags, pBufferInfo, ppFFT)))
 }
 
 // D3DX11CreateFFT1DReal wraps the raw D3DX11CreateFFT1DReal call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft1dreal
-func D3DX11CreateFFT1DReal(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, X uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT1DReal(pDeviceContext, X, Flags, pBufferInfo, ppFFT)))
+func D3DX11CreateFFT1DReal(pDeviceContext ID3D11DeviceContext, X uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT1DReal(pDeviceContext.Raw, X, Flags, pBufferInfo, ppFFT)))
 }
 
 // D3DX11CreateFFT2DComplex wraps the raw D3DX11CreateFFT2DComplex call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft2dcomplex
-func D3DX11CreateFFT2DComplex(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, X uint32, Y uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT2DComplex(pDeviceContext, X, Y, Flags, pBufferInfo, ppFFT)))
+func D3DX11CreateFFT2DComplex(pDeviceContext ID3D11DeviceContext, X uint32, Y uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT2DComplex(pDeviceContext.Raw, X, Y, Flags, pBufferInfo, ppFFT)))
 }
 
 // D3DX11CreateFFT2DReal wraps the raw D3DX11CreateFFT2DReal call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft2dreal
-func D3DX11CreateFFT2DReal(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, X uint32, Y uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT2DReal(pDeviceContext, X, Y, Flags, pBufferInfo, ppFFT)))
+func D3DX11CreateFFT2DReal(pDeviceContext ID3D11DeviceContext, X uint32, Y uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT2DReal(pDeviceContext.Raw, X, Y, Flags, pBufferInfo, ppFFT)))
 }
 
 // D3DX11CreateFFT3DComplex wraps the raw D3DX11CreateFFT3DComplex call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft3dcomplex
-func D3DX11CreateFFT3DComplex(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, X uint32, Y uint32, Z uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT3DComplex(pDeviceContext, X, Y, Z, Flags, pBufferInfo, ppFFT)))
+func D3DX11CreateFFT3DComplex(pDeviceContext ID3D11DeviceContext, X uint32, Y uint32, Z uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT3DComplex(pDeviceContext.Raw, X, Y, Z, Flags, pBufferInfo, ppFFT)))
 }
 
 // D3DX11CreateFFT3DReal wraps the raw D3DX11CreateFFT3DReal call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft3dreal
-func D3DX11CreateFFT3DReal(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, X uint32, Y uint32, Z uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT3DReal(pDeviceContext, X, Y, Z, Flags, pBufferInfo, ppFFT)))
+func D3DX11CreateFFT3DReal(pDeviceContext ID3D11DeviceContext, X uint32, Y uint32, Z uint32, Flags uint32, pBufferInfo *graphicsdirect3d11.D3DX11_FFT_BUFFER_INFO, ppFFT **graphicsdirect3d11.ID3DX11FFT) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateFFT3DReal(pDeviceContext.Raw, X, Y, Z, Flags, pBufferInfo, ppFFT)))
 }
 
 // D3DX11CreateScan wraps the raw D3DX11CreateScan call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createscan
-func D3DX11CreateScan(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, MaxElementScanSize uint32, MaxScanCount uint32, ppScan **graphicsdirect3d11.ID3DX11Scan) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateScan(pDeviceContext, MaxElementScanSize, MaxScanCount, ppScan)))
+func D3DX11CreateScan(pDeviceContext ID3D11DeviceContext, MaxElementScanSize uint32, MaxScanCount uint32, ppScan **graphicsdirect3d11.ID3DX11Scan) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateScan(pDeviceContext.Raw, MaxElementScanSize, MaxScanCount, ppScan)))
 }
 
 // D3DX11CreateSegmentedScan wraps the raw D3DX11CreateSegmentedScan call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createsegmentedscan
-func D3DX11CreateSegmentedScan(pDeviceContext *graphicsdirect3d11.ID3D11DeviceContext, MaxElementScanSize uint32, ppScan **graphicsdirect3d11.ID3DX11SegmentedScan) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateSegmentedScan(pDeviceContext, MaxElementScanSize, ppScan)))
+func D3DX11CreateSegmentedScan(pDeviceContext ID3D11DeviceContext, MaxElementScanSize uint32, ppScan **graphicsdirect3d11.ID3DX11SegmentedScan) error {
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3DX11CreateSegmentedScan(pDeviceContext.Raw, MaxElementScanSize, ppScan)))
 }

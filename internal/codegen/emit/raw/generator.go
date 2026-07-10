@@ -336,18 +336,18 @@ func (g *Generator) writeFile(dir, fileName, packageName string, imports typemap
 	code := stripComments(body)
 	pruned := map[string]string{}
 	for alias, path := range imports {
-		if strings.Contains(code, alias+".") {
+		if referencesAlias(code, alias) {
 			pruned[alias] = path
 		}
 	}
 	// Bodies reference these by fixed name; detect rather than track.
-	if strings.Contains(code, "unsafe.") {
+	if referencesAlias(code, "unsafe") {
 		pruned["unsafe"] = "unsafe"
 	}
-	if strings.Contains(code, "syscall.") {
+	if referencesAlias(code, "syscall") {
 		pruned["syscall"] = "syscall"
 	}
-	if strings.Contains(code, "win32.") {
+	if referencesAlias(code, "win32") {
 		pruned["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
 	}
 	path := filepath.Join(dir, fileName)
@@ -358,6 +358,28 @@ func (g *Generator) writeFile(dir, fileName, packageName string, imports typemap
 		Imports:     pruned,
 		Body:        body,
 	})
+}
+
+// referencesAlias reports whether code uses the import alias as a package
+// qualifier (`alias.`), requiring a word boundary so a shorter alias is not
+// falsely matched inside a longer one (e.g. "imaging" in "winrtimaging.").
+func referencesAlias(code, alias string) bool {
+	needle := alias + "."
+	for from := 0; ; {
+		index := strings.Index(code[from:], needle)
+		if index < 0 {
+			return false
+		}
+		position := from + index
+		if position == 0 || !isIdentByte(code[position-1]) {
+			return true
+		}
+		from = position + 1
+	}
+}
+
+func isIdentByte(b byte) bool {
+	return b == '_' || (b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z') || (b >= '0' && b <= '9')
 }
 
 // stripComments removes //-comment text from a body so import-usage scans

@@ -238,10 +238,10 @@ func WrapIMDSPDirectTransfer(raw *mediadevicemanager.IMDSPDirectTransfer) IMDSPD
 }
 
 // TransferToDevice wraps the raw TransferToDevice call.
-func (self IMDSPDirectTransfer) TransferToDevice(pwszSourceFilePath string, pSourceOperation *mediadevicemanager.IWMDMOperation, fuFlags uint32, pwszDestinationName string, pSourceMetaData *mediadevicemanager.IWMDMMetaData, pTransferProgress *mediadevicemanager.IWMDMProgress, ppNewObject **mediadevicemanager.IMDSPStorage) error {
+func (self IMDSPDirectTransfer) TransferToDevice(pwszSourceFilePath string, pSourceOperation IWMDMOperation, fuFlags uint32, pwszDestinationName string, pSourceMetaData IWMDMMetaData, pTransferProgress IWMDMProgress, ppNewObject **mediadevicemanager.IMDSPStorage) error {
 	_pwszSourceFilePath := win32.UTF16Ptr(pwszSourceFilePath)
 	_pwszDestinationName := win32.UTF16Ptr(pwszDestinationName)
-	return win32.HRESULTError(int32(self.Raw.TransferToDevice(foundation.PWSTR(_pwszSourceFilePath), pSourceOperation, fuFlags, foundation.PWSTR(_pwszDestinationName), pSourceMetaData, pTransferProgress, ppNewObject)))
+	return win32.HRESULTError(int32(self.Raw.TransferToDevice(foundation.PWSTR(_pwszSourceFilePath), pSourceOperation.Raw, fuFlags, foundation.PWSTR(_pwszDestinationName), pSourceMetaData.Raw, pTransferProgress.Raw, ppNewObject)))
 }
 
 // IMDSPEnumDevice is an idiomatic wrapper over the raw COM interface Media.DeviceManager.IMDSPEnumDevice with error-returning methods.
@@ -333,8 +333,8 @@ func (self IMDSPObject) Write(pData *byte, pdwSize *uint32, abMac *byte) error {
 }
 
 // Delete wraps the raw Delete call.
-func (self IMDSPObject) Delete(fuMode uint32, pProgress *mediadevicemanager.IWMDMProgress) error {
-	return win32.HRESULTError(int32(self.Raw.Delete(fuMode, pProgress)))
+func (self IMDSPObject) Delete(fuMode uint32, pProgress IWMDMProgress) error {
+	return win32.HRESULTError(int32(self.Raw.Delete(fuMode, pProgress.Raw)))
 }
 
 // Seek wraps the raw Seek call.
@@ -343,14 +343,14 @@ func (self IMDSPObject) Seek(fuFlags uint32, dwOffset uint32) error {
 }
 
 // Rename wraps the raw Rename call.
-func (self IMDSPObject) Rename(pwszNewName string, pProgress *mediadevicemanager.IWMDMProgress) error {
+func (self IMDSPObject) Rename(pwszNewName string, pProgress IWMDMProgress) error {
 	_pwszNewName := win32.UTF16Ptr(pwszNewName)
-	return win32.HRESULTError(int32(self.Raw.Rename(foundation.PWSTR(_pwszNewName), pProgress)))
+	return win32.HRESULTError(int32(self.Raw.Rename(foundation.PWSTR(_pwszNewName), pProgress.Raw)))
 }
 
 // Move wraps the raw Move call.
-func (self IMDSPObject) Move(fuMode uint32, pProgress *mediadevicemanager.IWMDMProgress, pTarget *mediadevicemanager.IMDSPStorage) error {
-	return win32.HRESULTError(int32(self.Raw.Move(fuMode, pProgress, pTarget)))
+func (self IMDSPObject) Move(fuMode uint32, pProgress IWMDMProgress, pTarget IMDSPStorage) error {
+	return win32.HRESULTError(int32(self.Raw.Move(fuMode, pProgress.Raw, pTarget.Raw)))
 }
 
 // Close wraps the raw Close call.
@@ -548,13 +548,13 @@ func WrapIMDSPStorage3(raw *mediadevicemanager.IMDSPStorage3) IMDSPStorage3 {
 }
 
 // GetMetadata wraps the raw GetMetadata call.
-func (self IMDSPStorage3) GetMetadata(pMetadata *mediadevicemanager.IWMDMMetaData) error {
-	return win32.HRESULTError(int32(self.Raw.GetMetadata(pMetadata)))
+func (self IMDSPStorage3) GetMetadata(pMetadata IWMDMMetaData) error {
+	return win32.HRESULTError(int32(self.Raw.GetMetadata(pMetadata.Raw)))
 }
 
 // SetMetadata wraps the raw SetMetadata call.
-func (self IMDSPStorage3) SetMetadata(pMetadata *mediadevicemanager.IWMDMMetaData) error {
-	return win32.HRESULTError(int32(self.Raw.SetMetadata(pMetadata)))
+func (self IMDSPStorage3) SetMetadata(pMetadata IWMDMMetaData) error {
+	return win32.HRESULTError(int32(self.Raw.SetMetadata(pMetadata.Raw)))
 }
 
 // IMDSPStorage4 is an idiomatic wrapper over the raw COM interface Media.DeviceManager.IMDSPStorage4 with error-returning methods.
@@ -579,14 +579,14 @@ func (self IMDSPStorage4) GetReferences(pdwRefs *uint32, pppISPStorage ***mediad
 }
 
 // CreateStorageWithMetadata wraps the raw CreateStorageWithMetadata call.
-func (self IMDSPStorage4) CreateStorageWithMetadata(dwAttributes uint32, pwszName string, pMetadata *mediadevicemanager.IWMDMMetaData, qwFileSize uint64, ppNewStorage **mediadevicemanager.IMDSPStorage) error {
+func (self IMDSPStorage4) CreateStorageWithMetadata(dwAttributes uint32, pwszName string, pMetadata IWMDMMetaData, qwFileSize uint64, ppNewStorage **mediadevicemanager.IMDSPStorage) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
-	return win32.HRESULTError(int32(self.Raw.CreateStorageWithMetadata(dwAttributes, foundation.PWSTR(_pwszName), pMetadata, qwFileSize, ppNewStorage)))
+	return win32.HRESULTError(int32(self.Raw.CreateStorageWithMetadata(dwAttributes, foundation.PWSTR(_pwszName), pMetadata.Raw, qwFileSize, ppNewStorage)))
 }
 
 // GetSpecifiedMetadata wraps the raw GetSpecifiedMetadata call.
-func (self IMDSPStorage4) GetSpecifiedMetadata(cProperties uint32, ppwszPropNames *foundation.PWSTR, pMetadata *mediadevicemanager.IWMDMMetaData) error {
-	return win32.HRESULTError(int32(self.Raw.GetSpecifiedMetadata(cProperties, ppwszPropNames, pMetadata)))
+func (self IMDSPStorage4) GetSpecifiedMetadata(cProperties uint32, ppwszPropNames *foundation.PWSTR, pMetadata IWMDMMetaData) error {
+	return win32.HRESULTError(int32(self.Raw.GetSpecifiedMetadata(cProperties, ppwszPropNames, pMetadata.Raw)))
 }
 
 // FindStorage wraps the raw FindStorage call.
@@ -642,8 +642,8 @@ func (self IMDSPStorageGlobals) GetStatus(pdwStatus *uint32) error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IMDSPStorageGlobals) Initialize(fuMode uint32, pProgress *mediadevicemanager.IWMDMProgress) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(fuMode, pProgress)))
+func (self IMDSPStorageGlobals) Initialize(fuMode uint32, pProgress IWMDMProgress) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(fuMode, pProgress.Raw)))
 }
 
 // GetDevice wraps the raw GetDevice call.
@@ -780,8 +780,8 @@ func WrapISCPSecureExchange2(raw *mediadevicemanager.ISCPSecureExchange2) ISCPSe
 }
 
 // TransferContainerData2 wraps the raw TransferContainerData2 call.
-func (self ISCPSecureExchange2) TransferContainerData2(pData *byte, dwSize uint32, pProgressCallback *mediadevicemanager.IWMDMProgress3, pfuReadyFlags *uint32, abMac *byte) error {
-	return win32.HRESULTError(int32(self.Raw.TransferContainerData2(pData, dwSize, pProgressCallback, pfuReadyFlags, abMac)))
+func (self ISCPSecureExchange2) TransferContainerData2(pData *byte, dwSize uint32, pProgressCallback IWMDMProgress3, pfuReadyFlags *uint32, abMac *byte) error {
+	return win32.HRESULTError(int32(self.Raw.TransferContainerData2(pData, dwSize, pProgressCallback.Raw, pfuReadyFlags, abMac)))
 }
 
 // ISCPSecureExchange3 is an idiomatic wrapper over the raw COM interface Media.DeviceManager.ISCPSecureExchange3 with error-returning methods.
@@ -796,18 +796,18 @@ func WrapISCPSecureExchange3(raw *mediadevicemanager.ISCPSecureExchange3) ISCPSe
 }
 
 // TransferContainerDataOnClearChannel wraps the raw TransferContainerDataOnClearChannel call.
-func (self ISCPSecureExchange3) TransferContainerDataOnClearChannel(pDevice *mediadevicemanager.IMDSPDevice, pData *byte, dwSize uint32, pProgressCallback *mediadevicemanager.IWMDMProgress3, pfuReadyFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.TransferContainerDataOnClearChannel(pDevice, pData, dwSize, pProgressCallback, pfuReadyFlags)))
+func (self ISCPSecureExchange3) TransferContainerDataOnClearChannel(pDevice IMDSPDevice, pData *byte, dwSize uint32, pProgressCallback IWMDMProgress3, pfuReadyFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.TransferContainerDataOnClearChannel(pDevice.Raw, pData, dwSize, pProgressCallback.Raw, pfuReadyFlags)))
 }
 
 // GetObjectDataOnClearChannel wraps the raw GetObjectDataOnClearChannel call.
-func (self ISCPSecureExchange3) GetObjectDataOnClearChannel(pDevice *mediadevicemanager.IMDSPDevice, pData *byte, pdwSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetObjectDataOnClearChannel(pDevice, pData, pdwSize)))
+func (self ISCPSecureExchange3) GetObjectDataOnClearChannel(pDevice IMDSPDevice, pData *byte, pdwSize *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetObjectDataOnClearChannel(pDevice.Raw, pData, pdwSize)))
 }
 
 // TransferCompleteForDevice wraps the raw TransferCompleteForDevice call.
-func (self ISCPSecureExchange3) TransferCompleteForDevice(pDevice *mediadevicemanager.IMDSPDevice) error {
-	return win32.HRESULTError(int32(self.Raw.TransferCompleteForDevice(pDevice)))
+func (self ISCPSecureExchange3) TransferCompleteForDevice(pDevice IMDSPDevice) error {
+	return win32.HRESULTError(int32(self.Raw.TransferCompleteForDevice(pDevice.Raw)))
 }
 
 // ISCPSecureQuery is an idiomatic wrapper over the raw COM interface Media.DeviceManager.ISCPSecureQuery with error-returning methods.
@@ -833,13 +833,13 @@ func (self ISCPSecureQuery) ExamineData(fuFlags uint32, pwszExtension string, pD
 }
 
 // MakeDecision wraps the raw MakeDecision call.
-func (self ISCPSecureQuery) MakeDecision(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals *mediadevicemanager.IMDSPStorageGlobals, ppExchange **mediadevicemanager.ISCPSecureExchange, abMac *byte) error {
-	return win32.HRESULTError(int32(self.Raw.MakeDecision(fuFlags, pData, dwSize, dwAppSec, pbSPSessionKey, dwSessionKeyLen, pStorageGlobals, ppExchange, abMac)))
+func (self ISCPSecureQuery) MakeDecision(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals IMDSPStorageGlobals, ppExchange **mediadevicemanager.ISCPSecureExchange, abMac *byte) error {
+	return win32.HRESULTError(int32(self.Raw.MakeDecision(fuFlags, pData, dwSize, dwAppSec, pbSPSessionKey, dwSessionKeyLen, pStorageGlobals.Raw, ppExchange, abMac)))
 }
 
 // GetRights wraps the raw GetRights call.
-func (self ISCPSecureQuery) GetRights(pData *byte, dwSize uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStgGlobals *mediadevicemanager.IMDSPStorageGlobals, ppRights **mediadevicemanager.WMDMRIGHTS, pnRightsCount *uint32, abMac *byte) error {
-	return win32.HRESULTError(int32(self.Raw.GetRights(pData, dwSize, pbSPSessionKey, dwSessionKeyLen, pStgGlobals, ppRights, pnRightsCount, abMac)))
+func (self ISCPSecureQuery) GetRights(pData *byte, dwSize uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStgGlobals IMDSPStorageGlobals, ppRights **mediadevicemanager.WMDMRIGHTS, pnRightsCount *uint32, abMac *byte) error {
+	return win32.HRESULTError(int32(self.Raw.GetRights(pData, dwSize, pbSPSessionKey, dwSessionKeyLen, pStgGlobals.Raw, ppRights, pnRightsCount, abMac)))
 }
 
 // ISCPSecureQuery2 is an idiomatic wrapper over the raw COM interface Media.DeviceManager.ISCPSecureQuery2 with error-returning methods.
@@ -854,8 +854,8 @@ func WrapISCPSecureQuery2(raw *mediadevicemanager.ISCPSecureQuery2) ISCPSecureQu
 }
 
 // MakeDecision2 wraps the raw MakeDecision2 call.
-func (self ISCPSecureQuery2) MakeDecision2(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals *mediadevicemanager.IMDSPStorageGlobals, pAppCertApp *byte, dwAppCertAppLen uint32, pAppCertSP *byte, dwAppCertSPLen uint32, pszRevocationURL *foundation.PWSTR, pdwRevocationURLLen *uint32, pdwRevocationBitFlag *uint32, pqwFileSize *uint64, pUnknown *systemcom.IUnknown, ppExchange **mediadevicemanager.ISCPSecureExchange, abMac *byte) error {
-	return win32.HRESULTError(int32(self.Raw.MakeDecision2(fuFlags, pData, dwSize, dwAppSec, pbSPSessionKey, dwSessionKeyLen, pStorageGlobals, pAppCertApp, dwAppCertAppLen, pAppCertSP, dwAppCertSPLen, pszRevocationURL, pdwRevocationURLLen, pdwRevocationBitFlag, pqwFileSize, pUnknown, ppExchange, abMac)))
+func (self ISCPSecureQuery2) MakeDecision2(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals IMDSPStorageGlobals, pAppCertApp *byte, dwAppCertAppLen uint32, pAppCertSP *byte, dwAppCertSPLen uint32, pszRevocationURL *foundation.PWSTR, pdwRevocationURLLen *uint32, pdwRevocationBitFlag *uint32, pqwFileSize *uint64, pUnknown systemcomidiom.IUnknown, ppExchange **mediadevicemanager.ISCPSecureExchange, abMac *byte) error {
+	return win32.HRESULTError(int32(self.Raw.MakeDecision2(fuFlags, pData, dwSize, dwAppSec, pbSPSessionKey, dwSessionKeyLen, pStorageGlobals.Raw, pAppCertApp, dwAppCertAppLen, pAppCertSP, dwAppCertSPLen, pszRevocationURL, pdwRevocationURLLen, pdwRevocationBitFlag, pqwFileSize, pUnknown.Raw, ppExchange, abMac)))
 }
 
 // ISCPSecureQuery3 is an idiomatic wrapper over the raw COM interface Media.DeviceManager.ISCPSecureQuery3 with error-returning methods.
@@ -870,13 +870,13 @@ func WrapISCPSecureQuery3(raw *mediadevicemanager.ISCPSecureQuery3) ISCPSecureQu
 }
 
 // GetRightsOnClearChannel wraps the raw GetRightsOnClearChannel call.
-func (self ISCPSecureQuery3) GetRightsOnClearChannel(pData *byte, dwSize uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStgGlobals *mediadevicemanager.IMDSPStorageGlobals, pProgressCallback *mediadevicemanager.IWMDMProgress3, ppRights **mediadevicemanager.WMDMRIGHTS, pnRightsCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetRightsOnClearChannel(pData, dwSize, pbSPSessionKey, dwSessionKeyLen, pStgGlobals, pProgressCallback, ppRights, pnRightsCount)))
+func (self ISCPSecureQuery3) GetRightsOnClearChannel(pData *byte, dwSize uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStgGlobals IMDSPStorageGlobals, pProgressCallback IWMDMProgress3, ppRights **mediadevicemanager.WMDMRIGHTS, pnRightsCount *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetRightsOnClearChannel(pData, dwSize, pbSPSessionKey, dwSessionKeyLen, pStgGlobals.Raw, pProgressCallback.Raw, ppRights, pnRightsCount)))
 }
 
 // MakeDecisionOnClearChannel wraps the raw MakeDecisionOnClearChannel call.
-func (self ISCPSecureQuery3) MakeDecisionOnClearChannel(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals *mediadevicemanager.IMDSPStorageGlobals, pProgressCallback *mediadevicemanager.IWMDMProgress3, pAppCertApp *byte, dwAppCertAppLen uint32, pAppCertSP *byte, dwAppCertSPLen uint32, pszRevocationURL *foundation.PWSTR, pdwRevocationURLLen *uint32, pdwRevocationBitFlag *uint32, pqwFileSize *uint64, pUnknown *systemcom.IUnknown, ppExchange **mediadevicemanager.ISCPSecureExchange) error {
-	return win32.HRESULTError(int32(self.Raw.MakeDecisionOnClearChannel(fuFlags, pData, dwSize, dwAppSec, pbSPSessionKey, dwSessionKeyLen, pStorageGlobals, pProgressCallback, pAppCertApp, dwAppCertAppLen, pAppCertSP, dwAppCertSPLen, pszRevocationURL, pdwRevocationURLLen, pdwRevocationBitFlag, pqwFileSize, pUnknown, ppExchange)))
+func (self ISCPSecureQuery3) MakeDecisionOnClearChannel(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals IMDSPStorageGlobals, pProgressCallback IWMDMProgress3, pAppCertApp *byte, dwAppCertAppLen uint32, pAppCertSP *byte, dwAppCertSPLen uint32, pszRevocationURL *foundation.PWSTR, pdwRevocationURLLen *uint32, pdwRevocationBitFlag *uint32, pqwFileSize *uint64, pUnknown systemcomidiom.IUnknown, ppExchange **mediadevicemanager.ISCPSecureExchange) error {
+	return win32.HRESULTError(int32(self.Raw.MakeDecisionOnClearChannel(fuFlags, pData, dwSize, dwAppSec, pbSPSessionKey, dwSessionKeyLen, pStorageGlobals.Raw, pProgressCallback.Raw, pAppCertApp, dwAppCertAppLen, pAppCertSP, dwAppCertSPLen, pszRevocationURL, pdwRevocationURLLen, pdwRevocationBitFlag, pqwFileSize, pUnknown.Raw, ppExchange)))
 }
 
 // ISCPSession is an idiomatic wrapper over the raw COM interface Media.DeviceManager.ISCPSession with error-returning methods.
@@ -891,8 +891,8 @@ func WrapISCPSession(raw *mediadevicemanager.ISCPSession) ISCPSession {
 }
 
 // BeginSession wraps the raw BeginSession call.
-func (self ISCPSession) BeginSession(pIDevice *mediadevicemanager.IMDSPDevice, pCtx *byte, dwSizeCtx uint32) error {
-	return win32.HRESULTError(int32(self.Raw.BeginSession(pIDevice, pCtx, dwSizeCtx)))
+func (self ISCPSession) BeginSession(pIDevice IMDSPDevice, pCtx *byte, dwSizeCtx uint32) error {
+	return win32.HRESULTError(int32(self.Raw.BeginSession(pIDevice.Raw, pCtx, dwSizeCtx)))
 }
 
 // EndSession wraps the raw EndSession call.
@@ -1387,8 +1387,8 @@ func (self IWMDMOperation) TransferObjectData(pData *byte, pdwSize *uint32, abMa
 }
 
 // End wraps the raw End call.
-func (self IWMDMOperation) End(phCompletionCode *foundation.HRESULT, pNewObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.End(phCompletionCode, pNewObject)))
+func (self IWMDMOperation) End(phCompletionCode *foundation.HRESULT, pNewObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.End(phCompletionCode, pNewObject.Raw)))
 }
 
 // IWMDMOperation2 is an idiomatic wrapper over the raw COM interface Media.DeviceManager.IWMDMOperation2 with error-returning methods.
@@ -1597,8 +1597,8 @@ func (self IWMDMStorage3) GetMetadata(ppMetadata **mediadevicemanager.IWMDMMetaD
 }
 
 // SetMetadata wraps the raw SetMetadata call.
-func (self IWMDMStorage3) SetMetadata(pMetadata *mediadevicemanager.IWMDMMetaData) error {
-	return win32.HRESULTError(int32(self.Raw.SetMetadata(pMetadata)))
+func (self IWMDMStorage3) SetMetadata(pMetadata IWMDMMetaData) error {
+	return win32.HRESULTError(int32(self.Raw.SetMetadata(pMetadata.Raw)))
 }
 
 // CreateEmptyMetadataObject wraps the raw CreateEmptyMetadataObject call.
@@ -1633,8 +1633,8 @@ func (self IWMDMStorage4) GetReferences(pdwRefs *uint32, pppIWMDMStorage ***medi
 }
 
 // GetRightsWithProgress wraps the raw GetRightsWithProgress call.
-func (self IWMDMStorage4) GetRightsWithProgress(pIProgressCallback *mediadevicemanager.IWMDMProgress3, ppRights **mediadevicemanager.WMDMRIGHTS, pnRightsCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetRightsWithProgress(pIProgressCallback, ppRights, pnRightsCount)))
+func (self IWMDMStorage4) GetRightsWithProgress(pIProgressCallback IWMDMProgress3, ppRights **mediadevicemanager.WMDMRIGHTS, pnRightsCount *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetRightsWithProgress(pIProgressCallback.Raw, ppRights, pnRightsCount)))
 }
 
 // GetSpecifiedMetadata wraps the raw GetSpecifiedMetadata call.
@@ -1665,31 +1665,31 @@ func WrapIWMDMStorageControl(raw *mediadevicemanager.IWMDMStorageControl) IWMDMS
 }
 
 // Insert wraps the raw Insert call.
-func (self IWMDMStorageControl) Insert(fuMode uint32, pwszFile string, pOperation *mediadevicemanager.IWMDMOperation, pProgress *mediadevicemanager.IWMDMProgress, ppNewObject **mediadevicemanager.IWMDMStorage) error {
+func (self IWMDMStorageControl) Insert(fuMode uint32, pwszFile string, pOperation IWMDMOperation, pProgress IWMDMProgress, ppNewObject **mediadevicemanager.IWMDMStorage) error {
 	_pwszFile := win32.UTF16Ptr(pwszFile)
-	return win32.HRESULTError(int32(self.Raw.Insert(fuMode, foundation.PWSTR(_pwszFile), pOperation, pProgress, ppNewObject)))
+	return win32.HRESULTError(int32(self.Raw.Insert(fuMode, foundation.PWSTR(_pwszFile), pOperation.Raw, pProgress.Raw, ppNewObject)))
 }
 
 // Delete wraps the raw Delete call.
-func (self IWMDMStorageControl) Delete(fuMode uint32, pProgress *mediadevicemanager.IWMDMProgress) error {
-	return win32.HRESULTError(int32(self.Raw.Delete(fuMode, pProgress)))
+func (self IWMDMStorageControl) Delete(fuMode uint32, pProgress IWMDMProgress) error {
+	return win32.HRESULTError(int32(self.Raw.Delete(fuMode, pProgress.Raw)))
 }
 
 // Rename wraps the raw Rename call.
-func (self IWMDMStorageControl) Rename(fuMode uint32, pwszNewName string, pProgress *mediadevicemanager.IWMDMProgress) error {
+func (self IWMDMStorageControl) Rename(fuMode uint32, pwszNewName string, pProgress IWMDMProgress) error {
 	_pwszNewName := win32.UTF16Ptr(pwszNewName)
-	return win32.HRESULTError(int32(self.Raw.Rename(fuMode, foundation.PWSTR(_pwszNewName), pProgress)))
+	return win32.HRESULTError(int32(self.Raw.Rename(fuMode, foundation.PWSTR(_pwszNewName), pProgress.Raw)))
 }
 
 // Read wraps the raw Read call.
-func (self IWMDMStorageControl) Read(fuMode uint32, pwszFile string, pProgress *mediadevicemanager.IWMDMProgress, pOperation *mediadevicemanager.IWMDMOperation) error {
+func (self IWMDMStorageControl) Read(fuMode uint32, pwszFile string, pProgress IWMDMProgress, pOperation IWMDMOperation) error {
 	_pwszFile := win32.UTF16Ptr(pwszFile)
-	return win32.HRESULTError(int32(self.Raw.Read(fuMode, foundation.PWSTR(_pwszFile), pProgress, pOperation)))
+	return win32.HRESULTError(int32(self.Raw.Read(fuMode, foundation.PWSTR(_pwszFile), pProgress.Raw, pOperation.Raw)))
 }
 
 // Move wraps the raw Move call.
-func (self IWMDMStorageControl) Move(fuMode uint32, pTargetObject *mediadevicemanager.IWMDMStorage, pProgress *mediadevicemanager.IWMDMProgress) error {
-	return win32.HRESULTError(int32(self.Raw.Move(fuMode, pTargetObject, pProgress)))
+func (self IWMDMStorageControl) Move(fuMode uint32, pTargetObject IWMDMStorage, pProgress IWMDMProgress) error {
+	return win32.HRESULTError(int32(self.Raw.Move(fuMode, pTargetObject.Raw, pProgress.Raw)))
 }
 
 // IWMDMStorageControl2 is an idiomatic wrapper over the raw COM interface Media.DeviceManager.IWMDMStorageControl2 with error-returning methods.
@@ -1704,10 +1704,10 @@ func WrapIWMDMStorageControl2(raw *mediadevicemanager.IWMDMStorageControl2) IWMD
 }
 
 // Insert2 wraps the raw Insert2 call.
-func (self IWMDMStorageControl2) Insert2(fuMode uint32, pwszFileSource string, pwszFileDest string, pOperation *mediadevicemanager.IWMDMOperation, pProgress *mediadevicemanager.IWMDMProgress, pUnknown *systemcom.IUnknown, ppNewObject **mediadevicemanager.IWMDMStorage) error {
+func (self IWMDMStorageControl2) Insert2(fuMode uint32, pwszFileSource string, pwszFileDest string, pOperation IWMDMOperation, pProgress IWMDMProgress, pUnknown systemcomidiom.IUnknown, ppNewObject **mediadevicemanager.IWMDMStorage) error {
 	_pwszFileSource := win32.UTF16Ptr(pwszFileSource)
 	_pwszFileDest := win32.UTF16Ptr(pwszFileDest)
-	return win32.HRESULTError(int32(self.Raw.Insert2(fuMode, foundation.PWSTR(_pwszFileSource), foundation.PWSTR(_pwszFileDest), pOperation, pProgress, pUnknown, ppNewObject)))
+	return win32.HRESULTError(int32(self.Raw.Insert2(fuMode, foundation.PWSTR(_pwszFileSource), foundation.PWSTR(_pwszFileDest), pOperation.Raw, pProgress.Raw, pUnknown.Raw, ppNewObject)))
 }
 
 // IWMDMStorageControl3 is an idiomatic wrapper over the raw COM interface Media.DeviceManager.IWMDMStorageControl3 with error-returning methods.
@@ -1722,10 +1722,10 @@ func WrapIWMDMStorageControl3(raw *mediadevicemanager.IWMDMStorageControl3) IWMD
 }
 
 // Insert3 wraps the raw Insert3 call.
-func (self IWMDMStorageControl3) Insert3(fuMode uint32, fuType uint32, pwszFileSource string, pwszFileDest string, pOperation *mediadevicemanager.IWMDMOperation, pProgress *mediadevicemanager.IWMDMProgress, pMetaData *mediadevicemanager.IWMDMMetaData, pUnknown *systemcom.IUnknown, ppNewObject **mediadevicemanager.IWMDMStorage) error {
+func (self IWMDMStorageControl3) Insert3(fuMode uint32, fuType uint32, pwszFileSource string, pwszFileDest string, pOperation IWMDMOperation, pProgress IWMDMProgress, pMetaData IWMDMMetaData, pUnknown systemcomidiom.IUnknown, ppNewObject **mediadevicemanager.IWMDMStorage) error {
 	_pwszFileSource := win32.UTF16Ptr(pwszFileSource)
 	_pwszFileDest := win32.UTF16Ptr(pwszFileDest)
-	return win32.HRESULTError(int32(self.Raw.Insert3(fuMode, fuType, foundation.PWSTR(_pwszFileSource), foundation.PWSTR(_pwszFileDest), pOperation, pProgress, pMetaData, pUnknown, ppNewObject)))
+	return win32.HRESULTError(int32(self.Raw.Insert3(fuMode, fuType, foundation.PWSTR(_pwszFileSource), foundation.PWSTR(_pwszFileDest), pOperation.Raw, pProgress.Raw, pMetaData.Raw, pUnknown.Raw, ppNewObject)))
 }
 
 // IWMDMStorageGlobals is an idiomatic wrapper over the raw COM interface Media.DeviceManager.IWMDMStorageGlobals with error-returning methods.
@@ -1770,8 +1770,8 @@ func (self IWMDMStorageGlobals) GetStatus(pdwStatus *uint32) error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWMDMStorageGlobals) Initialize(fuMode uint32, pProgress *mediadevicemanager.IWMDMProgress) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(fuMode, pProgress)))
+func (self IWMDMStorageGlobals) Initialize(fuMode uint32, pProgress IWMDMProgress) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(fuMode, pProgress.Raw)))
 }
 
 // IWMDeviceManager is an idiomatic wrapper over the raw COM interface Media.DeviceManager.IWMDeviceManager with error-returning methods.

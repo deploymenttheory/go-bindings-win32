@@ -24,17 +24,17 @@ func WrapIWSMan(raw *systemremotemanagement.IWSMan) IWSMan {
 }
 
 // CreateSession wraps the raw CreateSession call.
-func (self IWSMan) CreateSession(connection foundation.BSTR, flags int32, connectionOptions *systemcom.IDispatch) (*systemcom.IDispatch, error) {
+func (self IWSMan) CreateSession(connection foundation.BSTR, flags int32, connectionOptions systemcomidiom.IDispatch) (systemcomidiom.IDispatch, error) {
 	var _session *systemcom.IDispatch
-	_hr := self.Raw.CreateSession(connection, flags, connectionOptions, &_session)
-	return _session, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateSession(connection, flags, connectionOptions.Raw, &_session)
+	return systemcomidiom.WrapIDispatch(_session), win32.HRESULTError(int32(_hr))
 }
 
 // CreateConnectionOptions wraps the raw CreateConnectionOptions call.
-func (self IWSMan) CreateConnectionOptions() (*systemcom.IDispatch, error) {
+func (self IWSMan) CreateConnectionOptions() (systemcomidiom.IDispatch, error) {
 	var _connectionOptions *systemcom.IDispatch
 	_hr := self.Raw.CreateConnectionOptions(&_connectionOptions)
-	return _connectionOptions, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_connectionOptions), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommandLine wraps the raw Get_CommandLine call.
@@ -211,10 +211,10 @@ func WrapIWSManEx(raw *systemremotemanagement.IWSManEx) IWSManEx {
 }
 
 // CreateResourceLocator wraps the raw CreateResourceLocator call.
-func (self IWSManEx) CreateResourceLocator(strResourceLocator foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IWSManEx) CreateResourceLocator(strResourceLocator foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _newResourceLocator *systemcom.IDispatch
 	_hr := self.Raw.CreateResourceLocator(strResourceLocator, &_newResourceLocator)
-	return _newResourceLocator, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_newResourceLocator), win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUTF8 wraps the raw SessionFlagUTF8 call.

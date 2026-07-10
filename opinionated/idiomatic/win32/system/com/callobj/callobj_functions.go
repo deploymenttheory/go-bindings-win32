@@ -8,17 +8,17 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomcallobj "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/callobj"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CoGetInterceptor wraps the raw CoGetInterceptor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/callobj/nf-callobj-cogetinterceptor
-func CoGetInterceptor(iidIntercepted *win32.GUID, punkOuter *systemcom.IUnknown, iid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemcomcallobj.CoGetInterceptor(iidIntercepted, punkOuter, iid, ppv)))
+func CoGetInterceptor(iidIntercepted *win32.GUID, punkOuter systemcomidiom.IUnknown, iid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemcomcallobj.CoGetInterceptor(iidIntercepted, punkOuter.Raw, iid, ppv)))
 }
 
 // CoGetInterceptorFromTypeInfo wraps the raw CoGetInterceptorFromTypeInfo call with idiomatic Go types.
-func CoGetInterceptorFromTypeInfo(iidIntercepted *win32.GUID, punkOuter *systemcom.IUnknown, typeInfo *systemcom.ITypeInfo, iid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemcomcallobj.CoGetInterceptorFromTypeInfo(iidIntercepted, punkOuter, typeInfo, iid, ppv)))
+func CoGetInterceptorFromTypeInfo(iidIntercepted *win32.GUID, punkOuter systemcomidiom.IUnknown, typeInfo systemcomidiom.ITypeInfo, iid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemcomcallobj.CoGetInterceptorFromTypeInfo(iidIntercepted, punkOuter.Raw, typeInfo.Raw, iid, ppv)))
 }

@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
 	systemwinrtmedia "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/media"
+	mediamediafoundationidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/mediafoundation"
 	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
 )
 
@@ -42,9 +43,9 @@ func WrapIAudioFrameNativeFactory(raw *systemwinrtmedia.IAudioFrameNativeFactory
 }
 
 // CreateFromMFSample wraps the raw CreateFromMFSample call.
-func (self IAudioFrameNativeFactory) CreateFromMFSample(data *mediamediafoundation.IMFSample, forceReadOnly bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self IAudioFrameNativeFactory) CreateFromMFSample(data mediamediafoundationidiom.IMFSample, forceReadOnly bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_forceReadOnly := foundation.BOOL(win32.Bool32(forceReadOnly))
-	return win32.HRESULTError(int32(self.Raw.CreateFromMFSample(data, _forceReadOnly, riid, ppv)))
+	return win32.HRESULTError(int32(self.Raw.CreateFromMFSample(data.Raw, _forceReadOnly, riid, ppv)))
 }
 
 // IVideoFrameNative is an idiomatic wrapper over the raw COM interface System.WinRT.Media.IVideoFrameNative with error-returning methods.
@@ -80,7 +81,7 @@ func WrapIVideoFrameNativeFactory(raw *systemwinrtmedia.IVideoFrameNativeFactory
 }
 
 // CreateFromMFSample wraps the raw CreateFromMFSample call.
-func (self IVideoFrameNativeFactory) CreateFromMFSample(data *mediamediafoundation.IMFSample, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, device *mediamediafoundation.IMFDXGIDeviceManager, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self IVideoFrameNativeFactory) CreateFromMFSample(data mediamediafoundationidiom.IMFSample, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, device mediamediafoundationidiom.IMFDXGIDeviceManager, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_forceReadOnly := foundation.BOOL(win32.Bool32(forceReadOnly))
-	return win32.HRESULTError(int32(self.Raw.CreateFromMFSample(data, subtype, width, height, _forceReadOnly, minDisplayAperture, device, riid, ppv)))
+	return win32.HRESULTError(int32(self.Raw.CreateFromMFSample(data.Raw, subtype, width, height, _forceReadOnly, minDisplayAperture, device.Raw, riid, ppv)))
 }

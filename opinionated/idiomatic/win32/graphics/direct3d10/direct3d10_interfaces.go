@@ -13,7 +13,7 @@ import (
 	graphicsdirect3d10 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d10"
 	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -154,8 +154,8 @@ func (self ID3D10Debug) GetPresentPerRenderOpDelay() uint32 {
 }
 
 // SetSwapChain wraps the raw SetSwapChain call.
-func (self ID3D10Debug) SetSwapChain(pSwapChain *graphicsdxgi.IDXGISwapChain) error {
-	return win32.HRESULTError(int32(self.Raw.SetSwapChain(pSwapChain)))
+func (self ID3D10Debug) SetSwapChain(pSwapChain graphicsdxgiidiom.IDXGISwapChain) error {
+	return win32.HRESULTError(int32(self.Raw.SetSwapChain(pSwapChain.Raw)))
 }
 
 // GetSwapChain wraps the raw GetSwapChain call.
@@ -222,8 +222,8 @@ func (self ID3D10Device) PSSetShaderResources(StartSlot uint32, NumViews uint32,
 }
 
 // PSSetShader wraps the raw PSSetShader call.
-func (self ID3D10Device) PSSetShader(pPixelShader *graphicsdirect3d10.ID3D10PixelShader) {
-	self.Raw.PSSetShader(pPixelShader)
+func (self ID3D10Device) PSSetShader(pPixelShader ID3D10PixelShader) {
+	self.Raw.PSSetShader(pPixelShader.Raw)
 }
 
 // PSSetSamplers wraps the raw PSSetSamplers call.
@@ -232,8 +232,8 @@ func (self ID3D10Device) PSSetSamplers(StartSlot uint32, NumSamplers uint32, ppS
 }
 
 // VSSetShader wraps the raw VSSetShader call.
-func (self ID3D10Device) VSSetShader(pVertexShader *graphicsdirect3d10.ID3D10VertexShader) {
-	self.Raw.VSSetShader(pVertexShader)
+func (self ID3D10Device) VSSetShader(pVertexShader ID3D10VertexShader) {
+	self.Raw.VSSetShader(pVertexShader.Raw)
 }
 
 // DrawIndexed wraps the raw DrawIndexed call.
@@ -252,8 +252,8 @@ func (self ID3D10Device) PSSetConstantBuffers(StartSlot uint32, NumBuffers uint3
 }
 
 // IASetInputLayout wraps the raw IASetInputLayout call.
-func (self ID3D10Device) IASetInputLayout(pInputLayout *graphicsdirect3d10.ID3D10InputLayout) {
-	self.Raw.IASetInputLayout(pInputLayout)
+func (self ID3D10Device) IASetInputLayout(pInputLayout ID3D10InputLayout) {
+	self.Raw.IASetInputLayout(pInputLayout.Raw)
 }
 
 // IASetVertexBuffers wraps the raw IASetVertexBuffers call.
@@ -262,8 +262,8 @@ func (self ID3D10Device) IASetVertexBuffers(StartSlot uint32, NumBuffers uint32,
 }
 
 // IASetIndexBuffer wraps the raw IASetIndexBuffer call.
-func (self ID3D10Device) IASetIndexBuffer(pIndexBuffer *graphicsdirect3d10.ID3D10Buffer, Format graphicsdxgicommon.DXGI_FORMAT, Offset uint32) {
-	self.Raw.IASetIndexBuffer(pIndexBuffer, Format, Offset)
+func (self ID3D10Device) IASetIndexBuffer(pIndexBuffer ID3D10Buffer, Format graphicsdxgicommon.DXGI_FORMAT, Offset uint32) {
+	self.Raw.IASetIndexBuffer(pIndexBuffer.Raw, Format, Offset)
 }
 
 // DrawIndexedInstanced wraps the raw DrawIndexedInstanced call.
@@ -282,8 +282,8 @@ func (self ID3D10Device) GSSetConstantBuffers(StartSlot uint32, NumBuffers uint3
 }
 
 // GSSetShader wraps the raw GSSetShader call.
-func (self ID3D10Device) GSSetShader(pShader *graphicsdirect3d10.ID3D10GeometryShader) {
-	self.Raw.GSSetShader(pShader)
+func (self ID3D10Device) GSSetShader(pShader ID3D10GeometryShader) {
+	self.Raw.GSSetShader(pShader.Raw)
 }
 
 // IASetPrimitiveTopology wraps the raw IASetPrimitiveTopology call.
@@ -302,9 +302,9 @@ func (self ID3D10Device) VSSetSamplers(StartSlot uint32, NumSamplers uint32, ppS
 }
 
 // SetPredication wraps the raw SetPredication call.
-func (self ID3D10Device) SetPredication(pPredicate *graphicsdirect3d10.ID3D10Predicate, PredicateValue bool) {
+func (self ID3D10Device) SetPredication(pPredicate ID3D10Predicate, PredicateValue bool) {
 	_PredicateValue := foundation.BOOL(win32.Bool32(PredicateValue))
-	self.Raw.SetPredication(pPredicate, _PredicateValue)
+	self.Raw.SetPredication(pPredicate.Raw, _PredicateValue)
 }
 
 // GSSetShaderResources wraps the raw GSSetShaderResources call.
@@ -318,18 +318,18 @@ func (self ID3D10Device) GSSetSamplers(StartSlot uint32, NumSamplers uint32, ppS
 }
 
 // OMSetRenderTargets wraps the raw OMSetRenderTargets call.
-func (self ID3D10Device) OMSetRenderTargets(NumViews uint32, ppRenderTargetViews **graphicsdirect3d10.ID3D10RenderTargetView, pDepthStencilView *graphicsdirect3d10.ID3D10DepthStencilView) {
-	self.Raw.OMSetRenderTargets(NumViews, ppRenderTargetViews, pDepthStencilView)
+func (self ID3D10Device) OMSetRenderTargets(NumViews uint32, ppRenderTargetViews **graphicsdirect3d10.ID3D10RenderTargetView, pDepthStencilView ID3D10DepthStencilView) {
+	self.Raw.OMSetRenderTargets(NumViews, ppRenderTargetViews, pDepthStencilView.Raw)
 }
 
 // OMSetBlendState wraps the raw OMSetBlendState call.
-func (self ID3D10Device) OMSetBlendState(pBlendState *graphicsdirect3d10.ID3D10BlendState, BlendFactor *float32, SampleMask uint32) {
-	self.Raw.OMSetBlendState(pBlendState, BlendFactor, SampleMask)
+func (self ID3D10Device) OMSetBlendState(pBlendState ID3D10BlendState, BlendFactor *float32, SampleMask uint32) {
+	self.Raw.OMSetBlendState(pBlendState.Raw, BlendFactor, SampleMask)
 }
 
 // OMSetDepthStencilState wraps the raw OMSetDepthStencilState call.
-func (self ID3D10Device) OMSetDepthStencilState(pDepthStencilState *graphicsdirect3d10.ID3D10DepthStencilState, StencilRef uint32) {
-	self.Raw.OMSetDepthStencilState(pDepthStencilState, StencilRef)
+func (self ID3D10Device) OMSetDepthStencilState(pDepthStencilState ID3D10DepthStencilState, StencilRef uint32) {
+	self.Raw.OMSetDepthStencilState(pDepthStencilState.Raw, StencilRef)
 }
 
 // SOSetTargets wraps the raw SOSetTargets call.
@@ -343,8 +343,8 @@ func (self ID3D10Device) DrawAuto() {
 }
 
 // RSSetState wraps the raw RSSetState call.
-func (self ID3D10Device) RSSetState(pRasterizerState *graphicsdirect3d10.ID3D10RasterizerState) {
-	self.Raw.RSSetState(pRasterizerState)
+func (self ID3D10Device) RSSetState(pRasterizerState ID3D10RasterizerState) {
+	self.Raw.RSSetState(pRasterizerState.Raw)
 }
 
 // RSSetViewports wraps the raw RSSetViewports call.
@@ -358,33 +358,33 @@ func (self ID3D10Device) RSSetScissorRects(NumRects uint32, pRects *foundation.R
 }
 
 // CopySubresourceRegion wraps the raw CopySubresourceRegion call.
-func (self ID3D10Device) CopySubresourceRegion(pDstResource *graphicsdirect3d10.ID3D10Resource, DstSubresource uint32, DstX uint32, DstY uint32, DstZ uint32, pSrcResource *graphicsdirect3d10.ID3D10Resource, SrcSubresource uint32, pSrcBox *graphicsdirect3d10.D3D10_BOX) {
-	self.Raw.CopySubresourceRegion(pDstResource, DstSubresource, DstX, DstY, DstZ, pSrcResource, SrcSubresource, pSrcBox)
+func (self ID3D10Device) CopySubresourceRegion(pDstResource ID3D10Resource, DstSubresource uint32, DstX uint32, DstY uint32, DstZ uint32, pSrcResource ID3D10Resource, SrcSubresource uint32, pSrcBox *graphicsdirect3d10.D3D10_BOX) {
+	self.Raw.CopySubresourceRegion(pDstResource.Raw, DstSubresource, DstX, DstY, DstZ, pSrcResource.Raw, SrcSubresource, pSrcBox)
 }
 
 // CopyResource wraps the raw CopyResource call.
-func (self ID3D10Device) CopyResource(pDstResource *graphicsdirect3d10.ID3D10Resource, pSrcResource *graphicsdirect3d10.ID3D10Resource) {
-	self.Raw.CopyResource(pDstResource, pSrcResource)
+func (self ID3D10Device) CopyResource(pDstResource ID3D10Resource, pSrcResource ID3D10Resource) {
+	self.Raw.CopyResource(pDstResource.Raw, pSrcResource.Raw)
 }
 
 // UpdateSubresource wraps the raw UpdateSubresource call.
-func (self ID3D10Device) UpdateSubresource(pDstResource *graphicsdirect3d10.ID3D10Resource, DstSubresource uint32, pDstBox *graphicsdirect3d10.D3D10_BOX, pSrcData unsafe.Pointer, SrcRowPitch uint32, SrcDepthPitch uint32) {
-	self.Raw.UpdateSubresource(pDstResource, DstSubresource, pDstBox, pSrcData, SrcRowPitch, SrcDepthPitch)
+func (self ID3D10Device) UpdateSubresource(pDstResource ID3D10Resource, DstSubresource uint32, pDstBox *graphicsdirect3d10.D3D10_BOX, pSrcData unsafe.Pointer, SrcRowPitch uint32, SrcDepthPitch uint32) {
+	self.Raw.UpdateSubresource(pDstResource.Raw, DstSubresource, pDstBox, pSrcData, SrcRowPitch, SrcDepthPitch)
 }
 
 // ClearRenderTargetView wraps the raw ClearRenderTargetView call.
-func (self ID3D10Device) ClearRenderTargetView(pRenderTargetView *graphicsdirect3d10.ID3D10RenderTargetView, ColorRGBA *float32) {
-	self.Raw.ClearRenderTargetView(pRenderTargetView, ColorRGBA)
+func (self ID3D10Device) ClearRenderTargetView(pRenderTargetView ID3D10RenderTargetView, ColorRGBA *float32) {
+	self.Raw.ClearRenderTargetView(pRenderTargetView.Raw, ColorRGBA)
 }
 
 // GenerateMips wraps the raw GenerateMips call.
-func (self ID3D10Device) GenerateMips(pShaderResourceView *graphicsdirect3d10.ID3D10ShaderResourceView) {
-	self.Raw.GenerateMips(pShaderResourceView)
+func (self ID3D10Device) GenerateMips(pShaderResourceView ID3D10ShaderResourceView) {
+	self.Raw.GenerateMips(pShaderResourceView.Raw)
 }
 
 // ResolveSubresource wraps the raw ResolveSubresource call.
-func (self ID3D10Device) ResolveSubresource(pDstResource *graphicsdirect3d10.ID3D10Resource, DstSubresource uint32, pSrcResource *graphicsdirect3d10.ID3D10Resource, SrcSubresource uint32, Format graphicsdxgicommon.DXGI_FORMAT) {
-	self.Raw.ResolveSubresource(pDstResource, DstSubresource, pSrcResource, SrcSubresource, Format)
+func (self ID3D10Device) ResolveSubresource(pDstResource ID3D10Resource, DstSubresource uint32, pSrcResource ID3D10Resource, SrcSubresource uint32, Format graphicsdxgicommon.DXGI_FORMAT) {
+	self.Raw.ResolveSubresource(pDstResource.Raw, DstSubresource, pSrcResource.Raw, SrcSubresource, Format)
 }
 
 // VSGetConstantBuffers wraps the raw VSGetConstantBuffers call.
@@ -533,8 +533,8 @@ func (self ID3D10Device) SetPrivateData(guid *win32.GUID, DataSize uint32, pData
 }
 
 // SetPrivateDataInterface wraps the raw SetPrivateDataInterface call.
-func (self ID3D10Device) SetPrivateDataInterface(guid *win32.GUID, pData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData)))
+func (self ID3D10Device) SetPrivateDataInterface(guid *win32.GUID, pData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData.Raw)))
 }
 
 // ClearState wraps the raw ClearState call.
@@ -568,18 +568,18 @@ func (self ID3D10Device) CreateTexture3D(pDesc *graphicsdirect3d10.D3D10_TEXTURE
 }
 
 // CreateShaderResourceView wraps the raw CreateShaderResourceView call.
-func (self ID3D10Device) CreateShaderResourceView(pResource *graphicsdirect3d10.ID3D10Resource, pDesc *graphicsdirect3d10.D3D10_SHADER_RESOURCE_VIEW_DESC, ppSRView **graphicsdirect3d10.ID3D10ShaderResourceView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateShaderResourceView(pResource, pDesc, ppSRView)))
+func (self ID3D10Device) CreateShaderResourceView(pResource ID3D10Resource, pDesc *graphicsdirect3d10.D3D10_SHADER_RESOURCE_VIEW_DESC, ppSRView **graphicsdirect3d10.ID3D10ShaderResourceView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateShaderResourceView(pResource.Raw, pDesc, ppSRView)))
 }
 
 // CreateRenderTargetView wraps the raw CreateRenderTargetView call.
-func (self ID3D10Device) CreateRenderTargetView(pResource *graphicsdirect3d10.ID3D10Resource, pDesc *graphicsdirect3d10.D3D10_RENDER_TARGET_VIEW_DESC, ppRTView **graphicsdirect3d10.ID3D10RenderTargetView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateRenderTargetView(pResource, pDesc, ppRTView)))
+func (self ID3D10Device) CreateRenderTargetView(pResource ID3D10Resource, pDesc *graphicsdirect3d10.D3D10_RENDER_TARGET_VIEW_DESC, ppRTView **graphicsdirect3d10.ID3D10RenderTargetView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateRenderTargetView(pResource.Raw, pDesc, ppRTView)))
 }
 
 // CreateDepthStencilView wraps the raw CreateDepthStencilView call.
-func (self ID3D10Device) CreateDepthStencilView(pResource *graphicsdirect3d10.ID3D10Resource, pDesc *graphicsdirect3d10.D3D10_DEPTH_STENCIL_VIEW_DESC, ppDepthStencilView **graphicsdirect3d10.ID3D10DepthStencilView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDepthStencilView(pResource, pDesc, ppDepthStencilView)))
+func (self ID3D10Device) CreateDepthStencilView(pResource ID3D10Resource, pDesc *graphicsdirect3d10.D3D10_DEPTH_STENCIL_VIEW_DESC, ppDepthStencilView **graphicsdirect3d10.ID3D10DepthStencilView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDepthStencilView(pResource.Raw, pDesc, ppDepthStencilView)))
 }
 
 // CreateInputLayout wraps the raw CreateInputLayout call.
@@ -694,8 +694,8 @@ func WrapID3D10Device1(raw *graphicsdirect3d10.ID3D10Device1) ID3D10Device1 {
 }
 
 // CreateShaderResourceView1 wraps the raw CreateShaderResourceView1 call.
-func (self ID3D10Device1) CreateShaderResourceView1(pResource *graphicsdirect3d10.ID3D10Resource, pDesc *graphicsdirect3d10.D3D10_SHADER_RESOURCE_VIEW_DESC1, ppSRView **graphicsdirect3d10.ID3D10ShaderResourceView1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateShaderResourceView1(pResource, pDesc, ppSRView)))
+func (self ID3D10Device1) CreateShaderResourceView1(pResource ID3D10Resource, pDesc *graphicsdirect3d10.D3D10_SHADER_RESOURCE_VIEW_DESC1, ppSRView **graphicsdirect3d10.ID3D10ShaderResourceView1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateShaderResourceView1(pResource.Raw, pDesc, ppSRView)))
 }
 
 // CreateBlendState1 wraps the raw CreateBlendState1 call.
@@ -735,8 +735,8 @@ func (self ID3D10DeviceChild) SetPrivateData(guid *win32.GUID, DataSize uint32, 
 }
 
 // SetPrivateDataInterface wraps the raw SetPrivateDataInterface call.
-func (self ID3D10DeviceChild) SetPrivateDataInterface(guid *win32.GUID, pData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData)))
+func (self ID3D10DeviceChild) SetPrivateDataInterface(guid *win32.GUID, pData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData.Raw)))
 }
 
 // ID3D10Effect is an idiomatic wrapper over the raw COM interface Graphics.Direct3D10.ID3D10Effect with error-returning methods.
@@ -848,8 +848,8 @@ func WrapID3D10EffectConstantBuffer(raw *graphicsdirect3d10.ID3D10EffectConstant
 }
 
 // SetConstantBuffer wraps the raw SetConstantBuffer call.
-func (self ID3D10EffectConstantBuffer) SetConstantBuffer(pConstantBuffer *graphicsdirect3d10.ID3D10Buffer) error {
-	return win32.HRESULTError(int32(self.Raw.SetConstantBuffer(pConstantBuffer)))
+func (self ID3D10EffectConstantBuffer) SetConstantBuffer(pConstantBuffer ID3D10Buffer) error {
+	return win32.HRESULTError(int32(self.Raw.SetConstantBuffer(pConstantBuffer.Raw)))
 }
 
 // GetConstantBuffer wraps the raw GetConstantBuffer call.
@@ -858,8 +858,8 @@ func (self ID3D10EffectConstantBuffer) GetConstantBuffer(ppConstantBuffer **grap
 }
 
 // SetTextureBuffer wraps the raw SetTextureBuffer call.
-func (self ID3D10EffectConstantBuffer) SetTextureBuffer(pTextureBuffer *graphicsdirect3d10.ID3D10ShaderResourceView) error {
-	return win32.HRESULTError(int32(self.Raw.SetTextureBuffer(pTextureBuffer)))
+func (self ID3D10EffectConstantBuffer) SetTextureBuffer(pTextureBuffer ID3D10ShaderResourceView) error {
+	return win32.HRESULTError(int32(self.Raw.SetTextureBuffer(pTextureBuffer.Raw)))
 }
 
 // GetTextureBuffer wraps the raw GetTextureBuffer call.
@@ -900,8 +900,8 @@ func WrapID3D10EffectDepthStencilViewVariable(raw *graphicsdirect3d10.ID3D10Effe
 }
 
 // SetDepthStencil wraps the raw SetDepthStencil call.
-func (self ID3D10EffectDepthStencilViewVariable) SetDepthStencil(pResource *graphicsdirect3d10.ID3D10DepthStencilView) error {
-	return win32.HRESULTError(int32(self.Raw.SetDepthStencil(pResource)))
+func (self ID3D10EffectDepthStencilViewVariable) SetDepthStencil(pResource ID3D10DepthStencilView) error {
+	return win32.HRESULTError(int32(self.Raw.SetDepthStencil(pResource.Raw)))
 }
 
 // GetDepthStencil wraps the raw GetDepthStencil call.
@@ -1074,8 +1074,8 @@ func WrapID3D10EffectRenderTargetViewVariable(raw *graphicsdirect3d10.ID3D10Effe
 }
 
 // SetRenderTarget wraps the raw SetRenderTarget call.
-func (self ID3D10EffectRenderTargetViewVariable) SetRenderTarget(pResource *graphicsdirect3d10.ID3D10RenderTargetView) error {
-	return win32.HRESULTError(int32(self.Raw.SetRenderTarget(pResource)))
+func (self ID3D10EffectRenderTargetViewVariable) SetRenderTarget(pResource ID3D10RenderTargetView) error {
+	return win32.HRESULTError(int32(self.Raw.SetRenderTarget(pResource.Raw)))
 }
 
 // GetRenderTarget wraps the raw GetRenderTarget call.
@@ -1193,8 +1193,8 @@ func WrapID3D10EffectShaderResourceVariable(raw *graphicsdirect3d10.ID3D10Effect
 }
 
 // SetResource wraps the raw SetResource call.
-func (self ID3D10EffectShaderResourceVariable) SetResource(pResource *graphicsdirect3d10.ID3D10ShaderResourceView) error {
-	return win32.HRESULTError(int32(self.Raw.SetResource(pResource)))
+func (self ID3D10EffectShaderResourceVariable) SetResource(pResource ID3D10ShaderResourceView) error {
+	return win32.HRESULTError(int32(self.Raw.SetResource(pResource.Raw)))
 }
 
 // GetResource wraps the raw GetResource call.

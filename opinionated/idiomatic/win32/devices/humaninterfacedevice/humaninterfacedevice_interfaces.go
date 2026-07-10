@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	deviceshumaninterfacedevice "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/humaninterfacedevice"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -60,8 +59,8 @@ func WrapIDirectInput7A(raw *deviceshumaninterfacedevice.IDirectInput7A) IDirect
 }
 
 // CreateDeviceEx wraps the raw CreateDeviceEx call.
-func (self IDirectInput7A) CreateDeviceEx(param0 *win32.GUID, param1 *win32.GUID, param2 *unsafe.Pointer, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDeviceEx(param0, param1, param2, param3)))
+func (self IDirectInput7A) CreateDeviceEx(param0 *win32.GUID, param1 *win32.GUID, param2 *unsafe.Pointer, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDeviceEx(param0, param1, param2, param3.Raw)))
 }
 
 // IDirectInput7W is an idiomatic wrapper over the raw COM interface Devices.HumanInterfaceDevice.IDirectInput7W with error-returning methods.
@@ -76,8 +75,8 @@ func WrapIDirectInput7W(raw *deviceshumaninterfacedevice.IDirectInput7W) IDirect
 }
 
 // CreateDeviceEx wraps the raw CreateDeviceEx call.
-func (self IDirectInput7W) CreateDeviceEx(param0 *win32.GUID, param1 *win32.GUID, param2 *unsafe.Pointer, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDeviceEx(param0, param1, param2, param3)))
+func (self IDirectInput7W) CreateDeviceEx(param0 *win32.GUID, param1 *win32.GUID, param2 *unsafe.Pointer, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDeviceEx(param0, param1, param2, param3.Raw)))
 }
 
 // IDirectInput8A is an idiomatic wrapper over the raw COM interface Devices.HumanInterfaceDevice.IDirectInput8A with error-returning methods.
@@ -92,8 +91,8 @@ func WrapIDirectInput8A(raw *deviceshumaninterfacedevice.IDirectInput8A) IDirect
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self IDirectInput8A) CreateDevice(param0 *win32.GUID, param1 **deviceshumaninterfacedevice.IDirectInputDevice8A, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(param0, param1, param2)))
+func (self IDirectInput8A) CreateDevice(param0 *win32.GUID, param1 **deviceshumaninterfacedevice.IDirectInputDevice8A, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(param0, param1, param2.Raw)))
 }
 
 // EnumDevices wraps the raw EnumDevices call.
@@ -143,8 +142,8 @@ func WrapIDirectInput8W(raw *deviceshumaninterfacedevice.IDirectInput8W) IDirect
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self IDirectInput8W) CreateDevice(param0 *win32.GUID, param1 **deviceshumaninterfacedevice.IDirectInputDevice8W, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(param0, param1, param2)))
+func (self IDirectInput8W) CreateDevice(param0 *win32.GUID, param1 **deviceshumaninterfacedevice.IDirectInputDevice8W, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(param0, param1, param2.Raw)))
 }
 
 // EnumDevices wraps the raw EnumDevices call.
@@ -196,8 +195,8 @@ func WrapIDirectInputA(raw *deviceshumaninterfacedevice.IDirectInputA) IDirectIn
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self IDirectInputA) CreateDevice(param0 *win32.GUID, param1 **deviceshumaninterfacedevice.IDirectInputDeviceA, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(param0, param1, param2)))
+func (self IDirectInputA) CreateDevice(param0 *win32.GUID, param1 **deviceshumaninterfacedevice.IDirectInputDeviceA, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(param0, param1, param2.Raw)))
 }
 
 // EnumDevices wraps the raw EnumDevices call.
@@ -232,8 +231,8 @@ func WrapIDirectInputDevice2A(raw *deviceshumaninterfacedevice.IDirectInputDevic
 }
 
 // CreateEffect wraps the raw CreateEffect call.
-func (self IDirectInputDevice2A) CreateEffect(param0 *win32.GUID, param1 *deviceshumaninterfacedevice.DIEFFECT, param2 **deviceshumaninterfacedevice.IDirectInputEffect, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEffect(param0, param1, param2, param3)))
+func (self IDirectInputDevice2A) CreateEffect(param0 *win32.GUID, param1 *deviceshumaninterfacedevice.DIEFFECT, param2 **deviceshumaninterfacedevice.IDirectInputEffect, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateEffect(param0, param1, param2, param3.Raw)))
 }
 
 // EnumEffects wraps the raw EnumEffects call.
@@ -288,8 +287,8 @@ func WrapIDirectInputDevice2W(raw *deviceshumaninterfacedevice.IDirectInputDevic
 }
 
 // CreateEffect wraps the raw CreateEffect call.
-func (self IDirectInputDevice2W) CreateEffect(param0 *win32.GUID, param1 *deviceshumaninterfacedevice.DIEFFECT, param2 **deviceshumaninterfacedevice.IDirectInputEffect, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEffect(param0, param1, param2, param3)))
+func (self IDirectInputDevice2W) CreateEffect(param0 *win32.GUID, param1 *deviceshumaninterfacedevice.DIEFFECT, param2 **deviceshumaninterfacedevice.IDirectInputEffect, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateEffect(param0, param1, param2, param3.Raw)))
 }
 
 // EnumEffects wraps the raw EnumEffects call.
@@ -463,8 +462,8 @@ func (self IDirectInputDevice8A) Initialize(param0 foundation.HINSTANCE, param1 
 }
 
 // CreateEffect wraps the raw CreateEffect call.
-func (self IDirectInputDevice8A) CreateEffect(param0 *win32.GUID, param1 *deviceshumaninterfacedevice.DIEFFECT, param2 **deviceshumaninterfacedevice.IDirectInputEffect, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEffect(param0, param1, param2, param3)))
+func (self IDirectInputDevice8A) CreateEffect(param0 *win32.GUID, param1 *deviceshumaninterfacedevice.DIEFFECT, param2 **deviceshumaninterfacedevice.IDirectInputEffect, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateEffect(param0, param1, param2, param3.Raw)))
 }
 
 // EnumEffects wraps the raw EnumEffects call.
@@ -619,8 +618,8 @@ func (self IDirectInputDevice8W) Initialize(param0 foundation.HINSTANCE, param1 
 }
 
 // CreateEffect wraps the raw CreateEffect call.
-func (self IDirectInputDevice8W) CreateEffect(param0 *win32.GUID, param1 *deviceshumaninterfacedevice.DIEFFECT, param2 **deviceshumaninterfacedevice.IDirectInputEffect, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEffect(param0, param1, param2, param3)))
+func (self IDirectInputDevice8W) CreateEffect(param0 *win32.GUID, param1 *deviceshumaninterfacedevice.DIEFFECT, param2 **deviceshumaninterfacedevice.IDirectInputEffect, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateEffect(param0, param1, param2, param3.Raw)))
 }
 
 // EnumEffects wraps the raw EnumEffects call.
@@ -1194,8 +1193,8 @@ func WrapIDirectInputW(raw *deviceshumaninterfacedevice.IDirectInputW) IDirectIn
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self IDirectInputW) CreateDevice(param0 *win32.GUID, param1 **deviceshumaninterfacedevice.IDirectInputDeviceW, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(param0, param1, param2)))
+func (self IDirectInputW) CreateDevice(param0 *win32.GUID, param1 **deviceshumaninterfacedevice.IDirectInputDeviceW, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(param0, param1, param2.Raw)))
 }
 
 // EnumDevices wraps the raw EnumDevices call.

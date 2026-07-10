@@ -9,8 +9,15 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemdiagnosticsdebugactivescript "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/diagnostics/debug/activescript"
 	systemjs "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/js"
+	systemdiagnosticsdebugactivescriptidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/diagnostics/debug/activescript"
 )
+
+// JsCreateContext wraps the raw JsCreateContext call with idiomatic Go types.
+func JsCreateContext(runtime unsafe.Pointer, debugApplication systemdiagnosticsdebugactivescriptidiom.IDebugApplication64, newContext *unsafe.Pointer) systemjs.JsErrorCode {
+	return systemjs.JsCreateContext(runtime, debugApplication.Raw, newContext)
+}
 
 // JsGetPropertyIdFromName wraps the raw JsGetPropertyIdFromName call with idiomatic Go types.
 func JsGetPropertyIdFromName(name string, propertyId *unsafe.Pointer) systemjs.JsErrorCode {
@@ -56,4 +63,14 @@ func JsRunSerializedScript(script string, buffer *byte, sourceContext uintptr, s
 func JsSerializeScript(script string, buffer *byte, bufferSize *uint32) systemjs.JsErrorCode {
 	_script := win32.UTF16Ptr(script)
 	return systemjs.JsSerializeScript(foundation.PWSTR(_script), buffer, bufferSize)
+}
+
+// JsStartDebugging wraps the raw JsStartDebugging call with idiomatic Go types.
+func JsStartDebugging(debugApplication systemdiagnosticsdebugactivescriptidiom.IDebugApplication64) systemjs.JsErrorCode {
+	return systemjs.JsStartDebugging(debugApplication.Raw)
+}
+
+// JsStartProfiling wraps the raw JsStartProfiling call with idiomatic Go types.
+func JsStartProfiling(callback systemdiagnosticsdebugactivescriptidiom.IActiveScriptProfilerCallback, eventMask systemdiagnosticsdebugactivescript.PROFILER_EVENT_MASK, context uint32) systemjs.JsErrorCode {
+	return systemjs.JsStartProfiling(callback.Raw, eventMask, context)
 }

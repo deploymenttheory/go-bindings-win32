@@ -7,10 +7,10 @@ package ui
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
-	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	systemcomui "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/ui"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
 )
 
 // IDummyHICONIncluder is an idiomatic wrapper over the raw COM interface System.Com.UI.IDummyHICONIncluder with error-returning methods.
@@ -41,11 +41,11 @@ func WrapIThumbnailExtractor(raw *systemcomui.IThumbnailExtractor) IThumbnailExt
 }
 
 // ExtractThumbnail wraps the raw ExtractThumbnail call.
-func (self IThumbnailExtractor) ExtractThumbnail(pStg *systemcomstructuredstorage.IStorage, ulLength uint32, ulHeight uint32, pulOutputLength *uint32, pulOutputHeight *uint32, phOutputBitmap *graphicsgdi.HBITMAP) error {
-	return win32.HRESULTError(int32(self.Raw.ExtractThumbnail(pStg, ulLength, ulHeight, pulOutputLength, pulOutputHeight, phOutputBitmap)))
+func (self IThumbnailExtractor) ExtractThumbnail(pStg systemcomstructuredstorageidiom.IStorage, ulLength uint32, ulHeight uint32, pulOutputLength *uint32, pulOutputHeight *uint32, phOutputBitmap *graphicsgdi.HBITMAP) error {
+	return win32.HRESULTError(int32(self.Raw.ExtractThumbnail(pStg.Raw, ulLength, ulHeight, pulOutputLength, pulOutputHeight, phOutputBitmap)))
 }
 
 // OnFileUpdated wraps the raw OnFileUpdated call.
-func (self IThumbnailExtractor) OnFileUpdated(pStg *systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(self.Raw.OnFileUpdated(pStg)))
+func (self IThumbnailExtractor) OnFileUpdated(pStg systemcomstructuredstorageidiom.IStorage) error {
+	return win32.HRESULTError(int32(self.Raw.OnFileUpdated(pStg.Raw)))
 }

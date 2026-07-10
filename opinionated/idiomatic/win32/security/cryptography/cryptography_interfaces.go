@@ -98,17 +98,17 @@ func (self ICertSrvSetup) GetPrivateKeyContainerList(bstrProviderName foundation
 }
 
 // GetExistingCACertificates wraps the raw GetExistingCACertificates call.
-func (self ICertSrvSetup) GetExistingCACertificates() (*securitycryptography.ICertSrvSetupKeyInformationCollection, error) {
+func (self ICertSrvSetup) GetExistingCACertificates() (ICertSrvSetupKeyInformationCollection, error) {
 	var _ppVal *securitycryptography.ICertSrvSetupKeyInformationCollection
 	_hr := self.Raw.GetExistingCACertificates(&_ppVal)
-	return _ppVal, win32.HRESULTError(int32(_hr))
+	return WrapICertSrvSetupKeyInformationCollection(_ppVal), win32.HRESULTError(int32(_hr))
 }
 
 // CAImportPFX wraps the raw CAImportPFX call.
-func (self ICertSrvSetup) CAImportPFX(bstrFileName foundation.BSTR, bstrPasswd foundation.BSTR, bOverwriteExistingKey foundation.VARIANT_BOOL) (*securitycryptography.ICertSrvSetupKeyInformation, error) {
+func (self ICertSrvSetup) CAImportPFX(bstrFileName foundation.BSTR, bstrPasswd foundation.BSTR, bOverwriteExistingKey foundation.VARIANT_BOOL) (ICertSrvSetupKeyInformation, error) {
 	var _ppVal *securitycryptography.ICertSrvSetupKeyInformation
 	_hr := self.Raw.CAImportPFX(bstrFileName, bstrPasswd, bOverwriteExistingKey, &_ppVal)
-	return _ppVal, win32.HRESULTError(int32(_hr))
+	return WrapICertSrvSetupKeyInformation(_ppVal), win32.HRESULTError(int32(_hr))
 }
 
 // SetCADistinguishedName wraps the raw SetCADistinguishedName call.
@@ -236,10 +236,10 @@ func WrapICertSrvSetupKeyInformationCollection(raw *securitycryptography.ICertSr
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ICertSrvSetupKeyInformationCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ICertSrvSetupKeyInformationCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppVal *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppVal)
-	return _ppVal, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppVal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
@@ -257,8 +257,8 @@ func (self ICertSrvSetupKeyInformationCollection) Get_Count() (int32, error) {
 }
 
 // Add wraps the raw Add call.
-func (self ICertSrvSetupKeyInformationCollection) Add(pIKeyInformation *securitycryptography.ICertSrvSetupKeyInformation) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pIKeyInformation)))
+func (self ICertSrvSetupKeyInformationCollection) Add(pIKeyInformation ICertSrvSetupKeyInformation) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pIKeyInformation.Raw)))
 }
 
 // ICertificateEnrollmentPolicyServerSetup is an idiomatic wrapper over the raw COM interface Security.Cryptography.ICertificateEnrollmentPolicyServerSetup with error-returning methods.

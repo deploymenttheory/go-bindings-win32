@@ -337,8 +337,8 @@ func (self IMetaDataDispenserEx) GetOption(optionid *win32.GUID, pvalue *systemv
 }
 
 // OpenScopeOnITypeInfo wraps the raw OpenScopeOnITypeInfo call.
-func (self IMetaDataDispenserEx) OpenScopeOnITypeInfo(pITI *systemcom.ITypeInfo, dwOpenFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OpenScopeOnITypeInfo(pITI, dwOpenFlags, riid, ppIUnk)))
+func (self IMetaDataDispenserEx) OpenScopeOnITypeInfo(pITI systemcomidiom.ITypeInfo, dwOpenFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OpenScopeOnITypeInfo(pITI.Raw, dwOpenFlags, riid, ppIUnk)))
 }
 
 // GetCORSystemDirectory wraps the raw GetCORSystemDirectory call.
@@ -390,8 +390,8 @@ func (self IMetaDataEmit) Save(szFile string, dwSaveFlags uint32) error {
 }
 
 // SaveToStream wraps the raw SaveToStream call.
-func (self IMetaDataEmit) SaveToStream(pIStream *systemcom.IStream, dwSaveFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SaveToStream(pIStream, dwSaveFlags)))
+func (self IMetaDataEmit) SaveToStream(pIStream systemcomidiom.IStream, dwSaveFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SaveToStream(pIStream.Raw, dwSaveFlags)))
 }
 
 // GetSaveSize wraps the raw GetSaveSize call.
@@ -412,8 +412,8 @@ func (self IMetaDataEmit) DefineNestedType(szTypeDef string, dwTypeDefFlags uint
 }
 
 // SetHandler wraps the raw SetHandler call.
-func (self IMetaDataEmit) SetHandler(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetHandler(pUnk)))
+func (self IMetaDataEmit) SetHandler(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetHandler(pUnk.Raw)))
 }
 
 // DefineMethod wraps the raw DefineMethod call.
@@ -434,8 +434,8 @@ func (self IMetaDataEmit) DefineTypeRefByName(tkResolutionScope uint32, szName s
 }
 
 // DefineImportType wraps the raw DefineImportType call.
-func (self IMetaDataEmit) DefineImportType(pAssemImport *systemwinrtmetadata.IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, pImport *systemwinrtmetadata.IMetaDataImport, tdImport uint32, pAssemEmit *systemwinrtmetadata.IMetaDataAssemblyEmit, ptr *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DefineImportType(pAssemImport, pbHashValue, cbHashValue, pImport, tdImport, pAssemEmit, ptr)))
+func (self IMetaDataEmit) DefineImportType(pAssemImport IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, pImport IMetaDataImport, tdImport uint32, pAssemEmit IMetaDataAssemblyEmit, ptr *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DefineImportType(pAssemImport.Raw, pbHashValue, cbHashValue, pImport.Raw, tdImport, pAssemEmit.Raw, ptr)))
 }
 
 // DefineMemberRef wraps the raw DefineMemberRef call.
@@ -445,8 +445,8 @@ func (self IMetaDataEmit) DefineMemberRef(tkImport uint32, szName string, pvSigB
 }
 
 // DefineImportMember wraps the raw DefineImportMember call.
-func (self IMetaDataEmit) DefineImportMember(pAssemImport *systemwinrtmetadata.IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, pImport *systemwinrtmetadata.IMetaDataImport, mbMember uint32, pAssemEmit *systemwinrtmetadata.IMetaDataAssemblyEmit, tkParent uint32, pmr *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DefineImportMember(pAssemImport, pbHashValue, cbHashValue, pImport, mbMember, pAssemEmit, tkParent, pmr)))
+func (self IMetaDataEmit) DefineImportMember(pAssemImport IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, pImport IMetaDataImport, mbMember uint32, pAssemEmit IMetaDataAssemblyEmit, tkParent uint32, pmr *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DefineImportMember(pAssemImport.Raw, pbHashValue, cbHashValue, pImport.Raw, mbMember, pAssemEmit.Raw, tkParent, pmr)))
 }
 
 // DefineEvent wraps the raw DefineEvent call.
@@ -609,13 +609,13 @@ func (self IMetaDataEmit) DefineSecurityAttributeSet(tkObj uint32, rSecAttrs *sy
 }
 
 // ApplyEditAndContinue wraps the raw ApplyEditAndContinue call.
-func (self IMetaDataEmit) ApplyEditAndContinue(pImport *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ApplyEditAndContinue(pImport)))
+func (self IMetaDataEmit) ApplyEditAndContinue(pImport systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ApplyEditAndContinue(pImport.Raw)))
 }
 
 // TranslateSigWithScope wraps the raw TranslateSigWithScope call.
-func (self IMetaDataEmit) TranslateSigWithScope(pAssemImport *systemwinrtmetadata.IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, import_ *systemwinrtmetadata.IMetaDataImport, pbSigBlob *byte, cbSigBlob uint32, pAssemEmit *systemwinrtmetadata.IMetaDataAssemblyEmit, emit *systemwinrtmetadata.IMetaDataEmit, pvTranslatedSig *byte, cbTranslatedSigMax uint32, pcbTranslatedSig *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.TranslateSigWithScope(pAssemImport, pbHashValue, cbHashValue, import_, pbSigBlob, cbSigBlob, pAssemEmit, emit, pvTranslatedSig, cbTranslatedSigMax, pcbTranslatedSig)))
+func (self IMetaDataEmit) TranslateSigWithScope(pAssemImport IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, import_ IMetaDataImport, pbSigBlob *byte, cbSigBlob uint32, pAssemEmit IMetaDataAssemblyEmit, emit IMetaDataEmit, pvTranslatedSig *byte, cbTranslatedSigMax uint32, pcbTranslatedSig *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.TranslateSigWithScope(pAssemImport.Raw, pbHashValue, cbHashValue, import_.Raw, pbSigBlob, cbSigBlob, pAssemEmit.Raw, emit.Raw, pvTranslatedSig, cbTranslatedSigMax, pcbTranslatedSig)))
 }
 
 // SetMethodImplFlags wraps the raw SetMethodImplFlags call.
@@ -629,8 +629,8 @@ func (self IMetaDataEmit) SetFieldRVA(fd uint32, ulRVA uint32) error {
 }
 
 // Merge wraps the raw Merge call.
-func (self IMetaDataEmit) Merge(pImport *systemwinrtmetadata.IMetaDataImport, pHostMapToken *systemwinrtmetadata.IMapToken, pHandler *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Merge(pImport, pHostMapToken, pHandler)))
+func (self IMetaDataEmit) Merge(pImport IMetaDataImport, pHostMapToken IMapToken, pHandler systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Merge(pImport.Raw, pHostMapToken.Raw, pHandler.Raw)))
 }
 
 // MergeEnd wraps the raw MergeEnd call.
@@ -666,8 +666,8 @@ func (self IMetaDataEmit2) SaveDelta(szFile string, dwSaveFlags uint32) error {
 }
 
 // SaveDeltaToStream wraps the raw SaveDeltaToStream call.
-func (self IMetaDataEmit2) SaveDeltaToStream(pIStream *systemcom.IStream, dwSaveFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SaveDeltaToStream(pIStream, dwSaveFlags)))
+func (self IMetaDataEmit2) SaveDeltaToStream(pIStream systemcomidiom.IStream, dwSaveFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SaveDeltaToStream(pIStream.Raw, dwSaveFlags)))
 }
 
 // SaveDeltaToMemory wraps the raw SaveDeltaToMemory call.
@@ -1273,8 +1273,8 @@ func WrapIMetaDataValidate(raw *systemwinrtmetadata.IMetaDataValidate) IMetaData
 }
 
 // ValidatorInit wraps the raw ValidatorInit call.
-func (self IMetaDataValidate) ValidatorInit(dwModuleType uint32, pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ValidatorInit(dwModuleType, pUnk)))
+func (self IMetaDataValidate) ValidatorInit(dwModuleType uint32, pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ValidatorInit(dwModuleType, pUnk.Raw)))
 }
 
 // ValidateMetaData wraps the raw ValidateMetaData call.
@@ -1309,9 +1309,9 @@ func WrapIRoMetaDataLocator(raw *systemwinrtmetadata.IRoMetaDataLocator) IRoMeta
 }
 
 // Locate wraps the raw Locate call.
-func (self IRoMetaDataLocator) Locate(nameElement string, metaDataDestination *systemwinrtmetadata.IRoSimpleMetaDataBuilder) error {
+func (self IRoMetaDataLocator) Locate(nameElement string, metaDataDestination IRoSimpleMetaDataBuilder) error {
 	_nameElement := win32.UTF16Ptr(nameElement)
-	return win32.HRESULTError(int32(self.Raw.Locate(foundation.PWSTR(_nameElement), metaDataDestination)))
+	return win32.HRESULTError(int32(self.Raw.Locate(foundation.PWSTR(_nameElement), metaDataDestination.Raw)))
 }
 
 // IRoSimpleMetaDataBuilder is an idiomatic wrapper over the raw COM interface System.WinRT.Metadata.IRoSimpleMetaDataBuilder with error-returning methods.

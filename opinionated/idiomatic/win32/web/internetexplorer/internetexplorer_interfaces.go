@@ -14,12 +14,13 @@ import (
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
-	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 	webinternetexplorer "github.com/deploymenttheory/go-bindings-win32/bindings/win32/web/internetexplorer"
 	webmshtml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/web/mshtml"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
+	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
+	webmshtmlidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/web/mshtml"
 )
 
 // IActiveXUIHandlerSite is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IActiveXUIHandlerSite with error-returning methods.
@@ -39,9 +40,9 @@ func (self IActiveXUIHandlerSite) CreateScrollableContextMenu(scrollableContextM
 }
 
 // PickFileAndGetResult wraps the raw PickFileAndGetResult call.
-func (self IActiveXUIHandlerSite) PickFileAndGetResult(filePicker *systemcom.IUnknown, allowMultipleSelections bool, result **systemcom.IUnknown) error {
+func (self IActiveXUIHandlerSite) PickFileAndGetResult(filePicker systemcomidiom.IUnknown, allowMultipleSelections bool, result **systemcom.IUnknown) error {
 	_allowMultipleSelections := foundation.BOOL(win32.Bool32(allowMultipleSelections))
-	return win32.HRESULTError(int32(self.Raw.PickFileAndGetResult(filePicker, _allowMultipleSelections, result)))
+	return win32.HRESULTError(int32(self.Raw.PickFileAndGetResult(filePicker.Raw, _allowMultipleSelections, result)))
 }
 
 // IActiveXUIHandlerSite2 is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IActiveXUIHandlerSite2 with error-returning methods.
@@ -171,8 +172,8 @@ func (self IDithererImpl) SetDestColorTable(nColors uint32, prgbColors *graphics
 }
 
 // SetEventSink wraps the raw SetEventSink call.
-func (self IDithererImpl) SetEventSink(pEventSink *webinternetexplorer.IImageDecodeEventSink) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventSink(pEventSink)))
+func (self IDithererImpl) SetEventSink(pEventSink IImageDecodeEventSink) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventSink(pEventSink.Raw)))
 }
 
 // IDocObjectService is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IDocObjectService with error-returning methods.
@@ -187,17 +188,17 @@ func WrapIDocObjectService(raw *webinternetexplorer.IDocObjectService) IDocObjec
 }
 
 // FireBeforeNavigate2 wraps the raw FireBeforeNavigate2 call.
-func (self IDocObjectService) FireBeforeNavigate2(pDispatch *systemcom.IDispatch, lpszUrl string, dwFlags uint32, lpszFrameName string, pPostData *byte, cbPostData uint32, lpszHeaders string, fPlayNavSound bool, pfCancel *foundation.BOOL) error {
+func (self IDocObjectService) FireBeforeNavigate2(pDispatch systemcomidiom.IDispatch, lpszUrl string, dwFlags uint32, lpszFrameName string, pPostData *byte, cbPostData uint32, lpszHeaders string, fPlayNavSound bool, pfCancel *foundation.BOOL) error {
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
 	_lpszFrameName := win32.UTF16Ptr(lpszFrameName)
 	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
 	_fPlayNavSound := foundation.BOOL(win32.Bool32(fPlayNavSound))
-	return win32.HRESULTError(int32(self.Raw.FireBeforeNavigate2(pDispatch, foundation.PWSTR(_lpszUrl), dwFlags, foundation.PWSTR(_lpszFrameName), pPostData, cbPostData, foundation.PWSTR(_lpszHeaders), _fPlayNavSound, pfCancel)))
+	return win32.HRESULTError(int32(self.Raw.FireBeforeNavigate2(pDispatch.Raw, foundation.PWSTR(_lpszUrl), dwFlags, foundation.PWSTR(_lpszFrameName), pPostData, cbPostData, foundation.PWSTR(_lpszHeaders), _fPlayNavSound, pfCancel)))
 }
 
 // FireNavigateComplete2 wraps the raw FireNavigateComplete2 call.
-func (self IDocObjectService) FireNavigateComplete2(pHTMLWindow2 *webmshtml.IHTMLWindow2, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.FireNavigateComplete2(pHTMLWindow2, dwFlags)))
+func (self IDocObjectService) FireNavigateComplete2(pHTMLWindow2 webmshtmlidiom.IHTMLWindow2, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.FireNavigateComplete2(pHTMLWindow2.Raw, dwFlags)))
 }
 
 // FireDownloadBegin wraps the raw FireDownloadBegin call.
@@ -211,13 +212,13 @@ func (self IDocObjectService) FireDownloadComplete() error {
 }
 
 // FireDocumentComplete wraps the raw FireDocumentComplete call.
-func (self IDocObjectService) FireDocumentComplete(pHTMLWindow *webmshtml.IHTMLWindow2, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.FireDocumentComplete(pHTMLWindow, dwFlags)))
+func (self IDocObjectService) FireDocumentComplete(pHTMLWindow webmshtmlidiom.IHTMLWindow2, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.FireDocumentComplete(pHTMLWindow.Raw, dwFlags)))
 }
 
 // UpdateDesktopComponent wraps the raw UpdateDesktopComponent call.
-func (self IDocObjectService) UpdateDesktopComponent(pHTMLWindow *webmshtml.IHTMLWindow2) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateDesktopComponent(pHTMLWindow)))
+func (self IDocObjectService) UpdateDesktopComponent(pHTMLWindow webmshtmlidiom.IHTMLWindow2) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateDesktopComponent(pHTMLWindow.Raw)))
 }
 
 // GetPendingUrl wraps the raw GetPendingUrl call.
@@ -226,8 +227,8 @@ func (self IDocObjectService) GetPendingUrl(pbstrPendingUrl *foundation.BSTR) er
 }
 
 // ActiveElementChanged wraps the raw ActiveElementChanged call.
-func (self IDocObjectService) ActiveElementChanged(pHTMLElement *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.ActiveElementChanged(pHTMLElement)))
+func (self IDocObjectService) ActiveElementChanged(pHTMLElement webmshtmlidiom.IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.ActiveElementChanged(pHTMLElement.Raw)))
 }
 
 // GetUrlSearchComponent wraps the raw GetUrlSearchComponent call.
@@ -253,8 +254,8 @@ func WrapIDownloadBehavior(raw *webinternetexplorer.IDownloadBehavior) IDownload
 }
 
 // StartDownload wraps the raw StartDownload call.
-func (self IDownloadBehavior) StartDownload(bstrUrl foundation.BSTR, pdispCallback *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.StartDownload(bstrUrl, pdispCallback)))
+func (self IDownloadBehavior) StartDownload(bstrUrl foundation.BSTR, pdispCallback systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.StartDownload(bstrUrl, pdispCallback.Raw)))
 }
 
 // IDownloadManager is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IDownloadManager with error-returning methods.
@@ -269,10 +270,10 @@ func WrapIDownloadManager(raw *webinternetexplorer.IDownloadManager) IDownloadMa
 }
 
 // Download wraps the raw Download call.
-func (self IDownloadManager) Download(pmk *systemcom.IMoniker, pbc *systemcom.IBindCtx, dwBindVerb uint32, grfBINDF int32, pBindInfo *systemcom.BINDINFO, pszHeaders string, pszRedir string, uiCP uint32) error {
+func (self IDownloadManager) Download(pmk systemcomidiom.IMoniker, pbc systemcomidiom.IBindCtx, dwBindVerb uint32, grfBINDF int32, pBindInfo *systemcom.BINDINFO, pszHeaders string, pszRedir string, uiCP uint32) error {
 	_pszHeaders := win32.UTF16Ptr(pszHeaders)
 	_pszRedir := win32.UTF16Ptr(pszRedir)
-	return win32.HRESULTError(int32(self.Raw.Download(pmk, pbc, dwBindVerb, grfBINDF, pBindInfo, foundation.PWSTR(_pszHeaders), foundation.PWSTR(_pszRedir), uiCP)))
+	return win32.HRESULTError(int32(self.Raw.Download(pmk.Raw, pbc.Raw, dwBindVerb, grfBINDF, pBindInfo, foundation.PWSTR(_pszHeaders), foundation.PWSTR(_pszRedir), uiCP)))
 }
 
 // IEnumManagerFrames is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IEnumManagerFrames with error-returning methods.
@@ -422,9 +423,9 @@ func WrapIExtensionValidation(raw *webinternetexplorer.IExtensionValidation) IEx
 }
 
 // Validate wraps the raw Validate call.
-func (self IExtensionValidation) Validate(extensionGuid *win32.GUID, extensionModulePath string, extensionFileVersionMS uint32, extensionFileVersionLS uint32, htmlDocumentTop *webmshtml.IHTMLDocument2, htmlDocumentSubframe *webmshtml.IHTMLDocument2, htmlElement *webmshtml.IHTMLElement, contexts webinternetexplorer.ExtensionValidationContexts, results *webinternetexplorer.ExtensionValidationResults) error {
+func (self IExtensionValidation) Validate(extensionGuid *win32.GUID, extensionModulePath string, extensionFileVersionMS uint32, extensionFileVersionLS uint32, htmlDocumentTop webmshtmlidiom.IHTMLDocument2, htmlDocumentSubframe webmshtmlidiom.IHTMLDocument2, htmlElement webmshtmlidiom.IHTMLElement, contexts webinternetexplorer.ExtensionValidationContexts, results *webinternetexplorer.ExtensionValidationResults) error {
 	_extensionModulePath := win32.UTF16Ptr(extensionModulePath)
-	return win32.HRESULTError(int32(self.Raw.Validate(extensionGuid, foundation.PWSTR(_extensionModulePath), extensionFileVersionMS, extensionFileVersionLS, htmlDocumentTop, htmlDocumentSubframe, htmlElement, contexts, results)))
+	return win32.HRESULTError(int32(self.Raw.Validate(extensionGuid, foundation.PWSTR(_extensionModulePath), extensionFileVersionMS, extensionFileVersionLS, htmlDocumentTop.Raw, htmlDocumentSubframe.Raw, htmlElement.Raw, contexts, results)))
 }
 
 // DisplayName wraps the raw DisplayName call.
@@ -444,16 +445,16 @@ func WrapIHTMLPersistData(raw *webinternetexplorer.IHTMLPersistData) IHTMLPersis
 }
 
 // Save wraps the raw Save call.
-func (self IHTMLPersistData) Save(pUnk *systemcom.IUnknown, lType int32) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLPersistData) Save(pUnk systemcomidiom.IUnknown, lType int32) (foundation.VARIANT_BOOL, error) {
 	var _fContinueBroacast foundation.VARIANT_BOOL
-	_hr := self.Raw.Save(pUnk, lType, &_fContinueBroacast)
+	_hr := self.Raw.Save(pUnk.Raw, lType, &_fContinueBroacast)
 	return _fContinueBroacast, win32.HRESULTError(int32(_hr))
 }
 
 // Load wraps the raw Load call.
-func (self IHTMLPersistData) Load(pUnk *systemcom.IUnknown, lType int32) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLPersistData) Load(pUnk systemcomidiom.IUnknown, lType int32) (foundation.VARIANT_BOOL, error) {
 	var _fDoDefault foundation.VARIANT_BOOL
-	_hr := self.Raw.Load(pUnk, lType, &_fDoDefault)
+	_hr := self.Raw.Load(pUnk.Raw, lType, &_fDoDefault)
 	return _fDoDefault, win32.HRESULTError(int32(_hr))
 }
 
@@ -476,10 +477,10 @@ func WrapIHTMLPersistDataOM(raw *webinternetexplorer.IHTMLPersistDataOM) IHTMLPe
 }
 
 // Get_XMLDocument wraps the raw Get_XMLDocument call.
-func (self IHTMLPersistDataOM) Get_XMLDocument() (*systemcom.IDispatch, error) {
+func (self IHTMLPersistDataOM) Get_XMLDocument() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_XMLDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // GetAttribute wraps the raw GetAttribute call.
@@ -506,10 +507,10 @@ func WrapIHTMLUserDataOM(raw *webinternetexplorer.IHTMLUserDataOM) IHTMLUserData
 }
 
 // Get_XMLDocument wraps the raw Get_XMLDocument call.
-func (self IHTMLUserDataOM) Get_XMLDocument() (*systemcom.IDispatch, error) {
+func (self IHTMLUserDataOM) Get_XMLDocument() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_XMLDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Save wraps the raw Save call.
@@ -805,14 +806,14 @@ func (self IIEWebDriverSite) WindowOperation(operationCode uint32, hWnd uint32) 
 }
 
 // DetachWebdriver wraps the raw DetachWebdriver call.
-func (self IIEWebDriverSite) DetachWebdriver(pUnkWD *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.DetachWebdriver(pUnkWD)))
+func (self IIEWebDriverSite) DetachWebdriver(pUnkWD systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.DetachWebdriver(pUnkWD.Raw)))
 }
 
 // GetCapabilityValue wraps the raw GetCapabilityValue call.
-func (self IIEWebDriverSite) GetCapabilityValue(pUnkWD *systemcom.IUnknown, capName string, capValue *systemvariant.VARIANT) error {
+func (self IIEWebDriverSite) GetCapabilityValue(pUnkWD systemcomidiom.IUnknown, capName string, capValue *systemvariant.VARIANT) error {
 	_capName := win32.UTF16Ptr(capName)
-	return win32.HRESULTError(int32(self.Raw.GetCapabilityValue(pUnkWD, foundation.PWSTR(_capName), capValue)))
+	return win32.HRESULTError(int32(self.Raw.GetCapabilityValue(pUnkWD.Raw, foundation.PWSTR(_capName), capValue)))
 }
 
 // IImageDecodeEventSink is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IImageDecodeEventSink with error-returning methods.
@@ -885,13 +886,13 @@ func WrapIImageDecodeFilter(raw *webinternetexplorer.IImageDecodeFilter) IImageD
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IImageDecodeFilter) Initialize(pEventSink *webinternetexplorer.IImageDecodeEventSink) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pEventSink)))
+func (self IImageDecodeFilter) Initialize(pEventSink IImageDecodeEventSink) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pEventSink.Raw)))
 }
 
 // Process wraps the raw Process call.
-func (self IImageDecodeFilter) Process(pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Process(pStream)))
+func (self IImageDecodeFilter) Process(pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Process(pStream.Raw)))
 }
 
 // Terminate wraps the raw Terminate call.
@@ -1010,22 +1011,22 @@ func (self ILayoutRect) Get_honorPageRules() (foundation.VARIANT_BOOL, error) {
 }
 
 // Put_nextRectElement wraps the raw Put_nextRectElement call.
-func (self ILayoutRect) Put_nextRectElement(pElem *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Put_nextRectElement(pElem)))
+func (self ILayoutRect) Put_nextRectElement(pElem systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Put_nextRectElement(pElem.Raw)))
 }
 
 // Get_nextRectElement wraps the raw Get_nextRectElement call.
-func (self ILayoutRect) Get_nextRectElement() (*systemcom.IDispatch, error) {
+func (self ILayoutRect) Get_nextRectElement() (systemcomidiom.IDispatch, error) {
 	var _ppElem *systemcom.IDispatch
 	_hr := self.Raw.Get_nextRectElement(&_ppElem)
-	return _ppElem, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppElem), win32.HRESULTError(int32(_hr))
 }
 
 // Get_contentDocument wraps the raw Get_contentDocument call.
-func (self ILayoutRect) Get_contentDocument() (*systemcom.IDispatch, error) {
+func (self ILayoutRect) Get_contentDocument() (systemcomidiom.IDispatch, error) {
 	var _pDoc *systemcom.IDispatch
 	_hr := self.Raw.Get_contentDocument(&_pDoc)
-	return _pDoc, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_pDoc), win32.HRESULTError(int32(_hr))
 }
 
 // IMapMIMEToCLSID is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IMapMIMEToCLSID with error-returning methods.
@@ -1117,13 +1118,13 @@ func WrapIOpenServiceActivity(raw *webinternetexplorer.IOpenServiceActivity) IOp
 }
 
 // Execute wraps the raw Execute call.
-func (self IOpenServiceActivity) Execute(pInput *webinternetexplorer.IOpenServiceActivityInput, pOutput *webinternetexplorer.IOpenServiceActivityOutputContext) error {
-	return win32.HRESULTError(int32(self.Raw.Execute(pInput, pOutput)))
+func (self IOpenServiceActivity) Execute(pInput IOpenServiceActivityInput, pOutput IOpenServiceActivityOutputContext) error {
+	return win32.HRESULTError(int32(self.Raw.Execute(pInput.Raw, pOutput.Raw)))
 }
 
 // CanExecute wraps the raw CanExecute call.
-func (self IOpenServiceActivity) CanExecute(pInput *webinternetexplorer.IOpenServiceActivityInput, pOutput *webinternetexplorer.IOpenServiceActivityOutputContext, pfCanExecute *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CanExecute(pInput, pOutput, pfCanExecute)))
+func (self IOpenServiceActivity) CanExecute(pInput IOpenServiceActivityInput, pOutput IOpenServiceActivityOutputContext, pfCanExecute *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.CanExecute(pInput.Raw, pOutput.Raw, pfCanExecute)))
 }
 
 // CanExecuteType wraps the raw CanExecuteType call.
@@ -1132,13 +1133,13 @@ func (self IOpenServiceActivity) CanExecuteType(type_ webinternetexplorer.OpenSe
 }
 
 // Preview wraps the raw Preview call.
-func (self IOpenServiceActivity) Preview(pInput *webinternetexplorer.IOpenServiceActivityInput, pOutput *webinternetexplorer.IOpenServiceActivityOutputContext) error {
-	return win32.HRESULTError(int32(self.Raw.Preview(pInput, pOutput)))
+func (self IOpenServiceActivity) Preview(pInput IOpenServiceActivityInput, pOutput IOpenServiceActivityOutputContext) error {
+	return win32.HRESULTError(int32(self.Raw.Preview(pInput.Raw, pOutput.Raw)))
 }
 
 // CanPreview wraps the raw CanPreview call.
-func (self IOpenServiceActivity) CanPreview(pInput *webinternetexplorer.IOpenServiceActivityInput, pOutput *webinternetexplorer.IOpenServiceActivityOutputContext, pfCanPreview *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CanPreview(pInput, pOutput, pfCanPreview)))
+func (self IOpenServiceActivity) CanPreview(pInput IOpenServiceActivityInput, pOutput IOpenServiceActivityOutputContext, pfCanPreview *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.CanPreview(pInput.Raw, pOutput.Raw, pfCanPreview)))
 }
 
 // CanPreviewType wraps the raw CanPreviewType call.
@@ -1147,8 +1148,8 @@ func (self IOpenServiceActivity) CanPreviewType(type_ webinternetexplorer.OpenSe
 }
 
 // GetStatusText wraps the raw GetStatusText call.
-func (self IOpenServiceActivity) GetStatusText(pInput *webinternetexplorer.IOpenServiceActivityInput, pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetStatusText(pInput, pbstrStatusText)))
+func (self IOpenServiceActivity) GetStatusText(pInput IOpenServiceActivityInput, pbstrStatusText *foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.GetStatusText(pInput.Raw, pbstrStatusText)))
 }
 
 // GetHomepageUrl wraps the raw GetHomepageUrl call.
@@ -1230,8 +1231,8 @@ func (self IOpenServiceActivityCategory) GetDefaultActivity(ppDefaultActivity **
 }
 
 // SetDefaultActivity wraps the raw SetDefaultActivity call.
-func (self IOpenServiceActivityCategory) SetDefaultActivity(pActivity *webinternetexplorer.IOpenServiceActivity, hwnd foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.SetDefaultActivity(pActivity, hwnd)))
+func (self IOpenServiceActivityCategory) SetDefaultActivity(pActivity IOpenServiceActivity, hwnd foundation.HWND) error {
+	return win32.HRESULTError(int32(self.Raw.SetDefaultActivity(pActivity.Raw, hwnd)))
 }
 
 // GetName wraps the raw GetName call.
@@ -1240,8 +1241,8 @@ func (self IOpenServiceActivityCategory) GetName(pbstrName *foundation.BSTR) err
 }
 
 // GetActivityEnumerator wraps the raw GetActivityEnumerator call.
-func (self IOpenServiceActivityCategory) GetActivityEnumerator(pInput *webinternetexplorer.IOpenServiceActivityInput, pOutput *webinternetexplorer.IOpenServiceActivityOutputContext, ppEnumActivity **webinternetexplorer.IEnumOpenServiceActivity) error {
-	return win32.HRESULTError(int32(self.Raw.GetActivityEnumerator(pInput, pOutput, ppEnumActivity)))
+func (self IOpenServiceActivityCategory) GetActivityEnumerator(pInput IOpenServiceActivityInput, pOutput IOpenServiceActivityOutputContext, ppEnumActivity **webinternetexplorer.IEnumOpenServiceActivity) error {
+	return win32.HRESULTError(int32(self.Raw.GetActivityEnumerator(pInput.Raw, pOutput.Raw, ppEnumActivity)))
 }
 
 // IOpenServiceActivityInput is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IOpenServiceActivityInput with error-returning methods.
@@ -1320,19 +1321,19 @@ func WrapIOpenServiceActivityOutputContext(raw *webinternetexplorer.IOpenService
 }
 
 // Navigate wraps the raw Navigate call.
-func (self IOpenServiceActivityOutputContext) Navigate(pwzUri string, pwzMethod string, pwzHeaders string, pPostData *systemcom.IStream) error {
+func (self IOpenServiceActivityOutputContext) Navigate(pwzUri string, pwzMethod string, pwzHeaders string, pPostData systemcomidiom.IStream) error {
 	_pwzUri := win32.UTF16Ptr(pwzUri)
 	_pwzMethod := win32.UTF16Ptr(pwzMethod)
 	_pwzHeaders := win32.UTF16Ptr(pwzHeaders)
-	return win32.HRESULTError(int32(self.Raw.Navigate(foundation.PWSTR(_pwzUri), foundation.PWSTR(_pwzMethod), foundation.PWSTR(_pwzHeaders), pPostData)))
+	return win32.HRESULTError(int32(self.Raw.Navigate(foundation.PWSTR(_pwzUri), foundation.PWSTR(_pwzMethod), foundation.PWSTR(_pwzHeaders), pPostData.Raw)))
 }
 
 // CanNavigate wraps the raw CanNavigate call.
-func (self IOpenServiceActivityOutputContext) CanNavigate(pwzUri string, pwzMethod string, pwzHeaders string, pPostData *systemcom.IStream, pfCanNavigate *foundation.BOOL) error {
+func (self IOpenServiceActivityOutputContext) CanNavigate(pwzUri string, pwzMethod string, pwzHeaders string, pPostData systemcomidiom.IStream, pfCanNavigate *foundation.BOOL) error {
 	_pwzUri := win32.UTF16Ptr(pwzUri)
 	_pwzMethod := win32.UTF16Ptr(pwzMethod)
 	_pwzHeaders := win32.UTF16Ptr(pwzHeaders)
-	return win32.HRESULTError(int32(self.Raw.CanNavigate(foundation.PWSTR(_pwzUri), foundation.PWSTR(_pwzMethod), foundation.PWSTR(_pwzHeaders), pPostData, pfCanNavigate)))
+	return win32.HRESULTError(int32(self.Raw.CanNavigate(foundation.PWSTR(_pwzUri), foundation.PWSTR(_pwzMethod), foundation.PWSTR(_pwzHeaders), pPostData.Raw, pfCanNavigate)))
 }
 
 // IOpenServiceManager is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IOpenServiceManager with error-returning methods.
@@ -1353,8 +1354,8 @@ func (self IOpenServiceManager) InstallService(pwzServiceUrl string, ppService *
 }
 
 // UninstallService wraps the raw UninstallService call.
-func (self IOpenServiceManager) UninstallService(pService *webinternetexplorer.IOpenService) error {
-	return win32.HRESULTError(int32(self.Raw.UninstallService(pService)))
+func (self IOpenServiceManager) UninstallService(pService IOpenService) error {
+	return win32.HRESULTError(int32(self.Raw.UninstallService(pService.Raw)))
 }
 
 // GetServiceByID wraps the raw GetServiceByID call.
@@ -1386,13 +1387,13 @@ func WrapIPersistHistory(raw *webinternetexplorer.IPersistHistory) IPersistHisto
 }
 
 // LoadHistory wraps the raw LoadHistory call.
-func (self IPersistHistory) LoadHistory(pStream *systemcom.IStream, pbc *systemcom.IBindCtx) error {
-	return win32.HRESULTError(int32(self.Raw.LoadHistory(pStream, pbc)))
+func (self IPersistHistory) LoadHistory(pStream systemcomidiom.IStream, pbc systemcomidiom.IBindCtx) error {
+	return win32.HRESULTError(int32(self.Raw.LoadHistory(pStream.Raw, pbc.Raw)))
 }
 
 // SaveHistory wraps the raw SaveHistory call.
-func (self IPersistHistory) SaveHistory(pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SaveHistory(pStream)))
+func (self IPersistHistory) SaveHistory(pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SaveHistory(pStream.Raw)))
 }
 
 // SetPositionCookie wraps the raw SetPositionCookie call.
@@ -1417,8 +1418,8 @@ func WrapIPrintTaskRequestFactory(raw *webinternetexplorer.IPrintTaskRequestFact
 }
 
 // CreatePrintTaskRequest wraps the raw CreatePrintTaskRequest call.
-func (self IPrintTaskRequestFactory) CreatePrintTaskRequest(pPrintTaskRequestHandler *webinternetexplorer.IPrintTaskRequestHandler) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePrintTaskRequest(pPrintTaskRequestHandler)))
+func (self IPrintTaskRequestFactory) CreatePrintTaskRequest(pPrintTaskRequestHandler IPrintTaskRequestHandler) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePrintTaskRequest(pPrintTaskRequestHandler.Raw)))
 }
 
 // IPrintTaskRequestHandler is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IPrintTaskRequestHandler with error-returning methods.
@@ -1433,8 +1434,8 @@ func WrapIPrintTaskRequestHandler(raw *webinternetexplorer.IPrintTaskRequestHand
 }
 
 // HandlePrintTaskRequest wraps the raw HandlePrintTaskRequest call.
-func (self IPrintTaskRequestHandler) HandlePrintTaskRequest(pPrintTaskRequest *systemwinrt.IInspectable) error {
-	return win32.HRESULTError(int32(self.Raw.HandlePrintTaskRequest(pPrintTaskRequest)))
+func (self IPrintTaskRequestHandler) HandlePrintTaskRequest(pPrintTaskRequest systemwinrtidiom.IInspectable) error {
+	return win32.HRESULTError(int32(self.Raw.HandlePrintTaskRequest(pPrintTaskRequest.Raw)))
 }
 
 // IScrollableContextMenu is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IScrollableContextMenu with error-returning methods.
@@ -1492,8 +1493,8 @@ func WrapISniffStream(raw *webinternetexplorer.ISniffStream) ISniffStream {
 }
 
 // Init wraps the raw Init call.
-func (self ISniffStream) Init(pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Init(pStream)))
+func (self ISniffStream) Init(pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Init(pStream.Raw)))
 }
 
 // Peek wraps the raw Peek call.
@@ -1624,9 +1625,9 @@ func (self ITargetFrame) GetParentFrame(ppunkParent **systemcom.IUnknown) error 
 }
 
 // FindFrame wraps the raw FindFrame call.
-func (self ITargetFrame) FindFrame(pszTargetName string, ppunkContextFrame *systemcom.IUnknown, dwFlags uint32, ppunkTargetFrame **systemcom.IUnknown) error {
+func (self ITargetFrame) FindFrame(pszTargetName string, ppunkContextFrame systemcomidiom.IUnknown, dwFlags uint32, ppunkTargetFrame **systemcom.IUnknown) error {
 	_pszTargetName := win32.UTF16Ptr(pszTargetName)
-	return win32.HRESULTError(int32(self.Raw.FindFrame(foundation.PWSTR(_pszTargetName), ppunkContextFrame, dwFlags, ppunkTargetFrame)))
+	return win32.HRESULTError(int32(self.Raw.FindFrame(foundation.PWSTR(_pszTargetName), ppunkContextFrame.Raw, dwFlags, ppunkTargetFrame)))
 }
 
 // SetFrameSrc wraps the raw SetFrameSrc call.
@@ -1671,13 +1672,13 @@ func (self ITargetFrame) RemoteNavigate(cLength uint32, pulData *uint32) error {
 }
 
 // OnChildFrameActivate wraps the raw OnChildFrameActivate call.
-func (self ITargetFrame) OnChildFrameActivate(pUnkChildFrame *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnChildFrameActivate(pUnkChildFrame)))
+func (self ITargetFrame) OnChildFrameActivate(pUnkChildFrame systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnChildFrameActivate(pUnkChildFrame.Raw)))
 }
 
 // OnChildFrameDeactivate wraps the raw OnChildFrameDeactivate call.
-func (self ITargetFrame) OnChildFrameDeactivate(pUnkChildFrame *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnChildFrameDeactivate(pUnkChildFrame)))
+func (self ITargetFrame) OnChildFrameDeactivate(pUnkChildFrame systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnChildFrameDeactivate(pUnkChildFrame.Raw)))
 }
 
 // ITargetFrame2 is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.ITargetFrame2 with error-returning methods.
@@ -1773,27 +1774,27 @@ func (self ITargetFramePriv) FindFrameDownwards(pszTargetName string, dwFlags ui
 }
 
 // FindFrameInContext wraps the raw FindFrameInContext call.
-func (self ITargetFramePriv) FindFrameInContext(pszTargetName string, punkContextFrame *systemcom.IUnknown, dwFlags uint32, ppunkTargetFrame **systemcom.IUnknown) error {
+func (self ITargetFramePriv) FindFrameInContext(pszTargetName string, punkContextFrame systemcomidiom.IUnknown, dwFlags uint32, ppunkTargetFrame **systemcom.IUnknown) error {
 	_pszTargetName := win32.UTF16Ptr(pszTargetName)
-	return win32.HRESULTError(int32(self.Raw.FindFrameInContext(foundation.PWSTR(_pszTargetName), punkContextFrame, dwFlags, ppunkTargetFrame)))
+	return win32.HRESULTError(int32(self.Raw.FindFrameInContext(foundation.PWSTR(_pszTargetName), punkContextFrame.Raw, dwFlags, ppunkTargetFrame)))
 }
 
 // OnChildFrameActivate wraps the raw OnChildFrameActivate call.
-func (self ITargetFramePriv) OnChildFrameActivate(pUnkChildFrame *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnChildFrameActivate(pUnkChildFrame)))
+func (self ITargetFramePriv) OnChildFrameActivate(pUnkChildFrame systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnChildFrameActivate(pUnkChildFrame.Raw)))
 }
 
 // OnChildFrameDeactivate wraps the raw OnChildFrameDeactivate call.
-func (self ITargetFramePriv) OnChildFrameDeactivate(pUnkChildFrame *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnChildFrameDeactivate(pUnkChildFrame)))
+func (self ITargetFramePriv) OnChildFrameDeactivate(pUnkChildFrame systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnChildFrameDeactivate(pUnkChildFrame.Raw)))
 }
 
 // NavigateHack wraps the raw NavigateHack call.
-func (self ITargetFramePriv) NavigateHack(grfHLNF uint32, pbc *systemcom.IBindCtx, pibsc *systemcom.IBindStatusCallback, pszTargetName string, pszUrl string, pszLocation string) error {
+func (self ITargetFramePriv) NavigateHack(grfHLNF uint32, pbc systemcomidiom.IBindCtx, pibsc systemcomidiom.IBindStatusCallback, pszTargetName string, pszUrl string, pszLocation string) error {
 	_pszTargetName := win32.UTF16Ptr(pszTargetName)
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	_pszLocation := win32.UTF16Ptr(pszLocation)
-	return win32.HRESULTError(int32(self.Raw.NavigateHack(grfHLNF, pbc, pibsc, foundation.PWSTR(_pszTargetName), foundation.PWSTR(_pszUrl), foundation.PWSTR(_pszLocation))))
+	return win32.HRESULTError(int32(self.Raw.NavigateHack(grfHLNF, pbc.Raw, pibsc.Raw, foundation.PWSTR(_pszTargetName), foundation.PWSTR(_pszUrl), foundation.PWSTR(_pszLocation))))
 }
 
 // FindBrowserByIndex wraps the raw FindBrowserByIndex call.
@@ -1813,10 +1814,10 @@ func WrapITargetFramePriv2(raw *webinternetexplorer.ITargetFramePriv2) ITargetFr
 }
 
 // AggregatedNavigation2 wraps the raw AggregatedNavigation2 call.
-func (self ITargetFramePriv2) AggregatedNavigation2(grfHLNF uint32, pbc *systemcom.IBindCtx, pibsc *systemcom.IBindStatusCallback, pszTargetName string, pUri *systemcom.IUri, pszLocation string) error {
+func (self ITargetFramePriv2) AggregatedNavigation2(grfHLNF uint32, pbc systemcomidiom.IBindCtx, pibsc systemcomidiom.IBindStatusCallback, pszTargetName string, pUri systemcomidiom.IUri, pszLocation string) error {
 	_pszTargetName := win32.UTF16Ptr(pszTargetName)
 	_pszLocation := win32.UTF16Ptr(pszLocation)
-	return win32.HRESULTError(int32(self.Raw.AggregatedNavigation2(grfHLNF, pbc, pibsc, foundation.PWSTR(_pszTargetName), pUri, foundation.PWSTR(_pszLocation))))
+	return win32.HRESULTError(int32(self.Raw.AggregatedNavigation2(grfHLNF, pbc.Raw, pibsc.Raw, foundation.PWSTR(_pszTargetName), pUri.Raw, foundation.PWSTR(_pszLocation))))
 }
 
 // ITargetNotify is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.ITargetNotify with error-returning methods.
@@ -1831,13 +1832,13 @@ func WrapITargetNotify(raw *webinternetexplorer.ITargetNotify) ITargetNotify {
 }
 
 // OnCreate wraps the raw OnCreate call.
-func (self ITargetNotify) OnCreate(pUnkDestination *systemcom.IUnknown, cbCookie uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnCreate(pUnkDestination, cbCookie)))
+func (self ITargetNotify) OnCreate(pUnkDestination systemcomidiom.IUnknown, cbCookie uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnCreate(pUnkDestination.Raw, cbCookie)))
 }
 
 // OnReuse wraps the raw OnReuse call.
-func (self ITargetNotify) OnReuse(pUnkDestination *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnReuse(pUnkDestination)))
+func (self ITargetNotify) OnReuse(pUnkDestination systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnReuse(pUnkDestination.Raw)))
 }
 
 // ITargetNotify2 is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.ITargetNotify2 with error-returning methods.
@@ -1911,8 +1912,8 @@ func WrapITimerService(raw *webinternetexplorer.ITimerService) ITimerService {
 }
 
 // CreateTimer wraps the raw CreateTimer call.
-func (self ITimerService) CreateTimer(pReferenceTimer *webinternetexplorer.ITimer, ppNewTimer **webinternetexplorer.ITimer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTimer(pReferenceTimer, ppNewTimer)))
+func (self ITimerService) CreateTimer(pReferenceTimer ITimer, ppNewTimer **webinternetexplorer.ITimer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTimer(pReferenceTimer.Raw, ppNewTimer)))
 }
 
 // GetNamedTimer wraps the raw GetNamedTimer call.
@@ -1921,8 +1922,8 @@ func (self ITimerService) GetNamedTimer(rguidName *win32.GUID, ppTimer **webinte
 }
 
 // SetNamedTimerReference wraps the raw SetNamedTimerReference call.
-func (self ITimerService) SetNamedTimerReference(rguidName *win32.GUID, pReferenceTimer *webinternetexplorer.ITimer) error {
-	return win32.HRESULTError(int32(self.Raw.SetNamedTimerReference(rguidName, pReferenceTimer)))
+func (self ITimerService) SetNamedTimerReference(rguidName *win32.GUID, pReferenceTimer ITimer) error {
+	return win32.HRESULTError(int32(self.Raw.SetNamedTimerReference(rguidName, pReferenceTimer.Raw)))
 }
 
 // ITimerSink is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.ITimerSink with error-returning methods.
@@ -2037,11 +2038,11 @@ func WrapIUrlHistoryStg2(raw *webinternetexplorer.IUrlHistoryStg2) IUrlHistorySt
 }
 
 // AddUrlAndNotify wraps the raw AddUrlAndNotify call.
-func (self IUrlHistoryStg2) AddUrlAndNotify(pocsUrl string, pocsTitle string, dwFlags uint32, fWriteHistory bool, poctNotify *systemole.IOleCommandTarget, punkISFolder *systemcom.IUnknown) error {
+func (self IUrlHistoryStg2) AddUrlAndNotify(pocsUrl string, pocsTitle string, dwFlags uint32, fWriteHistory bool, poctNotify systemoleidiom.IOleCommandTarget, punkISFolder systemcomidiom.IUnknown) error {
 	_pocsUrl := win32.UTF16Ptr(pocsUrl)
 	_pocsTitle := win32.UTF16Ptr(pocsTitle)
 	_fWriteHistory := foundation.BOOL(win32.Bool32(fWriteHistory))
-	return win32.HRESULTError(int32(self.Raw.AddUrlAndNotify(foundation.PWSTR(_pocsUrl), foundation.PWSTR(_pocsTitle), dwFlags, _fWriteHistory, poctNotify, punkISFolder)))
+	return win32.HRESULTError(int32(self.Raw.AddUrlAndNotify(foundation.PWSTR(_pocsUrl), foundation.PWSTR(_pocsTitle), dwFlags, _fWriteHistory, poctNotify.Raw, punkISFolder.Raw)))
 }
 
 // ClearHistory wraps the raw ClearHistory call.
@@ -2067,13 +2068,13 @@ func (self IViewObjectPresentFlip) NotifyRender(fRecreatePresenter bool) error {
 }
 
 // RenderObjectToBitmap wraps the raw RenderObjectToBitmap call.
-func (self IViewObjectPresentFlip) RenderObjectToBitmap(pBitmap *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RenderObjectToBitmap(pBitmap)))
+func (self IViewObjectPresentFlip) RenderObjectToBitmap(pBitmap systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RenderObjectToBitmap(pBitmap.Raw)))
 }
 
 // RenderObjectToSharedBuffer wraps the raw RenderObjectToSharedBuffer call.
-func (self IViewObjectPresentFlip) RenderObjectToSharedBuffer(pBuffer *webinternetexplorer.ISurfacePresenterFlipBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.RenderObjectToSharedBuffer(pBuffer)))
+func (self IViewObjectPresentFlip) RenderObjectToSharedBuffer(pBuffer ISurfacePresenterFlipBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.RenderObjectToSharedBuffer(pBuffer.Raw)))
 }
 
 // IViewObjectPresentFlip2 is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IViewObjectPresentFlip2 with error-returning methods.
@@ -2104,8 +2105,8 @@ func WrapIViewObjectPresentFlipSite(raw *webinternetexplorer.IViewObjectPresentF
 }
 
 // CreateSurfacePresenterFlip wraps the raw CreateSurfacePresenterFlip call.
-func (self IViewObjectPresentFlipSite) CreateSurfacePresenterFlip(pDevice *systemcom.IUnknown, width uint32, height uint32, backBufferCount uint32, format graphicsdxgicommon.DXGI_FORMAT, mode webmshtml.VIEW_OBJECT_ALPHA_MODE, ppSPFlip **webinternetexplorer.ISurfacePresenterFlip) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSurfacePresenterFlip(pDevice, width, height, backBufferCount, format, mode, ppSPFlip)))
+func (self IViewObjectPresentFlipSite) CreateSurfacePresenterFlip(pDevice systemcomidiom.IUnknown, width uint32, height uint32, backBufferCount uint32, format graphicsdxgicommon.DXGI_FORMAT, mode webmshtml.VIEW_OBJECT_ALPHA_MODE, ppSPFlip **webinternetexplorer.ISurfacePresenterFlip) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSurfacePresenterFlip(pDevice.Raw, width, height, backBufferCount, format, mode, ppSPFlip)))
 }
 
 // GetDeviceLuid wraps the raw GetDeviceLuid call.
@@ -2241,6 +2242,6 @@ func (self Iwfolders) NavigateFrame(bstrUrl foundation.BSTR, bstrTargetFrame fou
 }
 
 // NavigateNoSite wraps the raw NavigateNoSite call.
-func (self Iwfolders) NavigateNoSite(bstrUrl foundation.BSTR, bstrTargetFrame foundation.BSTR, dwhwnd uint32, pwb *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.NavigateNoSite(bstrUrl, bstrTargetFrame, dwhwnd, pwb)))
+func (self Iwfolders) NavigateNoSite(bstrUrl foundation.BSTR, bstrTargetFrame foundation.BSTR, dwhwnd uint32, pwb systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.NavigateNoSite(bstrUrl, bstrTargetFrame, dwhwnd, pwb.Raw)))
 }

@@ -37,8 +37,8 @@ func (self IEnumWbemClassObject) Next(lTimeout int32, uCount uint32, apObjects *
 }
 
 // NextAsync wraps the raw NextAsync call.
-func (self IEnumWbemClassObject) NextAsync(uCount uint32, pSink *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.NextAsync(uCount, pSink)))
+func (self IEnumWbemClassObject) NextAsync(uCount uint32, pSink IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.NextAsync(uCount, pSink.Raw)))
 }
 
 // Clone wraps the raw Clone call.
@@ -347,17 +347,17 @@ func WrapISWbemEventSource(raw *systemwmi.ISWbemEventSource) ISWbemEventSource {
 }
 
 // NextEvent wraps the raw NextEvent call.
-func (self ISWbemEventSource) NextEvent(iTimeoutMs int32) (*systemwmi.ISWbemObject, error) {
+func (self ISWbemEventSource) NextEvent(iTimeoutMs int32) (ISWbemObject, error) {
 	var _objWbemObject *systemwmi.ISWbemObject
 	_hr := self.Raw.NextEvent(iTimeoutMs, &_objWbemObject)
-	return _objWbemObject, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWbemObject), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemEventSource) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+func (self ISWbemEventSource) Get_Security_() (ISWbemSecurity, error) {
 	var _objWbemSecurity *systemwmi.ISWbemSecurity
 	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
-	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
+	return WrapISWbemSecurity(_objWbemSecurity), win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemLastError is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemLastError with error-returning methods.
@@ -383,17 +383,17 @@ func WrapISWbemLocator(raw *systemwmi.ISWbemLocator) ISWbemLocator {
 }
 
 // ConnectServer wraps the raw ConnectServer call.
-func (self ISWbemLocator) ConnectServer(strServer foundation.BSTR, strNamespace foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, strAuthority foundation.BSTR, iSecurityFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemServices, error) {
+func (self ISWbemLocator) ConnectServer(strServer foundation.BSTR, strNamespace foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, strAuthority foundation.BSTR, iSecurityFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemServices, error) {
 	var _objWbemServices *systemwmi.ISWbemServices
-	_hr := self.Raw.ConnectServer(strServer, strNamespace, strUser, strPassword, strLocale, strAuthority, iSecurityFlags, objWbemNamedValueSet, &_objWbemServices)
-	return _objWbemServices, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ConnectServer(strServer, strNamespace, strUser, strPassword, strLocale, strAuthority, iSecurityFlags, objWbemNamedValueSet.Raw, &_objWbemServices)
+	return WrapISWbemServices(_objWbemServices), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemLocator) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+func (self ISWbemLocator) Get_Security_() (ISWbemSecurity, error) {
 	var _objWbemSecurity *systemwmi.ISWbemSecurity
 	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
-	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
+	return WrapISWbemSecurity(_objWbemSecurity), win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemMethod is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemMethod with error-returning methods.
@@ -422,24 +422,24 @@ func (self ISWbemMethod) Get_Origin() (foundation.BSTR, error) {
 }
 
 // Get_InParameters wraps the raw Get_InParameters call.
-func (self ISWbemMethod) Get_InParameters() (*systemwmi.ISWbemObject, error) {
+func (self ISWbemMethod) Get_InParameters() (ISWbemObject, error) {
 	var _objWbemInParameters *systemwmi.ISWbemObject
 	_hr := self.Raw.Get_InParameters(&_objWbemInParameters)
-	return _objWbemInParameters, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWbemInParameters), win32.HRESULTError(int32(_hr))
 }
 
 // Get_OutParameters wraps the raw Get_OutParameters call.
-func (self ISWbemMethod) Get_OutParameters() (*systemwmi.ISWbemObject, error) {
+func (self ISWbemMethod) Get_OutParameters() (ISWbemObject, error) {
 	var _objWbemOutParameters *systemwmi.ISWbemObject
 	_hr := self.Raw.Get_OutParameters(&_objWbemOutParameters)
-	return _objWbemOutParameters, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWbemOutParameters), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Qualifiers_ wraps the raw Get_Qualifiers_ call.
-func (self ISWbemMethod) Get_Qualifiers_() (*systemwmi.ISWbemQualifierSet, error) {
+func (self ISWbemMethod) Get_Qualifiers_() (ISWbemQualifierSet, error) {
 	var _objWbemQualifierSet *systemwmi.ISWbemQualifierSet
 	_hr := self.Raw.Get_Qualifiers_(&_objWbemQualifierSet)
-	return _objWbemQualifierSet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemQualifierSet(_objWbemQualifierSet), win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemMethodSet is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemMethodSet with error-returning methods.
@@ -454,17 +454,17 @@ func WrapISWbemMethodSet(raw *systemwmi.ISWbemMethodSet) ISWbemMethodSet {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemMethodSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISWbemMethodSet) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _pUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_pUnk)
-	return _pUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_pUnk), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemMethodSet) Item(strName foundation.BSTR, iFlags int32) (*systemwmi.ISWbemMethod, error) {
+func (self ISWbemMethodSet) Item(strName foundation.BSTR, iFlags int32) (ISWbemMethod, error) {
 	var _objWbemMethod *systemwmi.ISWbemMethod
 	_hr := self.Raw.Item(strName, iFlags, &_objWbemMethod)
-	return _objWbemMethod, win32.HRESULTError(int32(_hr))
+	return WrapISWbemMethod(_objWbemMethod), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -516,17 +516,17 @@ func WrapISWbemNamedValueSet(raw *systemwmi.ISWbemNamedValueSet) ISWbemNamedValu
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemNamedValueSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISWbemNamedValueSet) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _pUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_pUnk)
-	return _pUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_pUnk), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemNamedValueSet) Item(strName foundation.BSTR, iFlags int32) (*systemwmi.ISWbemNamedValue, error) {
+func (self ISWbemNamedValueSet) Item(strName foundation.BSTR, iFlags int32) (ISWbemNamedValue, error) {
 	var _objWbemNamedValue *systemwmi.ISWbemNamedValue
 	_hr := self.Raw.Item(strName, iFlags, &_objWbemNamedValue)
-	return _objWbemNamedValue, win32.HRESULTError(int32(_hr))
+	return WrapISWbemNamedValue(_objWbemNamedValue), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -537,10 +537,10 @@ func (self ISWbemNamedValueSet) Get_Count() (int32, error) {
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemNamedValueSet) Add(strName foundation.BSTR, varValue *systemvariant.VARIANT, iFlags int32) (*systemwmi.ISWbemNamedValue, error) {
+func (self ISWbemNamedValueSet) Add(strName foundation.BSTR, varValue *systemvariant.VARIANT, iFlags int32) (ISWbemNamedValue, error) {
 	var _objWbemNamedValue *systemwmi.ISWbemNamedValue
 	_hr := self.Raw.Add(strName, varValue, iFlags, &_objWbemNamedValue)
-	return _objWbemNamedValue, win32.HRESULTError(int32(_hr))
+	return WrapISWbemNamedValue(_objWbemNamedValue), win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -549,10 +549,10 @@ func (self ISWbemNamedValueSet) Remove(strName foundation.BSTR, iFlags int32) er
 }
 
 // Clone wraps the raw Clone call.
-func (self ISWbemNamedValueSet) Clone() (*systemwmi.ISWbemNamedValueSet, error) {
+func (self ISWbemNamedValueSet) Clone() (ISWbemNamedValueSet, error) {
 	var _objWbemNamedValueSet *systemwmi.ISWbemNamedValueSet
 	_hr := self.Raw.Clone(&_objWbemNamedValueSet)
-	return _objWbemNamedValueSet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemNamedValueSet(_objWbemNamedValueSet), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteAll wraps the raw DeleteAll call.
@@ -572,92 +572,92 @@ func WrapISWbemObject(raw *systemwmi.ISWbemObject) ISWbemObject {
 }
 
 // Put_ wraps the raw Put_ call.
-func (self ISWbemObject) Put_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectPath, error) {
+func (self ISWbemObject) Put_(iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectPath, error) {
 	var _objWbemObjectPath *systemwmi.ISWbemObjectPath
-	_hr := self.Raw.Put_(iFlags, objWbemNamedValueSet, &_objWbemObjectPath)
-	return _objWbemObjectPath, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Put_(iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectPath)
+	return WrapISWbemObjectPath(_objWbemObjectPath), win32.HRESULTError(int32(_hr))
 }
 
 // PutAsync_ wraps the raw PutAsync_ call.
-func (self ISWbemObject) PutAsync_(objWbemSink *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.PutAsync_(objWbemSink, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemObject) PutAsync_(objWbemSink systemcomidiom.IDispatch, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.PutAsync_(objWbemSink.Raw, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // Delete_ wraps the raw Delete_ call.
-func (self ISWbemObject) Delete_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Delete_(iFlags, objWbemNamedValueSet)))
+func (self ISWbemObject) Delete_(iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Delete_(iFlags, objWbemNamedValueSet.Raw)))
 }
 
 // DeleteAsync_ wraps the raw DeleteAsync_ call.
-func (self ISWbemObject) DeleteAsync_(objWbemSink *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteAsync_(objWbemSink, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemObject) DeleteAsync_(objWbemSink systemcomidiom.IDispatch, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteAsync_(objWbemSink.Raw, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // Instances_ wraps the raw Instances_ call.
-func (self ISWbemObject) Instances_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemObject) Instances_(iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.Instances_(iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Instances_(iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // InstancesAsync_ wraps the raw InstancesAsync_ call.
-func (self ISWbemObject) InstancesAsync_(objWbemSink *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.InstancesAsync_(objWbemSink, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemObject) InstancesAsync_(objWbemSink systemcomidiom.IDispatch, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.InstancesAsync_(objWbemSink.Raw, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // Subclasses_ wraps the raw Subclasses_ call.
-func (self ISWbemObject) Subclasses_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemObject) Subclasses_(iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.Subclasses_(iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Subclasses_(iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // SubclassesAsync_ wraps the raw SubclassesAsync_ call.
-func (self ISWbemObject) SubclassesAsync_(objWbemSink *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SubclassesAsync_(objWbemSink, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemObject) SubclassesAsync_(objWbemSink systemcomidiom.IDispatch, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SubclassesAsync_(objWbemSink.Raw, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // Associators_ wraps the raw Associators_ call.
-func (self ISWbemObject) Associators_(strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemObject) Associators_(strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.Associators_(strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Associators_(strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // AssociatorsAsync_ wraps the raw AssociatorsAsync_ call.
-func (self ISWbemObject) AssociatorsAsync_(objWbemSink *systemcom.IDispatch, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.AssociatorsAsync_(objWbemSink, strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemObject) AssociatorsAsync_(objWbemSink systemcomidiom.IDispatch, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.AssociatorsAsync_(objWbemSink.Raw, strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // References_ wraps the raw References_ call.
-func (self ISWbemObject) References_(strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemObject) References_(strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.References_(strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.References_(strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // ReferencesAsync_ wraps the raw ReferencesAsync_ call.
-func (self ISWbemObject) ReferencesAsync_(objWbemSink *systemcom.IDispatch, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.ReferencesAsync_(objWbemSink, strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemObject) ReferencesAsync_(objWbemSink systemcomidiom.IDispatch, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.ReferencesAsync_(objWbemSink.Raw, strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // ExecMethod_ wraps the raw ExecMethod_ call.
-func (self ISWbemObject) ExecMethod_(strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObject, error) {
+func (self ISWbemObject) ExecMethod_(strMethodName foundation.BSTR, objWbemInParameters systemcomidiom.IDispatch, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObject, error) {
 	var _objWbemOutParameters *systemwmi.ISWbemObject
-	_hr := self.Raw.ExecMethod_(strMethodName, objWbemInParameters, iFlags, objWbemNamedValueSet, &_objWbemOutParameters)
-	return _objWbemOutParameters, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ExecMethod_(strMethodName, objWbemInParameters.Raw, iFlags, objWbemNamedValueSet.Raw, &_objWbemOutParameters)
+	return WrapISWbemObject(_objWbemOutParameters), win32.HRESULTError(int32(_hr))
 }
 
 // ExecMethodAsync_ wraps the raw ExecMethodAsync_ call.
-func (self ISWbemObject) ExecMethodAsync_(objWbemSink *systemcom.IDispatch, strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.ExecMethodAsync_(objWbemSink, strMethodName, objWbemInParameters, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemObject) ExecMethodAsync_(objWbemSink systemcomidiom.IDispatch, strMethodName foundation.BSTR, objWbemInParameters systemcomidiom.IDispatch, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.ExecMethodAsync_(objWbemSink.Raw, strMethodName, objWbemInParameters.Raw, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // Clone_ wraps the raw Clone_ call.
-func (self ISWbemObject) Clone_() (*systemwmi.ISWbemObject, error) {
+func (self ISWbemObject) Clone_() (ISWbemObject, error) {
 	var _objWbemObject *systemwmi.ISWbemObject
 	_hr := self.Raw.Clone_(&_objWbemObject)
-	return _objWbemObject, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWbemObject), win32.HRESULTError(int32(_hr))
 }
 
 // GetObjectText_ wraps the raw GetObjectText_ call.
@@ -668,45 +668,45 @@ func (self ISWbemObject) GetObjectText_(iFlags int32) (foundation.BSTR, error) {
 }
 
 // SpawnDerivedClass_ wraps the raw SpawnDerivedClass_ call.
-func (self ISWbemObject) SpawnDerivedClass_(iFlags int32) (*systemwmi.ISWbemObject, error) {
+func (self ISWbemObject) SpawnDerivedClass_(iFlags int32) (ISWbemObject, error) {
 	var _objWbemObject *systemwmi.ISWbemObject
 	_hr := self.Raw.SpawnDerivedClass_(iFlags, &_objWbemObject)
-	return _objWbemObject, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWbemObject), win32.HRESULTError(int32(_hr))
 }
 
 // SpawnInstance_ wraps the raw SpawnInstance_ call.
-func (self ISWbemObject) SpawnInstance_(iFlags int32) (*systemwmi.ISWbemObject, error) {
+func (self ISWbemObject) SpawnInstance_(iFlags int32) (ISWbemObject, error) {
 	var _objWbemObject *systemwmi.ISWbemObject
 	_hr := self.Raw.SpawnInstance_(iFlags, &_objWbemObject)
-	return _objWbemObject, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWbemObject), win32.HRESULTError(int32(_hr))
 }
 
 // CompareTo_ wraps the raw CompareTo_ call.
-func (self ISWbemObject) CompareTo_(objWbemObject *systemcom.IDispatch, iFlags int32) (foundation.VARIANT_BOOL, error) {
+func (self ISWbemObject) CompareTo_(objWbemObject systemcomidiom.IDispatch, iFlags int32) (foundation.VARIANT_BOOL, error) {
 	var _bResult foundation.VARIANT_BOOL
-	_hr := self.Raw.CompareTo_(objWbemObject, iFlags, &_bResult)
+	_hr := self.Raw.CompareTo_(objWbemObject.Raw, iFlags, &_bResult)
 	return _bResult, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Qualifiers_ wraps the raw Get_Qualifiers_ call.
-func (self ISWbemObject) Get_Qualifiers_() (*systemwmi.ISWbemQualifierSet, error) {
+func (self ISWbemObject) Get_Qualifiers_() (ISWbemQualifierSet, error) {
 	var _objWbemQualifierSet *systemwmi.ISWbemQualifierSet
 	_hr := self.Raw.Get_Qualifiers_(&_objWbemQualifierSet)
-	return _objWbemQualifierSet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemQualifierSet(_objWbemQualifierSet), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Properties_ wraps the raw Get_Properties_ call.
-func (self ISWbemObject) Get_Properties_() (*systemwmi.ISWbemPropertySet, error) {
+func (self ISWbemObject) Get_Properties_() (ISWbemPropertySet, error) {
 	var _objWbemPropertySet *systemwmi.ISWbemPropertySet
 	_hr := self.Raw.Get_Properties_(&_objWbemPropertySet)
-	return _objWbemPropertySet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemPropertySet(_objWbemPropertySet), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Methods_ wraps the raw Get_Methods_ call.
-func (self ISWbemObject) Get_Methods_() (*systemwmi.ISWbemMethodSet, error) {
+func (self ISWbemObject) Get_Methods_() (ISWbemMethodSet, error) {
 	var _objWbemMethodSet *systemwmi.ISWbemMethodSet
 	_hr := self.Raw.Get_Methods_(&_objWbemMethodSet)
-	return _objWbemMethodSet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemMethodSet(_objWbemMethodSet), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Derivation_ wraps the raw Get_Derivation_ call.
@@ -717,17 +717,17 @@ func (self ISWbemObject) Get_Derivation_() (systemvariant.VARIANT, error) {
 }
 
 // Get_Path_ wraps the raw Get_Path_ call.
-func (self ISWbemObject) Get_Path_() (*systemwmi.ISWbemObjectPath, error) {
+func (self ISWbemObject) Get_Path_() (ISWbemObjectPath, error) {
 	var _objWbemObjectPath *systemwmi.ISWbemObjectPath
 	_hr := self.Raw.Get_Path_(&_objWbemObjectPath)
-	return _objWbemObjectPath, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObjectPath(_objWbemObjectPath), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemObject) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+func (self ISWbemObject) Get_Security_() (ISWbemSecurity, error) {
 	var _objWbemSecurity *systemwmi.ISWbemSecurity
 	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
-	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
+	return WrapISWbemSecurity(_objWbemSecurity), win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemObjectEx is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemObjectEx with error-returning methods.
@@ -742,27 +742,27 @@ func WrapISWbemObjectEx(raw *systemwmi.ISWbemObjectEx) ISWbemObjectEx {
 }
 
 // Refresh_ wraps the raw Refresh_ call.
-func (self ISWbemObjectEx) Refresh_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Refresh_(iFlags, objWbemNamedValueSet)))
+func (self ISWbemObjectEx) Refresh_(iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Refresh_(iFlags, objWbemNamedValueSet.Raw)))
 }
 
 // Get_SystemProperties_ wraps the raw Get_SystemProperties_ call.
-func (self ISWbemObjectEx) Get_SystemProperties_() (*systemwmi.ISWbemPropertySet, error) {
+func (self ISWbemObjectEx) Get_SystemProperties_() (ISWbemPropertySet, error) {
 	var _objWbemPropertySet *systemwmi.ISWbemPropertySet
 	_hr := self.Raw.Get_SystemProperties_(&_objWbemPropertySet)
-	return _objWbemPropertySet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemPropertySet(_objWbemPropertySet), win32.HRESULTError(int32(_hr))
 }
 
 // GetText_ wraps the raw GetText_ call.
-func (self ISWbemObjectEx) GetText_(iObjectTextFormat systemwmi.WbemObjectTextFormatEnum, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (foundation.BSTR, error) {
+func (self ISWbemObjectEx) GetText_(iObjectTextFormat systemwmi.WbemObjectTextFormatEnum, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (foundation.BSTR, error) {
 	var _bsText foundation.BSTR
-	_hr := self.Raw.GetText_(iObjectTextFormat, iFlags, objWbemNamedValueSet, &_bsText)
+	_hr := self.Raw.GetText_(iObjectTextFormat, iFlags, objWbemNamedValueSet.Raw, &_bsText)
 	return _bsText, win32.HRESULTError(int32(_hr))
 }
 
 // SetFromText_ wraps the raw SetFromText_ call.
-func (self ISWbemObjectEx) SetFromText_(bsText foundation.BSTR, iObjectTextFormat systemwmi.WbemObjectTextFormatEnum, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SetFromText_(bsText, iObjectTextFormat, iFlags, objWbemNamedValueSet)))
+func (self ISWbemObjectEx) SetFromText_(bsText foundation.BSTR, iObjectTextFormat systemwmi.WbemObjectTextFormatEnum, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SetFromText_(bsText, iObjectTextFormat, iFlags, objWbemNamedValueSet.Raw)))
 }
 
 // ISWbemObjectPath is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemObjectPath with error-returning methods.
@@ -880,17 +880,17 @@ func (self ISWbemObjectPath) SetAsSingleton() error {
 }
 
 // Get_Keys wraps the raw Get_Keys call.
-func (self ISWbemObjectPath) Get_Keys() (*systemwmi.ISWbemNamedValueSet, error) {
+func (self ISWbemObjectPath) Get_Keys() (ISWbemNamedValueSet, error) {
 	var _objWbemNamedValueSet *systemwmi.ISWbemNamedValueSet
 	_hr := self.Raw.Get_Keys(&_objWbemNamedValueSet)
-	return _objWbemNamedValueSet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemNamedValueSet(_objWbemNamedValueSet), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemObjectPath) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+func (self ISWbemObjectPath) Get_Security_() (ISWbemSecurity, error) {
 	var _objWbemSecurity *systemwmi.ISWbemSecurity
 	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
-	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
+	return WrapISWbemSecurity(_objWbemSecurity), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Locale wraps the raw Get_Locale call.
@@ -929,17 +929,17 @@ func WrapISWbemObjectSet(raw *systemwmi.ISWbemObjectSet) ISWbemObjectSet {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemObjectSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISWbemObjectSet) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _pUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_pUnk)
-	return _pUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_pUnk), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemObjectSet) Item(strObjectPath foundation.BSTR, iFlags int32) (*systemwmi.ISWbemObject, error) {
+func (self ISWbemObjectSet) Item(strObjectPath foundation.BSTR, iFlags int32) (ISWbemObject, error) {
 	var _objWbemObject *systemwmi.ISWbemObject
 	_hr := self.Raw.Item(strObjectPath, iFlags, &_objWbemObject)
-	return _objWbemObject, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWbemObject), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -950,17 +950,17 @@ func (self ISWbemObjectSet) Get_Count() (int32, error) {
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemObjectSet) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+func (self ISWbemObjectSet) Get_Security_() (ISWbemSecurity, error) {
 	var _objWbemSecurity *systemwmi.ISWbemSecurity
 	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
-	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
+	return WrapISWbemSecurity(_objWbemSecurity), win32.HRESULTError(int32(_hr))
 }
 
 // ItemIndex wraps the raw ItemIndex call.
-func (self ISWbemObjectSet) ItemIndex(lIndex int32) (*systemwmi.ISWbemObject, error) {
+func (self ISWbemObjectSet) ItemIndex(lIndex int32) (ISWbemObject, error) {
 	var _objWbemObject *systemwmi.ISWbemObject
 	_hr := self.Raw.ItemIndex(lIndex, &_objWbemObject)
-	return _objWbemObject, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWbemObject), win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemPrivilege is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemPrivilege with error-returning methods.
@@ -1019,17 +1019,17 @@ func WrapISWbemPrivilegeSet(raw *systemwmi.ISWbemPrivilegeSet) ISWbemPrivilegeSe
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemPrivilegeSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISWbemPrivilegeSet) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _pUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_pUnk)
-	return _pUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_pUnk), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemPrivilegeSet) Item(iPrivilege systemwmi.WbemPrivilegeEnum) (*systemwmi.ISWbemPrivilege, error) {
+func (self ISWbemPrivilegeSet) Item(iPrivilege systemwmi.WbemPrivilegeEnum) (ISWbemPrivilege, error) {
 	var _objWbemPrivilege *systemwmi.ISWbemPrivilege
 	_hr := self.Raw.Item(iPrivilege, &_objWbemPrivilege)
-	return _objWbemPrivilege, win32.HRESULTError(int32(_hr))
+	return WrapISWbemPrivilege(_objWbemPrivilege), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -1040,10 +1040,10 @@ func (self ISWbemPrivilegeSet) Get_Count() (int32, error) {
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemPrivilegeSet) Add(iPrivilege systemwmi.WbemPrivilegeEnum, bIsEnabled foundation.VARIANT_BOOL) (*systemwmi.ISWbemPrivilege, error) {
+func (self ISWbemPrivilegeSet) Add(iPrivilege systemwmi.WbemPrivilegeEnum, bIsEnabled foundation.VARIANT_BOOL) (ISWbemPrivilege, error) {
 	var _objWbemPrivilege *systemwmi.ISWbemPrivilege
 	_hr := self.Raw.Add(iPrivilege, bIsEnabled, &_objWbemPrivilege)
-	return _objWbemPrivilege, win32.HRESULTError(int32(_hr))
+	return WrapISWbemPrivilege(_objWbemPrivilege), win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1057,10 +1057,10 @@ func (self ISWbemPrivilegeSet) DeleteAll() error {
 }
 
 // AddAsString wraps the raw AddAsString call.
-func (self ISWbemPrivilegeSet) AddAsString(strPrivilege foundation.BSTR, bIsEnabled foundation.VARIANT_BOOL) (*systemwmi.ISWbemPrivilege, error) {
+func (self ISWbemPrivilegeSet) AddAsString(strPrivilege foundation.BSTR, bIsEnabled foundation.VARIANT_BOOL) (ISWbemPrivilege, error) {
 	var _objWbemPrivilege *systemwmi.ISWbemPrivilege
 	_hr := self.Raw.AddAsString(strPrivilege, bIsEnabled, &_objWbemPrivilege)
-	return _objWbemPrivilege, win32.HRESULTError(int32(_hr))
+	return WrapISWbemPrivilege(_objWbemPrivilege), win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemProperty is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemProperty with error-returning methods.
@@ -1115,10 +1115,10 @@ func (self ISWbemProperty) Get_CIMType() (systemwmi.WbemCimtypeEnum, error) {
 }
 
 // Get_Qualifiers_ wraps the raw Get_Qualifiers_ call.
-func (self ISWbemProperty) Get_Qualifiers_() (*systemwmi.ISWbemQualifierSet, error) {
+func (self ISWbemProperty) Get_Qualifiers_() (ISWbemQualifierSet, error) {
 	var _objWbemQualifierSet *systemwmi.ISWbemQualifierSet
 	_hr := self.Raw.Get_Qualifiers_(&_objWbemQualifierSet)
-	return _objWbemQualifierSet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemQualifierSet(_objWbemQualifierSet), win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsArray wraps the raw Get_IsArray call.
@@ -1140,17 +1140,17 @@ func WrapISWbemPropertySet(raw *systemwmi.ISWbemPropertySet) ISWbemPropertySet {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemPropertySet) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISWbemPropertySet) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _pUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_pUnk)
-	return _pUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_pUnk), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemPropertySet) Item(strName foundation.BSTR, iFlags int32) (*systemwmi.ISWbemProperty, error) {
+func (self ISWbemPropertySet) Item(strName foundation.BSTR, iFlags int32) (ISWbemProperty, error) {
 	var _objWbemProperty *systemwmi.ISWbemProperty
 	_hr := self.Raw.Item(strName, iFlags, &_objWbemProperty)
-	return _objWbemProperty, win32.HRESULTError(int32(_hr))
+	return WrapISWbemProperty(_objWbemProperty), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -1161,10 +1161,10 @@ func (self ISWbemPropertySet) Get_Count() (int32, error) {
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemPropertySet) Add(strName foundation.BSTR, iCIMType systemwmi.WbemCimtypeEnum, bIsArray foundation.VARIANT_BOOL, iFlags int32) (*systemwmi.ISWbemProperty, error) {
+func (self ISWbemPropertySet) Add(strName foundation.BSTR, iCIMType systemwmi.WbemCimtypeEnum, bIsArray foundation.VARIANT_BOOL, iFlags int32) (ISWbemProperty, error) {
 	var _objWbemProperty *systemwmi.ISWbemProperty
 	_hr := self.Raw.Add(strName, iCIMType, bIsArray, iFlags, &_objWbemProperty)
-	return _objWbemProperty, win32.HRESULTError(int32(_hr))
+	return WrapISWbemProperty(_objWbemProperty), win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1264,17 +1264,17 @@ func WrapISWbemQualifierSet(raw *systemwmi.ISWbemQualifierSet) ISWbemQualifierSe
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemQualifierSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISWbemQualifierSet) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _pUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_pUnk)
-	return _pUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_pUnk), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemQualifierSet) Item(name foundation.BSTR, iFlags int32) (*systemwmi.ISWbemQualifier, error) {
+func (self ISWbemQualifierSet) Item(name foundation.BSTR, iFlags int32) (ISWbemQualifier, error) {
 	var _objWbemQualifier *systemwmi.ISWbemQualifier
 	_hr := self.Raw.Item(name, iFlags, &_objWbemQualifier)
-	return _objWbemQualifier, win32.HRESULTError(int32(_hr))
+	return WrapISWbemQualifier(_objWbemQualifier), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -1285,10 +1285,10 @@ func (self ISWbemQualifierSet) Get_Count() (int32, error) {
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemQualifierSet) Add(strName foundation.BSTR, varVal *systemvariant.VARIANT, bPropagatesToSubclass foundation.VARIANT_BOOL, bPropagatesToInstance foundation.VARIANT_BOOL, bIsOverridable foundation.VARIANT_BOOL, iFlags int32) (*systemwmi.ISWbemQualifier, error) {
+func (self ISWbemQualifierSet) Add(strName foundation.BSTR, varVal *systemvariant.VARIANT, bPropagatesToSubclass foundation.VARIANT_BOOL, bPropagatesToInstance foundation.VARIANT_BOOL, bIsOverridable foundation.VARIANT_BOOL, iFlags int32) (ISWbemQualifier, error) {
 	var _objWbemQualifier *systemwmi.ISWbemQualifier
 	_hr := self.Raw.Add(strName, varVal, bPropagatesToSubclass, bPropagatesToInstance, bIsOverridable, iFlags, &_objWbemQualifier)
-	return _objWbemQualifier, win32.HRESULTError(int32(_hr))
+	return WrapISWbemQualifier(_objWbemQualifier), win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1315,10 +1315,10 @@ func (self ISWbemRefreshableItem) Get_Index() (int32, error) {
 }
 
 // Get_Refresher wraps the raw Get_Refresher call.
-func (self ISWbemRefreshableItem) Get_Refresher() (*systemwmi.ISWbemRefresher, error) {
+func (self ISWbemRefreshableItem) Get_Refresher() (ISWbemRefresher, error) {
 	var _objWbemRefresher *systemwmi.ISWbemRefresher
 	_hr := self.Raw.Get_Refresher(&_objWbemRefresher)
-	return _objWbemRefresher, win32.HRESULTError(int32(_hr))
+	return WrapISWbemRefresher(_objWbemRefresher), win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsSet wraps the raw Get_IsSet call.
@@ -1329,17 +1329,17 @@ func (self ISWbemRefreshableItem) Get_IsSet() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_Object wraps the raw Get_Object call.
-func (self ISWbemRefreshableItem) Get_Object() (*systemwmi.ISWbemObjectEx, error) {
+func (self ISWbemRefreshableItem) Get_Object() (ISWbemObjectEx, error) {
 	var _objWbemObject *systemwmi.ISWbemObjectEx
 	_hr := self.Raw.Get_Object(&_objWbemObject)
-	return _objWbemObject, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObjectEx(_objWbemObject), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ObjectSet wraps the raw Get_ObjectSet call.
-func (self ISWbemRefreshableItem) Get_ObjectSet() (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemRefreshableItem) Get_ObjectSet() (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
 	_hr := self.Raw.Get_ObjectSet(&_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1359,17 +1359,17 @@ func WrapISWbemRefresher(raw *systemwmi.ISWbemRefresher) ISWbemRefresher {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemRefresher) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISWbemRefresher) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _pUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_pUnk)
-	return _pUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_pUnk), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemRefresher) Item(iIndex int32) (*systemwmi.ISWbemRefreshableItem, error) {
+func (self ISWbemRefresher) Item(iIndex int32) (ISWbemRefreshableItem, error) {
 	var _objWbemRefreshableItem *systemwmi.ISWbemRefreshableItem
 	_hr := self.Raw.Item(iIndex, &_objWbemRefreshableItem)
-	return _objWbemRefreshableItem, win32.HRESULTError(int32(_hr))
+	return WrapISWbemRefreshableItem(_objWbemRefreshableItem), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -1380,17 +1380,17 @@ func (self ISWbemRefresher) Get_Count() (int32, error) {
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemRefresher) Add(objWbemServices *systemwmi.ISWbemServicesEx, bsInstancePath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemRefreshableItem, error) {
+func (self ISWbemRefresher) Add(objWbemServices ISWbemServicesEx, bsInstancePath foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemRefreshableItem, error) {
 	var _objWbemRefreshableItem *systemwmi.ISWbemRefreshableItem
-	_hr := self.Raw.Add(objWbemServices, bsInstancePath, iFlags, objWbemNamedValueSet, &_objWbemRefreshableItem)
-	return _objWbemRefreshableItem, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Add(objWbemServices.Raw, bsInstancePath, iFlags, objWbemNamedValueSet.Raw, &_objWbemRefreshableItem)
+	return WrapISWbemRefreshableItem(_objWbemRefreshableItem), win32.HRESULTError(int32(_hr))
 }
 
 // AddEnum wraps the raw AddEnum call.
-func (self ISWbemRefresher) AddEnum(objWbemServices *systemwmi.ISWbemServicesEx, bsClassName foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemRefreshableItem, error) {
+func (self ISWbemRefresher) AddEnum(objWbemServices ISWbemServicesEx, bsClassName foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemRefreshableItem, error) {
 	var _objWbemRefreshableItem *systemwmi.ISWbemRefreshableItem
-	_hr := self.Raw.AddEnum(objWbemServices, bsClassName, iFlags, objWbemNamedValueSet, &_objWbemRefreshableItem)
-	return _objWbemRefreshableItem, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AddEnum(objWbemServices.Raw, bsClassName, iFlags, objWbemNamedValueSet.Raw, &_objWbemRefreshableItem)
+	return WrapISWbemRefreshableItem(_objWbemRefreshableItem), win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1456,10 +1456,10 @@ func (self ISWbemSecurity) Put_AuthenticationLevel(iAuthenticationLevel systemwm
 }
 
 // Get_Privileges wraps the raw Get_Privileges call.
-func (self ISWbemSecurity) Get_Privileges() (*systemwmi.ISWbemPrivilegeSet, error) {
+func (self ISWbemSecurity) Get_Privileges() (ISWbemPrivilegeSet, error) {
 	var _objWbemPrivilegeSet *systemwmi.ISWbemPrivilegeSet
 	_hr := self.Raw.Get_Privileges(&_objWbemPrivilegeSet)
-	return _objWbemPrivilegeSet, win32.HRESULTError(int32(_hr))
+	return WrapISWbemPrivilegeSet(_objWbemPrivilegeSet), win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemServices is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemServices with error-returning methods.
@@ -1474,116 +1474,116 @@ func WrapISWbemServices(raw *systemwmi.ISWbemServices) ISWbemServices {
 }
 
 // Get wraps the raw Get call.
-func (self ISWbemServices) Get(strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObject, error) {
+func (self ISWbemServices) Get(strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObject, error) {
 	var _objWbemObject *systemwmi.ISWbemObject
-	_hr := self.Raw.Get(strObjectPath, iFlags, objWbemNamedValueSet, &_objWbemObject)
-	return _objWbemObject, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Get(strObjectPath, iFlags, objWbemNamedValueSet.Raw, &_objWbemObject)
+	return WrapISWbemObject(_objWbemObject), win32.HRESULTError(int32(_hr))
 }
 
 // GetAsync wraps the raw GetAsync call.
-func (self ISWbemServices) GetAsync(objWbemSink *systemcom.IDispatch, strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetAsync(objWbemSink, strObjectPath, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) GetAsync(objWbemSink systemcomidiom.IDispatch, strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.GetAsync(objWbemSink.Raw, strObjectPath, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // Delete wraps the raw Delete call.
-func (self ISWbemServices) Delete(strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Delete(strObjectPath, iFlags, objWbemNamedValueSet)))
+func (self ISWbemServices) Delete(strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Delete(strObjectPath, iFlags, objWbemNamedValueSet.Raw)))
 }
 
 // DeleteAsync wraps the raw DeleteAsync call.
-func (self ISWbemServices) DeleteAsync(objWbemSink *systemcom.IDispatch, strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteAsync(objWbemSink, strObjectPath, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) DeleteAsync(objWbemSink systemcomidiom.IDispatch, strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteAsync(objWbemSink.Raw, strObjectPath, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // InstancesOf wraps the raw InstancesOf call.
-func (self ISWbemServices) InstancesOf(strClass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemServices) InstancesOf(strClass foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.InstancesOf(strClass, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.InstancesOf(strClass, iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // InstancesOfAsync wraps the raw InstancesOfAsync call.
-func (self ISWbemServices) InstancesOfAsync(objWbemSink *systemcom.IDispatch, strClass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.InstancesOfAsync(objWbemSink, strClass, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) InstancesOfAsync(objWbemSink systemcomidiom.IDispatch, strClass foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.InstancesOfAsync(objWbemSink.Raw, strClass, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // SubclassesOf wraps the raw SubclassesOf call.
-func (self ISWbemServices) SubclassesOf(strSuperclass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemServices) SubclassesOf(strSuperclass foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.SubclassesOf(strSuperclass, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SubclassesOf(strSuperclass, iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // SubclassesOfAsync wraps the raw SubclassesOfAsync call.
-func (self ISWbemServices) SubclassesOfAsync(objWbemSink *systemcom.IDispatch, strSuperclass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SubclassesOfAsync(objWbemSink, strSuperclass, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) SubclassesOfAsync(objWbemSink systemcomidiom.IDispatch, strSuperclass foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SubclassesOfAsync(objWbemSink.Raw, strSuperclass, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // ExecQuery wraps the raw ExecQuery call.
-func (self ISWbemServices) ExecQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemServices) ExecQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.ExecQuery(strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ExecQuery(strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // ExecQueryAsync wraps the raw ExecQueryAsync call.
-func (self ISWbemServices) ExecQueryAsync(objWbemSink *systemcom.IDispatch, strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, lFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.ExecQueryAsync(objWbemSink, strQuery, strQueryLanguage, lFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) ExecQueryAsync(objWbemSink systemcomidiom.IDispatch, strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, lFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.ExecQueryAsync(objWbemSink.Raw, strQuery, strQueryLanguage, lFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // AssociatorsOf wraps the raw AssociatorsOf call.
-func (self ISWbemServices) AssociatorsOf(strObjectPath foundation.BSTR, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemServices) AssociatorsOf(strObjectPath foundation.BSTR, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.AssociatorsOf(strObjectPath, strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AssociatorsOf(strObjectPath, strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // AssociatorsOfAsync wraps the raw AssociatorsOfAsync call.
-func (self ISWbemServices) AssociatorsOfAsync(objWbemSink *systemcom.IDispatch, strObjectPath foundation.BSTR, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.AssociatorsOfAsync(objWbemSink, strObjectPath, strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) AssociatorsOfAsync(objWbemSink systemcomidiom.IDispatch, strObjectPath foundation.BSTR, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.AssociatorsOfAsync(objWbemSink.Raw, strObjectPath, strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // ReferencesTo wraps the raw ReferencesTo call.
-func (self ISWbemServices) ReferencesTo(strObjectPath foundation.BSTR, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+func (self ISWbemServices) ReferencesTo(strObjectPath foundation.BSTR, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectSet, error) {
 	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
-	_hr := self.Raw.ReferencesTo(strObjectPath, strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
-	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReferencesTo(strObjectPath, strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectSet)
+	return WrapISWbemObjectSet(_objWbemObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // ReferencesToAsync wraps the raw ReferencesToAsync call.
-func (self ISWbemServices) ReferencesToAsync(objWbemSink *systemcom.IDispatch, strObjectPath foundation.BSTR, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.ReferencesToAsync(objWbemSink, strObjectPath, strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) ReferencesToAsync(objWbemSink systemcomidiom.IDispatch, strObjectPath foundation.BSTR, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.ReferencesToAsync(objWbemSink.Raw, strObjectPath, strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // ExecNotificationQuery wraps the raw ExecNotificationQuery call.
-func (self ISWbemServices) ExecNotificationQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemEventSource, error) {
+func (self ISWbemServices) ExecNotificationQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemEventSource, error) {
 	var _objWbemEventSource *systemwmi.ISWbemEventSource
-	_hr := self.Raw.ExecNotificationQuery(strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet, &_objWbemEventSource)
-	return _objWbemEventSource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ExecNotificationQuery(strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet.Raw, &_objWbemEventSource)
+	return WrapISWbemEventSource(_objWbemEventSource), win32.HRESULTError(int32(_hr))
 }
 
 // ExecNotificationQueryAsync wraps the raw ExecNotificationQueryAsync call.
-func (self ISWbemServices) ExecNotificationQueryAsync(objWbemSink *systemcom.IDispatch, strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.ExecNotificationQueryAsync(objWbemSink, strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) ExecNotificationQueryAsync(objWbemSink systemcomidiom.IDispatch, strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.ExecNotificationQueryAsync(objWbemSink.Raw, strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // ExecMethod wraps the raw ExecMethod call.
-func (self ISWbemServices) ExecMethod(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObject, error) {
+func (self ISWbemServices) ExecMethod(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, objWbemInParameters systemcomidiom.IDispatch, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObject, error) {
 	var _objWbemOutParameters *systemwmi.ISWbemObject
-	_hr := self.Raw.ExecMethod(strObjectPath, strMethodName, objWbemInParameters, iFlags, objWbemNamedValueSet, &_objWbemOutParameters)
-	return _objWbemOutParameters, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ExecMethod(strObjectPath, strMethodName, objWbemInParameters.Raw, iFlags, objWbemNamedValueSet.Raw, &_objWbemOutParameters)
+	return WrapISWbemObject(_objWbemOutParameters), win32.HRESULTError(int32(_hr))
 }
 
 // ExecMethodAsync wraps the raw ExecMethodAsync call.
-func (self ISWbemServices) ExecMethodAsync(objWbemSink *systemcom.IDispatch, strObjectPath foundation.BSTR, strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.ExecMethodAsync(objWbemSink, strObjectPath, strMethodName, objWbemInParameters, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServices) ExecMethodAsync(objWbemSink systemcomidiom.IDispatch, strObjectPath foundation.BSTR, strMethodName foundation.BSTR, objWbemInParameters systemcomidiom.IDispatch, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.ExecMethodAsync(objWbemSink.Raw, strObjectPath, strMethodName, objWbemInParameters.Raw, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemServices) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+func (self ISWbemServices) Get_Security_() (ISWbemSecurity, error) {
 	var _objWbemSecurity *systemwmi.ISWbemSecurity
 	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
-	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
+	return WrapISWbemSecurity(_objWbemSecurity), win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemServicesEx is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemServicesEx with error-returning methods.
@@ -1598,15 +1598,15 @@ func WrapISWbemServicesEx(raw *systemwmi.ISWbemServicesEx) ISWbemServicesEx {
 }
 
 // Put wraps the raw Put call.
-func (self ISWbemServicesEx) Put(objWbemObject *systemwmi.ISWbemObjectEx, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectPath, error) {
+func (self ISWbemServicesEx) Put(objWbemObject ISWbemObjectEx, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch) (ISWbemObjectPath, error) {
 	var _objWbemObjectPath *systemwmi.ISWbemObjectPath
-	_hr := self.Raw.Put(objWbemObject, iFlags, objWbemNamedValueSet, &_objWbemObjectPath)
-	return _objWbemObjectPath, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Put(objWbemObject.Raw, iFlags, objWbemNamedValueSet.Raw, &_objWbemObjectPath)
+	return WrapISWbemObjectPath(_objWbemObjectPath), win32.HRESULTError(int32(_hr))
 }
 
 // PutAsync wraps the raw PutAsync call.
-func (self ISWbemServicesEx) PutAsync(objWbemSink *systemwmi.ISWbemSink, objWbemObject *systemwmi.ISWbemObjectEx, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemAsyncContext *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.PutAsync(objWbemSink, objWbemObject, iFlags, objWbemNamedValueSet, objWbemAsyncContext)))
+func (self ISWbemServicesEx) PutAsync(objWbemSink ISWbemSink, objWbemObject ISWbemObjectEx, iFlags int32, objWbemNamedValueSet systemcomidiom.IDispatch, objWbemAsyncContext systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.PutAsync(objWbemSink.Raw, objWbemObject.Raw, iFlags, objWbemNamedValueSet.Raw, objWbemAsyncContext.Raw)))
 }
 
 // ISWbemSink is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemSink with error-returning methods.
@@ -1648,8 +1648,8 @@ func WrapIUnsecuredApartment(raw *systemwmi.IUnsecuredApartment) IUnsecuredApart
 }
 
 // CreateObjectStub wraps the raw CreateObjectStub call.
-func (self IUnsecuredApartment) CreateObjectStub(pObject *systemcom.IUnknown, ppStub **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateObjectStub(pObject, ppStub)))
+func (self IUnsecuredApartment) CreateObjectStub(pObject systemcomidiom.IUnknown, ppStub **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateObjectStub(pObject.Raw, ppStub)))
 }
 
 // IWMIExtension is an idiomatic wrapper over the raw COM interface System.Wmi.IWMIExtension with error-returning methods.
@@ -1671,17 +1671,17 @@ func (self IWMIExtension) Get_WMIObjectPath() (foundation.BSTR, error) {
 }
 
 // GetWMIObject wraps the raw GetWMIObject call.
-func (self IWMIExtension) GetWMIObject() (*systemwmi.ISWbemObject, error) {
+func (self IWMIExtension) GetWMIObject() (ISWbemObject, error) {
 	var _objWMIObject *systemwmi.ISWbemObject
 	_hr := self.Raw.GetWMIObject(&_objWMIObject)
-	return _objWMIObject, win32.HRESULTError(int32(_hr))
+	return WrapISWbemObject(_objWMIObject), win32.HRESULTError(int32(_hr))
 }
 
 // GetWMIServices wraps the raw GetWMIServices call.
-func (self IWMIExtension) GetWMIServices() (*systemwmi.ISWbemServices, error) {
+func (self IWMIExtension) GetWMIServices() (ISWbemServices, error) {
 	var _objWMIServices *systemwmi.ISWbemServices
 	_hr := self.Raw.GetWMIServices(&_objWMIServices)
-	return _objWMIServices, win32.HRESULTError(int32(_hr))
+	return WrapISWbemServices(_objWMIServices), win32.HRESULTError(int32(_hr))
 }
 
 // IWbemAddressResolution is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemAddressResolution with error-returning methods.
@@ -1858,8 +1858,8 @@ func (self IWbemClassObject) SpawnInstance(lFlags int32, ppNewInstance **systemw
 }
 
 // CompareTo wraps the raw CompareTo call.
-func (self IWbemClassObject) CompareTo(lFlags systemwmi.WBEM_COMPARISON_FLAG, pCompareTo *systemwmi.IWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.CompareTo(lFlags, pCompareTo)))
+func (self IWbemClassObject) CompareTo(lFlags systemwmi.WBEM_COMPARISON_FLAG, pCompareTo IWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.CompareTo(lFlags, pCompareTo.Raw)))
 }
 
 // GetPropertyOrigin wraps the raw GetPropertyOrigin call.
@@ -1881,9 +1881,9 @@ func (self IWbemClassObject) GetMethod(wszName string, lFlags int32, ppInSignatu
 }
 
 // PutMethod wraps the raw PutMethod call.
-func (self IWbemClassObject) PutMethod(wszName string, lFlags int32, pInSignature *systemwmi.IWbemClassObject, pOutSignature *systemwmi.IWbemClassObject) error {
+func (self IWbemClassObject) PutMethod(wszName string, lFlags int32, pInSignature IWbemClassObject, pOutSignature IWbemClassObject) error {
 	_wszName := win32.UTF16Ptr(wszName)
-	return win32.HRESULTError(int32(self.Raw.PutMethod(foundation.PWSTR(_wszName), lFlags, pInSignature, pOutSignature)))
+	return win32.HRESULTError(int32(self.Raw.PutMethod(foundation.PWSTR(_wszName), lFlags, pInSignature.Raw, pOutSignature.Raw)))
 }
 
 // DeleteMethod wraps the raw DeleteMethod call.
@@ -1931,18 +1931,18 @@ func WrapIWbemClientConnectionTransport(raw *systemwmi.IWbemClientConnectionTran
 }
 
 // Open wraps the raw Open call.
-func (self IWbemClientConnectionTransport) Open(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx *systemwmi.IWbemContext, riid *win32.GUID, pInterface *unsafe.Pointer, pCallRes **systemwmi.IWbemCallResult) error {
-	return win32.HRESULTError(int32(self.Raw.Open(strAddressType, dwBinaryAddressLength, abBinaryAddress, strObject, strUser, strPassword, strLocale, lFlags, pCtx, riid, pInterface, pCallRes)))
+func (self IWbemClientConnectionTransport) Open(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx IWbemContext, riid *win32.GUID, pInterface *unsafe.Pointer, pCallRes **systemwmi.IWbemCallResult) error {
+	return win32.HRESULTError(int32(self.Raw.Open(strAddressType, dwBinaryAddressLength, abBinaryAddress, strObject, strUser, strPassword, strLocale, lFlags, pCtx.Raw, riid, pInterface, pCallRes)))
 }
 
 // OpenAsync wraps the raw OpenAsync call.
-func (self IWbemClientConnectionTransport) OpenAsync(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx *systemwmi.IWbemContext, riid *win32.GUID, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.OpenAsync(strAddressType, dwBinaryAddressLength, abBinaryAddress, strObject, strUser, strPassword, strLocale, lFlags, pCtx, riid, pResponseHandler)))
+func (self IWbemClientConnectionTransport) OpenAsync(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx IWbemContext, riid *win32.GUID, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.OpenAsync(strAddressType, dwBinaryAddressLength, abBinaryAddress, strObject, strUser, strPassword, strLocale, lFlags, pCtx.Raw, riid, pResponseHandler.Raw)))
 }
 
 // Cancel wraps the raw Cancel call.
-func (self IWbemClientConnectionTransport) Cancel(lFlags int32, pHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.Cancel(lFlags, pHandler)))
+func (self IWbemClientConnectionTransport) Cancel(lFlags int32, pHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.Cancel(lFlags, pHandler.Raw)))
 }
 
 // IWbemClientTransport is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemClientTransport with error-returning methods.
@@ -1957,8 +1957,8 @@ func WrapIWbemClientTransport(raw *systemwmi.IWbemClientTransport) IWbemClientTr
 }
 
 // ConnectServer wraps the raw ConnectServer call.
-func (self IWbemClientTransport) ConnectServer(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strNetworkResource foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lSecurityFlags int32, strAuthority foundation.BSTR, pCtx *systemwmi.IWbemContext, ppNamespace **systemwmi.IWbemServices) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectServer(strAddressType, dwBinaryAddressLength, abBinaryAddress, strNetworkResource, strUser, strPassword, strLocale, lSecurityFlags, strAuthority, pCtx, ppNamespace)))
+func (self IWbemClientTransport) ConnectServer(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strNetworkResource foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lSecurityFlags int32, strAuthority foundation.BSTR, pCtx IWbemContext, ppNamespace **systemwmi.IWbemServices) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectServer(strAddressType, dwBinaryAddressLength, abBinaryAddress, strNetworkResource, strUser, strPassword, strLocale, lSecurityFlags, strAuthority, pCtx.Raw, ppNamespace)))
 }
 
 // IWbemConfigureRefresher is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemConfigureRefresher with error-returning methods.
@@ -1973,19 +1973,19 @@ func WrapIWbemConfigureRefresher(raw *systemwmi.IWbemConfigureRefresher) IWbemCo
 }
 
 // AddObjectByPath wraps the raw AddObjectByPath call.
-func (self IWbemConfigureRefresher) AddObjectByPath(pNamespace *systemwmi.IWbemServices, wszPath string, lFlags int32, pContext *systemwmi.IWbemContext, ppRefreshable **systemwmi.IWbemClassObject, plId *int32) error {
+func (self IWbemConfigureRefresher) AddObjectByPath(pNamespace IWbemServices, wszPath string, lFlags int32, pContext IWbemContext, ppRefreshable **systemwmi.IWbemClassObject, plId *int32) error {
 	_wszPath := win32.UTF16Ptr(wszPath)
-	return win32.HRESULTError(int32(self.Raw.AddObjectByPath(pNamespace, foundation.PWSTR(_wszPath), lFlags, pContext, ppRefreshable, plId)))
+	return win32.HRESULTError(int32(self.Raw.AddObjectByPath(pNamespace.Raw, foundation.PWSTR(_wszPath), lFlags, pContext.Raw, ppRefreshable, plId)))
 }
 
 // AddObjectByTemplate wraps the raw AddObjectByTemplate call.
-func (self IWbemConfigureRefresher) AddObjectByTemplate(pNamespace *systemwmi.IWbemServices, pTemplate *systemwmi.IWbemClassObject, lFlags int32, pContext *systemwmi.IWbemContext, ppRefreshable **systemwmi.IWbemClassObject, plId *int32) error {
-	return win32.HRESULTError(int32(self.Raw.AddObjectByTemplate(pNamespace, pTemplate, lFlags, pContext, ppRefreshable, plId)))
+func (self IWbemConfigureRefresher) AddObjectByTemplate(pNamespace IWbemServices, pTemplate IWbemClassObject, lFlags int32, pContext IWbemContext, ppRefreshable **systemwmi.IWbemClassObject, plId *int32) error {
+	return win32.HRESULTError(int32(self.Raw.AddObjectByTemplate(pNamespace.Raw, pTemplate.Raw, lFlags, pContext.Raw, ppRefreshable, plId)))
 }
 
 // AddRefresher wraps the raw AddRefresher call.
-func (self IWbemConfigureRefresher) AddRefresher(pRefresher *systemwmi.IWbemRefresher, lFlags int32, plId *int32) error {
-	return win32.HRESULTError(int32(self.Raw.AddRefresher(pRefresher, lFlags, plId)))
+func (self IWbemConfigureRefresher) AddRefresher(pRefresher IWbemRefresher, lFlags int32, plId *int32) error {
+	return win32.HRESULTError(int32(self.Raw.AddRefresher(pRefresher.Raw, lFlags, plId)))
 }
 
 // Remove wraps the raw Remove call.
@@ -1994,9 +1994,9 @@ func (self IWbemConfigureRefresher) Remove(lId int32, lFlags int32) error {
 }
 
 // AddEnum wraps the raw AddEnum call.
-func (self IWbemConfigureRefresher) AddEnum(pNamespace *systemwmi.IWbemServices, wszClassName string, lFlags int32, pContext *systemwmi.IWbemContext, ppEnum **systemwmi.IWbemHiPerfEnum, plId *int32) error {
+func (self IWbemConfigureRefresher) AddEnum(pNamespace IWbemServices, wszClassName string, lFlags int32, pContext IWbemContext, ppEnum **systemwmi.IWbemHiPerfEnum, plId *int32) error {
 	_wszClassName := win32.UTF16Ptr(wszClassName)
-	return win32.HRESULTError(int32(self.Raw.AddEnum(pNamespace, foundation.PWSTR(_wszClassName), lFlags, pContext, ppEnum, plId)))
+	return win32.HRESULTError(int32(self.Raw.AddEnum(pNamespace.Raw, foundation.PWSTR(_wszClassName), lFlags, pContext.Raw, ppEnum, plId)))
 }
 
 // IWbemConnectorLogin is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemConnectorLogin with error-returning methods.
@@ -2011,10 +2011,10 @@ func WrapIWbemConnectorLogin(raw *systemwmi.IWbemConnectorLogin) IWbemConnectorL
 }
 
 // ConnectorLogin wraps the raw ConnectorLogin call.
-func (self IWbemConnectorLogin) ConnectorLogin(wszNetworkResource string, wszPreferredLocale string, lFlags int32, pCtx *systemwmi.IWbemContext, riid *win32.GUID, pInterface *unsafe.Pointer) error {
+func (self IWbemConnectorLogin) ConnectorLogin(wszNetworkResource string, wszPreferredLocale string, lFlags int32, pCtx IWbemContext, riid *win32.GUID, pInterface *unsafe.Pointer) error {
 	_wszNetworkResource := win32.UTF16Ptr(wszNetworkResource)
 	_wszPreferredLocale := win32.UTF16Ptr(wszPreferredLocale)
-	return win32.HRESULTError(int32(self.Raw.ConnectorLogin(foundation.PWSTR(_wszNetworkResource), foundation.PWSTR(_wszPreferredLocale), lFlags, pCtx, riid, pInterface)))
+	return win32.HRESULTError(int32(self.Raw.ConnectorLogin(foundation.PWSTR(_wszNetworkResource), foundation.PWSTR(_wszPreferredLocale), lFlags, pCtx.Raw, riid, pInterface)))
 }
 
 // IWbemConstructClassObject is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemConstructClassObject with error-returning methods.
@@ -2123,13 +2123,13 @@ func WrapIWbemDecoupledBasicEventProvider(raw *systemwmi.IWbemDecoupledBasicEven
 }
 
 // GetSink wraps the raw GetSink call.
-func (self IWbemDecoupledBasicEventProvider) GetSink(a_Flags int32, a_Context *systemwmi.IWbemContext, a_Sink **systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.GetSink(a_Flags, a_Context, a_Sink)))
+func (self IWbemDecoupledBasicEventProvider) GetSink(a_Flags int32, a_Context IWbemContext, a_Sink **systemwmi.IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.GetSink(a_Flags, a_Context.Raw, a_Sink)))
 }
 
 // GetService wraps the raw GetService call.
-func (self IWbemDecoupledBasicEventProvider) GetService(a_Flags int32, a_Context *systemwmi.IWbemContext, a_Service **systemwmi.IWbemServices) error {
-	return win32.HRESULTError(int32(self.Raw.GetService(a_Flags, a_Context, a_Service)))
+func (self IWbemDecoupledBasicEventProvider) GetService(a_Flags int32, a_Context IWbemContext, a_Service **systemwmi.IWbemServices) error {
+	return win32.HRESULTError(int32(self.Raw.GetService(a_Flags, a_Context.Raw, a_Service)))
 }
 
 // IWbemDecoupledRegistrar is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemDecoupledRegistrar with error-returning methods.
@@ -2144,12 +2144,12 @@ func WrapIWbemDecoupledRegistrar(raw *systemwmi.IWbemDecoupledRegistrar) IWbemDe
 }
 
 // Register wraps the raw Register call.
-func (self IWbemDecoupledRegistrar) Register(a_Flags int32, a_Context *systemwmi.IWbemContext, a_User string, a_Locale string, a_Scope string, a_Registration string, pIUnknown *systemcom.IUnknown) error {
+func (self IWbemDecoupledRegistrar) Register(a_Flags int32, a_Context IWbemContext, a_User string, a_Locale string, a_Scope string, a_Registration string, pIUnknown systemcomidiom.IUnknown) error {
 	_a_User := win32.UTF16Ptr(a_User)
 	_a_Locale := win32.UTF16Ptr(a_Locale)
 	_a_Scope := win32.UTF16Ptr(a_Scope)
 	_a_Registration := win32.UTF16Ptr(a_Registration)
-	return win32.HRESULTError(int32(self.Raw.Register(a_Flags, a_Context, foundation.PWSTR(_a_User), foundation.PWSTR(_a_Locale), foundation.PWSTR(_a_Scope), foundation.PWSTR(_a_Registration), pIUnknown)))
+	return win32.HRESULTError(int32(self.Raw.Register(a_Flags, a_Context.Raw, foundation.PWSTR(_a_User), foundation.PWSTR(_a_Locale), foundation.PWSTR(_a_Scope), foundation.PWSTR(_a_Registration), pIUnknown.Raw)))
 }
 
 // UnRegister wraps the raw UnRegister call.
@@ -2169,8 +2169,8 @@ func WrapIWbemEventConsumerProvider(raw *systemwmi.IWbemEventConsumerProvider) I
 }
 
 // FindConsumer wraps the raw FindConsumer call.
-func (self IWbemEventConsumerProvider) FindConsumer(pLogicalConsumer *systemwmi.IWbemClassObject, ppConsumer **systemwmi.IWbemUnboundObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.FindConsumer(pLogicalConsumer, ppConsumer)))
+func (self IWbemEventConsumerProvider) FindConsumer(pLogicalConsumer IWbemClassObject, ppConsumer **systemwmi.IWbemUnboundObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.FindConsumer(pLogicalConsumer.Raw, ppConsumer)))
 }
 
 // IWbemEventProvider is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemEventProvider with error-returning methods.
@@ -2185,8 +2185,8 @@ func WrapIWbemEventProvider(raw *systemwmi.IWbemEventProvider) IWbemEventProvide
 }
 
 // ProvideEvents wraps the raw ProvideEvents call.
-func (self IWbemEventProvider) ProvideEvents(pSink *systemwmi.IWbemObjectSink, lFlags int32) error {
-	return win32.HRESULTError(int32(self.Raw.ProvideEvents(pSink, lFlags)))
+func (self IWbemEventProvider) ProvideEvents(pSink IWbemObjectSink, lFlags int32) error {
+	return win32.HRESULTError(int32(self.Raw.ProvideEvents(pSink.Raw, lFlags)))
 }
 
 // IWbemEventProviderQuerySink is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemEventProviderQuerySink with error-returning methods.
@@ -2248,8 +2248,8 @@ func (self IWbemEventSink) IsActive() error {
 }
 
 // GetRestrictedSink wraps the raw GetRestrictedSink call.
-func (self IWbemEventSink) GetRestrictedSink(lNumQueries int32, awszQueries *foundation.PWSTR, pCallback *systemcom.IUnknown, ppSink **systemwmi.IWbemEventSink) error {
-	return win32.HRESULTError(int32(self.Raw.GetRestrictedSink(lNumQueries, awszQueries, pCallback, ppSink)))
+func (self IWbemEventSink) GetRestrictedSink(lNumQueries int32, awszQueries *foundation.PWSTR, pCallback systemcomidiom.IUnknown, ppSink **systemwmi.IWbemEventSink) error {
+	return win32.HRESULTError(int32(self.Raw.GetRestrictedSink(lNumQueries, awszQueries, pCallback.Raw, ppSink)))
 }
 
 // SetBatchingParameters wraps the raw SetBatchingParameters call.
@@ -2300,35 +2300,35 @@ func WrapIWbemHiPerfProvider(raw *systemwmi.IWbemHiPerfProvider) IWbemHiPerfProv
 }
 
 // QueryInstances wraps the raw QueryInstances call.
-func (self IWbemHiPerfProvider) QueryInstances(pNamespace *systemwmi.IWbemServices, wszClass string, lFlags int32, pCtx *systemwmi.IWbemContext, pSink *systemwmi.IWbemObjectSink) error {
+func (self IWbemHiPerfProvider) QueryInstances(pNamespace IWbemServices, wszClass string, lFlags int32, pCtx IWbemContext, pSink IWbemObjectSink) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
-	return win32.HRESULTError(int32(self.Raw.QueryInstances(pNamespace, foundation.PWSTR(_wszClass), lFlags, pCtx, pSink)))
+	return win32.HRESULTError(int32(self.Raw.QueryInstances(pNamespace.Raw, foundation.PWSTR(_wszClass), lFlags, pCtx.Raw, pSink.Raw)))
 }
 
 // CreateRefresher wraps the raw CreateRefresher call.
-func (self IWbemHiPerfProvider) CreateRefresher(pNamespace *systemwmi.IWbemServices, lFlags int32, ppRefresher **systemwmi.IWbemRefresher) error {
-	return win32.HRESULTError(int32(self.Raw.CreateRefresher(pNamespace, lFlags, ppRefresher)))
+func (self IWbemHiPerfProvider) CreateRefresher(pNamespace IWbemServices, lFlags int32, ppRefresher **systemwmi.IWbemRefresher) error {
+	return win32.HRESULTError(int32(self.Raw.CreateRefresher(pNamespace.Raw, lFlags, ppRefresher)))
 }
 
 // CreateRefreshableObject wraps the raw CreateRefreshableObject call.
-func (self IWbemHiPerfProvider) CreateRefreshableObject(pNamespace *systemwmi.IWbemServices, pTemplate *systemwmi.IWbemObjectAccess, pRefresher *systemwmi.IWbemRefresher, lFlags int32, pContext *systemwmi.IWbemContext, ppRefreshable **systemwmi.IWbemObjectAccess, plId *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CreateRefreshableObject(pNamespace, pTemplate, pRefresher, lFlags, pContext, ppRefreshable, plId)))
+func (self IWbemHiPerfProvider) CreateRefreshableObject(pNamespace IWbemServices, pTemplate IWbemObjectAccess, pRefresher IWbemRefresher, lFlags int32, pContext IWbemContext, ppRefreshable **systemwmi.IWbemObjectAccess, plId *int32) error {
+	return win32.HRESULTError(int32(self.Raw.CreateRefreshableObject(pNamespace.Raw, pTemplate.Raw, pRefresher.Raw, lFlags, pContext.Raw, ppRefreshable, plId)))
 }
 
 // StopRefreshing wraps the raw StopRefreshing call.
-func (self IWbemHiPerfProvider) StopRefreshing(pRefresher *systemwmi.IWbemRefresher, lId int32, lFlags int32) error {
-	return win32.HRESULTError(int32(self.Raw.StopRefreshing(pRefresher, lId, lFlags)))
+func (self IWbemHiPerfProvider) StopRefreshing(pRefresher IWbemRefresher, lId int32, lFlags int32) error {
+	return win32.HRESULTError(int32(self.Raw.StopRefreshing(pRefresher.Raw, lId, lFlags)))
 }
 
 // CreateRefreshableEnum wraps the raw CreateRefreshableEnum call.
-func (self IWbemHiPerfProvider) CreateRefreshableEnum(pNamespace *systemwmi.IWbemServices, wszClass string, pRefresher *systemwmi.IWbemRefresher, lFlags int32, pContext *systemwmi.IWbemContext, pHiPerfEnum *systemwmi.IWbemHiPerfEnum, plId *int32) error {
+func (self IWbemHiPerfProvider) CreateRefreshableEnum(pNamespace IWbemServices, wszClass string, pRefresher IWbemRefresher, lFlags int32, pContext IWbemContext, pHiPerfEnum IWbemHiPerfEnum, plId *int32) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
-	return win32.HRESULTError(int32(self.Raw.CreateRefreshableEnum(pNamespace, foundation.PWSTR(_wszClass), pRefresher, lFlags, pContext, pHiPerfEnum, plId)))
+	return win32.HRESULTError(int32(self.Raw.CreateRefreshableEnum(pNamespace.Raw, foundation.PWSTR(_wszClass), pRefresher.Raw, lFlags, pContext.Raw, pHiPerfEnum.Raw, plId)))
 }
 
 // GetObjects wraps the raw GetObjects call.
-func (self IWbemHiPerfProvider) GetObjects(pNamespace *systemwmi.IWbemServices, lNumObjects int32, apObj **systemwmi.IWbemObjectAccess, lFlags int32, pContext *systemwmi.IWbemContext) error {
-	return win32.HRESULTError(int32(self.Raw.GetObjects(pNamespace, lNumObjects, apObj, lFlags, pContext)))
+func (self IWbemHiPerfProvider) GetObjects(pNamespace IWbemServices, lNumObjects int32, apObj **systemwmi.IWbemObjectAccess, lFlags int32, pContext IWbemContext) error {
+	return win32.HRESULTError(int32(self.Raw.GetObjects(pNamespace.Raw, lNumObjects, apObj, lFlags, pContext.Raw)))
 }
 
 // IWbemLevel1Login is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemLevel1Login with error-returning methods.
@@ -2356,16 +2356,16 @@ func (self IWbemLevel1Login) RequestChallenge(wszNetworkResource string, wszUser
 }
 
 // WBEMLogin wraps the raw WBEMLogin call.
-func (self IWbemLevel1Login) WBEMLogin(wszPreferredLocale string, AccessToken *byte, lFlags int32, pCtx *systemwmi.IWbemContext, ppNamespace **systemwmi.IWbemServices) error {
+func (self IWbemLevel1Login) WBEMLogin(wszPreferredLocale string, AccessToken *byte, lFlags int32, pCtx IWbemContext, ppNamespace **systemwmi.IWbemServices) error {
 	_wszPreferredLocale := win32.UTF16Ptr(wszPreferredLocale)
-	return win32.HRESULTError(int32(self.Raw.WBEMLogin(foundation.PWSTR(_wszPreferredLocale), AccessToken, lFlags, pCtx, ppNamespace)))
+	return win32.HRESULTError(int32(self.Raw.WBEMLogin(foundation.PWSTR(_wszPreferredLocale), AccessToken, lFlags, pCtx.Raw, ppNamespace)))
 }
 
 // NTLMLogin wraps the raw NTLMLogin call.
-func (self IWbemLevel1Login) NTLMLogin(wszNetworkResource string, wszPreferredLocale string, lFlags int32, pCtx *systemwmi.IWbemContext, ppNamespace **systemwmi.IWbemServices) error {
+func (self IWbemLevel1Login) NTLMLogin(wszNetworkResource string, wszPreferredLocale string, lFlags int32, pCtx IWbemContext, ppNamespace **systemwmi.IWbemServices) error {
 	_wszNetworkResource := win32.UTF16Ptr(wszNetworkResource)
 	_wszPreferredLocale := win32.UTF16Ptr(wszPreferredLocale)
-	return win32.HRESULTError(int32(self.Raw.NTLMLogin(foundation.PWSTR(_wszNetworkResource), foundation.PWSTR(_wszPreferredLocale), lFlags, pCtx, ppNamespace)))
+	return win32.HRESULTError(int32(self.Raw.NTLMLogin(foundation.PWSTR(_wszNetworkResource), foundation.PWSTR(_wszPreferredLocale), lFlags, pCtx.Raw, ppNamespace)))
 }
 
 // IWbemLocator is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemLocator with error-returning methods.
@@ -2380,8 +2380,8 @@ func WrapIWbemLocator(raw *systemwmi.IWbemLocator) IWbemLocator {
 }
 
 // ConnectServer wraps the raw ConnectServer call.
-func (self IWbemLocator) ConnectServer(strNetworkResource foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lSecurityFlags int32, strAuthority foundation.BSTR, pCtx *systemwmi.IWbemContext, ppNamespace **systemwmi.IWbemServices) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectServer(strNetworkResource, strUser, strPassword, strLocale, lSecurityFlags, strAuthority, pCtx, ppNamespace)))
+func (self IWbemLocator) ConnectServer(strNetworkResource foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lSecurityFlags int32, strAuthority foundation.BSTR, pCtx IWbemContext, ppNamespace **systemwmi.IWbemServices) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectServer(strNetworkResource, strUser, strPassword, strLocale, lSecurityFlags, strAuthority, pCtx.Raw, ppNamespace)))
 }
 
 // IWbemObjectAccess is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemObjectAccess with error-returning methods.
@@ -2463,8 +2463,8 @@ func (self IWbemObjectSink) Indicate(lObjectCount int32, apObjArray **systemwmi.
 }
 
 // SetStatus wraps the raw SetStatus call.
-func (self IWbemObjectSink) SetStatus(lFlags int32, hResult foundation.HRESULT, strParam foundation.BSTR, pObjParam *systemwmi.IWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.SetStatus(lFlags, hResult, strParam, pObjParam)))
+func (self IWbemObjectSink) SetStatus(lFlags int32, hResult foundation.HRESULT, strParam foundation.BSTR, pObjParam IWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.SetStatus(lFlags, hResult, strParam, pObjParam.Raw)))
 }
 
 // IWbemObjectSinkEx is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemObjectSinkEx with error-returning methods.
@@ -2484,8 +2484,8 @@ func (self IWbemObjectSinkEx) WriteMessage(uChannel uint32, strMessage foundatio
 }
 
 // WriteError wraps the raw WriteError call.
-func (self IWbemObjectSinkEx) WriteError(pObjError *systemwmi.IWbemClassObject, puReturned *byte) error {
-	return win32.HRESULTError(int32(self.Raw.WriteError(pObjError, puReturned)))
+func (self IWbemObjectSinkEx) WriteError(pObjError IWbemClassObject, puReturned *byte) error {
+	return win32.HRESULTError(int32(self.Raw.WriteError(pObjError.Raw, puReturned)))
 }
 
 // PromptUser wraps the raw PromptUser call.
@@ -2515,13 +2515,13 @@ func WrapIWbemObjectTextSrc(raw *systemwmi.IWbemObjectTextSrc) IWbemObjectTextSr
 }
 
 // GetText wraps the raw GetText call.
-func (self IWbemObjectTextSrc) GetText(lFlags int32, pObj *systemwmi.IWbemClassObject, uObjTextFormat uint32, pCtx *systemwmi.IWbemContext, strText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetText(lFlags, pObj, uObjTextFormat, pCtx, strText)))
+func (self IWbemObjectTextSrc) GetText(lFlags int32, pObj IWbemClassObject, uObjTextFormat uint32, pCtx IWbemContext, strText *foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.GetText(lFlags, pObj.Raw, uObjTextFormat, pCtx.Raw, strText)))
 }
 
 // CreateFromText wraps the raw CreateFromText call.
-func (self IWbemObjectTextSrc) CreateFromText(lFlags int32, strText foundation.BSTR, uObjTextFormat uint32, pCtx *systemwmi.IWbemContext, pNewObj **systemwmi.IWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFromText(lFlags, strText, uObjTextFormat, pCtx, pNewObj)))
+func (self IWbemObjectTextSrc) CreateFromText(lFlags int32, strText foundation.BSTR, uObjTextFormat uint32, pCtx IWbemContext, pNewObj **systemwmi.IWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFromText(lFlags, strText, uObjTextFormat, pCtx.Raw, pNewObj)))
 }
 
 // IWbemPath is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemPath with error-returning methods.
@@ -2775,8 +2775,8 @@ func WrapIWbemProviderIdentity(raw *systemwmi.IWbemProviderIdentity) IWbemProvid
 }
 
 // SetRegistrationObject wraps the raw SetRegistrationObject call.
-func (self IWbemProviderIdentity) SetRegistrationObject(lFlags int32, pProvReg *systemwmi.IWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.SetRegistrationObject(lFlags, pProvReg)))
+func (self IWbemProviderIdentity) SetRegistrationObject(lFlags int32, pProvReg IWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.SetRegistrationObject(lFlags, pProvReg.Raw)))
 }
 
 // IWbemProviderInit is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemProviderInit with error-returning methods.
@@ -2791,11 +2791,11 @@ func WrapIWbemProviderInit(raw *systemwmi.IWbemProviderInit) IWbemProviderInit {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWbemProviderInit) Initialize(wszUser string, lFlags int32, wszNamespace string, wszLocale string, pNamespace *systemwmi.IWbemServices, pCtx *systemwmi.IWbemContext, pInitSink *systemwmi.IWbemProviderInitSink) error {
+func (self IWbemProviderInit) Initialize(wszUser string, lFlags int32, wszNamespace string, wszLocale string, pNamespace IWbemServices, pCtx IWbemContext, pInitSink IWbemProviderInitSink) error {
 	_wszUser := win32.UTF16Ptr(wszUser)
 	_wszNamespace := win32.UTF16Ptr(wszNamespace)
 	_wszLocale := win32.UTF16Ptr(wszLocale)
-	return win32.HRESULTError(int32(self.Raw.Initialize(foundation.PWSTR(_wszUser), lFlags, foundation.PWSTR(_wszNamespace), foundation.PWSTR(_wszLocale), pNamespace, pCtx, pInitSink)))
+	return win32.HRESULTError(int32(self.Raw.Initialize(foundation.PWSTR(_wszUser), lFlags, foundation.PWSTR(_wszNamespace), foundation.PWSTR(_wszLocale), pNamespace.Raw, pCtx.Raw, pInitSink.Raw)))
 }
 
 // IWbemProviderInitSink is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemProviderInitSink with error-returning methods.
@@ -2939,13 +2939,13 @@ func WrapIWbemServices(raw *systemwmi.IWbemServices) IWbemServices {
 }
 
 // OpenNamespace wraps the raw OpenNamespace call.
-func (self IWbemServices) OpenNamespace(strNamespace foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppWorkingNamespace **systemwmi.IWbemServices, ppResult **systemwmi.IWbemCallResult) error {
-	return win32.HRESULTError(int32(self.Raw.OpenNamespace(strNamespace, lFlags, pCtx, ppWorkingNamespace, ppResult)))
+func (self IWbemServices) OpenNamespace(strNamespace foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppWorkingNamespace **systemwmi.IWbemServices, ppResult **systemwmi.IWbemCallResult) error {
+	return win32.HRESULTError(int32(self.Raw.OpenNamespace(strNamespace, lFlags, pCtx.Raw, ppWorkingNamespace, ppResult)))
 }
 
 // CancelAsyncCall wraps the raw CancelAsyncCall call.
-func (self IWbemServices) CancelAsyncCall(pSink *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.CancelAsyncCall(pSink)))
+func (self IWbemServices) CancelAsyncCall(pSink IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.CancelAsyncCall(pSink.Raw)))
 }
 
 // QueryObjectSink wraps the raw QueryObjectSink call.
@@ -2954,103 +2954,103 @@ func (self IWbemServices) QueryObjectSink(lFlags systemwmi.WBEM_GENERIC_FLAG_TYP
 }
 
 // GetObject wraps the raw GetObject call.
-func (self IWbemServices) GetObject(strObjectPath foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppObject **systemwmi.IWbemClassObject, ppCallResult **systemwmi.IWbemCallResult) error {
-	return win32.HRESULTError(int32(self.Raw.GetObject(strObjectPath, lFlags, pCtx, ppObject, ppCallResult)))
+func (self IWbemServices) GetObject(strObjectPath foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppObject **systemwmi.IWbemClassObject, ppCallResult **systemwmi.IWbemCallResult) error {
+	return win32.HRESULTError(int32(self.Raw.GetObject(strObjectPath, lFlags, pCtx.Raw, ppObject, ppCallResult)))
 }
 
 // GetObjectAsync wraps the raw GetObjectAsync call.
-func (self IWbemServices) GetObjectAsync(strObjectPath foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.GetObjectAsync(strObjectPath, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) GetObjectAsync(strObjectPath foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.GetObjectAsync(strObjectPath, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // PutClass wraps the raw PutClass call.
-func (self IWbemServices) PutClass(pObject *systemwmi.IWbemClassObject, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppCallResult **systemwmi.IWbemCallResult) error {
-	return win32.HRESULTError(int32(self.Raw.PutClass(pObject, lFlags, pCtx, ppCallResult)))
+func (self IWbemServices) PutClass(pObject IWbemClassObject, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppCallResult **systemwmi.IWbemCallResult) error {
+	return win32.HRESULTError(int32(self.Raw.PutClass(pObject.Raw, lFlags, pCtx.Raw, ppCallResult)))
 }
 
 // PutClassAsync wraps the raw PutClassAsync call.
-func (self IWbemServices) PutClassAsync(pObject *systemwmi.IWbemClassObject, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.PutClassAsync(pObject, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) PutClassAsync(pObject IWbemClassObject, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.PutClassAsync(pObject.Raw, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // DeleteClass wraps the raw DeleteClass call.
-func (self IWbemServices) DeleteClass(strClass foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppCallResult **systemwmi.IWbemCallResult) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteClass(strClass, lFlags, pCtx, ppCallResult)))
+func (self IWbemServices) DeleteClass(strClass foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppCallResult **systemwmi.IWbemCallResult) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteClass(strClass, lFlags, pCtx.Raw, ppCallResult)))
 }
 
 // DeleteClassAsync wraps the raw DeleteClassAsync call.
-func (self IWbemServices) DeleteClassAsync(strClass foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteClassAsync(strClass, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) DeleteClassAsync(strClass foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteClassAsync(strClass, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // CreateClassEnum wraps the raw CreateClassEnum call.
-func (self IWbemServices) CreateClassEnum(strSuperclass foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppEnum **systemwmi.IEnumWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateClassEnum(strSuperclass, lFlags, pCtx, ppEnum)))
+func (self IWbemServices) CreateClassEnum(strSuperclass foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppEnum **systemwmi.IEnumWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateClassEnum(strSuperclass, lFlags, pCtx.Raw, ppEnum)))
 }
 
 // CreateClassEnumAsync wraps the raw CreateClassEnumAsync call.
-func (self IWbemServices) CreateClassEnumAsync(strSuperclass foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.CreateClassEnumAsync(strSuperclass, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) CreateClassEnumAsync(strSuperclass foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.CreateClassEnumAsync(strSuperclass, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // PutInstance wraps the raw PutInstance call.
-func (self IWbemServices) PutInstance(pInst *systemwmi.IWbemClassObject, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppCallResult **systemwmi.IWbemCallResult) error {
-	return win32.HRESULTError(int32(self.Raw.PutInstance(pInst, lFlags, pCtx, ppCallResult)))
+func (self IWbemServices) PutInstance(pInst IWbemClassObject, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppCallResult **systemwmi.IWbemCallResult) error {
+	return win32.HRESULTError(int32(self.Raw.PutInstance(pInst.Raw, lFlags, pCtx.Raw, ppCallResult)))
 }
 
 // PutInstanceAsync wraps the raw PutInstanceAsync call.
-func (self IWbemServices) PutInstanceAsync(pInst *systemwmi.IWbemClassObject, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.PutInstanceAsync(pInst, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) PutInstanceAsync(pInst IWbemClassObject, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.PutInstanceAsync(pInst.Raw, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // DeleteInstance wraps the raw DeleteInstance call.
-func (self IWbemServices) DeleteInstance(strObjectPath foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppCallResult **systemwmi.IWbemCallResult) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteInstance(strObjectPath, lFlags, pCtx, ppCallResult)))
+func (self IWbemServices) DeleteInstance(strObjectPath foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppCallResult **systemwmi.IWbemCallResult) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteInstance(strObjectPath, lFlags, pCtx.Raw, ppCallResult)))
 }
 
 // DeleteInstanceAsync wraps the raw DeleteInstanceAsync call.
-func (self IWbemServices) DeleteInstanceAsync(strObjectPath foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteInstanceAsync(strObjectPath, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) DeleteInstanceAsync(strObjectPath foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteInstanceAsync(strObjectPath, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // CreateInstanceEnum wraps the raw CreateInstanceEnum call.
-func (self IWbemServices) CreateInstanceEnum(strFilter foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppEnum **systemwmi.IEnumWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceEnum(strFilter, lFlags, pCtx, ppEnum)))
+func (self IWbemServices) CreateInstanceEnum(strFilter foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppEnum **systemwmi.IEnumWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceEnum(strFilter, lFlags, pCtx.Raw, ppEnum)))
 }
 
 // CreateInstanceEnumAsync wraps the raw CreateInstanceEnumAsync call.
-func (self IWbemServices) CreateInstanceEnumAsync(strFilter foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceEnumAsync(strFilter, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) CreateInstanceEnumAsync(strFilter foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceEnumAsync(strFilter, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // ExecQuery wraps the raw ExecQuery call.
-func (self IWbemServices) ExecQuery(strQueryLanguage foundation.BSTR, strQuery foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppEnum **systemwmi.IEnumWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.ExecQuery(strQueryLanguage, strQuery, lFlags, pCtx, ppEnum)))
+func (self IWbemServices) ExecQuery(strQueryLanguage foundation.BSTR, strQuery foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppEnum **systemwmi.IEnumWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.ExecQuery(strQueryLanguage, strQuery, lFlags, pCtx.Raw, ppEnum)))
 }
 
 // ExecQueryAsync wraps the raw ExecQueryAsync call.
-func (self IWbemServices) ExecQueryAsync(strQueryLanguage foundation.BSTR, strQuery foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.ExecQueryAsync(strQueryLanguage, strQuery, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) ExecQueryAsync(strQueryLanguage foundation.BSTR, strQuery foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.ExecQueryAsync(strQueryLanguage, strQuery, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // ExecNotificationQuery wraps the raw ExecNotificationQuery call.
-func (self IWbemServices) ExecNotificationQuery(strQueryLanguage foundation.BSTR, strQuery foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, ppEnum **systemwmi.IEnumWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.ExecNotificationQuery(strQueryLanguage, strQuery, lFlags, pCtx, ppEnum)))
+func (self IWbemServices) ExecNotificationQuery(strQueryLanguage foundation.BSTR, strQuery foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, ppEnum **systemwmi.IEnumWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.ExecNotificationQuery(strQueryLanguage, strQuery, lFlags, pCtx.Raw, ppEnum)))
 }
 
 // ExecNotificationQueryAsync wraps the raw ExecNotificationQueryAsync call.
-func (self IWbemServices) ExecNotificationQueryAsync(strQueryLanguage foundation.BSTR, strQuery foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.ExecNotificationQueryAsync(strQueryLanguage, strQuery, lFlags, pCtx, pResponseHandler)))
+func (self IWbemServices) ExecNotificationQueryAsync(strQueryLanguage foundation.BSTR, strQuery foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.ExecNotificationQueryAsync(strQueryLanguage, strQuery, lFlags, pCtx.Raw, pResponseHandler.Raw)))
 }
 
 // ExecMethod wraps the raw ExecMethod call.
-func (self IWbemServices) ExecMethod(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pInParams *systemwmi.IWbemClassObject, ppOutParams **systemwmi.IWbemClassObject, ppCallResult **systemwmi.IWbemCallResult) error {
-	return win32.HRESULTError(int32(self.Raw.ExecMethod(strObjectPath, strMethodName, lFlags, pCtx, pInParams, ppOutParams, ppCallResult)))
+func (self IWbemServices) ExecMethod(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pInParams IWbemClassObject, ppOutParams **systemwmi.IWbemClassObject, ppCallResult **systemwmi.IWbemCallResult) error {
+	return win32.HRESULTError(int32(self.Raw.ExecMethod(strObjectPath, strMethodName, lFlags, pCtx.Raw, pInParams.Raw, ppOutParams, ppCallResult)))
 }
 
 // ExecMethodAsync wraps the raw ExecMethodAsync call.
-func (self IWbemServices) ExecMethodAsync(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx *systemwmi.IWbemContext, pInParams *systemwmi.IWbemClassObject, pResponseHandler *systemwmi.IWbemObjectSink) error {
-	return win32.HRESULTError(int32(self.Raw.ExecMethodAsync(strObjectPath, strMethodName, lFlags, pCtx, pInParams, pResponseHandler)))
+func (self IWbemServices) ExecMethodAsync(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, lFlags systemwmi.WBEM_GENERIC_FLAG_TYPE, pCtx IWbemContext, pInParams IWbemClassObject, pResponseHandler IWbemObjectSink) error {
+	return win32.HRESULTError(int32(self.Raw.ExecMethodAsync(strObjectPath, strMethodName, lFlags, pCtx.Raw, pInParams.Raw, pResponseHandler.Raw)))
 }
 
 // IWbemShutdown is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemShutdown with error-returning methods.
@@ -3065,8 +3065,8 @@ func WrapIWbemShutdown(raw *systemwmi.IWbemShutdown) IWbemShutdown {
 }
 
 // Shutdown wraps the raw Shutdown call.
-func (self IWbemShutdown) Shutdown(uReason int32, uMaxMilliseconds uint32, pCtx *systemwmi.IWbemContext) error {
-	return win32.HRESULTError(int32(self.Raw.Shutdown(uReason, uMaxMilliseconds, pCtx)))
+func (self IWbemShutdown) Shutdown(uReason int32, uMaxMilliseconds uint32, pCtx IWbemContext) error {
+	return win32.HRESULTError(int32(self.Raw.Shutdown(uReason, uMaxMilliseconds, pCtx.Raw)))
 }
 
 // IWbemStatusCodeText is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemStatusCodeText with error-returning methods.
@@ -3118,8 +3118,8 @@ func WrapIWbemUnboundObjectSink(raw *systemwmi.IWbemUnboundObjectSink) IWbemUnbo
 }
 
 // IndicateToConsumer wraps the raw IndicateToConsumer call.
-func (self IWbemUnboundObjectSink) IndicateToConsumer(pLogicalConsumer *systemwmi.IWbemClassObject, lNumObjects int32, apObjects **systemwmi.IWbemClassObject) error {
-	return win32.HRESULTError(int32(self.Raw.IndicateToConsumer(pLogicalConsumer, lNumObjects, apObjects)))
+func (self IWbemUnboundObjectSink) IndicateToConsumer(pLogicalConsumer IWbemClassObject, lNumObjects int32, apObjects **systemwmi.IWbemClassObject) error {
+	return win32.HRESULTError(int32(self.Raw.IndicateToConsumer(pLogicalConsumer.Raw, lNumObjects, apObjects)))
 }
 
 // IWbemUnsecuredApartment is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemUnsecuredApartment with error-returning methods.
@@ -3134,7 +3134,7 @@ func WrapIWbemUnsecuredApartment(raw *systemwmi.IWbemUnsecuredApartment) IWbemUn
 }
 
 // CreateSinkStub wraps the raw CreateSinkStub call.
-func (self IWbemUnsecuredApartment) CreateSinkStub(pSink *systemwmi.IWbemObjectSink, dwFlags uint32, wszReserved string, ppStub **systemwmi.IWbemObjectSink) error {
+func (self IWbemUnsecuredApartment) CreateSinkStub(pSink IWbemObjectSink, dwFlags uint32, wszReserved string, ppStub **systemwmi.IWbemObjectSink) error {
 	_wszReserved := win32.UTF16Ptr(wszReserved)
-	return win32.HRESULTError(int32(self.Raw.CreateSinkStub(pSink, dwFlags, foundation.PWSTR(_wszReserved), ppStub)))
+	return win32.HRESULTError(int32(self.Raw.CreateSinkStub(pSink.Raw, dwFlags, foundation.PWSTR(_wszReserved), ppStub)))
 }

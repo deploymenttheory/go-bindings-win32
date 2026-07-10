@@ -43,10 +43,10 @@ func (self IWindowsMediaLibrarySharingDevice) Put_Authorization(authorization me
 }
 
 // Get_Properties wraps the raw Get_Properties call.
-func (self IWindowsMediaLibrarySharingDevice) Get_Properties() (*medialibrarysharingservices.IWindowsMediaLibrarySharingDeviceProperties, error) {
+func (self IWindowsMediaLibrarySharingDevice) Get_Properties() (IWindowsMediaLibrarySharingDeviceProperties, error) {
 	var _deviceProperties *medialibrarysharingservices.IWindowsMediaLibrarySharingDeviceProperties
 	_hr := self.Raw.Get_Properties(&_deviceProperties)
-	return _deviceProperties, win32.HRESULTError(int32(_hr))
+	return WrapIWindowsMediaLibrarySharingDeviceProperties(_deviceProperties), win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsMediaLibrarySharingDeviceProperties is an idiomatic wrapper over the raw COM interface Media.LibrarySharingServices.IWindowsMediaLibrarySharingDeviceProperties with error-returning methods.
@@ -61,10 +61,10 @@ func WrapIWindowsMediaLibrarySharingDeviceProperties(raw *medialibrarysharingser
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IWindowsMediaLibrarySharingDeviceProperties) Get_Item(index int32) (*medialibrarysharingservices.IWindowsMediaLibrarySharingDeviceProperty, error) {
+func (self IWindowsMediaLibrarySharingDeviceProperties) Get_Item(index int32) (IWindowsMediaLibrarySharingDeviceProperty, error) {
 	var _property *medialibrarysharingservices.IWindowsMediaLibrarySharingDeviceProperty
 	_hr := self.Raw.Get_Item(index, &_property)
-	return _property, win32.HRESULTError(int32(_hr))
+	return WrapIWindowsMediaLibrarySharingDeviceProperty(_property), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -75,10 +75,10 @@ func (self IWindowsMediaLibrarySharingDeviceProperties) Get_Count() (int32, erro
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self IWindowsMediaLibrarySharingDeviceProperties) GetProperty(name foundation.BSTR) (*medialibrarysharingservices.IWindowsMediaLibrarySharingDeviceProperty, error) {
+func (self IWindowsMediaLibrarySharingDeviceProperties) GetProperty(name foundation.BSTR) (IWindowsMediaLibrarySharingDeviceProperty, error) {
 	var _property *medialibrarysharingservices.IWindowsMediaLibrarySharingDeviceProperty
 	_hr := self.Raw.GetProperty(name, &_property)
-	return _property, win32.HRESULTError(int32(_hr))
+	return WrapIWindowsMediaLibrarySharingDeviceProperty(_property), win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsMediaLibrarySharingDeviceProperty is an idiomatic wrapper over the raw COM interface Media.LibrarySharingServices.IWindowsMediaLibrarySharingDeviceProperty with error-returning methods.
@@ -118,10 +118,10 @@ func WrapIWindowsMediaLibrarySharingDevices(raw *medialibrarysharingservices.IWi
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IWindowsMediaLibrarySharingDevices) Get_Item(index int32) (*medialibrarysharingservices.IWindowsMediaLibrarySharingDevice, error) {
+func (self IWindowsMediaLibrarySharingDevices) Get_Item(index int32) (IWindowsMediaLibrarySharingDevice, error) {
 	var _device *medialibrarysharingservices.IWindowsMediaLibrarySharingDevice
 	_hr := self.Raw.Get_Item(index, &_device)
-	return _device, win32.HRESULTError(int32(_hr))
+	return WrapIWindowsMediaLibrarySharingDevice(_device), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -132,10 +132,10 @@ func (self IWindowsMediaLibrarySharingDevices) Get_Count() (int32, error) {
 }
 
 // GetDevice wraps the raw GetDevice call.
-func (self IWindowsMediaLibrarySharingDevices) GetDevice(deviceID foundation.BSTR) (*medialibrarysharingservices.IWindowsMediaLibrarySharingDevice, error) {
+func (self IWindowsMediaLibrarySharingDevices) GetDevice(deviceID foundation.BSTR) (IWindowsMediaLibrarySharingDevice, error) {
 	var _device *medialibrarysharingservices.IWindowsMediaLibrarySharingDevice
 	_hr := self.Raw.GetDevice(deviceID, &_device)
-	return _device, win32.HRESULTError(int32(_hr))
+	return WrapIWindowsMediaLibrarySharingDevice(_device), win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsMediaLibrarySharingServices is an idiomatic wrapper over the raw COM interface Media.LibrarySharingServices.IWindowsMediaLibrarySharingServices with error-returning methods.
@@ -249,10 +249,10 @@ func (self IWindowsMediaLibrarySharingServices) SetAuthorizationState(MACAddress
 }
 
 // GetAllDevices wraps the raw GetAllDevices call.
-func (self IWindowsMediaLibrarySharingServices) GetAllDevices() (*medialibrarysharingservices.IWindowsMediaLibrarySharingDevices, error) {
+func (self IWindowsMediaLibrarySharingServices) GetAllDevices() (IWindowsMediaLibrarySharingDevices, error) {
 	var _devices *medialibrarysharingservices.IWindowsMediaLibrarySharingDevices
 	_hr := self.Raw.GetAllDevices(&_devices)
-	return _devices, win32.HRESULTError(int32(_hr))
+	return WrapIWindowsMediaLibrarySharingDevices(_devices), win32.HRESULTError(int32(_hr))
 }
 
 // Get_customSettingsApplied wraps the raw Get_customSettingsApplied call.

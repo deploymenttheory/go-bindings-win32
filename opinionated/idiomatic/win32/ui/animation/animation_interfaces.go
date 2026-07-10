@@ -10,6 +10,7 @@ import (
 	graphicsdirectcomposition "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directcomposition"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uianimation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/animation"
+	graphicsdirectcompositionidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/directcomposition"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -71,8 +72,8 @@ func (self IUIAnimationInterpolator2) GetFinalValue(value *float64, cDimension u
 }
 
 // GetPrimitiveInterpolation wraps the raw GetPrimitiveInterpolation call.
-func (self IUIAnimationInterpolator2) GetPrimitiveInterpolation(interpolation *uianimation.IUIAnimationPrimitiveInterpolation, cDimension uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetPrimitiveInterpolation(interpolation, cDimension)))
+func (self IUIAnimationInterpolator2) GetPrimitiveInterpolation(interpolation IUIAnimationPrimitiveInterpolation, cDimension uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetPrimitiveInterpolation(interpolation.Raw, cDimension)))
 }
 
 // GetDependencies wraps the raw GetDependencies call.
@@ -92,8 +93,8 @@ func WrapIUIAnimationLoopIterationChangeHandler2(raw *uianimation.IUIAnimationLo
 }
 
 // OnLoopIterationChanged wraps the raw OnLoopIterationChanged call.
-func (self IUIAnimationLoopIterationChangeHandler2) OnLoopIterationChanged(storyboard *uianimation.IUIAnimationStoryboard2, id uintptr, newIterationCount uint32, oldIterationCount uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnLoopIterationChanged(storyboard, id, newIterationCount, oldIterationCount)))
+func (self IUIAnimationLoopIterationChangeHandler2) OnLoopIterationChanged(storyboard IUIAnimationStoryboard2, id uintptr, newIterationCount uint32, oldIterationCount uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnLoopIterationChanged(storyboard.Raw, id, newIterationCount, oldIterationCount)))
 }
 
 // IUIAnimationManager is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationManager with error-returning methods.
@@ -118,13 +119,13 @@ func (self IUIAnimationManager) AbandonAllStoryboards() error {
 }
 
 // GetVariableFromTag wraps the raw GetVariableFromTag call.
-func (self IUIAnimationManager) GetVariableFromTag(object *systemcom.IUnknown, id uint32, variable **uianimation.IUIAnimationVariable) error {
-	return win32.HRESULTError(int32(self.Raw.GetVariableFromTag(object, id, variable)))
+func (self IUIAnimationManager) GetVariableFromTag(object systemcomidiom.IUnknown, id uint32, variable **uianimation.IUIAnimationVariable) error {
+	return win32.HRESULTError(int32(self.Raw.GetVariableFromTag(object.Raw, id, variable)))
 }
 
 // GetStoryboardFromTag wraps the raw GetStoryboardFromTag call.
-func (self IUIAnimationManager) GetStoryboardFromTag(object *systemcom.IUnknown, id uint32, storyboard **uianimation.IUIAnimationStoryboard) error {
-	return win32.HRESULTError(int32(self.Raw.GetStoryboardFromTag(object, id, storyboard)))
+func (self IUIAnimationManager) GetStoryboardFromTag(object systemcomidiom.IUnknown, id uint32, storyboard **uianimation.IUIAnimationStoryboard) error {
+	return win32.HRESULTError(int32(self.Raw.GetStoryboardFromTag(object.Raw, id, storyboard)))
 }
 
 // GetStatus wraps the raw GetStatus call.
@@ -148,28 +149,28 @@ func (self IUIAnimationManager) Resume() error {
 }
 
 // SetManagerEventHandler wraps the raw SetManagerEventHandler call.
-func (self IUIAnimationManager) SetManagerEventHandler(handler *uianimation.IUIAnimationManagerEventHandler) error {
-	return win32.HRESULTError(int32(self.Raw.SetManagerEventHandler(handler)))
+func (self IUIAnimationManager) SetManagerEventHandler(handler IUIAnimationManagerEventHandler) error {
+	return win32.HRESULTError(int32(self.Raw.SetManagerEventHandler(handler.Raw)))
 }
 
 // SetCancelPriorityComparison wraps the raw SetCancelPriorityComparison call.
-func (self IUIAnimationManager) SetCancelPriorityComparison(comparison *uianimation.IUIAnimationPriorityComparison) error {
-	return win32.HRESULTError(int32(self.Raw.SetCancelPriorityComparison(comparison)))
+func (self IUIAnimationManager) SetCancelPriorityComparison(comparison IUIAnimationPriorityComparison) error {
+	return win32.HRESULTError(int32(self.Raw.SetCancelPriorityComparison(comparison.Raw)))
 }
 
 // SetTrimPriorityComparison wraps the raw SetTrimPriorityComparison call.
-func (self IUIAnimationManager) SetTrimPriorityComparison(comparison *uianimation.IUIAnimationPriorityComparison) error {
-	return win32.HRESULTError(int32(self.Raw.SetTrimPriorityComparison(comparison)))
+func (self IUIAnimationManager) SetTrimPriorityComparison(comparison IUIAnimationPriorityComparison) error {
+	return win32.HRESULTError(int32(self.Raw.SetTrimPriorityComparison(comparison.Raw)))
 }
 
 // SetCompressPriorityComparison wraps the raw SetCompressPriorityComparison call.
-func (self IUIAnimationManager) SetCompressPriorityComparison(comparison *uianimation.IUIAnimationPriorityComparison) error {
-	return win32.HRESULTError(int32(self.Raw.SetCompressPriorityComparison(comparison)))
+func (self IUIAnimationManager) SetCompressPriorityComparison(comparison IUIAnimationPriorityComparison) error {
+	return win32.HRESULTError(int32(self.Raw.SetCompressPriorityComparison(comparison.Raw)))
 }
 
 // SetConcludePriorityComparison wraps the raw SetConcludePriorityComparison call.
-func (self IUIAnimationManager) SetConcludePriorityComparison(comparison *uianimation.IUIAnimationPriorityComparison) error {
-	return win32.HRESULTError(int32(self.Raw.SetConcludePriorityComparison(comparison)))
+func (self IUIAnimationManager) SetConcludePriorityComparison(comparison IUIAnimationPriorityComparison) error {
+	return win32.HRESULTError(int32(self.Raw.SetConcludePriorityComparison(comparison.Raw)))
 }
 
 // Shutdown wraps the raw Shutdown call.
@@ -204,13 +205,13 @@ func (self IUIAnimationManager2) AbandonAllStoryboards() error {
 }
 
 // GetVariableFromTag wraps the raw GetVariableFromTag call.
-func (self IUIAnimationManager2) GetVariableFromTag(object *systemcom.IUnknown, id uint32, variable **uianimation.IUIAnimationVariable2) error {
-	return win32.HRESULTError(int32(self.Raw.GetVariableFromTag(object, id, variable)))
+func (self IUIAnimationManager2) GetVariableFromTag(object systemcomidiom.IUnknown, id uint32, variable **uianimation.IUIAnimationVariable2) error {
+	return win32.HRESULTError(int32(self.Raw.GetVariableFromTag(object.Raw, id, variable)))
 }
 
 // GetStoryboardFromTag wraps the raw GetStoryboardFromTag call.
-func (self IUIAnimationManager2) GetStoryboardFromTag(object *systemcom.IUnknown, id uint32, storyboard **uianimation.IUIAnimationStoryboard2) error {
-	return win32.HRESULTError(int32(self.Raw.GetStoryboardFromTag(object, id, storyboard)))
+func (self IUIAnimationManager2) GetStoryboardFromTag(object systemcomidiom.IUnknown, id uint32, storyboard **uianimation.IUIAnimationStoryboard2) error {
+	return win32.HRESULTError(int32(self.Raw.GetStoryboardFromTag(object.Raw, id, storyboard)))
 }
 
 // EstimateNextEventTime wraps the raw EstimateNextEventTime call.
@@ -239,29 +240,29 @@ func (self IUIAnimationManager2) Resume() error {
 }
 
 // SetManagerEventHandler wraps the raw SetManagerEventHandler call.
-func (self IUIAnimationManager2) SetManagerEventHandler(handler *uianimation.IUIAnimationManagerEventHandler2, fRegisterForNextAnimationEvent bool) error {
+func (self IUIAnimationManager2) SetManagerEventHandler(handler IUIAnimationManagerEventHandler2, fRegisterForNextAnimationEvent bool) error {
 	_fRegisterForNextAnimationEvent := foundation.BOOL(win32.Bool32(fRegisterForNextAnimationEvent))
-	return win32.HRESULTError(int32(self.Raw.SetManagerEventHandler(handler, _fRegisterForNextAnimationEvent)))
+	return win32.HRESULTError(int32(self.Raw.SetManagerEventHandler(handler.Raw, _fRegisterForNextAnimationEvent)))
 }
 
 // SetCancelPriorityComparison wraps the raw SetCancelPriorityComparison call.
-func (self IUIAnimationManager2) SetCancelPriorityComparison(comparison *uianimation.IUIAnimationPriorityComparison2) error {
-	return win32.HRESULTError(int32(self.Raw.SetCancelPriorityComparison(comparison)))
+func (self IUIAnimationManager2) SetCancelPriorityComparison(comparison IUIAnimationPriorityComparison2) error {
+	return win32.HRESULTError(int32(self.Raw.SetCancelPriorityComparison(comparison.Raw)))
 }
 
 // SetTrimPriorityComparison wraps the raw SetTrimPriorityComparison call.
-func (self IUIAnimationManager2) SetTrimPriorityComparison(comparison *uianimation.IUIAnimationPriorityComparison2) error {
-	return win32.HRESULTError(int32(self.Raw.SetTrimPriorityComparison(comparison)))
+func (self IUIAnimationManager2) SetTrimPriorityComparison(comparison IUIAnimationPriorityComparison2) error {
+	return win32.HRESULTError(int32(self.Raw.SetTrimPriorityComparison(comparison.Raw)))
 }
 
 // SetCompressPriorityComparison wraps the raw SetCompressPriorityComparison call.
-func (self IUIAnimationManager2) SetCompressPriorityComparison(comparison *uianimation.IUIAnimationPriorityComparison2) error {
-	return win32.HRESULTError(int32(self.Raw.SetCompressPriorityComparison(comparison)))
+func (self IUIAnimationManager2) SetCompressPriorityComparison(comparison IUIAnimationPriorityComparison2) error {
+	return win32.HRESULTError(int32(self.Raw.SetCompressPriorityComparison(comparison.Raw)))
 }
 
 // SetConcludePriorityComparison wraps the raw SetConcludePriorityComparison call.
-func (self IUIAnimationManager2) SetConcludePriorityComparison(comparison *uianimation.IUIAnimationPriorityComparison2) error {
-	return win32.HRESULTError(int32(self.Raw.SetConcludePriorityComparison(comparison)))
+func (self IUIAnimationManager2) SetConcludePriorityComparison(comparison IUIAnimationPriorityComparison2) error {
+	return win32.HRESULTError(int32(self.Raw.SetConcludePriorityComparison(comparison.Raw)))
 }
 
 // Shutdown wraps the raw Shutdown call.
@@ -324,8 +325,8 @@ func WrapIUIAnimationPriorityComparison(raw *uianimation.IUIAnimationPriorityCom
 }
 
 // HasPriority wraps the raw HasPriority call.
-func (self IUIAnimationPriorityComparison) HasPriority(scheduledStoryboard *uianimation.IUIAnimationStoryboard, newStoryboard *uianimation.IUIAnimationStoryboard, priorityEffect uianimation.UI_ANIMATION_PRIORITY_EFFECT) error {
-	return win32.HRESULTError(int32(self.Raw.HasPriority(scheduledStoryboard, newStoryboard, priorityEffect)))
+func (self IUIAnimationPriorityComparison) HasPriority(scheduledStoryboard IUIAnimationStoryboard, newStoryboard IUIAnimationStoryboard, priorityEffect uianimation.UI_ANIMATION_PRIORITY_EFFECT) error {
+	return win32.HRESULTError(int32(self.Raw.HasPriority(scheduledStoryboard.Raw, newStoryboard.Raw, priorityEffect)))
 }
 
 // IUIAnimationPriorityComparison2 is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationPriorityComparison2 with error-returning methods.
@@ -340,8 +341,8 @@ func WrapIUIAnimationPriorityComparison2(raw *uianimation.IUIAnimationPriorityCo
 }
 
 // HasPriority wraps the raw HasPriority call.
-func (self IUIAnimationPriorityComparison2) HasPriority(scheduledStoryboard *uianimation.IUIAnimationStoryboard2, newStoryboard *uianimation.IUIAnimationStoryboard2, priorityEffect uianimation.UI_ANIMATION_PRIORITY_EFFECT) error {
-	return win32.HRESULTError(int32(self.Raw.HasPriority(scheduledStoryboard, newStoryboard, priorityEffect)))
+func (self IUIAnimationPriorityComparison2) HasPriority(scheduledStoryboard IUIAnimationStoryboard2, newStoryboard IUIAnimationStoryboard2, priorityEffect uianimation.UI_ANIMATION_PRIORITY_EFFECT) error {
+	return win32.HRESULTError(int32(self.Raw.HasPriority(scheduledStoryboard.Raw, newStoryboard.Raw, priorityEffect)))
 }
 
 // IUIAnimationStoryboard is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationStoryboard with error-returning methods.
@@ -356,23 +357,23 @@ func WrapIUIAnimationStoryboard(raw *uianimation.IUIAnimationStoryboard) IUIAnim
 }
 
 // AddTransition wraps the raw AddTransition call.
-func (self IUIAnimationStoryboard) AddTransition(variable *uianimation.IUIAnimationVariable, transition *uianimation.IUIAnimationTransition) error {
-	return win32.HRESULTError(int32(self.Raw.AddTransition(variable, transition)))
+func (self IUIAnimationStoryboard) AddTransition(variable IUIAnimationVariable, transition IUIAnimationTransition) error {
+	return win32.HRESULTError(int32(self.Raw.AddTransition(variable.Raw, transition.Raw)))
 }
 
 // AddKeyframeAfterTransition wraps the raw AddKeyframeAfterTransition call.
-func (self IUIAnimationStoryboard) AddKeyframeAfterTransition(transition *uianimation.IUIAnimationTransition, keyframe *uianimation.UI_ANIMATION_KEYFRAME) error {
-	return win32.HRESULTError(int32(self.Raw.AddKeyframeAfterTransition(transition, keyframe)))
+func (self IUIAnimationStoryboard) AddKeyframeAfterTransition(transition IUIAnimationTransition, keyframe *uianimation.UI_ANIMATION_KEYFRAME) error {
+	return win32.HRESULTError(int32(self.Raw.AddKeyframeAfterTransition(transition.Raw, keyframe)))
 }
 
 // AddTransitionAtKeyframe wraps the raw AddTransitionAtKeyframe call.
-func (self IUIAnimationStoryboard) AddTransitionAtKeyframe(variable *uianimation.IUIAnimationVariable, transition *uianimation.IUIAnimationTransition, startKeyframe uianimation.UI_ANIMATION_KEYFRAME) error {
-	return win32.HRESULTError(int32(self.Raw.AddTransitionAtKeyframe(variable, transition, startKeyframe)))
+func (self IUIAnimationStoryboard) AddTransitionAtKeyframe(variable IUIAnimationVariable, transition IUIAnimationTransition, startKeyframe uianimation.UI_ANIMATION_KEYFRAME) error {
+	return win32.HRESULTError(int32(self.Raw.AddTransitionAtKeyframe(variable.Raw, transition.Raw, startKeyframe)))
 }
 
 // AddTransitionBetweenKeyframes wraps the raw AddTransitionBetweenKeyframes call.
-func (self IUIAnimationStoryboard) AddTransitionBetweenKeyframes(variable *uianimation.IUIAnimationVariable, transition *uianimation.IUIAnimationTransition, startKeyframe uianimation.UI_ANIMATION_KEYFRAME, endKeyframe uianimation.UI_ANIMATION_KEYFRAME) error {
-	return win32.HRESULTError(int32(self.Raw.AddTransitionBetweenKeyframes(variable, transition, startKeyframe, endKeyframe)))
+func (self IUIAnimationStoryboard) AddTransitionBetweenKeyframes(variable IUIAnimationVariable, transition IUIAnimationTransition, startKeyframe uianimation.UI_ANIMATION_KEYFRAME, endKeyframe uianimation.UI_ANIMATION_KEYFRAME) error {
+	return win32.HRESULTError(int32(self.Raw.AddTransitionBetweenKeyframes(variable.Raw, transition.Raw, startKeyframe, endKeyframe)))
 }
 
 // RepeatBetweenKeyframes wraps the raw RepeatBetweenKeyframes call.
@@ -381,8 +382,8 @@ func (self IUIAnimationStoryboard) RepeatBetweenKeyframes(startKeyframe uianimat
 }
 
 // HoldVariable wraps the raw HoldVariable call.
-func (self IUIAnimationStoryboard) HoldVariable(variable *uianimation.IUIAnimationVariable) error {
-	return win32.HRESULTError(int32(self.Raw.HoldVariable(variable)))
+func (self IUIAnimationStoryboard) HoldVariable(variable IUIAnimationVariable) error {
+	return win32.HRESULTError(int32(self.Raw.HoldVariable(variable.Raw)))
 }
 
 // Conclude wraps the raw Conclude call.
@@ -396,8 +397,8 @@ func (self IUIAnimationStoryboard) Abandon() error {
 }
 
 // SetTag wraps the raw SetTag call.
-func (self IUIAnimationStoryboard) SetTag(object *systemcom.IUnknown, id uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetTag(object, id)))
+func (self IUIAnimationStoryboard) SetTag(object systemcomidiom.IUnknown, id uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetTag(object.Raw, id)))
 }
 
 // GetTag wraps the raw GetTag call.
@@ -416,8 +417,8 @@ func (self IUIAnimationStoryboard) GetElapsedTime(elapsedTime *float64) error {
 }
 
 // SetStoryboardEventHandler wraps the raw SetStoryboardEventHandler call.
-func (self IUIAnimationStoryboard) SetStoryboardEventHandler(handler *uianimation.IUIAnimationStoryboardEventHandler) error {
-	return win32.HRESULTError(int32(self.Raw.SetStoryboardEventHandler(handler)))
+func (self IUIAnimationStoryboard) SetStoryboardEventHandler(handler IUIAnimationStoryboardEventHandler) error {
+	return win32.HRESULTError(int32(self.Raw.SetStoryboardEventHandler(handler.Raw)))
 }
 
 // IUIAnimationStoryboard2 is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationStoryboard2 with error-returning methods.
@@ -432,28 +433,28 @@ func WrapIUIAnimationStoryboard2(raw *uianimation.IUIAnimationStoryboard2) IUIAn
 }
 
 // AddTransition wraps the raw AddTransition call.
-func (self IUIAnimationStoryboard2) AddTransition(variable *uianimation.IUIAnimationVariable2, transition *uianimation.IUIAnimationTransition2) error {
-	return win32.HRESULTError(int32(self.Raw.AddTransition(variable, transition)))
+func (self IUIAnimationStoryboard2) AddTransition(variable IUIAnimationVariable2, transition IUIAnimationTransition2) error {
+	return win32.HRESULTError(int32(self.Raw.AddTransition(variable.Raw, transition.Raw)))
 }
 
 // AddKeyframeAfterTransition wraps the raw AddKeyframeAfterTransition call.
-func (self IUIAnimationStoryboard2) AddKeyframeAfterTransition(transition *uianimation.IUIAnimationTransition2, keyframe *uianimation.UI_ANIMATION_KEYFRAME) error {
-	return win32.HRESULTError(int32(self.Raw.AddKeyframeAfterTransition(transition, keyframe)))
+func (self IUIAnimationStoryboard2) AddKeyframeAfterTransition(transition IUIAnimationTransition2, keyframe *uianimation.UI_ANIMATION_KEYFRAME) error {
+	return win32.HRESULTError(int32(self.Raw.AddKeyframeAfterTransition(transition.Raw, keyframe)))
 }
 
 // AddTransitionAtKeyframe wraps the raw AddTransitionAtKeyframe call.
-func (self IUIAnimationStoryboard2) AddTransitionAtKeyframe(variable *uianimation.IUIAnimationVariable2, transition *uianimation.IUIAnimationTransition2, startKeyframe uianimation.UI_ANIMATION_KEYFRAME) error {
-	return win32.HRESULTError(int32(self.Raw.AddTransitionAtKeyframe(variable, transition, startKeyframe)))
+func (self IUIAnimationStoryboard2) AddTransitionAtKeyframe(variable IUIAnimationVariable2, transition IUIAnimationTransition2, startKeyframe uianimation.UI_ANIMATION_KEYFRAME) error {
+	return win32.HRESULTError(int32(self.Raw.AddTransitionAtKeyframe(variable.Raw, transition.Raw, startKeyframe)))
 }
 
 // AddTransitionBetweenKeyframes wraps the raw AddTransitionBetweenKeyframes call.
-func (self IUIAnimationStoryboard2) AddTransitionBetweenKeyframes(variable *uianimation.IUIAnimationVariable2, transition *uianimation.IUIAnimationTransition2, startKeyframe uianimation.UI_ANIMATION_KEYFRAME, endKeyframe uianimation.UI_ANIMATION_KEYFRAME) error {
-	return win32.HRESULTError(int32(self.Raw.AddTransitionBetweenKeyframes(variable, transition, startKeyframe, endKeyframe)))
+func (self IUIAnimationStoryboard2) AddTransitionBetweenKeyframes(variable IUIAnimationVariable2, transition IUIAnimationTransition2, startKeyframe uianimation.UI_ANIMATION_KEYFRAME, endKeyframe uianimation.UI_ANIMATION_KEYFRAME) error {
+	return win32.HRESULTError(int32(self.Raw.AddTransitionBetweenKeyframes(variable.Raw, transition.Raw, startKeyframe, endKeyframe)))
 }
 
 // HoldVariable wraps the raw HoldVariable call.
-func (self IUIAnimationStoryboard2) HoldVariable(variable *uianimation.IUIAnimationVariable2) error {
-	return win32.HRESULTError(int32(self.Raw.HoldVariable(variable)))
+func (self IUIAnimationStoryboard2) HoldVariable(variable IUIAnimationVariable2) error {
+	return win32.HRESULTError(int32(self.Raw.HoldVariable(variable.Raw)))
 }
 
 // Conclude wraps the raw Conclude call.
@@ -467,8 +468,8 @@ func (self IUIAnimationStoryboard2) Abandon() error {
 }
 
 // SetTag wraps the raw SetTag call.
-func (self IUIAnimationStoryboard2) SetTag(object *systemcom.IUnknown, id uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetTag(object, id)))
+func (self IUIAnimationStoryboard2) SetTag(object systemcomidiom.IUnknown, id uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetTag(object.Raw, id)))
 }
 
 // GetTag wraps the raw GetTag call.
@@ -487,10 +488,10 @@ func (self IUIAnimationStoryboard2) GetElapsedTime(elapsedTime *float64) error {
 }
 
 // SetStoryboardEventHandler wraps the raw SetStoryboardEventHandler call.
-func (self IUIAnimationStoryboard2) SetStoryboardEventHandler(handler *uianimation.IUIAnimationStoryboardEventHandler2, fRegisterStatusChangeForNextAnimationEvent bool, fRegisterUpdateForNextAnimationEvent bool) error {
+func (self IUIAnimationStoryboard2) SetStoryboardEventHandler(handler IUIAnimationStoryboardEventHandler2, fRegisterStatusChangeForNextAnimationEvent bool, fRegisterUpdateForNextAnimationEvent bool) error {
 	_fRegisterStatusChangeForNextAnimationEvent := foundation.BOOL(win32.Bool32(fRegisterStatusChangeForNextAnimationEvent))
 	_fRegisterUpdateForNextAnimationEvent := foundation.BOOL(win32.Bool32(fRegisterUpdateForNextAnimationEvent))
-	return win32.HRESULTError(int32(self.Raw.SetStoryboardEventHandler(handler, _fRegisterStatusChangeForNextAnimationEvent, _fRegisterUpdateForNextAnimationEvent)))
+	return win32.HRESULTError(int32(self.Raw.SetStoryboardEventHandler(handler.Raw, _fRegisterStatusChangeForNextAnimationEvent, _fRegisterUpdateForNextAnimationEvent)))
 }
 
 // IUIAnimationStoryboardEventHandler is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationStoryboardEventHandler with error-returning methods.
@@ -505,13 +506,13 @@ func WrapIUIAnimationStoryboardEventHandler(raw *uianimation.IUIAnimationStorybo
 }
 
 // OnStoryboardStatusChanged wraps the raw OnStoryboardStatusChanged call.
-func (self IUIAnimationStoryboardEventHandler) OnStoryboardStatusChanged(storyboard *uianimation.IUIAnimationStoryboard, newStatus uianimation.UI_ANIMATION_STORYBOARD_STATUS, previousStatus uianimation.UI_ANIMATION_STORYBOARD_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.OnStoryboardStatusChanged(storyboard, newStatus, previousStatus)))
+func (self IUIAnimationStoryboardEventHandler) OnStoryboardStatusChanged(storyboard IUIAnimationStoryboard, newStatus uianimation.UI_ANIMATION_STORYBOARD_STATUS, previousStatus uianimation.UI_ANIMATION_STORYBOARD_STATUS) error {
+	return win32.HRESULTError(int32(self.Raw.OnStoryboardStatusChanged(storyboard.Raw, newStatus, previousStatus)))
 }
 
 // OnStoryboardUpdated wraps the raw OnStoryboardUpdated call.
-func (self IUIAnimationStoryboardEventHandler) OnStoryboardUpdated(storyboard *uianimation.IUIAnimationStoryboard) error {
-	return win32.HRESULTError(int32(self.Raw.OnStoryboardUpdated(storyboard)))
+func (self IUIAnimationStoryboardEventHandler) OnStoryboardUpdated(storyboard IUIAnimationStoryboard) error {
+	return win32.HRESULTError(int32(self.Raw.OnStoryboardUpdated(storyboard.Raw)))
 }
 
 // IUIAnimationStoryboardEventHandler2 is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationStoryboardEventHandler2 with error-returning methods.
@@ -526,13 +527,13 @@ func WrapIUIAnimationStoryboardEventHandler2(raw *uianimation.IUIAnimationStoryb
 }
 
 // OnStoryboardStatusChanged wraps the raw OnStoryboardStatusChanged call.
-func (self IUIAnimationStoryboardEventHandler2) OnStoryboardStatusChanged(storyboard *uianimation.IUIAnimationStoryboard2, newStatus uianimation.UI_ANIMATION_STORYBOARD_STATUS, previousStatus uianimation.UI_ANIMATION_STORYBOARD_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.OnStoryboardStatusChanged(storyboard, newStatus, previousStatus)))
+func (self IUIAnimationStoryboardEventHandler2) OnStoryboardStatusChanged(storyboard IUIAnimationStoryboard2, newStatus uianimation.UI_ANIMATION_STORYBOARD_STATUS, previousStatus uianimation.UI_ANIMATION_STORYBOARD_STATUS) error {
+	return win32.HRESULTError(int32(self.Raw.OnStoryboardStatusChanged(storyboard.Raw, newStatus, previousStatus)))
 }
 
 // OnStoryboardUpdated wraps the raw OnStoryboardUpdated call.
-func (self IUIAnimationStoryboardEventHandler2) OnStoryboardUpdated(storyboard *uianimation.IUIAnimationStoryboard2) error {
-	return win32.HRESULTError(int32(self.Raw.OnStoryboardUpdated(storyboard)))
+func (self IUIAnimationStoryboardEventHandler2) OnStoryboardUpdated(storyboard IUIAnimationStoryboard2) error {
+	return win32.HRESULTError(int32(self.Raw.OnStoryboardUpdated(storyboard.Raw)))
 }
 
 // IUIAnimationTimer is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationTimer with error-returning methods.
@@ -547,13 +548,13 @@ func WrapIUIAnimationTimer(raw *uianimation.IUIAnimationTimer) IUIAnimationTimer
 }
 
 // SetTimerUpdateHandler wraps the raw SetTimerUpdateHandler call.
-func (self IUIAnimationTimer) SetTimerUpdateHandler(updateHandler *uianimation.IUIAnimationTimerUpdateHandler, idleBehavior uianimation.UI_ANIMATION_IDLE_BEHAVIOR) error {
-	return win32.HRESULTError(int32(self.Raw.SetTimerUpdateHandler(updateHandler, idleBehavior)))
+func (self IUIAnimationTimer) SetTimerUpdateHandler(updateHandler IUIAnimationTimerUpdateHandler, idleBehavior uianimation.UI_ANIMATION_IDLE_BEHAVIOR) error {
+	return win32.HRESULTError(int32(self.Raw.SetTimerUpdateHandler(updateHandler.Raw, idleBehavior)))
 }
 
 // SetTimerEventHandler wraps the raw SetTimerEventHandler call.
-func (self IUIAnimationTimer) SetTimerEventHandler(handler *uianimation.IUIAnimationTimerEventHandler) error {
-	return win32.HRESULTError(int32(self.Raw.SetTimerEventHandler(handler)))
+func (self IUIAnimationTimer) SetTimerEventHandler(handler IUIAnimationTimerEventHandler) error {
+	return win32.HRESULTError(int32(self.Raw.SetTimerEventHandler(handler.Raw)))
 }
 
 // Enable wraps the raw Enable call.
@@ -635,8 +636,8 @@ func WrapIUIAnimationTimerUpdateHandler(raw *uianimation.IUIAnimationTimerUpdate
 }
 
 // SetTimerClientEventHandler wraps the raw SetTimerClientEventHandler call.
-func (self IUIAnimationTimerUpdateHandler) SetTimerClientEventHandler(handler *uianimation.IUIAnimationTimerClientEventHandler) error {
-	return win32.HRESULTError(int32(self.Raw.SetTimerClientEventHandler(handler)))
+func (self IUIAnimationTimerUpdateHandler) SetTimerClientEventHandler(handler IUIAnimationTimerClientEventHandler) error {
+	return win32.HRESULTError(int32(self.Raw.SetTimerClientEventHandler(handler.Raw)))
 }
 
 // ClearTimerClientEventHandler wraps the raw ClearTimerClientEventHandler call.
@@ -713,8 +714,8 @@ func WrapIUIAnimationTransitionFactory(raw *uianimation.IUIAnimationTransitionFa
 }
 
 // CreateTransition wraps the raw CreateTransition call.
-func (self IUIAnimationTransitionFactory) CreateTransition(interpolator *uianimation.IUIAnimationInterpolator, transition **uianimation.IUIAnimationTransition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTransition(interpolator, transition)))
+func (self IUIAnimationTransitionFactory) CreateTransition(interpolator IUIAnimationInterpolator, transition **uianimation.IUIAnimationTransition) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTransition(interpolator.Raw, transition)))
 }
 
 // IUIAnimationTransitionFactory2 is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationTransitionFactory2 with error-returning methods.
@@ -729,8 +730,8 @@ func WrapIUIAnimationTransitionFactory2(raw *uianimation.IUIAnimationTransitionF
 }
 
 // CreateTransition wraps the raw CreateTransition call.
-func (self IUIAnimationTransitionFactory2) CreateTransition(interpolator *uianimation.IUIAnimationInterpolator2, transition **uianimation.IUIAnimationTransition2) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTransition(interpolator, transition)))
+func (self IUIAnimationTransitionFactory2) CreateTransition(interpolator IUIAnimationInterpolator2, transition **uianimation.IUIAnimationTransition2) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTransition(interpolator.Raw, transition)))
 }
 
 // IUIAnimationTransitionLibrary is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationTransitionLibrary with error-returning methods.
@@ -812,8 +813,8 @@ func (self IUIAnimationVariable) SetRoundingMode(mode uianimation.UI_ANIMATION_R
 }
 
 // SetTag wraps the raw SetTag call.
-func (self IUIAnimationVariable) SetTag(object *systemcom.IUnknown, id uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetTag(object, id)))
+func (self IUIAnimationVariable) SetTag(object systemcomidiom.IUnknown, id uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetTag(object.Raw, id)))
 }
 
 // GetTag wraps the raw GetTag call.
@@ -822,13 +823,13 @@ func (self IUIAnimationVariable) GetTag(object **systemcom.IUnknown, id *uint32)
 }
 
 // SetVariableChangeHandler wraps the raw SetVariableChangeHandler call.
-func (self IUIAnimationVariable) SetVariableChangeHandler(handler *uianimation.IUIAnimationVariableChangeHandler) error {
-	return win32.HRESULTError(int32(self.Raw.SetVariableChangeHandler(handler)))
+func (self IUIAnimationVariable) SetVariableChangeHandler(handler IUIAnimationVariableChangeHandler) error {
+	return win32.HRESULTError(int32(self.Raw.SetVariableChangeHandler(handler.Raw)))
 }
 
 // SetVariableIntegerChangeHandler wraps the raw SetVariableIntegerChangeHandler call.
-func (self IUIAnimationVariable) SetVariableIntegerChangeHandler(handler *uianimation.IUIAnimationVariableIntegerChangeHandler) error {
-	return win32.HRESULTError(int32(self.Raw.SetVariableIntegerChangeHandler(handler)))
+func (self IUIAnimationVariable) SetVariableIntegerChangeHandler(handler IUIAnimationVariableIntegerChangeHandler) error {
+	return win32.HRESULTError(int32(self.Raw.SetVariableIntegerChangeHandler(handler.Raw)))
 }
 
 // IUIAnimationVariable2 is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationVariable2 with error-returning methods.
@@ -858,8 +859,8 @@ func (self IUIAnimationVariable2) GetVectorValue(value *float64, cDimension uint
 }
 
 // GetCurve wraps the raw GetCurve call.
-func (self IUIAnimationVariable2) GetCurve(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurve(animation)))
+func (self IUIAnimationVariable2) GetCurve(animation graphicsdirectcompositionidiom.IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.GetCurve(animation.Raw)))
 }
 
 // GetVectorCurve wraps the raw GetVectorCurve call.
@@ -938,8 +939,8 @@ func (self IUIAnimationVariable2) SetRoundingMode(mode uianimation.UI_ANIMATION_
 }
 
 // SetTag wraps the raw SetTag call.
-func (self IUIAnimationVariable2) SetTag(object *systemcom.IUnknown, id uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetTag(object, id)))
+func (self IUIAnimationVariable2) SetTag(object systemcomidiom.IUnknown, id uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetTag(object.Raw, id)))
 }
 
 // GetTag wraps the raw GetTag call.
@@ -948,20 +949,20 @@ func (self IUIAnimationVariable2) GetTag(object **systemcom.IUnknown, id *uint32
 }
 
 // SetVariableChangeHandler wraps the raw SetVariableChangeHandler call.
-func (self IUIAnimationVariable2) SetVariableChangeHandler(handler *uianimation.IUIAnimationVariableChangeHandler2, fRegisterForNextAnimationEvent bool) error {
+func (self IUIAnimationVariable2) SetVariableChangeHandler(handler IUIAnimationVariableChangeHandler2, fRegisterForNextAnimationEvent bool) error {
 	_fRegisterForNextAnimationEvent := foundation.BOOL(win32.Bool32(fRegisterForNextAnimationEvent))
-	return win32.HRESULTError(int32(self.Raw.SetVariableChangeHandler(handler, _fRegisterForNextAnimationEvent)))
+	return win32.HRESULTError(int32(self.Raw.SetVariableChangeHandler(handler.Raw, _fRegisterForNextAnimationEvent)))
 }
 
 // SetVariableIntegerChangeHandler wraps the raw SetVariableIntegerChangeHandler call.
-func (self IUIAnimationVariable2) SetVariableIntegerChangeHandler(handler *uianimation.IUIAnimationVariableIntegerChangeHandler2, fRegisterForNextAnimationEvent bool) error {
+func (self IUIAnimationVariable2) SetVariableIntegerChangeHandler(handler IUIAnimationVariableIntegerChangeHandler2, fRegisterForNextAnimationEvent bool) error {
 	_fRegisterForNextAnimationEvent := foundation.BOOL(win32.Bool32(fRegisterForNextAnimationEvent))
-	return win32.HRESULTError(int32(self.Raw.SetVariableIntegerChangeHandler(handler, _fRegisterForNextAnimationEvent)))
+	return win32.HRESULTError(int32(self.Raw.SetVariableIntegerChangeHandler(handler.Raw, _fRegisterForNextAnimationEvent)))
 }
 
 // SetVariableCurveChangeHandler wraps the raw SetVariableCurveChangeHandler call.
-func (self IUIAnimationVariable2) SetVariableCurveChangeHandler(handler *uianimation.IUIAnimationVariableCurveChangeHandler2) error {
-	return win32.HRESULTError(int32(self.Raw.SetVariableCurveChangeHandler(handler)))
+func (self IUIAnimationVariable2) SetVariableCurveChangeHandler(handler IUIAnimationVariableCurveChangeHandler2) error {
+	return win32.HRESULTError(int32(self.Raw.SetVariableCurveChangeHandler(handler.Raw)))
 }
 
 // IUIAnimationVariableChangeHandler is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationVariableChangeHandler with error-returning methods.
@@ -987,8 +988,8 @@ func WrapIUIAnimationVariableChangeHandler2(raw *uianimation.IUIAnimationVariabl
 }
 
 // OnValueChanged wraps the raw OnValueChanged call.
-func (self IUIAnimationVariableChangeHandler2) OnValueChanged(storyboard *uianimation.IUIAnimationStoryboard2, variable *uianimation.IUIAnimationVariable2, newValue *float64, previousValue *float64, cDimension uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnValueChanged(storyboard, variable, newValue, previousValue, cDimension)))
+func (self IUIAnimationVariableChangeHandler2) OnValueChanged(storyboard IUIAnimationStoryboard2, variable IUIAnimationVariable2, newValue *float64, previousValue *float64, cDimension uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnValueChanged(storyboard.Raw, variable.Raw, newValue, previousValue, cDimension)))
 }
 
 // IUIAnimationVariableCurveChangeHandler2 is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationVariableCurveChangeHandler2 with error-returning methods.
@@ -1003,8 +1004,8 @@ func WrapIUIAnimationVariableCurveChangeHandler2(raw *uianimation.IUIAnimationVa
 }
 
 // OnCurveChanged wraps the raw OnCurveChanged call.
-func (self IUIAnimationVariableCurveChangeHandler2) OnCurveChanged(variable *uianimation.IUIAnimationVariable2) error {
-	return win32.HRESULTError(int32(self.Raw.OnCurveChanged(variable)))
+func (self IUIAnimationVariableCurveChangeHandler2) OnCurveChanged(variable IUIAnimationVariable2) error {
+	return win32.HRESULTError(int32(self.Raw.OnCurveChanged(variable.Raw)))
 }
 
 // IUIAnimationVariableIntegerChangeHandler is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationVariableIntegerChangeHandler with error-returning methods.
@@ -1019,8 +1020,8 @@ func WrapIUIAnimationVariableIntegerChangeHandler(raw *uianimation.IUIAnimationV
 }
 
 // OnIntegerValueChanged wraps the raw OnIntegerValueChanged call.
-func (self IUIAnimationVariableIntegerChangeHandler) OnIntegerValueChanged(storyboard *uianimation.IUIAnimationStoryboard, variable *uianimation.IUIAnimationVariable, newValue int32, previousValue int32) error {
-	return win32.HRESULTError(int32(self.Raw.OnIntegerValueChanged(storyboard, variable, newValue, previousValue)))
+func (self IUIAnimationVariableIntegerChangeHandler) OnIntegerValueChanged(storyboard IUIAnimationStoryboard, variable IUIAnimationVariable, newValue int32, previousValue int32) error {
+	return win32.HRESULTError(int32(self.Raw.OnIntegerValueChanged(storyboard.Raw, variable.Raw, newValue, previousValue)))
 }
 
 // IUIAnimationVariableIntegerChangeHandler2 is an idiomatic wrapper over the raw COM interface UI.Animation.IUIAnimationVariableIntegerChangeHandler2 with error-returning methods.
@@ -1035,6 +1036,6 @@ func WrapIUIAnimationVariableIntegerChangeHandler2(raw *uianimation.IUIAnimation
 }
 
 // OnIntegerValueChanged wraps the raw OnIntegerValueChanged call.
-func (self IUIAnimationVariableIntegerChangeHandler2) OnIntegerValueChanged(storyboard *uianimation.IUIAnimationStoryboard2, variable *uianimation.IUIAnimationVariable2, newValue *int32, previousValue *int32, cDimension uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnIntegerValueChanged(storyboard, variable, newValue, previousValue, cDimension)))
+func (self IUIAnimationVariableIntegerChangeHandler2) OnIntegerValueChanged(storyboard IUIAnimationStoryboard2, variable IUIAnimationVariable2, newValue *int32, previousValue *int32, cDimension uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnIntegerValueChanged(storyboard.Raw, variable.Raw, newValue, previousValue, cDimension)))
 }

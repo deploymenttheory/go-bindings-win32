@@ -73,8 +73,8 @@ func WrapIActionQueryConcept(raw *systemdiagnosticsdebugextensions.IActionQueryC
 }
 
 // EnumerateActions wraps the raw EnumerateActions call.
-func (self IActionQueryConcept) EnumerateActions(contextObject *systemdiagnosticsdebugextensions.IModelObject, actionEnumerator **systemdiagnosticsdebugextensions.IActionEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateActions(contextObject, actionEnumerator)))
+func (self IActionQueryConcept) EnumerateActions(contextObject IModelObject, actionEnumerator **systemdiagnosticsdebugextensions.IActionEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.EnumerateActions(contextObject.Raw, actionEnumerator)))
 }
 
 // IActionableConcept is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IActionableConcept with error-returning methods.
@@ -89,8 +89,8 @@ func WrapIActionableConcept(raw *systemdiagnosticsdebugextensions.IActionableCon
 }
 
 // EnumerateActions wraps the raw EnumerateActions call.
-func (self IActionableConcept) EnumerateActions(contextObject *systemdiagnosticsdebugextensions.IModelObject, actionEnumerator **systemdiagnosticsdebugextensions.IActionEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateActions(contextObject, actionEnumerator)))
+func (self IActionableConcept) EnumerateActions(contextObject IModelObject, actionEnumerator **systemdiagnosticsdebugextensions.IActionEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.EnumerateActions(contextObject.Raw, actionEnumerator)))
 }
 
 // ICodeAddressConcept is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.ICodeAddressConcept with error-returning methods.
@@ -105,8 +105,8 @@ func WrapICodeAddressConcept(raw *systemdiagnosticsdebugextensions.ICodeAddressC
 }
 
 // GetContainingSymbol wraps the raw GetContainingSymbol call.
-func (self ICodeAddressConcept) GetContainingSymbol(pContextObject *systemdiagnosticsdebugextensions.IModelObject, ppSymbol **systemdiagnosticsdebugextensions.IDebugHostSymbol) error {
-	return win32.HRESULTError(int32(self.Raw.GetContainingSymbol(pContextObject, ppSymbol)))
+func (self ICodeAddressConcept) GetContainingSymbol(pContextObject IModelObject, ppSymbol **systemdiagnosticsdebugextensions.IDebugHostSymbol) error {
+	return win32.HRESULTError(int32(self.Raw.GetContainingSymbol(pContextObject.Raw, ppSymbol)))
 }
 
 // IComparableConcept is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IComparableConcept with error-returning methods.
@@ -121,8 +121,8 @@ func WrapIComparableConcept(raw *systemdiagnosticsdebugextensions.IComparableCon
 }
 
 // CompareObjects wraps the raw CompareObjects call.
-func (self IComparableConcept) CompareObjects(contextObject *systemdiagnosticsdebugextensions.IModelObject, otherObject *systemdiagnosticsdebugextensions.IModelObject, comparisonResult *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CompareObjects(contextObject, otherObject, comparisonResult)))
+func (self IComparableConcept) CompareObjects(contextObject IModelObject, otherObject IModelObject, comparisonResult *int32) error {
+	return win32.HRESULTError(int32(self.Raw.CompareObjects(contextObject.Raw, otherObject.Raw, comparisonResult)))
 }
 
 // IConstructableConcept is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IConstructableConcept with error-returning methods.
@@ -153,8 +153,8 @@ func WrapIDataModelConcept(raw *systemdiagnosticsdebugextensions.IDataModelConce
 }
 
 // InitializeObject wraps the raw InitializeObject call.
-func (self IDataModelConcept) InitializeObject(modelObject *systemdiagnosticsdebugextensions.IModelObject, matchingTypeSignature *systemdiagnosticsdebugextensions.IDebugHostTypeSignature, wildcardMatches *systemdiagnosticsdebugextensions.IDebugHostSymbolEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeObject(modelObject, matchingTypeSignature, wildcardMatches)))
+func (self IDataModelConcept) InitializeObject(modelObject IModelObject, matchingTypeSignature IDebugHostTypeSignature, wildcardMatches IDebugHostSymbolEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeObject(modelObject.Raw, matchingTypeSignature.Raw, wildcardMatches.Raw)))
 }
 
 // GetName wraps the raw GetName call.
@@ -190,13 +190,13 @@ func (self IDataModelManager) CreateErrorObject(hrError foundation.HRESULT, pwsz
 }
 
 // CreateSyntheticObject wraps the raw CreateSyntheticObject call.
-func (self IDataModelManager) CreateSyntheticObject(context *systemdiagnosticsdebugextensions.IDebugHostContext, object **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSyntheticObject(context, object)))
+func (self IDataModelManager) CreateSyntheticObject(context IDebugHostContext, object **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSyntheticObject(context.Raw, object)))
 }
 
 // CreateDataModelObject wraps the raw CreateDataModelObject call.
-func (self IDataModelManager) CreateDataModelObject(dataModel *systemdiagnosticsdebugextensions.IDataModelConcept, object **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDataModelObject(dataModel, object)))
+func (self IDataModelManager) CreateDataModelObject(dataModel IDataModelConcept, object **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDataModelObject(dataModel.Raw, object)))
 }
 
 // CreateIntrinsicObject wraps the raw CreateIntrinsicObject call.
@@ -205,43 +205,43 @@ func (self IDataModelManager) CreateIntrinsicObject(objectKind systemdiagnostics
 }
 
 // CreateTypedIntrinsicObject wraps the raw CreateTypedIntrinsicObject call.
-func (self IDataModelManager) CreateTypedIntrinsicObject(intrinsicData *systemvariant.VARIANT, type_ *systemdiagnosticsdebugextensions.IDebugHostType, object **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTypedIntrinsicObject(intrinsicData, type_, object)))
+func (self IDataModelManager) CreateTypedIntrinsicObject(intrinsicData *systemvariant.VARIANT, type_ IDebugHostType, object **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTypedIntrinsicObject(intrinsicData, type_.Raw, object)))
 }
 
 // GetModelForTypeSignature wraps the raw GetModelForTypeSignature call.
-func (self IDataModelManager) GetModelForTypeSignature(typeSignature *systemdiagnosticsdebugextensions.IDebugHostTypeSignature, dataModel **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.GetModelForTypeSignature(typeSignature, dataModel)))
+func (self IDataModelManager) GetModelForTypeSignature(typeSignature IDebugHostTypeSignature, dataModel **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.GetModelForTypeSignature(typeSignature.Raw, dataModel)))
 }
 
 // GetModelForType wraps the raw GetModelForType call.
-func (self IDataModelManager) GetModelForType(type_ *systemdiagnosticsdebugextensions.IDebugHostType, dataModel **systemdiagnosticsdebugextensions.IModelObject, typeSignature **systemdiagnosticsdebugextensions.IDebugHostTypeSignature, wildcardMatches **systemdiagnosticsdebugextensions.IDebugHostSymbolEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetModelForType(type_, dataModel, typeSignature, wildcardMatches)))
+func (self IDataModelManager) GetModelForType(type_ IDebugHostType, dataModel **systemdiagnosticsdebugextensions.IModelObject, typeSignature **systemdiagnosticsdebugextensions.IDebugHostTypeSignature, wildcardMatches **systemdiagnosticsdebugextensions.IDebugHostSymbolEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.GetModelForType(type_.Raw, dataModel, typeSignature, wildcardMatches)))
 }
 
 // RegisterModelForTypeSignature wraps the raw RegisterModelForTypeSignature call.
-func (self IDataModelManager) RegisterModelForTypeSignature(typeSignature *systemdiagnosticsdebugextensions.IDebugHostTypeSignature, dataModel *systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterModelForTypeSignature(typeSignature, dataModel)))
+func (self IDataModelManager) RegisterModelForTypeSignature(typeSignature IDebugHostTypeSignature, dataModel IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterModelForTypeSignature(typeSignature.Raw, dataModel.Raw)))
 }
 
 // UnregisterModelForTypeSignature wraps the raw UnregisterModelForTypeSignature call.
-func (self IDataModelManager) UnregisterModelForTypeSignature(dataModel *systemdiagnosticsdebugextensions.IModelObject, typeSignature *systemdiagnosticsdebugextensions.IDebugHostTypeSignature) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterModelForTypeSignature(dataModel, typeSignature)))
+func (self IDataModelManager) UnregisterModelForTypeSignature(dataModel IModelObject, typeSignature IDebugHostTypeSignature) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterModelForTypeSignature(dataModel.Raw, typeSignature.Raw)))
 }
 
 // RegisterExtensionForTypeSignature wraps the raw RegisterExtensionForTypeSignature call.
-func (self IDataModelManager) RegisterExtensionForTypeSignature(typeSignature *systemdiagnosticsdebugextensions.IDebugHostTypeSignature, dataModel *systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterExtensionForTypeSignature(typeSignature, dataModel)))
+func (self IDataModelManager) RegisterExtensionForTypeSignature(typeSignature IDebugHostTypeSignature, dataModel IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterExtensionForTypeSignature(typeSignature.Raw, dataModel.Raw)))
 }
 
 // UnregisterExtensionForTypeSignature wraps the raw UnregisterExtensionForTypeSignature call.
-func (self IDataModelManager) UnregisterExtensionForTypeSignature(dataModel *systemdiagnosticsdebugextensions.IModelObject, typeSignature *systemdiagnosticsdebugextensions.IDebugHostTypeSignature) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterExtensionForTypeSignature(dataModel, typeSignature)))
+func (self IDataModelManager) UnregisterExtensionForTypeSignature(dataModel IModelObject, typeSignature IDebugHostTypeSignature) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterExtensionForTypeSignature(dataModel.Raw, typeSignature.Raw)))
 }
 
 // CreateMetadataStore wraps the raw CreateMetadataStore call.
-func (self IDataModelManager) CreateMetadataStore(parentStore *systemdiagnosticsdebugextensions.IKeyStore, metadataStore **systemdiagnosticsdebugextensions.IKeyStore) error {
-	return win32.HRESULTError(int32(self.Raw.CreateMetadataStore(parentStore, metadataStore)))
+func (self IDataModelManager) CreateMetadataStore(parentStore IKeyStore, metadataStore **systemdiagnosticsdebugextensions.IKeyStore) error {
+	return win32.HRESULTError(int32(self.Raw.CreateMetadataStore(parentStore.Raw, metadataStore)))
 }
 
 // GetRootNamespace wraps the raw GetRootNamespace call.
@@ -250,9 +250,9 @@ func (self IDataModelManager) GetRootNamespace(rootNamespace **systemdiagnostics
 }
 
 // RegisterNamedModel wraps the raw RegisterNamedModel call.
-func (self IDataModelManager) RegisterNamedModel(modelName string, modeObject *systemdiagnosticsdebugextensions.IModelObject) error {
+func (self IDataModelManager) RegisterNamedModel(modelName string, modeObject IModelObject) error {
 	_modelName := win32.UTF16Ptr(modelName)
-	return win32.HRESULTError(int32(self.Raw.RegisterNamedModel(foundation.PWSTR(_modelName), modeObject)))
+	return win32.HRESULTError(int32(self.Raw.RegisterNamedModel(foundation.PWSTR(_modelName), modeObject.Raw)))
 }
 
 // UnregisterNamedModel wraps the raw UnregisterNamedModel call.
@@ -279,16 +279,16 @@ func WrapIDataModelManager2(raw *systemdiagnosticsdebugextensions.IDataModelMana
 }
 
 // AcquireSubNamespace wraps the raw AcquireSubNamespace call.
-func (self IDataModelManager2) AcquireSubNamespace(modelName string, subNamespaceModelName string, accessName string, metadata *systemdiagnosticsdebugextensions.IKeyStore, namespaceModelObject **systemdiagnosticsdebugextensions.IModelObject) error {
+func (self IDataModelManager2) AcquireSubNamespace(modelName string, subNamespaceModelName string, accessName string, metadata IKeyStore, namespaceModelObject **systemdiagnosticsdebugextensions.IModelObject) error {
 	_modelName := win32.UTF16Ptr(modelName)
 	_subNamespaceModelName := win32.UTF16Ptr(subNamespaceModelName)
 	_accessName := win32.UTF16Ptr(accessName)
-	return win32.HRESULTError(int32(self.Raw.AcquireSubNamespace(foundation.PWSTR(_modelName), foundation.PWSTR(_subNamespaceModelName), foundation.PWSTR(_accessName), metadata, namespaceModelObject)))
+	return win32.HRESULTError(int32(self.Raw.AcquireSubNamespace(foundation.PWSTR(_modelName), foundation.PWSTR(_subNamespaceModelName), foundation.PWSTR(_accessName), metadata.Raw, namespaceModelObject)))
 }
 
 // CreateTypedIntrinsicObjectEx wraps the raw CreateTypedIntrinsicObjectEx call.
-func (self IDataModelManager2) CreateTypedIntrinsicObjectEx(context *systemdiagnosticsdebugextensions.IDebugHostContext, intrinsicData *systemvariant.VARIANT, type_ *systemdiagnosticsdebugextensions.IDebugHostType, object **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTypedIntrinsicObjectEx(context, intrinsicData, type_, object)))
+func (self IDataModelManager2) CreateTypedIntrinsicObjectEx(context IDebugHostContext, intrinsicData *systemvariant.VARIANT, type_ IDebugHostType, object **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTypedIntrinsicObjectEx(context.Raw, intrinsicData, type_.Raw, object)))
 }
 
 // IDataModelManager3 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDataModelManager3 with error-returning methods.
@@ -303,11 +303,11 @@ func WrapIDataModelManager3(raw *systemdiagnosticsdebugextensions.IDataModelMana
 }
 
 // AcquireFilteredSubNamespace wraps the raw AcquireFilteredSubNamespace call.
-func (self IDataModelManager3) AcquireFilteredSubNamespace(modelName string, subNamespaceModelName string, accessName string, metadata *systemdiagnosticsdebugextensions.IKeyStore, filter *systemdiagnosticsdebugextensions.IModelMethod, namespaceModelObject **systemdiagnosticsdebugextensions.IModelObject, token **systemdiagnosticsdebugextensions.IFilteredNamespacePropertyToken) error {
+func (self IDataModelManager3) AcquireFilteredSubNamespace(modelName string, subNamespaceModelName string, accessName string, metadata IKeyStore, filter IModelMethod, namespaceModelObject **systemdiagnosticsdebugextensions.IModelObject, token **systemdiagnosticsdebugextensions.IFilteredNamespacePropertyToken) error {
 	_modelName := win32.UTF16Ptr(modelName)
 	_subNamespaceModelName := win32.UTF16Ptr(subNamespaceModelName)
 	_accessName := win32.UTF16Ptr(accessName)
-	return win32.HRESULTError(int32(self.Raw.AcquireFilteredSubNamespace(foundation.PWSTR(_modelName), foundation.PWSTR(_subNamespaceModelName), foundation.PWSTR(_accessName), metadata, filter, namespaceModelObject, token)))
+	return win32.HRESULTError(int32(self.Raw.AcquireFilteredSubNamespace(foundation.PWSTR(_modelName), foundation.PWSTR(_subNamespaceModelName), foundation.PWSTR(_accessName), metadata.Raw, filter.Raw, namespaceModelObject, token)))
 }
 
 // EnumerateNamedModels wraps the raw EnumerateNamedModels call.
@@ -327,8 +327,8 @@ func WrapIDataModelManager4(raw *systemdiagnosticsdebugextensions.IDataModelMana
 }
 
 // CreateSyntheticObjectFromKeyStore wraps the raw CreateSyntheticObjectFromKeyStore call.
-func (self IDataModelManager4) CreateSyntheticObjectFromKeyStore(context *systemdiagnosticsdebugextensions.IDebugHostContext, parentStore *systemdiagnosticsdebugextensions.IKeyStore, object **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSyntheticObjectFromKeyStore(context, parentStore, object)))
+func (self IDataModelManager4) CreateSyntheticObjectFromKeyStore(context IDebugHostContext, parentStore IKeyStore, object **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSyntheticObjectFromKeyStore(context.Raw, parentStore.Raw, object)))
 }
 
 // IDataModelNameBinder is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDataModelNameBinder with error-returning methods.
@@ -343,25 +343,25 @@ func WrapIDataModelNameBinder(raw *systemdiagnosticsdebugextensions.IDataModelNa
 }
 
 // BindValue wraps the raw BindValue call.
-func (self IDataModelNameBinder) BindValue(contextObject *systemdiagnosticsdebugextensions.IModelObject, name string, value **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
+func (self IDataModelNameBinder) BindValue(contextObject IModelObject, name string, value **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
 	_name := win32.UTF16Ptr(name)
-	return win32.HRESULTError(int32(self.Raw.BindValue(contextObject, foundation.PWSTR(_name), value, metadata)))
+	return win32.HRESULTError(int32(self.Raw.BindValue(contextObject.Raw, foundation.PWSTR(_name), value, metadata)))
 }
 
 // BindReference wraps the raw BindReference call.
-func (self IDataModelNameBinder) BindReference(contextObject *systemdiagnosticsdebugextensions.IModelObject, name string, reference **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
+func (self IDataModelNameBinder) BindReference(contextObject IModelObject, name string, reference **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
 	_name := win32.UTF16Ptr(name)
-	return win32.HRESULTError(int32(self.Raw.BindReference(contextObject, foundation.PWSTR(_name), reference, metadata)))
+	return win32.HRESULTError(int32(self.Raw.BindReference(contextObject.Raw, foundation.PWSTR(_name), reference, metadata)))
 }
 
 // EnumerateValues wraps the raw EnumerateValues call.
-func (self IDataModelNameBinder) EnumerateValues(contextObject *systemdiagnosticsdebugextensions.IModelObject, enumerator **systemdiagnosticsdebugextensions.IKeyEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateValues(contextObject, enumerator)))
+func (self IDataModelNameBinder) EnumerateValues(contextObject IModelObject, enumerator **systemdiagnosticsdebugextensions.IKeyEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.EnumerateValues(contextObject.Raw, enumerator)))
 }
 
 // EnumerateReferences wraps the raw EnumerateReferences call.
-func (self IDataModelNameBinder) EnumerateReferences(contextObject *systemdiagnosticsdebugextensions.IModelObject, enumerator **systemdiagnosticsdebugextensions.IKeyEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateReferences(contextObject, enumerator)))
+func (self IDataModelNameBinder) EnumerateReferences(contextObject IModelObject, enumerator **systemdiagnosticsdebugextensions.IKeyEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.EnumerateReferences(contextObject.Raw, enumerator)))
 }
 
 // IDataModelScript is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDataModelScript with error-returning methods.
@@ -387,13 +387,13 @@ func (self IDataModelScript) Rename(scriptName string) error {
 }
 
 // Populate wraps the raw Populate call.
-func (self IDataModelScript) Populate(contentStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Populate(contentStream)))
+func (self IDataModelScript) Populate(contentStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Populate(contentStream.Raw)))
 }
 
 // Execute wraps the raw Execute call.
-func (self IDataModelScript) Execute(client *systemdiagnosticsdebugextensions.IDataModelScriptClient) error {
-	return win32.HRESULTError(int32(self.Raw.Execute(client)))
+func (self IDataModelScript) Execute(client IDataModelScriptClient) error {
+	return win32.HRESULTError(int32(self.Raw.Execute(client.Raw)))
 }
 
 // Unlink wraps the raw Unlink call.
@@ -407,8 +407,8 @@ func (self IDataModelScript) IsInvocable(isInvocable *bool) error {
 }
 
 // InvokeMain wraps the raw InvokeMain call.
-func (self IDataModelScript) InvokeMain(client *systemdiagnosticsdebugextensions.IDataModelScriptClient) error {
-	return win32.HRESULTError(int32(self.Raw.InvokeMain(client)))
+func (self IDataModelScript) InvokeMain(client IDataModelScriptClient) error {
+	return win32.HRESULTError(int32(self.Raw.InvokeMain(client.Raw)))
 }
 
 // IDataModelScript2 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDataModelScript2 with error-returning methods.
@@ -502,13 +502,13 @@ func (self IDataModelScriptDebug) SetEventFilter(eventFilter systemdiagnosticsde
 }
 
 // StartDebugging wraps the raw StartDebugging call.
-func (self IDataModelScriptDebug) StartDebugging(debugClient *systemdiagnosticsdebugextensions.IDataModelScriptDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.StartDebugging(debugClient)))
+func (self IDataModelScriptDebug) StartDebugging(debugClient IDataModelScriptDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.StartDebugging(debugClient.Raw)))
 }
 
 // StopDebugging wraps the raw StopDebugging call.
-func (self IDataModelScriptDebug) StopDebugging(debugClient *systemdiagnosticsdebugextensions.IDataModelScriptDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.StopDebugging(debugClient)))
+func (self IDataModelScriptDebug) StopDebugging(debugClient IDataModelScriptDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.StopDebugging(debugClient.Raw)))
 }
 
 // IDataModelScriptDebug2 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDataModelScriptDebug2 with error-returning methods.
@@ -597,8 +597,8 @@ func WrapIDataModelScriptDebugClient(raw *systemdiagnosticsdebugextensions.IData
 }
 
 // NotifyDebugEvent wraps the raw NotifyDebugEvent call.
-func (self IDataModelScriptDebugClient) NotifyDebugEvent(pEventInfo *systemdiagnosticsdebugextensions.ScriptDebugEventInformation, pScript *systemdiagnosticsdebugextensions.IDataModelScript, pEventDataObject *systemdiagnosticsdebugextensions.IModelObject, resumeEventKind *systemdiagnosticsdebugextensions.ScriptExecutionKind) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyDebugEvent(pEventInfo, pScript, pEventDataObject, resumeEventKind)))
+func (self IDataModelScriptDebugClient) NotifyDebugEvent(pEventInfo *systemdiagnosticsdebugextensions.ScriptDebugEventInformation, pScript IDataModelScript, pEventDataObject IModelObject, resumeEventKind *systemdiagnosticsdebugextensions.ScriptExecutionKind) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyDebugEvent(pEventInfo, pScript.Raw, pEventDataObject.Raw, resumeEventKind)))
 }
 
 // IDataModelScriptDebugStack is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDataModelScriptDebugStack with error-returning methods.
@@ -702,8 +702,8 @@ func WrapIDataModelScriptHostContext(raw *systemdiagnosticsdebugextensions.IData
 }
 
 // NotifyScriptChange wraps the raw NotifyScriptChange call.
-func (self IDataModelScriptHostContext) NotifyScriptChange(script *systemdiagnosticsdebugextensions.IDataModelScript, changeKind systemdiagnosticsdebugextensions.ScriptChangeKind) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyScriptChange(script, changeKind)))
+func (self IDataModelScriptHostContext) NotifyScriptChange(script IDataModelScript, changeKind systemdiagnosticsdebugextensions.ScriptChangeKind) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyScriptChange(script.Raw, changeKind)))
 }
 
 // GetNamespaceObject wraps the raw GetNamespaceObject call.
@@ -728,13 +728,13 @@ func (self IDataModelScriptManager) GetDefaultNameBinder(ppNameBinder **systemdi
 }
 
 // RegisterScriptProvider wraps the raw RegisterScriptProvider call.
-func (self IDataModelScriptManager) RegisterScriptProvider(provider *systemdiagnosticsdebugextensions.IDataModelScriptProvider) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterScriptProvider(provider)))
+func (self IDataModelScriptManager) RegisterScriptProvider(provider IDataModelScriptProvider) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterScriptProvider(provider.Raw)))
 }
 
 // UnregisterScriptProvider wraps the raw UnregisterScriptProvider call.
-func (self IDataModelScriptManager) UnregisterScriptProvider(provider *systemdiagnosticsdebugextensions.IDataModelScriptProvider) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterScriptProvider(provider)))
+func (self IDataModelScriptManager) UnregisterScriptProvider(provider IDataModelScriptProvider) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterScriptProvider(provider.Raw)))
 }
 
 // FindProviderForScriptType wraps the raw FindProviderForScriptType call.
@@ -1595,8 +1595,8 @@ func (self IDebugClient) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -1610,8 +1610,8 @@ func (self IDebugClient) GetInputCallbacks(Callbacks **systemdiagnosticsdebugext
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -1620,8 +1620,8 @@ func (self IDebugClient) GetOutputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -1635,13 +1635,13 @@ func (self IDebugClient) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -1680,8 +1680,8 @@ func (self IDebugClient) GetEventCallbacks(Callbacks **systemdiagnosticsdebugext
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -1831,8 +1831,8 @@ func (self IDebugClient2) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient2) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient2) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -1846,8 +1846,8 @@ func (self IDebugClient2) GetInputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient2) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient2) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -1856,8 +1856,8 @@ func (self IDebugClient2) GetOutputCallbacks(Callbacks **systemdiagnosticsdebuge
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient2) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient2) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -1871,13 +1871,13 @@ func (self IDebugClient2) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient2) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient2) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient2) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient2) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -1916,8 +1916,8 @@ func (self IDebugClient2) GetEventCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient2) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient2) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -2107,8 +2107,8 @@ func (self IDebugClient3) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient3) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient3) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -2122,8 +2122,8 @@ func (self IDebugClient3) GetInputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient3) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient3) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -2132,8 +2132,8 @@ func (self IDebugClient3) GetOutputCallbacks(Callbacks **systemdiagnosticsdebuge
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient3) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient3) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -2147,13 +2147,13 @@ func (self IDebugClient3) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient3) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient3) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient3) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient3) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -2192,8 +2192,8 @@ func (self IDebugClient3) GetEventCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient3) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient3) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -2406,8 +2406,8 @@ func (self IDebugClient4) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient4) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient4) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -2421,8 +2421,8 @@ func (self IDebugClient4) GetInputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient4) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient4) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -2431,8 +2431,8 @@ func (self IDebugClient4) GetOutputCallbacks(Callbacks **systemdiagnosticsdebuge
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient4) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient4) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -2446,13 +2446,13 @@ func (self IDebugClient4) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient4) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient4) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient4) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient4) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -2491,8 +2491,8 @@ func (self IDebugClient4) GetEventCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient4) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient4) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -2739,8 +2739,8 @@ func (self IDebugClient5) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient5) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient5) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -2754,8 +2754,8 @@ func (self IDebugClient5) GetInputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient5) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient5) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -2764,8 +2764,8 @@ func (self IDebugClient5) GetOutputCallbacks(Callbacks **systemdiagnosticsdebuge
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient5) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient5) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -2779,13 +2779,13 @@ func (self IDebugClient5) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient5) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient5) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient5) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient5) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -2824,8 +2824,8 @@ func (self IDebugClient5) GetEventCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient5) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient5) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -2977,8 +2977,8 @@ func (self IDebugClient5) GetOutputCallbacksWide(Callbacks **systemdiagnosticsde
 }
 
 // SetOutputCallbacksWide wraps the raw SetOutputCallbacksWide call.
-func (self IDebugClient5) SetOutputCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks)))
+func (self IDebugClient5) SetOutputCallbacksWide(Callbacks IDebugOutputCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks.Raw)))
 }
 
 // GetOutputLinePrefixWide wraps the raw GetOutputLinePrefixWide call.
@@ -3009,8 +3009,8 @@ func (self IDebugClient5) GetEventCallbacksWide(Callbacks **systemdiagnosticsdeb
 }
 
 // SetEventCallbacksWide wraps the raw SetEventCallbacksWide call.
-func (self IDebugClient5) SetEventCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks)))
+func (self IDebugClient5) SetEventCallbacksWide(Callbacks IDebugEventCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks.Raw)))
 }
 
 // CreateProcess2 wraps the raw CreateProcess2 call.
@@ -3233,8 +3233,8 @@ func (self IDebugClient6) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient6) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient6) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -3248,8 +3248,8 @@ func (self IDebugClient6) GetInputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient6) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient6) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -3258,8 +3258,8 @@ func (self IDebugClient6) GetOutputCallbacks(Callbacks **systemdiagnosticsdebuge
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient6) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient6) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -3273,13 +3273,13 @@ func (self IDebugClient6) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient6) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient6) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient6) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient6) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -3318,8 +3318,8 @@ func (self IDebugClient6) GetEventCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient6) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient6) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -3471,8 +3471,8 @@ func (self IDebugClient6) GetOutputCallbacksWide(Callbacks **systemdiagnosticsde
 }
 
 // SetOutputCallbacksWide wraps the raw SetOutputCallbacksWide call.
-func (self IDebugClient6) SetOutputCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks)))
+func (self IDebugClient6) SetOutputCallbacksWide(Callbacks IDebugOutputCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks.Raw)))
 }
 
 // GetOutputLinePrefixWide wraps the raw GetOutputLinePrefixWide call.
@@ -3503,8 +3503,8 @@ func (self IDebugClient6) GetEventCallbacksWide(Callbacks **systemdiagnosticsdeb
 }
 
 // SetEventCallbacksWide wraps the raw SetEventCallbacksWide call.
-func (self IDebugClient6) SetEventCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks)))
+func (self IDebugClient6) SetEventCallbacksWide(Callbacks IDebugEventCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks.Raw)))
 }
 
 // CreateProcess2 wraps the raw CreateProcess2 call.
@@ -3586,8 +3586,8 @@ func (self IDebugClient6) SetQuitLockStringWide(String string) error {
 }
 
 // SetEventContextCallbacks wraps the raw SetEventContextCallbacks call.
-func (self IDebugClient6) SetEventContextCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventContextCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventContextCallbacks(Callbacks)))
+func (self IDebugClient6) SetEventContextCallbacks(Callbacks IDebugEventContextCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventContextCallbacks(Callbacks.Raw)))
 }
 
 // IDebugClient7 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugClient7 with error-returning methods.
@@ -3732,8 +3732,8 @@ func (self IDebugClient7) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient7) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient7) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -3747,8 +3747,8 @@ func (self IDebugClient7) GetInputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient7) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient7) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -3757,8 +3757,8 @@ func (self IDebugClient7) GetOutputCallbacks(Callbacks **systemdiagnosticsdebuge
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient7) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient7) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -3772,13 +3772,13 @@ func (self IDebugClient7) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient7) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient7) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient7) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient7) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -3817,8 +3817,8 @@ func (self IDebugClient7) GetEventCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient7) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient7) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -3970,8 +3970,8 @@ func (self IDebugClient7) GetOutputCallbacksWide(Callbacks **systemdiagnosticsde
 }
 
 // SetOutputCallbacksWide wraps the raw SetOutputCallbacksWide call.
-func (self IDebugClient7) SetOutputCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks)))
+func (self IDebugClient7) SetOutputCallbacksWide(Callbacks IDebugOutputCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks.Raw)))
 }
 
 // GetOutputLinePrefixWide wraps the raw GetOutputLinePrefixWide call.
@@ -4002,8 +4002,8 @@ func (self IDebugClient7) GetEventCallbacksWide(Callbacks **systemdiagnosticsdeb
 }
 
 // SetEventCallbacksWide wraps the raw SetEventCallbacksWide call.
-func (self IDebugClient7) SetEventCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks)))
+func (self IDebugClient7) SetEventCallbacksWide(Callbacks IDebugEventCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks.Raw)))
 }
 
 // CreateProcess2 wraps the raw CreateProcess2 call.
@@ -4085,8 +4085,8 @@ func (self IDebugClient7) SetQuitLockStringWide(String string) error {
 }
 
 // SetEventContextCallbacks wraps the raw SetEventContextCallbacks call.
-func (self IDebugClient7) SetEventContextCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventContextCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventContextCallbacks(Callbacks)))
+func (self IDebugClient7) SetEventContextCallbacks(Callbacks IDebugEventContextCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventContextCallbacks(Callbacks.Raw)))
 }
 
 // SetClientContext wraps the raw SetClientContext call.
@@ -4236,8 +4236,8 @@ func (self IDebugClient8) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient8) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient8) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -4251,8 +4251,8 @@ func (self IDebugClient8) GetInputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient8) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient8) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -4261,8 +4261,8 @@ func (self IDebugClient8) GetOutputCallbacks(Callbacks **systemdiagnosticsdebuge
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient8) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient8) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -4276,13 +4276,13 @@ func (self IDebugClient8) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient8) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient8) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient8) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient8) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -4321,8 +4321,8 @@ func (self IDebugClient8) GetEventCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient8) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient8) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -4474,8 +4474,8 @@ func (self IDebugClient8) GetOutputCallbacksWide(Callbacks **systemdiagnosticsde
 }
 
 // SetOutputCallbacksWide wraps the raw SetOutputCallbacksWide call.
-func (self IDebugClient8) SetOutputCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks)))
+func (self IDebugClient8) SetOutputCallbacksWide(Callbacks IDebugOutputCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks.Raw)))
 }
 
 // GetOutputLinePrefixWide wraps the raw GetOutputLinePrefixWide call.
@@ -4506,8 +4506,8 @@ func (self IDebugClient8) GetEventCallbacksWide(Callbacks **systemdiagnosticsdeb
 }
 
 // SetEventCallbacksWide wraps the raw SetEventCallbacksWide call.
-func (self IDebugClient8) SetEventCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks)))
+func (self IDebugClient8) SetEventCallbacksWide(Callbacks IDebugEventCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks.Raw)))
 }
 
 // CreateProcess2 wraps the raw CreateProcess2 call.
@@ -4589,8 +4589,8 @@ func (self IDebugClient8) SetQuitLockStringWide(String string) error {
 }
 
 // SetEventContextCallbacks wraps the raw SetEventContextCallbacks call.
-func (self IDebugClient8) SetEventContextCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventContextCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventContextCallbacks(Callbacks)))
+func (self IDebugClient8) SetEventContextCallbacks(Callbacks IDebugEventContextCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventContextCallbacks(Callbacks.Raw)))
 }
 
 // SetClientContext wraps the raw SetClientContext call.
@@ -4746,8 +4746,8 @@ func (self IDebugClient9) DispatchCallbacks(Timeout uint32) error {
 }
 
 // ExitDispatch wraps the raw ExitDispatch call.
-func (self IDebugClient9) ExitDispatch(Client *systemdiagnosticsdebugextensions.IDebugClient) error {
-	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client)))
+func (self IDebugClient9) ExitDispatch(Client IDebugClient) error {
+	return win32.HRESULTError(int32(self.Raw.ExitDispatch(Client.Raw)))
 }
 
 // CreateClient wraps the raw CreateClient call.
@@ -4761,8 +4761,8 @@ func (self IDebugClient9) GetInputCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetInputCallbacks wraps the raw SetInputCallbacks call.
-func (self IDebugClient9) SetInputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugInputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks)))
+func (self IDebugClient9) SetInputCallbacks(Callbacks IDebugInputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputCallbacks wraps the raw GetOutputCallbacks call.
@@ -4771,8 +4771,8 @@ func (self IDebugClient9) GetOutputCallbacks(Callbacks **systemdiagnosticsdebuge
 }
 
 // SetOutputCallbacks wraps the raw SetOutputCallbacks call.
-func (self IDebugClient9) SetOutputCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks)))
+func (self IDebugClient9) SetOutputCallbacks(Callbacks IDebugOutputCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacks(Callbacks.Raw)))
 }
 
 // GetOutputMask wraps the raw GetOutputMask call.
@@ -4786,13 +4786,13 @@ func (self IDebugClient9) SetOutputMask(Mask uint32) error {
 }
 
 // GetOtherOutputMask wraps the raw GetOtherOutputMask call.
-func (self IDebugClient9) GetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client, Mask)))
+func (self IDebugClient9) GetOtherOutputMask(Client IDebugClient, Mask *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // SetOtherOutputMask wraps the raw SetOtherOutputMask call.
-func (self IDebugClient9) SetOtherOutputMask(Client *systemdiagnosticsdebugextensions.IDebugClient, Mask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client, Mask)))
+func (self IDebugClient9) SetOtherOutputMask(Client IDebugClient, Mask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOtherOutputMask(Client.Raw, Mask)))
 }
 
 // GetOutputWidth wraps the raw GetOutputWidth call.
@@ -4831,8 +4831,8 @@ func (self IDebugClient9) GetEventCallbacks(Callbacks **systemdiagnosticsdebugex
 }
 
 // SetEventCallbacks wraps the raw SetEventCallbacks call.
-func (self IDebugClient9) SetEventCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks)))
+func (self IDebugClient9) SetEventCallbacks(Callbacks IDebugEventCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacks(Callbacks.Raw)))
 }
 
 // FlushCallbacks wraps the raw FlushCallbacks call.
@@ -4984,8 +4984,8 @@ func (self IDebugClient9) GetOutputCallbacksWide(Callbacks **systemdiagnosticsde
 }
 
 // SetOutputCallbacksWide wraps the raw SetOutputCallbacksWide call.
-func (self IDebugClient9) SetOutputCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugOutputCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks)))
+func (self IDebugClient9) SetOutputCallbacksWide(Callbacks IDebugOutputCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputCallbacksWide(Callbacks.Raw)))
 }
 
 // GetOutputLinePrefixWide wraps the raw GetOutputLinePrefixWide call.
@@ -5016,8 +5016,8 @@ func (self IDebugClient9) GetEventCallbacksWide(Callbacks **systemdiagnosticsdeb
 }
 
 // SetEventCallbacksWide wraps the raw SetEventCallbacksWide call.
-func (self IDebugClient9) SetEventCallbacksWide(Callbacks *systemdiagnosticsdebugextensions.IDebugEventCallbacksWide) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks)))
+func (self IDebugClient9) SetEventCallbacksWide(Callbacks IDebugEventCallbacksWide) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventCallbacksWide(Callbacks.Raw)))
 }
 
 // CreateProcess2 wraps the raw CreateProcess2 call.
@@ -5099,8 +5099,8 @@ func (self IDebugClient9) SetQuitLockStringWide(String string) error {
 }
 
 // SetEventContextCallbacks wraps the raw SetEventContextCallbacks call.
-func (self IDebugClient9) SetEventContextCallbacks(Callbacks *systemdiagnosticsdebugextensions.IDebugEventContextCallbacks) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventContextCallbacks(Callbacks)))
+func (self IDebugClient9) SetEventContextCallbacks(Callbacks IDebugEventContextCallbacks) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventContextCallbacks(Callbacks.Raw)))
 }
 
 // SetClientContext wraps the raw SetClientContext call.
@@ -5488,8 +5488,8 @@ func (self IDebugControl) AddBreakpoint(Type uint32, DesiredId uint32, Bp **syst
 }
 
 // RemoveBreakpoint wraps the raw RemoveBreakpoint call.
-func (self IDebugControl) RemoveBreakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp)))
+func (self IDebugControl) RemoveBreakpoint(Bp IDebugBreakpoint) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp.Raw)))
 }
 
 // AddExtension wraps the raw AddExtension call.
@@ -5960,8 +5960,8 @@ func (self IDebugControl2) AddBreakpoint(Type uint32, DesiredId uint32, Bp **sys
 }
 
 // RemoveBreakpoint wraps the raw RemoveBreakpoint call.
-func (self IDebugControl2) RemoveBreakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp)))
+func (self IDebugControl2) RemoveBreakpoint(Bp IDebugBreakpoint) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp.Raw)))
 }
 
 // AddExtension wraps the raw AddExtension call.
@@ -6472,8 +6472,8 @@ func (self IDebugControl3) AddBreakpoint(Type uint32, DesiredId uint32, Bp **sys
 }
 
 // RemoveBreakpoint wraps the raw RemoveBreakpoint call.
-func (self IDebugControl3) RemoveBreakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp)))
+func (self IDebugControl3) RemoveBreakpoint(Bp IDebugBreakpoint) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp.Raw)))
 }
 
 // AddExtension wraps the raw AddExtension call.
@@ -7049,8 +7049,8 @@ func (self IDebugControl4) AddBreakpoint(Type uint32, DesiredId uint32, Bp **sys
 }
 
 // RemoveBreakpoint wraps the raw RemoveBreakpoint call.
-func (self IDebugControl4) RemoveBreakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp)))
+func (self IDebugControl4) RemoveBreakpoint(Bp IDebugBreakpoint) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp.Raw)))
 }
 
 // AddExtension wraps the raw AddExtension call.
@@ -7388,8 +7388,8 @@ func (self IDebugControl4) AddBreakpoint2(Type uint32, DesiredId uint32, Bp **sy
 }
 
 // RemoveBreakpoint2 wraps the raw RemoveBreakpoint2 call.
-func (self IDebugControl4) RemoveBreakpoint2(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint2) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint2(Bp)))
+func (self IDebugControl4) RemoveBreakpoint2(Bp IDebugBreakpoint2) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint2(Bp.Raw)))
 }
 
 // AddExtensionWide wraps the raw AddExtensionWide call.
@@ -7919,8 +7919,8 @@ func (self IDebugControl5) AddBreakpoint(Type uint32, DesiredId uint32, Bp **sys
 }
 
 // RemoveBreakpoint wraps the raw RemoveBreakpoint call.
-func (self IDebugControl5) RemoveBreakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp)))
+func (self IDebugControl5) RemoveBreakpoint(Bp IDebugBreakpoint) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp.Raw)))
 }
 
 // AddExtension wraps the raw AddExtension call.
@@ -8258,8 +8258,8 @@ func (self IDebugControl5) AddBreakpoint2(Type uint32, DesiredId uint32, Bp **sy
 }
 
 // RemoveBreakpoint2 wraps the raw RemoveBreakpoint2 call.
-func (self IDebugControl5) RemoveBreakpoint2(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint2) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint2(Bp)))
+func (self IDebugControl5) RemoveBreakpoint2(Bp IDebugBreakpoint2) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint2(Bp.Raw)))
 }
 
 // AddExtensionWide wraps the raw AddExtensionWide call.
@@ -8814,8 +8814,8 @@ func (self IDebugControl6) AddBreakpoint(Type uint32, DesiredId uint32, Bp **sys
 }
 
 // RemoveBreakpoint wraps the raw RemoveBreakpoint call.
-func (self IDebugControl6) RemoveBreakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp)))
+func (self IDebugControl6) RemoveBreakpoint(Bp IDebugBreakpoint) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp.Raw)))
 }
 
 // AddExtension wraps the raw AddExtension call.
@@ -9153,8 +9153,8 @@ func (self IDebugControl6) AddBreakpoint2(Type uint32, DesiredId uint32, Bp **sy
 }
 
 // RemoveBreakpoint2 wraps the raw RemoveBreakpoint2 call.
-func (self IDebugControl6) RemoveBreakpoint2(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint2) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint2(Bp)))
+func (self IDebugControl6) RemoveBreakpoint2(Bp IDebugBreakpoint2) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint2(Bp.Raw)))
 }
 
 // AddExtensionWide wraps the raw AddExtensionWide call.
@@ -9719,8 +9719,8 @@ func (self IDebugControl7) AddBreakpoint(Type uint32, DesiredId uint32, Bp **sys
 }
 
 // RemoveBreakpoint wraps the raw RemoveBreakpoint call.
-func (self IDebugControl7) RemoveBreakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp)))
+func (self IDebugControl7) RemoveBreakpoint(Bp IDebugBreakpoint) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint(Bp.Raw)))
 }
 
 // AddExtension wraps the raw AddExtension call.
@@ -10058,8 +10058,8 @@ func (self IDebugControl7) AddBreakpoint2(Type uint32, DesiredId uint32, Bp **sy
 }
 
 // RemoveBreakpoint2 wraps the raw RemoveBreakpoint2 call.
-func (self IDebugControl7) RemoveBreakpoint2(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint2) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint2(Bp)))
+func (self IDebugControl7) RemoveBreakpoint2(Bp IDebugBreakpoint2) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBreakpoint2(Bp.Raw)))
 }
 
 // AddExtensionWide wraps the raw AddExtensionWide call.
@@ -10917,8 +10917,8 @@ func (self IDebugEventCallbacks) GetInterestMask(Mask *uint32) error {
 }
 
 // Breakpoint wraps the raw Breakpoint call.
-func (self IDebugEventCallbacks) Breakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint) error {
-	return win32.HRESULTError(int32(self.Raw.Breakpoint(Bp)))
+func (self IDebugEventCallbacks) Breakpoint(Bp IDebugBreakpoint) error {
+	return win32.HRESULTError(int32(self.Raw.Breakpoint(Bp.Raw)))
 }
 
 // Exception wraps the raw Exception call.
@@ -10998,8 +10998,8 @@ func (self IDebugEventCallbacksWide) GetInterestMask(Mask *uint32) error {
 }
 
 // Breakpoint wraps the raw Breakpoint call.
-func (self IDebugEventCallbacksWide) Breakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint2) error {
-	return win32.HRESULTError(int32(self.Raw.Breakpoint(Bp)))
+func (self IDebugEventCallbacksWide) Breakpoint(Bp IDebugBreakpoint2) error {
+	return win32.HRESULTError(int32(self.Raw.Breakpoint(Bp.Raw)))
 }
 
 // Exception wraps the raw Exception call.
@@ -11084,8 +11084,8 @@ func (self IDebugEventContextCallbacks) GetInterestMask(Mask *uint32) error {
 }
 
 // Breakpoint wraps the raw Breakpoint call.
-func (self IDebugEventContextCallbacks) Breakpoint(Bp *systemdiagnosticsdebugextensions.IDebugBreakpoint2, Context unsafe.Pointer, ContextSize uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Breakpoint(Bp, Context, ContextSize)))
+func (self IDebugEventContextCallbacks) Breakpoint(Bp IDebugBreakpoint2, Context unsafe.Pointer, ContextSize uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Breakpoint(Bp.Raw, Context, ContextSize)))
 }
 
 // Exception wraps the raw Exception call.
@@ -11376,8 +11376,8 @@ func (self IDebugFailureAnalysis2) GetAnalysisXml(ppXMLDOMElement **dataxmlmsxml
 }
 
 // AddStructuredAnalysisData wraps the raw AddStructuredAnalysisData call.
-func (self IDebugFailureAnalysis2) AddStructuredAnalysisData(Tag systemdiagnosticsdebugextensions.DEBUG_FLR_PARAM_TYPE, Analysis *systemdiagnosticsdebugextensions.IDebugFailureAnalysis2) error {
-	return win32.HRESULTError(int32(self.Raw.AddStructuredAnalysisData(Tag, Analysis)))
+func (self IDebugFailureAnalysis2) AddStructuredAnalysisData(Tag systemdiagnosticsdebugextensions.DEBUG_FLR_PARAM_TYPE, Analysis IDebugFailureAnalysis2) error {
+	return win32.HRESULTError(int32(self.Raw.AddStructuredAnalysisData(Tag, Analysis.Raw)))
 }
 
 // IDebugFailureAnalysis3 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugFailureAnalysis3 with error-returning methods.
@@ -11502,13 +11502,13 @@ func (self IDebugFailureAnalysis3) GetAnalysisXml(ppXMLDOMElement **dataxmlmsxml
 }
 
 // AddStructuredAnalysisData wraps the raw AddStructuredAnalysisData call.
-func (self IDebugFailureAnalysis3) AddStructuredAnalysisData(Tag systemdiagnosticsdebugextensions.DEBUG_FLR_PARAM_TYPE, Analysis *systemdiagnosticsdebugextensions.IDebugFailureAnalysis2) error {
-	return win32.HRESULTError(int32(self.Raw.AddStructuredAnalysisData(Tag, Analysis)))
+func (self IDebugFailureAnalysis3) AddStructuredAnalysisData(Tag systemdiagnosticsdebugextensions.DEBUG_FLR_PARAM_TYPE, Analysis IDebugFailureAnalysis2) error {
+	return win32.HRESULTError(int32(self.Raw.AddStructuredAnalysisData(Tag, Analysis.Raw)))
 }
 
 // AddThreads wraps the raw AddThreads call.
-func (self IDebugFailureAnalysis3) AddThreads(pDebugFailureThreadEnum *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddThreads(pDebugFailureThreadEnum)))
+func (self IDebugFailureAnalysis3) AddThreads(pDebugFailureThreadEnum systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddThreads(pDebugFailureThreadEnum.Raw)))
 }
 
 // AttributeGet wraps the raw AttributeGet call.
@@ -11532,13 +11532,13 @@ func (self IDebugFailureAnalysis3) BlameProcess(Postfix foundation.BSTR) error {
 }
 
 // BlameThread wraps the raw BlameThread call.
-func (self IDebugFailureAnalysis3) BlameThread(pThread *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BlameThread(pThread)))
+func (self IDebugFailureAnalysis3) BlameThread(pThread systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BlameThread(pThread.Raw)))
 }
 
 // BlameStitch wraps the raw BlameStitch call.
-func (self IDebugFailureAnalysis3) BlameStitch(pThread *systemcom.IUnknown, Stitch foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.BlameStitch(pThread, Stitch)))
+func (self IDebugFailureAnalysis3) BlameStitch(pThread systemcomidiom.IUnknown, Stitch foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.BlameStitch(pThread.Raw, Stitch)))
 }
 
 // BlameTEB wraps the raw BlameTEB call.
@@ -11572,8 +11572,8 @@ func (self IDebugFailureAnalysis3) ProblemClassSetBSTR(nIndex uint32, Value foun
 }
 
 // SetAdditionalXML wraps the raw SetAdditionalXML call.
-func (self IDebugFailureAnalysis3) SetAdditionalXML(Key foundation.BSTR, pXMLDOMElement *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetAdditionalXML(Key, pXMLDOMElement)))
+func (self IDebugFailureAnalysis3) SetAdditionalXML(Key foundation.BSTR, pXMLDOMElement systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetAdditionalXML(Key, pXMLDOMElement.Raw)))
 }
 
 // GetAdditionalXML wraps the raw GetAdditionalXML call.
@@ -11677,8 +11677,8 @@ func WrapIDebugHostContext(raw *systemdiagnosticsdebugextensions.IDebugHostConte
 }
 
 // IsEqualTo wraps the raw IsEqualTo call.
-func (self IDebugHostContext) IsEqualTo(pContext *systemdiagnosticsdebugextensions.IDebugHostContext, pIsEqual *bool) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqualTo(pContext, pIsEqual)))
+func (self IDebugHostContext) IsEqualTo(pContext IDebugHostContext, pIsEqual *bool) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqualTo(pContext.Raw, pIsEqual)))
 }
 
 // IDebugHostContext2 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostContext2 with error-returning methods.
@@ -11693,8 +11693,8 @@ func WrapIDebugHostContext2(raw *systemdiagnosticsdebugextensions.IDebugHostCont
 }
 
 // GetAddressSpaceRelation wraps the raw GetAddressSpaceRelation call.
-func (self IDebugHostContext2) GetAddressSpaceRelation(pContext *systemdiagnosticsdebugextensions.IDebugHostContext2, pAddressSpaceRelation *systemdiagnosticsdebugextensions.AddressSpaceRelation) error {
-	return win32.HRESULTError(int32(self.Raw.GetAddressSpaceRelation(pContext, pAddressSpaceRelation)))
+func (self IDebugHostContext2) GetAddressSpaceRelation(pContext IDebugHostContext2, pAddressSpaceRelation *systemdiagnosticsdebugextensions.AddressSpaceRelation) error {
+	return win32.HRESULTError(int32(self.Raw.GetAddressSpaceRelation(pContext.Raw, pAddressSpaceRelation)))
 }
 
 // IDebugHostContextAlternator is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostContextAlternator with error-returning methods.
@@ -11867,15 +11867,15 @@ func WrapIDebugHostEvaluator(raw *systemdiagnosticsdebugextensions.IDebugHostEva
 }
 
 // EvaluateExpression wraps the raw EvaluateExpression call.
-func (self IDebugHostEvaluator) EvaluateExpression(context *systemdiagnosticsdebugextensions.IDebugHostContext, expression string, bindingContext *systemdiagnosticsdebugextensions.IModelObject, result **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
+func (self IDebugHostEvaluator) EvaluateExpression(context IDebugHostContext, expression string, bindingContext IModelObject, result **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
 	_expression := win32.UTF16Ptr(expression)
-	return win32.HRESULTError(int32(self.Raw.EvaluateExpression(context, foundation.PWSTR(_expression), bindingContext, result, metadata)))
+	return win32.HRESULTError(int32(self.Raw.EvaluateExpression(context.Raw, foundation.PWSTR(_expression), bindingContext.Raw, result, metadata)))
 }
 
 // EvaluateExtendedExpression wraps the raw EvaluateExtendedExpression call.
-func (self IDebugHostEvaluator) EvaluateExtendedExpression(context *systemdiagnosticsdebugextensions.IDebugHostContext, expression string, bindingContext *systemdiagnosticsdebugextensions.IModelObject, result **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
+func (self IDebugHostEvaluator) EvaluateExtendedExpression(context IDebugHostContext, expression string, bindingContext IModelObject, result **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
 	_expression := win32.UTF16Ptr(expression)
-	return win32.HRESULTError(int32(self.Raw.EvaluateExtendedExpression(context, foundation.PWSTR(_expression), bindingContext, result, metadata)))
+	return win32.HRESULTError(int32(self.Raw.EvaluateExtendedExpression(context.Raw, foundation.PWSTR(_expression), bindingContext.Raw, result, metadata)))
 }
 
 // IDebugHostEvaluator2 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostEvaluator2 with error-returning methods.
@@ -11890,8 +11890,8 @@ func WrapIDebugHostEvaluator2(raw *systemdiagnosticsdebugextensions.IDebugHostEv
 }
 
 // AssignTo wraps the raw AssignTo call.
-func (self IDebugHostEvaluator2) AssignTo(assignmentReference *systemdiagnosticsdebugextensions.IModelObject, assignmentValue *systemdiagnosticsdebugextensions.IModelObject, assignmentResult **systemdiagnosticsdebugextensions.IModelObject, assignmentMetadata **systemdiagnosticsdebugextensions.IKeyStore) error {
-	return win32.HRESULTError(int32(self.Raw.AssignTo(assignmentReference, assignmentValue, assignmentResult, assignmentMetadata)))
+func (self IDebugHostEvaluator2) AssignTo(assignmentReference IModelObject, assignmentValue IModelObject, assignmentResult **systemdiagnosticsdebugextensions.IModelObject, assignmentMetadata **systemdiagnosticsdebugextensions.IKeyStore) error {
+	return win32.HRESULTError(int32(self.Raw.AssignTo(assignmentReference.Raw, assignmentValue.Raw, assignmentResult, assignmentMetadata)))
 }
 
 // IDebugHostEvaluator3 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostEvaluator3 with error-returning methods.
@@ -11906,8 +11906,8 @@ func WrapIDebugHostEvaluator3(raw *systemdiagnosticsdebugextensions.IDebugHostEv
 }
 
 // Compare wraps the raw Compare call.
-func (self IDebugHostEvaluator3) Compare(pLeft *systemdiagnosticsdebugextensions.IModelObject, pRight *systemdiagnosticsdebugextensions.IModelObject, ppResult **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.Compare(pLeft, pRight, ppResult)))
+func (self IDebugHostEvaluator3) Compare(pLeft IModelObject, pRight IModelObject, ppResult **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.Compare(pLeft.Raw, pRight.Raw, ppResult)))
 }
 
 // IDebugHostExtensibility is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostExtensibility with error-returning methods.
@@ -11922,9 +11922,9 @@ func WrapIDebugHostExtensibility(raw *systemdiagnosticsdebugextensions.IDebugHos
 }
 
 // CreateFunctionAlias wraps the raw CreateFunctionAlias call.
-func (self IDebugHostExtensibility) CreateFunctionAlias(aliasName string, functionObject *systemdiagnosticsdebugextensions.IModelObject) error {
+func (self IDebugHostExtensibility) CreateFunctionAlias(aliasName string, functionObject IModelObject) error {
 	_aliasName := win32.UTF16Ptr(aliasName)
-	return win32.HRESULTError(int32(self.Raw.CreateFunctionAlias(foundation.PWSTR(_aliasName), functionObject)))
+	return win32.HRESULTError(int32(self.Raw.CreateFunctionAlias(foundation.PWSTR(_aliasName), functionObject.Raw)))
 }
 
 // DestroyFunctionAlias wraps the raw DestroyFunctionAlias call.
@@ -11945,9 +11945,9 @@ func WrapIDebugHostExtensibility2(raw *systemdiagnosticsdebugextensions.IDebugHo
 }
 
 // CreateFunctionAliasWithMetadata wraps the raw CreateFunctionAliasWithMetadata call.
-func (self IDebugHostExtensibility2) CreateFunctionAliasWithMetadata(aliasName string, functionObject *systemdiagnosticsdebugextensions.IModelObject, metadata *systemdiagnosticsdebugextensions.IKeyStore) error {
+func (self IDebugHostExtensibility2) CreateFunctionAliasWithMetadata(aliasName string, functionObject IModelObject, metadata IKeyStore) error {
 	_aliasName := win32.UTF16Ptr(aliasName)
-	return win32.HRESULTError(int32(self.Raw.CreateFunctionAliasWithMetadata(foundation.PWSTR(_aliasName), functionObject, metadata)))
+	return win32.HRESULTError(int32(self.Raw.CreateFunctionAliasWithMetadata(foundation.PWSTR(_aliasName), functionObject.Raw, metadata.Raw)))
 }
 
 // IDebugHostExtensibility3 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostExtensibility3 with error-returning methods.
@@ -12374,9 +12374,9 @@ func WrapIDebugHostModule4(raw *systemdiagnosticsdebugextensions.IDebugHostModul
 }
 
 // FindTypeByName2 wraps the raw FindTypeByName2 call.
-func (self IDebugHostModule4) FindTypeByName2(pEnclosingSymbol *systemdiagnosticsdebugextensions.IDebugHostSymbol, typeName string, type_ **systemdiagnosticsdebugextensions.IDebugHostType) error {
+func (self IDebugHostModule4) FindTypeByName2(pEnclosingSymbol IDebugHostSymbol, typeName string, type_ **systemdiagnosticsdebugextensions.IDebugHostType) error {
 	_typeName := win32.UTF16Ptr(typeName)
-	return win32.HRESULTError(int32(self.Raw.FindTypeByName2(pEnclosingSymbol, foundation.PWSTR(_typeName), type_)))
+	return win32.HRESULTError(int32(self.Raw.FindTypeByName2(pEnclosingSymbol.Raw, foundation.PWSTR(_typeName), type_)))
 }
 
 // IDebugHostModule5 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostModule5 with error-returning methods.
@@ -12407,8 +12407,8 @@ func WrapIDebugHostModuleSignature(raw *systemdiagnosticsdebugextensions.IDebugH
 }
 
 // IsMatch wraps the raw IsMatch call.
-func (self IDebugHostModuleSignature) IsMatch(pModule *systemdiagnosticsdebugextensions.IDebugHostModule, isMatch *bool) error {
-	return win32.HRESULTError(int32(self.Raw.IsMatch(pModule, isMatch)))
+func (self IDebugHostModuleSignature) IsMatch(pModule IDebugHostModule, isMatch *bool) error {
+	return win32.HRESULTError(int32(self.Raw.IsMatch(pModule.Raw, isMatch)))
 }
 
 // IDebugHostPublic is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostPublic with error-returning methods.
@@ -12444,8 +12444,8 @@ func WrapIDebugHostScriptHost(raw *systemdiagnosticsdebugextensions.IDebugHostSc
 }
 
 // CreateContext wraps the raw CreateContext call.
-func (self IDebugHostScriptHost) CreateContext(script *systemdiagnosticsdebugextensions.IDataModelScript, scriptContext **systemdiagnosticsdebugextensions.IDataModelScriptHostContext) error {
-	return win32.HRESULTError(int32(self.Raw.CreateContext(script, scriptContext)))
+func (self IDebugHostScriptHost) CreateContext(script IDataModelScript, scriptContext **systemdiagnosticsdebugextensions.IDataModelScriptHostContext) error {
+	return win32.HRESULTError(int32(self.Raw.CreateContext(script.Raw, scriptContext)))
 }
 
 // IDebugHostStatus is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostStatus with error-returning methods.
@@ -12528,8 +12528,8 @@ func (self IDebugHostSymbol) GetContainingModule(containingModule **systemdiagno
 }
 
 // CompareAgainst wraps the raw CompareAgainst call.
-func (self IDebugHostSymbol) CompareAgainst(pComparisonSymbol *systemdiagnosticsdebugextensions.IDebugHostSymbol, comparisonFlags uint32, pMatches *bool) error {
-	return win32.HRESULTError(int32(self.Raw.CompareAgainst(pComparisonSymbol, comparisonFlags, pMatches)))
+func (self IDebugHostSymbol) CompareAgainst(pComparisonSymbol IDebugHostSymbol, comparisonFlags uint32, pMatches *bool) error {
+	return win32.HRESULTError(int32(self.Raw.CompareAgainst(pComparisonSymbol.Raw, comparisonFlags, pMatches)))
 }
 
 // IDebugHostSymbol2 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostSymbol2 with error-returning methods.
@@ -12621,9 +12621,9 @@ func (self IDebugHostSymbols) CreateModuleSignature(pwszModuleName string, pwszM
 }
 
 // CreateTypeSignature wraps the raw CreateTypeSignature call.
-func (self IDebugHostSymbols) CreateTypeSignature(signatureSpecification string, module *systemdiagnosticsdebugextensions.IDebugHostModule, typeSignature **systemdiagnosticsdebugextensions.IDebugHostTypeSignature) error {
+func (self IDebugHostSymbols) CreateTypeSignature(signatureSpecification string, module IDebugHostModule, typeSignature **systemdiagnosticsdebugextensions.IDebugHostTypeSignature) error {
 	_signatureSpecification := win32.UTF16Ptr(signatureSpecification)
-	return win32.HRESULTError(int32(self.Raw.CreateTypeSignature(foundation.PWSTR(_signatureSpecification), module, typeSignature)))
+	return win32.HRESULTError(int32(self.Raw.CreateTypeSignature(foundation.PWSTR(_signatureSpecification), module.Raw, typeSignature)))
 }
 
 // CreateTypeSignatureForModuleRange wraps the raw CreateTypeSignatureForModuleRange call.
@@ -12636,14 +12636,14 @@ func (self IDebugHostSymbols) CreateTypeSignatureForModuleRange(signatureSpecifi
 }
 
 // EnumerateModules wraps the raw EnumerateModules call.
-func (self IDebugHostSymbols) EnumerateModules(context *systemdiagnosticsdebugextensions.IDebugHostContext, moduleEnum **systemdiagnosticsdebugextensions.IDebugHostSymbolEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateModules(context, moduleEnum)))
+func (self IDebugHostSymbols) EnumerateModules(context IDebugHostContext, moduleEnum **systemdiagnosticsdebugextensions.IDebugHostSymbolEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.EnumerateModules(context.Raw, moduleEnum)))
 }
 
 // FindModuleByName wraps the raw FindModuleByName call.
-func (self IDebugHostSymbols) FindModuleByName(context *systemdiagnosticsdebugextensions.IDebugHostContext, moduleName string, module **systemdiagnosticsdebugextensions.IDebugHostModule) error {
+func (self IDebugHostSymbols) FindModuleByName(context IDebugHostContext, moduleName string, module **systemdiagnosticsdebugextensions.IDebugHostModule) error {
 	_moduleName := win32.UTF16Ptr(moduleName)
-	return win32.HRESULTError(int32(self.Raw.FindModuleByName(context, foundation.PWSTR(_moduleName), module)))
+	return win32.HRESULTError(int32(self.Raw.FindModuleByName(context.Raw, foundation.PWSTR(_moduleName), module)))
 }
 
 // IDebugHostSymbols2 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostSymbols2 with error-returning methods.
@@ -12658,8 +12658,8 @@ func WrapIDebugHostSymbols2(raw *systemdiagnosticsdebugextensions.IDebugHostSymb
 }
 
 // DemangleSymbolName wraps the raw DemangleSymbolName call.
-func (self IDebugHostSymbols2) DemangleSymbolName(pSymbol *systemdiagnosticsdebugextensions.IDebugHostSymbol, flags uint32, pDemangledSymbolName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.DemangleSymbolName(pSymbol, flags, pDemangledSymbolName)))
+func (self IDebugHostSymbols2) DemangleSymbolName(pSymbol IDebugHostSymbol, flags uint32, pDemangledSymbolName *foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.DemangleSymbolName(pSymbol.Raw, flags, pDemangledSymbolName)))
 }
 
 // IDebugHostSymbolsTargetComposition is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostSymbolsTargetComposition with error-returning methods.
@@ -12900,8 +12900,8 @@ func WrapIDebugHostType5(raw *systemdiagnosticsdebugextensions.IDebugHostType5) 
 }
 
 // IsBaseTypeOf wraps the raw IsBaseTypeOf call.
-func (self IDebugHostType5) IsBaseTypeOf(pOtherType *systemdiagnosticsdebugextensions.IDebugHostType, pIsBase *bool) error {
-	return win32.HRESULTError(int32(self.Raw.IsBaseTypeOf(pOtherType, pIsBase)))
+func (self IDebugHostType5) IsBaseTypeOf(pOtherType IDebugHostType, pIsBase *bool) error {
+	return win32.HRESULTError(int32(self.Raw.IsBaseTypeOf(pOtherType.Raw, pIsBase)))
 }
 
 // IDebugHostType6 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostType6 with error-returning methods.
@@ -12926,8 +12926,8 @@ func (self IDebugHostType6) GetTaggedUnionTagRanges(pTagRangeEnumerator **system
 }
 
 // UpcastToTaggedUnionType wraps the raw UpcastToTaggedUnionType call.
-func (self IDebugHostType6) UpcastToTaggedUnionType(pTaggedUnionType *systemdiagnosticsdebugextensions.IDebugHostType, pUpcastedCaseType **systemdiagnosticsdebugextensions.IDebugHostType) error {
-	return win32.HRESULTError(int32(self.Raw.UpcastToTaggedUnionType(pTaggedUnionType, pUpcastedCaseType)))
+func (self IDebugHostType6) UpcastToTaggedUnionType(pTaggedUnionType IDebugHostType, pUpcastedCaseType **systemdiagnosticsdebugextensions.IDebugHostType) error {
+	return win32.HRESULTError(int32(self.Raw.UpcastToTaggedUnionType(pTaggedUnionType.Raw, pUpcastedCaseType)))
 }
 
 // IDebugHostTypeSignature is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugHostTypeSignature with error-returning methods.
@@ -12947,13 +12947,13 @@ func (self IDebugHostTypeSignature) GetHashCode(hashCode *uint32) error {
 }
 
 // IsMatch wraps the raw IsMatch call.
-func (self IDebugHostTypeSignature) IsMatch(type_ *systemdiagnosticsdebugextensions.IDebugHostType, isMatch *bool, wildcardMatches **systemdiagnosticsdebugextensions.IDebugHostSymbolEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.IsMatch(type_, isMatch, wildcardMatches)))
+func (self IDebugHostTypeSignature) IsMatch(type_ IDebugHostType, isMatch *bool, wildcardMatches **systemdiagnosticsdebugextensions.IDebugHostSymbolEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.IsMatch(type_.Raw, isMatch, wildcardMatches)))
 }
 
 // CompareAgainst wraps the raw CompareAgainst call.
-func (self IDebugHostTypeSignature) CompareAgainst(typeSignature *systemdiagnosticsdebugextensions.IDebugHostTypeSignature, result *systemdiagnosticsdebugextensions.SignatureComparison) error {
-	return win32.HRESULTError(int32(self.Raw.CompareAgainst(typeSignature, result)))
+func (self IDebugHostTypeSignature) CompareAgainst(typeSignature IDebugHostTypeSignature, result *systemdiagnosticsdebugextensions.SignatureComparison) error {
+	return win32.HRESULTError(int32(self.Raw.CompareAgainst(typeSignature.Raw, result)))
 }
 
 // IDebugInputCallbacks is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDebugInputCallbacks with error-returning methods.
@@ -13126,14 +13126,14 @@ func (self IDebugPlmClient3) LaunchPlmBgTaskForDebugWide(Server uint64, Timeout 
 }
 
 // QueryPlmPackageWide wraps the raw QueryPlmPackageWide call.
-func (self IDebugPlmClient3) QueryPlmPackageWide(Server uint64, PackageFullName string, Stream *systemdiagnosticsdebugextensions.IDebugOutputStream) error {
+func (self IDebugPlmClient3) QueryPlmPackageWide(Server uint64, PackageFullName string, Stream IDebugOutputStream) error {
 	_PackageFullName := win32.UTF16Ptr(PackageFullName)
-	return win32.HRESULTError(int32(self.Raw.QueryPlmPackageWide(Server, foundation.PWSTR(_PackageFullName), Stream)))
+	return win32.HRESULTError(int32(self.Raw.QueryPlmPackageWide(Server, foundation.PWSTR(_PackageFullName), Stream.Raw)))
 }
 
 // QueryPlmPackageList wraps the raw QueryPlmPackageList call.
-func (self IDebugPlmClient3) QueryPlmPackageList(Server uint64, Stream *systemdiagnosticsdebugextensions.IDebugOutputStream) error {
-	return win32.HRESULTError(int32(self.Raw.QueryPlmPackageList(Server, Stream)))
+func (self IDebugPlmClient3) QueryPlmPackageList(Server uint64, Stream IDebugOutputStream) error {
+	return win32.HRESULTError(int32(self.Raw.QueryPlmPackageList(Server, Stream.Raw)))
 }
 
 // EnablePlmPackageDebugWide wraps the raw EnablePlmPackageDebugWide call.
@@ -13750,8 +13750,8 @@ func (self IDebugSymbols) ResetScope() error {
 }
 
 // GetScopeSymbolGroup wraps the raw GetScopeSymbolGroup call.
-func (self IDebugSymbols) GetScopeSymbolGroup(Flags uint32, Update *systemdiagnosticsdebugextensions.IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update, Symbols)))
+func (self IDebugSymbols) GetScopeSymbolGroup(Flags uint32, Update IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
+	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update.Raw, Symbols)))
 }
 
 // CreateSymbolGroup wraps the raw CreateSymbolGroup call.
@@ -14006,8 +14006,8 @@ func (self IDebugSymbols2) ResetScope() error {
 }
 
 // GetScopeSymbolGroup wraps the raw GetScopeSymbolGroup call.
-func (self IDebugSymbols2) GetScopeSymbolGroup(Flags uint32, Update *systemdiagnosticsdebugextensions.IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update, Symbols)))
+func (self IDebugSymbols2) GetScopeSymbolGroup(Flags uint32, Update IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
+	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update.Raw, Symbols)))
 }
 
 // CreateSymbolGroup wraps the raw CreateSymbolGroup call.
@@ -14302,8 +14302,8 @@ func (self IDebugSymbols3) ResetScope() error {
 }
 
 // GetScopeSymbolGroup wraps the raw GetScopeSymbolGroup call.
-func (self IDebugSymbols3) GetScopeSymbolGroup(Flags uint32, Update *systemdiagnosticsdebugextensions.IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update, Symbols)))
+func (self IDebugSymbols3) GetScopeSymbolGroup(Flags uint32, Update IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
+	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update.Raw, Symbols)))
 }
 
 // CreateSymbolGroup wraps the raw CreateSymbolGroup call.
@@ -14494,8 +14494,8 @@ func (self IDebugSymbols3) GetSymbolTypeIdWide(Symbol string, TypeId *uint32, Mo
 }
 
 // GetScopeSymbolGroup2 wraps the raw GetScopeSymbolGroup2 call.
-func (self IDebugSymbols3) GetScopeSymbolGroup2(Flags uint32, Update *systemdiagnosticsdebugextensions.IDebugSymbolGroup2, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup2) error {
-	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup2(Flags, Update, Symbols)))
+func (self IDebugSymbols3) GetScopeSymbolGroup2(Flags uint32, Update IDebugSymbolGroup2, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup2) error {
+	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup2(Flags, Update.Raw, Symbols)))
 }
 
 // CreateSymbolGroup2 wraps the raw CreateSymbolGroup2 call.
@@ -14953,8 +14953,8 @@ func (self IDebugSymbols4) ResetScope() error {
 }
 
 // GetScopeSymbolGroup wraps the raw GetScopeSymbolGroup call.
-func (self IDebugSymbols4) GetScopeSymbolGroup(Flags uint32, Update *systemdiagnosticsdebugextensions.IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update, Symbols)))
+func (self IDebugSymbols4) GetScopeSymbolGroup(Flags uint32, Update IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
+	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update.Raw, Symbols)))
 }
 
 // CreateSymbolGroup wraps the raw CreateSymbolGroup call.
@@ -15145,8 +15145,8 @@ func (self IDebugSymbols4) GetSymbolTypeIdWide(Symbol string, TypeId *uint32, Mo
 }
 
 // GetScopeSymbolGroup2 wraps the raw GetScopeSymbolGroup2 call.
-func (self IDebugSymbols4) GetScopeSymbolGroup2(Flags uint32, Update *systemdiagnosticsdebugextensions.IDebugSymbolGroup2, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup2) error {
-	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup2(Flags, Update, Symbols)))
+func (self IDebugSymbols4) GetScopeSymbolGroup2(Flags uint32, Update IDebugSymbolGroup2, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup2) error {
+	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup2(Flags, Update.Raw, Symbols)))
 }
 
 // CreateSymbolGroup2 wraps the raw CreateSymbolGroup2 call.
@@ -15639,8 +15639,8 @@ func (self IDebugSymbols5) ResetScope() error {
 }
 
 // GetScopeSymbolGroup wraps the raw GetScopeSymbolGroup call.
-func (self IDebugSymbols5) GetScopeSymbolGroup(Flags uint32, Update *systemdiagnosticsdebugextensions.IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update, Symbols)))
+func (self IDebugSymbols5) GetScopeSymbolGroup(Flags uint32, Update IDebugSymbolGroup, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup) error {
+	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup(Flags, Update.Raw, Symbols)))
 }
 
 // CreateSymbolGroup wraps the raw CreateSymbolGroup call.
@@ -15831,8 +15831,8 @@ func (self IDebugSymbols5) GetSymbolTypeIdWide(Symbol string, TypeId *uint32, Mo
 }
 
 // GetScopeSymbolGroup2 wraps the raw GetScopeSymbolGroup2 call.
-func (self IDebugSymbols5) GetScopeSymbolGroup2(Flags uint32, Update *systemdiagnosticsdebugextensions.IDebugSymbolGroup2, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup2) error {
-	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup2(Flags, Update, Symbols)))
+func (self IDebugSymbols5) GetScopeSymbolGroup2(Flags uint32, Update IDebugSymbolGroup2, Symbols **systemdiagnosticsdebugextensions.IDebugSymbolGroup2) error {
+	return win32.HRESULTError(int32(self.Raw.GetScopeSymbolGroup2(Flags, Update.Raw, Symbols)))
 }
 
 // CreateSymbolGroup2 wraps the raw CreateSymbolGroup2 call.
@@ -16979,18 +16979,18 @@ func WrapIDeconstructableConcept(raw *systemdiagnosticsdebugextensions.IDeconstr
 }
 
 // GetConstructableModelName wraps the raw GetConstructableModelName call.
-func (self IDeconstructableConcept) GetConstructableModelName(contextObject *systemdiagnosticsdebugextensions.IModelObject, constructableModelName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetConstructableModelName(contextObject, constructableModelName)))
+func (self IDeconstructableConcept) GetConstructableModelName(contextObject IModelObject, constructableModelName *foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.GetConstructableModelName(contextObject.Raw, constructableModelName)))
 }
 
 // GetConstructorArgumentCount wraps the raw GetConstructorArgumentCount call.
-func (self IDeconstructableConcept) GetConstructorArgumentCount(contextObject *systemdiagnosticsdebugextensions.IModelObject, argCount *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetConstructorArgumentCount(contextObject, argCount)))
+func (self IDeconstructableConcept) GetConstructorArgumentCount(contextObject IModelObject, argCount *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.GetConstructorArgumentCount(contextObject.Raw, argCount)))
 }
 
 // GetConstructorArguments wraps the raw GetConstructorArguments call.
-func (self IDeconstructableConcept) GetConstructorArguments(contextObject *systemdiagnosticsdebugextensions.IModelObject, argCount uint64, constructorArguments **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.GetConstructorArguments(contextObject, argCount, constructorArguments)))
+func (self IDeconstructableConcept) GetConstructorArguments(contextObject IModelObject, argCount uint64, constructorArguments **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.GetConstructorArguments(contextObject.Raw, argCount, constructorArguments)))
 }
 
 // IDynamicConceptProviderConcept is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IDynamicConceptProviderConcept with error-returning methods.
@@ -17005,23 +17005,23 @@ func WrapIDynamicConceptProviderConcept(raw *systemdiagnosticsdebugextensions.ID
 }
 
 // GetConcept wraps the raw GetConcept call.
-func (self IDynamicConceptProviderConcept) GetConcept(contextObject *systemdiagnosticsdebugextensions.IModelObject, conceptId *win32.GUID, conceptInterface **systemcom.IUnknown, conceptMetadata **systemdiagnosticsdebugextensions.IKeyStore, hasConcept *bool) error {
-	return win32.HRESULTError(int32(self.Raw.GetConcept(contextObject, conceptId, conceptInterface, conceptMetadata, hasConcept)))
+func (self IDynamicConceptProviderConcept) GetConcept(contextObject IModelObject, conceptId *win32.GUID, conceptInterface **systemcom.IUnknown, conceptMetadata **systemdiagnosticsdebugextensions.IKeyStore, hasConcept *bool) error {
+	return win32.HRESULTError(int32(self.Raw.GetConcept(contextObject.Raw, conceptId, conceptInterface, conceptMetadata, hasConcept)))
 }
 
 // SetConcept wraps the raw SetConcept call.
-func (self IDynamicConceptProviderConcept) SetConcept(contextObject *systemdiagnosticsdebugextensions.IModelObject, conceptId *win32.GUID, conceptInterface *systemcom.IUnknown, conceptMetadata *systemdiagnosticsdebugextensions.IKeyStore) error {
-	return win32.HRESULTError(int32(self.Raw.SetConcept(contextObject, conceptId, conceptInterface, conceptMetadata)))
+func (self IDynamicConceptProviderConcept) SetConcept(contextObject IModelObject, conceptId *win32.GUID, conceptInterface systemcomidiom.IUnknown, conceptMetadata IKeyStore) error {
+	return win32.HRESULTError(int32(self.Raw.SetConcept(contextObject.Raw, conceptId, conceptInterface.Raw, conceptMetadata.Raw)))
 }
 
 // NotifyParent wraps the raw NotifyParent call.
-func (self IDynamicConceptProviderConcept) NotifyParent(parentModel *systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyParent(parentModel)))
+func (self IDynamicConceptProviderConcept) NotifyParent(parentModel IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyParent(parentModel.Raw)))
 }
 
 // NotifyParentChange wraps the raw NotifyParentChange call.
-func (self IDynamicConceptProviderConcept) NotifyParentChange(parentModel *systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyParentChange(parentModel)))
+func (self IDynamicConceptProviderConcept) NotifyParentChange(parentModel IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyParentChange(parentModel.Raw)))
 }
 
 // NotifyDestruct wraps the raw NotifyDestruct call.
@@ -17041,20 +17041,20 @@ func WrapIDynamicKeyProviderConcept(raw *systemdiagnosticsdebugextensions.IDynam
 }
 
 // GetKey wraps the raw GetKey call.
-func (self IDynamicKeyProviderConcept) GetKey(contextObject *systemdiagnosticsdebugextensions.IModelObject, key string, keyValue **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore, hasKey *bool) error {
+func (self IDynamicKeyProviderConcept) GetKey(contextObject IModelObject, key string, keyValue **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore, hasKey *bool) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.GetKey(contextObject, foundation.PWSTR(_key), keyValue, metadata, hasKey)))
+	return win32.HRESULTError(int32(self.Raw.GetKey(contextObject.Raw, foundation.PWSTR(_key), keyValue, metadata, hasKey)))
 }
 
 // SetKey wraps the raw SetKey call.
-func (self IDynamicKeyProviderConcept) SetKey(contextObject *systemdiagnosticsdebugextensions.IModelObject, key string, keyValue *systemdiagnosticsdebugextensions.IModelObject, metadata *systemdiagnosticsdebugextensions.IKeyStore) error {
+func (self IDynamicKeyProviderConcept) SetKey(contextObject IModelObject, key string, keyValue IModelObject, metadata IKeyStore) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.SetKey(contextObject, foundation.PWSTR(_key), keyValue, metadata)))
+	return win32.HRESULTError(int32(self.Raw.SetKey(contextObject.Raw, foundation.PWSTR(_key), keyValue.Raw, metadata.Raw)))
 }
 
 // EnumerateKeys wraps the raw EnumerateKeys call.
-func (self IDynamicKeyProviderConcept) EnumerateKeys(contextObject *systemdiagnosticsdebugextensions.IModelObject, ppEnumerator **systemdiagnosticsdebugextensions.IKeyEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateKeys(contextObject, ppEnumerator)))
+func (self IDynamicKeyProviderConcept) EnumerateKeys(contextObject IModelObject, ppEnumerator **systemdiagnosticsdebugextensions.IKeyEnumerator) error {
+	return win32.HRESULTError(int32(self.Raw.EnumerateKeys(contextObject.Raw, ppEnumerator)))
 }
 
 // IEquatableConcept is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IEquatableConcept with error-returning methods.
@@ -17069,8 +17069,8 @@ func WrapIEquatableConcept(raw *systemdiagnosticsdebugextensions.IEquatableConce
 }
 
 // AreObjectsEqual wraps the raw AreObjectsEqual call.
-func (self IEquatableConcept) AreObjectsEqual(contextObject *systemdiagnosticsdebugextensions.IModelObject, otherObject *systemdiagnosticsdebugextensions.IModelObject, isEqual *bool) error {
-	return win32.HRESULTError(int32(self.Raw.AreObjectsEqual(contextObject, otherObject, isEqual)))
+func (self IEquatableConcept) AreObjectsEqual(contextObject IModelObject, otherObject IModelObject, isEqual *bool) error {
+	return win32.HRESULTError(int32(self.Raw.AreObjectsEqual(contextObject.Raw, otherObject.Raw, isEqual)))
 }
 
 // IFilteredNamespacePropertyToken is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IFilteredNamespacePropertyToken with error-returning methods.
@@ -17095,8 +17095,8 @@ func (self IFilteredNamespacePropertyToken) GetFilter(ppFilter **systemdiagnosti
 }
 
 // TrySetFilter wraps the raw TrySetFilter call.
-func (self IFilteredNamespacePropertyToken) TrySetFilter(pFilter *systemdiagnosticsdebugextensions.IModelMethod) error {
-	return win32.HRESULTError(int32(self.Raw.TrySetFilter(pFilter)))
+func (self IFilteredNamespacePropertyToken) TrySetFilter(pFilter IModelMethod) error {
+	return win32.HRESULTError(int32(self.Raw.TrySetFilter(pFilter.Raw)))
 }
 
 // IHostDataModelAccess is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IHostDataModelAccess with error-returning methods.
@@ -17127,18 +17127,18 @@ func WrapIIndexableConcept(raw *systemdiagnosticsdebugextensions.IIndexableConce
 }
 
 // GetDimensionality wraps the raw GetDimensionality call.
-func (self IIndexableConcept) GetDimensionality(contextObject *systemdiagnosticsdebugextensions.IModelObject, dimensionality *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetDimensionality(contextObject, dimensionality)))
+func (self IIndexableConcept) GetDimensionality(contextObject IModelObject, dimensionality *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.GetDimensionality(contextObject.Raw, dimensionality)))
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IIndexableConcept) GetAt(contextObject *systemdiagnosticsdebugextensions.IModelObject, indexerCount uint64, indexers **systemdiagnosticsdebugextensions.IModelObject, object **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
-	return win32.HRESULTError(int32(self.Raw.GetAt(contextObject, indexerCount, indexers, object, metadata)))
+func (self IIndexableConcept) GetAt(contextObject IModelObject, indexerCount uint64, indexers **systemdiagnosticsdebugextensions.IModelObject, object **systemdiagnosticsdebugextensions.IModelObject, metadata **systemdiagnosticsdebugextensions.IKeyStore) error {
+	return win32.HRESULTError(int32(self.Raw.GetAt(contextObject.Raw, indexerCount, indexers, object, metadata)))
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IIndexableConcept) SetAt(contextObject *systemdiagnosticsdebugextensions.IModelObject, indexerCount uint64, indexers **systemdiagnosticsdebugextensions.IModelObject, value *systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(contextObject, indexerCount, indexers, value)))
+func (self IIndexableConcept) SetAt(contextObject IModelObject, indexerCount uint64, indexers **systemdiagnosticsdebugextensions.IModelObject, value IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(contextObject.Raw, indexerCount, indexers, value.Raw)))
 }
 
 // IIterableConcept is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IIterableConcept with error-returning methods.
@@ -17153,13 +17153,13 @@ func WrapIIterableConcept(raw *systemdiagnosticsdebugextensions.IIterableConcept
 }
 
 // GetDefaultIndexDimensionality wraps the raw GetDefaultIndexDimensionality call.
-func (self IIterableConcept) GetDefaultIndexDimensionality(contextObject *systemdiagnosticsdebugextensions.IModelObject, dimensionality *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetDefaultIndexDimensionality(contextObject, dimensionality)))
+func (self IIterableConcept) GetDefaultIndexDimensionality(contextObject IModelObject, dimensionality *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.GetDefaultIndexDimensionality(contextObject.Raw, dimensionality)))
 }
 
 // GetIterator wraps the raw GetIterator call.
-func (self IIterableConcept) GetIterator(contextObject *systemdiagnosticsdebugextensions.IModelObject, iterator **systemdiagnosticsdebugextensions.IModelIterator) error {
-	return win32.HRESULTError(int32(self.Raw.GetIterator(contextObject, iterator)))
+func (self IIterableConcept) GetIterator(contextObject IModelObject, iterator **systemdiagnosticsdebugextensions.IModelIterator) error {
+	return win32.HRESULTError(int32(self.Raw.GetIterator(contextObject.Raw, iterator)))
 }
 
 // IKeyEnumerator is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IKeyEnumerator with error-returning methods.
@@ -17201,9 +17201,9 @@ func (self IKeyStore) GetKey(key string, object **systemdiagnosticsdebugextensio
 }
 
 // SetKey wraps the raw SetKey call.
-func (self IKeyStore) SetKey(key string, object *systemdiagnosticsdebugextensions.IModelObject, metadata *systemdiagnosticsdebugextensions.IKeyStore) error {
+func (self IKeyStore) SetKey(key string, object IModelObject, metadata IKeyStore) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.SetKey(foundation.PWSTR(_key), object, metadata)))
+	return win32.HRESULTError(int32(self.Raw.SetKey(foundation.PWSTR(_key), object.Raw, metadata.Raw)))
 }
 
 // GetKeyValue wraps the raw GetKeyValue call.
@@ -17213,9 +17213,9 @@ func (self IKeyStore) GetKeyValue(key string, object **systemdiagnosticsdebugext
 }
 
 // SetKeyValue wraps the raw SetKeyValue call.
-func (self IKeyStore) SetKeyValue(key string, object *systemdiagnosticsdebugextensions.IModelObject) error {
+func (self IKeyStore) SetKeyValue(key string, object IModelObject) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.SetKeyValue(foundation.PWSTR(_key), object)))
+	return win32.HRESULTError(int32(self.Raw.SetKeyValue(foundation.PWSTR(_key), object.Raw)))
 }
 
 // ClearKeys wraps the raw ClearKeys call.
@@ -17281,13 +17281,13 @@ func (self IModelKeyReference) GetKeyValue(object **systemdiagnosticsdebugextens
 }
 
 // SetKey wraps the raw SetKey call.
-func (self IModelKeyReference) SetKey(object *systemdiagnosticsdebugextensions.IModelObject, metadata *systemdiagnosticsdebugextensions.IKeyStore) error {
-	return win32.HRESULTError(int32(self.Raw.SetKey(object, metadata)))
+func (self IModelKeyReference) SetKey(object IModelObject, metadata IKeyStore) error {
+	return win32.HRESULTError(int32(self.Raw.SetKey(object.Raw, metadata.Raw)))
 }
 
 // SetKeyValue wraps the raw SetKeyValue call.
-func (self IModelKeyReference) SetKeyValue(object *systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.SetKeyValue(object)))
+func (self IModelKeyReference) SetKeyValue(object IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.SetKeyValue(object.Raw)))
 }
 
 // IModelKeyReference2 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IModelKeyReference2 with error-returning methods.
@@ -17302,8 +17302,8 @@ func WrapIModelKeyReference2(raw *systemdiagnosticsdebugextensions.IModelKeyRefe
 }
 
 // OverrideContextObject wraps the raw OverrideContextObject call.
-func (self IModelKeyReference2) OverrideContextObject(newContextObject *systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.OverrideContextObject(newContextObject)))
+func (self IModelKeyReference2) OverrideContextObject(newContextObject IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.OverrideContextObject(newContextObject.Raw)))
 }
 
 // IModelMethod is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IModelMethod with error-returning methods.
@@ -17318,8 +17318,8 @@ func WrapIModelMethod(raw *systemdiagnosticsdebugextensions.IModelMethod) IModel
 }
 
 // Call wraps the raw Call call.
-func (self IModelMethod) Call(pContextObject *systemdiagnosticsdebugextensions.IModelObject, argCount uint64, ppArguments **systemdiagnosticsdebugextensions.IModelObject, ppResult **systemdiagnosticsdebugextensions.IModelObject, ppMetadata **systemdiagnosticsdebugextensions.IKeyStore) error {
-	return win32.HRESULTError(int32(self.Raw.Call(pContextObject, argCount, ppArguments, ppResult, ppMetadata)))
+func (self IModelMethod) Call(pContextObject IModelObject, argCount uint64, ppArguments **systemdiagnosticsdebugextensions.IModelObject, ppResult **systemdiagnosticsdebugextensions.IModelObject, ppMetadata **systemdiagnosticsdebugextensions.IKeyStore) error {
+	return win32.HRESULTError(int32(self.Raw.Call(pContextObject.Raw, argCount, ppArguments, ppResult, ppMetadata)))
 }
 
 // IModelObject is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IModelObject with error-returning methods.
@@ -17360,9 +17360,9 @@ func (self IModelObject) GetKeyValue(key string, object **systemdiagnosticsdebug
 }
 
 // SetKeyValue wraps the raw SetKeyValue call.
-func (self IModelObject) SetKeyValue(key string, object *systemdiagnosticsdebugextensions.IModelObject) error {
+func (self IModelObject) SetKeyValue(key string, object IModelObject) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.SetKeyValue(foundation.PWSTR(_key), object)))
+	return win32.HRESULTError(int32(self.Raw.SetKeyValue(foundation.PWSTR(_key), object.Raw)))
 }
 
 // EnumerateKeyValues wraps the raw EnumerateKeyValues call.
@@ -17422,13 +17422,13 @@ func (self IModelObject) GetParentModel(i uint64, model **systemdiagnosticsdebug
 }
 
 // AddParentModel wraps the raw AddParentModel call.
-func (self IModelObject) AddParentModel(model *systemdiagnosticsdebugextensions.IModelObject, contextObject *systemdiagnosticsdebugextensions.IModelObject, override byte) error {
-	return win32.HRESULTError(int32(self.Raw.AddParentModel(model, contextObject, override)))
+func (self IModelObject) AddParentModel(model IModelObject, contextObject IModelObject, override byte) error {
+	return win32.HRESULTError(int32(self.Raw.AddParentModel(model.Raw, contextObject.Raw, override)))
 }
 
 // RemoveParentModel wraps the raw RemoveParentModel call.
-func (self IModelObject) RemoveParentModel(model *systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveParentModel(model)))
+func (self IModelObject) RemoveParentModel(model IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveParentModel(model.Raw)))
 }
 
 // GetKey wraps the raw GetKey call.
@@ -17444,9 +17444,9 @@ func (self IModelObject) GetKeyReference(key string, objectReference **systemdia
 }
 
 // SetKey wraps the raw SetKey call.
-func (self IModelObject) SetKey(key string, object *systemdiagnosticsdebugextensions.IModelObject, metadata *systemdiagnosticsdebugextensions.IKeyStore) error {
+func (self IModelObject) SetKey(key string, object IModelObject, metadata IKeyStore) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.SetKey(foundation.PWSTR(_key), object, metadata)))
+	return win32.HRESULTError(int32(self.Raw.SetKey(foundation.PWSTR(_key), object.Raw, metadata.Raw)))
 }
 
 // ClearKeys wraps the raw ClearKeys call.
@@ -17465,8 +17465,8 @@ func (self IModelObject) EnumerateKeyReferences(enumerator **systemdiagnosticsde
 }
 
 // SetConcept wraps the raw SetConcept call.
-func (self IModelObject) SetConcept(conceptId *win32.GUID, conceptInterface *systemcom.IUnknown, conceptMetadata *systemdiagnosticsdebugextensions.IKeyStore) error {
-	return win32.HRESULTError(int32(self.Raw.SetConcept(conceptId, conceptInterface, conceptMetadata)))
+func (self IModelObject) SetConcept(conceptId *win32.GUID, conceptInterface systemcomidiom.IUnknown, conceptMetadata IKeyStore) error {
+	return win32.HRESULTError(int32(self.Raw.SetConcept(conceptId, conceptInterface.Raw, conceptMetadata.Raw)))
 }
 
 // ClearConcepts wraps the raw ClearConcepts call.
@@ -17486,23 +17486,23 @@ func (self IModelObject) EnumerateRawReferences(kind systemdiagnosticsdebugexten
 }
 
 // SetContextForDataModel wraps the raw SetContextForDataModel call.
-func (self IModelObject) SetContextForDataModel(dataModelObject *systemdiagnosticsdebugextensions.IModelObject, context *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetContextForDataModel(dataModelObject, context)))
+func (self IModelObject) SetContextForDataModel(dataModelObject IModelObject, context systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetContextForDataModel(dataModelObject.Raw, context.Raw)))
 }
 
 // GetContextForDataModel wraps the raw GetContextForDataModel call.
-func (self IModelObject) GetContextForDataModel(dataModelObject *systemdiagnosticsdebugextensions.IModelObject, context **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetContextForDataModel(dataModelObject, context)))
+func (self IModelObject) GetContextForDataModel(dataModelObject IModelObject, context **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GetContextForDataModel(dataModelObject.Raw, context)))
 }
 
 // Compare wraps the raw Compare call.
-func (self IModelObject) Compare(other *systemdiagnosticsdebugextensions.IModelObject, ppResult **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.Compare(other, ppResult)))
+func (self IModelObject) Compare(other IModelObject, ppResult **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.Compare(other.Raw, ppResult)))
 }
 
 // IsEqualTo wraps the raw IsEqualTo call.
-func (self IModelObject) IsEqualTo(other *systemdiagnosticsdebugextensions.IModelObject, equal *bool) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqualTo(other, equal)))
+func (self IModelObject) IsEqualTo(other IModelObject, equal *bool) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqualTo(other.Raw, equal)))
 }
 
 // IModelObject2 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IModelObject2 with error-returning methods.
@@ -17543,15 +17543,15 @@ func WrapIModelPropertyAccessor(raw *systemdiagnosticsdebugextensions.IModelProp
 }
 
 // GetValue wraps the raw GetValue call.
-func (self IModelPropertyAccessor) GetValue(key string, contextObject *systemdiagnosticsdebugextensions.IModelObject, value **systemdiagnosticsdebugextensions.IModelObject) error {
+func (self IModelPropertyAccessor) GetValue(key string, contextObject IModelObject, value **systemdiagnosticsdebugextensions.IModelObject) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.GetValue(foundation.PWSTR(_key), contextObject, value)))
+	return win32.HRESULTError(int32(self.Raw.GetValue(foundation.PWSTR(_key), contextObject.Raw, value)))
 }
 
 // SetValue wraps the raw SetValue call.
-func (self IModelPropertyAccessor) SetValue(key string, contextObject *systemdiagnosticsdebugextensions.IModelObject, value *systemdiagnosticsdebugextensions.IModelObject) error {
+func (self IModelPropertyAccessor) SetValue(key string, contextObject IModelObject, value IModelObject) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.SetValue(foundation.PWSTR(_key), contextObject, value)))
+	return win32.HRESULTError(int32(self.Raw.SetValue(foundation.PWSTR(_key), contextObject.Raw, value.Raw)))
 }
 
 // INamedModelsEnumerator is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.INamedModelsEnumerator with error-returning methods.
@@ -17587,8 +17587,8 @@ func WrapIObjectWrapperConcept(raw *systemdiagnosticsdebugextensions.IObjectWrap
 }
 
 // GetWrappedObject wraps the raw GetWrappedObject call.
-func (self IObjectWrapperConcept) GetWrappedObject(pContextObject *systemdiagnosticsdebugextensions.IModelObject, wrappedObject **systemdiagnosticsdebugextensions.IModelObject, pUsagePreference *systemdiagnosticsdebugextensions.WrappedObjectPreference) error {
-	return win32.HRESULTError(int32(self.Raw.GetWrappedObject(pContextObject, wrappedObject, pUsagePreference)))
+func (self IObjectWrapperConcept) GetWrappedObject(pContextObject IModelObject, wrappedObject **systemdiagnosticsdebugextensions.IModelObject, pUsagePreference *systemdiagnosticsdebugextensions.WrappedObjectPreference) error {
+	return win32.HRESULTError(int32(self.Raw.GetWrappedObject(pContextObject.Raw, wrappedObject, pUsagePreference)))
 }
 
 // IPreferredRuntimeTypeConcept is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IPreferredRuntimeTypeConcept with error-returning methods.
@@ -17603,8 +17603,8 @@ func WrapIPreferredRuntimeTypeConcept(raw *systemdiagnosticsdebugextensions.IPre
 }
 
 // CastToPreferredRuntimeType wraps the raw CastToPreferredRuntimeType call.
-func (self IPreferredRuntimeTypeConcept) CastToPreferredRuntimeType(contextObject *systemdiagnosticsdebugextensions.IModelObject, object **systemdiagnosticsdebugextensions.IModelObject) error {
-	return win32.HRESULTError(int32(self.Raw.CastToPreferredRuntimeType(contextObject, object)))
+func (self IPreferredRuntimeTypeConcept) CastToPreferredRuntimeType(contextObject IModelObject, object **systemdiagnosticsdebugextensions.IModelObject) error {
+	return win32.HRESULTError(int32(self.Raw.CastToPreferredRuntimeType(contextObject.Raw, object)))
 }
 
 // IRawEnumerator is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.Extensions.IRawEnumerator with error-returning methods.
@@ -17640,6 +17640,6 @@ func WrapIStringDisplayableConcept(raw *systemdiagnosticsdebugextensions.IString
 }
 
 // ToDisplayString wraps the raw ToDisplayString call.
-func (self IStringDisplayableConcept) ToDisplayString(contextObject *systemdiagnosticsdebugextensions.IModelObject, metadata *systemdiagnosticsdebugextensions.IKeyStore, displayString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.ToDisplayString(contextObject, metadata, displayString)))
+func (self IStringDisplayableConcept) ToDisplayString(contextObject IModelObject, metadata IKeyStore, displayString *foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.ToDisplayString(contextObject.Raw, metadata.Raw, displayString)))
 }

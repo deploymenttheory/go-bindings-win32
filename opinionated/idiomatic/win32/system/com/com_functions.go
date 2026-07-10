@@ -15,8 +15,8 @@ import (
 
 // BindMoniker wraps the raw BindMoniker call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-bindmoniker
-func BindMoniker(pmk *systemcom.IMoniker, grfOpt uint32, iidResult *win32.GUID, ppvResult *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemcom.BindMoniker(pmk, grfOpt, iidResult, ppvResult)))
+func BindMoniker(pmk IMoniker, grfOpt uint32, iidResult *win32.GUID, ppvResult *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemcom.BindMoniker(pmk.Raw, grfOpt, iidResult, ppvResult)))
 }
 
 // CLSIDFromProgID wraps the raw CLSIDFromProgID call with idiomatic Go types.
@@ -42,8 +42,8 @@ func CLSIDFromString(lpsz string, pclsid *win32.GUID) error {
 
 // CoAllowSetForegroundWindow wraps the raw CoAllowSetForegroundWindow call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coallowsetforegroundwindow
-func CoAllowSetForegroundWindow(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcom.CoAllowSetForegroundWindow(pUnk, nil)))
+func CoAllowSetForegroundWindow(pUnk IUnknown) error {
+	return win32.HRESULTError(int32(systemcom.CoAllowSetForegroundWindow(pUnk.Raw, nil)))
 }
 
 // CoAllowUnmarshalerCLSID wraps the raw CoAllowUnmarshalerCLSID call with idiomatic Go types.
@@ -60,14 +60,14 @@ func CoCancelCall(dwThreadId uint32, ulTimeout uint32) error {
 
 // CoCopyProxy wraps the raw CoCopyProxy call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocopyproxy
-func CoCopyProxy(pProxy *systemcom.IUnknown, ppCopy **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcom.CoCopyProxy(pProxy, ppCopy)))
+func CoCopyProxy(pProxy IUnknown, ppCopy **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(systemcom.CoCopyProxy(pProxy.Raw, ppCopy)))
 }
 
 // CoCreateFreeThreadedMarshaler wraps the raw CoCreateFreeThreadedMarshaler call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreatefreethreadedmarshaler
-func CoCreateFreeThreadedMarshaler(punkOuter *systemcom.IUnknown, ppunkMarshal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcom.CoCreateFreeThreadedMarshaler(punkOuter, ppunkMarshal)))
+func CoCreateFreeThreadedMarshaler(punkOuter IUnknown, ppunkMarshal **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(systemcom.CoCreateFreeThreadedMarshaler(punkOuter.Raw, ppunkMarshal)))
 }
 
 // CoCreateGuid wraps the raw CoCreateGuid call with idiomatic Go types.
@@ -78,28 +78,28 @@ func CoCreateGuid(pguid *win32.GUID) error {
 
 // CoCreateInstance wraps the raw CoCreateInstance call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance
-func CoCreateInstance(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext systemcom.CLSCTX, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemcom.CoCreateInstance(rclsid, pUnkOuter, dwClsContext, riid, ppv)))
+func CoCreateInstance(rclsid *win32.GUID, pUnkOuter IUnknown, dwClsContext systemcom.CLSCTX, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemcom.CoCreateInstance(rclsid, pUnkOuter.Raw, dwClsContext, riid, ppv)))
 }
 
 // CoCreateInstanceEx wraps the raw CoCreateInstanceEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstanceex
-func CoCreateInstanceEx(Clsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pServerInfo *systemcom.COSERVERINFO, pResults []systemcom.MULTI_QI) error {
+func CoCreateInstanceEx(Clsid *win32.GUID, punkOuter IUnknown, dwClsCtx systemcom.CLSCTX, pServerInfo *systemcom.COSERVERINFO, pResults []systemcom.MULTI_QI) error {
 	var _pResults *systemcom.MULTI_QI
 	if len(pResults) > 0 {
 		_pResults = &pResults[0]
 	}
-	return win32.HRESULTError(int32(systemcom.CoCreateInstanceEx(Clsid, punkOuter, dwClsCtx, pServerInfo, uint32(len(pResults)), _pResults)))
+	return win32.HRESULTError(int32(systemcom.CoCreateInstanceEx(Clsid, punkOuter.Raw, dwClsCtx, pServerInfo, uint32(len(pResults)), _pResults)))
 }
 
 // CoCreateInstanceFromApp wraps the raw CoCreateInstanceFromApp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstancefromapp
-func CoCreateInstanceFromApp(Clsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, reserved unsafe.Pointer, pResults []systemcom.MULTI_QI) error {
+func CoCreateInstanceFromApp(Clsid *win32.GUID, punkOuter IUnknown, dwClsCtx systemcom.CLSCTX, reserved unsafe.Pointer, pResults []systemcom.MULTI_QI) error {
 	var _pResults *systemcom.MULTI_QI
 	if len(pResults) > 0 {
 		_pResults = &pResults[0]
 	}
-	return win32.HRESULTError(int32(systemcom.CoCreateInstanceFromApp(Clsid, punkOuter, dwClsCtx, reserved, uint32(len(pResults)), _pResults)))
+	return win32.HRESULTError(int32(systemcom.CoCreateInstanceFromApp(Clsid, punkOuter.Raw, dwClsCtx, reserved, uint32(len(pResults)), _pResults)))
 }
 
 // CoDecrementMTAUsage wraps the raw CoDecrementMTAUsage call with idiomatic Go types.
@@ -122,8 +122,8 @@ func CoDisconnectContext(dwTimeout uint32) error {
 
 // CoDisconnectObject wraps the raw CoDisconnectObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-codisconnectobject
-func CoDisconnectObject(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcom.CoDisconnectObject(pUnk, 0)))
+func CoDisconnectObject(pUnk IUnknown) error {
+	return win32.HRESULTError(int32(systemcom.CoDisconnectObject(pUnk.Raw, 0)))
 }
 
 // CoDosDateTimeToFileTime wraps the raw CoDosDateTimeToFileTime call with idiomatic Go types.
@@ -267,9 +267,9 @@ func CoInitializeSecurity(pSecDesc security.PSECURITY_DESCRIPTOR, cAuthSvc int32
 
 // CoInstall wraps the raw CoInstall call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coinstall
-func CoInstall(pbc *systemcom.IBindCtx, dwFlags uint32, pClassSpec *systemcom.UCLSSPEC, pQuery *systemcom.QUERYCONTEXT, pszCodeBase string) error {
+func CoInstall(pbc IBindCtx, dwFlags uint32, pClassSpec *systemcom.UCLSSPEC, pQuery *systemcom.QUERYCONTEXT, pszCodeBase string) error {
 	_pszCodeBase := win32.UTF16Ptr(pszCodeBase)
-	return win32.HRESULTError(int32(systemcom.CoInstall(pbc, dwFlags, pClassSpec, pQuery, foundation.PWSTR(_pszCodeBase))))
+	return win32.HRESULTError(int32(systemcom.CoInstall(pbc.Raw, dwFlags, pClassSpec, pQuery, foundation.PWSTR(_pszCodeBase))))
 }
 
 // CoInvalidateRemoteMachineBindings wraps the raw CoInvalidateRemoteMachineBindings call with idiomatic Go types.
@@ -281,8 +281,8 @@ func CoInvalidateRemoteMachineBindings(pszMachineName string) error {
 
 // CoIsHandlerConnected wraps the raw CoIsHandlerConnected call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coishandlerconnected
-func CoIsHandlerConnected(pUnk *systemcom.IUnknown) bool {
-	return systemcom.CoIsHandlerConnected(pUnk) != 0
+func CoIsHandlerConnected(pUnk IUnknown) bool {
+	return systemcom.CoIsHandlerConnected(pUnk.Raw) != 0
 }
 
 // CoIsOle1Class wraps the raw CoIsOle1Class call with idiomatic Go types.
@@ -301,10 +301,10 @@ func CoLoadLibrary(lpszLibName string, bAutoFree bool) foundation.HINSTANCE {
 
 // CoLockObjectExternal wraps the raw CoLockObjectExternal call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-colockobjectexternal
-func CoLockObjectExternal(pUnk *systemcom.IUnknown, fLock bool, fLastUnlockReleases bool) error {
+func CoLockObjectExternal(pUnk IUnknown, fLock bool, fLastUnlockReleases bool) error {
 	_fLock := foundation.BOOL(win32.Bool32(fLock))
 	_fLastUnlockReleases := foundation.BOOL(win32.Bool32(fLastUnlockReleases))
-	return win32.HRESULTError(int32(systemcom.CoLockObjectExternal(pUnk, _fLock, _fLastUnlockReleases)))
+	return win32.HRESULTError(int32(systemcom.CoLockObjectExternal(pUnk.Raw, _fLock, _fLastUnlockReleases)))
 }
 
 // CoQueryAuthenticationServices wraps the raw CoQueryAuthenticationServices call with idiomatic Go types.
@@ -321,26 +321,26 @@ func CoQueryClientBlanket(pAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName
 
 // CoQueryProxyBlanket wraps the raw CoQueryProxyBlanket call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coqueryproxyblanket
-func CoQueryProxyBlanket(pProxy *systemcom.IUnknown, pwAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName *foundation.PWSTR, pAuthnLevel *uint32, pImpLevel *uint32, pAuthInfo *unsafe.Pointer, pCapabilites *uint32) error {
-	return win32.HRESULTError(int32(systemcom.CoQueryProxyBlanket(pProxy, pwAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites)))
+func CoQueryProxyBlanket(pProxy IUnknown, pwAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName *foundation.PWSTR, pAuthnLevel *uint32, pImpLevel *uint32, pAuthInfo *unsafe.Pointer, pCapabilites *uint32) error {
+	return win32.HRESULTError(int32(systemcom.CoQueryProxyBlanket(pProxy.Raw, pwAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites)))
 }
 
 // CoRegisterActivationFilter wraps the raw CoRegisterActivationFilter call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coregisteractivationfilter
-func CoRegisterActivationFilter(pActivationFilter *systemcom.IActivationFilter) error {
-	return win32.HRESULTError(int32(systemcom.CoRegisterActivationFilter(pActivationFilter)))
+func CoRegisterActivationFilter(pActivationFilter IActivationFilter) error {
+	return win32.HRESULTError(int32(systemcom.CoRegisterActivationFilter(pActivationFilter.Raw)))
 }
 
 // CoRegisterChannelHook wraps the raw CoRegisterChannelHook call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregisterchannelhook
-func CoRegisterChannelHook(ExtensionUuid *win32.GUID, pChannelHook *systemcom.IChannelHook) error {
-	return win32.HRESULTError(int32(systemcom.CoRegisterChannelHook(ExtensionUuid, pChannelHook)))
+func CoRegisterChannelHook(ExtensionUuid *win32.GUID, pChannelHook IChannelHook) error {
+	return win32.HRESULTError(int32(systemcom.CoRegisterChannelHook(ExtensionUuid, pChannelHook.Raw)))
 }
 
 // CoRegisterClassObject wraps the raw CoRegisterClassObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coregisterclassobject
-func CoRegisterClassObject(rclsid *win32.GUID, pUnk *systemcom.IUnknown, dwClsContext systemcom.CLSCTX, flags uint32, lpdwRegister *uint32) error {
-	return win32.HRESULTError(int32(systemcom.CoRegisterClassObject(rclsid, pUnk, dwClsContext, flags, lpdwRegister)))
+func CoRegisterClassObject(rclsid *win32.GUID, pUnk IUnknown, dwClsContext systemcom.CLSCTX, flags uint32, lpdwRegister *uint32) error {
+	return win32.HRESULTError(int32(systemcom.CoRegisterClassObject(rclsid, pUnk.Raw, dwClsContext, flags, lpdwRegister)))
 }
 
 // CoRegisterDeviceCatalog wraps the raw CoRegisterDeviceCatalog call with idiomatic Go types.
@@ -352,14 +352,14 @@ func CoRegisterDeviceCatalog(deviceInstanceId string, cookie *systemcom.CO_DEVIC
 
 // CoRegisterInitializeSpy wraps the raw CoRegisterInitializeSpy call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregisterinitializespy
-func CoRegisterInitializeSpy(pSpy *systemcom.IInitializeSpy, puliCookie *uint64) error {
-	return win32.HRESULTError(int32(systemcom.CoRegisterInitializeSpy(pSpy, puliCookie)))
+func CoRegisterInitializeSpy(pSpy IInitializeSpy, puliCookie *uint64) error {
+	return win32.HRESULTError(int32(systemcom.CoRegisterInitializeSpy(pSpy.Raw, puliCookie)))
 }
 
 // CoRegisterMallocSpy wraps the raw CoRegisterMallocSpy call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregistermallocspy
-func CoRegisterMallocSpy(pMallocSpy *systemcom.IMallocSpy) error {
-	return win32.HRESULTError(int32(systemcom.CoRegisterMallocSpy(pMallocSpy)))
+func CoRegisterMallocSpy(pMallocSpy IMallocSpy) error {
+	return win32.HRESULTError(int32(systemcom.CoRegisterMallocSpy(pMallocSpy.Raw)))
 }
 
 // CoRegisterPSClsid wraps the raw CoRegisterPSClsid call with idiomatic Go types.
@@ -370,8 +370,8 @@ func CoRegisterPSClsid(riid *win32.GUID, rclsid *win32.GUID) error {
 
 // CoRegisterSurrogate wraps the raw CoRegisterSurrogate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coregistersurrogate
-func CoRegisterSurrogate(pSurrogate *systemcom.ISurrogate) error {
-	return win32.HRESULTError(int32(systemcom.CoRegisterSurrogate(pSurrogate)))
+func CoRegisterSurrogate(pSurrogate ISurrogate) error {
+	return win32.HRESULTError(int32(systemcom.CoRegisterSurrogate(pSurrogate.Raw)))
 }
 
 // CoResumeClassObjects wraps the raw CoResumeClassObjects call with idiomatic Go types.
@@ -412,15 +412,15 @@ func CoRevokeMallocSpy() error {
 
 // CoSetCancelObject wraps the raw CoSetCancelObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cosetcancelobject
-func CoSetCancelObject(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcom.CoSetCancelObject(pUnk)))
+func CoSetCancelObject(pUnk IUnknown) error {
+	return win32.HRESULTError(int32(systemcom.CoSetCancelObject(pUnk.Raw)))
 }
 
 // CoSetProxyBlanket wraps the raw CoSetProxyBlanket call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cosetproxyblanket
-func CoSetProxyBlanket(pProxy *systemcom.IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName string, dwAuthnLevel systemcom.RPC_C_AUTHN_LEVEL, dwImpLevel systemcom.RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
+func CoSetProxyBlanket(pProxy IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName string, dwAuthnLevel systemcom.RPC_C_AUTHN_LEVEL, dwImpLevel systemcom.RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
 	_pServerPrincName := win32.UTF16Ptr(pServerPrincName)
-	return win32.HRESULTError(int32(systemcom.CoSetProxyBlanket(pProxy, dwAuthnSvc, dwAuthzSvc, foundation.PWSTR(_pServerPrincName), dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities)))
+	return win32.HRESULTError(int32(systemcom.CoSetProxyBlanket(pProxy.Raw, dwAuthnSvc, dwAuthzSvc, foundation.PWSTR(_pServerPrincName), dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities)))
 }
 
 // CoSuspendClassObjects wraps the raw CoSuspendClassObjects call with idiomatic Go types.
@@ -431,8 +431,8 @@ func CoSuspendClassObjects() error {
 
 // CoSwitchCallContext wraps the raw CoSwitchCallContext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coswitchcallcontext
-func CoSwitchCallContext(pNewObject *systemcom.IUnknown, ppOldObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcom.CoSwitchCallContext(pNewObject, ppOldObject)))
+func CoSwitchCallContext(pNewObject IUnknown, ppOldObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(systemcom.CoSwitchCallContext(pNewObject.Raw, ppOldObject)))
 }
 
 // CoTestCancel wraps the raw CoTestCancel call with idiomatic Go types.
@@ -493,8 +493,8 @@ func CreateDataAdviseHolder(ppDAHolder **systemcom.IDataAdviseHolder) error {
 
 // CreateDataCache wraps the raw CreateDataCache call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createdatacache
-func CreateDataCache(pUnkOuter *systemcom.IUnknown, rclsid *win32.GUID, iid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemcom.CreateDataCache(pUnkOuter, rclsid, iid, ppv)))
+func CreateDataCache(pUnkOuter IUnknown, rclsid *win32.GUID, iid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemcom.CreateDataCache(pUnkOuter.Raw, rclsid, iid, ppv)))
 }
 
 // CreateFileMoniker wraps the raw CreateFileMoniker call with idiomatic Go types.
@@ -506,13 +506,13 @@ func CreateFileMoniker(lpszPathName string, ppmk **systemcom.IMoniker) error {
 
 // CreateGenericComposite wraps the raw CreateGenericComposite call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-creategenericcomposite
-func CreateGenericComposite(pmkFirst *systemcom.IMoniker, pmkRest *systemcom.IMoniker, ppmkComposite **systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(systemcom.CreateGenericComposite(pmkFirst, pmkRest, ppmkComposite)))
+func CreateGenericComposite(pmkFirst IMoniker, pmkRest IMoniker, ppmkComposite **systemcom.IMoniker) error {
+	return win32.HRESULTError(int32(systemcom.CreateGenericComposite(pmkFirst.Raw, pmkRest.Raw, ppmkComposite)))
 }
 
 // CreateIUriBuilder wraps the raw CreateIUriBuilder call with idiomatic Go types.
-func CreateIUriBuilder(pIUri *systemcom.IUri, dwFlags uint32, dwReserved uintptr, ppIUriBuilder **systemcom.IUriBuilder) error {
-	return win32.HRESULTError(int32(systemcom.CreateIUriBuilder(pIUri, dwFlags, dwReserved, ppIUriBuilder)))
+func CreateIUriBuilder(pIUri IUri, dwFlags uint32, dwReserved uintptr, ppIUriBuilder **systemcom.IUriBuilder) error {
+	return win32.HRESULTError(int32(systemcom.CreateIUriBuilder(pIUri.Raw, dwFlags, dwReserved, ppIUriBuilder)))
 }
 
 // CreateItemMoniker wraps the raw CreateItemMoniker call with idiomatic Go types.
@@ -525,20 +525,20 @@ func CreateItemMoniker(lpszDelim string, lpszItem string, ppmk **systemcom.IMoni
 
 // CreateObjrefMoniker wraps the raw CreateObjrefMoniker call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createobjrefmoniker
-func CreateObjrefMoniker(punk *systemcom.IUnknown, ppmk **systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(systemcom.CreateObjrefMoniker(punk, ppmk)))
+func CreateObjrefMoniker(punk IUnknown, ppmk **systemcom.IMoniker) error {
+	return win32.HRESULTError(int32(systemcom.CreateObjrefMoniker(punk.Raw, ppmk)))
 }
 
 // CreatePointerMoniker wraps the raw CreatePointerMoniker call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-createpointermoniker
-func CreatePointerMoniker(punk *systemcom.IUnknown, ppmk **systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(systemcom.CreatePointerMoniker(punk, ppmk)))
+func CreatePointerMoniker(punk IUnknown, ppmk **systemcom.IMoniker) error {
+	return win32.HRESULTError(int32(systemcom.CreatePointerMoniker(punk.Raw, ppmk)))
 }
 
 // CreateStdProgressIndicator wraps the raw CreateStdProgressIndicator call with idiomatic Go types.
-func CreateStdProgressIndicator(hwndParent foundation.HWND, pszTitle string, pIbscCaller *systemcom.IBindStatusCallback, ppIbsc **systemcom.IBindStatusCallback) error {
+func CreateStdProgressIndicator(hwndParent foundation.HWND, pszTitle string, pIbscCaller IBindStatusCallback, ppIbsc **systemcom.IBindStatusCallback) error {
 	_pszTitle := win32.UTF16Ptr(pszTitle)
-	return win32.HRESULTError(int32(systemcom.CreateStdProgressIndicator(hwndParent, foundation.PWSTR(_pszTitle), pIbscCaller, ppIbsc)))
+	return win32.HRESULTError(int32(systemcom.CreateStdProgressIndicator(hwndParent, foundation.PWSTR(_pszTitle), pIbscCaller.Raw, ppIbsc)))
 }
 
 // CreateUri wraps the raw CreateUri call with idiomatic Go types.
@@ -592,22 +592,22 @@ func IIDFromString(lpsz string, lpiid *win32.GUID) error {
 
 // MkParseDisplayName wraps the raw MkParseDisplayName call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-mkparsedisplayname
-func MkParseDisplayName(pbc *systemcom.IBindCtx, szUserName string, pchEaten *uint32, ppmk **systemcom.IMoniker) error {
+func MkParseDisplayName(pbc IBindCtx, szUserName string, pchEaten *uint32, ppmk **systemcom.IMoniker) error {
 	_szUserName := win32.UTF16Ptr(szUserName)
-	return win32.HRESULTError(int32(systemcom.MkParseDisplayName(pbc, foundation.PWSTR(_szUserName), pchEaten, ppmk)))
+	return win32.HRESULTError(int32(systemcom.MkParseDisplayName(pbc.Raw, foundation.PWSTR(_szUserName), pchEaten, ppmk)))
 }
 
 // MonikerCommonPrefixWith wraps the raw MonikerCommonPrefixWith call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-monikercommonprefixwith
-func MonikerCommonPrefixWith(pmkThis *systemcom.IMoniker, pmkOther *systemcom.IMoniker, ppmkCommon **systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(systemcom.MonikerCommonPrefixWith(pmkThis, pmkOther, ppmkCommon)))
+func MonikerCommonPrefixWith(pmkThis IMoniker, pmkOther IMoniker, ppmkCommon **systemcom.IMoniker) error {
+	return win32.HRESULTError(int32(systemcom.MonikerCommonPrefixWith(pmkThis.Raw, pmkOther.Raw, ppmkCommon)))
 }
 
 // MonikerRelativePathTo wraps the raw MonikerRelativePathTo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-monikerrelativepathto
-func MonikerRelativePathTo(pmkSrc *systemcom.IMoniker, pmkDest *systemcom.IMoniker, ppmkRelPath **systemcom.IMoniker, dwReserved bool) error {
+func MonikerRelativePathTo(pmkSrc IMoniker, pmkDest IMoniker, ppmkRelPath **systemcom.IMoniker, dwReserved bool) error {
 	_dwReserved := foundation.BOOL(win32.Bool32(dwReserved))
-	return win32.HRESULTError(int32(systemcom.MonikerRelativePathTo(pmkSrc, pmkDest, ppmkRelPath, _dwReserved)))
+	return win32.HRESULTError(int32(systemcom.MonikerRelativePathTo(pmkSrc.Raw, pmkDest.Raw, ppmkRelPath, _dwReserved)))
 }
 
 // ProgIDFromCLSID wraps the raw ProgIDFromCLSID call with idiomatic Go types.
@@ -618,8 +618,8 @@ func ProgIDFromCLSID(clsid *win32.GUID, lplpszProgID *foundation.PWSTR) error {
 
 // SetErrorInfo wraps the raw SetErrorInfo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-seterrorinfo
-func SetErrorInfo(dwReserved uint32, perrinfo *systemcom.IErrorInfo) error {
-	return win32.HRESULTError(int32(systemcom.SetErrorInfo(dwReserved, perrinfo)))
+func SetErrorInfo(dwReserved uint32, perrinfo IErrorInfo) error {
+	return win32.HRESULTError(int32(systemcom.SetErrorInfo(dwReserved, perrinfo.Raw)))
 }
 
 // StringFromCLSID wraps the raw StringFromCLSID call with idiomatic Go types.

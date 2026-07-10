@@ -49,8 +49,8 @@ func (self IWCNDevice) SetPassword(Type networkmanagementwindowsconnectnow.WCN_P
 }
 
 // Connect wraps the raw Connect call.
-func (self IWCNDevice) Connect(pNotify *networkmanagementwindowsconnectnow.IWCNConnectNotify) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(pNotify)))
+func (self IWCNDevice) Connect(pNotify IWCNConnectNotify) error {
+	return win32.HRESULTError(int32(self.Raw.Connect(pNotify.Raw)))
 }
 
 // GetAttribute wraps the raw GetAttribute call.

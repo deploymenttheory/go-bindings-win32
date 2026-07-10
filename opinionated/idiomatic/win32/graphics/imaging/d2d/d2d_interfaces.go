@@ -6,9 +6,9 @@ package d2d
 
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	graphicsdirect2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d"
 	graphicsimaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/imaging"
 	graphicsimagingd2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/imaging/d2d"
+	graphicsdirect2didiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct2d"
 	graphicsimagingidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/imaging"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -25,18 +25,18 @@ func WrapIWICImageEncoder(raw *graphicsimagingd2d.IWICImageEncoder) IWICImageEnc
 }
 
 // WriteFrame wraps the raw WriteFrame call.
-func (self IWICImageEncoder) WriteFrame(pImage *graphicsdirect2d.ID2D1Image, pFrameEncode *graphicsimaging.IWICBitmapFrameEncode, pImageParameters *graphicsimaging.WICImageParameters) error {
-	return win32.HRESULTError(int32(self.Raw.WriteFrame(pImage, pFrameEncode, pImageParameters)))
+func (self IWICImageEncoder) WriteFrame(pImage graphicsdirect2didiom.ID2D1Image, pFrameEncode graphicsimagingidiom.IWICBitmapFrameEncode, pImageParameters *graphicsimaging.WICImageParameters) error {
+	return win32.HRESULTError(int32(self.Raw.WriteFrame(pImage.Raw, pFrameEncode.Raw, pImageParameters)))
 }
 
 // WriteFrameThumbnail wraps the raw WriteFrameThumbnail call.
-func (self IWICImageEncoder) WriteFrameThumbnail(pImage *graphicsdirect2d.ID2D1Image, pFrameEncode *graphicsimaging.IWICBitmapFrameEncode, pImageParameters *graphicsimaging.WICImageParameters) error {
-	return win32.HRESULTError(int32(self.Raw.WriteFrameThumbnail(pImage, pFrameEncode, pImageParameters)))
+func (self IWICImageEncoder) WriteFrameThumbnail(pImage graphicsdirect2didiom.ID2D1Image, pFrameEncode graphicsimagingidiom.IWICBitmapFrameEncode, pImageParameters *graphicsimaging.WICImageParameters) error {
+	return win32.HRESULTError(int32(self.Raw.WriteFrameThumbnail(pImage.Raw, pFrameEncode.Raw, pImageParameters)))
 }
 
 // WriteThumbnail wraps the raw WriteThumbnail call.
-func (self IWICImageEncoder) WriteThumbnail(pImage *graphicsdirect2d.ID2D1Image, pEncoder *graphicsimaging.IWICBitmapEncoder, pImageParameters *graphicsimaging.WICImageParameters) error {
-	return win32.HRESULTError(int32(self.Raw.WriteThumbnail(pImage, pEncoder, pImageParameters)))
+func (self IWICImageEncoder) WriteThumbnail(pImage graphicsdirect2didiom.ID2D1Image, pEncoder graphicsimagingidiom.IWICBitmapEncoder, pImageParameters *graphicsimaging.WICImageParameters) error {
+	return win32.HRESULTError(int32(self.Raw.WriteThumbnail(pImage.Raw, pEncoder.Raw, pImageParameters)))
 }
 
 // IWICImagingFactory2 is an idiomatic wrapper over the raw COM interface Graphics.Imaging.D2D.IWICImagingFactory2 with error-returning methods.
@@ -51,8 +51,8 @@ func WrapIWICImagingFactory2(raw *graphicsimagingd2d.IWICImagingFactory2) IWICIm
 }
 
 // CreateImageEncoder wraps the raw CreateImageEncoder call.
-func (self IWICImagingFactory2) CreateImageEncoder(pD2DDevice *graphicsdirect2d.ID2D1Device, ppWICImageEncoder **graphicsimagingd2d.IWICImageEncoder) error {
-	return win32.HRESULTError(int32(self.Raw.CreateImageEncoder(pD2DDevice, ppWICImageEncoder)))
+func (self IWICImagingFactory2) CreateImageEncoder(pD2DDevice graphicsdirect2didiom.ID2D1Device, ppWICImageEncoder **graphicsimagingd2d.IWICImageEncoder) error {
+	return win32.HRESULTError(int32(self.Raw.CreateImageEncoder(pD2DDevice.Raw, ppWICImageEncoder)))
 }
 
 // IWICImagingFactory3 is an idiomatic wrapper over the raw COM interface Graphics.Imaging.D2D.IWICImagingFactory3 with error-returning methods.

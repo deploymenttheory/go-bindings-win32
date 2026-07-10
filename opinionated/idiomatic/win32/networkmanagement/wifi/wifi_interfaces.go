@@ -95,15 +95,15 @@ func WrapIDot11AdHocManager(raw *networkmanagementwifi.IDot11AdHocManager) IDot1
 }
 
 // CreateNetwork wraps the raw CreateNetwork call.
-func (self IDot11AdHocManager) CreateNetwork(Name string, Password string, GeographicalId int32, pInterface *networkmanagementwifi.IDot11AdHocInterface, pSecurity *networkmanagementwifi.IDot11AdHocSecuritySettings, pContextGuid *win32.GUID, pIAdHoc **networkmanagementwifi.IDot11AdHocNetwork) error {
+func (self IDot11AdHocManager) CreateNetwork(Name string, Password string, GeographicalId int32, pInterface IDot11AdHocInterface, pSecurity IDot11AdHocSecuritySettings, pContextGuid *win32.GUID, pIAdHoc **networkmanagementwifi.IDot11AdHocNetwork) error {
 	_Name := win32.UTF16Ptr(Name)
 	_Password := win32.UTF16Ptr(Password)
-	return win32.HRESULTError(int32(self.Raw.CreateNetwork(foundation.PWSTR(_Name), foundation.PWSTR(_Password), GeographicalId, pInterface, pSecurity, pContextGuid, pIAdHoc)))
+	return win32.HRESULTError(int32(self.Raw.CreateNetwork(foundation.PWSTR(_Name), foundation.PWSTR(_Password), GeographicalId, pInterface.Raw, pSecurity.Raw, pContextGuid, pIAdHoc)))
 }
 
 // CommitCreatedNetwork wraps the raw CommitCreatedNetwork call.
-func (self IDot11AdHocManager) CommitCreatedNetwork(pIAdHoc *networkmanagementwifi.IDot11AdHocNetwork, fSaveProfile foundation.BOOLEAN, fMakeSavedProfileUserSpecific foundation.BOOLEAN) error {
-	return win32.HRESULTError(int32(self.Raw.CommitCreatedNetwork(pIAdHoc, fSaveProfile, fMakeSavedProfileUserSpecific)))
+func (self IDot11AdHocManager) CommitCreatedNetwork(pIAdHoc IDot11AdHocNetwork, fSaveProfile foundation.BOOLEAN, fMakeSavedProfileUserSpecific foundation.BOOLEAN) error {
+	return win32.HRESULTError(int32(self.Raw.CommitCreatedNetwork(pIAdHoc.Raw, fSaveProfile, fMakeSavedProfileUserSpecific)))
 }
 
 // GetIEnumDot11AdHocNetworks wraps the raw GetIEnumDot11AdHocNetworks call.
@@ -133,8 +133,8 @@ func WrapIDot11AdHocManagerNotificationSink(raw *networkmanagementwifi.IDot11AdH
 }
 
 // OnNetworkAdd wraps the raw OnNetworkAdd call.
-func (self IDot11AdHocManagerNotificationSink) OnNetworkAdd(pIAdHocNetwork *networkmanagementwifi.IDot11AdHocNetwork) error {
-	return win32.HRESULTError(int32(self.Raw.OnNetworkAdd(pIAdHocNetwork)))
+func (self IDot11AdHocManagerNotificationSink) OnNetworkAdd(pIAdHocNetwork IDot11AdHocNetwork) error {
+	return win32.HRESULTError(int32(self.Raw.OnNetworkAdd(pIAdHocNetwork.Raw)))
 }
 
 // OnNetworkRemove wraps the raw OnNetworkRemove call.
@@ -143,8 +143,8 @@ func (self IDot11AdHocManagerNotificationSink) OnNetworkRemove(Signature *win32.
 }
 
 // OnInterfaceAdd wraps the raw OnInterfaceAdd call.
-func (self IDot11AdHocManagerNotificationSink) OnInterfaceAdd(pIAdHocInterface *networkmanagementwifi.IDot11AdHocInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnInterfaceAdd(pIAdHocInterface)))
+func (self IDot11AdHocManagerNotificationSink) OnInterfaceAdd(pIAdHocInterface IDot11AdHocInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnInterfaceAdd(pIAdHocInterface.Raw)))
 }
 
 // OnInterfaceRemove wraps the raw OnInterfaceRemove call.

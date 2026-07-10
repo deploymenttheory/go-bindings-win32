@@ -135,13 +135,13 @@ func WrapIXAudio2(raw *mediaaudioxaudio2.IXAudio2) IXAudio2 {
 }
 
 // RegisterForCallbacks wraps the raw RegisterForCallbacks call.
-func (self IXAudio2) RegisterForCallbacks(pCallback *mediaaudioxaudio2.IXAudio2EngineCallback) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterForCallbacks(pCallback)))
+func (self IXAudio2) RegisterForCallbacks(pCallback IXAudio2EngineCallback) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterForCallbacks(pCallback.Raw)))
 }
 
 // UnregisterForCallbacks wraps the raw UnregisterForCallbacks call.
-func (self IXAudio2) UnregisterForCallbacks(pCallback *mediaaudioxaudio2.IXAudio2EngineCallback) {
-	self.Raw.UnregisterForCallbacks(pCallback)
+func (self IXAudio2) UnregisterForCallbacks(pCallback IXAudio2EngineCallback) {
+	self.Raw.UnregisterForCallbacks(pCallback.Raw)
 }
 
 // CreateSubmixVoice wraps the raw CreateSubmixVoice call.
@@ -370,13 +370,13 @@ func (self IXAudio2Voice) GetFilterParameters(pParameters unsafe.Pointer) {
 }
 
 // SetOutputFilterParameters wraps the raw SetOutputFilterParameters call.
-func (self IXAudio2Voice) SetOutputFilterParameters(pDestinationVoice *mediaaudioxaudio2.IXAudio2Voice, pParameters unsafe.Pointer, OperationSet uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputFilterParameters(pDestinationVoice, pParameters, OperationSet)))
+func (self IXAudio2Voice) SetOutputFilterParameters(pDestinationVoice IXAudio2Voice, pParameters unsafe.Pointer, OperationSet uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputFilterParameters(pDestinationVoice.Raw, pParameters, OperationSet)))
 }
 
 // GetOutputFilterParameters wraps the raw GetOutputFilterParameters call.
-func (self IXAudio2Voice) GetOutputFilterParameters(pDestinationVoice *mediaaudioxaudio2.IXAudio2Voice, pParameters unsafe.Pointer) {
-	self.Raw.GetOutputFilterParameters(pDestinationVoice, pParameters)
+func (self IXAudio2Voice) GetOutputFilterParameters(pDestinationVoice IXAudio2Voice, pParameters unsafe.Pointer) {
+	self.Raw.GetOutputFilterParameters(pDestinationVoice.Raw, pParameters)
 }
 
 // GetVolume wraps the raw GetVolume call.
@@ -395,13 +395,13 @@ func (self IXAudio2Voice) GetChannelVolumes(Channels uint32, pVolumes *float32) 
 }
 
 // SetOutputMatrix wraps the raw SetOutputMatrix call.
-func (self IXAudio2Voice) SetOutputMatrix(pDestinationVoice *mediaaudioxaudio2.IXAudio2Voice, SourceChannels uint32, DestinationChannels uint32, pLevelMatrix *float32, OperationSet uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputMatrix(pDestinationVoice, SourceChannels, DestinationChannels, pLevelMatrix, OperationSet)))
+func (self IXAudio2Voice) SetOutputMatrix(pDestinationVoice IXAudio2Voice, SourceChannels uint32, DestinationChannels uint32, pLevelMatrix *float32, OperationSet uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputMatrix(pDestinationVoice.Raw, SourceChannels, DestinationChannels, pLevelMatrix, OperationSet)))
 }
 
 // GetOutputMatrix wraps the raw GetOutputMatrix call.
-func (self IXAudio2Voice) GetOutputMatrix(pDestinationVoice *mediaaudioxaudio2.IXAudio2Voice, SourceChannels uint32, DestinationChannels uint32, pLevelMatrix *float32) {
-	self.Raw.GetOutputMatrix(pDestinationVoice, SourceChannels, DestinationChannels, pLevelMatrix)
+func (self IXAudio2Voice) GetOutputMatrix(pDestinationVoice IXAudio2Voice, SourceChannels uint32, DestinationChannels uint32, pLevelMatrix *float32) {
+	self.Raw.GetOutputMatrix(pDestinationVoice.Raw, SourceChannels, DestinationChannels, pLevelMatrix)
 }
 
 // DestroyVoice wraps the raw DestroyVoice call.

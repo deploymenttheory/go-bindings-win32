@@ -9,7 +9,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	graphicsdirect2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
@@ -19,7 +18,10 @@ import (
 	uicontrolsrichedit "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls/richedit"
 	uiinputime "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input/ime"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	graphicsdirect2didiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct2d"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // IRichEditOle is an idiomatic wrapper over the raw COM interface UI.Controls.RichEdit.IRichEditOle with error-returning methods.
@@ -90,8 +92,8 @@ func (self IRichEditOle) HandsOffStorage(iob int32) error {
 }
 
 // SaveCompleted wraps the raw SaveCompleted call.
-func (self IRichEditOle) SaveCompleted(iob int32, lpstg *systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(self.Raw.SaveCompleted(iob, lpstg)))
+func (self IRichEditOle) SaveCompleted(iob int32, lpstg systemcomstructuredstorageidiom.IStorage) error {
+	return win32.HRESULTError(int32(self.Raw.SaveCompleted(iob, lpstg.Raw)))
 }
 
 // InPlaceDeactivate wraps the raw InPlaceDeactivate call.
@@ -111,8 +113,8 @@ func (self IRichEditOle) GetClipboardData(lpchrg *uicontrolsrichedit.CHARRANGE, 
 }
 
 // ImportDataObject wraps the raw ImportDataObject call.
-func (self IRichEditOle) ImportDataObject(lpdataobj *systemcom.IDataObject, cf uint16, hMetaPict foundation.HGLOBAL) error {
-	return win32.HRESULTError(int32(self.Raw.ImportDataObject(lpdataobj, cf, hMetaPict)))
+func (self IRichEditOle) ImportDataObject(lpdataobj systemcomidiom.IDataObject, cf uint16, hMetaPict foundation.HGLOBAL) error {
+	return win32.HRESULTError(int32(self.Raw.ImportDataObject(lpdataobj.Raw, cf, hMetaPict)))
 }
 
 // IRichEditOleCallback is an idiomatic wrapper over the raw COM interface UI.Controls.RichEdit.IRichEditOleCallback with error-returning methods.
@@ -143,19 +145,19 @@ func (self IRichEditOleCallback) ShowContainerUI(fShow bool) error {
 }
 
 // QueryInsertObject wraps the raw QueryInsertObject call.
-func (self IRichEditOleCallback) QueryInsertObject(lpclsid *win32.GUID, lpstg *systemcomstructuredstorage.IStorage, cp int32) error {
-	return win32.HRESULTError(int32(self.Raw.QueryInsertObject(lpclsid, lpstg, cp)))
+func (self IRichEditOleCallback) QueryInsertObject(lpclsid *win32.GUID, lpstg systemcomstructuredstorageidiom.IStorage, cp int32) error {
+	return win32.HRESULTError(int32(self.Raw.QueryInsertObject(lpclsid, lpstg.Raw, cp)))
 }
 
 // DeleteObject wraps the raw DeleteObject call.
-func (self IRichEditOleCallback) DeleteObject(lpoleobj *systemole.IOleObject) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteObject(lpoleobj)))
+func (self IRichEditOleCallback) DeleteObject(lpoleobj systemoleidiom.IOleObject) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteObject(lpoleobj.Raw)))
 }
 
 // QueryAcceptData wraps the raw QueryAcceptData call.
-func (self IRichEditOleCallback) QueryAcceptData(lpdataobj *systemcom.IDataObject, lpcfFormat *uint16, reco systemsystemservices.RECO_FLAGS, fReally bool, hMetaPict foundation.HGLOBAL) error {
+func (self IRichEditOleCallback) QueryAcceptData(lpdataobj systemcomidiom.IDataObject, lpcfFormat *uint16, reco systemsystemservices.RECO_FLAGS, fReally bool, hMetaPict foundation.HGLOBAL) error {
 	_fReally := foundation.BOOL(win32.Bool32(fReally))
-	return win32.HRESULTError(int32(self.Raw.QueryAcceptData(lpdataobj, lpcfFormat, reco, _fReally, hMetaPict)))
+	return win32.HRESULTError(int32(self.Raw.QueryAcceptData(lpdataobj.Raw, lpcfFormat, reco, _fReally, hMetaPict)))
 }
 
 // ContextSensitiveHelp wraps the raw ContextSensitiveHelp call.
@@ -176,8 +178,8 @@ func (self IRichEditOleCallback) GetDragDropEffect(fDrag bool, grfKeyState syste
 }
 
 // GetContextMenu wraps the raw GetContextMenu call.
-func (self IRichEditOleCallback) GetContextMenu(seltype uicontrolsrichedit.RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, lpoleobj *systemole.IOleObject, lpchrg *uicontrolsrichedit.CHARRANGE, lphmenu *uiwindowsandmessaging.HMENU) error {
-	return win32.HRESULTError(int32(self.Raw.GetContextMenu(seltype, lpoleobj, lpchrg, lphmenu)))
+func (self IRichEditOleCallback) GetContextMenu(seltype uicontrolsrichedit.RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, lpoleobj systemoleidiom.IOleObject, lpchrg *uicontrolsrichedit.CHARRANGE, lphmenu *uiwindowsandmessaging.HMENU) error {
+	return win32.HRESULTError(int32(self.Raw.GetContextMenu(seltype, lpoleobj.Raw, lpchrg, lphmenu)))
 }
 
 // IRicheditUiaOverrides is an idiomatic wrapper over the raw COM interface UI.Controls.RichEdit.IRicheditUiaOverrides with error-returning methods.
@@ -340,8 +342,8 @@ func (self ITextDocument2) GetDocumentFont(ppFont **uicontrolsrichedit.ITextFont
 }
 
 // SetDocumentFont wraps the raw SetDocumentFont call.
-func (self ITextDocument2) SetDocumentFont(pFont *uicontrolsrichedit.ITextFont2) error {
-	return win32.HRESULTError(int32(self.Raw.SetDocumentFont(pFont)))
+func (self ITextDocument2) SetDocumentFont(pFont ITextFont2) error {
+	return win32.HRESULTError(int32(self.Raw.SetDocumentFont(pFont.Raw)))
 }
 
 // GetDocumentPara wraps the raw GetDocumentPara call.
@@ -350,8 +352,8 @@ func (self ITextDocument2) GetDocumentPara(ppPara **uicontrolsrichedit.ITextPara
 }
 
 // SetDocumentPara wraps the raw SetDocumentPara call.
-func (self ITextDocument2) SetDocumentPara(pPara *uicontrolsrichedit.ITextPara2) error {
-	return win32.HRESULTError(int32(self.Raw.SetDocumentPara(pPara)))
+func (self ITextDocument2) SetDocumentPara(pPara ITextPara2) error {
+	return win32.HRESULTError(int32(self.Raw.SetDocumentPara(pPara.Raw)))
 }
 
 // GetEastAsianFlags wraps the raw GetEastAsianFlags call.
@@ -405,8 +407,8 @@ func (self ITextDocument2) GetWindow(pHwnd *int64) error {
 }
 
 // AttachMsgFilter wraps the raw AttachMsgFilter call.
-func (self ITextDocument2) AttachMsgFilter(pFilter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AttachMsgFilter(pFilter)))
+func (self ITextDocument2) AttachMsgFilter(pFilter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AttachMsgFilter(pFilter.Raw)))
 }
 
 // CheckTextLimit wraps the raw CheckTextLimit call.
@@ -465,8 +467,8 @@ func (self ITextDocument2) RangeFromPoint2(x int32, y int32, Type int32, ppRange
 }
 
 // ReleaseCallManager wraps the raw ReleaseCallManager call.
-func (self ITextDocument2) ReleaseCallManager(pVoid *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseCallManager(pVoid)))
+func (self ITextDocument2) ReleaseCallManager(pVoid systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseCallManager(pVoid.Raw)))
 }
 
 // ReleaseImmContext wraps the raw ReleaseImmContext call.
@@ -520,8 +522,8 @@ func (self ITextDocument2) GetActiveStory(ppStory **uicontrolsrichedit.ITextStor
 }
 
 // SetActiveStory wraps the raw SetActiveStory call.
-func (self ITextDocument2) SetActiveStory(pStory *uicontrolsrichedit.ITextStory) error {
-	return win32.HRESULTError(int32(self.Raw.SetActiveStory(pStory)))
+func (self ITextDocument2) SetActiveStory(pStory ITextStory) error {
+	return win32.HRESULTError(int32(self.Raw.SetActiveStory(pStory.Raw)))
 }
 
 // GetMainStory wraps the raw GetMainStory call.
@@ -551,8 +553,8 @@ func WrapITextDocument2Old(raw *uicontrolsrichedit.ITextDocument2Old) ITextDocum
 }
 
 // AttachMsgFilter wraps the raw AttachMsgFilter call.
-func (self ITextDocument2Old) AttachMsgFilter(pFilter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AttachMsgFilter(pFilter)))
+func (self ITextDocument2Old) AttachMsgFilter(pFilter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AttachMsgFilter(pFilter.Raw)))
 }
 
 // SetEffectColor wraps the raw SetEffectColor call.
@@ -666,8 +668,8 @@ func (self ITextDocument2Old) GetCallManager(ppVoid **systemcom.IUnknown) error 
 }
 
 // ReleaseCallManager wraps the raw ReleaseCallManager call.
-func (self ITextDocument2Old) ReleaseCallManager(pVoid *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseCallManager(pVoid)))
+func (self ITextDocument2Old) ReleaseCallManager(pVoid systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseCallManager(pVoid.Raw)))
 }
 
 // ITextFont is an idiomatic wrapper over the raw COM interface UI.Controls.RichEdit.ITextFont with error-returning methods.
@@ -687,8 +689,8 @@ func (self ITextFont) GetDuplicate(ppFont **uicontrolsrichedit.ITextFont) error 
 }
 
 // SetDuplicate wraps the raw SetDuplicate call.
-func (self ITextFont) SetDuplicate(pFont *uicontrolsrichedit.ITextFont) error {
-	return win32.HRESULTError(int32(self.Raw.SetDuplicate(pFont)))
+func (self ITextFont) SetDuplicate(pFont ITextFont) error {
+	return win32.HRESULTError(int32(self.Raw.SetDuplicate(pFont.Raw)))
 }
 
 // CanChange wraps the raw CanChange call.
@@ -697,8 +699,8 @@ func (self ITextFont) CanChange(pValue *int32) error {
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self ITextFont) IsEqual(pFont *uicontrolsrichedit.ITextFont, pValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pFont, pValue)))
+func (self ITextFont) IsEqual(pFont ITextFont, pValue *int32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pFont.Raw, pValue)))
 }
 
 // Reset wraps the raw Reset call.
@@ -1038,8 +1040,8 @@ func (self ITextFont2) GetDuplicate2(ppFont **uicontrolsrichedit.ITextFont2) err
 }
 
 // SetDuplicate2 wraps the raw SetDuplicate2 call.
-func (self ITextFont2) SetDuplicate2(pFont *uicontrolsrichedit.ITextFont2) error {
-	return win32.HRESULTError(int32(self.Raw.SetDuplicate2(pFont)))
+func (self ITextFont2) SetDuplicate2(pFont ITextFont2) error {
+	return win32.HRESULTError(int32(self.Raw.SetDuplicate2(pFont.Raw)))
 }
 
 // GetLinkType wraps the raw GetLinkType call.
@@ -1153,8 +1155,8 @@ func (self ITextFont2) GetPropertyInfo(Index int32, pType *int32, pValue *int32)
 }
 
 // IsEqual2 wraps the raw IsEqual2 call.
-func (self ITextFont2) IsEqual2(pFont *uicontrolsrichedit.ITextFont2, pB *int32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual2(pFont, pB)))
+func (self ITextFont2) IsEqual2(pFont ITextFont2, pB *int32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual2(pFont.Raw, pB)))
 }
 
 // SetEffects wraps the raw SetEffects call.
@@ -1476,8 +1478,8 @@ func (self ITextPara) GetDuplicate(ppPara **uicontrolsrichedit.ITextPara) error 
 }
 
 // SetDuplicate wraps the raw SetDuplicate call.
-func (self ITextPara) SetDuplicate(pPara *uicontrolsrichedit.ITextPara) error {
-	return win32.HRESULTError(int32(self.Raw.SetDuplicate(pPara)))
+func (self ITextPara) SetDuplicate(pPara ITextPara) error {
+	return win32.HRESULTError(int32(self.Raw.SetDuplicate(pPara.Raw)))
 }
 
 // CanChange wraps the raw CanChange call.
@@ -1486,8 +1488,8 @@ func (self ITextPara) CanChange(pValue *int32) error {
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self ITextPara) IsEqual(pPara *uicontrolsrichedit.ITextPara, pValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pPara, pValue)))
+func (self ITextPara) IsEqual(pPara ITextPara, pValue *int32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pPara.Raw, pValue)))
 }
 
 // Reset wraps the raw Reset call.
@@ -1692,8 +1694,8 @@ func (self ITextPara2) GetDuplicate2(ppPara **uicontrolsrichedit.ITextPara2) err
 }
 
 // SetDuplicate2 wraps the raw SetDuplicate2 call.
-func (self ITextPara2) SetDuplicate2(pPara *uicontrolsrichedit.ITextPara2) error {
-	return win32.HRESULTError(int32(self.Raw.SetDuplicate2(pPara)))
+func (self ITextPara2) SetDuplicate2(pPara ITextPara2) error {
+	return win32.HRESULTError(int32(self.Raw.SetDuplicate2(pPara.Raw)))
 }
 
 // GetFontAlignment wraps the raw GetFontAlignment call.
@@ -1747,8 +1749,8 @@ func (self ITextPara2) GetProperty(Type int32, pValue *int32) error {
 }
 
 // IsEqual2 wraps the raw IsEqual2 call.
-func (self ITextPara2) IsEqual2(pPara *uicontrolsrichedit.ITextPara2, pB *int32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual2(pPara, pB)))
+func (self ITextPara2) IsEqual2(pPara ITextPara2, pB *int32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual2(pPara.Raw, pB)))
 }
 
 // SetEffects wraps the raw SetEffects call.
@@ -1803,8 +1805,8 @@ func (self ITextRange) GetFormattedText(ppRange **uicontrolsrichedit.ITextRange)
 }
 
 // SetFormattedText wraps the raw SetFormattedText call.
-func (self ITextRange) SetFormattedText(pRange *uicontrolsrichedit.ITextRange) error {
-	return win32.HRESULTError(int32(self.Raw.SetFormattedText(pRange)))
+func (self ITextRange) SetFormattedText(pRange ITextRange) error {
+	return win32.HRESULTError(int32(self.Raw.SetFormattedText(pRange.Raw)))
 }
 
 // GetStart wraps the raw GetStart call.
@@ -1833,8 +1835,8 @@ func (self ITextRange) GetFont(ppFont **uicontrolsrichedit.ITextFont) error {
 }
 
 // SetFont wraps the raw SetFont call.
-func (self ITextRange) SetFont(pFont *uicontrolsrichedit.ITextFont) error {
-	return win32.HRESULTError(int32(self.Raw.SetFont(pFont)))
+func (self ITextRange) SetFont(pFont ITextFont) error {
+	return win32.HRESULTError(int32(self.Raw.SetFont(pFont.Raw)))
 }
 
 // GetPara wraps the raw GetPara call.
@@ -1843,8 +1845,8 @@ func (self ITextRange) GetPara(ppPara **uicontrolsrichedit.ITextPara) error {
 }
 
 // SetPara wraps the raw SetPara call.
-func (self ITextRange) SetPara(pPara *uicontrolsrichedit.ITextPara) error {
-	return win32.HRESULTError(int32(self.Raw.SetPara(pPara)))
+func (self ITextRange) SetPara(pPara ITextPara) error {
+	return win32.HRESULTError(int32(self.Raw.SetPara(pPara.Raw)))
 }
 
 // GetStoryLength wraps the raw GetStoryLength call.
@@ -1883,18 +1885,18 @@ func (self ITextRange) SetRange(cpAnchor int32, cpActive int32) error {
 }
 
 // InRange wraps the raw InRange call.
-func (self ITextRange) InRange(pRange *uicontrolsrichedit.ITextRange, pValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.InRange(pRange, pValue)))
+func (self ITextRange) InRange(pRange ITextRange, pValue *int32) error {
+	return win32.HRESULTError(int32(self.Raw.InRange(pRange.Raw, pValue)))
 }
 
 // InStory wraps the raw InStory call.
-func (self ITextRange) InStory(pRange *uicontrolsrichedit.ITextRange, pValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.InStory(pRange, pValue)))
+func (self ITextRange) InStory(pRange ITextRange, pValue *int32) error {
+	return win32.HRESULTError(int32(self.Raw.InStory(pRange.Raw, pValue)))
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self ITextRange) IsEqual(pRange *uicontrolsrichedit.ITextRange, pValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pRange, pValue)))
+func (self ITextRange) IsEqual(pRange ITextRange, pValue *int32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pRange.Raw, pValue)))
 }
 
 // Select wraps the raw Select call.
@@ -2069,8 +2071,8 @@ func (self ITextRange2) GetFont2(ppFont **uicontrolsrichedit.ITextFont2) error {
 }
 
 // SetFont2 wraps the raw SetFont2 call.
-func (self ITextRange2) SetFont2(pFont *uicontrolsrichedit.ITextFont2) error {
-	return win32.HRESULTError(int32(self.Raw.SetFont2(pFont)))
+func (self ITextRange2) SetFont2(pFont ITextFont2) error {
+	return win32.HRESULTError(int32(self.Raw.SetFont2(pFont.Raw)))
 }
 
 // GetFormattedText2 wraps the raw GetFormattedText2 call.
@@ -2079,8 +2081,8 @@ func (self ITextRange2) GetFormattedText2(ppRange **uicontrolsrichedit.ITextRang
 }
 
 // SetFormattedText2 wraps the raw SetFormattedText2 call.
-func (self ITextRange2) SetFormattedText2(pRange *uicontrolsrichedit.ITextRange2) error {
-	return win32.HRESULTError(int32(self.Raw.SetFormattedText2(pRange)))
+func (self ITextRange2) SetFormattedText2(pRange ITextRange2) error {
+	return win32.HRESULTError(int32(self.Raw.SetFormattedText2(pRange.Raw)))
 }
 
 // GetGravity wraps the raw GetGravity call.
@@ -2099,8 +2101,8 @@ func (self ITextRange2) GetPara2(ppPara **uicontrolsrichedit.ITextPara2) error {
 }
 
 // SetPara2 wraps the raw SetPara2 call.
-func (self ITextRange2) SetPara2(pPara *uicontrolsrichedit.ITextPara2) error {
-	return win32.HRESULTError(int32(self.Raw.SetPara2(pPara)))
+func (self ITextRange2) SetPara2(pPara ITextPara2) error {
+	return win32.HRESULTError(int32(self.Raw.SetPara2(pPara.Raw)))
 }
 
 // GetRow wraps the raw GetRow call.
@@ -2144,8 +2146,8 @@ func (self ITextRange2) DeleteSubrange(cpFirst int32, cpLim int32) error {
 }
 
 // Find wraps the raw Find call.
-func (self ITextRange2) Find(pRange *uicontrolsrichedit.ITextRange2, Count int32, Flags int32, pDelta *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Find(pRange, Count, Flags, pDelta)))
+func (self ITextRange2) Find(pRange ITextRange2, Count int32, Flags int32, pDelta *int32) error {
+	return win32.HRESULTError(int32(self.Raw.Find(pRange.Raw, Count, Flags, pDelta)))
 }
 
 // GetChar2 wraps the raw GetChar2 call.
@@ -2234,8 +2236,8 @@ func (self ITextRange2) GetMathFunctionType(bstr foundation.BSTR, pValue *int32)
 }
 
 // InsertImage wraps the raw InsertImage call.
-func (self ITextRange2) InsertImage(width int32, height int32, ascent int32, Type int32, bstrAltText foundation.BSTR, pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.InsertImage(width, height, ascent, Type, bstrAltText, pStream)))
+func (self ITextRange2) InsertImage(width int32, height int32, ascent int32, Type int32, bstrAltText foundation.BSTR, pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.InsertImage(width, height, ascent, Type, bstrAltText, pStream.Raw)))
 }
 
 // ITextRow is an idiomatic wrapper over the raw COM interface UI.Controls.RichEdit.ITextRow with error-returning methods.
@@ -2465,8 +2467,8 @@ func (self ITextRow) Insert(cRow int32) error {
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self ITextRow) IsEqual(pRow *uicontrolsrichedit.ITextRow, pB *int32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pRow, pB)))
+func (self ITextRow) IsEqual(pRow ITextRow, pB *int32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pRow.Raw, pB)))
 }
 
 // Reset wraps the raw Reset call.
@@ -2670,8 +2672,8 @@ func (self ITextServices2) TxGetNaturalSize2(dwAspect uint32, hdcDraw graphicsgd
 }
 
 // TxDrawD2D wraps the raw TxDrawD2D call.
-func (self ITextServices2) TxDrawD2D(pRenderTarget *graphicsdirect2d.ID2D1RenderTarget, lprcBounds *foundation.RECTL, lprcUpdate *foundation.RECT, lViewId int32) error {
-	return win32.HRESULTError(int32(self.Raw.TxDrawD2D(pRenderTarget, lprcBounds, lprcUpdate, lViewId)))
+func (self ITextServices2) TxDrawD2D(pRenderTarget graphicsdirect2didiom.ID2D1RenderTarget, lprcBounds *foundation.RECTL, lprcUpdate *foundation.RECT, lViewId int32) error {
+	return win32.HRESULTError(int32(self.Raw.TxDrawD2D(pRenderTarget.Raw, lprcBounds, lprcUpdate, lViewId)))
 }
 
 // ITextStory is an idiomatic wrapper over the raw COM interface UI.Controls.RichEdit.ITextStory with error-returning methods.
@@ -2731,8 +2733,8 @@ func (self ITextStory) GetText(Flags int32, pbstr *foundation.BSTR) error {
 }
 
 // SetFormattedText wraps the raw SetFormattedText call.
-func (self ITextStory) SetFormattedText(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetFormattedText(pUnk)))
+func (self ITextStory) SetFormattedText(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetFormattedText(pUnk.Raw)))
 }
 
 // SetProperty wraps the raw SetProperty call.
@@ -2814,8 +2816,8 @@ func (self ITextStrings) Add(bstr foundation.BSTR) error {
 }
 
 // Append wraps the raw Append call.
-func (self ITextStrings) Append(pRange *uicontrolsrichedit.ITextRange2, iString int32) error {
-	return win32.HRESULTError(int32(self.Raw.Append(pRange, iString)))
+func (self ITextStrings) Append(pRange ITextRange2, iString int32) error {
+	return win32.HRESULTError(int32(self.Raw.Append(pRange.Raw, iString)))
 }
 
 // Cat2 wraps the raw Cat2 call.
@@ -2829,13 +2831,13 @@ func (self ITextStrings) CatTop2(bstr foundation.BSTR) error {
 }
 
 // DeleteRange wraps the raw DeleteRange call.
-func (self ITextStrings) DeleteRange(pRange *uicontrolsrichedit.ITextRange2) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteRange(pRange)))
+func (self ITextStrings) DeleteRange(pRange ITextRange2) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteRange(pRange.Raw)))
 }
 
 // EncodeFunction wraps the raw EncodeFunction call.
-func (self ITextStrings) EncodeFunction(Type int32, Align int32, Char int32, Char1 int32, Char2 int32, Count int32, TeXStyle int32, cCol int32, pRange *uicontrolsrichedit.ITextRange2) error {
-	return win32.HRESULTError(int32(self.Raw.EncodeFunction(Type, Align, Char, Char1, Char2, Count, TeXStyle, cCol, pRange)))
+func (self ITextStrings) EncodeFunction(Type int32, Align int32, Char int32, Char1 int32, Char2 int32, Count int32, TeXStyle int32, cCol int32, pRange ITextRange2) error {
+	return win32.HRESULTError(int32(self.Raw.EncodeFunction(Type, Align, Char, Char1, Char2, Count, TeXStyle, cCol, pRange.Raw)))
 }
 
 // GetCch wraps the raw GetCch call.
@@ -2864,8 +2866,8 @@ func (self ITextStrings) Remove(iString int32, cString int32) error {
 }
 
 // SetFormattedText wraps the raw SetFormattedText call.
-func (self ITextStrings) SetFormattedText(pRangeD *uicontrolsrichedit.ITextRange2, pRangeS *uicontrolsrichedit.ITextRange2) error {
-	return win32.HRESULTError(int32(self.Raw.SetFormattedText(pRangeD, pRangeS)))
+func (self ITextStrings) SetFormattedText(pRangeD ITextRange2, pRangeS ITextRange2) error {
+	return win32.HRESULTError(int32(self.Raw.SetFormattedText(pRangeD.Raw, pRangeS.Raw)))
 }
 
 // SetOpCp wraps the raw SetOpCp call.
@@ -2874,8 +2876,8 @@ func (self ITextStrings) SetOpCp(iString int32, cp int32) error {
 }
 
 // SuffixTop wraps the raw SuffixTop call.
-func (self ITextStrings) SuffixTop(bstr foundation.BSTR, pRange *uicontrolsrichedit.ITextRange2) error {
-	return win32.HRESULTError(int32(self.Raw.SuffixTop(bstr, pRange)))
+func (self ITextStrings) SuffixTop(bstr foundation.BSTR, pRange ITextRange2) error {
+	return win32.HRESULTError(int32(self.Raw.SuffixTop(bstr, pRange.Raw)))
 }
 
 // Swap wraps the raw Swap call.

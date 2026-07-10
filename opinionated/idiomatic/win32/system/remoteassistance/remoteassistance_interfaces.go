@@ -7,7 +7,6 @@ package remoteassistance
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemremoteassistance "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/remoteassistance"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -35,8 +34,8 @@ func WrapIRendezvousApplication(raw *systemremoteassistance.IRendezvousApplicati
 }
 
 // SetRendezvousSession wraps the raw SetRendezvousSession call.
-func (self IRendezvousApplication) SetRendezvousSession(pRendezvousSession *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetRendezvousSession(pRendezvousSession)))
+func (self IRendezvousApplication) SetRendezvousSession(pRendezvousSession systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetRendezvousSession(pRendezvousSession.Raw)))
 }
 
 // IRendezvousSession is an idiomatic wrapper over the raw COM interface System.RemoteAssistance.IRendezvousSession with error-returning methods.

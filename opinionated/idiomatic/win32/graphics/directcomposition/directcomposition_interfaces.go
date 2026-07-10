@@ -44,13 +44,13 @@ func (self IDCompositionAffineTransform2DEffect) SetTransformMatrix(transformMat
 }
 
 // SetTransformMatrixElement wraps the raw SetTransformMatrixElement call.
-func (self IDCompositionAffineTransform2DEffect) SetTransformMatrixElement(row int32, column int32, animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransformMatrixElement(row, column, animation)))
+func (self IDCompositionAffineTransform2DEffect) SetTransformMatrixElement(row int32, column int32, animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransformMatrixElement(row, column, animation.Raw)))
 }
 
 // SetSharpness wraps the raw SetSharpness call.
-func (self IDCompositionAffineTransform2DEffect) SetSharpness(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetSharpness(animation)))
+func (self IDCompositionAffineTransform2DEffect) SetSharpness(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetSharpness(animation.Raw)))
 }
 
 // IDCompositionAnimation is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionAnimation with error-returning methods.
@@ -97,23 +97,23 @@ func (self IDCompositionArithmeticCompositeEffect) SetClampOutput(clampoutput bo
 }
 
 // SetCoefficient1 wraps the raw SetCoefficient1 call.
-func (self IDCompositionArithmeticCompositeEffect) SetCoefficient1(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCoefficient1(animation)))
+func (self IDCompositionArithmeticCompositeEffect) SetCoefficient1(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCoefficient1(animation.Raw)))
 }
 
 // SetCoefficient2 wraps the raw SetCoefficient2 call.
-func (self IDCompositionArithmeticCompositeEffect) SetCoefficient2(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCoefficient2(animation)))
+func (self IDCompositionArithmeticCompositeEffect) SetCoefficient2(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCoefficient2(animation.Raw)))
 }
 
 // SetCoefficient3 wraps the raw SetCoefficient3 call.
-func (self IDCompositionArithmeticCompositeEffect) SetCoefficient3(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCoefficient3(animation)))
+func (self IDCompositionArithmeticCompositeEffect) SetCoefficient3(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCoefficient3(animation.Raw)))
 }
 
 // SetCoefficient4 wraps the raw SetCoefficient4 call.
-func (self IDCompositionArithmeticCompositeEffect) SetCoefficient4(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCoefficient4(animation)))
+func (self IDCompositionArithmeticCompositeEffect) SetCoefficient4(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCoefficient4(animation.Raw)))
 }
 
 // IDCompositionBlendEffect is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionBlendEffect with error-returning methods.
@@ -154,23 +154,23 @@ func (self IDCompositionBrightnessEffect) SetBlackPoint(blackPoint *graphicsdire
 }
 
 // SetWhitePointX wraps the raw SetWhitePointX call.
-func (self IDCompositionBrightnessEffect) SetWhitePointX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetWhitePointX(animation)))
+func (self IDCompositionBrightnessEffect) SetWhitePointX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetWhitePointX(animation.Raw)))
 }
 
 // SetWhitePointY wraps the raw SetWhitePointY call.
-func (self IDCompositionBrightnessEffect) SetWhitePointY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetWhitePointY(animation)))
+func (self IDCompositionBrightnessEffect) SetWhitePointY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetWhitePointY(animation.Raw)))
 }
 
 // SetBlackPointX wraps the raw SetBlackPointX call.
-func (self IDCompositionBrightnessEffect) SetBlackPointX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBlackPointX(animation)))
+func (self IDCompositionBrightnessEffect) SetBlackPointX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBlackPointX(animation.Raw)))
 }
 
 // SetBlackPointY wraps the raw SetBlackPointY call.
-func (self IDCompositionBrightnessEffect) SetBlackPointY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBlackPointY(animation)))
+func (self IDCompositionBrightnessEffect) SetBlackPointY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBlackPointY(animation.Raw)))
 }
 
 // IDCompositionClip is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionClip with error-returning methods.
@@ -201,8 +201,8 @@ func (self IDCompositionColorMatrixEffect) SetMatrix(matrix *graphicsdirect2dcom
 }
 
 // SetMatrixElement wraps the raw SetMatrixElement call.
-func (self IDCompositionColorMatrixEffect) SetMatrixElement(row int32, column int32, animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetMatrixElement(row, column, animation)))
+func (self IDCompositionColorMatrixEffect) SetMatrixElement(row int32, column int32, animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetMatrixElement(row, column, animation.Raw)))
 }
 
 // SetAlphaMode wraps the raw SetAlphaMode call.
@@ -458,8 +458,8 @@ func (self IDCompositionDevice2) CreateVisual(visual **graphicsdirectcomposition
 }
 
 // CreateSurfaceFactory wraps the raw CreateSurfaceFactory call.
-func (self IDCompositionDevice2) CreateSurfaceFactory(renderingDevice *systemcom.IUnknown, surfaceFactory **graphicsdirectcomposition.IDCompositionSurfaceFactory) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSurfaceFactory(renderingDevice, surfaceFactory)))
+func (self IDCompositionDevice2) CreateSurfaceFactory(renderingDevice systemcomidiom.IUnknown, surfaceFactory **graphicsdirectcomposition.IDCompositionSurfaceFactory) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSurfaceFactory(renderingDevice.Raw, surfaceFactory)))
 }
 
 // CreateSurface wraps the raw CreateSurface call.
@@ -630,13 +630,13 @@ func WrapIDCompositionDevice4(raw *graphicsdirectcomposition.IDCompositionDevice
 }
 
 // CheckCompositionTextureSupport wraps the raw CheckCompositionTextureSupport call.
-func (self IDCompositionDevice4) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CheckCompositionTextureSupport(renderingDevice, supportsCompositionTextures)))
+func (self IDCompositionDevice4) CheckCompositionTextureSupport(renderingDevice systemcomidiom.IUnknown, supportsCompositionTextures *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.CheckCompositionTextureSupport(renderingDevice.Raw, supportsCompositionTextures)))
 }
 
 // CreateCompositionTexture wraps the raw CreateCompositionTexture call.
-func (self IDCompositionDevice4) CreateCompositionTexture(d3dTexture *systemcom.IUnknown, compositionTexture **graphicsdirectcomposition.IDCompositionTexture) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCompositionTexture(d3dTexture, compositionTexture)))
+func (self IDCompositionDevice4) CreateCompositionTexture(d3dTexture systemcomidiom.IUnknown, compositionTexture **graphicsdirectcomposition.IDCompositionTexture) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCompositionTexture(d3dTexture.Raw, compositionTexture)))
 }
 
 // IDCompositionDevice5 is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionDevice5 with error-returning methods.
@@ -688,13 +688,13 @@ func WrapIDCompositionDynamicTexture(raw *graphicsdirectcomposition.IDCompositio
 }
 
 // SetTexture wraps the raw SetTexture call.
-func (self IDCompositionDynamicTexture) SetTexture(pTexture *graphicsdirectcomposition.IDCompositionTexture, pRects *foundation.RECT, rectCount uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.SetTexture(pTexture, pRects, rectCount)))
+func (self IDCompositionDynamicTexture) SetTexture(pTexture IDCompositionTexture, pRects *foundation.RECT, rectCount uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.SetTexture(pTexture.Raw, pRects, rectCount)))
 }
 
 // SetTexture wraps the raw SetTexture_ call.
-func (self IDCompositionDynamicTexture) SetTexture_(pTexture *graphicsdirectcomposition.IDCompositionTexture) error {
-	return win32.HRESULTError(int32(self.Raw.SetTexture_(pTexture)))
+func (self IDCompositionDynamicTexture) SetTexture_(pTexture IDCompositionTexture) error {
+	return win32.HRESULTError(int32(self.Raw.SetTexture_(pTexture.Raw)))
 }
 
 // IDCompositionEffect is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionEffect with error-returning methods.
@@ -720,13 +720,13 @@ func WrapIDCompositionEffectGroup(raw *graphicsdirectcomposition.IDCompositionEf
 }
 
 // SetOpacity wraps the raw SetOpacity call.
-func (self IDCompositionEffectGroup) SetOpacity(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOpacity(animation)))
+func (self IDCompositionEffectGroup) SetOpacity(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOpacity(animation.Raw)))
 }
 
 // SetTransform3D wraps the raw SetTransform3D call.
-func (self IDCompositionEffectGroup) SetTransform3D(transform3D *graphicsdirectcomposition.IDCompositionTransform3D) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransform3D(transform3D)))
+func (self IDCompositionEffectGroup) SetTransform3D(transform3D IDCompositionTransform3D) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransform3D(transform3D.Raw)))
 }
 
 // IDCompositionFilterEffect is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionFilterEffect with error-returning methods.
@@ -741,8 +741,8 @@ func WrapIDCompositionFilterEffect(raw *graphicsdirectcomposition.IDCompositionF
 }
 
 // SetInput wraps the raw SetInput call.
-func (self IDCompositionFilterEffect) SetInput(index uint32, input *systemcom.IUnknown, flags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetInput(index, input, flags)))
+func (self IDCompositionFilterEffect) SetInput(index uint32, input systemcomidiom.IUnknown, flags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetInput(index, input.Raw, flags)))
 }
 
 // IDCompositionGaussianBlurEffect is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionGaussianBlurEffect with error-returning methods.
@@ -757,8 +757,8 @@ func WrapIDCompositionGaussianBlurEffect(raw *graphicsdirectcomposition.IDCompos
 }
 
 // SetStandardDeviation wraps the raw SetStandardDeviation call.
-func (self IDCompositionGaussianBlurEffect) SetStandardDeviation(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetStandardDeviation(animation)))
+func (self IDCompositionGaussianBlurEffect) SetStandardDeviation(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetStandardDeviation(animation.Raw)))
 }
 
 // SetBorderMode wraps the raw SetBorderMode call.
@@ -778,8 +778,8 @@ func WrapIDCompositionHueRotationEffect(raw *graphicsdirectcomposition.IDComposi
 }
 
 // SetAngle wraps the raw SetAngle call.
-func (self IDCompositionHueRotationEffect) SetAngle(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAngle(animation)))
+func (self IDCompositionHueRotationEffect) SetAngle(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAngle(animation.Raw)))
 }
 
 // IDCompositionInkTrailDevice is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionInkTrailDevice with error-returning methods.
@@ -799,8 +799,8 @@ func (self IDCompositionInkTrailDevice) CreateDelegatedInkTrail(inkTrail **graph
 }
 
 // CreateDelegatedInkTrailForSwapChain wraps the raw CreateDelegatedInkTrailForSwapChain call.
-func (self IDCompositionInkTrailDevice) CreateDelegatedInkTrailForSwapChain(swapChain *systemcom.IUnknown, inkTrail **graphicsdirectcomposition.IDCompositionDelegatedInkTrail) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDelegatedInkTrailForSwapChain(swapChain, inkTrail)))
+func (self IDCompositionInkTrailDevice) CreateDelegatedInkTrailForSwapChain(swapChain systemcomidiom.IUnknown, inkTrail **graphicsdirectcomposition.IDCompositionDelegatedInkTrail) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDelegatedInkTrailForSwapChain(swapChain.Raw, inkTrail)))
 }
 
 // IDCompositionLinearTransferEffect is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionLinearTransferEffect with error-returning methods.
@@ -815,13 +815,13 @@ func WrapIDCompositionLinearTransferEffect(raw *graphicsdirectcomposition.IDComp
 }
 
 // SetRedYIntercept wraps the raw SetRedYIntercept call.
-func (self IDCompositionLinearTransferEffect) SetRedYIntercept(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetRedYIntercept(animation)))
+func (self IDCompositionLinearTransferEffect) SetRedYIntercept(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetRedYIntercept(animation.Raw)))
 }
 
 // SetRedSlope wraps the raw SetRedSlope call.
-func (self IDCompositionLinearTransferEffect) SetRedSlope(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetRedSlope(animation)))
+func (self IDCompositionLinearTransferEffect) SetRedSlope(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetRedSlope(animation.Raw)))
 }
 
 // SetRedDisable wraps the raw SetRedDisable call.
@@ -831,13 +831,13 @@ func (self IDCompositionLinearTransferEffect) SetRedDisable(redDisable bool) err
 }
 
 // SetGreenYIntercept wraps the raw SetGreenYIntercept call.
-func (self IDCompositionLinearTransferEffect) SetGreenYIntercept(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetGreenYIntercept(animation)))
+func (self IDCompositionLinearTransferEffect) SetGreenYIntercept(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetGreenYIntercept(animation.Raw)))
 }
 
 // SetGreenSlope wraps the raw SetGreenSlope call.
-func (self IDCompositionLinearTransferEffect) SetGreenSlope(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetGreenSlope(animation)))
+func (self IDCompositionLinearTransferEffect) SetGreenSlope(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetGreenSlope(animation.Raw)))
 }
 
 // SetGreenDisable wraps the raw SetGreenDisable call.
@@ -847,13 +847,13 @@ func (self IDCompositionLinearTransferEffect) SetGreenDisable(greenDisable bool)
 }
 
 // SetBlueYIntercept wraps the raw SetBlueYIntercept call.
-func (self IDCompositionLinearTransferEffect) SetBlueYIntercept(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBlueYIntercept(animation)))
+func (self IDCompositionLinearTransferEffect) SetBlueYIntercept(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBlueYIntercept(animation.Raw)))
 }
 
 // SetBlueSlope wraps the raw SetBlueSlope call.
-func (self IDCompositionLinearTransferEffect) SetBlueSlope(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBlueSlope(animation)))
+func (self IDCompositionLinearTransferEffect) SetBlueSlope(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBlueSlope(animation.Raw)))
 }
 
 // SetBlueDisable wraps the raw SetBlueDisable call.
@@ -863,13 +863,13 @@ func (self IDCompositionLinearTransferEffect) SetBlueDisable(blueDisable bool) e
 }
 
 // SetAlphaYIntercept wraps the raw SetAlphaYIntercept call.
-func (self IDCompositionLinearTransferEffect) SetAlphaYIntercept(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAlphaYIntercept(animation)))
+func (self IDCompositionLinearTransferEffect) SetAlphaYIntercept(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAlphaYIntercept(animation.Raw)))
 }
 
 // SetAlphaSlope wraps the raw SetAlphaSlope call.
-func (self IDCompositionLinearTransferEffect) SetAlphaSlope(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAlphaSlope(animation)))
+func (self IDCompositionLinearTransferEffect) SetAlphaSlope(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAlphaSlope(animation.Raw)))
 }
 
 // SetAlphaDisable wraps the raw SetAlphaDisable call.
@@ -901,8 +901,8 @@ func (self IDCompositionMatrixTransform) SetMatrix(matrix *graphicsdirect2dcommo
 }
 
 // SetMatrixElement wraps the raw SetMatrixElement call.
-func (self IDCompositionMatrixTransform) SetMatrixElement(row int32, column int32, animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetMatrixElement(row, column, animation)))
+func (self IDCompositionMatrixTransform) SetMatrixElement(row int32, column int32, animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetMatrixElement(row, column, animation.Raw)))
 }
 
 // IDCompositionMatrixTransform3D is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionMatrixTransform3D with error-returning methods.
@@ -922,8 +922,8 @@ func (self IDCompositionMatrixTransform3D) SetMatrix(matrix *graphicsdirect3d.D3
 }
 
 // SetMatrixElement wraps the raw SetMatrixElement call.
-func (self IDCompositionMatrixTransform3D) SetMatrixElement(row int32, column int32, animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetMatrixElement(row, column, animation)))
+func (self IDCompositionMatrixTransform3D) SetMatrixElement(row int32, column int32, animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetMatrixElement(row, column, animation.Raw)))
 }
 
 // IDCompositionRectangleClip is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionRectangleClip with error-returning methods.
@@ -938,63 +938,63 @@ func WrapIDCompositionRectangleClip(raw *graphicsdirectcomposition.IDComposition
 }
 
 // SetLeft wraps the raw SetLeft call.
-func (self IDCompositionRectangleClip) SetLeft(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetLeft(animation)))
+func (self IDCompositionRectangleClip) SetLeft(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetLeft(animation.Raw)))
 }
 
 // SetTop wraps the raw SetTop call.
-func (self IDCompositionRectangleClip) SetTop(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetTop(animation)))
+func (self IDCompositionRectangleClip) SetTop(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetTop(animation.Raw)))
 }
 
 // SetRight wraps the raw SetRight call.
-func (self IDCompositionRectangleClip) SetRight(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetRight(animation)))
+func (self IDCompositionRectangleClip) SetRight(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetRight(animation.Raw)))
 }
 
 // SetBottom wraps the raw SetBottom call.
-func (self IDCompositionRectangleClip) SetBottom(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBottom(animation)))
+func (self IDCompositionRectangleClip) SetBottom(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBottom(animation.Raw)))
 }
 
 // SetTopLeftRadiusX wraps the raw SetTopLeftRadiusX call.
-func (self IDCompositionRectangleClip) SetTopLeftRadiusX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetTopLeftRadiusX(animation)))
+func (self IDCompositionRectangleClip) SetTopLeftRadiusX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetTopLeftRadiusX(animation.Raw)))
 }
 
 // SetTopLeftRadiusY wraps the raw SetTopLeftRadiusY call.
-func (self IDCompositionRectangleClip) SetTopLeftRadiusY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetTopLeftRadiusY(animation)))
+func (self IDCompositionRectangleClip) SetTopLeftRadiusY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetTopLeftRadiusY(animation.Raw)))
 }
 
 // SetTopRightRadiusX wraps the raw SetTopRightRadiusX call.
-func (self IDCompositionRectangleClip) SetTopRightRadiusX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetTopRightRadiusX(animation)))
+func (self IDCompositionRectangleClip) SetTopRightRadiusX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetTopRightRadiusX(animation.Raw)))
 }
 
 // SetTopRightRadiusY wraps the raw SetTopRightRadiusY call.
-func (self IDCompositionRectangleClip) SetTopRightRadiusY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetTopRightRadiusY(animation)))
+func (self IDCompositionRectangleClip) SetTopRightRadiusY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetTopRightRadiusY(animation.Raw)))
 }
 
 // SetBottomLeftRadiusX wraps the raw SetBottomLeftRadiusX call.
-func (self IDCompositionRectangleClip) SetBottomLeftRadiusX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBottomLeftRadiusX(animation)))
+func (self IDCompositionRectangleClip) SetBottomLeftRadiusX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBottomLeftRadiusX(animation.Raw)))
 }
 
 // SetBottomLeftRadiusY wraps the raw SetBottomLeftRadiusY call.
-func (self IDCompositionRectangleClip) SetBottomLeftRadiusY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBottomLeftRadiusY(animation)))
+func (self IDCompositionRectangleClip) SetBottomLeftRadiusY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBottomLeftRadiusY(animation.Raw)))
 }
 
 // SetBottomRightRadiusX wraps the raw SetBottomRightRadiusX call.
-func (self IDCompositionRectangleClip) SetBottomRightRadiusX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBottomRightRadiusX(animation)))
+func (self IDCompositionRectangleClip) SetBottomRightRadiusX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBottomRightRadiusX(animation.Raw)))
 }
 
 // SetBottomRightRadiusY wraps the raw SetBottomRightRadiusY call.
-func (self IDCompositionRectangleClip) SetBottomRightRadiusY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBottomRightRadiusY(animation)))
+func (self IDCompositionRectangleClip) SetBottomRightRadiusY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBottomRightRadiusY(animation.Raw)))
 }
 
 // IDCompositionRotateTransform is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionRotateTransform with error-returning methods.
@@ -1009,18 +1009,18 @@ func WrapIDCompositionRotateTransform(raw *graphicsdirectcomposition.IDCompositi
 }
 
 // SetAngle wraps the raw SetAngle call.
-func (self IDCompositionRotateTransform) SetAngle(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAngle(animation)))
+func (self IDCompositionRotateTransform) SetAngle(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAngle(animation.Raw)))
 }
 
 // SetCenterX wraps the raw SetCenterX call.
-func (self IDCompositionRotateTransform) SetCenterX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation)))
+func (self IDCompositionRotateTransform) SetCenterX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation.Raw)))
 }
 
 // SetCenterY wraps the raw SetCenterY call.
-func (self IDCompositionRotateTransform) SetCenterY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation)))
+func (self IDCompositionRotateTransform) SetCenterY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation.Raw)))
 }
 
 // IDCompositionRotateTransform3D is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionRotateTransform3D with error-returning methods.
@@ -1035,38 +1035,38 @@ func WrapIDCompositionRotateTransform3D(raw *graphicsdirectcomposition.IDComposi
 }
 
 // SetAngle wraps the raw SetAngle call.
-func (self IDCompositionRotateTransform3D) SetAngle(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAngle(animation)))
+func (self IDCompositionRotateTransform3D) SetAngle(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAngle(animation.Raw)))
 }
 
 // SetAxisX wraps the raw SetAxisX call.
-func (self IDCompositionRotateTransform3D) SetAxisX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAxisX(animation)))
+func (self IDCompositionRotateTransform3D) SetAxisX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAxisX(animation.Raw)))
 }
 
 // SetAxisY wraps the raw SetAxisY call.
-func (self IDCompositionRotateTransform3D) SetAxisY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAxisY(animation)))
+func (self IDCompositionRotateTransform3D) SetAxisY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAxisY(animation.Raw)))
 }
 
 // SetAxisZ wraps the raw SetAxisZ call.
-func (self IDCompositionRotateTransform3D) SetAxisZ(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAxisZ(animation)))
+func (self IDCompositionRotateTransform3D) SetAxisZ(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAxisZ(animation.Raw)))
 }
 
 // SetCenterX wraps the raw SetCenterX call.
-func (self IDCompositionRotateTransform3D) SetCenterX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation)))
+func (self IDCompositionRotateTransform3D) SetCenterX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation.Raw)))
 }
 
 // SetCenterY wraps the raw SetCenterY call.
-func (self IDCompositionRotateTransform3D) SetCenterY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation)))
+func (self IDCompositionRotateTransform3D) SetCenterY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation.Raw)))
 }
 
 // SetCenterZ wraps the raw SetCenterZ call.
-func (self IDCompositionRotateTransform3D) SetCenterZ(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterZ(animation)))
+func (self IDCompositionRotateTransform3D) SetCenterZ(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterZ(animation.Raw)))
 }
 
 // IDCompositionSaturationEffect is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionSaturationEffect with error-returning methods.
@@ -1081,8 +1081,8 @@ func WrapIDCompositionSaturationEffect(raw *graphicsdirectcomposition.IDComposit
 }
 
 // SetSaturation wraps the raw SetSaturation call.
-func (self IDCompositionSaturationEffect) SetSaturation(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetSaturation(animation)))
+func (self IDCompositionSaturationEffect) SetSaturation(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetSaturation(animation.Raw)))
 }
 
 // IDCompositionScaleTransform is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionScaleTransform with error-returning methods.
@@ -1097,23 +1097,23 @@ func WrapIDCompositionScaleTransform(raw *graphicsdirectcomposition.IDCompositio
 }
 
 // SetScaleX wraps the raw SetScaleX call.
-func (self IDCompositionScaleTransform) SetScaleX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetScaleX(animation)))
+func (self IDCompositionScaleTransform) SetScaleX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetScaleX(animation.Raw)))
 }
 
 // SetScaleY wraps the raw SetScaleY call.
-func (self IDCompositionScaleTransform) SetScaleY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetScaleY(animation)))
+func (self IDCompositionScaleTransform) SetScaleY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetScaleY(animation.Raw)))
 }
 
 // SetCenterX wraps the raw SetCenterX call.
-func (self IDCompositionScaleTransform) SetCenterX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation)))
+func (self IDCompositionScaleTransform) SetCenterX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation.Raw)))
 }
 
 // SetCenterY wraps the raw SetCenterY call.
-func (self IDCompositionScaleTransform) SetCenterY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation)))
+func (self IDCompositionScaleTransform) SetCenterY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation.Raw)))
 }
 
 // IDCompositionScaleTransform3D is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionScaleTransform3D with error-returning methods.
@@ -1128,33 +1128,33 @@ func WrapIDCompositionScaleTransform3D(raw *graphicsdirectcomposition.IDComposit
 }
 
 // SetScaleX wraps the raw SetScaleX call.
-func (self IDCompositionScaleTransform3D) SetScaleX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetScaleX(animation)))
+func (self IDCompositionScaleTransform3D) SetScaleX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetScaleX(animation.Raw)))
 }
 
 // SetScaleY wraps the raw SetScaleY call.
-func (self IDCompositionScaleTransform3D) SetScaleY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetScaleY(animation)))
+func (self IDCompositionScaleTransform3D) SetScaleY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetScaleY(animation.Raw)))
 }
 
 // SetScaleZ wraps the raw SetScaleZ call.
-func (self IDCompositionScaleTransform3D) SetScaleZ(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetScaleZ(animation)))
+func (self IDCompositionScaleTransform3D) SetScaleZ(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetScaleZ(animation.Raw)))
 }
 
 // SetCenterX wraps the raw SetCenterX call.
-func (self IDCompositionScaleTransform3D) SetCenterX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation)))
+func (self IDCompositionScaleTransform3D) SetCenterX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation.Raw)))
 }
 
 // SetCenterY wraps the raw SetCenterY call.
-func (self IDCompositionScaleTransform3D) SetCenterY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation)))
+func (self IDCompositionScaleTransform3D) SetCenterY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation.Raw)))
 }
 
 // SetCenterZ wraps the raw SetCenterZ call.
-func (self IDCompositionScaleTransform3D) SetCenterZ(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterZ(animation)))
+func (self IDCompositionScaleTransform3D) SetCenterZ(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterZ(animation.Raw)))
 }
 
 // IDCompositionShadowEffect is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionShadowEffect with error-returning methods.
@@ -1169,8 +1169,8 @@ func WrapIDCompositionShadowEffect(raw *graphicsdirectcomposition.IDCompositionS
 }
 
 // SetStandardDeviation wraps the raw SetStandardDeviation call.
-func (self IDCompositionShadowEffect) SetStandardDeviation(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetStandardDeviation(animation)))
+func (self IDCompositionShadowEffect) SetStandardDeviation(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetStandardDeviation(animation.Raw)))
 }
 
 // SetColor wraps the raw SetColor call.
@@ -1179,23 +1179,23 @@ func (self IDCompositionShadowEffect) SetColor(color *graphicsdirect2dcommon.D2D
 }
 
 // SetRed wraps the raw SetRed call.
-func (self IDCompositionShadowEffect) SetRed(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetRed(animation)))
+func (self IDCompositionShadowEffect) SetRed(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetRed(animation.Raw)))
 }
 
 // SetGreen wraps the raw SetGreen call.
-func (self IDCompositionShadowEffect) SetGreen(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetGreen(animation)))
+func (self IDCompositionShadowEffect) SetGreen(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetGreen(animation.Raw)))
 }
 
 // SetBlue wraps the raw SetBlue call.
-func (self IDCompositionShadowEffect) SetBlue(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBlue(animation)))
+func (self IDCompositionShadowEffect) SetBlue(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBlue(animation.Raw)))
 }
 
 // SetAlpha wraps the raw SetAlpha call.
-func (self IDCompositionShadowEffect) SetAlpha(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAlpha(animation)))
+func (self IDCompositionShadowEffect) SetAlpha(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAlpha(animation.Raw)))
 }
 
 // IDCompositionSkewTransform is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionSkewTransform with error-returning methods.
@@ -1210,23 +1210,23 @@ func WrapIDCompositionSkewTransform(raw *graphicsdirectcomposition.IDComposition
 }
 
 // SetAngleX wraps the raw SetAngleX call.
-func (self IDCompositionSkewTransform) SetAngleX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAngleX(animation)))
+func (self IDCompositionSkewTransform) SetAngleX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAngleX(animation.Raw)))
 }
 
 // SetAngleY wraps the raw SetAngleY call.
-func (self IDCompositionSkewTransform) SetAngleY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAngleY(animation)))
+func (self IDCompositionSkewTransform) SetAngleY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAngleY(animation.Raw)))
 }
 
 // SetCenterX wraps the raw SetCenterX call.
-func (self IDCompositionSkewTransform) SetCenterX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation)))
+func (self IDCompositionSkewTransform) SetCenterX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterX(animation.Raw)))
 }
 
 // SetCenterY wraps the raw SetCenterY call.
-func (self IDCompositionSkewTransform) SetCenterY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation)))
+func (self IDCompositionSkewTransform) SetCenterY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetCenterY(animation.Raw)))
 }
 
 // IDCompositionSurface is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionSurface with error-returning methods.
@@ -1348,23 +1348,23 @@ func (self IDCompositionTableTransferEffect) SetClampOutput(clampOutput bool) er
 }
 
 // SetRedTableValue wraps the raw SetRedTableValue call.
-func (self IDCompositionTableTransferEffect) SetRedTableValue(index uint32, animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetRedTableValue(index, animation)))
+func (self IDCompositionTableTransferEffect) SetRedTableValue(index uint32, animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetRedTableValue(index, animation.Raw)))
 }
 
 // SetGreenTableValue wraps the raw SetGreenTableValue call.
-func (self IDCompositionTableTransferEffect) SetGreenTableValue(index uint32, animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetGreenTableValue(index, animation)))
+func (self IDCompositionTableTransferEffect) SetGreenTableValue(index uint32, animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetGreenTableValue(index, animation.Raw)))
 }
 
 // SetBlueTableValue wraps the raw SetBlueTableValue call.
-func (self IDCompositionTableTransferEffect) SetBlueTableValue(index uint32, animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetBlueTableValue(index, animation)))
+func (self IDCompositionTableTransferEffect) SetBlueTableValue(index uint32, animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetBlueTableValue(index, animation.Raw)))
 }
 
 // SetAlphaTableValue wraps the raw SetAlphaTableValue call.
-func (self IDCompositionTableTransferEffect) SetAlphaTableValue(index uint32, animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetAlphaTableValue(index, animation)))
+func (self IDCompositionTableTransferEffect) SetAlphaTableValue(index uint32, animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetAlphaTableValue(index, animation.Raw)))
 }
 
 // IDCompositionTarget is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionTarget with error-returning methods.
@@ -1379,8 +1379,8 @@ func WrapIDCompositionTarget(raw *graphicsdirectcomposition.IDCompositionTarget)
 }
 
 // SetRoot wraps the raw SetRoot call.
-func (self IDCompositionTarget) SetRoot(visual *graphicsdirectcomposition.IDCompositionVisual) error {
-	return win32.HRESULTError(int32(self.Raw.SetRoot(visual)))
+func (self IDCompositionTarget) SetRoot(visual IDCompositionVisual) error {
+	return win32.HRESULTError(int32(self.Raw.SetRoot(visual.Raw)))
 }
 
 // IDCompositionTexture is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionTexture with error-returning methods.
@@ -1448,13 +1448,13 @@ func WrapIDCompositionTranslateTransform(raw *graphicsdirectcomposition.IDCompos
 }
 
 // SetOffsetX wraps the raw SetOffsetX call.
-func (self IDCompositionTranslateTransform) SetOffsetX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOffsetX(animation)))
+func (self IDCompositionTranslateTransform) SetOffsetX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOffsetX(animation.Raw)))
 }
 
 // SetOffsetY wraps the raw SetOffsetY call.
-func (self IDCompositionTranslateTransform) SetOffsetY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOffsetY(animation)))
+func (self IDCompositionTranslateTransform) SetOffsetY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOffsetY(animation.Raw)))
 }
 
 // IDCompositionTranslateTransform3D is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionTranslateTransform3D with error-returning methods.
@@ -1469,18 +1469,18 @@ func WrapIDCompositionTranslateTransform3D(raw *graphicsdirectcomposition.IDComp
 }
 
 // SetOffsetX wraps the raw SetOffsetX call.
-func (self IDCompositionTranslateTransform3D) SetOffsetX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOffsetX(animation)))
+func (self IDCompositionTranslateTransform3D) SetOffsetX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOffsetX(animation.Raw)))
 }
 
 // SetOffsetY wraps the raw SetOffsetY call.
-func (self IDCompositionTranslateTransform3D) SetOffsetY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOffsetY(animation)))
+func (self IDCompositionTranslateTransform3D) SetOffsetY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOffsetY(animation.Raw)))
 }
 
 // SetOffsetZ wraps the raw SetOffsetZ call.
-func (self IDCompositionTranslateTransform3D) SetOffsetZ(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOffsetZ(animation)))
+func (self IDCompositionTranslateTransform3D) SetOffsetZ(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOffsetZ(animation.Raw)))
 }
 
 // IDCompositionTurbulenceEffect is an idiomatic wrapper over the raw COM interface Graphics.DirectComposition.IDCompositionTurbulenceEffect with error-returning methods.
@@ -1563,18 +1563,18 @@ func WrapIDCompositionVisual(raw *graphicsdirectcomposition.IDCompositionVisual)
 }
 
 // SetOffsetX wraps the raw SetOffsetX call.
-func (self IDCompositionVisual) SetOffsetX(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOffsetX(animation)))
+func (self IDCompositionVisual) SetOffsetX(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOffsetX(animation.Raw)))
 }
 
 // SetOffsetY wraps the raw SetOffsetY call.
-func (self IDCompositionVisual) SetOffsetY(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOffsetY(animation)))
+func (self IDCompositionVisual) SetOffsetY(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOffsetY(animation.Raw)))
 }
 
 // SetTransform wraps the raw SetTransform call.
-func (self IDCompositionVisual) SetTransform(transform *graphicsdirectcomposition.IDCompositionTransform) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransform(transform)))
+func (self IDCompositionVisual) SetTransform(transform IDCompositionTransform) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransform(transform.Raw)))
 }
 
 // SetTransform wraps the raw SetTransform_ call.
@@ -1583,13 +1583,13 @@ func (self IDCompositionVisual) SetTransform_(matrix *graphicsdirect2dcommon.D2D
 }
 
 // SetTransformParent wraps the raw SetTransformParent call.
-func (self IDCompositionVisual) SetTransformParent(visual *graphicsdirectcomposition.IDCompositionVisual) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransformParent(visual)))
+func (self IDCompositionVisual) SetTransformParent(visual IDCompositionVisual) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransformParent(visual.Raw)))
 }
 
 // SetEffect wraps the raw SetEffect call.
-func (self IDCompositionVisual) SetEffect(effect *graphicsdirectcomposition.IDCompositionEffect) error {
-	return win32.HRESULTError(int32(self.Raw.SetEffect(effect)))
+func (self IDCompositionVisual) SetEffect(effect IDCompositionEffect) error {
+	return win32.HRESULTError(int32(self.Raw.SetEffect(effect.Raw)))
 }
 
 // SetBitmapInterpolationMode wraps the raw SetBitmapInterpolationMode call.
@@ -1603,8 +1603,8 @@ func (self IDCompositionVisual) SetBorderMode(borderMode graphicsdirectcompositi
 }
 
 // SetClip wraps the raw SetClip call.
-func (self IDCompositionVisual) SetClip(clip *graphicsdirectcomposition.IDCompositionClip) error {
-	return win32.HRESULTError(int32(self.Raw.SetClip(clip)))
+func (self IDCompositionVisual) SetClip(clip IDCompositionClip) error {
+	return win32.HRESULTError(int32(self.Raw.SetClip(clip.Raw)))
 }
 
 // SetClip wraps the raw SetClip_ call.
@@ -1613,19 +1613,19 @@ func (self IDCompositionVisual) SetClip_(rect *graphicsdirect2dcommon.D2D_RECT_F
 }
 
 // SetContent wraps the raw SetContent call.
-func (self IDCompositionVisual) SetContent(content *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetContent(content)))
+func (self IDCompositionVisual) SetContent(content systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetContent(content.Raw)))
 }
 
 // AddVisual wraps the raw AddVisual call.
-func (self IDCompositionVisual) AddVisual(visual *graphicsdirectcomposition.IDCompositionVisual, insertAbove bool, referenceVisual *graphicsdirectcomposition.IDCompositionVisual) error {
+func (self IDCompositionVisual) AddVisual(visual IDCompositionVisual, insertAbove bool, referenceVisual IDCompositionVisual) error {
 	_insertAbove := foundation.BOOL(win32.Bool32(insertAbove))
-	return win32.HRESULTError(int32(self.Raw.AddVisual(visual, _insertAbove, referenceVisual)))
+	return win32.HRESULTError(int32(self.Raw.AddVisual(visual.Raw, _insertAbove, referenceVisual.Raw)))
 }
 
 // RemoveVisual wraps the raw RemoveVisual call.
-func (self IDCompositionVisual) RemoveVisual(visual *graphicsdirectcomposition.IDCompositionVisual) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveVisual(visual)))
+func (self IDCompositionVisual) RemoveVisual(visual IDCompositionVisual) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveVisual(visual.Raw)))
 }
 
 // RemoveAllVisuals wraps the raw RemoveAllVisuals call.
@@ -1676,18 +1676,18 @@ func (self IDCompositionVisual3) SetDepthMode(mode graphicsdirectcomposition.DCO
 }
 
 // SetOffsetZ wraps the raw SetOffsetZ call.
-func (self IDCompositionVisual3) SetOffsetZ(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOffsetZ(animation)))
+func (self IDCompositionVisual3) SetOffsetZ(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOffsetZ(animation.Raw)))
 }
 
 // SetOpacity wraps the raw SetOpacity call.
-func (self IDCompositionVisual3) SetOpacity(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
-	return win32.HRESULTError(int32(self.Raw.SetOpacity(animation)))
+func (self IDCompositionVisual3) SetOpacity(animation IDCompositionAnimation) error {
+	return win32.HRESULTError(int32(self.Raw.SetOpacity(animation.Raw)))
 }
 
 // SetTransform wraps the raw SetTransform call.
-func (self IDCompositionVisual3) SetTransform(transform *graphicsdirectcomposition.IDCompositionTransform3D) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransform(transform)))
+func (self IDCompositionVisual3) SetTransform(transform IDCompositionTransform3D) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransform(transform.Raw)))
 }
 
 // SetTransform wraps the raw SetTransform_ call.

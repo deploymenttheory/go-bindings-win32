@@ -9,7 +9,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	systemsearchcommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/search/common"
 	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
@@ -28,8 +27,8 @@ func WrapICreateObject(raw *uishellpropertiessystem.ICreateObject) ICreateObject
 }
 
 // CreateObject wraps the raw CreateObject call.
-func (self ICreateObject) CreateObject(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateObject(clsid, pUnkOuter, riid, ppv)))
+func (self ICreateObject) CreateObject(clsid *win32.GUID, pUnkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateObject(clsid, pUnkOuter.Raw, riid, ppv)))
 }
 
 // IDelayedPropertyStoreFactory is an idiomatic wrapper over the raw COM interface UI.Shell.PropertiesSystem.IDelayedPropertyStoreFactory with error-returning methods.
@@ -77,8 +76,8 @@ func WrapIInitializeWithStream(raw *uishellpropertiessystem.IInitializeWithStrea
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IInitializeWithStream) Initialize(pstream *systemcom.IStream, grfMode uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pstream, grfMode)))
+func (self IInitializeWithStream) Initialize(pstream systemcomidiom.IStream, grfMode uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pstream.Raw, grfMode)))
 }
 
 // INamedPropertyStore is an idiomatic wrapper over the raw COM interface UI.Shell.PropertiesSystem.INamedPropertyStore with error-returning methods.
@@ -220,18 +219,18 @@ func (self IPropertyChangeArray) GetAt(iIndex uint32, riid *win32.GUID, ppv *uns
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IPropertyChangeArray) InsertAt(iIndex uint32, ppropChange *uishellpropertiessystem.IPropertyChange) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(iIndex, ppropChange)))
+func (self IPropertyChangeArray) InsertAt(iIndex uint32, ppropChange IPropertyChange) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(iIndex, ppropChange.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IPropertyChangeArray) Append(ppropChange *uishellpropertiessystem.IPropertyChange) error {
-	return win32.HRESULTError(int32(self.Raw.Append(ppropChange)))
+func (self IPropertyChangeArray) Append(ppropChange IPropertyChange) error {
+	return win32.HRESULTError(int32(self.Raw.Append(ppropChange.Raw)))
 }
 
 // AppendOrReplace wraps the raw AppendOrReplace call.
-func (self IPropertyChangeArray) AppendOrReplace(ppropChange *uishellpropertiessystem.IPropertyChange) error {
-	return win32.HRESULTError(int32(self.Raw.AppendOrReplace(ppropChange)))
+func (self IPropertyChangeArray) AppendOrReplace(ppropChange IPropertyChange) error {
+	return win32.HRESULTError(int32(self.Raw.AppendOrReplace(ppropChange.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -645,8 +644,8 @@ func WrapIPropertyStoreFactory(raw *uishellpropertiessystem.IPropertyStoreFactor
 }
 
 // GetPropertyStore wraps the raw GetPropertyStore call.
-func (self IPropertyStoreFactory) GetPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, pUnkFactory *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetPropertyStore(flags, pUnkFactory, riid, ppv)))
+func (self IPropertyStoreFactory) GetPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, pUnkFactory systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetPropertyStore(flags, pUnkFactory.Raw, riid, ppv)))
 }
 
 // GetPropertyStoreForKeys wraps the raw GetPropertyStoreForKeys call.

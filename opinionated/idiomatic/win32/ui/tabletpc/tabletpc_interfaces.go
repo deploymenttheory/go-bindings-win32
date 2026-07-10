@@ -13,6 +13,7 @@ import (
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uitabletpc "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/tabletpc"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // IDynamicRenderer is an idiomatic wrapper over the raw COM interface UI.TabletPC.IDynamicRenderer with error-returning methods.
@@ -73,8 +74,8 @@ func (self IDynamicRenderer) Get_DrawingAttributes(ppiDA **uitabletpc.IInkDrawin
 }
 
 // Putref_DrawingAttributes wraps the raw Putref_DrawingAttributes call.
-func (self IDynamicRenderer) Putref_DrawingAttributes(piDA *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_DrawingAttributes(piDA)))
+func (self IDynamicRenderer) Putref_DrawingAttributes(piDA IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_DrawingAttributes(piDA.Raw)))
 }
 
 // Get_DataCacheEnabled wraps the raw Get_DataCacheEnabled call.
@@ -163,9 +164,9 @@ func (self IHandwrittenTextInsertion) InsertRecognitionResultsArray(psaAlternate
 }
 
 // InsertInkRecognitionResult wraps the raw InsertInkRecognitionResult call.
-func (self IHandwrittenTextInsertion) InsertInkRecognitionResult(pIInkRecoResult *uitabletpc.IInkRecognitionResult, locale uint32, fAlternateContainsAutoSpacingInformation bool) error {
+func (self IHandwrittenTextInsertion) InsertInkRecognitionResult(pIInkRecoResult IInkRecognitionResult, locale uint32, fAlternateContainsAutoSpacingInformation bool) error {
 	_fAlternateContainsAutoSpacingInformation := foundation.BOOL(win32.Bool32(fAlternateContainsAutoSpacingInformation))
-	return win32.HRESULTError(int32(self.Raw.InsertInkRecognitionResult(pIInkRecoResult, locale, _fAlternateContainsAutoSpacingInformation)))
+	return win32.HRESULTError(int32(self.Raw.InsertInkRecognitionResult(pIInkRecoResult.Raw, locale, _fAlternateContainsAutoSpacingInformation)))
 }
 
 // IInk is an idiomatic wrapper over the raw COM interface UI.TabletPC.IInk with error-returning methods.
@@ -216,8 +217,8 @@ func (self IInkCollector) Get_DefaultDrawingAttributes(CurrentAttributes **uitab
 }
 
 // Putref_DefaultDrawingAttributes wraps the raw Putref_DefaultDrawingAttributes call.
-func (self IInkCollector) Putref_DefaultDrawingAttributes(NewAttributes *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_DefaultDrawingAttributes(NewAttributes)))
+func (self IInkCollector) Putref_DefaultDrawingAttributes(NewAttributes IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_DefaultDrawingAttributes(NewAttributes.Raw)))
 }
 
 // Get_Renderer wraps the raw Get_Renderer call.
@@ -226,8 +227,8 @@ func (self IInkCollector) Get_Renderer(CurrentInkRenderer **uitabletpc.IInkRende
 }
 
 // Putref_Renderer wraps the raw Putref_Renderer call.
-func (self IInkCollector) Putref_Renderer(NewInkRenderer *uitabletpc.IInkRenderer) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Renderer(NewInkRenderer)))
+func (self IInkCollector) Putref_Renderer(NewInkRenderer IInkRenderer) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Renderer(NewInkRenderer.Raw)))
 }
 
 // Get_Ink wraps the raw Get_Ink call.
@@ -236,8 +237,8 @@ func (self IInkCollector) Get_Ink(Ink **uitabletpc.IInkDisp) error {
 }
 
 // Putref_Ink wraps the raw Putref_Ink call.
-func (self IInkCollector) Putref_Ink(NewInk *uitabletpc.IInkDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Ink(NewInk)))
+func (self IInkCollector) Putref_Ink(NewInk IInkDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Ink(NewInk.Raw)))
 }
 
 // Get_AutoRedraw wraps the raw Get_AutoRedraw call.
@@ -286,13 +287,13 @@ func (self IInkCollector) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) erro
 }
 
 // Put_MouseIcon wraps the raw Put_MouseIcon call.
-func (self IInkCollector) Put_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Put_MouseIcon(MouseIcon)))
+func (self IInkCollector) Put_MouseIcon(MouseIcon systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Put_MouseIcon(MouseIcon.Raw)))
 }
 
 // Putref_MouseIcon wraps the raw Putref_MouseIcon call.
-func (self IInkCollector) Putref_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_MouseIcon(MouseIcon)))
+func (self IInkCollector) Putref_MouseIcon(MouseIcon systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_MouseIcon(MouseIcon.Raw)))
 }
 
 // Get_MousePointer wraps the raw Get_MousePointer call.
@@ -361,8 +362,8 @@ func (self IInkCollector) GetWindowInputRectangle(WindowInputRectangle **uitable
 }
 
 // SetWindowInputRectangle wraps the raw SetWindowInputRectangle call.
-func (self IInkCollector) SetWindowInputRectangle(WindowInputRectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.SetWindowInputRectangle(WindowInputRectangle)))
+func (self IInkCollector) SetWindowInputRectangle(WindowInputRectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.SetWindowInputRectangle(WindowInputRectangle.Raw)))
 }
 
 // SetAllTabletsMode wraps the raw SetAllTabletsMode call.
@@ -371,8 +372,8 @@ func (self IInkCollector) SetAllTabletsMode(UseMouseForInput foundation.VARIANT_
 }
 
 // SetSingleTabletIntegratedMode wraps the raw SetSingleTabletIntegratedMode call.
-func (self IInkCollector) SetSingleTabletIntegratedMode(Tablet *uitabletpc.IInkTablet) error {
-	return win32.HRESULTError(int32(self.Raw.SetSingleTabletIntegratedMode(Tablet)))
+func (self IInkCollector) SetSingleTabletIntegratedMode(Tablet IInkTablet) error {
+	return win32.HRESULTError(int32(self.Raw.SetSingleTabletIntegratedMode(Tablet.Raw)))
 }
 
 // GetEventInterest wraps the raw GetEventInterest call.
@@ -417,8 +418,8 @@ func (self IInkCursor) Get_DrawingAttributes(Attributes **uitabletpc.IInkDrawing
 }
 
 // Putref_DrawingAttributes wraps the raw Putref_DrawingAttributes call.
-func (self IInkCursor) Putref_DrawingAttributes(Attributes *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_DrawingAttributes(Attributes)))
+func (self IInkCursor) Putref_DrawingAttributes(Attributes IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_DrawingAttributes(Attributes.Raw)))
 }
 
 // Get_Tablet wraps the raw Get_Tablet call.
@@ -526,8 +527,8 @@ func (self IInkCustomStrokes) Get__NewEnum(_NewEnum **systemcom.IUnknown) error 
 }
 
 // Add wraps the raw Add call.
-func (self IInkCustomStrokes) Add(Name foundation.BSTR, Strokes *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.Add(Name, Strokes)))
+func (self IInkCustomStrokes) Add(Name foundation.BSTR, Strokes IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.Add(Name, Strokes.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -577,28 +578,28 @@ func (self IInkDisp) GetBoundingBox(BoundingBoxMode uitabletpc.InkBoundingBoxMod
 }
 
 // DeleteStrokes wraps the raw DeleteStrokes call.
-func (self IInkDisp) DeleteStrokes(Strokes *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteStrokes(Strokes)))
+func (self IInkDisp) DeleteStrokes(Strokes IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteStrokes(Strokes.Raw)))
 }
 
 // DeleteStroke wraps the raw DeleteStroke call.
-func (self IInkDisp) DeleteStroke(Stroke *uitabletpc.IInkStrokeDisp) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteStroke(Stroke)))
+func (self IInkDisp) DeleteStroke(Stroke IInkStrokeDisp) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteStroke(Stroke.Raw)))
 }
 
 // ExtractStrokes wraps the raw ExtractStrokes call.
-func (self IInkDisp) ExtractStrokes(Strokes *uitabletpc.IInkStrokes, ExtractFlags uitabletpc.InkExtractFlags, ExtractedInk **uitabletpc.IInkDisp) error {
-	return win32.HRESULTError(int32(self.Raw.ExtractStrokes(Strokes, ExtractFlags, ExtractedInk)))
+func (self IInkDisp) ExtractStrokes(Strokes IInkStrokes, ExtractFlags uitabletpc.InkExtractFlags, ExtractedInk **uitabletpc.IInkDisp) error {
+	return win32.HRESULTError(int32(self.Raw.ExtractStrokes(Strokes.Raw, ExtractFlags, ExtractedInk)))
 }
 
 // ExtractWithRectangle wraps the raw ExtractWithRectangle call.
-func (self IInkDisp) ExtractWithRectangle(Rectangle *uitabletpc.IInkRectangle, extractFlags uitabletpc.InkExtractFlags, ExtractedInk **uitabletpc.IInkDisp) error {
-	return win32.HRESULTError(int32(self.Raw.ExtractWithRectangle(Rectangle, extractFlags, ExtractedInk)))
+func (self IInkDisp) ExtractWithRectangle(Rectangle IInkRectangle, extractFlags uitabletpc.InkExtractFlags, ExtractedInk **uitabletpc.IInkDisp) error {
+	return win32.HRESULTError(int32(self.Raw.ExtractWithRectangle(Rectangle.Raw, extractFlags, ExtractedInk)))
 }
 
 // Clip wraps the raw Clip call.
-func (self IInkDisp) Clip(Rectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.Clip(Rectangle)))
+func (self IInkDisp) Clip(Rectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.Clip(Rectangle.Raw)))
 }
 
 // Clone wraps the raw Clone call.
@@ -612,8 +613,8 @@ func (self IInkDisp) NearestPoint(X int32, Y int32, PointOnStroke *float32, Dist
 }
 
 // AddStrokesAtRectangle wraps the raw AddStrokesAtRectangle call.
-func (self IInkDisp) AddStrokesAtRectangle(SourceStrokes *uitabletpc.IInkStrokes, TargetRectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.AddStrokesAtRectangle(SourceStrokes, TargetRectangle)))
+func (self IInkDisp) AddStrokesAtRectangle(SourceStrokes IInkStrokes, TargetRectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.AddStrokesAtRectangle(SourceStrokes.Raw, TargetRectangle.Raw)))
 }
 
 // Save wraps the raw Save call.
@@ -622,23 +623,23 @@ func (self IInkDisp) Save(PersistenceFormat uitabletpc.InkPersistenceFormat, Com
 }
 
 // ClipboardCopyWithRectangle wraps the raw ClipboardCopyWithRectangle call.
-func (self IInkDisp) ClipboardCopyWithRectangle(Rectangle *uitabletpc.IInkRectangle, ClipboardFormats uitabletpc.InkClipboardFormats, ClipboardModes uitabletpc.InkClipboardModes, DataObject **systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.ClipboardCopyWithRectangle(Rectangle, ClipboardFormats, ClipboardModes, DataObject)))
+func (self IInkDisp) ClipboardCopyWithRectangle(Rectangle IInkRectangle, ClipboardFormats uitabletpc.InkClipboardFormats, ClipboardModes uitabletpc.InkClipboardModes, DataObject **systemcom.IDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.ClipboardCopyWithRectangle(Rectangle.Raw, ClipboardFormats, ClipboardModes, DataObject)))
 }
 
 // ClipboardCopy wraps the raw ClipboardCopy call.
-func (self IInkDisp) ClipboardCopy(strokes *uitabletpc.IInkStrokes, ClipboardFormats uitabletpc.InkClipboardFormats, ClipboardModes uitabletpc.InkClipboardModes, DataObject **systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.ClipboardCopy(strokes, ClipboardFormats, ClipboardModes, DataObject)))
+func (self IInkDisp) ClipboardCopy(strokes IInkStrokes, ClipboardFormats uitabletpc.InkClipboardFormats, ClipboardModes uitabletpc.InkClipboardModes, DataObject **systemcom.IDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.ClipboardCopy(strokes.Raw, ClipboardFormats, ClipboardModes, DataObject)))
 }
 
 // CanPaste wraps the raw CanPaste call.
-func (self IInkDisp) CanPaste(DataObject *systemcom.IDataObject, CanPaste *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CanPaste(DataObject, CanPaste)))
+func (self IInkDisp) CanPaste(DataObject systemcomidiom.IDataObject, CanPaste *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.CanPaste(DataObject.Raw, CanPaste)))
 }
 
 // ClipboardPaste wraps the raw ClipboardPaste call.
-func (self IInkDisp) ClipboardPaste(x int32, y int32, DataObject *systemcom.IDataObject, Strokes **uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.ClipboardPaste(x, y, DataObject, Strokes)))
+func (self IInkDisp) ClipboardPaste(x int32, y int32, DataObject systemcomidiom.IDataObject, Strokes **uitabletpc.IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.ClipboardPaste(x, y, DataObject.Raw, Strokes)))
 }
 
 // IInkDivider is an idiomatic wrapper over the raw COM interface UI.TabletPC.IInkDivider with error-returning methods.
@@ -658,8 +659,8 @@ func (self IInkDivider) Get_Strokes(Strokes **uitabletpc.IInkStrokes) error {
 }
 
 // Putref_Strokes wraps the raw Putref_Strokes call.
-func (self IInkDivider) Putref_Strokes(Strokes *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Strokes(Strokes)))
+func (self IInkDivider) Putref_Strokes(Strokes IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Strokes(Strokes.Raw)))
 }
 
 // Get_RecognizerContext wraps the raw Get_RecognizerContext call.
@@ -668,8 +669,8 @@ func (self IInkDivider) Get_RecognizerContext(RecognizerContext **uitabletpc.IIn
 }
 
 // Putref_RecognizerContext wraps the raw Putref_RecognizerContext call.
-func (self IInkDivider) Putref_RecognizerContext(RecognizerContext *uitabletpc.IInkRecognizerContext) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_RecognizerContext(RecognizerContext)))
+func (self IInkDivider) Putref_RecognizerContext(RecognizerContext IInkRecognizerContext) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_RecognizerContext(RecognizerContext.Raw)))
 }
 
 // Get_LineHeight wraps the raw Get_LineHeight call.
@@ -918,8 +919,8 @@ func (self IInkEdit) Get_DrawingAttributes(pVal **uitabletpc.IInkDrawingAttribut
 }
 
 // Putref_DrawingAttributes wraps the raw Putref_DrawingAttributes call.
-func (self IInkEdit) Putref_DrawingAttributes(newVal *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_DrawingAttributes(newVal)))
+func (self IInkEdit) Putref_DrawingAttributes(newVal IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_DrawingAttributes(newVal.Raw)))
 }
 
 // Get_RecognitionTimeout wraps the raw Get_RecognitionTimeout call.
@@ -938,8 +939,8 @@ func (self IInkEdit) Get_Recognizer(pVal **uitabletpc.IInkRecognizer) error {
 }
 
 // Putref_Recognizer wraps the raw Putref_Recognizer call.
-func (self IInkEdit) Putref_Recognizer(newVal *uitabletpc.IInkRecognizer) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Recognizer(newVal)))
+func (self IInkEdit) Putref_Recognizer(newVal IInkRecognizer) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Recognizer(newVal.Raw)))
 }
 
 // Get_Factoid wraps the raw Get_Factoid call.
@@ -1023,8 +1024,8 @@ func (self IInkEdit) Get_Font(ppFont **systemole.IFontDisp) error {
 }
 
 // Putref_Font wraps the raw Putref_Font call.
-func (self IInkEdit) Putref_Font(ppFont *systemole.IFontDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Font(ppFont)))
+func (self IInkEdit) Putref_Font(ppFont systemoleidiom.IFontDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Font(ppFont.Raw)))
 }
 
 // Get_Text wraps the raw Get_Text call.
@@ -1043,13 +1044,13 @@ func (self IInkEdit) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) error {
 }
 
 // Put_MouseIcon wraps the raw Put_MouseIcon call.
-func (self IInkEdit) Put_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Put_MouseIcon(MouseIcon)))
+func (self IInkEdit) Put_MouseIcon(MouseIcon systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Put_MouseIcon(MouseIcon.Raw)))
 }
 
 // Putref_MouseIcon wraps the raw Putref_MouseIcon call.
-func (self IInkEdit) Putref_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_MouseIcon(MouseIcon)))
+func (self IInkEdit) Putref_MouseIcon(MouseIcon systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_MouseIcon(MouseIcon.Raw)))
 }
 
 // Get_MousePointer wraps the raw Get_MousePointer call.
@@ -1375,8 +1376,8 @@ func (self IInkOverlay) Get_DefaultDrawingAttributes(CurrentAttributes **uitable
 }
 
 // Putref_DefaultDrawingAttributes wraps the raw Putref_DefaultDrawingAttributes call.
-func (self IInkOverlay) Putref_DefaultDrawingAttributes(NewAttributes *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_DefaultDrawingAttributes(NewAttributes)))
+func (self IInkOverlay) Putref_DefaultDrawingAttributes(NewAttributes IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_DefaultDrawingAttributes(NewAttributes.Raw)))
 }
 
 // Get_Renderer wraps the raw Get_Renderer call.
@@ -1385,8 +1386,8 @@ func (self IInkOverlay) Get_Renderer(CurrentInkRenderer **uitabletpc.IInkRendere
 }
 
 // Putref_Renderer wraps the raw Putref_Renderer call.
-func (self IInkOverlay) Putref_Renderer(NewInkRenderer *uitabletpc.IInkRenderer) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Renderer(NewInkRenderer)))
+func (self IInkOverlay) Putref_Renderer(NewInkRenderer IInkRenderer) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Renderer(NewInkRenderer.Raw)))
 }
 
 // Get_Ink wraps the raw Get_Ink call.
@@ -1395,8 +1396,8 @@ func (self IInkOverlay) Get_Ink(Ink **uitabletpc.IInkDisp) error {
 }
 
 // Putref_Ink wraps the raw Putref_Ink call.
-func (self IInkOverlay) Putref_Ink(NewInk *uitabletpc.IInkDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Ink(NewInk)))
+func (self IInkOverlay) Putref_Ink(NewInk IInkDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Ink(NewInk.Raw)))
 }
 
 // Get_AutoRedraw wraps the raw Get_AutoRedraw call.
@@ -1445,13 +1446,13 @@ func (self IInkOverlay) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) error 
 }
 
 // Put_MouseIcon wraps the raw Put_MouseIcon call.
-func (self IInkOverlay) Put_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Put_MouseIcon(MouseIcon)))
+func (self IInkOverlay) Put_MouseIcon(MouseIcon systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Put_MouseIcon(MouseIcon.Raw)))
 }
 
 // Putref_MouseIcon wraps the raw Putref_MouseIcon call.
-func (self IInkOverlay) Putref_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_MouseIcon(MouseIcon)))
+func (self IInkOverlay) Putref_MouseIcon(MouseIcon systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_MouseIcon(MouseIcon.Raw)))
 }
 
 // Get_MousePointer wraps the raw Get_MousePointer call.
@@ -1480,8 +1481,8 @@ func (self IInkOverlay) Get_Selection(Selection **uitabletpc.IInkStrokes) error 
 }
 
 // Put_Selection wraps the raw Put_Selection call.
-func (self IInkOverlay) Put_Selection(Selection *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Selection(Selection)))
+func (self IInkOverlay) Put_Selection(Selection IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Selection(Selection.Raw)))
 }
 
 // Get_EraserMode wraps the raw Get_EraserMode call.
@@ -1570,8 +1571,8 @@ func (self IInkOverlay) HitTestSelection(x int32, y int32, SelArea *uitabletpc.S
 }
 
 // Draw wraps the raw Draw call.
-func (self IInkOverlay) Draw(Rect *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.Draw(Rect)))
+func (self IInkOverlay) Draw(Rect IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.Draw(Rect.Raw)))
 }
 
 // SetGestureStatus wraps the raw SetGestureStatus call.
@@ -1590,8 +1591,8 @@ func (self IInkOverlay) GetWindowInputRectangle(WindowInputRectangle **uitabletp
 }
 
 // SetWindowInputRectangle wraps the raw SetWindowInputRectangle call.
-func (self IInkOverlay) SetWindowInputRectangle(WindowInputRectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.SetWindowInputRectangle(WindowInputRectangle)))
+func (self IInkOverlay) SetWindowInputRectangle(WindowInputRectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.SetWindowInputRectangle(WindowInputRectangle.Raw)))
 }
 
 // SetAllTabletsMode wraps the raw SetAllTabletsMode call.
@@ -1600,8 +1601,8 @@ func (self IInkOverlay) SetAllTabletsMode(UseMouseForInput foundation.VARIANT_BO
 }
 
 // SetSingleTabletIntegratedMode wraps the raw SetSingleTabletIntegratedMode call.
-func (self IInkOverlay) SetSingleTabletIntegratedMode(Tablet *uitabletpc.IInkTablet) error {
-	return win32.HRESULTError(int32(self.Raw.SetSingleTabletIntegratedMode(Tablet)))
+func (self IInkOverlay) SetSingleTabletIntegratedMode(Tablet IInkTablet) error {
+	return win32.HRESULTError(int32(self.Raw.SetSingleTabletIntegratedMode(Tablet.Raw)))
 }
 
 // GetEventInterest wraps the raw GetEventInterest call.
@@ -1636,8 +1637,8 @@ func (self IInkPicture) Get_DefaultDrawingAttributes(CurrentAttributes **uitable
 }
 
 // Putref_DefaultDrawingAttributes wraps the raw Putref_DefaultDrawingAttributes call.
-func (self IInkPicture) Putref_DefaultDrawingAttributes(NewAttributes *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_DefaultDrawingAttributes(NewAttributes)))
+func (self IInkPicture) Putref_DefaultDrawingAttributes(NewAttributes IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_DefaultDrawingAttributes(NewAttributes.Raw)))
 }
 
 // Get_Renderer wraps the raw Get_Renderer call.
@@ -1646,8 +1647,8 @@ func (self IInkPicture) Get_Renderer(CurrentInkRenderer **uitabletpc.IInkRendere
 }
 
 // Putref_Renderer wraps the raw Putref_Renderer call.
-func (self IInkPicture) Putref_Renderer(NewInkRenderer *uitabletpc.IInkRenderer) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Renderer(NewInkRenderer)))
+func (self IInkPicture) Putref_Renderer(NewInkRenderer IInkRenderer) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Renderer(NewInkRenderer.Raw)))
 }
 
 // Get_Ink wraps the raw Get_Ink call.
@@ -1656,8 +1657,8 @@ func (self IInkPicture) Get_Ink(Ink **uitabletpc.IInkDisp) error {
 }
 
 // Putref_Ink wraps the raw Putref_Ink call.
-func (self IInkPicture) Putref_Ink(NewInk *uitabletpc.IInkDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Ink(NewInk)))
+func (self IInkPicture) Putref_Ink(NewInk IInkDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Ink(NewInk.Raw)))
 }
 
 // Get_AutoRedraw wraps the raw Get_AutoRedraw call.
@@ -1706,13 +1707,13 @@ func (self IInkPicture) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) error 
 }
 
 // Put_MouseIcon wraps the raw Put_MouseIcon call.
-func (self IInkPicture) Put_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Put_MouseIcon(MouseIcon)))
+func (self IInkPicture) Put_MouseIcon(MouseIcon systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Put_MouseIcon(MouseIcon.Raw)))
 }
 
 // Putref_MouseIcon wraps the raw Putref_MouseIcon call.
-func (self IInkPicture) Putref_MouseIcon(MouseIcon *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_MouseIcon(MouseIcon)))
+func (self IInkPicture) Putref_MouseIcon(MouseIcon systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_MouseIcon(MouseIcon.Raw)))
 }
 
 // Get_MousePointer wraps the raw Get_MousePointer call.
@@ -1741,8 +1742,8 @@ func (self IInkPicture) Get_Selection(Selection **uitabletpc.IInkStrokes) error 
 }
 
 // Put_Selection wraps the raw Put_Selection call.
-func (self IInkPicture) Put_Selection(Selection *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Selection(Selection)))
+func (self IInkPicture) Put_Selection(Selection IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Selection(Selection.Raw)))
 }
 
 // Get_EraserMode wraps the raw Get_EraserMode call.
@@ -1766,13 +1767,13 @@ func (self IInkPicture) Put_EraserWidth(newEraserWidth int32) error {
 }
 
 // Putref_Picture wraps the raw Putref_Picture call.
-func (self IInkPicture) Putref_Picture(pPicture *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Picture(pPicture)))
+func (self IInkPicture) Putref_Picture(pPicture systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Picture(pPicture.Raw)))
 }
 
 // Put_Picture wraps the raw Put_Picture call.
-func (self IInkPicture) Put_Picture(pPicture *systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Picture(pPicture)))
+func (self IInkPicture) Put_Picture(pPicture systemoleidiom.IPictureDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Picture(pPicture.Raw)))
 }
 
 // Get_Picture wraps the raw Get_Picture call.
@@ -1871,8 +1872,8 @@ func (self IInkPicture) GetWindowInputRectangle(WindowInputRectangle **uitabletp
 }
 
 // SetWindowInputRectangle wraps the raw SetWindowInputRectangle call.
-func (self IInkPicture) SetWindowInputRectangle(WindowInputRectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.SetWindowInputRectangle(WindowInputRectangle)))
+func (self IInkPicture) SetWindowInputRectangle(WindowInputRectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.SetWindowInputRectangle(WindowInputRectangle.Raw)))
 }
 
 // SetAllTabletsMode wraps the raw SetAllTabletsMode call.
@@ -1881,8 +1882,8 @@ func (self IInkPicture) SetAllTabletsMode(UseMouseForInput foundation.VARIANT_BO
 }
 
 // SetSingleTabletIntegratedMode wraps the raw SetSingleTabletIntegratedMode call.
-func (self IInkPicture) SetSingleTabletIntegratedMode(Tablet *uitabletpc.IInkTablet) error {
-	return win32.HRESULTError(int32(self.Raw.SetSingleTabletIntegratedMode(Tablet)))
+func (self IInkPicture) SetSingleTabletIntegratedMode(Tablet IInkTablet) error {
+	return win32.HRESULTError(int32(self.Raw.SetSingleTabletIntegratedMode(Tablet.Raw)))
 }
 
 // GetEventInterest wraps the raw GetEventInterest call.
@@ -1977,8 +1978,8 @@ func (self IInkRecognitionAlternate) Get_ConfidenceAlternates(ConfidenceAlternat
 }
 
 // GetStrokesFromStrokeRanges wraps the raw GetStrokesFromStrokeRanges call.
-func (self IInkRecognitionAlternate) GetStrokesFromStrokeRanges(Strokes *uitabletpc.IInkStrokes, GetStrokesFromStrokeRanges **uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.GetStrokesFromStrokeRanges(Strokes, GetStrokesFromStrokeRanges)))
+func (self IInkRecognitionAlternate) GetStrokesFromStrokeRanges(Strokes IInkStrokes, GetStrokesFromStrokeRanges **uitabletpc.IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.GetStrokesFromStrokeRanges(Strokes.Raw, GetStrokesFromStrokeRanges)))
 }
 
 // GetStrokesFromTextRange wraps the raw GetStrokesFromTextRange call.
@@ -1987,8 +1988,8 @@ func (self IInkRecognitionAlternate) GetStrokesFromTextRange(selectionStart *int
 }
 
 // GetTextRangeFromStrokes wraps the raw GetTextRangeFromStrokes call.
-func (self IInkRecognitionAlternate) GetTextRangeFromStrokes(Strokes *uitabletpc.IInkStrokes, selectionStart *int32, selectionLength *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetTextRangeFromStrokes(Strokes, selectionStart, selectionLength)))
+func (self IInkRecognitionAlternate) GetTextRangeFromStrokes(Strokes IInkStrokes, selectionStart *int32, selectionLength *int32) error {
+	return win32.HRESULTError(int32(self.Raw.GetTextRangeFromStrokes(Strokes.Raw, selectionStart, selectionLength)))
 }
 
 // AlternatesWithConstantPropertyValues wraps the raw AlternatesWithConstantPropertyValues call.
@@ -2069,8 +2070,8 @@ func (self IInkRecognitionResult) AlternatesFromSelection(selectionStart int32, 
 }
 
 // ModifyTopAlternate wraps the raw ModifyTopAlternate call.
-func (self IInkRecognitionResult) ModifyTopAlternate(Alternate *uitabletpc.IInkRecognitionAlternate) error {
-	return win32.HRESULTError(int32(self.Raw.ModifyTopAlternate(Alternate)))
+func (self IInkRecognitionResult) ModifyTopAlternate(Alternate IInkRecognitionAlternate) error {
+	return win32.HRESULTError(int32(self.Raw.ModifyTopAlternate(Alternate.Raw)))
 }
 
 // SetResultOnStrokes wraps the raw SetResultOnStrokes call.
@@ -2162,8 +2163,8 @@ func (self IInkRecognizerContext) Get_Strokes(Strokes **uitabletpc.IInkStrokes) 
 }
 
 // Putref_Strokes wraps the raw Putref_Strokes call.
-func (self IInkRecognizerContext) Putref_Strokes(Strokes *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Strokes(Strokes)))
+func (self IInkRecognizerContext) Putref_Strokes(Strokes IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Strokes(Strokes.Raw)))
 }
 
 // Get_CharacterAutoCompletionMode wraps the raw Get_CharacterAutoCompletionMode call.
@@ -2192,8 +2193,8 @@ func (self IInkRecognizerContext) Get_Guide(RecognizerGuide **uitabletpc.IInkRec
 }
 
 // Putref_Guide wraps the raw Putref_Guide call.
-func (self IInkRecognizerContext) Putref_Guide(RecognizerGuide *uitabletpc.IInkRecognizerGuide) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Guide(RecognizerGuide)))
+func (self IInkRecognizerContext) Putref_Guide(RecognizerGuide IInkRecognizerGuide) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Guide(RecognizerGuide.Raw)))
 }
 
 // Get_PrefixText wraps the raw Get_PrefixText call.
@@ -2232,8 +2233,8 @@ func (self IInkRecognizerContext) Get_WordList(WordList **uitabletpc.IInkWordLis
 }
 
 // Putref_WordList wraps the raw Putref_WordList call.
-func (self IInkRecognizerContext) Putref_WordList(WordList *uitabletpc.IInkWordList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_WordList(WordList)))
+func (self IInkRecognizerContext) Putref_WordList(WordList IInkWordList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_WordList(WordList.Raw)))
 }
 
 // Get_Recognizer wraps the raw Get_Recognizer call.
@@ -2299,8 +2300,8 @@ func (self IInkRecognizerGuide) Get_WritingBox(Rectangle **uitabletpc.IInkRectan
 }
 
 // Put_WritingBox wraps the raw Put_WritingBox call.
-func (self IInkRecognizerGuide) Put_WritingBox(Rectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.Put_WritingBox(Rectangle)))
+func (self IInkRecognizerGuide) Put_WritingBox(Rectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.Put_WritingBox(Rectangle.Raw)))
 }
 
 // Get_DrawnBox wraps the raw Get_DrawnBox call.
@@ -2309,8 +2310,8 @@ func (self IInkRecognizerGuide) Get_DrawnBox(Rectangle **uitabletpc.IInkRectangl
 }
 
 // Put_DrawnBox wraps the raw Put_DrawnBox call.
-func (self IInkRecognizerGuide) Put_DrawnBox(Rectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.Put_DrawnBox(Rectangle)))
+func (self IInkRecognizerGuide) Put_DrawnBox(Rectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.Put_DrawnBox(Rectangle.Raw)))
 }
 
 // Get_Rows wraps the raw Get_Rows call.
@@ -2457,33 +2458,33 @@ func WrapIInkRenderer(raw *uitabletpc.IInkRenderer) IInkRenderer {
 }
 
 // GetViewTransform wraps the raw GetViewTransform call.
-func (self IInkRenderer) GetViewTransform(ViewTransform *uitabletpc.IInkTransform) error {
-	return win32.HRESULTError(int32(self.Raw.GetViewTransform(ViewTransform)))
+func (self IInkRenderer) GetViewTransform(ViewTransform IInkTransform) error {
+	return win32.HRESULTError(int32(self.Raw.GetViewTransform(ViewTransform.Raw)))
 }
 
 // SetViewTransform wraps the raw SetViewTransform call.
-func (self IInkRenderer) SetViewTransform(ViewTransform *uitabletpc.IInkTransform) error {
-	return win32.HRESULTError(int32(self.Raw.SetViewTransform(ViewTransform)))
+func (self IInkRenderer) SetViewTransform(ViewTransform IInkTransform) error {
+	return win32.HRESULTError(int32(self.Raw.SetViewTransform(ViewTransform.Raw)))
 }
 
 // GetObjectTransform wraps the raw GetObjectTransform call.
-func (self IInkRenderer) GetObjectTransform(ObjectTransform *uitabletpc.IInkTransform) error {
-	return win32.HRESULTError(int32(self.Raw.GetObjectTransform(ObjectTransform)))
+func (self IInkRenderer) GetObjectTransform(ObjectTransform IInkTransform) error {
+	return win32.HRESULTError(int32(self.Raw.GetObjectTransform(ObjectTransform.Raw)))
 }
 
 // SetObjectTransform wraps the raw SetObjectTransform call.
-func (self IInkRenderer) SetObjectTransform(ObjectTransform *uitabletpc.IInkTransform) error {
-	return win32.HRESULTError(int32(self.Raw.SetObjectTransform(ObjectTransform)))
+func (self IInkRenderer) SetObjectTransform(ObjectTransform IInkTransform) error {
+	return win32.HRESULTError(int32(self.Raw.SetObjectTransform(ObjectTransform.Raw)))
 }
 
 // Draw wraps the raw Draw call.
-func (self IInkRenderer) Draw(hDC uintptr, Strokes *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.Draw(hDC, Strokes)))
+func (self IInkRenderer) Draw(hDC uintptr, Strokes IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.Draw(hDC, Strokes.Raw)))
 }
 
 // DrawStroke wraps the raw DrawStroke call.
-func (self IInkRenderer) DrawStroke(hDC uintptr, Stroke *uitabletpc.IInkStrokeDisp, DrawingAttributes *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.DrawStroke(hDC, Stroke, DrawingAttributes)))
+func (self IInkRenderer) DrawStroke(hDC uintptr, Stroke IInkStrokeDisp, DrawingAttributes IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.DrawStroke(hDC, Stroke.Raw, DrawingAttributes.Raw)))
 }
 
 // PixelToInkSpace wraps the raw PixelToInkSpace call.
@@ -2507,13 +2508,13 @@ func (self IInkRenderer) InkSpaceToPixelFromPoints(hDC uintptr, Points *systemva
 }
 
 // Measure wraps the raw Measure call.
-func (self IInkRenderer) Measure(Strokes *uitabletpc.IInkStrokes, Rectangle **uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.Measure(Strokes, Rectangle)))
+func (self IInkRenderer) Measure(Strokes IInkStrokes, Rectangle **uitabletpc.IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.Measure(Strokes.Raw, Rectangle)))
 }
 
 // MeasureStroke wraps the raw MeasureStroke call.
-func (self IInkRenderer) MeasureStroke(Stroke *uitabletpc.IInkStrokeDisp, DrawingAttributes *uitabletpc.IInkDrawingAttributes, Rectangle **uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.MeasureStroke(Stroke, DrawingAttributes, Rectangle)))
+func (self IInkRenderer) MeasureStroke(Stroke IInkStrokeDisp, DrawingAttributes IInkDrawingAttributes, Rectangle **uitabletpc.IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.MeasureStroke(Stroke.Raw, DrawingAttributes.Raw, Rectangle)))
 }
 
 // IInkStrokeDisp is an idiomatic wrapper over the raw COM interface UI.TabletPC.IInkStrokeDisp with error-returning methods.
@@ -2543,8 +2544,8 @@ func (self IInkStrokeDisp) Get_DrawingAttributes(DrawAttrs **uitabletpc.IInkDraw
 }
 
 // Putref_DrawingAttributes wraps the raw Putref_DrawingAttributes call.
-func (self IInkStrokeDisp) Putref_DrawingAttributes(DrawAttrs *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_DrawingAttributes(DrawAttrs)))
+func (self IInkStrokeDisp) Putref_DrawingAttributes(DrawAttrs IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_DrawingAttributes(DrawAttrs.Raw)))
 }
 
 // Get_Ink wraps the raw Get_Ink call.
@@ -2598,18 +2599,18 @@ func (self IInkStrokeDisp) GetBoundingBox(BoundingBoxMode uitabletpc.InkBounding
 }
 
 // FindIntersections wraps the raw FindIntersections call.
-func (self IInkStrokeDisp) FindIntersections(Strokes *uitabletpc.IInkStrokes, Intersections *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.FindIntersections(Strokes, Intersections)))
+func (self IInkStrokeDisp) FindIntersections(Strokes IInkStrokes, Intersections *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.FindIntersections(Strokes.Raw, Intersections)))
 }
 
 // GetRectangleIntersections wraps the raw GetRectangleIntersections call.
-func (self IInkStrokeDisp) GetRectangleIntersections(Rectangle *uitabletpc.IInkRectangle, Intersections *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetRectangleIntersections(Rectangle, Intersections)))
+func (self IInkStrokeDisp) GetRectangleIntersections(Rectangle IInkRectangle, Intersections *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.GetRectangleIntersections(Rectangle.Raw, Intersections)))
 }
 
 // Clip wraps the raw Clip call.
-func (self IInkStrokeDisp) Clip(Rectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.Clip(Rectangle)))
+func (self IInkStrokeDisp) Clip(Rectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.Clip(Rectangle.Raw)))
 }
 
 // NearestPoint wraps the raw NearestPoint call.
@@ -2643,13 +2644,13 @@ func (self IInkStrokeDisp) GetFlattenedBezierPoints(FittingError int32, Flattene
 }
 
 // Transform wraps the raw Transform call.
-func (self IInkStrokeDisp) Transform(Transform *uitabletpc.IInkTransform, ApplyOnPenWidth foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Transform(Transform, ApplyOnPenWidth)))
+func (self IInkStrokeDisp) Transform(Transform IInkTransform, ApplyOnPenWidth foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Transform(Transform.Raw, ApplyOnPenWidth)))
 }
 
 // ScaleToRectangle wraps the raw ScaleToRectangle call.
-func (self IInkStrokeDisp) ScaleToRectangle(Rectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.ScaleToRectangle(Rectangle)))
+func (self IInkStrokeDisp) ScaleToRectangle(Rectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.ScaleToRectangle(Rectangle.Raw)))
 }
 
 // IInkStrokes is an idiomatic wrapper over the raw COM interface UI.TabletPC.IInkStrokes with error-returning methods.
@@ -2694,28 +2695,28 @@ func (self IInkStrokes) Item(Index int32, Stroke **uitabletpc.IInkStrokeDisp) er
 }
 
 // Add wraps the raw Add call.
-func (self IInkStrokes) Add(InkStroke *uitabletpc.IInkStrokeDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Add(InkStroke)))
+func (self IInkStrokes) Add(InkStroke IInkStrokeDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Add(InkStroke.Raw)))
 }
 
 // AddStrokes wraps the raw AddStrokes call.
-func (self IInkStrokes) AddStrokes(InkStrokes *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.AddStrokes(InkStrokes)))
+func (self IInkStrokes) AddStrokes(InkStrokes IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.AddStrokes(InkStrokes.Raw)))
 }
 
 // Remove wraps the raw Remove call.
-func (self IInkStrokes) Remove(InkStroke *uitabletpc.IInkStrokeDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(InkStroke)))
+func (self IInkStrokes) Remove(InkStroke IInkStrokeDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(InkStroke.Raw)))
 }
 
 // RemoveStrokes wraps the raw RemoveStrokes call.
-func (self IInkStrokes) RemoveStrokes(InkStrokes *uitabletpc.IInkStrokes) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveStrokes(InkStrokes)))
+func (self IInkStrokes) RemoveStrokes(InkStrokes IInkStrokes) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveStrokes(InkStrokes.Raw)))
 }
 
 // ModifyDrawingAttributes wraps the raw ModifyDrawingAttributes call.
-func (self IInkStrokes) ModifyDrawingAttributes(DrawAttrs *uitabletpc.IInkDrawingAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.ModifyDrawingAttributes(DrawAttrs)))
+func (self IInkStrokes) ModifyDrawingAttributes(DrawAttrs IInkDrawingAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.ModifyDrawingAttributes(DrawAttrs.Raw)))
 }
 
 // GetBoundingBox wraps the raw GetBoundingBox call.
@@ -2724,18 +2725,18 @@ func (self IInkStrokes) GetBoundingBox(BoundingBoxMode uitabletpc.InkBoundingBox
 }
 
 // Transform wraps the raw Transform call.
-func (self IInkStrokes) Transform(Transform *uitabletpc.IInkTransform, ApplyOnPenWidth foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Transform(Transform, ApplyOnPenWidth)))
+func (self IInkStrokes) Transform(Transform IInkTransform, ApplyOnPenWidth foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Transform(Transform.Raw, ApplyOnPenWidth)))
 }
 
 // ScaleToRectangle wraps the raw ScaleToRectangle call.
-func (self IInkStrokes) ScaleToRectangle(Rectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.ScaleToRectangle(Rectangle)))
+func (self IInkStrokes) ScaleToRectangle(Rectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.ScaleToRectangle(Rectangle.Raw)))
 }
 
 // Clip wraps the raw Clip call.
-func (self IInkStrokes) Clip(Rectangle *uitabletpc.IInkRectangle) error {
-	return win32.HRESULTError(int32(self.Raw.Clip(Rectangle)))
+func (self IInkStrokes) Clip(Rectangle IInkRectangle) error {
+	return win32.HRESULTError(int32(self.Raw.Clip(Rectangle.Raw)))
 }
 
 // RemoveRecognitionResult wraps the raw RemoveRecognitionResult call.
@@ -2940,8 +2941,8 @@ func (self IInkWordList) RemoveWord(RemoveWord foundation.BSTR) error {
 }
 
 // Merge wraps the raw Merge call.
-func (self IInkWordList) Merge(MergeWordList *uitabletpc.IInkWordList) error {
-	return win32.HRESULTError(int32(self.Raw.Merge(MergeWordList)))
+func (self IInkWordList) Merge(MergeWordList IInkWordList) error {
+	return win32.HRESULTError(int32(self.Raw.Merge(MergeWordList.Raw)))
 }
 
 // IInkWordList2 is an idiomatic wrapper over the raw COM interface UI.TabletPC.IInkWordList2 with error-returning methods.
@@ -3043,8 +3044,8 @@ func (self IMathInputControl) SetCaptionText(CaptionText foundation.BSTR) error 
 }
 
 // LoadInk wraps the raw LoadInk call.
-func (self IMathInputControl) LoadInk(Ink *uitabletpc.IInkDisp) error {
-	return win32.HRESULTError(int32(self.Raw.LoadInk(Ink)))
+func (self IMathInputControl) LoadInk(Ink IInkDisp) error {
+	return win32.HRESULTError(int32(self.Raw.LoadInk(Ink.Raw)))
 }
 
 // SetOwnerWindow wraps the raw SetOwnerWindow call.
@@ -3266,8 +3267,8 @@ func (self IRealTimeStylus) Put_WindowInputRectangle(prcWndInputRect *foundation
 }
 
 // AddStylusSyncPlugin wraps the raw AddStylusSyncPlugin call.
-func (self IRealTimeStylus) AddStylusSyncPlugin(iIndex uint32, piPlugin *uitabletpc.IStylusSyncPlugin) error {
-	return win32.HRESULTError(int32(self.Raw.AddStylusSyncPlugin(iIndex, piPlugin)))
+func (self IRealTimeStylus) AddStylusSyncPlugin(iIndex uint32, piPlugin IStylusSyncPlugin) error {
+	return win32.HRESULTError(int32(self.Raw.AddStylusSyncPlugin(iIndex, piPlugin.Raw)))
 }
 
 // RemoveStylusSyncPlugin wraps the raw RemoveStylusSyncPlugin call.
@@ -3291,8 +3292,8 @@ func (self IRealTimeStylus) GetStylusSyncPluginCount(pcPlugins *uint32) error {
 }
 
 // AddStylusAsyncPlugin wraps the raw AddStylusAsyncPlugin call.
-func (self IRealTimeStylus) AddStylusAsyncPlugin(iIndex uint32, piPlugin *uitabletpc.IStylusAsyncPlugin) error {
-	return win32.HRESULTError(int32(self.Raw.AddStylusAsyncPlugin(iIndex, piPlugin)))
+func (self IRealTimeStylus) AddStylusAsyncPlugin(iIndex uint32, piPlugin IStylusAsyncPlugin) error {
+	return win32.HRESULTError(int32(self.Raw.AddStylusAsyncPlugin(iIndex, piPlugin.Raw)))
 }
 
 // RemoveStylusAsyncPlugin wraps the raw RemoveStylusAsyncPlugin call.
@@ -3321,8 +3322,8 @@ func (self IRealTimeStylus) Get_ChildRealTimeStylusPlugin(ppiRTS **uitabletpc.IR
 }
 
 // Putref_ChildRealTimeStylusPlugin wraps the raw Putref_ChildRealTimeStylusPlugin call.
-func (self IRealTimeStylus) Putref_ChildRealTimeStylusPlugin(piRTS *uitabletpc.IRealTimeStylus) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ChildRealTimeStylusPlugin(piRTS)))
+func (self IRealTimeStylus) Putref_ChildRealTimeStylusPlugin(piRTS IRealTimeStylus) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ChildRealTimeStylusPlugin(piRTS.Raw)))
 }
 
 // AddCustomStylusDataToQueue wraps the raw AddCustomStylusDataToQueue call.
@@ -3342,8 +3343,8 @@ func (self IRealTimeStylus) SetAllTabletsMode(fUseMouseForInput bool) error {
 }
 
 // SetSingleTabletMode wraps the raw SetSingleTabletMode call.
-func (self IRealTimeStylus) SetSingleTabletMode(piTablet *uitabletpc.IInkTablet) error {
-	return win32.HRESULTError(int32(self.Raw.SetSingleTabletMode(piTablet)))
+func (self IRealTimeStylus) SetSingleTabletMode(piTablet IInkTablet) error {
+	return win32.HRESULTError(int32(self.Raw.SetSingleTabletMode(piTablet.Raw)))
 }
 
 // GetTablet wraps the raw GetTablet call.
@@ -3352,8 +3353,8 @@ func (self IRealTimeStylus) GetTablet(ppiSingleTablet **uitabletpc.IInkTablet) e
 }
 
 // GetTabletContextIdFromTablet wraps the raw GetTabletContextIdFromTablet call.
-func (self IRealTimeStylus) GetTabletContextIdFromTablet(piTablet *uitabletpc.IInkTablet, ptcid *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetTabletContextIdFromTablet(piTablet, ptcid)))
+func (self IRealTimeStylus) GetTabletContextIdFromTablet(piTablet IInkTablet, ptcid *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetTabletContextIdFromTablet(piTablet.Raw, ptcid)))
 }
 
 // GetTabletFromTabletContextId wraps the raw GetTabletFromTabletContextId call.
@@ -3494,8 +3495,8 @@ func (self IStrokeBuilder) Get_Ink(ppiInkObj **uitabletpc.IInkDisp) error {
 }
 
 // Putref_Ink wraps the raw Putref_Ink call.
-func (self IStrokeBuilder) Putref_Ink(piInkObj *uitabletpc.IInkDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Ink(piInkObj)))
+func (self IStrokeBuilder) Putref_Ink(piInkObj IInkDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Ink(piInkObj.Raw)))
 }
 
 // IStylusAsyncPlugin is an idiomatic wrapper over the raw COM interface UI.TabletPC.IStylusAsyncPlugin with error-returning methods.
@@ -3521,78 +3522,78 @@ func WrapIStylusPlugin(raw *uitabletpc.IStylusPlugin) IStylusPlugin {
 }
 
 // RealTimeStylusEnabled wraps the raw RealTimeStylusEnabled call.
-func (self IStylusPlugin) RealTimeStylusEnabled(piRtsSrc *uitabletpc.IRealTimeStylus, cTcidCount uint32, pTcids *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RealTimeStylusEnabled(piRtsSrc, cTcidCount, pTcids)))
+func (self IStylusPlugin) RealTimeStylusEnabled(piRtsSrc IRealTimeStylus, cTcidCount uint32, pTcids *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RealTimeStylusEnabled(piRtsSrc.Raw, cTcidCount, pTcids)))
 }
 
 // RealTimeStylusDisabled wraps the raw RealTimeStylusDisabled call.
-func (self IStylusPlugin) RealTimeStylusDisabled(piRtsSrc *uitabletpc.IRealTimeStylus, cTcidCount uint32, pTcids *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RealTimeStylusDisabled(piRtsSrc, cTcidCount, pTcids)))
+func (self IStylusPlugin) RealTimeStylusDisabled(piRtsSrc IRealTimeStylus, cTcidCount uint32, pTcids *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RealTimeStylusDisabled(piRtsSrc.Raw, cTcidCount, pTcids)))
 }
 
 // StylusInRange wraps the raw StylusInRange call.
-func (self IStylusPlugin) StylusInRange(piRtsSrc *uitabletpc.IRealTimeStylus, tcid uint32, sid uint32) error {
-	return win32.HRESULTError(int32(self.Raw.StylusInRange(piRtsSrc, tcid, sid)))
+func (self IStylusPlugin) StylusInRange(piRtsSrc IRealTimeStylus, tcid uint32, sid uint32) error {
+	return win32.HRESULTError(int32(self.Raw.StylusInRange(piRtsSrc.Raw, tcid, sid)))
 }
 
 // StylusOutOfRange wraps the raw StylusOutOfRange call.
-func (self IStylusPlugin) StylusOutOfRange(piRtsSrc *uitabletpc.IRealTimeStylus, tcid uint32, sid uint32) error {
-	return win32.HRESULTError(int32(self.Raw.StylusOutOfRange(piRtsSrc, tcid, sid)))
+func (self IStylusPlugin) StylusOutOfRange(piRtsSrc IRealTimeStylus, tcid uint32, sid uint32) error {
+	return win32.HRESULTError(int32(self.Raw.StylusOutOfRange(piRtsSrc.Raw, tcid, sid)))
 }
 
 // StylusDown wraps the raw StylusDown call.
-func (self IStylusPlugin) StylusDown(piRtsSrc *uitabletpc.IRealTimeStylus, pStylusInfo *uitabletpc.StylusInfo, cPropCountPerPkt uint32, pPacket *int32, ppInOutPkt **int32) error {
-	return win32.HRESULTError(int32(self.Raw.StylusDown(piRtsSrc, pStylusInfo, cPropCountPerPkt, pPacket, ppInOutPkt)))
+func (self IStylusPlugin) StylusDown(piRtsSrc IRealTimeStylus, pStylusInfo *uitabletpc.StylusInfo, cPropCountPerPkt uint32, pPacket *int32, ppInOutPkt **int32) error {
+	return win32.HRESULTError(int32(self.Raw.StylusDown(piRtsSrc.Raw, pStylusInfo, cPropCountPerPkt, pPacket, ppInOutPkt)))
 }
 
 // StylusUp wraps the raw StylusUp call.
-func (self IStylusPlugin) StylusUp(piRtsSrc *uitabletpc.IRealTimeStylus, pStylusInfo *uitabletpc.StylusInfo, cPropCountPerPkt uint32, pPacket *int32, ppInOutPkt **int32) error {
-	return win32.HRESULTError(int32(self.Raw.StylusUp(piRtsSrc, pStylusInfo, cPropCountPerPkt, pPacket, ppInOutPkt)))
+func (self IStylusPlugin) StylusUp(piRtsSrc IRealTimeStylus, pStylusInfo *uitabletpc.StylusInfo, cPropCountPerPkt uint32, pPacket *int32, ppInOutPkt **int32) error {
+	return win32.HRESULTError(int32(self.Raw.StylusUp(piRtsSrc.Raw, pStylusInfo, cPropCountPerPkt, pPacket, ppInOutPkt)))
 }
 
 // StylusButtonDown wraps the raw StylusButtonDown call.
-func (self IStylusPlugin) StylusButtonDown(piRtsSrc *uitabletpc.IRealTimeStylus, sid uint32, pGuidStylusButton *win32.GUID, pStylusPos *foundation.POINT) error {
-	return win32.HRESULTError(int32(self.Raw.StylusButtonDown(piRtsSrc, sid, pGuidStylusButton, pStylusPos)))
+func (self IStylusPlugin) StylusButtonDown(piRtsSrc IRealTimeStylus, sid uint32, pGuidStylusButton *win32.GUID, pStylusPos *foundation.POINT) error {
+	return win32.HRESULTError(int32(self.Raw.StylusButtonDown(piRtsSrc.Raw, sid, pGuidStylusButton, pStylusPos)))
 }
 
 // StylusButtonUp wraps the raw StylusButtonUp call.
-func (self IStylusPlugin) StylusButtonUp(piRtsSrc *uitabletpc.IRealTimeStylus, sid uint32, pGuidStylusButton *win32.GUID, pStylusPos *foundation.POINT) error {
-	return win32.HRESULTError(int32(self.Raw.StylusButtonUp(piRtsSrc, sid, pGuidStylusButton, pStylusPos)))
+func (self IStylusPlugin) StylusButtonUp(piRtsSrc IRealTimeStylus, sid uint32, pGuidStylusButton *win32.GUID, pStylusPos *foundation.POINT) error {
+	return win32.HRESULTError(int32(self.Raw.StylusButtonUp(piRtsSrc.Raw, sid, pGuidStylusButton, pStylusPos)))
 }
 
 // InAirPackets wraps the raw InAirPackets call.
-func (self IStylusPlugin) InAirPackets(piRtsSrc *uitabletpc.IRealTimeStylus, pStylusInfo *uitabletpc.StylusInfo, cPktCount uint32, cPktBuffLength uint32, pPackets *int32, pcInOutPkts *uint32, ppInOutPkts **int32) error {
-	return win32.HRESULTError(int32(self.Raw.InAirPackets(piRtsSrc, pStylusInfo, cPktCount, cPktBuffLength, pPackets, pcInOutPkts, ppInOutPkts)))
+func (self IStylusPlugin) InAirPackets(piRtsSrc IRealTimeStylus, pStylusInfo *uitabletpc.StylusInfo, cPktCount uint32, cPktBuffLength uint32, pPackets *int32, pcInOutPkts *uint32, ppInOutPkts **int32) error {
+	return win32.HRESULTError(int32(self.Raw.InAirPackets(piRtsSrc.Raw, pStylusInfo, cPktCount, cPktBuffLength, pPackets, pcInOutPkts, ppInOutPkts)))
 }
 
 // Packets wraps the raw Packets call.
-func (self IStylusPlugin) Packets(piRtsSrc *uitabletpc.IRealTimeStylus, pStylusInfo *uitabletpc.StylusInfo, cPktCount uint32, cPktBuffLength uint32, pPackets *int32, pcInOutPkts *uint32, ppInOutPkts **int32) error {
-	return win32.HRESULTError(int32(self.Raw.Packets(piRtsSrc, pStylusInfo, cPktCount, cPktBuffLength, pPackets, pcInOutPkts, ppInOutPkts)))
+func (self IStylusPlugin) Packets(piRtsSrc IRealTimeStylus, pStylusInfo *uitabletpc.StylusInfo, cPktCount uint32, cPktBuffLength uint32, pPackets *int32, pcInOutPkts *uint32, ppInOutPkts **int32) error {
+	return win32.HRESULTError(int32(self.Raw.Packets(piRtsSrc.Raw, pStylusInfo, cPktCount, cPktBuffLength, pPackets, pcInOutPkts, ppInOutPkts)))
 }
 
 // CustomStylusDataAdded wraps the raw CustomStylusDataAdded call.
-func (self IStylusPlugin) CustomStylusDataAdded(piRtsSrc *uitabletpc.IRealTimeStylus, pGuidId *win32.GUID, cbData uint32, pbData *byte) error {
-	return win32.HRESULTError(int32(self.Raw.CustomStylusDataAdded(piRtsSrc, pGuidId, cbData, pbData)))
+func (self IStylusPlugin) CustomStylusDataAdded(piRtsSrc IRealTimeStylus, pGuidId *win32.GUID, cbData uint32, pbData *byte) error {
+	return win32.HRESULTError(int32(self.Raw.CustomStylusDataAdded(piRtsSrc.Raw, pGuidId, cbData, pbData)))
 }
 
 // TabletAdded wraps the raw TabletAdded call.
-func (self IStylusPlugin) TabletAdded(piRtsSrc *uitabletpc.IRealTimeStylus, piTablet *uitabletpc.IInkTablet) error {
-	return win32.HRESULTError(int32(self.Raw.TabletAdded(piRtsSrc, piTablet)))
+func (self IStylusPlugin) TabletAdded(piRtsSrc IRealTimeStylus, piTablet IInkTablet) error {
+	return win32.HRESULTError(int32(self.Raw.TabletAdded(piRtsSrc.Raw, piTablet.Raw)))
 }
 
 // TabletRemoved wraps the raw TabletRemoved call.
-func (self IStylusPlugin) TabletRemoved(piRtsSrc *uitabletpc.IRealTimeStylus, iTabletIndex int32) error {
-	return win32.HRESULTError(int32(self.Raw.TabletRemoved(piRtsSrc, iTabletIndex)))
+func (self IStylusPlugin) TabletRemoved(piRtsSrc IRealTimeStylus, iTabletIndex int32) error {
+	return win32.HRESULTError(int32(self.Raw.TabletRemoved(piRtsSrc.Raw, iTabletIndex)))
 }
 
 // Error wraps the raw Error call.
-func (self IStylusPlugin) Error(piRtsSrc *uitabletpc.IRealTimeStylus, piPlugin *uitabletpc.IStylusPlugin, dataInterest uitabletpc.RealTimeStylusDataInterest, hrErrorCode foundation.HRESULT, lptrKey *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.Error(piRtsSrc, piPlugin, dataInterest, hrErrorCode, lptrKey)))
+func (self IStylusPlugin) Error(piRtsSrc IRealTimeStylus, piPlugin IStylusPlugin, dataInterest uitabletpc.RealTimeStylusDataInterest, hrErrorCode foundation.HRESULT, lptrKey *uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.Error(piRtsSrc.Raw, piPlugin.Raw, dataInterest, hrErrorCode, lptrKey)))
 }
 
 // UpdateMapping wraps the raw UpdateMapping call.
-func (self IStylusPlugin) UpdateMapping(piRtsSrc *uitabletpc.IRealTimeStylus) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateMapping(piRtsSrc)))
+func (self IStylusPlugin) UpdateMapping(piRtsSrc IRealTimeStylus) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateMapping(piRtsSrc.Raw)))
 }
 
 // DataInterest wraps the raw DataInterest call.
@@ -3741,13 +3742,13 @@ func (self ITextInputPanel) SetInPlaceHoverTargetPosition(xPosition int32, yPosi
 }
 
 // Advise wraps the raw Advise call.
-func (self ITextInputPanel) Advise(EventSink *uitabletpc.ITextInputPanelEventSink, EventMask uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(EventSink, EventMask)))
+func (self ITextInputPanel) Advise(EventSink ITextInputPanelEventSink, EventMask uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(EventSink.Raw, EventMask)))
 }
 
 // Unadvise wraps the raw Unadvise call.
-func (self ITextInputPanel) Unadvise(EventSink *uitabletpc.ITextInputPanelEventSink) error {
-	return win32.HRESULTError(int32(self.Raw.Unadvise(EventSink)))
+func (self ITextInputPanel) Unadvise(EventSink ITextInputPanelEventSink) error {
+	return win32.HRESULTError(int32(self.Raw.Unadvise(EventSink.Raw)))
 }
 
 // ITextInputPanelEventSink is an idiomatic wrapper over the raw COM interface UI.TabletPC.ITextInputPanelEventSink with error-returning methods.
@@ -3843,13 +3844,13 @@ func WrapITipAutoCompleteClient(raw *uitabletpc.ITipAutoCompleteClient) ITipAuto
 }
 
 // AdviseProvider wraps the raw AdviseProvider call.
-func (self ITipAutoCompleteClient) AdviseProvider(hWndField foundation.HWND, pIProvider *uitabletpc.ITipAutoCompleteProvider) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseProvider(hWndField, pIProvider)))
+func (self ITipAutoCompleteClient) AdviseProvider(hWndField foundation.HWND, pIProvider ITipAutoCompleteProvider) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseProvider(hWndField, pIProvider.Raw)))
 }
 
 // UnadviseProvider wraps the raw UnadviseProvider call.
-func (self ITipAutoCompleteClient) UnadviseProvider(hWndField foundation.HWND, pIProvider *uitabletpc.ITipAutoCompleteProvider) error {
-	return win32.HRESULTError(int32(self.Raw.UnadviseProvider(hWndField, pIProvider)))
+func (self ITipAutoCompleteClient) UnadviseProvider(hWndField foundation.HWND, pIProvider ITipAutoCompleteProvider) error {
+	return win32.HRESULTError(int32(self.Raw.UnadviseProvider(hWndField, pIProvider.Raw)))
 }
 
 // UserSelection wraps the raw UserSelection call.

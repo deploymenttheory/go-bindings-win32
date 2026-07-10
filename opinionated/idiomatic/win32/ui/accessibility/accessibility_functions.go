@@ -13,6 +13,7 @@ import (
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiaccessibility "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/accessibility"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // AccSetRunningUtilityState wraps the raw AccSetRunningUtilityState call with idiomatic Go types.
@@ -23,12 +24,12 @@ func AccSetRunningUtilityState(hwndApp foundation.HWND, dwUtilityStateMask uint3
 
 // AccessibleChildren wraps the raw AccessibleChildren call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessiblechildren
-func AccessibleChildren(paccContainer *uiaccessibility.IAccessible, iChildStart int32, rgvarChildren []systemvariant.VARIANT, pcObtained *int32) error {
+func AccessibleChildren(paccContainer IAccessible, iChildStart int32, rgvarChildren []systemvariant.VARIANT, pcObtained *int32) error {
 	var _rgvarChildren *systemvariant.VARIANT
 	if len(rgvarChildren) > 0 {
 		_rgvarChildren = &rgvarChildren[0]
 	}
-	return win32.HRESULTError(int32(uiaccessibility.AccessibleChildren(paccContainer, iChildStart, int32(len(rgvarChildren)), _rgvarChildren, pcObtained)))
+	return win32.HRESULTError(int32(uiaccessibility.AccessibleChildren(paccContainer.Raw, iChildStart, int32(len(rgvarChildren)), _rgvarChildren, pcObtained)))
 }
 
 // AccessibleObjectFromEvent wraps the raw AccessibleObjectFromEvent call with idiomatic Go types.
@@ -133,6 +134,12 @@ func LegacyIAccessiblePattern_Select(hobj uiaccessibility.HUIAPATTERNOBJECT, fla
 func LegacyIAccessiblePattern_SetValue(hobj uiaccessibility.HUIAPATTERNOBJECT, szValue string) error {
 	_szValue := win32.UTF16Ptr(szValue)
 	return win32.HRESULTError(int32(uiaccessibility.LegacyIAccessiblePattern_SetValue(hobj, foundation.PWSTR(_szValue))))
+}
+
+// LresultFromObject wraps the raw LresultFromObject call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-lresultfromobject
+func LresultFromObject(riid *win32.GUID, wParam foundation.WPARAM, punk systemcomidiom.IUnknown) foundation.LRESULT {
+	return uiaccessibility.LresultFromObject(riid, wParam, punk.Raw)
 }
 
 // MultipleViewPattern_GetViewName wraps the raw MultipleViewPattern_GetViewName call with idiomatic Go types.
@@ -363,8 +370,8 @@ func UiaDisconnectAllProviders() error {
 
 // UiaDisconnectProvider wraps the raw UiaDisconnectProvider call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiadisconnectprovider
-func UiaDisconnectProvider(pProvider *uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaDisconnectProvider(pProvider)))
+func UiaDisconnectProvider(pProvider IRawElementProviderSimple) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaDisconnectProvider(pProvider.Raw)))
 }
 
 // UiaEventAddWindow wraps the raw UiaEventAddWindow call with idiomatic Go types.
@@ -465,8 +472,8 @@ func UiaHostProviderFromHwnd(hwnd foundation.HWND, ppProvider **uiaccessibility.
 
 // UiaIAccessibleFromProvider wraps the raw UiaIAccessibleFromProvider call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaiaccessiblefromprovider
-func UiaIAccessibleFromProvider(pProvider *uiaccessibility.IRawElementProviderSimple, dwFlags uint32, ppAccessible **uiaccessibility.IAccessible, pvarChild *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaIAccessibleFromProvider(pProvider, dwFlags, ppAccessible, pvarChild)))
+func UiaIAccessibleFromProvider(pProvider IRawElementProviderSimple, dwFlags uint32, ppAccessible **uiaccessibility.IAccessible, pvarChild *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaIAccessibleFromProvider(pProvider.Raw, dwFlags, ppAccessible, pvarChild)))
 }
 
 // UiaNavigate wraps the raw UiaNavigate call with idiomatic Go types.
@@ -489,8 +496,8 @@ func UiaNodeFromHandle(hwnd foundation.HWND, phnode *uiaccessibility.HUIANODE) e
 
 // UiaNodeFromProvider wraps the raw UiaNodeFromProvider call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianodefromprovider
-func UiaNodeFromProvider(pProvider *uiaccessibility.IRawElementProviderSimple, phnode *uiaccessibility.HUIANODE) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaNodeFromProvider(pProvider, phnode)))
+func UiaNodeFromProvider(pProvider IRawElementProviderSimple, phnode *uiaccessibility.HUIANODE) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaNodeFromProvider(pProvider.Raw, phnode)))
 }
 
 // UiaNodeRelease wraps the raw UiaNodeRelease call with idiomatic Go types.
@@ -513,50 +520,56 @@ func UiaProviderForNonClient(hwnd foundation.HWND, idObject int32, idChild int32
 
 // UiaProviderFromIAccessible wraps the raw UiaProviderFromIAccessible call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaproviderfromiaccessible
-func UiaProviderFromIAccessible(pAccessible *uiaccessibility.IAccessible, idChild int32, dwFlags uint32, ppProvider **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaProviderFromIAccessible(pAccessible, idChild, dwFlags, ppProvider)))
+func UiaProviderFromIAccessible(pAccessible IAccessible, idChild int32, dwFlags uint32, ppProvider **uiaccessibility.IRawElementProviderSimple) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaProviderFromIAccessible(pAccessible.Raw, idChild, dwFlags, ppProvider)))
 }
 
 // UiaRaiseActiveTextPositionChangedEvent wraps the raw UiaRaiseActiveTextPositionChangedEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseactivetextpositionchangedevent
-func UiaRaiseActiveTextPositionChangedEvent(provider *uiaccessibility.IRawElementProviderSimple, textRange *uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseActiveTextPositionChangedEvent(provider, textRange)))
+func UiaRaiseActiveTextPositionChangedEvent(provider IRawElementProviderSimple, textRange ITextRangeProvider) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseActiveTextPositionChangedEvent(provider.Raw, textRange.Raw)))
 }
 
 // UiaRaiseAutomationEvent wraps the raw UiaRaiseAutomationEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseautomationevent
-func UiaRaiseAutomationEvent(pProvider *uiaccessibility.IRawElementProviderSimple, id uiaccessibility.UIA_EVENT_ID) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseAutomationEvent(pProvider, id)))
+func UiaRaiseAutomationEvent(pProvider IRawElementProviderSimple, id uiaccessibility.UIA_EVENT_ID) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseAutomationEvent(pProvider.Raw, id)))
 }
 
 // UiaRaiseChangesEvent wraps the raw UiaRaiseChangesEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisechangesevent
-func UiaRaiseChangesEvent(pProvider *uiaccessibility.IRawElementProviderSimple, eventIdCount int32, pUiaChanges *uiaccessibility.UiaChangeInfo) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseChangesEvent(pProvider, eventIdCount, pUiaChanges)))
+func UiaRaiseChangesEvent(pProvider IRawElementProviderSimple, eventIdCount int32, pUiaChanges *uiaccessibility.UiaChangeInfo) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseChangesEvent(pProvider.Raw, eventIdCount, pUiaChanges)))
 }
 
 // UiaRaiseNotificationEvent wraps the raw UiaRaiseNotificationEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisenotificationevent
-func UiaRaiseNotificationEvent(provider *uiaccessibility.IRawElementProviderSimple, notificationKind uiaccessibility.NotificationKind, notificationProcessing uiaccessibility.NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseNotificationEvent(provider, notificationKind, notificationProcessing, displayString, activityId)))
+func UiaRaiseNotificationEvent(provider IRawElementProviderSimple, notificationKind uiaccessibility.NotificationKind, notificationProcessing uiaccessibility.NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseNotificationEvent(provider.Raw, notificationKind, notificationProcessing, displayString, activityId)))
 }
 
 // UiaRaiseStructureChangedEvent wraps the raw UiaRaiseStructureChangedEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisestructurechangedevent
-func UiaRaiseStructureChangedEvent(pProvider *uiaccessibility.IRawElementProviderSimple, structureChangeType uiaccessibility.StructureChangeType, pRuntimeId *int32, cRuntimeIdLen int32) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseStructureChangedEvent(pProvider, structureChangeType, pRuntimeId, cRuntimeIdLen)))
+func UiaRaiseStructureChangedEvent(pProvider IRawElementProviderSimple, structureChangeType uiaccessibility.StructureChangeType, pRuntimeId *int32, cRuntimeIdLen int32) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseStructureChangedEvent(pProvider.Raw, structureChangeType, pRuntimeId, cRuntimeIdLen)))
 }
 
 // UiaRaiseTextEditTextChangedEvent wraps the raw UiaRaiseTextEditTextChangedEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisetextedittextchangedevent
-func UiaRaiseTextEditTextChangedEvent(pProvider *uiaccessibility.IRawElementProviderSimple, textEditChangeType uiaccessibility.TextEditChangeType, pChangedData *systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseTextEditTextChangedEvent(pProvider, textEditChangeType, pChangedData)))
+func UiaRaiseTextEditTextChangedEvent(pProvider IRawElementProviderSimple, textEditChangeType uiaccessibility.TextEditChangeType, pChangedData *systemcom.SAFEARRAY) error {
+	return win32.HRESULTError(int32(uiaccessibility.UiaRaiseTextEditTextChangedEvent(pProvider.Raw, textEditChangeType, pChangedData)))
 }
 
 // UiaRemoveEvent wraps the raw UiaRemoveEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaremoveevent
 func UiaRemoveEvent(hEvent uiaccessibility.HUIAEVENT) error {
 	return win32.HRESULTError(int32(uiaccessibility.UiaRemoveEvent(hEvent)))
+}
+
+// UiaReturnRawElementProvider wraps the raw UiaReturnRawElementProvider call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiareturnrawelementprovider
+func UiaReturnRawElementProvider(hwnd foundation.HWND, wParam foundation.WPARAM, lParam foundation.LPARAM, el IRawElementProviderSimple) foundation.LRESULT {
+	return uiaccessibility.UiaReturnRawElementProvider(hwnd, wParam, lParam, el.Raw)
 }
 
 // UiaSetFocus wraps the raw UiaSetFocus call with idiomatic Go types.
@@ -598,8 +611,8 @@ func VirtualizedItemPattern_Realize(hobj uiaccessibility.HUIAPATTERNOBJECT) erro
 
 // WindowFromAccessibleObject wraps the raw WindowFromAccessibleObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-windowfromaccessibleobject
-func WindowFromAccessibleObject(param0 *uiaccessibility.IAccessible, phwnd *foundation.HWND) error {
-	return win32.HRESULTError(int32(uiaccessibility.WindowFromAccessibleObject(param0, phwnd)))
+func WindowFromAccessibleObject(param0 IAccessible, phwnd *foundation.HWND) error {
+	return win32.HRESULTError(int32(uiaccessibility.WindowFromAccessibleObject(param0.Raw, phwnd)))
 }
 
 // WindowPattern_Close wraps the raw WindowPattern_Close call with idiomatic Go types.

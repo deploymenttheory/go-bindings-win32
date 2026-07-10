@@ -61,8 +61,8 @@ func (self IDeviceIoControl) DeviceIoControlSync(ioControlCode uint32, inputBuff
 }
 
 // DeviceIoControlAsync wraps the raw DeviceIoControlAsync call.
-func (self IDeviceIoControl) DeviceIoControlAsync(ioControlCode uint32, inputBuffer *byte, inputBufferSize uint32, outputBuffer *byte, outputBufferSize uint32, requestCompletionCallback *devicesdeviceaccess.IDeviceRequestCompletionCallback, cancelContext *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.DeviceIoControlAsync(ioControlCode, inputBuffer, inputBufferSize, outputBuffer, outputBufferSize, requestCompletionCallback, cancelContext)))
+func (self IDeviceIoControl) DeviceIoControlAsync(ioControlCode uint32, inputBuffer *byte, inputBufferSize uint32, outputBuffer *byte, outputBufferSize uint32, requestCompletionCallback IDeviceRequestCompletionCallback, cancelContext *uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.DeviceIoControlAsync(ioControlCode, inputBuffer, inputBufferSize, outputBuffer, outputBufferSize, requestCompletionCallback.Raw, cancelContext)))
 }
 
 // CancelOperation wraps the raw CancelOperation call.

@@ -11,40 +11,41 @@ import (
 	dataxmlxmllite "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/xmllite"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CreateXmlReader wraps the raw CreateXmlReader call with idiomatic Go types.
-func CreateXmlReader(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc *systemcom.IMalloc) error {
-	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlReader(riid, ppvObject, pMalloc)))
+func CreateXmlReader(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc systemcomidiom.IMalloc) error {
+	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlReader(riid, ppvObject, pMalloc.Raw)))
 }
 
 // CreateXmlReaderInputWithEncodingCodePage wraps the raw CreateXmlReaderInputWithEncodingCodePage call with idiomatic Go types.
-func CreateXmlReaderInputWithEncodingCodePage(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, fEncodingHint bool, pwszBaseUri string, ppInput **systemcom.IUnknown) error {
+func CreateXmlReaderInputWithEncodingCodePage(pInputStream systemcomidiom.IUnknown, pMalloc systemcomidiom.IMalloc, nEncodingCodePage uint32, fEncodingHint bool, pwszBaseUri string, ppInput **systemcom.IUnknown) error {
 	_fEncodingHint := foundation.BOOL(win32.Bool32(fEncodingHint))
 	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
-	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlReaderInputWithEncodingCodePage(pInputStream, pMalloc, nEncodingCodePage, _fEncodingHint, foundation.PWSTR(_pwszBaseUri), ppInput)))
+	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlReaderInputWithEncodingCodePage(pInputStream.Raw, pMalloc.Raw, nEncodingCodePage, _fEncodingHint, foundation.PWSTR(_pwszBaseUri), ppInput)))
 }
 
 // CreateXmlReaderInputWithEncodingName wraps the raw CreateXmlReaderInputWithEncodingName call with idiomatic Go types.
-func CreateXmlReaderInputWithEncodingName(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName string, fEncodingHint bool, pwszBaseUri string, ppInput **systemcom.IUnknown) error {
+func CreateXmlReaderInputWithEncodingName(pInputStream systemcomidiom.IUnknown, pMalloc systemcomidiom.IMalloc, pwszEncodingName string, fEncodingHint bool, pwszBaseUri string, ppInput **systemcom.IUnknown) error {
 	_pwszEncodingName := win32.UTF16Ptr(pwszEncodingName)
 	_fEncodingHint := foundation.BOOL(win32.Bool32(fEncodingHint))
 	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
-	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlReaderInputWithEncodingName(pInputStream, pMalloc, foundation.PWSTR(_pwszEncodingName), _fEncodingHint, foundation.PWSTR(_pwszBaseUri), ppInput)))
+	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlReaderInputWithEncodingName(pInputStream.Raw, pMalloc.Raw, foundation.PWSTR(_pwszEncodingName), _fEncodingHint, foundation.PWSTR(_pwszBaseUri), ppInput)))
 }
 
 // CreateXmlWriter wraps the raw CreateXmlWriter call with idiomatic Go types.
-func CreateXmlWriter(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc *systemcom.IMalloc) error {
-	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlWriter(riid, ppvObject, pMalloc)))
+func CreateXmlWriter(riid *win32.GUID, ppvObject *unsafe.Pointer, pMalloc systemcomidiom.IMalloc) error {
+	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlWriter(riid, ppvObject, pMalloc.Raw)))
 }
 
 // CreateXmlWriterOutputWithEncodingCodePage wraps the raw CreateXmlWriterOutputWithEncodingCodePage call with idiomatic Go types.
-func CreateXmlWriterOutputWithEncodingCodePage(pOutputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, ppOutput **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlWriterOutputWithEncodingCodePage(pOutputStream, pMalloc, nEncodingCodePage, ppOutput)))
+func CreateXmlWriterOutputWithEncodingCodePage(pOutputStream systemcomidiom.IUnknown, pMalloc systemcomidiom.IMalloc, nEncodingCodePage uint32, ppOutput **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlWriterOutputWithEncodingCodePage(pOutputStream.Raw, pMalloc.Raw, nEncodingCodePage, ppOutput)))
 }
 
 // CreateXmlWriterOutputWithEncodingName wraps the raw CreateXmlWriterOutputWithEncodingName call with idiomatic Go types.
-func CreateXmlWriterOutputWithEncodingName(pOutputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName string, ppOutput **systemcom.IUnknown) error {
+func CreateXmlWriterOutputWithEncodingName(pOutputStream systemcomidiom.IUnknown, pMalloc systemcomidiom.IMalloc, pwszEncodingName string, ppOutput **systemcom.IUnknown) error {
 	_pwszEncodingName := win32.UTF16Ptr(pwszEncodingName)
-	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlWriterOutputWithEncodingName(pOutputStream, pMalloc, foundation.PWSTR(_pwszEncodingName), ppOutput)))
+	return win32.HRESULTError(int32(dataxmlxmllite.CreateXmlWriterOutputWithEncodingName(pOutputStream.Raw, pMalloc.Raw, foundation.PWSTR(_pwszEncodingName), ppOutput)))
 }

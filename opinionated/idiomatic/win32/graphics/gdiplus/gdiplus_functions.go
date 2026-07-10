@@ -12,6 +12,8 @@ import (
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	graphicsgdiplus "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdiplus"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	graphicsdirectdrawidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/directdraw"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // GdipAddPathPath wraps the raw GdipAddPathPath call with idiomatic Go types.
@@ -46,9 +48,14 @@ func GdipConvertToEmfPlusToFile(refGraphics *graphicsgdiplus.GpGraphics, metafil
 }
 
 // GdipConvertToEmfPlusToStream wraps the raw GdipConvertToEmfPlusToStream call with idiomatic Go types.
-func GdipConvertToEmfPlusToStream(refGraphics *graphicsgdiplus.GpGraphics, metafile *graphicsgdiplus.GpMetafile, conversionFailureFlag *int32, stream *systemcom.IStream, emfType graphicsgdiplus.EmfType, description string, out_metafile **graphicsgdiplus.GpMetafile) graphicsgdiplus.Status {
+func GdipConvertToEmfPlusToStream(refGraphics *graphicsgdiplus.GpGraphics, metafile *graphicsgdiplus.GpMetafile, conversionFailureFlag *int32, stream systemcomidiom.IStream, emfType graphicsgdiplus.EmfType, description string, out_metafile **graphicsgdiplus.GpMetafile) graphicsgdiplus.Status {
 	_description := win32.UTF16Ptr(description)
-	return graphicsgdiplus.GdipConvertToEmfPlusToStream(refGraphics, metafile, conversionFailureFlag, stream, emfType, foundation.PWSTR(_description), out_metafile)
+	return graphicsgdiplus.GdipConvertToEmfPlusToStream(refGraphics, metafile, conversionFailureFlag, stream.Raw, emfType, foundation.PWSTR(_description), out_metafile)
+}
+
+// GdipCreateBitmapFromDirectDrawSurface wraps the raw GdipCreateBitmapFromDirectDrawSurface call with idiomatic Go types.
+func GdipCreateBitmapFromDirectDrawSurface(surface graphicsdirectdrawidiom.IDirectDrawSurface7, bitmap **graphicsgdiplus.GpBitmap) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipCreateBitmapFromDirectDrawSurface(surface.Raw, bitmap)
 }
 
 // GdipCreateBitmapFromFile wraps the raw GdipCreateBitmapFromFile call with idiomatic Go types.
@@ -67,6 +74,16 @@ func GdipCreateBitmapFromFileICM(filename string, bitmap **graphicsgdiplus.GpBit
 func GdipCreateBitmapFromResource(hInstance foundation.HINSTANCE, lpBitmapName string, bitmap **graphicsgdiplus.GpBitmap) graphicsgdiplus.Status {
 	_lpBitmapName := win32.UTF16Ptr(lpBitmapName)
 	return graphicsgdiplus.GdipCreateBitmapFromResource(hInstance, foundation.PWSTR(_lpBitmapName), bitmap)
+}
+
+// GdipCreateBitmapFromStream wraps the raw GdipCreateBitmapFromStream call with idiomatic Go types.
+func GdipCreateBitmapFromStream(stream systemcomidiom.IStream, bitmap **graphicsgdiplus.GpBitmap) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipCreateBitmapFromStream(stream.Raw, bitmap)
+}
+
+// GdipCreateBitmapFromStreamICM wraps the raw GdipCreateBitmapFromStreamICM call with idiomatic Go types.
+func GdipCreateBitmapFromStreamICM(stream systemcomidiom.IStream, bitmap **graphicsgdiplus.GpBitmap) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipCreateBitmapFromStreamICM(stream.Raw, bitmap)
 }
 
 // GdipCreateFontFamilyFromName wraps the raw GdipCreateFontFamilyFromName call with idiomatic Go types.
@@ -90,6 +107,11 @@ func GdipCreateMetafileFromEmf(hEmf graphicsgdi.HENHMETAFILE, deleteEmf bool, me
 func GdipCreateMetafileFromFile(file string, metafile **graphicsgdiplus.GpMetafile) graphicsgdiplus.Status {
 	_file := win32.UTF16Ptr(file)
 	return graphicsgdiplus.GdipCreateMetafileFromFile(foundation.PWSTR(_file), metafile)
+}
+
+// GdipCreateMetafileFromStream wraps the raw GdipCreateMetafileFromStream call with idiomatic Go types.
+func GdipCreateMetafileFromStream(stream systemcomidiom.IStream, metafile **graphicsgdiplus.GpMetafile) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipCreateMetafileFromStream(stream.Raw, metafile)
 }
 
 // GdipCreateMetafileFromWmf wraps the raw GdipCreateMetafileFromWmf call with idiomatic Go types.
@@ -145,6 +167,11 @@ func GdipGetMetafileHeaderFromFile(filename string, header *graphicsgdiplus.Meta
 	return graphicsgdiplus.GdipGetMetafileHeaderFromFile(foundation.PWSTR(_filename), header)
 }
 
+// GdipGetMetafileHeaderFromStream wraps the raw GdipGetMetafileHeaderFromStream call with idiomatic Go types.
+func GdipGetMetafileHeaderFromStream(stream systemcomidiom.IStream, header *graphicsgdiplus.MetafileHeader) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipGetMetafileHeaderFromStream(stream.Raw, header)
+}
+
 // GdipGetRegionData wraps the raw GdipGetRegionData call with idiomatic Go types.
 func GdipGetRegionData(region *graphicsgdiplus.GpRegion, buffer []byte, sizeFilled *uint32) graphicsgdiplus.Status {
 	var _buffer *byte
@@ -152,6 +179,16 @@ func GdipGetRegionData(region *graphicsgdiplus.GpRegion, buffer []byte, sizeFill
 		_buffer = &buffer[0]
 	}
 	return graphicsgdiplus.GdipGetRegionData(region, _buffer, uint32(len(buffer)), sizeFilled)
+}
+
+// GdipGraphicsSetAbort wraps the raw GdipGraphicsSetAbort call with idiomatic Go types.
+func GdipGraphicsSetAbort(pGraphics *graphicsgdiplus.GpGraphics, pIAbort GdiplusAbort) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipGraphicsSetAbort(pGraphics, pIAbort.Raw)
+}
+
+// GdipImageSetAbort wraps the raw GdipImageSetAbort call with idiomatic Go types.
+func GdipImageSetAbort(pImage *graphicsgdiplus.GpImage, pIAbort GdiplusAbort) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipImageSetAbort(pImage, pIAbort.Raw)
 }
 
 // GdipInitializePalette wraps the raw GdipInitializePalette call with idiomatic Go types.
@@ -170,6 +207,16 @@ func GdipLoadImageFromFile(filename string, image **graphicsgdiplus.GpImage) gra
 func GdipLoadImageFromFileICM(filename string, image **graphicsgdiplus.GpImage) graphicsgdiplus.Status {
 	_filename := win32.UTF16Ptr(filename)
 	return graphicsgdiplus.GdipLoadImageFromFileICM(foundation.PWSTR(_filename), image)
+}
+
+// GdipLoadImageFromStream wraps the raw GdipLoadImageFromStream call with idiomatic Go types.
+func GdipLoadImageFromStream(stream systemcomidiom.IStream, image **graphicsgdiplus.GpImage) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipLoadImageFromStream(stream.Raw, image)
+}
+
+// GdipLoadImageFromStreamICM wraps the raw GdipLoadImageFromStreamICM call with idiomatic Go types.
+func GdipLoadImageFromStreamICM(stream systemcomidiom.IStream, image **graphicsgdiplus.GpImage) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipLoadImageFromStreamICM(stream.Raw, image)
 }
 
 // GdipMeasureCharacterRanges wraps the raw GdipMeasureCharacterRanges call with idiomatic Go types.
@@ -217,21 +264,26 @@ func GdipRecordMetafileI(referenceHdc graphicsgdi.HDC, type_ graphicsgdiplus.Emf
 }
 
 // GdipRecordMetafileStream wraps the raw GdipRecordMetafileStream call with idiomatic Go types.
-func GdipRecordMetafileStream(stream *systemcom.IStream, referenceHdc graphicsgdi.HDC, type_ graphicsgdiplus.EmfType, frameRect *graphicsgdiplus.RectF, frameUnit graphicsgdiplus.MetafileFrameUnit, description string, metafile **graphicsgdiplus.GpMetafile) graphicsgdiplus.Status {
+func GdipRecordMetafileStream(stream systemcomidiom.IStream, referenceHdc graphicsgdi.HDC, type_ graphicsgdiplus.EmfType, frameRect *graphicsgdiplus.RectF, frameUnit graphicsgdiplus.MetafileFrameUnit, description string, metafile **graphicsgdiplus.GpMetafile) graphicsgdiplus.Status {
 	_description := win32.UTF16Ptr(description)
-	return graphicsgdiplus.GdipRecordMetafileStream(stream, referenceHdc, type_, frameRect, frameUnit, foundation.PWSTR(_description), metafile)
+	return graphicsgdiplus.GdipRecordMetafileStream(stream.Raw, referenceHdc, type_, frameRect, frameUnit, foundation.PWSTR(_description), metafile)
 }
 
 // GdipRecordMetafileStreamI wraps the raw GdipRecordMetafileStreamI call with idiomatic Go types.
-func GdipRecordMetafileStreamI(stream *systemcom.IStream, referenceHdc graphicsgdi.HDC, type_ graphicsgdiplus.EmfType, frameRect *graphicsgdiplus.Rect, frameUnit graphicsgdiplus.MetafileFrameUnit, description string, metafile **graphicsgdiplus.GpMetafile) graphicsgdiplus.Status {
+func GdipRecordMetafileStreamI(stream systemcomidiom.IStream, referenceHdc graphicsgdi.HDC, type_ graphicsgdiplus.EmfType, frameRect *graphicsgdiplus.Rect, frameUnit graphicsgdiplus.MetafileFrameUnit, description string, metafile **graphicsgdiplus.GpMetafile) graphicsgdiplus.Status {
 	_description := win32.UTF16Ptr(description)
-	return graphicsgdiplus.GdipRecordMetafileStreamI(stream, referenceHdc, type_, frameRect, frameUnit, foundation.PWSTR(_description), metafile)
+	return graphicsgdiplus.GdipRecordMetafileStreamI(stream.Raw, referenceHdc, type_, frameRect, frameUnit, foundation.PWSTR(_description), metafile)
 }
 
 // GdipSaveImageToFile wraps the raw GdipSaveImageToFile call with idiomatic Go types.
 func GdipSaveImageToFile(image *graphicsgdiplus.GpImage, filename string, clsidEncoder *win32.GUID, encoderParams *graphicsgdiplus.EncoderParameters) graphicsgdiplus.Status {
 	_filename := win32.UTF16Ptr(filename)
 	return graphicsgdiplus.GdipSaveImageToFile(image, foundation.PWSTR(_filename), clsidEncoder, encoderParams)
+}
+
+// GdipSaveImageToStream wraps the raw GdipSaveImageToStream call with idiomatic Go types.
+func GdipSaveImageToStream(image *graphicsgdiplus.GpImage, stream systemcomidiom.IStream, clsidEncoder *win32.GUID, encoderParams *graphicsgdiplus.EncoderParameters) graphicsgdiplus.Status {
+	return graphicsgdiplus.GdipSaveImageToStream(image, stream.Raw, clsidEncoder, encoderParams)
 }
 
 // GdipSetAdjustableArrowCapFillState wraps the raw GdipSetAdjustableArrowCapFillState call with idiomatic Go types.

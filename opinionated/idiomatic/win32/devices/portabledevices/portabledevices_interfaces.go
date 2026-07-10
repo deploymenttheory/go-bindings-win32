@@ -11,8 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
-	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	uishellpropertiessystemidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/ui/shell/propertiessystem"
 )
 
 // IConnectionRequestCallback is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IConnectionRequestCallback with error-returning methods.
@@ -131,8 +131,8 @@ func WrapIMediaRadioManagerNotifySink(raw *devicesportabledevices.IMediaRadioMan
 }
 
 // OnInstanceAdd wraps the raw OnInstanceAdd call.
-func (self IMediaRadioManagerNotifySink) OnInstanceAdd(pRadioInstance *devicesportabledevices.IRadioInstance) error {
-	return win32.HRESULTError(int32(self.Raw.OnInstanceAdd(pRadioInstance)))
+func (self IMediaRadioManagerNotifySink) OnInstanceAdd(pRadioInstance IRadioInstance) error {
+	return win32.HRESULTError(int32(self.Raw.OnInstanceAdd(pRadioInstance.Raw)))
 }
 
 // OnInstanceRemove wraps the raw OnInstanceRemove call.
@@ -157,14 +157,14 @@ func WrapIPortableDevice(raw *devicesportabledevices.IPortableDevice) IPortableD
 }
 
 // Open wraps the raw Open call.
-func (self IPortableDevice) Open(pszPnPDeviceID string, pClientInfo *devicesportabledevices.IPortableDeviceValues) error {
+func (self IPortableDevice) Open(pszPnPDeviceID string, pClientInfo IPortableDeviceValues) error {
 	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
-	return win32.HRESULTError(int32(self.Raw.Open(foundation.PWSTR(_pszPnPDeviceID), pClientInfo)))
+	return win32.HRESULTError(int32(self.Raw.Open(foundation.PWSTR(_pszPnPDeviceID), pClientInfo.Raw)))
 }
 
 // SendCommand wraps the raw SendCommand call.
-func (self IPortableDevice) SendCommand(dwFlags uint32, pParameters *devicesportabledevices.IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.SendCommand(dwFlags, pParameters, ppResults)))
+func (self IPortableDevice) SendCommand(dwFlags uint32, pParameters IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.SendCommand(dwFlags, pParameters.Raw, ppResults)))
 }
 
 // Content wraps the raw Content call.
@@ -188,8 +188,8 @@ func (self IPortableDevice) Close() error {
 }
 
 // Advise wraps the raw Advise call.
-func (self IPortableDevice) Advise(dwFlags uint32, pCallback *devicesportabledevices.IPortableDeviceEventCallback, pParameters *devicesportabledevices.IPortableDeviceValues, ppszCookie *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(dwFlags, pCallback, pParameters, ppszCookie)))
+func (self IPortableDevice) Advise(dwFlags uint32, pCallback IPortableDeviceEventCallback, pParameters IPortableDeviceValues, ppszCookie *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(dwFlags, pCallback.Raw, pParameters.Raw, ppszCookie)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -281,18 +281,18 @@ func WrapIPortableDeviceConnector(raw *devicesportabledevices.IPortableDeviceCon
 }
 
 // Connect wraps the raw Connect call.
-func (self IPortableDeviceConnector) Connect(pCallback *devicesportabledevices.IConnectionRequestCallback) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(pCallback)))
+func (self IPortableDeviceConnector) Connect(pCallback IConnectionRequestCallback) error {
+	return win32.HRESULTError(int32(self.Raw.Connect(pCallback.Raw)))
 }
 
 // Disconnect wraps the raw Disconnect call.
-func (self IPortableDeviceConnector) Disconnect(pCallback *devicesportabledevices.IConnectionRequestCallback) error {
-	return win32.HRESULTError(int32(self.Raw.Disconnect(pCallback)))
+func (self IPortableDeviceConnector) Disconnect(pCallback IConnectionRequestCallback) error {
+	return win32.HRESULTError(int32(self.Raw.Disconnect(pCallback.Raw)))
 }
 
 // Cancel wraps the raw Cancel call.
-func (self IPortableDeviceConnector) Cancel(pCallback *devicesportabledevices.IConnectionRequestCallback) error {
-	return win32.HRESULTError(int32(self.Raw.Cancel(pCallback)))
+func (self IPortableDeviceConnector) Cancel(pCallback IConnectionRequestCallback) error {
+	return win32.HRESULTError(int32(self.Raw.Cancel(pCallback.Raw)))
 }
 
 // GetProperty wraps the raw GetProperty call.
@@ -322,9 +322,9 @@ func WrapIPortableDeviceContent(raw *devicesportabledevices.IPortableDeviceConte
 }
 
 // EnumObjects wraps the raw EnumObjects call.
-func (self IPortableDeviceContent) EnumObjects(dwFlags uint32, pszParentObjectID string, pFilter *devicesportabledevices.IPortableDeviceValues, ppEnum **devicesportabledevices.IEnumPortableDeviceObjectIDs) error {
+func (self IPortableDeviceContent) EnumObjects(dwFlags uint32, pszParentObjectID string, pFilter IPortableDeviceValues, ppEnum **devicesportabledevices.IEnumPortableDeviceObjectIDs) error {
 	_pszParentObjectID := win32.UTF16Ptr(pszParentObjectID)
-	return win32.HRESULTError(int32(self.Raw.EnumObjects(dwFlags, foundation.PWSTR(_pszParentObjectID), pFilter, ppEnum)))
+	return win32.HRESULTError(int32(self.Raw.EnumObjects(dwFlags, foundation.PWSTR(_pszParentObjectID), pFilter.Raw, ppEnum)))
 }
 
 // Properties wraps the raw Properties call.
@@ -338,23 +338,23 @@ func (self IPortableDeviceContent) Transfer(ppResources **devicesportabledevices
 }
 
 // CreateObjectWithPropertiesOnly wraps the raw CreateObjectWithPropertiesOnly call.
-func (self IPortableDeviceContent) CreateObjectWithPropertiesOnly(pValues *devicesportabledevices.IPortableDeviceValues, ppszObjectID *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.CreateObjectWithPropertiesOnly(pValues, ppszObjectID)))
+func (self IPortableDeviceContent) CreateObjectWithPropertiesOnly(pValues IPortableDeviceValues, ppszObjectID *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.CreateObjectWithPropertiesOnly(pValues.Raw, ppszObjectID)))
 }
 
 // CreateObjectWithPropertiesAndData wraps the raw CreateObjectWithPropertiesAndData call.
-func (self IPortableDeviceContent) CreateObjectWithPropertiesAndData(pValues *devicesportabledevices.IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.CreateObjectWithPropertiesAndData(pValues, ppData, pdwOptimalWriteBufferSize, ppszCookie)))
+func (self IPortableDeviceContent) CreateObjectWithPropertiesAndData(pValues IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.CreateObjectWithPropertiesAndData(pValues.Raw, ppData, pdwOptimalWriteBufferSize, ppszCookie)))
 }
 
 // Delete wraps the raw Delete call.
-func (self IPortableDeviceContent) Delete(dwOptions uint32, pObjectIDs *devicesportabledevices.IPortableDevicePropVariantCollection, ppResults **devicesportabledevices.IPortableDevicePropVariantCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Delete(dwOptions, pObjectIDs, ppResults)))
+func (self IPortableDeviceContent) Delete(dwOptions uint32, pObjectIDs IPortableDevicePropVariantCollection, ppResults **devicesportabledevices.IPortableDevicePropVariantCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Delete(dwOptions, pObjectIDs.Raw, ppResults)))
 }
 
 // GetObjectIDsFromPersistentUniqueIDs wraps the raw GetObjectIDsFromPersistentUniqueIDs call.
-func (self IPortableDeviceContent) GetObjectIDsFromPersistentUniqueIDs(pPersistentUniqueIDs *devicesportabledevices.IPortableDevicePropVariantCollection, ppObjectIDs **devicesportabledevices.IPortableDevicePropVariantCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetObjectIDsFromPersistentUniqueIDs(pPersistentUniqueIDs, ppObjectIDs)))
+func (self IPortableDeviceContent) GetObjectIDsFromPersistentUniqueIDs(pPersistentUniqueIDs IPortableDevicePropVariantCollection, ppObjectIDs **devicesportabledevices.IPortableDevicePropVariantCollection) error {
+	return win32.HRESULTError(int32(self.Raw.GetObjectIDsFromPersistentUniqueIDs(pPersistentUniqueIDs.Raw, ppObjectIDs)))
 }
 
 // Cancel wraps the raw Cancel call.
@@ -363,15 +363,15 @@ func (self IPortableDeviceContent) Cancel() error {
 }
 
 // Move wraps the raw Move call.
-func (self IPortableDeviceContent) Move(pObjectIDs *devicesportabledevices.IPortableDevicePropVariantCollection, pszDestinationFolderObjectID string, ppResults **devicesportabledevices.IPortableDevicePropVariantCollection) error {
+func (self IPortableDeviceContent) Move(pObjectIDs IPortableDevicePropVariantCollection, pszDestinationFolderObjectID string, ppResults **devicesportabledevices.IPortableDevicePropVariantCollection) error {
 	_pszDestinationFolderObjectID := win32.UTF16Ptr(pszDestinationFolderObjectID)
-	return win32.HRESULTError(int32(self.Raw.Move(pObjectIDs, foundation.PWSTR(_pszDestinationFolderObjectID), ppResults)))
+	return win32.HRESULTError(int32(self.Raw.Move(pObjectIDs.Raw, foundation.PWSTR(_pszDestinationFolderObjectID), ppResults)))
 }
 
 // Copy wraps the raw Copy call.
-func (self IPortableDeviceContent) Copy(pObjectIDs *devicesportabledevices.IPortableDevicePropVariantCollection, pszDestinationFolderObjectID string, ppResults **devicesportabledevices.IPortableDevicePropVariantCollection) error {
+func (self IPortableDeviceContent) Copy(pObjectIDs IPortableDevicePropVariantCollection, pszDestinationFolderObjectID string, ppResults **devicesportabledevices.IPortableDevicePropVariantCollection) error {
 	_pszDestinationFolderObjectID := win32.UTF16Ptr(pszDestinationFolderObjectID)
-	return win32.HRESULTError(int32(self.Raw.Copy(pObjectIDs, foundation.PWSTR(_pszDestinationFolderObjectID), ppResults)))
+	return win32.HRESULTError(int32(self.Raw.Copy(pObjectIDs.Raw, foundation.PWSTR(_pszDestinationFolderObjectID), ppResults)))
 }
 
 // IPortableDeviceContent2 is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IPortableDeviceContent2 with error-returning methods.
@@ -386,9 +386,9 @@ func WrapIPortableDeviceContent2(raw *devicesportabledevices.IPortableDeviceCont
 }
 
 // UpdateObjectWithPropertiesAndData wraps the raw UpdateObjectWithPropertiesAndData call.
-func (self IPortableDeviceContent2) UpdateObjectWithPropertiesAndData(pszObjectID string, pProperties *devicesportabledevices.IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32) error {
+func (self IPortableDeviceContent2) UpdateObjectWithPropertiesAndData(pszObjectID string, pProperties IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
-	return win32.HRESULTError(int32(self.Raw.UpdateObjectWithPropertiesAndData(foundation.PWSTR(_pszObjectID), pProperties, ppData, pdwOptimalWriteBufferSize)))
+	return win32.HRESULTError(int32(self.Raw.UpdateObjectWithPropertiesAndData(foundation.PWSTR(_pszObjectID), pProperties.Raw, ppData, pdwOptimalWriteBufferSize)))
 }
 
 // IPortableDeviceDataStream is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IPortableDeviceDataStream with error-returning methods.
@@ -441,8 +441,8 @@ func WrapIPortableDeviceEventCallback(raw *devicesportabledevices.IPortableDevic
 }
 
 // OnEvent wraps the raw OnEvent call.
-func (self IPortableDeviceEventCallback) OnEvent(pEventParameters *devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.OnEvent(pEventParameters)))
+func (self IPortableDeviceEventCallback) OnEvent(pEventParameters IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.OnEvent(pEventParameters.Raw)))
 }
 
 // IPortableDeviceKeyCollection is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IPortableDeviceKeyCollection with error-returning methods.
@@ -602,21 +602,21 @@ func (self IPortableDeviceProperties) GetPropertyAttributes(pszObjectID string, 
 }
 
 // GetValues wraps the raw GetValues call.
-func (self IPortableDeviceProperties) GetValues(pszObjectID string, pKeys *devicesportabledevices.IPortableDeviceKeyCollection, ppValues **devicesportabledevices.IPortableDeviceValues) error {
+func (self IPortableDeviceProperties) GetValues(pszObjectID string, pKeys IPortableDeviceKeyCollection, ppValues **devicesportabledevices.IPortableDeviceValues) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
-	return win32.HRESULTError(int32(self.Raw.GetValues(foundation.PWSTR(_pszObjectID), pKeys, ppValues)))
+	return win32.HRESULTError(int32(self.Raw.GetValues(foundation.PWSTR(_pszObjectID), pKeys.Raw, ppValues)))
 }
 
 // SetValues wraps the raw SetValues call.
-func (self IPortableDeviceProperties) SetValues(pszObjectID string, pValues *devicesportabledevices.IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
+func (self IPortableDeviceProperties) SetValues(pszObjectID string, pValues IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
-	return win32.HRESULTError(int32(self.Raw.SetValues(foundation.PWSTR(_pszObjectID), pValues, ppResults)))
+	return win32.HRESULTError(int32(self.Raw.SetValues(foundation.PWSTR(_pszObjectID), pValues.Raw, ppResults)))
 }
 
 // Delete wraps the raw Delete call.
-func (self IPortableDeviceProperties) Delete(pszObjectID string, pKeys *devicesportabledevices.IPortableDeviceKeyCollection) error {
+func (self IPortableDeviceProperties) Delete(pszObjectID string, pKeys IPortableDeviceKeyCollection) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
-	return win32.HRESULTError(int32(self.Raw.Delete(foundation.PWSTR(_pszObjectID), pKeys)))
+	return win32.HRESULTError(int32(self.Raw.Delete(foundation.PWSTR(_pszObjectID), pKeys.Raw)))
 }
 
 // Cancel wraps the raw Cancel call.
@@ -636,19 +636,19 @@ func WrapIPortableDevicePropertiesBulk(raw *devicesportabledevices.IPortableDevi
 }
 
 // QueueGetValuesByObjectList wraps the raw QueueGetValuesByObjectList call.
-func (self IPortableDevicePropertiesBulk) QueueGetValuesByObjectList(pObjectIDs *devicesportabledevices.IPortableDevicePropVariantCollection, pKeys *devicesportabledevices.IPortableDeviceKeyCollection, pCallback *devicesportabledevices.IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.QueueGetValuesByObjectList(pObjectIDs, pKeys, pCallback, pContext)))
+func (self IPortableDevicePropertiesBulk) QueueGetValuesByObjectList(pObjectIDs IPortableDevicePropVariantCollection, pKeys IPortableDeviceKeyCollection, pCallback IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.QueueGetValuesByObjectList(pObjectIDs.Raw, pKeys.Raw, pCallback.Raw, pContext)))
 }
 
 // QueueGetValuesByObjectFormat wraps the raw QueueGetValuesByObjectFormat call.
-func (self IPortableDevicePropertiesBulk) QueueGetValuesByObjectFormat(pguidObjectFormat *win32.GUID, pszParentObjectID string, dwDepth uint32, pKeys *devicesportabledevices.IPortableDeviceKeyCollection, pCallback *devicesportabledevices.IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
+func (self IPortableDevicePropertiesBulk) QueueGetValuesByObjectFormat(pguidObjectFormat *win32.GUID, pszParentObjectID string, dwDepth uint32, pKeys IPortableDeviceKeyCollection, pCallback IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
 	_pszParentObjectID := win32.UTF16Ptr(pszParentObjectID)
-	return win32.HRESULTError(int32(self.Raw.QueueGetValuesByObjectFormat(pguidObjectFormat, foundation.PWSTR(_pszParentObjectID), dwDepth, pKeys, pCallback, pContext)))
+	return win32.HRESULTError(int32(self.Raw.QueueGetValuesByObjectFormat(pguidObjectFormat, foundation.PWSTR(_pszParentObjectID), dwDepth, pKeys.Raw, pCallback.Raw, pContext)))
 }
 
 // QueueSetValuesByObjectList wraps the raw QueueSetValuesByObjectList call.
-func (self IPortableDevicePropertiesBulk) QueueSetValuesByObjectList(pObjectValues *devicesportabledevices.IPortableDeviceValuesCollection, pCallback *devicesportabledevices.IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.QueueSetValuesByObjectList(pObjectValues, pCallback, pContext)))
+func (self IPortableDevicePropertiesBulk) QueueSetValuesByObjectList(pObjectValues IPortableDeviceValuesCollection, pCallback IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.QueueSetValuesByObjectList(pObjectValues.Raw, pCallback.Raw, pContext)))
 }
 
 // Start wraps the raw Start call.
@@ -678,8 +678,8 @@ func (self IPortableDevicePropertiesBulkCallback) OnStart(pContext *win32.GUID) 
 }
 
 // OnProgress wraps the raw OnProgress call.
-func (self IPortableDevicePropertiesBulkCallback) OnProgress(pContext *win32.GUID, pResults *devicesportabledevices.IPortableDeviceValuesCollection) error {
-	return win32.HRESULTError(int32(self.Raw.OnProgress(pContext, pResults)))
+func (self IPortableDevicePropertiesBulkCallback) OnProgress(pContext *win32.GUID, pResults IPortableDeviceValuesCollection) error {
+	return win32.HRESULTError(int32(self.Raw.OnProgress(pContext, pResults.Raw)))
 }
 
 // OnEnd wraps the raw OnEnd call.
@@ -717,9 +717,9 @@ func (self IPortableDeviceResources) GetStream(pszObjectID string, Key *foundati
 }
 
 // Delete wraps the raw Delete call.
-func (self IPortableDeviceResources) Delete(pszObjectID string, pKeys *devicesportabledevices.IPortableDeviceKeyCollection) error {
+func (self IPortableDeviceResources) Delete(pszObjectID string, pKeys IPortableDeviceKeyCollection) error {
 	_pszObjectID := win32.UTF16Ptr(pszObjectID)
-	return win32.HRESULTError(int32(self.Raw.Delete(foundation.PWSTR(_pszObjectID), pKeys)))
+	return win32.HRESULTError(int32(self.Raw.Delete(foundation.PWSTR(_pszObjectID), pKeys.Raw)))
 }
 
 // Cancel wraps the raw Cancel call.
@@ -728,8 +728,8 @@ func (self IPortableDeviceResources) Cancel() error {
 }
 
 // CreateResource wraps the raw CreateResource call.
-func (self IPortableDeviceResources) CreateResource(pResourceAttributes *devicesportabledevices.IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.CreateResource(pResourceAttributes, ppData, pdwOptimalWriteBufferSize, ppszCookie)))
+func (self IPortableDeviceResources) CreateResource(pResourceAttributes IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.CreateResource(pResourceAttributes.Raw, ppData, pdwOptimalWriteBufferSize, ppszCookie)))
 }
 
 // IPortableDeviceService is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IPortableDeviceService with error-returning methods.
@@ -744,9 +744,9 @@ func WrapIPortableDeviceService(raw *devicesportabledevices.IPortableDeviceServi
 }
 
 // Open wraps the raw Open call.
-func (self IPortableDeviceService) Open(pszPnPServiceID string, pClientInfo *devicesportabledevices.IPortableDeviceValues) error {
+func (self IPortableDeviceService) Open(pszPnPServiceID string, pClientInfo IPortableDeviceValues) error {
 	_pszPnPServiceID := win32.UTF16Ptr(pszPnPServiceID)
-	return win32.HRESULTError(int32(self.Raw.Open(foundation.PWSTR(_pszPnPServiceID), pClientInfo)))
+	return win32.HRESULTError(int32(self.Raw.Open(foundation.PWSTR(_pszPnPServiceID), pClientInfo.Raw)))
 }
 
 // Capabilities wraps the raw Capabilities call.
@@ -785,8 +785,8 @@ func (self IPortableDeviceService) GetPnPServiceID(ppszPnPServiceID *foundation.
 }
 
 // Advise wraps the raw Advise call.
-func (self IPortableDeviceService) Advise(dwFlags uint32, pCallback *devicesportabledevices.IPortableDeviceEventCallback, pParameters *devicesportabledevices.IPortableDeviceValues, ppszCookie *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(dwFlags, pCallback, pParameters, ppszCookie)))
+func (self IPortableDeviceService) Advise(dwFlags uint32, pCallback IPortableDeviceEventCallback, pParameters IPortableDeviceValues, ppszCookie *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(dwFlags, pCallback.Raw, pParameters.Raw, ppszCookie)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -796,8 +796,8 @@ func (self IPortableDeviceService) Unadvise(pszCookie string) error {
 }
 
 // SendCommand wraps the raw SendCommand call.
-func (self IPortableDeviceService) SendCommand(dwFlags uint32, pParameters *devicesportabledevices.IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.SendCommand(dwFlags, pParameters, ppResults)))
+func (self IPortableDeviceService) SendCommand(dwFlags uint32, pParameters IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.SendCommand(dwFlags, pParameters.Raw, ppResults)))
 }
 
 // IPortableDeviceServiceActivation is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IPortableDeviceServiceActivation with error-returning methods.
@@ -812,9 +812,9 @@ func WrapIPortableDeviceServiceActivation(raw *devicesportabledevices.IPortableD
 }
 
 // OpenAsync wraps the raw OpenAsync call.
-func (self IPortableDeviceServiceActivation) OpenAsync(pszPnPServiceID string, pClientInfo *devicesportabledevices.IPortableDeviceValues, pCallback *devicesportabledevices.IPortableDeviceServiceOpenCallback) error {
+func (self IPortableDeviceServiceActivation) OpenAsync(pszPnPServiceID string, pClientInfo IPortableDeviceValues, pCallback IPortableDeviceServiceOpenCallback) error {
 	_pszPnPServiceID := win32.UTF16Ptr(pszPnPServiceID)
-	return win32.HRESULTError(int32(self.Raw.OpenAsync(foundation.PWSTR(_pszPnPServiceID), pClientInfo, pCallback)))
+	return win32.HRESULTError(int32(self.Raw.OpenAsync(foundation.PWSTR(_pszPnPServiceID), pClientInfo.Raw, pCallback.Raw)))
 }
 
 // CancelOpenAsync wraps the raw CancelOpenAsync call.
@@ -948,8 +948,8 @@ func WrapIPortableDeviceServiceMethodCallback(raw *devicesportabledevices.IPorta
 }
 
 // OnComplete wraps the raw OnComplete call.
-func (self IPortableDeviceServiceMethodCallback) OnComplete(hrStatus foundation.HRESULT, pResults *devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.OnComplete(hrStatus, pResults)))
+func (self IPortableDeviceServiceMethodCallback) OnComplete(hrStatus foundation.HRESULT, pResults IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.OnComplete(hrStatus, pResults.Raw)))
 }
 
 // IPortableDeviceServiceMethods is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IPortableDeviceServiceMethods with error-returning methods.
@@ -964,18 +964,18 @@ func WrapIPortableDeviceServiceMethods(raw *devicesportabledevices.IPortableDevi
 }
 
 // Invoke wraps the raw Invoke call.
-func (self IPortableDeviceServiceMethods) Invoke(Method *win32.GUID, pParameters *devicesportabledevices.IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.Invoke(Method, pParameters, ppResults)))
+func (self IPortableDeviceServiceMethods) Invoke(Method *win32.GUID, pParameters IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.Invoke(Method, pParameters.Raw, ppResults)))
 }
 
 // InvokeAsync wraps the raw InvokeAsync call.
-func (self IPortableDeviceServiceMethods) InvokeAsync(Method *win32.GUID, pParameters *devicesportabledevices.IPortableDeviceValues, pCallback *devicesportabledevices.IPortableDeviceServiceMethodCallback) error {
-	return win32.HRESULTError(int32(self.Raw.InvokeAsync(Method, pParameters, pCallback)))
+func (self IPortableDeviceServiceMethods) InvokeAsync(Method *win32.GUID, pParameters IPortableDeviceValues, pCallback IPortableDeviceServiceMethodCallback) error {
+	return win32.HRESULTError(int32(self.Raw.InvokeAsync(Method, pParameters.Raw, pCallback.Raw)))
 }
 
 // Cancel wraps the raw Cancel call.
-func (self IPortableDeviceServiceMethods) Cancel(pCallback *devicesportabledevices.IPortableDeviceServiceMethodCallback) error {
-	return win32.HRESULTError(int32(self.Raw.Cancel(pCallback)))
+func (self IPortableDeviceServiceMethods) Cancel(pCallback IPortableDeviceServiceMethodCallback) error {
+	return win32.HRESULTError(int32(self.Raw.Cancel(pCallback.Raw)))
 }
 
 // IPortableDeviceServiceOpenCallback is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IPortableDeviceServiceOpenCallback with error-returning methods.
@@ -1134,8 +1134,8 @@ func (self IPortableDeviceValues) GetBoolValue(key *foundation.PROPERTYKEY, pVal
 }
 
 // SetIUnknownValue wraps the raw SetIUnknownValue call.
-func (self IPortableDeviceValues) SetIUnknownValue(key *foundation.PROPERTYKEY, pValue *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetIUnknownValue(key, pValue)))
+func (self IPortableDeviceValues) SetIUnknownValue(key *foundation.PROPERTYKEY, pValue systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetIUnknownValue(key, pValue.Raw)))
 }
 
 // GetIUnknownValue wraps the raw GetIUnknownValue call.
@@ -1164,8 +1164,8 @@ func (self IPortableDeviceValues) GetBufferValue(key *foundation.PROPERTYKEY, pp
 }
 
 // SetIPortableDeviceValuesValue wraps the raw SetIPortableDeviceValuesValue call.
-func (self IPortableDeviceValues) SetIPortableDeviceValuesValue(key *foundation.PROPERTYKEY, pValue *devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.SetIPortableDeviceValuesValue(key, pValue)))
+func (self IPortableDeviceValues) SetIPortableDeviceValuesValue(key *foundation.PROPERTYKEY, pValue IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.SetIPortableDeviceValuesValue(key, pValue.Raw)))
 }
 
 // GetIPortableDeviceValuesValue wraps the raw GetIPortableDeviceValuesValue call.
@@ -1174,8 +1174,8 @@ func (self IPortableDeviceValues) GetIPortableDeviceValuesValue(key *foundation.
 }
 
 // SetIPortableDevicePropVariantCollectionValue wraps the raw SetIPortableDevicePropVariantCollectionValue call.
-func (self IPortableDeviceValues) SetIPortableDevicePropVariantCollectionValue(key *foundation.PROPERTYKEY, pValue *devicesportabledevices.IPortableDevicePropVariantCollection) error {
-	return win32.HRESULTError(int32(self.Raw.SetIPortableDevicePropVariantCollectionValue(key, pValue)))
+func (self IPortableDeviceValues) SetIPortableDevicePropVariantCollectionValue(key *foundation.PROPERTYKEY, pValue IPortableDevicePropVariantCollection) error {
+	return win32.HRESULTError(int32(self.Raw.SetIPortableDevicePropVariantCollectionValue(key, pValue.Raw)))
 }
 
 // GetIPortableDevicePropVariantCollectionValue wraps the raw GetIPortableDevicePropVariantCollectionValue call.
@@ -1184,8 +1184,8 @@ func (self IPortableDeviceValues) GetIPortableDevicePropVariantCollectionValue(k
 }
 
 // SetIPortableDeviceKeyCollectionValue wraps the raw SetIPortableDeviceKeyCollectionValue call.
-func (self IPortableDeviceValues) SetIPortableDeviceKeyCollectionValue(key *foundation.PROPERTYKEY, pValue *devicesportabledevices.IPortableDeviceKeyCollection) error {
-	return win32.HRESULTError(int32(self.Raw.SetIPortableDeviceKeyCollectionValue(key, pValue)))
+func (self IPortableDeviceValues) SetIPortableDeviceKeyCollectionValue(key *foundation.PROPERTYKEY, pValue IPortableDeviceKeyCollection) error {
+	return win32.HRESULTError(int32(self.Raw.SetIPortableDeviceKeyCollectionValue(key, pValue.Raw)))
 }
 
 // GetIPortableDeviceKeyCollectionValue wraps the raw GetIPortableDeviceKeyCollectionValue call.
@@ -1194,8 +1194,8 @@ func (self IPortableDeviceValues) GetIPortableDeviceKeyCollectionValue(key *foun
 }
 
 // SetIPortableDeviceValuesCollectionValue wraps the raw SetIPortableDeviceValuesCollectionValue call.
-func (self IPortableDeviceValues) SetIPortableDeviceValuesCollectionValue(key *foundation.PROPERTYKEY, pValue *devicesportabledevices.IPortableDeviceValuesCollection) error {
-	return win32.HRESULTError(int32(self.Raw.SetIPortableDeviceValuesCollectionValue(key, pValue)))
+func (self IPortableDeviceValues) SetIPortableDeviceValuesCollectionValue(key *foundation.PROPERTYKEY, pValue IPortableDeviceValuesCollection) error {
+	return win32.HRESULTError(int32(self.Raw.SetIPortableDeviceValuesCollectionValue(key, pValue.Raw)))
 }
 
 // GetIPortableDeviceValuesCollectionValue wraps the raw GetIPortableDeviceValuesCollectionValue call.
@@ -1209,13 +1209,13 @@ func (self IPortableDeviceValues) RemoveValue(key *foundation.PROPERTYKEY) error
 }
 
 // CopyValuesFromPropertyStore wraps the raw CopyValuesFromPropertyStore call.
-func (self IPortableDeviceValues) CopyValuesFromPropertyStore(pStore *uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.CopyValuesFromPropertyStore(pStore)))
+func (self IPortableDeviceValues) CopyValuesFromPropertyStore(pStore uishellpropertiessystemidiom.IPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.CopyValuesFromPropertyStore(pStore.Raw)))
 }
 
 // CopyValuesToPropertyStore wraps the raw CopyValuesToPropertyStore call.
-func (self IPortableDeviceValues) CopyValuesToPropertyStore(pStore *uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.CopyValuesToPropertyStore(pStore)))
+func (self IPortableDeviceValues) CopyValuesToPropertyStore(pStore uishellpropertiessystemidiom.IPropertyStore) error {
+	return win32.HRESULTError(int32(self.Raw.CopyValuesToPropertyStore(pStore.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -1245,8 +1245,8 @@ func (self IPortableDeviceValuesCollection) GetAt(dwIndex uint32, ppValues **dev
 }
 
 // Add wraps the raw Add call.
-func (self IPortableDeviceValuesCollection) Add(pValues *devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pValues)))
+func (self IPortableDeviceValuesCollection) Add(pValues IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pValues.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -1276,8 +1276,8 @@ func (self IPortableDeviceWebControl) GetDeviceFromId(deviceId foundation.BSTR, 
 }
 
 // GetDeviceFromIdAsync wraps the raw GetDeviceFromIdAsync call.
-func (self IPortableDeviceWebControl) GetDeviceFromIdAsync(deviceId foundation.BSTR, pCompletionHandler *systemcom.IDispatch, pErrorHandler *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetDeviceFromIdAsync(deviceId, pCompletionHandler, pErrorHandler)))
+func (self IPortableDeviceWebControl) GetDeviceFromIdAsync(deviceId foundation.BSTR, pCompletionHandler systemcomidiom.IDispatch, pErrorHandler systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.GetDeviceFromIdAsync(deviceId, pCompletionHandler.Raw, pErrorHandler.Raw)))
 }
 
 // IRadioInstance is an idiomatic wrapper over the raw COM interface Devices.PortableDevices.IRadioInstance with error-returning methods.
@@ -1364,16 +1364,16 @@ func (self IWpdSerializer) GetIPortableDeviceValuesFromBuffer(pBuffer *byte, dwI
 }
 
 // WriteIPortableDeviceValuesToBuffer wraps the raw WriteIPortableDeviceValuesToBuffer call.
-func (self IWpdSerializer) WriteIPortableDeviceValuesToBuffer(dwOutputBufferLength uint32, pResults *devicesportabledevices.IPortableDeviceValues, pBuffer *byte, pdwBytesWritten *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.WriteIPortableDeviceValuesToBuffer(dwOutputBufferLength, pResults, pBuffer, pdwBytesWritten)))
+func (self IWpdSerializer) WriteIPortableDeviceValuesToBuffer(dwOutputBufferLength uint32, pResults IPortableDeviceValues, pBuffer *byte, pdwBytesWritten *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.WriteIPortableDeviceValuesToBuffer(dwOutputBufferLength, pResults.Raw, pBuffer, pdwBytesWritten)))
 }
 
 // GetBufferFromIPortableDeviceValues wraps the raw GetBufferFromIPortableDeviceValues call.
-func (self IWpdSerializer) GetBufferFromIPortableDeviceValues(pSource *devicesportabledevices.IPortableDeviceValues, ppBuffer **byte, pdwBufferSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetBufferFromIPortableDeviceValues(pSource, ppBuffer, pdwBufferSize)))
+func (self IWpdSerializer) GetBufferFromIPortableDeviceValues(pSource IPortableDeviceValues, ppBuffer **byte, pdwBufferSize *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetBufferFromIPortableDeviceValues(pSource.Raw, ppBuffer, pdwBufferSize)))
 }
 
 // GetSerializedSize wraps the raw GetSerializedSize call.
-func (self IWpdSerializer) GetSerializedSize(pSource *devicesportabledevices.IPortableDeviceValues, pdwSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetSerializedSize(pSource, pdwSize)))
+func (self IWpdSerializer) GetSerializedSize(pSource IPortableDeviceValues, pdwSize *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetSerializedSize(pSource.Raw, pdwSize)))
 }

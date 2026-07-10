@@ -23,7 +23,10 @@ import (
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
 	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
+	graphicsdirect3d9idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d9"
+	mediadxmediaobjectsidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/dxmediaobjects"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	uishellpropertiessystemidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/ui/shell/propertiessystem"
 )
 
 // IAdvancedMediaCapture is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IAdvancedMediaCapture with error-returning methods.
@@ -54,8 +57,8 @@ func WrapIAdvancedMediaCaptureInitializationSettings(raw *mediamediafoundation.I
 }
 
 // SetDirectxDeviceManager wraps the raw SetDirectxDeviceManager call.
-func (self IAdvancedMediaCaptureInitializationSettings) SetDirectxDeviceManager(value *mediamediafoundation.IMFDXGIDeviceManager) error {
-	return win32.HRESULTError(int32(self.Raw.SetDirectxDeviceManager(value)))
+func (self IAdvancedMediaCaptureInitializationSettings) SetDirectxDeviceManager(value IMFDXGIDeviceManager) error {
+	return win32.HRESULTError(int32(self.Raw.SetDirectxDeviceManager(value.Raw)))
 }
 
 // IAdvancedMediaCaptureSettings is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IAdvancedMediaCaptureSettings with error-returning methods.
@@ -178,18 +181,18 @@ func (self ICodecAPI) SetAllDefaultsWithNotify(ChangedParam **win32.GUID, Change
 }
 
 // GetAllSettings wraps the raw GetAllSettings call.
-func (self ICodecAPI) GetAllSettings(__MIDL__ICodecAPI0000 *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.GetAllSettings(__MIDL__ICodecAPI0000)))
+func (self ICodecAPI) GetAllSettings(__MIDL__ICodecAPI0000 systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.GetAllSettings(__MIDL__ICodecAPI0000.Raw)))
 }
 
 // SetAllSettings wraps the raw SetAllSettings call.
-func (self ICodecAPI) SetAllSettings(__MIDL__ICodecAPI0001 *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SetAllSettings(__MIDL__ICodecAPI0001)))
+func (self ICodecAPI) SetAllSettings(__MIDL__ICodecAPI0001 systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SetAllSettings(__MIDL__ICodecAPI0001.Raw)))
 }
 
 // SetAllSettingsWithNotify wraps the raw SetAllSettingsWithNotify call.
-func (self ICodecAPI) SetAllSettingsWithNotify(__MIDL__ICodecAPI0002 *systemcom.IStream, ChangedParam **win32.GUID, ChangedParamCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetAllSettingsWithNotify(__MIDL__ICodecAPI0002, ChangedParam, ChangedParamCount)))
+func (self ICodecAPI) SetAllSettingsWithNotify(__MIDL__ICodecAPI0002 systemcomidiom.IStream, ChangedParam **win32.GUID, ChangedParamCount *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetAllSettingsWithNotify(__MIDL__ICodecAPI0002.Raw, ChangedParam, ChangedParamCount)))
 }
 
 // ID3D12VideoDecodeCommandList is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoDecodeCommandList with error-returning methods.
@@ -209,8 +212,8 @@ func (self ID3D12VideoDecodeCommandList) Close() error {
 }
 
 // Reset wraps the raw Reset call.
-func (self ID3D12VideoDecodeCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) error {
-	return win32.HRESULTError(int32(self.Raw.Reset(pAllocator)))
+func (self ID3D12VideoDecodeCommandList) Reset(pAllocator graphicsdirect3d12idiom.ID3D12CommandAllocator) error {
+	return win32.HRESULTError(int32(self.Raw.Reset(pAllocator.Raw)))
 }
 
 // ClearState wraps the raw ClearState call.
@@ -224,28 +227,28 @@ func (self ID3D12VideoDecodeCommandList) ResourceBarrier(NumBarriers uint32, pBa
 }
 
 // DiscardResource wraps the raw DiscardResource call.
-func (self ID3D12VideoDecodeCommandList) DiscardResource(pResource *graphicsdirect3d12.ID3D12Resource, pRegion *graphicsdirect3d12.D3D12_DISCARD_REGION) {
-	self.Raw.DiscardResource(pResource, pRegion)
+func (self ID3D12VideoDecodeCommandList) DiscardResource(pResource graphicsdirect3d12idiom.ID3D12Resource, pRegion *graphicsdirect3d12.D3D12_DISCARD_REGION) {
+	self.Raw.DiscardResource(pResource.Raw, pRegion)
 }
 
 // BeginQuery wraps the raw BeginQuery call.
-func (self ID3D12VideoDecodeCommandList) BeginQuery(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
-	self.Raw.BeginQuery(pQueryHeap, Type, Index)
+func (self ID3D12VideoDecodeCommandList) BeginQuery(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
+	self.Raw.BeginQuery(pQueryHeap.Raw, Type, Index)
 }
 
 // EndQuery wraps the raw EndQuery call.
-func (self ID3D12VideoDecodeCommandList) EndQuery(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
-	self.Raw.EndQuery(pQueryHeap, Type, Index)
+func (self ID3D12VideoDecodeCommandList) EndQuery(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
+	self.Raw.EndQuery(pQueryHeap.Raw, Type, Index)
 }
 
 // ResolveQueryData wraps the raw ResolveQueryData call.
-func (self ID3D12VideoDecodeCommandList) ResolveQueryData(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pDestinationBuffer *graphicsdirect3d12.ID3D12Resource, AlignedDestinationBufferOffset uint64) {
-	self.Raw.ResolveQueryData(pQueryHeap, Type, StartIndex, NumQueries, pDestinationBuffer, AlignedDestinationBufferOffset)
+func (self ID3D12VideoDecodeCommandList) ResolveQueryData(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pDestinationBuffer graphicsdirect3d12idiom.ID3D12Resource, AlignedDestinationBufferOffset uint64) {
+	self.Raw.ResolveQueryData(pQueryHeap.Raw, Type, StartIndex, NumQueries, pDestinationBuffer.Raw, AlignedDestinationBufferOffset)
 }
 
 // SetPredication wraps the raw SetPredication call.
-func (self ID3D12VideoDecodeCommandList) SetPredication(pBuffer *graphicsdirect3d12.ID3D12Resource, AlignedBufferOffset uint64, Operation graphicsdirect3d12.D3D12_PREDICATION_OP) {
-	self.Raw.SetPredication(pBuffer, AlignedBufferOffset, Operation)
+func (self ID3D12VideoDecodeCommandList) SetPredication(pBuffer graphicsdirect3d12idiom.ID3D12Resource, AlignedBufferOffset uint64, Operation graphicsdirect3d12.D3D12_PREDICATION_OP) {
+	self.Raw.SetPredication(pBuffer.Raw, AlignedBufferOffset, Operation)
 }
 
 // SetMarker wraps the raw SetMarker call.
@@ -264,8 +267,8 @@ func (self ID3D12VideoDecodeCommandList) EndEvent() {
 }
 
 // DecodeFrame wraps the raw DecodeFrame call.
-func (self ID3D12VideoDecodeCommandList) DecodeFrame(pDecoder *mediamediafoundation.ID3D12VideoDecoder, pOutputArguments *mediamediafoundation.D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS, pInputArguments *mediamediafoundation.D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS) {
-	self.Raw.DecodeFrame(pDecoder, pOutputArguments, pInputArguments)
+func (self ID3D12VideoDecodeCommandList) DecodeFrame(pDecoder ID3D12VideoDecoder, pOutputArguments *mediamediafoundation.D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS, pInputArguments *mediamediafoundation.D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS) {
+	self.Raw.DecodeFrame(pDecoder.Raw, pOutputArguments, pInputArguments)
 }
 
 // WriteBufferImmediate wraps the raw WriteBufferImmediate call.
@@ -285,8 +288,8 @@ func WrapID3D12VideoDecodeCommandList1(raw *mediamediafoundation.ID3D12VideoDeco
 }
 
 // DecodeFrame1 wraps the raw DecodeFrame1 call.
-func (self ID3D12VideoDecodeCommandList1) DecodeFrame1(pDecoder *mediamediafoundation.ID3D12VideoDecoder, pOutputArguments *mediamediafoundation.D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1, pInputArguments *mediamediafoundation.D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS) {
-	self.Raw.DecodeFrame1(pDecoder, pOutputArguments, pInputArguments)
+func (self ID3D12VideoDecodeCommandList1) DecodeFrame1(pDecoder ID3D12VideoDecoder, pOutputArguments *mediamediafoundation.D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1, pInputArguments *mediamediafoundation.D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS) {
+	self.Raw.DecodeFrame1(pDecoder.Raw, pOutputArguments, pInputArguments)
 }
 
 // ID3D12VideoDecodeCommandList2 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoDecodeCommandList2 with error-returning methods.
@@ -301,18 +304,18 @@ func WrapID3D12VideoDecodeCommandList2(raw *mediamediafoundation.ID3D12VideoDeco
 }
 
 // SetProtectedResourceSession wraps the raw SetProtectedResourceSession call.
-func (self ID3D12VideoDecodeCommandList2) SetProtectedResourceSession(pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) {
-	self.Raw.SetProtectedResourceSession(pProtectedResourceSession)
+func (self ID3D12VideoDecodeCommandList2) SetProtectedResourceSession(pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession) {
+	self.Raw.SetProtectedResourceSession(pProtectedResourceSession.Raw)
 }
 
 // InitializeExtensionCommand wraps the raw InitializeExtensionCommand call.
-func (self ID3D12VideoDecodeCommandList2) InitializeExtensionCommand(pExtensionCommand *mediamediafoundation.ID3D12VideoExtensionCommand, pInitializationParameters unsafe.Pointer, InitializationParametersSizeInBytes uintptr) {
-	self.Raw.InitializeExtensionCommand(pExtensionCommand, pInitializationParameters, InitializationParametersSizeInBytes)
+func (self ID3D12VideoDecodeCommandList2) InitializeExtensionCommand(pExtensionCommand ID3D12VideoExtensionCommand, pInitializationParameters unsafe.Pointer, InitializationParametersSizeInBytes uintptr) {
+	self.Raw.InitializeExtensionCommand(pExtensionCommand.Raw, pInitializationParameters, InitializationParametersSizeInBytes)
 }
 
 // ExecuteExtensionCommand wraps the raw ExecuteExtensionCommand call.
-func (self ID3D12VideoDecodeCommandList2) ExecuteExtensionCommand(pExtensionCommand *mediamediafoundation.ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr) {
-	self.Raw.ExecuteExtensionCommand(pExtensionCommand, pExecutionParameters, ExecutionParametersSizeInBytes)
+func (self ID3D12VideoDecodeCommandList2) ExecuteExtensionCommand(pExtensionCommand ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr) {
+	self.Raw.ExecuteExtensionCommand(pExtensionCommand.Raw, pExecutionParameters, ExecutionParametersSizeInBytes)
 }
 
 // ID3D12VideoDecodeCommandList3 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoDecodeCommandList3 with error-returning methods.
@@ -428,13 +431,13 @@ func WrapID3D12VideoDevice1(raw *mediamediafoundation.ID3D12VideoDevice1) ID3D12
 }
 
 // CreateVideoMotionEstimator wraps the raw CreateVideoMotionEstimator call.
-func (self ID3D12VideoDevice1) CreateVideoMotionEstimator(pDesc *mediamediafoundation.D3D12_VIDEO_MOTION_ESTIMATOR_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionEstimator *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoMotionEstimator(pDesc, pProtectedResourceSession, riid, ppVideoMotionEstimator)))
+func (self ID3D12VideoDevice1) CreateVideoMotionEstimator(pDesc *mediamediafoundation.D3D12_VIDEO_MOTION_ESTIMATOR_DESC, pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionEstimator *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoMotionEstimator(pDesc, pProtectedResourceSession.Raw, riid, ppVideoMotionEstimator)))
 }
 
 // CreateVideoMotionVectorHeap wraps the raw CreateVideoMotionVectorHeap call.
-func (self ID3D12VideoDevice1) CreateVideoMotionVectorHeap(pDesc *mediamediafoundation.D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionVectorHeap *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoMotionVectorHeap(pDesc, pProtectedResourceSession, riid, ppVideoMotionVectorHeap)))
+func (self ID3D12VideoDevice1) CreateVideoMotionVectorHeap(pDesc *mediamediafoundation.D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC, pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionVectorHeap *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoMotionVectorHeap(pDesc, pProtectedResourceSession.Raw, riid, ppVideoMotionVectorHeap)))
 }
 
 // ID3D12VideoDevice2 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoDevice2 with error-returning methods.
@@ -449,28 +452,28 @@ func WrapID3D12VideoDevice2(raw *mediamediafoundation.ID3D12VideoDevice2) ID3D12
 }
 
 // CreateVideoDecoder1 wraps the raw CreateVideoDecoder1 call.
-func (self ID3D12VideoDevice2) CreateVideoDecoder1(pDesc *mediamediafoundation.D3D12_VIDEO_DECODER_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoder *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoDecoder1(pDesc, pProtectedResourceSession, riid, ppVideoDecoder)))
+func (self ID3D12VideoDevice2) CreateVideoDecoder1(pDesc *mediamediafoundation.D3D12_VIDEO_DECODER_DESC, pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoder *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoDecoder1(pDesc, pProtectedResourceSession.Raw, riid, ppVideoDecoder)))
 }
 
 // CreateVideoDecoderHeap1 wraps the raw CreateVideoDecoderHeap1 call.
-func (self ID3D12VideoDevice2) CreateVideoDecoderHeap1(pVideoDecoderHeapDesc *mediamediafoundation.D3D12_VIDEO_DECODER_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoderHeap *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoDecoderHeap1(pVideoDecoderHeapDesc, pProtectedResourceSession, riid, ppVideoDecoderHeap)))
+func (self ID3D12VideoDevice2) CreateVideoDecoderHeap1(pVideoDecoderHeapDesc *mediamediafoundation.D3D12_VIDEO_DECODER_HEAP_DESC, pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoderHeap *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoDecoderHeap1(pVideoDecoderHeapDesc, pProtectedResourceSession.Raw, riid, ppVideoDecoderHeap)))
 }
 
 // CreateVideoProcessor1 wraps the raw CreateVideoProcessor1 call.
-func (self ID3D12VideoDevice2) CreateVideoProcessor1(NodeMask uint32, pOutputStreamDesc *mediamediafoundation.D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, NumInputStreamDescs uint32, pInputStreamDescs *mediamediafoundation.D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoProcessor *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoProcessor1(NodeMask, pOutputStreamDesc, NumInputStreamDescs, pInputStreamDescs, pProtectedResourceSession, riid, ppVideoProcessor)))
+func (self ID3D12VideoDevice2) CreateVideoProcessor1(NodeMask uint32, pOutputStreamDesc *mediamediafoundation.D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, NumInputStreamDescs uint32, pInputStreamDescs *mediamediafoundation.D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoProcessor *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoProcessor1(NodeMask, pOutputStreamDesc, NumInputStreamDescs, pInputStreamDescs, pProtectedResourceSession.Raw, riid, ppVideoProcessor)))
 }
 
 // CreateVideoExtensionCommand wraps the raw CreateVideoExtensionCommand call.
-func (self ID3D12VideoDevice2) CreateVideoExtensionCommand(pDesc *mediamediafoundation.D3D12_VIDEO_EXTENSION_COMMAND_DESC, pCreationParameters unsafe.Pointer, CreationParametersDataSizeInBytes uintptr, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoExtensionCommand *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoExtensionCommand(pDesc, pCreationParameters, CreationParametersDataSizeInBytes, pProtectedResourceSession, riid, ppVideoExtensionCommand)))
+func (self ID3D12VideoDevice2) CreateVideoExtensionCommand(pDesc *mediamediafoundation.D3D12_VIDEO_EXTENSION_COMMAND_DESC, pCreationParameters unsafe.Pointer, CreationParametersDataSizeInBytes uintptr, pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoExtensionCommand *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoExtensionCommand(pDesc, pCreationParameters, CreationParametersDataSizeInBytes, pProtectedResourceSession.Raw, riid, ppVideoExtensionCommand)))
 }
 
 // ExecuteExtensionCommand wraps the raw ExecuteExtensionCommand call.
-func (self ID3D12VideoDevice2) ExecuteExtensionCommand(pExtensionCommand *mediamediafoundation.ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr, pOutputData unsafe.Pointer, OutputDataSizeInBytes uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.ExecuteExtensionCommand(pExtensionCommand, pExecutionParameters, ExecutionParametersSizeInBytes, pOutputData, OutputDataSizeInBytes)))
+func (self ID3D12VideoDevice2) ExecuteExtensionCommand(pExtensionCommand ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr, pOutputData unsafe.Pointer, OutputDataSizeInBytes uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.ExecuteExtensionCommand(pExtensionCommand.Raw, pExecutionParameters, ExecutionParametersSizeInBytes, pOutputData, OutputDataSizeInBytes)))
 }
 
 // ID3D12VideoDevice3 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoDevice3 with error-returning methods.
@@ -527,8 +530,8 @@ func (self ID3D12VideoEncodeCommandList) Close() error {
 }
 
 // Reset wraps the raw Reset call.
-func (self ID3D12VideoEncodeCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) error {
-	return win32.HRESULTError(int32(self.Raw.Reset(pAllocator)))
+func (self ID3D12VideoEncodeCommandList) Reset(pAllocator graphicsdirect3d12idiom.ID3D12CommandAllocator) error {
+	return win32.HRESULTError(int32(self.Raw.Reset(pAllocator.Raw)))
 }
 
 // ClearState wraps the raw ClearState call.
@@ -542,28 +545,28 @@ func (self ID3D12VideoEncodeCommandList) ResourceBarrier(NumBarriers uint32, pBa
 }
 
 // DiscardResource wraps the raw DiscardResource call.
-func (self ID3D12VideoEncodeCommandList) DiscardResource(pResource *graphicsdirect3d12.ID3D12Resource, pRegion *graphicsdirect3d12.D3D12_DISCARD_REGION) {
-	self.Raw.DiscardResource(pResource, pRegion)
+func (self ID3D12VideoEncodeCommandList) DiscardResource(pResource graphicsdirect3d12idiom.ID3D12Resource, pRegion *graphicsdirect3d12.D3D12_DISCARD_REGION) {
+	self.Raw.DiscardResource(pResource.Raw, pRegion)
 }
 
 // BeginQuery wraps the raw BeginQuery call.
-func (self ID3D12VideoEncodeCommandList) BeginQuery(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
-	self.Raw.BeginQuery(pQueryHeap, Type, Index)
+func (self ID3D12VideoEncodeCommandList) BeginQuery(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
+	self.Raw.BeginQuery(pQueryHeap.Raw, Type, Index)
 }
 
 // EndQuery wraps the raw EndQuery call.
-func (self ID3D12VideoEncodeCommandList) EndQuery(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
-	self.Raw.EndQuery(pQueryHeap, Type, Index)
+func (self ID3D12VideoEncodeCommandList) EndQuery(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
+	self.Raw.EndQuery(pQueryHeap.Raw, Type, Index)
 }
 
 // ResolveQueryData wraps the raw ResolveQueryData call.
-func (self ID3D12VideoEncodeCommandList) ResolveQueryData(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pDestinationBuffer *graphicsdirect3d12.ID3D12Resource, AlignedDestinationBufferOffset uint64) {
-	self.Raw.ResolveQueryData(pQueryHeap, Type, StartIndex, NumQueries, pDestinationBuffer, AlignedDestinationBufferOffset)
+func (self ID3D12VideoEncodeCommandList) ResolveQueryData(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pDestinationBuffer graphicsdirect3d12idiom.ID3D12Resource, AlignedDestinationBufferOffset uint64) {
+	self.Raw.ResolveQueryData(pQueryHeap.Raw, Type, StartIndex, NumQueries, pDestinationBuffer.Raw, AlignedDestinationBufferOffset)
 }
 
 // SetPredication wraps the raw SetPredication call.
-func (self ID3D12VideoEncodeCommandList) SetPredication(pBuffer *graphicsdirect3d12.ID3D12Resource, AlignedBufferOffset uint64, Operation graphicsdirect3d12.D3D12_PREDICATION_OP) {
-	self.Raw.SetPredication(pBuffer, AlignedBufferOffset, Operation)
+func (self ID3D12VideoEncodeCommandList) SetPredication(pBuffer graphicsdirect3d12idiom.ID3D12Resource, AlignedBufferOffset uint64, Operation graphicsdirect3d12.D3D12_PREDICATION_OP) {
+	self.Raw.SetPredication(pBuffer.Raw, AlignedBufferOffset, Operation)
 }
 
 // SetMarker wraps the raw SetMarker call.
@@ -582,8 +585,8 @@ func (self ID3D12VideoEncodeCommandList) EndEvent() {
 }
 
 // EstimateMotion wraps the raw EstimateMotion call.
-func (self ID3D12VideoEncodeCommandList) EstimateMotion(pMotionEstimator *mediamediafoundation.ID3D12VideoMotionEstimator, pOutputArguments *mediamediafoundation.D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT, pInputArguments *mediamediafoundation.D3D12_VIDEO_MOTION_ESTIMATOR_INPUT) {
-	self.Raw.EstimateMotion(pMotionEstimator, pOutputArguments, pInputArguments)
+func (self ID3D12VideoEncodeCommandList) EstimateMotion(pMotionEstimator ID3D12VideoMotionEstimator, pOutputArguments *mediamediafoundation.D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT, pInputArguments *mediamediafoundation.D3D12_VIDEO_MOTION_ESTIMATOR_INPUT) {
+	self.Raw.EstimateMotion(pMotionEstimator.Raw, pOutputArguments, pInputArguments)
 }
 
 // ResolveMotionVectorHeap wraps the raw ResolveMotionVectorHeap call.
@@ -597,8 +600,8 @@ func (self ID3D12VideoEncodeCommandList) WriteBufferImmediate(Count uint32, pPar
 }
 
 // SetProtectedResourceSession wraps the raw SetProtectedResourceSession call.
-func (self ID3D12VideoEncodeCommandList) SetProtectedResourceSession(pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) {
-	self.Raw.SetProtectedResourceSession(pProtectedResourceSession)
+func (self ID3D12VideoEncodeCommandList) SetProtectedResourceSession(pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession) {
+	self.Raw.SetProtectedResourceSession(pProtectedResourceSession.Raw)
 }
 
 // ID3D12VideoEncodeCommandList1 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoEncodeCommandList1 with error-returning methods.
@@ -613,13 +616,13 @@ func WrapID3D12VideoEncodeCommandList1(raw *mediamediafoundation.ID3D12VideoEnco
 }
 
 // InitializeExtensionCommand wraps the raw InitializeExtensionCommand call.
-func (self ID3D12VideoEncodeCommandList1) InitializeExtensionCommand(pExtensionCommand *mediamediafoundation.ID3D12VideoExtensionCommand, pInitializationParameters unsafe.Pointer, InitializationParametersSizeInBytes uintptr) {
-	self.Raw.InitializeExtensionCommand(pExtensionCommand, pInitializationParameters, InitializationParametersSizeInBytes)
+func (self ID3D12VideoEncodeCommandList1) InitializeExtensionCommand(pExtensionCommand ID3D12VideoExtensionCommand, pInitializationParameters unsafe.Pointer, InitializationParametersSizeInBytes uintptr) {
+	self.Raw.InitializeExtensionCommand(pExtensionCommand.Raw, pInitializationParameters, InitializationParametersSizeInBytes)
 }
 
 // ExecuteExtensionCommand wraps the raw ExecuteExtensionCommand call.
-func (self ID3D12VideoEncodeCommandList1) ExecuteExtensionCommand(pExtensionCommand *mediamediafoundation.ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr) {
-	self.Raw.ExecuteExtensionCommand(pExtensionCommand, pExecutionParameters, ExecutionParametersSizeInBytes)
+func (self ID3D12VideoEncodeCommandList1) ExecuteExtensionCommand(pExtensionCommand ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr) {
+	self.Raw.ExecuteExtensionCommand(pExtensionCommand.Raw, pExecutionParameters, ExecutionParametersSizeInBytes)
 }
 
 // ID3D12VideoEncodeCommandList2 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoEncodeCommandList2 with error-returning methods.
@@ -634,8 +637,8 @@ func WrapID3D12VideoEncodeCommandList2(raw *mediamediafoundation.ID3D12VideoEnco
 }
 
 // EncodeFrame wraps the raw EncodeFrame call.
-func (self ID3D12VideoEncodeCommandList2) EncodeFrame(pEncoder *mediamediafoundation.ID3D12VideoEncoder, pHeap *mediamediafoundation.ID3D12VideoEncoderHeap, pInputArguments *mediamediafoundation.D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS, pOutputArguments *mediamediafoundation.D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS) {
-	self.Raw.EncodeFrame(pEncoder, pHeap, pInputArguments, pOutputArguments)
+func (self ID3D12VideoEncodeCommandList2) EncodeFrame(pEncoder ID3D12VideoEncoder, pHeap ID3D12VideoEncoderHeap, pInputArguments *mediamediafoundation.D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS, pOutputArguments *mediamediafoundation.D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS) {
+	self.Raw.EncodeFrame(pEncoder.Raw, pHeap.Raw, pInputArguments, pOutputArguments)
 }
 
 // ResolveEncoderOutputMetadata wraps the raw ResolveEncoderOutputMetadata call.
@@ -671,8 +674,8 @@ func WrapID3D12VideoEncodeCommandList4(raw *mediamediafoundation.ID3D12VideoEnco
 }
 
 // EncodeFrame1 wraps the raw EncodeFrame1 call.
-func (self ID3D12VideoEncodeCommandList4) EncodeFrame1(pEncoder *mediamediafoundation.ID3D12VideoEncoder, pHeap *mediamediafoundation.ID3D12VideoEncoderHeap1, pInputArguments *mediamediafoundation.D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS1, pOutputArguments *mediamediafoundation.D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS1) {
-	self.Raw.EncodeFrame1(pEncoder, pHeap, pInputArguments, pOutputArguments)
+func (self ID3D12VideoEncodeCommandList4) EncodeFrame1(pEncoder ID3D12VideoEncoder, pHeap ID3D12VideoEncoderHeap1, pInputArguments *mediamediafoundation.D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS1, pOutputArguments *mediamediafoundation.D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS1) {
+	self.Raw.EncodeFrame1(pEncoder.Raw, pHeap.Raw, pInputArguments, pOutputArguments)
 }
 
 // ResolveEncoderOutputMetadata1 wraps the raw ResolveEncoderOutputMetadata1 call.
@@ -838,8 +841,8 @@ func (self ID3D12VideoProcessCommandList) Close() error {
 }
 
 // Reset wraps the raw Reset call.
-func (self ID3D12VideoProcessCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) error {
-	return win32.HRESULTError(int32(self.Raw.Reset(pAllocator)))
+func (self ID3D12VideoProcessCommandList) Reset(pAllocator graphicsdirect3d12idiom.ID3D12CommandAllocator) error {
+	return win32.HRESULTError(int32(self.Raw.Reset(pAllocator.Raw)))
 }
 
 // ClearState wraps the raw ClearState call.
@@ -853,28 +856,28 @@ func (self ID3D12VideoProcessCommandList) ResourceBarrier(NumBarriers uint32, pB
 }
 
 // DiscardResource wraps the raw DiscardResource call.
-func (self ID3D12VideoProcessCommandList) DiscardResource(pResource *graphicsdirect3d12.ID3D12Resource, pRegion *graphicsdirect3d12.D3D12_DISCARD_REGION) {
-	self.Raw.DiscardResource(pResource, pRegion)
+func (self ID3D12VideoProcessCommandList) DiscardResource(pResource graphicsdirect3d12idiom.ID3D12Resource, pRegion *graphicsdirect3d12.D3D12_DISCARD_REGION) {
+	self.Raw.DiscardResource(pResource.Raw, pRegion)
 }
 
 // BeginQuery wraps the raw BeginQuery call.
-func (self ID3D12VideoProcessCommandList) BeginQuery(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
-	self.Raw.BeginQuery(pQueryHeap, Type, Index)
+func (self ID3D12VideoProcessCommandList) BeginQuery(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
+	self.Raw.BeginQuery(pQueryHeap.Raw, Type, Index)
 }
 
 // EndQuery wraps the raw EndQuery call.
-func (self ID3D12VideoProcessCommandList) EndQuery(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
-	self.Raw.EndQuery(pQueryHeap, Type, Index)
+func (self ID3D12VideoProcessCommandList) EndQuery(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
+	self.Raw.EndQuery(pQueryHeap.Raw, Type, Index)
 }
 
 // ResolveQueryData wraps the raw ResolveQueryData call.
-func (self ID3D12VideoProcessCommandList) ResolveQueryData(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pDestinationBuffer *graphicsdirect3d12.ID3D12Resource, AlignedDestinationBufferOffset uint64) {
-	self.Raw.ResolveQueryData(pQueryHeap, Type, StartIndex, NumQueries, pDestinationBuffer, AlignedDestinationBufferOffset)
+func (self ID3D12VideoProcessCommandList) ResolveQueryData(pQueryHeap graphicsdirect3d12idiom.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pDestinationBuffer graphicsdirect3d12idiom.ID3D12Resource, AlignedDestinationBufferOffset uint64) {
+	self.Raw.ResolveQueryData(pQueryHeap.Raw, Type, StartIndex, NumQueries, pDestinationBuffer.Raw, AlignedDestinationBufferOffset)
 }
 
 // SetPredication wraps the raw SetPredication call.
-func (self ID3D12VideoProcessCommandList) SetPredication(pBuffer *graphicsdirect3d12.ID3D12Resource, AlignedBufferOffset uint64, Operation graphicsdirect3d12.D3D12_PREDICATION_OP) {
-	self.Raw.SetPredication(pBuffer, AlignedBufferOffset, Operation)
+func (self ID3D12VideoProcessCommandList) SetPredication(pBuffer graphicsdirect3d12idiom.ID3D12Resource, AlignedBufferOffset uint64, Operation graphicsdirect3d12.D3D12_PREDICATION_OP) {
+	self.Raw.SetPredication(pBuffer.Raw, AlignedBufferOffset, Operation)
 }
 
 // SetMarker wraps the raw SetMarker call.
@@ -893,8 +896,8 @@ func (self ID3D12VideoProcessCommandList) EndEvent() {
 }
 
 // ProcessFrames wraps the raw ProcessFrames call.
-func (self ID3D12VideoProcessCommandList) ProcessFrames(pVideoProcessor *mediamediafoundation.ID3D12VideoProcessor, pOutputArguments *mediamediafoundation.D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS, NumInputStreams uint32, pInputArguments *mediamediafoundation.D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS) {
-	self.Raw.ProcessFrames(pVideoProcessor, pOutputArguments, NumInputStreams, pInputArguments)
+func (self ID3D12VideoProcessCommandList) ProcessFrames(pVideoProcessor ID3D12VideoProcessor, pOutputArguments *mediamediafoundation.D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS, NumInputStreams uint32, pInputArguments *mediamediafoundation.D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS) {
+	self.Raw.ProcessFrames(pVideoProcessor.Raw, pOutputArguments, NumInputStreams, pInputArguments)
 }
 
 // WriteBufferImmediate wraps the raw WriteBufferImmediate call.
@@ -914,8 +917,8 @@ func WrapID3D12VideoProcessCommandList1(raw *mediamediafoundation.ID3D12VideoPro
 }
 
 // ProcessFrames1 wraps the raw ProcessFrames1 call.
-func (self ID3D12VideoProcessCommandList1) ProcessFrames1(pVideoProcessor *mediamediafoundation.ID3D12VideoProcessor, pOutputArguments *mediamediafoundation.D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS, NumInputStreams uint32, pInputArguments *mediamediafoundation.D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1) {
-	self.Raw.ProcessFrames1(pVideoProcessor, pOutputArguments, NumInputStreams, pInputArguments)
+func (self ID3D12VideoProcessCommandList1) ProcessFrames1(pVideoProcessor ID3D12VideoProcessor, pOutputArguments *mediamediafoundation.D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS, NumInputStreams uint32, pInputArguments *mediamediafoundation.D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1) {
+	self.Raw.ProcessFrames1(pVideoProcessor.Raw, pOutputArguments, NumInputStreams, pInputArguments)
 }
 
 // ID3D12VideoProcessCommandList2 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoProcessCommandList2 with error-returning methods.
@@ -930,18 +933,18 @@ func WrapID3D12VideoProcessCommandList2(raw *mediamediafoundation.ID3D12VideoPro
 }
 
 // SetProtectedResourceSession wraps the raw SetProtectedResourceSession call.
-func (self ID3D12VideoProcessCommandList2) SetProtectedResourceSession(pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) {
-	self.Raw.SetProtectedResourceSession(pProtectedResourceSession)
+func (self ID3D12VideoProcessCommandList2) SetProtectedResourceSession(pProtectedResourceSession graphicsdirect3d12idiom.ID3D12ProtectedResourceSession) {
+	self.Raw.SetProtectedResourceSession(pProtectedResourceSession.Raw)
 }
 
 // InitializeExtensionCommand wraps the raw InitializeExtensionCommand call.
-func (self ID3D12VideoProcessCommandList2) InitializeExtensionCommand(pExtensionCommand *mediamediafoundation.ID3D12VideoExtensionCommand, pInitializationParameters unsafe.Pointer, InitializationParametersSizeInBytes uintptr) {
-	self.Raw.InitializeExtensionCommand(pExtensionCommand, pInitializationParameters, InitializationParametersSizeInBytes)
+func (self ID3D12VideoProcessCommandList2) InitializeExtensionCommand(pExtensionCommand ID3D12VideoExtensionCommand, pInitializationParameters unsafe.Pointer, InitializationParametersSizeInBytes uintptr) {
+	self.Raw.InitializeExtensionCommand(pExtensionCommand.Raw, pInitializationParameters, InitializationParametersSizeInBytes)
 }
 
 // ExecuteExtensionCommand wraps the raw ExecuteExtensionCommand call.
-func (self ID3D12VideoProcessCommandList2) ExecuteExtensionCommand(pExtensionCommand *mediamediafoundation.ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr) {
-	self.Raw.ExecuteExtensionCommand(pExtensionCommand, pExecutionParameters, ExecutionParametersSizeInBytes)
+func (self ID3D12VideoProcessCommandList2) ExecuteExtensionCommand(pExtensionCommand ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr) {
+	self.Raw.ExecuteExtensionCommand(pExtensionCommand.Raw, pExecutionParameters, ExecutionParametersSizeInBytes)
 }
 
 // ID3D12VideoProcessCommandList3 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.ID3D12VideoProcessCommandList3 with error-returning methods.
@@ -1085,8 +1088,8 @@ func (self IDXVAHD_VideoProcessor) GetVideoProcessStreamState(StreamNumber uint3
 }
 
 // VideoProcessBltHD wraps the raw VideoProcessBltHD call.
-func (self IDXVAHD_VideoProcessor) VideoProcessBltHD(pOutputSurface *graphicsdirect3d9.IDirect3DSurface9, OutputFrame uint32, StreamCount uint32, pStreams *mediamediafoundation.DXVAHD_STREAM_DATA) error {
-	return win32.HRESULTError(int32(self.Raw.VideoProcessBltHD(pOutputSurface, OutputFrame, StreamCount, pStreams)))
+func (self IDXVAHD_VideoProcessor) VideoProcessBltHD(pOutputSurface graphicsdirect3d9idiom.IDirect3DSurface9, OutputFrame uint32, StreamCount uint32, pStreams *mediamediafoundation.DXVAHD_STREAM_DATA) error {
+	return win32.HRESULTError(int32(self.Raw.VideoProcessBltHD(pOutputSurface.Raw, OutputFrame, StreamCount, pStreams)))
 }
 
 // IDirect3D9ExOverlayExtension is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IDirect3D9ExOverlayExtension with error-returning methods.
@@ -1168,18 +1171,18 @@ func (self IDirect3DCryptoSession9) NegotiateKeyExchange(DataSize uint32, pData 
 }
 
 // EncryptionBlt wraps the raw EncryptionBlt call.
-func (self IDirect3DCryptoSession9) EncryptionBlt(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pDstSurface *graphicsdirect3d9.IDirect3DSurface9, DstSurfaceSize uint32, pIV unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.EncryptionBlt(pSrcSurface, pDstSurface, DstSurfaceSize, pIV)))
+func (self IDirect3DCryptoSession9) EncryptionBlt(pSrcSurface graphicsdirect3d9idiom.IDirect3DSurface9, pDstSurface graphicsdirect3d9idiom.IDirect3DSurface9, DstSurfaceSize uint32, pIV unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.EncryptionBlt(pSrcSurface.Raw, pDstSurface.Raw, DstSurfaceSize, pIV)))
 }
 
 // DecryptionBlt wraps the raw DecryptionBlt call.
-func (self IDirect3DCryptoSession9) DecryptionBlt(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pDstSurface *graphicsdirect3d9.IDirect3DSurface9, SrcSurfaceSize uint32, pEncryptedBlockInfo *graphicsdirect3d9.D3DENCRYPTED_BLOCK_INFO, pContentKey unsafe.Pointer, pIV unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.DecryptionBlt(pSrcSurface, pDstSurface, SrcSurfaceSize, pEncryptedBlockInfo, pContentKey, pIV)))
+func (self IDirect3DCryptoSession9) DecryptionBlt(pSrcSurface graphicsdirect3d9idiom.IDirect3DSurface9, pDstSurface graphicsdirect3d9idiom.IDirect3DSurface9, SrcSurfaceSize uint32, pEncryptedBlockInfo *graphicsdirect3d9.D3DENCRYPTED_BLOCK_INFO, pContentKey unsafe.Pointer, pIV unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.DecryptionBlt(pSrcSurface.Raw, pDstSurface.Raw, SrcSurfaceSize, pEncryptedBlockInfo, pContentKey, pIV)))
 }
 
 // GetSurfacePitch wraps the raw GetSurfacePitch call.
-func (self IDirect3DCryptoSession9) GetSurfacePitch(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pSurfacePitch *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetSurfacePitch(pSrcSurface, pSurfacePitch)))
+func (self IDirect3DCryptoSession9) GetSurfacePitch(pSrcSurface graphicsdirect3d9idiom.IDirect3DSurface9, pSurfacePitch *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetSurfacePitch(pSrcSurface.Raw, pSurfacePitch)))
 }
 
 // StartSessionKeyRefresh wraps the raw StartSessionKeyRefresh call.
@@ -1235,8 +1238,8 @@ func WrapIDirect3DDeviceManager9(raw *mediamediafoundation.IDirect3DDeviceManage
 }
 
 // ResetDevice wraps the raw ResetDevice call.
-func (self IDirect3DDeviceManager9) ResetDevice(pDevice *graphicsdirect3d9.IDirect3DDevice9, resetToken uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ResetDevice(pDevice, resetToken)))
+func (self IDirect3DDeviceManager9) ResetDevice(pDevice graphicsdirect3d9idiom.IDirect3DDevice9, resetToken uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ResetDevice(pDevice.Raw, resetToken)))
 }
 
 // OpenDeviceHandle wraps the raw OpenDeviceHandle call.
@@ -1319,8 +1322,8 @@ func (self IDirectXVideoDecoder) ReleaseBuffer(BufferType uint32) error {
 }
 
 // BeginFrame wraps the raw BeginFrame call.
-func (self IDirectXVideoDecoder) BeginFrame(pRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pvPVPData unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.BeginFrame(pRenderTarget, pvPVPData)))
+func (self IDirectXVideoDecoder) BeginFrame(pRenderTarget graphicsdirect3d9idiom.IDirect3DSurface9, pvPVPData unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.BeginFrame(pRenderTarget.Raw, pvPVPData)))
 }
 
 // EndFrame wraps the raw EndFrame call.
@@ -1422,8 +1425,8 @@ func (self IDirectXVideoProcessor) GetFilterPropertyRange(FilterSetting uint32, 
 }
 
 // VideoProcessBlt wraps the raw VideoProcessBlt call.
-func (self IDirectXVideoProcessor) VideoProcessBlt(pRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pBltParams *mediamediafoundation.DXVA2_VideoProcessBltParams, pSamples *mediamediafoundation.DXVA2_VideoSample, NumSamples uint32, pHandleComplete *foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.VideoProcessBlt(pRenderTarget, pBltParams, pSamples, NumSamples, pHandleComplete)))
+func (self IDirectXVideoProcessor) VideoProcessBlt(pRenderTarget graphicsdirect3d9idiom.IDirect3DSurface9, pBltParams *mediamediafoundation.DXVA2_VideoProcessBltParams, pSamples *mediamediafoundation.DXVA2_VideoSample, NumSamples uint32, pHandleComplete *foundation.HANDLE) error {
+	return win32.HRESULTError(int32(self.Raw.VideoProcessBlt(pRenderTarget.Raw, pBltParams, pSamples, NumSamples, pHandleComplete)))
 }
 
 // IDirectXVideoProcessorService is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IDirectXVideoProcessorService with error-returning methods.
@@ -1590,13 +1593,13 @@ func (self IFileClient) GetObjectDiskSize(pqwSize *uint64) error {
 }
 
 // Write wraps the raw Write call.
-func (self IFileClient) Write(pFio *mediamediafoundation.IFileIo) error {
-	return win32.HRESULTError(int32(self.Raw.Write(pFio)))
+func (self IFileClient) Write(pFio IFileIo) error {
+	return win32.HRESULTError(int32(self.Raw.Write(pFio.Raw)))
 }
 
 // Read wraps the raw Read call.
-func (self IFileClient) Read(pFio *mediamediafoundation.IFileIo) error {
-	return win32.HRESULTError(int32(self.Raw.Read(pFio)))
+func (self IFileClient) Read(pFio IFileIo) error {
+	return win32.HRESULTError(int32(self.Raw.Read(pFio.Raw)))
 }
 
 // IFileIo is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IFileIo with error-returning methods.
@@ -1724,8 +1727,8 @@ func (self IMF2DBuffer2) Lock2DSize(lockFlags mediamediafoundation.MF2DBuffer_Lo
 }
 
 // Copy2DTo wraps the raw Copy2DTo call.
-func (self IMF2DBuffer2) Copy2DTo(pDestBuffer *mediamediafoundation.IMF2DBuffer2) error {
-	return win32.HRESULTError(int32(self.Raw.Copy2DTo(pDestBuffer)))
+func (self IMF2DBuffer2) Copy2DTo(pDestBuffer IMF2DBuffer2) error {
+	return win32.HRESULTError(int32(self.Raw.Copy2DTo(pDestBuffer.Raw)))
 }
 
 // IMFASFContentInfo is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFASFContentInfo with error-returning methods.
@@ -1740,18 +1743,18 @@ func WrapIMFASFContentInfo(raw *mediamediafoundation.IMFASFContentInfo) IMFASFCo
 }
 
 // GetHeaderSize wraps the raw GetHeaderSize call.
-func (self IMFASFContentInfo) GetHeaderSize(pIStartOfContent *mediamediafoundation.IMFMediaBuffer, cbHeaderSize *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetHeaderSize(pIStartOfContent, cbHeaderSize)))
+func (self IMFASFContentInfo) GetHeaderSize(pIStartOfContent IMFMediaBuffer, cbHeaderSize *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.GetHeaderSize(pIStartOfContent.Raw, cbHeaderSize)))
 }
 
 // ParseHeader wraps the raw ParseHeader call.
-func (self IMFASFContentInfo) ParseHeader(pIHeaderBuffer *mediamediafoundation.IMFMediaBuffer, cbOffsetWithinHeader uint64) error {
-	return win32.HRESULTError(int32(self.Raw.ParseHeader(pIHeaderBuffer, cbOffsetWithinHeader)))
+func (self IMFASFContentInfo) ParseHeader(pIHeaderBuffer IMFMediaBuffer, cbOffsetWithinHeader uint64) error {
+	return win32.HRESULTError(int32(self.Raw.ParseHeader(pIHeaderBuffer.Raw, cbOffsetWithinHeader)))
 }
 
 // GenerateHeader wraps the raw GenerateHeader call.
-func (self IMFASFContentInfo) GenerateHeader(pIHeader *mediamediafoundation.IMFMediaBuffer, pcbHeader *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GenerateHeader(pIHeader, pcbHeader)))
+func (self IMFASFContentInfo) GenerateHeader(pIHeader IMFMediaBuffer, pcbHeader *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GenerateHeader(pIHeader.Raw, pcbHeader)))
 }
 
 // GetProfile wraps the raw GetProfile call.
@@ -1760,8 +1763,8 @@ func (self IMFASFContentInfo) GetProfile(ppIProfile **mediamediafoundation.IMFAS
 }
 
 // SetProfile wraps the raw SetProfile call.
-func (self IMFASFContentInfo) SetProfile(pIProfile *mediamediafoundation.IMFASFProfile) error {
-	return win32.HRESULTError(int32(self.Raw.SetProfile(pIProfile)))
+func (self IMFASFContentInfo) SetProfile(pIProfile IMFASFProfile) error {
+	return win32.HRESULTError(int32(self.Raw.SetProfile(pIProfile.Raw)))
 }
 
 // GeneratePresentationDescriptor wraps the raw GeneratePresentationDescriptor call.
@@ -1796,13 +1799,13 @@ func (self IMFASFIndexer) GetFlags(pdwFlags *uint32) error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IMFASFIndexer) Initialize(pIContentInfo *mediamediafoundation.IMFASFContentInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIContentInfo)))
+func (self IMFASFIndexer) Initialize(pIContentInfo IMFASFContentInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIContentInfo.Raw)))
 }
 
 // GetIndexPosition wraps the raw GetIndexPosition call.
-func (self IMFASFIndexer) GetIndexPosition(pIContentInfo *mediamediafoundation.IMFASFContentInfo, pcbIndexOffset *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetIndexPosition(pIContentInfo, pcbIndexOffset)))
+func (self IMFASFIndexer) GetIndexPosition(pIContentInfo IMFASFContentInfo, pcbIndexOffset *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.GetIndexPosition(pIContentInfo.Raw, pcbIndexOffset)))
 }
 
 // SetIndexByteStreams wraps the raw SetIndexByteStreams call.
@@ -1832,13 +1835,13 @@ func (self IMFASFIndexer) GetSeekPositionForValue(pvarValue *systemcomstructured
 }
 
 // GenerateIndexEntries wraps the raw GenerateIndexEntries call.
-func (self IMFASFIndexer) GenerateIndexEntries(pIASFPacketSample *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.GenerateIndexEntries(pIASFPacketSample)))
+func (self IMFASFIndexer) GenerateIndexEntries(pIASFPacketSample IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.GenerateIndexEntries(pIASFPacketSample.Raw)))
 }
 
 // CommitIndex wraps the raw CommitIndex call.
-func (self IMFASFIndexer) CommitIndex(pIContentInfo *mediamediafoundation.IMFASFContentInfo) error {
-	return win32.HRESULTError(int32(self.Raw.CommitIndex(pIContentInfo)))
+func (self IMFASFIndexer) CommitIndex(pIContentInfo IMFASFContentInfo) error {
+	return win32.HRESULTError(int32(self.Raw.CommitIndex(pIContentInfo.Raw)))
 }
 
 // GetIndexWriteSpace wraps the raw GetIndexWriteSpace call.
@@ -1847,8 +1850,8 @@ func (self IMFASFIndexer) GetIndexWriteSpace(pcbIndexWriteSpace *uint64) error {
 }
 
 // GetCompletedIndex wraps the raw GetCompletedIndex call.
-func (self IMFASFIndexer) GetCompletedIndex(pIIndexBuffer *mediamediafoundation.IMFMediaBuffer, cbOffsetWithinIndex uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetCompletedIndex(pIIndexBuffer, cbOffsetWithinIndex)))
+func (self IMFASFIndexer) GetCompletedIndex(pIIndexBuffer IMFMediaBuffer, cbOffsetWithinIndex uint64) error {
+	return win32.HRESULTError(int32(self.Raw.GetCompletedIndex(pIIndexBuffer.Raw, cbOffsetWithinIndex)))
 }
 
 // IMFASFMultiplexer is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFASFMultiplexer with error-returning methods.
@@ -1863,8 +1866,8 @@ func WrapIMFASFMultiplexer(raw *mediamediafoundation.IMFASFMultiplexer) IMFASFMu
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IMFASFMultiplexer) Initialize(pIContentInfo *mediamediafoundation.IMFASFContentInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIContentInfo)))
+func (self IMFASFMultiplexer) Initialize(pIContentInfo IMFASFContentInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIContentInfo.Raw)))
 }
 
 // SetFlags wraps the raw SetFlags call.
@@ -1878,8 +1881,8 @@ func (self IMFASFMultiplexer) GetFlags(pdwFlags *uint32) error {
 }
 
 // ProcessSample wraps the raw ProcessSample call.
-func (self IMFASFMultiplexer) ProcessSample(wStreamNumber uint16, pISample *mediamediafoundation.IMFSample, hnsTimestampAdjust int64) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessSample(wStreamNumber, pISample, hnsTimestampAdjust)))
+func (self IMFASFMultiplexer) ProcessSample(wStreamNumber uint16, pISample IMFSample, hnsTimestampAdjust int64) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessSample(wStreamNumber, pISample.Raw, hnsTimestampAdjust)))
 }
 
 // GetNextPacket wraps the raw GetNextPacket call.
@@ -1893,8 +1896,8 @@ func (self IMFASFMultiplexer) Flush() error {
 }
 
 // End wraps the raw End call.
-func (self IMFASFMultiplexer) End(pIContentInfo *mediamediafoundation.IMFASFContentInfo) error {
-	return win32.HRESULTError(int32(self.Raw.End(pIContentInfo)))
+func (self IMFASFMultiplexer) End(pIContentInfo IMFASFContentInfo) error {
+	return win32.HRESULTError(int32(self.Raw.End(pIContentInfo.Raw)))
 }
 
 // GetStatistics wraps the raw GetStatistics call.
@@ -1990,8 +1993,8 @@ func (self IMFASFProfile) GetStreamByNumber(wStreamNumber uint16, ppIStream **me
 }
 
 // SetStream wraps the raw SetStream call.
-func (self IMFASFProfile) SetStream(pIStream *mediamediafoundation.IMFASFStreamConfig) error {
-	return win32.HRESULTError(int32(self.Raw.SetStream(pIStream)))
+func (self IMFASFProfile) SetStream(pIStream IMFASFStreamConfig) error {
+	return win32.HRESULTError(int32(self.Raw.SetStream(pIStream.Raw)))
 }
 
 // RemoveStream wraps the raw RemoveStream call.
@@ -2000,8 +2003,8 @@ func (self IMFASFProfile) RemoveStream(wStreamNumber uint16) error {
 }
 
 // CreateStream wraps the raw CreateStream call.
-func (self IMFASFProfile) CreateStream(pIMediaType *mediamediafoundation.IMFMediaType, ppIStream **mediamediafoundation.IMFASFStreamConfig) error {
-	return win32.HRESULTError(int32(self.Raw.CreateStream(pIMediaType, ppIStream)))
+func (self IMFASFProfile) CreateStream(pIMediaType IMFMediaType, ppIStream **mediamediafoundation.IMFASFStreamConfig) error {
+	return win32.HRESULTError(int32(self.Raw.CreateStream(pIMediaType.Raw, ppIStream)))
 }
 
 // GetMutualExclusionCount wraps the raw GetMutualExclusionCount call.
@@ -2015,8 +2018,8 @@ func (self IMFASFProfile) GetMutualExclusion(dwMutexIndex uint32, ppIMutex **med
 }
 
 // AddMutualExclusion wraps the raw AddMutualExclusion call.
-func (self IMFASFProfile) AddMutualExclusion(pIMutex *mediamediafoundation.IMFASFMutualExclusion) error {
-	return win32.HRESULTError(int32(self.Raw.AddMutualExclusion(pIMutex)))
+func (self IMFASFProfile) AddMutualExclusion(pIMutex IMFASFMutualExclusion) error {
+	return win32.HRESULTError(int32(self.Raw.AddMutualExclusion(pIMutex.Raw)))
 }
 
 // RemoveMutualExclusion wraps the raw RemoveMutualExclusion call.
@@ -2035,8 +2038,8 @@ func (self IMFASFProfile) GetStreamPrioritization(ppIStreamPrioritization **medi
 }
 
 // AddStreamPrioritization wraps the raw AddStreamPrioritization call.
-func (self IMFASFProfile) AddStreamPrioritization(pIStreamPrioritization *mediamediafoundation.IMFASFStreamPrioritization) error {
-	return win32.HRESULTError(int32(self.Raw.AddStreamPrioritization(pIStreamPrioritization)))
+func (self IMFASFProfile) AddStreamPrioritization(pIStreamPrioritization IMFASFStreamPrioritization) error {
+	return win32.HRESULTError(int32(self.Raw.AddStreamPrioritization(pIStreamPrioritization.Raw)))
 }
 
 // RemoveStreamPrioritization wraps the raw RemoveStreamPrioritization call.
@@ -2066,8 +2069,8 @@ func WrapIMFASFSplitter(raw *mediamediafoundation.IMFASFSplitter) IMFASFSplitter
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IMFASFSplitter) Initialize(pIContentInfo *mediamediafoundation.IMFASFContentInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIContentInfo)))
+func (self IMFASFSplitter) Initialize(pIContentInfo IMFASFContentInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIContentInfo.Raw)))
 }
 
 // SetFlags wraps the raw SetFlags call.
@@ -2091,8 +2094,8 @@ func (self IMFASFSplitter) GetSelectedStreams(pwStreamNumbers *uint16, pwNumStre
 }
 
 // ParseData wraps the raw ParseData call.
-func (self IMFASFSplitter) ParseData(pIBuffer *mediamediafoundation.IMFMediaBuffer, cbBufferOffset uint32, cbLength uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ParseData(pIBuffer, cbBufferOffset, cbLength)))
+func (self IMFASFSplitter) ParseData(pIBuffer IMFMediaBuffer, cbBufferOffset uint32, cbLength uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ParseData(pIBuffer.Raw, cbBufferOffset, cbLength)))
 }
 
 // GetNextSample wraps the raw GetNextSample call.
@@ -2142,8 +2145,8 @@ func (self IMFASFStreamConfig) GetMediaType(ppIMediaType **mediamediafoundation.
 }
 
 // SetMediaType wraps the raw SetMediaType call.
-func (self IMFASFStreamConfig) SetMediaType(pIMediaType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.SetMediaType(pIMediaType)))
+func (self IMFASFStreamConfig) SetMediaType(pIMediaType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.SetMediaType(pIMediaType.Raw)))
 }
 
 // GetPayloadExtensionCount wraps the raw GetPayloadExtensionCount call.
@@ -2326,8 +2329,8 @@ func (self IMFAsyncCallback) GetParameters(pdwFlags *uint32, pdwQueue *uint32) e
 }
 
 // Invoke wraps the raw Invoke call.
-func (self IMFAsyncCallback) Invoke(pAsyncResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.Invoke(pAsyncResult)))
+func (self IMFAsyncCallback) Invoke(pAsyncResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.Invoke(pAsyncResult.Raw)))
 }
 
 // IMFAsyncCallbackLogging is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFAsyncCallbackLogging with error-returning methods.
@@ -2414,8 +2417,8 @@ func (self IMFAttributes) CompareItem(guidKey *win32.GUID, Value *systemcomstruc
 }
 
 // Compare wraps the raw Compare call.
-func (self IMFAttributes) Compare(pTheirs *mediamediafoundation.IMFAttributes, MatchType mediamediafoundation.MF_ATTRIBUTES_MATCH_TYPE, pbResult *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Compare(pTheirs, MatchType, pbResult)))
+func (self IMFAttributes) Compare(pTheirs IMFAttributes, MatchType mediamediafoundation.MF_ATTRIBUTES_MATCH_TYPE, pbResult *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Compare(pTheirs.Raw, MatchType, pbResult)))
 }
 
 // GetUINT32 wraps the raw GetUINT32 call.
@@ -2515,8 +2518,8 @@ func (self IMFAttributes) SetBlob(guidKey *win32.GUID, pBuf *byte, cbBufSize uin
 }
 
 // SetUnknown wraps the raw SetUnknown call.
-func (self IMFAttributes) SetUnknown(guidKey *win32.GUID, pUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetUnknown(guidKey, pUnknown)))
+func (self IMFAttributes) SetUnknown(guidKey *win32.GUID, pUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetUnknown(guidKey, pUnknown.Raw)))
 }
 
 // LockStore wraps the raw LockStore call.
@@ -2540,8 +2543,8 @@ func (self IMFAttributes) GetItemByIndex(unIndex uint32, pguidKey *win32.GUID, p
 }
 
 // CopyAllItems wraps the raw CopyAllItems call.
-func (self IMFAttributes) CopyAllItems(pDest *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.CopyAllItems(pDest)))
+func (self IMFAttributes) CopyAllItems(pDest IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.CopyAllItems(pDest.Raw)))
 }
 
 // IMFAudioMediaType is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFAudioMediaType with error-returning methods.
@@ -2702,13 +2705,13 @@ func (self IMFByteStream) Read(pb *byte, cb uint32, pcbRead *uint32) error {
 }
 
 // BeginRead wraps the raw BeginRead call.
-func (self IMFByteStream) BeginRead(pb *byte, cb uint32, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginRead(pb, cb, pCallback, punkState)))
+func (self IMFByteStream) BeginRead(pb *byte, cb uint32, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginRead(pb, cb, pCallback.Raw, punkState.Raw)))
 }
 
 // EndRead wraps the raw EndRead call.
-func (self IMFByteStream) EndRead(pResult *mediamediafoundation.IMFAsyncResult, pcbRead *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.EndRead(pResult, pcbRead)))
+func (self IMFByteStream) EndRead(pResult IMFAsyncResult, pcbRead *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.EndRead(pResult.Raw, pcbRead)))
 }
 
 // Write wraps the raw Write call.
@@ -2717,13 +2720,13 @@ func (self IMFByteStream) Write(pb *byte, cb uint32, pcbWritten *uint32) error {
 }
 
 // BeginWrite wraps the raw BeginWrite call.
-func (self IMFByteStream) BeginWrite(pb *byte, cb uint32, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginWrite(pb, cb, pCallback, punkState)))
+func (self IMFByteStream) BeginWrite(pb *byte, cb uint32, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginWrite(pb, cb, pCallback.Raw, punkState.Raw)))
 }
 
 // EndWrite wraps the raw EndWrite call.
-func (self IMFByteStream) EndWrite(pResult *mediamediafoundation.IMFAsyncResult, pcbWritten *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.EndWrite(pResult, pcbWritten)))
+func (self IMFByteStream) EndWrite(pResult IMFAsyncResult, pcbWritten *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.EndWrite(pResult.Raw, pcbWritten)))
 }
 
 // Seek wraps the raw Seek call.
@@ -2822,19 +2825,19 @@ func WrapIMFByteStreamHandler(raw *mediamediafoundation.IMFByteStreamHandler) IM
 }
 
 // BeginCreateObject wraps the raw BeginCreateObject call.
-func (self IMFByteStreamHandler) BeginCreateObject(pByteStream *mediamediafoundation.IMFByteStream, pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
+func (self IMFByteStreamHandler) BeginCreateObject(pByteStream IMFByteStream, pwszURL string, dwFlags uint32, pProps uishellpropertiessystemidiom.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.BeginCreateObject(pByteStream, foundation.PWSTR(_pwszURL), dwFlags, pProps, ppIUnknownCancelCookie, pCallback, punkState)))
+	return win32.HRESULTError(int32(self.Raw.BeginCreateObject(pByteStream.Raw, foundation.PWSTR(_pwszURL), dwFlags, pProps.Raw, ppIUnknownCancelCookie, pCallback.Raw, punkState.Raw)))
 }
 
 // EndCreateObject wraps the raw EndCreateObject call.
-func (self IMFByteStreamHandler) EndCreateObject(pResult *mediamediafoundation.IMFAsyncResult, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.EndCreateObject(pResult, pObjectType, ppObject)))
+func (self IMFByteStreamHandler) EndCreateObject(pResult IMFAsyncResult, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.EndCreateObject(pResult.Raw, pObjectType, ppObject)))
 }
 
 // CancelObjectCreation wraps the raw CancelObjectCreation call.
-func (self IMFByteStreamHandler) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CancelObjectCreation(pIUnknownCancelCookie)))
+func (self IMFByteStreamHandler) CancelObjectCreation(pIUnknownCancelCookie systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CancelObjectCreation(pIUnknownCancelCookie.Raw)))
 }
 
 // GetMaxNumberOfBytesRequiredForResolution wraps the raw GetMaxNumberOfBytesRequiredForResolution call.
@@ -2854,8 +2857,8 @@ func WrapIMFByteStreamProxyClassFactory(raw *mediamediafoundation.IMFByteStreamP
 }
 
 // CreateByteStreamProxy wraps the raw CreateByteStreamProxy call.
-func (self IMFByteStreamProxyClassFactory) CreateByteStreamProxy(pByteStream *mediamediafoundation.IMFByteStream, pAttributes *mediamediafoundation.IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateByteStreamProxy(pByteStream, pAttributes, riid, ppvObject)))
+func (self IMFByteStreamProxyClassFactory) CreateByteStreamProxy(pByteStream IMFByteStream, pAttributes IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateByteStreamProxy(pByteStream.Raw, pAttributes.Raw, riid, ppvObject)))
 }
 
 // IMFByteStreamTimeSeek is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFByteStreamTimeSeek with error-returning methods.
@@ -2896,13 +2899,13 @@ func WrapIMFCameraConfigurationManager(raw *mediamediafoundation.IMFCameraConfig
 }
 
 // LoadDefaults wraps the raw LoadDefaults call.
-func (self IMFCameraConfigurationManager) LoadDefaults(cameraAttributes *mediamediafoundation.IMFAttributes, configurations **mediamediafoundation.IMFCameraControlDefaultsCollection) error {
-	return win32.HRESULTError(int32(self.Raw.LoadDefaults(cameraAttributes, configurations)))
+func (self IMFCameraConfigurationManager) LoadDefaults(cameraAttributes IMFAttributes, configurations **mediamediafoundation.IMFCameraControlDefaultsCollection) error {
+	return win32.HRESULTError(int32(self.Raw.LoadDefaults(cameraAttributes.Raw, configurations)))
 }
 
 // SaveDefaults wraps the raw SaveDefaults call.
-func (self IMFCameraConfigurationManager) SaveDefaults(configurations *mediamediafoundation.IMFCameraControlDefaultsCollection) error {
-	return win32.HRESULTError(int32(self.Raw.SaveDefaults(configurations)))
+func (self IMFCameraConfigurationManager) SaveDefaults(configurations IMFCameraControlDefaultsCollection) error {
+	return win32.HRESULTError(int32(self.Raw.SaveDefaults(configurations.Raw)))
 }
 
 // Shutdown wraps the raw Shutdown call.
@@ -3083,8 +3086,8 @@ func WrapIMFCameraOcclusionStateReportCallback(raw *mediamediafoundation.IMFCame
 }
 
 // OnOcclusionStateReport wraps the raw OnOcclusionStateReport call.
-func (self IMFCameraOcclusionStateReportCallback) OnOcclusionStateReport(occlusionStateReport *mediamediafoundation.IMFCameraOcclusionStateReport) error {
-	return win32.HRESULTError(int32(self.Raw.OnOcclusionStateReport(occlusionStateReport)))
+func (self IMFCameraOcclusionStateReportCallback) OnOcclusionStateReport(occlusionStateReport IMFCameraOcclusionStateReport) error {
+	return win32.HRESULTError(int32(self.Raw.OnOcclusionStateReport(occlusionStateReport.Raw)))
 }
 
 // IMFCameraSyncObject is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFCameraSyncObject with error-returning methods.
@@ -3120,8 +3123,8 @@ func WrapIMFCaptureEngine(raw *mediamediafoundation.IMFCaptureEngine) IMFCapture
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IMFCaptureEngine) Initialize(pEventCallback *mediamediafoundation.IMFCaptureEngineOnEventCallback, pAttributes *mediamediafoundation.IMFAttributes, pAudioSource *systemcom.IUnknown, pVideoSource *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pEventCallback, pAttributes, pAudioSource, pVideoSource)))
+func (self IMFCaptureEngine) Initialize(pEventCallback IMFCaptureEngineOnEventCallback, pAttributes IMFAttributes, pAudioSource systemcomidiom.IUnknown, pVideoSource systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pEventCallback.Raw, pAttributes.Raw, pAudioSource.Raw, pVideoSource.Raw)))
 }
 
 // StartPreview wraps the raw StartPreview call.
@@ -3189,8 +3192,8 @@ func WrapIMFCaptureEngineOnEventCallback(raw *mediamediafoundation.IMFCaptureEng
 }
 
 // OnEvent wraps the raw OnEvent call.
-func (self IMFCaptureEngineOnEventCallback) OnEvent(pEvent *mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.OnEvent(pEvent)))
+func (self IMFCaptureEngineOnEventCallback) OnEvent(pEvent IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.OnEvent(pEvent.Raw)))
 }
 
 // IMFCaptureEngineOnSampleCallback is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFCaptureEngineOnSampleCallback with error-returning methods.
@@ -3205,8 +3208,8 @@ func WrapIMFCaptureEngineOnSampleCallback(raw *mediamediafoundation.IMFCaptureEn
 }
 
 // OnSample wraps the raw OnSample call.
-func (self IMFCaptureEngineOnSampleCallback) OnSample(pSample *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.OnSample(pSample)))
+func (self IMFCaptureEngineOnSampleCallback) OnSample(pSample IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.OnSample(pSample.Raw)))
 }
 
 // IMFCaptureEngineOnSampleCallback2 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFCaptureEngineOnSampleCallback2 with error-returning methods.
@@ -3221,8 +3224,8 @@ func WrapIMFCaptureEngineOnSampleCallback2(raw *mediamediafoundation.IMFCaptureE
 }
 
 // OnSynchronizedEvent wraps the raw OnSynchronizedEvent call.
-func (self IMFCaptureEngineOnSampleCallback2) OnSynchronizedEvent(pEvent *mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.OnSynchronizedEvent(pEvent)))
+func (self IMFCaptureEngineOnSampleCallback2) OnSynchronizedEvent(pEvent IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.OnSynchronizedEvent(pEvent.Raw)))
 }
 
 // IMFCapturePhotoConfirmation is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFCapturePhotoConfirmation with error-returning methods.
@@ -3237,8 +3240,8 @@ func WrapIMFCapturePhotoConfirmation(raw *mediamediafoundation.IMFCapturePhotoCo
 }
 
 // SetPhotoConfirmationCallback wraps the raw SetPhotoConfirmationCallback call.
-func (self IMFCapturePhotoConfirmation) SetPhotoConfirmationCallback(pNotificationCallback *mediamediafoundation.IMFAsyncCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetPhotoConfirmationCallback(pNotificationCallback)))
+func (self IMFCapturePhotoConfirmation) SetPhotoConfirmationCallback(pNotificationCallback IMFAsyncCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetPhotoConfirmationCallback(pNotificationCallback.Raw)))
 }
 
 // GetPixelFormat wraps the raw GetPixelFormat call.
@@ -3264,13 +3267,13 @@ func (self IMFCapturePhotoSink) SetOutputFileName(fileName string) error {
 }
 
 // SetSampleCallback wraps the raw SetSampleCallback call.
-func (self IMFCapturePhotoSink) SetSampleCallback(pCallback *mediamediafoundation.IMFCaptureEngineOnSampleCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetSampleCallback(pCallback)))
+func (self IMFCapturePhotoSink) SetSampleCallback(pCallback IMFCaptureEngineOnSampleCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetSampleCallback(pCallback.Raw)))
 }
 
 // SetOutputByteStream wraps the raw SetOutputByteStream call.
-func (self IMFCapturePhotoSink) SetOutputByteStream(pByteStream *mediamediafoundation.IMFByteStream) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputByteStream(pByteStream)))
+func (self IMFCapturePhotoSink) SetOutputByteStream(pByteStream IMFByteStream) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputByteStream(pByteStream.Raw)))
 }
 
 // IMFCapturePreviewSink is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFCapturePreviewSink with error-returning methods.
@@ -3290,8 +3293,8 @@ func (self IMFCapturePreviewSink) SetRenderHandle(handle foundation.HANDLE) erro
 }
 
 // SetRenderSurface wraps the raw SetRenderSurface call.
-func (self IMFCapturePreviewSink) SetRenderSurface(pSurface *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetRenderSurface(pSurface)))
+func (self IMFCapturePreviewSink) SetRenderSurface(pSurface systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetRenderSurface(pSurface.Raw)))
 }
 
 // UpdateVideo wraps the raw UpdateVideo call.
@@ -3300,8 +3303,8 @@ func (self IMFCapturePreviewSink) UpdateVideo(pSrc *mediamediafoundation.MFVideo
 }
 
 // SetSampleCallback wraps the raw SetSampleCallback call.
-func (self IMFCapturePreviewSink) SetSampleCallback(dwStreamSinkIndex uint32, pCallback *mediamediafoundation.IMFCaptureEngineOnSampleCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetSampleCallback(dwStreamSinkIndex, pCallback)))
+func (self IMFCapturePreviewSink) SetSampleCallback(dwStreamSinkIndex uint32, pCallback IMFCaptureEngineOnSampleCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetSampleCallback(dwStreamSinkIndex, pCallback.Raw)))
 }
 
 // GetMirrorState wraps the raw GetMirrorState call.
@@ -3326,8 +3329,8 @@ func (self IMFCapturePreviewSink) SetRotation(dwStreamIndex uint32, dwRotationVa
 }
 
 // SetCustomSink wraps the raw SetCustomSink call.
-func (self IMFCapturePreviewSink) SetCustomSink(pMediaSink *mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(self.Raw.SetCustomSink(pMediaSink)))
+func (self IMFCapturePreviewSink) SetCustomSink(pMediaSink IMFMediaSink) error {
+	return win32.HRESULTError(int32(self.Raw.SetCustomSink(pMediaSink.Raw)))
 }
 
 // IMFCaptureRecordSink is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFCaptureRecordSink with error-returning methods.
@@ -3342,8 +3345,8 @@ func WrapIMFCaptureRecordSink(raw *mediamediafoundation.IMFCaptureRecordSink) IM
 }
 
 // SetOutputByteStream wraps the raw SetOutputByteStream call.
-func (self IMFCaptureRecordSink) SetOutputByteStream(pByteStream *mediamediafoundation.IMFByteStream, guidContainerType *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputByteStream(pByteStream, guidContainerType)))
+func (self IMFCaptureRecordSink) SetOutputByteStream(pByteStream IMFByteStream, guidContainerType *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputByteStream(pByteStream.Raw, guidContainerType)))
 }
 
 // SetOutputFileName wraps the raw SetOutputFileName call.
@@ -3353,13 +3356,13 @@ func (self IMFCaptureRecordSink) SetOutputFileName(fileName string) error {
 }
 
 // SetSampleCallback wraps the raw SetSampleCallback call.
-func (self IMFCaptureRecordSink) SetSampleCallback(dwStreamSinkIndex uint32, pCallback *mediamediafoundation.IMFCaptureEngineOnSampleCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetSampleCallback(dwStreamSinkIndex, pCallback)))
+func (self IMFCaptureRecordSink) SetSampleCallback(dwStreamSinkIndex uint32, pCallback IMFCaptureEngineOnSampleCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetSampleCallback(dwStreamSinkIndex, pCallback.Raw)))
 }
 
 // SetCustomSink wraps the raw SetCustomSink call.
-func (self IMFCaptureRecordSink) SetCustomSink(pMediaSink *mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(self.Raw.SetCustomSink(pMediaSink)))
+func (self IMFCaptureRecordSink) SetCustomSink(pMediaSink IMFMediaSink) error {
+	return win32.HRESULTError(int32(self.Raw.SetCustomSink(pMediaSink.Raw)))
 }
 
 // GetRotation wraps the raw GetRotation call.
@@ -3394,8 +3397,8 @@ func (self IMFCaptureSink) GetService(dwSinkStreamIndex uint32, rguidService *wi
 }
 
 // AddStream wraps the raw AddStream call.
-func (self IMFCaptureSink) AddStream(dwSourceStreamIndex uint32, pMediaType *mediamediafoundation.IMFMediaType, pAttributes *mediamediafoundation.IMFAttributes, pdwSinkStreamIndex *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddStream(dwSourceStreamIndex, pMediaType, pAttributes, pdwSinkStreamIndex)))
+func (self IMFCaptureSink) AddStream(dwSourceStreamIndex uint32, pMediaType IMFMediaType, pAttributes IMFAttributes, pdwSinkStreamIndex *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddStream(dwSourceStreamIndex, pMediaType.Raw, pAttributes.Raw, pdwSinkStreamIndex)))
 }
 
 // Prepare wraps the raw Prepare call.
@@ -3420,8 +3423,8 @@ func WrapIMFCaptureSink2(raw *mediamediafoundation.IMFCaptureSink2) IMFCaptureSi
 }
 
 // SetOutputMediaType wraps the raw SetOutputMediaType call.
-func (self IMFCaptureSink2) SetOutputMediaType(dwStreamIndex uint32, pMediaType *mediamediafoundation.IMFMediaType, pEncodingAttributes *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputMediaType(dwStreamIndex, pMediaType, pEncodingAttributes)))
+func (self IMFCaptureSink2) SetOutputMediaType(dwStreamIndex uint32, pMediaType IMFMediaType, pEncodingAttributes IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputMediaType(dwStreamIndex, pMediaType.Raw, pEncodingAttributes.Raw)))
 }
 
 // IMFCaptureSource is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFCaptureSource with error-returning methods.
@@ -3451,13 +3454,13 @@ func (self IMFCaptureSource) GetService(rguidService *win32.GUID, riid *win32.GU
 }
 
 // AddEffect wraps the raw AddEffect call.
-func (self IMFCaptureSource) AddEffect(dwSourceStreamIndex uint32, pUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddEffect(dwSourceStreamIndex, pUnknown)))
+func (self IMFCaptureSource) AddEffect(dwSourceStreamIndex uint32, pUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddEffect(dwSourceStreamIndex, pUnknown.Raw)))
 }
 
 // RemoveEffect wraps the raw RemoveEffect call.
-func (self IMFCaptureSource) RemoveEffect(dwSourceStreamIndex uint32, pUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveEffect(dwSourceStreamIndex, pUnknown)))
+func (self IMFCaptureSource) RemoveEffect(dwSourceStreamIndex uint32, pUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveEffect(dwSourceStreamIndex, pUnknown.Raw)))
 }
 
 // RemoveAllEffects wraps the raw RemoveAllEffects call.
@@ -3471,8 +3474,8 @@ func (self IMFCaptureSource) GetAvailableDeviceMediaType(dwSourceStreamIndex uin
 }
 
 // SetCurrentDeviceMediaType wraps the raw SetCurrentDeviceMediaType call.
-func (self IMFCaptureSource) SetCurrentDeviceMediaType(dwSourceStreamIndex uint32, pMediaType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.SetCurrentDeviceMediaType(dwSourceStreamIndex, pMediaType)))
+func (self IMFCaptureSource) SetCurrentDeviceMediaType(dwSourceStreamIndex uint32, pMediaType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.SetCurrentDeviceMediaType(dwSourceStreamIndex, pMediaType.Raw)))
 }
 
 // GetCurrentDeviceMediaType wraps the raw GetCurrentDeviceMediaType call.
@@ -3575,8 +3578,8 @@ func WrapIMFClockConsumer(raw *mediamediafoundation.IMFClockConsumer) IMFClockCo
 }
 
 // SetPresentationClock wraps the raw SetPresentationClock call.
-func (self IMFClockConsumer) SetPresentationClock(pPresentationClock *mediamediafoundation.IMFPresentationClock) error {
-	return win32.HRESULTError(int32(self.Raw.SetPresentationClock(pPresentationClock)))
+func (self IMFClockConsumer) SetPresentationClock(pPresentationClock IMFPresentationClock) error {
+	return win32.HRESULTError(int32(self.Raw.SetPresentationClock(pPresentationClock.Raw)))
 }
 
 // GetPresentationClock wraps the raw GetPresentationClock call.
@@ -3637,8 +3640,8 @@ func (self IMFCollection) GetElement(dwElementIndex uint32, ppUnkElement **syste
 }
 
 // AddElement wraps the raw AddElement call.
-func (self IMFCollection) AddElement(pUnkElement *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddElement(pUnkElement)))
+func (self IMFCollection) AddElement(pUnkElement systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddElement(pUnkElement.Raw)))
 }
 
 // RemoveElement wraps the raw RemoveElement call.
@@ -3647,8 +3650,8 @@ func (self IMFCollection) RemoveElement(dwElementIndex uint32, ppUnkElement **sy
 }
 
 // InsertElementAt wraps the raw InsertElementAt call.
-func (self IMFCollection) InsertElementAt(dwIndex uint32, pUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.InsertElementAt(dwIndex, pUnknown)))
+func (self IMFCollection) InsertElementAt(dwIndex uint32, pUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.InsertElementAt(dwIndex, pUnknown.Raw)))
 }
 
 // RemoveAllElements wraps the raw RemoveAllElements call.
@@ -3668,8 +3671,8 @@ func WrapIMFContentDecryptionModule(raw *mediamediafoundation.IMFContentDecrypti
 }
 
 // SetContentEnabler wraps the raw SetContentEnabler call.
-func (self IMFContentDecryptionModule) SetContentEnabler(contentEnabler *mediamediafoundation.IMFContentEnabler, result *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.SetContentEnabler(contentEnabler, result)))
+func (self IMFContentDecryptionModule) SetContentEnabler(contentEnabler IMFContentEnabler, result IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.SetContentEnabler(contentEnabler.Raw, result.Raw)))
 }
 
 // GetSuspendNotify wraps the raw GetSuspendNotify call.
@@ -3678,13 +3681,13 @@ func (self IMFContentDecryptionModule) GetSuspendNotify(notify **mediamediafound
 }
 
 // SetPMPHostApp wraps the raw SetPMPHostApp call.
-func (self IMFContentDecryptionModule) SetPMPHostApp(pmpHostApp *mediamediafoundation.IMFPMPHostApp) error {
-	return win32.HRESULTError(int32(self.Raw.SetPMPHostApp(pmpHostApp)))
+func (self IMFContentDecryptionModule) SetPMPHostApp(pmpHostApp IMFPMPHostApp) error {
+	return win32.HRESULTError(int32(self.Raw.SetPMPHostApp(pmpHostApp.Raw)))
 }
 
 // CreateSession wraps the raw CreateSession call.
-func (self IMFContentDecryptionModule) CreateSession(sessionType mediamediafoundation.MF_MEDIAKEYSESSION_TYPE, callbacks *mediamediafoundation.IMFContentDecryptionModuleSessionCallbacks, session **mediamediafoundation.IMFContentDecryptionModuleSession) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSession(sessionType, callbacks, session)))
+func (self IMFContentDecryptionModule) CreateSession(sessionType mediamediafoundation.MF_MEDIAKEYSESSION_TYPE, callbacks IMFContentDecryptionModuleSessionCallbacks, session **mediamediafoundation.IMFContentDecryptionModuleSession) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSession(sessionType, callbacks.Raw, session)))
 }
 
 // SetServerCertificate wraps the raw SetServerCertificate call.
@@ -3714,8 +3717,8 @@ func WrapIMFContentDecryptionModuleAccess(raw *mediamediafoundation.IMFContentDe
 }
 
 // CreateContentDecryptionModule wraps the raw CreateContentDecryptionModule call.
-func (self IMFContentDecryptionModuleAccess) CreateContentDecryptionModule(contentDecryptionModuleProperties *uishellpropertiessystem.IPropertyStore, contentDecryptionModule **mediamediafoundation.IMFContentDecryptionModule) error {
-	return win32.HRESULTError(int32(self.Raw.CreateContentDecryptionModule(contentDecryptionModuleProperties, contentDecryptionModule)))
+func (self IMFContentDecryptionModuleAccess) CreateContentDecryptionModule(contentDecryptionModuleProperties uishellpropertiessystemidiom.IPropertyStore, contentDecryptionModule **mediamediafoundation.IMFContentDecryptionModule) error {
+	return win32.HRESULTError(int32(self.Raw.CreateContentDecryptionModule(contentDecryptionModuleProperties.Raw, contentDecryptionModule)))
 }
 
 // GetConfiguration wraps the raw GetConfiguration call.
@@ -3922,13 +3925,13 @@ func WrapIMFContentProtectionManager(raw *mediamediafoundation.IMFContentProtect
 }
 
 // BeginEnableContent wraps the raw BeginEnableContent call.
-func (self IMFContentProtectionManager) BeginEnableContent(pEnablerActivate *mediamediafoundation.IMFActivate, pTopo *mediamediafoundation.IMFTopology, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginEnableContent(pEnablerActivate, pTopo, pCallback, punkState)))
+func (self IMFContentProtectionManager) BeginEnableContent(pEnablerActivate IMFActivate, pTopo IMFTopology, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginEnableContent(pEnablerActivate.Raw, pTopo.Raw, pCallback.Raw, punkState.Raw)))
 }
 
 // EndEnableContent wraps the raw EndEnableContent call.
-func (self IMFContentProtectionManager) EndEnableContent(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndEnableContent(pResult)))
+func (self IMFContentProtectionManager) EndEnableContent(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndEnableContent(pResult.Raw)))
 }
 
 // IMFD3D12SynchronizationObject is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFD3D12SynchronizationObject with error-returning methods.
@@ -3964,13 +3967,13 @@ func WrapIMFD3D12SynchronizationObjectCommands(raw *mediamediafoundation.IMFD3D1
 }
 
 // EnqueueResourceReady wraps the raw EnqueueResourceReady call.
-func (self IMFD3D12SynchronizationObjectCommands) EnqueueResourceReady(pProducerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
-	return win32.HRESULTError(int32(self.Raw.EnqueueResourceReady(pProducerCommandQueue)))
+func (self IMFD3D12SynchronizationObjectCommands) EnqueueResourceReady(pProducerCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue) error {
+	return win32.HRESULTError(int32(self.Raw.EnqueueResourceReady(pProducerCommandQueue.Raw)))
 }
 
 // EnqueueResourceReadyWait wraps the raw EnqueueResourceReadyWait call.
-func (self IMFD3D12SynchronizationObjectCommands) EnqueueResourceReadyWait(pConsumerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
-	return win32.HRESULTError(int32(self.Raw.EnqueueResourceReadyWait(pConsumerCommandQueue)))
+func (self IMFD3D12SynchronizationObjectCommands) EnqueueResourceReadyWait(pConsumerCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue) error {
+	return win32.HRESULTError(int32(self.Raw.EnqueueResourceReadyWait(pConsumerCommandQueue.Raw)))
 }
 
 // SignalEventOnResourceReady wraps the raw SignalEventOnResourceReady call.
@@ -3979,8 +3982,8 @@ func (self IMFD3D12SynchronizationObjectCommands) SignalEventOnResourceReady(hEv
 }
 
 // EnqueueResourceRelease wraps the raw EnqueueResourceRelease call.
-func (self IMFD3D12SynchronizationObjectCommands) EnqueueResourceRelease(pConsumerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
-	return win32.HRESULTError(int32(self.Raw.EnqueueResourceRelease(pConsumerCommandQueue)))
+func (self IMFD3D12SynchronizationObjectCommands) EnqueueResourceRelease(pConsumerCommandQueue graphicsdirect3d12idiom.ID3D12CommandQueue) error {
+	return win32.HRESULTError(int32(self.Raw.EnqueueResourceRelease(pConsumerCommandQueue.Raw)))
 }
 
 // IMFDLNASinkInit is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFDLNASinkInit with error-returning methods.
@@ -3995,9 +3998,9 @@ func WrapIMFDLNASinkInit(raw *mediamediafoundation.IMFDLNASinkInit) IMFDLNASinkI
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IMFDLNASinkInit) Initialize(pByteStream *mediamediafoundation.IMFByteStream, fPal bool) error {
+func (self IMFDLNASinkInit) Initialize(pByteStream IMFByteStream, fPal bool) error {
 	_fPal := foundation.BOOL(win32.Bool32(fPal))
-	return win32.HRESULTError(int32(self.Raw.Initialize(pByteStream, _fPal)))
+	return win32.HRESULTError(int32(self.Raw.Initialize(pByteStream.Raw, _fPal)))
 }
 
 // IMFDRMNetHelper is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFDRMNetHelper with error-returning methods.
@@ -4048,8 +4051,8 @@ func (self IMFDXGIBuffer) GetUnknown(guid *win32.GUID, riid *win32.GUID, ppvObje
 }
 
 // SetUnknown wraps the raw SetUnknown call.
-func (self IMFDXGIBuffer) SetUnknown(guid *win32.GUID, pUnkData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetUnknown(guid, pUnkData)))
+func (self IMFDXGIBuffer) SetUnknown(guid *win32.GUID, pUnkData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetUnknown(guid, pUnkData.Raw)))
 }
 
 // IMFDXGICrossAdapterBuffer is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFDXGICrossAdapterBuffer with error-returning methods.
@@ -4064,23 +4067,23 @@ func WrapIMFDXGICrossAdapterBuffer(raw *mediamediafoundation.IMFDXGICrossAdapter
 }
 
 // GetResourceForDevice wraps the raw GetResourceForDevice call.
-func (self IMFDXGICrossAdapterBuffer) GetResourceForDevice(pUnkDevice *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetResourceForDevice(pUnkDevice, riid, ppvObject)))
+func (self IMFDXGICrossAdapterBuffer) GetResourceForDevice(pUnkDevice systemcomidiom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetResourceForDevice(pUnkDevice.Raw, riid, ppvObject)))
 }
 
 // GetSubresourceIndexForDevice wraps the raw GetSubresourceIndexForDevice call.
-func (self IMFDXGICrossAdapterBuffer) GetSubresourceIndexForDevice(pUnkDevice *systemcom.IUnknown, puSubresource *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetSubresourceIndexForDevice(pUnkDevice, puSubresource)))
+func (self IMFDXGICrossAdapterBuffer) GetSubresourceIndexForDevice(pUnkDevice systemcomidiom.IUnknown, puSubresource *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetSubresourceIndexForDevice(pUnkDevice.Raw, puSubresource)))
 }
 
 // GetUnknownForDevice wraps the raw GetUnknownForDevice call.
-func (self IMFDXGICrossAdapterBuffer) GetUnknownForDevice(pUnkDevice *systemcom.IUnknown, guid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetUnknownForDevice(pUnkDevice, guid, riid, ppvObject)))
+func (self IMFDXGICrossAdapterBuffer) GetUnknownForDevice(pUnkDevice systemcomidiom.IUnknown, guid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetUnknownForDevice(pUnkDevice.Raw, guid, riid, ppvObject)))
 }
 
 // SetUnknownForDevice wraps the raw SetUnknownForDevice call.
-func (self IMFDXGICrossAdapterBuffer) SetUnknownForDevice(pUnkDevice *systemcom.IUnknown, guid *win32.GUID, pUnkData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetUnknownForDevice(pUnkDevice, guid, pUnkData)))
+func (self IMFDXGICrossAdapterBuffer) SetUnknownForDevice(pUnkDevice systemcomidiom.IUnknown, guid *win32.GUID, pUnkData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetUnknownForDevice(pUnkDevice.Raw, guid, pUnkData.Raw)))
 }
 
 // IMFDXGIDeviceManager is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFDXGIDeviceManager with error-returning methods.
@@ -4116,8 +4119,8 @@ func (self IMFDXGIDeviceManager) OpenDeviceHandle(phDevice *foundation.HANDLE) e
 }
 
 // ResetDevice wraps the raw ResetDevice call.
-func (self IMFDXGIDeviceManager) ResetDevice(pUnkDevice *systemcom.IUnknown, resetToken uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ResetDevice(pUnkDevice, resetToken)))
+func (self IMFDXGIDeviceManager) ResetDevice(pUnkDevice systemcomidiom.IUnknown, resetToken uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ResetDevice(pUnkDevice.Raw, resetToken)))
 }
 
 // TestDevice wraps the raw TestDevice call.
@@ -4185,8 +4188,8 @@ func WrapIMFDeviceTransform(raw *mediamediafoundation.IMFDeviceTransform) IMFDev
 }
 
 // InitializeTransform wraps the raw InitializeTransform call.
-func (self IMFDeviceTransform) InitializeTransform(pAttributes *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeTransform(pAttributes)))
+func (self IMFDeviceTransform) InitializeTransform(pAttributes IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeTransform(pAttributes.Raw)))
 }
 
 // GetInputAvailableType wraps the raw GetInputAvailableType call.
@@ -4230,13 +4233,13 @@ func (self IMFDeviceTransform) GetStreamIDs(dwInputIDArraySize uint32, pdwInputS
 }
 
 // ProcessEvent wraps the raw ProcessEvent call.
-func (self IMFDeviceTransform) ProcessEvent(dwInputStreamID uint32, pEvent *mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessEvent(dwInputStreamID, pEvent)))
+func (self IMFDeviceTransform) ProcessEvent(dwInputStreamID uint32, pEvent IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessEvent(dwInputStreamID, pEvent.Raw)))
 }
 
 // ProcessInput wraps the raw ProcessInput call.
-func (self IMFDeviceTransform) ProcessInput(dwInputStreamID uint32, pSample *mediamediafoundation.IMFSample, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessInput(dwInputStreamID, pSample, dwFlags)))
+func (self IMFDeviceTransform) ProcessInput(dwInputStreamID uint32, pSample IMFSample, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessInput(dwInputStreamID, pSample.Raw, dwFlags)))
 }
 
 // ProcessMessage wraps the raw ProcessMessage call.
@@ -4250,8 +4253,8 @@ func (self IMFDeviceTransform) ProcessOutput(dwFlags uint32, cOutputBufferCount 
 }
 
 // SetInputStreamState wraps the raw SetInputStreamState call.
-func (self IMFDeviceTransform) SetInputStreamState(dwStreamID uint32, pMediaType *mediamediafoundation.IMFMediaType, value mediamediafoundation.DeviceStreamState, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputStreamState(dwStreamID, pMediaType, value, dwFlags)))
+func (self IMFDeviceTransform) SetInputStreamState(dwStreamID uint32, pMediaType IMFMediaType, value mediamediafoundation.DeviceStreamState, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputStreamState(dwStreamID, pMediaType.Raw, value, dwFlags)))
 }
 
 // GetInputStreamState wraps the raw GetInputStreamState call.
@@ -4260,8 +4263,8 @@ func (self IMFDeviceTransform) GetInputStreamState(dwStreamID uint32, value *med
 }
 
 // SetOutputStreamState wraps the raw SetOutputStreamState call.
-func (self IMFDeviceTransform) SetOutputStreamState(dwStreamID uint32, pMediaType *mediamediafoundation.IMFMediaType, value mediamediafoundation.DeviceStreamState, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputStreamState(dwStreamID, pMediaType, value, dwFlags)))
+func (self IMFDeviceTransform) SetOutputStreamState(dwStreamID uint32, pMediaType IMFMediaType, value mediamediafoundation.DeviceStreamState, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputStreamState(dwStreamID, pMediaType.Raw, value, dwFlags)))
 }
 
 // GetOutputStreamState wraps the raw GetOutputStreamState call.
@@ -4312,8 +4315,8 @@ func WrapIMFDeviceTransformCallback(raw *mediamediafoundation.IMFDeviceTransform
 }
 
 // OnBufferSent wraps the raw OnBufferSent call.
-func (self IMFDeviceTransformCallback) OnBufferSent(pCallbackAttributes *mediamediafoundation.IMFAttributes, pinId uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnBufferSent(pCallbackAttributes, pinId)))
+func (self IMFDeviceTransformCallback) OnBufferSent(pCallbackAttributes IMFAttributes, pinId uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnBufferSent(pCallbackAttributes.Raw, pinId)))
 }
 
 // IMFExtendedCameraControl is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFExtendedCameraControl with error-returning methods.
@@ -4436,8 +4439,8 @@ func (self IMFExtendedCameraIntrinsics) GetIntrinsicModelByIndex(dwIndex uint32,
 }
 
 // AddIntrinsicModel wraps the raw AddIntrinsicModel call.
-func (self IMFExtendedCameraIntrinsics) AddIntrinsicModel(pIntrinsicModel *mediamediafoundation.IMFExtendedCameraIntrinsicModel) error {
-	return win32.HRESULTError(int32(self.Raw.AddIntrinsicModel(pIntrinsicModel)))
+func (self IMFExtendedCameraIntrinsics) AddIntrinsicModel(pIntrinsicModel IMFExtendedCameraIntrinsicModel) error {
+	return win32.HRESULTError(int32(self.Raw.AddIntrinsicModel(pIntrinsicModel.Raw)))
 }
 
 // IMFExtendedCameraIntrinsicsDistortionModel6KT is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFExtendedCameraIntrinsicsDistortionModel6KT with error-returning methods.
@@ -4510,8 +4513,8 @@ func WrapIMFFaceDetectionTransform(raw *mediamediafoundation.IMFFaceDetectionTra
 }
 
 // SetDetectionCallback wraps the raw SetDetectionCallback call.
-func (self IMFFaceDetectionTransform) SetDetectionCallback(callback *mediamediafoundation.IMFFaceDetectionTransformCallback, callbackToken *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.SetDetectionCallback(callback, callbackToken)))
+func (self IMFFaceDetectionTransform) SetDetectionCallback(callback IMFFaceDetectionTransformCallback, callbackToken *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.SetDetectionCallback(callback.Raw, callbackToken)))
 }
 
 // ClearDetectionCallback wraps the raw ClearDetectionCallback call.
@@ -4547,8 +4550,8 @@ func WrapIMFFieldOfUseMFTUnlock(raw *mediamediafoundation.IMFFieldOfUseMFTUnlock
 }
 
 // Unlock wraps the raw Unlock call.
-func (self IMFFieldOfUseMFTUnlock) Unlock(pUnkMFT *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Unlock(pUnkMFT)))
+func (self IMFFieldOfUseMFTUnlock) Unlock(pUnkMFT systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Unlock(pUnkMFT.Raw)))
 }
 
 // IMFFinalizableMediaSink is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFFinalizableMediaSink with error-returning methods.
@@ -4563,13 +4566,13 @@ func WrapIMFFinalizableMediaSink(raw *mediamediafoundation.IMFFinalizableMediaSi
 }
 
 // BeginFinalize wraps the raw BeginFinalize call.
-func (self IMFFinalizableMediaSink) BeginFinalize(pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginFinalize(pCallback, punkState)))
+func (self IMFFinalizableMediaSink) BeginFinalize(pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginFinalize(pCallback.Raw, punkState.Raw)))
 }
 
 // EndFinalize wraps the raw EndFinalize call.
-func (self IMFFinalizableMediaSink) EndFinalize(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndFinalize(pResult)))
+func (self IMFFinalizableMediaSink) EndFinalize(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndFinalize(pResult.Raw)))
 }
 
 // IMFGetService is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFGetService with error-returning methods.
@@ -4627,33 +4630,33 @@ func (self IMFHttpDownloadRequest) AddHeader(szHeader string) error {
 }
 
 // BeginSendRequest wraps the raw BeginSendRequest call.
-func (self IMFHttpDownloadRequest) BeginSendRequest(pbPayload *byte, cbPayload uint32, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginSendRequest(pbPayload, cbPayload, pCallback, punkState)))
+func (self IMFHttpDownloadRequest) BeginSendRequest(pbPayload *byte, cbPayload uint32, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginSendRequest(pbPayload, cbPayload, pCallback.Raw, punkState.Raw)))
 }
 
 // EndSendRequest wraps the raw EndSendRequest call.
-func (self IMFHttpDownloadRequest) EndSendRequest(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndSendRequest(pResult)))
+func (self IMFHttpDownloadRequest) EndSendRequest(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndSendRequest(pResult.Raw)))
 }
 
 // BeginReceiveResponse wraps the raw BeginReceiveResponse call.
-func (self IMFHttpDownloadRequest) BeginReceiveResponse(pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginReceiveResponse(pCallback, punkState)))
+func (self IMFHttpDownloadRequest) BeginReceiveResponse(pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginReceiveResponse(pCallback.Raw, punkState.Raw)))
 }
 
 // EndReceiveResponse wraps the raw EndReceiveResponse call.
-func (self IMFHttpDownloadRequest) EndReceiveResponse(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndReceiveResponse(pResult)))
+func (self IMFHttpDownloadRequest) EndReceiveResponse(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndReceiveResponse(pResult.Raw)))
 }
 
 // BeginReadPayload wraps the raw BeginReadPayload call.
-func (self IMFHttpDownloadRequest) BeginReadPayload(pb *byte, cb uint32, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginReadPayload(pb, cb, pCallback, punkState)))
+func (self IMFHttpDownloadRequest) BeginReadPayload(pb *byte, cb uint32, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginReadPayload(pb, cb, pCallback.Raw, punkState.Raw)))
 }
 
 // EndReadPayload wraps the raw EndReadPayload call.
-func (self IMFHttpDownloadRequest) EndReadPayload(pResult *mediamediafoundation.IMFAsyncResult, pqwOffset *uint64, pcbRead *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.EndReadPayload(pResult, pqwOffset, pcbRead)))
+func (self IMFHttpDownloadRequest) EndReadPayload(pResult IMFAsyncResult, pqwOffset *uint64, pcbRead *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.EndReadPayload(pResult.Raw, pqwOffset, pcbRead)))
 }
 
 // QueryHeader wraps the raw QueryHeader call.
@@ -4763,8 +4766,8 @@ func WrapIMFImageSharingEngine(raw *mediamediafoundation.IMFImageSharingEngine) 
 }
 
 // SetSource wraps the raw SetSource call.
-func (self IMFImageSharingEngine) SetSource(pStream *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetSource(pStream)))
+func (self IMFImageSharingEngine) SetSource(pStream systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetSource(pStream.Raw)))
 }
 
 // GetDevice wraps the raw GetDevice call.
@@ -4908,8 +4911,8 @@ func (self IMFMediaEngine) SetErrorCode(error_ mediamediafoundation.MF_MEDIA_ENG
 }
 
 // SetSourceElements wraps the raw SetSourceElements call.
-func (self IMFMediaEngine) SetSourceElements(pSrcElements *mediamediafoundation.IMFMediaEngineSrcElements) error {
-	return win32.HRESULTError(int32(self.Raw.SetSourceElements(pSrcElements)))
+func (self IMFMediaEngine) SetSourceElements(pSrcElements IMFMediaEngineSrcElements) error {
+	return win32.HRESULTError(int32(self.Raw.SetSourceElements(pSrcElements.Raw)))
 }
 
 // SetSource wraps the raw SetSource call.
@@ -5051,8 +5054,8 @@ func (self IMFMediaEngine) Shutdown() error {
 }
 
 // TransferVideoFrame wraps the raw TransferVideoFrame call.
-func (self IMFMediaEngine) TransferVideoFrame(pDstSurf *systemcom.IUnknown, pSrc *mediamediafoundation.MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *mediamediafoundation.MFARGB) error {
-	return win32.HRESULTError(int32(self.Raw.TransferVideoFrame(pDstSurf, pSrc, pDst, pBorderClr)))
+func (self IMFMediaEngine) TransferVideoFrame(pDstSurf systemcomidiom.IUnknown, pSrc *mediamediafoundation.MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *mediamediafoundation.MFARGB) error {
+	return win32.HRESULTError(int32(self.Raw.TransferVideoFrame(pDstSurf.Raw, pSrc, pDst, pBorderClr)))
 }
 
 // OnVideoStreamTick wraps the raw OnVideoStreamTick call.
@@ -5094,8 +5097,8 @@ func WrapIMFMediaEngineClassFactory(raw *mediamediafoundation.IMFMediaEngineClas
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self IMFMediaEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *mediamediafoundation.IMFAttributes, ppPlayer **mediamediafoundation.IMFMediaEngine) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(dwFlags, pAttr, ppPlayer)))
+func (self IMFMediaEngineClassFactory) CreateInstance(dwFlags uint32, pAttr IMFAttributes, ppPlayer **mediamediafoundation.IMFMediaEngine) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(dwFlags, pAttr.Raw, ppPlayer)))
 }
 
 // CreateTimeRange wraps the raw CreateTimeRange call.
@@ -5169,8 +5172,8 @@ func WrapIMFMediaEngineClassFactoryEx(raw *mediamediafoundation.IMFMediaEngineCl
 }
 
 // CreateMediaSourceExtension wraps the raw CreateMediaSourceExtension call.
-func (self IMFMediaEngineClassFactoryEx) CreateMediaSourceExtension(dwFlags uint32, pAttr *mediamediafoundation.IMFAttributes, ppMSE **mediamediafoundation.IMFMediaSourceExtension) error {
-	return win32.HRESULTError(int32(self.Raw.CreateMediaSourceExtension(dwFlags, pAttr, ppMSE)))
+func (self IMFMediaEngineClassFactoryEx) CreateMediaSourceExtension(dwFlags uint32, pAttr IMFAttributes, ppMSE **mediamediafoundation.IMFMediaSourceExtension) error {
+	return win32.HRESULTError(int32(self.Raw.CreateMediaSourceExtension(dwFlags, pAttr.Raw, ppMSE)))
 }
 
 // CreateMediaKeys wraps the raw CreateMediaKeys call.
@@ -5200,8 +5203,8 @@ func (self IMFMediaEngineEME) Get_Keys(keys **mediamediafoundation.IMFMediaKeys)
 }
 
 // SetMediaKeys wraps the raw SetMediaKeys call.
-func (self IMFMediaEngineEME) SetMediaKeys(keys *mediamediafoundation.IMFMediaKeys) error {
-	return win32.HRESULTError(int32(self.Raw.SetMediaKeys(keys)))
+func (self IMFMediaEngineEME) SetMediaKeys(keys IMFMediaKeys) error {
+	return win32.HRESULTError(int32(self.Raw.SetMediaKeys(keys.Raw)))
 }
 
 // IMFMediaEngineEMENotify is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaEngineEMENotify with error-returning methods.
@@ -5237,8 +5240,8 @@ func WrapIMFMediaEngineEx(raw *mediamediafoundation.IMFMediaEngineEx) IMFMediaEn
 }
 
 // SetSourceFromByteStream wraps the raw SetSourceFromByteStream call.
-func (self IMFMediaEngineEx) SetSourceFromByteStream(pByteStream *mediamediafoundation.IMFByteStream, pURL foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.SetSourceFromByteStream(pByteStream, pURL)))
+func (self IMFMediaEngineEx) SetSourceFromByteStream(pByteStream IMFByteStream, pURL foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.SetSourceFromByteStream(pByteStream.Raw, pURL)))
 }
 
 // GetStatistics wraps the raw GetStatistics call.
@@ -5299,15 +5302,15 @@ func (self IMFMediaEngineEx) IsProtected(pProtected *foundation.BOOL) error {
 }
 
 // InsertVideoEffect wraps the raw InsertVideoEffect call.
-func (self IMFMediaEngineEx) InsertVideoEffect(pEffect *systemcom.IUnknown, fOptional bool) error {
+func (self IMFMediaEngineEx) InsertVideoEffect(pEffect systemcomidiom.IUnknown, fOptional bool) error {
 	_fOptional := foundation.BOOL(win32.Bool32(fOptional))
-	return win32.HRESULTError(int32(self.Raw.InsertVideoEffect(pEffect, _fOptional)))
+	return win32.HRESULTError(int32(self.Raw.InsertVideoEffect(pEffect.Raw, _fOptional)))
 }
 
 // InsertAudioEffect wraps the raw InsertAudioEffect call.
-func (self IMFMediaEngineEx) InsertAudioEffect(pEffect *systemcom.IUnknown, fOptional bool) error {
+func (self IMFMediaEngineEx) InsertAudioEffect(pEffect systemcomidiom.IUnknown, fOptional bool) error {
 	_fOptional := foundation.BOOL(win32.Bool32(fOptional))
-	return win32.HRESULTError(int32(self.Raw.InsertAudioEffect(pEffect, _fOptional)))
+	return win32.HRESULTError(int32(self.Raw.InsertAudioEffect(pEffect.Raw, _fOptional)))
 }
 
 // RemoveAllEffects wraps the raw RemoveAllEffects call.
@@ -5422,18 +5425,18 @@ func (self IMFMediaEngineExtension) CanPlayType(AudioOnly bool, MimeType foundat
 }
 
 // BeginCreateObject wraps the raw BeginCreateObject call.
-func (self IMFMediaEngineExtension) BeginCreateObject(bstrURL foundation.BSTR, pByteStream *mediamediafoundation.IMFByteStream, type_ mediamediafoundation.MF_OBJECT_TYPE, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginCreateObject(bstrURL, pByteStream, type_, ppIUnknownCancelCookie, pCallback, punkState)))
+func (self IMFMediaEngineExtension) BeginCreateObject(bstrURL foundation.BSTR, pByteStream IMFByteStream, type_ mediamediafoundation.MF_OBJECT_TYPE, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginCreateObject(bstrURL, pByteStream.Raw, type_, ppIUnknownCancelCookie, pCallback.Raw, punkState.Raw)))
 }
 
 // CancelObjectCreation wraps the raw CancelObjectCreation call.
-func (self IMFMediaEngineExtension) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CancelObjectCreation(pIUnknownCancelCookie)))
+func (self IMFMediaEngineExtension) CancelObjectCreation(pIUnknownCancelCookie systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CancelObjectCreation(pIUnknownCancelCookie.Raw)))
 }
 
 // EndCreateObject wraps the raw EndCreateObject call.
-func (self IMFMediaEngineExtension) EndCreateObject(pResult *mediamediafoundation.IMFAsyncResult, ppObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.EndCreateObject(pResult, ppObject)))
+func (self IMFMediaEngineExtension) EndCreateObject(pResult IMFAsyncResult, ppObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.EndCreateObject(pResult.Raw, ppObject)))
 }
 
 // IMFMediaEngineNeedKeyNotify is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaEngineNeedKeyNotify with error-returning methods.
@@ -5496,8 +5499,8 @@ func WrapIMFMediaEngineProtectedContent(raw *mediamediafoundation.IMFMediaEngine
 }
 
 // ShareResources wraps the raw ShareResources call.
-func (self IMFMediaEngineProtectedContent) ShareResources(pUnkDeviceContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ShareResources(pUnkDeviceContext)))
+func (self IMFMediaEngineProtectedContent) ShareResources(pUnkDeviceContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ShareResources(pUnkDeviceContext.Raw)))
 }
 
 // GetRequiredProtections wraps the raw GetRequiredProtections call.
@@ -5511,13 +5514,13 @@ func (self IMFMediaEngineProtectedContent) SetOPMWindow(hwnd foundation.HWND) er
 }
 
 // TransferVideoFrame wraps the raw TransferVideoFrame call.
-func (self IMFMediaEngineProtectedContent) TransferVideoFrame(pDstSurf *systemcom.IUnknown, pSrc *mediamediafoundation.MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *mediamediafoundation.MFARGB, pFrameProtectionFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.TransferVideoFrame(pDstSurf, pSrc, pDst, pBorderClr, pFrameProtectionFlags)))
+func (self IMFMediaEngineProtectedContent) TransferVideoFrame(pDstSurf systemcomidiom.IUnknown, pSrc *mediamediafoundation.MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *mediamediafoundation.MFARGB, pFrameProtectionFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.TransferVideoFrame(pDstSurf.Raw, pSrc, pDst, pBorderClr, pFrameProtectionFlags)))
 }
 
 // SetContentProtectionManager wraps the raw SetContentProtectionManager call.
-func (self IMFMediaEngineProtectedContent) SetContentProtectionManager(pCPM *mediamediafoundation.IMFContentProtectionManager) error {
-	return win32.HRESULTError(int32(self.Raw.SetContentProtectionManager(pCPM)))
+func (self IMFMediaEngineProtectedContent) SetContentProtectionManager(pCPM IMFContentProtectionManager) error {
+	return win32.HRESULTError(int32(self.Raw.SetContentProtectionManager(pCPM.Raw)))
 }
 
 // SetApplicationCertificate wraps the raw SetApplicationCertificate call.
@@ -5609,8 +5612,8 @@ func (self IMFMediaEngineSupportsSourceTransfer) DetachMediaSource(ppByteStream 
 }
 
 // AttachMediaSource wraps the raw AttachMediaSource call.
-func (self IMFMediaEngineSupportsSourceTransfer) AttachMediaSource(pByteStream *mediamediafoundation.IMFByteStream, pMediaSource *mediamediafoundation.IMFMediaSource, pMSE *mediamediafoundation.IMFMediaSourceExtension) error {
-	return win32.HRESULTError(int32(self.Raw.AttachMediaSource(pByteStream, pMediaSource, pMSE)))
+func (self IMFMediaEngineSupportsSourceTransfer) AttachMediaSource(pByteStream IMFByteStream, pMediaSource IMFMediaSource, pMSE IMFMediaSourceExtension) error {
+	return win32.HRESULTError(int32(self.Raw.AttachMediaSource(pByteStream.Raw, pMediaSource.Raw, pMSE.Raw)))
 }
 
 // IMFMediaEngineTransferSource is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaEngineTransferSource with error-returning methods.
@@ -5625,8 +5628,8 @@ func WrapIMFMediaEngineTransferSource(raw *mediamediafoundation.IMFMediaEngineTr
 }
 
 // TransferSourceToMediaEngine wraps the raw TransferSourceToMediaEngine call.
-func (self IMFMediaEngineTransferSource) TransferSourceToMediaEngine(destination *mediamediafoundation.IMFMediaEngine) error {
-	return win32.HRESULTError(int32(self.Raw.TransferSourceToMediaEngine(destination)))
+func (self IMFMediaEngineTransferSource) TransferSourceToMediaEngine(destination IMFMediaEngine) error {
+	return win32.HRESULTError(int32(self.Raw.TransferSourceToMediaEngine(destination.Raw)))
 }
 
 // IMFMediaEngineWebSupport is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaEngineWebSupport with error-returning methods.
@@ -5734,13 +5737,13 @@ func (self IMFMediaEventGenerator) GetEvent(dwFlags mediamediafoundation.MEDIA_E
 }
 
 // BeginGetEvent wraps the raw BeginGetEvent call.
-func (self IMFMediaEventGenerator) BeginGetEvent(pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginGetEvent(pCallback, punkState)))
+func (self IMFMediaEventGenerator) BeginGetEvent(pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginGetEvent(pCallback.Raw, punkState.Raw)))
 }
 
 // EndGetEvent wraps the raw EndGetEvent call.
-func (self IMFMediaEventGenerator) EndGetEvent(pResult *mediamediafoundation.IMFAsyncResult, ppEvent **mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.EndGetEvent(pResult, ppEvent)))
+func (self IMFMediaEventGenerator) EndGetEvent(pResult IMFAsyncResult, ppEvent **mediamediafoundation.IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.EndGetEvent(pResult.Raw, ppEvent)))
 }
 
 // QueueEvent wraps the raw QueueEvent call.
@@ -5765,18 +5768,18 @@ func (self IMFMediaEventQueue) GetEvent(dwFlags uint32, ppEvent **mediamediafoun
 }
 
 // BeginGetEvent wraps the raw BeginGetEvent call.
-func (self IMFMediaEventQueue) BeginGetEvent(pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginGetEvent(pCallback, punkState)))
+func (self IMFMediaEventQueue) BeginGetEvent(pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginGetEvent(pCallback.Raw, punkState.Raw)))
 }
 
 // EndGetEvent wraps the raw EndGetEvent call.
-func (self IMFMediaEventQueue) EndGetEvent(pResult *mediamediafoundation.IMFAsyncResult, ppEvent **mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.EndGetEvent(pResult, ppEvent)))
+func (self IMFMediaEventQueue) EndGetEvent(pResult IMFAsyncResult, ppEvent **mediamediafoundation.IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.EndGetEvent(pResult.Raw, ppEvent)))
 }
 
 // QueueEvent wraps the raw QueueEvent call.
-func (self IMFMediaEventQueue) QueueEvent(pEvent *mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.QueueEvent(pEvent)))
+func (self IMFMediaEventQueue) QueueEvent(pEvent IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.QueueEvent(pEvent.Raw)))
 }
 
 // QueueEventParamVar wraps the raw QueueEventParamVar call.
@@ -5785,8 +5788,8 @@ func (self IMFMediaEventQueue) QueueEventParamVar(met uint32, guidExtendedType *
 }
 
 // QueueEventParamUnk wraps the raw QueueEventParamUnk call.
-func (self IMFMediaEventQueue) QueueEventParamUnk(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.QueueEventParamUnk(met, guidExtendedType, hrStatus, pUnk)))
+func (self IMFMediaEventQueue) QueueEventParamUnk(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.QueueEventParamUnk(met, guidExtendedType, hrStatus, pUnk.Raw)))
 }
 
 // Shutdown wraps the raw Shutdown call.
@@ -5930,8 +5933,8 @@ func WrapIMFMediaKeySystemAccess(raw *mediamediafoundation.IMFMediaKeySystemAcce
 }
 
 // CreateMediaKeys wraps the raw CreateMediaKeys call.
-func (self IMFMediaKeySystemAccess) CreateMediaKeys(pCdmCustomConfig *uishellpropertiessystem.IPropertyStore, ppKeys **mediamediafoundation.IMFMediaKeys2) error {
-	return win32.HRESULTError(int32(self.Raw.CreateMediaKeys(pCdmCustomConfig, ppKeys)))
+func (self IMFMediaKeySystemAccess) CreateMediaKeys(pCdmCustomConfig uishellpropertiessystemidiom.IPropertyStore, ppKeys **mediamediafoundation.IMFMediaKeys2) error {
+	return win32.HRESULTError(int32(self.Raw.CreateMediaKeys(pCdmCustomConfig.Raw, ppKeys)))
 }
 
 // Get_SupportedConfiguration wraps the raw Get_SupportedConfiguration call.
@@ -5956,8 +5959,8 @@ func WrapIMFMediaKeys(raw *mediamediafoundation.IMFMediaKeys) IMFMediaKeys {
 }
 
 // CreateSession wraps the raw CreateSession call.
-func (self IMFMediaKeys) CreateSession(mimeType foundation.BSTR, initData *byte, cb uint32, customData *byte, cbCustomData uint32, notify *mediamediafoundation.IMFMediaKeySessionNotify, ppSession **mediamediafoundation.IMFMediaKeySession) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSession(mimeType, initData, cb, customData, cbCustomData, notify, ppSession)))
+func (self IMFMediaKeys) CreateSession(mimeType foundation.BSTR, initData *byte, cb uint32, customData *byte, cbCustomData uint32, notify IMFMediaKeySessionNotify, ppSession **mediamediafoundation.IMFMediaKeySession) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSession(mimeType, initData, cb, customData, cbCustomData, notify.Raw, ppSession)))
 }
 
 // Get_KeySystem wraps the raw Get_KeySystem call.
@@ -5987,8 +5990,8 @@ func WrapIMFMediaKeys2(raw *mediamediafoundation.IMFMediaKeys2) IMFMediaKeys2 {
 }
 
 // CreateSession2 wraps the raw CreateSession2 call.
-func (self IMFMediaKeys2) CreateSession2(eSessionType mediamediafoundation.MF_MEDIAKEYSESSION_TYPE, pMFMediaKeySessionNotify2 *mediamediafoundation.IMFMediaKeySessionNotify2, ppSession **mediamediafoundation.IMFMediaKeySession2) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSession2(eSessionType, pMFMediaKeySessionNotify2, ppSession)))
+func (self IMFMediaKeys2) CreateSession2(eSessionType mediamediafoundation.MF_MEDIAKEYSESSION_TYPE, pMFMediaKeySessionNotify2 IMFMediaKeySessionNotify2, ppSession **mediamediafoundation.IMFMediaKeySession2) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSession2(eSessionType, pMFMediaKeySessionNotify2.Raw, ppSession)))
 }
 
 // SetServerCertificate wraps the raw SetServerCertificate call.
@@ -6013,8 +6016,8 @@ func WrapIMFMediaSession(raw *mediamediafoundation.IMFMediaSession) IMFMediaSess
 }
 
 // SetTopology wraps the raw SetTopology call.
-func (self IMFMediaSession) SetTopology(dwSetTopologyFlags uint32, pTopology *mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(self.Raw.SetTopology(dwSetTopologyFlags, pTopology)))
+func (self IMFMediaSession) SetTopology(dwSetTopologyFlags uint32, pTopology IMFTopology) error {
+	return win32.HRESULTError(int32(self.Raw.SetTopology(dwSetTopologyFlags, pTopology.Raw)))
 }
 
 // ClearTopologies wraps the raw ClearTopologies call.
@@ -6090,8 +6093,8 @@ func WrapIMFMediaSharingEngineClassFactory(raw *mediamediafoundation.IMFMediaSha
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self IMFMediaSharingEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *mediamediafoundation.IMFAttributes, ppEngine **mediamediafoundation.IMFMediaSharingEngine) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(dwFlags, pAttr, ppEngine)))
+func (self IMFMediaSharingEngineClassFactory) CreateInstance(dwFlags uint32, pAttr IMFAttributes, ppEngine **mediamediafoundation.IMFMediaSharingEngine) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(dwFlags, pAttr.Raw, ppEngine)))
 }
 
 // IMFMediaSink is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaSink with error-returning methods.
@@ -6111,8 +6114,8 @@ func (self IMFMediaSink) GetCharacteristics(pdwCharacteristics *uint32) error {
 }
 
 // AddStreamSink wraps the raw AddStreamSink call.
-func (self IMFMediaSink) AddStreamSink(dwStreamSinkIdentifier uint32, pMediaType *mediamediafoundation.IMFMediaType, ppStreamSink **mediamediafoundation.IMFStreamSink) error {
-	return win32.HRESULTError(int32(self.Raw.AddStreamSink(dwStreamSinkIdentifier, pMediaType, ppStreamSink)))
+func (self IMFMediaSink) AddStreamSink(dwStreamSinkIdentifier uint32, pMediaType IMFMediaType, ppStreamSink **mediamediafoundation.IMFStreamSink) error {
+	return win32.HRESULTError(int32(self.Raw.AddStreamSink(dwStreamSinkIdentifier, pMediaType.Raw, ppStreamSink)))
 }
 
 // RemoveStreamSink wraps the raw RemoveStreamSink call.
@@ -6136,8 +6139,8 @@ func (self IMFMediaSink) GetStreamSinkById(dwStreamSinkIdentifier uint32, ppStre
 }
 
 // SetPresentationClock wraps the raw SetPresentationClock call.
-func (self IMFMediaSink) SetPresentationClock(pPresentationClock *mediamediafoundation.IMFPresentationClock) error {
-	return win32.HRESULTError(int32(self.Raw.SetPresentationClock(pPresentationClock)))
+func (self IMFMediaSink) SetPresentationClock(pPresentationClock IMFPresentationClock) error {
+	return win32.HRESULTError(int32(self.Raw.SetPresentationClock(pPresentationClock.Raw)))
 }
 
 // GetPresentationClock wraps the raw GetPresentationClock call.
@@ -6188,8 +6191,8 @@ func (self IMFMediaSource) CreatePresentationDescriptor(ppPresentationDescriptor
 }
 
 // Start wraps the raw Start call.
-func (self IMFMediaSource) Start(pPresentationDescriptor *mediamediafoundation.IMFPresentationDescriptor, pguidTimeFormat *win32.GUID, pvarStartPosition *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Start(pPresentationDescriptor, pguidTimeFormat, pvarStartPosition)))
+func (self IMFMediaSource) Start(pPresentationDescriptor IMFPresentationDescriptor, pguidTimeFormat *win32.GUID, pvarStartPosition *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.Start(pPresentationDescriptor.Raw, pguidTimeFormat, pvarStartPosition)))
 }
 
 // Stop wraps the raw Stop call.
@@ -6219,8 +6222,8 @@ func WrapIMFMediaSource2(raw *mediamediafoundation.IMFMediaSource2) IMFMediaSour
 }
 
 // SetMediaType wraps the raw SetMediaType call.
-func (self IMFMediaSource2) SetMediaType(dwStreamID uint32, pMediaType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.SetMediaType(dwStreamID, pMediaType)))
+func (self IMFMediaSource2) SetMediaType(dwStreamID uint32, pMediaType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.SetMediaType(dwStreamID, pMediaType.Raw)))
 }
 
 // IMFMediaSourceEx is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaSourceEx with error-returning methods.
@@ -6245,8 +6248,8 @@ func (self IMFMediaSourceEx) GetStreamAttributes(dwStreamIdentifier uint32, ppAt
 }
 
 // SetD3DManager wraps the raw SetD3DManager call.
-func (self IMFMediaSourceEx) SetD3DManager(pManager *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetD3DManager(pManager)))
+func (self IMFMediaSourceEx) SetD3DManager(pManager systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetD3DManager(pManager.Raw)))
 }
 
 // IMFMediaSourceExtension is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaSourceExtension with error-returning methods.
@@ -6276,13 +6279,13 @@ func (self IMFMediaSourceExtension) GetReadyState() mediamediafoundation.MF_MSE_
 }
 
 // AddSourceBuffer wraps the raw AddSourceBuffer call.
-func (self IMFMediaSourceExtension) AddSourceBuffer(type_ foundation.BSTR, pNotify *mediamediafoundation.IMFSourceBufferNotify, ppSourceBuffer **mediamediafoundation.IMFSourceBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.AddSourceBuffer(type_, pNotify, ppSourceBuffer)))
+func (self IMFMediaSourceExtension) AddSourceBuffer(type_ foundation.BSTR, pNotify IMFSourceBufferNotify, ppSourceBuffer **mediamediafoundation.IMFSourceBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.AddSourceBuffer(type_, pNotify.Raw, ppSourceBuffer)))
 }
 
 // RemoveSourceBuffer wraps the raw RemoveSourceBuffer call.
-func (self IMFMediaSourceExtension) RemoveSourceBuffer(pSourceBuffer *mediamediafoundation.IMFSourceBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveSourceBuffer(pSourceBuffer)))
+func (self IMFMediaSourceExtension) RemoveSourceBuffer(pSourceBuffer IMFSourceBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveSourceBuffer(pSourceBuffer.Raw)))
 }
 
 // SetEndOfStream wraps the raw SetEndOfStream call.
@@ -6354,8 +6357,8 @@ func WrapIMFMediaSourcePresentationProvider(raw *mediamediafoundation.IMFMediaSo
 }
 
 // ForceEndOfPresentation wraps the raw ForceEndOfPresentation call.
-func (self IMFMediaSourcePresentationProvider) ForceEndOfPresentation(pPresentationDescriptor *mediamediafoundation.IMFPresentationDescriptor) error {
-	return win32.HRESULTError(int32(self.Raw.ForceEndOfPresentation(pPresentationDescriptor)))
+func (self IMFMediaSourcePresentationProvider) ForceEndOfPresentation(pPresentationDescriptor IMFPresentationDescriptor) error {
+	return win32.HRESULTError(int32(self.Raw.ForceEndOfPresentation(pPresentationDescriptor.Raw)))
 }
 
 // IMFMediaSourceTopologyProvider is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaSourceTopologyProvider with error-returning methods.
@@ -6370,8 +6373,8 @@ func WrapIMFMediaSourceTopologyProvider(raw *mediamediafoundation.IMFMediaSource
 }
 
 // GetMediaSourceTopology wraps the raw GetMediaSourceTopology call.
-func (self IMFMediaSourceTopologyProvider) GetMediaSourceTopology(pPresentationDescriptor *mediamediafoundation.IMFPresentationDescriptor, ppTopology **mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(self.Raw.GetMediaSourceTopology(pPresentationDescriptor, ppTopology)))
+func (self IMFMediaSourceTopologyProvider) GetMediaSourceTopology(pPresentationDescriptor IMFPresentationDescriptor, ppTopology **mediamediafoundation.IMFTopology) error {
+	return win32.HRESULTError(int32(self.Raw.GetMediaSourceTopology(pPresentationDescriptor.Raw, ppTopology)))
 }
 
 // IMFMediaStream is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaStream with error-returning methods.
@@ -6396,8 +6399,8 @@ func (self IMFMediaStream) GetStreamDescriptor(ppStreamDescriptor **mediamediafo
 }
 
 // RequestSample wraps the raw RequestSample call.
-func (self IMFMediaStream) RequestSample(pToken *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RequestSample(pToken)))
+func (self IMFMediaStream) RequestSample(pToken systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RequestSample(pToken.Raw)))
 }
 
 // IMFMediaStream2 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaStream2 with error-returning methods.
@@ -6433,8 +6436,8 @@ func WrapIMFMediaStreamSourceSampleRequest(raw *mediamediafoundation.IMFMediaStr
 }
 
 // SetSample wraps the raw SetSample call.
-func (self IMFMediaStreamSourceSampleRequest) SetSample(value *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.SetSample(value)))
+func (self IMFMediaStreamSourceSampleRequest) SetSample(value IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.SetSample(value.Raw)))
 }
 
 // IMFMediaTimeRange is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaTimeRange with error-returning methods.
@@ -6490,8 +6493,8 @@ func (self IMFMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) error
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IMFMediaType) IsEqual(pIMediaType *mediamediafoundation.IMFMediaType, pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pIMediaType, pdwFlags)))
+func (self IMFMediaType) IsEqual(pIMediaType IMFMediaType, pdwFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pIMediaType.Raw, pdwFlags)))
 }
 
 // IMFMediaTypeHandler is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMediaTypeHandler with error-returning methods.
@@ -6506,8 +6509,8 @@ func WrapIMFMediaTypeHandler(raw *mediamediafoundation.IMFMediaTypeHandler) IMFM
 }
 
 // IsMediaTypeSupported wraps the raw IsMediaTypeSupported call.
-func (self IMFMediaTypeHandler) IsMediaTypeSupported(pMediaType *mediamediafoundation.IMFMediaType, ppMediaType **mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.IsMediaTypeSupported(pMediaType, ppMediaType)))
+func (self IMFMediaTypeHandler) IsMediaTypeSupported(pMediaType IMFMediaType, ppMediaType **mediamediafoundation.IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.IsMediaTypeSupported(pMediaType.Raw, ppMediaType)))
 }
 
 // GetMediaTypeCount wraps the raw GetMediaTypeCount call.
@@ -6521,8 +6524,8 @@ func (self IMFMediaTypeHandler) GetMediaTypeByIndex(dwIndex uint32, ppType **med
 }
 
 // SetCurrentMediaType wraps the raw SetCurrentMediaType call.
-func (self IMFMediaTypeHandler) SetCurrentMediaType(pMediaType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.SetCurrentMediaType(pMediaType)))
+func (self IMFMediaTypeHandler) SetCurrentMediaType(pMediaType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.SetCurrentMediaType(pMediaType.Raw)))
 }
 
 // GetCurrentMediaType wraps the raw GetCurrentMediaType call.
@@ -6597,8 +6600,8 @@ func WrapIMFMetadataProvider(raw *mediamediafoundation.IMFMetadataProvider) IMFM
 }
 
 // GetMFMetadata wraps the raw GetMFMetadata call.
-func (self IMFMetadataProvider) GetMFMetadata(pPresentationDescriptor *mediamediafoundation.IMFPresentationDescriptor, dwStreamIdentifier uint32, dwFlags uint32, ppMFMetadata **mediamediafoundation.IMFMetadata) error {
-	return win32.HRESULTError(int32(self.Raw.GetMFMetadata(pPresentationDescriptor, dwStreamIdentifier, dwFlags, ppMFMetadata)))
+func (self IMFMetadataProvider) GetMFMetadata(pPresentationDescriptor IMFPresentationDescriptor, dwStreamIdentifier uint32, dwFlags uint32, ppMFMetadata **mediamediafoundation.IMFMetadata) error {
+	return win32.HRESULTError(int32(self.Raw.GetMFMetadata(pPresentationDescriptor.Raw, dwStreamIdentifier, dwFlags, ppMFMetadata)))
 }
 
 // IMFMuxStreamAttributesManager is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFMuxStreamAttributesManager with error-returning methods.
@@ -6748,14 +6751,14 @@ func (self IMFNetCredentialCache) GetCredential(pszUrl string, pszRealm string, 
 }
 
 // SetGood wraps the raw SetGood call.
-func (self IMFNetCredentialCache) SetGood(pCred *mediamediafoundation.IMFNetCredential, fGood bool) error {
+func (self IMFNetCredentialCache) SetGood(pCred IMFNetCredential, fGood bool) error {
 	_fGood := foundation.BOOL(win32.Bool32(fGood))
-	return win32.HRESULTError(int32(self.Raw.SetGood(pCred, _fGood)))
+	return win32.HRESULTError(int32(self.Raw.SetGood(pCred.Raw, _fGood)))
 }
 
 // SetUserOptions wraps the raw SetUserOptions call.
-func (self IMFNetCredentialCache) SetUserOptions(pCred *mediamediafoundation.IMFNetCredential, dwOptionsFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetUserOptions(pCred, dwOptionsFlags)))
+func (self IMFNetCredentialCache) SetUserOptions(pCred IMFNetCredential, dwOptionsFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetUserOptions(pCred.Raw, dwOptionsFlags)))
 }
 
 // IMFNetCredentialManager is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFNetCredentialManager with error-returning methods.
@@ -6770,19 +6773,19 @@ func WrapIMFNetCredentialManager(raw *mediamediafoundation.IMFNetCredentialManag
 }
 
 // BeginGetCredentials wraps the raw BeginGetCredentials call.
-func (self IMFNetCredentialManager) BeginGetCredentials(pParam *mediamediafoundation.MFNetCredentialManagerGetParam, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginGetCredentials(pParam, pCallback, pState)))
+func (self IMFNetCredentialManager) BeginGetCredentials(pParam *mediamediafoundation.MFNetCredentialManagerGetParam, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginGetCredentials(pParam, pCallback.Raw, pState.Raw)))
 }
 
 // EndGetCredentials wraps the raw EndGetCredentials call.
-func (self IMFNetCredentialManager) EndGetCredentials(pResult *mediamediafoundation.IMFAsyncResult, ppCred **mediamediafoundation.IMFNetCredential) error {
-	return win32.HRESULTError(int32(self.Raw.EndGetCredentials(pResult, ppCred)))
+func (self IMFNetCredentialManager) EndGetCredentials(pResult IMFAsyncResult, ppCred **mediamediafoundation.IMFNetCredential) error {
+	return win32.HRESULTError(int32(self.Raw.EndGetCredentials(pResult.Raw, ppCred)))
 }
 
 // SetGood wraps the raw SetGood call.
-func (self IMFNetCredentialManager) SetGood(pCred *mediamediafoundation.IMFNetCredential, fGood bool) error {
+func (self IMFNetCredentialManager) SetGood(pCred IMFNetCredential, fGood bool) error {
 	_fGood := foundation.BOOL(win32.Bool32(fGood))
-	return win32.HRESULTError(int32(self.Raw.SetGood(pCred, _fGood)))
+	return win32.HRESULTError(int32(self.Raw.SetGood(pCred.Raw, _fGood)))
 }
 
 // IMFNetCrossOriginSupport is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFNetCrossOriginSupport with error-returning methods.
@@ -6929,8 +6932,8 @@ func WrapIMFObjectReferenceStream(raw *mediamediafoundation.IMFObjectReferenceSt
 }
 
 // SaveReference wraps the raw SaveReference call.
-func (self IMFObjectReferenceStream) SaveReference(riid *win32.GUID, pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SaveReference(riid, pUnk)))
+func (self IMFObjectReferenceStream) SaveReference(riid *win32.GUID, pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SaveReference(riid, pUnk.Raw)))
 }
 
 // LoadReference wraps the raw LoadReference call.
@@ -7018,8 +7021,8 @@ func WrapIMFPMPClient(raw *mediamediafoundation.IMFPMPClient) IMFPMPClient {
 }
 
 // SetPMPHost wraps the raw SetPMPHost call.
-func (self IMFPMPClient) SetPMPHost(pPMPHost *mediamediafoundation.IMFPMPHost) error {
-	return win32.HRESULTError(int32(self.Raw.SetPMPHost(pPMPHost)))
+func (self IMFPMPClient) SetPMPHost(pPMPHost IMFPMPHost) error {
+	return win32.HRESULTError(int32(self.Raw.SetPMPHost(pPMPHost.Raw)))
 }
 
 // IMFPMPClientApp is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFPMPClientApp with error-returning methods.
@@ -7034,8 +7037,8 @@ func WrapIMFPMPClientApp(raw *mediamediafoundation.IMFPMPClientApp) IMFPMPClient
 }
 
 // SetPMPHost wraps the raw SetPMPHost call.
-func (self IMFPMPClientApp) SetPMPHost(pPMPHost *mediamediafoundation.IMFPMPHostApp) error {
-	return win32.HRESULTError(int32(self.Raw.SetPMPHost(pPMPHost)))
+func (self IMFPMPClientApp) SetPMPHost(pPMPHost IMFPMPHostApp) error {
+	return win32.HRESULTError(int32(self.Raw.SetPMPHost(pPMPHost.Raw)))
 }
 
 // IMFPMPHost is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFPMPHost with error-returning methods.
@@ -7060,8 +7063,8 @@ func (self IMFPMPHost) UnlockProcess() error {
 }
 
 // CreateObjectByCLSID wraps the raw CreateObjectByCLSID call.
-func (self IMFPMPHost) CreateObjectByCLSID(clsid *win32.GUID, pStream *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateObjectByCLSID(clsid, pStream, riid, ppv)))
+func (self IMFPMPHost) CreateObjectByCLSID(clsid *win32.GUID, pStream systemcomidiom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateObjectByCLSID(clsid, pStream.Raw, riid, ppv)))
 }
 
 // IMFPMPHostApp is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFPMPHostApp with error-returning methods.
@@ -7086,9 +7089,9 @@ func (self IMFPMPHostApp) UnlockProcess() error {
 }
 
 // ActivateClassById wraps the raw ActivateClassById call.
-func (self IMFPMPHostApp) ActivateClassById(id string, pStream *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self IMFPMPHostApp) ActivateClassById(id string, pStream systemcomidiom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_id := win32.UTF16Ptr(id)
-	return win32.HRESULTError(int32(self.Raw.ActivateClassById(foundation.PWSTR(_id), pStream, riid, ppv)))
+	return win32.HRESULTError(int32(self.Raw.ActivateClassById(foundation.PWSTR(_id), pStream.Raw, riid, ppv)))
 }
 
 // IMFPMPServer is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFPMPServer with error-returning methods.
@@ -7215,8 +7218,8 @@ func (self IMFPMediaItem) GetCharacteristics(pCharacteristics *uint32) error {
 }
 
 // SetStreamSink wraps the raw SetStreamSink call.
-func (self IMFPMediaItem) SetStreamSink(dwStreamIndex uint32, pMediaSink *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetStreamSink(dwStreamIndex, pMediaSink)))
+func (self IMFPMediaItem) SetStreamSink(dwStreamIndex uint32, pMediaSink systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetStreamSink(dwStreamIndex, pMediaSink.Raw)))
 }
 
 // GetMetadata wraps the raw GetMetadata call.
@@ -7294,14 +7297,14 @@ func (self IMFPMediaPlayer) CreateMediaItemFromURL(pwszURL string, fSync bool, d
 }
 
 // CreateMediaItemFromObject wraps the raw CreateMediaItemFromObject call.
-func (self IMFPMediaPlayer) CreateMediaItemFromObject(pIUnknownObj *systemcom.IUnknown, fSync bool, dwUserData uintptr, ppMediaItem **mediamediafoundation.IMFPMediaItem) error {
+func (self IMFPMediaPlayer) CreateMediaItemFromObject(pIUnknownObj systemcomidiom.IUnknown, fSync bool, dwUserData uintptr, ppMediaItem **mediamediafoundation.IMFPMediaItem) error {
 	_fSync := foundation.BOOL(win32.Bool32(fSync))
-	return win32.HRESULTError(int32(self.Raw.CreateMediaItemFromObject(pIUnknownObj, _fSync, dwUserData, ppMediaItem)))
+	return win32.HRESULTError(int32(self.Raw.CreateMediaItemFromObject(pIUnknownObj.Raw, _fSync, dwUserData, ppMediaItem)))
 }
 
 // SetMediaItem wraps the raw SetMediaItem call.
-func (self IMFPMediaPlayer) SetMediaItem(pIMFPMediaItem *mediamediafoundation.IMFPMediaItem) error {
-	return win32.HRESULTError(int32(self.Raw.SetMediaItem(pIMFPMediaItem)))
+func (self IMFPMediaPlayer) SetMediaItem(pIMFPMediaItem IMFPMediaItem) error {
+	return win32.HRESULTError(int32(self.Raw.SetMediaItem(pIMFPMediaItem.Raw)))
 }
 
 // ClearMediaItem wraps the raw ClearMediaItem call.
@@ -7386,14 +7389,14 @@ func (self IMFPMediaPlayer) GetBorderColor(pClr *foundation.COLORREF) error {
 }
 
 // InsertEffect wraps the raw InsertEffect call.
-func (self IMFPMediaPlayer) InsertEffect(pEffect *systemcom.IUnknown, fOptional bool) error {
+func (self IMFPMediaPlayer) InsertEffect(pEffect systemcomidiom.IUnknown, fOptional bool) error {
 	_fOptional := foundation.BOOL(win32.Bool32(fOptional))
-	return win32.HRESULTError(int32(self.Raw.InsertEffect(pEffect, _fOptional)))
+	return win32.HRESULTError(int32(self.Raw.InsertEffect(pEffect.Raw, _fOptional)))
 }
 
 // RemoveEffect wraps the raw RemoveEffect call.
-func (self IMFPMediaPlayer) RemoveEffect(pEffect *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveEffect(pEffect)))
+func (self IMFPMediaPlayer) RemoveEffect(pEffect systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveEffect(pEffect.Raw)))
 }
 
 // RemoveAllEffects wraps the raw RemoveAllEffects call.
@@ -7494,8 +7497,8 @@ func WrapIMFPresentationClock(raw *mediamediafoundation.IMFPresentationClock) IM
 }
 
 // SetTimeSource wraps the raw SetTimeSource call.
-func (self IMFPresentationClock) SetTimeSource(pTimeSource *mediamediafoundation.IMFPresentationTimeSource) error {
-	return win32.HRESULTError(int32(self.Raw.SetTimeSource(pTimeSource)))
+func (self IMFPresentationClock) SetTimeSource(pTimeSource IMFPresentationTimeSource) error {
+	return win32.HRESULTError(int32(self.Raw.SetTimeSource(pTimeSource.Raw)))
 }
 
 // GetTimeSource wraps the raw GetTimeSource call.
@@ -7509,13 +7512,13 @@ func (self IMFPresentationClock) GetTime(phnsClockTime *int64) error {
 }
 
 // AddClockStateSink wraps the raw AddClockStateSink call.
-func (self IMFPresentationClock) AddClockStateSink(pStateSink *mediamediafoundation.IMFClockStateSink) error {
-	return win32.HRESULTError(int32(self.Raw.AddClockStateSink(pStateSink)))
+func (self IMFPresentationClock) AddClockStateSink(pStateSink IMFClockStateSink) error {
+	return win32.HRESULTError(int32(self.Raw.AddClockStateSink(pStateSink.Raw)))
 }
 
 // RemoveClockStateSink wraps the raw RemoveClockStateSink call.
-func (self IMFPresentationClock) RemoveClockStateSink(pStateSink *mediamediafoundation.IMFClockStateSink) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveClockStateSink(pStateSink)))
+func (self IMFPresentationClock) RemoveClockStateSink(pStateSink IMFClockStateSink) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveClockStateSink(pStateSink.Raw)))
 }
 
 // Start wraps the raw Start call.
@@ -7654,8 +7657,8 @@ func WrapIMFQualityAdvise2(raw *mediamediafoundation.IMFQualityAdvise2) IMFQuali
 }
 
 // NotifyQualityEvent wraps the raw NotifyQualityEvent call.
-func (self IMFQualityAdvise2) NotifyQualityEvent(pEvent *mediamediafoundation.IMFMediaEvent, pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyQualityEvent(pEvent, pdwFlags)))
+func (self IMFQualityAdvise2) NotifyQualityEvent(pEvent IMFMediaEvent, pdwFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyQualityEvent(pEvent.Raw, pdwFlags)))
 }
 
 // IMFQualityAdviseLimits is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFQualityAdviseLimits with error-returning methods.
@@ -7691,28 +7694,28 @@ func WrapIMFQualityManager(raw *mediamediafoundation.IMFQualityManager) IMFQuali
 }
 
 // NotifyTopology wraps the raw NotifyTopology call.
-func (self IMFQualityManager) NotifyTopology(pTopology *mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyTopology(pTopology)))
+func (self IMFQualityManager) NotifyTopology(pTopology IMFTopology) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyTopology(pTopology.Raw)))
 }
 
 // NotifyPresentationClock wraps the raw NotifyPresentationClock call.
-func (self IMFQualityManager) NotifyPresentationClock(pClock *mediamediafoundation.IMFPresentationClock) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyPresentationClock(pClock)))
+func (self IMFQualityManager) NotifyPresentationClock(pClock IMFPresentationClock) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyPresentationClock(pClock.Raw)))
 }
 
 // NotifyProcessInput wraps the raw NotifyProcessInput call.
-func (self IMFQualityManager) NotifyProcessInput(pNode *mediamediafoundation.IMFTopologyNode, lInputIndex int32, pSample *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyProcessInput(pNode, lInputIndex, pSample)))
+func (self IMFQualityManager) NotifyProcessInput(pNode IMFTopologyNode, lInputIndex int32, pSample IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyProcessInput(pNode.Raw, lInputIndex, pSample.Raw)))
 }
 
 // NotifyProcessOutput wraps the raw NotifyProcessOutput call.
-func (self IMFQualityManager) NotifyProcessOutput(pNode *mediamediafoundation.IMFTopologyNode, lOutputIndex int32, pSample *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyProcessOutput(pNode, lOutputIndex, pSample)))
+func (self IMFQualityManager) NotifyProcessOutput(pNode IMFTopologyNode, lOutputIndex int32, pSample IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyProcessOutput(pNode.Raw, lOutputIndex, pSample.Raw)))
 }
 
 // NotifyQualityEvent wraps the raw NotifyQualityEvent call.
-func (self IMFQualityManager) NotifyQualityEvent(pObject *systemcom.IUnknown, pEvent *mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyQualityEvent(pObject, pEvent)))
+func (self IMFQualityManager) NotifyQualityEvent(pObject systemcomidiom.IUnknown, pEvent IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyQualityEvent(pObject.Raw, pEvent.Raw)))
 }
 
 // Shutdown wraps the raw Shutdown call.
@@ -7771,14 +7774,14 @@ func WrapIMFReadWriteClassFactory(raw *mediamediafoundation.IMFReadWriteClassFac
 }
 
 // CreateInstanceFromURL wraps the raw CreateInstanceFromURL call.
-func (self IMFReadWriteClassFactory) CreateInstanceFromURL(clsid *win32.GUID, pwszURL string, pAttributes *mediamediafoundation.IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self IMFReadWriteClassFactory) CreateInstanceFromURL(clsid *win32.GUID, pwszURL string, pAttributes IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceFromURL(clsid, foundation.PWSTR(_pwszURL), pAttributes, riid, ppvObject)))
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceFromURL(clsid, foundation.PWSTR(_pwszURL), pAttributes.Raw, riid, ppvObject)))
 }
 
 // CreateInstanceFromObject wraps the raw CreateInstanceFromObject call.
-func (self IMFReadWriteClassFactory) CreateInstanceFromObject(clsid *win32.GUID, punkObject *systemcom.IUnknown, pAttributes *mediamediafoundation.IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceFromObject(clsid, punkObject, pAttributes, riid, ppvObject)))
+func (self IMFReadWriteClassFactory) CreateInstanceFromObject(clsid *win32.GUID, punkObject systemcomidiom.IUnknown, pAttributes IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceFromObject(clsid, punkObject.Raw, pAttributes.Raw, riid, ppvObject)))
 }
 
 // IMFRealTimeClient is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFRealTimeClient with error-returning methods.
@@ -7863,13 +7866,13 @@ func WrapIMFRelativePanelWatcher(raw *mediamediafoundation.IMFRelativePanelWatch
 }
 
 // BeginGetReport wraps the raw BeginGetReport call.
-func (self IMFRelativePanelWatcher) BeginGetReport(pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginGetReport(pCallback, pState)))
+func (self IMFRelativePanelWatcher) BeginGetReport(pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginGetReport(pCallback.Raw, pState.Raw)))
 }
 
 // EndGetReport wraps the raw EndGetReport call.
-func (self IMFRelativePanelWatcher) EndGetReport(pResult *mediamediafoundation.IMFAsyncResult, ppRelativePanelReport **mediamediafoundation.IMFRelativePanelReport) error {
-	return win32.HRESULTError(int32(self.Raw.EndGetReport(pResult, ppRelativePanelReport)))
+func (self IMFRelativePanelWatcher) EndGetReport(pResult IMFAsyncResult, ppRelativePanelReport **mediamediafoundation.IMFRelativePanelReport) error {
+	return win32.HRESULTError(int32(self.Raw.EndGetReport(pResult.Raw, ppRelativePanelReport)))
 }
 
 // GetReport wraps the raw GetReport call.
@@ -7889,8 +7892,8 @@ func WrapIMFRemoteAsyncCallback(raw *mediamediafoundation.IMFRemoteAsyncCallback
 }
 
 // Invoke wraps the raw Invoke call.
-func (self IMFRemoteAsyncCallback) Invoke(hr foundation.HRESULT, pRemoteResult *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Invoke(hr, pRemoteResult)))
+func (self IMFRemoteAsyncCallback) Invoke(hr foundation.HRESULT, pRemoteResult systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Invoke(hr, pRemoteResult.Raw)))
 }
 
 // IMFRemoteDesktopPlugin is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFRemoteDesktopPlugin with error-returning methods.
@@ -7905,8 +7908,8 @@ func WrapIMFRemoteDesktopPlugin(raw *mediamediafoundation.IMFRemoteDesktopPlugin
 }
 
 // UpdateTopology wraps the raw UpdateTopology call.
-func (self IMFRemoteDesktopPlugin) UpdateTopology(pTopology *mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateTopology(pTopology)))
+func (self IMFRemoteDesktopPlugin) UpdateTopology(pTopology IMFTopology) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateTopology(pTopology.Raw)))
 }
 
 // IMFRemoteProxy is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFRemoteProxy with error-returning methods.
@@ -7980,14 +7983,14 @@ func (self IMFSSLCertificateManager) GetClientCertificate(pszURL string, ppbData
 }
 
 // BeginGetClientCertificate wraps the raw BeginGetClientCertificate call.
-func (self IMFSSLCertificateManager) BeginGetClientCertificate(pszURL string, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
+func (self IMFSSLCertificateManager) BeginGetClientCertificate(pszURL string, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
 	_pszURL := win32.UTF16Ptr(pszURL)
-	return win32.HRESULTError(int32(self.Raw.BeginGetClientCertificate(foundation.PWSTR(_pszURL), pCallback, pState)))
+	return win32.HRESULTError(int32(self.Raw.BeginGetClientCertificate(foundation.PWSTR(_pszURL), pCallback.Raw, pState.Raw)))
 }
 
 // EndGetClientCertificate wraps the raw EndGetClientCertificate call.
-func (self IMFSSLCertificateManager) EndGetClientCertificate(pResult *mediamediafoundation.IMFAsyncResult, ppbData **byte, pcbData *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.EndGetClientCertificate(pResult, ppbData, pcbData)))
+func (self IMFSSLCertificateManager) EndGetClientCertificate(pResult IMFAsyncResult, ppbData **byte, pcbData *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.EndGetClientCertificate(pResult.Raw, ppbData, pcbData)))
 }
 
 // GetCertificatePolicy wraps the raw GetCertificatePolicy call.
@@ -8059,8 +8062,8 @@ func (self IMFSample) ConvertToContiguousBuffer(ppBuffer **mediamediafoundation.
 }
 
 // AddBuffer wraps the raw AddBuffer call.
-func (self IMFSample) AddBuffer(pBuffer *mediamediafoundation.IMFMediaBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.AddBuffer(pBuffer)))
+func (self IMFSample) AddBuffer(pBuffer IMFMediaBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.AddBuffer(pBuffer.Raw)))
 }
 
 // RemoveBufferByIndex wraps the raw RemoveBufferByIndex call.
@@ -8079,8 +8082,8 @@ func (self IMFSample) GetTotalLength(pcbTotalLength *uint32) error {
 }
 
 // CopyToBuffer wraps the raw CopyToBuffer call.
-func (self IMFSample) CopyToBuffer(pBuffer *mediamediafoundation.IMFMediaBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.CopyToBuffer(pBuffer)))
+func (self IMFSample) CopyToBuffer(pBuffer IMFMediaBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.CopyToBuffer(pBuffer.Raw)))
 }
 
 // IMFSampleAllocatorControl is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSampleAllocatorControl with error-returning methods.
@@ -8095,8 +8098,8 @@ func WrapIMFSampleAllocatorControl(raw *mediamediafoundation.IMFSampleAllocatorC
 }
 
 // SetDefaultAllocator wraps the raw SetDefaultAllocator call.
-func (self IMFSampleAllocatorControl) SetDefaultAllocator(dwOutputStreamID uint32, pAllocator *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetDefaultAllocator(dwOutputStreamID, pAllocator)))
+func (self IMFSampleAllocatorControl) SetDefaultAllocator(dwOutputStreamID uint32, pAllocator systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetDefaultAllocator(dwOutputStreamID, pAllocator.Raw)))
 }
 
 // GetAllocatorUsage wraps the raw GetAllocatorUsage call.
@@ -8116,8 +8119,8 @@ func WrapIMFSampleGrabberSinkCallback(raw *mediamediafoundation.IMFSampleGrabber
 }
 
 // OnSetPresentationClock wraps the raw OnSetPresentationClock call.
-func (self IMFSampleGrabberSinkCallback) OnSetPresentationClock(pPresentationClock *mediamediafoundation.IMFPresentationClock) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetPresentationClock(pPresentationClock)))
+func (self IMFSampleGrabberSinkCallback) OnSetPresentationClock(pPresentationClock IMFPresentationClock) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetPresentationClock(pPresentationClock.Raw)))
 }
 
 // OnProcessSample wraps the raw OnProcessSample call.
@@ -8142,8 +8145,8 @@ func WrapIMFSampleGrabberSinkCallback2(raw *mediamediafoundation.IMFSampleGrabbe
 }
 
 // OnProcessSampleEx wraps the raw OnProcessSampleEx call.
-func (self IMFSampleGrabberSinkCallback2) OnProcessSampleEx(guidMajorMediaType *win32.GUID, dwSampleFlags uint32, llSampleTime int64, llSampleDuration int64, pSampleBuffer *byte, dwSampleSize uint32, pAttributes *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.OnProcessSampleEx(guidMajorMediaType, dwSampleFlags, llSampleTime, llSampleDuration, pSampleBuffer, dwSampleSize, pAttributes)))
+func (self IMFSampleGrabberSinkCallback2) OnProcessSampleEx(guidMajorMediaType *win32.GUID, dwSampleFlags uint32, llSampleTime int64, llSampleDuration int64, pSampleBuffer *byte, dwSampleSize uint32, pAttributes IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.OnProcessSampleEx(guidMajorMediaType, dwSampleFlags, llSampleTime, llSampleDuration, pSampleBuffer, dwSampleSize, pAttributes.Raw)))
 }
 
 // IMFSampleOutputStream is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSampleOutputStream with error-returning methods.
@@ -8158,13 +8161,13 @@ func WrapIMFSampleOutputStream(raw *mediamediafoundation.IMFSampleOutputStream) 
 }
 
 // BeginWriteSample wraps the raw BeginWriteSample call.
-func (self IMFSampleOutputStream) BeginWriteSample(pSample *mediamediafoundation.IMFSample, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginWriteSample(pSample, pCallback, punkState)))
+func (self IMFSampleOutputStream) BeginWriteSample(pSample IMFSample, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginWriteSample(pSample.Raw, pCallback.Raw, punkState.Raw)))
 }
 
 // EndWriteSample wraps the raw EndWriteSample call.
-func (self IMFSampleOutputStream) EndWriteSample(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndWriteSample(pResult)))
+func (self IMFSampleOutputStream) EndWriteSample(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndWriteSample(pResult.Raw)))
 }
 
 // Close wraps the raw Close call.
@@ -8220,13 +8223,13 @@ func WrapIMFSaveJob(raw *mediamediafoundation.IMFSaveJob) IMFSaveJob {
 }
 
 // BeginSave wraps the raw BeginSave call.
-func (self IMFSaveJob) BeginSave(pStream *mediamediafoundation.IMFByteStream, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginSave(pStream, pCallback, pState)))
+func (self IMFSaveJob) BeginSave(pStream IMFByteStream, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginSave(pStream.Raw, pCallback.Raw, pState.Raw)))
 }
 
 // EndSave wraps the raw EndSave call.
-func (self IMFSaveJob) EndSave(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndSave(pResult)))
+func (self IMFSaveJob) EndSave(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndSave(pResult.Raw)))
 }
 
 // CancelSave wraps the raw CancelSave call.
@@ -8251,19 +8254,19 @@ func WrapIMFSchemeHandler(raw *mediamediafoundation.IMFSchemeHandler) IMFSchemeH
 }
 
 // BeginCreateObject wraps the raw BeginCreateObject call.
-func (self IMFSchemeHandler) BeginCreateObject(pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
+func (self IMFSchemeHandler) BeginCreateObject(pwszURL string, dwFlags uint32, pProps uishellpropertiessystemidiom.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.BeginCreateObject(foundation.PWSTR(_pwszURL), dwFlags, pProps, ppIUnknownCancelCookie, pCallback, punkState)))
+	return win32.HRESULTError(int32(self.Raw.BeginCreateObject(foundation.PWSTR(_pwszURL), dwFlags, pProps.Raw, ppIUnknownCancelCookie, pCallback.Raw, punkState.Raw)))
 }
 
 // EndCreateObject wraps the raw EndCreateObject call.
-func (self IMFSchemeHandler) EndCreateObject(pResult *mediamediafoundation.IMFAsyncResult, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.EndCreateObject(pResult, pObjectType, ppObject)))
+func (self IMFSchemeHandler) EndCreateObject(pResult IMFAsyncResult, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.EndCreateObject(pResult.Raw, pObjectType, ppObject)))
 }
 
 // CancelObjectCreation wraps the raw CancelObjectCreation call.
-func (self IMFSchemeHandler) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CancelObjectCreation(pIUnknownCancelCookie)))
+func (self IMFSchemeHandler) CancelObjectCreation(pIUnknownCancelCookie systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CancelObjectCreation(pIUnknownCancelCookie.Raw)))
 }
 
 // IMFSecureBuffer is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSecureBuffer with error-returning methods.
@@ -8358,8 +8361,8 @@ func WrapIMFSensorActivitiesReportCallback(raw *mediamediafoundation.IMFSensorAc
 }
 
 // OnActivitiesReport wraps the raw OnActivitiesReport call.
-func (self IMFSensorActivitiesReportCallback) OnActivitiesReport(sensorActivitiesReport *mediamediafoundation.IMFSensorActivitiesReport) error {
-	return win32.HRESULTError(int32(self.Raw.OnActivitiesReport(sensorActivitiesReport)))
+func (self IMFSensorActivitiesReportCallback) OnActivitiesReport(sensorActivitiesReport IMFSensorActivitiesReport) error {
+	return win32.HRESULTError(int32(self.Raw.OnActivitiesReport(sensorActivitiesReport.Raw)))
 }
 
 // IMFSensorActivityMonitor is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSensorActivityMonitor with error-returning methods.
@@ -8575,8 +8578,8 @@ func (self IMFSensorProfile) AddProfileFilter(StreamId uint32, wzFilterSetString
 }
 
 // IsMediaTypeSupported wraps the raw IsMediaTypeSupported call.
-func (self IMFSensorProfile) IsMediaTypeSupported(StreamId uint32, pMediaType *mediamediafoundation.IMFMediaType, pfSupported *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsMediaTypeSupported(StreamId, pMediaType, pfSupported)))
+func (self IMFSensorProfile) IsMediaTypeSupported(StreamId uint32, pMediaType IMFMediaType, pfSupported *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsMediaTypeSupported(StreamId, pMediaType.Raw, pfSupported)))
 }
 
 // AddBlockedControl wraps the raw AddBlockedControl call.
@@ -8607,8 +8610,8 @@ func (self IMFSensorProfileCollection) GetProfile(Index uint32, ppProfile **medi
 }
 
 // AddProfile wraps the raw AddProfile call.
-func (self IMFSensorProfileCollection) AddProfile(pProfile *mediamediafoundation.IMFSensorProfile) error {
-	return win32.HRESULTError(int32(self.Raw.AddProfile(pProfile)))
+func (self IMFSensorProfileCollection) AddProfile(pProfile IMFSensorProfile) error {
+	return win32.HRESULTError(int32(self.Raw.AddProfile(pProfile.Raw)))
 }
 
 // FindProfile wraps the raw FindProfile call.
@@ -8669,8 +8672,8 @@ func (self IMFSensorTransformFactory) GetFactoryAttributes(ppAttributes **mediam
 }
 
 // InitializeFactory wraps the raw InitializeFactory call.
-func (self IMFSensorTransformFactory) InitializeFactory(dwMaxTransformCount uint32, pSensorDevices *mediamediafoundation.IMFCollection, pAttributes *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFactory(dwMaxTransformCount, pSensorDevices, pAttributes)))
+func (self IMFSensorTransformFactory) InitializeFactory(dwMaxTransformCount uint32, pSensorDevices IMFCollection, pAttributes IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFactory(dwMaxTransformCount, pSensorDevices.Raw, pAttributes.Raw)))
 }
 
 // GetTransformCount wraps the raw GetTransformCount call.
@@ -8684,8 +8687,8 @@ func (self IMFSensorTransformFactory) GetTransformInformation(TransformIndex uin
 }
 
 // CreateTransform wraps the raw CreateTransform call.
-func (self IMFSensorTransformFactory) CreateTransform(guidSensorTransformID *win32.GUID, pAttributes *mediamediafoundation.IMFAttributes, ppDeviceMFT **mediamediafoundation.IMFDeviceTransform) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTransform(guidSensorTransformID, pAttributes, ppDeviceMFT)))
+func (self IMFSensorTransformFactory) CreateTransform(guidSensorTransformID *win32.GUID, pAttributes IMFAttributes, ppDeviceMFT **mediamediafoundation.IMFDeviceTransform) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTransform(guidSensorTransformID, pAttributes.Raw, ppDeviceMFT)))
 }
 
 // IMFSequencerSource is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSequencerSource with error-returning methods.
@@ -8700,8 +8703,8 @@ func WrapIMFSequencerSource(raw *mediamediafoundation.IMFSequencerSource) IMFSeq
 }
 
 // AppendTopology wraps the raw AppendTopology call.
-func (self IMFSequencerSource) AppendTopology(pTopology *mediamediafoundation.IMFTopology, dwFlags uint32, pdwId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AppendTopology(pTopology, dwFlags, pdwId)))
+func (self IMFSequencerSource) AppendTopology(pTopology IMFTopology, dwFlags uint32, pdwId *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AppendTopology(pTopology.Raw, dwFlags, pdwId)))
 }
 
 // DeleteTopology wraps the raw DeleteTopology call.
@@ -8710,13 +8713,13 @@ func (self IMFSequencerSource) DeleteTopology(dwId uint32) error {
 }
 
 // GetPresentationContext wraps the raw GetPresentationContext call.
-func (self IMFSequencerSource) GetPresentationContext(pPD *mediamediafoundation.IMFPresentationDescriptor, pId *uint32, ppTopology **mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(self.Raw.GetPresentationContext(pPD, pId, ppTopology)))
+func (self IMFSequencerSource) GetPresentationContext(pPD IMFPresentationDescriptor, pId *uint32, ppTopology **mediamediafoundation.IMFTopology) error {
+	return win32.HRESULTError(int32(self.Raw.GetPresentationContext(pPD.Raw, pId, ppTopology)))
 }
 
 // UpdateTopology wraps the raw UpdateTopology call.
-func (self IMFSequencerSource) UpdateTopology(dwId uint32, pTopology *mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateTopology(dwId, pTopology)))
+func (self IMFSequencerSource) UpdateTopology(dwId uint32, pTopology IMFTopology) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateTopology(dwId, pTopology.Raw)))
 }
 
 // UpdateTopologyFlags wraps the raw UpdateTopologyFlags call.
@@ -8736,8 +8739,8 @@ func WrapIMFSharingEngineClassFactory(raw *mediamediafoundation.IMFSharingEngine
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self IMFSharingEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *mediamediafoundation.IMFAttributes, ppEngine **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(dwFlags, pAttr, ppEngine)))
+func (self IMFSharingEngineClassFactory) CreateInstance(dwFlags uint32, pAttr IMFAttributes, ppEngine **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(dwFlags, pAttr.Raw, ppEngine)))
 }
 
 // IMFShutdown is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFShutdown with error-returning methods.
@@ -8816,13 +8819,13 @@ func WrapIMFSinkWriter(raw *mediamediafoundation.IMFSinkWriter) IMFSinkWriter {
 }
 
 // AddStream wraps the raw AddStream call.
-func (self IMFSinkWriter) AddStream(pTargetMediaType *mediamediafoundation.IMFMediaType, pdwStreamIndex *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddStream(pTargetMediaType, pdwStreamIndex)))
+func (self IMFSinkWriter) AddStream(pTargetMediaType IMFMediaType, pdwStreamIndex *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddStream(pTargetMediaType.Raw, pdwStreamIndex)))
 }
 
 // SetInputMediaType wraps the raw SetInputMediaType call.
-func (self IMFSinkWriter) SetInputMediaType(dwStreamIndex uint32, pInputMediaType *mediamediafoundation.IMFMediaType, pEncodingParameters *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputMediaType(dwStreamIndex, pInputMediaType, pEncodingParameters)))
+func (self IMFSinkWriter) SetInputMediaType(dwStreamIndex uint32, pInputMediaType IMFMediaType, pEncodingParameters IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputMediaType(dwStreamIndex, pInputMediaType.Raw, pEncodingParameters.Raw)))
 }
 
 // BeginWriting wraps the raw BeginWriting call.
@@ -8831,8 +8834,8 @@ func (self IMFSinkWriter) BeginWriting() error {
 }
 
 // WriteSample wraps the raw WriteSample call.
-func (self IMFSinkWriter) WriteSample(dwStreamIndex uint32, pSample *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.WriteSample(dwStreamIndex, pSample)))
+func (self IMFSinkWriter) WriteSample(dwStreamIndex uint32, pSample IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.WriteSample(dwStreamIndex, pSample.Raw)))
 }
 
 // SendStreamTick wraps the raw SendStreamTick call.
@@ -8924,13 +8927,13 @@ func WrapIMFSinkWriterEncoderConfig(raw *mediamediafoundation.IMFSinkWriterEncod
 }
 
 // SetTargetMediaType wraps the raw SetTargetMediaType call.
-func (self IMFSinkWriterEncoderConfig) SetTargetMediaType(dwStreamIndex uint32, pTargetMediaType *mediamediafoundation.IMFMediaType, pEncodingParameters *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.SetTargetMediaType(dwStreamIndex, pTargetMediaType, pEncodingParameters)))
+func (self IMFSinkWriterEncoderConfig) SetTargetMediaType(dwStreamIndex uint32, pTargetMediaType IMFMediaType, pEncodingParameters IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.SetTargetMediaType(dwStreamIndex, pTargetMediaType.Raw, pEncodingParameters.Raw)))
 }
 
 // PlaceEncodingParameters wraps the raw PlaceEncodingParameters call.
-func (self IMFSinkWriterEncoderConfig) PlaceEncodingParameters(dwStreamIndex uint32, pEncodingParameters *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.PlaceEncodingParameters(dwStreamIndex, pEncodingParameters)))
+func (self IMFSinkWriterEncoderConfig) PlaceEncodingParameters(dwStreamIndex uint32, pEncodingParameters IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.PlaceEncodingParameters(dwStreamIndex, pEncodingParameters.Raw)))
 }
 
 // IMFSinkWriterEx is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSinkWriterEx with error-returning methods.
@@ -8976,8 +8979,8 @@ func (self IMFSourceBuffer) Append(pData *byte, len_ uint32) error {
 }
 
 // AppendByteStream wraps the raw AppendByteStream call.
-func (self IMFSourceBuffer) AppendByteStream(pStream *mediamediafoundation.IMFByteStream, pMaxLen *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.AppendByteStream(pStream, pMaxLen)))
+func (self IMFSourceBuffer) AppendByteStream(pStream IMFByteStream, pMaxLen *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.AppendByteStream(pStream.Raw, pMaxLen)))
 }
 
 // Abort wraps the raw Abort call.
@@ -9075,8 +9078,8 @@ func WrapIMFSourceOpenMonitor(raw *mediamediafoundation.IMFSourceOpenMonitor) IM
 }
 
 // OnSourceEvent wraps the raw OnSourceEvent call.
-func (self IMFSourceOpenMonitor) OnSourceEvent(pEvent *mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.OnSourceEvent(pEvent)))
+func (self IMFSourceOpenMonitor) OnSourceEvent(pEvent IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.OnSourceEvent(pEvent.Raw)))
 }
 
 // IMFSourceReader is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSourceReader with error-returning methods.
@@ -9112,8 +9115,8 @@ func (self IMFSourceReader) GetCurrentMediaType(dwStreamIndex uint32, ppMediaTyp
 }
 
 // SetCurrentMediaType wraps the raw SetCurrentMediaType call.
-func (self IMFSourceReader) SetCurrentMediaType(dwStreamIndex uint32, pMediaType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.SetCurrentMediaType(dwStreamIndex, nil, pMediaType)))
+func (self IMFSourceReader) SetCurrentMediaType(dwStreamIndex uint32, pMediaType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.SetCurrentMediaType(dwStreamIndex, nil, pMediaType.Raw)))
 }
 
 // SetCurrentPosition wraps the raw SetCurrentPosition call.
@@ -9153,8 +9156,8 @@ func WrapIMFSourceReaderCallback(raw *mediamediafoundation.IMFSourceReaderCallba
 }
 
 // OnReadSample wraps the raw OnReadSample call.
-func (self IMFSourceReaderCallback) OnReadSample(hrStatus foundation.HRESULT, dwStreamIndex uint32, dwStreamFlags uint32, llTimestamp int64, pSample *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.OnReadSample(hrStatus, dwStreamIndex, dwStreamFlags, llTimestamp, pSample)))
+func (self IMFSourceReaderCallback) OnReadSample(hrStatus foundation.HRESULT, dwStreamIndex uint32, dwStreamFlags uint32, llTimestamp int64, pSample IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.OnReadSample(hrStatus, dwStreamIndex, dwStreamFlags, llTimestamp, pSample.Raw)))
 }
 
 // OnFlush wraps the raw OnFlush call.
@@ -9163,8 +9166,8 @@ func (self IMFSourceReaderCallback) OnFlush(dwStreamIndex uint32) error {
 }
 
 // OnEvent wraps the raw OnEvent call.
-func (self IMFSourceReaderCallback) OnEvent(dwStreamIndex uint32, pEvent *mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.OnEvent(dwStreamIndex, pEvent)))
+func (self IMFSourceReaderCallback) OnEvent(dwStreamIndex uint32, pEvent IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.OnEvent(dwStreamIndex, pEvent.Raw)))
 }
 
 // IMFSourceReaderCallback2 is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSourceReaderCallback2 with error-returning methods.
@@ -9200,13 +9203,13 @@ func WrapIMFSourceReaderEx(raw *mediamediafoundation.IMFSourceReaderEx) IMFSourc
 }
 
 // SetNativeMediaType wraps the raw SetNativeMediaType call.
-func (self IMFSourceReaderEx) SetNativeMediaType(dwStreamIndex uint32, pMediaType *mediamediafoundation.IMFMediaType, pdwStreamFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetNativeMediaType(dwStreamIndex, pMediaType, pdwStreamFlags)))
+func (self IMFSourceReaderEx) SetNativeMediaType(dwStreamIndex uint32, pMediaType IMFMediaType, pdwStreamFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetNativeMediaType(dwStreamIndex, pMediaType.Raw, pdwStreamFlags)))
 }
 
 // AddTransformForStream wraps the raw AddTransformForStream call.
-func (self IMFSourceReaderEx) AddTransformForStream(dwStreamIndex uint32, pTransformOrActivate *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddTransformForStream(dwStreamIndex, pTransformOrActivate)))
+func (self IMFSourceReaderEx) AddTransformForStream(dwStreamIndex uint32, pTransformOrActivate systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddTransformForStream(dwStreamIndex, pTransformOrActivate.Raw)))
 }
 
 // RemoveAllTransformsForStream wraps the raw RemoveAllTransformsForStream call.
@@ -9231,42 +9234,42 @@ func WrapIMFSourceResolver(raw *mediamediafoundation.IMFSourceResolver) IMFSourc
 }
 
 // CreateObjectFromURL wraps the raw CreateObjectFromURL call.
-func (self IMFSourceResolver) CreateObjectFromURL(pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
+func (self IMFSourceResolver) CreateObjectFromURL(pwszURL string, dwFlags uint32, pProps uishellpropertiessystemidiom.IPropertyStore, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.CreateObjectFromURL(foundation.PWSTR(_pwszURL), dwFlags, pProps, pObjectType, ppObject)))
+	return win32.HRESULTError(int32(self.Raw.CreateObjectFromURL(foundation.PWSTR(_pwszURL), dwFlags, pProps.Raw, pObjectType, ppObject)))
 }
 
 // CreateObjectFromByteStream wraps the raw CreateObjectFromByteStream call.
-func (self IMFSourceResolver) CreateObjectFromByteStream(pByteStream *mediamediafoundation.IMFByteStream, pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
+func (self IMFSourceResolver) CreateObjectFromByteStream(pByteStream IMFByteStream, pwszURL string, dwFlags uint32, pProps uishellpropertiessystemidiom.IPropertyStore, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.CreateObjectFromByteStream(pByteStream, foundation.PWSTR(_pwszURL), dwFlags, pProps, pObjectType, ppObject)))
+	return win32.HRESULTError(int32(self.Raw.CreateObjectFromByteStream(pByteStream.Raw, foundation.PWSTR(_pwszURL), dwFlags, pProps.Raw, pObjectType, ppObject)))
 }
 
 // BeginCreateObjectFromURL wraps the raw BeginCreateObjectFromURL call.
-func (self IMFSourceResolver) BeginCreateObjectFromURL(pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
+func (self IMFSourceResolver) BeginCreateObjectFromURL(pwszURL string, dwFlags uint32, pProps uishellpropertiessystemidiom.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.BeginCreateObjectFromURL(foundation.PWSTR(_pwszURL), dwFlags, pProps, ppIUnknownCancelCookie, pCallback, punkState)))
+	return win32.HRESULTError(int32(self.Raw.BeginCreateObjectFromURL(foundation.PWSTR(_pwszURL), dwFlags, pProps.Raw, ppIUnknownCancelCookie, pCallback.Raw, punkState.Raw)))
 }
 
 // EndCreateObjectFromURL wraps the raw EndCreateObjectFromURL call.
-func (self IMFSourceResolver) EndCreateObjectFromURL(pResult *mediamediafoundation.IMFAsyncResult, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.EndCreateObjectFromURL(pResult, pObjectType, ppObject)))
+func (self IMFSourceResolver) EndCreateObjectFromURL(pResult IMFAsyncResult, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.EndCreateObjectFromURL(pResult.Raw, pObjectType, ppObject)))
 }
 
 // BeginCreateObjectFromByteStream wraps the raw BeginCreateObjectFromByteStream call.
-func (self IMFSourceResolver) BeginCreateObjectFromByteStream(pByteStream *mediamediafoundation.IMFByteStream, pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
+func (self IMFSourceResolver) BeginCreateObjectFromByteStream(pByteStream IMFByteStream, pwszURL string, dwFlags uint32, pProps uishellpropertiessystemidiom.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.BeginCreateObjectFromByteStream(pByteStream, foundation.PWSTR(_pwszURL), dwFlags, pProps, ppIUnknownCancelCookie, pCallback, punkState)))
+	return win32.HRESULTError(int32(self.Raw.BeginCreateObjectFromByteStream(pByteStream.Raw, foundation.PWSTR(_pwszURL), dwFlags, pProps.Raw, ppIUnknownCancelCookie, pCallback.Raw, punkState.Raw)))
 }
 
 // EndCreateObjectFromByteStream wraps the raw EndCreateObjectFromByteStream call.
-func (self IMFSourceResolver) EndCreateObjectFromByteStream(pResult *mediamediafoundation.IMFAsyncResult, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.EndCreateObjectFromByteStream(pResult, pObjectType, ppObject)))
+func (self IMFSourceResolver) EndCreateObjectFromByteStream(pResult IMFAsyncResult, pObjectType *mediamediafoundation.MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.EndCreateObjectFromByteStream(pResult.Raw, pObjectType, ppObject)))
 }
 
 // CancelObjectCreation wraps the raw CancelObjectCreation call.
-func (self IMFSourceResolver) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CancelObjectCreation(pIUnknownCancelCookie)))
+func (self IMFSourceResolver) CancelObjectCreation(pIUnknownCancelCookie systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CancelObjectCreation(pIUnknownCancelCookie.Raw)))
 }
 
 // IMFSpatialAudioObjectBuffer is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFSpatialAudioObjectBuffer with error-returning methods.
@@ -9322,8 +9325,8 @@ func (self IMFSpatialAudioSample) GetObjectCount(pdwObjectCount *uint32) error {
 }
 
 // AddSpatialAudioObject wraps the raw AddSpatialAudioObject call.
-func (self IMFSpatialAudioSample) AddSpatialAudioObject(pAudioObjBuffer *mediamediafoundation.IMFSpatialAudioObjectBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.AddSpatialAudioObject(pAudioObjBuffer)))
+func (self IMFSpatialAudioSample) AddSpatialAudioObject(pAudioObjBuffer IMFSpatialAudioObjectBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.AddSpatialAudioObject(pAudioObjBuffer.Raw)))
 }
 
 // GetSpatialAudioObjectByIndex wraps the raw GetSpatialAudioObjectByIndex call.
@@ -9379,8 +9382,8 @@ func (self IMFStreamSink) GetMediaTypeHandler(ppHandler **mediamediafoundation.I
 }
 
 // ProcessSample wraps the raw ProcessSample call.
-func (self IMFStreamSink) ProcessSample(pSample *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessSample(pSample)))
+func (self IMFStreamSink) ProcessSample(pSample IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessSample(pSample.Raw)))
 }
 
 // PlaceMarker wraps the raw PlaceMarker call.
@@ -9443,23 +9446,23 @@ func WrapIMFTimecodeTranslate(raw *mediamediafoundation.IMFTimecodeTranslate) IM
 }
 
 // BeginConvertTimecodeToHNS wraps the raw BeginConvertTimecodeToHNS call.
-func (self IMFTimecodeTranslate) BeginConvertTimecodeToHNS(pPropVarTimecode *systemcomstructuredstorage.PROPVARIANT, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginConvertTimecodeToHNS(pPropVarTimecode, pCallback, punkState)))
+func (self IMFTimecodeTranslate) BeginConvertTimecodeToHNS(pPropVarTimecode *systemcomstructuredstorage.PROPVARIANT, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginConvertTimecodeToHNS(pPropVarTimecode, pCallback.Raw, punkState.Raw)))
 }
 
 // EndConvertTimecodeToHNS wraps the raw EndConvertTimecodeToHNS call.
-func (self IMFTimecodeTranslate) EndConvertTimecodeToHNS(pResult *mediamediafoundation.IMFAsyncResult, phnsTime *int64) error {
-	return win32.HRESULTError(int32(self.Raw.EndConvertTimecodeToHNS(pResult, phnsTime)))
+func (self IMFTimecodeTranslate) EndConvertTimecodeToHNS(pResult IMFAsyncResult, phnsTime *int64) error {
+	return win32.HRESULTError(int32(self.Raw.EndConvertTimecodeToHNS(pResult.Raw, phnsTime)))
 }
 
 // BeginConvertHNSToTimecode wraps the raw BeginConvertHNSToTimecode call.
-func (self IMFTimecodeTranslate) BeginConvertHNSToTimecode(hnsTime int64, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginConvertHNSToTimecode(hnsTime, pCallback, punkState)))
+func (self IMFTimecodeTranslate) BeginConvertHNSToTimecode(hnsTime int64, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginConvertHNSToTimecode(hnsTime, pCallback.Raw, punkState.Raw)))
 }
 
 // EndConvertHNSToTimecode wraps the raw EndConvertHNSToTimecode call.
-func (self IMFTimecodeTranslate) EndConvertHNSToTimecode(pResult *mediamediafoundation.IMFAsyncResult, pPropVarTimecode *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.EndConvertHNSToTimecode(pResult, pPropVarTimecode)))
+func (self IMFTimecodeTranslate) EndConvertHNSToTimecode(pResult IMFAsyncResult, pPropVarTimecode *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.EndConvertHNSToTimecode(pResult.Raw, pPropVarTimecode)))
 }
 
 // IMFTimedText is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFTimedText with error-returning methods.
@@ -9474,8 +9477,8 @@ func WrapIMFTimedText(raw *mediamediafoundation.IMFTimedText) IMFTimedText {
 }
 
 // RegisterNotifications wraps the raw RegisterNotifications call.
-func (self IMFTimedText) RegisterNotifications(notify *mediamediafoundation.IMFTimedTextNotify) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterNotifications(notify)))
+func (self IMFTimedText) RegisterNotifications(notify IMFTimedTextNotify) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterNotifications(notify.Raw)))
 }
 
 // SelectTrack wraps the raw SelectTrack call.
@@ -9485,11 +9488,11 @@ func (self IMFTimedText) SelectTrack(trackId uint32, selected bool) error {
 }
 
 // AddDataSource wraps the raw AddDataSource call.
-func (self IMFTimedText) AddDataSource(byteStream *mediamediafoundation.IMFByteStream, label string, language string, kind mediamediafoundation.MF_TIMED_TEXT_TRACK_KIND, isDefault bool, trackId *uint32) error {
+func (self IMFTimedText) AddDataSource(byteStream IMFByteStream, label string, language string, kind mediamediafoundation.MF_TIMED_TEXT_TRACK_KIND, isDefault bool, trackId *uint32) error {
 	_label := win32.UTF16Ptr(label)
 	_language := win32.UTF16Ptr(language)
 	_isDefault := foundation.BOOL(win32.Bool32(isDefault))
-	return win32.HRESULTError(int32(self.Raw.AddDataSource(byteStream, foundation.PWSTR(_label), foundation.PWSTR(_language), kind, _isDefault, trackId)))
+	return win32.HRESULTError(int32(self.Raw.AddDataSource(byteStream.Raw, foundation.PWSTR(_label), foundation.PWSTR(_language), kind, _isDefault, trackId)))
 }
 
 // AddDataSourceFromUrl wraps the raw AddDataSourceFromUrl call.
@@ -9509,8 +9512,8 @@ func (self IMFTimedText) AddTrack(label string, language string, kind mediamedia
 }
 
 // RemoveTrack wraps the raw RemoveTrack call.
-func (self IMFTimedText) RemoveTrack(track *mediamediafoundation.IMFTimedTextTrack) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveTrack(track)))
+func (self IMFTimedText) RemoveTrack(track IMFTimedTextTrack) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveTrack(track.Raw)))
 }
 
 // GetCueTimeOffset wraps the raw GetCueTimeOffset call.
@@ -9680,8 +9683,8 @@ func (self IMFTimedTextCueList) GetCueByOriginalId(originalId string, cue **medi
 }
 
 // RemoveCue wraps the raw RemoveCue call.
-func (self IMFTimedTextCueList) RemoveCue(cue *mediamediafoundation.IMFTimedTextCue) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveCue(cue)))
+func (self IMFTimedTextCueList) RemoveCue(cue IMFTimedTextCue) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveCue(cue.Raw)))
 }
 
 // IMFTimedTextFormattedText is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFTimedTextFormattedText with error-returning methods.
@@ -10076,13 +10079,13 @@ func WrapIMFTimer(raw *mediamediafoundation.IMFTimer) IMFTimer {
 }
 
 // SetTimer wraps the raw SetTimer call.
-func (self IMFTimer) SetTimer(dwFlags uint32, llClockTime int64, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown, ppunkKey **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetTimer(dwFlags, llClockTime, pCallback, punkState, ppunkKey)))
+func (self IMFTimer) SetTimer(dwFlags uint32, llClockTime int64, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown, ppunkKey **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetTimer(dwFlags, llClockTime, pCallback.Raw, punkState.Raw, ppunkKey)))
 }
 
 // CancelTimer wraps the raw CancelTimer call.
-func (self IMFTimer) CancelTimer(punkKey *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CancelTimer(punkKey)))
+func (self IMFTimer) CancelTimer(punkKey systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CancelTimer(punkKey.Raw)))
 }
 
 // IMFTopoLoader is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFTopoLoader with error-returning methods.
@@ -10097,8 +10100,8 @@ func WrapIMFTopoLoader(raw *mediamediafoundation.IMFTopoLoader) IMFTopoLoader {
 }
 
 // Load wraps the raw Load call.
-func (self IMFTopoLoader) Load(pInputTopo *mediamediafoundation.IMFTopology, ppOutputTopo **mediamediafoundation.IMFTopology, pCurrentTopo *mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pInputTopo, ppOutputTopo, pCurrentTopo)))
+func (self IMFTopoLoader) Load(pInputTopo IMFTopology, ppOutputTopo **mediamediafoundation.IMFTopology, pCurrentTopo IMFTopology) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pInputTopo.Raw, ppOutputTopo, pCurrentTopo.Raw)))
 }
 
 // IMFTopology is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFTopology with error-returning methods.
@@ -10118,13 +10121,13 @@ func (self IMFTopology) GetTopologyID(pID *uint64) error {
 }
 
 // AddNode wraps the raw AddNode call.
-func (self IMFTopology) AddNode(pNode *mediamediafoundation.IMFTopologyNode) error {
-	return win32.HRESULTError(int32(self.Raw.AddNode(pNode)))
+func (self IMFTopology) AddNode(pNode IMFTopologyNode) error {
+	return win32.HRESULTError(int32(self.Raw.AddNode(pNode.Raw)))
 }
 
 // RemoveNode wraps the raw RemoveNode call.
-func (self IMFTopology) RemoveNode(pNode *mediamediafoundation.IMFTopologyNode) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveNode(pNode)))
+func (self IMFTopology) RemoveNode(pNode IMFTopologyNode) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveNode(pNode.Raw)))
 }
 
 // GetNodeCount wraps the raw GetNodeCount call.
@@ -10143,8 +10146,8 @@ func (self IMFTopology) Clear() error {
 }
 
 // CloneFrom wraps the raw CloneFrom call.
-func (self IMFTopology) CloneFrom(pTopology *mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(self.Raw.CloneFrom(pTopology)))
+func (self IMFTopology) CloneFrom(pTopology IMFTopology) error {
+	return win32.HRESULTError(int32(self.Raw.CloneFrom(pTopology.Raw)))
 }
 
 // GetNodeByID wraps the raw GetNodeByID call.
@@ -10174,8 +10177,8 @@ func WrapIMFTopologyNode(raw *mediamediafoundation.IMFTopologyNode) IMFTopologyN
 }
 
 // SetObject wraps the raw SetObject call.
-func (self IMFTopologyNode) SetObject(pObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetObject(pObject)))
+func (self IMFTopologyNode) SetObject(pObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetObject(pObject.Raw)))
 }
 
 // GetObject wraps the raw GetObject call.
@@ -10209,8 +10212,8 @@ func (self IMFTopologyNode) GetOutputCount(pcOutputs *uint32) error {
 }
 
 // ConnectOutput wraps the raw ConnectOutput call.
-func (self IMFTopologyNode) ConnectOutput(dwOutputIndex uint32, pDownstreamNode *mediamediafoundation.IMFTopologyNode, dwInputIndexOnDownstreamNode uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectOutput(dwOutputIndex, pDownstreamNode, dwInputIndexOnDownstreamNode)))
+func (self IMFTopologyNode) ConnectOutput(dwOutputIndex uint32, pDownstreamNode IMFTopologyNode, dwInputIndexOnDownstreamNode uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectOutput(dwOutputIndex, pDownstreamNode.Raw, dwInputIndexOnDownstreamNode)))
 }
 
 // DisconnectOutput wraps the raw DisconnectOutput call.
@@ -10229,8 +10232,8 @@ func (self IMFTopologyNode) GetOutput(dwOutputIndex uint32, ppDownstreamNode **m
 }
 
 // SetOutputPrefType wraps the raw SetOutputPrefType call.
-func (self IMFTopologyNode) SetOutputPrefType(dwOutputIndex uint32, pType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputPrefType(dwOutputIndex, pType)))
+func (self IMFTopologyNode) SetOutputPrefType(dwOutputIndex uint32, pType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputPrefType(dwOutputIndex, pType.Raw)))
 }
 
 // GetOutputPrefType wraps the raw GetOutputPrefType call.
@@ -10239,8 +10242,8 @@ func (self IMFTopologyNode) GetOutputPrefType(dwOutputIndex uint32, ppType **med
 }
 
 // SetInputPrefType wraps the raw SetInputPrefType call.
-func (self IMFTopologyNode) SetInputPrefType(dwInputIndex uint32, pType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputPrefType(dwInputIndex, pType)))
+func (self IMFTopologyNode) SetInputPrefType(dwInputIndex uint32, pType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputPrefType(dwInputIndex, pType.Raw)))
 }
 
 // GetInputPrefType wraps the raw GetInputPrefType call.
@@ -10249,8 +10252,8 @@ func (self IMFTopologyNode) GetInputPrefType(dwInputIndex uint32, ppType **media
 }
 
 // CloneFrom wraps the raw CloneFrom call.
-func (self IMFTopologyNode) CloneFrom(pNode *mediamediafoundation.IMFTopologyNode) error {
-	return win32.HRESULTError(int32(self.Raw.CloneFrom(pNode)))
+func (self IMFTopologyNode) CloneFrom(pNode IMFTopologyNode) error {
+	return win32.HRESULTError(int32(self.Raw.CloneFrom(pNode.Raw)))
 }
 
 // IMFTopologyNodeAttributeEditor is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFTopologyNodeAttributeEditor with error-returning methods.
@@ -10297,8 +10300,8 @@ func WrapIMFTopologyServiceLookupClient(raw *mediamediafoundation.IMFTopologySer
 }
 
 // InitServicePointers wraps the raw InitServicePointers call.
-func (self IMFTopologyServiceLookupClient) InitServicePointers(pLookup *mediamediafoundation.IMFTopologyServiceLookup) error {
-	return win32.HRESULTError(int32(self.Raw.InitServicePointers(pLookup)))
+func (self IMFTopologyServiceLookupClient) InitServicePointers(pLookup IMFTopologyServiceLookup) error {
+	return win32.HRESULTError(int32(self.Raw.InitServicePointers(pLookup.Raw)))
 }
 
 // ReleaseServicePointers wraps the raw ReleaseServicePointers call.
@@ -10318,8 +10321,8 @@ func WrapIMFTrackedSample(raw *mediamediafoundation.IMFTrackedSample) IMFTracked
 }
 
 // SetAllocator wraps the raw SetAllocator call.
-func (self IMFTrackedSample) SetAllocator(pSampleAllocator *mediamediafoundation.IMFAsyncCallback, pUnkState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetAllocator(pSampleAllocator, pUnkState)))
+func (self IMFTrackedSample) SetAllocator(pSampleAllocator IMFAsyncCallback, pUnkState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetAllocator(pSampleAllocator.Raw, pUnkState.Raw)))
 }
 
 // IMFTranscodeProfile is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFTranscodeProfile with error-returning methods.
@@ -10334,8 +10337,8 @@ func WrapIMFTranscodeProfile(raw *mediamediafoundation.IMFTranscodeProfile) IMFT
 }
 
 // SetAudioAttributes wraps the raw SetAudioAttributes call.
-func (self IMFTranscodeProfile) SetAudioAttributes(pAttrs *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.SetAudioAttributes(pAttrs)))
+func (self IMFTranscodeProfile) SetAudioAttributes(pAttrs IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.SetAudioAttributes(pAttrs.Raw)))
 }
 
 // GetAudioAttributes wraps the raw GetAudioAttributes call.
@@ -10344,8 +10347,8 @@ func (self IMFTranscodeProfile) GetAudioAttributes(ppAttrs **mediamediafoundatio
 }
 
 // SetVideoAttributes wraps the raw SetVideoAttributes call.
-func (self IMFTranscodeProfile) SetVideoAttributes(pAttrs *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.SetVideoAttributes(pAttrs)))
+func (self IMFTranscodeProfile) SetVideoAttributes(pAttrs IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.SetVideoAttributes(pAttrs.Raw)))
 }
 
 // GetVideoAttributes wraps the raw GetVideoAttributes call.
@@ -10354,8 +10357,8 @@ func (self IMFTranscodeProfile) GetVideoAttributes(ppAttrs **mediamediafoundatio
 }
 
 // SetContainerAttributes wraps the raw SetContainerAttributes call.
-func (self IMFTranscodeProfile) SetContainerAttributes(pAttrs *mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.SetContainerAttributes(pAttrs)))
+func (self IMFTranscodeProfile) SetContainerAttributes(pAttrs IMFAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.SetContainerAttributes(pAttrs.Raw)))
 }
 
 // GetContainerAttributes wraps the raw GetContainerAttributes call.
@@ -10381,13 +10384,13 @@ func (self IMFTranscodeSinkInfoProvider) SetOutputFile(pwszFileName string) erro
 }
 
 // SetOutputByteStream wraps the raw SetOutputByteStream call.
-func (self IMFTranscodeSinkInfoProvider) SetOutputByteStream(pByteStreamActivate *mediamediafoundation.IMFActivate) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputByteStream(pByteStreamActivate)))
+func (self IMFTranscodeSinkInfoProvider) SetOutputByteStream(pByteStreamActivate IMFActivate) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputByteStream(pByteStreamActivate.Raw)))
 }
 
 // SetProfile wraps the raw SetProfile call.
-func (self IMFTranscodeSinkInfoProvider) SetProfile(pProfile *mediamediafoundation.IMFTranscodeProfile) error {
-	return win32.HRESULTError(int32(self.Raw.SetProfile(pProfile)))
+func (self IMFTranscodeSinkInfoProvider) SetProfile(pProfile IMFTranscodeProfile) error {
+	return win32.HRESULTError(int32(self.Raw.SetProfile(pProfile.Raw)))
 }
 
 // GetSinkInfo wraps the raw GetSinkInfo call.
@@ -10467,13 +10470,13 @@ func (self IMFTransform) GetOutputAvailableType(dwOutputStreamID uint32, dwTypeI
 }
 
 // SetInputType wraps the raw SetInputType call.
-func (self IMFTransform) SetInputType(dwInputStreamID uint32, pType *mediamediafoundation.IMFMediaType, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputType(dwInputStreamID, pType, dwFlags)))
+func (self IMFTransform) SetInputType(dwInputStreamID uint32, pType IMFMediaType, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputType(dwInputStreamID, pType.Raw, dwFlags)))
 }
 
 // SetOutputType wraps the raw SetOutputType call.
-func (self IMFTransform) SetOutputType(dwOutputStreamID uint32, pType *mediamediafoundation.IMFMediaType, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputType(dwOutputStreamID, pType, dwFlags)))
+func (self IMFTransform) SetOutputType(dwOutputStreamID uint32, pType IMFMediaType, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputType(dwOutputStreamID, pType.Raw, dwFlags)))
 }
 
 // GetInputCurrentType wraps the raw GetInputCurrentType call.
@@ -10502,8 +10505,8 @@ func (self IMFTransform) SetOutputBounds(hnsLowerBound int64, hnsUpperBound int6
 }
 
 // ProcessEvent wraps the raw ProcessEvent call.
-func (self IMFTransform) ProcessEvent(dwInputStreamID uint32, pEvent *mediamediafoundation.IMFMediaEvent) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessEvent(dwInputStreamID, pEvent)))
+func (self IMFTransform) ProcessEvent(dwInputStreamID uint32, pEvent IMFMediaEvent) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessEvent(dwInputStreamID, pEvent.Raw)))
 }
 
 // ProcessMessage wraps the raw ProcessMessage call.
@@ -10512,8 +10515,8 @@ func (self IMFTransform) ProcessMessage(eMessage mediamediafoundation.MFT_MESSAG
 }
 
 // ProcessInput wraps the raw ProcessInput call.
-func (self IMFTransform) ProcessInput(dwInputStreamID uint32, pSample *mediamediafoundation.IMFSample, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessInput(dwInputStreamID, pSample, dwFlags)))
+func (self IMFTransform) ProcessInput(dwInputStreamID uint32, pSample IMFSample, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessInput(dwInputStreamID, pSample.Raw, dwFlags)))
 }
 
 // ProcessOutput wraps the raw ProcessOutput call.
@@ -10575,8 +10578,8 @@ func WrapIMFVideoCaptureSampleAllocator(raw *mediamediafoundation.IMFVideoCaptur
 }
 
 // InitializeCaptureSampleAllocator wraps the raw InitializeCaptureSampleAllocator call.
-func (self IMFVideoCaptureSampleAllocator) InitializeCaptureSampleAllocator(cbSampleSize uint32, cbCaptureMetadataSize uint32, cbAlignment uint32, cMinimumSamples uint32, pAttributes *mediamediafoundation.IMFAttributes, pMediaType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeCaptureSampleAllocator(cbSampleSize, cbCaptureMetadataSize, cbAlignment, cMinimumSamples, pAttributes, pMediaType)))
+func (self IMFVideoCaptureSampleAllocator) InitializeCaptureSampleAllocator(cbSampleSize uint32, cbCaptureMetadataSize uint32, cbAlignment uint32, cMinimumSamples uint32, pAttributes IMFAttributes, pMediaType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeCaptureSampleAllocator(cbSampleSize, cbCaptureMetadataSize, cbAlignment, cMinimumSamples, pAttributes.Raw, pMediaType.Raw)))
 }
 
 // IMFVideoDeviceID is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFVideoDeviceID with error-returning methods.
@@ -10980,8 +10983,8 @@ func (self IMFVideoProcessorControl3) EnableSphericalVideoProcessing(fEnable boo
 }
 
 // SetOutputDevice wraps the raw SetOutputDevice call.
-func (self IMFVideoProcessorControl3) SetOutputDevice(pOutputDevice *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputDevice(pOutputDevice)))
+func (self IMFVideoProcessorControl3) SetOutputDevice(pOutputDevice systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputDevice(pOutputDevice.Raw)))
 }
 
 // IMFVideoRenderer is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFVideoRenderer with error-returning methods.
@@ -10996,8 +10999,8 @@ func WrapIMFVideoRenderer(raw *mediamediafoundation.IMFVideoRenderer) IMFVideoRe
 }
 
 // InitializeRenderer wraps the raw InitializeRenderer call.
-func (self IMFVideoRenderer) InitializeRenderer(pVideoMixer *mediamediafoundation.IMFTransform, pVideoPresenter *mediamediafoundation.IMFVideoPresenter) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeRenderer(pVideoMixer, pVideoPresenter)))
+func (self IMFVideoRenderer) InitializeRenderer(pVideoMixer IMFTransform, pVideoPresenter IMFVideoPresenter) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeRenderer(pVideoMixer.Raw, pVideoPresenter.Raw)))
 }
 
 // IMFVideoRendererEffectControl is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFVideoRendererEffectControl with error-returning methods.
@@ -11012,8 +11015,8 @@ func WrapIMFVideoRendererEffectControl(raw *mediamediafoundation.IMFVideoRendere
 }
 
 // OnAppServiceConnectionEstablished wraps the raw OnAppServiceConnectionEstablished call.
-func (self IMFVideoRendererEffectControl) OnAppServiceConnectionEstablished(pAppServiceConnection *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnAppServiceConnectionEstablished(pAppServiceConnection)))
+func (self IMFVideoRendererEffectControl) OnAppServiceConnectionEstablished(pAppServiceConnection systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnAppServiceConnectionEstablished(pAppServiceConnection.Raw)))
 }
 
 // IMFVideoSampleAllocator is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFVideoSampleAllocator with error-returning methods.
@@ -11028,8 +11031,8 @@ func WrapIMFVideoSampleAllocator(raw *mediamediafoundation.IMFVideoSampleAllocat
 }
 
 // SetDirectXManager wraps the raw SetDirectXManager call.
-func (self IMFVideoSampleAllocator) SetDirectXManager(pManager *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetDirectXManager(pManager)))
+func (self IMFVideoSampleAllocator) SetDirectXManager(pManager systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetDirectXManager(pManager.Raw)))
 }
 
 // UninitializeSampleAllocator wraps the raw UninitializeSampleAllocator call.
@@ -11038,8 +11041,8 @@ func (self IMFVideoSampleAllocator) UninitializeSampleAllocator() error {
 }
 
 // InitializeSampleAllocator wraps the raw InitializeSampleAllocator call.
-func (self IMFVideoSampleAllocator) InitializeSampleAllocator(cRequestedFrames uint32, pMediaType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeSampleAllocator(cRequestedFrames, pMediaType)))
+func (self IMFVideoSampleAllocator) InitializeSampleAllocator(cRequestedFrames uint32, pMediaType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeSampleAllocator(cRequestedFrames, pMediaType.Raw)))
 }
 
 // AllocateSample wraps the raw AllocateSample call.
@@ -11059,8 +11062,8 @@ func WrapIMFVideoSampleAllocatorCallback(raw *mediamediafoundation.IMFVideoSampl
 }
 
 // SetCallback wraps the raw SetCallback call.
-func (self IMFVideoSampleAllocatorCallback) SetCallback(pNotify *mediamediafoundation.IMFVideoSampleAllocatorNotify) error {
-	return win32.HRESULTError(int32(self.Raw.SetCallback(pNotify)))
+func (self IMFVideoSampleAllocatorCallback) SetCallback(pNotify IMFVideoSampleAllocatorNotify) error {
+	return win32.HRESULTError(int32(self.Raw.SetCallback(pNotify.Raw)))
 }
 
 // GetFreeSampleCount wraps the raw GetFreeSampleCount call.
@@ -11080,8 +11083,8 @@ func WrapIMFVideoSampleAllocatorEx(raw *mediamediafoundation.IMFVideoSampleAlloc
 }
 
 // InitializeSampleAllocatorEx wraps the raw InitializeSampleAllocatorEx call.
-func (self IMFVideoSampleAllocatorEx) InitializeSampleAllocatorEx(cInitialSamples uint32, cMaximumSamples uint32, pAttributes *mediamediafoundation.IMFAttributes, pMediaType *mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeSampleAllocatorEx(cInitialSamples, cMaximumSamples, pAttributes, pMediaType)))
+func (self IMFVideoSampleAllocatorEx) InitializeSampleAllocatorEx(cInitialSamples uint32, cMaximumSamples uint32, pAttributes IMFAttributes, pMediaType IMFMediaType) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeSampleAllocatorEx(cInitialSamples, cMaximumSamples, pAttributes.Raw, pMediaType.Raw)))
 }
 
 // IMFVideoSampleAllocatorNotify is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFVideoSampleAllocatorNotify with error-returning methods.
@@ -11112,8 +11115,8 @@ func WrapIMFVideoSampleAllocatorNotifyEx(raw *mediamediafoundation.IMFVideoSampl
 }
 
 // NotifyPrune wraps the raw NotifyPrune call.
-func (self IMFVideoSampleAllocatorNotifyEx) NotifyPrune(__MIDL__IMFVideoSampleAllocatorNotifyEx0000 *mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyPrune(__MIDL__IMFVideoSampleAllocatorNotifyEx0000)))
+func (self IMFVideoSampleAllocatorNotifyEx) NotifyPrune(__MIDL__IMFVideoSampleAllocatorNotifyEx0000 IMFSample) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyPrune(__MIDL__IMFVideoSampleAllocatorNotifyEx0000.Raw)))
 }
 
 // IMFVirtualCamera is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IMFVirtualCamera with error-returning methods.
@@ -11146,8 +11149,8 @@ func (self IMFVirtualCamera) AddRegistryEntry(EntryName string, SubkeyPath strin
 }
 
 // Start wraps the raw Start call.
-func (self IMFVirtualCamera) Start(pCallback *mediamediafoundation.IMFAsyncCallback) error {
-	return win32.HRESULTError(int32(self.Raw.Start(pCallback)))
+func (self IMFVirtualCamera) Start(pCallback IMFAsyncCallback) error {
+	return win32.HRESULTError(int32(self.Raw.Start(pCallback.Raw)))
 }
 
 // Stop wraps the raw Stop call.
@@ -11197,23 +11200,23 @@ func WrapIMFWorkQueueServices(raw *mediamediafoundation.IMFWorkQueueServices) IM
 }
 
 // BeginRegisterTopologyWorkQueuesWithMMCSS wraps the raw BeginRegisterTopologyWorkQueuesWithMMCSS call.
-func (self IMFWorkQueueServices) BeginRegisterTopologyWorkQueuesWithMMCSS(pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginRegisterTopologyWorkQueuesWithMMCSS(pCallback, pState)))
+func (self IMFWorkQueueServices) BeginRegisterTopologyWorkQueuesWithMMCSS(pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginRegisterTopologyWorkQueuesWithMMCSS(pCallback.Raw, pState.Raw)))
 }
 
 // EndRegisterTopologyWorkQueuesWithMMCSS wraps the raw EndRegisterTopologyWorkQueuesWithMMCSS call.
-func (self IMFWorkQueueServices) EndRegisterTopologyWorkQueuesWithMMCSS(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndRegisterTopologyWorkQueuesWithMMCSS(pResult)))
+func (self IMFWorkQueueServices) EndRegisterTopologyWorkQueuesWithMMCSS(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndRegisterTopologyWorkQueuesWithMMCSS(pResult.Raw)))
 }
 
 // BeginUnregisterTopologyWorkQueuesWithMMCSS wraps the raw BeginUnregisterTopologyWorkQueuesWithMMCSS call.
-func (self IMFWorkQueueServices) BeginUnregisterTopologyWorkQueuesWithMMCSS(pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginUnregisterTopologyWorkQueuesWithMMCSS(pCallback, pState)))
+func (self IMFWorkQueueServices) BeginUnregisterTopologyWorkQueuesWithMMCSS(pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginUnregisterTopologyWorkQueuesWithMMCSS(pCallback.Raw, pState.Raw)))
 }
 
 // EndUnregisterTopologyWorkQueuesWithMMCSS wraps the raw EndUnregisterTopologyWorkQueuesWithMMCSS call.
-func (self IMFWorkQueueServices) EndUnregisterTopologyWorkQueuesWithMMCSS(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndUnregisterTopologyWorkQueuesWithMMCSS(pResult)))
+func (self IMFWorkQueueServices) EndUnregisterTopologyWorkQueuesWithMMCSS(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndUnregisterTopologyWorkQueuesWithMMCSS(pResult.Raw)))
 }
 
 // GetTopologyWorkQueueMMCSSClass wraps the raw GetTopologyWorkQueueMMCSSClass call.
@@ -11227,24 +11230,24 @@ func (self IMFWorkQueueServices) GetTopologyWorkQueueMMCSSTaskId(dwTopologyWorkQ
 }
 
 // BeginRegisterPlatformWorkQueueWithMMCSS wraps the raw BeginRegisterPlatformWorkQueueWithMMCSS call.
-func (self IMFWorkQueueServices) BeginRegisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue uint32, wszClass string, dwTaskId uint32, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
+func (self IMFWorkQueueServices) BeginRegisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue uint32, wszClass string, dwTaskId uint32, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
-	return win32.HRESULTError(int32(self.Raw.BeginRegisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue, foundation.PWSTR(_wszClass), dwTaskId, pCallback, pState)))
+	return win32.HRESULTError(int32(self.Raw.BeginRegisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue, foundation.PWSTR(_wszClass), dwTaskId, pCallback.Raw, pState.Raw)))
 }
 
 // EndRegisterPlatformWorkQueueWithMMCSS wraps the raw EndRegisterPlatformWorkQueueWithMMCSS call.
-func (self IMFWorkQueueServices) EndRegisterPlatformWorkQueueWithMMCSS(pResult *mediamediafoundation.IMFAsyncResult, pdwTaskId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.EndRegisterPlatformWorkQueueWithMMCSS(pResult, pdwTaskId)))
+func (self IMFWorkQueueServices) EndRegisterPlatformWorkQueueWithMMCSS(pResult IMFAsyncResult, pdwTaskId *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.EndRegisterPlatformWorkQueueWithMMCSS(pResult.Raw, pdwTaskId)))
 }
 
 // BeginUnregisterPlatformWorkQueueWithMMCSS wraps the raw BeginUnregisterPlatformWorkQueueWithMMCSS call.
-func (self IMFWorkQueueServices) BeginUnregisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue uint32, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeginUnregisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue, pCallback, pState)))
+func (self IMFWorkQueueServices) BeginUnregisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue uint32, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeginUnregisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue, pCallback.Raw, pState.Raw)))
 }
 
 // EndUnregisterPlatformWorkQueueWithMMCSS wraps the raw EndUnregisterPlatformWorkQueueWithMMCSS call.
-func (self IMFWorkQueueServices) EndUnregisterPlatformWorkQueueWithMMCSS(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndUnregisterPlatformWorkQueueWithMMCSS(pResult)))
+func (self IMFWorkQueueServices) EndUnregisterPlatformWorkQueueWithMMCSS(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndUnregisterPlatformWorkQueueWithMMCSS(pResult.Raw)))
 }
 
 // GetPlaftormWorkQueueMMCSSClass wraps the raw GetPlaftormWorkQueueMMCSSClass call.
@@ -11274,9 +11277,9 @@ func (self IMFWorkQueueServicesEx) GetTopologyWorkQueueMMCSSPriority(dwTopologyW
 }
 
 // BeginRegisterPlatformWorkQueueWithMMCSSEx wraps the raw BeginRegisterPlatformWorkQueueWithMMCSSEx call.
-func (self IMFWorkQueueServicesEx) BeginRegisterPlatformWorkQueueWithMMCSSEx(dwPlatformWorkQueue uint32, wszClass string, dwTaskId uint32, lPriority int32, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
+func (self IMFWorkQueueServicesEx) BeginRegisterPlatformWorkQueueWithMMCSSEx(dwPlatformWorkQueue uint32, wszClass string, dwTaskId uint32, lPriority int32, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
-	return win32.HRESULTError(int32(self.Raw.BeginRegisterPlatformWorkQueueWithMMCSSEx(dwPlatformWorkQueue, foundation.PWSTR(_wszClass), dwTaskId, lPriority, pCallback, pState)))
+	return win32.HRESULTError(int32(self.Raw.BeginRegisterPlatformWorkQueueWithMMCSSEx(dwPlatformWorkQueue, foundation.PWSTR(_wszClass), dwTaskId, lPriority, pCallback.Raw, pState.Raw)))
 }
 
 // GetPlatformWorkQueueMMCSSPriority wraps the raw GetPlatformWorkQueueMMCSSPriority call.
@@ -11332,8 +11335,8 @@ func WrapIPlayToControl(raw *mediamediafoundation.IPlayToControl) IPlayToControl
 }
 
 // Connect wraps the raw Connect call.
-func (self IPlayToControl) Connect(pFactory *mediamediafoundation.IMFSharingEngineClassFactory) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(pFactory)))
+func (self IPlayToControl) Connect(pFactory IMFSharingEngineClassFactory) error {
+	return win32.HRESULTError(int32(self.Raw.Connect(pFactory.Raw)))
 }
 
 // Disconnect wraps the raw Disconnect call.
@@ -11369,8 +11372,8 @@ func WrapIPlayToSourceClassFactory(raw *mediamediafoundation.IPlayToSourceClassF
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self IPlayToSourceClassFactory) CreateInstance(dwFlags uint32, pControl *mediamediafoundation.IPlayToControl, ppSource **systemwinrt.IInspectable) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(dwFlags, pControl, ppSource)))
+func (self IPlayToSourceClassFactory) CreateInstance(dwFlags uint32, pControl IPlayToControl, ppSource **systemwinrt.IInspectable) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(dwFlags, pControl.Raw, ppSource)))
 }
 
 // IToc is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IToc with error-returning methods.
@@ -11426,13 +11429,13 @@ func (self IToc) GetEntryListByIndex(wEntryListIndex uint16, ppEntryList **media
 }
 
 // AddEntryList wraps the raw AddEntryList call.
-func (self IToc) AddEntryList(pEntryList *mediamediafoundation.ITocEntryList, pwEntryListIndex *uint16) error {
-	return win32.HRESULTError(int32(self.Raw.AddEntryList(pEntryList, pwEntryListIndex)))
+func (self IToc) AddEntryList(pEntryList ITocEntryList, pwEntryListIndex *uint16) error {
+	return win32.HRESULTError(int32(self.Raw.AddEntryList(pEntryList.Raw, pwEntryListIndex)))
 }
 
 // AddEntryListByIndex wraps the raw AddEntryListByIndex call.
-func (self IToc) AddEntryListByIndex(wEntryListIndex uint16, pEntryList *mediamediafoundation.ITocEntryList) error {
-	return win32.HRESULTError(int32(self.Raw.AddEntryListByIndex(wEntryListIndex, pEntryList)))
+func (self IToc) AddEntryListByIndex(wEntryListIndex uint16, pEntryList ITocEntryList) error {
+	return win32.HRESULTError(int32(self.Raw.AddEntryListByIndex(wEntryListIndex, pEntryList.Raw)))
 }
 
 // RemoveEntryListByIndex wraps the raw RemoveEntryListByIndex call.
@@ -11462,13 +11465,13 @@ func (self ITocCollection) GetEntryByIndex(dwEntryIndex uint32, ppToc **mediamed
 }
 
 // AddEntry wraps the raw AddEntry call.
-func (self ITocCollection) AddEntry(pToc *mediamediafoundation.IToc, pdwEntryIndex *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddEntry(pToc, pdwEntryIndex)))
+func (self ITocCollection) AddEntry(pToc IToc, pdwEntryIndex *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddEntry(pToc.Raw, pdwEntryIndex)))
 }
 
 // AddEntryByIndex wraps the raw AddEntryByIndex call.
-func (self ITocCollection) AddEntryByIndex(dwEntryIndex uint32, pToc *mediamediafoundation.IToc) error {
-	return win32.HRESULTError(int32(self.Raw.AddEntryByIndex(dwEntryIndex, pToc)))
+func (self ITocCollection) AddEntryByIndex(dwEntryIndex uint32, pToc IToc) error {
+	return win32.HRESULTError(int32(self.Raw.AddEntryByIndex(dwEntryIndex, pToc.Raw)))
 }
 
 // RemoveEntryByIndex wraps the raw RemoveEntryByIndex call.
@@ -11550,13 +11553,13 @@ func (self ITocEntryList) GetEntryByIndex(dwEntryIndex uint32, ppEntry **mediame
 }
 
 // AddEntry wraps the raw AddEntry call.
-func (self ITocEntryList) AddEntry(pEntry *mediamediafoundation.ITocEntry, pdwEntryIndex *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddEntry(pEntry, pdwEntryIndex)))
+func (self ITocEntryList) AddEntry(pEntry ITocEntry, pdwEntryIndex *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddEntry(pEntry.Raw, pdwEntryIndex)))
 }
 
 // AddEntryByIndex wraps the raw AddEntryByIndex call.
-func (self ITocEntryList) AddEntryByIndex(dwEntryIndex uint32, pEntry *mediamediafoundation.ITocEntry) error {
-	return win32.HRESULTError(int32(self.Raw.AddEntryByIndex(dwEntryIndex, pEntry)))
+func (self ITocEntryList) AddEntryByIndex(dwEntryIndex uint32, pEntry ITocEntry) error {
+	return win32.HRESULTError(int32(self.Raw.AddEntryByIndex(dwEntryIndex, pEntry.Raw)))
 }
 
 // RemoveEntryByIndex wraps the raw RemoveEntryByIndex call.
@@ -11592,8 +11595,8 @@ func (self ITocParser) GetTocByIndex(enumTocPosType mediamediafoundation.TOC_POS
 }
 
 // AddToc wraps the raw AddToc call.
-func (self ITocParser) AddToc(enumTocPosType mediamediafoundation.TOC_POS_TYPE, pToc *mediamediafoundation.IToc, pdwTocIndex *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddToc(enumTocPosType, pToc, pdwTocIndex)))
+func (self ITocParser) AddToc(enumTocPosType mediamediafoundation.TOC_POS_TYPE, pToc IToc, pdwTocIndex *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddToc(enumTocPosType, pToc.Raw, pdwTocIndex)))
 }
 
 // RemoveTocByIndex wraps the raw RemoveTocByIndex call.
@@ -11947,13 +11950,13 @@ func (self IWMVideoDecoderReconBuffer) GetReconstructedVideoFrameSize(pdwSize *u
 }
 
 // GetReconstructedVideoFrame wraps the raw GetReconstructedVideoFrame call.
-func (self IWMVideoDecoderReconBuffer) GetReconstructedVideoFrame(pBuf *mediadxmediaobjects.IMediaBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.GetReconstructedVideoFrame(pBuf)))
+func (self IWMVideoDecoderReconBuffer) GetReconstructedVideoFrame(pBuf mediadxmediaobjectsidiom.IMediaBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.GetReconstructedVideoFrame(pBuf.Raw)))
 }
 
 // SetReconstructedVideoFrame wraps the raw SetReconstructedVideoFrame call.
-func (self IWMVideoDecoderReconBuffer) SetReconstructedVideoFrame(pBuf *mediadxmediaobjects.IMediaBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.SetReconstructedVideoFrame(pBuf)))
+func (self IWMVideoDecoderReconBuffer) SetReconstructedVideoFrame(pBuf mediadxmediaobjectsidiom.IMediaBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.SetReconstructedVideoFrame(pBuf.Raw)))
 }
 
 // IWMVideoForceKeyFrame is an idiomatic wrapper over the raw COM interface Media.MediaFoundation.IWMVideoForceKeyFrame with error-returning methods.

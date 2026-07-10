@@ -77,23 +77,23 @@ func (self ICallFrame) GetParam(iparam uint32, pvar *systemvariant.VARIANT) erro
 }
 
 // Copy wraps the raw Copy call.
-func (self ICallFrame) Copy(copyControl systemcomcallobj.CALLFRAME_COPY, pWalker *systemcomcallobj.ICallFrameWalker, ppFrame **systemcomcallobj.ICallFrame) error {
-	return win32.HRESULTError(int32(self.Raw.Copy(copyControl, pWalker, ppFrame)))
+func (self ICallFrame) Copy(copyControl systemcomcallobj.CALLFRAME_COPY, pWalker ICallFrameWalker, ppFrame **systemcomcallobj.ICallFrame) error {
+	return win32.HRESULTError(int32(self.Raw.Copy(copyControl, pWalker.Raw, ppFrame)))
 }
 
 // Free wraps the raw Free call.
-func (self ICallFrame) Free(pframeArgsDest *systemcomcallobj.ICallFrame, pWalkerDestFree *systemcomcallobj.ICallFrameWalker, pWalkerCopy *systemcomcallobj.ICallFrameWalker, freeFlags uint32, pWalkerFree *systemcomcallobj.ICallFrameWalker, nullFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Free(pframeArgsDest, pWalkerDestFree, pWalkerCopy, freeFlags, pWalkerFree, nullFlags)))
+func (self ICallFrame) Free(pframeArgsDest ICallFrame, pWalkerDestFree ICallFrameWalker, pWalkerCopy ICallFrameWalker, freeFlags uint32, pWalkerFree ICallFrameWalker, nullFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Free(pframeArgsDest.Raw, pWalkerDestFree.Raw, pWalkerCopy.Raw, freeFlags, pWalkerFree.Raw, nullFlags)))
 }
 
 // FreeParam wraps the raw FreeParam call.
-func (self ICallFrame) FreeParam(iparam uint32, freeFlags uint32, pWalkerFree *systemcomcallobj.ICallFrameWalker, nullFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.FreeParam(iparam, freeFlags, pWalkerFree, nullFlags)))
+func (self ICallFrame) FreeParam(iparam uint32, freeFlags uint32, pWalkerFree ICallFrameWalker, nullFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.FreeParam(iparam, freeFlags, pWalkerFree.Raw, nullFlags)))
 }
 
 // WalkFrame wraps the raw WalkFrame call.
-func (self ICallFrame) WalkFrame(walkWhat uint32, pWalker *systemcomcallobj.ICallFrameWalker) error {
-	return win32.HRESULTError(int32(self.Raw.WalkFrame(walkWhat, pWalker)))
+func (self ICallFrame) WalkFrame(walkWhat uint32, pWalker ICallFrameWalker) error {
+	return win32.HRESULTError(int32(self.Raw.WalkFrame(walkWhat, pWalker.Raw)))
 }
 
 // GetMarshalSizeMax wraps the raw GetMarshalSizeMax call.
@@ -133,8 +133,8 @@ func WrapICallFrameEvents(raw *systemcomcallobj.ICallFrameEvents) ICallFrameEven
 }
 
 // OnCall wraps the raw OnCall call.
-func (self ICallFrameEvents) OnCall(pFrame *systemcomcallobj.ICallFrame) error {
-	return win32.HRESULTError(int32(self.Raw.OnCall(pFrame)))
+func (self ICallFrameEvents) OnCall(pFrame ICallFrame) error {
+	return win32.HRESULTError(int32(self.Raw.OnCall(pFrame.Raw)))
 }
 
 // ICallFrameWalker is an idiomatic wrapper over the raw COM interface System.Com.CallObj.ICallFrameWalker with error-returning methods.
@@ -198,8 +198,8 @@ func WrapICallInterceptor(raw *systemcomcallobj.ICallInterceptor) ICallIntercept
 }
 
 // RegisterSink wraps the raw RegisterSink call.
-func (self ICallInterceptor) RegisterSink(psink *systemcomcallobj.ICallFrameEvents) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterSink(psink)))
+func (self ICallInterceptor) RegisterSink(psink ICallFrameEvents) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterSink(psink.Raw)))
 }
 
 // GetRegisteredSink wraps the raw GetRegisteredSink call.

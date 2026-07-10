@@ -74,8 +74,8 @@ func (self IUPnPDescriptionDocument) Load(bstrUrl foundation.BSTR) error {
 }
 
 // LoadAsync wraps the raw LoadAsync call.
-func (self IUPnPDescriptionDocument) LoadAsync(bstrUrl foundation.BSTR, punkCallback *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.LoadAsync(bstrUrl, punkCallback)))
+func (self IUPnPDescriptionDocument) LoadAsync(bstrUrl foundation.BSTR, punkCallback systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.LoadAsync(bstrUrl, punkCallback.Raw)))
 }
 
 // Get_LoadResult wraps the raw Get_LoadResult call.
@@ -91,17 +91,17 @@ func (self IUPnPDescriptionDocument) Abort() error {
 }
 
 // RootDevice wraps the raw RootDevice call.
-func (self IUPnPDescriptionDocument) RootDevice() (*devicesenumerationpnp.IUPnPDevice, error) {
+func (self IUPnPDescriptionDocument) RootDevice() (IUPnPDevice, error) {
 	var _ppudRootDevice *devicesenumerationpnp.IUPnPDevice
 	_hr := self.Raw.RootDevice(&_ppudRootDevice)
-	return _ppudRootDevice, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPDevice(_ppudRootDevice), win32.HRESULTError(int32(_hr))
 }
 
 // DeviceByUDN wraps the raw DeviceByUDN call.
-func (self IUPnPDescriptionDocument) DeviceByUDN(bstrUDN foundation.BSTR) (*devicesenumerationpnp.IUPnPDevice, error) {
+func (self IUPnPDescriptionDocument) DeviceByUDN(bstrUDN foundation.BSTR) (IUPnPDevice, error) {
 	var _ppudDevice *devicesenumerationpnp.IUPnPDevice
 	_hr := self.Raw.DeviceByUDN(bstrUDN, &_ppudDevice)
-	return _ppudDevice, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPDevice(_ppudDevice), win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDescriptionDocumentCallback is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDescriptionDocumentCallback with error-returning methods.
@@ -139,17 +139,17 @@ func (self IUPnPDevice) Get_IsRootDevice() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_RootDevice wraps the raw Get_RootDevice call.
-func (self IUPnPDevice) Get_RootDevice() (*devicesenumerationpnp.IUPnPDevice, error) {
+func (self IUPnPDevice) Get_RootDevice() (IUPnPDevice, error) {
 	var _ppudRootDevice *devicesenumerationpnp.IUPnPDevice
 	_hr := self.Raw.Get_RootDevice(&_ppudRootDevice)
-	return _ppudRootDevice, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPDevice(_ppudRootDevice), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ParentDevice wraps the raw Get_ParentDevice call.
-func (self IUPnPDevice) Get_ParentDevice() (*devicesenumerationpnp.IUPnPDevice, error) {
+func (self IUPnPDevice) Get_ParentDevice() (IUPnPDevice, error) {
 	var _ppudDeviceParent *devicesenumerationpnp.IUPnPDevice
 	_hr := self.Raw.Get_ParentDevice(&_ppudDeviceParent)
-	return _ppudDeviceParent, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPDevice(_ppudDeviceParent), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HasChildren wraps the raw Get_HasChildren call.
@@ -160,10 +160,10 @@ func (self IUPnPDevice) Get_HasChildren() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_Children wraps the raw Get_Children call.
-func (self IUPnPDevice) Get_Children() (*devicesenumerationpnp.IUPnPDevices, error) {
+func (self IUPnPDevice) Get_Children() (IUPnPDevices, error) {
 	var _ppudChildren *devicesenumerationpnp.IUPnPDevices
 	_hr := self.Raw.Get_Children(&_ppudChildren)
-	return _ppudChildren, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPDevices(_ppudChildren), win32.HRESULTError(int32(_hr))
 }
 
 // Get_UniqueDeviceName wraps the raw Get_UniqueDeviceName call.
@@ -258,10 +258,10 @@ func (self IUPnPDevice) IconURL(bstrEncodingFormat foundation.BSTR, lSizeX int32
 }
 
 // Get_Services wraps the raw Get_Services call.
-func (self IUPnPDevice) Get_Services() (*devicesenumerationpnp.IUPnPServices, error) {
+func (self IUPnPDevice) Get_Services() (IUPnPServices, error) {
 	var _ppusServices *devicesenumerationpnp.IUPnPServices
 	_hr := self.Raw.Get_Services(&_ppusServices)
-	return _ppusServices, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPServices(_ppusServices), win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceControl is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceControl with error-returning methods.
@@ -281,10 +281,10 @@ func (self IUPnPDeviceControl) Initialize(bstrXMLDesc foundation.BSTR, bstrDevic
 }
 
 // GetServiceObject wraps the raw GetServiceObject call.
-func (self IUPnPDeviceControl) GetServiceObject(bstrUDN foundation.BSTR, bstrServiceId foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IUPnPDeviceControl) GetServiceObject(bstrUDN foundation.BSTR, bstrServiceId foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _ppdispService *systemcom.IDispatch
 	_hr := self.Raw.GetServiceObject(bstrUDN, bstrServiceId, &_ppdispService)
-	return _ppdispService, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppdispService), win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceControlHttpHeaders is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceControlHttpHeaders with error-returning methods.
@@ -353,16 +353,16 @@ func WrapIUPnPDeviceFinder(raw *devicesenumerationpnp.IUPnPDeviceFinder) IUPnPDe
 }
 
 // FindByType wraps the raw FindByType call.
-func (self IUPnPDeviceFinder) FindByType(bstrTypeURI foundation.BSTR, dwFlags uint32) (*devicesenumerationpnp.IUPnPDevices, error) {
+func (self IUPnPDeviceFinder) FindByType(bstrTypeURI foundation.BSTR, dwFlags uint32) (IUPnPDevices, error) {
 	var _pDevices *devicesenumerationpnp.IUPnPDevices
 	_hr := self.Raw.FindByType(bstrTypeURI, dwFlags, &_pDevices)
-	return _pDevices, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPDevices(_pDevices), win32.HRESULTError(int32(_hr))
 }
 
 // CreateAsyncFind wraps the raw CreateAsyncFind call.
-func (self IUPnPDeviceFinder) CreateAsyncFind(bstrTypeURI foundation.BSTR, dwFlags uint32, punkDeviceFinderCallback *systemcom.IUnknown) (int32, error) {
+func (self IUPnPDeviceFinder) CreateAsyncFind(bstrTypeURI foundation.BSTR, dwFlags uint32, punkDeviceFinderCallback systemcomidiom.IUnknown) (int32, error) {
 	var _plFindData int32
-	_hr := self.Raw.CreateAsyncFind(bstrTypeURI, dwFlags, punkDeviceFinderCallback, &_plFindData)
+	_hr := self.Raw.CreateAsyncFind(bstrTypeURI, dwFlags, punkDeviceFinderCallback.Raw, &_plFindData)
 	return _plFindData, win32.HRESULTError(int32(_hr))
 }
 
@@ -377,10 +377,10 @@ func (self IUPnPDeviceFinder) CancelAsyncFind(lFindData int32) error {
 }
 
 // FindByUDN wraps the raw FindByUDN call.
-func (self IUPnPDeviceFinder) FindByUDN(bstrUDN foundation.BSTR) (*devicesenumerationpnp.IUPnPDevice, error) {
+func (self IUPnPDeviceFinder) FindByUDN(bstrUDN foundation.BSTR) (IUPnPDevice, error) {
 	var _pDevice *devicesenumerationpnp.IUPnPDevice
 	_hr := self.Raw.FindByUDN(bstrUDN, &_pDevice)
-	return _pDevice, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPDevice(_pDevice), win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceFinderAddCallbackWithInterface is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceFinderAddCallbackWithInterface with error-returning methods.
@@ -395,8 +395,8 @@ func WrapIUPnPDeviceFinderAddCallbackWithInterface(raw *devicesenumerationpnp.IU
 }
 
 // DeviceAddedWithInterface wraps the raw DeviceAddedWithInterface call.
-func (self IUPnPDeviceFinderAddCallbackWithInterface) DeviceAddedWithInterface(lFindData int32, pDevice *devicesenumerationpnp.IUPnPDevice, pguidInterface *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.DeviceAddedWithInterface(lFindData, pDevice, pguidInterface)))
+func (self IUPnPDeviceFinderAddCallbackWithInterface) DeviceAddedWithInterface(lFindData int32, pDevice IUPnPDevice, pguidInterface *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.DeviceAddedWithInterface(lFindData, pDevice.Raw, pguidInterface)))
 }
 
 // IUPnPDeviceFinderCallback is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceFinderCallback with error-returning methods.
@@ -411,8 +411,8 @@ func WrapIUPnPDeviceFinderCallback(raw *devicesenumerationpnp.IUPnPDeviceFinderC
 }
 
 // DeviceAdded wraps the raw DeviceAdded call.
-func (self IUPnPDeviceFinderCallback) DeviceAdded(lFindData int32, pDevice *devicesenumerationpnp.IUPnPDevice) error {
-	return win32.HRESULTError(int32(self.Raw.DeviceAdded(lFindData, pDevice)))
+func (self IUPnPDeviceFinderCallback) DeviceAdded(lFindData int32, pDevice IUPnPDevice) error {
+	return win32.HRESULTError(int32(self.Raw.DeviceAdded(lFindData, pDevice.Raw)))
 }
 
 // DeviceRemoved wraps the raw DeviceRemoved call.
@@ -465,17 +465,17 @@ func (self IUPnPDevices) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUPnPDevices) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IUPnPDevices) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppunk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppunk)
-	return _ppunk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppunk), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUPnPDevices) Get_Item(bstrUDN foundation.BSTR) (*devicesenumerationpnp.IUPnPDevice, error) {
+func (self IUPnPDevices) Get_Item(bstrUDN foundation.BSTR) (IUPnPDevice, error) {
 	var _ppDevice *devicesenumerationpnp.IUPnPDevice
 	_hr := self.Raw.Get_Item(bstrUDN, &_ppDevice)
-	return _ppDevice, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPDevice(_ppDevice), win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPEventSink is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPEventSink with error-returning methods.
@@ -506,13 +506,13 @@ func WrapIUPnPEventSource(raw *devicesenumerationpnp.IUPnPEventSource) IUPnPEven
 }
 
 // Advise wraps the raw Advise call.
-func (self IUPnPEventSource) Advise(pesSubscriber *devicesenumerationpnp.IUPnPEventSink) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pesSubscriber)))
+func (self IUPnPEventSource) Advise(pesSubscriber IUPnPEventSink) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pesSubscriber.Raw)))
 }
 
 // Unadvise wraps the raw Unadvise call.
-func (self IUPnPEventSource) Unadvise(pesSubscriber *devicesenumerationpnp.IUPnPEventSink) error {
-	return win32.HRESULTError(int32(self.Raw.Unadvise(pesSubscriber)))
+func (self IUPnPEventSource) Unadvise(pesSubscriber IUPnPEventSink) error {
+	return win32.HRESULTError(int32(self.Raw.Unadvise(pesSubscriber.Raw)))
 }
 
 // IUPnPHttpHeaderControl is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPHttpHeaderControl with error-returning methods.
@@ -550,9 +550,9 @@ func (self IUPnPRegistrar) RegisterDevice(bstrXMLDesc foundation.BSTR, bstrProgI
 }
 
 // RegisterRunningDevice wraps the raw RegisterRunningDevice call.
-func (self IUPnPRegistrar) RegisterRunningDevice(bstrXMLDesc foundation.BSTR, punkDeviceControl *systemcom.IUnknown, bstrInitString foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32) (foundation.BSTR, error) {
+func (self IUPnPRegistrar) RegisterRunningDevice(bstrXMLDesc foundation.BSTR, punkDeviceControl systemcomidiom.IUnknown, bstrInitString foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32) (foundation.BSTR, error) {
 	var _pbstrDeviceIdentifier foundation.BSTR
-	_hr := self.Raw.RegisterRunningDevice(bstrXMLDesc, punkDeviceControl, bstrInitString, bstrResourcePath, nLifeTime, &_pbstrDeviceIdentifier)
+	_hr := self.Raw.RegisterRunningDevice(bstrXMLDesc, punkDeviceControl.Raw, bstrInitString, bstrResourcePath, nLifeTime, &_pbstrDeviceIdentifier)
 	return _pbstrDeviceIdentifier, win32.HRESULTError(int32(_hr))
 }
 
@@ -622,8 +622,8 @@ func (self IUPnPReregistrar) ReregisterDevice(bstrDeviceIdentifier foundation.BS
 }
 
 // ReregisterRunningDevice wraps the raw ReregisterRunningDevice call.
-func (self IUPnPReregistrar) ReregisterRunningDevice(bstrDeviceIdentifier foundation.BSTR, bstrXMLDesc foundation.BSTR, punkDeviceControl *systemcom.IUnknown, bstrInitString foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32) error {
-	return win32.HRESULTError(int32(self.Raw.ReregisterRunningDevice(bstrDeviceIdentifier, bstrXMLDesc, punkDeviceControl, bstrInitString, bstrResourcePath, nLifeTime)))
+func (self IUPnPReregistrar) ReregisterRunningDevice(bstrDeviceIdentifier foundation.BSTR, bstrXMLDesc foundation.BSTR, punkDeviceControl systemcomidiom.IUnknown, bstrInitString foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32) error {
+	return win32.HRESULTError(int32(self.Raw.ReregisterRunningDevice(bstrDeviceIdentifier, bstrXMLDesc, punkDeviceControl.Raw, bstrInitString, bstrResourcePath, nLifeTime)))
 }
 
 // IUPnPService is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPService with error-returning methods.
@@ -652,8 +652,8 @@ func (self IUPnPService) Get_ServiceTypeIdentifier() (foundation.BSTR, error) {
 }
 
 // AddCallback wraps the raw AddCallback call.
-func (self IUPnPService) AddCallback(pUnkCallback *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddCallback(pUnkCallback)))
+func (self IUPnPService) AddCallback(pUnkCallback systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddCallback(pUnkCallback.Raw)))
 }
 
 // Get_Id wraps the raw Get_Id call.
@@ -687,8 +687,8 @@ func (self IUPnPServiceAsync) EndInvokeAction(ullRequestID uint64, pvOutActionAr
 }
 
 // BeginQueryStateVariable wraps the raw BeginQueryStateVariable call.
-func (self IUPnPServiceAsync) BeginQueryStateVariable(bstrVariableName foundation.BSTR, pAsyncResult *devicesenumerationpnp.IUPnPAsyncResult, pullRequestID *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.BeginQueryStateVariable(bstrVariableName, pAsyncResult, pullRequestID)))
+func (self IUPnPServiceAsync) BeginQueryStateVariable(bstrVariableName foundation.BSTR, pAsyncResult IUPnPAsyncResult, pullRequestID *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.BeginQueryStateVariable(bstrVariableName, pAsyncResult.Raw, pullRequestID)))
 }
 
 // EndQueryStateVariable wraps the raw EndQueryStateVariable call.
@@ -697,8 +697,8 @@ func (self IUPnPServiceAsync) EndQueryStateVariable(ullRequestID uint64, pValue 
 }
 
 // BeginSubscribeToEvents wraps the raw BeginSubscribeToEvents call.
-func (self IUPnPServiceAsync) BeginSubscribeToEvents(pUnkCallback *systemcom.IUnknown, pAsyncResult *devicesenumerationpnp.IUPnPAsyncResult, pullRequestID *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.BeginSubscribeToEvents(pUnkCallback, pAsyncResult, pullRequestID)))
+func (self IUPnPServiceAsync) BeginSubscribeToEvents(pUnkCallback systemcomidiom.IUnknown, pAsyncResult IUPnPAsyncResult, pullRequestID *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.BeginSubscribeToEvents(pUnkCallback.Raw, pAsyncResult.Raw, pullRequestID)))
 }
 
 // EndSubscribeToEvents wraps the raw EndSubscribeToEvents call.
@@ -707,8 +707,8 @@ func (self IUPnPServiceAsync) EndSubscribeToEvents(ullRequestID uint64) error {
 }
 
 // BeginSCPDDownload wraps the raw BeginSCPDDownload call.
-func (self IUPnPServiceAsync) BeginSCPDDownload(pAsyncResult *devicesenumerationpnp.IUPnPAsyncResult, pullRequestID *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.BeginSCPDDownload(pAsyncResult, pullRequestID)))
+func (self IUPnPServiceAsync) BeginSCPDDownload(pAsyncResult IUPnPAsyncResult, pullRequestID *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.BeginSCPDDownload(pAsyncResult.Raw, pullRequestID)))
 }
 
 // EndSCPDDownload wraps the raw EndSCPDDownload call.
@@ -733,8 +733,8 @@ func WrapIUPnPServiceCallback(raw *devicesenumerationpnp.IUPnPServiceCallback) I
 }
 
 // ServiceInstanceDied wraps the raw ServiceInstanceDied call.
-func (self IUPnPServiceCallback) ServiceInstanceDied(pus *devicesenumerationpnp.IUPnPService) error {
-	return win32.HRESULTError(int32(self.Raw.ServiceInstanceDied(pus)))
+func (self IUPnPServiceCallback) ServiceInstanceDied(pus IUPnPService) error {
+	return win32.HRESULTError(int32(self.Raw.ServiceInstanceDied(pus.Raw)))
 }
 
 // IUPnPServiceDocumentAccess is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPServiceDocumentAccess with error-returning methods.
@@ -793,15 +793,15 @@ func (self IUPnPServices) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUPnPServices) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IUPnPServices) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppunk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppunk)
-	return _ppunk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppunk), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUPnPServices) Get_Item(bstrServiceId foundation.BSTR) (*devicesenumerationpnp.IUPnPService, error) {
+func (self IUPnPServices) Get_Item(bstrServiceId foundation.BSTR) (IUPnPService, error) {
 	var _ppService *devicesenumerationpnp.IUPnPService
 	_hr := self.Raw.Get_Item(bstrServiceId, &_ppService)
-	return _ppService, win32.HRESULTError(int32(_hr))
+	return WrapIUPnPService(_ppService), win32.HRESULTError(int32(_hr))
 }

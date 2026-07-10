@@ -25,8 +25,8 @@ func WrapISideShowBulkCapabilities(raw *systemsideshow.ISideShowBulkCapabilities
 }
 
 // GetCapabilities wraps the raw GetCapabilities call.
-func (self ISideShowBulkCapabilities) GetCapabilities(in_keyCollection *systemsideshow.ISideShowKeyCollection, inout_pValues **systemsideshow.ISideShowPropVariantCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetCapabilities(in_keyCollection, inout_pValues)))
+func (self ISideShowBulkCapabilities) GetCapabilities(in_keyCollection ISideShowKeyCollection, inout_pValues **systemsideshow.ISideShowPropVariantCollection) error {
+	return win32.HRESULTError(int32(self.Raw.GetCapabilities(in_keyCollection.Raw, inout_pValues)))
 }
 
 // ISideShowCapabilities is an idiomatic wrapper over the raw COM interface System.SideShow.ISideShowCapabilities with error-returning methods.
@@ -78,8 +78,8 @@ func WrapISideShowContent(raw *systemsideshow.ISideShowContent) ISideShowContent
 }
 
 // GetContent wraps the raw GetContent call.
-func (self ISideShowContent) GetContent(in_pICapabilities *systemsideshow.ISideShowCapabilities, out_pdwSize *uint32, out_ppbData **byte) error {
-	return win32.HRESULTError(int32(self.Raw.GetContent(in_pICapabilities, out_pdwSize, out_ppbData)))
+func (self ISideShowContent) GetContent(in_pICapabilities ISideShowCapabilities, out_pdwSize *uint32, out_ppbData **byte) error {
+	return win32.HRESULTError(int32(self.Raw.GetContent(in_pICapabilities.Raw, out_pdwSize, out_ppbData)))
 }
 
 // Get_ContentId wraps the raw Get_ContentId call.
@@ -104,8 +104,8 @@ func WrapISideShowContentManager(raw *systemsideshow.ISideShowContentManager) IS
 }
 
 // Add wraps the raw Add call.
-func (self ISideShowContentManager) Add(in_pIContent *systemsideshow.ISideShowContent) error {
-	return win32.HRESULTError(int32(self.Raw.Add(in_pIContent)))
+func (self ISideShowContentManager) Add(in_pIContent ISideShowContent) error {
+	return win32.HRESULTError(int32(self.Raw.Add(in_pIContent.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -119,8 +119,8 @@ func (self ISideShowContentManager) RemoveAll() error {
 }
 
 // SetEventSink wraps the raw SetEventSink call.
-func (self ISideShowContentManager) SetEventSink(in_pIEvents *systemsideshow.ISideShowEvents) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventSink(in_pIEvents)))
+func (self ISideShowContentManager) SetEventSink(in_pIEvents ISideShowEvents) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventSink(in_pIEvents.Raw)))
 }
 
 // GetDeviceCapabilities wraps the raw GetDeviceCapabilities call.
@@ -145,18 +145,18 @@ func (self ISideShowEvents) ContentMissing(in_contentId uint32, out_ppIContent *
 }
 
 // ApplicationEvent wraps the raw ApplicationEvent call.
-func (self ISideShowEvents) ApplicationEvent(in_pICapabilities *systemsideshow.ISideShowCapabilities, in_dwEventId uint32, in_dwEventSize uint32, in_pbEventData *byte) error {
-	return win32.HRESULTError(int32(self.Raw.ApplicationEvent(in_pICapabilities, in_dwEventId, in_dwEventSize, in_pbEventData)))
+func (self ISideShowEvents) ApplicationEvent(in_pICapabilities ISideShowCapabilities, in_dwEventId uint32, in_dwEventSize uint32, in_pbEventData *byte) error {
+	return win32.HRESULTError(int32(self.Raw.ApplicationEvent(in_pICapabilities.Raw, in_dwEventId, in_dwEventSize, in_pbEventData)))
 }
 
 // DeviceAdded wraps the raw DeviceAdded call.
-func (self ISideShowEvents) DeviceAdded(in_pIDevice *systemsideshow.ISideShowCapabilities) error {
-	return win32.HRESULTError(int32(self.Raw.DeviceAdded(in_pIDevice)))
+func (self ISideShowEvents) DeviceAdded(in_pIDevice ISideShowCapabilities) error {
+	return win32.HRESULTError(int32(self.Raw.DeviceAdded(in_pIDevice.Raw)))
 }
 
 // DeviceRemoved wraps the raw DeviceRemoved call.
-func (self ISideShowEvents) DeviceRemoved(in_pIDevice *systemsideshow.ISideShowCapabilities) error {
-	return win32.HRESULTError(int32(self.Raw.DeviceRemoved(in_pIDevice)))
+func (self ISideShowEvents) DeviceRemoved(in_pIDevice ISideShowCapabilities) error {
+	return win32.HRESULTError(int32(self.Raw.DeviceRemoved(in_pIDevice.Raw)))
 }
 
 // ISideShowKeyCollection is an idiomatic wrapper over the raw COM interface System.SideShow.ISideShowKeyCollection with error-returning methods.
@@ -270,8 +270,8 @@ func WrapISideShowNotificationManager(raw *systemsideshow.ISideShowNotificationM
 }
 
 // Show wraps the raw Show call.
-func (self ISideShowNotificationManager) Show(in_pINotification *systemsideshow.ISideShowNotification) error {
-	return win32.HRESULTError(int32(self.Raw.Show(in_pINotification)))
+func (self ISideShowNotificationManager) Show(in_pINotification ISideShowNotification) error {
+	return win32.HRESULTError(int32(self.Raw.Show(in_pINotification.Raw)))
 }
 
 // Revoke wraps the raw Revoke call.

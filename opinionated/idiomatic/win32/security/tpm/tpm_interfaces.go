@@ -23,16 +23,16 @@ func WrapITpmVirtualSmartCardManager(raw *securitytpm.ITpmVirtualSmartCardManage
 }
 
 // CreateVirtualSmartCard wraps the raw CreateVirtualSmartCard call.
-func (self ITpmVirtualSmartCardManager) CreateVirtualSmartCard(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, fGenerate bool, pStatusCallback *securitytpm.ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
+func (self ITpmVirtualSmartCardManager) CreateVirtualSmartCard(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, fGenerate bool, pStatusCallback ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
 	_pszFriendlyName := win32.UTF16Ptr(pszFriendlyName)
 	_fGenerate := foundation.BOOL(win32.Bool32(fGenerate))
-	return win32.HRESULTError(int32(self.Raw.CreateVirtualSmartCard(foundation.PWSTR(_pszFriendlyName), bAdminAlgId, pbAdminKey, cbAdminKey, pbAdminKcv, cbAdminKcv, pbPuk, cbPuk, pbPin, cbPin, _fGenerate, pStatusCallback, ppszInstanceId, pfNeedReboot)))
+	return win32.HRESULTError(int32(self.Raw.CreateVirtualSmartCard(foundation.PWSTR(_pszFriendlyName), bAdminAlgId, pbAdminKey, cbAdminKey, pbAdminKcv, cbAdminKcv, pbPuk, cbPuk, pbPin, cbPin, _fGenerate, pStatusCallback.Raw, ppszInstanceId, pfNeedReboot)))
 }
 
 // DestroyVirtualSmartCard wraps the raw DestroyVirtualSmartCard call.
-func (self ITpmVirtualSmartCardManager) DestroyVirtualSmartCard(pszInstanceId string, pStatusCallback *securitytpm.ITpmVirtualSmartCardManagerStatusCallback, pfNeedReboot *foundation.BOOL) error {
+func (self ITpmVirtualSmartCardManager) DestroyVirtualSmartCard(pszInstanceId string, pStatusCallback ITpmVirtualSmartCardManagerStatusCallback, pfNeedReboot *foundation.BOOL) error {
 	_pszInstanceId := win32.UTF16Ptr(pszInstanceId)
-	return win32.HRESULTError(int32(self.Raw.DestroyVirtualSmartCard(foundation.PWSTR(_pszInstanceId), pStatusCallback, pfNeedReboot)))
+	return win32.HRESULTError(int32(self.Raw.DestroyVirtualSmartCard(foundation.PWSTR(_pszInstanceId), pStatusCallback.Raw, pfNeedReboot)))
 }
 
 // ITpmVirtualSmartCardManager2 is an idiomatic wrapper over the raw COM interface Security.Tpm.ITpmVirtualSmartCardManager2 with error-returning methods.
@@ -47,10 +47,10 @@ func WrapITpmVirtualSmartCardManager2(raw *securitytpm.ITpmVirtualSmartCardManag
 }
 
 // CreateVirtualSmartCardWithPinPolicy wraps the raw CreateVirtualSmartCardWithPinPolicy call.
-func (self ITpmVirtualSmartCardManager2) CreateVirtualSmartCardWithPinPolicy(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, pbPinPolicy *byte, cbPinPolicy uint32, fGenerate bool, pStatusCallback *securitytpm.ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
+func (self ITpmVirtualSmartCardManager2) CreateVirtualSmartCardWithPinPolicy(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, pbPinPolicy *byte, cbPinPolicy uint32, fGenerate bool, pStatusCallback ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
 	_pszFriendlyName := win32.UTF16Ptr(pszFriendlyName)
 	_fGenerate := foundation.BOOL(win32.Bool32(fGenerate))
-	return win32.HRESULTError(int32(self.Raw.CreateVirtualSmartCardWithPinPolicy(foundation.PWSTR(_pszFriendlyName), bAdminAlgId, pbAdminKey, cbAdminKey, pbAdminKcv, cbAdminKcv, pbPuk, cbPuk, pbPin, cbPin, pbPinPolicy, cbPinPolicy, _fGenerate, pStatusCallback, ppszInstanceId, pfNeedReboot)))
+	return win32.HRESULTError(int32(self.Raw.CreateVirtualSmartCardWithPinPolicy(foundation.PWSTR(_pszFriendlyName), bAdminAlgId, pbAdminKey, cbAdminKey, pbAdminKcv, cbAdminKcv, pbPuk, cbPuk, pbPin, cbPin, pbPinPolicy, cbPinPolicy, _fGenerate, pStatusCallback.Raw, ppszInstanceId, pfNeedReboot)))
 }
 
 // ITpmVirtualSmartCardManager3 is an idiomatic wrapper over the raw COM interface Security.Tpm.ITpmVirtualSmartCardManager3 with error-returning methods.
@@ -65,10 +65,10 @@ func WrapITpmVirtualSmartCardManager3(raw *securitytpm.ITpmVirtualSmartCardManag
 }
 
 // CreateVirtualSmartCardWithAttestation wraps the raw CreateVirtualSmartCardWithAttestation call.
-func (self ITpmVirtualSmartCardManager3) CreateVirtualSmartCardWithAttestation(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, pbPinPolicy *byte, cbPinPolicy uint32, attestationType securitytpm.TPMVSC_ATTESTATION_TYPE, fGenerate bool, pStatusCallback *securitytpm.ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR) error {
+func (self ITpmVirtualSmartCardManager3) CreateVirtualSmartCardWithAttestation(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, pbPinPolicy *byte, cbPinPolicy uint32, attestationType securitytpm.TPMVSC_ATTESTATION_TYPE, fGenerate bool, pStatusCallback ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR) error {
 	_pszFriendlyName := win32.UTF16Ptr(pszFriendlyName)
 	_fGenerate := foundation.BOOL(win32.Bool32(fGenerate))
-	return win32.HRESULTError(int32(self.Raw.CreateVirtualSmartCardWithAttestation(foundation.PWSTR(_pszFriendlyName), bAdminAlgId, pbAdminKey, cbAdminKey, pbAdminKcv, cbAdminKcv, pbPuk, cbPuk, pbPin, cbPin, pbPinPolicy, cbPinPolicy, attestationType, _fGenerate, pStatusCallback, ppszInstanceId)))
+	return win32.HRESULTError(int32(self.Raw.CreateVirtualSmartCardWithAttestation(foundation.PWSTR(_pszFriendlyName), bAdminAlgId, pbAdminKey, cbAdminKey, pbAdminKcv, cbAdminKcv, pbPuk, cbPuk, pbPin, cbPin, pbPinPolicy, cbPinPolicy, attestationType, _fGenerate, pStatusCallback.Raw, ppszInstanceId)))
 }
 
 // ITpmVirtualSmartCardManagerStatusCallback is an idiomatic wrapper over the raw COM interface Security.Tpm.ITpmVirtualSmartCardManagerStatusCallback with error-returning methods.

@@ -266,8 +266,8 @@ func (self IEmailAction) Get_HeaderFields(ppHeaderFields **systemtaskscheduler.I
 }
 
 // Put_HeaderFields wraps the raw Put_HeaderFields call.
-func (self IEmailAction) Put_HeaderFields(pHeaderFields *systemtaskscheduler.ITaskNamedValueCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Put_HeaderFields(pHeaderFields)))
+func (self IEmailAction) Put_HeaderFields(pHeaderFields ITaskNamedValueCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Put_HeaderFields(pHeaderFields.Raw)))
 }
 
 // Get_Body wraps the raw Get_Body call.
@@ -358,8 +358,8 @@ func (self IEventTrigger) Get_ValueQueries(ppNamedXPaths **systemtaskscheduler.I
 }
 
 // Put_ValueQueries wraps the raw Put_ValueQueries call.
-func (self IEventTrigger) Put_ValueQueries(pNamedXPaths *systemtaskscheduler.ITaskNamedValueCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Put_ValueQueries(pNamedXPaths)))
+func (self IEventTrigger) Put_ValueQueries(pNamedXPaths ITaskNamedValueCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Put_ValueQueries(pNamedXPaths.Raw)))
 }
 
 // IExecAction is an idiomatic wrapper over the raw COM interface System.TaskScheduler.IExecAction with error-returning methods.
@@ -1490,8 +1490,8 @@ func (self ITaskDefinition) Get_RegistrationInfo(ppRegistrationInfo **systemtask
 }
 
 // Put_RegistrationInfo wraps the raw Put_RegistrationInfo call.
-func (self ITaskDefinition) Put_RegistrationInfo(pRegistrationInfo *systemtaskscheduler.IRegistrationInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Put_RegistrationInfo(pRegistrationInfo)))
+func (self ITaskDefinition) Put_RegistrationInfo(pRegistrationInfo IRegistrationInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Put_RegistrationInfo(pRegistrationInfo.Raw)))
 }
 
 // Get_Triggers wraps the raw Get_Triggers call.
@@ -1500,8 +1500,8 @@ func (self ITaskDefinition) Get_Triggers(ppTriggers **systemtaskscheduler.ITrigg
 }
 
 // Put_Triggers wraps the raw Put_Triggers call.
-func (self ITaskDefinition) Put_Triggers(pTriggers *systemtaskscheduler.ITriggerCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Triggers(pTriggers)))
+func (self ITaskDefinition) Put_Triggers(pTriggers ITriggerCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Triggers(pTriggers.Raw)))
 }
 
 // Get_Settings wraps the raw Get_Settings call.
@@ -1510,8 +1510,8 @@ func (self ITaskDefinition) Get_Settings(ppSettings **systemtaskscheduler.ITaskS
 }
 
 // Put_Settings wraps the raw Put_Settings call.
-func (self ITaskDefinition) Put_Settings(pSettings *systemtaskscheduler.ITaskSettings) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Settings(pSettings)))
+func (self ITaskDefinition) Put_Settings(pSettings ITaskSettings) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Settings(pSettings.Raw)))
 }
 
 // Get_Data wraps the raw Get_Data call.
@@ -1530,8 +1530,8 @@ func (self ITaskDefinition) Get_Principal(ppPrincipal **systemtaskscheduler.IPri
 }
 
 // Put_Principal wraps the raw Put_Principal call.
-func (self ITaskDefinition) Put_Principal(pPrincipal *systemtaskscheduler.IPrincipal) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Principal(pPrincipal)))
+func (self ITaskDefinition) Put_Principal(pPrincipal IPrincipal) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Principal(pPrincipal.Raw)))
 }
 
 // Get_Actions wraps the raw Get_Actions call.
@@ -1540,8 +1540,8 @@ func (self ITaskDefinition) Get_Actions(ppActions **systemtaskscheduler.IActionC
 }
 
 // Put_Actions wraps the raw Put_Actions call.
-func (self ITaskDefinition) Put_Actions(pActions *systemtaskscheduler.IActionCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Actions(pActions)))
+func (self ITaskDefinition) Put_Actions(pActions IActionCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Actions(pActions.Raw)))
 }
 
 // Get_XmlText wraps the raw Get_XmlText call.
@@ -1648,8 +1648,8 @@ func WrapITaskHandler(raw *systemtaskscheduler.ITaskHandler) ITaskHandler {
 }
 
 // Start wraps the raw Start call.
-func (self ITaskHandler) Start(pHandlerServices *systemcom.IUnknown, data foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Start(pHandlerServices, data)))
+func (self ITaskHandler) Start(pHandlerServices systemcomidiom.IUnknown, data foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.Start(pHandlerServices.Raw, data)))
 }
 
 // Stop wraps the raw Stop call.
@@ -1806,9 +1806,9 @@ func (self ITaskScheduler) NewWorkItem(pwszTaskName string, rclsid *win32.GUID, 
 }
 
 // AddWorkItem wraps the raw AddWorkItem call.
-func (self ITaskScheduler) AddWorkItem(pwszTaskName string, pWorkItem *systemtaskscheduler.IScheduledWorkItem) error {
+func (self ITaskScheduler) AddWorkItem(pwszTaskName string, pWorkItem IScheduledWorkItem) error {
 	_pwszTaskName := win32.UTF16Ptr(pwszTaskName)
-	return win32.HRESULTError(int32(self.Raw.AddWorkItem(foundation.PWSTR(_pwszTaskName), pWorkItem)))
+	return win32.HRESULTError(int32(self.Raw.AddWorkItem(foundation.PWSTR(_pwszTaskName), pWorkItem.Raw)))
 }
 
 // IsOfType wraps the raw IsOfType call.
@@ -2045,8 +2045,8 @@ func (self ITaskSettings) Get_IdleSettings(ppIdleSettings **systemtaskscheduler.
 }
 
 // Put_IdleSettings wraps the raw Put_IdleSettings call.
-func (self ITaskSettings) Put_IdleSettings(pIdleSettings *systemtaskscheduler.IIdleSettings) error {
-	return win32.HRESULTError(int32(self.Raw.Put_IdleSettings(pIdleSettings)))
+func (self ITaskSettings) Put_IdleSettings(pIdleSettings IIdleSettings) error {
+	return win32.HRESULTError(int32(self.Raw.Put_IdleSettings(pIdleSettings.Raw)))
 }
 
 // Get_RunOnlyIfIdle wraps the raw Get_RunOnlyIfIdle call.
@@ -2075,8 +2075,8 @@ func (self ITaskSettings) Get_NetworkSettings(ppNetworkSettings **systemtasksche
 }
 
 // Put_NetworkSettings wraps the raw Put_NetworkSettings call.
-func (self ITaskSettings) Put_NetworkSettings(pNetworkSettings *systemtaskscheduler.INetworkSettings) error {
-	return win32.HRESULTError(int32(self.Raw.Put_NetworkSettings(pNetworkSettings)))
+func (self ITaskSettings) Put_NetworkSettings(pNetworkSettings INetworkSettings) error {
+	return win32.HRESULTError(int32(self.Raw.Put_NetworkSettings(pNetworkSettings.Raw)))
 }
 
 // ITaskSettings2 is an idiomatic wrapper over the raw COM interface System.TaskScheduler.ITaskSettings2 with error-returning methods.
@@ -2147,8 +2147,8 @@ func (self ITaskSettings3) Get_MaintenanceSettings(ppMaintenanceSettings **syste
 }
 
 // Put_MaintenanceSettings wraps the raw Put_MaintenanceSettings call.
-func (self ITaskSettings3) Put_MaintenanceSettings(pMaintenanceSettings *systemtaskscheduler.IMaintenanceSettings) error {
-	return win32.HRESULTError(int32(self.Raw.Put_MaintenanceSettings(pMaintenanceSettings)))
+func (self ITaskSettings3) Put_MaintenanceSettings(pMaintenanceSettings IMaintenanceSettings) error {
+	return win32.HRESULTError(int32(self.Raw.Put_MaintenanceSettings(pMaintenanceSettings.Raw)))
 }
 
 // CreateMaintenanceSettings wraps the raw CreateMaintenanceSettings call.
@@ -2271,8 +2271,8 @@ func (self ITrigger) Get_Repetition(ppRepeat **systemtaskscheduler.IRepetitionPa
 }
 
 // Put_Repetition wraps the raw Put_Repetition call.
-func (self ITrigger) Put_Repetition(pRepeat *systemtaskscheduler.IRepetitionPattern) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Repetition(pRepeat)))
+func (self ITrigger) Put_Repetition(pRepeat IRepetitionPattern) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Repetition(pRepeat.Raw)))
 }
 
 // Get_ExecutionTimeLimit wraps the raw Get_ExecutionTimeLimit call.

@@ -199,8 +199,8 @@ func (self ILayoutStorage) ReLayoutDocfile(pwcsNewDfName string) error {
 }
 
 // ReLayoutDocfileOnILockBytes wraps the raw ReLayoutDocfileOnILockBytes call.
-func (self ILayoutStorage) ReLayoutDocfileOnILockBytes(pILockBytes *systemcomstructuredstorage.ILockBytes) error {
-	return win32.HRESULTError(int32(self.Raw.ReLayoutDocfileOnILockBytes(pILockBytes)))
+func (self ILayoutStorage) ReLayoutDocfileOnILockBytes(pILockBytes ILockBytes) error {
+	return win32.HRESULTError(int32(self.Raw.ReLayoutDocfileOnILockBytes(pILockBytes.Raw)))
 }
 
 // ILockBytes is an idiomatic wrapper over the raw COM interface System.Com.StructuredStorage.ILockBytes with error-returning methods.
@@ -286,24 +286,24 @@ func (self IPersistStorage) IsDirty() error {
 }
 
 // InitNew wraps the raw InitNew call.
-func (self IPersistStorage) InitNew(pStg *systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(self.Raw.InitNew(pStg)))
+func (self IPersistStorage) InitNew(pStg IStorage) error {
+	return win32.HRESULTError(int32(self.Raw.InitNew(pStg.Raw)))
 }
 
 // Load wraps the raw Load call.
-func (self IPersistStorage) Load(pStg *systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pStg)))
+func (self IPersistStorage) Load(pStg IStorage) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pStg.Raw)))
 }
 
 // Save wraps the raw Save call.
-func (self IPersistStorage) Save(pStgSave *systemcomstructuredstorage.IStorage, fSameAsLoad bool) error {
+func (self IPersistStorage) Save(pStgSave IStorage, fSameAsLoad bool) error {
 	_fSameAsLoad := foundation.BOOL(win32.Bool32(fSameAsLoad))
-	return win32.HRESULTError(int32(self.Raw.Save(pStgSave, _fSameAsLoad)))
+	return win32.HRESULTError(int32(self.Raw.Save(pStgSave.Raw, _fSameAsLoad)))
 }
 
 // SaveCompleted wraps the raw SaveCompleted call.
-func (self IPersistStorage) SaveCompleted(pStgNew *systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(self.Raw.SaveCompleted(pStgNew)))
+func (self IPersistStorage) SaveCompleted(pStgNew IStorage) error {
+	return win32.HRESULTError(int32(self.Raw.SaveCompleted(pStgNew.Raw)))
 }
 
 // HandsOffStorage wraps the raw HandsOffStorage call.
@@ -323,9 +323,9 @@ func WrapIPropertyBag(raw *systemcomstructuredstorage.IPropertyBag) IPropertyBag
 }
 
 // Read wraps the raw Read call.
-func (self IPropertyBag) Read(pszPropName string, pVar *systemvariant.VARIANT, pErrorLog *systemcom.IErrorLog) error {
+func (self IPropertyBag) Read(pszPropName string, pVar *systemvariant.VARIANT, pErrorLog systemcomidiom.IErrorLog) error {
 	_pszPropName := win32.UTF16Ptr(pszPropName)
-	return win32.HRESULTError(int32(self.Raw.Read(foundation.PWSTR(_pszPropName), pVar, pErrorLog)))
+	return win32.HRESULTError(int32(self.Raw.Read(foundation.PWSTR(_pszPropName), pVar, pErrorLog.Raw)))
 }
 
 // Write wraps the raw Write call.
@@ -346,8 +346,8 @@ func WrapIPropertyBag2(raw *systemcomstructuredstorage.IPropertyBag2) IPropertyB
 }
 
 // Read wraps the raw Read call.
-func (self IPropertyBag2) Read(cProperties uint32, pPropBag *systemcomstructuredstorage.PROPBAG2, pErrLog *systemcom.IErrorLog, pvarValue *systemvariant.VARIANT, phrError *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.Read(cProperties, pPropBag, pErrLog, pvarValue, phrError)))
+func (self IPropertyBag2) Read(cProperties uint32, pPropBag *systemcomstructuredstorage.PROPBAG2, pErrLog systemcomidiom.IErrorLog, pvarValue *systemvariant.VARIANT, phrError *foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.Read(cProperties, pPropBag, pErrLog.Raw, pvarValue, phrError)))
 }
 
 // Write wraps the raw Write call.
@@ -366,9 +366,9 @@ func (self IPropertyBag2) GetPropertyInfo(iProperty uint32, cProperties uint32, 
 }
 
 // LoadObject wraps the raw LoadObject call.
-func (self IPropertyBag2) LoadObject(pstrName string, dwHint uint32, pUnkObject *systemcom.IUnknown, pErrLog *systemcom.IErrorLog) error {
+func (self IPropertyBag2) LoadObject(pstrName string, dwHint uint32, pUnkObject systemcomidiom.IUnknown, pErrLog systemcomidiom.IErrorLog) error {
 	_pstrName := win32.UTF16Ptr(pstrName)
-	return win32.HRESULTError(int32(self.Raw.LoadObject(foundation.PWSTR(_pstrName), dwHint, pUnkObject, pErrLog)))
+	return win32.HRESULTError(int32(self.Raw.LoadObject(foundation.PWSTR(_pstrName), dwHint, pUnkObject.Raw, pErrLog.Raw)))
 }
 
 // IPropertySetStorage is an idiomatic wrapper over the raw COM interface System.Com.StructuredStorage.IPropertySetStorage with error-returning methods.
@@ -520,21 +520,21 @@ func (self IStorage) CreateStorage(pwcsName string, grfMode systemcom.STGM, rese
 }
 
 // OpenStorage wraps the raw OpenStorage call.
-func (self IStorage) OpenStorage(pwcsName string, pstgPriority *systemcomstructuredstorage.IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstg **systemcomstructuredstorage.IStorage) error {
+func (self IStorage) OpenStorage(pwcsName string, pstgPriority IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstg **systemcomstructuredstorage.IStorage) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
-	return win32.HRESULTError(int32(self.Raw.OpenStorage(foundation.PWSTR(_pwcsName), pstgPriority, grfMode, snbExclude, reserved, ppstg)))
+	return win32.HRESULTError(int32(self.Raw.OpenStorage(foundation.PWSTR(_pwcsName), pstgPriority.Raw, grfMode, snbExclude, reserved, ppstg)))
 }
 
 // CopyTo wraps the raw CopyTo call.
-func (self IStorage) CopyTo(ciidExclude uint32, rgiidExclude *win32.GUID, snbExclude **uint16, pstgDest *systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(self.Raw.CopyTo(ciidExclude, rgiidExclude, snbExclude, pstgDest)))
+func (self IStorage) CopyTo(ciidExclude uint32, rgiidExclude *win32.GUID, snbExclude **uint16, pstgDest IStorage) error {
+	return win32.HRESULTError(int32(self.Raw.CopyTo(ciidExclude, rgiidExclude, snbExclude, pstgDest.Raw)))
 }
 
 // MoveElementTo wraps the raw MoveElementTo call.
-func (self IStorage) MoveElementTo(pwcsName string, pstgDest *systemcomstructuredstorage.IStorage, pwcsNewName string, grfFlags uint32) error {
+func (self IStorage) MoveElementTo(pwcsName string, pstgDest IStorage, pwcsNewName string, grfFlags uint32) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	_pwcsNewName := win32.UTF16Ptr(pwcsNewName)
-	return win32.HRESULTError(int32(self.Raw.MoveElementTo(foundation.PWSTR(_pwcsName), pstgDest, foundation.PWSTR(_pwcsNewName), grfFlags)))
+	return win32.HRESULTError(int32(self.Raw.MoveElementTo(foundation.PWSTR(_pwcsName), pstgDest.Raw, foundation.PWSTR(_pwcsNewName), grfFlags)))
 }
 
 // Commit wraps the raw Commit call.

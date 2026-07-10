@@ -9,10 +9,10 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemwinrtxaml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/xaml"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -67,8 +67,8 @@ func WrapIFindReferenceTargetsCallback(raw *systemwinrtxaml.IFindReferenceTarget
 }
 
 // FoundTrackerTarget wraps the raw FoundTrackerTarget call.
-func (self IFindReferenceTargetsCallback) FoundTrackerTarget(target *systemwinrtxaml.IReferenceTrackerTarget) error {
-	return win32.HRESULTError(int32(self.Raw.FoundTrackerTarget(target)))
+func (self IFindReferenceTargetsCallback) FoundTrackerTarget(target IReferenceTrackerTarget) error {
+	return win32.HRESULTError(int32(self.Raw.FoundTrackerTarget(target.Raw)))
 }
 
 // IReferenceTracker is an idiomatic wrapper over the raw COM interface System.WinRT.Xaml.IReferenceTracker with error-returning methods.
@@ -93,8 +93,8 @@ func (self IReferenceTracker) DisconnectFromTrackerSource() error {
 }
 
 // FindTrackerTargets wraps the raw FindTrackerTargets call.
-func (self IReferenceTracker) FindTrackerTargets(callback *systemwinrtxaml.IFindReferenceTargetsCallback) error {
-	return win32.HRESULTError(int32(self.Raw.FindTrackerTargets(callback)))
+func (self IReferenceTracker) FindTrackerTargets(callback IFindReferenceTargetsCallback) error {
+	return win32.HRESULTError(int32(self.Raw.FindTrackerTargets(callback.Raw)))
 }
 
 // GetReferenceTrackerManager wraps the raw GetReferenceTrackerManager call.
@@ -155,8 +155,8 @@ func (self IReferenceTrackerHost) NotifyEndOfReferenceTrackingOnThread() error {
 }
 
 // GetTrackerTarget wraps the raw GetTrackerTarget call.
-func (self IReferenceTrackerHost) GetTrackerTarget(unknown *systemcom.IUnknown, newReference **systemwinrtxaml.IReferenceTrackerTarget) error {
-	return win32.HRESULTError(int32(self.Raw.GetTrackerTarget(unknown, newReference)))
+func (self IReferenceTrackerHost) GetTrackerTarget(unknown systemcomidiom.IUnknown, newReference **systemwinrtxaml.IReferenceTrackerTarget) error {
+	return win32.HRESULTError(int32(self.Raw.GetTrackerTarget(unknown.Raw, newReference)))
 }
 
 // AddMemoryPressure wraps the raw AddMemoryPressure call.
@@ -196,8 +196,8 @@ func (self IReferenceTrackerManager) ReferenceTrackingCompleted() error {
 }
 
 // SetReferenceTrackerHost wraps the raw SetReferenceTrackerHost call.
-func (self IReferenceTrackerManager) SetReferenceTrackerHost(value *systemwinrtxaml.IReferenceTrackerHost) error {
-	return win32.HRESULTError(int32(self.Raw.SetReferenceTrackerHost(value)))
+func (self IReferenceTrackerManager) SetReferenceTrackerHost(value IReferenceTrackerHost) error {
+	return win32.HRESULTError(int32(self.Raw.SetReferenceTrackerHost(value.Raw)))
 }
 
 // IReferenceTrackerTarget is an idiomatic wrapper over the raw COM interface System.WinRT.Xaml.IReferenceTrackerTarget with error-returning methods.
@@ -243,8 +243,8 @@ func WrapISurfaceImageSourceManagerNative(raw *systemwinrtxaml.ISurfaceImageSour
 }
 
 // FlushAllSurfacesWithDevice wraps the raw FlushAllSurfacesWithDevice call.
-func (self ISurfaceImageSourceManagerNative) FlushAllSurfacesWithDevice(device *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.FlushAllSurfacesWithDevice(device)))
+func (self ISurfaceImageSourceManagerNative) FlushAllSurfacesWithDevice(device systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.FlushAllSurfacesWithDevice(device.Raw)))
 }
 
 // ISurfaceImageSourceNative is an idiomatic wrapper over the raw COM interface System.WinRT.Xaml.ISurfaceImageSourceNative with error-returning methods.
@@ -259,8 +259,8 @@ func WrapISurfaceImageSourceNative(raw *systemwinrtxaml.ISurfaceImageSourceNativ
 }
 
 // SetDevice wraps the raw SetDevice call.
-func (self ISurfaceImageSourceNative) SetDevice(device *graphicsdxgi.IDXGIDevice) error {
-	return win32.HRESULTError(int32(self.Raw.SetDevice(device)))
+func (self ISurfaceImageSourceNative) SetDevice(device graphicsdxgiidiom.IDXGIDevice) error {
+	return win32.HRESULTError(int32(self.Raw.SetDevice(device.Raw)))
 }
 
 // EndDraw wraps the raw EndDraw call.
@@ -280,8 +280,8 @@ func WrapISurfaceImageSourceNativeWithD2D(raw *systemwinrtxaml.ISurfaceImageSour
 }
 
 // SetDevice wraps the raw SetDevice call.
-func (self ISurfaceImageSourceNativeWithD2D) SetDevice(device *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetDevice(device)))
+func (self ISurfaceImageSourceNativeWithD2D) SetDevice(device systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetDevice(device.Raw)))
 }
 
 // BeginDraw wraps the raw BeginDraw call.
@@ -316,8 +316,8 @@ func WrapISwapChainBackgroundPanelNative(raw *systemwinrtxaml.ISwapChainBackgrou
 }
 
 // SetSwapChain wraps the raw SetSwapChain call.
-func (self ISwapChainBackgroundPanelNative) SetSwapChain(swapChain *graphicsdxgi.IDXGISwapChain) error {
-	return win32.HRESULTError(int32(self.Raw.SetSwapChain(swapChain)))
+func (self ISwapChainBackgroundPanelNative) SetSwapChain(swapChain graphicsdxgiidiom.IDXGISwapChain) error {
+	return win32.HRESULTError(int32(self.Raw.SetSwapChain(swapChain.Raw)))
 }
 
 // ISwapChainPanelNative is an idiomatic wrapper over the raw COM interface System.WinRT.Xaml.ISwapChainPanelNative with error-returning methods.
@@ -332,8 +332,8 @@ func WrapISwapChainPanelNative(raw *systemwinrtxaml.ISwapChainPanelNative) ISwap
 }
 
 // SetSwapChain wraps the raw SetSwapChain call.
-func (self ISwapChainPanelNative) SetSwapChain(swapChain *graphicsdxgi.IDXGISwapChain) error {
-	return win32.HRESULTError(int32(self.Raw.SetSwapChain(swapChain)))
+func (self ISwapChainPanelNative) SetSwapChain(swapChain graphicsdxgiidiom.IDXGISwapChain) error {
+	return win32.HRESULTError(int32(self.Raw.SetSwapChain(swapChain.Raw)))
 }
 
 // ISwapChainPanelNative2 is an idiomatic wrapper over the raw COM interface System.WinRT.Xaml.ISwapChainPanelNative2 with error-returning methods.
@@ -376,8 +376,8 @@ func (self ITrackerOwner) DeleteTrackerHandle(handle systemwinrtxaml.TrackerHand
 }
 
 // SetTrackerValue wraps the raw SetTrackerValue call.
-func (self ITrackerOwner) SetTrackerValue(handle systemwinrtxaml.TrackerHandle, value *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetTrackerValue(handle, value)))
+func (self ITrackerOwner) SetTrackerValue(handle systemwinrtxaml.TrackerHandle, value systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetTrackerValue(handle, value.Raw)))
 }
 
 // TryGetSafeTrackerValue wraps the raw TryGetSafeTrackerValue call.
@@ -412,8 +412,8 @@ func (self IVirtualSurfaceImageSourceNative) GetVisibleBounds(bounds *foundation
 }
 
 // RegisterForUpdatesNeeded wraps the raw RegisterForUpdatesNeeded call.
-func (self IVirtualSurfaceImageSourceNative) RegisterForUpdatesNeeded(callback *systemwinrtxaml.IVirtualSurfaceUpdatesCallbackNative) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterForUpdatesNeeded(callback)))
+func (self IVirtualSurfaceImageSourceNative) RegisterForUpdatesNeeded(callback IVirtualSurfaceUpdatesCallbackNative) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterForUpdatesNeeded(callback.Raw)))
 }
 
 // Resize wraps the raw Resize call.

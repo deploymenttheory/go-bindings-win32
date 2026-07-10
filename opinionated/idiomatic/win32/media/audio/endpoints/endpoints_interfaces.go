@@ -13,6 +13,7 @@ import (
 	mediaaudioapo "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/apo"
 	mediaaudioendpoints "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/endpoints"
 	mediakernelstreaming "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/kernelstreaming"
+	mediaaudioidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/audio"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -133,13 +134,13 @@ func WrapIAudioEndpointVolume(raw *mediaaudioendpoints.IAudioEndpointVolume) IAu
 }
 
 // RegisterControlChangeNotify wraps the raw RegisterControlChangeNotify call.
-func (self IAudioEndpointVolume) RegisterControlChangeNotify(pNotify *mediaaudioendpoints.IAudioEndpointVolumeCallback) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterControlChangeNotify(pNotify)))
+func (self IAudioEndpointVolume) RegisterControlChangeNotify(pNotify IAudioEndpointVolumeCallback) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterControlChangeNotify(pNotify.Raw)))
 }
 
 // UnregisterControlChangeNotify wraps the raw UnregisterControlChangeNotify call.
-func (self IAudioEndpointVolume) UnregisterControlChangeNotify(pNotify *mediaaudioendpoints.IAudioEndpointVolumeCallback) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterControlChangeNotify(pNotify)))
+func (self IAudioEndpointVolume) UnregisterControlChangeNotify(pNotify IAudioEndpointVolumeCallback) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterControlChangeNotify(pNotify.Raw)))
 }
 
 // GetChannelCount wraps the raw GetChannelCount call.
@@ -306,23 +307,23 @@ func (self IHardwareAudioEngineBase) GetAvailableOffloadConnectorCount(_pwstrDev
 }
 
 // GetEngineFormat wraps the raw GetEngineFormat call.
-func (self IHardwareAudioEngineBase) GetEngineFormat(pDevice *mediaaudio.IMMDevice, _bRequestDeviceFormat bool, _ppwfxFormat *unsafe.Pointer) error {
+func (self IHardwareAudioEngineBase) GetEngineFormat(pDevice mediaaudioidiom.IMMDevice, _bRequestDeviceFormat bool, _ppwfxFormat *unsafe.Pointer) error {
 	__bRequestDeviceFormat := foundation.BOOL(win32.Bool32(_bRequestDeviceFormat))
-	return win32.HRESULTError(int32(self.Raw.GetEngineFormat(pDevice, __bRequestDeviceFormat, _ppwfxFormat)))
+	return win32.HRESULTError(int32(self.Raw.GetEngineFormat(pDevice.Raw, __bRequestDeviceFormat, _ppwfxFormat)))
 }
 
 // SetEngineDeviceFormat wraps the raw SetEngineDeviceFormat call.
-func (self IHardwareAudioEngineBase) SetEngineDeviceFormat(pDevice *mediaaudio.IMMDevice, _pwfxFormat unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.SetEngineDeviceFormat(pDevice, _pwfxFormat)))
+func (self IHardwareAudioEngineBase) SetEngineDeviceFormat(pDevice mediaaudioidiom.IMMDevice, _pwfxFormat unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.SetEngineDeviceFormat(pDevice.Raw, _pwfxFormat)))
 }
 
 // SetGfxState wraps the raw SetGfxState call.
-func (self IHardwareAudioEngineBase) SetGfxState(pDevice *mediaaudio.IMMDevice, _bEnable bool) error {
+func (self IHardwareAudioEngineBase) SetGfxState(pDevice mediaaudioidiom.IMMDevice, _bEnable bool) error {
 	__bEnable := foundation.BOOL(win32.Bool32(_bEnable))
-	return win32.HRESULTError(int32(self.Raw.SetGfxState(pDevice, __bEnable)))
+	return win32.HRESULTError(int32(self.Raw.SetGfxState(pDevice.Raw, __bEnable)))
 }
 
 // GetGfxState wraps the raw GetGfxState call.
-func (self IHardwareAudioEngineBase) GetGfxState(pDevice *mediaaudio.IMMDevice, _pbEnable *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetGfxState(pDevice, _pbEnable)))
+func (self IHardwareAudioEngineBase) GetGfxState(pDevice mediaaudioidiom.IMMDevice, _pbEnable *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.GetGfxState(pDevice.Raw, _pbEnable)))
 }

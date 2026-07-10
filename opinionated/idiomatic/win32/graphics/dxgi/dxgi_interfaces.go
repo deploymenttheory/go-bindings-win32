@@ -418,8 +418,8 @@ func (self IDXGIFactory) GetWindowAssociation(pWindowHandle *foundation.HWND) er
 }
 
 // CreateSwapChain wraps the raw CreateSwapChain call.
-func (self IDXGIFactory) CreateSwapChain(pDevice *systemcom.IUnknown, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSwapChain(pDevice, pDesc, ppSwapChain)))
+func (self IDXGIFactory) CreateSwapChain(pDevice systemcomidiom.IUnknown, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSwapChain(pDevice.Raw, pDesc, ppSwapChain)))
 }
 
 // CreateSoftwareAdapter wraps the raw CreateSoftwareAdapter call.
@@ -465,13 +465,13 @@ func (self IDXGIFactory2) IsWindowedStereoEnabled() foundation.BOOL {
 }
 
 // CreateSwapChainForHwnd wraps the raw CreateSwapChainForHwnd call.
-func (self IDXGIFactory2) CreateSwapChainForHwnd(pDevice *systemcom.IUnknown, hWnd foundation.HWND, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, pFullscreenDesc *graphicsdxgi.DXGI_SWAP_CHAIN_FULLSCREEN_DESC, pRestrictToOutput *graphicsdxgi.IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGISwapChain1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSwapChainForHwnd(pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain)))
+func (self IDXGIFactory2) CreateSwapChainForHwnd(pDevice systemcomidiom.IUnknown, hWnd foundation.HWND, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, pFullscreenDesc *graphicsdxgi.DXGI_SWAP_CHAIN_FULLSCREEN_DESC, pRestrictToOutput IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGISwapChain1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSwapChainForHwnd(pDevice.Raw, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput.Raw, ppSwapChain)))
 }
 
 // CreateSwapChainForCoreWindow wraps the raw CreateSwapChainForCoreWindow call.
-func (self IDXGIFactory2) CreateSwapChainForCoreWindow(pDevice *systemcom.IUnknown, pWindow *systemcom.IUnknown, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *graphicsdxgi.IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGISwapChain1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSwapChainForCoreWindow(pDevice, pWindow, pDesc, pRestrictToOutput, ppSwapChain)))
+func (self IDXGIFactory2) CreateSwapChainForCoreWindow(pDevice systemcomidiom.IUnknown, pWindow systemcomidiom.IUnknown, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGISwapChain1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSwapChainForCoreWindow(pDevice.Raw, pWindow.Raw, pDesc, pRestrictToOutput.Raw, ppSwapChain)))
 }
 
 // GetSharedResourceAdapterLuid wraps the raw GetSharedResourceAdapterLuid call.
@@ -510,8 +510,8 @@ func (self IDXGIFactory2) UnregisterOcclusionStatus(dwCookie uint32) {
 }
 
 // CreateSwapChainForComposition wraps the raw CreateSwapChainForComposition call.
-func (self IDXGIFactory2) CreateSwapChainForComposition(pDevice *systemcom.IUnknown, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *graphicsdxgi.IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGISwapChain1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSwapChainForComposition(pDevice, pDesc, pRestrictToOutput, ppSwapChain)))
+func (self IDXGIFactory2) CreateSwapChainForComposition(pDevice systemcomidiom.IUnknown, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGISwapChain1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSwapChainForComposition(pDevice.Raw, pDesc, pRestrictToOutput.Raw, ppSwapChain)))
 }
 
 // IDXGIFactory3 is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIFactory3 with error-returning methods.
@@ -611,13 +611,13 @@ func WrapIDXGIFactoryMedia(raw *graphicsdxgi.IDXGIFactoryMedia) IDXGIFactoryMedi
 }
 
 // CreateSwapChainForCompositionSurfaceHandle wraps the raw CreateSwapChainForCompositionSurfaceHandle call.
-func (self IDXGIFactoryMedia) CreateSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *graphicsdxgi.IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGISwapChain1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSwapChainForCompositionSurfaceHandle(pDevice, hSurface, pDesc, pRestrictToOutput, ppSwapChain)))
+func (self IDXGIFactoryMedia) CreateSwapChainForCompositionSurfaceHandle(pDevice systemcomidiom.IUnknown, hSurface foundation.HANDLE, pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGISwapChain1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSwapChainForCompositionSurfaceHandle(pDevice.Raw, hSurface, pDesc, pRestrictToOutput.Raw, ppSwapChain)))
 }
 
 // CreateDecodeSwapChainForCompositionSurfaceHandle wraps the raw CreateDecodeSwapChainForCompositionSurfaceHandle call.
-func (self IDXGIFactoryMedia) CreateDecodeSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *graphicsdxgi.DXGI_DECODE_SWAP_CHAIN_DESC, pYuvDecodeBuffers *graphicsdxgi.IDXGIResource, pRestrictToOutput *graphicsdxgi.IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGIDecodeSwapChain) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDecodeSwapChainForCompositionSurfaceHandle(pDevice, hSurface, pDesc, pYuvDecodeBuffers, pRestrictToOutput, ppSwapChain)))
+func (self IDXGIFactoryMedia) CreateDecodeSwapChainForCompositionSurfaceHandle(pDevice systemcomidiom.IUnknown, hSurface foundation.HANDLE, pDesc *graphicsdxgi.DXGI_DECODE_SWAP_CHAIN_DESC, pYuvDecodeBuffers IDXGIResource, pRestrictToOutput IDXGIOutput, ppSwapChain **graphicsdxgi.IDXGIDecodeSwapChain) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDecodeSwapChainForCompositionSurfaceHandle(pDevice.Raw, hSurface, pDesc, pYuvDecodeBuffers.Raw, pRestrictToOutput.Raw, ppSwapChain)))
 }
 
 // IDXGIInfoQueue is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIInfoQueue with error-returning methods.
@@ -674,8 +674,8 @@ func (self IDXGIObject) SetPrivateData(Name *win32.GUID, DataSize uint32, pData 
 }
 
 // SetPrivateDataInterface wraps the raw SetPrivateDataInterface call.
-func (self IDXGIObject) SetPrivateDataInterface(Name *win32.GUID, pUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(Name, pUnknown)))
+func (self IDXGIObject) SetPrivateDataInterface(Name *win32.GUID, pUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(Name, pUnknown.Raw)))
 }
 
 // GetPrivateData wraps the raw GetPrivateData call.
@@ -712,8 +712,8 @@ func (self IDXGIOutput) GetDisplayModeList(EnumFormat graphicsdxgicommon.DXGI_FO
 }
 
 // FindClosestMatchingMode wraps the raw FindClosestMatchingMode call.
-func (self IDXGIOutput) FindClosestMatchingMode(pModeToMatch *graphicsdxgicommon.DXGI_MODE_DESC, pClosestMatch *graphicsdxgicommon.DXGI_MODE_DESC, pConcernedDevice *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.FindClosestMatchingMode(pModeToMatch, pClosestMatch, pConcernedDevice)))
+func (self IDXGIOutput) FindClosestMatchingMode(pModeToMatch *graphicsdxgicommon.DXGI_MODE_DESC, pClosestMatch *graphicsdxgicommon.DXGI_MODE_DESC, pConcernedDevice systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.FindClosestMatchingMode(pModeToMatch, pClosestMatch, pConcernedDevice.Raw)))
 }
 
 // WaitForVBlank wraps the raw WaitForVBlank call.
@@ -722,9 +722,9 @@ func (self IDXGIOutput) WaitForVBlank() error {
 }
 
 // TakeOwnership wraps the raw TakeOwnership call.
-func (self IDXGIOutput) TakeOwnership(pDevice *systemcom.IUnknown, Exclusive bool) error {
+func (self IDXGIOutput) TakeOwnership(pDevice systemcomidiom.IUnknown, Exclusive bool) error {
 	_Exclusive := foundation.BOOL(win32.Bool32(Exclusive))
-	return win32.HRESULTError(int32(self.Raw.TakeOwnership(pDevice, _Exclusive)))
+	return win32.HRESULTError(int32(self.Raw.TakeOwnership(pDevice.Raw, _Exclusive)))
 }
 
 // ReleaseOwnership wraps the raw ReleaseOwnership call.
@@ -748,13 +748,13 @@ func (self IDXGIOutput) GetGammaControl(pArray *graphicsdxgicommon.DXGI_GAMMA_CO
 }
 
 // SetDisplaySurface wraps the raw SetDisplaySurface call.
-func (self IDXGIOutput) SetDisplaySurface(pScanoutSurface *graphicsdxgi.IDXGISurface) error {
-	return win32.HRESULTError(int32(self.Raw.SetDisplaySurface(pScanoutSurface)))
+func (self IDXGIOutput) SetDisplaySurface(pScanoutSurface IDXGISurface) error {
+	return win32.HRESULTError(int32(self.Raw.SetDisplaySurface(pScanoutSurface.Raw)))
 }
 
 // GetDisplaySurfaceData wraps the raw GetDisplaySurfaceData call.
-func (self IDXGIOutput) GetDisplaySurfaceData(pDestination *graphicsdxgi.IDXGISurface) error {
-	return win32.HRESULTError(int32(self.Raw.GetDisplaySurfaceData(pDestination)))
+func (self IDXGIOutput) GetDisplaySurfaceData(pDestination IDXGISurface) error {
+	return win32.HRESULTError(int32(self.Raw.GetDisplaySurfaceData(pDestination.Raw)))
 }
 
 // GetFrameStatistics wraps the raw GetFrameStatistics call.
@@ -779,18 +779,18 @@ func (self IDXGIOutput1) GetDisplayModeList1(EnumFormat graphicsdxgicommon.DXGI_
 }
 
 // FindClosestMatchingMode1 wraps the raw FindClosestMatchingMode1 call.
-func (self IDXGIOutput1) FindClosestMatchingMode1(pModeToMatch *graphicsdxgi.DXGI_MODE_DESC1, pClosestMatch *graphicsdxgi.DXGI_MODE_DESC1, pConcernedDevice *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.FindClosestMatchingMode1(pModeToMatch, pClosestMatch, pConcernedDevice)))
+func (self IDXGIOutput1) FindClosestMatchingMode1(pModeToMatch *graphicsdxgi.DXGI_MODE_DESC1, pClosestMatch *graphicsdxgi.DXGI_MODE_DESC1, pConcernedDevice systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.FindClosestMatchingMode1(pModeToMatch, pClosestMatch, pConcernedDevice.Raw)))
 }
 
 // GetDisplaySurfaceData1 wraps the raw GetDisplaySurfaceData1 call.
-func (self IDXGIOutput1) GetDisplaySurfaceData1(pDestination *graphicsdxgi.IDXGIResource) error {
-	return win32.HRESULTError(int32(self.Raw.GetDisplaySurfaceData1(pDestination)))
+func (self IDXGIOutput1) GetDisplaySurfaceData1(pDestination IDXGIResource) error {
+	return win32.HRESULTError(int32(self.Raw.GetDisplaySurfaceData1(pDestination.Raw)))
 }
 
 // DuplicateOutput wraps the raw DuplicateOutput call.
-func (self IDXGIOutput1) DuplicateOutput(pDevice *systemcom.IUnknown, ppOutputDuplication **graphicsdxgi.IDXGIOutputDuplication) error {
-	return win32.HRESULTError(int32(self.Raw.DuplicateOutput(pDevice, ppOutputDuplication)))
+func (self IDXGIOutput1) DuplicateOutput(pDevice systemcomidiom.IUnknown, ppOutputDuplication **graphicsdxgi.IDXGIOutputDuplication) error {
+	return win32.HRESULTError(int32(self.Raw.DuplicateOutput(pDevice.Raw, ppOutputDuplication)))
 }
 
 // IDXGIOutput2 is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIOutput2 with error-returning methods.
@@ -821,8 +821,8 @@ func WrapIDXGIOutput3(raw *graphicsdxgi.IDXGIOutput3) IDXGIOutput3 {
 }
 
 // CheckOverlaySupport wraps the raw CheckOverlaySupport call.
-func (self IDXGIOutput3) CheckOverlaySupport(EnumFormat graphicsdxgicommon.DXGI_FORMAT, pConcernedDevice *systemcom.IUnknown, pFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CheckOverlaySupport(EnumFormat, pConcernedDevice, pFlags)))
+func (self IDXGIOutput3) CheckOverlaySupport(EnumFormat graphicsdxgicommon.DXGI_FORMAT, pConcernedDevice systemcomidiom.IUnknown, pFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CheckOverlaySupport(EnumFormat, pConcernedDevice.Raw, pFlags)))
 }
 
 // IDXGIOutput4 is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIOutput4 with error-returning methods.
@@ -837,8 +837,8 @@ func WrapIDXGIOutput4(raw *graphicsdxgi.IDXGIOutput4) IDXGIOutput4 {
 }
 
 // CheckOverlayColorSpaceSupport wraps the raw CheckOverlayColorSpaceSupport call.
-func (self IDXGIOutput4) CheckOverlayColorSpaceSupport(Format graphicsdxgicommon.DXGI_FORMAT, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pConcernedDevice *systemcom.IUnknown, pFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CheckOverlayColorSpaceSupport(Format, ColorSpace, pConcernedDevice, pFlags)))
+func (self IDXGIOutput4) CheckOverlayColorSpaceSupport(Format graphicsdxgicommon.DXGI_FORMAT, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pConcernedDevice systemcomidiom.IUnknown, pFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CheckOverlayColorSpaceSupport(Format, ColorSpace, pConcernedDevice.Raw, pFlags)))
 }
 
 // IDXGIOutput5 is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIOutput5 with error-returning methods.
@@ -853,8 +853,8 @@ func WrapIDXGIOutput5(raw *graphicsdxgi.IDXGIOutput5) IDXGIOutput5 {
 }
 
 // DuplicateOutput1 wraps the raw DuplicateOutput1 call.
-func (self IDXGIOutput5) DuplicateOutput1(pDevice *systemcom.IUnknown, Flags uint32, SupportedFormatsCount uint32, pSupportedFormats *graphicsdxgicommon.DXGI_FORMAT, ppOutputDuplication **graphicsdxgi.IDXGIOutputDuplication) error {
-	return win32.HRESULTError(int32(self.Raw.DuplicateOutput1(pDevice, Flags, SupportedFormatsCount, pSupportedFormats, ppOutputDuplication)))
+func (self IDXGIOutput5) DuplicateOutput1(pDevice systemcomidiom.IUnknown, Flags uint32, SupportedFormatsCount uint32, pSupportedFormats *graphicsdxgicommon.DXGI_FORMAT, ppOutputDuplication **graphicsdxgi.IDXGIOutputDuplication) error {
+	return win32.HRESULTError(int32(self.Raw.DuplicateOutput1(pDevice.Raw, Flags, SupportedFormatsCount, pSupportedFormats, ppOutputDuplication)))
 }
 
 // IDXGIOutput6 is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIOutput6 with error-returning methods.
@@ -1072,9 +1072,9 @@ func (self IDXGISwapChain) GetBuffer(Buffer uint32, riid *win32.GUID, ppSurface 
 }
 
 // SetFullscreenState wraps the raw SetFullscreenState call.
-func (self IDXGISwapChain) SetFullscreenState(Fullscreen bool, pTarget *graphicsdxgi.IDXGIOutput) error {
+func (self IDXGISwapChain) SetFullscreenState(Fullscreen bool, pTarget IDXGIOutput) error {
 	_Fullscreen := foundation.BOOL(win32.Bool32(Fullscreen))
-	return win32.HRESULTError(int32(self.Raw.SetFullscreenState(_Fullscreen, pTarget)))
+	return win32.HRESULTError(int32(self.Raw.SetFullscreenState(_Fullscreen, pTarget.Raw)))
 }
 
 // GetFullscreenState wraps the raw GetFullscreenState call.

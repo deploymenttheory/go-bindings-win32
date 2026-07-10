@@ -96,8 +96,8 @@ func (self IDiskQuotaControl) AddUserName(pszLogonName string, fNameResolution s
 }
 
 // DeleteUser wraps the raw DeleteUser call.
-func (self IDiskQuotaControl) DeleteUser(pUser *storagefilesystem.IDiskQuotaUser) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteUser(pUser)))
+func (self IDiskQuotaControl) DeleteUser(pUser IDiskQuotaUser) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteUser(pUser.Raw)))
 }
 
 // FindUserSid wraps the raw FindUserSid call.
@@ -127,8 +127,8 @@ func (self IDiskQuotaControl) InvalidateSidNameCache() error {
 }
 
 // GiveUserNameResolutionPriority wraps the raw GiveUserNameResolutionPriority call.
-func (self IDiskQuotaControl) GiveUserNameResolutionPriority(pUser *storagefilesystem.IDiskQuotaUser) error {
-	return win32.HRESULTError(int32(self.Raw.GiveUserNameResolutionPriority(pUser)))
+func (self IDiskQuotaControl) GiveUserNameResolutionPriority(pUser IDiskQuotaUser) error {
+	return win32.HRESULTError(int32(self.Raw.GiveUserNameResolutionPriority(pUser.Raw)))
 }
 
 // ShutdownNameResolution wraps the raw ShutdownNameResolution call.
@@ -148,8 +148,8 @@ func WrapIDiskQuotaEvents(raw *storagefilesystem.IDiskQuotaEvents) IDiskQuotaEve
 }
 
 // OnUserNameChanged wraps the raw OnUserNameChanged call.
-func (self IDiskQuotaEvents) OnUserNameChanged(pUser *storagefilesystem.IDiskQuotaUser) error {
-	return win32.HRESULTError(int32(self.Raw.OnUserNameChanged(pUser)))
+func (self IDiskQuotaEvents) OnUserNameChanged(pUser IDiskQuotaUser) error {
+	return win32.HRESULTError(int32(self.Raw.OnUserNameChanged(pUser.Raw)))
 }
 
 // IDiskQuotaUser is an idiomatic wrapper over the raw COM interface Storage.FileSystem.IDiskQuotaUser with error-returning methods.
@@ -258,13 +258,13 @@ func WrapIDiskQuotaUserBatch(raw *storagefilesystem.IDiskQuotaUserBatch) IDiskQu
 }
 
 // Add wraps the raw Add call.
-func (self IDiskQuotaUserBatch) Add(pUser *storagefilesystem.IDiskQuotaUser) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pUser)))
+func (self IDiskQuotaUserBatch) Add(pUser IDiskQuotaUser) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pUser.Raw)))
 }
 
 // Remove wraps the raw Remove call.
-func (self IDiskQuotaUserBatch) Remove(pUser *storagefilesystem.IDiskQuotaUser) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(pUser)))
+func (self IDiskQuotaUserBatch) Remove(pUser IDiskQuotaUser) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(pUser.Raw)))
 }
 
 // RemoveAll wraps the raw RemoveAll call.

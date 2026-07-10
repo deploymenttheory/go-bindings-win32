@@ -10,6 +10,7 @@ import (
 	networkingnetworklistmanager "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networking/networklistmanager"
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // IEnumNetworkConnections is an idiomatic wrapper over the raw COM interface Networking.NetworkListManager.IEnumNetworkConnections with error-returning methods.
@@ -24,10 +25,10 @@ func WrapIEnumNetworkConnections(raw *networkingnetworklistmanager.IEnumNetworkC
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IEnumNetworkConnections) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IEnumNetworkConnections) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppEnumVar *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppEnumVar)
-	return _ppEnumVar, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppEnumVar), win32.HRESULTError(int32(_hr))
 }
 
 // Next wraps the raw Next call.
@@ -46,10 +47,10 @@ func (self IEnumNetworkConnections) Reset() error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumNetworkConnections) Clone() (*networkingnetworklistmanager.IEnumNetworkConnections, error) {
+func (self IEnumNetworkConnections) Clone() (IEnumNetworkConnections, error) {
 	var _ppEnumNetwork *networkingnetworklistmanager.IEnumNetworkConnections
 	_hr := self.Raw.Clone(&_ppEnumNetwork)
-	return _ppEnumNetwork, win32.HRESULTError(int32(_hr))
+	return WrapIEnumNetworkConnections(_ppEnumNetwork), win32.HRESULTError(int32(_hr))
 }
 
 // IEnumNetworks is an idiomatic wrapper over the raw COM interface Networking.NetworkListManager.IEnumNetworks with error-returning methods.
@@ -64,10 +65,10 @@ func WrapIEnumNetworks(raw *networkingnetworklistmanager.IEnumNetworks) IEnumNet
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IEnumNetworks) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IEnumNetworks) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _ppEnumVar *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_ppEnumVar)
-	return _ppEnumVar, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_ppEnumVar), win32.HRESULTError(int32(_hr))
 }
 
 // Next wraps the raw Next call.
@@ -86,10 +87,10 @@ func (self IEnumNetworks) Reset() error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumNetworks) Clone() (*networkingnetworklistmanager.IEnumNetworks, error) {
+func (self IEnumNetworks) Clone() (IEnumNetworks, error) {
 	var _ppEnumNetwork *networkingnetworklistmanager.IEnumNetworks
 	_hr := self.Raw.Clone(&_ppEnumNetwork)
-	return _ppEnumNetwork, win32.HRESULTError(int32(_hr))
+	return WrapIEnumNetworks(_ppEnumNetwork), win32.HRESULTError(int32(_hr))
 }
 
 // INetwork is an idiomatic wrapper over the raw COM interface Networking.NetworkListManager.INetwork with error-returning methods.
@@ -142,10 +143,10 @@ func (self INetwork) GetDomainType() (networkingnetworklistmanager.NLM_DOMAIN_TY
 }
 
 // GetNetworkConnections wraps the raw GetNetworkConnections call.
-func (self INetwork) GetNetworkConnections() (*networkingnetworklistmanager.IEnumNetworkConnections, error) {
+func (self INetwork) GetNetworkConnections() (IEnumNetworkConnections, error) {
 	var _ppEnumNetworkConnection *networkingnetworklistmanager.IEnumNetworkConnections
 	_hr := self.Raw.GetNetworkConnections(&_ppEnumNetworkConnection)
-	return _ppEnumNetworkConnection, win32.HRESULTError(int32(_hr))
+	return WrapIEnumNetworkConnections(_ppEnumNetworkConnection), win32.HRESULTError(int32(_hr))
 }
 
 // GetTimeCreatedAndConnected wraps the raw GetTimeCreatedAndConnected call.
@@ -216,10 +217,10 @@ func WrapINetworkConnection(raw *networkingnetworklistmanager.INetworkConnection
 }
 
 // GetNetwork wraps the raw GetNetwork call.
-func (self INetworkConnection) GetNetwork() (*networkingnetworklistmanager.INetwork, error) {
+func (self INetworkConnection) GetNetwork() (INetwork, error) {
 	var _ppNetwork *networkingnetworklistmanager.INetwork
 	_hr := self.Raw.GetNetwork(&_ppNetwork)
-	return _ppNetwork, win32.HRESULTError(int32(_hr))
+	return WrapINetwork(_ppNetwork), win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsConnectedToInternet wraps the raw Get_IsConnectedToInternet call.
@@ -393,17 +394,17 @@ func WrapINetworkListManager(raw *networkingnetworklistmanager.INetworkListManag
 }
 
 // GetNetworks wraps the raw GetNetworks call.
-func (self INetworkListManager) GetNetworks(Flags networkingnetworklistmanager.NLM_ENUM_NETWORK) (*networkingnetworklistmanager.IEnumNetworks, error) {
+func (self INetworkListManager) GetNetworks(Flags networkingnetworklistmanager.NLM_ENUM_NETWORK) (IEnumNetworks, error) {
 	var _ppEnumNetwork *networkingnetworklistmanager.IEnumNetworks
 	_hr := self.Raw.GetNetworks(Flags, &_ppEnumNetwork)
-	return _ppEnumNetwork, win32.HRESULTError(int32(_hr))
+	return WrapIEnumNetworks(_ppEnumNetwork), win32.HRESULTError(int32(_hr))
 }
 
 // GetNetworkConnections wraps the raw GetNetworkConnections call.
-func (self INetworkListManager) GetNetworkConnections() (*networkingnetworklistmanager.IEnumNetworkConnections, error) {
+func (self INetworkListManager) GetNetworkConnections() (IEnumNetworkConnections, error) {
 	var _ppEnum *networkingnetworklistmanager.IEnumNetworkConnections
 	_hr := self.Raw.GetNetworkConnections(&_ppEnum)
-	return _ppEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumNetworkConnections(_ppEnum), win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsConnectedToInternet wraps the raw Get_IsConnectedToInternet call.

@@ -45,14 +45,14 @@ func WrapIInitiateWinSATAssessment(raw *systemassessmenttool.IInitiateWinSATAsse
 }
 
 // InitiateAssessment wraps the raw InitiateAssessment call.
-func (self IInitiateWinSATAssessment) InitiateAssessment(cmdLine string, pCallbacks *systemassessmenttool.IWinSATInitiateEvents, callerHwnd foundation.HWND) error {
+func (self IInitiateWinSATAssessment) InitiateAssessment(cmdLine string, pCallbacks IWinSATInitiateEvents, callerHwnd foundation.HWND) error {
 	_cmdLine := win32.UTF16Ptr(cmdLine)
-	return win32.HRESULTError(int32(self.Raw.InitiateAssessment(foundation.PWSTR(_cmdLine), pCallbacks, callerHwnd)))
+	return win32.HRESULTError(int32(self.Raw.InitiateAssessment(foundation.PWSTR(_cmdLine), pCallbacks.Raw, callerHwnd)))
 }
 
 // InitiateFormalAssessment wraps the raw InitiateFormalAssessment call.
-func (self IInitiateWinSATAssessment) InitiateFormalAssessment(pCallbacks *systemassessmenttool.IWinSATInitiateEvents, callerHwnd foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.InitiateFormalAssessment(pCallbacks, callerHwnd)))
+func (self IInitiateWinSATAssessment) InitiateFormalAssessment(pCallbacks IWinSATInitiateEvents, callerHwnd foundation.HWND) error {
+	return win32.HRESULTError(int32(self.Raw.InitiateFormalAssessment(pCallbacks.Raw, callerHwnd)))
 }
 
 // CancelAssessment wraps the raw CancelAssessment call.

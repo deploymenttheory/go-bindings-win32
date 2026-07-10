@@ -11,7 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
 	mediaaudiodirectsound "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/directsound"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -27,8 +26,8 @@ func WrapIDirectSound(raw *mediaaudiodirectsound.IDirectSound) IDirectSound {
 }
 
 // CreateSoundBuffer wraps the raw CreateSoundBuffer call.
-func (self IDirectSound) CreateSoundBuffer(pcDSBufferDesc *mediaaudiodirectsound.DSBUFFERDESC, ppDSBuffer **mediaaudiodirectsound.IDirectSoundBuffer, pUnkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSoundBuffer(pcDSBufferDesc, ppDSBuffer, pUnkOuter)))
+func (self IDirectSound) CreateSoundBuffer(pcDSBufferDesc *mediaaudiodirectsound.DSBUFFERDESC, ppDSBuffer **mediaaudiodirectsound.IDirectSoundBuffer, pUnkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSoundBuffer(pcDSBufferDesc, ppDSBuffer, pUnkOuter.Raw)))
 }
 
 // GetCaps wraps the raw GetCaps call.
@@ -37,8 +36,8 @@ func (self IDirectSound) GetCaps(pDSCaps *mediaaudiodirectsound.DSCAPS) error {
 }
 
 // DuplicateSoundBuffer wraps the raw DuplicateSoundBuffer call.
-func (self IDirectSound) DuplicateSoundBuffer(pDSBufferOriginal *mediaaudiodirectsound.IDirectSoundBuffer, ppDSBufferDuplicate **mediaaudiodirectsound.IDirectSoundBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.DuplicateSoundBuffer(pDSBufferOriginal, ppDSBufferDuplicate)))
+func (self IDirectSound) DuplicateSoundBuffer(pDSBufferOriginal IDirectSoundBuffer, ppDSBufferDuplicate **mediaaudiodirectsound.IDirectSoundBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.DuplicateSoundBuffer(pDSBufferOriginal.Raw, ppDSBufferDuplicate)))
 }
 
 // SetCooperativeLevel wraps the raw SetCooperativeLevel call.
@@ -261,8 +260,8 @@ func (self IDirectSoundBuffer) GetStatus(pdwStatus *uint32) error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectSoundBuffer) Initialize(pDirectSound *mediaaudiodirectsound.IDirectSound, pcDSBufferDesc *mediaaudiodirectsound.DSBUFFERDESC) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pDirectSound, pcDSBufferDesc)))
+func (self IDirectSoundBuffer) Initialize(pDirectSound IDirectSound, pcDSBufferDesc *mediaaudiodirectsound.DSBUFFERDESC) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pDirectSound.Raw, pcDSBufferDesc)))
 }
 
 // Lock wraps the raw Lock call.
@@ -353,8 +352,8 @@ func WrapIDirectSoundCapture(raw *mediaaudiodirectsound.IDirectSoundCapture) IDi
 }
 
 // CreateCaptureBuffer wraps the raw CreateCaptureBuffer call.
-func (self IDirectSoundCapture) CreateCaptureBuffer(pcDSCBufferDesc *mediaaudiodirectsound.DSCBUFFERDESC, ppDSCBuffer **mediaaudiodirectsound.IDirectSoundCaptureBuffer, pUnkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCaptureBuffer(pcDSCBufferDesc, ppDSCBuffer, pUnkOuter)))
+func (self IDirectSoundCapture) CreateCaptureBuffer(pcDSCBufferDesc *mediaaudiodirectsound.DSCBUFFERDESC, ppDSCBuffer **mediaaudiodirectsound.IDirectSoundCaptureBuffer, pUnkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCaptureBuffer(pcDSCBufferDesc, ppDSCBuffer, pUnkOuter.Raw)))
 }
 
 // GetCaps wraps the raw GetCaps call.
@@ -399,8 +398,8 @@ func (self IDirectSoundCaptureBuffer) GetStatus(pdwStatus *uint32) error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectSoundCaptureBuffer) Initialize(pDirectSoundCapture *mediaaudiodirectsound.IDirectSoundCapture, pcDSCBufferDesc *mediaaudiodirectsound.DSCBUFFERDESC) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pDirectSoundCapture, pcDSCBufferDesc)))
+func (self IDirectSoundCaptureBuffer) Initialize(pDirectSoundCapture IDirectSoundCapture, pcDSCBufferDesc *mediaaudiodirectsound.DSCBUFFERDESC) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pDirectSoundCapture.Raw, pcDSCBufferDesc)))
 }
 
 // Lock wraps the raw Lock call.

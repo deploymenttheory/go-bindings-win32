@@ -14,7 +14,7 @@ import (
 	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -271,8 +271,8 @@ func (self ID3D11Debug) GetPresentPerRenderOpDelay() uint32 {
 }
 
 // SetSwapChain wraps the raw SetSwapChain call.
-func (self ID3D11Debug) SetSwapChain(pSwapChain *graphicsdxgi.IDXGISwapChain) error {
-	return win32.HRESULTError(int32(self.Raw.SetSwapChain(pSwapChain)))
+func (self ID3D11Debug) SetSwapChain(pSwapChain graphicsdxgiidiom.IDXGISwapChain) error {
+	return win32.HRESULTError(int32(self.Raw.SetSwapChain(pSwapChain.Raw)))
 }
 
 // GetSwapChain wraps the raw GetSwapChain call.
@@ -281,8 +281,8 @@ func (self ID3D11Debug) GetSwapChain(ppSwapChain **graphicsdxgi.IDXGISwapChain) 
 }
 
 // ValidateContext wraps the raw ValidateContext call.
-func (self ID3D11Debug) ValidateContext(pContext *graphicsdirect3d11.ID3D11DeviceContext) error {
-	return win32.HRESULTError(int32(self.Raw.ValidateContext(pContext)))
+func (self ID3D11Debug) ValidateContext(pContext ID3D11DeviceContext) error {
+	return win32.HRESULTError(int32(self.Raw.ValidateContext(pContext.Raw)))
 }
 
 // ReportLiveDeviceObjects wraps the raw ReportLiveDeviceObjects call.
@@ -291,8 +291,8 @@ func (self ID3D11Debug) ReportLiveDeviceObjects(Flags graphicsdirect3d11.D3D11_R
 }
 
 // ValidateContextForDispatch wraps the raw ValidateContextForDispatch call.
-func (self ID3D11Debug) ValidateContextForDispatch(pContext *graphicsdirect3d11.ID3D11DeviceContext) error {
-	return win32.HRESULTError(int32(self.Raw.ValidateContextForDispatch(pContext)))
+func (self ID3D11Debug) ValidateContextForDispatch(pContext ID3D11DeviceContext) error {
+	return win32.HRESULTError(int32(self.Raw.ValidateContextForDispatch(pContext.Raw)))
 }
 
 // ID3D11DepthStencilState is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11DepthStencilState with error-returning methods.
@@ -359,23 +359,23 @@ func (self ID3D11Device) CreateTexture3D(pDesc *graphicsdirect3d11.D3D11_TEXTURE
 }
 
 // CreateShaderResourceView wraps the raw CreateShaderResourceView call.
-func (self ID3D11Device) CreateShaderResourceView(pResource *graphicsdirect3d11.ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_SHADER_RESOURCE_VIEW_DESC, ppSRView **graphicsdirect3d11.ID3D11ShaderResourceView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateShaderResourceView(pResource, pDesc, ppSRView)))
+func (self ID3D11Device) CreateShaderResourceView(pResource ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_SHADER_RESOURCE_VIEW_DESC, ppSRView **graphicsdirect3d11.ID3D11ShaderResourceView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateShaderResourceView(pResource.Raw, pDesc, ppSRView)))
 }
 
 // CreateUnorderedAccessView wraps the raw CreateUnorderedAccessView call.
-func (self ID3D11Device) CreateUnorderedAccessView(pResource *graphicsdirect3d11.ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_UNORDERED_ACCESS_VIEW_DESC, ppUAView **graphicsdirect3d11.ID3D11UnorderedAccessView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateUnorderedAccessView(pResource, pDesc, ppUAView)))
+func (self ID3D11Device) CreateUnorderedAccessView(pResource ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_UNORDERED_ACCESS_VIEW_DESC, ppUAView **graphicsdirect3d11.ID3D11UnorderedAccessView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateUnorderedAccessView(pResource.Raw, pDesc, ppUAView)))
 }
 
 // CreateRenderTargetView wraps the raw CreateRenderTargetView call.
-func (self ID3D11Device) CreateRenderTargetView(pResource *graphicsdirect3d11.ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_RENDER_TARGET_VIEW_DESC, ppRTView **graphicsdirect3d11.ID3D11RenderTargetView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateRenderTargetView(pResource, pDesc, ppRTView)))
+func (self ID3D11Device) CreateRenderTargetView(pResource ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_RENDER_TARGET_VIEW_DESC, ppRTView **graphicsdirect3d11.ID3D11RenderTargetView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateRenderTargetView(pResource.Raw, pDesc, ppRTView)))
 }
 
 // CreateDepthStencilView wraps the raw CreateDepthStencilView call.
-func (self ID3D11Device) CreateDepthStencilView(pResource *graphicsdirect3d11.ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_DEPTH_STENCIL_VIEW_DESC, ppDepthStencilView **graphicsdirect3d11.ID3D11DepthStencilView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDepthStencilView(pResource, pDesc, ppDepthStencilView)))
+func (self ID3D11Device) CreateDepthStencilView(pResource ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_DEPTH_STENCIL_VIEW_DESC, ppDepthStencilView **graphicsdirect3d11.ID3D11DepthStencilView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDepthStencilView(pResource.Raw, pDesc, ppDepthStencilView)))
 }
 
 // CreateInputLayout wraps the raw CreateInputLayout call.
@@ -384,38 +384,38 @@ func (self ID3D11Device) CreateInputLayout(pInputElementDescs *graphicsdirect3d1
 }
 
 // CreateVertexShader wraps the raw CreateVertexShader call.
-func (self ID3D11Device) CreateVertexShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage *graphicsdirect3d11.ID3D11ClassLinkage, ppVertexShader **graphicsdirect3d11.ID3D11VertexShader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVertexShader(pShaderBytecode, BytecodeLength, pClassLinkage, ppVertexShader)))
+func (self ID3D11Device) CreateVertexShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage ID3D11ClassLinkage, ppVertexShader **graphicsdirect3d11.ID3D11VertexShader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVertexShader(pShaderBytecode, BytecodeLength, pClassLinkage.Raw, ppVertexShader)))
 }
 
 // CreateGeometryShader wraps the raw CreateGeometryShader call.
-func (self ID3D11Device) CreateGeometryShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage *graphicsdirect3d11.ID3D11ClassLinkage, ppGeometryShader **graphicsdirect3d11.ID3D11GeometryShader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateGeometryShader(pShaderBytecode, BytecodeLength, pClassLinkage, ppGeometryShader)))
+func (self ID3D11Device) CreateGeometryShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage ID3D11ClassLinkage, ppGeometryShader **graphicsdirect3d11.ID3D11GeometryShader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateGeometryShader(pShaderBytecode, BytecodeLength, pClassLinkage.Raw, ppGeometryShader)))
 }
 
 // CreateGeometryShaderWithStreamOutput wraps the raw CreateGeometryShaderWithStreamOutput call.
-func (self ID3D11Device) CreateGeometryShaderWithStreamOutput(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pSODeclaration *graphicsdirect3d11.D3D11_SO_DECLARATION_ENTRY, NumEntries uint32, pBufferStrides *uint32, NumStrides uint32, RasterizedStream uint32, pClassLinkage *graphicsdirect3d11.ID3D11ClassLinkage, ppGeometryShader **graphicsdirect3d11.ID3D11GeometryShader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateGeometryShaderWithStreamOutput(pShaderBytecode, BytecodeLength, pSODeclaration, NumEntries, pBufferStrides, NumStrides, RasterizedStream, pClassLinkage, ppGeometryShader)))
+func (self ID3D11Device) CreateGeometryShaderWithStreamOutput(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pSODeclaration *graphicsdirect3d11.D3D11_SO_DECLARATION_ENTRY, NumEntries uint32, pBufferStrides *uint32, NumStrides uint32, RasterizedStream uint32, pClassLinkage ID3D11ClassLinkage, ppGeometryShader **graphicsdirect3d11.ID3D11GeometryShader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateGeometryShaderWithStreamOutput(pShaderBytecode, BytecodeLength, pSODeclaration, NumEntries, pBufferStrides, NumStrides, RasterizedStream, pClassLinkage.Raw, ppGeometryShader)))
 }
 
 // CreatePixelShader wraps the raw CreatePixelShader call.
-func (self ID3D11Device) CreatePixelShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage *graphicsdirect3d11.ID3D11ClassLinkage, ppPixelShader **graphicsdirect3d11.ID3D11PixelShader) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePixelShader(pShaderBytecode, BytecodeLength, pClassLinkage, ppPixelShader)))
+func (self ID3D11Device) CreatePixelShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage ID3D11ClassLinkage, ppPixelShader **graphicsdirect3d11.ID3D11PixelShader) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePixelShader(pShaderBytecode, BytecodeLength, pClassLinkage.Raw, ppPixelShader)))
 }
 
 // CreateHullShader wraps the raw CreateHullShader call.
-func (self ID3D11Device) CreateHullShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage *graphicsdirect3d11.ID3D11ClassLinkage, ppHullShader **graphicsdirect3d11.ID3D11HullShader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateHullShader(pShaderBytecode, BytecodeLength, pClassLinkage, ppHullShader)))
+func (self ID3D11Device) CreateHullShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage ID3D11ClassLinkage, ppHullShader **graphicsdirect3d11.ID3D11HullShader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateHullShader(pShaderBytecode, BytecodeLength, pClassLinkage.Raw, ppHullShader)))
 }
 
 // CreateDomainShader wraps the raw CreateDomainShader call.
-func (self ID3D11Device) CreateDomainShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage *graphicsdirect3d11.ID3D11ClassLinkage, ppDomainShader **graphicsdirect3d11.ID3D11DomainShader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDomainShader(pShaderBytecode, BytecodeLength, pClassLinkage, ppDomainShader)))
+func (self ID3D11Device) CreateDomainShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage ID3D11ClassLinkage, ppDomainShader **graphicsdirect3d11.ID3D11DomainShader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDomainShader(pShaderBytecode, BytecodeLength, pClassLinkage.Raw, ppDomainShader)))
 }
 
 // CreateComputeShader wraps the raw CreateComputeShader call.
-func (self ID3D11Device) CreateComputeShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage *graphicsdirect3d11.ID3D11ClassLinkage, ppComputeShader **graphicsdirect3d11.ID3D11ComputeShader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateComputeShader(pShaderBytecode, BytecodeLength, pClassLinkage, ppComputeShader)))
+func (self ID3D11Device) CreateComputeShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pClassLinkage ID3D11ClassLinkage, ppComputeShader **graphicsdirect3d11.ID3D11ComputeShader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateComputeShader(pShaderBytecode, BytecodeLength, pClassLinkage.Raw, ppComputeShader)))
 }
 
 // CreateClassLinkage wraps the raw CreateClassLinkage call.
@@ -504,8 +504,8 @@ func (self ID3D11Device) SetPrivateData(guid *win32.GUID, DataSize uint32, pData
 }
 
 // SetPrivateDataInterface wraps the raw SetPrivateDataInterface call.
-func (self ID3D11Device) SetPrivateDataInterface(guid *win32.GUID, pData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData)))
+func (self ID3D11Device) SetPrivateDataInterface(guid *win32.GUID, pData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData.Raw)))
 }
 
 // GetFeatureLevel wraps the raw GetFeatureLevel call.
@@ -607,8 +607,8 @@ func (self ID3D11Device2) CreateDeferredContext2(ContextFlags uint32, ppDeferred
 }
 
 // GetResourceTiling wraps the raw GetResourceTiling call.
-func (self ID3D11Device2) GetResourceTiling(pTiledResource *graphicsdirect3d11.ID3D11Resource, pNumTilesForEntireResource *uint32, pPackedMipDesc *graphicsdirect3d11.D3D11_PACKED_MIP_DESC, pStandardTileShapeForNonPackedMips *graphicsdirect3d11.D3D11_TILE_SHAPE, pNumSubresourceTilings *uint32, FirstSubresourceTilingToGet uint32, pSubresourceTilingsForNonPackedMips *graphicsdirect3d11.D3D11_SUBRESOURCE_TILING) {
-	self.Raw.GetResourceTiling(pTiledResource, pNumTilesForEntireResource, pPackedMipDesc, pStandardTileShapeForNonPackedMips, pNumSubresourceTilings, FirstSubresourceTilingToGet, pSubresourceTilingsForNonPackedMips)
+func (self ID3D11Device2) GetResourceTiling(pTiledResource ID3D11Resource, pNumTilesForEntireResource *uint32, pPackedMipDesc *graphicsdirect3d11.D3D11_PACKED_MIP_DESC, pStandardTileShapeForNonPackedMips *graphicsdirect3d11.D3D11_TILE_SHAPE, pNumSubresourceTilings *uint32, FirstSubresourceTilingToGet uint32, pSubresourceTilingsForNonPackedMips *graphicsdirect3d11.D3D11_SUBRESOURCE_TILING) {
+	self.Raw.GetResourceTiling(pTiledResource.Raw, pNumTilesForEntireResource, pPackedMipDesc, pStandardTileShapeForNonPackedMips, pNumSubresourceTilings, FirstSubresourceTilingToGet, pSubresourceTilingsForNonPackedMips)
 }
 
 // CheckMultisampleQualityLevels1 wraps the raw CheckMultisampleQualityLevels1 call.
@@ -643,18 +643,18 @@ func (self ID3D11Device3) CreateRasterizerState2(pRasterizerDesc *graphicsdirect
 }
 
 // CreateShaderResourceView1 wraps the raw CreateShaderResourceView1 call.
-func (self ID3D11Device3) CreateShaderResourceView1(pResource *graphicsdirect3d11.ID3D11Resource, pDesc1 *graphicsdirect3d11.D3D11_SHADER_RESOURCE_VIEW_DESC1, ppSRView1 **graphicsdirect3d11.ID3D11ShaderResourceView1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateShaderResourceView1(pResource, pDesc1, ppSRView1)))
+func (self ID3D11Device3) CreateShaderResourceView1(pResource ID3D11Resource, pDesc1 *graphicsdirect3d11.D3D11_SHADER_RESOURCE_VIEW_DESC1, ppSRView1 **graphicsdirect3d11.ID3D11ShaderResourceView1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateShaderResourceView1(pResource.Raw, pDesc1, ppSRView1)))
 }
 
 // CreateUnorderedAccessView1 wraps the raw CreateUnorderedAccessView1 call.
-func (self ID3D11Device3) CreateUnorderedAccessView1(pResource *graphicsdirect3d11.ID3D11Resource, pDesc1 *graphicsdirect3d11.D3D11_UNORDERED_ACCESS_VIEW_DESC1, ppUAView1 **graphicsdirect3d11.ID3D11UnorderedAccessView1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateUnorderedAccessView1(pResource, pDesc1, ppUAView1)))
+func (self ID3D11Device3) CreateUnorderedAccessView1(pResource ID3D11Resource, pDesc1 *graphicsdirect3d11.D3D11_UNORDERED_ACCESS_VIEW_DESC1, ppUAView1 **graphicsdirect3d11.ID3D11UnorderedAccessView1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateUnorderedAccessView1(pResource.Raw, pDesc1, ppUAView1)))
 }
 
 // CreateRenderTargetView1 wraps the raw CreateRenderTargetView1 call.
-func (self ID3D11Device3) CreateRenderTargetView1(pResource *graphicsdirect3d11.ID3D11Resource, pDesc1 *graphicsdirect3d11.D3D11_RENDER_TARGET_VIEW_DESC1, ppRTView1 **graphicsdirect3d11.ID3D11RenderTargetView1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateRenderTargetView1(pResource, pDesc1, ppRTView1)))
+func (self ID3D11Device3) CreateRenderTargetView1(pResource ID3D11Resource, pDesc1 *graphicsdirect3d11.D3D11_RENDER_TARGET_VIEW_DESC1, ppRTView1 **graphicsdirect3d11.ID3D11RenderTargetView1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateRenderTargetView1(pResource.Raw, pDesc1, ppRTView1)))
 }
 
 // CreateQuery1 wraps the raw CreateQuery1 call.
@@ -673,13 +673,13 @@ func (self ID3D11Device3) CreateDeferredContext3(ContextFlags uint32, ppDeferred
 }
 
 // WriteToSubresource wraps the raw WriteToSubresource call.
-func (self ID3D11Device3) WriteToSubresource(pDstResource *graphicsdirect3d11.ID3D11Resource, DstSubresource uint32, pDstBox *graphicsdirect3d11.D3D11_BOX, pSrcData unsafe.Pointer, SrcRowPitch uint32, SrcDepthPitch uint32) {
-	self.Raw.WriteToSubresource(pDstResource, DstSubresource, pDstBox, pSrcData, SrcRowPitch, SrcDepthPitch)
+func (self ID3D11Device3) WriteToSubresource(pDstResource ID3D11Resource, DstSubresource uint32, pDstBox *graphicsdirect3d11.D3D11_BOX, pSrcData unsafe.Pointer, SrcRowPitch uint32, SrcDepthPitch uint32) {
+	self.Raw.WriteToSubresource(pDstResource.Raw, DstSubresource, pDstBox, pSrcData, SrcRowPitch, SrcDepthPitch)
 }
 
 // ReadFromSubresource wraps the raw ReadFromSubresource call.
-func (self ID3D11Device3) ReadFromSubresource(pDstData unsafe.Pointer, DstRowPitch uint32, DstDepthPitch uint32, pSrcResource *graphicsdirect3d11.ID3D11Resource, SrcSubresource uint32, pSrcBox *graphicsdirect3d11.D3D11_BOX) {
-	self.Raw.ReadFromSubresource(pDstData, DstRowPitch, DstDepthPitch, pSrcResource, SrcSubresource, pSrcBox)
+func (self ID3D11Device3) ReadFromSubresource(pDstData unsafe.Pointer, DstRowPitch uint32, DstDepthPitch uint32, pSrcResource ID3D11Resource, SrcSubresource uint32, pSrcBox *graphicsdirect3d11.D3D11_BOX) {
+	self.Raw.ReadFromSubresource(pDstData, DstRowPitch, DstDepthPitch, pSrcResource.Raw, SrcSubresource, pSrcBox)
 }
 
 // ID3D11Device4 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11Device4 with error-returning methods.
@@ -751,8 +751,8 @@ func (self ID3D11DeviceChild) SetPrivateData(guid *win32.GUID, DataSize uint32, 
 }
 
 // SetPrivateDataInterface wraps the raw SetPrivateDataInterface call.
-func (self ID3D11DeviceChild) SetPrivateDataInterface(guid *win32.GUID, pData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData)))
+func (self ID3D11DeviceChild) SetPrivateDataInterface(guid *win32.GUID, pData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData.Raw)))
 }
 
 // ID3D11DeviceContext is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11DeviceContext with error-returning methods.
@@ -777,8 +777,8 @@ func (self ID3D11DeviceContext) PSSetShaderResources(StartSlot uint32, NumViews 
 }
 
 // PSSetShader wraps the raw PSSetShader call.
-func (self ID3D11DeviceContext) PSSetShader(pPixelShader *graphicsdirect3d11.ID3D11PixelShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
-	self.Raw.PSSetShader(pPixelShader, ppClassInstances, NumClassInstances)
+func (self ID3D11DeviceContext) PSSetShader(pPixelShader ID3D11PixelShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
+	self.Raw.PSSetShader(pPixelShader.Raw, ppClassInstances, NumClassInstances)
 }
 
 // PSSetSamplers wraps the raw PSSetSamplers call.
@@ -787,8 +787,8 @@ func (self ID3D11DeviceContext) PSSetSamplers(StartSlot uint32, NumSamplers uint
 }
 
 // VSSetShader wraps the raw VSSetShader call.
-func (self ID3D11DeviceContext) VSSetShader(pVertexShader *graphicsdirect3d11.ID3D11VertexShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
-	self.Raw.VSSetShader(pVertexShader, ppClassInstances, NumClassInstances)
+func (self ID3D11DeviceContext) VSSetShader(pVertexShader ID3D11VertexShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
+	self.Raw.VSSetShader(pVertexShader.Raw, ppClassInstances, NumClassInstances)
 }
 
 // DrawIndexed wraps the raw DrawIndexed call.
@@ -802,13 +802,13 @@ func (self ID3D11DeviceContext) Draw(VertexCount uint32, StartVertexLocation uin
 }
 
 // Map wraps the raw Map call.
-func (self ID3D11DeviceContext) Map(pResource *graphicsdirect3d11.ID3D11Resource, Subresource uint32, MapType graphicsdirect3d11.D3D11_MAP, MapFlags uint32, pMappedResource *graphicsdirect3d11.D3D11_MAPPED_SUBRESOURCE) error {
-	return win32.HRESULTError(int32(self.Raw.Map(pResource, Subresource, MapType, MapFlags, pMappedResource)))
+func (self ID3D11DeviceContext) Map(pResource ID3D11Resource, Subresource uint32, MapType graphicsdirect3d11.D3D11_MAP, MapFlags uint32, pMappedResource *graphicsdirect3d11.D3D11_MAPPED_SUBRESOURCE) error {
+	return win32.HRESULTError(int32(self.Raw.Map(pResource.Raw, Subresource, MapType, MapFlags, pMappedResource)))
 }
 
 // Unmap wraps the raw Unmap call.
-func (self ID3D11DeviceContext) Unmap(pResource *graphicsdirect3d11.ID3D11Resource, Subresource uint32) {
-	self.Raw.Unmap(pResource, Subresource)
+func (self ID3D11DeviceContext) Unmap(pResource ID3D11Resource, Subresource uint32) {
+	self.Raw.Unmap(pResource.Raw, Subresource)
 }
 
 // PSSetConstantBuffers wraps the raw PSSetConstantBuffers call.
@@ -817,8 +817,8 @@ func (self ID3D11DeviceContext) PSSetConstantBuffers(StartSlot uint32, NumBuffer
 }
 
 // IASetInputLayout wraps the raw IASetInputLayout call.
-func (self ID3D11DeviceContext) IASetInputLayout(pInputLayout *graphicsdirect3d11.ID3D11InputLayout) {
-	self.Raw.IASetInputLayout(pInputLayout)
+func (self ID3D11DeviceContext) IASetInputLayout(pInputLayout ID3D11InputLayout) {
+	self.Raw.IASetInputLayout(pInputLayout.Raw)
 }
 
 // IASetVertexBuffers wraps the raw IASetVertexBuffers call.
@@ -827,8 +827,8 @@ func (self ID3D11DeviceContext) IASetVertexBuffers(StartSlot uint32, NumBuffers 
 }
 
 // IASetIndexBuffer wraps the raw IASetIndexBuffer call.
-func (self ID3D11DeviceContext) IASetIndexBuffer(pIndexBuffer *graphicsdirect3d11.ID3D11Buffer, Format graphicsdxgicommon.DXGI_FORMAT, Offset uint32) {
-	self.Raw.IASetIndexBuffer(pIndexBuffer, Format, Offset)
+func (self ID3D11DeviceContext) IASetIndexBuffer(pIndexBuffer ID3D11Buffer, Format graphicsdxgicommon.DXGI_FORMAT, Offset uint32) {
+	self.Raw.IASetIndexBuffer(pIndexBuffer.Raw, Format, Offset)
 }
 
 // DrawIndexedInstanced wraps the raw DrawIndexedInstanced call.
@@ -847,8 +847,8 @@ func (self ID3D11DeviceContext) GSSetConstantBuffers(StartSlot uint32, NumBuffer
 }
 
 // GSSetShader wraps the raw GSSetShader call.
-func (self ID3D11DeviceContext) GSSetShader(pShader *graphicsdirect3d11.ID3D11GeometryShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
-	self.Raw.GSSetShader(pShader, ppClassInstances, NumClassInstances)
+func (self ID3D11DeviceContext) GSSetShader(pShader ID3D11GeometryShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
+	self.Raw.GSSetShader(pShader.Raw, ppClassInstances, NumClassInstances)
 }
 
 // IASetPrimitiveTopology wraps the raw IASetPrimitiveTopology call.
@@ -867,24 +867,24 @@ func (self ID3D11DeviceContext) VSSetSamplers(StartSlot uint32, NumSamplers uint
 }
 
 // Begin wraps the raw Begin call.
-func (self ID3D11DeviceContext) Begin(pAsync *graphicsdirect3d11.ID3D11Asynchronous) {
-	self.Raw.Begin(pAsync)
+func (self ID3D11DeviceContext) Begin(pAsync ID3D11Asynchronous) {
+	self.Raw.Begin(pAsync.Raw)
 }
 
 // End wraps the raw End call.
-func (self ID3D11DeviceContext) End(pAsync *graphicsdirect3d11.ID3D11Asynchronous) {
-	self.Raw.End(pAsync)
+func (self ID3D11DeviceContext) End(pAsync ID3D11Asynchronous) {
+	self.Raw.End(pAsync.Raw)
 }
 
 // GetData wraps the raw GetData call.
-func (self ID3D11DeviceContext) GetData(pAsync *graphicsdirect3d11.ID3D11Asynchronous, pData unsafe.Pointer, DataSize uint32, GetDataFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetData(pAsync, pData, DataSize, GetDataFlags)))
+func (self ID3D11DeviceContext) GetData(pAsync ID3D11Asynchronous, pData unsafe.Pointer, DataSize uint32, GetDataFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetData(pAsync.Raw, pData, DataSize, GetDataFlags)))
 }
 
 // SetPredication wraps the raw SetPredication call.
-func (self ID3D11DeviceContext) SetPredication(pPredicate *graphicsdirect3d11.ID3D11Predicate, PredicateValue bool) {
+func (self ID3D11DeviceContext) SetPredication(pPredicate ID3D11Predicate, PredicateValue bool) {
 	_PredicateValue := foundation.BOOL(win32.Bool32(PredicateValue))
-	self.Raw.SetPredication(pPredicate, _PredicateValue)
+	self.Raw.SetPredication(pPredicate.Raw, _PredicateValue)
 }
 
 // GSSetShaderResources wraps the raw GSSetShaderResources call.
@@ -898,23 +898,23 @@ func (self ID3D11DeviceContext) GSSetSamplers(StartSlot uint32, NumSamplers uint
 }
 
 // OMSetRenderTargets wraps the raw OMSetRenderTargets call.
-func (self ID3D11DeviceContext) OMSetRenderTargets(NumViews uint32, ppRenderTargetViews **graphicsdirect3d11.ID3D11RenderTargetView, pDepthStencilView *graphicsdirect3d11.ID3D11DepthStencilView) {
-	self.Raw.OMSetRenderTargets(NumViews, ppRenderTargetViews, pDepthStencilView)
+func (self ID3D11DeviceContext) OMSetRenderTargets(NumViews uint32, ppRenderTargetViews **graphicsdirect3d11.ID3D11RenderTargetView, pDepthStencilView ID3D11DepthStencilView) {
+	self.Raw.OMSetRenderTargets(NumViews, ppRenderTargetViews, pDepthStencilView.Raw)
 }
 
 // OMSetRenderTargetsAndUnorderedAccessViews wraps the raw OMSetRenderTargetsAndUnorderedAccessViews call.
-func (self ID3D11DeviceContext) OMSetRenderTargetsAndUnorderedAccessViews(NumRTVs uint32, ppRenderTargetViews **graphicsdirect3d11.ID3D11RenderTargetView, pDepthStencilView *graphicsdirect3d11.ID3D11DepthStencilView, UAVStartSlot uint32, NumUAVs uint32, ppUnorderedAccessViews **graphicsdirect3d11.ID3D11UnorderedAccessView, pUAVInitialCounts *uint32) {
-	self.Raw.OMSetRenderTargetsAndUnorderedAccessViews(NumRTVs, ppRenderTargetViews, pDepthStencilView, UAVStartSlot, NumUAVs, ppUnorderedAccessViews, pUAVInitialCounts)
+func (self ID3D11DeviceContext) OMSetRenderTargetsAndUnorderedAccessViews(NumRTVs uint32, ppRenderTargetViews **graphicsdirect3d11.ID3D11RenderTargetView, pDepthStencilView ID3D11DepthStencilView, UAVStartSlot uint32, NumUAVs uint32, ppUnorderedAccessViews **graphicsdirect3d11.ID3D11UnorderedAccessView, pUAVInitialCounts *uint32) {
+	self.Raw.OMSetRenderTargetsAndUnorderedAccessViews(NumRTVs, ppRenderTargetViews, pDepthStencilView.Raw, UAVStartSlot, NumUAVs, ppUnorderedAccessViews, pUAVInitialCounts)
 }
 
 // OMSetBlendState wraps the raw OMSetBlendState call.
-func (self ID3D11DeviceContext) OMSetBlendState(pBlendState *graphicsdirect3d11.ID3D11BlendState, BlendFactor *float32, SampleMask uint32) {
-	self.Raw.OMSetBlendState(pBlendState, BlendFactor, SampleMask)
+func (self ID3D11DeviceContext) OMSetBlendState(pBlendState ID3D11BlendState, BlendFactor *float32, SampleMask uint32) {
+	self.Raw.OMSetBlendState(pBlendState.Raw, BlendFactor, SampleMask)
 }
 
 // OMSetDepthStencilState wraps the raw OMSetDepthStencilState call.
-func (self ID3D11DeviceContext) OMSetDepthStencilState(pDepthStencilState *graphicsdirect3d11.ID3D11DepthStencilState, StencilRef uint32) {
-	self.Raw.OMSetDepthStencilState(pDepthStencilState, StencilRef)
+func (self ID3D11DeviceContext) OMSetDepthStencilState(pDepthStencilState ID3D11DepthStencilState, StencilRef uint32) {
+	self.Raw.OMSetDepthStencilState(pDepthStencilState.Raw, StencilRef)
 }
 
 // SOSetTargets wraps the raw SOSetTargets call.
@@ -928,13 +928,13 @@ func (self ID3D11DeviceContext) DrawAuto() {
 }
 
 // DrawIndexedInstancedIndirect wraps the raw DrawIndexedInstancedIndirect call.
-func (self ID3D11DeviceContext) DrawIndexedInstancedIndirect(pBufferForArgs *graphicsdirect3d11.ID3D11Buffer, AlignedByteOffsetForArgs uint32) {
-	self.Raw.DrawIndexedInstancedIndirect(pBufferForArgs, AlignedByteOffsetForArgs)
+func (self ID3D11DeviceContext) DrawIndexedInstancedIndirect(pBufferForArgs ID3D11Buffer, AlignedByteOffsetForArgs uint32) {
+	self.Raw.DrawIndexedInstancedIndirect(pBufferForArgs.Raw, AlignedByteOffsetForArgs)
 }
 
 // DrawInstancedIndirect wraps the raw DrawInstancedIndirect call.
-func (self ID3D11DeviceContext) DrawInstancedIndirect(pBufferForArgs *graphicsdirect3d11.ID3D11Buffer, AlignedByteOffsetForArgs uint32) {
-	self.Raw.DrawInstancedIndirect(pBufferForArgs, AlignedByteOffsetForArgs)
+func (self ID3D11DeviceContext) DrawInstancedIndirect(pBufferForArgs ID3D11Buffer, AlignedByteOffsetForArgs uint32) {
+	self.Raw.DrawInstancedIndirect(pBufferForArgs.Raw, AlignedByteOffsetForArgs)
 }
 
 // Dispatch wraps the raw Dispatch call.
@@ -943,13 +943,13 @@ func (self ID3D11DeviceContext) Dispatch(ThreadGroupCountX uint32, ThreadGroupCo
 }
 
 // DispatchIndirect wraps the raw DispatchIndirect call.
-func (self ID3D11DeviceContext) DispatchIndirect(pBufferForArgs *graphicsdirect3d11.ID3D11Buffer, AlignedByteOffsetForArgs uint32) {
-	self.Raw.DispatchIndirect(pBufferForArgs, AlignedByteOffsetForArgs)
+func (self ID3D11DeviceContext) DispatchIndirect(pBufferForArgs ID3D11Buffer, AlignedByteOffsetForArgs uint32) {
+	self.Raw.DispatchIndirect(pBufferForArgs.Raw, AlignedByteOffsetForArgs)
 }
 
 // RSSetState wraps the raw RSSetState call.
-func (self ID3D11DeviceContext) RSSetState(pRasterizerState *graphicsdirect3d11.ID3D11RasterizerState) {
-	self.Raw.RSSetState(pRasterizerState)
+func (self ID3D11DeviceContext) RSSetState(pRasterizerState ID3D11RasterizerState) {
+	self.Raw.RSSetState(pRasterizerState.Raw)
 }
 
 // RSSetViewports wraps the raw RSSetViewports call.
@@ -963,54 +963,54 @@ func (self ID3D11DeviceContext) RSSetScissorRects(NumRects uint32, pRects *found
 }
 
 // CopySubresourceRegion wraps the raw CopySubresourceRegion call.
-func (self ID3D11DeviceContext) CopySubresourceRegion(pDstResource *graphicsdirect3d11.ID3D11Resource, DstSubresource uint32, DstX uint32, DstY uint32, DstZ uint32, pSrcResource *graphicsdirect3d11.ID3D11Resource, SrcSubresource uint32, pSrcBox *graphicsdirect3d11.D3D11_BOX) {
-	self.Raw.CopySubresourceRegion(pDstResource, DstSubresource, DstX, DstY, DstZ, pSrcResource, SrcSubresource, pSrcBox)
+func (self ID3D11DeviceContext) CopySubresourceRegion(pDstResource ID3D11Resource, DstSubresource uint32, DstX uint32, DstY uint32, DstZ uint32, pSrcResource ID3D11Resource, SrcSubresource uint32, pSrcBox *graphicsdirect3d11.D3D11_BOX) {
+	self.Raw.CopySubresourceRegion(pDstResource.Raw, DstSubresource, DstX, DstY, DstZ, pSrcResource.Raw, SrcSubresource, pSrcBox)
 }
 
 // CopyResource wraps the raw CopyResource call.
-func (self ID3D11DeviceContext) CopyResource(pDstResource *graphicsdirect3d11.ID3D11Resource, pSrcResource *graphicsdirect3d11.ID3D11Resource) {
-	self.Raw.CopyResource(pDstResource, pSrcResource)
+func (self ID3D11DeviceContext) CopyResource(pDstResource ID3D11Resource, pSrcResource ID3D11Resource) {
+	self.Raw.CopyResource(pDstResource.Raw, pSrcResource.Raw)
 }
 
 // UpdateSubresource wraps the raw UpdateSubresource call.
-func (self ID3D11DeviceContext) UpdateSubresource(pDstResource *graphicsdirect3d11.ID3D11Resource, DstSubresource uint32, pDstBox *graphicsdirect3d11.D3D11_BOX, pSrcData unsafe.Pointer, SrcRowPitch uint32, SrcDepthPitch uint32) {
-	self.Raw.UpdateSubresource(pDstResource, DstSubresource, pDstBox, pSrcData, SrcRowPitch, SrcDepthPitch)
+func (self ID3D11DeviceContext) UpdateSubresource(pDstResource ID3D11Resource, DstSubresource uint32, pDstBox *graphicsdirect3d11.D3D11_BOX, pSrcData unsafe.Pointer, SrcRowPitch uint32, SrcDepthPitch uint32) {
+	self.Raw.UpdateSubresource(pDstResource.Raw, DstSubresource, pDstBox, pSrcData, SrcRowPitch, SrcDepthPitch)
 }
 
 // CopyStructureCount wraps the raw CopyStructureCount call.
-func (self ID3D11DeviceContext) CopyStructureCount(pDstBuffer *graphicsdirect3d11.ID3D11Buffer, DstAlignedByteOffset uint32, pSrcView *graphicsdirect3d11.ID3D11UnorderedAccessView) {
-	self.Raw.CopyStructureCount(pDstBuffer, DstAlignedByteOffset, pSrcView)
+func (self ID3D11DeviceContext) CopyStructureCount(pDstBuffer ID3D11Buffer, DstAlignedByteOffset uint32, pSrcView ID3D11UnorderedAccessView) {
+	self.Raw.CopyStructureCount(pDstBuffer.Raw, DstAlignedByteOffset, pSrcView.Raw)
 }
 
 // ClearRenderTargetView wraps the raw ClearRenderTargetView call.
-func (self ID3D11DeviceContext) ClearRenderTargetView(pRenderTargetView *graphicsdirect3d11.ID3D11RenderTargetView, ColorRGBA *float32) {
-	self.Raw.ClearRenderTargetView(pRenderTargetView, ColorRGBA)
+func (self ID3D11DeviceContext) ClearRenderTargetView(pRenderTargetView ID3D11RenderTargetView, ColorRGBA *float32) {
+	self.Raw.ClearRenderTargetView(pRenderTargetView.Raw, ColorRGBA)
 }
 
 // ClearUnorderedAccessViewUint wraps the raw ClearUnorderedAccessViewUint call.
-func (self ID3D11DeviceContext) ClearUnorderedAccessViewUint(pUnorderedAccessView *graphicsdirect3d11.ID3D11UnorderedAccessView, Values *uint32) {
-	self.Raw.ClearUnorderedAccessViewUint(pUnorderedAccessView, Values)
+func (self ID3D11DeviceContext) ClearUnorderedAccessViewUint(pUnorderedAccessView ID3D11UnorderedAccessView, Values *uint32) {
+	self.Raw.ClearUnorderedAccessViewUint(pUnorderedAccessView.Raw, Values)
 }
 
 // ClearUnorderedAccessViewFloat wraps the raw ClearUnorderedAccessViewFloat call.
-func (self ID3D11DeviceContext) ClearUnorderedAccessViewFloat(pUnorderedAccessView *graphicsdirect3d11.ID3D11UnorderedAccessView, Values *float32) {
-	self.Raw.ClearUnorderedAccessViewFloat(pUnorderedAccessView, Values)
+func (self ID3D11DeviceContext) ClearUnorderedAccessViewFloat(pUnorderedAccessView ID3D11UnorderedAccessView, Values *float32) {
+	self.Raw.ClearUnorderedAccessViewFloat(pUnorderedAccessView.Raw, Values)
 }
 
 // GenerateMips wraps the raw GenerateMips call.
-func (self ID3D11DeviceContext) GenerateMips(pShaderResourceView *graphicsdirect3d11.ID3D11ShaderResourceView) {
-	self.Raw.GenerateMips(pShaderResourceView)
+func (self ID3D11DeviceContext) GenerateMips(pShaderResourceView ID3D11ShaderResourceView) {
+	self.Raw.GenerateMips(pShaderResourceView.Raw)
 }
 
 // ResolveSubresource wraps the raw ResolveSubresource call.
-func (self ID3D11DeviceContext) ResolveSubresource(pDstResource *graphicsdirect3d11.ID3D11Resource, DstSubresource uint32, pSrcResource *graphicsdirect3d11.ID3D11Resource, SrcSubresource uint32, Format graphicsdxgicommon.DXGI_FORMAT) {
-	self.Raw.ResolveSubresource(pDstResource, DstSubresource, pSrcResource, SrcSubresource, Format)
+func (self ID3D11DeviceContext) ResolveSubresource(pDstResource ID3D11Resource, DstSubresource uint32, pSrcResource ID3D11Resource, SrcSubresource uint32, Format graphicsdxgicommon.DXGI_FORMAT) {
+	self.Raw.ResolveSubresource(pDstResource.Raw, DstSubresource, pSrcResource.Raw, SrcSubresource, Format)
 }
 
 // ExecuteCommandList wraps the raw ExecuteCommandList call.
-func (self ID3D11DeviceContext) ExecuteCommandList(pCommandList *graphicsdirect3d11.ID3D11CommandList, RestoreContextState bool) {
+func (self ID3D11DeviceContext) ExecuteCommandList(pCommandList ID3D11CommandList, RestoreContextState bool) {
 	_RestoreContextState := foundation.BOOL(win32.Bool32(RestoreContextState))
-	self.Raw.ExecuteCommandList(pCommandList, _RestoreContextState)
+	self.Raw.ExecuteCommandList(pCommandList.Raw, _RestoreContextState)
 }
 
 // HSSetShaderResources wraps the raw HSSetShaderResources call.
@@ -1019,8 +1019,8 @@ func (self ID3D11DeviceContext) HSSetShaderResources(StartSlot uint32, NumViews 
 }
 
 // HSSetShader wraps the raw HSSetShader call.
-func (self ID3D11DeviceContext) HSSetShader(pHullShader *graphicsdirect3d11.ID3D11HullShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
-	self.Raw.HSSetShader(pHullShader, ppClassInstances, NumClassInstances)
+func (self ID3D11DeviceContext) HSSetShader(pHullShader ID3D11HullShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
+	self.Raw.HSSetShader(pHullShader.Raw, ppClassInstances, NumClassInstances)
 }
 
 // HSSetSamplers wraps the raw HSSetSamplers call.
@@ -1039,8 +1039,8 @@ func (self ID3D11DeviceContext) DSSetShaderResources(StartSlot uint32, NumViews 
 }
 
 // DSSetShader wraps the raw DSSetShader call.
-func (self ID3D11DeviceContext) DSSetShader(pDomainShader *graphicsdirect3d11.ID3D11DomainShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
-	self.Raw.DSSetShader(pDomainShader, ppClassInstances, NumClassInstances)
+func (self ID3D11DeviceContext) DSSetShader(pDomainShader ID3D11DomainShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
+	self.Raw.DSSetShader(pDomainShader.Raw, ppClassInstances, NumClassInstances)
 }
 
 // DSSetSamplers wraps the raw DSSetSamplers call.
@@ -1064,8 +1064,8 @@ func (self ID3D11DeviceContext) CSSetUnorderedAccessViews(StartSlot uint32, NumU
 }
 
 // CSSetShader wraps the raw CSSetShader call.
-func (self ID3D11DeviceContext) CSSetShader(pComputeShader *graphicsdirect3d11.ID3D11ComputeShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
-	self.Raw.CSSetShader(pComputeShader, ppClassInstances, NumClassInstances)
+func (self ID3D11DeviceContext) CSSetShader(pComputeShader ID3D11ComputeShader, ppClassInstances **graphicsdirect3d11.ID3D11ClassInstance, NumClassInstances uint32) {
+	self.Raw.CSSetShader(pComputeShader.Raw, ppClassInstances, NumClassInstances)
 }
 
 // CSSetSamplers wraps the raw CSSetSamplers call.
@@ -1306,23 +1306,23 @@ func WrapID3D11DeviceContext1(raw *graphicsdirect3d11.ID3D11DeviceContext1) ID3D
 }
 
 // CopySubresourceRegion1 wraps the raw CopySubresourceRegion1 call.
-func (self ID3D11DeviceContext1) CopySubresourceRegion1(pDstResource *graphicsdirect3d11.ID3D11Resource, DstSubresource uint32, DstX uint32, DstY uint32, DstZ uint32, pSrcResource *graphicsdirect3d11.ID3D11Resource, SrcSubresource uint32, pSrcBox *graphicsdirect3d11.D3D11_BOX, CopyFlags uint32) {
-	self.Raw.CopySubresourceRegion1(pDstResource, DstSubresource, DstX, DstY, DstZ, pSrcResource, SrcSubresource, pSrcBox, CopyFlags)
+func (self ID3D11DeviceContext1) CopySubresourceRegion1(pDstResource ID3D11Resource, DstSubresource uint32, DstX uint32, DstY uint32, DstZ uint32, pSrcResource ID3D11Resource, SrcSubresource uint32, pSrcBox *graphicsdirect3d11.D3D11_BOX, CopyFlags uint32) {
+	self.Raw.CopySubresourceRegion1(pDstResource.Raw, DstSubresource, DstX, DstY, DstZ, pSrcResource.Raw, SrcSubresource, pSrcBox, CopyFlags)
 }
 
 // UpdateSubresource1 wraps the raw UpdateSubresource1 call.
-func (self ID3D11DeviceContext1) UpdateSubresource1(pDstResource *graphicsdirect3d11.ID3D11Resource, DstSubresource uint32, pDstBox *graphicsdirect3d11.D3D11_BOX, pSrcData unsafe.Pointer, SrcRowPitch uint32, SrcDepthPitch uint32, CopyFlags uint32) {
-	self.Raw.UpdateSubresource1(pDstResource, DstSubresource, pDstBox, pSrcData, SrcRowPitch, SrcDepthPitch, CopyFlags)
+func (self ID3D11DeviceContext1) UpdateSubresource1(pDstResource ID3D11Resource, DstSubresource uint32, pDstBox *graphicsdirect3d11.D3D11_BOX, pSrcData unsafe.Pointer, SrcRowPitch uint32, SrcDepthPitch uint32, CopyFlags uint32) {
+	self.Raw.UpdateSubresource1(pDstResource.Raw, DstSubresource, pDstBox, pSrcData, SrcRowPitch, SrcDepthPitch, CopyFlags)
 }
 
 // DiscardResource wraps the raw DiscardResource call.
-func (self ID3D11DeviceContext1) DiscardResource(pResource *graphicsdirect3d11.ID3D11Resource) {
-	self.Raw.DiscardResource(pResource)
+func (self ID3D11DeviceContext1) DiscardResource(pResource ID3D11Resource) {
+	self.Raw.DiscardResource(pResource.Raw)
 }
 
 // DiscardView wraps the raw DiscardView call.
-func (self ID3D11DeviceContext1) DiscardView(pResourceView *graphicsdirect3d11.ID3D11View) {
-	self.Raw.DiscardView(pResourceView)
+func (self ID3D11DeviceContext1) DiscardView(pResourceView ID3D11View) {
+	self.Raw.DiscardView(pResourceView.Raw)
 }
 
 // VSSetConstantBuffers1 wraps the raw VSSetConstantBuffers1 call.
@@ -1386,18 +1386,18 @@ func (self ID3D11DeviceContext1) CSGetConstantBuffers1(StartSlot uint32, NumBuff
 }
 
 // SwapDeviceContextState wraps the raw SwapDeviceContextState call.
-func (self ID3D11DeviceContext1) SwapDeviceContextState(pState *graphicsdirect3d11.ID3DDeviceContextState, ppPreviousState **graphicsdirect3d11.ID3DDeviceContextState) {
-	self.Raw.SwapDeviceContextState(pState, ppPreviousState)
+func (self ID3D11DeviceContext1) SwapDeviceContextState(pState ID3DDeviceContextState, ppPreviousState **graphicsdirect3d11.ID3DDeviceContextState) {
+	self.Raw.SwapDeviceContextState(pState.Raw, ppPreviousState)
 }
 
 // ClearView wraps the raw ClearView call.
-func (self ID3D11DeviceContext1) ClearView(pView *graphicsdirect3d11.ID3D11View, Color *float32, pRect *foundation.RECT, NumRects uint32) {
-	self.Raw.ClearView(pView, Color, pRect, NumRects)
+func (self ID3D11DeviceContext1) ClearView(pView ID3D11View, Color *float32, pRect *foundation.RECT, NumRects uint32) {
+	self.Raw.ClearView(pView.Raw, Color, pRect, NumRects)
 }
 
 // DiscardView1 wraps the raw DiscardView1 call.
-func (self ID3D11DeviceContext1) DiscardView1(pResourceView *graphicsdirect3d11.ID3D11View, pRects *foundation.RECT, NumRects uint32) {
-	self.Raw.DiscardView1(pResourceView, pRects, NumRects)
+func (self ID3D11DeviceContext1) DiscardView1(pResourceView ID3D11View, pRects *foundation.RECT, NumRects uint32) {
+	self.Raw.DiscardView1(pResourceView.Raw, pRects, NumRects)
 }
 
 // ID3D11DeviceContext2 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11DeviceContext2 with error-returning methods.
@@ -1412,33 +1412,33 @@ func WrapID3D11DeviceContext2(raw *graphicsdirect3d11.ID3D11DeviceContext2) ID3D
 }
 
 // UpdateTileMappings wraps the raw UpdateTileMappings call.
-func (self ID3D11DeviceContext2) UpdateTileMappings(pTiledResource *graphicsdirect3d11.ID3D11Resource, NumTiledResourceRegions uint32, pTiledResourceRegionStartCoordinates *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pTiledResourceRegionSizes *graphicsdirect3d11.D3D11_TILE_REGION_SIZE, pTilePool *graphicsdirect3d11.ID3D11Buffer, NumRanges uint32, pRangeFlags *uint32, pTilePoolStartOffsets *uint32, pRangeTileCounts *uint32, Flags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateTileMappings(pTiledResource, NumTiledResourceRegions, pTiledResourceRegionStartCoordinates, pTiledResourceRegionSizes, pTilePool, NumRanges, pRangeFlags, pTilePoolStartOffsets, pRangeTileCounts, Flags)))
+func (self ID3D11DeviceContext2) UpdateTileMappings(pTiledResource ID3D11Resource, NumTiledResourceRegions uint32, pTiledResourceRegionStartCoordinates *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pTiledResourceRegionSizes *graphicsdirect3d11.D3D11_TILE_REGION_SIZE, pTilePool ID3D11Buffer, NumRanges uint32, pRangeFlags *uint32, pTilePoolStartOffsets *uint32, pRangeTileCounts *uint32, Flags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateTileMappings(pTiledResource.Raw, NumTiledResourceRegions, pTiledResourceRegionStartCoordinates, pTiledResourceRegionSizes, pTilePool.Raw, NumRanges, pRangeFlags, pTilePoolStartOffsets, pRangeTileCounts, Flags)))
 }
 
 // CopyTileMappings wraps the raw CopyTileMappings call.
-func (self ID3D11DeviceContext2) CopyTileMappings(pDestTiledResource *graphicsdirect3d11.ID3D11Resource, pDestRegionStartCoordinate *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pSourceTiledResource *graphicsdirect3d11.ID3D11Resource, pSourceRegionStartCoordinate *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pTileRegionSize *graphicsdirect3d11.D3D11_TILE_REGION_SIZE, Flags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CopyTileMappings(pDestTiledResource, pDestRegionStartCoordinate, pSourceTiledResource, pSourceRegionStartCoordinate, pTileRegionSize, Flags)))
+func (self ID3D11DeviceContext2) CopyTileMappings(pDestTiledResource ID3D11Resource, pDestRegionStartCoordinate *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pSourceTiledResource ID3D11Resource, pSourceRegionStartCoordinate *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pTileRegionSize *graphicsdirect3d11.D3D11_TILE_REGION_SIZE, Flags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CopyTileMappings(pDestTiledResource.Raw, pDestRegionStartCoordinate, pSourceTiledResource.Raw, pSourceRegionStartCoordinate, pTileRegionSize, Flags)))
 }
 
 // CopyTiles wraps the raw CopyTiles call.
-func (self ID3D11DeviceContext2) CopyTiles(pTiledResource *graphicsdirect3d11.ID3D11Resource, pTileRegionStartCoordinate *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pTileRegionSize *graphicsdirect3d11.D3D11_TILE_REGION_SIZE, pBuffer *graphicsdirect3d11.ID3D11Buffer, BufferStartOffsetInBytes uint64, Flags uint32) {
-	self.Raw.CopyTiles(pTiledResource, pTileRegionStartCoordinate, pTileRegionSize, pBuffer, BufferStartOffsetInBytes, Flags)
+func (self ID3D11DeviceContext2) CopyTiles(pTiledResource ID3D11Resource, pTileRegionStartCoordinate *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pTileRegionSize *graphicsdirect3d11.D3D11_TILE_REGION_SIZE, pBuffer ID3D11Buffer, BufferStartOffsetInBytes uint64, Flags uint32) {
+	self.Raw.CopyTiles(pTiledResource.Raw, pTileRegionStartCoordinate, pTileRegionSize, pBuffer.Raw, BufferStartOffsetInBytes, Flags)
 }
 
 // UpdateTiles wraps the raw UpdateTiles call.
-func (self ID3D11DeviceContext2) UpdateTiles(pDestTiledResource *graphicsdirect3d11.ID3D11Resource, pDestTileRegionStartCoordinate *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pDestTileRegionSize *graphicsdirect3d11.D3D11_TILE_REGION_SIZE, pSourceTileData unsafe.Pointer, Flags uint32) {
-	self.Raw.UpdateTiles(pDestTiledResource, pDestTileRegionStartCoordinate, pDestTileRegionSize, pSourceTileData, Flags)
+func (self ID3D11DeviceContext2) UpdateTiles(pDestTiledResource ID3D11Resource, pDestTileRegionStartCoordinate *graphicsdirect3d11.D3D11_TILED_RESOURCE_COORDINATE, pDestTileRegionSize *graphicsdirect3d11.D3D11_TILE_REGION_SIZE, pSourceTileData unsafe.Pointer, Flags uint32) {
+	self.Raw.UpdateTiles(pDestTiledResource.Raw, pDestTileRegionStartCoordinate, pDestTileRegionSize, pSourceTileData, Flags)
 }
 
 // ResizeTilePool wraps the raw ResizeTilePool call.
-func (self ID3D11DeviceContext2) ResizeTilePool(pTilePool *graphicsdirect3d11.ID3D11Buffer, NewSizeInBytes uint64) error {
-	return win32.HRESULTError(int32(self.Raw.ResizeTilePool(pTilePool, NewSizeInBytes)))
+func (self ID3D11DeviceContext2) ResizeTilePool(pTilePool ID3D11Buffer, NewSizeInBytes uint64) error {
+	return win32.HRESULTError(int32(self.Raw.ResizeTilePool(pTilePool.Raw, NewSizeInBytes)))
 }
 
 // TiledResourceBarrier wraps the raw TiledResourceBarrier call.
-func (self ID3D11DeviceContext2) TiledResourceBarrier(pTiledResourceOrViewAccessBeforeBarrier *graphicsdirect3d11.ID3D11DeviceChild, pTiledResourceOrViewAccessAfterBarrier *graphicsdirect3d11.ID3D11DeviceChild) {
-	self.Raw.TiledResourceBarrier(pTiledResourceOrViewAccessBeforeBarrier, pTiledResourceOrViewAccessAfterBarrier)
+func (self ID3D11DeviceContext2) TiledResourceBarrier(pTiledResourceOrViewAccessBeforeBarrier ID3D11DeviceChild, pTiledResourceOrViewAccessAfterBarrier ID3D11DeviceChild) {
+	self.Raw.TiledResourceBarrier(pTiledResourceOrViewAccessBeforeBarrier.Raw, pTiledResourceOrViewAccessAfterBarrier.Raw)
 }
 
 // IsAnnotationEnabled wraps the raw IsAnnotationEnabled call.
@@ -1502,13 +1502,13 @@ func WrapID3D11DeviceContext4(raw *graphicsdirect3d11.ID3D11DeviceContext4) ID3D
 }
 
 // Signal wraps the raw Signal call.
-func (self ID3D11DeviceContext4) Signal(pFence *graphicsdirect3d11.ID3D11Fence, Value uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Signal(pFence, Value)))
+func (self ID3D11DeviceContext4) Signal(pFence ID3D11Fence, Value uint64) error {
+	return win32.HRESULTError(int32(self.Raw.Signal(pFence.Raw, Value)))
 }
 
 // Wait wraps the raw Wait call.
-func (self ID3D11DeviceContext4) Wait(pFence *graphicsdirect3d11.ID3D11Fence, Value uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Wait(pFence, Value)))
+func (self ID3D11DeviceContext4) Wait(pFence ID3D11Fence, Value uint64) error {
+	return win32.HRESULTError(int32(self.Raw.Wait(pFence.Raw, Value)))
 }
 
 // ID3D11DomainShader is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11DomainShader with error-returning methods.
@@ -1576,18 +1576,18 @@ func (self ID3D11FunctionLinkingGraph) SetOutputSignature(pOutputParameters *gra
 }
 
 // CallFunction wraps the raw CallFunction call.
-func (self ID3D11FunctionLinkingGraph) CallFunction(pModuleInstanceNamespace foundation.PSTR, pModuleWithFunctionPrototype *graphicsdirect3d11.ID3D11Module, pFunctionName foundation.PSTR, ppCallNode **graphicsdirect3d11.ID3D11LinkingNode) error {
-	return win32.HRESULTError(int32(self.Raw.CallFunction(pModuleInstanceNamespace, pModuleWithFunctionPrototype, pFunctionName, ppCallNode)))
+func (self ID3D11FunctionLinkingGraph) CallFunction(pModuleInstanceNamespace foundation.PSTR, pModuleWithFunctionPrototype ID3D11Module, pFunctionName foundation.PSTR, ppCallNode **graphicsdirect3d11.ID3D11LinkingNode) error {
+	return win32.HRESULTError(int32(self.Raw.CallFunction(pModuleInstanceNamespace, pModuleWithFunctionPrototype.Raw, pFunctionName, ppCallNode)))
 }
 
 // PassValue wraps the raw PassValue call.
-func (self ID3D11FunctionLinkingGraph) PassValue(pSrcNode *graphicsdirect3d11.ID3D11LinkingNode, SrcParameterIndex int32, pDstNode *graphicsdirect3d11.ID3D11LinkingNode, DstParameterIndex int32) error {
-	return win32.HRESULTError(int32(self.Raw.PassValue(pSrcNode, SrcParameterIndex, pDstNode, DstParameterIndex)))
+func (self ID3D11FunctionLinkingGraph) PassValue(pSrcNode ID3D11LinkingNode, SrcParameterIndex int32, pDstNode ID3D11LinkingNode, DstParameterIndex int32) error {
+	return win32.HRESULTError(int32(self.Raw.PassValue(pSrcNode.Raw, SrcParameterIndex, pDstNode.Raw, DstParameterIndex)))
 }
 
 // PassValueWithSwizzle wraps the raw PassValueWithSwizzle call.
-func (self ID3D11FunctionLinkingGraph) PassValueWithSwizzle(pSrcNode *graphicsdirect3d11.ID3D11LinkingNode, SrcParameterIndex int32, pSrcSwizzle foundation.PSTR, pDstNode *graphicsdirect3d11.ID3D11LinkingNode, DstParameterIndex int32, pDstSwizzle foundation.PSTR) error {
-	return win32.HRESULTError(int32(self.Raw.PassValueWithSwizzle(pSrcNode, SrcParameterIndex, pSrcSwizzle, pDstNode, DstParameterIndex, pDstSwizzle)))
+func (self ID3D11FunctionLinkingGraph) PassValueWithSwizzle(pSrcNode ID3D11LinkingNode, SrcParameterIndex int32, pSrcSwizzle foundation.PSTR, pDstNode ID3D11LinkingNode, DstParameterIndex int32, pDstSwizzle foundation.PSTR) error {
+	return win32.HRESULTError(int32(self.Raw.PassValueWithSwizzle(pSrcNode.Raw, SrcParameterIndex, pSrcSwizzle, pDstNode.Raw, DstParameterIndex, pDstSwizzle)))
 }
 
 // GetLastError wraps the raw GetLastError call.
@@ -1916,13 +1916,13 @@ func WrapID3D11Linker(raw *graphicsdirect3d11.ID3D11Linker) ID3D11Linker {
 }
 
 // Link wraps the raw Link call.
-func (self ID3D11Linker) Link(pEntry *graphicsdirect3d11.ID3D11ModuleInstance, pEntryName foundation.PSTR, pTargetName foundation.PSTR, uFlags uint32, ppShaderBlob **graphicsdirect3d.ID3DBlob, ppErrorBuffer **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(self.Raw.Link(pEntry, pEntryName, pTargetName, uFlags, ppShaderBlob, ppErrorBuffer)))
+func (self ID3D11Linker) Link(pEntry ID3D11ModuleInstance, pEntryName foundation.PSTR, pTargetName foundation.PSTR, uFlags uint32, ppShaderBlob **graphicsdirect3d.ID3DBlob, ppErrorBuffer **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(self.Raw.Link(pEntry.Raw, pEntryName, pTargetName, uFlags, ppShaderBlob, ppErrorBuffer)))
 }
 
 // UseLibrary wraps the raw UseLibrary call.
-func (self ID3D11Linker) UseLibrary(pLibraryMI *graphicsdirect3d11.ID3D11ModuleInstance) error {
-	return win32.HRESULTError(int32(self.Raw.UseLibrary(pLibraryMI)))
+func (self ID3D11Linker) UseLibrary(pLibraryMI ID3D11ModuleInstance) error {
+	return win32.HRESULTError(int32(self.Raw.UseLibrary(pLibraryMI.Raw)))
 }
 
 // AddClipPlaneFromCBuffer wraps the raw AddClipPlaneFromCBuffer call.
@@ -2420,8 +2420,8 @@ func (self ID3D11ShaderReflectionType) GetMemberTypeName(Index uint32) foundatio
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self ID3D11ShaderReflectionType) IsEqual(pType *graphicsdirect3d11.ID3D11ShaderReflectionType) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pType)))
+func (self ID3D11ShaderReflectionType) IsEqual(pType ID3D11ShaderReflectionType) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pType.Raw)))
 }
 
 // GetSubType wraps the raw GetSubType call.
@@ -2445,13 +2445,13 @@ func (self ID3D11ShaderReflectionType) GetInterfaceByIndex(uIndex uint32) *graph
 }
 
 // IsOfType wraps the raw IsOfType call.
-func (self ID3D11ShaderReflectionType) IsOfType(pType *graphicsdirect3d11.ID3D11ShaderReflectionType) error {
-	return win32.HRESULTError(int32(self.Raw.IsOfType(pType)))
+func (self ID3D11ShaderReflectionType) IsOfType(pType ID3D11ShaderReflectionType) error {
+	return win32.HRESULTError(int32(self.Raw.IsOfType(pType.Raw)))
 }
 
 // ImplementsInterface wraps the raw ImplementsInterface call.
-func (self ID3D11ShaderReflectionType) ImplementsInterface(pBase *graphicsdirect3d11.ID3D11ShaderReflectionType) error {
-	return win32.HRESULTError(int32(self.Raw.ImplementsInterface(pBase)))
+func (self ID3D11ShaderReflectionType) ImplementsInterface(pBase ID3D11ShaderReflectionType) error {
+	return win32.HRESULTError(int32(self.Raw.ImplementsInterface(pBase.Raw)))
 }
 
 // ID3D11ShaderReflectionVariable is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11ShaderReflectionVariable with error-returning methods.
@@ -2579,8 +2579,8 @@ func WrapID3D11ShaderTraceFactory(raw *graphicsdirect3d11.ID3D11ShaderTraceFacto
 }
 
 // CreateShaderTrace wraps the raw CreateShaderTrace call.
-func (self ID3D11ShaderTraceFactory) CreateShaderTrace(pShader *systemcom.IUnknown, pTraceDesc *graphicsdirect3d11.D3D11_SHADER_TRACE_DESC, ppShaderTrace **graphicsdirect3d11.ID3D11ShaderTrace) error {
-	return win32.HRESULTError(int32(self.Raw.CreateShaderTrace(pShader, pTraceDesc, ppShaderTrace)))
+func (self ID3D11ShaderTraceFactory) CreateShaderTrace(pShader systemcomidiom.IUnknown, pTraceDesc *graphicsdirect3d11.D3D11_SHADER_TRACE_DESC, ppShaderTrace **graphicsdirect3d11.ID3D11ShaderTrace) error {
+	return win32.HRESULTError(int32(self.Raw.CreateShaderTrace(pShader.Raw, pTraceDesc, ppShaderTrace)))
 }
 
 // ID3D11SwitchToRef is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11SwitchToRef with error-returning methods.
@@ -2702,8 +2702,8 @@ func (self ID3D11TracingDevice) SetShaderTrackingOptionsByType(ResourceTypeFlags
 }
 
 // SetShaderTrackingOptions wraps the raw SetShaderTrackingOptions call.
-func (self ID3D11TracingDevice) SetShaderTrackingOptions(pShader *systemcom.IUnknown, Options uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetShaderTrackingOptions(pShader, Options)))
+func (self ID3D11TracingDevice) SetShaderTrackingOptions(pShader systemcomidiom.IUnknown, Options uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetShaderTrackingOptions(pShader.Raw, Options)))
 }
 
 // ID3D11UnorderedAccessView is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11UnorderedAccessView with error-returning methods.
@@ -2761,291 +2761,291 @@ func WrapID3D11VideoContext(raw *graphicsdirect3d11.ID3D11VideoContext) ID3D11Vi
 }
 
 // GetDecoderBuffer wraps the raw GetDecoderBuffer call.
-func (self ID3D11VideoContext) GetDecoderBuffer(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, Type graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_TYPE, pBufferSize *uint32, ppBuffer *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetDecoderBuffer(pDecoder, Type, pBufferSize, ppBuffer)))
+func (self ID3D11VideoContext) GetDecoderBuffer(pDecoder ID3D11VideoDecoder, Type graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_TYPE, pBufferSize *uint32, ppBuffer *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetDecoderBuffer(pDecoder.Raw, Type, pBufferSize, ppBuffer)))
 }
 
 // ReleaseDecoderBuffer wraps the raw ReleaseDecoderBuffer call.
-func (self ID3D11VideoContext) ReleaseDecoderBuffer(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, Type graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseDecoderBuffer(pDecoder, Type)))
+func (self ID3D11VideoContext) ReleaseDecoderBuffer(pDecoder ID3D11VideoDecoder, Type graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseDecoderBuffer(pDecoder.Raw, Type)))
 }
 
 // DecoderBeginFrame wraps the raw DecoderBeginFrame call.
-func (self ID3D11VideoContext) DecoderBeginFrame(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, pView *graphicsdirect3d11.ID3D11VideoDecoderOutputView, ContentKeySize uint32, pContentKey unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.DecoderBeginFrame(pDecoder, pView, ContentKeySize, pContentKey)))
+func (self ID3D11VideoContext) DecoderBeginFrame(pDecoder ID3D11VideoDecoder, pView ID3D11VideoDecoderOutputView, ContentKeySize uint32, pContentKey unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.DecoderBeginFrame(pDecoder.Raw, pView.Raw, ContentKeySize, pContentKey)))
 }
 
 // DecoderEndFrame wraps the raw DecoderEndFrame call.
-func (self ID3D11VideoContext) DecoderEndFrame(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder) error {
-	return win32.HRESULTError(int32(self.Raw.DecoderEndFrame(pDecoder)))
+func (self ID3D11VideoContext) DecoderEndFrame(pDecoder ID3D11VideoDecoder) error {
+	return win32.HRESULTError(int32(self.Raw.DecoderEndFrame(pDecoder.Raw)))
 }
 
 // SubmitDecoderBuffers wraps the raw SubmitDecoderBuffers call.
-func (self ID3D11VideoContext) SubmitDecoderBuffers(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_DESC) error {
-	return win32.HRESULTError(int32(self.Raw.SubmitDecoderBuffers(pDecoder, NumBuffers, pBufferDesc)))
+func (self ID3D11VideoContext) SubmitDecoderBuffers(pDecoder ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_DESC) error {
+	return win32.HRESULTError(int32(self.Raw.SubmitDecoderBuffers(pDecoder.Raw, NumBuffers, pBufferDesc)))
 }
 
 // DecoderExtension wraps the raw DecoderExtension call.
-func (self ID3D11VideoContext) DecoderExtension(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, pExtensionData *graphicsdirect3d11.D3D11_VIDEO_DECODER_EXTENSION) int32 {
-	return self.Raw.DecoderExtension(pDecoder, pExtensionData)
+func (self ID3D11VideoContext) DecoderExtension(pDecoder ID3D11VideoDecoder, pExtensionData *graphicsdirect3d11.D3D11_VIDEO_DECODER_EXTENSION) int32 {
+	return self.Raw.DecoderExtension(pDecoder.Raw, pExtensionData)
 }
 
 // VideoProcessorSetOutputTargetRect wraps the raw VideoProcessorSetOutputTargetRect call.
-func (self ID3D11VideoContext) VideoProcessorSetOutputTargetRect(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, Enable bool, pRect *foundation.RECT) {
+func (self ID3D11VideoContext) VideoProcessorSetOutputTargetRect(pVideoProcessor ID3D11VideoProcessor, Enable bool, pRect *foundation.RECT) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
-	self.Raw.VideoProcessorSetOutputTargetRect(pVideoProcessor, _Enable, pRect)
+	self.Raw.VideoProcessorSetOutputTargetRect(pVideoProcessor.Raw, _Enable, pRect)
 }
 
 // VideoProcessorSetOutputBackgroundColor wraps the raw VideoProcessorSetOutputBackgroundColor call.
-func (self ID3D11VideoContext) VideoProcessorSetOutputBackgroundColor(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, YCbCr bool, pColor *graphicsdirect3d11.D3D11_VIDEO_COLOR) {
+func (self ID3D11VideoContext) VideoProcessorSetOutputBackgroundColor(pVideoProcessor ID3D11VideoProcessor, YCbCr bool, pColor *graphicsdirect3d11.D3D11_VIDEO_COLOR) {
 	_YCbCr := foundation.BOOL(win32.Bool32(YCbCr))
-	self.Raw.VideoProcessorSetOutputBackgroundColor(pVideoProcessor, _YCbCr, pColor)
+	self.Raw.VideoProcessorSetOutputBackgroundColor(pVideoProcessor.Raw, _YCbCr, pColor)
 }
 
 // VideoProcessorSetOutputColorSpace wraps the raw VideoProcessorSetOutputColorSpace call.
-func (self ID3D11VideoContext) VideoProcessorSetOutputColorSpace(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pColorSpace *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_COLOR_SPACE) {
-	self.Raw.VideoProcessorSetOutputColorSpace(pVideoProcessor, pColorSpace)
+func (self ID3D11VideoContext) VideoProcessorSetOutputColorSpace(pVideoProcessor ID3D11VideoProcessor, pColorSpace *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_COLOR_SPACE) {
+	self.Raw.VideoProcessorSetOutputColorSpace(pVideoProcessor.Raw, pColorSpace)
 }
 
 // VideoProcessorSetOutputAlphaFillMode wraps the raw VideoProcessorSetOutputAlphaFillMode call.
-func (self ID3D11VideoContext) VideoProcessorSetOutputAlphaFillMode(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, AlphaFillMode graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, StreamIndex uint32) {
-	self.Raw.VideoProcessorSetOutputAlphaFillMode(pVideoProcessor, AlphaFillMode, StreamIndex)
+func (self ID3D11VideoContext) VideoProcessorSetOutputAlphaFillMode(pVideoProcessor ID3D11VideoProcessor, AlphaFillMode graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, StreamIndex uint32) {
+	self.Raw.VideoProcessorSetOutputAlphaFillMode(pVideoProcessor.Raw, AlphaFillMode, StreamIndex)
 }
 
 // VideoProcessorSetOutputStereoMode wraps the raw VideoProcessorSetOutputStereoMode call.
-func (self ID3D11VideoContext) VideoProcessorSetOutputStereoMode(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, Enable bool) {
+func (self ID3D11VideoContext) VideoProcessorSetOutputStereoMode(pVideoProcessor ID3D11VideoProcessor, Enable bool) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
-	self.Raw.VideoProcessorSetOutputStereoMode(pVideoProcessor, _Enable)
+	self.Raw.VideoProcessorSetOutputStereoMode(pVideoProcessor.Raw, _Enable)
 }
 
 // VideoProcessorSetOutputExtension wraps the raw VideoProcessorSetOutputExtension call.
-func (self ID3D11VideoContext) VideoProcessorSetOutputExtension(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
-	return self.Raw.VideoProcessorSetOutputExtension(pVideoProcessor, pExtensionGuid, DataSize, pData)
+func (self ID3D11VideoContext) VideoProcessorSetOutputExtension(pVideoProcessor ID3D11VideoProcessor, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
+	return self.Raw.VideoProcessorSetOutputExtension(pVideoProcessor.Raw, pExtensionGuid, DataSize, pData)
 }
 
 // VideoProcessorGetOutputTargetRect wraps the raw VideoProcessorGetOutputTargetRect call.
-func (self ID3D11VideoContext) VideoProcessorGetOutputTargetRect(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, Enabled *foundation.BOOL, pRect *foundation.RECT) {
-	self.Raw.VideoProcessorGetOutputTargetRect(pVideoProcessor, Enabled, pRect)
+func (self ID3D11VideoContext) VideoProcessorGetOutputTargetRect(pVideoProcessor ID3D11VideoProcessor, Enabled *foundation.BOOL, pRect *foundation.RECT) {
+	self.Raw.VideoProcessorGetOutputTargetRect(pVideoProcessor.Raw, Enabled, pRect)
 }
 
 // VideoProcessorGetOutputBackgroundColor wraps the raw VideoProcessorGetOutputBackgroundColor call.
-func (self ID3D11VideoContext) VideoProcessorGetOutputBackgroundColor(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pYCbCr *foundation.BOOL, pColor *graphicsdirect3d11.D3D11_VIDEO_COLOR) {
-	self.Raw.VideoProcessorGetOutputBackgroundColor(pVideoProcessor, pYCbCr, pColor)
+func (self ID3D11VideoContext) VideoProcessorGetOutputBackgroundColor(pVideoProcessor ID3D11VideoProcessor, pYCbCr *foundation.BOOL, pColor *graphicsdirect3d11.D3D11_VIDEO_COLOR) {
+	self.Raw.VideoProcessorGetOutputBackgroundColor(pVideoProcessor.Raw, pYCbCr, pColor)
 }
 
 // VideoProcessorGetOutputColorSpace wraps the raw VideoProcessorGetOutputColorSpace call.
-func (self ID3D11VideoContext) VideoProcessorGetOutputColorSpace(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pColorSpace *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_COLOR_SPACE) {
-	self.Raw.VideoProcessorGetOutputColorSpace(pVideoProcessor, pColorSpace)
+func (self ID3D11VideoContext) VideoProcessorGetOutputColorSpace(pVideoProcessor ID3D11VideoProcessor, pColorSpace *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_COLOR_SPACE) {
+	self.Raw.VideoProcessorGetOutputColorSpace(pVideoProcessor.Raw, pColorSpace)
 }
 
 // VideoProcessorGetOutputAlphaFillMode wraps the raw VideoProcessorGetOutputAlphaFillMode call.
-func (self ID3D11VideoContext) VideoProcessorGetOutputAlphaFillMode(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pAlphaFillMode *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, pStreamIndex *uint32) {
-	self.Raw.VideoProcessorGetOutputAlphaFillMode(pVideoProcessor, pAlphaFillMode, pStreamIndex)
+func (self ID3D11VideoContext) VideoProcessorGetOutputAlphaFillMode(pVideoProcessor ID3D11VideoProcessor, pAlphaFillMode *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, pStreamIndex *uint32) {
+	self.Raw.VideoProcessorGetOutputAlphaFillMode(pVideoProcessor.Raw, pAlphaFillMode, pStreamIndex)
 }
 
 // VideoProcessorGetOutputConstriction wraps the raw VideoProcessorGetOutputConstriction call.
-func (self ID3D11VideoContext) VideoProcessorGetOutputConstriction(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pEnabled *foundation.BOOL, pSize *foundation.SIZE) {
-	self.Raw.VideoProcessorGetOutputConstriction(pVideoProcessor, pEnabled, pSize)
+func (self ID3D11VideoContext) VideoProcessorGetOutputConstriction(pVideoProcessor ID3D11VideoProcessor, pEnabled *foundation.BOOL, pSize *foundation.SIZE) {
+	self.Raw.VideoProcessorGetOutputConstriction(pVideoProcessor.Raw, pEnabled, pSize)
 }
 
 // VideoProcessorGetOutputStereoMode wraps the raw VideoProcessorGetOutputStereoMode call.
-func (self ID3D11VideoContext) VideoProcessorGetOutputStereoMode(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pEnabled *foundation.BOOL) {
-	self.Raw.VideoProcessorGetOutputStereoMode(pVideoProcessor, pEnabled)
+func (self ID3D11VideoContext) VideoProcessorGetOutputStereoMode(pVideoProcessor ID3D11VideoProcessor, pEnabled *foundation.BOOL) {
+	self.Raw.VideoProcessorGetOutputStereoMode(pVideoProcessor.Raw, pEnabled)
 }
 
 // VideoProcessorGetOutputExtension wraps the raw VideoProcessorGetOutputExtension call.
-func (self ID3D11VideoContext) VideoProcessorGetOutputExtension(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
-	return self.Raw.VideoProcessorGetOutputExtension(pVideoProcessor, pExtensionGuid, DataSize, pData)
+func (self ID3D11VideoContext) VideoProcessorGetOutputExtension(pVideoProcessor ID3D11VideoProcessor, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
+	return self.Raw.VideoProcessorGetOutputExtension(pVideoProcessor.Raw, pExtensionGuid, DataSize, pData)
 }
 
 // VideoProcessorSetStreamFrameFormat wraps the raw VideoProcessorSetStreamFrameFormat call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamFrameFormat(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, FrameFormat graphicsdirect3d11.D3D11_VIDEO_FRAME_FORMAT) {
-	self.Raw.VideoProcessorSetStreamFrameFormat(pVideoProcessor, StreamIndex, FrameFormat)
+func (self ID3D11VideoContext) VideoProcessorSetStreamFrameFormat(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, FrameFormat graphicsdirect3d11.D3D11_VIDEO_FRAME_FORMAT) {
+	self.Raw.VideoProcessorSetStreamFrameFormat(pVideoProcessor.Raw, StreamIndex, FrameFormat)
 }
 
 // VideoProcessorSetStreamColorSpace wraps the raw VideoProcessorSetStreamColorSpace call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamColorSpace(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pColorSpace *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_COLOR_SPACE) {
-	self.Raw.VideoProcessorSetStreamColorSpace(pVideoProcessor, StreamIndex, pColorSpace)
+func (self ID3D11VideoContext) VideoProcessorSetStreamColorSpace(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pColorSpace *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_COLOR_SPACE) {
+	self.Raw.VideoProcessorSetStreamColorSpace(pVideoProcessor.Raw, StreamIndex, pColorSpace)
 }
 
 // VideoProcessorSetStreamOutputRate wraps the raw VideoProcessorSetStreamOutputRate call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamOutputRate(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, OutputRate graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, RepeatFrame bool, pCustomRate *graphicsdxgicommon.DXGI_RATIONAL) {
+func (self ID3D11VideoContext) VideoProcessorSetStreamOutputRate(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, OutputRate graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, RepeatFrame bool, pCustomRate *graphicsdxgicommon.DXGI_RATIONAL) {
 	_RepeatFrame := foundation.BOOL(win32.Bool32(RepeatFrame))
-	self.Raw.VideoProcessorSetStreamOutputRate(pVideoProcessor, StreamIndex, OutputRate, _RepeatFrame, pCustomRate)
+	self.Raw.VideoProcessorSetStreamOutputRate(pVideoProcessor.Raw, StreamIndex, OutputRate, _RepeatFrame, pCustomRate)
 }
 
 // VideoProcessorSetStreamSourceRect wraps the raw VideoProcessorSetStreamSourceRect call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamSourceRect(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Enable bool, pRect *foundation.RECT) {
+func (self ID3D11VideoContext) VideoProcessorSetStreamSourceRect(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Enable bool, pRect *foundation.RECT) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
-	self.Raw.VideoProcessorSetStreamSourceRect(pVideoProcessor, StreamIndex, _Enable, pRect)
+	self.Raw.VideoProcessorSetStreamSourceRect(pVideoProcessor.Raw, StreamIndex, _Enable, pRect)
 }
 
 // VideoProcessorSetStreamDestRect wraps the raw VideoProcessorSetStreamDestRect call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamDestRect(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Enable bool, pRect *foundation.RECT) {
+func (self ID3D11VideoContext) VideoProcessorSetStreamDestRect(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Enable bool, pRect *foundation.RECT) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
-	self.Raw.VideoProcessorSetStreamDestRect(pVideoProcessor, StreamIndex, _Enable, pRect)
+	self.Raw.VideoProcessorSetStreamDestRect(pVideoProcessor.Raw, StreamIndex, _Enable, pRect)
 }
 
 // VideoProcessorSetStreamPalette wraps the raw VideoProcessorSetStreamPalette call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamPalette(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Count uint32, pEntries *uint32) {
-	self.Raw.VideoProcessorSetStreamPalette(pVideoProcessor, StreamIndex, Count, pEntries)
+func (self ID3D11VideoContext) VideoProcessorSetStreamPalette(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Count uint32, pEntries *uint32) {
+	self.Raw.VideoProcessorSetStreamPalette(pVideoProcessor.Raw, StreamIndex, Count, pEntries)
 }
 
 // VideoProcessorSetStreamPixelAspectRatio wraps the raw VideoProcessorSetStreamPixelAspectRatio call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamPixelAspectRatio(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Enable bool, pSourceAspectRatio *graphicsdxgicommon.DXGI_RATIONAL, pDestinationAspectRatio *graphicsdxgicommon.DXGI_RATIONAL) {
+func (self ID3D11VideoContext) VideoProcessorSetStreamPixelAspectRatio(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Enable bool, pSourceAspectRatio *graphicsdxgicommon.DXGI_RATIONAL, pDestinationAspectRatio *graphicsdxgicommon.DXGI_RATIONAL) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
-	self.Raw.VideoProcessorSetStreamPixelAspectRatio(pVideoProcessor, StreamIndex, _Enable, pSourceAspectRatio, pDestinationAspectRatio)
+	self.Raw.VideoProcessorSetStreamPixelAspectRatio(pVideoProcessor.Raw, StreamIndex, _Enable, pSourceAspectRatio, pDestinationAspectRatio)
 }
 
 // VideoProcessorSetStreamStereoFormat wraps the raw VideoProcessorSetStreamStereoFormat call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamStereoFormat(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Enable bool, Format graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LeftViewFrame0 bool, BaseViewFrame0 bool, FlipMode graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, MonoOffset int32) {
+func (self ID3D11VideoContext) VideoProcessorSetStreamStereoFormat(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Enable bool, Format graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LeftViewFrame0 bool, BaseViewFrame0 bool, FlipMode graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, MonoOffset int32) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
 	_LeftViewFrame0 := foundation.BOOL(win32.Bool32(LeftViewFrame0))
 	_BaseViewFrame0 := foundation.BOOL(win32.Bool32(BaseViewFrame0))
-	self.Raw.VideoProcessorSetStreamStereoFormat(pVideoProcessor, StreamIndex, _Enable, Format, _LeftViewFrame0, _BaseViewFrame0, FlipMode, MonoOffset)
+	self.Raw.VideoProcessorSetStreamStereoFormat(pVideoProcessor.Raw, StreamIndex, _Enable, Format, _LeftViewFrame0, _BaseViewFrame0, FlipMode, MonoOffset)
 }
 
 // VideoProcessorSetStreamAutoProcessingMode wraps the raw VideoProcessorSetStreamAutoProcessingMode call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamAutoProcessingMode(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Enable bool) {
+func (self ID3D11VideoContext) VideoProcessorSetStreamAutoProcessingMode(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Enable bool) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
-	self.Raw.VideoProcessorSetStreamAutoProcessingMode(pVideoProcessor, StreamIndex, _Enable)
+	self.Raw.VideoProcessorSetStreamAutoProcessingMode(pVideoProcessor.Raw, StreamIndex, _Enable)
 }
 
 // VideoProcessorSetStreamFilter wraps the raw VideoProcessorSetStreamFilter call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamFilter(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Filter graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_FILTER, Enable bool, Level int32) {
+func (self ID3D11VideoContext) VideoProcessorSetStreamFilter(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Filter graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_FILTER, Enable bool, Level int32) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
-	self.Raw.VideoProcessorSetStreamFilter(pVideoProcessor, StreamIndex, Filter, _Enable, Level)
+	self.Raw.VideoProcessorSetStreamFilter(pVideoProcessor.Raw, StreamIndex, Filter, _Enable, Level)
 }
 
 // VideoProcessorSetStreamExtension wraps the raw VideoProcessorSetStreamExtension call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamExtension(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
-	return self.Raw.VideoProcessorSetStreamExtension(pVideoProcessor, StreamIndex, pExtensionGuid, DataSize, pData)
+func (self ID3D11VideoContext) VideoProcessorSetStreamExtension(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
+	return self.Raw.VideoProcessorSetStreamExtension(pVideoProcessor.Raw, StreamIndex, pExtensionGuid, DataSize, pData)
 }
 
 // VideoProcessorGetStreamFrameFormat wraps the raw VideoProcessorGetStreamFrameFormat call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamFrameFormat(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pFrameFormat *graphicsdirect3d11.D3D11_VIDEO_FRAME_FORMAT) {
-	self.Raw.VideoProcessorGetStreamFrameFormat(pVideoProcessor, StreamIndex, pFrameFormat)
+func (self ID3D11VideoContext) VideoProcessorGetStreamFrameFormat(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pFrameFormat *graphicsdirect3d11.D3D11_VIDEO_FRAME_FORMAT) {
+	self.Raw.VideoProcessorGetStreamFrameFormat(pVideoProcessor.Raw, StreamIndex, pFrameFormat)
 }
 
 // VideoProcessorGetStreamColorSpace wraps the raw VideoProcessorGetStreamColorSpace call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamColorSpace(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pColorSpace *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_COLOR_SPACE) {
-	self.Raw.VideoProcessorGetStreamColorSpace(pVideoProcessor, StreamIndex, pColorSpace)
+func (self ID3D11VideoContext) VideoProcessorGetStreamColorSpace(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pColorSpace *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_COLOR_SPACE) {
+	self.Raw.VideoProcessorGetStreamColorSpace(pVideoProcessor.Raw, StreamIndex, pColorSpace)
 }
 
 // VideoProcessorGetStreamOutputRate wraps the raw VideoProcessorGetStreamOutputRate call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamOutputRate(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pOutputRate *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, pRepeatFrame *foundation.BOOL, pCustomRate *graphicsdxgicommon.DXGI_RATIONAL) {
-	self.Raw.VideoProcessorGetStreamOutputRate(pVideoProcessor, StreamIndex, pOutputRate, pRepeatFrame, pCustomRate)
+func (self ID3D11VideoContext) VideoProcessorGetStreamOutputRate(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pOutputRate *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, pRepeatFrame *foundation.BOOL, pCustomRate *graphicsdxgicommon.DXGI_RATIONAL) {
+	self.Raw.VideoProcessorGetStreamOutputRate(pVideoProcessor.Raw, StreamIndex, pOutputRate, pRepeatFrame, pCustomRate)
 }
 
 // VideoProcessorGetStreamSourceRect wraps the raw VideoProcessorGetStreamSourceRect call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamSourceRect(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pRect *foundation.RECT) {
-	self.Raw.VideoProcessorGetStreamSourceRect(pVideoProcessor, StreamIndex, pEnabled, pRect)
+func (self ID3D11VideoContext) VideoProcessorGetStreamSourceRect(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pRect *foundation.RECT) {
+	self.Raw.VideoProcessorGetStreamSourceRect(pVideoProcessor.Raw, StreamIndex, pEnabled, pRect)
 }
 
 // VideoProcessorGetStreamDestRect wraps the raw VideoProcessorGetStreamDestRect call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamDestRect(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pRect *foundation.RECT) {
-	self.Raw.VideoProcessorGetStreamDestRect(pVideoProcessor, StreamIndex, pEnabled, pRect)
+func (self ID3D11VideoContext) VideoProcessorGetStreamDestRect(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pRect *foundation.RECT) {
+	self.Raw.VideoProcessorGetStreamDestRect(pVideoProcessor.Raw, StreamIndex, pEnabled, pRect)
 }
 
 // VideoProcessorGetStreamAlpha wraps the raw VideoProcessorGetStreamAlpha call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamAlpha(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pAlpha *float32) {
-	self.Raw.VideoProcessorGetStreamAlpha(pVideoProcessor, StreamIndex, pEnabled, pAlpha)
+func (self ID3D11VideoContext) VideoProcessorGetStreamAlpha(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pAlpha *float32) {
+	self.Raw.VideoProcessorGetStreamAlpha(pVideoProcessor.Raw, StreamIndex, pEnabled, pAlpha)
 }
 
 // VideoProcessorGetStreamPalette wraps the raw VideoProcessorGetStreamPalette call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamPalette(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Count uint32, pEntries *uint32) {
-	self.Raw.VideoProcessorGetStreamPalette(pVideoProcessor, StreamIndex, Count, pEntries)
+func (self ID3D11VideoContext) VideoProcessorGetStreamPalette(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Count uint32, pEntries *uint32) {
+	self.Raw.VideoProcessorGetStreamPalette(pVideoProcessor.Raw, StreamIndex, Count, pEntries)
 }
 
 // VideoProcessorGetStreamPixelAspectRatio wraps the raw VideoProcessorGetStreamPixelAspectRatio call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamPixelAspectRatio(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pSourceAspectRatio *graphicsdxgicommon.DXGI_RATIONAL, pDestinationAspectRatio *graphicsdxgicommon.DXGI_RATIONAL) {
-	self.Raw.VideoProcessorGetStreamPixelAspectRatio(pVideoProcessor, StreamIndex, pEnabled, pSourceAspectRatio, pDestinationAspectRatio)
+func (self ID3D11VideoContext) VideoProcessorGetStreamPixelAspectRatio(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pSourceAspectRatio *graphicsdxgicommon.DXGI_RATIONAL, pDestinationAspectRatio *graphicsdxgicommon.DXGI_RATIONAL) {
+	self.Raw.VideoProcessorGetStreamPixelAspectRatio(pVideoProcessor.Raw, StreamIndex, pEnabled, pSourceAspectRatio, pDestinationAspectRatio)
 }
 
 // VideoProcessorGetStreamLumaKey wraps the raw VideoProcessorGetStreamLumaKey call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamLumaKey(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pLower *float32, pUpper *float32) {
-	self.Raw.VideoProcessorGetStreamLumaKey(pVideoProcessor, StreamIndex, pEnabled, pLower, pUpper)
+func (self ID3D11VideoContext) VideoProcessorGetStreamLumaKey(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pLower *float32, pUpper *float32) {
+	self.Raw.VideoProcessorGetStreamLumaKey(pVideoProcessor.Raw, StreamIndex, pEnabled, pLower, pUpper)
 }
 
 // VideoProcessorGetStreamStereoFormat wraps the raw VideoProcessorGetStreamStereoFormat call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamStereoFormat(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pFormat *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, pLeftViewFrame0 *foundation.BOOL, pBaseViewFrame0 *foundation.BOOL, pFlipMode *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, MonoOffset *int32) {
-	self.Raw.VideoProcessorGetStreamStereoFormat(pVideoProcessor, StreamIndex, pEnable, pFormat, pLeftViewFrame0, pBaseViewFrame0, pFlipMode, MonoOffset)
+func (self ID3D11VideoContext) VideoProcessorGetStreamStereoFormat(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pFormat *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, pLeftViewFrame0 *foundation.BOOL, pBaseViewFrame0 *foundation.BOOL, pFlipMode *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, MonoOffset *int32) {
+	self.Raw.VideoProcessorGetStreamStereoFormat(pVideoProcessor.Raw, StreamIndex, pEnable, pFormat, pLeftViewFrame0, pBaseViewFrame0, pFlipMode, MonoOffset)
 }
 
 // VideoProcessorGetStreamAutoProcessingMode wraps the raw VideoProcessorGetStreamAutoProcessingMode call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamAutoProcessingMode(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL) {
-	self.Raw.VideoProcessorGetStreamAutoProcessingMode(pVideoProcessor, StreamIndex, pEnabled)
+func (self ID3D11VideoContext) VideoProcessorGetStreamAutoProcessingMode(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL) {
+	self.Raw.VideoProcessorGetStreamAutoProcessingMode(pVideoProcessor.Raw, StreamIndex, pEnabled)
 }
 
 // VideoProcessorGetStreamFilter wraps the raw VideoProcessorGetStreamFilter call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamFilter(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Filter graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_FILTER, pEnabled *foundation.BOOL, pLevel *int32) {
-	self.Raw.VideoProcessorGetStreamFilter(pVideoProcessor, StreamIndex, Filter, pEnabled, pLevel)
+func (self ID3D11VideoContext) VideoProcessorGetStreamFilter(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Filter graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_FILTER, pEnabled *foundation.BOOL, pLevel *int32) {
+	self.Raw.VideoProcessorGetStreamFilter(pVideoProcessor.Raw, StreamIndex, Filter, pEnabled, pLevel)
 }
 
 // VideoProcessorGetStreamExtension wraps the raw VideoProcessorGetStreamExtension call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamExtension(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
-	return self.Raw.VideoProcessorGetStreamExtension(pVideoProcessor, StreamIndex, pExtensionGuid, DataSize, pData)
+func (self ID3D11VideoContext) VideoProcessorGetStreamExtension(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
+	return self.Raw.VideoProcessorGetStreamExtension(pVideoProcessor.Raw, StreamIndex, pExtensionGuid, DataSize, pData)
 }
 
 // VideoProcessorBlt wraps the raw VideoProcessorBlt call.
-func (self ID3D11VideoContext) VideoProcessorBlt(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pView *graphicsdirect3d11.ID3D11VideoProcessorOutputView, OutputFrame uint32, StreamCount uint32, pStreams *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STREAM) error {
-	return win32.HRESULTError(int32(self.Raw.VideoProcessorBlt(pVideoProcessor, pView, OutputFrame, StreamCount, pStreams)))
+func (self ID3D11VideoContext) VideoProcessorBlt(pVideoProcessor ID3D11VideoProcessor, pView ID3D11VideoProcessorOutputView, OutputFrame uint32, StreamCount uint32, pStreams *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STREAM) error {
+	return win32.HRESULTError(int32(self.Raw.VideoProcessorBlt(pVideoProcessor.Raw, pView.Raw, OutputFrame, StreamCount, pStreams)))
 }
 
 // NegotiateCryptoSessionKeyExchange wraps the raw NegotiateCryptoSessionKeyExchange call.
-func (self ID3D11VideoContext) NegotiateCryptoSessionKeyExchange(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession, DataSize uint32, pData unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.NegotiateCryptoSessionKeyExchange(pCryptoSession, DataSize, pData)))
+func (self ID3D11VideoContext) NegotiateCryptoSessionKeyExchange(pCryptoSession ID3D11CryptoSession, DataSize uint32, pData unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.NegotiateCryptoSessionKeyExchange(pCryptoSession.Raw, DataSize, pData)))
 }
 
 // EncryptionBlt wraps the raw EncryptionBlt call.
-func (self ID3D11VideoContext) EncryptionBlt(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession, pSrcSurface *graphicsdirect3d11.ID3D11Texture2D, pDstSurface *graphicsdirect3d11.ID3D11Texture2D, IVSize uint32, pIV unsafe.Pointer) {
-	self.Raw.EncryptionBlt(pCryptoSession, pSrcSurface, pDstSurface, IVSize, pIV)
+func (self ID3D11VideoContext) EncryptionBlt(pCryptoSession ID3D11CryptoSession, pSrcSurface ID3D11Texture2D, pDstSurface ID3D11Texture2D, IVSize uint32, pIV unsafe.Pointer) {
+	self.Raw.EncryptionBlt(pCryptoSession.Raw, pSrcSurface.Raw, pDstSurface.Raw, IVSize, pIV)
 }
 
 // DecryptionBlt wraps the raw DecryptionBlt call.
-func (self ID3D11VideoContext) DecryptionBlt(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession, pSrcSurface *graphicsdirect3d11.ID3D11Texture2D, pDstSurface *graphicsdirect3d11.ID3D11Texture2D, pEncryptedBlockInfo *graphicsdirect3d11.D3D11_ENCRYPTED_BLOCK_INFO, ContentKeySize uint32, pContentKey unsafe.Pointer, IVSize uint32, pIV unsafe.Pointer) {
-	self.Raw.DecryptionBlt(pCryptoSession, pSrcSurface, pDstSurface, pEncryptedBlockInfo, ContentKeySize, pContentKey, IVSize, pIV)
+func (self ID3D11VideoContext) DecryptionBlt(pCryptoSession ID3D11CryptoSession, pSrcSurface ID3D11Texture2D, pDstSurface ID3D11Texture2D, pEncryptedBlockInfo *graphicsdirect3d11.D3D11_ENCRYPTED_BLOCK_INFO, ContentKeySize uint32, pContentKey unsafe.Pointer, IVSize uint32, pIV unsafe.Pointer) {
+	self.Raw.DecryptionBlt(pCryptoSession.Raw, pSrcSurface.Raw, pDstSurface.Raw, pEncryptedBlockInfo, ContentKeySize, pContentKey, IVSize, pIV)
 }
 
 // StartSessionKeyRefresh wraps the raw StartSessionKeyRefresh call.
-func (self ID3D11VideoContext) StartSessionKeyRefresh(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession, RandomNumberSize uint32, pRandomNumber unsafe.Pointer) {
-	self.Raw.StartSessionKeyRefresh(pCryptoSession, RandomNumberSize, pRandomNumber)
+func (self ID3D11VideoContext) StartSessionKeyRefresh(pCryptoSession ID3D11CryptoSession, RandomNumberSize uint32, pRandomNumber unsafe.Pointer) {
+	self.Raw.StartSessionKeyRefresh(pCryptoSession.Raw, RandomNumberSize, pRandomNumber)
 }
 
 // FinishSessionKeyRefresh wraps the raw FinishSessionKeyRefresh call.
-func (self ID3D11VideoContext) FinishSessionKeyRefresh(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession) {
-	self.Raw.FinishSessionKeyRefresh(pCryptoSession)
+func (self ID3D11VideoContext) FinishSessionKeyRefresh(pCryptoSession ID3D11CryptoSession) {
+	self.Raw.FinishSessionKeyRefresh(pCryptoSession.Raw)
 }
 
 // GetEncryptionBltKey wraps the raw GetEncryptionBltKey call.
-func (self ID3D11VideoContext) GetEncryptionBltKey(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession, KeySize uint32, pReadbackKey unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetEncryptionBltKey(pCryptoSession, KeySize, pReadbackKey)))
+func (self ID3D11VideoContext) GetEncryptionBltKey(pCryptoSession ID3D11CryptoSession, KeySize uint32, pReadbackKey unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetEncryptionBltKey(pCryptoSession.Raw, KeySize, pReadbackKey)))
 }
 
 // NegotiateAuthenticatedChannelKeyExchange wraps the raw NegotiateAuthenticatedChannelKeyExchange call.
-func (self ID3D11VideoContext) NegotiateAuthenticatedChannelKeyExchange(pChannel *graphicsdirect3d11.ID3D11AuthenticatedChannel, DataSize uint32, pData unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.NegotiateAuthenticatedChannelKeyExchange(pChannel, DataSize, pData)))
+func (self ID3D11VideoContext) NegotiateAuthenticatedChannelKeyExchange(pChannel ID3D11AuthenticatedChannel, DataSize uint32, pData unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.NegotiateAuthenticatedChannelKeyExchange(pChannel.Raw, DataSize, pData)))
 }
 
 // QueryAuthenticatedChannel wraps the raw QueryAuthenticatedChannel call.
-func (self ID3D11VideoContext) QueryAuthenticatedChannel(pChannel *graphicsdirect3d11.ID3D11AuthenticatedChannel, InputSize uint32, pInput unsafe.Pointer, OutputSize uint32, pOutput unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.QueryAuthenticatedChannel(pChannel, InputSize, pInput, OutputSize, pOutput)))
+func (self ID3D11VideoContext) QueryAuthenticatedChannel(pChannel ID3D11AuthenticatedChannel, InputSize uint32, pInput unsafe.Pointer, OutputSize uint32, pOutput unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.QueryAuthenticatedChannel(pChannel.Raw, InputSize, pInput, OutputSize, pOutput)))
 }
 
 // ConfigureAuthenticatedChannel wraps the raw ConfigureAuthenticatedChannel call.
-func (self ID3D11VideoContext) ConfigureAuthenticatedChannel(pChannel *graphicsdirect3d11.ID3D11AuthenticatedChannel, InputSize uint32, pInput unsafe.Pointer, pOutput *graphicsdirect3d11.D3D11_AUTHENTICATED_CONFIGURE_OUTPUT) error {
-	return win32.HRESULTError(int32(self.Raw.ConfigureAuthenticatedChannel(pChannel, InputSize, pInput, pOutput)))
+func (self ID3D11VideoContext) ConfigureAuthenticatedChannel(pChannel ID3D11AuthenticatedChannel, InputSize uint32, pInput unsafe.Pointer, pOutput *graphicsdirect3d11.D3D11_AUTHENTICATED_CONFIGURE_OUTPUT) error {
+	return win32.HRESULTError(int32(self.Raw.ConfigureAuthenticatedChannel(pChannel.Raw, InputSize, pInput, pOutput)))
 }
 
 // VideoProcessorSetStreamRotation wraps the raw VideoProcessorSetStreamRotation call.
-func (self ID3D11VideoContext) VideoProcessorSetStreamRotation(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Enable bool, Rotation graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_ROTATION) {
+func (self ID3D11VideoContext) VideoProcessorSetStreamRotation(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Enable bool, Rotation graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_ROTATION) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
-	self.Raw.VideoProcessorSetStreamRotation(pVideoProcessor, StreamIndex, _Enable, Rotation)
+	self.Raw.VideoProcessorSetStreamRotation(pVideoProcessor.Raw, StreamIndex, _Enable, Rotation)
 }
 
 // VideoProcessorGetStreamRotation wraps the raw VideoProcessorGetStreamRotation call.
-func (self ID3D11VideoContext) VideoProcessorGetStreamRotation(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pRotation *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_ROTATION) {
-	self.Raw.VideoProcessorGetStreamRotation(pVideoProcessor, StreamIndex, pEnable, pRotation)
+func (self ID3D11VideoContext) VideoProcessorGetStreamRotation(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pRotation *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_ROTATION) {
+	self.Raw.VideoProcessorGetStreamRotation(pVideoProcessor.Raw, StreamIndex, pEnable, pRotation)
 }
 
 // ID3D11VideoContext1 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11VideoContext1 with error-returning methods.
@@ -3060,77 +3060,77 @@ func WrapID3D11VideoContext1(raw *graphicsdirect3d11.ID3D11VideoContext1) ID3D11
 }
 
 // SubmitDecoderBuffers1 wraps the raw SubmitDecoderBuffers1 call.
-func (self ID3D11VideoContext1) SubmitDecoderBuffers1(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_DESC1) error {
-	return win32.HRESULTError(int32(self.Raw.SubmitDecoderBuffers1(pDecoder, NumBuffers, pBufferDesc)))
+func (self ID3D11VideoContext1) SubmitDecoderBuffers1(pDecoder ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_DESC1) error {
+	return win32.HRESULTError(int32(self.Raw.SubmitDecoderBuffers1(pDecoder.Raw, NumBuffers, pBufferDesc)))
 }
 
 // GetDataForNewHardwareKey wraps the raw GetDataForNewHardwareKey call.
-func (self ID3D11VideoContext1) GetDataForNewHardwareKey(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession, PrivateInputSize uint32, pPrivatInputData unsafe.Pointer, pPrivateOutputData *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetDataForNewHardwareKey(pCryptoSession, PrivateInputSize, pPrivatInputData, pPrivateOutputData)))
+func (self ID3D11VideoContext1) GetDataForNewHardwareKey(pCryptoSession ID3D11CryptoSession, PrivateInputSize uint32, pPrivatInputData unsafe.Pointer, pPrivateOutputData *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.GetDataForNewHardwareKey(pCryptoSession.Raw, PrivateInputSize, pPrivatInputData, pPrivateOutputData)))
 }
 
 // CheckCryptoSessionStatus wraps the raw CheckCryptoSessionStatus call.
-func (self ID3D11VideoContext1) CheckCryptoSessionStatus(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession, pStatus *graphicsdirect3d11.D3D11_CRYPTO_SESSION_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.CheckCryptoSessionStatus(pCryptoSession, pStatus)))
+func (self ID3D11VideoContext1) CheckCryptoSessionStatus(pCryptoSession ID3D11CryptoSession, pStatus *graphicsdirect3d11.D3D11_CRYPTO_SESSION_STATUS) error {
+	return win32.HRESULTError(int32(self.Raw.CheckCryptoSessionStatus(pCryptoSession.Raw, pStatus)))
 }
 
 // DecoderEnableDownsampling wraps the raw DecoderEnableDownsampling call.
-func (self ID3D11VideoContext1) DecoderEnableDownsampling(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, InputColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pOutputDesc *graphicsdirect3d11.D3D11_VIDEO_SAMPLE_DESC, ReferenceFrameCount uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DecoderEnableDownsampling(pDecoder, InputColorSpace, pOutputDesc, ReferenceFrameCount)))
+func (self ID3D11VideoContext1) DecoderEnableDownsampling(pDecoder ID3D11VideoDecoder, InputColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pOutputDesc *graphicsdirect3d11.D3D11_VIDEO_SAMPLE_DESC, ReferenceFrameCount uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DecoderEnableDownsampling(pDecoder.Raw, InputColorSpace, pOutputDesc, ReferenceFrameCount)))
 }
 
 // DecoderUpdateDownsampling wraps the raw DecoderUpdateDownsampling call.
-func (self ID3D11VideoContext1) DecoderUpdateDownsampling(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, pOutputDesc *graphicsdirect3d11.D3D11_VIDEO_SAMPLE_DESC) error {
-	return win32.HRESULTError(int32(self.Raw.DecoderUpdateDownsampling(pDecoder, pOutputDesc)))
+func (self ID3D11VideoContext1) DecoderUpdateDownsampling(pDecoder ID3D11VideoDecoder, pOutputDesc *graphicsdirect3d11.D3D11_VIDEO_SAMPLE_DESC) error {
+	return win32.HRESULTError(int32(self.Raw.DecoderUpdateDownsampling(pDecoder.Raw, pOutputDesc)))
 }
 
 // VideoProcessorSetOutputColorSpace1 wraps the raw VideoProcessorSetOutputColorSpace1 call.
-func (self ID3D11VideoContext1) VideoProcessorSetOutputColorSpace1(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) {
-	self.Raw.VideoProcessorSetOutputColorSpace1(pVideoProcessor, ColorSpace)
+func (self ID3D11VideoContext1) VideoProcessorSetOutputColorSpace1(pVideoProcessor ID3D11VideoProcessor, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) {
+	self.Raw.VideoProcessorSetOutputColorSpace1(pVideoProcessor.Raw, ColorSpace)
 }
 
 // VideoProcessorSetOutputShaderUsage wraps the raw VideoProcessorSetOutputShaderUsage call.
-func (self ID3D11VideoContext1) VideoProcessorSetOutputShaderUsage(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, ShaderUsage bool) {
+func (self ID3D11VideoContext1) VideoProcessorSetOutputShaderUsage(pVideoProcessor ID3D11VideoProcessor, ShaderUsage bool) {
 	_ShaderUsage := foundation.BOOL(win32.Bool32(ShaderUsage))
-	self.Raw.VideoProcessorSetOutputShaderUsage(pVideoProcessor, _ShaderUsage)
+	self.Raw.VideoProcessorSetOutputShaderUsage(pVideoProcessor.Raw, _ShaderUsage)
 }
 
 // VideoProcessorGetOutputColorSpace1 wraps the raw VideoProcessorGetOutputColorSpace1 call.
-func (self ID3D11VideoContext1) VideoProcessorGetOutputColorSpace1(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pColorSpace *graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) {
-	self.Raw.VideoProcessorGetOutputColorSpace1(pVideoProcessor, pColorSpace)
+func (self ID3D11VideoContext1) VideoProcessorGetOutputColorSpace1(pVideoProcessor ID3D11VideoProcessor, pColorSpace *graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) {
+	self.Raw.VideoProcessorGetOutputColorSpace1(pVideoProcessor.Raw, pColorSpace)
 }
 
 // VideoProcessorGetOutputShaderUsage wraps the raw VideoProcessorGetOutputShaderUsage call.
-func (self ID3D11VideoContext1) VideoProcessorGetOutputShaderUsage(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pShaderUsage *foundation.BOOL) {
-	self.Raw.VideoProcessorGetOutputShaderUsage(pVideoProcessor, pShaderUsage)
+func (self ID3D11VideoContext1) VideoProcessorGetOutputShaderUsage(pVideoProcessor ID3D11VideoProcessor, pShaderUsage *foundation.BOOL) {
+	self.Raw.VideoProcessorGetOutputShaderUsage(pVideoProcessor.Raw, pShaderUsage)
 }
 
 // VideoProcessorSetStreamColorSpace1 wraps the raw VideoProcessorSetStreamColorSpace1 call.
-func (self ID3D11VideoContext1) VideoProcessorSetStreamColorSpace1(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) {
-	self.Raw.VideoProcessorSetStreamColorSpace1(pVideoProcessor, StreamIndex, ColorSpace)
+func (self ID3D11VideoContext1) VideoProcessorSetStreamColorSpace1(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) {
+	self.Raw.VideoProcessorSetStreamColorSpace1(pVideoProcessor.Raw, StreamIndex, ColorSpace)
 }
 
 // VideoProcessorSetStreamMirror wraps the raw VideoProcessorSetStreamMirror call.
-func (self ID3D11VideoContext1) VideoProcessorSetStreamMirror(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Enable bool, FlipHorizontal bool, FlipVertical bool) {
+func (self ID3D11VideoContext1) VideoProcessorSetStreamMirror(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Enable bool, FlipHorizontal bool, FlipVertical bool) {
 	_Enable := foundation.BOOL(win32.Bool32(Enable))
 	_FlipHorizontal := foundation.BOOL(win32.Bool32(FlipHorizontal))
 	_FlipVertical := foundation.BOOL(win32.Bool32(FlipVertical))
-	self.Raw.VideoProcessorSetStreamMirror(pVideoProcessor, StreamIndex, _Enable, _FlipHorizontal, _FlipVertical)
+	self.Raw.VideoProcessorSetStreamMirror(pVideoProcessor.Raw, StreamIndex, _Enable, _FlipHorizontal, _FlipVertical)
 }
 
 // VideoProcessorGetStreamColorSpace1 wraps the raw VideoProcessorGetStreamColorSpace1 call.
-func (self ID3D11VideoContext1) VideoProcessorGetStreamColorSpace1(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pColorSpace *graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) {
-	self.Raw.VideoProcessorGetStreamColorSpace1(pVideoProcessor, StreamIndex, pColorSpace)
+func (self ID3D11VideoContext1) VideoProcessorGetStreamColorSpace1(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pColorSpace *graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) {
+	self.Raw.VideoProcessorGetStreamColorSpace1(pVideoProcessor.Raw, StreamIndex, pColorSpace)
 }
 
 // VideoProcessorGetStreamMirror wraps the raw VideoProcessorGetStreamMirror call.
-func (self ID3D11VideoContext1) VideoProcessorGetStreamMirror(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pFlipHorizontal *foundation.BOOL, pFlipVertical *foundation.BOOL) {
-	self.Raw.VideoProcessorGetStreamMirror(pVideoProcessor, StreamIndex, pEnable, pFlipHorizontal, pFlipVertical)
+func (self ID3D11VideoContext1) VideoProcessorGetStreamMirror(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pFlipHorizontal *foundation.BOOL, pFlipVertical *foundation.BOOL) {
+	self.Raw.VideoProcessorGetStreamMirror(pVideoProcessor.Raw, StreamIndex, pEnable, pFlipHorizontal, pFlipVertical)
 }
 
 // VideoProcessorGetBehaviorHints wraps the raw VideoProcessorGetBehaviorHints call.
-func (self ID3D11VideoContext1) VideoProcessorGetBehaviorHints(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, OutputWidth uint32, OutputHeight uint32, OutputFormat graphicsdxgicommon.DXGI_FORMAT, StreamCount uint32, pStreams *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT, pBehaviorHints *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.VideoProcessorGetBehaviorHints(pVideoProcessor, OutputWidth, OutputHeight, OutputFormat, StreamCount, pStreams, pBehaviorHints)))
+func (self ID3D11VideoContext1) VideoProcessorGetBehaviorHints(pVideoProcessor ID3D11VideoProcessor, OutputWidth uint32, OutputHeight uint32, OutputFormat graphicsdxgicommon.DXGI_FORMAT, StreamCount uint32, pStreams *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT, pBehaviorHints *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.VideoProcessorGetBehaviorHints(pVideoProcessor.Raw, OutputWidth, OutputHeight, OutputFormat, StreamCount, pStreams, pBehaviorHints)))
 }
 
 // ID3D11VideoContext2 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11VideoContext2 with error-returning methods.
@@ -3145,23 +3145,23 @@ func WrapID3D11VideoContext2(raw *graphicsdirect3d11.ID3D11VideoContext2) ID3D11
 }
 
 // VideoProcessorSetOutputHDRMetaData wraps the raw VideoProcessorSetOutputHDRMetaData call.
-func (self ID3D11VideoContext2) VideoProcessorSetOutputHDRMetaData(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, Type graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pHDRMetaData unsafe.Pointer) {
-	self.Raw.VideoProcessorSetOutputHDRMetaData(pVideoProcessor, Type, Size, pHDRMetaData)
+func (self ID3D11VideoContext2) VideoProcessorSetOutputHDRMetaData(pVideoProcessor ID3D11VideoProcessor, Type graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pHDRMetaData unsafe.Pointer) {
+	self.Raw.VideoProcessorSetOutputHDRMetaData(pVideoProcessor.Raw, Type, Size, pHDRMetaData)
 }
 
 // VideoProcessorGetOutputHDRMetaData wraps the raw VideoProcessorGetOutputHDRMetaData call.
-func (self ID3D11VideoContext2) VideoProcessorGetOutputHDRMetaData(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, pType *graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) {
-	self.Raw.VideoProcessorGetOutputHDRMetaData(pVideoProcessor, pType, Size, pMetaData)
+func (self ID3D11VideoContext2) VideoProcessorGetOutputHDRMetaData(pVideoProcessor ID3D11VideoProcessor, pType *graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) {
+	self.Raw.VideoProcessorGetOutputHDRMetaData(pVideoProcessor.Raw, pType, Size, pMetaData)
 }
 
 // VideoProcessorSetStreamHDRMetaData wraps the raw VideoProcessorSetStreamHDRMetaData call.
-func (self ID3D11VideoContext2) VideoProcessorSetStreamHDRMetaData(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, Type graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pHDRMetaData unsafe.Pointer) {
-	self.Raw.VideoProcessorSetStreamHDRMetaData(pVideoProcessor, StreamIndex, Type, Size, pHDRMetaData)
+func (self ID3D11VideoContext2) VideoProcessorSetStreamHDRMetaData(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, Type graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pHDRMetaData unsafe.Pointer) {
+	self.Raw.VideoProcessorSetStreamHDRMetaData(pVideoProcessor.Raw, StreamIndex, Type, Size, pHDRMetaData)
 }
 
 // VideoProcessorGetStreamHDRMetaData wraps the raw VideoProcessorGetStreamHDRMetaData call.
-func (self ID3D11VideoContext2) VideoProcessorGetStreamHDRMetaData(pVideoProcessor *graphicsdirect3d11.ID3D11VideoProcessor, StreamIndex uint32, pType *graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) {
-	self.Raw.VideoProcessorGetStreamHDRMetaData(pVideoProcessor, StreamIndex, pType, Size, pMetaData)
+func (self ID3D11VideoContext2) VideoProcessorGetStreamHDRMetaData(pVideoProcessor ID3D11VideoProcessor, StreamIndex uint32, pType *graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) {
+	self.Raw.VideoProcessorGetStreamHDRMetaData(pVideoProcessor.Raw, StreamIndex, pType, Size, pMetaData)
 }
 
 // ID3D11VideoContext3 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11VideoContext3 with error-returning methods.
@@ -3176,13 +3176,13 @@ func WrapID3D11VideoContext3(raw *graphicsdirect3d11.ID3D11VideoContext3) ID3D11
 }
 
 // DecoderBeginFrame1 wraps the raw DecoderBeginFrame1 call.
-func (self ID3D11VideoContext3) DecoderBeginFrame1(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, pView *graphicsdirect3d11.ID3D11VideoDecoderOutputView, ContentKeySize uint32, pContentKey unsafe.Pointer, NumComponentHistograms uint32, pHistogramOffsets *uint32, ppHistogramBuffers **graphicsdirect3d11.ID3D11Buffer) error {
-	return win32.HRESULTError(int32(self.Raw.DecoderBeginFrame1(pDecoder, pView, ContentKeySize, pContentKey, NumComponentHistograms, pHistogramOffsets, ppHistogramBuffers)))
+func (self ID3D11VideoContext3) DecoderBeginFrame1(pDecoder ID3D11VideoDecoder, pView ID3D11VideoDecoderOutputView, ContentKeySize uint32, pContentKey unsafe.Pointer, NumComponentHistograms uint32, pHistogramOffsets *uint32, ppHistogramBuffers **graphicsdirect3d11.ID3D11Buffer) error {
+	return win32.HRESULTError(int32(self.Raw.DecoderBeginFrame1(pDecoder.Raw, pView.Raw, ContentKeySize, pContentKey, NumComponentHistograms, pHistogramOffsets, ppHistogramBuffers)))
 }
 
 // SubmitDecoderBuffers2 wraps the raw SubmitDecoderBuffers2 call.
-func (self ID3D11VideoContext3) SubmitDecoderBuffers2(pDecoder *graphicsdirect3d11.ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_DESC2) error {
-	return win32.HRESULTError(int32(self.Raw.SubmitDecoderBuffers2(pDecoder, NumBuffers, pBufferDesc)))
+func (self ID3D11VideoContext3) SubmitDecoderBuffers2(pDecoder ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *graphicsdirect3d11.D3D11_VIDEO_DECODER_BUFFER_DESC2) error {
+	return win32.HRESULTError(int32(self.Raw.SubmitDecoderBuffers2(pDecoder.Raw, NumBuffers, pBufferDesc)))
 }
 
 // ID3D11VideoDecoder is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11VideoDecoder with error-returning methods.
@@ -3239,8 +3239,8 @@ func (self ID3D11VideoDevice) CreateVideoDecoder(pVideoDesc *graphicsdirect3d11.
 }
 
 // CreateVideoProcessor wraps the raw CreateVideoProcessor call.
-func (self ID3D11VideoDevice) CreateVideoProcessor(pEnum *graphicsdirect3d11.ID3D11VideoProcessorEnumerator, RateConversionIndex uint32, ppVideoProcessor **graphicsdirect3d11.ID3D11VideoProcessor) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoProcessor(pEnum, RateConversionIndex, ppVideoProcessor)))
+func (self ID3D11VideoDevice) CreateVideoProcessor(pEnum ID3D11VideoProcessorEnumerator, RateConversionIndex uint32, ppVideoProcessor **graphicsdirect3d11.ID3D11VideoProcessor) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoProcessor(pEnum.Raw, RateConversionIndex, ppVideoProcessor)))
 }
 
 // CreateAuthenticatedChannel wraps the raw CreateAuthenticatedChannel call.
@@ -3254,18 +3254,18 @@ func (self ID3D11VideoDevice) CreateCryptoSession(pCryptoType *win32.GUID, pDeco
 }
 
 // CreateVideoDecoderOutputView wraps the raw CreateVideoDecoderOutputView call.
-func (self ID3D11VideoDevice) CreateVideoDecoderOutputView(pResource *graphicsdirect3d11.ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC, ppVDOVView **graphicsdirect3d11.ID3D11VideoDecoderOutputView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoDecoderOutputView(pResource, pDesc, ppVDOVView)))
+func (self ID3D11VideoDevice) CreateVideoDecoderOutputView(pResource ID3D11Resource, pDesc *graphicsdirect3d11.D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC, ppVDOVView **graphicsdirect3d11.ID3D11VideoDecoderOutputView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoDecoderOutputView(pResource.Raw, pDesc, ppVDOVView)))
 }
 
 // CreateVideoProcessorInputView wraps the raw CreateVideoProcessorInputView call.
-func (self ID3D11VideoDevice) CreateVideoProcessorInputView(pResource *graphicsdirect3d11.ID3D11Resource, pEnum *graphicsdirect3d11.ID3D11VideoProcessorEnumerator, pDesc *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC, ppVPIView **graphicsdirect3d11.ID3D11VideoProcessorInputView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoProcessorInputView(pResource, pEnum, pDesc, ppVPIView)))
+func (self ID3D11VideoDevice) CreateVideoProcessorInputView(pResource ID3D11Resource, pEnum ID3D11VideoProcessorEnumerator, pDesc *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC, ppVPIView **graphicsdirect3d11.ID3D11VideoProcessorInputView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoProcessorInputView(pResource.Raw, pEnum.Raw, pDesc, ppVPIView)))
 }
 
 // CreateVideoProcessorOutputView wraps the raw CreateVideoProcessorOutputView call.
-func (self ID3D11VideoDevice) CreateVideoProcessorOutputView(pResource *graphicsdirect3d11.ID3D11Resource, pEnum *graphicsdirect3d11.ID3D11VideoProcessorEnumerator, pDesc *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC, ppVPOView **graphicsdirect3d11.ID3D11VideoProcessorOutputView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoProcessorOutputView(pResource, pEnum, pDesc, ppVPOView)))
+func (self ID3D11VideoDevice) CreateVideoProcessorOutputView(pResource ID3D11Resource, pEnum ID3D11VideoProcessorEnumerator, pDesc *graphicsdirect3d11.D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC, ppVPOView **graphicsdirect3d11.ID3D11VideoProcessorOutputView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoProcessorOutputView(pResource.Raw, pEnum.Raw, pDesc, ppVPOView)))
 }
 
 // CreateVideoProcessorEnumerator wraps the raw CreateVideoProcessorEnumerator call.
@@ -3314,8 +3314,8 @@ func (self ID3D11VideoDevice) SetPrivateData(guid *win32.GUID, DataSize uint32, 
 }
 
 // SetPrivateDataInterface wraps the raw SetPrivateDataInterface call.
-func (self ID3D11VideoDevice) SetPrivateDataInterface(guid *win32.GUID, pData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData)))
+func (self ID3D11VideoDevice) SetPrivateDataInterface(guid *win32.GUID, pData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData.Raw)))
 }
 
 // ID3D11VideoDevice1 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11VideoDevice1 with error-returning methods.
@@ -3366,8 +3366,8 @@ func (self ID3D11VideoDevice2) CheckFeatureSupport(Feature graphicsdirect3d11.D3
 }
 
 // NegotiateCryptoSessionKeyExchangeMT wraps the raw NegotiateCryptoSessionKeyExchangeMT call.
-func (self ID3D11VideoDevice2) NegotiateCryptoSessionKeyExchangeMT(pCryptoSession *graphicsdirect3d11.ID3D11CryptoSession, flags graphicsdirect3d11.D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, DataSize uint32, pData unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.NegotiateCryptoSessionKeyExchangeMT(pCryptoSession, flags, DataSize, pData)))
+func (self ID3D11VideoDevice2) NegotiateCryptoSessionKeyExchangeMT(pCryptoSession ID3D11CryptoSession, flags graphicsdirect3d11.D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, DataSize uint32, pData unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.NegotiateCryptoSessionKeyExchangeMT(pCryptoSession.Raw, flags, DataSize, pData)))
 }
 
 // ID3D11VideoProcessor is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3D11VideoProcessor with error-returning methods.
@@ -3557,13 +3557,13 @@ func (self ID3DX11FFT) AttachBuffersAndPrecompute(NumTempBuffers uint32, ppTempB
 }
 
 // ForwardTransform wraps the raw ForwardTransform call.
-func (self ID3DX11FFT) ForwardTransform(pInputBuffer *graphicsdirect3d11.ID3D11UnorderedAccessView, ppOutputBuffer **graphicsdirect3d11.ID3D11UnorderedAccessView) error {
-	return win32.HRESULTError(int32(self.Raw.ForwardTransform(pInputBuffer, ppOutputBuffer)))
+func (self ID3DX11FFT) ForwardTransform(pInputBuffer ID3D11UnorderedAccessView, ppOutputBuffer **graphicsdirect3d11.ID3D11UnorderedAccessView) error {
+	return win32.HRESULTError(int32(self.Raw.ForwardTransform(pInputBuffer.Raw, ppOutputBuffer)))
 }
 
 // InverseTransform wraps the raw InverseTransform call.
-func (self ID3DX11FFT) InverseTransform(pInputBuffer *graphicsdirect3d11.ID3D11UnorderedAccessView, ppOutputBuffer **graphicsdirect3d11.ID3D11UnorderedAccessView) error {
-	return win32.HRESULTError(int32(self.Raw.InverseTransform(pInputBuffer, ppOutputBuffer)))
+func (self ID3DX11FFT) InverseTransform(pInputBuffer ID3D11UnorderedAccessView, ppOutputBuffer **graphicsdirect3d11.ID3D11UnorderedAccessView) error {
+	return win32.HRESULTError(int32(self.Raw.InverseTransform(pInputBuffer.Raw, ppOutputBuffer)))
 }
 
 // ID3DX11Scan is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3DX11Scan with error-returning methods.
@@ -3583,13 +3583,13 @@ func (self ID3DX11Scan) SetScanDirection(Direction graphicsdirect3d11.D3DX11_SCA
 }
 
 // Scan wraps the raw Scan call.
-func (self ID3DX11Scan) Scan(ElementType graphicsdirect3d11.D3DX11_SCAN_DATA_TYPE, OpCode graphicsdirect3d11.D3DX11_SCAN_OPCODE, ElementScanSize uint32, pSrc *graphicsdirect3d11.ID3D11UnorderedAccessView, pDst *graphicsdirect3d11.ID3D11UnorderedAccessView) error {
-	return win32.HRESULTError(int32(self.Raw.Scan(ElementType, OpCode, ElementScanSize, pSrc, pDst)))
+func (self ID3DX11Scan) Scan(ElementType graphicsdirect3d11.D3DX11_SCAN_DATA_TYPE, OpCode graphicsdirect3d11.D3DX11_SCAN_OPCODE, ElementScanSize uint32, pSrc ID3D11UnorderedAccessView, pDst ID3D11UnorderedAccessView) error {
+	return win32.HRESULTError(int32(self.Raw.Scan(ElementType, OpCode, ElementScanSize, pSrc.Raw, pDst.Raw)))
 }
 
 // Multiscan wraps the raw Multiscan call.
-func (self ID3DX11Scan) Multiscan(ElementType graphicsdirect3d11.D3DX11_SCAN_DATA_TYPE, OpCode graphicsdirect3d11.D3DX11_SCAN_OPCODE, ElementScanSize uint32, ElementScanPitch uint32, ScanCount uint32, pSrc *graphicsdirect3d11.ID3D11UnorderedAccessView, pDst *graphicsdirect3d11.ID3D11UnorderedAccessView) error {
-	return win32.HRESULTError(int32(self.Raw.Multiscan(ElementType, OpCode, ElementScanSize, ElementScanPitch, ScanCount, pSrc, pDst)))
+func (self ID3DX11Scan) Multiscan(ElementType graphicsdirect3d11.D3DX11_SCAN_DATA_TYPE, OpCode graphicsdirect3d11.D3DX11_SCAN_OPCODE, ElementScanSize uint32, ElementScanPitch uint32, ScanCount uint32, pSrc ID3D11UnorderedAccessView, pDst ID3D11UnorderedAccessView) error {
+	return win32.HRESULTError(int32(self.Raw.Multiscan(ElementType, OpCode, ElementScanSize, ElementScanPitch, ScanCount, pSrc.Raw, pDst.Raw)))
 }
 
 // ID3DX11SegmentedScan is an idiomatic wrapper over the raw COM interface Graphics.Direct3D11.ID3DX11SegmentedScan with error-returning methods.
@@ -3609,6 +3609,6 @@ func (self ID3DX11SegmentedScan) SetScanDirection(Direction graphicsdirect3d11.D
 }
 
 // SegScan wraps the raw SegScan call.
-func (self ID3DX11SegmentedScan) SegScan(ElementType graphicsdirect3d11.D3DX11_SCAN_DATA_TYPE, OpCode graphicsdirect3d11.D3DX11_SCAN_OPCODE, ElementScanSize uint32, pSrc *graphicsdirect3d11.ID3D11UnorderedAccessView, pSrcElementFlags *graphicsdirect3d11.ID3D11UnorderedAccessView, pDst *graphicsdirect3d11.ID3D11UnorderedAccessView) error {
-	return win32.HRESULTError(int32(self.Raw.SegScan(ElementType, OpCode, ElementScanSize, pSrc, pSrcElementFlags, pDst)))
+func (self ID3DX11SegmentedScan) SegScan(ElementType graphicsdirect3d11.D3DX11_SCAN_DATA_TYPE, OpCode graphicsdirect3d11.D3DX11_SCAN_OPCODE, ElementScanSize uint32, pSrc ID3D11UnorderedAccessView, pSrcElementFlags ID3D11UnorderedAccessView, pDst ID3D11UnorderedAccessView) error {
+	return win32.HRESULTError(int32(self.Raw.SegScan(ElementType, OpCode, ElementScanSize, pSrc.Raw, pSrcElementFlags.Raw, pDst.Raw)))
 }

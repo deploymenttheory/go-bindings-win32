@@ -1270,9 +1270,9 @@ func WrapIVdsProviderPrivate(raw *storagevirtualdiskservice.IVdsProviderPrivate)
 }
 
 // OnLoad wraps the raw OnLoad call.
-func (self IVdsProviderPrivate) OnLoad(pwszMachineName string, pCallbackObject *systemcom.IUnknown) error {
+func (self IVdsProviderPrivate) OnLoad(pwszMachineName string, pCallbackObject systemcomidiom.IUnknown) error {
 	_pwszMachineName := win32.UTF16Ptr(pwszMachineName)
-	return win32.HRESULTError(int32(self.Raw.OnLoad(foundation.PWSTR(_pwszMachineName), pCallbackObject)))
+	return win32.HRESULTError(int32(self.Raw.OnLoad(foundation.PWSTR(_pwszMachineName), pCallbackObject.Raw)))
 }
 
 // OnUnload wraps the raw OnUnload call.
@@ -1385,8 +1385,8 @@ func (self IVdsService) CleanupObsoleteMountPoints() error {
 }
 
 // Advise wraps the raw Advise call.
-func (self IVdsService) Advise(pSink *storagevirtualdiskservice.IVdsAdviseSink, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pSink, pdwCookie)))
+func (self IVdsService) Advise(pSink IVdsAdviseSink, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pSink.Raw, pdwCookie)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -1859,13 +1859,13 @@ func (self IVdsVdProvider) AddVDisk(VirtualDeviceType *storagevhd.VIRTUAL_STORAG
 }
 
 // GetDiskFromVDisk wraps the raw GetDiskFromVDisk call.
-func (self IVdsVdProvider) GetDiskFromVDisk(pVDisk *storagevirtualdiskservice.IVdsVDisk, ppDisk **storagevirtualdiskservice.IVdsDisk) error {
-	return win32.HRESULTError(int32(self.Raw.GetDiskFromVDisk(pVDisk, ppDisk)))
+func (self IVdsVdProvider) GetDiskFromVDisk(pVDisk IVdsVDisk, ppDisk **storagevirtualdiskservice.IVdsDisk) error {
+	return win32.HRESULTError(int32(self.Raw.GetDiskFromVDisk(pVDisk.Raw, ppDisk)))
 }
 
 // GetVDiskFromDisk wraps the raw GetVDiskFromDisk call.
-func (self IVdsVdProvider) GetVDiskFromDisk(pDisk *storagevirtualdiskservice.IVdsDisk, ppVDisk **storagevirtualdiskservice.IVdsVDisk) error {
-	return win32.HRESULTError(int32(self.Raw.GetVDiskFromDisk(pDisk, ppVDisk)))
+func (self IVdsVdProvider) GetVDiskFromDisk(pDisk IVdsDisk, ppVDisk **storagevirtualdiskservice.IVdsVDisk) error {
+	return win32.HRESULTError(int32(self.Raw.GetVDiskFromDisk(pDisk.Raw, ppVDisk)))
 }
 
 // IVdsVolume is an idiomatic wrapper over the raw COM interface Storage.VirtualDiskService.IVdsVolume with error-returning methods.

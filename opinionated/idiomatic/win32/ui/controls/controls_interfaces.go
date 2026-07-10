@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
@@ -73,13 +72,13 @@ func (self IImageList) GetImageInfo(i int32, pImageInfo *uicontrols.IMAGEINFO) e
 }
 
 // Copy wraps the raw Copy call.
-func (self IImageList) Copy(iDst int32, punkSrc *systemcom.IUnknown, iSrc int32, uFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Copy(iDst, punkSrc, iSrc, uFlags)))
+func (self IImageList) Copy(iDst int32, punkSrc systemcomidiom.IUnknown, iSrc int32, uFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Copy(iDst, punkSrc.Raw, iSrc, uFlags)))
 }
 
 // Merge wraps the raw Merge call.
-func (self IImageList) Merge(i1 int32, punk2 *systemcom.IUnknown, i2 int32, dx int32, dy int32, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.Merge(i1, punk2, i2, dx, dy, riid, ppv)))
+func (self IImageList) Merge(i1 int32, punk2 systemcomidiom.IUnknown, i2 int32, dx int32, dy int32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.Merge(i1, punk2.Raw, i2, dx, dy, riid, ppv)))
 }
 
 // Clone wraps the raw Clone call.
@@ -148,8 +147,8 @@ func (self IImageList) DragMove(x int32, y int32) error {
 }
 
 // SetDragCursorImage wraps the raw SetDragCursorImage call.
-func (self IImageList) SetDragCursorImage(punk *systemcom.IUnknown, iDrag int32, dxHotspot int32, dyHotspot int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetDragCursorImage(punk, iDrag, dxHotspot, dyHotspot)))
+func (self IImageList) SetDragCursorImage(punk systemcomidiom.IUnknown, iDrag int32, dxHotspot int32, dyHotspot int32) error {
+	return win32.HRESULTError(int32(self.Raw.SetDragCursorImage(punk.Raw, iDrag, dxHotspot, dyHotspot)))
 }
 
 // DragShowNolock wraps the raw DragShowNolock call.
@@ -200,8 +199,8 @@ func (self IImageList2) SetOriginalSize(iImage int32, cx int32, cy int32) error 
 }
 
 // SetCallback wraps the raw SetCallback call.
-func (self IImageList2) SetCallback(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetCallback(punk)))
+func (self IImageList2) SetCallback(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetCallback(punk.Raw)))
 }
 
 // GetCallback wraps the raw GetCallback call.
@@ -235,11 +234,11 @@ func (self IImageList2) Initialize(cx int32, cy int32, flags uicontrols.IMAGELIS
 }
 
 // Replace2 wraps the raw Replace2 call.
-func (self IImageList2) Replace2(i int32, hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP, punk *systemcom.IUnknown, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Replace2(i, hbmImage, hbmMask, punk, dwFlags)))
+func (self IImageList2) Replace2(i int32, hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP, punk systemcomidiom.IUnknown, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Replace2(i, hbmImage, hbmMask, punk.Raw, dwFlags)))
 }
 
 // ReplaceFromImageList wraps the raw ReplaceFromImageList call.
-func (self IImageList2) ReplaceFromImageList(i int32, pil *uicontrols.IImageList, iSrc int32, punk *systemcom.IUnknown, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ReplaceFromImageList(i, pil, iSrc, punk, dwFlags)))
+func (self IImageList2) ReplaceFromImageList(i int32, pil IImageList, iSrc int32, punk systemcomidiom.IUnknown, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ReplaceFromImageList(i, pil.Raw, iSrc, punk.Raw, dwFlags)))
 }

@@ -146,8 +146,8 @@ func (self INetDiagHelperEx) ReconfirmLowHealth(celt uint32, pResults *networkma
 }
 
 // SetUtilities wraps the raw SetUtilities call.
-func (self INetDiagHelperEx) SetUtilities(pUtilities *networkmanagementnetworkdiagnosticsframework.INetDiagHelperUtilFactory) error {
-	return win32.HRESULTError(int32(self.Raw.SetUtilities(pUtilities)))
+func (self INetDiagHelperEx) SetUtilities(pUtilities INetDiagHelperUtilFactory) error {
+	return win32.HRESULTError(int32(self.Raw.SetUtilities(pUtilities.Raw)))
 }
 
 // ReproduceFailure wraps the raw ReproduceFailure call.

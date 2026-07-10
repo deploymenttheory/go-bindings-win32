@@ -11,12 +11,12 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
-	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemsystemservices "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/systemservices"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
 )
 
 // IAdviseSinkEx is an idiomatic wrapper over the raw COM interface System.Ole.IAdviseSinkEx with error-returning methods.
@@ -73,8 +73,8 @@ func (self IClassFactory2) RequestLicKey(dwReserved uint32, pBstrKey *foundation
 }
 
 // CreateInstanceLic wraps the raw CreateInstanceLic call.
-func (self IClassFactory2) CreateInstanceLic(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, bstrKey foundation.BSTR, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceLic(pUnkOuter, nil, riid, bstrKey, ppvObj)))
+func (self IClassFactory2) CreateInstanceLic(pUnkOuter systemcomidiom.IUnknown, pUnkReserved systemcomidiom.IUnknown, riid *win32.GUID, bstrKey foundation.BSTR, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceLic(pUnkOuter.Raw, pUnkReserved.Raw, riid, bstrKey, ppvObj)))
 }
 
 // IContinue is an idiomatic wrapper over the raw COM interface System.Ole.IContinue with error-returning methods.
@@ -192,8 +192,8 @@ func (self ICreateTypeInfo) SetVersion(wMajorVerNum uint16, wMinorVerNum uint16)
 }
 
 // AddRefTypeInfo wraps the raw AddRefTypeInfo call.
-func (self ICreateTypeInfo) AddRefTypeInfo(pTInfo *systemcom.ITypeInfo, phRefType *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddRefTypeInfo(pTInfo, phRefType)))
+func (self ICreateTypeInfo) AddRefTypeInfo(pTInfo systemcomidiom.ITypeInfo, phRefType *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddRefTypeInfo(pTInfo.Raw, phRefType)))
 }
 
 // AddFuncDesc wraps the raw AddFuncDesc call.
@@ -525,8 +525,8 @@ func (self IDispatchEx) GetDispID(bstrName foundation.BSTR, grfdex uint32, pid *
 }
 
 // InvokeEx wraps the raw InvokeEx call.
-func (self IDispatchEx) InvokeEx(id int32, lcid uint32, wFlags uint16, pdp *systemcom.DISPPARAMS, pvarRes *systemvariant.VARIANT, pei *systemcom.EXCEPINFO, pspCaller *systemcom.IServiceProvider) error {
-	return win32.HRESULTError(int32(self.Raw.InvokeEx(id, lcid, wFlags, pdp, pvarRes, pei, pspCaller)))
+func (self IDispatchEx) InvokeEx(id int32, lcid uint32, wFlags uint16, pdp *systemcom.DISPPARAMS, pvarRes *systemvariant.VARIANT, pei *systemcom.EXCEPINFO, pspCaller systemcomidiom.IServiceProvider) error {
+	return win32.HRESULTError(int32(self.Raw.InvokeEx(id, lcid, wFlags, pdp, pvarRes, pei, pspCaller.Raw)))
 }
 
 // DeleteMemberByName wraps the raw DeleteMemberByName call.
@@ -867,8 +867,8 @@ func (self IFont) Clone(ppFont **systemole.IFont) error {
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IFont) IsEqual(pFontOther *systemole.IFont) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pFontOther)))
+func (self IFont) IsEqual(pFontOther IFont) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pFontOther.Raw)))
 }
 
 // SetRatio wraps the raw SetRatio call.
@@ -962,8 +962,8 @@ func WrapIObjectIdentity(raw *systemole.IObjectIdentity) IObjectIdentity {
 }
 
 // IsEqualObject wraps the raw IsEqualObject call.
-func (self IObjectIdentity) IsEqualObject(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqualObject(punk)))
+func (self IObjectIdentity) IsEqualObject(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqualObject(punk.Raw)))
 }
 
 // IObjectWithSite is an idiomatic wrapper over the raw COM interface System.Ole.IObjectWithSite with error-returning methods.
@@ -978,8 +978,8 @@ func WrapIObjectWithSite(raw *systemole.IObjectWithSite) IObjectWithSite {
 }
 
 // SetSite wraps the raw SetSite call.
-func (self IObjectWithSite) SetSite(pUnkSite *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetSite(pUnkSite)))
+func (self IObjectWithSite) SetSite(pUnkSite systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetSite(pUnkSite.Raw)))
 }
 
 // GetSite wraps the raw GetSite call.
@@ -999,8 +999,8 @@ func WrapIOleAdviseHolder(raw *systemole.IOleAdviseHolder) IOleAdviseHolder {
 }
 
 // Advise wraps the raw Advise call.
-func (self IOleAdviseHolder) Advise(pAdvise *systemcom.IAdviseSink, pdwConnection *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pAdvise, pdwConnection)))
+func (self IOleAdviseHolder) Advise(pAdvise systemcomidiom.IAdviseSink, pdwConnection *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pAdvise.Raw, pdwConnection)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -1014,8 +1014,8 @@ func (self IOleAdviseHolder) EnumAdvise(ppenumAdvise **systemcom.IEnumSTATDATA) 
 }
 
 // SendOnRename wraps the raw SendOnRename call.
-func (self IOleAdviseHolder) SendOnRename(pmk *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.SendOnRename(pmk)))
+func (self IOleAdviseHolder) SendOnRename(pmk systemcomidiom.IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.SendOnRename(pmk.Raw)))
 }
 
 // SendOnSave wraps the raw SendOnSave call.
@@ -1055,8 +1055,8 @@ func (self IOleCache) EnumCache(ppenumSTATDATA **systemcom.IEnumSTATDATA) error 
 }
 
 // InitCache wraps the raw InitCache call.
-func (self IOleCache) InitCache(pDataObject *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.InitCache(pDataObject)))
+func (self IOleCache) InitCache(pDataObject systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.InitCache(pDataObject.Raw)))
 }
 
 // SetData wraps the raw SetData call.
@@ -1077,8 +1077,8 @@ func WrapIOleCache2(raw *systemole.IOleCache2) IOleCache2 {
 }
 
 // UpdateCache wraps the raw UpdateCache call.
-func (self IOleCache2) UpdateCache(pDataObject *systemcom.IDataObject, grfUpdf systemole.UPDFCACHE_FLAGS) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateCache(pDataObject, grfUpdf, nil)))
+func (self IOleCache2) UpdateCache(pDataObject systemcomidiom.IDataObject, grfUpdf systemole.UPDFCACHE_FLAGS) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateCache(pDataObject.Raw, grfUpdf, nil)))
 }
 
 // DiscardCache wraps the raw DiscardCache call.
@@ -1098,8 +1098,8 @@ func WrapIOleCacheControl(raw *systemole.IOleCacheControl) IOleCacheControl {
 }
 
 // OnRun wraps the raw OnRun call.
-func (self IOleCacheControl) OnRun(pDataObject *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.OnRun(pDataObject)))
+func (self IOleCacheControl) OnRun(pDataObject systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.OnRun(pDataObject.Raw)))
 }
 
 // OnStop wraps the raw OnStop call.
@@ -1284,8 +1284,8 @@ func WrapIOleDocument(raw *systemole.IOleDocument) IOleDocument {
 }
 
 // CreateView wraps the raw CreateView call.
-func (self IOleDocument) CreateView(pIPSite *systemole.IOleInPlaceSite, pstm *systemcom.IStream, dwReserved uint32, ppView **systemole.IOleDocumentView) error {
-	return win32.HRESULTError(int32(self.Raw.CreateView(pIPSite, pstm, dwReserved, ppView)))
+func (self IOleDocument) CreateView(pIPSite IOleInPlaceSite, pstm systemcomidiom.IStream, dwReserved uint32, ppView **systemole.IOleDocumentView) error {
+	return win32.HRESULTError(int32(self.Raw.CreateView(pIPSite.Raw, pstm.Raw, dwReserved, ppView)))
 }
 
 // GetDocMiscStatus wraps the raw GetDocMiscStatus call.
@@ -1310,8 +1310,8 @@ func WrapIOleDocumentSite(raw *systemole.IOleDocumentSite) IOleDocumentSite {
 }
 
 // ActivateMe wraps the raw ActivateMe call.
-func (self IOleDocumentSite) ActivateMe(pViewToActivate *systemole.IOleDocumentView) error {
-	return win32.HRESULTError(int32(self.Raw.ActivateMe(pViewToActivate)))
+func (self IOleDocumentSite) ActivateMe(pViewToActivate IOleDocumentView) error {
+	return win32.HRESULTError(int32(self.Raw.ActivateMe(pViewToActivate.Raw)))
 }
 
 // IOleDocumentView is an idiomatic wrapper over the raw COM interface System.Ole.IOleDocumentView with error-returning methods.
@@ -1326,8 +1326,8 @@ func WrapIOleDocumentView(raw *systemole.IOleDocumentView) IOleDocumentView {
 }
 
 // SetInPlaceSite wraps the raw SetInPlaceSite call.
-func (self IOleDocumentView) SetInPlaceSite(pIPSite *systemole.IOleInPlaceSite) error {
-	return win32.HRESULTError(int32(self.Raw.SetInPlaceSite(pIPSite)))
+func (self IOleDocumentView) SetInPlaceSite(pIPSite IOleInPlaceSite) error {
+	return win32.HRESULTError(int32(self.Raw.SetInPlaceSite(pIPSite.Raw)))
 }
 
 // GetInPlaceSite wraps the raw GetInPlaceSite call.
@@ -1378,18 +1378,18 @@ func (self IOleDocumentView) CloseView(dwReserved uint32) error {
 }
 
 // SaveViewState wraps the raw SaveViewState call.
-func (self IOleDocumentView) SaveViewState(pstm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SaveViewState(pstm)))
+func (self IOleDocumentView) SaveViewState(pstm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SaveViewState(pstm.Raw)))
 }
 
 // ApplyViewState wraps the raw ApplyViewState call.
-func (self IOleDocumentView) ApplyViewState(pstm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.ApplyViewState(pstm)))
+func (self IOleDocumentView) ApplyViewState(pstm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.ApplyViewState(pstm.Raw)))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOleDocumentView) Clone(pIPSiteNew *systemole.IOleInPlaceSite, ppViewNew **systemole.IOleDocumentView) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(pIPSiteNew, ppViewNew)))
+func (self IOleDocumentView) Clone(pIPSiteNew IOleInPlaceSite, ppViewNew **systemole.IOleDocumentView) error {
+	return win32.HRESULTError(int32(self.Raw.Clone(pIPSiteNew.Raw, ppViewNew)))
 }
 
 // IOleInPlaceActiveObject is an idiomatic wrapper over the raw COM interface System.Ole.IOleInPlaceActiveObject with error-returning methods.
@@ -1421,9 +1421,9 @@ func (self IOleInPlaceActiveObject) OnDocWindowActivate(fActivate bool) error {
 }
 
 // ResizeBorder wraps the raw ResizeBorder call.
-func (self IOleInPlaceActiveObject) ResizeBorder(prcBorder *foundation.RECT, pUIWindow *systemole.IOleInPlaceUIWindow, fFrameWindow bool) error {
+func (self IOleInPlaceActiveObject) ResizeBorder(prcBorder *foundation.RECT, pUIWindow IOleInPlaceUIWindow, fFrameWindow bool) error {
 	_fFrameWindow := foundation.BOOL(win32.Bool32(fFrameWindow))
-	return win32.HRESULTError(int32(self.Raw.ResizeBorder(prcBorder, pUIWindow, _fFrameWindow)))
+	return win32.HRESULTError(int32(self.Raw.ResizeBorder(prcBorder, pUIWindow.Raw, _fFrameWindow)))
 }
 
 // EnableModeless wraps the raw EnableModeless call.
@@ -1713,9 +1713,9 @@ func (self IOleInPlaceUIWindow) SetBorderSpace(pborderwidths *foundation.RECT) e
 }
 
 // SetActiveObject wraps the raw SetActiveObject call.
-func (self IOleInPlaceUIWindow) SetActiveObject(pActiveObject *systemole.IOleInPlaceActiveObject, pszObjName string) error {
+func (self IOleInPlaceUIWindow) SetActiveObject(pActiveObject IOleInPlaceActiveObject, pszObjName string) error {
 	_pszObjName := win32.UTF16Ptr(pszObjName)
-	return win32.HRESULTError(int32(self.Raw.SetActiveObject(pActiveObject, foundation.PWSTR(_pszObjName))))
+	return win32.HRESULTError(int32(self.Raw.SetActiveObject(pActiveObject.Raw, foundation.PWSTR(_pszObjName))))
 }
 
 // IOleItemContainer is an idiomatic wrapper over the raw COM interface System.Ole.IOleItemContainer with error-returning methods.
@@ -1730,15 +1730,15 @@ func WrapIOleItemContainer(raw *systemole.IOleItemContainer) IOleItemContainer {
 }
 
 // GetObject wraps the raw GetObject call.
-func (self IOleItemContainer) GetObject(pszItem string, dwSpeedNeeded uint32, pbc *systemcom.IBindCtx, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func (self IOleItemContainer) GetObject(pszItem string, dwSpeedNeeded uint32, pbc systemcomidiom.IBindCtx, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	_pszItem := win32.UTF16Ptr(pszItem)
-	return win32.HRESULTError(int32(self.Raw.GetObject(foundation.PWSTR(_pszItem), dwSpeedNeeded, pbc, riid, ppvObject)))
+	return win32.HRESULTError(int32(self.Raw.GetObject(foundation.PWSTR(_pszItem), dwSpeedNeeded, pbc.Raw, riid, ppvObject)))
 }
 
 // GetObjectStorage wraps the raw GetObjectStorage call.
-func (self IOleItemContainer) GetObjectStorage(pszItem string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppvStorage *unsafe.Pointer) error {
+func (self IOleItemContainer) GetObjectStorage(pszItem string, pbc systemcomidiom.IBindCtx, riid *win32.GUID, ppvStorage *unsafe.Pointer) error {
 	_pszItem := win32.UTF16Ptr(pszItem)
-	return win32.HRESULTError(int32(self.Raw.GetObjectStorage(foundation.PWSTR(_pszItem), pbc, riid, ppvStorage)))
+	return win32.HRESULTError(int32(self.Raw.GetObjectStorage(foundation.PWSTR(_pszItem), pbc.Raw, riid, ppvStorage)))
 }
 
 // IsRunning wraps the raw IsRunning call.
@@ -1769,8 +1769,8 @@ func (self IOleLink) GetUpdateOptions(pdwUpdateOpt *uint32) error {
 }
 
 // SetSourceMoniker wraps the raw SetSourceMoniker call.
-func (self IOleLink) SetSourceMoniker(pmk *systemcom.IMoniker, rclsid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.SetSourceMoniker(pmk, rclsid)))
+func (self IOleLink) SetSourceMoniker(pmk systemcomidiom.IMoniker, rclsid *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.SetSourceMoniker(pmk.Raw, rclsid)))
 }
 
 // GetSourceMoniker wraps the raw GetSourceMoniker call.
@@ -1790,8 +1790,8 @@ func (self IOleLink) GetSourceDisplayName(ppszDisplayName *foundation.PWSTR) err
 }
 
 // BindToSource wraps the raw BindToSource call.
-func (self IOleLink) BindToSource(bindflags uint32, pbc *systemcom.IBindCtx) error {
-	return win32.HRESULTError(int32(self.Raw.BindToSource(bindflags, pbc)))
+func (self IOleLink) BindToSource(bindflags uint32, pbc systemcomidiom.IBindCtx) error {
+	return win32.HRESULTError(int32(self.Raw.BindToSource(bindflags, pbc.Raw)))
 }
 
 // BindIfRunning wraps the raw BindIfRunning call.
@@ -1810,8 +1810,8 @@ func (self IOleLink) UnbindSource() error {
 }
 
 // Update wraps the raw Update call.
-func (self IOleLink) Update(pbc *systemcom.IBindCtx) error {
-	return win32.HRESULTError(int32(self.Raw.Update(pbc)))
+func (self IOleLink) Update(pbc systemcomidiom.IBindCtx) error {
+	return win32.HRESULTError(int32(self.Raw.Update(pbc.Raw)))
 }
 
 // IOleObject is an idiomatic wrapper over the raw COM interface System.Ole.IOleObject with error-returning methods.
@@ -1826,8 +1826,8 @@ func WrapIOleObject(raw *systemole.IOleObject) IOleObject {
 }
 
 // SetClientSite wraps the raw SetClientSite call.
-func (self IOleObject) SetClientSite(pClientSite *systemole.IOleClientSite) error {
-	return win32.HRESULTError(int32(self.Raw.SetClientSite(pClientSite)))
+func (self IOleObject) SetClientSite(pClientSite IOleClientSite) error {
+	return win32.HRESULTError(int32(self.Raw.SetClientSite(pClientSite.Raw)))
 }
 
 // GetClientSite wraps the raw GetClientSite call.
@@ -1848,8 +1848,8 @@ func (self IOleObject) Close(dwSaveOption uint32) error {
 }
 
 // SetMoniker wraps the raw SetMoniker call.
-func (self IOleObject) SetMoniker(dwWhichMoniker uint32, pmk *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.SetMoniker(dwWhichMoniker, pmk)))
+func (self IOleObject) SetMoniker(dwWhichMoniker uint32, pmk systemcomidiom.IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.SetMoniker(dwWhichMoniker, pmk.Raw)))
 }
 
 // GetMoniker wraps the raw GetMoniker call.
@@ -1858,9 +1858,9 @@ func (self IOleObject) GetMoniker(dwAssign uint32, dwWhichMoniker uint32, ppmk *
 }
 
 // InitFromData wraps the raw InitFromData call.
-func (self IOleObject) InitFromData(pDataObject *systemcom.IDataObject, fCreation bool, dwReserved uint32) error {
+func (self IOleObject) InitFromData(pDataObject systemcomidiom.IDataObject, fCreation bool, dwReserved uint32) error {
 	_fCreation := foundation.BOOL(win32.Bool32(fCreation))
-	return win32.HRESULTError(int32(self.Raw.InitFromData(pDataObject, _fCreation, dwReserved)))
+	return win32.HRESULTError(int32(self.Raw.InitFromData(pDataObject.Raw, _fCreation, dwReserved)))
 }
 
 // GetClipboardData wraps the raw GetClipboardData call.
@@ -1869,8 +1869,8 @@ func (self IOleObject) GetClipboardData(dwReserved uint32, ppDataObject **system
 }
 
 // DoVerb wraps the raw DoVerb call.
-func (self IOleObject) DoVerb(iVerb int32, lpmsg *uiwindowsandmessaging.MSG, pActiveSite *systemole.IOleClientSite, lindex int32, hwndParent foundation.HWND, lprcPosRect *foundation.RECT) error {
-	return win32.HRESULTError(int32(self.Raw.DoVerb(iVerb, lpmsg, pActiveSite, lindex, hwndParent, lprcPosRect)))
+func (self IOleObject) DoVerb(iVerb int32, lpmsg *uiwindowsandmessaging.MSG, pActiveSite IOleClientSite, lindex int32, hwndParent foundation.HWND, lprcPosRect *foundation.RECT) error {
+	return win32.HRESULTError(int32(self.Raw.DoVerb(iVerb, lpmsg, pActiveSite.Raw, lindex, hwndParent, lprcPosRect)))
 }
 
 // EnumVerbs wraps the raw EnumVerbs call.
@@ -1909,8 +1909,8 @@ func (self IOleObject) GetExtent(dwDrawAspect systemcom.DVASPECT, psizel *founda
 }
 
 // Advise wraps the raw Advise call.
-func (self IOleObject) Advise(pAdvSink *systemcom.IAdviseSink, pdwConnection *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pAdvSink, pdwConnection)))
+func (self IOleObject) Advise(pAdvSink systemcomidiom.IAdviseSink, pdwConnection *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pAdvSink.Raw, pdwConnection)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -1945,24 +1945,24 @@ func WrapIOleParentUndoUnit(raw *systemole.IOleParentUndoUnit) IOleParentUndoUni
 }
 
 // Open wraps the raw Open call.
-func (self IOleParentUndoUnit) Open(pPUU *systemole.IOleParentUndoUnit) error {
-	return win32.HRESULTError(int32(self.Raw.Open(pPUU)))
+func (self IOleParentUndoUnit) Open(pPUU IOleParentUndoUnit) error {
+	return win32.HRESULTError(int32(self.Raw.Open(pPUU.Raw)))
 }
 
 // Close wraps the raw Close call.
-func (self IOleParentUndoUnit) Close(pPUU *systemole.IOleParentUndoUnit, fCommit bool) error {
+func (self IOleParentUndoUnit) Close(pPUU IOleParentUndoUnit, fCommit bool) error {
 	_fCommit := foundation.BOOL(win32.Bool32(fCommit))
-	return win32.HRESULTError(int32(self.Raw.Close(pPUU, _fCommit)))
+	return win32.HRESULTError(int32(self.Raw.Close(pPUU.Raw, _fCommit)))
 }
 
 // Add wraps the raw Add call.
-func (self IOleParentUndoUnit) Add(pUU *systemole.IOleUndoUnit) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pUU)))
+func (self IOleParentUndoUnit) Add(pUU IOleUndoUnit) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pUU.Raw)))
 }
 
 // FindUnit wraps the raw FindUnit call.
-func (self IOleParentUndoUnit) FindUnit(pUU *systemole.IOleUndoUnit) error {
-	return win32.HRESULTError(int32(self.Raw.FindUnit(pUU)))
+func (self IOleParentUndoUnit) FindUnit(pUU IOleUndoUnit) error {
+	return win32.HRESULTError(int32(self.Raw.FindUnit(pUU.Raw)))
 }
 
 // GetParentState wraps the raw GetParentState call.
@@ -2197,19 +2197,19 @@ func WrapIOleUndoManager(raw *systemole.IOleUndoManager) IOleUndoManager {
 }
 
 // Open wraps the raw Open call.
-func (self IOleUndoManager) Open(pPUU *systemole.IOleParentUndoUnit) error {
-	return win32.HRESULTError(int32(self.Raw.Open(pPUU)))
+func (self IOleUndoManager) Open(pPUU IOleParentUndoUnit) error {
+	return win32.HRESULTError(int32(self.Raw.Open(pPUU.Raw)))
 }
 
 // Close wraps the raw Close call.
-func (self IOleUndoManager) Close(pPUU *systemole.IOleParentUndoUnit, fCommit bool) error {
+func (self IOleUndoManager) Close(pPUU IOleParentUndoUnit, fCommit bool) error {
 	_fCommit := foundation.BOOL(win32.Bool32(fCommit))
-	return win32.HRESULTError(int32(self.Raw.Close(pPUU, _fCommit)))
+	return win32.HRESULTError(int32(self.Raw.Close(pPUU.Raw, _fCommit)))
 }
 
 // Add wraps the raw Add call.
-func (self IOleUndoManager) Add(pUU *systemole.IOleUndoUnit) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pUU)))
+func (self IOleUndoManager) Add(pUU IOleUndoUnit) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pUU.Raw)))
 }
 
 // GetOpenParentState wraps the raw GetOpenParentState call.
@@ -2218,18 +2218,18 @@ func (self IOleUndoManager) GetOpenParentState(pdwState *uint32) error {
 }
 
 // DiscardFrom wraps the raw DiscardFrom call.
-func (self IOleUndoManager) DiscardFrom(pUU *systemole.IOleUndoUnit) error {
-	return win32.HRESULTError(int32(self.Raw.DiscardFrom(pUU)))
+func (self IOleUndoManager) DiscardFrom(pUU IOleUndoUnit) error {
+	return win32.HRESULTError(int32(self.Raw.DiscardFrom(pUU.Raw)))
 }
 
 // UndoTo wraps the raw UndoTo call.
-func (self IOleUndoManager) UndoTo(pUU *systemole.IOleUndoUnit) error {
-	return win32.HRESULTError(int32(self.Raw.UndoTo(pUU)))
+func (self IOleUndoManager) UndoTo(pUU IOleUndoUnit) error {
+	return win32.HRESULTError(int32(self.Raw.UndoTo(pUU.Raw)))
 }
 
 // RedoTo wraps the raw RedoTo call.
-func (self IOleUndoManager) RedoTo(pUU *systemole.IOleUndoUnit) error {
-	return win32.HRESULTError(int32(self.Raw.RedoTo(pUU)))
+func (self IOleUndoManager) RedoTo(pUU IOleUndoUnit) error {
+	return win32.HRESULTError(int32(self.Raw.RedoTo(pUU.Raw)))
 }
 
 // EnumUndoable wraps the raw EnumUndoable call.
@@ -2270,8 +2270,8 @@ func WrapIOleUndoUnit(raw *systemole.IOleUndoUnit) IOleUndoUnit {
 }
 
 // Do wraps the raw Do call.
-func (self IOleUndoUnit) Do(pUndoManager *systemole.IOleUndoManager) error {
-	return win32.HRESULTError(int32(self.Raw.Do(pUndoManager)))
+func (self IOleUndoUnit) Do(pUndoManager IOleUndoManager) error {
+	return win32.HRESULTError(int32(self.Raw.Do(pUndoManager.Raw)))
 }
 
 // GetDescription wraps the raw GetDescription call.
@@ -2323,9 +2323,9 @@ func WrapIParseDisplayName(raw *systemole.IParseDisplayName) IParseDisplayName {
 }
 
 // ParseDisplayName wraps the raw ParseDisplayName call.
-func (self IParseDisplayName) ParseDisplayName(pbc *systemcom.IBindCtx, pszDisplayName string, pchEaten *uint32, ppmkOut **systemcom.IMoniker) error {
+func (self IParseDisplayName) ParseDisplayName(pbc systemcomidiom.IBindCtx, pszDisplayName string, pchEaten *uint32, ppmkOut **systemcom.IMoniker) error {
 	_pszDisplayName := win32.UTF16Ptr(pszDisplayName)
-	return win32.HRESULTError(int32(self.Raw.ParseDisplayName(pbc, foundation.PWSTR(_pszDisplayName), pchEaten, ppmkOut)))
+	return win32.HRESULTError(int32(self.Raw.ParseDisplayName(pbc.Raw, foundation.PWSTR(_pszDisplayName), pchEaten, ppmkOut)))
 }
 
 // IPerPropertyBrowsing is an idiomatic wrapper over the raw COM interface System.Ole.IPerPropertyBrowsing with error-returning methods.
@@ -2376,15 +2376,15 @@ func (self IPersistPropertyBag) InitNew() error {
 }
 
 // Load wraps the raw Load call.
-func (self IPersistPropertyBag) Load(pPropBag *systemcomstructuredstorage.IPropertyBag, pErrorLog *systemcom.IErrorLog) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pPropBag, pErrorLog)))
+func (self IPersistPropertyBag) Load(pPropBag systemcomstructuredstorageidiom.IPropertyBag, pErrorLog systemcomidiom.IErrorLog) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pPropBag.Raw, pErrorLog.Raw)))
 }
 
 // Save wraps the raw Save call.
-func (self IPersistPropertyBag) Save(pPropBag *systemcomstructuredstorage.IPropertyBag, fClearDirty bool, fSaveAllProperties bool) error {
+func (self IPersistPropertyBag) Save(pPropBag systemcomstructuredstorageidiom.IPropertyBag, fClearDirty bool, fSaveAllProperties bool) error {
 	_fClearDirty := foundation.BOOL(win32.Bool32(fClearDirty))
 	_fSaveAllProperties := foundation.BOOL(win32.Bool32(fSaveAllProperties))
-	return win32.HRESULTError(int32(self.Raw.Save(pPropBag, _fClearDirty, _fSaveAllProperties)))
+	return win32.HRESULTError(int32(self.Raw.Save(pPropBag.Raw, _fClearDirty, _fSaveAllProperties)))
 }
 
 // IPersistPropertyBag2 is an idiomatic wrapper over the raw COM interface System.Ole.IPersistPropertyBag2 with error-returning methods.
@@ -2404,15 +2404,15 @@ func (self IPersistPropertyBag2) InitNew() error {
 }
 
 // Load wraps the raw Load call.
-func (self IPersistPropertyBag2) Load(pPropBag *systemcomstructuredstorage.IPropertyBag2, pErrLog *systemcom.IErrorLog) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pPropBag, pErrLog)))
+func (self IPersistPropertyBag2) Load(pPropBag systemcomstructuredstorageidiom.IPropertyBag2, pErrLog systemcomidiom.IErrorLog) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pPropBag.Raw, pErrLog.Raw)))
 }
 
 // Save wraps the raw Save call.
-func (self IPersistPropertyBag2) Save(pPropBag *systemcomstructuredstorage.IPropertyBag2, fClearDirty bool, fSaveAllProperties bool) error {
+func (self IPersistPropertyBag2) Save(pPropBag systemcomstructuredstorageidiom.IPropertyBag2, fClearDirty bool, fSaveAllProperties bool) error {
 	_fClearDirty := foundation.BOOL(win32.Bool32(fClearDirty))
 	_fSaveAllProperties := foundation.BOOL(win32.Bool32(fSaveAllProperties))
-	return win32.HRESULTError(int32(self.Raw.Save(pPropBag, _fClearDirty, _fSaveAllProperties)))
+	return win32.HRESULTError(int32(self.Raw.Save(pPropBag.Raw, _fClearDirty, _fSaveAllProperties)))
 }
 
 // IsDirty wraps the raw IsDirty call.
@@ -2493,9 +2493,9 @@ func (self IPicture) PictureChanged() error {
 }
 
 // SaveAsFile wraps the raw SaveAsFile call.
-func (self IPicture) SaveAsFile(pStream *systemcom.IStream, fSaveMemCopy bool, pCbSize *int32) error {
+func (self IPicture) SaveAsFile(pStream systemcomidiom.IStream, fSaveMemCopy bool, pCbSize *int32) error {
 	_fSaveMemCopy := foundation.BOOL(win32.Bool32(fSaveMemCopy))
-	return win32.HRESULTError(int32(self.Raw.SaveAsFile(pStream, _fSaveMemCopy, pCbSize)))
+	return win32.HRESULTError(int32(self.Raw.SaveAsFile(pStream.Raw, _fSaveMemCopy, pCbSize)))
 }
 
 // Get_Attributes wraps the raw Get_Attributes call.
@@ -2576,9 +2576,9 @@ func (self IPicture2) PictureChanged() error {
 }
 
 // SaveAsFile wraps the raw SaveAsFile call.
-func (self IPicture2) SaveAsFile(pStream *systemcom.IStream, fSaveMemCopy bool, pCbSize *int32) error {
+func (self IPicture2) SaveAsFile(pStream systemcomidiom.IStream, fSaveMemCopy bool, pCbSize *int32) error {
 	_fSaveMemCopy := foundation.BOOL(win32.Bool32(fSaveMemCopy))
-	return win32.HRESULTError(int32(self.Raw.SaveAsFile(pStream, _fSaveMemCopy, pCbSize)))
+	return win32.HRESULTError(int32(self.Raw.SaveAsFile(pStream.Raw, _fSaveMemCopy, pCbSize)))
 }
 
 // Get_Attributes wraps the raw Get_Attributes call.
@@ -2646,8 +2646,8 @@ func (self IPrint) GetPageInfo(pnFirstPage *int32, pcPages *int32) error {
 }
 
 // Print wraps the raw Print call.
-func (self IPrint) Print(grfFlags uint32, pptd **systemcom.DVTARGETDEVICE, ppPageSet **systemole.PAGESET, pstgmOptions *systemcom.STGMEDIUM, pcallback *systemole.IContinueCallback, nFirstPage int32, pcPagesPrinted *int32, pnLastPage *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Print(grfFlags, pptd, ppPageSet, pstgmOptions, pcallback, nFirstPage, pcPagesPrinted, pnLastPage)))
+func (self IPrint) Print(grfFlags uint32, pptd **systemcom.DVTARGETDEVICE, ppPageSet **systemole.PAGESET, pstgmOptions *systemcom.STGMEDIUM, pcallback IContinueCallback, nFirstPage int32, pcPagesPrinted *int32, pnLastPage *int32) error {
+	return win32.HRESULTError(int32(self.Raw.Print(grfFlags, pptd, ppPageSet, pstgmOptions, pcallback.Raw, nFirstPage, pcPagesPrinted, pnLastPage)))
 }
 
 // IPropertyNotifySink is an idiomatic wrapper over the raw COM interface System.Ole.IPropertyNotifySink with error-returning methods.
@@ -2683,8 +2683,8 @@ func WrapIPropertyPage(raw *systemole.IPropertyPage) IPropertyPage {
 }
 
 // SetPageSite wraps the raw SetPageSite call.
-func (self IPropertyPage) SetPageSite(pPageSite *systemole.IPropertyPageSite) error {
-	return win32.HRESULTError(int32(self.Raw.SetPageSite(pPageSite)))
+func (self IPropertyPage) SetPageSite(pPageSite IPropertyPageSite) error {
+	return win32.HRESULTError(int32(self.Raw.SetPageSite(pPageSite.Raw)))
 }
 
 // Activate wraps the raw Activate call.
@@ -3002,8 +3002,8 @@ func (self IRecordInfo) GetFieldNames(pcNames *uint32, rgBstrNames *foundation.B
 }
 
 // IsMatchingType wraps the raw IsMatchingType call.
-func (self IRecordInfo) IsMatchingType(pRecordInfo *systemole.IRecordInfo) foundation.BOOL {
-	return self.Raw.IsMatchingType(pRecordInfo)
+func (self IRecordInfo) IsMatchingType(pRecordInfo IRecordInfo) foundation.BOOL {
+	return self.Raw.IsMatchingType(pRecordInfo.Raw)
 }
 
 // RecordCreate wraps the raw RecordCreate call.
@@ -3070,15 +3070,15 @@ func WrapITypeChangeEvents(raw *systemole.ITypeChangeEvents) ITypeChangeEvents {
 }
 
 // RequestTypeChange wraps the raw RequestTypeChange call.
-func (self ITypeChangeEvents) RequestTypeChange(changeKind systemole.CHANGEKIND, pTInfoBefore *systemcom.ITypeInfo, pStrName string, pfCancel *int32) error {
+func (self ITypeChangeEvents) RequestTypeChange(changeKind systemole.CHANGEKIND, pTInfoBefore systemcomidiom.ITypeInfo, pStrName string, pfCancel *int32) error {
 	_pStrName := win32.UTF16Ptr(pStrName)
-	return win32.HRESULTError(int32(self.Raw.RequestTypeChange(changeKind, pTInfoBefore, foundation.PWSTR(_pStrName), pfCancel)))
+	return win32.HRESULTError(int32(self.Raw.RequestTypeChange(changeKind, pTInfoBefore.Raw, foundation.PWSTR(_pStrName), pfCancel)))
 }
 
 // AfterTypeChange wraps the raw AfterTypeChange call.
-func (self ITypeChangeEvents) AfterTypeChange(changeKind systemole.CHANGEKIND, pTInfoAfter *systemcom.ITypeInfo, pStrName string) error {
+func (self ITypeChangeEvents) AfterTypeChange(changeKind systemole.CHANGEKIND, pTInfoAfter systemcomidiom.ITypeInfo, pStrName string) error {
 	_pStrName := win32.UTF16Ptr(pStrName)
-	return win32.HRESULTError(int32(self.Raw.AfterTypeChange(changeKind, pTInfoAfter, foundation.PWSTR(_pStrName))))
+	return win32.HRESULTError(int32(self.Raw.AfterTypeChange(changeKind, pTInfoAfter.Raw, foundation.PWSTR(_pStrName))))
 }
 
 // ITypeFactory is an idiomatic wrapper over the raw COM interface System.Ole.ITypeFactory with error-returning methods.
@@ -3093,8 +3093,8 @@ func WrapITypeFactory(raw *systemole.ITypeFactory) ITypeFactory {
 }
 
 // CreateFromTypeInfo wraps the raw CreateFromTypeInfo call.
-func (self ITypeFactory) CreateFromTypeInfo(pTypeInfo *systemcom.ITypeInfo, riid *win32.GUID, ppv **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFromTypeInfo(pTypeInfo, riid, ppv)))
+func (self ITypeFactory) CreateFromTypeInfo(pTypeInfo systemcomidiom.ITypeInfo, riid *win32.GUID, ppv **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFromTypeInfo(pTypeInfo.Raw, riid, ppv)))
 }
 
 // ITypeMarshal is an idiomatic wrapper over the raw COM interface System.Ole.ITypeMarshal with error-returning methods.
@@ -3208,8 +3208,8 @@ func (self IViewObject) Unfreeze(dwFreeze uint32) error {
 }
 
 // SetAdvise wraps the raw SetAdvise call.
-func (self IViewObject) SetAdvise(aspects systemcom.DVASPECT, advf uint32, pAdvSink *systemcom.IAdviseSink) error {
-	return win32.HRESULTError(int32(self.Raw.SetAdvise(aspects, advf, pAdvSink)))
+func (self IViewObject) SetAdvise(aspects systemcom.DVASPECT, advf uint32, pAdvSink systemcomidiom.IAdviseSink) error {
+	return win32.HRESULTError(int32(self.Raw.SetAdvise(aspects, advf, pAdvSink.Raw)))
 }
 
 // GetAdvise wraps the raw GetAdvise call.

@@ -16,6 +16,7 @@ import (
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
 )
 
 // IWICBitmap is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICBitmap with error-returning methods.
@@ -35,8 +36,8 @@ func (self IWICBitmap) Lock(prcLock *graphicsimaging.WICRect, flags uint32, ppIL
 }
 
 // SetPalette wraps the raw SetPalette call.
-func (self IWICBitmap) SetPalette(pIPalette *graphicsimaging.IWICPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetPalette(pIPalette)))
+func (self IWICBitmap) SetPalette(pIPalette IWICPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetPalette(pIPalette.Raw)))
 }
 
 // IWICBitmapClipper is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICBitmapClipper with error-returning methods.
@@ -51,8 +52,8 @@ func WrapIWICBitmapClipper(raw *graphicsimaging.IWICBitmapClipper) IWICBitmapCli
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWICBitmapClipper) Initialize(pISource *graphicsimaging.IWICBitmapSource, prc *graphicsimaging.WICRect) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pISource, prc)))
+func (self IWICBitmapClipper) Initialize(pISource IWICBitmapSource, prc *graphicsimaging.WICRect) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pISource.Raw, prc)))
 }
 
 // IWICBitmapCodecInfo is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICBitmapCodecInfo with error-returning methods.
@@ -155,13 +156,13 @@ func WrapIWICBitmapDecoder(raw *graphicsimaging.IWICBitmapDecoder) IWICBitmapDec
 }
 
 // QueryCapability wraps the raw QueryCapability call.
-func (self IWICBitmapDecoder) QueryCapability(pIStream *systemcom.IStream, pdwCapability *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.QueryCapability(pIStream, pdwCapability)))
+func (self IWICBitmapDecoder) QueryCapability(pIStream systemcomidiom.IStream, pdwCapability *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.QueryCapability(pIStream.Raw, pdwCapability)))
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWICBitmapDecoder) Initialize(pIStream *systemcom.IStream, cacheOptions graphicsimaging.WICDecodeOptions) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIStream, cacheOptions)))
+func (self IWICBitmapDecoder) Initialize(pIStream systemcomidiom.IStream, cacheOptions graphicsimaging.WICDecodeOptions) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIStream.Raw, cacheOptions)))
 }
 
 // GetContainerFormat wraps the raw GetContainerFormat call.
@@ -175,8 +176,8 @@ func (self IWICBitmapDecoder) GetDecoderInfo(ppIDecoderInfo **graphicsimaging.IW
 }
 
 // CopyPalette wraps the raw CopyPalette call.
-func (self IWICBitmapDecoder) CopyPalette(pIPalette *graphicsimaging.IWICPalette) error {
-	return win32.HRESULTError(int32(self.Raw.CopyPalette(pIPalette)))
+func (self IWICBitmapDecoder) CopyPalette(pIPalette IWICPalette) error {
+	return win32.HRESULTError(int32(self.Raw.CopyPalette(pIPalette.Raw)))
 }
 
 // GetMetadataQueryReader wraps the raw GetMetadataQueryReader call.
@@ -226,8 +227,8 @@ func (self IWICBitmapDecoderInfo) GetPatterns(cbSizePatterns uint32, pPatterns *
 }
 
 // MatchesPattern wraps the raw MatchesPattern call.
-func (self IWICBitmapDecoderInfo) MatchesPattern(pIStream *systemcom.IStream, pfMatches *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MatchesPattern(pIStream, pfMatches)))
+func (self IWICBitmapDecoderInfo) MatchesPattern(pIStream systemcomidiom.IStream, pfMatches *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.MatchesPattern(pIStream.Raw, pfMatches)))
 }
 
 // CreateInstance wraps the raw CreateInstance call.
@@ -247,8 +248,8 @@ func WrapIWICBitmapEncoder(raw *graphicsimaging.IWICBitmapEncoder) IWICBitmapEnc
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWICBitmapEncoder) Initialize(pIStream *systemcom.IStream, cacheOption graphicsimaging.WICBitmapEncoderCacheOption) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIStream, cacheOption)))
+func (self IWICBitmapEncoder) Initialize(pIStream systemcomidiom.IStream, cacheOption graphicsimaging.WICBitmapEncoderCacheOption) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIStream.Raw, cacheOption)))
 }
 
 // GetContainerFormat wraps the raw GetContainerFormat call.
@@ -267,18 +268,18 @@ func (self IWICBitmapEncoder) SetColorContexts(cCount uint32, ppIColorContext **
 }
 
 // SetPalette wraps the raw SetPalette call.
-func (self IWICBitmapEncoder) SetPalette(pIPalette *graphicsimaging.IWICPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetPalette(pIPalette)))
+func (self IWICBitmapEncoder) SetPalette(pIPalette IWICPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetPalette(pIPalette.Raw)))
 }
 
 // SetThumbnail wraps the raw SetThumbnail call.
-func (self IWICBitmapEncoder) SetThumbnail(pIThumbnail *graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(self.Raw.SetThumbnail(pIThumbnail)))
+func (self IWICBitmapEncoder) SetThumbnail(pIThumbnail IWICBitmapSource) error {
+	return win32.HRESULTError(int32(self.Raw.SetThumbnail(pIThumbnail.Raw)))
 }
 
 // SetPreview wraps the raw SetPreview call.
-func (self IWICBitmapEncoder) SetPreview(pIPreview *graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(self.Raw.SetPreview(pIPreview)))
+func (self IWICBitmapEncoder) SetPreview(pIPreview IWICBitmapSource) error {
+	return win32.HRESULTError(int32(self.Raw.SetPreview(pIPreview.Raw)))
 }
 
 // CreateNewFrame wraps the raw CreateNewFrame call.
@@ -324,8 +325,8 @@ func WrapIWICBitmapFlipRotator(raw *graphicsimaging.IWICBitmapFlipRotator) IWICB
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWICBitmapFlipRotator) Initialize(pISource *graphicsimaging.IWICBitmapSource, options graphicsimaging.WICBitmapTransformOptions) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pISource, options)))
+func (self IWICBitmapFlipRotator) Initialize(pISource IWICBitmapSource, options graphicsimaging.WICBitmapTransformOptions) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pISource.Raw, options)))
 }
 
 // IWICBitmapFrameChainReader is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICBitmapFrameChainReader with error-returning methods.
@@ -408,8 +409,8 @@ func WrapIWICBitmapFrameEncode(raw *graphicsimaging.IWICBitmapFrameEncode) IWICB
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWICBitmapFrameEncode) Initialize(pIEncoderOptions *systemcomstructuredstorage.IPropertyBag2) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIEncoderOptions)))
+func (self IWICBitmapFrameEncode) Initialize(pIEncoderOptions systemcomstructuredstorageidiom.IPropertyBag2) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIEncoderOptions.Raw)))
 }
 
 // SetSize wraps the raw SetSize call.
@@ -428,13 +429,13 @@ func (self IWICBitmapFrameEncode) SetColorContexts(cCount uint32, ppIColorContex
 }
 
 // SetPalette wraps the raw SetPalette call.
-func (self IWICBitmapFrameEncode) SetPalette(pIPalette *graphicsimaging.IWICPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetPalette(pIPalette)))
+func (self IWICBitmapFrameEncode) SetPalette(pIPalette IWICPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetPalette(pIPalette.Raw)))
 }
 
 // SetThumbnail wraps the raw SetThumbnail call.
-func (self IWICBitmapFrameEncode) SetThumbnail(pIThumbnail *graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(self.Raw.SetThumbnail(pIThumbnail)))
+func (self IWICBitmapFrameEncode) SetThumbnail(pIThumbnail IWICBitmapSource) error {
+	return win32.HRESULTError(int32(self.Raw.SetThumbnail(pIThumbnail.Raw)))
 }
 
 // WritePixels wraps the raw WritePixels call.
@@ -443,8 +444,8 @@ func (self IWICBitmapFrameEncode) WritePixels(lineCount uint32, cbStride uint32,
 }
 
 // WriteSource wraps the raw WriteSource call.
-func (self IWICBitmapFrameEncode) WriteSource(pIBitmapSource *graphicsimaging.IWICBitmapSource, prc *graphicsimaging.WICRect) error {
-	return win32.HRESULTError(int32(self.Raw.WriteSource(pIBitmapSource, prc)))
+func (self IWICBitmapFrameEncode) WriteSource(pIBitmapSource IWICBitmapSource, prc *graphicsimaging.WICRect) error {
+	return win32.HRESULTError(int32(self.Raw.WriteSource(pIBitmapSource.Raw, prc)))
 }
 
 // Commit wraps the raw Commit call.
@@ -500,8 +501,8 @@ func WrapIWICBitmapScaler(raw *graphicsimaging.IWICBitmapScaler) IWICBitmapScale
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWICBitmapScaler) Initialize(pISource *graphicsimaging.IWICBitmapSource, uiWidth uint32, uiHeight uint32, mode graphicsimaging.WICBitmapInterpolationMode) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pISource, uiWidth, uiHeight, mode)))
+func (self IWICBitmapScaler) Initialize(pISource IWICBitmapSource, uiWidth uint32, uiHeight uint32, mode graphicsimaging.WICBitmapInterpolationMode) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pISource.Raw, uiWidth, uiHeight, mode)))
 }
 
 // IWICBitmapSource is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICBitmapSource with error-returning methods.
@@ -531,8 +532,8 @@ func (self IWICBitmapSource) GetResolution(pDpiX *float64, pDpiY *float64) error
 }
 
 // CopyPalette wraps the raw CopyPalette call.
-func (self IWICBitmapSource) CopyPalette(pIPalette *graphicsimaging.IWICPalette) error {
-	return win32.HRESULTError(int32(self.Raw.CopyPalette(pIPalette)))
+func (self IWICBitmapSource) CopyPalette(pIPalette IWICPalette) error {
+	return win32.HRESULTError(int32(self.Raw.CopyPalette(pIPalette.Raw)))
 }
 
 // CopyPixels wraps the raw CopyPixels call.
@@ -599,8 +600,8 @@ func WrapIWICBitmapToneMapper(raw *graphicsimaging.IWICBitmapToneMapper) IWICBit
 }
 
 // InitializeForSdrTarget wraps the raw InitializeForSdrTarget call.
-func (self IWICBitmapToneMapper) InitializeForSdrTarget(pISource *graphicsimaging.IWICBitmapSource, guidDstFormat *win32.GUID, mode graphicsimaging.WICBitmapToneMappingMode) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeForSdrTarget(pISource, guidDstFormat, mode)))
+func (self IWICBitmapToneMapper) InitializeForSdrTarget(pISource IWICBitmapSource, guidDstFormat *win32.GUID, mode graphicsimaging.WICBitmapToneMappingMode) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeForSdrTarget(pISource.Raw, guidDstFormat, mode)))
 }
 
 // IWICColorContext is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICColorContext with error-returning methods.
@@ -657,8 +658,8 @@ func WrapIWICColorTransform(raw *graphicsimaging.IWICColorTransform) IWICColorTr
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWICColorTransform) Initialize(pIBitmapSource *graphicsimaging.IWICBitmapSource, pIContextSource *graphicsimaging.IWICColorContext, pIContextDest *graphicsimaging.IWICColorContext, pixelFmtDest *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIBitmapSource, pIContextSource, pIContextDest, pixelFmtDest)))
+func (self IWICColorTransform) Initialize(pIBitmapSource IWICBitmapSource, pIContextSource IWICColorContext, pIContextDest IWICColorContext, pixelFmtDest *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIBitmapSource.Raw, pIContextSource.Raw, pIContextDest.Raw, pixelFmtDest)))
 }
 
 // IWICComponentFactory is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICComponentFactory with error-returning methods.
@@ -673,13 +674,13 @@ func WrapIWICComponentFactory(raw *graphicsimaging.IWICComponentFactory) IWICCom
 }
 
 // CreateMetadataReader wraps the raw CreateMetadataReader call.
-func (self IWICComponentFactory) CreateMetadataReader(guidMetadataFormat *win32.GUID, pguidVendor *win32.GUID, dwOptions uint32, pIStream *systemcom.IStream, ppIReader **graphicsimaging.IWICMetadataReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateMetadataReader(guidMetadataFormat, pguidVendor, dwOptions, pIStream, ppIReader)))
+func (self IWICComponentFactory) CreateMetadataReader(guidMetadataFormat *win32.GUID, pguidVendor *win32.GUID, dwOptions uint32, pIStream systemcomidiom.IStream, ppIReader **graphicsimaging.IWICMetadataReader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateMetadataReader(guidMetadataFormat, pguidVendor, dwOptions, pIStream.Raw, ppIReader)))
 }
 
 // CreateMetadataReaderFromContainer wraps the raw CreateMetadataReaderFromContainer call.
-func (self IWICComponentFactory) CreateMetadataReaderFromContainer(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, dwOptions uint32, pIStream *systemcom.IStream, ppIReader **graphicsimaging.IWICMetadataReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateMetadataReaderFromContainer(guidContainerFormat, pguidVendor, dwOptions, pIStream, ppIReader)))
+func (self IWICComponentFactory) CreateMetadataReaderFromContainer(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, dwOptions uint32, pIStream systemcomidiom.IStream, ppIReader **graphicsimaging.IWICMetadataReader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateMetadataReaderFromContainer(guidContainerFormat, pguidVendor, dwOptions, pIStream.Raw, ppIReader)))
 }
 
 // CreateMetadataWriter wraps the raw CreateMetadataWriter call.
@@ -688,18 +689,18 @@ func (self IWICComponentFactory) CreateMetadataWriter(guidMetadataFormat *win32.
 }
 
 // CreateMetadataWriterFromReader wraps the raw CreateMetadataWriterFromReader call.
-func (self IWICComponentFactory) CreateMetadataWriterFromReader(pIReader *graphicsimaging.IWICMetadataReader, pguidVendor *win32.GUID, ppIWriter **graphicsimaging.IWICMetadataWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateMetadataWriterFromReader(pIReader, pguidVendor, ppIWriter)))
+func (self IWICComponentFactory) CreateMetadataWriterFromReader(pIReader IWICMetadataReader, pguidVendor *win32.GUID, ppIWriter **graphicsimaging.IWICMetadataWriter) error {
+	return win32.HRESULTError(int32(self.Raw.CreateMetadataWriterFromReader(pIReader.Raw, pguidVendor, ppIWriter)))
 }
 
 // CreateQueryReaderFromBlockReader wraps the raw CreateQueryReaderFromBlockReader call.
-func (self IWICComponentFactory) CreateQueryReaderFromBlockReader(pIBlockReader *graphicsimaging.IWICMetadataBlockReader, ppIQueryReader **graphicsimaging.IWICMetadataQueryReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateQueryReaderFromBlockReader(pIBlockReader, ppIQueryReader)))
+func (self IWICComponentFactory) CreateQueryReaderFromBlockReader(pIBlockReader IWICMetadataBlockReader, ppIQueryReader **graphicsimaging.IWICMetadataQueryReader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateQueryReaderFromBlockReader(pIBlockReader.Raw, ppIQueryReader)))
 }
 
 // CreateQueryWriterFromBlockWriter wraps the raw CreateQueryWriterFromBlockWriter call.
-func (self IWICComponentFactory) CreateQueryWriterFromBlockWriter(pIBlockWriter *graphicsimaging.IWICMetadataBlockWriter, ppIQueryWriter **graphicsimaging.IWICMetadataQueryWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateQueryWriterFromBlockWriter(pIBlockWriter, ppIQueryWriter)))
+func (self IWICComponentFactory) CreateQueryWriterFromBlockWriter(pIBlockWriter IWICMetadataBlockWriter, ppIQueryWriter **graphicsimaging.IWICMetadataQueryWriter) error {
+	return win32.HRESULTError(int32(self.Raw.CreateQueryWriterFromBlockWriter(pIBlockWriter.Raw, ppIQueryWriter)))
 }
 
 // CreateEncoderPropertyBag wraps the raw CreateEncoderPropertyBag call.
@@ -770,13 +771,13 @@ func WrapIWICD3DTextureSource(raw *graphicsimaging.IWICD3DTextureSource) IWICD3D
 }
 
 // GetTexture wraps the raw GetTexture call.
-func (self IWICD3DTextureSource) GetTexture(pD3DDevice *systemcom.IUnknown, pID3DTextureOptions *systemcomstructuredstorage.IPropertyBag2, riid *win32.GUID, ppTexture *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetTexture(pD3DDevice, pID3DTextureOptions, riid, ppTexture)))
+func (self IWICD3DTextureSource) GetTexture(pD3DDevice systemcomidiom.IUnknown, pID3DTextureOptions systemcomstructuredstorageidiom.IPropertyBag2, riid *win32.GUID, ppTexture *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetTexture(pD3DDevice.Raw, pID3DTextureOptions.Raw, riid, ppTexture)))
 }
 
 // GetTransformedTexture wraps the raw GetTransformedTexture call.
-func (self IWICD3DTextureSource) GetTransformedTexture(prc *graphicsimaging.WICRect, uiWidth uint32, uiHeight uint32, pguidDstFormat *win32.GUID, dstTransform graphicsimaging.WICBitmapTransformOptions, pD3DDevice *systemcom.IUnknown, pID3DTextureOptions *systemcomstructuredstorage.IPropertyBag2, riid *win32.GUID, ppTexture *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetTransformedTexture(prc, uiWidth, uiHeight, pguidDstFormat, dstTransform, pD3DDevice, pID3DTextureOptions, riid, ppTexture)))
+func (self IWICD3DTextureSource) GetTransformedTexture(prc *graphicsimaging.WICRect, uiWidth uint32, uiHeight uint32, pguidDstFormat *win32.GUID, dstTransform graphicsimaging.WICBitmapTransformOptions, pD3DDevice systemcomidiom.IUnknown, pID3DTextureOptions systemcomstructuredstorageidiom.IPropertyBag2, riid *win32.GUID, ppTexture *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetTransformedTexture(prc, uiWidth, uiHeight, pguidDstFormat, dstTransform, pD3DDevice.Raw, pID3DTextureOptions.Raw, riid, ppTexture)))
 }
 
 // DoesSupportD3DDeviceType wraps the raw DoesSupportD3DDeviceType call.
@@ -806,10 +807,10 @@ func (self IWICDdsDecoder) GetParameters(pParameters *graphicsimaging.WICDdsPara
 }
 
 // GetFrame wraps the raw GetFrame call.
-func (self IWICDdsDecoder) GetFrame(arrayIndex uint32, mipLevel uint32, sliceIndex uint32) (*graphicsimaging.IWICBitmapFrameDecode, error) {
+func (self IWICDdsDecoder) GetFrame(arrayIndex uint32, mipLevel uint32, sliceIndex uint32) (IWICBitmapFrameDecode, error) {
 	var _ppIBitmapFrame *graphicsimaging.IWICBitmapFrameDecode
 	_hr := self.Raw.GetFrame(arrayIndex, mipLevel, sliceIndex, &_ppIBitmapFrame)
-	return _ppIBitmapFrame, win32.HRESULTError(int32(_hr))
+	return WrapIWICBitmapFrameDecode(_ppIBitmapFrame), win32.HRESULTError(int32(_hr))
 }
 
 // IWICDdsEncoder is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICDdsEncoder with error-returning methods.
@@ -961,8 +962,8 @@ func (self IWICDevelopRaw) GetNoiseReduction(pNoiseReduction *float64) error {
 }
 
 // SetDestinationColorContext wraps the raw SetDestinationColorContext call.
-func (self IWICDevelopRaw) SetDestinationColorContext(pColorContext *graphicsimaging.IWICColorContext) error {
-	return win32.HRESULTError(int32(self.Raw.SetDestinationColorContext(pColorContext)))
+func (self IWICDevelopRaw) SetDestinationColorContext(pColorContext IWICColorContext) error {
+	return win32.HRESULTError(int32(self.Raw.SetDestinationColorContext(pColorContext.Raw)))
 }
 
 // SetToneCurve wraps the raw SetToneCurve call.
@@ -991,8 +992,8 @@ func (self IWICDevelopRaw) GetRenderMode(pRenderMode *graphicsimaging.WICRawRend
 }
 
 // SetNotificationCallback wraps the raw SetNotificationCallback call.
-func (self IWICDevelopRaw) SetNotificationCallback(pCallback *graphicsimaging.IWICDevelopRawNotificationCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetNotificationCallback(pCallback)))
+func (self IWICDevelopRaw) SetNotificationCallback(pCallback IWICDevelopRawNotificationCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetNotificationCallback(pCallback.Raw)))
 }
 
 // IWICDevelopRawNotificationCallback is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICDevelopRawNotificationCallback with error-returning methods.
@@ -1170,25 +1171,25 @@ func WrapIWICImagingFactory(raw *graphicsimaging.IWICImagingFactory) IWICImaging
 }
 
 // CreateDecoderFromFilename wraps the raw CreateDecoderFromFilename call.
-func (self IWICImagingFactory) CreateDecoderFromFilename(wzFilename string, pguidVendor *win32.GUID, dwDesiredAccess foundation.GENERIC_ACCESS_RIGHTS, metadataOptions graphicsimaging.WICDecodeOptions) (*graphicsimaging.IWICBitmapDecoder, error) {
+func (self IWICImagingFactory) CreateDecoderFromFilename(wzFilename string, pguidVendor *win32.GUID, dwDesiredAccess foundation.GENERIC_ACCESS_RIGHTS, metadataOptions graphicsimaging.WICDecodeOptions) (IWICBitmapDecoder, error) {
 	_wzFilename := win32.UTF16Ptr(wzFilename)
 	var _ppIDecoder *graphicsimaging.IWICBitmapDecoder
 	_hr := self.Raw.CreateDecoderFromFilename(foundation.PWSTR(_wzFilename), pguidVendor, dwDesiredAccess, metadataOptions, &_ppIDecoder)
-	return _ppIDecoder, win32.HRESULTError(int32(_hr))
+	return WrapIWICBitmapDecoder(_ppIDecoder), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDecoderFromStream wraps the raw CreateDecoderFromStream call.
-func (self IWICImagingFactory) CreateDecoderFromStream(pIStream *systemcom.IStream, pguidVendor *win32.GUID, metadataOptions graphicsimaging.WICDecodeOptions) (*graphicsimaging.IWICBitmapDecoder, error) {
+func (self IWICImagingFactory) CreateDecoderFromStream(pIStream systemcomidiom.IStream, pguidVendor *win32.GUID, metadataOptions graphicsimaging.WICDecodeOptions) (IWICBitmapDecoder, error) {
 	var _ppIDecoder *graphicsimaging.IWICBitmapDecoder
-	_hr := self.Raw.CreateDecoderFromStream(pIStream, pguidVendor, metadataOptions, &_ppIDecoder)
-	return _ppIDecoder, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDecoderFromStream(pIStream.Raw, pguidVendor, metadataOptions, &_ppIDecoder)
+	return WrapIWICBitmapDecoder(_ppIDecoder), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDecoderFromFileHandle wraps the raw CreateDecoderFromFileHandle call.
-func (self IWICImagingFactory) CreateDecoderFromFileHandle(hFile uintptr, pguidVendor *win32.GUID, metadataOptions graphicsimaging.WICDecodeOptions) (*graphicsimaging.IWICBitmapDecoder, error) {
+func (self IWICImagingFactory) CreateDecoderFromFileHandle(hFile uintptr, pguidVendor *win32.GUID, metadataOptions graphicsimaging.WICDecodeOptions) (IWICBitmapDecoder, error) {
 	var _ppIDecoder *graphicsimaging.IWICBitmapDecoder
 	_hr := self.Raw.CreateDecoderFromFileHandle(hFile, pguidVendor, metadataOptions, &_ppIDecoder)
-	return _ppIDecoder, win32.HRESULTError(int32(_hr))
+	return WrapIWICBitmapDecoder(_ppIDecoder), win32.HRESULTError(int32(_hr))
 }
 
 // CreateComponentInfo wraps the raw CreateComponentInfo call.
@@ -1197,17 +1198,17 @@ func (self IWICImagingFactory) CreateComponentInfo(clsidComponent *win32.GUID, p
 }
 
 // CreateDecoder wraps the raw CreateDecoder call.
-func (self IWICImagingFactory) CreateDecoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID) (*graphicsimaging.IWICBitmapDecoder, error) {
+func (self IWICImagingFactory) CreateDecoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID) (IWICBitmapDecoder, error) {
 	var _ppIDecoder *graphicsimaging.IWICBitmapDecoder
 	_hr := self.Raw.CreateDecoder(guidContainerFormat, pguidVendor, &_ppIDecoder)
-	return _ppIDecoder, win32.HRESULTError(int32(_hr))
+	return WrapIWICBitmapDecoder(_ppIDecoder), win32.HRESULTError(int32(_hr))
 }
 
 // CreateEncoder wraps the raw CreateEncoder call.
-func (self IWICImagingFactory) CreateEncoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID) (*graphicsimaging.IWICBitmapEncoder, error) {
+func (self IWICImagingFactory) CreateEncoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID) (IWICBitmapEncoder, error) {
 	var _ppIEncoder *graphicsimaging.IWICBitmapEncoder
 	_hr := self.Raw.CreateEncoder(guidContainerFormat, pguidVendor, &_ppIEncoder)
-	return _ppIEncoder, win32.HRESULTError(int32(_hr))
+	return WrapIWICBitmapEncoder(_ppIEncoder), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePalette wraps the raw CreatePalette call.
@@ -1256,13 +1257,13 @@ func (self IWICImagingFactory) CreateBitmap(uiWidth uint32, uiHeight uint32, pix
 }
 
 // CreateBitmapFromSource wraps the raw CreateBitmapFromSource call.
-func (self IWICImagingFactory) CreateBitmapFromSource(pIBitmapSource *graphicsimaging.IWICBitmapSource, option graphicsimaging.WICBitmapCreateCacheOption, ppIBitmap **graphicsimaging.IWICBitmap) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromSource(pIBitmapSource, option, ppIBitmap)))
+func (self IWICImagingFactory) CreateBitmapFromSource(pIBitmapSource IWICBitmapSource, option graphicsimaging.WICBitmapCreateCacheOption, ppIBitmap **graphicsimaging.IWICBitmap) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromSource(pIBitmapSource.Raw, option, ppIBitmap)))
 }
 
 // CreateBitmapFromSourceRect wraps the raw CreateBitmapFromSourceRect call.
-func (self IWICImagingFactory) CreateBitmapFromSourceRect(pIBitmapSource *graphicsimaging.IWICBitmapSource, x uint32, y uint32, width uint32, height uint32, ppIBitmap **graphicsimaging.IWICBitmap) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromSourceRect(pIBitmapSource, x, y, width, height, ppIBitmap)))
+func (self IWICImagingFactory) CreateBitmapFromSourceRect(pIBitmapSource IWICBitmapSource, x uint32, y uint32, width uint32, height uint32, ppIBitmap **graphicsimaging.IWICBitmap) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromSourceRect(pIBitmapSource.Raw, x, y, width, height, ppIBitmap)))
 }
 
 // CreateBitmapFromMemory wraps the raw CreateBitmapFromMemory call.
@@ -1286,13 +1287,13 @@ func (self IWICImagingFactory) CreateComponentEnumerator(componentTypes uint32, 
 }
 
 // CreateFastMetadataEncoderFromDecoder wraps the raw CreateFastMetadataEncoderFromDecoder call.
-func (self IWICImagingFactory) CreateFastMetadataEncoderFromDecoder(pIDecoder *graphicsimaging.IWICBitmapDecoder, ppIFastEncoder **graphicsimaging.IWICFastMetadataEncoder) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFastMetadataEncoderFromDecoder(pIDecoder, ppIFastEncoder)))
+func (self IWICImagingFactory) CreateFastMetadataEncoderFromDecoder(pIDecoder IWICBitmapDecoder, ppIFastEncoder **graphicsimaging.IWICFastMetadataEncoder) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFastMetadataEncoderFromDecoder(pIDecoder.Raw, ppIFastEncoder)))
 }
 
 // CreateFastMetadataEncoderFromFrameDecode wraps the raw CreateFastMetadataEncoderFromFrameDecode call.
-func (self IWICImagingFactory) CreateFastMetadataEncoderFromFrameDecode(pIFrameDecoder *graphicsimaging.IWICBitmapFrameDecode, ppIFastEncoder **graphicsimaging.IWICFastMetadataEncoder) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFastMetadataEncoderFromFrameDecode(pIFrameDecoder, ppIFastEncoder)))
+func (self IWICImagingFactory) CreateFastMetadataEncoderFromFrameDecode(pIFrameDecoder IWICBitmapFrameDecode, ppIFastEncoder **graphicsimaging.IWICFastMetadataEncoder) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFastMetadataEncoderFromFrameDecode(pIFrameDecoder.Raw, ppIFastEncoder)))
 }
 
 // CreateQueryWriter wraps the raw CreateQueryWriter call.
@@ -1301,8 +1302,8 @@ func (self IWICImagingFactory) CreateQueryWriter(guidMetadataFormat *win32.GUID,
 }
 
 // CreateQueryWriterFromReader wraps the raw CreateQueryWriterFromReader call.
-func (self IWICImagingFactory) CreateQueryWriterFromReader(pIQueryReader *graphicsimaging.IWICMetadataQueryReader, pguidVendor *win32.GUID, ppIQueryWriter **graphicsimaging.IWICMetadataQueryWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateQueryWriterFromReader(pIQueryReader, pguidVendor, ppIQueryWriter)))
+func (self IWICImagingFactory) CreateQueryWriterFromReader(pIQueryReader IWICMetadataQueryReader, pguidVendor *win32.GUID, ppIQueryWriter **graphicsimaging.IWICMetadataQueryWriter) error {
+	return win32.HRESULTError(int32(self.Raw.CreateQueryWriterFromReader(pIQueryReader.Raw, pguidVendor, ppIQueryWriter)))
 }
 
 // IWICJpegFrameDecode is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICJpegFrameDecode with error-returning methods.
@@ -1440,8 +1441,8 @@ func WrapIWICMetadataBlockWriter(raw *graphicsimaging.IWICMetadataBlockWriter) I
 }
 
 // InitializeFromBlockReader wraps the raw InitializeFromBlockReader call.
-func (self IWICMetadataBlockWriter) InitializeFromBlockReader(pIMDBlockReader *graphicsimaging.IWICMetadataBlockReader) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromBlockReader(pIMDBlockReader)))
+func (self IWICMetadataBlockWriter) InitializeFromBlockReader(pIMDBlockReader IWICMetadataBlockReader) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromBlockReader(pIMDBlockReader.Raw)))
 }
 
 // GetWriterByIndex wraps the raw GetWriterByIndex call.
@@ -1450,13 +1451,13 @@ func (self IWICMetadataBlockWriter) GetWriterByIndex(nIndex uint32, ppIMetadataW
 }
 
 // AddWriter wraps the raw AddWriter call.
-func (self IWICMetadataBlockWriter) AddWriter(pIMetadataWriter *graphicsimaging.IWICMetadataWriter) error {
-	return win32.HRESULTError(int32(self.Raw.AddWriter(pIMetadataWriter)))
+func (self IWICMetadataBlockWriter) AddWriter(pIMetadataWriter IWICMetadataWriter) error {
+	return win32.HRESULTError(int32(self.Raw.AddWriter(pIMetadataWriter.Raw)))
 }
 
 // SetWriterByIndex wraps the raw SetWriterByIndex call.
-func (self IWICMetadataBlockWriter) SetWriterByIndex(nIndex uint32, pIMetadataWriter *graphicsimaging.IWICMetadataWriter) error {
-	return win32.HRESULTError(int32(self.Raw.SetWriterByIndex(nIndex, pIMetadataWriter)))
+func (self IWICMetadataBlockWriter) SetWriterByIndex(nIndex uint32, pIMetadataWriter IWICMetadataWriter) error {
+	return win32.HRESULTError(int32(self.Raw.SetWriterByIndex(nIndex, pIMetadataWriter.Raw)))
 }
 
 // RemoveWriterByIndex wraps the raw RemoveWriterByIndex call.
@@ -1623,8 +1624,8 @@ func (self IWICMetadataReaderInfo) GetPatterns(guidContainerFormat *win32.GUID, 
 }
 
 // MatchesPattern wraps the raw MatchesPattern call.
-func (self IWICMetadataReaderInfo) MatchesPattern(guidContainerFormat *win32.GUID, pIStream *systemcom.IStream, pfMatches *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MatchesPattern(guidContainerFormat, pIStream, pfMatches)))
+func (self IWICMetadataReaderInfo) MatchesPattern(guidContainerFormat *win32.GUID, pIStream systemcomidiom.IStream, pfMatches *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.MatchesPattern(guidContainerFormat, pIStream.Raw, pfMatches)))
 }
 
 // CreateInstance wraps the raw CreateInstance call.
@@ -1707,14 +1708,14 @@ func (self IWICPalette) InitializeCustom(pColors *uint32, cCount uint32) error {
 }
 
 // InitializeFromBitmap wraps the raw InitializeFromBitmap call.
-func (self IWICPalette) InitializeFromBitmap(pISurface *graphicsimaging.IWICBitmapSource, cCount uint32, fAddTransparentColor bool) error {
+func (self IWICPalette) InitializeFromBitmap(pISurface IWICBitmapSource, cCount uint32, fAddTransparentColor bool) error {
 	_fAddTransparentColor := foundation.BOOL(win32.Bool32(fAddTransparentColor))
-	return win32.HRESULTError(int32(self.Raw.InitializeFromBitmap(pISurface, cCount, _fAddTransparentColor)))
+	return win32.HRESULTError(int32(self.Raw.InitializeFromBitmap(pISurface.Raw, cCount, _fAddTransparentColor)))
 }
 
 // InitializeFromPalette wraps the raw InitializeFromPalette call.
-func (self IWICPalette) InitializeFromPalette(pIPalette *graphicsimaging.IWICPalette) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromPalette(pIPalette)))
+func (self IWICPalette) InitializeFromPalette(pIPalette IWICPalette) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromPalette(pIPalette.Raw)))
 }
 
 // GetType wraps the raw GetType call.
@@ -1759,14 +1760,14 @@ func WrapIWICPersistStream(raw *graphicsimaging.IWICPersistStream) IWICPersistSt
 }
 
 // LoadEx wraps the raw LoadEx call.
-func (self IWICPersistStream) LoadEx(pIStream *systemcom.IStream, pguidPreferredVendor *win32.GUID, dwPersistOptions uint32) error {
-	return win32.HRESULTError(int32(self.Raw.LoadEx(pIStream, pguidPreferredVendor, dwPersistOptions)))
+func (self IWICPersistStream) LoadEx(pIStream systemcomidiom.IStream, pguidPreferredVendor *win32.GUID, dwPersistOptions uint32) error {
+	return win32.HRESULTError(int32(self.Raw.LoadEx(pIStream.Raw, pguidPreferredVendor, dwPersistOptions)))
 }
 
 // SaveEx wraps the raw SaveEx call.
-func (self IWICPersistStream) SaveEx(pIStream *systemcom.IStream, dwPersistOptions uint32, fClearDirty bool) error {
+func (self IWICPersistStream) SaveEx(pIStream systemcomidiom.IStream, dwPersistOptions uint32, fClearDirty bool) error {
 	_fClearDirty := foundation.BOOL(win32.Bool32(fClearDirty))
-	return win32.HRESULTError(int32(self.Raw.SaveEx(pIStream, dwPersistOptions, _fClearDirty)))
+	return win32.HRESULTError(int32(self.Raw.SaveEx(pIStream.Raw, dwPersistOptions, _fClearDirty)))
 }
 
 // IWICPixelFormatInfo is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICPixelFormatInfo with error-returning methods.
@@ -1937,8 +1938,8 @@ func WrapIWICStream(raw *graphicsimaging.IWICStream) IWICStream {
 }
 
 // InitializeFromIStream wraps the raw InitializeFromIStream call.
-func (self IWICStream) InitializeFromIStream(pIStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromIStream(pIStream)))
+func (self IWICStream) InitializeFromIStream(pIStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromIStream(pIStream.Raw)))
 }
 
 // InitializeFromFilename wraps the raw InitializeFromFilename call.
@@ -1953,8 +1954,8 @@ func (self IWICStream) InitializeFromMemory(pbBuffer *byte, cbBufferSize uint32)
 }
 
 // InitializeFromIStreamRegion wraps the raw InitializeFromIStreamRegion call.
-func (self IWICStream) InitializeFromIStreamRegion(pIStream *systemcom.IStream, ulOffset uint64, ulMaxSize uint64) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromIStreamRegion(pIStream, ulOffset, ulMaxSize)))
+func (self IWICStream) InitializeFromIStreamRegion(pIStream systemcomidiom.IStream, ulOffset uint64, ulMaxSize uint64) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromIStreamRegion(pIStream.Raw, ulOffset, ulMaxSize)))
 }
 
 // IWICStreamProvider is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICStreamProvider with error-returning methods.

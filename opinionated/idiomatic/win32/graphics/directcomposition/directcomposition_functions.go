@@ -10,23 +10,23 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirectcomposition "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directcomposition"
-	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // DCompositionAttachMouseDragToHwnd wraps the raw DCompositionAttachMouseDragToHwnd call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionattachmousedragtohwnd
-func DCompositionAttachMouseDragToHwnd(visual *graphicsdirectcomposition.IDCompositionVisual, hwnd foundation.HWND, enable bool) error {
+func DCompositionAttachMouseDragToHwnd(visual IDCompositionVisual, hwnd foundation.HWND, enable bool) error {
 	_enable := foundation.BOOL(win32.Bool32(enable))
-	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionAttachMouseDragToHwnd(visual, hwnd, _enable)))
+	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionAttachMouseDragToHwnd(visual.Raw, hwnd, _enable)))
 }
 
 // DCompositionAttachMouseWheelToHwnd wraps the raw DCompositionAttachMouseWheelToHwnd call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionattachmousewheeltohwnd
-func DCompositionAttachMouseWheelToHwnd(visual *graphicsdirectcomposition.IDCompositionVisual, hwnd foundation.HWND, enable bool) error {
+func DCompositionAttachMouseWheelToHwnd(visual IDCompositionVisual, hwnd foundation.HWND, enable bool) error {
 	_enable := foundation.BOOL(win32.Bool32(enable))
-	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionAttachMouseWheelToHwnd(visual, hwnd, _enable)))
+	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionAttachMouseWheelToHwnd(visual.Raw, hwnd, _enable)))
 }
 
 // DCompositionBoostCompositorClock wraps the raw DCompositionBoostCompositorClock call with idiomatic Go types.
@@ -38,20 +38,20 @@ func DCompositionBoostCompositorClock(enable bool) error {
 
 // DCompositionCreateDevice wraps the raw DCompositionCreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice
-func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionCreateDevice(dxgiDevice, iid, dcompositionDevice)))
+func DCompositionCreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionCreateDevice(dxgiDevice.Raw, iid, dcompositionDevice)))
 }
 
 // DCompositionCreateDevice2 wraps the raw DCompositionCreateDevice2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice2
-func DCompositionCreateDevice2(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionCreateDevice2(renderingDevice, iid, dcompositionDevice)))
+func DCompositionCreateDevice2(renderingDevice systemcomidiom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionCreateDevice2(renderingDevice.Raw, iid, dcompositionDevice)))
 }
 
 // DCompositionCreateDevice3 wraps the raw DCompositionCreateDevice3 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice3
-func DCompositionCreateDevice3(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionCreateDevice3(renderingDevice, iid, dcompositionDevice)))
+func DCompositionCreateDevice3(renderingDevice systemcomidiom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionCreateDevice3(renderingDevice.Raw, iid, dcompositionDevice)))
 }
 
 // DCompositionCreateSurfaceHandle wraps the raw DCompositionCreateSurfaceHandle call with idiomatic Go types.

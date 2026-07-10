@@ -43,8 +43,8 @@ func WrapICorProfilerCallback(raw *systemdiagnosticsclrprofiling.ICorProfilerCal
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ICorProfilerCallback) Initialize(pICorProfilerInfoUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pICorProfilerInfoUnk)))
+func (self ICorProfilerCallback) Initialize(pICorProfilerInfoUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pICorProfilerInfoUnk.Raw)))
 }
 
 // Shutdown wraps the raw Shutdown call.
@@ -494,8 +494,8 @@ func WrapICorProfilerCallback3(raw *systemdiagnosticsclrprofiling.ICorProfilerCa
 }
 
 // InitializeForAttach wraps the raw InitializeForAttach call.
-func (self ICorProfilerCallback3) InitializeForAttach(pCorProfilerInfoUnk *systemcom.IUnknown, pvClientData unsafe.Pointer, cbClientData uint32) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeForAttach(pCorProfilerInfoUnk, pvClientData, cbClientData)))
+func (self ICorProfilerCallback3) InitializeForAttach(pCorProfilerInfoUnk systemcomidiom.IUnknown, pvClientData unsafe.Pointer, cbClientData uint32) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeForAttach(pCorProfilerInfoUnk.Raw, pvClientData, cbClientData)))
 }
 
 // ProfilerAttachComplete wraps the raw ProfilerAttachComplete call.
@@ -526,8 +526,8 @@ func (self ICorProfilerCallback4) ReJITCompilationStarted(functionId uintptr, re
 }
 
 // GetReJITParameters wraps the raw GetReJITParameters call.
-func (self ICorProfilerCallback4) GetReJITParameters(moduleId uintptr, methodId uint32, pFunctionControl *systemdiagnosticsclrprofiling.ICorProfilerFunctionControl) error {
-	return win32.HRESULTError(int32(self.Raw.GetReJITParameters(moduleId, methodId, pFunctionControl)))
+func (self ICorProfilerCallback4) GetReJITParameters(moduleId uintptr, methodId uint32, pFunctionControl ICorProfilerFunctionControl) error {
+	return win32.HRESULTError(int32(self.Raw.GetReJITParameters(moduleId, methodId, pFunctionControl.Raw)))
 }
 
 // ReJITCompilationFinished wraps the raw ReJITCompilationFinished call.
@@ -579,9 +579,9 @@ func WrapICorProfilerCallback6(raw *systemdiagnosticsclrprofiling.ICorProfilerCa
 }
 
 // GetAssemblyReferences wraps the raw GetAssemblyReferences call.
-func (self ICorProfilerCallback6) GetAssemblyReferences(wszAssemblyPath string, pAsmRefProvider *systemdiagnosticsclrprofiling.ICorProfilerAssemblyReferenceProvider) error {
+func (self ICorProfilerCallback6) GetAssemblyReferences(wszAssemblyPath string, pAsmRefProvider ICorProfilerAssemblyReferenceProvider) error {
 	_wszAssemblyPath := win32.UTF16Ptr(wszAssemblyPath)
-	return win32.HRESULTError(int32(self.Raw.GetAssemblyReferences(foundation.PWSTR(_wszAssemblyPath), pAsmRefProvider)))
+	return win32.HRESULTError(int32(self.Raw.GetAssemblyReferences(foundation.PWSTR(_wszAssemblyPath), pAsmRefProvider.Raw)))
 }
 
 // ICorProfilerCallback7 is an idiomatic wrapper over the raw COM interface System.Diagnostics.ClrProfiling.ICorProfilerCallback7 with error-returning methods.

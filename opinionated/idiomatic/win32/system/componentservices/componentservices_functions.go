@@ -10,24 +10,31 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomponentservices "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/componentservices"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CoCreateActivity wraps the raw CoCreateActivity call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-cocreateactivity
-func CoCreateActivity(pIUnknown *systemcom.IUnknown, riid *win32.GUID, ppObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemcomponentservices.CoCreateActivity(pIUnknown, riid, ppObj)))
+func CoCreateActivity(pIUnknown systemcomidiom.IUnknown, riid *win32.GUID, ppObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemcomponentservices.CoCreateActivity(pIUnknown.Raw, riid, ppObj)))
 }
 
 // CoEnterServiceDomain wraps the raw CoEnterServiceDomain call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-coenterservicedomain
-func CoEnterServiceDomain(pConfigObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcomponentservices.CoEnterServiceDomain(pConfigObject)))
+func CoEnterServiceDomain(pConfigObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(systemcomponentservices.CoEnterServiceDomain(pConfigObject.Raw)))
 }
 
 // CoGetDefaultContext wraps the raw CoGetDefaultContext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetdefaultcontext
 func CoGetDefaultContext(aptType systemcom.APTTYPE, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	return win32.HRESULTError(int32(systemcomponentservices.CoGetDefaultContext(aptType, riid, ppv)))
+}
+
+// CoLeaveServiceDomain wraps the raw CoLeaveServiceDomain call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-coleaveservicedomain
+func CoLeaveServiceDomain(pUnkStatus systemcomidiom.IUnknown) {
+	systemcomponentservices.CoLeaveServiceDomain(pUnkStatus.Raw)
 }
 
 // GetDispenserManager wraps the raw GetDispenserManager call with idiomatic Go types.
@@ -52,4 +59,10 @@ func MTSCreateActivity(riid *win32.GUID, ppobj *unsafe.Pointer) error {
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-recyclesurrogate
 func RecycleSurrogate(lReasonCode int32) error {
 	return win32.HRESULTError(int32(systemcomponentservices.RecycleSurrogate(lReasonCode)))
+}
+
+// SafeRef wraps the raw SafeRef call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-saferef
+func SafeRef(rid *win32.GUID, pUnk systemcomidiom.IUnknown) unsafe.Pointer {
+	return systemcomponentservices.SafeRef(rid, pUnk.Raw)
 }

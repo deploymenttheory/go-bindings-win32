@@ -28,8 +28,8 @@ func WrapIUIApplication(raw *uiribbon.IUIApplication) IUIApplication {
 }
 
 // OnViewChanged wraps the raw OnViewChanged call.
-func (self IUIApplication) OnViewChanged(viewId uint32, typeID uiribbon.UI_VIEWTYPE, view *systemcom.IUnknown, verb uiribbon.UI_VIEWVERB, uReasonCode int32) error {
-	return win32.HRESULTError(int32(self.Raw.OnViewChanged(viewId, typeID, view, verb, uReasonCode)))
+func (self IUIApplication) OnViewChanged(viewId uint32, typeID uiribbon.UI_VIEWTYPE, view systemcomidiom.IUnknown, verb uiribbon.UI_VIEWVERB, uReasonCode int32) error {
+	return win32.HRESULTError(int32(self.Raw.OnViewChanged(viewId, typeID, view.Raw, verb, uReasonCode)))
 }
 
 // OnCreateUICommand wraps the raw OnCreateUICommand call.
@@ -38,8 +38,8 @@ func (self IUIApplication) OnCreateUICommand(commandId uint32, typeID uiribbon.U
 }
 
 // OnDestroyUICommand wraps the raw OnDestroyUICommand call.
-func (self IUIApplication) OnDestroyUICommand(commandId uint32, typeID uiribbon.UI_COMMANDTYPE, commandHandler *uiribbon.IUICommandHandler) error {
-	return win32.HRESULTError(int32(self.Raw.OnDestroyUICommand(commandId, typeID, commandHandler)))
+func (self IUIApplication) OnDestroyUICommand(commandId uint32, typeID uiribbon.UI_COMMANDTYPE, commandHandler IUICommandHandler) error {
+	return win32.HRESULTError(int32(self.Raw.OnDestroyUICommand(commandId, typeID, commandHandler.Raw)))
 }
 
 // IUICollection is an idiomatic wrapper over the raw COM interface UI.Ribbon.IUICollection with error-returning methods.
@@ -64,13 +64,13 @@ func (self IUICollection) GetItem(index uint32, item **systemcom.IUnknown) error
 }
 
 // Add wraps the raw Add call.
-func (self IUICollection) Add(item *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Add(item)))
+func (self IUICollection) Add(item systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Add(item.Raw)))
 }
 
 // Insert wraps the raw Insert call.
-func (self IUICollection) Insert(index uint32, item *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Insert(index, item)))
+func (self IUICollection) Insert(index uint32, item systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Insert(index, item.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -79,8 +79,8 @@ func (self IUICollection) RemoveAt(index uint32) error {
 }
 
 // Replace wraps the raw Replace call.
-func (self IUICollection) Replace(indexReplaced uint32, itemReplaceWith *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Replace(indexReplaced, itemReplaceWith)))
+func (self IUICollection) Replace(indexReplaced uint32, itemReplaceWith systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Replace(indexReplaced, itemReplaceWith.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -100,8 +100,8 @@ func WrapIUICollectionChangedEvent(raw *uiribbon.IUICollectionChangedEvent) IUIC
 }
 
 // OnChanged wraps the raw OnChanged call.
-func (self IUICollectionChangedEvent) OnChanged(action uiribbon.UI_COLLECTIONCHANGE, oldIndex uint32, oldItem *systemcom.IUnknown, newIndex uint32, newItem *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnChanged(action, oldIndex, oldItem, newIndex, newItem)))
+func (self IUICollectionChangedEvent) OnChanged(action uiribbon.UI_COLLECTIONCHANGE, oldIndex uint32, oldItem systemcomidiom.IUnknown, newIndex uint32, newItem systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnChanged(action, oldIndex, oldItem.Raw, newIndex, newItem.Raw)))
 }
 
 // IUICommandHandler is an idiomatic wrapper over the raw COM interface UI.Ribbon.IUICommandHandler with error-returning methods.
@@ -116,8 +116,8 @@ func WrapIUICommandHandler(raw *uiribbon.IUICommandHandler) IUICommandHandler {
 }
 
 // Execute wraps the raw Execute call.
-func (self IUICommandHandler) Execute(commandId uint32, verb uiribbon.UI_EXECUTIONVERB, key *foundation.PROPERTYKEY, currentValue *systemcomstructuredstorage.PROPVARIANT, commandExecutionProperties *uiribbon.IUISimplePropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Execute(commandId, verb, key, currentValue, commandExecutionProperties)))
+func (self IUICommandHandler) Execute(commandId uint32, verb uiribbon.UI_EXECUTIONVERB, key *foundation.PROPERTYKEY, currentValue *systemcomstructuredstorage.PROPVARIANT, commandExecutionProperties IUISimplePropertySet) error {
+	return win32.HRESULTError(int32(self.Raw.Execute(commandId, verb, key, currentValue, commandExecutionProperties.Raw)))
 }
 
 // UpdateProperty wraps the raw UpdateProperty call.
@@ -169,8 +169,8 @@ func WrapIUIEventingManager(raw *uiribbon.IUIEventingManager) IUIEventingManager
 }
 
 // SetEventLogger wraps the raw SetEventLogger call.
-func (self IUIEventingManager) SetEventLogger(eventLogger *uiribbon.IUIEventLogger) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventLogger(eventLogger)))
+func (self IUIEventingManager) SetEventLogger(eventLogger IUIEventLogger) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventLogger(eventLogger.Raw)))
 }
 
 // IUIFramework is an idiomatic wrapper over the raw COM interface UI.Ribbon.IUIFramework with error-returning methods.
@@ -185,8 +185,8 @@ func WrapIUIFramework(raw *uiribbon.IUIFramework) IUIFramework {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IUIFramework) Initialize(frameWnd foundation.HWND, application *uiribbon.IUIApplication) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(frameWnd, application)))
+func (self IUIFramework) Initialize(frameWnd foundation.HWND, application IUIApplication) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(frameWnd, application.Raw)))
 }
 
 // Destroy wraps the raw Destroy call.
@@ -279,13 +279,13 @@ func (self IUIRibbon) GetHeight(cy *uint32) error {
 }
 
 // LoadSettingsFromStream wraps the raw LoadSettingsFromStream call.
-func (self IUIRibbon) LoadSettingsFromStream(pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.LoadSettingsFromStream(pStream)))
+func (self IUIRibbon) LoadSettingsFromStream(pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.LoadSettingsFromStream(pStream.Raw)))
 }
 
 // SaveSettingsToStream wraps the raw SaveSettingsToStream call.
-func (self IUIRibbon) SaveSettingsToStream(pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SaveSettingsToStream(pStream)))
+func (self IUIRibbon) SaveSettingsToStream(pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SaveSettingsToStream(pStream.Raw)))
 }
 
 // IUISimplePropertySet is an idiomatic wrapper over the raw COM interface UI.Ribbon.IUISimplePropertySet with error-returning methods.

@@ -113,9 +113,9 @@ func (self IAssemblyName) GetDisplayName(szDisplayName foundation.PWSTR, pccDisp
 }
 
 // Reserved wraps the raw Reserved call.
-func (self IAssemblyName) Reserved(refIID *win32.GUID, pUnkReserved1 *systemcom.IUnknown, pUnkReserved2 *systemcom.IUnknown, szReserved string, llReserved int64, pvReserved unsafe.Pointer, cbReserved uint32, ppReserved *unsafe.Pointer) error {
+func (self IAssemblyName) Reserved(refIID *win32.GUID, pUnkReserved1 systemcomidiom.IUnknown, pUnkReserved2 systemcomidiom.IUnknown, szReserved string, llReserved int64, pvReserved unsafe.Pointer, cbReserved uint32, ppReserved *unsafe.Pointer) error {
 	_szReserved := win32.UTF16Ptr(szReserved)
-	return win32.HRESULTError(int32(self.Raw.Reserved(refIID, pUnkReserved1, pUnkReserved2, foundation.PWSTR(_szReserved), llReserved, pvReserved, cbReserved, ppReserved)))
+	return win32.HRESULTError(int32(self.Raw.Reserved(refIID, pUnkReserved1.Raw, pUnkReserved2.Raw, foundation.PWSTR(_szReserved), llReserved, pvReserved, cbReserved, ppReserved)))
 }
 
 // GetName wraps the raw GetName call.
@@ -129,8 +129,8 @@ func (self IAssemblyName) GetVersion(pdwVersionHi *uint32, pdwVersionLow *uint32
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IAssemblyName) IsEqual(pName *systemapplicationinstallationandservicing.IAssemblyName, dwCmpFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pName, dwCmpFlags)))
+func (self IAssemblyName) IsEqual(pName IAssemblyName, dwCmpFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pName.Raw, dwCmpFlags)))
 }
 
 // Clone wraps the raw Clone call.

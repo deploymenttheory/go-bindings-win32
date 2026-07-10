@@ -10,19 +10,19 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	graphicsdirect2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d"
 	graphicsdirect2dcommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d/common"
-	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
 )
 
 // D2D1CreateDevice wraps the raw D2D1CreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1createdevice
-func D2D1CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, creationProperties *graphicsdirect2d.D2D1_CREATION_PROPERTIES, d2dDevice **graphicsdirect2d.ID2D1Device) error {
-	return win32.HRESULTError(int32(graphicsdirect2d.D2D1CreateDevice(dxgiDevice, creationProperties, d2dDevice)))
+func D2D1CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, creationProperties *graphicsdirect2d.D2D1_CREATION_PROPERTIES, d2dDevice **graphicsdirect2d.ID2D1Device) error {
+	return win32.HRESULTError(int32(graphicsdirect2d.D2D1CreateDevice(dxgiDevice.Raw, creationProperties, d2dDevice)))
 }
 
 // D2D1CreateDeviceContext wraps the raw D2D1CreateDeviceContext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1createdevicecontext
-func D2D1CreateDeviceContext(dxgiSurface *graphicsdxgi.IDXGISurface, creationProperties *graphicsdirect2d.D2D1_CREATION_PROPERTIES, d2dDeviceContext **graphicsdirect2d.ID2D1DeviceContext) error {
-	return win32.HRESULTError(int32(graphicsdirect2d.D2D1CreateDeviceContext(dxgiSurface, creationProperties, d2dDeviceContext)))
+func D2D1CreateDeviceContext(dxgiSurface graphicsdxgiidiom.IDXGISurface, creationProperties *graphicsdirect2d.D2D1_CREATION_PROPERTIES, d2dDeviceContext **graphicsdirect2d.ID2D1DeviceContext) error {
+	return win32.HRESULTError(int32(graphicsdirect2d.D2D1CreateDeviceContext(dxgiSurface.Raw, creationProperties, d2dDeviceContext)))
 }
 
 // D2D1CreateFactory wraps the raw D2D1CreateFactory call with idiomatic Go types.

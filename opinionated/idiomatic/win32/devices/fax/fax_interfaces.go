@@ -148,58 +148,58 @@ func WrapIFaxAccountNotify(raw *devicesfax.IFaxAccountNotify) IFaxAccountNotify 
 }
 
 // OnIncomingJobAdded wraps the raw OnIncomingJobAdded call.
-func (self IFaxAccountNotify) OnIncomingJobAdded(pFaxAccount *devicesfax.IFaxAccount, bstrJobId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingJobAdded(pFaxAccount, bstrJobId)))
+func (self IFaxAccountNotify) OnIncomingJobAdded(pFaxAccount IFaxAccount, bstrJobId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingJobAdded(pFaxAccount.Raw, bstrJobId)))
 }
 
 // OnIncomingJobRemoved wraps the raw OnIncomingJobRemoved call.
-func (self IFaxAccountNotify) OnIncomingJobRemoved(pFaxAccount *devicesfax.IFaxAccount, bstrJobId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingJobRemoved(pFaxAccount, bstrJobId)))
+func (self IFaxAccountNotify) OnIncomingJobRemoved(pFaxAccount IFaxAccount, bstrJobId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingJobRemoved(pFaxAccount.Raw, bstrJobId)))
 }
 
 // OnIncomingJobChanged wraps the raw OnIncomingJobChanged call.
-func (self IFaxAccountNotify) OnIncomingJobChanged(pFaxAccount *devicesfax.IFaxAccount, bstrJobId foundation.BSTR, pJobStatus *devicesfax.IFaxJobStatus) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingJobChanged(pFaxAccount, bstrJobId, pJobStatus)))
+func (self IFaxAccountNotify) OnIncomingJobChanged(pFaxAccount IFaxAccount, bstrJobId foundation.BSTR, pJobStatus IFaxJobStatus) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingJobChanged(pFaxAccount.Raw, bstrJobId, pJobStatus.Raw)))
 }
 
 // OnOutgoingJobAdded wraps the raw OnOutgoingJobAdded call.
-func (self IFaxAccountNotify) OnOutgoingJobAdded(pFaxAccount *devicesfax.IFaxAccount, bstrJobId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobAdded(pFaxAccount, bstrJobId)))
+func (self IFaxAccountNotify) OnOutgoingJobAdded(pFaxAccount IFaxAccount, bstrJobId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobAdded(pFaxAccount.Raw, bstrJobId)))
 }
 
 // OnOutgoingJobRemoved wraps the raw OnOutgoingJobRemoved call.
-func (self IFaxAccountNotify) OnOutgoingJobRemoved(pFaxAccount *devicesfax.IFaxAccount, bstrJobId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobRemoved(pFaxAccount, bstrJobId)))
+func (self IFaxAccountNotify) OnOutgoingJobRemoved(pFaxAccount IFaxAccount, bstrJobId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobRemoved(pFaxAccount.Raw, bstrJobId)))
 }
 
 // OnOutgoingJobChanged wraps the raw OnOutgoingJobChanged call.
-func (self IFaxAccountNotify) OnOutgoingJobChanged(pFaxAccount *devicesfax.IFaxAccount, bstrJobId foundation.BSTR, pJobStatus *devicesfax.IFaxJobStatus) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobChanged(pFaxAccount, bstrJobId, pJobStatus)))
+func (self IFaxAccountNotify) OnOutgoingJobChanged(pFaxAccount IFaxAccount, bstrJobId foundation.BSTR, pJobStatus IFaxJobStatus) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobChanged(pFaxAccount.Raw, bstrJobId, pJobStatus.Raw)))
 }
 
 // OnIncomingMessageAdded wraps the raw OnIncomingMessageAdded call.
-func (self IFaxAccountNotify) OnIncomingMessageAdded(pFaxAccount *devicesfax.IFaxAccount, bstrMessageId foundation.BSTR, fAddedToReceiveFolder foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingMessageAdded(pFaxAccount, bstrMessageId, fAddedToReceiveFolder)))
+func (self IFaxAccountNotify) OnIncomingMessageAdded(pFaxAccount IFaxAccount, bstrMessageId foundation.BSTR, fAddedToReceiveFolder foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingMessageAdded(pFaxAccount.Raw, bstrMessageId, fAddedToReceiveFolder)))
 }
 
 // OnIncomingMessageRemoved wraps the raw OnIncomingMessageRemoved call.
-func (self IFaxAccountNotify) OnIncomingMessageRemoved(pFaxAccount *devicesfax.IFaxAccount, bstrMessageId foundation.BSTR, fRemovedFromReceiveFolder foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingMessageRemoved(pFaxAccount, bstrMessageId, fRemovedFromReceiveFolder)))
+func (self IFaxAccountNotify) OnIncomingMessageRemoved(pFaxAccount IFaxAccount, bstrMessageId foundation.BSTR, fRemovedFromReceiveFolder foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingMessageRemoved(pFaxAccount.Raw, bstrMessageId, fRemovedFromReceiveFolder)))
 }
 
 // OnOutgoingMessageAdded wraps the raw OnOutgoingMessageAdded call.
-func (self IFaxAccountNotify) OnOutgoingMessageAdded(pFaxAccount *devicesfax.IFaxAccount, bstrMessageId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingMessageAdded(pFaxAccount, bstrMessageId)))
+func (self IFaxAccountNotify) OnOutgoingMessageAdded(pFaxAccount IFaxAccount, bstrMessageId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingMessageAdded(pFaxAccount.Raw, bstrMessageId)))
 }
 
 // OnOutgoingMessageRemoved wraps the raw OnOutgoingMessageRemoved call.
-func (self IFaxAccountNotify) OnOutgoingMessageRemoved(pFaxAccount *devicesfax.IFaxAccount, bstrMessageId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingMessageRemoved(pFaxAccount, bstrMessageId)))
+func (self IFaxAccountNotify) OnOutgoingMessageRemoved(pFaxAccount IFaxAccount, bstrMessageId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingMessageRemoved(pFaxAccount.Raw, bstrMessageId)))
 }
 
 // OnServerShutDown wraps the raw OnServerShutDown call.
-func (self IFaxAccountNotify) OnServerShutDown(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnServerShutDown(pFaxServer)))
+func (self IFaxAccountNotify) OnServerShutDown(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnServerShutDown(pFaxServer.Raw)))
 }
 
 // IFaxAccountOutgoingArchive is an idiomatic wrapper over the raw COM interface Devices.Fax.IFaxAccountOutgoingArchive with error-returning methods.
@@ -1056,8 +1056,8 @@ func (self IFaxDocument) Get_TapiConnection(ppTapiConnection **systemcom.IDispat
 }
 
 // Putref_TapiConnection wraps the raw Putref_TapiConnection call.
-func (self IFaxDocument) Putref_TapiConnection(pTapiConnection *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_TapiConnection(pTapiConnection)))
+func (self IFaxDocument) Putref_TapiConnection(pTapiConnection systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_TapiConnection(pTapiConnection.Raw)))
 }
 
 // Submit wraps the raw Submit call.
@@ -1066,8 +1066,8 @@ func (self IFaxDocument) Submit(bstrFaxServerName foundation.BSTR, pvFaxOutgoing
 }
 
 // ConnectedSubmit wraps the raw ConnectedSubmit call.
-func (self IFaxDocument) ConnectedSubmit(pFaxServer *devicesfax.IFaxServer, pvFaxOutgoingJobIDs *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectedSubmit(pFaxServer, pvFaxOutgoingJobIDs)))
+func (self IFaxDocument) ConnectedSubmit(pFaxServer IFaxServer, pvFaxOutgoingJobIDs *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectedSubmit(pFaxServer.Raw, pvFaxOutgoingJobIDs)))
 }
 
 // Get_AttachFaxToReceipt wraps the raw Get_AttachFaxToReceipt call.
@@ -1107,8 +1107,8 @@ func (self IFaxDocument2) Submit2(bstrFaxServerName foundation.BSTR, pvFaxOutgoi
 }
 
 // ConnectedSubmit2 wraps the raw ConnectedSubmit2 call.
-func (self IFaxDocument2) ConnectedSubmit2(pFaxServer *devicesfax.IFaxServer, pvFaxOutgoingJobIDs *systemvariant.VARIANT, plErrorBodyFile *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectedSubmit2(pFaxServer, pvFaxOutgoingJobIDs, plErrorBodyFile)))
+func (self IFaxDocument2) ConnectedSubmit2(pFaxServer IFaxServer, pvFaxOutgoingJobIDs *systemvariant.VARIANT, plErrorBodyFile *int32) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectedSubmit2(pFaxServer.Raw, pvFaxOutgoingJobIDs, plErrorBodyFile)))
 }
 
 // IFaxEventLogging is an idiomatic wrapper over the raw COM interface Devices.Fax.IFaxEventLogging with error-returning methods.
@@ -3411,133 +3411,133 @@ func WrapIFaxServerNotify2(raw *devicesfax.IFaxServerNotify2) IFaxServerNotify2 
 }
 
 // OnIncomingJobAdded wraps the raw OnIncomingJobAdded call.
-func (self IFaxServerNotify2) OnIncomingJobAdded(pFaxServer *devicesfax.IFaxServer2, bstrJobId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingJobAdded(pFaxServer, bstrJobId)))
+func (self IFaxServerNotify2) OnIncomingJobAdded(pFaxServer IFaxServer2, bstrJobId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingJobAdded(pFaxServer.Raw, bstrJobId)))
 }
 
 // OnIncomingJobRemoved wraps the raw OnIncomingJobRemoved call.
-func (self IFaxServerNotify2) OnIncomingJobRemoved(pFaxServer *devicesfax.IFaxServer2, bstrJobId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingJobRemoved(pFaxServer, bstrJobId)))
+func (self IFaxServerNotify2) OnIncomingJobRemoved(pFaxServer IFaxServer2, bstrJobId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingJobRemoved(pFaxServer.Raw, bstrJobId)))
 }
 
 // OnIncomingJobChanged wraps the raw OnIncomingJobChanged call.
-func (self IFaxServerNotify2) OnIncomingJobChanged(pFaxServer *devicesfax.IFaxServer2, bstrJobId foundation.BSTR, pJobStatus *devicesfax.IFaxJobStatus) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingJobChanged(pFaxServer, bstrJobId, pJobStatus)))
+func (self IFaxServerNotify2) OnIncomingJobChanged(pFaxServer IFaxServer2, bstrJobId foundation.BSTR, pJobStatus IFaxJobStatus) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingJobChanged(pFaxServer.Raw, bstrJobId, pJobStatus.Raw)))
 }
 
 // OnOutgoingJobAdded wraps the raw OnOutgoingJobAdded call.
-func (self IFaxServerNotify2) OnOutgoingJobAdded(pFaxServer *devicesfax.IFaxServer2, bstrJobId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobAdded(pFaxServer, bstrJobId)))
+func (self IFaxServerNotify2) OnOutgoingJobAdded(pFaxServer IFaxServer2, bstrJobId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobAdded(pFaxServer.Raw, bstrJobId)))
 }
 
 // OnOutgoingJobRemoved wraps the raw OnOutgoingJobRemoved call.
-func (self IFaxServerNotify2) OnOutgoingJobRemoved(pFaxServer *devicesfax.IFaxServer2, bstrJobId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobRemoved(pFaxServer, bstrJobId)))
+func (self IFaxServerNotify2) OnOutgoingJobRemoved(pFaxServer IFaxServer2, bstrJobId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobRemoved(pFaxServer.Raw, bstrJobId)))
 }
 
 // OnOutgoingJobChanged wraps the raw OnOutgoingJobChanged call.
-func (self IFaxServerNotify2) OnOutgoingJobChanged(pFaxServer *devicesfax.IFaxServer2, bstrJobId foundation.BSTR, pJobStatus *devicesfax.IFaxJobStatus) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobChanged(pFaxServer, bstrJobId, pJobStatus)))
+func (self IFaxServerNotify2) OnOutgoingJobChanged(pFaxServer IFaxServer2, bstrJobId foundation.BSTR, pJobStatus IFaxJobStatus) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingJobChanged(pFaxServer.Raw, bstrJobId, pJobStatus.Raw)))
 }
 
 // OnIncomingMessageAdded wraps the raw OnIncomingMessageAdded call.
-func (self IFaxServerNotify2) OnIncomingMessageAdded(pFaxServer *devicesfax.IFaxServer2, bstrMessageId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingMessageAdded(pFaxServer, bstrMessageId)))
+func (self IFaxServerNotify2) OnIncomingMessageAdded(pFaxServer IFaxServer2, bstrMessageId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingMessageAdded(pFaxServer.Raw, bstrMessageId)))
 }
 
 // OnIncomingMessageRemoved wraps the raw OnIncomingMessageRemoved call.
-func (self IFaxServerNotify2) OnIncomingMessageRemoved(pFaxServer *devicesfax.IFaxServer2, bstrMessageId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingMessageRemoved(pFaxServer, bstrMessageId)))
+func (self IFaxServerNotify2) OnIncomingMessageRemoved(pFaxServer IFaxServer2, bstrMessageId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingMessageRemoved(pFaxServer.Raw, bstrMessageId)))
 }
 
 // OnOutgoingMessageAdded wraps the raw OnOutgoingMessageAdded call.
-func (self IFaxServerNotify2) OnOutgoingMessageAdded(pFaxServer *devicesfax.IFaxServer2, bstrMessageId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingMessageAdded(pFaxServer, bstrMessageId)))
+func (self IFaxServerNotify2) OnOutgoingMessageAdded(pFaxServer IFaxServer2, bstrMessageId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingMessageAdded(pFaxServer.Raw, bstrMessageId)))
 }
 
 // OnOutgoingMessageRemoved wraps the raw OnOutgoingMessageRemoved call.
-func (self IFaxServerNotify2) OnOutgoingMessageRemoved(pFaxServer *devicesfax.IFaxServer2, bstrMessageId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingMessageRemoved(pFaxServer, bstrMessageId)))
+func (self IFaxServerNotify2) OnOutgoingMessageRemoved(pFaxServer IFaxServer2, bstrMessageId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingMessageRemoved(pFaxServer.Raw, bstrMessageId)))
 }
 
 // OnReceiptOptionsChange wraps the raw OnReceiptOptionsChange call.
-func (self IFaxServerNotify2) OnReceiptOptionsChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnReceiptOptionsChange(pFaxServer)))
+func (self IFaxServerNotify2) OnReceiptOptionsChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnReceiptOptionsChange(pFaxServer.Raw)))
 }
 
 // OnActivityLoggingConfigChange wraps the raw OnActivityLoggingConfigChange call.
-func (self IFaxServerNotify2) OnActivityLoggingConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnActivityLoggingConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnActivityLoggingConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnActivityLoggingConfigChange(pFaxServer.Raw)))
 }
 
 // OnSecurityConfigChange wraps the raw OnSecurityConfigChange call.
-func (self IFaxServerNotify2) OnSecurityConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnSecurityConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnSecurityConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnSecurityConfigChange(pFaxServer.Raw)))
 }
 
 // OnEventLoggingConfigChange wraps the raw OnEventLoggingConfigChange call.
-func (self IFaxServerNotify2) OnEventLoggingConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnEventLoggingConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnEventLoggingConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnEventLoggingConfigChange(pFaxServer.Raw)))
 }
 
 // OnOutgoingQueueConfigChange wraps the raw OnOutgoingQueueConfigChange call.
-func (self IFaxServerNotify2) OnOutgoingQueueConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingQueueConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnOutgoingQueueConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingQueueConfigChange(pFaxServer.Raw)))
 }
 
 // OnOutgoingArchiveConfigChange wraps the raw OnOutgoingArchiveConfigChange call.
-func (self IFaxServerNotify2) OnOutgoingArchiveConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutgoingArchiveConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnOutgoingArchiveConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutgoingArchiveConfigChange(pFaxServer.Raw)))
 }
 
 // OnIncomingArchiveConfigChange wraps the raw OnIncomingArchiveConfigChange call.
-func (self IFaxServerNotify2) OnIncomingArchiveConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnIncomingArchiveConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnIncomingArchiveConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnIncomingArchiveConfigChange(pFaxServer.Raw)))
 }
 
 // OnDevicesConfigChange wraps the raw OnDevicesConfigChange call.
-func (self IFaxServerNotify2) OnDevicesConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnDevicesConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnDevicesConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnDevicesConfigChange(pFaxServer.Raw)))
 }
 
 // OnOutboundRoutingGroupsConfigChange wraps the raw OnOutboundRoutingGroupsConfigChange call.
-func (self IFaxServerNotify2) OnOutboundRoutingGroupsConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutboundRoutingGroupsConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnOutboundRoutingGroupsConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutboundRoutingGroupsConfigChange(pFaxServer.Raw)))
 }
 
 // OnOutboundRoutingRulesConfigChange wraps the raw OnOutboundRoutingRulesConfigChange call.
-func (self IFaxServerNotify2) OnOutboundRoutingRulesConfigChange(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnOutboundRoutingRulesConfigChange(pFaxServer)))
+func (self IFaxServerNotify2) OnOutboundRoutingRulesConfigChange(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnOutboundRoutingRulesConfigChange(pFaxServer.Raw)))
 }
 
 // OnServerActivityChange wraps the raw OnServerActivityChange call.
-func (self IFaxServerNotify2) OnServerActivityChange(pFaxServer *devicesfax.IFaxServer2, lIncomingMessages int32, lRoutingMessages int32, lOutgoingMessages int32, lQueuedMessages int32) error {
-	return win32.HRESULTError(int32(self.Raw.OnServerActivityChange(pFaxServer, lIncomingMessages, lRoutingMessages, lOutgoingMessages, lQueuedMessages)))
+func (self IFaxServerNotify2) OnServerActivityChange(pFaxServer IFaxServer2, lIncomingMessages int32, lRoutingMessages int32, lOutgoingMessages int32, lQueuedMessages int32) error {
+	return win32.HRESULTError(int32(self.Raw.OnServerActivityChange(pFaxServer.Raw, lIncomingMessages, lRoutingMessages, lOutgoingMessages, lQueuedMessages)))
 }
 
 // OnQueuesStatusChange wraps the raw OnQueuesStatusChange call.
-func (self IFaxServerNotify2) OnQueuesStatusChange(pFaxServer *devicesfax.IFaxServer2, bOutgoingQueueBlocked foundation.VARIANT_BOOL, bOutgoingQueuePaused foundation.VARIANT_BOOL, bIncomingQueueBlocked foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnQueuesStatusChange(pFaxServer, bOutgoingQueueBlocked, bOutgoingQueuePaused, bIncomingQueueBlocked)))
+func (self IFaxServerNotify2) OnQueuesStatusChange(pFaxServer IFaxServer2, bOutgoingQueueBlocked foundation.VARIANT_BOOL, bOutgoingQueuePaused foundation.VARIANT_BOOL, bIncomingQueueBlocked foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnQueuesStatusChange(pFaxServer.Raw, bOutgoingQueueBlocked, bOutgoingQueuePaused, bIncomingQueueBlocked)))
 }
 
 // OnNewCall wraps the raw OnNewCall call.
-func (self IFaxServerNotify2) OnNewCall(pFaxServer *devicesfax.IFaxServer2, lCallId int32, lDeviceId int32, bstrCallerId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.OnNewCall(pFaxServer, lCallId, lDeviceId, bstrCallerId)))
+func (self IFaxServerNotify2) OnNewCall(pFaxServer IFaxServer2, lCallId int32, lDeviceId int32, bstrCallerId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.OnNewCall(pFaxServer.Raw, lCallId, lDeviceId, bstrCallerId)))
 }
 
 // OnServerShutDown wraps the raw OnServerShutDown call.
-func (self IFaxServerNotify2) OnServerShutDown(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnServerShutDown(pFaxServer)))
+func (self IFaxServerNotify2) OnServerShutDown(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnServerShutDown(pFaxServer.Raw)))
 }
 
 // OnDeviceStatusChange wraps the raw OnDeviceStatusChange call.
-func (self IFaxServerNotify2) OnDeviceStatusChange(pFaxServer *devicesfax.IFaxServer2, lDeviceId int32, bPoweredOff foundation.VARIANT_BOOL, bSending foundation.VARIANT_BOOL, bReceiving foundation.VARIANT_BOOL, bRinging foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnDeviceStatusChange(pFaxServer, lDeviceId, bPoweredOff, bSending, bReceiving, bRinging)))
+func (self IFaxServerNotify2) OnDeviceStatusChange(pFaxServer IFaxServer2, lDeviceId int32, bPoweredOff foundation.VARIANT_BOOL, bSending foundation.VARIANT_BOOL, bReceiving foundation.VARIANT_BOOL, bRinging foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnDeviceStatusChange(pFaxServer.Raw, lDeviceId, bPoweredOff, bSending, bReceiving, bRinging)))
 }
 
 // OnGeneralServerConfigChanged wraps the raw OnGeneralServerConfigChanged call.
-func (self IFaxServerNotify2) OnGeneralServerConfigChanged(pFaxServer *devicesfax.IFaxServer2) error {
-	return win32.HRESULTError(int32(self.Raw.OnGeneralServerConfigChanged(pFaxServer)))
+func (self IFaxServerNotify2) OnGeneralServerConfigChanged(pFaxServer IFaxServer2) error {
+	return win32.HRESULTError(int32(self.Raw.OnGeneralServerConfigChanged(pFaxServer.Raw)))
 }
 
 // IStiDevice is an idiomatic wrapper over the raw COM interface Devices.Fax.IStiDevice with error-returning methods.
@@ -3717,8 +3717,8 @@ func WrapIStiUSD(raw *devicesfax.IStiUSD) IStiUSD {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IStiUSD) Initialize(pHelDcb *devicesfax.IStiDeviceControl, dwStiVersion uint32, hParametersKey systemregistry.HKEY) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pHelDcb, dwStiVersion, hParametersKey)))
+func (self IStiUSD) Initialize(pHelDcb IStiDeviceControl, dwStiVersion uint32, hParametersKey systemregistry.HKEY) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pHelDcb.Raw, dwStiVersion, hParametersKey)))
 }
 
 // GetCapabilities wraps the raw GetCapabilities call.
@@ -3824,9 +3824,9 @@ func (self IStillImageW) GetDeviceInfo(pwszDeviceName string, ppBuffer *unsafe.P
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self IStillImageW) CreateDevice(pwszDeviceName string, dwMode uint32, pDevice **devicesfax.IStiDevice, punkOuter *systemcom.IUnknown) error {
+func (self IStillImageW) CreateDevice(pwszDeviceName string, dwMode uint32, pDevice **devicesfax.IStiDevice, punkOuter systemcomidiom.IUnknown) error {
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(foundation.PWSTR(_pwszDeviceName), dwMode, pDevice, punkOuter)))
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(foundation.PWSTR(_pwszDeviceName), dwMode, pDevice, punkOuter.Raw)))
 }
 
 // GetDeviceValue wraps the raw GetDeviceValue call.

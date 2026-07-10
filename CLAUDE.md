@@ -175,6 +175,14 @@ The raw tier records each emitted (deduped, non-skipped) COM method name so
 the wrapper calls the exact raw method; base embedding mirrors the raw tier's
 decision (severed cycle edges → rootless wrapper). ~43,600 wrappers.
 
+COM interface **parameters** use idiomatic wrapper types, not raw pointers:
+an input COM param takes the wrapper value and forwards its `.Raw` to the
+vtable call; an `[out,retval]` COM param is elevated to a wrapper return
+value via `Wrap<Interface>(...)`. Cross-namespace wrappers import the peer
+idiomatic package under an `…idiom` alias (the graph stays acyclic because
+it mirrors the already-cycle-broken raw graph). Falls back to the raw
+pointer when the peer wrapper was not emitted.
+
 ### Architecture support
 
 Generated files carry `//go:build windows && (amd64 || arm64)`

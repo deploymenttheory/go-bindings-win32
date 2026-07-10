@@ -8,19 +8,25 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	dataxmlmsxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/msxml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securityextensibleauthenticationprotocol "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/extensibleauthenticationprotocol"
+	dataxmlmsxmlidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/data/xml/msxml"
 )
+
+// EapHostPeerConfigXml2Blob wraps the raw EapHostPeerConfigXml2Blob call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerconfigxml2blob
+func EapHostPeerConfigXml2Blob(dwFlags uint32, pConfigDoc dataxmlmsxmlidiom.IXMLDOMNode, pdwSizeOfConfigOut *uint32, ppConfigOut **byte, pEapMethodType *securityextensibleauthenticationprotocol.EAP_METHOD_TYPE, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR) uint32 {
+	return securityextensibleauthenticationprotocol.EapHostPeerConfigXml2Blob(dwFlags, pConfigDoc.Raw, pdwSizeOfConfigOut, ppConfigOut, pEapMethodType, ppEapError)
+}
 
 // EapHostPeerCredentialsXml2Blob wraps the raw EapHostPeerCredentialsXml2Blob call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeercredentialsxml2blob
-func EapHostPeerCredentialsXml2Blob(dwFlags uint32, pCredentialsDoc *dataxmlmsxml.IXMLDOMNode, pConfigIn []byte, pdwSizeOfCredentialsOut *uint32, ppCredentialsOut **byte, pEapMethodType *securityextensibleauthenticationprotocol.EAP_METHOD_TYPE, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR) uint32 {
+func EapHostPeerCredentialsXml2Blob(dwFlags uint32, pCredentialsDoc dataxmlmsxmlidiom.IXMLDOMNode, pConfigIn []byte, pdwSizeOfCredentialsOut *uint32, ppCredentialsOut **byte, pEapMethodType *securityextensibleauthenticationprotocol.EAP_METHOD_TYPE, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR) uint32 {
 	var _pConfigIn *byte
 	if len(pConfigIn) > 0 {
 		_pConfigIn = &pConfigIn[0]
 	}
-	return securityextensibleauthenticationprotocol.EapHostPeerCredentialsXml2Blob(dwFlags, pCredentialsDoc, uint32(len(pConfigIn)), _pConfigIn, pdwSizeOfCredentialsOut, ppCredentialsOut, pEapMethodType, ppEapError)
+	return securityextensibleauthenticationprotocol.EapHostPeerCredentialsXml2Blob(dwFlags, pCredentialsDoc.Raw, uint32(len(pConfigIn)), _pConfigIn, pdwSizeOfCredentialsOut, ppCredentialsOut, pEapMethodType, ppEapError)
 }
 
 // EapHostPeerGetEncryptedPassword wraps the raw EapHostPeerGetEncryptedPassword call with idiomatic Go types.

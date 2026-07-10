@@ -31,8 +31,8 @@ func (self IABContainer) CreateEntry(cbEntryID uint32, lpEntryID *systemaddressb
 }
 
 // CopyEntries wraps the raw CopyEntries call.
-func (self IABContainer) CopyEntries(lpEntries *systemaddressbook.SBinaryArray, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CopyEntries(lpEntries, ulUIParam, lpProgress, ulFlags)))
+func (self IABContainer) CopyEntries(lpEntries *systemaddressbook.SBinaryArray, ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CopyEntries(lpEntries, ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // DeleteEntries wraps the raw DeleteEntries call.
@@ -67,8 +67,8 @@ func (self IAddrBook) CompareEntryIDs(cbEntryID1 uint32, lpEntryID1 *systemaddre
 }
 
 // Advise wraps the raw Advise call.
-func (self IAddrBook) Advise(cbEntryID uint32, lpEntryID *systemaddressbook.ENTRYID, ulEventMask uint32, lpAdviseSink *systemaddressbook.IMAPIAdviseSink, lpulConnection *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(cbEntryID, lpEntryID, ulEventMask, lpAdviseSink, lpulConnection)))
+func (self IAddrBook) Advise(cbEntryID uint32, lpEntryID *systemaddressbook.ENTRYID, ulEventMask uint32, lpAdviseSink IMAPIAdviseSink, lpulConnection *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(cbEntryID, lpEntryID, ulEventMask, lpAdviseSink.Raw, lpulConnection)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -174,8 +174,8 @@ func (self IDistList) CreateEntry(cbEntryID uint32, lpEntryID *systemaddressbook
 }
 
 // CopyEntries wraps the raw CopyEntries call.
-func (self IDistList) CopyEntries(lpEntries *systemaddressbook.SBinaryArray, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CopyEntries(lpEntries, ulUIParam, lpProgress, ulFlags)))
+func (self IDistList) CopyEntries(lpEntries *systemaddressbook.SBinaryArray, ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CopyEntries(lpEntries, ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // DeleteEntries wraps the raw DeleteEntries call.
@@ -283,13 +283,13 @@ func (self IMAPIFolder) CreateMessage(lpInterface *win32.GUID, ulFlags uint32, l
 }
 
 // CopyMessages wraps the raw CopyMessages call.
-func (self IMAPIFolder) CopyMessages(lpMsgList *systemaddressbook.SBinaryArray, lpInterface *win32.GUID, lpDestFolder unsafe.Pointer, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CopyMessages(lpMsgList, lpInterface, lpDestFolder, ulUIParam, lpProgress, ulFlags)))
+func (self IMAPIFolder) CopyMessages(lpMsgList *systemaddressbook.SBinaryArray, lpInterface *win32.GUID, lpDestFolder unsafe.Pointer, ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CopyMessages(lpMsgList, lpInterface, lpDestFolder, ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // DeleteMessages wraps the raw DeleteMessages call.
-func (self IMAPIFolder) DeleteMessages(lpMsgList *systemaddressbook.SBinaryArray, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteMessages(lpMsgList, ulUIParam, lpProgress, ulFlags)))
+func (self IMAPIFolder) DeleteMessages(lpMsgList *systemaddressbook.SBinaryArray, ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteMessages(lpMsgList, ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // CreateFolder wraps the raw CreateFolder call.
@@ -298,18 +298,18 @@ func (self IMAPIFolder) CreateFolder(ulFolderType uint32, lpszFolderName *int8, 
 }
 
 // CopyFolder wraps the raw CopyFolder call.
-func (self IMAPIFolder) CopyFolder(cbEntryID uint32, lpEntryID *systemaddressbook.ENTRYID, lpInterface *win32.GUID, lpDestFolder unsafe.Pointer, lpszNewFolderName *int8, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CopyFolder(cbEntryID, lpEntryID, lpInterface, lpDestFolder, lpszNewFolderName, ulUIParam, lpProgress, ulFlags)))
+func (self IMAPIFolder) CopyFolder(cbEntryID uint32, lpEntryID *systemaddressbook.ENTRYID, lpInterface *win32.GUID, lpDestFolder unsafe.Pointer, lpszNewFolderName *int8, ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CopyFolder(cbEntryID, lpEntryID, lpInterface, lpDestFolder, lpszNewFolderName, ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // DeleteFolder wraps the raw DeleteFolder call.
-func (self IMAPIFolder) DeleteFolder(cbEntryID uint32, lpEntryID *systemaddressbook.ENTRYID, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteFolder(cbEntryID, lpEntryID, ulUIParam, lpProgress, ulFlags)))
+func (self IMAPIFolder) DeleteFolder(cbEntryID uint32, lpEntryID *systemaddressbook.ENTRYID, ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteFolder(cbEntryID, lpEntryID, ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // SetReadFlags wraps the raw SetReadFlags call.
-func (self IMAPIFolder) SetReadFlags(lpMsgList *systemaddressbook.SBinaryArray, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetReadFlags(lpMsgList, ulUIParam, lpProgress, ulFlags)))
+func (self IMAPIFolder) SetReadFlags(lpMsgList *systemaddressbook.SBinaryArray, ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetReadFlags(lpMsgList, ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // GetMessageStatus wraps the raw GetMessageStatus call.
@@ -328,8 +328,8 @@ func (self IMAPIFolder) SaveContentsSort(lpSortCriteria *systemaddressbook.SSort
 }
 
 // EmptyFolder wraps the raw EmptyFolder call.
-func (self IMAPIFolder) EmptyFolder(ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.EmptyFolder(ulUIParam, lpProgress, ulFlags)))
+func (self IMAPIFolder) EmptyFolder(ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.EmptyFolder(ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // IMAPIProgress is an idiomatic wrapper over the raw COM interface System.AddressBook.IMAPIProgress with error-returning methods.
@@ -415,13 +415,13 @@ func (self IMAPIProp) DeleteProps(lpPropTagArray *systemaddressbook.SPropTagArra
 }
 
 // CopyTo wraps the raw CopyTo call.
-func (self IMAPIProp) CopyTo(ciidExclude uint32, rgiidExclude *win32.GUID, lpExcludeProps *systemaddressbook.SPropTagArray, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, lpInterface *win32.GUID, lpDestObj unsafe.Pointer, ulFlags uint32, lppProblems **systemaddressbook.SPropProblemArray) error {
-	return win32.HRESULTError(int32(self.Raw.CopyTo(ciidExclude, rgiidExclude, lpExcludeProps, ulUIParam, lpProgress, lpInterface, lpDestObj, ulFlags, lppProblems)))
+func (self IMAPIProp) CopyTo(ciidExclude uint32, rgiidExclude *win32.GUID, lpExcludeProps *systemaddressbook.SPropTagArray, ulUIParam uintptr, lpProgress IMAPIProgress, lpInterface *win32.GUID, lpDestObj unsafe.Pointer, ulFlags uint32, lppProblems **systemaddressbook.SPropProblemArray) error {
+	return win32.HRESULTError(int32(self.Raw.CopyTo(ciidExclude, rgiidExclude, lpExcludeProps, ulUIParam, lpProgress.Raw, lpInterface, lpDestObj, ulFlags, lppProblems)))
 }
 
 // CopyProps wraps the raw CopyProps call.
-func (self IMAPIProp) CopyProps(lpIncludeProps *systemaddressbook.SPropTagArray, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, lpInterface *win32.GUID, lpDestObj unsafe.Pointer, ulFlags uint32, lppProblems **systemaddressbook.SPropProblemArray) error {
-	return win32.HRESULTError(int32(self.Raw.CopyProps(lpIncludeProps, ulUIParam, lpProgress, lpInterface, lpDestObj, ulFlags, lppProblems)))
+func (self IMAPIProp) CopyProps(lpIncludeProps *systemaddressbook.SPropTagArray, ulUIParam uintptr, lpProgress IMAPIProgress, lpInterface *win32.GUID, lpDestObj unsafe.Pointer, ulFlags uint32, lppProblems **systemaddressbook.SPropProblemArray) error {
+	return win32.HRESULTError(int32(self.Raw.CopyProps(lpIncludeProps, ulUIParam, lpProgress.Raw, lpInterface, lpDestObj, ulFlags, lppProblems)))
 }
 
 // GetNamesFromIDs wraps the raw GetNamesFromIDs call.
@@ -482,8 +482,8 @@ func (self IMAPITable) GetLastError(hResult foundation.HRESULT, ulFlags uint32, 
 }
 
 // Advise wraps the raw Advise call.
-func (self IMAPITable) Advise(ulEventMask uint32, lpAdviseSink *systemaddressbook.IMAPIAdviseSink, lpulConnection *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(ulEventMask, lpAdviseSink, lpulConnection)))
+func (self IMAPITable) Advise(ulEventMask uint32, lpAdviseSink IMAPIAdviseSink, lpulConnection *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(ulEventMask, lpAdviseSink.Raw, lpulConnection)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -629,8 +629,8 @@ func (self IMessage) CreateAttach(lpInterface *win32.GUID, ulFlags uint32, lpulA
 }
 
 // DeleteAttach wraps the raw DeleteAttach call.
-func (self IMessage) DeleteAttach(ulAttachmentNum uint32, ulUIParam uintptr, lpProgress *systemaddressbook.IMAPIProgress, ulFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteAttach(ulAttachmentNum, ulUIParam, lpProgress, ulFlags)))
+func (self IMessage) DeleteAttach(ulAttachmentNum uint32, ulUIParam uintptr, lpProgress IMAPIProgress, ulFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteAttach(ulAttachmentNum, ulUIParam, lpProgress.Raw, ulFlags)))
 }
 
 // GetRecipientTable wraps the raw GetRecipientTable call.
@@ -665,8 +665,8 @@ func WrapIMsgStore(raw *systemaddressbook.IMsgStore) IMsgStore {
 }
 
 // Advise wraps the raw Advise call.
-func (self IMsgStore) Advise(cbEntryID uint32, lpEntryID *systemaddressbook.ENTRYID, ulEventMask uint32, lpAdviseSink *systemaddressbook.IMAPIAdviseSink, lpulConnection *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(cbEntryID, lpEntryID, ulEventMask, lpAdviseSink, lpulConnection)))
+func (self IMsgStore) Advise(cbEntryID uint32, lpEntryID *systemaddressbook.ENTRYID, ulEventMask uint32, lpAdviseSink IMAPIAdviseSink, lpulConnection *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(cbEntryID, lpEntryID, ulEventMask, lpAdviseSink.Raw, lpulConnection)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -715,8 +715,8 @@ func (self IMsgStore) GetOutgoingQueue(ulFlags uint32, lppTable **systemaddressb
 }
 
 // SetLockState wraps the raw SetLockState call.
-func (self IMsgStore) SetLockState(lpMessage *systemaddressbook.IMessage, ulLockState uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetLockState(lpMessage, ulLockState)))
+func (self IMsgStore) SetLockState(lpMessage IMessage, ulLockState uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetLockState(lpMessage.Raw, ulLockState)))
 }
 
 // FinishedMsg wraps the raw FinishedMsg call.
@@ -921,31 +921,31 @@ func (self IWABObject) Import(lpWIP foundation.PSTR) error {
 }
 
 // Find wraps the raw Find call.
-func (self IWABObject) Find(lpIAB *systemaddressbook.IAddrBook, hWnd foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.Find(lpIAB, hWnd)))
+func (self IWABObject) Find(lpIAB IAddrBook, hWnd foundation.HWND) error {
+	return win32.HRESULTError(int32(self.Raw.Find(lpIAB.Raw, hWnd)))
 }
 
 // VCardDisplay wraps the raw VCardDisplay call.
-func (self IWABObject) VCardDisplay(lpIAB *systemaddressbook.IAddrBook, hWnd foundation.HWND, lpszFileName foundation.PSTR) error {
-	return win32.HRESULTError(int32(self.Raw.VCardDisplay(lpIAB, hWnd, lpszFileName)))
+func (self IWABObject) VCardDisplay(lpIAB IAddrBook, hWnd foundation.HWND, lpszFileName foundation.PSTR) error {
+	return win32.HRESULTError(int32(self.Raw.VCardDisplay(lpIAB.Raw, hWnd, lpszFileName)))
 }
 
 // LDAPUrl wraps the raw LDAPUrl call.
-func (self IWABObject) LDAPUrl(lpIAB *systemaddressbook.IAddrBook, hWnd foundation.HWND, ulFlags uint32, lpszURL foundation.PSTR, lppMailUser **systemaddressbook.IMailUser) error {
-	return win32.HRESULTError(int32(self.Raw.LDAPUrl(lpIAB, hWnd, ulFlags, lpszURL, lppMailUser)))
+func (self IWABObject) LDAPUrl(lpIAB IAddrBook, hWnd foundation.HWND, ulFlags uint32, lpszURL foundation.PSTR, lppMailUser **systemaddressbook.IMailUser) error {
+	return win32.HRESULTError(int32(self.Raw.LDAPUrl(lpIAB.Raw, hWnd, ulFlags, lpszURL, lppMailUser)))
 }
 
 // VCardCreate wraps the raw VCardCreate call.
-func (self IWABObject) VCardCreate(lpIAB *systemaddressbook.IAddrBook, ulFlags uint32, lpszVCard foundation.PSTR, lpMailUser *systemaddressbook.IMailUser) error {
-	return win32.HRESULTError(int32(self.Raw.VCardCreate(lpIAB, ulFlags, lpszVCard, lpMailUser)))
+func (self IWABObject) VCardCreate(lpIAB IAddrBook, ulFlags uint32, lpszVCard foundation.PSTR, lpMailUser IMailUser) error {
+	return win32.HRESULTError(int32(self.Raw.VCardCreate(lpIAB.Raw, ulFlags, lpszVCard, lpMailUser.Raw)))
 }
 
 // VCardRetrieve wraps the raw VCardRetrieve call.
-func (self IWABObject) VCardRetrieve(lpIAB *systemaddressbook.IAddrBook, ulFlags uint32, lpszVCard foundation.PSTR, lppMailUser **systemaddressbook.IMailUser) error {
-	return win32.HRESULTError(int32(self.Raw.VCardRetrieve(lpIAB, ulFlags, lpszVCard, lppMailUser)))
+func (self IWABObject) VCardRetrieve(lpIAB IAddrBook, ulFlags uint32, lpszVCard foundation.PSTR, lppMailUser **systemaddressbook.IMailUser) error {
+	return win32.HRESULTError(int32(self.Raw.VCardRetrieve(lpIAB.Raw, ulFlags, lpszVCard, lppMailUser)))
 }
 
 // GetMe wraps the raw GetMe call.
-func (self IWABObject) GetMe(lpIAB *systemaddressbook.IAddrBook, ulFlags uint32, lpdwAction *uint32, lpsbEID *systemaddressbook.SBinary, hwnd foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.GetMe(lpIAB, ulFlags, lpdwAction, lpsbEID, hwnd)))
+func (self IWABObject) GetMe(lpIAB IAddrBook, ulFlags uint32, lpdwAction *uint32, lpsbEID *systemaddressbook.SBinary, hwnd foundation.HWND) error {
+	return win32.HRESULTError(int32(self.Raw.GetMe(lpIAB.Raw, ulFlags, lpdwAction, lpsbEID, hwnd)))
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemservices "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/services"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -106,8 +105,8 @@ func (self ID3DShaderCacheApplication) RegisterComponent(pName string, pStateObj
 }
 
 // RemoveComponent wraps the raw RemoveComponent call.
-func (self ID3DShaderCacheApplication) RemoveComponent(pComponent *graphicsdirect3d.ID3DShaderCacheComponent) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveComponent(pComponent)))
+func (self ID3DShaderCacheApplication) RemoveComponent(pComponent ID3DShaderCacheComponent) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveComponent(pComponent.Raw)))
 }
 
 // GetComponentCount wraps the raw GetComponentCount call.
@@ -227,8 +226,8 @@ func (self ID3DShaderCacheInstaller) RegisterApplication(pExePath string, pAppli
 }
 
 // RemoveApplication wraps the raw RemoveApplication call.
-func (self ID3DShaderCacheInstaller) RemoveApplication(pApplication *graphicsdirect3d.ID3DShaderCacheApplication) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveApplication(pApplication)))
+func (self ID3DShaderCacheInstaller) RemoveApplication(pApplication ID3DShaderCacheApplication) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveApplication(pApplication.Raw)))
 }
 
 // GetApplicationCount wraps the raw GetApplicationCount call.
@@ -277,8 +276,8 @@ func (self ID3DShaderCacheInstallerClient) GetInstallerScope() graphicsdirect3d.
 }
 
 // HandleDriverUpdate wraps the raw HandleDriverUpdate call.
-func (self ID3DShaderCacheInstallerClient) HandleDriverUpdate(pInstaller *graphicsdirect3d.ID3DShaderCacheInstaller) error {
-	return win32.HRESULTError(int32(self.Raw.HandleDriverUpdate(pInstaller)))
+func (self ID3DShaderCacheInstallerClient) HandleDriverUpdate(pInstaller ID3DShaderCacheInstaller) error {
+	return win32.HRESULTError(int32(self.Raw.HandleDriverUpdate(pInstaller.Raw)))
 }
 
 // ID3DShaderCacheInstallerFactory is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.ID3DShaderCacheInstallerFactory with error-returning methods.
@@ -293,11 +292,11 @@ func WrapID3DShaderCacheInstallerFactory(raw *graphicsdirect3d.ID3DShaderCacheIn
 }
 
 // CreateInstaller wraps the raw CreateInstaller call.
-func (self ID3DShaderCacheInstallerFactory) CreateInstaller(pClient *graphicsdirect3d.ID3DShaderCacheInstallerClient, riid *win32.GUID, ppvInstaller *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstaller(pClient, riid, ppvInstaller)))
+func (self ID3DShaderCacheInstallerFactory) CreateInstaller(pClient ID3DShaderCacheInstallerClient, riid *win32.GUID, ppvInstaller *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstaller(pClient.Raw, riid, ppvInstaller)))
 }
 
 // CreateExplorer wraps the raw CreateExplorer call.
-func (self ID3DShaderCacheInstallerFactory) CreateExplorer(pUnknown *systemcom.IUnknown, riid *win32.GUID, ppvExplorer *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateExplorer(pUnknown, riid, ppvExplorer)))
+func (self ID3DShaderCacheInstallerFactory) CreateExplorer(pUnknown systemcomidiom.IUnknown, riid *win32.GUID, ppvExplorer *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateExplorer(pUnknown.Raw, riid, ppvExplorer)))
 }

@@ -11,8 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	systemgrouppolicy "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/grouppolicy"
-	systemwmi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/wmi"
 	uishell "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell"
+	systemwmiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/wmi"
 )
 
 // BrowseForGPO wraps the raw BrowseForGPO call with idiomatic Go types.
@@ -162,18 +162,18 @@ func RsopFileAccessCheck(pszFileName string, pRsopToken unsafe.Pointer, dwDesire
 
 // RsopResetPolicySettingStatus wraps the raw RsopResetPolicySettingStatus call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopresetpolicysettingstatus
-func RsopResetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject) error {
-	return win32.HRESULTError(int32(systemgrouppolicy.RsopResetPolicySettingStatus(dwFlags, pServices, pSettingInstance)))
+func RsopResetPolicySettingStatus(dwFlags uint32, pServices systemwmiidiom.IWbemServices, pSettingInstance systemwmiidiom.IWbemClassObject) error {
+	return win32.HRESULTError(int32(systemgrouppolicy.RsopResetPolicySettingStatus(dwFlags, pServices.Raw, pSettingInstance.Raw)))
 }
 
 // RsopSetPolicySettingStatus wraps the raw RsopSetPolicySettingStatus call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopsetpolicysettingstatus
-func RsopSetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject, pStatus []systemgrouppolicy.POLICYSETTINGSTATUSINFO) error {
+func RsopSetPolicySettingStatus(dwFlags uint32, pServices systemwmiidiom.IWbemServices, pSettingInstance systemwmiidiom.IWbemClassObject, pStatus []systemgrouppolicy.POLICYSETTINGSTATUSINFO) error {
 	var _pStatus *systemgrouppolicy.POLICYSETTINGSTATUSINFO
 	if len(pStatus) > 0 {
 		_pStatus = &pStatus[0]
 	}
-	return win32.HRESULTError(int32(systemgrouppolicy.RsopSetPolicySettingStatus(dwFlags, pServices, pSettingInstance, uint32(len(pStatus)), _pStatus)))
+	return win32.HRESULTError(int32(systemgrouppolicy.RsopSetPolicySettingStatus(dwFlags, pServices.Raw, pSettingInstance.Raw, uint32(len(pStatus)), _pStatus)))
 }
 
 // UninstallApplication wraps the raw UninstallApplication call with idiomatic Go types.

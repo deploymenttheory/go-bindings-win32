@@ -55,9 +55,9 @@ func WrapIStorageFolderHandleAccess(raw *systemwinrtstorage.IStorageFolderHandle
 }
 
 // Create wraps the raw Create call.
-func (self IStorageFolderHandleAccess) Create(fileName string, creationOptions systemwinrtstorage.HANDLE_CREATION_OPTIONS, accessOptions systemwinrtstorage.HANDLE_ACCESS_OPTIONS, sharingOptions systemwinrtstorage.HANDLE_SHARING_OPTIONS, options systemwinrtstorage.HANDLE_OPTIONS, oplockBreakingHandler *systemwinrtstorage.IOplockBreakingHandler, interopHandle *foundation.HANDLE) error {
+func (self IStorageFolderHandleAccess) Create(fileName string, creationOptions systemwinrtstorage.HANDLE_CREATION_OPTIONS, accessOptions systemwinrtstorage.HANDLE_ACCESS_OPTIONS, sharingOptions systemwinrtstorage.HANDLE_SHARING_OPTIONS, options systemwinrtstorage.HANDLE_OPTIONS, oplockBreakingHandler IOplockBreakingHandler, interopHandle *foundation.HANDLE) error {
 	_fileName := win32.UTF16Ptr(fileName)
-	return win32.HRESULTError(int32(self.Raw.Create(foundation.PWSTR(_fileName), creationOptions, accessOptions, sharingOptions, options, oplockBreakingHandler, interopHandle)))
+	return win32.HRESULTError(int32(self.Raw.Create(foundation.PWSTR(_fileName), creationOptions, accessOptions, sharingOptions, options, oplockBreakingHandler.Raw, interopHandle)))
 }
 
 // IStorageItemHandleAccess is an idiomatic wrapper over the raw COM interface System.WinRT.Storage.IStorageItemHandleAccess with error-returning methods.
@@ -72,8 +72,8 @@ func WrapIStorageItemHandleAccess(raw *systemwinrtstorage.IStorageItemHandleAcce
 }
 
 // Create wraps the raw Create call.
-func (self IStorageItemHandleAccess) Create(accessOptions systemwinrtstorage.HANDLE_ACCESS_OPTIONS, sharingOptions systemwinrtstorage.HANDLE_SHARING_OPTIONS, options systemwinrtstorage.HANDLE_OPTIONS, oplockBreakingHandler *systemwinrtstorage.IOplockBreakingHandler, interopHandle *foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.Create(accessOptions, sharingOptions, options, oplockBreakingHandler, interopHandle)))
+func (self IStorageItemHandleAccess) Create(accessOptions systemwinrtstorage.HANDLE_ACCESS_OPTIONS, sharingOptions systemwinrtstorage.HANDLE_SHARING_OPTIONS, options systemwinrtstorage.HANDLE_OPTIONS, oplockBreakingHandler IOplockBreakingHandler, interopHandle *foundation.HANDLE) error {
+	return win32.HRESULTError(int32(self.Raw.Create(accessOptions, sharingOptions, options, oplockBreakingHandler.Raw, interopHandle)))
 }
 
 // IUnbufferedFileHandleOplockCallback is an idiomatic wrapper over the raw COM interface System.WinRT.Storage.IUnbufferedFileHandleOplockCallback with error-returning methods.
@@ -104,9 +104,9 @@ func WrapIUnbufferedFileHandleProvider(raw *systemwinrtstorage.IUnbufferedFileHa
 }
 
 // OpenUnbufferedFileHandle wraps the raw OpenUnbufferedFileHandle call.
-func (self IUnbufferedFileHandleProvider) OpenUnbufferedFileHandle(oplockBreakCallback *systemwinrtstorage.IUnbufferedFileHandleOplockCallback) (uintptr, error) {
+func (self IUnbufferedFileHandleProvider) OpenUnbufferedFileHandle(oplockBreakCallback IUnbufferedFileHandleOplockCallback) (uintptr, error) {
 	var _fileHandle uintptr
-	_hr := self.Raw.OpenUnbufferedFileHandle(oplockBreakCallback, &_fileHandle)
+	_hr := self.Raw.OpenUnbufferedFileHandle(oplockBreakCallback.Raw, &_fileHandle)
 	return _fileHandle, win32.HRESULTError(int32(_hr))
 }
 

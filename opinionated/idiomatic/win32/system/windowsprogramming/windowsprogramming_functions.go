@@ -9,9 +9,9 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	systemwindowsprogramming "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/windowsprogramming"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // AddDelBackupEntry wraps the raw AddDelBackupEntryW call with idiomatic Go types.
@@ -659,9 +659,9 @@ func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options systemwin
 
 // WldpCanExecuteStream wraps the raw WldpCanExecuteStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutestream
-func WldpCanExecuteStream(host *win32.GUID, options systemwindowsprogramming.WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo string, result *systemwindowsprogramming.WLDP_EXECUTION_POLICY) error {
+func WldpCanExecuteStream(host *win32.GUID, options systemwindowsprogramming.WLDP_EXECUTION_EVALUATION_OPTIONS, stream systemcomidiom.IStream, auditInfo string, result *systemwindowsprogramming.WLDP_EXECUTION_POLICY) error {
 	_auditInfo := win32.UTF16Ptr(auditInfo)
-	return win32.HRESULTError(int32(systemwindowsprogramming.WldpCanExecuteStream(host, options, stream, foundation.PWSTR(_auditInfo), result)))
+	return win32.HRESULTError(int32(systemwindowsprogramming.WldpCanExecuteStream(host, options, stream.Raw, foundation.PWSTR(_auditInfo), result)))
 }
 
 // WldpGetApplicationSettingBoolean wraps the raw WldpGetApplicationSettingBoolean call with idiomatic Go types.

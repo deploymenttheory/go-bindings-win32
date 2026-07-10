@@ -114,16 +114,24 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, method *win32m
 	for i := range method.Params {
 		param := &method.Params[i]
 		resolved := g.mapper.GoType(&param.Type, context, scratch)
+
+		// [out,retval] → elevated Go return value (COM out → wrapper).
 		if elevate {
-			if element, ok := retValElement(param, resolved); ok {
-				local := "_" + naming.ParamName(param.Name)
-				preamble = append(preamble, "var "+local+" "+element)
-				rawArgs = append(rawArgs, "&"+local)
-				returnValues = append(returnValues, local)
-				returnTypes = append(returnTypes, element)
+			if decl, rawArg, returnExpr, returnType, ok := g.elevateRetValParam(param, resolved, meta.Namespace, scratch); ok {
+				preamble = append(preamble, decl)
+				rawArgs = append(rawArgs, rawArg)
+				returnValues = append(returnValues, returnExpr)
+				returnTypes = append(returnTypes, returnType)
 				continue
 			}
 		}
+		// Input COM interface param → idiomatic wrapper value.
+		if decl, rawArg, ok := g.comInParam(param, resolved, meta.Namespace, scratch); ok {
+			decls = append(decls, decl)
+			rawArgs = append(rawArgs, rawArg)
+			continue
+		}
+
 		idiomatic := g.idiomaticParam(param, resolved, i)
 		if idiomatic.decl != "" {
 			decls = append(decls, idiomatic.decl)

@@ -12,6 +12,7 @@ import (
 	systemclrhosting "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/clrhosting"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemthreading "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CLRCreateInstance wraps the raw CLRCreateInstance call with idiomatic Go types.
@@ -46,8 +47,8 @@ func CorBindToRuntime(pwszVersion string, pwszBuildFlavor string, rclsid *win32.
 }
 
 // CorBindToRuntimeByCfg wraps the raw CorBindToRuntimeByCfg call with idiomatic Go types.
-func CorBindToRuntimeByCfg(pCfgStream *systemcom.IStream, reserved uint32, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemclrhosting.CorBindToRuntimeByCfg(pCfgStream, reserved, startupFlags, rclsid, riid, ppv)))
+func CorBindToRuntimeByCfg(pCfgStream systemcomidiom.IStream, reserved uint32, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemclrhosting.CorBindToRuntimeByCfg(pCfgStream.Raw, reserved, startupFlags, rclsid, riid, ppv)))
 }
 
 // CorBindToRuntimeEx wraps the raw CorBindToRuntimeEx call with idiomatic Go types.

@@ -30,8 +30,8 @@ func (self ISceSvcAttachmentData) GetData(scesvcHandle unsafe.Pointer, sceType s
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ISceSvcAttachmentData) Initialize(lpServiceName *int8, lpTemplateName *int8, lpSceSvcPersistInfo *securityconfigurationsnapin.ISceSvcAttachmentPersistInfo, pscesvcHandle *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(lpServiceName, lpTemplateName, lpSceSvcPersistInfo, pscesvcHandle)))
+func (self ISceSvcAttachmentData) Initialize(lpServiceName *int8, lpTemplateName *int8, lpSceSvcPersistInfo ISceSvcAttachmentPersistInfo, pscesvcHandle *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(lpServiceName, lpTemplateName, lpSceSvcPersistInfo.Raw, pscesvcHandle)))
 }
 
 // FreeBuffer wraps the raw FreeBuffer call.

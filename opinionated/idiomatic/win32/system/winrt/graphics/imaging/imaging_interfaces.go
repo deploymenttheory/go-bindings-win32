@@ -9,9 +9,10 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	graphicsimaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/imaging"
 	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
 	systemwinrtgraphicsimaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/graphics/imaging"
+	graphicsimagingidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/imaging"
+	mediamediafoundationidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/mediafoundation"
 	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
 )
 
@@ -43,13 +44,13 @@ func WrapISoftwareBitmapNativeFactory(raw *systemwinrtgraphicsimaging.ISoftwareB
 }
 
 // CreateFromWICBitmap wraps the raw CreateFromWICBitmap call.
-func (self ISoftwareBitmapNativeFactory) CreateFromWICBitmap(data *graphicsimaging.IWICBitmap, forceReadOnly bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self ISoftwareBitmapNativeFactory) CreateFromWICBitmap(data graphicsimagingidiom.IWICBitmap, forceReadOnly bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_forceReadOnly := foundation.BOOL(win32.Bool32(forceReadOnly))
-	return win32.HRESULTError(int32(self.Raw.CreateFromWICBitmap(data, _forceReadOnly, riid, ppv)))
+	return win32.HRESULTError(int32(self.Raw.CreateFromWICBitmap(data.Raw, _forceReadOnly, riid, ppv)))
 }
 
 // CreateFromMF2DBuffer2 wraps the raw CreateFromMF2DBuffer2 call.
-func (self ISoftwareBitmapNativeFactory) CreateFromMF2DBuffer2(data *mediamediafoundation.IMF2DBuffer2, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func (self ISoftwareBitmapNativeFactory) CreateFromMF2DBuffer2(data mediamediafoundationidiom.IMF2DBuffer2, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_forceReadOnly := foundation.BOOL(win32.Bool32(forceReadOnly))
-	return win32.HRESULTError(int32(self.Raw.CreateFromMF2DBuffer2(data, subtype, width, height, _forceReadOnly, minDisplayAperture, riid, ppv)))
+	return win32.HRESULTError(int32(self.Raw.CreateFromMF2DBuffer2(data.Raw, subtype, width, height, _forceReadOnly, minDisplayAperture, riid, ppv)))
 }

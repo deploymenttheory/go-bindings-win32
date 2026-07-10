@@ -195,24 +195,24 @@ func WrapISClusApplication(raw *networkingclustering.ISClusApplication) ISClusAp
 }
 
 // Get_DomainNames wraps the raw Get_DomainNames call.
-func (self ISClusApplication) Get_DomainNames() (*networkingclustering.ISDomainNames, error) {
+func (self ISClusApplication) Get_DomainNames() (ISDomainNames, error) {
 	var _ppDomains *networkingclustering.ISDomainNames
 	_hr := self.Raw.Get_DomainNames(&_ppDomains)
-	return _ppDomains, win32.HRESULTError(int32(_hr))
+	return WrapISDomainNames(_ppDomains), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClusterNames wraps the raw Get_ClusterNames call.
-func (self ISClusApplication) Get_ClusterNames(bstrDomainName foundation.BSTR) (*networkingclustering.ISClusterNames, error) {
+func (self ISClusApplication) Get_ClusterNames(bstrDomainName foundation.BSTR) (ISClusterNames, error) {
 	var _ppClusters *networkingclustering.ISClusterNames
 	_hr := self.Raw.Get_ClusterNames(bstrDomainName, &_ppClusters)
-	return _ppClusters, win32.HRESULTError(int32(_hr))
+	return WrapISClusterNames(_ppClusters), win32.HRESULTError(int32(_hr))
 }
 
 // OpenCluster wraps the raw OpenCluster call.
-func (self ISClusApplication) OpenCluster(bstrClusterName foundation.BSTR) (*networkingclustering.ISCluster, error) {
+func (self ISClusApplication) OpenCluster(bstrClusterName foundation.BSTR) (ISCluster, error) {
 	var _pCluster *networkingclustering.ISCluster
 	_hr := self.Raw.OpenCluster(bstrClusterName, &_pCluster)
-	return _pCluster, win32.HRESULTError(int32(_hr))
+	return WrapISCluster(_pCluster), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusCryptoKeys is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusCryptoKeys with error-returning methods.
@@ -234,10 +234,10 @@ func (self ISClusCryptoKeys) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusCryptoKeys) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusCryptoKeys) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -269,10 +269,10 @@ func (self ISClusDisk) Get_Signature() (int32, error) {
 }
 
 // Get_ScsiAddress wraps the raw Get_ScsiAddress call.
-func (self ISClusDisk) Get_ScsiAddress() (*networkingclustering.ISClusScsiAddress, error) {
+func (self ISClusDisk) Get_ScsiAddress() (ISClusScsiAddress, error) {
 	var _ppScsiAddress *networkingclustering.ISClusScsiAddress
 	_hr := self.Raw.Get_ScsiAddress(&_ppScsiAddress)
-	return _ppScsiAddress, win32.HRESULTError(int32(_hr))
+	return WrapISClusScsiAddress(_ppScsiAddress), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DiskNumber wraps the raw Get_DiskNumber call.
@@ -283,10 +283,10 @@ func (self ISClusDisk) Get_DiskNumber() (int32, error) {
 }
 
 // Get_Partitions wraps the raw Get_Partitions call.
-func (self ISClusDisk) Get_Partitions() (*networkingclustering.ISClusPartitions, error) {
+func (self ISClusDisk) Get_Partitions() (ISClusPartitions, error) {
 	var _ppPartitions *networkingclustering.ISClusPartitions
 	_hr := self.Raw.Get_Partitions(&_ppPartitions)
-	return _ppPartitions, win32.HRESULTError(int32(_hr))
+	return WrapISClusPartitions(_ppPartitions), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusDisks is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusDisks with error-returning methods.
@@ -308,10 +308,10 @@ func (self ISClusDisks) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusDisks) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusDisks) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusNetInterface is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusNetInterface with error-returning methods.
@@ -326,31 +326,31 @@ func WrapISClusNetInterface(raw *networkingclustering.ISClusNetInterface) ISClus
 }
 
 // Get_CommonProperties wraps the raw Get_CommonProperties call.
-func (self ISClusNetInterface) Get_CommonProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNetInterface) Get_CommonProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateProperties wraps the raw Get_PrivateProperties call.
-func (self ISClusNetInterface) Get_PrivateProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNetInterface) Get_PrivateProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommonROProperties wraps the raw Get_CommonROProperties call.
-func (self ISClusNetInterface) Get_CommonROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNetInterface) Get_CommonROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateROProperties wraps the raw Get_PrivateROProperties call.
-func (self ISClusNetInterface) Get_PrivateROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNetInterface) Get_PrivateROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
@@ -375,10 +375,10 @@ func (self ISClusNetInterface) Get_State() (networkingclustering.CLUSTER_NETINTE
 }
 
 // Get_Cluster wraps the raw Get_Cluster call.
-func (self ISClusNetInterface) Get_Cluster() (*networkingclustering.ISCluster, error) {
+func (self ISClusNetInterface) Get_Cluster() (ISCluster, error) {
 	var _ppCluster *networkingclustering.ISCluster
 	_hr := self.Raw.Get_Cluster(&_ppCluster)
-	return _ppCluster, win32.HRESULTError(int32(_hr))
+	return WrapISCluster(_ppCluster), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusNetInterfaces is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusNetInterfaces with error-returning methods.
@@ -400,10 +400,10 @@ func (self ISClusNetInterfaces) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusNetInterfaces) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -423,31 +423,31 @@ func WrapISClusNetwork(raw *networkingclustering.ISClusNetwork) ISClusNetwork {
 }
 
 // Get_CommonProperties wraps the raw Get_CommonProperties call.
-func (self ISClusNetwork) Get_CommonProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNetwork) Get_CommonProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateProperties wraps the raw Get_PrivateProperties call.
-func (self ISClusNetwork) Get_PrivateProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNetwork) Get_PrivateProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommonROProperties wraps the raw Get_CommonROProperties call.
-func (self ISClusNetwork) Get_CommonROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNetwork) Get_CommonROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateROProperties wraps the raw Get_PrivateROProperties call.
-func (self ISClusNetwork) Get_PrivateROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNetwork) Get_PrivateROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Handle wraps the raw Get_Handle call.
@@ -484,17 +484,17 @@ func (self ISClusNetwork) Get_State() (networkingclustering.CLUSTER_NETWORK_STAT
 }
 
 // Get_NetInterfaces wraps the raw Get_NetInterfaces call.
-func (self ISClusNetwork) Get_NetInterfaces() (*networkingclustering.ISClusNetworkNetInterfaces, error) {
+func (self ISClusNetwork) Get_NetInterfaces() (ISClusNetworkNetInterfaces, error) {
 	var _ppClusNetInterfaces *networkingclustering.ISClusNetworkNetInterfaces
 	_hr := self.Raw.Get_NetInterfaces(&_ppClusNetInterfaces)
-	return _ppClusNetInterfaces, win32.HRESULTError(int32(_hr))
+	return WrapISClusNetworkNetInterfaces(_ppClusNetInterfaces), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Cluster wraps the raw Get_Cluster call.
-func (self ISClusNetwork) Get_Cluster() (*networkingclustering.ISCluster, error) {
+func (self ISClusNetwork) Get_Cluster() (ISCluster, error) {
 	var _ppCluster *networkingclustering.ISCluster
 	_hr := self.Raw.Get_Cluster(&_ppCluster)
-	return _ppCluster, win32.HRESULTError(int32(_hr))
+	return WrapISCluster(_ppCluster), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusNetworkNetInterfaces is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusNetworkNetInterfaces with error-returning methods.
@@ -516,10 +516,10 @@ func (self ISClusNetworkNetInterfaces) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusNetworkNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusNetworkNetInterfaces) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -546,10 +546,10 @@ func (self ISClusNetworks) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusNetworks) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusNetworks) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -569,31 +569,31 @@ func WrapISClusNode(raw *networkingclustering.ISClusNode) ISClusNode {
 }
 
 // Get_CommonProperties wraps the raw Get_CommonProperties call.
-func (self ISClusNode) Get_CommonProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNode) Get_CommonProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateProperties wraps the raw Get_PrivateProperties call.
-func (self ISClusNode) Get_PrivateProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNode) Get_PrivateProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommonROProperties wraps the raw Get_CommonROProperties call.
-func (self ISClusNode) Get_CommonROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNode) Get_CommonROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateROProperties wraps the raw Get_PrivateROProperties call.
-func (self ISClusNode) Get_PrivateROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusNode) Get_PrivateROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
@@ -640,24 +640,24 @@ func (self ISClusNode) Evict() error {
 }
 
 // Get_ResourceGroups wraps the raw Get_ResourceGroups call.
-func (self ISClusNode) Get_ResourceGroups() (*networkingclustering.ISClusResGroups, error) {
+func (self ISClusNode) Get_ResourceGroups() (ISClusResGroups, error) {
 	var _ppResourceGroups *networkingclustering.ISClusResGroups
 	_hr := self.Raw.Get_ResourceGroups(&_ppResourceGroups)
-	return _ppResourceGroups, win32.HRESULTError(int32(_hr))
+	return WrapISClusResGroups(_ppResourceGroups), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Cluster wraps the raw Get_Cluster call.
-func (self ISClusNode) Get_Cluster() (*networkingclustering.ISCluster, error) {
+func (self ISClusNode) Get_Cluster() (ISCluster, error) {
 	var _ppCluster *networkingclustering.ISCluster
 	_hr := self.Raw.Get_Cluster(&_ppCluster)
-	return _ppCluster, win32.HRESULTError(int32(_hr))
+	return WrapISCluster(_ppCluster), win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetInterfaces wraps the raw Get_NetInterfaces call.
-func (self ISClusNode) Get_NetInterfaces() (*networkingclustering.ISClusNodeNetInterfaces, error) {
+func (self ISClusNode) Get_NetInterfaces() (ISClusNodeNetInterfaces, error) {
 	var _ppClusNetInterfaces *networkingclustering.ISClusNodeNetInterfaces
 	_hr := self.Raw.Get_NetInterfaces(&_ppClusNetInterfaces)
-	return _ppClusNetInterfaces, win32.HRESULTError(int32(_hr))
+	return WrapISClusNodeNetInterfaces(_ppClusNetInterfaces), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusNodeNetInterfaces is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusNodeNetInterfaces with error-returning methods.
@@ -679,10 +679,10 @@ func (self ISClusNodeNetInterfaces) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusNodeNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusNodeNetInterfaces) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -709,10 +709,10 @@ func (self ISClusNodes) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusNodes) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -845,10 +845,10 @@ func (self ISClusPartitions) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusPartitions) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusPartitions) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusProperties is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusProperties with error-returning methods.
@@ -870,10 +870,10 @@ func (self ISClusProperties) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusProperties) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusProperties) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -947,10 +947,10 @@ func (self ISClusProperty) Get_ValueCount() (int32, error) {
 }
 
 // Get_Values wraps the raw Get_Values call.
-func (self ISClusProperty) Get_Values() (*networkingclustering.ISClusPropertyValues, error) {
+func (self ISClusProperty) Get_Values() (ISClusPropertyValues, error) {
 	var _ppClusterPropertyValues *networkingclustering.ISClusPropertyValues
 	_hr := self.Raw.Get_Values(&_ppClusterPropertyValues)
-	return _ppClusterPropertyValues, win32.HRESULTError(int32(_hr))
+	return WrapISClusPropertyValues(_ppClusterPropertyValues), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Value wraps the raw Get_Value call.
@@ -1074,10 +1074,10 @@ func (self ISClusPropertyValue) Get_DataCount() (int32, error) {
 }
 
 // Get_Data wraps the raw Get_Data call.
-func (self ISClusPropertyValue) Get_Data() (*networkingclustering.ISClusPropertyValueData, error) {
+func (self ISClusPropertyValue) Get_Data() (ISClusPropertyValueData, error) {
 	var _ppClusterPropertyValueData *networkingclustering.ISClusPropertyValueData
 	_hr := self.Raw.Get_Data(&_ppClusterPropertyValueData)
-	return _ppClusterPropertyValueData, win32.HRESULTError(int32(_hr))
+	return WrapISClusPropertyValueData(_ppClusterPropertyValueData), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusPropertyValueData is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusPropertyValueData with error-returning methods.
@@ -1099,10 +1099,10 @@ func (self ISClusPropertyValueData) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusPropertyValueData) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusPropertyValueData) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusPropertyValues is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusPropertyValues with error-returning methods.
@@ -1124,10 +1124,10 @@ func (self ISClusPropertyValues) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusPropertyValues) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusPropertyValues) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusRefObject is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusRefObject with error-returning methods.
@@ -1167,10 +1167,10 @@ func (self ISClusRegistryKeys) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusRegistryKeys) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusRegistryKeys) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1202,10 +1202,10 @@ func (self ISClusResDependencies) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResDependencies) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResDependencies) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1214,15 +1214,15 @@ func (self ISClusResDependencies) Refresh() error {
 }
 
 // CreateItem wraps the raw CreateItem call.
-func (self ISClusResDependencies) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (*networkingclustering.ISClusResource, error) {
+func (self ISClusResDependencies) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (ISClusResource, error) {
 	var _ppClusterResource *networkingclustering.ISClusResource
 	_hr := self.Raw.CreateItem(bstrResourceName, bstrResourceType, dwFlags, &_ppClusterResource)
-	return _ppClusterResource, win32.HRESULTError(int32(_hr))
+	return WrapISClusResource(_ppClusterResource), win32.HRESULTError(int32(_hr))
 }
 
 // AddItem wraps the raw AddItem call.
-func (self ISClusResDependencies) AddItem(pResource *networkingclustering.ISClusResource) error {
-	return win32.HRESULTError(int32(self.Raw.AddItem(pResource)))
+func (self ISClusResDependencies) AddItem(pResource ISClusResource) error {
+	return win32.HRESULTError(int32(self.Raw.AddItem(pResource.Raw)))
 }
 
 // ISClusResDependents is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResDependents with error-returning methods.
@@ -1244,10 +1244,10 @@ func (self ISClusResDependents) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResDependents) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResDependents) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1256,15 +1256,15 @@ func (self ISClusResDependents) Refresh() error {
 }
 
 // CreateItem wraps the raw CreateItem call.
-func (self ISClusResDependents) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (*networkingclustering.ISClusResource, error) {
+func (self ISClusResDependents) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (ISClusResource, error) {
 	var _ppClusterResource *networkingclustering.ISClusResource
 	_hr := self.Raw.CreateItem(bstrResourceName, bstrResourceType, dwFlags, &_ppClusterResource)
-	return _ppClusterResource, win32.HRESULTError(int32(_hr))
+	return WrapISClusResource(_ppClusterResource), win32.HRESULTError(int32(_hr))
 }
 
 // AddItem wraps the raw AddItem call.
-func (self ISClusResDependents) AddItem(pResource *networkingclustering.ISClusResource) error {
-	return win32.HRESULTError(int32(self.Raw.AddItem(pResource)))
+func (self ISClusResDependents) AddItem(pResource ISClusResource) error {
+	return win32.HRESULTError(int32(self.Raw.AddItem(pResource.Raw)))
 }
 
 // ISClusResGroup is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResGroup with error-returning methods.
@@ -1279,31 +1279,31 @@ func WrapISClusResGroup(raw *networkingclustering.ISClusResGroup) ISClusResGroup
 }
 
 // Get_CommonProperties wraps the raw Get_CommonProperties call.
-func (self ISClusResGroup) Get_CommonProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResGroup) Get_CommonProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateProperties wraps the raw Get_PrivateProperties call.
-func (self ISClusResGroup) Get_PrivateProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResGroup) Get_PrivateProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommonROProperties wraps the raw Get_CommonROProperties call.
-func (self ISClusResGroup) Get_CommonROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResGroup) Get_CommonROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateROProperties wraps the raw Get_PrivateROProperties call.
-func (self ISClusResGroup) Get_PrivateROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResGroup) Get_PrivateROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Handle wraps the raw Get_Handle call.
@@ -1333,24 +1333,24 @@ func (self ISClusResGroup) Get_State() (networkingclustering.CLUSTER_GROUP_STATE
 }
 
 // Get_OwnerNode wraps the raw Get_OwnerNode call.
-func (self ISClusResGroup) Get_OwnerNode() (*networkingclustering.ISClusNode, error) {
+func (self ISClusResGroup) Get_OwnerNode() (ISClusNode, error) {
 	var _ppOwnerNode *networkingclustering.ISClusNode
 	_hr := self.Raw.Get_OwnerNode(&_ppOwnerNode)
-	return _ppOwnerNode, win32.HRESULTError(int32(_hr))
+	return WrapISClusNode(_ppOwnerNode), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Resources wraps the raw Get_Resources call.
-func (self ISClusResGroup) Get_Resources() (*networkingclustering.ISClusResGroupResources, error) {
+func (self ISClusResGroup) Get_Resources() (ISClusResGroupResources, error) {
 	var _ppClusterGroupResources *networkingclustering.ISClusResGroupResources
 	_hr := self.Raw.Get_Resources(&_ppClusterGroupResources)
-	return _ppClusterGroupResources, win32.HRESULTError(int32(_hr))
+	return WrapISClusResGroupResources(_ppClusterGroupResources), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PreferredOwnerNodes wraps the raw Get_PreferredOwnerNodes call.
-func (self ISClusResGroup) Get_PreferredOwnerNodes() (*networkingclustering.ISClusResGroupPreferredOwnerNodes, error) {
+func (self ISClusResGroup) Get_PreferredOwnerNodes() (ISClusResGroupPreferredOwnerNodes, error) {
 	var _ppOwnerNodes *networkingclustering.ISClusResGroupPreferredOwnerNodes
 	_hr := self.Raw.Get_PreferredOwnerNodes(&_ppOwnerNodes)
-	return _ppOwnerNodes, win32.HRESULTError(int32(_hr))
+	return WrapISClusResGroupPreferredOwnerNodes(_ppOwnerNodes), win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -1359,10 +1359,10 @@ func (self ISClusResGroup) Delete() error {
 }
 
 // Get_Cluster wraps the raw Get_Cluster call.
-func (self ISClusResGroup) Get_Cluster() (*networkingclustering.ISCluster, error) {
+func (self ISClusResGroup) Get_Cluster() (ISCluster, error) {
 	var _ppCluster *networkingclustering.ISCluster
 	_hr := self.Raw.Get_Cluster(&_ppCluster)
-	return _ppCluster, win32.HRESULTError(int32(_hr))
+	return WrapISCluster(_ppCluster), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusResGroupPreferredOwnerNodes is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResGroupPreferredOwnerNodes with error-returning methods.
@@ -1384,10 +1384,10 @@ func (self ISClusResGroupPreferredOwnerNodes) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResGroupPreferredOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResGroupPreferredOwnerNodes) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1396,8 +1396,8 @@ func (self ISClusResGroupPreferredOwnerNodes) Refresh() error {
 }
 
 // InsertItem wraps the raw InsertItem call.
-func (self ISClusResGroupPreferredOwnerNodes) InsertItem(pNode *networkingclustering.ISClusNode, nPosition int32) error {
-	return win32.HRESULTError(int32(self.Raw.InsertItem(pNode, nPosition)))
+func (self ISClusResGroupPreferredOwnerNodes) InsertItem(pNode ISClusNode, nPosition int32) error {
+	return win32.HRESULTError(int32(self.Raw.InsertItem(pNode.Raw, nPosition)))
 }
 
 // Get_Modified wraps the raw Get_Modified call.
@@ -1413,8 +1413,8 @@ func (self ISClusResGroupPreferredOwnerNodes) SaveChanges() error {
 }
 
 // AddItem wraps the raw AddItem call.
-func (self ISClusResGroupPreferredOwnerNodes) AddItem(pNode *networkingclustering.ISClusNode) error {
-	return win32.HRESULTError(int32(self.Raw.AddItem(pNode)))
+func (self ISClusResGroupPreferredOwnerNodes) AddItem(pNode ISClusNode) error {
+	return win32.HRESULTError(int32(self.Raw.AddItem(pNode.Raw)))
 }
 
 // ISClusResGroupResources is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResGroupResources with error-returning methods.
@@ -1436,10 +1436,10 @@ func (self ISClusResGroupResources) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResGroupResources) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResGroupResources) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1448,10 +1448,10 @@ func (self ISClusResGroupResources) Refresh() error {
 }
 
 // CreateItem wraps the raw CreateItem call.
-func (self ISClusResGroupResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (*networkingclustering.ISClusResource, error) {
+func (self ISClusResGroupResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (ISClusResource, error) {
 	var _ppClusterResource *networkingclustering.ISClusResource
 	_hr := self.Raw.CreateItem(bstrResourceName, bstrResourceType, dwFlags, &_ppClusterResource)
-	return _ppClusterResource, win32.HRESULTError(int32(_hr))
+	return WrapISClusResource(_ppClusterResource), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusResGroups is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResGroups with error-returning methods.
@@ -1473,10 +1473,10 @@ func (self ISClusResGroups) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResGroups) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResGroups) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1485,10 +1485,10 @@ func (self ISClusResGroups) Refresh() error {
 }
 
 // CreateItem wraps the raw CreateItem call.
-func (self ISClusResGroups) CreateItem(bstrResourceGroupName foundation.BSTR) (*networkingclustering.ISClusResGroup, error) {
+func (self ISClusResGroups) CreateItem(bstrResourceGroupName foundation.BSTR) (ISClusResGroup, error) {
 	var _ppResourceGroup *networkingclustering.ISClusResGroup
 	_hr := self.Raw.CreateItem(bstrResourceGroupName, &_ppResourceGroup)
-	return _ppResourceGroup, win32.HRESULTError(int32(_hr))
+	return WrapISClusResGroup(_ppResourceGroup), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusResPossibleOwnerNodes is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResPossibleOwnerNodes with error-returning methods.
@@ -1510,10 +1510,10 @@ func (self ISClusResPossibleOwnerNodes) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResPossibleOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResPossibleOwnerNodes) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1522,8 +1522,8 @@ func (self ISClusResPossibleOwnerNodes) Refresh() error {
 }
 
 // AddItem wraps the raw AddItem call.
-func (self ISClusResPossibleOwnerNodes) AddItem(pNode *networkingclustering.ISClusNode) error {
-	return win32.HRESULTError(int32(self.Raw.AddItem(pNode)))
+func (self ISClusResPossibleOwnerNodes) AddItem(pNode ISClusNode) error {
+	return win32.HRESULTError(int32(self.Raw.AddItem(pNode.Raw)))
 }
 
 // Get_Modified wraps the raw Get_Modified call.
@@ -1545,31 +1545,31 @@ func WrapISClusResType(raw *networkingclustering.ISClusResType) ISClusResType {
 }
 
 // Get_CommonProperties wraps the raw Get_CommonProperties call.
-func (self ISClusResType) Get_CommonProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResType) Get_CommonProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateProperties wraps the raw Get_PrivateProperties call.
-func (self ISClusResType) Get_PrivateProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResType) Get_PrivateProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommonROProperties wraps the raw Get_CommonROProperties call.
-func (self ISClusResType) Get_CommonROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResType) Get_CommonROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateROProperties wraps the raw Get_PrivateROProperties call.
-func (self ISClusResType) Get_PrivateROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResType) Get_PrivateROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
@@ -1585,31 +1585,31 @@ func (self ISClusResType) Delete() error {
 }
 
 // Get_Cluster wraps the raw Get_Cluster call.
-func (self ISClusResType) Get_Cluster() (*networkingclustering.ISCluster, error) {
+func (self ISClusResType) Get_Cluster() (ISCluster, error) {
 	var _ppCluster *networkingclustering.ISCluster
 	_hr := self.Raw.Get_Cluster(&_ppCluster)
-	return _ppCluster, win32.HRESULTError(int32(_hr))
+	return WrapISCluster(_ppCluster), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Resources wraps the raw Get_Resources call.
-func (self ISClusResType) Get_Resources() (*networkingclustering.ISClusResTypeResources, error) {
+func (self ISClusResType) Get_Resources() (ISClusResTypeResources, error) {
 	var _ppClusterResTypeResources *networkingclustering.ISClusResTypeResources
 	_hr := self.Raw.Get_Resources(&_ppClusterResTypeResources)
-	return _ppClusterResTypeResources, win32.HRESULTError(int32(_hr))
+	return WrapISClusResTypeResources(_ppClusterResTypeResources), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PossibleOwnerNodes wraps the raw Get_PossibleOwnerNodes call.
-func (self ISClusResType) Get_PossibleOwnerNodes() (*networkingclustering.ISClusResTypePossibleOwnerNodes, error) {
+func (self ISClusResType) Get_PossibleOwnerNodes() (ISClusResTypePossibleOwnerNodes, error) {
 	var _ppOwnerNodes *networkingclustering.ISClusResTypePossibleOwnerNodes
 	_hr := self.Raw.Get_PossibleOwnerNodes(&_ppOwnerNodes)
-	return _ppOwnerNodes, win32.HRESULTError(int32(_hr))
+	return WrapISClusResTypePossibleOwnerNodes(_ppOwnerNodes), win32.HRESULTError(int32(_hr))
 }
 
 // Get_AvailableDisks wraps the raw Get_AvailableDisks call.
-func (self ISClusResType) Get_AvailableDisks() (*networkingclustering.ISClusDisks, error) {
+func (self ISClusResType) Get_AvailableDisks() (ISClusDisks, error) {
 	var _ppAvailableDisks *networkingclustering.ISClusDisks
 	_hr := self.Raw.Get_AvailableDisks(&_ppAvailableDisks)
-	return _ppAvailableDisks, win32.HRESULTError(int32(_hr))
+	return WrapISClusDisks(_ppAvailableDisks), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusResTypePossibleOwnerNodes is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResTypePossibleOwnerNodes with error-returning methods.
@@ -1631,10 +1631,10 @@ func (self ISClusResTypePossibleOwnerNodes) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResTypePossibleOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResTypePossibleOwnerNodes) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1661,10 +1661,10 @@ func (self ISClusResTypeResources) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResTypeResources) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResTypeResources) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1673,10 +1673,10 @@ func (self ISClusResTypeResources) Refresh() error {
 }
 
 // CreateItem wraps the raw CreateItem call.
-func (self ISClusResTypeResources) CreateItem(bstrResourceName foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (*networkingclustering.ISClusResource, error) {
+func (self ISClusResTypeResources) CreateItem(bstrResourceName foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (ISClusResource, error) {
 	var _ppClusterResource *networkingclustering.ISClusResource
 	_hr := self.Raw.CreateItem(bstrResourceName, bstrGroupName, dwFlags, &_ppClusterResource)
-	return _ppClusterResource, win32.HRESULTError(int32(_hr))
+	return WrapISClusResource(_ppClusterResource), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusResTypes is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResTypes with error-returning methods.
@@ -1698,10 +1698,10 @@ func (self ISClusResTypes) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResTypes) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResTypes) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1710,10 +1710,10 @@ func (self ISClusResTypes) Refresh() error {
 }
 
 // CreateItem wraps the raw CreateItem call.
-func (self ISClusResTypes) CreateItem(bstrResourceTypeName foundation.BSTR, bstrDisplayName foundation.BSTR, bstrResourceTypeDll foundation.BSTR, dwLooksAlivePollInterval int32, dwIsAlivePollInterval int32) (*networkingclustering.ISClusResType, error) {
+func (self ISClusResTypes) CreateItem(bstrResourceTypeName foundation.BSTR, bstrDisplayName foundation.BSTR, bstrResourceTypeDll foundation.BSTR, dwLooksAlivePollInterval int32, dwIsAlivePollInterval int32) (ISClusResType, error) {
 	var _ppResourceType *networkingclustering.ISClusResType
 	_hr := self.Raw.CreateItem(bstrResourceTypeName, bstrDisplayName, bstrResourceTypeDll, dwLooksAlivePollInterval, dwIsAlivePollInterval, &_ppResourceType)
-	return _ppResourceType, win32.HRESULTError(int32(_hr))
+	return WrapISClusResType(_ppResourceType), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusResource is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusResource with error-returning methods.
@@ -1728,31 +1728,31 @@ func WrapISClusResource(raw *networkingclustering.ISClusResource) ISClusResource
 }
 
 // Get_CommonProperties wraps the raw Get_CommonProperties call.
-func (self ISClusResource) Get_CommonProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResource) Get_CommonProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateProperties wraps the raw Get_PrivateProperties call.
-func (self ISClusResource) Get_PrivateProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResource) Get_PrivateProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommonROProperties wraps the raw Get_CommonROProperties call.
-func (self ISClusResource) Get_CommonROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResource) Get_CommonROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateROProperties wraps the raw Get_PrivateROProperties call.
-func (self ISClusResource) Get_PrivateROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISClusResource) Get_PrivateROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Handle wraps the raw Get_Handle call.
@@ -1818,67 +1818,67 @@ func (self ISClusResource) Offline(nTimeout int32) (systemvariant.VARIANT, error
 }
 
 // ChangeResourceGroup wraps the raw ChangeResourceGroup call.
-func (self ISClusResource) ChangeResourceGroup(pResourceGroup *networkingclustering.ISClusResGroup) error {
-	return win32.HRESULTError(int32(self.Raw.ChangeResourceGroup(pResourceGroup)))
+func (self ISClusResource) ChangeResourceGroup(pResourceGroup ISClusResGroup) error {
+	return win32.HRESULTError(int32(self.Raw.ChangeResourceGroup(pResourceGroup.Raw)))
 }
 
 // AddResourceNode wraps the raw AddResourceNode call.
-func (self ISClusResource) AddResourceNode(pNode *networkingclustering.ISClusNode) error {
-	return win32.HRESULTError(int32(self.Raw.AddResourceNode(pNode)))
+func (self ISClusResource) AddResourceNode(pNode ISClusNode) error {
+	return win32.HRESULTError(int32(self.Raw.AddResourceNode(pNode.Raw)))
 }
 
 // RemoveResourceNode wraps the raw RemoveResourceNode call.
-func (self ISClusResource) RemoveResourceNode(pNode *networkingclustering.ISClusNode) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveResourceNode(pNode)))
+func (self ISClusResource) RemoveResourceNode(pNode ISClusNode) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveResourceNode(pNode.Raw)))
 }
 
 // CanResourceBeDependent wraps the raw CanResourceBeDependent call.
-func (self ISClusResource) CanResourceBeDependent(pResource *networkingclustering.ISClusResource) (systemvariant.VARIANT, error) {
+func (self ISClusResource) CanResourceBeDependent(pResource ISClusResource) (systemvariant.VARIANT, error) {
 	var _pvarDependent systemvariant.VARIANT
-	_hr := self.Raw.CanResourceBeDependent(pResource, &_pvarDependent)
+	_hr := self.Raw.CanResourceBeDependent(pResource.Raw, &_pvarDependent)
 	return _pvarDependent, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PossibleOwnerNodes wraps the raw Get_PossibleOwnerNodes call.
-func (self ISClusResource) Get_PossibleOwnerNodes() (*networkingclustering.ISClusResPossibleOwnerNodes, error) {
+func (self ISClusResource) Get_PossibleOwnerNodes() (ISClusResPossibleOwnerNodes, error) {
 	var _ppOwnerNodes *networkingclustering.ISClusResPossibleOwnerNodes
 	_hr := self.Raw.Get_PossibleOwnerNodes(&_ppOwnerNodes)
-	return _ppOwnerNodes, win32.HRESULTError(int32(_hr))
+	return WrapISClusResPossibleOwnerNodes(_ppOwnerNodes), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Dependencies wraps the raw Get_Dependencies call.
-func (self ISClusResource) Get_Dependencies() (*networkingclustering.ISClusResDependencies, error) {
+func (self ISClusResource) Get_Dependencies() (ISClusResDependencies, error) {
 	var _ppResDependencies *networkingclustering.ISClusResDependencies
 	_hr := self.Raw.Get_Dependencies(&_ppResDependencies)
-	return _ppResDependencies, win32.HRESULTError(int32(_hr))
+	return WrapISClusResDependencies(_ppResDependencies), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Dependents wraps the raw Get_Dependents call.
-func (self ISClusResource) Get_Dependents() (*networkingclustering.ISClusResDependents, error) {
+func (self ISClusResource) Get_Dependents() (ISClusResDependents, error) {
 	var _ppResDependents *networkingclustering.ISClusResDependents
 	_hr := self.Raw.Get_Dependents(&_ppResDependents)
-	return _ppResDependents, win32.HRESULTError(int32(_hr))
+	return WrapISClusResDependents(_ppResDependents), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Group wraps the raw Get_Group call.
-func (self ISClusResource) Get_Group() (*networkingclustering.ISClusResGroup, error) {
+func (self ISClusResource) Get_Group() (ISClusResGroup, error) {
 	var _ppResGroup *networkingclustering.ISClusResGroup
 	_hr := self.Raw.Get_Group(&_ppResGroup)
-	return _ppResGroup, win32.HRESULTError(int32(_hr))
+	return WrapISClusResGroup(_ppResGroup), win32.HRESULTError(int32(_hr))
 }
 
 // Get_OwnerNode wraps the raw Get_OwnerNode call.
-func (self ISClusResource) Get_OwnerNode() (*networkingclustering.ISClusNode, error) {
+func (self ISClusResource) Get_OwnerNode() (ISClusNode, error) {
 	var _ppOwnerNode *networkingclustering.ISClusNode
 	_hr := self.Raw.Get_OwnerNode(&_ppOwnerNode)
-	return _ppOwnerNode, win32.HRESULTError(int32(_hr))
+	return WrapISClusNode(_ppOwnerNode), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Cluster wraps the raw Get_Cluster call.
-func (self ISClusResource) Get_Cluster() (*networkingclustering.ISCluster, error) {
+func (self ISClusResource) Get_Cluster() (ISCluster, error) {
 	var _ppCluster *networkingclustering.ISCluster
 	_hr := self.Raw.Get_Cluster(&_ppCluster)
-	return _ppCluster, win32.HRESULTError(int32(_hr))
+	return WrapISCluster(_ppCluster), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClassInfo wraps the raw Get_ClassInfo call.
@@ -1889,24 +1889,24 @@ func (self ISClusResource) Get_ClassInfo() (networkingclustering.CLUSTER_RESOURC
 }
 
 // Get_Disk wraps the raw Get_Disk call.
-func (self ISClusResource) Get_Disk() (*networkingclustering.ISClusDisk, error) {
+func (self ISClusResource) Get_Disk() (ISClusDisk, error) {
 	var _ppDisk *networkingclustering.ISClusDisk
 	_hr := self.Raw.Get_Disk(&_ppDisk)
-	return _ppDisk, win32.HRESULTError(int32(_hr))
+	return WrapISClusDisk(_ppDisk), win32.HRESULTError(int32(_hr))
 }
 
 // Get_RegistryKeys wraps the raw Get_RegistryKeys call.
-func (self ISClusResource) Get_RegistryKeys() (*networkingclustering.ISClusRegistryKeys, error) {
+func (self ISClusResource) Get_RegistryKeys() (ISClusRegistryKeys, error) {
 	var _ppRegistryKeys *networkingclustering.ISClusRegistryKeys
 	_hr := self.Raw.Get_RegistryKeys(&_ppRegistryKeys)
-	return _ppRegistryKeys, win32.HRESULTError(int32(_hr))
+	return WrapISClusRegistryKeys(_ppRegistryKeys), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CryptoKeys wraps the raw Get_CryptoKeys call.
-func (self ISClusResource) Get_CryptoKeys() (*networkingclustering.ISClusCryptoKeys, error) {
+func (self ISClusResource) Get_CryptoKeys() (ISClusCryptoKeys, error) {
 	var _ppCryptoKeys *networkingclustering.ISClusCryptoKeys
 	_hr := self.Raw.Get_CryptoKeys(&_ppCryptoKeys)
-	return _ppCryptoKeys, win32.HRESULTError(int32(_hr))
+	return WrapISClusCryptoKeys(_ppCryptoKeys), win32.HRESULTError(int32(_hr))
 }
 
 // Get_TypeName wraps the raw Get_TypeName call.
@@ -1917,10 +1917,10 @@ func (self ISClusResource) Get_TypeName() (foundation.BSTR, error) {
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self ISClusResource) Get_Type() (*networkingclustering.ISClusResType, error) {
+func (self ISClusResource) Get_Type() (ISClusResType, error) {
 	var _ppResourceType *networkingclustering.ISClusResType
 	_hr := self.Raw.Get_Type(&_ppResourceType)
-	return _ppResourceType, win32.HRESULTError(int32(_hr))
+	return WrapISClusResType(_ppResourceType), win32.HRESULTError(int32(_hr))
 }
 
 // Get_MaintenanceMode wraps the raw Get_MaintenanceMode call.
@@ -1955,10 +1955,10 @@ func (self ISClusResources) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusResources) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusResources) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -1967,10 +1967,10 @@ func (self ISClusResources) Refresh() error {
 }
 
 // CreateItem wraps the raw CreateItem call.
-func (self ISClusResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (*networkingclustering.ISClusResource, error) {
+func (self ISClusResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags networkingclustering.CLUSTER_RESOURCE_CREATE_FLAGS) (ISClusResource, error) {
 	var _ppClusterResource *networkingclustering.ISClusResource
 	_hr := self.Raw.CreateItem(bstrResourceName, bstrResourceType, bstrGroupName, dwFlags, &_ppClusterResource)
-	return _ppClusterResource, win32.HRESULTError(int32(_hr))
+	return WrapISClusResource(_ppClusterResource), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusScsiAddress is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusScsiAddress with error-returning methods.
@@ -2105,31 +2105,31 @@ func WrapISCluster(raw *networkingclustering.ISCluster) ISCluster {
 }
 
 // Get_CommonProperties wraps the raw Get_CommonProperties call.
-func (self ISCluster) Get_CommonProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISCluster) Get_CommonProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateProperties wraps the raw Get_PrivateProperties call.
-func (self ISCluster) Get_PrivateProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISCluster) Get_PrivateProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommonROProperties wraps the raw Get_CommonROProperties call.
-func (self ISCluster) Get_CommonROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISCluster) Get_CommonROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_CommonROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrivateROProperties wraps the raw Get_PrivateROProperties call.
-func (self ISCluster) Get_PrivateROProperties() (*networkingclustering.ISClusProperties, error) {
+func (self ISCluster) Get_PrivateROProperties() (ISClusProperties, error) {
 	var _ppProperties *networkingclustering.ISClusProperties
 	_hr := self.Raw.Get_PrivateROProperties(&_ppProperties)
-	return _ppProperties, win32.HRESULTError(int32(_hr))
+	return WrapISClusProperties(_ppProperties), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Handle wraps the raw Get_Handle call.
@@ -2157,22 +2157,22 @@ func (self ISCluster) Put_Name(bstrClusterName foundation.BSTR) error {
 }
 
 // Get_Version wraps the raw Get_Version call.
-func (self ISCluster) Get_Version() (*networkingclustering.ISClusVersion, error) {
+func (self ISCluster) Get_Version() (ISClusVersion, error) {
 	var _ppClusVersion *networkingclustering.ISClusVersion
 	_hr := self.Raw.Get_Version(&_ppClusVersion)
-	return _ppClusVersion, win32.HRESULTError(int32(_hr))
+	return WrapISClusVersion(_ppClusVersion), win32.HRESULTError(int32(_hr))
 }
 
 // Put_QuorumResource wraps the raw Put_QuorumResource call.
-func (self ISCluster) Put_QuorumResource(pClusterResource *networkingclustering.ISClusResource) error {
-	return win32.HRESULTError(int32(self.Raw.Put_QuorumResource(pClusterResource)))
+func (self ISCluster) Put_QuorumResource(pClusterResource ISClusResource) error {
+	return win32.HRESULTError(int32(self.Raw.Put_QuorumResource(pClusterResource.Raw)))
 }
 
 // Get_QuorumResource wraps the raw Get_QuorumResource call.
-func (self ISCluster) Get_QuorumResource() (*networkingclustering.ISClusResource, error) {
+func (self ISCluster) Get_QuorumResource() (ISClusResource, error) {
 	var _pClusterResource *networkingclustering.ISClusResource
 	_hr := self.Raw.Get_QuorumResource(&_pClusterResource)
-	return _pClusterResource, win32.HRESULTError(int32(_hr))
+	return WrapISClusResource(_pClusterResource), win32.HRESULTError(int32(_hr))
 }
 
 // Get_QuorumLogSize wraps the raw Get_QuorumLogSize call.
@@ -2200,45 +2200,45 @@ func (self ISCluster) Put_QuorumPath(pPath foundation.BSTR) error {
 }
 
 // Get_Nodes wraps the raw Get_Nodes call.
-func (self ISCluster) Get_Nodes() (*networkingclustering.ISClusNodes, error) {
+func (self ISCluster) Get_Nodes() (ISClusNodes, error) {
 	var _ppNodes *networkingclustering.ISClusNodes
 	_hr := self.Raw.Get_Nodes(&_ppNodes)
-	return _ppNodes, win32.HRESULTError(int32(_hr))
+	return WrapISClusNodes(_ppNodes), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResourceGroups wraps the raw Get_ResourceGroups call.
-func (self ISCluster) Get_ResourceGroups() (*networkingclustering.ISClusResGroups, error) {
+func (self ISCluster) Get_ResourceGroups() (ISClusResGroups, error) {
 	var _ppClusterResourceGroups *networkingclustering.ISClusResGroups
 	_hr := self.Raw.Get_ResourceGroups(&_ppClusterResourceGroups)
-	return _ppClusterResourceGroups, win32.HRESULTError(int32(_hr))
+	return WrapISClusResGroups(_ppClusterResourceGroups), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Resources wraps the raw Get_Resources call.
-func (self ISCluster) Get_Resources() (*networkingclustering.ISClusResources, error) {
+func (self ISCluster) Get_Resources() (ISClusResources, error) {
 	var _ppClusterResources *networkingclustering.ISClusResources
 	_hr := self.Raw.Get_Resources(&_ppClusterResources)
-	return _ppClusterResources, win32.HRESULTError(int32(_hr))
+	return WrapISClusResources(_ppClusterResources), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResourceTypes wraps the raw Get_ResourceTypes call.
-func (self ISCluster) Get_ResourceTypes() (*networkingclustering.ISClusResTypes, error) {
+func (self ISCluster) Get_ResourceTypes() (ISClusResTypes, error) {
 	var _ppResourceTypes *networkingclustering.ISClusResTypes
 	_hr := self.Raw.Get_ResourceTypes(&_ppResourceTypes)
-	return _ppResourceTypes, win32.HRESULTError(int32(_hr))
+	return WrapISClusResTypes(_ppResourceTypes), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Networks wraps the raw Get_Networks call.
-func (self ISCluster) Get_Networks() (*networkingclustering.ISClusNetworks, error) {
+func (self ISCluster) Get_Networks() (ISClusNetworks, error) {
 	var _ppNetworks *networkingclustering.ISClusNetworks
 	_hr := self.Raw.Get_Networks(&_ppNetworks)
-	return _ppNetworks, win32.HRESULTError(int32(_hr))
+	return WrapISClusNetworks(_ppNetworks), win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetInterfaces wraps the raw Get_NetInterfaces call.
-func (self ISCluster) Get_NetInterfaces() (*networkingclustering.ISClusNetInterfaces, error) {
+func (self ISCluster) Get_NetInterfaces() (ISClusNetInterfaces, error) {
 	var _ppNetInterfaces *networkingclustering.ISClusNetInterfaces
 	_hr := self.Raw.Get_NetInterfaces(&_ppNetInterfaces)
-	return _ppNetInterfaces, win32.HRESULTError(int32(_hr))
+	return WrapISClusNetInterfaces(_ppNetInterfaces), win32.HRESULTError(int32(_hr))
 }
 
 // ISClusterNames is an idiomatic wrapper over the raw COM interface Networking.Clustering.ISClusterNames with error-returning methods.
@@ -2260,10 +2260,10 @@ func (self ISClusterNames) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISClusterNames) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISClusterNames) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -2297,10 +2297,10 @@ func (self ISDomainNames) Get_Count() (int32, error) {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISDomainNames) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISDomainNames) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _retval *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_retval)
-	return _retval, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_retval), win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -2396,8 +2396,8 @@ func WrapIWEExtendContextMenu(raw *networkingclustering.IWEExtendContextMenu) IW
 }
 
 // AddContextMenuItems wraps the raw AddContextMenuItems call.
-func (self IWEExtendContextMenu) AddContextMenuItems(piData *systemcom.IUnknown, piCallback *networkingclustering.IWCContextMenuCallback) error {
-	return win32.HRESULTError(int32(self.Raw.AddContextMenuItems(piData, piCallback)))
+func (self IWEExtendContextMenu) AddContextMenuItems(piData systemcomidiom.IUnknown, piCallback IWCContextMenuCallback) error {
+	return win32.HRESULTError(int32(self.Raw.AddContextMenuItems(piData.Raw, piCallback.Raw)))
 }
 
 // IWEExtendPropertySheet is an idiomatic wrapper over the raw COM interface Networking.Clustering.IWEExtendPropertySheet with error-returning methods.
@@ -2412,8 +2412,8 @@ func WrapIWEExtendPropertySheet(raw *networkingclustering.IWEExtendPropertySheet
 }
 
 // CreatePropertySheetPages wraps the raw CreatePropertySheetPages call.
-func (self IWEExtendPropertySheet) CreatePropertySheetPages(piData *systemcom.IUnknown, piCallback *networkingclustering.IWCPropertySheetCallback) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePropertySheetPages(piData, piCallback)))
+func (self IWEExtendPropertySheet) CreatePropertySheetPages(piData systemcomidiom.IUnknown, piCallback IWCPropertySheetCallback) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePropertySheetPages(piData.Raw, piCallback.Raw)))
 }
 
 // IWEExtendWizard is an idiomatic wrapper over the raw COM interface Networking.Clustering.IWEExtendWizard with error-returning methods.
@@ -2428,8 +2428,8 @@ func WrapIWEExtendWizard(raw *networkingclustering.IWEExtendWizard) IWEExtendWiz
 }
 
 // CreateWizardPages wraps the raw CreateWizardPages call.
-func (self IWEExtendWizard) CreateWizardPages(piData *systemcom.IUnknown, piCallback *networkingclustering.IWCWizardCallback) error {
-	return win32.HRESULTError(int32(self.Raw.CreateWizardPages(piData, piCallback)))
+func (self IWEExtendWizard) CreateWizardPages(piData systemcomidiom.IUnknown, piCallback IWCWizardCallback) error {
+	return win32.HRESULTError(int32(self.Raw.CreateWizardPages(piData.Raw, piCallback.Raw)))
 }
 
 // IWEExtendWizard97 is an idiomatic wrapper over the raw COM interface Networking.Clustering.IWEExtendWizard97 with error-returning methods.
@@ -2444,8 +2444,8 @@ func WrapIWEExtendWizard97(raw *networkingclustering.IWEExtendWizard97) IWEExten
 }
 
 // CreateWizard97Pages wraps the raw CreateWizard97Pages call.
-func (self IWEExtendWizard97) CreateWizard97Pages(piData *systemcom.IUnknown, piCallback *networkingclustering.IWCWizard97Callback) error {
-	return win32.HRESULTError(int32(self.Raw.CreateWizard97Pages(piData, piCallback)))
+func (self IWEExtendWizard97) CreateWizard97Pages(piData systemcomidiom.IUnknown, piCallback IWCWizard97Callback) error {
+	return win32.HRESULTError(int32(self.Raw.CreateWizard97Pages(piData.Raw, piCallback.Raw)))
 }
 
 // IWEInvokeCommand is an idiomatic wrapper over the raw COM interface Networking.Clustering.IWEInvokeCommand with error-returning methods.
@@ -2460,6 +2460,6 @@ func WrapIWEInvokeCommand(raw *networkingclustering.IWEInvokeCommand) IWEInvokeC
 }
 
 // InvokeCommand wraps the raw InvokeCommand call.
-func (self IWEInvokeCommand) InvokeCommand(nCommandID uint32, piData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.InvokeCommand(nCommandID, piData)))
+func (self IWEInvokeCommand) InvokeCommand(nCommandID uint32, piData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.InvokeCommand(nCommandID, piData.Raw)))
 }

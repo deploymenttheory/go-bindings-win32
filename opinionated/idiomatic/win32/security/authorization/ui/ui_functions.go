@@ -8,10 +8,23 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securityauthorizationui "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/authorization/ui"
+	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 )
+
+// CreateSecurityPage wraps the raw CreateSecurityPage call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/aclui/nf-aclui-createsecuritypage
+func CreateSecurityPage(psi ISecurityInformation) (uicontrols.HPROPSHEETPAGE, error) {
+	return securityauthorizationui.CreateSecurityPage(psi.Raw)
+}
+
+// EditSecurity wraps the raw EditSecurity call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/aclui/nf-aclui-editsecurity
+func EditSecurity(hwndOwner foundation.HWND, psi ISecurityInformation) error {
+	return securityauthorizationui.EditSecurity(hwndOwner, psi.Raw)
+}
 
 // EditSecurityAdvanced wraps the raw EditSecurityAdvanced call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/aclui/nf-aclui-editsecurityadvanced
-func EditSecurityAdvanced(hwndOwner foundation.HWND, psi *securityauthorizationui.ISecurityInformation, uSIPage securityauthorizationui.SI_PAGE_TYPE) error {
-	return win32.HRESULTError(int32(securityauthorizationui.EditSecurityAdvanced(hwndOwner, psi, uSIPage)))
+func EditSecurityAdvanced(hwndOwner foundation.HWND, psi ISecurityInformation, uSIPage securityauthorizationui.SI_PAGE_TYPE) error {
+	return win32.HRESULTError(int32(securityauthorizationui.EditSecurityAdvanced(hwndOwner, psi.Raw, uSIPage)))
 }

@@ -15,6 +15,7 @@ import (
 	systemdistributedtransactioncoordinator "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/distributedtransactioncoordinator"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemdistributedtransactioncoordinatoridiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/distributedtransactioncoordinator"
 )
 
 // ContextInfo is an idiomatic wrapper over the raw COM interface System.ComponentServices.ContextInfo with error-returning methods.
@@ -91,13 +92,13 @@ func WrapIAppDomainHelper(raw *systemcomponentservices.IAppDomainHelper) IAppDom
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IAppDomainHelper) Initialize(pUnkAD *systemcom.IUnknown, __MIDL__IAppDomainHelper0000 uintptr, pPool unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pUnkAD, __MIDL__IAppDomainHelper0000, pPool)))
+func (self IAppDomainHelper) Initialize(pUnkAD systemcomidiom.IUnknown, __MIDL__IAppDomainHelper0000 uintptr, pPool unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pUnkAD.Raw, __MIDL__IAppDomainHelper0000, pPool)))
 }
 
 // DoCallback wraps the raw DoCallback call.
-func (self IAppDomainHelper) DoCallback(pUnkAD *systemcom.IUnknown, __MIDL__IAppDomainHelper0001 uintptr, pPool unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.DoCallback(pUnkAD, __MIDL__IAppDomainHelper0001, pPool)))
+func (self IAppDomainHelper) DoCallback(pUnkAD systemcomidiom.IUnknown, __MIDL__IAppDomainHelper0001 uintptr, pPool unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.DoCallback(pUnkAD.Raw, __MIDL__IAppDomainHelper0001, pPool)))
 }
 
 // IAssemblyLocator is an idiomatic wrapper over the raw COM interface System.ComponentServices.IAssemblyLocator with error-returning methods.
@@ -144,17 +145,17 @@ func WrapICOMAdminCatalog(raw *systemcomponentservices.ICOMAdminCatalog) ICOMAdm
 }
 
 // GetCollection wraps the raw GetCollection call.
-func (self ICOMAdminCatalog) GetCollection(bstrCollName foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self ICOMAdminCatalog) GetCollection(bstrCollName foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _ppCatalogCollection *systemcom.IDispatch
 	_hr := self.Raw.GetCollection(bstrCollName, &_ppCatalogCollection)
-	return _ppCatalogCollection, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppCatalogCollection), win32.HRESULTError(int32(_hr))
 }
 
 // Connect wraps the raw Connect call.
-func (self ICOMAdminCatalog) Connect(bstrCatalogServerName foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self ICOMAdminCatalog) Connect(bstrCatalogServerName foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _ppCatalogCollection *systemcom.IDispatch
 	_hr := self.Raw.Connect(bstrCatalogServerName, &_ppCatalogCollection)
-	return _ppCatalogCollection, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppCatalogCollection), win32.HRESULTError(int32(_hr))
 }
 
 // Get_MajorVersion wraps the raw Get_MajorVersion call.
@@ -172,10 +173,10 @@ func (self ICOMAdminCatalog) Get_MinorVersion() (int32, error) {
 }
 
 // GetCollectionByQuery wraps the raw GetCollectionByQuery call.
-func (self ICOMAdminCatalog) GetCollectionByQuery(bstrCollName foundation.BSTR, ppsaVarQuery **systemcom.SAFEARRAY) (*systemcom.IDispatch, error) {
+func (self ICOMAdminCatalog) GetCollectionByQuery(bstrCollName foundation.BSTR, ppsaVarQuery **systemcom.SAFEARRAY) (systemcomidiom.IDispatch, error) {
 	var _ppCatalogCollection *systemcom.IDispatch
 	_hr := self.Raw.GetCollectionByQuery(bstrCollName, ppsaVarQuery, &_ppCatalogCollection)
-	return _ppCatalogCollection, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppCatalogCollection), win32.HRESULTError(int32(_hr))
 }
 
 // ImportComponent wraps the raw ImportComponent call.
@@ -297,10 +298,10 @@ func WrapICOMAdminCatalog2(raw *systemcomponentservices.ICOMAdminCatalog2) ICOMA
 }
 
 // GetCollectionByQuery2 wraps the raw GetCollectionByQuery2 call.
-func (self ICOMAdminCatalog2) GetCollectionByQuery2(bstrCollectionName foundation.BSTR, pVarQueryStrings *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+func (self ICOMAdminCatalog2) GetCollectionByQuery2(bstrCollectionName foundation.BSTR, pVarQueryStrings *systemvariant.VARIANT) (systemcomidiom.IDispatch, error) {
 	var _ppCatalogCollection *systemcom.IDispatch
 	_hr := self.Raw.GetCollectionByQuery2(bstrCollectionName, pVarQueryStrings, &_ppCatalogCollection)
-	return _ppCatalogCollection, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppCatalogCollection), win32.HRESULTError(int32(_hr))
 }
 
 // GetApplicationInstanceIDFromProcessID wraps the raw GetApplicationInstanceIDFromProcessID call.
@@ -466,10 +467,10 @@ func (self ICOMAdminCatalog2) InstallPartition(bstrFileName foundation.BSTR, bst
 }
 
 // QueryApplicationFile2 wraps the raw QueryApplicationFile2 call.
-func (self ICOMAdminCatalog2) QueryApplicationFile2(bstrApplicationFile foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self ICOMAdminCatalog2) QueryApplicationFile2(bstrApplicationFile foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _ppFilesForImport *systemcom.IDispatch
 	_hr := self.Raw.QueryApplicationFile2(bstrApplicationFile, &_ppFilesForImport)
-	return _ppFilesForImport, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppFilesForImport), win32.HRESULTError(int32(_hr))
 }
 
 // GetComponentVersionCount wraps the raw GetComponentVersionCount call.
@@ -523,17 +524,17 @@ func WrapICatalogCollection(raw *systemcomponentservices.ICatalogCollection) ICa
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ICatalogCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ICatalogCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppEnumVariant *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppEnumVariant)
-	return _ppEnumVariant, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppEnumVariant), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self ICatalogCollection) Get_Item(lIndex int32) (*systemcom.IDispatch, error) {
+func (self ICatalogCollection) Get_Item(lIndex int32) (systemcomidiom.IDispatch, error) {
 	var _ppCatalogObject *systemcom.IDispatch
 	_hr := self.Raw.Get_Item(lIndex, &_ppCatalogObject)
-	return _ppCatalogObject, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppCatalogObject), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -549,10 +550,10 @@ func (self ICatalogCollection) Remove(lIndex int32) error {
 }
 
 // Add wraps the raw Add call.
-func (self ICatalogCollection) Add() (*systemcom.IDispatch, error) {
+func (self ICatalogCollection) Add() (systemcomidiom.IDispatch, error) {
 	var _ppCatalogObject *systemcom.IDispatch
 	_hr := self.Raw.Add(&_ppCatalogObject)
-	return _ppCatalogObject, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppCatalogObject), win32.HRESULTError(int32(_hr))
 }
 
 // Populate wraps the raw Populate call.
@@ -589,10 +590,10 @@ func (self ICatalogCollection) Get_RemoveEnabled() (foundation.VARIANT_BOOL, err
 }
 
 // GetUtilInterface wraps the raw GetUtilInterface call.
-func (self ICatalogCollection) GetUtilInterface() (*systemcom.IDispatch, error) {
+func (self ICatalogCollection) GetUtilInterface() (systemcomidiom.IDispatch, error) {
 	var _ppIDispatch *systemcom.IDispatch
 	_hr := self.Raw.GetUtilInterface(&_ppIDispatch)
-	return _ppIDispatch, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppIDispatch), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DataStoreMajorVersion wraps the raw Get_DataStoreMajorVersion call.
@@ -1458,8 +1459,8 @@ func WrapIComTrackingInfoEvents(raw *systemcomponentservices.IComTrackingInfoEve
 }
 
 // OnNewTrackingInfo wraps the raw OnNewTrackingInfo call.
-func (self IComTrackingInfoEvents) OnNewTrackingInfo(pToplevelCollection *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnNewTrackingInfo(pToplevelCollection)))
+func (self IComTrackingInfoEvents) OnNewTrackingInfo(pToplevelCollection systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnNewTrackingInfo(pToplevelCollection.Raw)))
 }
 
 // IComTrackingInfoObject is an idiomatic wrapper over the raw COM interface System.ComponentServices.IComTrackingInfoObject with error-returning methods.
@@ -1678,8 +1679,8 @@ func WrapICreateWithLocalTransaction(raw *systemcomponentservices.ICreateWithLoc
 }
 
 // CreateInstanceWithSysTx wraps the raw CreateInstanceWithSysTx call.
-func (self ICreateWithLocalTransaction) CreateInstanceWithSysTx(pTransaction *systemcom.IUnknown, rclsid *win32.GUID, riid *win32.GUID, pObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceWithSysTx(pTransaction, rclsid, riid, pObject)))
+func (self ICreateWithLocalTransaction) CreateInstanceWithSysTx(pTransaction systemcomidiom.IUnknown, rclsid *win32.GUID, riid *win32.GUID, pObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceWithSysTx(pTransaction.Raw, rclsid, riid, pObject)))
 }
 
 // ICreateWithTipTransactionEx is an idiomatic wrapper over the raw COM interface System.ComponentServices.ICreateWithTipTransactionEx with error-returning methods.
@@ -1710,8 +1711,8 @@ func WrapICreateWithTransactionEx(raw *systemcomponentservices.ICreateWithTransa
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self ICreateWithTransactionEx) CreateInstance(pTransaction *systemdistributedtransactioncoordinator.ITransaction, rclsid *win32.GUID, riid *win32.GUID, pObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(pTransaction, rclsid, riid, pObject)))
+func (self ICreateWithTransactionEx) CreateInstance(pTransaction systemdistributedtransactioncoordinatoridiom.ITransaction, rclsid *win32.GUID, riid *win32.GUID, pObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(pTransaction.Raw, rclsid, riid, pObject)))
 }
 
 // ICrmCompensator is an idiomatic wrapper over the raw COM interface System.ComponentServices.ICrmCompensator with error-returning methods.
@@ -1726,8 +1727,8 @@ func WrapICrmCompensator(raw *systemcomponentservices.ICrmCompensator) ICrmCompe
 }
 
 // SetLogControl wraps the raw SetLogControl call.
-func (self ICrmCompensator) SetLogControl(pLogControl *systemcomponentservices.ICrmLogControl) error {
-	return win32.HRESULTError(int32(self.Raw.SetLogControl(pLogControl)))
+func (self ICrmCompensator) SetLogControl(pLogControl ICrmLogControl) error {
+	return win32.HRESULTError(int32(self.Raw.SetLogControl(pLogControl.Raw)))
 }
 
 // BeginPrepare wraps the raw BeginPrepare call.
@@ -1774,8 +1775,8 @@ func WrapICrmCompensatorVariants(raw *systemcomponentservices.ICrmCompensatorVar
 }
 
 // SetLogControlVariants wraps the raw SetLogControlVariants call.
-func (self ICrmCompensatorVariants) SetLogControlVariants(pLogControl *systemcomponentservices.ICrmLogControl) error {
-	return win32.HRESULTError(int32(self.Raw.SetLogControlVariants(pLogControl)))
+func (self ICrmCompensatorVariants) SetLogControlVariants(pLogControl ICrmLogControl) error {
+	return win32.HRESULTError(int32(self.Raw.SetLogControlVariants(pLogControl.Raw)))
 }
 
 // BeginPrepareVariants wraps the raw BeginPrepareVariants call.
@@ -2014,9 +2015,9 @@ func WrapIDispenserManager(raw *systemcomponentservices.IDispenserManager) IDisp
 }
 
 // RegisterDispenser wraps the raw RegisterDispenser call.
-func (self IDispenserManager) RegisterDispenser(__MIDL__IDispenserManager0000 *systemcomponentservices.IDispenserDriver, szDispenserName string, __MIDL__IDispenserManager0001 **systemcomponentservices.IHolder) error {
+func (self IDispenserManager) RegisterDispenser(__MIDL__IDispenserManager0000 IDispenserDriver, szDispenserName string, __MIDL__IDispenserManager0001 **systemcomponentservices.IHolder) error {
 	_szDispenserName := win32.UTF16Ptr(szDispenserName)
-	return win32.HRESULTError(int32(self.Raw.RegisterDispenser(__MIDL__IDispenserManager0000, foundation.PWSTR(_szDispenserName), __MIDL__IDispenserManager0001)))
+	return win32.HRESULTError(int32(self.Raw.RegisterDispenser(__MIDL__IDispenserManager0000.Raw, foundation.PWSTR(_szDispenserName), __MIDL__IDispenserManager0001)))
 }
 
 // GetContext wraps the raw GetContext call.
@@ -2260,13 +2261,13 @@ func WrapIMTSActivity(raw *systemcomponentservices.IMTSActivity) IMTSActivity {
 }
 
 // SynchronousCall wraps the raw SynchronousCall call.
-func (self IMTSActivity) SynchronousCall(pCall *systemcomponentservices.IMTSCall) error {
-	return win32.HRESULTError(int32(self.Raw.SynchronousCall(pCall)))
+func (self IMTSActivity) SynchronousCall(pCall IMTSCall) error {
+	return win32.HRESULTError(int32(self.Raw.SynchronousCall(pCall.Raw)))
 }
 
 // AsyncCall wraps the raw AsyncCall call.
-func (self IMTSActivity) AsyncCall(pCall *systemcomponentservices.IMTSCall) error {
-	return win32.HRESULTError(int32(self.Raw.AsyncCall(pCall)))
+func (self IMTSActivity) AsyncCall(pCall IMTSCall) error {
+	return win32.HRESULTError(int32(self.Raw.AsyncCall(pCall.Raw)))
 }
 
 // Reserved1 wraps the raw Reserved1 call.
@@ -2328,14 +2329,14 @@ func WrapIManagedActivationEvents(raw *systemcomponentservices.IManagedActivatio
 }
 
 // CreateManagedStub wraps the raw CreateManagedStub call.
-func (self IManagedActivationEvents) CreateManagedStub(pInfo *systemcomponentservices.IManagedObjectInfo, fDist bool) error {
+func (self IManagedActivationEvents) CreateManagedStub(pInfo IManagedObjectInfo, fDist bool) error {
 	_fDist := foundation.BOOL(win32.Bool32(fDist))
-	return win32.HRESULTError(int32(self.Raw.CreateManagedStub(pInfo, _fDist)))
+	return win32.HRESULTError(int32(self.Raw.CreateManagedStub(pInfo.Raw, _fDist)))
 }
 
 // DestroyManagedStub wraps the raw DestroyManagedStub call.
-func (self IManagedActivationEvents) DestroyManagedStub(pInfo *systemcomponentservices.IManagedObjectInfo) error {
-	return win32.HRESULTError(int32(self.Raw.DestroyManagedStub(pInfo)))
+func (self IManagedActivationEvents) DestroyManagedStub(pInfo IManagedObjectInfo) error {
+	return win32.HRESULTError(int32(self.Raw.DestroyManagedStub(pInfo.Raw)))
 }
 
 // IManagedObjectInfo is an idiomatic wrapper over the raw COM interface System.ComponentServices.IManagedObjectInfo with error-returning methods.
@@ -2360,9 +2361,9 @@ func (self IManagedObjectInfo) GetIObjectControl(pCtrl **systemcomponentservices
 }
 
 // SetInPool wraps the raw SetInPool call.
-func (self IManagedObjectInfo) SetInPool(bInPool bool, pPooledObj *systemcomponentservices.IManagedPooledObj) error {
+func (self IManagedObjectInfo) SetInPool(bInPool bool, pPooledObj IManagedPooledObj) error {
 	_bInPool := foundation.BOOL(win32.Bool32(bInPool))
-	return win32.HRESULTError(int32(self.Raw.SetInPool(_bInPool, pPooledObj)))
+	return win32.HRESULTError(int32(self.Raw.SetInPool(_bInPool, pPooledObj.Raw)))
 }
 
 // SetWrapperStrength wraps the raw SetWrapperStrength call.
@@ -2580,8 +2581,8 @@ func (self IObjPool) Reserved4() {
 }
 
 // PutEndTx wraps the raw PutEndTx call.
-func (self IObjPool) PutEndTx(pObj *systemcom.IUnknown) {
-	self.Raw.PutEndTx(pObj)
+func (self IObjPool) PutEndTx(pObj systemcomidiom.IUnknown) {
+	self.Raw.PutEndTx(pObj.Raw)
 }
 
 // Reserved5 wraps the raw Reserved5 call.
@@ -2606,8 +2607,8 @@ func WrapIObjectConstruct(raw *systemcomponentservices.IObjectConstruct) IObject
 }
 
 // Construct wraps the raw Construct call.
-func (self IObjectConstruct) Construct(pCtorObj *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Construct(pCtorObj)))
+func (self IObjectConstruct) Construct(pCtorObj systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Construct(pCtorObj.Raw)))
 }
 
 // IObjectConstructString is an idiomatic wrapper over the raw COM interface System.ComponentServices.IObjectConstructString with error-returning methods.
@@ -2846,8 +2847,8 @@ func WrapIProcessInitializer(raw *systemcomponentservices.IProcessInitializer) I
 }
 
 // Startup wraps the raw Startup call.
-func (self IProcessInitializer) Startup(punkProcessControl *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Startup(punkProcessControl)))
+func (self IProcessInitializer) Startup(punkProcessControl systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Startup(punkProcessControl.Raw)))
 }
 
 // Shutdown wraps the raw Shutdown call.
@@ -3001,8 +3002,8 @@ func (self ISelectCOMLBServer) Init() error {
 }
 
 // GetLBServer wraps the raw GetLBServer call.
-func (self ISelectCOMLBServer) GetLBServer(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetLBServer(pUnk)))
+func (self ISelectCOMLBServer) GetLBServer(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GetLBServer(pUnk.Raw)))
 }
 
 // ISendMethodEvents is an idiomatic wrapper over the raw COM interface System.ComponentServices.ISendMethodEvents with error-returning methods.
@@ -3038,13 +3039,13 @@ func WrapIServiceActivity(raw *systemcomponentservices.IServiceActivity) IServic
 }
 
 // SynchronousCall wraps the raw SynchronousCall call.
-func (self IServiceActivity) SynchronousCall(pIServiceCall *systemcomponentservices.IServiceCall) error {
-	return win32.HRESULTError(int32(self.Raw.SynchronousCall(pIServiceCall)))
+func (self IServiceActivity) SynchronousCall(pIServiceCall IServiceCall) error {
+	return win32.HRESULTError(int32(self.Raw.SynchronousCall(pIServiceCall.Raw)))
 }
 
 // AsynchronousCall wraps the raw AsynchronousCall call.
-func (self IServiceActivity) AsynchronousCall(pIServiceCall *systemcomponentservices.IServiceCall) error {
-	return win32.HRESULTError(int32(self.Raw.AsynchronousCall(pIServiceCall)))
+func (self IServiceActivity) AsynchronousCall(pIServiceCall IServiceCall) error {
+	return win32.HRESULTError(int32(self.Raw.AsynchronousCall(pIServiceCall.Raw)))
 }
 
 // BindToCurrentThread wraps the raw BindToCurrentThread call.
@@ -3154,8 +3155,8 @@ func WrapIServicePool(raw *systemcomponentservices.IServicePool) IServicePool {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IServicePool) Initialize(pPoolConfig *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pPoolConfig)))
+func (self IServicePool) Initialize(pPoolConfig systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pPoolConfig.Raw)))
 }
 
 // GetObject wraps the raw GetObject call.
@@ -3221,8 +3222,8 @@ func (self IServicePoolConfig) Get_TransactionAffinity(pfTxAffinity *foundation.
 }
 
 // Put_ClassFactory wraps the raw Put_ClassFactory call.
-func (self IServicePoolConfig) Put_ClassFactory(pFactory *systemcom.IClassFactory) error {
-	return win32.HRESULTError(int32(self.Raw.Put_ClassFactory(pFactory)))
+func (self IServicePoolConfig) Put_ClassFactory(pFactory systemcomidiom.IClassFactory) error {
+	return win32.HRESULTError(int32(self.Raw.Put_ClassFactory(pFactory.Raw)))
 }
 
 // Get_ClassFactory wraps the raw Get_ClassFactory call.
@@ -3286,8 +3287,8 @@ func WrapIServiceSysTxnConfig(raw *systemcomponentservices.IServiceSysTxnConfig)
 }
 
 // ConfigureBYOTSysTxn wraps the raw ConfigureBYOTSysTxn call.
-func (self IServiceSysTxnConfig) ConfigureBYOTSysTxn(pTxProxy *systemcomponentservices.ITransactionProxy) error {
-	return win32.HRESULTError(int32(self.Raw.ConfigureBYOTSysTxn(pTxProxy)))
+func (self IServiceSysTxnConfig) ConfigureBYOTSysTxn(pTxProxy ITransactionProxy) error {
+	return win32.HRESULTError(int32(self.Raw.ConfigureBYOTSysTxn(pTxProxy.Raw)))
 }
 
 // IServiceThreadPoolConfig is an idiomatic wrapper over the raw COM interface System.ComponentServices.IServiceThreadPoolConfig with error-returning methods.
@@ -3341,8 +3342,8 @@ func WrapIServiceTransactionConfig(raw *systemcomponentservices.IServiceTransact
 }
 
 // ConfigureBYOT wraps the raw ConfigureBYOT call.
-func (self IServiceTransactionConfig) ConfigureBYOT(pITxByot *systemdistributedtransactioncoordinator.ITransaction) error {
-	return win32.HRESULTError(int32(self.Raw.ConfigureBYOT(pITxByot)))
+func (self IServiceTransactionConfig) ConfigureBYOT(pITxByot systemdistributedtransactioncoordinatoridiom.ITransaction) error {
+	return win32.HRESULTError(int32(self.Raw.ConfigureBYOT(pITxByot.Raw)))
 }
 
 // IServiceTransactionConfigBase is an idiomatic wrapper over the raw COM interface System.ComponentServices.IServiceTransactionConfigBase with error-returning methods.
@@ -3713,8 +3714,8 @@ func (self ITransactionProxy) Promote(pTransaction **systemdistributedtransactio
 }
 
 // CreateVoter wraps the raw CreateVoter call.
-func (self ITransactionProxy) CreateVoter(pTxAsync *systemdistributedtransactioncoordinator.ITransactionVoterNotifyAsync2, ppBallot **systemdistributedtransactioncoordinator.ITransactionVoterBallotAsync2) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVoter(pTxAsync, ppBallot)))
+func (self ITransactionProxy) CreateVoter(pTxAsync systemdistributedtransactioncoordinatoridiom.ITransactionVoterNotifyAsync2, ppBallot **systemdistributedtransactioncoordinator.ITransactionVoterBallotAsync2) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVoter(pTxAsync.Raw, ppBallot)))
 }
 
 // GetIsolationLevel wraps the raw GetIsolationLevel call.
@@ -3744,13 +3745,13 @@ func WrapITransactionResourcePool(raw *systemcomponentservices.ITransactionResou
 }
 
 // PutResource wraps the raw PutResource call.
-func (self ITransactionResourcePool) PutResource(pPool *systemcomponentservices.IObjPool, pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.PutResource(pPool, pUnk)))
+func (self ITransactionResourcePool) PutResource(pPool IObjPool, pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.PutResource(pPool.Raw, pUnk.Raw)))
 }
 
 // GetResource wraps the raw GetResource call.
-func (self ITransactionResourcePool) GetResource(pPool *systemcomponentservices.IObjPool, ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetResource(pPool, ppUnk)))
+func (self ITransactionResourcePool) GetResource(pPool IObjPool, ppUnk **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GetResource(pPool.Raw, ppUnk)))
 }
 
 // ITransactionStatus is an idiomatic wrapper over the raw COM interface System.ComponentServices.ITransactionStatus with error-returning methods.

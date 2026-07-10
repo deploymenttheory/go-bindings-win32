@@ -9,9 +9,9 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcommarshal "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/marshal"
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CoDecodeProxy wraps the raw CoDecodeProxy call with idiomatic Go types.
@@ -28,8 +28,8 @@ func CreateControlInput(riid *win32.GUID, ppv *unsafe.Pointer) error {
 
 // CreateControlInputEx wraps the raw CreateControlInputEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/corewindow/nf-corewindow-createcontrolinputex
-func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemwinrt.CreateControlInputEx(pCoreWindow, riid, ppv)))
+func CreateControlInputEx(pCoreWindow systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemwinrt.CreateControlInputEx(pCoreWindow.Raw, riid, ppv)))
 }
 
 // CreateRandomAccessStreamOnFile wraps the raw CreateRandomAccessStreamOnFile call with idiomatic Go types.
@@ -41,14 +41,14 @@ func CreateRandomAccessStreamOnFile(filePath string, accessMode uint32, riid *wi
 
 // CreateRandomAccessStreamOverStream wraps the raw CreateRandomAccessStreamOverStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createrandomaccessstreamoverstream
-func CreateRandomAccessStreamOverStream(stream *systemcom.IStream, options systemwinrt.BSOS_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemwinrt.CreateRandomAccessStreamOverStream(stream, options, riid, ppv)))
+func CreateRandomAccessStreamOverStream(stream systemcomidiom.IStream, options systemwinrt.BSOS_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemwinrt.CreateRandomAccessStreamOverStream(stream.Raw, options, riid, ppv)))
 }
 
 // CreateStreamOverRandomAccessStream wraps the raw CreateStreamOverRandomAccessStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createstreamoverrandomaccessstream
-func CreateStreamOverRandomAccessStream(randomAccessStream *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemwinrt.CreateStreamOverRandomAccessStream(randomAccessStream, riid, ppv)))
+func CreateStreamOverRandomAccessStream(randomAccessStream systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemwinrt.CreateStreamOverRandomAccessStream(randomAccessStream.Raw, riid, ppv)))
 }
 
 // GetRestrictedErrorInfo wraps the raw GetRestrictedErrorInfo call with idiomatic Go types.
@@ -83,8 +83,8 @@ func RoGetActivationFactory(activatableClassId systemwinrt.HSTRING, iid *win32.G
 
 // RoGetAgileReference wraps the raw RoGetAgileReference call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-rogetagilereference
-func RoGetAgileReference(options systemwinrt.AgileReferenceOptions, riid *win32.GUID, pUnk *systemcom.IUnknown, ppAgileReference **systemwinrt.IAgileReference) error {
-	return win32.HRESULTError(int32(systemwinrt.RoGetAgileReference(options, riid, pUnk, ppAgileReference)))
+func RoGetAgileReference(options systemwinrt.AgileReferenceOptions, riid *win32.GUID, pUnk systemcomidiom.IUnknown, ppAgileReference **systemwinrt.IAgileReference) error {
+	return win32.HRESULTError(int32(systemwinrt.RoGetAgileReference(options, riid, pUnk.Raw, ppAgileReference)))
 }
 
 // RoGetApartmentIdentifier wraps the raw RoGetApartmentIdentifier call with idiomatic Go types.
@@ -150,8 +150,8 @@ func RoOriginateErrorW(error_ foundation.HRESULT, cchMax uint32, message string)
 
 // RoOriginateLanguageException wraps the raw RoOriginateLanguageException call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rooriginatelanguageexception
-func RoOriginateLanguageException(error_ foundation.HRESULT, message systemwinrt.HSTRING, languageException *systemcom.IUnknown) bool {
-	return systemwinrt.RoOriginateLanguageException(error_, message, languageException) != 0
+func RoOriginateLanguageException(error_ foundation.HRESULT, message systemwinrt.HSTRING, languageException systemcomidiom.IUnknown) bool {
+	return systemwinrt.RoOriginateLanguageException(error_, message, languageException.Raw) != 0
 }
 
 // RoRegisterActivationFactories wraps the raw RoRegisterActivationFactories call with idiomatic Go types.
@@ -162,20 +162,20 @@ func RoRegisterActivationFactories(activatableClassIds *systemwinrt.HSTRING, act
 
 // RoRegisterForApartmentShutdown wraps the raw RoRegisterForApartmentShutdown call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-roregisterforapartmentshutdown
-func RoRegisterForApartmentShutdown(callbackObject *systemwinrt.IApartmentShutdown, apartmentIdentifier *uint64, regCookie *systemwinrt.APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) error {
-	return win32.HRESULTError(int32(systemwinrt.RoRegisterForApartmentShutdown(callbackObject, apartmentIdentifier, regCookie)))
+func RoRegisterForApartmentShutdown(callbackObject IApartmentShutdown, apartmentIdentifier *uint64, regCookie *systemwinrt.APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) error {
+	return win32.HRESULTError(int32(systemwinrt.RoRegisterForApartmentShutdown(callbackObject.Raw, apartmentIdentifier, regCookie)))
 }
 
 // RoReportFailedDelegate wraps the raw RoReportFailedDelegate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roreportfaileddelegate
-func RoReportFailedDelegate(punkDelegate *systemcom.IUnknown, pRestrictedErrorInfo *systemwinrt.IRestrictedErrorInfo) error {
-	return win32.HRESULTError(int32(systemwinrt.RoReportFailedDelegate(punkDelegate, pRestrictedErrorInfo)))
+func RoReportFailedDelegate(punkDelegate systemcomidiom.IUnknown, pRestrictedErrorInfo IRestrictedErrorInfo) error {
+	return win32.HRESULTError(int32(systemwinrt.RoReportFailedDelegate(punkDelegate.Raw, pRestrictedErrorInfo.Raw)))
 }
 
 // RoReportUnhandledError wraps the raw RoReportUnhandledError call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roreportunhandlederror
-func RoReportUnhandledError(pRestrictedErrorInfo *systemwinrt.IRestrictedErrorInfo) error {
-	return win32.HRESULTError(int32(systemwinrt.RoReportUnhandledError(pRestrictedErrorInfo)))
+func RoReportUnhandledError(pRestrictedErrorInfo IRestrictedErrorInfo) error {
+	return win32.HRESULTError(int32(systemwinrt.RoReportUnhandledError(pRestrictedErrorInfo.Raw)))
 }
 
 // RoResolveRestrictedErrorInfoReference wraps the raw RoResolveRestrictedErrorInfoReference call with idiomatic Go types.
@@ -212,8 +212,8 @@ func RoUnregisterForApartmentShutdown(regCookie systemwinrt.APARTMENT_SHUTDOWN_R
 
 // SetRestrictedErrorInfo wraps the raw SetRestrictedErrorInfo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-setrestrictederrorinfo
-func SetRestrictedErrorInfo(pRestrictedErrorInfo *systemwinrt.IRestrictedErrorInfo) error {
-	return win32.HRESULTError(int32(systemwinrt.SetRestrictedErrorInfo(pRestrictedErrorInfo)))
+func SetRestrictedErrorInfo(pRestrictedErrorInfo IRestrictedErrorInfo) error {
+	return win32.HRESULTError(int32(systemwinrt.SetRestrictedErrorInfo(pRestrictedErrorInfo.Raw)))
 }
 
 // WindowsCompareStringOrdinal wraps the raw WindowsCompareStringOrdinal call with idiomatic Go types.

@@ -9,8 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	networkingwininet "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networking/wininet"
-	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
 )
 
 // IDialBranding is an idiomatic wrapper over the raw COM interface Networking.WinInet.IDialBranding with error-returning methods.
@@ -47,9 +47,9 @@ func WrapIDialEngine(raw *networkingwininet.IDialEngine) IDialEngine {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDialEngine) Initialize(pwzConnectoid string, pIDES *networkingwininet.IDialEventSink) error {
+func (self IDialEngine) Initialize(pwzConnectoid string, pIDES IDialEventSink) error {
 	_pwzConnectoid := win32.UTF16Ptr(pwzConnectoid)
-	return win32.HRESULTError(int32(self.Raw.Initialize(foundation.PWSTR(_pwzConnectoid), pIDES)))
+	return win32.HRESULTError(int32(self.Raw.Initialize(foundation.PWSTR(_pwzConnectoid), pIDES.Raw)))
 }
 
 // GetProperty wraps the raw GetProperty call.
@@ -131,9 +131,9 @@ func WrapIProofOfPossessionCookieInfoManager2(raw *networkingwininet.IProofOfPos
 }
 
 // GetCookieInfoWithUriForAccount wraps the raw GetCookieInfoWithUriForAccount call.
-func (self IProofOfPossessionCookieInfoManager2) GetCookieInfoWithUriForAccount(webAccount *systemwinrt.IInspectable, uri string, cookieInfoCount *uint32, cookieInfo **networkingwininet.ProofOfPossessionCookieInfo) error {
+func (self IProofOfPossessionCookieInfoManager2) GetCookieInfoWithUriForAccount(webAccount systemwinrtidiom.IInspectable, uri string, cookieInfoCount *uint32, cookieInfo **networkingwininet.ProofOfPossessionCookieInfo) error {
 	_uri := win32.UTF16Ptr(uri)
-	return win32.HRESULTError(int32(self.Raw.GetCookieInfoWithUriForAccount(webAccount, foundation.PWSTR(_uri), cookieInfoCount, cookieInfo)))
+	return win32.HRESULTError(int32(self.Raw.GetCookieInfoWithUriForAccount(webAccount.Raw, foundation.PWSTR(_uri), cookieInfoCount, cookieInfo)))
 }
 
 // IProofOfPossessionCookieInfoManager3 is an idiomatic wrapper over the raw COM interface Networking.WinInet.IProofOfPossessionCookieInfoManager3 with error-returning methods.
@@ -172,8 +172,8 @@ func (self IProofOfPossessionCookieInfoManager4) GetCookieInfoForUriWithUserAgen
 }
 
 // GetCookieInfoWithUriAndUserAgentIdForAccount wraps the raw GetCookieInfoWithUriAndUserAgentIdForAccount call.
-func (self IProofOfPossessionCookieInfoManager4) GetCookieInfoWithUriAndUserAgentIdForAccount(webAccount *systemwinrt.IInspectable, uri string, uaClientId string, cookieInfoCount *uint32, cookieInfo **networkingwininet.ProofOfPossessionCookieInfo) error {
+func (self IProofOfPossessionCookieInfoManager4) GetCookieInfoWithUriAndUserAgentIdForAccount(webAccount systemwinrtidiom.IInspectable, uri string, uaClientId string, cookieInfoCount *uint32, cookieInfo **networkingwininet.ProofOfPossessionCookieInfo) error {
 	_uri := win32.UTF16Ptr(uri)
 	_uaClientId := win32.UTF16Ptr(uaClientId)
-	return win32.HRESULTError(int32(self.Raw.GetCookieInfoWithUriAndUserAgentIdForAccount(webAccount, foundation.PWSTR(_uri), foundation.PWSTR(_uaClientId), cookieInfoCount, cookieInfo)))
+	return win32.HRESULTError(int32(self.Raw.GetCookieInfoWithUriAndUserAgentIdForAccount(webAccount.Raw, foundation.PWSTR(_uri), foundation.PWSTR(_uaClientId), cookieInfoCount, cookieInfo)))
 }

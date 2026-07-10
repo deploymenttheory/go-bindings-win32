@@ -10,12 +10,12 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	deviceshumaninterfacedevice "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/humaninterfacedevice"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // DirectInput8Create wraps the raw DirectInput8Create call with idiomatic Go types.
-func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut *unsafe.Pointer, punkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(deviceshumaninterfacedevice.DirectInput8Create(hinst, dwVersion, riidltf, ppvOut, punkOuter)))
+func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut *unsafe.Pointer, punkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(deviceshumaninterfacedevice.DirectInput8Create(hinst, dwVersion, riidltf, ppvOut, punkOuter.Raw)))
 }
 
 // HidP_SetButtonArray wraps the raw HidP_SetButtonArray call with idiomatic Go types.

@@ -36,8 +36,8 @@ func (self IAVIEditStream) Copy(plStart *int32, plLength *int32, ppResult **medi
 }
 
 // Paste wraps the raw Paste call.
-func (self IAVIEditStream) Paste(plPos *int32, plLength *int32, pstream *mediamultimedia.IAVIStream, lStart int32, lEnd int32) error {
-	return win32.HRESULTError(int32(self.Raw.Paste(plPos, plLength, pstream, lStart, lEnd)))
+func (self IAVIEditStream) Paste(plPos *int32, plLength *int32, pstream IAVIStream, lStart int32, lEnd int32) error {
+	return win32.HRESULTError(int32(self.Raw.Paste(plPos, plLength, pstream.Raw, lStart, lEnd)))
 }
 
 // Clone wraps the raw Clone call.

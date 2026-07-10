@@ -10,27 +10,27 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	storageindexserver "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/indexserver"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
-	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
 )
 
 // BindIFilterFromStorage wraps the raw BindIFilterFromStorage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntquery/nf-ntquery-bindifilterfromstorage
-func BindIFilterFromStorage(pStg *systemcomstructuredstorage.IStorage, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(storageindexserver.BindIFilterFromStorage(pStg, pUnkOuter, ppIUnk)))
+func BindIFilterFromStorage(pStg systemcomstructuredstorageidiom.IStorage, pUnkOuter systemcomidiom.IUnknown, ppIUnk *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(storageindexserver.BindIFilterFromStorage(pStg.Raw, pUnkOuter.Raw, ppIUnk)))
 }
 
 // BindIFilterFromStream wraps the raw BindIFilterFromStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntquery/nf-ntquery-bindifilterfromstream
-func BindIFilterFromStream(pStm *systemcom.IStream, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(storageindexserver.BindIFilterFromStream(pStm, pUnkOuter, ppIUnk)))
+func BindIFilterFromStream(pStm systemcomidiom.IStream, pUnkOuter systemcomidiom.IUnknown, ppIUnk *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(storageindexserver.BindIFilterFromStream(pStm.Raw, pUnkOuter.Raw, ppIUnk)))
 }
 
 // LoadIFilter wraps the raw LoadIFilter call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntquery/nf-ntquery-loadifilter
-func LoadIFilter(pwcsPath string, pUnkOuter *systemcom.IUnknown, ppIUnk *unsafe.Pointer) error {
+func LoadIFilter(pwcsPath string, pUnkOuter systemcomidiom.IUnknown, ppIUnk *unsafe.Pointer) error {
 	_pwcsPath := win32.UTF16Ptr(pwcsPath)
-	return win32.HRESULTError(int32(storageindexserver.LoadIFilter(foundation.PWSTR(_pwcsPath), pUnkOuter, ppIUnk)))
+	return win32.HRESULTError(int32(storageindexserver.LoadIFilter(foundation.PWSTR(_pwcsPath), pUnkOuter.Raw, ppIUnk)))
 }
 
 // LoadIFilterEx wraps the raw LoadIFilterEx call with idiomatic Go types.

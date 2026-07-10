@@ -25,9 +25,9 @@ func WrapICameraUIControl(raw *systemwindowsprogramming.ICameraUIControl) ICamer
 }
 
 // Show wraps the raw Show call.
-func (self ICameraUIControl) Show(pWindow *systemcom.IUnknown, mode systemwindowsprogramming.CameraUIControlMode, selectionMode systemwindowsprogramming.CameraUIControlLinearSelectionMode, captureMode systemwindowsprogramming.CameraUIControlCaptureMode, photoFormat systemwindowsprogramming.CameraUIControlPhotoFormat, videoFormat systemwindowsprogramming.CameraUIControlVideoFormat, bHasCloseButton bool, pEventCallback *systemwindowsprogramming.ICameraUIControlEventCallback) error {
+func (self ICameraUIControl) Show(pWindow systemcomidiom.IUnknown, mode systemwindowsprogramming.CameraUIControlMode, selectionMode systemwindowsprogramming.CameraUIControlLinearSelectionMode, captureMode systemwindowsprogramming.CameraUIControlCaptureMode, photoFormat systemwindowsprogramming.CameraUIControlPhotoFormat, videoFormat systemwindowsprogramming.CameraUIControlVideoFormat, bHasCloseButton bool, pEventCallback ICameraUIControlEventCallback) error {
 	_bHasCloseButton := foundation.BOOL(win32.Bool32(bHasCloseButton))
-	return win32.HRESULTError(int32(self.Raw.Show(pWindow, mode, selectionMode, captureMode, photoFormat, videoFormat, _bHasCloseButton, pEventCallback)))
+	return win32.HRESULTError(int32(self.Raw.Show(pWindow.Raw, mode, selectionMode, captureMode, photoFormat, videoFormat, _bHasCloseButton, pEventCallback.Raw)))
 }
 
 // Close wraps the raw Close call.

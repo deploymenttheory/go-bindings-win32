@@ -9,7 +9,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemdistributedtransactioncoordinator "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/distributedtransactioncoordinator"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -291,8 +290,8 @@ func WrapIDtcLuRmEnlistmentFactory(raw *systemdistributedtransactioncoordinator.
 }
 
 // Create wraps the raw Create call.
-func (self IDtcLuRmEnlistmentFactory) Create(pucLuPair *byte, cbLuPair uint32, pITransaction *systemdistributedtransactioncoordinator.ITransaction, pTransId *byte, cbTransId uint32, pRmEnlistmentSink *systemdistributedtransactioncoordinator.IDtcLuRmEnlistmentSink, ppRmEnlistment **systemdistributedtransactioncoordinator.IDtcLuRmEnlistment) error {
-	return win32.HRESULTError(int32(self.Raw.Create(pucLuPair, cbLuPair, pITransaction, pTransId, cbTransId, pRmEnlistmentSink, ppRmEnlistment)))
+func (self IDtcLuRmEnlistmentFactory) Create(pucLuPair *byte, cbLuPair uint32, pITransaction ITransaction, pTransId *byte, cbTransId uint32, pRmEnlistmentSink IDtcLuRmEnlistmentSink, ppRmEnlistment **systemdistributedtransactioncoordinator.IDtcLuRmEnlistment) error {
+	return win32.HRESULTError(int32(self.Raw.Create(pucLuPair, cbLuPair, pITransaction.Raw, pTransId, cbTransId, pRmEnlistmentSink.Raw, ppRmEnlistment)))
 }
 
 // IDtcLuRmEnlistmentSink is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.IDtcLuRmEnlistmentSink with error-returning methods.
@@ -410,8 +409,8 @@ func WrapIDtcLuSubordinateDtcFactory(raw *systemdistributedtransactioncoordinato
 }
 
 // Create wraps the raw Create call.
-func (self IDtcLuSubordinateDtcFactory) Create(pucLuPair *byte, cbLuPair uint32, punkTransactionOuter *systemcom.IUnknown, isoLevel int32, isoFlags uint32, pOptions *systemdistributedtransactioncoordinator.ITransactionOptions, ppTransaction **systemdistributedtransactioncoordinator.ITransaction, pTransId *byte, cbTransId uint32, pSubordinateDtcSink *systemdistributedtransactioncoordinator.IDtcLuSubordinateDtcSink, ppSubordinateDtc **systemdistributedtransactioncoordinator.IDtcLuSubordinateDtc) error {
-	return win32.HRESULTError(int32(self.Raw.Create(pucLuPair, cbLuPair, punkTransactionOuter, isoLevel, isoFlags, pOptions, ppTransaction, pTransId, cbTransId, pSubordinateDtcSink, ppSubordinateDtc)))
+func (self IDtcLuSubordinateDtcFactory) Create(pucLuPair *byte, cbLuPair uint32, punkTransactionOuter systemcomidiom.IUnknown, isoLevel int32, isoFlags uint32, pOptions ITransactionOptions, ppTransaction **systemdistributedtransactioncoordinator.ITransaction, pTransId *byte, cbTransId uint32, pSubordinateDtcSink IDtcLuSubordinateDtcSink, ppSubordinateDtc **systemdistributedtransactioncoordinator.IDtcLuSubordinateDtc) error {
+	return win32.HRESULTError(int32(self.Raw.Create(pucLuPair, cbLuPair, punkTransactionOuter.Raw, isoLevel, isoFlags, pOptions.Raw, ppTransaction, pTransId, cbTransId, pSubordinateDtcSink.Raw, ppSubordinateDtc)))
 }
 
 // IDtcLuSubordinateDtcSink is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.IDtcLuSubordinateDtcSink with error-returning methods.
@@ -630,8 +629,8 @@ func (self IDtcToXaHelper) Close(i_fDoRecovery bool) error {
 }
 
 // TranslateTridToXid wraps the raw TranslateTridToXid call.
-func (self IDtcToXaHelper) TranslateTridToXid(pITransaction *systemdistributedtransactioncoordinator.ITransaction, pguidBqual *win32.GUID, pXid *systemdistributedtransactioncoordinator.XID) error {
-	return win32.HRESULTError(int32(self.Raw.TranslateTridToXid(pITransaction, pguidBqual, pXid)))
+func (self IDtcToXaHelper) TranslateTridToXid(pITransaction ITransaction, pguidBqual *win32.GUID, pXid *systemdistributedtransactioncoordinator.XID) error {
+	return win32.HRESULTError(int32(self.Raw.TranslateTridToXid(pITransaction.Raw, pguidBqual, pXid)))
 }
 
 // IDtcToXaHelperFactory is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.IDtcToXaHelperFactory with error-returning methods.
@@ -672,8 +671,8 @@ func (self IDtcToXaHelperSinglePipe) ConvertTridToXID(pdwITrans *uint32, dwRMCoo
 }
 
 // EnlistWithRM wraps the raw EnlistWithRM call.
-func (self IDtcToXaHelperSinglePipe) EnlistWithRM(dwRMCookie uint32, i_pITransaction *systemdistributedtransactioncoordinator.ITransaction, i_pITransRes *systemdistributedtransactioncoordinator.ITransactionResourceAsync, o_ppITransEnslitment **systemdistributedtransactioncoordinator.ITransactionEnlistmentAsync) error {
-	return win32.HRESULTError(int32(self.Raw.EnlistWithRM(dwRMCookie, i_pITransaction, i_pITransRes, o_ppITransEnslitment)))
+func (self IDtcToXaHelperSinglePipe) EnlistWithRM(dwRMCookie uint32, i_pITransaction ITransaction, i_pITransRes ITransactionResourceAsync, o_ppITransEnslitment **systemdistributedtransactioncoordinator.ITransactionEnlistmentAsync) error {
+	return win32.HRESULTError(int32(self.Raw.EnlistWithRM(dwRMCookie, i_pITransaction.Raw, i_pITransRes.Raw, o_ppITransEnslitment)))
 }
 
 // ReleaseRMCookie wraps the raw ReleaseRMCookie call.
@@ -836,8 +835,8 @@ func WrapIResourceManager(raw *systemdistributedtransactioncoordinator.IResource
 }
 
 // Enlist wraps the raw Enlist call.
-func (self IResourceManager) Enlist(pTransaction *systemdistributedtransactioncoordinator.ITransaction, pRes *systemdistributedtransactioncoordinator.ITransactionResourceAsync, pUOW *systemdistributedtransactioncoordinator.BOID, pisoLevel *int32, ppEnlist **systemdistributedtransactioncoordinator.ITransactionEnlistmentAsync) error {
-	return win32.HRESULTError(int32(self.Raw.Enlist(pTransaction, pRes, pUOW, pisoLevel, ppEnlist)))
+func (self IResourceManager) Enlist(pTransaction ITransaction, pRes ITransactionResourceAsync, pUOW *systemdistributedtransactioncoordinator.BOID, pisoLevel *int32, ppEnlist **systemdistributedtransactioncoordinator.ITransactionEnlistmentAsync) error {
+	return win32.HRESULTError(int32(self.Raw.Enlist(pTransaction.Raw, pRes.Raw, pUOW, pisoLevel, ppEnlist)))
 }
 
 // Reenlist wraps the raw Reenlist call.
@@ -867,8 +866,8 @@ func WrapIResourceManager2(raw *systemdistributedtransactioncoordinator.IResourc
 }
 
 // Enlist2 wraps the raw Enlist2 call.
-func (self IResourceManager2) Enlist2(pTransaction *systemdistributedtransactioncoordinator.ITransaction, pResAsync *systemdistributedtransactioncoordinator.ITransactionResourceAsync, pUOW *systemdistributedtransactioncoordinator.BOID, pisoLevel *int32, pXid *systemdistributedtransactioncoordinator.XID, ppEnlist **systemdistributedtransactioncoordinator.ITransactionEnlistmentAsync) error {
-	return win32.HRESULTError(int32(self.Raw.Enlist2(pTransaction, pResAsync, pUOW, pisoLevel, pXid, ppEnlist)))
+func (self IResourceManager2) Enlist2(pTransaction ITransaction, pResAsync ITransactionResourceAsync, pUOW *systemdistributedtransactioncoordinator.BOID, pisoLevel *int32, pXid *systemdistributedtransactioncoordinator.XID, ppEnlist **systemdistributedtransactioncoordinator.ITransactionEnlistmentAsync) error {
+	return win32.HRESULTError(int32(self.Raw.Enlist2(pTransaction.Raw, pResAsync.Raw, pUOW, pisoLevel, pXid, ppEnlist)))
 }
 
 // Reenlist2 wraps the raw Reenlist2 call.
@@ -888,8 +887,8 @@ func WrapIResourceManagerFactory(raw *systemdistributedtransactioncoordinator.IR
 }
 
 // Create wraps the raw Create call.
-func (self IResourceManagerFactory) Create(pguidRM *win32.GUID, pszRMName foundation.PSTR, pIResMgrSink *systemdistributedtransactioncoordinator.IResourceManagerSink, ppResMgr **systemdistributedtransactioncoordinator.IResourceManager) error {
-	return win32.HRESULTError(int32(self.Raw.Create(pguidRM, pszRMName, pIResMgrSink, ppResMgr)))
+func (self IResourceManagerFactory) Create(pguidRM *win32.GUID, pszRMName foundation.PSTR, pIResMgrSink IResourceManagerSink, ppResMgr **systemdistributedtransactioncoordinator.IResourceManager) error {
+	return win32.HRESULTError(int32(self.Raw.Create(pguidRM, pszRMName, pIResMgrSink.Raw, ppResMgr)))
 }
 
 // IResourceManagerFactory2 is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.IResourceManagerFactory2 with error-returning methods.
@@ -904,8 +903,8 @@ func WrapIResourceManagerFactory2(raw *systemdistributedtransactioncoordinator.I
 }
 
 // CreateEx wraps the raw CreateEx call.
-func (self IResourceManagerFactory2) CreateEx(pguidRM *win32.GUID, pszRMName foundation.PSTR, pIResMgrSink *systemdistributedtransactioncoordinator.IResourceManagerSink, riidRequested *win32.GUID, ppvResMgr *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEx(pguidRM, pszRMName, pIResMgrSink, riidRequested, ppvResMgr)))
+func (self IResourceManagerFactory2) CreateEx(pguidRM *win32.GUID, pszRMName foundation.PSTR, pIResMgrSink IResourceManagerSink, riidRequested *win32.GUID, ppvResMgr *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateEx(pguidRM, pszRMName, pIResMgrSink.Raw, riidRequested, ppvResMgr)))
 }
 
 // IResourceManagerRejoinable is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.IResourceManagerRejoinable with error-returning methods.
@@ -957,8 +956,8 @@ func (self ITipHelper) Pull(i_pszTxUrl *byte, o_ppITransaction **systemdistribut
 }
 
 // PullAsync wraps the raw PullAsync call.
-func (self ITipHelper) PullAsync(i_pszTxUrl *byte, i_pTipPullSink *systemdistributedtransactioncoordinator.ITipPullSink, o_ppITransaction **systemdistributedtransactioncoordinator.ITransaction) error {
-	return win32.HRESULTError(int32(self.Raw.PullAsync(i_pszTxUrl, i_pTipPullSink, o_ppITransaction)))
+func (self ITipHelper) PullAsync(i_pszTxUrl *byte, i_pTipPullSink ITipPullSink, o_ppITransaction **systemdistributedtransactioncoordinator.ITransaction) error {
+	return win32.HRESULTError(int32(self.Raw.PullAsync(i_pszTxUrl, i_pTipPullSink.Raw, o_ppITransaction)))
 }
 
 // GetLocalTmUrl wraps the raw GetLocalTmUrl call.
@@ -1102,8 +1101,8 @@ func (self ITransactionDispenser) GetOptionsObject(ppOptions **systemdistributed
 }
 
 // BeginTransaction wraps the raw BeginTransaction call.
-func (self ITransactionDispenser) BeginTransaction(punkOuter *systemcom.IUnknown, isoLevel int32, isoFlags uint32, pOptions *systemdistributedtransactioncoordinator.ITransactionOptions, ppTransaction **systemdistributedtransactioncoordinator.ITransaction) error {
-	return win32.HRESULTError(int32(self.Raw.BeginTransaction(punkOuter, isoLevel, isoFlags, pOptions, ppTransaction)))
+func (self ITransactionDispenser) BeginTransaction(punkOuter systemcomidiom.IUnknown, isoLevel int32, isoFlags uint32, pOptions ITransactionOptions, ppTransaction **systemdistributedtransactioncoordinator.ITransaction) error {
+	return win32.HRESULTError(int32(self.Raw.BeginTransaction(punkOuter.Raw, isoLevel, isoFlags, pOptions.Raw, ppTransaction)))
 }
 
 // ITransactionEnlistmentAsync is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.ITransactionEnlistmentAsync with error-returning methods.
@@ -1118,8 +1117,8 @@ func WrapITransactionEnlistmentAsync(raw *systemdistributedtransactioncoordinato
 }
 
 // PrepareRequestDone wraps the raw PrepareRequestDone call.
-func (self ITransactionEnlistmentAsync) PrepareRequestDone(hr foundation.HRESULT, pmk *systemcom.IMoniker, pboidReason *systemdistributedtransactioncoordinator.BOID) error {
-	return win32.HRESULTError(int32(self.Raw.PrepareRequestDone(hr, pmk, pboidReason)))
+func (self ITransactionEnlistmentAsync) PrepareRequestDone(hr foundation.HRESULT, pmk systemcomidiom.IMoniker, pboidReason *systemdistributedtransactioncoordinator.BOID) error {
+	return win32.HRESULTError(int32(self.Raw.PrepareRequestDone(hr, pmk.Raw, pboidReason)))
 }
 
 // CommitRequestDone wraps the raw CommitRequestDone call.
@@ -1144,13 +1143,13 @@ func WrapITransactionExport(raw *systemdistributedtransactioncoordinator.ITransa
 }
 
 // Export wraps the raw Export call.
-func (self ITransactionExport) Export(punkTransaction *systemcom.IUnknown, pcbTransactionCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Export(punkTransaction, pcbTransactionCookie)))
+func (self ITransactionExport) Export(punkTransaction systemcomidiom.IUnknown, pcbTransactionCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Export(punkTransaction.Raw, pcbTransactionCookie)))
 }
 
 // GetTransactionCookie wraps the raw GetTransactionCookie call.
-func (self ITransactionExport) GetTransactionCookie(punkTransaction *systemcom.IUnknown, cbTransactionCookie uint32, rgbTransactionCookie *byte, pcbUsed *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetTransactionCookie(punkTransaction, cbTransactionCookie, rgbTransactionCookie, pcbUsed)))
+func (self ITransactionExport) GetTransactionCookie(punkTransaction systemcomidiom.IUnknown, cbTransactionCookie uint32, rgbTransactionCookie *byte, pcbUsed *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetTransactionCookie(punkTransaction.Raw, cbTransactionCookie, rgbTransactionCookie, pcbUsed)))
 }
 
 // ITransactionExportFactory is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.ITransactionExportFactory with error-returning methods.
@@ -1350,8 +1349,8 @@ func WrapITransactionPhase0Factory(raw *systemdistributedtransactioncoordinator.
 }
 
 // Create wraps the raw Create call.
-func (self ITransactionPhase0Factory) Create(pPhase0Notify *systemdistributedtransactioncoordinator.ITransactionPhase0NotifyAsync, ppPhase0Enlistment **systemdistributedtransactioncoordinator.ITransactionPhase0EnlistmentAsync) error {
-	return win32.HRESULTError(int32(self.Raw.Create(pPhase0Notify, ppPhase0Enlistment)))
+func (self ITransactionPhase0Factory) Create(pPhase0Notify ITransactionPhase0NotifyAsync, ppPhase0Enlistment **systemdistributedtransactioncoordinator.ITransactionPhase0EnlistmentAsync) error {
+	return win32.HRESULTError(int32(self.Raw.Create(pPhase0Notify.Raw, ppPhase0Enlistment)))
 }
 
 // ITransactionPhase0NotifyAsync is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.ITransactionPhase0NotifyAsync with error-returning methods.
@@ -1505,8 +1504,8 @@ func WrapITransactionTransmitter(raw *systemdistributedtransactioncoordinator.IT
 }
 
 // Set wraps the raw Set call.
-func (self ITransactionTransmitter) Set(pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
-	return win32.HRESULTError(int32(self.Raw.Set(pTransaction)))
+func (self ITransactionTransmitter) Set(pTransaction ITransaction) error {
+	return win32.HRESULTError(int32(self.Raw.Set(pTransaction.Raw)))
 }
 
 // GetPropagationTokenSize wraps the raw GetPropagationTokenSize call.
@@ -1573,8 +1572,8 @@ func WrapITransactionVoterFactory2(raw *systemdistributedtransactioncoordinator.
 }
 
 // Create wraps the raw Create call.
-func (self ITransactionVoterFactory2) Create(pTransaction *systemdistributedtransactioncoordinator.ITransaction, pVoterNotify *systemdistributedtransactioncoordinator.ITransactionVoterNotifyAsync2, ppVoterBallot **systemdistributedtransactioncoordinator.ITransactionVoterBallotAsync2) error {
-	return win32.HRESULTError(int32(self.Raw.Create(pTransaction, pVoterNotify, ppVoterBallot)))
+func (self ITransactionVoterFactory2) Create(pTransaction ITransaction, pVoterNotify ITransactionVoterNotifyAsync2, ppVoterBallot **systemdistributedtransactioncoordinator.ITransactionVoterBallotAsync2) error {
+	return win32.HRESULTError(int32(self.Raw.Create(pTransaction.Raw, pVoterNotify.Raw, ppVoterBallot)))
 }
 
 // ITransactionVoterNotifyAsync2 is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.ITransactionVoterNotifyAsync2 with error-returning methods.
@@ -1621,8 +1620,8 @@ func WrapIXAObtainRMInfo(raw *systemdistributedtransactioncoordinator.IXAObtainR
 }
 
 // ObtainRMInfo wraps the raw ObtainRMInfo call.
-func (self IXAObtainRMInfo) ObtainRMInfo(pIRMHelper *systemdistributedtransactioncoordinator.IRMHelper) error {
-	return win32.HRESULTError(int32(self.Raw.ObtainRMInfo(pIRMHelper)))
+func (self IXAObtainRMInfo) ObtainRMInfo(pIRMHelper IRMHelper) error {
+	return win32.HRESULTError(int32(self.Raw.ObtainRMInfo(pIRMHelper.Raw)))
 }
 
 // IXATransLookup is an idiomatic wrapper over the raw COM interface System.DistributedTransactionCoordinator.IXATransLookup with error-returning methods.

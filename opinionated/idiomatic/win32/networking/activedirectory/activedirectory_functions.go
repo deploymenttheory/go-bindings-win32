@@ -13,16 +13,17 @@ import (
 	networkingwinsock "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networking/winsock"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	securityauthenticationidentity "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/authentication/identity"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // ADsBuildEnumerator wraps the raw ADsBuildEnumerator call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsbuildenumerator
-func ADsBuildEnumerator(pADsContainer *networkingactivedirectory.IADsContainer, ppEnumVariant **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(networkingactivedirectory.ADsBuildEnumerator(pADsContainer, ppEnumVariant)))
+func ADsBuildEnumerator(pADsContainer IADsContainer, ppEnumVariant **systemole.IEnumVARIANT) error {
+	return win32.HRESULTError(int32(networkingactivedirectory.ADsBuildEnumerator(pADsContainer.Raw, ppEnumVariant)))
 }
 
 // ADsBuildVarArrayInt wraps the raw ADsBuildVarArrayInt call with idiomatic Go types.
@@ -55,14 +56,14 @@ func ADsEncodeBinaryData(pbSrcData *byte, dwSrcLen uint32, ppszDestData *foundat
 
 // ADsEnumerateNext wraps the raw ADsEnumerateNext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsenumeratenext
-func ADsEnumerateNext(pEnumVariant *systemole.IEnumVARIANT, cElements uint32, pvar *systemvariant.VARIANT, pcElementsFetched *uint32) error {
-	return win32.HRESULTError(int32(networkingactivedirectory.ADsEnumerateNext(pEnumVariant, cElements, pvar, pcElementsFetched)))
+func ADsEnumerateNext(pEnumVariant systemoleidiom.IEnumVARIANT, cElements uint32, pvar *systemvariant.VARIANT, pcElementsFetched *uint32) error {
+	return win32.HRESULTError(int32(networkingactivedirectory.ADsEnumerateNext(pEnumVariant.Raw, cElements, pvar, pcElementsFetched)))
 }
 
 // ADsFreeEnumerator wraps the raw ADsFreeEnumerator call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsfreeenumerator
-func ADsFreeEnumerator(pEnumVariant *systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(networkingactivedirectory.ADsFreeEnumerator(pEnumVariant)))
+func ADsFreeEnumerator(pEnumVariant systemoleidiom.IEnumVARIANT) error {
+	return win32.HRESULTError(int32(networkingactivedirectory.ADsFreeEnumerator(pEnumVariant.Raw)))
 }
 
 // ADsGetObject wraps the raw ADsGetObject call with idiomatic Go types.
@@ -90,9 +91,9 @@ func ADsPropCheckIfWritable(pwzAttr string, pWritableAttrs *networkingactivedire
 
 // ADsPropCreateNotifyObj wraps the raw ADsPropCreateNotifyObj call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/adsprop/nf-adsprop-adspropcreatenotifyobj
-func ADsPropCreateNotifyObj(pAppThdDataObj *systemcom.IDataObject, pwzADsObjName string, phNotifyObj *foundation.HWND) error {
+func ADsPropCreateNotifyObj(pAppThdDataObj systemcomidiom.IDataObject, pwzADsObjName string, phNotifyObj *foundation.HWND) error {
 	_pwzADsObjName := win32.UTF16Ptr(pwzADsObjName)
-	return win32.HRESULTError(int32(networkingactivedirectory.ADsPropCreateNotifyObj(pAppThdDataObj, foundation.PWSTR(_pwzADsObjName), phNotifyObj)))
+	return win32.HRESULTError(int32(networkingactivedirectory.ADsPropCreateNotifyObj(pAppThdDataObj.Raw, foundation.PWSTR(_pwzADsObjName), phNotifyObj)))
 }
 
 // ADsPropGetInitInfo wraps the raw ADsPropGetInitInfo call with idiomatic Go types.

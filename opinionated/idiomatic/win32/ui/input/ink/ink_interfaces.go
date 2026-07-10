@@ -9,7 +9,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uiinputink "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input/ink"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -42,9 +41,9 @@ func WrapIInkD2DRenderer(raw *uiinputink.IInkD2DRenderer) IInkD2DRenderer {
 }
 
 // Draw wraps the raw Draw call.
-func (self IInkD2DRenderer) Draw(pD2D1DeviceContext *systemcom.IUnknown, pInkStrokeIterable *systemcom.IUnknown, fHighContrast bool) error {
+func (self IInkD2DRenderer) Draw(pD2D1DeviceContext systemcomidiom.IUnknown, pInkStrokeIterable systemcomidiom.IUnknown, fHighContrast bool) error {
 	_fHighContrast := foundation.BOOL(win32.Bool32(fHighContrast))
-	return win32.HRESULTError(int32(self.Raw.Draw(pD2D1DeviceContext, pInkStrokeIterable, _fHighContrast)))
+	return win32.HRESULTError(int32(self.Raw.Draw(pD2D1DeviceContext.Raw, pInkStrokeIterable.Raw, _fHighContrast)))
 }
 
 // IInkD2DRenderer2 is an idiomatic wrapper over the raw COM interface UI.Input.Ink.IInkD2DRenderer2 with error-returning methods.
@@ -59,8 +58,8 @@ func WrapIInkD2DRenderer2(raw *uiinputink.IInkD2DRenderer2) IInkD2DRenderer2 {
 }
 
 // Draw wraps the raw Draw call.
-func (self IInkD2DRenderer2) Draw(pD2D1DeviceContext *systemcom.IUnknown, pInkStrokeIterable *systemcom.IUnknown, highContrastAdjustment uiinputink.INK_HIGH_CONTRAST_ADJUSTMENT) error {
-	return win32.HRESULTError(int32(self.Raw.Draw(pD2D1DeviceContext, pInkStrokeIterable, highContrastAdjustment)))
+func (self IInkD2DRenderer2) Draw(pD2D1DeviceContext systemcomidiom.IUnknown, pInkStrokeIterable systemcomidiom.IUnknown, highContrastAdjustment uiinputink.INK_HIGH_CONTRAST_ADJUSTMENT) error {
+	return win32.HRESULTError(int32(self.Raw.Draw(pD2D1DeviceContext.Raw, pInkStrokeIterable.Raw, highContrastAdjustment)))
 }
 
 // IInkDesktopHost is an idiomatic wrapper over the raw COM interface UI.Input.Ink.IInkDesktopHost with error-returning methods.
@@ -75,8 +74,8 @@ func WrapIInkDesktopHost(raw *uiinputink.IInkDesktopHost) IInkDesktopHost {
 }
 
 // QueueWorkItem wraps the raw QueueWorkItem call.
-func (self IInkDesktopHost) QueueWorkItem(workItem *uiinputink.IInkHostWorkItem) error {
-	return win32.HRESULTError(int32(self.Raw.QueueWorkItem(workItem)))
+func (self IInkDesktopHost) QueueWorkItem(workItem IInkHostWorkItem) error {
+	return win32.HRESULTError(int32(self.Raw.QueueWorkItem(workItem.Raw)))
 }
 
 // CreateInkPresenter wraps the raw CreateInkPresenter call.
@@ -112,13 +111,13 @@ func WrapIInkPresenterDesktop(raw *uiinputink.IInkPresenterDesktop) IInkPresente
 }
 
 // SetRootVisual wraps the raw SetRootVisual call.
-func (self IInkPresenterDesktop) SetRootVisual(rootVisual *systemcom.IUnknown, device *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetRootVisual(rootVisual, device)))
+func (self IInkPresenterDesktop) SetRootVisual(rootVisual systemcomidiom.IUnknown, device systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetRootVisual(rootVisual.Raw, device.Raw)))
 }
 
 // SetCommitRequestHandler wraps the raw SetCommitRequestHandler call.
-func (self IInkPresenterDesktop) SetCommitRequestHandler(handler *uiinputink.IInkCommitRequestHandler) error {
-	return win32.HRESULTError(int32(self.Raw.SetCommitRequestHandler(handler)))
+func (self IInkPresenterDesktop) SetCommitRequestHandler(handler IInkCommitRequestHandler) error {
+	return win32.HRESULTError(int32(self.Raw.SetCommitRequestHandler(handler.Raw)))
 }
 
 // GetSize wraps the raw GetSize call.

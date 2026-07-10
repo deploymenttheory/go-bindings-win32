@@ -45,8 +45,8 @@ func (self AsyncIAdviseSink) Finish_OnViewChange() {
 }
 
 // Begin_OnRename wraps the raw Begin_OnRename call.
-func (self AsyncIAdviseSink) Begin_OnRename(pmk *systemcom.IMoniker) {
-	self.Raw.Begin_OnRename(pmk)
+func (self AsyncIAdviseSink) Begin_OnRename(pmk IMoniker) {
+	self.Raw.Begin_OnRename(pmk.Raw)
 }
 
 // Finish_OnRename wraps the raw Finish_OnRename call.
@@ -86,8 +86,8 @@ func WrapAsyncIAdviseSink2(raw *systemcom.AsyncIAdviseSink2) AsyncIAdviseSink2 {
 }
 
 // Begin_OnLinkSrcChange wraps the raw Begin_OnLinkSrcChange call.
-func (self AsyncIAdviseSink2) Begin_OnLinkSrcChange(pmk *systemcom.IMoniker) {
-	self.Raw.Begin_OnLinkSrcChange(pmk)
+func (self AsyncIAdviseSink2) Begin_OnLinkSrcChange(pmk IMoniker) {
+	self.Raw.Begin_OnLinkSrcChange(pmk.Raw)
 }
 
 // Finish_OnLinkSrcChange wraps the raw Finish_OnLinkSrcChange call.
@@ -283,8 +283,8 @@ func (self IAddrExclusionControl) GetCurrentAddrExclusionList(riid *win32.GUID, 
 }
 
 // UpdateAddrExclusionList wraps the raw UpdateAddrExclusionList call.
-func (self IAddrExclusionControl) UpdateAddrExclusionList(pEnumerator *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateAddrExclusionList(pEnumerator)))
+func (self IAddrExclusionControl) UpdateAddrExclusionList(pEnumerator IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateAddrExclusionList(pEnumerator.Raw)))
 }
 
 // IAddrTrackingControl is an idiomatic wrapper over the raw COM interface System.Com.IAddrTrackingControl with error-returning methods.
@@ -330,8 +330,8 @@ func (self IAdviseSink) OnViewChange(dwAspect uint32, lindex int32) {
 }
 
 // OnRename wraps the raw OnRename call.
-func (self IAdviseSink) OnRename(pmk *systemcom.IMoniker) {
-	self.Raw.OnRename(pmk)
+func (self IAdviseSink) OnRename(pmk IMoniker) {
+	self.Raw.OnRename(pmk.Raw)
 }
 
 // OnSave wraps the raw OnSave call.
@@ -356,8 +356,8 @@ func WrapIAdviseSink2(raw *systemcom.IAdviseSink2) IAdviseSink2 {
 }
 
 // OnLinkSrcChange wraps the raw OnLinkSrcChange call.
-func (self IAdviseSink2) OnLinkSrcChange(pmk *systemcom.IMoniker) {
-	self.Raw.OnLinkSrcChange(pmk)
+func (self IAdviseSink2) OnLinkSrcChange(pmk IMoniker) {
+	self.Raw.OnLinkSrcChange(pmk.Raw)
 }
 
 // IAgileObject is an idiomatic wrapper over the raw COM interface System.Com.IAgileObject with error-returning methods.
@@ -409,8 +409,8 @@ func WrapIAsyncRpcChannelBuffer(raw *systemcom.IAsyncRpcChannelBuffer) IAsyncRpc
 }
 
 // Send wraps the raw Send call.
-func (self IAsyncRpcChannelBuffer) Send(pMsg *systemcom.RPCOLEMESSAGE, pSync *systemcom.ISynchronize, pulStatus *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Send(pMsg, pSync, pulStatus)))
+func (self IAsyncRpcChannelBuffer) Send(pMsg *systemcom.RPCOLEMESSAGE, pSync ISynchronize, pulStatus *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Send(pMsg, pSync.Raw, pulStatus)))
 }
 
 // Receive wraps the raw Receive call.
@@ -467,13 +467,13 @@ func WrapIBindCtx(raw *systemcom.IBindCtx) IBindCtx {
 }
 
 // RegisterObjectBound wraps the raw RegisterObjectBound call.
-func (self IBindCtx) RegisterObjectBound(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterObjectBound(punk)))
+func (self IBindCtx) RegisterObjectBound(punk IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterObjectBound(punk.Raw)))
 }
 
 // RevokeObjectBound wraps the raw RevokeObjectBound call.
-func (self IBindCtx) RevokeObjectBound(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RevokeObjectBound(punk)))
+func (self IBindCtx) RevokeObjectBound(punk IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RevokeObjectBound(punk.Raw)))
 }
 
 // ReleaseBoundObjects wraps the raw ReleaseBoundObjects call.
@@ -497,9 +497,9 @@ func (self IBindCtx) GetRunningObjectTable(pprot **systemcom.IRunningObjectTable
 }
 
 // RegisterObjectParam wraps the raw RegisterObjectParam call.
-func (self IBindCtx) RegisterObjectParam(pszKey string, punk *systemcom.IUnknown) error {
+func (self IBindCtx) RegisterObjectParam(pszKey string, punk IUnknown) error {
 	_pszKey := win32.UTF16Ptr(pszKey)
-	return win32.HRESULTError(int32(self.Raw.RegisterObjectParam(foundation.PWSTR(_pszKey), punk)))
+	return win32.HRESULTError(int32(self.Raw.RegisterObjectParam(foundation.PWSTR(_pszKey), punk.Raw)))
 }
 
 // GetObjectParam wraps the raw GetObjectParam call.
@@ -531,19 +531,19 @@ func WrapIBindHost(raw *systemcom.IBindHost) IBindHost {
 }
 
 // CreateMoniker wraps the raw CreateMoniker call.
-func (self IBindHost) CreateMoniker(szName string, pBC *systemcom.IBindCtx, ppmk **systemcom.IMoniker, dwReserved uint32) error {
+func (self IBindHost) CreateMoniker(szName string, pBC IBindCtx, ppmk **systemcom.IMoniker, dwReserved uint32) error {
 	_szName := win32.UTF16Ptr(szName)
-	return win32.HRESULTError(int32(self.Raw.CreateMoniker(foundation.PWSTR(_szName), pBC, ppmk, dwReserved)))
+	return win32.HRESULTError(int32(self.Raw.CreateMoniker(foundation.PWSTR(_szName), pBC.Raw, ppmk, dwReserved)))
 }
 
 // MonikerBindToStorage wraps the raw MonikerBindToStorage call.
-func (self IBindHost) MonikerBindToStorage(pMk *systemcom.IMoniker, pBC *systemcom.IBindCtx, pBSC *systemcom.IBindStatusCallback, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.MonikerBindToStorage(pMk, pBC, pBSC, riid, ppvObj)))
+func (self IBindHost) MonikerBindToStorage(pMk IMoniker, pBC IBindCtx, pBSC IBindStatusCallback, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.MonikerBindToStorage(pMk.Raw, pBC.Raw, pBSC.Raw, riid, ppvObj)))
 }
 
 // MonikerBindToObject wraps the raw MonikerBindToObject call.
-func (self IBindHost) MonikerBindToObject(pMk *systemcom.IMoniker, pBC *systemcom.IBindCtx, pBSC *systemcom.IBindStatusCallback, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.MonikerBindToObject(pMk, pBC, pBSC, riid, ppvObj)))
+func (self IBindHost) MonikerBindToObject(pMk IMoniker, pBC IBindCtx, pBSC IBindStatusCallback, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.MonikerBindToObject(pMk.Raw, pBC.Raw, pBSC.Raw, riid, ppvObj)))
 }
 
 // IBindStatusCallback is an idiomatic wrapper over the raw COM interface System.Com.IBindStatusCallback with error-returning methods.
@@ -558,8 +558,8 @@ func WrapIBindStatusCallback(raw *systemcom.IBindStatusCallback) IBindStatusCall
 }
 
 // OnStartBinding wraps the raw OnStartBinding call.
-func (self IBindStatusCallback) OnStartBinding(dwReserved uint32, pib *systemcom.IBinding) error {
-	return win32.HRESULTError(int32(self.Raw.OnStartBinding(dwReserved, pib)))
+func (self IBindStatusCallback) OnStartBinding(dwReserved uint32, pib IBinding) error {
+	return win32.HRESULTError(int32(self.Raw.OnStartBinding(dwReserved, pib.Raw)))
 }
 
 // GetPriority wraps the raw GetPriority call.
@@ -595,8 +595,8 @@ func (self IBindStatusCallback) OnDataAvailable(grfBSCF uint32, dwSize uint32, p
 }
 
 // OnObjectAvailable wraps the raw OnObjectAvailable call.
-func (self IBindStatusCallback) OnObjectAvailable(riid *win32.GUID, punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnObjectAvailable(riid, punk)))
+func (self IBindStatusCallback) OnObjectAvailable(riid *win32.GUID, punk IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnObjectAvailable(riid, punk.Raw)))
 }
 
 // IBindStatusCallbackEx is an idiomatic wrapper over the raw COM interface System.Com.IBindStatusCallbackEx with error-returning methods.
@@ -689,8 +689,8 @@ func WrapICallFactory(raw *systemcom.ICallFactory) ICallFactory {
 }
 
 // CreateCall wraps the raw CreateCall call.
-func (self ICallFactory) CreateCall(riid *win32.GUID, pCtrlUnk *systemcom.IUnknown, riid2 *win32.GUID, ppv **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCall(riid, pCtrlUnk, riid2, ppv)))
+func (self ICallFactory) CreateCall(riid *win32.GUID, pCtrlUnk IUnknown, riid2 *win32.GUID, ppv **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCall(riid, pCtrlUnk.Raw, riid2, ppv)))
 }
 
 // ICancelMethodCalls is an idiomatic wrapper over the raw COM interface System.Com.ICancelMethodCalls with error-returning methods.
@@ -865,8 +865,8 @@ func WrapIClassFactory(raw *systemcom.IClassFactory) IClassFactory {
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self IClassFactory) CreateInstance(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(pUnkOuter, riid, ppvObject)))
+func (self IClassFactory) CreateInstance(pUnkOuter IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(pUnkOuter.Raw, riid, ppvObject)))
 }
 
 // LockServer wraps the raw LockServer call.
@@ -887,19 +887,19 @@ func WrapIClientSecurity(raw *systemcom.IClientSecurity) IClientSecurity {
 }
 
 // QueryBlanket wraps the raw QueryBlanket call.
-func (self IClientSecurity) QueryBlanket(pProxy *systemcom.IUnknown, pAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName **uint16, pAuthnLevel *systemcom.RPC_C_AUTHN_LEVEL, pImpLevel *systemcom.RPC_C_IMP_LEVEL, pAuthInfo *unsafe.Pointer, pCapabilites *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.QueryBlanket(pProxy, pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites)))
+func (self IClientSecurity) QueryBlanket(pProxy IUnknown, pAuthnSvc *uint32, pAuthzSvc *uint32, pServerPrincName **uint16, pAuthnLevel *systemcom.RPC_C_AUTHN_LEVEL, pImpLevel *systemcom.RPC_C_IMP_LEVEL, pAuthInfo *unsafe.Pointer, pCapabilites *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.QueryBlanket(pProxy.Raw, pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites)))
 }
 
 // SetBlanket wraps the raw SetBlanket call.
-func (self IClientSecurity) SetBlanket(pProxy *systemcom.IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName string, dwAuthnLevel systemcom.RPC_C_AUTHN_LEVEL, dwImpLevel systemcom.RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
+func (self IClientSecurity) SetBlanket(pProxy IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName string, dwAuthnLevel systemcom.RPC_C_AUTHN_LEVEL, dwImpLevel systemcom.RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
 	_pServerPrincName := win32.UTF16Ptr(pServerPrincName)
-	return win32.HRESULTError(int32(self.Raw.SetBlanket(pProxy, dwAuthnSvc, dwAuthzSvc, foundation.PWSTR(_pServerPrincName), dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities)))
+	return win32.HRESULTError(int32(self.Raw.SetBlanket(pProxy.Raw, dwAuthnSvc, dwAuthzSvc, foundation.PWSTR(_pServerPrincName), dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities)))
 }
 
 // CopyProxy wraps the raw CopyProxy call.
-func (self IClientSecurity) CopyProxy(pProxy *systemcom.IUnknown, ppCopy **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CopyProxy(pProxy, ppCopy)))
+func (self IClientSecurity) CopyProxy(pProxy IUnknown, ppCopy **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CopyProxy(pProxy.Raw, ppCopy)))
 }
 
 // IComThreadingInfo is an idiomatic wrapper over the raw COM interface System.Com.IComThreadingInfo with error-returning methods.
@@ -955,8 +955,8 @@ func (self IConnectionPoint) GetConnectionPointContainer(ppCPC **systemcom.IConn
 }
 
 // Advise wraps the raw Advise call.
-func (self IConnectionPoint) Advise(pUnkSink *systemcom.IUnknown, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pUnkSink, pdwCookie)))
+func (self IConnectionPoint) Advise(pUnkSink IUnknown, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pUnkSink.Raw, pdwCookie)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -1002,8 +1002,8 @@ func WrapIContext(raw *systemcom.IContext) IContext {
 }
 
 // SetProperty wraps the raw SetProperty call.
-func (self IContext) SetProperty(rpolicyId *win32.GUID, flags uint32, pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetProperty(rpolicyId, flags, pUnk)))
+func (self IContext) SetProperty(rpolicyId *win32.GUID, flags uint32, pUnk IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetProperty(rpolicyId, flags, pUnk.Raw)))
 }
 
 // RemoveProperty wraps the raw RemoveProperty call.
@@ -1033,8 +1033,8 @@ func WrapIContextCallback(raw *systemcom.IContextCallback) IContextCallback {
 }
 
 // ContextCallback wraps the raw ContextCallback call.
-func (self IContextCallback) ContextCallback(pfnCallback systemcom.PFNCONTEXTCALL, pParam *systemcom.ComCallData, riid *win32.GUID, iMethod int32, pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ContextCallback(pfnCallback, pParam, riid, iMethod, pUnk)))
+func (self IContextCallback) ContextCallback(pfnCallback systemcom.PFNCONTEXTCALL, pParam *systemcom.ComCallData, riid *win32.GUID, iMethod int32, pUnk IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ContextCallback(pfnCallback, pParam, riid, iMethod, pUnk.Raw)))
 }
 
 // IDataAdviseHolder is an idiomatic wrapper over the raw COM interface System.Com.IDataAdviseHolder with error-returning methods.
@@ -1049,8 +1049,8 @@ func WrapIDataAdviseHolder(raw *systemcom.IDataAdviseHolder) IDataAdviseHolder {
 }
 
 // Advise wraps the raw Advise call.
-func (self IDataAdviseHolder) Advise(pDataObject *systemcom.IDataObject, pFetc *systemcom.FORMATETC, advf uint32, pAdvise *systemcom.IAdviseSink, pdwConnection *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pDataObject, pFetc, advf, pAdvise, pdwConnection)))
+func (self IDataAdviseHolder) Advise(pDataObject IDataObject, pFetc *systemcom.FORMATETC, advf uint32, pAdvise IAdviseSink, pdwConnection *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pDataObject.Raw, pFetc, advf, pAdvise.Raw, pdwConnection)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -1064,8 +1064,8 @@ func (self IDataAdviseHolder) EnumAdvise(ppenumAdvise **systemcom.IEnumSTATDATA)
 }
 
 // SendOnDataChange wraps the raw SendOnDataChange call.
-func (self IDataAdviseHolder) SendOnDataChange(pDataObject *systemcom.IDataObject, advf uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SendOnDataChange(pDataObject, 0, advf)))
+func (self IDataAdviseHolder) SendOnDataChange(pDataObject IDataObject, advf uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SendOnDataChange(pDataObject.Raw, 0, advf)))
 }
 
 // IDataObject is an idiomatic wrapper over the raw COM interface System.Com.IDataObject with error-returning methods.
@@ -1111,8 +1111,8 @@ func (self IDataObject) EnumFormatEtc(dwDirection uint32, ppenumFormatEtc **syst
 }
 
 // DAdvise wraps the raw DAdvise call.
-func (self IDataObject) DAdvise(pformatetc *systemcom.FORMATETC, advf uint32, pAdvSink *systemcom.IAdviseSink, pdwConnection *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DAdvise(pformatetc, advf, pAdvSink, pdwConnection)))
+func (self IDataObject) DAdvise(pformatetc *systemcom.FORMATETC, advf uint32, pAdvSink IAdviseSink, pdwConnection *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DAdvise(pformatetc, advf, pAdvSink.Raw, pdwConnection)))
 }
 
 // DUnadvise wraps the raw DUnadvise call.
@@ -1585,8 +1585,8 @@ func WrapIGlobalInterfaceTable(raw *systemcom.IGlobalInterfaceTable) IGlobalInte
 }
 
 // RegisterInterfaceInGlobal wraps the raw RegisterInterfaceInGlobal call.
-func (self IGlobalInterfaceTable) RegisterInterfaceInGlobal(pUnk *systemcom.IUnknown, riid *win32.GUID, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterInterfaceInGlobal(pUnk, riid, pdwCookie)))
+func (self IGlobalInterfaceTable) RegisterInterfaceInGlobal(pUnk IUnknown, riid *win32.GUID, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterInterfaceInGlobal(pUnk.Raw, riid, pdwCookie)))
 }
 
 // RevokeInterfaceFromGlobal wraps the raw RevokeInterfaceFromGlobal call.
@@ -1679,9 +1679,9 @@ func WrapIMachineGlobalObjectTable(raw *systemcom.IMachineGlobalObjectTable) IMa
 }
 
 // RegisterObject wraps the raw RegisterObject call.
-func (self IMachineGlobalObjectTable) RegisterObject(clsid *win32.GUID, identifier string, object *systemcom.IUnknown, token *systemcom.MachineGlobalObjectTableRegistrationToken) error {
+func (self IMachineGlobalObjectTable) RegisterObject(clsid *win32.GUID, identifier string, object IUnknown, token *systemcom.MachineGlobalObjectTableRegistrationToken) error {
 	_identifier := win32.UTF16Ptr(identifier)
-	return win32.HRESULTError(int32(self.Raw.RegisterObject(clsid, foundation.PWSTR(_identifier), object, token)))
+	return win32.HRESULTError(int32(self.Raw.RegisterObject(clsid, foundation.PWSTR(_identifier), object.Raw, token)))
 }
 
 // GetObject wraps the raw GetObject call.
@@ -1827,24 +1827,24 @@ func WrapIMoniker(raw *systemcom.IMoniker) IMoniker {
 }
 
 // BindToObject wraps the raw BindToObject call.
-func (self IMoniker) BindToObject(pbc *systemcom.IBindCtx, pmkToLeft *systemcom.IMoniker, riidResult *win32.GUID, ppvResult *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.BindToObject(pbc, pmkToLeft, riidResult, ppvResult)))
+func (self IMoniker) BindToObject(pbc IBindCtx, pmkToLeft IMoniker, riidResult *win32.GUID, ppvResult *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.BindToObject(pbc.Raw, pmkToLeft.Raw, riidResult, ppvResult)))
 }
 
 // BindToStorage wraps the raw BindToStorage call.
-func (self IMoniker) BindToStorage(pbc *systemcom.IBindCtx, pmkToLeft *systemcom.IMoniker, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.BindToStorage(pbc, pmkToLeft, riid, ppvObj)))
+func (self IMoniker) BindToStorage(pbc IBindCtx, pmkToLeft IMoniker, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.BindToStorage(pbc.Raw, pmkToLeft.Raw, riid, ppvObj)))
 }
 
 // Reduce wraps the raw Reduce call.
-func (self IMoniker) Reduce(pbc *systemcom.IBindCtx, dwReduceHowFar uint32, ppmkToLeft **systemcom.IMoniker, ppmkReduced **systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.Reduce(pbc, dwReduceHowFar, ppmkToLeft, ppmkReduced)))
+func (self IMoniker) Reduce(pbc IBindCtx, dwReduceHowFar uint32, ppmkToLeft **systemcom.IMoniker, ppmkReduced **systemcom.IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.Reduce(pbc.Raw, dwReduceHowFar, ppmkToLeft, ppmkReduced)))
 }
 
 // ComposeWith wraps the raw ComposeWith call.
-func (self IMoniker) ComposeWith(pmkRight *systemcom.IMoniker, fOnlyIfNotGeneric bool, ppmkComposite **systemcom.IMoniker) error {
+func (self IMoniker) ComposeWith(pmkRight IMoniker, fOnlyIfNotGeneric bool, ppmkComposite **systemcom.IMoniker) error {
 	_fOnlyIfNotGeneric := foundation.BOOL(win32.Bool32(fOnlyIfNotGeneric))
-	return win32.HRESULTError(int32(self.Raw.ComposeWith(pmkRight, _fOnlyIfNotGeneric, ppmkComposite)))
+	return win32.HRESULTError(int32(self.Raw.ComposeWith(pmkRight.Raw, _fOnlyIfNotGeneric, ppmkComposite)))
 }
 
 // Enum wraps the raw Enum call.
@@ -1854,8 +1854,8 @@ func (self IMoniker) Enum(fForward bool, ppenumMoniker **systemcom.IEnumMoniker)
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IMoniker) IsEqual(pmkOtherMoniker *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pmkOtherMoniker)))
+func (self IMoniker) IsEqual(pmkOtherMoniker IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pmkOtherMoniker.Raw)))
 }
 
 // Hash wraps the raw Hash call.
@@ -1864,13 +1864,13 @@ func (self IMoniker) Hash(pdwHash *uint32) error {
 }
 
 // IsRunning wraps the raw IsRunning call.
-func (self IMoniker) IsRunning(pbc *systemcom.IBindCtx, pmkToLeft *systemcom.IMoniker, pmkNewlyRunning *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.IsRunning(pbc, pmkToLeft, pmkNewlyRunning)))
+func (self IMoniker) IsRunning(pbc IBindCtx, pmkToLeft IMoniker, pmkNewlyRunning IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.IsRunning(pbc.Raw, pmkToLeft.Raw, pmkNewlyRunning.Raw)))
 }
 
 // GetTimeOfLastChange wraps the raw GetTimeOfLastChange call.
-func (self IMoniker) GetTimeOfLastChange(pbc *systemcom.IBindCtx, pmkToLeft *systemcom.IMoniker, pFileTime *foundation.FILETIME) error {
-	return win32.HRESULTError(int32(self.Raw.GetTimeOfLastChange(pbc, pmkToLeft, pFileTime)))
+func (self IMoniker) GetTimeOfLastChange(pbc IBindCtx, pmkToLeft IMoniker, pFileTime *foundation.FILETIME) error {
+	return win32.HRESULTError(int32(self.Raw.GetTimeOfLastChange(pbc.Raw, pmkToLeft.Raw, pFileTime)))
 }
 
 // Inverse wraps the raw Inverse call.
@@ -1879,24 +1879,24 @@ func (self IMoniker) Inverse(ppmk **systemcom.IMoniker) error {
 }
 
 // CommonPrefixWith wraps the raw CommonPrefixWith call.
-func (self IMoniker) CommonPrefixWith(pmkOther *systemcom.IMoniker, ppmkPrefix **systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.CommonPrefixWith(pmkOther, ppmkPrefix)))
+func (self IMoniker) CommonPrefixWith(pmkOther IMoniker, ppmkPrefix **systemcom.IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.CommonPrefixWith(pmkOther.Raw, ppmkPrefix)))
 }
 
 // RelativePathTo wraps the raw RelativePathTo call.
-func (self IMoniker) RelativePathTo(pmkOther *systemcom.IMoniker, ppmkRelPath **systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.RelativePathTo(pmkOther, ppmkRelPath)))
+func (self IMoniker) RelativePathTo(pmkOther IMoniker, ppmkRelPath **systemcom.IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.RelativePathTo(pmkOther.Raw, ppmkRelPath)))
 }
 
 // GetDisplayName wraps the raw GetDisplayName call.
-func (self IMoniker) GetDisplayName(pbc *systemcom.IBindCtx, pmkToLeft *systemcom.IMoniker, ppszDisplayName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDisplayName(pbc, pmkToLeft, ppszDisplayName)))
+func (self IMoniker) GetDisplayName(pbc IBindCtx, pmkToLeft IMoniker, ppszDisplayName *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.GetDisplayName(pbc.Raw, pmkToLeft.Raw, ppszDisplayName)))
 }
 
 // ParseDisplayName wraps the raw ParseDisplayName call.
-func (self IMoniker) ParseDisplayName(pbc *systemcom.IBindCtx, pmkToLeft *systemcom.IMoniker, pszDisplayName string, pchEaten *uint32, ppmkOut **systemcom.IMoniker) error {
+func (self IMoniker) ParseDisplayName(pbc IBindCtx, pmkToLeft IMoniker, pszDisplayName string, pchEaten *uint32, ppmkOut **systemcom.IMoniker) error {
 	_pszDisplayName := win32.UTF16Ptr(pszDisplayName)
-	return win32.HRESULTError(int32(self.Raw.ParseDisplayName(pbc, pmkToLeft, foundation.PWSTR(_pszDisplayName), pchEaten, ppmkOut)))
+	return win32.HRESULTError(int32(self.Raw.ParseDisplayName(pbc.Raw, pmkToLeft.Raw, foundation.PWSTR(_pszDisplayName), pchEaten, ppmkOut)))
 }
 
 // IsSystemMoniker wraps the raw IsSystemMoniker call.
@@ -1966,13 +1966,13 @@ func WrapIPSFactoryBuffer(raw *systemcom.IPSFactoryBuffer) IPSFactoryBuffer {
 }
 
 // CreateProxy wraps the raw CreateProxy call.
-func (self IPSFactoryBuffer) CreateProxy(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppProxy **systemcom.IRpcProxyBuffer, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateProxy(pUnkOuter, riid, ppProxy, ppv)))
+func (self IPSFactoryBuffer) CreateProxy(pUnkOuter IUnknown, riid *win32.GUID, ppProxy **systemcom.IRpcProxyBuffer, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateProxy(pUnkOuter.Raw, riid, ppProxy, ppv)))
 }
 
 // CreateStub wraps the raw CreateStub call.
-func (self IPSFactoryBuffer) CreateStub(riid *win32.GUID, pUnkServer *systemcom.IUnknown, ppStub **systemcom.IRpcStubBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateStub(riid, pUnkServer, ppStub)))
+func (self IPSFactoryBuffer) CreateStub(riid *win32.GUID, pUnkServer IUnknown, ppStub **systemcom.IRpcStubBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateStub(riid, pUnkServer.Raw, ppStub)))
 }
 
 // IPackagedComSyntaxSupport is an idiomatic wrapper over the raw COM interface System.Com.IPackagedComSyntaxSupport with error-returning methods.
@@ -2101,14 +2101,14 @@ func (self IPersistStream) IsDirty() error {
 }
 
 // Load wraps the raw Load call.
-func (self IPersistStream) Load(pStm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pStm)))
+func (self IPersistStream) Load(pStm IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pStm.Raw)))
 }
 
 // Save wraps the raw Save call.
-func (self IPersistStream) Save(pStm *systemcom.IStream, fClearDirty bool) error {
+func (self IPersistStream) Save(pStm IStream, fClearDirty bool) error {
 	_fClearDirty := foundation.BOOL(win32.Bool32(fClearDirty))
-	return win32.HRESULTError(int32(self.Raw.Save(pStm, _fClearDirty)))
+	return win32.HRESULTError(int32(self.Raw.Save(pStm.Raw, _fClearDirty)))
 }
 
 // GetSizeMax wraps the raw GetSizeMax call.
@@ -2133,14 +2133,14 @@ func (self IPersistStreamInit) IsDirty() error {
 }
 
 // Load wraps the raw Load call.
-func (self IPersistStreamInit) Load(pStm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pStm)))
+func (self IPersistStreamInit) Load(pStm IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pStm.Raw)))
 }
 
 // Save wraps the raw Save call.
-func (self IPersistStreamInit) Save(pStm *systemcom.IStream, fClearDirty bool) error {
+func (self IPersistStreamInit) Save(pStm IStream, fClearDirty bool) error {
 	_fClearDirty := foundation.BOOL(win32.Bool32(fClearDirty))
-	return win32.HRESULTError(int32(self.Raw.Save(pStm, _fClearDirty)))
+	return win32.HRESULTError(int32(self.Raw.Save(pStm.Raw, _fClearDirty)))
 }
 
 // GetSizeMax wraps the raw GetSizeMax call.
@@ -2299,8 +2299,8 @@ func WrapIReleaseMarshalBuffers(raw *systemcom.IReleaseMarshalBuffers) IReleaseM
 }
 
 // ReleaseMarshalBuffer wraps the raw ReleaseMarshalBuffer call.
-func (self IReleaseMarshalBuffers) ReleaseMarshalBuffer(pMsg *systemcom.RPCOLEMESSAGE, dwFlags uint32, pChnl *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseMarshalBuffer(pMsg, dwFlags, pChnl)))
+func (self IReleaseMarshalBuffers) ReleaseMarshalBuffer(pMsg *systemcom.RPCOLEMESSAGE, dwFlags uint32, pChnl IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseMarshalBuffer(pMsg, dwFlags, pChnl.Raw)))
 }
 
 // IRpcChannelBuffer is an idiomatic wrapper over the raw COM interface System.Com.IRpcChannelBuffer with error-returning methods.
@@ -2397,8 +2397,8 @@ func (self IRpcChannelBuffer3) GetState(pMsg *systemcom.RPCOLEMESSAGE, pState *u
 }
 
 // RegisterAsync wraps the raw RegisterAsync call.
-func (self IRpcChannelBuffer3) RegisterAsync(pMsg *systemcom.RPCOLEMESSAGE, pAsyncMgr *systemcom.IAsyncManager) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterAsync(pMsg, pAsyncMgr)))
+func (self IRpcChannelBuffer3) RegisterAsync(pMsg *systemcom.RPCOLEMESSAGE, pAsyncMgr IAsyncManager) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterAsync(pMsg, pAsyncMgr.Raw)))
 }
 
 // IRpcHelper is an idiomatic wrapper over the raw COM interface System.Com.IRpcHelper with error-returning methods.
@@ -2434,13 +2434,13 @@ func WrapIRpcOptions(raw *systemcom.IRpcOptions) IRpcOptions {
 }
 
 // Set wraps the raw Set call.
-func (self IRpcOptions) Set(pPrx *systemcom.IUnknown, dwProperty systemcom.RPCOPT_PROPERTIES, dwValue uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.Set(pPrx, dwProperty, dwValue)))
+func (self IRpcOptions) Set(pPrx IUnknown, dwProperty systemcom.RPCOPT_PROPERTIES, dwValue uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.Set(pPrx.Raw, dwProperty, dwValue)))
 }
 
 // Query wraps the raw Query call.
-func (self IRpcOptions) Query(pPrx *systemcom.IUnknown, dwProperty systemcom.RPCOPT_PROPERTIES, pdwValue *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.Query(pPrx, dwProperty, pdwValue)))
+func (self IRpcOptions) Query(pPrx IUnknown, dwProperty systemcom.RPCOPT_PROPERTIES, pdwValue *uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.Query(pPrx.Raw, dwProperty, pdwValue)))
 }
 
 // IRpcProxyBuffer is an idiomatic wrapper over the raw COM interface System.Com.IRpcProxyBuffer with error-returning methods.
@@ -2455,8 +2455,8 @@ func WrapIRpcProxyBuffer(raw *systemcom.IRpcProxyBuffer) IRpcProxyBuffer {
 }
 
 // Connect wraps the raw Connect call.
-func (self IRpcProxyBuffer) Connect(pRpcChannelBuffer *systemcom.IRpcChannelBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(pRpcChannelBuffer)))
+func (self IRpcProxyBuffer) Connect(pRpcChannelBuffer IRpcChannelBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.Connect(pRpcChannelBuffer.Raw)))
 }
 
 // Disconnect wraps the raw Disconnect call.
@@ -2476,8 +2476,8 @@ func WrapIRpcStubBuffer(raw *systemcom.IRpcStubBuffer) IRpcStubBuffer {
 }
 
 // Connect wraps the raw Connect call.
-func (self IRpcStubBuffer) Connect(pUnkServer *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(pUnkServer)))
+func (self IRpcStubBuffer) Connect(pUnkServer IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Connect(pUnkServer.Raw)))
 }
 
 // Disconnect wraps the raw Disconnect call.
@@ -2486,8 +2486,8 @@ func (self IRpcStubBuffer) Disconnect() {
 }
 
 // Invoke wraps the raw Invoke call.
-func (self IRpcStubBuffer) Invoke(_prpcmsg *systemcom.RPCOLEMESSAGE, _pRpcChannelBuffer *systemcom.IRpcChannelBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.Invoke(_prpcmsg, _pRpcChannelBuffer)))
+func (self IRpcStubBuffer) Invoke(_prpcmsg *systemcom.RPCOLEMESSAGE, _pRpcChannelBuffer IRpcChannelBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.Invoke(_prpcmsg, _pRpcChannelBuffer.Raw)))
 }
 
 // IsIIDSupported wraps the raw IsIIDSupported call.
@@ -2543,8 +2543,8 @@ func (self IRunnableObject) GetRunningClass(lpClsid *win32.GUID) error {
 }
 
 // Run wraps the raw Run call.
-func (self IRunnableObject) Run(pbc *systemcom.IBindCtx) error {
-	return win32.HRESULTError(int32(self.Raw.Run(pbc)))
+func (self IRunnableObject) Run(pbc IBindCtx) error {
+	return win32.HRESULTError(int32(self.Raw.Run(pbc.Raw)))
 }
 
 // IsRunning wraps the raw IsRunning call.
@@ -2577,8 +2577,8 @@ func WrapIRunningObjectTable(raw *systemcom.IRunningObjectTable) IRunningObjectT
 }
 
 // Register wraps the raw Register call.
-func (self IRunningObjectTable) Register(grfFlags systemcom.ROT_FLAGS, punkObject *systemcom.IUnknown, pmkObjectName *systemcom.IMoniker, pdwRegister *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Register(grfFlags, punkObject, pmkObjectName, pdwRegister)))
+func (self IRunningObjectTable) Register(grfFlags systemcom.ROT_FLAGS, punkObject IUnknown, pmkObjectName IMoniker, pdwRegister *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Register(grfFlags, punkObject.Raw, pmkObjectName.Raw, pdwRegister)))
 }
 
 // Revoke wraps the raw Revoke call.
@@ -2587,13 +2587,13 @@ func (self IRunningObjectTable) Revoke(dwRegister uint32) error {
 }
 
 // IsRunning wraps the raw IsRunning call.
-func (self IRunningObjectTable) IsRunning(pmkObjectName *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.IsRunning(pmkObjectName)))
+func (self IRunningObjectTable) IsRunning(pmkObjectName IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.IsRunning(pmkObjectName.Raw)))
 }
 
 // GetObject wraps the raw GetObject call.
-func (self IRunningObjectTable) GetObject(pmkObjectName *systemcom.IMoniker, ppunkObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetObject(pmkObjectName, ppunkObject)))
+func (self IRunningObjectTable) GetObject(pmkObjectName IMoniker, ppunkObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GetObject(pmkObjectName.Raw, ppunkObject)))
 }
 
 // NoteChangeTime wraps the raw NoteChangeTime call.
@@ -2602,8 +2602,8 @@ func (self IRunningObjectTable) NoteChangeTime(dwRegister uint32, pfiletime *fou
 }
 
 // GetTimeOfLastChange wraps the raw GetTimeOfLastChange call.
-func (self IRunningObjectTable) GetTimeOfLastChange(pmkObjectName *systemcom.IMoniker, pfiletime *foundation.FILETIME) error {
-	return win32.HRESULTError(int32(self.Raw.GetTimeOfLastChange(pmkObjectName, pfiletime)))
+func (self IRunningObjectTable) GetTimeOfLastChange(pmkObjectName IMoniker, pfiletime *foundation.FILETIME) error {
+	return win32.HRESULTError(int32(self.Raw.GetTimeOfLastChange(pmkObjectName.Raw, pfiletime)))
 }
 
 // EnumRunning wraps the raw EnumRunning call.
@@ -2717,8 +2717,8 @@ func (self IStream) SetSize(libNewSize uint64) error {
 }
 
 // CopyTo wraps the raw CopyTo call.
-func (self IStream) CopyTo(pstm *systemcom.IStream, cb uint64, pcbRead *uint64, pcbWritten *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.CopyTo(pstm, cb, pcbRead, pcbWritten)))
+func (self IStream) CopyTo(pstm IStream, cb uint64, pcbRead *uint64, pcbWritten *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.CopyTo(pstm.Raw, cb, pcbRead, pcbWritten)))
 }
 
 // Commit wraps the raw Commit call.
@@ -2888,8 +2888,8 @@ func WrapISurrogateService(raw *systemcom.ISurrogateService) ISurrogateService {
 }
 
 // Init wraps the raw Init call.
-func (self ISurrogateService) Init(rguidProcessID *win32.GUID, pProcessLock *systemcom.IProcessLock, pfApplicationAware *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Init(rguidProcessID, pProcessLock, pfApplicationAware)))
+func (self ISurrogateService) Init(rguidProcessID *win32.GUID, pProcessLock IProcessLock, pfApplicationAware *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Init(rguidProcessID, pProcessLock.Raw, pfApplicationAware)))
 }
 
 // ApplicationLaunch wraps the raw ApplicationLaunch call.
@@ -2950,8 +2950,8 @@ func WrapISynchronizeContainer(raw *systemcom.ISynchronizeContainer) ISynchroniz
 }
 
 // AddSynchronize wraps the raw AddSynchronize call.
-func (self ISynchronizeContainer) AddSynchronize(pSync *systemcom.ISynchronize) error {
-	return win32.HRESULTError(int32(self.Raw.AddSynchronize(pSync)))
+func (self ISynchronizeContainer) AddSynchronize(pSync ISynchronize) error {
+	return win32.HRESULTError(int32(self.Raw.AddSynchronize(pSync.Raw)))
 }
 
 // WaitMultiple wraps the raw WaitMultiple call.
@@ -3123,8 +3123,8 @@ func (self ITypeInfo) AddressOfMember(memid int32, invKind systemcom.INVOKEKIND,
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self ITypeInfo) CreateInstance(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(pUnkOuter, riid, ppvObj)))
+func (self ITypeInfo) CreateInstance(pUnkOuter IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(pUnkOuter.Raw, riid, ppvObj)))
 }
 
 // GetMops wraps the raw GetMops call.
@@ -3554,8 +3554,8 @@ func (self IUri) GetProperties(pdwFlags *uint32) error {
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IUri) IsEqual(pUri *systemcom.IUri, pfEqual *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pUri, pfEqual)))
+func (self IUri) IsEqual(pUri IUri, pfEqual *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pUri.Raw, pfEqual)))
 }
 
 // IUriBuilder is an idiomatic wrapper over the raw COM interface System.Com.IUriBuilder with error-returning methods.
@@ -3590,8 +3590,8 @@ func (self IUriBuilder) GetIUri(ppIUri **systemcom.IUri) error {
 }
 
 // SetIUri wraps the raw SetIUri call.
-func (self IUriBuilder) SetIUri(pIUri *systemcom.IUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetIUri(pIUri)))
+func (self IUriBuilder) SetIUri(pIUri IUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetIUri(pIUri.Raw)))
 }
 
 // GetFragment wraps the raw GetFragment call.
@@ -3704,11 +3704,11 @@ func WrapIUrlMon(raw *systemcom.IUrlMon) IUrlMon {
 }
 
 // AsyncGetClassBits wraps the raw AsyncGetClassBits call.
-func (self IUrlMon) AsyncGetClassBits(rclsid *win32.GUID, pszTYPE string, pszExt string, dwFileVersionMS uint32, dwFileVersionLS uint32, pszCodeBase string, pbc *systemcom.IBindCtx, dwClassContext uint32, riid *win32.GUID, flags uint32) error {
+func (self IUrlMon) AsyncGetClassBits(rclsid *win32.GUID, pszTYPE string, pszExt string, dwFileVersionMS uint32, dwFileVersionLS uint32, pszCodeBase string, pbc IBindCtx, dwClassContext uint32, riid *win32.GUID, flags uint32) error {
 	_pszTYPE := win32.UTF16Ptr(pszTYPE)
 	_pszExt := win32.UTF16Ptr(pszExt)
 	_pszCodeBase := win32.UTF16Ptr(pszCodeBase)
-	return win32.HRESULTError(int32(self.Raw.AsyncGetClassBits(rclsid, foundation.PWSTR(_pszTYPE), foundation.PWSTR(_pszExt), dwFileVersionMS, dwFileVersionLS, foundation.PWSTR(_pszCodeBase), pbc, dwClassContext, riid, flags)))
+	return win32.HRESULTError(int32(self.Raw.AsyncGetClassBits(rclsid, foundation.PWSTR(_pszTYPE), foundation.PWSTR(_pszExt), dwFileVersionMS, dwFileVersionLS, foundation.PWSTR(_pszCodeBase), pbc.Raw, dwClassContext, riid, flags)))
 }
 
 // IWaitMultiple is an idiomatic wrapper over the raw COM interface System.Com.IWaitMultiple with error-returning methods.
@@ -3728,6 +3728,6 @@ func (self IWaitMultiple) WaitMultiple(timeout uint32, pSync **systemcom.ISynchr
 }
 
 // AddSynchronize wraps the raw AddSynchronize call.
-func (self IWaitMultiple) AddSynchronize(pSync *systemcom.ISynchronize) error {
-	return win32.HRESULTError(int32(self.Raw.AddSynchronize(pSync)))
+func (self IWaitMultiple) AddSynchronize(pSync ISynchronize) error {
+	return win32.HRESULTError(int32(self.Raw.AddSynchronize(pSync.Raw)))
 }

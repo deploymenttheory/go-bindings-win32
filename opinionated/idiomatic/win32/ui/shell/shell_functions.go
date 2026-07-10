@@ -22,6 +22,9 @@ import (
 	uishell "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell"
 	uishellcommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/common"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // AssocCreateForClasses wraps the raw AssocCreateForClasses call with idiomatic Go types.
@@ -36,8 +39,8 @@ func AssocCreateForClasses(rgClasses []uishell.ASSOCIATIONELEMENT, riid *win32.G
 
 // AssocGetDetailsOfPropKey wraps the raw AssocGetDetailsOfPropKey call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-assocgetdetailsofpropkey
-func AssocGetDetailsOfPropKey(psf *uishell.IShellFolder, pidl *uishellcommon.ITEMIDLIST, pkey *foundation.PROPERTYKEY, pv *systemvariant.VARIANT, pfFoundPropKey *foundation.BOOL) error {
-	return win32.HRESULTError(int32(uishell.AssocGetDetailsOfPropKey(psf, pidl, pkey, pv, pfFoundPropKey)))
+func AssocGetDetailsOfPropKey(psf IShellFolder, pidl *uishellcommon.ITEMIDLIST, pkey *foundation.PROPERTYKEY, pv *systemvariant.VARIANT, pfFoundPropKey *foundation.BOOL) error {
+	return win32.HRESULTError(int32(uishell.AssocGetDetailsOfPropKey(psf.Raw, pidl, pkey, pv, pfFoundPropKey)))
 }
 
 // AssocGetPerceivedType wraps the raw AssocGetPerceivedType call with idiomatic Go types.
@@ -97,7 +100,7 @@ func AssocQueryStringByKeyA(flags uishell.ASSOCF, str uishell.ASSOCSTR, hkAssoc 
 
 // CDefFolderMenu_Create2 wraps the raw CDefFolderMenu_Create2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-cdeffoldermenu_create2
-func CDefFolderMenu_Create2(pidlFolder *uishellcommon.ITEMIDLIST, hwnd foundation.HWND, apidl []*uishellcommon.ITEMIDLIST, psf *uishell.IShellFolder, pfn uishell.LPFNDFMCALLBACK, ahkeys []systemregistry.HKEY, ppcm **uishell.IContextMenu) error {
+func CDefFolderMenu_Create2(pidlFolder *uishellcommon.ITEMIDLIST, hwnd foundation.HWND, apidl []*uishellcommon.ITEMIDLIST, psf IShellFolder, pfn uishell.LPFNDFMCALLBACK, ahkeys []systemregistry.HKEY, ppcm **uishell.IContextMenu) error {
 	var _apidl **uishellcommon.ITEMIDLIST
 	if len(apidl) > 0 {
 		_apidl = &apidl[0]
@@ -106,7 +109,7 @@ func CDefFolderMenu_Create2(pidlFolder *uishellcommon.ITEMIDLIST, hwnd foundatio
 	if len(ahkeys) > 0 {
 		_ahkeys = &ahkeys[0]
 	}
-	return win32.HRESULTError(int32(uishell.CDefFolderMenu_Create2(pidlFolder, hwnd, uint32(len(apidl)), _apidl, psf, pfn, uint32(len(ahkeys)), _ahkeys, ppcm)))
+	return win32.HRESULTError(int32(uishell.CDefFolderMenu_Create2(pidlFolder, hwnd, uint32(len(apidl)), _apidl, psf.Raw, pfn, uint32(len(ahkeys)), _ahkeys, ppcm)))
 }
 
 // CIDLData_CreateFromIDArray wraps the raw CIDLData_CreateFromIDArray call with idiomatic Go types.
@@ -147,9 +150,9 @@ func CommandLineToArgvW(lpCmdLine string, pNumArgs *int32) (*foundation.PWSTR, e
 
 // ConnectToConnectionPoint wraps the raw ConnectToConnectionPoint call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-connecttoconnectionpoint
-func ConnectToConnectionPoint(punk *systemcom.IUnknown, riidEvent *win32.GUID, fConnect bool, punkTarget *systemcom.IUnknown, pdwCookie *uint32, ppcpOut **systemcom.IConnectionPoint) error {
+func ConnectToConnectionPoint(punk systemcomidiom.IUnknown, riidEvent *win32.GUID, fConnect bool, punkTarget systemcomidiom.IUnknown, pdwCookie *uint32, ppcpOut **systemcom.IConnectionPoint) error {
 	_fConnect := foundation.BOOL(win32.Bool32(fConnect))
-	return win32.HRESULTError(int32(uishell.ConnectToConnectionPoint(punk, riidEvent, _fConnect, punkTarget, pdwCookie, ppcpOut)))
+	return win32.HRESULTError(int32(uishell.ConnectToConnectionPoint(punk.Raw, riidEvent, _fConnect, punkTarget.Raw, pdwCookie, ppcpOut)))
 }
 
 // CreateProfile wraps the raw CreateProfile call with idiomatic Go types.
@@ -355,56 +358,56 @@ func HashData(pbData *byte, cbData uint32, pbHash *byte, cbHash uint32) error {
 }
 
 // HlinkClone wraps the raw HlinkClone call with idiomatic Go types.
-func HlinkClone(pihl *uishell.IHlink, riid *win32.GUID, pihlsiteForClone *uishell.IHlinkSite, dwSiteData uint32, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.HlinkClone(pihl, riid, pihlsiteForClone, dwSiteData, ppvObj)))
+func HlinkClone(pihl IHlink, riid *win32.GUID, pihlsiteForClone IHlinkSite, dwSiteData uint32, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.HlinkClone(pihl.Raw, riid, pihlsiteForClone.Raw, dwSiteData, ppvObj)))
 }
 
 // HlinkCreateBrowseContext wraps the raw HlinkCreateBrowseContext call with idiomatic Go types.
-func HlinkCreateBrowseContext(piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.HlinkCreateBrowseContext(piunkOuter, riid, ppvObj)))
+func HlinkCreateBrowseContext(piunkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.HlinkCreateBrowseContext(piunkOuter.Raw, riid, ppvObj)))
 }
 
 // HlinkCreateExtensionServices wraps the raw HlinkCreateExtensionServices call with idiomatic Go types.
-func HlinkCreateExtensionServices(pwzAdditionalHeaders string, phwnd foundation.HWND, pszUsername string, pszPassword string, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkCreateExtensionServices(pwzAdditionalHeaders string, phwnd foundation.HWND, pszUsername string, pszPassword string, piunkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
 	_pwzAdditionalHeaders := win32.UTF16Ptr(pwzAdditionalHeaders)
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
-	return win32.HRESULTError(int32(uishell.HlinkCreateExtensionServices(foundation.PWSTR(_pwzAdditionalHeaders), phwnd, foundation.PWSTR(_pszUsername), foundation.PWSTR(_pszPassword), piunkOuter, riid, ppvObj)))
+	return win32.HRESULTError(int32(uishell.HlinkCreateExtensionServices(foundation.PWSTR(_pwzAdditionalHeaders), phwnd, foundation.PWSTR(_pszUsername), foundation.PWSTR(_pszPassword), piunkOuter.Raw, riid, ppvObj)))
 }
 
 // HlinkCreateFromData wraps the raw HlinkCreateFromData call with idiomatic Go types.
-func HlinkCreateFromData(piDataObj *systemcom.IDataObject, pihlsite *uishell.IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.HlinkCreateFromData(piDataObj, pihlsite, dwSiteData, piunkOuter, riid, ppvObj)))
+func HlinkCreateFromData(piDataObj systemcomidiom.IDataObject, pihlsite IHlinkSite, dwSiteData uint32, piunkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.HlinkCreateFromData(piDataObj.Raw, pihlsite.Raw, dwSiteData, piunkOuter.Raw, riid, ppvObj)))
 }
 
 // HlinkCreateFromMoniker wraps the raw HlinkCreateFromMoniker call with idiomatic Go types.
-func HlinkCreateFromMoniker(pimkTrgt *systemcom.IMoniker, pwzLocation string, pwzFriendlyName string, pihlsite *uishell.IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkCreateFromMoniker(pimkTrgt systemcomidiom.IMoniker, pwzLocation string, pwzFriendlyName string, pihlsite IHlinkSite, dwSiteData uint32, piunkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
 	_pwzLocation := win32.UTF16Ptr(pwzLocation)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
-	return win32.HRESULTError(int32(uishell.HlinkCreateFromMoniker(pimkTrgt, foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzFriendlyName), pihlsite, dwSiteData, piunkOuter, riid, ppvObj)))
+	return win32.HRESULTError(int32(uishell.HlinkCreateFromMoniker(pimkTrgt.Raw, foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzFriendlyName), pihlsite.Raw, dwSiteData, piunkOuter.Raw, riid, ppvObj)))
 }
 
 // HlinkCreateFromString wraps the raw HlinkCreateFromString call with idiomatic Go types.
-func HlinkCreateFromString(pwzTarget string, pwzLocation string, pwzFriendlyName string, pihlsite *uishell.IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkCreateFromString(pwzTarget string, pwzLocation string, pwzFriendlyName string, pihlsite IHlinkSite, dwSiteData uint32, piunkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
 	_pwzTarget := win32.UTF16Ptr(pwzTarget)
 	_pwzLocation := win32.UTF16Ptr(pwzLocation)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
-	return win32.HRESULTError(int32(uishell.HlinkCreateFromString(foundation.PWSTR(_pwzTarget), foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzFriendlyName), pihlsite, dwSiteData, piunkOuter, riid, ppvObj)))
+	return win32.HRESULTError(int32(uishell.HlinkCreateFromString(foundation.PWSTR(_pwzTarget), foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzFriendlyName), pihlsite.Raw, dwSiteData, piunkOuter.Raw, riid, ppvObj)))
 }
 
 // HlinkCreateShortcut wraps the raw HlinkCreateShortcut call with idiomatic Go types.
-func HlinkCreateShortcut(grfHLSHORTCUTF uint32, pihl *uishell.IHlink, pwzDir string, pwzFileName string, ppwzShortcutFile *foundation.PWSTR, dwReserved uint32) error {
+func HlinkCreateShortcut(grfHLSHORTCUTF uint32, pihl IHlink, pwzDir string, pwzFileName string, ppwzShortcutFile *foundation.PWSTR, dwReserved uint32) error {
 	_pwzDir := win32.UTF16Ptr(pwzDir)
 	_pwzFileName := win32.UTF16Ptr(pwzFileName)
-	return win32.HRESULTError(int32(uishell.HlinkCreateShortcut(grfHLSHORTCUTF, pihl, foundation.PWSTR(_pwzDir), foundation.PWSTR(_pwzFileName), ppwzShortcutFile, dwReserved)))
+	return win32.HRESULTError(int32(uishell.HlinkCreateShortcut(grfHLSHORTCUTF, pihl.Raw, foundation.PWSTR(_pwzDir), foundation.PWSTR(_pwzFileName), ppwzShortcutFile, dwReserved)))
 }
 
 // HlinkCreateShortcutFromMoniker wraps the raw HlinkCreateShortcutFromMoniker call with idiomatic Go types.
-func HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF uint32, pimkTarget *systemcom.IMoniker, pwzLocation string, pwzDir string, pwzFileName string, ppwzShortcutFile *foundation.PWSTR, dwReserved uint32) error {
+func HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF uint32, pimkTarget systemcomidiom.IMoniker, pwzLocation string, pwzDir string, pwzFileName string, ppwzShortcutFile *foundation.PWSTR, dwReserved uint32) error {
 	_pwzLocation := win32.UTF16Ptr(pwzLocation)
 	_pwzDir := win32.UTF16Ptr(pwzDir)
 	_pwzFileName := win32.UTF16Ptr(pwzFileName)
-	return win32.HRESULTError(int32(uishell.HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF, pimkTarget, foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzDir), foundation.PWSTR(_pwzFileName), ppwzShortcutFile, dwReserved)))
+	return win32.HRESULTError(int32(uishell.HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF, pimkTarget.Raw, foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzDir), foundation.PWSTR(_pwzFileName), ppwzShortcutFile, dwReserved)))
 }
 
 // HlinkCreateShortcutFromString wraps the raw HlinkCreateShortcutFromString call with idiomatic Go types.
@@ -435,55 +438,55 @@ func HlinkIsShortcut(pwzFileName string) error {
 }
 
 // HlinkNavigate wraps the raw HlinkNavigate call with idiomatic Go types.
-func HlinkNavigate(pihl *uishell.IHlink, pihlframe *uishell.IHlinkFrame, grfHLNF uint32, pbc *systemcom.IBindCtx, pibsc *systemcom.IBindStatusCallback, pihlbc *uishell.IHlinkBrowseContext) error {
-	return win32.HRESULTError(int32(uishell.HlinkNavigate(pihl, pihlframe, grfHLNF, pbc, pibsc, pihlbc)))
+func HlinkNavigate(pihl IHlink, pihlframe IHlinkFrame, grfHLNF uint32, pbc systemcomidiom.IBindCtx, pibsc systemcomidiom.IBindStatusCallback, pihlbc IHlinkBrowseContext) error {
+	return win32.HRESULTError(int32(uishell.HlinkNavigate(pihl.Raw, pihlframe.Raw, grfHLNF, pbc.Raw, pibsc.Raw, pihlbc.Raw)))
 }
 
 // HlinkNavigateToStringReference wraps the raw HlinkNavigateToStringReference call with idiomatic Go types.
-func HlinkNavigateToStringReference(pwzTarget string, pwzLocation string, pihlsite *uishell.IHlinkSite, dwSiteData uint32, pihlframe *uishell.IHlinkFrame, grfHLNF uint32, pibc *systemcom.IBindCtx, pibsc *systemcom.IBindStatusCallback, pihlbc *uishell.IHlinkBrowseContext) error {
+func HlinkNavigateToStringReference(pwzTarget string, pwzLocation string, pihlsite IHlinkSite, dwSiteData uint32, pihlframe IHlinkFrame, grfHLNF uint32, pibc systemcomidiom.IBindCtx, pibsc systemcomidiom.IBindStatusCallback, pihlbc IHlinkBrowseContext) error {
 	_pwzTarget := win32.UTF16Ptr(pwzTarget)
 	_pwzLocation := win32.UTF16Ptr(pwzLocation)
-	return win32.HRESULTError(int32(uishell.HlinkNavigateToStringReference(foundation.PWSTR(_pwzTarget), foundation.PWSTR(_pwzLocation), pihlsite, dwSiteData, pihlframe, grfHLNF, pibc, pibsc, pihlbc)))
+	return win32.HRESULTError(int32(uishell.HlinkNavigateToStringReference(foundation.PWSTR(_pwzTarget), foundation.PWSTR(_pwzLocation), pihlsite.Raw, dwSiteData, pihlframe.Raw, grfHLNF, pibc.Raw, pibsc.Raw, pihlbc.Raw)))
 }
 
 // HlinkOnNavigate wraps the raw HlinkOnNavigate call with idiomatic Go types.
-func HlinkOnNavigate(pihlframe *uishell.IHlinkFrame, pihlbc *uishell.IHlinkBrowseContext, grfHLNF uint32, pimkTarget *systemcom.IMoniker, pwzLocation string, pwzFriendlyName string, puHLID *uint32) error {
+func HlinkOnNavigate(pihlframe IHlinkFrame, pihlbc IHlinkBrowseContext, grfHLNF uint32, pimkTarget systemcomidiom.IMoniker, pwzLocation string, pwzFriendlyName string, puHLID *uint32) error {
 	_pwzLocation := win32.UTF16Ptr(pwzLocation)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
-	return win32.HRESULTError(int32(uishell.HlinkOnNavigate(pihlframe, pihlbc, grfHLNF, pimkTarget, foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzFriendlyName), puHLID)))
+	return win32.HRESULTError(int32(uishell.HlinkOnNavigate(pihlframe.Raw, pihlbc.Raw, grfHLNF, pimkTarget.Raw, foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzFriendlyName), puHLID)))
 }
 
 // HlinkOnRenameDocument wraps the raw HlinkOnRenameDocument call with idiomatic Go types.
-func HlinkOnRenameDocument(dwReserved uint32, pihlbc *uishell.IHlinkBrowseContext, pimkOld *systemcom.IMoniker, pimkNew *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(uishell.HlinkOnRenameDocument(dwReserved, pihlbc, pimkOld, pimkNew)))
+func HlinkOnRenameDocument(dwReserved uint32, pihlbc IHlinkBrowseContext, pimkOld systemcomidiom.IMoniker, pimkNew systemcomidiom.IMoniker) error {
+	return win32.HRESULTError(int32(uishell.HlinkOnRenameDocument(dwReserved, pihlbc.Raw, pimkOld.Raw, pimkNew.Raw)))
 }
 
 // HlinkParseDisplayName wraps the raw HlinkParseDisplayName call with idiomatic Go types.
-func HlinkParseDisplayName(pibc *systemcom.IBindCtx, pwzDisplayName string, fNoForceAbs bool, pcchEaten *uint32, ppimk **systemcom.IMoniker) error {
+func HlinkParseDisplayName(pibc systemcomidiom.IBindCtx, pwzDisplayName string, fNoForceAbs bool, pcchEaten *uint32, ppimk **systemcom.IMoniker) error {
 	_pwzDisplayName := win32.UTF16Ptr(pwzDisplayName)
 	_fNoForceAbs := foundation.BOOL(win32.Bool32(fNoForceAbs))
-	return win32.HRESULTError(int32(uishell.HlinkParseDisplayName(pibc, foundation.PWSTR(_pwzDisplayName), _fNoForceAbs, pcchEaten, ppimk)))
+	return win32.HRESULTError(int32(uishell.HlinkParseDisplayName(pibc.Raw, foundation.PWSTR(_pwzDisplayName), _fNoForceAbs, pcchEaten, ppimk)))
 }
 
 // HlinkPreprocessMoniker wraps the raw HlinkPreprocessMoniker call with idiomatic Go types.
-func HlinkPreprocessMoniker(pibc *systemcom.IBindCtx, pimkIn *systemcom.IMoniker, ppimkOut **systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(uishell.HlinkPreprocessMoniker(pibc, pimkIn, ppimkOut)))
+func HlinkPreprocessMoniker(pibc systemcomidiom.IBindCtx, pimkIn systemcomidiom.IMoniker, ppimkOut **systemcom.IMoniker) error {
+	return win32.HRESULTError(int32(uishell.HlinkPreprocessMoniker(pibc.Raw, pimkIn.Raw, ppimkOut)))
 }
 
 // HlinkQueryCreateFromData wraps the raw HlinkQueryCreateFromData call with idiomatic Go types.
-func HlinkQueryCreateFromData(piDataObj *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(uishell.HlinkQueryCreateFromData(piDataObj)))
+func HlinkQueryCreateFromData(piDataObj systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(uishell.HlinkQueryCreateFromData(piDataObj.Raw)))
 }
 
 // HlinkResolveMonikerForData wraps the raw HlinkResolveMonikerForData call with idiomatic Go types.
-func HlinkResolveMonikerForData(pimkReference *systemcom.IMoniker, reserved uint32, pibc *systemcom.IBindCtx, cFmtetc uint32, rgFmtetc *systemcom.FORMATETC, pibsc *systemcom.IBindStatusCallback, pimkBase *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(uishell.HlinkResolveMonikerForData(pimkReference, reserved, pibc, cFmtetc, rgFmtetc, pibsc, pimkBase)))
+func HlinkResolveMonikerForData(pimkReference systemcomidiom.IMoniker, reserved uint32, pibc systemcomidiom.IBindCtx, cFmtetc uint32, rgFmtetc *systemcom.FORMATETC, pibsc systemcomidiom.IBindStatusCallback, pimkBase systemcomidiom.IMoniker) error {
+	return win32.HRESULTError(int32(uishell.HlinkResolveMonikerForData(pimkReference.Raw, reserved, pibc.Raw, cFmtetc, rgFmtetc, pibsc.Raw, pimkBase.Raw)))
 }
 
 // HlinkResolveShortcut wraps the raw HlinkResolveShortcut call with idiomatic Go types.
-func HlinkResolveShortcut(pwzShortcutFileName string, pihlsite *uishell.IHlinkSite, dwSiteData uint32, piunkOuter *systemcom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
+func HlinkResolveShortcut(pwzShortcutFileName string, pihlsite IHlinkSite, dwSiteData uint32, piunkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppvObj *unsafe.Pointer) error {
 	_pwzShortcutFileName := win32.UTF16Ptr(pwzShortcutFileName)
-	return win32.HRESULTError(int32(uishell.HlinkResolveShortcut(foundation.PWSTR(_pwzShortcutFileName), pihlsite, dwSiteData, piunkOuter, riid, ppvObj)))
+	return win32.HRESULTError(int32(uishell.HlinkResolveShortcut(foundation.PWSTR(_pwzShortcutFileName), pihlsite.Raw, dwSiteData, piunkOuter.Raw, riid, ppvObj)))
 }
 
 // HlinkResolveShortcutToMoniker wraps the raw HlinkResolveShortcutToMoniker call with idiomatic Go types.
@@ -499,9 +502,9 @@ func HlinkResolveShortcutToString(pwzShortcutFileName string, ppwzTarget *founda
 }
 
 // HlinkResolveStringForData wraps the raw HlinkResolveStringForData call with idiomatic Go types.
-func HlinkResolveStringForData(pwzReference string, reserved uint32, pibc *systemcom.IBindCtx, cFmtetc uint32, rgFmtetc *systemcom.FORMATETC, pibsc *systemcom.IBindStatusCallback, pimkBase *systemcom.IMoniker) error {
+func HlinkResolveStringForData(pwzReference string, reserved uint32, pibc systemcomidiom.IBindCtx, cFmtetc uint32, rgFmtetc *systemcom.FORMATETC, pibsc systemcomidiom.IBindStatusCallback, pimkBase systemcomidiom.IMoniker) error {
 	_pwzReference := win32.UTF16Ptr(pwzReference)
-	return win32.HRESULTError(int32(uishell.HlinkResolveStringForData(foundation.PWSTR(_pwzReference), reserved, pibc, cFmtetc, rgFmtetc, pibsc, pimkBase)))
+	return win32.HRESULTError(int32(uishell.HlinkResolveStringForData(foundation.PWSTR(_pwzReference), reserved, pibc.Raw, cFmtetc, rgFmtetc, pibsc.Raw, pimkBase.Raw)))
 }
 
 // HlinkSetSpecialReference wraps the raw HlinkSetSpecialReference call with idiomatic Go types.
@@ -517,10 +520,10 @@ func HlinkTranslateURL(pwzURL string, grfFlags uint32, ppwzTranslatedURL *founda
 }
 
 // HlinkUpdateStackItem wraps the raw HlinkUpdateStackItem call with idiomatic Go types.
-func HlinkUpdateStackItem(pihlframe *uishell.IHlinkFrame, pihlbc *uishell.IHlinkBrowseContext, uHLID uint32, pimkTrgt *systemcom.IMoniker, pwzLocation string, pwzFriendlyName string) error {
+func HlinkUpdateStackItem(pihlframe IHlinkFrame, pihlbc IHlinkBrowseContext, uHLID uint32, pimkTrgt systemcomidiom.IMoniker, pwzLocation string, pwzFriendlyName string) error {
 	_pwzLocation := win32.UTF16Ptr(pwzLocation)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
-	return win32.HRESULTError(int32(uishell.HlinkUpdateStackItem(pihlframe, pihlbc, uHLID, pimkTrgt, foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzFriendlyName))))
+	return win32.HRESULTError(int32(uishell.HlinkUpdateStackItem(pihlframe.Raw, pihlbc.Raw, uHLID, pimkTrgt.Raw, foundation.PWSTR(_pwzLocation), foundation.PWSTR(_pwzFriendlyName))))
 }
 
 // ILAppendID wraps the raw ILAppendID call with idiomatic Go types.
@@ -552,8 +555,8 @@ func ILIsParent(pidl1 *uishellcommon.ITEMIDLIST, pidl2 *uishellcommon.ITEMIDLIST
 
 // ILLoadFromStreamEx wraps the raw ILLoadFromStreamEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-illoadfromstreamex
-func ILLoadFromStreamEx(pstm *systemcom.IStream, pidl **uishellcommon.ITEMIDLIST) error {
-	return win32.HRESULTError(int32(uishell.ILLoadFromStreamEx(pstm, pidl)))
+func ILLoadFromStreamEx(pstm systemcomidiom.IStream, pidl **uishellcommon.ITEMIDLIST) error {
+	return win32.HRESULTError(int32(uishell.ILLoadFromStreamEx(pstm.Raw, pidl)))
 }
 
 // ILRemoveLastID wraps the raw ILRemoveLastID call with idiomatic Go types.
@@ -564,87 +567,93 @@ func ILRemoveLastID(pidl *uishellcommon.ITEMIDLIST) bool {
 
 // ILSaveToStream wraps the raw ILSaveToStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-ilsavetostream
-func ILSaveToStream(pstm *systemcom.IStream, pidl *uishellcommon.ITEMIDLIST) error {
-	return win32.HRESULTError(int32(uishell.ILSaveToStream(pstm, pidl)))
+func ILSaveToStream(pstm systemcomidiom.IStream, pidl *uishellcommon.ITEMIDLIST) error {
+	return win32.HRESULTError(int32(uishell.ILSaveToStream(pstm.Raw, pidl)))
 }
 
 // IStream_Copy wraps the raw IStream_Copy call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_copy
-func IStream_Copy(pstmFrom *systemcom.IStream, pstmTo *systemcom.IStream, cb uint32) error {
-	return win32.HRESULTError(int32(uishell.IStream_Copy(pstmFrom, pstmTo, cb)))
+func IStream_Copy(pstmFrom systemcomidiom.IStream, pstmTo systemcomidiom.IStream, cb uint32) error {
+	return win32.HRESULTError(int32(uishell.IStream_Copy(pstmFrom.Raw, pstmTo.Raw, cb)))
 }
 
 // IStream_Read wraps the raw IStream_Read call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_read
-func IStream_Read(pstm *systemcom.IStream, pv unsafe.Pointer, cb uint32) error {
-	return win32.HRESULTError(int32(uishell.IStream_Read(pstm, pv, cb)))
+func IStream_Read(pstm systemcomidiom.IStream, pv unsafe.Pointer, cb uint32) error {
+	return win32.HRESULTError(int32(uishell.IStream_Read(pstm.Raw, pv, cb)))
 }
 
 // IStream_ReadPidl wraps the raw IStream_ReadPidl call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_readpidl
-func IStream_ReadPidl(pstm *systemcom.IStream, ppidlOut **uishellcommon.ITEMIDLIST) error {
-	return win32.HRESULTError(int32(uishell.IStream_ReadPidl(pstm, ppidlOut)))
+func IStream_ReadPidl(pstm systemcomidiom.IStream, ppidlOut **uishellcommon.ITEMIDLIST) error {
+	return win32.HRESULTError(int32(uishell.IStream_ReadPidl(pstm.Raw, ppidlOut)))
 }
 
 // IStream_ReadStr wraps the raw IStream_ReadStr call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_readstr
-func IStream_ReadStr(pstm *systemcom.IStream, ppsz *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(uishell.IStream_ReadStr(pstm, ppsz)))
+func IStream_ReadStr(pstm systemcomidiom.IStream, ppsz *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(uishell.IStream_ReadStr(pstm.Raw, ppsz)))
 }
 
 // IStream_Reset wraps the raw IStream_Reset call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_reset
-func IStream_Reset(pstm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(uishell.IStream_Reset(pstm)))
+func IStream_Reset(pstm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(uishell.IStream_Reset(pstm.Raw)))
 }
 
 // IStream_Size wraps the raw IStream_Size call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_size
-func IStream_Size(pstm *systemcom.IStream, pui *uint64) error {
-	return win32.HRESULTError(int32(uishell.IStream_Size(pstm, pui)))
+func IStream_Size(pstm systemcomidiom.IStream, pui *uint64) error {
+	return win32.HRESULTError(int32(uishell.IStream_Size(pstm.Raw, pui)))
 }
 
 // IStream_Write wraps the raw IStream_Write call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_write
-func IStream_Write(pstm *systemcom.IStream, pv unsafe.Pointer, cb uint32) error {
-	return win32.HRESULTError(int32(uishell.IStream_Write(pstm, pv, cb)))
+func IStream_Write(pstm systemcomidiom.IStream, pv unsafe.Pointer, cb uint32) error {
+	return win32.HRESULTError(int32(uishell.IStream_Write(pstm.Raw, pv, cb)))
 }
 
 // IStream_WritePidl wraps the raw IStream_WritePidl call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_writepidl
-func IStream_WritePidl(pstm *systemcom.IStream, pidlWrite *uishellcommon.ITEMIDLIST) error {
-	return win32.HRESULTError(int32(uishell.IStream_WritePidl(pstm, pidlWrite)))
+func IStream_WritePidl(pstm systemcomidiom.IStream, pidlWrite *uishellcommon.ITEMIDLIST) error {
+	return win32.HRESULTError(int32(uishell.IStream_WritePidl(pstm.Raw, pidlWrite)))
 }
 
 // IStream_WriteStr wraps the raw IStream_WriteStr call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_writestr
-func IStream_WriteStr(pstm *systemcom.IStream, psz string) error {
+func IStream_WriteStr(pstm systemcomidiom.IStream, psz string) error {
 	_psz := win32.UTF16Ptr(psz)
-	return win32.HRESULTError(int32(uishell.IStream_WriteStr(pstm, foundation.PWSTR(_psz))))
+	return win32.HRESULTError(int32(uishell.IStream_WriteStr(pstm.Raw, foundation.PWSTR(_psz))))
 }
 
 // IUnknown_GetSite wraps the raw IUnknown_GetSite call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_getsite
-func IUnknown_GetSite(punk *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.IUnknown_GetSite(punk, riid, ppv)))
+func IUnknown_GetSite(punk systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.IUnknown_GetSite(punk.Raw, riid, ppv)))
 }
 
 // IUnknown_GetWindow wraps the raw IUnknown_GetWindow call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_getwindow
-func IUnknown_GetWindow(punk *systemcom.IUnknown, phwnd *foundation.HWND) error {
-	return win32.HRESULTError(int32(uishell.IUnknown_GetWindow(punk, phwnd)))
+func IUnknown_GetWindow(punk systemcomidiom.IUnknown, phwnd *foundation.HWND) error {
+	return win32.HRESULTError(int32(uishell.IUnknown_GetWindow(punk.Raw, phwnd)))
 }
 
 // IUnknown_QueryService wraps the raw IUnknown_QueryService call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_queryservice
-func IUnknown_QueryService(punk *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvOut *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.IUnknown_QueryService(punk, guidService, riid, ppvOut)))
+func IUnknown_QueryService(punk systemcomidiom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvOut *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.IUnknown_QueryService(punk.Raw, guidService, riid, ppvOut)))
+}
+
+// IUnknown_Set wraps the raw IUnknown_Set call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_set
+func IUnknown_Set(ppunk **systemcom.IUnknown, punk systemcomidiom.IUnknown) {
+	uishell.IUnknown_Set(ppunk, punk.Raw)
 }
 
 // IUnknown_SetSite wraps the raw IUnknown_SetSite call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-iunknown_setsite
-func IUnknown_SetSite(punk *systemcom.IUnknown, punkSite *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(uishell.IUnknown_SetSite(punk, punkSite)))
+func IUnknown_SetSite(punk systemcomidiom.IUnknown, punkSite systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(uishell.IUnknown_SetSite(punk.Raw, punkSite.Raw)))
 }
 
 // ImportPrivacySettings wraps the raw ImportPrivacySettings call with idiomatic Go types.
@@ -735,9 +744,9 @@ func LoadUserProfile(hToken foundation.HANDLE, lpProfileInfo *uishell.PROFILEINF
 }
 
 // OleSaveToStreamEx wraps the raw OleSaveToStreamEx call with idiomatic Go types.
-func OleSaveToStreamEx(piunk *systemcom.IUnknown, pistm *systemcom.IStream, fClearDirty bool) error {
+func OleSaveToStreamEx(piunk systemcomidiom.IUnknown, pistm systemcomidiom.IStream, fClearDirty bool) error {
 	_fClearDirty := foundation.BOOL(win32.Bool32(fClearDirty))
-	return win32.HRESULTError(int32(uishell.OleSaveToStreamEx(piunk, pistm, _fClearDirty)))
+	return win32.HRESULTError(int32(uishell.OleSaveToStreamEx(piunk.Raw, pistm.Raw, _fClearDirty)))
 }
 
 // OpenRegStream wraps the raw OpenRegStream call with idiomatic Go types.
@@ -1648,20 +1657,20 @@ func SHAutoComplete(hwndEdit foundation.HWND, dwFlags uishell.SHELL_AUTOCOMPLETE
 
 // SHBindToFolderIDListParent wraps the raw SHBindToFolderIDListParent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtofolderidlistparent
-func SHBindToFolderIDListParent(psfRoot *uishell.IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) error {
-	return win32.HRESULTError(int32(uishell.SHBindToFolderIDListParent(psfRoot, pidl, riid, ppv, ppidlLast)))
+func SHBindToFolderIDListParent(psfRoot IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) error {
+	return win32.HRESULTError(int32(uishell.SHBindToFolderIDListParent(psfRoot.Raw, pidl, riid, ppv, ppidlLast)))
 }
 
 // SHBindToFolderIDListParentEx wraps the raw SHBindToFolderIDListParentEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtofolderidlistparentex
-func SHBindToFolderIDListParentEx(psfRoot *uishell.IShellFolder, pidl *uishellcommon.ITEMIDLIST, ppbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) error {
-	return win32.HRESULTError(int32(uishell.SHBindToFolderIDListParentEx(psfRoot, pidl, ppbc, riid, ppv, ppidlLast)))
+func SHBindToFolderIDListParentEx(psfRoot IShellFolder, pidl *uishellcommon.ITEMIDLIST, ppbc systemcomidiom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer, ppidlLast **uishellcommon.ITEMIDLIST) error {
+	return win32.HRESULTError(int32(uishell.SHBindToFolderIDListParentEx(psfRoot.Raw, pidl, ppbc.Raw, riid, ppv, ppidlLast)))
 }
 
 // SHBindToObject wraps the raw SHBindToObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbindtoobject
-func SHBindToObject(psf *uishell.IShellFolder, pidl *uishellcommon.ITEMIDLIST, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.SHBindToObject(psf, pidl, pbc, riid, ppv)))
+func SHBindToObject(psf IShellFolder, pidl *uishellcommon.ITEMIDLIST, pbc systemcomidiom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.SHBindToObject(psf.Raw, pidl, pbc.Raw, riid, ppv)))
 }
 
 // SHBindToParent wraps the raw SHBindToParent call with idiomatic Go types.
@@ -1704,9 +1713,9 @@ func SHCloneSpecialIDList(csidl int32, fCreate bool) *uishellcommon.ITEMIDLIST {
 
 // SHCoCreateInstance wraps the raw SHCoCreateInstance call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcocreateinstance
-func SHCoCreateInstance(pszCLSID string, pclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCoCreateInstance(pszCLSID string, pclsid *win32.GUID, pUnkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_pszCLSID := win32.UTF16Ptr(pszCLSID)
-	return win32.HRESULTError(int32(uishell.SHCoCreateInstance(foundation.PWSTR(_pszCLSID), pclsid, pUnkOuter, riid, ppv)))
+	return win32.HRESULTError(int32(uishell.SHCoCreateInstance(foundation.PWSTR(_pszCLSID), pclsid, pUnkOuter.Raw, riid, ppv)))
 }
 
 // SHCopyKey wraps the raw SHCopyKeyW call with idiomatic Go types.
@@ -1730,12 +1739,12 @@ func SHCreateAssociationRegistration(riid *win32.GUID, ppv *unsafe.Pointer) erro
 
 // SHCreateDataObject wraps the raw SHCreateDataObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreatedataobject
-func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*uishellcommon.ITEMIDLIST, pdtInner *systemcom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*uishellcommon.ITEMIDLIST, pdtInner systemcomidiom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	var _apidl **uishellcommon.ITEMIDLIST
 	if len(apidl) > 0 {
 		_apidl = &apidl[0]
 	}
-	return win32.HRESULTError(int32(uishell.SHCreateDataObject(pidlFolder, uint32(len(apidl)), _apidl, pdtInner, riid, ppv)))
+	return win32.HRESULTError(int32(uishell.SHCreateDataObject(pidlFolder, uint32(len(apidl)), _apidl, pdtInner.Raw, riid, ppv)))
 }
 
 // SHCreateDefaultContextMenu wraps the raw SHCreateDefaultContextMenu call with idiomatic Go types.
@@ -1752,8 +1761,8 @@ func SHCreateDefaultExtractIcon(riid *win32.GUID, ppv *unsafe.Pointer) error {
 
 // SHCreateDefaultPropertiesOp wraps the raw SHCreateDefaultPropertiesOp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl/nf-shobjidl-shcreatedefaultpropertiesop
-func SHCreateDefaultPropertiesOp(psi *uishell.IShellItem, ppFileOp **uishell.IFileOperation) error {
-	return win32.HRESULTError(int32(uishell.SHCreateDefaultPropertiesOp(psi, ppFileOp)))
+func SHCreateDefaultPropertiesOp(psi IShellItem, ppFileOp **uishell.IFileOperation) error {
+	return win32.HRESULTError(int32(uishell.SHCreateDefaultPropertiesOp(psi.Raw, ppFileOp)))
 }
 
 // SHCreateDirectory wraps the raw SHCreateDirectory call with idiomatic Go types.
@@ -1785,16 +1794,16 @@ func SHCreateItemFromIDList(pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, pp
 
 // SHCreateItemFromParsingName wraps the raw SHCreateItemFromParsingName call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemfromparsingname
-func SHCreateItemFromParsingName(pszPath string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateItemFromParsingName(pszPath string, pbc systemcomidiom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	return win32.HRESULTError(int32(uishell.SHCreateItemFromParsingName(foundation.PWSTR(_pszPath), pbc, riid, ppv)))
+	return win32.HRESULTError(int32(uishell.SHCreateItemFromParsingName(foundation.PWSTR(_pszPath), pbc.Raw, riid, ppv)))
 }
 
 // SHCreateItemFromRelativeName wraps the raw SHCreateItemFromRelativeName call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemfromrelativename
-func SHCreateItemFromRelativeName(psiParent *uishell.IShellItem, pszName string, pbc *systemcom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHCreateItemFromRelativeName(psiParent IShellItem, pszName string, pbc systemcomidiom.IBindCtx, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(uishell.SHCreateItemFromRelativeName(psiParent, foundation.PWSTR(_pszName), pbc, riid, ppv)))
+	return win32.HRESULTError(int32(uishell.SHCreateItemFromRelativeName(psiParent.Raw, foundation.PWSTR(_pszName), pbc.Raw, riid, ppv)))
 }
 
 // SHCreateItemInKnownFolder wraps the raw SHCreateItemInKnownFolder call with idiomatic Go types.
@@ -1806,8 +1815,8 @@ func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem strin
 
 // SHCreateItemWithParent wraps the raw SHCreateItemWithParent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemwithparent
-func SHCreateItemWithParent(pidlParent *uishellcommon.ITEMIDLIST, psfParent *uishell.IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppvItem *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.SHCreateItemWithParent(pidlParent, psfParent, pidl, riid, ppvItem)))
+func SHCreateItemWithParent(pidlParent *uishellcommon.ITEMIDLIST, psfParent IShellFolder, pidl *uishellcommon.ITEMIDLIST, riid *win32.GUID, ppvItem *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.SHCreateItemWithParent(pidlParent, psfParent.Raw, pidl, riid, ppvItem)))
 }
 
 // SHCreatePropSheetExtArray wraps the raw SHCreatePropSheetExtArray call with idiomatic Go types.
@@ -1837,24 +1846,24 @@ func SHCreateShellFolderViewEx(pcsfv *uishell.CSFV, ppsv **uishell.IShellView) e
 
 // SHCreateShellItem wraps the raw SHCreateShellItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreateshellitem
-func SHCreateShellItem(pidlParent *uishellcommon.ITEMIDLIST, psfParent *uishell.IShellFolder, pidl *uishellcommon.ITEMIDLIST, ppsi **uishell.IShellItem) error {
-	return win32.HRESULTError(int32(uishell.SHCreateShellItem(pidlParent, psfParent, pidl, ppsi)))
+func SHCreateShellItem(pidlParent *uishellcommon.ITEMIDLIST, psfParent IShellFolder, pidl *uishellcommon.ITEMIDLIST, ppsi **uishell.IShellItem) error {
+	return win32.HRESULTError(int32(uishell.SHCreateShellItem(pidlParent, psfParent.Raw, pidl, ppsi)))
 }
 
 // SHCreateShellItemArray wraps the raw SHCreateShellItemArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarray
-func SHCreateShellItemArray(pidlParent *uishellcommon.ITEMIDLIST, psf *uishell.IShellFolder, ppidl []*uishellcommon.ITEMIDLIST, ppsiItemArray **uishell.IShellItemArray) error {
+func SHCreateShellItemArray(pidlParent *uishellcommon.ITEMIDLIST, psf IShellFolder, ppidl []*uishellcommon.ITEMIDLIST, ppsiItemArray **uishell.IShellItemArray) error {
 	var _ppidl **uishellcommon.ITEMIDLIST
 	if len(ppidl) > 0 {
 		_ppidl = &ppidl[0]
 	}
-	return win32.HRESULTError(int32(uishell.SHCreateShellItemArray(pidlParent, psf, uint32(len(ppidl)), _ppidl, ppsiItemArray)))
+	return win32.HRESULTError(int32(uishell.SHCreateShellItemArray(pidlParent, psf.Raw, uint32(len(ppidl)), _ppidl, ppsiItemArray)))
 }
 
 // SHCreateShellItemArrayFromDataObject wraps the raw SHCreateShellItemArrayFromDataObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarrayfromdataobject
-func SHCreateShellItemArrayFromDataObject(pdo *systemcom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.SHCreateShellItemArrayFromDataObject(pdo, riid, ppv)))
+func SHCreateShellItemArrayFromDataObject(pdo systemcomidiom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.SHCreateShellItemArrayFromDataObject(pdo.Raw, riid, ppv)))
 }
 
 // SHCreateShellItemArrayFromIDLists wraps the raw SHCreateShellItemArrayFromIDLists call with idiomatic Go types.
@@ -1869,8 +1878,8 @@ func SHCreateShellItemArrayFromIDLists(rgpidl []*uishellcommon.ITEMIDLIST, ppsiI
 
 // SHCreateShellItemArrayFromShellItem wraps the raw SHCreateShellItemArrayFromShellItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarrayfromshellitem
-func SHCreateShellItemArrayFromShellItem(psi *uishell.IShellItem, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.SHCreateShellItemArrayFromShellItem(psi, riid, ppv)))
+func SHCreateShellItemArrayFromShellItem(psi IShellItem, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.SHCreateShellItemArrayFromShellItem(psi.Raw, riid, ppv)))
 }
 
 // SHCreateStdEnumFmtEtc wraps the raw SHCreateStdEnumFmtEtc call with idiomatic Go types.
@@ -1898,10 +1907,10 @@ func SHCreateStreamOnFileA(pszFile foundation.PSTR, grfMode uint32, ppstm **syst
 
 // SHCreateStreamOnFileEx wraps the raw SHCreateStreamOnFileEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcreatestreamonfileex
-func SHCreateStreamOnFileEx(pszFile string, grfMode uint32, dwAttributes uint32, fCreate bool, pstmTemplate *systemcom.IStream, ppstm **systemcom.IStream) error {
+func SHCreateStreamOnFileEx(pszFile string, grfMode uint32, dwAttributes uint32, fCreate bool, pstmTemplate systemcomidiom.IStream, ppstm **systemcom.IStream) error {
 	_pszFile := win32.UTF16Ptr(pszFile)
 	_fCreate := foundation.BOOL(win32.Bool32(fCreate))
-	return win32.HRESULTError(int32(uishell.SHCreateStreamOnFileEx(foundation.PWSTR(_pszFile), grfMode, dwAttributes, _fCreate, pstmTemplate, ppstm)))
+	return win32.HRESULTError(int32(uishell.SHCreateStreamOnFileEx(foundation.PWSTR(_pszFile), grfMode, dwAttributes, _fCreate, pstmTemplate.Raw, ppstm)))
 }
 
 // SHCreateThreadRef wraps the raw SHCreateThreadRef call with idiomatic Go types.
@@ -1947,8 +1956,8 @@ func SHDeleteValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string) 
 
 // SHDoDragDrop wraps the raw SHDoDragDrop call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shdodragdrop
-func SHDoDragDrop(hwnd foundation.HWND, pdata *systemcom.IDataObject, pdsrc *systemole.IDropSource, dwEffect systemole.DROPEFFECT, pdwEffect *systemole.DROPEFFECT) error {
-	return win32.HRESULTError(int32(uishell.SHDoDragDrop(hwnd, pdata, pdsrc, dwEffect, pdwEffect)))
+func SHDoDragDrop(hwnd foundation.HWND, pdata systemcomidiom.IDataObject, pdsrc systemoleidiom.IDropSource, dwEffect systemole.DROPEFFECT, pdwEffect *systemole.DROPEFFECT) error {
+	return win32.HRESULTError(int32(uishell.SHDoDragDrop(hwnd, pdata.Raw, pdsrc.Raw, dwEffect, pdwEffect)))
 }
 
 // SHEmptyRecycleBin wraps the raw SHEmptyRecycleBinW call with idiomatic Go types.
@@ -2009,20 +2018,20 @@ func SHFormatDateTime(pft *foundation.FILETIME, pdwFlags *uint32, pszBuf foundat
 
 // SHGetAttributesFromDataObject wraps the raw SHGetAttributesFromDataObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetattributesfromdataobject
-func SHGetAttributesFromDataObject(pdo *systemcom.IDataObject, dwAttributeMask uint32, pdwAttributes *uint32, pcItems *uint32) error {
-	return win32.HRESULTError(int32(uishell.SHGetAttributesFromDataObject(pdo, dwAttributeMask, pdwAttributes, pcItems)))
+func SHGetAttributesFromDataObject(pdo systemcomidiom.IDataObject, dwAttributeMask uint32, pdwAttributes *uint32, pcItems *uint32) error {
+	return win32.HRESULTError(int32(uishell.SHGetAttributesFromDataObject(pdo.Raw, dwAttributeMask, pdwAttributes, pcItems)))
 }
 
 // SHGetDataFromIDList wraps the raw SHGetDataFromIDListW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetdatafromidlistw
-func SHGetDataFromIDList(psf *uishell.IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat uishell.SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) error {
-	return win32.HRESULTError(int32(uishell.SHGetDataFromIDListW(psf, pidl, nFormat, pv, cb)))
+func SHGetDataFromIDList(psf IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat uishell.SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) error {
+	return win32.HRESULTError(int32(uishell.SHGetDataFromIDListW(psf.Raw, pidl, nFormat, pv, cb)))
 }
 
 // SHGetDataFromIDListA wraps the raw SHGetDataFromIDListA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetdatafromidlista
-func SHGetDataFromIDListA(psf *uishell.IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat uishell.SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) error {
-	return win32.HRESULTError(int32(uishell.SHGetDataFromIDListA(psf, pidl, nFormat, pv, cb)))
+func SHGetDataFromIDListA(psf IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat uishell.SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) error {
+	return win32.HRESULTError(int32(uishell.SHGetDataFromIDListA(psf.Raw, pidl, nFormat, pv, cb)))
 }
 
 // SHGetDesktopFolder wraps the raw SHGetDesktopFolder call with idiomatic Go types.
@@ -2091,8 +2100,8 @@ func SHGetFolderPathAndSubDirA(csidl int32, hToken foundation.HANDLE, dwFlags ui
 
 // SHGetIDListFromObject wraps the raw SHGetIDListFromObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetidlistfromobject
-func SHGetIDListFromObject(punk *systemcom.IUnknown, ppidl **uishellcommon.ITEMIDLIST) error {
-	return win32.HRESULTError(int32(uishell.SHGetIDListFromObject(punk, ppidl)))
+func SHGetIDListFromObject(punk systemcomidiom.IUnknown, ppidl **uishellcommon.ITEMIDLIST) error {
+	return win32.HRESULTError(int32(uishell.SHGetIDListFromObject(punk.Raw, ppidl)))
 }
 
 // SHGetIconOverlayIndex wraps the raw SHGetIconOverlayIndexW call with idiomatic Go types.
@@ -2122,14 +2131,14 @@ func SHGetInverseCMAP(pbMap *byte, cbMap uint32) error {
 
 // SHGetItemFromDataObject wraps the raw SHGetItemFromDataObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetitemfromdataobject
-func SHGetItemFromDataObject(pdtobj *systemcom.IDataObject, dwFlags uishell.DATAOBJ_GET_ITEM_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.SHGetItemFromDataObject(pdtobj, dwFlags, riid, ppv)))
+func SHGetItemFromDataObject(pdtobj systemcomidiom.IDataObject, dwFlags uishell.DATAOBJ_GET_ITEM_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.SHGetItemFromDataObject(pdtobj.Raw, dwFlags, riid, ppv)))
 }
 
 // SHGetItemFromObject wraps the raw SHGetItemFromObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetitemfromobject
-func SHGetItemFromObject(punk *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.SHGetItemFromObject(punk, riid, ppv)))
+func SHGetItemFromObject(punk systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishell.SHGetItemFromObject(punk.Raw, riid, ppv)))
 }
 
 // SHGetKnownFolderIDList wraps the raw SHGetKnownFolderIDList call with idiomatic Go types.
@@ -2203,8 +2212,8 @@ func SHGetPathFromIDListEx(pidl *uishellcommon.ITEMIDLIST, pszPath foundation.PW
 
 // SHGetRealIDL wraps the raw SHGetRealIDL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetrealidl
-func SHGetRealIDL(psf *uishell.IShellFolder, pidlSimple *uishellcommon.ITEMIDLIST, ppidlReal **uishellcommon.ITEMIDLIST) error {
-	return win32.HRESULTError(int32(uishell.SHGetRealIDL(psf, pidlSimple, ppidlReal)))
+func SHGetRealIDL(psf IShellFolder, pidlSimple *uishellcommon.ITEMIDLIST, ppidlReal **uishellcommon.ITEMIDLIST) error {
+	return win32.HRESULTError(int32(uishell.SHGetRealIDL(psf.Raw, pidlSimple, ppidlReal)))
 }
 
 // SHGetSetFolderCustomSettings wraps the raw SHGetSetFolderCustomSettings call with idiomatic Go types.
@@ -2249,8 +2258,8 @@ func SHGetStockIconInfo(siid uishell.SHSTOCKICONID, uFlags uishell.SHGSI_FLAGS, 
 
 // SHGetTemporaryPropertyForItem wraps the raw SHGetTemporaryPropertyForItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgettemporarypropertyforitem
-func SHGetTemporaryPropertyForItem(psi *uishell.IShellItem, propkey *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(uishell.SHGetTemporaryPropertyForItem(psi, propkey, ppropvar)))
+func SHGetTemporaryPropertyForItem(psi IShellItem, propkey *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(uishell.SHGetTemporaryPropertyForItem(psi.Raw, propkey, ppropvar)))
 }
 
 // SHGetThreadRef wraps the raw SHGetThreadRef call with idiomatic Go types.
@@ -2319,8 +2328,8 @@ func SHIsLowMemoryMachine(dwType uint32) bool {
 
 // SHLimitInputEdit wraps the raw SHLimitInputEdit call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shlimitinputedit
-func SHLimitInputEdit(hwndEdit foundation.HWND, psf *uishell.IShellFolder) error {
-	return win32.HRESULTError(int32(uishell.SHLimitInputEdit(hwndEdit, psf)))
+func SHLimitInputEdit(hwndEdit foundation.HWND, psf IShellFolder) error {
+	return win32.HRESULTError(int32(uishell.SHLimitInputEdit(hwndEdit, psf.Raw)))
 }
 
 // SHLoadInProc wraps the raw SHLoadInProc call with idiomatic Go types.
@@ -2342,6 +2351,12 @@ func SHLoadNonloadedIconOverlayIdentifiers() error {
 	return win32.HRESULTError(int32(uishell.SHLoadNonloadedIconOverlayIdentifiers()))
 }
 
+// SHMapPIDLToSystemImageListIndex wraps the raw SHMapPIDLToSystemImageListIndex call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shmappidltosystemimagelistindex
+func SHMapPIDLToSystemImageListIndex(pshf IShellFolder, pidl *uishellcommon.ITEMIDLIST, piIndexSel *int32) int32 {
+	return uishell.SHMapPIDLToSystemImageListIndex(pshf.Raw, pidl, piIndexSel)
+}
+
 // SHMessageBoxCheck wraps the raw SHMessageBoxCheckW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shmessageboxcheckw
 func SHMessageBoxCheck(hwnd foundation.HWND, pszText string, pszCaption string, uType uint32, iDefault int32, pszRegVal string) int32 {
@@ -2353,8 +2368,8 @@ func SHMessageBoxCheck(hwnd foundation.HWND, pszText string, pszCaption string, 
 
 // SHMultiFileProperties wraps the raw SHMultiFileProperties call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shmultifileproperties
-func SHMultiFileProperties(pdtobj *systemcom.IDataObject, dwFlags uint32) error {
-	return win32.HRESULTError(int32(uishell.SHMultiFileProperties(pdtobj, dwFlags)))
+func SHMultiFileProperties(pdtobj systemcomidiom.IDataObject, dwFlags uint32) error {
+	return win32.HRESULTError(int32(uishell.SHMultiFileProperties(pdtobj.Raw, dwFlags)))
 }
 
 // SHObjectProperties wraps the raw SHObjectProperties call with idiomatic Go types.
@@ -2377,14 +2392,14 @@ func SHOpenFolderAndSelectItems(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*u
 
 // SHOpenPropSheet wraps the raw SHOpenPropSheetW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shopenpropsheetw
-func SHOpenPropSheet(pszCaption string, ahkeys []systemregistry.HKEY, pclsidDefault *win32.GUID, pdtobj *systemcom.IDataObject, psb *uishell.IShellBrowser, pStartPage string) bool {
+func SHOpenPropSheet(pszCaption string, ahkeys []systemregistry.HKEY, pclsidDefault *win32.GUID, pdtobj systemcomidiom.IDataObject, psb IShellBrowser, pStartPage string) bool {
 	_pszCaption := win32.UTF16Ptr(pszCaption)
 	var _ahkeys *systemregistry.HKEY
 	if len(ahkeys) > 0 {
 		_ahkeys = &ahkeys[0]
 	}
 	_pStartPage := win32.UTF16Ptr(pStartPage)
-	return uishell.SHOpenPropSheetW(foundation.PWSTR(_pszCaption), _ahkeys, uint32(len(ahkeys)), pclsidDefault, pdtobj, psb, foundation.PWSTR(_pStartPage)) != 0
+	return uishell.SHOpenPropSheetW(foundation.PWSTR(_pszCaption), _ahkeys, uint32(len(ahkeys)), pclsidDefault, pdtobj.Raw, psb.Raw, foundation.PWSTR(_pStartPage)) != 0
 }
 
 // SHOpenRegStream wraps the raw SHOpenRegStreamW call with idiomatic Go types.
@@ -2411,22 +2426,22 @@ func SHOpenWithDialog(hwndParent foundation.HWND, poainfo *uishell.OPENASINFO) e
 
 // SHParseDisplayName wraps the raw SHParseDisplayName call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shparsedisplayname
-func SHParseDisplayName(pszName string, pbc *systemcom.IBindCtx, ppidl **uishellcommon.ITEMIDLIST, sfgaoIn uint32, psfgaoOut *uint32) error {
+func SHParseDisplayName(pszName string, pbc systemcomidiom.IBindCtx, ppidl **uishellcommon.ITEMIDLIST, sfgaoIn uint32, psfgaoOut *uint32) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(uishell.SHParseDisplayName(foundation.PWSTR(_pszName), pbc, ppidl, sfgaoIn, psfgaoOut)))
+	return win32.HRESULTError(int32(uishell.SHParseDisplayName(foundation.PWSTR(_pszName), pbc.Raw, ppidl, sfgaoIn, psfgaoOut)))
 }
 
 // SHPathPrepareForWrite wraps the raw SHPathPrepareForWriteW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpathprepareforwritew
-func SHPathPrepareForWrite(hwnd foundation.HWND, punkEnableModless *systemcom.IUnknown, pszPath string, dwFlags uint32) error {
+func SHPathPrepareForWrite(hwnd foundation.HWND, punkEnableModless systemcomidiom.IUnknown, pszPath string, dwFlags uint32) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	return win32.HRESULTError(int32(uishell.SHPathPrepareForWriteW(hwnd, punkEnableModless, foundation.PWSTR(_pszPath), dwFlags)))
+	return win32.HRESULTError(int32(uishell.SHPathPrepareForWriteW(hwnd, punkEnableModless.Raw, foundation.PWSTR(_pszPath), dwFlags)))
 }
 
 // SHPathPrepareForWriteA wraps the raw SHPathPrepareForWriteA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpathprepareforwritea
-func SHPathPrepareForWriteA(hwnd foundation.HWND, punkEnableModless *systemcom.IUnknown, pszPath foundation.PSTR, dwFlags uint32) error {
-	return win32.HRESULTError(int32(uishell.SHPathPrepareForWriteA(hwnd, punkEnableModless, pszPath, dwFlags)))
+func SHPathPrepareForWriteA(hwnd foundation.HWND, punkEnableModless systemcomidiom.IUnknown, pszPath foundation.PSTR, dwFlags uint32) error {
+	return win32.HRESULTError(int32(uishell.SHPathPrepareForWriteA(hwnd, punkEnableModless.Raw, pszPath, dwFlags)))
 }
 
 // SHQueryInfoKey wraps the raw SHQueryInfoKeyW call with idiomatic Go types.
@@ -2640,8 +2655,8 @@ func SHRemoveLocalizedName(pszPath string) error {
 
 // SHResolveLibrary wraps the raw SHResolveLibrary call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shresolvelibrary
-func SHResolveLibrary(psiLibrary *uishell.IShellItem) error {
-	return win32.HRESULTError(int32(uishell.SHResolveLibrary(psiLibrary)))
+func SHResolveLibrary(psiLibrary IShellItem) error {
+	return win32.HRESULTError(int32(uishell.SHResolveLibrary(psiLibrary.Raw)))
 }
 
 // SHSendMessageBroadcast wraps the raw SHSendMessageBroadcastW call with idiomatic Go types.
@@ -2652,8 +2667,8 @@ func SHSendMessageBroadcast(uMsg uint32, wParam foundation.WPARAM, lParam founda
 
 // SHSetDefaultProperties wraps the raw SHSetDefaultProperties call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl/nf-shobjidl-shsetdefaultproperties
-func SHSetDefaultProperties(hwnd foundation.HWND, psi *uishell.IShellItem, dwFileOpFlags uint32, pfops *uishell.IFileOperationProgressSink) error {
-	return win32.HRESULTError(int32(uishell.SHSetDefaultProperties(hwnd, psi, dwFileOpFlags, pfops)))
+func SHSetDefaultProperties(hwnd foundation.HWND, psi IShellItem, dwFileOpFlags uint32, pfops IFileOperationProgressSink) error {
+	return win32.HRESULTError(int32(uishell.SHSetDefaultProperties(hwnd, psi.Raw, dwFileOpFlags, pfops.Raw)))
 }
 
 // SHSetFolderPath wraps the raw SHSetFolderPathW call with idiomatic Go types.
@@ -2667,6 +2682,12 @@ func SHSetFolderPath(csidl int32, hToken foundation.HANDLE, dwFlags uint32, pszP
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shsetfolderpatha
 func SHSetFolderPathA(csidl int32, hToken foundation.HANDLE, dwFlags uint32, pszPath foundation.PSTR) error {
 	return win32.HRESULTError(int32(uishell.SHSetFolderPathA(csidl, hToken, dwFlags, pszPath)))
+}
+
+// SHSetInstanceExplorer wraps the raw SHSetInstanceExplorer call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shsetinstanceexplorer
+func SHSetInstanceExplorer(punk systemcomidiom.IUnknown) {
+	uishell.SHSetInstanceExplorer(punk.Raw)
 }
 
 // SHSetKnownFolderPath wraps the raw SHSetKnownFolderPath call with idiomatic Go types.
@@ -2686,14 +2707,14 @@ func SHSetLocalizedName(pszPath string, pszResModule string, idsRes int32) error
 
 // SHSetTemporaryPropertyForItem wraps the raw SHSetTemporaryPropertyForItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shsettemporarypropertyforitem
-func SHSetTemporaryPropertyForItem(psi *uishell.IShellItem, propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(uishell.SHSetTemporaryPropertyForItem(psi, propkey, propvar)))
+func SHSetTemporaryPropertyForItem(psi IShellItem, propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(uishell.SHSetTemporaryPropertyForItem(psi.Raw, propkey, propvar)))
 }
 
 // SHSetThreadRef wraps the raw SHSetThreadRef call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shsetthreadref
-func SHSetThreadRef(punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(uishell.SHSetThreadRef(punk)))
+func SHSetThreadRef(punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(uishell.SHSetThreadRef(punk.Raw)))
 }
 
 // SHSetUnreadMailCount wraps the raw SHSetUnreadMailCountW call with idiomatic Go types.
@@ -2714,10 +2735,10 @@ func SHSetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, dwT
 
 // SHShowManageLibraryUI wraps the raw SHShowManageLibraryUI call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shshowmanagelibraryui
-func SHShowManageLibraryUI(psiLibrary *uishell.IShellItem, hwndOwner foundation.HWND, pszTitle string, pszInstruction string, lmdOptions uishell.LIBRARYMANAGEDIALOGOPTIONS) error {
+func SHShowManageLibraryUI(psiLibrary IShellItem, hwndOwner foundation.HWND, pszTitle string, pszInstruction string, lmdOptions uishell.LIBRARYMANAGEDIALOGOPTIONS) error {
 	_pszTitle := win32.UTF16Ptr(pszTitle)
 	_pszInstruction := win32.UTF16Ptr(pszInstruction)
-	return win32.HRESULTError(int32(uishell.SHShowManageLibraryUI(psiLibrary, hwndOwner, foundation.PWSTR(_pszTitle), foundation.PWSTR(_pszInstruction), lmdOptions)))
+	return win32.HRESULTError(int32(uishell.SHShowManageLibraryUI(psiLibrary.Raw, hwndOwner, foundation.PWSTR(_pszTitle), foundation.PWSTR(_pszInstruction), lmdOptions)))
 }
 
 // SHSimpleIDListFromPath wraps the raw SHSimpleIDListFromPath call with idiomatic Go types.
@@ -2729,8 +2750,8 @@ func SHSimpleIDListFromPath(pszPath string) *uishellcommon.ITEMIDLIST {
 
 // SHSkipJunction wraps the raw SHSkipJunction call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shskipjunction
-func SHSkipJunction(pbc *systemcom.IBindCtx, pclsid *win32.GUID) bool {
-	return uishell.SHSkipJunction(pbc, pclsid) != 0
+func SHSkipJunction(pbc systemcomidiom.IBindCtx, pclsid *win32.GUID) bool {
+	return uishell.SHSkipJunction(pbc.Raw, pclsid) != 0
 }
 
 // SHStartNetConnectionDialog wraps the raw SHStartNetConnectionDialogW call with idiomatic Go types.
@@ -2890,9 +2911,9 @@ func SoftwareUpdateMessageBox(hWnd foundation.HWND, pszDistUnit string, dwFlags 
 
 // StgMakeUniqueName wraps the raw StgMakeUniqueName call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-stgmakeuniquename
-func StgMakeUniqueName(pstgParent *systemcomstructuredstorage.IStorage, pszFileSpec string, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func StgMakeUniqueName(pstgParent systemcomstructuredstorageidiom.IStorage, pszFileSpec string, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_pszFileSpec := win32.UTF16Ptr(pszFileSpec)
-	return win32.HRESULTError(int32(uishell.StgMakeUniqueName(pstgParent, foundation.PWSTR(_pszFileSpec), grfMode, riid, ppv)))
+	return win32.HRESULTError(int32(uishell.StgMakeUniqueName(pstgParent.Raw, foundation.PWSTR(_pszFileSpec), grfMode, riid, ppv)))
 }
 
 // StrCSpn wraps the raw StrCSpnW call with idiomatic Go types.

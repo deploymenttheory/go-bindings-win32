@@ -11,58 +11,59 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcommarshal "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/marshal"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CoGetMarshalSizeMax wraps the raw CoGetMarshalSizeMax call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetmarshalsizemax
-func CoGetMarshalSizeMax(pulSize *uint32, riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoGetMarshalSizeMax(pulSize, riid, pUnk, dwDestContext, pvDestContext, mshlflags)))
+func CoGetMarshalSizeMax(pulSize *uint32, riid *win32.GUID, pUnk systemcomidiom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoGetMarshalSizeMax(pulSize, riid, pUnk.Raw, dwDestContext, pvDestContext, mshlflags)))
 }
 
 // CoGetStandardMarshal wraps the raw CoGetStandardMarshal call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetstandardmarshal
-func CoGetStandardMarshal(riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32, ppMarshal **systemcommarshal.IMarshal) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoGetStandardMarshal(riid, pUnk, dwDestContext, pvDestContext, mshlflags, ppMarshal)))
+func CoGetStandardMarshal(riid *win32.GUID, pUnk systemcomidiom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32, ppMarshal **systemcommarshal.IMarshal) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoGetStandardMarshal(riid, pUnk.Raw, dwDestContext, pvDestContext, mshlflags, ppMarshal)))
 }
 
 // CoGetStdMarshalEx wraps the raw CoGetStdMarshalEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetstdmarshalex
-func CoGetStdMarshalEx(pUnkOuter *systemcom.IUnknown, smexflags uint32, ppUnkInner **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoGetStdMarshalEx(pUnkOuter, smexflags, ppUnkInner)))
+func CoGetStdMarshalEx(pUnkOuter systemcomidiom.IUnknown, smexflags uint32, ppUnkInner **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoGetStdMarshalEx(pUnkOuter.Raw, smexflags, ppUnkInner)))
 }
 
 // CoMarshalHresult wraps the raw CoMarshalHresult call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-comarshalhresult
-func CoMarshalHresult(pstm *systemcom.IStream, hresult foundation.HRESULT) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoMarshalHresult(pstm, hresult)))
+func CoMarshalHresult(pstm systemcomidiom.IStream, hresult foundation.HRESULT) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoMarshalHresult(pstm.Raw, hresult)))
 }
 
 // CoMarshalInterThreadInterfaceInStream wraps the raw CoMarshalInterThreadInterfaceInStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-comarshalinterthreadinterfaceinstream
-func CoMarshalInterThreadInterfaceInStream(riid *win32.GUID, pUnk *systemcom.IUnknown, ppStm **systemcom.IStream) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoMarshalInterThreadInterfaceInStream(riid, pUnk, ppStm)))
+func CoMarshalInterThreadInterfaceInStream(riid *win32.GUID, pUnk systemcomidiom.IUnknown, ppStm **systemcom.IStream) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoMarshalInterThreadInterfaceInStream(riid, pUnk.Raw, ppStm)))
 }
 
 // CoMarshalInterface wraps the raw CoMarshalInterface call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-comarshalinterface
-func CoMarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, pUnk *systemcom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoMarshalInterface(pStm, riid, pUnk, dwDestContext, pvDestContext, mshlflags)))
+func CoMarshalInterface(pStm systemcomidiom.IStream, riid *win32.GUID, pUnk systemcomidiom.IUnknown, dwDestContext uint32, pvDestContext unsafe.Pointer, mshlflags uint32) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoMarshalInterface(pStm.Raw, riid, pUnk.Raw, dwDestContext, pvDestContext, mshlflags)))
 }
 
 // CoReleaseMarshalData wraps the raw CoReleaseMarshalData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coreleasemarshaldata
-func CoReleaseMarshalData(pStm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoReleaseMarshalData(pStm)))
+func CoReleaseMarshalData(pStm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoReleaseMarshalData(pStm.Raw)))
 }
 
 // CoUnmarshalHresult wraps the raw CoUnmarshalHresult call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-counmarshalhresult
-func CoUnmarshalHresult(pstm *systemcom.IStream, phresult *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoUnmarshalHresult(pstm, phresult)))
+func CoUnmarshalHresult(pstm systemcomidiom.IStream, phresult *foundation.HRESULT) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoUnmarshalHresult(pstm.Raw, phresult)))
 }
 
 // CoUnmarshalInterface wraps the raw CoUnmarshalInterface call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-counmarshalinterface
-func CoUnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemcommarshal.CoUnmarshalInterface(pStm, riid, ppv)))
+func CoUnmarshalInterface(pStm systemcomidiom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemcommarshal.CoUnmarshalInterface(pStm.Raw, riid, ppv)))
 }

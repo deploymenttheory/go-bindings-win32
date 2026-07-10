@@ -252,8 +252,8 @@ func (self IMSMQDestination) Get_IADs(ppIADs **systemcom.IDispatch) error {
 }
 
 // Putref_IADs wraps the raw Putref_IADs call.
-func (self IMSMQDestination) Putref_IADs(pIADs *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_IADs(pIADs)))
+func (self IMSMQDestination) Putref_IADs(pIADs systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_IADs(pIADs.Raw)))
 }
 
 // Get_ADsPath wraps the raw Get_ADsPath call.
@@ -292,8 +292,8 @@ func (self IMSMQDestination) Get_Destinations(ppDestinations **systemcom.IDispat
 }
 
 // Putref_Destinations wraps the raw Putref_Destinations call.
-func (self IMSMQDestination) Putref_Destinations(pDestinations *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Destinations(pDestinations)))
+func (self IMSMQDestination) Putref_Destinations(pDestinations systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Destinations(pDestinations.Raw)))
 }
 
 // Get_Properties wraps the raw Get_Properties call.
@@ -482,8 +482,8 @@ func (self IMSMQMessage) Get_ResponseQueueInfo(ppqinfoResponse **systemmessagequ
 }
 
 // Putref_ResponseQueueInfo wraps the raw Putref_ResponseQueueInfo call.
-func (self IMSMQMessage) Putref_ResponseQueueInfo(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo(pqinfoResponse)))
+func (self IMSMQMessage) Putref_ResponseQueueInfo(pqinfoResponse IMSMQQueueInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo(pqinfoResponse.Raw)))
 }
 
 // Get_AppSpecific wraps the raw Get_AppSpecific call.
@@ -517,8 +517,8 @@ func (self IMSMQMessage) Get_AdminQueueInfo(ppqinfoAdmin **systemmessagequeuing.
 }
 
 // Putref_AdminQueueInfo wraps the raw Putref_AdminQueueInfo call.
-func (self IMSMQMessage) Putref_AdminQueueInfo(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo(pqinfoAdmin)))
+func (self IMSMQMessage) Putref_AdminQueueInfo(pqinfoAdmin IMSMQQueueInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo(pqinfoAdmin.Raw)))
 }
 
 // Get_Id wraps the raw Get_Id call.
@@ -627,8 +627,8 @@ func (self IMSMQMessage) Put_SenderIdType(lSenderIdType int32) error {
 }
 
 // Send wraps the raw Send call.
-func (self IMSMQMessage) Send(DestinationQueue *systemmessagequeuing.IMSMQQueue, Transaction *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Send(DestinationQueue, Transaction)))
+func (self IMSMQMessage) Send(DestinationQueue IMSMQQueue, Transaction *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.Send(DestinationQueue.Raw, Transaction)))
 }
 
 // AttachCurrentSecurityContext wraps the raw AttachCurrentSecurityContext call.
@@ -723,8 +723,8 @@ func (self IMSMQMessage2) Get_ResponseQueueInfo_v1(ppqinfoResponse **systemmessa
 }
 
 // Putref_ResponseQueueInfo_v1 wraps the raw Putref_ResponseQueueInfo_v1 call.
-func (self IMSMQMessage2) Putref_ResponseQueueInfo_v1(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v1(pqinfoResponse)))
+func (self IMSMQMessage2) Putref_ResponseQueueInfo_v1(pqinfoResponse IMSMQQueueInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v1(pqinfoResponse.Raw)))
 }
 
 // Get_AppSpecific wraps the raw Get_AppSpecific call.
@@ -758,8 +758,8 @@ func (self IMSMQMessage2) Get_AdminQueueInfo_v1(ppqinfoAdmin **systemmessagequeu
 }
 
 // Putref_AdminQueueInfo_v1 wraps the raw Putref_AdminQueueInfo_v1 call.
-func (self IMSMQMessage2) Putref_AdminQueueInfo_v1(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v1(pqinfoAdmin)))
+func (self IMSMQMessage2) Putref_AdminQueueInfo_v1(pqinfoAdmin IMSMQQueueInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v1(pqinfoAdmin.Raw)))
 }
 
 // Get_Id wraps the raw Get_Id call.
@@ -868,8 +868,8 @@ func (self IMSMQMessage2) Put_SenderIdType(lSenderIdType int32) error {
 }
 
 // Send wraps the raw Send call.
-func (self IMSMQMessage2) Send(DestinationQueue *systemmessagequeuing.IMSMQQueue2, Transaction *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Send(DestinationQueue, Transaction)))
+func (self IMSMQMessage2) Send(DestinationQueue IMSMQQueue2, Transaction *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.Send(DestinationQueue.Raw, Transaction)))
 }
 
 // AttachCurrentSecurityContext wraps the raw AttachCurrentSecurityContext call.
@@ -968,8 +968,8 @@ func (self IMSMQMessage2) Get_ResponseQueueInfo(ppqinfoResponse **systemmessageq
 }
 
 // Putref_ResponseQueueInfo wraps the raw Putref_ResponseQueueInfo call.
-func (self IMSMQMessage2) Putref_ResponseQueueInfo(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo2) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo(pqinfoResponse)))
+func (self IMSMQMessage2) Putref_ResponseQueueInfo(pqinfoResponse IMSMQQueueInfo2) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo(pqinfoResponse.Raw)))
 }
 
 // Get_AdminQueueInfo wraps the raw Get_AdminQueueInfo call.
@@ -978,8 +978,8 @@ func (self IMSMQMessage2) Get_AdminQueueInfo(ppqinfoAdmin **systemmessagequeuing
 }
 
 // Putref_AdminQueueInfo wraps the raw Putref_AdminQueueInfo call.
-func (self IMSMQMessage2) Putref_AdminQueueInfo(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo2) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo(pqinfoAdmin)))
+func (self IMSMQMessage2) Putref_AdminQueueInfo(pqinfoAdmin IMSMQQueueInfo2) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo(pqinfoAdmin.Raw)))
 }
 
 // Get_ReceivedAuthenticationLevel wraps the raw Get_ReceivedAuthenticationLevel call.
@@ -1074,8 +1074,8 @@ func (self IMSMQMessage3) Get_ResponseQueueInfo_v1(ppqinfoResponse **systemmessa
 }
 
 // Putref_ResponseQueueInfo_v1 wraps the raw Putref_ResponseQueueInfo_v1 call.
-func (self IMSMQMessage3) Putref_ResponseQueueInfo_v1(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v1(pqinfoResponse)))
+func (self IMSMQMessage3) Putref_ResponseQueueInfo_v1(pqinfoResponse IMSMQQueueInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v1(pqinfoResponse.Raw)))
 }
 
 // Get_AppSpecific wraps the raw Get_AppSpecific call.
@@ -1109,8 +1109,8 @@ func (self IMSMQMessage3) Get_AdminQueueInfo_v1(ppqinfoAdmin **systemmessagequeu
 }
 
 // Putref_AdminQueueInfo_v1 wraps the raw Putref_AdminQueueInfo_v1 call.
-func (self IMSMQMessage3) Putref_AdminQueueInfo_v1(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v1(pqinfoAdmin)))
+func (self IMSMQMessage3) Putref_AdminQueueInfo_v1(pqinfoAdmin IMSMQQueueInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v1(pqinfoAdmin.Raw)))
 }
 
 // Get_Id wraps the raw Get_Id call.
@@ -1219,8 +1219,8 @@ func (self IMSMQMessage3) Put_SenderIdType(lSenderIdType int32) error {
 }
 
 // Send wraps the raw Send call.
-func (self IMSMQMessage3) Send(DestinationQueue *systemcom.IDispatch, Transaction *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Send(DestinationQueue, Transaction)))
+func (self IMSMQMessage3) Send(DestinationQueue systemcomidiom.IDispatch, Transaction *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.Send(DestinationQueue.Raw, Transaction)))
 }
 
 // AttachCurrentSecurityContext wraps the raw AttachCurrentSecurityContext call.
@@ -1319,8 +1319,8 @@ func (self IMSMQMessage3) Get_ResponseQueueInfo_v2(ppqinfoResponse **systemmessa
 }
 
 // Putref_ResponseQueueInfo_v2 wraps the raw Putref_ResponseQueueInfo_v2 call.
-func (self IMSMQMessage3) Putref_ResponseQueueInfo_v2(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo2) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v2(pqinfoResponse)))
+func (self IMSMQMessage3) Putref_ResponseQueueInfo_v2(pqinfoResponse IMSMQQueueInfo2) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v2(pqinfoResponse.Raw)))
 }
 
 // Get_AdminQueueInfo_v2 wraps the raw Get_AdminQueueInfo_v2 call.
@@ -1329,8 +1329,8 @@ func (self IMSMQMessage3) Get_AdminQueueInfo_v2(ppqinfoAdmin **systemmessagequeu
 }
 
 // Putref_AdminQueueInfo_v2 wraps the raw Putref_AdminQueueInfo_v2 call.
-func (self IMSMQMessage3) Putref_AdminQueueInfo_v2(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo2) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v2(pqinfoAdmin)))
+func (self IMSMQMessage3) Putref_AdminQueueInfo_v2(pqinfoAdmin IMSMQQueueInfo2) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v2(pqinfoAdmin.Raw)))
 }
 
 // Get_ReceivedAuthenticationLevel wraps the raw Get_ReceivedAuthenticationLevel call.
@@ -1344,8 +1344,8 @@ func (self IMSMQMessage3) Get_ResponseQueueInfo(ppqinfoResponse **systemmessageq
 }
 
 // Putref_ResponseQueueInfo wraps the raw Putref_ResponseQueueInfo call.
-func (self IMSMQMessage3) Putref_ResponseQueueInfo(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo3) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo(pqinfoResponse)))
+func (self IMSMQMessage3) Putref_ResponseQueueInfo(pqinfoResponse IMSMQQueueInfo3) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo(pqinfoResponse.Raw)))
 }
 
 // Get_AdminQueueInfo wraps the raw Get_AdminQueueInfo call.
@@ -1354,8 +1354,8 @@ func (self IMSMQMessage3) Get_AdminQueueInfo(ppqinfoAdmin **systemmessagequeuing
 }
 
 // Putref_AdminQueueInfo wraps the raw Putref_AdminQueueInfo call.
-func (self IMSMQMessage3) Putref_AdminQueueInfo(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo3) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo(pqinfoAdmin)))
+func (self IMSMQMessage3) Putref_AdminQueueInfo(pqinfoAdmin IMSMQQueueInfo3) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo(pqinfoAdmin.Raw)))
 }
 
 // Get_ResponseDestination wraps the raw Get_ResponseDestination call.
@@ -1364,8 +1364,8 @@ func (self IMSMQMessage3) Get_ResponseDestination(ppdestResponse **systemcom.IDi
 }
 
 // Putref_ResponseDestination wraps the raw Putref_ResponseDestination call.
-func (self IMSMQMessage3) Putref_ResponseDestination(pdestResponse *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseDestination(pdestResponse)))
+func (self IMSMQMessage3) Putref_ResponseDestination(pdestResponse systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseDestination(pdestResponse.Raw)))
 }
 
 // Get_Destination wraps the raw Get_Destination call.
@@ -1505,8 +1505,8 @@ func (self IMSMQMessage4) Get_ResponseQueueInfo_v1(ppqinfoResponse **systemmessa
 }
 
 // Putref_ResponseQueueInfo_v1 wraps the raw Putref_ResponseQueueInfo_v1 call.
-func (self IMSMQMessage4) Putref_ResponseQueueInfo_v1(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v1(pqinfoResponse)))
+func (self IMSMQMessage4) Putref_ResponseQueueInfo_v1(pqinfoResponse IMSMQQueueInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v1(pqinfoResponse.Raw)))
 }
 
 // Get_AppSpecific wraps the raw Get_AppSpecific call.
@@ -1540,8 +1540,8 @@ func (self IMSMQMessage4) Get_AdminQueueInfo_v1(ppqinfoAdmin **systemmessagequeu
 }
 
 // Putref_AdminQueueInfo_v1 wraps the raw Putref_AdminQueueInfo_v1 call.
-func (self IMSMQMessage4) Putref_AdminQueueInfo_v1(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v1(pqinfoAdmin)))
+func (self IMSMQMessage4) Putref_AdminQueueInfo_v1(pqinfoAdmin IMSMQQueueInfo) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v1(pqinfoAdmin.Raw)))
 }
 
 // Get_Id wraps the raw Get_Id call.
@@ -1650,8 +1650,8 @@ func (self IMSMQMessage4) Put_SenderIdType(lSenderIdType int32) error {
 }
 
 // Send wraps the raw Send call.
-func (self IMSMQMessage4) Send(DestinationQueue *systemcom.IDispatch, Transaction *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Send(DestinationQueue, Transaction)))
+func (self IMSMQMessage4) Send(DestinationQueue systemcomidiom.IDispatch, Transaction *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.Send(DestinationQueue.Raw, Transaction)))
 }
 
 // AttachCurrentSecurityContext wraps the raw AttachCurrentSecurityContext call.
@@ -1750,8 +1750,8 @@ func (self IMSMQMessage4) Get_ResponseQueueInfo_v2(ppqinfoResponse **systemmessa
 }
 
 // Putref_ResponseQueueInfo_v2 wraps the raw Putref_ResponseQueueInfo_v2 call.
-func (self IMSMQMessage4) Putref_ResponseQueueInfo_v2(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo2) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v2(pqinfoResponse)))
+func (self IMSMQMessage4) Putref_ResponseQueueInfo_v2(pqinfoResponse IMSMQQueueInfo2) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo_v2(pqinfoResponse.Raw)))
 }
 
 // Get_AdminQueueInfo_v2 wraps the raw Get_AdminQueueInfo_v2 call.
@@ -1760,8 +1760,8 @@ func (self IMSMQMessage4) Get_AdminQueueInfo_v2(ppqinfoAdmin **systemmessagequeu
 }
 
 // Putref_AdminQueueInfo_v2 wraps the raw Putref_AdminQueueInfo_v2 call.
-func (self IMSMQMessage4) Putref_AdminQueueInfo_v2(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo2) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v2(pqinfoAdmin)))
+func (self IMSMQMessage4) Putref_AdminQueueInfo_v2(pqinfoAdmin IMSMQQueueInfo2) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo_v2(pqinfoAdmin.Raw)))
 }
 
 // Get_ReceivedAuthenticationLevel wraps the raw Get_ReceivedAuthenticationLevel call.
@@ -1775,8 +1775,8 @@ func (self IMSMQMessage4) Get_ResponseQueueInfo(ppqinfoResponse **systemmessageq
 }
 
 // Putref_ResponseQueueInfo wraps the raw Putref_ResponseQueueInfo call.
-func (self IMSMQMessage4) Putref_ResponseQueueInfo(pqinfoResponse *systemmessagequeuing.IMSMQQueueInfo4) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo(pqinfoResponse)))
+func (self IMSMQMessage4) Putref_ResponseQueueInfo(pqinfoResponse IMSMQQueueInfo4) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseQueueInfo(pqinfoResponse.Raw)))
 }
 
 // Get_AdminQueueInfo wraps the raw Get_AdminQueueInfo call.
@@ -1785,8 +1785,8 @@ func (self IMSMQMessage4) Get_AdminQueueInfo(ppqinfoAdmin **systemmessagequeuing
 }
 
 // Putref_AdminQueueInfo wraps the raw Putref_AdminQueueInfo call.
-func (self IMSMQMessage4) Putref_AdminQueueInfo(pqinfoAdmin *systemmessagequeuing.IMSMQQueueInfo4) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo(pqinfoAdmin)))
+func (self IMSMQMessage4) Putref_AdminQueueInfo(pqinfoAdmin IMSMQQueueInfo4) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AdminQueueInfo(pqinfoAdmin.Raw)))
 }
 
 // Get_ResponseDestination wraps the raw Get_ResponseDestination call.
@@ -1795,8 +1795,8 @@ func (self IMSMQMessage4) Get_ResponseDestination(ppdestResponse **systemcom.IDi
 }
 
 // Putref_ResponseDestination wraps the raw Putref_ResponseDestination call.
-func (self IMSMQMessage4) Putref_ResponseDestination(pdestResponse *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ResponseDestination(pdestResponse)))
+func (self IMSMQMessage4) Putref_ResponseDestination(pdestResponse systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ResponseDestination(pdestResponse.Raw)))
 }
 
 // Get_Destination wraps the raw Get_Destination call.
@@ -1923,13 +1923,13 @@ func (self IMSMQPrivateEvent) Get_Hwnd(phwnd *int32) error {
 }
 
 // FireArrivedEvent wraps the raw FireArrivedEvent call.
-func (self IMSMQPrivateEvent) FireArrivedEvent(pq *systemmessagequeuing.IMSMQQueue, msgcursor int32) error {
-	return win32.HRESULTError(int32(self.Raw.FireArrivedEvent(pq, msgcursor)))
+func (self IMSMQPrivateEvent) FireArrivedEvent(pq IMSMQQueue, msgcursor int32) error {
+	return win32.HRESULTError(int32(self.Raw.FireArrivedEvent(pq.Raw, msgcursor)))
 }
 
 // FireArrivedErrorEvent wraps the raw FireArrivedErrorEvent call.
-func (self IMSMQPrivateEvent) FireArrivedErrorEvent(pq *systemmessagequeuing.IMSMQQueue, hrStatus foundation.HRESULT, msgcursor int32) error {
-	return win32.HRESULTError(int32(self.Raw.FireArrivedErrorEvent(pq, hrStatus, msgcursor)))
+func (self IMSMQPrivateEvent) FireArrivedErrorEvent(pq IMSMQQueue, hrStatus foundation.HRESULT, msgcursor int32) error {
+	return win32.HRESULTError(int32(self.Raw.FireArrivedErrorEvent(pq.Raw, hrStatus, msgcursor)))
 }
 
 // IMSMQQuery is an idiomatic wrapper over the raw COM interface System.MessageQueuing.IMSMQQuery with error-returning methods.
@@ -2073,8 +2073,8 @@ func (self IMSMQQueue) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBod
 }
 
 // EnableNotification wraps the raw EnableNotification call.
-func (self IMSMQQueue) EnableNotification(Event *systemmessagequeuing.IMSMQEvent, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.EnableNotification(Event, Cursor, ReceiveTimeout)))
+func (self IMSMQQueue) EnableNotification(Event IMSMQEvent, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.EnableNotification(Event.Raw, Cursor, ReceiveTimeout)))
 }
 
 // Reset wraps the raw Reset call.
@@ -2149,8 +2149,8 @@ func (self IMSMQQueue2) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, Wan
 }
 
 // EnableNotification wraps the raw EnableNotification call.
-func (self IMSMQQueue2) EnableNotification(Event *systemmessagequeuing.IMSMQEvent2, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.EnableNotification(Event, Cursor, ReceiveTimeout)))
+func (self IMSMQQueue2) EnableNotification(Event IMSMQEvent2, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.EnableNotification(Event.Raw, Cursor, ReceiveTimeout)))
 }
 
 // Reset wraps the raw Reset call.
@@ -2255,8 +2255,8 @@ func (self IMSMQQueue3) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, Wan
 }
 
 // EnableNotification wraps the raw EnableNotification call.
-func (self IMSMQQueue3) EnableNotification(Event *systemmessagequeuing.IMSMQEvent3, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.EnableNotification(Event, Cursor, ReceiveTimeout)))
+func (self IMSMQQueue3) EnableNotification(Event IMSMQEvent3, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.EnableNotification(Event.Raw, Cursor, ReceiveTimeout)))
 }
 
 // Reset wraps the raw Reset call.
@@ -2396,8 +2396,8 @@ func (self IMSMQQueue4) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, Wan
 }
 
 // EnableNotification wraps the raw EnableNotification call.
-func (self IMSMQQueue4) EnableNotification(Event *systemmessagequeuing.IMSMQEvent3, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.EnableNotification(Event, Cursor, ReceiveTimeout)))
+func (self IMSMQQueue4) EnableNotification(Event IMSMQEvent3, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.EnableNotification(Event.Raw, Cursor, ReceiveTimeout)))
 }
 
 // Reset wraps the raw Reset call.

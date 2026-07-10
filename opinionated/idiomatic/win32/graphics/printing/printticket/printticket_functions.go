@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	graphicsprintingprintticket "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/printing/printticket"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // PTCloseProvider wraps the raw PTCloseProvider call with idiomatic Go types.
@@ -22,39 +22,39 @@ func PTCloseProvider(hProvider graphicsprintingprintticket.HPTPROVIDER) error {
 
 // PTConvertDevModeToPrintTicket wraps the raw PTConvertDevModeToPrintTicket call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptconvertdevmodetoprintticket
-func PTConvertDevModeToPrintTicket(hProvider graphicsprintingprintticket.HPTPROVIDER, cbDevmode uint32, pDevmode *graphicsgdi.DEVMODEA, scope graphicsprintingprintticket.EPrintTicketScope, pPrintTicket *systemcom.IStream) error {
-	return win32.HRESULTError(int32(graphicsprintingprintticket.PTConvertDevModeToPrintTicket(hProvider, cbDevmode, pDevmode, scope, pPrintTicket)))
+func PTConvertDevModeToPrintTicket(hProvider graphicsprintingprintticket.HPTPROVIDER, cbDevmode uint32, pDevmode *graphicsgdi.DEVMODEA, scope graphicsprintingprintticket.EPrintTicketScope, pPrintTicket systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(graphicsprintingprintticket.PTConvertDevModeToPrintTicket(hProvider, cbDevmode, pDevmode, scope, pPrintTicket.Raw)))
 }
 
 // PTConvertPrintTicketToDevMode wraps the raw PTConvertPrintTicketToDevMode call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptconvertprinttickettodevmode
-func PTConvertPrintTicketToDevMode(hProvider graphicsprintingprintticket.HPTPROVIDER, pPrintTicket *systemcom.IStream, baseDevmodeType graphicsprintingprintticket.EDefaultDevmodeType, scope graphicsprintingprintticket.EPrintTicketScope, pcbDevmode *uint32, ppDevmode **graphicsgdi.DEVMODEA, pbstrErrorMessage *foundation.BSTR) error {
-	return win32.HRESULTError(int32(graphicsprintingprintticket.PTConvertPrintTicketToDevMode(hProvider, pPrintTicket, baseDevmodeType, scope, pcbDevmode, ppDevmode, pbstrErrorMessage)))
+func PTConvertPrintTicketToDevMode(hProvider graphicsprintingprintticket.HPTPROVIDER, pPrintTicket systemcomidiom.IStream, baseDevmodeType graphicsprintingprintticket.EDefaultDevmodeType, scope graphicsprintingprintticket.EPrintTicketScope, pcbDevmode *uint32, ppDevmode **graphicsgdi.DEVMODEA, pbstrErrorMessage *foundation.BSTR) error {
+	return win32.HRESULTError(int32(graphicsprintingprintticket.PTConvertPrintTicketToDevMode(hProvider, pPrintTicket.Raw, baseDevmodeType, scope, pcbDevmode, ppDevmode, pbstrErrorMessage)))
 }
 
 // PTGetPrintCapabilities wraps the raw PTGetPrintCapabilities call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintcapabilities
-func PTGetPrintCapabilities(hProvider graphicsprintingprintticket.HPTPROVIDER, pPrintTicket *systemcom.IStream, pCapabilities *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) error {
-	return win32.HRESULTError(int32(graphicsprintingprintticket.PTGetPrintCapabilities(hProvider, pPrintTicket, pCapabilities, pbstrErrorMessage)))
+func PTGetPrintCapabilities(hProvider graphicsprintingprintticket.HPTPROVIDER, pPrintTicket systemcomidiom.IStream, pCapabilities systemcomidiom.IStream, pbstrErrorMessage *foundation.BSTR) error {
+	return win32.HRESULTError(int32(graphicsprintingprintticket.PTGetPrintCapabilities(hProvider, pPrintTicket.Raw, pCapabilities.Raw, pbstrErrorMessage)))
 }
 
 // PTGetPrintDeviceCapabilities wraps the raw PTGetPrintDeviceCapabilities call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintdevicecapabilities
-func PTGetPrintDeviceCapabilities(hProvider graphicsprintingprintticket.HPTPROVIDER, pPrintTicket *systemcom.IStream, pDeviceCapabilities *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) error {
-	return win32.HRESULTError(int32(graphicsprintingprintticket.PTGetPrintDeviceCapabilities(hProvider, pPrintTicket, pDeviceCapabilities, pbstrErrorMessage)))
+func PTGetPrintDeviceCapabilities(hProvider graphicsprintingprintticket.HPTPROVIDER, pPrintTicket systemcomidiom.IStream, pDeviceCapabilities systemcomidiom.IStream, pbstrErrorMessage *foundation.BSTR) error {
+	return win32.HRESULTError(int32(graphicsprintingprintticket.PTGetPrintDeviceCapabilities(hProvider, pPrintTicket.Raw, pDeviceCapabilities.Raw, pbstrErrorMessage)))
 }
 
 // PTGetPrintDeviceResources wraps the raw PTGetPrintDeviceResources call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintdeviceresources
-func PTGetPrintDeviceResources(hProvider graphicsprintingprintticket.HPTPROVIDER, pszLocaleName string, pPrintTicket *systemcom.IStream, pDeviceResources *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) error {
+func PTGetPrintDeviceResources(hProvider graphicsprintingprintticket.HPTPROVIDER, pszLocaleName string, pPrintTicket systemcomidiom.IStream, pDeviceResources systemcomidiom.IStream, pbstrErrorMessage *foundation.BSTR) error {
 	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
-	return win32.HRESULTError(int32(graphicsprintingprintticket.PTGetPrintDeviceResources(hProvider, foundation.PWSTR(_pszLocaleName), pPrintTicket, pDeviceResources, pbstrErrorMessage)))
+	return win32.HRESULTError(int32(graphicsprintingprintticket.PTGetPrintDeviceResources(hProvider, foundation.PWSTR(_pszLocaleName), pPrintTicket.Raw, pDeviceResources.Raw, pbstrErrorMessage)))
 }
 
 // PTMergeAndValidatePrintTicket wraps the raw PTMergeAndValidatePrintTicket call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptmergeandvalidateprintticket
-func PTMergeAndValidatePrintTicket(hProvider graphicsprintingprintticket.HPTPROVIDER, pBaseTicket *systemcom.IStream, pDeltaTicket *systemcom.IStream, scope graphicsprintingprintticket.EPrintTicketScope, pResultTicket *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) error {
-	return win32.HRESULTError(int32(graphicsprintingprintticket.PTMergeAndValidatePrintTicket(hProvider, pBaseTicket, pDeltaTicket, scope, pResultTicket, pbstrErrorMessage)))
+func PTMergeAndValidatePrintTicket(hProvider graphicsprintingprintticket.HPTPROVIDER, pBaseTicket systemcomidiom.IStream, pDeltaTicket systemcomidiom.IStream, scope graphicsprintingprintticket.EPrintTicketScope, pResultTicket systemcomidiom.IStream, pbstrErrorMessage *foundation.BSTR) error {
+	return win32.HRESULTError(int32(graphicsprintingprintticket.PTMergeAndValidatePrintTicket(hProvider, pBaseTicket.Raw, pDeltaTicket.Raw, scope, pResultTicket.Raw, pbstrErrorMessage)))
 }
 
 // PTOpenProvider wraps the raw PTOpenProvider call with idiomatic Go types.

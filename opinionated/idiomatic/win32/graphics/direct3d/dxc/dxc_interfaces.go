@@ -26,8 +26,8 @@ func WrapIDxcAssembler(raw *graphicsdirect3ddxc.IDxcAssembler) IDxcAssembler {
 }
 
 // AssembleToContainer wraps the raw AssembleToContainer call.
-func (self IDxcAssembler) AssembleToContainer(pShader *graphicsdirect3ddxc.IDxcBlob, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
-	return win32.HRESULTError(int32(self.Raw.AssembleToContainer(pShader, ppResult)))
+func (self IDxcAssembler) AssembleToContainer(pShader IDxcBlob, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
+	return win32.HRESULTError(int32(self.Raw.AssembleToContainer(pShader.Raw, ppResult)))
 }
 
 // IDxcBlob is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.Dxc.IDxcBlob with error-returning methods.
@@ -121,22 +121,22 @@ func WrapIDxcCompiler(raw *graphicsdirect3ddxc.IDxcCompiler) IDxcCompiler {
 }
 
 // Compile wraps the raw Compile call.
-func (self IDxcCompiler) Compile(pSource *graphicsdirect3ddxc.IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *graphicsdirect3ddxc.DxcDefine, defineCount uint32, pIncludeHandler *graphicsdirect3ddxc.IDxcIncludeHandler, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
+func (self IDxcCompiler) Compile(pSource IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *graphicsdirect3ddxc.DxcDefine, defineCount uint32, pIncludeHandler IDxcIncludeHandler, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
 	_pSourceName := win32.UTF16Ptr(pSourceName)
 	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
-	return win32.HRESULTError(int32(self.Raw.Compile(pSource, foundation.PWSTR(_pSourceName), foundation.PWSTR(_pEntryPoint), foundation.PWSTR(_pTargetProfile), pArguments, argCount, pDefines, defineCount, pIncludeHandler, ppResult)))
+	return win32.HRESULTError(int32(self.Raw.Compile(pSource.Raw, foundation.PWSTR(_pSourceName), foundation.PWSTR(_pEntryPoint), foundation.PWSTR(_pTargetProfile), pArguments, argCount, pDefines, defineCount, pIncludeHandler.Raw, ppResult)))
 }
 
 // Preprocess wraps the raw Preprocess call.
-func (self IDxcCompiler) Preprocess(pSource *graphicsdirect3ddxc.IDxcBlob, pSourceName string, pArguments *foundation.PWSTR, argCount uint32, pDefines *graphicsdirect3ddxc.DxcDefine, defineCount uint32, pIncludeHandler *graphicsdirect3ddxc.IDxcIncludeHandler, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
+func (self IDxcCompiler) Preprocess(pSource IDxcBlob, pSourceName string, pArguments *foundation.PWSTR, argCount uint32, pDefines *graphicsdirect3ddxc.DxcDefine, defineCount uint32, pIncludeHandler IDxcIncludeHandler, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
 	_pSourceName := win32.UTF16Ptr(pSourceName)
-	return win32.HRESULTError(int32(self.Raw.Preprocess(pSource, foundation.PWSTR(_pSourceName), pArguments, argCount, pDefines, defineCount, pIncludeHandler, ppResult)))
+	return win32.HRESULTError(int32(self.Raw.Preprocess(pSource.Raw, foundation.PWSTR(_pSourceName), pArguments, argCount, pDefines, defineCount, pIncludeHandler.Raw, ppResult)))
 }
 
 // Disassemble wraps the raw Disassemble call.
-func (self IDxcCompiler) Disassemble(pSource *graphicsdirect3ddxc.IDxcBlob, ppDisassembly **graphicsdirect3ddxc.IDxcBlobEncoding) error {
-	return win32.HRESULTError(int32(self.Raw.Disassemble(pSource, ppDisassembly)))
+func (self IDxcCompiler) Disassemble(pSource IDxcBlob, ppDisassembly **graphicsdirect3ddxc.IDxcBlobEncoding) error {
+	return win32.HRESULTError(int32(self.Raw.Disassemble(pSource.Raw, ppDisassembly)))
 }
 
 // IDxcCompiler2 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.Dxc.IDxcCompiler2 with error-returning methods.
@@ -151,11 +151,11 @@ func WrapIDxcCompiler2(raw *graphicsdirect3ddxc.IDxcCompiler2) IDxcCompiler2 {
 }
 
 // CompileWithDebug wraps the raw CompileWithDebug call.
-func (self IDxcCompiler2) CompileWithDebug(pSource *graphicsdirect3ddxc.IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *graphicsdirect3ddxc.DxcDefine, defineCount uint32, pIncludeHandler *graphicsdirect3ddxc.IDxcIncludeHandler, ppResult **graphicsdirect3ddxc.IDxcOperationResult, ppDebugBlobName *foundation.PWSTR, ppDebugBlob **graphicsdirect3ddxc.IDxcBlob) error {
+func (self IDxcCompiler2) CompileWithDebug(pSource IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *graphicsdirect3ddxc.DxcDefine, defineCount uint32, pIncludeHandler IDxcIncludeHandler, ppResult **graphicsdirect3ddxc.IDxcOperationResult, ppDebugBlobName *foundation.PWSTR, ppDebugBlob **graphicsdirect3ddxc.IDxcBlob) error {
 	_pSourceName := win32.UTF16Ptr(pSourceName)
 	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
-	return win32.HRESULTError(int32(self.Raw.CompileWithDebug(pSource, foundation.PWSTR(_pSourceName), foundation.PWSTR(_pEntryPoint), foundation.PWSTR(_pTargetProfile), pArguments, argCount, pDefines, defineCount, pIncludeHandler, ppResult, ppDebugBlobName, ppDebugBlob)))
+	return win32.HRESULTError(int32(self.Raw.CompileWithDebug(pSource.Raw, foundation.PWSTR(_pSourceName), foundation.PWSTR(_pEntryPoint), foundation.PWSTR(_pTargetProfile), pArguments, argCount, pDefines, defineCount, pIncludeHandler.Raw, ppResult, ppDebugBlobName, ppDebugBlob)))
 }
 
 // IDxcCompiler3 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.Dxc.IDxcCompiler3 with error-returning methods.
@@ -170,8 +170,8 @@ func WrapIDxcCompiler3(raw *graphicsdirect3ddxc.IDxcCompiler3) IDxcCompiler3 {
 }
 
 // Compile wraps the raw Compile call.
-func (self IDxcCompiler3) Compile(pSource *graphicsdirect3ddxc.DxcBuffer, pArguments *foundation.PWSTR, argCount uint32, pIncludeHandler *graphicsdirect3ddxc.IDxcIncludeHandler, riid *win32.GUID, ppResult *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.Compile(pSource, pArguments, argCount, pIncludeHandler, riid, ppResult)))
+func (self IDxcCompiler3) Compile(pSource *graphicsdirect3ddxc.DxcBuffer, pArguments *foundation.PWSTR, argCount uint32, pIncludeHandler IDxcIncludeHandler, riid *win32.GUID, ppResult *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.Compile(pSource, pArguments, argCount, pIncludeHandler.Raw, riid, ppResult)))
 }
 
 // Disassemble wraps the raw Disassemble call.
@@ -227,13 +227,13 @@ func WrapIDxcContainerBuilder(raw *graphicsdirect3ddxc.IDxcContainerBuilder) IDx
 }
 
 // Load wraps the raw Load call.
-func (self IDxcContainerBuilder) Load(pDxilContainerHeader *graphicsdirect3ddxc.IDxcBlob) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pDxilContainerHeader)))
+func (self IDxcContainerBuilder) Load(pDxilContainerHeader IDxcBlob) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pDxilContainerHeader.Raw)))
 }
 
 // AddPart wraps the raw AddPart call.
-func (self IDxcContainerBuilder) AddPart(fourCC uint32, pSource *graphicsdirect3ddxc.IDxcBlob) error {
-	return win32.HRESULTError(int32(self.Raw.AddPart(fourCC, pSource)))
+func (self IDxcContainerBuilder) AddPart(fourCC uint32, pSource IDxcBlob) error {
+	return win32.HRESULTError(int32(self.Raw.AddPart(fourCC, pSource.Raw)))
 }
 
 // RemovePart wraps the raw RemovePart call.
@@ -258,8 +258,8 @@ func WrapIDxcContainerReflection(raw *graphicsdirect3ddxc.IDxcContainerReflectio
 }
 
 // Load wraps the raw Load call.
-func (self IDxcContainerReflection) Load(pContainer *graphicsdirect3ddxc.IDxcBlob) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pContainer)))
+func (self IDxcContainerReflection) Load(pContainer IDxcBlob) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pContainer.Raw)))
 }
 
 // GetPartCount wraps the raw GetPartCount call.
@@ -337,13 +337,13 @@ func WrapIDxcLibrary(raw *graphicsdirect3ddxc.IDxcLibrary) IDxcLibrary {
 }
 
 // SetMalloc wraps the raw SetMalloc call.
-func (self IDxcLibrary) SetMalloc(pMalloc *systemcom.IMalloc) error {
-	return win32.HRESULTError(int32(self.Raw.SetMalloc(pMalloc)))
+func (self IDxcLibrary) SetMalloc(pMalloc systemcomidiom.IMalloc) error {
+	return win32.HRESULTError(int32(self.Raw.SetMalloc(pMalloc.Raw)))
 }
 
 // CreateBlobFromBlob wraps the raw CreateBlobFromBlob call.
-func (self IDxcLibrary) CreateBlobFromBlob(pBlob *graphicsdirect3ddxc.IDxcBlob, offset uint32, length uint32, ppResult **graphicsdirect3ddxc.IDxcBlob) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBlobFromBlob(pBlob, offset, length, ppResult)))
+func (self IDxcLibrary) CreateBlobFromBlob(pBlob IDxcBlob, offset uint32, length uint32, ppResult **graphicsdirect3ddxc.IDxcBlob) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBlobFromBlob(pBlob.Raw, offset, length, ppResult)))
 }
 
 // CreateBlobFromFile wraps the raw CreateBlobFromFile call.
@@ -363,8 +363,8 @@ func (self IDxcLibrary) CreateBlobWithEncodingOnHeapCopy(pText unsafe.Pointer, s
 }
 
 // CreateBlobWithEncodingOnMalloc wraps the raw CreateBlobWithEncodingOnMalloc call.
-func (self IDxcLibrary) CreateBlobWithEncodingOnMalloc(pText unsafe.Pointer, pIMalloc *systemcom.IMalloc, size uint32, codePage graphicsdirect3ddxc.DXC_CP, pBlobEncoding **graphicsdirect3ddxc.IDxcBlobEncoding) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBlobWithEncodingOnMalloc(pText, pIMalloc, size, codePage, pBlobEncoding)))
+func (self IDxcLibrary) CreateBlobWithEncodingOnMalloc(pText unsafe.Pointer, pIMalloc systemcomidiom.IMalloc, size uint32, codePage graphicsdirect3ddxc.DXC_CP, pBlobEncoding **graphicsdirect3ddxc.IDxcBlobEncoding) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBlobWithEncodingOnMalloc(pText, pIMalloc.Raw, size, codePage, pBlobEncoding)))
 }
 
 // CreateIncludeHandler wraps the raw CreateIncludeHandler call.
@@ -373,18 +373,18 @@ func (self IDxcLibrary) CreateIncludeHandler(ppResult **graphicsdirect3ddxc.IDxc
 }
 
 // CreateStreamFromBlobReadOnly wraps the raw CreateStreamFromBlobReadOnly call.
-func (self IDxcLibrary) CreateStreamFromBlobReadOnly(pBlob *graphicsdirect3ddxc.IDxcBlob, ppStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.CreateStreamFromBlobReadOnly(pBlob, ppStream)))
+func (self IDxcLibrary) CreateStreamFromBlobReadOnly(pBlob IDxcBlob, ppStream **systemcom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.CreateStreamFromBlobReadOnly(pBlob.Raw, ppStream)))
 }
 
 // GetBlobAsUtf8 wraps the raw GetBlobAsUtf8 call.
-func (self IDxcLibrary) GetBlobAsUtf8(pBlob *graphicsdirect3ddxc.IDxcBlob, pBlobEncoding **graphicsdirect3ddxc.IDxcBlobEncoding) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlobAsUtf8(pBlob, pBlobEncoding)))
+func (self IDxcLibrary) GetBlobAsUtf8(pBlob IDxcBlob, pBlobEncoding **graphicsdirect3ddxc.IDxcBlobEncoding) error {
+	return win32.HRESULTError(int32(self.Raw.GetBlobAsUtf8(pBlob.Raw, pBlobEncoding)))
 }
 
 // GetBlobAsWide wraps the raw GetBlobAsWide call.
-func (self IDxcLibrary) GetBlobAsWide(pBlob *graphicsdirect3ddxc.IDxcBlob, pBlobEncoding **graphicsdirect3ddxc.IDxcBlobEncoding) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlobAsWide(pBlob, pBlobEncoding)))
+func (self IDxcLibrary) GetBlobAsWide(pBlob IDxcBlob, pBlobEncoding **graphicsdirect3ddxc.IDxcBlobEncoding) error {
+	return win32.HRESULTError(int32(self.Raw.GetBlobAsWide(pBlob.Raw, pBlobEncoding)))
 }
 
 // IDxcLinker is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.Dxc.IDxcLinker with error-returning methods.
@@ -399,9 +399,9 @@ func WrapIDxcLinker(raw *graphicsdirect3ddxc.IDxcLinker) IDxcLinker {
 }
 
 // RegisterLibrary wraps the raw RegisterLibrary call.
-func (self IDxcLinker) RegisterLibrary(pLibName string, pLib *graphicsdirect3ddxc.IDxcBlob) error {
+func (self IDxcLinker) RegisterLibrary(pLibName string, pLib IDxcBlob) error {
 	_pLibName := win32.UTF16Ptr(pLibName)
-	return win32.HRESULTError(int32(self.Raw.RegisterLibrary(foundation.PWSTR(_pLibName), pLib)))
+	return win32.HRESULTError(int32(self.Raw.RegisterLibrary(foundation.PWSTR(_pLibName), pLib.Raw)))
 }
 
 // Link wraps the raw Link call.
@@ -459,8 +459,8 @@ func (self IDxcOptimizer) GetAvailablePass(index uint32, ppResult **graphicsdire
 }
 
 // RunOptimizer wraps the raw RunOptimizer call.
-func (self IDxcOptimizer) RunOptimizer(pBlob *graphicsdirect3ddxc.IDxcBlob, ppOptions *foundation.PWSTR, optionCount uint32, pOutputModule **graphicsdirect3ddxc.IDxcBlob, ppOutputText **graphicsdirect3ddxc.IDxcBlobEncoding) error {
-	return win32.HRESULTError(int32(self.Raw.RunOptimizer(pBlob, ppOptions, optionCount, pOutputModule, ppOutputText)))
+func (self IDxcOptimizer) RunOptimizer(pBlob IDxcBlob, ppOptions *foundation.PWSTR, optionCount uint32, pOutputModule **graphicsdirect3ddxc.IDxcBlob, ppOutputText **graphicsdirect3ddxc.IDxcBlobEncoding) error {
+	return win32.HRESULTError(int32(self.Raw.RunOptimizer(pBlob.Raw, ppOptions, optionCount, pOutputModule, ppOutputText)))
 }
 
 // IDxcOptimizerPass is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.Dxc.IDxcOptimizerPass with error-returning methods.
@@ -511,8 +511,8 @@ func WrapIDxcPdbUtils(raw *graphicsdirect3ddxc.IDxcPdbUtils) IDxcPdbUtils {
 }
 
 // Load wraps the raw Load call.
-func (self IDxcPdbUtils) Load(pPdbOrDxil *graphicsdirect3ddxc.IDxcBlob) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pPdbOrDxil)))
+func (self IDxcPdbUtils) Load(pPdbOrDxil IDxcBlob) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pPdbOrDxil.Raw)))
 }
 
 // GetSourceCount wraps the raw GetSourceCount call.
@@ -611,8 +611,8 @@ func (self IDxcPdbUtils) GetVersionInfo(ppVersionInfo **graphicsdirect3ddxc.IDxc
 }
 
 // SetCompiler wraps the raw SetCompiler call.
-func (self IDxcPdbUtils) SetCompiler(pCompiler *graphicsdirect3ddxc.IDxcCompiler3) error {
-	return win32.HRESULTError(int32(self.Raw.SetCompiler(pCompiler)))
+func (self IDxcPdbUtils) SetCompiler(pCompiler IDxcCompiler3) error {
+	return win32.HRESULTError(int32(self.Raw.SetCompiler(pCompiler.Raw)))
 }
 
 // CompileForFullPDB wraps the raw CompileForFullPDB call.
@@ -643,8 +643,8 @@ func WrapIDxcPdbUtils2(raw *graphicsdirect3ddxc.IDxcPdbUtils2) IDxcPdbUtils2 {
 }
 
 // Load wraps the raw Load call.
-func (self IDxcPdbUtils2) Load(pPdbOrDxil *graphicsdirect3ddxc.IDxcBlob) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pPdbOrDxil)))
+func (self IDxcPdbUtils2) Load(pPdbOrDxil IDxcBlob) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pPdbOrDxil.Raw)))
 }
 
 // GetSourceCount wraps the raw GetSourceCount call.
@@ -815,8 +815,8 @@ func WrapIDxcUtils(raw *graphicsdirect3ddxc.IDxcUtils) IDxcUtils {
 }
 
 // CreateBlobFromBlob wraps the raw CreateBlobFromBlob call.
-func (self IDxcUtils) CreateBlobFromBlob(pBlob *graphicsdirect3ddxc.IDxcBlob, offset uint32, length uint32, ppResult **graphicsdirect3ddxc.IDxcBlob) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBlobFromBlob(pBlob, offset, length, ppResult)))
+func (self IDxcUtils) CreateBlobFromBlob(pBlob IDxcBlob, offset uint32, length uint32, ppResult **graphicsdirect3ddxc.IDxcBlob) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBlobFromBlob(pBlob.Raw, offset, length, ppResult)))
 }
 
 // CreateBlobFromPinned wraps the raw CreateBlobFromPinned call.
@@ -825,8 +825,8 @@ func (self IDxcUtils) CreateBlobFromPinned(pData unsafe.Pointer, size uint32, co
 }
 
 // MoveToBlob wraps the raw MoveToBlob call.
-func (self IDxcUtils) MoveToBlob(pData unsafe.Pointer, pIMalloc *systemcom.IMalloc, size uint32, codePage graphicsdirect3ddxc.DXC_CP, ppBlobEncoding **graphicsdirect3ddxc.IDxcBlobEncoding) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToBlob(pData, pIMalloc, size, codePage, ppBlobEncoding)))
+func (self IDxcUtils) MoveToBlob(pData unsafe.Pointer, pIMalloc systemcomidiom.IMalloc, size uint32, codePage graphicsdirect3ddxc.DXC_CP, ppBlobEncoding **graphicsdirect3ddxc.IDxcBlobEncoding) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToBlob(pData, pIMalloc.Raw, size, codePage, ppBlobEncoding)))
 }
 
 // CreateBlob wraps the raw CreateBlob call.
@@ -841,8 +841,8 @@ func (self IDxcUtils) LoadFile(pFileName string, pCodePage *graphicsdirect3ddxc.
 }
 
 // CreateReadOnlyStreamFromBlob wraps the raw CreateReadOnlyStreamFromBlob call.
-func (self IDxcUtils) CreateReadOnlyStreamFromBlob(pBlob *graphicsdirect3ddxc.IDxcBlob, ppStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.CreateReadOnlyStreamFromBlob(pBlob, ppStream)))
+func (self IDxcUtils) CreateReadOnlyStreamFromBlob(pBlob IDxcBlob, ppStream **systemcom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.CreateReadOnlyStreamFromBlob(pBlob.Raw, ppStream)))
 }
 
 // CreateDefaultIncludeHandler wraps the raw CreateDefaultIncludeHandler call.
@@ -851,13 +851,13 @@ func (self IDxcUtils) CreateDefaultIncludeHandler(ppResult **graphicsdirect3ddxc
 }
 
 // GetBlobAsUtf8 wraps the raw GetBlobAsUtf8 call.
-func (self IDxcUtils) GetBlobAsUtf8(pBlob *graphicsdirect3ddxc.IDxcBlob, ppBlobEncoding **graphicsdirect3ddxc.IDxcBlobUtf8) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlobAsUtf8(pBlob, ppBlobEncoding)))
+func (self IDxcUtils) GetBlobAsUtf8(pBlob IDxcBlob, ppBlobEncoding **graphicsdirect3ddxc.IDxcBlobUtf8) error {
+	return win32.HRESULTError(int32(self.Raw.GetBlobAsUtf8(pBlob.Raw, ppBlobEncoding)))
 }
 
 // GetBlobAsWide wraps the raw GetBlobAsWide call.
-func (self IDxcUtils) GetBlobAsWide(pBlob *graphicsdirect3ddxc.IDxcBlob, ppBlobEncoding **graphicsdirect3ddxc.IDxcBlobUtf16) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlobAsWide(pBlob, ppBlobEncoding)))
+func (self IDxcUtils) GetBlobAsWide(pBlob IDxcBlob, ppBlobEncoding **graphicsdirect3ddxc.IDxcBlobUtf16) error {
+	return win32.HRESULTError(int32(self.Raw.GetBlobAsWide(pBlob.Raw, ppBlobEncoding)))
 }
 
 // GetDxilContainerPart wraps the raw GetDxilContainerPart call.
@@ -879,8 +879,8 @@ func (self IDxcUtils) BuildArguments(pSourceName string, pEntryPoint string, pTa
 }
 
 // GetPDBContents wraps the raw GetPDBContents call.
-func (self IDxcUtils) GetPDBContents(pPDBBlob *graphicsdirect3ddxc.IDxcBlob, ppHash **graphicsdirect3ddxc.IDxcBlob, ppContainer **graphicsdirect3ddxc.IDxcBlob) error {
-	return win32.HRESULTError(int32(self.Raw.GetPDBContents(pPDBBlob, ppHash, ppContainer)))
+func (self IDxcUtils) GetPDBContents(pPDBBlob IDxcBlob, ppHash **graphicsdirect3ddxc.IDxcBlob, ppContainer **graphicsdirect3ddxc.IDxcBlob) error {
+	return win32.HRESULTError(int32(self.Raw.GetPDBContents(pPDBBlob.Raw, ppHash, ppContainer)))
 }
 
 // IDxcValidator is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.Dxc.IDxcValidator with error-returning methods.
@@ -895,8 +895,8 @@ func WrapIDxcValidator(raw *graphicsdirect3ddxc.IDxcValidator) IDxcValidator {
 }
 
 // Validate wraps the raw Validate call.
-func (self IDxcValidator) Validate(pShader *graphicsdirect3ddxc.IDxcBlob, Flags uint32, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
-	return win32.HRESULTError(int32(self.Raw.Validate(pShader, Flags, ppResult)))
+func (self IDxcValidator) Validate(pShader IDxcBlob, Flags uint32, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
+	return win32.HRESULTError(int32(self.Raw.Validate(pShader.Raw, Flags, ppResult)))
 }
 
 // IDxcValidator2 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.Dxc.IDxcValidator2 with error-returning methods.
@@ -911,8 +911,8 @@ func WrapIDxcValidator2(raw *graphicsdirect3ddxc.IDxcValidator2) IDxcValidator2 
 }
 
 // ValidateWithDebug wraps the raw ValidateWithDebug call.
-func (self IDxcValidator2) ValidateWithDebug(pShader *graphicsdirect3ddxc.IDxcBlob, Flags uint32, pOptDebugBitcode *graphicsdirect3ddxc.DxcBuffer, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
-	return win32.HRESULTError(int32(self.Raw.ValidateWithDebug(pShader, Flags, pOptDebugBitcode, ppResult)))
+func (self IDxcValidator2) ValidateWithDebug(pShader IDxcBlob, Flags uint32, pOptDebugBitcode *graphicsdirect3ddxc.DxcBuffer, ppResult **graphicsdirect3ddxc.IDxcOperationResult) error {
+	return win32.HRESULTError(int32(self.Raw.ValidateWithDebug(pShader.Raw, Flags, pOptDebugBitcode, ppResult)))
 }
 
 // IDxcVersionInfo is an idiomatic wrapper over the raw COM interface Graphics.Direct3D.Dxc.IDxcVersionInfo with error-returning methods.

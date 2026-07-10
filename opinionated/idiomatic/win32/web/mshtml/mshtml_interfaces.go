@@ -12,13 +12,13 @@ import (
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
-	systemdiagnosticsdebugactivescript "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/diagnostics/debug/activescript"
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiinputime "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input/ime"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 	webmshtml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/web/mshtml"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemdiagnosticsdebugactivescriptidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/diagnostics/debug/activescript"
 	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
@@ -3333,10 +3333,10 @@ func WrapIBlockFormats(raw *webmshtml.IBlockFormats) IBlockFormats {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IBlockFormats) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IBlockFormats) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -3365,8 +3365,8 @@ func WrapICSSFilter(raw *webmshtml.ICSSFilter) ICSSFilter {
 }
 
 // SetSite wraps the raw SetSite call.
-func (self ICSSFilter) SetSite(pSink *webmshtml.ICSSFilterSite) error {
-	return win32.HRESULTError(int32(self.Raw.SetSite(pSink)))
+func (self ICSSFilter) SetSite(pSink ICSSFilterSite) error {
+	return win32.HRESULTError(int32(self.Raw.SetSite(pSink.Raw)))
 }
 
 // OnAmbientPropertyChange wraps the raw OnAmbientPropertyChange call.
@@ -3386,10 +3386,10 @@ func WrapICSSFilterSite(raw *webmshtml.ICSSFilterSite) ICSSFilterSite {
 }
 
 // GetElement wraps the raw GetElement call.
-func (self ICSSFilterSite) GetElement() (*webmshtml.IHTMLElement, error) {
+func (self ICSSFilterSite) GetElement() (IHTMLElement, error) {
 	var _Element *webmshtml.IHTMLElement
 	_hr := self.Raw.GetElement(&_Element)
-	return _Element, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_Element), win32.HRESULTError(int32(_hr))
 }
 
 // FireOnFilterChangeEvent wraps the raw FireOnFilterChangeEvent call.
@@ -3497,10 +3497,10 @@ func WrapICanvasRenderingContext2D(raw *webmshtml.ICanvasRenderingContext2D) ICa
 }
 
 // Get_canvas wraps the raw Get_canvas call.
-func (self ICanvasRenderingContext2D) Get_canvas() (*webmshtml.IHTMLCanvasElement, error) {
+func (self ICanvasRenderingContext2D) Get_canvas() (IHTMLCanvasElement, error) {
 	var _p *webmshtml.IHTMLCanvasElement
 	_hr := self.Raw.Get_canvas(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLCanvasElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Restore wraps the raw Restore call.
@@ -3679,10 +3679,10 @@ func (self ICanvasRenderingContext2D) Get_textBaseline() (foundation.BSTR, error
 }
 
 // MeasureText wraps the raw MeasureText call.
-func (self ICanvasRenderingContext2D) MeasureText(text foundation.BSTR) (*webmshtml.ICanvasTextMetrics, error) {
+func (self ICanvasRenderingContext2D) MeasureText(text foundation.BSTR) (ICanvasTextMetrics, error) {
 	var _ppCanvasTextMetrics *webmshtml.ICanvasTextMetrics
 	_hr := self.Raw.MeasureText(text, &_ppCanvasTextMetrics)
-	return _ppCanvasTextMetrics, win32.HRESULTError(int32(_hr))
+	return WrapICanvasTextMetrics(_ppCanvasTextMetrics), win32.HRESULTError(int32(_hr))
 }
 
 // ICanvasTextMetrics is an idiomatic wrapper over the raw COM interface Web.MsHtml.ICanvasTextMetrics with error-returning methods.
@@ -3715,8 +3715,8 @@ func WrapIClassFactoryEx(raw *webmshtml.IClassFactoryEx) IClassFactoryEx {
 }
 
 // CreateInstanceWithContext wraps the raw CreateInstanceWithContext call.
-func (self IClassFactoryEx) CreateInstanceWithContext(punkContext *systemcom.IUnknown, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceWithContext(punkContext, punkOuter, riid, ppv)))
+func (self IClassFactoryEx) CreateInstanceWithContext(punkContext systemcomidiom.IUnknown, punkOuter systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceWithContext(punkContext.Raw, punkOuter.Raw, riid, ppv)))
 }
 
 // IClientCaps is an idiomatic wrapper over the raw COM interface Web.MsHtml.IClientCaps with error-returning methods.
@@ -3885,8 +3885,8 @@ func WrapICustomDoc(raw *webmshtml.ICustomDoc) ICustomDoc {
 }
 
 // SetUIHandler wraps the raw SetUIHandler call.
-func (self ICustomDoc) SetUIHandler(pUIHandler *webmshtml.IDocHostUIHandler) error {
-	return win32.HRESULTError(int32(self.Raw.SetUIHandler(pUIHandler)))
+func (self ICustomDoc) SetUIHandler(pUIHandler IDocHostUIHandler) error {
+	return win32.HRESULTError(int32(self.Raw.SetUIHandler(pUIHandler.Raw)))
 }
 
 // IDOMBeforeUnloadEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMBeforeUnloadEvent with error-returning methods.
@@ -3949,8 +3949,8 @@ func (self IDOMCompositionEvent) Get_data() (foundation.BSTR, error) {
 }
 
 // InitCompositionEvent wraps the raw InitCompositionEvent call.
-func (self IDOMCompositionEvent) InitCompositionEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg *webmshtml.IHTMLWindow2, data foundation.BSTR, locale foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.InitCompositionEvent(eventType, canBubble, cancelable, viewArg, data, locale)))
+func (self IDOMCompositionEvent) InitCompositionEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg IHTMLWindow2, data foundation.BSTR, locale foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.InitCompositionEvent(eventType, canBubble, cancelable, viewArg.Raw, data, locale)))
 }
 
 // Get_locale wraps the raw Get_locale call.
@@ -4002,17 +4002,17 @@ func (self IDOMDocumentType) Get_name() (foundation.BSTR, error) {
 }
 
 // Get_entities wraps the raw Get_entities call.
-func (self IDOMDocumentType) Get_entities() (*systemcom.IDispatch, error) {
+func (self IDOMDocumentType) Get_entities() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_entities(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_notations wraps the raw Get_notations call.
-func (self IDOMDocumentType) Get_notations() (*systemcom.IDispatch, error) {
+func (self IDOMDocumentType) Get_notations() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_notations(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_publicId wraps the raw Get_publicId call.
@@ -4048,15 +4048,15 @@ func WrapIDOMDragEvent(raw *webmshtml.IDOMDragEvent) IDOMDragEvent {
 }
 
 // Get_dataTransfer wraps the raw Get_dataTransfer call.
-func (self IDOMDragEvent) Get_dataTransfer() (*webmshtml.IHTMLDataTransfer, error) {
+func (self IDOMDragEvent) Get_dataTransfer() (IHTMLDataTransfer, error) {
 	var _p *webmshtml.IHTMLDataTransfer
 	_hr := self.Raw.Get_dataTransfer(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDataTransfer(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InitDragEvent wraps the raw InitDragEvent call.
-func (self IDOMDragEvent) InitDragEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg *webmshtml.IHTMLWindow2, detailArg int32, screenXArg int32, screenYArg int32, clientXArg int32, clientYArg int32, ctrlKeyArg foundation.VARIANT_BOOL, altKeyArg foundation.VARIANT_BOOL, shiftKeyArg foundation.VARIANT_BOOL, metaKeyArg foundation.VARIANT_BOOL, buttonArg uint16, relatedTargetArg *webmshtml.IEventTarget, dataTransferArg *webmshtml.IHTMLDataTransfer) error {
-	return win32.HRESULTError(int32(self.Raw.InitDragEvent(eventType, canBubble, cancelable, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg, dataTransferArg)))
+func (self IDOMDragEvent) InitDragEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg IHTMLWindow2, detailArg int32, screenXArg int32, screenYArg int32, clientXArg int32, clientYArg int32, ctrlKeyArg foundation.VARIANT_BOOL, altKeyArg foundation.VARIANT_BOOL, shiftKeyArg foundation.VARIANT_BOOL, metaKeyArg foundation.VARIANT_BOOL, buttonArg uint16, relatedTargetArg IEventTarget, dataTransferArg IHTMLDataTransfer) error {
+	return win32.HRESULTError(int32(self.Raw.InitDragEvent(eventType, canBubble, cancelable, viewArg.Raw, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg.Raw, dataTransferArg.Raw)))
 }
 
 // IDOMEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMEvent with error-returning methods.
@@ -4085,10 +4085,10 @@ func (self IDOMEvent) Get_cancelable() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_currentTarget wraps the raw Get_currentTarget call.
-func (self IDOMEvent) Get_currentTarget() (*webmshtml.IEventTarget, error) {
+func (self IDOMEvent) Get_currentTarget() (IEventTarget, error) {
 	var _p *webmshtml.IEventTarget
 	_hr := self.Raw.Get_currentTarget(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIEventTarget(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_defaultPrevented wraps the raw Get_defaultPrevented call.
@@ -4106,10 +4106,10 @@ func (self IDOMEvent) Get_eventPhase() (uint16, error) {
 }
 
 // Get_target wraps the raw Get_target call.
-func (self IDOMEvent) Get_target() (*webmshtml.IEventTarget, error) {
+func (self IDOMEvent) Get_target() (IEventTarget, error) {
 	var _p *webmshtml.IEventTarget
 	_hr := self.Raw.Get_target(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIEventTarget(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_timeStamp wraps the raw Get_timeStamp call.
@@ -4166,10 +4166,10 @@ func (self IDOMEvent) Get_cancelBubble() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_srcElement wraps the raw Get_srcElement call.
-func (self IDOMEvent) Get_srcElement() (*webmshtml.IHTMLElement, error) {
+func (self IDOMEvent) Get_srcElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_srcElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IDOMEventRegistrationCallback is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMEventRegistrationCallback with error-returning methods.
@@ -4184,9 +4184,9 @@ func WrapIDOMEventRegistrationCallback(raw *webmshtml.IDOMEventRegistrationCallb
 }
 
 // OnDOMEventListenerAdded wraps the raw OnDOMEventListenerAdded call.
-func (self IDOMEventRegistrationCallback) OnDOMEventListenerAdded(pszEventType string, pHandler *webmshtml.IScriptEventHandler) error {
+func (self IDOMEventRegistrationCallback) OnDOMEventListenerAdded(pszEventType string, pHandler IScriptEventHandler) error {
 	_pszEventType := win32.UTF16Ptr(pszEventType)
-	return win32.HRESULTError(int32(self.Raw.OnDOMEventListenerAdded(foundation.PWSTR(_pszEventType), pHandler)))
+	return win32.HRESULTError(int32(self.Raw.OnDOMEventListenerAdded(foundation.PWSTR(_pszEventType), pHandler.Raw)))
 }
 
 // OnDOMEventListenerRemoved wraps the raw OnDOMEventListenerRemoved call.
@@ -4236,15 +4236,15 @@ func WrapIDOMFocusEvent(raw *webmshtml.IDOMFocusEvent) IDOMFocusEvent {
 }
 
 // Get_relatedTarget wraps the raw Get_relatedTarget call.
-func (self IDOMFocusEvent) Get_relatedTarget() (*webmshtml.IEventTarget, error) {
+func (self IDOMFocusEvent) Get_relatedTarget() (IEventTarget, error) {
 	var _p *webmshtml.IEventTarget
 	_hr := self.Raw.Get_relatedTarget(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIEventTarget(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InitFocusEvent wraps the raw InitFocusEvent call.
-func (self IDOMFocusEvent) InitFocusEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, view *webmshtml.IHTMLWindow2, detail int32, relatedTargetArg *webmshtml.IEventTarget) error {
-	return win32.HRESULTError(int32(self.Raw.InitFocusEvent(eventType, canBubble, cancelable, view, detail, relatedTargetArg)))
+func (self IDOMFocusEvent) InitFocusEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, view IHTMLWindow2, detail int32, relatedTargetArg IEventTarget) error {
+	return win32.HRESULTError(int32(self.Raw.InitFocusEvent(eventType, canBubble, cancelable, view.Raw, detail, relatedTargetArg.Raw)))
 }
 
 // IDOMKeyboardEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMKeyboardEvent with error-returning methods.
@@ -4315,8 +4315,8 @@ func (self IDOMKeyboardEvent) GetModifierState(keyArg foundation.BSTR) (foundati
 }
 
 // InitKeyboardEvent wraps the raw InitKeyboardEvent call.
-func (self IDOMKeyboardEvent) InitKeyboardEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg *webmshtml.IHTMLWindow2, keyArg foundation.BSTR, locationArg uint32, modifiersListArg foundation.BSTR, repeat foundation.VARIANT_BOOL, locale foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.InitKeyboardEvent(eventType, canBubble, cancelable, viewArg, keyArg, locationArg, modifiersListArg, repeat, locale)))
+func (self IDOMKeyboardEvent) InitKeyboardEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg IHTMLWindow2, keyArg foundation.BSTR, locationArg uint32, modifiersListArg foundation.BSTR, repeat foundation.VARIANT_BOOL, locale foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.InitKeyboardEvent(eventType, canBubble, cancelable, viewArg.Raw, keyArg, locationArg, modifiersListArg, repeat, locale)))
 }
 
 // Get_keyCode wraps the raw Get_keyCode call.
@@ -4405,8 +4405,8 @@ func (self IDOMMSManipulationEvent) Get_currentState() (int32, error) {
 }
 
 // InitMSManipulationEvent wraps the raw InitMSManipulationEvent call.
-func (self IDOMMSManipulationEvent) InitMSManipulationEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg *webmshtml.IHTMLWindow2, detailArg int32, lastState int32, currentState int32) error {
-	return win32.HRESULTError(int32(self.Raw.InitMSManipulationEvent(eventType, canBubble, cancelable, viewArg, detailArg, lastState, currentState)))
+func (self IDOMMSManipulationEvent) InitMSManipulationEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg IHTMLWindow2, detailArg int32, lastState int32, currentState int32) error {
+	return win32.HRESULTError(int32(self.Raw.InitMSManipulationEvent(eventType, canBubble, cancelable, viewArg.Raw, detailArg, lastState, currentState)))
 }
 
 // IDOMMSTransitionEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMMSTransitionEvent with error-returning methods.
@@ -4460,15 +4460,15 @@ func (self IDOMMessageEvent) Get_origin() (foundation.BSTR, error) {
 }
 
 // Get_source wraps the raw Get_source call.
-func (self IDOMMessageEvent) Get_source() (*webmshtml.IHTMLWindow2, error) {
+func (self IDOMMessageEvent) Get_source() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_source(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InitMessageEvent wraps the raw InitMessageEvent call.
-func (self IDOMMessageEvent) InitMessageEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, data foundation.BSTR, origin foundation.BSTR, lastEventId foundation.BSTR, source *webmshtml.IHTMLWindow2) error {
-	return win32.HRESULTError(int32(self.Raw.InitMessageEvent(eventType, canBubble, cancelable, data, origin, lastEventId, source)))
+func (self IDOMMessageEvent) InitMessageEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, data foundation.BSTR, origin foundation.BSTR, lastEventId foundation.BSTR, source IHTMLWindow2) error {
+	return win32.HRESULTError(int32(self.Raw.InitMessageEvent(eventType, canBubble, cancelable, data, origin, lastEventId, source.Raw)))
 }
 
 // IDOMMouseEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMMouseEvent with error-returning methods.
@@ -4546,15 +4546,15 @@ func (self IDOMMouseEvent) Get_button() (uint16, error) {
 }
 
 // Get_relatedTarget wraps the raw Get_relatedTarget call.
-func (self IDOMMouseEvent) Get_relatedTarget() (*webmshtml.IEventTarget, error) {
+func (self IDOMMouseEvent) Get_relatedTarget() (IEventTarget, error) {
 	var _p *webmshtml.IEventTarget
 	_hr := self.Raw.Get_relatedTarget(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIEventTarget(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InitMouseEvent wraps the raw InitMouseEvent call.
-func (self IDOMMouseEvent) InitMouseEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg *webmshtml.IHTMLWindow2, detailArg int32, screenXArg int32, screenYArg int32, clientXArg int32, clientYArg int32, ctrlKeyArg foundation.VARIANT_BOOL, altKeyArg foundation.VARIANT_BOOL, shiftKeyArg foundation.VARIANT_BOOL, metaKeyArg foundation.VARIANT_BOOL, buttonArg uint16, relatedTargetArg *webmshtml.IEventTarget) error {
-	return win32.HRESULTError(int32(self.Raw.InitMouseEvent(eventType, canBubble, cancelable, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg)))
+func (self IDOMMouseEvent) InitMouseEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg IHTMLWindow2, detailArg int32, screenXArg int32, screenYArg int32, clientXArg int32, clientYArg int32, ctrlKeyArg foundation.VARIANT_BOOL, altKeyArg foundation.VARIANT_BOOL, shiftKeyArg foundation.VARIANT_BOOL, metaKeyArg foundation.VARIANT_BOOL, buttonArg uint16, relatedTargetArg IEventTarget) error {
+	return win32.HRESULTError(int32(self.Raw.InitMouseEvent(eventType, canBubble, cancelable, viewArg.Raw, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg.Raw)))
 }
 
 // GetModifierState wraps the raw GetModifierState call.
@@ -4572,17 +4572,17 @@ func (self IDOMMouseEvent) Get_buttons() (uint16, error) {
 }
 
 // Get_fromElement wraps the raw Get_fromElement call.
-func (self IDOMMouseEvent) Get_fromElement() (*webmshtml.IHTMLElement, error) {
+func (self IDOMMouseEvent) Get_fromElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_fromElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_toElement wraps the raw Get_toElement call.
-func (self IDOMMouseEvent) Get_toElement() (*webmshtml.IHTMLElement, error) {
+func (self IDOMMouseEvent) Get_toElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_toElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_x wraps the raw Get_x call.
@@ -4667,8 +4667,8 @@ func (self IDOMMouseWheelEvent) Get_wheelDelta() (int32, error) {
 }
 
 // InitMouseWheelEvent wraps the raw InitMouseWheelEvent call.
-func (self IDOMMouseWheelEvent) InitMouseWheelEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg *webmshtml.IHTMLWindow2, detailArg int32, screenXArg int32, screenYArg int32, clientXArg int32, clientYArg int32, buttonArg uint16, relatedTargetArg *webmshtml.IEventTarget, modifiersListArg foundation.BSTR, wheelDeltaArg int32) error {
-	return win32.HRESULTError(int32(self.Raw.InitMouseWheelEvent(eventType, canBubble, cancelable, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, buttonArg, relatedTargetArg, modifiersListArg, wheelDeltaArg)))
+func (self IDOMMouseWheelEvent) InitMouseWheelEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg IHTMLWindow2, detailArg int32, screenXArg int32, screenYArg int32, clientXArg int32, clientYArg int32, buttonArg uint16, relatedTargetArg IEventTarget, modifiersListArg foundation.BSTR, wheelDeltaArg int32) error {
+	return win32.HRESULTError(int32(self.Raw.InitMouseWheelEvent(eventType, canBubble, cancelable, viewArg.Raw, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, buttonArg, relatedTargetArg.Raw, modifiersListArg, wheelDeltaArg)))
 }
 
 // IDOMMutationEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMMutationEvent with error-returning methods.
@@ -4683,10 +4683,10 @@ func WrapIDOMMutationEvent(raw *webmshtml.IDOMMutationEvent) IDOMMutationEvent {
 }
 
 // Get_relatedNode wraps the raw Get_relatedNode call.
-func (self IDOMMutationEvent) Get_relatedNode() (*systemcom.IDispatch, error) {
+func (self IDOMMutationEvent) Get_relatedNode() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_relatedNode(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_prevValue wraps the raw Get_prevValue call.
@@ -4718,8 +4718,8 @@ func (self IDOMMutationEvent) Get_attrChange() (uint16, error) {
 }
 
 // InitMutationEvent wraps the raw InitMutationEvent call.
-func (self IDOMMutationEvent) InitMutationEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, relatedNodeArg *systemcom.IDispatch, prevValueArg foundation.BSTR, newValueArg foundation.BSTR, attrNameArg foundation.BSTR, attrChangeArg uint16) error {
-	return win32.HRESULTError(int32(self.Raw.InitMutationEvent(eventType, canBubble, cancelable, relatedNodeArg, prevValueArg, newValueArg, attrNameArg, attrChangeArg)))
+func (self IDOMMutationEvent) InitMutationEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, relatedNodeArg systemcomidiom.IDispatch, prevValueArg foundation.BSTR, newValueArg foundation.BSTR, attrNameArg foundation.BSTR, attrChangeArg uint16) error {
+	return win32.HRESULTError(int32(self.Raw.InitMutationEvent(eventType, canBubble, cancelable, relatedNodeArg.Raw, prevValueArg, newValueArg, attrNameArg, attrChangeArg)))
 }
 
 // IDOMNodeIterator is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMNodeIterator with error-returning methods.
@@ -4734,10 +4734,10 @@ func WrapIDOMNodeIterator(raw *webmshtml.IDOMNodeIterator) IDOMNodeIterator {
 }
 
 // Get_root wraps the raw Get_root call.
-func (self IDOMNodeIterator) Get_root() (*systemcom.IDispatch, error) {
+func (self IDOMNodeIterator) Get_root() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_root(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_whatToShow wraps the raw Get_whatToShow call.
@@ -4748,10 +4748,10 @@ func (self IDOMNodeIterator) Get_whatToShow() (uint32, error) {
 }
 
 // Get_filter wraps the raw Get_filter call.
-func (self IDOMNodeIterator) Get_filter() (*systemcom.IDispatch, error) {
+func (self IDOMNodeIterator) Get_filter() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_filter(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_expandEntityReferences wraps the raw Get_expandEntityReferences call.
@@ -4762,17 +4762,17 @@ func (self IDOMNodeIterator) Get_expandEntityReferences() (foundation.VARIANT_BO
 }
 
 // NextNode wraps the raw NextNode call.
-func (self IDOMNodeIterator) NextNode() (*systemcom.IDispatch, error) {
+func (self IDOMNodeIterator) NextNode() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.NextNode(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // PreviousNode wraps the raw PreviousNode call.
-func (self IDOMNodeIterator) PreviousNode() (*systemcom.IDispatch, error) {
+func (self IDOMNodeIterator) PreviousNode() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.PreviousNode(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // Detach wraps the raw Detach call.
@@ -4792,10 +4792,10 @@ func WrapIDOMParser(raw *webmshtml.IDOMParser) IDOMParser {
 }
 
 // ParseFromString wraps the raw ParseFromString call.
-func (self IDOMParser) ParseFromString(xmlSource foundation.BSTR, mimeType foundation.BSTR) (*webmshtml.IHTMLDocument2, error) {
+func (self IDOMParser) ParseFromString(xmlSource foundation.BSTR, mimeType foundation.BSTR) (IHTMLDocument2, error) {
 	var _ppNode *webmshtml.IHTMLDocument2
 	_hr := self.Raw.ParseFromString(xmlSource, mimeType, &_ppNode)
-	return _ppNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument2(_ppNode), win32.HRESULTError(int32(_hr))
 }
 
 // IDOMParserFactory is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMParserFactory with error-returning methods.
@@ -4810,10 +4810,10 @@ func WrapIDOMParserFactory(raw *webmshtml.IDOMParserFactory) IDOMParserFactory {
 }
 
 // Create wraps the raw Create call.
-func (self IDOMParserFactory) Create() (*webmshtml.IDOMParser, error) {
+func (self IDOMParserFactory) Create() (IDOMParser, error) {
 	var ___MIDL__IDOMParserFactory0000 *webmshtml.IDOMParser
 	_hr := self.Raw.Create(&___MIDL__IDOMParserFactory0000)
-	return ___MIDL__IDOMParserFactory0000, win32.HRESULTError(int32(_hr))
+	return WrapIDOMParser(___MIDL__IDOMParserFactory0000), win32.HRESULTError(int32(_hr))
 }
 
 // IDOMProcessingInstruction is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMProcessingInstruction with error-returning methods.
@@ -4948,15 +4948,15 @@ func (self IDOMStorageEvent) Get_url() (foundation.BSTR, error) {
 }
 
 // Get_storageArea wraps the raw Get_storageArea call.
-func (self IDOMStorageEvent) Get_storageArea() (*webmshtml.IHTMLStorage, error) {
+func (self IDOMStorageEvent) Get_storageArea() (IHTMLStorage, error) {
 	var _p *webmshtml.IHTMLStorage
 	_hr := self.Raw.Get_storageArea(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStorage(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InitStorageEvent wraps the raw InitStorageEvent call.
-func (self IDOMStorageEvent) InitStorageEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, keyArg foundation.BSTR, oldValueArg foundation.BSTR, newValueArg foundation.BSTR, urlArg foundation.BSTR, storageAreaArg *webmshtml.IHTMLStorage) error {
-	return win32.HRESULTError(int32(self.Raw.InitStorageEvent(eventType, canBubble, cancelable, keyArg, oldValueArg, newValueArg, urlArg, storageAreaArg)))
+func (self IDOMStorageEvent) InitStorageEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, keyArg foundation.BSTR, oldValueArg foundation.BSTR, newValueArg foundation.BSTR, urlArg foundation.BSTR, storageAreaArg IHTMLStorage) error {
+	return win32.HRESULTError(int32(self.Raw.InitStorageEvent(eventType, canBubble, cancelable, keyArg, oldValueArg, newValueArg, urlArg, storageAreaArg.Raw)))
 }
 
 // IDOMTextEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMTextEvent with error-returning methods.
@@ -4985,8 +4985,8 @@ func (self IDOMTextEvent) Get_inputMethod() (uint32, error) {
 }
 
 // InitTextEvent wraps the raw InitTextEvent call.
-func (self IDOMTextEvent) InitTextEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg *webmshtml.IHTMLWindow2, dataArg foundation.BSTR, inputMethod uint32, locale foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.InitTextEvent(eventType, canBubble, cancelable, viewArg, dataArg, inputMethod, locale)))
+func (self IDOMTextEvent) InitTextEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg IHTMLWindow2, dataArg foundation.BSTR, inputMethod uint32, locale foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.InitTextEvent(eventType, canBubble, cancelable, viewArg.Raw, dataArg, inputMethod, locale)))
 }
 
 // Get_locale wraps the raw Get_locale call.
@@ -5008,10 +5008,10 @@ func WrapIDOMTreeWalker(raw *webmshtml.IDOMTreeWalker) IDOMTreeWalker {
 }
 
 // Get_root wraps the raw Get_root call.
-func (self IDOMTreeWalker) Get_root() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) Get_root() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_root(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_whatToShow wraps the raw Get_whatToShow call.
@@ -5022,10 +5022,10 @@ func (self IDOMTreeWalker) Get_whatToShow() (uint32, error) {
 }
 
 // Get_filter wraps the raw Get_filter call.
-func (self IDOMTreeWalker) Get_filter() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) Get_filter() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_filter(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_expandEntityReferences wraps the raw Get_expandEntityReferences call.
@@ -5036,64 +5036,64 @@ func (self IDOMTreeWalker) Get_expandEntityReferences() (foundation.VARIANT_BOOL
 }
 
 // Putref_currentNode wraps the raw Putref_currentNode call.
-func (self IDOMTreeWalker) Putref_currentNode(v *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_currentNode(v)))
+func (self IDOMTreeWalker) Putref_currentNode(v systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_currentNode(v.Raw)))
 }
 
 // Get_currentNode wraps the raw Get_currentNode call.
-func (self IDOMTreeWalker) Get_currentNode() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) Get_currentNode() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_currentNode(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ParentNode wraps the raw ParentNode call.
-func (self IDOMTreeWalker) ParentNode() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) ParentNode() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.ParentNode(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // FirstChild wraps the raw FirstChild call.
-func (self IDOMTreeWalker) FirstChild() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) FirstChild() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.FirstChild(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // LastChild wraps the raw LastChild call.
-func (self IDOMTreeWalker) LastChild() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) LastChild() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.LastChild(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // PreviousSibling wraps the raw PreviousSibling call.
-func (self IDOMTreeWalker) PreviousSibling() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) PreviousSibling() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.PreviousSibling(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // NextSibling wraps the raw NextSibling call.
-func (self IDOMTreeWalker) NextSibling() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) NextSibling() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.NextSibling(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // PreviousNode wraps the raw PreviousNode call.
-func (self IDOMTreeWalker) PreviousNode() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) PreviousNode() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.PreviousNode(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // NextNode wraps the raw NextNode call.
-func (self IDOMTreeWalker) NextNode() (*systemcom.IDispatch, error) {
+func (self IDOMTreeWalker) NextNode() (systemcomidiom.IDispatch, error) {
 	var _ppRetNode *systemcom.IDispatch
 	_hr := self.Raw.NextNode(&_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // IDOMUIEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMUIEvent with error-returning methods.
@@ -5108,10 +5108,10 @@ func WrapIDOMUIEvent(raw *webmshtml.IDOMUIEvent) IDOMUIEvent {
 }
 
 // Get_view wraps the raw Get_view call.
-func (self IDOMUIEvent) Get_view() (*webmshtml.IHTMLWindow2, error) {
+func (self IDOMUIEvent) Get_view() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_view(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_detail wraps the raw Get_detail call.
@@ -5122,8 +5122,8 @@ func (self IDOMUIEvent) Get_detail() (int32, error) {
 }
 
 // InitUIEvent wraps the raw InitUIEvent call.
-func (self IDOMUIEvent) InitUIEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, view *webmshtml.IHTMLWindow2, detail int32) error {
-	return win32.HRESULTError(int32(self.Raw.InitUIEvent(eventType, canBubble, cancelable, view, detail)))
+func (self IDOMUIEvent) InitUIEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, view IHTMLWindow2, detail int32) error {
+	return win32.HRESULTError(int32(self.Raw.InitUIEvent(eventType, canBubble, cancelable, view.Raw, detail)))
 }
 
 // IDOMWheelEvent is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMWheelEvent with error-returning methods.
@@ -5166,8 +5166,8 @@ func (self IDOMWheelEvent) Get_deltaMode() (uint32, error) {
 }
 
 // InitWheelEvent wraps the raw InitWheelEvent call.
-func (self IDOMWheelEvent) InitWheelEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg *webmshtml.IHTMLWindow2, detailArg int32, screenXArg int32, screenYArg int32, clientXArg int32, clientYArg int32, buttonArg uint16, relatedTargetArg *webmshtml.IEventTarget, modifiersListArg foundation.BSTR, deltaX int32, deltaY int32, deltaZ int32, deltaMode uint32) error {
-	return win32.HRESULTError(int32(self.Raw.InitWheelEvent(eventType, canBubble, cancelable, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, buttonArg, relatedTargetArg, modifiersListArg, deltaX, deltaY, deltaZ, deltaMode)))
+func (self IDOMWheelEvent) InitWheelEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, viewArg IHTMLWindow2, detailArg int32, screenXArg int32, screenYArg int32, clientXArg int32, clientYArg int32, buttonArg uint16, relatedTargetArg IEventTarget, modifiersListArg foundation.BSTR, deltaX int32, deltaY int32, deltaZ int32, deltaMode uint32) error {
+	return win32.HRESULTError(int32(self.Raw.InitWheelEvent(eventType, canBubble, cancelable, viewArg.Raw, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, buttonArg, relatedTargetArg.Raw, modifiersListArg, deltaX, deltaY, deltaZ, deltaMode)))
 }
 
 // IDOMXmlSerializer is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDOMXmlSerializer with error-returning methods.
@@ -5182,9 +5182,9 @@ func WrapIDOMXmlSerializer(raw *webmshtml.IDOMXmlSerializer) IDOMXmlSerializer {
 }
 
 // SerializeToString wraps the raw SerializeToString call.
-func (self IDOMXmlSerializer) SerializeToString(pNode *webmshtml.IHTMLDOMNode) (foundation.BSTR, error) {
+func (self IDOMXmlSerializer) SerializeToString(pNode IHTMLDOMNode) (foundation.BSTR, error) {
 	var _pString foundation.BSTR
-	_hr := self.Raw.SerializeToString(pNode, &_pString)
+	_hr := self.Raw.SerializeToString(pNode.Raw, &_pString)
 	return _pString, win32.HRESULTError(int32(_hr))
 }
 
@@ -5200,10 +5200,10 @@ func WrapIDOMXmlSerializerFactory(raw *webmshtml.IDOMXmlSerializerFactory) IDOMX
 }
 
 // Create wraps the raw Create call.
-func (self IDOMXmlSerializerFactory) Create() (*webmshtml.IDOMXmlSerializer, error) {
+func (self IDOMXmlSerializerFactory) Create() (IDOMXmlSerializer, error) {
 	var ___MIDL__IDOMXmlSerializerFactory0000 *webmshtml.IDOMXmlSerializer
 	_hr := self.Raw.Create(&___MIDL__IDOMXmlSerializerFactory0000)
-	return ___MIDL__IDOMXmlSerializerFactory0000, win32.HRESULTError(int32(_hr))
+	return WrapIDOMXmlSerializer(___MIDL__IDOMXmlSerializerFactory0000), win32.HRESULTError(int32(_hr))
 }
 
 // IDebugCallbackNotificationHandler is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDebugCallbackNotificationHandler with error-returning methods.
@@ -5223,33 +5223,33 @@ func (self IDebugCallbackNotificationHandler) RequestedCallbackTypes(pCallbackMa
 }
 
 // BeforeDispatchEvent wraps the raw BeforeDispatchEvent call.
-func (self IDebugCallbackNotificationHandler) BeforeDispatchEvent(pEvent *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeforeDispatchEvent(pEvent)))
+func (self IDebugCallbackNotificationHandler) BeforeDispatchEvent(pEvent systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeforeDispatchEvent(pEvent.Raw)))
 }
 
 // DispatchEventComplete wraps the raw DispatchEventComplete call.
-func (self IDebugCallbackNotificationHandler) DispatchEventComplete(pEvent *systemcom.IUnknown, propagationStatus uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DispatchEventComplete(pEvent, propagationStatus)))
+func (self IDebugCallbackNotificationHandler) DispatchEventComplete(pEvent systemcomidiom.IUnknown, propagationStatus uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DispatchEventComplete(pEvent.Raw, propagationStatus)))
 }
 
 // BeforeInvokeDomCallback wraps the raw BeforeInvokeDomCallback call.
-func (self IDebugCallbackNotificationHandler) BeforeInvokeDomCallback(pEvent *systemcom.IUnknown, pCallback *webmshtml.IScriptEventHandler, eStage webmshtml.DOM_EVENT_PHASE, propagationStatus uint32) error {
-	return win32.HRESULTError(int32(self.Raw.BeforeInvokeDomCallback(pEvent, pCallback, eStage, propagationStatus)))
+func (self IDebugCallbackNotificationHandler) BeforeInvokeDomCallback(pEvent systemcomidiom.IUnknown, pCallback IScriptEventHandler, eStage webmshtml.DOM_EVENT_PHASE, propagationStatus uint32) error {
+	return win32.HRESULTError(int32(self.Raw.BeforeInvokeDomCallback(pEvent.Raw, pCallback.Raw, eStage, propagationStatus)))
 }
 
 // InvokeDomCallbackComplete wraps the raw InvokeDomCallbackComplete call.
-func (self IDebugCallbackNotificationHandler) InvokeDomCallbackComplete(pEvent *systemcom.IUnknown, pCallback *webmshtml.IScriptEventHandler, eStage webmshtml.DOM_EVENT_PHASE, propagationStatus uint32) error {
-	return win32.HRESULTError(int32(self.Raw.InvokeDomCallbackComplete(pEvent, pCallback, eStage, propagationStatus)))
+func (self IDebugCallbackNotificationHandler) InvokeDomCallbackComplete(pEvent systemcomidiom.IUnknown, pCallback IScriptEventHandler, eStage webmshtml.DOM_EVENT_PHASE, propagationStatus uint32) error {
+	return win32.HRESULTError(int32(self.Raw.InvokeDomCallbackComplete(pEvent.Raw, pCallback.Raw, eStage, propagationStatus)))
 }
 
 // BeforeInvokeCallback wraps the raw BeforeInvokeCallback call.
-func (self IDebugCallbackNotificationHandler) BeforeInvokeCallback(eCallbackType webmshtml.SCRIPT_TIMER_TYPE, callbackCookie uint32, pDispHandler *systemcom.IDispatch, ullHandlerCookie uint64, functionName foundation.BSTR, line uint32, column uint32, cchLength uint32, pDebugDocumentContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.BeforeInvokeCallback(eCallbackType, callbackCookie, pDispHandler, ullHandlerCookie, functionName, line, column, cchLength, pDebugDocumentContext)))
+func (self IDebugCallbackNotificationHandler) BeforeInvokeCallback(eCallbackType webmshtml.SCRIPT_TIMER_TYPE, callbackCookie uint32, pDispHandler systemcomidiom.IDispatch, ullHandlerCookie uint64, functionName foundation.BSTR, line uint32, column uint32, cchLength uint32, pDebugDocumentContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.BeforeInvokeCallback(eCallbackType, callbackCookie, pDispHandler.Raw, ullHandlerCookie, functionName, line, column, cchLength, pDebugDocumentContext.Raw)))
 }
 
 // InvokeCallbackComplete wraps the raw InvokeCallbackComplete call.
-func (self IDebugCallbackNotificationHandler) InvokeCallbackComplete(eCallbackType webmshtml.SCRIPT_TIMER_TYPE, callbackCookie uint32, pDispHandler *systemcom.IDispatch, ullHandlerCookie uint64, functionName foundation.BSTR, line uint32, column uint32, cchLength uint32, pDebugDocumentContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.InvokeCallbackComplete(eCallbackType, callbackCookie, pDispHandler, ullHandlerCookie, functionName, line, column, cchLength, pDebugDocumentContext)))
+func (self IDebugCallbackNotificationHandler) InvokeCallbackComplete(eCallbackType webmshtml.SCRIPT_TIMER_TYPE, callbackCookie uint32, pDispHandler systemcomidiom.IDispatch, ullHandlerCookie uint64, functionName foundation.BSTR, line uint32, column uint32, cchLength uint32, pDebugDocumentContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.InvokeCallbackComplete(eCallbackType, callbackCookie, pDispHandler.Raw, ullHandlerCookie, functionName, line, column, cchLength, pDebugDocumentContext.Raw)))
 }
 
 // IDeveloperConsoleMessageReceiver is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDeveloperConsoleMessageReceiver with error-returning methods.
@@ -5334,9 +5334,9 @@ func WrapIDiagnosticsScriptEngineProvider(raw *webmshtml.IDiagnosticsScriptEngin
 }
 
 // CreateDiagnosticsScriptEngine wraps the raw CreateDiagnosticsScriptEngine call.
-func (self IDiagnosticsScriptEngineProvider) CreateDiagnosticsScriptEngine(pScriptSite *webmshtml.IDiagnosticsScriptEngineSite, fDebuggingEnabled bool, ulProcessId uint32, ppEngine **webmshtml.IDiagnosticsScriptEngine) error {
+func (self IDiagnosticsScriptEngineProvider) CreateDiagnosticsScriptEngine(pScriptSite IDiagnosticsScriptEngineSite, fDebuggingEnabled bool, ulProcessId uint32, ppEngine **webmshtml.IDiagnosticsScriptEngine) error {
 	_fDebuggingEnabled := foundation.BOOL(win32.Bool32(fDebuggingEnabled))
-	return win32.HRESULTError(int32(self.Raw.CreateDiagnosticsScriptEngine(pScriptSite, _fDebuggingEnabled, ulProcessId, ppEngine)))
+	return win32.HRESULTError(int32(self.Raw.CreateDiagnosticsScriptEngine(pScriptSite.Raw, _fDebuggingEnabled, ulProcessId, ppEngine)))
 }
 
 // IDiagnosticsScriptEngineSite is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDiagnosticsScriptEngineSite with error-returning methods.
@@ -5356,8 +5356,8 @@ func (self IDiagnosticsScriptEngineSite) OnMessage(pszData *foundation.PWSTR, ul
 }
 
 // OnScriptError wraps the raw OnScriptError call.
-func (self IDiagnosticsScriptEngineSite) OnScriptError(pScriptError *systemdiagnosticsdebugactivescript.IActiveScriptError) error {
-	return win32.HRESULTError(int32(self.Raw.OnScriptError(pScriptError)))
+func (self IDiagnosticsScriptEngineSite) OnScriptError(pScriptError systemdiagnosticsdebugactivescriptidiom.IActiveScriptError) error {
+	return win32.HRESULTError(int32(self.Raw.OnScriptError(pScriptError.Raw)))
 }
 
 // IDisplayPointer is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDisplayPointer with error-returning methods.
@@ -5377,13 +5377,13 @@ func (self IDisplayPointer) MoveUnit(eMoveUnit webmshtml.DISPLAY_MOVEUNIT, lXPos
 }
 
 // PositionMarkupPointer wraps the raw PositionMarkupPointer call.
-func (self IDisplayPointer) PositionMarkupPointer(pMarkupPointer *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.PositionMarkupPointer(pMarkupPointer)))
+func (self IDisplayPointer) PositionMarkupPointer(pMarkupPointer IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.PositionMarkupPointer(pMarkupPointer.Raw)))
 }
 
 // MoveToPointer wraps the raw MoveToPointer call.
-func (self IDisplayPointer) MoveToPointer(pDispPointer *webmshtml.IDisplayPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToPointer(pDispPointer)))
+func (self IDisplayPointer) MoveToPointer(pDispPointer IDisplayPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToPointer(pDispPointer.Raw)))
 }
 
 // SetPointerGravity wraps the raw SetPointerGravity call.
@@ -5417,18 +5417,18 @@ func (self IDisplayPointer) Unposition() error {
 }
 
 // IsEqualTo wraps the raw IsEqualTo call.
-func (self IDisplayPointer) IsEqualTo(pDispPointer *webmshtml.IDisplayPointer, pfIsEqual *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqualTo(pDispPointer, pfIsEqual)))
+func (self IDisplayPointer) IsEqualTo(pDispPointer IDisplayPointer, pfIsEqual *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqualTo(pDispPointer.Raw, pfIsEqual)))
 }
 
 // IsLeftOf wraps the raw IsLeftOf call.
-func (self IDisplayPointer) IsLeftOf(pDispPointer *webmshtml.IDisplayPointer, pfIsLeftOf *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsLeftOf(pDispPointer, pfIsLeftOf)))
+func (self IDisplayPointer) IsLeftOf(pDispPointer IDisplayPointer, pfIsLeftOf *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsLeftOf(pDispPointer.Raw, pfIsLeftOf)))
 }
 
 // IsRightOf wraps the raw IsRightOf call.
-func (self IDisplayPointer) IsRightOf(pDispPointer *webmshtml.IDisplayPointer, pfIsRightOf *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsRightOf(pDispPointer, pfIsRightOf)))
+func (self IDisplayPointer) IsRightOf(pDispPointer IDisplayPointer, pfIsRightOf *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsRightOf(pDispPointer.Raw, pfIsRightOf)))
 }
 
 // IsAtBOL wraps the raw IsAtBOL call.
@@ -5437,8 +5437,8 @@ func (self IDisplayPointer) IsAtBOL(pfBOL *foundation.BOOL) error {
 }
 
 // MoveToMarkupPointer wraps the raw MoveToMarkupPointer call.
-func (self IDisplayPointer) MoveToMarkupPointer(pPointer *webmshtml.IMarkupPointer, pDispLineContext *webmshtml.IDisplayPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToMarkupPointer(pPointer, pDispLineContext)))
+func (self IDisplayPointer) MoveToMarkupPointer(pPointer IMarkupPointer, pDispLineContext IDisplayPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToMarkupPointer(pPointer.Raw, pDispLineContext.Raw)))
 }
 
 // ScrollIntoView wraps the raw ScrollIntoView call.
@@ -5478,13 +5478,13 @@ func (self IDisplayServices) CreateDisplayPointer(ppDispPointer **webmshtml.IDis
 }
 
 // TransformRect wraps the raw TransformRect call.
-func (self IDisplayServices) TransformRect(pRect *foundation.RECT, eSource webmshtml.COORD_SYSTEM, eDestination webmshtml.COORD_SYSTEM, pIElement *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.TransformRect(pRect, eSource, eDestination, pIElement)))
+func (self IDisplayServices) TransformRect(pRect *foundation.RECT, eSource webmshtml.COORD_SYSTEM, eDestination webmshtml.COORD_SYSTEM, pIElement IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.TransformRect(pRect, eSource, eDestination, pIElement.Raw)))
 }
 
 // TransformPoint wraps the raw TransformPoint call.
-func (self IDisplayServices) TransformPoint(pPoint *foundation.POINT, eSource webmshtml.COORD_SYSTEM, eDestination webmshtml.COORD_SYSTEM, pIElement *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.TransformPoint(pPoint, eSource, eDestination, pIElement)))
+func (self IDisplayServices) TransformPoint(pPoint *foundation.POINT, eSource webmshtml.COORD_SYSTEM, eDestination webmshtml.COORD_SYSTEM, pIElement IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.TransformPoint(pPoint, eSource, eDestination, pIElement.Raw)))
 }
 
 // GetCaret wraps the raw GetCaret call.
@@ -5493,13 +5493,13 @@ func (self IDisplayServices) GetCaret(ppCaret **webmshtml.IHTMLCaret) error {
 }
 
 // GetComputedStyle wraps the raw GetComputedStyle call.
-func (self IDisplayServices) GetComputedStyle(pPointer *webmshtml.IMarkupPointer, ppComputedStyle **webmshtml.IHTMLComputedStyle) error {
-	return win32.HRESULTError(int32(self.Raw.GetComputedStyle(pPointer, ppComputedStyle)))
+func (self IDisplayServices) GetComputedStyle(pPointer IMarkupPointer, ppComputedStyle **webmshtml.IHTMLComputedStyle) error {
+	return win32.HRESULTError(int32(self.Raw.GetComputedStyle(pPointer.Raw, ppComputedStyle)))
 }
 
 // HasFlowLayout wraps the raw HasFlowLayout call.
-func (self IDisplayServices) HasFlowLayout(pIElement *webmshtml.IHTMLElement, pfHasFlowLayout *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.HasFlowLayout(pIElement, pfHasFlowLayout)))
+func (self IDisplayServices) HasFlowLayout(pIElement IHTMLElement, pfHasFlowLayout *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.HasFlowLayout(pIElement.Raw, pfHasFlowLayout)))
 }
 
 // IDocHostShowUI is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDocHostShowUI with error-returning methods.
@@ -5533,8 +5533,8 @@ func WrapIDocHostUIHandler(raw *webmshtml.IDocHostUIHandler) IDocHostUIHandler {
 }
 
 // ShowContextMenu wraps the raw ShowContextMenu call.
-func (self IDocHostUIHandler) ShowContextMenu(dwID uint32, ppt *foundation.POINT, pcmdtReserved *systemcom.IUnknown, pdispReserved *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.ShowContextMenu(dwID, ppt, pcmdtReserved, pdispReserved)))
+func (self IDocHostUIHandler) ShowContextMenu(dwID uint32, ppt *foundation.POINT, pcmdtReserved systemcomidiom.IUnknown, pdispReserved systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.ShowContextMenu(dwID, ppt, pcmdtReserved.Raw, pdispReserved.Raw)))
 }
 
 // GetHostInfo wraps the raw GetHostInfo call.
@@ -5543,8 +5543,8 @@ func (self IDocHostUIHandler) GetHostInfo(pInfo *webmshtml.DOCHOSTUIINFO) error 
 }
 
 // ShowUI wraps the raw ShowUI call.
-func (self IDocHostUIHandler) ShowUI(dwID uint32, pActiveObject *systemole.IOleInPlaceActiveObject, pCommandTarget *systemole.IOleCommandTarget, pFrame *systemole.IOleInPlaceFrame, pDoc *systemole.IOleInPlaceUIWindow) error {
-	return win32.HRESULTError(int32(self.Raw.ShowUI(dwID, pActiveObject, pCommandTarget, pFrame, pDoc)))
+func (self IDocHostUIHandler) ShowUI(dwID uint32, pActiveObject systemoleidiom.IOleInPlaceActiveObject, pCommandTarget systemoleidiom.IOleCommandTarget, pFrame systemoleidiom.IOleInPlaceFrame, pDoc systemoleidiom.IOleInPlaceUIWindow) error {
+	return win32.HRESULTError(int32(self.Raw.ShowUI(dwID, pActiveObject.Raw, pCommandTarget.Raw, pFrame.Raw, pDoc.Raw)))
 }
 
 // HideUI wraps the raw HideUI call.
@@ -5576,9 +5576,9 @@ func (self IDocHostUIHandler) OnFrameWindowActivate(fActivate bool) error {
 }
 
 // ResizeBorder wraps the raw ResizeBorder call.
-func (self IDocHostUIHandler) ResizeBorder(prcBorder *foundation.RECT, pUIWindow *systemole.IOleInPlaceUIWindow, fRameWindow bool) error {
+func (self IDocHostUIHandler) ResizeBorder(prcBorder *foundation.RECT, pUIWindow systemoleidiom.IOleInPlaceUIWindow, fRameWindow bool) error {
 	_fRameWindow := foundation.BOOL(win32.Bool32(fRameWindow))
-	return win32.HRESULTError(int32(self.Raw.ResizeBorder(prcBorder, pUIWindow, _fRameWindow)))
+	return win32.HRESULTError(int32(self.Raw.ResizeBorder(prcBorder, pUIWindow.Raw, _fRameWindow)))
 }
 
 // TranslateAccelerator wraps the raw TranslateAccelerator call.
@@ -5592,8 +5592,8 @@ func (self IDocHostUIHandler) GetOptionKeyPath(pchKey *foundation.PWSTR, dw uint
 }
 
 // GetDropTarget wraps the raw GetDropTarget call.
-func (self IDocHostUIHandler) GetDropTarget(pDropTarget *systemole.IDropTarget, ppDropTarget **systemole.IDropTarget) error {
-	return win32.HRESULTError(int32(self.Raw.GetDropTarget(pDropTarget, ppDropTarget)))
+func (self IDocHostUIHandler) GetDropTarget(pDropTarget systemoleidiom.IDropTarget, ppDropTarget **systemole.IDropTarget) error {
+	return win32.HRESULTError(int32(self.Raw.GetDropTarget(pDropTarget.Raw, ppDropTarget)))
 }
 
 // GetExternal wraps the raw GetExternal call.
@@ -5608,8 +5608,8 @@ func (self IDocHostUIHandler) TranslateUrl(dwTranslate uint32, pchURLIn string, 
 }
 
 // FilterDataObject wraps the raw FilterDataObject call.
-func (self IDocHostUIHandler) FilterDataObject(pDO *systemcom.IDataObject, ppDORet **systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.FilterDataObject(pDO, ppDORet)))
+func (self IDocHostUIHandler) FilterDataObject(pDO systemcomidiom.IDataObject, ppDORet **systemcom.IDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.FilterDataObject(pDO.Raw, ppDORet)))
 }
 
 // IDocHostUIHandler2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDocHostUIHandler2 with error-returning methods.
@@ -5640,10 +5640,10 @@ func WrapIDocumentEvent(raw *webmshtml.IDocumentEvent) IDocumentEvent {
 }
 
 // CreateEvent wraps the raw CreateEvent call.
-func (self IDocumentEvent) CreateEvent(eventType foundation.BSTR) (*webmshtml.IDOMEvent, error) {
+func (self IDocumentEvent) CreateEvent(eventType foundation.BSTR) (IDOMEvent, error) {
 	var _ppEvent *webmshtml.IDOMEvent
 	_hr := self.Raw.CreateEvent(eventType, &_ppEvent)
-	return _ppEvent, win32.HRESULTError(int32(_hr))
+	return WrapIDOMEvent(_ppEvent), win32.HRESULTError(int32(_hr))
 }
 
 // IDocumentRange is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDocumentRange with error-returning methods.
@@ -5658,10 +5658,10 @@ func WrapIDocumentRange(raw *webmshtml.IDocumentRange) IDocumentRange {
 }
 
 // CreateRange wraps the raw CreateRange call.
-func (self IDocumentRange) CreateRange() (*webmshtml.IHTMLDOMRange, error) {
+func (self IDocumentRange) CreateRange() (IHTMLDOMRange, error) {
 	var _ppIHTMLDOMRange *webmshtml.IHTMLDOMRange
 	_hr := self.Raw.CreateRange(&_ppIHTMLDOMRange)
-	return _ppIHTMLDOMRange, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMRange(_ppIHTMLDOMRange), win32.HRESULTError(int32(_hr))
 }
 
 // IDocumentSelector is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDocumentSelector with error-returning methods.
@@ -5676,17 +5676,17 @@ func WrapIDocumentSelector(raw *webmshtml.IDocumentSelector) IDocumentSelector {
 }
 
 // QuerySelector wraps the raw QuerySelector call.
-func (self IDocumentSelector) QuerySelector(v foundation.BSTR) (*webmshtml.IHTMLElement, error) {
+func (self IDocumentSelector) QuerySelector(v foundation.BSTR) (IHTMLElement, error) {
 	var _pel *webmshtml.IHTMLElement
 	_hr := self.Raw.QuerySelector(v, &_pel)
-	return _pel, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_pel), win32.HRESULTError(int32(_hr))
 }
 
 // QuerySelectorAll wraps the raw QuerySelectorAll call.
-func (self IDocumentSelector) QuerySelectorAll(v foundation.BSTR) (*webmshtml.IHTMLDOMChildrenCollection, error) {
+func (self IDocumentSelector) QuerySelectorAll(v foundation.BSTR) (IHTMLDOMChildrenCollection, error) {
 	var _pel *webmshtml.IHTMLDOMChildrenCollection
 	_hr := self.Raw.QuerySelectorAll(v, &_pel)
-	return _pel, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMChildrenCollection(_pel), win32.HRESULTError(int32(_hr))
 }
 
 // IDocumentTraversal is an idiomatic wrapper over the raw COM interface Web.MsHtml.IDocumentTraversal with error-returning methods.
@@ -5701,17 +5701,17 @@ func WrapIDocumentTraversal(raw *webmshtml.IDocumentTraversal) IDocumentTraversa
 }
 
 // CreateNodeIterator wraps the raw CreateNodeIterator call.
-func (self IDocumentTraversal) CreateNodeIterator(pRootNode *systemcom.IDispatch, ulWhatToShow int32, pFilter *systemvariant.VARIANT, fEntityReferenceExpansion foundation.VARIANT_BOOL) (*webmshtml.IDOMNodeIterator, error) {
+func (self IDocumentTraversal) CreateNodeIterator(pRootNode systemcomidiom.IDispatch, ulWhatToShow int32, pFilter *systemvariant.VARIANT, fEntityReferenceExpansion foundation.VARIANT_BOOL) (IDOMNodeIterator, error) {
 	var _ppNodeIterator *webmshtml.IDOMNodeIterator
-	_hr := self.Raw.CreateNodeIterator(pRootNode, ulWhatToShow, pFilter, fEntityReferenceExpansion, &_ppNodeIterator)
-	return _ppNodeIterator, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateNodeIterator(pRootNode.Raw, ulWhatToShow, pFilter, fEntityReferenceExpansion, &_ppNodeIterator)
+	return WrapIDOMNodeIterator(_ppNodeIterator), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTreeWalker wraps the raw CreateTreeWalker call.
-func (self IDocumentTraversal) CreateTreeWalker(pRootNode *systemcom.IDispatch, ulWhatToShow int32, pFilter *systemvariant.VARIANT, fEntityReferenceExpansion foundation.VARIANT_BOOL) (*webmshtml.IDOMTreeWalker, error) {
+func (self IDocumentTraversal) CreateTreeWalker(pRootNode systemcomidiom.IDispatch, ulWhatToShow int32, pFilter *systemvariant.VARIANT, fEntityReferenceExpansion foundation.VARIANT_BOOL) (IDOMTreeWalker, error) {
 	var _ppTreeWalker *webmshtml.IDOMTreeWalker
-	_hr := self.Raw.CreateTreeWalker(pRootNode, ulWhatToShow, pFilter, fEntityReferenceExpansion, &_ppTreeWalker)
-	return _ppTreeWalker, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateTreeWalker(pRootNode.Raw, ulWhatToShow, pFilter, fEntityReferenceExpansion, &_ppTreeWalker)
+	return WrapIDOMTreeWalker(_ppTreeWalker), win32.HRESULTError(int32(_hr))
 }
 
 // IElementBehavior is an idiomatic wrapper over the raw COM interface Web.MsHtml.IElementBehavior with error-returning methods.
@@ -5726,8 +5726,8 @@ func WrapIElementBehavior(raw *webmshtml.IElementBehavior) IElementBehavior {
 }
 
 // Init wraps the raw Init call.
-func (self IElementBehavior) Init(pBehaviorSite *webmshtml.IElementBehaviorSite) error {
-	return win32.HRESULTError(int32(self.Raw.Init(pBehaviorSite)))
+func (self IElementBehavior) Init(pBehaviorSite IElementBehaviorSite) error {
+	return win32.HRESULTError(int32(self.Raw.Init(pBehaviorSite.Raw)))
 }
 
 // Notify wraps the raw Notify call.
@@ -5770,10 +5770,10 @@ func WrapIElementBehaviorFactory(raw *webmshtml.IElementBehaviorFactory) IElemen
 }
 
 // FindBehavior wraps the raw FindBehavior call.
-func (self IElementBehaviorFactory) FindBehavior(bstrBehavior foundation.BSTR, bstrBehaviorUrl foundation.BSTR, pSite *webmshtml.IElementBehaviorSite) (*webmshtml.IElementBehavior, error) {
+func (self IElementBehaviorFactory) FindBehavior(bstrBehavior foundation.BSTR, bstrBehaviorUrl foundation.BSTR, pSite IElementBehaviorSite) (IElementBehavior, error) {
 	var _ppBehavior *webmshtml.IElementBehavior
-	_hr := self.Raw.FindBehavior(bstrBehavior, bstrBehaviorUrl, pSite, &_ppBehavior)
-	return _ppBehavior, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.FindBehavior(bstrBehavior, bstrBehaviorUrl, pSite.Raw, &_ppBehavior)
+	return WrapIElementBehavior(_ppBehavior), win32.HRESULTError(int32(_hr))
 }
 
 // IElementBehaviorFocus is an idiomatic wrapper over the raw COM interface Web.MsHtml.IElementBehaviorFocus with error-returning methods.
@@ -5848,8 +5848,8 @@ func WrapIElementBehaviorRender(raw *webmshtml.IElementBehaviorRender) IElementB
 }
 
 // Draw wraps the raw Draw call.
-func (self IElementBehaviorRender) Draw(hdc graphicsgdi.HDC, lLayer int32, pRect *foundation.RECT, pReserved *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Draw(hdc, lLayer, pRect, pReserved)))
+func (self IElementBehaviorRender) Draw(hdc graphicsgdi.HDC, lLayer int32, pRect *foundation.RECT, pReserved systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Draw(hdc, lLayer, pRect, pReserved.Raw)))
 }
 
 // GetRenderInfo wraps the raw GetRenderInfo call.
@@ -5860,9 +5860,9 @@ func (self IElementBehaviorRender) GetRenderInfo() (int32, error) {
 }
 
 // HitTestPoint wraps the raw HitTestPoint call.
-func (self IElementBehaviorRender) HitTestPoint(pPoint *foundation.POINT, pReserved *systemcom.IUnknown) (foundation.BOOL, error) {
+func (self IElementBehaviorRender) HitTestPoint(pPoint *foundation.POINT, pReserved systemcomidiom.IUnknown) (foundation.BOOL, error) {
 	var _pbHit foundation.BOOL
-	_hr := self.Raw.HitTestPoint(pPoint, pReserved, &_pbHit)
+	_hr := self.Raw.HitTestPoint(pPoint, pReserved.Raw, &_pbHit)
 	return _pbHit, win32.HRESULTError(int32(_hr))
 }
 
@@ -5878,10 +5878,10 @@ func WrapIElementBehaviorSite(raw *webmshtml.IElementBehaviorSite) IElementBehav
 }
 
 // GetElement wraps the raw GetElement call.
-func (self IElementBehaviorSite) GetElement() (*webmshtml.IHTMLElement, error) {
+func (self IElementBehaviorSite) GetElement() (IHTMLElement, error) {
 	var _ppElement *webmshtml.IHTMLElement
 	_hr := self.Raw.GetElement(&_ppElement)
-	return _ppElement, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_ppElement), win32.HRESULTError(int32(_hr))
 }
 
 // RegisterNotification wraps the raw RegisterNotification call.
@@ -5901,11 +5901,11 @@ func WrapIElementBehaviorSiteCategory(raw *webmshtml.IElementBehaviorSiteCategor
 }
 
 // GetRelatedBehaviors wraps the raw GetRelatedBehaviors call.
-func (self IElementBehaviorSiteCategory) GetRelatedBehaviors(lDirection int32, pchCategory string) (*systemcom.IEnumUnknown, error) {
+func (self IElementBehaviorSiteCategory) GetRelatedBehaviors(lDirection int32, pchCategory string) (systemcomidiom.IEnumUnknown, error) {
 	_pchCategory := win32.UTF16Ptr(pchCategory)
 	var _ppEnumerator *systemcom.IEnumUnknown
 	_hr := self.Raw.GetRelatedBehaviors(lDirection, foundation.PWSTR(_pchCategory), &_ppEnumerator)
-	return _ppEnumerator, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIEnumUnknown(_ppEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // IElementBehaviorSiteLayout is an idiomatic wrapper over the raw COM interface Web.MsHtml.IElementBehaviorSiteLayout with error-returning methods.
@@ -5980,15 +5980,15 @@ func (self IElementBehaviorSiteOM) GetEventCookie(pchEvent string) (int32, error
 }
 
 // FireEvent wraps the raw FireEvent call.
-func (self IElementBehaviorSiteOM) FireEvent(lCookie int32, pEventObject *webmshtml.IHTMLEventObj) error {
-	return win32.HRESULTError(int32(self.Raw.FireEvent(lCookie, pEventObject)))
+func (self IElementBehaviorSiteOM) FireEvent(lCookie int32, pEventObject IHTMLEventObj) error {
+	return win32.HRESULTError(int32(self.Raw.FireEvent(lCookie, pEventObject.Raw)))
 }
 
 // CreateEventObject wraps the raw CreateEventObject call.
-func (self IElementBehaviorSiteOM) CreateEventObject() (*webmshtml.IHTMLEventObj, error) {
+func (self IElementBehaviorSiteOM) CreateEventObject() (IHTMLEventObj, error) {
 	var _ppEventObject *webmshtml.IHTMLEventObj
 	_hr := self.Raw.CreateEventObject(&_ppEventObject)
-	return _ppEventObject, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLEventObj(_ppEventObject), win32.HRESULTError(int32(_hr))
 }
 
 // RegisterName wraps the raw RegisterName call.
@@ -6015,10 +6015,10 @@ func WrapIElementBehaviorSiteOM2(raw *webmshtml.IElementBehaviorSiteOM2) IElemen
 }
 
 // GetDefaults wraps the raw GetDefaults call.
-func (self IElementBehaviorSiteOM2) GetDefaults() (*webmshtml.IHTMLElementDefaults, error) {
+func (self IElementBehaviorSiteOM2) GetDefaults() (IHTMLElementDefaults, error) {
 	var _ppDefaults *webmshtml.IHTMLElementDefaults
 	_hr := self.Raw.GetDefaults(&_ppDefaults)
-	return _ppDefaults, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementDefaults(_ppDefaults), win32.HRESULTError(int32(_hr))
 }
 
 // IElementBehaviorSiteRender is an idiomatic wrapper over the raw COM interface Web.MsHtml.IElementBehaviorSiteRender with error-returning methods.
@@ -6059,8 +6059,8 @@ func WrapIElementBehaviorSubmit(raw *webmshtml.IElementBehaviorSubmit) IElementB
 }
 
 // GetSubmitInfo wraps the raw GetSubmitInfo call.
-func (self IElementBehaviorSubmit) GetSubmitInfo(pSubmitData *webmshtml.IHTMLSubmitData) error {
-	return win32.HRESULTError(int32(self.Raw.GetSubmitInfo(pSubmitData)))
+func (self IElementBehaviorSubmit) GetSubmitInfo(pSubmitData IHTMLSubmitData) error {
+	return win32.HRESULTError(int32(self.Raw.GetSubmitInfo(pSubmitData.Raw)))
 }
 
 // Reset wraps the raw Reset call.
@@ -6096,8 +6096,8 @@ func WrapIElementNamespaceFactory(raw *webmshtml.IElementNamespaceFactory) IElem
 }
 
 // Create wraps the raw Create call.
-func (self IElementNamespaceFactory) Create(pNamespace *webmshtml.IElementNamespace) error {
-	return win32.HRESULTError(int32(self.Raw.Create(pNamespace)))
+func (self IElementNamespaceFactory) Create(pNamespace IElementNamespace) error {
+	return win32.HRESULTError(int32(self.Raw.Create(pNamespace.Raw)))
 }
 
 // IElementNamespaceFactory2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IElementNamespaceFactory2 with error-returning methods.
@@ -6112,8 +6112,8 @@ func WrapIElementNamespaceFactory2(raw *webmshtml.IElementNamespaceFactory2) IEl
 }
 
 // CreateWithImplementation wraps the raw CreateWithImplementation call.
-func (self IElementNamespaceFactory2) CreateWithImplementation(pNamespace *webmshtml.IElementNamespace, bstrImplementation foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.CreateWithImplementation(pNamespace, bstrImplementation)))
+func (self IElementNamespaceFactory2) CreateWithImplementation(pNamespace IElementNamespace, bstrImplementation foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.CreateWithImplementation(pNamespace.Raw, bstrImplementation)))
 }
 
 // IElementNamespaceFactoryCallback is an idiomatic wrapper over the raw COM interface Web.MsHtml.IElementNamespaceFactoryCallback with error-returning methods.
@@ -6128,8 +6128,8 @@ func WrapIElementNamespaceFactoryCallback(raw *webmshtml.IElementNamespaceFactor
 }
 
 // Resolve wraps the raw Resolve call.
-func (self IElementNamespaceFactoryCallback) Resolve(bstrNamespace foundation.BSTR, bstrTagName foundation.BSTR, bstrAttrs foundation.BSTR, pNamespace *webmshtml.IElementNamespace) error {
-	return win32.HRESULTError(int32(self.Raw.Resolve(bstrNamespace, bstrTagName, bstrAttrs, pNamespace)))
+func (self IElementNamespaceFactoryCallback) Resolve(bstrNamespace foundation.BSTR, bstrTagName foundation.BSTR, bstrAttrs foundation.BSTR, pNamespace IElementNamespace) error {
+	return win32.HRESULTError(int32(self.Raw.Resolve(bstrNamespace, bstrTagName, bstrAttrs, pNamespace.Raw)))
 }
 
 // IElementNamespaceTable is an idiomatic wrapper over the raw COM interface Web.MsHtml.IElementNamespaceTable with error-returning methods.
@@ -6187,17 +6187,17 @@ func WrapIElementSelector(raw *webmshtml.IElementSelector) IElementSelector {
 }
 
 // QuerySelector wraps the raw QuerySelector call.
-func (self IElementSelector) QuerySelector(v foundation.BSTR) (*webmshtml.IHTMLElement, error) {
+func (self IElementSelector) QuerySelector(v foundation.BSTR) (IHTMLElement, error) {
 	var _pel *webmshtml.IHTMLElement
 	_hr := self.Raw.QuerySelector(v, &_pel)
-	return _pel, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_pel), win32.HRESULTError(int32(_hr))
 }
 
 // QuerySelectorAll wraps the raw QuerySelectorAll call.
-func (self IElementSelector) QuerySelectorAll(v foundation.BSTR) (*webmshtml.IHTMLDOMChildrenCollection, error) {
+func (self IElementSelector) QuerySelectorAll(v foundation.BSTR) (IHTMLDOMChildrenCollection, error) {
 	var _pel *webmshtml.IHTMLDOMChildrenCollection
 	_hr := self.Raw.QuerySelectorAll(v, &_pel)
-	return _pel, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMChildrenCollection(_pel), win32.HRESULTError(int32(_hr))
 }
 
 // IElementTraversal is an idiomatic wrapper over the raw COM interface Web.MsHtml.IElementTraversal with error-returning methods.
@@ -6212,31 +6212,31 @@ func WrapIElementTraversal(raw *webmshtml.IElementTraversal) IElementTraversal {
 }
 
 // Get_firstElementChild wraps the raw Get_firstElementChild call.
-func (self IElementTraversal) Get_firstElementChild() (*webmshtml.IHTMLElement, error) {
+func (self IElementTraversal) Get_firstElementChild() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_firstElementChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_lastElementChild wraps the raw Get_lastElementChild call.
-func (self IElementTraversal) Get_lastElementChild() (*webmshtml.IHTMLElement, error) {
+func (self IElementTraversal) Get_lastElementChild() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_lastElementChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_previousElementSibling wraps the raw Get_previousElementSibling call.
-func (self IElementTraversal) Get_previousElementSibling() (*webmshtml.IHTMLElement, error) {
+func (self IElementTraversal) Get_previousElementSibling() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_previousElementSibling(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_nextElementSibling wraps the raw Get_nextElementSibling call.
-func (self IElementTraversal) Get_nextElementSibling() (*webmshtml.IHTMLElement, error) {
+func (self IElementTraversal) Get_nextElementSibling() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_nextElementSibling(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_childElementCount wraps the raw Get_childElementCount call.
@@ -6319,19 +6319,19 @@ func WrapIEventTarget(raw *webmshtml.IEventTarget) IEventTarget {
 }
 
 // AddEventListener wraps the raw AddEventListener call.
-func (self IEventTarget) AddEventListener(type_ foundation.BSTR, listener *systemcom.IDispatch, useCapture foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.AddEventListener(type_, listener, useCapture)))
+func (self IEventTarget) AddEventListener(type_ foundation.BSTR, listener systemcomidiom.IDispatch, useCapture foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.AddEventListener(type_, listener.Raw, useCapture)))
 }
 
 // RemoveEventListener wraps the raw RemoveEventListener call.
-func (self IEventTarget) RemoveEventListener(type_ foundation.BSTR, listener *systemcom.IDispatch, useCapture foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveEventListener(type_, listener, useCapture)))
+func (self IEventTarget) RemoveEventListener(type_ foundation.BSTR, listener systemcomidiom.IDispatch, useCapture foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveEventListener(type_, listener.Raw, useCapture)))
 }
 
 // DispatchEvent wraps the raw DispatchEvent call.
-func (self IEventTarget) DispatchEvent(evt *webmshtml.IDOMEvent) (foundation.VARIANT_BOOL, error) {
+func (self IEventTarget) DispatchEvent(evt IDOMEvent) (foundation.VARIANT_BOOL, error) {
 	var _pfResult foundation.VARIANT_BOOL
-	_hr := self.Raw.DispatchEvent(evt, &_pfResult)
+	_hr := self.Raw.DispatchEvent(evt.Raw, &_pfResult)
 	return _pfResult, win32.HRESULTError(int32(_hr))
 }
 
@@ -6362,13 +6362,13 @@ func (self IEventTarget2) GetListenersForType(pszEventType string) (*systemcom.S
 }
 
 // RegisterForDOMEventListeners wraps the raw RegisterForDOMEventListeners call.
-func (self IEventTarget2) RegisterForDOMEventListeners(pCallback *webmshtml.IDOMEventRegistrationCallback) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterForDOMEventListeners(pCallback)))
+func (self IEventTarget2) RegisterForDOMEventListeners(pCallback IDOMEventRegistrationCallback) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterForDOMEventListeners(pCallback.Raw)))
 }
 
 // UnregisterForDOMEventListeners wraps the raw UnregisterForDOMEventListeners call.
-func (self IEventTarget2) UnregisterForDOMEventListeners(pCallback *webmshtml.IDOMEventRegistrationCallback) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterForDOMEventListeners(pCallback)))
+func (self IEventTarget2) UnregisterForDOMEventListeners(pCallback IDOMEventRegistrationCallback) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterForDOMEventListeners(pCallback.Raw)))
 }
 
 // IFontNames is an idiomatic wrapper over the raw COM interface Web.MsHtml.IFontNames with error-returning methods.
@@ -6383,10 +6383,10 @@ func WrapIFontNames(raw *webmshtml.IFontNames) IFontNames {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IFontNames) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IFontNames) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -6415,10 +6415,10 @@ func WrapIGetSVGDocument(raw *webmshtml.IGetSVGDocument) IGetSVGDocument {
 }
 
 // GetSVGDocument wraps the raw GetSVGDocument call.
-func (self IGetSVGDocument) GetSVGDocument() (*systemcom.IDispatch, error) {
+func (self IGetSVGDocument) GetSVGDocument() (systemcomidiom.IDispatch, error) {
 	var _ppSVGDocument *systemcom.IDispatch
 	_hr := self.Raw.GetSVGDocument(&_ppSVGDocument)
-	return _ppSVGDocument, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppSVGDocument), win32.HRESULTError(int32(_hr))
 }
 
 // IHTCAttachBehavior is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTCAttachBehavior with error-returning methods.
@@ -6433,8 +6433,8 @@ func WrapIHTCAttachBehavior(raw *webmshtml.IHTCAttachBehavior) IHTCAttachBehavio
 }
 
 // FireEvent wraps the raw FireEvent call.
-func (self IHTCAttachBehavior) FireEvent(evt *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.FireEvent(evt)))
+func (self IHTCAttachBehavior) FireEvent(evt systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.FireEvent(evt.Raw)))
 }
 
 // DetachEvent wraps the raw DetachEvent call.
@@ -6465,31 +6465,31 @@ func WrapIHTCDefaultDispatch(raw *webmshtml.IHTCDefaultDispatch) IHTCDefaultDisp
 }
 
 // Get_element wraps the raw Get_element call.
-func (self IHTCDefaultDispatch) Get_element() (*webmshtml.IHTMLElement, error) {
+func (self IHTCDefaultDispatch) Get_element() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_element(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // CreateEventObject wraps the raw CreateEventObject call.
-func (self IHTCDefaultDispatch) CreateEventObject() (*webmshtml.IHTMLEventObj, error) {
+func (self IHTCDefaultDispatch) CreateEventObject() (IHTMLEventObj, error) {
 	var _eventObj *webmshtml.IHTMLEventObj
 	_hr := self.Raw.CreateEventObject(&_eventObj)
-	return _eventObj, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLEventObj(_eventObj), win32.HRESULTError(int32(_hr))
 }
 
 // Get_defaults wraps the raw Get_defaults call.
-func (self IHTCDefaultDispatch) Get_defaults() (*systemcom.IDispatch, error) {
+func (self IHTCDefaultDispatch) Get_defaults() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_defaults(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_document wraps the raw Get_document call.
-func (self IHTCDefaultDispatch) Get_document() (*systemcom.IDispatch, error) {
+func (self IHTCDefaultDispatch) Get_document() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_document(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTCDescBehavior is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTCDescBehavior with error-returning methods.
@@ -6529,8 +6529,8 @@ func WrapIHTCEventBehavior(raw *webmshtml.IHTCEventBehavior) IHTCEventBehavior {
 }
 
 // Fire wraps the raw Fire call.
-func (self IHTCEventBehavior) Fire(pvar *webmshtml.IHTMLEventObj) error {
-	return win32.HRESULTError(int32(self.Raw.Fire(pvar)))
+func (self IHTCEventBehavior) Fire(pvar IHTMLEventObj) error {
+	return win32.HRESULTError(int32(self.Raw.Fire(pvar.Raw)))
 }
 
 // IHTCMethodBehavior is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTCMethodBehavior with error-returning methods.
@@ -7552,10 +7552,10 @@ func (self IHTMLAreasCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLAreasCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLAreasCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -7586,10 +7586,10 @@ func WrapIHTMLAreasCollection3(raw *webmshtml.IHTMLAreasCollection3) IHTMLAreasC
 }
 
 // NamedItem wraps the raw NamedItem call.
-func (self IHTMLAreasCollection3) NamedItem(name foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IHTMLAreasCollection3) NamedItem(name foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _pdisp *systemcom.IDispatch
 	_hr := self.Raw.NamedItem(name, &_pdisp)
-	return _pdisp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_pdisp), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLAreasCollection4 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLAreasCollection4 with error-returning methods.
@@ -7611,17 +7611,17 @@ func (self IHTMLAreasCollection4) Get_length() (int32, error) {
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLAreasCollection4) Item(index int32) (*webmshtml.IHTMLElement2, error) {
+func (self IHTMLAreasCollection4) Item(index int32) (IHTMLElement2, error) {
 	var _pNode *webmshtml.IHTMLElement2
 	_hr := self.Raw.Item(index, &_pNode)
-	return _pNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement2(_pNode), win32.HRESULTError(int32(_hr))
 }
 
 // NamedItem wraps the raw NamedItem call.
-func (self IHTMLAreasCollection4) NamedItem(name foundation.BSTR) (*webmshtml.IHTMLElement2, error) {
+func (self IHTMLAreasCollection4) NamedItem(name foundation.BSTR) (IHTMLElement2, error) {
 	var _pNode *webmshtml.IHTMLElement2
 	_hr := self.Raw.NamedItem(name, &_pNode)
-	return _pNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement2(_pNode), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLAttributeCollection is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLAttributeCollection with error-returning methods.
@@ -7643,17 +7643,17 @@ func (self IHTMLAttributeCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLAttributeCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLAttributeCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLAttributeCollection) Item(name *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+func (self IHTMLAttributeCollection) Item(name *systemvariant.VARIANT) (systemcomidiom.IDispatch, error) {
 	var _pdisp *systemcom.IDispatch
 	_hr := self.Raw.Item(name, &_pdisp)
-	return _pdisp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_pdisp), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLAttributeCollection2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLAttributeCollection2 with error-returning methods.
@@ -7668,24 +7668,24 @@ func WrapIHTMLAttributeCollection2(raw *webmshtml.IHTMLAttributeCollection2) IHT
 }
 
 // GetNamedItem wraps the raw GetNamedItem call.
-func (self IHTMLAttributeCollection2) GetNamedItem(bstrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLAttributeCollection2) GetNamedItem(bstrName foundation.BSTR) (IHTMLDOMAttribute, error) {
 	var _newretNode *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.GetNamedItem(bstrName, &_newretNode)
-	return _newretNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_newretNode), win32.HRESULTError(int32(_hr))
 }
 
 // SetNamedItem wraps the raw SetNamedItem call.
-func (self IHTMLAttributeCollection2) SetNamedItem(ppNode *webmshtml.IHTMLDOMAttribute) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLAttributeCollection2) SetNamedItem(ppNode IHTMLDOMAttribute) (IHTMLDOMAttribute, error) {
 	var _newretNode *webmshtml.IHTMLDOMAttribute
-	_hr := self.Raw.SetNamedItem(ppNode, &_newretNode)
-	return _newretNode, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SetNamedItem(ppNode.Raw, &_newretNode)
+	return WrapIHTMLDOMAttribute(_newretNode), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveNamedItem wraps the raw RemoveNamedItem call.
-func (self IHTMLAttributeCollection2) RemoveNamedItem(bstrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLAttributeCollection2) RemoveNamedItem(bstrName foundation.BSTR) (IHTMLDOMAttribute, error) {
 	var _newretNode *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.RemoveNamedItem(bstrName, &_newretNode)
-	return _newretNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_newretNode), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLAttributeCollection3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLAttributeCollection3 with error-returning methods.
@@ -7700,31 +7700,31 @@ func WrapIHTMLAttributeCollection3(raw *webmshtml.IHTMLAttributeCollection3) IHT
 }
 
 // GetNamedItem wraps the raw GetNamedItem call.
-func (self IHTMLAttributeCollection3) GetNamedItem(bstrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLAttributeCollection3) GetNamedItem(bstrName foundation.BSTR) (IHTMLDOMAttribute, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.GetNamedItem(bstrName, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // SetNamedItem wraps the raw SetNamedItem call.
-func (self IHTMLAttributeCollection3) SetNamedItem(pNodeIn *webmshtml.IHTMLDOMAttribute) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLAttributeCollection3) SetNamedItem(pNodeIn IHTMLDOMAttribute) (IHTMLDOMAttribute, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute
-	_hr := self.Raw.SetNamedItem(pNodeIn, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SetNamedItem(pNodeIn.Raw, &_ppNodeOut)
+	return WrapIHTMLDOMAttribute(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveNamedItem wraps the raw RemoveNamedItem call.
-func (self IHTMLAttributeCollection3) RemoveNamedItem(bstrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLAttributeCollection3) RemoveNamedItem(bstrName foundation.BSTR) (IHTMLDOMAttribute, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.RemoveNamedItem(bstrName, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLAttributeCollection3) Item(index int32) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLAttributeCollection3) Item(index int32) (IHTMLDOMAttribute, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.Item(index, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
@@ -7746,52 +7746,52 @@ func WrapIHTMLAttributeCollection4(raw *webmshtml.IHTMLAttributeCollection4) IHT
 }
 
 // GetNamedItemNS wraps the raw GetNamedItemNS call.
-func (self IHTMLAttributeCollection4) GetNamedItemNS(pvarNS *systemvariant.VARIANT, bstrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLAttributeCollection4) GetNamedItemNS(pvarNS *systemvariant.VARIANT, bstrName foundation.BSTR) (IHTMLDOMAttribute2, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute2
 	_hr := self.Raw.GetNamedItemNS(pvarNS, bstrName, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute2(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // SetNamedItemNS wraps the raw SetNamedItemNS call.
-func (self IHTMLAttributeCollection4) SetNamedItemNS(pNodeIn *webmshtml.IHTMLDOMAttribute2) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLAttributeCollection4) SetNamedItemNS(pNodeIn IHTMLDOMAttribute2) (IHTMLDOMAttribute2, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute2
-	_hr := self.Raw.SetNamedItemNS(pNodeIn, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SetNamedItemNS(pNodeIn.Raw, &_ppNodeOut)
+	return WrapIHTMLDOMAttribute2(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveNamedItemNS wraps the raw RemoveNamedItemNS call.
-func (self IHTMLAttributeCollection4) RemoveNamedItemNS(pvarNS *systemvariant.VARIANT, bstrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLAttributeCollection4) RemoveNamedItemNS(pvarNS *systemvariant.VARIANT, bstrName foundation.BSTR) (IHTMLDOMAttribute2, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute2
 	_hr := self.Raw.RemoveNamedItemNS(pvarNS, bstrName, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute2(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // GetNamedItem wraps the raw GetNamedItem call.
-func (self IHTMLAttributeCollection4) GetNamedItem(bstrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLAttributeCollection4) GetNamedItem(bstrName foundation.BSTR) (IHTMLDOMAttribute2, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute2
 	_hr := self.Raw.GetNamedItem(bstrName, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute2(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // SetNamedItem wraps the raw SetNamedItem call.
-func (self IHTMLAttributeCollection4) SetNamedItem(pNodeIn *webmshtml.IHTMLDOMAttribute2) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLAttributeCollection4) SetNamedItem(pNodeIn IHTMLDOMAttribute2) (IHTMLDOMAttribute2, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute2
-	_hr := self.Raw.SetNamedItem(pNodeIn, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SetNamedItem(pNodeIn.Raw, &_ppNodeOut)
+	return WrapIHTMLDOMAttribute2(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveNamedItem wraps the raw RemoveNamedItem call.
-func (self IHTMLAttributeCollection4) RemoveNamedItem(bstrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLAttributeCollection4) RemoveNamedItem(bstrName foundation.BSTR) (IHTMLDOMAttribute2, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute2
 	_hr := self.Raw.RemoveNamedItem(bstrName, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute2(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLAttributeCollection4) Item(index int32) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLAttributeCollection4) Item(index int32) (IHTMLDOMAttribute2, error) {
 	var _ppNodeOut *webmshtml.IHTMLDOMAttribute2
 	_hr := self.Raw.Item(index, &_ppNodeOut)
-	return _ppNodeOut, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute2(_ppNodeOut), win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
@@ -8222,10 +8222,10 @@ func (self IHTMLBodyElement) Get_onbeforeunload() (systemvariant.VARIANT, error)
 }
 
 // CreateTextRange wraps the raw CreateTextRange call.
-func (self IHTMLBodyElement) CreateTextRange() (*webmshtml.IHTMLTxtRange, error) {
+func (self IHTMLBodyElement) CreateTextRange() (IHTMLTxtRange, error) {
 	var _range_ *webmshtml.IHTMLTxtRange
 	_hr := self.Raw.CreateTextRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTxtRange(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLBodyElement2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLBodyElement2 with error-returning methods.
@@ -8359,10 +8359,10 @@ func (self IHTMLBookmarkCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLBookmarkCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLBookmarkCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
@@ -8434,17 +8434,17 @@ func (self IHTMLButtonElement) Get_disabled() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLButtonElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLButtonElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTextRange wraps the raw CreateTextRange call.
-func (self IHTMLButtonElement) CreateTextRange() (*webmshtml.IHTMLTxtRange, error) {
+func (self IHTMLButtonElement) CreateTextRange() (IHTMLTxtRange, error) {
 	var _range_ *webmshtml.IHTMLTxtRange
 	_hr := self.Raw.CreateTextRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTxtRange(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLButtonElement2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLButtonElement2 with error-returning methods.
@@ -8496,10 +8496,10 @@ func (self IHTMLCSSImportRule) Get_media() (systemvariant.VARIANT, error) {
 }
 
 // Get_styleSheet wraps the raw Get_styleSheet call.
-func (self IHTMLCSSImportRule) Get_styleSheet() (*webmshtml.IHTMLStyleSheet, error) {
+func (self IHTMLCSSImportRule) Get_styleSheet() (IHTMLStyleSheet, error) {
 	var _p *webmshtml.IHTMLStyleSheet
 	_hr := self.Raw.Get_styleSheet(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheet(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLCSSMediaList is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLCSSMediaList with error-returning methods.
@@ -8568,10 +8568,10 @@ func (self IHTMLCSSMediaRule) Get_media() (systemvariant.VARIANT, error) {
 }
 
 // Get_cssRules wraps the raw Get_cssRules call.
-func (self IHTMLCSSMediaRule) Get_cssRules() (*webmshtml.IHTMLStyleSheetRulesCollection, error) {
+func (self IHTMLCSSMediaRule) Get_cssRules() (IHTMLStyleSheetRulesCollection, error) {
 	var _p *webmshtml.IHTMLStyleSheetRulesCollection
 	_hr := self.Raw.Get_cssRules(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRulesCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InsertRule wraps the raw InsertRule call.
@@ -8642,17 +8642,17 @@ func (self IHTMLCSSRule) Get_cssText() (foundation.BSTR, error) {
 }
 
 // Get_parentRule wraps the raw Get_parentRule call.
-func (self IHTMLCSSRule) Get_parentRule() (*webmshtml.IHTMLCSSRule, error) {
+func (self IHTMLCSSRule) Get_parentRule() (IHTMLCSSRule, error) {
 	var _p *webmshtml.IHTMLCSSRule
 	_hr := self.Raw.Get_parentRule(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLCSSRule(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_parentStyleSheet wraps the raw Get_parentStyleSheet call.
-func (self IHTMLCSSRule) Get_parentStyleSheet() (*webmshtml.IHTMLStyleSheet, error) {
+func (self IHTMLCSSRule) Get_parentStyleSheet() (IHTMLStyleSheet, error) {
 	var _p *webmshtml.IHTMLStyleSheet
 	_hr := self.Raw.Get_parentStyleSheet(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheet(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLCSSStyleDeclaration is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLCSSStyleDeclaration with error-returning methods.
@@ -12598,10 +12598,10 @@ func (self IHTMLCanvasElement) Get_height() (int32, error) {
 }
 
 // GetContext wraps the raw GetContext call.
-func (self IHTMLCanvasElement) GetContext(contextId foundation.BSTR) (*webmshtml.ICanvasRenderingContext2D, error) {
+func (self IHTMLCanvasElement) GetContext(contextId foundation.BSTR) (ICanvasRenderingContext2D, error) {
 	var _ppContext *webmshtml.ICanvasRenderingContext2D
 	_hr := self.Raw.GetContext(contextId, &_ppContext)
-	return _ppContext, win32.HRESULTError(int32(_hr))
+	return WrapICanvasRenderingContext2D(_ppContext), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLCaret is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLCaret with error-returning methods.
@@ -12616,26 +12616,26 @@ func WrapIHTMLCaret(raw *webmshtml.IHTMLCaret) IHTMLCaret {
 }
 
 // MoveCaretToPointer wraps the raw MoveCaretToPointer call.
-func (self IHTMLCaret) MoveCaretToPointer(pDispPointer *webmshtml.IDisplayPointer, fScrollIntoView bool, eDir webmshtml.CARET_DIRECTION) error {
+func (self IHTMLCaret) MoveCaretToPointer(pDispPointer IDisplayPointer, fScrollIntoView bool, eDir webmshtml.CARET_DIRECTION) error {
 	_fScrollIntoView := foundation.BOOL(win32.Bool32(fScrollIntoView))
-	return win32.HRESULTError(int32(self.Raw.MoveCaretToPointer(pDispPointer, _fScrollIntoView, eDir)))
+	return win32.HRESULTError(int32(self.Raw.MoveCaretToPointer(pDispPointer.Raw, _fScrollIntoView, eDir)))
 }
 
 // MoveCaretToPointerEx wraps the raw MoveCaretToPointerEx call.
-func (self IHTMLCaret) MoveCaretToPointerEx(pDispPointer *webmshtml.IDisplayPointer, fVisible bool, fScrollIntoView bool, eDir webmshtml.CARET_DIRECTION) error {
+func (self IHTMLCaret) MoveCaretToPointerEx(pDispPointer IDisplayPointer, fVisible bool, fScrollIntoView bool, eDir webmshtml.CARET_DIRECTION) error {
 	_fVisible := foundation.BOOL(win32.Bool32(fVisible))
 	_fScrollIntoView := foundation.BOOL(win32.Bool32(fScrollIntoView))
-	return win32.HRESULTError(int32(self.Raw.MoveCaretToPointerEx(pDispPointer, _fVisible, _fScrollIntoView, eDir)))
+	return win32.HRESULTError(int32(self.Raw.MoveCaretToPointerEx(pDispPointer.Raw, _fVisible, _fScrollIntoView, eDir)))
 }
 
 // MoveMarkupPointerToCaret wraps the raw MoveMarkupPointerToCaret call.
-func (self IHTMLCaret) MoveMarkupPointerToCaret(pIMarkupPointer *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveMarkupPointerToCaret(pIMarkupPointer)))
+func (self IHTMLCaret) MoveMarkupPointerToCaret(pIMarkupPointer IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveMarkupPointerToCaret(pIMarkupPointer.Raw)))
 }
 
 // MoveDisplayPointerToCaret wraps the raw MoveDisplayPointerToCaret call.
-func (self IHTMLCaret) MoveDisplayPointerToCaret(pDispPointer *webmshtml.IDisplayPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveDisplayPointerToCaret(pDispPointer)))
+func (self IHTMLCaret) MoveDisplayPointerToCaret(pDispPointer IDisplayPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveDisplayPointerToCaret(pDispPointer.Raw)))
 }
 
 // IsVisible wraps the raw IsVisible call.
@@ -12993,8 +12993,8 @@ func (self IHTMLComputedStyle) Get_OL() (foundation.VARIANT_BOOL, error) {
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IHTMLComputedStyle) IsEqual(pComputedStyle *webmshtml.IHTMLComputedStyle, pfEqual *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pComputedStyle, pfEqual)))
+func (self IHTMLComputedStyle) IsEqual(pComputedStyle IHTMLComputedStyle, pfEqual *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pComputedStyle.Raw, pfEqual)))
 }
 
 // IHTMLControlElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLControlElement with error-returning methods.
@@ -13064,13 +13064,13 @@ func (self IHTMLControlElement) Blur() error {
 }
 
 // AddFilter wraps the raw AddFilter call.
-func (self IHTMLControlElement) AddFilter(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddFilter(pUnk)))
+func (self IHTMLControlElement) AddFilter(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddFilter(pUnk.Raw)))
 }
 
 // RemoveFilter wraps the raw RemoveFilter call.
-func (self IHTMLControlElement) RemoveFilter(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveFilter(pUnk)))
+func (self IHTMLControlElement) RemoveFilter(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveFilter(pUnk.Raw)))
 }
 
 // Get_clientHeight wraps the raw Get_clientHeight call.
@@ -13118,8 +13118,8 @@ func (self IHTMLControlRange) Select() error {
 }
 
 // Add wraps the raw Add call.
-func (self IHTMLControlRange) Add(item *webmshtml.IHTMLControlElement) error {
-	return win32.HRESULTError(int32(self.Raw.Add(item)))
+func (self IHTMLControlRange) Add(item IHTMLControlElement) error {
+	return win32.HRESULTError(int32(self.Raw.Add(item.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -13128,10 +13128,10 @@ func (self IHTMLControlRange) Remove(index int32) error {
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLControlRange) Item(index int32) (*webmshtml.IHTMLElement, error) {
+func (self IHTMLControlRange) Item(index int32) (IHTMLElement, error) {
 	var _pdisp *webmshtml.IHTMLElement
 	_hr := self.Raw.Item(index, &_pdisp)
-	return _pdisp, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_pdisp), win32.HRESULTError(int32(_hr))
 }
 
 // QueryCommandSupported wraps the raw QueryCommandSupported call.
@@ -13184,10 +13184,10 @@ func (self IHTMLControlRange) ExecCommandShowHelp(cmdID foundation.BSTR) (founda
 }
 
 // CommonParentElement wraps the raw CommonParentElement call.
-func (self IHTMLControlRange) CommonParentElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLControlRange) CommonParentElement() (IHTMLElement, error) {
 	var _parent *webmshtml.IHTMLElement
 	_hr := self.Raw.CommonParentElement(&_parent)
-	return _parent, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_parent), win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
@@ -13209,8 +13209,8 @@ func WrapIHTMLControlRange2(raw *webmshtml.IHTMLControlRange2) IHTMLControlRange
 }
 
 // AddElement wraps the raw AddElement call.
-func (self IHTMLControlRange2) AddElement(item *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.AddElement(item)))
+func (self IHTMLControlRange2) AddElement(item IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.AddElement(item.Raw)))
 }
 
 // IHTMLCurrentStyle is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLCurrentStyle with error-returning methods.
@@ -14301,80 +14301,80 @@ func (self IHTMLDOMAttribute2) Get_nodeType() (int32, error) {
 }
 
 // Get_parentNode wraps the raw Get_parentNode call.
-func (self IHTMLDOMAttribute2) Get_parentNode() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute2) Get_parentNode() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_parentNode(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_childNodes wraps the raw Get_childNodes call.
-func (self IHTMLDOMAttribute2) Get_childNodes() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMAttribute2) Get_childNodes() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_childNodes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_firstChild wraps the raw Get_firstChild call.
-func (self IHTMLDOMAttribute2) Get_firstChild() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute2) Get_firstChild() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_firstChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_lastChild wraps the raw Get_lastChild call.
-func (self IHTMLDOMAttribute2) Get_lastChild() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute2) Get_lastChild() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_lastChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_previousSibling wraps the raw Get_previousSibling call.
-func (self IHTMLDOMAttribute2) Get_previousSibling() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute2) Get_previousSibling() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_previousSibling(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_nextSibling wraps the raw Get_nextSibling call.
-func (self IHTMLDOMAttribute2) Get_nextSibling() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute2) Get_nextSibling() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_nextSibling(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_attributes wraps the raw Get_attributes call.
-func (self IHTMLDOMAttribute2) Get_attributes() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMAttribute2) Get_attributes() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_attributes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ownerDocument wraps the raw Get_ownerDocument call.
-func (self IHTMLDOMAttribute2) Get_ownerDocument() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMAttribute2) Get_ownerDocument() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_ownerDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceChild wraps the raw ReplaceChild call.
-func (self IHTMLDOMAttribute2) ReplaceChild(newChild *webmshtml.IHTMLDOMNode, oldChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute2) ReplaceChild(newChild IHTMLDOMNode, oldChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.ReplaceChild(newChild, oldChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceChild(newChild.Raw, oldChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveChild wraps the raw RemoveChild call.
-func (self IHTMLDOMAttribute2) RemoveChild(oldChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute2) RemoveChild(oldChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.RemoveChild(oldChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.RemoveChild(oldChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // AppendChild wraps the raw AppendChild call.
-func (self IHTMLDOMAttribute2) AppendChild(newChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute2) AppendChild(newChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.AppendChild(newChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AppendChild(newChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // HasChildNodes wraps the raw HasChildNodes call.
@@ -14385,10 +14385,10 @@ func (self IHTMLDOMAttribute2) HasChildNodes() (foundation.VARIANT_BOOL, error) 
 }
 
 // CloneNode wraps the raw CloneNode call.
-func (self IHTMLDOMAttribute2) CloneNode(fDeep foundation.VARIANT_BOOL) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLDOMAttribute2) CloneNode(fDeep foundation.VARIANT_BOOL) (IHTMLDOMAttribute, error) {
 	var _clonedNode *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.CloneNode(fDeep, &_clonedNode)
-	return _clonedNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_clonedNode), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMAttribute3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMAttribute3 with error-returning methods.
@@ -14429,10 +14429,10 @@ func (self IHTMLDOMAttribute3) Get_specified() (foundation.VARIANT_BOOL, error) 
 }
 
 // Get_ownerElement wraps the raw Get_ownerElement call.
-func (self IHTMLDOMAttribute3) Get_ownerElement() (*webmshtml.IHTMLElement2, error) {
+func (self IHTMLDOMAttribute3) Get_ownerElement() (IHTMLElement2, error) {
 	var _p *webmshtml.IHTMLElement2
 	_hr := self.Raw.Get_ownerElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMAttribute4 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMAttribute4 with error-returning methods.
@@ -14480,24 +14480,24 @@ func (self IHTMLDOMAttribute4) Get_value() (foundation.BSTR, error) {
 }
 
 // Get_firstChild wraps the raw Get_firstChild call.
-func (self IHTMLDOMAttribute4) Get_firstChild() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute4) Get_firstChild() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_firstChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_lastChild wraps the raw Get_lastChild call.
-func (self IHTMLDOMAttribute4) Get_lastChild() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMAttribute4) Get_lastChild() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_lastChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_childNodes wraps the raw Get_childNodes call.
-func (self IHTMLDOMAttribute4) Get_childNodes() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMAttribute4) Get_childNodes() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_childNodes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // HasAttributes wraps the raw HasAttributes call.
@@ -14545,17 +14545,17 @@ func (self IHTMLDOMChildrenCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLDOMChildrenCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLDOMChildrenCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLDOMChildrenCollection) Item(index int32) (*systemcom.IDispatch, error) {
+func (self IHTMLDOMChildrenCollection) Item(index int32) (systemcomidiom.IDispatch, error) {
 	var _ppItem *systemcom.IDispatch
 	_hr := self.Raw.Item(index, &_ppItem)
-	return _ppItem, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppItem), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMChildrenCollection2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMChildrenCollection2 with error-returning methods.
@@ -14570,10 +14570,10 @@ func WrapIHTMLDOMChildrenCollection2(raw *webmshtml.IHTMLDOMChildrenCollection2)
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLDOMChildrenCollection2) Item(index int32) (*systemcom.IDispatch, error) {
+func (self IHTMLDOMChildrenCollection2) Item(index int32) (systemcomidiom.IDispatch, error) {
 	var _ppItem *systemcom.IDispatch
 	_hr := self.Raw.Item(index, &_ppItem)
-	return _ppItem, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppItem), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMConstructor is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMConstructor with error-returning methods.
@@ -14588,10 +14588,10 @@ func WrapIHTMLDOMConstructor(raw *webmshtml.IHTMLDOMConstructor) IHTMLDOMConstru
 }
 
 // Get_constructor wraps the raw Get_constructor call.
-func (self IHTMLDOMConstructor) Get_constructor() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructor) Get_constructor() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_constructor(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // LookupGetter wraps the raw LookupGetter call.
@@ -14630,745 +14630,745 @@ func WrapIHTMLDOMConstructorCollection(raw *webmshtml.IHTMLDOMConstructorCollect
 }
 
 // Get_Attr wraps the raw Get_Attr call.
-func (self IHTMLDOMConstructorCollection) Get_Attr() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Attr() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Attr(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_BehaviorUrnsCollection wraps the raw Get_BehaviorUrnsCollection call.
-func (self IHTMLDOMConstructorCollection) Get_BehaviorUrnsCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_BehaviorUrnsCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_BehaviorUrnsCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_BookmarkCollection wraps the raw Get_BookmarkCollection call.
-func (self IHTMLDOMConstructorCollection) Get_BookmarkCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_BookmarkCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_BookmarkCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CompatibleInfo wraps the raw Get_CompatibleInfo call.
-func (self IHTMLDOMConstructorCollection) Get_CompatibleInfo() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_CompatibleInfo() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_CompatibleInfo(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CompatibleInfoCollection wraps the raw Get_CompatibleInfoCollection call.
-func (self IHTMLDOMConstructorCollection) Get_CompatibleInfoCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_CompatibleInfoCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_CompatibleInfoCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ControlRangeCollection wraps the raw Get_ControlRangeCollection call.
-func (self IHTMLDOMConstructorCollection) Get_ControlRangeCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_ControlRangeCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_ControlRangeCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CSSCurrentStyleDeclaration wraps the raw Get_CSSCurrentStyleDeclaration call.
-func (self IHTMLDOMConstructorCollection) Get_CSSCurrentStyleDeclaration() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_CSSCurrentStyleDeclaration() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_CSSCurrentStyleDeclaration(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CSSRuleList wraps the raw Get_CSSRuleList call.
-func (self IHTMLDOMConstructorCollection) Get_CSSRuleList() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_CSSRuleList() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_CSSRuleList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CSSRuleStyleDeclaration wraps the raw Get_CSSRuleStyleDeclaration call.
-func (self IHTMLDOMConstructorCollection) Get_CSSRuleStyleDeclaration() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_CSSRuleStyleDeclaration() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_CSSRuleStyleDeclaration(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CSSStyleDeclaration wraps the raw Get_CSSStyleDeclaration call.
-func (self IHTMLDOMConstructorCollection) Get_CSSStyleDeclaration() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_CSSStyleDeclaration() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_CSSStyleDeclaration(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CSSStyleRule wraps the raw Get_CSSStyleRule call.
-func (self IHTMLDOMConstructorCollection) Get_CSSStyleRule() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_CSSStyleRule() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_CSSStyleRule(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_CSSStyleSheet wraps the raw Get_CSSStyleSheet call.
-func (self IHTMLDOMConstructorCollection) Get_CSSStyleSheet() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_CSSStyleSheet() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_CSSStyleSheet(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DataTransfer wraps the raw Get_DataTransfer call.
-func (self IHTMLDOMConstructorCollection) Get_DataTransfer() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_DataTransfer() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_DataTransfer(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DOMImplementation wraps the raw Get_DOMImplementation call.
-func (self IHTMLDOMConstructorCollection) Get_DOMImplementation() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_DOMImplementation() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_DOMImplementation(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Element wraps the raw Get_Element call.
-func (self IHTMLDOMConstructorCollection) Get_Element() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Element() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Element(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Event wraps the raw Get_Event call.
-func (self IHTMLDOMConstructorCollection) Get_Event() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Event() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Event(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_History wraps the raw Get_History call.
-func (self IHTMLDOMConstructorCollection) Get_History() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_History() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_History(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTCElementBehaviorDefaults wraps the raw Get_HTCElementBehaviorDefaults call.
-func (self IHTMLDOMConstructorCollection) Get_HTCElementBehaviorDefaults() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTCElementBehaviorDefaults() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTCElementBehaviorDefaults(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLAnchorElement wraps the raw Get_HTMLAnchorElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLAnchorElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLAnchorElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLAnchorElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLAreaElement wraps the raw Get_HTMLAreaElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLAreaElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLAreaElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLAreaElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLAreasCollection wraps the raw Get_HTMLAreasCollection call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLAreasCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLAreasCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLAreasCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLBaseElement wraps the raw Get_HTMLBaseElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLBaseElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLBaseElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLBaseElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLBaseFontElement wraps the raw Get_HTMLBaseFontElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLBaseFontElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLBaseFontElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLBaseFontElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLBGSoundElement wraps the raw Get_HTMLBGSoundElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLBGSoundElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLBGSoundElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLBGSoundElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLBlockElement wraps the raw Get_HTMLBlockElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLBlockElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLBlockElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLBlockElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLBodyElement wraps the raw Get_HTMLBodyElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLBodyElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLBodyElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLBodyElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLBRElement wraps the raw Get_HTMLBRElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLBRElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLBRElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLBRElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLButtonElement wraps the raw Get_HTMLButtonElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLButtonElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLButtonElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLButtonElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLCollection wraps the raw Get_HTMLCollection call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLCommentElement wraps the raw Get_HTMLCommentElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLCommentElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLCommentElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLCommentElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLDDElement wraps the raw Get_HTMLDDElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLDDElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLDDElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLDDElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLDivElement wraps the raw Get_HTMLDivElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLDivElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLDivElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLDivElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLDocument wraps the raw Get_HTMLDocument call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLDocument() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLDocument() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLDListElement wraps the raw Get_HTMLDListElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLDListElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLDListElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLDListElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLDTElement wraps the raw Get_HTMLDTElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLDTElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLDTElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLDTElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLEmbedElement wraps the raw Get_HTMLEmbedElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLEmbedElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLEmbedElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLEmbedElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLFieldSetElement wraps the raw Get_HTMLFieldSetElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLFieldSetElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLFieldSetElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLFieldSetElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLFontElement wraps the raw Get_HTMLFontElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLFontElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLFontElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLFontElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLFormElement wraps the raw Get_HTMLFormElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLFormElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLFormElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLFormElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLFrameElement wraps the raw Get_HTMLFrameElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLFrameElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLFrameElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLFrameElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLFrameSetElement wraps the raw Get_HTMLFrameSetElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLFrameSetElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLFrameSetElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLFrameSetElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLGenericElement wraps the raw Get_HTMLGenericElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLGenericElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLGenericElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLGenericElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLHeadElement wraps the raw Get_HTMLHeadElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLHeadElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLHeadElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLHeadElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLHeadingElement wraps the raw Get_HTMLHeadingElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLHeadingElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLHeadingElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLHeadingElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLHRElement wraps the raw Get_HTMLHRElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLHRElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLHRElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLHRElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLHtmlElement wraps the raw Get_HTMLHtmlElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLHtmlElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLHtmlElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLHtmlElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLIFrameElement wraps the raw Get_HTMLIFrameElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLIFrameElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLIFrameElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLIFrameElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLImageElement wraps the raw Get_HTMLImageElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLImageElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLImageElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLImageElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLInputElement wraps the raw Get_HTMLInputElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLInputElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLInputElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLInputElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLIsIndexElement wraps the raw Get_HTMLIsIndexElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLIsIndexElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLIsIndexElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLIsIndexElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLLabelElement wraps the raw Get_HTMLLabelElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLLabelElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLLabelElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLLabelElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLLegendElement wraps the raw Get_HTMLLegendElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLLegendElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLLegendElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLLegendElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLLIElement wraps the raw Get_HTMLLIElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLLIElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLLIElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLLIElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLLinkElement wraps the raw Get_HTMLLinkElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLLinkElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLLinkElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLLinkElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLMapElement wraps the raw Get_HTMLMapElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLMapElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLMapElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLMapElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLMarqueeElement wraps the raw Get_HTMLMarqueeElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLMarqueeElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLMarqueeElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLMarqueeElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLMetaElement wraps the raw Get_HTMLMetaElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLMetaElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLMetaElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLMetaElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLModelessDialog wraps the raw Get_HTMLModelessDialog call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLModelessDialog() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLModelessDialog() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLModelessDialog(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLNamespaceInfo wraps the raw Get_HTMLNamespaceInfo call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLNamespaceInfo() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLNamespaceInfo() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLNamespaceInfo(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLNamespaceInfoCollection wraps the raw Get_HTMLNamespaceInfoCollection call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLNamespaceInfoCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLNamespaceInfoCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLNamespaceInfoCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLNextIdElement wraps the raw Get_HTMLNextIdElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLNextIdElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLNextIdElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLNextIdElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLNoShowElement wraps the raw Get_HTMLNoShowElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLNoShowElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLNoShowElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLNoShowElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLObjectElement wraps the raw Get_HTMLObjectElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLObjectElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLObjectElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLObjectElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLOListElement wraps the raw Get_HTMLOListElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLOListElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLOListElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLOListElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLOptionElement wraps the raw Get_HTMLOptionElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLOptionElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLOptionElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLOptionElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLParagraphElement wraps the raw Get_HTMLParagraphElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLParagraphElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLParagraphElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLParagraphElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLParamElement wraps the raw Get_HTMLParamElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLParamElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLParamElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLParamElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLPhraseElement wraps the raw Get_HTMLPhraseElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLPhraseElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLPhraseElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLPhraseElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLPluginsCollection wraps the raw Get_HTMLPluginsCollection call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLPluginsCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLPluginsCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLPluginsCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLPopup wraps the raw Get_HTMLPopup call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLPopup() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLPopup() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLPopup(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLScriptElement wraps the raw Get_HTMLScriptElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLScriptElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLScriptElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLScriptElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLSelectElement wraps the raw Get_HTMLSelectElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLSelectElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLSelectElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLSelectElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLSpanElement wraps the raw Get_HTMLSpanElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLSpanElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLSpanElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLSpanElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLStyleElement wraps the raw Get_HTMLStyleElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLStyleElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLStyleElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLStyleElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTableCaptionElement wraps the raw Get_HTMLTableCaptionElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTableCaptionElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTableCaptionElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTableCaptionElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTableCellElement wraps the raw Get_HTMLTableCellElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTableCellElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTableCellElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTableCellElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTableColElement wraps the raw Get_HTMLTableColElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTableColElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTableColElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTableColElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTableElement wraps the raw Get_HTMLTableElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTableElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTableElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTableElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTableRowElement wraps the raw Get_HTMLTableRowElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTableRowElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTableRowElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTableRowElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTableSectionElement wraps the raw Get_HTMLTableSectionElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTableSectionElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTableSectionElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTableSectionElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTextAreaElement wraps the raw Get_HTMLTextAreaElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTextAreaElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTextAreaElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTextAreaElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTextElement wraps the raw Get_HTMLTextElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTextElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTextElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTextElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLTitleElement wraps the raw Get_HTMLTitleElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLTitleElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLTitleElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLTitleElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLUListElement wraps the raw Get_HTMLUListElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLUListElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLUListElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLUListElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_HTMLUnknownElement wraps the raw Get_HTMLUnknownElement call.
-func (self IHTMLDOMConstructorCollection) Get_HTMLUnknownElement() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_HTMLUnknownElement() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_HTMLUnknownElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Image wraps the raw Get_Image call.
-func (self IHTMLDOMConstructorCollection) Get_Image() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Image() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Image(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Location wraps the raw Get_Location call.
-func (self IHTMLDOMConstructorCollection) Get_Location() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Location() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Location(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_NamedNodeMap wraps the raw Get_NamedNodeMap call.
-func (self IHTMLDOMConstructorCollection) Get_NamedNodeMap() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_NamedNodeMap() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_NamedNodeMap(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Navigator wraps the raw Get_Navigator call.
-func (self IHTMLDOMConstructorCollection) Get_Navigator() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Navigator() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Navigator(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_NodeList wraps the raw Get_NodeList call.
-func (self IHTMLDOMConstructorCollection) Get_NodeList() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_NodeList() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_NodeList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Option wraps the raw Get_Option call.
-func (self IHTMLDOMConstructorCollection) Get_Option() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Option() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Option(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Screen wraps the raw Get_Screen call.
-func (self IHTMLDOMConstructorCollection) Get_Screen() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Screen() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Screen(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Selection wraps the raw Get_Selection call.
-func (self IHTMLDOMConstructorCollection) Get_Selection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Selection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Selection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_StaticNodeList wraps the raw Get_StaticNodeList call.
-func (self IHTMLDOMConstructorCollection) Get_StaticNodeList() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_StaticNodeList() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_StaticNodeList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Storage wraps the raw Get_Storage call.
-func (self IHTMLDOMConstructorCollection) Get_Storage() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Storage() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Storage(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_StyleSheetList wraps the raw Get_StyleSheetList call.
-func (self IHTMLDOMConstructorCollection) Get_StyleSheetList() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_StyleSheetList() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_StyleSheetList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_StyleSheetPage wraps the raw Get_StyleSheetPage call.
-func (self IHTMLDOMConstructorCollection) Get_StyleSheetPage() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_StyleSheetPage() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_StyleSheetPage(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_StyleSheetPageList wraps the raw Get_StyleSheetPageList call.
-func (self IHTMLDOMConstructorCollection) Get_StyleSheetPageList() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_StyleSheetPageList() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_StyleSheetPageList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Text wraps the raw Get_Text call.
-func (self IHTMLDOMConstructorCollection) Get_Text() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Text() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Text(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_TextRange wraps the raw Get_TextRange call.
-func (self IHTMLDOMConstructorCollection) Get_TextRange() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_TextRange() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_TextRange(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_TextRangeCollection wraps the raw Get_TextRangeCollection call.
-func (self IHTMLDOMConstructorCollection) Get_TextRangeCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_TextRangeCollection() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_TextRangeCollection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_TextRectangle wraps the raw Get_TextRectangle call.
-func (self IHTMLDOMConstructorCollection) Get_TextRectangle() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_TextRectangle() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_TextRectangle(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_TextRectangleList wraps the raw Get_TextRectangleList call.
-func (self IHTMLDOMConstructorCollection) Get_TextRectangleList() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_TextRectangleList() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_TextRectangleList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Window wraps the raw Get_Window call.
-func (self IHTMLDOMConstructorCollection) Get_Window() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_Window() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Window(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_XDomainRequest wraps the raw Get_XDomainRequest call.
-func (self IHTMLDOMConstructorCollection) Get_XDomainRequest() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_XDomainRequest() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_XDomainRequest(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_XMLHttpRequest wraps the raw Get_XMLHttpRequest call.
-func (self IHTMLDOMConstructorCollection) Get_XMLHttpRequest() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMConstructorCollection) Get_XMLHttpRequest() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_XMLHttpRequest(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMImplementation is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMImplementation with error-returning methods.
@@ -15394,24 +15394,24 @@ func WrapIHTMLDOMImplementation2(raw *webmshtml.IHTMLDOMImplementation2) IHTMLDO
 }
 
 // CreateDocumentType wraps the raw CreateDocumentType call.
-func (self IHTMLDOMImplementation2) CreateDocumentType(bstrQualifiedName foundation.BSTR, pvarPublicId *systemvariant.VARIANT, pvarSystemId *systemvariant.VARIANT) (*webmshtml.IDOMDocumentType, error) {
+func (self IHTMLDOMImplementation2) CreateDocumentType(bstrQualifiedName foundation.BSTR, pvarPublicId *systemvariant.VARIANT, pvarSystemId *systemvariant.VARIANT) (IDOMDocumentType, error) {
 	var _newDocumentType *webmshtml.IDOMDocumentType
 	_hr := self.Raw.CreateDocumentType(bstrQualifiedName, pvarPublicId, pvarSystemId, &_newDocumentType)
-	return _newDocumentType, win32.HRESULTError(int32(_hr))
+	return WrapIDOMDocumentType(_newDocumentType), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDocument wraps the raw CreateDocument call.
-func (self IHTMLDOMImplementation2) CreateDocument(pvarNS *systemvariant.VARIANT, pvarTagName *systemvariant.VARIANT, pDocumentType *webmshtml.IDOMDocumentType) (*webmshtml.IHTMLDocument7, error) {
+func (self IHTMLDOMImplementation2) CreateDocument(pvarNS *systemvariant.VARIANT, pvarTagName *systemvariant.VARIANT, pDocumentType IDOMDocumentType) (IHTMLDocument7, error) {
 	var _ppnewDocument *webmshtml.IHTMLDocument7
-	_hr := self.Raw.CreateDocument(pvarNS, pvarTagName, pDocumentType, &_ppnewDocument)
-	return _ppnewDocument, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDocument(pvarNS, pvarTagName, pDocumentType.Raw, &_ppnewDocument)
+	return WrapIHTMLDocument7(_ppnewDocument), win32.HRESULTError(int32(_hr))
 }
 
 // CreateHTMLDocument wraps the raw CreateHTMLDocument call.
-func (self IHTMLDOMImplementation2) CreateHTMLDocument(bstrTitle foundation.BSTR) (*webmshtml.IHTMLDocument7, error) {
+func (self IHTMLDOMImplementation2) CreateHTMLDocument(bstrTitle foundation.BSTR) (IHTMLDocument7, error) {
 	var _ppnewDocument *webmshtml.IHTMLDocument7
 	_hr := self.Raw.CreateHTMLDocument(bstrTitle, &_ppnewDocument)
-	return _ppnewDocument, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument7(_ppnewDocument), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMNode is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMNode with error-returning methods.
@@ -15433,10 +15433,10 @@ func (self IHTMLDOMNode) Get_nodeType() (int32, error) {
 }
 
 // Get_parentNode wraps the raw Get_parentNode call.
-func (self IHTMLDOMNode) Get_parentNode() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) Get_parentNode() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_parentNode(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // HasChildNodes wraps the raw HasChildNodes call.
@@ -15447,66 +15447,66 @@ func (self IHTMLDOMNode) HasChildNodes() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_childNodes wraps the raw Get_childNodes call.
-func (self IHTMLDOMNode) Get_childNodes() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMNode) Get_childNodes() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_childNodes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_attributes wraps the raw Get_attributes call.
-func (self IHTMLDOMNode) Get_attributes() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMNode) Get_attributes() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_attributes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveChild wraps the raw RemoveChild call.
-func (self IHTMLDOMNode) RemoveChild(oldChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) RemoveChild(oldChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.RemoveChild(oldChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.RemoveChild(oldChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceChild wraps the raw ReplaceChild call.
-func (self IHTMLDOMNode) ReplaceChild(newChild *webmshtml.IHTMLDOMNode, oldChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) ReplaceChild(newChild IHTMLDOMNode, oldChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.ReplaceChild(newChild, oldChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceChild(newChild.Raw, oldChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // CloneNode wraps the raw CloneNode call.
-func (self IHTMLDOMNode) CloneNode(fDeep foundation.VARIANT_BOOL) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) CloneNode(fDeep foundation.VARIANT_BOOL) (IHTMLDOMNode, error) {
 	var _clonedNode *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.CloneNode(fDeep, &_clonedNode)
-	return _clonedNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_clonedNode), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveNode wraps the raw RemoveNode call.
-func (self IHTMLDOMNode) RemoveNode(fDeep foundation.VARIANT_BOOL) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) RemoveNode(fDeep foundation.VARIANT_BOOL) (IHTMLDOMNode, error) {
 	var _removed *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.RemoveNode(fDeep, &_removed)
-	return _removed, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_removed), win32.HRESULTError(int32(_hr))
 }
 
 // SwapNode wraps the raw SwapNode call.
-func (self IHTMLDOMNode) SwapNode(otherNode *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) SwapNode(otherNode IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _swappedNode *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.SwapNode(otherNode, &_swappedNode)
-	return _swappedNode, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SwapNode(otherNode.Raw, &_swappedNode)
+	return WrapIHTMLDOMNode(_swappedNode), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceNode wraps the raw ReplaceNode call.
-func (self IHTMLDOMNode) ReplaceNode(replacement *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) ReplaceNode(replacement IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _replaced *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.ReplaceNode(replacement, &_replaced)
-	return _replaced, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceNode(replacement.Raw, &_replaced)
+	return WrapIHTMLDOMNode(_replaced), win32.HRESULTError(int32(_hr))
 }
 
 // AppendChild wraps the raw AppendChild call.
-func (self IHTMLDOMNode) AppendChild(newChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) AppendChild(newChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.AppendChild(newChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AppendChild(newChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // Get_nodeName wraps the raw Get_nodeName call.
@@ -15524,31 +15524,31 @@ func (self IHTMLDOMNode) Get_nodeValue() (systemvariant.VARIANT, error) {
 }
 
 // Get_firstChild wraps the raw Get_firstChild call.
-func (self IHTMLDOMNode) Get_firstChild() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) Get_firstChild() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_firstChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_lastChild wraps the raw Get_lastChild call.
-func (self IHTMLDOMNode) Get_lastChild() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) Get_lastChild() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_lastChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_previousSibling wraps the raw Get_previousSibling call.
-func (self IHTMLDOMNode) Get_previousSibling() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) Get_previousSibling() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_previousSibling(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_nextSibling wraps the raw Get_nextSibling call.
-func (self IHTMLDOMNode) Get_nextSibling() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode) Get_nextSibling() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_nextSibling(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMNode2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMNode2 with error-returning methods.
@@ -15563,10 +15563,10 @@ func WrapIHTMLDOMNode2(raw *webmshtml.IHTMLDOMNode2) IHTMLDOMNode2 {
 }
 
 // Get_ownerDocument wraps the raw Get_ownerDocument call.
-func (self IHTMLDOMNode2) Get_ownerDocument() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMNode2) Get_ownerDocument() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_ownerDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMNode3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMNode3 with error-returning methods.
@@ -15609,9 +15609,9 @@ func (self IHTMLDOMNode3) Get_textContent() (systemvariant.VARIANT, error) {
 }
 
 // IsEqualNode wraps the raw IsEqualNode call.
-func (self IHTMLDOMNode3) IsEqualNode(otherNode *webmshtml.IHTMLDOMNode3) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLDOMNode3) IsEqualNode(otherNode IHTMLDOMNode3) (foundation.VARIANT_BOOL, error) {
 	var _isEqual foundation.VARIANT_BOOL
-	_hr := self.Raw.IsEqualNode(otherNode, &_isEqual)
+	_hr := self.Raw.IsEqualNode(otherNode.Raw, &_isEqual)
 	return _isEqual, win32.HRESULTError(int32(_hr))
 }
 
@@ -15637,37 +15637,37 @@ func (self IHTMLDOMNode3) IsDefaultNamespace(pvarNamespace *systemvariant.VARIAN
 }
 
 // AppendChild wraps the raw AppendChild call.
-func (self IHTMLDOMNode3) AppendChild(newChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode3) AppendChild(newChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.AppendChild(newChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AppendChild(newChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveChild wraps the raw RemoveChild call.
-func (self IHTMLDOMNode3) RemoveChild(oldChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode3) RemoveChild(oldChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.RemoveChild(oldChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.RemoveChild(oldChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceChild wraps the raw ReplaceChild call.
-func (self IHTMLDOMNode3) ReplaceChild(newChild *webmshtml.IHTMLDOMNode, oldChild *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMNode3) ReplaceChild(newChild IHTMLDOMNode, oldChild IHTMLDOMNode) (IHTMLDOMNode, error) {
 	var _node *webmshtml.IHTMLDOMNode
-	_hr := self.Raw.ReplaceChild(newChild, oldChild, &_node)
-	return _node, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceChild(newChild.Raw, oldChild.Raw, &_node)
+	return WrapIHTMLDOMNode(_node), win32.HRESULTError(int32(_hr))
 }
 
 // IsSameNode wraps the raw IsSameNode call.
-func (self IHTMLDOMNode3) IsSameNode(otherNode *webmshtml.IHTMLDOMNode3) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLDOMNode3) IsSameNode(otherNode IHTMLDOMNode3) (foundation.VARIANT_BOOL, error) {
 	var _isSame foundation.VARIANT_BOOL
-	_hr := self.Raw.IsSameNode(otherNode, &_isSame)
+	_hr := self.Raw.IsSameNode(otherNode.Raw, &_isSame)
 	return _isSame, win32.HRESULTError(int32(_hr))
 }
 
 // CompareDocumentPosition wraps the raw CompareDocumentPosition call.
-func (self IHTMLDOMNode3) CompareDocumentPosition(otherNode *webmshtml.IHTMLDOMNode) (uint16, error) {
+func (self IHTMLDOMNode3) CompareDocumentPosition(otherNode IHTMLDOMNode) (uint16, error) {
 	var _flags uint16
-	_hr := self.Raw.CompareDocumentPosition(otherNode, &_flags)
+	_hr := self.Raw.CompareDocumentPosition(otherNode.Raw, &_flags)
 	return _flags, win32.HRESULTError(int32(_hr))
 }
 
@@ -15683,10 +15683,10 @@ func WrapIHTMLDOMRange(raw *webmshtml.IHTMLDOMRange) IHTMLDOMRange {
 }
 
 // Get_startContainer wraps the raw Get_startContainer call.
-func (self IHTMLDOMRange) Get_startContainer() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMRange) Get_startContainer() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_startContainer(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_startOffset wraps the raw Get_startOffset call.
@@ -15697,10 +15697,10 @@ func (self IHTMLDOMRange) Get_startOffset() (int32, error) {
 }
 
 // Get_endContainer wraps the raw Get_endContainer call.
-func (self IHTMLDOMRange) Get_endContainer() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMRange) Get_endContainer() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_endContainer(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_endOffset wraps the raw Get_endOffset call.
@@ -15718,40 +15718,40 @@ func (self IHTMLDOMRange) Get_collapsed() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_commonAncestorContainer wraps the raw Get_commonAncestorContainer call.
-func (self IHTMLDOMRange) Get_commonAncestorContainer() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMRange) Get_commonAncestorContainer() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_commonAncestorContainer(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // SetStart wraps the raw SetStart call.
-func (self IHTMLDOMRange) SetStart(refNode *systemcom.IDispatch, offset int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetStart(refNode, offset)))
+func (self IHTMLDOMRange) SetStart(refNode systemcomidiom.IDispatch, offset int32) error {
+	return win32.HRESULTError(int32(self.Raw.SetStart(refNode.Raw, offset)))
 }
 
 // SetEnd wraps the raw SetEnd call.
-func (self IHTMLDOMRange) SetEnd(refNode *systemcom.IDispatch, offset int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetEnd(refNode, offset)))
+func (self IHTMLDOMRange) SetEnd(refNode systemcomidiom.IDispatch, offset int32) error {
+	return win32.HRESULTError(int32(self.Raw.SetEnd(refNode.Raw, offset)))
 }
 
 // SetStartBefore wraps the raw SetStartBefore call.
-func (self IHTMLDOMRange) SetStartBefore(refNode *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SetStartBefore(refNode)))
+func (self IHTMLDOMRange) SetStartBefore(refNode systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SetStartBefore(refNode.Raw)))
 }
 
 // SetStartAfter wraps the raw SetStartAfter call.
-func (self IHTMLDOMRange) SetStartAfter(refNode *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SetStartAfter(refNode)))
+func (self IHTMLDOMRange) SetStartAfter(refNode systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SetStartAfter(refNode.Raw)))
 }
 
 // SetEndBefore wraps the raw SetEndBefore call.
-func (self IHTMLDOMRange) SetEndBefore(refNode *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SetEndBefore(refNode)))
+func (self IHTMLDOMRange) SetEndBefore(refNode systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SetEndBefore(refNode.Raw)))
 }
 
 // SetEndAfter wraps the raw SetEndAfter call.
-func (self IHTMLDOMRange) SetEndAfter(refNode *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SetEndAfter(refNode)))
+func (self IHTMLDOMRange) SetEndAfter(refNode systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SetEndAfter(refNode.Raw)))
 }
 
 // Collapse wraps the raw Collapse call.
@@ -15760,19 +15760,19 @@ func (self IHTMLDOMRange) Collapse(toStart foundation.VARIANT_BOOL) error {
 }
 
 // SelectNode wraps the raw SelectNode call.
-func (self IHTMLDOMRange) SelectNode(refNode *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SelectNode(refNode)))
+func (self IHTMLDOMRange) SelectNode(refNode systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SelectNode(refNode.Raw)))
 }
 
 // SelectNodeContents wraps the raw SelectNodeContents call.
-func (self IHTMLDOMRange) SelectNodeContents(refNode *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SelectNodeContents(refNode)))
+func (self IHTMLDOMRange) SelectNodeContents(refNode systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SelectNodeContents(refNode.Raw)))
 }
 
 // CompareBoundaryPoints wraps the raw CompareBoundaryPoints call.
-func (self IHTMLDOMRange) CompareBoundaryPoints(how int16, sourceRange *systemcom.IDispatch) (int32, error) {
+func (self IHTMLDOMRange) CompareBoundaryPoints(how int16, sourceRange systemcomidiom.IDispatch) (int32, error) {
 	var _compareResult int32
-	_hr := self.Raw.CompareBoundaryPoints(how, sourceRange, &_compareResult)
+	_hr := self.Raw.CompareBoundaryPoints(how, sourceRange.Raw, &_compareResult)
 	return _compareResult, win32.HRESULTError(int32(_hr))
 }
 
@@ -15782,34 +15782,34 @@ func (self IHTMLDOMRange) DeleteContents() error {
 }
 
 // ExtractContents wraps the raw ExtractContents call.
-func (self IHTMLDOMRange) ExtractContents() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMRange) ExtractContents() (systemcomidiom.IDispatch, error) {
 	var _ppDocumentFragment *systemcom.IDispatch
 	_hr := self.Raw.ExtractContents(&_ppDocumentFragment)
-	return _ppDocumentFragment, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppDocumentFragment), win32.HRESULTError(int32(_hr))
 }
 
 // CloneContents wraps the raw CloneContents call.
-func (self IHTMLDOMRange) CloneContents() (*systemcom.IDispatch, error) {
+func (self IHTMLDOMRange) CloneContents() (systemcomidiom.IDispatch, error) {
 	var _ppDocumentFragment *systemcom.IDispatch
 	_hr := self.Raw.CloneContents(&_ppDocumentFragment)
-	return _ppDocumentFragment, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppDocumentFragment), win32.HRESULTError(int32(_hr))
 }
 
 // InsertNode wraps the raw InsertNode call.
-func (self IHTMLDOMRange) InsertNode(newNode *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.InsertNode(newNode)))
+func (self IHTMLDOMRange) InsertNode(newNode systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.InsertNode(newNode.Raw)))
 }
 
 // SurroundContents wraps the raw SurroundContents call.
-func (self IHTMLDOMRange) SurroundContents(newParent *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SurroundContents(newParent)))
+func (self IHTMLDOMRange) SurroundContents(newParent systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SurroundContents(newParent.Raw)))
 }
 
 // CloneRange wraps the raw CloneRange call.
-func (self IHTMLDOMRange) CloneRange() (*webmshtml.IHTMLDOMRange, error) {
+func (self IHTMLDOMRange) CloneRange() (IHTMLDOMRange, error) {
 	var _ppClonedRange *webmshtml.IHTMLDOMRange
 	_hr := self.Raw.CloneRange(&_ppClonedRange)
-	return _ppClonedRange, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMRange(_ppClonedRange), win32.HRESULTError(int32(_hr))
 }
 
 // ToString wraps the raw ToString call.
@@ -15825,17 +15825,17 @@ func (self IHTMLDOMRange) Detach() error {
 }
 
 // GetClientRects wraps the raw GetClientRects call.
-func (self IHTMLDOMRange) GetClientRects() (*webmshtml.IHTMLRectCollection, error) {
+func (self IHTMLDOMRange) GetClientRects() (IHTMLRectCollection, error) {
 	var _ppRectCol *webmshtml.IHTMLRectCollection
 	_hr := self.Raw.GetClientRects(&_ppRectCol)
-	return _ppRectCol, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRectCollection(_ppRectCol), win32.HRESULTError(int32(_hr))
 }
 
 // GetBoundingClientRect wraps the raw GetBoundingClientRect call.
-func (self IHTMLDOMRange) GetBoundingClientRect() (*webmshtml.IHTMLRect, error) {
+func (self IHTMLDOMRange) GetBoundingClientRect() (IHTMLRect, error) {
 	var _ppRect *webmshtml.IHTMLRect
 	_hr := self.Raw.GetBoundingClientRect(&_ppRect)
-	return _ppRect, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRect(_ppRect), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMTextNode is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMTextNode with error-returning methods.
@@ -15876,10 +15876,10 @@ func (self IHTMLDOMTextNode) Get_length() (int32, error) {
 }
 
 // SplitText wraps the raw SplitText call.
-func (self IHTMLDOMTextNode) SplitText(offset int32) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMTextNode) SplitText(offset int32) (IHTMLDOMNode, error) {
 	var _pRetNode *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.SplitText(offset, &_pRetNode)
-	return _pRetNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_pRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDOMTextNode2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDOMTextNode2 with error-returning methods.
@@ -15954,10 +15954,10 @@ func (self IHTMLDOMTextNode3) ReplaceData(offset int32, Count int32, bstrstring 
 }
 
 // SplitText wraps the raw SplitText call.
-func (self IHTMLDOMTextNode3) SplitText(offset int32) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMTextNode3) SplitText(offset int32) (IHTMLDOMNode, error) {
 	var _pRetNode *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.SplitText(offset, &_pRetNode)
-	return _pRetNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_pRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // Get_wholeText wraps the raw Get_wholeText call.
@@ -15968,10 +15968,10 @@ func (self IHTMLDOMTextNode3) Get_wholeText() (foundation.BSTR, error) {
 }
 
 // ReplaceWholeText wraps the raw ReplaceWholeText call.
-func (self IHTMLDOMTextNode3) ReplaceWholeText(bstrText foundation.BSTR) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDOMTextNode3) ReplaceWholeText(bstrText foundation.BSTR) (IHTMLDOMNode, error) {
 	var _ppRetNode *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.ReplaceWholeText(bstrText, &_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // HasAttributes wraps the raw HasAttributes call.
@@ -16324,10 +16324,10 @@ func WrapIHTMLDocument(raw *webmshtml.IHTMLDocument) IHTMLDocument {
 }
 
 // Get_Script wraps the raw Get_Script call.
-func (self IHTMLDocument) Get_Script() (*systemcom.IDispatch, error) {
+func (self IHTMLDocument) Get_Script() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Script(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDocument2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDocument2 with error-returning methods.
@@ -16342,59 +16342,59 @@ func WrapIHTMLDocument2(raw *webmshtml.IHTMLDocument2) IHTMLDocument2 {
 }
 
 // Get_all wraps the raw Get_all call.
-func (self IHTMLDocument2) Get_all() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_all() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_all(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_body wraps the raw Get_body call.
-func (self IHTMLDocument2) Get_body() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument2) Get_body() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_body(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_activeElement wraps the raw Get_activeElement call.
-func (self IHTMLDocument2) Get_activeElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument2) Get_activeElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_activeElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_images wraps the raw Get_images call.
-func (self IHTMLDocument2) Get_images() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_images() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_images(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_applets wraps the raw Get_applets call.
-func (self IHTMLDocument2) Get_applets() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_applets() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_applets(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_links wraps the raw Get_links call.
-func (self IHTMLDocument2) Get_links() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_links() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_links(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_forms wraps the raw Get_forms call.
-func (self IHTMLDocument2) Get_forms() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_forms() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_forms(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_anchors wraps the raw Get_anchors call.
-func (self IHTMLDocument2) Get_anchors() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_anchors() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_anchors(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_title wraps the raw Put_title call.
@@ -16410,10 +16410,10 @@ func (self IHTMLDocument2) Get_title() (foundation.BSTR, error) {
 }
 
 // Get_scripts wraps the raw Get_scripts call.
-func (self IHTMLDocument2) Get_scripts() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_scripts() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_scripts(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_designMode wraps the raw Put_designMode call.
@@ -16429,10 +16429,10 @@ func (self IHTMLDocument2) Get_designMode() (foundation.BSTR, error) {
 }
 
 // Get_selection wraps the raw Get_selection call.
-func (self IHTMLDocument2) Get_selection() (*webmshtml.IHTMLSelectionObject, error) {
+func (self IHTMLDocument2) Get_selection() (IHTMLSelectionObject, error) {
 	var _p *webmshtml.IHTMLSelectionObject
 	_hr := self.Raw.Get_selection(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLSelectionObject(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_readyState wraps the raw Get_readyState call.
@@ -16443,24 +16443,24 @@ func (self IHTMLDocument2) Get_readyState() (foundation.BSTR, error) {
 }
 
 // Get_frames wraps the raw Get_frames call.
-func (self IHTMLDocument2) Get_frames() (*webmshtml.IHTMLFramesCollection2, error) {
+func (self IHTMLDocument2) Get_frames() (IHTMLFramesCollection2, error) {
 	var _p *webmshtml.IHTMLFramesCollection2
 	_hr := self.Raw.Get_frames(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFramesCollection2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_embeds wraps the raw Get_embeds call.
-func (self IHTMLDocument2) Get_embeds() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_embeds() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_embeds(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_plugins wraps the raw Get_plugins call.
-func (self IHTMLDocument2) Get_plugins() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument2) Get_plugins() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_plugins(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_alinkColor wraps the raw Get_alinkColor call.
@@ -16506,10 +16506,10 @@ func (self IHTMLDocument2) Get_referrer() (foundation.BSTR, error) {
 }
 
 // Get_location wraps the raw Get_location call.
-func (self IHTMLDocument2) Get_location() (*webmshtml.IHTMLLocation, error) {
+func (self IHTMLDocument2) Get_location() (IHTMLLocation, error) {
 	var _p *webmshtml.IHTMLLocation
 	_hr := self.Raw.Get_location(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLLocation(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_lastModified wraps the raw Get_lastModified call.
@@ -16717,10 +16717,10 @@ func (self IHTMLDocument2) ExecCommandShowHelp(cmdID foundation.BSTR) (foundatio
 }
 
 // CreateElement wraps the raw CreateElement call.
-func (self IHTMLDocument2) CreateElement(eTag foundation.BSTR) (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument2) CreateElement(eTag foundation.BSTR) (IHTMLElement, error) {
 	var _newElem *webmshtml.IHTMLElement
 	_hr := self.Raw.CreateElement(eTag, &_newElem)
-	return _newElem, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_newElem), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onhelp wraps the raw Get_onhelp call.
@@ -16843,24 +16843,24 @@ func (self IHTMLDocument2) Get_onselectstart() (systemvariant.VARIANT, error) {
 }
 
 // ElementFromPoint wraps the raw ElementFromPoint call.
-func (self IHTMLDocument2) ElementFromPoint(x int32, y int32) (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument2) ElementFromPoint(x int32, y int32) (IHTMLElement, error) {
 	var _elementHit *webmshtml.IHTMLElement
 	_hr := self.Raw.ElementFromPoint(x, y, &_elementHit)
-	return _elementHit, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_elementHit), win32.HRESULTError(int32(_hr))
 }
 
 // Get_parentWindow wraps the raw Get_parentWindow call.
-func (self IHTMLDocument2) Get_parentWindow() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLDocument2) Get_parentWindow() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_parentWindow(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_styleSheets wraps the raw Get_styleSheets call.
-func (self IHTMLDocument2) Get_styleSheets() (*webmshtml.IHTMLStyleSheetsCollection, error) {
+func (self IHTMLDocument2) Get_styleSheets() (IHTMLStyleSheetsCollection, error) {
 	var _p *webmshtml.IHTMLStyleSheetsCollection
 	_hr := self.Raw.Get_styleSheets(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetsCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onbeforeupdate wraps the raw Get_onbeforeupdate call.
@@ -16885,10 +16885,10 @@ func (self IHTMLDocument2) ToString() (foundation.BSTR, error) {
 }
 
 // CreateStyleSheet wraps the raw CreateStyleSheet call.
-func (self IHTMLDocument2) CreateStyleSheet(bstrHref foundation.BSTR, lIndex int32) (*webmshtml.IHTMLStyleSheet, error) {
+func (self IHTMLDocument2) CreateStyleSheet(bstrHref foundation.BSTR, lIndex int32) (IHTMLStyleSheet, error) {
 	var _ppnewStyleSheet *webmshtml.IHTMLStyleSheet
 	_hr := self.Raw.CreateStyleSheet(bstrHref, lIndex, &_ppnewStyleSheet)
-	return _ppnewStyleSheet, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheet(_ppnewStyleSheet), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDocument3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDocument3 with error-returning methods.
@@ -16913,17 +16913,17 @@ func (self IHTMLDocument3) Recalc(fForce foundation.VARIANT_BOOL) error {
 }
 
 // CreateTextNode wraps the raw CreateTextNode call.
-func (self IHTMLDocument3) CreateTextNode(text foundation.BSTR) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDocument3) CreateTextNode(text foundation.BSTR) (IHTMLDOMNode, error) {
 	var _newTextNode *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.CreateTextNode(text, &_newTextNode)
-	return _newTextNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_newTextNode), win32.HRESULTError(int32(_hr))
 }
 
 // Get_documentElement wraps the raw Get_documentElement call.
-func (self IHTMLDocument3) Get_documentElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument3) Get_documentElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_documentElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_uniqueID wraps the raw Get_uniqueID call.
@@ -16934,15 +16934,15 @@ func (self IHTMLDocument3) Get_uniqueID() (foundation.BSTR, error) {
 }
 
 // AttachEvent wraps the raw AttachEvent call.
-func (self IHTMLDocument3) AttachEvent(event foundation.BSTR, pDisp *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLDocument3) AttachEvent(event foundation.BSTR, pDisp systemcomidiom.IDispatch) (foundation.VARIANT_BOOL, error) {
 	var _pfResult foundation.VARIANT_BOOL
-	_hr := self.Raw.AttachEvent(event, pDisp, &_pfResult)
+	_hr := self.Raw.AttachEvent(event, pDisp.Raw, &_pfResult)
 	return _pfResult, win32.HRESULTError(int32(_hr))
 }
 
 // DetachEvent wraps the raw DetachEvent call.
-func (self IHTMLDocument3) DetachEvent(event foundation.BSTR, pDisp *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.DetachEvent(event, pDisp)))
+func (self IHTMLDocument3) DetachEvent(event foundation.BSTR, pDisp systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.DetachEvent(event, pDisp.Raw)))
 }
 
 // Get_onrowsdelete wraps the raw Get_onrowsdelete call.
@@ -17021,17 +17021,17 @@ func (self IHTMLDocument3) Get_onstop() (systemvariant.VARIANT, error) {
 }
 
 // CreateDocumentFragment wraps the raw CreateDocumentFragment call.
-func (self IHTMLDocument3) CreateDocumentFragment() (*webmshtml.IHTMLDocument2, error) {
+func (self IHTMLDocument3) CreateDocumentFragment() (IHTMLDocument2, error) {
 	var _pNewDoc *webmshtml.IHTMLDocument2
 	_hr := self.Raw.CreateDocumentFragment(&_pNewDoc)
-	return _pNewDoc, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument2(_pNewDoc), win32.HRESULTError(int32(_hr))
 }
 
 // Get_parentDocument wraps the raw Get_parentDocument call.
-func (self IHTMLDocument3) Get_parentDocument() (*webmshtml.IHTMLDocument2, error) {
+func (self IHTMLDocument3) Get_parentDocument() (IHTMLDocument2, error) {
 	var _p *webmshtml.IHTMLDocument2
 	_hr := self.Raw.Get_parentDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_enableDownload wraps the raw Put_enableDownload call.
@@ -17059,10 +17059,10 @@ func (self IHTMLDocument3) Get_baseUrl() (foundation.BSTR, error) {
 }
 
 // Get_childNodes wraps the raw Get_childNodes call.
-func (self IHTMLDocument3) Get_childNodes() (*systemcom.IDispatch, error) {
+func (self IHTMLDocument3) Get_childNodes() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_childNodes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_inheritStyleSheets wraps the raw Put_inheritStyleSheets call.
@@ -17085,24 +17085,24 @@ func (self IHTMLDocument3) Get_onbeforeeditfocus() (systemvariant.VARIANT, error
 }
 
 // GetElementsByName wraps the raw GetElementsByName call.
-func (self IHTMLDocument3) GetElementsByName(v foundation.BSTR) (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument3) GetElementsByName(v foundation.BSTR) (IHTMLElementCollection, error) {
 	var _pelColl *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.GetElementsByName(v, &_pelColl)
-	return _pelColl, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_pelColl), win32.HRESULTError(int32(_hr))
 }
 
 // GetElementById wraps the raw GetElementById call.
-func (self IHTMLDocument3) GetElementById(v foundation.BSTR) (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument3) GetElementById(v foundation.BSTR) (IHTMLElement, error) {
 	var _pel *webmshtml.IHTMLElement
 	_hr := self.Raw.GetElementById(v, &_pel)
-	return _pel, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_pel), win32.HRESULTError(int32(_hr))
 }
 
 // GetElementsByTagName wraps the raw GetElementsByTagName call.
-func (self IHTMLDocument3) GetElementsByTagName(v foundation.BSTR) (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument3) GetElementsByTagName(v foundation.BSTR) (IHTMLElementCollection, error) {
 	var _pelColl *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.GetElementsByTagName(v, &_pelColl)
-	return _pelColl, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_pelColl), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDocument4 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDocument4 with error-returning methods.
@@ -17136,17 +17136,17 @@ func (self IHTMLDocument4) Get_onselectionchange() (systemvariant.VARIANT, error
 }
 
 // Get_namespaces wraps the raw Get_namespaces call.
-func (self IHTMLDocument4) Get_namespaces() (*systemcom.IDispatch, error) {
+func (self IHTMLDocument4) Get_namespaces() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_namespaces(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDocumentFromUrl wraps the raw CreateDocumentFromUrl call.
-func (self IHTMLDocument4) CreateDocumentFromUrl(bstrUrl foundation.BSTR, bstrOptions foundation.BSTR) (*webmshtml.IHTMLDocument2, error) {
+func (self IHTMLDocument4) CreateDocumentFromUrl(bstrUrl foundation.BSTR, bstrOptions foundation.BSTR) (IHTMLDocument2, error) {
 	var _newDoc *webmshtml.IHTMLDocument2
 	_hr := self.Raw.CreateDocumentFromUrl(bstrUrl, bstrOptions, &_newDoc)
-	return _newDoc, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument2(_newDoc), win32.HRESULTError(int32(_hr))
 }
 
 // Put_media wraps the raw Put_media call.
@@ -17162,10 +17162,10 @@ func (self IHTMLDocument4) Get_media() (foundation.BSTR, error) {
 }
 
 // CreateEventObject wraps the raw CreateEventObject call.
-func (self IHTMLDocument4) CreateEventObject(pvarEventObject *systemvariant.VARIANT) (*webmshtml.IHTMLEventObj, error) {
+func (self IHTMLDocument4) CreateEventObject(pvarEventObject *systemvariant.VARIANT) (IHTMLEventObj, error) {
 	var _ppEventObj *webmshtml.IHTMLEventObj
 	_hr := self.Raw.CreateEventObject(pvarEventObject, &_ppEventObj)
-	return _ppEventObj, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLEventObj(_ppEventObj), win32.HRESULTError(int32(_hr))
 }
 
 // FireEvent wraps the raw FireEvent call.
@@ -17176,10 +17176,10 @@ func (self IHTMLDocument4) FireEvent(bstrEventName foundation.BSTR, pvarEventObj
 }
 
 // CreateRenderStyle wraps the raw CreateRenderStyle call.
-func (self IHTMLDocument4) CreateRenderStyle(v foundation.BSTR) (*webmshtml.IHTMLRenderStyle, error) {
+func (self IHTMLDocument4) CreateRenderStyle(v foundation.BSTR) (IHTMLRenderStyle, error) {
 	var _ppIHTMLRenderStyle *webmshtml.IHTMLRenderStyle
 	_hr := self.Raw.CreateRenderStyle(v, &_ppIHTMLRenderStyle)
-	return _ppIHTMLRenderStyle, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRenderStyle(_ppIHTMLRenderStyle), win32.HRESULTError(int32(_hr))
 }
 
 // Get_oncontrolselect wraps the raw Get_oncontrolselect call.
@@ -17215,31 +17215,31 @@ func (self IHTMLDocument5) Get_onmousewheel() (systemvariant.VARIANT, error) {
 }
 
 // Get_doctype wraps the raw Get_doctype call.
-func (self IHTMLDocument5) Get_doctype() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDocument5) Get_doctype() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_doctype(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_implementation wraps the raw Get_implementation call.
-func (self IHTMLDocument5) Get_implementation() (*webmshtml.IHTMLDOMImplementation, error) {
+func (self IHTMLDocument5) Get_implementation() (IHTMLDOMImplementation, error) {
 	var _p *webmshtml.IHTMLDOMImplementation
 	_hr := self.Raw.Get_implementation(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMImplementation(_p), win32.HRESULTError(int32(_hr))
 }
 
 // CreateAttribute wraps the raw CreateAttribute call.
-func (self IHTMLDocument5) CreateAttribute(bstrattrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLDocument5) CreateAttribute(bstrattrName foundation.BSTR) (IHTMLDOMAttribute, error) {
 	var _ppattribute *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.CreateAttribute(bstrattrName, &_ppattribute)
-	return _ppattribute, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_ppattribute), win32.HRESULTError(int32(_hr))
 }
 
 // CreateComment wraps the raw CreateComment call.
-func (self IHTMLDocument5) CreateComment(bstrdata foundation.BSTR) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDocument5) CreateComment(bstrdata foundation.BSTR) (IHTMLDOMNode, error) {
 	var _ppRetNode *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.CreateComment(bstrdata, &_ppRetNode)
-	return _ppRetNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_ppRetNode), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onfocusin wraps the raw Get_onfocusin call.
@@ -17303,10 +17303,10 @@ func WrapIHTMLDocument6(raw *webmshtml.IHTMLDocument6) IHTMLDocument6 {
 }
 
 // Get_compatible wraps the raw Get_compatible call.
-func (self IHTMLDocument6) Get_compatible() (*webmshtml.IHTMLDocumentCompatibleInfoCollection, error) {
+func (self IHTMLDocument6) Get_compatible() (IHTMLDocumentCompatibleInfoCollection, error) {
 	var _p *webmshtml.IHTMLDocumentCompatibleInfoCollection
 	_hr := self.Raw.Get_compatible(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocumentCompatibleInfoCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_documentMode wraps the raw Get_documentMode call.
@@ -17331,10 +17331,10 @@ func (self IHTMLDocument6) Get_onstoragecommit() (systemvariant.VARIANT, error) 
 }
 
 // GetElementById wraps the raw GetElementById call.
-func (self IHTMLDocument6) GetElementById(bstrId foundation.BSTR) (*webmshtml.IHTMLElement2, error) {
+func (self IHTMLDocument6) GetElementById(bstrId foundation.BSTR) (IHTMLElement2, error) {
 	var _ppRetElement *webmshtml.IHTMLElement2
 	_hr := self.Raw.GetElementById(bstrId, &_ppRetElement)
-	return _ppRetElement, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement2(_ppRetElement), win32.HRESULTError(int32(_hr))
 }
 
 // UpdateSettings wraps the raw UpdateSettings call.
@@ -17354,45 +17354,45 @@ func WrapIHTMLDocument7(raw *webmshtml.IHTMLDocument7) IHTMLDocument7 {
 }
 
 // Get_defaultView wraps the raw Get_defaultView call.
-func (self IHTMLDocument7) Get_defaultView() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLDocument7) Get_defaultView() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_defaultView(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // CreateCDATASection wraps the raw CreateCDATASection call.
-func (self IHTMLDocument7) CreateCDATASection(text foundation.BSTR) (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLDocument7) CreateCDATASection(text foundation.BSTR) (IHTMLDOMNode, error) {
 	var _newCDATASectionNode *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.CreateCDATASection(text, &_newCDATASectionNode)
-	return _newCDATASectionNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_newCDATASectionNode), win32.HRESULTError(int32(_hr))
 }
 
 // GetSelection wraps the raw GetSelection call.
-func (self IHTMLDocument7) GetSelection() (*webmshtml.IHTMLSelection, error) {
+func (self IHTMLDocument7) GetSelection() (IHTMLSelection, error) {
 	var _ppIHTMLSelection *webmshtml.IHTMLSelection
 	_hr := self.Raw.GetSelection(&_ppIHTMLSelection)
-	return _ppIHTMLSelection, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLSelection(_ppIHTMLSelection), win32.HRESULTError(int32(_hr))
 }
 
 // GetElementsByTagNameNS wraps the raw GetElementsByTagNameNS call.
-func (self IHTMLDocument7) GetElementsByTagNameNS(pvarNS *systemvariant.VARIANT, bstrLocalName foundation.BSTR) (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument7) GetElementsByTagNameNS(pvarNS *systemvariant.VARIANT, bstrLocalName foundation.BSTR) (IHTMLElementCollection, error) {
 	var _pelColl *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.GetElementsByTagNameNS(pvarNS, bstrLocalName, &_pelColl)
-	return _pelColl, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_pelColl), win32.HRESULTError(int32(_hr))
 }
 
 // CreateElementNS wraps the raw CreateElementNS call.
-func (self IHTMLDocument7) CreateElementNS(pvarNS *systemvariant.VARIANT, bstrTag foundation.BSTR) (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument7) CreateElementNS(pvarNS *systemvariant.VARIANT, bstrTag foundation.BSTR) (IHTMLElement, error) {
 	var _newElem *webmshtml.IHTMLElement
 	_hr := self.Raw.CreateElementNS(pvarNS, bstrTag, &_newElem)
-	return _newElem, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_newElem), win32.HRESULTError(int32(_hr))
 }
 
 // CreateAttributeNS wraps the raw CreateAttributeNS call.
-func (self IHTMLDocument7) CreateAttributeNS(pvarNS *systemvariant.VARIANT, bstrAttrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLDocument7) CreateAttributeNS(pvarNS *systemvariant.VARIANT, bstrAttrName foundation.BSTR) (IHTMLDOMAttribute, error) {
 	var _ppAttribute *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.CreateAttributeNS(pvarNS, bstrAttrName, &_ppAttribute)
-	return _ppAttribute, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_ppAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onmsthumbnailclick wraps the raw Get_onmsthumbnailclick call.
@@ -17410,38 +17410,38 @@ func (self IHTMLDocument7) Get_characterSet() (foundation.BSTR, error) {
 }
 
 // CreateElement wraps the raw CreateElement call.
-func (self IHTMLDocument7) CreateElement(bstrTag foundation.BSTR) (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument7) CreateElement(bstrTag foundation.BSTR) (IHTMLElement, error) {
 	var _newElem *webmshtml.IHTMLElement
 	_hr := self.Raw.CreateElement(bstrTag, &_newElem)
-	return _newElem, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_newElem), win32.HRESULTError(int32(_hr))
 }
 
 // CreateAttribute wraps the raw CreateAttribute call.
-func (self IHTMLDocument7) CreateAttribute(bstrAttrName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLDocument7) CreateAttribute(bstrAttrName foundation.BSTR) (IHTMLDOMAttribute, error) {
 	var _ppAttribute *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.CreateAttribute(bstrAttrName, &_ppAttribute)
-	return _ppAttribute, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_ppAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // GetElementsByClassName wraps the raw GetElementsByClassName call.
-func (self IHTMLDocument7) GetElementsByClassName(v foundation.BSTR) (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument7) GetElementsByClassName(v foundation.BSTR) (IHTMLElementCollection, error) {
 	var _pel *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.GetElementsByClassName(v, &_pel)
-	return _pel, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_pel), win32.HRESULTError(int32(_hr))
 }
 
 // CreateProcessingInstruction wraps the raw CreateProcessingInstruction call.
-func (self IHTMLDocument7) CreateProcessingInstruction(bstrTarget foundation.BSTR, bstrData foundation.BSTR) (*webmshtml.IDOMProcessingInstruction, error) {
+func (self IHTMLDocument7) CreateProcessingInstruction(bstrTarget foundation.BSTR, bstrData foundation.BSTR) (IDOMProcessingInstruction, error) {
 	var _newProcessingInstruction *webmshtml.IDOMProcessingInstruction
 	_hr := self.Raw.CreateProcessingInstruction(bstrTarget, bstrData, &_newProcessingInstruction)
-	return _newProcessingInstruction, win32.HRESULTError(int32(_hr))
+	return WrapIDOMProcessingInstruction(_newProcessingInstruction), win32.HRESULTError(int32(_hr))
 }
 
 // AdoptNode wraps the raw AdoptNode call.
-func (self IHTMLDocument7) AdoptNode(pNodeSource *webmshtml.IHTMLDOMNode) (*webmshtml.IHTMLDOMNode3, error) {
+func (self IHTMLDocument7) AdoptNode(pNodeSource IHTMLDOMNode) (IHTMLDOMNode3, error) {
 	var _ppNodeDest *webmshtml.IHTMLDOMNode3
-	_hr := self.Raw.AdoptNode(pNodeSource, &_ppNodeDest)
-	return _ppNodeDest, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AdoptNode(pNodeSource.Raw, &_ppNodeDest)
+	return WrapIHTMLDOMNode3(_ppNodeDest), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onmssitemodejumplistitemremoved wraps the raw Get_onmssitemodejumplistitemremoved call.
@@ -17452,10 +17452,10 @@ func (self IHTMLDocument7) Get_onmssitemodejumplistitemremoved() (systemvariant.
 }
 
 // Get_all wraps the raw Get_all call.
-func (self IHTMLDocument7) Get_all() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLDocument7) Get_all() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_all(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_inputEncoding wraps the raw Get_inputEncoding call.
@@ -17768,36 +17768,36 @@ func (self IHTMLDocument7) Normalize() error {
 }
 
 // ImportNode wraps the raw ImportNode call.
-func (self IHTMLDocument7) ImportNode(pNodeSource *webmshtml.IHTMLDOMNode, fDeep foundation.VARIANT_BOOL) (*webmshtml.IHTMLDOMNode3, error) {
+func (self IHTMLDocument7) ImportNode(pNodeSource IHTMLDOMNode, fDeep foundation.VARIANT_BOOL) (IHTMLDOMNode3, error) {
 	var _ppNodeDest *webmshtml.IHTMLDOMNode3
-	_hr := self.Raw.ImportNode(pNodeSource, fDeep, &_ppNodeDest)
-	return _ppNodeDest, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ImportNode(pNodeSource.Raw, fDeep, &_ppNodeDest)
+	return WrapIHTMLDOMNode3(_ppNodeDest), win32.HRESULTError(int32(_hr))
 }
 
 // Get_parentWindow wraps the raw Get_parentWindow call.
-func (self IHTMLDocument7) Get_parentWindow() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLDocument7) Get_parentWindow() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_parentWindow(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_body wraps the raw Putref_body call.
-func (self IHTMLDocument7) Putref_body(v *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_body(v)))
+func (self IHTMLDocument7) Putref_body(v IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_body(v.Raw)))
 }
 
 // Get_body wraps the raw Get_body call.
-func (self IHTMLDocument7) Get_body() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument7) Get_body() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_body(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_head wraps the raw Get_head call.
-func (self IHTMLDocument7) Get_head() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLDocument7) Get_head() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_head(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLDocument8 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLDocument8 with error-returning methods.
@@ -17979,10 +17979,10 @@ func (self IHTMLDocumentCompatibleInfoCollection) Get_length() (int32, error) {
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLDocumentCompatibleInfoCollection) Item(index int32) (*webmshtml.IHTMLDocumentCompatibleInfo, error) {
+func (self IHTMLDocumentCompatibleInfoCollection) Item(index int32) (IHTMLDocumentCompatibleInfo, error) {
 	var _compatibleInfo *webmshtml.IHTMLDocumentCompatibleInfo
 	_hr := self.Raw.Item(index, &_compatibleInfo)
-	return _compatibleInfo, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocumentCompatibleInfo(_compatibleInfo), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLEditDesigner is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLEditDesigner with error-returning methods.
@@ -17997,23 +17997,23 @@ func WrapIHTMLEditDesigner(raw *webmshtml.IHTMLEditDesigner) IHTMLEditDesigner {
 }
 
 // PreHandleEvent wraps the raw PreHandleEvent call.
-func (self IHTMLEditDesigner) PreHandleEvent(inEvtDispId int32, pIEventObj *webmshtml.IHTMLEventObj) error {
-	return win32.HRESULTError(int32(self.Raw.PreHandleEvent(inEvtDispId, pIEventObj)))
+func (self IHTMLEditDesigner) PreHandleEvent(inEvtDispId int32, pIEventObj IHTMLEventObj) error {
+	return win32.HRESULTError(int32(self.Raw.PreHandleEvent(inEvtDispId, pIEventObj.Raw)))
 }
 
 // PostHandleEvent wraps the raw PostHandleEvent call.
-func (self IHTMLEditDesigner) PostHandleEvent(inEvtDispId int32, pIEventObj *webmshtml.IHTMLEventObj) error {
-	return win32.HRESULTError(int32(self.Raw.PostHandleEvent(inEvtDispId, pIEventObj)))
+func (self IHTMLEditDesigner) PostHandleEvent(inEvtDispId int32, pIEventObj IHTMLEventObj) error {
+	return win32.HRESULTError(int32(self.Raw.PostHandleEvent(inEvtDispId, pIEventObj.Raw)))
 }
 
 // TranslateAccelerator wraps the raw TranslateAccelerator call.
-func (self IHTMLEditDesigner) TranslateAccelerator(inEvtDispId int32, pIEventObj *webmshtml.IHTMLEventObj) error {
-	return win32.HRESULTError(int32(self.Raw.TranslateAccelerator(inEvtDispId, pIEventObj)))
+func (self IHTMLEditDesigner) TranslateAccelerator(inEvtDispId int32, pIEventObj IHTMLEventObj) error {
+	return win32.HRESULTError(int32(self.Raw.TranslateAccelerator(inEvtDispId, pIEventObj.Raw)))
 }
 
 // PostEditorEventNotify wraps the raw PostEditorEventNotify call.
-func (self IHTMLEditDesigner) PostEditorEventNotify(inEvtDispId int32, pIEventObj *webmshtml.IHTMLEventObj) error {
-	return win32.HRESULTError(int32(self.Raw.PostEditorEventNotify(inEvtDispId, pIEventObj)))
+func (self IHTMLEditDesigner) PostEditorEventNotify(inEvtDispId int32, pIEventObj IHTMLEventObj) error {
+	return win32.HRESULTError(int32(self.Raw.PostEditorEventNotify(inEvtDispId, pIEventObj.Raw)))
 }
 
 // IHTMLEditHost is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLEditHost with error-returning methods.
@@ -18028,8 +18028,8 @@ func WrapIHTMLEditHost(raw *webmshtml.IHTMLEditHost) IHTMLEditHost {
 }
 
 // SnapRect wraps the raw SnapRect call.
-func (self IHTMLEditHost) SnapRect(pIElement *webmshtml.IHTMLElement, prcNew *foundation.RECT, eHandle webmshtml.ELEMENT_CORNER) error {
-	return win32.HRESULTError(int32(self.Raw.SnapRect(pIElement, prcNew, eHandle)))
+func (self IHTMLEditHost) SnapRect(pIElement IHTMLElement, prcNew *foundation.RECT, eHandle webmshtml.ELEMENT_CORNER) error {
+	return win32.HRESULTError(int32(self.Raw.SnapRect(pIElement.Raw, prcNew, eHandle)))
 }
 
 // IHTMLEditHost2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLEditHost2 with error-returning methods.
@@ -18060,33 +18060,33 @@ func WrapIHTMLEditServices(raw *webmshtml.IHTMLEditServices) IHTMLEditServices {
 }
 
 // AddDesigner wraps the raw AddDesigner call.
-func (self IHTMLEditServices) AddDesigner(pIDesigner *webmshtml.IHTMLEditDesigner) error {
-	return win32.HRESULTError(int32(self.Raw.AddDesigner(pIDesigner)))
+func (self IHTMLEditServices) AddDesigner(pIDesigner IHTMLEditDesigner) error {
+	return win32.HRESULTError(int32(self.Raw.AddDesigner(pIDesigner.Raw)))
 }
 
 // RemoveDesigner wraps the raw RemoveDesigner call.
-func (self IHTMLEditServices) RemoveDesigner(pIDesigner *webmshtml.IHTMLEditDesigner) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveDesigner(pIDesigner)))
+func (self IHTMLEditServices) RemoveDesigner(pIDesigner IHTMLEditDesigner) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveDesigner(pIDesigner.Raw)))
 }
 
 // GetSelectionServices wraps the raw GetSelectionServices call.
-func (self IHTMLEditServices) GetSelectionServices(pIContainer *webmshtml.IMarkupContainer, ppSelSvc **webmshtml.ISelectionServices) error {
-	return win32.HRESULTError(int32(self.Raw.GetSelectionServices(pIContainer, ppSelSvc)))
+func (self IHTMLEditServices) GetSelectionServices(pIContainer IMarkupContainer, ppSelSvc **webmshtml.ISelectionServices) error {
+	return win32.HRESULTError(int32(self.Raw.GetSelectionServices(pIContainer.Raw, ppSelSvc)))
 }
 
 // MoveToSelectionAnchor wraps the raw MoveToSelectionAnchor call.
-func (self IHTMLEditServices) MoveToSelectionAnchor(pIStartAnchor *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToSelectionAnchor(pIStartAnchor)))
+func (self IHTMLEditServices) MoveToSelectionAnchor(pIStartAnchor IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToSelectionAnchor(pIStartAnchor.Raw)))
 }
 
 // MoveToSelectionEnd wraps the raw MoveToSelectionEnd call.
-func (self IHTMLEditServices) MoveToSelectionEnd(pIEndAnchor *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToSelectionEnd(pIEndAnchor)))
+func (self IHTMLEditServices) MoveToSelectionEnd(pIEndAnchor IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToSelectionEnd(pIEndAnchor.Raw)))
 }
 
 // SelectRange wraps the raw SelectRange call.
-func (self IHTMLEditServices) SelectRange(pStart *webmshtml.IMarkupPointer, pEnd *webmshtml.IMarkupPointer, eType webmshtml.SELECTION_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.SelectRange(pStart, pEnd, eType)))
+func (self IHTMLEditServices) SelectRange(pStart IMarkupPointer, pEnd IMarkupPointer, eType webmshtml.SELECTION_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.SelectRange(pStart.Raw, pEnd.Raw, eType)))
 }
 
 // IHTMLEditServices2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLEditServices2 with error-returning methods.
@@ -18101,13 +18101,13 @@ func WrapIHTMLEditServices2(raw *webmshtml.IHTMLEditServices2) IHTMLEditServices
 }
 
 // MoveToSelectionAnchorEx wraps the raw MoveToSelectionAnchorEx call.
-func (self IHTMLEditServices2) MoveToSelectionAnchorEx(pIStartAnchor *webmshtml.IDisplayPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToSelectionAnchorEx(pIStartAnchor)))
+func (self IHTMLEditServices2) MoveToSelectionAnchorEx(pIStartAnchor IDisplayPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToSelectionAnchorEx(pIStartAnchor.Raw)))
 }
 
 // MoveToSelectionEndEx wraps the raw MoveToSelectionEndEx call.
-func (self IHTMLEditServices2) MoveToSelectionEndEx(pIEndAnchor *webmshtml.IDisplayPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToSelectionEndEx(pIEndAnchor)))
+func (self IHTMLEditServices2) MoveToSelectionEndEx(pIEndAnchor IDisplayPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToSelectionEndEx(pIEndAnchor.Raw)))
 }
 
 // FreezeVirtualCaretPos wraps the raw FreezeVirtualCaretPos call.
@@ -18179,17 +18179,17 @@ func (self IHTMLElement) Get_tagName() (foundation.BSTR, error) {
 }
 
 // Get_parentElement wraps the raw Get_parentElement call.
-func (self IHTMLElement) Get_parentElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLElement) Get_parentElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_parentElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_style wraps the raw Get_style call.
-func (self IHTMLElement) Get_style() (*webmshtml.IHTMLStyle, error) {
+func (self IHTMLElement) Get_style() (IHTMLStyle, error) {
 	var _p *webmshtml.IHTMLStyle
 	_hr := self.Raw.Get_style(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onhelp wraps the raw Get_onhelp call.
@@ -18270,10 +18270,10 @@ func (self IHTMLElement) Get_onmouseup() (systemvariant.VARIANT, error) {
 }
 
 // Get_document wraps the raw Get_document call.
-func (self IHTMLElement) Get_document() (*systemcom.IDispatch, error) {
+func (self IHTMLElement) Get_document() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_document(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_title wraps the raw Put_title call.
@@ -18308,9 +18308,9 @@ func (self IHTMLElement) Get_onselectstart() (systemvariant.VARIANT, error) {
 }
 
 // Contains wraps the raw Contains call.
-func (self IHTMLElement) Contains(pChild *webmshtml.IHTMLElement) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLElement) Contains(pChild IHTMLElement) (foundation.VARIANT_BOOL, error) {
 	var _pfResult foundation.VARIANT_BOOL
-	_hr := self.Raw.Contains(pChild, &_pfResult)
+	_hr := self.Raw.Contains(pChild.Raw, &_pfResult)
 	return _pfResult, win32.HRESULTError(int32(_hr))
 }
 
@@ -18369,10 +18369,10 @@ func (self IHTMLElement) Get_offsetHeight() (int32, error) {
 }
 
 // Get_offsetParent wraps the raw Get_offsetParent call.
-func (self IHTMLElement) Get_offsetParent() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLElement) Get_offsetParent() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_offsetParent(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_innerHTML wraps the raw Put_innerHTML call.
@@ -18434,10 +18434,10 @@ func (self IHTMLElement) InsertAdjacentText(where foundation.BSTR, text foundati
 }
 
 // Get_parentTextEdit wraps the raw Get_parentTextEdit call.
-func (self IHTMLElement) Get_parentTextEdit() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLElement) Get_parentTextEdit() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_parentTextEdit(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_isTextEdit wraps the raw Get_isTextEdit call.
@@ -18453,10 +18453,10 @@ func (self IHTMLElement) Click() error {
 }
 
 // Get_filters wraps the raw Get_filters call.
-func (self IHTMLElement) Get_filters() (*webmshtml.IHTMLFiltersCollection, error) {
+func (self IHTMLElement) Get_filters() (IHTMLFiltersCollection, error) {
 	var _p *webmshtml.IHTMLFiltersCollection
 	_hr := self.Raw.Get_filters(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFiltersCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ondragstart wraps the raw Get_ondragstart call.
@@ -18537,17 +18537,17 @@ func (self IHTMLElement) Get_onfilterchange() (systemvariant.VARIANT, error) {
 }
 
 // Get_children wraps the raw Get_children call.
-func (self IHTMLElement) Get_children() (*systemcom.IDispatch, error) {
+func (self IHTMLElement) Get_children() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_children(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_all wraps the raw Get_all call.
-func (self IHTMLElement) Get_all() (*systemcom.IDispatch, error) {
+func (self IHTMLElement) Get_all() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_all(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLElement2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLElement2 with error-returning methods.
@@ -18684,10 +18684,10 @@ func (self IHTMLElement2) Get_onpaste() (systemvariant.VARIANT, error) {
 }
 
 // Get_currentStyle wraps the raw Get_currentStyle call.
-func (self IHTMLElement2) Get_currentStyle() (*webmshtml.IHTMLCurrentStyle, error) {
+func (self IHTMLElement2) Get_currentStyle() (IHTMLCurrentStyle, error) {
 	var _p *webmshtml.IHTMLCurrentStyle
 	_hr := self.Raw.Get_currentStyle(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLCurrentStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onpropertychange wraps the raw Get_onpropertychange call.
@@ -18698,17 +18698,17 @@ func (self IHTMLElement2) Get_onpropertychange() (systemvariant.VARIANT, error) 
 }
 
 // GetClientRects wraps the raw GetClientRects call.
-func (self IHTMLElement2) GetClientRects() (*webmshtml.IHTMLRectCollection, error) {
+func (self IHTMLElement2) GetClientRects() (IHTMLRectCollection, error) {
 	var _pRectCol *webmshtml.IHTMLRectCollection
 	_hr := self.Raw.GetClientRects(&_pRectCol)
-	return _pRectCol, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRectCollection(_pRectCol), win32.HRESULTError(int32(_hr))
 }
 
 // GetBoundingClientRect wraps the raw GetBoundingClientRect call.
-func (self IHTMLElement2) GetBoundingClientRect() (*webmshtml.IHTMLRect, error) {
+func (self IHTMLElement2) GetBoundingClientRect() (IHTMLRect, error) {
 	var _pRect *webmshtml.IHTMLRect
 	_hr := self.Raw.GetBoundingClientRect(&_pRect)
-	return _pRect, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRect(_pRect), win32.HRESULTError(int32(_hr))
 }
 
 // SetExpression wraps the raw SetExpression call.
@@ -18786,13 +18786,13 @@ func (self IHTMLElement2) Blur() error {
 }
 
 // AddFilter wraps the raw AddFilter call.
-func (self IHTMLElement2) AddFilter(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddFilter(pUnk)))
+func (self IHTMLElement2) AddFilter(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddFilter(pUnk.Raw)))
 }
 
 // RemoveFilter wraps the raw RemoveFilter call.
-func (self IHTMLElement2) RemoveFilter(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveFilter(pUnk)))
+func (self IHTMLElement2) RemoveFilter(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveFilter(pUnk.Raw)))
 }
 
 // Get_clientHeight wraps the raw Get_clientHeight call.
@@ -18824,15 +18824,15 @@ func (self IHTMLElement2) Get_clientLeft() (int32, error) {
 }
 
 // AttachEvent wraps the raw AttachEvent call.
-func (self IHTMLElement2) AttachEvent(event foundation.BSTR, pDisp *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLElement2) AttachEvent(event foundation.BSTR, pDisp systemcomidiom.IDispatch) (foundation.VARIANT_BOOL, error) {
 	var _pfResult foundation.VARIANT_BOOL
-	_hr := self.Raw.AttachEvent(event, pDisp, &_pfResult)
+	_hr := self.Raw.AttachEvent(event, pDisp.Raw, &_pfResult)
 	return _pfResult, win32.HRESULTError(int32(_hr))
 }
 
 // DetachEvent wraps the raw DetachEvent call.
-func (self IHTMLElement2) DetachEvent(event foundation.BSTR, pDisp *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.DetachEvent(event, pDisp)))
+func (self IHTMLElement2) DetachEvent(event foundation.BSTR, pDisp systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.DetachEvent(event, pDisp.Raw)))
 }
 
 // Get_readyState wraps the raw Get_readyState call.
@@ -18883,10 +18883,10 @@ func (self IHTMLElement2) Get_dir() (foundation.BSTR, error) {
 }
 
 // CreateControlRange wraps the raw CreateControlRange call.
-func (self IHTMLElement2) CreateControlRange() (*systemcom.IDispatch, error) {
+func (self IHTMLElement2) CreateControlRange() (systemcomidiom.IDispatch, error) {
 	var _range_ *systemcom.IDispatch
 	_hr := self.Raw.CreateControlRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // Get_scrollHeight wraps the raw Get_scrollHeight call.
@@ -18933,8 +18933,8 @@ func (self IHTMLElement2) ClearAttributes() error {
 }
 
 // MergeAttributes wraps the raw MergeAttributes call.
-func (self IHTMLElement2) MergeAttributes(mergeThis *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.MergeAttributes(mergeThis)))
+func (self IHTMLElement2) MergeAttributes(mergeThis IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.MergeAttributes(mergeThis.Raw)))
 }
 
 // Get_oncontextmenu wraps the raw Get_oncontextmenu call.
@@ -18945,17 +18945,17 @@ func (self IHTMLElement2) Get_oncontextmenu() (systemvariant.VARIANT, error) {
 }
 
 // InsertAdjacentElement wraps the raw InsertAdjacentElement call.
-func (self IHTMLElement2) InsertAdjacentElement(where foundation.BSTR, insertedElement *webmshtml.IHTMLElement) (*webmshtml.IHTMLElement, error) {
+func (self IHTMLElement2) InsertAdjacentElement(where foundation.BSTR, insertedElement IHTMLElement) (IHTMLElement, error) {
 	var _inserted *webmshtml.IHTMLElement
-	_hr := self.Raw.InsertAdjacentElement(where, insertedElement, &_inserted)
-	return _inserted, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.InsertAdjacentElement(where, insertedElement.Raw, &_inserted)
+	return WrapIHTMLElement(_inserted), win32.HRESULTError(int32(_hr))
 }
 
 // ApplyElement wraps the raw ApplyElement call.
-func (self IHTMLElement2) ApplyElement(apply *webmshtml.IHTMLElement, where foundation.BSTR) (*webmshtml.IHTMLElement, error) {
+func (self IHTMLElement2) ApplyElement(apply IHTMLElement, where foundation.BSTR) (IHTMLElement, error) {
 	var _applied *webmshtml.IHTMLElement
-	_hr := self.Raw.ApplyElement(apply, where, &_applied)
-	return _applied, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ApplyElement(apply.Raw, where, &_applied)
+	return WrapIHTMLElement(_applied), win32.HRESULTError(int32(_hr))
 }
 
 // GetAdjacentText wraps the raw GetAdjacentText call.
@@ -18994,17 +18994,17 @@ func (self IHTMLElement2) RemoveBehavior(cookie int32) (foundation.VARIANT_BOOL,
 }
 
 // Get_runtimeStyle wraps the raw Get_runtimeStyle call.
-func (self IHTMLElement2) Get_runtimeStyle() (*webmshtml.IHTMLStyle, error) {
+func (self IHTMLElement2) Get_runtimeStyle() (IHTMLStyle, error) {
 	var _p *webmshtml.IHTMLStyle
 	_hr := self.Raw.Get_runtimeStyle(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_behaviorUrns wraps the raw Get_behaviorUrns call.
-func (self IHTMLElement2) Get_behaviorUrns() (*systemcom.IDispatch, error) {
+func (self IHTMLElement2) Get_behaviorUrns() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_behaviorUrns(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_tagUrn wraps the raw Put_tagUrn call.
@@ -19034,10 +19034,10 @@ func (self IHTMLElement2) Get_readyStateValue() (int32, error) {
 }
 
 // GetElementsByTagName wraps the raw GetElementsByTagName call.
-func (self IHTMLElement2) GetElementsByTagName(v foundation.BSTR) (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLElement2) GetElementsByTagName(v foundation.BSTR) (IHTMLElementCollection, error) {
 	var _pelColl *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.GetElementsByTagName(v, &_pelColl)
-	return _pelColl, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_pelColl), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLElement3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLElement3 with error-returning methods.
@@ -19052,8 +19052,8 @@ func WrapIHTMLElement3(raw *webmshtml.IHTMLElement3) IHTMLElement3 {
 }
 
 // MergeAttributes wraps the raw MergeAttributes call.
-func (self IHTMLElement3) MergeAttributes(mergeThis *webmshtml.IHTMLElement, pvarFlags *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.MergeAttributes(mergeThis, pvarFlags)))
+func (self IHTMLElement3) MergeAttributes(mergeThis IHTMLElement, pvarFlags *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.MergeAttributes(mergeThis.Raw, pvarFlags)))
 }
 
 // Get_isMultiLine wraps the raw Get_isMultiLine call.
@@ -19273,24 +19273,24 @@ func (self IHTMLElement4) Normalize() error {
 }
 
 // GetAttributeNode wraps the raw GetAttributeNode call.
-func (self IHTMLElement4) GetAttributeNode(bstrname foundation.BSTR) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLElement4) GetAttributeNode(bstrname foundation.BSTR) (IHTMLDOMAttribute, error) {
 	var _ppAttribute *webmshtml.IHTMLDOMAttribute
 	_hr := self.Raw.GetAttributeNode(bstrname, &_ppAttribute)
-	return _ppAttribute, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute(_ppAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // SetAttributeNode wraps the raw SetAttributeNode call.
-func (self IHTMLElement4) SetAttributeNode(pattr *webmshtml.IHTMLDOMAttribute) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLElement4) SetAttributeNode(pattr IHTMLDOMAttribute) (IHTMLDOMAttribute, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute
-	_hr := self.Raw.SetAttributeNode(pattr, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SetAttributeNode(pattr.Raw, &_ppretAttribute)
+	return WrapIHTMLDOMAttribute(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttributeNode wraps the raw RemoveAttributeNode call.
-func (self IHTMLElement4) RemoveAttributeNode(pattr *webmshtml.IHTMLDOMAttribute) (*webmshtml.IHTMLDOMAttribute, error) {
+func (self IHTMLElement4) RemoveAttributeNode(pattr IHTMLDOMAttribute) (IHTMLDOMAttribute, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute
-	_hr := self.Raw.RemoveAttributeNode(pattr, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.RemoveAttributeNode(pattr.Raw, &_ppretAttribute)
+	return WrapIHTMLDOMAttribute(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onbeforeactivate wraps the raw Get_onbeforeactivate call.
@@ -19326,24 +19326,24 @@ func WrapIHTMLElement5(raw *webmshtml.IHTMLElement5) IHTMLElement5 {
 }
 
 // GetAttributeNode wraps the raw GetAttributeNode call.
-func (self IHTMLElement5) GetAttributeNode(bstrname foundation.BSTR) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLElement5) GetAttributeNode(bstrname foundation.BSTR) (IHTMLDOMAttribute2, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute2
 	_hr := self.Raw.GetAttributeNode(bstrname, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute2(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // SetAttributeNode wraps the raw SetAttributeNode call.
-func (self IHTMLElement5) SetAttributeNode(pattr *webmshtml.IHTMLDOMAttribute2) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLElement5) SetAttributeNode(pattr IHTMLDOMAttribute2) (IHTMLDOMAttribute2, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute2
-	_hr := self.Raw.SetAttributeNode(pattr, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SetAttributeNode(pattr.Raw, &_ppretAttribute)
+	return WrapIHTMLDOMAttribute2(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttributeNode wraps the raw RemoveAttributeNode call.
-func (self IHTMLElement5) RemoveAttributeNode(pattr *webmshtml.IHTMLDOMAttribute2) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLElement5) RemoveAttributeNode(pattr IHTMLDOMAttribute2) (IHTMLDOMAttribute2, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute2
-	_hr := self.Raw.RemoveAttributeNode(pattr, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.RemoveAttributeNode(pattr.Raw, &_ppretAttribute)
+	return WrapIHTMLDOMAttribute2(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // HasAttribute wraps the raw HasAttribute call.
@@ -19536,10 +19536,10 @@ func (self IHTMLElement5) RemoveAttribute(strAttributeName foundation.BSTR) (fou
 }
 
 // Get_attributes wraps the raw Get_attributes call.
-func (self IHTMLElement5) Get_attributes() (*webmshtml.IHTMLAttributeCollection3, error) {
+func (self IHTMLElement5) Get_attributes() (IHTMLAttributeCollection3, error) {
 	var _p *webmshtml.IHTMLAttributeCollection3
 	_hr := self.Raw.Get_attributes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLAttributeCollection3(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_ariaValuenow wraps the raw Put_ariaValuenow call.
@@ -19746,17 +19746,17 @@ func (self IHTMLElement6) RemoveAttributeNS(pvarNS *systemvariant.VARIANT, strAt
 }
 
 // GetAttributeNodeNS wraps the raw GetAttributeNodeNS call.
-func (self IHTMLElement6) GetAttributeNodeNS(pvarNS *systemvariant.VARIANT, bstrname foundation.BSTR) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLElement6) GetAttributeNodeNS(pvarNS *systemvariant.VARIANT, bstrname foundation.BSTR) (IHTMLDOMAttribute2, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute2
 	_hr := self.Raw.GetAttributeNodeNS(pvarNS, bstrname, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute2(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // SetAttributeNodeNS wraps the raw SetAttributeNodeNS call.
-func (self IHTMLElement6) SetAttributeNodeNS(pattr *webmshtml.IHTMLDOMAttribute2) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLElement6) SetAttributeNodeNS(pattr IHTMLDOMAttribute2) (IHTMLDOMAttribute2, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute2
-	_hr := self.Raw.SetAttributeNodeNS(pattr, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SetAttributeNodeNS(pattr.Raw, &_ppretAttribute)
+	return WrapIHTMLDOMAttribute2(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // HasAttributeNS wraps the raw HasAttributeNS call.
@@ -19784,24 +19784,24 @@ func (self IHTMLElement6) RemoveAttribute(strAttributeName foundation.BSTR) erro
 }
 
 // GetAttributeNode wraps the raw GetAttributeNode call.
-func (self IHTMLElement6) GetAttributeNode(strAttributeName foundation.BSTR) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLElement6) GetAttributeNode(strAttributeName foundation.BSTR) (IHTMLDOMAttribute2, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute2
 	_hr := self.Raw.GetAttributeNode(strAttributeName, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMAttribute2(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // SetAttributeNode wraps the raw SetAttributeNode call.
-func (self IHTMLElement6) SetAttributeNode(pattr *webmshtml.IHTMLDOMAttribute2) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLElement6) SetAttributeNode(pattr IHTMLDOMAttribute2) (IHTMLDOMAttribute2, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute2
-	_hr := self.Raw.SetAttributeNode(pattr, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SetAttributeNode(pattr.Raw, &_ppretAttribute)
+	return WrapIHTMLDOMAttribute2(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttributeNode wraps the raw RemoveAttributeNode call.
-func (self IHTMLElement6) RemoveAttributeNode(pattr *webmshtml.IHTMLDOMAttribute2) (*webmshtml.IHTMLDOMAttribute2, error) {
+func (self IHTMLElement6) RemoveAttributeNode(pattr IHTMLDOMAttribute2) (IHTMLDOMAttribute2, error) {
 	var _ppretAttribute *webmshtml.IHTMLDOMAttribute2
-	_hr := self.Raw.RemoveAttributeNode(pattr, &_ppretAttribute)
-	return _ppretAttribute, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.RemoveAttributeNode(pattr.Raw, &_ppretAttribute)
+	return WrapIHTMLDOMAttribute2(_ppretAttribute), win32.HRESULTError(int32(_hr))
 }
 
 // HasAttribute wraps the raw HasAttribute call.
@@ -19812,10 +19812,10 @@ func (self IHTMLElement6) HasAttribute(name foundation.BSTR) (foundation.VARIANT
 }
 
 // GetElementsByTagNameNS wraps the raw GetElementsByTagNameNS call.
-func (self IHTMLElement6) GetElementsByTagNameNS(varNS *systemvariant.VARIANT, bstrLocalName foundation.BSTR) (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLElement6) GetElementsByTagNameNS(varNS *systemvariant.VARIANT, bstrLocalName foundation.BSTR) (IHTMLElementCollection, error) {
 	var _pelColl *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.GetElementsByTagNameNS(varNS, bstrLocalName, &_pelColl)
-	return _pelColl, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_pelColl), win32.HRESULTError(int32(_hr))
 }
 
 // Get_tagName wraps the raw Get_tagName call.
@@ -19833,10 +19833,10 @@ func (self IHTMLElement6) Get_nodeName() (foundation.BSTR, error) {
 }
 
 // GetElementsByClassName wraps the raw GetElementsByClassName call.
-func (self IHTMLElement6) GetElementsByClassName(v foundation.BSTR) (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLElement6) GetElementsByClassName(v foundation.BSTR) (IHTMLElementCollection, error) {
 	var _pel *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.GetElementsByClassName(v, &_pel)
-	return _pel, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_pel), win32.HRESULTError(int32(_hr))
 }
 
 // MsMatchesSelector wraps the raw MsMatchesSelector call.
@@ -20269,10 +20269,10 @@ func WrapIHTMLElementAppliedStyles(raw *webmshtml.IHTMLElementAppliedStyles) IHT
 }
 
 // MsGetRulesApplied wraps the raw MsGetRulesApplied call.
-func (self IHTMLElementAppliedStyles) MsGetRulesApplied() (*webmshtml.IRulesAppliedCollection, error) {
+func (self IHTMLElementAppliedStyles) MsGetRulesApplied() (IRulesAppliedCollection, error) {
 	var _ppRulesAppliedCollection *webmshtml.IRulesAppliedCollection
 	_hr := self.Raw.MsGetRulesApplied(&_ppRulesAppliedCollection)
-	return _ppRulesAppliedCollection, win32.HRESULTError(int32(_hr))
+	return WrapIRulesAppliedCollection(_ppRulesAppliedCollection), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLElementCollection is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLElementCollection with error-returning methods.
@@ -20306,10 +20306,10 @@ func (self IHTMLElementCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLElementCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLElementCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLElementCollection2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLElementCollection2 with error-returning methods.
@@ -20335,10 +20335,10 @@ func WrapIHTMLElementCollection3(raw *webmshtml.IHTMLElementCollection3) IHTMLEl
 }
 
 // NamedItem wraps the raw NamedItem call.
-func (self IHTMLElementCollection3) NamedItem(name foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IHTMLElementCollection3) NamedItem(name foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _pdisp *systemcom.IDispatch
 	_hr := self.Raw.NamedItem(name, &_pdisp)
-	return _pdisp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_pdisp), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLElementCollection4 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLElementCollection4 with error-returning methods.
@@ -20360,17 +20360,17 @@ func (self IHTMLElementCollection4) Get_length() (int32, error) {
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLElementCollection4) Item(index int32) (*webmshtml.IHTMLElement2, error) {
+func (self IHTMLElementCollection4) Item(index int32) (IHTMLElement2, error) {
 	var _pNode *webmshtml.IHTMLElement2
 	_hr := self.Raw.Item(index, &_pNode)
-	return _pNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement2(_pNode), win32.HRESULTError(int32(_hr))
 }
 
 // NamedItem wraps the raw NamedItem call.
-func (self IHTMLElementCollection4) NamedItem(name foundation.BSTR) (*webmshtml.IHTMLElement2, error) {
+func (self IHTMLElementCollection4) NamedItem(name foundation.BSTR) (IHTMLElement2, error) {
 	var _pNode *webmshtml.IHTMLElement2
 	_hr := self.Raw.NamedItem(name, &_pNode)
-	return _pNode, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement2(_pNode), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLElementDefaults is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLElementDefaults with error-returning methods.
@@ -20385,10 +20385,10 @@ func WrapIHTMLElementDefaults(raw *webmshtml.IHTMLElementDefaults) IHTMLElementD
 }
 
 // Get_style wraps the raw Get_style call.
-func (self IHTMLElementDefaults) Get_style() (*webmshtml.IHTMLStyle, error) {
+func (self IHTMLElementDefaults) Get_style() (IHTMLStyle, error) {
 	var _p *webmshtml.IHTMLStyle
 	_hr := self.Raw.Get_style(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_tabStop wraps the raw Put_tabStop call.
@@ -20488,15 +20488,15 @@ func (self IHTMLElementDefaults) Get_canHaveHTML() (foundation.VARIANT_BOOL, err
 }
 
 // Putref_viewLink wraps the raw Putref_viewLink call.
-func (self IHTMLElementDefaults) Putref_viewLink(v *webmshtml.IHTMLDocument) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_viewLink(v)))
+func (self IHTMLElementDefaults) Putref_viewLink(v IHTMLDocument) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_viewLink(v.Raw)))
 }
 
 // Get_viewLink wraps the raw Get_viewLink call.
-func (self IHTMLElementDefaults) Get_viewLink() (*webmshtml.IHTMLDocument, error) {
+func (self IHTMLElementDefaults) Get_viewLink() (IHTMLDocument, error) {
 	var _p *webmshtml.IHTMLDocument
 	_hr := self.Raw.Get_viewLink(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_frozen wraps the raw Put_frozen call.
@@ -20661,10 +20661,10 @@ func WrapIHTMLEventObj(raw *webmshtml.IHTMLEventObj) IHTMLEventObj {
 }
 
 // Get_srcElement wraps the raw Get_srcElement call.
-func (self IHTMLEventObj) Get_srcElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLEventObj) Get_srcElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_srcElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_altKey wraps the raw Get_altKey call.
@@ -20708,17 +20708,17 @@ func (self IHTMLEventObj) Get_cancelBubble() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_fromElement wraps the raw Get_fromElement call.
-func (self IHTMLEventObj) Get_fromElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLEventObj) Get_fromElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_fromElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_toElement wraps the raw Get_toElement call.
-func (self IHTMLEventObj) Get_toElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLEventObj) Get_toElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_toElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_keyCode wraps the raw Put_keyCode call.
@@ -20818,10 +20818,10 @@ func (self IHTMLEventObj) Get_screenY() (int32, error) {
 }
 
 // Get_srcFilter wraps the raw Get_srcFilter call.
-func (self IHTMLEventObj) Get_srcFilter() (*systemcom.IDispatch, error) {
+func (self IHTMLEventObj) Get_srcFilter() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_srcFilter(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLEventObj2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLEventObj2 with error-returning methods.
@@ -20862,27 +20862,27 @@ func (self IHTMLEventObj2) Get_propertyName() (foundation.BSTR, error) {
 }
 
 // Putref_bookmarks wraps the raw Putref_bookmarks call.
-func (self IHTMLEventObj2) Putref_bookmarks(v *webmshtml.IHTMLBookmarkCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_bookmarks(v)))
+func (self IHTMLEventObj2) Putref_bookmarks(v IHTMLBookmarkCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_bookmarks(v.Raw)))
 }
 
 // Get_bookmarks wraps the raw Get_bookmarks call.
-func (self IHTMLEventObj2) Get_bookmarks() (*webmshtml.IHTMLBookmarkCollection, error) {
+func (self IHTMLEventObj2) Get_bookmarks() (IHTMLBookmarkCollection, error) {
 	var _p *webmshtml.IHTMLBookmarkCollection
 	_hr := self.Raw.Get_bookmarks(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLBookmarkCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_recordset wraps the raw Putref_recordset call.
-func (self IHTMLEventObj2) Putref_recordset(v *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_recordset(v)))
+func (self IHTMLEventObj2) Putref_recordset(v systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_recordset(v.Raw)))
 }
 
 // Get_recordset wraps the raw Get_recordset call.
-func (self IHTMLEventObj2) Get_recordset() (*systemcom.IDispatch, error) {
+func (self IHTMLEventObj2) Get_recordset() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_recordset(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_dataFld wraps the raw Put_dataFld call.
@@ -20898,15 +20898,15 @@ func (self IHTMLEventObj2) Get_dataFld() (foundation.BSTR, error) {
 }
 
 // Putref_boundElements wraps the raw Putref_boundElements call.
-func (self IHTMLEventObj2) Putref_boundElements(v *webmshtml.IHTMLElementCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_boundElements(v)))
+func (self IHTMLEventObj2) Putref_boundElements(v IHTMLElementCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_boundElements(v.Raw)))
 }
 
 // Get_boundElements wraps the raw Get_boundElements call.
-func (self IHTMLEventObj2) Get_boundElements() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLEventObj2) Get_boundElements() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_boundElements(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_repeat wraps the raw Put_repeat call.
@@ -20934,15 +20934,15 @@ func (self IHTMLEventObj2) Get_srcUrn() (foundation.BSTR, error) {
 }
 
 // Putref_srcElement wraps the raw Putref_srcElement call.
-func (self IHTMLEventObj2) Putref_srcElement(v *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_srcElement(v)))
+func (self IHTMLEventObj2) Putref_srcElement(v IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_srcElement(v.Raw)))
 }
 
 // Get_srcElement wraps the raw Get_srcElement call.
-func (self IHTMLEventObj2) Get_srcElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLEventObj2) Get_srcElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_srcElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_altKey wraps the raw Put_altKey call.
@@ -20982,27 +20982,27 @@ func (self IHTMLEventObj2) Get_shiftKey() (foundation.VARIANT_BOOL, error) {
 }
 
 // Putref_fromElement wraps the raw Putref_fromElement call.
-func (self IHTMLEventObj2) Putref_fromElement(v *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_fromElement(v)))
+func (self IHTMLEventObj2) Putref_fromElement(v IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_fromElement(v.Raw)))
 }
 
 // Get_fromElement wraps the raw Get_fromElement call.
-func (self IHTMLEventObj2) Get_fromElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLEventObj2) Get_fromElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_fromElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_toElement wraps the raw Putref_toElement call.
-func (self IHTMLEventObj2) Putref_toElement(v *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_toElement(v)))
+func (self IHTMLEventObj2) Putref_toElement(v IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_toElement(v.Raw)))
 }
 
 // Get_toElement wraps the raw Get_toElement call.
-func (self IHTMLEventObj2) Get_toElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLEventObj2) Get_toElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_toElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_button wraps the raw Put_button call.
@@ -21150,22 +21150,22 @@ func (self IHTMLEventObj2) Get_screenY() (int32, error) {
 }
 
 // Putref_srcFilter wraps the raw Putref_srcFilter call.
-func (self IHTMLEventObj2) Putref_srcFilter(v *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_srcFilter(v)))
+func (self IHTMLEventObj2) Putref_srcFilter(v systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_srcFilter(v.Raw)))
 }
 
 // Get_srcFilter wraps the raw Get_srcFilter call.
-func (self IHTMLEventObj2) Get_srcFilter() (*systemcom.IDispatch, error) {
+func (self IHTMLEventObj2) Get_srcFilter() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_srcFilter(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_dataTransfer wraps the raw Get_dataTransfer call.
-func (self IHTMLEventObj2) Get_dataTransfer() (*webmshtml.IHTMLDataTransfer, error) {
+func (self IHTMLEventObj2) Get_dataTransfer() (IHTMLDataTransfer, error) {
 	var _p *webmshtml.IHTMLDataTransfer
 	_hr := self.Raw.Get_dataTransfer(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDataTransfer(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLEventObj3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLEventObj3 with error-returning methods.
@@ -21339,10 +21339,10 @@ func (self IHTMLEventObj5) Get_data() (foundation.BSTR, error) {
 }
 
 // Get_source wraps the raw Get_source call.
-func (self IHTMLEventObj5) Get_source() (*systemcom.IDispatch, error) {
+func (self IHTMLEventObj5) Get_source() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_source(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_origin wraps the raw Put_origin call.
@@ -21429,10 +21429,10 @@ func WrapIHTMLFieldSetElement2(raw *webmshtml.IHTMLFieldSetElement2) IHTMLFieldS
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLFieldSetElement2) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLFieldSetElement2) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLFiltersCollection is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLFiltersCollection with error-returning methods.
@@ -21454,10 +21454,10 @@ func (self IHTMLFiltersCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLFiltersCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLFiltersCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
@@ -21523,10 +21523,10 @@ func (self IHTMLFontNamesCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLFontNamesCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLFontNamesCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
@@ -21555,10 +21555,10 @@ func (self IHTMLFontSizesCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLFontSizesCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLFontSizesCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_forFont wraps the raw Get_forFont call.
@@ -21635,10 +21635,10 @@ func (self IHTMLFormElement) Get_method() (foundation.BSTR, error) {
 }
 
 // Get_elements wraps the raw Get_elements call.
-func (self IHTMLFormElement) Get_elements() (*systemcom.IDispatch, error) {
+func (self IHTMLFormElement) Get_elements() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_elements(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_target wraps the raw Put_target call.
@@ -21702,10 +21702,10 @@ func (self IHTMLFormElement) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLFormElement) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLFormElement) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLFormElement2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLFormElement2 with error-returning methods.
@@ -21743,10 +21743,10 @@ func WrapIHTMLFormElement3(raw *webmshtml.IHTMLFormElement3) IHTMLFormElement3 {
 }
 
 // NamedItem wraps the raw NamedItem call.
-func (self IHTMLFormElement3) NamedItem(name foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IHTMLFormElement3) NamedItem(name foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _pdisp *systemcom.IDispatch
 	_hr := self.Raw.NamedItem(name, &_pdisp)
-	return _pdisp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_pdisp), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLFormElement4 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLFormElement4 with error-returning methods.
@@ -21883,10 +21883,10 @@ func WrapIHTMLFrameBase2(raw *webmshtml.IHTMLFrameBase2) IHTMLFrameBase2 {
 }
 
 // Get_contentWindow wraps the raw Get_contentWindow call.
-func (self IHTMLFrameBase2) Get_contentWindow() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLFrameBase2) Get_contentWindow() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_contentWindow(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onload wraps the raw Get_onload call.
@@ -22000,10 +22000,10 @@ func WrapIHTMLFrameElement3(raw *webmshtml.IHTMLFrameElement3) IHTMLFrameElement
 }
 
 // Get_contentDocument wraps the raw Get_contentDocument call.
-func (self IHTMLFrameElement3) Get_contentDocument() (*systemcom.IDispatch, error) {
+func (self IHTMLFrameElement3) Get_contentDocument() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_contentDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_src wraps the raw Put_src call.
@@ -22251,17 +22251,17 @@ func WrapIHTMLGenericElement(raw *webmshtml.IHTMLGenericElement) IHTMLGenericEle
 }
 
 // Get_recordset wraps the raw Get_recordset call.
-func (self IHTMLGenericElement) Get_recordset() (*systemcom.IDispatch, error) {
+func (self IHTMLGenericElement) Get_recordset() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_recordset(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // NamedRecordset wraps the raw NamedRecordset call.
-func (self IHTMLGenericElement) NamedRecordset(dataMember foundation.BSTR, hierarchy *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+func (self IHTMLGenericElement) NamedRecordset(dataMember foundation.BSTR, hierarchy *systemvariant.VARIANT) (systemcomidiom.IDispatch, error) {
 	var _ppRecordset *systemcom.IDispatch
 	_hr := self.Raw.NamedRecordset(dataMember, hierarchy, &_ppRecordset)
-	return _ppRecordset, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRecordset), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLHRElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLHRElement with error-returning methods.
@@ -22496,10 +22496,10 @@ func WrapIHTMLIFrameElement3(raw *webmshtml.IHTMLIFrameElement3) IHTMLIFrameElem
 }
 
 // Get_contentDocument wraps the raw Get_contentDocument call.
-func (self IHTMLIFrameElement3) Get_contentDocument() (*systemcom.IDispatch, error) {
+func (self IHTMLIFrameElement3) Get_contentDocument() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_contentDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_src wraps the raw Put_src call.
@@ -22557,17 +22557,17 @@ func (self IHTMLIPrintCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLIPrintCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLIPrintCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLIPrintCollection) Item(index int32) (*systemcom.IUnknown, error) {
+func (self IHTMLIPrintCollection) Item(index int32) (systemcomidiom.IUnknown, error) {
 	var _ppIPrint *systemcom.IUnknown
 	_hr := self.Raw.Item(index, &_ppIPrint)
-	return _ppIPrint, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppIPrint), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLImageElementFactory is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLImageElementFactory with error-returning methods.
@@ -23034,17 +23034,17 @@ func (self IHTMLInputButtonElement) Get_disabled() (foundation.VARIANT_BOOL, err
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLInputButtonElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLInputButtonElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTextRange wraps the raw CreateTextRange call.
-func (self IHTMLInputButtonElement) CreateTextRange() (*webmshtml.IHTMLTxtRange, error) {
+func (self IHTMLInputButtonElement) CreateTextRange() (IHTMLTxtRange, error) {
 	var _range_ *webmshtml.IHTMLTxtRange
 	_hr := self.Raw.CreateTextRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTxtRange(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLInputElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLInputElement with error-returning methods.
@@ -23119,10 +23119,10 @@ func (self IHTMLInputElement) Get_disabled() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLInputElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLInputElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_size wraps the raw Put_size call.
@@ -23193,10 +23193,10 @@ func (self IHTMLInputElement) Get_readOnly() (foundation.VARIANT_BOOL, error) {
 }
 
 // CreateTextRange wraps the raw CreateTextRange call.
-func (self IHTMLInputElement) CreateTextRange() (*webmshtml.IHTMLTxtRange, error) {
+func (self IHTMLInputElement) CreateTextRange() (IHTMLTxtRange, error) {
 	var _range_ *webmshtml.IHTMLTxtRange
 	_hr := self.Raw.CreateTextRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTxtRange(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // Put_indeterminate wraps the raw Put_indeterminate call.
@@ -23560,10 +23560,10 @@ func (self IHTMLInputFileElement) Get_disabled() (foundation.VARIANT_BOOL, error
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLInputFileElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLInputFileElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_size wraps the raw Put_size call.
@@ -23683,17 +23683,17 @@ func (self IHTMLInputHiddenElement) Get_disabled() (foundation.VARIANT_BOOL, err
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLInputHiddenElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLInputHiddenElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTextRange wraps the raw CreateTextRange call.
-func (self IHTMLInputHiddenElement) CreateTextRange() (*webmshtml.IHTMLTxtRange, error) {
+func (self IHTMLInputHiddenElement) CreateTextRange() (IHTMLTxtRange, error) {
 	var _range_ *webmshtml.IHTMLTxtRange
 	_hr := self.Raw.CreateTextRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTxtRange(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLInputImage is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLInputImage with error-returning methods.
@@ -24100,10 +24100,10 @@ func (self IHTMLInputTextElement) Get_disabled() (foundation.VARIANT_BOOL, error
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLInputTextElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLInputTextElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_defaultValue wraps the raw Put_defaultValue call.
@@ -24174,10 +24174,10 @@ func (self IHTMLInputTextElement) Get_readOnly() (foundation.VARIANT_BOOL, error
 }
 
 // CreateTextRange wraps the raw CreateTextRange call.
-func (self IHTMLInputTextElement) CreateTextRange() (*webmshtml.IHTMLTxtRange, error) {
+func (self IHTMLInputTextElement) CreateTextRange() (IHTMLTxtRange, error) {
 	var _range_ *webmshtml.IHTMLTxtRange
 	_hr := self.Raw.CreateTextRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTxtRange(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLInputTextElement2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLInputTextElement2 with error-returning methods.
@@ -24267,10 +24267,10 @@ func WrapIHTMLIsIndexElement2(raw *webmshtml.IHTMLIsIndexElement2) IHTMLIsIndexE
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLIsIndexElement2) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLIsIndexElement2) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLLIElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLLIElement with error-returning methods.
@@ -24355,10 +24355,10 @@ func WrapIHTMLLabelElement2(raw *webmshtml.IHTMLLabelElement2) IHTMLLabelElement
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLLabelElement2) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLLabelElement2) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLLegendElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLLegendElement with error-returning methods.
@@ -24396,10 +24396,10 @@ func WrapIHTMLLegendElement2(raw *webmshtml.IHTMLLegendElement2) IHTMLLegendElem
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLLegendElement2) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLLegendElement2) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLLinkElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLLinkElement with error-returning methods.
@@ -24490,10 +24490,10 @@ func (self IHTMLLinkElement) Get_onerror() (systemvariant.VARIANT, error) {
 }
 
 // Get_styleSheet wraps the raw Get_styleSheet call.
-func (self IHTMLLinkElement) Get_styleSheet() (*webmshtml.IHTMLStyleSheet, error) {
+func (self IHTMLLinkElement) Get_styleSheet() (IHTMLStyleSheet, error) {
 	var _p *webmshtml.IHTMLStyleSheet
 	_hr := self.Raw.Get_styleSheet(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheet(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_disabled wraps the raw Put_disabled call.
@@ -24613,10 +24613,10 @@ func WrapIHTMLLinkElement5(raw *webmshtml.IHTMLLinkElement5) IHTMLLinkElement5 {
 }
 
 // Get_sheet wraps the raw Get_sheet call.
-func (self IHTMLLinkElement5) Get_sheet() (*webmshtml.IHTMLStyleSheet, error) {
+func (self IHTMLLinkElement5) Get_sheet() (IHTMLStyleSheet, error) {
 	var _p *webmshtml.IHTMLStyleSheet
 	_hr := self.Raw.Get_sheet(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheet(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLListElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLListElement with error-returning methods.
@@ -24806,10 +24806,10 @@ func (self IHTMLMSCSSKeyframeRule) Get_keyText() (foundation.BSTR, error) {
 }
 
 // Get_style wraps the raw Get_style call.
-func (self IHTMLMSCSSKeyframeRule) Get_style() (*webmshtml.IHTMLRuleStyle, error) {
+func (self IHTMLMSCSSKeyframeRule) Get_style() (IHTMLRuleStyle, error) {
 	var _p *webmshtml.IHTMLRuleStyle
 	_hr := self.Raw.Get_style(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRuleStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLMSCSSKeyframesRule is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLMSCSSKeyframesRule with error-returning methods.
@@ -24836,10 +24836,10 @@ func (self IHTMLMSCSSKeyframesRule) Get_name() (foundation.BSTR, error) {
 }
 
 // Get_cssRules wraps the raw Get_cssRules call.
-func (self IHTMLMSCSSKeyframesRule) Get_cssRules() (*webmshtml.IHTMLStyleSheetRulesCollection, error) {
+func (self IHTMLMSCSSKeyframesRule) Get_cssRules() (IHTMLStyleSheetRulesCollection, error) {
 	var _p *webmshtml.IHTMLStyleSheetRulesCollection
 	_hr := self.Raw.Get_cssRules(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRulesCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // AppendRule wraps the raw AppendRule call.
@@ -24853,10 +24853,10 @@ func (self IHTMLMSCSSKeyframesRule) DeleteRule(bstrKey foundation.BSTR) error {
 }
 
 // FindRule wraps the raw FindRule call.
-func (self IHTMLMSCSSKeyframesRule) FindRule(bstrKey foundation.BSTR) (*webmshtml.IHTMLMSCSSKeyframeRule, error) {
+func (self IHTMLMSCSSKeyframesRule) FindRule(bstrKey foundation.BSTR) (IHTMLMSCSSKeyframeRule, error) {
 	var _ppMSKeyframeRule *webmshtml.IHTMLMSCSSKeyframeRule
 	_hr := self.Raw.FindRule(bstrKey, &_ppMSKeyframeRule)
-	return _ppMSKeyframeRule, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLMSCSSKeyframeRule(_ppMSKeyframeRule), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLMSImgElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLMSImgElement with error-returning methods.
@@ -24941,10 +24941,10 @@ func WrapIHTMLMapElement(raw *webmshtml.IHTMLMapElement) IHTMLMapElement {
 }
 
 // Get_areas wraps the raw Get_areas call.
-func (self IHTMLMapElement) Get_areas() (*webmshtml.IHTMLAreasCollection, error) {
+func (self IHTMLMapElement) Get_areas() (IHTMLAreasCollection, error) {
 	var _p *webmshtml.IHTMLAreasCollection
 	_hr := self.Raw.Get_areas(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLAreasCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_name wraps the raw Put_name call.
@@ -25130,10 +25130,10 @@ func WrapIHTMLMediaElement(raw *webmshtml.IHTMLMediaElement) IHTMLMediaElement {
 }
 
 // Get_error wraps the raw Get_error call.
-func (self IHTMLMediaElement) Get_error() (*webmshtml.IHTMLMediaError, error) {
+func (self IHTMLMediaElement) Get_error() (IHTMLMediaError, error) {
 	var _p *webmshtml.IHTMLMediaError
 	_hr := self.Raw.Get_error(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLMediaError(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_src wraps the raw Put_src call.
@@ -25175,10 +25175,10 @@ func (self IHTMLMediaElement) Get_preload() (foundation.BSTR, error) {
 }
 
 // Get_buffered wraps the raw Get_buffered call.
-func (self IHTMLMediaElement) Get_buffered() (*webmshtml.IHTMLTimeRanges, error) {
+func (self IHTMLMediaElement) Get_buffered() (IHTMLTimeRanges, error) {
 	var _p *webmshtml.IHTMLTimeRanges
 	_hr := self.Raw.Get_buffered(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTimeRanges(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Load wraps the raw Load call.
@@ -25243,17 +25243,17 @@ func (self IHTMLMediaElement) Get_playbackRate() (float32, error) {
 }
 
 // Get_played wraps the raw Get_played call.
-func (self IHTMLMediaElement) Get_played() (*webmshtml.IHTMLTimeRanges, error) {
+func (self IHTMLMediaElement) Get_played() (IHTMLTimeRanges, error) {
 	var _p *webmshtml.IHTMLTimeRanges
 	_hr := self.Raw.Get_played(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTimeRanges(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_seekable wraps the raw Get_seekable call.
-func (self IHTMLMediaElement) Get_seekable() (*webmshtml.IHTMLTimeRanges, error) {
+func (self IHTMLMediaElement) Get_seekable() (IHTMLTimeRanges, error) {
 	var _p *webmshtml.IHTMLTimeRanges
 	_hr := self.Raw.Get_seekable(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTimeRanges(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ended wraps the raw Get_ended call.
@@ -25572,17 +25572,17 @@ func (self IHTMLModelessInit) Get_optionString() (systemvariant.VARIANT, error) 
 }
 
 // Get_moniker wraps the raw Get_moniker call.
-func (self IHTMLModelessInit) Get_moniker() (*systemcom.IUnknown, error) {
+func (self IHTMLModelessInit) Get_moniker() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get_moniker(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_document wraps the raw Get_document call.
-func (self IHTMLModelessInit) Get_document() (*systemcom.IUnknown, error) {
+func (self IHTMLModelessInit) Get_document() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get_document(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLNamespace is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLNamespace with error-returning methods.
@@ -25611,10 +25611,10 @@ func (self IHTMLNamespace) Get_urn() (foundation.BSTR, error) {
 }
 
 // Get_tagNames wraps the raw Get_tagNames call.
-func (self IHTMLNamespace) Get_tagNames() (*systemcom.IDispatch, error) {
+func (self IHTMLNamespace) Get_tagNames() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_tagNames(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_readyState wraps the raw Get_readyState call.
@@ -25637,15 +25637,15 @@ func (self IHTMLNamespace) DoImport(bstrImplementationUrl foundation.BSTR) error
 }
 
 // AttachEvent wraps the raw AttachEvent call.
-func (self IHTMLNamespace) AttachEvent(event foundation.BSTR, pDisp *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLNamespace) AttachEvent(event foundation.BSTR, pDisp systemcomidiom.IDispatch) (foundation.VARIANT_BOOL, error) {
 	var _pfResult foundation.VARIANT_BOOL
-	_hr := self.Raw.AttachEvent(event, pDisp, &_pfResult)
+	_hr := self.Raw.AttachEvent(event, pDisp.Raw, &_pfResult)
 	return _pfResult, win32.HRESULTError(int32(_hr))
 }
 
 // DetachEvent wraps the raw DetachEvent call.
-func (self IHTMLNamespace) DetachEvent(event foundation.BSTR, pDisp *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.DetachEvent(event, pDisp)))
+func (self IHTMLNamespace) DetachEvent(event foundation.BSTR, pDisp systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.DetachEvent(event, pDisp.Raw)))
 }
 
 // IHTMLNamespaceCollection is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLNamespaceCollection with error-returning methods.
@@ -25790,10 +25790,10 @@ func WrapIHTMLObjectElement(raw *webmshtml.IHTMLObjectElement) IHTMLObjectElemen
 }
 
 // Get_object wraps the raw Get_object call.
-func (self IHTMLObjectElement) Get_object() (*systemcom.IDispatch, error) {
+func (self IHTMLObjectElement) Get_object() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_object(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_classid wraps the raw Get_classid call.
@@ -25811,15 +25811,15 @@ func (self IHTMLObjectElement) Get_data() (foundation.BSTR, error) {
 }
 
 // Putref_recordset wraps the raw Putref_recordset call.
-func (self IHTMLObjectElement) Putref_recordset(v *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_recordset(v)))
+func (self IHTMLObjectElement) Putref_recordset(v systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_recordset(v.Raw)))
 }
 
 // Get_recordset wraps the raw Get_recordset call.
-func (self IHTMLObjectElement) Get_recordset() (*systemcom.IDispatch, error) {
+func (self IHTMLObjectElement) Get_recordset() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_recordset(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_align wraps the raw Put_align call.
@@ -25902,10 +25902,10 @@ func (self IHTMLObjectElement) Get_type() (foundation.BSTR, error) {
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLObjectElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLObjectElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_width wraps the raw Get_width call.
@@ -25991,10 +25991,10 @@ func WrapIHTMLObjectElement2(raw *webmshtml.IHTMLObjectElement2) IHTMLObjectElem
 }
 
 // NamedRecordset wraps the raw NamedRecordset call.
-func (self IHTMLObjectElement2) NamedRecordset(dataMember foundation.BSTR, hierarchy *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+func (self IHTMLObjectElement2) NamedRecordset(dataMember foundation.BSTR, hierarchy *systemvariant.VARIANT) (systemcomidiom.IDispatch, error) {
 	var _ppRecordset *systemcom.IDispatch
 	_hr := self.Raw.NamedRecordset(dataMember, hierarchy, &_ppRecordset)
-	return _ppRecordset, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppRecordset), win32.HRESULTError(int32(_hr))
 }
 
 // Put_classid wraps the raw Put_classid call.
@@ -26111,10 +26111,10 @@ func WrapIHTMLObjectElement4(raw *webmshtml.IHTMLObjectElement4) IHTMLObjectElem
 }
 
 // Get_contentDocument wraps the raw Get_contentDocument call.
-func (self IHTMLObjectElement4) Get_contentDocument() (*systemcom.IDispatch, error) {
+func (self IHTMLObjectElement4) Get_contentDocument() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_contentDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_codeBase wraps the raw Put_codeBase call.
@@ -26311,10 +26311,10 @@ func (self IHTMLOptionButtonElement) Get_indeterminate() (foundation.VARIANT_BOO
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLOptionButtonElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLOptionButtonElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLOptionElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLOptionElement with error-returning methods.
@@ -26389,10 +26389,10 @@ func (self IHTMLOptionElement) Get_text() (foundation.BSTR, error) {
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLOptionElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLOptionElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLOptionElement3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLOptionElement3 with error-returning methods.
@@ -26464,17 +26464,17 @@ func WrapIHTMLOptionsHolder(raw *webmshtml.IHTMLOptionsHolder) IHTMLOptionsHolde
 }
 
 // Get_document wraps the raw Get_document call.
-func (self IHTMLOptionsHolder) Get_document() (*webmshtml.IHTMLDocument2, error) {
+func (self IHTMLOptionsHolder) Get_document() (IHTMLDocument2, error) {
 	var _p *webmshtml.IHTMLDocument2
 	_hr := self.Raw.Get_document(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_fonts wraps the raw Get_fonts call.
-func (self IHTMLOptionsHolder) Get_fonts() (*webmshtml.IHTMLFontNamesCollection, error) {
+func (self IHTMLOptionsHolder) Get_fonts() (IHTMLFontNamesCollection, error) {
 	var _p *webmshtml.IHTMLFontNamesCollection
 	_hr := self.Raw.Get_fonts(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFontNamesCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_execArg wraps the raw Get_execArg call.
@@ -26545,10 +26545,10 @@ func (self IHTMLOptionsHolder) Get_errorDebug() (foundation.VARIANT_BOOL, error)
 }
 
 // Get_unsecuredWindowOfDocument wraps the raw Get_unsecuredWindowOfDocument call.
-func (self IHTMLOptionsHolder) Get_unsecuredWindowOfDocument() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLOptionsHolder) Get_unsecuredWindowOfDocument() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_unsecuredWindowOfDocument(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_findText wraps the raw Put_findText call.
@@ -26576,10 +26576,10 @@ func (self IHTMLOptionsHolder) Get_anythingAfterFrameset() (foundation.VARIANT_B
 }
 
 // Sizes wraps the raw Sizes call.
-func (self IHTMLOptionsHolder) Sizes(fontName foundation.BSTR) (*webmshtml.IHTMLFontSizesCollection, error) {
+func (self IHTMLOptionsHolder) Sizes(fontName foundation.BSTR) (IHTMLFontSizesCollection, error) {
 	var _pSizesCollection *webmshtml.IHTMLFontSizesCollection
 	_hr := self.Raw.Sizes(fontName, &_pSizesCollection)
-	return _pSizesCollection, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFontSizesCollection(_pSizesCollection), win32.HRESULTError(int32(_hr))
 }
 
 // ShowSecurityInfo wraps the raw ShowSecurityInfo call.
@@ -26588,9 +26588,9 @@ func (self IHTMLOptionsHolder) ShowSecurityInfo() error {
 }
 
 // IsApartmentModel wraps the raw IsApartmentModel call.
-func (self IHTMLOptionsHolder) IsApartmentModel(object *webmshtml.IHTMLObjectElement) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLOptionsHolder) IsApartmentModel(object IHTMLObjectElement) (foundation.VARIANT_BOOL, error) {
 	var _fApartment foundation.VARIANT_BOOL
-	_hr := self.Raw.IsApartmentModel(object, &_fApartment)
+	_hr := self.Raw.IsApartmentModel(object.Raw, &_fApartment)
 	return _fApartment, win32.HRESULTError(int32(_hr))
 }
 
@@ -26855,17 +26855,17 @@ func WrapIHTMLPerformance(raw *webmshtml.IHTMLPerformance) IHTMLPerformance {
 }
 
 // Get_navigation wraps the raw Get_navigation call.
-func (self IHTMLPerformance) Get_navigation() (*webmshtml.IHTMLPerformanceNavigation, error) {
+func (self IHTMLPerformance) Get_navigation() (IHTMLPerformanceNavigation, error) {
 	var _p *webmshtml.IHTMLPerformanceNavigation
 	_hr := self.Raw.Get_navigation(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLPerformanceNavigation(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_timing wraps the raw Get_timing call.
-func (self IHTMLPerformance) Get_timing() (*webmshtml.IHTMLPerformanceTiming, error) {
+func (self IHTMLPerformance) Get_timing() (IHTMLPerformanceTiming, error) {
 	var _p *webmshtml.IHTMLPerformanceTiming
 	_hr := self.Raw.Get_timing(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLPerformanceTiming(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ToString wraps the raw ToString call.
@@ -27207,10 +27207,10 @@ func (self IHTMLPopup) Hide() error {
 }
 
 // Get_document wraps the raw Get_document call.
-func (self IHTMLPopup) Get_document() (*webmshtml.IHTMLDocument, error) {
+func (self IHTMLPopup) Get_document() (IHTMLDocument, error) {
 	var _p *webmshtml.IHTMLDocument
 	_hr := self.Raw.Get_document(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_isOpen wraps the raw Get_isOpen call.
@@ -27253,10 +27253,10 @@ func (self IHTMLProgressElement) Get_position() (float32, error) {
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLProgressElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLProgressElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLRect is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLRect with error-returning methods.
@@ -27362,10 +27362,10 @@ func (self IHTMLRectCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLRectCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLRectCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
@@ -29406,10 +29406,10 @@ func (self IHTMLSelectElement) Get_name() (foundation.BSTR, error) {
 }
 
 // Get_options wraps the raw Get_options call.
-func (self IHTMLSelectElement) Get_options() (*systemcom.IDispatch, error) {
+func (self IHTMLSelectElement) Get_options() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_options(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onchange wraps the raw Get_onchange call.
@@ -29463,10 +29463,10 @@ func (self IHTMLSelectElement) Get_disabled() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLSelectElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLSelectElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -29487,10 +29487,10 @@ func (self IHTMLSelectElement) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLSelectElement) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLSelectElement) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLSelectElement2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLSelectElement2 with error-returning methods.
@@ -29516,10 +29516,10 @@ func WrapIHTMLSelectElement4(raw *webmshtml.IHTMLSelectElement4) IHTMLSelectElem
 }
 
 // NamedItem wraps the raw NamedItem call.
-func (self IHTMLSelectElement4) NamedItem(name foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IHTMLSelectElement4) NamedItem(name foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _pdisp *systemcom.IDispatch
 	_hr := self.Raw.NamedItem(name, &_pdisp)
-	return _pdisp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_pdisp), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLSelectElement5 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLSelectElement5 with error-returning methods.
@@ -29534,8 +29534,8 @@ func WrapIHTMLSelectElement5(raw *webmshtml.IHTMLSelectElement5) IHTMLSelectElem
 }
 
 // Add wraps the raw Add call.
-func (self IHTMLSelectElement5) Add(pElem *webmshtml.IHTMLOptionElement, pvarBefore *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pElem, pvarBefore)))
+func (self IHTMLSelectElement5) Add(pElem IHTMLOptionElement, pvarBefore *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pElem.Raw, pvarBefore)))
 }
 
 // IHTMLSelectElement6 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLSelectElement6 with error-returning methods.
@@ -29550,8 +29550,8 @@ func WrapIHTMLSelectElement6(raw *webmshtml.IHTMLSelectElement6) IHTMLSelectElem
 }
 
 // Add wraps the raw Add call.
-func (self IHTMLSelectElement6) Add(pElem *webmshtml.IHTMLOptionElement, pvarBefore *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pElem, pvarBefore)))
+func (self IHTMLSelectElement6) Add(pElem IHTMLOptionElement, pvarBefore *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pElem.Raw, pvarBefore)))
 }
 
 // Put_value wraps the raw Put_value call.
@@ -29614,10 +29614,10 @@ func WrapIHTMLSelection(raw *webmshtml.IHTMLSelection) IHTMLSelection {
 }
 
 // Get_anchorNode wraps the raw Get_anchorNode call.
-func (self IHTMLSelection) Get_anchorNode() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLSelection) Get_anchorNode() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_anchorNode(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_anchorOffset wraps the raw Get_anchorOffset call.
@@ -29628,10 +29628,10 @@ func (self IHTMLSelection) Get_anchorOffset() (int32, error) {
 }
 
 // Get_focusNode wraps the raw Get_focusNode call.
-func (self IHTMLSelection) Get_focusNode() (*webmshtml.IHTMLDOMNode, error) {
+func (self IHTMLSelection) Get_focusNode() (IHTMLDOMNode, error) {
 	var _p *webmshtml.IHTMLDOMNode
 	_hr := self.Raw.Get_focusNode(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMNode(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_focusOffset wraps the raw Get_focusOffset call.
@@ -29649,8 +29649,8 @@ func (self IHTMLSelection) Get_isCollapsed() (foundation.VARIANT_BOOL, error) {
 }
 
 // Collapse wraps the raw Collapse call.
-func (self IHTMLSelection) Collapse(parentNode *systemcom.IDispatch, offfset int32) error {
-	return win32.HRESULTError(int32(self.Raw.Collapse(parentNode, offfset)))
+func (self IHTMLSelection) Collapse(parentNode systemcomidiom.IDispatch, offfset int32) error {
+	return win32.HRESULTError(int32(self.Raw.Collapse(parentNode.Raw, offfset)))
 }
 
 // CollapseToStart wraps the raw CollapseToStart call.
@@ -29664,8 +29664,8 @@ func (self IHTMLSelection) CollapseToEnd() error {
 }
 
 // SelectAllChildren wraps the raw SelectAllChildren call.
-func (self IHTMLSelection) SelectAllChildren(parentNode *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SelectAllChildren(parentNode)))
+func (self IHTMLSelection) SelectAllChildren(parentNode systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SelectAllChildren(parentNode.Raw)))
 }
 
 // DeleteFromDocument wraps the raw DeleteFromDocument call.
@@ -29681,20 +29681,20 @@ func (self IHTMLSelection) Get_rangeCount() (int32, error) {
 }
 
 // GetRangeAt wraps the raw GetRangeAt call.
-func (self IHTMLSelection) GetRangeAt(index int32) (*webmshtml.IHTMLDOMRange, error) {
+func (self IHTMLSelection) GetRangeAt(index int32) (IHTMLDOMRange, error) {
 	var _ppRange *webmshtml.IHTMLDOMRange
 	_hr := self.Raw.GetRangeAt(index, &_ppRange)
-	return _ppRange, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDOMRange(_ppRange), win32.HRESULTError(int32(_hr))
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IHTMLSelection) AddRange(range_ *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(range_)))
+func (self IHTMLSelection) AddRange(range_ systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(range_.Raw)))
 }
 
 // RemoveRange wraps the raw RemoveRange call.
-func (self IHTMLSelection) RemoveRange(range_ *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveRange(range_)))
+func (self IHTMLSelection) RemoveRange(range_ systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveRange(range_.Raw)))
 }
 
 // RemoveAllRanges wraps the raw RemoveAllRanges call.
@@ -29721,10 +29721,10 @@ func WrapIHTMLSelectionObject(raw *webmshtml.IHTMLSelectionObject) IHTMLSelectio
 }
 
 // CreateRange wraps the raw CreateRange call.
-func (self IHTMLSelectionObject) CreateRange() (*systemcom.IDispatch, error) {
+func (self IHTMLSelectionObject) CreateRange() (systemcomidiom.IDispatch, error) {
 	var _range_ *systemcom.IDispatch
 	_hr := self.Raw.CreateRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // Empty wraps the raw Empty call.
@@ -29756,10 +29756,10 @@ func WrapIHTMLSelectionObject2(raw *webmshtml.IHTMLSelectionObject2) IHTMLSelect
 }
 
 // CreateRangeCollection wraps the raw CreateRangeCollection call.
-func (self IHTMLSelectionObject2) CreateRangeCollection() (*systemcom.IDispatch, error) {
+func (self IHTMLSelectionObject2) CreateRangeCollection() (systemcomidiom.IDispatch, error) {
 	var _rangeCollection *systemcom.IDispatch
 	_hr := self.Raw.CreateRangeCollection(&_rangeCollection)
-	return _rangeCollection, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_rangeCollection), win32.HRESULTError(int32(_hr))
 }
 
 // Get_typeDetail wraps the raw Get_typeDetail call.
@@ -31633,10 +31633,10 @@ func (self IHTMLStyleElement) Get_onerror() (systemvariant.VARIANT, error) {
 }
 
 // Get_styleSheet wraps the raw Get_styleSheet call.
-func (self IHTMLStyleElement) Get_styleSheet() (*webmshtml.IHTMLStyleSheet, error) {
+func (self IHTMLStyleElement) Get_styleSheet() (IHTMLStyleSheet, error) {
 	var _p *webmshtml.IHTMLStyleSheet
 	_hr := self.Raw.Get_styleSheet(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheet(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_disabled wraps the raw Put_disabled call.
@@ -31675,10 +31675,10 @@ func WrapIHTMLStyleElement2(raw *webmshtml.IHTMLStyleElement2) IHTMLStyleElement
 }
 
 // Get_sheet wraps the raw Get_sheet call.
-func (self IHTMLStyleElement2) Get_sheet() (*webmshtml.IHTMLStyleSheet, error) {
+func (self IHTMLStyleElement2) Get_sheet() (IHTMLStyleSheet, error) {
 	var _p *webmshtml.IHTMLStyleSheet
 	_hr := self.Raw.Get_sheet(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheet(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLStyleEnabled is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLStyleEnabled with error-returning methods.
@@ -31739,10 +31739,10 @@ func WrapIHTMLStyleFontFace2(raw *webmshtml.IHTMLStyleFontFace2) IHTMLStyleFontF
 }
 
 // Get_style wraps the raw Get_style call.
-func (self IHTMLStyleFontFace2) Get_style() (*webmshtml.IHTMLRuleStyle, error) {
+func (self IHTMLStyleFontFace2) Get_style() (IHTMLRuleStyle, error) {
 	var _p *webmshtml.IHTMLRuleStyle
 	_hr := self.Raw.Get_style(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRuleStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLStyleMedia is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLStyleMedia with error-returning methods.
@@ -31794,17 +31794,17 @@ func (self IHTMLStyleSheet) Get_title() (foundation.BSTR, error) {
 }
 
 // Get_parentStyleSheet wraps the raw Get_parentStyleSheet call.
-func (self IHTMLStyleSheet) Get_parentStyleSheet() (*webmshtml.IHTMLStyleSheet, error) {
+func (self IHTMLStyleSheet) Get_parentStyleSheet() (IHTMLStyleSheet, error) {
 	var _p *webmshtml.IHTMLStyleSheet
 	_hr := self.Raw.Get_parentStyleSheet(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheet(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_owningElement wraps the raw Get_owningElement call.
-func (self IHTMLStyleSheet) Get_owningElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLStyleSheet) Get_owningElement() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_owningElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_disabled wraps the raw Put_disabled call.
@@ -31827,10 +31827,10 @@ func (self IHTMLStyleSheet) Get_readOnly() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_imports wraps the raw Get_imports call.
-func (self IHTMLStyleSheet) Get_imports() (*webmshtml.IHTMLStyleSheetsCollection, error) {
+func (self IHTMLStyleSheet) Get_imports() (IHTMLStyleSheetsCollection, error) {
 	var _p *webmshtml.IHTMLStyleSheetsCollection
 	_hr := self.Raw.Get_imports(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetsCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_href wraps the raw Put_href call.
@@ -31908,10 +31908,10 @@ func (self IHTMLStyleSheet) Get_cssText() (foundation.BSTR, error) {
 }
 
 // Get_rules wraps the raw Get_rules call.
-func (self IHTMLStyleSheet) Get_rules() (*webmshtml.IHTMLStyleSheetRulesCollection, error) {
+func (self IHTMLStyleSheet) Get_rules() (IHTMLStyleSheetRulesCollection, error) {
 	var _p *webmshtml.IHTMLStyleSheetRulesCollection
 	_hr := self.Raw.Get_rules(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRulesCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLStyleSheet2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLStyleSheet2 with error-returning methods.
@@ -31926,10 +31926,10 @@ func WrapIHTMLStyleSheet2(raw *webmshtml.IHTMLStyleSheet2) IHTMLStyleSheet2 {
 }
 
 // Get_pages wraps the raw Get_pages call.
-func (self IHTMLStyleSheet2) Get_pages() (*webmshtml.IHTMLStyleSheetPagesCollection, error) {
+func (self IHTMLStyleSheet2) Get_pages() (IHTMLStyleSheetPagesCollection, error) {
 	var _p *webmshtml.IHTMLStyleSheetPagesCollection
 	_hr := self.Raw.Get_pages(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetPagesCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // AddPageRule wraps the raw AddPageRule call.
@@ -32009,24 +32009,24 @@ func (self IHTMLStyleSheet4) Get_title() (foundation.BSTR, error) {
 }
 
 // Get_ownerNode wraps the raw Get_ownerNode call.
-func (self IHTMLStyleSheet4) Get_ownerNode() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLStyleSheet4) Get_ownerNode() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_ownerNode(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ownerRule wraps the raw Get_ownerRule call.
-func (self IHTMLStyleSheet4) Get_ownerRule() (*webmshtml.IHTMLCSSRule, error) {
+func (self IHTMLStyleSheet4) Get_ownerRule() (IHTMLCSSRule, error) {
 	var _p *webmshtml.IHTMLCSSRule
 	_hr := self.Raw.Get_ownerRule(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLCSSRule(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_cssRules wraps the raw Get_cssRules call.
-func (self IHTMLStyleSheet4) Get_cssRules() (*webmshtml.IHTMLStyleSheetRulesCollection, error) {
+func (self IHTMLStyleSheet4) Get_cssRules() (IHTMLStyleSheetRulesCollection, error) {
 	var _p *webmshtml.IHTMLStyleSheetRulesCollection
 	_hr := self.Raw.Get_cssRules(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRulesCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_media wraps the raw Get_media call.
@@ -32097,10 +32097,10 @@ func (self IHTMLStyleSheetPage2) Get_selectorText() (foundation.BSTR, error) {
 }
 
 // Get_style wraps the raw Get_style call.
-func (self IHTMLStyleSheetPage2) Get_style() (*webmshtml.IHTMLRuleStyle, error) {
+func (self IHTMLStyleSheetPage2) Get_style() (IHTMLRuleStyle, error) {
 	var _p *webmshtml.IHTMLRuleStyle
 	_hr := self.Raw.Get_style(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRuleStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLStyleSheetPagesCollection is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLStyleSheetPagesCollection with error-returning methods.
@@ -32122,10 +32122,10 @@ func (self IHTMLStyleSheetPagesCollection) Get_length() (int32, error) {
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLStyleSheetPagesCollection) Item(index int32) (*webmshtml.IHTMLStyleSheetPage, error) {
+func (self IHTMLStyleSheetPagesCollection) Item(index int32) (IHTMLStyleSheetPage, error) {
 	var _ppHTMLStyleSheetPage *webmshtml.IHTMLStyleSheetPage
 	_hr := self.Raw.Item(index, &_ppHTMLStyleSheetPage)
-	return _ppHTMLStyleSheetPage, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetPage(_ppHTMLStyleSheetPage), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLStyleSheetRule is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLStyleSheetRule with error-returning methods.
@@ -32152,10 +32152,10 @@ func (self IHTMLStyleSheetRule) Get_selectorText() (foundation.BSTR, error) {
 }
 
 // Get_style wraps the raw Get_style call.
-func (self IHTMLStyleSheetRule) Get_style() (*webmshtml.IHTMLRuleStyle, error) {
+func (self IHTMLStyleSheetRule) Get_style() (IHTMLRuleStyle, error) {
 	var _p *webmshtml.IHTMLRuleStyle
 	_hr := self.Raw.Get_style(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRuleStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_readOnly wraps the raw Get_readOnly call.
@@ -32225,10 +32225,10 @@ func WrapIHTMLStyleSheetRulesAppliedCollection(raw *webmshtml.IHTMLStyleSheetRul
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLStyleSheetRulesAppliedCollection) Item(index int32) (*webmshtml.IHTMLStyleSheetRule, error) {
+func (self IHTMLStyleSheetRulesAppliedCollection) Item(index int32) (IHTMLStyleSheetRule, error) {
 	var _ppHTMLStyleSheetRule *webmshtml.IHTMLStyleSheetRule
 	_hr := self.Raw.Item(index, &_ppHTMLStyleSheetRule)
-	return _ppHTMLStyleSheetRule, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRule(_ppHTMLStyleSheetRule), win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
@@ -32239,17 +32239,17 @@ func (self IHTMLStyleSheetRulesAppliedCollection) Get_length() (int32, error) {
 }
 
 // PropertyAppliedBy wraps the raw PropertyAppliedBy call.
-func (self IHTMLStyleSheetRulesAppliedCollection) PropertyAppliedBy(name foundation.BSTR) (*webmshtml.IHTMLStyleSheetRule, error) {
+func (self IHTMLStyleSheetRulesAppliedCollection) PropertyAppliedBy(name foundation.BSTR) (IHTMLStyleSheetRule, error) {
 	var _ppRule *webmshtml.IHTMLStyleSheetRule
 	_hr := self.Raw.PropertyAppliedBy(name, &_ppRule)
-	return _ppRule, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRule(_ppRule), win32.HRESULTError(int32(_hr))
 }
 
 // PropertyAppliedTrace wraps the raw PropertyAppliedTrace call.
-func (self IHTMLStyleSheetRulesAppliedCollection) PropertyAppliedTrace(name foundation.BSTR, index int32) (*webmshtml.IHTMLStyleSheetRule, error) {
+func (self IHTMLStyleSheetRulesAppliedCollection) PropertyAppliedTrace(name foundation.BSTR, index int32) (IHTMLStyleSheetRule, error) {
 	var _ppRule *webmshtml.IHTMLStyleSheetRule
 	_hr := self.Raw.PropertyAppliedTrace(name, index, &_ppRule)
-	return _ppRule, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRule(_ppRule), win32.HRESULTError(int32(_hr))
 }
 
 // PropertyAppliedTraceLength wraps the raw PropertyAppliedTraceLength call.
@@ -32278,10 +32278,10 @@ func (self IHTMLStyleSheetRulesCollection) Get_length() (int32, error) {
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLStyleSheetRulesCollection) Item(index int32) (*webmshtml.IHTMLStyleSheetRule, error) {
+func (self IHTMLStyleSheetRulesCollection) Item(index int32) (IHTMLStyleSheetRule, error) {
 	var _ppHTMLStyleSheetRule *webmshtml.IHTMLStyleSheetRule
 	_hr := self.Raw.Item(index, &_ppHTMLStyleSheetRule)
-	return _ppHTMLStyleSheetRule, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRule(_ppHTMLStyleSheetRule), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLStyleSheetRulesCollection2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLStyleSheetRulesCollection2 with error-returning methods.
@@ -32303,10 +32303,10 @@ func (self IHTMLStyleSheetRulesCollection2) Get_length() (int32, error) {
 }
 
 // Item wraps the raw Item call.
-func (self IHTMLStyleSheetRulesCollection2) Item(index int32) (*webmshtml.IHTMLCSSRule, error) {
+func (self IHTMLStyleSheetRulesCollection2) Item(index int32) (IHTMLCSSRule, error) {
 	var _ppHTMLCSSRule *webmshtml.IHTMLCSSRule
 	_hr := self.Raw.Item(index, &_ppHTMLCSSRule)
-	return _ppHTMLCSSRule, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLCSSRule(_ppHTMLCSSRule), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLStyleSheetsCollection is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLStyleSheetsCollection with error-returning methods.
@@ -32328,10 +32328,10 @@ func (self IHTMLStyleSheetsCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLStyleSheetsCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLStyleSheetsCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
@@ -32511,10 +32511,10 @@ func (self IHTMLTable) Refresh() error {
 }
 
 // Get_rows wraps the raw Get_rows call.
-func (self IHTMLTable) Get_rows() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLTable) Get_rows() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_rows(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_width wraps the raw Get_width call.
@@ -32554,38 +32554,38 @@ func (self IHTMLTable) PreviousPage() error {
 }
 
 // Get_tHead wraps the raw Get_tHead call.
-func (self IHTMLTable) Get_tHead() (*webmshtml.IHTMLTableSection, error) {
+func (self IHTMLTable) Get_tHead() (IHTMLTableSection, error) {
 	var _p *webmshtml.IHTMLTableSection
 	_hr := self.Raw.Get_tHead(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTableSection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_tFoot wraps the raw Get_tFoot call.
-func (self IHTMLTable) Get_tFoot() (*webmshtml.IHTMLTableSection, error) {
+func (self IHTMLTable) Get_tFoot() (IHTMLTableSection, error) {
 	var _p *webmshtml.IHTMLTableSection
 	_hr := self.Raw.Get_tFoot(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTableSection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_tBodies wraps the raw Get_tBodies call.
-func (self IHTMLTable) Get_tBodies() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLTable) Get_tBodies() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_tBodies(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_caption wraps the raw Get_caption call.
-func (self IHTMLTable) Get_caption() (*webmshtml.IHTMLTableCaption, error) {
+func (self IHTMLTable) Get_caption() (IHTMLTableCaption, error) {
 	var _p *webmshtml.IHTMLTableCaption
 	_hr := self.Raw.Get_caption(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTableCaption(_p), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTHead wraps the raw CreateTHead call.
-func (self IHTMLTable) CreateTHead() (*systemcom.IDispatch, error) {
+func (self IHTMLTable) CreateTHead() (systemcomidiom.IDispatch, error) {
 	var _head *systemcom.IDispatch
 	_hr := self.Raw.CreateTHead(&_head)
-	return _head, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_head), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteTHead wraps the raw DeleteTHead call.
@@ -32594,10 +32594,10 @@ func (self IHTMLTable) DeleteTHead() error {
 }
 
 // CreateTFoot wraps the raw CreateTFoot call.
-func (self IHTMLTable) CreateTFoot() (*systemcom.IDispatch, error) {
+func (self IHTMLTable) CreateTFoot() (systemcomidiom.IDispatch, error) {
 	var _foot *systemcom.IDispatch
 	_hr := self.Raw.CreateTFoot(&_foot)
-	return _foot, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_foot), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteTFoot wraps the raw DeleteTFoot call.
@@ -32606,10 +32606,10 @@ func (self IHTMLTable) DeleteTFoot() error {
 }
 
 // CreateCaption wraps the raw CreateCaption call.
-func (self IHTMLTable) CreateCaption() (*webmshtml.IHTMLTableCaption, error) {
+func (self IHTMLTable) CreateCaption() (IHTMLTableCaption, error) {
 	var _caption *webmshtml.IHTMLTableCaption
 	_hr := self.Raw.CreateCaption(&_caption)
-	return _caption, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTableCaption(_caption), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteCaption wraps the raw DeleteCaption call.
@@ -32618,10 +32618,10 @@ func (self IHTMLTable) DeleteCaption() error {
 }
 
 // InsertRow wraps the raw InsertRow call.
-func (self IHTMLTable) InsertRow(index int32) (*systemcom.IDispatch, error) {
+func (self IHTMLTable) InsertRow(index int32) (systemcomidiom.IDispatch, error) {
 	var _row *systemcom.IDispatch
 	_hr := self.Raw.InsertRow(index, &_row)
-	return _row, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_row), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteRow wraps the raw DeleteRow call.
@@ -32665,17 +32665,17 @@ func (self IHTMLTable2) LastPage() error {
 }
 
 // Get_cells wraps the raw Get_cells call.
-func (self IHTMLTable2) Get_cells() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLTable2) Get_cells() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_cells(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // MoveRow wraps the raw MoveRow call.
-func (self IHTMLTable2) MoveRow(indexFrom int32, indexTo int32) (*systemcom.IDispatch, error) {
+func (self IHTMLTable2) MoveRow(indexFrom int32, indexTo int32) (systemcomidiom.IDispatch, error) {
 	var _row *systemcom.IDispatch
 	_hr := self.Raw.MoveRow(indexFrom, indexTo, &_row)
-	return _row, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_row), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLTable3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLTable3 with error-returning methods.
@@ -32713,46 +32713,46 @@ func WrapIHTMLTable4(raw *webmshtml.IHTMLTable4) IHTMLTable4 {
 }
 
 // Putref_tHead wraps the raw Putref_tHead call.
-func (self IHTMLTable4) Putref_tHead(v *webmshtml.IHTMLTableSection) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_tHead(v)))
+func (self IHTMLTable4) Putref_tHead(v IHTMLTableSection) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_tHead(v.Raw)))
 }
 
 // Get_tHead wraps the raw Get_tHead call.
-func (self IHTMLTable4) Get_tHead() (*webmshtml.IHTMLTableSection, error) {
+func (self IHTMLTable4) Get_tHead() (IHTMLTableSection, error) {
 	var _p *webmshtml.IHTMLTableSection
 	_hr := self.Raw.Get_tHead(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTableSection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_tFoot wraps the raw Putref_tFoot call.
-func (self IHTMLTable4) Putref_tFoot(v *webmshtml.IHTMLTableSection) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_tFoot(v)))
+func (self IHTMLTable4) Putref_tFoot(v IHTMLTableSection) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_tFoot(v.Raw)))
 }
 
 // Get_tFoot wraps the raw Get_tFoot call.
-func (self IHTMLTable4) Get_tFoot() (*webmshtml.IHTMLTableSection, error) {
+func (self IHTMLTable4) Get_tFoot() (IHTMLTableSection, error) {
 	var _p *webmshtml.IHTMLTableSection
 	_hr := self.Raw.Get_tFoot(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTableSection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_caption wraps the raw Putref_caption call.
-func (self IHTMLTable4) Putref_caption(v *webmshtml.IHTMLTableCaption) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_caption(v)))
+func (self IHTMLTable4) Putref_caption(v IHTMLTableCaption) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_caption(v.Raw)))
 }
 
 // Get_caption wraps the raw Get_caption call.
-func (self IHTMLTable4) Get_caption() (*webmshtml.IHTMLTableCaption, error) {
+func (self IHTMLTable4) Get_caption() (IHTMLTableCaption, error) {
 	var _p *webmshtml.IHTMLTableCaption
 	_hr := self.Raw.Get_caption(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTableCaption(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InsertRow wraps the raw InsertRow call.
-func (self IHTMLTable4) InsertRow(index int32) (*systemcom.IDispatch, error) {
+func (self IHTMLTable4) InsertRow(index int32) (systemcomidiom.IDispatch, error) {
 	var _row *systemcom.IDispatch
 	_hr := self.Raw.InsertRow(index, &_row)
-	return _row, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_row), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteRow wraps the raw DeleteRow call.
@@ -32761,10 +32761,10 @@ func (self IHTMLTable4) DeleteRow(index int32) error {
 }
 
 // CreateTBody wraps the raw CreateTBody call.
-func (self IHTMLTable4) CreateTBody() (*webmshtml.IHTMLTableSection, error) {
+func (self IHTMLTable4) CreateTBody() (IHTMLTableSection, error) {
 	var _tbody *webmshtml.IHTMLTableSection
 	_hr := self.Raw.CreateTBody(&_tbody)
-	return _tbody, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTableSection(_tbody), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLTableCaption is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLTableCaption with error-returning methods.
@@ -33254,17 +33254,17 @@ func (self IHTMLTableRow) Get_sectionRowIndex() (int32, error) {
 }
 
 // Get_cells wraps the raw Get_cells call.
-func (self IHTMLTableRow) Get_cells() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLTableRow) Get_cells() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_cells(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InsertCell wraps the raw InsertCell call.
-func (self IHTMLTableRow) InsertCell(index int32) (*systemcom.IDispatch, error) {
+func (self IHTMLTableRow) InsertCell(index int32) (systemcomidiom.IDispatch, error) {
 	var _row *systemcom.IDispatch
 	_hr := self.Raw.InsertCell(index, &_row)
-	return _row, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_row), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteCell wraps the raw DeleteCell call.
@@ -33361,10 +33361,10 @@ func (self IHTMLTableRow4) Get_chOff() (foundation.BSTR, error) {
 }
 
 // InsertCell wraps the raw InsertCell call.
-func (self IHTMLTableRow4) InsertCell(index int32) (*systemcom.IDispatch, error) {
+func (self IHTMLTableRow4) InsertCell(index int32) (systemcomidiom.IDispatch, error) {
 	var _row *systemcom.IDispatch
 	_hr := self.Raw.InsertCell(index, &_row)
-	return _row, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_row), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteCell wraps the raw DeleteCell call.
@@ -33454,17 +33454,17 @@ func (self IHTMLTableSection) Get_bgColor() (systemvariant.VARIANT, error) {
 }
 
 // Get_rows wraps the raw Get_rows call.
-func (self IHTMLTableSection) Get_rows() (*webmshtml.IHTMLElementCollection, error) {
+func (self IHTMLTableSection) Get_rows() (IHTMLElementCollection, error) {
 	var _p *webmshtml.IHTMLElementCollection
 	_hr := self.Raw.Get_rows(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElementCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // InsertRow wraps the raw InsertRow call.
-func (self IHTMLTableSection) InsertRow(index int32) (*systemcom.IDispatch, error) {
+func (self IHTMLTableSection) InsertRow(index int32) (systemcomidiom.IDispatch, error) {
 	var _row *systemcom.IDispatch
 	_hr := self.Raw.InsertRow(index, &_row)
-	return _row, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_row), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteRow wraps the raw DeleteRow call.
@@ -33484,10 +33484,10 @@ func WrapIHTMLTableSection2(raw *webmshtml.IHTMLTableSection2) IHTMLTableSection
 }
 
 // MoveRow wraps the raw MoveRow call.
-func (self IHTMLTableSection2) MoveRow(indexFrom int32, indexTo int32) (*systemcom.IDispatch, error) {
+func (self IHTMLTableSection2) MoveRow(indexFrom int32, indexTo int32) (systemcomidiom.IDispatch, error) {
 	var _row *systemcom.IDispatch
 	_hr := self.Raw.MoveRow(indexFrom, indexTo, &_row)
-	return _row, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_row), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLTableSection3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLTableSection3 with error-returning methods.
@@ -33561,10 +33561,10 @@ func (self IHTMLTableSection4) Get_chOff() (foundation.BSTR, error) {
 }
 
 // InsertRow wraps the raw InsertRow call.
-func (self IHTMLTableSection4) InsertRow(index int32) (*systemcom.IDispatch, error) {
+func (self IHTMLTableSection4) InsertRow(index int32) (systemcomidiom.IDispatch, error) {
 	var _row *systemcom.IDispatch
 	_hr := self.Raw.InsertRow(index, &_row)
-	return _row, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_row), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteRow wraps the raw DeleteRow call.
@@ -33634,10 +33634,10 @@ func (self IHTMLTextAreaElement) Get_disabled() (foundation.VARIANT_BOOL, error)
 }
 
 // Get_form wraps the raw Get_form call.
-func (self IHTMLTextAreaElement) Get_form() (*webmshtml.IHTMLFormElement, error) {
+func (self IHTMLTextAreaElement) Get_form() (IHTMLFormElement, error) {
 	var _p *webmshtml.IHTMLFormElement
 	_hr := self.Raw.Get_form(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFormElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_defaultValue wraps the raw Put_defaultValue call.
@@ -33720,10 +33720,10 @@ func (self IHTMLTextAreaElement) Get_wrap() (foundation.BSTR, error) {
 }
 
 // CreateTextRange wraps the raw CreateTextRange call.
-func (self IHTMLTextAreaElement) CreateTextRange() (*webmshtml.IHTMLTxtRange, error) {
+func (self IHTMLTextAreaElement) CreateTextRange() (IHTMLTxtRange, error) {
 	var _range_ *webmshtml.IHTMLTxtRange
 	_hr := self.Raw.CreateTextRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTxtRange(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLTextAreaElement2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLTextAreaElement2 with error-returning methods.
@@ -33778,10 +33778,10 @@ func WrapIHTMLTextContainer(raw *webmshtml.IHTMLTextContainer) IHTMLTextContaine
 }
 
 // CreateControlRange wraps the raw CreateControlRange call.
-func (self IHTMLTextContainer) CreateControlRange() (*systemcom.IDispatch, error) {
+func (self IHTMLTextContainer) CreateControlRange() (systemcomidiom.IDispatch, error) {
 	var _range_ *systemcom.IDispatch
 	_hr := self.Raw.CreateControlRange(&_range_)
-	return _range_, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_range_), win32.HRESULTError(int32(_hr))
 }
 
 // Get_scrollHeight wraps the raw Get_scrollHeight call.
@@ -33905,17 +33905,17 @@ func WrapIHTMLTextRangeMetrics2(raw *webmshtml.IHTMLTextRangeMetrics2) IHTMLText
 }
 
 // GetClientRects wraps the raw GetClientRects call.
-func (self IHTMLTextRangeMetrics2) GetClientRects() (*webmshtml.IHTMLRectCollection, error) {
+func (self IHTMLTextRangeMetrics2) GetClientRects() (IHTMLRectCollection, error) {
 	var _pRectCol *webmshtml.IHTMLRectCollection
 	_hr := self.Raw.GetClientRects(&_pRectCol)
-	return _pRectCol, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRectCollection(_pRectCol), win32.HRESULTError(int32(_hr))
 }
 
 // GetBoundingClientRect wraps the raw GetBoundingClientRect call.
-func (self IHTMLTextRangeMetrics2) GetBoundingClientRect() (*webmshtml.IHTMLRect, error) {
+func (self IHTMLTextRangeMetrics2) GetBoundingClientRect() (IHTMLRect, error) {
 	var _pRect *webmshtml.IHTMLRect
 	_hr := self.Raw.GetBoundingClientRect(&_pRect)
-	return _pRect, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLRect(_pRect), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLTimeRanges is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLTimeRanges with error-returning methods.
@@ -34029,30 +34029,30 @@ func (self IHTMLTxtRange) Get_text() (foundation.BSTR, error) {
 }
 
 // ParentElement wraps the raw ParentElement call.
-func (self IHTMLTxtRange) ParentElement() (*webmshtml.IHTMLElement, error) {
+func (self IHTMLTxtRange) ParentElement() (IHTMLElement, error) {
 	var _parent *webmshtml.IHTMLElement
 	_hr := self.Raw.ParentElement(&_parent)
-	return _parent, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_parent), win32.HRESULTError(int32(_hr))
 }
 
 // Duplicate wraps the raw Duplicate call.
-func (self IHTMLTxtRange) Duplicate() (*webmshtml.IHTMLTxtRange, error) {
+func (self IHTMLTxtRange) Duplicate() (IHTMLTxtRange, error) {
 	var _Duplicate *webmshtml.IHTMLTxtRange
 	_hr := self.Raw.Duplicate(&_Duplicate)
-	return _Duplicate, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLTxtRange(_Duplicate), win32.HRESULTError(int32(_hr))
 }
 
 // InRange wraps the raw InRange call.
-func (self IHTMLTxtRange) InRange(Range *webmshtml.IHTMLTxtRange) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLTxtRange) InRange(Range IHTMLTxtRange) (foundation.VARIANT_BOOL, error) {
 	var _InRange foundation.VARIANT_BOOL
-	_hr := self.Raw.InRange(Range, &_InRange)
+	_hr := self.Raw.InRange(Range.Raw, &_InRange)
 	return _InRange, win32.HRESULTError(int32(_hr))
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self IHTMLTxtRange) IsEqual(Range *webmshtml.IHTMLTxtRange) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLTxtRange) IsEqual(Range IHTMLTxtRange) (foundation.VARIANT_BOOL, error) {
 	var _IsEqual foundation.VARIANT_BOOL
-	_hr := self.Raw.IsEqual(Range, &_IsEqual)
+	_hr := self.Raw.IsEqual(Range.Raw, &_IsEqual)
 	return _IsEqual, win32.HRESULTError(int32(_hr))
 }
 
@@ -34105,19 +34105,19 @@ func (self IHTMLTxtRange) PasteHTML(html foundation.BSTR) error {
 }
 
 // MoveToElementText wraps the raw MoveToElementText call.
-func (self IHTMLTxtRange) MoveToElementText(element *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToElementText(element)))
+func (self IHTMLTxtRange) MoveToElementText(element IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToElementText(element.Raw)))
 }
 
 // SetEndPoint wraps the raw SetEndPoint call.
-func (self IHTMLTxtRange) SetEndPoint(how foundation.BSTR, SourceRange *webmshtml.IHTMLTxtRange) error {
-	return win32.HRESULTError(int32(self.Raw.SetEndPoint(how, SourceRange)))
+func (self IHTMLTxtRange) SetEndPoint(how foundation.BSTR, SourceRange IHTMLTxtRange) error {
+	return win32.HRESULTError(int32(self.Raw.SetEndPoint(how, SourceRange.Raw)))
 }
 
 // CompareEndPoints wraps the raw CompareEndPoints call.
-func (self IHTMLTxtRange) CompareEndPoints(how foundation.BSTR, SourceRange *webmshtml.IHTMLTxtRange) (int32, error) {
+func (self IHTMLTxtRange) CompareEndPoints(how foundation.BSTR, SourceRange IHTMLTxtRange) (int32, error) {
 	var _ret_ int32
-	_hr := self.Raw.CompareEndPoints(how, SourceRange, &_ret_)
+	_hr := self.Raw.CompareEndPoints(how, SourceRange.Raw, &_ret_)
 	return _ret_, win32.HRESULTError(int32(_hr))
 }
 
@@ -34215,10 +34215,10 @@ func (self IHTMLTxtRangeCollection) Get_length() (int32, error) {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLTxtRangeCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLTxtRangeCollection) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
@@ -34397,10 +34397,10 @@ func WrapIHTMLWindow2(raw *webmshtml.IHTMLWindow2) IHTMLWindow2 {
 }
 
 // Get_frames wraps the raw Get_frames call.
-func (self IHTMLWindow2) Get_frames() (*webmshtml.IHTMLFramesCollection2, error) {
+func (self IHTMLWindow2) Get_frames() (IHTMLFramesCollection2, error) {
 	var _p *webmshtml.IHTMLFramesCollection2
 	_hr := self.Raw.Get_frames(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFramesCollection2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_defaultStatus wraps the raw Put_defaultStatus call.
@@ -34459,24 +34459,24 @@ func (self IHTMLWindow2) Prompt(message foundation.BSTR, defstr foundation.BSTR)
 }
 
 // Get_Image wraps the raw Get_Image call.
-func (self IHTMLWindow2) Get_Image() (*webmshtml.IHTMLImageElementFactory, error) {
+func (self IHTMLWindow2) Get_Image() (IHTMLImageElementFactory, error) {
 	var _p *webmshtml.IHTMLImageElementFactory
 	_hr := self.Raw.Get_Image(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLImageElementFactory(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_location wraps the raw Get_location call.
-func (self IHTMLWindow2) Get_location() (*webmshtml.IHTMLLocation, error) {
+func (self IHTMLWindow2) Get_location() (IHTMLLocation, error) {
 	var _p *webmshtml.IHTMLLocation
 	_hr := self.Raw.Get_location(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLLocation(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_history wraps the raw Get_history call.
-func (self IHTMLWindow2) Get_history() (*webmshtml.IOmHistory, error) {
+func (self IHTMLWindow2) Get_history() (IOmHistory, error) {
 	var _p *webmshtml.IOmHistory
 	_hr := self.Raw.Get_history(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIOmHistory(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Close wraps the raw Close call.
@@ -34492,10 +34492,10 @@ func (self IHTMLWindow2) Get_opener() (systemvariant.VARIANT, error) {
 }
 
 // Get_navigator wraps the raw Get_navigator call.
-func (self IHTMLWindow2) Get_navigator() (*webmshtml.IOmNavigator, error) {
+func (self IHTMLWindow2) Get_navigator() (IOmNavigator, error) {
 	var _p *webmshtml.IOmNavigator
 	_hr := self.Raw.Get_navigator(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIOmNavigator(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_name wraps the raw Put_name call.
@@ -34511,38 +34511,38 @@ func (self IHTMLWindow2) Get_name() (foundation.BSTR, error) {
 }
 
 // Get_parent wraps the raw Get_parent call.
-func (self IHTMLWindow2) Get_parent() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLWindow2) Get_parent() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_parent(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Open wraps the raw Open call.
-func (self IHTMLWindow2) Open(url foundation.BSTR, name foundation.BSTR, features foundation.BSTR, replace foundation.VARIANT_BOOL) (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLWindow2) Open(url foundation.BSTR, name foundation.BSTR, features foundation.BSTR, replace foundation.VARIANT_BOOL) (IHTMLWindow2, error) {
 	var _pomWindowResult *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Open(url, name, features, replace, &_pomWindowResult)
-	return _pomWindowResult, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_pomWindowResult), win32.HRESULTError(int32(_hr))
 }
 
 // Get_self wraps the raw Get_self call.
-func (self IHTMLWindow2) Get_self() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLWindow2) Get_self() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_self(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_top wraps the raw Get_top call.
-func (self IHTMLWindow2) Get_top() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLWindow2) Get_top() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_top(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_window wraps the raw Get_window call.
-func (self IHTMLWindow2) Get_window() (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLWindow2) Get_window() (IHTMLWindow2, error) {
 	var _p *webmshtml.IHTMLWindow2
 	_hr := self.Raw.Get_window(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Navigate wraps the raw Navigate call.
@@ -34614,24 +34614,24 @@ func (self IHTMLWindow2) Get_onscroll() (systemvariant.VARIANT, error) {
 }
 
 // Get_document wraps the raw Get_document call.
-func (self IHTMLWindow2) Get_document() (*webmshtml.IHTMLDocument2, error) {
+func (self IHTMLWindow2) Get_document() (IHTMLDocument2, error) {
 	var _p *webmshtml.IHTMLDocument2
 	_hr := self.Raw.Get_document(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDocument2(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_event wraps the raw Get_event call.
-func (self IHTMLWindow2) Get_event() (*webmshtml.IHTMLEventObj, error) {
+func (self IHTMLWindow2) Get_event() (IHTMLEventObj, error) {
 	var _p *webmshtml.IHTMLEventObj
 	_hr := self.Raw.Get_event(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLEventObj(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IHTMLWindow2) Get__newEnum() (*systemcom.IUnknown, error) {
+func (self IHTMLWindow2) Get__newEnum() (systemcomidiom.IUnknown, error) {
 	var _p *systemcom.IUnknown
 	_hr := self.Raw.Get__newEnum(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ShowModalDialog wraps the raw ShowModalDialog call.
@@ -34642,17 +34642,17 @@ func (self IHTMLWindow2) ShowModalDialog(dialog foundation.BSTR, varArgIn *syste
 }
 
 // Get_screen wraps the raw Get_screen call.
-func (self IHTMLWindow2) Get_screen() (*webmshtml.IHTMLScreen, error) {
+func (self IHTMLWindow2) Get_screen() (IHTMLScreen, error) {
 	var _p *webmshtml.IHTMLScreen
 	_hr := self.Raw.Get_screen(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLScreen(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Option wraps the raw Get_Option call.
-func (self IHTMLWindow2) Get_Option() (*webmshtml.IHTMLOptionElementFactory, error) {
+func (self IHTMLWindow2) Get_Option() (IHTMLOptionElementFactory, error) {
 	var _p *webmshtml.IHTMLOptionElementFactory
 	_hr := self.Raw.Get_Option(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLOptionElementFactory(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Focus wraps the raw Focus call.
@@ -34678,10 +34678,10 @@ func (self IHTMLWindow2) Scroll(x int32, y int32) error {
 }
 
 // Get_clientInformation wraps the raw Get_clientInformation call.
-func (self IHTMLWindow2) Get_clientInformation() (*webmshtml.IOmNavigator, error) {
+func (self IHTMLWindow2) Get_clientInformation() (IOmNavigator, error) {
 	var _p *webmshtml.IOmNavigator
 	_hr := self.Raw.Get_clientInformation(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIOmNavigator(_p), win32.HRESULTError(int32(_hr))
 }
 
 // SetInterval wraps the raw SetInterval call.
@@ -34748,10 +34748,10 @@ func (self IHTMLWindow2) ResizeBy(x int32, y int32) error {
 }
 
 // Get_external wraps the raw Get_external call.
-func (self IHTMLWindow2) Get_external() (*systemcom.IDispatch, error) {
+func (self IHTMLWindow2) Get_external() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_external(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLWindow3 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLWindow3 with error-returning methods.
@@ -34780,15 +34780,15 @@ func (self IHTMLWindow3) Get_screenTop() (int32, error) {
 }
 
 // AttachEvent wraps the raw AttachEvent call.
-func (self IHTMLWindow3) AttachEvent(event foundation.BSTR, pDisp *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+func (self IHTMLWindow3) AttachEvent(event foundation.BSTR, pDisp systemcomidiom.IDispatch) (foundation.VARIANT_BOOL, error) {
 	var _pfResult foundation.VARIANT_BOOL
-	_hr := self.Raw.AttachEvent(event, pDisp, &_pfResult)
+	_hr := self.Raw.AttachEvent(event, pDisp.Raw, &_pfResult)
 	return _pfResult, win32.HRESULTError(int32(_hr))
 }
 
 // DetachEvent wraps the raw DetachEvent call.
-func (self IHTMLWindow3) DetachEvent(event foundation.BSTR, pDisp *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.DetachEvent(event, pDisp)))
+func (self IHTMLWindow3) DetachEvent(event foundation.BSTR, pDisp systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.DetachEvent(event, pDisp.Raw)))
 }
 
 // SetTimeout wraps the raw SetTimeout call.
@@ -34825,17 +34825,17 @@ func (self IHTMLWindow3) Get_onafterprint() (systemvariant.VARIANT, error) {
 }
 
 // Get_clipboardData wraps the raw Get_clipboardData call.
-func (self IHTMLWindow3) Get_clipboardData() (*webmshtml.IHTMLDataTransfer, error) {
+func (self IHTMLWindow3) Get_clipboardData() (IHTMLDataTransfer, error) {
 	var _p *webmshtml.IHTMLDataTransfer
 	_hr := self.Raw.Get_clipboardData(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLDataTransfer(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ShowModelessDialog wraps the raw ShowModelessDialog call.
-func (self IHTMLWindow3) ShowModelessDialog(url foundation.BSTR, varArgIn *systemvariant.VARIANT, options *systemvariant.VARIANT) (*webmshtml.IHTMLWindow2, error) {
+func (self IHTMLWindow3) ShowModelessDialog(url foundation.BSTR, varArgIn *systemvariant.VARIANT, options *systemvariant.VARIANT) (IHTMLWindow2, error) {
 	var _pDialog *webmshtml.IHTMLWindow2
 	_hr := self.Raw.ShowModelessDialog(url, varArgIn, options, &_pDialog)
-	return _pDialog, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLWindow2(_pDialog), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLWindow4 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLWindow4 with error-returning methods.
@@ -34850,17 +34850,17 @@ func WrapIHTMLWindow4(raw *webmshtml.IHTMLWindow4) IHTMLWindow4 {
 }
 
 // CreatePopup wraps the raw CreatePopup call.
-func (self IHTMLWindow4) CreatePopup(varArgIn *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+func (self IHTMLWindow4) CreatePopup(varArgIn *systemvariant.VARIANT) (systemcomidiom.IDispatch, error) {
 	var _ppPopup *systemcom.IDispatch
 	_hr := self.Raw.CreatePopup(varArgIn, &_ppPopup)
-	return _ppPopup, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppPopup), win32.HRESULTError(int32(_hr))
 }
 
 // Get_frameElement wraps the raw Get_frameElement call.
-func (self IHTMLWindow4) Get_frameElement() (*webmshtml.IHTMLFrameBase, error) {
+func (self IHTMLWindow4) Get_frameElement() (IHTMLFrameBase, error) {
 	var _p *webmshtml.IHTMLFrameBase
 	_hr := self.Raw.Get_frameElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLFrameBase(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLWindow5 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLWindow5 with error-returning methods.
@@ -34900,17 +34900,17 @@ func (self IHTMLWindow6) Get_XDomainRequest() (systemvariant.VARIANT, error) {
 }
 
 // Get_sessionStorage wraps the raw Get_sessionStorage call.
-func (self IHTMLWindow6) Get_sessionStorage() (*webmshtml.IHTMLStorage, error) {
+func (self IHTMLWindow6) Get_sessionStorage() (IHTMLStorage, error) {
 	var _p *webmshtml.IHTMLStorage
 	_hr := self.Raw.Get_sessionStorage(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStorage(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_localStorage wraps the raw Get_localStorage call.
-func (self IHTMLWindow6) Get_localStorage() (*webmshtml.IHTMLStorage, error) {
+func (self IHTMLWindow6) Get_localStorage() (IHTMLStorage, error) {
 	var _p *webmshtml.IHTMLStorage
 	_hr := self.Raw.Get_localStorage(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStorage(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onhashchange wraps the raw Get_onhashchange call.
@@ -34958,24 +34958,24 @@ func WrapIHTMLWindow7(raw *webmshtml.IHTMLWindow7) IHTMLWindow7 {
 }
 
 // GetSelection wraps the raw GetSelection call.
-func (self IHTMLWindow7) GetSelection() (*webmshtml.IHTMLSelection, error) {
+func (self IHTMLWindow7) GetSelection() (IHTMLSelection, error) {
 	var _ppIHTMLSelection *webmshtml.IHTMLSelection
 	_hr := self.Raw.GetSelection(&_ppIHTMLSelection)
-	return _ppIHTMLSelection, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLSelection(_ppIHTMLSelection), win32.HRESULTError(int32(_hr))
 }
 
 // GetComputedStyle wraps the raw GetComputedStyle call.
-func (self IHTMLWindow7) GetComputedStyle(varArgIn *webmshtml.IHTMLDOMNode, bstrPseudoElt foundation.BSTR) (*webmshtml.IHTMLCSSStyleDeclaration, error) {
+func (self IHTMLWindow7) GetComputedStyle(varArgIn IHTMLDOMNode, bstrPseudoElt foundation.BSTR) (IHTMLCSSStyleDeclaration, error) {
 	var _ppComputedStyle *webmshtml.IHTMLCSSStyleDeclaration
-	_hr := self.Raw.GetComputedStyle(varArgIn, bstrPseudoElt, &_ppComputedStyle)
-	return _ppComputedStyle, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetComputedStyle(varArgIn.Raw, bstrPseudoElt, &_ppComputedStyle)
+	return WrapIHTMLCSSStyleDeclaration(_ppComputedStyle), win32.HRESULTError(int32(_hr))
 }
 
 // Get_styleMedia wraps the raw Get_styleMedia call.
-func (self IHTMLWindow7) Get_styleMedia() (*webmshtml.IHTMLStyleMedia, error) {
+func (self IHTMLWindow7) Get_styleMedia() (IHTMLStyleMedia, error) {
 	var _p *webmshtml.IHTMLStyleMedia
 	_hr := self.Raw.Get_styleMedia(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleMedia(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_performance wraps the raw Get_performance call.
@@ -35522,10 +35522,10 @@ func (self IHTMLWindow8) Get_onmsinertiastart() (systemvariant.VARIANT, error) {
 }
 
 // Get_applicationCache wraps the raw Get_applicationCache call.
-func (self IHTMLWindow8) Get_applicationCache() (*webmshtml.IHTMLApplicationCache, error) {
+func (self IHTMLWindow8) Get_applicationCache() (IHTMLApplicationCache, error) {
 	var _p *webmshtml.IHTMLApplicationCache
 	_hr := self.Raw.Get_applicationCache(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLApplicationCache(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_onpopstate wraps the raw Get_onpopstate call.
@@ -35622,10 +35622,10 @@ func WrapIHTMLXDomainRequestFactory(raw *webmshtml.IHTMLXDomainRequestFactory) I
 }
 
 // Create wraps the raw Create call.
-func (self IHTMLXDomainRequestFactory) Create() (*webmshtml.IHTMLXDomainRequest, error) {
+func (self IHTMLXDomainRequestFactory) Create() (IHTMLXDomainRequest, error) {
 	var ___MIDL__IHTMLXDomainRequestFactory0000 *webmshtml.IHTMLXDomainRequest
 	_hr := self.Raw.Create(&___MIDL__IHTMLXDomainRequestFactory0000)
-	return ___MIDL__IHTMLXDomainRequestFactory0000, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLXDomainRequest(___MIDL__IHTMLXDomainRequestFactory0000), win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLXMLHttpRequest is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHTMLXMLHttpRequest with error-returning methods.
@@ -35661,10 +35661,10 @@ func (self IHTMLXMLHttpRequest) Get_responseText() (foundation.BSTR, error) {
 }
 
 // Get_responseXML wraps the raw Get_responseXML call.
-func (self IHTMLXMLHttpRequest) Get_responseXML() (*systemcom.IDispatch, error) {
+func (self IHTMLXMLHttpRequest) Get_responseXML() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_responseXML(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_status wraps the raw Get_status call.
@@ -35754,10 +35754,10 @@ func WrapIHTMLXMLHttpRequestFactory(raw *webmshtml.IHTMLXMLHttpRequestFactory) I
 }
 
 // Create wraps the raw Create call.
-func (self IHTMLXMLHttpRequestFactory) Create() (*webmshtml.IHTMLXMLHttpRequest, error) {
+func (self IHTMLXMLHttpRequestFactory) Create() (IHTMLXMLHttpRequest, error) {
 	var ___MIDL__IHTMLXMLHttpRequestFactory0000 *webmshtml.IHTMLXMLHttpRequest
 	_hr := self.Raw.Create(&___MIDL__IHTMLXMLHttpRequestFactory0000)
-	return ___MIDL__IHTMLXMLHttpRequestFactory0000, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLXMLHttpRequest(___MIDL__IHTMLXMLHttpRequestFactory0000), win32.HRESULTError(int32(_hr))
 }
 
 // IHighlightRenderingServices is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHighlightRenderingServices with error-returning methods.
@@ -35772,18 +35772,18 @@ func WrapIHighlightRenderingServices(raw *webmshtml.IHighlightRenderingServices)
 }
 
 // AddSegment wraps the raw AddSegment call.
-func (self IHighlightRenderingServices) AddSegment(pDispPointerStart *webmshtml.IDisplayPointer, pDispPointerEnd *webmshtml.IDisplayPointer, pIRenderStyle *webmshtml.IHTMLRenderStyle, ppISegment **webmshtml.IHighlightSegment) error {
-	return win32.HRESULTError(int32(self.Raw.AddSegment(pDispPointerStart, pDispPointerEnd, pIRenderStyle, ppISegment)))
+func (self IHighlightRenderingServices) AddSegment(pDispPointerStart IDisplayPointer, pDispPointerEnd IDisplayPointer, pIRenderStyle IHTMLRenderStyle, ppISegment **webmshtml.IHighlightSegment) error {
+	return win32.HRESULTError(int32(self.Raw.AddSegment(pDispPointerStart.Raw, pDispPointerEnd.Raw, pIRenderStyle.Raw, ppISegment)))
 }
 
 // MoveSegmentToPointers wraps the raw MoveSegmentToPointers call.
-func (self IHighlightRenderingServices) MoveSegmentToPointers(pISegment *webmshtml.IHighlightSegment, pDispPointerStart *webmshtml.IDisplayPointer, pDispPointerEnd *webmshtml.IDisplayPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveSegmentToPointers(pISegment, pDispPointerStart, pDispPointerEnd)))
+func (self IHighlightRenderingServices) MoveSegmentToPointers(pISegment IHighlightSegment, pDispPointerStart IDisplayPointer, pDispPointerEnd IDisplayPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveSegmentToPointers(pISegment.Raw, pDispPointerStart.Raw, pDispPointerEnd.Raw)))
 }
 
 // RemoveSegment wraps the raw RemoveSegment call.
-func (self IHighlightRenderingServices) RemoveSegment(pISegment *webmshtml.IHighlightSegment) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveSegment(pISegment)))
+func (self IHighlightRenderingServices) RemoveSegment(pISegment IHighlightSegment) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveSegment(pISegment.Raw)))
 }
 
 // IHighlightSegment is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHighlightSegment with error-returning methods.
@@ -35825,9 +35825,9 @@ func WrapIHostDialogHelper(raw *webmshtml.IHostDialogHelper) IHostDialogHelper {
 }
 
 // ShowHTMLDialog wraps the raw ShowHTMLDialog call.
-func (self IHostDialogHelper) ShowHTMLDialog(hwndParent foundation.HWND, pMk *systemcom.IMoniker, pvarArgIn *systemvariant.VARIANT, pchOptions string, pvarArgOut *systemvariant.VARIANT, punkHost *systemcom.IUnknown) error {
+func (self IHostDialogHelper) ShowHTMLDialog(hwndParent foundation.HWND, pMk systemcomidiom.IMoniker, pvarArgIn *systemvariant.VARIANT, pchOptions string, pvarArgOut *systemvariant.VARIANT, punkHost systemcomidiom.IUnknown) error {
 	_pchOptions := win32.UTF16Ptr(pchOptions)
-	return win32.HRESULTError(int32(self.Raw.ShowHTMLDialog(hwndParent, pMk, pvarArgIn, foundation.PWSTR(_pchOptions), pvarArgOut, punkHost)))
+	return win32.HRESULTError(int32(self.Raw.ShowHTMLDialog(hwndParent, pMk.Raw, pvarArgIn, foundation.PWSTR(_pchOptions), pvarArgOut, punkHost.Raw)))
 }
 
 // IHtmlDlgSafeHelper is an idiomatic wrapper over the raw COM interface Web.MsHtml.IHtmlDlgSafeHelper with error-returning methods.
@@ -35849,17 +35849,17 @@ func (self IHtmlDlgSafeHelper) GetCharset(fontName foundation.BSTR) (systemvaria
 }
 
 // Get_Fonts wraps the raw Get_Fonts call.
-func (self IHtmlDlgSafeHelper) Get_Fonts() (*systemcom.IDispatch, error) {
+func (self IHtmlDlgSafeHelper) Get_Fonts() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_Fonts(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_BlockFormats wraps the raw Get_BlockFormats call.
-func (self IHtmlDlgSafeHelper) Get_BlockFormats() (*systemcom.IDispatch, error) {
+func (self IHtmlDlgSafeHelper) Get_BlockFormats() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_BlockFormats(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IICCSVGColor is an idiomatic wrapper over the raw COM interface Web.MsHtml.IICCSVGColor with error-returning methods.
@@ -35985,15 +35985,15 @@ func WrapIMarkupContainer2(raw *webmshtml.IMarkupContainer2) IMarkupContainer2 {
 }
 
 // CreateChangeLog wraps the raw CreateChangeLog call.
-func (self IMarkupContainer2) CreateChangeLog(pChangeSink *webmshtml.IHTMLChangeSink, ppChangeLog **webmshtml.IHTMLChangeLog, fForward bool, fBackward bool) error {
+func (self IMarkupContainer2) CreateChangeLog(pChangeSink IHTMLChangeSink, ppChangeLog **webmshtml.IHTMLChangeLog, fForward bool, fBackward bool) error {
 	_fForward := foundation.BOOL(win32.Bool32(fForward))
 	_fBackward := foundation.BOOL(win32.Bool32(fBackward))
-	return win32.HRESULTError(int32(self.Raw.CreateChangeLog(pChangeSink, ppChangeLog, _fForward, _fBackward)))
+	return win32.HRESULTError(int32(self.Raw.CreateChangeLog(pChangeSink.Raw, ppChangeLog, _fForward, _fBackward)))
 }
 
 // RegisterForDirtyRange wraps the raw RegisterForDirtyRange call.
-func (self IMarkupContainer2) RegisterForDirtyRange(pChangeSink *webmshtml.IHTMLChangeSink, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterForDirtyRange(pChangeSink, pdwCookie)))
+func (self IMarkupContainer2) RegisterForDirtyRange(pChangeSink IHTMLChangeSink, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterForDirtyRange(pChangeSink.Raw, pdwCookie)))
 }
 
 // UnRegisterForDirtyRange wraps the raw UnRegisterForDirtyRange call.
@@ -36002,8 +36002,8 @@ func (self IMarkupContainer2) UnRegisterForDirtyRange(dwCookie uint32) error {
 }
 
 // GetAndClearDirtyRange wraps the raw GetAndClearDirtyRange call.
-func (self IMarkupContainer2) GetAndClearDirtyRange(dwCookie uint32, pIPointerBegin *webmshtml.IMarkupPointer, pIPointerEnd *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetAndClearDirtyRange(dwCookie, pIPointerBegin, pIPointerEnd)))
+func (self IMarkupContainer2) GetAndClearDirtyRange(dwCookie uint32, pIPointerBegin IMarkupPointer, pIPointerEnd IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetAndClearDirtyRange(dwCookie, pIPointerBegin.Raw, pIPointerEnd.Raw)))
 }
 
 // GetVersionNumber wraps the raw GetVersionNumber call.
@@ -36069,19 +36069,19 @@ func (self IMarkupPointer) GetContainer(ppContainer **webmshtml.IMarkupContainer
 }
 
 // MoveAdjacentToElement wraps the raw MoveAdjacentToElement call.
-func (self IMarkupPointer) MoveAdjacentToElement(pElement *webmshtml.IHTMLElement, eAdj webmshtml.ELEMENT_ADJACENCY) error {
-	return win32.HRESULTError(int32(self.Raw.MoveAdjacentToElement(pElement, eAdj)))
+func (self IMarkupPointer) MoveAdjacentToElement(pElement IHTMLElement, eAdj webmshtml.ELEMENT_ADJACENCY) error {
+	return win32.HRESULTError(int32(self.Raw.MoveAdjacentToElement(pElement.Raw, eAdj)))
 }
 
 // MoveToPointer wraps the raw MoveToPointer call.
-func (self IMarkupPointer) MoveToPointer(pPointer *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToPointer(pPointer)))
+func (self IMarkupPointer) MoveToPointer(pPointer IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToPointer(pPointer.Raw)))
 }
 
 // MoveToContainer wraps the raw MoveToContainer call.
-func (self IMarkupPointer) MoveToContainer(pContainer *webmshtml.IMarkupContainer, fAtStart bool) error {
+func (self IMarkupPointer) MoveToContainer(pContainer IMarkupContainer, fAtStart bool) error {
 	_fAtStart := foundation.BOOL(win32.Bool32(fAtStart))
-	return win32.HRESULTError(int32(self.Raw.MoveToContainer(pContainer, _fAtStart)))
+	return win32.HRESULTError(int32(self.Raw.MoveToContainer(pContainer.Raw, _fAtStart)))
 }
 
 // Left wraps the raw Left call.
@@ -36102,28 +36102,28 @@ func (self IMarkupPointer) CurrentScope(ppElemCurrent **webmshtml.IHTMLElement) 
 }
 
 // IsLeftOf wraps the raw IsLeftOf call.
-func (self IMarkupPointer) IsLeftOf(pPointerThat *webmshtml.IMarkupPointer, pfResult *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsLeftOf(pPointerThat, pfResult)))
+func (self IMarkupPointer) IsLeftOf(pPointerThat IMarkupPointer, pfResult *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsLeftOf(pPointerThat.Raw, pfResult)))
 }
 
 // IsLeftOfOrEqualTo wraps the raw IsLeftOfOrEqualTo call.
-func (self IMarkupPointer) IsLeftOfOrEqualTo(pPointerThat *webmshtml.IMarkupPointer, pfResult *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsLeftOfOrEqualTo(pPointerThat, pfResult)))
+func (self IMarkupPointer) IsLeftOfOrEqualTo(pPointerThat IMarkupPointer, pfResult *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsLeftOfOrEqualTo(pPointerThat.Raw, pfResult)))
 }
 
 // IsRightOf wraps the raw IsRightOf call.
-func (self IMarkupPointer) IsRightOf(pPointerThat *webmshtml.IMarkupPointer, pfResult *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsRightOf(pPointerThat, pfResult)))
+func (self IMarkupPointer) IsRightOf(pPointerThat IMarkupPointer, pfResult *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsRightOf(pPointerThat.Raw, pfResult)))
 }
 
 // IsRightOfOrEqualTo wraps the raw IsRightOfOrEqualTo call.
-func (self IMarkupPointer) IsRightOfOrEqualTo(pPointerThat *webmshtml.IMarkupPointer, pfResult *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsRightOfOrEqualTo(pPointerThat, pfResult)))
+func (self IMarkupPointer) IsRightOfOrEqualTo(pPointerThat IMarkupPointer, pfResult *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsRightOfOrEqualTo(pPointerThat.Raw, pfResult)))
 }
 
 // IsEqualTo wraps the raw IsEqualTo call.
-func (self IMarkupPointer) IsEqualTo(pPointerThat *webmshtml.IMarkupPointer, pfAreEqual *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqualTo(pPointerThat, pfAreEqual)))
+func (self IMarkupPointer) IsEqualTo(pPointerThat IMarkupPointer, pfAreEqual *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqualTo(pPointerThat.Raw, pfAreEqual)))
 }
 
 // MoveUnit wraps the raw MoveUnit call.
@@ -36132,9 +36132,9 @@ func (self IMarkupPointer) MoveUnit(muAction webmshtml.MOVEUNIT_ACTION) error {
 }
 
 // FindText wraps the raw FindText call.
-func (self IMarkupPointer) FindText(pchFindText string, dwFlags uint32, pIEndMatch *webmshtml.IMarkupPointer, pIEndSearch *webmshtml.IMarkupPointer) error {
+func (self IMarkupPointer) FindText(pchFindText string, dwFlags uint32, pIEndMatch IMarkupPointer, pIEndSearch IMarkupPointer) error {
 	_pchFindText := win32.UTF16Ptr(pchFindText)
-	return win32.HRESULTError(int32(self.Raw.FindText(foundation.PWSTR(_pchFindText), dwFlags, pIEndMatch, pIEndSearch)))
+	return win32.HRESULTError(int32(self.Raw.FindText(foundation.PWSTR(_pchFindText), dwFlags, pIEndMatch.Raw, pIEndSearch.Raw)))
 }
 
 // IMarkupPointer2 is an idiomatic wrapper over the raw COM interface Web.MsHtml.IMarkupPointer2 with error-returning methods.
@@ -36159,24 +36159,24 @@ func (self IMarkupPointer2) GetMarkupPosition(plMP *int32) error {
 }
 
 // MoveToMarkupPosition wraps the raw MoveToMarkupPosition call.
-func (self IMarkupPointer2) MoveToMarkupPosition(pContainer *webmshtml.IMarkupContainer, lMP int32) error {
-	return win32.HRESULTError(int32(self.Raw.MoveToMarkupPosition(pContainer, lMP)))
+func (self IMarkupPointer2) MoveToMarkupPosition(pContainer IMarkupContainer, lMP int32) error {
+	return win32.HRESULTError(int32(self.Raw.MoveToMarkupPosition(pContainer.Raw, lMP)))
 }
 
 // MoveUnitBounded wraps the raw MoveUnitBounded call.
-func (self IMarkupPointer2) MoveUnitBounded(muAction webmshtml.MOVEUNIT_ACTION, pIBoundary *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MoveUnitBounded(muAction, pIBoundary)))
+func (self IMarkupPointer2) MoveUnitBounded(muAction webmshtml.MOVEUNIT_ACTION, pIBoundary IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MoveUnitBounded(muAction, pIBoundary.Raw)))
 }
 
 // IsInsideURL wraps the raw IsInsideURL call.
-func (self IMarkupPointer2) IsInsideURL(pRight *webmshtml.IMarkupPointer, pfResult *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsInsideURL(pRight, pfResult)))
+func (self IMarkupPointer2) IsInsideURL(pRight IMarkupPointer, pfResult *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsInsideURL(pRight.Raw, pfResult)))
 }
 
 // MoveToContent wraps the raw MoveToContent call.
-func (self IMarkupPointer2) MoveToContent(pIElement *webmshtml.IHTMLElement, fAtStart bool) error {
+func (self IMarkupPointer2) MoveToContent(pIElement IHTMLElement, fAtStart bool) error {
 	_fAtStart := foundation.BOOL(win32.Bool32(fAtStart))
-	return win32.HRESULTError(int32(self.Raw.MoveToContent(pIElement, _fAtStart)))
+	return win32.HRESULTError(int32(self.Raw.MoveToContent(pIElement.Raw, _fAtStart)))
 }
 
 // IMarkupServices is an idiomatic wrapper over the raw COM interface Web.MsHtml.IMarkupServices with error-returning methods.
@@ -36207,60 +36207,60 @@ func (self IMarkupServices) CreateElement(tagID webmshtml.ELEMENT_TAG_ID, pchAtt
 }
 
 // CloneElement wraps the raw CloneElement call.
-func (self IMarkupServices) CloneElement(pElemCloneThis *webmshtml.IHTMLElement, ppElementTheClone **webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.CloneElement(pElemCloneThis, ppElementTheClone)))
+func (self IMarkupServices) CloneElement(pElemCloneThis IHTMLElement, ppElementTheClone **webmshtml.IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.CloneElement(pElemCloneThis.Raw, ppElementTheClone)))
 }
 
 // InsertElement wraps the raw InsertElement call.
-func (self IMarkupServices) InsertElement(pElementInsert *webmshtml.IHTMLElement, pPointerStart *webmshtml.IMarkupPointer, pPointerFinish *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.InsertElement(pElementInsert, pPointerStart, pPointerFinish)))
+func (self IMarkupServices) InsertElement(pElementInsert IHTMLElement, pPointerStart IMarkupPointer, pPointerFinish IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.InsertElement(pElementInsert.Raw, pPointerStart.Raw, pPointerFinish.Raw)))
 }
 
 // RemoveElement wraps the raw RemoveElement call.
-func (self IMarkupServices) RemoveElement(pElementRemove *webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveElement(pElementRemove)))
+func (self IMarkupServices) RemoveElement(pElementRemove IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveElement(pElementRemove.Raw)))
 }
 
 // Remove wraps the raw Remove call.
-func (self IMarkupServices) Remove(pPointerStart *webmshtml.IMarkupPointer, pPointerFinish *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(pPointerStart, pPointerFinish)))
+func (self IMarkupServices) Remove(pPointerStart IMarkupPointer, pPointerFinish IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(pPointerStart.Raw, pPointerFinish.Raw)))
 }
 
 // Copy wraps the raw Copy call.
-func (self IMarkupServices) Copy(pPointerSourceStart *webmshtml.IMarkupPointer, pPointerSourceFinish *webmshtml.IMarkupPointer, pPointerTarget *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.Copy(pPointerSourceStart, pPointerSourceFinish, pPointerTarget)))
+func (self IMarkupServices) Copy(pPointerSourceStart IMarkupPointer, pPointerSourceFinish IMarkupPointer, pPointerTarget IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.Copy(pPointerSourceStart.Raw, pPointerSourceFinish.Raw, pPointerTarget.Raw)))
 }
 
 // Move wraps the raw Move call.
-func (self IMarkupServices) Move(pPointerSourceStart *webmshtml.IMarkupPointer, pPointerSourceFinish *webmshtml.IMarkupPointer, pPointerTarget *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.Move(pPointerSourceStart, pPointerSourceFinish, pPointerTarget)))
+func (self IMarkupServices) Move(pPointerSourceStart IMarkupPointer, pPointerSourceFinish IMarkupPointer, pPointerTarget IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.Move(pPointerSourceStart.Raw, pPointerSourceFinish.Raw, pPointerTarget.Raw)))
 }
 
 // InsertText wraps the raw InsertText call.
-func (self IMarkupServices) InsertText(pchText string, cch int32, pPointerTarget *webmshtml.IMarkupPointer) error {
+func (self IMarkupServices) InsertText(pchText string, cch int32, pPointerTarget IMarkupPointer) error {
 	_pchText := win32.UTF16Ptr(pchText)
-	return win32.HRESULTError(int32(self.Raw.InsertText(foundation.PWSTR(_pchText), cch, pPointerTarget)))
+	return win32.HRESULTError(int32(self.Raw.InsertText(foundation.PWSTR(_pchText), cch, pPointerTarget.Raw)))
 }
 
 // ParseString wraps the raw ParseString call.
-func (self IMarkupServices) ParseString(pchHTML string, dwFlags uint32, ppContainerResult **webmshtml.IMarkupContainer, ppPointerStart *webmshtml.IMarkupPointer, ppPointerFinish *webmshtml.IMarkupPointer) error {
+func (self IMarkupServices) ParseString(pchHTML string, dwFlags uint32, ppContainerResult **webmshtml.IMarkupContainer, ppPointerStart IMarkupPointer, ppPointerFinish IMarkupPointer) error {
 	_pchHTML := win32.UTF16Ptr(pchHTML)
-	return win32.HRESULTError(int32(self.Raw.ParseString(foundation.PWSTR(_pchHTML), dwFlags, ppContainerResult, ppPointerStart, ppPointerFinish)))
+	return win32.HRESULTError(int32(self.Raw.ParseString(foundation.PWSTR(_pchHTML), dwFlags, ppContainerResult, ppPointerStart.Raw, ppPointerFinish.Raw)))
 }
 
 // ParseGlobal wraps the raw ParseGlobal call.
-func (self IMarkupServices) ParseGlobal(hglobalHTML foundation.HGLOBAL, dwFlags uint32, ppContainerResult **webmshtml.IMarkupContainer, pPointerStart *webmshtml.IMarkupPointer, pPointerFinish *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.ParseGlobal(hglobalHTML, dwFlags, ppContainerResult, pPointerStart, pPointerFinish)))
+func (self IMarkupServices) ParseGlobal(hglobalHTML foundation.HGLOBAL, dwFlags uint32, ppContainerResult **webmshtml.IMarkupContainer, pPointerStart IMarkupPointer, pPointerFinish IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.ParseGlobal(hglobalHTML, dwFlags, ppContainerResult, pPointerStart.Raw, pPointerFinish.Raw)))
 }
 
 // IsScopedElement wraps the raw IsScopedElement call.
-func (self IMarkupServices) IsScopedElement(pElement *webmshtml.IHTMLElement, pfScoped *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsScopedElement(pElement, pfScoped)))
+func (self IMarkupServices) IsScopedElement(pElement IHTMLElement, pfScoped *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsScopedElement(pElement.Raw, pfScoped)))
 }
 
 // GetElementTagId wraps the raw GetElementTagId call.
-func (self IMarkupServices) GetElementTagId(pElement *webmshtml.IHTMLElement, ptagId *webmshtml.ELEMENT_TAG_ID) error {
-	return win32.HRESULTError(int32(self.Raw.GetElementTagId(pElement, ptagId)))
+func (self IMarkupServices) GetElementTagId(pElement IHTMLElement, ptagId *webmshtml.ELEMENT_TAG_ID) error {
+	return win32.HRESULTError(int32(self.Raw.GetElementTagId(pElement.Raw, ptagId)))
 }
 
 // GetTagIDForName wraps the raw GetTagIDForName call.
@@ -36274,13 +36274,13 @@ func (self IMarkupServices) GetNameForTagID(tagId webmshtml.ELEMENT_TAG_ID, pbst
 }
 
 // MovePointersToRange wraps the raw MovePointersToRange call.
-func (self IMarkupServices) MovePointersToRange(pIRange *webmshtml.IHTMLTxtRange, pPointerStart *webmshtml.IMarkupPointer, pPointerFinish *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.MovePointersToRange(pIRange, pPointerStart, pPointerFinish)))
+func (self IMarkupServices) MovePointersToRange(pIRange IHTMLTxtRange, pPointerStart IMarkupPointer, pPointerFinish IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.MovePointersToRange(pIRange.Raw, pPointerStart.Raw, pPointerFinish.Raw)))
 }
 
 // MoveRangeToPointers wraps the raw MoveRangeToPointers call.
-func (self IMarkupServices) MoveRangeToPointers(pPointerStart *webmshtml.IMarkupPointer, pPointerFinish *webmshtml.IMarkupPointer, pIRange *webmshtml.IHTMLTxtRange) error {
-	return win32.HRESULTError(int32(self.Raw.MoveRangeToPointers(pPointerStart, pPointerFinish, pIRange)))
+func (self IMarkupServices) MoveRangeToPointers(pPointerStart IMarkupPointer, pPointerFinish IMarkupPointer, pIRange IHTMLTxtRange) error {
+	return win32.HRESULTError(int32(self.Raw.MoveRangeToPointers(pPointerStart.Raw, pPointerFinish.Raw, pIRange.Raw)))
 }
 
 // BeginUndoUnit wraps the raw BeginUndoUnit call.
@@ -36306,18 +36306,18 @@ func WrapIMarkupServices2(raw *webmshtml.IMarkupServices2) IMarkupServices2 {
 }
 
 // ParseGlobalEx wraps the raw ParseGlobalEx call.
-func (self IMarkupServices2) ParseGlobalEx(hglobalHTML foundation.HGLOBAL, dwFlags uint32, pContext *webmshtml.IMarkupContainer, ppContainerResult **webmshtml.IMarkupContainer, pPointerStart *webmshtml.IMarkupPointer, pPointerFinish *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.ParseGlobalEx(hglobalHTML, dwFlags, pContext, ppContainerResult, pPointerStart, pPointerFinish)))
+func (self IMarkupServices2) ParseGlobalEx(hglobalHTML foundation.HGLOBAL, dwFlags uint32, pContext IMarkupContainer, ppContainerResult **webmshtml.IMarkupContainer, pPointerStart IMarkupPointer, pPointerFinish IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.ParseGlobalEx(hglobalHTML, dwFlags, pContext.Raw, ppContainerResult, pPointerStart.Raw, pPointerFinish.Raw)))
 }
 
 // ValidateElements wraps the raw ValidateElements call.
-func (self IMarkupServices2) ValidateElements(pPointerStart *webmshtml.IMarkupPointer, pPointerFinish *webmshtml.IMarkupPointer, pPointerTarget *webmshtml.IMarkupPointer, pPointerStatus *webmshtml.IMarkupPointer, ppElemFailBottom **webmshtml.IHTMLElement, ppElemFailTop **webmshtml.IHTMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.ValidateElements(pPointerStart, pPointerFinish, pPointerTarget, pPointerStatus, ppElemFailBottom, ppElemFailTop)))
+func (self IMarkupServices2) ValidateElements(pPointerStart IMarkupPointer, pPointerFinish IMarkupPointer, pPointerTarget IMarkupPointer, pPointerStatus IMarkupPointer, ppElemFailBottom **webmshtml.IHTMLElement, ppElemFailTop **webmshtml.IHTMLElement) error {
+	return win32.HRESULTError(int32(self.Raw.ValidateElements(pPointerStart.Raw, pPointerFinish.Raw, pPointerTarget.Raw, pPointerStatus.Raw, ppElemFailBottom, ppElemFailTop)))
 }
 
 // SaveSegmentsToClipboard wraps the raw SaveSegmentsToClipboard call.
-func (self IMarkupServices2) SaveSegmentsToClipboard(pSegmentList *webmshtml.ISegmentList, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SaveSegmentsToClipboard(pSegmentList, dwFlags)))
+func (self IMarkupServices2) SaveSegmentsToClipboard(pSegmentList ISegmentList, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SaveSegmentsToClipboard(pSegmentList.Raw, dwFlags)))
 }
 
 // IMarkupTextFrags is an idiomatic wrapper over the raw COM interface Web.MsHtml.IMarkupTextFrags with error-returning methods.
@@ -36337,8 +36337,8 @@ func (self IMarkupTextFrags) GetTextFragCount(pcFrags *int32) error {
 }
 
 // GetTextFrag wraps the raw GetTextFrag call.
-func (self IMarkupTextFrags) GetTextFrag(iFrag int32, pbstrFrag *foundation.BSTR, pPointerFrag *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetTextFrag(iFrag, pbstrFrag, pPointerFrag)))
+func (self IMarkupTextFrags) GetTextFrag(iFrag int32, pbstrFrag *foundation.BSTR, pPointerFrag IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetTextFrag(iFrag, pbstrFrag, pPointerFrag.Raw)))
 }
 
 // RemoveTextFrag wraps the raw RemoveTextFrag call.
@@ -36347,13 +36347,13 @@ func (self IMarkupTextFrags) RemoveTextFrag(iFrag int32) error {
 }
 
 // InsertTextFrag wraps the raw InsertTextFrag call.
-func (self IMarkupTextFrags) InsertTextFrag(iFrag int32, bstrInsert foundation.BSTR, pPointerInsert *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.InsertTextFrag(iFrag, bstrInsert, pPointerInsert)))
+func (self IMarkupTextFrags) InsertTextFrag(iFrag int32, bstrInsert foundation.BSTR, pPointerInsert IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.InsertTextFrag(iFrag, bstrInsert, pPointerInsert.Raw)))
 }
 
 // FindTextFragFromMarkupPointer wraps the raw FindTextFragFromMarkupPointer call.
-func (self IMarkupTextFrags) FindTextFragFromMarkupPointer(pPointerFind *webmshtml.IMarkupPointer, piFrag *int32, pfFragFound *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.FindTextFragFromMarkupPointer(pPointerFind, piFrag, pfFragFound)))
+func (self IMarkupTextFrags) FindTextFragFromMarkupPointer(pPointerFind IMarkupPointer, piFrag *int32, pfFragFound *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.FindTextFragFromMarkupPointer(pPointerFind.Raw, piFrag, pfFragFound)))
 }
 
 // INavigatorDoNotTrack is an idiomatic wrapper over the raw COM interface Web.MsHtml.INavigatorDoNotTrack with error-returning methods.
@@ -36386,10 +36386,10 @@ func WrapINavigatorGeolocation(raw *webmshtml.INavigatorGeolocation) INavigatorG
 }
 
 // Get_geolocation wraps the raw Get_geolocation call.
-func (self INavigatorGeolocation) Get_geolocation() (*webmshtml.IWebGeolocation, error) {
+func (self INavigatorGeolocation) Get_geolocation() (IWebGeolocation, error) {
 	var _p *webmshtml.IWebGeolocation
 	_hr := self.Raw.Get_geolocation(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIWebGeolocation(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IOmHistory is an idiomatic wrapper over the raw COM interface Web.MsHtml.IOmHistory with error-returning methods.
@@ -36479,17 +36479,17 @@ func (self IOmNavigator) TaintEnabled() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_mimeTypes wraps the raw Get_mimeTypes call.
-func (self IOmNavigator) Get_mimeTypes() (*webmshtml.IHTMLMimeTypesCollection, error) {
+func (self IOmNavigator) Get_mimeTypes() (IHTMLMimeTypesCollection, error) {
 	var _p *webmshtml.IHTMLMimeTypesCollection
 	_hr := self.Raw.Get_mimeTypes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLMimeTypesCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_plugins wraps the raw Get_plugins call.
-func (self IOmNavigator) Get_plugins() (*webmshtml.IHTMLPluginsCollection, error) {
+func (self IOmNavigator) Get_plugins() (IHTMLPluginsCollection, error) {
 	var _p *webmshtml.IHTMLPluginsCollection
 	_hr := self.Raw.Get_plugins(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLPluginsCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_cookieEnabled wraps the raw Get_cookieEnabled call.
@@ -36500,10 +36500,10 @@ func (self IOmNavigator) Get_cookieEnabled() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_opsProfile wraps the raw Get_opsProfile call.
-func (self IOmNavigator) Get_opsProfile() (*webmshtml.IHTMLOpsProfile, error) {
+func (self IOmNavigator) Get_opsProfile() (IHTMLOpsProfile, error) {
 	var _p *webmshtml.IHTMLOpsProfile
 	_hr := self.Raw.Get_opsProfile(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLOpsProfile(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ToString wraps the raw ToString call.
@@ -36570,10 +36570,10 @@ func (self IOmNavigator) Get_onLine() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_userProfile wraps the raw Get_userProfile call.
-func (self IOmNavigator) Get_userProfile() (*webmshtml.IHTMLOpsProfile, error) {
+func (self IOmNavigator) Get_userProfile() (IHTMLOpsProfile, error) {
 	var _p *webmshtml.IHTMLOpsProfile
 	_hr := self.Raw.Get_userProfile(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLOpsProfile(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintManagerTemplatePrinter is an idiomatic wrapper over the raw COM interface Web.MsHtml.IPrintManagerTemplatePrinter with error-returning methods.
@@ -36593,8 +36593,8 @@ func (self IPrintManagerTemplatePrinter) StartPrint() error {
 }
 
 // DrawPreviewPage wraps the raw DrawPreviewPage call.
-func (self IPrintManagerTemplatePrinter) DrawPreviewPage(pElemDisp *systemcom.IDispatch, nPage int32) error {
-	return win32.HRESULTError(int32(self.Raw.DrawPreviewPage(pElemDisp, nPage)))
+func (self IPrintManagerTemplatePrinter) DrawPreviewPage(pElemDisp systemcomidiom.IDispatch, nPage int32) error {
+	return win32.HRESULTError(int32(self.Raw.DrawPreviewPage(pElemDisp.Raw, nPage)))
 }
 
 // SetPageCount wraps the raw SetPageCount call.
@@ -36693,24 +36693,24 @@ func WrapIRulesApplied(raw *webmshtml.IRulesApplied) IRulesApplied {
 }
 
 // Get_element wraps the raw Get_element call.
-func (self IRulesApplied) Get_element() (*webmshtml.IHTMLElement, error) {
+func (self IRulesApplied) Get_element() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_element(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_inlineStyles wraps the raw Get_inlineStyles call.
-func (self IRulesApplied) Get_inlineStyles() (*webmshtml.IHTMLStyle, error) {
+func (self IRulesApplied) Get_inlineStyles() (IHTMLStyle, error) {
 	var _p *webmshtml.IHTMLStyle
 	_hr := self.Raw.Get_inlineStyles(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_appliedRules wraps the raw Get_appliedRules call.
-func (self IRulesApplied) Get_appliedRules() (*webmshtml.IHTMLStyleSheetRulesAppliedCollection, error) {
+func (self IRulesApplied) Get_appliedRules() (IHTMLStyleSheetRulesAppliedCollection, error) {
 	var _p *webmshtml.IHTMLStyleSheetRulesAppliedCollection
 	_hr := self.Raw.Get_appliedRules(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLStyleSheetRulesAppliedCollection(_p), win32.HRESULTError(int32(_hr))
 }
 
 // PropertyIsInline wraps the raw PropertyIsInline call.
@@ -36746,10 +36746,10 @@ func WrapIRulesAppliedCollection(raw *webmshtml.IRulesAppliedCollection) IRulesA
 }
 
 // Item wraps the raw Item call.
-func (self IRulesAppliedCollection) Item(index int32) (*webmshtml.IRulesApplied, error) {
+func (self IRulesAppliedCollection) Item(index int32) (IRulesApplied, error) {
 	var _ppRulesApplied *webmshtml.IRulesApplied
 	_hr := self.Raw.Item(index, &_ppRulesApplied)
-	return _ppRulesApplied, win32.HRESULTError(int32(_hr))
+	return WrapIRulesApplied(_ppRulesApplied), win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
@@ -36760,17 +36760,17 @@ func (self IRulesAppliedCollection) Get_length() (int32, error) {
 }
 
 // Get_element wraps the raw Get_element call.
-func (self IRulesAppliedCollection) Get_element() (*webmshtml.IHTMLElement, error) {
+func (self IRulesAppliedCollection) Get_element() (IHTMLElement, error) {
 	var _p *webmshtml.IHTMLElement
 	_hr := self.Raw.Get_element(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // PropertyInheritedFrom wraps the raw PropertyInheritedFrom call.
-func (self IRulesAppliedCollection) PropertyInheritedFrom(name foundation.BSTR) (*webmshtml.IRulesApplied, error) {
+func (self IRulesAppliedCollection) PropertyInheritedFrom(name foundation.BSTR) (IRulesApplied, error) {
 	var _ppRulesApplied *webmshtml.IRulesApplied
 	_hr := self.Raw.PropertyInheritedFrom(name, &_ppRulesApplied)
-	return _ppRulesApplied, win32.HRESULTError(int32(_hr))
+	return WrapIRulesApplied(_ppRulesApplied), win32.HRESULTError(int32(_hr))
 }
 
 // Get_propertyCount wraps the raw Get_propertyCount call.
@@ -36788,10 +36788,10 @@ func (self IRulesAppliedCollection) Property(index int32) (foundation.BSTR, erro
 }
 
 // PropertyInheritedTrace wraps the raw PropertyInheritedTrace call.
-func (self IRulesAppliedCollection) PropertyInheritedTrace(name foundation.BSTR, index int32) (*webmshtml.IRulesApplied, error) {
+func (self IRulesAppliedCollection) PropertyInheritedTrace(name foundation.BSTR, index int32) (IRulesApplied, error) {
 	var _ppRulesApplied *webmshtml.IRulesApplied
 	_hr := self.Raw.PropertyInheritedTrace(name, index, &_ppRulesApplied)
-	return _ppRulesApplied, win32.HRESULTError(int32(_hr))
+	return WrapIRulesApplied(_ppRulesApplied), win32.HRESULTError(int32(_hr))
 }
 
 // PropertyInheritedTraceLength wraps the raw PropertyInheritedTraceLength call.
@@ -36813,15 +36813,15 @@ func WrapISVGAElement(raw *webmshtml.ISVGAElement) ISVGAElement {
 }
 
 // Putref_target wraps the raw Putref_target call.
-func (self ISVGAElement) Putref_target(v *webmshtml.ISVGAnimatedString) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_target(v)))
+func (self ISVGAElement) Putref_target(v ISVGAnimatedString) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_target(v.Raw)))
 }
 
 // Get_target wraps the raw Get_target call.
-func (self ISVGAElement) Get_target() (*webmshtml.ISVGAnimatedString, error) {
+func (self ISVGAElement) Get_target() (ISVGAnimatedString, error) {
 	var _p *webmshtml.ISVGAnimatedString
 	_hr := self.Raw.Get_target(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedString(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAngle is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAngle with error-returning methods.
@@ -36890,27 +36890,27 @@ func WrapISVGAnimatedAngle(raw *webmshtml.ISVGAnimatedAngle) ISVGAnimatedAngle {
 }
 
 // Putref_baseVal wraps the raw Putref_baseVal call.
-func (self ISVGAnimatedAngle) Putref_baseVal(v *webmshtml.ISVGAngle) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v)))
+func (self ISVGAnimatedAngle) Putref_baseVal(v ISVGAngle) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v.Raw)))
 }
 
 // Get_baseVal wraps the raw Get_baseVal call.
-func (self ISVGAnimatedAngle) Get_baseVal() (*webmshtml.ISVGAngle, error) {
+func (self ISVGAnimatedAngle) Get_baseVal() (ISVGAngle, error) {
 	var _p *webmshtml.ISVGAngle
 	_hr := self.Raw.Get_baseVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAngle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animVal wraps the raw Putref_animVal call.
-func (self ISVGAnimatedAngle) Putref_animVal(v *webmshtml.ISVGAngle) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v)))
+func (self ISVGAnimatedAngle) Putref_animVal(v ISVGAngle) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v.Raw)))
 }
 
 // Get_animVal wraps the raw Get_animVal call.
-func (self ISVGAnimatedAngle) Get_animVal() (*webmshtml.ISVGAngle, error) {
+func (self ISVGAnimatedAngle) Get_animVal() (ISVGAngle, error) {
 	var _p *webmshtml.ISVGAngle
 	_hr := self.Raw.Get_animVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAngle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAnimatedBoolean is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAnimatedBoolean with error-returning methods.
@@ -37030,27 +37030,27 @@ func WrapISVGAnimatedLength(raw *webmshtml.ISVGAnimatedLength) ISVGAnimatedLengt
 }
 
 // Putref_baseVal wraps the raw Putref_baseVal call.
-func (self ISVGAnimatedLength) Putref_baseVal(v *webmshtml.ISVGLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v)))
+func (self ISVGAnimatedLength) Putref_baseVal(v ISVGLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v.Raw)))
 }
 
 // Get_baseVal wraps the raw Get_baseVal call.
-func (self ISVGAnimatedLength) Get_baseVal() (*webmshtml.ISVGLength, error) {
+func (self ISVGAnimatedLength) Get_baseVal() (ISVGLength, error) {
 	var _p *webmshtml.ISVGLength
 	_hr := self.Raw.Get_baseVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animVal wraps the raw Putref_animVal call.
-func (self ISVGAnimatedLength) Putref_animVal(v *webmshtml.ISVGLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v)))
+func (self ISVGAnimatedLength) Putref_animVal(v ISVGLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v.Raw)))
 }
 
 // Get_animVal wraps the raw Get_animVal call.
-func (self ISVGAnimatedLength) Get_animVal() (*webmshtml.ISVGLength, error) {
+func (self ISVGAnimatedLength) Get_animVal() (ISVGLength, error) {
 	var _p *webmshtml.ISVGLength
 	_hr := self.Raw.Get_animVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAnimatedLengthList is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAnimatedLengthList with error-returning methods.
@@ -37065,27 +37065,27 @@ func WrapISVGAnimatedLengthList(raw *webmshtml.ISVGAnimatedLengthList) ISVGAnima
 }
 
 // Putref_baseVal wraps the raw Putref_baseVal call.
-func (self ISVGAnimatedLengthList) Putref_baseVal(v *webmshtml.ISVGLengthList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v)))
+func (self ISVGAnimatedLengthList) Putref_baseVal(v ISVGLengthList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v.Raw)))
 }
 
 // Get_baseVal wraps the raw Get_baseVal call.
-func (self ISVGAnimatedLengthList) Get_baseVal() (*webmshtml.ISVGLengthList, error) {
+func (self ISVGAnimatedLengthList) Get_baseVal() (ISVGLengthList, error) {
 	var _p *webmshtml.ISVGLengthList
 	_hr := self.Raw.Get_baseVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGLengthList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animVal wraps the raw Putref_animVal call.
-func (self ISVGAnimatedLengthList) Putref_animVal(v *webmshtml.ISVGLengthList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v)))
+func (self ISVGAnimatedLengthList) Putref_animVal(v ISVGLengthList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v.Raw)))
 }
 
 // Get_animVal wraps the raw Get_animVal call.
-func (self ISVGAnimatedLengthList) Get_animVal() (*webmshtml.ISVGLengthList, error) {
+func (self ISVGAnimatedLengthList) Get_animVal() (ISVGLengthList, error) {
 	var _p *webmshtml.ISVGLengthList
 	_hr := self.Raw.Get_animVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGLengthList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAnimatedNumber is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAnimatedNumber with error-returning methods.
@@ -37125,27 +37125,27 @@ func WrapISVGAnimatedNumberList(raw *webmshtml.ISVGAnimatedNumberList) ISVGAnima
 }
 
 // Putref_baseVal wraps the raw Putref_baseVal call.
-func (self ISVGAnimatedNumberList) Putref_baseVal(v *webmshtml.ISVGNumberList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v)))
+func (self ISVGAnimatedNumberList) Putref_baseVal(v ISVGNumberList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v.Raw)))
 }
 
 // Get_baseVal wraps the raw Get_baseVal call.
-func (self ISVGAnimatedNumberList) Get_baseVal() (*webmshtml.ISVGNumberList, error) {
+func (self ISVGAnimatedNumberList) Get_baseVal() (ISVGNumberList, error) {
 	var _p *webmshtml.ISVGNumberList
 	_hr := self.Raw.Get_baseVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGNumberList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animVal wraps the raw Putref_animVal call.
-func (self ISVGAnimatedNumberList) Putref_animVal(v *webmshtml.ISVGNumberList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v)))
+func (self ISVGAnimatedNumberList) Putref_animVal(v ISVGNumberList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v.Raw)))
 }
 
 // Get_animVal wraps the raw Get_animVal call.
-func (self ISVGAnimatedNumberList) Get_animVal() (*webmshtml.ISVGNumberList, error) {
+func (self ISVGAnimatedNumberList) Get_animVal() (ISVGNumberList, error) {
 	var _p *webmshtml.ISVGNumberList
 	_hr := self.Raw.Get_animVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGNumberList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAnimatedPathData is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAnimatedPathData with error-returning methods.
@@ -37160,51 +37160,51 @@ func WrapISVGAnimatedPathData(raw *webmshtml.ISVGAnimatedPathData) ISVGAnimatedP
 }
 
 // Putref_pathSegList wraps the raw Putref_pathSegList call.
-func (self ISVGAnimatedPathData) Putref_pathSegList(v *webmshtml.ISVGPathSegList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_pathSegList(v)))
+func (self ISVGAnimatedPathData) Putref_pathSegList(v ISVGPathSegList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_pathSegList(v.Raw)))
 }
 
 // Get_pathSegList wraps the raw Get_pathSegList call.
-func (self ISVGAnimatedPathData) Get_pathSegList() (*webmshtml.ISVGPathSegList, error) {
+func (self ISVGAnimatedPathData) Get_pathSegList() (ISVGPathSegList, error) {
 	var _p *webmshtml.ISVGPathSegList
 	_hr := self.Raw.Get_pathSegList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPathSegList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_normalizedPathSegList wraps the raw Putref_normalizedPathSegList call.
-func (self ISVGAnimatedPathData) Putref_normalizedPathSegList(v *webmshtml.ISVGPathSegList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_normalizedPathSegList(v)))
+func (self ISVGAnimatedPathData) Putref_normalizedPathSegList(v ISVGPathSegList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_normalizedPathSegList(v.Raw)))
 }
 
 // Get_normalizedPathSegList wraps the raw Get_normalizedPathSegList call.
-func (self ISVGAnimatedPathData) Get_normalizedPathSegList() (*webmshtml.ISVGPathSegList, error) {
+func (self ISVGAnimatedPathData) Get_normalizedPathSegList() (ISVGPathSegList, error) {
 	var _p *webmshtml.ISVGPathSegList
 	_hr := self.Raw.Get_normalizedPathSegList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPathSegList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animatedPathSegList wraps the raw Putref_animatedPathSegList call.
-func (self ISVGAnimatedPathData) Putref_animatedPathSegList(v *webmshtml.ISVGPathSegList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animatedPathSegList(v)))
+func (self ISVGAnimatedPathData) Putref_animatedPathSegList(v ISVGPathSegList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animatedPathSegList(v.Raw)))
 }
 
 // Get_animatedPathSegList wraps the raw Get_animatedPathSegList call.
-func (self ISVGAnimatedPathData) Get_animatedPathSegList() (*webmshtml.ISVGPathSegList, error) {
+func (self ISVGAnimatedPathData) Get_animatedPathSegList() (ISVGPathSegList, error) {
 	var _p *webmshtml.ISVGPathSegList
 	_hr := self.Raw.Get_animatedPathSegList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPathSegList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animatedNormalizedPathSegList wraps the raw Putref_animatedNormalizedPathSegList call.
-func (self ISVGAnimatedPathData) Putref_animatedNormalizedPathSegList(v *webmshtml.ISVGPathSegList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animatedNormalizedPathSegList(v)))
+func (self ISVGAnimatedPathData) Putref_animatedNormalizedPathSegList(v ISVGPathSegList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animatedNormalizedPathSegList(v.Raw)))
 }
 
 // Get_animatedNormalizedPathSegList wraps the raw Get_animatedNormalizedPathSegList call.
-func (self ISVGAnimatedPathData) Get_animatedNormalizedPathSegList() (*webmshtml.ISVGPathSegList, error) {
+func (self ISVGAnimatedPathData) Get_animatedNormalizedPathSegList() (ISVGPathSegList, error) {
 	var _p *webmshtml.ISVGPathSegList
 	_hr := self.Raw.Get_animatedNormalizedPathSegList(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPathSegList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAnimatedPoints is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAnimatedPoints with error-returning methods.
@@ -37219,27 +37219,27 @@ func WrapISVGAnimatedPoints(raw *webmshtml.ISVGAnimatedPoints) ISVGAnimatedPoint
 }
 
 // Putref_points wraps the raw Putref_points call.
-func (self ISVGAnimatedPoints) Putref_points(v *webmshtml.ISVGPointList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_points(v)))
+func (self ISVGAnimatedPoints) Putref_points(v ISVGPointList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_points(v.Raw)))
 }
 
 // Get_points wraps the raw Get_points call.
-func (self ISVGAnimatedPoints) Get_points() (*webmshtml.ISVGPointList, error) {
+func (self ISVGAnimatedPoints) Get_points() (ISVGPointList, error) {
 	var _p *webmshtml.ISVGPointList
 	_hr := self.Raw.Get_points(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPointList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animatedPoints wraps the raw Putref_animatedPoints call.
-func (self ISVGAnimatedPoints) Putref_animatedPoints(v *webmshtml.ISVGPointList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animatedPoints(v)))
+func (self ISVGAnimatedPoints) Putref_animatedPoints(v ISVGPointList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animatedPoints(v.Raw)))
 }
 
 // Get_animatedPoints wraps the raw Get_animatedPoints call.
-func (self ISVGAnimatedPoints) Get_animatedPoints() (*webmshtml.ISVGPointList, error) {
+func (self ISVGAnimatedPoints) Get_animatedPoints() (ISVGPointList, error) {
 	var _p *webmshtml.ISVGPointList
 	_hr := self.Raw.Get_animatedPoints(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPointList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAnimatedPreserveAspectRatio is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAnimatedPreserveAspectRatio with error-returning methods.
@@ -37254,27 +37254,27 @@ func WrapISVGAnimatedPreserveAspectRatio(raw *webmshtml.ISVGAnimatedPreserveAspe
 }
 
 // Putref_baseVal wraps the raw Putref_baseVal call.
-func (self ISVGAnimatedPreserveAspectRatio) Putref_baseVal(v *webmshtml.ISVGPreserveAspectRatio) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v)))
+func (self ISVGAnimatedPreserveAspectRatio) Putref_baseVal(v ISVGPreserveAspectRatio) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v.Raw)))
 }
 
 // Get_baseVal wraps the raw Get_baseVal call.
-func (self ISVGAnimatedPreserveAspectRatio) Get_baseVal() (*webmshtml.ISVGPreserveAspectRatio, error) {
+func (self ISVGAnimatedPreserveAspectRatio) Get_baseVal() (ISVGPreserveAspectRatio, error) {
 	var _p *webmshtml.ISVGPreserveAspectRatio
 	_hr := self.Raw.Get_baseVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPreserveAspectRatio(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animVal wraps the raw Putref_animVal call.
-func (self ISVGAnimatedPreserveAspectRatio) Putref_animVal(v *webmshtml.ISVGPreserveAspectRatio) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v)))
+func (self ISVGAnimatedPreserveAspectRatio) Putref_animVal(v ISVGPreserveAspectRatio) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v.Raw)))
 }
 
 // Get_animVal wraps the raw Get_animVal call.
-func (self ISVGAnimatedPreserveAspectRatio) Get_animVal() (*webmshtml.ISVGPreserveAspectRatio, error) {
+func (self ISVGAnimatedPreserveAspectRatio) Get_animVal() (ISVGPreserveAspectRatio, error) {
 	var _p *webmshtml.ISVGPreserveAspectRatio
 	_hr := self.Raw.Get_animVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPreserveAspectRatio(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAnimatedRect is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAnimatedRect with error-returning methods.
@@ -37289,27 +37289,27 @@ func WrapISVGAnimatedRect(raw *webmshtml.ISVGAnimatedRect) ISVGAnimatedRect {
 }
 
 // Putref_baseVal wraps the raw Putref_baseVal call.
-func (self ISVGAnimatedRect) Putref_baseVal(v *webmshtml.ISVGRect) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v)))
+func (self ISVGAnimatedRect) Putref_baseVal(v ISVGRect) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v.Raw)))
 }
 
 // Get_baseVal wraps the raw Get_baseVal call.
-func (self ISVGAnimatedRect) Get_baseVal() (*webmshtml.ISVGRect, error) {
+func (self ISVGAnimatedRect) Get_baseVal() (ISVGRect, error) {
 	var _p *webmshtml.ISVGRect
 	_hr := self.Raw.Get_baseVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGRect(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animVal wraps the raw Putref_animVal call.
-func (self ISVGAnimatedRect) Putref_animVal(v *webmshtml.ISVGRect) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v)))
+func (self ISVGAnimatedRect) Putref_animVal(v ISVGRect) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v.Raw)))
 }
 
 // Get_animVal wraps the raw Get_animVal call.
-func (self ISVGAnimatedRect) Get_animVal() (*webmshtml.ISVGRect, error) {
+func (self ISVGAnimatedRect) Get_animVal() (ISVGRect, error) {
 	var _p *webmshtml.ISVGRect
 	_hr := self.Raw.Get_animVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGRect(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGAnimatedString is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGAnimatedString with error-returning methods.
@@ -37354,27 +37354,27 @@ func WrapISVGAnimatedTransformList(raw *webmshtml.ISVGAnimatedTransformList) ISV
 }
 
 // Putref_baseVal wraps the raw Putref_baseVal call.
-func (self ISVGAnimatedTransformList) Putref_baseVal(v *webmshtml.ISVGTransformList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v)))
+func (self ISVGAnimatedTransformList) Putref_baseVal(v ISVGTransformList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_baseVal(v.Raw)))
 }
 
 // Get_baseVal wraps the raw Get_baseVal call.
-func (self ISVGAnimatedTransformList) Get_baseVal() (*webmshtml.ISVGTransformList, error) {
+func (self ISVGAnimatedTransformList) Get_baseVal() (ISVGTransformList, error) {
 	var _p *webmshtml.ISVGTransformList
 	_hr := self.Raw.Get_baseVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGTransformList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animVal wraps the raw Putref_animVal call.
-func (self ISVGAnimatedTransformList) Putref_animVal(v *webmshtml.ISVGTransformList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v)))
+func (self ISVGAnimatedTransformList) Putref_animVal(v ISVGTransformList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animVal(v.Raw)))
 }
 
 // Get_animVal wraps the raw Get_animVal call.
-func (self ISVGAnimatedTransformList) Get_animVal() (*webmshtml.ISVGTransformList, error) {
+func (self ISVGAnimatedTransformList) Get_animVal() (ISVGTransformList, error) {
 	var _p *webmshtml.ISVGTransformList
 	_hr := self.Raw.Get_animVal(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGTransformList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGCircleElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGCircleElement with error-returning methods.
@@ -37389,39 +37389,39 @@ func WrapISVGCircleElement(raw *webmshtml.ISVGCircleElement) ISVGCircleElement {
 }
 
 // Putref_cx wraps the raw Putref_cx call.
-func (self ISVGCircleElement) Putref_cx(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_cx(v)))
+func (self ISVGCircleElement) Putref_cx(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_cx(v.Raw)))
 }
 
 // Get_cx wraps the raw Get_cx call.
-func (self ISVGCircleElement) Get_cx() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGCircleElement) Get_cx() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_cx(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_cy wraps the raw Putref_cy call.
-func (self ISVGCircleElement) Putref_cy(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_cy(v)))
+func (self ISVGCircleElement) Putref_cy(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_cy(v.Raw)))
 }
 
 // Get_cy wraps the raw Get_cy call.
-func (self ISVGCircleElement) Get_cy() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGCircleElement) Get_cy() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_cy(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_r wraps the raw Putref_r call.
-func (self ISVGCircleElement) Putref_r(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_r(v)))
+func (self ISVGCircleElement) Putref_r(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_r(v.Raw)))
 }
 
 // Get_r wraps the raw Get_r call.
-func (self ISVGCircleElement) Get_r() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGCircleElement) Get_r() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_r(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGClipPathElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGClipPathElement with error-returning methods.
@@ -37436,15 +37436,15 @@ func WrapISVGClipPathElement(raw *webmshtml.ISVGClipPathElement) ISVGClipPathEle
 }
 
 // Putref_clipPathUnits wraps the raw Putref_clipPathUnits call.
-func (self ISVGClipPathElement) Putref_clipPathUnits(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_clipPathUnits(v)))
+func (self ISVGClipPathElement) Putref_clipPathUnits(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_clipPathUnits(v.Raw)))
 }
 
 // Get_clipPathUnits wraps the raw Get_clipPathUnits call.
-func (self ISVGClipPathElement) Get_clipPathUnits() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGClipPathElement) Get_clipPathUnits() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_clipPathUnits(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGDefsElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGDefsElement with error-returning methods.
@@ -37481,10 +37481,10 @@ func WrapISVGDocument(raw *webmshtml.ISVGDocument) ISVGDocument {
 }
 
 // Get_rootElement wraps the raw Get_rootElement call.
-func (self ISVGDocument) Get_rootElement() (*webmshtml.ISVGSVGElement, error) {
+func (self ISVGDocument) Get_rootElement() (ISVGSVGElement, error) {
 	var _p *webmshtml.ISVGSVGElement
 	_hr := self.Raw.Get_rootElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGSVGElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGElement with error-returning methods.
@@ -37511,39 +37511,39 @@ func (self ISVGElement) Get_xmlbase() (foundation.BSTR, error) {
 }
 
 // Putref_ownerSVGElement wraps the raw Putref_ownerSVGElement call.
-func (self ISVGElement) Putref_ownerSVGElement(v *webmshtml.ISVGSVGElement) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ownerSVGElement(v)))
+func (self ISVGElement) Putref_ownerSVGElement(v ISVGSVGElement) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ownerSVGElement(v.Raw)))
 }
 
 // Get_ownerSVGElement wraps the raw Get_ownerSVGElement call.
-func (self ISVGElement) Get_ownerSVGElement() (*webmshtml.ISVGSVGElement, error) {
+func (self ISVGElement) Get_ownerSVGElement() (ISVGSVGElement, error) {
 	var _p *webmshtml.ISVGSVGElement
 	_hr := self.Raw.Get_ownerSVGElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGSVGElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_viewportElement wraps the raw Putref_viewportElement call.
-func (self ISVGElement) Putref_viewportElement(v *webmshtml.ISVGElement) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_viewportElement(v)))
+func (self ISVGElement) Putref_viewportElement(v ISVGElement) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_viewportElement(v.Raw)))
 }
 
 // Get_viewportElement wraps the raw Get_viewportElement call.
-func (self ISVGElement) Get_viewportElement() (*webmshtml.ISVGElement, error) {
+func (self ISVGElement) Get_viewportElement() (ISVGElement, error) {
 	var _p *webmshtml.ISVGElement
 	_hr := self.Raw.Get_viewportElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_focusable wraps the raw Putref_focusable call.
-func (self ISVGElement) Putref_focusable(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_focusable(v)))
+func (self ISVGElement) Putref_focusable(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_focusable(v.Raw)))
 }
 
 // Get_focusable wraps the raw Get_focusable call.
-func (self ISVGElement) Get_focusable() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGElement) Get_focusable() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_focusable(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGElementInstance is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGElementInstance with error-returning methods.
@@ -37558,59 +37558,59 @@ func WrapISVGElementInstance(raw *webmshtml.ISVGElementInstance) ISVGElementInst
 }
 
 // Get_correspondingElement wraps the raw Get_correspondingElement call.
-func (self ISVGElementInstance) Get_correspondingElement() (*webmshtml.ISVGElement, error) {
+func (self ISVGElementInstance) Get_correspondingElement() (ISVGElement, error) {
 	var _p *webmshtml.ISVGElement
 	_hr := self.Raw.Get_correspondingElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_correspondingUseElement wraps the raw Get_correspondingUseElement call.
-func (self ISVGElementInstance) Get_correspondingUseElement() (*webmshtml.ISVGUseElement, error) {
+func (self ISVGElementInstance) Get_correspondingUseElement() (ISVGUseElement, error) {
 	var _p *webmshtml.ISVGUseElement
 	_hr := self.Raw.Get_correspondingUseElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGUseElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_parentNode wraps the raw Get_parentNode call.
-func (self ISVGElementInstance) Get_parentNode() (*webmshtml.ISVGElementInstance, error) {
+func (self ISVGElementInstance) Get_parentNode() (ISVGElementInstance, error) {
 	var _p *webmshtml.ISVGElementInstance
 	_hr := self.Raw.Get_parentNode(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstance(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_childNodes wraps the raw Get_childNodes call.
-func (self ISVGElementInstance) Get_childNodes() (*webmshtml.ISVGElementInstanceList, error) {
+func (self ISVGElementInstance) Get_childNodes() (ISVGElementInstanceList, error) {
 	var _p *webmshtml.ISVGElementInstanceList
 	_hr := self.Raw.Get_childNodes(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstanceList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_firstChild wraps the raw Get_firstChild call.
-func (self ISVGElementInstance) Get_firstChild() (*webmshtml.ISVGElementInstance, error) {
+func (self ISVGElementInstance) Get_firstChild() (ISVGElementInstance, error) {
 	var _p *webmshtml.ISVGElementInstance
 	_hr := self.Raw.Get_firstChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstance(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_lastChild wraps the raw Get_lastChild call.
-func (self ISVGElementInstance) Get_lastChild() (*webmshtml.ISVGElementInstance, error) {
+func (self ISVGElementInstance) Get_lastChild() (ISVGElementInstance, error) {
 	var _p *webmshtml.ISVGElementInstance
 	_hr := self.Raw.Get_lastChild(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstance(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_previousSibling wraps the raw Get_previousSibling call.
-func (self ISVGElementInstance) Get_previousSibling() (*webmshtml.ISVGElementInstance, error) {
+func (self ISVGElementInstance) Get_previousSibling() (ISVGElementInstance, error) {
 	var _p *webmshtml.ISVGElementInstance
 	_hr := self.Raw.Get_previousSibling(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstance(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_nextSibling wraps the raw Get_nextSibling call.
-func (self ISVGElementInstance) Get_nextSibling() (*webmshtml.ISVGElementInstance, error) {
+func (self ISVGElementInstance) Get_nextSibling() (ISVGElementInstance, error) {
 	var _p *webmshtml.ISVGElementInstance
 	_hr := self.Raw.Get_nextSibling(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstance(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGElementInstanceList is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGElementInstanceList with error-returning methods.
@@ -37632,10 +37632,10 @@ func (self ISVGElementInstanceList) Get_length() (int32, error) {
 }
 
 // Item wraps the raw Item call.
-func (self ISVGElementInstanceList) Item(index int32) (*webmshtml.ISVGElementInstance, error) {
+func (self ISVGElementInstanceList) Item(index int32) (ISVGElementInstance, error) {
 	var _ppResult *webmshtml.ISVGElementInstance
 	_hr := self.Raw.Item(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstance(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGEllipseElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGEllipseElement with error-returning methods.
@@ -37650,51 +37650,51 @@ func WrapISVGEllipseElement(raw *webmshtml.ISVGEllipseElement) ISVGEllipseElemen
 }
 
 // Putref_cx wraps the raw Putref_cx call.
-func (self ISVGEllipseElement) Putref_cx(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_cx(v)))
+func (self ISVGEllipseElement) Putref_cx(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_cx(v.Raw)))
 }
 
 // Get_cx wraps the raw Get_cx call.
-func (self ISVGEllipseElement) Get_cx() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGEllipseElement) Get_cx() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_cx(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_cy wraps the raw Putref_cy call.
-func (self ISVGEllipseElement) Putref_cy(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_cy(v)))
+func (self ISVGEllipseElement) Putref_cy(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_cy(v.Raw)))
 }
 
 // Get_cy wraps the raw Get_cy call.
-func (self ISVGEllipseElement) Get_cy() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGEllipseElement) Get_cy() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_cy(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_rx wraps the raw Putref_rx call.
-func (self ISVGEllipseElement) Putref_rx(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_rx(v)))
+func (self ISVGEllipseElement) Putref_rx(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_rx(v.Raw)))
 }
 
 // Get_rx wraps the raw Get_rx call.
-func (self ISVGEllipseElement) Get_rx() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGEllipseElement) Get_rx() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_rx(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_ry wraps the raw Putref_ry call.
-func (self ISVGEllipseElement) Putref_ry(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ry(v)))
+func (self ISVGEllipseElement) Putref_ry(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ry(v.Raw)))
 }
 
 // Get_ry wraps the raw Get_ry call.
-func (self ISVGEllipseElement) Get_ry() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGEllipseElement) Get_ry() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_ry(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGException is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGException with error-returning methods.
@@ -37739,10 +37739,10 @@ func WrapISVGExternalResourcesRequired(raw *webmshtml.ISVGExternalResourcesRequi
 }
 
 // Get_externalResourcesRequired wraps the raw Get_externalResourcesRequired call.
-func (self ISVGExternalResourcesRequired) Get_externalResourcesRequired() (*webmshtml.ISVGAnimatedBoolean, error) {
+func (self ISVGExternalResourcesRequired) Get_externalResourcesRequired() (ISVGAnimatedBoolean, error) {
 	var _p *webmshtml.ISVGAnimatedBoolean
 	_hr := self.Raw.Get_externalResourcesRequired(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedBoolean(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGFitToViewBox is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGFitToViewBox with error-returning methods.
@@ -37757,22 +37757,22 @@ func WrapISVGFitToViewBox(raw *webmshtml.ISVGFitToViewBox) ISVGFitToViewBox {
 }
 
 // Get_viewBox wraps the raw Get_viewBox call.
-func (self ISVGFitToViewBox) Get_viewBox() (*webmshtml.ISVGAnimatedRect, error) {
+func (self ISVGFitToViewBox) Get_viewBox() (ISVGAnimatedRect, error) {
 	var _p *webmshtml.ISVGAnimatedRect
 	_hr := self.Raw.Get_viewBox(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedRect(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_preserveAspectRatio wraps the raw Putref_preserveAspectRatio call.
-func (self ISVGFitToViewBox) Putref_preserveAspectRatio(v *webmshtml.ISVGAnimatedPreserveAspectRatio) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_preserveAspectRatio(v)))
+func (self ISVGFitToViewBox) Putref_preserveAspectRatio(v ISVGAnimatedPreserveAspectRatio) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_preserveAspectRatio(v.Raw)))
 }
 
 // Get_preserveAspectRatio wraps the raw Get_preserveAspectRatio call.
-func (self ISVGFitToViewBox) Get_preserveAspectRatio() (*webmshtml.ISVGAnimatedPreserveAspectRatio, error) {
+func (self ISVGFitToViewBox) Get_preserveAspectRatio() (ISVGAnimatedPreserveAspectRatio, error) {
 	var _p *webmshtml.ISVGAnimatedPreserveAspectRatio
 	_hr := self.Raw.Get_preserveAspectRatio(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedPreserveAspectRatio(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGGElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGGElement with error-returning methods.
@@ -37798,39 +37798,39 @@ func WrapISVGGradientElement(raw *webmshtml.ISVGGradientElement) ISVGGradientEle
 }
 
 // Putref_gradientUnits wraps the raw Putref_gradientUnits call.
-func (self ISVGGradientElement) Putref_gradientUnits(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_gradientUnits(v)))
+func (self ISVGGradientElement) Putref_gradientUnits(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_gradientUnits(v.Raw)))
 }
 
 // Get_gradientUnits wraps the raw Get_gradientUnits call.
-func (self ISVGGradientElement) Get_gradientUnits() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGGradientElement) Get_gradientUnits() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_gradientUnits(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_gradientTransform wraps the raw Putref_gradientTransform call.
-func (self ISVGGradientElement) Putref_gradientTransform(v *webmshtml.ISVGAnimatedTransformList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_gradientTransform(v)))
+func (self ISVGGradientElement) Putref_gradientTransform(v ISVGAnimatedTransformList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_gradientTransform(v.Raw)))
 }
 
 // Get_gradientTransform wraps the raw Get_gradientTransform call.
-func (self ISVGGradientElement) Get_gradientTransform() (*webmshtml.ISVGAnimatedTransformList, error) {
+func (self ISVGGradientElement) Get_gradientTransform() (ISVGAnimatedTransformList, error) {
 	var _p *webmshtml.ISVGAnimatedTransformList
 	_hr := self.Raw.Get_gradientTransform(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedTransformList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_spreadMethod wraps the raw Putref_spreadMethod call.
-func (self ISVGGradientElement) Putref_spreadMethod(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_spreadMethod(v)))
+func (self ISVGGradientElement) Putref_spreadMethod(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_spreadMethod(v.Raw)))
 }
 
 // Get_spreadMethod wraps the raw Get_spreadMethod call.
-func (self ISVGGradientElement) Get_spreadMethod() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGGradientElement) Get_spreadMethod() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_spreadMethod(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGImageElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGImageElement with error-returning methods.
@@ -37845,51 +37845,51 @@ func WrapISVGImageElement(raw *webmshtml.ISVGImageElement) ISVGImageElement {
 }
 
 // Putref_x wraps the raw Putref_x call.
-func (self ISVGImageElement) Putref_x(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x(v)))
+func (self ISVGImageElement) Putref_x(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x(v.Raw)))
 }
 
 // Get_x wraps the raw Get_x call.
-func (self ISVGImageElement) Get_x() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGImageElement) Get_x() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y wraps the raw Putref_y call.
-func (self ISVGImageElement) Putref_y(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y(v)))
+func (self ISVGImageElement) Putref_y(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y(v.Raw)))
 }
 
 // Get_y wraps the raw Get_y call.
-func (self ISVGImageElement) Get_y() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGImageElement) Get_y() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_width wraps the raw Putref_width call.
-func (self ISVGImageElement) Putref_width(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_width(v)))
+func (self ISVGImageElement) Putref_width(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_width(v.Raw)))
 }
 
 // Get_width wraps the raw Get_width call.
-func (self ISVGImageElement) Get_width() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGImageElement) Get_width() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_width(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_height wraps the raw Putref_height call.
-func (self ISVGImageElement) Putref_height(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_height(v)))
+func (self ISVGImageElement) Putref_height(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_height(v.Raw)))
 }
 
 // Get_height wraps the raw Get_height call.
-func (self ISVGImageElement) Get_height() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGImageElement) Get_height() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_height(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGLangSpace is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGLangSpace with error-returning methods.
@@ -38010,45 +38010,45 @@ func (self ISVGLengthList) Clear() error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ISVGLengthList) Initialize(newItem *webmshtml.ISVGLength) (*webmshtml.ISVGLength, error) {
+func (self ISVGLengthList) Initialize(newItem ISVGLength) (ISVGLength, error) {
 	var _ppResult *webmshtml.ISVGLength
-	_hr := self.Raw.Initialize(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Initialize(newItem.Raw, &_ppResult)
+	return WrapISVGLength(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetItem wraps the raw GetItem call.
-func (self ISVGLengthList) GetItem(index int32) (*webmshtml.ISVGLength, error) {
+func (self ISVGLengthList) GetItem(index int32) (ISVGLength, error) {
 	var _ppResult *webmshtml.ISVGLength
 	_hr := self.Raw.GetItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGLength(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // InsertItemBefore wraps the raw InsertItemBefore call.
-func (self ISVGLengthList) InsertItemBefore(newItem *webmshtml.ISVGLength, index int32) (*webmshtml.ISVGLength, error) {
+func (self ISVGLengthList) InsertItemBefore(newItem ISVGLength, index int32) (ISVGLength, error) {
 	var _ppResult *webmshtml.ISVGLength
-	_hr := self.Raw.InsertItemBefore(newItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.InsertItemBefore(newItem.Raw, index, &_ppResult)
+	return WrapISVGLength(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceItem wraps the raw ReplaceItem call.
-func (self ISVGLengthList) ReplaceItem(newItem *webmshtml.ISVGLength, index int32) (*webmshtml.ISVGLength, error) {
+func (self ISVGLengthList) ReplaceItem(newItem ISVGLength, index int32) (ISVGLength, error) {
 	var _ppResult *webmshtml.ISVGLength
-	_hr := self.Raw.ReplaceItem(newItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceItem(newItem.Raw, index, &_ppResult)
+	return WrapISVGLength(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveItem wraps the raw RemoveItem call.
-func (self ISVGLengthList) RemoveItem(index int32) (*webmshtml.ISVGLength, error) {
+func (self ISVGLengthList) RemoveItem(index int32) (ISVGLength, error) {
 	var _ppResult *webmshtml.ISVGLength
 	_hr := self.Raw.RemoveItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGLength(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // AppendItem wraps the raw AppendItem call.
-func (self ISVGLengthList) AppendItem(newItem *webmshtml.ISVGLength) (*webmshtml.ISVGLength, error) {
+func (self ISVGLengthList) AppendItem(newItem ISVGLength) (ISVGLength, error) {
 	var _ppResult *webmshtml.ISVGLength
-	_hr := self.Raw.AppendItem(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AppendItem(newItem.Raw, &_ppResult)
+	return WrapISVGLength(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGLineElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGLineElement with error-returning methods.
@@ -38063,51 +38063,51 @@ func WrapISVGLineElement(raw *webmshtml.ISVGLineElement) ISVGLineElement {
 }
 
 // Putref_x1 wraps the raw Putref_x1 call.
-func (self ISVGLineElement) Putref_x1(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x1(v)))
+func (self ISVGLineElement) Putref_x1(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x1(v.Raw)))
 }
 
 // Get_x1 wraps the raw Get_x1 call.
-func (self ISVGLineElement) Get_x1() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGLineElement) Get_x1() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x1(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y1 wraps the raw Putref_y1 call.
-func (self ISVGLineElement) Putref_y1(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y1(v)))
+func (self ISVGLineElement) Putref_y1(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y1(v.Raw)))
 }
 
 // Get_y1 wraps the raw Get_y1 call.
-func (self ISVGLineElement) Get_y1() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGLineElement) Get_y1() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y1(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_x2 wraps the raw Putref_x2 call.
-func (self ISVGLineElement) Putref_x2(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x2(v)))
+func (self ISVGLineElement) Putref_x2(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x2(v.Raw)))
 }
 
 // Get_x2 wraps the raw Get_x2 call.
-func (self ISVGLineElement) Get_x2() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGLineElement) Get_x2() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x2(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y2 wraps the raw Putref_y2 call.
-func (self ISVGLineElement) Putref_y2(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y2(v)))
+func (self ISVGLineElement) Putref_y2(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y2(v.Raw)))
 }
 
 // Get_y2 wraps the raw Get_y2 call.
-func (self ISVGLineElement) Get_y2() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGLineElement) Get_y2() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y2(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGLinearGradientElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGLinearGradientElement with error-returning methods.
@@ -38122,51 +38122,51 @@ func WrapISVGLinearGradientElement(raw *webmshtml.ISVGLinearGradientElement) ISV
 }
 
 // Putref_x1 wraps the raw Putref_x1 call.
-func (self ISVGLinearGradientElement) Putref_x1(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x1(v)))
+func (self ISVGLinearGradientElement) Putref_x1(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x1(v.Raw)))
 }
 
 // Get_x1 wraps the raw Get_x1 call.
-func (self ISVGLinearGradientElement) Get_x1() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGLinearGradientElement) Get_x1() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x1(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y1 wraps the raw Putref_y1 call.
-func (self ISVGLinearGradientElement) Putref_y1(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y1(v)))
+func (self ISVGLinearGradientElement) Putref_y1(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y1(v.Raw)))
 }
 
 // Get_y1 wraps the raw Get_y1 call.
-func (self ISVGLinearGradientElement) Get_y1() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGLinearGradientElement) Get_y1() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y1(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_x2 wraps the raw Putref_x2 call.
-func (self ISVGLinearGradientElement) Putref_x2(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x2(v)))
+func (self ISVGLinearGradientElement) Putref_x2(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x2(v.Raw)))
 }
 
 // Get_x2 wraps the raw Get_x2 call.
-func (self ISVGLinearGradientElement) Get_x2() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGLinearGradientElement) Get_x2() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x2(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y2 wraps the raw Putref_y2 call.
-func (self ISVGLinearGradientElement) Putref_y2(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y2(v)))
+func (self ISVGLinearGradientElement) Putref_y2(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y2(v.Raw)))
 }
 
 // Get_y2 wraps the raw Get_y2 call.
-func (self ISVGLinearGradientElement) Get_y2() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGLinearGradientElement) Get_y2() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y2(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGLocatable is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGLocatable with error-returning methods.
@@ -38181,45 +38181,45 @@ func WrapISVGLocatable(raw *webmshtml.ISVGLocatable) ISVGLocatable {
 }
 
 // Get_nearestViewportElement wraps the raw Get_nearestViewportElement call.
-func (self ISVGLocatable) Get_nearestViewportElement() (*webmshtml.ISVGElement, error) {
+func (self ISVGLocatable) Get_nearestViewportElement() (ISVGElement, error) {
 	var _p *webmshtml.ISVGElement
 	_hr := self.Raw.Get_nearestViewportElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_farthestViewportElement wraps the raw Get_farthestViewportElement call.
-func (self ISVGLocatable) Get_farthestViewportElement() (*webmshtml.ISVGElement, error) {
+func (self ISVGLocatable) Get_farthestViewportElement() (ISVGElement, error) {
 	var _p *webmshtml.ISVGElement
 	_hr := self.Raw.Get_farthestViewportElement(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElement(_p), win32.HRESULTError(int32(_hr))
 }
 
 // GetBBox wraps the raw GetBBox call.
-func (self ISVGLocatable) GetBBox() (*webmshtml.ISVGRect, error) {
+func (self ISVGLocatable) GetBBox() (ISVGRect, error) {
 	var _ppResult *webmshtml.ISVGRect
 	_hr := self.Raw.GetBBox(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGRect(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetCTM wraps the raw GetCTM call.
-func (self ISVGLocatable) GetCTM() (*webmshtml.ISVGMatrix, error) {
+func (self ISVGLocatable) GetCTM() (ISVGMatrix, error) {
 	var _ppResult *webmshtml.ISVGMatrix
 	_hr := self.Raw.GetCTM(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGMatrix(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetScreenCTM wraps the raw GetScreenCTM call.
-func (self ISVGLocatable) GetScreenCTM() (*webmshtml.ISVGMatrix, error) {
+func (self ISVGLocatable) GetScreenCTM() (ISVGMatrix, error) {
 	var _ppResult *webmshtml.ISVGMatrix
 	_hr := self.Raw.GetScreenCTM(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGMatrix(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetTransformToElement wraps the raw GetTransformToElement call.
-func (self ISVGLocatable) GetTransformToElement(pElement *webmshtml.ISVGElement) (*webmshtml.ISVGMatrix, error) {
+func (self ISVGLocatable) GetTransformToElement(pElement ISVGElement) (ISVGMatrix, error) {
 	var _ppResult *webmshtml.ISVGMatrix
-	_hr := self.Raw.GetTransformToElement(pElement, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetTransformToElement(pElement.Raw, &_ppResult)
+	return WrapISVGMatrix(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGMarkerElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGMarkerElement with error-returning methods.
@@ -38234,87 +38234,87 @@ func WrapISVGMarkerElement(raw *webmshtml.ISVGMarkerElement) ISVGMarkerElement {
 }
 
 // Putref_refX wraps the raw Putref_refX call.
-func (self ISVGMarkerElement) Putref_refX(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_refX(v)))
+func (self ISVGMarkerElement) Putref_refX(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_refX(v.Raw)))
 }
 
 // Get_refX wraps the raw Get_refX call.
-func (self ISVGMarkerElement) Get_refX() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGMarkerElement) Get_refX() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_refX(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_refY wraps the raw Putref_refY call.
-func (self ISVGMarkerElement) Putref_refY(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_refY(v)))
+func (self ISVGMarkerElement) Putref_refY(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_refY(v.Raw)))
 }
 
 // Get_refY wraps the raw Get_refY call.
-func (self ISVGMarkerElement) Get_refY() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGMarkerElement) Get_refY() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_refY(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_markerUnits wraps the raw Putref_markerUnits call.
-func (self ISVGMarkerElement) Putref_markerUnits(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_markerUnits(v)))
+func (self ISVGMarkerElement) Putref_markerUnits(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_markerUnits(v.Raw)))
 }
 
 // Get_markerUnits wraps the raw Get_markerUnits call.
-func (self ISVGMarkerElement) Get_markerUnits() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGMarkerElement) Get_markerUnits() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_markerUnits(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_markerWidth wraps the raw Putref_markerWidth call.
-func (self ISVGMarkerElement) Putref_markerWidth(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_markerWidth(v)))
+func (self ISVGMarkerElement) Putref_markerWidth(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_markerWidth(v.Raw)))
 }
 
 // Get_markerWidth wraps the raw Get_markerWidth call.
-func (self ISVGMarkerElement) Get_markerWidth() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGMarkerElement) Get_markerWidth() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_markerWidth(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_markerHeight wraps the raw Putref_markerHeight call.
-func (self ISVGMarkerElement) Putref_markerHeight(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_markerHeight(v)))
+func (self ISVGMarkerElement) Putref_markerHeight(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_markerHeight(v.Raw)))
 }
 
 // Get_markerHeight wraps the raw Get_markerHeight call.
-func (self ISVGMarkerElement) Get_markerHeight() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGMarkerElement) Get_markerHeight() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_markerHeight(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_orientType wraps the raw Putref_orientType call.
-func (self ISVGMarkerElement) Putref_orientType(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_orientType(v)))
+func (self ISVGMarkerElement) Putref_orientType(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_orientType(v.Raw)))
 }
 
 // Get_orientType wraps the raw Get_orientType call.
-func (self ISVGMarkerElement) Get_orientType() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGMarkerElement) Get_orientType() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_orientType(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_orientAngle wraps the raw Putref_orientAngle call.
-func (self ISVGMarkerElement) Putref_orientAngle(v *webmshtml.ISVGAnimatedAngle) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_orientAngle(v)))
+func (self ISVGMarkerElement) Putref_orientAngle(v ISVGAnimatedAngle) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_orientAngle(v.Raw)))
 }
 
 // Get_orientAngle wraps the raw Get_orientAngle call.
-func (self ISVGMarkerElement) Get_orientAngle() (*webmshtml.ISVGAnimatedAngle, error) {
+func (self ISVGMarkerElement) Get_orientAngle() (ISVGAnimatedAngle, error) {
 	var _p *webmshtml.ISVGAnimatedAngle
 	_hr := self.Raw.Get_orientAngle(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedAngle(_p), win32.HRESULTError(int32(_hr))
 }
 
 // SetOrientToAuto wraps the raw SetOrientToAuto call.
@@ -38323,8 +38323,8 @@ func (self ISVGMarkerElement) SetOrientToAuto() error {
 }
 
 // SetOrientToAngle wraps the raw SetOrientToAngle call.
-func (self ISVGMarkerElement) SetOrientToAngle(pSVGAngle *webmshtml.ISVGAngle) error {
-	return win32.HRESULTError(int32(self.Raw.SetOrientToAngle(pSVGAngle)))
+func (self ISVGMarkerElement) SetOrientToAngle(pSVGAngle ISVGAngle) error {
+	return win32.HRESULTError(int32(self.Raw.SetOrientToAngle(pSVGAngle.Raw)))
 }
 
 // ISVGMaskElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGMaskElement with error-returning methods.
@@ -38339,75 +38339,75 @@ func WrapISVGMaskElement(raw *webmshtml.ISVGMaskElement) ISVGMaskElement {
 }
 
 // Putref_maskUnits wraps the raw Putref_maskUnits call.
-func (self ISVGMaskElement) Putref_maskUnits(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_maskUnits(v)))
+func (self ISVGMaskElement) Putref_maskUnits(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_maskUnits(v.Raw)))
 }
 
 // Get_maskUnits wraps the raw Get_maskUnits call.
-func (self ISVGMaskElement) Get_maskUnits() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGMaskElement) Get_maskUnits() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_maskUnits(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_maskContentUnits wraps the raw Putref_maskContentUnits call.
-func (self ISVGMaskElement) Putref_maskContentUnits(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_maskContentUnits(v)))
+func (self ISVGMaskElement) Putref_maskContentUnits(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_maskContentUnits(v.Raw)))
 }
 
 // Get_maskContentUnits wraps the raw Get_maskContentUnits call.
-func (self ISVGMaskElement) Get_maskContentUnits() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGMaskElement) Get_maskContentUnits() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_maskContentUnits(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_x wraps the raw Putref_x call.
-func (self ISVGMaskElement) Putref_x(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x(v)))
+func (self ISVGMaskElement) Putref_x(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x(v.Raw)))
 }
 
 // Get_x wraps the raw Get_x call.
-func (self ISVGMaskElement) Get_x() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGMaskElement) Get_x() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y wraps the raw Putref_y call.
-func (self ISVGMaskElement) Putref_y(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y(v)))
+func (self ISVGMaskElement) Putref_y(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y(v.Raw)))
 }
 
 // Get_y wraps the raw Get_y call.
-func (self ISVGMaskElement) Get_y() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGMaskElement) Get_y() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_width wraps the raw Putref_width call.
-func (self ISVGMaskElement) Putref_width(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_width(v)))
+func (self ISVGMaskElement) Putref_width(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_width(v.Raw)))
 }
 
 // Get_width wraps the raw Get_width call.
-func (self ISVGMaskElement) Get_width() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGMaskElement) Get_width() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_width(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_height wraps the raw Putref_height call.
-func (self ISVGMaskElement) Putref_height(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_height(v)))
+func (self ISVGMaskElement) Putref_height(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_height(v.Raw)))
 }
 
 // Get_height wraps the raw Get_height call.
-func (self ISVGMaskElement) Get_height() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGMaskElement) Get_height() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_height(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGMatrix is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGMatrix with error-returning methods.
@@ -38464,31 +38464,31 @@ func (self ISVGMatrix) Get_f() (float32, error) {
 }
 
 // Multiply wraps the raw Multiply call.
-func (self ISVGMatrix) Multiply(secondMatrix *webmshtml.ISVGMatrix) (*webmshtml.ISVGMatrix, error) {
+func (self ISVGMatrix) Multiply(secondMatrix ISVGMatrix) (ISVGMatrix, error) {
 	var _ppResult *webmshtml.ISVGMatrix
-	_hr := self.Raw.Multiply(secondMatrix, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Multiply(secondMatrix.Raw, &_ppResult)
+	return WrapISVGMatrix(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // Inverse wraps the raw Inverse call.
-func (self ISVGMatrix) Inverse() (*webmshtml.ISVGMatrix, error) {
+func (self ISVGMatrix) Inverse() (ISVGMatrix, error) {
 	var _ppResult *webmshtml.ISVGMatrix
 	_hr := self.Raw.Inverse(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGMatrix(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // FlipX wraps the raw FlipX call.
-func (self ISVGMatrix) FlipX() (*webmshtml.ISVGMatrix, error) {
+func (self ISVGMatrix) FlipX() (ISVGMatrix, error) {
 	var _ppResult *webmshtml.ISVGMatrix
 	_hr := self.Raw.FlipX(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGMatrix(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // FlipY wraps the raw FlipY call.
-func (self ISVGMatrix) FlipY() (*webmshtml.ISVGMatrix, error) {
+func (self ISVGMatrix) FlipY() (ISVGMatrix, error) {
 	var _ppResult *webmshtml.ISVGMatrix
 	_hr := self.Raw.FlipY(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGMatrix(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGMetadataElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGMetadataElement with error-returning methods.
@@ -38549,45 +38549,45 @@ func (self ISVGNumberList) Clear() error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ISVGNumberList) Initialize(newItem *webmshtml.ISVGNumber) (*webmshtml.ISVGNumber, error) {
+func (self ISVGNumberList) Initialize(newItem ISVGNumber) (ISVGNumber, error) {
 	var _ppResult *webmshtml.ISVGNumber
-	_hr := self.Raw.Initialize(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Initialize(newItem.Raw, &_ppResult)
+	return WrapISVGNumber(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetItem wraps the raw GetItem call.
-func (self ISVGNumberList) GetItem(index int32) (*webmshtml.ISVGNumber, error) {
+func (self ISVGNumberList) GetItem(index int32) (ISVGNumber, error) {
 	var _ppResult *webmshtml.ISVGNumber
 	_hr := self.Raw.GetItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGNumber(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // InsertItemBefore wraps the raw InsertItemBefore call.
-func (self ISVGNumberList) InsertItemBefore(newItem *webmshtml.ISVGNumber, index int32) (*webmshtml.ISVGNumber, error) {
+func (self ISVGNumberList) InsertItemBefore(newItem ISVGNumber, index int32) (ISVGNumber, error) {
 	var _ppResult *webmshtml.ISVGNumber
-	_hr := self.Raw.InsertItemBefore(newItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.InsertItemBefore(newItem.Raw, index, &_ppResult)
+	return WrapISVGNumber(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceItem wraps the raw ReplaceItem call.
-func (self ISVGNumberList) ReplaceItem(newItem *webmshtml.ISVGNumber, index int32) (*webmshtml.ISVGNumber, error) {
+func (self ISVGNumberList) ReplaceItem(newItem ISVGNumber, index int32) (ISVGNumber, error) {
 	var _ppResult *webmshtml.ISVGNumber
-	_hr := self.Raw.ReplaceItem(newItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceItem(newItem.Raw, index, &_ppResult)
+	return WrapISVGNumber(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveItem wraps the raw RemoveItem call.
-func (self ISVGNumberList) RemoveItem(index int32) (*webmshtml.ISVGNumber, error) {
+func (self ISVGNumberList) RemoveItem(index int32) (ISVGNumber, error) {
 	var _ppResult *webmshtml.ISVGNumber
 	_hr := self.Raw.RemoveItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGNumber(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // AppendItem wraps the raw AppendItem call.
-func (self ISVGNumberList) AppendItem(newItem *webmshtml.ISVGNumber) (*webmshtml.ISVGNumber, error) {
+func (self ISVGNumberList) AppendItem(newItem ISVGNumber) (ISVGNumber, error) {
 	var _ppResult *webmshtml.ISVGNumber
-	_hr := self.Raw.AppendItem(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AppendItem(newItem.Raw, &_ppResult)
+	return WrapISVGNumber(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGPaint is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGPaint with error-returning methods.
@@ -38613,15 +38613,15 @@ func WrapISVGPathElement(raw *webmshtml.ISVGPathElement) ISVGPathElement {
 }
 
 // Putref_pathLength wraps the raw Putref_pathLength call.
-func (self ISVGPathElement) Putref_pathLength(v *webmshtml.ISVGAnimatedNumber) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_pathLength(v)))
+func (self ISVGPathElement) Putref_pathLength(v ISVGAnimatedNumber) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_pathLength(v.Raw)))
 }
 
 // Get_pathLength wraps the raw Get_pathLength call.
-func (self ISVGPathElement) Get_pathLength() (*webmshtml.ISVGAnimatedNumber, error) {
+func (self ISVGPathElement) Get_pathLength() (ISVGAnimatedNumber, error) {
 	var _p *webmshtml.ISVGAnimatedNumber
 	_hr := self.Raw.Get_pathLength(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedNumber(_p), win32.HRESULTError(int32(_hr))
 }
 
 // GetTotalLength wraps the raw GetTotalLength call.
@@ -38632,10 +38632,10 @@ func (self ISVGPathElement) GetTotalLength() (float32, error) {
 }
 
 // CreateSVGPathSegClosePath wraps the raw CreateSVGPathSegClosePath call.
-func (self ISVGPathElement) CreateSVGPathSegClosePath() (*webmshtml.ISVGPathSegClosePath, error) {
+func (self ISVGPathElement) CreateSVGPathSegClosePath() (ISVGPathSegClosePath, error) {
 	var _ppResult *webmshtml.ISVGPathSegClosePath
 	_hr := self.Raw.CreateSVGPathSegClosePath(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGPathSegClosePath(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGPathSeg is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGPathSeg with error-returning methods.
@@ -39282,45 +39282,45 @@ func (self ISVGPathSegList) Clear() error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ISVGPathSegList) Initialize(newItem *webmshtml.ISVGPathSeg) (*webmshtml.ISVGPathSeg, error) {
+func (self ISVGPathSegList) Initialize(newItem ISVGPathSeg) (ISVGPathSeg, error) {
 	var _ppResult *webmshtml.ISVGPathSeg
-	_hr := self.Raw.Initialize(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Initialize(newItem.Raw, &_ppResult)
+	return WrapISVGPathSeg(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetItem wraps the raw GetItem call.
-func (self ISVGPathSegList) GetItem(index int32) (*webmshtml.ISVGPathSeg, error) {
+func (self ISVGPathSegList) GetItem(index int32) (ISVGPathSeg, error) {
 	var _ppResult *webmshtml.ISVGPathSeg
 	_hr := self.Raw.GetItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGPathSeg(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // InsertItemBefore wraps the raw InsertItemBefore call.
-func (self ISVGPathSegList) InsertItemBefore(newItem *webmshtml.ISVGPathSeg, index int32) (*webmshtml.ISVGPathSeg, error) {
+func (self ISVGPathSegList) InsertItemBefore(newItem ISVGPathSeg, index int32) (ISVGPathSeg, error) {
 	var _ppResult *webmshtml.ISVGPathSeg
-	_hr := self.Raw.InsertItemBefore(newItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.InsertItemBefore(newItem.Raw, index, &_ppResult)
+	return WrapISVGPathSeg(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceItem wraps the raw ReplaceItem call.
-func (self ISVGPathSegList) ReplaceItem(newItem *webmshtml.ISVGPathSeg, index int32) (*webmshtml.ISVGPathSeg, error) {
+func (self ISVGPathSegList) ReplaceItem(newItem ISVGPathSeg, index int32) (ISVGPathSeg, error) {
 	var _ppResult *webmshtml.ISVGPathSeg
-	_hr := self.Raw.ReplaceItem(newItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceItem(newItem.Raw, index, &_ppResult)
+	return WrapISVGPathSeg(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveItem wraps the raw RemoveItem call.
-func (self ISVGPathSegList) RemoveItem(index int32) (*webmshtml.ISVGPathSeg, error) {
+func (self ISVGPathSegList) RemoveItem(index int32) (ISVGPathSeg, error) {
 	var _ppResult *webmshtml.ISVGPathSeg
 	_hr := self.Raw.RemoveItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGPathSeg(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // AppendItem wraps the raw AppendItem call.
-func (self ISVGPathSegList) AppendItem(newItem *webmshtml.ISVGPathSeg) (*webmshtml.ISVGPathSeg, error) {
+func (self ISVGPathSegList) AppendItem(newItem ISVGPathSeg) (ISVGPathSeg, error) {
 	var _ppResult *webmshtml.ISVGPathSeg
-	_hr := self.Raw.AppendItem(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AppendItem(newItem.Raw, &_ppResult)
+	return WrapISVGPathSeg(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGPathSegMovetoAbs is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGPathSegMovetoAbs with error-returning methods.
@@ -39385,87 +39385,87 @@ func WrapISVGPatternElement(raw *webmshtml.ISVGPatternElement) ISVGPatternElemen
 }
 
 // Putref_patternUnits wraps the raw Putref_patternUnits call.
-func (self ISVGPatternElement) Putref_patternUnits(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_patternUnits(v)))
+func (self ISVGPatternElement) Putref_patternUnits(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_patternUnits(v.Raw)))
 }
 
 // Get_patternUnits wraps the raw Get_patternUnits call.
-func (self ISVGPatternElement) Get_patternUnits() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGPatternElement) Get_patternUnits() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_patternUnits(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_patternContentUnits wraps the raw Putref_patternContentUnits call.
-func (self ISVGPatternElement) Putref_patternContentUnits(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_patternContentUnits(v)))
+func (self ISVGPatternElement) Putref_patternContentUnits(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_patternContentUnits(v.Raw)))
 }
 
 // Get_patternContentUnits wraps the raw Get_patternContentUnits call.
-func (self ISVGPatternElement) Get_patternContentUnits() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGPatternElement) Get_patternContentUnits() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_patternContentUnits(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_patternTransform wraps the raw Putref_patternTransform call.
-func (self ISVGPatternElement) Putref_patternTransform(v *webmshtml.ISVGAnimatedTransformList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_patternTransform(v)))
+func (self ISVGPatternElement) Putref_patternTransform(v ISVGAnimatedTransformList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_patternTransform(v.Raw)))
 }
 
 // Get_patternTransform wraps the raw Get_patternTransform call.
-func (self ISVGPatternElement) Get_patternTransform() (*webmshtml.ISVGAnimatedTransformList, error) {
+func (self ISVGPatternElement) Get_patternTransform() (ISVGAnimatedTransformList, error) {
 	var _p *webmshtml.ISVGAnimatedTransformList
 	_hr := self.Raw.Get_patternTransform(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedTransformList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_x wraps the raw Putref_x call.
-func (self ISVGPatternElement) Putref_x(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x(v)))
+func (self ISVGPatternElement) Putref_x(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x(v.Raw)))
 }
 
 // Get_x wraps the raw Get_x call.
-func (self ISVGPatternElement) Get_x() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGPatternElement) Get_x() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y wraps the raw Putref_y call.
-func (self ISVGPatternElement) Putref_y(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y(v)))
+func (self ISVGPatternElement) Putref_y(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y(v.Raw)))
 }
 
 // Get_y wraps the raw Get_y call.
-func (self ISVGPatternElement) Get_y() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGPatternElement) Get_y() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_width wraps the raw Putref_width call.
-func (self ISVGPatternElement) Putref_width(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_width(v)))
+func (self ISVGPatternElement) Putref_width(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_width(v.Raw)))
 }
 
 // Get_width wraps the raw Get_width call.
-func (self ISVGPatternElement) Get_width() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGPatternElement) Get_width() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_width(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_height wraps the raw Putref_height call.
-func (self ISVGPatternElement) Putref_height(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_height(v)))
+func (self ISVGPatternElement) Putref_height(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_height(v.Raw)))
 }
 
 // Get_height wraps the raw Get_height call.
-func (self ISVGPatternElement) Get_height() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGPatternElement) Get_height() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_height(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGPoint is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGPoint with error-returning methods.
@@ -39494,10 +39494,10 @@ func (self ISVGPoint) Get_y() (float32, error) {
 }
 
 // MatrixTransform wraps the raw MatrixTransform call.
-func (self ISVGPoint) MatrixTransform(pMatrix *webmshtml.ISVGMatrix) (*webmshtml.ISVGPoint, error) {
+func (self ISVGPoint) MatrixTransform(pMatrix ISVGMatrix) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
-	_hr := self.Raw.MatrixTransform(pMatrix, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.MatrixTransform(pMatrix.Raw, &_ppResult)
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGPointList is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGPointList with error-returning methods.
@@ -39529,45 +39529,45 @@ func (self ISVGPointList) Clear() error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ISVGPointList) Initialize(pNewItem *webmshtml.ISVGPoint) (*webmshtml.ISVGPoint, error) {
+func (self ISVGPointList) Initialize(pNewItem ISVGPoint) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
-	_hr := self.Raw.Initialize(pNewItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Initialize(pNewItem.Raw, &_ppResult)
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetItem wraps the raw GetItem call.
-func (self ISVGPointList) GetItem(index int32) (*webmshtml.ISVGPoint, error) {
+func (self ISVGPointList) GetItem(index int32) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
 	_hr := self.Raw.GetItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // InsertItemBefore wraps the raw InsertItemBefore call.
-func (self ISVGPointList) InsertItemBefore(pNewItem *webmshtml.ISVGPoint, index int32) (*webmshtml.ISVGPoint, error) {
+func (self ISVGPointList) InsertItemBefore(pNewItem ISVGPoint, index int32) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
-	_hr := self.Raw.InsertItemBefore(pNewItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.InsertItemBefore(pNewItem.Raw, index, &_ppResult)
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceItem wraps the raw ReplaceItem call.
-func (self ISVGPointList) ReplaceItem(pNewItem *webmshtml.ISVGPoint, index int32) (*webmshtml.ISVGPoint, error) {
+func (self ISVGPointList) ReplaceItem(pNewItem ISVGPoint, index int32) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
-	_hr := self.Raw.ReplaceItem(pNewItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceItem(pNewItem.Raw, index, &_ppResult)
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveItem wraps the raw RemoveItem call.
-func (self ISVGPointList) RemoveItem(index int32) (*webmshtml.ISVGPoint, error) {
+func (self ISVGPointList) RemoveItem(index int32) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
 	_hr := self.Raw.RemoveItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // AppendItem wraps the raw AppendItem call.
-func (self ISVGPointList) AppendItem(pNewItem *webmshtml.ISVGPoint) (*webmshtml.ISVGPoint, error) {
+func (self ISVGPointList) AppendItem(pNewItem ISVGPoint) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
-	_hr := self.Raw.AppendItem(pNewItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AppendItem(pNewItem.Raw, &_ppResult)
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGPolygonElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGPolygonElement with error-returning methods.
@@ -39639,63 +39639,63 @@ func WrapISVGRadialGradientElement(raw *webmshtml.ISVGRadialGradientElement) ISV
 }
 
 // Putref_cx wraps the raw Putref_cx call.
-func (self ISVGRadialGradientElement) Putref_cx(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_cx(v)))
+func (self ISVGRadialGradientElement) Putref_cx(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_cx(v.Raw)))
 }
 
 // Get_cx wraps the raw Get_cx call.
-func (self ISVGRadialGradientElement) Get_cx() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRadialGradientElement) Get_cx() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_cx(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_cy wraps the raw Putref_cy call.
-func (self ISVGRadialGradientElement) Putref_cy(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_cy(v)))
+func (self ISVGRadialGradientElement) Putref_cy(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_cy(v.Raw)))
 }
 
 // Get_cy wraps the raw Get_cy call.
-func (self ISVGRadialGradientElement) Get_cy() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRadialGradientElement) Get_cy() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_cy(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_r wraps the raw Putref_r call.
-func (self ISVGRadialGradientElement) Putref_r(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_r(v)))
+func (self ISVGRadialGradientElement) Putref_r(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_r(v.Raw)))
 }
 
 // Get_r wraps the raw Get_r call.
-func (self ISVGRadialGradientElement) Get_r() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRadialGradientElement) Get_r() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_r(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_fx wraps the raw Putref_fx call.
-func (self ISVGRadialGradientElement) Putref_fx(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_fx(v)))
+func (self ISVGRadialGradientElement) Putref_fx(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_fx(v.Raw)))
 }
 
 // Get_fx wraps the raw Get_fx call.
-func (self ISVGRadialGradientElement) Get_fx() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRadialGradientElement) Get_fx() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_fx(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_fy wraps the raw Putref_fy call.
-func (self ISVGRadialGradientElement) Putref_fy(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_fy(v)))
+func (self ISVGRadialGradientElement) Putref_fy(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_fy(v.Raw)))
 }
 
 // Get_fy wraps the raw Get_fy call.
-func (self ISVGRadialGradientElement) Get_fy() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRadialGradientElement) Get_fy() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_fy(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGRect is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGRect with error-returning methods.
@@ -39749,75 +39749,75 @@ func WrapISVGRectElement(raw *webmshtml.ISVGRectElement) ISVGRectElement {
 }
 
 // Putref_x wraps the raw Putref_x call.
-func (self ISVGRectElement) Putref_x(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x(v)))
+func (self ISVGRectElement) Putref_x(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x(v.Raw)))
 }
 
 // Get_x wraps the raw Get_x call.
-func (self ISVGRectElement) Get_x() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRectElement) Get_x() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y wraps the raw Putref_y call.
-func (self ISVGRectElement) Putref_y(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y(v)))
+func (self ISVGRectElement) Putref_y(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y(v.Raw)))
 }
 
 // Get_y wraps the raw Get_y call.
-func (self ISVGRectElement) Get_y() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRectElement) Get_y() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_width wraps the raw Putref_width call.
-func (self ISVGRectElement) Putref_width(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_width(v)))
+func (self ISVGRectElement) Putref_width(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_width(v.Raw)))
 }
 
 // Get_width wraps the raw Get_width call.
-func (self ISVGRectElement) Get_width() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRectElement) Get_width() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_width(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_height wraps the raw Putref_height call.
-func (self ISVGRectElement) Putref_height(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_height(v)))
+func (self ISVGRectElement) Putref_height(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_height(v.Raw)))
 }
 
 // Get_height wraps the raw Get_height call.
-func (self ISVGRectElement) Get_height() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRectElement) Get_height() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_height(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_rx wraps the raw Putref_rx call.
-func (self ISVGRectElement) Putref_rx(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_rx(v)))
+func (self ISVGRectElement) Putref_rx(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_rx(v.Raw)))
 }
 
 // Get_rx wraps the raw Get_rx call.
-func (self ISVGRectElement) Get_rx() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRectElement) Get_rx() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_rx(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_ry wraps the raw Putref_ry call.
-func (self ISVGRectElement) Putref_ry(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_ry(v)))
+func (self ISVGRectElement) Putref_ry(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_ry(v.Raw)))
 }
 
 // Get_ry wraps the raw Get_ry call.
-func (self ISVGRectElement) Get_ry() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGRectElement) Get_ry() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_ry(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGSVGElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGSVGElement with error-returning methods.
@@ -39832,51 +39832,51 @@ func WrapISVGSVGElement(raw *webmshtml.ISVGSVGElement) ISVGSVGElement {
 }
 
 // Putref_x wraps the raw Putref_x call.
-func (self ISVGSVGElement) Putref_x(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x(v)))
+func (self ISVGSVGElement) Putref_x(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x(v.Raw)))
 }
 
 // Get_x wraps the raw Get_x call.
-func (self ISVGSVGElement) Get_x() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGSVGElement) Get_x() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y wraps the raw Putref_y call.
-func (self ISVGSVGElement) Putref_y(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y(v)))
+func (self ISVGSVGElement) Putref_y(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y(v.Raw)))
 }
 
 // Get_y wraps the raw Get_y call.
-func (self ISVGSVGElement) Get_y() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGSVGElement) Get_y() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_width wraps the raw Putref_width call.
-func (self ISVGSVGElement) Putref_width(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_width(v)))
+func (self ISVGSVGElement) Putref_width(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_width(v.Raw)))
 }
 
 // Get_width wraps the raw Get_width call.
-func (self ISVGSVGElement) Get_width() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGSVGElement) Get_width() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_width(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_height wraps the raw Putref_height call.
-func (self ISVGSVGElement) Putref_height(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_height(v)))
+func (self ISVGSVGElement) Putref_height(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_height(v.Raw)))
 }
 
 // Get_height wraps the raw Get_height call.
-func (self ISVGSVGElement) Get_height() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGSVGElement) Get_height() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_height(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Put_contentScriptType wraps the raw Put_contentScriptType call.
@@ -39904,15 +39904,15 @@ func (self ISVGSVGElement) Get_contentStyleType() (foundation.BSTR, error) {
 }
 
 // Putref_viewport wraps the raw Putref_viewport call.
-func (self ISVGSVGElement) Putref_viewport(v *webmshtml.ISVGRect) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_viewport(v)))
+func (self ISVGSVGElement) Putref_viewport(v ISVGRect) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_viewport(v.Raw)))
 }
 
 // Get_viewport wraps the raw Get_viewport call.
-func (self ISVGSVGElement) Get_viewport() (*webmshtml.ISVGRect, error) {
+func (self ISVGSVGElement) Get_viewport() (ISVGRect, error) {
 	var _p *webmshtml.ISVGRect
 	_hr := self.Raw.Get_viewport(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGRect(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_pixelUnitToMillimeterX wraps the raw Get_pixelUnitToMillimeterX call.
@@ -39956,15 +39956,15 @@ func (self ISVGSVGElement) Get_useCurrentView() (foundation.VARIANT_BOOL, error)
 }
 
 // Putref_currentView wraps the raw Putref_currentView call.
-func (self ISVGSVGElement) Putref_currentView(v *webmshtml.ISVGViewSpec) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_currentView(v)))
+func (self ISVGSVGElement) Putref_currentView(v ISVGViewSpec) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_currentView(v.Raw)))
 }
 
 // Get_currentView wraps the raw Get_currentView call.
-func (self ISVGSVGElement) Get_currentView() (*webmshtml.ISVGViewSpec, error) {
+func (self ISVGSVGElement) Get_currentView() (ISVGViewSpec, error) {
 	var _p *webmshtml.ISVGViewSpec
 	_hr := self.Raw.Get_currentView(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGViewSpec(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_currentScale wraps the raw Get_currentScale call.
@@ -39975,15 +39975,15 @@ func (self ISVGSVGElement) Get_currentScale() (float32, error) {
 }
 
 // Putref_currentTranslate wraps the raw Putref_currentTranslate call.
-func (self ISVGSVGElement) Putref_currentTranslate(v *webmshtml.ISVGPoint) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_currentTranslate(v)))
+func (self ISVGSVGElement) Putref_currentTranslate(v ISVGPoint) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_currentTranslate(v.Raw)))
 }
 
 // Get_currentTranslate wraps the raw Get_currentTranslate call.
-func (self ISVGSVGElement) Get_currentTranslate() (*webmshtml.ISVGPoint, error) {
+func (self ISVGSVGElement) Get_currentTranslate() (ISVGPoint, error) {
 	var _p *webmshtml.ISVGPoint
 	_hr := self.Raw.Get_currentTranslate(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPoint(_p), win32.HRESULTError(int32(_hr))
 }
 
 // SuspendRedraw wraps the raw SuspendRedraw call.
@@ -40033,30 +40033,30 @@ func (self ISVGSVGElement) GetCurrentTime() (float32, error) {
 }
 
 // GetIntersectionList wraps the raw GetIntersectionList call.
-func (self ISVGSVGElement) GetIntersectionList(rect *webmshtml.ISVGRect, referenceElement *webmshtml.ISVGElement) (systemvariant.VARIANT, error) {
+func (self ISVGSVGElement) GetIntersectionList(rect ISVGRect, referenceElement ISVGElement) (systemvariant.VARIANT, error) {
 	var _pResult systemvariant.VARIANT
-	_hr := self.Raw.GetIntersectionList(rect, referenceElement, &_pResult)
+	_hr := self.Raw.GetIntersectionList(rect.Raw, referenceElement.Raw, &_pResult)
 	return _pResult, win32.HRESULTError(int32(_hr))
 }
 
 // GetEnclosureList wraps the raw GetEnclosureList call.
-func (self ISVGSVGElement) GetEnclosureList(rect *webmshtml.ISVGRect, referenceElement *webmshtml.ISVGElement) (systemvariant.VARIANT, error) {
+func (self ISVGSVGElement) GetEnclosureList(rect ISVGRect, referenceElement ISVGElement) (systemvariant.VARIANT, error) {
 	var _pResult systemvariant.VARIANT
-	_hr := self.Raw.GetEnclosureList(rect, referenceElement, &_pResult)
+	_hr := self.Raw.GetEnclosureList(rect.Raw, referenceElement.Raw, &_pResult)
 	return _pResult, win32.HRESULTError(int32(_hr))
 }
 
 // CheckIntersection wraps the raw CheckIntersection call.
-func (self ISVGSVGElement) CheckIntersection(element *webmshtml.ISVGElement, rect *webmshtml.ISVGRect) (foundation.VARIANT_BOOL, error) {
+func (self ISVGSVGElement) CheckIntersection(element ISVGElement, rect ISVGRect) (foundation.VARIANT_BOOL, error) {
 	var _pResult foundation.VARIANT_BOOL
-	_hr := self.Raw.CheckIntersection(element, rect, &_pResult)
+	_hr := self.Raw.CheckIntersection(element.Raw, rect.Raw, &_pResult)
 	return _pResult, win32.HRESULTError(int32(_hr))
 }
 
 // CheckEnclosure wraps the raw CheckEnclosure call.
-func (self ISVGSVGElement) CheckEnclosure(element *webmshtml.ISVGElement, rect *webmshtml.ISVGRect) (foundation.VARIANT_BOOL, error) {
+func (self ISVGSVGElement) CheckEnclosure(element ISVGElement, rect ISVGRect) (foundation.VARIANT_BOOL, error) {
 	var _pResult foundation.VARIANT_BOOL
-	_hr := self.Raw.CheckEnclosure(element, rect, &_pResult)
+	_hr := self.Raw.CheckEnclosure(element.Raw, rect.Raw, &_pResult)
 	return _pResult, win32.HRESULTError(int32(_hr))
 }
 
@@ -40066,66 +40066,66 @@ func (self ISVGSVGElement) DeselectAll() error {
 }
 
 // CreateSVGNumber wraps the raw CreateSVGNumber call.
-func (self ISVGSVGElement) CreateSVGNumber() (*webmshtml.ISVGNumber, error) {
+func (self ISVGSVGElement) CreateSVGNumber() (ISVGNumber, error) {
 	var _pResult *webmshtml.ISVGNumber
 	_hr := self.Raw.CreateSVGNumber(&_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGNumber(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSVGLength wraps the raw CreateSVGLength call.
-func (self ISVGSVGElement) CreateSVGLength() (*webmshtml.ISVGLength, error) {
+func (self ISVGSVGElement) CreateSVGLength() (ISVGLength, error) {
 	var _pResult *webmshtml.ISVGLength
 	_hr := self.Raw.CreateSVGLength(&_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGLength(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSVGAngle wraps the raw CreateSVGAngle call.
-func (self ISVGSVGElement) CreateSVGAngle() (*webmshtml.ISVGAngle, error) {
+func (self ISVGSVGElement) CreateSVGAngle() (ISVGAngle, error) {
 	var _pResult *webmshtml.ISVGAngle
 	_hr := self.Raw.CreateSVGAngle(&_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGAngle(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSVGPoint wraps the raw CreateSVGPoint call.
-func (self ISVGSVGElement) CreateSVGPoint() (*webmshtml.ISVGPoint, error) {
+func (self ISVGSVGElement) CreateSVGPoint() (ISVGPoint, error) {
 	var _pResult *webmshtml.ISVGPoint
 	_hr := self.Raw.CreateSVGPoint(&_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGPoint(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSVGMatrix wraps the raw CreateSVGMatrix call.
-func (self ISVGSVGElement) CreateSVGMatrix() (*webmshtml.ISVGMatrix, error) {
+func (self ISVGSVGElement) CreateSVGMatrix() (ISVGMatrix, error) {
 	var _pResult *webmshtml.ISVGMatrix
 	_hr := self.Raw.CreateSVGMatrix(&_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGMatrix(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSVGRect wraps the raw CreateSVGRect call.
-func (self ISVGSVGElement) CreateSVGRect() (*webmshtml.ISVGRect, error) {
+func (self ISVGSVGElement) CreateSVGRect() (ISVGRect, error) {
 	var _pResult *webmshtml.ISVGRect
 	_hr := self.Raw.CreateSVGRect(&_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGRect(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSVGTransform wraps the raw CreateSVGTransform call.
-func (self ISVGSVGElement) CreateSVGTransform() (*webmshtml.ISVGTransform, error) {
+func (self ISVGSVGElement) CreateSVGTransform() (ISVGTransform, error) {
 	var _pResult *webmshtml.ISVGTransform
 	_hr := self.Raw.CreateSVGTransform(&_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGTransform(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSVGTransformFromMatrix wraps the raw CreateSVGTransformFromMatrix call.
-func (self ISVGSVGElement) CreateSVGTransformFromMatrix(matrix *webmshtml.ISVGMatrix) (*webmshtml.ISVGTransform, error) {
+func (self ISVGSVGElement) CreateSVGTransformFromMatrix(matrix ISVGMatrix) (ISVGTransform, error) {
 	var _pResult *webmshtml.ISVGTransform
-	_hr := self.Raw.CreateSVGTransformFromMatrix(matrix, &_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateSVGTransformFromMatrix(matrix.Raw, &_pResult)
+	return WrapISVGTransform(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetElementById wraps the raw GetElementById call.
-func (self ISVGSVGElement) GetElementById(elementId foundation.BSTR) (*webmshtml.IHTMLElement, error) {
+func (self ISVGSVGElement) GetElementById(elementId foundation.BSTR) (IHTMLElement, error) {
 	var _pResult *webmshtml.IHTMLElement
 	_hr := self.Raw.GetElementById(elementId, &_pResult)
-	return _pResult, win32.HRESULTError(int32(_hr))
+	return WrapIHTMLElement(_pResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGScriptElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGScriptElement with error-returning methods.
@@ -40163,15 +40163,15 @@ func WrapISVGStopElement(raw *webmshtml.ISVGStopElement) ISVGStopElement {
 }
 
 // Putref_offset wraps the raw Putref_offset call.
-func (self ISVGStopElement) Putref_offset(v *webmshtml.ISVGAnimatedNumber) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_offset(v)))
+func (self ISVGStopElement) Putref_offset(v ISVGAnimatedNumber) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_offset(v.Raw)))
 }
 
 // Get_offset wraps the raw Get_offset call.
-func (self ISVGStopElement) Get_offset() (*webmshtml.ISVGAnimatedNumber, error) {
+func (self ISVGStopElement) Get_offset() (ISVGAnimatedNumber, error) {
 	var _p *webmshtml.ISVGAnimatedNumber
 	_hr := self.Raw.Get_offset(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedNumber(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGStringList is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGStringList with error-returning methods.
@@ -40256,10 +40256,10 @@ func WrapISVGStylable(raw *webmshtml.ISVGStylable) ISVGStylable {
 }
 
 // Get_className wraps the raw Get_className call.
-func (self ISVGStylable) Get_className() (*webmshtml.ISVGAnimatedString, error) {
+func (self ISVGStylable) Get_className() (ISVGAnimatedString, error) {
 	var _p *webmshtml.ISVGAnimatedString
 	_hr := self.Raw.Get_className(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedString(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGStyleElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGStyleElement with error-returning methods.
@@ -40342,24 +40342,24 @@ func WrapISVGTests(raw *webmshtml.ISVGTests) ISVGTests {
 }
 
 // Get_requiredFeatures wraps the raw Get_requiredFeatures call.
-func (self ISVGTests) Get_requiredFeatures() (*webmshtml.ISVGStringList, error) {
+func (self ISVGTests) Get_requiredFeatures() (ISVGStringList, error) {
 	var _p *webmshtml.ISVGStringList
 	_hr := self.Raw.Get_requiredFeatures(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGStringList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_requiredExtensions wraps the raw Get_requiredExtensions call.
-func (self ISVGTests) Get_requiredExtensions() (*webmshtml.ISVGStringList, error) {
+func (self ISVGTests) Get_requiredExtensions() (ISVGStringList, error) {
 	var _p *webmshtml.ISVGStringList
 	_hr := self.Raw.Get_requiredExtensions(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGStringList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_systemLanguage wraps the raw Get_systemLanguage call.
-func (self ISVGTests) Get_systemLanguage() (*webmshtml.ISVGStringList, error) {
+func (self ISVGTests) Get_systemLanguage() (ISVGStringList, error) {
 	var _p *webmshtml.ISVGStringList
 	_hr := self.Raw.Get_systemLanguage(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGStringList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // HasExtension wraps the raw HasExtension call.
@@ -40381,27 +40381,27 @@ func WrapISVGTextContentElement(raw *webmshtml.ISVGTextContentElement) ISVGTextC
 }
 
 // Putref_textLength wraps the raw Putref_textLength call.
-func (self ISVGTextContentElement) Putref_textLength(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_textLength(v)))
+func (self ISVGTextContentElement) Putref_textLength(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_textLength(v.Raw)))
 }
 
 // Get_textLength wraps the raw Get_textLength call.
-func (self ISVGTextContentElement) Get_textLength() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGTextContentElement) Get_textLength() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_textLength(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_lengthAdjust wraps the raw Putref_lengthAdjust call.
-func (self ISVGTextContentElement) Putref_lengthAdjust(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_lengthAdjust(v)))
+func (self ISVGTextContentElement) Putref_lengthAdjust(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_lengthAdjust(v.Raw)))
 }
 
 // Get_lengthAdjust wraps the raw Get_lengthAdjust call.
-func (self ISVGTextContentElement) Get_lengthAdjust() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGTextContentElement) Get_lengthAdjust() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_lengthAdjust(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // GetNumberOfChars wraps the raw GetNumberOfChars call.
@@ -40426,24 +40426,24 @@ func (self ISVGTextContentElement) GetSubStringLength(charnum int32, nchars int3
 }
 
 // GetStartPositionOfChar wraps the raw GetStartPositionOfChar call.
-func (self ISVGTextContentElement) GetStartPositionOfChar(charnum int32) (*webmshtml.ISVGPoint, error) {
+func (self ISVGTextContentElement) GetStartPositionOfChar(charnum int32) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
 	_hr := self.Raw.GetStartPositionOfChar(charnum, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetEndPositionOfChar wraps the raw GetEndPositionOfChar call.
-func (self ISVGTextContentElement) GetEndPositionOfChar(charnum int32) (*webmshtml.ISVGPoint, error) {
+func (self ISVGTextContentElement) GetEndPositionOfChar(charnum int32) (ISVGPoint, error) {
 	var _ppResult *webmshtml.ISVGPoint
 	_hr := self.Raw.GetEndPositionOfChar(charnum, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGPoint(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetExtentOfChar wraps the raw GetExtentOfChar call.
-func (self ISVGTextContentElement) GetExtentOfChar(charnum int32) (*webmshtml.ISVGRect, error) {
+func (self ISVGTextContentElement) GetExtentOfChar(charnum int32) (ISVGRect, error) {
 	var _ppResult *webmshtml.ISVGRect
 	_hr := self.Raw.GetExtentOfChar(charnum, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGRect(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetRotationOfChar wraps the raw GetRotationOfChar call.
@@ -40454,9 +40454,9 @@ func (self ISVGTextContentElement) GetRotationOfChar(charnum int32) (float32, er
 }
 
 // GetCharNumAtPosition wraps the raw GetCharNumAtPosition call.
-func (self ISVGTextContentElement) GetCharNumAtPosition(point *webmshtml.ISVGPoint) (int32, error) {
+func (self ISVGTextContentElement) GetCharNumAtPosition(point ISVGPoint) (int32, error) {
 	var _pResult int32
-	_hr := self.Raw.GetCharNumAtPosition(point, &_pResult)
+	_hr := self.Raw.GetCharNumAtPosition(point.Raw, &_pResult)
 	return _pResult, win32.HRESULTError(int32(_hr))
 }
 
@@ -40488,39 +40488,39 @@ func WrapISVGTextPathElement(raw *webmshtml.ISVGTextPathElement) ISVGTextPathEle
 }
 
 // Putref_startOffset wraps the raw Putref_startOffset call.
-func (self ISVGTextPathElement) Putref_startOffset(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_startOffset(v)))
+func (self ISVGTextPathElement) Putref_startOffset(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_startOffset(v.Raw)))
 }
 
 // Get_startOffset wraps the raw Get_startOffset call.
-func (self ISVGTextPathElement) Get_startOffset() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGTextPathElement) Get_startOffset() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_startOffset(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_method wraps the raw Putref_method call.
-func (self ISVGTextPathElement) Putref_method(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_method(v)))
+func (self ISVGTextPathElement) Putref_method(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_method(v.Raw)))
 }
 
 // Get_method wraps the raw Get_method call.
-func (self ISVGTextPathElement) Get_method() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGTextPathElement) Get_method() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_method(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_spacing wraps the raw Putref_spacing call.
-func (self ISVGTextPathElement) Putref_spacing(v *webmshtml.ISVGAnimatedEnumeration) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_spacing(v)))
+func (self ISVGTextPathElement) Putref_spacing(v ISVGAnimatedEnumeration) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_spacing(v.Raw)))
 }
 
 // Get_spacing wraps the raw Get_spacing call.
-func (self ISVGTextPathElement) Get_spacing() (*webmshtml.ISVGAnimatedEnumeration, error) {
+func (self ISVGTextPathElement) Get_spacing() (ISVGAnimatedEnumeration, error) {
 	var _p *webmshtml.ISVGAnimatedEnumeration
 	_hr := self.Raw.Get_spacing(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedEnumeration(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGTextPositioningElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGTextPositioningElement with error-returning methods.
@@ -40535,63 +40535,63 @@ func WrapISVGTextPositioningElement(raw *webmshtml.ISVGTextPositioningElement) I
 }
 
 // Putref_x wraps the raw Putref_x call.
-func (self ISVGTextPositioningElement) Putref_x(v *webmshtml.ISVGAnimatedLengthList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x(v)))
+func (self ISVGTextPositioningElement) Putref_x(v ISVGAnimatedLengthList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x(v.Raw)))
 }
 
 // Get_x wraps the raw Get_x call.
-func (self ISVGTextPositioningElement) Get_x() (*webmshtml.ISVGAnimatedLengthList, error) {
+func (self ISVGTextPositioningElement) Get_x() (ISVGAnimatedLengthList, error) {
 	var _p *webmshtml.ISVGAnimatedLengthList
 	_hr := self.Raw.Get_x(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLengthList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y wraps the raw Putref_y call.
-func (self ISVGTextPositioningElement) Putref_y(v *webmshtml.ISVGAnimatedLengthList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y(v)))
+func (self ISVGTextPositioningElement) Putref_y(v ISVGAnimatedLengthList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y(v.Raw)))
 }
 
 // Get_y wraps the raw Get_y call.
-func (self ISVGTextPositioningElement) Get_y() (*webmshtml.ISVGAnimatedLengthList, error) {
+func (self ISVGTextPositioningElement) Get_y() (ISVGAnimatedLengthList, error) {
 	var _p *webmshtml.ISVGAnimatedLengthList
 	_hr := self.Raw.Get_y(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLengthList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_dx wraps the raw Putref_dx call.
-func (self ISVGTextPositioningElement) Putref_dx(v *webmshtml.ISVGAnimatedLengthList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_dx(v)))
+func (self ISVGTextPositioningElement) Putref_dx(v ISVGAnimatedLengthList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_dx(v.Raw)))
 }
 
 // Get_dx wraps the raw Get_dx call.
-func (self ISVGTextPositioningElement) Get_dx() (*webmshtml.ISVGAnimatedLengthList, error) {
+func (self ISVGTextPositioningElement) Get_dx() (ISVGAnimatedLengthList, error) {
 	var _p *webmshtml.ISVGAnimatedLengthList
 	_hr := self.Raw.Get_dx(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLengthList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_dy wraps the raw Putref_dy call.
-func (self ISVGTextPositioningElement) Putref_dy(v *webmshtml.ISVGAnimatedLengthList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_dy(v)))
+func (self ISVGTextPositioningElement) Putref_dy(v ISVGAnimatedLengthList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_dy(v.Raw)))
 }
 
 // Get_dy wraps the raw Get_dy call.
-func (self ISVGTextPositioningElement) Get_dy() (*webmshtml.ISVGAnimatedLengthList, error) {
+func (self ISVGTextPositioningElement) Get_dy() (ISVGAnimatedLengthList, error) {
 	var _p *webmshtml.ISVGAnimatedLengthList
 	_hr := self.Raw.Get_dy(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLengthList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_rotate wraps the raw Putref_rotate call.
-func (self ISVGTextPositioningElement) Putref_rotate(v *webmshtml.ISVGAnimatedNumberList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_rotate(v)))
+func (self ISVGTextPositioningElement) Putref_rotate(v ISVGAnimatedNumberList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_rotate(v.Raw)))
 }
 
 // Get_rotate wraps the raw Get_rotate call.
-func (self ISVGTextPositioningElement) Get_rotate() (*webmshtml.ISVGAnimatedNumberList, error) {
+func (self ISVGTextPositioningElement) Get_rotate() (ISVGAnimatedNumberList, error) {
 	var _p *webmshtml.ISVGAnimatedNumberList
 	_hr := self.Raw.Get_rotate(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedNumberList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGTitleElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGTitleElement with error-returning methods.
@@ -40629,15 +40629,15 @@ func (self ISVGTransform) Get_type() (int16, error) {
 }
 
 // Putref_matrix wraps the raw Putref_matrix call.
-func (self ISVGTransform) Putref_matrix(v *webmshtml.ISVGMatrix) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_matrix(v)))
+func (self ISVGTransform) Putref_matrix(v ISVGMatrix) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_matrix(v.Raw)))
 }
 
 // Get_matrix wraps the raw Get_matrix call.
-func (self ISVGTransform) Get_matrix() (*webmshtml.ISVGMatrix, error) {
+func (self ISVGTransform) Get_matrix() (ISVGMatrix, error) {
 	var _p *webmshtml.ISVGMatrix
 	_hr := self.Raw.Get_matrix(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGMatrix(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_angle wraps the raw Get_angle call.
@@ -40648,8 +40648,8 @@ func (self ISVGTransform) Get_angle() (float32, error) {
 }
 
 // SetMatrix wraps the raw SetMatrix call.
-func (self ISVGTransform) SetMatrix(matrix *webmshtml.ISVGMatrix) error {
-	return win32.HRESULTError(int32(self.Raw.SetMatrix(matrix)))
+func (self ISVGTransform) SetMatrix(matrix ISVGMatrix) error {
+	return win32.HRESULTError(int32(self.Raw.SetMatrix(matrix.Raw)))
 }
 
 // ISVGTransformList is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGTransformList with error-returning methods.
@@ -40681,59 +40681,59 @@ func (self ISVGTransformList) Clear() error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ISVGTransformList) Initialize(newItem *webmshtml.ISVGTransform) (*webmshtml.ISVGTransform, error) {
+func (self ISVGTransformList) Initialize(newItem ISVGTransform) (ISVGTransform, error) {
 	var _ppResult *webmshtml.ISVGTransform
-	_hr := self.Raw.Initialize(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Initialize(newItem.Raw, &_ppResult)
+	return WrapISVGTransform(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // GetItem wraps the raw GetItem call.
-func (self ISVGTransformList) GetItem(index int32) (*webmshtml.ISVGTransform, error) {
+func (self ISVGTransformList) GetItem(index int32) (ISVGTransform, error) {
 	var _ppResult *webmshtml.ISVGTransform
 	_hr := self.Raw.GetItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGTransform(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // InsertItemBefore wraps the raw InsertItemBefore call.
-func (self ISVGTransformList) InsertItemBefore(newItem *webmshtml.ISVGTransform, index int32) (*webmshtml.ISVGTransform, error) {
+func (self ISVGTransformList) InsertItemBefore(newItem ISVGTransform, index int32) (ISVGTransform, error) {
 	var _ppResult *webmshtml.ISVGTransform
-	_hr := self.Raw.InsertItemBefore(newItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.InsertItemBefore(newItem.Raw, index, &_ppResult)
+	return WrapISVGTransform(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceItem wraps the raw ReplaceItem call.
-func (self ISVGTransformList) ReplaceItem(newItem *webmshtml.ISVGTransform, index int32) (*webmshtml.ISVGTransform, error) {
+func (self ISVGTransformList) ReplaceItem(newItem ISVGTransform, index int32) (ISVGTransform, error) {
 	var _ppResult *webmshtml.ISVGTransform
-	_hr := self.Raw.ReplaceItem(newItem, index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.ReplaceItem(newItem.Raw, index, &_ppResult)
+	return WrapISVGTransform(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveItem wraps the raw RemoveItem call.
-func (self ISVGTransformList) RemoveItem(index int32) (*webmshtml.ISVGTransform, error) {
+func (self ISVGTransformList) RemoveItem(index int32) (ISVGTransform, error) {
 	var _ppResult *webmshtml.ISVGTransform
 	_hr := self.Raw.RemoveItem(index, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGTransform(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // AppendItem wraps the raw AppendItem call.
-func (self ISVGTransformList) AppendItem(newItem *webmshtml.ISVGTransform) (*webmshtml.ISVGTransform, error) {
+func (self ISVGTransformList) AppendItem(newItem ISVGTransform) (ISVGTransform, error) {
 	var _ppResult *webmshtml.ISVGTransform
-	_hr := self.Raw.AppendItem(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AppendItem(newItem.Raw, &_ppResult)
+	return WrapISVGTransform(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSVGTransformFromMatrix wraps the raw CreateSVGTransformFromMatrix call.
-func (self ISVGTransformList) CreateSVGTransformFromMatrix(newItem *webmshtml.ISVGMatrix) (*webmshtml.ISVGTransform, error) {
+func (self ISVGTransformList) CreateSVGTransformFromMatrix(newItem ISVGMatrix) (ISVGTransform, error) {
 	var _ppResult *webmshtml.ISVGTransform
-	_hr := self.Raw.CreateSVGTransformFromMatrix(newItem, &_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateSVGTransformFromMatrix(newItem.Raw, &_ppResult)
+	return WrapISVGTransform(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // Consolidate wraps the raw Consolidate call.
-func (self ISVGTransformList) Consolidate() (*webmshtml.ISVGTransform, error) {
+func (self ISVGTransformList) Consolidate() (ISVGTransform, error) {
 	var _ppResult *webmshtml.ISVGTransform
 	_hr := self.Raw.Consolidate(&_ppResult)
-	return _ppResult, win32.HRESULTError(int32(_hr))
+	return WrapISVGTransform(_ppResult), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGTransformable is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGTransformable with error-returning methods.
@@ -40748,10 +40748,10 @@ func WrapISVGTransformable(raw *webmshtml.ISVGTransformable) ISVGTransformable {
 }
 
 // Get_transform wraps the raw Get_transform call.
-func (self ISVGTransformable) Get_transform() (*webmshtml.ISVGAnimatedTransformList, error) {
+func (self ISVGTransformable) Get_transform() (ISVGAnimatedTransformList, error) {
 	var _p *webmshtml.ISVGAnimatedTransformList
 	_hr := self.Raw.Get_transform(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedTransformList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGURIReference is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGURIReference with error-returning methods.
@@ -40766,10 +40766,10 @@ func WrapISVGURIReference(raw *webmshtml.ISVGURIReference) ISVGURIReference {
 }
 
 // Get_href wraps the raw Get_href call.
-func (self ISVGURIReference) Get_href() (*webmshtml.ISVGAnimatedString, error) {
+func (self ISVGURIReference) Get_href() (ISVGAnimatedString, error) {
 	var _p *webmshtml.ISVGAnimatedString
 	_hr := self.Raw.Get_href(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedString(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGUseElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGUseElement with error-returning methods.
@@ -40784,75 +40784,75 @@ func WrapISVGUseElement(raw *webmshtml.ISVGUseElement) ISVGUseElement {
 }
 
 // Putref_x wraps the raw Putref_x call.
-func (self ISVGUseElement) Putref_x(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_x(v)))
+func (self ISVGUseElement) Putref_x(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_x(v.Raw)))
 }
 
 // Get_x wraps the raw Get_x call.
-func (self ISVGUseElement) Get_x() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGUseElement) Get_x() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_x(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_y wraps the raw Putref_y call.
-func (self ISVGUseElement) Putref_y(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_y(v)))
+func (self ISVGUseElement) Putref_y(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_y(v.Raw)))
 }
 
 // Get_y wraps the raw Get_y call.
-func (self ISVGUseElement) Get_y() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGUseElement) Get_y() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_y(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_width wraps the raw Putref_width call.
-func (self ISVGUseElement) Putref_width(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_width(v)))
+func (self ISVGUseElement) Putref_width(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_width(v.Raw)))
 }
 
 // Get_width wraps the raw Get_width call.
-func (self ISVGUseElement) Get_width() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGUseElement) Get_width() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_width(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_height wraps the raw Putref_height call.
-func (self ISVGUseElement) Putref_height(v *webmshtml.ISVGAnimatedLength) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_height(v)))
+func (self ISVGUseElement) Putref_height(v ISVGAnimatedLength) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_height(v.Raw)))
 }
 
 // Get_height wraps the raw Get_height call.
-func (self ISVGUseElement) Get_height() (*webmshtml.ISVGAnimatedLength, error) {
+func (self ISVGUseElement) Get_height() (ISVGAnimatedLength, error) {
 	var _p *webmshtml.ISVGAnimatedLength
 	_hr := self.Raw.Get_height(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGAnimatedLength(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_instanceRoot wraps the raw Putref_instanceRoot call.
-func (self ISVGUseElement) Putref_instanceRoot(v *webmshtml.ISVGElementInstance) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_instanceRoot(v)))
+func (self ISVGUseElement) Putref_instanceRoot(v ISVGElementInstance) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_instanceRoot(v.Raw)))
 }
 
 // Get_instanceRoot wraps the raw Get_instanceRoot call.
-func (self ISVGUseElement) Get_instanceRoot() (*webmshtml.ISVGElementInstance, error) {
+func (self ISVGUseElement) Get_instanceRoot() (ISVGElementInstance, error) {
 	var _p *webmshtml.ISVGElementInstance
 	_hr := self.Raw.Get_instanceRoot(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstance(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Putref_animatedInstanceRoot wraps the raw Putref_animatedInstanceRoot call.
-func (self ISVGUseElement) Putref_animatedInstanceRoot(v *webmshtml.ISVGElementInstance) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_animatedInstanceRoot(v)))
+func (self ISVGUseElement) Putref_animatedInstanceRoot(v ISVGElementInstance) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_animatedInstanceRoot(v.Raw)))
 }
 
 // Get_animatedInstanceRoot wraps the raw Get_animatedInstanceRoot call.
-func (self ISVGUseElement) Get_animatedInstanceRoot() (*webmshtml.ISVGElementInstance, error) {
+func (self ISVGUseElement) Get_animatedInstanceRoot() (ISVGElementInstance, error) {
 	var _p *webmshtml.ISVGElementInstance
 	_hr := self.Raw.Get_animatedInstanceRoot(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGElementInstance(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGViewElement is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGViewElement with error-returning methods.
@@ -40867,15 +40867,15 @@ func WrapISVGViewElement(raw *webmshtml.ISVGViewElement) ISVGViewElement {
 }
 
 // Putref_viewTarget wraps the raw Putref_viewTarget call.
-func (self ISVGViewElement) Putref_viewTarget(v *webmshtml.ISVGStringList) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_viewTarget(v)))
+func (self ISVGViewElement) Putref_viewTarget(v ISVGStringList) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_viewTarget(v.Raw)))
 }
 
 // Get_viewTarget wraps the raw Get_viewTarget call.
-func (self ISVGViewElement) Get_viewTarget() (*webmshtml.ISVGStringList, error) {
+func (self ISVGViewElement) Get_viewTarget() (ISVGStringList, error) {
 	var _p *webmshtml.ISVGStringList
 	_hr := self.Raw.Get_viewTarget(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGStringList(_p), win32.HRESULTError(int32(_hr))
 }
 
 // ISVGViewSpec is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISVGViewSpec with error-returning methods.
@@ -40919,10 +40919,10 @@ func WrapISVGZoomEvent(raw *webmshtml.ISVGZoomEvent) ISVGZoomEvent {
 }
 
 // Get_zoomRectScreen wraps the raw Get_zoomRectScreen call.
-func (self ISVGZoomEvent) Get_zoomRectScreen() (*webmshtml.ISVGRect, error) {
+func (self ISVGZoomEvent) Get_zoomRectScreen() (ISVGRect, error) {
 	var _p *webmshtml.ISVGRect
 	_hr := self.Raw.Get_zoomRectScreen(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGRect(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_previousScale wraps the raw Get_previousScale call.
@@ -40933,10 +40933,10 @@ func (self ISVGZoomEvent) Get_previousScale() (float32, error) {
 }
 
 // Get_previousTranslate wraps the raw Get_previousTranslate call.
-func (self ISVGZoomEvent) Get_previousTranslate() (*webmshtml.ISVGPoint, error) {
+func (self ISVGZoomEvent) Get_previousTranslate() (ISVGPoint, error) {
 	var _p *webmshtml.ISVGPoint
 	_hr := self.Raw.Get_previousTranslate(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPoint(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_newScale wraps the raw Get_newScale call.
@@ -40947,10 +40947,10 @@ func (self ISVGZoomEvent) Get_newScale() (float32, error) {
 }
 
 // Get_newTranslate wraps the raw Get_newTranslate call.
-func (self ISVGZoomEvent) Get_newTranslate() (*webmshtml.ISVGPoint, error) {
+func (self ISVGZoomEvent) Get_newTranslate() (ISVGPoint, error) {
 	var _p *webmshtml.ISVGPoint
 	_hr := self.Raw.Get_newTranslate(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapISVGPoint(_p), win32.HRESULTError(int32(_hr))
 }
 
 // IScriptEventHandler is an idiomatic wrapper over the raw COM interface Web.MsHtml.IScriptEventHandler with error-returning methods.
@@ -40972,17 +40972,17 @@ func (self IScriptEventHandler) FunctionName() (foundation.BSTR, error) {
 }
 
 // DebugDocumentContext wraps the raw DebugDocumentContext call.
-func (self IScriptEventHandler) DebugDocumentContext() (*systemcom.IUnknown, error) {
+func (self IScriptEventHandler) DebugDocumentContext() (systemcomidiom.IUnknown, error) {
 	var _ppDebugDocumentContext *systemcom.IUnknown
 	_hr := self.Raw.DebugDocumentContext(&_ppDebugDocumentContext)
-	return _ppDebugDocumentContext, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppDebugDocumentContext), win32.HRESULTError(int32(_hr))
 }
 
 // EventHandlerDispatch wraps the raw EventHandlerDispatch call.
-func (self IScriptEventHandler) EventHandlerDispatch() (*systemcom.IDispatch, error) {
+func (self IScriptEventHandler) EventHandlerDispatch() (systemcomidiom.IDispatch, error) {
 	var _ppDispHandler *systemcom.IDispatch
 	_hr := self.Raw.EventHandlerDispatch(&_ppDispHandler)
-	return _ppDispHandler, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppDispHandler), win32.HRESULTError(int32(_hr))
 }
 
 // UsesCapture wraps the raw UsesCapture call.
@@ -41044,8 +41044,8 @@ func WrapISegment(raw *webmshtml.ISegment) ISegment {
 }
 
 // GetPointers wraps the raw GetPointers call.
-func (self ISegment) GetPointers(pIStart *webmshtml.IMarkupPointer, pIEnd *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.GetPointers(pIStart, pIEnd)))
+func (self ISegment) GetPointers(pIStart IMarkupPointer, pIEnd IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.GetPointers(pIStart.Raw, pIEnd.Raw)))
 }
 
 // ISegmentList is an idiomatic wrapper over the raw COM interface Web.MsHtml.ISegmentList with error-returning methods.
@@ -41117,8 +41117,8 @@ func WrapISelectionServices(raw *webmshtml.ISelectionServices) ISelectionService
 }
 
 // SetSelectionType wraps the raw SetSelectionType call.
-func (self ISelectionServices) SetSelectionType(eType webmshtml.SELECTION_TYPE, pIListener *webmshtml.ISelectionServicesListener) error {
-	return win32.HRESULTError(int32(self.Raw.SetSelectionType(eType, pIListener)))
+func (self ISelectionServices) SetSelectionType(eType webmshtml.SELECTION_TYPE, pIListener ISelectionServicesListener) error {
+	return win32.HRESULTError(int32(self.Raw.SetSelectionType(eType, pIListener.Raw)))
 }
 
 // GetMarkupContainer wraps the raw GetMarkupContainer call.
@@ -41127,18 +41127,18 @@ func (self ISelectionServices) GetMarkupContainer(ppIContainer **webmshtml.IMark
 }
 
 // AddSegment wraps the raw AddSegment call.
-func (self ISelectionServices) AddSegment(pIStart *webmshtml.IMarkupPointer, pIEnd *webmshtml.IMarkupPointer, ppISegmentAdded **webmshtml.ISegment) error {
-	return win32.HRESULTError(int32(self.Raw.AddSegment(pIStart, pIEnd, ppISegmentAdded)))
+func (self ISelectionServices) AddSegment(pIStart IMarkupPointer, pIEnd IMarkupPointer, ppISegmentAdded **webmshtml.ISegment) error {
+	return win32.HRESULTError(int32(self.Raw.AddSegment(pIStart.Raw, pIEnd.Raw, ppISegmentAdded)))
 }
 
 // AddElementSegment wraps the raw AddElementSegment call.
-func (self ISelectionServices) AddElementSegment(pIElement *webmshtml.IHTMLElement, ppISegmentAdded **webmshtml.IElementSegment) error {
-	return win32.HRESULTError(int32(self.Raw.AddElementSegment(pIElement, ppISegmentAdded)))
+func (self ISelectionServices) AddElementSegment(pIElement IHTMLElement, ppISegmentAdded **webmshtml.IElementSegment) error {
+	return win32.HRESULTError(int32(self.Raw.AddElementSegment(pIElement.Raw, ppISegmentAdded)))
 }
 
 // RemoveSegment wraps the raw RemoveSegment call.
-func (self ISelectionServices) RemoveSegment(pISegment *webmshtml.ISegment) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveSegment(pISegment)))
+func (self ISelectionServices) RemoveSegment(pISegment ISegment) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveSegment(pISegment.Raw)))
 }
 
 // GetSelectionServicesListener wraps the raw GetSelectionServicesListener call.
@@ -41168,13 +41168,13 @@ func (self ISelectionServicesListener) EndSelectionUndo() error {
 }
 
 // OnSelectedElementExit wraps the raw OnSelectedElementExit call.
-func (self ISelectionServicesListener) OnSelectedElementExit(pIElementStart *webmshtml.IMarkupPointer, pIElementEnd *webmshtml.IMarkupPointer, pIElementContentStart *webmshtml.IMarkupPointer, pIElementContentEnd *webmshtml.IMarkupPointer) error {
-	return win32.HRESULTError(int32(self.Raw.OnSelectedElementExit(pIElementStart, pIElementEnd, pIElementContentStart, pIElementContentEnd)))
+func (self ISelectionServicesListener) OnSelectedElementExit(pIElementStart IMarkupPointer, pIElementEnd IMarkupPointer, pIElementContentStart IMarkupPointer, pIElementContentEnd IMarkupPointer) error {
+	return win32.HRESULTError(int32(self.Raw.OnSelectedElementExit(pIElementStart.Raw, pIElementEnd.Raw, pIElementContentStart.Raw, pIElementContentEnd.Raw)))
 }
 
 // OnChangeType wraps the raw OnChangeType call.
-func (self ISelectionServicesListener) OnChangeType(eType webmshtml.SELECTION_TYPE, pIListener *webmshtml.ISelectionServicesListener) error {
-	return win32.HRESULTError(int32(self.Raw.OnChangeType(eType, pIListener)))
+func (self ISelectionServicesListener) OnChangeType(eType webmshtml.SELECTION_TYPE, pIListener ISelectionServicesListener) error {
+	return win32.HRESULTError(int32(self.Raw.OnChangeType(eType, pIListener.Raw)))
 }
 
 // GetTypeDetail wraps the raw GetTypeDetail call.
@@ -41255,8 +41255,8 @@ func (self ITemplatePrinter) PrintBlankPage() error {
 }
 
 // PrintPage wraps the raw PrintPage call.
-func (self ITemplatePrinter) PrintPage(pElemDisp *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.PrintPage(pElemDisp)))
+func (self ITemplatePrinter) PrintPage(pElemDisp systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.PrintPage(pElemDisp.Raw)))
 }
 
 // EnsurePrintDialogDefaults wraps the raw EnsurePrintDialogDefaults call.
@@ -41281,15 +41281,15 @@ func (self ITemplatePrinter) ShowPageSetupDialog() (foundation.VARIANT_BOOL, err
 }
 
 // PrintNonNative wraps the raw PrintNonNative call.
-func (self ITemplatePrinter) PrintNonNative(pMarkup *systemcom.IUnknown) (foundation.VARIANT_BOOL, error) {
+func (self ITemplatePrinter) PrintNonNative(pMarkup systemcomidiom.IUnknown) (foundation.VARIANT_BOOL, error) {
 	var _p foundation.VARIANT_BOOL
-	_hr := self.Raw.PrintNonNative(pMarkup, &_p)
+	_hr := self.Raw.PrintNonNative(pMarkup.Raw, &_p)
 	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // PrintNonNativeFrames wraps the raw PrintNonNativeFrames call.
-func (self ITemplatePrinter) PrintNonNativeFrames(pMarkup *systemcom.IUnknown, fActiveFrame foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.PrintNonNativeFrames(pMarkup, fActiveFrame)))
+func (self ITemplatePrinter) PrintNonNativeFrames(pMarkup systemcomidiom.IUnknown, fActiveFrame foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.PrintNonNativeFrames(pMarkup.Raw, fActiveFrame)))
 }
 
 // Put_framesetDocument wraps the raw Put_framesetDocument call.
@@ -41664,58 +41664,58 @@ func (self ITemplatePrinter3) Get_headerFooterFont() (foundation.BSTR, error) {
 }
 
 // GetPageMarginTop wraps the raw GetPageMarginTop call.
-func (self ITemplatePrinter3) GetPageMarginTop(pageRule *systemcom.IDispatch, pageWidth int32, pageHeight int32) (systemvariant.VARIANT, error) {
+func (self ITemplatePrinter3) GetPageMarginTop(pageRule systemcomidiom.IDispatch, pageWidth int32, pageHeight int32) (systemvariant.VARIANT, error) {
 	var _pMargin systemvariant.VARIANT
-	_hr := self.Raw.GetPageMarginTop(pageRule, pageWidth, pageHeight, &_pMargin)
+	_hr := self.Raw.GetPageMarginTop(pageRule.Raw, pageWidth, pageHeight, &_pMargin)
 	return _pMargin, win32.HRESULTError(int32(_hr))
 }
 
 // GetPageMarginRight wraps the raw GetPageMarginRight call.
-func (self ITemplatePrinter3) GetPageMarginRight(pageRule *systemcom.IDispatch, pageWidth int32, pageHeight int32) (systemvariant.VARIANT, error) {
+func (self ITemplatePrinter3) GetPageMarginRight(pageRule systemcomidiom.IDispatch, pageWidth int32, pageHeight int32) (systemvariant.VARIANT, error) {
 	var _pMargin systemvariant.VARIANT
-	_hr := self.Raw.GetPageMarginRight(pageRule, pageWidth, pageHeight, &_pMargin)
+	_hr := self.Raw.GetPageMarginRight(pageRule.Raw, pageWidth, pageHeight, &_pMargin)
 	return _pMargin, win32.HRESULTError(int32(_hr))
 }
 
 // GetPageMarginBottom wraps the raw GetPageMarginBottom call.
-func (self ITemplatePrinter3) GetPageMarginBottom(pageRule *systemcom.IDispatch, pageWidth int32, pageHeight int32) (systemvariant.VARIANT, error) {
+func (self ITemplatePrinter3) GetPageMarginBottom(pageRule systemcomidiom.IDispatch, pageWidth int32, pageHeight int32) (systemvariant.VARIANT, error) {
 	var _pMargin systemvariant.VARIANT
-	_hr := self.Raw.GetPageMarginBottom(pageRule, pageWidth, pageHeight, &_pMargin)
+	_hr := self.Raw.GetPageMarginBottom(pageRule.Raw, pageWidth, pageHeight, &_pMargin)
 	return _pMargin, win32.HRESULTError(int32(_hr))
 }
 
 // GetPageMarginLeft wraps the raw GetPageMarginLeft call.
-func (self ITemplatePrinter3) GetPageMarginLeft(pageRule *systemcom.IDispatch, pageWidth int32, pageHeight int32) (systemvariant.VARIANT, error) {
+func (self ITemplatePrinter3) GetPageMarginLeft(pageRule systemcomidiom.IDispatch, pageWidth int32, pageHeight int32) (systemvariant.VARIANT, error) {
 	var _pMargin systemvariant.VARIANT
-	_hr := self.Raw.GetPageMarginLeft(pageRule, pageWidth, pageHeight, &_pMargin)
+	_hr := self.Raw.GetPageMarginLeft(pageRule.Raw, pageWidth, pageHeight, &_pMargin)
 	return _pMargin, win32.HRESULTError(int32(_hr))
 }
 
 // GetPageMarginTopImportant wraps the raw GetPageMarginTopImportant call.
-func (self ITemplatePrinter3) GetPageMarginTopImportant(pageRule *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+func (self ITemplatePrinter3) GetPageMarginTopImportant(pageRule systemcomidiom.IDispatch) (foundation.VARIANT_BOOL, error) {
 	var _pbImportant foundation.VARIANT_BOOL
-	_hr := self.Raw.GetPageMarginTopImportant(pageRule, &_pbImportant)
+	_hr := self.Raw.GetPageMarginTopImportant(pageRule.Raw, &_pbImportant)
 	return _pbImportant, win32.HRESULTError(int32(_hr))
 }
 
 // GetPageMarginRightImportant wraps the raw GetPageMarginRightImportant call.
-func (self ITemplatePrinter3) GetPageMarginRightImportant(pageRule *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+func (self ITemplatePrinter3) GetPageMarginRightImportant(pageRule systemcomidiom.IDispatch) (foundation.VARIANT_BOOL, error) {
 	var _pbImportant foundation.VARIANT_BOOL
-	_hr := self.Raw.GetPageMarginRightImportant(pageRule, &_pbImportant)
+	_hr := self.Raw.GetPageMarginRightImportant(pageRule.Raw, &_pbImportant)
 	return _pbImportant, win32.HRESULTError(int32(_hr))
 }
 
 // GetPageMarginBottomImportant wraps the raw GetPageMarginBottomImportant call.
-func (self ITemplatePrinter3) GetPageMarginBottomImportant(pageRule *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+func (self ITemplatePrinter3) GetPageMarginBottomImportant(pageRule systemcomidiom.IDispatch) (foundation.VARIANT_BOOL, error) {
 	var _pbImportant foundation.VARIANT_BOOL
-	_hr := self.Raw.GetPageMarginBottomImportant(pageRule, &_pbImportant)
+	_hr := self.Raw.GetPageMarginBottomImportant(pageRule.Raw, &_pbImportant)
 	return _pbImportant, win32.HRESULTError(int32(_hr))
 }
 
 // GetPageMarginLeftImportant wraps the raw GetPageMarginLeftImportant call.
-func (self ITemplatePrinter3) GetPageMarginLeftImportant(pageRule *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+func (self ITemplatePrinter3) GetPageMarginLeftImportant(pageRule systemcomidiom.IDispatch) (foundation.VARIANT_BOOL, error) {
 	var _pbImportant foundation.VARIANT_BOOL
-	_hr := self.Raw.GetPageMarginLeftImportant(pageRule, &_pbImportant)
+	_hr := self.Raw.GetPageMarginLeftImportant(pageRule.Raw, &_pbImportant)
 	return _pbImportant, win32.HRESULTError(int32(_hr))
 }
 
@@ -41784,10 +41784,10 @@ func WrapIViewObjectPresentSite(raw *webmshtml.IViewObjectPresentSite) IViewObje
 }
 
 // CreateSurfacePresenter wraps the raw CreateSurfacePresenter call.
-func (self IViewObjectPresentSite) CreateSurfacePresenter(pDevice *systemcom.IUnknown, width uint32, height uint32, backBufferCount uint32, format graphicsdxgicommon.DXGI_FORMAT, mode webmshtml.VIEW_OBJECT_ALPHA_MODE) (*webmshtml.ISurfacePresenter, error) {
+func (self IViewObjectPresentSite) CreateSurfacePresenter(pDevice systemcomidiom.IUnknown, width uint32, height uint32, backBufferCount uint32, format graphicsdxgicommon.DXGI_FORMAT, mode webmshtml.VIEW_OBJECT_ALPHA_MODE) (ISurfacePresenter, error) {
 	var _ppQueue *webmshtml.ISurfacePresenter
-	_hr := self.Raw.CreateSurfacePresenter(pDevice, width, height, backBufferCount, format, mode, &_ppQueue)
-	return _ppQueue, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateSurfacePresenter(pDevice.Raw, width, height, backBufferCount, format, mode, &_ppQueue)
+	return WrapISurfacePresenter(_ppQueue), win32.HRESULTError(int32(_hr))
 }
 
 // IsHardwareComposition wraps the raw IsHardwareComposition call.
@@ -41814,10 +41814,10 @@ func WrapIViewObjectPrint(raw *webmshtml.IViewObjectPrint) IViewObjectPrint {
 }
 
 // GetPrintBitmap wraps the raw GetPrintBitmap call.
-func (self IViewObjectPrint) GetPrintBitmap() (*systemcom.IUnknown, error) {
+func (self IViewObjectPrint) GetPrintBitmap() (systemcomidiom.IUnknown, error) {
 	var _ppPrintBitmap *systemcom.IUnknown
 	_hr := self.Raw.GetPrintBitmap(&_ppPrintBitmap)
-	return _ppPrintBitmap, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppPrintBitmap), win32.HRESULTError(int32(_hr))
 }
 
 // IWBScriptControl is an idiomatic wrapper over the raw COM interface Web.MsHtml.IWBScriptControl with error-returning methods.
@@ -41957,10 +41957,10 @@ func (self IWebBridge) Get_embed() (foundation.VARIANT_BOOL, error) {
 }
 
 // Get_event wraps the raw Get_event call.
-func (self IWebBridge) Get_event() (*systemcom.IDispatch, error) {
+func (self IWebBridge) Get_event() (systemcomidiom.IDispatch, error) {
 	var _p *systemcom.IDispatch
 	_hr := self.Raw.Get_event(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_readyState wraps the raw Get_readyState call.
@@ -42047,14 +42047,14 @@ func WrapIWebGeolocation(raw *webmshtml.IWebGeolocation) IWebGeolocation {
 }
 
 // GetCurrentPosition wraps the raw GetCurrentPosition call.
-func (self IWebGeolocation) GetCurrentPosition(successCallback *systemcom.IDispatch, errorCallback *systemcom.IDispatch, options *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentPosition(successCallback, errorCallback, options)))
+func (self IWebGeolocation) GetCurrentPosition(successCallback systemcomidiom.IDispatch, errorCallback systemcomidiom.IDispatch, options systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.GetCurrentPosition(successCallback.Raw, errorCallback.Raw, options.Raw)))
 }
 
 // WatchPosition wraps the raw WatchPosition call.
-func (self IWebGeolocation) WatchPosition(successCallback *systemcom.IDispatch, errorCallback *systemcom.IDispatch, options *systemcom.IDispatch) (int32, error) {
+func (self IWebGeolocation) WatchPosition(successCallback systemcomidiom.IDispatch, errorCallback systemcomidiom.IDispatch, options systemcomidiom.IDispatch) (int32, error) {
 	var _watchId int32
-	_hr := self.Raw.WatchPosition(successCallback, errorCallback, options, &_watchId)
+	_hr := self.Raw.WatchPosition(successCallback.Raw, errorCallback.Raw, options.Raw, &_watchId)
 	return _watchId, win32.HRESULTError(int32(_hr))
 }
 
@@ -42075,10 +42075,10 @@ func WrapIWebGeoposition(raw *webmshtml.IWebGeoposition) IWebGeoposition {
 }
 
 // Get_coords wraps the raw Get_coords call.
-func (self IWebGeoposition) Get_coords() (*webmshtml.IWebGeocoordinates, error) {
+func (self IWebGeoposition) Get_coords() (IWebGeocoordinates, error) {
 	var _p *webmshtml.IWebGeocoordinates
 	_hr := self.Raw.Get_coords(&_p)
-	return _p, win32.HRESULTError(int32(_hr))
+	return WrapIWebGeocoordinates(_p), win32.HRESULTError(int32(_hr))
 }
 
 // Get_timestamp wraps the raw Get_timestamp call.

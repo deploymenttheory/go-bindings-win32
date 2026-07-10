@@ -11,10 +11,10 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsprinting "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/printing"
 	storagexps "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/xps"
-	storagexpsprinting "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/xps/printing"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
-	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 	systemwinrtprinting "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/printing"
+	graphicsprintingidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/printing"
+	storagexpsidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/storage/xps"
+	storagexpsprintingidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/storage/xps/printing"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
 )
@@ -31,13 +31,13 @@ func WrapIPrintDocumentPageSource(raw *systemwinrtprinting.IPrintDocumentPageSou
 }
 
 // GetPreviewPageCollection wraps the raw GetPreviewPageCollection call.
-func (self IPrintDocumentPageSource) GetPreviewPageCollection(docPackageTarget *storagexpsprinting.IPrintDocumentPackageTarget, docPageCollection **systemwinrtprinting.IPrintPreviewPageCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreviewPageCollection(docPackageTarget, docPageCollection)))
+func (self IPrintDocumentPageSource) GetPreviewPageCollection(docPackageTarget storagexpsprintingidiom.IPrintDocumentPackageTarget, docPageCollection **systemwinrtprinting.IPrintPreviewPageCollection) error {
+	return win32.HRESULTError(int32(self.Raw.GetPreviewPageCollection(docPackageTarget.Raw, docPageCollection)))
 }
 
 // MakeDocument wraps the raw MakeDocument call.
-func (self IPrintDocumentPageSource) MakeDocument(printTaskOptions *systemwinrt.IInspectable, docPackageTarget *storagexpsprinting.IPrintDocumentPackageTarget) error {
-	return win32.HRESULTError(int32(self.Raw.MakeDocument(printTaskOptions, docPackageTarget)))
+func (self IPrintDocumentPageSource) MakeDocument(printTaskOptions systemwinrtidiom.IInspectable, docPackageTarget storagexpsprintingidiom.IPrintDocumentPackageTarget) error {
+	return win32.HRESULTError(int32(self.Raw.MakeDocument(printTaskOptions.Raw, docPackageTarget.Raw)))
 }
 
 // IPrintManagerInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Printing.IPrintManagerInterop with error-returning methods.
@@ -73,8 +73,8 @@ func WrapIPrintPreviewPageCollection(raw *systemwinrtprinting.IPrintPreviewPageC
 }
 
 // Paginate wraps the raw Paginate call.
-func (self IPrintPreviewPageCollection) Paginate(currentJobPage uint32, printTaskOptions *systemwinrt.IInspectable) error {
-	return win32.HRESULTError(int32(self.Raw.Paginate(currentJobPage, printTaskOptions)))
+func (self IPrintPreviewPageCollection) Paginate(currentJobPage uint32, printTaskOptions systemwinrtidiom.IInspectable) error {
+	return win32.HRESULTError(int32(self.Raw.Paginate(currentJobPage, printTaskOptions.Raw)))
 }
 
 // IPrintWorkflowConfigurationNative is an idiomatic wrapper over the raw COM interface System.WinRT.Printing.IPrintWorkflowConfigurationNative with error-returning methods.
@@ -89,24 +89,24 @@ func WrapIPrintWorkflowConfigurationNative(raw *systemwinrtprinting.IPrintWorkfl
 }
 
 // Get_PrinterQueue wraps the raw Get_PrinterQueue call.
-func (self IPrintWorkflowConfigurationNative) Get_PrinterQueue() (*graphicsprinting.IPrinterQueue, error) {
+func (self IPrintWorkflowConfigurationNative) Get_PrinterQueue() (graphicsprintingidiom.IPrinterQueue, error) {
 	var _value *graphicsprinting.IPrinterQueue
 	_hr := self.Raw.Get_PrinterQueue(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return graphicsprintingidiom.WrapIPrinterQueue(_value), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverProperties wraps the raw Get_DriverProperties call.
-func (self IPrintWorkflowConfigurationNative) Get_DriverProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+func (self IPrintWorkflowConfigurationNative) Get_DriverProperties() (graphicsprintingidiom.IPrinterPropertyBag, error) {
 	var _value *graphicsprinting.IPrinterPropertyBag
 	_hr := self.Raw.Get_DriverProperties(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return graphicsprintingidiom.WrapIPrinterPropertyBag(_value), win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserProperties wraps the raw Get_UserProperties call.
-func (self IPrintWorkflowConfigurationNative) Get_UserProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+func (self IPrintWorkflowConfigurationNative) Get_UserProperties() (graphicsprintingidiom.IPrinterPropertyBag, error) {
 	var _value *graphicsprinting.IPrinterPropertyBag
 	_hr := self.Raw.Get_UserProperties(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return graphicsprintingidiom.WrapIPrinterPropertyBag(_value), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintWorkflowObjectModelSourceFileContentNative is an idiomatic wrapper over the raw COM interface System.WinRT.Printing.IPrintWorkflowObjectModelSourceFileContentNative with error-returning methods.
@@ -121,15 +121,15 @@ func WrapIPrintWorkflowObjectModelSourceFileContentNative(raw *systemwinrtprinti
 }
 
 // StartXpsOMGeneration wraps the raw StartXpsOMGeneration call.
-func (self IPrintWorkflowObjectModelSourceFileContentNative) StartXpsOMGeneration(receiver *systemwinrtprinting.IPrintWorkflowXpsReceiver) error {
-	return win32.HRESULTError(int32(self.Raw.StartXpsOMGeneration(receiver)))
+func (self IPrintWorkflowObjectModelSourceFileContentNative) StartXpsOMGeneration(receiver IPrintWorkflowXpsReceiver) error {
+	return win32.HRESULTError(int32(self.Raw.StartXpsOMGeneration(receiver.Raw)))
 }
 
 // Get_ObjectFactory wraps the raw Get_ObjectFactory call.
-func (self IPrintWorkflowObjectModelSourceFileContentNative) Get_ObjectFactory() (*storagexps.IXpsOMObjectFactory1, error) {
+func (self IPrintWorkflowObjectModelSourceFileContentNative) Get_ObjectFactory() (storagexpsidiom.IXpsOMObjectFactory1, error) {
 	var _value *storagexps.IXpsOMObjectFactory1
 	_hr := self.Raw.Get_ObjectFactory(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return storagexpsidiom.WrapIXpsOMObjectFactory1(_value), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintWorkflowXpsObjectModelTargetPackageNative is an idiomatic wrapper over the raw COM interface System.WinRT.Printing.IPrintWorkflowXpsObjectModelTargetPackageNative with error-returning methods.
@@ -144,10 +144,10 @@ func WrapIPrintWorkflowXpsObjectModelTargetPackageNative(raw *systemwinrtprintin
 }
 
 // Get_DocumentPackageTarget wraps the raw Get_DocumentPackageTarget call.
-func (self IPrintWorkflowXpsObjectModelTargetPackageNative) Get_DocumentPackageTarget() (*storagexps.IXpsDocumentPackageTarget, error) {
+func (self IPrintWorkflowXpsObjectModelTargetPackageNative) Get_DocumentPackageTarget() (storagexpsidiom.IXpsDocumentPackageTarget, error) {
 	var _value *storagexps.IXpsDocumentPackageTarget
 	_hr := self.Raw.Get_DocumentPackageTarget(&_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return storagexpsidiom.WrapIXpsDocumentPackageTarget(_value), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintWorkflowXpsReceiver is an idiomatic wrapper over the raw COM interface System.WinRT.Printing.IPrintWorkflowXpsReceiver with error-returning methods.
@@ -162,8 +162,8 @@ func WrapIPrintWorkflowXpsReceiver(raw *systemwinrtprinting.IPrintWorkflowXpsRec
 }
 
 // SetDocumentSequencePrintTicket wraps the raw SetDocumentSequencePrintTicket call.
-func (self IPrintWorkflowXpsReceiver) SetDocumentSequencePrintTicket(documentSequencePrintTicket *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SetDocumentSequencePrintTicket(documentSequencePrintTicket)))
+func (self IPrintWorkflowXpsReceiver) SetDocumentSequencePrintTicket(documentSequencePrintTicket systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SetDocumentSequencePrintTicket(documentSequencePrintTicket.Raw)))
 }
 
 // SetDocumentSequenceUri wraps the raw SetDocumentSequenceUri call.
@@ -173,15 +173,15 @@ func (self IPrintWorkflowXpsReceiver) SetDocumentSequenceUri(documentSequenceUri
 }
 
 // AddDocumentData wraps the raw AddDocumentData call.
-func (self IPrintWorkflowXpsReceiver) AddDocumentData(documentId uint32, documentPrintTicket *systemcom.IStream, documentUri string) error {
+func (self IPrintWorkflowXpsReceiver) AddDocumentData(documentId uint32, documentPrintTicket systemcomidiom.IStream, documentUri string) error {
 	_documentUri := win32.UTF16Ptr(documentUri)
-	return win32.HRESULTError(int32(self.Raw.AddDocumentData(documentId, documentPrintTicket, foundation.PWSTR(_documentUri))))
+	return win32.HRESULTError(int32(self.Raw.AddDocumentData(documentId, documentPrintTicket.Raw, foundation.PWSTR(_documentUri))))
 }
 
 // AddPage wraps the raw AddPage call.
-func (self IPrintWorkflowXpsReceiver) AddPage(documentId uint32, pageId uint32, pageReference *storagexps.IXpsOMPageReference, pageUri string) error {
+func (self IPrintWorkflowXpsReceiver) AddPage(documentId uint32, pageId uint32, pageReference storagexpsidiom.IXpsOMPageReference, pageUri string) error {
 	_pageUri := win32.UTF16Ptr(pageUri)
-	return win32.HRESULTError(int32(self.Raw.AddPage(documentId, pageId, pageReference, foundation.PWSTR(_pageUri))))
+	return win32.HRESULTError(int32(self.Raw.AddPage(documentId, pageId, pageReference.Raw, foundation.PWSTR(_pageUri))))
 }
 
 // Close wraps the raw Close call.

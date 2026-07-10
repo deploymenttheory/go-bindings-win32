@@ -142,13 +142,16 @@ func (g *Generator) rawImportPath(namespace string) string {
 }
 
 func (g *Generator) writeFile(dir, fileName, packageName string, imports typemap.ImportSet, body string) error {
+	// Import usage is detected against code only — doc comments mention
+	// qualified type names (e.g. a wrapped interface) without using them.
+	code := stripComments(body)
 	pruned := map[string]string{}
 	for alias, path := range imports {
-		if strings.Contains(body, alias+".") {
+		if referencesAlias(code, alias) {
 			pruned[alias] = path
 		}
 	}
-	if strings.Contains(body, "unsafe.") {
+	if referencesAlias(code, "unsafe") {
 		pruned["unsafe"] = "unsafe"
 	}
 	path := filepath.Join(dir, fileName)

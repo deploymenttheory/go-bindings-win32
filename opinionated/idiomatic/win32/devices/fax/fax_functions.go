@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	devicesfax "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/fax"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CanSendToFaxRecipient wraps the raw CanSendToFaxRecipient call with idiomatic Go types.
@@ -241,6 +241,6 @@ func SendToFaxRecipient(sndMode devicesfax.SendToMode, lpFileName string) uint32
 }
 
 // StiCreateInstanceW wraps the raw StiCreateInstanceW call with idiomatic Go types.
-func StiCreateInstanceW(hinst foundation.HINSTANCE, dwVer uint32, ppSti **devicesfax.IStillImageW, punkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(devicesfax.StiCreateInstanceW(hinst, dwVer, ppSti, punkOuter)))
+func StiCreateInstanceW(hinst foundation.HINSTANCE, dwVer uint32, ppSti **devicesfax.IStillImageW, punkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(devicesfax.StiCreateInstanceW(hinst, dwVer, ppSti, punkOuter.Raw)))
 }

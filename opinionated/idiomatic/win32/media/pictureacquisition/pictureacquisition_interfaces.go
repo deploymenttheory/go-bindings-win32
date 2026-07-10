@@ -13,9 +13,9 @@ import (
 	mediapictureacquisition "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/pictureacquisition"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
-	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	uishellpropertiessystemidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/ui/shell/propertiessystem"
 )
 
 // IPhotoAcquire is an idiomatic wrapper over the raw COM interface Media.PictureAcquisition.IPhotoAcquire with error-returning methods.
@@ -36,10 +36,10 @@ func (self IPhotoAcquire) CreatePhotoSource(pszDevice string, ppPhotoAcquireSour
 }
 
 // Acquire wraps the raw Acquire call.
-func (self IPhotoAcquire) Acquire(pPhotoAcquireSource *mediapictureacquisition.IPhotoAcquireSource, fShowProgress bool, hWndParent foundation.HWND, pszApplicationName string, pPhotoAcquireProgressCB *mediapictureacquisition.IPhotoAcquireProgressCB) error {
+func (self IPhotoAcquire) Acquire(pPhotoAcquireSource IPhotoAcquireSource, fShowProgress bool, hWndParent foundation.HWND, pszApplicationName string, pPhotoAcquireProgressCB IPhotoAcquireProgressCB) error {
 	_fShowProgress := foundation.BOOL(win32.Bool32(fShowProgress))
 	_pszApplicationName := win32.UTF16Ptr(pszApplicationName)
-	return win32.HRESULTError(int32(self.Raw.Acquire(pPhotoAcquireSource, _fShowProgress, hWndParent, foundation.PWSTR(_pszApplicationName), pPhotoAcquireProgressCB)))
+	return win32.HRESULTError(int32(self.Raw.Acquire(pPhotoAcquireSource.Raw, _fShowProgress, hWndParent, foundation.PWSTR(_pszApplicationName), pPhotoAcquireProgressCB.Raw)))
 }
 
 // EnumResults wraps the raw EnumResults call.
@@ -175,14 +175,14 @@ func WrapIPhotoAcquirePlugin(raw *mediapictureacquisition.IPhotoAcquirePlugin) I
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IPhotoAcquirePlugin) Initialize(pPhotoAcquireSource *mediapictureacquisition.IPhotoAcquireSource, pPhotoAcquireProgressCB *mediapictureacquisition.IPhotoAcquireProgressCB) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pPhotoAcquireSource, pPhotoAcquireProgressCB)))
+func (self IPhotoAcquirePlugin) Initialize(pPhotoAcquireSource IPhotoAcquireSource, pPhotoAcquireProgressCB IPhotoAcquireProgressCB) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pPhotoAcquireSource.Raw, pPhotoAcquireProgressCB.Raw)))
 }
 
 // ProcessItem wraps the raw ProcessItem call.
-func (self IPhotoAcquirePlugin) ProcessItem(dwAcquireStage uint32, pPhotoAcquireItem *mediapictureacquisition.IPhotoAcquireItem, pOriginalItemStream *systemcom.IStream, pszFinalFilename string, pPropertyStore *uishellpropertiessystem.IPropertyStore) error {
+func (self IPhotoAcquirePlugin) ProcessItem(dwAcquireStage uint32, pPhotoAcquireItem IPhotoAcquireItem, pOriginalItemStream systemcomidiom.IStream, pszFinalFilename string, pPropertyStore uishellpropertiessystemidiom.IPropertyStore) error {
 	_pszFinalFilename := win32.UTF16Ptr(pszFinalFilename)
-	return win32.HRESULTError(int32(self.Raw.ProcessItem(dwAcquireStage, pPhotoAcquireItem, pOriginalItemStream, foundation.PWSTR(_pszFinalFilename), pPropertyStore)))
+	return win32.HRESULTError(int32(self.Raw.ProcessItem(dwAcquireStage, pPhotoAcquireItem.Raw, pOriginalItemStream.Raw, foundation.PWSTR(_pszFinalFilename), pPropertyStore.Raw)))
 }
 
 // TransferComplete wraps the raw TransferComplete call.
@@ -212,13 +212,13 @@ func (self IPhotoAcquireProgressCB) Cancelled(pfCancelled *foundation.BOOL) erro
 }
 
 // StartEnumeration wraps the raw StartEnumeration call.
-func (self IPhotoAcquireProgressCB) StartEnumeration(pPhotoAcquireSource *mediapictureacquisition.IPhotoAcquireSource) error {
-	return win32.HRESULTError(int32(self.Raw.StartEnumeration(pPhotoAcquireSource)))
+func (self IPhotoAcquireProgressCB) StartEnumeration(pPhotoAcquireSource IPhotoAcquireSource) error {
+	return win32.HRESULTError(int32(self.Raw.StartEnumeration(pPhotoAcquireSource.Raw)))
 }
 
 // FoundItem wraps the raw FoundItem call.
-func (self IPhotoAcquireProgressCB) FoundItem(pPhotoAcquireItem *mediapictureacquisition.IPhotoAcquireItem) error {
-	return win32.HRESULTError(int32(self.Raw.FoundItem(pPhotoAcquireItem)))
+func (self IPhotoAcquireProgressCB) FoundItem(pPhotoAcquireItem IPhotoAcquireItem) error {
+	return win32.HRESULTError(int32(self.Raw.FoundItem(pPhotoAcquireItem.Raw)))
 }
 
 // EndEnumeration wraps the raw EndEnumeration call.
@@ -227,13 +227,13 @@ func (self IPhotoAcquireProgressCB) EndEnumeration(hr foundation.HRESULT) error 
 }
 
 // StartTransfer wraps the raw StartTransfer call.
-func (self IPhotoAcquireProgressCB) StartTransfer(pPhotoAcquireSource *mediapictureacquisition.IPhotoAcquireSource) error {
-	return win32.HRESULTError(int32(self.Raw.StartTransfer(pPhotoAcquireSource)))
+func (self IPhotoAcquireProgressCB) StartTransfer(pPhotoAcquireSource IPhotoAcquireSource) error {
+	return win32.HRESULTError(int32(self.Raw.StartTransfer(pPhotoAcquireSource.Raw)))
 }
 
 // StartItemTransfer wraps the raw StartItemTransfer call.
-func (self IPhotoAcquireProgressCB) StartItemTransfer(nItemIndex uint32, pPhotoAcquireItem *mediapictureacquisition.IPhotoAcquireItem) error {
-	return win32.HRESULTError(int32(self.Raw.StartItemTransfer(nItemIndex, pPhotoAcquireItem)))
+func (self IPhotoAcquireProgressCB) StartItemTransfer(nItemIndex uint32, pPhotoAcquireItem IPhotoAcquireItem) error {
+	return win32.HRESULTError(int32(self.Raw.StartItemTransfer(nItemIndex, pPhotoAcquireItem.Raw)))
 }
 
 // DirectoryCreated wraps the raw DirectoryCreated call.
@@ -249,8 +249,8 @@ func (self IPhotoAcquireProgressCB) UpdateTransferPercent(fOverall bool, nPercen
 }
 
 // EndItemTransfer wraps the raw EndItemTransfer call.
-func (self IPhotoAcquireProgressCB) EndItemTransfer(nItemIndex uint32, pPhotoAcquireItem *mediapictureacquisition.IPhotoAcquireItem, hr foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.EndItemTransfer(nItemIndex, pPhotoAcquireItem, hr)))
+func (self IPhotoAcquireProgressCB) EndItemTransfer(nItemIndex uint32, pPhotoAcquireItem IPhotoAcquireItem, hr foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.EndItemTransfer(nItemIndex, pPhotoAcquireItem.Raw, hr)))
 }
 
 // EndTransfer wraps the raw EndTransfer call.
@@ -259,13 +259,13 @@ func (self IPhotoAcquireProgressCB) EndTransfer(hr foundation.HRESULT) error {
 }
 
 // StartDelete wraps the raw StartDelete call.
-func (self IPhotoAcquireProgressCB) StartDelete(pPhotoAcquireSource *mediapictureacquisition.IPhotoAcquireSource) error {
-	return win32.HRESULTError(int32(self.Raw.StartDelete(pPhotoAcquireSource)))
+func (self IPhotoAcquireProgressCB) StartDelete(pPhotoAcquireSource IPhotoAcquireSource) error {
+	return win32.HRESULTError(int32(self.Raw.StartDelete(pPhotoAcquireSource.Raw)))
 }
 
 // StartItemDelete wraps the raw StartItemDelete call.
-func (self IPhotoAcquireProgressCB) StartItemDelete(nItemIndex uint32, pPhotoAcquireItem *mediapictureacquisition.IPhotoAcquireItem) error {
-	return win32.HRESULTError(int32(self.Raw.StartItemDelete(nItemIndex, pPhotoAcquireItem)))
+func (self IPhotoAcquireProgressCB) StartItemDelete(nItemIndex uint32, pPhotoAcquireItem IPhotoAcquireItem) error {
+	return win32.HRESULTError(int32(self.Raw.StartItemDelete(nItemIndex, pPhotoAcquireItem.Raw)))
 }
 
 // UpdateDeletePercent wraps the raw UpdateDeletePercent call.
@@ -274,8 +274,8 @@ func (self IPhotoAcquireProgressCB) UpdateDeletePercent(nPercent uint32) error {
 }
 
 // EndItemDelete wraps the raw EndItemDelete call.
-func (self IPhotoAcquireProgressCB) EndItemDelete(nItemIndex uint32, pPhotoAcquireItem *mediapictureacquisition.IPhotoAcquireItem, hr foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.EndItemDelete(nItemIndex, pPhotoAcquireItem, hr)))
+func (self IPhotoAcquireProgressCB) EndItemDelete(nItemIndex uint32, pPhotoAcquireItem IPhotoAcquireItem, hr foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.EndItemDelete(nItemIndex, pPhotoAcquireItem.Raw, hr)))
 }
 
 // EndDelete wraps the raw EndDelete call.
@@ -300,8 +300,8 @@ func (self IPhotoAcquireProgressCB) ErrorAdvise(hr foundation.HRESULT, pszErrorM
 }
 
 // GetUserInput wraps the raw GetUserInput call.
-func (self IPhotoAcquireProgressCB) GetUserInput(riidType *win32.GUID, pUnknown *systemcom.IUnknown, pPropVarResult *systemcomstructuredstorage.PROPVARIANT, pPropVarDefault *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetUserInput(riidType, pUnknown, pPropVarResult, pPropVarDefault)))
+func (self IPhotoAcquireProgressCB) GetUserInput(riidType *win32.GUID, pUnknown systemcomidiom.IUnknown, pPropVarResult *systemcomstructuredstorage.PROPVARIANT, pPropVarDefault *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.GetUserInput(riidType, pUnknown.Raw, pPropVarResult, pPropVarDefault)))
 }
 
 // IPhotoAcquireSettings is an idiomatic wrapper over the raw COM interface Media.PictureAcquisition.IPhotoAcquireSettings with error-returning methods.
@@ -406,9 +406,9 @@ func (self IPhotoAcquireSource) GetDeviceIcons(nSize uint32, phLargeIcon *uiwind
 }
 
 // InitializeItemList wraps the raw InitializeItemList call.
-func (self IPhotoAcquireSource) InitializeItemList(fForceEnumeration bool, pPhotoAcquireProgressCB *mediapictureacquisition.IPhotoAcquireProgressCB, pnItemCount *uint32) error {
+func (self IPhotoAcquireSource) InitializeItemList(fForceEnumeration bool, pPhotoAcquireProgressCB IPhotoAcquireProgressCB, pnItemCount *uint32) error {
 	_fForceEnumeration := foundation.BOOL(win32.Bool32(fForceEnumeration))
-	return win32.HRESULTError(int32(self.Raw.InitializeItemList(_fForceEnumeration, pPhotoAcquireProgressCB, pnItemCount)))
+	return win32.HRESULTError(int32(self.Raw.InitializeItemList(_fForceEnumeration, pPhotoAcquireProgressCB.Raw, pnItemCount)))
 }
 
 // GetItemCount wraps the raw GetItemCount call.
@@ -536,8 +536,8 @@ func (self IPhotoProgressDialog) SetProgressText(pszProgressText string) error {
 }
 
 // SetActionLinkCallback wraps the raw SetActionLinkCallback call.
-func (self IPhotoProgressDialog) SetActionLinkCallback(pPhotoProgressActionCB *mediapictureacquisition.IPhotoProgressActionCB) error {
-	return win32.HRESULTError(int32(self.Raw.SetActionLinkCallback(pPhotoProgressActionCB)))
+func (self IPhotoProgressDialog) SetActionLinkCallback(pPhotoProgressActionCB IPhotoProgressActionCB) error {
+	return win32.HRESULTError(int32(self.Raw.SetActionLinkCallback(pPhotoProgressActionCB.Raw)))
 }
 
 // SetActionLinkText wraps the raw SetActionLinkText call.
@@ -558,8 +558,8 @@ func (self IPhotoProgressDialog) IsCancelled(pfCancelled *foundation.BOOL) error
 }
 
 // GetUserInput wraps the raw GetUserInput call.
-func (self IPhotoProgressDialog) GetUserInput(riidType *win32.GUID, pUnknown *systemcom.IUnknown, pPropVarResult *systemcomstructuredstorage.PROPVARIANT, pPropVarDefault *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetUserInput(riidType, pUnknown, pPropVarResult, pPropVarDefault)))
+func (self IPhotoProgressDialog) GetUserInput(riidType *win32.GUID, pUnknown systemcomidiom.IUnknown, pPropVarResult *systemcomstructuredstorage.PROPVARIANT, pPropVarDefault *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.GetUserInput(riidType, pUnknown.Raw, pPropVarResult, pPropVarDefault)))
 }
 
 // IUserInputString is an idiomatic wrapper over the raw COM interface Media.PictureAcquisition.IUserInputString with error-returning methods.

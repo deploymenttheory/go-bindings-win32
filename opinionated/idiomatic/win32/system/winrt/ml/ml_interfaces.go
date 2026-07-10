@@ -10,6 +10,7 @@ import (
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemwinrtml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/ml"
+	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -25,8 +26,8 @@ func WrapILearningModelDeviceFactoryNative(raw *systemwinrtml.ILearningModelDevi
 }
 
 // CreateFromD3D12CommandQueue wraps the raw CreateFromD3D12CommandQueue call.
-func (self ILearningModelDeviceFactoryNative) CreateFromD3D12CommandQueue(value *graphicsdirect3d12.ID3D12CommandQueue, result **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFromD3D12CommandQueue(value, result)))
+func (self ILearningModelDeviceFactoryNative) CreateFromD3D12CommandQueue(value graphicsdirect3d12idiom.ID3D12CommandQueue, result **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFromD3D12CommandQueue(value.Raw, result)))
 }
 
 // ILearningModelOperatorProviderNative is an idiomatic wrapper over the raw COM interface System.WinRT.ML.ILearningModelOperatorProviderNative with error-returning methods.
@@ -110,6 +111,6 @@ func WrapITensorStaticsNative(raw *systemwinrtml.ITensorStaticsNative) ITensorSt
 }
 
 // CreateFromD3D12Resource wraps the raw CreateFromD3D12Resource call.
-func (self ITensorStaticsNative) CreateFromD3D12Resource(value *graphicsdirect3d12.ID3D12Resource, shape *int64, shapeCount int32, result **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFromD3D12Resource(value, shape, shapeCount, result)))
+func (self ITensorStaticsNative) CreateFromD3D12Resource(value graphicsdirect3d12idiom.ID3D12Resource, shape *int64, shapeCount int32, result **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFromD3D12Resource(value.Raw, shape, shapeCount, result)))
 }

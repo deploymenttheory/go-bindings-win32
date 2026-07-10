@@ -12,6 +12,7 @@ import (
 	systemperformance "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/performance"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // DICounterItem is an idiomatic wrapper over the raw COM interface System.Performance.DICounterItem with error-returning methods.
@@ -492,8 +493,8 @@ func (self IDataCollector) Get_DataCollectorSet(group **systemperformance.IDataC
 }
 
 // Put_DataCollectorSet wraps the raw Put_DataCollectorSet call.
-func (self IDataCollector) Put_DataCollectorSet(group *systemperformance.IDataCollectorSet) error {
-	return win32.HRESULTError(int32(self.Raw.Put_DataCollectorSet(group)))
+func (self IDataCollector) Put_DataCollectorSet(group IDataCollectorSet) error {
+	return win32.HRESULTError(int32(self.Raw.Put_DataCollectorSet(group.Raw)))
 }
 
 // Get_DataCollectorType wraps the raw Get_DataCollectorType call.
@@ -633,8 +634,8 @@ func (self IDataCollectorCollection) Get__NewEnum(retVal **systemcom.IUnknown) e
 }
 
 // Add wraps the raw Add call.
-func (self IDataCollectorCollection) Add(collector *systemperformance.IDataCollector) error {
-	return win32.HRESULTError(int32(self.Raw.Add(collector)))
+func (self IDataCollectorCollection) Add(collector IDataCollector) error {
+	return win32.HRESULTError(int32(self.Raw.Add(collector.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -643,8 +644,8 @@ func (self IDataCollectorCollection) Clear() error {
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IDataCollectorCollection) AddRange(collectors *systemperformance.IDataCollectorCollection) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(collectors)))
+func (self IDataCollectorCollection) AddRange(collectors IDataCollectorCollection) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(collectors.Raw)))
 }
 
 // CreateDataCollectorFromXml wraps the raw CreateDataCollectorFromXml call.
@@ -990,8 +991,8 @@ func (self IDataCollectorSetCollection) Get__NewEnum(retVal **systemcom.IUnknown
 }
 
 // Add wraps the raw Add call.
-func (self IDataCollectorSetCollection) Add(set *systemperformance.IDataCollectorSet) error {
-	return win32.HRESULTError(int32(self.Raw.Add(set)))
+func (self IDataCollectorSetCollection) Add(set IDataCollectorSet) error {
+	return win32.HRESULTError(int32(self.Raw.Add(set.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -1000,8 +1001,8 @@ func (self IDataCollectorSetCollection) Clear() error {
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IDataCollectorSetCollection) AddRange(sets *systemperformance.IDataCollectorSetCollection) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(sets)))
+func (self IDataCollectorSetCollection) AddRange(sets IDataCollectorSetCollection) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(sets.Raw)))
 }
 
 // GetDataCollectorSets wraps the raw GetDataCollectorSets call.
@@ -1218,8 +1219,8 @@ func (self IFolderActionCollection) Get__NewEnum(Enum **systemcom.IUnknown) erro
 }
 
 // Add wraps the raw Add call.
-func (self IFolderActionCollection) Add(Action *systemperformance.IFolderAction) error {
-	return win32.HRESULTError(int32(self.Raw.Add(Action)))
+func (self IFolderActionCollection) Add(Action IFolderAction) error {
+	return win32.HRESULTError(int32(self.Raw.Add(Action.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -1228,8 +1229,8 @@ func (self IFolderActionCollection) Clear() error {
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IFolderActionCollection) AddRange(Actions *systemperformance.IFolderActionCollection) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(Actions)))
+func (self IFolderActionCollection) AddRange(Actions IFolderActionCollection) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(Actions.Raw)))
 }
 
 // CreateFolderAction wraps the raw CreateFolderAction call.
@@ -1398,8 +1399,8 @@ func (self IScheduleCollection) Get__NewEnum(ienum **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self IScheduleCollection) Add(pSchedule *systemperformance.ISchedule) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pSchedule)))
+func (self IScheduleCollection) Add(pSchedule ISchedule) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pSchedule.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -1408,8 +1409,8 @@ func (self IScheduleCollection) Clear() error {
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IScheduleCollection) AddRange(pSchedules *systemperformance.IScheduleCollection) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(pSchedules)))
+func (self IScheduleCollection) AddRange(pSchedules IScheduleCollection) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(pSchedules.Raw)))
 }
 
 // CreateSchedule wraps the raw CreateSchedule call.
@@ -1474,8 +1475,8 @@ func (self ISystemMonitor) Get_Font(ppFont **systemole.IFontDisp) error {
 }
 
 // Putref_Font wraps the raw Putref_Font call.
-func (self ISystemMonitor) Putref_Font(pFont *systemole.IFontDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Font(pFont)))
+func (self ISystemMonitor) Putref_Font(pFont systemoleidiom.IFontDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Font(pFont.Raw)))
 }
 
 // Get_Counters wraps the raw Get_Counters call.
@@ -1629,8 +1630,8 @@ func (self ISystemMonitor) AddCounter(bsPath foundation.BSTR, ppICounter **syste
 }
 
 // DeleteCounter wraps the raw DeleteCounter call.
-func (self ISystemMonitor) DeleteCounter(pCtr *systemperformance.ICounterItem) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteCounter(pCtr)))
+func (self ISystemMonitor) DeleteCounter(pCtr ICounterItem) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteCounter(pCtr.Raw)))
 }
 
 // Get_BackColorCtl wraps the raw Get_BackColorCtl call.
@@ -2223,8 +2224,8 @@ func (self ITraceDataProvider) Query(bstrName foundation.BSTR, bstrServer founda
 }
 
 // Resolve wraps the raw Resolve call.
-func (self ITraceDataProvider) Resolve(pFrom *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Resolve(pFrom)))
+func (self ITraceDataProvider) Resolve(pFrom systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Resolve(pFrom.Raw)))
 }
 
 // SetSecurity wraps the raw SetSecurity call.
@@ -2264,8 +2265,8 @@ func (self ITraceDataProviderCollection) Get__NewEnum(retVal **systemcom.IUnknow
 }
 
 // Add wraps the raw Add call.
-func (self ITraceDataProviderCollection) Add(pProvider *systemperformance.ITraceDataProvider) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pProvider)))
+func (self ITraceDataProviderCollection) Add(pProvider ITraceDataProvider) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pProvider.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -2274,8 +2275,8 @@ func (self ITraceDataProviderCollection) Clear() error {
 }
 
 // AddRange wraps the raw AddRange call.
-func (self ITraceDataProviderCollection) AddRange(providers *systemperformance.ITraceDataProviderCollection) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(providers)))
+func (self ITraceDataProviderCollection) AddRange(providers ITraceDataProviderCollection) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(providers.Raw)))
 }
 
 // CreateTraceDataProvider wraps the raw CreateTraceDataProvider call.
@@ -2345,8 +2346,8 @@ func (self IValueMap) Clear() error {
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IValueMap) AddRange(map_ *systemperformance.IValueMap) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(map_)))
+func (self IValueMap) AddRange(map_ IValueMap) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(map_.Raw)))
 }
 
 // CreateValueMapItem wraps the raw CreateValueMapItem call.
@@ -2563,8 +2564,8 @@ func (self ISystemMonitorUnion) Get_Font(ppFont **systemole.IFontDisp) error {
 }
 
 // Putref_Font wraps the raw Putref_Font call.
-func (self ISystemMonitorUnion) Putref_Font(pFont *systemole.IFontDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Font(pFont)))
+func (self ISystemMonitorUnion) Putref_Font(pFont systemoleidiom.IFontDisp) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Font(pFont.Raw)))
 }
 
 // Get_Counters wraps the raw Get_Counters call.
@@ -2718,8 +2719,8 @@ func (self ISystemMonitorUnion) AddCounter(bsPath foundation.BSTR, ppICounter **
 }
 
 // DeleteCounter wraps the raw DeleteCounter call.
-func (self ISystemMonitorUnion) DeleteCounter(pCtr *systemperformance.ICounterItem) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteCounter(pCtr)))
+func (self ISystemMonitorUnion) DeleteCounter(pCtr ICounterItem) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteCounter(pCtr.Raw)))
 }
 
 // Get_BackColorCtl wraps the raw Get_BackColorCtl call.

@@ -34,40 +34,46 @@ func AVIClearClipboard() error {
 	return win32.HRESULTError(int32(mediamultimedia.AVIClearClipboard()))
 }
 
+// AVIFileAddRef wraps the raw AVIFileAddRef call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileaddref
+func AVIFileAddRef(pfile IAVIFile) uint32 {
+	return mediamultimedia.AVIFileAddRef(pfile.Raw)
+}
+
 // AVIFileCreateStream wraps the raw AVIFileCreateStreamW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilecreatestreamw
-func AVIFileCreateStream(pfile *mediamultimedia.IAVIFile, ppavi **mediamultimedia.IAVIStream, psi *mediamultimedia.AVISTREAMINFOW) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIFileCreateStreamW(pfile, ppavi, psi)))
+func AVIFileCreateStream(pfile IAVIFile, ppavi **mediamultimedia.IAVIStream, psi *mediamultimedia.AVISTREAMINFOW) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIFileCreateStreamW(pfile.Raw, ppavi, psi)))
 }
 
 // AVIFileCreateStreamA wraps the raw AVIFileCreateStreamA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilecreatestreama
-func AVIFileCreateStreamA(pfile *mediamultimedia.IAVIFile, ppavi **mediamultimedia.IAVIStream, psi *mediamultimedia.AVISTREAMINFOA) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIFileCreateStreamA(pfile, ppavi, psi)))
+func AVIFileCreateStreamA(pfile IAVIFile, ppavi **mediamultimedia.IAVIStream, psi *mediamultimedia.AVISTREAMINFOA) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIFileCreateStreamA(pfile.Raw, ppavi, psi)))
 }
 
 // AVIFileEndRecord wraps the raw AVIFileEndRecord call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileendrecord
-func AVIFileEndRecord(pfile *mediamultimedia.IAVIFile) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIFileEndRecord(pfile)))
+func AVIFileEndRecord(pfile IAVIFile) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIFileEndRecord(pfile.Raw)))
 }
 
 // AVIFileGetStream wraps the raw AVIFileGetStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilegetstream
-func AVIFileGetStream(pfile *mediamultimedia.IAVIFile, ppavi **mediamultimedia.IAVIStream, fccType uint32, lParam int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIFileGetStream(pfile, ppavi, fccType, lParam)))
+func AVIFileGetStream(pfile IAVIFile, ppavi **mediamultimedia.IAVIStream, fccType uint32, lParam int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIFileGetStream(pfile.Raw, ppavi, fccType, lParam)))
 }
 
 // AVIFileInfo wraps the raw AVIFileInfoW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileinfow
-func AVIFileInfo(pfile *mediamultimedia.IAVIFile, pfi *mediamultimedia.AVIFILEINFOW, lSize int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIFileInfoW(pfile, pfi, lSize)))
+func AVIFileInfo(pfile IAVIFile, pfi *mediamultimedia.AVIFILEINFOW, lSize int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIFileInfoW(pfile.Raw, pfi, lSize)))
 }
 
 // AVIFileInfoA wraps the raw AVIFileInfoA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileinfoa
-func AVIFileInfoA(pfile *mediamultimedia.IAVIFile, pfi *mediamultimedia.AVIFILEINFOA, lSize int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIFileInfoA(pfile, pfi, lSize)))
+func AVIFileInfoA(pfile IAVIFile, pfi *mediamultimedia.AVIFILEINFOA, lSize int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIFileInfoA(pfile.Raw, pfi, lSize)))
 }
 
 // AVIFileOpen wraps the raw AVIFileOpenW call with idiomatic Go types.
@@ -85,14 +91,20 @@ func AVIFileOpenA(ppfile **mediamultimedia.IAVIFile, szFile foundation.PSTR, uMo
 
 // AVIFileReadData wraps the raw AVIFileReadData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilereaddata
-func AVIFileReadData(pfile *mediamultimedia.IAVIFile, ckid uint32, lpData unsafe.Pointer, lpcbData *int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIFileReadData(pfile, ckid, lpData, lpcbData)))
+func AVIFileReadData(pfile IAVIFile, ckid uint32, lpData unsafe.Pointer, lpcbData *int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIFileReadData(pfile.Raw, ckid, lpData, lpcbData)))
+}
+
+// AVIFileRelease wraps the raw AVIFileRelease call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilerelease
+func AVIFileRelease(pfile IAVIFile) uint32 {
+	return mediamultimedia.AVIFileRelease(pfile.Raw)
 }
 
 // AVIFileWriteData wraps the raw AVIFileWriteData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilewritedata
-func AVIFileWriteData(pfile *mediamultimedia.IAVIFile, ckid uint32, lpData unsafe.Pointer, cbData int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIFileWriteData(pfile, ckid, lpData, cbData)))
+func AVIFileWriteData(pfile IAVIFile, ckid uint32, lpData unsafe.Pointer, cbData int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIFileWriteData(pfile.Raw, ckid, lpData, cbData)))
 }
 
 // AVIGetFromClipboard wraps the raw AVIGetFromClipboard call with idiomatic Go types.
@@ -103,8 +115,8 @@ func AVIGetFromClipboard(lppf **mediamultimedia.IAVIFile) error {
 
 // AVIMakeCompressedStream wraps the raw AVIMakeCompressedStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avimakecompressedstream
-func AVIMakeCompressedStream(ppsCompressed **mediamultimedia.IAVIStream, ppsSource *mediamultimedia.IAVIStream, lpOptions *mediamultimedia.AVICOMPRESSOPTIONS, pclsidHandler *win32.GUID) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIMakeCompressedStream(ppsCompressed, ppsSource, lpOptions, pclsidHandler)))
+func AVIMakeCompressedStream(ppsCompressed **mediamultimedia.IAVIStream, ppsSource IAVIStream, lpOptions *mediamultimedia.AVICOMPRESSOPTIONS, pclsidHandler *win32.GUID) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIMakeCompressedStream(ppsCompressed, ppsSource.Raw, lpOptions, pclsidHandler)))
 }
 
 // AVIMakeFileFromStreams wraps the raw AVIMakeFileFromStreams call with idiomatic Go types.
@@ -125,21 +137,21 @@ func AVIMakeStreamFromClipboard(cfFormat uint32, hGlobal foundation.HANDLE, ppst
 
 // AVIPutFileOnClipboard wraps the raw AVIPutFileOnClipboard call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-aviputfileonclipboard
-func AVIPutFileOnClipboard(pf *mediamultimedia.IAVIFile) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIPutFileOnClipboard(pf)))
+func AVIPutFileOnClipboard(pf IAVIFile) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIPutFileOnClipboard(pf.Raw)))
 }
 
 // AVISave wraps the raw AVISaveW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavew
-func AVISave(szFile string, pclsidHandler *win32.GUID, lpfnCallback mediamultimedia.AVISAVECALLBACK, nStreams int32, pfile *mediamultimedia.IAVIStream, lpOptions *mediamultimedia.AVICOMPRESSOPTIONS) error {
+func AVISave(szFile string, pclsidHandler *win32.GUID, lpfnCallback mediamultimedia.AVISAVECALLBACK, nStreams int32, pfile IAVIStream, lpOptions *mediamultimedia.AVICOMPRESSOPTIONS) error {
 	_szFile := win32.UTF16Ptr(szFile)
-	return win32.HRESULTError(int32(mediamultimedia.AVISaveW(foundation.PWSTR(_szFile), pclsidHandler, lpfnCallback, nStreams, pfile, lpOptions)))
+	return win32.HRESULTError(int32(mediamultimedia.AVISaveW(foundation.PWSTR(_szFile), pclsidHandler, lpfnCallback, nStreams, pfile.Raw, lpOptions)))
 }
 
 // AVISaveA wraps the raw AVISaveA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavea
-func AVISaveA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback mediamultimedia.AVISAVECALLBACK, nStreams int32, pfile *mediamultimedia.IAVIStream, lpOptions *mediamultimedia.AVICOMPRESSOPTIONS) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVISaveA(szFile, pclsidHandler, lpfnCallback, nStreams, pfile, lpOptions)))
+func AVISaveA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback mediamultimedia.AVISAVECALLBACK, nStreams int32, pfile IAVIStream, lpOptions *mediamultimedia.AVICOMPRESSOPTIONS) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVISaveA(szFile, pclsidHandler, lpfnCallback, nStreams, pfile.Raw, lpOptions)))
 }
 
 // AVISaveOptionsFree wraps the raw AVISaveOptionsFree call with idiomatic Go types.
@@ -165,10 +177,16 @@ func AVISaveVA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback m
 	return win32.HRESULTError(int32(mediamultimedia.AVISaveVA(szFile, pclsidHandler, lpfnCallback, nStreams, ppavi, plpOptions)))
 }
 
+// AVIStreamAddRef wraps the raw AVIStreamAddRef call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamaddref
+func AVIStreamAddRef(pavi IAVIStream) uint32 {
+	return mediamultimedia.AVIStreamAddRef(pavi.Raw)
+}
+
 // AVIStreamBeginStreaming wraps the raw AVIStreamBeginStreaming call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreambeginstreaming
-func AVIStreamBeginStreaming(pavi *mediamultimedia.IAVIStream, lStart int32, lEnd int32, lRate int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamBeginStreaming(pavi, lStart, lEnd, lRate)))
+func AVIStreamBeginStreaming(pavi IAVIStream, lStart int32, lEnd int32, lRate int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamBeginStreaming(pavi.Raw, lStart, lEnd, lRate)))
 }
 
 // AVIStreamCreate wraps the raw AVIStreamCreate call with idiomatic Go types.
@@ -179,26 +197,50 @@ func AVIStreamCreate(ppavi **mediamultimedia.IAVIStream, lParam1 int32, lParam2 
 
 // AVIStreamEndStreaming wraps the raw AVIStreamEndStreaming call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamendstreaming
-func AVIStreamEndStreaming(pavi *mediamultimedia.IAVIStream) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamEndStreaming(pavi)))
+func AVIStreamEndStreaming(pavi IAVIStream) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamEndStreaming(pavi.Raw)))
+}
+
+// AVIStreamFindSample wraps the raw AVIStreamFindSample call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamfindsample
+func AVIStreamFindSample(pavi IAVIStream, lPos int32, lFlags int32) int32 {
+	return mediamultimedia.AVIStreamFindSample(pavi.Raw, lPos, lFlags)
+}
+
+// AVIStreamGetFrame wraps the raw AVIStreamGetFrame call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamgetframe
+func AVIStreamGetFrame(pg IGetFrame, lPos int32) unsafe.Pointer {
+	return mediamultimedia.AVIStreamGetFrame(pg.Raw, lPos)
 }
 
 // AVIStreamGetFrameClose wraps the raw AVIStreamGetFrameClose call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamgetframeclose
-func AVIStreamGetFrameClose(pg *mediamultimedia.IGetFrame) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamGetFrameClose(pg)))
+func AVIStreamGetFrameClose(pg IGetFrame) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamGetFrameClose(pg.Raw)))
+}
+
+// AVIStreamGetFrameOpen wraps the raw AVIStreamGetFrameOpen call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamgetframeopen
+func AVIStreamGetFrameOpen(pavi IAVIStream, lpbiWanted *graphicsgdi.BITMAPINFOHEADER) *mediamultimedia.IGetFrame {
+	return mediamultimedia.AVIStreamGetFrameOpen(pavi.Raw, lpbiWanted)
 }
 
 // AVIStreamInfo wraps the raw AVIStreamInfoW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreaminfow
-func AVIStreamInfo(pavi *mediamultimedia.IAVIStream, psi *mediamultimedia.AVISTREAMINFOW, lSize int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamInfoW(pavi, psi, lSize)))
+func AVIStreamInfo(pavi IAVIStream, psi *mediamultimedia.AVISTREAMINFOW, lSize int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamInfoW(pavi.Raw, psi, lSize)))
 }
 
 // AVIStreamInfoA wraps the raw AVIStreamInfoA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreaminfoa
-func AVIStreamInfoA(pavi *mediamultimedia.IAVIStream, psi *mediamultimedia.AVISTREAMINFOA, lSize int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamInfoA(pavi, psi, lSize)))
+func AVIStreamInfoA(pavi IAVIStream, psi *mediamultimedia.AVISTREAMINFOA, lSize int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamInfoA(pavi.Raw, psi, lSize)))
+}
+
+// AVIStreamLength wraps the raw AVIStreamLength call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamlength
+func AVIStreamLength(pavi IAVIStream) int32 {
+	return mediamultimedia.AVIStreamLength(pavi.Raw)
 }
 
 // AVIStreamOpenFromFile wraps the raw AVIStreamOpenFromFileW call with idiomatic Go types.
@@ -216,38 +258,62 @@ func AVIStreamOpenFromFileA(ppavi **mediamultimedia.IAVIStream, szFile foundatio
 
 // AVIStreamRead wraps the raw AVIStreamRead call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamread
-func AVIStreamRead(pavi *mediamultimedia.IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamRead(pavi, lStart, lSamples, lpBuffer, cbBuffer, plBytes, plSamples)))
+func AVIStreamRead(pavi IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamRead(pavi.Raw, lStart, lSamples, lpBuffer, cbBuffer, plBytes, plSamples)))
 }
 
 // AVIStreamReadData wraps the raw AVIStreamReadData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamreaddata
-func AVIStreamReadData(pavi *mediamultimedia.IAVIStream, fcc uint32, lp unsafe.Pointer, lpcb *int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamReadData(pavi, fcc, lp, lpcb)))
+func AVIStreamReadData(pavi IAVIStream, fcc uint32, lp unsafe.Pointer, lpcb *int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamReadData(pavi.Raw, fcc, lp, lpcb)))
 }
 
 // AVIStreamReadFormat wraps the raw AVIStreamReadFormat call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamreadformat
-func AVIStreamReadFormat(pavi *mediamultimedia.IAVIStream, lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamReadFormat(pavi, lPos, lpFormat, lpcbFormat)))
+func AVIStreamReadFormat(pavi IAVIStream, lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamReadFormat(pavi.Raw, lPos, lpFormat, lpcbFormat)))
+}
+
+// AVIStreamRelease wraps the raw AVIStreamRelease call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamrelease
+func AVIStreamRelease(pavi IAVIStream) uint32 {
+	return mediamultimedia.AVIStreamRelease(pavi.Raw)
+}
+
+// AVIStreamSampleToTime wraps the raw AVIStreamSampleToTime call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamsampletotime
+func AVIStreamSampleToTime(pavi IAVIStream, lSample int32) int32 {
+	return mediamultimedia.AVIStreamSampleToTime(pavi.Raw, lSample)
 }
 
 // AVIStreamSetFormat wraps the raw AVIStreamSetFormat call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamsetformat
-func AVIStreamSetFormat(pavi *mediamultimedia.IAVIStream, lPos int32, lpFormat unsafe.Pointer, cbFormat int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamSetFormat(pavi, lPos, lpFormat, cbFormat)))
+func AVIStreamSetFormat(pavi IAVIStream, lPos int32, lpFormat unsafe.Pointer, cbFormat int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamSetFormat(pavi.Raw, lPos, lpFormat, cbFormat)))
+}
+
+// AVIStreamStart wraps the raw AVIStreamStart call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamstart
+func AVIStreamStart(pavi IAVIStream) int32 {
+	return mediamultimedia.AVIStreamStart(pavi.Raw)
+}
+
+// AVIStreamTimeToSample wraps the raw AVIStreamTimeToSample call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamtimetosample
+func AVIStreamTimeToSample(pavi IAVIStream, lTime int32) int32 {
+	return mediamultimedia.AVIStreamTimeToSample(pavi.Raw, lTime)
 }
 
 // AVIStreamWrite wraps the raw AVIStreamWrite call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamwrite
-func AVIStreamWrite(pavi *mediamultimedia.IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamWrite(pavi, lStart, lSamples, lpBuffer, cbBuffer, dwFlags, plSampWritten, plBytesWritten)))
+func AVIStreamWrite(pavi IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamWrite(pavi.Raw, lStart, lSamples, lpBuffer, cbBuffer, dwFlags, plSampWritten, plBytesWritten)))
 }
 
 // AVIStreamWriteData wraps the raw AVIStreamWriteData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamwritedata
-func AVIStreamWriteData(pavi *mediamultimedia.IAVIStream, fcc uint32, lp unsafe.Pointer, cb int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIStreamWriteData(pavi, fcc, lp, cb)))
+func AVIStreamWriteData(pavi IAVIStream, fcc uint32, lp unsafe.Pointer, cb int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.AVIStreamWriteData(pavi.Raw, fcc, lp, cb)))
 }
 
 // CapCreateCaptureWindow wraps the raw CapCreateCaptureWindowW call with idiomatic Go types.
@@ -271,8 +337,8 @@ func CapGetDriverDescriptionA(wDriverIndex uint32, lpszName foundation.PSTR, cbN
 
 // CreateEditableStream wraps the raw CreateEditableStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-createeditablestream
-func CreateEditableStream(ppsEditable **mediamultimedia.IAVIStream, psSource *mediamultimedia.IAVIStream) error {
-	return win32.HRESULTError(int32(mediamultimedia.CreateEditableStream(ppsEditable, psSource)))
+func CreateEditableStream(ppsEditable **mediamultimedia.IAVIStream, psSource IAVIStream) error {
+	return win32.HRESULTError(int32(mediamultimedia.CreateEditableStream(ppsEditable, psSource.Raw)))
 }
 
 // DrawDibBegin wraps the raw DrawDibBegin call with idiomatic Go types.
@@ -348,51 +414,51 @@ func DriverCallback(dwCallback uintptr, dwFlags uint32, hDevice mediamultimedia.
 
 // EditStreamClone wraps the raw EditStreamClone call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamclone
-func EditStreamClone(pavi *mediamultimedia.IAVIStream, ppResult **mediamultimedia.IAVIStream) error {
-	return win32.HRESULTError(int32(mediamultimedia.EditStreamClone(pavi, ppResult)))
+func EditStreamClone(pavi IAVIStream, ppResult **mediamultimedia.IAVIStream) error {
+	return win32.HRESULTError(int32(mediamultimedia.EditStreamClone(pavi.Raw, ppResult)))
 }
 
 // EditStreamCopy wraps the raw EditStreamCopy call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamcopy
-func EditStreamCopy(pavi *mediamultimedia.IAVIStream, plStart *int32, plLength *int32, ppResult **mediamultimedia.IAVIStream) error {
-	return win32.HRESULTError(int32(mediamultimedia.EditStreamCopy(pavi, plStart, plLength, ppResult)))
+func EditStreamCopy(pavi IAVIStream, plStart *int32, plLength *int32, ppResult **mediamultimedia.IAVIStream) error {
+	return win32.HRESULTError(int32(mediamultimedia.EditStreamCopy(pavi.Raw, plStart, plLength, ppResult)))
 }
 
 // EditStreamCut wraps the raw EditStreamCut call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamcut
-func EditStreamCut(pavi *mediamultimedia.IAVIStream, plStart *int32, plLength *int32, ppResult **mediamultimedia.IAVIStream) error {
-	return win32.HRESULTError(int32(mediamultimedia.EditStreamCut(pavi, plStart, plLength, ppResult)))
+func EditStreamCut(pavi IAVIStream, plStart *int32, plLength *int32, ppResult **mediamultimedia.IAVIStream) error {
+	return win32.HRESULTError(int32(mediamultimedia.EditStreamCut(pavi.Raw, plStart, plLength, ppResult)))
 }
 
 // EditStreamPaste wraps the raw EditStreamPaste call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreampaste
-func EditStreamPaste(pavi *mediamultimedia.IAVIStream, plPos *int32, plLength *int32, pstream *mediamultimedia.IAVIStream, lStart int32, lEnd int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.EditStreamPaste(pavi, plPos, plLength, pstream, lStart, lEnd)))
+func EditStreamPaste(pavi IAVIStream, plPos *int32, plLength *int32, pstream IAVIStream, lStart int32, lEnd int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.EditStreamPaste(pavi.Raw, plPos, plLength, pstream.Raw, lStart, lEnd)))
 }
 
 // EditStreamSetInfo wraps the raw EditStreamSetInfoW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetinfow
-func EditStreamSetInfo(pavi *mediamultimedia.IAVIStream, lpInfo *mediamultimedia.AVISTREAMINFOW, cbInfo int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.EditStreamSetInfoW(pavi, lpInfo, cbInfo)))
+func EditStreamSetInfo(pavi IAVIStream, lpInfo *mediamultimedia.AVISTREAMINFOW, cbInfo int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.EditStreamSetInfoW(pavi.Raw, lpInfo, cbInfo)))
 }
 
 // EditStreamSetInfoA wraps the raw EditStreamSetInfoA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetinfoa
-func EditStreamSetInfoA(pavi *mediamultimedia.IAVIStream, lpInfo *mediamultimedia.AVISTREAMINFOA, cbInfo int32) error {
-	return win32.HRESULTError(int32(mediamultimedia.EditStreamSetInfoA(pavi, lpInfo, cbInfo)))
+func EditStreamSetInfoA(pavi IAVIStream, lpInfo *mediamultimedia.AVISTREAMINFOA, cbInfo int32) error {
+	return win32.HRESULTError(int32(mediamultimedia.EditStreamSetInfoA(pavi.Raw, lpInfo, cbInfo)))
 }
 
 // EditStreamSetName wraps the raw EditStreamSetNameW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetnamew
-func EditStreamSetName(pavi *mediamultimedia.IAVIStream, lpszName string) error {
+func EditStreamSetName(pavi IAVIStream, lpszName string) error {
 	_lpszName := win32.UTF16Ptr(lpszName)
-	return win32.HRESULTError(int32(mediamultimedia.EditStreamSetNameW(pavi, foundation.PWSTR(_lpszName))))
+	return win32.HRESULTError(int32(mediamultimedia.EditStreamSetNameW(pavi.Raw, foundation.PWSTR(_lpszName))))
 }
 
 // EditStreamSetNameA wraps the raw EditStreamSetNameA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetnamea
-func EditStreamSetNameA(pavi *mediamultimedia.IAVIStream, lpszName foundation.PSTR) error {
-	return win32.HRESULTError(int32(mediamultimedia.EditStreamSetNameA(pavi, lpszName)))
+func EditStreamSetNameA(pavi IAVIStream, lpszName foundation.PSTR) error {
+	return win32.HRESULTError(int32(mediamultimedia.EditStreamSetNameA(pavi.Raw, lpszName)))
 }
 
 // GetOpenFileNamePreview wraps the raw GetOpenFileNamePreviewW call with idiomatic Go types.

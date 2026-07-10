@@ -217,13 +217,13 @@ func (self IRdcLibrary) CreateGenerator(depth uint32, iGeneratorParametersArray 
 }
 
 // CreateComparator wraps the raw CreateComparator call.
-func (self IRdcLibrary) CreateComparator(iSeedSignaturesFile *networkingremotedifferentialcompression.IRdcFileReader, comparatorBufferSize uint32, iComparator **networkingremotedifferentialcompression.IRdcComparator) error {
-	return win32.HRESULTError(int32(self.Raw.CreateComparator(iSeedSignaturesFile, comparatorBufferSize, iComparator)))
+func (self IRdcLibrary) CreateComparator(iSeedSignaturesFile IRdcFileReader, comparatorBufferSize uint32, iComparator **networkingremotedifferentialcompression.IRdcComparator) error {
+	return win32.HRESULTError(int32(self.Raw.CreateComparator(iSeedSignaturesFile.Raw, comparatorBufferSize, iComparator)))
 }
 
 // CreateSignatureReader wraps the raw CreateSignatureReader call.
-func (self IRdcLibrary) CreateSignatureReader(iFileReader *networkingremotedifferentialcompression.IRdcFileReader, iSignatureReader **networkingremotedifferentialcompression.IRdcSignatureReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSignatureReader(iFileReader, iSignatureReader)))
+func (self IRdcLibrary) CreateSignatureReader(iFileReader IRdcFileReader, iSignatureReader **networkingremotedifferentialcompression.IRdcSignatureReader) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSignatureReader(iFileReader.Raw, iSignatureReader)))
 }
 
 // GetRDCVersion wraps the raw GetRDCVersion call.
@@ -292,9 +292,9 @@ func (self ISimilarity) CreateTable(path string, truncate bool, securityDescript
 }
 
 // CreateTableIndirect wraps the raw CreateTableIndirect call.
-func (self ISimilarity) CreateTableIndirect(mapping *networkingremotedifferentialcompression.ISimilarityTraitsMapping, fileIdFile *networkingremotedifferentialcompression.IRdcFileWriter, truncate bool, recordSize uint32, isNew *networkingremotedifferentialcompression.RdcCreatedTables) error {
+func (self ISimilarity) CreateTableIndirect(mapping ISimilarityTraitsMapping, fileIdFile IRdcFileWriter, truncate bool, recordSize uint32, isNew *networkingremotedifferentialcompression.RdcCreatedTables) error {
 	_truncate := foundation.BOOL(win32.Bool32(truncate))
-	return win32.HRESULTError(int32(self.Raw.CreateTableIndirect(mapping, fileIdFile, _truncate, recordSize, isNew)))
+	return win32.HRESULTError(int32(self.Raw.CreateTableIndirect(mapping.Raw, fileIdFile.Raw, _truncate, recordSize, isNew)))
 }
 
 // CloseTable wraps the raw CloseTable call.
@@ -314,8 +314,8 @@ func (self ISimilarity) FindSimilarFileId(similarityData *networkingremotediffer
 }
 
 // CopyAndSwap wraps the raw CopyAndSwap call.
-func (self ISimilarity) CopyAndSwap(newSimilarityTables *networkingremotedifferentialcompression.ISimilarity, reportProgress *networkingremotedifferentialcompression.ISimilarityReportProgress) error {
-	return win32.HRESULTError(int32(self.Raw.CopyAndSwap(newSimilarityTables, reportProgress)))
+func (self ISimilarity) CopyAndSwap(newSimilarityTables ISimilarity, reportProgress ISimilarityReportProgress) error {
+	return win32.HRESULTError(int32(self.Raw.CopyAndSwap(newSimilarityTables.Raw, reportProgress.Raw)))
 }
 
 // GetRecordCount wraps the raw GetRecordCount call.
@@ -342,9 +342,9 @@ func (self ISimilarityFileIdTable) CreateTable(path string, truncate bool, secur
 }
 
 // CreateTableIndirect wraps the raw CreateTableIndirect call.
-func (self ISimilarityFileIdTable) CreateTableIndirect(fileIdFile *networkingremotedifferentialcompression.IRdcFileWriter, truncate bool, recordSize uint32, isNew *networkingremotedifferentialcompression.RdcCreatedTables) error {
+func (self ISimilarityFileIdTable) CreateTableIndirect(fileIdFile IRdcFileWriter, truncate bool, recordSize uint32, isNew *networkingremotedifferentialcompression.RdcCreatedTables) error {
 	_truncate := foundation.BOOL(win32.Bool32(truncate))
-	return win32.HRESULTError(int32(self.Raw.CreateTableIndirect(fileIdFile, _truncate, recordSize, isNew)))
+	return win32.HRESULTError(int32(self.Raw.CreateTableIndirect(fileIdFile.Raw, _truncate, recordSize, isNew)))
 }
 
 // CloseTable wraps the raw CloseTable call.
@@ -502,9 +502,9 @@ func (self ISimilarityTraitsTable) CreateTable(path string, truncate bool, secur
 }
 
 // CreateTableIndirect wraps the raw CreateTableIndirect call.
-func (self ISimilarityTraitsTable) CreateTableIndirect(mapping *networkingremotedifferentialcompression.ISimilarityTraitsMapping, truncate bool, isNew *networkingremotedifferentialcompression.RdcCreatedTables) error {
+func (self ISimilarityTraitsTable) CreateTableIndirect(mapping ISimilarityTraitsMapping, truncate bool, isNew *networkingremotedifferentialcompression.RdcCreatedTables) error {
 	_truncate := foundation.BOOL(win32.Bool32(truncate))
-	return win32.HRESULTError(int32(self.Raw.CreateTableIndirect(mapping, _truncate, isNew)))
+	return win32.HRESULTError(int32(self.Raw.CreateTableIndirect(mapping.Raw, _truncate, isNew)))
 }
 
 // CloseTable wraps the raw CloseTable call.

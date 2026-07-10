@@ -8,13 +8,13 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsimaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/imaging"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // WICConvertBitmapSource wraps the raw WICConvertBitmapSource call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wicconvertbitmapsource
-func WICConvertBitmapSource(dstFormat *win32.GUID, pISrc *graphicsimaging.IWICBitmapSource, ppIDst **graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(graphicsimaging.WICConvertBitmapSource(dstFormat, pISrc, ppIDst)))
+func WICConvertBitmapSource(dstFormat *win32.GUID, pISrc IWICBitmapSource, ppIDst **graphicsimaging.IWICBitmapSource) error {
+	return win32.HRESULTError(int32(graphicsimaging.WICConvertBitmapSource(dstFormat, pISrc.Raw, ppIDst)))
 }
 
 // WICCreateBitmapFromSection wraps the raw WICCreateBitmapFromSection call with idiomatic Go types.
@@ -31,8 +31,8 @@ func WICCreateBitmapFromSectionEx(width uint32, height uint32, pixelFormat *win3
 
 // WICGetMetadataContentSize wraps the raw WICGetMetadataContentSize call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicgetmetadatacontentsize
-func WICGetMetadataContentSize(guidContainerFormat *win32.GUID, pIWriter *graphicsimaging.IWICMetadataWriter, pcbSize *uint64) error {
-	return win32.HRESULTError(int32(graphicsimaging.WICGetMetadataContentSize(guidContainerFormat, pIWriter, pcbSize)))
+func WICGetMetadataContentSize(guidContainerFormat *win32.GUID, pIWriter IWICMetadataWriter, pcbSize *uint64) error {
+	return win32.HRESULTError(int32(graphicsimaging.WICGetMetadataContentSize(guidContainerFormat, pIWriter.Raw, pcbSize)))
 }
 
 // WICMapGuidToShortName wraps the raw WICMapGuidToShortName call with idiomatic Go types.
@@ -57,12 +57,12 @@ func WICMapShortNameToGuid(wzName string, pguid *win32.GUID) error {
 
 // WICMatchMetadataContent wraps the raw WICMatchMetadataContent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicmatchmetadatacontent
-func WICMatchMetadataContent(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, pIStream *systemcom.IStream, pguidMetadataFormat *win32.GUID) error {
-	return win32.HRESULTError(int32(graphicsimaging.WICMatchMetadataContent(guidContainerFormat, pguidVendor, pIStream, pguidMetadataFormat)))
+func WICMatchMetadataContent(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, pIStream systemcomidiom.IStream, pguidMetadataFormat *win32.GUID) error {
+	return win32.HRESULTError(int32(graphicsimaging.WICMatchMetadataContent(guidContainerFormat, pguidVendor, pIStream.Raw, pguidMetadataFormat)))
 }
 
 // WICSerializeMetadataContent wraps the raw WICSerializeMetadataContent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicserializemetadatacontent
-func WICSerializeMetadataContent(guidContainerFormat *win32.GUID, pIWriter *graphicsimaging.IWICMetadataWriter, dwPersistOptions uint32, pIStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(graphicsimaging.WICSerializeMetadataContent(guidContainerFormat, pIWriter, dwPersistOptions, pIStream)))
+func WICSerializeMetadataContent(guidContainerFormat *win32.GUID, pIWriter IWICMetadataWriter, dwPersistOptions uint32, pIStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(graphicsimaging.WICSerializeMetadataContent(guidContainerFormat, pIWriter.Raw, dwPersistOptions, pIStream.Raw)))
 }

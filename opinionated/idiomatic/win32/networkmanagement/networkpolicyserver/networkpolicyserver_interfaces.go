@@ -25,10 +25,10 @@ func WrapISdo(raw *networkmanagementnetworkpolicyserver.ISdo) ISdo {
 }
 
 // GetPropertyInfo wraps the raw GetPropertyInfo call.
-func (self ISdo) GetPropertyInfo(Id int32) (*systemcom.IUnknown, error) {
+func (self ISdo) GetPropertyInfo(Id int32) (systemcomidiom.IUnknown, error) {
 	var _ppPropertyInfo *systemcom.IUnknown
 	_hr := self.Raw.GetPropertyInfo(Id, &_ppPropertyInfo)
-	return _ppPropertyInfo, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppPropertyInfo), win32.HRESULTError(int32(_hr))
 }
 
 // GetProperty wraps the raw GetProperty call.
@@ -59,10 +59,10 @@ func (self ISdo) Restore() error {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISdo) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISdo) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppEnumVARIANT *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppEnumVARIANT)
-	return _ppEnumVARIANT, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppEnumVARIANT), win32.HRESULTError(int32(_hr))
 }
 
 // ISdoCollection is an idiomatic wrapper over the raw COM interface NetworkManagement.NetworkPolicyServer.ISdoCollection with error-returning methods.
@@ -89,8 +89,8 @@ func (self ISdoCollection) Add(bstrName foundation.BSTR, ppItem **systemcom.IDis
 }
 
 // Remove wraps the raw Remove call.
-func (self ISdoCollection) Remove(pItem *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(pItem)))
+func (self ISdoCollection) Remove(pItem systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(pItem.Raw)))
 }
 
 // RemoveAll wraps the raw RemoveAll call.
@@ -111,17 +111,17 @@ func (self ISdoCollection) IsNameUnique(bstrName foundation.BSTR) (foundation.VA
 }
 
 // Item wraps the raw Item call.
-func (self ISdoCollection) Item(Name *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+func (self ISdoCollection) Item(Name *systemvariant.VARIANT) (systemcomidiom.IDispatch, error) {
 	var _pItem *systemcom.IDispatch
 	_hr := self.Raw.Item(Name, &_pItem)
-	return _pItem, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_pItem), win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISdoCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self ISdoCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppEnumVARIANT *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppEnumVARIANT)
-	return _ppEnumVARIANT, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppEnumVARIANT), win32.HRESULTError(int32(_hr))
 }
 
 // ISdoDictionaryOld is an idiomatic wrapper over the raw COM interface NetworkManagement.NetworkPolicyServer.ISdoDictionaryOld with error-returning methods.
@@ -157,10 +157,10 @@ func (self ISdoDictionaryOld) EnumAttributeValues(Id networkmanagementnetworkpol
 }
 
 // CreateAttribute wraps the raw CreateAttribute call.
-func (self ISdoDictionaryOld) CreateAttribute(Id networkmanagementnetworkpolicyserver.ATTRIBUTEID) (*systemcom.IDispatch, error) {
+func (self ISdoDictionaryOld) CreateAttribute(Id networkmanagementnetworkpolicyserver.ATTRIBUTEID) (systemcomidiom.IDispatch, error) {
 	var _ppAttributeObject *systemcom.IDispatch
 	_hr := self.Raw.CreateAttribute(Id, &_ppAttributeObject)
-	return _ppAttributeObject, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppAttributeObject), win32.HRESULTError(int32(_hr))
 }
 
 // GetAttributeID wraps the raw GetAttributeID call.
@@ -187,24 +187,24 @@ func (self ISdoMachine) Attach(bstrComputerName foundation.BSTR) error {
 }
 
 // GetDictionarySDO wraps the raw GetDictionarySDO call.
-func (self ISdoMachine) GetDictionarySDO() (*systemcom.IUnknown, error) {
+func (self ISdoMachine) GetDictionarySDO() (systemcomidiom.IUnknown, error) {
 	var _ppDictionarySDO *systemcom.IUnknown
 	_hr := self.Raw.GetDictionarySDO(&_ppDictionarySDO)
-	return _ppDictionarySDO, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppDictionarySDO), win32.HRESULTError(int32(_hr))
 }
 
 // GetServiceSDO wraps the raw GetServiceSDO call.
-func (self ISdoMachine) GetServiceSDO(eDataStore networkmanagementnetworkpolicyserver.IASDATASTORE, bstrServiceName foundation.BSTR) (*systemcom.IUnknown, error) {
+func (self ISdoMachine) GetServiceSDO(eDataStore networkmanagementnetworkpolicyserver.IASDATASTORE, bstrServiceName foundation.BSTR) (systemcomidiom.IUnknown, error) {
 	var _ppServiceSDO *systemcom.IUnknown
 	_hr := self.Raw.GetServiceSDO(eDataStore, bstrServiceName, &_ppServiceSDO)
-	return _ppServiceSDO, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppServiceSDO), win32.HRESULTError(int32(_hr))
 }
 
 // GetUserSDO wraps the raw GetUserSDO call.
-func (self ISdoMachine) GetUserSDO(eDataStore networkmanagementnetworkpolicyserver.IASDATASTORE, bstrUserName foundation.BSTR) (*systemcom.IUnknown, error) {
+func (self ISdoMachine) GetUserSDO(eDataStore networkmanagementnetworkpolicyserver.IASDATASTORE, bstrUserName foundation.BSTR) (systemcomidiom.IUnknown, error) {
 	var _ppUserSDO *systemcom.IUnknown
 	_hr := self.Raw.GetUserSDO(eDataStore, bstrUserName, &_ppUserSDO)
-	return _ppUserSDO, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppUserSDO), win32.HRESULTError(int32(_hr))
 }
 
 // GetOSType wraps the raw GetOSType call.
@@ -236,10 +236,10 @@ func (self ISdoMachine) GetAttachedComputer() (foundation.BSTR, error) {
 }
 
 // GetSDOSchema wraps the raw GetSDOSchema call.
-func (self ISdoMachine) GetSDOSchema() (*systemcom.IUnknown, error) {
+func (self ISdoMachine) GetSDOSchema() (systemcomidiom.IUnknown, error) {
 	var _ppSDOSchema *systemcom.IUnknown
 	_hr := self.Raw.GetSDOSchema(&_ppSDOSchema)
-	return _ppSDOSchema, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppSDOSchema), win32.HRESULTError(int32(_hr))
 }
 
 // ISdoMachine2 is an idiomatic wrapper over the raw COM interface NetworkManagement.NetworkPolicyServer.ISdoMachine2 with error-returning methods.
@@ -254,10 +254,10 @@ func WrapISdoMachine2(raw *networkmanagementnetworkpolicyserver.ISdoMachine2) IS
 }
 
 // GetTemplatesSDO wraps the raw GetTemplatesSDO call.
-func (self ISdoMachine2) GetTemplatesSDO(bstrServiceName foundation.BSTR) (*systemcom.IUnknown, error) {
+func (self ISdoMachine2) GetTemplatesSDO(bstrServiceName foundation.BSTR) (systemcomidiom.IUnknown, error) {
 	var _ppTemplatesSDO *systemcom.IUnknown
 	_hr := self.Raw.GetTemplatesSDO(bstrServiceName, &_ppTemplatesSDO)
-	return _ppTemplatesSDO, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppTemplatesSDO), win32.HRESULTError(int32(_hr))
 }
 
 // EnableTemplates wraps the raw EnableTemplates call.
@@ -271,8 +271,8 @@ func (self ISdoMachine2) SyncConfigAgainstTemplates(bstrServiceName foundation.B
 }
 
 // ImportRemoteTemplates wraps the raw ImportRemoteTemplates call.
-func (self ISdoMachine2) ImportRemoteTemplates(pLocalTemplatesRoot *systemcom.IUnknown, bstrRemoteMachineName foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.ImportRemoteTemplates(pLocalTemplatesRoot, bstrRemoteMachineName)))
+func (self ISdoMachine2) ImportRemoteTemplates(pLocalTemplatesRoot systemcomidiom.IUnknown, bstrRemoteMachineName foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.ImportRemoteTemplates(pLocalTemplatesRoot.Raw, bstrRemoteMachineName)))
 }
 
 // Reload wraps the raw Reload call.
@@ -325,16 +325,16 @@ func WrapITemplateSdo(raw *networkmanagementnetworkpolicyserver.ITemplateSdo) IT
 }
 
 // AddToCollection wraps the raw AddToCollection call.
-func (self ITemplateSdo) AddToCollection(bstrName foundation.BSTR, pCollection *systemcom.IDispatch, ppItem **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.AddToCollection(bstrName, pCollection, ppItem)))
+func (self ITemplateSdo) AddToCollection(bstrName foundation.BSTR, pCollection systemcomidiom.IDispatch, ppItem **systemcom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.AddToCollection(bstrName, pCollection.Raw, ppItem)))
 }
 
 // AddToSdo wraps the raw AddToSdo call.
-func (self ITemplateSdo) AddToSdo(bstrName foundation.BSTR, pSdoTarget *systemcom.IDispatch, ppItem **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.AddToSdo(bstrName, pSdoTarget, ppItem)))
+func (self ITemplateSdo) AddToSdo(bstrName foundation.BSTR, pSdoTarget systemcomidiom.IDispatch, ppItem **systemcom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.AddToSdo(bstrName, pSdoTarget.Raw, ppItem)))
 }
 
 // AddToSdoAsProperty wraps the raw AddToSdoAsProperty call.
-func (self ITemplateSdo) AddToSdoAsProperty(pSdoTarget *systemcom.IDispatch, id int32) error {
-	return win32.HRESULTError(int32(self.Raw.AddToSdoAsProperty(pSdoTarget, id)))
+func (self ITemplateSdo) AddToSdoAsProperty(pSdoTarget systemcomidiom.IDispatch, id int32) error {
+	return win32.HRESULTError(int32(self.Raw.AddToSdoAsProperty(pSdoTarget.Raw, id)))
 }

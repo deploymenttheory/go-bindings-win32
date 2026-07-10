@@ -7,6 +7,39 @@ import (
 	"strings"
 )
 
+// referencesAlias reports whether code uses the import alias as a package
+// qualifier (`alias.`), requiring a word boundary so that e.g. the alias
+// "graphicsimaging" is not falsely matched inside "systemwinrtgraphicsimaging.".
+func referencesAlias(code, alias string) bool {
+	needle := alias + "."
+	for from := 0; ; {
+		index := strings.Index(code[from:], needle)
+		if index < 0 {
+			return false
+		}
+		position := from + index
+		if position == 0 || !isIdentByte(code[position-1]) {
+			return true
+		}
+		from = position + 1
+	}
+}
+
+func isIdentByte(b byte) bool {
+	return b == '_' || (b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z') || (b >= '0' && b <= '9')
+}
+
+// stripComments removes //-comment text so import-usage scans see only code.
+func stripComments(body string) string {
+	lines := strings.Split(body, "\n")
+	for i, line := range lines {
+		if index := strings.Index(line, "//"); index >= 0 {
+			lines[i] = line[:index]
+		}
+	}
+	return strings.Join(lines, "\n")
+}
+
 // writeRawFile writes pre-formatted content, creating parent directories.
 func writeRawFile(path string, content []byte) error {
 	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {

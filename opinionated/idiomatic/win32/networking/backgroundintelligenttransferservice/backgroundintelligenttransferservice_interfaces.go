@@ -25,8 +25,8 @@ func WrapAsyncIBackgroundCopyCallback(raw *networkingbackgroundintelligenttransf
 }
 
 // Begin_JobTransferred wraps the raw Begin_JobTransferred call.
-func (self AsyncIBackgroundCopyCallback) Begin_JobTransferred(pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_JobTransferred(pJob)))
+func (self AsyncIBackgroundCopyCallback) Begin_JobTransferred(pJob IBackgroundCopyJob) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_JobTransferred(pJob.Raw)))
 }
 
 // Finish_JobTransferred wraps the raw Finish_JobTransferred call.
@@ -35,8 +35,8 @@ func (self AsyncIBackgroundCopyCallback) Finish_JobTransferred() error {
 }
 
 // Begin_JobError wraps the raw Begin_JobError call.
-func (self AsyncIBackgroundCopyCallback) Begin_JobError(pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob, pError *networkingbackgroundintelligenttransferservice.IBackgroundCopyError) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_JobError(pJob, pError)))
+func (self AsyncIBackgroundCopyCallback) Begin_JobError(pJob IBackgroundCopyJob, pError IBackgroundCopyError) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_JobError(pJob.Raw, pError.Raw)))
 }
 
 // Finish_JobError wraps the raw Finish_JobError call.
@@ -45,8 +45,8 @@ func (self AsyncIBackgroundCopyCallback) Finish_JobError() error {
 }
 
 // Begin_JobModification wraps the raw Begin_JobModification call.
-func (self AsyncIBackgroundCopyCallback) Begin_JobModification(pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob, dwReserved uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_JobModification(pJob, dwReserved)))
+func (self AsyncIBackgroundCopyCallback) Begin_JobModification(pJob IBackgroundCopyJob, dwReserved uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_JobModification(pJob.Raw, dwReserved)))
 }
 
 // Finish_JobModification wraps the raw Finish_JobModification call.
@@ -83,10 +83,10 @@ func (self IBITSExtensionSetup) GetCleanupTaskName() (foundation.BSTR, error) {
 }
 
 // GetCleanupTask wraps the raw GetCleanupTask call.
-func (self IBITSExtensionSetup) GetCleanupTask(riid *win32.GUID) (*systemcom.IUnknown, error) {
+func (self IBITSExtensionSetup) GetCleanupTask(riid *win32.GUID) (systemcomidiom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	_hr := self.Raw.GetCleanupTask(riid, &_ppUnk)
-	return _ppUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppUnk), win32.HRESULTError(int32(_hr))
 }
 
 // IBITSExtensionSetupFactory is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBITSExtensionSetupFactory with error-returning methods.
@@ -101,10 +101,10 @@ func WrapIBITSExtensionSetupFactory(raw *networkingbackgroundintelligenttransfer
 }
 
 // GetObject wraps the raw GetObject call.
-func (self IBITSExtensionSetupFactory) GetObject(Path foundation.BSTR) (*networkingbackgroundintelligenttransferservice.IBITSExtensionSetup, error) {
+func (self IBITSExtensionSetupFactory) GetObject(Path foundation.BSTR) (IBITSExtensionSetup, error) {
 	var _ppExtensionSetup *networkingbackgroundintelligenttransferservice.IBITSExtensionSetup
 	_hr := self.Raw.GetObject(Path, &_ppExtensionSetup)
-	return _ppExtensionSetup, win32.HRESULTError(int32(_hr))
+	return WrapIBITSExtensionSetup(_ppExtensionSetup), win32.HRESULTError(int32(_hr))
 }
 
 // IBackgroundCopyCallback is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBackgroundCopyCallback with error-returning methods.
@@ -119,18 +119,18 @@ func WrapIBackgroundCopyCallback(raw *networkingbackgroundintelligenttransferser
 }
 
 // JobTransferred wraps the raw JobTransferred call.
-func (self IBackgroundCopyCallback) JobTransferred(pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob) error {
-	return win32.HRESULTError(int32(self.Raw.JobTransferred(pJob)))
+func (self IBackgroundCopyCallback) JobTransferred(pJob IBackgroundCopyJob) error {
+	return win32.HRESULTError(int32(self.Raw.JobTransferred(pJob.Raw)))
 }
 
 // JobError wraps the raw JobError call.
-func (self IBackgroundCopyCallback) JobError(pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob, pError *networkingbackgroundintelligenttransferservice.IBackgroundCopyError) error {
-	return win32.HRESULTError(int32(self.Raw.JobError(pJob, pError)))
+func (self IBackgroundCopyCallback) JobError(pJob IBackgroundCopyJob, pError IBackgroundCopyError) error {
+	return win32.HRESULTError(int32(self.Raw.JobError(pJob.Raw, pError.Raw)))
 }
 
 // JobModification wraps the raw JobModification call.
-func (self IBackgroundCopyCallback) JobModification(pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob, dwReserved uint32) error {
-	return win32.HRESULTError(int32(self.Raw.JobModification(pJob, dwReserved)))
+func (self IBackgroundCopyCallback) JobModification(pJob IBackgroundCopyJob, dwReserved uint32) error {
+	return win32.HRESULTError(int32(self.Raw.JobModification(pJob.Raw, dwReserved)))
 }
 
 // IBackgroundCopyCallback1 is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBackgroundCopyCallback1 with error-returning methods.
@@ -145,18 +145,18 @@ func WrapIBackgroundCopyCallback1(raw *networkingbackgroundintelligenttransferse
 }
 
 // OnStatus wraps the raw OnStatus call.
-func (self IBackgroundCopyCallback1) OnStatus(pGroup *networkingbackgroundintelligenttransferservice.IBackgroundCopyGroup, pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob1, dwFileIndex uint32, dwStatus uint32, dwNumOfRetries uint32, dwWin32Result uint32, dwTransportResult uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnStatus(pGroup, pJob, dwFileIndex, dwStatus, dwNumOfRetries, dwWin32Result, dwTransportResult)))
+func (self IBackgroundCopyCallback1) OnStatus(pGroup IBackgroundCopyGroup, pJob IBackgroundCopyJob1, dwFileIndex uint32, dwStatus uint32, dwNumOfRetries uint32, dwWin32Result uint32, dwTransportResult uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnStatus(pGroup.Raw, pJob.Raw, dwFileIndex, dwStatus, dwNumOfRetries, dwWin32Result, dwTransportResult)))
 }
 
 // OnProgress wraps the raw OnProgress call.
-func (self IBackgroundCopyCallback1) OnProgress(ProgressType uint32, pGroup *networkingbackgroundintelligenttransferservice.IBackgroundCopyGroup, pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnProgress(ProgressType, pGroup, pJob, dwFileIndex, dwProgressValue)))
+func (self IBackgroundCopyCallback1) OnProgress(ProgressType uint32, pGroup IBackgroundCopyGroup, pJob IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnProgress(ProgressType, pGroup.Raw, pJob.Raw, dwFileIndex, dwProgressValue)))
 }
 
 // OnProgressEx wraps the raw OnProgressEx call.
-func (self IBackgroundCopyCallback1) OnProgressEx(ProgressType uint32, pGroup *networkingbackgroundintelligenttransferservice.IBackgroundCopyGroup, pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32, dwByteArraySize uint32, pByte *byte) error {
-	return win32.HRESULTError(int32(self.Raw.OnProgressEx(ProgressType, pGroup, pJob, dwFileIndex, dwProgressValue, dwByteArraySize, pByte)))
+func (self IBackgroundCopyCallback1) OnProgressEx(ProgressType uint32, pGroup IBackgroundCopyGroup, pJob IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32, dwByteArraySize uint32, pByte *byte) error {
+	return win32.HRESULTError(int32(self.Raw.OnProgressEx(ProgressType, pGroup.Raw, pJob.Raw, dwFileIndex, dwProgressValue, dwByteArraySize, pByte)))
 }
 
 // IBackgroundCopyCallback2 is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBackgroundCopyCallback2 with error-returning methods.
@@ -171,8 +171,8 @@ func WrapIBackgroundCopyCallback2(raw *networkingbackgroundintelligenttransferse
 }
 
 // FileTransferred wraps the raw FileTransferred call.
-func (self IBackgroundCopyCallback2) FileTransferred(pJob *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob, pFile *networkingbackgroundintelligenttransferservice.IBackgroundCopyFile) error {
-	return win32.HRESULTError(int32(self.Raw.FileTransferred(pJob, pFile)))
+func (self IBackgroundCopyCallback2) FileTransferred(pJob IBackgroundCopyJob, pFile IBackgroundCopyFile) error {
+	return win32.HRESULTError(int32(self.Raw.FileTransferred(pJob.Raw, pFile.Raw)))
 }
 
 // IBackgroundCopyCallback3 is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBackgroundCopyCallback3 with error-returning methods.
@@ -187,8 +187,8 @@ func WrapIBackgroundCopyCallback3(raw *networkingbackgroundintelligenttransferse
 }
 
 // FileRangesTransferred wraps the raw FileRangesTransferred call.
-func (self IBackgroundCopyCallback3) FileRangesTransferred(job *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob, file *networkingbackgroundintelligenttransferservice.IBackgroundCopyFile, rangeCount uint32, ranges *networkingbackgroundintelligenttransferservice.BG_FILE_RANGE) error {
-	return win32.HRESULTError(int32(self.Raw.FileRangesTransferred(job, file, rangeCount, ranges)))
+func (self IBackgroundCopyCallback3) FileRangesTransferred(job IBackgroundCopyJob, file IBackgroundCopyFile, rangeCount uint32, ranges *networkingbackgroundintelligenttransferservice.BG_FILE_RANGE) error {
+	return win32.HRESULTError(int32(self.Raw.FileRangesTransferred(job.Raw, file.Raw, rangeCount, ranges)))
 }
 
 // IBackgroundCopyError is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBackgroundCopyError with error-returning methods.
@@ -437,8 +437,8 @@ func (self IBackgroundCopyGroup) QueryNewJobInterface(iid *win32.GUID, pUnk **sy
 }
 
 // SetNotificationPointer wraps the raw SetNotificationPointer call.
-func (self IBackgroundCopyGroup) SetNotificationPointer(iid *win32.GUID, pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetNotificationPointer(iid, pUnk)))
+func (self IBackgroundCopyGroup) SetNotificationPointer(iid *win32.GUID, pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetNotificationPointer(iid, pUnk.Raw)))
 }
 
 // IBackgroundCopyJob is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBackgroundCopyJob with error-returning methods.
@@ -567,8 +567,8 @@ func (self IBackgroundCopyJob) GetNotifyFlags(pVal *uint32) error {
 }
 
 // SetNotifyInterface wraps the raw SetNotifyInterface call.
-func (self IBackgroundCopyJob) SetNotifyInterface(Val *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetNotifyInterface(Val)))
+func (self IBackgroundCopyJob) SetNotifyInterface(Val systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetNotifyInterface(Val.Raw)))
 }
 
 // GetNotifyInterface wraps the raw GetNotifyInterface call.
@@ -904,8 +904,8 @@ func WrapIBackgroundCopyJobHttpOptions3(raw *networkingbackgroundintelligenttran
 }
 
 // SetServerCertificateValidationInterface wraps the raw SetServerCertificateValidationInterface call.
-func (self IBackgroundCopyJobHttpOptions3) SetServerCertificateValidationInterface(certValidationCallback *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetServerCertificateValidationInterface(certValidationCallback)))
+func (self IBackgroundCopyJobHttpOptions3) SetServerCertificateValidationInterface(certValidationCallback systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetServerCertificateValidationInterface(certValidationCallback.Raw)))
 }
 
 // MakeCustomHeadersWriteOnly wraps the raw MakeCustomHeadersWriteOnly call.
@@ -973,8 +973,8 @@ func WrapIBackgroundCopyServerCertificateValidationCallback(raw *networkingbackg
 }
 
 // ValidateServerCertificate wraps the raw ValidateServerCertificate call.
-func (self IBackgroundCopyServerCertificateValidationCallback) ValidateServerCertificate(job *networkingbackgroundintelligenttransferservice.IBackgroundCopyJob, file *networkingbackgroundintelligenttransferservice.IBackgroundCopyFile, certLength uint32, certData *byte, certEncodingType uint32, certStoreLength uint32, certStoreData *byte) error {
-	return win32.HRESULTError(int32(self.Raw.ValidateServerCertificate(job, file, certLength, certData, certEncodingType, certStoreLength, certStoreData)))
+func (self IBackgroundCopyServerCertificateValidationCallback) ValidateServerCertificate(job IBackgroundCopyJob, file IBackgroundCopyFile, certLength uint32, certData *byte, certEncodingType uint32, certStoreLength uint32, certStoreData *byte) error {
+	return win32.HRESULTError(int32(self.Raw.ValidateServerCertificate(job.Raw, file.Raw, certLength, certData, certEncodingType, certStoreLength, certStoreData)))
 }
 
 // IBitsPeer is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBitsPeer with error-returning methods.

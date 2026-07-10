@@ -32,9 +32,9 @@ func (self INSNetSourceCreator) Initialize() error {
 }
 
 // CreateNetSource wraps the raw CreateNetSource call.
-func (self INSNetSourceCreator) CreateNetSource(pszStreamName string, pMonitor *systemcom.IUnknown, pData *byte, pUserContext *systemcom.IUnknown, pCallback *systemcom.IUnknown, qwContext uint64) error {
+func (self INSNetSourceCreator) CreateNetSource(pszStreamName string, pMonitor systemcomidiom.IUnknown, pData *byte, pUserContext systemcomidiom.IUnknown, pCallback systemcomidiom.IUnknown, qwContext uint64) error {
 	_pszStreamName := win32.UTF16Ptr(pszStreamName)
-	return win32.HRESULTError(int32(self.Raw.CreateNetSource(foundation.PWSTR(_pszStreamName), pMonitor, pData, pUserContext, pCallback, qwContext)))
+	return win32.HRESULTError(int32(self.Raw.CreateNetSource(foundation.PWSTR(_pszStreamName), pMonitor.Raw, pData, pUserContext.Raw, pCallback.Raw, qwContext)))
 }
 
 // GetNetSourceProperties wraps the raw GetNetSourceProperties call.
@@ -615,8 +615,8 @@ func WrapIWMDRMTranscryptor(raw *mediawindowsmediaformat.IWMDRMTranscryptor) IWM
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWMDRMTranscryptor) Initialize(bstrFileName foundation.BSTR, pbLicenseRequestMsg *byte, cbLicenseRequestMsg uint32, ppLicenseResponseMsg **mediawindowsmediaformat.INSSBuffer, pCallback *mediawindowsmediaformat.IWMStatusCallback, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(bstrFileName, pbLicenseRequestMsg, cbLicenseRequestMsg, ppLicenseResponseMsg, pCallback, pvContext)))
+func (self IWMDRMTranscryptor) Initialize(bstrFileName foundation.BSTR, pbLicenseRequestMsg *byte, cbLicenseRequestMsg uint32, ppLicenseResponseMsg **mediawindowsmediaformat.INSSBuffer, pCallback IWMStatusCallback, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(bstrFileName, pbLicenseRequestMsg, cbLicenseRequestMsg, ppLicenseResponseMsg, pCallback.Raw, pvContext)))
 }
 
 // Seek wraps the raw Seek call.
@@ -965,9 +965,9 @@ func WrapIWMIndexer(raw *mediawindowsmediaformat.IWMIndexer) IWMIndexer {
 }
 
 // StartIndexing wraps the raw StartIndexing call.
-func (self IWMIndexer) StartIndexing(pwszURL string, pCallback *mediawindowsmediaformat.IWMStatusCallback, pvContext unsafe.Pointer) error {
+func (self IWMIndexer) StartIndexing(pwszURL string, pCallback IWMStatusCallback, pvContext unsafe.Pointer) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.StartIndexing(foundation.PWSTR(_pwszURL), pCallback, pvContext)))
+	return win32.HRESULTError(int32(self.Raw.StartIndexing(foundation.PWSTR(_pwszURL), pCallback.Raw, pvContext)))
 }
 
 // Cancel wraps the raw Cancel call.
@@ -1051,8 +1051,8 @@ func WrapIWMLicenseBackup(raw *mediawindowsmediaformat.IWMLicenseBackup) IWMLice
 }
 
 // BackupLicenses wraps the raw BackupLicenses call.
-func (self IWMLicenseBackup) BackupLicenses(dwFlags uint32, pCallback *mediawindowsmediaformat.IWMStatusCallback) error {
-	return win32.HRESULTError(int32(self.Raw.BackupLicenses(dwFlags, pCallback)))
+func (self IWMLicenseBackup) BackupLicenses(dwFlags uint32, pCallback IWMStatusCallback) error {
+	return win32.HRESULTError(int32(self.Raw.BackupLicenses(dwFlags, pCallback.Raw)))
 }
 
 // CancelLicenseBackup wraps the raw CancelLicenseBackup call.
@@ -1072,8 +1072,8 @@ func WrapIWMLicenseRestore(raw *mediawindowsmediaformat.IWMLicenseRestore) IWMLi
 }
 
 // RestoreLicenses wraps the raw RestoreLicenses call.
-func (self IWMLicenseRestore) RestoreLicenses(dwFlags uint32, pCallback *mediawindowsmediaformat.IWMStatusCallback) error {
-	return win32.HRESULTError(int32(self.Raw.RestoreLicenses(dwFlags, pCallback)))
+func (self IWMLicenseRestore) RestoreLicenses(dwFlags uint32, pCallback IWMStatusCallback) error {
+	return win32.HRESULTError(int32(self.Raw.RestoreLicenses(dwFlags, pCallback.Raw)))
 }
 
 // CancelLicenseRestore wraps the raw CancelLicenseRestore call.
@@ -1405,8 +1405,8 @@ func (self IWMProfile) GetStreamByNumber(wStreamNum uint16, ppConfig **mediawind
 }
 
 // RemoveStream wraps the raw RemoveStream call.
-func (self IWMProfile) RemoveStream(pConfig *mediawindowsmediaformat.IWMStreamConfig) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveStream(pConfig)))
+func (self IWMProfile) RemoveStream(pConfig IWMStreamConfig) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveStream(pConfig.Raw)))
 }
 
 // RemoveStreamByNumber wraps the raw RemoveStreamByNumber call.
@@ -1415,13 +1415,13 @@ func (self IWMProfile) RemoveStreamByNumber(wStreamNum uint16) error {
 }
 
 // AddStream wraps the raw AddStream call.
-func (self IWMProfile) AddStream(pConfig *mediawindowsmediaformat.IWMStreamConfig) error {
-	return win32.HRESULTError(int32(self.Raw.AddStream(pConfig)))
+func (self IWMProfile) AddStream(pConfig IWMStreamConfig) error {
+	return win32.HRESULTError(int32(self.Raw.AddStream(pConfig.Raw)))
 }
 
 // ReconfigStream wraps the raw ReconfigStream call.
-func (self IWMProfile) ReconfigStream(pConfig *mediawindowsmediaformat.IWMStreamConfig) error {
-	return win32.HRESULTError(int32(self.Raw.ReconfigStream(pConfig)))
+func (self IWMProfile) ReconfigStream(pConfig IWMStreamConfig) error {
+	return win32.HRESULTError(int32(self.Raw.ReconfigStream(pConfig.Raw)))
 }
 
 // CreateNewStream wraps the raw CreateNewStream call.
@@ -1440,13 +1440,13 @@ func (self IWMProfile) GetMutualExclusion(dwMEIndex uint32, ppME **mediawindowsm
 }
 
 // RemoveMutualExclusion wraps the raw RemoveMutualExclusion call.
-func (self IWMProfile) RemoveMutualExclusion(pME *mediawindowsmediaformat.IWMMutualExclusion) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveMutualExclusion(pME)))
+func (self IWMProfile) RemoveMutualExclusion(pME IWMMutualExclusion) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveMutualExclusion(pME.Raw)))
 }
 
 // AddMutualExclusion wraps the raw AddMutualExclusion call.
-func (self IWMProfile) AddMutualExclusion(pME *mediawindowsmediaformat.IWMMutualExclusion) error {
-	return win32.HRESULTError(int32(self.Raw.AddMutualExclusion(pME)))
+func (self IWMProfile) AddMutualExclusion(pME IWMMutualExclusion) error {
+	return win32.HRESULTError(int32(self.Raw.AddMutualExclusion(pME.Raw)))
 }
 
 // CreateNewMutualExclusion wraps the raw CreateNewMutualExclusion call.
@@ -1502,13 +1502,13 @@ func (self IWMProfile3) GetBandwidthSharing(dwBSIndex uint32, ppBS **mediawindow
 }
 
 // RemoveBandwidthSharing wraps the raw RemoveBandwidthSharing call.
-func (self IWMProfile3) RemoveBandwidthSharing(pBS *mediawindowsmediaformat.IWMBandwidthSharing) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveBandwidthSharing(pBS)))
+func (self IWMProfile3) RemoveBandwidthSharing(pBS IWMBandwidthSharing) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveBandwidthSharing(pBS.Raw)))
 }
 
 // AddBandwidthSharing wraps the raw AddBandwidthSharing call.
-func (self IWMProfile3) AddBandwidthSharing(pBS *mediawindowsmediaformat.IWMBandwidthSharing) error {
-	return win32.HRESULTError(int32(self.Raw.AddBandwidthSharing(pBS)))
+func (self IWMProfile3) AddBandwidthSharing(pBS IWMBandwidthSharing) error {
+	return win32.HRESULTError(int32(self.Raw.AddBandwidthSharing(pBS.Raw)))
 }
 
 // CreateNewBandwidthSharing wraps the raw CreateNewBandwidthSharing call.
@@ -1522,8 +1522,8 @@ func (self IWMProfile3) GetStreamPrioritization(ppSP **mediawindowsmediaformat.I
 }
 
 // SetStreamPrioritization wraps the raw SetStreamPrioritization call.
-func (self IWMProfile3) SetStreamPrioritization(pSP *mediawindowsmediaformat.IWMStreamPrioritization) error {
-	return win32.HRESULTError(int32(self.Raw.SetStreamPrioritization(pSP)))
+func (self IWMProfile3) SetStreamPrioritization(pSP IWMStreamPrioritization) error {
+	return win32.HRESULTError(int32(self.Raw.SetStreamPrioritization(pSP.Raw)))
 }
 
 // RemoveStreamPrioritization wraps the raw RemoveStreamPrioritization call.
@@ -1569,9 +1569,9 @@ func (self IWMProfileManager) LoadProfileByData(pwszProfile string, ppProfile **
 }
 
 // SaveProfile wraps the raw SaveProfile call.
-func (self IWMProfileManager) SaveProfile(pIWMProfile *mediawindowsmediaformat.IWMProfile, pwszProfile string, pdwLength *uint32) error {
+func (self IWMProfileManager) SaveProfile(pIWMProfile IWMProfile, pwszProfile string, pdwLength *uint32) error {
 	_pwszProfile := win32.UTF16Ptr(pwszProfile)
-	return win32.HRESULTError(int32(self.Raw.SaveProfile(pIWMProfile, foundation.PWSTR(_pwszProfile), pdwLength)))
+	return win32.HRESULTError(int32(self.Raw.SaveProfile(pIWMProfile.Raw, foundation.PWSTR(_pwszProfile), pdwLength)))
 }
 
 // GetSystemProfileCount wraps the raw GetSystemProfileCount call.
@@ -1660,8 +1660,8 @@ func (self IWMPropertyVault) GetPropertyByIndex(dwIndex uint32, pszName foundati
 }
 
 // CopyPropertiesFrom wraps the raw CopyPropertiesFrom call.
-func (self IWMPropertyVault) CopyPropertiesFrom(pIWMPropertyVault *mediawindowsmediaformat.IWMPropertyVault) error {
-	return win32.HRESULTError(int32(self.Raw.CopyPropertiesFrom(pIWMPropertyVault)))
+func (self IWMPropertyVault) CopyPropertiesFrom(pIWMPropertyVault IWMPropertyVault) error {
+	return win32.HRESULTError(int32(self.Raw.CopyPropertiesFrom(pIWMPropertyVault.Raw)))
 }
 
 // Clear wraps the raw Clear call.
@@ -1681,8 +1681,8 @@ func WrapIWMProximityDetection(raw *mediawindowsmediaformat.IWMProximityDetectio
 }
 
 // StartDetection wraps the raw StartDetection call.
-func (self IWMProximityDetection) StartDetection(pbRegistrationMsg *byte, cbRegistrationMsg uint32, pbLocalAddress *byte, cbLocalAddress uint32, dwExtraPortsAllowed uint32, ppRegistrationResponseMsg **mediawindowsmediaformat.INSSBuffer, pCallback *mediawindowsmediaformat.IWMStatusCallback, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.StartDetection(pbRegistrationMsg, cbRegistrationMsg, pbLocalAddress, cbLocalAddress, dwExtraPortsAllowed, ppRegistrationResponseMsg, pCallback, pvContext)))
+func (self IWMProximityDetection) StartDetection(pbRegistrationMsg *byte, cbRegistrationMsg uint32, pbLocalAddress *byte, cbLocalAddress uint32, dwExtraPortsAllowed uint32, ppRegistrationResponseMsg **mediawindowsmediaformat.INSSBuffer, pCallback IWMStatusCallback, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.StartDetection(pbRegistrationMsg, cbRegistrationMsg, pbLocalAddress, cbLocalAddress, dwExtraPortsAllowed, ppRegistrationResponseMsg, pCallback.Raw, pvContext)))
 }
 
 // IWMReader is an idiomatic wrapper over the raw COM interface Media.WindowsMediaFormat.IWMReader with error-returning methods.
@@ -1697,9 +1697,9 @@ func WrapIWMReader(raw *mediawindowsmediaformat.IWMReader) IWMReader {
 }
 
 // Open wraps the raw Open call.
-func (self IWMReader) Open(pwszURL string, pCallback *mediawindowsmediaformat.IWMReaderCallback, pvContext unsafe.Pointer) error {
+func (self IWMReader) Open(pwszURL string, pCallback IWMReaderCallback, pvContext unsafe.Pointer) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(self.Raw.Open(foundation.PWSTR(_pwszURL), pCallback, pvContext)))
+	return win32.HRESULTError(int32(self.Raw.Open(foundation.PWSTR(_pwszURL), pCallback.Raw, pvContext)))
 }
 
 // Close wraps the raw Close call.
@@ -1718,8 +1718,8 @@ func (self IWMReader) GetOutputProps(dwOutputNum uint32, ppOutput **mediawindows
 }
 
 // SetOutputProps wraps the raw SetOutputProps call.
-func (self IWMReader) SetOutputProps(dwOutputNum uint32, pOutput *mediawindowsmediaformat.IWMOutputMediaProps) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputProps(dwOutputNum, pOutput)))
+func (self IWMReader) SetOutputProps(dwOutputNum uint32, pOutput IWMOutputMediaProps) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputProps(dwOutputNum, pOutput.Raw)))
 }
 
 // GetOutputFormatCount wraps the raw GetOutputFormatCount call.
@@ -1961,8 +1961,8 @@ func (self IWMReaderAdvanced2) StopBuffering() error {
 }
 
 // OpenStream wraps the raw OpenStream call.
-func (self IWMReaderAdvanced2) OpenStream(pStream *systemcom.IStream, pCallback *mediawindowsmediaformat.IWMReaderCallback, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.OpenStream(pStream, pCallback, pvContext)))
+func (self IWMReaderAdvanced2) OpenStream(pStream systemcomidiom.IStream, pCallback IWMReaderCallback, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.OpenStream(pStream.Raw, pCallback.Raw, pvContext)))
 }
 
 // IWMReaderAdvanced3 is an idiomatic wrapper over the raw COM interface Media.WindowsMediaFormat.IWMReaderAdvanced3 with error-returning methods.
@@ -2052,8 +2052,8 @@ func WrapIWMReaderAdvanced5(raw *mediawindowsmediaformat.IWMReaderAdvanced5) IWM
 }
 
 // SetPlayerHook wraps the raw SetPlayerHook call.
-func (self IWMReaderAdvanced5) SetPlayerHook(dwOutputNum uint32, pHook *mediawindowsmediaformat.IWMPlayerHook) error {
-	return win32.HRESULTError(int32(self.Raw.SetPlayerHook(dwOutputNum, pHook)))
+func (self IWMReaderAdvanced5) SetPlayerHook(dwOutputNum uint32, pHook IWMPlayerHook) error {
+	return win32.HRESULTError(int32(self.Raw.SetPlayerHook(dwOutputNum, pHook.Raw)))
 }
 
 // IWMReaderAdvanced6 is an idiomatic wrapper over the raw COM interface Media.WindowsMediaFormat.IWMReaderAdvanced6 with error-returning methods.
@@ -2105,8 +2105,8 @@ func WrapIWMReaderCallback(raw *mediawindowsmediaformat.IWMReaderCallback) IWMRe
 }
 
 // OnSample wraps the raw OnSample call.
-func (self IWMReaderCallback) OnSample(dwOutputNum uint32, cnsSampleTime uint64, cnsSampleDuration uint64, dwFlags uint32, pSample *mediawindowsmediaformat.INSSBuffer, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.OnSample(dwOutputNum, cnsSampleTime, cnsSampleDuration, dwFlags, pSample, pvContext)))
+func (self IWMReaderCallback) OnSample(dwOutputNum uint32, cnsSampleTime uint64, cnsSampleDuration uint64, dwFlags uint32, pSample INSSBuffer, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.OnSample(dwOutputNum, cnsSampleTime, cnsSampleDuration, dwFlags, pSample.Raw, pvContext)))
 }
 
 // IWMReaderCallbackAdvanced is an idiomatic wrapper over the raw COM interface Media.WindowsMediaFormat.IWMReaderCallbackAdvanced with error-returning methods.
@@ -2121,8 +2121,8 @@ func WrapIWMReaderCallbackAdvanced(raw *mediawindowsmediaformat.IWMReaderCallbac
 }
 
 // OnStreamSample wraps the raw OnStreamSample call.
-func (self IWMReaderCallbackAdvanced) OnStreamSample(wStreamNum uint16, cnsSampleTime uint64, cnsSampleDuration uint64, dwFlags uint32, pSample *mediawindowsmediaformat.INSSBuffer, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.OnStreamSample(wStreamNum, cnsSampleTime, cnsSampleDuration, dwFlags, pSample, pvContext)))
+func (self IWMReaderCallbackAdvanced) OnStreamSample(wStreamNum uint16, cnsSampleTime uint64, cnsSampleDuration uint64, dwFlags uint32, pSample INSSBuffer, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.OnStreamSample(wStreamNum, cnsSampleTime, cnsSampleDuration, dwFlags, pSample.Raw, pvContext)))
 }
 
 // OnTime wraps the raw OnTime call.
@@ -2437,8 +2437,8 @@ func WrapIWMReaderPlaylistBurn(raw *mediawindowsmediaformat.IWMReaderPlaylistBur
 }
 
 // InitPlaylistBurn wraps the raw InitPlaylistBurn call.
-func (self IWMReaderPlaylistBurn) InitPlaylistBurn(cFiles uint32, ppwszFilenames *foundation.PWSTR, pCallback *mediawindowsmediaformat.IWMStatusCallback, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.InitPlaylistBurn(cFiles, ppwszFilenames, pCallback, pvContext)))
+func (self IWMReaderPlaylistBurn) InitPlaylistBurn(cFiles uint32, ppwszFilenames *foundation.PWSTR, pCallback IWMStatusCallback, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.InitPlaylistBurn(cFiles, ppwszFilenames, pCallback.Raw, pvContext)))
 }
 
 // GetInitResults wraps the raw GetInitResults call.
@@ -2515,8 +2515,8 @@ func WrapIWMReaderTypeNegotiation(raw *mediawindowsmediaformat.IWMReaderTypeNego
 }
 
 // TryOutputProps wraps the raw TryOutputProps call.
-func (self IWMReaderTypeNegotiation) TryOutputProps(dwOutputNum uint32, pOutput *mediawindowsmediaformat.IWMOutputMediaProps) error {
-	return win32.HRESULTError(int32(self.Raw.TryOutputProps(dwOutputNum, pOutput)))
+func (self IWMReaderTypeNegotiation) TryOutputProps(dwOutputNum uint32, pOutput IWMOutputMediaProps) error {
+	return win32.HRESULTError(int32(self.Raw.TryOutputProps(dwOutputNum, pOutput.Raw)))
 }
 
 // IWMRegisterCallback is an idiomatic wrapper over the raw COM interface Media.WindowsMediaFormat.IWMRegisterCallback with error-returning methods.
@@ -2531,13 +2531,13 @@ func WrapIWMRegisterCallback(raw *mediawindowsmediaformat.IWMRegisterCallback) I
 }
 
 // Advise wraps the raw Advise call.
-func (self IWMRegisterCallback) Advise(pCallback *mediawindowsmediaformat.IWMStatusCallback, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pCallback, pvContext)))
+func (self IWMRegisterCallback) Advise(pCallback IWMStatusCallback, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pCallback.Raw, pvContext)))
 }
 
 // Unadvise wraps the raw Unadvise call.
-func (self IWMRegisterCallback) Unadvise(pCallback *mediawindowsmediaformat.IWMStatusCallback, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.Unadvise(pCallback, pvContext)))
+func (self IWMRegisterCallback) Unadvise(pCallback IWMStatusCallback, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.Unadvise(pCallback.Raw, pvContext)))
 }
 
 // IWMRegisteredDevice is an idiomatic wrapper over the raw COM interface Media.WindowsMediaFormat.IWMRegisteredDevice with error-returning methods.
@@ -2655,9 +2655,9 @@ func WrapIWMSInternalAdminNetSource(raw *mediawindowsmediaformat.IWMSInternalAdm
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWMSInternalAdminNetSource) Initialize(pSharedNamespace *systemcom.IUnknown, pNamespaceNode *systemcom.IUnknown, pNetSourceCreator *mediawindowsmediaformat.INSNetSourceCreator, fEmbeddedInServer bool) error {
+func (self IWMSInternalAdminNetSource) Initialize(pSharedNamespace systemcomidiom.IUnknown, pNamespaceNode systemcomidiom.IUnknown, pNetSourceCreator INSNetSourceCreator, fEmbeddedInServer bool) error {
 	_fEmbeddedInServer := foundation.BOOL(win32.Bool32(fEmbeddedInServer))
-	return win32.HRESULTError(int32(self.Raw.Initialize(pSharedNamespace, pNamespaceNode, pNetSourceCreator, _fEmbeddedInServer)))
+	return win32.HRESULTError(int32(self.Raw.Initialize(pSharedNamespace.Raw, pNamespaceNode.Raw, pNetSourceCreator.Raw, _fEmbeddedInServer)))
 }
 
 // GetNetSourceCreator wraps the raw GetNetSourceCreator call.
@@ -2812,8 +2812,8 @@ func WrapIWMSecureChannel(raw *mediawindowsmediaformat.IWMSecureChannel) IWMSecu
 }
 
 // WMSC_AddCertificate wraps the raw WMSC_AddCertificate call.
-func (self IWMSecureChannel) WMSC_AddCertificate(pCert *mediawindowsmediaformat.IWMAuthorizer) error {
-	return win32.HRESULTError(int32(self.Raw.WMSC_AddCertificate(pCert)))
+func (self IWMSecureChannel) WMSC_AddCertificate(pCert IWMAuthorizer) error {
+	return win32.HRESULTError(int32(self.Raw.WMSC_AddCertificate(pCert.Raw)))
 }
 
 // WMSC_AddSignature wraps the raw WMSC_AddSignature call.
@@ -2822,8 +2822,8 @@ func (self IWMSecureChannel) WMSC_AddSignature(pbCertSig *byte, cbCertSig uint32
 }
 
 // WMSC_Connect wraps the raw WMSC_Connect call.
-func (self IWMSecureChannel) WMSC_Connect(pOtherSide *mediawindowsmediaformat.IWMSecureChannel) error {
-	return win32.HRESULTError(int32(self.Raw.WMSC_Connect(pOtherSide)))
+func (self IWMSecureChannel) WMSC_Connect(pOtherSide IWMSecureChannel) error {
+	return win32.HRESULTError(int32(self.Raw.WMSC_Connect(pOtherSide.Raw)))
 }
 
 // WMSC_IsConnected wraps the raw WMSC_IsConnected call.
@@ -3136,8 +3136,8 @@ func (self IWMSyncReader) GetOutputProps(dwOutputNum uint32, ppOutput **mediawin
 }
 
 // SetOutputProps wraps the raw SetOutputProps call.
-func (self IWMSyncReader) SetOutputProps(dwOutputNum uint32, pOutput *mediawindowsmediaformat.IWMOutputMediaProps) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputProps(dwOutputNum, pOutput)))
+func (self IWMSyncReader) SetOutputProps(dwOutputNum uint32, pOutput IWMOutputMediaProps) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputProps(dwOutputNum, pOutput.Raw)))
 }
 
 // GetOutputFormatCount wraps the raw GetOutputFormatCount call.
@@ -3171,8 +3171,8 @@ func (self IWMSyncReader) GetMaxStreamSampleSize(wStream uint16, pcbMax *uint32)
 }
 
 // OpenStream wraps the raw OpenStream call.
-func (self IWMSyncReader) OpenStream(pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.OpenStream(pStream)))
+func (self IWMSyncReader) OpenStream(pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.OpenStream(pStream.Raw)))
 }
 
 // IWMSyncReader2 is an idiomatic wrapper over the raw COM interface Media.WindowsMediaFormat.IWMSyncReader2 with error-returning methods.
@@ -3197,8 +3197,8 @@ func (self IWMSyncReader2) SetRangeByFrameEx(wStreamNum uint16, qwFrameNumber ui
 }
 
 // SetAllocateForOutput wraps the raw SetAllocateForOutput call.
-func (self IWMSyncReader2) SetAllocateForOutput(dwOutputNum uint32, pAllocator *mediawindowsmediaformat.IWMReaderAllocatorEx) error {
-	return win32.HRESULTError(int32(self.Raw.SetAllocateForOutput(dwOutputNum, pAllocator)))
+func (self IWMSyncReader2) SetAllocateForOutput(dwOutputNum uint32, pAllocator IWMReaderAllocatorEx) error {
+	return win32.HRESULTError(int32(self.Raw.SetAllocateForOutput(dwOutputNum, pAllocator.Raw)))
 }
 
 // GetAllocateForOutput wraps the raw GetAllocateForOutput call.
@@ -3207,8 +3207,8 @@ func (self IWMSyncReader2) GetAllocateForOutput(dwOutputNum uint32, ppAllocator 
 }
 
 // SetAllocateForStream wraps the raw SetAllocateForStream call.
-func (self IWMSyncReader2) SetAllocateForStream(wStreamNum uint16, pAllocator *mediawindowsmediaformat.IWMReaderAllocatorEx) error {
-	return win32.HRESULTError(int32(self.Raw.SetAllocateForStream(wStreamNum, pAllocator)))
+func (self IWMSyncReader2) SetAllocateForStream(wStreamNum uint16, pAllocator IWMReaderAllocatorEx) error {
+	return win32.HRESULTError(int32(self.Raw.SetAllocateForStream(wStreamNum, pAllocator.Raw)))
 }
 
 // GetAllocateForStream wraps the raw GetAllocateForStream call.
@@ -3285,8 +3285,8 @@ func (self IWMWriter) SetProfileByID(guidProfile *win32.GUID) error {
 }
 
 // SetProfile wraps the raw SetProfile call.
-func (self IWMWriter) SetProfile(pProfile *mediawindowsmediaformat.IWMProfile) error {
-	return win32.HRESULTError(int32(self.Raw.SetProfile(pProfile)))
+func (self IWMWriter) SetProfile(pProfile IWMProfile) error {
+	return win32.HRESULTError(int32(self.Raw.SetProfile(pProfile.Raw)))
 }
 
 // SetOutputFilename wraps the raw SetOutputFilename call.
@@ -3306,8 +3306,8 @@ func (self IWMWriter) GetInputProps(dwInputNum uint32, ppInput **mediawindowsmed
 }
 
 // SetInputProps wraps the raw SetInputProps call.
-func (self IWMWriter) SetInputProps(dwInputNum uint32, pInput *mediawindowsmediaformat.IWMInputMediaProps) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputProps(dwInputNum, pInput)))
+func (self IWMWriter) SetInputProps(dwInputNum uint32, pInput IWMInputMediaProps) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputProps(dwInputNum, pInput.Raw)))
 }
 
 // GetInputFormatCount wraps the raw GetInputFormatCount call.
@@ -3336,8 +3336,8 @@ func (self IWMWriter) AllocateSample(dwSampleSize uint32, ppSample **mediawindow
 }
 
 // WriteSample wraps the raw WriteSample call.
-func (self IWMWriter) WriteSample(dwInputNum uint32, cnsSampleTime uint64, dwFlags uint32, pSample *mediawindowsmediaformat.INSSBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.WriteSample(dwInputNum, cnsSampleTime, dwFlags, pSample)))
+func (self IWMWriter) WriteSample(dwInputNum uint32, cnsSampleTime uint64, dwFlags uint32, pSample INSSBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.WriteSample(dwInputNum, cnsSampleTime, dwFlags, pSample.Raw)))
 }
 
 // Flush wraps the raw Flush call.
@@ -3367,18 +3367,18 @@ func (self IWMWriterAdvanced) GetSink(dwSinkNum uint32, ppSink **mediawindowsmed
 }
 
 // AddSink wraps the raw AddSink call.
-func (self IWMWriterAdvanced) AddSink(pSink *mediawindowsmediaformat.IWMWriterSink) error {
-	return win32.HRESULTError(int32(self.Raw.AddSink(pSink)))
+func (self IWMWriterAdvanced) AddSink(pSink IWMWriterSink) error {
+	return win32.HRESULTError(int32(self.Raw.AddSink(pSink.Raw)))
 }
 
 // RemoveSink wraps the raw RemoveSink call.
-func (self IWMWriterAdvanced) RemoveSink(pSink *mediawindowsmediaformat.IWMWriterSink) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveSink(pSink)))
+func (self IWMWriterAdvanced) RemoveSink(pSink IWMWriterSink) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveSink(pSink.Raw)))
 }
 
 // WriteStreamSample wraps the raw WriteStreamSample call.
-func (self IWMWriterAdvanced) WriteStreamSample(wStreamNum uint16, cnsSampleTime uint64, msSampleSendTime uint32, cnsSampleDuration uint64, dwFlags uint32, pSample *mediawindowsmediaformat.INSSBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.WriteStreamSample(wStreamNum, cnsSampleTime, msSampleSendTime, cnsSampleDuration, dwFlags, pSample)))
+func (self IWMWriterAdvanced) WriteStreamSample(wStreamNum uint16, cnsSampleTime uint64, msSampleSendTime uint32, cnsSampleDuration uint64, dwFlags uint32, pSample INSSBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.WriteStreamSample(wStreamNum, cnsSampleTime, msSampleSendTime, cnsSampleDuration, dwFlags, pSample.Raw)))
 }
 
 // SetLiveSource wraps the raw SetLiveSource call.
@@ -3637,8 +3637,8 @@ func WrapIWMWriterPostView(raw *mediawindowsmediaformat.IWMWriterPostView) IWMWr
 }
 
 // SetPostViewCallback wraps the raw SetPostViewCallback call.
-func (self IWMWriterPostView) SetPostViewCallback(pCallback *mediawindowsmediaformat.IWMWriterPostViewCallback, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.SetPostViewCallback(pCallback, pvContext)))
+func (self IWMWriterPostView) SetPostViewCallback(pCallback IWMWriterPostViewCallback, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.SetPostViewCallback(pCallback.Raw, pvContext)))
 }
 
 // SetReceivePostViewSamples wraps the raw SetReceivePostViewSamples call.
@@ -3658,8 +3658,8 @@ func (self IWMWriterPostView) GetPostViewProps(wStreamNumber uint16, ppOutput **
 }
 
 // SetPostViewProps wraps the raw SetPostViewProps call.
-func (self IWMWriterPostView) SetPostViewProps(wStreamNumber uint16, pOutput *mediawindowsmediaformat.IWMMediaProps) error {
-	return win32.HRESULTError(int32(self.Raw.SetPostViewProps(wStreamNumber, pOutput)))
+func (self IWMWriterPostView) SetPostViewProps(wStreamNumber uint16, pOutput IWMMediaProps) error {
+	return win32.HRESULTError(int32(self.Raw.SetPostViewProps(wStreamNumber, pOutput.Raw)))
 }
 
 // GetPostViewFormatCount wraps the raw GetPostViewFormatCount call.
@@ -3695,8 +3695,8 @@ func WrapIWMWriterPostViewCallback(raw *mediawindowsmediaformat.IWMWriterPostVie
 }
 
 // OnPostViewSample wraps the raw OnPostViewSample call.
-func (self IWMWriterPostViewCallback) OnPostViewSample(wStreamNumber uint16, cnsSampleTime uint64, cnsSampleDuration uint64, dwFlags uint32, pSample *mediawindowsmediaformat.INSSBuffer, pvContext unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.OnPostViewSample(wStreamNumber, cnsSampleTime, cnsSampleDuration, dwFlags, pSample, pvContext)))
+func (self IWMWriterPostViewCallback) OnPostViewSample(wStreamNumber uint16, cnsSampleTime uint64, cnsSampleDuration uint64, dwFlags uint32, pSample INSSBuffer, pvContext unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.OnPostViewSample(wStreamNumber, cnsSampleTime, cnsSampleDuration, dwFlags, pSample.Raw, pvContext)))
 }
 
 // AllocateForPostView wraps the raw AllocateForPostView call.
@@ -3731,8 +3731,8 @@ func (self IWMWriterPreprocess) BeginPreprocessingPass(dwInputNum uint32, dwFlag
 }
 
 // PreprocessSample wraps the raw PreprocessSample call.
-func (self IWMWriterPreprocess) PreprocessSample(dwInputNum uint32, cnsSampleTime uint64, dwFlags uint32, pSample *mediawindowsmediaformat.INSSBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.PreprocessSample(dwInputNum, cnsSampleTime, dwFlags, pSample)))
+func (self IWMWriterPreprocess) PreprocessSample(dwInputNum uint32, cnsSampleTime uint64, dwFlags uint32, pSample INSSBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.PreprocessSample(dwInputNum, cnsSampleTime, dwFlags, pSample.Raw)))
 }
 
 // EndPreprocessingPass wraps the raw EndPreprocessingPass call.
@@ -3781,8 +3781,8 @@ func WrapIWMWriterSink(raw *mediawindowsmediaformat.IWMWriterSink) IWMWriterSink
 }
 
 // OnHeader wraps the raw OnHeader call.
-func (self IWMWriterSink) OnHeader(pHeader *mediawindowsmediaformat.INSSBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.OnHeader(pHeader)))
+func (self IWMWriterSink) OnHeader(pHeader INSSBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.OnHeader(pHeader.Raw)))
 }
 
 // IsRealTime wraps the raw IsRealTime call.
@@ -3796,8 +3796,8 @@ func (self IWMWriterSink) AllocateDataUnit(cbDataUnit uint32, ppDataUnit **media
 }
 
 // OnDataUnit wraps the raw OnDataUnit call.
-func (self IWMWriterSink) OnDataUnit(pDataUnit *mediawindowsmediaformat.INSSBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.OnDataUnit(pDataUnit)))
+func (self IWMWriterSink) OnDataUnit(pDataUnit INSSBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.OnDataUnit(pDataUnit.Raw)))
 }
 
 // OnEndWriting wraps the raw OnEndWriting call.

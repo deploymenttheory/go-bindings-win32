@@ -10,8 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	aimachinelearningdirectml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ai/machinelearning/directml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -63,8 +62,8 @@ func WrapIDMLCommandRecorder(raw *aimachinelearningdirectml.IDMLCommandRecorder)
 }
 
 // RecordDispatch wraps the raw RecordDispatch call.
-func (self IDMLCommandRecorder) RecordDispatch(commandList *graphicsdirect3d12.ID3D12CommandList, dispatchable *aimachinelearningdirectml.IDMLDispatchable, bindings *aimachinelearningdirectml.IDMLBindingTable) {
-	self.Raw.RecordDispatch(commandList, dispatchable, bindings)
+func (self IDMLCommandRecorder) RecordDispatch(commandList graphicsdirect3d12idiom.ID3D12CommandList, dispatchable IDMLDispatchable, bindings IDMLBindingTable) {
+	self.Raw.RecordDispatch(commandList.Raw, dispatchable.Raw, bindings.Raw)
 }
 
 // IDMLCompiledOperator is an idiomatic wrapper over the raw COM interface AI.MachineLearning.DirectML.IDMLCompiledOperator with error-returning methods.
@@ -117,8 +116,8 @@ func (self IDMLDevice) CreateOperator(desc *aimachinelearningdirectml.DML_OPERAT
 }
 
 // CompileOperator wraps the raw CompileOperator call.
-func (self IDMLDevice) CompileOperator(op *aimachinelearningdirectml.IDMLOperator, flags aimachinelearningdirectml.DML_EXECUTION_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CompileOperator(op, flags, riid, ppv)))
+func (self IDMLDevice) CompileOperator(op IDMLOperator, flags aimachinelearningdirectml.DML_EXECUTION_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CompileOperator(op.Raw, flags, riid, ppv)))
 }
 
 // CreateOperatorInitializer wraps the raw CreateOperatorInitializer call.
@@ -221,8 +220,8 @@ func (self IDMLObject) SetPrivateData(guid *win32.GUID, dataSize uint32, data un
 }
 
 // SetPrivateDataInterface wraps the raw SetPrivateDataInterface call.
-func (self IDMLObject) SetPrivateDataInterface(guid *win32.GUID, data *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, data)))
+func (self IDMLObject) SetPrivateDataInterface(guid *win32.GUID, data systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, data.Raw)))
 }
 
 // SetName wraps the raw SetName call.

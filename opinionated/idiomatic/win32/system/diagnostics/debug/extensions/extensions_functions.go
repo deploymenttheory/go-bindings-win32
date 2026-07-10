@@ -13,8 +13,8 @@ import (
 )
 
 // CreateDataModelManager wraps the raw CreateDataModelManager call with idiomatic Go types.
-func CreateDataModelManager(debugHost *systemdiagnosticsdebugextensions.IDebugHost, manager **systemdiagnosticsdebugextensions.IDataModelManager) error {
-	return win32.HRESULTError(int32(systemdiagnosticsdebugextensions.CreateDataModelManager(debugHost, manager)))
+func CreateDataModelManager(debugHost IDebugHost, manager **systemdiagnosticsdebugextensions.IDataModelManager) error {
+	return win32.HRESULTError(int32(systemdiagnosticsdebugextensions.CreateDataModelManager(debugHost.Raw, manager)))
 }
 
 // DebugConnect wraps the raw DebugConnect call with idiomatic Go types.

@@ -38,8 +38,8 @@ func (self IAlternativeName) InitializeFromRawData(Type securitycryptographycert
 }
 
 // InitializeFromOtherName wraps the raw InitializeFromOtherName call.
-func (self IAlternativeName) InitializeFromOtherName(pObjectId *securitycryptographycertificates.IObjectId, Encoding securitycryptographycertificates.EncodingType, strRawData foundation.BSTR, ToBeWrapped foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromOtherName(pObjectId, Encoding, strRawData, ToBeWrapped)))
+func (self IAlternativeName) InitializeFromOtherName(pObjectId IObjectId, Encoding securitycryptographycertificates.EncodingType, strRawData foundation.BSTR, ToBeWrapped foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromOtherName(pObjectId.Raw, Encoding, strRawData, ToBeWrapped)))
 }
 
 // Get_Type wraps the raw Get_Type call.
@@ -89,8 +89,8 @@ func (self IAlternativeNames) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self IAlternativeNames) Add(pVal *securitycryptographycertificates.IAlternativeName) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IAlternativeNames) Add(pVal IAlternativeName) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -1344,10 +1344,10 @@ func WrapICertExit2(raw *securitycryptographycertificates.ICertExit2) ICertExit2
 }
 
 // GetManageModule wraps the raw GetManageModule call.
-func (self ICertExit2) GetManageModule() (*securitycryptographycertificates.ICertManageModule, error) {
+func (self ICertExit2) GetManageModule() (ICertManageModule, error) {
 	var _ppManageModule *securitycryptographycertificates.ICertManageModule
 	_hr := self.Raw.GetManageModule(&_ppManageModule)
-	return _ppManageModule, win32.HRESULTError(int32(_hr))
+	return WrapICertManageModule(_ppManageModule), win32.HRESULTError(int32(_hr))
 }
 
 // ICertGetConfig is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICertGetConfig with error-returning methods.
@@ -1441,10 +1441,10 @@ func WrapICertPolicy2(raw *securitycryptographycertificates.ICertPolicy2) ICertP
 }
 
 // GetManageModule wraps the raw GetManageModule call.
-func (self ICertPolicy2) GetManageModule() (*securitycryptographycertificates.ICertManageModule, error) {
+func (self ICertPolicy2) GetManageModule() (ICertManageModule, error) {
 	var _ppManageModule *securitycryptographycertificates.ICertManageModule
 	_hr := self.Raw.GetManageModule(&_ppManageModule)
-	return _ppManageModule, win32.HRESULTError(int32(_hr))
+	return WrapICertManageModule(_ppManageModule), win32.HRESULTError(int32(_hr))
 }
 
 // ICertProperties is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICertProperties with error-returning methods.
@@ -1474,8 +1474,8 @@ func (self ICertProperties) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self ICertProperties) Add(pVal *securitycryptographycertificates.ICertProperty) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ICertProperties) Add(pVal ICertProperty) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -1774,8 +1774,8 @@ func WrapICertPropertyKeyProvInfo(raw *securitycryptographycertificates.ICertPro
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ICertPropertyKeyProvInfo) Initialize(pValue *securitycryptographycertificates.IX509PrivateKey) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pValue)))
+func (self ICertPropertyKeyProvInfo) Initialize(pValue IX509PrivateKey) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pValue.Raw)))
 }
 
 // Get_PrivateKey wraps the raw Get_PrivateKey call.
@@ -2334,8 +2334,8 @@ func (self ICertificatePolicies) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self ICertificatePolicies) Add(pVal *securitycryptographycertificates.ICertificatePolicy) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ICertificatePolicies) Add(pVal ICertificatePolicy) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -2360,8 +2360,8 @@ func WrapICertificatePolicy(raw *securitycryptographycertificates.ICertificatePo
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ICertificatePolicy) Initialize(pValue *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pValue)))
+func (self ICertificatePolicy) Initialize(pValue IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pValue.Raw)))
 }
 
 // Get_ObjectId wraps the raw Get_ObjectId call.
@@ -2401,8 +2401,8 @@ func (self ICertificationAuthorities) Get__NewEnum(pVal **systemcom.IUnknown) er
 }
 
 // Add wraps the raw Add call.
-func (self ICertificationAuthorities) Add(pVal *securitycryptographycertificates.ICertificationAuthority) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ICertificationAuthorities) Add(pVal ICertificationAuthority) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -2453,13 +2453,13 @@ func WrapICryptAttribute(raw *securitycryptographycertificates.ICryptAttribute) 
 }
 
 // InitializeFromObjectId wraps the raw InitializeFromObjectId call.
-func (self ICryptAttribute) InitializeFromObjectId(pObjectId *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromObjectId(pObjectId)))
+func (self ICryptAttribute) InitializeFromObjectId(pObjectId IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromObjectId(pObjectId.Raw)))
 }
 
 // InitializeFromValues wraps the raw InitializeFromValues call.
-func (self ICryptAttribute) InitializeFromValues(pAttributes *securitycryptographycertificates.IX509Attributes) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromValues(pAttributes)))
+func (self ICryptAttribute) InitializeFromValues(pAttributes IX509Attributes) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromValues(pAttributes.Raw)))
 }
 
 // Get_ObjectId wraps the raw Get_ObjectId call.
@@ -2499,8 +2499,8 @@ func (self ICryptAttributes) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self ICryptAttributes) Add(pVal *securitycryptographycertificates.ICryptAttribute) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ICryptAttributes) Add(pVal ICryptAttribute) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -2514,13 +2514,13 @@ func (self ICryptAttributes) Clear() error {
 }
 
 // Get_IndexByObjectId wraps the raw Get_IndexByObjectId call.
-func (self ICryptAttributes) Get_IndexByObjectId(pObjectId *securitycryptographycertificates.IObjectId, pIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IndexByObjectId(pObjectId, pIndex)))
+func (self ICryptAttributes) Get_IndexByObjectId(pObjectId IObjectId, pIndex *int32) error {
+	return win32.HRESULTError(int32(self.Raw.Get_IndexByObjectId(pObjectId.Raw, pIndex)))
 }
 
 // AddRange wraps the raw AddRange call.
-func (self ICryptAttributes) AddRange(pValue *securitycryptographycertificates.ICryptAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(pValue)))
+func (self ICryptAttributes) AddRange(pValue ICryptAttributes) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(pValue.Raw)))
 }
 
 // ICspAlgorithm is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICspAlgorithm with error-returning methods.
@@ -2611,8 +2611,8 @@ func (self ICspAlgorithms) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self ICspAlgorithms) Add(pVal *securitycryptographycertificates.ICspAlgorithm) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ICspAlgorithms) Add(pVal ICspAlgorithm) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -2631,8 +2631,8 @@ func (self ICspAlgorithms) Get_ItemByName(strName foundation.BSTR, ppValue **sec
 }
 
 // Get_IndexByObjectId wraps the raw Get_IndexByObjectId call.
-func (self ICspAlgorithms) Get_IndexByObjectId(pObjectId *securitycryptographycertificates.IObjectId, pIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IndexByObjectId(pObjectId, pIndex)))
+func (self ICspAlgorithms) Get_IndexByObjectId(pObjectId IObjectId, pIndex *int32) error {
+	return win32.HRESULTError(int32(self.Raw.Get_IndexByObjectId(pObjectId.Raw, pIndex)))
 }
 
 // ICspInformation is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICspInformation with error-returning methods.
@@ -2652,8 +2652,8 @@ func (self ICspInformation) InitializeFromName(strName foundation.BSTR) error {
 }
 
 // InitializeFromType wraps the raw InitializeFromType call.
-func (self ICspInformation) InitializeFromType(Type securitycryptographycertificates.X509ProviderType, pAlgorithm *securitycryptographycertificates.IObjectId, MachineContext foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromType(Type, pAlgorithm, MachineContext)))
+func (self ICspInformation) InitializeFromType(Type securitycryptographycertificates.X509ProviderType, pAlgorithm IObjectId, MachineContext foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromType(Type, pAlgorithm.Raw, MachineContext)))
 }
 
 // Get_CspAlgorithms wraps the raw Get_CspAlgorithms call.
@@ -2727,8 +2727,8 @@ func (self ICspInformation) Get_LegacyCsp(pValue *foundation.VARIANT_BOOL) error
 }
 
 // GetCspStatusFromOperations wraps the raw GetCspStatusFromOperations call.
-func (self ICspInformation) GetCspStatusFromOperations(pAlgorithm *securitycryptographycertificates.IObjectId, Operations securitycryptographycertificates.AlgorithmOperationFlags, ppValue **securitycryptographycertificates.ICspStatus) error {
-	return win32.HRESULTError(int32(self.Raw.GetCspStatusFromOperations(pAlgorithm, Operations, ppValue)))
+func (self ICspInformation) GetCspStatusFromOperations(pAlgorithm IObjectId, Operations securitycryptographycertificates.AlgorithmOperationFlags, ppValue **securitycryptographycertificates.ICspStatus) error {
+	return win32.HRESULTError(int32(self.Raw.GetCspStatusFromOperations(pAlgorithm.Raw, Operations, ppValue)))
 }
 
 // ICspInformations is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICspInformations with error-returning methods.
@@ -2758,8 +2758,8 @@ func (self ICspInformations) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self ICspInformations) Add(pVal *securitycryptographycertificates.ICspInformation) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ICspInformations) Add(pVal ICspInformation) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -2788,18 +2788,18 @@ func (self ICspInformations) GetCspStatusFromProviderName(strProviderName founda
 }
 
 // GetCspStatusesFromOperations wraps the raw GetCspStatusesFromOperations call.
-func (self ICspInformations) GetCspStatusesFromOperations(Operations securitycryptographycertificates.AlgorithmOperationFlags, pCspInformation *securitycryptographycertificates.ICspInformation, ppValue **securitycryptographycertificates.ICspStatuses) error {
-	return win32.HRESULTError(int32(self.Raw.GetCspStatusesFromOperations(Operations, pCspInformation, ppValue)))
+func (self ICspInformations) GetCspStatusesFromOperations(Operations securitycryptographycertificates.AlgorithmOperationFlags, pCspInformation ICspInformation, ppValue **securitycryptographycertificates.ICspStatuses) error {
+	return win32.HRESULTError(int32(self.Raw.GetCspStatusesFromOperations(Operations, pCspInformation.Raw, ppValue)))
 }
 
 // GetEncryptionCspAlgorithms wraps the raw GetEncryptionCspAlgorithms call.
-func (self ICspInformations) GetEncryptionCspAlgorithms(pCspInformation *securitycryptographycertificates.ICspInformation, ppValue **securitycryptographycertificates.ICspAlgorithms) error {
-	return win32.HRESULTError(int32(self.Raw.GetEncryptionCspAlgorithms(pCspInformation, ppValue)))
+func (self ICspInformations) GetEncryptionCspAlgorithms(pCspInformation ICspInformation, ppValue **securitycryptographycertificates.ICspAlgorithms) error {
+	return win32.HRESULTError(int32(self.Raw.GetEncryptionCspAlgorithms(pCspInformation.Raw, ppValue)))
 }
 
 // GetHashAlgorithms wraps the raw GetHashAlgorithms call.
-func (self ICspInformations) GetHashAlgorithms(pCspInformation *securitycryptographycertificates.ICspInformation, ppValue **securitycryptographycertificates.IObjectIds) error {
-	return win32.HRESULTError(int32(self.Raw.GetHashAlgorithms(pCspInformation, ppValue)))
+func (self ICspInformations) GetHashAlgorithms(pCspInformation ICspInformation, ppValue **securitycryptographycertificates.IObjectIds) error {
+	return win32.HRESULTError(int32(self.Raw.GetHashAlgorithms(pCspInformation.Raw, ppValue)))
 }
 
 // ICspStatus is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICspStatus with error-returning methods.
@@ -2814,8 +2814,8 @@ func WrapICspStatus(raw *securitycryptographycertificates.ICspStatus) ICspStatus
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ICspStatus) Initialize(pCsp *securitycryptographycertificates.ICspInformation, pAlgorithm *securitycryptographycertificates.ICspAlgorithm) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pCsp, pAlgorithm)))
+func (self ICspStatus) Initialize(pCsp ICspInformation, pAlgorithm ICspAlgorithm) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pCsp.Raw, pAlgorithm.Raw)))
 }
 
 // Get_Ordinal wraps the raw Get_Ordinal call.
@@ -2875,8 +2875,8 @@ func (self ICspStatuses) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self ICspStatuses) Add(pVal *securitycryptographycertificates.ICspStatus) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ICspStatuses) Add(pVal ICspStatus) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -2905,8 +2905,8 @@ func (self ICspStatuses) Get_ItemByOperations(strCspName foundation.BSTR, strAlg
 }
 
 // Get_ItemByProvider wraps the raw Get_ItemByProvider call.
-func (self ICspStatuses) Get_ItemByProvider(pCspStatus *securitycryptographycertificates.ICspStatus, ppValue **securitycryptographycertificates.ICspStatus) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ItemByProvider(pCspStatus, ppValue)))
+func (self ICspStatuses) Get_ItemByProvider(pCspStatus ICspStatus, ppValue **securitycryptographycertificates.ICspStatus) error {
+	return win32.HRESULTError(int32(self.Raw.Get_ItemByProvider(pCspStatus.Raw, ppValue)))
 }
 
 // IEnroll is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.IEnroll with error-returning methods.
@@ -4194,8 +4194,8 @@ func (self IObjectIds) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self IObjectIds) Add(pVal *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IObjectIds) Add(pVal IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -4209,8 +4209,8 @@ func (self IObjectIds) Clear() error {
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IObjectIds) AddRange(pValue *securitycryptographycertificates.IObjectIds) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(pValue)))
+func (self IObjectIds) AddRange(pValue IObjectIds) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(pValue.Raw)))
 }
 
 // IPolicyQualifier is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.IPolicyQualifier with error-returning methods.
@@ -4276,8 +4276,8 @@ func (self IPolicyQualifiers) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self IPolicyQualifiers) Add(pVal *securitycryptographycertificates.IPolicyQualifier) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IPolicyQualifiers) Add(pVal IPolicyQualifier) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -4383,8 +4383,8 @@ func (self ISignerCertificates) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self ISignerCertificates) Add(pVal *securitycryptographycertificates.ISignerCertificate) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ISignerCertificates) Add(pVal ISignerCertificate) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -4398,8 +4398,8 @@ func (self ISignerCertificates) Clear() error {
 }
 
 // Find wraps the raw Find call.
-func (self ISignerCertificates) Find(pSignerCert *securitycryptographycertificates.ISignerCertificate, piSignerCert *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Find(pSignerCert, piSignerCert)))
+func (self ISignerCertificates) Find(pSignerCert ISignerCertificate, piSignerCert *int32) error {
+	return win32.HRESULTError(int32(self.Raw.Find(pSignerCert.Raw, piSignerCert)))
 }
 
 // ISmimeCapabilities is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ISmimeCapabilities with error-returning methods.
@@ -4429,8 +4429,8 @@ func (self ISmimeCapabilities) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self ISmimeCapabilities) Add(pVal *securitycryptographycertificates.ISmimeCapability) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self ISmimeCapabilities) Add(pVal ISmimeCapability) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -4444,8 +4444,8 @@ func (self ISmimeCapabilities) Clear() error {
 }
 
 // AddFromCsp wraps the raw AddFromCsp call.
-func (self ISmimeCapabilities) AddFromCsp(pValue *securitycryptographycertificates.ICspInformation) error {
-	return win32.HRESULTError(int32(self.Raw.AddFromCsp(pValue)))
+func (self ISmimeCapabilities) AddFromCsp(pValue ICspInformation) error {
+	return win32.HRESULTError(int32(self.Raw.AddFromCsp(pValue.Raw)))
 }
 
 // AddAvailableSmimeCapabilities wraps the raw AddAvailableSmimeCapabilities call.
@@ -4465,8 +4465,8 @@ func WrapISmimeCapability(raw *securitycryptographycertificates.ISmimeCapability
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ISmimeCapability) Initialize(pObjectId *securitycryptographycertificates.IObjectId, BitCount int32) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pObjectId, BitCount)))
+func (self ISmimeCapability) Initialize(pObjectId IObjectId, BitCount int32) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pObjectId.Raw, BitCount)))
 }
 
 // Get_ObjectId wraps the raw Get_ObjectId call.
@@ -4522,8 +4522,8 @@ func WrapIX509Attribute(raw *securitycryptographycertificates.IX509Attribute) IX
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IX509Attribute) Initialize(pObjectId *securitycryptographycertificates.IObjectId, Encoding securitycryptographycertificates.EncodingType, strEncodedData foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pObjectId, Encoding, strEncodedData)))
+func (self IX509Attribute) Initialize(pObjectId IObjectId, Encoding securitycryptographycertificates.EncodingType, strEncodedData foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pObjectId.Raw, Encoding, strEncodedData)))
 }
 
 // Get_ObjectId wraps the raw Get_ObjectId call.
@@ -4548,8 +4548,8 @@ func WrapIX509AttributeArchiveKey(raw *securitycryptographycertificates.IX509Att
 }
 
 // InitializeEncode wraps the raw InitializeEncode call.
-func (self IX509AttributeArchiveKey) InitializeEncode(pKey *securitycryptographycertificates.IX509PrivateKey, Encoding securitycryptographycertificates.EncodingType, strCAXCert foundation.BSTR, pAlgorithm *securitycryptographycertificates.IObjectId, EncryptionStrength int32) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pKey, Encoding, strCAXCert, pAlgorithm, EncryptionStrength)))
+func (self IX509AttributeArchiveKey) InitializeEncode(pKey IX509PrivateKey, Encoding securitycryptographycertificates.EncodingType, strCAXCert foundation.BSTR, pAlgorithm IObjectId, EncryptionStrength int32) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pKey.Raw, Encoding, strCAXCert, pAlgorithm.Raw, EncryptionStrength)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -4687,8 +4687,8 @@ func WrapIX509AttributeExtensions(raw *securitycryptographycertificates.IX509Att
 }
 
 // InitializeEncode wraps the raw InitializeEncode call.
-func (self IX509AttributeExtensions) InitializeEncode(pExtensions *securitycryptographycertificates.IX509Extensions) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pExtensions)))
+func (self IX509AttributeExtensions) InitializeEncode(pExtensions IX509Extensions) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pExtensions.Raw)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -4780,8 +4780,8 @@ func (self IX509Attributes) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self IX509Attributes) Add(pVal *securitycryptographycertificates.IX509Attribute) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IX509Attributes) Add(pVal IX509Attribute) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -4901,8 +4901,8 @@ func (self IX509CertificateRequest) Get_CspInformations(ppValue **securitycrypto
 }
 
 // Put_CspInformations wraps the raw Put_CspInformations call.
-func (self IX509CertificateRequest) Put_CspInformations(pValue *securitycryptographycertificates.ICspInformations) error {
-	return win32.HRESULTError(int32(self.Raw.Put_CspInformations(pValue)))
+func (self IX509CertificateRequest) Put_CspInformations(pValue ICspInformations) error {
+	return win32.HRESULTError(int32(self.Raw.Put_CspInformations(pValue.Raw)))
 }
 
 // Get_HashAlgorithm wraps the raw Get_HashAlgorithm call.
@@ -4911,8 +4911,8 @@ func (self IX509CertificateRequest) Get_HashAlgorithm(ppValue **securitycryptogr
 }
 
 // Put_HashAlgorithm wraps the raw Put_HashAlgorithm call.
-func (self IX509CertificateRequest) Put_HashAlgorithm(pValue *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Put_HashAlgorithm(pValue)))
+func (self IX509CertificateRequest) Put_HashAlgorithm(pValue IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Put_HashAlgorithm(pValue.Raw)))
 }
 
 // Get_AlternateSignatureAlgorithm wraps the raw Get_AlternateSignatureAlgorithm call.
@@ -4942,8 +4942,8 @@ func WrapIX509CertificateRequestCertificate(raw *securitycryptographycertificate
 }
 
 // CheckPublicKeySignature wraps the raw CheckPublicKeySignature call.
-func (self IX509CertificateRequestCertificate) CheckPublicKeySignature(pPublicKey *securitycryptographycertificates.IX509PublicKey) error {
-	return win32.HRESULTError(int32(self.Raw.CheckPublicKeySignature(pPublicKey)))
+func (self IX509CertificateRequestCertificate) CheckPublicKeySignature(pPublicKey IX509PublicKey) error {
+	return win32.HRESULTError(int32(self.Raw.CheckPublicKeySignature(pPublicKey.Raw)))
 }
 
 // Get_Issuer wraps the raw Get_Issuer call.
@@ -4952,8 +4952,8 @@ func (self IX509CertificateRequestCertificate) Get_Issuer(ppValue **securitycryp
 }
 
 // Put_Issuer wraps the raw Put_Issuer call.
-func (self IX509CertificateRequestCertificate) Put_Issuer(pValue *securitycryptographycertificates.IX500DistinguishedName) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Issuer(pValue)))
+func (self IX509CertificateRequestCertificate) Put_Issuer(pValue IX500DistinguishedName) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Issuer(pValue.Raw)))
 }
 
 // Get_NotBefore wraps the raw Get_NotBefore call.
@@ -4982,8 +4982,8 @@ func (self IX509CertificateRequestCertificate) Get_SignerCertificate(ppValue **s
 }
 
 // Put_SignerCertificate wraps the raw Put_SignerCertificate call.
-func (self IX509CertificateRequestCertificate) Put_SignerCertificate(pValue *securitycryptographycertificates.ISignerCertificate) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SignerCertificate(pValue)))
+func (self IX509CertificateRequestCertificate) Put_SignerCertificate(pValue ISignerCertificate) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SignerCertificate(pValue.Raw)))
 }
 
 // IX509CertificateRequestCertificate2 is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.IX509CertificateRequestCertificate2 with error-returning methods.
@@ -4998,13 +4998,13 @@ func WrapIX509CertificateRequestCertificate2(raw *securitycryptographycertificat
 }
 
 // InitializeFromTemplate wraps the raw InitializeFromTemplate call.
-func (self IX509CertificateRequestCertificate2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer, pTemplate)))
+func (self IX509CertificateRequestCertificate2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // InitializeFromPrivateKeyTemplate wraps the raw InitializeFromPrivateKeyTemplate call.
-func (self IX509CertificateRequestCertificate2) InitializeFromPrivateKeyTemplate(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPrivateKey *securitycryptographycertificates.IX509PrivateKey, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromPrivateKeyTemplate(Context, pPrivateKey, pPolicyServer, pTemplate)))
+func (self IX509CertificateRequestCertificate2) InitializeFromPrivateKeyTemplate(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPrivateKey IX509PrivateKey, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromPrivateKeyTemplate(Context, pPrivateKey.Raw, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // Get_PolicyServer wraps the raw Get_PolicyServer call.
@@ -5029,8 +5029,8 @@ func WrapIX509CertificateRequestCmc(raw *securitycryptographycertificates.IX509C
 }
 
 // InitializeFromInnerRequestTemplateName wraps the raw InitializeFromInnerRequestTemplateName call.
-func (self IX509CertificateRequestCmc) InitializeFromInnerRequestTemplateName(pInnerRequest *securitycryptographycertificates.IX509CertificateRequest, strTemplateName foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromInnerRequestTemplateName(pInnerRequest, strTemplateName)))
+func (self IX509CertificateRequestCmc) InitializeFromInnerRequestTemplateName(pInnerRequest IX509CertificateRequest, strTemplateName foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromInnerRequestTemplateName(pInnerRequest.Raw, strTemplateName)))
 }
 
 // Get_TemplateObjectId wraps the raw Get_TemplateObjectId call.
@@ -5119,8 +5119,8 @@ func (self IX509CertificateRequestCmc) Get_EncryptionAlgorithm(ppValue **securit
 }
 
 // Put_EncryptionAlgorithm wraps the raw Put_EncryptionAlgorithm call.
-func (self IX509CertificateRequestCmc) Put_EncryptionAlgorithm(pValue *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Put_EncryptionAlgorithm(pValue)))
+func (self IX509CertificateRequestCmc) Put_EncryptionAlgorithm(pValue IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Put_EncryptionAlgorithm(pValue.Raw)))
 }
 
 // Get_EncryptionStrength wraps the raw Get_EncryptionStrength call.
@@ -5155,13 +5155,13 @@ func WrapIX509CertificateRequestCmc2(raw *securitycryptographycertificates.IX509
 }
 
 // InitializeFromTemplate wraps the raw InitializeFromTemplate call.
-func (self IX509CertificateRequestCmc2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer, pTemplate)))
+func (self IX509CertificateRequestCmc2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // InitializeFromInnerRequestTemplate wraps the raw InitializeFromInnerRequestTemplate call.
-func (self IX509CertificateRequestCmc2) InitializeFromInnerRequestTemplate(pInnerRequest *securitycryptographycertificates.IX509CertificateRequest, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromInnerRequestTemplate(pInnerRequest, pPolicyServer, pTemplate)))
+func (self IX509CertificateRequestCmc2) InitializeFromInnerRequestTemplate(pInnerRequest IX509CertificateRequest, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromInnerRequestTemplate(pInnerRequest.Raw, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // Get_PolicyServer wraps the raw Get_PolicyServer call.
@@ -5180,8 +5180,8 @@ func (self IX509CertificateRequestCmc2) CheckSignature(AllowedSignatureTypes sec
 }
 
 // CheckCertificateSignature wraps the raw CheckCertificateSignature call.
-func (self IX509CertificateRequestCmc2) CheckCertificateSignature(pSignerCertificate *securitycryptographycertificates.ISignerCertificate, ValidateCertificateChain foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CheckCertificateSignature(pSignerCertificate, ValidateCertificateChain)))
+func (self IX509CertificateRequestCmc2) CheckCertificateSignature(pSignerCertificate ISignerCertificate, ValidateCertificateChain foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.CheckCertificateSignature(pSignerCertificate.Raw, ValidateCertificateChain)))
 }
 
 // IX509CertificateRequestPkcs10 is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.IX509CertificateRequestPkcs10 with error-returning methods.
@@ -5201,13 +5201,13 @@ func (self IX509CertificateRequestPkcs10) InitializeFromTemplateName(Context sec
 }
 
 // InitializeFromPrivateKey wraps the raw InitializeFromPrivateKey call.
-func (self IX509CertificateRequestPkcs10) InitializeFromPrivateKey(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPrivateKey *securitycryptographycertificates.IX509PrivateKey, strTemplateName foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromPrivateKey(Context, pPrivateKey, strTemplateName)))
+func (self IX509CertificateRequestPkcs10) InitializeFromPrivateKey(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPrivateKey IX509PrivateKey, strTemplateName foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromPrivateKey(Context, pPrivateKey.Raw, strTemplateName)))
 }
 
 // InitializeFromPublicKey wraps the raw InitializeFromPublicKey call.
-func (self IX509CertificateRequestPkcs10) InitializeFromPublicKey(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPublicKey *securitycryptographycertificates.IX509PublicKey, strTemplateName foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromPublicKey(Context, pPublicKey, strTemplateName)))
+func (self IX509CertificateRequestPkcs10) InitializeFromPublicKey(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPublicKey IX509PublicKey, strTemplateName foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromPublicKey(Context, pPublicKey.Raw, strTemplateName)))
 }
 
 // InitializeFromCertificate wraps the raw InitializeFromCertificate call.
@@ -5266,8 +5266,8 @@ func (self IX509CertificateRequestPkcs10) Get_Subject(ppValue **securitycryptogr
 }
 
 // Put_Subject wraps the raw Put_Subject call.
-func (self IX509CertificateRequestPkcs10) Put_Subject(pValue *securitycryptographycertificates.IX500DistinguishedName) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Subject(pValue)))
+func (self IX509CertificateRequestPkcs10) Put_Subject(pValue IX500DistinguishedName) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Subject(pValue.Raw)))
 }
 
 // Get_CspStatuses wraps the raw Get_CspStatuses call.
@@ -5347,18 +5347,18 @@ func WrapIX509CertificateRequestPkcs10V2(raw *securitycryptographycertificates.I
 }
 
 // InitializeFromTemplate wraps the raw InitializeFromTemplate call.
-func (self IX509CertificateRequestPkcs10V2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer, pTemplate)))
+func (self IX509CertificateRequestPkcs10V2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // InitializeFromPrivateKeyTemplate wraps the raw InitializeFromPrivateKeyTemplate call.
-func (self IX509CertificateRequestPkcs10V2) InitializeFromPrivateKeyTemplate(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPrivateKey *securitycryptographycertificates.IX509PrivateKey, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromPrivateKeyTemplate(Context, pPrivateKey, pPolicyServer, pTemplate)))
+func (self IX509CertificateRequestPkcs10V2) InitializeFromPrivateKeyTemplate(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPrivateKey IX509PrivateKey, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromPrivateKeyTemplate(Context, pPrivateKey.Raw, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // InitializeFromPublicKeyTemplate wraps the raw InitializeFromPublicKeyTemplate call.
-func (self IX509CertificateRequestPkcs10V2) InitializeFromPublicKeyTemplate(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPublicKey *securitycryptographycertificates.IX509PublicKey, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromPublicKeyTemplate(Context, pPublicKey, pPolicyServer, pTemplate)))
+func (self IX509CertificateRequestPkcs10V2) InitializeFromPublicKeyTemplate(Context securitycryptographycertificates.X509CertificateEnrollmentContext, pPublicKey IX509PublicKey, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromPublicKeyTemplate(Context, pPublicKey.Raw, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // Get_PolicyServer wraps the raw Get_PolicyServer call.
@@ -5408,8 +5408,8 @@ func (self IX509CertificateRequestPkcs10V3) Get_EncryptionAlgorithm(ppValue **se
 }
 
 // Put_EncryptionAlgorithm wraps the raw Put_EncryptionAlgorithm call.
-func (self IX509CertificateRequestPkcs10V3) Put_EncryptionAlgorithm(pValue *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Put_EncryptionAlgorithm(pValue)))
+func (self IX509CertificateRequestPkcs10V3) Put_EncryptionAlgorithm(pValue IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Put_EncryptionAlgorithm(pValue.Raw)))
 }
 
 // Get_EncryptionStrength wraps the raw Get_EncryptionStrength call.
@@ -5490,8 +5490,8 @@ func (self IX509CertificateRequestPkcs7) InitializeFromCertificate(Context secur
 }
 
 // InitializeFromInnerRequest wraps the raw InitializeFromInnerRequest call.
-func (self IX509CertificateRequestPkcs7) InitializeFromInnerRequest(pInnerRequest *securitycryptographycertificates.IX509CertificateRequest) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromInnerRequest(pInnerRequest)))
+func (self IX509CertificateRequestPkcs7) InitializeFromInnerRequest(pInnerRequest IX509CertificateRequest) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromInnerRequest(pInnerRequest.Raw)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -5515,8 +5515,8 @@ func (self IX509CertificateRequestPkcs7) Get_SignerCertificate(ppValue **securit
 }
 
 // Put_SignerCertificate wraps the raw Put_SignerCertificate call.
-func (self IX509CertificateRequestPkcs7) Put_SignerCertificate(pValue *securitycryptographycertificates.ISignerCertificate) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SignerCertificate(pValue)))
+func (self IX509CertificateRequestPkcs7) Put_SignerCertificate(pValue ISignerCertificate) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SignerCertificate(pValue.Raw)))
 }
 
 // IX509CertificateRequestPkcs7V2 is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.IX509CertificateRequestPkcs7V2 with error-returning methods.
@@ -5531,8 +5531,8 @@ func WrapIX509CertificateRequestPkcs7V2(raw *securitycryptographycertificates.IX
 }
 
 // InitializeFromTemplate wraps the raw InitializeFromTemplate call.
-func (self IX509CertificateRequestPkcs7V2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer, pTemplate)))
+func (self IX509CertificateRequestPkcs7V2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // Get_PolicyServer wraps the raw Get_PolicyServer call.
@@ -5582,8 +5582,8 @@ func (self IX509CertificateRevocationList) ResetForEncode() error {
 }
 
 // CheckPublicKeySignature wraps the raw CheckPublicKeySignature call.
-func (self IX509CertificateRevocationList) CheckPublicKeySignature(pPublicKey *securitycryptographycertificates.IX509PublicKey) error {
-	return win32.HRESULTError(int32(self.Raw.CheckPublicKeySignature(pPublicKey)))
+func (self IX509CertificateRevocationList) CheckPublicKeySignature(pPublicKey IX509PublicKey) error {
+	return win32.HRESULTError(int32(self.Raw.CheckPublicKeySignature(pPublicKey.Raw)))
 }
 
 // CheckSignature wraps the raw CheckSignature call.
@@ -5597,8 +5597,8 @@ func (self IX509CertificateRevocationList) Get_Issuer(ppValue **securitycryptogr
 }
 
 // Put_Issuer wraps the raw Put_Issuer call.
-func (self IX509CertificateRevocationList) Put_Issuer(pValue *securitycryptographycertificates.IX500DistinguishedName) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Issuer(pValue)))
+func (self IX509CertificateRevocationList) Put_Issuer(pValue IX500DistinguishedName) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Issuer(pValue.Raw)))
 }
 
 // Get_ThisUpdate wraps the raw Get_ThisUpdate call.
@@ -5632,8 +5632,8 @@ func (self IX509CertificateRevocationList) Get_SignerCertificate(ppValue **secur
 }
 
 // Put_SignerCertificate wraps the raw Put_SignerCertificate call.
-func (self IX509CertificateRevocationList) Put_SignerCertificate(pValue *securitycryptographycertificates.ISignerCertificate) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SignerCertificate(pValue)))
+func (self IX509CertificateRevocationList) Put_SignerCertificate(pValue ISignerCertificate) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SignerCertificate(pValue.Raw)))
 }
 
 // Get_CRLNumber wraps the raw Get_CRLNumber call.
@@ -5672,8 +5672,8 @@ func (self IX509CertificateRevocationList) Get_HashAlgorithm(ppValue **securityc
 }
 
 // Put_HashAlgorithm wraps the raw Put_HashAlgorithm call.
-func (self IX509CertificateRevocationList) Put_HashAlgorithm(pValue *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Put_HashAlgorithm(pValue)))
+func (self IX509CertificateRevocationList) Put_HashAlgorithm(pValue IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Put_HashAlgorithm(pValue.Raw)))
 }
 
 // Get_AlternateSignatureAlgorithm wraps the raw Get_AlternateSignatureAlgorithm call.
@@ -5733,8 +5733,8 @@ func (self IX509CertificateRevocationListEntries) Get__NewEnum(pVal **systemcom.
 }
 
 // Add wraps the raw Add call.
-func (self IX509CertificateRevocationListEntries) Add(pVal *securitycryptographycertificates.IX509CertificateRevocationListEntry) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IX509CertificateRevocationListEntries) Add(pVal IX509CertificateRevocationListEntry) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -5753,8 +5753,8 @@ func (self IX509CertificateRevocationListEntries) Get_IndexBySerialNumber(Encodi
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IX509CertificateRevocationListEntries) AddRange(pValue *securitycryptographycertificates.IX509CertificateRevocationListEntries) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(pValue)))
+func (self IX509CertificateRevocationListEntries) AddRange(pValue IX509CertificateRevocationListEntries) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(pValue.Raw)))
 }
 
 // IX509CertificateRevocationListEntry is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.IX509CertificateRevocationListEntry with error-returning methods.
@@ -5826,8 +5826,8 @@ func WrapIX509CertificateTemplateWritable(raw *securitycryptographycertificates.
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IX509CertificateTemplateWritable) Initialize(pValue *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pValue)))
+func (self IX509CertificateTemplateWritable) Initialize(pValue IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pValue.Raw)))
 }
 
 // Commit wraps the raw Commit call.
@@ -5872,8 +5872,8 @@ func (self IX509CertificateTemplates) Get__NewEnum(pVal **systemcom.IUnknown) er
 }
 
 // Add wraps the raw Add call.
-func (self IX509CertificateTemplates) Add(pVal *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IX509CertificateTemplates) Add(pVal IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -5892,8 +5892,8 @@ func (self IX509CertificateTemplates) Get_ItemByName(bstrName foundation.BSTR, p
 }
 
 // Get_ItemByOid wraps the raw Get_ItemByOid call.
-func (self IX509CertificateTemplates) Get_ItemByOid(pOid *securitycryptographycertificates.IObjectId, ppValue **securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ItemByOid(pOid, ppValue)))
+func (self IX509CertificateTemplates) Get_ItemByOid(pOid IObjectId, ppValue **securitycryptographycertificates.IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.Get_ItemByOid(pOid.Raw, ppValue)))
 }
 
 // IX509EndorsementKey is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.IX509EndorsementKey with error-returning methods.
@@ -5984,8 +5984,8 @@ func (self IX509Enrollment) InitializeFromTemplateName(Context securitycryptogra
 }
 
 // InitializeFromRequest wraps the raw InitializeFromRequest call.
-func (self IX509Enrollment) InitializeFromRequest(pRequest *securitycryptographycertificates.IX509CertificateRequest) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromRequest(pRequest)))
+func (self IX509Enrollment) InitializeFromRequest(pRequest IX509CertificateRequest) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromRequest(pRequest.Raw)))
 }
 
 // CreateRequest wraps the raw CreateRequest call.
@@ -6100,8 +6100,8 @@ func WrapIX509Enrollment2(raw *securitycryptographycertificates.IX509Enrollment2
 }
 
 // InitializeFromTemplate wraps the raw InitializeFromTemplate call.
-func (self IX509Enrollment2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer *securitycryptographycertificates.IX509EnrollmentPolicyServer, pTemplate *securitycryptographycertificates.IX509CertificateTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer, pTemplate)))
+func (self IX509Enrollment2) InitializeFromTemplate(context securitycryptographycertificates.X509CertificateEnrollmentContext, pPolicyServer IX509EnrollmentPolicyServer, pTemplate IX509CertificateTemplate) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFromTemplate(context, pPolicyServer.Raw, pTemplate.Raw)))
 }
 
 // InstallResponse2 wraps the raw InstallResponse2 call.
@@ -6182,8 +6182,8 @@ func (self IX509EnrollmentPolicyServer) GetTemplates(pTemplates **securitycrypto
 }
 
 // GetCAsForTemplate wraps the raw GetCAsForTemplate call.
-func (self IX509EnrollmentPolicyServer) GetCAsForTemplate(pTemplate *securitycryptographycertificates.IX509CertificateTemplate, ppCAs **securitycryptographycertificates.ICertificationAuthorities) error {
-	return win32.HRESULTError(int32(self.Raw.GetCAsForTemplate(pTemplate, ppCAs)))
+func (self IX509EnrollmentPolicyServer) GetCAsForTemplate(pTemplate IX509CertificateTemplate, ppCAs **securitycryptographycertificates.ICertificationAuthorities) error {
+	return win32.HRESULTError(int32(self.Raw.GetCAsForTemplate(pTemplate.Raw, ppCAs)))
 }
 
 // GetCAs wraps the raw GetCAs call.
@@ -6380,8 +6380,8 @@ func WrapIX509Extension(raw *securitycryptographycertificates.IX509Extension) IX
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IX509Extension) Initialize(pObjectId *securitycryptographycertificates.IObjectId, Encoding securitycryptographycertificates.EncodingType, strEncodedData foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pObjectId, Encoding, strEncodedData)))
+func (self IX509Extension) Initialize(pObjectId IObjectId, Encoding securitycryptographycertificates.EncodingType, strEncodedData foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pObjectId.Raw, Encoding, strEncodedData)))
 }
 
 // Get_ObjectId wraps the raw Get_ObjectId call.
@@ -6416,8 +6416,8 @@ func WrapIX509ExtensionAlternativeNames(raw *securitycryptographycertificates.IX
 }
 
 // InitializeEncode wraps the raw InitializeEncode call.
-func (self IX509ExtensionAlternativeNames) InitializeEncode(pValue *securitycryptographycertificates.IAlternativeNames) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue)))
+func (self IX509ExtensionAlternativeNames) InitializeEncode(pValue IAlternativeNames) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue.Raw)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -6499,8 +6499,8 @@ func WrapIX509ExtensionCertificatePolicies(raw *securitycryptographycertificates
 }
 
 // InitializeEncode wraps the raw InitializeEncode call.
-func (self IX509ExtensionCertificatePolicies) InitializeEncode(pValue *securitycryptographycertificates.ICertificatePolicies) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue)))
+func (self IX509ExtensionCertificatePolicies) InitializeEncode(pValue ICertificatePolicies) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue.Raw)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -6525,8 +6525,8 @@ func WrapIX509ExtensionEnhancedKeyUsage(raw *securitycryptographycertificates.IX
 }
 
 // InitializeEncode wraps the raw InitializeEncode call.
-func (self IX509ExtensionEnhancedKeyUsage) InitializeEncode(pValue *securitycryptographycertificates.IObjectIds) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue)))
+func (self IX509ExtensionEnhancedKeyUsage) InitializeEncode(pValue IObjectIds) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue.Raw)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -6577,8 +6577,8 @@ func WrapIX509ExtensionMSApplicationPolicies(raw *securitycryptographycertificat
 }
 
 // InitializeEncode wraps the raw InitializeEncode call.
-func (self IX509ExtensionMSApplicationPolicies) InitializeEncode(pValue *securitycryptographycertificates.ICertificatePolicies) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue)))
+func (self IX509ExtensionMSApplicationPolicies) InitializeEncode(pValue ICertificatePolicies) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue.Raw)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -6603,8 +6603,8 @@ func WrapIX509ExtensionSmimeCapabilities(raw *securitycryptographycertificates.I
 }
 
 // InitializeEncode wraps the raw InitializeEncode call.
-func (self IX509ExtensionSmimeCapabilities) InitializeEncode(pValue *securitycryptographycertificates.ISmimeCapabilities) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue)))
+func (self IX509ExtensionSmimeCapabilities) InitializeEncode(pValue ISmimeCapabilities) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pValue.Raw)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -6655,8 +6655,8 @@ func WrapIX509ExtensionTemplate(raw *securitycryptographycertificates.IX509Exten
 }
 
 // InitializeEncode wraps the raw InitializeEncode call.
-func (self IX509ExtensionTemplate) InitializeEncode(pTemplateOid *securitycryptographycertificates.IObjectId, MajorVersion int32, MinorVersion int32) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pTemplateOid, MajorVersion, MinorVersion)))
+func (self IX509ExtensionTemplate) InitializeEncode(pTemplateOid IObjectId, MajorVersion int32, MinorVersion int32) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeEncode(pTemplateOid.Raw, MajorVersion, MinorVersion)))
 }
 
 // InitializeDecode wraps the raw InitializeDecode call.
@@ -6732,8 +6732,8 @@ func (self IX509Extensions) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self IX509Extensions) Add(pVal *securitycryptographycertificates.IX509Extension) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IX509Extensions) Add(pVal IX509Extension) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -6747,13 +6747,13 @@ func (self IX509Extensions) Clear() error {
 }
 
 // Get_IndexByObjectId wraps the raw Get_IndexByObjectId call.
-func (self IX509Extensions) Get_IndexByObjectId(pObjectId *securitycryptographycertificates.IObjectId, pIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IndexByObjectId(pObjectId, pIndex)))
+func (self IX509Extensions) Get_IndexByObjectId(pObjectId IObjectId, pIndex *int32) error {
+	return win32.HRESULTError(int32(self.Raw.Get_IndexByObjectId(pObjectId.Raw, pIndex)))
 }
 
 // AddRange wraps the raw AddRange call.
-func (self IX509Extensions) AddRange(pValue *securitycryptographycertificates.IX509Extensions) error {
-	return win32.HRESULTError(int32(self.Raw.AddRange(pValue)))
+func (self IX509Extensions) AddRange(pValue IX509Extensions) error {
+	return win32.HRESULTError(int32(self.Raw.AddRange(pValue.Raw)))
 }
 
 // IX509MachineEnrollmentFactory is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.IX509MachineEnrollmentFactory with error-returning methods.
@@ -6825,8 +6825,8 @@ func (self IX509NameValuePairs) Get__NewEnum(pVal **systemcom.IUnknown) error {
 }
 
 // Add wraps the raw Add call.
-func (self IX509NameValuePairs) Add(pVal *securitycryptographycertificates.IX509NameValuePair) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IX509NameValuePairs) Add(pVal IX509NameValuePair) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -6866,8 +6866,8 @@ func (self IX509PolicyServerListManager) Get__NewEnum(pVal **systemcom.IUnknown)
 }
 
 // Add wraps the raw Add call.
-func (self IX509PolicyServerListManager) Add(pVal *securitycryptographycertificates.IX509PolicyServerUrl) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pVal)))
+func (self IX509PolicyServerListManager) Add(pVal IX509PolicyServerUrl) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pVal.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -7058,8 +7058,8 @@ func (self IX509PrivateKey) Get_CspInformations(ppValue **securitycryptographyce
 }
 
 // Put_CspInformations wraps the raw Put_CspInformations call.
-func (self IX509PrivateKey) Put_CspInformations(pValue *securitycryptographycertificates.ICspInformations) error {
-	return win32.HRESULTError(int32(self.Raw.Put_CspInformations(pValue)))
+func (self IX509PrivateKey) Put_CspInformations(pValue ICspInformations) error {
+	return win32.HRESULTError(int32(self.Raw.Put_CspInformations(pValue.Raw)))
 }
 
 // Get_CspStatus wraps the raw Get_CspStatus call.
@@ -7068,8 +7068,8 @@ func (self IX509PrivateKey) Get_CspStatus(ppValue **securitycryptographycertific
 }
 
 // Put_CspStatus wraps the raw Put_CspStatus call.
-func (self IX509PrivateKey) Put_CspStatus(pValue *securitycryptographycertificates.ICspStatus) error {
-	return win32.HRESULTError(int32(self.Raw.Put_CspStatus(pValue)))
+func (self IX509PrivateKey) Put_CspStatus(pValue ICspStatus) error {
+	return win32.HRESULTError(int32(self.Raw.Put_CspStatus(pValue.Raw)))
 }
 
 // Get_ProviderName wraps the raw Get_ProviderName call.
@@ -7108,8 +7108,8 @@ func (self IX509PrivateKey) Get_Algorithm(ppValue **securitycryptographycertific
 }
 
 // Put_Algorithm wraps the raw Put_Algorithm call.
-func (self IX509PrivateKey) Put_Algorithm(pValue *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Algorithm(pValue)))
+func (self IX509PrivateKey) Put_Algorithm(pValue IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Algorithm(pValue.Raw)))
 }
 
 // Get_KeySpec wraps the raw Get_KeySpec call.
@@ -7345,8 +7345,8 @@ func WrapIX509PublicKey(raw *securitycryptographycertificates.IX509PublicKey) IX
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IX509PublicKey) Initialize(pObjectId *securitycryptographycertificates.IObjectId, strEncodedKey foundation.BSTR, strEncodedParameters foundation.BSTR, Encoding securitycryptographycertificates.EncodingType) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pObjectId, strEncodedKey, strEncodedParameters, Encoding)))
+func (self IX509PublicKey) Initialize(pObjectId IObjectId, strEncodedKey foundation.BSTR, strEncodedParameters foundation.BSTR, Encoding securitycryptographycertificates.EncodingType) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pObjectId.Raw, strEncodedKey, strEncodedParameters, Encoding)))
 }
 
 // InitializeFromEncodedPublicKeyInfo wraps the raw InitializeFromEncodedPublicKeyInfo call.
@@ -7391,8 +7391,8 @@ func WrapIX509SCEPEnrollment(raw *securitycryptographycertificates.IX509SCEPEnro
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IX509SCEPEnrollment) Initialize(pRequest *securitycryptographycertificates.IX509CertificateRequestPkcs10, strThumbprint foundation.BSTR, ThumprintEncoding securitycryptographycertificates.EncodingType, strServerCertificates foundation.BSTR, Encoding securitycryptographycertificates.EncodingType) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pRequest, strThumbprint, ThumprintEncoding, strServerCertificates, Encoding)))
+func (self IX509SCEPEnrollment) Initialize(pRequest IX509CertificateRequestPkcs10, strThumbprint foundation.BSTR, ThumprintEncoding securitycryptographycertificates.EncodingType, strServerCertificates foundation.BSTR, Encoding securitycryptographycertificates.EncodingType) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pRequest.Raw, strThumbprint, ThumprintEncoding, strServerCertificates, Encoding)))
 }
 
 // InitializeForPending wraps the raw InitializeForPending call.
@@ -7436,8 +7436,8 @@ func (self IX509SCEPEnrollment) Get_SignerCertificate(ppValue **securitycryptogr
 }
 
 // Put_SignerCertificate wraps the raw Put_SignerCertificate call.
-func (self IX509SCEPEnrollment) Put_SignerCertificate(pValue *securitycryptographycertificates.ISignerCertificate) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SignerCertificate(pValue)))
+func (self IX509SCEPEnrollment) Put_SignerCertificate(pValue ISignerCertificate) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SignerCertificate(pValue.Raw)))
 }
 
 // Get_OldCertificate wraps the raw Get_OldCertificate call.
@@ -7446,8 +7446,8 @@ func (self IX509SCEPEnrollment) Get_OldCertificate(ppValue **securitycryptograph
 }
 
 // Put_OldCertificate wraps the raw Put_OldCertificate call.
-func (self IX509SCEPEnrollment) Put_OldCertificate(pValue *securitycryptographycertificates.ISignerCertificate) error {
-	return win32.HRESULTError(int32(self.Raw.Put_OldCertificate(pValue)))
+func (self IX509SCEPEnrollment) Put_OldCertificate(pValue ISignerCertificate) error {
+	return win32.HRESULTError(int32(self.Raw.Put_OldCertificate(pValue.Raw)))
 }
 
 // Get_TransactionId wraps the raw Get_TransactionId call.
@@ -7553,8 +7553,8 @@ func WrapIX509SCEPEnrollmentHelper(raw *securitycryptographycertificates.IX509SC
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IX509SCEPEnrollmentHelper) Initialize(strServerUrl foundation.BSTR, strRequestHeaders foundation.BSTR, pRequest *securitycryptographycertificates.IX509CertificateRequestPkcs10, strCACertificateThumbprint foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(strServerUrl, strRequestHeaders, pRequest, strCACertificateThumbprint)))
+func (self IX509SCEPEnrollmentHelper) Initialize(strServerUrl foundation.BSTR, strRequestHeaders foundation.BSTR, pRequest IX509CertificateRequestPkcs10, strCACertificateThumbprint foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(strServerUrl, strRequestHeaders, pRequest.Raw, strCACertificateThumbprint)))
 }
 
 // InitializeForPending wraps the raw InitializeForPending call.
@@ -7599,8 +7599,8 @@ func (self IX509SignatureInformation) Get_HashAlgorithm(ppValue **securitycrypto
 }
 
 // Put_HashAlgorithm wraps the raw Put_HashAlgorithm call.
-func (self IX509SignatureInformation) Put_HashAlgorithm(pValue *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Put_HashAlgorithm(pValue)))
+func (self IX509SignatureInformation) Put_HashAlgorithm(pValue IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Put_HashAlgorithm(pValue.Raw)))
 }
 
 // Get_PublicKeyAlgorithm wraps the raw Get_PublicKeyAlgorithm call.
@@ -7609,8 +7609,8 @@ func (self IX509SignatureInformation) Get_PublicKeyAlgorithm(ppValue **securityc
 }
 
 // Put_PublicKeyAlgorithm wraps the raw Put_PublicKeyAlgorithm call.
-func (self IX509SignatureInformation) Put_PublicKeyAlgorithm(pValue *securitycryptographycertificates.IObjectId) error {
-	return win32.HRESULTError(int32(self.Raw.Put_PublicKeyAlgorithm(pValue)))
+func (self IX509SignatureInformation) Put_PublicKeyAlgorithm(pValue IObjectId) error {
+	return win32.HRESULTError(int32(self.Raw.Put_PublicKeyAlgorithm(pValue.Raw)))
 }
 
 // Get_Parameters wraps the raw Get_Parameters call.

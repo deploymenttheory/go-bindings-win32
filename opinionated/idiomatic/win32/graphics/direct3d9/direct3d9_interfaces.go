@@ -258,8 +258,8 @@ func (self IDirect3DDevice9) GetCreationParameters(pParameters *graphicsdirect3d
 }
 
 // SetCursorProperties wraps the raw SetCursorProperties call.
-func (self IDirect3DDevice9) SetCursorProperties(XHotSpot uint32, YHotSpot uint32, pCursorBitmap *graphicsdirect3d9.IDirect3DSurface9) error {
-	return win32.HRESULTError(int32(self.Raw.SetCursorProperties(XHotSpot, YHotSpot, pCursorBitmap)))
+func (self IDirect3DDevice9) SetCursorProperties(XHotSpot uint32, YHotSpot uint32, pCursorBitmap IDirect3DSurface9) error {
+	return win32.HRESULTError(int32(self.Raw.SetCursorProperties(XHotSpot, YHotSpot, pCursorBitmap.Raw)))
 }
 
 // SetCursorPosition wraps the raw SetCursorPosition call.
@@ -362,33 +362,33 @@ func (self IDirect3DDevice9) CreateDepthStencilSurface(Width uint32, Height uint
 }
 
 // UpdateSurface wraps the raw UpdateSurface call.
-func (self IDirect3DDevice9) UpdateSurface(pSourceSurface *graphicsdirect3d9.IDirect3DSurface9, pSourceRect *foundation.RECT, pDestinationSurface *graphicsdirect3d9.IDirect3DSurface9, pDestPoint *foundation.POINT) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateSurface(pSourceSurface, pSourceRect, pDestinationSurface, pDestPoint)))
+func (self IDirect3DDevice9) UpdateSurface(pSourceSurface IDirect3DSurface9, pSourceRect *foundation.RECT, pDestinationSurface IDirect3DSurface9, pDestPoint *foundation.POINT) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateSurface(pSourceSurface.Raw, pSourceRect, pDestinationSurface.Raw, pDestPoint)))
 }
 
 // UpdateTexture wraps the raw UpdateTexture call.
-func (self IDirect3DDevice9) UpdateTexture(pSourceTexture *graphicsdirect3d9.IDirect3DBaseTexture9, pDestinationTexture *graphicsdirect3d9.IDirect3DBaseTexture9) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateTexture(pSourceTexture, pDestinationTexture)))
+func (self IDirect3DDevice9) UpdateTexture(pSourceTexture IDirect3DBaseTexture9, pDestinationTexture IDirect3DBaseTexture9) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateTexture(pSourceTexture.Raw, pDestinationTexture.Raw)))
 }
 
 // GetRenderTargetData wraps the raw GetRenderTargetData call.
-func (self IDirect3DDevice9) GetRenderTargetData(pRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pDestSurface *graphicsdirect3d9.IDirect3DSurface9) error {
-	return win32.HRESULTError(int32(self.Raw.GetRenderTargetData(pRenderTarget, pDestSurface)))
+func (self IDirect3DDevice9) GetRenderTargetData(pRenderTarget IDirect3DSurface9, pDestSurface IDirect3DSurface9) error {
+	return win32.HRESULTError(int32(self.Raw.GetRenderTargetData(pRenderTarget.Raw, pDestSurface.Raw)))
 }
 
 // GetFrontBufferData wraps the raw GetFrontBufferData call.
-func (self IDirect3DDevice9) GetFrontBufferData(iSwapChain uint32, pDestSurface *graphicsdirect3d9.IDirect3DSurface9) error {
-	return win32.HRESULTError(int32(self.Raw.GetFrontBufferData(iSwapChain, pDestSurface)))
+func (self IDirect3DDevice9) GetFrontBufferData(iSwapChain uint32, pDestSurface IDirect3DSurface9) error {
+	return win32.HRESULTError(int32(self.Raw.GetFrontBufferData(iSwapChain, pDestSurface.Raw)))
 }
 
 // StretchRect wraps the raw StretchRect call.
-func (self IDirect3DDevice9) StretchRect(pSourceSurface *graphicsdirect3d9.IDirect3DSurface9, pSourceRect *foundation.RECT, pDestSurface *graphicsdirect3d9.IDirect3DSurface9, pDestRect *foundation.RECT, Filter graphicsdirect3d9.D3DTEXTUREFILTERTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.StretchRect(pSourceSurface, pSourceRect, pDestSurface, pDestRect, Filter)))
+func (self IDirect3DDevice9) StretchRect(pSourceSurface IDirect3DSurface9, pSourceRect *foundation.RECT, pDestSurface IDirect3DSurface9, pDestRect *foundation.RECT, Filter graphicsdirect3d9.D3DTEXTUREFILTERTYPE) error {
+	return win32.HRESULTError(int32(self.Raw.StretchRect(pSourceSurface.Raw, pSourceRect, pDestSurface.Raw, pDestRect, Filter)))
 }
 
 // ColorFill wraps the raw ColorFill call.
-func (self IDirect3DDevice9) ColorFill(pSurface *graphicsdirect3d9.IDirect3DSurface9, pRect *foundation.RECT, color uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ColorFill(pSurface, pRect, color)))
+func (self IDirect3DDevice9) ColorFill(pSurface IDirect3DSurface9, pRect *foundation.RECT, color uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ColorFill(pSurface.Raw, pRect, color)))
 }
 
 // CreateOffscreenPlainSurface wraps the raw CreateOffscreenPlainSurface call.
@@ -397,8 +397,8 @@ func (self IDirect3DDevice9) CreateOffscreenPlainSurface(Width uint32, Height ui
 }
 
 // SetRenderTarget wraps the raw SetRenderTarget call.
-func (self IDirect3DDevice9) SetRenderTarget(RenderTargetIndex uint32, pRenderTarget *graphicsdirect3d9.IDirect3DSurface9) error {
-	return win32.HRESULTError(int32(self.Raw.SetRenderTarget(RenderTargetIndex, pRenderTarget)))
+func (self IDirect3DDevice9) SetRenderTarget(RenderTargetIndex uint32, pRenderTarget IDirect3DSurface9) error {
+	return win32.HRESULTError(int32(self.Raw.SetRenderTarget(RenderTargetIndex, pRenderTarget.Raw)))
 }
 
 // GetRenderTarget wraps the raw GetRenderTarget call.
@@ -407,8 +407,8 @@ func (self IDirect3DDevice9) GetRenderTarget(RenderTargetIndex uint32, ppRenderT
 }
 
 // SetDepthStencilSurface wraps the raw SetDepthStencilSurface call.
-func (self IDirect3DDevice9) SetDepthStencilSurface(pNewZStencil *graphicsdirect3d9.IDirect3DSurface9) error {
-	return win32.HRESULTError(int32(self.Raw.SetDepthStencilSurface(pNewZStencil)))
+func (self IDirect3DDevice9) SetDepthStencilSurface(pNewZStencil IDirect3DSurface9) error {
+	return win32.HRESULTError(int32(self.Raw.SetDepthStencilSurface(pNewZStencil.Raw)))
 }
 
 // GetDepthStencilSurface wraps the raw GetDepthStencilSurface call.
@@ -533,8 +533,8 @@ func (self IDirect3DDevice9) GetTexture(Stage uint32, ppTexture **graphicsdirect
 }
 
 // SetTexture wraps the raw SetTexture call.
-func (self IDirect3DDevice9) SetTexture(Stage uint32, pTexture *graphicsdirect3d9.IDirect3DBaseTexture9) error {
-	return win32.HRESULTError(int32(self.Raw.SetTexture(Stage, pTexture)))
+func (self IDirect3DDevice9) SetTexture(Stage uint32, pTexture IDirect3DBaseTexture9) error {
+	return win32.HRESULTError(int32(self.Raw.SetTexture(Stage, pTexture.Raw)))
 }
 
 // GetTextureStageState wraps the raw GetTextureStageState call.
@@ -624,8 +624,8 @@ func (self IDirect3DDevice9) DrawIndexedPrimitiveUP(PrimitiveType graphicsdirect
 }
 
 // ProcessVertices wraps the raw ProcessVertices call.
-func (self IDirect3DDevice9) ProcessVertices(SrcStartIndex uint32, DestIndex uint32, VertexCount uint32, pDestBuffer *graphicsdirect3d9.IDirect3DVertexBuffer9, pVertexDecl *graphicsdirect3d9.IDirect3DVertexDeclaration9, Flags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessVertices(SrcStartIndex, DestIndex, VertexCount, pDestBuffer, pVertexDecl, Flags)))
+func (self IDirect3DDevice9) ProcessVertices(SrcStartIndex uint32, DestIndex uint32, VertexCount uint32, pDestBuffer IDirect3DVertexBuffer9, pVertexDecl IDirect3DVertexDeclaration9, Flags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessVertices(SrcStartIndex, DestIndex, VertexCount, pDestBuffer.Raw, pVertexDecl.Raw, Flags)))
 }
 
 // CreateVertexDeclaration wraps the raw CreateVertexDeclaration call.
@@ -634,8 +634,8 @@ func (self IDirect3DDevice9) CreateVertexDeclaration(pVertexElements *graphicsdi
 }
 
 // SetVertexDeclaration wraps the raw SetVertexDeclaration call.
-func (self IDirect3DDevice9) SetVertexDeclaration(pDecl *graphicsdirect3d9.IDirect3DVertexDeclaration9) error {
-	return win32.HRESULTError(int32(self.Raw.SetVertexDeclaration(pDecl)))
+func (self IDirect3DDevice9) SetVertexDeclaration(pDecl IDirect3DVertexDeclaration9) error {
+	return win32.HRESULTError(int32(self.Raw.SetVertexDeclaration(pDecl.Raw)))
 }
 
 // GetVertexDeclaration wraps the raw GetVertexDeclaration call.
@@ -659,8 +659,8 @@ func (self IDirect3DDevice9) CreateVertexShader(pFunction *uint32, ppShader **gr
 }
 
 // SetVertexShader wraps the raw SetVertexShader call.
-func (self IDirect3DDevice9) SetVertexShader(pShader *graphicsdirect3d9.IDirect3DVertexShader9) error {
-	return win32.HRESULTError(int32(self.Raw.SetVertexShader(pShader)))
+func (self IDirect3DDevice9) SetVertexShader(pShader IDirect3DVertexShader9) error {
+	return win32.HRESULTError(int32(self.Raw.SetVertexShader(pShader.Raw)))
 }
 
 // GetVertexShader wraps the raw GetVertexShader call.
@@ -699,8 +699,8 @@ func (self IDirect3DDevice9) GetVertexShaderConstantB(StartRegister uint32, pCon
 }
 
 // SetStreamSource wraps the raw SetStreamSource call.
-func (self IDirect3DDevice9) SetStreamSource(StreamNumber uint32, pStreamData *graphicsdirect3d9.IDirect3DVertexBuffer9, OffsetInBytes uint32, Stride uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetStreamSource(StreamNumber, pStreamData, OffsetInBytes, Stride)))
+func (self IDirect3DDevice9) SetStreamSource(StreamNumber uint32, pStreamData IDirect3DVertexBuffer9, OffsetInBytes uint32, Stride uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetStreamSource(StreamNumber, pStreamData.Raw, OffsetInBytes, Stride)))
 }
 
 // GetStreamSource wraps the raw GetStreamSource call.
@@ -719,8 +719,8 @@ func (self IDirect3DDevice9) GetStreamSourceFreq(StreamNumber uint32, pSetting *
 }
 
 // SetIndices wraps the raw SetIndices call.
-func (self IDirect3DDevice9) SetIndices(pIndexData *graphicsdirect3d9.IDirect3DIndexBuffer9) error {
-	return win32.HRESULTError(int32(self.Raw.SetIndices(pIndexData)))
+func (self IDirect3DDevice9) SetIndices(pIndexData IDirect3DIndexBuffer9) error {
+	return win32.HRESULTError(int32(self.Raw.SetIndices(pIndexData.Raw)))
 }
 
 // GetIndices wraps the raw GetIndices call.
@@ -734,8 +734,8 @@ func (self IDirect3DDevice9) CreatePixelShader(pFunction *uint32, ppShader **gra
 }
 
 // SetPixelShader wraps the raw SetPixelShader call.
-func (self IDirect3DDevice9) SetPixelShader(pShader *graphicsdirect3d9.IDirect3DPixelShader9) error {
-	return win32.HRESULTError(int32(self.Raw.SetPixelShader(pShader)))
+func (self IDirect3DDevice9) SetPixelShader(pShader IDirect3DPixelShader9) error {
+	return win32.HRESULTError(int32(self.Raw.SetPixelShader(pShader.Raw)))
 }
 
 // GetPixelShader wraps the raw GetPixelShader call.
@@ -810,8 +810,8 @@ func (self IDirect3DDevice9Ex) SetConvolutionMonoKernel(width uint32, height uin
 }
 
 // ComposeRects wraps the raw ComposeRects call.
-func (self IDirect3DDevice9Ex) ComposeRects(pSrc *graphicsdirect3d9.IDirect3DSurface9, pDst *graphicsdirect3d9.IDirect3DSurface9, pSrcRectDescs *graphicsdirect3d9.IDirect3DVertexBuffer9, NumRects uint32, pDstRectDescs *graphicsdirect3d9.IDirect3DVertexBuffer9, Operation graphicsdirect3d9.D3DCOMPOSERECTSOP, Xoffset int32, Yoffset int32) error {
-	return win32.HRESULTError(int32(self.Raw.ComposeRects(pSrc, pDst, pSrcRectDescs, NumRects, pDstRectDescs, Operation, Xoffset, Yoffset)))
+func (self IDirect3DDevice9Ex) ComposeRects(pSrc IDirect3DSurface9, pDst IDirect3DSurface9, pSrcRectDescs IDirect3DVertexBuffer9, NumRects uint32, pDstRectDescs IDirect3DVertexBuffer9, Operation graphicsdirect3d9.D3DCOMPOSERECTSOP, Xoffset int32, Yoffset int32) error {
+	return win32.HRESULTError(int32(self.Raw.ComposeRects(pSrc.Raw, pDst.Raw, pSrcRectDescs.Raw, NumRects, pDstRectDescs.Raw, Operation, Xoffset, Yoffset)))
 }
 
 // PresentEx wraps the raw PresentEx call.
@@ -1099,8 +1099,8 @@ func (self IDirect3DSwapChain9) Present(pSourceRect *foundation.RECT, pDestRect 
 }
 
 // GetFrontBufferData wraps the raw GetFrontBufferData call.
-func (self IDirect3DSwapChain9) GetFrontBufferData(pDestSurface *graphicsdirect3d9.IDirect3DSurface9) error {
-	return win32.HRESULTError(int32(self.Raw.GetFrontBufferData(pDestSurface)))
+func (self IDirect3DSwapChain9) GetFrontBufferData(pDestSurface IDirect3DSurface9) error {
+	return win32.HRESULTError(int32(self.Raw.GetFrontBufferData(pDestSurface.Raw)))
 }
 
 // GetBackBuffer wraps the raw GetBackBuffer call.

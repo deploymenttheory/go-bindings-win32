@@ -14,6 +14,8 @@ import (
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uishellcommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/common"
 	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
 )
 
 // PSCoerceToCanonicalValue wraps the raw PSCoerceToCanonicalValue call with idiomatic Go types.
@@ -24,18 +26,18 @@ func PSCoerceToCanonicalValue(key *foundation.PROPERTYKEY, ppropvar *systemcomst
 
 // PSCreateAdapterFromPropertyStore wraps the raw PSCreateAdapterFromPropertyStore call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreateadapterfrompropertystore
-func PSCreateAdapterFromPropertyStore(pps *uishellpropertiessystem.IPropertyStore, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreateAdapterFromPropertyStore(pps, riid, ppv)))
+func PSCreateAdapterFromPropertyStore(pps IPropertyStore, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreateAdapterFromPropertyStore(pps.Raw, riid, ppv)))
 }
 
 // PSCreateDelayedMultiplexPropertyStore wraps the raw PSCreateDelayedMultiplexPropertyStore call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatedelayedmultiplexpropertystore
-func PSCreateDelayedMultiplexPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, pdpsf *uishellpropertiessystem.IDelayedPropertyStoreFactory, rgStoreIds []uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSCreateDelayedMultiplexPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, pdpsf IDelayedPropertyStoreFactory, rgStoreIds []uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	var _rgStoreIds *uint32
 	if len(rgStoreIds) > 0 {
 		_rgStoreIds = &rgStoreIds[0]
 	}
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreateDelayedMultiplexPropertyStore(flags, pdpsf, _rgStoreIds, uint32(len(rgStoreIds)), riid, ppv)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreateDelayedMultiplexPropertyStore(flags, pdpsf.Raw, _rgStoreIds, uint32(len(rgStoreIds)), riid, ppv)))
 }
 
 // PSCreateMemoryPropertyStore wraps the raw PSCreateMemoryPropertyStore call with idiomatic Go types.
@@ -62,14 +64,14 @@ func PSCreatePropertyChangeArray(rgpropkey *foundation.PROPERTYKEY, rgflags *uis
 
 // PSCreatePropertyStoreFromObject wraps the raw PSCreatePropertyStoreFromObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatepropertystorefromobject
-func PSCreatePropertyStoreFromObject(punk *systemcom.IUnknown, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreatePropertyStoreFromObject(punk, grfMode, riid, ppv)))
+func PSCreatePropertyStoreFromObject(punk systemcomidiom.IUnknown, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreatePropertyStoreFromObject(punk.Raw, grfMode, riid, ppv)))
 }
 
 // PSCreatePropertyStoreFromPropertySetStorage wraps the raw PSCreatePropertyStoreFromPropertySetStorage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatepropertystorefrompropertysetstorage
-func PSCreatePropertyStoreFromPropertySetStorage(ppss *systemcomstructuredstorage.IPropertySetStorage, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreatePropertyStoreFromPropertySetStorage(ppss, grfMode, riid, ppv)))
+func PSCreatePropertyStoreFromPropertySetStorage(ppss systemcomstructuredstorageidiom.IPropertySetStorage, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreatePropertyStoreFromPropertySetStorage(ppss.Raw, grfMode, riid, ppv)))
 }
 
 // PSCreateSimplePropertyChange wraps the raw PSCreateSimplePropertyChange call with idiomatic Go types.
@@ -98,8 +100,8 @@ func PSFormatForDisplayAlloc(key *foundation.PROPERTYKEY, propvar *systemcomstru
 
 // PSFormatPropertyValue wraps the raw PSFormatPropertyValue call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psformatpropertyvalue
-func PSFormatPropertyValue(pps *uishellpropertiessystem.IPropertyStore, ppd *uishellpropertiessystem.IPropertyDescription, pdff uishellpropertiessystem.PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSFormatPropertyValue(pps, ppd, pdff, ppszDisplay)))
+func PSFormatPropertyValue(pps IPropertyStore, ppd IPropertyDescription, pdff uishellpropertiessystem.PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSFormatPropertyValue(pps.Raw, ppd.Raw, pdff, ppszDisplay)))
 }
 
 // PSGetImageReferenceForValue wraps the raw PSGetImageReferenceForValue call with idiomatic Go types.
@@ -110,16 +112,16 @@ func PSGetImageReferenceForValue(propkey *foundation.PROPERTYKEY, propvar *syste
 
 // PSGetItemPropertyHandler wraps the raw PSGetItemPropertyHandler call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetitempropertyhandler
-func PSGetItemPropertyHandler(punkItem *systemcom.IUnknown, fReadWrite bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSGetItemPropertyHandler(punkItem systemcomidiom.IUnknown, fReadWrite bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_fReadWrite := foundation.BOOL(win32.Bool32(fReadWrite))
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSGetItemPropertyHandler(punkItem, _fReadWrite, riid, ppv)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSGetItemPropertyHandler(punkItem.Raw, _fReadWrite, riid, ppv)))
 }
 
 // PSGetItemPropertyHandlerWithCreateObject wraps the raw PSGetItemPropertyHandlerWithCreateObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetitempropertyhandlerwithcreateobject
-func PSGetItemPropertyHandlerWithCreateObject(punkItem *systemcom.IUnknown, fReadWrite bool, punkCreateObject *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSGetItemPropertyHandlerWithCreateObject(punkItem systemcomidiom.IUnknown, fReadWrite bool, punkCreateObject systemcomidiom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_fReadWrite := foundation.BOOL(win32.Bool32(fReadWrite))
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSGetItemPropertyHandlerWithCreateObject(punkItem, _fReadWrite, punkCreateObject, riid, ppv)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSGetItemPropertyHandlerWithCreateObject(punkItem.Raw, _fReadWrite, punkCreateObject.Raw, riid, ppv)))
 }
 
 // PSGetNameFromPropertyKey wraps the raw PSGetNameFromPropertyKey call with idiomatic Go types.
@@ -176,8 +178,8 @@ func PSGetPropertySystem(riid *win32.GUID, ppv *unsafe.Pointer) error {
 
 // PSGetPropertyValue wraps the raw PSGetPropertyValue call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertyvalue
-func PSGetPropertyValue(pps *uishellpropertiessystem.IPropertyStore, ppd *uishellpropertiessystem.IPropertyDescription, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSGetPropertyValue(pps, ppd, ppropvar)))
+func PSGetPropertyValue(pps IPropertyStore, ppd IPropertyDescription, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSGetPropertyValue(pps.Raw, ppd.Raw, ppropvar)))
 }
 
 // PSLookupPropertyHandlerCLSID wraps the raw PSLookupPropertyHandlerCLSID call with idiomatic Go types.
@@ -189,235 +191,235 @@ func PSLookupPropertyHandlerCLSID(pszFilePath string, pclsid *win32.GUID) error 
 
 // PSPropertyBag_Delete wraps the raw PSPropertyBag_Delete call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_delete
-func PSPropertyBag_Delete(propBag *systemcomstructuredstorage.IPropertyBag, propName string) error {
+func PSPropertyBag_Delete(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_Delete(propBag, foundation.PWSTR(_propName))))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_Delete(propBag.Raw, foundation.PWSTR(_propName))))
 }
 
 // PSPropertyBag_ReadBOOL wraps the raw PSPropertyBag_ReadBOOL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readbool
-func PSPropertyBag_ReadBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.BOOL) error {
+func PSPropertyBag_ReadBOOL(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.BOOL) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadBOOL(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadBOOL(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadBSTR wraps the raw PSPropertyBag_ReadBSTR call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readbstr
-func PSPropertyBag_ReadBSTR(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.BSTR) error {
+func PSPropertyBag_ReadBSTR(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.BSTR) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadBSTR(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadBSTR(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadDWORD wraps the raw PSPropertyBag_ReadDWORD call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readdword
-func PSPropertyBag_ReadDWORD(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *uint32) error {
+func PSPropertyBag_ReadDWORD(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *uint32) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadDWORD(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadDWORD(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadGUID wraps the raw PSPropertyBag_ReadGUID call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readguid
-func PSPropertyBag_ReadGUID(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *win32.GUID) error {
+func PSPropertyBag_ReadGUID(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *win32.GUID) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadGUID(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadGUID(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadInt wraps the raw PSPropertyBag_ReadInt call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readint
-func PSPropertyBag_ReadInt(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int32) error {
+func PSPropertyBag_ReadInt(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *int32) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadInt(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadInt(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadLONG wraps the raw PSPropertyBag_ReadLONG call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readlong
-func PSPropertyBag_ReadLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int32) error {
+func PSPropertyBag_ReadLONG(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *int32) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadLONG(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadLONG(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadPOINTL wraps the raw PSPropertyBag_ReadPOINTL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readpointl
-func PSPropertyBag_ReadPOINTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTL) error {
+func PSPropertyBag_ReadPOINTL(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.POINTL) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadPOINTL(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadPOINTL(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadPOINTS wraps the raw PSPropertyBag_ReadPOINTS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readpoints
-func PSPropertyBag_ReadPOINTS(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTS) error {
+func PSPropertyBag_ReadPOINTS(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.POINTS) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadPOINTS(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadPOINTS(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadPropertyKey wraps the raw PSPropertyBag_ReadPropertyKey call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readpropertykey
-func PSPropertyBag_ReadPropertyKey(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PROPERTYKEY) error {
+func PSPropertyBag_ReadPropertyKey(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.PROPERTYKEY) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadPropertyKey(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadPropertyKey(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadRECTL wraps the raw PSPropertyBag_ReadRECTL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readrectl
-func PSPropertyBag_ReadRECTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.RECTL) error {
+func PSPropertyBag_ReadRECTL(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.RECTL) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadRECTL(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadRECTL(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadSHORT wraps the raw PSPropertyBag_ReadSHORT call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readshort
-func PSPropertyBag_ReadSHORT(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int16) error {
+func PSPropertyBag_ReadSHORT(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *int16) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadSHORT(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadSHORT(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadStr wraps the raw PSPropertyBag_ReadStr call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readstr
-func PSPropertyBag_ReadStr(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value foundation.PWSTR, characterCount int32) error {
+func PSPropertyBag_ReadStr(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value foundation.PWSTR, characterCount int32) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadStr(propBag, foundation.PWSTR(_propName), value, characterCount)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadStr(propBag.Raw, foundation.PWSTR(_propName), value, characterCount)))
 }
 
 // PSPropertyBag_ReadStrAlloc wraps the raw PSPropertyBag_ReadStrAlloc call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readstralloc
-func PSPropertyBag_ReadStrAlloc(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PWSTR) error {
+func PSPropertyBag_ReadStrAlloc(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.PWSTR) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadStrAlloc(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadStrAlloc(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadStream wraps the raw PSPropertyBag_ReadStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readstream
-func PSPropertyBag_ReadStream(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value **systemcom.IStream) error {
+func PSPropertyBag_ReadStream(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value **systemcom.IStream) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadStream(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadStream(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadType wraps the raw PSPropertyBag_ReadType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readtype
-func PSPropertyBag_ReadType(propBag *systemcomstructuredstorage.IPropertyBag, propName string, var_ *systemvariant.VARIANT, type_ systemvariant.VARENUM) error {
+func PSPropertyBag_ReadType(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, var_ *systemvariant.VARIANT, type_ systemvariant.VARENUM) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadType(propBag, foundation.PWSTR(_propName), var_, type_)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadType(propBag.Raw, foundation.PWSTR(_propName), var_, type_)))
 }
 
 // PSPropertyBag_ReadULONGLONG wraps the raw PSPropertyBag_ReadULONGLONG call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readulonglong
-func PSPropertyBag_ReadULONGLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *uint64) error {
+func PSPropertyBag_ReadULONGLONG(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *uint64) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadULONGLONG(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadULONGLONG(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_ReadUnknown wraps the raw PSPropertyBag_ReadUnknown call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readunknown
-func PSPropertyBag_ReadUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func PSPropertyBag_ReadUnknown(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadUnknown(propBag, foundation.PWSTR(_propName), riid, ppv)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_ReadUnknown(propBag.Raw, foundation.PWSTR(_propName), riid, ppv)))
 }
 
 // PSPropertyBag_WriteBOOL wraps the raw PSPropertyBag_WriteBOOL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writebool
-func PSPropertyBag_WriteBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value bool) error {
+func PSPropertyBag_WriteBOOL(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value bool) error {
 	_propName := win32.UTF16Ptr(propName)
 	_value := foundation.BOOL(win32.Bool32(value))
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteBOOL(propBag, foundation.PWSTR(_propName), _value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteBOOL(propBag.Raw, foundation.PWSTR(_propName), _value)))
 }
 
 // PSPropertyBag_WriteBSTR wraps the raw PSPropertyBag_WriteBSTR call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writebstr
-func PSPropertyBag_WriteBSTR(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value foundation.BSTR) error {
+func PSPropertyBag_WriteBSTR(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value foundation.BSTR) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteBSTR(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteBSTR(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WriteDWORD wraps the raw PSPropertyBag_WriteDWORD call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writedword
-func PSPropertyBag_WriteDWORD(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value uint32) error {
+func PSPropertyBag_WriteDWORD(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value uint32) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteDWORD(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteDWORD(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WriteGUID wraps the raw PSPropertyBag_WriteGUID call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeguid
-func PSPropertyBag_WriteGUID(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *win32.GUID) error {
+func PSPropertyBag_WriteGUID(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *win32.GUID) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteGUID(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteGUID(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WriteInt wraps the raw PSPropertyBag_WriteInt call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeint
-func PSPropertyBag_WriteInt(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int32) error {
+func PSPropertyBag_WriteInt(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value int32) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteInt(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteInt(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WriteLONG wraps the raw PSPropertyBag_WriteLONG call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writelong
-func PSPropertyBag_WriteLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int32) error {
+func PSPropertyBag_WriteLONG(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value int32) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteLONG(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteLONG(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WritePOINTL wraps the raw PSPropertyBag_WritePOINTL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writepointl
-func PSPropertyBag_WritePOINTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTL) error {
+func PSPropertyBag_WritePOINTL(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.POINTL) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WritePOINTL(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WritePOINTL(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WritePOINTS wraps the raw PSPropertyBag_WritePOINTS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writepoints
-func PSPropertyBag_WritePOINTS(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTS) error {
+func PSPropertyBag_WritePOINTS(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.POINTS) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WritePOINTS(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WritePOINTS(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WritePropertyKey wraps the raw PSPropertyBag_WritePropertyKey call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writepropertykey
-func PSPropertyBag_WritePropertyKey(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PROPERTYKEY) error {
+func PSPropertyBag_WritePropertyKey(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.PROPERTYKEY) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WritePropertyKey(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WritePropertyKey(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WriteRECTL wraps the raw PSPropertyBag_WriteRECTL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writerectl
-func PSPropertyBag_WriteRECTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.RECTL) error {
+func PSPropertyBag_WriteRECTL(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value *foundation.RECTL) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteRECTL(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteRECTL(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WriteSHORT wraps the raw PSPropertyBag_WriteSHORT call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeshort
-func PSPropertyBag_WriteSHORT(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int16) error {
+func PSPropertyBag_WriteSHORT(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value int16) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteSHORT(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteSHORT(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WriteStr wraps the raw PSPropertyBag_WriteStr call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writestr
-func PSPropertyBag_WriteStr(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value string) error {
+func PSPropertyBag_WriteStr(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value string) error {
 	_propName := win32.UTF16Ptr(propName)
 	_value := win32.UTF16Ptr(value)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteStr(propBag, foundation.PWSTR(_propName), foundation.PWSTR(_value))))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteStr(propBag.Raw, foundation.PWSTR(_propName), foundation.PWSTR(_value))))
 }
 
 // PSPropertyBag_WriteStream wraps the raw PSPropertyBag_WriteStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writestream
-func PSPropertyBag_WriteStream(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *systemcom.IStream) error {
+func PSPropertyBag_WriteStream(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value systemcomidiom.IStream) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteStream(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteStream(propBag.Raw, foundation.PWSTR(_propName), value.Raw)))
 }
 
 // PSPropertyBag_WriteULONGLONG wraps the raw PSPropertyBag_WriteULONGLONG call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeulonglong
-func PSPropertyBag_WriteULONGLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value uint64) error {
+func PSPropertyBag_WriteULONGLONG(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, value uint64) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteULONGLONG(propBag, foundation.PWSTR(_propName), value)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteULONGLONG(propBag.Raw, foundation.PWSTR(_propName), value)))
 }
 
 // PSPropertyBag_WriteUnknown wraps the raw PSPropertyBag_WriteUnknown call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeunknown
-func PSPropertyBag_WriteUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName string, punk *systemcom.IUnknown) error {
+func PSPropertyBag_WriteUnknown(propBag systemcomstructuredstorageidiom.IPropertyBag, propName string, punk systemcomidiom.IUnknown) error {
 	_propName := win32.UTF16Ptr(propName)
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteUnknown(propBag, foundation.PWSTR(_propName), punk)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSPropertyBag_WriteUnknown(propBag.Raw, foundation.PWSTR(_propName), punk.Raw)))
 }
 
 // PSPropertyKeyFromString wraps the raw PSPropertyKeyFromString call with idiomatic Go types.
@@ -442,8 +444,8 @@ func PSRegisterPropertySchema(pszPath string) error {
 
 // PSSetPropertyValue wraps the raw PSSetPropertyValue call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pssetpropertyvalue
-func PSSetPropertyValue(pps *uishellpropertiessystem.IPropertyStore, ppd *uishellpropertiessystem.IPropertyDescription, propvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSSetPropertyValue(pps, ppd, propvar)))
+func PSSetPropertyValue(pps IPropertyStore, ppd IPropertyDescription, propvar *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSSetPropertyValue(pps.Raw, ppd.Raw, propvar)))
 }
 
 // PSStringFromPropertyKey wraps the raw PSStringFromPropertyKey call with idiomatic Go types.
@@ -469,9 +471,9 @@ func PifMgr_OpenProperties(pszApp string, pszPIF string, hInf uint32, flOpt uint
 
 // SHAddDefaultPropertiesByExt wraps the raw SHAddDefaultPropertiesByExt call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl/nf-shobjidl-shadddefaultpropertiesbyext
-func SHAddDefaultPropertiesByExt(pszExt string, pPropStore *uishellpropertiessystem.IPropertyStore) error {
+func SHAddDefaultPropertiesByExt(pszExt string, pPropStore IPropertyStore) error {
 	_pszExt := win32.UTF16Ptr(pszExt)
-	return win32.HRESULTError(int32(uishellpropertiessystem.SHAddDefaultPropertiesByExt(foundation.PWSTR(_pszExt), pPropStore)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.SHAddDefaultPropertiesByExt(foundation.PWSTR(_pszExt), pPropStore.Raw)))
 }
 
 // SHGetPropertyStoreForWindow wraps the raw SHGetPropertyStoreForWindow call with idiomatic Go types.
@@ -488,25 +490,25 @@ func SHGetPropertyStoreFromIDList(pidl *uishellcommon.ITEMIDLIST, flags uishellp
 
 // SHGetPropertyStoreFromParsingName wraps the raw SHGetPropertyStoreFromParsingName call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetpropertystorefromparsingname
-func SHGetPropertyStoreFromParsingName(pszPath string, pbc *systemcom.IBindCtx, flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func SHGetPropertyStoreFromParsingName(pszPath string, pbc systemcomidiom.IBindCtx, flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	return win32.HRESULTError(int32(uishellpropertiessystem.SHGetPropertyStoreFromParsingName(foundation.PWSTR(_pszPath), pbc, flags, riid, ppv)))
+	return win32.HRESULTError(int32(uishellpropertiessystem.SHGetPropertyStoreFromParsingName(foundation.PWSTR(_pszPath), pbc.Raw, flags, riid, ppv)))
 }
 
 // SHPropStgCreate wraps the raw SHPropStgCreate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpropstgcreate
-func SHPropStgCreate(psstg *systemcomstructuredstorage.IPropertySetStorage, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, grfMode uint32, dwDisposition uint32, ppstg **systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.SHPropStgCreate(psstg, fmtid, pclsid, grfFlags, grfMode, dwDisposition, ppstg, puCodePage)))
+func SHPropStgCreate(psstg systemcomstructuredstorageidiom.IPropertySetStorage, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, grfMode uint32, dwDisposition uint32, ppstg **systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.SHPropStgCreate(psstg.Raw, fmtid, pclsid, grfFlags, grfMode, dwDisposition, ppstg, puCodePage)))
 }
 
 // SHPropStgReadMultiple wraps the raw SHPropStgReadMultiple call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpropstgreadmultiple
-func SHPropStgReadMultiple(pps *systemcomstructuredstorage.IPropertyStorage, uCodePage uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.SHPropStgReadMultiple(pps, uCodePage, cpspec, rgpspec, rgvar)))
+func SHPropStgReadMultiple(pps systemcomstructuredstorageidiom.IPropertyStorage, uCodePage uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.SHPropStgReadMultiple(pps.Raw, uCodePage, cpspec, rgpspec, rgvar)))
 }
 
 // SHPropStgWriteMultiple wraps the raw SHPropStgWriteMultiple call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpropstgwritemultiple
-func SHPropStgWriteMultiple(pps *systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT, propidNameFirst uint32) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.SHPropStgWriteMultiple(pps, puCodePage, cpspec, rgpspec, rgvar, propidNameFirst)))
+func SHPropStgWriteMultiple(pps systemcomstructuredstorageidiom.IPropertyStorage, puCodePage *uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT, propidNameFirst uint32) error {
+	return win32.HRESULTError(int32(uishellpropertiessystem.SHPropStgWriteMultiple(pps.Raw, puCodePage, cpspec, rgpspec, rgvar, propidNameFirst)))
 }

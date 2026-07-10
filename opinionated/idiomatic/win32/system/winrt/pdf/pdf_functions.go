@@ -6,12 +6,12 @@ package pdf
 
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	systemwinrtpdf "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/pdf"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
 )
 
 // PdfCreateRenderer wraps the raw PdfCreateRenderer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/windows.data.pdf.interop/nf-windows-data-pdf-interop-pdfcreaterenderer
-func PdfCreateRenderer(pDevice *graphicsdxgi.IDXGIDevice, ppRenderer **systemwinrtpdf.IPdfRendererNative) error {
-	return win32.HRESULTError(int32(systemwinrtpdf.PdfCreateRenderer(pDevice, ppRenderer)))
+func PdfCreateRenderer(pDevice graphicsdxgiidiom.IDXGIDevice, ppRenderer **systemwinrtpdf.IPdfRendererNative) error {
+	return win32.HRESULTError(int32(systemwinrtpdf.PdfCreateRenderer(pDevice.Raw, ppRenderer)))
 }

@@ -9,14 +9,16 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
-	graphicsdirect3d9 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	mediadxmediaobjects "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/dxmediaobjects"
 	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	uishellpropertiessystem "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell/propertiessystem"
+	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
+	graphicsdirect3d9idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d9"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	uishellpropertiessystemidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/ui/shell/propertiessystem"
 )
 
 // CreateNamedPropertyStore wraps the raw CreateNamedPropertyStore call with idiomatic Go types.
@@ -39,20 +41,20 @@ func DXVA2CreateDirect3DDeviceManager9(pResetToken *uint32, ppDeviceManager **me
 
 // DXVA2CreateVideoService wraps the raw DXVA2CreateVideoService call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dxva2api/nf-dxva2api-dxva2createvideoservice
-func DXVA2CreateVideoService(pDD *graphicsdirect3d9.IDirect3DDevice9, riid *win32.GUID, ppService *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.DXVA2CreateVideoService(pDD, riid, ppService)))
+func DXVA2CreateVideoService(pDD graphicsdirect3d9idiom.IDirect3DDevice9, riid *win32.GUID, ppService *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.DXVA2CreateVideoService(pDD.Raw, riid, ppService)))
 }
 
 // DXVAHD_CreateDevice wraps the raw DXVAHD_CreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dxvahd/nf-dxvahd-dxvahd_createdevice
-func DXVAHD_CreateDevice(pD3DDevice *graphicsdirect3d9.IDirect3DDevice9Ex, pContentDesc *mediamediafoundation.DXVAHD_CONTENT_DESC, Usage mediamediafoundation.DXVAHD_DEVICE_USAGE, pPlugin mediamediafoundation.PDXVAHDSW_Plugin, ppDevice **mediamediafoundation.IDXVAHD_Device) error {
-	return win32.HRESULTError(int32(mediamediafoundation.DXVAHD_CreateDevice(pD3DDevice, pContentDesc, Usage, pPlugin, ppDevice)))
+func DXVAHD_CreateDevice(pD3DDevice graphicsdirect3d9idiom.IDirect3DDevice9Ex, pContentDesc *mediamediafoundation.DXVAHD_CONTENT_DESC, Usage mediamediafoundation.DXVAHD_DEVICE_USAGE, pPlugin mediamediafoundation.PDXVAHDSW_Plugin, ppDevice **mediamediafoundation.IDXVAHD_Device) error {
+	return win32.HRESULTError(int32(mediamediafoundation.DXVAHD_CreateDevice(pD3DDevice.Raw, pContentDesc, Usage, pPlugin, ppDevice)))
 }
 
 // MFAddPeriodicCallback wraps the raw MFAddPeriodicCallback call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfaddperiodiccallback
-func MFAddPeriodicCallback(Callback mediamediafoundation.MFPERIODICCALLBACK, pContext *systemcom.IUnknown, pdwKey *uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFAddPeriodicCallback(Callback, pContext, pdwKey)))
+func MFAddPeriodicCallback(Callback mediamediafoundation.MFPERIODICCALLBACK, pContext systemcomidiom.IUnknown, pdwKey *uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFAddPeriodicCallback(Callback, pContext.Raw, pdwKey)))
 }
 
 // MFAllocateSerialWorkQueue wraps the raw MFAllocateSerialWorkQueue call with idiomatic Go types.
@@ -81,29 +83,29 @@ func MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame uint64, punNumerator
 
 // MFBeginCreateFile wraps the raw MFBeginCreateFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfbegincreatefile
-func MFBeginCreateFile(AccessMode mediamediafoundation.MF_FILE_ACCESSMODE, OpenMode mediamediafoundation.MF_FILE_OPENMODE, fFlags mediamediafoundation.MF_FILE_FLAGS, pwszFilePath string, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown, ppCancelCookie **systemcom.IUnknown) error {
+func MFBeginCreateFile(AccessMode mediamediafoundation.MF_FILE_ACCESSMODE, OpenMode mediamediafoundation.MF_FILE_OPENMODE, fFlags mediamediafoundation.MF_FILE_FLAGS, pwszFilePath string, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown, ppCancelCookie **systemcom.IUnknown) error {
 	_pwszFilePath := win32.UTF16Ptr(pwszFilePath)
-	return win32.HRESULTError(int32(mediamediafoundation.MFBeginCreateFile(AccessMode, OpenMode, fFlags, foundation.PWSTR(_pwszFilePath), pCallback, pState, ppCancelCookie)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFBeginCreateFile(AccessMode, OpenMode, fFlags, foundation.PWSTR(_pwszFilePath), pCallback.Raw, pState.Raw, ppCancelCookie)))
 }
 
 // MFBeginRegisterWorkQueueWithMMCSS wraps the raw MFBeginRegisterWorkQueueWithMMCSS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfbeginregisterworkqueuewithmmcss
-func MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId uint32, wszClass string, dwTaskId uint32, pDoneCallback *mediamediafoundation.IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
+func MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId uint32, wszClass string, dwTaskId uint32, pDoneCallback IMFAsyncCallback, pDoneState systemcomidiom.IUnknown) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
-	return win32.HRESULTError(int32(mediamediafoundation.MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId, foundation.PWSTR(_wszClass), dwTaskId, pDoneCallback, pDoneState)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId, foundation.PWSTR(_wszClass), dwTaskId, pDoneCallback.Raw, pDoneState.Raw)))
 }
 
 // MFBeginRegisterWorkQueueWithMMCSSEx wraps the raw MFBeginRegisterWorkQueueWithMMCSSEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfbeginregisterworkqueuewithmmcssex
-func MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId uint32, wszClass string, dwTaskId uint32, lPriority int32, pDoneCallback *mediamediafoundation.IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
+func MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId uint32, wszClass string, dwTaskId uint32, lPriority int32, pDoneCallback IMFAsyncCallback, pDoneState systemcomidiom.IUnknown) error {
 	_wszClass := win32.UTF16Ptr(wszClass)
-	return win32.HRESULTError(int32(mediamediafoundation.MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId, foundation.PWSTR(_wszClass), dwTaskId, lPriority, pDoneCallback, pDoneState)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId, foundation.PWSTR(_wszClass), dwTaskId, lPriority, pDoneCallback.Raw, pDoneState.Raw)))
 }
 
 // MFBeginUnregisterWorkQueueWithMMCSS wraps the raw MFBeginUnregisterWorkQueueWithMMCSS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfbeginunregisterworkqueuewithmmcss
-func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId uint32, pDoneCallback *mediamediafoundation.IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId, pDoneCallback, pDoneState)))
+func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId uint32, pDoneCallback IMFAsyncCallback, pDoneState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId, pDoneCallback.Raw, pDoneState.Raw)))
 }
 
 // MFCalculateBitmapImageSize wraps the raw MFCalculateBitmapImageSize call with idiomatic Go types.
@@ -120,8 +122,8 @@ func MFCalculateImageSize(guidSubtype *win32.GUID, unWidth uint32, unHeight uint
 
 // MFCancelCreateFile wraps the raw MFCancelCreateFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcancelcreatefile
-func MFCancelCreateFile(pCancelCookie *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCancelCreateFile(pCancelCookie)))
+func MFCancelCreateFile(pCancelCookie systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCancelCreateFile(pCancelCookie.Raw)))
 }
 
 // MFCancelWorkItem wraps the raw MFCancelWorkItem call with idiomatic Go types.
@@ -132,14 +134,14 @@ func MFCancelWorkItem(Key uint64) error {
 
 // MFCombineSamples wraps the raw MFCombineSamples call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcombinesamples
-func MFCombineSamples(pSample *mediamediafoundation.IMFSample, pSampleToAdd *mediamediafoundation.IMFSample, dwMaxMergedDurationInMS uint32, pMerged *foundation.BOOL) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCombineSamples(pSample, pSampleToAdd, dwMaxMergedDurationInMS, pMerged)))
+func MFCombineSamples(pSample IMFSample, pSampleToAdd IMFSample, dwMaxMergedDurationInMS uint32, pMerged *foundation.BOOL) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCombineSamples(pSample.Raw, pSampleToAdd.Raw, dwMaxMergedDurationInMS, pMerged)))
 }
 
 // MFCompareFullToPartialMediaType wraps the raw MFCompareFullToPartialMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcomparefulltopartialmediatype
-func MFCompareFullToPartialMediaType(pMFTypeFull *mediamediafoundation.IMFMediaType, pMFTypePartial *mediamediafoundation.IMFMediaType) bool {
-	return mediamediafoundation.MFCompareFullToPartialMediaType(pMFTypeFull, pMFTypePartial) != 0
+func MFCompareFullToPartialMediaType(pMFTypeFull IMFMediaType, pMFTypePartial IMFMediaType) bool {
+	return mediamediafoundation.MFCompareFullToPartialMediaType(pMFTypeFull.Raw, pMFTypePartial.Raw) != 0
 }
 
 // MFConvertColorInfoFromDXVA wraps the raw MFConvertColorInfoFromDXVA call with idiomatic Go types.
@@ -181,20 +183,20 @@ func MFCreate2DMediaBuffer(dwWidth uint32, dwHeight uint32, dwFourCC uint32, fBo
 
 // MFCreate3GPMediaSink wraps the raw MFCreate3GPMediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreate3gpmediasink
-func MFCreate3GPMediaSink(pIByteStream *mediamediafoundation.IMFByteStream, pVideoMediaType *mediamediafoundation.IMFMediaType, pAudioMediaType *mediamediafoundation.IMFMediaType, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreate3GPMediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)))
+func MFCreate3GPMediaSink(pIByteStream IMFByteStream, pVideoMediaType IMFMediaType, pAudioMediaType IMFMediaType, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreate3GPMediaSink(pIByteStream.Raw, pVideoMediaType.Raw, pAudioMediaType.Raw, ppIMediaSink)))
 }
 
 // MFCreateAC3MediaSink wraps the raw MFCreateAC3MediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateac3mediasink
-func MFCreateAC3MediaSink(pTargetByteStream *mediamediafoundation.IMFByteStream, pAudioMediaType *mediamediafoundation.IMFMediaType, ppMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAC3MediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)))
+func MFCreateAC3MediaSink(pTargetByteStream IMFByteStream, pAudioMediaType IMFMediaType, ppMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAC3MediaSink(pTargetByteStream.Raw, pAudioMediaType.Raw, ppMediaSink)))
 }
 
 // MFCreateADTSMediaSink wraps the raw MFCreateADTSMediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateadtsmediasink
-func MFCreateADTSMediaSink(pTargetByteStream *mediamediafoundation.IMFByteStream, pAudioMediaType *mediamediafoundation.IMFMediaType, ppMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateADTSMediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)))
+func MFCreateADTSMediaSink(pTargetByteStream IMFByteStream, pAudioMediaType IMFMediaType, ppMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateADTSMediaSink(pTargetByteStream.Raw, pAudioMediaType.Raw, ppMediaSink)))
 }
 
 // MFCreateASFContentInfo wraps the raw MFCreateASFContentInfo call with idiomatic Go types.
@@ -211,21 +213,21 @@ func MFCreateASFIndexer(ppIIndexer **mediamediafoundation.IMFASFIndexer) error {
 
 // MFCreateASFIndexerByteStream wraps the raw MFCreateASFIndexerByteStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfindexerbytestream
-func MFCreateASFIndexerByteStream(pIContentByteStream *mediamediafoundation.IMFByteStream, cbIndexStartOffset uint64, pIIndexByteStream **mediamediafoundation.IMFByteStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFIndexerByteStream(pIContentByteStream, cbIndexStartOffset, pIIndexByteStream)))
+func MFCreateASFIndexerByteStream(pIContentByteStream IMFByteStream, cbIndexStartOffset uint64, pIIndexByteStream **mediamediafoundation.IMFByteStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFIndexerByteStream(pIContentByteStream.Raw, cbIndexStartOffset, pIIndexByteStream)))
 }
 
 // MFCreateASFMediaSink wraps the raw MFCreateASFMediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfmediasink
-func MFCreateASFMediaSink(pIByteStream *mediamediafoundation.IMFByteStream, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFMediaSink(pIByteStream, ppIMediaSink)))
+func MFCreateASFMediaSink(pIByteStream IMFByteStream, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFMediaSink(pIByteStream.Raw, ppIMediaSink)))
 }
 
 // MFCreateASFMediaSinkActivate wraps the raw MFCreateASFMediaSinkActivate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfmediasinkactivate
-func MFCreateASFMediaSinkActivate(pwszFileName string, pContentInfo *mediamediafoundation.IMFASFContentInfo, ppIActivate **mediamediafoundation.IMFActivate) error {
+func MFCreateASFMediaSinkActivate(pwszFileName string, pContentInfo IMFASFContentInfo, ppIActivate **mediamediafoundation.IMFActivate) error {
 	_pwszFileName := win32.UTF16Ptr(pwszFileName)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFMediaSinkActivate(foundation.PWSTR(_pwszFileName), pContentInfo, ppIActivate)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFMediaSinkActivate(foundation.PWSTR(_pwszFileName), pContentInfo.Raw, ppIActivate)))
 }
 
 // MFCreateASFMultiplexer wraps the raw MFCreateASFMultiplexer call with idiomatic Go types.
@@ -242,8 +244,8 @@ func MFCreateASFProfile(ppIProfile **mediamediafoundation.IMFASFProfile) error {
 
 // MFCreateASFProfileFromPresentationDescriptor wraps the raw MFCreateASFProfileFromPresentationDescriptor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfprofilefrompresentationdescriptor
-func MFCreateASFProfileFromPresentationDescriptor(pIPD *mediamediafoundation.IMFPresentationDescriptor, ppIProfile **mediamediafoundation.IMFASFProfile) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFProfileFromPresentationDescriptor(pIPD, ppIProfile)))
+func MFCreateASFProfileFromPresentationDescriptor(pIPD IMFPresentationDescriptor, ppIProfile **mediamediafoundation.IMFASFProfile) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFProfileFromPresentationDescriptor(pIPD.Raw, ppIProfile)))
 }
 
 // MFCreateASFSplitter wraps the raw MFCreateASFSplitter call with idiomatic Go types.
@@ -254,32 +256,32 @@ func MFCreateASFSplitter(ppISplitter **mediamediafoundation.IMFASFSplitter) erro
 
 // MFCreateASFStreamSelector wraps the raw MFCreateASFStreamSelector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfstreamselector
-func MFCreateASFStreamSelector(pIASFProfile *mediamediafoundation.IMFASFProfile, ppSelector **mediamediafoundation.IMFASFStreamSelector) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFStreamSelector(pIASFProfile, ppSelector)))
+func MFCreateASFStreamSelector(pIASFProfile IMFASFProfile, ppSelector **mediamediafoundation.IMFASFStreamSelector) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFStreamSelector(pIASFProfile.Raw, ppSelector)))
 }
 
 // MFCreateASFStreamingMediaSink wraps the raw MFCreateASFStreamingMediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfstreamingmediasink
-func MFCreateASFStreamingMediaSink(pIByteStream *mediamediafoundation.IMFByteStream, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFStreamingMediaSink(pIByteStream, ppIMediaSink)))
+func MFCreateASFStreamingMediaSink(pIByteStream IMFByteStream, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFStreamingMediaSink(pIByteStream.Raw, ppIMediaSink)))
 }
 
 // MFCreateASFStreamingMediaSinkActivate wraps the raw MFCreateASFStreamingMediaSinkActivate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfstreamingmediasinkactivate
-func MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate *mediamediafoundation.IMFActivate, pContentInfo *mediamediafoundation.IMFASFContentInfo, ppIActivate **mediamediafoundation.IMFActivate) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate, pContentInfo, ppIActivate)))
+func MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate IMFActivate, pContentInfo IMFASFContentInfo, ppIActivate **mediamediafoundation.IMFActivate) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate.Raw, pContentInfo.Raw, ppIActivate)))
 }
 
 // MFCreateAVIMediaSink wraps the raw MFCreateAVIMediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateavimediasink
-func MFCreateAVIMediaSink(pIByteStream *mediamediafoundation.IMFByteStream, pVideoMediaType *mediamediafoundation.IMFMediaType, pAudioMediaType *mediamediafoundation.IMFMediaType, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAVIMediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)))
+func MFCreateAVIMediaSink(pIByteStream IMFByteStream, pVideoMediaType IMFMediaType, pAudioMediaType IMFMediaType, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAVIMediaSink(pIByteStream.Raw, pVideoMediaType.Raw, pAudioMediaType.Raw, ppIMediaSink)))
 }
 
 // MFCreateAggregateSource wraps the raw MFCreateAggregateSource call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateaggregatesource
-func MFCreateAggregateSource(pSourceCollection *mediamediafoundation.IMFCollection, ppAggSource **mediamediafoundation.IMFMediaSource) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAggregateSource(pSourceCollection, ppAggSource)))
+func MFCreateAggregateSource(pSourceCollection IMFCollection, ppAggSource **mediamediafoundation.IMFMediaSource) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAggregateSource(pSourceCollection.Raw, ppAggSource)))
 }
 
 // MFCreateAlignedMemoryBuffer wraps the raw MFCreateAlignedMemoryBuffer call with idiomatic Go types.
@@ -290,8 +292,8 @@ func MFCreateAlignedMemoryBuffer(cbMaxLength uint32, cbAligment uint32, ppBuffer
 
 // MFCreateAsyncResult wraps the raw MFCreateAsyncResult call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreateasyncresult
-func MFCreateAsyncResult(punkObject *systemcom.IUnknown, pCallback *mediamediafoundation.IMFAsyncCallback, punkState *systemcom.IUnknown, ppAsyncResult **mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAsyncResult(punkObject, pCallback, punkState, ppAsyncResult)))
+func MFCreateAsyncResult(punkObject systemcomidiom.IUnknown, pCallback IMFAsyncCallback, punkState systemcomidiom.IUnknown, ppAsyncResult **mediamediafoundation.IMFAsyncResult) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAsyncResult(punkObject.Raw, pCallback.Raw, punkState.Raw, ppAsyncResult)))
 }
 
 // MFCreateAttributes wraps the raw MFCreateAttributes call with idiomatic Go types.
@@ -308,8 +310,8 @@ func MFCreateAudioMediaType(pAudioFormat unsafe.Pointer, ppIAudioMediaType **med
 
 // MFCreateAudioRenderer wraps the raw MFCreateAudioRenderer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateaudiorenderer
-func MFCreateAudioRenderer(pAudioAttributes *mediamediafoundation.IMFAttributes, ppSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAudioRenderer(pAudioAttributes, ppSink)))
+func MFCreateAudioRenderer(pAudioAttributes IMFAttributes, ppSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateAudioRenderer(pAudioAttributes.Raw, ppSink)))
 }
 
 // MFCreateAudioRendererActivate wraps the raw MFCreateAudioRendererActivate call with idiomatic Go types.
@@ -320,16 +322,16 @@ func MFCreateAudioRendererActivate(ppActivate **mediamediafoundation.IMFActivate
 
 // MFCreateCameraControlMonitor wraps the raw MFCreateCameraControlMonitor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatecameracontrolmonitor
-func MFCreateCameraControlMonitor(symbolicLink string, callback *mediamediafoundation.IMFCameraControlNotify, ppCameraControlMonitor **mediamediafoundation.IMFCameraControlMonitor) error {
+func MFCreateCameraControlMonitor(symbolicLink string, callback IMFCameraControlNotify, ppCameraControlMonitor **mediamediafoundation.IMFCameraControlMonitor) error {
 	_symbolicLink := win32.UTF16Ptr(symbolicLink)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateCameraControlMonitor(foundation.PWSTR(_symbolicLink), callback, ppCameraControlMonitor)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateCameraControlMonitor(foundation.PWSTR(_symbolicLink), callback.Raw, ppCameraControlMonitor)))
 }
 
 // MFCreateCameraOcclusionStateMonitor wraps the raw MFCreateCameraOcclusionStateMonitor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatecameraocclusionstatemonitor
-func MFCreateCameraOcclusionStateMonitor(symbolicLink string, callback *mediamediafoundation.IMFCameraOcclusionStateReportCallback, occlusionStateMonitor **mediamediafoundation.IMFCameraOcclusionStateMonitor) error {
+func MFCreateCameraOcclusionStateMonitor(symbolicLink string, callback IMFCameraOcclusionStateReportCallback, occlusionStateMonitor **mediamediafoundation.IMFCameraOcclusionStateMonitor) error {
 	_symbolicLink := win32.UTF16Ptr(symbolicLink)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateCameraOcclusionStateMonitor(foundation.PWSTR(_symbolicLink), callback, occlusionStateMonitor)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateCameraOcclusionStateMonitor(foundation.PWSTR(_symbolicLink), callback.Raw, occlusionStateMonitor)))
 }
 
 // MFCreateCollection wraps the raw MFCreateCollection call with idiomatic Go types.
@@ -340,8 +342,8 @@ func MFCreateCollection(ppIMFCollection **mediamediafoundation.IMFCollection) er
 
 // MFCreateContentDecryptorContext wraps the raw MFCreateContentDecryptorContext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatecontentdecryptorcontext
-func MFCreateContentDecryptorContext(guidMediaProtectionSystemId *win32.GUID, pD3DManager *mediamediafoundation.IMFDXGIDeviceManager, pContentProtectionDevice *mediamediafoundation.IMFContentProtectionDevice, ppContentDecryptorContext **mediamediafoundation.IMFContentDecryptorContext) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateContentDecryptorContext(guidMediaProtectionSystemId, pD3DManager, pContentProtectionDevice, ppContentDecryptorContext)))
+func MFCreateContentDecryptorContext(guidMediaProtectionSystemId *win32.GUID, pD3DManager IMFDXGIDeviceManager, pContentProtectionDevice IMFContentProtectionDevice, ppContentDecryptorContext **mediamediafoundation.IMFContentDecryptorContext) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateContentDecryptorContext(guidMediaProtectionSystemId, pD3DManager.Raw, pContentProtectionDevice.Raw, ppContentDecryptorContext)))
 }
 
 // MFCreateContentProtectionDevice wraps the raw MFCreateContentProtectionDevice call with idiomatic Go types.
@@ -358,13 +360,13 @@ func MFCreateCredentialCache(ppCache **mediamediafoundation.IMFNetCredentialCach
 
 // MFCreateD3D12SynchronizationObject wraps the raw MFCreateD3D12SynchronizationObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfd3d12/nf-mfd3d12-mfcreated3d12synchronizationobject
-func MFCreateD3D12SynchronizationObject(pDevice *graphicsdirect3d12.ID3D12Device, riid *win32.GUID, ppvSyncObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateD3D12SynchronizationObject(pDevice, riid, ppvSyncObject)))
+func MFCreateD3D12SynchronizationObject(pDevice graphicsdirect3d12idiom.ID3D12Device, riid *win32.GUID, ppvSyncObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateD3D12SynchronizationObject(pDevice.Raw, riid, ppvSyncObject)))
 }
 
 // MFCreateDXGICrossAdapterBuffer wraps the raw MFCreateDXGICrossAdapterBuffer call with idiomatic Go types.
-func MFCreateDXGICrossAdapterBuffer(riid *win32.GUID, punkDevice *systemcom.IUnknown, pMediaType *mediamediafoundation.IMFMediaType, uSubresource uint32, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDXGICrossAdapterBuffer(riid, punkDevice, pMediaType, uSubresource, ppBuffer)))
+func MFCreateDXGICrossAdapterBuffer(riid *win32.GUID, punkDevice systemcomidiom.IUnknown, pMediaType IMFMediaType, uSubresource uint32, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDXGICrossAdapterBuffer(riid, punkDevice.Raw, pMediaType.Raw, uSubresource, ppBuffer)))
 }
 
 // MFCreateDXGIDeviceManager wraps the raw MFCreateDXGIDeviceManager call with idiomatic Go types.
@@ -375,35 +377,35 @@ func MFCreateDXGIDeviceManager(resetToken *uint32, ppDeviceManager **mediamediaf
 
 // MFCreateDXGISurfaceBuffer wraps the raw MFCreateDXGISurfaceBuffer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatedxgisurfacebuffer
-func MFCreateDXGISurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, uSubresourceIndex uint32, fBottomUpWhenLinear bool, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
+func MFCreateDXGISurfaceBuffer(riid *win32.GUID, punkSurface systemcomidiom.IUnknown, uSubresourceIndex uint32, fBottomUpWhenLinear bool, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
 	_fBottomUpWhenLinear := foundation.BOOL(win32.Bool32(fBottomUpWhenLinear))
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDXGISurfaceBuffer(riid, punkSurface, uSubresourceIndex, _fBottomUpWhenLinear, ppBuffer)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDXGISurfaceBuffer(riid, punkSurface.Raw, uSubresourceIndex, _fBottomUpWhenLinear, ppBuffer)))
 }
 
 // MFCreateDXSurfaceBuffer wraps the raw MFCreateDXSurfaceBuffer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatedxsurfacebuffer
-func MFCreateDXSurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, fBottomUpWhenLinear bool, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
+func MFCreateDXSurfaceBuffer(riid *win32.GUID, punkSurface systemcomidiom.IUnknown, fBottomUpWhenLinear bool, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
 	_fBottomUpWhenLinear := foundation.BOOL(win32.Bool32(fBottomUpWhenLinear))
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDXSurfaceBuffer(riid, punkSurface, _fBottomUpWhenLinear, ppBuffer)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDXSurfaceBuffer(riid, punkSurface.Raw, _fBottomUpWhenLinear, ppBuffer)))
 }
 
 // MFCreateDeviceSource wraps the raw MFCreateDeviceSource call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatedevicesource
-func MFCreateDeviceSource(pAttributes *mediamediafoundation.IMFAttributes, ppSource **mediamediafoundation.IMFMediaSource) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDeviceSource(pAttributes, ppSource)))
+func MFCreateDeviceSource(pAttributes IMFAttributes, ppSource **mediamediafoundation.IMFMediaSource) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDeviceSource(pAttributes.Raw, ppSource)))
 }
 
 // MFCreateDeviceSourceActivate wraps the raw MFCreateDeviceSourceActivate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatedevicesourceactivate
-func MFCreateDeviceSourceActivate(pAttributes *mediamediafoundation.IMFAttributes, ppActivate **mediamediafoundation.IMFActivate) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDeviceSourceActivate(pAttributes, ppActivate)))
+func MFCreateDeviceSourceActivate(pAttributes IMFAttributes, ppActivate **mediamediafoundation.IMFActivate) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateDeviceSourceActivate(pAttributes.Raw, ppActivate)))
 }
 
 // MFCreateEncryptedMediaExtensionsStoreActivate wraps the raw MFCreateEncryptedMediaExtensionsStoreActivate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfcontentdecryptionmodule/nf-mfcontentdecryptionmodule-mfcreateencryptedmediaextensionsstoreactivate
-func MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost *mediamediafoundation.IMFPMPHostApp, objectStream *systemcom.IStream, classId string, activate **mediamediafoundation.IMFActivate) error {
+func MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost IMFPMPHostApp, objectStream systemcomidiom.IStream, classId string, activate **mediamediafoundation.IMFActivate) error {
 	_classId := win32.UTF16Ptr(classId)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost, objectStream, foundation.PWSTR(_classId), activate)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost.Raw, objectStream.Raw, foundation.PWSTR(_classId), activate)))
 }
 
 // MFCreateEventQueue wraps the raw MFCreateEventQueue call with idiomatic Go types.
@@ -424,8 +426,8 @@ func MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics **mediamediafou
 
 // MFCreateFMPEG4MediaSink wraps the raw MFCreateFMPEG4MediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatefmpeg4mediasink
-func MFCreateFMPEG4MediaSink(pIByteStream *mediamediafoundation.IMFByteStream, pVideoMediaType *mediamediafoundation.IMFMediaType, pAudioMediaType *mediamediafoundation.IMFMediaType, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateFMPEG4MediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)))
+func MFCreateFMPEG4MediaSink(pIByteStream IMFByteStream, pVideoMediaType IMFMediaType, pAudioMediaType IMFMediaType, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateFMPEG4MediaSink(pIByteStream.Raw, pVideoMediaType.Raw, pAudioMediaType.Raw, ppIMediaSink)))
 }
 
 // MFCreateFile wraps the raw MFCreateFile call with idiomatic Go types.
@@ -437,56 +439,56 @@ func MFCreateFile(AccessMode mediamediafoundation.MF_FILE_ACCESSMODE, OpenMode m
 
 // MFCreateLegacyMediaBufferOnMFMediaBuffer wraps the raw MFCreateLegacyMediaBufferOnMFMediaBuffer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatelegacymediabufferonmfmediabuffer
-func MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample *mediamediafoundation.IMFSample, pMFMediaBuffer *mediamediafoundation.IMFMediaBuffer, cbOffset uint32, ppMediaBuffer **mediadxmediaobjects.IMediaBuffer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample, pMFMediaBuffer, cbOffset, ppMediaBuffer)))
+func MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample IMFSample, pMFMediaBuffer IMFMediaBuffer, cbOffset uint32, ppMediaBuffer **mediadxmediaobjects.IMediaBuffer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample.Raw, pMFMediaBuffer.Raw, cbOffset, ppMediaBuffer)))
 }
 
 // MFCreateMFByteStreamOnStream wraps the raw MFCreateMFByteStreamOnStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemfbytestreamonstream
-func MFCreateMFByteStreamOnStream(pStream *systemcom.IStream, ppByteStream **mediamediafoundation.IMFByteStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMFByteStreamOnStream(pStream, ppByteStream)))
+func MFCreateMFByteStreamOnStream(pStream systemcomidiom.IStream, ppByteStream **mediamediafoundation.IMFByteStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMFByteStreamOnStream(pStream.Raw, ppByteStream)))
 }
 
 // MFCreateMFByteStreamOnStreamEx wraps the raw MFCreateMFByteStreamOnStreamEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemfbytestreamonstreamex
-func MFCreateMFByteStreamOnStreamEx(punkStream *systemcom.IUnknown, ppByteStream **mediamediafoundation.IMFByteStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMFByteStreamOnStreamEx(punkStream, ppByteStream)))
+func MFCreateMFByteStreamOnStreamEx(punkStream systemcomidiom.IUnknown, ppByteStream **mediamediafoundation.IMFByteStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMFByteStreamOnStreamEx(punkStream.Raw, ppByteStream)))
 }
 
 // MFCreateMFByteStreamWrapper wraps the raw MFCreateMFByteStreamWrapper call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemfbytestreamwrapper
-func MFCreateMFByteStreamWrapper(pStream *mediamediafoundation.IMFByteStream, ppStreamWrapper **mediamediafoundation.IMFByteStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMFByteStreamWrapper(pStream, ppStreamWrapper)))
+func MFCreateMFByteStreamWrapper(pStream IMFByteStream, ppStreamWrapper **mediamediafoundation.IMFByteStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMFByteStreamWrapper(pStream.Raw, ppStreamWrapper)))
 }
 
 // MFCreateMFVideoFormatFromMFMediaType wraps the raw MFCreateMFVideoFormatFromMFMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemfvideoformatfrommfmediatype
-func MFCreateMFVideoFormatFromMFMediaType(pMFType *mediamediafoundation.IMFMediaType, ppMFVF **mediamediafoundation.MFVIDEOFORMAT, pcbSize *uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMFVideoFormatFromMFMediaType(pMFType, ppMFVF, pcbSize)))
+func MFCreateMFVideoFormatFromMFMediaType(pMFType IMFMediaType, ppMFVF **mediamediafoundation.MFVIDEOFORMAT, pcbSize *uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMFVideoFormatFromMFMediaType(pMFType.Raw, ppMFVF, pcbSize)))
 }
 
 // MFCreateMP3MediaSink wraps the raw MFCreateMP3MediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemp3mediasink
-func MFCreateMP3MediaSink(pTargetByteStream *mediamediafoundation.IMFByteStream, ppMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMP3MediaSink(pTargetByteStream, ppMediaSink)))
+func MFCreateMP3MediaSink(pTargetByteStream IMFByteStream, ppMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMP3MediaSink(pTargetByteStream.Raw, ppMediaSink)))
 }
 
 // MFCreateMPEG4MediaSink wraps the raw MFCreateMPEG4MediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatempeg4mediasink
-func MFCreateMPEG4MediaSink(pIByteStream *mediamediafoundation.IMFByteStream, pVideoMediaType *mediamediafoundation.IMFMediaType, pAudioMediaType *mediamediafoundation.IMFMediaType, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMPEG4MediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)))
+func MFCreateMPEG4MediaSink(pIByteStream IMFByteStream, pVideoMediaType IMFMediaType, pAudioMediaType IMFMediaType, ppIMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMPEG4MediaSink(pIByteStream.Raw, pVideoMediaType.Raw, pAudioMediaType.Raw, ppIMediaSink)))
 }
 
 // MFCreateMediaBufferFromMediaType wraps the raw MFCreateMediaBufferFromMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediabufferfrommediatype
-func MFCreateMediaBufferFromMediaType(pMediaType *mediamediafoundation.IMFMediaType, llDuration int64, dwMinLength uint32, dwMinAlignment uint32, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaBufferFromMediaType(pMediaType, llDuration, dwMinLength, dwMinAlignment, ppBuffer)))
+func MFCreateMediaBufferFromMediaType(pMediaType IMFMediaType, llDuration int64, dwMinLength uint32, dwMinAlignment uint32, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaBufferFromMediaType(pMediaType.Raw, llDuration, dwMinLength, dwMinAlignment, ppBuffer)))
 }
 
 // MFCreateMediaBufferWrapper wraps the raw MFCreateMediaBufferWrapper call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediabufferwrapper
-func MFCreateMediaBufferWrapper(pBuffer *mediamediafoundation.IMFMediaBuffer, cbOffset uint32, dwLength uint32, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaBufferWrapper(pBuffer, cbOffset, dwLength, ppBuffer)))
+func MFCreateMediaBufferWrapper(pBuffer IMFMediaBuffer, cbOffset uint32, dwLength uint32, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaBufferWrapper(pBuffer.Raw, cbOffset, dwLength, ppBuffer)))
 }
 
 // MFCreateMediaEvent wraps the raw MFCreateMediaEvent call with idiomatic Go types.
@@ -497,15 +499,15 @@ func MFCreateMediaEvent(met uint32, guidExtendedType *win32.GUID, hrStatus found
 
 // MFCreateMediaExtensionActivate wraps the raw MFCreateMediaExtensionActivate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediaextensionactivate
-func MFCreateMediaExtensionActivate(szActivatableClassId string, pConfiguration *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+func MFCreateMediaExtensionActivate(szActivatableClassId string, pConfiguration systemcomidiom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	_szActivatableClassId := win32.UTF16Ptr(szActivatableClassId)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaExtensionActivate(foundation.PWSTR(_szActivatableClassId), pConfiguration, riid, ppvObject)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaExtensionActivate(foundation.PWSTR(_szActivatableClassId), pConfiguration.Raw, riid, ppvObject)))
 }
 
 // MFCreateMediaSession wraps the raw MFCreateMediaSession call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemediasession
-func MFCreateMediaSession(pConfiguration *mediamediafoundation.IMFAttributes, ppMediaSession **mediamediafoundation.IMFMediaSession) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaSession(pConfiguration, ppMediaSession)))
+func MFCreateMediaSession(pConfiguration IMFAttributes, ppMediaSession **mediamediafoundation.IMFMediaSession) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaSession(pConfiguration.Raw, ppMediaSession)))
 }
 
 // MFCreateMediaType wraps the raw MFCreateMediaType call with idiomatic Go types.
@@ -516,8 +518,8 @@ func MFCreateMediaType(ppMFType **mediamediafoundation.IMFMediaType) error {
 
 // MFCreateMediaTypeFromProperties wraps the raw MFCreateMediaTypeFromProperties call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemediatypefromproperties
-func MFCreateMediaTypeFromProperties(punkStream *systemcom.IUnknown, ppMediaType **mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaTypeFromProperties(punkStream, ppMediaType)))
+func MFCreateMediaTypeFromProperties(punkStream systemcomidiom.IUnknown, ppMediaType **mediamediafoundation.IMFMediaType) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMediaTypeFromProperties(punkStream.Raw, ppMediaType)))
 }
 
 // MFCreateMemoryBuffer wraps the raw MFCreateMemoryBuffer call with idiomatic Go types.
@@ -528,20 +530,20 @@ func MFCreateMemoryBuffer(cbMaxLength uint32, ppBuffer **mediamediafoundation.IM
 
 // MFCreateMuxStreamAttributes wraps the raw MFCreateMuxStreamAttributes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemuxstreamattributes
-func MFCreateMuxStreamAttributes(pAttributesToMux *mediamediafoundation.IMFCollection, ppMuxAttribs **mediamediafoundation.IMFAttributes) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMuxStreamAttributes(pAttributesToMux, ppMuxAttribs)))
+func MFCreateMuxStreamAttributes(pAttributesToMux IMFCollection, ppMuxAttribs **mediamediafoundation.IMFAttributes) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMuxStreamAttributes(pAttributesToMux.Raw, ppMuxAttribs)))
 }
 
 // MFCreateMuxStreamMediaType wraps the raw MFCreateMuxStreamMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemuxstreammediatype
-func MFCreateMuxStreamMediaType(pMediaTypesToMux *mediamediafoundation.IMFCollection, ppMuxMediaType **mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMuxStreamMediaType(pMediaTypesToMux, ppMuxMediaType)))
+func MFCreateMuxStreamMediaType(pMediaTypesToMux IMFCollection, ppMuxMediaType **mediamediafoundation.IMFMediaType) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMuxStreamMediaType(pMediaTypesToMux.Raw, ppMuxMediaType)))
 }
 
 // MFCreateMuxStreamSample wraps the raw MFCreateMuxStreamSample call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemuxstreamsample
-func MFCreateMuxStreamSample(pSamplesToMux *mediamediafoundation.IMFCollection, ppMuxSample **mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMuxStreamSample(pSamplesToMux, ppMuxSample)))
+func MFCreateMuxStreamSample(pSamplesToMux IMFCollection, ppMuxSample **mediamediafoundation.IMFSample) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateMuxStreamSample(pSamplesToMux.Raw, ppMuxSample)))
 }
 
 // MFCreateNetSchemePlugin wraps the raw MFCreateNetSchemePlugin call with idiomatic Go types.
@@ -552,8 +554,8 @@ func MFCreateNetSchemePlugin(riid *win32.GUID, ppvHandler *unsafe.Pointer) error
 
 // MFCreatePMPMediaSession wraps the raw MFCreatePMPMediaSession call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepmpmediasession
-func MFCreatePMPMediaSession(dwCreationFlags uint32, pConfiguration *mediamediafoundation.IMFAttributes, ppMediaSession **mediamediafoundation.IMFMediaSession, ppEnablerActivate **mediamediafoundation.IMFActivate) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreatePMPMediaSession(dwCreationFlags, pConfiguration, ppMediaSession, ppEnablerActivate)))
+func MFCreatePMPMediaSession(dwCreationFlags uint32, pConfiguration IMFAttributes, ppMediaSession **mediamediafoundation.IMFMediaSession, ppEnablerActivate **mediamediafoundation.IMFActivate) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreatePMPMediaSession(dwCreationFlags, pConfiguration.Raw, ppMediaSession, ppEnablerActivate)))
 }
 
 // MFCreatePMPServer wraps the raw MFCreatePMPServer call with idiomatic Go types.
@@ -580,14 +582,14 @@ func MFCreatePresentationDescriptor(apStreamDescriptors []*mediamediafoundation.
 
 // MFCreatePresentationDescriptorFromASFProfile wraps the raw MFCreatePresentationDescriptorFromASFProfile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreatepresentationdescriptorfromasfprofile
-func MFCreatePresentationDescriptorFromASFProfile(pIProfile *mediamediafoundation.IMFASFProfile, ppIPD **mediamediafoundation.IMFPresentationDescriptor) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreatePresentationDescriptorFromASFProfile(pIProfile, ppIPD)))
+func MFCreatePresentationDescriptorFromASFProfile(pIProfile IMFASFProfile, ppIPD **mediamediafoundation.IMFPresentationDescriptor) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreatePresentationDescriptorFromASFProfile(pIProfile.Raw, ppIPD)))
 }
 
 // MFCreatePropertiesFromMediaType wraps the raw MFCreatePropertiesFromMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepropertiesfrommediatype
-func MFCreatePropertiesFromMediaType(pMediaType *mediamediafoundation.IMFMediaType, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreatePropertiesFromMediaType(pMediaType, riid, ppv)))
+func MFCreatePropertiesFromMediaType(pMediaType IMFMediaType, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreatePropertiesFromMediaType(pMediaType.Raw, riid, ppv)))
 }
 
 // MFCreateProtectedEnvironmentAccess wraps the raw MFCreateProtectedEnvironmentAccess call with idiomatic Go types.
@@ -598,9 +600,9 @@ func MFCreateProtectedEnvironmentAccess(ppAccess **mediamediafoundation.IMFProte
 
 // MFCreateProxyLocator wraps the raw MFCreateProxyLocator call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateproxylocator
-func MFCreateProxyLocator(pszProtocol string, pProxyConfig *uishellpropertiessystem.IPropertyStore, ppProxyLocator **mediamediafoundation.IMFNetProxyLocator) error {
+func MFCreateProxyLocator(pszProtocol string, pProxyConfig uishellpropertiessystemidiom.IPropertyStore, ppProxyLocator **mediamediafoundation.IMFNetProxyLocator) error {
 	_pszProtocol := win32.UTF16Ptr(pszProtocol)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateProxyLocator(foundation.PWSTR(_pszProtocol), pProxyConfig, ppProxyLocator)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateProxyLocator(foundation.PWSTR(_pszProtocol), pProxyConfig.Raw, ppProxyLocator)))
 }
 
 // MFCreateRelativePanelWatcher wraps the raw MFCreateRelativePanelWatcher call with idiomatic Go types.
@@ -631,14 +633,14 @@ func MFCreateSampleCopierMFT(ppCopierMFT **mediamediafoundation.IMFTransform) er
 
 // MFCreateSampleGrabberSinkActivate wraps the raw MFCreateSampleGrabberSinkActivate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesamplegrabbersinkactivate
-func MFCreateSampleGrabberSinkActivate(pIMFMediaType *mediamediafoundation.IMFMediaType, pIMFSampleGrabberSinkCallback *mediamediafoundation.IMFSampleGrabberSinkCallback, ppIActivate **mediamediafoundation.IMFActivate) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSampleGrabberSinkActivate(pIMFMediaType, pIMFSampleGrabberSinkCallback, ppIActivate)))
+func MFCreateSampleGrabberSinkActivate(pIMFMediaType IMFMediaType, pIMFSampleGrabberSinkCallback IMFSampleGrabberSinkCallback, ppIActivate **mediamediafoundation.IMFActivate) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSampleGrabberSinkActivate(pIMFMediaType.Raw, pIMFSampleGrabberSinkCallback.Raw, ppIActivate)))
 }
 
 // MFCreateSensorActivityMonitor wraps the raw MFCreateSensorActivityMonitor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensoractivitymonitor
-func MFCreateSensorActivityMonitor(pCallback *mediamediafoundation.IMFSensorActivitiesReportCallback, ppActivityMonitor **mediamediafoundation.IMFSensorActivityMonitor) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSensorActivityMonitor(pCallback, ppActivityMonitor)))
+func MFCreateSensorActivityMonitor(pCallback IMFSensorActivitiesReportCallback, ppActivityMonitor **mediamediafoundation.IMFSensorActivityMonitor) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSensorActivityMonitor(pCallback.Raw, ppActivityMonitor)))
 }
 
 // MFCreateSensorGroup wraps the raw MFCreateSensorGroup call with idiomatic Go types.
@@ -663,8 +665,8 @@ func MFCreateSensorProfileCollection(ppSensorProfile **mediamediafoundation.IMFS
 
 // MFCreateSensorStream wraps the raw MFCreateSensorStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensorstream
-func MFCreateSensorStream(StreamId uint32, pAttributes *mediamediafoundation.IMFAttributes, pMediaTypeCollection *mediamediafoundation.IMFCollection, ppStream **mediamediafoundation.IMFSensorStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSensorStream(StreamId, pAttributes, pMediaTypeCollection, ppStream)))
+func MFCreateSensorStream(StreamId uint32, pAttributes IMFAttributes, pMediaTypeCollection IMFCollection, ppStream **mediamediafoundation.IMFSensorStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSensorStream(StreamId, pAttributes.Raw, pMediaTypeCollection.Raw, ppStream)))
 }
 
 // MFCreateSequencerSegmentOffset wraps the raw MFCreateSequencerSegmentOffset call with idiomatic Go types.
@@ -675,8 +677,8 @@ func MFCreateSequencerSegmentOffset(dwId uint32, hnsOffset int64, pvarSegmentOff
 
 // MFCreateSequencerSource wraps the raw MFCreateSequencerSource call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesequencersource
-func MFCreateSequencerSource(pReserved *systemcom.IUnknown, ppSequencerSource **mediamediafoundation.IMFSequencerSource) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSequencerSource(pReserved, ppSequencerSource)))
+func MFCreateSequencerSource(pReserved systemcomidiom.IUnknown, ppSequencerSource **mediamediafoundation.IMFSequencerSource) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSequencerSource(pReserved.Raw, ppSequencerSource)))
 }
 
 // MFCreateSimpleTypeHandler wraps the raw MFCreateSimpleTypeHandler call with idiomatic Go types.
@@ -687,34 +689,34 @@ func MFCreateSimpleTypeHandler(ppHandler **mediamediafoundation.IMFMediaTypeHand
 
 // MFCreateSinkWriterFromMediaSink wraps the raw MFCreateSinkWriterFromMediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesinkwriterfrommediasink
-func MFCreateSinkWriterFromMediaSink(pMediaSink *mediamediafoundation.IMFMediaSink, pAttributes *mediamediafoundation.IMFAttributes, ppSinkWriter **mediamediafoundation.IMFSinkWriter) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSinkWriterFromMediaSink(pMediaSink, pAttributes, ppSinkWriter)))
+func MFCreateSinkWriterFromMediaSink(pMediaSink IMFMediaSink, pAttributes IMFAttributes, ppSinkWriter **mediamediafoundation.IMFSinkWriter) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSinkWriterFromMediaSink(pMediaSink.Raw, pAttributes.Raw, ppSinkWriter)))
 }
 
 // MFCreateSinkWriterFromURL wraps the raw MFCreateSinkWriterFromURL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesinkwriterfromurl
-func MFCreateSinkWriterFromURL(pwszOutputURL string, pByteStream *mediamediafoundation.IMFByteStream, pAttributes *mediamediafoundation.IMFAttributes, ppSinkWriter **mediamediafoundation.IMFSinkWriter) error {
+func MFCreateSinkWriterFromURL(pwszOutputURL string, pByteStream IMFByteStream, pAttributes IMFAttributes, ppSinkWriter **mediamediafoundation.IMFSinkWriter) error {
 	_pwszOutputURL := win32.UTF16Ptr(pwszOutputURL)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSinkWriterFromURL(foundation.PWSTR(_pwszOutputURL), pByteStream, pAttributes, ppSinkWriter)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSinkWriterFromURL(foundation.PWSTR(_pwszOutputURL), pByteStream.Raw, pAttributes.Raw, ppSinkWriter)))
 }
 
 // MFCreateSourceReaderFromByteStream wraps the raw MFCreateSourceReaderFromByteStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesourcereaderfrombytestream
-func MFCreateSourceReaderFromByteStream(pByteStream *mediamediafoundation.IMFByteStream, pAttributes *mediamediafoundation.IMFAttributes, ppSourceReader **mediamediafoundation.IMFSourceReader) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSourceReaderFromByteStream(pByteStream, pAttributes, ppSourceReader)))
+func MFCreateSourceReaderFromByteStream(pByteStream IMFByteStream, pAttributes IMFAttributes, ppSourceReader **mediamediafoundation.IMFSourceReader) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSourceReaderFromByteStream(pByteStream.Raw, pAttributes.Raw, ppSourceReader)))
 }
 
 // MFCreateSourceReaderFromMediaSource wraps the raw MFCreateSourceReaderFromMediaSource call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesourcereaderfrommediasource
-func MFCreateSourceReaderFromMediaSource(pMediaSource *mediamediafoundation.IMFMediaSource, pAttributes *mediamediafoundation.IMFAttributes, ppSourceReader **mediamediafoundation.IMFSourceReader) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSourceReaderFromMediaSource(pMediaSource, pAttributes, ppSourceReader)))
+func MFCreateSourceReaderFromMediaSource(pMediaSource IMFMediaSource, pAttributes IMFAttributes, ppSourceReader **mediamediafoundation.IMFSourceReader) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSourceReaderFromMediaSource(pMediaSource.Raw, pAttributes.Raw, ppSourceReader)))
 }
 
 // MFCreateSourceReaderFromURL wraps the raw MFCreateSourceReaderFromURL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesourcereaderfromurl
-func MFCreateSourceReaderFromURL(pwszURL string, pAttributes *mediamediafoundation.IMFAttributes, ppSourceReader **mediamediafoundation.IMFSourceReader) error {
+func MFCreateSourceReaderFromURL(pwszURL string, pAttributes IMFAttributes, ppSourceReader **mediamediafoundation.IMFSourceReader) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSourceReaderFromURL(foundation.PWSTR(_pwszURL), pAttributes, ppSourceReader)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateSourceReaderFromURL(foundation.PWSTR(_pwszURL), pAttributes.Raw, ppSourceReader)))
 }
 
 // MFCreateSourceResolver wraps the raw MFCreateSourceResolver call with idiomatic Go types.
@@ -741,14 +743,14 @@ func MFCreateStreamDescriptor(dwStreamIdentifier uint32, apMediaTypes []*mediame
 
 // MFCreateStreamOnMFByteStream wraps the raw MFCreateStreamOnMFByteStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatestreamonmfbytestream
-func MFCreateStreamOnMFByteStream(pByteStream *mediamediafoundation.IMFByteStream, ppStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateStreamOnMFByteStream(pByteStream, ppStream)))
+func MFCreateStreamOnMFByteStream(pByteStream IMFByteStream, ppStream **systemcom.IStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateStreamOnMFByteStream(pByteStream.Raw, ppStream)))
 }
 
 // MFCreateStreamOnMFByteStreamEx wraps the raw MFCreateStreamOnMFByteStreamEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatestreamonmfbytestreamex
-func MFCreateStreamOnMFByteStreamEx(pByteStream *mediamediafoundation.IMFByteStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateStreamOnMFByteStreamEx(pByteStream, riid, ppv)))
+func MFCreateStreamOnMFByteStreamEx(pByteStream IMFByteStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateStreamOnMFByteStreamEx(pByteStream.Raw, riid, ppv)))
 }
 
 // MFCreateSystemTimeSource wraps the raw MFCreateSystemTimeSource call with idiomatic Go types.
@@ -801,15 +803,15 @@ func MFCreateTranscodeSinkActivate(ppActivate **mediamediafoundation.IMFActivate
 
 // MFCreateTranscodeTopology wraps the raw MFCreateTranscodeTopology call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetranscodetopology
-func MFCreateTranscodeTopology(pSrc *mediamediafoundation.IMFMediaSource, pwszOutputFilePath string, pProfile *mediamediafoundation.IMFTranscodeProfile, ppTranscodeTopo **mediamediafoundation.IMFTopology) error {
+func MFCreateTranscodeTopology(pSrc IMFMediaSource, pwszOutputFilePath string, pProfile IMFTranscodeProfile, ppTranscodeTopo **mediamediafoundation.IMFTopology) error {
 	_pwszOutputFilePath := win32.UTF16Ptr(pwszOutputFilePath)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateTranscodeTopology(pSrc, foundation.PWSTR(_pwszOutputFilePath), pProfile, ppTranscodeTopo)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateTranscodeTopology(pSrc.Raw, foundation.PWSTR(_pwszOutputFilePath), pProfile.Raw, ppTranscodeTopo)))
 }
 
 // MFCreateTranscodeTopologyFromByteStream wraps the raw MFCreateTranscodeTopologyFromByteStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetranscodetopologyfrombytestream
-func MFCreateTranscodeTopologyFromByteStream(pSrc *mediamediafoundation.IMFMediaSource, pOutputStream *mediamediafoundation.IMFByteStream, pProfile *mediamediafoundation.IMFTranscodeProfile, ppTranscodeTopo **mediamediafoundation.IMFTopology) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateTranscodeTopologyFromByteStream(pSrc, pOutputStream, pProfile, ppTranscodeTopo)))
+func MFCreateTranscodeTopologyFromByteStream(pSrc IMFMediaSource, pOutputStream IMFByteStream, pProfile IMFTranscodeProfile, ppTranscodeTopo **mediamediafoundation.IMFTopology) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateTranscodeTopologyFromByteStream(pSrc.Raw, pOutputStream.Raw, pProfile.Raw, ppTranscodeTopo)))
 }
 
 // MFCreateTransformActivate wraps the raw MFCreateTransformActivate call with idiomatic Go types.
@@ -844,20 +846,20 @@ func MFCreateVideoMediaTypeFromSubtype(pAMSubtype *win32.GUID, ppIVideoMediaType
 
 // MFCreateVideoMixer wraps the raw MFCreateVideoMixer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideomixer
-func MFCreateVideoMixer(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVideoMixer(pOwner, riidDevice, riid, ppv)))
+func MFCreateVideoMixer(pOwner systemcomidiom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVideoMixer(pOwner.Raw, riidDevice, riid, ppv)))
 }
 
 // MFCreateVideoMixerAndPresenter wraps the raw MFCreateVideoMixerAndPresenter call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideomixerandpresenter
-func MFCreateVideoMixerAndPresenter(pMixerOwner *systemcom.IUnknown, pPresenterOwner *systemcom.IUnknown, riidMixer *win32.GUID, ppvVideoMixer *unsafe.Pointer, riidPresenter *win32.GUID, ppvVideoPresenter *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVideoMixerAndPresenter(pMixerOwner, pPresenterOwner, riidMixer, ppvVideoMixer, riidPresenter, ppvVideoPresenter)))
+func MFCreateVideoMixerAndPresenter(pMixerOwner systemcomidiom.IUnknown, pPresenterOwner systemcomidiom.IUnknown, riidMixer *win32.GUID, ppvVideoMixer *unsafe.Pointer, riidPresenter *win32.GUID, ppvVideoPresenter *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVideoMixerAndPresenter(pMixerOwner.Raw, pPresenterOwner.Raw, riidMixer, ppvVideoMixer, riidPresenter, ppvVideoPresenter)))
 }
 
 // MFCreateVideoPresenter wraps the raw MFCreateVideoPresenter call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideopresenter
-func MFCreateVideoPresenter(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppVideoPresenter *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVideoPresenter(pOwner, riidDevice, riid, ppVideoPresenter)))
+func MFCreateVideoPresenter(pOwner systemcomidiom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppVideoPresenter *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVideoPresenter(pOwner.Raw, riidDevice, riid, ppVideoPresenter)))
 }
 
 // MFCreateVideoRenderer wraps the raw MFCreateVideoRenderer call with idiomatic Go types.
@@ -886,8 +888,8 @@ func MFCreateVideoSampleAllocatorEx(riid *win32.GUID, ppSampleAllocator *unsafe.
 
 // MFCreateVideoSampleFromSurface wraps the raw MFCreateVideoSampleFromSurface call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideosamplefromsurface
-func MFCreateVideoSampleFromSurface(pUnkSurface *systemcom.IUnknown, ppSample **mediamediafoundation.IMFSample) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVideoSampleFromSurface(pUnkSurface, ppSample)))
+func MFCreateVideoSampleFromSurface(pUnkSurface systemcomidiom.IUnknown, ppSample **mediamediafoundation.IMFSample) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVideoSampleFromSurface(pUnkSurface.Raw, ppSample)))
 }
 
 // MFCreateVirtualCamera wraps the raw MFCreateVirtualCamera call with idiomatic Go types.
@@ -904,38 +906,38 @@ func MFCreateVirtualCamera(type_ mediamediafoundation.MFVirtualCameraType, lifet
 
 // MFCreateWAVEMediaSink wraps the raw MFCreateWAVEMediaSink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatewavemediasink
-func MFCreateWAVEMediaSink(pTargetByteStream *mediamediafoundation.IMFByteStream, pAudioMediaType *mediamediafoundation.IMFMediaType, ppMediaSink **mediamediafoundation.IMFMediaSink) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWAVEMediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)))
+func MFCreateWAVEMediaSink(pTargetByteStream IMFByteStream, pAudioMediaType IMFMediaType, ppMediaSink **mediamediafoundation.IMFMediaSink) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWAVEMediaSink(pTargetByteStream.Raw, pAudioMediaType.Raw, ppMediaSink)))
 }
 
 // MFCreateWICBitmapBuffer wraps the raw MFCreateWICBitmapBuffer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatewicbitmapbuffer
-func MFCreateWICBitmapBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWICBitmapBuffer(riid, punkSurface, ppBuffer)))
+func MFCreateWICBitmapBuffer(riid *win32.GUID, punkSurface systemcomidiom.IUnknown, ppBuffer **mediamediafoundation.IMFMediaBuffer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWICBitmapBuffer(riid, punkSurface.Raw, ppBuffer)))
 }
 
 // MFCreateWMAEncoderActivate wraps the raw MFCreateWMAEncoderActivate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreatewmaencoderactivate
-func MFCreateWMAEncoderActivate(pMediaType *mediamediafoundation.IMFMediaType, pEncodingConfigurationProperties *uishellpropertiessystem.IPropertyStore, ppActivate **mediamediafoundation.IMFActivate) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWMAEncoderActivate(pMediaType, pEncodingConfigurationProperties, ppActivate)))
+func MFCreateWMAEncoderActivate(pMediaType IMFMediaType, pEncodingConfigurationProperties uishellpropertiessystemidiom.IPropertyStore, ppActivate **mediamediafoundation.IMFActivate) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWMAEncoderActivate(pMediaType.Raw, pEncodingConfigurationProperties.Raw, ppActivate)))
 }
 
 // MFCreateWMVEncoderActivate wraps the raw MFCreateWMVEncoderActivate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreatewmvencoderactivate
-func MFCreateWMVEncoderActivate(pMediaType *mediamediafoundation.IMFMediaType, pEncodingConfigurationProperties *uishellpropertiessystem.IPropertyStore, ppActivate **mediamediafoundation.IMFActivate) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWMVEncoderActivate(pMediaType, pEncodingConfigurationProperties, ppActivate)))
+func MFCreateWMVEncoderActivate(pMediaType IMFMediaType, pEncodingConfigurationProperties uishellpropertiessystemidiom.IPropertyStore, ppActivate **mediamediafoundation.IMFActivate) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWMVEncoderActivate(pMediaType.Raw, pEncodingConfigurationProperties.Raw, ppActivate)))
 }
 
 // MFCreateWaveFormatExFromMFMediaType wraps the raw MFCreateWaveFormatExFromMFMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatewaveformatexfrommfmediatype
-func MFCreateWaveFormatExFromMFMediaType(pMFType *mediamediafoundation.IMFMediaType, ppWF *unsafe.Pointer, pcbSize *uint32, Flags uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWaveFormatExFromMFMediaType(pMFType, ppWF, pcbSize, Flags)))
+func MFCreateWaveFormatExFromMFMediaType(pMFType IMFMediaType, ppWF *unsafe.Pointer, pcbSize *uint32, Flags uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateWaveFormatExFromMFMediaType(pMFType.Raw, ppWF, pcbSize, Flags)))
 }
 
 // MFDeserializeAttributesFromStream wraps the raw MFDeserializeAttributesFromStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfobjects/nf-mfobjects-mfdeserializeattributesfromstream
-func MFDeserializeAttributesFromStream(pAttr *mediamediafoundation.IMFAttributes, dwOptions uint32, pStm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFDeserializeAttributesFromStream(pAttr, dwOptions, pStm)))
+func MFDeserializeAttributesFromStream(pAttr IMFAttributes, dwOptions uint32, pStm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFDeserializeAttributesFromStream(pAttr.Raw, dwOptions, pStm.Raw)))
 }
 
 // MFDeserializePresentationDescriptor wraps the raw MFDeserializePresentationDescriptor call with idiomatic Go types.
@@ -950,26 +952,26 @@ func MFDeserializePresentationDescriptor(pbData []byte, ppPD **mediamediafoundat
 
 // MFEndCreateFile wraps the raw MFEndCreateFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfendcreatefile
-func MFEndCreateFile(pResult *mediamediafoundation.IMFAsyncResult, ppFile **mediamediafoundation.IMFByteStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFEndCreateFile(pResult, ppFile)))
+func MFEndCreateFile(pResult IMFAsyncResult, ppFile **mediamediafoundation.IMFByteStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFEndCreateFile(pResult.Raw, ppFile)))
 }
 
 // MFEndRegisterWorkQueueWithMMCSS wraps the raw MFEndRegisterWorkQueueWithMMCSS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfendregisterworkqueuewithmmcss
-func MFEndRegisterWorkQueueWithMMCSS(pResult *mediamediafoundation.IMFAsyncResult, pdwTaskId *uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFEndRegisterWorkQueueWithMMCSS(pResult, pdwTaskId)))
+func MFEndRegisterWorkQueueWithMMCSS(pResult IMFAsyncResult, pdwTaskId *uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFEndRegisterWorkQueueWithMMCSS(pResult.Raw, pdwTaskId)))
 }
 
 // MFEndUnregisterWorkQueueWithMMCSS wraps the raw MFEndUnregisterWorkQueueWithMMCSS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfendunregisterworkqueuewithmmcss
-func MFEndUnregisterWorkQueueWithMMCSS(pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFEndUnregisterWorkQueueWithMMCSS(pResult)))
+func MFEndUnregisterWorkQueueWithMMCSS(pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFEndUnregisterWorkQueueWithMMCSS(pResult.Raw)))
 }
 
 // MFEnumDeviceSources wraps the raw MFEnumDeviceSources call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfenumdevicesources
-func MFEnumDeviceSources(pAttributes *mediamediafoundation.IMFAttributes, pppSourceActivate ***mediamediafoundation.IMFActivate, pcSourceActivate *uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFEnumDeviceSources(pAttributes, pppSourceActivate, pcSourceActivate)))
+func MFEnumDeviceSources(pAttributes IMFAttributes, pppSourceActivate ***mediamediafoundation.IMFActivate, pcSourceActivate *uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFEnumDeviceSources(pAttributes.Raw, pppSourceActivate, pcSourceActivate)))
 }
 
 // MFFrameRateToAverageTimePerFrame wraps the raw MFFrameRateToAverageTimePerFrame call with idiomatic Go types.
@@ -980,14 +982,14 @@ func MFFrameRateToAverageTimePerFrame(unNumerator uint32, unDenominator uint32, 
 
 // MFGetAttributesAsBlob wraps the raw MFGetAttributesAsBlob call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetattributesasblob
-func MFGetAttributesAsBlob(pAttributes *mediamediafoundation.IMFAttributes, pBuf *byte, cbBufSize uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFGetAttributesAsBlob(pAttributes, pBuf, cbBufSize)))
+func MFGetAttributesAsBlob(pAttributes IMFAttributes, pBuf *byte, cbBufSize uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFGetAttributesAsBlob(pAttributes.Raw, pBuf, cbBufSize)))
 }
 
 // MFGetAttributesAsBlobSize wraps the raw MFGetAttributesAsBlobSize call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetattributesasblobsize
-func MFGetAttributesAsBlobSize(pAttributes *mediamediafoundation.IMFAttributes, pcbBufSize *uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFGetAttributesAsBlobSize(pAttributes, pcbBufSize)))
+func MFGetAttributesAsBlobSize(pAttributes IMFAttributes, pcbBufSize *uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFGetAttributesAsBlobSize(pAttributes.Raw, pcbBufSize)))
 }
 
 // MFGetContentProtectionSystemCLSID wraps the raw MFGetContentProtectionSystemCLSID call with idiomatic Go types.
@@ -997,8 +999,8 @@ func MFGetContentProtectionSystemCLSID(guidProtectionSystemID *win32.GUID, pclsi
 }
 
 // MFGetDXGIDeviceManageMode wraps the raw MFGetDXGIDeviceManageMode call with idiomatic Go types.
-func MFGetDXGIDeviceManageMode(pDeviceManager *systemcom.IUnknown, mode *mediamediafoundation.MF_DXGI_DEVICE_MANAGER_MODE) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFGetDXGIDeviceManageMode(pDeviceManager, mode)))
+func MFGetDXGIDeviceManageMode(pDeviceManager systemcomidiom.IUnknown, mode *mediamediafoundation.MF_DXGI_DEVICE_MANAGER_MODE) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFGetDXGIDeviceManageMode(pDeviceManager.Raw, mode)))
 }
 
 // MFGetLocalId wraps the raw MFGetLocalId call with idiomatic Go types.
@@ -1009,8 +1011,8 @@ func MFGetLocalId(verifier *byte, size uint32, id *foundation.PWSTR) error {
 
 // MFGetMFTMerit wraps the raw MFGetMFTMerit call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetmftmerit
-func MFGetMFTMerit(pMFT *systemcom.IUnknown, cbVerifier uint32, verifier *byte, merit *uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFGetMFTMerit(pMFT, cbVerifier, verifier, merit)))
+func MFGetMFTMerit(pMFT systemcomidiom.IUnknown, cbVerifier uint32, verifier *byte, merit *uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFGetMFTMerit(pMFT.Raw, cbVerifier, verifier, merit)))
 }
 
 // MFGetPlaneSize wraps the raw MFGetPlaneSize call with idiomatic Go types.
@@ -1027,8 +1029,8 @@ func MFGetPluginControl(ppPluginControl **mediamediafoundation.IMFPluginControl)
 
 // MFGetService wraps the raw MFGetService call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgetservice
-func MFGetService(punkObject *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFGetService(punkObject, guidService, riid, ppvObject)))
+func MFGetService(punkObject systemcomidiom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFGetService(punkObject.Raw, guidService, riid, ppvObject)))
 }
 
 // MFGetStrideForBitmapInfoHeader wraps the raw MFGetStrideForBitmapInfoHeader call with idiomatic Go types.
@@ -1063,9 +1065,9 @@ func MFGetTimerPeriodicity(Periodicity *uint32) error {
 
 // MFGetTopoNodeCurrentType wraps the raw MFGetTopoNodeCurrentType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgettoponodecurrenttype
-func MFGetTopoNodeCurrentType(pNode *mediamediafoundation.IMFTopologyNode, dwStreamIndex uint32, fOutput bool, ppType **mediamediafoundation.IMFMediaType) error {
+func MFGetTopoNodeCurrentType(pNode IMFTopologyNode, dwStreamIndex uint32, fOutput bool, ppType **mediamediafoundation.IMFMediaType) error {
 	_fOutput := foundation.BOOL(win32.Bool32(fOutput))
-	return win32.HRESULTError(int32(mediamediafoundation.MFGetTopoNodeCurrentType(pNode, dwStreamIndex, _fOutput, ppType)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFGetTopoNodeCurrentType(pNode.Raw, dwStreamIndex, _fOutput, ppType)))
 }
 
 // MFGetWorkQueueMMCSSClass wraps the raw MFGetWorkQueueMMCSSClass call with idiomatic Go types.
@@ -1088,50 +1090,50 @@ func MFGetWorkQueueMMCSSTaskId(dwWorkQueueId uint32, pdwTaskId *uint32) error {
 
 // MFInitAttributesFromBlob wraps the raw MFInitAttributesFromBlob call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitattributesfromblob
-func MFInitAttributesFromBlob(pAttributes *mediamediafoundation.IMFAttributes, pBuf *byte, cbBufSize uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInitAttributesFromBlob(pAttributes, pBuf, cbBufSize)))
+func MFInitAttributesFromBlob(pAttributes IMFAttributes, pBuf *byte, cbBufSize uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInitAttributesFromBlob(pAttributes.Raw, pBuf, cbBufSize)))
 }
 
 // MFInitMediaTypeFromAMMediaType wraps the raw MFInitMediaTypeFromAMMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromammediatype
-func MFInitMediaTypeFromAMMediaType(pMFType *mediamediafoundation.IMFMediaType, pAMType *mediamediafoundation.AM_MEDIA_TYPE) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromAMMediaType(pMFType, pAMType)))
+func MFInitMediaTypeFromAMMediaType(pMFType IMFMediaType, pAMType *mediamediafoundation.AM_MEDIA_TYPE) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromAMMediaType(pMFType.Raw, pAMType)))
 }
 
 // MFInitMediaTypeFromMFVideoFormat wraps the raw MFInitMediaTypeFromMFVideoFormat call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefrommfvideoformat
-func MFInitMediaTypeFromMFVideoFormat(pMFType *mediamediafoundation.IMFMediaType, pMFVF *mediamediafoundation.MFVIDEOFORMAT, cbBufSize uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromMFVideoFormat(pMFType, pMFVF, cbBufSize)))
+func MFInitMediaTypeFromMFVideoFormat(pMFType IMFMediaType, pMFVF *mediamediafoundation.MFVIDEOFORMAT, cbBufSize uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromMFVideoFormat(pMFType.Raw, pMFVF, cbBufSize)))
 }
 
 // MFInitMediaTypeFromMPEG1VideoInfo wraps the raw MFInitMediaTypeFromMPEG1VideoInfo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefrommpeg1videoinfo
-func MFInitMediaTypeFromMPEG1VideoInfo(pMFType *mediamediafoundation.IMFMediaType, pMP1VI *mediamediafoundation.MPEG1VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromMPEG1VideoInfo(pMFType, pMP1VI, cbBufSize, pSubtype)))
+func MFInitMediaTypeFromMPEG1VideoInfo(pMFType IMFMediaType, pMP1VI *mediamediafoundation.MPEG1VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromMPEG1VideoInfo(pMFType.Raw, pMP1VI, cbBufSize, pSubtype)))
 }
 
 // MFInitMediaTypeFromMPEG2VideoInfo wraps the raw MFInitMediaTypeFromMPEG2VideoInfo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefrommpeg2videoinfo
-func MFInitMediaTypeFromMPEG2VideoInfo(pMFType *mediamediafoundation.IMFMediaType, pMP2VI *mediamediafoundation.MPEG2VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromMPEG2VideoInfo(pMFType, pMP2VI, cbBufSize, pSubtype)))
+func MFInitMediaTypeFromMPEG2VideoInfo(pMFType IMFMediaType, pMP2VI *mediamediafoundation.MPEG2VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromMPEG2VideoInfo(pMFType.Raw, pMP2VI, cbBufSize, pSubtype)))
 }
 
 // MFInitMediaTypeFromVideoInfoHeader wraps the raw MFInitMediaTypeFromVideoInfoHeader call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromvideoinfoheader
-func MFInitMediaTypeFromVideoInfoHeader(pMFType *mediamediafoundation.IMFMediaType, pVIH *mediamediafoundation.VIDEOINFOHEADER, cbBufSize uint32, pSubtype *win32.GUID) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromVideoInfoHeader(pMFType, pVIH, cbBufSize, pSubtype)))
+func MFInitMediaTypeFromVideoInfoHeader(pMFType IMFMediaType, pVIH *mediamediafoundation.VIDEOINFOHEADER, cbBufSize uint32, pSubtype *win32.GUID) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromVideoInfoHeader(pMFType.Raw, pVIH, cbBufSize, pSubtype)))
 }
 
 // MFInitMediaTypeFromVideoInfoHeader2 wraps the raw MFInitMediaTypeFromVideoInfoHeader2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromvideoinfoheader2
-func MFInitMediaTypeFromVideoInfoHeader2(pMFType *mediamediafoundation.IMFMediaType, pVIH2 *mediamediafoundation.VIDEOINFOHEADER2, cbBufSize uint32, pSubtype *win32.GUID) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromVideoInfoHeader2(pMFType, pVIH2, cbBufSize, pSubtype)))
+func MFInitMediaTypeFromVideoInfoHeader2(pMFType IMFMediaType, pVIH2 *mediamediafoundation.VIDEOINFOHEADER2, cbBufSize uint32, pSubtype *win32.GUID) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromVideoInfoHeader2(pMFType.Raw, pVIH2, cbBufSize, pSubtype)))
 }
 
 // MFInitMediaTypeFromWaveFormatEx wraps the raw MFInitMediaTypeFromWaveFormatEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromwaveformatex
-func MFInitMediaTypeFromWaveFormatEx(pMFType *mediamediafoundation.IMFMediaType, pWaveFormat unsafe.Pointer, cbBufSize uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromWaveFormatEx(pMFType, pWaveFormat, cbBufSize)))
+func MFInitMediaTypeFromWaveFormatEx(pMFType IMFMediaType, pWaveFormat unsafe.Pointer, cbBufSize uint32) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInitMediaTypeFromWaveFormatEx(pMFType.Raw, pWaveFormat, cbBufSize)))
 }
 
 // MFInitVideoFormat wraps the raw MFInitVideoFormat call with idiomatic Go types.
@@ -1148,8 +1150,8 @@ func MFInitVideoFormat_RGB(pVideoFormat *mediamediafoundation.MFVIDEOFORMAT, dwW
 
 // MFInvokeCallback wraps the raw MFInvokeCallback call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinvokecallback
-func MFInvokeCallback(pAsyncResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFInvokeCallback(pAsyncResult)))
+func MFInvokeCallback(pAsyncResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFInvokeCallback(pAsyncResult.Raw)))
 }
 
 // MFIsContentProtectionDeviceSupported wraps the raw MFIsContentProtectionDeviceSupported call with idiomatic Go types.
@@ -1204,55 +1206,55 @@ func MFLockWorkQueue(dwWorkQueue uint32) error {
 
 // MFPCreateMediaPlayer wraps the raw MFPCreateMediaPlayer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfplay/nf-mfplay-mfpcreatemediaplayer
-func MFPCreateMediaPlayer(pwszURL string, fStartPlayback bool, creationOptions mediamediafoundation.MFP_CREATION_OPTIONS, pCallback *mediamediafoundation.IMFPMediaPlayerCallback, hWnd foundation.HWND, ppMediaPlayer **mediamediafoundation.IMFPMediaPlayer) error {
+func MFPCreateMediaPlayer(pwszURL string, fStartPlayback bool, creationOptions mediamediafoundation.MFP_CREATION_OPTIONS, pCallback IMFPMediaPlayerCallback, hWnd foundation.HWND, ppMediaPlayer **mediamediafoundation.IMFPMediaPlayer) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
 	_fStartPlayback := foundation.BOOL(win32.Bool32(fStartPlayback))
-	return win32.HRESULTError(int32(mediamediafoundation.MFPCreateMediaPlayer(foundation.PWSTR(_pwszURL), _fStartPlayback, creationOptions, pCallback, hWnd, ppMediaPlayer)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFPCreateMediaPlayer(foundation.PWSTR(_pwszURL), _fStartPlayback, creationOptions, pCallback.Raw, hWnd, ppMediaPlayer)))
 }
 
 // MFPutWaitingWorkItem wraps the raw MFPutWaitingWorkItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputwaitingworkitem
-func MFPutWaitingWorkItem(hEvent foundation.HANDLE, Priority int32, pResult *mediamediafoundation.IMFAsyncResult, pKey *uint64) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFPutWaitingWorkItem(hEvent, Priority, pResult, pKey)))
+func MFPutWaitingWorkItem(hEvent foundation.HANDLE, Priority int32, pResult IMFAsyncResult, pKey *uint64) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFPutWaitingWorkItem(hEvent, Priority, pResult.Raw, pKey)))
 }
 
 // MFPutWorkItem wraps the raw MFPutWorkItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputworkitem
-func MFPutWorkItem(dwQueue uint32, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFPutWorkItem(dwQueue, pCallback, pState)))
+func MFPutWorkItem(dwQueue uint32, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFPutWorkItem(dwQueue, pCallback.Raw, pState.Raw)))
 }
 
 // MFPutWorkItem2 wraps the raw MFPutWorkItem2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputworkitem2
-func MFPutWorkItem2(dwQueue uint32, Priority int32, pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFPutWorkItem2(dwQueue, Priority, pCallback, pState)))
+func MFPutWorkItem2(dwQueue uint32, Priority int32, pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFPutWorkItem2(dwQueue, Priority, pCallback.Raw, pState.Raw)))
 }
 
 // MFPutWorkItemEx wraps the raw MFPutWorkItemEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputworkitemex
-func MFPutWorkItemEx(dwQueue uint32, pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFPutWorkItemEx(dwQueue, pResult)))
+func MFPutWorkItemEx(dwQueue uint32, pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFPutWorkItemEx(dwQueue, pResult.Raw)))
 }
 
 // MFPutWorkItemEx2 wraps the raw MFPutWorkItemEx2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputworkitemex2
-func MFPutWorkItemEx2(dwQueue uint32, Priority int32, pResult *mediamediafoundation.IMFAsyncResult) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFPutWorkItemEx2(dwQueue, Priority, pResult)))
+func MFPutWorkItemEx2(dwQueue uint32, Priority int32, pResult IMFAsyncResult) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFPutWorkItemEx2(dwQueue, Priority, pResult.Raw)))
 }
 
 // MFRegisterLocalByteStreamHandler wraps the raw MFRegisterLocalByteStreamHandler call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfregisterlocalbytestreamhandler
-func MFRegisterLocalByteStreamHandler(szFileExtension string, szMimeType string, pActivate *mediamediafoundation.IMFActivate) error {
+func MFRegisterLocalByteStreamHandler(szFileExtension string, szMimeType string, pActivate IMFActivate) error {
 	_szFileExtension := win32.UTF16Ptr(szFileExtension)
 	_szMimeType := win32.UTF16Ptr(szMimeType)
-	return win32.HRESULTError(int32(mediamediafoundation.MFRegisterLocalByteStreamHandler(foundation.PWSTR(_szFileExtension), foundation.PWSTR(_szMimeType), pActivate)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFRegisterLocalByteStreamHandler(foundation.PWSTR(_szFileExtension), foundation.PWSTR(_szMimeType), pActivate.Raw)))
 }
 
 // MFRegisterLocalSchemeHandler wraps the raw MFRegisterLocalSchemeHandler call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfregisterlocalschemehandler
-func MFRegisterLocalSchemeHandler(szScheme string, pActivate *mediamediafoundation.IMFActivate) error {
+func MFRegisterLocalSchemeHandler(szScheme string, pActivate IMFActivate) error {
 	_szScheme := win32.UTF16Ptr(szScheme)
-	return win32.HRESULTError(int32(mediamediafoundation.MFRegisterLocalSchemeHandler(foundation.PWSTR(_szScheme), pActivate)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFRegisterLocalSchemeHandler(foundation.PWSTR(_szScheme), pActivate.Raw)))
 }
 
 // MFRegisterPlatformWithMMCSS wraps the raw MFRegisterPlatformWithMMCSS call with idiomatic Go types.
@@ -1270,32 +1272,32 @@ func MFRemovePeriodicCallback(dwKey uint32) error {
 
 // MFRequireProtectedEnvironment wraps the raw MFRequireProtectedEnvironment call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfrequireprotectedenvironment
-func MFRequireProtectedEnvironment(pPresentationDescriptor *mediamediafoundation.IMFPresentationDescriptor) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFRequireProtectedEnvironment(pPresentationDescriptor)))
+func MFRequireProtectedEnvironment(pPresentationDescriptor IMFPresentationDescriptor) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFRequireProtectedEnvironment(pPresentationDescriptor.Raw)))
 }
 
 // MFScheduleWorkItem wraps the raw MFScheduleWorkItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfscheduleworkitem
-func MFScheduleWorkItem(pCallback *mediamediafoundation.IMFAsyncCallback, pState *systemcom.IUnknown, Timeout int64, pKey *uint64) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFScheduleWorkItem(pCallback, pState, Timeout, pKey)))
+func MFScheduleWorkItem(pCallback IMFAsyncCallback, pState systemcomidiom.IUnknown, Timeout int64, pKey *uint64) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFScheduleWorkItem(pCallback.Raw, pState.Raw, Timeout, pKey)))
 }
 
 // MFScheduleWorkItemEx wraps the raw MFScheduleWorkItemEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfscheduleworkitemex
-func MFScheduleWorkItemEx(pResult *mediamediafoundation.IMFAsyncResult, Timeout int64, pKey *uint64) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFScheduleWorkItemEx(pResult, Timeout, pKey)))
+func MFScheduleWorkItemEx(pResult IMFAsyncResult, Timeout int64, pKey *uint64) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFScheduleWorkItemEx(pResult.Raw, Timeout, pKey)))
 }
 
 // MFSerializeAttributesToStream wraps the raw MFSerializeAttributesToStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfobjects/nf-mfobjects-mfserializeattributestostream
-func MFSerializeAttributesToStream(pAttr *mediamediafoundation.IMFAttributes, dwOptions uint32, pStm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFSerializeAttributesToStream(pAttr, dwOptions, pStm)))
+func MFSerializeAttributesToStream(pAttr IMFAttributes, dwOptions uint32, pStm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFSerializeAttributesToStream(pAttr.Raw, dwOptions, pStm.Raw)))
 }
 
 // MFSerializePresentationDescriptor wraps the raw MFSerializePresentationDescriptor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfserializepresentationdescriptor
-func MFSerializePresentationDescriptor(pPD *mediamediafoundation.IMFPresentationDescriptor, pcbData *uint32, ppbData **byte) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFSerializePresentationDescriptor(pPD, pcbData, ppbData)))
+func MFSerializePresentationDescriptor(pPD IMFPresentationDescriptor, pcbData *uint32, ppbData **byte) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFSerializePresentationDescriptor(pPD.Raw, pcbData, ppbData)))
 }
 
 // MFShutdown wraps the raw MFShutdown call with idiomatic Go types.
@@ -1306,18 +1308,18 @@ func MFShutdown() error {
 
 // MFShutdownObject wraps the raw MFShutdownObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfshutdownobject
-func MFShutdownObject(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFShutdownObject(pUnk)))
+func MFShutdownObject(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFShutdownObject(pUnk.Raw)))
 }
 
 // MFSplitSample wraps the raw MFSplitSample call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfsplitsample
-func MFSplitSample(pSample *mediamediafoundation.IMFSample, pOutputSamples []*mediamediafoundation.IMFSample, pdwOutputSampleCount *uint32) error {
+func MFSplitSample(pSample IMFSample, pOutputSamples []*mediamediafoundation.IMFSample, pdwOutputSampleCount *uint32) error {
 	var _pOutputSamples **mediamediafoundation.IMFSample
 	if len(pOutputSamples) > 0 {
 		_pOutputSamples = &pOutputSamples[0]
 	}
-	return win32.HRESULTError(int32(mediamediafoundation.MFSplitSample(pSample, _pOutputSamples, uint32(len(pOutputSamples)), pdwOutputSampleCount)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFSplitSample(pSample.Raw, _pOutputSamples, uint32(len(pOutputSamples)), pdwOutputSampleCount)))
 }
 
 // MFStartup wraps the raw MFStartup call with idiomatic Go types.
@@ -1328,7 +1330,7 @@ func MFStartup(Version uint32, dwFlags uint32) error {
 
 // MFTRegisterLocal wraps the raw MFTRegisterLocal call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregisterlocal
-func MFTRegisterLocal(pClassFactory *systemcom.IClassFactory, guidCategory *win32.GUID, pszName string, Flags uint32, pInputTypes []mediamediafoundation.MFT_REGISTER_TYPE_INFO, pOutputTypes []mediamediafoundation.MFT_REGISTER_TYPE_INFO) error {
+func MFTRegisterLocal(pClassFactory systemcomidiom.IClassFactory, guidCategory *win32.GUID, pszName string, Flags uint32, pInputTypes []mediamediafoundation.MFT_REGISTER_TYPE_INFO, pOutputTypes []mediamediafoundation.MFT_REGISTER_TYPE_INFO) error {
 	_pszName := win32.UTF16Ptr(pszName)
 	var _pInputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO
 	if len(pInputTypes) > 0 {
@@ -1338,7 +1340,7 @@ func MFTRegisterLocal(pClassFactory *systemcom.IClassFactory, guidCategory *win3
 	if len(pOutputTypes) > 0 {
 		_pOutputTypes = &pOutputTypes[0]
 	}
-	return win32.HRESULTError(int32(mediamediafoundation.MFTRegisterLocal(pClassFactory, guidCategory, foundation.PWSTR(_pszName), Flags, uint32(len(pInputTypes)), _pInputTypes, uint32(len(pOutputTypes)), _pOutputTypes)))
+	return win32.HRESULTError(int32(mediamediafoundation.MFTRegisterLocal(pClassFactory.Raw, guidCategory, foundation.PWSTR(_pszName), Flags, uint32(len(pInputTypes)), _pInputTypes, uint32(len(pOutputTypes)), _pOutputTypes)))
 }
 
 // MFTRegisterLocalByCLSID wraps the raw MFTRegisterLocalByCLSID call with idiomatic Go types.
@@ -1358,14 +1360,14 @@ func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, psz
 
 // MFTUnregisterLocal wraps the raw MFTUnregisterLocal call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftunregisterlocal
-func MFTUnregisterLocal(pClassFactory *systemcom.IClassFactory) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFTUnregisterLocal(pClassFactory)))
+func MFTUnregisterLocal(pClassFactory systemcomidiom.IClassFactory) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFTUnregisterLocal(pClassFactory.Raw)))
 }
 
 // MFTranscodeGetAudioOutputAvailableTypes wraps the raw MFTranscodeGetAudioOutputAvailableTypes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mftranscodegetaudiooutputavailabletypes
-func MFTranscodeGetAudioOutputAvailableTypes(guidSubType *win32.GUID, dwMFTFlags uint32, pCodecConfig *mediamediafoundation.IMFAttributes, ppAvailableTypes **mediamediafoundation.IMFCollection) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFTranscodeGetAudioOutputAvailableTypes(guidSubType, dwMFTFlags, pCodecConfig, ppAvailableTypes)))
+func MFTranscodeGetAudioOutputAvailableTypes(guidSubType *win32.GUID, dwMFTFlags uint32, pCodecConfig IMFAttributes, ppAvailableTypes **mediamediafoundation.IMFCollection) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFTranscodeGetAudioOutputAvailableTypes(guidSubType, dwMFTFlags, pCodecConfig.Raw, ppAvailableTypes)))
 }
 
 // MFUnlockDXGIDeviceManager wraps the raw MFUnlockDXGIDeviceManager call with idiomatic Go types.
@@ -1394,14 +1396,14 @@ func MFUnregisterPlatformFromMMCSS() error {
 
 // MFUnwrapMediaType wraps the raw MFUnwrapMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfunwrapmediatype
-func MFUnwrapMediaType(pWrap *mediamediafoundation.IMFMediaType, ppOrig **mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFUnwrapMediaType(pWrap, ppOrig)))
+func MFUnwrapMediaType(pWrap IMFMediaType, ppOrig **mediamediafoundation.IMFMediaType) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFUnwrapMediaType(pWrap.Raw, ppOrig)))
 }
 
 // MFWrapMediaType wraps the raw MFWrapMediaType call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfwrapmediatype
-func MFWrapMediaType(pOrig *mediamediafoundation.IMFMediaType, MajorType *win32.GUID, SubType *win32.GUID, ppWrap **mediamediafoundation.IMFMediaType) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFWrapMediaType(pOrig, MajorType, SubType, ppWrap)))
+func MFWrapMediaType(pOrig IMFMediaType, MajorType *win32.GUID, SubType *win32.GUID, ppWrap **mediamediafoundation.IMFMediaType) error {
+	return win32.HRESULTError(int32(mediamediafoundation.MFWrapMediaType(pOrig.Raw, MajorType, SubType, ppWrap)))
 }
 
 // OPMGetVideoOutputForTarget wraps the raw OPMGetVideoOutputForTarget call with idiomatic Go types.
@@ -1418,8 +1420,8 @@ func OPMGetVideoOutputsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, vos mediamedi
 
 // OPMGetVideoOutputsFromIDirect3DDevice9Object wraps the raw OPMGetVideoOutputsFromIDirect3DDevice9Object call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/opmapi/nf-opmapi-opmgetvideooutputsfromidirect3ddevice9object
-func OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, vos mediamediafoundation.OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs *uint32, pppOPMVideoOutputArray ***mediamediafoundation.IOPMVideoOutput) error {
-	return win32.HRESULTError(int32(mediamediafoundation.OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9, vos, pulNumVideoOutputs, pppOPMVideoOutputArray)))
+func OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9 graphicsdirect3d9idiom.IDirect3DDevice9, vos mediamediafoundation.OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs *uint32, pppOPMVideoOutputArray ***mediamediafoundation.IOPMVideoOutput) error {
+	return win32.HRESULTError(int32(mediamediafoundation.OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9.Raw, vos, pulNumVideoOutputs, pppOPMVideoOutputArray)))
 }
 
 // OPMXboxEnableHDCP wraps the raw OPMXboxEnableHDCP call with idiomatic Go types.

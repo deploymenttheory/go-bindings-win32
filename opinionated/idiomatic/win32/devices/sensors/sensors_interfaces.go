@@ -10,6 +10,7 @@ import (
 	devicessensors "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/sensors"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
+	devicesportabledevicesidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/devices/portabledevices"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -71,8 +72,8 @@ func (self ISensor) GetProperty(key *foundation.PROPERTYKEY, pProperty *systemco
 }
 
 // GetProperties wraps the raw GetProperties call.
-func (self ISensor) GetProperties(pKeys *devicesportabledevices.IPortableDeviceKeyCollection, ppProperties **devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperties(pKeys, ppProperties)))
+func (self ISensor) GetProperties(pKeys devicesportabledevicesidiom.IPortableDeviceKeyCollection, ppProperties **devicesportabledevices.IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.GetProperties(pKeys.Raw, ppProperties)))
 }
 
 // GetSupportedDataFields wraps the raw GetSupportedDataFields call.
@@ -81,8 +82,8 @@ func (self ISensor) GetSupportedDataFields(ppDataFields **devicesportabledevices
 }
 
 // SetProperties wraps the raw SetProperties call.
-func (self ISensor) SetProperties(pProperties *devicesportabledevices.IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.SetProperties(pProperties, ppResults)))
+func (self ISensor) SetProperties(pProperties devicesportabledevicesidiom.IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.SetProperties(pProperties.Raw, ppResults)))
 }
 
 // SupportsDataField wraps the raw SupportsDataField call.
@@ -116,8 +117,8 @@ func (self ISensor) SetEventInterest(pValues *win32.GUID, count uint32) error {
 }
 
 // SetEventSink wraps the raw SetEventSink call.
-func (self ISensor) SetEventSink(pEvents *devicessensors.ISensorEvents) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventSink(pEvents)))
+func (self ISensor) SetEventSink(pEvents ISensorEvents) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventSink(pEvents.Raw)))
 }
 
 // ISensorCollection is an idiomatic wrapper over the raw COM interface Devices.Sensors.ISensorCollection with error-returning methods.
@@ -142,13 +143,13 @@ func (self ISensorCollection) GetCount(pCount *uint32) error {
 }
 
 // Add wraps the raw Add call.
-func (self ISensorCollection) Add(pSensor *devicessensors.ISensor) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pSensor)))
+func (self ISensorCollection) Add(pSensor ISensor) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pSensor.Raw)))
 }
 
 // Remove wraps the raw Remove call.
-func (self ISensorCollection) Remove(pSensor *devicessensors.ISensor) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(pSensor)))
+func (self ISensorCollection) Remove(pSensor ISensor) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(pSensor.Raw)))
 }
 
 // RemoveByID wraps the raw RemoveByID call.
@@ -183,8 +184,8 @@ func (self ISensorDataReport) GetSensorValue(pKey *foundation.PROPERTYKEY, pValu
 }
 
 // GetSensorValues wraps the raw GetSensorValues call.
-func (self ISensorDataReport) GetSensorValues(pKeys *devicesportabledevices.IPortableDeviceKeyCollection, ppValues **devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.GetSensorValues(pKeys, ppValues)))
+func (self ISensorDataReport) GetSensorValues(pKeys devicesportabledevicesidiom.IPortableDeviceKeyCollection, ppValues **devicesportabledevices.IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.GetSensorValues(pKeys.Raw, ppValues)))
 }
 
 // ISensorEvents is an idiomatic wrapper over the raw COM interface Devices.Sensors.ISensorEvents with error-returning methods.
@@ -199,18 +200,18 @@ func WrapISensorEvents(raw *devicessensors.ISensorEvents) ISensorEvents {
 }
 
 // OnStateChanged wraps the raw OnStateChanged call.
-func (self ISensorEvents) OnStateChanged(pSensor *devicessensors.ISensor, state devicessensors.SensorState) error {
-	return win32.HRESULTError(int32(self.Raw.OnStateChanged(pSensor, state)))
+func (self ISensorEvents) OnStateChanged(pSensor ISensor, state devicessensors.SensorState) error {
+	return win32.HRESULTError(int32(self.Raw.OnStateChanged(pSensor.Raw, state)))
 }
 
 // OnDataUpdated wraps the raw OnDataUpdated call.
-func (self ISensorEvents) OnDataUpdated(pSensor *devicessensors.ISensor, pNewData *devicessensors.ISensorDataReport) error {
-	return win32.HRESULTError(int32(self.Raw.OnDataUpdated(pSensor, pNewData)))
+func (self ISensorEvents) OnDataUpdated(pSensor ISensor, pNewData ISensorDataReport) error {
+	return win32.HRESULTError(int32(self.Raw.OnDataUpdated(pSensor.Raw, pNewData.Raw)))
 }
 
 // OnEvent wraps the raw OnEvent call.
-func (self ISensorEvents) OnEvent(pSensor *devicessensors.ISensor, eventID *win32.GUID, pEventData *devicesportabledevices.IPortableDeviceValues) error {
-	return win32.HRESULTError(int32(self.Raw.OnEvent(pSensor, eventID, pEventData)))
+func (self ISensorEvents) OnEvent(pSensor ISensor, eventID *win32.GUID, pEventData devicesportabledevicesidiom.IPortableDeviceValues) error {
+	return win32.HRESULTError(int32(self.Raw.OnEvent(pSensor.Raw, eventID, pEventData.Raw)))
 }
 
 // OnLeave wraps the raw OnLeave call.
@@ -245,14 +246,14 @@ func (self ISensorManager) GetSensorByID(sensorID *win32.GUID, ppSensor **device
 }
 
 // SetEventSink wraps the raw SetEventSink call.
-func (self ISensorManager) SetEventSink(pEvents *devicessensors.ISensorManagerEvents) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventSink(pEvents)))
+func (self ISensorManager) SetEventSink(pEvents ISensorManagerEvents) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventSink(pEvents.Raw)))
 }
 
 // RequestPermissions wraps the raw RequestPermissions call.
-func (self ISensorManager) RequestPermissions(hParent foundation.HWND, pSensors *devicessensors.ISensorCollection, fModal bool) error {
+func (self ISensorManager) RequestPermissions(hParent foundation.HWND, pSensors ISensorCollection, fModal bool) error {
 	_fModal := foundation.BOOL(win32.Bool32(fModal))
-	return win32.HRESULTError(int32(self.Raw.RequestPermissions(hParent, pSensors, _fModal)))
+	return win32.HRESULTError(int32(self.Raw.RequestPermissions(hParent, pSensors.Raw, _fModal)))
 }
 
 // ISensorManagerEvents is an idiomatic wrapper over the raw COM interface Devices.Sensors.ISensorManagerEvents with error-returning methods.
@@ -267,6 +268,6 @@ func WrapISensorManagerEvents(raw *devicessensors.ISensorManagerEvents) ISensorM
 }
 
 // OnSensorEnter wraps the raw OnSensorEnter call.
-func (self ISensorManagerEvents) OnSensorEnter(pSensor *devicessensors.ISensor, state devicessensors.SensorState) error {
-	return win32.HRESULTError(int32(self.Raw.OnSensorEnter(pSensor, state)))
+func (self ISensorManagerEvents) OnSensorEnter(pSensor ISensor, state devicessensors.SensorState) error {
+	return win32.HRESULTError(int32(self.Raw.OnSensorEnter(pSensor.Raw, state)))
 }

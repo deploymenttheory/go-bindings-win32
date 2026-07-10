@@ -12,18 +12,20 @@ import (
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
 	graphicsdirect3d10 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d10"
 	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
+	graphicsdirect3didiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
 )
 
 // D3D10CompileEffectFromMemory wraps the raw D3D10CompileEffectFromMemory call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10compileeffectfrommemory
-func D3D10CompileEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, pSrcFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, HLSLFlags uint32, FXFlags uint32, ppCompiledEffect **graphicsdirect3d.ID3DBlob, ppErrors **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CompileEffectFromMemory(pData, DataLength, pSrcFileName, pDefines, pInclude, HLSLFlags, FXFlags, ppCompiledEffect, ppErrors)))
+func D3D10CompileEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, pSrcFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude graphicsdirect3didiom.ID3DInclude, HLSLFlags uint32, FXFlags uint32, ppCompiledEffect **graphicsdirect3d.ID3DBlob, ppErrors **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CompileEffectFromMemory(pData, DataLength, pSrcFileName, pDefines, pInclude.Raw, HLSLFlags, FXFlags, ppCompiledEffect, ppErrors)))
 }
 
 // D3D10CompileShader wraps the raw D3D10CompileShader call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10compileshader
-func D3D10CompileShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, pFunctionName foundation.PSTR, pProfile foundation.PSTR, Flags uint32, ppShader **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CompileShader(pSrcData, SrcDataSize, pFileName, pDefines, pInclude, pFunctionName, pProfile, Flags, ppShader, ppErrorMsgs)))
+func D3D10CompileShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude graphicsdirect3didiom.ID3DInclude, pFunctionName foundation.PSTR, pProfile foundation.PSTR, Flags uint32, ppShader **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CompileShader(pSrcData, SrcDataSize, pFileName, pDefines, pInclude.Raw, pFunctionName, pProfile, Flags, ppShader, ppErrorMsgs)))
 }
 
 // D3D10CreateBlob wraps the raw D3D10CreateBlob call with idiomatic Go types.
@@ -34,51 +36,51 @@ func D3D10CreateBlob(NumBytes uintptr, ppBuffer **graphicsdirect3d.ID3DBlob) err
 
 // D3D10CreateDevice wraps the raw D3D10CreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10misc/nf-d3d10misc-d3d10createdevice
-func D3D10CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d10.D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, SDKVersion uint32, ppDevice **graphicsdirect3d10.ID3D10Device) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateDevice(pAdapter, DriverType, Software, Flags, SDKVersion, ppDevice)))
+func D3D10CreateDevice(pAdapter graphicsdxgiidiom.IDXGIAdapter, DriverType graphicsdirect3d10.D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, SDKVersion uint32, ppDevice **graphicsdirect3d10.ID3D10Device) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateDevice(pAdapter.Raw, DriverType, Software, Flags, SDKVersion, ppDevice)))
 }
 
 // D3D10CreateDevice1 wraps the raw D3D10CreateDevice1 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10_1/nf-d3d10_1-d3d10createdevice1
-func D3D10CreateDevice1(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d10.D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, HardwareLevel graphicsdirect3d10.D3D10_FEATURE_LEVEL1, SDKVersion uint32, ppDevice **graphicsdirect3d10.ID3D10Device1) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateDevice1(pAdapter, DriverType, Software, Flags, HardwareLevel, SDKVersion, ppDevice)))
+func D3D10CreateDevice1(pAdapter graphicsdxgiidiom.IDXGIAdapter, DriverType graphicsdirect3d10.D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, HardwareLevel graphicsdirect3d10.D3D10_FEATURE_LEVEL1, SDKVersion uint32, ppDevice **graphicsdirect3d10.ID3D10Device1) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateDevice1(pAdapter.Raw, DriverType, Software, Flags, HardwareLevel, SDKVersion, ppDevice)))
 }
 
 // D3D10CreateDeviceAndSwapChain wraps the raw D3D10CreateDeviceAndSwapChain call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10misc/nf-d3d10misc-d3d10createdeviceandswapchain
-func D3D10CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d10.D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **graphicsdirect3d10.ID3D10Device) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateDeviceAndSwapChain(pAdapter, DriverType, Software, Flags, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice)))
+func D3D10CreateDeviceAndSwapChain(pAdapter graphicsdxgiidiom.IDXGIAdapter, DriverType graphicsdirect3d10.D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **graphicsdirect3d10.ID3D10Device) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateDeviceAndSwapChain(pAdapter.Raw, DriverType, Software, Flags, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice)))
 }
 
 // D3D10CreateDeviceAndSwapChain1 wraps the raw D3D10CreateDeviceAndSwapChain1 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10_1/nf-d3d10_1-d3d10createdeviceandswapchain1
-func D3D10CreateDeviceAndSwapChain1(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d10.D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, HardwareLevel graphicsdirect3d10.D3D10_FEATURE_LEVEL1, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **graphicsdirect3d10.ID3D10Device1) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateDeviceAndSwapChain1(pAdapter, DriverType, Software, Flags, HardwareLevel, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice)))
+func D3D10CreateDeviceAndSwapChain1(pAdapter graphicsdxgiidiom.IDXGIAdapter, DriverType graphicsdirect3d10.D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, HardwareLevel graphicsdirect3d10.D3D10_FEATURE_LEVEL1, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **graphicsdirect3d10.ID3D10Device1) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateDeviceAndSwapChain1(pAdapter.Raw, DriverType, Software, Flags, HardwareLevel, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice)))
 }
 
 // D3D10CreateEffectFromMemory wraps the raw D3D10CreateEffectFromMemory call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10createeffectfrommemory
-func D3D10CreateEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice *graphicsdirect3d10.ID3D10Device, pEffectPool *graphicsdirect3d10.ID3D10EffectPool, ppEffect **graphicsdirect3d10.ID3D10Effect) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateEffectFromMemory(pData, DataLength, FXFlags, pDevice, pEffectPool, ppEffect)))
+func D3D10CreateEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice ID3D10Device, pEffectPool ID3D10EffectPool, ppEffect **graphicsdirect3d10.ID3D10Effect) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateEffectFromMemory(pData, DataLength, FXFlags, pDevice.Raw, pEffectPool.Raw, ppEffect)))
 }
 
 // D3D10CreateEffectPoolFromMemory wraps the raw D3D10CreateEffectPoolFromMemory call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10createeffectpoolfrommemory
-func D3D10CreateEffectPoolFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice *graphicsdirect3d10.ID3D10Device, ppEffectPool **graphicsdirect3d10.ID3D10EffectPool) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateEffectPoolFromMemory(pData, DataLength, FXFlags, pDevice, ppEffectPool)))
+func D3D10CreateEffectPoolFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice ID3D10Device, ppEffectPool **graphicsdirect3d10.ID3D10EffectPool) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateEffectPoolFromMemory(pData, DataLength, FXFlags, pDevice.Raw, ppEffectPool)))
 }
 
 // D3D10CreateStateBlock wraps the raw D3D10CreateStateBlock call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10createstateblock
-func D3D10CreateStateBlock(pDevice *graphicsdirect3d10.ID3D10Device, pStateBlockMask *graphicsdirect3d10.D3D10_STATE_BLOCK_MASK, ppStateBlock **graphicsdirect3d10.ID3D10StateBlock) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateStateBlock(pDevice, pStateBlockMask, ppStateBlock)))
+func D3D10CreateStateBlock(pDevice ID3D10Device, pStateBlockMask *graphicsdirect3d10.D3D10_STATE_BLOCK_MASK, ppStateBlock **graphicsdirect3d10.ID3D10StateBlock) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10CreateStateBlock(pDevice.Raw, pStateBlockMask, ppStateBlock)))
 }
 
 // D3D10DisassembleEffect wraps the raw D3D10DisassembleEffect call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10disassembleeffect
-func D3D10DisassembleEffect(pEffect *graphicsdirect3d10.ID3D10Effect, EnableColorCode bool, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
+func D3D10DisassembleEffect(pEffect ID3D10Effect, EnableColorCode bool, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
 	_EnableColorCode := foundation.BOOL(win32.Bool32(EnableColorCode))
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10DisassembleEffect(pEffect, _EnableColorCode, ppDisassembly)))
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10DisassembleEffect(pEffect.Raw, _EnableColorCode, ppDisassembly)))
 }
 
 // D3D10DisassembleShader wraps the raw D3D10DisassembleShader call with idiomatic Go types.
@@ -86,6 +88,12 @@ func D3D10DisassembleEffect(pEffect *graphicsdirect3d10.ID3D10Effect, EnableColo
 func D3D10DisassembleShader(pShader unsafe.Pointer, BytecodeLength uintptr, EnableColorCode bool, pComments foundation.PSTR, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
 	_EnableColorCode := foundation.BOOL(win32.Bool32(EnableColorCode))
 	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10DisassembleShader(pShader, BytecodeLength, _EnableColorCode, pComments, ppDisassembly)))
+}
+
+// D3D10GetGeometryShaderProfile wraps the raw D3D10GetGeometryShaderProfile call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getgeometryshaderprofile
+func D3D10GetGeometryShaderProfile(pDevice ID3D10Device) foundation.PSTR {
+	return graphicsdirect3d10.D3D10GetGeometryShaderProfile(pDevice.Raw)
 }
 
 // D3D10GetInputAndOutputSignatureBlob wraps the raw D3D10GetInputAndOutputSignatureBlob call with idiomatic Go types.
@@ -106,16 +114,28 @@ func D3D10GetOutputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength 
 	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10GetOutputSignatureBlob(pShaderBytecode, BytecodeLength, ppSignatureBlob)))
 }
 
+// D3D10GetPixelShaderProfile wraps the raw D3D10GetPixelShaderProfile call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getpixelshaderprofile
+func D3D10GetPixelShaderProfile(pDevice ID3D10Device) foundation.PSTR {
+	return graphicsdirect3d10.D3D10GetPixelShaderProfile(pDevice.Raw)
+}
+
 // D3D10GetShaderDebugInfo wraps the raw D3D10GetShaderDebugInfo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getshaderdebuginfo
 func D3D10GetShaderDebugInfo(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppDebugInfo **graphicsdirect3d.ID3DBlob) error {
 	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10GetShaderDebugInfo(pShaderBytecode, BytecodeLength, ppDebugInfo)))
 }
 
+// D3D10GetVertexShaderProfile wraps the raw D3D10GetVertexShaderProfile call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getvertexshaderprofile
+func D3D10GetVertexShaderProfile(pDevice ID3D10Device) foundation.PSTR {
+	return graphicsdirect3d10.D3D10GetVertexShaderProfile(pDevice.Raw)
+}
+
 // D3D10PreprocessShader wraps the raw D3D10PreprocessShader call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10preprocessshader
-func D3D10PreprocessShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, ppShaderText **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10PreprocessShader(pSrcData, SrcDataSize, pFileName, pDefines, pInclude, ppShaderText, ppErrorMsgs)))
+func D3D10PreprocessShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude graphicsdirect3didiom.ID3DInclude, ppShaderText **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(graphicsdirect3d10.D3D10PreprocessShader(pSrcData, SrcDataSize, pFileName, pDefines, pInclude.Raw, ppShaderText, ppErrorMsgs)))
 }
 
 // D3D10ReflectShader wraps the raw D3D10ReflectShader call with idiomatic Go types.

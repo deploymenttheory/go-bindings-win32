@@ -13,6 +13,7 @@ import (
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // ClearPropVariantArray wraps the raw ClearPropVariantArray call with idiomatic Go types.
@@ -27,29 +28,29 @@ func ClearPropVariantArray(rgPropVar []systemcomstructuredstorage.PROPVARIANT) {
 
 // CoGetInstanceFromFile wraps the raw CoGetInstanceFromFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetinstancefromfile
-func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, grfMode uint32, pwszName string, pResults []systemcom.MULTI_QI) error {
+func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter systemcomidiom.IUnknown, dwClsCtx systemcom.CLSCTX, grfMode uint32, pwszName string, pResults []systemcom.MULTI_QI) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	var _pResults *systemcom.MULTI_QI
 	if len(pResults) > 0 {
 		_pResults = &pResults[0]
 	}
-	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInstanceFromFile(pServerInfo, pClsid, punkOuter, dwClsCtx, grfMode, foundation.PWSTR(_pwszName), uint32(len(pResults)), _pResults)))
+	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInstanceFromFile(pServerInfo, pClsid, punkOuter.Raw, dwClsCtx, grfMode, foundation.PWSTR(_pwszName), uint32(len(pResults)), _pResults)))
 }
 
 // CoGetInstanceFromIStorage wraps the raw CoGetInstanceFromIStorage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetinstancefromistorage
-func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pstg *systemcomstructuredstorage.IStorage, pResults []systemcom.MULTI_QI) error {
+func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter systemcomidiom.IUnknown, dwClsCtx systemcom.CLSCTX, pstg IStorage, pResults []systemcom.MULTI_QI) error {
 	var _pResults *systemcom.MULTI_QI
 	if len(pResults) > 0 {
 		_pResults = &pResults[0]
 	}
-	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInstanceFromIStorage(pServerInfo, pClsid, punkOuter, dwClsCtx, pstg, uint32(len(pResults)), _pResults)))
+	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInstanceFromIStorage(pServerInfo, pClsid, punkOuter.Raw, dwClsCtx, pstg.Raw, uint32(len(pResults)), _pResults)))
 }
 
 // CoGetInterfaceAndReleaseStream wraps the raw CoGetInterfaceAndReleaseStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetinterfaceandreleasestream
-func CoGetInterfaceAndReleaseStream(pStm *systemcom.IStream, iid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInterfaceAndReleaseStream(pStm, iid, ppv)))
+func CoGetInterfaceAndReleaseStream(pStm systemcomidiom.IStream, iid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInterfaceAndReleaseStream(pStm.Raw, iid, ppv)))
 }
 
 // CreateILockBytesOnHGlobal wraps the raw CreateILockBytesOnHGlobal call with idiomatic Go types.
@@ -84,20 +85,20 @@ func FreePropVariantArray(rgvars []systemcomstructuredstorage.PROPVARIANT) error
 
 // GetConvertStg wraps the raw GetConvertStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-getconvertstg
-func GetConvertStg(pStg *systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.GetConvertStg(pStg)))
+func GetConvertStg(pStg IStorage) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.GetConvertStg(pStg.Raw)))
 }
 
 // GetHGlobalFromILockBytes wraps the raw GetHGlobalFromILockBytes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-gethglobalfromilockbytes
-func GetHGlobalFromILockBytes(plkbyt *systemcomstructuredstorage.ILockBytes, phglobal *foundation.HGLOBAL) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.GetHGlobalFromILockBytes(plkbyt, phglobal)))
+func GetHGlobalFromILockBytes(plkbyt ILockBytes, phglobal *foundation.HGLOBAL) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.GetHGlobalFromILockBytes(plkbyt.Raw, phglobal)))
 }
 
 // GetHGlobalFromStream wraps the raw GetHGlobalFromStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-gethglobalfromstream
-func GetHGlobalFromStream(pstm *systemcom.IStream, phglobal *foundation.HGLOBAL) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.GetHGlobalFromStream(pstm, phglobal)))
+func GetHGlobalFromStream(pstm systemcomidiom.IStream, phglobal *foundation.HGLOBAL) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.GetHGlobalFromStream(pstm.Raw, phglobal)))
 }
 
 // InitPropVariantFromBooleanVector wraps the raw InitPropVariantFromBooleanVector call with idiomatic Go types.
@@ -251,26 +252,26 @@ func InitPropVariantVectorFromPropVariant(propvarSingle *systemcomstructuredstor
 
 // OleConvertIStorageToOLESTREAM wraps the raw OleConvertIStorageToOLESTREAM call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertistoragetoolestream
-func OleConvertIStorageToOLESTREAM(pstg *systemcomstructuredstorage.IStorage, lpolestream *systemcomstructuredstorage.OLESTREAM) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.OleConvertIStorageToOLESTREAM(pstg, lpolestream)))
+func OleConvertIStorageToOLESTREAM(pstg IStorage, lpolestream *systemcomstructuredstorage.OLESTREAM) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.OleConvertIStorageToOLESTREAM(pstg.Raw, lpolestream)))
 }
 
 // OleConvertIStorageToOLESTREAMEx wraps the raw OleConvertIStorageToOLESTREAMEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertistoragetoolestreamex
-func OleConvertIStorageToOLESTREAMEx(pstg *systemcomstructuredstorage.IStorage, cfFormat uint16, lWidth int32, lHeight int32, dwSize uint32, pmedium *systemcom.STGMEDIUM, polestm *systemcomstructuredstorage.OLESTREAM) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.OleConvertIStorageToOLESTREAMEx(pstg, cfFormat, lWidth, lHeight, dwSize, pmedium, polestm)))
+func OleConvertIStorageToOLESTREAMEx(pstg IStorage, cfFormat uint16, lWidth int32, lHeight int32, dwSize uint32, pmedium *systemcom.STGMEDIUM, polestm *systemcomstructuredstorage.OLESTREAM) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.OleConvertIStorageToOLESTREAMEx(pstg.Raw, cfFormat, lWidth, lHeight, dwSize, pmedium, polestm)))
 }
 
 // OleConvertOLESTREAMToIStorage wraps the raw OleConvertOLESTREAMToIStorage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertolestreamtoistorage
-func OleConvertOLESTREAMToIStorage(lpolestream *systemcomstructuredstorage.OLESTREAM, pstg *systemcomstructuredstorage.IStorage, ptd *systemcom.DVTARGETDEVICE) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.OleConvertOLESTREAMToIStorage(lpolestream, pstg, ptd)))
+func OleConvertOLESTREAMToIStorage(lpolestream *systemcomstructuredstorage.OLESTREAM, pstg IStorage, ptd *systemcom.DVTARGETDEVICE) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.OleConvertOLESTREAMToIStorage(lpolestream, pstg.Raw, ptd)))
 }
 
 // OleConvertOLESTREAMToIStorageEx wraps the raw OleConvertOLESTREAMToIStorageEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertolestreamtoistorageex
-func OleConvertOLESTREAMToIStorageEx(polestm *systemcomstructuredstorage.OLESTREAM, pstg *systemcomstructuredstorage.IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.OleConvertOLESTREAMToIStorageEx(polestm, pstg, pcfFormat, plwWidth, plHeight, pdwSize, pmedium)))
+func OleConvertOLESTREAMToIStorageEx(polestm *systemcomstructuredstorage.OLESTREAM, pstg IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.OleConvertOLESTREAMToIStorageEx(polestm, pstg.Raw, pcfFormat, plwWidth, plHeight, pdwSize, pmedium)))
 }
 
 // PropStgNameToFmtId wraps the raw PropStgNameToFmtId call with idiomatic Go types.
@@ -630,27 +631,33 @@ func PropVariantToWinRTPropertyValue(propvar *systemcomstructuredstorage.PROPVAR
 
 // ReadClassStg wraps the raw ReadClassStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-readclassstg
-func ReadClassStg(pStg *systemcomstructuredstorage.IStorage, pclsid *win32.GUID) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.ReadClassStg(pStg, pclsid)))
+func ReadClassStg(pStg IStorage, pclsid *win32.GUID) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.ReadClassStg(pStg.Raw, pclsid)))
 }
 
 // ReadClassStm wraps the raw ReadClassStm call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-readclassstm
-func ReadClassStm(pStm *systemcom.IStream, pclsid *win32.GUID) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.ReadClassStm(pStm, pclsid)))
+func ReadClassStm(pStm systemcomidiom.IStream, pclsid *win32.GUID) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.ReadClassStm(pStm.Raw, pclsid)))
 }
 
 // ReadFmtUserTypeStg wraps the raw ReadFmtUserTypeStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-readfmtusertypestg
-func ReadFmtUserTypeStg(pstg *systemcomstructuredstorage.IStorage, pcf *uint16, lplpszUserType *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.ReadFmtUserTypeStg(pstg, pcf, lplpszUserType)))
+func ReadFmtUserTypeStg(pstg IStorage, pcf *uint16, lplpszUserType *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.ReadFmtUserTypeStg(pstg.Raw, pcf, lplpszUserType)))
 }
 
 // SetConvertStg wraps the raw SetConvertStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-setconvertstg
-func SetConvertStg(pStg *systemcomstructuredstorage.IStorage, fConvert bool) error {
+func SetConvertStg(pStg IStorage, fConvert bool) error {
 	_fConvert := foundation.BOOL(win32.Bool32(fConvert))
-	return win32.HRESULTError(int32(systemcomstructuredstorage.SetConvertStg(pStg, _fConvert)))
+	return win32.HRESULTError(int32(systemcomstructuredstorage.SetConvertStg(pStg.Raw, _fConvert)))
+}
+
+// StgConvertPropertyToVariant wraps the raw StgConvertPropertyToVariant call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/propidl/nf-propidl-stgconvertpropertytovariant
+func StgConvertPropertyToVariant(pprop *systemcomstructuredstorage.SERIALIZEDPROPERTYVALUE, CodePage uint16, pvar *systemcomstructuredstorage.PROPVARIANT, pma IMemoryAllocator) foundation.BOOLEAN {
+	return systemcomstructuredstorage.StgConvertPropertyToVariant(pprop, CodePage, pvar, pma.Raw)
 }
 
 // StgConvertVariantToProperty wraps the raw StgConvertVariantToProperty call with idiomatic Go types.
@@ -668,20 +675,20 @@ func StgCreateDocfile(pwcsName string, grfMode systemcom.STGM, ppstgOpen **syste
 
 // StgCreateDocfileOnILockBytes wraps the raw StgCreateDocfileOnILockBytes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatedocfileonilockbytes
-func StgCreateDocfileOnILockBytes(plkbyt *systemcomstructuredstorage.ILockBytes, grfMode systemcom.STGM, reserved uint32, ppstgOpen **systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgCreateDocfileOnILockBytes(plkbyt, grfMode, reserved, ppstgOpen)))
+func StgCreateDocfileOnILockBytes(plkbyt ILockBytes, grfMode systemcom.STGM, reserved uint32, ppstgOpen **systemcomstructuredstorage.IStorage) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgCreateDocfileOnILockBytes(plkbyt.Raw, grfMode, reserved, ppstgOpen)))
 }
 
 // StgCreatePropSetStg wraps the raw StgCreatePropSetStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatepropsetstg
-func StgCreatePropSetStg(pStorage *systemcomstructuredstorage.IStorage, ppPropSetStg **systemcomstructuredstorage.IPropertySetStorage) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgCreatePropSetStg(pStorage, 0, ppPropSetStg)))
+func StgCreatePropSetStg(pStorage IStorage, ppPropSetStg **systemcomstructuredstorage.IPropertySetStorage) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgCreatePropSetStg(pStorage.Raw, 0, ppPropSetStg)))
 }
 
 // StgCreatePropStg wraps the raw StgCreatePropStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatepropstg
-func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, ppPropStg **systemcomstructuredstorage.IPropertyStorage) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgCreatePropStg(pUnk, fmtid, pclsid, grfFlags, 0, ppPropStg)))
+func StgCreatePropStg(pUnk systemcomidiom.IUnknown, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, ppPropStg **systemcomstructuredstorage.IPropertyStorage) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgCreatePropStg(pUnk.Raw, fmtid, pclsid, grfFlags, 0, ppPropStg)))
 }
 
 // StgCreateStorageEx wraps the raw StgCreateStorageEx call with idiomatic Go types.
@@ -706,8 +713,8 @@ func StgGetIFillLockBytesOnFile(pwcsName string, ppflb **systemcomstructuredstor
 
 // StgGetIFillLockBytesOnILockBytes wraps the raw StgGetIFillLockBytesOnILockBytes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stggetifilllockbytesonilockbytes
-func StgGetIFillLockBytesOnILockBytes(pilb *systemcomstructuredstorage.ILockBytes, ppflb **systemcomstructuredstorage.IFillLockBytes) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgGetIFillLockBytesOnILockBytes(pilb, ppflb)))
+func StgGetIFillLockBytesOnILockBytes(pilb ILockBytes, ppflb **systemcomstructuredstorage.IFillLockBytes) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgGetIFillLockBytesOnILockBytes(pilb.Raw, ppflb)))
 }
 
 // StgIsStorageFile wraps the raw StgIsStorageFile call with idiomatic Go types.
@@ -719,14 +726,14 @@ func StgIsStorageFile(pwcsName string) error {
 
 // StgIsStorageILockBytes wraps the raw StgIsStorageILockBytes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgisstorageilockbytes
-func StgIsStorageILockBytes(plkbyt *systemcomstructuredstorage.ILockBytes) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgIsStorageILockBytes(plkbyt)))
+func StgIsStorageILockBytes(plkbyt ILockBytes) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgIsStorageILockBytes(plkbyt.Raw)))
 }
 
 // StgOpenAsyncDocfileOnIFillLockBytes wraps the raw StgOpenAsyncDocfileOnIFillLockBytes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stgopenasyncdocfileonifilllockbytes
-func StgOpenAsyncDocfileOnIFillLockBytes(pflb *systemcomstructuredstorage.IFillLockBytes, grfMode uint32, asyncFlags uint32, ppstgOpen **systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgOpenAsyncDocfileOnIFillLockBytes(pflb, grfMode, asyncFlags, ppstgOpen)))
+func StgOpenAsyncDocfileOnIFillLockBytes(pflb IFillLockBytes, grfMode uint32, asyncFlags uint32, ppstgOpen **systemcomstructuredstorage.IStorage) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgOpenAsyncDocfileOnIFillLockBytes(pflb.Raw, grfMode, asyncFlags, ppstgOpen)))
 }
 
 // StgOpenLayoutDocfile wraps the raw StgOpenLayoutDocfile call with idiomatic Go types.
@@ -738,15 +745,15 @@ func StgOpenLayoutDocfile(pwcsDfName string, grfMode uint32, reserved uint32, pp
 
 // StgOpenPropStg wraps the raw StgOpenPropStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenpropstg
-func StgOpenPropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, grfFlags uint32, ppPropStg **systemcomstructuredstorage.IPropertyStorage) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgOpenPropStg(pUnk, fmtid, grfFlags, 0, ppPropStg)))
+func StgOpenPropStg(pUnk systemcomidiom.IUnknown, fmtid *win32.GUID, grfFlags uint32, ppPropStg **systemcomstructuredstorage.IPropertyStorage) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgOpenPropStg(pUnk.Raw, fmtid, grfFlags, 0, ppPropStg)))
 }
 
 // StgOpenStorage wraps the raw StgOpenStorage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorage
-func StgOpenStorage(pwcsName string, pstgPriority *systemcomstructuredstorage.IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **systemcomstructuredstorage.IStorage) error {
+func StgOpenStorage(pwcsName string, pstgPriority IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **systemcomstructuredstorage.IStorage) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgOpenStorage(foundation.PWSTR(_pwcsName), pstgPriority, grfMode, snbExclude, reserved, ppstgOpen)))
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgOpenStorage(foundation.PWSTR(_pwcsName), pstgPriority.Raw, grfMode, snbExclude, reserved, ppstgOpen)))
 }
 
 // StgOpenStorageEx wraps the raw StgOpenStorageEx call with idiomatic Go types.
@@ -758,8 +765,8 @@ func StgOpenStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt systemcoms
 
 // StgOpenStorageOnILockBytes wraps the raw StgOpenStorageOnILockBytes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorageonilockbytes
-func StgOpenStorageOnILockBytes(plkbyt *systemcomstructuredstorage.ILockBytes, pstgPriority *systemcomstructuredstorage.IStorage, grfMode systemcom.STGM, snbExclude **uint16, ppstgOpen **systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.StgOpenStorageOnILockBytes(plkbyt, pstgPriority, grfMode, snbExclude, 0, ppstgOpen)))
+func StgOpenStorageOnILockBytes(plkbyt ILockBytes, pstgPriority IStorage, grfMode systemcom.STGM, snbExclude **uint16, ppstgOpen **systemcomstructuredstorage.IStorage) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.StgOpenStorageOnILockBytes(plkbyt.Raw, pstgPriority.Raw, grfMode, snbExclude, 0, ppstgOpen)))
 }
 
 // StgPropertyLengthAsVariant wraps the raw StgPropertyLengthAsVariant call with idiomatic Go types.
@@ -789,25 +796,25 @@ func VariantToPropVariant(pVar *systemvariant.VARIANT, pPropVar *systemcomstruct
 
 // WinRTPropertyValueToPropVariant wraps the raw WinRTPropertyValueToPropVariant call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-winrtpropertyvaluetopropvariant
-func WinRTPropertyValueToPropVariant(punkPropertyValue *systemcom.IUnknown, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.WinRTPropertyValueToPropVariant(punkPropertyValue, ppropvar)))
+func WinRTPropertyValueToPropVariant(punkPropertyValue systemcomidiom.IUnknown, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.WinRTPropertyValueToPropVariant(punkPropertyValue.Raw, ppropvar)))
 }
 
 // WriteClassStg wraps the raw WriteClassStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-writeclassstg
-func WriteClassStg(pStg *systemcomstructuredstorage.IStorage, rclsid *win32.GUID) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.WriteClassStg(pStg, rclsid)))
+func WriteClassStg(pStg IStorage, rclsid *win32.GUID) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.WriteClassStg(pStg.Raw, rclsid)))
 }
 
 // WriteClassStm wraps the raw WriteClassStm call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-writeclassstm
-func WriteClassStm(pStm *systemcom.IStream, rclsid *win32.GUID) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.WriteClassStm(pStm, rclsid)))
+func WriteClassStm(pStm systemcomidiom.IStream, rclsid *win32.GUID) error {
+	return win32.HRESULTError(int32(systemcomstructuredstorage.WriteClassStm(pStm.Raw, rclsid)))
 }
 
 // WriteFmtUserTypeStg wraps the raw WriteFmtUserTypeStg call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-writefmtusertypestg
-func WriteFmtUserTypeStg(pstg *systemcomstructuredstorage.IStorage, cf uint16, lpszUserType string) error {
+func WriteFmtUserTypeStg(pstg IStorage, cf uint16, lpszUserType string) error {
 	_lpszUserType := win32.UTF16Ptr(lpszUserType)
-	return win32.HRESULTError(int32(systemcomstructuredstorage.WriteFmtUserTypeStg(pstg, cf, foundation.PWSTR(_lpszUserType))))
+	return win32.HRESULTError(int32(systemcomstructuredstorage.WriteFmtUserTypeStg(pstg.Raw, cf, foundation.PWSTR(_lpszUserType))))
 }

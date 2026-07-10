@@ -11,27 +11,28 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
 	graphicsdirect3dfxc "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d/fxc"
-	graphicsdirect3d10 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d10"
 	graphicsdirect3d11 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d11"
+	graphicsdirect3didiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d"
+	graphicsdirect3d10idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d10"
 )
 
 // D3DCompile wraps the raw D3DCompile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile
-func D3DCompile(pSrcData unsafe.Pointer, SrcDataSize uintptr, pSourceName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, pEntrypoint foundation.PSTR, pTarget foundation.PSTR, Flags1 uint32, Flags2 uint32, ppCode **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DCompile(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, ppCode, ppErrorMsgs)))
+func D3DCompile(pSrcData unsafe.Pointer, SrcDataSize uintptr, pSourceName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude graphicsdirect3didiom.ID3DInclude, pEntrypoint foundation.PSTR, pTarget foundation.PSTR, Flags1 uint32, Flags2 uint32, ppCode **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DCompile(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude.Raw, pEntrypoint, pTarget, Flags1, Flags2, ppCode, ppErrorMsgs)))
 }
 
 // D3DCompile2 wraps the raw D3DCompile2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2
-func D3DCompile2(pSrcData unsafe.Pointer, SrcDataSize uintptr, pSourceName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, pEntrypoint foundation.PSTR, pTarget foundation.PSTR, Flags1 uint32, Flags2 uint32, SecondaryDataFlags uint32, pSecondaryData unsafe.Pointer, SecondaryDataSize uintptr, ppCode **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DCompile2(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, SecondaryDataFlags, pSecondaryData, SecondaryDataSize, ppCode, ppErrorMsgs)))
+func D3DCompile2(pSrcData unsafe.Pointer, SrcDataSize uintptr, pSourceName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude graphicsdirect3didiom.ID3DInclude, pEntrypoint foundation.PSTR, pTarget foundation.PSTR, Flags1 uint32, Flags2 uint32, SecondaryDataFlags uint32, pSecondaryData unsafe.Pointer, SecondaryDataSize uintptr, ppCode **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DCompile2(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude.Raw, pEntrypoint, pTarget, Flags1, Flags2, SecondaryDataFlags, pSecondaryData, SecondaryDataSize, ppCode, ppErrorMsgs)))
 }
 
 // D3DCompileFromFile wraps the raw D3DCompileFromFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompilefromfile
-func D3DCompileFromFile(pFileName string, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, pEntrypoint foundation.PSTR, pTarget foundation.PSTR, Flags1 uint32, Flags2 uint32, ppCode **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
+func D3DCompileFromFile(pFileName string, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude graphicsdirect3didiom.ID3DInclude, pEntrypoint foundation.PSTR, pTarget foundation.PSTR, Flags1 uint32, Flags2 uint32, ppCode **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
 	_pFileName := win32.UTF16Ptr(pFileName)
-	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DCompileFromFile(foundation.PWSTR(_pFileName), pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, ppCode, ppErrorMsgs)))
+	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DCompileFromFile(foundation.PWSTR(_pFileName), pDefines, pInclude.Raw, pEntrypoint, pTarget, Flags1, Flags2, ppCode, ppErrorMsgs)))
 }
 
 // D3DCompressShaders wraps the raw D3DCompressShaders call with idiomatic Go types.
@@ -76,8 +77,8 @@ func D3DDisassemble(pSrcData unsafe.Pointer, SrcDataSize uintptr, Flags uint32, 
 
 // D3DDisassemble10Effect wraps the raw D3DDisassemble10Effect call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble10effect
-func D3DDisassemble10Effect(pEffect *graphicsdirect3d10.ID3D10Effect, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DDisassemble10Effect(pEffect, Flags, ppDisassembly)))
+func D3DDisassemble10Effect(pEffect graphicsdirect3d10idiom.ID3D10Effect, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DDisassemble10Effect(pEffect.Raw, Flags, ppDisassembly)))
 }
 
 // D3DDisassembleRegion wraps the raw D3DDisassembleRegion call with idiomatic Go types.
@@ -134,8 +135,8 @@ func D3DLoadModule(pSrcData unsafe.Pointer, cbSrcDataSize uintptr, ppModule **gr
 
 // D3DPreprocess wraps the raw D3DPreprocess call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dpreprocess
-func D3DPreprocess(pSrcData unsafe.Pointer, SrcDataSize uintptr, pSourceName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, ppCodeText **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DPreprocess(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, ppCodeText, ppErrorMsgs)))
+func D3DPreprocess(pSrcData unsafe.Pointer, SrcDataSize uintptr, pSourceName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude graphicsdirect3didiom.ID3DInclude, ppCodeText **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
+	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DPreprocess(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude.Raw, ppCodeText, ppErrorMsgs)))
 }
 
 // D3DReadFileToBlob wraps the raw D3DReadFileToBlob call with idiomatic Go types.
@@ -171,8 +172,8 @@ func D3DStripShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, uStr
 
 // D3DWriteBlobToFile wraps the raw D3DWriteBlobToFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dwriteblobtofile
-func D3DWriteBlobToFile(pBlob *graphicsdirect3d.ID3DBlob, pFileName string, bOverwrite bool) error {
+func D3DWriteBlobToFile(pBlob graphicsdirect3didiom.ID3DBlob, pFileName string, bOverwrite bool) error {
 	_pFileName := win32.UTF16Ptr(pFileName)
 	_bOverwrite := foundation.BOOL(win32.Bool32(bOverwrite))
-	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DWriteBlobToFile(pBlob, foundation.PWSTR(_pFileName), _bOverwrite)))
+	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DWriteBlobToFile(pBlob.Raw, foundation.PWSTR(_pFileName), _bOverwrite)))
 }

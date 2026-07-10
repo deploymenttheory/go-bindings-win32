@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/gaming"
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
+	systemwinrtidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/winrt"
 )
 
 // CheckGamingPrivilegeSilently wraps the raw CheckGamingPrivilegeSilently call with idiomatic Go types.
@@ -19,8 +20,8 @@ func CheckGamingPrivilegeSilently(privilegeId uint32, scope systemwinrt.HSTRING,
 }
 
 // CheckGamingPrivilegeSilentlyForUser wraps the raw CheckGamingPrivilegeSilentlyForUser call with idiomatic Go types.
-func CheckGamingPrivilegeSilentlyForUser(user *systemwinrt.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) error {
-	return win32.HRESULTError(int32(gaming.CheckGamingPrivilegeSilentlyForUser(user, privilegeId, scope, policy, hasPrivilege)))
+func CheckGamingPrivilegeSilentlyForUser(user systemwinrtidiom.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) error {
+	return win32.HRESULTError(int32(gaming.CheckGamingPrivilegeSilentlyForUser(user.Raw, privilegeId, scope, policy, hasPrivilege)))
 }
 
 // CheckGamingPrivilegeWithUI wraps the raw CheckGamingPrivilegeWithUI call with idiomatic Go types.
@@ -30,8 +31,8 @@ func CheckGamingPrivilegeWithUI(privilegeId uint32, scope systemwinrt.HSTRING, p
 }
 
 // CheckGamingPrivilegeWithUIForUser wraps the raw CheckGamingPrivilegeWithUIForUser call with idiomatic Go types.
-func CheckGamingPrivilegeWithUIForUser(user *systemwinrt.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, friendlyMessage systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.CheckGamingPrivilegeWithUIForUser(user, privilegeId, scope, policy, friendlyMessage, completionRoutine, context)))
+func CheckGamingPrivilegeWithUIForUser(user systemwinrtidiom.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, friendlyMessage systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.CheckGamingPrivilegeWithUIForUser(user.Raw, privilegeId, scope, policy, friendlyMessage, completionRoutine, context)))
 }
 
 // GetExpandedResourceExclusiveCpuCount wraps the raw GetExpandedResourceExclusiveCpuCount call with idiomatic Go types.
@@ -72,8 +73,8 @@ func ShowChangeFriendRelationshipUI(targetUserXuid systemwinrt.HSTRING, completi
 }
 
 // ShowChangeFriendRelationshipUIForUser wraps the raw ShowChangeFriendRelationshipUIForUser call with idiomatic Go types.
-func ShowChangeFriendRelationshipUIForUser(user *systemwinrt.IInspectable, targetUserXuid systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowChangeFriendRelationshipUIForUser(user, targetUserXuid, completionRoutine, context)))
+func ShowChangeFriendRelationshipUIForUser(user systemwinrtidiom.IInspectable, targetUserXuid systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowChangeFriendRelationshipUIForUser(user.Raw, targetUserXuid, completionRoutine, context)))
 }
 
 // ShowCustomizeUserProfileUI wraps the raw ShowCustomizeUserProfileUI call with idiomatic Go types.
@@ -82,8 +83,8 @@ func ShowCustomizeUserProfileUI(completionRoutine gaming.GameUICompletionRoutine
 }
 
 // ShowCustomizeUserProfileUIForUser wraps the raw ShowCustomizeUserProfileUIForUser call with idiomatic Go types.
-func ShowCustomizeUserProfileUIForUser(user *systemwinrt.IInspectable, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowCustomizeUserProfileUIForUser(user, completionRoutine, context)))
+func ShowCustomizeUserProfileUIForUser(user systemwinrtidiom.IInspectable, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowCustomizeUserProfileUIForUser(user.Raw, completionRoutine, context)))
 }
 
 // ShowFindFriendsUI wraps the raw ShowFindFriendsUI call with idiomatic Go types.
@@ -92,8 +93,8 @@ func ShowFindFriendsUI(completionRoutine gaming.GameUICompletionRoutine, context
 }
 
 // ShowFindFriendsUIForUser wraps the raw ShowFindFriendsUIForUser call with idiomatic Go types.
-func ShowFindFriendsUIForUser(user *systemwinrt.IInspectable, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowFindFriendsUIForUser(user, completionRoutine, context)))
+func ShowFindFriendsUIForUser(user systemwinrtidiom.IInspectable, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowFindFriendsUIForUser(user.Raw, completionRoutine, context)))
 }
 
 // ShowGameInfoUI wraps the raw ShowGameInfoUI call with idiomatic Go types.
@@ -102,8 +103,8 @@ func ShowGameInfoUI(titleId uint32, completionRoutine gaming.GameUICompletionRou
 }
 
 // ShowGameInfoUIForUser wraps the raw ShowGameInfoUIForUser call with idiomatic Go types.
-func ShowGameInfoUIForUser(user *systemwinrt.IInspectable, titleId uint32, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowGameInfoUIForUser(user, titleId, completionRoutine, context)))
+func ShowGameInfoUIForUser(user systemwinrtidiom.IInspectable, titleId uint32, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowGameInfoUIForUser(user.Raw, titleId, completionRoutine, context)))
 }
 
 // ShowGameInviteUI wraps the raw ShowGameInviteUI call with idiomatic Go types.
@@ -113,8 +114,8 @@ func ShowGameInviteUI(serviceConfigurationId systemwinrt.HSTRING, sessionTemplat
 }
 
 // ShowGameInviteUIForUser wraps the raw ShowGameInviteUIForUser call with idiomatic Go types.
-func ShowGameInviteUIForUser(user *systemwinrt.IInspectable, serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowGameInviteUIForUser(user, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, completionRoutine, context)))
+func ShowGameInviteUIForUser(user systemwinrtidiom.IInspectable, serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowGameInviteUIForUser(user.Raw, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, completionRoutine, context)))
 }
 
 // ShowGameInviteUIWithContext wraps the raw ShowGameInviteUIWithContext call with idiomatic Go types.
@@ -123,8 +124,8 @@ func ShowGameInviteUIWithContext(serviceConfigurationId systemwinrt.HSTRING, ses
 }
 
 // ShowGameInviteUIWithContextForUser wraps the raw ShowGameInviteUIWithContextForUser call with idiomatic Go types.
-func ShowGameInviteUIWithContextForUser(user *systemwinrt.IInspectable, serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, customActivationContext systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowGameInviteUIWithContextForUser(user, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, customActivationContext, completionRoutine, context)))
+func ShowGameInviteUIWithContextForUser(user systemwinrtidiom.IInspectable, serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, customActivationContext systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowGameInviteUIWithContextForUser(user.Raw, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, customActivationContext, completionRoutine, context)))
 }
 
 // ShowPlayerPickerUI wraps the raw ShowPlayerPickerUI call with idiomatic Go types.
@@ -142,7 +143,7 @@ func ShowPlayerPickerUI(promptDisplayText systemwinrt.HSTRING, xuids []systemwin
 }
 
 // ShowPlayerPickerUIForUser wraps the raw ShowPlayerPickerUIForUser call with idiomatic Go types.
-func ShowPlayerPickerUIForUser(user *systemwinrt.IInspectable, promptDisplayText systemwinrt.HSTRING, xuids []systemwinrt.HSTRING, preSelectedXuids []systemwinrt.HSTRING, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine gaming.PlayerPickerUICompletionRoutine, context unsafe.Pointer) error {
+func ShowPlayerPickerUIForUser(user systemwinrtidiom.IInspectable, promptDisplayText systemwinrt.HSTRING, xuids []systemwinrt.HSTRING, preSelectedXuids []systemwinrt.HSTRING, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine gaming.PlayerPickerUICompletionRoutine, context unsafe.Pointer) error {
 	var _xuids *systemwinrt.HSTRING
 	if len(xuids) > 0 {
 		_xuids = &xuids[0]
@@ -151,7 +152,7 @@ func ShowPlayerPickerUIForUser(user *systemwinrt.IInspectable, promptDisplayText
 	if len(preSelectedXuids) > 0 {
 		_preSelectedXuids = &preSelectedXuids[0]
 	}
-	return win32.HRESULTError(int32(gaming.ShowPlayerPickerUIForUser(user, promptDisplayText, _xuids, uintptr(len(xuids)), _preSelectedXuids, uintptr(len(preSelectedXuids)), minSelectionCount, maxSelectionCount, completionRoutine, context)))
+	return win32.HRESULTError(int32(gaming.ShowPlayerPickerUIForUser(user.Raw, promptDisplayText, _xuids, uintptr(len(xuids)), _preSelectedXuids, uintptr(len(preSelectedXuids)), minSelectionCount, maxSelectionCount, completionRoutine, context)))
 }
 
 // ShowProfileCardUI wraps the raw ShowProfileCardUI call with idiomatic Go types.
@@ -161,8 +162,8 @@ func ShowProfileCardUI(targetUserXuid systemwinrt.HSTRING, completionRoutine gam
 }
 
 // ShowProfileCardUIForUser wraps the raw ShowProfileCardUIForUser call with idiomatic Go types.
-func ShowProfileCardUIForUser(user *systemwinrt.IInspectable, targetUserXuid systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowProfileCardUIForUser(user, targetUserXuid, completionRoutine, context)))
+func ShowProfileCardUIForUser(user systemwinrtidiom.IInspectable, targetUserXuid systemwinrt.HSTRING, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowProfileCardUIForUser(user.Raw, targetUserXuid, completionRoutine, context)))
 }
 
 // ShowTitleAchievementsUI wraps the raw ShowTitleAchievementsUI call with idiomatic Go types.
@@ -172,8 +173,8 @@ func ShowTitleAchievementsUI(titleId uint32, completionRoutine gaming.GameUIComp
 }
 
 // ShowTitleAchievementsUIForUser wraps the raw ShowTitleAchievementsUIForUser call with idiomatic Go types.
-func ShowTitleAchievementsUIForUser(user *systemwinrt.IInspectable, titleId uint32, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowTitleAchievementsUIForUser(user, titleId, completionRoutine, context)))
+func ShowTitleAchievementsUIForUser(user systemwinrtidiom.IInspectable, titleId uint32, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowTitleAchievementsUIForUser(user.Raw, titleId, completionRoutine, context)))
 }
 
 // ShowUserSettingsUI wraps the raw ShowUserSettingsUI call with idiomatic Go types.
@@ -182,8 +183,8 @@ func ShowUserSettingsUI(completionRoutine gaming.GameUICompletionRoutine, contex
 }
 
 // ShowUserSettingsUIForUser wraps the raw ShowUserSettingsUIForUser call with idiomatic Go types.
-func ShowUserSettingsUIForUser(user *systemwinrt.IInspectable, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowUserSettingsUIForUser(user, completionRoutine, context)))
+func ShowUserSettingsUIForUser(user systemwinrtidiom.IInspectable, completionRoutine gaming.GameUICompletionRoutine, context unsafe.Pointer) error {
+	return win32.HRESULTError(int32(gaming.ShowUserSettingsUIForUser(user.Raw, completionRoutine, context)))
 }
 
 // TryCancelPendingGameUI wraps the raw TryCancelPendingGameUI call with idiomatic Go types.

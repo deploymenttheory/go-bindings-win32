@@ -12,12 +12,13 @@ import (
 	systemaddressbook "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/addressbook"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // BuildDisplayTable wraps the raw BuildDisplayTable call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/builddisplaytable
-func BuildDisplayTable(lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpAllocateMore systemaddressbook.LPALLOCATEMORE, lpFreeBuffer systemaddressbook.LPFREEBUFFER, lpMalloc *systemcom.IMalloc, hInstance foundation.HINSTANCE, cPages uint32, lpPage *systemaddressbook.DTPAGE, ulFlags uint32, lppTable **systemaddressbook.IMAPITable, lppTblData **systemaddressbook.ITableData) error {
-	return win32.HRESULTError(int32(systemaddressbook.BuildDisplayTable(lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpMalloc, hInstance, cPages, lpPage, ulFlags, lppTable, lppTblData)))
+func BuildDisplayTable(lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpAllocateMore systemaddressbook.LPALLOCATEMORE, lpFreeBuffer systemaddressbook.LPFREEBUFFER, lpMalloc systemcomidiom.IMalloc, hInstance foundation.HINSTANCE, cPages uint32, lpPage *systemaddressbook.DTPAGE, ulFlags uint32, lppTable **systemaddressbook.IMAPITable, lppTblData **systemaddressbook.ITableData) error {
+	return win32.HRESULTError(int32(systemaddressbook.BuildDisplayTable(lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpMalloc.Raw, hInstance, cPages, lpPage, ulFlags, lppTable, lppTblData)))
 }
 
 // EnableIdleRoutine wraps the raw EnableIdleRoutine call with idiomatic Go types.
@@ -47,20 +48,20 @@ func FPropContainsProp(lpSPropValueDst *systemaddressbook.SPropValue, lpSPropVal
 
 // FPropExists wraps the raw FPropExists call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/fpropexists
-func FPropExists(lpMapiProp *systemaddressbook.IMAPIProp, ulPropTag uint32) bool {
-	return systemaddressbook.FPropExists(lpMapiProp, ulPropTag) != 0
+func FPropExists(lpMapiProp IMAPIProp, ulPropTag uint32) bool {
+	return systemaddressbook.FPropExists(lpMapiProp.Raw, ulPropTag) != 0
 }
 
 // HrAddColumns wraps the raw HrAddColumns call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hraddcolumns
-func HrAddColumns(lptbl *systemaddressbook.IMAPITable, lpproptagColumnsNew *systemaddressbook.SPropTagArray, lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpFreeBuffer systemaddressbook.LPFREEBUFFER) error {
-	return win32.HRESULTError(int32(systemaddressbook.HrAddColumns(lptbl, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer)))
+func HrAddColumns(lptbl IMAPITable, lpproptagColumnsNew *systemaddressbook.SPropTagArray, lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpFreeBuffer systemaddressbook.LPFREEBUFFER) error {
+	return win32.HRESULTError(int32(systemaddressbook.HrAddColumns(lptbl.Raw, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer)))
 }
 
 // HrAddColumnsEx wraps the raw HrAddColumnsEx call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hraddcolumnsex
-func HrAddColumnsEx(lptbl *systemaddressbook.IMAPITable, lpproptagColumnsNew *systemaddressbook.SPropTagArray, lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpFreeBuffer systemaddressbook.LPFREEBUFFER, lpfnFilterColumns uintptr) error {
-	return win32.HRESULTError(int32(systemaddressbook.HrAddColumnsEx(lptbl, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer, lpfnFilterColumns)))
+func HrAddColumnsEx(lptbl IMAPITable, lpproptagColumnsNew *systemaddressbook.SPropTagArray, lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpFreeBuffer systemaddressbook.LPFREEBUFFER, lpfnFilterColumns uintptr) error {
+	return win32.HRESULTError(int32(systemaddressbook.HrAddColumnsEx(lptbl.Raw, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer, lpfnFilterColumns)))
 }
 
 // HrAllocAdviseSink wraps the raw HrAllocAdviseSink call with idiomatic Go types.
@@ -77,32 +78,32 @@ func HrDispatchNotifications(ulFlags uint32) error {
 
 // HrGetOneProp wraps the raw HrGetOneProp call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrgetoneprop
-func HrGetOneProp(lpMapiProp *systemaddressbook.IMAPIProp, ulPropTag uint32, lppProp **systemaddressbook.SPropValue) error {
-	return win32.HRESULTError(int32(systemaddressbook.HrGetOneProp(lpMapiProp, ulPropTag, lppProp)))
+func HrGetOneProp(lpMapiProp IMAPIProp, ulPropTag uint32, lppProp **systemaddressbook.SPropValue) error {
+	return win32.HRESULTError(int32(systemaddressbook.HrGetOneProp(lpMapiProp.Raw, ulPropTag, lppProp)))
 }
 
 // HrIStorageFromStream wraps the raw HrIStorageFromStream call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hristoragefromstream
-func HrIStorageFromStream(lpUnkIn *systemcom.IUnknown, lpInterface *win32.GUID, ulFlags uint32, lppStorageOut **systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(systemaddressbook.HrIStorageFromStream(lpUnkIn, lpInterface, ulFlags, lppStorageOut)))
+func HrIStorageFromStream(lpUnkIn systemcomidiom.IUnknown, lpInterface *win32.GUID, ulFlags uint32, lppStorageOut **systemcomstructuredstorage.IStorage) error {
+	return win32.HRESULTError(int32(systemaddressbook.HrIStorageFromStream(lpUnkIn.Raw, lpInterface, ulFlags, lppStorageOut)))
 }
 
 // HrQueryAllRows wraps the raw HrQueryAllRows call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrqueryallrows
-func HrQueryAllRows(lpTable *systemaddressbook.IMAPITable, lpPropTags *systemaddressbook.SPropTagArray, lpRestriction *systemaddressbook.SRestriction, lpSortOrderSet *systemaddressbook.SSortOrderSet, crowsMax int32, lppRows **systemaddressbook.SRowSet) error {
-	return win32.HRESULTError(int32(systemaddressbook.HrQueryAllRows(lpTable, lpPropTags, lpRestriction, lpSortOrderSet, crowsMax, lppRows)))
+func HrQueryAllRows(lpTable IMAPITable, lpPropTags *systemaddressbook.SPropTagArray, lpRestriction *systemaddressbook.SRestriction, lpSortOrderSet *systemaddressbook.SSortOrderSet, crowsMax int32, lppRows **systemaddressbook.SRowSet) error {
+	return win32.HRESULTError(int32(systemaddressbook.HrQueryAllRows(lpTable.Raw, lpPropTags, lpRestriction, lpSortOrderSet, crowsMax, lppRows)))
 }
 
 // HrSetOneProp wraps the raw HrSetOneProp call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrsetoneprop
-func HrSetOneProp(lpMapiProp *systemaddressbook.IMAPIProp, lpProp *systemaddressbook.SPropValue) error {
-	return win32.HRESULTError(int32(systemaddressbook.HrSetOneProp(lpMapiProp, lpProp)))
+func HrSetOneProp(lpMapiProp IMAPIProp, lpProp *systemaddressbook.SPropValue) error {
+	return win32.HRESULTError(int32(systemaddressbook.HrSetOneProp(lpMapiProp.Raw, lpProp)))
 }
 
 // HrThisThreadAdviseSink wraps the raw HrThisThreadAdviseSink call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrthisthreadadvisesink
-func HrThisThreadAdviseSink(lpAdviseSink *systemaddressbook.IMAPIAdviseSink, lppAdviseSink **systemaddressbook.IMAPIAdviseSink) error {
-	return win32.HRESULTError(int32(systemaddressbook.HrThisThreadAdviseSink(lpAdviseSink, lppAdviseSink)))
+func HrThisThreadAdviseSink(lpAdviseSink IMAPIAdviseSink, lppAdviseSink **systemaddressbook.IMAPIAdviseSink) error {
+	return win32.HRESULTError(int32(systemaddressbook.HrThisThreadAdviseSink(lpAdviseSink.Raw, lppAdviseSink)))
 }
 
 // OpenStreamOnFile wraps the raw OpenStreamOnFile call with idiomatic Go types.
@@ -113,14 +114,14 @@ func OpenStreamOnFile(lpAllocateBuffer systemaddressbook.LPALLOCATEBUFFER, lpFre
 
 // RTFSync wraps the raw RTFSync call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/rtfsync
-func RTFSync(lpMessage *systemaddressbook.IMessage, ulFlags uint32, lpfMessageUpdated *foundation.BOOL) error {
-	return win32.HRESULTError(int32(systemaddressbook.RTFSync(lpMessage, ulFlags, lpfMessageUpdated)))
+func RTFSync(lpMessage IMessage, ulFlags uint32, lpfMessageUpdated *foundation.BOOL) error {
+	return win32.HRESULTError(int32(systemaddressbook.RTFSync(lpMessage.Raw, ulFlags, lpfMessageUpdated)))
 }
 
 // WrapCompressedRTFStream wraps the raw WrapCompressedRTFStream call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/wrapcompressedrtfstream
-func WrapCompressedRTFStream(lpCompressedRTFStream *systemcom.IStream, ulFlags uint32, lpUncompressedRTFStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(systemaddressbook.WrapCompressedRTFStream(lpCompressedRTFStream, ulFlags, lpUncompressedRTFStream)))
+func WrapCompressedRTFStream(lpCompressedRTFStream systemcomidiom.IStream, ulFlags uint32, lpUncompressedRTFStream **systemcom.IStream) error {
+	return win32.HRESULTError(int32(systemaddressbook.WrapCompressedRTFStream(lpCompressedRTFStream.Raw, ulFlags, lpUncompressedRTFStream)))
 }
 
 // WrapStoreEntryID wraps the raw WrapStoreEntryID call with idiomatic Go types.

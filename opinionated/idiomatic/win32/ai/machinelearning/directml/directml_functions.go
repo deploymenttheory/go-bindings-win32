@@ -9,17 +9,17 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	aimachinelearningdirectml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ai/machinelearning/directml"
-	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
+	graphicsdirect3d12idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d12"
 )
 
 // DMLCreateDevice wraps the raw DMLCreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/directml/nf-directml-dmlcreatedevice
-func DMLCreateDevice(d3d12Device *graphicsdirect3d12.ID3D12Device, flags aimachinelearningdirectml.DML_CREATE_DEVICE_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(aimachinelearningdirectml.DMLCreateDevice(d3d12Device, flags, riid, ppv)))
+func DMLCreateDevice(d3d12Device graphicsdirect3d12idiom.ID3D12Device, flags aimachinelearningdirectml.DML_CREATE_DEVICE_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(aimachinelearningdirectml.DMLCreateDevice(d3d12Device.Raw, flags, riid, ppv)))
 }
 
 // DMLCreateDevice1 wraps the raw DMLCreateDevice1 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/directml/nf-directml-dmlcreatedevice1
-func DMLCreateDevice1(d3d12Device *graphicsdirect3d12.ID3D12Device, flags aimachinelearningdirectml.DML_CREATE_DEVICE_FLAGS, minimumFeatureLevel aimachinelearningdirectml.DML_FEATURE_LEVEL, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(aimachinelearningdirectml.DMLCreateDevice1(d3d12Device, flags, minimumFeatureLevel, riid, ppv)))
+func DMLCreateDevice1(d3d12Device graphicsdirect3d12idiom.ID3D12Device, flags aimachinelearningdirectml.DML_CREATE_DEVICE_FLAGS, minimumFeatureLevel aimachinelearningdirectml.DML_FEATURE_LEVEL, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(aimachinelearningdirectml.DMLCreateDevice1(d3d12Device.Raw, flags, minimumFeatureLevel, riid, ppv)))
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirectmanipulation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directmanipulation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -43,18 +42,18 @@ func WrapIDirectManipulationCompositor(raw *graphicsdirectmanipulation.IDirectMa
 }
 
 // AddContent wraps the raw AddContent call.
-func (self IDirectManipulationCompositor) AddContent(content *graphicsdirectmanipulation.IDirectManipulationContent, device *systemcom.IUnknown, parentVisual *systemcom.IUnknown, childVisual *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddContent(content, device, parentVisual, childVisual)))
+func (self IDirectManipulationCompositor) AddContent(content IDirectManipulationContent, device systemcomidiom.IUnknown, parentVisual systemcomidiom.IUnknown, childVisual systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddContent(content.Raw, device.Raw, parentVisual.Raw, childVisual.Raw)))
 }
 
 // RemoveContent wraps the raw RemoveContent call.
-func (self IDirectManipulationCompositor) RemoveContent(content *graphicsdirectmanipulation.IDirectManipulationContent) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveContent(content)))
+func (self IDirectManipulationCompositor) RemoveContent(content IDirectManipulationContent) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveContent(content.Raw)))
 }
 
 // SetUpdateManager wraps the raw SetUpdateManager call.
-func (self IDirectManipulationCompositor) SetUpdateManager(updateManager *graphicsdirectmanipulation.IDirectManipulationUpdateManager) error {
-	return win32.HRESULTError(int32(self.Raw.SetUpdateManager(updateManager)))
+func (self IDirectManipulationCompositor) SetUpdateManager(updateManager IDirectManipulationUpdateManager) error {
+	return win32.HRESULTError(int32(self.Raw.SetUpdateManager(updateManager.Raw)))
 }
 
 // Flush wraps the raw Flush call.
@@ -74,8 +73,8 @@ func WrapIDirectManipulationCompositor2(raw *graphicsdirectmanipulation.IDirectM
 }
 
 // AddContentWithCrossProcessChaining wraps the raw AddContentWithCrossProcessChaining call.
-func (self IDirectManipulationCompositor2) AddContentWithCrossProcessChaining(content *graphicsdirectmanipulation.IDirectManipulationPrimaryContent, device *systemcom.IUnknown, parentVisual *systemcom.IUnknown, childVisual *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AddContentWithCrossProcessChaining(content, device, parentVisual, childVisual)))
+func (self IDirectManipulationCompositor2) AddContentWithCrossProcessChaining(content IDirectManipulationPrimaryContent, device systemcomidiom.IUnknown, parentVisual systemcomidiom.IUnknown, childVisual systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AddContentWithCrossProcessChaining(content.Raw, device.Raw, parentVisual.Raw, childVisual.Raw)))
 }
 
 // IDirectManipulationContent is an idiomatic wrapper over the raw COM interface Graphics.DirectManipulation.IDirectManipulationContent with error-returning methods.
@@ -110,8 +109,8 @@ func (self IDirectManipulationContent) GetTag(riid *win32.GUID, object *unsafe.P
 }
 
 // SetTag wraps the raw SetTag call.
-func (self IDirectManipulationContent) SetTag(object *systemcom.IUnknown, id uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetTag(object, id)))
+func (self IDirectManipulationContent) SetTag(object systemcomidiom.IUnknown, id uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetTag(object.Raw, id)))
 }
 
 // GetOutputTransform wraps the raw GetOutputTransform call.
@@ -188,8 +187,8 @@ func WrapIDirectManipulationDragDropEventHandler(raw *graphicsdirectmanipulation
 }
 
 // OnDragDropStatusChange wraps the raw OnDragDropStatusChange call.
-func (self IDirectManipulationDragDropEventHandler) OnDragDropStatusChange(viewport *graphicsdirectmanipulation.IDirectManipulationViewport2, current graphicsdirectmanipulation.DIRECTMANIPULATION_DRAG_DROP_STATUS, previous graphicsdirectmanipulation.DIRECTMANIPULATION_DRAG_DROP_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.OnDragDropStatusChange(viewport, current, previous)))
+func (self IDirectManipulationDragDropEventHandler) OnDragDropStatusChange(viewport IDirectManipulationViewport2, current graphicsdirectmanipulation.DIRECTMANIPULATION_DRAG_DROP_STATUS, previous graphicsdirectmanipulation.DIRECTMANIPULATION_DRAG_DROP_STATUS) error {
+	return win32.HRESULTError(int32(self.Raw.OnDragDropStatusChange(viewport.Raw, current, previous)))
 }
 
 // IDirectManipulationFrameInfoProvider is an idiomatic wrapper over the raw COM interface Graphics.DirectManipulation.IDirectManipulationFrameInfoProvider with error-returning methods.
@@ -220,8 +219,8 @@ func WrapIDirectManipulationInteractionEventHandler(raw *graphicsdirectmanipulat
 }
 
 // OnInteraction wraps the raw OnInteraction call.
-func (self IDirectManipulationInteractionEventHandler) OnInteraction(viewport *graphicsdirectmanipulation.IDirectManipulationViewport2, interaction graphicsdirectmanipulation.DIRECTMANIPULATION_INTERACTION_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.OnInteraction(viewport, interaction)))
+func (self IDirectManipulationInteractionEventHandler) OnInteraction(viewport IDirectManipulationViewport2, interaction graphicsdirectmanipulation.DIRECTMANIPULATION_INTERACTION_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.OnInteraction(viewport.Raw, interaction)))
 }
 
 // IDirectManipulationManager is an idiomatic wrapper over the raw COM interface Graphics.DirectManipulation.IDirectManipulationManager with error-returning methods.
@@ -261,13 +260,13 @@ func (self IDirectManipulationManager) GetUpdateManager(riid *win32.GUID, object
 }
 
 // CreateViewport wraps the raw CreateViewport call.
-func (self IDirectManipulationManager) CreateViewport(frameInfo *graphicsdirectmanipulation.IDirectManipulationFrameInfoProvider, window foundation.HWND, riid *win32.GUID, object *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateViewport(frameInfo, window, riid, object)))
+func (self IDirectManipulationManager) CreateViewport(frameInfo IDirectManipulationFrameInfoProvider, window foundation.HWND, riid *win32.GUID, object *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateViewport(frameInfo.Raw, window, riid, object)))
 }
 
 // CreateContent wraps the raw CreateContent call.
-func (self IDirectManipulationManager) CreateContent(frameInfo *graphicsdirectmanipulation.IDirectManipulationFrameInfoProvider, clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateContent(frameInfo, clsid, riid, object)))
+func (self IDirectManipulationManager) CreateContent(frameInfo IDirectManipulationFrameInfoProvider, clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateContent(frameInfo.Raw, clsid, riid, object)))
 }
 
 // IDirectManipulationManager2 is an idiomatic wrapper over the raw COM interface Graphics.DirectManipulation.IDirectManipulationManager2 with error-returning methods.
@@ -371,8 +370,8 @@ func WrapIDirectManipulationUpdateManager(raw *graphicsdirectmanipulation.IDirec
 }
 
 // RegisterWaitHandleCallback wraps the raw RegisterWaitHandleCallback call.
-func (self IDirectManipulationUpdateManager) RegisterWaitHandleCallback(handle foundation.HANDLE, eventHandler *graphicsdirectmanipulation.IDirectManipulationUpdateHandler, cookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterWaitHandleCallback(handle, eventHandler, cookie)))
+func (self IDirectManipulationUpdateManager) RegisterWaitHandleCallback(handle foundation.HANDLE, eventHandler IDirectManipulationUpdateHandler, cookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterWaitHandleCallback(handle, eventHandler.Raw, cookie)))
 }
 
 // UnregisterWaitHandleCallback wraps the raw UnregisterWaitHandleCallback call.
@@ -381,8 +380,8 @@ func (self IDirectManipulationUpdateManager) UnregisterWaitHandleCallback(cookie
 }
 
 // Update wraps the raw Update call.
-func (self IDirectManipulationUpdateManager) Update(frameInfo *graphicsdirectmanipulation.IDirectManipulationFrameInfoProvider) error {
-	return win32.HRESULTError(int32(self.Raw.Update(frameInfo)))
+func (self IDirectManipulationUpdateManager) Update(frameInfo IDirectManipulationFrameInfoProvider) error {
+	return win32.HRESULTError(int32(self.Raw.Update(frameInfo.Raw)))
 }
 
 // IDirectManipulationViewport is an idiomatic wrapper over the raw COM interface Graphics.DirectManipulation.IDirectManipulationViewport with error-returning methods.
@@ -432,8 +431,8 @@ func (self IDirectManipulationViewport) GetTag(riid *win32.GUID, object *unsafe.
 }
 
 // SetTag wraps the raw SetTag call.
-func (self IDirectManipulationViewport) SetTag(object *systemcom.IUnknown, id uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetTag(object, id)))
+func (self IDirectManipulationViewport) SetTag(object systemcomidiom.IUnknown, id uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetTag(object.Raw, id)))
 }
 
 // GetViewportRect wraps the raw GetViewportRect call.
@@ -462,13 +461,13 @@ func (self IDirectManipulationViewport) GetPrimaryContent(riid *win32.GUID, obje
 }
 
 // AddContent wraps the raw AddContent call.
-func (self IDirectManipulationViewport) AddContent(content *graphicsdirectmanipulation.IDirectManipulationContent) error {
-	return win32.HRESULTError(int32(self.Raw.AddContent(content)))
+func (self IDirectManipulationViewport) AddContent(content IDirectManipulationContent) error {
+	return win32.HRESULTError(int32(self.Raw.AddContent(content.Raw)))
 }
 
 // RemoveContent wraps the raw RemoveContent call.
-func (self IDirectManipulationViewport) RemoveContent(content *graphicsdirectmanipulation.IDirectManipulationContent) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveContent(content)))
+func (self IDirectManipulationViewport) RemoveContent(content IDirectManipulationContent) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveContent(content.Raw)))
 }
 
 // SetViewportOptions wraps the raw SetViewportOptions call.
@@ -502,8 +501,8 @@ func (self IDirectManipulationViewport) SetChaining(enabledTypes graphicsdirectm
 }
 
 // AddEventHandler wraps the raw AddEventHandler call.
-func (self IDirectManipulationViewport) AddEventHandler(window foundation.HWND, eventHandler *graphicsdirectmanipulation.IDirectManipulationViewportEventHandler, cookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddEventHandler(window, eventHandler, cookie)))
+func (self IDirectManipulationViewport) AddEventHandler(window foundation.HWND, eventHandler IDirectManipulationViewportEventHandler, cookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddEventHandler(window, eventHandler.Raw, cookie)))
 }
 
 // RemoveEventHandler wraps the raw RemoveEventHandler call.
@@ -543,8 +542,8 @@ func WrapIDirectManipulationViewport2(raw *graphicsdirectmanipulation.IDirectMan
 }
 
 // AddBehavior wraps the raw AddBehavior call.
-func (self IDirectManipulationViewport2) AddBehavior(behavior *systemcom.IUnknown, cookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddBehavior(behavior, cookie)))
+func (self IDirectManipulationViewport2) AddBehavior(behavior systemcomidiom.IUnknown, cookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddBehavior(behavior.Raw, cookie)))
 }
 
 // RemoveBehavior wraps the raw RemoveBehavior call.
@@ -569,16 +568,16 @@ func WrapIDirectManipulationViewportEventHandler(raw *graphicsdirectmanipulation
 }
 
 // OnViewportStatusChanged wraps the raw OnViewportStatusChanged call.
-func (self IDirectManipulationViewportEventHandler) OnViewportStatusChanged(viewport *graphicsdirectmanipulation.IDirectManipulationViewport, current graphicsdirectmanipulation.DIRECTMANIPULATION_STATUS, previous graphicsdirectmanipulation.DIRECTMANIPULATION_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.OnViewportStatusChanged(viewport, current, previous)))
+func (self IDirectManipulationViewportEventHandler) OnViewportStatusChanged(viewport IDirectManipulationViewport, current graphicsdirectmanipulation.DIRECTMANIPULATION_STATUS, previous graphicsdirectmanipulation.DIRECTMANIPULATION_STATUS) error {
+	return win32.HRESULTError(int32(self.Raw.OnViewportStatusChanged(viewport.Raw, current, previous)))
 }
 
 // OnViewportUpdated wraps the raw OnViewportUpdated call.
-func (self IDirectManipulationViewportEventHandler) OnViewportUpdated(viewport *graphicsdirectmanipulation.IDirectManipulationViewport) error {
-	return win32.HRESULTError(int32(self.Raw.OnViewportUpdated(viewport)))
+func (self IDirectManipulationViewportEventHandler) OnViewportUpdated(viewport IDirectManipulationViewport) error {
+	return win32.HRESULTError(int32(self.Raw.OnViewportUpdated(viewport.Raw)))
 }
 
 // OnContentUpdated wraps the raw OnContentUpdated call.
-func (self IDirectManipulationViewportEventHandler) OnContentUpdated(viewport *graphicsdirectmanipulation.IDirectManipulationViewport, content *graphicsdirectmanipulation.IDirectManipulationContent) error {
-	return win32.HRESULTError(int32(self.Raw.OnContentUpdated(viewport, content)))
+func (self IDirectManipulationViewportEventHandler) OnContentUpdated(viewport IDirectManipulationViewport, content IDirectManipulationContent) error {
+	return win32.HRESULTError(int32(self.Raw.OnContentUpdated(viewport.Raw, content.Raw)))
 }

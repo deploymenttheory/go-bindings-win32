@@ -15,6 +15,8 @@ import (
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
 )
 
 // BstrFromVector wraps the raw BstrFromVector call with idiomatic Go types.
@@ -43,8 +45,8 @@ func CreateOleAdviseHolder(ppOAHolder **systemole.IOleAdviseHolder) error {
 
 // CreateStdDispatch wraps the raw CreateStdDispatch call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-createstddispatch
-func CreateStdDispatch(punkOuter *systemcom.IUnknown, pvThis unsafe.Pointer, ptinfo *systemcom.ITypeInfo, ppunkStdDisp **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemole.CreateStdDispatch(punkOuter, pvThis, ptinfo, ppunkStdDisp)))
+func CreateStdDispatch(punkOuter systemcomidiom.IUnknown, pvThis unsafe.Pointer, ptinfo systemcomidiom.ITypeInfo, ppunkStdDisp **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(systemole.CreateStdDispatch(punkOuter.Raw, pvThis, ptinfo.Raw, ppunkStdDisp)))
 }
 
 // CreateTypeLib wraps the raw CreateTypeLib call with idiomatic Go types.
@@ -69,8 +71,8 @@ func DispCallFunc(pvInstance unsafe.Pointer, oVft uintptr, cc systemcom.CALLCONV
 
 // DispGetIDsOfNames wraps the raw DispGetIDsOfNames call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-dispgetidsofnames
-func DispGetIDsOfNames(ptinfo *systemcom.ITypeInfo, rgszNames *foundation.PWSTR, cNames uint32, rgdispid *int32) error {
-	return win32.HRESULTError(int32(systemole.DispGetIDsOfNames(ptinfo, rgszNames, cNames, rgdispid)))
+func DispGetIDsOfNames(ptinfo systemcomidiom.ITypeInfo, rgszNames *foundation.PWSTR, cNames uint32, rgdispid *int32) error {
+	return win32.HRESULTError(int32(systemole.DispGetIDsOfNames(ptinfo.Raw, rgszNames, cNames, rgdispid)))
 }
 
 // DispGetParam wraps the raw DispGetParam call with idiomatic Go types.
@@ -81,14 +83,14 @@ func DispGetParam(pdispparams *systemcom.DISPPARAMS, position uint32, vtTarg sys
 
 // DispInvoke wraps the raw DispInvoke call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-dispinvoke
-func DispInvoke(_this unsafe.Pointer, ptinfo *systemcom.ITypeInfo, dispidMember int32, wFlags uint16, pparams *systemcom.DISPPARAMS, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO, puArgErr *uint32) error {
-	return win32.HRESULTError(int32(systemole.DispInvoke(_this, ptinfo, dispidMember, wFlags, pparams, pvarResult, pexcepinfo, puArgErr)))
+func DispInvoke(_this unsafe.Pointer, ptinfo systemcomidiom.ITypeInfo, dispidMember int32, wFlags uint16, pparams *systemcom.DISPPARAMS, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO, puArgErr *uint32) error {
+	return win32.HRESULTError(int32(systemole.DispInvoke(_this, ptinfo.Raw, dispidMember, wFlags, pparams, pvarResult, pexcepinfo, puArgErr)))
 }
 
 // DoDragDrop wraps the raw DoDragDrop call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-dodragdrop
-func DoDragDrop(pDataObj *systemcom.IDataObject, pDropSource *systemole.IDropSource, dwOKEffects systemole.DROPEFFECT, pdwEffect *systemole.DROPEFFECT) error {
-	return win32.HRESULTError(int32(systemole.DoDragDrop(pDataObj, pDropSource, dwOKEffects, pdwEffect)))
+func DoDragDrop(pDataObj systemcomidiom.IDataObject, pDropSource IDropSource, dwOKEffects systemole.DROPEFFECT, pdwEffect *systemole.DROPEFFECT) error {
+	return win32.HRESULTError(int32(systemole.DoDragDrop(pDataObj.Raw, pDropSource.Raw, dwOKEffects, pdwEffect)))
 }
 
 // GetActiveObject wraps the raw GetActiveObject call with idiomatic Go types.
@@ -111,8 +113,8 @@ func GetRecordInfoFromGuids(rGuidTypeLib *win32.GUID, uVerMajor uint32, uVerMino
 
 // GetRecordInfoFromTypeInfo wraps the raw GetRecordInfoFromTypeInfo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-getrecordinfofromtypeinfo
-func GetRecordInfoFromTypeInfo(pTypeInfo *systemcom.ITypeInfo, ppRecInfo **systemole.IRecordInfo) error {
-	return win32.HRESULTError(int32(systemole.GetRecordInfoFromTypeInfo(pTypeInfo, ppRecInfo)))
+func GetRecordInfoFromTypeInfo(pTypeInfo systemcomidiom.ITypeInfo, ppRecInfo **systemole.IRecordInfo) error {
+	return win32.HRESULTError(int32(systemole.GetRecordInfoFromTypeInfo(pTypeInfo.Raw, ppRecInfo)))
 }
 
 // IsAccelerator wraps the raw IsAccelerator call with idiomatic Go types.
@@ -149,37 +151,37 @@ func LoadTypeLibEx(szFile string, regkind systemole.REGKIND, pptlib **systemcom.
 }
 
 // OleConvertOLESTREAMToIStorage2 wraps the raw OleConvertOLESTREAMToIStorage2 call with idiomatic Go types.
-func OleConvertOLESTREAMToIStorage2(lpolestream *systemcomstructuredstorage.OLESTREAM, pstg *systemcomstructuredstorage.IStorage, ptd *systemcom.DVTARGETDEVICE, opt uint32, pvCallbackContext unsafe.Pointer, pQueryConvertOLELinkCallback systemole.OLESTREAMQUERYCONVERTOLELINKCALLBACK) error {
-	return win32.HRESULTError(int32(systemole.OleConvertOLESTREAMToIStorage2(lpolestream, pstg, ptd, opt, pvCallbackContext, pQueryConvertOLELinkCallback)))
+func OleConvertOLESTREAMToIStorage2(lpolestream *systemcomstructuredstorage.OLESTREAM, pstg systemcomstructuredstorageidiom.IStorage, ptd *systemcom.DVTARGETDEVICE, opt uint32, pvCallbackContext unsafe.Pointer, pQueryConvertOLELinkCallback systemole.OLESTREAMQUERYCONVERTOLELINKCALLBACK) error {
+	return win32.HRESULTError(int32(systemole.OleConvertOLESTREAMToIStorage2(lpolestream, pstg.Raw, ptd, opt, pvCallbackContext, pQueryConvertOLELinkCallback)))
 }
 
 // OleConvertOLESTREAMToIStorageEx2 wraps the raw OleConvertOLESTREAMToIStorageEx2 call with idiomatic Go types.
-func OleConvertOLESTREAMToIStorageEx2(polestm *systemcomstructuredstorage.OLESTREAM, pstg *systemcomstructuredstorage.IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM, opt uint32, pvCallbackContext unsafe.Pointer, pQueryConvertOLELinkCallback systemole.OLESTREAMQUERYCONVERTOLELINKCALLBACK) error {
-	return win32.HRESULTError(int32(systemole.OleConvertOLESTREAMToIStorageEx2(polestm, pstg, pcfFormat, plwWidth, plHeight, pdwSize, pmedium, opt, pvCallbackContext, pQueryConvertOLELinkCallback)))
+func OleConvertOLESTREAMToIStorageEx2(polestm *systemcomstructuredstorage.OLESTREAM, pstg systemcomstructuredstorageidiom.IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM, opt uint32, pvCallbackContext unsafe.Pointer, pQueryConvertOLELinkCallback systemole.OLESTREAMQUERYCONVERTOLELINKCALLBACK) error {
+	return win32.HRESULTError(int32(systemole.OleConvertOLESTREAMToIStorageEx2(polestm, pstg.Raw, pcfFormat, plwWidth, plHeight, pdwSize, pmedium, opt, pvCallbackContext, pQueryConvertOLELinkCallback)))
 }
 
 // OleCreate wraps the raw OleCreate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreate
-func OleCreate(rclsid *win32.GUID, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreate(rclsid, riid, renderopt, pFormatEtc, pClientSite, pStg, ppvObj)))
+func OleCreate(rclsid *win32.GUID, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreate(rclsid, riid, renderopt, pFormatEtc, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateDefaultHandler wraps the raw OleCreateDefaultHandler call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatedefaulthandler
-func OleCreateDefaultHandler(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, lplpObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateDefaultHandler(clsid, pUnkOuter, riid, lplpObj)))
+func OleCreateDefaultHandler(clsid *win32.GUID, pUnkOuter systemcomidiom.IUnknown, riid *win32.GUID, lplpObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateDefaultHandler(clsid, pUnkOuter.Raw, riid, lplpObj)))
 }
 
 // OleCreateEmbeddingHelper wraps the raw OleCreateEmbeddingHelper call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreateembeddinghelper
-func OleCreateEmbeddingHelper(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, flags systemole.EMBDHLP_FLAGS, pCF *systemcom.IClassFactory, riid *win32.GUID, lplpObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateEmbeddingHelper(clsid, pUnkOuter, flags, pCF, riid, lplpObj)))
+func OleCreateEmbeddingHelper(clsid *win32.GUID, pUnkOuter systemcomidiom.IUnknown, flags systemole.EMBDHLP_FLAGS, pCF systemcomidiom.IClassFactory, riid *win32.GUID, lplpObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateEmbeddingHelper(clsid, pUnkOuter.Raw, flags, pCF.Raw, riid, lplpObj)))
 }
 
 // OleCreateEx wraps the raw OleCreateEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreateex
-func OleCreateEx(rclsid *win32.GUID, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateEx(rclsid, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)))
+func OleCreateEx(rclsid *win32.GUID, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink systemcomidiom.IAdviseSink, rgdwConnection *uint32, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateEx(rclsid, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink.Raw, rgdwConnection, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateFontIndirect wraps the raw OleCreateFontIndirect call with idiomatic Go types.
@@ -190,66 +192,66 @@ func OleCreateFontIndirect(lpFontDesc *systemole.FONTDESC, riid *win32.GUID, lpl
 
 // OleCreateFromData wraps the raw OleCreateFromData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromdata
-func OleCreateFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateFromData(pSrcDataObj, riid, renderopt, pFormatEtc, pClientSite, pStg, ppvObj)))
+func OleCreateFromData(pSrcDataObj systemcomidiom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateFromData(pSrcDataObj.Raw, riid, renderopt, pFormatEtc, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateFromDataEx wraps the raw OleCreateFromDataEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromdataex
-func OleCreateFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateFromDataEx(pSrcDataObj, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)))
+func OleCreateFromDataEx(pSrcDataObj systemcomidiom.IDataObject, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink systemcomidiom.IAdviseSink, rgdwConnection *uint32, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateFromDataEx(pSrcDataObj.Raw, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink.Raw, rgdwConnection, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateFromFile wraps the raw OleCreateFromFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromfile
-func OleCreateFromFile(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
+func OleCreateFromFile(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
 	_lpszFileName := win32.UTF16Ptr(lpszFileName)
-	return win32.HRESULTError(int32(systemole.OleCreateFromFile(rclsid, foundation.PWSTR(_lpszFileName), riid, renderopt, lpFormatEtc, pClientSite, pStg, ppvObj)))
+	return win32.HRESULTError(int32(systemole.OleCreateFromFile(rclsid, foundation.PWSTR(_lpszFileName), riid, renderopt, lpFormatEtc, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateFromFileEx wraps the raw OleCreateFromFileEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromfileex
-func OleCreateFromFileEx(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
+func OleCreateFromFileEx(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink systemcomidiom.IAdviseSink, rgdwConnection *uint32, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
 	_lpszFileName := win32.UTF16Ptr(lpszFileName)
-	return win32.HRESULTError(int32(systemole.OleCreateFromFileEx(rclsid, foundation.PWSTR(_lpszFileName), riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)))
+	return win32.HRESULTError(int32(systemole.OleCreateFromFileEx(rclsid, foundation.PWSTR(_lpszFileName), riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink.Raw, rgdwConnection, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateLink wraps the raw OleCreateLink call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelink
-func OleCreateLink(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateLink(pmkLinkSrc, riid, renderopt, lpFormatEtc, pClientSite, pStg, ppvObj)))
+func OleCreateLink(pmkLinkSrc systemcomidiom.IMoniker, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateLink(pmkLinkSrc.Raw, riid, renderopt, lpFormatEtc, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateLinkEx wraps the raw OleCreateLinkEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkex
-func OleCreateLinkEx(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateLinkEx(pmkLinkSrc, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)))
+func OleCreateLinkEx(pmkLinkSrc systemcomidiom.IMoniker, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink systemcomidiom.IAdviseSink, rgdwConnection *uint32, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateLinkEx(pmkLinkSrc.Raw, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink.Raw, rgdwConnection, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateLinkFromData wraps the raw OleCreateLinkFromData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkfromdata
-func OleCreateLinkFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateLinkFromData(pSrcDataObj, riid, renderopt, pFormatEtc, pClientSite, pStg, ppvObj)))
+func OleCreateLinkFromData(pSrcDataObj systemcomidiom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateLinkFromData(pSrcDataObj.Raw, riid, renderopt, pFormatEtc, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateLinkFromDataEx wraps the raw OleCreateLinkFromDataEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkfromdataex
-func OleCreateLinkFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateLinkFromDataEx(pSrcDataObj, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)))
+func OleCreateLinkFromDataEx(pSrcDataObj systemcomidiom.IDataObject, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink systemcomidiom.IAdviseSink, rgdwConnection *uint32, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateLinkFromDataEx(pSrcDataObj.Raw, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink.Raw, rgdwConnection, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateLinkToFile wraps the raw OleCreateLinkToFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinktofile
-func OleCreateLinkToFile(lpszFileName string, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
+func OleCreateLinkToFile(lpszFileName string, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
 	_lpszFileName := win32.UTF16Ptr(lpszFileName)
-	return win32.HRESULTError(int32(systemole.OleCreateLinkToFile(foundation.PWSTR(_lpszFileName), riid, renderopt, lpFormatEtc, pClientSite, pStg, ppvObj)))
+	return win32.HRESULTError(int32(systemole.OleCreateLinkToFile(foundation.PWSTR(_lpszFileName), riid, renderopt, lpFormatEtc, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreateLinkToFileEx wraps the raw OleCreateLinkToFileEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinktofileex
-func OleCreateLinkToFileEx(lpszFileName string, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
+func OleCreateLinkToFileEx(lpszFileName string, riid *win32.GUID, dwFlags systemole.OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink systemcomidiom.IAdviseSink, rgdwConnection *uint32, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
 	_lpszFileName := win32.UTF16Ptr(lpszFileName)
-	return win32.HRESULTError(int32(systemole.OleCreateLinkToFileEx(foundation.PWSTR(_lpszFileName), riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)))
+	return win32.HRESULTError(int32(systemole.OleCreateLinkToFileEx(foundation.PWSTR(_lpszFileName), riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink.Raw, rgdwConnection, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleCreatePictureIndirect wraps the raw OleCreatePictureIndirect call with idiomatic Go types.
@@ -274,8 +276,8 @@ func OleCreatePropertyFrameIndirect(lpParams *systemole.OCPFIPARAMS) error {
 
 // OleCreateStaticFromData wraps the raw OleCreateStaticFromData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatestaticfromdata
-func OleCreateStaticFromData(pSrcDataObj *systemcom.IDataObject, iid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *systemole.IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleCreateStaticFromData(pSrcDataObj, iid, renderopt, pFormatEtc, pClientSite, pStg, ppvObj)))
+func OleCreateStaticFromData(pSrcDataObj systemcomidiom.IDataObject, iid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite IOleClientSite, pStg systemcomstructuredstorageidiom.IStorage, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleCreateStaticFromData(pSrcDataObj.Raw, iid, renderopt, pFormatEtc, pClientSite.Raw, pStg.Raw, ppvObj)))
 }
 
 // OleDestroyMenuDescriptor wraps the raw OleDestroyMenuDescriptor call with idiomatic Go types.
@@ -286,14 +288,14 @@ func OleDestroyMenuDescriptor(holemenu uintptr) error {
 
 // OleDoAutoConvert wraps the raw OleDoAutoConvert call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oledoautoconvert
-func OleDoAutoConvert(pStg *systemcomstructuredstorage.IStorage, pClsidNew *win32.GUID) error {
-	return win32.HRESULTError(int32(systemole.OleDoAutoConvert(pStg, pClsidNew)))
+func OleDoAutoConvert(pStg systemcomstructuredstorageidiom.IStorage, pClsidNew *win32.GUID) error {
+	return win32.HRESULTError(int32(systemole.OleDoAutoConvert(pStg.Raw, pClsidNew)))
 }
 
 // OleDraw wraps the raw OleDraw call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oledraw
-func OleDraw(pUnknown *systemcom.IUnknown, dwAspect uint32, hdcDraw graphicsgdi.HDC, lprcBounds *foundation.RECT) error {
-	return win32.HRESULTError(int32(systemole.OleDraw(pUnknown, dwAspect, hdcDraw, lprcBounds)))
+func OleDraw(pUnknown systemcomidiom.IUnknown, dwAspect uint32, hdcDraw graphicsgdi.HDC, lprcBounds *foundation.RECT) error {
+	return win32.HRESULTError(int32(systemole.OleDraw(pUnknown.Raw, dwAspect, hdcDraw, lprcBounds)))
 }
 
 // OleFlushClipboard wraps the raw OleFlushClipboard call with idiomatic Go types.
@@ -344,55 +346,55 @@ func OleInitialize() error {
 
 // OleIsCurrentClipboard wraps the raw OleIsCurrentClipboard call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleiscurrentclipboard
-func OleIsCurrentClipboard(pDataObj *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(systemole.OleIsCurrentClipboard(pDataObj)))
+func OleIsCurrentClipboard(pDataObj systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(systemole.OleIsCurrentClipboard(pDataObj.Raw)))
 }
 
 // OleIsRunning wraps the raw OleIsRunning call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleisrunning
-func OleIsRunning(pObject *systemole.IOleObject) bool {
-	return systemole.OleIsRunning(pObject) != 0
+func OleIsRunning(pObject IOleObject) bool {
+	return systemole.OleIsRunning(pObject.Raw) != 0
 }
 
 // OleLoad wraps the raw OleLoad call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleload
-func OleLoad(pStg *systemcomstructuredstorage.IStorage, riid *win32.GUID, pClientSite *systemole.IOleClientSite, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleLoad(pStg, riid, pClientSite, ppvObj)))
+func OleLoad(pStg systemcomstructuredstorageidiom.IStorage, riid *win32.GUID, pClientSite IOleClientSite, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleLoad(pStg.Raw, riid, pClientSite.Raw, ppvObj)))
 }
 
 // OleLoadFromStream wraps the raw OleLoadFromStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleloadfromstream
-func OleLoadFromStream(pStm *systemcom.IStream, iidInterface *win32.GUID, ppvObj *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(systemole.OleLoadFromStream(pStm, iidInterface, ppvObj)))
+func OleLoadFromStream(pStm systemcomidiom.IStream, iidInterface *win32.GUID, ppvObj *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(systemole.OleLoadFromStream(pStm.Raw, iidInterface, ppvObj)))
 }
 
 // OleLoadPicture wraps the raw OleLoadPicture call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oleloadpicture
-func OleLoadPicture(lpstream *systemcom.IStream, lSize int32, fRunmode bool, riid *win32.GUID, lplpvObj *unsafe.Pointer) error {
+func OleLoadPicture(lpstream systemcomidiom.IStream, lSize int32, fRunmode bool, riid *win32.GUID, lplpvObj *unsafe.Pointer) error {
 	_fRunmode := foundation.BOOL(win32.Bool32(fRunmode))
-	return win32.HRESULTError(int32(systemole.OleLoadPicture(lpstream, lSize, _fRunmode, riid, lplpvObj)))
+	return win32.HRESULTError(int32(systemole.OleLoadPicture(lpstream.Raw, lSize, _fRunmode, riid, lplpvObj)))
 }
 
 // OleLoadPictureEx wraps the raw OleLoadPictureEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oleloadpictureex
-func OleLoadPictureEx(lpstream *systemcom.IStream, lSize int32, fRunmode bool, riid *win32.GUID, xSizeDesired uint32, ySizeDesired uint32, dwFlags systemole.LOAD_PICTURE_FLAGS, lplpvObj *unsafe.Pointer) error {
+func OleLoadPictureEx(lpstream systemcomidiom.IStream, lSize int32, fRunmode bool, riid *win32.GUID, xSizeDesired uint32, ySizeDesired uint32, dwFlags systemole.LOAD_PICTURE_FLAGS, lplpvObj *unsafe.Pointer) error {
 	_fRunmode := foundation.BOOL(win32.Bool32(fRunmode))
-	return win32.HRESULTError(int32(systemole.OleLoadPictureEx(lpstream, lSize, _fRunmode, riid, xSizeDesired, ySizeDesired, dwFlags, lplpvObj)))
+	return win32.HRESULTError(int32(systemole.OleLoadPictureEx(lpstream.Raw, lSize, _fRunmode, riid, xSizeDesired, ySizeDesired, dwFlags, lplpvObj)))
 }
 
 // OleLoadPicturePath wraps the raw OleLoadPicturePath call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oleloadpicturepath
-func OleLoadPicturePath(szURLorPath string, punkCaller *systemcom.IUnknown, clrReserved uint32, riid *win32.GUID, ppvRet *unsafe.Pointer) error {
+func OleLoadPicturePath(szURLorPath string, punkCaller systemcomidiom.IUnknown, clrReserved uint32, riid *win32.GUID, ppvRet *unsafe.Pointer) error {
 	_szURLorPath := win32.UTF16Ptr(szURLorPath)
-	return win32.HRESULTError(int32(systemole.OleLoadPicturePath(foundation.PWSTR(_szURLorPath), punkCaller, 0, clrReserved, riid, ppvRet)))
+	return win32.HRESULTError(int32(systemole.OleLoadPicturePath(foundation.PWSTR(_szURLorPath), punkCaller.Raw, 0, clrReserved, riid, ppvRet)))
 }
 
 // OleLockRunning wraps the raw OleLockRunning call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olelockrunning
-func OleLockRunning(pUnknown *systemcom.IUnknown, fLock bool, fLastUnlockCloses bool) error {
+func OleLockRunning(pUnknown systemcomidiom.IUnknown, fLock bool, fLastUnlockCloses bool) error {
 	_fLock := foundation.BOOL(win32.Bool32(fLock))
 	_fLastUnlockCloses := foundation.BOOL(win32.Bool32(fLastUnlockCloses))
-	return win32.HRESULTError(int32(systemole.OleLockRunning(pUnknown, _fLock, _fLastUnlockCloses)))
+	return win32.HRESULTError(int32(systemole.OleLockRunning(pUnknown.Raw, _fLock, _fLastUnlockCloses)))
 }
 
 // OleMetafilePictFromIconAndLabel wraps the raw OleMetafilePictFromIconAndLabel call with idiomatic Go types.
@@ -405,21 +407,21 @@ func OleMetafilePictFromIconAndLabel(hIcon uiwindowsandmessaging.HICON, lpszLabe
 
 // OleNoteObjectVisible wraps the raw OleNoteObjectVisible call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olenoteobjectvisible
-func OleNoteObjectVisible(pUnknown *systemcom.IUnknown, fVisible bool) error {
+func OleNoteObjectVisible(pUnknown systemcomidiom.IUnknown, fVisible bool) error {
 	_fVisible := foundation.BOOL(win32.Bool32(fVisible))
-	return win32.HRESULTError(int32(systemole.OleNoteObjectVisible(pUnknown, _fVisible)))
+	return win32.HRESULTError(int32(systemole.OleNoteObjectVisible(pUnknown.Raw, _fVisible)))
 }
 
 // OleQueryCreateFromData wraps the raw OleQueryCreateFromData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olequerycreatefromdata
-func OleQueryCreateFromData(pSrcDataObject *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(systemole.OleQueryCreateFromData(pSrcDataObject)))
+func OleQueryCreateFromData(pSrcDataObject systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(systemole.OleQueryCreateFromData(pSrcDataObject.Raw)))
 }
 
 // OleQueryLinkFromData wraps the raw OleQueryLinkFromData call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olequerylinkfromdata
-func OleQueryLinkFromData(pSrcDataObject *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(systemole.OleQueryLinkFromData(pSrcDataObject)))
+func OleQueryLinkFromData(pSrcDataObject systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(systemole.OleQueryLinkFromData(pSrcDataObject.Raw)))
 }
 
 // OleRegEnumFormatEtc wraps the raw OleRegEnumFormatEtc call with idiomatic Go types.
@@ -448,27 +450,27 @@ func OleRegGetUserType(clsid *win32.GUID, dwFormOfType uint32, pszUserType *foun
 
 // OleRun wraps the raw OleRun call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olerun
-func OleRun(pUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemole.OleRun(pUnknown)))
+func OleRun(pUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(systemole.OleRun(pUnknown.Raw)))
 }
 
 // OleSave wraps the raw OleSave call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesave
-func OleSave(pPS *systemcomstructuredstorage.IPersistStorage, pStg *systemcomstructuredstorage.IStorage, fSameAsLoad bool) error {
+func OleSave(pPS systemcomstructuredstorageidiom.IPersistStorage, pStg systemcomstructuredstorageidiom.IStorage, fSameAsLoad bool) error {
 	_fSameAsLoad := foundation.BOOL(win32.Bool32(fSameAsLoad))
-	return win32.HRESULTError(int32(systemole.OleSave(pPS, pStg, _fSameAsLoad)))
+	return win32.HRESULTError(int32(systemole.OleSave(pPS.Raw, pStg.Raw, _fSameAsLoad)))
 }
 
 // OleSavePictureFile wraps the raw OleSavePictureFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-olesavepicturefile
-func OleSavePictureFile(lpdispPicture *systemcom.IDispatch, bstrFileName foundation.BSTR) error {
-	return win32.HRESULTError(int32(systemole.OleSavePictureFile(lpdispPicture, bstrFileName)))
+func OleSavePictureFile(lpdispPicture systemcomidiom.IDispatch, bstrFileName foundation.BSTR) error {
+	return win32.HRESULTError(int32(systemole.OleSavePictureFile(lpdispPicture.Raw, bstrFileName)))
 }
 
 // OleSaveToStream wraps the raw OleSaveToStream call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesavetostream
-func OleSaveToStream(pPStm *systemcom.IPersistStream, pStm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(systemole.OleSaveToStream(pPStm, pStm)))
+func OleSaveToStream(pPStm systemcomidiom.IPersistStream, pStm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(systemole.OleSaveToStream(pPStm.Raw, pStm.Raw)))
 }
 
 // OleSetAutoConvert wraps the raw OleSetAutoConvert call with idiomatic Go types.
@@ -479,27 +481,27 @@ func OleSetAutoConvert(clsidOld *win32.GUID, clsidNew *win32.GUID) error {
 
 // OleSetClipboard wraps the raw OleSetClipboard call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesetclipboard
-func OleSetClipboard(pDataObj *systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(systemole.OleSetClipboard(pDataObj)))
+func OleSetClipboard(pDataObj systemcomidiom.IDataObject) error {
+	return win32.HRESULTError(int32(systemole.OleSetClipboard(pDataObj.Raw)))
 }
 
 // OleSetContainedObject wraps the raw OleSetContainedObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesetcontainedobject
-func OleSetContainedObject(pUnknown *systemcom.IUnknown, fContained bool) error {
+func OleSetContainedObject(pUnknown systemcomidiom.IUnknown, fContained bool) error {
 	_fContained := foundation.BOOL(win32.Bool32(fContained))
-	return win32.HRESULTError(int32(systemole.OleSetContainedObject(pUnknown, _fContained)))
+	return win32.HRESULTError(int32(systemole.OleSetContainedObject(pUnknown.Raw, _fContained)))
 }
 
 // OleSetMenuDescriptor wraps the raw OleSetMenuDescriptor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesetmenudescriptor
-func OleSetMenuDescriptor(holemenu uintptr, hwndFrame foundation.HWND, hwndActiveObject foundation.HWND, lpFrame *systemole.IOleInPlaceFrame, lpActiveObj *systemole.IOleInPlaceActiveObject) error {
-	return win32.HRESULTError(int32(systemole.OleSetMenuDescriptor(holemenu, hwndFrame, hwndActiveObject, lpFrame, lpActiveObj)))
+func OleSetMenuDescriptor(holemenu uintptr, hwndFrame foundation.HWND, hwndActiveObject foundation.HWND, lpFrame IOleInPlaceFrame, lpActiveObj IOleInPlaceActiveObject) error {
+	return win32.HRESULTError(int32(systemole.OleSetMenuDescriptor(holemenu, hwndFrame, hwndActiveObject, lpFrame.Raw, lpActiveObj.Raw)))
 }
 
 // OleTranslateAccelerator wraps the raw OleTranslateAccelerator call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oletranslateaccelerator
-func OleTranslateAccelerator(lpFrame *systemole.IOleInPlaceFrame, lpFrameInfo *systemole.OLEINPLACEFRAMEINFO, lpmsg *uiwindowsandmessaging.MSG) error {
-	return win32.HRESULTError(int32(systemole.OleTranslateAccelerator(lpFrame, lpFrameInfo, lpmsg)))
+func OleTranslateAccelerator(lpFrame IOleInPlaceFrame, lpFrameInfo *systemole.OLEINPLACEFRAMEINFO, lpmsg *uiwindowsandmessaging.MSG) error {
+	return win32.HRESULTError(int32(systemole.OleTranslateAccelerator(lpFrame.Raw, lpFrameInfo, lpmsg)))
 }
 
 // OleTranslateColor wraps the raw OleTranslateColor call with idiomatic Go types.
@@ -510,17 +512,17 @@ func OleTranslateColor(clr uint32, hpal graphicsgdi.HPALETTE, lpcolorref *founda
 
 // OleUIAddVerbMenu wraps the raw OleUIAddVerbMenuW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiaddverbmenuw
-func OleUIAddVerbMenu(lpOleObj *systemole.IOleObject, lpszShortType string, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
+func OleUIAddVerbMenu(lpOleObj IOleObject, lpszShortType string, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
 	_lpszShortType := win32.UTF16Ptr(lpszShortType)
 	_bAddConvert := foundation.BOOL(win32.Bool32(bAddConvert))
-	return systemole.OleUIAddVerbMenuW(lpOleObj, foundation.PWSTR(_lpszShortType), hMenu, uPos, uIDVerbMin, uIDVerbMax, _bAddConvert, idConvert, lphMenu) != 0
+	return systemole.OleUIAddVerbMenuW(lpOleObj.Raw, foundation.PWSTR(_lpszShortType), hMenu, uPos, uIDVerbMin, uIDVerbMax, _bAddConvert, idConvert, lphMenu) != 0
 }
 
 // OleUIAddVerbMenuA wraps the raw OleUIAddVerbMenuA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiaddverbmenua
-func OleUIAddVerbMenuA(lpOleObj *systemole.IOleObject, lpszShortType foundation.PSTR, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
+func OleUIAddVerbMenuA(lpOleObj IOleObject, lpszShortType foundation.PSTR, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
 	_bAddConvert := foundation.BOOL(win32.Bool32(bAddConvert))
-	return systemole.OleUIAddVerbMenuA(lpOleObj, lpszShortType, hMenu, uPos, uIDVerbMin, uIDVerbMax, _bAddConvert, idConvert, lphMenu) != 0
+	return systemole.OleUIAddVerbMenuA(lpOleObj.Raw, lpszShortType, hMenu, uPos, uIDVerbMin, uIDVerbMax, _bAddConvert, idConvert, lphMenu) != 0
 }
 
 // OleUIBusy wraps the raw OleUIBusyW call with idiomatic Go types.
@@ -586,15 +588,15 @@ func OleUIPromptUser(nTemplate int32, hwndParent foundation.HWND) int32 {
 
 // OleUIUpdateLinks wraps the raw OleUIUpdateLinksW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiupdatelinksw
-func OleUIUpdateLinks(lpOleUILinkCntr *systemole.IOleUILinkContainerW, hwndParent foundation.HWND, lpszTitle string, cLinks int32) bool {
+func OleUIUpdateLinks(lpOleUILinkCntr IOleUILinkContainerW, hwndParent foundation.HWND, lpszTitle string, cLinks int32) bool {
 	_lpszTitle := win32.UTF16Ptr(lpszTitle)
-	return systemole.OleUIUpdateLinksW(lpOleUILinkCntr, hwndParent, foundation.PWSTR(_lpszTitle), cLinks) != 0
+	return systemole.OleUIUpdateLinksW(lpOleUILinkCntr.Raw, hwndParent, foundation.PWSTR(_lpszTitle), cLinks) != 0
 }
 
 // OleUIUpdateLinksA wraps the raw OleUIUpdateLinksA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiupdatelinksa
-func OleUIUpdateLinksA(lpOleUILinkCntr *systemole.IOleUILinkContainerA, hwndParent foundation.HWND, lpszTitle foundation.PSTR, cLinks int32) bool {
-	return systemole.OleUIUpdateLinksA(lpOleUILinkCntr, hwndParent, lpszTitle, cLinks) != 0
+func OleUIUpdateLinksA(lpOleUILinkCntr IOleUILinkContainerA, hwndParent foundation.HWND, lpszTitle foundation.PSTR, cLinks int32) bool {
+	return systemole.OleUIUpdateLinksA(lpOleUILinkCntr.Raw, hwndParent, lpszTitle, cLinks) != 0
 }
 
 // QueryPathOfRegTypeLib wraps the raw QueryPathOfRegTypeLib call with idiomatic Go types.
@@ -605,30 +607,30 @@ func QueryPathOfRegTypeLib(guid *win32.GUID, wMaj uint16, wMin uint16, lcid uint
 
 // RegisterActiveObject wraps the raw RegisterActiveObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registeractiveobject
-func RegisterActiveObject(punk *systemcom.IUnknown, rclsid *win32.GUID, dwFlags systemole.ACTIVEOBJECT_FLAGS, pdwRegister *uint32) error {
-	return win32.HRESULTError(int32(systemole.RegisterActiveObject(punk, rclsid, dwFlags, pdwRegister)))
+func RegisterActiveObject(punk systemcomidiom.IUnknown, rclsid *win32.GUID, dwFlags systemole.ACTIVEOBJECT_FLAGS, pdwRegister *uint32) error {
+	return win32.HRESULTError(int32(systemole.RegisterActiveObject(punk.Raw, rclsid, dwFlags, pdwRegister)))
 }
 
 // RegisterDragDrop wraps the raw RegisterDragDrop call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-registerdragdrop
-func RegisterDragDrop(hwnd foundation.HWND, pDropTarget *systemole.IDropTarget) error {
-	return win32.HRESULTError(int32(systemole.RegisterDragDrop(hwnd, pDropTarget)))
+func RegisterDragDrop(hwnd foundation.HWND, pDropTarget IDropTarget) error {
+	return win32.HRESULTError(int32(systemole.RegisterDragDrop(hwnd, pDropTarget.Raw)))
 }
 
 // RegisterTypeLib wraps the raw RegisterTypeLib call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registertypelib
-func RegisterTypeLib(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir string) error {
+func RegisterTypeLib(ptlib systemcomidiom.ITypeLib, szFullPath string, szHelpDir string) error {
 	_szFullPath := win32.UTF16Ptr(szFullPath)
 	_szHelpDir := win32.UTF16Ptr(szHelpDir)
-	return win32.HRESULTError(int32(systemole.RegisterTypeLib(ptlib, foundation.PWSTR(_szFullPath), foundation.PWSTR(_szHelpDir))))
+	return win32.HRESULTError(int32(systemole.RegisterTypeLib(ptlib.Raw, foundation.PWSTR(_szFullPath), foundation.PWSTR(_szHelpDir))))
 }
 
 // RegisterTypeLibForUser wraps the raw RegisterTypeLibForUser call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registertypelibforuser
-func RegisterTypeLibForUser(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir string) error {
+func RegisterTypeLibForUser(ptlib systemcomidiom.ITypeLib, szFullPath string, szHelpDir string) error {
 	_szFullPath := win32.UTF16Ptr(szFullPath)
 	_szHelpDir := win32.UTF16Ptr(szHelpDir)
-	return win32.HRESULTError(int32(systemole.RegisterTypeLibForUser(ptlib, foundation.PWSTR(_szFullPath), foundation.PWSTR(_szHelpDir))))
+	return win32.HRESULTError(int32(systemole.RegisterTypeLibForUser(ptlib.Raw, foundation.PWSTR(_szFullPath), foundation.PWSTR(_szHelpDir))))
 }
 
 // RevokeActiveObject wraps the raw RevokeActiveObject call with idiomatic Go types.
@@ -771,8 +773,8 @@ func SafeArraySetIID(psa *systemcom.SAFEARRAY, guid *win32.GUID) error {
 
 // SafeArraySetRecordInfo wraps the raw SafeArraySetRecordInfo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraysetrecordinfo
-func SafeArraySetRecordInfo(psa *systemcom.SAFEARRAY, prinfo *systemole.IRecordInfo) error {
-	return win32.HRESULTError(int32(systemole.SafeArraySetRecordInfo(psa, prinfo)))
+func SafeArraySetRecordInfo(psa *systemcom.SAFEARRAY, prinfo IRecordInfo) error {
+	return win32.HRESULTError(int32(systemole.SafeArraySetRecordInfo(psa, prinfo.Raw)))
 }
 
 // SafeArrayUnaccessData wraps the raw SafeArrayUnaccessData call with idiomatic Go types.
@@ -825,8 +827,8 @@ func VarBoolFromDec(pdecIn *foundation.DECIMAL, pboolOut *foundation.VARIANT_BOO
 
 // VarBoolFromDisp wraps the raw VarBoolFromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromdisp
-func VarBoolFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pboolOut *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(systemole.VarBoolFromDisp(pdispIn, lcid, pboolOut)))
+func VarBoolFromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pboolOut *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(systemole.VarBoolFromDisp(pdispIn.Raw, lcid, pboolOut)))
 }
 
 // VarBoolFromI1 wraps the raw VarBoolFromI1 call with idiomatic Go types.
@@ -910,8 +912,8 @@ func VarBstrFromDec(pdecIn *foundation.DECIMAL, lcid uint32, dwFlags uint32, pbs
 
 // VarBstrFromDisp wraps the raw VarBstrFromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromdisp
-func VarBstrFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
-	return win32.HRESULTError(int32(systemole.VarBstrFromDisp(pdispIn, lcid, dwFlags, pbstrOut)))
+func VarBstrFromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
+	return win32.HRESULTError(int32(systemole.VarBstrFromDisp(pdispIn.Raw, lcid, dwFlags, pbstrOut)))
 }
 
 // VarBstrFromI1 wraps the raw VarBstrFromI1 call with idiomatic Go types.
@@ -982,8 +984,8 @@ func VarCyFromDec(pdecIn *foundation.DECIMAL, pcyOut *systemcom.CY) error {
 
 // VarCyFromDisp wraps the raw VarCyFromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromdisp
-func VarCyFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pcyOut *systemcom.CY) error {
-	return win32.HRESULTError(int32(systemole.VarCyFromDisp(pdispIn, lcid, pcyOut)))
+func VarCyFromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pcyOut *systemcom.CY) error {
+	return win32.HRESULTError(int32(systemole.VarCyFromDisp(pdispIn.Raw, lcid, pcyOut)))
 }
 
 // VarCyFromI1 wraps the raw VarCyFromI1 call with idiomatic Go types.
@@ -1055,8 +1057,8 @@ func VarDateFromDec(pdecIn *foundation.DECIMAL, pdateOut *float64) error {
 
 // VarDateFromDisp wraps the raw VarDateFromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromdisp
-func VarDateFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdateOut *float64) error {
-	return win32.HRESULTError(int32(systemole.VarDateFromDisp(pdispIn, lcid, pdateOut)))
+func VarDateFromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pdateOut *float64) error {
+	return win32.HRESULTError(int32(systemole.VarDateFromDisp(pdispIn.Raw, lcid, pdateOut)))
 }
 
 // VarDateFromI1 wraps the raw VarDateFromI1 call with idiomatic Go types.
@@ -1158,8 +1160,8 @@ func VarDecFromBool(boolIn foundation.VARIANT_BOOL, pdecOut *foundation.DECIMAL)
 
 // VarDecFromDisp wraps the raw VarDecFromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromdisp
-func VarDecFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdecOut *foundation.DECIMAL) error {
-	return win32.HRESULTError(int32(systemole.VarDecFromDisp(pdispIn, lcid, pdecOut)))
+func VarDecFromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pdecOut *foundation.DECIMAL) error {
+	return win32.HRESULTError(int32(systemole.VarDecFromDisp(pdispIn.Raw, lcid, pdecOut)))
 }
 
 // VarDecFromI1 wraps the raw VarDecFromI1 call with idiomatic Go types.
@@ -1317,8 +1319,8 @@ func VarI1FromDec(pdecIn *foundation.DECIMAL, pcOut foundation.PSTR) error {
 
 // VarI1FromDisp wraps the raw VarI1FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromdisp
-func VarI1FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pcOut foundation.PSTR) error {
-	return win32.HRESULTError(int32(systemole.VarI1FromDisp(pdispIn, lcid, pcOut)))
+func VarI1FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pcOut foundation.PSTR) error {
+	return win32.HRESULTError(int32(systemole.VarI1FromDisp(pdispIn.Raw, lcid, pcOut)))
 }
 
 // VarI1FromI2 wraps the raw VarI1FromI2 call with idiomatic Go types.
@@ -1384,8 +1386,8 @@ func VarI2FromDec(pdecIn *foundation.DECIMAL, psOut *int16) error {
 
 // VarI2FromDisp wraps the raw VarI2FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromdisp
-func VarI2FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, psOut *int16) error {
-	return win32.HRESULTError(int32(systemole.VarI2FromDisp(pdispIn, lcid, psOut)))
+func VarI2FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, psOut *int16) error {
+	return win32.HRESULTError(int32(systemole.VarI2FromDisp(pdispIn.Raw, lcid, psOut)))
 }
 
 // VarI2FromI1 wraps the raw VarI2FromI1 call with idiomatic Go types.
@@ -1451,8 +1453,8 @@ func VarI4FromDec(pdecIn *foundation.DECIMAL, plOut *int32) error {
 
 // VarI4FromDisp wraps the raw VarI4FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromdisp
-func VarI4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, plOut *int32) error {
-	return win32.HRESULTError(int32(systemole.VarI4FromDisp(pdispIn, lcid, plOut)))
+func VarI4FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, plOut *int32) error {
+	return win32.HRESULTError(int32(systemole.VarI4FromDisp(pdispIn.Raw, lcid, plOut)))
 }
 
 // VarI4FromI1 wraps the raw VarI4FromI1 call with idiomatic Go types.
@@ -1518,8 +1520,8 @@ func VarI8FromDec(pdecIn *foundation.DECIMAL, pi64Out *int64) error {
 
 // VarI8FromDisp wraps the raw VarI8FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromdisp
-func VarI8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pi64Out *int64) error {
-	return win32.HRESULTError(int32(systemole.VarI8FromDisp(pdispIn, lcid, pi64Out)))
+func VarI8FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pi64Out *int64) error {
+	return win32.HRESULTError(int32(systemole.VarI8FromDisp(pdispIn.Raw, lcid, pi64Out)))
 }
 
 // VarI8FromI1 wraps the raw VarI8FromI1 call with idiomatic Go types.
@@ -1652,8 +1654,8 @@ func VarR4FromDec(pdecIn *foundation.DECIMAL, pfltOut *float32) error {
 
 // VarR4FromDisp wraps the raw VarR4FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromdisp
-func VarR4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pfltOut *float32) error {
-	return win32.HRESULTError(int32(systemole.VarR4FromDisp(pdispIn, lcid, pfltOut)))
+func VarR4FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pfltOut *float32) error {
+	return win32.HRESULTError(int32(systemole.VarR4FromDisp(pdispIn.Raw, lcid, pfltOut)))
 }
 
 // VarR4FromI1 wraps the raw VarR4FromI1 call with idiomatic Go types.
@@ -1725,8 +1727,8 @@ func VarR8FromDec(pdecIn *foundation.DECIMAL, pdblOut *float64) error {
 
 // VarR8FromDisp wraps the raw VarR8FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromdisp
-func VarR8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdblOut *float64) error {
-	return win32.HRESULTError(int32(systemole.VarR8FromDisp(pdispIn, lcid, pdblOut)))
+func VarR8FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pdblOut *float64) error {
+	return win32.HRESULTError(int32(systemole.VarR8FromDisp(pdispIn.Raw, lcid, pdblOut)))
 }
 
 // VarR8FromI1 wraps the raw VarR8FromI1 call with idiomatic Go types.
@@ -1821,8 +1823,8 @@ func VarUI1FromDec(pdecIn *foundation.DECIMAL, pbOut *byte) error {
 
 // VarUI1FromDisp wraps the raw VarUI1FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromdisp
-func VarUI1FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pbOut *byte) error {
-	return win32.HRESULTError(int32(systemole.VarUI1FromDisp(pdispIn, lcid, pbOut)))
+func VarUI1FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pbOut *byte) error {
+	return win32.HRESULTError(int32(systemole.VarUI1FromDisp(pdispIn.Raw, lcid, pbOut)))
 }
 
 // VarUI1FromI1 wraps the raw VarUI1FromI1 call with idiomatic Go types.
@@ -1888,8 +1890,8 @@ func VarUI2FromDec(pdecIn *foundation.DECIMAL, puiOut *uint16) error {
 
 // VarUI2FromDisp wraps the raw VarUI2FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromdisp
-func VarUI2FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, puiOut *uint16) error {
-	return win32.HRESULTError(int32(systemole.VarUI2FromDisp(pdispIn, lcid, puiOut)))
+func VarUI2FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, puiOut *uint16) error {
+	return win32.HRESULTError(int32(systemole.VarUI2FromDisp(pdispIn.Raw, lcid, puiOut)))
 }
 
 // VarUI2FromI1 wraps the raw VarUI2FromI1 call with idiomatic Go types.
@@ -1955,8 +1957,8 @@ func VarUI4FromDec(pdecIn *foundation.DECIMAL, pulOut *uint32) error {
 
 // VarUI4FromDisp wraps the raw VarUI4FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromdisp
-func VarUI4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pulOut *uint32) error {
-	return win32.HRESULTError(int32(systemole.VarUI4FromDisp(pdispIn, lcid, pulOut)))
+func VarUI4FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pulOut *uint32) error {
+	return win32.HRESULTError(int32(systemole.VarUI4FromDisp(pdispIn.Raw, lcid, pulOut)))
 }
 
 // VarUI4FromI1 wraps the raw VarUI4FromI1 call with idiomatic Go types.
@@ -2022,8 +2024,8 @@ func VarUI8FromDec(pdecIn *foundation.DECIMAL, pi64Out *uint64) error {
 
 // VarUI8FromDisp wraps the raw VarUI8FromDisp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromdisp
-func VarUI8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pi64Out *uint64) error {
-	return win32.HRESULTError(int32(systemole.VarUI8FromDisp(pdispIn, lcid, pi64Out)))
+func VarUI8FromDisp(pdispIn systemcomidiom.IDispatch, lcid uint32, pi64Out *uint64) error {
+	return win32.HRESULTError(int32(systemole.VarUI8FromDisp(pdispIn.Raw, lcid, pi64Out)))
 }
 
 // VarUI8FromI1 wraps the raw VarUI8FromI1 call with idiomatic Go types.

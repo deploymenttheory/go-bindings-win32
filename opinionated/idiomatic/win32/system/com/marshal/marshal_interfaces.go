@@ -35,18 +35,18 @@ func (self IMarshal) GetMarshalSizeMax(riid *win32.GUID, pv unsafe.Pointer, dwDe
 }
 
 // MarshalInterface wraps the raw MarshalInterface call.
-func (self IMarshal) MarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, pv unsafe.Pointer, dwDestContext uint32, mshlflags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.MarshalInterface(pStm, riid, pv, dwDestContext, nil, mshlflags)))
+func (self IMarshal) MarshalInterface(pStm systemcomidiom.IStream, riid *win32.GUID, pv unsafe.Pointer, dwDestContext uint32, mshlflags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.MarshalInterface(pStm.Raw, riid, pv, dwDestContext, nil, mshlflags)))
 }
 
 // UnmarshalInterface wraps the raw UnmarshalInterface call.
-func (self IMarshal) UnmarshalInterface(pStm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.UnmarshalInterface(pStm, riid, ppv)))
+func (self IMarshal) UnmarshalInterface(pStm systemcomidiom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.UnmarshalInterface(pStm.Raw, riid, ppv)))
 }
 
 // ReleaseMarshalData wraps the raw ReleaseMarshalData call.
-func (self IMarshal) ReleaseMarshalData(pStm *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseMarshalData(pStm)))
+func (self IMarshal) ReleaseMarshalData(pStm systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseMarshalData(pStm.Raw)))
 }
 
 // DisconnectObject wraps the raw DisconnectObject call.

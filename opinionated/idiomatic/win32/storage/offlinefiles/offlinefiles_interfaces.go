@@ -87,36 +87,36 @@ func WrapIOfflineFilesCache(raw *storageofflinefiles.IOfflineFilesCache) IOfflin
 }
 
 // Synchronize wraps the raw Synchronize call.
-func (self IOfflineFilesCache) Synchronize(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bAsync bool, dwSyncControl uint32, pISyncConflictHandler *storageofflinefiles.IOfflineFilesSyncConflictHandler, pIProgress *storageofflinefiles.IOfflineFilesSyncProgress, pSyncId *win32.GUID) error {
+func (self IOfflineFilesCache) Synchronize(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bAsync bool, dwSyncControl uint32, pISyncConflictHandler IOfflineFilesSyncConflictHandler, pIProgress IOfflineFilesSyncProgress, pSyncId *win32.GUID) error {
 	_bAsync := foundation.BOOL(win32.Bool32(bAsync))
-	return win32.HRESULTError(int32(self.Raw.Synchronize(hwndParent, rgpszPaths, cPaths, _bAsync, dwSyncControl, pISyncConflictHandler, pIProgress, pSyncId)))
+	return win32.HRESULTError(int32(self.Raw.Synchronize(hwndParent, rgpszPaths, cPaths, _bAsync, dwSyncControl, pISyncConflictHandler.Raw, pIProgress.Raw, pSyncId)))
 }
 
 // DeleteItems wraps the raw DeleteItems call.
-func (self IOfflineFilesCache) DeleteItems(rgpszPaths *foundation.PWSTR, cPaths uint32, dwFlags uint32, bAsync bool, pIProgress *storageofflinefiles.IOfflineFilesSimpleProgress) error {
+func (self IOfflineFilesCache) DeleteItems(rgpszPaths *foundation.PWSTR, cPaths uint32, dwFlags uint32, bAsync bool, pIProgress IOfflineFilesSimpleProgress) error {
 	_bAsync := foundation.BOOL(win32.Bool32(bAsync))
-	return win32.HRESULTError(int32(self.Raw.DeleteItems(rgpszPaths, cPaths, dwFlags, _bAsync, pIProgress)))
+	return win32.HRESULTError(int32(self.Raw.DeleteItems(rgpszPaths, cPaths, dwFlags, _bAsync, pIProgress.Raw)))
 }
 
 // DeleteItemsForUser wraps the raw DeleteItemsForUser call.
-func (self IOfflineFilesCache) DeleteItemsForUser(pszUser string, rgpszPaths *foundation.PWSTR, cPaths uint32, dwFlags uint32, bAsync bool, pIProgress *storageofflinefiles.IOfflineFilesSimpleProgress) error {
+func (self IOfflineFilesCache) DeleteItemsForUser(pszUser string, rgpszPaths *foundation.PWSTR, cPaths uint32, dwFlags uint32, bAsync bool, pIProgress IOfflineFilesSimpleProgress) error {
 	_pszUser := win32.UTF16Ptr(pszUser)
 	_bAsync := foundation.BOOL(win32.Bool32(bAsync))
-	return win32.HRESULTError(int32(self.Raw.DeleteItemsForUser(foundation.PWSTR(_pszUser), rgpszPaths, cPaths, dwFlags, _bAsync, pIProgress)))
+	return win32.HRESULTError(int32(self.Raw.DeleteItemsForUser(foundation.PWSTR(_pszUser), rgpszPaths, cPaths, dwFlags, _bAsync, pIProgress.Raw)))
 }
 
 // Pin wraps the raw Pin call.
-func (self IOfflineFilesCache) Pin(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bDeep bool, bAsync bool, dwPinControlFlags uint32, pIProgress *storageofflinefiles.IOfflineFilesSyncProgress) error {
+func (self IOfflineFilesCache) Pin(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bDeep bool, bAsync bool, dwPinControlFlags uint32, pIProgress IOfflineFilesSyncProgress) error {
 	_bDeep := foundation.BOOL(win32.Bool32(bDeep))
 	_bAsync := foundation.BOOL(win32.Bool32(bAsync))
-	return win32.HRESULTError(int32(self.Raw.Pin(hwndParent, rgpszPaths, cPaths, _bDeep, _bAsync, dwPinControlFlags, pIProgress)))
+	return win32.HRESULTError(int32(self.Raw.Pin(hwndParent, rgpszPaths, cPaths, _bDeep, _bAsync, dwPinControlFlags, pIProgress.Raw)))
 }
 
 // Unpin wraps the raw Unpin call.
-func (self IOfflineFilesCache) Unpin(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bDeep bool, bAsync bool, dwPinControlFlags uint32, pIProgress *storageofflinefiles.IOfflineFilesSyncProgress) error {
+func (self IOfflineFilesCache) Unpin(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bDeep bool, bAsync bool, dwPinControlFlags uint32, pIProgress IOfflineFilesSyncProgress) error {
 	_bDeep := foundation.BOOL(win32.Bool32(bDeep))
 	_bAsync := foundation.BOOL(win32.Bool32(bAsync))
-	return win32.HRESULTError(int32(self.Raw.Unpin(hwndParent, rgpszPaths, cPaths, _bDeep, _bAsync, dwPinControlFlags, pIProgress)))
+	return win32.HRESULTError(int32(self.Raw.Unpin(hwndParent, rgpszPaths, cPaths, _bDeep, _bAsync, dwPinControlFlags, pIProgress.Raw)))
 }
 
 // GetEncryptionStatus wraps the raw GetEncryptionStatus call.
@@ -125,10 +125,10 @@ func (self IOfflineFilesCache) GetEncryptionStatus(pbEncrypted *foundation.BOOL,
 }
 
 // Encrypt wraps the raw Encrypt call.
-func (self IOfflineFilesCache) Encrypt(hwndParent foundation.HWND, bEncrypt bool, dwEncryptionControlFlags uint32, bAsync bool, pIProgress *storageofflinefiles.IOfflineFilesSyncProgress) error {
+func (self IOfflineFilesCache) Encrypt(hwndParent foundation.HWND, bEncrypt bool, dwEncryptionControlFlags uint32, bAsync bool, pIProgress IOfflineFilesSyncProgress) error {
 	_bEncrypt := foundation.BOOL(win32.Bool32(bEncrypt))
 	_bAsync := foundation.BOOL(win32.Bool32(bAsync))
-	return win32.HRESULTError(int32(self.Raw.Encrypt(hwndParent, _bEncrypt, dwEncryptionControlFlags, _bAsync, pIProgress)))
+	return win32.HRESULTError(int32(self.Raw.Encrypt(hwndParent, _bEncrypt, dwEncryptionControlFlags, _bAsync, pIProgress.Raw)))
 }
 
 // FindItem wraps the raw FindItem call.
@@ -138,9 +138,9 @@ func (self IOfflineFilesCache) FindItem(pszPath string, dwQueryFlags uint32, ppI
 }
 
 // FindItemEx wraps the raw FindItemEx call.
-func (self IOfflineFilesCache) FindItemEx(pszPath string, pIncludeFileFilter *storageofflinefiles.IOfflineFilesItemFilter, pIncludeDirFilter *storageofflinefiles.IOfflineFilesItemFilter, pExcludeFileFilter *storageofflinefiles.IOfflineFilesItemFilter, pExcludeDirFilter *storageofflinefiles.IOfflineFilesItemFilter, dwQueryFlags uint32, ppItem **storageofflinefiles.IOfflineFilesItem) error {
+func (self IOfflineFilesCache) FindItemEx(pszPath string, pIncludeFileFilter IOfflineFilesItemFilter, pIncludeDirFilter IOfflineFilesItemFilter, pExcludeFileFilter IOfflineFilesItemFilter, pExcludeDirFilter IOfflineFilesItemFilter, dwQueryFlags uint32, ppItem **storageofflinefiles.IOfflineFilesItem) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	return win32.HRESULTError(int32(self.Raw.FindItemEx(foundation.PWSTR(_pszPath), pIncludeFileFilter, pIncludeDirFilter, pExcludeFileFilter, pExcludeDirFilter, dwQueryFlags, ppItem)))
+	return win32.HRESULTError(int32(self.Raw.FindItemEx(foundation.PWSTR(_pszPath), pIncludeFileFilter.Raw, pIncludeDirFilter.Raw, pExcludeFileFilter.Raw, pExcludeDirFilter.Raw, dwQueryFlags, ppItem)))
 }
 
 // RenameItem wraps the raw RenameItem call.
@@ -167,8 +167,8 @@ func (self IOfflineFilesCache) SetDiskSpaceLimits(cbLimit uint64, cbUnpinnedLimi
 }
 
 // ProcessAdminPinPolicy wraps the raw ProcessAdminPinPolicy call.
-func (self IOfflineFilesCache) ProcessAdminPinPolicy(pPinProgress *storageofflinefiles.IOfflineFilesSyncProgress, pUnpinProgress *storageofflinefiles.IOfflineFilesSyncProgress) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessAdminPinPolicy(pPinProgress, pUnpinProgress)))
+func (self IOfflineFilesCache) ProcessAdminPinPolicy(pPinProgress IOfflineFilesSyncProgress, pUnpinProgress IOfflineFilesSyncProgress) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessAdminPinPolicy(pPinProgress.Raw, pUnpinProgress.Raw)))
 }
 
 // GetSettingObject wraps the raw GetSettingObject call.
@@ -744,8 +744,8 @@ func (self IOfflineFilesItemContainer) EnumItems(dwQueryFlags uint32, ppenum **s
 }
 
 // EnumItemsEx wraps the raw EnumItemsEx call.
-func (self IOfflineFilesItemContainer) EnumItemsEx(pIncludeFileFilter *storageofflinefiles.IOfflineFilesItemFilter, pIncludeDirFilter *storageofflinefiles.IOfflineFilesItemFilter, pExcludeFileFilter *storageofflinefiles.IOfflineFilesItemFilter, pExcludeDirFilter *storageofflinefiles.IOfflineFilesItemFilter, dwEnumFlags uint32, dwQueryFlags uint32, ppenum **storageofflinefiles.IEnumOfflineFilesItems) error {
-	return win32.HRESULTError(int32(self.Raw.EnumItemsEx(pIncludeFileFilter, pIncludeDirFilter, pExcludeFileFilter, pExcludeDirFilter, dwEnumFlags, dwQueryFlags, ppenum)))
+func (self IOfflineFilesItemContainer) EnumItemsEx(pIncludeFileFilter IOfflineFilesItemFilter, pIncludeDirFilter IOfflineFilesItemFilter, pExcludeFileFilter IOfflineFilesItemFilter, pExcludeDirFilter IOfflineFilesItemFilter, dwEnumFlags uint32, dwQueryFlags uint32, ppenum **storageofflinefiles.IEnumOfflineFilesItems) error {
+	return win32.HRESULTError(int32(self.Raw.EnumItemsEx(pIncludeFileFilter.Raw, pIncludeDirFilter.Raw, pExcludeFileFilter.Raw, pExcludeDirFilter.Raw, dwEnumFlags, dwQueryFlags, ppenum)))
 }
 
 // IOfflineFilesItemFilter is an idiomatic wrapper over the raw COM interface Storage.OfflineFiles.IOfflineFilesItemFilter with error-returning methods.
@@ -1119,9 +1119,9 @@ func (self IOfflineFilesSyncProgress) SyncItemBegin(pszFile string, pResponse *s
 }
 
 // SyncItemResult wraps the raw SyncItemResult call.
-func (self IOfflineFilesSyncProgress) SyncItemResult(pszFile string, hrResult foundation.HRESULT, pErrorInfo *storageofflinefiles.IOfflineFilesSyncErrorInfo, pResponse *storageofflinefiles.OFFLINEFILES_OP_RESPONSE) error {
+func (self IOfflineFilesSyncProgress) SyncItemResult(pszFile string, hrResult foundation.HRESULT, pErrorInfo IOfflineFilesSyncErrorInfo, pResponse *storageofflinefiles.OFFLINEFILES_OP_RESPONSE) error {
 	_pszFile := win32.UTF16Ptr(pszFile)
-	return win32.HRESULTError(int32(self.Raw.SyncItemResult(foundation.PWSTR(_pszFile), hrResult, pErrorInfo, pResponse)))
+	return win32.HRESULTError(int32(self.Raw.SyncItemResult(foundation.PWSTR(_pszFile), hrResult, pErrorInfo.Raw, pResponse)))
 }
 
 // IOfflineFilesTransparentCacheInfo is an idiomatic wrapper over the raw COM interface Storage.OfflineFiles.IOfflineFilesTransparentCacheInfo with error-returning methods.

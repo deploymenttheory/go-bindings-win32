@@ -11,8 +11,8 @@ import (
 )
 
 // DoPrivacyDlg wraps the raw DoPrivacyDlg call with idiomatic Go types.
-func DoPrivacyDlg(hwndOwner foundation.HWND, pszUrl string, pPrivacyEnum *webmshtml.IEnumPrivacyRecords, fReportAllSites bool) error {
+func DoPrivacyDlg(hwndOwner foundation.HWND, pszUrl string, pPrivacyEnum IEnumPrivacyRecords, fReportAllSites bool) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
 	_fReportAllSites := foundation.BOOL(win32.Bool32(fReportAllSites))
-	return win32.HRESULTError(int32(webmshtml.DoPrivacyDlg(hwndOwner, foundation.PWSTR(_pszUrl), pPrivacyEnum, _fReportAllSites)))
+	return win32.HRESULTError(int32(webmshtml.DoPrivacyDlg(hwndOwner, foundation.PWSTR(_pszUrl), pPrivacyEnum.Raw, _fReportAllSites)))
 }

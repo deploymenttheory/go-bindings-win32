@@ -10,8 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	devicesdisplay "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/display"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	graphicsdirect3d9 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	graphicsdirect3d9idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d9"
 )
 
 // CLIPOBJ_bEnum wraps the raw CLIPOBJ_bEnum call with idiomatic Go types.
@@ -187,14 +187,14 @@ func GetDisplayAutoRotationPreferences(pOrientation *devicesdisplay.ORIENTATION_
 
 // GetNumberOfPhysicalMonitorsFromIDirect3DDevice9 wraps the raw GetNumberOfPhysicalMonitorsFromIDirect3DDevice9 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getnumberofphysicalmonitorsfromidirect3ddevice9
-func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, pdwNumberOfPhysicalMonitors *uint32) error {
-	return win32.HRESULTError(int32(devicesdisplay.GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9, pdwNumberOfPhysicalMonitors)))
+func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 graphicsdirect3d9idiom.IDirect3DDevice9, pdwNumberOfPhysicalMonitors *uint32) error {
+	return win32.HRESULTError(int32(devicesdisplay.GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9.Raw, pdwNumberOfPhysicalMonitors)))
 }
 
 // GetPhysicalMonitorsFromIDirect3DDevice9 wraps the raw GetPhysicalMonitorsFromIDirect3DDevice9 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getphysicalmonitorsfromidirect3ddevice9
-func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) error {
-	return win32.HRESULTError(int32(devicesdisplay.GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9, dwPhysicalMonitorArraySize, pPhysicalMonitorArray)))
+func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 graphicsdirect3d9idiom.IDirect3DDevice9, dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) error {
+	return win32.HRESULTError(int32(devicesdisplay.GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9.Raw, dwPhysicalMonitorArraySize, pPhysicalMonitorArray)))
 }
 
 // HT_Get8BPPMaskPalette wraps the raw HT_Get8BPPMaskPalette call with idiomatic Go types.

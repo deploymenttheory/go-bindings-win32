@@ -87,9 +87,9 @@ func AcmFormatTagEnum(had mediaaudio.HACMDRIVER, paftd unsafe.Pointer, fnCallbac
 
 // ActivateAudioInterfaceAsync wraps the raw ActivateAudioInterfaceAsync call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-activateaudiointerfaceasync
-func ActivateAudioInterfaceAsync(deviceInterfacePath string, riid *win32.GUID, activationParams *systemcomstructuredstorage.PROPVARIANT, completionHandler *mediaaudio.IActivateAudioInterfaceCompletionHandler, activationOperation **mediaaudio.IActivateAudioInterfaceAsyncOperation) error {
+func ActivateAudioInterfaceAsync(deviceInterfacePath string, riid *win32.GUID, activationParams *systemcomstructuredstorage.PROPVARIANT, completionHandler IActivateAudioInterfaceCompletionHandler, activationOperation **mediaaudio.IActivateAudioInterfaceAsyncOperation) error {
 	_deviceInterfacePath := win32.UTF16Ptr(deviceInterfacePath)
-	return win32.HRESULTError(int32(mediaaudio.ActivateAudioInterfaceAsync(foundation.PWSTR(_deviceInterfacePath), riid, activationParams, completionHandler, activationOperation)))
+	return win32.HRESULTError(int32(mediaaudio.ActivateAudioInterfaceAsync(foundation.PWSTR(_deviceInterfacePath), riid, activationParams, completionHandler.Raw, activationOperation)))
 }
 
 // AuxGetDevCaps wraps the raw AuxGetDevCapsW call with idiomatic Go types.
@@ -100,8 +100,8 @@ func AuxGetDevCaps(uDeviceID uintptr, pac unsafe.Pointer, cbac uint32) uint32 {
 
 // CoRegisterMessageFilter wraps the raw CoRegisterMessageFilter call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-coregistermessagefilter
-func CoRegisterMessageFilter(lpMessageFilter *mediaaudio.IMessageFilter, lplpMessageFilter **mediaaudio.IMessageFilter) error {
-	return win32.HRESULTError(int32(mediaaudio.CoRegisterMessageFilter(lpMessageFilter, lplpMessageFilter)))
+func CoRegisterMessageFilter(lpMessageFilter IMessageFilter, lplpMessageFilter **mediaaudio.IMessageFilter) error {
+	return win32.HRESULTError(int32(mediaaudio.CoRegisterMessageFilter(lpMessageFilter.Raw, lplpMessageFilter)))
 }
 
 // CreateCaptureAudioStateMonitor wraps the raw CreateCaptureAudioStateMonitor call with idiomatic Go types.

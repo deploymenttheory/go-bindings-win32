@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	storagevirtualdiskservice "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/virtualdiskservice"
 	storagevss "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/vss"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -1123,8 +1122,8 @@ func WrapIVssProviderNotifications(raw *storagevss.IVssProviderNotifications) IV
 }
 
 // OnLoad wraps the raw OnLoad call.
-func (self IVssProviderNotifications) OnLoad(pCallback *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnLoad(pCallback)))
+func (self IVssProviderNotifications) OnLoad(pCallback systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnLoad(pCallback.Raw)))
 }
 
 // OnUnload wraps the raw OnUnload call.

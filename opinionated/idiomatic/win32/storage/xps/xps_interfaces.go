@@ -12,6 +12,7 @@ import (
 	storagepackagingopc "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/packaging/opc"
 	storagexps "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/xps"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	storagepackagingopcidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/storage/packaging/opc"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -27,17 +28,17 @@ func WrapIXpsDocumentPackageTarget(raw *storagexps.IXpsDocumentPackageTarget) IX
 }
 
 // GetXpsOMPackageWriter wraps the raw GetXpsOMPackageWriter call.
-func (self IXpsDocumentPackageTarget) GetXpsOMPackageWriter(documentSequencePartName *storagepackagingopc.IOpcPartUri, discardControlPartName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMPackageWriter, error) {
+func (self IXpsDocumentPackageTarget) GetXpsOMPackageWriter(documentSequencePartName storagepackagingopcidiom.IOpcPartUri, discardControlPartName storagepackagingopcidiom.IOpcPartUri) (IXpsOMPackageWriter, error) {
 	var _packageWriter *storagexps.IXpsOMPackageWriter
-	_hr := self.Raw.GetXpsOMPackageWriter(documentSequencePartName, discardControlPartName, &_packageWriter)
-	return _packageWriter, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetXpsOMPackageWriter(documentSequencePartName.Raw, discardControlPartName.Raw, &_packageWriter)
+	return WrapIXpsOMPackageWriter(_packageWriter), win32.HRESULTError(int32(_hr))
 }
 
 // GetXpsOMFactory wraps the raw GetXpsOMFactory call.
-func (self IXpsDocumentPackageTarget) GetXpsOMFactory() (*storagexps.IXpsOMObjectFactory, error) {
+func (self IXpsDocumentPackageTarget) GetXpsOMFactory() (IXpsOMObjectFactory, error) {
 	var _xpsFactory *storagexps.IXpsOMObjectFactory
 	_hr := self.Raw.GetXpsOMFactory(&_xpsFactory)
-	return _xpsFactory, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMObjectFactory(_xpsFactory), win32.HRESULTError(int32(_hr))
 }
 
 // GetXpsType wraps the raw GetXpsType call.
@@ -59,17 +60,17 @@ func WrapIXpsDocumentPackageTarget3D(raw *storagexps.IXpsDocumentPackageTarget3D
 }
 
 // GetXpsOMPackageWriter3D wraps the raw GetXpsOMPackageWriter3D call.
-func (self IXpsDocumentPackageTarget3D) GetXpsOMPackageWriter3D(documentSequencePartName *storagepackagingopc.IOpcPartUri, discardControlPartName *storagepackagingopc.IOpcPartUri, modelPartName *storagepackagingopc.IOpcPartUri, modelData *systemcom.IStream) (*storagexps.IXpsOMPackageWriter3D, error) {
+func (self IXpsDocumentPackageTarget3D) GetXpsOMPackageWriter3D(documentSequencePartName storagepackagingopcidiom.IOpcPartUri, discardControlPartName storagepackagingopcidiom.IOpcPartUri, modelPartName storagepackagingopcidiom.IOpcPartUri, modelData systemcomidiom.IStream) (IXpsOMPackageWriter3D, error) {
 	var _packageWriter *storagexps.IXpsOMPackageWriter3D
-	_hr := self.Raw.GetXpsOMPackageWriter3D(documentSequencePartName, discardControlPartName, modelPartName, modelData, &_packageWriter)
-	return _packageWriter, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetXpsOMPackageWriter3D(documentSequencePartName.Raw, discardControlPartName.Raw, modelPartName.Raw, modelData.Raw, &_packageWriter)
+	return WrapIXpsOMPackageWriter3D(_packageWriter), win32.HRESULTError(int32(_hr))
 }
 
 // GetXpsOMFactory wraps the raw GetXpsOMFactory call.
-func (self IXpsDocumentPackageTarget3D) GetXpsOMFactory() (*storagexps.IXpsOMObjectFactory, error) {
+func (self IXpsDocumentPackageTarget3D) GetXpsOMFactory() (IXpsOMObjectFactory, error) {
 	var _xpsFactory *storagexps.IXpsOMObjectFactory
 	_hr := self.Raw.GetXpsOMFactory(&_xpsFactory)
-	return _xpsFactory, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMObjectFactory(_xpsFactory), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMBrush is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMBrush with error-returning methods.
@@ -102,10 +103,10 @@ func WrapIXpsOMCanvas(raw *storagexps.IXpsOMCanvas) IXpsOMCanvas {
 }
 
 // GetVisuals wraps the raw GetVisuals call.
-func (self IXpsOMCanvas) GetVisuals() (*storagexps.IXpsOMVisualCollection, error) {
+func (self IXpsOMCanvas) GetVisuals() (IXpsOMVisualCollection, error) {
 	var _visuals *storagexps.IXpsOMVisualCollection
 	_hr := self.Raw.GetVisuals(&_visuals)
-	return _visuals, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMVisualCollection(_visuals), win32.HRESULTError(int32(_hr))
 }
 
 // GetUseAliasedEdgeMode wraps the raw GetUseAliasedEdgeMode call.
@@ -148,41 +149,41 @@ func (self IXpsOMCanvas) SetAccessibilityLongDescription(longDescription string)
 }
 
 // GetDictionary wraps the raw GetDictionary call.
-func (self IXpsOMCanvas) GetDictionary() (*storagexps.IXpsOMDictionary, error) {
+func (self IXpsOMCanvas) GetDictionary() (IXpsOMDictionary, error) {
 	var _resourceDictionary *storagexps.IXpsOMDictionary
 	_hr := self.Raw.GetDictionary(&_resourceDictionary)
-	return _resourceDictionary, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDictionary(_resourceDictionary), win32.HRESULTError(int32(_hr))
 }
 
 // GetDictionaryLocal wraps the raw GetDictionaryLocal call.
-func (self IXpsOMCanvas) GetDictionaryLocal() (*storagexps.IXpsOMDictionary, error) {
+func (self IXpsOMCanvas) GetDictionaryLocal() (IXpsOMDictionary, error) {
 	var _resourceDictionary *storagexps.IXpsOMDictionary
 	_hr := self.Raw.GetDictionaryLocal(&_resourceDictionary)
-	return _resourceDictionary, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDictionary(_resourceDictionary), win32.HRESULTError(int32(_hr))
 }
 
 // SetDictionaryLocal wraps the raw SetDictionaryLocal call.
-func (self IXpsOMCanvas) SetDictionaryLocal(resourceDictionary *storagexps.IXpsOMDictionary) error {
-	return win32.HRESULTError(int32(self.Raw.SetDictionaryLocal(resourceDictionary)))
+func (self IXpsOMCanvas) SetDictionaryLocal(resourceDictionary IXpsOMDictionary) error {
+	return win32.HRESULTError(int32(self.Raw.SetDictionaryLocal(resourceDictionary.Raw)))
 }
 
 // GetDictionaryResource wraps the raw GetDictionaryResource call.
-func (self IXpsOMCanvas) GetDictionaryResource() (*storagexps.IXpsOMRemoteDictionaryResource, error) {
+func (self IXpsOMCanvas) GetDictionaryResource() (IXpsOMRemoteDictionaryResource, error) {
 	var _remoteDictionaryResource *storagexps.IXpsOMRemoteDictionaryResource
 	_hr := self.Raw.GetDictionaryResource(&_remoteDictionaryResource)
-	return _remoteDictionaryResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMRemoteDictionaryResource(_remoteDictionaryResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetDictionaryResource wraps the raw SetDictionaryResource call.
-func (self IXpsOMCanvas) SetDictionaryResource(remoteDictionaryResource *storagexps.IXpsOMRemoteDictionaryResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetDictionaryResource(remoteDictionaryResource)))
+func (self IXpsOMCanvas) SetDictionaryResource(remoteDictionaryResource IXpsOMRemoteDictionaryResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetDictionaryResource(remoteDictionaryResource.Raw)))
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMCanvas) Clone() (*storagexps.IXpsOMCanvas, error) {
+func (self IXpsOMCanvas) Clone() (IXpsOMCanvas, error) {
 	var _canvas *storagexps.IXpsOMCanvas
 	_hr := self.Raw.Clone(&_canvas)
-	return _canvas, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMCanvas(_canvas), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMColorProfileResource is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMColorProfileResource with error-returning methods.
@@ -197,15 +198,15 @@ func WrapIXpsOMColorProfileResource(raw *storagexps.IXpsOMColorProfileResource) 
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IXpsOMColorProfileResource) GetStream() (*systemcom.IStream, error) {
+func (self IXpsOMColorProfileResource) GetStream() (systemcomidiom.IStream, error) {
 	var _stream *systemcom.IStream
 	_hr := self.Raw.GetStream(&_stream)
-	return _stream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_stream), win32.HRESULTError(int32(_hr))
 }
 
 // SetContent wraps the raw SetContent call.
-func (self IXpsOMColorProfileResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream, partName)))
+func (self IXpsOMColorProfileResource) SetContent(sourceStream systemcomidiom.IStream, partName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream.Raw, partName.Raw)))
 }
 
 // IXpsOMColorProfileResourceCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMColorProfileResourceCollection with error-returning methods.
@@ -227,15 +228,15 @@ func (self IXpsOMColorProfileResourceCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMColorProfileResourceCollection) GetAt(index uint32) (*storagexps.IXpsOMColorProfileResource, error) {
+func (self IXpsOMColorProfileResourceCollection) GetAt(index uint32) (IXpsOMColorProfileResource, error) {
 	var _object *storagexps.IXpsOMColorProfileResource
 	_hr := self.Raw.GetAt(index, &_object)
-	return _object, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMColorProfileResource(_object), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMColorProfileResourceCollection) InsertAt(index uint32, object *storagexps.IXpsOMColorProfileResource) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, object)))
+func (self IXpsOMColorProfileResourceCollection) InsertAt(index uint32, object IXpsOMColorProfileResource) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, object.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -244,20 +245,20 @@ func (self IXpsOMColorProfileResourceCollection) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMColorProfileResourceCollection) SetAt(index uint32, object *storagexps.IXpsOMColorProfileResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, object)))
+func (self IXpsOMColorProfileResourceCollection) SetAt(index uint32, object IXpsOMColorProfileResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, object.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMColorProfileResourceCollection) Append(object *storagexps.IXpsOMColorProfileResource) error {
-	return win32.HRESULTError(int32(self.Raw.Append(object)))
+func (self IXpsOMColorProfileResourceCollection) Append(object IXpsOMColorProfileResource) error {
+	return win32.HRESULTError(int32(self.Raw.Append(object.Raw)))
 }
 
 // GetByPartName wraps the raw GetByPartName call.
-func (self IXpsOMColorProfileResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMColorProfileResource, error) {
+func (self IXpsOMColorProfileResourceCollection) GetByPartName(partName storagepackagingopcidiom.IOpcPartUri) (IXpsOMColorProfileResource, error) {
 	var _part *storagexps.IXpsOMColorProfileResource
-	_hr := self.Raw.GetByPartName(partName, &_part)
-	return _part, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetByPartName(partName.Raw, &_part)
+	return WrapIXpsOMColorProfileResource(_part), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMCoreProperties is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMCoreProperties with error-returning methods.
@@ -272,10 +273,10 @@ func WrapIXpsOMCoreProperties(raw *storagexps.IXpsOMCoreProperties) IXpsOMCorePr
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMCoreProperties) GetOwner() (*storagexps.IXpsOMPackage, error) {
+func (self IXpsOMCoreProperties) GetOwner() (IXpsOMPackage, error) {
 	var _package_ *storagexps.IXpsOMPackage
 	_hr := self.Raw.GetOwner(&_package_)
-	return _package_, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPackage(_package_), win32.HRESULTError(int32(_hr))
 }
 
 // GetCategory wraps the raw GetCategory call.
@@ -484,10 +485,10 @@ func (self IXpsOMCoreProperties) SetVersion(version string) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMCoreProperties) Clone() (*storagexps.IXpsOMCoreProperties, error) {
+func (self IXpsOMCoreProperties) Clone() (IXpsOMCoreProperties, error) {
 	var _coreProperties *storagexps.IXpsOMCoreProperties
 	_hr := self.Raw.Clone(&_coreProperties)
-	return _coreProperties, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMCoreProperties(_coreProperties), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMDashCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMDashCollection with error-returning methods.
@@ -547,10 +548,10 @@ func WrapIXpsOMDictionary(raw *storagexps.IXpsOMDictionary) IXpsOMDictionary {
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMDictionary) GetOwner() (*systemcom.IUnknown, error) {
+func (self IXpsOMDictionary) GetOwner() (systemcomidiom.IUnknown, error) {
 	var _owner *systemcom.IUnknown
 	_hr := self.Raw.GetOwner(&_owner)
-	return _owner, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_owner), win32.HRESULTError(int32(_hr))
 }
 
 // GetCount wraps the raw GetCount call.
@@ -561,37 +562,37 @@ func (self IXpsOMDictionary) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMDictionary) GetAt(index uint32, key *foundation.PWSTR) (*storagexps.IXpsOMShareable, error) {
+func (self IXpsOMDictionary) GetAt(index uint32, key *foundation.PWSTR) (IXpsOMShareable, error) {
 	var _entry *storagexps.IXpsOMShareable
 	_hr := self.Raw.GetAt(index, key, &_entry)
-	return _entry, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMShareable(_entry), win32.HRESULTError(int32(_hr))
 }
 
 // GetByKey wraps the raw GetByKey call.
-func (self IXpsOMDictionary) GetByKey(key string, beforeEntry *storagexps.IXpsOMShareable) (*storagexps.IXpsOMShareable, error) {
+func (self IXpsOMDictionary) GetByKey(key string, beforeEntry IXpsOMShareable) (IXpsOMShareable, error) {
 	_key := win32.UTF16Ptr(key)
 	var _entry *storagexps.IXpsOMShareable
-	_hr := self.Raw.GetByKey(foundation.PWSTR(_key), beforeEntry, &_entry)
-	return _entry, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetByKey(foundation.PWSTR(_key), beforeEntry.Raw, &_entry)
+	return WrapIXpsOMShareable(_entry), win32.HRESULTError(int32(_hr))
 }
 
 // GetIndex wraps the raw GetIndex call.
-func (self IXpsOMDictionary) GetIndex(entry *storagexps.IXpsOMShareable) (uint32, error) {
+func (self IXpsOMDictionary) GetIndex(entry IXpsOMShareable) (uint32, error) {
 	var _index uint32
-	_hr := self.Raw.GetIndex(entry, &_index)
+	_hr := self.Raw.GetIndex(entry.Raw, &_index)
 	return _index, win32.HRESULTError(int32(_hr))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMDictionary) Append(key string, entry *storagexps.IXpsOMShareable) error {
+func (self IXpsOMDictionary) Append(key string, entry IXpsOMShareable) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.Append(foundation.PWSTR(_key), entry)))
+	return win32.HRESULTError(int32(self.Raw.Append(foundation.PWSTR(_key), entry.Raw)))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMDictionary) InsertAt(index uint32, key string, entry *storagexps.IXpsOMShareable) error {
+func (self IXpsOMDictionary) InsertAt(index uint32, key string, entry IXpsOMShareable) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, foundation.PWSTR(_key), entry)))
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, foundation.PWSTR(_key), entry.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -600,16 +601,16 @@ func (self IXpsOMDictionary) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMDictionary) SetAt(index uint32, key string, entry *storagexps.IXpsOMShareable) error {
+func (self IXpsOMDictionary) SetAt(index uint32, key string, entry IXpsOMShareable) error {
 	_key := win32.UTF16Ptr(key)
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, foundation.PWSTR(_key), entry)))
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, foundation.PWSTR(_key), entry.Raw)))
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMDictionary) Clone() (*storagexps.IXpsOMDictionary, error) {
+func (self IXpsOMDictionary) Clone() (IXpsOMDictionary, error) {
 	var _dictionary *storagexps.IXpsOMDictionary
 	_hr := self.Raw.Clone(&_dictionary)
-	return _dictionary, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDictionary(_dictionary), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMDocument is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMDocument with error-returning methods.
@@ -624,55 +625,55 @@ func WrapIXpsOMDocument(raw *storagexps.IXpsOMDocument) IXpsOMDocument {
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMDocument) GetOwner() (*storagexps.IXpsOMDocumentSequence, error) {
+func (self IXpsOMDocument) GetOwner() (IXpsOMDocumentSequence, error) {
 	var _documentSequence *storagexps.IXpsOMDocumentSequence
 	_hr := self.Raw.GetOwner(&_documentSequence)
-	return _documentSequence, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocumentSequence(_documentSequence), win32.HRESULTError(int32(_hr))
 }
 
 // GetPageReferences wraps the raw GetPageReferences call.
-func (self IXpsOMDocument) GetPageReferences() (*storagexps.IXpsOMPageReferenceCollection, error) {
+func (self IXpsOMDocument) GetPageReferences() (IXpsOMPageReferenceCollection, error) {
 	var _pageReferences *storagexps.IXpsOMPageReferenceCollection
 	_hr := self.Raw.GetPageReferences(&_pageReferences)
-	return _pageReferences, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPageReferenceCollection(_pageReferences), win32.HRESULTError(int32(_hr))
 }
 
 // GetPrintTicketResource wraps the raw GetPrintTicketResource call.
-func (self IXpsOMDocument) GetPrintTicketResource() (*storagexps.IXpsOMPrintTicketResource, error) {
+func (self IXpsOMDocument) GetPrintTicketResource() (IXpsOMPrintTicketResource, error) {
 	var _printTicketResource *storagexps.IXpsOMPrintTicketResource
 	_hr := self.Raw.GetPrintTicketResource(&_printTicketResource)
-	return _printTicketResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPrintTicketResource(_printTicketResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetPrintTicketResource wraps the raw SetPrintTicketResource call.
-func (self IXpsOMDocument) SetPrintTicketResource(printTicketResource *storagexps.IXpsOMPrintTicketResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrintTicketResource(printTicketResource)))
+func (self IXpsOMDocument) SetPrintTicketResource(printTicketResource IXpsOMPrintTicketResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrintTicketResource(printTicketResource.Raw)))
 }
 
 // GetDocumentStructureResource wraps the raw GetDocumentStructureResource call.
-func (self IXpsOMDocument) GetDocumentStructureResource() (*storagexps.IXpsOMDocumentStructureResource, error) {
+func (self IXpsOMDocument) GetDocumentStructureResource() (IXpsOMDocumentStructureResource, error) {
 	var _documentStructureResource *storagexps.IXpsOMDocumentStructureResource
 	_hr := self.Raw.GetDocumentStructureResource(&_documentStructureResource)
-	return _documentStructureResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocumentStructureResource(_documentStructureResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetDocumentStructureResource wraps the raw SetDocumentStructureResource call.
-func (self IXpsOMDocument) SetDocumentStructureResource(documentStructureResource *storagexps.IXpsOMDocumentStructureResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetDocumentStructureResource(documentStructureResource)))
+func (self IXpsOMDocument) SetDocumentStructureResource(documentStructureResource IXpsOMDocumentStructureResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetDocumentStructureResource(documentStructureResource.Raw)))
 }
 
 // GetSignatureBlockResources wraps the raw GetSignatureBlockResources call.
-func (self IXpsOMDocument) GetSignatureBlockResources() (*storagexps.IXpsOMSignatureBlockResourceCollection, error) {
+func (self IXpsOMDocument) GetSignatureBlockResources() (IXpsOMSignatureBlockResourceCollection, error) {
 	var _signatureBlockResources *storagexps.IXpsOMSignatureBlockResourceCollection
 	_hr := self.Raw.GetSignatureBlockResources(&_signatureBlockResources)
-	return _signatureBlockResources, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMSignatureBlockResourceCollection(_signatureBlockResources), win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMDocument) Clone() (*storagexps.IXpsOMDocument, error) {
+func (self IXpsOMDocument) Clone() (IXpsOMDocument, error) {
 	var _document *storagexps.IXpsOMDocument
 	_hr := self.Raw.Clone(&_document)
-	return _document, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocument(_document), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMDocumentCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMDocumentCollection with error-returning methods.
@@ -694,15 +695,15 @@ func (self IXpsOMDocumentCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMDocumentCollection) GetAt(index uint32) (*storagexps.IXpsOMDocument, error) {
+func (self IXpsOMDocumentCollection) GetAt(index uint32) (IXpsOMDocument, error) {
 	var _document *storagexps.IXpsOMDocument
 	_hr := self.Raw.GetAt(index, &_document)
-	return _document, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocument(_document), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMDocumentCollection) InsertAt(index uint32, document *storagexps.IXpsOMDocument) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, document)))
+func (self IXpsOMDocumentCollection) InsertAt(index uint32, document IXpsOMDocument) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, document.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -711,13 +712,13 @@ func (self IXpsOMDocumentCollection) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMDocumentCollection) SetAt(index uint32, document *storagexps.IXpsOMDocument) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, document)))
+func (self IXpsOMDocumentCollection) SetAt(index uint32, document IXpsOMDocument) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, document.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMDocumentCollection) Append(document *storagexps.IXpsOMDocument) error {
-	return win32.HRESULTError(int32(self.Raw.Append(document)))
+func (self IXpsOMDocumentCollection) Append(document IXpsOMDocument) error {
+	return win32.HRESULTError(int32(self.Raw.Append(document.Raw)))
 }
 
 // IXpsOMDocumentSequence is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMDocumentSequence with error-returning methods.
@@ -732,29 +733,29 @@ func WrapIXpsOMDocumentSequence(raw *storagexps.IXpsOMDocumentSequence) IXpsOMDo
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMDocumentSequence) GetOwner() (*storagexps.IXpsOMPackage, error) {
+func (self IXpsOMDocumentSequence) GetOwner() (IXpsOMPackage, error) {
 	var _package_ *storagexps.IXpsOMPackage
 	_hr := self.Raw.GetOwner(&_package_)
-	return _package_, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPackage(_package_), win32.HRESULTError(int32(_hr))
 }
 
 // GetDocuments wraps the raw GetDocuments call.
-func (self IXpsOMDocumentSequence) GetDocuments() (*storagexps.IXpsOMDocumentCollection, error) {
+func (self IXpsOMDocumentSequence) GetDocuments() (IXpsOMDocumentCollection, error) {
 	var _documents *storagexps.IXpsOMDocumentCollection
 	_hr := self.Raw.GetDocuments(&_documents)
-	return _documents, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocumentCollection(_documents), win32.HRESULTError(int32(_hr))
 }
 
 // GetPrintTicketResource wraps the raw GetPrintTicketResource call.
-func (self IXpsOMDocumentSequence) GetPrintTicketResource() (*storagexps.IXpsOMPrintTicketResource, error) {
+func (self IXpsOMDocumentSequence) GetPrintTicketResource() (IXpsOMPrintTicketResource, error) {
 	var _printTicketResource *storagexps.IXpsOMPrintTicketResource
 	_hr := self.Raw.GetPrintTicketResource(&_printTicketResource)
-	return _printTicketResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPrintTicketResource(_printTicketResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetPrintTicketResource wraps the raw SetPrintTicketResource call.
-func (self IXpsOMDocumentSequence) SetPrintTicketResource(printTicketResource *storagexps.IXpsOMPrintTicketResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrintTicketResource(printTicketResource)))
+func (self IXpsOMDocumentSequence) SetPrintTicketResource(printTicketResource IXpsOMPrintTicketResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrintTicketResource(printTicketResource.Raw)))
 }
 
 // IXpsOMDocumentStructureResource is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMDocumentStructureResource with error-returning methods.
@@ -769,22 +770,22 @@ func WrapIXpsOMDocumentStructureResource(raw *storagexps.IXpsOMDocumentStructure
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMDocumentStructureResource) GetOwner() (*storagexps.IXpsOMDocument, error) {
+func (self IXpsOMDocumentStructureResource) GetOwner() (IXpsOMDocument, error) {
 	var _owner *storagexps.IXpsOMDocument
 	_hr := self.Raw.GetOwner(&_owner)
-	return _owner, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocument(_owner), win32.HRESULTError(int32(_hr))
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IXpsOMDocumentStructureResource) GetStream() (*systemcom.IStream, error) {
+func (self IXpsOMDocumentStructureResource) GetStream() (systemcomidiom.IStream, error) {
 	var _stream *systemcom.IStream
 	_hr := self.Raw.GetStream(&_stream)
-	return _stream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_stream), win32.HRESULTError(int32(_hr))
 }
 
 // SetContent wraps the raw SetContent call.
-func (self IXpsOMDocumentStructureResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream, partName)))
+func (self IXpsOMDocumentStructureResource) SetContent(sourceStream systemcomidiom.IStream, partName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream.Raw, partName.Raw)))
 }
 
 // IXpsOMFontResource is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMFontResource with error-returning methods.
@@ -799,15 +800,15 @@ func WrapIXpsOMFontResource(raw *storagexps.IXpsOMFontResource) IXpsOMFontResour
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IXpsOMFontResource) GetStream() (*systemcom.IStream, error) {
+func (self IXpsOMFontResource) GetStream() (systemcomidiom.IStream, error) {
 	var _readerStream *systemcom.IStream
 	_hr := self.Raw.GetStream(&_readerStream)
-	return _readerStream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_readerStream), win32.HRESULTError(int32(_hr))
 }
 
 // SetContent wraps the raw SetContent call.
-func (self IXpsOMFontResource) SetContent(sourceStream *systemcom.IStream, embeddingOption storagexps.XPS_FONT_EMBEDDING, partName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream, embeddingOption, partName)))
+func (self IXpsOMFontResource) SetContent(sourceStream systemcomidiom.IStream, embeddingOption storagexps.XPS_FONT_EMBEDDING, partName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream.Raw, embeddingOption, partName.Raw)))
 }
 
 // GetEmbeddingOption wraps the raw GetEmbeddingOption call.
@@ -836,25 +837,25 @@ func (self IXpsOMFontResourceCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMFontResourceCollection) GetAt(index uint32) (*storagexps.IXpsOMFontResource, error) {
+func (self IXpsOMFontResourceCollection) GetAt(index uint32) (IXpsOMFontResource, error) {
 	var _value *storagexps.IXpsOMFontResource
 	_hr := self.Raw.GetAt(index, &_value)
-	return _value, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMFontResource(_value), win32.HRESULTError(int32(_hr))
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMFontResourceCollection) SetAt(index uint32, value *storagexps.IXpsOMFontResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, value)))
+func (self IXpsOMFontResourceCollection) SetAt(index uint32, value IXpsOMFontResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, value.Raw)))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMFontResourceCollection) InsertAt(index uint32, value *storagexps.IXpsOMFontResource) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, value)))
+func (self IXpsOMFontResourceCollection) InsertAt(index uint32, value IXpsOMFontResource) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, value.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMFontResourceCollection) Append(value *storagexps.IXpsOMFontResource) error {
-	return win32.HRESULTError(int32(self.Raw.Append(value)))
+func (self IXpsOMFontResourceCollection) Append(value IXpsOMFontResource) error {
+	return win32.HRESULTError(int32(self.Raw.Append(value.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -863,10 +864,10 @@ func (self IXpsOMFontResourceCollection) RemoveAt(index uint32) error {
 }
 
 // GetByPartName wraps the raw GetByPartName call.
-func (self IXpsOMFontResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMFontResource, error) {
+func (self IXpsOMFontResourceCollection) GetByPartName(partName storagepackagingopcidiom.IOpcPartUri) (IXpsOMFontResource, error) {
 	var _part *storagexps.IXpsOMFontResource
-	_hr := self.Raw.GetByPartName(partName, &_part)
-	return _part, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetByPartName(partName.Raw, &_part)
+	return WrapIXpsOMFontResource(_part), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMGeometry is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMGeometry with error-returning methods.
@@ -881,10 +882,10 @@ func WrapIXpsOMGeometry(raw *storagexps.IXpsOMGeometry) IXpsOMGeometry {
 }
 
 // GetFigures wraps the raw GetFigures call.
-func (self IXpsOMGeometry) GetFigures() (*storagexps.IXpsOMGeometryFigureCollection, error) {
+func (self IXpsOMGeometry) GetFigures() (IXpsOMGeometryFigureCollection, error) {
 	var _figures *storagexps.IXpsOMGeometryFigureCollection
 	_hr := self.Raw.GetFigures(&_figures)
-	return _figures, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometryFigureCollection(_figures), win32.HRESULTError(int32(_hr))
 }
 
 // GetFillRule wraps the raw GetFillRule call.
@@ -900,22 +901,22 @@ func (self IXpsOMGeometry) SetFillRule(fillRule storagexps.XPS_FILL_RULE) error 
 }
 
 // GetTransform wraps the raw GetTransform call.
-func (self IXpsOMGeometry) GetTransform() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMGeometry) GetTransform() (IXpsOMMatrixTransform, error) {
 	var _transform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.GetTransform(&_transform)
-	return _transform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_transform), win32.HRESULTError(int32(_hr))
 }
 
 // GetTransformLocal wraps the raw GetTransformLocal call.
-func (self IXpsOMGeometry) GetTransformLocal() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMGeometry) GetTransformLocal() (IXpsOMMatrixTransform, error) {
 	var _transform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.GetTransformLocal(&_transform)
-	return _transform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_transform), win32.HRESULTError(int32(_hr))
 }
 
 // SetTransformLocal wraps the raw SetTransformLocal call.
-func (self IXpsOMGeometry) SetTransformLocal(transform *storagexps.IXpsOMMatrixTransform) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransformLocal(transform)))
+func (self IXpsOMGeometry) SetTransformLocal(transform IXpsOMMatrixTransform) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransformLocal(transform.Raw)))
 }
 
 // GetTransformLookup wraps the raw GetTransformLookup call.
@@ -932,10 +933,10 @@ func (self IXpsOMGeometry) SetTransformLookup(lookup string) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMGeometry) Clone() (*storagexps.IXpsOMGeometry, error) {
+func (self IXpsOMGeometry) Clone() (IXpsOMGeometry, error) {
 	var _geometry *storagexps.IXpsOMGeometry
 	_hr := self.Raw.Clone(&_geometry)
-	return _geometry, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometry(_geometry), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMGeometryFigure is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMGeometryFigure with error-returning methods.
@@ -950,10 +951,10 @@ func WrapIXpsOMGeometryFigure(raw *storagexps.IXpsOMGeometryFigure) IXpsOMGeomet
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMGeometryFigure) GetOwner() (*storagexps.IXpsOMGeometry, error) {
+func (self IXpsOMGeometryFigure) GetOwner() (IXpsOMGeometry, error) {
 	var _owner *storagexps.IXpsOMGeometry
 	_hr := self.Raw.GetOwner(&_owner)
-	return _owner, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometry(_owner), win32.HRESULTError(int32(_hr))
 }
 
 // GetSegmentData wraps the raw GetSegmentData call.
@@ -1036,10 +1037,10 @@ func (self IXpsOMGeometryFigure) GetSegmentStrokePattern() (storagexps.XPS_SEGME
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMGeometryFigure) Clone() (*storagexps.IXpsOMGeometryFigure, error) {
+func (self IXpsOMGeometryFigure) Clone() (IXpsOMGeometryFigure, error) {
 	var _geometryFigure *storagexps.IXpsOMGeometryFigure
 	_hr := self.Raw.Clone(&_geometryFigure)
-	return _geometryFigure, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometryFigure(_geometryFigure), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMGeometryFigureCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMGeometryFigureCollection with error-returning methods.
@@ -1061,15 +1062,15 @@ func (self IXpsOMGeometryFigureCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMGeometryFigureCollection) GetAt(index uint32) (*storagexps.IXpsOMGeometryFigure, error) {
+func (self IXpsOMGeometryFigureCollection) GetAt(index uint32) (IXpsOMGeometryFigure, error) {
 	var _geometryFigure *storagexps.IXpsOMGeometryFigure
 	_hr := self.Raw.GetAt(index, &_geometryFigure)
-	return _geometryFigure, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometryFigure(_geometryFigure), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMGeometryFigureCollection) InsertAt(index uint32, geometryFigure *storagexps.IXpsOMGeometryFigure) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, geometryFigure)))
+func (self IXpsOMGeometryFigureCollection) InsertAt(index uint32, geometryFigure IXpsOMGeometryFigure) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, geometryFigure.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -1078,13 +1079,13 @@ func (self IXpsOMGeometryFigureCollection) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMGeometryFigureCollection) SetAt(index uint32, geometryFigure *storagexps.IXpsOMGeometryFigure) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, geometryFigure)))
+func (self IXpsOMGeometryFigureCollection) SetAt(index uint32, geometryFigure IXpsOMGeometryFigure) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, geometryFigure.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMGeometryFigureCollection) Append(geometryFigure *storagexps.IXpsOMGeometryFigure) error {
-	return win32.HRESULTError(int32(self.Raw.Append(geometryFigure)))
+func (self IXpsOMGeometryFigureCollection) Append(geometryFigure IXpsOMGeometryFigure) error {
+	return win32.HRESULTError(int32(self.Raw.Append(geometryFigure.Raw)))
 }
 
 // IXpsOMGlyphs is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMGlyphs with error-returning methods.
@@ -1194,15 +1195,15 @@ func (self IXpsOMGlyphs) GetFontRenderingEmSize() (float32, error) {
 }
 
 // GetFontResource wraps the raw GetFontResource call.
-func (self IXpsOMGlyphs) GetFontResource() (*storagexps.IXpsOMFontResource, error) {
+func (self IXpsOMGlyphs) GetFontResource() (IXpsOMFontResource, error) {
 	var _fontResource *storagexps.IXpsOMFontResource
 	_hr := self.Raw.GetFontResource(&_fontResource)
-	return _fontResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMFontResource(_fontResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetFontResource wraps the raw SetFontResource call.
-func (self IXpsOMGlyphs) SetFontResource(fontResource *storagexps.IXpsOMFontResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetFontResource(fontResource)))
+func (self IXpsOMGlyphs) SetFontResource(fontResource IXpsOMFontResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetFontResource(fontResource.Raw)))
 }
 
 // GetFontFaceIndex wraps the raw GetFontFaceIndex call.
@@ -1218,22 +1219,22 @@ func (self IXpsOMGlyphs) SetFontFaceIndex(fontFaceIndex int16) error {
 }
 
 // GetFillBrush wraps the raw GetFillBrush call.
-func (self IXpsOMGlyphs) GetFillBrush() (*storagexps.IXpsOMBrush, error) {
+func (self IXpsOMGlyphs) GetFillBrush() (IXpsOMBrush, error) {
 	var _fillBrush *storagexps.IXpsOMBrush
 	_hr := self.Raw.GetFillBrush(&_fillBrush)
-	return _fillBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMBrush(_fillBrush), win32.HRESULTError(int32(_hr))
 }
 
 // GetFillBrushLocal wraps the raw GetFillBrushLocal call.
-func (self IXpsOMGlyphs) GetFillBrushLocal() (*storagexps.IXpsOMBrush, error) {
+func (self IXpsOMGlyphs) GetFillBrushLocal() (IXpsOMBrush, error) {
 	var _fillBrush *storagexps.IXpsOMBrush
 	_hr := self.Raw.GetFillBrushLocal(&_fillBrush)
-	return _fillBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMBrush(_fillBrush), win32.HRESULTError(int32(_hr))
 }
 
 // SetFillBrushLocal wraps the raw SetFillBrushLocal call.
-func (self IXpsOMGlyphs) SetFillBrushLocal(fillBrush *storagexps.IXpsOMBrush) error {
-	return win32.HRESULTError(int32(self.Raw.SetFillBrushLocal(fillBrush)))
+func (self IXpsOMGlyphs) SetFillBrushLocal(fillBrush IXpsOMBrush) error {
+	return win32.HRESULTError(int32(self.Raw.SetFillBrushLocal(fillBrush.Raw)))
 }
 
 // GetFillBrushLookup wraps the raw GetFillBrushLookup call.
@@ -1250,17 +1251,17 @@ func (self IXpsOMGlyphs) SetFillBrushLookup(key string) error {
 }
 
 // GetGlyphsEditor wraps the raw GetGlyphsEditor call.
-func (self IXpsOMGlyphs) GetGlyphsEditor() (*storagexps.IXpsOMGlyphsEditor, error) {
+func (self IXpsOMGlyphs) GetGlyphsEditor() (IXpsOMGlyphsEditor, error) {
 	var _editor *storagexps.IXpsOMGlyphsEditor
 	_hr := self.Raw.GetGlyphsEditor(&_editor)
-	return _editor, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGlyphsEditor(_editor), win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMGlyphs) Clone() (*storagexps.IXpsOMGlyphs, error) {
+func (self IXpsOMGlyphs) Clone() (IXpsOMGlyphs, error) {
 	var _glyphs *storagexps.IXpsOMGlyphs
 	_hr := self.Raw.Clone(&_glyphs)
-	return _glyphs, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGlyphs(_glyphs), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMGlyphsEditor is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMGlyphsEditor with error-returning methods.
@@ -1393,29 +1394,29 @@ func WrapIXpsOMGradientBrush(raw *storagexps.IXpsOMGradientBrush) IXpsOMGradient
 }
 
 // GetGradientStops wraps the raw GetGradientStops call.
-func (self IXpsOMGradientBrush) GetGradientStops() (*storagexps.IXpsOMGradientStopCollection, error) {
+func (self IXpsOMGradientBrush) GetGradientStops() (IXpsOMGradientStopCollection, error) {
 	var _gradientStops *storagexps.IXpsOMGradientStopCollection
 	_hr := self.Raw.GetGradientStops(&_gradientStops)
-	return _gradientStops, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGradientStopCollection(_gradientStops), win32.HRESULTError(int32(_hr))
 }
 
 // GetTransform wraps the raw GetTransform call.
-func (self IXpsOMGradientBrush) GetTransform() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMGradientBrush) GetTransform() (IXpsOMMatrixTransform, error) {
 	var _transform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.GetTransform(&_transform)
-	return _transform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_transform), win32.HRESULTError(int32(_hr))
 }
 
 // GetTransformLocal wraps the raw GetTransformLocal call.
-func (self IXpsOMGradientBrush) GetTransformLocal() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMGradientBrush) GetTransformLocal() (IXpsOMMatrixTransform, error) {
 	var _transform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.GetTransformLocal(&_transform)
-	return _transform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_transform), win32.HRESULTError(int32(_hr))
 }
 
 // SetTransformLocal wraps the raw SetTransformLocal call.
-func (self IXpsOMGradientBrush) SetTransformLocal(transform *storagexps.IXpsOMMatrixTransform) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransformLocal(transform)))
+func (self IXpsOMGradientBrush) SetTransformLocal(transform IXpsOMMatrixTransform) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransformLocal(transform.Raw)))
 }
 
 // GetTransformLookup wraps the raw GetTransformLookup call.
@@ -1467,10 +1468,10 @@ func WrapIXpsOMGradientStop(raw *storagexps.IXpsOMGradientStop) IXpsOMGradientSt
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMGradientStop) GetOwner() (*storagexps.IXpsOMGradientBrush, error) {
+func (self IXpsOMGradientStop) GetOwner() (IXpsOMGradientBrush, error) {
 	var _owner *storagexps.IXpsOMGradientBrush
 	_hr := self.Raw.GetOwner(&_owner)
-	return _owner, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGradientBrush(_owner), win32.HRESULTError(int32(_hr))
 }
 
 // GetOffset wraps the raw GetOffset call.
@@ -1481,22 +1482,22 @@ func (self IXpsOMGradientStop) GetOffset() (float32, error) {
 }
 
 // GetColor wraps the raw GetColor call.
-func (self IXpsOMGradientStop) GetColor(color *storagexps.XPS_COLOR) (*storagexps.IXpsOMColorProfileResource, error) {
+func (self IXpsOMGradientStop) GetColor(color *storagexps.XPS_COLOR) (IXpsOMColorProfileResource, error) {
 	var _colorProfile *storagexps.IXpsOMColorProfileResource
 	_hr := self.Raw.GetColor(color, &_colorProfile)
-	return _colorProfile, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMColorProfileResource(_colorProfile), win32.HRESULTError(int32(_hr))
 }
 
 // SetColor wraps the raw SetColor call.
-func (self IXpsOMGradientStop) SetColor(color *storagexps.XPS_COLOR, colorProfile *storagexps.IXpsOMColorProfileResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetColor(color, colorProfile)))
+func (self IXpsOMGradientStop) SetColor(color *storagexps.XPS_COLOR, colorProfile IXpsOMColorProfileResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetColor(color, colorProfile.Raw)))
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMGradientStop) Clone() (*storagexps.IXpsOMGradientStop, error) {
+func (self IXpsOMGradientStop) Clone() (IXpsOMGradientStop, error) {
 	var _gradientStop *storagexps.IXpsOMGradientStop
 	_hr := self.Raw.Clone(&_gradientStop)
-	return _gradientStop, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGradientStop(_gradientStop), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMGradientStopCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMGradientStopCollection with error-returning methods.
@@ -1518,15 +1519,15 @@ func (self IXpsOMGradientStopCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMGradientStopCollection) GetAt(index uint32) (*storagexps.IXpsOMGradientStop, error) {
+func (self IXpsOMGradientStopCollection) GetAt(index uint32) (IXpsOMGradientStop, error) {
 	var _stop *storagexps.IXpsOMGradientStop
 	_hr := self.Raw.GetAt(index, &_stop)
-	return _stop, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGradientStop(_stop), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMGradientStopCollection) InsertAt(index uint32, stop *storagexps.IXpsOMGradientStop) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, stop)))
+func (self IXpsOMGradientStopCollection) InsertAt(index uint32, stop IXpsOMGradientStop) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, stop.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -1535,13 +1536,13 @@ func (self IXpsOMGradientStopCollection) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMGradientStopCollection) SetAt(index uint32, stop *storagexps.IXpsOMGradientStop) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, stop)))
+func (self IXpsOMGradientStopCollection) SetAt(index uint32, stop IXpsOMGradientStop) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, stop.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMGradientStopCollection) Append(stop *storagexps.IXpsOMGradientStop) error {
-	return win32.HRESULTError(int32(self.Raw.Append(stop)))
+func (self IXpsOMGradientStopCollection) Append(stop IXpsOMGradientStop) error {
+	return win32.HRESULTError(int32(self.Raw.Append(stop.Raw)))
 }
 
 // IXpsOMImageBrush is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMImageBrush with error-returning methods.
@@ -1556,34 +1557,34 @@ func WrapIXpsOMImageBrush(raw *storagexps.IXpsOMImageBrush) IXpsOMImageBrush {
 }
 
 // GetImageResource wraps the raw GetImageResource call.
-func (self IXpsOMImageBrush) GetImageResource() (*storagexps.IXpsOMImageResource, error) {
+func (self IXpsOMImageBrush) GetImageResource() (IXpsOMImageResource, error) {
 	var _imageResource *storagexps.IXpsOMImageResource
 	_hr := self.Raw.GetImageResource(&_imageResource)
-	return _imageResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMImageResource(_imageResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetImageResource wraps the raw SetImageResource call.
-func (self IXpsOMImageBrush) SetImageResource(imageResource *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetImageResource(imageResource)))
+func (self IXpsOMImageBrush) SetImageResource(imageResource IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetImageResource(imageResource.Raw)))
 }
 
 // GetColorProfileResource wraps the raw GetColorProfileResource call.
-func (self IXpsOMImageBrush) GetColorProfileResource() (*storagexps.IXpsOMColorProfileResource, error) {
+func (self IXpsOMImageBrush) GetColorProfileResource() (IXpsOMColorProfileResource, error) {
 	var _colorProfileResource *storagexps.IXpsOMColorProfileResource
 	_hr := self.Raw.GetColorProfileResource(&_colorProfileResource)
-	return _colorProfileResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMColorProfileResource(_colorProfileResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetColorProfileResource wraps the raw SetColorProfileResource call.
-func (self IXpsOMImageBrush) SetColorProfileResource(colorProfileResource *storagexps.IXpsOMColorProfileResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetColorProfileResource(colorProfileResource)))
+func (self IXpsOMImageBrush) SetColorProfileResource(colorProfileResource IXpsOMColorProfileResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetColorProfileResource(colorProfileResource.Raw)))
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMImageBrush) Clone() (*storagexps.IXpsOMImageBrush, error) {
+func (self IXpsOMImageBrush) Clone() (IXpsOMImageBrush, error) {
 	var _imageBrush *storagexps.IXpsOMImageBrush
 	_hr := self.Raw.Clone(&_imageBrush)
-	return _imageBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMImageBrush(_imageBrush), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMImageResource is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMImageResource with error-returning methods.
@@ -1598,15 +1599,15 @@ func WrapIXpsOMImageResource(raw *storagexps.IXpsOMImageResource) IXpsOMImageRes
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IXpsOMImageResource) GetStream() (*systemcom.IStream, error) {
+func (self IXpsOMImageResource) GetStream() (systemcomidiom.IStream, error) {
 	var _readerStream *systemcom.IStream
 	_hr := self.Raw.GetStream(&_readerStream)
-	return _readerStream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_readerStream), win32.HRESULTError(int32(_hr))
 }
 
 // SetContent wraps the raw SetContent call.
-func (self IXpsOMImageResource) SetContent(sourceStream *systemcom.IStream, imageType storagexps.XPS_IMAGE_TYPE, partName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream, imageType, partName)))
+func (self IXpsOMImageResource) SetContent(sourceStream systemcomidiom.IStream, imageType storagexps.XPS_IMAGE_TYPE, partName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream.Raw, imageType, partName.Raw)))
 }
 
 // GetImageType wraps the raw GetImageType call.
@@ -1635,15 +1636,15 @@ func (self IXpsOMImageResourceCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMImageResourceCollection) GetAt(index uint32) (*storagexps.IXpsOMImageResource, error) {
+func (self IXpsOMImageResourceCollection) GetAt(index uint32) (IXpsOMImageResource, error) {
 	var _object *storagexps.IXpsOMImageResource
 	_hr := self.Raw.GetAt(index, &_object)
-	return _object, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMImageResource(_object), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMImageResourceCollection) InsertAt(index uint32, object *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, object)))
+func (self IXpsOMImageResourceCollection) InsertAt(index uint32, object IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, object.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -1652,20 +1653,20 @@ func (self IXpsOMImageResourceCollection) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMImageResourceCollection) SetAt(index uint32, object *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, object)))
+func (self IXpsOMImageResourceCollection) SetAt(index uint32, object IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, object.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMImageResourceCollection) Append(object *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.Append(object)))
+func (self IXpsOMImageResourceCollection) Append(object IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.Append(object.Raw)))
 }
 
 // GetByPartName wraps the raw GetByPartName call.
-func (self IXpsOMImageResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMImageResource, error) {
+func (self IXpsOMImageResourceCollection) GetByPartName(partName storagepackagingopcidiom.IOpcPartUri) (IXpsOMImageResource, error) {
 	var _part *storagexps.IXpsOMImageResource
-	_hr := self.Raw.GetByPartName(partName, &_part)
-	return _part, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetByPartName(partName.Raw, &_part)
+	return WrapIXpsOMImageResource(_part), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMLinearGradientBrush is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMLinearGradientBrush with error-returning methods.
@@ -1704,10 +1705,10 @@ func (self IXpsOMLinearGradientBrush) SetEndPoint(endPoint *storagexps.XPS_POINT
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMLinearGradientBrush) Clone() (*storagexps.IXpsOMLinearGradientBrush, error) {
+func (self IXpsOMLinearGradientBrush) Clone() (IXpsOMLinearGradientBrush, error) {
 	var _linearGradientBrush *storagexps.IXpsOMLinearGradientBrush
 	_hr := self.Raw.Clone(&_linearGradientBrush)
-	return _linearGradientBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMLinearGradientBrush(_linearGradientBrush), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMMatrixTransform is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMMatrixTransform with error-returning methods.
@@ -1734,10 +1735,10 @@ func (self IXpsOMMatrixTransform) SetMatrix(matrix *storagexps.XPS_MATRIX) error
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMMatrixTransform) Clone() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMMatrixTransform) Clone() (IXpsOMMatrixTransform, error) {
 	var _matrixTransform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.Clone(&_matrixTransform)
-	return _matrixTransform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_matrixTransform), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMNameCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMNameCollection with error-returning methods.
@@ -1777,266 +1778,266 @@ func WrapIXpsOMObjectFactory(raw *storagexps.IXpsOMObjectFactory) IXpsOMObjectFa
 }
 
 // CreatePackage wraps the raw CreatePackage call.
-func (self IXpsOMObjectFactory) CreatePackage() (*storagexps.IXpsOMPackage, error) {
+func (self IXpsOMObjectFactory) CreatePackage() (IXpsOMPackage, error) {
 	var _package_ *storagexps.IXpsOMPackage
 	_hr := self.Raw.CreatePackage(&_package_)
-	return _package_, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPackage(_package_), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackageFromFile wraps the raw CreatePackageFromFile call.
-func (self IXpsOMObjectFactory) CreatePackageFromFile(filename string, reuseObjects bool) (*storagexps.IXpsOMPackage, error) {
+func (self IXpsOMObjectFactory) CreatePackageFromFile(filename string, reuseObjects bool) (IXpsOMPackage, error) {
 	_filename := win32.UTF16Ptr(filename)
 	_reuseObjects := foundation.BOOL(win32.Bool32(reuseObjects))
 	var _package_ *storagexps.IXpsOMPackage
 	_hr := self.Raw.CreatePackageFromFile(foundation.PWSTR(_filename), _reuseObjects, &_package_)
-	return _package_, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPackage(_package_), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackageFromStream wraps the raw CreatePackageFromStream call.
-func (self IXpsOMObjectFactory) CreatePackageFromStream(stream *systemcom.IStream, reuseObjects bool) (*storagexps.IXpsOMPackage, error) {
+func (self IXpsOMObjectFactory) CreatePackageFromStream(stream systemcomidiom.IStream, reuseObjects bool) (IXpsOMPackage, error) {
 	_reuseObjects := foundation.BOOL(win32.Bool32(reuseObjects))
 	var _package_ *storagexps.IXpsOMPackage
-	_hr := self.Raw.CreatePackageFromStream(stream, _reuseObjects, &_package_)
-	return _package_, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePackageFromStream(stream.Raw, _reuseObjects, &_package_)
+	return WrapIXpsOMPackage(_package_), win32.HRESULTError(int32(_hr))
 }
 
 // CreateStoryFragmentsResource wraps the raw CreateStoryFragmentsResource call.
-func (self IXpsOMObjectFactory) CreateStoryFragmentsResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMStoryFragmentsResource, error) {
+func (self IXpsOMObjectFactory) CreateStoryFragmentsResource(acquiredStream systemcomidiom.IStream, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMStoryFragmentsResource, error) {
 	var _storyFragmentsResource *storagexps.IXpsOMStoryFragmentsResource
-	_hr := self.Raw.CreateStoryFragmentsResource(acquiredStream, partUri, &_storyFragmentsResource)
-	return _storyFragmentsResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateStoryFragmentsResource(acquiredStream.Raw, partUri.Raw, &_storyFragmentsResource)
+	return WrapIXpsOMStoryFragmentsResource(_storyFragmentsResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDocumentStructureResource wraps the raw CreateDocumentStructureResource call.
-func (self IXpsOMObjectFactory) CreateDocumentStructureResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMDocumentStructureResource, error) {
+func (self IXpsOMObjectFactory) CreateDocumentStructureResource(acquiredStream systemcomidiom.IStream, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMDocumentStructureResource, error) {
 	var _documentStructureResource *storagexps.IXpsOMDocumentStructureResource
-	_hr := self.Raw.CreateDocumentStructureResource(acquiredStream, partUri, &_documentStructureResource)
-	return _documentStructureResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDocumentStructureResource(acquiredStream.Raw, partUri.Raw, &_documentStructureResource)
+	return WrapIXpsOMDocumentStructureResource(_documentStructureResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSignatureBlockResource wraps the raw CreateSignatureBlockResource call.
-func (self IXpsOMObjectFactory) CreateSignatureBlockResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMSignatureBlockResource, error) {
+func (self IXpsOMObjectFactory) CreateSignatureBlockResource(acquiredStream systemcomidiom.IStream, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMSignatureBlockResource, error) {
 	var _signatureBlockResource *storagexps.IXpsOMSignatureBlockResource
-	_hr := self.Raw.CreateSignatureBlockResource(acquiredStream, partUri, &_signatureBlockResource)
-	return _signatureBlockResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateSignatureBlockResource(acquiredStream.Raw, partUri.Raw, &_signatureBlockResource)
+	return WrapIXpsOMSignatureBlockResource(_signatureBlockResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateRemoteDictionaryResource wraps the raw CreateRemoteDictionaryResource call.
-func (self IXpsOMObjectFactory) CreateRemoteDictionaryResource(dictionary *storagexps.IXpsOMDictionary, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMRemoteDictionaryResource, error) {
+func (self IXpsOMObjectFactory) CreateRemoteDictionaryResource(dictionary IXpsOMDictionary, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMRemoteDictionaryResource, error) {
 	var _remoteDictionaryResource *storagexps.IXpsOMRemoteDictionaryResource
-	_hr := self.Raw.CreateRemoteDictionaryResource(dictionary, partUri, &_remoteDictionaryResource)
-	return _remoteDictionaryResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateRemoteDictionaryResource(dictionary.Raw, partUri.Raw, &_remoteDictionaryResource)
+	return WrapIXpsOMRemoteDictionaryResource(_remoteDictionaryResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateRemoteDictionaryResourceFromStream wraps the raw CreateRemoteDictionaryResourceFromStream call.
-func (self IXpsOMObjectFactory) CreateRemoteDictionaryResourceFromStream(dictionaryMarkupStream *systemcom.IStream, dictionaryPartUri *storagepackagingopc.IOpcPartUri, resources *storagexps.IXpsOMPartResources) (*storagexps.IXpsOMRemoteDictionaryResource, error) {
+func (self IXpsOMObjectFactory) CreateRemoteDictionaryResourceFromStream(dictionaryMarkupStream systemcomidiom.IStream, dictionaryPartUri storagepackagingopcidiom.IOpcPartUri, resources IXpsOMPartResources) (IXpsOMRemoteDictionaryResource, error) {
 	var _dictionaryResource *storagexps.IXpsOMRemoteDictionaryResource
-	_hr := self.Raw.CreateRemoteDictionaryResourceFromStream(dictionaryMarkupStream, dictionaryPartUri, resources, &_dictionaryResource)
-	return _dictionaryResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateRemoteDictionaryResourceFromStream(dictionaryMarkupStream.Raw, dictionaryPartUri.Raw, resources.Raw, &_dictionaryResource)
+	return WrapIXpsOMRemoteDictionaryResource(_dictionaryResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePartResources wraps the raw CreatePartResources call.
-func (self IXpsOMObjectFactory) CreatePartResources() (*storagexps.IXpsOMPartResources, error) {
+func (self IXpsOMObjectFactory) CreatePartResources() (IXpsOMPartResources, error) {
 	var _partResources *storagexps.IXpsOMPartResources
 	_hr := self.Raw.CreatePartResources(&_partResources)
-	return _partResources, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPartResources(_partResources), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDocumentSequence wraps the raw CreateDocumentSequence call.
-func (self IXpsOMObjectFactory) CreateDocumentSequence(partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMDocumentSequence, error) {
+func (self IXpsOMObjectFactory) CreateDocumentSequence(partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMDocumentSequence, error) {
 	var _documentSequence *storagexps.IXpsOMDocumentSequence
-	_hr := self.Raw.CreateDocumentSequence(partUri, &_documentSequence)
-	return _documentSequence, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDocumentSequence(partUri.Raw, &_documentSequence)
+	return WrapIXpsOMDocumentSequence(_documentSequence), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDocument wraps the raw CreateDocument call.
-func (self IXpsOMObjectFactory) CreateDocument(partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMDocument, error) {
+func (self IXpsOMObjectFactory) CreateDocument(partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMDocument, error) {
 	var _document *storagexps.IXpsOMDocument
-	_hr := self.Raw.CreateDocument(partUri, &_document)
-	return _document, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateDocument(partUri.Raw, &_document)
+	return WrapIXpsOMDocument(_document), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePageReference wraps the raw CreatePageReference call.
-func (self IXpsOMObjectFactory) CreatePageReference(advisoryPageDimensions *storagexps.XPS_SIZE) (*storagexps.IXpsOMPageReference, error) {
+func (self IXpsOMObjectFactory) CreatePageReference(advisoryPageDimensions *storagexps.XPS_SIZE) (IXpsOMPageReference, error) {
 	var _pageReference *storagexps.IXpsOMPageReference
 	_hr := self.Raw.CreatePageReference(advisoryPageDimensions, &_pageReference)
-	return _pageReference, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPageReference(_pageReference), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePage wraps the raw CreatePage call.
-func (self IXpsOMObjectFactory) CreatePage(pageDimensions *storagexps.XPS_SIZE, language string, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMPage, error) {
+func (self IXpsOMObjectFactory) CreatePage(pageDimensions *storagexps.XPS_SIZE, language string, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMPage, error) {
 	_language := win32.UTF16Ptr(language)
 	var _page *storagexps.IXpsOMPage
-	_hr := self.Raw.CreatePage(pageDimensions, foundation.PWSTR(_language), partUri, &_page)
-	return _page, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePage(pageDimensions, foundation.PWSTR(_language), partUri.Raw, &_page)
+	return WrapIXpsOMPage(_page), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePageFromStream wraps the raw CreatePageFromStream call.
-func (self IXpsOMObjectFactory) CreatePageFromStream(pageMarkupStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri, resources *storagexps.IXpsOMPartResources, reuseObjects bool) (*storagexps.IXpsOMPage, error) {
+func (self IXpsOMObjectFactory) CreatePageFromStream(pageMarkupStream systemcomidiom.IStream, partUri storagepackagingopcidiom.IOpcPartUri, resources IXpsOMPartResources, reuseObjects bool) (IXpsOMPage, error) {
 	_reuseObjects := foundation.BOOL(win32.Bool32(reuseObjects))
 	var _page *storagexps.IXpsOMPage
-	_hr := self.Raw.CreatePageFromStream(pageMarkupStream, partUri, resources, _reuseObjects, &_page)
-	return _page, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePageFromStream(pageMarkupStream.Raw, partUri.Raw, resources.Raw, _reuseObjects, &_page)
+	return WrapIXpsOMPage(_page), win32.HRESULTError(int32(_hr))
 }
 
 // CreateCanvas wraps the raw CreateCanvas call.
-func (self IXpsOMObjectFactory) CreateCanvas() (*storagexps.IXpsOMCanvas, error) {
+func (self IXpsOMObjectFactory) CreateCanvas() (IXpsOMCanvas, error) {
 	var _canvas *storagexps.IXpsOMCanvas
 	_hr := self.Raw.CreateCanvas(&_canvas)
-	return _canvas, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMCanvas(_canvas), win32.HRESULTError(int32(_hr))
 }
 
 // CreateGlyphs wraps the raw CreateGlyphs call.
-func (self IXpsOMObjectFactory) CreateGlyphs(fontResource *storagexps.IXpsOMFontResource) (*storagexps.IXpsOMGlyphs, error) {
+func (self IXpsOMObjectFactory) CreateGlyphs(fontResource IXpsOMFontResource) (IXpsOMGlyphs, error) {
 	var _glyphs *storagexps.IXpsOMGlyphs
-	_hr := self.Raw.CreateGlyphs(fontResource, &_glyphs)
-	return _glyphs, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateGlyphs(fontResource.Raw, &_glyphs)
+	return WrapIXpsOMGlyphs(_glyphs), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePath wraps the raw CreatePath call.
-func (self IXpsOMObjectFactory) CreatePath() (*storagexps.IXpsOMPath, error) {
+func (self IXpsOMObjectFactory) CreatePath() (IXpsOMPath, error) {
 	var _path *storagexps.IXpsOMPath
 	_hr := self.Raw.CreatePath(&_path)
-	return _path, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPath(_path), win32.HRESULTError(int32(_hr))
 }
 
 // CreateGeometry wraps the raw CreateGeometry call.
-func (self IXpsOMObjectFactory) CreateGeometry() (*storagexps.IXpsOMGeometry, error) {
+func (self IXpsOMObjectFactory) CreateGeometry() (IXpsOMGeometry, error) {
 	var _geometry *storagexps.IXpsOMGeometry
 	_hr := self.Raw.CreateGeometry(&_geometry)
-	return _geometry, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometry(_geometry), win32.HRESULTError(int32(_hr))
 }
 
 // CreateGeometryFigure wraps the raw CreateGeometryFigure call.
-func (self IXpsOMObjectFactory) CreateGeometryFigure(startPoint *storagexps.XPS_POINT) (*storagexps.IXpsOMGeometryFigure, error) {
+func (self IXpsOMObjectFactory) CreateGeometryFigure(startPoint *storagexps.XPS_POINT) (IXpsOMGeometryFigure, error) {
 	var _figure *storagexps.IXpsOMGeometryFigure
 	_hr := self.Raw.CreateGeometryFigure(startPoint, &_figure)
-	return _figure, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometryFigure(_figure), win32.HRESULTError(int32(_hr))
 }
 
 // CreateMatrixTransform wraps the raw CreateMatrixTransform call.
-func (self IXpsOMObjectFactory) CreateMatrixTransform(matrix *storagexps.XPS_MATRIX) (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMObjectFactory) CreateMatrixTransform(matrix *storagexps.XPS_MATRIX) (IXpsOMMatrixTransform, error) {
 	var _transform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.CreateMatrixTransform(matrix, &_transform)
-	return _transform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_transform), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSolidColorBrush wraps the raw CreateSolidColorBrush call.
-func (self IXpsOMObjectFactory) CreateSolidColorBrush(color *storagexps.XPS_COLOR, colorProfile *storagexps.IXpsOMColorProfileResource) (*storagexps.IXpsOMSolidColorBrush, error) {
+func (self IXpsOMObjectFactory) CreateSolidColorBrush(color *storagexps.XPS_COLOR, colorProfile IXpsOMColorProfileResource) (IXpsOMSolidColorBrush, error) {
 	var _solidColorBrush *storagexps.IXpsOMSolidColorBrush
-	_hr := self.Raw.CreateSolidColorBrush(color, colorProfile, &_solidColorBrush)
-	return _solidColorBrush, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateSolidColorBrush(color, colorProfile.Raw, &_solidColorBrush)
+	return WrapIXpsOMSolidColorBrush(_solidColorBrush), win32.HRESULTError(int32(_hr))
 }
 
 // CreateColorProfileResource wraps the raw CreateColorProfileResource call.
-func (self IXpsOMObjectFactory) CreateColorProfileResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMColorProfileResource, error) {
+func (self IXpsOMObjectFactory) CreateColorProfileResource(acquiredStream systemcomidiom.IStream, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMColorProfileResource, error) {
 	var _colorProfileResource *storagexps.IXpsOMColorProfileResource
-	_hr := self.Raw.CreateColorProfileResource(acquiredStream, partUri, &_colorProfileResource)
-	return _colorProfileResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateColorProfileResource(acquiredStream.Raw, partUri.Raw, &_colorProfileResource)
+	return WrapIXpsOMColorProfileResource(_colorProfileResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateImageBrush wraps the raw CreateImageBrush call.
-func (self IXpsOMObjectFactory) CreateImageBrush(image *storagexps.IXpsOMImageResource, viewBox *storagexps.XPS_RECT, viewPort *storagexps.XPS_RECT) (*storagexps.IXpsOMImageBrush, error) {
+func (self IXpsOMObjectFactory) CreateImageBrush(image IXpsOMImageResource, viewBox *storagexps.XPS_RECT, viewPort *storagexps.XPS_RECT) (IXpsOMImageBrush, error) {
 	var _imageBrush *storagexps.IXpsOMImageBrush
-	_hr := self.Raw.CreateImageBrush(image, viewBox, viewPort, &_imageBrush)
-	return _imageBrush, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateImageBrush(image.Raw, viewBox, viewPort, &_imageBrush)
+	return WrapIXpsOMImageBrush(_imageBrush), win32.HRESULTError(int32(_hr))
 }
 
 // CreateVisualBrush wraps the raw CreateVisualBrush call.
-func (self IXpsOMObjectFactory) CreateVisualBrush(viewBox *storagexps.XPS_RECT, viewPort *storagexps.XPS_RECT) (*storagexps.IXpsOMVisualBrush, error) {
+func (self IXpsOMObjectFactory) CreateVisualBrush(viewBox *storagexps.XPS_RECT, viewPort *storagexps.XPS_RECT) (IXpsOMVisualBrush, error) {
 	var _visualBrush *storagexps.IXpsOMVisualBrush
 	_hr := self.Raw.CreateVisualBrush(viewBox, viewPort, &_visualBrush)
-	return _visualBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMVisualBrush(_visualBrush), win32.HRESULTError(int32(_hr))
 }
 
 // CreateImageResource wraps the raw CreateImageResource call.
-func (self IXpsOMObjectFactory) CreateImageResource(acquiredStream *systemcom.IStream, contentType storagexps.XPS_IMAGE_TYPE, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMImageResource, error) {
+func (self IXpsOMObjectFactory) CreateImageResource(acquiredStream systemcomidiom.IStream, contentType storagexps.XPS_IMAGE_TYPE, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMImageResource, error) {
 	var _imageResource *storagexps.IXpsOMImageResource
-	_hr := self.Raw.CreateImageResource(acquiredStream, contentType, partUri, &_imageResource)
-	return _imageResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateImageResource(acquiredStream.Raw, contentType, partUri.Raw, &_imageResource)
+	return WrapIXpsOMImageResource(_imageResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePrintTicketResource wraps the raw CreatePrintTicketResource call.
-func (self IXpsOMObjectFactory) CreatePrintTicketResource(acquiredStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMPrintTicketResource, error) {
+func (self IXpsOMObjectFactory) CreatePrintTicketResource(acquiredStream systemcomidiom.IStream, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMPrintTicketResource, error) {
 	var _printTicketResource *storagexps.IXpsOMPrintTicketResource
-	_hr := self.Raw.CreatePrintTicketResource(acquiredStream, partUri, &_printTicketResource)
-	return _printTicketResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePrintTicketResource(acquiredStream.Raw, partUri.Raw, &_printTicketResource)
+	return WrapIXpsOMPrintTicketResource(_printTicketResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateFontResource wraps the raw CreateFontResource call.
-func (self IXpsOMObjectFactory) CreateFontResource(acquiredStream *systemcom.IStream, fontEmbedding storagexps.XPS_FONT_EMBEDDING, partUri *storagepackagingopc.IOpcPartUri, isObfSourceStream bool) (*storagexps.IXpsOMFontResource, error) {
+func (self IXpsOMObjectFactory) CreateFontResource(acquiredStream systemcomidiom.IStream, fontEmbedding storagexps.XPS_FONT_EMBEDDING, partUri storagepackagingopcidiom.IOpcPartUri, isObfSourceStream bool) (IXpsOMFontResource, error) {
 	_isObfSourceStream := foundation.BOOL(win32.Bool32(isObfSourceStream))
 	var _fontResource *storagexps.IXpsOMFontResource
-	_hr := self.Raw.CreateFontResource(acquiredStream, fontEmbedding, partUri, _isObfSourceStream, &_fontResource)
-	return _fontResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateFontResource(acquiredStream.Raw, fontEmbedding, partUri.Raw, _isObfSourceStream, &_fontResource)
+	return WrapIXpsOMFontResource(_fontResource), win32.HRESULTError(int32(_hr))
 }
 
 // CreateLinearGradientBrush wraps the raw CreateLinearGradientBrush call.
-func (self IXpsOMObjectFactory) CreateLinearGradientBrush(gradStop1 *storagexps.IXpsOMGradientStop, gradStop2 *storagexps.IXpsOMGradientStop, startPoint *storagexps.XPS_POINT, endPoint *storagexps.XPS_POINT) (*storagexps.IXpsOMLinearGradientBrush, error) {
+func (self IXpsOMObjectFactory) CreateLinearGradientBrush(gradStop1 IXpsOMGradientStop, gradStop2 IXpsOMGradientStop, startPoint *storagexps.XPS_POINT, endPoint *storagexps.XPS_POINT) (IXpsOMLinearGradientBrush, error) {
 	var _linearGradientBrush *storagexps.IXpsOMLinearGradientBrush
-	_hr := self.Raw.CreateLinearGradientBrush(gradStop1, gradStop2, startPoint, endPoint, &_linearGradientBrush)
-	return _linearGradientBrush, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateLinearGradientBrush(gradStop1.Raw, gradStop2.Raw, startPoint, endPoint, &_linearGradientBrush)
+	return WrapIXpsOMLinearGradientBrush(_linearGradientBrush), win32.HRESULTError(int32(_hr))
 }
 
 // CreateRadialGradientBrush wraps the raw CreateRadialGradientBrush call.
-func (self IXpsOMObjectFactory) CreateRadialGradientBrush(gradStop1 *storagexps.IXpsOMGradientStop, gradStop2 *storagexps.IXpsOMGradientStop, centerPoint *storagexps.XPS_POINT, gradientOrigin *storagexps.XPS_POINT, radiiSizes *storagexps.XPS_SIZE) (*storagexps.IXpsOMRadialGradientBrush, error) {
+func (self IXpsOMObjectFactory) CreateRadialGradientBrush(gradStop1 IXpsOMGradientStop, gradStop2 IXpsOMGradientStop, centerPoint *storagexps.XPS_POINT, gradientOrigin *storagexps.XPS_POINT, radiiSizes *storagexps.XPS_SIZE) (IXpsOMRadialGradientBrush, error) {
 	var _radialGradientBrush *storagexps.IXpsOMRadialGradientBrush
-	_hr := self.Raw.CreateRadialGradientBrush(gradStop1, gradStop2, centerPoint, gradientOrigin, radiiSizes, &_radialGradientBrush)
-	return _radialGradientBrush, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateRadialGradientBrush(gradStop1.Raw, gradStop2.Raw, centerPoint, gradientOrigin, radiiSizes, &_radialGradientBrush)
+	return WrapIXpsOMRadialGradientBrush(_radialGradientBrush), win32.HRESULTError(int32(_hr))
 }
 
 // CreateCoreProperties wraps the raw CreateCoreProperties call.
-func (self IXpsOMObjectFactory) CreateCoreProperties(partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMCoreProperties, error) {
+func (self IXpsOMObjectFactory) CreateCoreProperties(partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMCoreProperties, error) {
 	var _coreProperties *storagexps.IXpsOMCoreProperties
-	_hr := self.Raw.CreateCoreProperties(partUri, &_coreProperties)
-	return _coreProperties, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateCoreProperties(partUri.Raw, &_coreProperties)
+	return WrapIXpsOMCoreProperties(_coreProperties), win32.HRESULTError(int32(_hr))
 }
 
 // CreateDictionary wraps the raw CreateDictionary call.
-func (self IXpsOMObjectFactory) CreateDictionary() (*storagexps.IXpsOMDictionary, error) {
+func (self IXpsOMObjectFactory) CreateDictionary() (IXpsOMDictionary, error) {
 	var _dictionary *storagexps.IXpsOMDictionary
 	_hr := self.Raw.CreateDictionary(&_dictionary)
-	return _dictionary, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDictionary(_dictionary), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePartUriCollection wraps the raw CreatePartUriCollection call.
-func (self IXpsOMObjectFactory) CreatePartUriCollection() (*storagexps.IXpsOMPartUriCollection, error) {
+func (self IXpsOMObjectFactory) CreatePartUriCollection() (IXpsOMPartUriCollection, error) {
 	var _partUriCollection *storagexps.IXpsOMPartUriCollection
 	_hr := self.Raw.CreatePartUriCollection(&_partUriCollection)
-	return _partUriCollection, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPartUriCollection(_partUriCollection), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackageWriterOnFile wraps the raw CreatePackageWriterOnFile call.
-func (self IXpsOMObjectFactory) CreatePackageWriterOnFile(fileName string, securityAttributes *security.SECURITY_ATTRIBUTES, flagsAndAttributes uint32, optimizeMarkupSize bool, interleaving storagexps.XPS_INTERLEAVING, documentSequencePartName *storagepackagingopc.IOpcPartUri, coreProperties *storagexps.IXpsOMCoreProperties, packageThumbnail *storagexps.IXpsOMImageResource, documentSequencePrintTicket *storagexps.IXpsOMPrintTicketResource, discardControlPartName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMPackageWriter, error) {
+func (self IXpsOMObjectFactory) CreatePackageWriterOnFile(fileName string, securityAttributes *security.SECURITY_ATTRIBUTES, flagsAndAttributes uint32, optimizeMarkupSize bool, interleaving storagexps.XPS_INTERLEAVING, documentSequencePartName storagepackagingopcidiom.IOpcPartUri, coreProperties IXpsOMCoreProperties, packageThumbnail IXpsOMImageResource, documentSequencePrintTicket IXpsOMPrintTicketResource, discardControlPartName storagepackagingopcidiom.IOpcPartUri) (IXpsOMPackageWriter, error) {
 	_fileName := win32.UTF16Ptr(fileName)
 	_optimizeMarkupSize := foundation.BOOL(win32.Bool32(optimizeMarkupSize))
 	var _packageWriter *storagexps.IXpsOMPackageWriter
-	_hr := self.Raw.CreatePackageWriterOnFile(foundation.PWSTR(_fileName), securityAttributes, flagsAndAttributes, _optimizeMarkupSize, interleaving, documentSequencePartName, coreProperties, packageThumbnail, documentSequencePrintTicket, discardControlPartName, &_packageWriter)
-	return _packageWriter, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePackageWriterOnFile(foundation.PWSTR(_fileName), securityAttributes, flagsAndAttributes, _optimizeMarkupSize, interleaving, documentSequencePartName.Raw, coreProperties.Raw, packageThumbnail.Raw, documentSequencePrintTicket.Raw, discardControlPartName.Raw, &_packageWriter)
+	return WrapIXpsOMPackageWriter(_packageWriter), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackageWriterOnStream wraps the raw CreatePackageWriterOnStream call.
-func (self IXpsOMObjectFactory) CreatePackageWriterOnStream(outputStream *systemcom.ISequentialStream, optimizeMarkupSize bool, interleaving storagexps.XPS_INTERLEAVING, documentSequencePartName *storagepackagingopc.IOpcPartUri, coreProperties *storagexps.IXpsOMCoreProperties, packageThumbnail *storagexps.IXpsOMImageResource, documentSequencePrintTicket *storagexps.IXpsOMPrintTicketResource, discardControlPartName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMPackageWriter, error) {
+func (self IXpsOMObjectFactory) CreatePackageWriterOnStream(outputStream systemcomidiom.ISequentialStream, optimizeMarkupSize bool, interleaving storagexps.XPS_INTERLEAVING, documentSequencePartName storagepackagingopcidiom.IOpcPartUri, coreProperties IXpsOMCoreProperties, packageThumbnail IXpsOMImageResource, documentSequencePrintTicket IXpsOMPrintTicketResource, discardControlPartName storagepackagingopcidiom.IOpcPartUri) (IXpsOMPackageWriter, error) {
 	_optimizeMarkupSize := foundation.BOOL(win32.Bool32(optimizeMarkupSize))
 	var _packageWriter *storagexps.IXpsOMPackageWriter
-	_hr := self.Raw.CreatePackageWriterOnStream(outputStream, _optimizeMarkupSize, interleaving, documentSequencePartName, coreProperties, packageThumbnail, documentSequencePrintTicket, discardControlPartName, &_packageWriter)
-	return _packageWriter, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePackageWriterOnStream(outputStream.Raw, _optimizeMarkupSize, interleaving, documentSequencePartName.Raw, coreProperties.Raw, packageThumbnail.Raw, documentSequencePrintTicket.Raw, discardControlPartName.Raw, &_packageWriter)
+	return WrapIXpsOMPackageWriter(_packageWriter), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePartUri wraps the raw CreatePartUri call.
-func (self IXpsOMObjectFactory) CreatePartUri(uri string) (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsOMObjectFactory) CreatePartUri(uri string) (storagepackagingopcidiom.IOpcPartUri, error) {
 	_uri := win32.UTF16Ptr(uri)
 	var _partUri *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.CreatePartUri(foundation.PWSTR(_uri), &_partUri)
-	return _partUri, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_partUri), win32.HRESULTError(int32(_hr))
 }
 
 // CreateReadOnlyStreamOnFile wraps the raw CreateReadOnlyStreamOnFile call.
-func (self IXpsOMObjectFactory) CreateReadOnlyStreamOnFile(filename string) (*systemcom.IStream, error) {
+func (self IXpsOMObjectFactory) CreateReadOnlyStreamOnFile(filename string) (systemcomidiom.IStream, error) {
 	_filename := win32.UTF16Ptr(filename)
 	var _stream *systemcom.IStream
 	_hr := self.Raw.CreateReadOnlyStreamOnFile(foundation.PWSTR(_filename), &_stream)
-	return _stream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_stream), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMObjectFactory1 is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMObjectFactory1 with error-returning methods.
@@ -2059,84 +2060,84 @@ func (self IXpsOMObjectFactory1) GetDocumentTypeFromFile(filename string) (stora
 }
 
 // GetDocumentTypeFromStream wraps the raw GetDocumentTypeFromStream call.
-func (self IXpsOMObjectFactory1) GetDocumentTypeFromStream(xpsDocumentStream *systemcom.IStream) (storagexps.XPS_DOCUMENT_TYPE, error) {
+func (self IXpsOMObjectFactory1) GetDocumentTypeFromStream(xpsDocumentStream systemcomidiom.IStream) (storagexps.XPS_DOCUMENT_TYPE, error) {
 	var _documentType storagexps.XPS_DOCUMENT_TYPE
-	_hr := self.Raw.GetDocumentTypeFromStream(xpsDocumentStream, &_documentType)
+	_hr := self.Raw.GetDocumentTypeFromStream(xpsDocumentStream.Raw, &_documentType)
 	return _documentType, win32.HRESULTError(int32(_hr))
 }
 
 // ConvertHDPhotoToJpegXR wraps the raw ConvertHDPhotoToJpegXR call.
-func (self IXpsOMObjectFactory1) ConvertHDPhotoToJpegXR(imageResource *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertHDPhotoToJpegXR(imageResource)))
+func (self IXpsOMObjectFactory1) ConvertHDPhotoToJpegXR(imageResource IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertHDPhotoToJpegXR(imageResource.Raw)))
 }
 
 // ConvertJpegXRToHDPhoto wraps the raw ConvertJpegXRToHDPhoto call.
-func (self IXpsOMObjectFactory1) ConvertJpegXRToHDPhoto(imageResource *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertJpegXRToHDPhoto(imageResource)))
+func (self IXpsOMObjectFactory1) ConvertJpegXRToHDPhoto(imageResource IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertJpegXRToHDPhoto(imageResource.Raw)))
 }
 
 // CreatePackageWriterOnFile1 wraps the raw CreatePackageWriterOnFile1 call.
-func (self IXpsOMObjectFactory1) CreatePackageWriterOnFile1(fileName string, securityAttributes *security.SECURITY_ATTRIBUTES, flagsAndAttributes uint32, optimizeMarkupSize bool, interleaving storagexps.XPS_INTERLEAVING, documentSequencePartName *storagepackagingopc.IOpcPartUri, coreProperties *storagexps.IXpsOMCoreProperties, packageThumbnail *storagexps.IXpsOMImageResource, documentSequencePrintTicket *storagexps.IXpsOMPrintTicketResource, discardControlPartName *storagepackagingopc.IOpcPartUri, documentType storagexps.XPS_DOCUMENT_TYPE) (*storagexps.IXpsOMPackageWriter, error) {
+func (self IXpsOMObjectFactory1) CreatePackageWriterOnFile1(fileName string, securityAttributes *security.SECURITY_ATTRIBUTES, flagsAndAttributes uint32, optimizeMarkupSize bool, interleaving storagexps.XPS_INTERLEAVING, documentSequencePartName storagepackagingopcidiom.IOpcPartUri, coreProperties IXpsOMCoreProperties, packageThumbnail IXpsOMImageResource, documentSequencePrintTicket IXpsOMPrintTicketResource, discardControlPartName storagepackagingopcidiom.IOpcPartUri, documentType storagexps.XPS_DOCUMENT_TYPE) (IXpsOMPackageWriter, error) {
 	_fileName := win32.UTF16Ptr(fileName)
 	_optimizeMarkupSize := foundation.BOOL(win32.Bool32(optimizeMarkupSize))
 	var _packageWriter *storagexps.IXpsOMPackageWriter
-	_hr := self.Raw.CreatePackageWriterOnFile1(foundation.PWSTR(_fileName), securityAttributes, flagsAndAttributes, _optimizeMarkupSize, interleaving, documentSequencePartName, coreProperties, packageThumbnail, documentSequencePrintTicket, discardControlPartName, documentType, &_packageWriter)
-	return _packageWriter, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePackageWriterOnFile1(foundation.PWSTR(_fileName), securityAttributes, flagsAndAttributes, _optimizeMarkupSize, interleaving, documentSequencePartName.Raw, coreProperties.Raw, packageThumbnail.Raw, documentSequencePrintTicket.Raw, discardControlPartName.Raw, documentType, &_packageWriter)
+	return WrapIXpsOMPackageWriter(_packageWriter), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackageWriterOnStream1 wraps the raw CreatePackageWriterOnStream1 call.
-func (self IXpsOMObjectFactory1) CreatePackageWriterOnStream1(outputStream *systemcom.ISequentialStream, optimizeMarkupSize bool, interleaving storagexps.XPS_INTERLEAVING, documentSequencePartName *storagepackagingopc.IOpcPartUri, coreProperties *storagexps.IXpsOMCoreProperties, packageThumbnail *storagexps.IXpsOMImageResource, documentSequencePrintTicket *storagexps.IXpsOMPrintTicketResource, discardControlPartName *storagepackagingopc.IOpcPartUri, documentType storagexps.XPS_DOCUMENT_TYPE) (*storagexps.IXpsOMPackageWriter, error) {
+func (self IXpsOMObjectFactory1) CreatePackageWriterOnStream1(outputStream systemcomidiom.ISequentialStream, optimizeMarkupSize bool, interleaving storagexps.XPS_INTERLEAVING, documentSequencePartName storagepackagingopcidiom.IOpcPartUri, coreProperties IXpsOMCoreProperties, packageThumbnail IXpsOMImageResource, documentSequencePrintTicket IXpsOMPrintTicketResource, discardControlPartName storagepackagingopcidiom.IOpcPartUri, documentType storagexps.XPS_DOCUMENT_TYPE) (IXpsOMPackageWriter, error) {
 	_optimizeMarkupSize := foundation.BOOL(win32.Bool32(optimizeMarkupSize))
 	var _packageWriter *storagexps.IXpsOMPackageWriter
-	_hr := self.Raw.CreatePackageWriterOnStream1(outputStream, _optimizeMarkupSize, interleaving, documentSequencePartName, coreProperties, packageThumbnail, documentSequencePrintTicket, discardControlPartName, documentType, &_packageWriter)
-	return _packageWriter, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePackageWriterOnStream1(outputStream.Raw, _optimizeMarkupSize, interleaving, documentSequencePartName.Raw, coreProperties.Raw, packageThumbnail.Raw, documentSequencePrintTicket.Raw, discardControlPartName.Raw, documentType, &_packageWriter)
+	return WrapIXpsOMPackageWriter(_packageWriter), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackage1 wraps the raw CreatePackage1 call.
-func (self IXpsOMObjectFactory1) CreatePackage1() (*storagexps.IXpsOMPackage1, error) {
+func (self IXpsOMObjectFactory1) CreatePackage1() (IXpsOMPackage1, error) {
 	var _package_ *storagexps.IXpsOMPackage1
 	_hr := self.Raw.CreatePackage1(&_package_)
-	return _package_, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPackage1(_package_), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackageFromStream1 wraps the raw CreatePackageFromStream1 call.
-func (self IXpsOMObjectFactory1) CreatePackageFromStream1(stream *systemcom.IStream, reuseObjects bool) (*storagexps.IXpsOMPackage1, error) {
+func (self IXpsOMObjectFactory1) CreatePackageFromStream1(stream systemcomidiom.IStream, reuseObjects bool) (IXpsOMPackage1, error) {
 	_reuseObjects := foundation.BOOL(win32.Bool32(reuseObjects))
 	var _package_ *storagexps.IXpsOMPackage1
-	_hr := self.Raw.CreatePackageFromStream1(stream, _reuseObjects, &_package_)
-	return _package_, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePackageFromStream1(stream.Raw, _reuseObjects, &_package_)
+	return WrapIXpsOMPackage1(_package_), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackageFromFile1 wraps the raw CreatePackageFromFile1 call.
-func (self IXpsOMObjectFactory1) CreatePackageFromFile1(filename string, reuseObjects bool) (*storagexps.IXpsOMPackage1, error) {
+func (self IXpsOMObjectFactory1) CreatePackageFromFile1(filename string, reuseObjects bool) (IXpsOMPackage1, error) {
 	_filename := win32.UTF16Ptr(filename)
 	_reuseObjects := foundation.BOOL(win32.Bool32(reuseObjects))
 	var _package_ *storagexps.IXpsOMPackage1
 	_hr := self.Raw.CreatePackageFromFile1(foundation.PWSTR(_filename), _reuseObjects, &_package_)
-	return _package_, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPackage1(_package_), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePage1 wraps the raw CreatePage1 call.
-func (self IXpsOMObjectFactory1) CreatePage1(pageDimensions *storagexps.XPS_SIZE, language string, partUri *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMPage1, error) {
+func (self IXpsOMObjectFactory1) CreatePage1(pageDimensions *storagexps.XPS_SIZE, language string, partUri storagepackagingopcidiom.IOpcPartUri) (IXpsOMPage1, error) {
 	_language := win32.UTF16Ptr(language)
 	var _page *storagexps.IXpsOMPage1
-	_hr := self.Raw.CreatePage1(pageDimensions, foundation.PWSTR(_language), partUri, &_page)
-	return _page, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePage1(pageDimensions, foundation.PWSTR(_language), partUri.Raw, &_page)
+	return WrapIXpsOMPage1(_page), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePageFromStream1 wraps the raw CreatePageFromStream1 call.
-func (self IXpsOMObjectFactory1) CreatePageFromStream1(pageMarkupStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri, resources *storagexps.IXpsOMPartResources, reuseObjects bool) (*storagexps.IXpsOMPage1, error) {
+func (self IXpsOMObjectFactory1) CreatePageFromStream1(pageMarkupStream systemcomidiom.IStream, partUri storagepackagingopcidiom.IOpcPartUri, resources IXpsOMPartResources, reuseObjects bool) (IXpsOMPage1, error) {
 	_reuseObjects := foundation.BOOL(win32.Bool32(reuseObjects))
 	var _page *storagexps.IXpsOMPage1
-	_hr := self.Raw.CreatePageFromStream1(pageMarkupStream, partUri, resources, _reuseObjects, &_page)
-	return _page, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreatePageFromStream1(pageMarkupStream.Raw, partUri.Raw, resources.Raw, _reuseObjects, &_page)
+	return WrapIXpsOMPage1(_page), win32.HRESULTError(int32(_hr))
 }
 
 // CreateRemoteDictionaryResourceFromStream1 wraps the raw CreateRemoteDictionaryResourceFromStream1 call.
-func (self IXpsOMObjectFactory1) CreateRemoteDictionaryResourceFromStream1(dictionaryMarkupStream *systemcom.IStream, partUri *storagepackagingopc.IOpcPartUri, resources *storagexps.IXpsOMPartResources) (*storagexps.IXpsOMRemoteDictionaryResource, error) {
+func (self IXpsOMObjectFactory1) CreateRemoteDictionaryResourceFromStream1(dictionaryMarkupStream systemcomidiom.IStream, partUri storagepackagingopcidiom.IOpcPartUri, resources IXpsOMPartResources) (IXpsOMRemoteDictionaryResource, error) {
 	var _dictionaryResource *storagexps.IXpsOMRemoteDictionaryResource
-	_hr := self.Raw.CreateRemoteDictionaryResourceFromStream1(dictionaryMarkupStream, partUri, resources, &_dictionaryResource)
-	return _dictionaryResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.CreateRemoteDictionaryResourceFromStream1(dictionaryMarkupStream.Raw, partUri.Raw, resources.Raw, &_dictionaryResource)
+	return WrapIXpsOMRemoteDictionaryResource(_dictionaryResource), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMPackage is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPackage with error-returning methods.
@@ -2151,51 +2152,51 @@ func WrapIXpsOMPackage(raw *storagexps.IXpsOMPackage) IXpsOMPackage {
 }
 
 // GetDocumentSequence wraps the raw GetDocumentSequence call.
-func (self IXpsOMPackage) GetDocumentSequence() (*storagexps.IXpsOMDocumentSequence, error) {
+func (self IXpsOMPackage) GetDocumentSequence() (IXpsOMDocumentSequence, error) {
 	var _documentSequence *storagexps.IXpsOMDocumentSequence
 	_hr := self.Raw.GetDocumentSequence(&_documentSequence)
-	return _documentSequence, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocumentSequence(_documentSequence), win32.HRESULTError(int32(_hr))
 }
 
 // SetDocumentSequence wraps the raw SetDocumentSequence call.
-func (self IXpsOMPackage) SetDocumentSequence(documentSequence *storagexps.IXpsOMDocumentSequence) error {
-	return win32.HRESULTError(int32(self.Raw.SetDocumentSequence(documentSequence)))
+func (self IXpsOMPackage) SetDocumentSequence(documentSequence IXpsOMDocumentSequence) error {
+	return win32.HRESULTError(int32(self.Raw.SetDocumentSequence(documentSequence.Raw)))
 }
 
 // GetCoreProperties wraps the raw GetCoreProperties call.
-func (self IXpsOMPackage) GetCoreProperties() (*storagexps.IXpsOMCoreProperties, error) {
+func (self IXpsOMPackage) GetCoreProperties() (IXpsOMCoreProperties, error) {
 	var _coreProperties *storagexps.IXpsOMCoreProperties
 	_hr := self.Raw.GetCoreProperties(&_coreProperties)
-	return _coreProperties, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMCoreProperties(_coreProperties), win32.HRESULTError(int32(_hr))
 }
 
 // SetCoreProperties wraps the raw SetCoreProperties call.
-func (self IXpsOMPackage) SetCoreProperties(coreProperties *storagexps.IXpsOMCoreProperties) error {
-	return win32.HRESULTError(int32(self.Raw.SetCoreProperties(coreProperties)))
+func (self IXpsOMPackage) SetCoreProperties(coreProperties IXpsOMCoreProperties) error {
+	return win32.HRESULTError(int32(self.Raw.SetCoreProperties(coreProperties.Raw)))
 }
 
 // GetDiscardControlPartName wraps the raw GetDiscardControlPartName call.
-func (self IXpsOMPackage) GetDiscardControlPartName() (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsOMPackage) GetDiscardControlPartName() (storagepackagingopcidiom.IOpcPartUri, error) {
 	var _discardControlPartUri *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.GetDiscardControlPartName(&_discardControlPartUri)
-	return _discardControlPartUri, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_discardControlPartUri), win32.HRESULTError(int32(_hr))
 }
 
 // SetDiscardControlPartName wraps the raw SetDiscardControlPartName call.
-func (self IXpsOMPackage) SetDiscardControlPartName(discardControlPartUri *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetDiscardControlPartName(discardControlPartUri)))
+func (self IXpsOMPackage) SetDiscardControlPartName(discardControlPartUri storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetDiscardControlPartName(discardControlPartUri.Raw)))
 }
 
 // GetThumbnailResource wraps the raw GetThumbnailResource call.
-func (self IXpsOMPackage) GetThumbnailResource() (*storagexps.IXpsOMImageResource, error) {
+func (self IXpsOMPackage) GetThumbnailResource() (IXpsOMImageResource, error) {
 	var _imageResource *storagexps.IXpsOMImageResource
 	_hr := self.Raw.GetThumbnailResource(&_imageResource)
-	return _imageResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMImageResource(_imageResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetThumbnailResource wraps the raw SetThumbnailResource call.
-func (self IXpsOMPackage) SetThumbnailResource(imageResource *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetThumbnailResource(imageResource)))
+func (self IXpsOMPackage) SetThumbnailResource(imageResource IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetThumbnailResource(imageResource.Raw)))
 }
 
 // WriteToFile wraps the raw WriteToFile call.
@@ -2206,9 +2207,9 @@ func (self IXpsOMPackage) WriteToFile(fileName string, securityAttributes *secur
 }
 
 // WriteToStream wraps the raw WriteToStream call.
-func (self IXpsOMPackage) WriteToStream(stream *systemcom.ISequentialStream, optimizeMarkupSize bool) error {
+func (self IXpsOMPackage) WriteToStream(stream systemcomidiom.ISequentialStream, optimizeMarkupSize bool) error {
 	_optimizeMarkupSize := foundation.BOOL(win32.Bool32(optimizeMarkupSize))
-	return win32.HRESULTError(int32(self.Raw.WriteToStream(stream, _optimizeMarkupSize)))
+	return win32.HRESULTError(int32(self.Raw.WriteToStream(stream.Raw, _optimizeMarkupSize)))
 }
 
 // IXpsOMPackage1 is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPackage1 with error-returning methods.
@@ -2237,9 +2238,9 @@ func (self IXpsOMPackage1) WriteToFile1(fileName string, securityAttributes *sec
 }
 
 // WriteToStream1 wraps the raw WriteToStream1 call.
-func (self IXpsOMPackage1) WriteToStream1(outputStream *systemcom.ISequentialStream, optimizeMarkupSize bool, documentType storagexps.XPS_DOCUMENT_TYPE) error {
+func (self IXpsOMPackage1) WriteToStream1(outputStream systemcomidiom.ISequentialStream, optimizeMarkupSize bool, documentType storagexps.XPS_DOCUMENT_TYPE) error {
 	_optimizeMarkupSize := foundation.BOOL(win32.Bool32(optimizeMarkupSize))
-	return win32.HRESULTError(int32(self.Raw.WriteToStream1(outputStream, _optimizeMarkupSize, documentType)))
+	return win32.HRESULTError(int32(self.Raw.WriteToStream1(outputStream.Raw, _optimizeMarkupSize, documentType)))
 }
 
 // IXpsOMPackageTarget is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPackageTarget with error-returning methods.
@@ -2254,8 +2255,8 @@ func WrapIXpsOMPackageTarget(raw *storagexps.IXpsOMPackageTarget) IXpsOMPackageT
 }
 
 // CreateXpsOMPackageWriter wraps the raw CreateXpsOMPackageWriter call.
-func (self IXpsOMPackageTarget) CreateXpsOMPackageWriter(documentSequencePartName *storagepackagingopc.IOpcPartUri, documentSequencePrintTicket *storagexps.IXpsOMPrintTicketResource, discardControlPartName *storagepackagingopc.IOpcPartUri, packageWriter **storagexps.IXpsOMPackageWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateXpsOMPackageWriter(documentSequencePartName, documentSequencePrintTicket, discardControlPartName, packageWriter)))
+func (self IXpsOMPackageTarget) CreateXpsOMPackageWriter(documentSequencePartName storagepackagingopcidiom.IOpcPartUri, documentSequencePrintTicket IXpsOMPrintTicketResource, discardControlPartName storagepackagingopcidiom.IOpcPartUri, packageWriter **storagexps.IXpsOMPackageWriter) error {
+	return win32.HRESULTError(int32(self.Raw.CreateXpsOMPackageWriter(documentSequencePartName.Raw, documentSequencePrintTicket.Raw, discardControlPartName.Raw, packageWriter)))
 }
 
 // IXpsOMPackageWriter is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPackageWriter with error-returning methods.
@@ -2270,18 +2271,18 @@ func WrapIXpsOMPackageWriter(raw *storagexps.IXpsOMPackageWriter) IXpsOMPackageW
 }
 
 // StartNewDocument wraps the raw StartNewDocument call.
-func (self IXpsOMPackageWriter) StartNewDocument(documentPartName *storagepackagingopc.IOpcPartUri, documentPrintTicket *storagexps.IXpsOMPrintTicketResource, documentStructure *storagexps.IXpsOMDocumentStructureResource, signatureBlockResources *storagexps.IXpsOMSignatureBlockResourceCollection, restrictedFonts *storagexps.IXpsOMPartUriCollection) error {
-	return win32.HRESULTError(int32(self.Raw.StartNewDocument(documentPartName, documentPrintTicket, documentStructure, signatureBlockResources, restrictedFonts)))
+func (self IXpsOMPackageWriter) StartNewDocument(documentPartName storagepackagingopcidiom.IOpcPartUri, documentPrintTicket IXpsOMPrintTicketResource, documentStructure IXpsOMDocumentStructureResource, signatureBlockResources IXpsOMSignatureBlockResourceCollection, restrictedFonts IXpsOMPartUriCollection) error {
+	return win32.HRESULTError(int32(self.Raw.StartNewDocument(documentPartName.Raw, documentPrintTicket.Raw, documentStructure.Raw, signatureBlockResources.Raw, restrictedFonts.Raw)))
 }
 
 // AddPage wraps the raw AddPage call.
-func (self IXpsOMPackageWriter) AddPage(page *storagexps.IXpsOMPage, advisoryPageDimensions *storagexps.XPS_SIZE, discardableResourceParts *storagexps.IXpsOMPartUriCollection, storyFragments *storagexps.IXpsOMStoryFragmentsResource, pagePrintTicket *storagexps.IXpsOMPrintTicketResource, pageThumbnail *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.AddPage(page, advisoryPageDimensions, discardableResourceParts, storyFragments, pagePrintTicket, pageThumbnail)))
+func (self IXpsOMPackageWriter) AddPage(page IXpsOMPage, advisoryPageDimensions *storagexps.XPS_SIZE, discardableResourceParts IXpsOMPartUriCollection, storyFragments IXpsOMStoryFragmentsResource, pagePrintTicket IXpsOMPrintTicketResource, pageThumbnail IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.AddPage(page.Raw, advisoryPageDimensions, discardableResourceParts.Raw, storyFragments.Raw, pagePrintTicket.Raw, pageThumbnail.Raw)))
 }
 
 // AddResource wraps the raw AddResource call.
-func (self IXpsOMPackageWriter) AddResource(resource *storagexps.IXpsOMResource) error {
-	return win32.HRESULTError(int32(self.Raw.AddResource(resource)))
+func (self IXpsOMPackageWriter) AddResource(resource IXpsOMResource) error {
+	return win32.HRESULTError(int32(self.Raw.AddResource(resource.Raw)))
 }
 
 // Close wraps the raw Close call.
@@ -2308,13 +2309,13 @@ func WrapIXpsOMPackageWriter3D(raw *storagexps.IXpsOMPackageWriter3D) IXpsOMPack
 }
 
 // AddModelTexture wraps the raw AddModelTexture call.
-func (self IXpsOMPackageWriter3D) AddModelTexture(texturePartName *storagepackagingopc.IOpcPartUri, textureData *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.AddModelTexture(texturePartName, textureData)))
+func (self IXpsOMPackageWriter3D) AddModelTexture(texturePartName storagepackagingopcidiom.IOpcPartUri, textureData systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.AddModelTexture(texturePartName.Raw, textureData.Raw)))
 }
 
 // SetModelPrintTicket wraps the raw SetModelPrintTicket call.
-func (self IXpsOMPackageWriter3D) SetModelPrintTicket(printTicketPartName *storagepackagingopc.IOpcPartUri, printTicketData *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SetModelPrintTicket(printTicketPartName, printTicketData)))
+func (self IXpsOMPackageWriter3D) SetModelPrintTicket(printTicketPartName storagepackagingopcidiom.IOpcPartUri, printTicketData systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SetModelPrintTicket(printTicketPartName.Raw, printTicketData.Raw)))
 }
 
 // IXpsOMPage is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPage with error-returning methods.
@@ -2329,17 +2330,17 @@ func WrapIXpsOMPage(raw *storagexps.IXpsOMPage) IXpsOMPage {
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMPage) GetOwner() (*storagexps.IXpsOMPageReference, error) {
+func (self IXpsOMPage) GetOwner() (IXpsOMPageReference, error) {
 	var _pageReference *storagexps.IXpsOMPageReference
 	_hr := self.Raw.GetOwner(&_pageReference)
-	return _pageReference, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPageReference(_pageReference), win32.HRESULTError(int32(_hr))
 }
 
 // GetVisuals wraps the raw GetVisuals call.
-func (self IXpsOMPage) GetVisuals() (*storagexps.IXpsOMVisualCollection, error) {
+func (self IXpsOMPage) GetVisuals() (IXpsOMVisualCollection, error) {
 	var _visuals *storagexps.IXpsOMVisualCollection
 	_hr := self.Raw.GetVisuals(&_visuals)
-	return _visuals, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMVisualCollection(_visuals), win32.HRESULTError(int32(_hr))
 }
 
 // GetPageDimensions wraps the raw GetPageDimensions call.
@@ -2418,40 +2419,40 @@ func (self IXpsOMPage) SetIsHyperlinkTarget(isHyperlinkTarget bool) error {
 }
 
 // GetDictionary wraps the raw GetDictionary call.
-func (self IXpsOMPage) GetDictionary() (*storagexps.IXpsOMDictionary, error) {
+func (self IXpsOMPage) GetDictionary() (IXpsOMDictionary, error) {
 	var _resourceDictionary *storagexps.IXpsOMDictionary
 	_hr := self.Raw.GetDictionary(&_resourceDictionary)
-	return _resourceDictionary, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDictionary(_resourceDictionary), win32.HRESULTError(int32(_hr))
 }
 
 // GetDictionaryLocal wraps the raw GetDictionaryLocal call.
-func (self IXpsOMPage) GetDictionaryLocal() (*storagexps.IXpsOMDictionary, error) {
+func (self IXpsOMPage) GetDictionaryLocal() (IXpsOMDictionary, error) {
 	var _resourceDictionary *storagexps.IXpsOMDictionary
 	_hr := self.Raw.GetDictionaryLocal(&_resourceDictionary)
-	return _resourceDictionary, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDictionary(_resourceDictionary), win32.HRESULTError(int32(_hr))
 }
 
 // SetDictionaryLocal wraps the raw SetDictionaryLocal call.
-func (self IXpsOMPage) SetDictionaryLocal(resourceDictionary *storagexps.IXpsOMDictionary) error {
-	return win32.HRESULTError(int32(self.Raw.SetDictionaryLocal(resourceDictionary)))
+func (self IXpsOMPage) SetDictionaryLocal(resourceDictionary IXpsOMDictionary) error {
+	return win32.HRESULTError(int32(self.Raw.SetDictionaryLocal(resourceDictionary.Raw)))
 }
 
 // GetDictionaryResource wraps the raw GetDictionaryResource call.
-func (self IXpsOMPage) GetDictionaryResource() (*storagexps.IXpsOMRemoteDictionaryResource, error) {
+func (self IXpsOMPage) GetDictionaryResource() (IXpsOMRemoteDictionaryResource, error) {
 	var _remoteDictionaryResource *storagexps.IXpsOMRemoteDictionaryResource
 	_hr := self.Raw.GetDictionaryResource(&_remoteDictionaryResource)
-	return _remoteDictionaryResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMRemoteDictionaryResource(_remoteDictionaryResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetDictionaryResource wraps the raw SetDictionaryResource call.
-func (self IXpsOMPage) SetDictionaryResource(remoteDictionaryResource *storagexps.IXpsOMRemoteDictionaryResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetDictionaryResource(remoteDictionaryResource)))
+func (self IXpsOMPage) SetDictionaryResource(remoteDictionaryResource IXpsOMRemoteDictionaryResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetDictionaryResource(remoteDictionaryResource.Raw)))
 }
 
 // Write wraps the raw Write call.
-func (self IXpsOMPage) Write(stream *systemcom.ISequentialStream, optimizeMarkupSize bool) error {
+func (self IXpsOMPage) Write(stream systemcomidiom.ISequentialStream, optimizeMarkupSize bool) error {
 	_optimizeMarkupSize := foundation.BOOL(win32.Bool32(optimizeMarkupSize))
-	return win32.HRESULTError(int32(self.Raw.Write(stream, _optimizeMarkupSize)))
+	return win32.HRESULTError(int32(self.Raw.Write(stream.Raw, _optimizeMarkupSize)))
 }
 
 // GenerateUnusedLookupKey wraps the raw GenerateUnusedLookupKey call.
@@ -2462,10 +2463,10 @@ func (self IXpsOMPage) GenerateUnusedLookupKey(type_ storagexps.XPS_OBJECT_TYPE)
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMPage) Clone() (*storagexps.IXpsOMPage, error) {
+func (self IXpsOMPage) Clone() (IXpsOMPage, error) {
 	var _page *storagexps.IXpsOMPage
 	_hr := self.Raw.Clone(&_page)
-	return _page, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPage(_page), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMPage1 is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPage1 with error-returning methods.
@@ -2487,9 +2488,9 @@ func (self IXpsOMPage1) GetDocumentType() (storagexps.XPS_DOCUMENT_TYPE, error) 
 }
 
 // Write1 wraps the raw Write1 call.
-func (self IXpsOMPage1) Write1(stream *systemcom.ISequentialStream, optimizeMarkupSize bool, documentType storagexps.XPS_DOCUMENT_TYPE) error {
+func (self IXpsOMPage1) Write1(stream systemcomidiom.ISequentialStream, optimizeMarkupSize bool, documentType storagexps.XPS_DOCUMENT_TYPE) error {
 	_optimizeMarkupSize := foundation.BOOL(win32.Bool32(optimizeMarkupSize))
-	return win32.HRESULTError(int32(self.Raw.Write1(stream, _optimizeMarkupSize, documentType)))
+	return win32.HRESULTError(int32(self.Raw.Write1(stream.Raw, _optimizeMarkupSize, documentType)))
 }
 
 // IXpsOMPageReference is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPageReference with error-returning methods.
@@ -2504,22 +2505,22 @@ func WrapIXpsOMPageReference(raw *storagexps.IXpsOMPageReference) IXpsOMPageRefe
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMPageReference) GetOwner() (*storagexps.IXpsOMDocument, error) {
+func (self IXpsOMPageReference) GetOwner() (IXpsOMDocument, error) {
 	var _document *storagexps.IXpsOMDocument
 	_hr := self.Raw.GetOwner(&_document)
-	return _document, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocument(_document), win32.HRESULTError(int32(_hr))
 }
 
 // GetPage wraps the raw GetPage call.
-func (self IXpsOMPageReference) GetPage() (*storagexps.IXpsOMPage, error) {
+func (self IXpsOMPageReference) GetPage() (IXpsOMPage, error) {
 	var _page *storagexps.IXpsOMPage
 	_hr := self.Raw.GetPage(&_page)
-	return _page, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPage(_page), win32.HRESULTError(int32(_hr))
 }
 
 // SetPage wraps the raw SetPage call.
-func (self IXpsOMPageReference) SetPage(page *storagexps.IXpsOMPage) error {
-	return win32.HRESULTError(int32(self.Raw.SetPage(page)))
+func (self IXpsOMPageReference) SetPage(page IXpsOMPage) error {
+	return win32.HRESULTError(int32(self.Raw.SetPage(page.Raw)))
 }
 
 // DiscardPage wraps the raw DiscardPage call.
@@ -2547,53 +2548,53 @@ func (self IXpsOMPageReference) SetAdvisoryPageDimensions(pageDimensions *storag
 }
 
 // GetStoryFragmentsResource wraps the raw GetStoryFragmentsResource call.
-func (self IXpsOMPageReference) GetStoryFragmentsResource() (*storagexps.IXpsOMStoryFragmentsResource, error) {
+func (self IXpsOMPageReference) GetStoryFragmentsResource() (IXpsOMStoryFragmentsResource, error) {
 	var _storyFragmentsResource *storagexps.IXpsOMStoryFragmentsResource
 	_hr := self.Raw.GetStoryFragmentsResource(&_storyFragmentsResource)
-	return _storyFragmentsResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMStoryFragmentsResource(_storyFragmentsResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetStoryFragmentsResource wraps the raw SetStoryFragmentsResource call.
-func (self IXpsOMPageReference) SetStoryFragmentsResource(storyFragmentsResource *storagexps.IXpsOMStoryFragmentsResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetStoryFragmentsResource(storyFragmentsResource)))
+func (self IXpsOMPageReference) SetStoryFragmentsResource(storyFragmentsResource IXpsOMStoryFragmentsResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetStoryFragmentsResource(storyFragmentsResource.Raw)))
 }
 
 // GetPrintTicketResource wraps the raw GetPrintTicketResource call.
-func (self IXpsOMPageReference) GetPrintTicketResource() (*storagexps.IXpsOMPrintTicketResource, error) {
+func (self IXpsOMPageReference) GetPrintTicketResource() (IXpsOMPrintTicketResource, error) {
 	var _printTicketResource *storagexps.IXpsOMPrintTicketResource
 	_hr := self.Raw.GetPrintTicketResource(&_printTicketResource)
-	return _printTicketResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPrintTicketResource(_printTicketResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetPrintTicketResource wraps the raw SetPrintTicketResource call.
-func (self IXpsOMPageReference) SetPrintTicketResource(printTicketResource *storagexps.IXpsOMPrintTicketResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrintTicketResource(printTicketResource)))
+func (self IXpsOMPageReference) SetPrintTicketResource(printTicketResource IXpsOMPrintTicketResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrintTicketResource(printTicketResource.Raw)))
 }
 
 // GetThumbnailResource wraps the raw GetThumbnailResource call.
-func (self IXpsOMPageReference) GetThumbnailResource() (*storagexps.IXpsOMImageResource, error) {
+func (self IXpsOMPageReference) GetThumbnailResource() (IXpsOMImageResource, error) {
 	var _imageResource *storagexps.IXpsOMImageResource
 	_hr := self.Raw.GetThumbnailResource(&_imageResource)
-	return _imageResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMImageResource(_imageResource), win32.HRESULTError(int32(_hr))
 }
 
 // SetThumbnailResource wraps the raw SetThumbnailResource call.
-func (self IXpsOMPageReference) SetThumbnailResource(imageResource *storagexps.IXpsOMImageResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetThumbnailResource(imageResource)))
+func (self IXpsOMPageReference) SetThumbnailResource(imageResource IXpsOMImageResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetThumbnailResource(imageResource.Raw)))
 }
 
 // CollectLinkTargets wraps the raw CollectLinkTargets call.
-func (self IXpsOMPageReference) CollectLinkTargets() (*storagexps.IXpsOMNameCollection, error) {
+func (self IXpsOMPageReference) CollectLinkTargets() (IXpsOMNameCollection, error) {
 	var _linkTargets *storagexps.IXpsOMNameCollection
 	_hr := self.Raw.CollectLinkTargets(&_linkTargets)
-	return _linkTargets, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMNameCollection(_linkTargets), win32.HRESULTError(int32(_hr))
 }
 
 // CollectPartResources wraps the raw CollectPartResources call.
-func (self IXpsOMPageReference) CollectPartResources() (*storagexps.IXpsOMPartResources, error) {
+func (self IXpsOMPageReference) CollectPartResources() (IXpsOMPartResources, error) {
 	var _partResources *storagexps.IXpsOMPartResources
 	_hr := self.Raw.CollectPartResources(&_partResources)
-	return _partResources, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPartResources(_partResources), win32.HRESULTError(int32(_hr))
 }
 
 // HasRestrictedFonts wraps the raw HasRestrictedFonts call.
@@ -2604,10 +2605,10 @@ func (self IXpsOMPageReference) HasRestrictedFonts() (foundation.BOOL, error) {
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMPageReference) Clone() (*storagexps.IXpsOMPageReference, error) {
+func (self IXpsOMPageReference) Clone() (IXpsOMPageReference, error) {
 	var _pageReference *storagexps.IXpsOMPageReference
 	_hr := self.Raw.Clone(&_pageReference)
-	return _pageReference, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPageReference(_pageReference), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMPageReferenceCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPageReferenceCollection with error-returning methods.
@@ -2629,15 +2630,15 @@ func (self IXpsOMPageReferenceCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMPageReferenceCollection) GetAt(index uint32) (*storagexps.IXpsOMPageReference, error) {
+func (self IXpsOMPageReferenceCollection) GetAt(index uint32) (IXpsOMPageReference, error) {
 	var _pageReference *storagexps.IXpsOMPageReference
 	_hr := self.Raw.GetAt(index, &_pageReference)
-	return _pageReference, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPageReference(_pageReference), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMPageReferenceCollection) InsertAt(index uint32, pageReference *storagexps.IXpsOMPageReference) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, pageReference)))
+func (self IXpsOMPageReferenceCollection) InsertAt(index uint32, pageReference IXpsOMPageReference) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, pageReference.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -2646,13 +2647,13 @@ func (self IXpsOMPageReferenceCollection) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMPageReferenceCollection) SetAt(index uint32, pageReference *storagexps.IXpsOMPageReference) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, pageReference)))
+func (self IXpsOMPageReferenceCollection) SetAt(index uint32, pageReference IXpsOMPageReference) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, pageReference.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMPageReferenceCollection) Append(pageReference *storagexps.IXpsOMPageReference) error {
-	return win32.HRESULTError(int32(self.Raw.Append(pageReference)))
+func (self IXpsOMPageReferenceCollection) Append(pageReference IXpsOMPageReference) error {
+	return win32.HRESULTError(int32(self.Raw.Append(pageReference.Raw)))
 }
 
 // IXpsOMPart is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPart with error-returning methods.
@@ -2667,15 +2668,15 @@ func WrapIXpsOMPart(raw *storagexps.IXpsOMPart) IXpsOMPart {
 }
 
 // GetPartName wraps the raw GetPartName call.
-func (self IXpsOMPart) GetPartName() (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsOMPart) GetPartName() (storagepackagingopcidiom.IOpcPartUri, error) {
 	var _partUri *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.GetPartName(&_partUri)
-	return _partUri, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_partUri), win32.HRESULTError(int32(_hr))
 }
 
 // SetPartName wraps the raw SetPartName call.
-func (self IXpsOMPart) SetPartName(partUri *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetPartName(partUri)))
+func (self IXpsOMPart) SetPartName(partUri storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetPartName(partUri.Raw)))
 }
 
 // IXpsOMPartResources is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPartResources with error-returning methods.
@@ -2690,31 +2691,31 @@ func WrapIXpsOMPartResources(raw *storagexps.IXpsOMPartResources) IXpsOMPartReso
 }
 
 // GetFontResources wraps the raw GetFontResources call.
-func (self IXpsOMPartResources) GetFontResources() (*storagexps.IXpsOMFontResourceCollection, error) {
+func (self IXpsOMPartResources) GetFontResources() (IXpsOMFontResourceCollection, error) {
 	var _fontResources *storagexps.IXpsOMFontResourceCollection
 	_hr := self.Raw.GetFontResources(&_fontResources)
-	return _fontResources, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMFontResourceCollection(_fontResources), win32.HRESULTError(int32(_hr))
 }
 
 // GetImageResources wraps the raw GetImageResources call.
-func (self IXpsOMPartResources) GetImageResources() (*storagexps.IXpsOMImageResourceCollection, error) {
+func (self IXpsOMPartResources) GetImageResources() (IXpsOMImageResourceCollection, error) {
 	var _imageResources *storagexps.IXpsOMImageResourceCollection
 	_hr := self.Raw.GetImageResources(&_imageResources)
-	return _imageResources, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMImageResourceCollection(_imageResources), win32.HRESULTError(int32(_hr))
 }
 
 // GetColorProfileResources wraps the raw GetColorProfileResources call.
-func (self IXpsOMPartResources) GetColorProfileResources() (*storagexps.IXpsOMColorProfileResourceCollection, error) {
+func (self IXpsOMPartResources) GetColorProfileResources() (IXpsOMColorProfileResourceCollection, error) {
 	var _colorProfileResources *storagexps.IXpsOMColorProfileResourceCollection
 	_hr := self.Raw.GetColorProfileResources(&_colorProfileResources)
-	return _colorProfileResources, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMColorProfileResourceCollection(_colorProfileResources), win32.HRESULTError(int32(_hr))
 }
 
 // GetRemoteDictionaryResources wraps the raw GetRemoteDictionaryResources call.
-func (self IXpsOMPartResources) GetRemoteDictionaryResources() (*storagexps.IXpsOMRemoteDictionaryResourceCollection, error) {
+func (self IXpsOMPartResources) GetRemoteDictionaryResources() (IXpsOMRemoteDictionaryResourceCollection, error) {
 	var _dictionaryResources *storagexps.IXpsOMRemoteDictionaryResourceCollection
 	_hr := self.Raw.GetRemoteDictionaryResources(&_dictionaryResources)
-	return _dictionaryResources, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMRemoteDictionaryResourceCollection(_dictionaryResources), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMPartUriCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPartUriCollection with error-returning methods.
@@ -2736,15 +2737,15 @@ func (self IXpsOMPartUriCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMPartUriCollection) GetAt(index uint32) (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsOMPartUriCollection) GetAt(index uint32) (storagepackagingopcidiom.IOpcPartUri, error) {
 	var _partUri *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.GetAt(index, &_partUri)
-	return _partUri, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_partUri), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMPartUriCollection) InsertAt(index uint32, partUri *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, partUri)))
+func (self IXpsOMPartUriCollection) InsertAt(index uint32, partUri storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, partUri.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -2753,13 +2754,13 @@ func (self IXpsOMPartUriCollection) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMPartUriCollection) SetAt(index uint32, partUri *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, partUri)))
+func (self IXpsOMPartUriCollection) SetAt(index uint32, partUri storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, partUri.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMPartUriCollection) Append(partUri *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.Append(partUri)))
+func (self IXpsOMPartUriCollection) Append(partUri storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.Append(partUri.Raw)))
 }
 
 // IXpsOMPath is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPath with error-returning methods.
@@ -2774,22 +2775,22 @@ func WrapIXpsOMPath(raw *storagexps.IXpsOMPath) IXpsOMPath {
 }
 
 // GetGeometry wraps the raw GetGeometry call.
-func (self IXpsOMPath) GetGeometry() (*storagexps.IXpsOMGeometry, error) {
+func (self IXpsOMPath) GetGeometry() (IXpsOMGeometry, error) {
 	var _geometry *storagexps.IXpsOMGeometry
 	_hr := self.Raw.GetGeometry(&_geometry)
-	return _geometry, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometry(_geometry), win32.HRESULTError(int32(_hr))
 }
 
 // GetGeometryLocal wraps the raw GetGeometryLocal call.
-func (self IXpsOMPath) GetGeometryLocal() (*storagexps.IXpsOMGeometry, error) {
+func (self IXpsOMPath) GetGeometryLocal() (IXpsOMGeometry, error) {
 	var _geometry *storagexps.IXpsOMGeometry
 	_hr := self.Raw.GetGeometryLocal(&_geometry)
-	return _geometry, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometry(_geometry), win32.HRESULTError(int32(_hr))
 }
 
 // SetGeometryLocal wraps the raw SetGeometryLocal call.
-func (self IXpsOMPath) SetGeometryLocal(geometry *storagexps.IXpsOMGeometry) error {
-	return win32.HRESULTError(int32(self.Raw.SetGeometryLocal(geometry)))
+func (self IXpsOMPath) SetGeometryLocal(geometry IXpsOMGeometry) error {
+	return win32.HRESULTError(int32(self.Raw.SetGeometryLocal(geometry.Raw)))
 }
 
 // GetGeometryLookup wraps the raw GetGeometryLookup call.
@@ -2845,22 +2846,22 @@ func (self IXpsOMPath) SetSnapsToPixels(snapsToPixels bool) error {
 }
 
 // GetStrokeBrush wraps the raw GetStrokeBrush call.
-func (self IXpsOMPath) GetStrokeBrush() (*storagexps.IXpsOMBrush, error) {
+func (self IXpsOMPath) GetStrokeBrush() (IXpsOMBrush, error) {
 	var _brush *storagexps.IXpsOMBrush
 	_hr := self.Raw.GetStrokeBrush(&_brush)
-	return _brush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMBrush(_brush), win32.HRESULTError(int32(_hr))
 }
 
 // GetStrokeBrushLocal wraps the raw GetStrokeBrushLocal call.
-func (self IXpsOMPath) GetStrokeBrushLocal() (*storagexps.IXpsOMBrush, error) {
+func (self IXpsOMPath) GetStrokeBrushLocal() (IXpsOMBrush, error) {
 	var _brush *storagexps.IXpsOMBrush
 	_hr := self.Raw.GetStrokeBrushLocal(&_brush)
-	return _brush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMBrush(_brush), win32.HRESULTError(int32(_hr))
 }
 
 // SetStrokeBrushLocal wraps the raw SetStrokeBrushLocal call.
-func (self IXpsOMPath) SetStrokeBrushLocal(brush *storagexps.IXpsOMBrush) error {
-	return win32.HRESULTError(int32(self.Raw.SetStrokeBrushLocal(brush)))
+func (self IXpsOMPath) SetStrokeBrushLocal(brush IXpsOMBrush) error {
+	return win32.HRESULTError(int32(self.Raw.SetStrokeBrushLocal(brush.Raw)))
 }
 
 // GetStrokeBrushLookup wraps the raw GetStrokeBrushLookup call.
@@ -2877,10 +2878,10 @@ func (self IXpsOMPath) SetStrokeBrushLookup(lookup string) error {
 }
 
 // GetStrokeDashes wraps the raw GetStrokeDashes call.
-func (self IXpsOMPath) GetStrokeDashes() (*storagexps.IXpsOMDashCollection, error) {
+func (self IXpsOMPath) GetStrokeDashes() (IXpsOMDashCollection, error) {
 	var _strokeDashes *storagexps.IXpsOMDashCollection
 	_hr := self.Raw.GetStrokeDashes(&_strokeDashes)
-	return _strokeDashes, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDashCollection(_strokeDashes), win32.HRESULTError(int32(_hr))
 }
 
 // GetStrokeDashCap wraps the raw GetStrokeDashCap call.
@@ -2953,22 +2954,22 @@ func (self IXpsOMPath) GetStrokeThickness() (float32, error) {
 }
 
 // GetFillBrush wraps the raw GetFillBrush call.
-func (self IXpsOMPath) GetFillBrush() (*storagexps.IXpsOMBrush, error) {
+func (self IXpsOMPath) GetFillBrush() (IXpsOMBrush, error) {
 	var _brush *storagexps.IXpsOMBrush
 	_hr := self.Raw.GetFillBrush(&_brush)
-	return _brush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMBrush(_brush), win32.HRESULTError(int32(_hr))
 }
 
 // GetFillBrushLocal wraps the raw GetFillBrushLocal call.
-func (self IXpsOMPath) GetFillBrushLocal() (*storagexps.IXpsOMBrush, error) {
+func (self IXpsOMPath) GetFillBrushLocal() (IXpsOMBrush, error) {
 	var _brush *storagexps.IXpsOMBrush
 	_hr := self.Raw.GetFillBrushLocal(&_brush)
-	return _brush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMBrush(_brush), win32.HRESULTError(int32(_hr))
 }
 
 // SetFillBrushLocal wraps the raw SetFillBrushLocal call.
-func (self IXpsOMPath) SetFillBrushLocal(brush *storagexps.IXpsOMBrush) error {
-	return win32.HRESULTError(int32(self.Raw.SetFillBrushLocal(brush)))
+func (self IXpsOMPath) SetFillBrushLocal(brush IXpsOMBrush) error {
+	return win32.HRESULTError(int32(self.Raw.SetFillBrushLocal(brush.Raw)))
 }
 
 // GetFillBrushLookup wraps the raw GetFillBrushLookup call.
@@ -2985,10 +2986,10 @@ func (self IXpsOMPath) SetFillBrushLookup(lookup string) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMPath) Clone() (*storagexps.IXpsOMPath, error) {
+func (self IXpsOMPath) Clone() (IXpsOMPath, error) {
 	var _path *storagexps.IXpsOMPath
 	_hr := self.Raw.Clone(&_path)
-	return _path, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPath(_path), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMPrintTicketResource is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMPrintTicketResource with error-returning methods.
@@ -3003,15 +3004,15 @@ func WrapIXpsOMPrintTicketResource(raw *storagexps.IXpsOMPrintTicketResource) IX
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IXpsOMPrintTicketResource) GetStream() (*systemcom.IStream, error) {
+func (self IXpsOMPrintTicketResource) GetStream() (systemcomidiom.IStream, error) {
 	var _stream *systemcom.IStream
 	_hr := self.Raw.GetStream(&_stream)
-	return _stream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_stream), win32.HRESULTError(int32(_hr))
 }
 
 // SetContent wraps the raw SetContent call.
-func (self IXpsOMPrintTicketResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream, partName)))
+func (self IXpsOMPrintTicketResource) SetContent(sourceStream systemcomidiom.IStream, partName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream.Raw, partName.Raw)))
 }
 
 // IXpsOMRadialGradientBrush is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMRadialGradientBrush with error-returning methods.
@@ -3062,10 +3063,10 @@ func (self IXpsOMRadialGradientBrush) SetGradientOrigin(origin *storagexps.XPS_P
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMRadialGradientBrush) Clone() (*storagexps.IXpsOMRadialGradientBrush, error) {
+func (self IXpsOMRadialGradientBrush) Clone() (IXpsOMRadialGradientBrush, error) {
 	var _radialGradientBrush *storagexps.IXpsOMRadialGradientBrush
 	_hr := self.Raw.Clone(&_radialGradientBrush)
-	return _radialGradientBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMRadialGradientBrush(_radialGradientBrush), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMRemoteDictionaryResource is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMRemoteDictionaryResource with error-returning methods.
@@ -3080,15 +3081,15 @@ func WrapIXpsOMRemoteDictionaryResource(raw *storagexps.IXpsOMRemoteDictionaryRe
 }
 
 // GetDictionary wraps the raw GetDictionary call.
-func (self IXpsOMRemoteDictionaryResource) GetDictionary() (*storagexps.IXpsOMDictionary, error) {
+func (self IXpsOMRemoteDictionaryResource) GetDictionary() (IXpsOMDictionary, error) {
 	var _dictionary *storagexps.IXpsOMDictionary
 	_hr := self.Raw.GetDictionary(&_dictionary)
-	return _dictionary, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDictionary(_dictionary), win32.HRESULTError(int32(_hr))
 }
 
 // SetDictionary wraps the raw SetDictionary call.
-func (self IXpsOMRemoteDictionaryResource) SetDictionary(dictionary *storagexps.IXpsOMDictionary) error {
-	return win32.HRESULTError(int32(self.Raw.SetDictionary(dictionary)))
+func (self IXpsOMRemoteDictionaryResource) SetDictionary(dictionary IXpsOMDictionary) error {
+	return win32.HRESULTError(int32(self.Raw.SetDictionary(dictionary.Raw)))
 }
 
 // IXpsOMRemoteDictionaryResource1 is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMRemoteDictionaryResource1 with error-returning methods.
@@ -3110,8 +3111,8 @@ func (self IXpsOMRemoteDictionaryResource1) GetDocumentType() (storagexps.XPS_DO
 }
 
 // Write1 wraps the raw Write1 call.
-func (self IXpsOMRemoteDictionaryResource1) Write1(stream *systemcom.ISequentialStream, documentType storagexps.XPS_DOCUMENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Write1(stream, documentType)))
+func (self IXpsOMRemoteDictionaryResource1) Write1(stream systemcomidiom.ISequentialStream, documentType storagexps.XPS_DOCUMENT_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.Write1(stream.Raw, documentType)))
 }
 
 // IXpsOMRemoteDictionaryResourceCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMRemoteDictionaryResourceCollection with error-returning methods.
@@ -3133,15 +3134,15 @@ func (self IXpsOMRemoteDictionaryResourceCollection) GetCount() (uint32, error) 
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMRemoteDictionaryResourceCollection) GetAt(index uint32) (*storagexps.IXpsOMRemoteDictionaryResource, error) {
+func (self IXpsOMRemoteDictionaryResourceCollection) GetAt(index uint32) (IXpsOMRemoteDictionaryResource, error) {
 	var _object *storagexps.IXpsOMRemoteDictionaryResource
 	_hr := self.Raw.GetAt(index, &_object)
-	return _object, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMRemoteDictionaryResource(_object), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMRemoteDictionaryResourceCollection) InsertAt(index uint32, object *storagexps.IXpsOMRemoteDictionaryResource) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, object)))
+func (self IXpsOMRemoteDictionaryResourceCollection) InsertAt(index uint32, object IXpsOMRemoteDictionaryResource) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, object.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -3150,20 +3151,20 @@ func (self IXpsOMRemoteDictionaryResourceCollection) RemoveAt(index uint32) erro
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMRemoteDictionaryResourceCollection) SetAt(index uint32, object *storagexps.IXpsOMRemoteDictionaryResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, object)))
+func (self IXpsOMRemoteDictionaryResourceCollection) SetAt(index uint32, object IXpsOMRemoteDictionaryResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, object.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMRemoteDictionaryResourceCollection) Append(object *storagexps.IXpsOMRemoteDictionaryResource) error {
-	return win32.HRESULTError(int32(self.Raw.Append(object)))
+func (self IXpsOMRemoteDictionaryResourceCollection) Append(object IXpsOMRemoteDictionaryResource) error {
+	return win32.HRESULTError(int32(self.Raw.Append(object.Raw)))
 }
 
 // GetByPartName wraps the raw GetByPartName call.
-func (self IXpsOMRemoteDictionaryResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMRemoteDictionaryResource, error) {
+func (self IXpsOMRemoteDictionaryResourceCollection) GetByPartName(partName storagepackagingopcidiom.IOpcPartUri) (IXpsOMRemoteDictionaryResource, error) {
 	var _remoteDictionaryResource *storagexps.IXpsOMRemoteDictionaryResource
-	_hr := self.Raw.GetByPartName(partName, &_remoteDictionaryResource)
-	return _remoteDictionaryResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetByPartName(partName.Raw, &_remoteDictionaryResource)
+	return WrapIXpsOMRemoteDictionaryResource(_remoteDictionaryResource), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMResource is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMResource with error-returning methods.
@@ -3189,10 +3190,10 @@ func WrapIXpsOMShareable(raw *storagexps.IXpsOMShareable) IXpsOMShareable {
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMShareable) GetOwner() (*systemcom.IUnknown, error) {
+func (self IXpsOMShareable) GetOwner() (systemcomidiom.IUnknown, error) {
 	var _owner *systemcom.IUnknown
 	_hr := self.Raw.GetOwner(&_owner)
-	return _owner, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_owner), win32.HRESULTError(int32(_hr))
 }
 
 // GetType wraps the raw GetType call.
@@ -3214,22 +3215,22 @@ func WrapIXpsOMSignatureBlockResource(raw *storagexps.IXpsOMSignatureBlockResour
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMSignatureBlockResource) GetOwner() (*storagexps.IXpsOMDocument, error) {
+func (self IXpsOMSignatureBlockResource) GetOwner() (IXpsOMDocument, error) {
 	var _owner *storagexps.IXpsOMDocument
 	_hr := self.Raw.GetOwner(&_owner)
-	return _owner, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMDocument(_owner), win32.HRESULTError(int32(_hr))
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IXpsOMSignatureBlockResource) GetStream() (*systemcom.IStream, error) {
+func (self IXpsOMSignatureBlockResource) GetStream() (systemcomidiom.IStream, error) {
 	var _stream *systemcom.IStream
 	_hr := self.Raw.GetStream(&_stream)
-	return _stream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_stream), win32.HRESULTError(int32(_hr))
 }
 
 // SetContent wraps the raw SetContent call.
-func (self IXpsOMSignatureBlockResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream, partName)))
+func (self IXpsOMSignatureBlockResource) SetContent(sourceStream systemcomidiom.IStream, partName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream.Raw, partName.Raw)))
 }
 
 // IXpsOMSignatureBlockResourceCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMSignatureBlockResourceCollection with error-returning methods.
@@ -3251,15 +3252,15 @@ func (self IXpsOMSignatureBlockResourceCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMSignatureBlockResourceCollection) GetAt(index uint32) (*storagexps.IXpsOMSignatureBlockResource, error) {
+func (self IXpsOMSignatureBlockResourceCollection) GetAt(index uint32) (IXpsOMSignatureBlockResource, error) {
 	var _signatureBlockResource *storagexps.IXpsOMSignatureBlockResource
 	_hr := self.Raw.GetAt(index, &_signatureBlockResource)
-	return _signatureBlockResource, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMSignatureBlockResource(_signatureBlockResource), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMSignatureBlockResourceCollection) InsertAt(index uint32, signatureBlockResource *storagexps.IXpsOMSignatureBlockResource) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, signatureBlockResource)))
+func (self IXpsOMSignatureBlockResourceCollection) InsertAt(index uint32, signatureBlockResource IXpsOMSignatureBlockResource) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, signatureBlockResource.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -3268,20 +3269,20 @@ func (self IXpsOMSignatureBlockResourceCollection) RemoveAt(index uint32) error 
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMSignatureBlockResourceCollection) SetAt(index uint32, signatureBlockResource *storagexps.IXpsOMSignatureBlockResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, signatureBlockResource)))
+func (self IXpsOMSignatureBlockResourceCollection) SetAt(index uint32, signatureBlockResource IXpsOMSignatureBlockResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, signatureBlockResource.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMSignatureBlockResourceCollection) Append(signatureBlockResource *storagexps.IXpsOMSignatureBlockResource) error {
-	return win32.HRESULTError(int32(self.Raw.Append(signatureBlockResource)))
+func (self IXpsOMSignatureBlockResourceCollection) Append(signatureBlockResource IXpsOMSignatureBlockResource) error {
+	return win32.HRESULTError(int32(self.Raw.Append(signatureBlockResource.Raw)))
 }
 
 // GetByPartName wraps the raw GetByPartName call.
-func (self IXpsOMSignatureBlockResourceCollection) GetByPartName(partName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMSignatureBlockResource, error) {
+func (self IXpsOMSignatureBlockResourceCollection) GetByPartName(partName storagepackagingopcidiom.IOpcPartUri) (IXpsOMSignatureBlockResource, error) {
 	var _signatureBlockResource *storagexps.IXpsOMSignatureBlockResource
-	_hr := self.Raw.GetByPartName(partName, &_signatureBlockResource)
-	return _signatureBlockResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetByPartName(partName.Raw, &_signatureBlockResource)
+	return WrapIXpsOMSignatureBlockResource(_signatureBlockResource), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMSolidColorBrush is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMSolidColorBrush with error-returning methods.
@@ -3296,22 +3297,22 @@ func WrapIXpsOMSolidColorBrush(raw *storagexps.IXpsOMSolidColorBrush) IXpsOMSoli
 }
 
 // GetColor wraps the raw GetColor call.
-func (self IXpsOMSolidColorBrush) GetColor(color *storagexps.XPS_COLOR) (*storagexps.IXpsOMColorProfileResource, error) {
+func (self IXpsOMSolidColorBrush) GetColor(color *storagexps.XPS_COLOR) (IXpsOMColorProfileResource, error) {
 	var _colorProfile *storagexps.IXpsOMColorProfileResource
 	_hr := self.Raw.GetColor(color, &_colorProfile)
-	return _colorProfile, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMColorProfileResource(_colorProfile), win32.HRESULTError(int32(_hr))
 }
 
 // SetColor wraps the raw SetColor call.
-func (self IXpsOMSolidColorBrush) SetColor(color *storagexps.XPS_COLOR, colorProfile *storagexps.IXpsOMColorProfileResource) error {
-	return win32.HRESULTError(int32(self.Raw.SetColor(color, colorProfile)))
+func (self IXpsOMSolidColorBrush) SetColor(color *storagexps.XPS_COLOR, colorProfile IXpsOMColorProfileResource) error {
+	return win32.HRESULTError(int32(self.Raw.SetColor(color, colorProfile.Raw)))
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMSolidColorBrush) Clone() (*storagexps.IXpsOMSolidColorBrush, error) {
+func (self IXpsOMSolidColorBrush) Clone() (IXpsOMSolidColorBrush, error) {
 	var _solidColorBrush *storagexps.IXpsOMSolidColorBrush
 	_hr := self.Raw.Clone(&_solidColorBrush)
-	return _solidColorBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMSolidColorBrush(_solidColorBrush), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMStoryFragmentsResource is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMStoryFragmentsResource with error-returning methods.
@@ -3326,22 +3327,22 @@ func WrapIXpsOMStoryFragmentsResource(raw *storagexps.IXpsOMStoryFragmentsResour
 }
 
 // GetOwner wraps the raw GetOwner call.
-func (self IXpsOMStoryFragmentsResource) GetOwner() (*storagexps.IXpsOMPageReference, error) {
+func (self IXpsOMStoryFragmentsResource) GetOwner() (IXpsOMPageReference, error) {
 	var _owner *storagexps.IXpsOMPageReference
 	_hr := self.Raw.GetOwner(&_owner)
-	return _owner, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMPageReference(_owner), win32.HRESULTError(int32(_hr))
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IXpsOMStoryFragmentsResource) GetStream() (*systemcom.IStream, error) {
+func (self IXpsOMStoryFragmentsResource) GetStream() (systemcomidiom.IStream, error) {
 	var _stream *systemcom.IStream
 	_hr := self.Raw.GetStream(&_stream)
-	return _stream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_stream), win32.HRESULTError(int32(_hr))
 }
 
 // SetContent wraps the raw SetContent call.
-func (self IXpsOMStoryFragmentsResource) SetContent(sourceStream *systemcom.IStream, partName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream, partName)))
+func (self IXpsOMStoryFragmentsResource) SetContent(sourceStream systemcomidiom.IStream, partName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetContent(sourceStream.Raw, partName.Raw)))
 }
 
 // IXpsOMThumbnailGenerator is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMThumbnailGenerator with error-returning methods.
@@ -3356,10 +3357,10 @@ func WrapIXpsOMThumbnailGenerator(raw *storagexps.IXpsOMThumbnailGenerator) IXps
 }
 
 // GenerateThumbnail wraps the raw GenerateThumbnail call.
-func (self IXpsOMThumbnailGenerator) GenerateThumbnail(page *storagexps.IXpsOMPage, thumbnailType storagexps.XPS_IMAGE_TYPE, thumbnailSize storagexps.XPS_THUMBNAIL_SIZE, imageResourcePartName *storagepackagingopc.IOpcPartUri) (*storagexps.IXpsOMImageResource, error) {
+func (self IXpsOMThumbnailGenerator) GenerateThumbnail(page IXpsOMPage, thumbnailType storagexps.XPS_IMAGE_TYPE, thumbnailSize storagexps.XPS_THUMBNAIL_SIZE, imageResourcePartName storagepackagingopcidiom.IOpcPartUri) (IXpsOMImageResource, error) {
 	var _imageResource *storagexps.IXpsOMImageResource
-	_hr := self.Raw.GenerateThumbnail(page, thumbnailType, thumbnailSize, imageResourcePartName, &_imageResource)
-	return _imageResource, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GenerateThumbnail(page.Raw, thumbnailType, thumbnailSize, imageResourcePartName.Raw, &_imageResource)
+	return WrapIXpsOMImageResource(_imageResource), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMTileBrush is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMTileBrush with error-returning methods.
@@ -3374,22 +3375,22 @@ func WrapIXpsOMTileBrush(raw *storagexps.IXpsOMTileBrush) IXpsOMTileBrush {
 }
 
 // GetTransform wraps the raw GetTransform call.
-func (self IXpsOMTileBrush) GetTransform() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMTileBrush) GetTransform() (IXpsOMMatrixTransform, error) {
 	var _transform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.GetTransform(&_transform)
-	return _transform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_transform), win32.HRESULTError(int32(_hr))
 }
 
 // GetTransformLocal wraps the raw GetTransformLocal call.
-func (self IXpsOMTileBrush) GetTransformLocal() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMTileBrush) GetTransformLocal() (IXpsOMMatrixTransform, error) {
 	var _transform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.GetTransformLocal(&_transform)
-	return _transform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_transform), win32.HRESULTError(int32(_hr))
 }
 
 // SetTransformLocal wraps the raw SetTransformLocal call.
-func (self IXpsOMTileBrush) SetTransformLocal(transform *storagexps.IXpsOMMatrixTransform) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransformLocal(transform)))
+func (self IXpsOMTileBrush) SetTransformLocal(transform IXpsOMMatrixTransform) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransformLocal(transform.Raw)))
 }
 
 // GetTransformLookup wraps the raw GetTransformLookup call.
@@ -3453,22 +3454,22 @@ func WrapIXpsOMVisual(raw *storagexps.IXpsOMVisual) IXpsOMVisual {
 }
 
 // GetTransform wraps the raw GetTransform call.
-func (self IXpsOMVisual) GetTransform() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMVisual) GetTransform() (IXpsOMMatrixTransform, error) {
 	var _matrixTransform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.GetTransform(&_matrixTransform)
-	return _matrixTransform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_matrixTransform), win32.HRESULTError(int32(_hr))
 }
 
 // GetTransformLocal wraps the raw GetTransformLocal call.
-func (self IXpsOMVisual) GetTransformLocal() (*storagexps.IXpsOMMatrixTransform, error) {
+func (self IXpsOMVisual) GetTransformLocal() (IXpsOMMatrixTransform, error) {
 	var _matrixTransform *storagexps.IXpsOMMatrixTransform
 	_hr := self.Raw.GetTransformLocal(&_matrixTransform)
-	return _matrixTransform, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMMatrixTransform(_matrixTransform), win32.HRESULTError(int32(_hr))
 }
 
 // SetTransformLocal wraps the raw SetTransformLocal call.
-func (self IXpsOMVisual) SetTransformLocal(matrixTransform *storagexps.IXpsOMMatrixTransform) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransformLocal(matrixTransform)))
+func (self IXpsOMVisual) SetTransformLocal(matrixTransform IXpsOMMatrixTransform) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransformLocal(matrixTransform.Raw)))
 }
 
 // GetTransformLookup wraps the raw GetTransformLookup call.
@@ -3485,22 +3486,22 @@ func (self IXpsOMVisual) SetTransformLookup(key string) error {
 }
 
 // GetClipGeometry wraps the raw GetClipGeometry call.
-func (self IXpsOMVisual) GetClipGeometry() (*storagexps.IXpsOMGeometry, error) {
+func (self IXpsOMVisual) GetClipGeometry() (IXpsOMGeometry, error) {
 	var _clipGeometry *storagexps.IXpsOMGeometry
 	_hr := self.Raw.GetClipGeometry(&_clipGeometry)
-	return _clipGeometry, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometry(_clipGeometry), win32.HRESULTError(int32(_hr))
 }
 
 // GetClipGeometryLocal wraps the raw GetClipGeometryLocal call.
-func (self IXpsOMVisual) GetClipGeometryLocal() (*storagexps.IXpsOMGeometry, error) {
+func (self IXpsOMVisual) GetClipGeometryLocal() (IXpsOMGeometry, error) {
 	var _clipGeometry *storagexps.IXpsOMGeometry
 	_hr := self.Raw.GetClipGeometryLocal(&_clipGeometry)
-	return _clipGeometry, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMGeometry(_clipGeometry), win32.HRESULTError(int32(_hr))
 }
 
 // SetClipGeometryLocal wraps the raw SetClipGeometryLocal call.
-func (self IXpsOMVisual) SetClipGeometryLocal(clipGeometry *storagexps.IXpsOMGeometry) error {
-	return win32.HRESULTError(int32(self.Raw.SetClipGeometryLocal(clipGeometry)))
+func (self IXpsOMVisual) SetClipGeometryLocal(clipGeometry IXpsOMGeometry) error {
+	return win32.HRESULTError(int32(self.Raw.SetClipGeometryLocal(clipGeometry.Raw)))
 }
 
 // GetClipGeometryLookup wraps the raw GetClipGeometryLookup call.
@@ -3524,22 +3525,22 @@ func (self IXpsOMVisual) GetOpacity() (float32, error) {
 }
 
 // GetOpacityMaskBrush wraps the raw GetOpacityMaskBrush call.
-func (self IXpsOMVisual) GetOpacityMaskBrush() (*storagexps.IXpsOMBrush, error) {
+func (self IXpsOMVisual) GetOpacityMaskBrush() (IXpsOMBrush, error) {
 	var _opacityMaskBrush *storagexps.IXpsOMBrush
 	_hr := self.Raw.GetOpacityMaskBrush(&_opacityMaskBrush)
-	return _opacityMaskBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMBrush(_opacityMaskBrush), win32.HRESULTError(int32(_hr))
 }
 
 // GetOpacityMaskBrushLocal wraps the raw GetOpacityMaskBrushLocal call.
-func (self IXpsOMVisual) GetOpacityMaskBrushLocal() (*storagexps.IXpsOMBrush, error) {
+func (self IXpsOMVisual) GetOpacityMaskBrushLocal() (IXpsOMBrush, error) {
 	var _opacityMaskBrush *storagexps.IXpsOMBrush
 	_hr := self.Raw.GetOpacityMaskBrushLocal(&_opacityMaskBrush)
-	return _opacityMaskBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMBrush(_opacityMaskBrush), win32.HRESULTError(int32(_hr))
 }
 
 // SetOpacityMaskBrushLocal wraps the raw SetOpacityMaskBrushLocal call.
-func (self IXpsOMVisual) SetOpacityMaskBrushLocal(opacityMaskBrush *storagexps.IXpsOMBrush) error {
-	return win32.HRESULTError(int32(self.Raw.SetOpacityMaskBrushLocal(opacityMaskBrush)))
+func (self IXpsOMVisual) SetOpacityMaskBrushLocal(opacityMaskBrush IXpsOMBrush) error {
+	return win32.HRESULTError(int32(self.Raw.SetOpacityMaskBrushLocal(opacityMaskBrush.Raw)))
 }
 
 // GetOpacityMaskBrushLookup wraps the raw GetOpacityMaskBrushLookup call.
@@ -3582,15 +3583,15 @@ func (self IXpsOMVisual) SetIsHyperlinkTarget(isHyperlink bool) error {
 }
 
 // GetHyperlinkNavigateUri wraps the raw GetHyperlinkNavigateUri call.
-func (self IXpsOMVisual) GetHyperlinkNavigateUri() (*systemcom.IUri, error) {
+func (self IXpsOMVisual) GetHyperlinkNavigateUri() (systemcomidiom.IUri, error) {
 	var _hyperlinkUri *systemcom.IUri
 	_hr := self.Raw.GetHyperlinkNavigateUri(&_hyperlinkUri)
-	return _hyperlinkUri, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUri(_hyperlinkUri), win32.HRESULTError(int32(_hr))
 }
 
 // SetHyperlinkNavigateUri wraps the raw SetHyperlinkNavigateUri call.
-func (self IXpsOMVisual) SetHyperlinkNavigateUri(hyperlinkUri *systemcom.IUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetHyperlinkNavigateUri(hyperlinkUri)))
+func (self IXpsOMVisual) SetHyperlinkNavigateUri(hyperlinkUri systemcomidiom.IUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetHyperlinkNavigateUri(hyperlinkUri.Raw)))
 }
 
 // GetLanguage wraps the raw GetLanguage call.
@@ -3618,22 +3619,22 @@ func WrapIXpsOMVisualBrush(raw *storagexps.IXpsOMVisualBrush) IXpsOMVisualBrush 
 }
 
 // GetVisual wraps the raw GetVisual call.
-func (self IXpsOMVisualBrush) GetVisual() (*storagexps.IXpsOMVisual, error) {
+func (self IXpsOMVisualBrush) GetVisual() (IXpsOMVisual, error) {
 	var _visual *storagexps.IXpsOMVisual
 	_hr := self.Raw.GetVisual(&_visual)
-	return _visual, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMVisual(_visual), win32.HRESULTError(int32(_hr))
 }
 
 // GetVisualLocal wraps the raw GetVisualLocal call.
-func (self IXpsOMVisualBrush) GetVisualLocal() (*storagexps.IXpsOMVisual, error) {
+func (self IXpsOMVisualBrush) GetVisualLocal() (IXpsOMVisual, error) {
 	var _visual *storagexps.IXpsOMVisual
 	_hr := self.Raw.GetVisualLocal(&_visual)
-	return _visual, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMVisual(_visual), win32.HRESULTError(int32(_hr))
 }
 
 // SetVisualLocal wraps the raw SetVisualLocal call.
-func (self IXpsOMVisualBrush) SetVisualLocal(visual *storagexps.IXpsOMVisual) error {
-	return win32.HRESULTError(int32(self.Raw.SetVisualLocal(visual)))
+func (self IXpsOMVisualBrush) SetVisualLocal(visual IXpsOMVisual) error {
+	return win32.HRESULTError(int32(self.Raw.SetVisualLocal(visual.Raw)))
 }
 
 // GetVisualLookup wraps the raw GetVisualLookup call.
@@ -3650,10 +3651,10 @@ func (self IXpsOMVisualBrush) SetVisualLookup(lookup string) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IXpsOMVisualBrush) Clone() (*storagexps.IXpsOMVisualBrush, error) {
+func (self IXpsOMVisualBrush) Clone() (IXpsOMVisualBrush, error) {
 	var _visualBrush *storagexps.IXpsOMVisualBrush
 	_hr := self.Raw.Clone(&_visualBrush)
-	return _visualBrush, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMVisualBrush(_visualBrush), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsOMVisualCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsOMVisualCollection with error-returning methods.
@@ -3675,15 +3676,15 @@ func (self IXpsOMVisualCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsOMVisualCollection) GetAt(index uint32) (*storagexps.IXpsOMVisual, error) {
+func (self IXpsOMVisualCollection) GetAt(index uint32) (IXpsOMVisual, error) {
 	var _object *storagexps.IXpsOMVisual
 	_hr := self.Raw.GetAt(index, &_object)
-	return _object, win32.HRESULTError(int32(_hr))
+	return WrapIXpsOMVisual(_object), win32.HRESULTError(int32(_hr))
 }
 
 // InsertAt wraps the raw InsertAt call.
-func (self IXpsOMVisualCollection) InsertAt(index uint32, object *storagexps.IXpsOMVisual) error {
-	return win32.HRESULTError(int32(self.Raw.InsertAt(index, object)))
+func (self IXpsOMVisualCollection) InsertAt(index uint32, object IXpsOMVisual) error {
+	return win32.HRESULTError(int32(self.Raw.InsertAt(index, object.Raw)))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -3692,13 +3693,13 @@ func (self IXpsOMVisualCollection) RemoveAt(index uint32) error {
 }
 
 // SetAt wraps the raw SetAt call.
-func (self IXpsOMVisualCollection) SetAt(index uint32, object *storagexps.IXpsOMVisual) error {
-	return win32.HRESULTError(int32(self.Raw.SetAt(index, object)))
+func (self IXpsOMVisualCollection) SetAt(index uint32, object IXpsOMVisual) error {
+	return win32.HRESULTError(int32(self.Raw.SetAt(index, object.Raw)))
 }
 
 // Append wraps the raw Append call.
-func (self IXpsOMVisualCollection) Append(object *storagexps.IXpsOMVisual) error {
-	return win32.HRESULTError(int32(self.Raw.Append(object)))
+func (self IXpsOMVisualCollection) Append(object IXpsOMVisual) error {
+	return win32.HRESULTError(int32(self.Raw.Append(object.Raw)))
 }
 
 // IXpsSignature is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsSignature with error-returning methods.
@@ -3725,10 +3726,10 @@ func (self IXpsSignature) GetSignatureValue(signatureHashValue **byte, count *ui
 }
 
 // GetCertificateEnumerator wraps the raw GetCertificateEnumerator call.
-func (self IXpsSignature) GetCertificateEnumerator() (*storagepackagingopc.IOpcCertificateEnumerator, error) {
+func (self IXpsSignature) GetCertificateEnumerator() (storagepackagingopcidiom.IOpcCertificateEnumerator, error) {
 	var _certificateEnumerator *storagepackagingopc.IOpcCertificateEnumerator
 	_hr := self.Raw.GetCertificateEnumerator(&_certificateEnumerator)
-	return _certificateEnumerator, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcCertificateEnumerator(_certificateEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // GetSigningTime wraps the raw GetSigningTime call.
@@ -3746,10 +3747,10 @@ func (self IXpsSignature) GetSigningTimeFormat() (storagepackagingopc.OPC_SIGNAT
 }
 
 // GetSignaturePartName wraps the raw GetSignaturePartName call.
-func (self IXpsSignature) GetSignaturePartName() (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsSignature) GetSignaturePartName() (storagepackagingopcidiom.IOpcPartUri, error) {
 	var _signaturePartName *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.GetSignaturePartName(&_signaturePartName)
-	return _signaturePartName, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_signaturePartName), win32.HRESULTError(int32(_hr))
 }
 
 // Verify wraps the raw Verify call.
@@ -3767,17 +3768,17 @@ func (self IXpsSignature) GetPolicy() (storagexps.XPS_SIGN_POLICY, error) {
 }
 
 // GetCustomObjectEnumerator wraps the raw GetCustomObjectEnumerator call.
-func (self IXpsSignature) GetCustomObjectEnumerator() (*storagepackagingopc.IOpcSignatureCustomObjectEnumerator, error) {
+func (self IXpsSignature) GetCustomObjectEnumerator() (storagepackagingopcidiom.IOpcSignatureCustomObjectEnumerator, error) {
 	var _customObjectEnumerator *storagepackagingopc.IOpcSignatureCustomObjectEnumerator
 	_hr := self.Raw.GetCustomObjectEnumerator(&_customObjectEnumerator)
-	return _customObjectEnumerator, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcSignatureCustomObjectEnumerator(_customObjectEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // GetCustomReferenceEnumerator wraps the raw GetCustomReferenceEnumerator call.
-func (self IXpsSignature) GetCustomReferenceEnumerator() (*storagepackagingopc.IOpcSignatureReferenceEnumerator, error) {
+func (self IXpsSignature) GetCustomReferenceEnumerator() (storagepackagingopcidiom.IOpcSignatureReferenceEnumerator, error) {
 	var _customReferenceEnumerator *storagepackagingopc.IOpcSignatureReferenceEnumerator
 	_hr := self.Raw.GetCustomReferenceEnumerator(&_customReferenceEnumerator)
-	return _customReferenceEnumerator, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcSignatureReferenceEnumerator(_customReferenceEnumerator), win32.HRESULTError(int32(_hr))
 }
 
 // GetSignatureXml wraps the raw GetSignatureXml call.
@@ -3802,17 +3803,17 @@ func WrapIXpsSignatureBlock(raw *storagexps.IXpsSignatureBlock) IXpsSignatureBlo
 }
 
 // GetRequests wraps the raw GetRequests call.
-func (self IXpsSignatureBlock) GetRequests() (*storagexps.IXpsSignatureRequestCollection, error) {
+func (self IXpsSignatureBlock) GetRequests() (IXpsSignatureRequestCollection, error) {
 	var _requests *storagexps.IXpsSignatureRequestCollection
 	_hr := self.Raw.GetRequests(&_requests)
-	return _requests, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSignatureRequestCollection(_requests), win32.HRESULTError(int32(_hr))
 }
 
 // GetPartName wraps the raw GetPartName call.
-func (self IXpsSignatureBlock) GetPartName() (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsSignatureBlock) GetPartName() (storagepackagingopcidiom.IOpcPartUri, error) {
 	var _partName *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.GetPartName(&_partName)
-	return _partName, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_partName), win32.HRESULTError(int32(_hr))
 }
 
 // GetDocumentIndex wraps the raw GetDocumentIndex call.
@@ -3823,18 +3824,18 @@ func (self IXpsSignatureBlock) GetDocumentIndex() (uint32, error) {
 }
 
 // GetDocumentName wraps the raw GetDocumentName call.
-func (self IXpsSignatureBlock) GetDocumentName() (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsSignatureBlock) GetDocumentName() (storagepackagingopcidiom.IOpcPartUri, error) {
 	var _fixedDocumentName *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.GetDocumentName(&_fixedDocumentName)
-	return _fixedDocumentName, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_fixedDocumentName), win32.HRESULTError(int32(_hr))
 }
 
 // CreateRequest wraps the raw CreateRequest call.
-func (self IXpsSignatureBlock) CreateRequest(requestId string) (*storagexps.IXpsSignatureRequest, error) {
+func (self IXpsSignatureBlock) CreateRequest(requestId string) (IXpsSignatureRequest, error) {
 	_requestId := win32.UTF16Ptr(requestId)
 	var _signatureRequest *storagexps.IXpsSignatureRequest
 	_hr := self.Raw.CreateRequest(foundation.PWSTR(_requestId), &_signatureRequest)
-	return _signatureRequest, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSignatureRequest(_signatureRequest), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsSignatureBlockCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsSignatureBlockCollection with error-returning methods.
@@ -3856,10 +3857,10 @@ func (self IXpsSignatureBlockCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsSignatureBlockCollection) GetAt(index uint32) (*storagexps.IXpsSignatureBlock, error) {
+func (self IXpsSignatureBlockCollection) GetAt(index uint32) (IXpsSignatureBlock, error) {
 	var _signatureBlock *storagexps.IXpsSignatureBlock
 	_hr := self.Raw.GetAt(index, &_signatureBlock)
-	return _signatureBlock, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSignatureBlock(_signatureBlock), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -3886,10 +3887,10 @@ func (self IXpsSignatureCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsSignatureCollection) GetAt(index uint32) (*storagexps.IXpsSignature, error) {
+func (self IXpsSignatureCollection) GetAt(index uint32) (IXpsSignature, error) {
 	var _signature *storagexps.IXpsSignature
 	_hr := self.Raw.GetAt(index, &_signature)
-	return _signature, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSignature(_signature), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -3915,55 +3916,55 @@ func (self IXpsSignatureManager) LoadPackageFile(fileName string) error {
 }
 
 // LoadPackageStream wraps the raw LoadPackageStream call.
-func (self IXpsSignatureManager) LoadPackageStream(stream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.LoadPackageStream(stream)))
+func (self IXpsSignatureManager) LoadPackageStream(stream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.LoadPackageStream(stream.Raw)))
 }
 
 // Sign wraps the raw Sign call.
-func (self IXpsSignatureManager) Sign(signOptions *storagexps.IXpsSigningOptions, x509Certificate *securitycryptography.CERT_CONTEXT) (*storagexps.IXpsSignature, error) {
+func (self IXpsSignatureManager) Sign(signOptions IXpsSigningOptions, x509Certificate *securitycryptography.CERT_CONTEXT) (IXpsSignature, error) {
 	var _signature *storagexps.IXpsSignature
-	_hr := self.Raw.Sign(signOptions, x509Certificate, &_signature)
-	return _signature, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.Sign(signOptions.Raw, x509Certificate, &_signature)
+	return WrapIXpsSignature(_signature), win32.HRESULTError(int32(_hr))
 }
 
 // GetSignatureOriginPartName wraps the raw GetSignatureOriginPartName call.
-func (self IXpsSignatureManager) GetSignatureOriginPartName() (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsSignatureManager) GetSignatureOriginPartName() (storagepackagingopcidiom.IOpcPartUri, error) {
 	var _signatureOriginPartName *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.GetSignatureOriginPartName(&_signatureOriginPartName)
-	return _signatureOriginPartName, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_signatureOriginPartName), win32.HRESULTError(int32(_hr))
 }
 
 // SetSignatureOriginPartName wraps the raw SetSignatureOriginPartName call.
-func (self IXpsSignatureManager) SetSignatureOriginPartName(signatureOriginPartName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetSignatureOriginPartName(signatureOriginPartName)))
+func (self IXpsSignatureManager) SetSignatureOriginPartName(signatureOriginPartName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetSignatureOriginPartName(signatureOriginPartName.Raw)))
 }
 
 // GetSignatures wraps the raw GetSignatures call.
-func (self IXpsSignatureManager) GetSignatures() (*storagexps.IXpsSignatureCollection, error) {
+func (self IXpsSignatureManager) GetSignatures() (IXpsSignatureCollection, error) {
 	var _signatures *storagexps.IXpsSignatureCollection
 	_hr := self.Raw.GetSignatures(&_signatures)
-	return _signatures, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSignatureCollection(_signatures), win32.HRESULTError(int32(_hr))
 }
 
 // AddSignatureBlock wraps the raw AddSignatureBlock call.
-func (self IXpsSignatureManager) AddSignatureBlock(partName *storagepackagingopc.IOpcPartUri, fixedDocumentIndex uint32) (*storagexps.IXpsSignatureBlock, error) {
+func (self IXpsSignatureManager) AddSignatureBlock(partName storagepackagingopcidiom.IOpcPartUri, fixedDocumentIndex uint32) (IXpsSignatureBlock, error) {
 	var _signatureBlock *storagexps.IXpsSignatureBlock
-	_hr := self.Raw.AddSignatureBlock(partName, fixedDocumentIndex, &_signatureBlock)
-	return _signatureBlock, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.AddSignatureBlock(partName.Raw, fixedDocumentIndex, &_signatureBlock)
+	return WrapIXpsSignatureBlock(_signatureBlock), win32.HRESULTError(int32(_hr))
 }
 
 // GetSignatureBlocks wraps the raw GetSignatureBlocks call.
-func (self IXpsSignatureManager) GetSignatureBlocks() (*storagexps.IXpsSignatureBlockCollection, error) {
+func (self IXpsSignatureManager) GetSignatureBlocks() (IXpsSignatureBlockCollection, error) {
 	var _signatureBlocks *storagexps.IXpsSignatureBlockCollection
 	_hr := self.Raw.GetSignatureBlocks(&_signatureBlocks)
-	return _signatureBlocks, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSignatureBlockCollection(_signatureBlocks), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSigningOptions wraps the raw CreateSigningOptions call.
-func (self IXpsSignatureManager) CreateSigningOptions() (*storagexps.IXpsSigningOptions, error) {
+func (self IXpsSignatureManager) CreateSigningOptions() (IXpsSigningOptions, error) {
 	var _signingOptions *storagexps.IXpsSigningOptions
 	_hr := self.Raw.CreateSigningOptions(&_signingOptions)
-	return _signingOptions, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSigningOptions(_signingOptions), win32.HRESULTError(int32(_hr))
 }
 
 // SavePackageToFile wraps the raw SavePackageToFile call.
@@ -3973,8 +3974,8 @@ func (self IXpsSignatureManager) SavePackageToFile(fileName string, securityAttr
 }
 
 // SavePackageToStream wraps the raw SavePackageToStream call.
-func (self IXpsSignatureManager) SavePackageToStream(stream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SavePackageToStream(stream)))
+func (self IXpsSignatureManager) SavePackageToStream(stream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SavePackageToStream(stream.Raw)))
 }
 
 // IXpsSignatureRequest is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsSignatureRequest with error-returning methods.
@@ -4053,10 +4054,10 @@ func (self IXpsSignatureRequest) GetRequestId() (foundation.PWSTR, error) {
 }
 
 // GetSignature wraps the raw GetSignature call.
-func (self IXpsSignatureRequest) GetSignature() (*storagexps.IXpsSignature, error) {
+func (self IXpsSignatureRequest) GetSignature() (IXpsSignature, error) {
 	var _signature *storagexps.IXpsSignature
 	_hr := self.Raw.GetSignature(&_signature)
-	return _signature, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSignature(_signature), win32.HRESULTError(int32(_hr))
 }
 
 // IXpsSignatureRequestCollection is an idiomatic wrapper over the raw COM interface Storage.Xps.IXpsSignatureRequestCollection with error-returning methods.
@@ -4078,10 +4079,10 @@ func (self IXpsSignatureRequestCollection) GetCount() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IXpsSignatureRequestCollection) GetAt(index uint32) (*storagexps.IXpsSignatureRequest, error) {
+func (self IXpsSignatureRequestCollection) GetAt(index uint32) (IXpsSignatureRequest, error) {
 	var _signatureRequest *storagexps.IXpsSignatureRequest
 	_hr := self.Raw.GetAt(index, &_signatureRequest)
-	return _signatureRequest, win32.HRESULTError(int32(_hr))
+	return WrapIXpsSignatureRequest(_signatureRequest), win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAt wraps the raw RemoveAt call.
@@ -4140,15 +4141,15 @@ func (self IXpsSigningOptions) SetDigestMethod(digestMethod string) error {
 }
 
 // GetSignaturePartName wraps the raw GetSignaturePartName call.
-func (self IXpsSigningOptions) GetSignaturePartName() (*storagepackagingopc.IOpcPartUri, error) {
+func (self IXpsSigningOptions) GetSignaturePartName() (storagepackagingopcidiom.IOpcPartUri, error) {
 	var _signaturePartName *storagepackagingopc.IOpcPartUri
 	_hr := self.Raw.GetSignaturePartName(&_signaturePartName)
-	return _signaturePartName, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcPartUri(_signaturePartName), win32.HRESULTError(int32(_hr))
 }
 
 // SetSignaturePartName wraps the raw SetSignaturePartName call.
-func (self IXpsSigningOptions) SetSignaturePartName(signaturePartName *storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.SetSignaturePartName(signaturePartName)))
+func (self IXpsSigningOptions) SetSignaturePartName(signaturePartName storagepackagingopcidiom.IOpcPartUri) error {
+	return win32.HRESULTError(int32(self.Raw.SetSignaturePartName(signaturePartName.Raw)))
 }
 
 // GetPolicy wraps the raw GetPolicy call.
@@ -4176,24 +4177,24 @@ func (self IXpsSigningOptions) SetSigningTimeFormat(timeFormat storagepackagingo
 }
 
 // GetCustomObjects wraps the raw GetCustomObjects call.
-func (self IXpsSigningOptions) GetCustomObjects() (*storagepackagingopc.IOpcSignatureCustomObjectSet, error) {
+func (self IXpsSigningOptions) GetCustomObjects() (storagepackagingopcidiom.IOpcSignatureCustomObjectSet, error) {
 	var _customObjectSet *storagepackagingopc.IOpcSignatureCustomObjectSet
 	_hr := self.Raw.GetCustomObjects(&_customObjectSet)
-	return _customObjectSet, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcSignatureCustomObjectSet(_customObjectSet), win32.HRESULTError(int32(_hr))
 }
 
 // GetCustomReferences wraps the raw GetCustomReferences call.
-func (self IXpsSigningOptions) GetCustomReferences() (*storagepackagingopc.IOpcSignatureReferenceSet, error) {
+func (self IXpsSigningOptions) GetCustomReferences() (storagepackagingopcidiom.IOpcSignatureReferenceSet, error) {
 	var _customReferenceSet *storagepackagingopc.IOpcSignatureReferenceSet
 	_hr := self.Raw.GetCustomReferences(&_customReferenceSet)
-	return _customReferenceSet, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcSignatureReferenceSet(_customReferenceSet), win32.HRESULTError(int32(_hr))
 }
 
 // GetCertificateSet wraps the raw GetCertificateSet call.
-func (self IXpsSigningOptions) GetCertificateSet() (*storagepackagingopc.IOpcCertificateSet, error) {
+func (self IXpsSigningOptions) GetCertificateSet() (storagepackagingopcidiom.IOpcCertificateSet, error) {
 	var _certificateSet *storagepackagingopc.IOpcCertificateSet
 	_hr := self.Raw.GetCertificateSet(&_certificateSet)
-	return _certificateSet, win32.HRESULTError(int32(_hr))
+	return storagepackagingopcidiom.WrapIOpcCertificateSet(_certificateSet), win32.HRESULTError(int32(_hr))
 }
 
 // GetFlags wraps the raw GetFlags call.

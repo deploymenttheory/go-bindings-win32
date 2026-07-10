@@ -13,7 +13,7 @@ import (
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	graphicsdirect3didiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -77,13 +77,13 @@ func WrapID3D12CommandQueue(raw *graphicsdirect3d12.ID3D12CommandQueue) ID3D12Co
 }
 
 // UpdateTileMappings wraps the raw UpdateTileMappings call.
-func (self ID3D12CommandQueue) UpdateTileMappings(pResource *graphicsdirect3d12.ID3D12Resource, NumResourceRegions uint32, pResourceRegionStartCoordinates *graphicsdirect3d12.D3D12_TILED_RESOURCE_COORDINATE, pResourceRegionSizes *graphicsdirect3d12.D3D12_TILE_REGION_SIZE, pHeap *graphicsdirect3d12.ID3D12Heap, NumRanges uint32, pRangeFlags *graphicsdirect3d12.D3D12_TILE_RANGE_FLAGS, pHeapRangeStartOffsets *uint32, pRangeTileCounts *uint32, Flags graphicsdirect3d12.D3D12_TILE_MAPPING_FLAGS) {
-	self.Raw.UpdateTileMappings(pResource, NumResourceRegions, pResourceRegionStartCoordinates, pResourceRegionSizes, pHeap, NumRanges, pRangeFlags, pHeapRangeStartOffsets, pRangeTileCounts, Flags)
+func (self ID3D12CommandQueue) UpdateTileMappings(pResource ID3D12Resource, NumResourceRegions uint32, pResourceRegionStartCoordinates *graphicsdirect3d12.D3D12_TILED_RESOURCE_COORDINATE, pResourceRegionSizes *graphicsdirect3d12.D3D12_TILE_REGION_SIZE, pHeap ID3D12Heap, NumRanges uint32, pRangeFlags *graphicsdirect3d12.D3D12_TILE_RANGE_FLAGS, pHeapRangeStartOffsets *uint32, pRangeTileCounts *uint32, Flags graphicsdirect3d12.D3D12_TILE_MAPPING_FLAGS) {
+	self.Raw.UpdateTileMappings(pResource.Raw, NumResourceRegions, pResourceRegionStartCoordinates, pResourceRegionSizes, pHeap.Raw, NumRanges, pRangeFlags, pHeapRangeStartOffsets, pRangeTileCounts, Flags)
 }
 
 // CopyTileMappings wraps the raw CopyTileMappings call.
-func (self ID3D12CommandQueue) CopyTileMappings(pDstResource *graphicsdirect3d12.ID3D12Resource, pDstRegionStartCoordinate *graphicsdirect3d12.D3D12_TILED_RESOURCE_COORDINATE, pSrcResource *graphicsdirect3d12.ID3D12Resource, pSrcRegionStartCoordinate *graphicsdirect3d12.D3D12_TILED_RESOURCE_COORDINATE, pRegionSize *graphicsdirect3d12.D3D12_TILE_REGION_SIZE, Flags graphicsdirect3d12.D3D12_TILE_MAPPING_FLAGS) {
-	self.Raw.CopyTileMappings(pDstResource, pDstRegionStartCoordinate, pSrcResource, pSrcRegionStartCoordinate, pRegionSize, Flags)
+func (self ID3D12CommandQueue) CopyTileMappings(pDstResource ID3D12Resource, pDstRegionStartCoordinate *graphicsdirect3d12.D3D12_TILED_RESOURCE_COORDINATE, pSrcResource ID3D12Resource, pSrcRegionStartCoordinate *graphicsdirect3d12.D3D12_TILED_RESOURCE_COORDINATE, pRegionSize *graphicsdirect3d12.D3D12_TILE_REGION_SIZE, Flags graphicsdirect3d12.D3D12_TILE_MAPPING_FLAGS) {
+	self.Raw.CopyTileMappings(pDstResource.Raw, pDstRegionStartCoordinate, pSrcResource.Raw, pSrcRegionStartCoordinate, pRegionSize, Flags)
 }
 
 // ExecuteCommandLists wraps the raw ExecuteCommandLists call.
@@ -107,13 +107,13 @@ func (self ID3D12CommandQueue) EndEvent() {
 }
 
 // Signal wraps the raw Signal call.
-func (self ID3D12CommandQueue) Signal(pFence *graphicsdirect3d12.ID3D12Fence, Value uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Signal(pFence, Value)))
+func (self ID3D12CommandQueue) Signal(pFence ID3D12Fence, Value uint64) error {
+	return win32.HRESULTError(int32(self.Raw.Signal(pFence.Raw, Value)))
 }
 
 // Wait wraps the raw Wait call.
-func (self ID3D12CommandQueue) Wait(pFence *graphicsdirect3d12.ID3D12Fence, Value uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Wait(pFence, Value)))
+func (self ID3D12CommandQueue) Wait(pFence ID3D12Fence, Value uint64) error {
+	return win32.HRESULTError(int32(self.Raw.Wait(pFence.Raw, Value)))
 }
 
 // GetTimestampFrequency wraps the raw GetTimestampFrequency call.
@@ -190,8 +190,8 @@ func (self ID3D12Compiler) CompileStateObject(pGroupKey *graphicsdirect3d12.D3D1
 }
 
 // CompileAddToStateObject wraps the raw CompileAddToStateObject call.
-func (self ID3D12Compiler) CompileAddToStateObject(pGroupKey *graphicsdirect3d12.D3D12_COMPILER_CACHE_GROUP_KEY, GroupVersion uint32, pAddition *graphicsdirect3d12.D3D12_STATE_OBJECT_DESC, pCompilerStateObjectToGrowFrom *graphicsdirect3d12.ID3D12CompilerStateObject, riid *win32.GUID, ppNewCompilerStateObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CompileAddToStateObject(pGroupKey, GroupVersion, pAddition, pCompilerStateObjectToGrowFrom, riid, ppNewCompilerStateObject)))
+func (self ID3D12Compiler) CompileAddToStateObject(pGroupKey *graphicsdirect3d12.D3D12_COMPILER_CACHE_GROUP_KEY, GroupVersion uint32, pAddition *graphicsdirect3d12.D3D12_STATE_OBJECT_DESC, pCompilerStateObjectToGrowFrom ID3D12CompilerStateObject, riid *win32.GUID, ppNewCompilerStateObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CompileAddToStateObject(pGroupKey, GroupVersion, pAddition, pCompilerStateObjectToGrowFrom.Raw, riid, ppNewCompilerStateObject)))
 }
 
 // GetCacheSession wraps the raw GetCacheSession call.
@@ -287,8 +287,8 @@ func (self ID3D12CompilerFactory) CreateCompilerCacheSession(pPaths *graphicsdir
 }
 
 // CreateCompiler wraps the raw CreateCompiler call.
-func (self ID3D12CompilerFactory) CreateCompiler(pCompilerCacheSession *graphicsdirect3d12.ID3D12CompilerCacheSession, riid *win32.GUID, ppCompiler *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCompiler(pCompilerCacheSession, riid, ppCompiler)))
+func (self ID3D12CompilerFactory) CreateCompiler(pCompilerCacheSession ID3D12CompilerCacheSession, riid *win32.GUID, ppCompiler *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCompiler(pCompilerCacheSession.Raw, riid, ppCompiler)))
 }
 
 // ID3D12CompilerFactoryChild is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12CompilerFactoryChild with error-returning methods.
@@ -335,8 +335,8 @@ func WrapID3D12DSRDeviceFactory(raw *graphicsdirect3d12.ID3D12DSRDeviceFactory) 
 }
 
 // CreateDSRDevice wraps the raw CreateDSRDevice call.
-func (self ID3D12DSRDeviceFactory) CreateDSRDevice(pD3D12Device *graphicsdirect3d12.ID3D12Device, NodeMask uint32, riid *win32.GUID, ppvDSRDevice *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDSRDevice(pD3D12Device, NodeMask, riid, ppvDSRDevice)))
+func (self ID3D12DSRDeviceFactory) CreateDSRDevice(pD3D12Device ID3D12Device, NodeMask uint32, riid *win32.GUID, ppvDSRDevice *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDSRDevice(pD3D12Device.Raw, NodeMask, riid, ppvDSRDevice)))
 }
 
 // ID3D12Debug is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12Debug with error-returning methods.
@@ -489,8 +489,8 @@ func WrapID3D12DebugCommandList(raw *graphicsdirect3d12.ID3D12DebugCommandList) 
 }
 
 // AssertResourceState wraps the raw AssertResourceState call.
-func (self ID3D12DebugCommandList) AssertResourceState(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, State uint32) foundation.BOOL {
-	return self.Raw.AssertResourceState(pResource, Subresource, State)
+func (self ID3D12DebugCommandList) AssertResourceState(pResource ID3D12Resource, Subresource uint32, State uint32) foundation.BOOL {
+	return self.Raw.AssertResourceState(pResource.Raw, Subresource, State)
 }
 
 // SetFeatureMask wraps the raw SetFeatureMask call.
@@ -515,8 +515,8 @@ func WrapID3D12DebugCommandList1(raw *graphicsdirect3d12.ID3D12DebugCommandList1
 }
 
 // AssertResourceState wraps the raw AssertResourceState call.
-func (self ID3D12DebugCommandList1) AssertResourceState(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, State uint32) foundation.BOOL {
-	return self.Raw.AssertResourceState(pResource, Subresource, State)
+func (self ID3D12DebugCommandList1) AssertResourceState(pResource ID3D12Resource, Subresource uint32, State uint32) foundation.BOOL {
+	return self.Raw.AssertResourceState(pResource.Raw, Subresource, State)
 }
 
 // SetDebugParameter wraps the raw SetDebugParameter call.
@@ -562,13 +562,13 @@ func WrapID3D12DebugCommandList3(raw *graphicsdirect3d12.ID3D12DebugCommandList3
 }
 
 // AssertResourceAccess wraps the raw AssertResourceAccess call.
-func (self ID3D12DebugCommandList3) AssertResourceAccess(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, Access graphicsdirect3d12.D3D12_BARRIER_ACCESS) {
-	self.Raw.AssertResourceAccess(pResource, Subresource, Access)
+func (self ID3D12DebugCommandList3) AssertResourceAccess(pResource ID3D12Resource, Subresource uint32, Access graphicsdirect3d12.D3D12_BARRIER_ACCESS) {
+	self.Raw.AssertResourceAccess(pResource.Raw, Subresource, Access)
 }
 
 // AssertTextureLayout wraps the raw AssertTextureLayout call.
-func (self ID3D12DebugCommandList3) AssertTextureLayout(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, Layout graphicsdirect3d12.D3D12_BARRIER_LAYOUT) {
-	self.Raw.AssertTextureLayout(pResource, Subresource, Layout)
+func (self ID3D12DebugCommandList3) AssertTextureLayout(pResource ID3D12Resource, Subresource uint32, Layout graphicsdirect3d12.D3D12_BARRIER_LAYOUT) {
+	self.Raw.AssertTextureLayout(pResource.Raw, Subresource, Layout)
 }
 
 // ID3D12DebugCommandQueue is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12DebugCommandQueue with error-returning methods.
@@ -583,8 +583,8 @@ func WrapID3D12DebugCommandQueue(raw *graphicsdirect3d12.ID3D12DebugCommandQueue
 }
 
 // AssertResourceState wraps the raw AssertResourceState call.
-func (self ID3D12DebugCommandQueue) AssertResourceState(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, State uint32) foundation.BOOL {
-	return self.Raw.AssertResourceState(pResource, Subresource, State)
+func (self ID3D12DebugCommandQueue) AssertResourceState(pResource ID3D12Resource, Subresource uint32, State uint32) foundation.BOOL {
+	return self.Raw.AssertResourceState(pResource.Raw, Subresource, State)
 }
 
 // ID3D12DebugCommandQueue1 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12DebugCommandQueue1 with error-returning methods.
@@ -599,13 +599,13 @@ func WrapID3D12DebugCommandQueue1(raw *graphicsdirect3d12.ID3D12DebugCommandQueu
 }
 
 // AssertResourceAccess wraps the raw AssertResourceAccess call.
-func (self ID3D12DebugCommandQueue1) AssertResourceAccess(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, Access graphicsdirect3d12.D3D12_BARRIER_ACCESS) {
-	self.Raw.AssertResourceAccess(pResource, Subresource, Access)
+func (self ID3D12DebugCommandQueue1) AssertResourceAccess(pResource ID3D12Resource, Subresource uint32, Access graphicsdirect3d12.D3D12_BARRIER_ACCESS) {
+	self.Raw.AssertResourceAccess(pResource.Raw, Subresource, Access)
 }
 
 // AssertTextureLayout wraps the raw AssertTextureLayout call.
-func (self ID3D12DebugCommandQueue1) AssertTextureLayout(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, Layout graphicsdirect3d12.D3D12_BARRIER_LAYOUT) {
-	self.Raw.AssertTextureLayout(pResource, Subresource, Layout)
+func (self ID3D12DebugCommandQueue1) AssertTextureLayout(pResource ID3D12Resource, Subresource uint32, Layout graphicsdirect3d12.D3D12_BARRIER_LAYOUT) {
+	self.Raw.AssertTextureLayout(pResource.Raw, Subresource, Layout)
 }
 
 // ID3D12DebugDevice is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12DebugDevice with error-returning methods.
@@ -729,8 +729,8 @@ func (self ID3D12Device) CreateComputePipelineState(pDesc *graphicsdirect3d12.D3
 }
 
 // CreateCommandList wraps the raw CreateCommandList call.
-func (self ID3D12Device) CreateCommandList(nodeMask uint32, type_ graphicsdirect3d12.D3D12_COMMAND_LIST_TYPE, pCommandAllocator *graphicsdirect3d12.ID3D12CommandAllocator, pInitialState *graphicsdirect3d12.ID3D12PipelineState, riid *win32.GUID, ppCommandList *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCommandList(nodeMask, type_, pCommandAllocator, pInitialState, riid, ppCommandList)))
+func (self ID3D12Device) CreateCommandList(nodeMask uint32, type_ graphicsdirect3d12.D3D12_COMMAND_LIST_TYPE, pCommandAllocator ID3D12CommandAllocator, pInitialState ID3D12PipelineState, riid *win32.GUID, ppCommandList *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCommandList(nodeMask, type_, pCommandAllocator.Raw, pInitialState.Raw, riid, ppCommandList)))
 }
 
 // CheckFeatureSupport wraps the raw CheckFeatureSupport call.
@@ -769,8 +769,8 @@ func (self ID3D12Device) CreateHeap(pDesc *graphicsdirect3d12.D3D12_HEAP_DESC, r
 }
 
 // CreatePlacedResource wraps the raw CreatePlacedResource call.
-func (self ID3D12Device) CreatePlacedResource(pHeap *graphicsdirect3d12.ID3D12Heap, HeapOffset uint64, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, InitialState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePlacedResource(pHeap, HeapOffset, pDesc, InitialState, pOptimizedClearValue, riid, ppvResource)))
+func (self ID3D12Device) CreatePlacedResource(pHeap ID3D12Heap, HeapOffset uint64, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, InitialState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePlacedResource(pHeap.Raw, HeapOffset, pDesc, InitialState, pOptimizedClearValue, riid, ppvResource)))
 }
 
 // CreateReservedResource wraps the raw CreateReservedResource call.
@@ -779,9 +779,9 @@ func (self ID3D12Device) CreateReservedResource(pDesc *graphicsdirect3d12.D3D12_
 }
 
 // CreateSharedHandle wraps the raw CreateSharedHandle call.
-func (self ID3D12Device) CreateSharedHandle(pObject *graphicsdirect3d12.ID3D12DeviceChild, pAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name string, pHandle *foundation.HANDLE) error {
+func (self ID3D12Device) CreateSharedHandle(pObject ID3D12DeviceChild, pAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name string, pHandle *foundation.HANDLE) error {
 	_Name := win32.UTF16Ptr(Name)
-	return win32.HRESULTError(int32(self.Raw.CreateSharedHandle(pObject, pAttributes, Access, foundation.PWSTR(_Name), pHandle)))
+	return win32.HRESULTError(int32(self.Raw.CreateSharedHandle(pObject.Raw, pAttributes, Access, foundation.PWSTR(_Name), pHandle)))
 }
 
 // OpenSharedHandle wraps the raw OpenSharedHandle call.
@@ -832,13 +832,13 @@ func (self ID3D12Device) SetStablePowerState(Enable bool) error {
 }
 
 // CreateCommandSignature wraps the raw CreateCommandSignature call.
-func (self ID3D12Device) CreateCommandSignature(pDesc *graphicsdirect3d12.D3D12_COMMAND_SIGNATURE_DESC, pRootSignature *graphicsdirect3d12.ID3D12RootSignature, riid *win32.GUID, ppvCommandSignature *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCommandSignature(pDesc, pRootSignature, riid, ppvCommandSignature)))
+func (self ID3D12Device) CreateCommandSignature(pDesc *graphicsdirect3d12.D3D12_COMMAND_SIGNATURE_DESC, pRootSignature ID3D12RootSignature, riid *win32.GUID, ppvCommandSignature *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCommandSignature(pDesc, pRootSignature.Raw, riid, ppvCommandSignature)))
 }
 
 // GetResourceTiling wraps the raw GetResourceTiling call.
-func (self ID3D12Device) GetResourceTiling(pTiledResource *graphicsdirect3d12.ID3D12Resource, pNumTilesForEntireResource *uint32, pPackedMipDesc *graphicsdirect3d12.D3D12_PACKED_MIP_INFO, pStandardTileShapeForNonPackedMips *graphicsdirect3d12.D3D12_TILE_SHAPE, pNumSubresourceTilings *uint32, FirstSubresourceTilingToGet uint32, pSubresourceTilingsForNonPackedMips *graphicsdirect3d12.D3D12_SUBRESOURCE_TILING) {
-	self.Raw.GetResourceTiling(pTiledResource, pNumTilesForEntireResource, pPackedMipDesc, pStandardTileShapeForNonPackedMips, pNumSubresourceTilings, FirstSubresourceTilingToGet, pSubresourceTilingsForNonPackedMips)
+func (self ID3D12Device) GetResourceTiling(pTiledResource ID3D12Resource, pNumTilesForEntireResource *uint32, pPackedMipDesc *graphicsdirect3d12.D3D12_PACKED_MIP_INFO, pStandardTileShapeForNonPackedMips *graphicsdirect3d12.D3D12_TILE_SHAPE, pNumSubresourceTilings *uint32, FirstSubresourceTilingToGet uint32, pSubresourceTilingsForNonPackedMips *graphicsdirect3d12.D3D12_SUBRESOURCE_TILING) {
+	self.Raw.GetResourceTiling(pTiledResource.Raw, pNumTilesForEntireResource, pPackedMipDesc, pStandardTileShapeForNonPackedMips, pNumSubresourceTilings, FirstSubresourceTilingToGet, pSubresourceTilingsForNonPackedMips)
 }
 
 // ID3D12Device1 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12Device1 with error-returning methods.
@@ -879,18 +879,18 @@ func WrapID3D12Device10(raw *graphicsdirect3d12.ID3D12Device10) ID3D12Device10 {
 }
 
 // CreateCommittedResource3 wraps the raw CreateCommittedResource3 call.
-func (self ID3D12Device10) CreateCommittedResource3(pHeapProperties *graphicsdirect3d12.D3D12_HEAP_PROPERTIES, HeapFlags graphicsdirect3d12.D3D12_HEAP_FLAGS, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC1, InitialLayout graphicsdirect3d12.D3D12_BARRIER_LAYOUT, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riidResource *win32.GUID, ppvResource *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCommittedResource3(pHeapProperties, HeapFlags, pDesc, InitialLayout, pOptimizedClearValue, pProtectedSession, NumCastableFormats, pCastableFormats, riidResource, ppvResource)))
+func (self ID3D12Device10) CreateCommittedResource3(pHeapProperties *graphicsdirect3d12.D3D12_HEAP_PROPERTIES, HeapFlags graphicsdirect3d12.D3D12_HEAP_FLAGS, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC1, InitialLayout graphicsdirect3d12.D3D12_BARRIER_LAYOUT, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession ID3D12ProtectedResourceSession, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riidResource *win32.GUID, ppvResource *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCommittedResource3(pHeapProperties, HeapFlags, pDesc, InitialLayout, pOptimizedClearValue, pProtectedSession.Raw, NumCastableFormats, pCastableFormats, riidResource, ppvResource)))
 }
 
 // CreatePlacedResource2 wraps the raw CreatePlacedResource2 call.
-func (self ID3D12Device10) CreatePlacedResource2(pHeap *graphicsdirect3d12.ID3D12Heap, HeapOffset uint64, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC1, InitialLayout graphicsdirect3d12.D3D12_BARRIER_LAYOUT, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePlacedResource2(pHeap, HeapOffset, pDesc, InitialLayout, pOptimizedClearValue, NumCastableFormats, pCastableFormats, riid, ppvResource)))
+func (self ID3D12Device10) CreatePlacedResource2(pHeap ID3D12Heap, HeapOffset uint64, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC1, InitialLayout graphicsdirect3d12.D3D12_BARRIER_LAYOUT, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePlacedResource2(pHeap.Raw, HeapOffset, pDesc, InitialLayout, pOptimizedClearValue, NumCastableFormats, pCastableFormats, riid, ppvResource)))
 }
 
 // CreateReservedResource2 wraps the raw CreateReservedResource2 call.
-func (self ID3D12Device10) CreateReservedResource2(pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, InitialLayout graphicsdirect3d12.D3D12_BARRIER_LAYOUT, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateReservedResource2(pDesc, InitialLayout, pOptimizedClearValue, pProtectedSession, NumCastableFormats, pCastableFormats, riid, ppvResource)))
+func (self ID3D12Device10) CreateReservedResource2(pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, InitialLayout graphicsdirect3d12.D3D12_BARRIER_LAYOUT, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession ID3D12ProtectedResourceSession, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateReservedResource2(pDesc, InitialLayout, pOptimizedClearValue, pProtectedSession.Raw, NumCastableFormats, pCastableFormats, riid, ppvResource)))
 }
 
 // ID3D12Device11 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12Device11 with error-returning methods.
@@ -975,8 +975,8 @@ func (self ID3D12Device15) CreateQueryHeap1(pDesc *graphicsdirect3d12.D3D12_QUER
 }
 
 // ResolveQueryData wraps the raw ResolveQueryData call.
-func (self ID3D12Device15) ResolveQueryData(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pResolvedQueryData unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.ResolveQueryData(pQueryHeap, Type, StartIndex, NumQueries, pResolvedQueryData)))
+func (self ID3D12Device15) ResolveQueryData(pQueryHeap ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pResolvedQueryData unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.ResolveQueryData(pQueryHeap.Raw, Type, StartIndex, NumQueries, pResolvedQueryData)))
 }
 
 // ID3D12Device2 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12Device2 with error-returning methods.
@@ -1017,8 +1017,8 @@ func (self ID3D12Device3) OpenExistingHeapFromFileMapping(hFileMapping foundatio
 }
 
 // EnqueueMakeResident wraps the raw EnqueueMakeResident call.
-func (self ID3D12Device3) EnqueueMakeResident(Flags graphicsdirect3d12.D3D12_RESIDENCY_FLAGS, NumObjects uint32, ppObjects **graphicsdirect3d12.ID3D12Pageable, pFenceToSignal *graphicsdirect3d12.ID3D12Fence, FenceValueToSignal uint64) error {
-	return win32.HRESULTError(int32(self.Raw.EnqueueMakeResident(Flags, NumObjects, ppObjects, pFenceToSignal, FenceValueToSignal)))
+func (self ID3D12Device3) EnqueueMakeResident(Flags graphicsdirect3d12.D3D12_RESIDENCY_FLAGS, NumObjects uint32, ppObjects **graphicsdirect3d12.ID3D12Pageable, pFenceToSignal ID3D12Fence, FenceValueToSignal uint64) error {
+	return win32.HRESULTError(int32(self.Raw.EnqueueMakeResident(Flags, NumObjects, ppObjects, pFenceToSignal.Raw, FenceValueToSignal)))
 }
 
 // ID3D12Device4 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12Device4 with error-returning methods.
@@ -1043,18 +1043,18 @@ func (self ID3D12Device4) CreateProtectedResourceSession(pDesc *graphicsdirect3d
 }
 
 // CreateCommittedResource1 wraps the raw CreateCommittedResource1 call.
-func (self ID3D12Device4) CreateCommittedResource1(pHeapProperties *graphicsdirect3d12.D3D12_HEAP_PROPERTIES, HeapFlags graphicsdirect3d12.D3D12_HEAP_FLAGS, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, InitialResourceState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riidResource *win32.GUID, ppvResource *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCommittedResource1(pHeapProperties, HeapFlags, pDesc, InitialResourceState, pOptimizedClearValue, pProtectedSession, riidResource, ppvResource)))
+func (self ID3D12Device4) CreateCommittedResource1(pHeapProperties *graphicsdirect3d12.D3D12_HEAP_PROPERTIES, HeapFlags graphicsdirect3d12.D3D12_HEAP_FLAGS, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, InitialResourceState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession ID3D12ProtectedResourceSession, riidResource *win32.GUID, ppvResource *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCommittedResource1(pHeapProperties, HeapFlags, pDesc, InitialResourceState, pOptimizedClearValue, pProtectedSession.Raw, riidResource, ppvResource)))
 }
 
 // CreateHeap1 wraps the raw CreateHeap1 call.
-func (self ID3D12Device4) CreateHeap1(pDesc *graphicsdirect3d12.D3D12_HEAP_DESC, pProtectedSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppvHeap *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateHeap1(pDesc, pProtectedSession, riid, ppvHeap)))
+func (self ID3D12Device4) CreateHeap1(pDesc *graphicsdirect3d12.D3D12_HEAP_DESC, pProtectedSession ID3D12ProtectedResourceSession, riid *win32.GUID, ppvHeap *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateHeap1(pDesc, pProtectedSession.Raw, riid, ppvHeap)))
 }
 
 // CreateReservedResource1 wraps the raw CreateReservedResource1 call.
-func (self ID3D12Device4) CreateReservedResource1(pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, InitialState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateReservedResource1(pDesc, InitialState, pOptimizedClearValue, pProtectedSession, riid, ppvResource)))
+func (self ID3D12Device4) CreateReservedResource1(pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, InitialState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession ID3D12ProtectedResourceSession, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateReservedResource1(pDesc, InitialState, pOptimizedClearValue, pProtectedSession.Raw, riid, ppvResource)))
 }
 
 // ID3D12Device5 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12Device5 with error-returning methods.
@@ -1069,8 +1069,8 @@ func WrapID3D12Device5(raw *graphicsdirect3d12.ID3D12Device5) ID3D12Device5 {
 }
 
 // CreateLifetimeTracker wraps the raw CreateLifetimeTracker call.
-func (self ID3D12Device5) CreateLifetimeTracker(pOwner *graphicsdirect3d12.ID3D12LifetimeOwner, riid *win32.GUID, ppvTracker *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateLifetimeTracker(pOwner, riid, ppvTracker)))
+func (self ID3D12Device5) CreateLifetimeTracker(pOwner ID3D12LifetimeOwner, riid *win32.GUID, ppvTracker *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateLifetimeTracker(pOwner.Raw, riid, ppvTracker)))
 }
 
 // RemoveDevice wraps the raw RemoveDevice call.
@@ -1136,8 +1136,8 @@ func WrapID3D12Device7(raw *graphicsdirect3d12.ID3D12Device7) ID3D12Device7 {
 }
 
 // AddToStateObject wraps the raw AddToStateObject call.
-func (self ID3D12Device7) AddToStateObject(pAddition *graphicsdirect3d12.D3D12_STATE_OBJECT_DESC, pStateObjectToGrowFrom *graphicsdirect3d12.ID3D12StateObject, riid *win32.GUID, ppNewStateObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.AddToStateObject(pAddition, pStateObjectToGrowFrom, riid, ppNewStateObject)))
+func (self ID3D12Device7) AddToStateObject(pAddition *graphicsdirect3d12.D3D12_STATE_OBJECT_DESC, pStateObjectToGrowFrom ID3D12StateObject, riid *win32.GUID, ppNewStateObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.AddToStateObject(pAddition, pStateObjectToGrowFrom.Raw, riid, ppNewStateObject)))
 }
 
 // CreateProtectedResourceSession1 wraps the raw CreateProtectedResourceSession1 call.
@@ -1157,13 +1157,13 @@ func WrapID3D12Device8(raw *graphicsdirect3d12.ID3D12Device8) ID3D12Device8 {
 }
 
 // CreateCommittedResource2 wraps the raw CreateCommittedResource2 call.
-func (self ID3D12Device8) CreateCommittedResource2(pHeapProperties *graphicsdirect3d12.D3D12_HEAP_PROPERTIES, HeapFlags graphicsdirect3d12.D3D12_HEAP_FLAGS, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC1, InitialResourceState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riidResource *win32.GUID, ppvResource *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCommittedResource2(pHeapProperties, HeapFlags, pDesc, InitialResourceState, pOptimizedClearValue, pProtectedSession, riidResource, ppvResource)))
+func (self ID3D12Device8) CreateCommittedResource2(pHeapProperties *graphicsdirect3d12.D3D12_HEAP_PROPERTIES, HeapFlags graphicsdirect3d12.D3D12_HEAP_FLAGS, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC1, InitialResourceState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, pProtectedSession ID3D12ProtectedResourceSession, riidResource *win32.GUID, ppvResource *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCommittedResource2(pHeapProperties, HeapFlags, pDesc, InitialResourceState, pOptimizedClearValue, pProtectedSession.Raw, riidResource, ppvResource)))
 }
 
 // CreatePlacedResource1 wraps the raw CreatePlacedResource1 call.
-func (self ID3D12Device8) CreatePlacedResource1(pHeap *graphicsdirect3d12.ID3D12Heap, HeapOffset uint64, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC1, InitialState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePlacedResource1(pHeap, HeapOffset, pDesc, InitialState, pOptimizedClearValue, riid, ppvResource)))
+func (self ID3D12Device8) CreatePlacedResource1(pHeap ID3D12Heap, HeapOffset uint64, pDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC1, InitialState graphicsdirect3d12.D3D12_RESOURCE_STATES, pOptimizedClearValue *graphicsdirect3d12.D3D12_CLEAR_VALUE, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePlacedResource1(pHeap.Raw, HeapOffset, pDesc, InitialState, pOptimizedClearValue, riid, ppvResource)))
 }
 
 // GetCopyableFootprints1 wraps the raw GetCopyableFootprints1 call.
@@ -1298,8 +1298,8 @@ func (self ID3D12DeviceFactory) EnableExperimentalFeatures(NumFeatures uint32, p
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID3D12DeviceFactory) CreateDevice(adapter *systemcom.IUnknown, FeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppvDevice *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(adapter, FeatureLevel, riid, ppvDevice)))
+func (self ID3D12DeviceFactory) CreateDevice(adapter systemcomidiom.IUnknown, FeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppvDevice *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(adapter.Raw, FeatureLevel, riid, ppvDevice)))
 }
 
 // ID3D12DeviceRemovedExtendedData is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12DeviceRemovedExtendedData with error-returning methods.
@@ -1591,23 +1591,23 @@ func WrapID3D12GBVDiagnostics(raw *graphicsdirect3d12.ID3D12GBVDiagnostics) ID3D
 }
 
 // GetGBVEntireSubresourceStatesData wraps the raw GetGBVEntireSubresourceStatesData call.
-func (self ID3D12GBVDiagnostics) GetGBVEntireSubresourceStatesData(pResource *graphicsdirect3d12.ID3D12Resource, pData *int32, DataSize uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetGBVEntireSubresourceStatesData(pResource, pData, DataSize)))
+func (self ID3D12GBVDiagnostics) GetGBVEntireSubresourceStatesData(pResource ID3D12Resource, pData *int32, DataSize uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetGBVEntireSubresourceStatesData(pResource.Raw, pData, DataSize)))
 }
 
 // GetGBVSubresourceState wraps the raw GetGBVSubresourceState call.
-func (self ID3D12GBVDiagnostics) GetGBVSubresourceState(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, pData *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetGBVSubresourceState(pResource, Subresource, pData)))
+func (self ID3D12GBVDiagnostics) GetGBVSubresourceState(pResource ID3D12Resource, Subresource uint32, pData *int32) error {
+	return win32.HRESULTError(int32(self.Raw.GetGBVSubresourceState(pResource.Raw, Subresource, pData)))
 }
 
 // GetGBVResourceUniformState wraps the raw GetGBVResourceUniformState call.
-func (self ID3D12GBVDiagnostics) GetGBVResourceUniformState(pResource *graphicsdirect3d12.ID3D12Resource, pData *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetGBVResourceUniformState(pResource, pData)))
+func (self ID3D12GBVDiagnostics) GetGBVResourceUniformState(pResource ID3D12Resource, pData *int32) error {
+	return win32.HRESULTError(int32(self.Raw.GetGBVResourceUniformState(pResource.Raw, pData)))
 }
 
 // GetGBVResourceInfo wraps the raw GetGBVResourceInfo call.
-func (self ID3D12GBVDiagnostics) GetGBVResourceInfo(pResource *graphicsdirect3d12.ID3D12Resource, pResourceDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pResourceHash *uint32, pSubresourceStatesByteOffset *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetGBVResourceInfo(pResource, pResourceDesc, pResourceHash, pSubresourceStatesByteOffset)))
+func (self ID3D12GBVDiagnostics) GetGBVResourceInfo(pResource ID3D12Resource, pResourceDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pResourceHash *uint32, pSubresourceStatesByteOffset *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetGBVResourceInfo(pResource.Raw, pResourceDesc, pResourceHash, pSubresourceStatesByteOffset)))
 }
 
 // GBVReserved0 wraps the raw GBVReserved0 call.
@@ -1637,13 +1637,13 @@ func (self ID3D12GraphicsCommandList) Close() error {
 }
 
 // Reset wraps the raw Reset call.
-func (self ID3D12GraphicsCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator, pInitialState *graphicsdirect3d12.ID3D12PipelineState) error {
-	return win32.HRESULTError(int32(self.Raw.Reset(pAllocator, pInitialState)))
+func (self ID3D12GraphicsCommandList) Reset(pAllocator ID3D12CommandAllocator, pInitialState ID3D12PipelineState) error {
+	return win32.HRESULTError(int32(self.Raw.Reset(pAllocator.Raw, pInitialState.Raw)))
 }
 
 // ClearState wraps the raw ClearState call.
-func (self ID3D12GraphicsCommandList) ClearState(pPipelineState *graphicsdirect3d12.ID3D12PipelineState) {
-	self.Raw.ClearState(pPipelineState)
+func (self ID3D12GraphicsCommandList) ClearState(pPipelineState ID3D12PipelineState) {
+	self.Raw.ClearState(pPipelineState.Raw)
 }
 
 // DrawInstanced wraps the raw DrawInstanced call.
@@ -1662,8 +1662,8 @@ func (self ID3D12GraphicsCommandList) Dispatch(ThreadGroupCountX uint32, ThreadG
 }
 
 // CopyBufferRegion wraps the raw CopyBufferRegion call.
-func (self ID3D12GraphicsCommandList) CopyBufferRegion(pDstBuffer *graphicsdirect3d12.ID3D12Resource, DstOffset uint64, pSrcBuffer *graphicsdirect3d12.ID3D12Resource, SrcOffset uint64, NumBytes uint64) {
-	self.Raw.CopyBufferRegion(pDstBuffer, DstOffset, pSrcBuffer, SrcOffset, NumBytes)
+func (self ID3D12GraphicsCommandList) CopyBufferRegion(pDstBuffer ID3D12Resource, DstOffset uint64, pSrcBuffer ID3D12Resource, SrcOffset uint64, NumBytes uint64) {
+	self.Raw.CopyBufferRegion(pDstBuffer.Raw, DstOffset, pSrcBuffer.Raw, SrcOffset, NumBytes)
 }
 
 // CopyTextureRegion wraps the raw CopyTextureRegion call.
@@ -1672,18 +1672,18 @@ func (self ID3D12GraphicsCommandList) CopyTextureRegion(pDst *graphicsdirect3d12
 }
 
 // CopyResource wraps the raw CopyResource call.
-func (self ID3D12GraphicsCommandList) CopyResource(pDstResource *graphicsdirect3d12.ID3D12Resource, pSrcResource *graphicsdirect3d12.ID3D12Resource) {
-	self.Raw.CopyResource(pDstResource, pSrcResource)
+func (self ID3D12GraphicsCommandList) CopyResource(pDstResource ID3D12Resource, pSrcResource ID3D12Resource) {
+	self.Raw.CopyResource(pDstResource.Raw, pSrcResource.Raw)
 }
 
 // CopyTiles wraps the raw CopyTiles call.
-func (self ID3D12GraphicsCommandList) CopyTiles(pTiledResource *graphicsdirect3d12.ID3D12Resource, pTileRegionStartCoordinate *graphicsdirect3d12.D3D12_TILED_RESOURCE_COORDINATE, pTileRegionSize *graphicsdirect3d12.D3D12_TILE_REGION_SIZE, pBuffer *graphicsdirect3d12.ID3D12Resource, BufferStartOffsetInBytes uint64, Flags graphicsdirect3d12.D3D12_TILE_COPY_FLAGS) {
-	self.Raw.CopyTiles(pTiledResource, pTileRegionStartCoordinate, pTileRegionSize, pBuffer, BufferStartOffsetInBytes, Flags)
+func (self ID3D12GraphicsCommandList) CopyTiles(pTiledResource ID3D12Resource, pTileRegionStartCoordinate *graphicsdirect3d12.D3D12_TILED_RESOURCE_COORDINATE, pTileRegionSize *graphicsdirect3d12.D3D12_TILE_REGION_SIZE, pBuffer ID3D12Resource, BufferStartOffsetInBytes uint64, Flags graphicsdirect3d12.D3D12_TILE_COPY_FLAGS) {
+	self.Raw.CopyTiles(pTiledResource.Raw, pTileRegionStartCoordinate, pTileRegionSize, pBuffer.Raw, BufferStartOffsetInBytes, Flags)
 }
 
 // ResolveSubresource wraps the raw ResolveSubresource call.
-func (self ID3D12GraphicsCommandList) ResolveSubresource(pDstResource *graphicsdirect3d12.ID3D12Resource, DstSubresource uint32, pSrcResource *graphicsdirect3d12.ID3D12Resource, SrcSubresource uint32, Format graphicsdxgicommon.DXGI_FORMAT) {
-	self.Raw.ResolveSubresource(pDstResource, DstSubresource, pSrcResource, SrcSubresource, Format)
+func (self ID3D12GraphicsCommandList) ResolveSubresource(pDstResource ID3D12Resource, DstSubresource uint32, pSrcResource ID3D12Resource, SrcSubresource uint32, Format graphicsdxgicommon.DXGI_FORMAT) {
+	self.Raw.ResolveSubresource(pDstResource.Raw, DstSubresource, pSrcResource.Raw, SrcSubresource, Format)
 }
 
 // IASetPrimitiveTopology wraps the raw IASetPrimitiveTopology call.
@@ -1712,8 +1712,8 @@ func (self ID3D12GraphicsCommandList) OMSetStencilRef(StencilRef uint32) {
 }
 
 // SetPipelineState wraps the raw SetPipelineState call.
-func (self ID3D12GraphicsCommandList) SetPipelineState(pPipelineState *graphicsdirect3d12.ID3D12PipelineState) {
-	self.Raw.SetPipelineState(pPipelineState)
+func (self ID3D12GraphicsCommandList) SetPipelineState(pPipelineState ID3D12PipelineState) {
+	self.Raw.SetPipelineState(pPipelineState.Raw)
 }
 
 // ResourceBarrier wraps the raw ResourceBarrier call.
@@ -1722,8 +1722,8 @@ func (self ID3D12GraphicsCommandList) ResourceBarrier(NumBarriers uint32, pBarri
 }
 
 // ExecuteBundle wraps the raw ExecuteBundle call.
-func (self ID3D12GraphicsCommandList) ExecuteBundle(pCommandList *graphicsdirect3d12.ID3D12GraphicsCommandList) {
-	self.Raw.ExecuteBundle(pCommandList)
+func (self ID3D12GraphicsCommandList) ExecuteBundle(pCommandList ID3D12GraphicsCommandList) {
+	self.Raw.ExecuteBundle(pCommandList.Raw)
 }
 
 // SetDescriptorHeaps wraps the raw SetDescriptorHeaps call.
@@ -1732,13 +1732,13 @@ func (self ID3D12GraphicsCommandList) SetDescriptorHeaps(NumDescriptorHeaps uint
 }
 
 // SetComputeRootSignature wraps the raw SetComputeRootSignature call.
-func (self ID3D12GraphicsCommandList) SetComputeRootSignature(pRootSignature *graphicsdirect3d12.ID3D12RootSignature) {
-	self.Raw.SetComputeRootSignature(pRootSignature)
+func (self ID3D12GraphicsCommandList) SetComputeRootSignature(pRootSignature ID3D12RootSignature) {
+	self.Raw.SetComputeRootSignature(pRootSignature.Raw)
 }
 
 // SetGraphicsRootSignature wraps the raw SetGraphicsRootSignature call.
-func (self ID3D12GraphicsCommandList) SetGraphicsRootSignature(pRootSignature *graphicsdirect3d12.ID3D12RootSignature) {
-	self.Raw.SetGraphicsRootSignature(pRootSignature)
+func (self ID3D12GraphicsCommandList) SetGraphicsRootSignature(pRootSignature ID3D12RootSignature) {
+	self.Raw.SetGraphicsRootSignature(pRootSignature.Raw)
 }
 
 // SetComputeRoot32BitConstant wraps the raw SetComputeRoot32BitConstant call.
@@ -1813,28 +1813,28 @@ func (self ID3D12GraphicsCommandList) OMSetRenderTargets(NumRenderTargetDescript
 }
 
 // DiscardResource wraps the raw DiscardResource call.
-func (self ID3D12GraphicsCommandList) DiscardResource(pResource *graphicsdirect3d12.ID3D12Resource, pRegion *graphicsdirect3d12.D3D12_DISCARD_REGION) {
-	self.Raw.DiscardResource(pResource, pRegion)
+func (self ID3D12GraphicsCommandList) DiscardResource(pResource ID3D12Resource, pRegion *graphicsdirect3d12.D3D12_DISCARD_REGION) {
+	self.Raw.DiscardResource(pResource.Raw, pRegion)
 }
 
 // BeginQuery wraps the raw BeginQuery call.
-func (self ID3D12GraphicsCommandList) BeginQuery(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
-	self.Raw.BeginQuery(pQueryHeap, Type, Index)
+func (self ID3D12GraphicsCommandList) BeginQuery(pQueryHeap ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
+	self.Raw.BeginQuery(pQueryHeap.Raw, Type, Index)
 }
 
 // EndQuery wraps the raw EndQuery call.
-func (self ID3D12GraphicsCommandList) EndQuery(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
-	self.Raw.EndQuery(pQueryHeap, Type, Index)
+func (self ID3D12GraphicsCommandList) EndQuery(pQueryHeap ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, Index uint32) {
+	self.Raw.EndQuery(pQueryHeap.Raw, Type, Index)
 }
 
 // ResolveQueryData wraps the raw ResolveQueryData call.
-func (self ID3D12GraphicsCommandList) ResolveQueryData(pQueryHeap *graphicsdirect3d12.ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pDestinationBuffer *graphicsdirect3d12.ID3D12Resource, AlignedDestinationBufferOffset uint64) {
-	self.Raw.ResolveQueryData(pQueryHeap, Type, StartIndex, NumQueries, pDestinationBuffer, AlignedDestinationBufferOffset)
+func (self ID3D12GraphicsCommandList) ResolveQueryData(pQueryHeap ID3D12QueryHeap, Type graphicsdirect3d12.D3D12_QUERY_TYPE, StartIndex uint32, NumQueries uint32, pDestinationBuffer ID3D12Resource, AlignedDestinationBufferOffset uint64) {
+	self.Raw.ResolveQueryData(pQueryHeap.Raw, Type, StartIndex, NumQueries, pDestinationBuffer.Raw, AlignedDestinationBufferOffset)
 }
 
 // SetPredication wraps the raw SetPredication call.
-func (self ID3D12GraphicsCommandList) SetPredication(pBuffer *graphicsdirect3d12.ID3D12Resource, AlignedBufferOffset uint64, Operation graphicsdirect3d12.D3D12_PREDICATION_OP) {
-	self.Raw.SetPredication(pBuffer, AlignedBufferOffset, Operation)
+func (self ID3D12GraphicsCommandList) SetPredication(pBuffer ID3D12Resource, AlignedBufferOffset uint64, Operation graphicsdirect3d12.D3D12_PREDICATION_OP) {
+	self.Raw.SetPredication(pBuffer.Raw, AlignedBufferOffset, Operation)
 }
 
 // SetMarker wraps the raw SetMarker call.
@@ -1853,8 +1853,8 @@ func (self ID3D12GraphicsCommandList) EndEvent() {
 }
 
 // ExecuteIndirect wraps the raw ExecuteIndirect call.
-func (self ID3D12GraphicsCommandList) ExecuteIndirect(pCommandSignature *graphicsdirect3d12.ID3D12CommandSignature, MaxCommandCount uint32, pArgumentBuffer *graphicsdirect3d12.ID3D12Resource, ArgumentBufferOffset uint64, pCountBuffer *graphicsdirect3d12.ID3D12Resource, CountBufferOffset uint64) {
-	self.Raw.ExecuteIndirect(pCommandSignature, MaxCommandCount, pArgumentBuffer, ArgumentBufferOffset, pCountBuffer, CountBufferOffset)
+func (self ID3D12GraphicsCommandList) ExecuteIndirect(pCommandSignature ID3D12CommandSignature, MaxCommandCount uint32, pArgumentBuffer ID3D12Resource, ArgumentBufferOffset uint64, pCountBuffer ID3D12Resource, CountBufferOffset uint64) {
+	self.Raw.ExecuteIndirect(pCommandSignature.Raw, MaxCommandCount, pArgumentBuffer.Raw, ArgumentBufferOffset, pCountBuffer.Raw, CountBufferOffset)
 }
 
 // ID3D12GraphicsCommandList1 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12GraphicsCommandList1 with error-returning methods.
@@ -1869,13 +1869,13 @@ func WrapID3D12GraphicsCommandList1(raw *graphicsdirect3d12.ID3D12GraphicsComman
 }
 
 // AtomicCopyBufferUINT wraps the raw AtomicCopyBufferUINT call.
-func (self ID3D12GraphicsCommandList1) AtomicCopyBufferUINT(pDstBuffer *graphicsdirect3d12.ID3D12Resource, DstOffset uint64, pSrcBuffer *graphicsdirect3d12.ID3D12Resource, SrcOffset uint64, Dependencies uint32, ppDependentResources **graphicsdirect3d12.ID3D12Resource, pDependentSubresourceRanges *graphicsdirect3d12.D3D12_SUBRESOURCE_RANGE_UINT64) {
-	self.Raw.AtomicCopyBufferUINT(pDstBuffer, DstOffset, pSrcBuffer, SrcOffset, Dependencies, ppDependentResources, pDependentSubresourceRanges)
+func (self ID3D12GraphicsCommandList1) AtomicCopyBufferUINT(pDstBuffer ID3D12Resource, DstOffset uint64, pSrcBuffer ID3D12Resource, SrcOffset uint64, Dependencies uint32, ppDependentResources **graphicsdirect3d12.ID3D12Resource, pDependentSubresourceRanges *graphicsdirect3d12.D3D12_SUBRESOURCE_RANGE_UINT64) {
+	self.Raw.AtomicCopyBufferUINT(pDstBuffer.Raw, DstOffset, pSrcBuffer.Raw, SrcOffset, Dependencies, ppDependentResources, pDependentSubresourceRanges)
 }
 
 // AtomicCopyBufferUINT64 wraps the raw AtomicCopyBufferUINT64 call.
-func (self ID3D12GraphicsCommandList1) AtomicCopyBufferUINT64(pDstBuffer *graphicsdirect3d12.ID3D12Resource, DstOffset uint64, pSrcBuffer *graphicsdirect3d12.ID3D12Resource, SrcOffset uint64, Dependencies uint32, ppDependentResources **graphicsdirect3d12.ID3D12Resource, pDependentSubresourceRanges *graphicsdirect3d12.D3D12_SUBRESOURCE_RANGE_UINT64) {
-	self.Raw.AtomicCopyBufferUINT64(pDstBuffer, DstOffset, pSrcBuffer, SrcOffset, Dependencies, ppDependentResources, pDependentSubresourceRanges)
+func (self ID3D12GraphicsCommandList1) AtomicCopyBufferUINT64(pDstBuffer ID3D12Resource, DstOffset uint64, pSrcBuffer ID3D12Resource, SrcOffset uint64, Dependencies uint32, ppDependentResources **graphicsdirect3d12.ID3D12Resource, pDependentSubresourceRanges *graphicsdirect3d12.D3D12_SUBRESOURCE_RANGE_UINT64) {
+	self.Raw.AtomicCopyBufferUINT64(pDstBuffer.Raw, DstOffset, pSrcBuffer.Raw, SrcOffset, Dependencies, ppDependentResources, pDependentSubresourceRanges)
 }
 
 // SetSamplePositions wraps the raw SetSamplePositions call.
@@ -1884,8 +1884,8 @@ func (self ID3D12GraphicsCommandList1) SetSamplePositions(NumSamplesPerPixel uin
 }
 
 // ResolveSubresourceRegion wraps the raw ResolveSubresourceRegion call.
-func (self ID3D12GraphicsCommandList1) ResolveSubresourceRegion(pDstResource *graphicsdirect3d12.ID3D12Resource, DstSubresource uint32, DstX uint32, DstY uint32, pSrcResource *graphicsdirect3d12.ID3D12Resource, SrcSubresource uint32, pSrcRect *foundation.RECT, Format graphicsdxgicommon.DXGI_FORMAT, ResolveMode graphicsdirect3d12.D3D12_RESOLVE_MODE) {
-	self.Raw.ResolveSubresourceRegion(pDstResource, DstSubresource, DstX, DstY, pSrcResource, SrcSubresource, pSrcRect, Format, ResolveMode)
+func (self ID3D12GraphicsCommandList1) ResolveSubresourceRegion(pDstResource ID3D12Resource, DstSubresource uint32, DstX uint32, DstY uint32, pSrcResource ID3D12Resource, SrcSubresource uint32, pSrcRect *foundation.RECT, Format graphicsdxgicommon.DXGI_FORMAT, ResolveMode graphicsdirect3d12.D3D12_RESOLVE_MODE) {
+	self.Raw.ResolveSubresourceRegion(pDstResource.Raw, DstSubresource, DstX, DstY, pSrcResource.Raw, SrcSubresource, pSrcRect, Format, ResolveMode)
 }
 
 // SetViewInstanceMask wraps the raw SetViewInstanceMask call.
@@ -1942,8 +1942,8 @@ func WrapID3D12GraphicsCommandList3(raw *graphicsdirect3d12.ID3D12GraphicsComman
 }
 
 // SetProtectedResourceSession wraps the raw SetProtectedResourceSession call.
-func (self ID3D12GraphicsCommandList3) SetProtectedResourceSession(pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) {
-	self.Raw.SetProtectedResourceSession(pProtectedResourceSession)
+func (self ID3D12GraphicsCommandList3) SetProtectedResourceSession(pProtectedResourceSession ID3D12ProtectedResourceSession) {
+	self.Raw.SetProtectedResourceSession(pProtectedResourceSession.Raw)
 }
 
 // ID3D12GraphicsCommandList4 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12GraphicsCommandList4 with error-returning methods.
@@ -1968,13 +1968,13 @@ func (self ID3D12GraphicsCommandList4) EndRenderPass() {
 }
 
 // InitializeMetaCommand wraps the raw InitializeMetaCommand call.
-func (self ID3D12GraphicsCommandList4) InitializeMetaCommand(pMetaCommand *graphicsdirect3d12.ID3D12MetaCommand, pInitializationParametersData unsafe.Pointer, InitializationParametersDataSizeInBytes uintptr) {
-	self.Raw.InitializeMetaCommand(pMetaCommand, pInitializationParametersData, InitializationParametersDataSizeInBytes)
+func (self ID3D12GraphicsCommandList4) InitializeMetaCommand(pMetaCommand ID3D12MetaCommand, pInitializationParametersData unsafe.Pointer, InitializationParametersDataSizeInBytes uintptr) {
+	self.Raw.InitializeMetaCommand(pMetaCommand.Raw, pInitializationParametersData, InitializationParametersDataSizeInBytes)
 }
 
 // ExecuteMetaCommand wraps the raw ExecuteMetaCommand call.
-func (self ID3D12GraphicsCommandList4) ExecuteMetaCommand(pMetaCommand *graphicsdirect3d12.ID3D12MetaCommand, pExecutionParametersData unsafe.Pointer, ExecutionParametersDataSizeInBytes uintptr) {
-	self.Raw.ExecuteMetaCommand(pMetaCommand, pExecutionParametersData, ExecutionParametersDataSizeInBytes)
+func (self ID3D12GraphicsCommandList4) ExecuteMetaCommand(pMetaCommand ID3D12MetaCommand, pExecutionParametersData unsafe.Pointer, ExecutionParametersDataSizeInBytes uintptr) {
+	self.Raw.ExecuteMetaCommand(pMetaCommand.Raw, pExecutionParametersData, ExecutionParametersDataSizeInBytes)
 }
 
 // BuildRaytracingAccelerationStructure wraps the raw BuildRaytracingAccelerationStructure call.
@@ -1993,8 +1993,8 @@ func (self ID3D12GraphicsCommandList4) CopyRaytracingAccelerationStructure(DestA
 }
 
 // SetPipelineState1 wraps the raw SetPipelineState1 call.
-func (self ID3D12GraphicsCommandList4) SetPipelineState1(pStateObject *graphicsdirect3d12.ID3D12StateObject) {
-	self.Raw.SetPipelineState1(pStateObject)
+func (self ID3D12GraphicsCommandList4) SetPipelineState1(pStateObject ID3D12StateObject) {
+	self.Raw.SetPipelineState1(pStateObject.Raw)
 }
 
 // DispatchRays wraps the raw DispatchRays call.
@@ -2019,8 +2019,8 @@ func (self ID3D12GraphicsCommandList5) RSSetShadingRate(baseShadingRate graphics
 }
 
 // RSSetShadingRateImage wraps the raw RSSetShadingRateImage call.
-func (self ID3D12GraphicsCommandList5) RSSetShadingRateImage(shadingRateImage *graphicsdirect3d12.ID3D12Resource) {
-	self.Raw.RSSetShadingRateImage(shadingRateImage)
+func (self ID3D12GraphicsCommandList5) RSSetShadingRateImage(shadingRateImage ID3D12Resource) {
+	self.Raw.RSSetShadingRateImage(shadingRateImage.Raw)
 }
 
 // ID3D12GraphicsCommandList6 is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12GraphicsCommandList6 with error-returning methods.
@@ -2374,8 +2374,8 @@ func WrapID3D12LifetimeTracker(raw *graphicsdirect3d12.ID3D12LifetimeTracker) ID
 }
 
 // DestroyOwnedObject wraps the raw DestroyOwnedObject call.
-func (self ID3D12LifetimeTracker) DestroyOwnedObject(pObject *graphicsdirect3d12.ID3D12DeviceChild) error {
-	return win32.HRESULTError(int32(self.Raw.DestroyOwnedObject(pObject)))
+func (self ID3D12LifetimeTracker) DestroyOwnedObject(pObject ID3D12DeviceChild) error {
+	return win32.HRESULTError(int32(self.Raw.DestroyOwnedObject(pObject.Raw)))
 }
 
 // ID3D12ManualWriteTrackingResource is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12ManualWriteTrackingResource with error-returning methods.
@@ -2432,8 +2432,8 @@ func (self ID3D12Object) SetPrivateData(guid *win32.GUID, DataSize uint32, pData
 }
 
 // SetPrivateDataInterface wraps the raw SetPrivateDataInterface call.
-func (self ID3D12Object) SetPrivateDataInterface(guid *win32.GUID, pData *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData)))
+func (self ID3D12Object) SetPrivateDataInterface(guid *win32.GUID, pData systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrivateDataInterface(guid, pData.Raw)))
 }
 
 // SetName wraps the raw SetName call.
@@ -2481,9 +2481,9 @@ func WrapID3D12PipelineLibrary(raw *graphicsdirect3d12.ID3D12PipelineLibrary) ID
 }
 
 // StorePipeline wraps the raw StorePipeline call.
-func (self ID3D12PipelineLibrary) StorePipeline(pName string, pPipeline *graphicsdirect3d12.ID3D12PipelineState) error {
+func (self ID3D12PipelineLibrary) StorePipeline(pName string, pPipeline ID3D12PipelineState) error {
 	_pName := win32.UTF16Ptr(pName)
-	return win32.HRESULTError(int32(self.Raw.StorePipeline(foundation.PWSTR(_pName), pPipeline)))
+	return win32.HRESULTError(int32(self.Raw.StorePipeline(foundation.PWSTR(_pName), pPipeline.Raw)))
 }
 
 // LoadGraphicsPipeline wraps the raw LoadGraphicsPipeline call.
@@ -2974,8 +2974,8 @@ func (self ID3D12ShaderReflectionType) GetMemberTypeName(Index uint32) foundatio
 }
 
 // IsEqual wraps the raw IsEqual call.
-func (self ID3D12ShaderReflectionType) IsEqual(pType *graphicsdirect3d12.ID3D12ShaderReflectionType) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqual(pType)))
+func (self ID3D12ShaderReflectionType) IsEqual(pType ID3D12ShaderReflectionType) error {
+	return win32.HRESULTError(int32(self.Raw.IsEqual(pType.Raw)))
 }
 
 // GetSubType wraps the raw GetSubType call.
@@ -2999,13 +2999,13 @@ func (self ID3D12ShaderReflectionType) GetInterfaceByIndex(uIndex uint32) *graph
 }
 
 // IsOfType wraps the raw IsOfType call.
-func (self ID3D12ShaderReflectionType) IsOfType(pType *graphicsdirect3d12.ID3D12ShaderReflectionType) error {
-	return win32.HRESULTError(int32(self.Raw.IsOfType(pType)))
+func (self ID3D12ShaderReflectionType) IsOfType(pType ID3D12ShaderReflectionType) error {
+	return win32.HRESULTError(int32(self.Raw.IsOfType(pType.Raw)))
 }
 
 // ImplementsInterface wraps the raw ImplementsInterface call.
-func (self ID3D12ShaderReflectionType) ImplementsInterface(pBase *graphicsdirect3d12.ID3D12ShaderReflectionType) error {
-	return win32.HRESULTError(int32(self.Raw.ImplementsInterface(pBase)))
+func (self ID3D12ShaderReflectionType) ImplementsInterface(pBase ID3D12ShaderReflectionType) error {
+	return win32.HRESULTError(int32(self.Raw.ImplementsInterface(pBase.Raw)))
 }
 
 // ID3D12ShaderReflectionVariable is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12ShaderReflectionVariable with error-returning methods.
@@ -3050,13 +3050,13 @@ func WrapID3D12SharingContract(raw *graphicsdirect3d12.ID3D12SharingContract) ID
 }
 
 // Present wraps the raw Present call.
-func (self ID3D12SharingContract) Present(pResource *graphicsdirect3d12.ID3D12Resource, Subresource uint32, window foundation.HWND) {
-	self.Raw.Present(pResource, Subresource, window)
+func (self ID3D12SharingContract) Present(pResource ID3D12Resource, Subresource uint32, window foundation.HWND) {
+	self.Raw.Present(pResource.Raw, Subresource, window)
 }
 
 // SharedFenceSignal wraps the raw SharedFenceSignal call.
-func (self ID3D12SharingContract) SharedFenceSignal(pFence *graphicsdirect3d12.ID3D12Fence, FenceValue uint64) {
-	self.Raw.SharedFenceSignal(pFence, FenceValue)
+func (self ID3D12SharingContract) SharedFenceSignal(pFence ID3D12Fence, FenceValue uint64) {
+	self.Raw.SharedFenceSignal(pFence.Raw, FenceValue)
 }
 
 // BeginCapturableWork wraps the raw BeginCapturableWork call.
@@ -3291,8 +3291,8 @@ func WrapID3D12Tools2(raw *graphicsdirect3d12.ID3D12Tools2) ID3D12Tools2 {
 }
 
 // SetApplicationSpecificDriverState wraps the raw SetApplicationSpecificDriverState call.
-func (self ID3D12Tools2) SetApplicationSpecificDriverState(pAdapter *systemcom.IUnknown, pBlob *graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(self.Raw.SetApplicationSpecificDriverState(pAdapter, pBlob)))
+func (self ID3D12Tools2) SetApplicationSpecificDriverState(pAdapter systemcomidiom.IUnknown, pBlob graphicsdirect3didiom.ID3DBlob) error {
+	return win32.HRESULTError(int32(self.Raw.SetApplicationSpecificDriverState(pAdapter.Raw, pBlob.Raw)))
 }
 
 // ID3D12VersionedRootSignatureDeserializer is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12VersionedRootSignatureDeserializer with error-returning methods.
@@ -3328,13 +3328,13 @@ func WrapID3D12VirtualizationGuestDevice(raw *graphicsdirect3d12.ID3D12Virtualiz
 }
 
 // ShareWithHost wraps the raw ShareWithHost call.
-func (self ID3D12VirtualizationGuestDevice) ShareWithHost(pObject *graphicsdirect3d12.ID3D12DeviceChild, pHandle *foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.ShareWithHost(pObject, pHandle)))
+func (self ID3D12VirtualizationGuestDevice) ShareWithHost(pObject ID3D12DeviceChild, pHandle *foundation.HANDLE) error {
+	return win32.HRESULTError(int32(self.Raw.ShareWithHost(pObject.Raw, pHandle)))
 }
 
 // CreateFenceFd wraps the raw CreateFenceFd call.
-func (self ID3D12VirtualizationGuestDevice) CreateFenceFd(pFence *graphicsdirect3d12.ID3D12Fence, FenceValue uint64, pFenceFd *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFenceFd(pFence, FenceValue, pFenceFd)))
+func (self ID3D12VirtualizationGuestDevice) CreateFenceFd(pFence ID3D12Fence, FenceValue uint64, pFenceFd *int32) error {
+	return win32.HRESULTError(int32(self.Raw.CreateFenceFd(pFence.Raw, FenceValue, pFenceFd)))
 }
 
 // ID3D12WorkGraphProperties is an idiomatic wrapper over the raw COM interface Graphics.Direct3D12.ID3D12WorkGraphProperties with error-returning methods.

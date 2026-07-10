@@ -51,8 +51,8 @@ func WrapIWSDAsyncCallback(raw *deviceswebservicesondevices.IWSDAsyncCallback) I
 }
 
 // AsyncOperationComplete wraps the raw AsyncOperationComplete call.
-func (self IWSDAsyncCallback) AsyncOperationComplete(pAsyncResult *deviceswebservicesondevices.IWSDAsyncResult, pAsyncState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.AsyncOperationComplete(pAsyncResult, pAsyncState)))
+func (self IWSDAsyncCallback) AsyncOperationComplete(pAsyncResult IWSDAsyncResult, pAsyncState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.AsyncOperationComplete(pAsyncResult.Raw, pAsyncState.Raw)))
 }
 
 // IWSDAsyncResult is an idiomatic wrapper over the raw COM interface Devices.WebServicesOnDevices.IWSDAsyncResult with error-returning methods.
@@ -67,8 +67,8 @@ func WrapIWSDAsyncResult(raw *deviceswebservicesondevices.IWSDAsyncResult) IWSDA
 }
 
 // SetCallback wraps the raw SetCallback call.
-func (self IWSDAsyncResult) SetCallback(pCallback *deviceswebservicesondevices.IWSDAsyncCallback, pAsyncState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetCallback(pCallback, pAsyncState)))
+func (self IWSDAsyncResult) SetCallback(pCallback IWSDAsyncCallback, pAsyncState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetCallback(pCallback.Raw, pAsyncState.Raw)))
 }
 
 // SetWaitHandle wraps the raw SetWaitHandle call.
@@ -124,14 +124,14 @@ func WrapIWSDDeviceHost(raw *deviceswebservicesondevices.IWSDDeviceHost) IWSDDev
 }
 
 // Init wraps the raw Init call.
-func (self IWSDDeviceHost) Init(pszLocalId string, pContext *deviceswebservicesondevices.IWSDXMLContext, ppHostAddresses **deviceswebservicesondevices.IWSDAddress, dwHostAddressCount uint32) error {
+func (self IWSDDeviceHost) Init(pszLocalId string, pContext IWSDXMLContext, ppHostAddresses **deviceswebservicesondevices.IWSDAddress, dwHostAddressCount uint32) error {
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
-	return win32.HRESULTError(int32(self.Raw.Init(foundation.PWSTR(_pszLocalId), pContext, ppHostAddresses, dwHostAddressCount)))
+	return win32.HRESULTError(int32(self.Raw.Init(foundation.PWSTR(_pszLocalId), pContext.Raw, ppHostAddresses, dwHostAddressCount)))
 }
 
 // Start wraps the raw Start call.
-func (self IWSDDeviceHost) Start(ullInstanceId uint64, pScopeList *deviceswebservicesondevices.WSD_URI_LIST, pNotificationSink *deviceswebservicesondevices.IWSDDeviceHostNotify) error {
-	return win32.HRESULTError(int32(self.Raw.Start(ullInstanceId, pScopeList, pNotificationSink)))
+func (self IWSDDeviceHost) Start(ullInstanceId uint64, pScopeList *deviceswebservicesondevices.WSD_URI_LIST, pNotificationSink IWSDDeviceHostNotify) error {
+	return win32.HRESULTError(int32(self.Raw.Start(ullInstanceId, pScopeList, pNotificationSink.Raw)))
 }
 
 // Stop wraps the raw Stop call.
@@ -155,9 +155,9 @@ func (self IWSDDeviceHost) SetMetadata(pThisModelMetadata *deviceswebservicesond
 }
 
 // RegisterService wraps the raw RegisterService call.
-func (self IWSDDeviceHost) RegisterService(pszServiceId string, pService *systemcom.IUnknown) error {
+func (self IWSDDeviceHost) RegisterService(pszServiceId string, pService systemcomidiom.IUnknown) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
-	return win32.HRESULTError(int32(self.Raw.RegisterService(foundation.PWSTR(_pszServiceId), pService)))
+	return win32.HRESULTError(int32(self.Raw.RegisterService(foundation.PWSTR(_pszServiceId), pService.Raw)))
 }
 
 // RetireService wraps the raw RetireService call.
@@ -167,10 +167,10 @@ func (self IWSDDeviceHost) RetireService(pszServiceId string) error {
 }
 
 // AddDynamicService wraps the raw AddDynamicService call.
-func (self IWSDDeviceHost) AddDynamicService(pszServiceId string, pszEndpointAddress string, pPortType *deviceswebservicesondevices.WSD_PORT_TYPE, pPortName *deviceswebservicesondevices.WSDXML_NAME, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pService *systemcom.IUnknown) error {
+func (self IWSDDeviceHost) AddDynamicService(pszServiceId string, pszEndpointAddress string, pPortType *deviceswebservicesondevices.WSD_PORT_TYPE, pPortName *deviceswebservicesondevices.WSDXML_NAME, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pService systemcomidiom.IUnknown) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
 	_pszEndpointAddress := win32.UTF16Ptr(pszEndpointAddress)
-	return win32.HRESULTError(int32(self.Raw.AddDynamicService(foundation.PWSTR(_pszServiceId), foundation.PWSTR(_pszEndpointAddress), pPortType, pPortName, pAny, pService)))
+	return win32.HRESULTError(int32(self.Raw.AddDynamicService(foundation.PWSTR(_pszServiceId), foundation.PWSTR(_pszEndpointAddress), pPortType, pPortName, pAny, pService.Raw)))
 }
 
 // RemoveDynamicService wraps the raw RemoveDynamicService call.
@@ -221,10 +221,10 @@ func WrapIWSDDeviceProxy(raw *deviceswebservicesondevices.IWSDDeviceProxy) IWSDD
 }
 
 // Init wraps the raw Init call.
-func (self IWSDDeviceProxy) Init(pszDeviceId string, pDeviceAddress *deviceswebservicesondevices.IWSDAddress, pszLocalId string, pContext *deviceswebservicesondevices.IWSDXMLContext, pSponsor *deviceswebservicesondevices.IWSDDeviceProxy) error {
+func (self IWSDDeviceProxy) Init(pszDeviceId string, pDeviceAddress IWSDAddress, pszLocalId string, pContext IWSDXMLContext, pSponsor IWSDDeviceProxy) error {
 	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
-	return win32.HRESULTError(int32(self.Raw.Init(foundation.PWSTR(_pszDeviceId), pDeviceAddress, foundation.PWSTR(_pszLocalId), pContext, pSponsor)))
+	return win32.HRESULTError(int32(self.Raw.Init(foundation.PWSTR(_pszDeviceId), pDeviceAddress.Raw, foundation.PWSTR(_pszLocalId), pContext.Raw, pSponsor.Raw)))
 }
 
 // BeginGetMetadata wraps the raw BeginGetMetadata call.
@@ -233,8 +233,8 @@ func (self IWSDDeviceProxy) BeginGetMetadata(ppResult **deviceswebservicesondevi
 }
 
 // EndGetMetadata wraps the raw EndGetMetadata call.
-func (self IWSDDeviceProxy) EndGetMetadata(pResult *deviceswebservicesondevices.IWSDAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndGetMetadata(pResult)))
+func (self IWSDDeviceProxy) EndGetMetadata(pResult IWSDAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndGetMetadata(pResult.Raw)))
 }
 
 // GetHostMetadata wraps the raw GetHostMetadata call.
@@ -295,13 +295,13 @@ func (self IWSDEndpointProxy) SendTwoWayRequest(pBody unsafe.Pointer, pOperation
 }
 
 // SendTwoWayRequestAsync wraps the raw SendTwoWayRequestAsync call.
-func (self IWSDEndpointProxy) SendTwoWayRequestAsync(pBody unsafe.Pointer, pOperation *deviceswebservicesondevices.WSD_OPERATION, pAsyncState *systemcom.IUnknown, pCallback *deviceswebservicesondevices.IWSDAsyncCallback, pResult **deviceswebservicesondevices.IWSDAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.SendTwoWayRequestAsync(pBody, pOperation, pAsyncState, pCallback, pResult)))
+func (self IWSDEndpointProxy) SendTwoWayRequestAsync(pBody unsafe.Pointer, pOperation *deviceswebservicesondevices.WSD_OPERATION, pAsyncState systemcomidiom.IUnknown, pCallback IWSDAsyncCallback, pResult **deviceswebservicesondevices.IWSDAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.SendTwoWayRequestAsync(pBody, pOperation, pAsyncState.Raw, pCallback.Raw, pResult)))
 }
 
 // AbortAsyncOperation wraps the raw AbortAsyncOperation call.
-func (self IWSDEndpointProxy) AbortAsyncOperation(pAsyncResult *deviceswebservicesondevices.IWSDAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.AbortAsyncOperation(pAsyncResult)))
+func (self IWSDEndpointProxy) AbortAsyncOperation(pAsyncResult IWSDAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.AbortAsyncOperation(pAsyncResult.Raw)))
 }
 
 // ProcessFault wraps the raw ProcessFault call.
@@ -447,8 +447,8 @@ func (self IWSDHttpMessageParameters) GetID(ppszId *foundation.PWSTR) error {
 }
 
 // SetContext wraps the raw SetContext call.
-func (self IWSDHttpMessageParameters) SetContext(pContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetContext(pContext)))
+func (self IWSDHttpMessageParameters) SetContext(pContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetContext(pContext.Raw)))
 }
 
 // GetContext wraps the raw GetContext call.
@@ -499,8 +499,8 @@ func (self IWSDMessageParameters) GetLocalAddress(ppAddress **deviceswebservices
 }
 
 // SetLocalAddress wraps the raw SetLocalAddress call.
-func (self IWSDMessageParameters) SetLocalAddress(pAddress *deviceswebservicesondevices.IWSDAddress) error {
-	return win32.HRESULTError(int32(self.Raw.SetLocalAddress(pAddress)))
+func (self IWSDMessageParameters) SetLocalAddress(pAddress IWSDAddress) error {
+	return win32.HRESULTError(int32(self.Raw.SetLocalAddress(pAddress.Raw)))
 }
 
 // GetRemoteAddress wraps the raw GetRemoteAddress call.
@@ -509,8 +509,8 @@ func (self IWSDMessageParameters) GetRemoteAddress(ppAddress **deviceswebservice
 }
 
 // SetRemoteAddress wraps the raw SetRemoteAddress call.
-func (self IWSDMessageParameters) SetRemoteAddress(pAddress *deviceswebservicesondevices.IWSDAddress) error {
-	return win32.HRESULTError(int32(self.Raw.SetRemoteAddress(pAddress)))
+func (self IWSDMessageParameters) SetRemoteAddress(pAddress IWSDAddress) error {
+	return win32.HRESULTError(int32(self.Raw.SetRemoteAddress(pAddress.Raw)))
 }
 
 // GetLowerParameters wraps the raw GetLowerParameters call.
@@ -616,13 +616,13 @@ func WrapIWSDServiceMessaging(raw *deviceswebservicesondevices.IWSDServiceMessag
 }
 
 // SendResponse wraps the raw SendResponse call.
-func (self IWSDServiceMessaging) SendResponse(pBody unsafe.Pointer, pOperation *deviceswebservicesondevices.WSD_OPERATION, pMessageParameters *deviceswebservicesondevices.IWSDMessageParameters) error {
-	return win32.HRESULTError(int32(self.Raw.SendResponse(pBody, pOperation, pMessageParameters)))
+func (self IWSDServiceMessaging) SendResponse(pBody unsafe.Pointer, pOperation *deviceswebservicesondevices.WSD_OPERATION, pMessageParameters IWSDMessageParameters) error {
+	return win32.HRESULTError(int32(self.Raw.SendResponse(pBody, pOperation, pMessageParameters.Raw)))
 }
 
 // FaultRequest wraps the raw FaultRequest call.
-func (self IWSDServiceMessaging) FaultRequest(pRequestHeader *deviceswebservicesondevices.WSD_SOAP_HEADER, pMessageParameters *deviceswebservicesondevices.IWSDMessageParameters, pFault *deviceswebservicesondevices.WSD_SOAP_FAULT) error {
-	return win32.HRESULTError(int32(self.Raw.FaultRequest(pRequestHeader, pMessageParameters, pFault)))
+func (self IWSDServiceMessaging) FaultRequest(pRequestHeader *deviceswebservicesondevices.WSD_SOAP_HEADER, pMessageParameters IWSDMessageParameters, pFault *deviceswebservicesondevices.WSD_SOAP_FAULT) error {
+	return win32.HRESULTError(int32(self.Raw.FaultRequest(pRequestHeader, pMessageParameters.Raw, pFault)))
 }
 
 // IWSDServiceProxy is an idiomatic wrapper over the raw COM interface Devices.WebServicesOnDevices.IWSDServiceProxy with error-returning methods.
@@ -642,8 +642,8 @@ func (self IWSDServiceProxy) BeginGetMetadata(ppResult **deviceswebservicesondev
 }
 
 // EndGetMetadata wraps the raw EndGetMetadata call.
-func (self IWSDServiceProxy) EndGetMetadata(pResult *deviceswebservicesondevices.IWSDAsyncResult, ppMetadata **deviceswebservicesondevices.WSD_METADATA_SECTION_LIST) error {
-	return win32.HRESULTError(int32(self.Raw.EndGetMetadata(pResult, ppMetadata)))
+func (self IWSDServiceProxy) EndGetMetadata(pResult IWSDAsyncResult, ppMetadata **deviceswebservicesondevices.WSD_METADATA_SECTION_LIST) error {
+	return win32.HRESULTError(int32(self.Raw.EndGetMetadata(pResult.Raw, ppMetadata)))
 }
 
 // GetServiceMetadata wraps the raw GetServiceMetadata call.
@@ -652,8 +652,8 @@ func (self IWSDServiceProxy) GetServiceMetadata(ppServiceMetadata **deviceswebse
 }
 
 // SubscribeToOperation wraps the raw SubscribeToOperation call.
-func (self IWSDServiceProxy) SubscribeToOperation(pOperation *deviceswebservicesondevices.WSD_OPERATION, pUnknown *systemcom.IUnknown, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
-	return win32.HRESULTError(int32(self.Raw.SubscribeToOperation(pOperation, pUnknown, pAny, ppAny)))
+func (self IWSDServiceProxy) SubscribeToOperation(pOperation *deviceswebservicesondevices.WSD_OPERATION, pUnknown systemcomidiom.IUnknown, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
+	return win32.HRESULTError(int32(self.Raw.SubscribeToOperation(pOperation, pUnknown.Raw, pAny, ppAny)))
 }
 
 // UnsubscribeToOperation wraps the raw UnsubscribeToOperation call.
@@ -662,8 +662,8 @@ func (self IWSDServiceProxy) UnsubscribeToOperation(pOperation *deviceswebservic
 }
 
 // SetEventingStatusCallback wraps the raw SetEventingStatusCallback call.
-func (self IWSDServiceProxy) SetEventingStatusCallback(pStatus *deviceswebservicesondevices.IWSDEventingStatus) error {
-	return win32.HRESULTError(int32(self.Raw.SetEventingStatusCallback(pStatus)))
+func (self IWSDServiceProxy) SetEventingStatusCallback(pStatus IWSDEventingStatus) error {
+	return win32.HRESULTError(int32(self.Raw.SetEventingStatusCallback(pStatus.Raw)))
 }
 
 // GetEndpointProxy wraps the raw GetEndpointProxy call.
@@ -683,18 +683,18 @@ func WrapIWSDServiceProxyEventing(raw *deviceswebservicesondevices.IWSDServicePr
 }
 
 // SubscribeToMultipleOperations wraps the raw SubscribeToMultipleOperations call.
-func (self IWSDServiceProxyEventing) SubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pUnknown *systemcom.IUnknown, pExpires *deviceswebservicesondevices.WSD_EVENTING_EXPIRES, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, ppExpires **deviceswebservicesondevices.WSD_EVENTING_EXPIRES, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
-	return win32.HRESULTError(int32(self.Raw.SubscribeToMultipleOperations(pOperations, dwOperationCount, pUnknown, pExpires, pAny, ppExpires, ppAny)))
+func (self IWSDServiceProxyEventing) SubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pUnknown systemcomidiom.IUnknown, pExpires *deviceswebservicesondevices.WSD_EVENTING_EXPIRES, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, ppExpires **deviceswebservicesondevices.WSD_EVENTING_EXPIRES, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
+	return win32.HRESULTError(int32(self.Raw.SubscribeToMultipleOperations(pOperations, dwOperationCount, pUnknown.Raw, pExpires, pAny, ppExpires, ppAny)))
 }
 
 // BeginSubscribeToMultipleOperations wraps the raw BeginSubscribeToMultipleOperations call.
-func (self IWSDServiceProxyEventing) BeginSubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pUnknown *systemcom.IUnknown, pExpires *deviceswebservicesondevices.WSD_EVENTING_EXPIRES, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *deviceswebservicesondevices.IWSDAsyncCallback, ppResult **deviceswebservicesondevices.IWSDAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.BeginSubscribeToMultipleOperations(pOperations, dwOperationCount, pUnknown, pExpires, pAny, pAsyncState, pAsyncCallback, ppResult)))
+func (self IWSDServiceProxyEventing) BeginSubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pUnknown systemcomidiom.IUnknown, pExpires *deviceswebservicesondevices.WSD_EVENTING_EXPIRES, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAsyncState systemcomidiom.IUnknown, pAsyncCallback IWSDAsyncCallback, ppResult **deviceswebservicesondevices.IWSDAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.BeginSubscribeToMultipleOperations(pOperations, dwOperationCount, pUnknown.Raw, pExpires, pAny, pAsyncState.Raw, pAsyncCallback.Raw, ppResult)))
 }
 
 // EndSubscribeToMultipleOperations wraps the raw EndSubscribeToMultipleOperations call.
-func (self IWSDServiceProxyEventing) EndSubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pResult *deviceswebservicesondevices.IWSDAsyncResult, ppExpires **deviceswebservicesondevices.WSD_EVENTING_EXPIRES, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
-	return win32.HRESULTError(int32(self.Raw.EndSubscribeToMultipleOperations(pOperations, dwOperationCount, pResult, ppExpires, ppAny)))
+func (self IWSDServiceProxyEventing) EndSubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pResult IWSDAsyncResult, ppExpires **deviceswebservicesondevices.WSD_EVENTING_EXPIRES, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
+	return win32.HRESULTError(int32(self.Raw.EndSubscribeToMultipleOperations(pOperations, dwOperationCount, pResult.Raw, ppExpires, ppAny)))
 }
 
 // UnsubscribeToMultipleOperations wraps the raw UnsubscribeToMultipleOperations call.
@@ -703,13 +703,13 @@ func (self IWSDServiceProxyEventing) UnsubscribeToMultipleOperations(pOperations
 }
 
 // BeginUnsubscribeToMultipleOperations wraps the raw BeginUnsubscribeToMultipleOperations call.
-func (self IWSDServiceProxyEventing) BeginUnsubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *deviceswebservicesondevices.IWSDAsyncCallback, ppResult **deviceswebservicesondevices.IWSDAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.BeginUnsubscribeToMultipleOperations(pOperations, dwOperationCount, pAny, pAsyncState, pAsyncCallback, ppResult)))
+func (self IWSDServiceProxyEventing) BeginUnsubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAsyncState systemcomidiom.IUnknown, pAsyncCallback IWSDAsyncCallback, ppResult **deviceswebservicesondevices.IWSDAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.BeginUnsubscribeToMultipleOperations(pOperations, dwOperationCount, pAny, pAsyncState.Raw, pAsyncCallback.Raw, ppResult)))
 }
 
 // EndUnsubscribeToMultipleOperations wraps the raw EndUnsubscribeToMultipleOperations call.
-func (self IWSDServiceProxyEventing) EndUnsubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pResult *deviceswebservicesondevices.IWSDAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndUnsubscribeToMultipleOperations(pOperations, dwOperationCount, pResult)))
+func (self IWSDServiceProxyEventing) EndUnsubscribeToMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pResult IWSDAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.EndUnsubscribeToMultipleOperations(pOperations, dwOperationCount, pResult.Raw)))
 }
 
 // RenewMultipleOperations wraps the raw RenewMultipleOperations call.
@@ -718,13 +718,13 @@ func (self IWSDServiceProxyEventing) RenewMultipleOperations(pOperations *device
 }
 
 // BeginRenewMultipleOperations wraps the raw BeginRenewMultipleOperations call.
-func (self IWSDServiceProxyEventing) BeginRenewMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pExpires *deviceswebservicesondevices.WSD_EVENTING_EXPIRES, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *deviceswebservicesondevices.IWSDAsyncCallback, ppResult **deviceswebservicesondevices.IWSDAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.BeginRenewMultipleOperations(pOperations, dwOperationCount, pExpires, pAny, pAsyncState, pAsyncCallback, ppResult)))
+func (self IWSDServiceProxyEventing) BeginRenewMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pExpires *deviceswebservicesondevices.WSD_EVENTING_EXPIRES, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAsyncState systemcomidiom.IUnknown, pAsyncCallback IWSDAsyncCallback, ppResult **deviceswebservicesondevices.IWSDAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.BeginRenewMultipleOperations(pOperations, dwOperationCount, pExpires, pAny, pAsyncState.Raw, pAsyncCallback.Raw, ppResult)))
 }
 
 // EndRenewMultipleOperations wraps the raw EndRenewMultipleOperations call.
-func (self IWSDServiceProxyEventing) EndRenewMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pResult *deviceswebservicesondevices.IWSDAsyncResult, ppExpires **deviceswebservicesondevices.WSD_EVENTING_EXPIRES, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
-	return win32.HRESULTError(int32(self.Raw.EndRenewMultipleOperations(pOperations, dwOperationCount, pResult, ppExpires, ppAny)))
+func (self IWSDServiceProxyEventing) EndRenewMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pResult IWSDAsyncResult, ppExpires **deviceswebservicesondevices.WSD_EVENTING_EXPIRES, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
+	return win32.HRESULTError(int32(self.Raw.EndRenewMultipleOperations(pOperations, dwOperationCount, pResult.Raw, ppExpires, ppAny)))
 }
 
 // GetStatusForMultipleOperations wraps the raw GetStatusForMultipleOperations call.
@@ -733,13 +733,13 @@ func (self IWSDServiceProxyEventing) GetStatusForMultipleOperations(pOperations 
 }
 
 // BeginGetStatusForMultipleOperations wraps the raw BeginGetStatusForMultipleOperations call.
-func (self IWSDServiceProxyEventing) BeginGetStatusForMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *deviceswebservicesondevices.IWSDAsyncCallback, ppResult **deviceswebservicesondevices.IWSDAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.BeginGetStatusForMultipleOperations(pOperations, dwOperationCount, pAny, pAsyncState, pAsyncCallback, ppResult)))
+func (self IWSDServiceProxyEventing) BeginGetStatusForMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAsyncState systemcomidiom.IUnknown, pAsyncCallback IWSDAsyncCallback, ppResult **deviceswebservicesondevices.IWSDAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.BeginGetStatusForMultipleOperations(pOperations, dwOperationCount, pAny, pAsyncState.Raw, pAsyncCallback.Raw, ppResult)))
 }
 
 // EndGetStatusForMultipleOperations wraps the raw EndGetStatusForMultipleOperations call.
-func (self IWSDServiceProxyEventing) EndGetStatusForMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pResult *deviceswebservicesondevices.IWSDAsyncResult, ppExpires **deviceswebservicesondevices.WSD_EVENTING_EXPIRES, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
-	return win32.HRESULTError(int32(self.Raw.EndGetStatusForMultipleOperations(pOperations, dwOperationCount, pResult, ppExpires, ppAny)))
+func (self IWSDServiceProxyEventing) EndGetStatusForMultipleOperations(pOperations *deviceswebservicesondevices.WSD_OPERATION, dwOperationCount uint32, pResult IWSDAsyncResult, ppExpires **deviceswebservicesondevices.WSD_EVENTING_EXPIRES, ppAny **deviceswebservicesondevices.WSDXML_ELEMENT) error {
+	return win32.HRESULTError(int32(self.Raw.EndGetStatusForMultipleOperations(pOperations, dwOperationCount, pResult.Raw, ppExpires, ppAny)))
 }
 
 // IWSDSignatureProperty is an idiomatic wrapper over the raw COM interface Devices.WebServicesOnDevices.IWSDSignatureProperty with error-returning methods.
@@ -1017,8 +1017,8 @@ func (self IWSDiscoveryProvider) SetAddressFamily(dwAddressFamily uint32) error 
 }
 
 // Attach wraps the raw Attach call.
-func (self IWSDiscoveryProvider) Attach(pSink *deviceswebservicesondevices.IWSDiscoveryProviderNotify) error {
-	return win32.HRESULTError(int32(self.Raw.Attach(pSink)))
+func (self IWSDiscoveryProvider) Attach(pSink IWSDiscoveryProviderNotify) error {
+	return win32.HRESULTError(int32(self.Raw.Attach(pSink.Raw)))
 }
 
 // Detach wraps the raw Detach call.
@@ -1064,13 +1064,13 @@ func WrapIWSDiscoveryProviderNotify(raw *deviceswebservicesondevices.IWSDiscover
 }
 
 // Add wraps the raw Add call.
-func (self IWSDiscoveryProviderNotify) Add(pService *deviceswebservicesondevices.IWSDiscoveredService) error {
-	return win32.HRESULTError(int32(self.Raw.Add(pService)))
+func (self IWSDiscoveryProviderNotify) Add(pService IWSDiscoveredService) error {
+	return win32.HRESULTError(int32(self.Raw.Add(pService.Raw)))
 }
 
 // Remove wraps the raw Remove call.
-func (self IWSDiscoveryProviderNotify) Remove(pService *deviceswebservicesondevices.IWSDiscoveredService) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(pService)))
+func (self IWSDiscoveryProviderNotify) Remove(pService IWSDiscoveredService) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(pService.Raw)))
 }
 
 // SearchFailed wraps the raw SearchFailed call.
@@ -1102,13 +1102,13 @@ func (self IWSDiscoveryPublisher) SetAddressFamily(dwAddressFamily uint32) error
 }
 
 // RegisterNotificationSink wraps the raw RegisterNotificationSink call.
-func (self IWSDiscoveryPublisher) RegisterNotificationSink(pSink *deviceswebservicesondevices.IWSDiscoveryPublisherNotify) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterNotificationSink(pSink)))
+func (self IWSDiscoveryPublisher) RegisterNotificationSink(pSink IWSDiscoveryPublisherNotify) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterNotificationSink(pSink.Raw)))
 }
 
 // UnRegisterNotificationSink wraps the raw UnRegisterNotificationSink call.
-func (self IWSDiscoveryPublisher) UnRegisterNotificationSink(pSink *deviceswebservicesondevices.IWSDiscoveryPublisherNotify) error {
-	return win32.HRESULTError(int32(self.Raw.UnRegisterNotificationSink(pSink)))
+func (self IWSDiscoveryPublisher) UnRegisterNotificationSink(pSink IWSDiscoveryPublisherNotify) error {
+	return win32.HRESULTError(int32(self.Raw.UnRegisterNotificationSink(pSink.Raw)))
 }
 
 // Publish wraps the raw Publish call.
@@ -1126,17 +1126,17 @@ func (self IWSDiscoveryPublisher) UnPublish(pszId string, ullInstanceId uint64, 
 }
 
 // MatchProbe wraps the raw MatchProbe call.
-func (self IWSDiscoveryPublisher) MatchProbe(pProbeMessage *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters *deviceswebservicesondevices.IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *deviceswebservicesondevices.WSD_NAME_LIST, pScopesList *deviceswebservicesondevices.WSD_URI_LIST, pXAddrsList *deviceswebservicesondevices.WSD_URI_LIST) error {
+func (self IWSDiscoveryPublisher) MatchProbe(pProbeMessage *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *deviceswebservicesondevices.WSD_NAME_LIST, pScopesList *deviceswebservicesondevices.WSD_URI_LIST, pXAddrsList *deviceswebservicesondevices.WSD_URI_LIST) error {
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
-	return win32.HRESULTError(int32(self.Raw.MatchProbe(pProbeMessage, pMessageParameters, foundation.PWSTR(_pszId), ullMetadataVersion, ullInstanceId, ullMessageNumber, foundation.PWSTR(_pszSessionId), pTypesList, pScopesList, pXAddrsList)))
+	return win32.HRESULTError(int32(self.Raw.MatchProbe(pProbeMessage, pMessageParameters.Raw, foundation.PWSTR(_pszId), ullMetadataVersion, ullInstanceId, ullMessageNumber, foundation.PWSTR(_pszSessionId), pTypesList, pScopesList, pXAddrsList)))
 }
 
 // MatchResolve wraps the raw MatchResolve call.
-func (self IWSDiscoveryPublisher) MatchResolve(pResolveMessage *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters *deviceswebservicesondevices.IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *deviceswebservicesondevices.WSD_NAME_LIST, pScopesList *deviceswebservicesondevices.WSD_URI_LIST, pXAddrsList *deviceswebservicesondevices.WSD_URI_LIST) error {
+func (self IWSDiscoveryPublisher) MatchResolve(pResolveMessage *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *deviceswebservicesondevices.WSD_NAME_LIST, pScopesList *deviceswebservicesondevices.WSD_URI_LIST, pXAddrsList *deviceswebservicesondevices.WSD_URI_LIST) error {
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
-	return win32.HRESULTError(int32(self.Raw.MatchResolve(pResolveMessage, pMessageParameters, foundation.PWSTR(_pszId), ullMetadataVersion, ullInstanceId, ullMessageNumber, foundation.PWSTR(_pszSessionId), pTypesList, pScopesList, pXAddrsList)))
+	return win32.HRESULTError(int32(self.Raw.MatchResolve(pResolveMessage, pMessageParameters.Raw, foundation.PWSTR(_pszId), ullMetadataVersion, ullInstanceId, ullMessageNumber, foundation.PWSTR(_pszSessionId), pTypesList, pScopesList, pXAddrsList)))
 }
 
 // PublishEx wraps the raw PublishEx call.
@@ -1147,27 +1147,27 @@ func (self IWSDiscoveryPublisher) PublishEx(pszId string, ullMetadataVersion uin
 }
 
 // MatchProbeEx wraps the raw MatchProbeEx call.
-func (self IWSDiscoveryPublisher) MatchProbeEx(pProbeMessage *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters *deviceswebservicesondevices.IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *deviceswebservicesondevices.WSD_NAME_LIST, pScopesList *deviceswebservicesondevices.WSD_URI_LIST, pXAddrsList *deviceswebservicesondevices.WSD_URI_LIST, pHeaderAny *deviceswebservicesondevices.WSDXML_ELEMENT, pReferenceParameterAny *deviceswebservicesondevices.WSDXML_ELEMENT, pPolicyAny *deviceswebservicesondevices.WSDXML_ELEMENT, pEndpointReferenceAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAny *deviceswebservicesondevices.WSDXML_ELEMENT) error {
+func (self IWSDiscoveryPublisher) MatchProbeEx(pProbeMessage *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *deviceswebservicesondevices.WSD_NAME_LIST, pScopesList *deviceswebservicesondevices.WSD_URI_LIST, pXAddrsList *deviceswebservicesondevices.WSD_URI_LIST, pHeaderAny *deviceswebservicesondevices.WSDXML_ELEMENT, pReferenceParameterAny *deviceswebservicesondevices.WSDXML_ELEMENT, pPolicyAny *deviceswebservicesondevices.WSDXML_ELEMENT, pEndpointReferenceAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAny *deviceswebservicesondevices.WSDXML_ELEMENT) error {
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
-	return win32.HRESULTError(int32(self.Raw.MatchProbeEx(pProbeMessage, pMessageParameters, foundation.PWSTR(_pszId), ullMetadataVersion, ullInstanceId, ullMessageNumber, foundation.PWSTR(_pszSessionId), pTypesList, pScopesList, pXAddrsList, pHeaderAny, pReferenceParameterAny, pPolicyAny, pEndpointReferenceAny, pAny)))
+	return win32.HRESULTError(int32(self.Raw.MatchProbeEx(pProbeMessage, pMessageParameters.Raw, foundation.PWSTR(_pszId), ullMetadataVersion, ullInstanceId, ullMessageNumber, foundation.PWSTR(_pszSessionId), pTypesList, pScopesList, pXAddrsList, pHeaderAny, pReferenceParameterAny, pPolicyAny, pEndpointReferenceAny, pAny)))
 }
 
 // MatchResolveEx wraps the raw MatchResolveEx call.
-func (self IWSDiscoveryPublisher) MatchResolveEx(pResolveMessage *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters *deviceswebservicesondevices.IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *deviceswebservicesondevices.WSD_NAME_LIST, pScopesList *deviceswebservicesondevices.WSD_URI_LIST, pXAddrsList *deviceswebservicesondevices.WSD_URI_LIST, pHeaderAny *deviceswebservicesondevices.WSDXML_ELEMENT, pReferenceParameterAny *deviceswebservicesondevices.WSDXML_ELEMENT, pPolicyAny *deviceswebservicesondevices.WSDXML_ELEMENT, pEndpointReferenceAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAny *deviceswebservicesondevices.WSDXML_ELEMENT) error {
+func (self IWSDiscoveryPublisher) MatchResolveEx(pResolveMessage *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *deviceswebservicesondevices.WSD_NAME_LIST, pScopesList *deviceswebservicesondevices.WSD_URI_LIST, pXAddrsList *deviceswebservicesondevices.WSD_URI_LIST, pHeaderAny *deviceswebservicesondevices.WSDXML_ELEMENT, pReferenceParameterAny *deviceswebservicesondevices.WSDXML_ELEMENT, pPolicyAny *deviceswebservicesondevices.WSDXML_ELEMENT, pEndpointReferenceAny *deviceswebservicesondevices.WSDXML_ELEMENT, pAny *deviceswebservicesondevices.WSDXML_ELEMENT) error {
 	_pszId := win32.UTF16Ptr(pszId)
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
-	return win32.HRESULTError(int32(self.Raw.MatchResolveEx(pResolveMessage, pMessageParameters, foundation.PWSTR(_pszId), ullMetadataVersion, ullInstanceId, ullMessageNumber, foundation.PWSTR(_pszSessionId), pTypesList, pScopesList, pXAddrsList, pHeaderAny, pReferenceParameterAny, pPolicyAny, pEndpointReferenceAny, pAny)))
+	return win32.HRESULTError(int32(self.Raw.MatchResolveEx(pResolveMessage, pMessageParameters.Raw, foundation.PWSTR(_pszId), ullMetadataVersion, ullInstanceId, ullMessageNumber, foundation.PWSTR(_pszSessionId), pTypesList, pScopesList, pXAddrsList, pHeaderAny, pReferenceParameterAny, pPolicyAny, pEndpointReferenceAny, pAny)))
 }
 
 // RegisterScopeMatchingRule wraps the raw RegisterScopeMatchingRule call.
-func (self IWSDiscoveryPublisher) RegisterScopeMatchingRule(pScopeMatchingRule *deviceswebservicesondevices.IWSDScopeMatchingRule) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterScopeMatchingRule(pScopeMatchingRule)))
+func (self IWSDiscoveryPublisher) RegisterScopeMatchingRule(pScopeMatchingRule IWSDScopeMatchingRule) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterScopeMatchingRule(pScopeMatchingRule.Raw)))
 }
 
 // UnRegisterScopeMatchingRule wraps the raw UnRegisterScopeMatchingRule call.
-func (self IWSDiscoveryPublisher) UnRegisterScopeMatchingRule(pScopeMatchingRule *deviceswebservicesondevices.IWSDScopeMatchingRule) error {
-	return win32.HRESULTError(int32(self.Raw.UnRegisterScopeMatchingRule(pScopeMatchingRule)))
+func (self IWSDiscoveryPublisher) UnRegisterScopeMatchingRule(pScopeMatchingRule IWSDScopeMatchingRule) error {
+	return win32.HRESULTError(int32(self.Raw.UnRegisterScopeMatchingRule(pScopeMatchingRule.Raw)))
 }
 
 // GetXMLContext wraps the raw GetXMLContext call.
@@ -1187,11 +1187,11 @@ func WrapIWSDiscoveryPublisherNotify(raw *deviceswebservicesondevices.IWSDiscove
 }
 
 // ProbeHandler wraps the raw ProbeHandler call.
-func (self IWSDiscoveryPublisherNotify) ProbeHandler(pSoap *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters *deviceswebservicesondevices.IWSDMessageParameters) error {
-	return win32.HRESULTError(int32(self.Raw.ProbeHandler(pSoap, pMessageParameters)))
+func (self IWSDiscoveryPublisherNotify) ProbeHandler(pSoap *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters IWSDMessageParameters) error {
+	return win32.HRESULTError(int32(self.Raw.ProbeHandler(pSoap, pMessageParameters.Raw)))
 }
 
 // ResolveHandler wraps the raw ResolveHandler call.
-func (self IWSDiscoveryPublisherNotify) ResolveHandler(pSoap *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters *deviceswebservicesondevices.IWSDMessageParameters) error {
-	return win32.HRESULTError(int32(self.Raw.ResolveHandler(pSoap, pMessageParameters)))
+func (self IWSDiscoveryPublisherNotify) ResolveHandler(pSoap *deviceswebservicesondevices.WSD_SOAP_MESSAGE, pMessageParameters IWSDMessageParameters) error {
+	return win32.HRESULTError(int32(self.Raw.ResolveHandler(pSoap, pMessageParameters.Raw)))
 }

@@ -80,8 +80,8 @@ func WrapICompositionDrawingSurfaceInterop2(raw *systemwinrtcomposition.IComposi
 }
 
 // CopySurface wraps the raw CopySurface call.
-func (self ICompositionDrawingSurfaceInterop2) CopySurface(destinationResource *systemcom.IUnknown, destinationOffsetX int32, destinationOffsetY int32, sourceRectangle *foundation.RECT) error {
-	return win32.HRESULTError(int32(self.Raw.CopySurface(destinationResource, destinationOffsetX, destinationOffsetY, sourceRectangle)))
+func (self ICompositionDrawingSurfaceInterop2) CopySurface(destinationResource systemcomidiom.IUnknown, destinationOffsetX int32, destinationOffsetY int32, sourceRectangle *foundation.RECT) error {
+	return win32.HRESULTError(int32(self.Raw.CopySurface(destinationResource.Raw, destinationOffsetX, destinationOffsetY, sourceRectangle)))
 }
 
 // ICompositionGraphicsDeviceInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Composition.ICompositionGraphicsDeviceInterop with error-returning methods.
@@ -101,8 +101,8 @@ func (self ICompositionGraphicsDeviceInterop) GetRenderingDevice(value **systemc
 }
 
 // SetRenderingDevice wraps the raw SetRenderingDevice call.
-func (self ICompositionGraphicsDeviceInterop) SetRenderingDevice(value *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetRenderingDevice(value)))
+func (self ICompositionGraphicsDeviceInterop) SetRenderingDevice(value systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetRenderingDevice(value.Raw)))
 }
 
 // ICompositionTextureInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Composition.ICompositionTextureInterop with error-returning methods.
@@ -160,13 +160,13 @@ func (self ICompositorInterop) CreateCompositionSurfaceForHandle(swapChain found
 }
 
 // CreateCompositionSurfaceForSwapChain wraps the raw CreateCompositionSurfaceForSwapChain call.
-func (self ICompositorInterop) CreateCompositionSurfaceForSwapChain(swapChain *systemcom.IUnknown, result *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCompositionSurfaceForSwapChain(swapChain, result)))
+func (self ICompositorInterop) CreateCompositionSurfaceForSwapChain(swapChain systemcomidiom.IUnknown, result *uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCompositionSurfaceForSwapChain(swapChain.Raw, result)))
 }
 
 // CreateGraphicsDevice wraps the raw CreateGraphicsDevice call.
-func (self ICompositorInterop) CreateGraphicsDevice(renderingDevice *systemcom.IUnknown, result *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.CreateGraphicsDevice(renderingDevice, result)))
+func (self ICompositorInterop) CreateGraphicsDevice(renderingDevice systemcomidiom.IUnknown, result *uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.CreateGraphicsDevice(renderingDevice.Raw, result)))
 }
 
 // ICompositorInterop2 is an idiomatic wrapper over the raw COM interface System.WinRT.Composition.ICompositorInterop2 with error-returning methods.
@@ -181,13 +181,13 @@ func WrapICompositorInterop2(raw *systemwinrtcomposition.ICompositorInterop2) IC
 }
 
 // CheckCompositionTextureSupport wraps the raw CheckCompositionTextureSupport call.
-func (self ICompositorInterop2) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CheckCompositionTextureSupport(renderingDevice, supportsCompositionTextures)))
+func (self ICompositorInterop2) CheckCompositionTextureSupport(renderingDevice systemcomidiom.IUnknown, supportsCompositionTextures *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.CheckCompositionTextureSupport(renderingDevice.Raw, supportsCompositionTextures)))
 }
 
 // CreateCompositionTexture wraps the raw CreateCompositionTexture call.
-func (self ICompositorInterop2) CreateCompositionTexture(d3dTexture *systemcom.IUnknown, compositionTexture *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCompositionTexture(d3dTexture, compositionTexture)))
+func (self ICompositorInterop2) CreateCompositionTexture(d3dTexture systemcomidiom.IUnknown, compositionTexture *uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.CreateCompositionTexture(d3dTexture.Raw, compositionTexture)))
 }
 
 // IDesktopWindowTargetInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Composition.IDesktopWindowTargetInterop with error-returning methods.

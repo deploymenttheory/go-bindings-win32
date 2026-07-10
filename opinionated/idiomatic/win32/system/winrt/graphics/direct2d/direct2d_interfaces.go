@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d"
 	systemwinrtgraphicsdirect2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/graphics/direct2d"
+	graphicsdirect2didiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct2d"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -29,8 +30,8 @@ func (self IGeometrySource2DInterop) GetGeometry(value **graphicsdirect2d.ID2D1G
 }
 
 // TryGetGeometryUsingFactory wraps the raw TryGetGeometryUsingFactory call.
-func (self IGeometrySource2DInterop) TryGetGeometryUsingFactory(factory *graphicsdirect2d.ID2D1Factory, value **graphicsdirect2d.ID2D1Geometry) error {
-	return win32.HRESULTError(int32(self.Raw.TryGetGeometryUsingFactory(factory, value)))
+func (self IGeometrySource2DInterop) TryGetGeometryUsingFactory(factory graphicsdirect2didiom.ID2D1Factory, value **graphicsdirect2d.ID2D1Geometry) error {
+	return win32.HRESULTError(int32(self.Raw.TryGetGeometryUsingFactory(factory.Raw, value)))
 }
 
 // IGraphicsEffectD2D1Interop is an idiomatic wrapper over the raw COM interface System.WinRT.Graphics.Direct2D.IGraphicsEffectD2D1Interop with error-returning methods.

@@ -408,13 +408,13 @@ func (self IRemoteDesktopClient) UpdateSessionDisplaySettings(width uint32, heig
 }
 
 // AttachEvent wraps the raw AttachEvent call.
-func (self IRemoteDesktopClient) AttachEvent(eventName foundation.BSTR, callback *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.AttachEvent(eventName, callback)))
+func (self IRemoteDesktopClient) AttachEvent(eventName foundation.BSTR, callback systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.AttachEvent(eventName, callback.Raw)))
 }
 
 // DetachEvent wraps the raw DetachEvent call.
-func (self IRemoteDesktopClient) DetachEvent(eventName foundation.BSTR, callback *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.DetachEvent(eventName, callback)))
+func (self IRemoteDesktopClient) DetachEvent(eventName foundation.BSTR, callback systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.DetachEvent(eventName, callback.Raw)))
 }
 
 // IRemoteDesktopClientActions is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IRemoteDesktopClientActions with error-returning methods.
@@ -681,10 +681,10 @@ func (self ITsSbClientConnection) Get_InitialProgram() (foundation.BSTR, error) 
 }
 
 // Get_LoadBalanceResult wraps the raw Get_LoadBalanceResult call.
-func (self ITsSbClientConnection) Get_LoadBalanceResult() (*systemremotedesktop.ITsSbLoadBalanceResult, error) {
+func (self ITsSbClientConnection) Get_LoadBalanceResult() (ITsSbLoadBalanceResult, error) {
 	var _ppVal *systemremotedesktop.ITsSbLoadBalanceResult
 	_hr := self.Raw.Get_LoadBalanceResult(&_ppVal)
-	return _ppVal, win32.HRESULTError(int32(_hr))
+	return WrapITsSbLoadBalanceResult(_ppVal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_FarmName wraps the raw Get_FarmName call.
@@ -702,10 +702,10 @@ func (self ITsSbClientConnection) GetContext(contextId foundation.BSTR) (systemv
 }
 
 // Get_Environment wraps the raw Get_Environment call.
-func (self ITsSbClientConnection) Get_Environment() (*systemremotedesktop.ITsSbEnvironment, error) {
+func (self ITsSbClientConnection) Get_Environment() (ITsSbEnvironment, error) {
 	var _ppEnvironment *systemremotedesktop.ITsSbEnvironment
 	_hr := self.Raw.Get_Environment(&_ppEnvironment)
-	return _ppEnvironment, win32.HRESULTError(int32(_hr))
+	return WrapITsSbEnvironment(_ppEnvironment), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ConnectionError wraps the raw Get_ConnectionError call.
@@ -721,10 +721,10 @@ func (self ITsSbClientConnection) Get_SamUserAccount() (foundation.BSTR, error) 
 }
 
 // Get_ClientConnectionPropertySet wraps the raw Get_ClientConnectionPropertySet call.
-func (self ITsSbClientConnection) Get_ClientConnectionPropertySet() (*systemremotedesktop.ITsSbClientConnectionPropertySet, error) {
+func (self ITsSbClientConnection) Get_ClientConnectionPropertySet() (ITsSbClientConnectionPropertySet, error) {
 	var _ppPropertySet *systemremotedesktop.ITsSbClientConnectionPropertySet
 	_hr := self.Raw.Get_ClientConnectionPropertySet(&_ppPropertySet)
-	return _ppPropertySet, win32.HRESULTError(int32(_hr))
+	return WrapITsSbClientConnectionPropertySet(_ppPropertySet), win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsFirstAssignment wraps the raw Get_IsFirstAssignment call.
@@ -790,15 +790,15 @@ func (self ITsSbEnvironment) Get_ServerWeight() (uint32, error) {
 }
 
 // Get_EnvironmentPropertySet wraps the raw Get_EnvironmentPropertySet call.
-func (self ITsSbEnvironment) Get_EnvironmentPropertySet() (*systemremotedesktop.ITsSbEnvironmentPropertySet, error) {
+func (self ITsSbEnvironment) Get_EnvironmentPropertySet() (ITsSbEnvironmentPropertySet, error) {
 	var _ppPropertySet *systemremotedesktop.ITsSbEnvironmentPropertySet
 	_hr := self.Raw.Get_EnvironmentPropertySet(&_ppPropertySet)
-	return _ppPropertySet, win32.HRESULTError(int32(_hr))
+	return WrapITsSbEnvironmentPropertySet(_ppPropertySet), win32.HRESULTError(int32(_hr))
 }
 
 // Put_EnvironmentPropertySet wraps the raw Put_EnvironmentPropertySet call.
-func (self ITsSbEnvironment) Put_EnvironmentPropertySet(pVal *systemremotedesktop.ITsSbEnvironmentPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Put_EnvironmentPropertySet(pVal)))
+func (self ITsSbEnvironment) Put_EnvironmentPropertySet(pVal ITsSbEnvironmentPropertySet) error {
+	return win32.HRESULTError(int32(self.Raw.Put_EnvironmentPropertySet(pVal.Raw)))
 }
 
 // ITsSbEnvironmentPropertySet is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbEnvironmentPropertySet with error-returning methods.
@@ -824,15 +824,15 @@ func WrapITsSbFilterPluginStore(raw *systemremotedesktop.ITsSbFilterPluginStore)
 }
 
 // SaveProperties wraps the raw SaveProperties call.
-func (self ITsSbFilterPluginStore) SaveProperties(pPropertySet *systemremotedesktop.ITsSbPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.SaveProperties(pPropertySet)))
+func (self ITsSbFilterPluginStore) SaveProperties(pPropertySet ITsSbPropertySet) error {
+	return win32.HRESULTError(int32(self.Raw.SaveProperties(pPropertySet.Raw)))
 }
 
 // EnumerateProperties wraps the raw EnumerateProperties call.
-func (self ITsSbFilterPluginStore) EnumerateProperties() (*systemremotedesktop.ITsSbPropertySet, error) {
+func (self ITsSbFilterPluginStore) EnumerateProperties() (ITsSbPropertySet, error) {
 	var _ppPropertySet *systemremotedesktop.ITsSbPropertySet
 	_hr := self.Raw.EnumerateProperties(&_ppPropertySet)
-	return _ppPropertySet, win32.HRESULTError(int32(_hr))
+	return WrapITsSbPropertySet(_ppPropertySet), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteProperties wraps the raw DeleteProperties call.
@@ -937,8 +937,8 @@ func WrapITsSbLoadBalancing(raw *systemremotedesktop.ITsSbLoadBalancing) ITsSbLo
 }
 
 // GetMostSuitableTarget wraps the raw GetMostSuitableTarget call.
-func (self ITsSbLoadBalancing) GetMostSuitableTarget(pConnection *systemremotedesktop.ITsSbClientConnection, pLBSink *systemremotedesktop.ITsSbLoadBalancingNotifySink) error {
-	return win32.HRESULTError(int32(self.Raw.GetMostSuitableTarget(pConnection, pLBSink)))
+func (self ITsSbLoadBalancing) GetMostSuitableTarget(pConnection ITsSbClientConnection, pLBSink ITsSbLoadBalancingNotifySink) error {
+	return win32.HRESULTError(int32(self.Raw.GetMostSuitableTarget(pConnection.Raw, pLBSink.Raw)))
 }
 
 // ITsSbLoadBalancingNotifySink is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbLoadBalancingNotifySink with error-returning methods.
@@ -953,9 +953,9 @@ func WrapITsSbLoadBalancingNotifySink(raw *systemremotedesktop.ITsSbLoadBalancin
 }
 
 // OnGetMostSuitableTarget wraps the raw OnGetMostSuitableTarget call.
-func (self ITsSbLoadBalancingNotifySink) OnGetMostSuitableTarget(pLBResult *systemremotedesktop.ITsSbLoadBalanceResult, fIsNewConnection bool) error {
+func (self ITsSbLoadBalancingNotifySink) OnGetMostSuitableTarget(pLBResult ITsSbLoadBalanceResult, fIsNewConnection bool) error {
 	_fIsNewConnection := foundation.BOOL(win32.Bool32(fIsNewConnection))
-	return win32.HRESULTError(int32(self.Raw.OnGetMostSuitableTarget(pLBResult, _fIsNewConnection)))
+	return win32.HRESULTError(int32(self.Raw.OnGetMostSuitableTarget(pLBResult.Raw, _fIsNewConnection)))
 }
 
 // ITsSbOrchestration is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbOrchestration with error-returning methods.
@@ -970,8 +970,8 @@ func WrapITsSbOrchestration(raw *systemremotedesktop.ITsSbOrchestration) ITsSbOr
 }
 
 // PrepareTargetForConnect wraps the raw PrepareTargetForConnect call.
-func (self ITsSbOrchestration) PrepareTargetForConnect(pConnection *systemremotedesktop.ITsSbClientConnection, pOrchestrationNotifySink *systemremotedesktop.ITsSbOrchestrationNotifySink) error {
-	return win32.HRESULTError(int32(self.Raw.PrepareTargetForConnect(pConnection, pOrchestrationNotifySink)))
+func (self ITsSbOrchestration) PrepareTargetForConnect(pConnection ITsSbClientConnection, pOrchestrationNotifySink ITsSbOrchestrationNotifySink) error {
+	return win32.HRESULTError(int32(self.Raw.PrepareTargetForConnect(pConnection.Raw, pOrchestrationNotifySink.Raw)))
 }
 
 // ITsSbOrchestrationNotifySink is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbOrchestrationNotifySink with error-returning methods.
@@ -986,8 +986,8 @@ func WrapITsSbOrchestrationNotifySink(raw *systemremotedesktop.ITsSbOrchestratio
 }
 
 // OnReadyToConnect wraps the raw OnReadyToConnect call.
-func (self ITsSbOrchestrationNotifySink) OnReadyToConnect(pTarget *systemremotedesktop.ITsSbTarget) error {
-	return win32.HRESULTError(int32(self.Raw.OnReadyToConnect(pTarget)))
+func (self ITsSbOrchestrationNotifySink) OnReadyToConnect(pTarget ITsSbTarget) error {
+	return win32.HRESULTError(int32(self.Raw.OnReadyToConnect(pTarget.Raw)))
 }
 
 // ITsSbPlacement is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbPlacement with error-returning methods.
@@ -1002,8 +1002,8 @@ func WrapITsSbPlacement(raw *systemremotedesktop.ITsSbPlacement) ITsSbPlacement 
 }
 
 // QueryEnvironmentForTarget wraps the raw QueryEnvironmentForTarget call.
-func (self ITsSbPlacement) QueryEnvironmentForTarget(pConnection *systemremotedesktop.ITsSbClientConnection, pPlacementSink *systemremotedesktop.ITsSbPlacementNotifySink) error {
-	return win32.HRESULTError(int32(self.Raw.QueryEnvironmentForTarget(pConnection, pPlacementSink)))
+func (self ITsSbPlacement) QueryEnvironmentForTarget(pConnection ITsSbClientConnection, pPlacementSink ITsSbPlacementNotifySink) error {
+	return win32.HRESULTError(int32(self.Raw.QueryEnvironmentForTarget(pConnection.Raw, pPlacementSink.Raw)))
 }
 
 // ITsSbPlacementNotifySink is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbPlacementNotifySink with error-returning methods.
@@ -1018,8 +1018,8 @@ func WrapITsSbPlacementNotifySink(raw *systemremotedesktop.ITsSbPlacementNotifyS
 }
 
 // OnQueryEnvironmentCompleted wraps the raw OnQueryEnvironmentCompleted call.
-func (self ITsSbPlacementNotifySink) OnQueryEnvironmentCompleted(pEnvironment *systemremotedesktop.ITsSbEnvironment) error {
-	return win32.HRESULTError(int32(self.Raw.OnQueryEnvironmentCompleted(pEnvironment)))
+func (self ITsSbPlacementNotifySink) OnQueryEnvironmentCompleted(pEnvironment ITsSbEnvironment) error {
+	return win32.HRESULTError(int32(self.Raw.OnQueryEnvironmentCompleted(pEnvironment.Raw)))
 }
 
 // ITsSbPlugin is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbPlugin with error-returning methods.
@@ -1034,8 +1034,8 @@ func WrapITsSbPlugin(raw *systemremotedesktop.ITsSbPlugin) ITsSbPlugin {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ITsSbPlugin) Initialize(pProvider *systemremotedesktop.ITsSbProvider, pNotifySink *systemremotedesktop.ITsSbPluginNotifySink, pPropertySet *systemremotedesktop.ITsSbPluginPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pProvider, pNotifySink, pPropertySet)))
+func (self ITsSbPlugin) Initialize(pProvider ITsSbProvider, pNotifySink ITsSbPluginNotifySink, pPropertySet ITsSbPluginPropertySet) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pProvider.Raw, pNotifySink.Raw, pPropertySet.Raw)))
 }
 
 // Terminate wraps the raw Terminate call.
@@ -1113,10 +1113,10 @@ func (self ITsSbProvider) CreateSessionObject(TargetName foundation.BSTR, UserNa
 }
 
 // CreatePluginPropertySet wraps the raw CreatePluginPropertySet call.
-func (self ITsSbProvider) CreatePluginPropertySet() (*systemremotedesktop.ITsSbPluginPropertySet, error) {
+func (self ITsSbProvider) CreatePluginPropertySet() (ITsSbPluginPropertySet, error) {
 	var _ppPropertySet *systemremotedesktop.ITsSbPluginPropertySet
 	_hr := self.Raw.CreatePluginPropertySet(&_ppPropertySet)
-	return _ppPropertySet, win32.HRESULTError(int32(_hr))
+	return WrapITsSbPluginPropertySet(_ppPropertySet), win32.HRESULTError(int32(_hr))
 }
 
 // CreateTargetPropertySetObject wraps the raw CreateTargetPropertySetObject call.
@@ -1140,8 +1140,8 @@ func (self ITsSbProvider) GetFilterPluginStore(ppStore **systemremotedesktop.ITs
 }
 
 // RegisterForNotification wraps the raw RegisterForNotification call.
-func (self ITsSbProvider) RegisterForNotification(notificationType uint32, ResourceToMonitor foundation.BSTR, pPluginNotification *systemremotedesktop.ITsSbResourceNotification) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterForNotification(notificationType, ResourceToMonitor, pPluginNotification)))
+func (self ITsSbProvider) RegisterForNotification(notificationType uint32, ResourceToMonitor foundation.BSTR, pPluginNotification ITsSbResourceNotification) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterForNotification(notificationType, ResourceToMonitor, pPluginNotification.Raw)))
 }
 
 // UnRegisterForNotification wraps the raw UnRegisterForNotification call.
@@ -1171,18 +1171,18 @@ func WrapITsSbProvisioning(raw *systemremotedesktop.ITsSbProvisioning) ITsSbProv
 }
 
 // CreateVirtualMachines wraps the raw CreateVirtualMachines call.
-func (self ITsSbProvisioning) CreateVirtualMachines(JobXmlString foundation.BSTR, JobGuid foundation.BSTR, pSink *systemremotedesktop.ITsSbProvisioningPluginNotifySink) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVirtualMachines(JobXmlString, JobGuid, pSink)))
+func (self ITsSbProvisioning) CreateVirtualMachines(JobXmlString foundation.BSTR, JobGuid foundation.BSTR, pSink ITsSbProvisioningPluginNotifySink) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVirtualMachines(JobXmlString, JobGuid, pSink.Raw)))
 }
 
 // PatchVirtualMachines wraps the raw PatchVirtualMachines call.
-func (self ITsSbProvisioning) PatchVirtualMachines(JobXmlString foundation.BSTR, JobGuid foundation.BSTR, pSink *systemremotedesktop.ITsSbProvisioningPluginNotifySink, pVMPatchInfo *systemremotedesktop.VM_PATCH_INFO) error {
-	return win32.HRESULTError(int32(self.Raw.PatchVirtualMachines(JobXmlString, JobGuid, pSink, pVMPatchInfo)))
+func (self ITsSbProvisioning) PatchVirtualMachines(JobXmlString foundation.BSTR, JobGuid foundation.BSTR, pSink ITsSbProvisioningPluginNotifySink, pVMPatchInfo *systemremotedesktop.VM_PATCH_INFO) error {
+	return win32.HRESULTError(int32(self.Raw.PatchVirtualMachines(JobXmlString, JobGuid, pSink.Raw, pVMPatchInfo)))
 }
 
 // DeleteVirtualMachines wraps the raw DeleteVirtualMachines call.
-func (self ITsSbProvisioning) DeleteVirtualMachines(JobXmlString foundation.BSTR, JobGuid foundation.BSTR, pSink *systemremotedesktop.ITsSbProvisioningPluginNotifySink) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteVirtualMachines(JobXmlString, JobGuid, pSink)))
+func (self ITsSbProvisioning) DeleteVirtualMachines(JobXmlString foundation.BSTR, JobGuid foundation.BSTR, pSink ITsSbProvisioningPluginNotifySink) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteVirtualMachines(JobXmlString, JobGuid, pSink.Raw)))
 }
 
 // CancelJob wraps the raw CancelJob call.
@@ -1243,18 +1243,18 @@ func WrapITsSbResourceNotification(raw *systemremotedesktop.ITsSbResourceNotific
 }
 
 // NotifySessionChange wraps the raw NotifySessionChange call.
-func (self ITsSbResourceNotification) NotifySessionChange(changeType systemremotedesktop.TSSESSION_STATE, pSession *systemremotedesktop.ITsSbSession) error {
-	return win32.HRESULTError(int32(self.Raw.NotifySessionChange(changeType, pSession)))
+func (self ITsSbResourceNotification) NotifySessionChange(changeType systemremotedesktop.TSSESSION_STATE, pSession ITsSbSession) error {
+	return win32.HRESULTError(int32(self.Raw.NotifySessionChange(changeType, pSession.Raw)))
 }
 
 // NotifyTargetChange wraps the raw NotifyTargetChange call.
-func (self ITsSbResourceNotification) NotifyTargetChange(TargetChangeType uint32, pTarget *systemremotedesktop.ITsSbTarget) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyTargetChange(TargetChangeType, pTarget)))
+func (self ITsSbResourceNotification) NotifyTargetChange(TargetChangeType uint32, pTarget ITsSbTarget) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyTargetChange(TargetChangeType, pTarget.Raw)))
 }
 
 // NotifyClientConnectionStateChange wraps the raw NotifyClientConnectionStateChange call.
-func (self ITsSbResourceNotification) NotifyClientConnectionStateChange(ChangeType systemremotedesktop.CONNECTION_CHANGE_NOTIFICATION, pConnection *systemremotedesktop.ITsSbClientConnection) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyClientConnectionStateChange(ChangeType, pConnection)))
+func (self ITsSbResourceNotification) NotifyClientConnectionStateChange(ChangeType systemremotedesktop.CONNECTION_CHANGE_NOTIFICATION, pConnection ITsSbClientConnection) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyClientConnectionStateChange(ChangeType, pConnection.Raw)))
 }
 
 // ITsSbResourceNotificationEx is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbResourceNotificationEx with error-returning methods.
@@ -1316,18 +1316,18 @@ func (self ITsSbResourcePluginStore) QuerySessionBySessionId(dwSessionId uint32,
 }
 
 // AddTargetToStore wraps the raw AddTargetToStore call.
-func (self ITsSbResourcePluginStore) AddTargetToStore(pTarget *systemremotedesktop.ITsSbTarget) error {
-	return win32.HRESULTError(int32(self.Raw.AddTargetToStore(pTarget)))
+func (self ITsSbResourcePluginStore) AddTargetToStore(pTarget ITsSbTarget) error {
+	return win32.HRESULTError(int32(self.Raw.AddTargetToStore(pTarget.Raw)))
 }
 
 // AddSessionToStore wraps the raw AddSessionToStore call.
-func (self ITsSbResourcePluginStore) AddSessionToStore(pSession *systemremotedesktop.ITsSbSession) error {
-	return win32.HRESULTError(int32(self.Raw.AddSessionToStore(pSession)))
+func (self ITsSbResourcePluginStore) AddSessionToStore(pSession ITsSbSession) error {
+	return win32.HRESULTError(int32(self.Raw.AddSessionToStore(pSession.Raw)))
 }
 
 // AddEnvironmentToStore wraps the raw AddEnvironmentToStore call.
-func (self ITsSbResourcePluginStore) AddEnvironmentToStore(pEnvironment *systemremotedesktop.ITsSbEnvironment) error {
-	return win32.HRESULTError(int32(self.Raw.AddEnvironmentToStore(pEnvironment)))
+func (self ITsSbResourcePluginStore) AddEnvironmentToStore(pEnvironment ITsSbEnvironment) error {
+	return win32.HRESULTError(int32(self.Raw.AddEnvironmentToStore(pEnvironment.Raw)))
 }
 
 // RemoveEnvironmentFromStore wraps the raw RemoveEnvironmentFromStore call.
@@ -1352,20 +1352,20 @@ func (self ITsSbResourcePluginStore) EnumerateEnvironments(pdwCount *uint32, pVa
 }
 
 // SaveTarget wraps the raw SaveTarget call.
-func (self ITsSbResourcePluginStore) SaveTarget(pTarget *systemremotedesktop.ITsSbTarget, bForceWrite bool) error {
+func (self ITsSbResourcePluginStore) SaveTarget(pTarget ITsSbTarget, bForceWrite bool) error {
 	_bForceWrite := foundation.BOOL(win32.Bool32(bForceWrite))
-	return win32.HRESULTError(int32(self.Raw.SaveTarget(pTarget, _bForceWrite)))
+	return win32.HRESULTError(int32(self.Raw.SaveTarget(pTarget.Raw, _bForceWrite)))
 }
 
 // SaveEnvironment wraps the raw SaveEnvironment call.
-func (self ITsSbResourcePluginStore) SaveEnvironment(pEnvironment *systemremotedesktop.ITsSbEnvironment, bForceWrite bool) error {
+func (self ITsSbResourcePluginStore) SaveEnvironment(pEnvironment ITsSbEnvironment, bForceWrite bool) error {
 	_bForceWrite := foundation.BOOL(win32.Bool32(bForceWrite))
-	return win32.HRESULTError(int32(self.Raw.SaveEnvironment(pEnvironment, _bForceWrite)))
+	return win32.HRESULTError(int32(self.Raw.SaveEnvironment(pEnvironment.Raw, _bForceWrite)))
 }
 
 // SaveSession wraps the raw SaveSession call.
-func (self ITsSbResourcePluginStore) SaveSession(pSession *systemremotedesktop.ITsSbSession) error {
-	return win32.HRESULTError(int32(self.Raw.SaveSession(pSession)))
+func (self ITsSbResourcePluginStore) SaveSession(pSession ITsSbSession) error {
+	return win32.HRESULTError(int32(self.Raw.SaveSession(pSession.Raw)))
 }
 
 // SetTargetProperty wraps the raw SetTargetProperty call.
@@ -1384,8 +1384,8 @@ func (self ITsSbResourcePluginStore) SetTargetState(targetName foundation.BSTR, 
 }
 
 // SetSessionState wraps the raw SetSessionState call.
-func (self ITsSbResourcePluginStore) SetSessionState(sbSession *systemremotedesktop.ITsSbSession) error {
-	return win32.HRESULTError(int32(self.Raw.SetSessionState(sbSession)))
+func (self ITsSbResourcePluginStore) SetSessionState(sbSession ITsSbSession) error {
+	return win32.HRESULTError(int32(self.Raw.SetSessionState(sbSession.Raw)))
 }
 
 // EnumerateTargets wraps the raw EnumerateTargets call.
@@ -1409,13 +1409,13 @@ func (self ITsSbResourcePluginStore) DeleteTarget(targetName foundation.BSTR, ho
 }
 
 // SetTargetPropertyWithVersionCheck wraps the raw SetTargetPropertyWithVersionCheck call.
-func (self ITsSbResourcePluginStore) SetTargetPropertyWithVersionCheck(pTarget *systemremotedesktop.ITsSbTarget, PropertyName foundation.BSTR, pProperty *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.SetTargetPropertyWithVersionCheck(pTarget, PropertyName, pProperty)))
+func (self ITsSbResourcePluginStore) SetTargetPropertyWithVersionCheck(pTarget ITsSbTarget, PropertyName foundation.BSTR, pProperty *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.SetTargetPropertyWithVersionCheck(pTarget.Raw, PropertyName, pProperty)))
 }
 
 // SetEnvironmentPropertyWithVersionCheck wraps the raw SetEnvironmentPropertyWithVersionCheck call.
-func (self ITsSbResourcePluginStore) SetEnvironmentPropertyWithVersionCheck(pEnvironment *systemremotedesktop.ITsSbEnvironment, PropertyName foundation.BSTR, pProperty *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.SetEnvironmentPropertyWithVersionCheck(pEnvironment, PropertyName, pProperty)))
+func (self ITsSbResourcePluginStore) SetEnvironmentPropertyWithVersionCheck(pEnvironment ITsSbEnvironment, PropertyName foundation.BSTR, pProperty *systemvariant.VARIANT) error {
+	return win32.HRESULTError(int32(self.Raw.SetEnvironmentPropertyWithVersionCheck(pEnvironment.Raw, PropertyName, pProperty)))
 }
 
 // AcquireTargetLock wraps the raw AcquireTargetLock call.
@@ -1424,8 +1424,8 @@ func (self ITsSbResourcePluginStore) AcquireTargetLock(targetName foundation.BST
 }
 
 // ReleaseTargetLock wraps the raw ReleaseTargetLock call.
-func (self ITsSbResourcePluginStore) ReleaseTargetLock(pContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseTargetLock(pContext)))
+func (self ITsSbResourcePluginStore) ReleaseTargetLock(pContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseTargetLock(pContext.Raw)))
 }
 
 // TestAndSetServerState wraps the raw TestAndSetServerState call.
@@ -1652,15 +1652,15 @@ func (self ITsSbTarget) Put_TargetState(State systemremotedesktop.TARGET_STATE) 
 }
 
 // Get_TargetPropertySet wraps the raw Get_TargetPropertySet call.
-func (self ITsSbTarget) Get_TargetPropertySet() (*systemremotedesktop.ITsSbTargetPropertySet, error) {
+func (self ITsSbTarget) Get_TargetPropertySet() (ITsSbTargetPropertySet, error) {
 	var _ppPropertySet *systemremotedesktop.ITsSbTargetPropertySet
 	_hr := self.Raw.Get_TargetPropertySet(&_ppPropertySet)
-	return _ppPropertySet, win32.HRESULTError(int32(_hr))
+	return WrapITsSbTargetPropertySet(_ppPropertySet), win32.HRESULTError(int32(_hr))
 }
 
 // Put_TargetPropertySet wraps the raw Put_TargetPropertySet call.
-func (self ITsSbTarget) Put_TargetPropertySet(pVal *systemremotedesktop.ITsSbTargetPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Put_TargetPropertySet(pVal)))
+func (self ITsSbTarget) Put_TargetPropertySet(pVal ITsSbTargetPropertySet) error {
+	return win32.HRESULTError(int32(self.Raw.Put_TargetPropertySet(pVal.Raw)))
 }
 
 // Get_EnvironmentName wraps the raw Get_EnvironmentName call.
@@ -1793,8 +1793,8 @@ func WrapITsSbTaskPlugin(raw *systemremotedesktop.ITsSbTaskPlugin) ITsSbTaskPlug
 }
 
 // InitializeTaskPlugin wraps the raw InitializeTaskPlugin call.
-func (self ITsSbTaskPlugin) InitializeTaskPlugin(pITsSbTaskPluginNotifySink *systemremotedesktop.ITsSbTaskPluginNotifySink) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeTaskPlugin(pITsSbTaskPluginNotifySink)))
+func (self ITsSbTaskPlugin) InitializeTaskPlugin(pITsSbTaskPluginNotifySink ITsSbTaskPluginNotifySink) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeTaskPlugin(pITsSbTaskPluginNotifySink.Raw)))
 }
 
 // SetTaskQueue wraps the raw SetTaskQueue call.
@@ -1856,8 +1856,8 @@ func WrapIWRdsGraphicsChannel(raw *systemremotedesktop.IWRdsGraphicsChannel) IWR
 }
 
 // Write wraps the raw Write call.
-func (self IWRdsGraphicsChannel) Write(cbSize uint32, pBuffer *byte, pContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Write(cbSize, pBuffer, pContext)))
+func (self IWRdsGraphicsChannel) Write(cbSize uint32, pBuffer *byte, pContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Write(cbSize, pBuffer, pContext.Raw)))
 }
 
 // Close wraps the raw Close call.
@@ -1866,8 +1866,8 @@ func (self IWRdsGraphicsChannel) Close() error {
 }
 
 // Open wraps the raw Open call.
-func (self IWRdsGraphicsChannel) Open(pChannelEvents *systemremotedesktop.IWRdsGraphicsChannelEvents, pOpenContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Open(pChannelEvents, pOpenContext)))
+func (self IWRdsGraphicsChannel) Open(pChannelEvents IWRdsGraphicsChannelEvents, pOpenContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Open(pChannelEvents.Raw, pOpenContext.Raw)))
 }
 
 // IWRdsGraphicsChannelEvents is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWRdsGraphicsChannelEvents with error-returning methods.
@@ -1892,14 +1892,14 @@ func (self IWRdsGraphicsChannelEvents) OnClose() error {
 }
 
 // OnChannelOpened wraps the raw OnChannelOpened call.
-func (self IWRdsGraphicsChannelEvents) OnChannelOpened(OpenResult foundation.HRESULT, pOpenContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnChannelOpened(OpenResult, pOpenContext)))
+func (self IWRdsGraphicsChannelEvents) OnChannelOpened(OpenResult foundation.HRESULT, pOpenContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnChannelOpened(OpenResult, pOpenContext.Raw)))
 }
 
 // OnDataSent wraps the raw OnDataSent call.
-func (self IWRdsGraphicsChannelEvents) OnDataSent(pWriteContext *systemcom.IUnknown, bCancelled bool, pBuffer *byte, cbBuffer uint32) error {
+func (self IWRdsGraphicsChannelEvents) OnDataSent(pWriteContext systemcomidiom.IUnknown, bCancelled bool, pBuffer *byte, cbBuffer uint32) error {
 	_bCancelled := foundation.BOOL(win32.Bool32(bCancelled))
-	return win32.HRESULTError(int32(self.Raw.OnDataSent(pWriteContext, _bCancelled, pBuffer, cbBuffer)))
+	return win32.HRESULTError(int32(self.Raw.OnDataSent(pWriteContext.Raw, _bCancelled, pBuffer, cbBuffer)))
 }
 
 // OnMetricsUpdate wraps the raw OnMetricsUpdate call.
@@ -1919,10 +1919,10 @@ func WrapIWRdsGraphicsChannelManager(raw *systemremotedesktop.IWRdsGraphicsChann
 }
 
 // CreateChannel wraps the raw CreateChannel call.
-func (self IWRdsGraphicsChannelManager) CreateChannel(pszChannelName *byte, channelType systemremotedesktop.WRdsGraphicsChannelType) (*systemremotedesktop.IWRdsGraphicsChannel, error) {
+func (self IWRdsGraphicsChannelManager) CreateChannel(pszChannelName *byte, channelType systemremotedesktop.WRdsGraphicsChannelType) (IWRdsGraphicsChannel, error) {
 	var _ppVirtualChannel *systemremotedesktop.IWRdsGraphicsChannel
 	_hr := self.Raw.CreateChannel(pszChannelName, channelType, &_ppVirtualChannel)
-	return _ppVirtualChannel, win32.HRESULTError(int32(_hr))
+	return WrapIWRdsGraphicsChannel(_ppVirtualChannel), win32.HRESULTError(int32(_hr))
 }
 
 // IWRdsProtocolConnection is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWRdsProtocolConnection with error-returning methods.
@@ -2168,8 +2168,8 @@ func (self IWRdsProtocolListener) GetSettings(WRdsListenerSettingLevel systemrem
 }
 
 // StartListen wraps the raw StartListen call.
-func (self IWRdsProtocolListener) StartListen(pCallback *systemremotedesktop.IWRdsProtocolListenerCallback) error {
-	return win32.HRESULTError(int32(self.Raw.StartListen(pCallback)))
+func (self IWRdsProtocolListener) StartListen(pCallback IWRdsProtocolListenerCallback) error {
+	return win32.HRESULTError(int32(self.Raw.StartListen(pCallback.Raw)))
 }
 
 // StopListen wraps the raw StopListen call.
@@ -2189,8 +2189,8 @@ func WrapIWRdsProtocolListenerCallback(raw *systemremotedesktop.IWRdsProtocolLis
 }
 
 // OnConnected wraps the raw OnConnected call.
-func (self IWRdsProtocolListenerCallback) OnConnected(pConnection *systemremotedesktop.IWRdsProtocolConnection, pWRdsConnectionSettings *systemremotedesktop.WRDS_CONNECTION_SETTINGS, pCallback **systemremotedesktop.IWRdsProtocolConnectionCallback) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnected(pConnection, pWRdsConnectionSettings, pCallback)))
+func (self IWRdsProtocolListenerCallback) OnConnected(pConnection IWRdsProtocolConnection, pWRdsConnectionSettings *systemremotedesktop.WRDS_CONNECTION_SETTINGS, pCallback **systemremotedesktop.IWRdsProtocolConnectionCallback) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnected(pConnection.Raw, pWRdsConnectionSettings, pCallback)))
 }
 
 // IWRdsProtocolLogonErrorRedirector is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWRdsProtocolLogonErrorRedirector with error-returning methods.
@@ -2241,8 +2241,8 @@ func WrapIWRdsProtocolManager(raw *systemremotedesktop.IWRdsProtocolManager) IWR
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWRdsProtocolManager) Initialize(pIWRdsSettings *systemremotedesktop.IWRdsProtocolSettings, pWRdsSettings *systemremotedesktop.WRDS_SETTINGS) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIWRdsSettings, pWRdsSettings)))
+func (self IWRdsProtocolManager) Initialize(pIWRdsSettings IWRdsProtocolSettings, pWRdsSettings *systemremotedesktop.WRDS_SETTINGS) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIWRdsSettings.Raw, pWRdsSettings)))
 }
 
 // CreateListener wraps the raw CreateListener call.
@@ -2337,9 +2337,9 @@ func WrapIWRdsProtocolShadowConnection(raw *systemremotedesktop.IWRdsProtocolSha
 }
 
 // Start wraps the raw Start call.
-func (self IWRdsProtocolShadowConnection) Start(pTargetServerName string, TargetSessionId uint32, HotKeyVk byte, HotkeyModifiers uint16, pShadowCallback *systemremotedesktop.IWRdsProtocolShadowCallback) error {
+func (self IWRdsProtocolShadowConnection) Start(pTargetServerName string, TargetSessionId uint32, HotKeyVk byte, HotkeyModifiers uint16, pShadowCallback IWRdsProtocolShadowCallback) error {
 	_pTargetServerName := win32.UTF16Ptr(pTargetServerName)
-	return win32.HRESULTError(int32(self.Raw.Start(foundation.PWSTR(_pTargetServerName), TargetSessionId, HotKeyVk, HotkeyModifiers, pShadowCallback)))
+	return win32.HRESULTError(int32(self.Raw.Start(foundation.PWSTR(_pTargetServerName), TargetSessionId, HotKeyVk, HotkeyModifiers, pShadowCallback.Raw)))
 }
 
 // Stop wraps the raw Stop call.
@@ -2426,8 +2426,8 @@ func WrapIWTSBitmapRenderService(raw *systemremotedesktop.IWTSBitmapRenderServic
 }
 
 // GetMappedRenderer wraps the raw GetMappedRenderer call.
-func (self IWTSBitmapRenderService) GetMappedRenderer(mappingId uint64, pMappedRendererCallback *systemremotedesktop.IWTSBitmapRendererCallback, ppMappedRenderer **systemremotedesktop.IWTSBitmapRenderer) error {
-	return win32.HRESULTError(int32(self.Raw.GetMappedRenderer(mappingId, pMappedRendererCallback, ppMappedRenderer)))
+func (self IWTSBitmapRenderService) GetMappedRenderer(mappingId uint64, pMappedRendererCallback IWTSBitmapRendererCallback, ppMappedRenderer **systemremotedesktop.IWTSBitmapRenderer) error {
+	return win32.HRESULTError(int32(self.Raw.GetMappedRenderer(mappingId, pMappedRendererCallback.Raw, ppMappedRenderer)))
 }
 
 // IWTSBitmapRenderer is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWTSBitmapRenderer with error-returning methods.
@@ -2490,8 +2490,8 @@ func WrapIWTSListenerCallback(raw *systemremotedesktop.IWTSListenerCallback) IWT
 }
 
 // OnNewChannelConnection wraps the raw OnNewChannelConnection call.
-func (self IWTSListenerCallback) OnNewChannelConnection(pChannel *systemremotedesktop.IWTSVirtualChannel, data foundation.BSTR, pbAccept *foundation.BOOL, ppCallback **systemremotedesktop.IWTSVirtualChannelCallback) error {
-	return win32.HRESULTError(int32(self.Raw.OnNewChannelConnection(pChannel, data, pbAccept, ppCallback)))
+func (self IWTSListenerCallback) OnNewChannelConnection(pChannel IWTSVirtualChannel, data foundation.BSTR, pbAccept *foundation.BOOL, ppCallback **systemremotedesktop.IWTSVirtualChannelCallback) error {
+	return win32.HRESULTError(int32(self.Raw.OnNewChannelConnection(pChannel.Raw, data, pbAccept, ppCallback)))
 }
 
 // IWTSPlugin is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWTSPlugin with error-returning methods.
@@ -2506,8 +2506,8 @@ func WrapIWTSPlugin(raw *systemremotedesktop.IWTSPlugin) IWTSPlugin {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWTSPlugin) Initialize(pChannelMgr *systemremotedesktop.IWTSVirtualChannelManager) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pChannelMgr)))
+func (self IWTSPlugin) Initialize(pChannelMgr IWTSVirtualChannelManager) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pChannelMgr.Raw)))
 }
 
 // Connected wraps the raw Connected call.
@@ -2742,8 +2742,8 @@ func WrapIWTSProtocolListener(raw *systemremotedesktop.IWTSProtocolListener) IWT
 }
 
 // StartListen wraps the raw StartListen call.
-func (self IWTSProtocolListener) StartListen(pCallback *systemremotedesktop.IWTSProtocolListenerCallback) error {
-	return win32.HRESULTError(int32(self.Raw.StartListen(pCallback)))
+func (self IWTSProtocolListener) StartListen(pCallback IWTSProtocolListenerCallback) error {
+	return win32.HRESULTError(int32(self.Raw.StartListen(pCallback.Raw)))
 }
 
 // StopListen wraps the raw StopListen call.
@@ -2763,8 +2763,8 @@ func WrapIWTSProtocolListenerCallback(raw *systemremotedesktop.IWTSProtocolListe
 }
 
 // OnConnected wraps the raw OnConnected call.
-func (self IWTSProtocolListenerCallback) OnConnected(pConnection *systemremotedesktop.IWTSProtocolConnection, pCallback **systemremotedesktop.IWTSProtocolConnectionCallback) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnected(pConnection, pCallback)))
+func (self IWTSProtocolListenerCallback) OnConnected(pConnection IWTSProtocolConnection, pCallback **systemremotedesktop.IWTSProtocolConnectionCallback) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnected(pConnection.Raw, pCallback)))
 }
 
 // IWTSProtocolLogonErrorRedirector is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWTSProtocolLogonErrorRedirector with error-returning methods.
@@ -2875,9 +2875,9 @@ func WrapIWTSProtocolShadowConnection(raw *systemremotedesktop.IWTSProtocolShado
 }
 
 // Start wraps the raw Start call.
-func (self IWTSProtocolShadowConnection) Start(pTargetServerName string, TargetSessionId uint32, HotKeyVk byte, HotkeyModifiers uint16, pShadowCallback *systemremotedesktop.IWTSProtocolShadowCallback) error {
+func (self IWTSProtocolShadowConnection) Start(pTargetServerName string, TargetSessionId uint32, HotKeyVk byte, HotkeyModifiers uint16, pShadowCallback IWTSProtocolShadowCallback) error {
 	_pTargetServerName := win32.UTF16Ptr(pTargetServerName)
-	return win32.HRESULTError(int32(self.Raw.Start(foundation.PWSTR(_pTargetServerName), TargetSessionId, HotKeyVk, HotkeyModifiers, pShadowCallback)))
+	return win32.HRESULTError(int32(self.Raw.Start(foundation.PWSTR(_pTargetServerName), TargetSessionId, HotKeyVk, HotkeyModifiers, pShadowCallback.Raw)))
 }
 
 // Stop wraps the raw Stop call.
@@ -2951,8 +2951,8 @@ func WrapIWTSVirtualChannel(raw *systemremotedesktop.IWTSVirtualChannel) IWTSVir
 }
 
 // Write wraps the raw Write call.
-func (self IWTSVirtualChannel) Write(cbSize uint32, pBuffer *byte, pReserved *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Write(cbSize, pBuffer, pReserved)))
+func (self IWTSVirtualChannel) Write(cbSize uint32, pBuffer *byte, pReserved systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Write(cbSize, pBuffer, pReserved.Raw)))
 }
 
 // Close wraps the raw Close call.
@@ -2993,8 +2993,8 @@ func WrapIWTSVirtualChannelManager(raw *systemremotedesktop.IWTSVirtualChannelMa
 }
 
 // CreateListener wraps the raw CreateListener call.
-func (self IWTSVirtualChannelManager) CreateListener(pszChannelName foundation.PSTR, uFlags uint32, pListenerCallback *systemremotedesktop.IWTSListenerCallback, ppListener **systemremotedesktop.IWTSListener) error {
-	return win32.HRESULTError(int32(self.Raw.CreateListener(pszChannelName, uFlags, pListenerCallback, ppListener)))
+func (self IWTSVirtualChannelManager) CreateListener(pszChannelName foundation.PSTR, uFlags uint32, pListenerCallback IWTSListenerCallback, ppListener **systemremotedesktop.IWTSListener) error {
+	return win32.HRESULTError(int32(self.Raw.CreateListener(pszChannelName, uFlags, pListenerCallback.Raw, ppListener)))
 }
 
 // IWorkspace is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWorkspace with error-returning methods.
@@ -3095,8 +3095,8 @@ func WrapIWorkspaceRegistration(raw *systemremotedesktop.IWorkspaceRegistration)
 }
 
 // AddResource wraps the raw AddResource call.
-func (self IWorkspaceRegistration) AddResource(pUnk *systemremotedesktop.IWorkspaceClientExt, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddResource(pUnk, pdwCookie)))
+func (self IWorkspaceRegistration) AddResource(pUnk IWorkspaceClientExt, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddResource(pUnk.Raw, pdwCookie)))
 }
 
 // RemoveResource wraps the raw RemoveResource call.

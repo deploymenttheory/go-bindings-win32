@@ -10,9 +10,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemsysteminformation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/systeminformation"
 	systemthreading "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // AttachThreadInput wraps the raw AttachThreadInput call with idiomatic Go types.
@@ -456,8 +456,8 @@ func QueueUserAPC2(ApcRoutine foundation.PAPCFUNC, Thread foundation.HANDLE, Dat
 
 // RtwqAddPeriodicCallback wraps the raw RtwqAddPeriodicCallback call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqaddperiodiccallback
-func RtwqAddPeriodicCallback(Callback systemthreading.RTWQPERIODICCALLBACK, context *systemcom.IUnknown, key *uint32) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqAddPeriodicCallback(Callback, context, key)))
+func RtwqAddPeriodicCallback(Callback systemthreading.RTWQPERIODICCALLBACK, context systemcomidiom.IUnknown, key *uint32) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqAddPeriodicCallback(Callback, context.Raw, key)))
 }
 
 // RtwqAllocateSerialWorkQueue wraps the raw RtwqAllocateSerialWorkQueue call with idiomatic Go types.
@@ -474,15 +474,15 @@ func RtwqAllocateWorkQueue(WorkQueueType systemthreading.RTWQ_WORKQUEUE_TYPE, wo
 
 // RtwqBeginRegisterWorkQueueWithMMCSS wraps the raw RtwqBeginRegisterWorkQueueWithMMCSS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqbeginregisterworkqueuewithmmcss
-func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId uint32, usageClass string, dwTaskId uint32, lPriority int32, doneCallback *systemthreading.IRtwqAsyncCallback, doneState *systemcom.IUnknown) error {
+func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId uint32, usageClass string, dwTaskId uint32, lPriority int32, doneCallback IRtwqAsyncCallback, doneState systemcomidiom.IUnknown) error {
 	_usageClass := win32.UTF16Ptr(usageClass)
-	return win32.HRESULTError(int32(systemthreading.RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId, foundation.PWSTR(_usageClass), dwTaskId, lPriority, doneCallback, doneState)))
+	return win32.HRESULTError(int32(systemthreading.RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId, foundation.PWSTR(_usageClass), dwTaskId, lPriority, doneCallback.Raw, doneState.Raw)))
 }
 
 // RtwqBeginUnregisterWorkQueueWithMMCSS wraps the raw RtwqBeginUnregisterWorkQueueWithMMCSS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqbeginunregisterworkqueuewithmmcss
-func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId uint32, doneCallback *systemthreading.IRtwqAsyncCallback, doneState *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId, doneCallback, doneState)))
+func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId uint32, doneCallback IRtwqAsyncCallback, doneState systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId, doneCallback.Raw, doneState.Raw)))
 }
 
 // RtwqCancelDeadline wraps the raw RtwqCancelDeadline call with idiomatic Go types.
@@ -499,14 +499,14 @@ func RtwqCancelWorkItem(Key uint64) error {
 
 // RtwqCreateAsyncResult wraps the raw RtwqCreateAsyncResult call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqcreateasyncresult
-func RtwqCreateAsyncResult(appObject *systemcom.IUnknown, callback *systemthreading.IRtwqAsyncCallback, appState *systemcom.IUnknown, asyncResult **systemthreading.IRtwqAsyncResult) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqCreateAsyncResult(appObject, callback, appState, asyncResult)))
+func RtwqCreateAsyncResult(appObject systemcomidiom.IUnknown, callback IRtwqAsyncCallback, appState systemcomidiom.IUnknown, asyncResult **systemthreading.IRtwqAsyncResult) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqCreateAsyncResult(appObject.Raw, callback.Raw, appState.Raw, asyncResult)))
 }
 
 // RtwqEndRegisterWorkQueueWithMMCSS wraps the raw RtwqEndRegisterWorkQueueWithMMCSS call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqendregisterworkqueuewithmmcss
-func RtwqEndRegisterWorkQueueWithMMCSS(result *systemthreading.IRtwqAsyncResult, taskId *uint32) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqEndRegisterWorkQueueWithMMCSS(result, taskId)))
+func RtwqEndRegisterWorkQueueWithMMCSS(result IRtwqAsyncResult, taskId *uint32) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqEndRegisterWorkQueueWithMMCSS(result.Raw, taskId)))
 }
 
 // RtwqGetWorkQueueMMCSSClass wraps the raw RtwqGetWorkQueueMMCSSClass call with idiomatic Go types.
@@ -529,8 +529,8 @@ func RtwqGetWorkQueueMMCSSTaskId(workQueueId uint32, taskId *uint32) error {
 
 // RtwqInvokeCallback wraps the raw RtwqInvokeCallback call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqinvokecallback
-func RtwqInvokeCallback(result *systemthreading.IRtwqAsyncResult) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqInvokeCallback(result)))
+func RtwqInvokeCallback(result IRtwqAsyncResult) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqInvokeCallback(result.Raw)))
 }
 
 // RtwqJoinWorkQueue wraps the raw RtwqJoinWorkQueue call with idiomatic Go types.
@@ -560,20 +560,20 @@ func RtwqLockWorkQueue(workQueueId uint32) error {
 
 // RtwqPutWaitingWorkItem wraps the raw RtwqPutWaitingWorkItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqputwaitingworkitem
-func RtwqPutWaitingWorkItem(hEvent foundation.HANDLE, lPriority int32, result *systemthreading.IRtwqAsyncResult, key *uint64) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqPutWaitingWorkItem(hEvent, lPriority, result, key)))
+func RtwqPutWaitingWorkItem(hEvent foundation.HANDLE, lPriority int32, result IRtwqAsyncResult, key *uint64) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqPutWaitingWorkItem(hEvent, lPriority, result.Raw, key)))
 }
 
 // RtwqPutWorkItem wraps the raw RtwqPutWorkItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqputworkitem
-func RtwqPutWorkItem(dwQueue uint32, lPriority int32, result *systemthreading.IRtwqAsyncResult) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqPutWorkItem(dwQueue, lPriority, result)))
+func RtwqPutWorkItem(dwQueue uint32, lPriority int32, result IRtwqAsyncResult) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqPutWorkItem(dwQueue, lPriority, result.Raw)))
 }
 
 // RtwqRegisterPlatformEvents wraps the raw RtwqRegisterPlatformEvents call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqregisterplatformevents
-func RtwqRegisterPlatformEvents(platformEvents *systemthreading.IRtwqPlatformEvents) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqRegisterPlatformEvents(platformEvents)))
+func RtwqRegisterPlatformEvents(platformEvents IRtwqPlatformEvents) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqRegisterPlatformEvents(platformEvents.Raw)))
 }
 
 // RtwqRegisterPlatformWithMMCSS wraps the raw RtwqRegisterPlatformWithMMCSS call with idiomatic Go types.
@@ -591,8 +591,8 @@ func RtwqRemovePeriodicCallback(dwKey uint32) error {
 
 // RtwqScheduleWorkItem wraps the raw RtwqScheduleWorkItem call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqscheduleworkitem
-func RtwqScheduleWorkItem(result *systemthreading.IRtwqAsyncResult, Timeout int64, key *uint64) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqScheduleWorkItem(result, Timeout, key)))
+func RtwqScheduleWorkItem(result IRtwqAsyncResult, Timeout int64, key *uint64) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqScheduleWorkItem(result.Raw, Timeout, key)))
 }
 
 // RtwqSetDeadline wraps the raw RtwqSetDeadline call with idiomatic Go types.
@@ -646,8 +646,8 @@ func RtwqUnlockWorkQueue(workQueueId uint32) error {
 
 // RtwqUnregisterPlatformEvents wraps the raw RtwqUnregisterPlatformEvents call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqunregisterplatformevents
-func RtwqUnregisterPlatformEvents(platformEvents *systemthreading.IRtwqPlatformEvents) error {
-	return win32.HRESULTError(int32(systemthreading.RtwqUnregisterPlatformEvents(platformEvents)))
+func RtwqUnregisterPlatformEvents(platformEvents IRtwqPlatformEvents) error {
+	return win32.HRESULTError(int32(systemthreading.RtwqUnregisterPlatformEvents(platformEvents.Raw)))
 }
 
 // RtwqUnregisterPlatformFromMMCSS wraps the raw RtwqUnregisterPlatformFromMMCSS call with idiomatic Go types.

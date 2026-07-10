@@ -133,8 +133,8 @@ func WrapICastingController(raw *systemwinrt.ICastingController) ICastingControl
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ICastingController) Initialize(castingEngine *systemcom.IUnknown, castingSource *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(castingEngine, castingSource)))
+func (self ICastingController) Initialize(castingEngine systemcomidiom.IUnknown, castingSource systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(castingEngine.Raw, castingSource.Raw)))
 }
 
 // Connect wraps the raw Connect call.
@@ -148,8 +148,8 @@ func (self ICastingController) Disconnect() error {
 }
 
 // Advise wraps the raw Advise call.
-func (self ICastingController) Advise(eventHandler *systemwinrt.ICastingEventHandler, cookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(eventHandler, cookie)))
+func (self ICastingController) Advise(eventHandler ICastingEventHandler, cookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(eventHandler.Raw, cookie)))
 }
 
 // UnAdvise wraps the raw UnAdvise call.
@@ -212,8 +212,8 @@ func WrapICoreInputInterop(raw *systemwinrt.ICoreInputInterop) ICoreInputInterop
 }
 
 // SetInputSource wraps the raw SetInputSource call.
-func (self ICoreInputInterop) SetInputSource(value *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetInputSource(value)))
+func (self ICoreInputInterop) SetInputSource(value systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetInputSource(value.Raw)))
 }
 
 // Put_MessageHandled wraps the raw Put_MessageHandled call.
@@ -289,8 +289,8 @@ func (self ICoreWindowAdapterInterop) Get_TitleBarClientAdapter(value **systemco
 }
 
 // SetWindowClientAdapter wraps the raw SetWindowClientAdapter call.
-func (self ICoreWindowAdapterInterop) SetWindowClientAdapter(value *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetWindowClientAdapter(value)))
+func (self ICoreWindowAdapterInterop) SetWindowClientAdapter(value systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetWindowClientAdapter(value.Raw)))
 }
 
 // ICoreWindowComponentInterop is an idiomatic wrapper over the raw COM interface System.WinRT.ICoreWindowComponentInterop with error-returning methods.
@@ -305,8 +305,8 @@ func WrapICoreWindowComponentInterop(raw *systemwinrt.ICoreWindowComponentIntero
 }
 
 // ConfigureComponentInput wraps the raw ConfigureComponentInput call.
-func (self ICoreWindowComponentInterop) ConfigureComponentInput(hostViewInstanceId uint32, hwndHost foundation.HWND, inputSourceVisual *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ConfigureComponentInput(hostViewInstanceId, hwndHost, inputSourceVisual)))
+func (self ICoreWindowComponentInterop) ConfigureComponentInput(hostViewInstanceId uint32, hwndHost foundation.HWND, inputSourceVisual systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ConfigureComponentInput(hostViewInstanceId, hwndHost, inputSourceVisual.Raw)))
 }
 
 // GetViewInstanceId wraps the raw GetViewInstanceId call.
@@ -490,8 +490,8 @@ func (self ILanguageExceptionErrorInfo2) GetPreviousLanguageExceptionErrorInfo(p
 }
 
 // CapturePropagationContext wraps the raw CapturePropagationContext call.
-func (self ILanguageExceptionErrorInfo2) CapturePropagationContext(languageException *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CapturePropagationContext(languageException)))
+func (self ILanguageExceptionErrorInfo2) CapturePropagationContext(languageException systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CapturePropagationContext(languageException.Raw)))
 }
 
 // GetPropagationContextHead wraps the raw GetPropagationContextHead call.
@@ -795,11 +795,11 @@ func WrapIWebAuthenticationCoreManagerInterop(raw *systemwinrt.IWebAuthenticatio
 }
 
 // RequestTokenForWindowAsync wraps the raw RequestTokenForWindowAsync call.
-func (self IWebAuthenticationCoreManagerInterop) RequestTokenForWindowAsync(appWindow foundation.HWND, request *systemwinrt.IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.RequestTokenForWindowAsync(appWindow, request, riid, asyncInfo)))
+func (self IWebAuthenticationCoreManagerInterop) RequestTokenForWindowAsync(appWindow foundation.HWND, request IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.RequestTokenForWindowAsync(appWindow, request.Raw, riid, asyncInfo)))
 }
 
 // RequestTokenWithWebAccountForWindowAsync wraps the raw RequestTokenWithWebAccountForWindowAsync call.
-func (self IWebAuthenticationCoreManagerInterop) RequestTokenWithWebAccountForWindowAsync(appWindow foundation.HWND, request *systemwinrt.IInspectable, webAccount *systemwinrt.IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.RequestTokenWithWebAccountForWindowAsync(appWindow, request, webAccount, riid, asyncInfo)))
+func (self IWebAuthenticationCoreManagerInterop) RequestTokenWithWebAccountForWindowAsync(appWindow foundation.HWND, request IInspectable, webAccount IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.RequestTokenWithWebAccountForWindowAsync(appWindow, request.Raw, webAccount.Raw, riid, asyncInfo)))
 }

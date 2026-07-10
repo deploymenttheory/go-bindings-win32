@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	devicesdisplay "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/display"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -82,8 +81,8 @@ func (self IViewHelper) Commit() error {
 }
 
 // SetConfiguration wraps the raw SetConfiguration call.
-func (self IViewHelper) SetConfiguration(pIStream *systemcom.IStream, pulStatus *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetConfiguration(pIStream, pulStatus)))
+func (self IViewHelper) SetConfiguration(pIStream systemcomidiom.IStream, pulStatus *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetConfiguration(pIStream.Raw, pulStatus)))
 }
 
 // GetProceedOnNewConfiguration wraps the raw GetProceedOnNewConfiguration call.

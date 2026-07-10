@@ -29,8 +29,8 @@ func (self IRtwqAsyncCallback) GetParameters(pdwFlags *uint32, pdwQueue *uint32)
 }
 
 // Invoke wraps the raw Invoke call.
-func (self IRtwqAsyncCallback) Invoke(pAsyncResult *systemthreading.IRtwqAsyncResult) error {
-	return win32.HRESULTError(int32(self.Raw.Invoke(pAsyncResult)))
+func (self IRtwqAsyncCallback) Invoke(pAsyncResult IRtwqAsyncResult) error {
+	return win32.HRESULTError(int32(self.Raw.Invoke(pAsyncResult.Raw)))
 }
 
 // IRtwqAsyncResult is an idiomatic wrapper over the raw COM interface System.Threading.IRtwqAsyncResult with error-returning methods.

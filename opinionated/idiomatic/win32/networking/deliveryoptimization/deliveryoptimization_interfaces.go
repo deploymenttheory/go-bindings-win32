@@ -70,8 +70,8 @@ func WrapIDODownloadStatusCallback(raw *networkingdeliveryoptimization.IDODownlo
 }
 
 // OnStatusChange wraps the raw OnStatusChange call.
-func (self IDODownloadStatusCallback) OnStatusChange(download *networkingdeliveryoptimization.IDODownload, status *networkingdeliveryoptimization.DO_DOWNLOAD_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.OnStatusChange(download, status)))
+func (self IDODownloadStatusCallback) OnStatusChange(download IDODownload, status *networkingdeliveryoptimization.DO_DOWNLOAD_STATUS) error {
+	return win32.HRESULTError(int32(self.Raw.OnStatusChange(download.Raw, status)))
 }
 
 // IDOManager is an idiomatic wrapper over the raw COM interface Networking.DeliveryOptimization.IDOManager with error-returning methods.

@@ -14,6 +14,8 @@ import (
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // DDiscFormat2DataEvents is an idiomatic wrapper over the raw COM interface Storage.Imapi.DDiscFormat2DataEvents with error-returning methods.
@@ -28,8 +30,8 @@ func WrapDDiscFormat2DataEvents(raw *storageimapi.DDiscFormat2DataEvents) DDiscF
 }
 
 // Update wraps the raw Update call.
-func (self DDiscFormat2DataEvents) Update(object *systemcom.IDispatch, progress *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Update(object, progress)))
+func (self DDiscFormat2DataEvents) Update(object systemcomidiom.IDispatch, progress systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Update(object.Raw, progress.Raw)))
 }
 
 // DDiscFormat2EraseEvents is an idiomatic wrapper over the raw COM interface Storage.Imapi.DDiscFormat2EraseEvents with error-returning methods.
@@ -44,8 +46,8 @@ func WrapDDiscFormat2EraseEvents(raw *storageimapi.DDiscFormat2EraseEvents) DDis
 }
 
 // Update wraps the raw Update call.
-func (self DDiscFormat2EraseEvents) Update(object *systemcom.IDispatch, elapsedSeconds int32, estimatedTotalSeconds int32) error {
-	return win32.HRESULTError(int32(self.Raw.Update(object, elapsedSeconds, estimatedTotalSeconds)))
+func (self DDiscFormat2EraseEvents) Update(object systemcomidiom.IDispatch, elapsedSeconds int32, estimatedTotalSeconds int32) error {
+	return win32.HRESULTError(int32(self.Raw.Update(object.Raw, elapsedSeconds, estimatedTotalSeconds)))
 }
 
 // DDiscFormat2RawCDEvents is an idiomatic wrapper over the raw COM interface Storage.Imapi.DDiscFormat2RawCDEvents with error-returning methods.
@@ -60,8 +62,8 @@ func WrapDDiscFormat2RawCDEvents(raw *storageimapi.DDiscFormat2RawCDEvents) DDis
 }
 
 // Update wraps the raw Update call.
-func (self DDiscFormat2RawCDEvents) Update(object *systemcom.IDispatch, progress *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Update(object, progress)))
+func (self DDiscFormat2RawCDEvents) Update(object systemcomidiom.IDispatch, progress systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Update(object.Raw, progress.Raw)))
 }
 
 // DDiscFormat2TrackAtOnceEvents is an idiomatic wrapper over the raw COM interface Storage.Imapi.DDiscFormat2TrackAtOnceEvents with error-returning methods.
@@ -76,8 +78,8 @@ func WrapDDiscFormat2TrackAtOnceEvents(raw *storageimapi.DDiscFormat2TrackAtOnce
 }
 
 // Update wraps the raw Update call.
-func (self DDiscFormat2TrackAtOnceEvents) Update(object *systemcom.IDispatch, progress *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Update(object, progress)))
+func (self DDiscFormat2TrackAtOnceEvents) Update(object systemcomidiom.IDispatch, progress systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Update(object.Raw, progress.Raw)))
 }
 
 // DDiscMaster2Events is an idiomatic wrapper over the raw COM interface Storage.Imapi.DDiscMaster2Events with error-returning methods.
@@ -92,13 +94,13 @@ func WrapDDiscMaster2Events(raw *storageimapi.DDiscMaster2Events) DDiscMaster2Ev
 }
 
 // NotifyDeviceAdded wraps the raw NotifyDeviceAdded call.
-func (self DDiscMaster2Events) NotifyDeviceAdded(object *systemcom.IDispatch, uniqueId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyDeviceAdded(object, uniqueId)))
+func (self DDiscMaster2Events) NotifyDeviceAdded(object systemcomidiom.IDispatch, uniqueId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyDeviceAdded(object.Raw, uniqueId)))
 }
 
 // NotifyDeviceRemoved wraps the raw NotifyDeviceRemoved call.
-func (self DDiscMaster2Events) NotifyDeviceRemoved(object *systemcom.IDispatch, uniqueId foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyDeviceRemoved(object, uniqueId)))
+func (self DDiscMaster2Events) NotifyDeviceRemoved(object systemcomidiom.IDispatch, uniqueId foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyDeviceRemoved(object.Raw, uniqueId)))
 }
 
 // DFileSystemImageEvents is an idiomatic wrapper over the raw COM interface Storage.Imapi.DFileSystemImageEvents with error-returning methods.
@@ -113,8 +115,8 @@ func WrapDFileSystemImageEvents(raw *storageimapi.DFileSystemImageEvents) DFileS
 }
 
 // Update wraps the raw Update call.
-func (self DFileSystemImageEvents) Update(object *systemcom.IDispatch, currentFile foundation.BSTR, copiedSectors int32, totalSectors int32) error {
-	return win32.HRESULTError(int32(self.Raw.Update(object, currentFile, copiedSectors, totalSectors)))
+func (self DFileSystemImageEvents) Update(object systemcomidiom.IDispatch, currentFile foundation.BSTR, copiedSectors int32, totalSectors int32) error {
+	return win32.HRESULTError(int32(self.Raw.Update(object.Raw, currentFile, copiedSectors, totalSectors)))
 }
 
 // DFileSystemImageImportEvents is an idiomatic wrapper over the raw COM interface Storage.Imapi.DFileSystemImageImportEvents with error-returning methods.
@@ -129,8 +131,8 @@ func WrapDFileSystemImageImportEvents(raw *storageimapi.DFileSystemImageImportEv
 }
 
 // UpdateImport wraps the raw UpdateImport call.
-func (self DFileSystemImageImportEvents) UpdateImport(object *systemcom.IDispatch, fileSystem storageimapi.FsiFileSystems, currentItem foundation.BSTR, importedDirectoryItems int32, totalDirectoryItems int32, importedFileItems int32, totalFileItems int32) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateImport(object, fileSystem, currentItem, importedDirectoryItems, totalDirectoryItems, importedFileItems, totalFileItems)))
+func (self DFileSystemImageImportEvents) UpdateImport(object systemcomidiom.IDispatch, fileSystem storageimapi.FsiFileSystems, currentItem foundation.BSTR, importedDirectoryItems int32, totalDirectoryItems int32, importedFileItems int32, totalFileItems int32) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateImport(object.Raw, fileSystem, currentItem, importedDirectoryItems, totalDirectoryItems, importedFileItems, totalFileItems)))
 }
 
 // DWriteEngine2Events is an idiomatic wrapper over the raw COM interface Storage.Imapi.DWriteEngine2Events with error-returning methods.
@@ -145,8 +147,8 @@ func WrapDWriteEngine2Events(raw *storageimapi.DWriteEngine2Events) DWriteEngine
 }
 
 // Update wraps the raw Update call.
-func (self DWriteEngine2Events) Update(object *systemcom.IDispatch, progress *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Update(object, progress)))
+func (self DWriteEngine2Events) Update(object systemcomidiom.IDispatch, progress systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Update(object.Raw, progress.Raw)))
 }
 
 // IBlockRange is an idiomatic wrapper over the raw COM interface Storage.Imapi.IBlockRange with error-returning methods.
@@ -198,10 +200,10 @@ func WrapIBootOptions(raw *storageimapi.IBootOptions) IBootOptions {
 }
 
 // Get_BootImage wraps the raw Get_BootImage call.
-func (self IBootOptions) Get_BootImage() (*systemcom.IStream, error) {
+func (self IBootOptions) Get_BootImage() (systemcomidiom.IStream, error) {
 	var _pVal *systemcom.IStream
 	_hr := self.Raw.Get_BootImage(&_pVal)
-	return _pVal, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_pVal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Manufacturer wraps the raw Get_Manufacturer call.
@@ -248,8 +250,8 @@ func (self IBootOptions) Get_ImageSize() (uint32, error) {
 }
 
 // AssignBootImage wraps the raw AssignBootImage call.
-func (self IBootOptions) AssignBootImage(newVal *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.AssignBootImage(newVal)))
+func (self IBootOptions) AssignBootImage(newVal systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.AssignBootImage(newVal.Raw)))
 }
 
 // IBurnVerification is an idiomatic wrapper over the raw COM interface Storage.Imapi.IBurnVerification with error-returning methods.
@@ -285,13 +287,13 @@ func WrapIDiscFormat2(raw *storageimapi.IDiscFormat2) IDiscFormat2 {
 }
 
 // IsRecorderSupported wraps the raw IsRecorderSupported call.
-func (self IDiscFormat2) IsRecorderSupported(recorder *storageimapi.IDiscRecorder2, value *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsRecorderSupported(recorder, value)))
+func (self IDiscFormat2) IsRecorderSupported(recorder IDiscRecorder2, value *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsRecorderSupported(recorder.Raw, value)))
 }
 
 // IsCurrentMediaSupported wraps the raw IsCurrentMediaSupported call.
-func (self IDiscFormat2) IsCurrentMediaSupported(recorder *storageimapi.IDiscRecorder2, value *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsCurrentMediaSupported(recorder, value)))
+func (self IDiscFormat2) IsCurrentMediaSupported(recorder IDiscRecorder2, value *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsCurrentMediaSupported(recorder.Raw, value)))
 }
 
 // Get_MediaPhysicallyBlank wraps the raw Get_MediaPhysicallyBlank call.
@@ -321,8 +323,8 @@ func WrapIDiscFormat2Data(raw *storageimapi.IDiscFormat2Data) IDiscFormat2Data {
 }
 
 // Put_Recorder wraps the raw Put_Recorder call.
-func (self IDiscFormat2Data) Put_Recorder(value *storageimapi.IDiscRecorder2) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value)))
+func (self IDiscFormat2Data) Put_Recorder(value IDiscRecorder2) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value.Raw)))
 }
 
 // Get_Recorder wraps the raw Get_Recorder call.
@@ -466,8 +468,8 @@ func (self IDiscFormat2Data) Get_MultisessionInterfaces(value **systemcom.SAFEAR
 }
 
 // Write wraps the raw Write call.
-func (self IDiscFormat2Data) Write(data *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Write(data)))
+func (self IDiscFormat2Data) Write(data systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Write(data.Raw)))
 }
 
 // CancelWrite wraps the raw CancelWrite call.
@@ -523,8 +525,8 @@ func WrapIDiscFormat2Erase(raw *storageimapi.IDiscFormat2Erase) IDiscFormat2Eras
 }
 
 // Put_Recorder wraps the raw Put_Recorder call.
-func (self IDiscFormat2Erase) Put_Recorder(value *storageimapi.IDiscRecorder2) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value)))
+func (self IDiscFormat2Erase) Put_Recorder(value IDiscRecorder2) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value.Raw)))
 }
 
 // Get_Recorder wraps the raw Get_Recorder call.
@@ -579,13 +581,13 @@ func (self IDiscFormat2RawCD) PrepareMedia() error {
 }
 
 // WriteMedia wraps the raw WriteMedia call.
-func (self IDiscFormat2RawCD) WriteMedia(data *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.WriteMedia(data)))
+func (self IDiscFormat2RawCD) WriteMedia(data systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.WriteMedia(data.Raw)))
 }
 
 // WriteMedia2 wraps the raw WriteMedia2 call.
-func (self IDiscFormat2RawCD) WriteMedia2(data *systemcom.IStream, streamLeadInSectors int32) error {
-	return win32.HRESULTError(int32(self.Raw.WriteMedia2(data, streamLeadInSectors)))
+func (self IDiscFormat2RawCD) WriteMedia2(data systemcomidiom.IStream, streamLeadInSectors int32) error {
+	return win32.HRESULTError(int32(self.Raw.WriteMedia2(data.Raw, streamLeadInSectors)))
 }
 
 // CancelWrite wraps the raw CancelWrite call.
@@ -604,8 +606,8 @@ func (self IDiscFormat2RawCD) SetWriteSpeed(RequestedSectorsPerSecond int32, Rot
 }
 
 // Put_Recorder wraps the raw Put_Recorder call.
-func (self IDiscFormat2RawCD) Put_Recorder(value *storageimapi.IDiscRecorder2) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value)))
+func (self IDiscFormat2RawCD) Put_Recorder(value IDiscRecorder2) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value.Raw)))
 }
 
 // Get_Recorder wraps the raw Get_Recorder call.
@@ -736,8 +738,8 @@ func (self IDiscFormat2TrackAtOnce) PrepareMedia() error {
 }
 
 // AddAudioTrack wraps the raw AddAudioTrack call.
-func (self IDiscFormat2TrackAtOnce) AddAudioTrack(data *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.AddAudioTrack(data)))
+func (self IDiscFormat2TrackAtOnce) AddAudioTrack(data systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.AddAudioTrack(data.Raw)))
 }
 
 // CancelAddTrack wraps the raw CancelAddTrack call.
@@ -756,8 +758,8 @@ func (self IDiscFormat2TrackAtOnce) SetWriteSpeed(RequestedSectorsPerSecond int3
 }
 
 // Put_Recorder wraps the raw Put_Recorder call.
-func (self IDiscFormat2TrackAtOnce) Put_Recorder(value *storageimapi.IDiscRecorder2) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value)))
+func (self IDiscFormat2TrackAtOnce) Put_Recorder(value IDiscRecorder2) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value.Raw)))
 }
 
 // Get_Recorder wraps the raw Get_Recorder call.
@@ -928,8 +930,8 @@ func (self IDiscMaster) GetActiveDiscRecorder(ppRecorder **storageimapi.IDiscRec
 }
 
 // SetActiveDiscRecorder wraps the raw SetActiveDiscRecorder call.
-func (self IDiscMaster) SetActiveDiscRecorder(pRecorder *storageimapi.IDiscRecorder) error {
-	return win32.HRESULTError(int32(self.Raw.SetActiveDiscRecorder(pRecorder)))
+func (self IDiscMaster) SetActiveDiscRecorder(pRecorder IDiscRecorder) error {
+	return win32.HRESULTError(int32(self.Raw.SetActiveDiscRecorder(pRecorder.Raw)))
 }
 
 // ClearFormatContent wraps the raw ClearFormatContent call.
@@ -938,8 +940,8 @@ func (self IDiscMaster) ClearFormatContent() error {
 }
 
 // ProgressAdvise wraps the raw ProgressAdvise call.
-func (self IDiscMaster) ProgressAdvise(pEvents *storageimapi.IDiscMasterProgressEvents, pvCookie *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.ProgressAdvise(pEvents, pvCookie)))
+func (self IDiscMaster) ProgressAdvise(pEvents IDiscMasterProgressEvents, pvCookie *uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.ProgressAdvise(pEvents.Raw, pvCookie)))
 }
 
 // ProgressUnadvise wraps the raw ProgressUnadvise call.
@@ -1091,8 +1093,8 @@ func (self IDiscRecorder) GetRecorderProperties(ppPropStg **systemcomstructureds
 }
 
 // SetRecorderProperties wraps the raw SetRecorderProperties call.
-func (self IDiscRecorder) SetRecorderProperties(pPropStg *systemcomstructuredstorage.IPropertyStorage) error {
-	return win32.HRESULTError(int32(self.Raw.SetRecorderProperties(pPropStg)))
+func (self IDiscRecorder) SetRecorderProperties(pPropStg systemcomstructuredstorageidiom.IPropertyStorage) error {
+	return win32.HRESULTError(int32(self.Raw.SetRecorderProperties(pPropStg.Raw)))
 }
 
 // GetRecorderState wraps the raw GetRecorderState call.
@@ -1508,8 +1510,8 @@ func (self IFileSystemImage) Put_FreeMediaBlocks(newVal int32) error {
 }
 
 // SetMaxMediaBlocksFromDevice wraps the raw SetMaxMediaBlocksFromDevice call.
-func (self IFileSystemImage) SetMaxMediaBlocksFromDevice(discRecorder *storageimapi.IDiscRecorder2) error {
-	return win32.HRESULTError(int32(self.Raw.SetMaxMediaBlocksFromDevice(discRecorder)))
+func (self IFileSystemImage) SetMaxMediaBlocksFromDevice(discRecorder IDiscRecorder2) error {
+	return win32.HRESULTError(int32(self.Raw.SetMaxMediaBlocksFromDevice(discRecorder.Raw)))
 }
 
 // Get_UsedBlocks wraps the raw Get_UsedBlocks call.
@@ -1538,8 +1540,8 @@ func (self IFileSystemImage) Get_BootImageOptions(pVal **storageimapi.IBootOptio
 }
 
 // Put_BootImageOptions wraps the raw Put_BootImageOptions call.
-func (self IFileSystemImage) Put_BootImageOptions(newVal *storageimapi.IBootOptions) error {
-	return win32.HRESULTError(int32(self.Raw.Put_BootImageOptions(newVal)))
+func (self IFileSystemImage) Put_BootImageOptions(newVal IBootOptions) error {
+	return win32.HRESULTError(int32(self.Raw.Put_BootImageOptions(newVal.Raw)))
 }
 
 // Get_FileCount wraps the raw Get_FileCount call.
@@ -1618,8 +1620,8 @@ func (self IFileSystemImage) Get_UDFRevisionsSupported(pVal **systemcom.SAFEARRA
 }
 
 // ChooseImageDefaults wraps the raw ChooseImageDefaults call.
-func (self IFileSystemImage) ChooseImageDefaults(discRecorder *storageimapi.IDiscRecorder2) error {
-	return win32.HRESULTError(int32(self.Raw.ChooseImageDefaults(discRecorder)))
+func (self IFileSystemImage) ChooseImageDefaults(discRecorder IDiscRecorder2) error {
+	return win32.HRESULTError(int32(self.Raw.ChooseImageDefaults(discRecorder.Raw)))
 }
 
 // ChooseImageDefaultsForMediaType wraps the raw ChooseImageDefaultsForMediaType call.
@@ -1658,8 +1660,8 @@ func (self IFileSystemImage) CalculateDiscIdentifier(discIdentifier *foundation.
 }
 
 // IdentifyFileSystemsOnDisc wraps the raw IdentifyFileSystemsOnDisc call.
-func (self IFileSystemImage) IdentifyFileSystemsOnDisc(discRecorder *storageimapi.IDiscRecorder2, fileSystems *storageimapi.FsiFileSystems) error {
-	return win32.HRESULTError(int32(self.Raw.IdentifyFileSystemsOnDisc(discRecorder, fileSystems)))
+func (self IFileSystemImage) IdentifyFileSystemsOnDisc(discRecorder IDiscRecorder2, fileSystems *storageimapi.FsiFileSystems) error {
+	return win32.HRESULTError(int32(self.Raw.IdentifyFileSystemsOnDisc(discRecorder.Raw, fileSystems)))
 }
 
 // GetDefaultFileSystemForImport wraps the raw GetDefaultFileSystemForImport call.
@@ -1791,17 +1793,17 @@ func WrapIFileSystemImageResult(raw *storageimapi.IFileSystemImageResult) IFileS
 }
 
 // Get_ImageStream wraps the raw Get_ImageStream call.
-func (self IFileSystemImageResult) Get_ImageStream() (*systemcom.IStream, error) {
+func (self IFileSystemImageResult) Get_ImageStream() (systemcomidiom.IStream, error) {
 	var _pVal *systemcom.IStream
 	_hr := self.Raw.Get_ImageStream(&_pVal)
-	return _pVal, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_pVal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProgressItems wraps the raw Get_ProgressItems call.
-func (self IFileSystemImageResult) Get_ProgressItems() (*storageimapi.IProgressItems, error) {
+func (self IFileSystemImageResult) Get_ProgressItems() (IProgressItems, error) {
 	var _pVal *storageimapi.IProgressItems
 	_hr := self.Raw.Get_ProgressItems(&_pVal)
-	return _pVal, win32.HRESULTError(int32(_hr))
+	return WrapIProgressItems(_pVal), win32.HRESULTError(int32(_hr))
 }
 
 // Get_TotalBlocks wraps the raw Get_TotalBlocks call.
@@ -1853,17 +1855,17 @@ func WrapIFsiDirectoryItem(raw *storageimapi.IFsiDirectoryItem) IFsiDirectoryIte
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IFsiDirectoryItem) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IFsiDirectoryItem) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _NewEnum *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_NewEnum)
-	return _NewEnum, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_NewEnum), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IFsiDirectoryItem) Get_Item(path foundation.BSTR) (*storageimapi.IFsiItem, error) {
+func (self IFsiDirectoryItem) Get_Item(path foundation.BSTR) (IFsiItem, error) {
 	var _item *storageimapi.IFsiItem
 	_hr := self.Raw.Get_Item(path, &_item)
-	return _item, win32.HRESULTError(int32(_hr))
+	return WrapIFsiItem(_item), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -1874,10 +1876,10 @@ func (self IFsiDirectoryItem) Get_Count() (int32, error) {
 }
 
 // Get_EnumFsiItems wraps the raw Get_EnumFsiItems call.
-func (self IFsiDirectoryItem) Get_EnumFsiItems() (*storageimapi.IEnumFsiItems, error) {
+func (self IFsiDirectoryItem) Get_EnumFsiItems() (IEnumFsiItems, error) {
 	var _NewEnum *storageimapi.IEnumFsiItems
 	_hr := self.Raw.Get_EnumFsiItems(&_NewEnum)
-	return _NewEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumFsiItems(_NewEnum), win32.HRESULTError(int32(_hr))
 }
 
 // AddDirectory wraps the raw AddDirectory call.
@@ -1886,8 +1888,8 @@ func (self IFsiDirectoryItem) AddDirectory(path foundation.BSTR) error {
 }
 
 // AddFile wraps the raw AddFile call.
-func (self IFsiDirectoryItem) AddFile(path foundation.BSTR, fileData *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.AddFile(path, fileData)))
+func (self IFsiDirectoryItem) AddFile(path foundation.BSTR, fileData systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.AddFile(path, fileData.Raw)))
 }
 
 // AddTree wraps the raw AddTree call.
@@ -1896,8 +1898,8 @@ func (self IFsiDirectoryItem) AddTree(sourceDirectory foundation.BSTR, includeBa
 }
 
 // Add wraps the raw Add call.
-func (self IFsiDirectoryItem) Add(item *storageimapi.IFsiItem) error {
-	return win32.HRESULTError(int32(self.Raw.Add(item)))
+func (self IFsiDirectoryItem) Add(item IFsiItem) error {
+	return win32.HRESULTError(int32(self.Raw.Add(item.Raw)))
 }
 
 // Remove wraps the raw Remove call.
@@ -1959,15 +1961,15 @@ func (self IFsiFileItem) Get_DataSize32BitHigh() (int32, error) {
 }
 
 // Get_Data wraps the raw Get_Data call.
-func (self IFsiFileItem) Get_Data() (*systemcom.IStream, error) {
+func (self IFsiFileItem) Get_Data() (systemcomidiom.IStream, error) {
 	var _pVal *systemcom.IStream
 	_hr := self.Raw.Get_Data(&_pVal)
-	return _pVal, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_pVal), win32.HRESULTError(int32(_hr))
 }
 
 // Put_Data wraps the raw Put_Data call.
-func (self IFsiFileItem) Put_Data(newVal *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Data(newVal)))
+func (self IFsiFileItem) Put_Data(newVal systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Data(newVal.Raw)))
 }
 
 // IFsiFileItem2 is an idiomatic wrapper over the raw COM interface Storage.Imapi.IFsiFileItem2 with error-returning methods.
@@ -1992,8 +1994,8 @@ func (self IFsiFileItem2) Get_IsNamedStream(pVal *foundation.VARIANT_BOOL) error
 }
 
 // AddStream wraps the raw AddStream call.
-func (self IFsiFileItem2) AddStream(name foundation.BSTR, streamData *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.AddStream(name, streamData)))
+func (self IFsiFileItem2) AddStream(name foundation.BSTR, streamData systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.AddStream(name, streamData.Raw)))
 }
 
 // RemoveStream wraps the raw RemoveStream call.
@@ -2131,10 +2133,10 @@ func (self IIsoImageManager) Get_Path(pVal *foundation.BSTR) error {
 }
 
 // Get_Stream wraps the raw Get_Stream call.
-func (self IIsoImageManager) Get_Stream() (*systemcom.IStream, error) {
+func (self IIsoImageManager) Get_Stream() (systemcomidiom.IStream, error) {
 	var _data *systemcom.IStream
 	_hr := self.Raw.Get_Stream(&_data)
-	return _data, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_data), win32.HRESULTError(int32(_hr))
 }
 
 // SetPath wraps the raw SetPath call.
@@ -2143,8 +2145,8 @@ func (self IIsoImageManager) SetPath(Val foundation.BSTR) error {
 }
 
 // SetStream wraps the raw SetStream call.
-func (self IIsoImageManager) SetStream(data *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SetStream(data)))
+func (self IIsoImageManager) SetStream(data systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SetStream(data.Raw)))
 }
 
 // Validate wraps the raw Validate call.
@@ -2179,8 +2181,8 @@ func (self IJolietDiscMaster) GetDataBlockSize(pnBlockBytes *int32) error {
 }
 
 // AddData wraps the raw AddData call.
-func (self IJolietDiscMaster) AddData(pStorage *systemcomstructuredstorage.IStorage, lFileOverwrite int32) error {
-	return win32.HRESULTError(int32(self.Raw.AddData(pStorage, lFileOverwrite)))
+func (self IJolietDiscMaster) AddData(pStorage systemcomstructuredstorageidiom.IStorage, lFileOverwrite int32) error {
+	return win32.HRESULTError(int32(self.Raw.AddData(pStorage.Raw, lFileOverwrite)))
 }
 
 // GetJolietProperties wraps the raw GetJolietProperties call.
@@ -2189,8 +2191,8 @@ func (self IJolietDiscMaster) GetJolietProperties(ppPropStg **systemcomstructure
 }
 
 // SetJolietProperties wraps the raw SetJolietProperties call.
-func (self IJolietDiscMaster) SetJolietProperties(pPropStg *systemcomstructuredstorage.IPropertyStorage) error {
-	return win32.HRESULTError(int32(self.Raw.SetJolietProperties(pPropStg)))
+func (self IJolietDiscMaster) SetJolietProperties(pPropStg systemcomstructuredstorageidiom.IPropertyStorage) error {
+	return win32.HRESULTError(int32(self.Raw.SetJolietProperties(pPropStg.Raw)))
 }
 
 // IMultisession is an idiomatic wrapper over the raw COM interface Storage.Imapi.IMultisession with error-returning methods.
@@ -2353,17 +2355,17 @@ func WrapIProgressItems(raw *storageimapi.IProgressItems) IProgressItems {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IProgressItems) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IProgressItems) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _NewEnum *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_NewEnum)
-	return _NewEnum, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_NewEnum), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IProgressItems) Get_Item(Index int32) (*storageimapi.IProgressItem, error) {
+func (self IProgressItems) Get_Item(Index int32) (IProgressItem, error) {
 	var _item *storageimapi.IProgressItem
 	_hr := self.Raw.Get_Item(Index, &_item)
-	return _item, win32.HRESULTError(int32(_hr))
+	return WrapIProgressItem(_item), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
@@ -2374,24 +2376,24 @@ func (self IProgressItems) Get_Count() (int32, error) {
 }
 
 // ProgressItemFromBlock wraps the raw ProgressItemFromBlock call.
-func (self IProgressItems) ProgressItemFromBlock(block uint32) (*storageimapi.IProgressItem, error) {
+func (self IProgressItems) ProgressItemFromBlock(block uint32) (IProgressItem, error) {
 	var _item *storageimapi.IProgressItem
 	_hr := self.Raw.ProgressItemFromBlock(block, &_item)
-	return _item, win32.HRESULTError(int32(_hr))
+	return WrapIProgressItem(_item), win32.HRESULTError(int32(_hr))
 }
 
 // ProgressItemFromDescription wraps the raw ProgressItemFromDescription call.
-func (self IProgressItems) ProgressItemFromDescription(description foundation.BSTR) (*storageimapi.IProgressItem, error) {
+func (self IProgressItems) ProgressItemFromDescription(description foundation.BSTR) (IProgressItem, error) {
 	var _item *storageimapi.IProgressItem
 	_hr := self.Raw.ProgressItemFromDescription(description, &_item)
-	return _item, win32.HRESULTError(int32(_hr))
+	return WrapIProgressItem(_item), win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnumProgressItems wraps the raw Get_EnumProgressItems call.
-func (self IProgressItems) Get_EnumProgressItems() (*storageimapi.IEnumProgressItems, error) {
+func (self IProgressItems) Get_EnumProgressItems() (IEnumProgressItems, error) {
 	var _NewEnum *storageimapi.IEnumProgressItems
 	_hr := self.Raw.Get_EnumProgressItems(&_NewEnum)
-	return _NewEnum, win32.HRESULTError(int32(_hr))
+	return WrapIEnumProgressItems(_NewEnum), win32.HRESULTError(int32(_hr))
 }
 
 // IRawCDImageCreator is an idiomatic wrapper over the raw COM interface Storage.Imapi.IRawCDImageCreator with error-returning methods.
@@ -2406,27 +2408,27 @@ func WrapIRawCDImageCreator(raw *storageimapi.IRawCDImageCreator) IRawCDImageCre
 }
 
 // CreateResultImage wraps the raw CreateResultImage call.
-func (self IRawCDImageCreator) CreateResultImage() (*systemcom.IStream, error) {
+func (self IRawCDImageCreator) CreateResultImage() (systemcomidiom.IStream, error) {
 	var _resultStream *systemcom.IStream
 	_hr := self.Raw.CreateResultImage(&_resultStream)
-	return _resultStream, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_resultStream), win32.HRESULTError(int32(_hr))
 }
 
 // AddTrack wraps the raw AddTrack call.
-func (self IRawCDImageCreator) AddTrack(dataType storageimapi.IMAPI_CD_SECTOR_TYPE, data *systemcom.IStream) (int32, error) {
+func (self IRawCDImageCreator) AddTrack(dataType storageimapi.IMAPI_CD_SECTOR_TYPE, data systemcomidiom.IStream) (int32, error) {
 	var _trackIndex int32
-	_hr := self.Raw.AddTrack(dataType, data, &_trackIndex)
+	_hr := self.Raw.AddTrack(dataType, data.Raw, &_trackIndex)
 	return _trackIndex, win32.HRESULTError(int32(_hr))
 }
 
 // AddSpecialPregap wraps the raw AddSpecialPregap call.
-func (self IRawCDImageCreator) AddSpecialPregap(data *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.AddSpecialPregap(data)))
+func (self IRawCDImageCreator) AddSpecialPregap(data systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.AddSpecialPregap(data.Raw)))
 }
 
 // AddSubcodeRWGenerator wraps the raw AddSubcodeRWGenerator call.
-func (self IRawCDImageCreator) AddSubcodeRWGenerator(subcode *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.AddSubcodeRWGenerator(subcode)))
+func (self IRawCDImageCreator) AddSubcodeRWGenerator(subcode systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.AddSubcodeRWGenerator(subcode.Raw)))
 }
 
 // Put_ResultingImageType wraps the raw Put_ResultingImageType call.
@@ -2643,8 +2645,8 @@ func WrapIStreamConcatenate(raw *storageimapi.IStreamConcatenate) IStreamConcate
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IStreamConcatenate) Initialize(stream1 *systemcom.IStream, stream2 *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(stream1, stream2)))
+func (self IStreamConcatenate) Initialize(stream1 systemcomidiom.IStream, stream2 systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(stream1.Raw, stream2.Raw)))
 }
 
 // Initialize2 wraps the raw Initialize2 call.
@@ -2653,8 +2655,8 @@ func (self IStreamConcatenate) Initialize2(streams **systemcom.IStream, streamCo
 }
 
 // Append wraps the raw Append call.
-func (self IStreamConcatenate) Append(stream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Append(stream)))
+func (self IStreamConcatenate) Append(stream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Append(stream.Raw)))
 }
 
 // Append2 wraps the raw Append2 call.
@@ -2721,8 +2723,8 @@ func WrapIWriteEngine2(raw *storageimapi.IWriteEngine2) IWriteEngine2 {
 }
 
 // WriteSection wraps the raw WriteSection call.
-func (self IWriteEngine2) WriteSection(data *systemcom.IStream, startingBlockAddress int32, numberOfBlocks int32) error {
-	return win32.HRESULTError(int32(self.Raw.WriteSection(data, startingBlockAddress, numberOfBlocks)))
+func (self IWriteEngine2) WriteSection(data systemcomidiom.IStream, startingBlockAddress int32, numberOfBlocks int32) error {
+	return win32.HRESULTError(int32(self.Raw.WriteSection(data.Raw, startingBlockAddress, numberOfBlocks)))
 }
 
 // CancelWrite wraps the raw CancelWrite call.
@@ -2731,8 +2733,8 @@ func (self IWriteEngine2) CancelWrite() error {
 }
 
 // Put_Recorder wraps the raw Put_Recorder call.
-func (self IWriteEngine2) Put_Recorder(value *storageimapi.IDiscRecorder2Ex) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value)))
+func (self IWriteEngine2) Put_Recorder(value IDiscRecorder2Ex) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Recorder(value.Raw)))
 }
 
 // Get_Recorder wraps the raw Get_Recorder call.

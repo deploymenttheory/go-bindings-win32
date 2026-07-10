@@ -268,13 +268,13 @@ func (self IADsAccessControlList) Put_AceCount(lnAceCount int32) error {
 }
 
 // AddAce wraps the raw AddAce call.
-func (self IADsAccessControlList) AddAce(pAccessControlEntry *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.AddAce(pAccessControlEntry)))
+func (self IADsAccessControlList) AddAce(pAccessControlEntry systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.AddAce(pAccessControlEntry.Raw)))
 }
 
 // RemoveAce wraps the raw RemoveAce call.
-func (self IADsAccessControlList) RemoveAce(pAccessControlEntry *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveAce(pAccessControlEntry)))
+func (self IADsAccessControlList) RemoveAce(pAccessControlEntry systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveAce(pAccessControlEntry.Raw)))
 }
 
 // CopyAccessList wraps the raw CopyAccessList call.
@@ -345,8 +345,8 @@ func WrapIADsAggregatee(raw *networkingactivedirectory.IADsAggregatee) IADsAggre
 }
 
 // ConnectAsAggregatee wraps the raw ConnectAsAggregatee call.
-func (self IADsAggregatee) ConnectAsAggregatee(pOuterUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectAsAggregatee(pOuterUnknown)))
+func (self IADsAggregatee) ConnectAsAggregatee(pOuterUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectAsAggregatee(pOuterUnknown.Raw)))
 }
 
 // DisconnectAsAggregatee wraps the raw DisconnectAsAggregatee call.
@@ -376,8 +376,8 @@ func WrapIADsAggregator(raw *networkingactivedirectory.IADsAggregator) IADsAggre
 }
 
 // ConnectAsAggregator wraps the raw ConnectAsAggregator call.
-func (self IADsAggregator) ConnectAsAggregator(pAggregatee *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectAsAggregator(pAggregatee)))
+func (self IADsAggregator) ConnectAsAggregator(pAggregatee systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectAsAggregator(pAggregatee.Raw)))
 }
 
 // DisconnectAsAggregator wraps the raw DisconnectAsAggregator call.
@@ -2317,8 +2317,8 @@ func (self IADsPropertyValue) Get_SecurityDescriptor(retval **systemcom.IDispatc
 }
 
 // Put_SecurityDescriptor wraps the raw Put_SecurityDescriptor call.
-func (self IADsPropertyValue) Put_SecurityDescriptor(pSecurityDescriptor *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SecurityDescriptor(pSecurityDescriptor)))
+func (self IADsPropertyValue) Put_SecurityDescriptor(pSecurityDescriptor systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SecurityDescriptor(pSecurityDescriptor.Raw)))
 }
 
 // Get_LargeInteger wraps the raw Get_LargeInteger call.
@@ -2327,8 +2327,8 @@ func (self IADsPropertyValue) Get_LargeInteger(retval **systemcom.IDispatch) err
 }
 
 // Put_LargeInteger wraps the raw Put_LargeInteger call.
-func (self IADsPropertyValue) Put_LargeInteger(pLargeInteger *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Put_LargeInteger(pLargeInteger)))
+func (self IADsPropertyValue) Put_LargeInteger(pLargeInteger systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Put_LargeInteger(pLargeInteger.Raw)))
 }
 
 // Get_UTCTime wraps the raw Get_UTCTime call.
@@ -2516,8 +2516,8 @@ func (self IADsSecurityDescriptor) Get_DiscretionaryAcl(retval **systemcom.IDisp
 }
 
 // Put_DiscretionaryAcl wraps the raw Put_DiscretionaryAcl call.
-func (self IADsSecurityDescriptor) Put_DiscretionaryAcl(pDiscretionaryAcl *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Put_DiscretionaryAcl(pDiscretionaryAcl)))
+func (self IADsSecurityDescriptor) Put_DiscretionaryAcl(pDiscretionaryAcl systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Put_DiscretionaryAcl(pDiscretionaryAcl.Raw)))
 }
 
 // Get_DaclDefaulted wraps the raw Get_DaclDefaulted call.
@@ -2536,8 +2536,8 @@ func (self IADsSecurityDescriptor) Get_SystemAcl(retval **systemcom.IDispatch) e
 }
 
 // Put_SystemAcl wraps the raw Put_SystemAcl call.
-func (self IADsSecurityDescriptor) Put_SystemAcl(pSystemAcl *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SystemAcl(pSystemAcl)))
+func (self IADsSecurityDescriptor) Put_SystemAcl(pSystemAcl systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SystemAcl(pSystemAcl.Raw)))
 }
 
 // Get_SaclDefaulted wraps the raw Get_SaclDefaulted call.
@@ -3485,9 +3485,9 @@ func WrapIDsAdminCreateObj(raw *networkingactivedirectory.IDsAdminCreateObj) IDs
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDsAdminCreateObj) Initialize(pADsContainerObj *networkingactivedirectory.IADsContainer, pADsCopySource *networkingactivedirectory.IADs, lpszClassName string) error {
+func (self IDsAdminCreateObj) Initialize(pADsContainerObj IADsContainer, pADsCopySource IADs, lpszClassName string) error {
 	_lpszClassName := win32.UTF16Ptr(lpszClassName)
-	return win32.HRESULTError(int32(self.Raw.Initialize(pADsContainerObj, pADsCopySource, foundation.PWSTR(_lpszClassName))))
+	return win32.HRESULTError(int32(self.Raw.Initialize(pADsContainerObj.Raw, pADsCopySource.Raw, foundation.PWSTR(_lpszClassName))))
 }
 
 // CreateModal wraps the raw CreateModal call.
@@ -3529,9 +3529,9 @@ func WrapIDsAdminNewObjExt(raw *networkingactivedirectory.IDsAdminNewObjExt) IDs
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDsAdminNewObjExt) Initialize(pADsContainerObj *networkingactivedirectory.IADsContainer, pADsCopySource *networkingactivedirectory.IADs, lpszClassName string, pDsAdminNewObj *networkingactivedirectory.IDsAdminNewObj, pDispInfo *networkingactivedirectory.DSA_NEWOBJ_DISPINFO) error {
+func (self IDsAdminNewObjExt) Initialize(pADsContainerObj IADsContainer, pADsCopySource IADs, lpszClassName string, pDsAdminNewObj IDsAdminNewObj, pDispInfo *networkingactivedirectory.DSA_NEWOBJ_DISPINFO) error {
 	_lpszClassName := win32.UTF16Ptr(lpszClassName)
-	return win32.HRESULTError(int32(self.Raw.Initialize(pADsContainerObj, pADsCopySource, foundation.PWSTR(_lpszClassName), pDsAdminNewObj, pDispInfo)))
+	return win32.HRESULTError(int32(self.Raw.Initialize(pADsContainerObj.Raw, pADsCopySource.Raw, foundation.PWSTR(_lpszClassName), pDsAdminNewObj.Raw, pDispInfo)))
 }
 
 // AddPages wraps the raw AddPages call.
@@ -3540,8 +3540,8 @@ func (self IDsAdminNewObjExt) AddPages(lpfnAddPage uicontrols.LPFNSVADDPROPSHEET
 }
 
 // SetObject wraps the raw SetObject call.
-func (self IDsAdminNewObjExt) SetObject(pADsObj *networkingactivedirectory.IADs) error {
-	return win32.HRESULTError(int32(self.Raw.SetObject(pADsObj)))
+func (self IDsAdminNewObjExt) SetObject(pADsObj IADs) error {
+	return win32.HRESULTError(int32(self.Raw.SetObject(pADsObj.Raw)))
 }
 
 // WriteData wraps the raw WriteData call.
@@ -3593,13 +3593,13 @@ func WrapIDsAdminNotifyHandler(raw *networkingactivedirectory.IDsAdminNotifyHand
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDsAdminNotifyHandler) Initialize(pExtraInfo *systemcom.IDataObject, puEventFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pExtraInfo, puEventFlags)))
+func (self IDsAdminNotifyHandler) Initialize(pExtraInfo systemcomidiom.IDataObject, puEventFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pExtraInfo.Raw, puEventFlags)))
 }
 
 // Begin wraps the raw Begin call.
-func (self IDsAdminNotifyHandler) Begin(uEvent uint32, pArg1 *systemcom.IDataObject, pArg2 *systemcom.IDataObject, puFlags *uint32, pBstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Begin(uEvent, pArg1, pArg2, puFlags, pBstr)))
+func (self IDsAdminNotifyHandler) Begin(uEvent uint32, pArg1 systemcomidiom.IDataObject, pArg2 systemcomidiom.IDataObject, puFlags *uint32, pBstr *foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.Begin(uEvent, pArg1.Raw, pArg2.Raw, puFlags, pBstr)))
 }
 
 // Notify wraps the raw Notify call.

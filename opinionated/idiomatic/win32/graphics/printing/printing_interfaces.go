@@ -15,6 +15,7 @@ import (
 	graphicsprinting "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/printing"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
+	dataxmlmsxmlidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/data/xml/msxml"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
@@ -31,9 +32,9 @@ func WrapIAsyncGetSendNotificationCookie(raw *graphicsprinting.IAsyncGetSendNoti
 }
 
 // FinishAsyncCallWithData wraps the raw FinishAsyncCallWithData call.
-func (self IAsyncGetSendNotificationCookie) FinishAsyncCallWithData(param0 *graphicsprinting.IPrintAsyncNotifyDataObject, param1 bool) error {
+func (self IAsyncGetSendNotificationCookie) FinishAsyncCallWithData(param0 IPrintAsyncNotifyDataObject, param1 bool) error {
 	_param1 := foundation.BOOL(win32.Bool32(param1))
-	return win32.HRESULTError(int32(self.Raw.FinishAsyncCallWithData(param0, _param1)))
+	return win32.HRESULTError(int32(self.Raw.FinishAsyncCallWithData(param0.Raw, _param1)))
 }
 
 // IAsyncGetSrvReferralCookie is an idiomatic wrapper over the raw COM interface Graphics.Printing.IAsyncGetSrvReferralCookie with error-returning methods.
@@ -90,13 +91,13 @@ func (self IBidiAsyncNotifyChannel) GetChannelNotificationType(param0 **graphics
 }
 
 // AsyncGetNotificationSendResponse wraps the raw AsyncGetNotificationSendResponse call.
-func (self IBidiAsyncNotifyChannel) AsyncGetNotificationSendResponse(param0 *graphicsprinting.IPrintAsyncNotifyDataObject, param1 *graphicsprinting.IAsyncGetSendNotificationCookie) error {
-	return win32.HRESULTError(int32(self.Raw.AsyncGetNotificationSendResponse(param0, param1)))
+func (self IBidiAsyncNotifyChannel) AsyncGetNotificationSendResponse(param0 IPrintAsyncNotifyDataObject, param1 IAsyncGetSendNotificationCookie) error {
+	return win32.HRESULTError(int32(self.Raw.AsyncGetNotificationSendResponse(param0.Raw, param1.Raw)))
 }
 
 // AsyncCloseChannel wraps the raw AsyncCloseChannel call.
-func (self IBidiAsyncNotifyChannel) AsyncCloseChannel(param0 *graphicsprinting.IPrintAsyncNotifyDataObject, param1 *graphicsprinting.IPrintAsyncCookie) error {
-	return win32.HRESULTError(int32(self.Raw.AsyncCloseChannel(param0, param1)))
+func (self IBidiAsyncNotifyChannel) AsyncCloseChannel(param0 IPrintAsyncNotifyDataObject, param1 IPrintAsyncCookie) error {
+	return win32.HRESULTError(int32(self.Raw.AsyncCloseChannel(param0.Raw, param1.Raw)))
 }
 
 // IBidiRequest is an idiomatic wrapper over the raw COM interface Graphics.Printing.IBidiRequest with error-returning methods.
@@ -148,8 +149,8 @@ func WrapIBidiRequestContainer(raw *graphicsprinting.IBidiRequestContainer) IBid
 }
 
 // AddRequest wraps the raw AddRequest call.
-func (self IBidiRequestContainer) AddRequest(pRequest *graphicsprinting.IBidiRequest) error {
-	return win32.HRESULTError(int32(self.Raw.AddRequest(pRequest)))
+func (self IBidiRequestContainer) AddRequest(pRequest IBidiRequest) error {
+	return win32.HRESULTError(int32(self.Raw.AddRequest(pRequest.Raw)))
 }
 
 // GetEnumObject wraps the raw GetEnumObject call.
@@ -185,15 +186,15 @@ func (self IBidiSpl) UnbindDevice() error {
 }
 
 // SendRecv wraps the raw SendRecv call.
-func (self IBidiSpl) SendRecv(pszAction string, pRequest *graphicsprinting.IBidiRequest) error {
+func (self IBidiSpl) SendRecv(pszAction string, pRequest IBidiRequest) error {
 	_pszAction := win32.UTF16Ptr(pszAction)
-	return win32.HRESULTError(int32(self.Raw.SendRecv(foundation.PWSTR(_pszAction), pRequest)))
+	return win32.HRESULTError(int32(self.Raw.SendRecv(foundation.PWSTR(_pszAction), pRequest.Raw)))
 }
 
 // MultiSendRecv wraps the raw MultiSendRecv call.
-func (self IBidiSpl) MultiSendRecv(pszAction string, pRequestContainer *graphicsprinting.IBidiRequestContainer) error {
+func (self IBidiSpl) MultiSendRecv(pszAction string, pRequestContainer IBidiRequestContainer) error {
 	_pszAction := win32.UTF16Ptr(pszAction)
-	return win32.HRESULTError(int32(self.Raw.MultiSendRecv(foundation.PWSTR(_pszAction), pRequestContainer)))
+	return win32.HRESULTError(int32(self.Raw.MultiSendRecv(foundation.PWSTR(_pszAction), pRequestContainer.Raw)))
 }
 
 // IBidiSpl2 is an idiomatic wrapper over the raw COM interface Graphics.Printing.IBidiSpl2 with error-returning methods.
@@ -224,8 +225,8 @@ func (self IBidiSpl2) SendRecvXMLString(bstrRequest foundation.BSTR, pbstrRespon
 }
 
 // SendRecvXMLStream wraps the raw SendRecvXMLStream call.
-func (self IBidiSpl2) SendRecvXMLStream(pSRequest *systemcom.IStream, ppSResponse **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SendRecvXMLStream(pSRequest, ppSResponse)))
+func (self IBidiSpl2) SendRecvXMLStream(pSRequest systemcomidiom.IStream, ppSResponse **systemcom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SendRecvXMLStream(pSRequest.Raw, ppSResponse)))
 }
 
 // IFixedDocument is an idiomatic wrapper over the raw COM interface Graphics.Printing.IFixedDocument with error-returning methods.
@@ -250,8 +251,8 @@ func (self IFixedDocument) GetPrintTicket(ppPrintTicket **graphicsprinting.IPart
 }
 
 // SetPrintTicket wraps the raw SetPrintTicket call.
-func (self IFixedDocument) SetPrintTicket(pPrintTicket *graphicsprinting.IPartPrintTicket) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrintTicket(pPrintTicket)))
+func (self IFixedDocument) SetPrintTicket(pPrintTicket IPartPrintTicket) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrintTicket(pPrintTicket.Raw)))
 }
 
 // IFixedDocumentSequence is an idiomatic wrapper over the raw COM interface Graphics.Printing.IFixedDocumentSequence with error-returning methods.
@@ -276,8 +277,8 @@ func (self IFixedDocumentSequence) GetPrintTicket(ppPrintTicket **graphicsprinti
 }
 
 // SetPrintTicket wraps the raw SetPrintTicket call.
-func (self IFixedDocumentSequence) SetPrintTicket(pPrintTicket *graphicsprinting.IPartPrintTicket) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrintTicket(pPrintTicket)))
+func (self IFixedDocumentSequence) SetPrintTicket(pPrintTicket IPartPrintTicket) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrintTicket(pPrintTicket.Raw)))
 }
 
 // IFixedPage is an idiomatic wrapper over the raw COM interface Graphics.Printing.IFixedPage with error-returning methods.
@@ -308,13 +309,13 @@ func (self IFixedPage) GetWriteStream(ppWriteStream **graphicsprinting.IPrintWri
 }
 
 // SetPrintTicket wraps the raw SetPrintTicket call.
-func (self IFixedPage) SetPrintTicket(ppPrintTicket *graphicsprinting.IPartPrintTicket) error {
-	return win32.HRESULTError(int32(self.Raw.SetPrintTicket(ppPrintTicket)))
+func (self IFixedPage) SetPrintTicket(ppPrintTicket IPartPrintTicket) error {
+	return win32.HRESULTError(int32(self.Raw.SetPrintTicket(ppPrintTicket.Raw)))
 }
 
 // SetPagePart wraps the raw SetPagePart call.
-func (self IFixedPage) SetPagePart(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetPagePart(pUnk)))
+func (self IFixedPage) SetPagePart(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetPagePart(pUnk.Raw)))
 }
 
 // DeleteResource wraps the raw DeleteResource call.
@@ -627,13 +628,13 @@ func WrapIPrintAsyncNotify(raw *graphicsprinting.IPrintAsyncNotify) IPrintAsyncN
 }
 
 // CreatePrintAsyncNotifyChannel wraps the raw CreatePrintAsyncNotifyChannel call.
-func (self IPrintAsyncNotify) CreatePrintAsyncNotifyChannel(param0 uint32, param1 *win32.GUID, param2 graphicsprinting.PrintAsyncNotifyUserFilter, param3 graphicsprinting.PrintAsyncNotifyConversationStyle, param4 *graphicsprinting.IPrintAsyncNotifyCallback, param5 **graphicsprinting.IPrintAsyncNotifyChannel) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePrintAsyncNotifyChannel(param0, param1, param2, param3, param4, param5)))
+func (self IPrintAsyncNotify) CreatePrintAsyncNotifyChannel(param0 uint32, param1 *win32.GUID, param2 graphicsprinting.PrintAsyncNotifyUserFilter, param3 graphicsprinting.PrintAsyncNotifyConversationStyle, param4 IPrintAsyncNotifyCallback, param5 **graphicsprinting.IPrintAsyncNotifyChannel) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePrintAsyncNotifyChannel(param0, param1, param2, param3, param4.Raw, param5)))
 }
 
 // CreatePrintAsyncNotifyRegistration wraps the raw CreatePrintAsyncNotifyRegistration call.
-func (self IPrintAsyncNotify) CreatePrintAsyncNotifyRegistration(param0 *win32.GUID, param1 graphicsprinting.PrintAsyncNotifyUserFilter, param2 graphicsprinting.PrintAsyncNotifyConversationStyle, param3 *graphicsprinting.IPrintAsyncNotifyCallback, param4 **graphicsprinting.IPrintAsyncNotifyRegistration) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePrintAsyncNotifyRegistration(param0, param1, param2, param3, param4)))
+func (self IPrintAsyncNotify) CreatePrintAsyncNotifyRegistration(param0 *win32.GUID, param1 graphicsprinting.PrintAsyncNotifyUserFilter, param2 graphicsprinting.PrintAsyncNotifyConversationStyle, param3 IPrintAsyncNotifyCallback, param4 **graphicsprinting.IPrintAsyncNotifyRegistration) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePrintAsyncNotifyRegistration(param0, param1, param2, param3.Raw, param4)))
 }
 
 // IPrintAsyncNotifyCallback is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintAsyncNotifyCallback with error-returning methods.
@@ -648,13 +649,13 @@ func WrapIPrintAsyncNotifyCallback(raw *graphicsprinting.IPrintAsyncNotifyCallba
 }
 
 // OnEventNotify wraps the raw OnEventNotify call.
-func (self IPrintAsyncNotifyCallback) OnEventNotify(pChannel *graphicsprinting.IPrintAsyncNotifyChannel, pData *graphicsprinting.IPrintAsyncNotifyDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.OnEventNotify(pChannel, pData)))
+func (self IPrintAsyncNotifyCallback) OnEventNotify(pChannel IPrintAsyncNotifyChannel, pData IPrintAsyncNotifyDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.OnEventNotify(pChannel.Raw, pData.Raw)))
 }
 
 // ChannelClosed wraps the raw ChannelClosed call.
-func (self IPrintAsyncNotifyCallback) ChannelClosed(pChannel *graphicsprinting.IPrintAsyncNotifyChannel, pData *graphicsprinting.IPrintAsyncNotifyDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.ChannelClosed(pChannel, pData)))
+func (self IPrintAsyncNotifyCallback) ChannelClosed(pChannel IPrintAsyncNotifyChannel, pData IPrintAsyncNotifyDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.ChannelClosed(pChannel.Raw, pData.Raw)))
 }
 
 // IPrintAsyncNotifyChannel is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintAsyncNotifyChannel with error-returning methods.
@@ -669,13 +670,13 @@ func WrapIPrintAsyncNotifyChannel(raw *graphicsprinting.IPrintAsyncNotifyChannel
 }
 
 // SendNotification wraps the raw SendNotification call.
-func (self IPrintAsyncNotifyChannel) SendNotification(pData *graphicsprinting.IPrintAsyncNotifyDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.SendNotification(pData)))
+func (self IPrintAsyncNotifyChannel) SendNotification(pData IPrintAsyncNotifyDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.SendNotification(pData.Raw)))
 }
 
 // CloseChannel wraps the raw CloseChannel call.
-func (self IPrintAsyncNotifyChannel) CloseChannel(pData *graphicsprinting.IPrintAsyncNotifyDataObject) error {
-	return win32.HRESULTError(int32(self.Raw.CloseChannel(pData)))
+func (self IPrintAsyncNotifyChannel) CloseChannel(pData IPrintAsyncNotifyDataObject) error {
+	return win32.HRESULTError(int32(self.Raw.CloseChannel(pData.Raw)))
 }
 
 // IPrintAsyncNotifyDataObject is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintAsyncNotifyDataObject with error-returning methods.
@@ -737,8 +738,8 @@ func (self IPrintAsyncNotifyServerReferral) GetServerReferral(param0 *foundation
 }
 
 // AsyncGetServerReferral wraps the raw AsyncGetServerReferral call.
-func (self IPrintAsyncNotifyServerReferral) AsyncGetServerReferral(param0 *graphicsprinting.IAsyncGetSrvReferralCookie) error {
-	return win32.HRESULTError(int32(self.Raw.AsyncGetServerReferral(param0)))
+func (self IPrintAsyncNotifyServerReferral) AsyncGetServerReferral(param0 IAsyncGetSrvReferralCookie) error {
+	return win32.HRESULTError(int32(self.Raw.AsyncGetServerReferral(param0.Raw)))
 }
 
 // SetServerReferral wraps the raw SetServerReferral call.
@@ -759,8 +760,8 @@ func WrapIPrintBidiAsyncNotifyRegistration(raw *graphicsprinting.IPrintBidiAsync
 }
 
 // AsyncGetNewChannel wraps the raw AsyncGetNewChannel call.
-func (self IPrintBidiAsyncNotifyRegistration) AsyncGetNewChannel(param0 *graphicsprinting.IPrintAsyncNewChannelCookie) error {
-	return win32.HRESULTError(int32(self.Raw.AsyncGetNewChannel(param0)))
+func (self IPrintBidiAsyncNotifyRegistration) AsyncGetNewChannel(param0 IPrintAsyncNewChannelCookie) error {
+	return win32.HRESULTError(int32(self.Raw.AsyncGetNewChannel(param0.Raw)))
 }
 
 // IPrintClassObjectFactory is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintClassObjectFactory with error-returning methods.
@@ -836,8 +837,8 @@ func (self IPrintCoreHelper) SetFontSubstitution(pszTrueTypeFontName string, psz
 }
 
 // CreateInstanceOfMSXMLObject wraps the raw CreateInstanceOfMSXMLObject call.
-func (self IPrintCoreHelper) CreateInstanceOfMSXMLObject(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceOfMSXMLObject(rclsid, pUnkOuter, dwClsContext, riid, ppv)))
+func (self IPrintCoreHelper) CreateInstanceOfMSXMLObject(rclsid *win32.GUID, pUnkOuter systemcomidiom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceOfMSXMLObject(rclsid, pUnkOuter.Raw, dwClsContext, riid, ppv)))
 }
 
 // IPrintCoreHelperPS is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintCoreHelperPS with error-returning methods.
@@ -1042,17 +1043,17 @@ func (self IPrintJobCollection) Get_Count() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IPrintJobCollection) GetAt(ulIndex uint32) (*graphicsprinting.IPrintJob, error) {
+func (self IPrintJobCollection) GetAt(ulIndex uint32) (IPrintJob, error) {
 	var _ppJob *graphicsprinting.IPrintJob
 	_hr := self.Raw.GetAt(ulIndex, &_ppJob)
-	return _ppJob, win32.HRESULTError(int32(_hr))
+	return WrapIPrintJob(_ppJob), win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IPrintJobCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IPrintJobCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppUnk)
-	return _ppUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppUnk), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintOemCommon is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintOemCommon with error-returning methods.
@@ -1114,8 +1115,8 @@ func WrapIPrintOemUI(raw *graphicsprinting.IPrintOemUI) IPrintOemUI {
 }
 
 // PublishDriverInterface wraps the raw PublishDriverInterface call.
-func (self IPrintOemUI) PublishDriverInterface(pIUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.PublishDriverInterface(pIUnknown)))
+func (self IPrintOemUI) PublishDriverInterface(pIUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.PublishDriverInterface(pIUnknown.Raw)))
 }
 
 // CommonUIProp wraps the raw CommonUIProp call.
@@ -1240,8 +1241,8 @@ func WrapIPrintPipelineFilter(raw *graphicsprinting.IPrintPipelineFilter) IPrint
 }
 
 // InitializeFilter wraps the raw InitializeFilter call.
-func (self IPrintPipelineFilter) InitializeFilter(pINegotiation *graphicsprinting.IInterFilterCommunicator, pIPropertyBag *graphicsprinting.IPrintPipelinePropertyBag, pIPipelineControl *graphicsprinting.IPrintPipelineManagerControl) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFilter(pINegotiation, pIPropertyBag, pIPipelineControl)))
+func (self IPrintPipelineFilter) InitializeFilter(pINegotiation IInterFilterCommunicator, pIPropertyBag IPrintPipelinePropertyBag, pIPipelineControl IPrintPipelineManagerControl) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFilter(pINegotiation.Raw, pIPropertyBag.Raw, pIPipelineControl.Raw)))
 }
 
 // ShutdownOperation wraps the raw ShutdownOperation call.
@@ -1266,8 +1267,8 @@ func WrapIPrintPipelineManagerControl(raw *graphicsprinting.IPrintPipelineManage
 }
 
 // RequestShutdown wraps the raw RequestShutdown call.
-func (self IPrintPipelineManagerControl) RequestShutdown(hrReason foundation.HRESULT, pReason *graphicsprinting.IImgErrorInfo) error {
-	return win32.HRESULTError(int32(self.Raw.RequestShutdown(hrReason, pReason)))
+func (self IPrintPipelineManagerControl) RequestShutdown(hrReason foundation.HRESULT, pReason IImgErrorInfo) error {
+	return win32.HRESULTError(int32(self.Raw.RequestShutdown(hrReason, pReason.Raw)))
 }
 
 // FilterFinished wraps the raw FilterFinished call.
@@ -1411,8 +1412,8 @@ func WrapIPrintSchemaAsyncOperationEvent(raw *graphicsprinting.IPrintSchemaAsync
 }
 
 // Completed wraps the raw Completed call.
-func (self IPrintSchemaAsyncOperationEvent) Completed(pTicket *graphicsprinting.IPrintSchemaTicket, hrOperation foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.Completed(pTicket, hrOperation)))
+func (self IPrintSchemaAsyncOperationEvent) Completed(pTicket IPrintSchemaTicket, hrOperation foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.Completed(pTicket.Raw, hrOperation)))
 }
 
 // IPrintSchemaCapabilities is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintSchemaCapabilities with error-returning methods.
@@ -1427,24 +1428,24 @@ func WrapIPrintSchemaCapabilities(raw *graphicsprinting.IPrintSchemaCapabilities
 }
 
 // GetFeatureByKeyName wraps the raw GetFeatureByKeyName call.
-func (self IPrintSchemaCapabilities) GetFeatureByKeyName(bstrKeyName foundation.BSTR) (*graphicsprinting.IPrintSchemaFeature, error) {
+func (self IPrintSchemaCapabilities) GetFeatureByKeyName(bstrKeyName foundation.BSTR) (IPrintSchemaFeature, error) {
 	var _ppFeature *graphicsprinting.IPrintSchemaFeature
 	_hr := self.Raw.GetFeatureByKeyName(bstrKeyName, &_ppFeature)
-	return _ppFeature, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaFeature(_ppFeature), win32.HRESULTError(int32(_hr))
 }
 
 // GetFeature wraps the raw GetFeature call.
-func (self IPrintSchemaCapabilities) GetFeature(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*graphicsprinting.IPrintSchemaFeature, error) {
+func (self IPrintSchemaCapabilities) GetFeature(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (IPrintSchemaFeature, error) {
 	var _ppFeature *graphicsprinting.IPrintSchemaFeature
 	_hr := self.Raw.GetFeature(bstrName, bstrNamespaceUri, &_ppFeature)
-	return _ppFeature, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaFeature(_ppFeature), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PageImageableSize wraps the raw Get_PageImageableSize call.
-func (self IPrintSchemaCapabilities) Get_PageImageableSize() (*graphicsprinting.IPrintSchemaPageImageableSize, error) {
+func (self IPrintSchemaCapabilities) Get_PageImageableSize() (IPrintSchemaPageImageableSize, error) {
 	var _ppPageImageableSize *graphicsprinting.IPrintSchemaPageImageableSize
 	_hr := self.Raw.Get_PageImageableSize(&_ppPageImageableSize)
-	return _ppPageImageableSize, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaPageImageableSize(_ppPageImageableSize), win32.HRESULTError(int32(_hr))
 }
 
 // Get_JobCopiesAllDocumentsMinValue wraps the raw Get_JobCopiesAllDocumentsMinValue call.
@@ -1462,17 +1463,17 @@ func (self IPrintSchemaCapabilities) Get_JobCopiesAllDocumentsMaxValue() (uint32
 }
 
 // GetSelectedOptionInPrintTicket wraps the raw GetSelectedOptionInPrintTicket call.
-func (self IPrintSchemaCapabilities) GetSelectedOptionInPrintTicket(pFeature *graphicsprinting.IPrintSchemaFeature) (*graphicsprinting.IPrintSchemaOption, error) {
+func (self IPrintSchemaCapabilities) GetSelectedOptionInPrintTicket(pFeature IPrintSchemaFeature) (IPrintSchemaOption, error) {
 	var _ppOption *graphicsprinting.IPrintSchemaOption
-	_hr := self.Raw.GetSelectedOptionInPrintTicket(pFeature, &_ppOption)
-	return _ppOption, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetSelectedOptionInPrintTicket(pFeature.Raw, &_ppOption)
+	return WrapIPrintSchemaOption(_ppOption), win32.HRESULTError(int32(_hr))
 }
 
 // GetOptions wraps the raw GetOptions call.
-func (self IPrintSchemaCapabilities) GetOptions(pFeature *graphicsprinting.IPrintSchemaFeature) (*graphicsprinting.IPrintSchemaOptionCollection, error) {
+func (self IPrintSchemaCapabilities) GetOptions(pFeature IPrintSchemaFeature) (IPrintSchemaOptionCollection, error) {
 	var _ppOptionCollection *graphicsprinting.IPrintSchemaOptionCollection
-	_hr := self.Raw.GetOptions(pFeature, &_ppOptionCollection)
-	return _ppOptionCollection, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.GetOptions(pFeature.Raw, &_ppOptionCollection)
+	return WrapIPrintSchemaOptionCollection(_ppOptionCollection), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintSchemaCapabilities2 is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintSchemaCapabilities2 with error-returning methods.
@@ -1487,10 +1488,10 @@ func WrapIPrintSchemaCapabilities2(raw *graphicsprinting.IPrintSchemaCapabilitie
 }
 
 // GetParameterDefinition wraps the raw GetParameterDefinition call.
-func (self IPrintSchemaCapabilities2) GetParameterDefinition(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*graphicsprinting.IPrintSchemaParameterDefinition, error) {
+func (self IPrintSchemaCapabilities2) GetParameterDefinition(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (IPrintSchemaParameterDefinition, error) {
 	var _ppParameterDefinition *graphicsprinting.IPrintSchemaParameterDefinition
 	_hr := self.Raw.GetParameterDefinition(bstrName, bstrNamespaceUri, &_ppParameterDefinition)
-	return _ppParameterDefinition, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaParameterDefinition(_ppParameterDefinition), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintSchemaDisplayableElement is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintSchemaDisplayableElement with error-returning methods.
@@ -1523,10 +1524,10 @@ func WrapIPrintSchemaElement(raw *graphicsprinting.IPrintSchemaElement) IPrintSc
 }
 
 // Get_XmlNode wraps the raw Get_XmlNode call.
-func (self IPrintSchemaElement) Get_XmlNode() (*systemcom.IUnknown, error) {
+func (self IPrintSchemaElement) Get_XmlNode() (systemcomidiom.IUnknown, error) {
 	var _ppXmlNode *systemcom.IUnknown
 	_hr := self.Raw.Get_XmlNode(&_ppXmlNode)
-	return _ppXmlNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppXmlNode), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
@@ -1555,15 +1556,15 @@ func WrapIPrintSchemaFeature(raw *graphicsprinting.IPrintSchemaFeature) IPrintSc
 }
 
 // Get_SelectedOption wraps the raw Get_SelectedOption call.
-func (self IPrintSchemaFeature) Get_SelectedOption() (*graphicsprinting.IPrintSchemaOption, error) {
+func (self IPrintSchemaFeature) Get_SelectedOption() (IPrintSchemaOption, error) {
 	var _ppOption *graphicsprinting.IPrintSchemaOption
 	_hr := self.Raw.Get_SelectedOption(&_ppOption)
-	return _ppOption, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaOption(_ppOption), win32.HRESULTError(int32(_hr))
 }
 
 // Put_SelectedOption wraps the raw Put_SelectedOption call.
-func (self IPrintSchemaFeature) Put_SelectedOption(pOption *graphicsprinting.IPrintSchemaOption) error {
-	return win32.HRESULTError(int32(self.Raw.Put_SelectedOption(pOption)))
+func (self IPrintSchemaFeature) Put_SelectedOption(pOption IPrintSchemaOption) error {
+	return win32.HRESULTError(int32(self.Raw.Put_SelectedOption(pOption.Raw)))
 }
 
 // Get_SelectionType wraps the raw Get_SelectionType call.
@@ -1574,10 +1575,10 @@ func (self IPrintSchemaFeature) Get_SelectionType() (graphicsprinting.PrintSchem
 }
 
 // GetOption wraps the raw GetOption call.
-func (self IPrintSchemaFeature) GetOption(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*graphicsprinting.IPrintSchemaOption, error) {
+func (self IPrintSchemaFeature) GetOption(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (IPrintSchemaOption, error) {
 	var _ppOption *graphicsprinting.IPrintSchemaOption
 	_hr := self.Raw.GetOption(bstrName, bstrNamespaceUri, &_ppOption)
-	return _ppOption, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaOption(_ppOption), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DisplayUI wraps the raw Get_DisplayUI call.
@@ -1631,10 +1632,10 @@ func (self IPrintSchemaOption) Get_Constrained() (graphicsprinting.PrintSchemaCo
 }
 
 // GetPropertyValue wraps the raw GetPropertyValue call.
-func (self IPrintSchemaOption) GetPropertyValue(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*systemcom.IUnknown, error) {
+func (self IPrintSchemaOption) GetPropertyValue(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (systemcomidiom.IUnknown, error) {
 	var _ppXmlValueNode *systemcom.IUnknown
 	_hr := self.Raw.GetPropertyValue(bstrName, bstrNamespaceUri, &_ppXmlValueNode)
-	return _ppXmlValueNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppXmlValueNode), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintSchemaOptionCollection is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintSchemaOptionCollection with error-returning methods.
@@ -1656,17 +1657,17 @@ func (self IPrintSchemaOptionCollection) Get_Count() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IPrintSchemaOptionCollection) GetAt(ulIndex uint32) (*graphicsprinting.IPrintSchemaOption, error) {
+func (self IPrintSchemaOptionCollection) GetAt(ulIndex uint32) (IPrintSchemaOption, error) {
 	var _ppOption *graphicsprinting.IPrintSchemaOption
 	_hr := self.Raw.GetAt(ulIndex, &_ppOption)
-	return _ppOption, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaOption(_ppOption), win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IPrintSchemaOptionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IPrintSchemaOptionCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppUnk)
-	return _ppUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppUnk), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintSchemaPageImageableSize is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintSchemaPageImageableSize with error-returning methods.
@@ -1828,17 +1829,17 @@ func WrapIPrintSchemaTicket(raw *graphicsprinting.IPrintSchemaTicket) IPrintSche
 }
 
 // GetFeatureByKeyName wraps the raw GetFeatureByKeyName call.
-func (self IPrintSchemaTicket) GetFeatureByKeyName(bstrKeyName foundation.BSTR) (*graphicsprinting.IPrintSchemaFeature, error) {
+func (self IPrintSchemaTicket) GetFeatureByKeyName(bstrKeyName foundation.BSTR) (IPrintSchemaFeature, error) {
 	var _ppFeature *graphicsprinting.IPrintSchemaFeature
 	_hr := self.Raw.GetFeatureByKeyName(bstrKeyName, &_ppFeature)
-	return _ppFeature, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaFeature(_ppFeature), win32.HRESULTError(int32(_hr))
 }
 
 // GetFeature wraps the raw GetFeature call.
-func (self IPrintSchemaTicket) GetFeature(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*graphicsprinting.IPrintSchemaFeature, error) {
+func (self IPrintSchemaTicket) GetFeature(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (IPrintSchemaFeature, error) {
 	var _ppFeature *graphicsprinting.IPrintSchemaFeature
 	_hr := self.Raw.GetFeature(bstrName, bstrNamespaceUri, &_ppFeature)
-	return _ppFeature, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaFeature(_ppFeature), win32.HRESULTError(int32(_hr))
 }
 
 // ValidateAsync wraps the raw ValidateAsync call.
@@ -1847,8 +1848,8 @@ func (self IPrintSchemaTicket) ValidateAsync(ppAsyncOperation **graphicsprinting
 }
 
 // CommitAsync wraps the raw CommitAsync call.
-func (self IPrintSchemaTicket) CommitAsync(pPrintTicketCommit *graphicsprinting.IPrintSchemaTicket, ppAsyncOperation **graphicsprinting.IPrintSchemaAsyncOperation) error {
-	return win32.HRESULTError(int32(self.Raw.CommitAsync(pPrintTicketCommit, ppAsyncOperation)))
+func (self IPrintSchemaTicket) CommitAsync(pPrintTicketCommit IPrintSchemaTicket, ppAsyncOperation **graphicsprinting.IPrintSchemaAsyncOperation) error {
+	return win32.HRESULTError(int32(self.Raw.CommitAsync(pPrintTicketCommit.Raw, ppAsyncOperation)))
 }
 
 // NotifyXmlChanged wraps the raw NotifyXmlChanged call.
@@ -1857,10 +1858,10 @@ func (self IPrintSchemaTicket) NotifyXmlChanged() error {
 }
 
 // GetCapabilities wraps the raw GetCapabilities call.
-func (self IPrintSchemaTicket) GetCapabilities() (*graphicsprinting.IPrintSchemaCapabilities, error) {
+func (self IPrintSchemaTicket) GetCapabilities() (IPrintSchemaCapabilities, error) {
 	var _ppCapabilities *graphicsprinting.IPrintSchemaCapabilities
 	_hr := self.Raw.GetCapabilities(&_ppCapabilities)
-	return _ppCapabilities, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaCapabilities(_ppCapabilities), win32.HRESULTError(int32(_hr))
 }
 
 // Get_JobCopiesAllDocuments wraps the raw Get_JobCopiesAllDocuments call.
@@ -1887,10 +1888,10 @@ func WrapIPrintSchemaTicket2(raw *graphicsprinting.IPrintSchemaTicket2) IPrintSc
 }
 
 // GetParameterInitializer wraps the raw GetParameterInitializer call.
-func (self IPrintSchemaTicket2) GetParameterInitializer(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (*graphicsprinting.IPrintSchemaParameterInitializer, error) {
+func (self IPrintSchemaTicket2) GetParameterInitializer(bstrName foundation.BSTR, bstrNamespaceUri foundation.BSTR) (IPrintSchemaParameterInitializer, error) {
 	var _ppParameterInitializer *graphicsprinting.IPrintSchemaParameterInitializer
 	_hr := self.Raw.GetParameterInitializer(bstrName, bstrNamespaceUri, &_ppParameterInitializer)
-	return _ppParameterInitializer, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaParameterInitializer(_ppParameterInitializer), win32.HRESULTError(int32(_hr))
 }
 
 // IPrintTicketProvider is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintTicketProvider with error-returning methods.
@@ -1920,23 +1921,23 @@ func (self IPrintTicketProvider) QueryDeviceNamespace(pDefaultNamespace *foundat
 }
 
 // ConvertPrintTicketToDevMode wraps the raw ConvertPrintTicketToDevMode call.
-func (self IPrintTicketProvider) ConvertPrintTicketToDevMode(pPrintTicket *dataxmlmsxml.IXMLDOMDocument2, cbDevmodeIn uint32, pDevmodeIn *graphicsgdi.DEVMODEA, pcbDevmodeOut *uint32, ppDevmodeOut **graphicsgdi.DEVMODEA) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertPrintTicketToDevMode(pPrintTicket, cbDevmodeIn, pDevmodeIn, pcbDevmodeOut, ppDevmodeOut)))
+func (self IPrintTicketProvider) ConvertPrintTicketToDevMode(pPrintTicket dataxmlmsxmlidiom.IXMLDOMDocument2, cbDevmodeIn uint32, pDevmodeIn *graphicsgdi.DEVMODEA, pcbDevmodeOut *uint32, ppDevmodeOut **graphicsgdi.DEVMODEA) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertPrintTicketToDevMode(pPrintTicket.Raw, cbDevmodeIn, pDevmodeIn, pcbDevmodeOut, ppDevmodeOut)))
 }
 
 // ConvertDevModeToPrintTicket wraps the raw ConvertDevModeToPrintTicket call.
-func (self IPrintTicketProvider) ConvertDevModeToPrintTicket(cbDevmode uint32, pDevmode *graphicsgdi.DEVMODEA, pPrintTicket *dataxmlmsxml.IXMLDOMDocument2) error {
-	return win32.HRESULTError(int32(self.Raw.ConvertDevModeToPrintTicket(cbDevmode, pDevmode, pPrintTicket)))
+func (self IPrintTicketProvider) ConvertDevModeToPrintTicket(cbDevmode uint32, pDevmode *graphicsgdi.DEVMODEA, pPrintTicket dataxmlmsxmlidiom.IXMLDOMDocument2) error {
+	return win32.HRESULTError(int32(self.Raw.ConvertDevModeToPrintTicket(cbDevmode, pDevmode, pPrintTicket.Raw)))
 }
 
 // GetPrintCapabilities wraps the raw GetPrintCapabilities call.
-func (self IPrintTicketProvider) GetPrintCapabilities(pPrintTicket *dataxmlmsxml.IXMLDOMDocument2, ppCapabilities **dataxmlmsxml.IXMLDOMDocument2) error {
-	return win32.HRESULTError(int32(self.Raw.GetPrintCapabilities(pPrintTicket, ppCapabilities)))
+func (self IPrintTicketProvider) GetPrintCapabilities(pPrintTicket dataxmlmsxmlidiom.IXMLDOMDocument2, ppCapabilities **dataxmlmsxml.IXMLDOMDocument2) error {
+	return win32.HRESULTError(int32(self.Raw.GetPrintCapabilities(pPrintTicket.Raw, ppCapabilities)))
 }
 
 // ValidatePrintTicket wraps the raw ValidatePrintTicket call.
-func (self IPrintTicketProvider) ValidatePrintTicket(pBaseTicket *dataxmlmsxml.IXMLDOMDocument2) error {
-	return win32.HRESULTError(int32(self.Raw.ValidatePrintTicket(pBaseTicket)))
+func (self IPrintTicketProvider) ValidatePrintTicket(pBaseTicket dataxmlmsxmlidiom.IXMLDOMDocument2) error {
+	return win32.HRESULTError(int32(self.Raw.ValidatePrintTicket(pBaseTicket.Raw)))
 }
 
 // IPrintTicketProvider2 is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintTicketProvider2 with error-returning methods.
@@ -1951,14 +1952,14 @@ func WrapIPrintTicketProvider2(raw *graphicsprinting.IPrintTicketProvider2) IPri
 }
 
 // GetPrintDeviceCapabilities wraps the raw GetPrintDeviceCapabilities call.
-func (self IPrintTicketProvider2) GetPrintDeviceCapabilities(pPrintTicket *dataxmlmsxml.IXMLDOMDocument2, ppDeviceCapabilities **dataxmlmsxml.IXMLDOMDocument2) error {
-	return win32.HRESULTError(int32(self.Raw.GetPrintDeviceCapabilities(pPrintTicket, ppDeviceCapabilities)))
+func (self IPrintTicketProvider2) GetPrintDeviceCapabilities(pPrintTicket dataxmlmsxmlidiom.IXMLDOMDocument2, ppDeviceCapabilities **dataxmlmsxml.IXMLDOMDocument2) error {
+	return win32.HRESULTError(int32(self.Raw.GetPrintDeviceCapabilities(pPrintTicket.Raw, ppDeviceCapabilities)))
 }
 
 // GetPrintDeviceResources wraps the raw GetPrintDeviceResources call.
-func (self IPrintTicketProvider2) GetPrintDeviceResources(pszLocaleName string, pPrintTicket *dataxmlmsxml.IXMLDOMDocument2, ppDeviceResources **dataxmlmsxml.IXMLDOMDocument2) error {
+func (self IPrintTicketProvider2) GetPrintDeviceResources(pszLocaleName string, pPrintTicket dataxmlmsxmlidiom.IXMLDOMDocument2, ppDeviceResources **dataxmlmsxml.IXMLDOMDocument2) error {
 	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
-	return win32.HRESULTError(int32(self.Raw.GetPrintDeviceResources(foundation.PWSTR(_pszLocaleName), pPrintTicket, ppDeviceResources)))
+	return win32.HRESULTError(int32(self.Raw.GetPrintDeviceResources(foundation.PWSTR(_pszLocaleName), pPrintTicket.Raw, ppDeviceResources)))
 }
 
 // IPrintUnidiAsyncNotifyRegistration is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintUnidiAsyncNotifyRegistration with error-returning methods.
@@ -1973,8 +1974,8 @@ func WrapIPrintUnidiAsyncNotifyRegistration(raw *graphicsprinting.IPrintUnidiAsy
 }
 
 // AsyncGetNotification wraps the raw AsyncGetNotification call.
-func (self IPrintUnidiAsyncNotifyRegistration) AsyncGetNotification(param0 *graphicsprinting.IAsyncGetSendNotificationCookie) error {
-	return win32.HRESULTError(int32(self.Raw.AsyncGetNotification(param0)))
+func (self IPrintUnidiAsyncNotifyRegistration) AsyncGetNotification(param0 IAsyncGetSendNotificationCookie) error {
+	return win32.HRESULTError(int32(self.Raw.AsyncGetNotification(param0.Raw)))
 }
 
 // IPrintWriteStream is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrintWriteStream with error-returning methods.
@@ -2058,31 +2059,31 @@ func WrapIPrinterExtensionContext(raw *graphicsprinting.IPrinterExtensionContext
 }
 
 // Get_PrinterQueue wraps the raw Get_PrinterQueue call.
-func (self IPrinterExtensionContext) Get_PrinterQueue() (*graphicsprinting.IPrinterQueue, error) {
+func (self IPrinterExtensionContext) Get_PrinterQueue() (IPrinterQueue, error) {
 	var _ppQueue *graphicsprinting.IPrinterQueue
 	_hr := self.Raw.Get_PrinterQueue(&_ppQueue)
-	return _ppQueue, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterQueue(_ppQueue), win32.HRESULTError(int32(_hr))
 }
 
 // Get_PrintSchemaTicket wraps the raw Get_PrintSchemaTicket call.
-func (self IPrinterExtensionContext) Get_PrintSchemaTicket() (*graphicsprinting.IPrintSchemaTicket, error) {
+func (self IPrinterExtensionContext) Get_PrintSchemaTicket() (IPrintSchemaTicket, error) {
 	var _ppTicket *graphicsprinting.IPrintSchemaTicket
 	_hr := self.Raw.Get_PrintSchemaTicket(&_ppTicket)
-	return _ppTicket, win32.HRESULTError(int32(_hr))
+	return WrapIPrintSchemaTicket(_ppTicket), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverProperties wraps the raw Get_DriverProperties call.
-func (self IPrinterExtensionContext) Get_DriverProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+func (self IPrinterExtensionContext) Get_DriverProperties() (IPrinterPropertyBag, error) {
 	var _ppPropertyBag *graphicsprinting.IPrinterPropertyBag
 	_hr := self.Raw.Get_DriverProperties(&_ppPropertyBag)
-	return _ppPropertyBag, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterPropertyBag(_ppPropertyBag), win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserProperties wraps the raw Get_UserProperties call.
-func (self IPrinterExtensionContext) Get_UserProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+func (self IPrinterExtensionContext) Get_UserProperties() (IPrinterPropertyBag, error) {
 	var _ppPropertyBag *graphicsprinting.IPrinterPropertyBag
 	_hr := self.Raw.Get_UserProperties(&_ppPropertyBag)
-	return _ppPropertyBag, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterPropertyBag(_ppPropertyBag), win32.HRESULTError(int32(_hr))
 }
 
 // IPrinterExtensionContextCollection is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterExtensionContextCollection with error-returning methods.
@@ -2104,17 +2105,17 @@ func (self IPrinterExtensionContextCollection) Get_Count() (uint32, error) {
 }
 
 // GetAt wraps the raw GetAt call.
-func (self IPrinterExtensionContextCollection) GetAt(ulIndex uint32) (*graphicsprinting.IPrinterExtensionContext, error) {
+func (self IPrinterExtensionContextCollection) GetAt(ulIndex uint32) (IPrinterExtensionContext, error) {
 	var _ppContext *graphicsprinting.IPrinterExtensionContext
 	_hr := self.Raw.GetAt(ulIndex, &_ppContext)
-	return _ppContext, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterExtensionContext(_ppContext), win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IPrinterExtensionContextCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IPrinterExtensionContextCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _ppUnk *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_ppUnk)
-	return _ppUnk, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppUnk), win32.HRESULTError(int32(_hr))
 }
 
 // IPrinterExtensionEvent is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterExtensionEvent with error-returning methods.
@@ -2129,13 +2130,13 @@ func WrapIPrinterExtensionEvent(raw *graphicsprinting.IPrinterExtensionEvent) IP
 }
 
 // OnDriverEvent wraps the raw OnDriverEvent call.
-func (self IPrinterExtensionEvent) OnDriverEvent(pEventArgs *graphicsprinting.IPrinterExtensionEventArgs) error {
-	return win32.HRESULTError(int32(self.Raw.OnDriverEvent(pEventArgs)))
+func (self IPrinterExtensionEvent) OnDriverEvent(pEventArgs IPrinterExtensionEventArgs) error {
+	return win32.HRESULTError(int32(self.Raw.OnDriverEvent(pEventArgs.Raw)))
 }
 
 // OnPrinterQueuesEnumerated wraps the raw OnPrinterQueuesEnumerated call.
-func (self IPrinterExtensionEvent) OnPrinterQueuesEnumerated(pContextCollection *graphicsprinting.IPrinterExtensionContextCollection) error {
-	return win32.HRESULTError(int32(self.Raw.OnPrinterQueuesEnumerated(pContextCollection)))
+func (self IPrinterExtensionEvent) OnPrinterQueuesEnumerated(pContextCollection IPrinterExtensionContextCollection) error {
+	return win32.HRESULTError(int32(self.Raw.OnPrinterQueuesEnumerated(pContextCollection.Raw)))
 }
 
 // IPrinterExtensionEventArgs is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterExtensionEventArgs with error-returning methods.
@@ -2164,10 +2165,10 @@ func (self IPrinterExtensionEventArgs) Get_ReasonId() (win32.GUID, error) {
 }
 
 // Get_Request wraps the raw Get_Request call.
-func (self IPrinterExtensionEventArgs) Get_Request() (*graphicsprinting.IPrinterExtensionRequest, error) {
+func (self IPrinterExtensionEventArgs) Get_Request() (IPrinterExtensionRequest, error) {
 	var _ppRequest *graphicsprinting.IPrinterExtensionRequest
 	_hr := self.Raw.Get_Request(&_ppRequest)
-	return _ppRequest, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterExtensionRequest(_ppRequest), win32.HRESULTError(int32(_hr))
 }
 
 // Get_SourceApplication wraps the raw Get_SourceApplication call.
@@ -2294,17 +2295,17 @@ func (self IPrinterPropertyBag) SetBytes(bstrName foundation.BSTR, cbValue uint3
 }
 
 // GetReadStream wraps the raw GetReadStream call.
-func (self IPrinterPropertyBag) GetReadStream(bstrName foundation.BSTR) (*systemcom.IStream, error) {
+func (self IPrinterPropertyBag) GetReadStream(bstrName foundation.BSTR) (systemcomidiom.IStream, error) {
 	var _ppValue *systemcom.IStream
 	_hr := self.Raw.GetReadStream(bstrName, &_ppValue)
-	return _ppValue, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_ppValue), win32.HRESULTError(int32(_hr))
 }
 
 // GetWriteStream wraps the raw GetWriteStream call.
-func (self IPrinterPropertyBag) GetWriteStream(bstrName foundation.BSTR) (*systemcom.IStream, error) {
+func (self IPrinterPropertyBag) GetWriteStream(bstrName foundation.BSTR) (systemcomidiom.IStream, error) {
 	var _ppValue *systemcom.IStream
 	_hr := self.Raw.GetWriteStream(bstrName, &_ppValue)
-	return _ppValue, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIStream(_ppValue), win32.HRESULTError(int32(_hr))
 }
 
 // IPrinterQueue is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterQueue with error-returning methods.
@@ -2338,10 +2339,10 @@ func (self IPrinterQueue) SendBidiQuery(bstrBidiQuery foundation.BSTR) error {
 }
 
 // GetProperties wraps the raw GetProperties call.
-func (self IPrinterQueue) GetProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+func (self IPrinterQueue) GetProperties() (IPrinterPropertyBag, error) {
 	var _ppPropertyBag *graphicsprinting.IPrinterPropertyBag
 	_hr := self.Raw.GetProperties(&_ppPropertyBag)
-	return _ppPropertyBag, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterPropertyBag(_ppPropertyBag), win32.HRESULTError(int32(_hr))
 }
 
 // IPrinterQueue2 is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterQueue2 with error-returning methods.
@@ -2356,17 +2357,17 @@ func WrapIPrinterQueue2(raw *graphicsprinting.IPrinterQueue2) IPrinterQueue2 {
 }
 
 // SendBidiSetRequestAsync wraps the raw SendBidiSetRequestAsync call.
-func (self IPrinterQueue2) SendBidiSetRequestAsync(bstrBidiRequest foundation.BSTR, pCallback *graphicsprinting.IPrinterBidiSetRequestCallback) (*graphicsprinting.IPrinterExtensionAsyncOperation, error) {
+func (self IPrinterQueue2) SendBidiSetRequestAsync(bstrBidiRequest foundation.BSTR, pCallback IPrinterBidiSetRequestCallback) (IPrinterExtensionAsyncOperation, error) {
 	var _ppAsyncOperation *graphicsprinting.IPrinterExtensionAsyncOperation
-	_hr := self.Raw.SendBidiSetRequestAsync(bstrBidiRequest, pCallback, &_ppAsyncOperation)
-	return _ppAsyncOperation, win32.HRESULTError(int32(_hr))
+	_hr := self.Raw.SendBidiSetRequestAsync(bstrBidiRequest, pCallback.Raw, &_ppAsyncOperation)
+	return WrapIPrinterExtensionAsyncOperation(_ppAsyncOperation), win32.HRESULTError(int32(_hr))
 }
 
 // GetPrinterQueueView wraps the raw GetPrinterQueueView call.
-func (self IPrinterQueue2) GetPrinterQueueView(ulViewOffset uint32, ulViewSize uint32) (*graphicsprinting.IPrinterQueueView, error) {
+func (self IPrinterQueue2) GetPrinterQueueView(ulViewOffset uint32, ulViewSize uint32) (IPrinterQueueView, error) {
 	var _ppJobView *graphicsprinting.IPrinterQueueView
 	_hr := self.Raw.GetPrinterQueueView(ulViewOffset, ulViewSize, &_ppJobView)
-	return _ppJobView, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterQueueView(_ppJobView), win32.HRESULTError(int32(_hr))
 }
 
 // IPrinterQueueEvent is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterQueueEvent with error-returning methods.
@@ -2413,8 +2414,8 @@ func WrapIPrinterQueueViewEvent(raw *graphicsprinting.IPrinterQueueViewEvent) IP
 }
 
 // OnChanged wraps the raw OnChanged call.
-func (self IPrinterQueueViewEvent) OnChanged(pCollection *graphicsprinting.IPrintJobCollection, ulViewOffset uint32, ulViewSize uint32, ulCountJobsInPrintQueue uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnChanged(pCollection, ulViewOffset, ulViewSize, ulCountJobsInPrintQueue)))
+func (self IPrinterQueueViewEvent) OnChanged(pCollection IPrintJobCollection, ulViewOffset uint32, ulViewSize uint32, ulCountJobsInPrintQueue uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnChanged(pCollection.Raw, ulViewOffset, ulViewSize, ulCountJobsInPrintQueue)))
 }
 
 // IPrinterScriptContext is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterScriptContext with error-returning methods.
@@ -2429,24 +2430,24 @@ func WrapIPrinterScriptContext(raw *graphicsprinting.IPrinterScriptContext) IPri
 }
 
 // Get_DriverProperties wraps the raw Get_DriverProperties call.
-func (self IPrinterScriptContext) Get_DriverProperties() (*graphicsprinting.IPrinterScriptablePropertyBag, error) {
+func (self IPrinterScriptContext) Get_DriverProperties() (IPrinterScriptablePropertyBag, error) {
 	var _ppPropertyBag *graphicsprinting.IPrinterScriptablePropertyBag
 	_hr := self.Raw.Get_DriverProperties(&_ppPropertyBag)
-	return _ppPropertyBag, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterScriptablePropertyBag(_ppPropertyBag), win32.HRESULTError(int32(_hr))
 }
 
 // Get_QueueProperties wraps the raw Get_QueueProperties call.
-func (self IPrinterScriptContext) Get_QueueProperties() (*graphicsprinting.IPrinterScriptablePropertyBag, error) {
+func (self IPrinterScriptContext) Get_QueueProperties() (IPrinterScriptablePropertyBag, error) {
 	var _ppPropertyBag *graphicsprinting.IPrinterScriptablePropertyBag
 	_hr := self.Raw.Get_QueueProperties(&_ppPropertyBag)
-	return _ppPropertyBag, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterScriptablePropertyBag(_ppPropertyBag), win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserProperties wraps the raw Get_UserProperties call.
-func (self IPrinterScriptContext) Get_UserProperties() (*graphicsprinting.IPrinterScriptablePropertyBag, error) {
+func (self IPrinterScriptContext) Get_UserProperties() (IPrinterScriptablePropertyBag, error) {
 	var _ppPropertyBag *graphicsprinting.IPrinterScriptablePropertyBag
 	_hr := self.Raw.Get_UserProperties(&_ppPropertyBag)
-	return _ppPropertyBag, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterScriptablePropertyBag(_ppPropertyBag), win32.HRESULTError(int32(_hr))
 }
 
 // IPrinterScriptablePropertyBag is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterScriptablePropertyBag with error-returning methods.
@@ -2498,29 +2499,29 @@ func (self IPrinterScriptablePropertyBag) SetString(bstrName foundation.BSTR, bs
 }
 
 // GetBytes wraps the raw GetBytes call.
-func (self IPrinterScriptablePropertyBag) GetBytes(bstrName foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IPrinterScriptablePropertyBag) GetBytes(bstrName foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _ppArray *systemcom.IDispatch
 	_hr := self.Raw.GetBytes(bstrName, &_ppArray)
-	return _ppArray, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppArray), win32.HRESULTError(int32(_hr))
 }
 
 // SetBytes wraps the raw SetBytes call.
-func (self IPrinterScriptablePropertyBag) SetBytes(bstrName foundation.BSTR, pArray *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SetBytes(bstrName, pArray)))
+func (self IPrinterScriptablePropertyBag) SetBytes(bstrName foundation.BSTR, pArray systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.SetBytes(bstrName, pArray.Raw)))
 }
 
 // GetReadStream wraps the raw GetReadStream call.
-func (self IPrinterScriptablePropertyBag) GetReadStream(bstrName foundation.BSTR) (*graphicsprinting.IPrinterScriptableStream, error) {
+func (self IPrinterScriptablePropertyBag) GetReadStream(bstrName foundation.BSTR) (IPrinterScriptableStream, error) {
 	var _ppStream *graphicsprinting.IPrinterScriptableStream
 	_hr := self.Raw.GetReadStream(bstrName, &_ppStream)
-	return _ppStream, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterScriptableStream(_ppStream), win32.HRESULTError(int32(_hr))
 }
 
 // GetWriteStream wraps the raw GetWriteStream call.
-func (self IPrinterScriptablePropertyBag) GetWriteStream(bstrName foundation.BSTR) (*graphicsprinting.IPrinterScriptableStream, error) {
+func (self IPrinterScriptablePropertyBag) GetWriteStream(bstrName foundation.BSTR) (IPrinterScriptableStream, error) {
 	var _ppStream *graphicsprinting.IPrinterScriptableStream
 	_hr := self.Raw.GetWriteStream(bstrName, &_ppStream)
-	return _ppStream, win32.HRESULTError(int32(_hr))
+	return WrapIPrinterScriptableStream(_ppStream), win32.HRESULTError(int32(_hr))
 }
 
 // IPrinterScriptablePropertyBag2 is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterScriptablePropertyBag2 with error-returning methods.
@@ -2535,10 +2536,10 @@ func WrapIPrinterScriptablePropertyBag2(raw *graphicsprinting.IPrinterScriptable
 }
 
 // GetReadStreamAsXML wraps the raw GetReadStreamAsXML call.
-func (self IPrinterScriptablePropertyBag2) GetReadStreamAsXML(bstrName foundation.BSTR) (*systemcom.IUnknown, error) {
+func (self IPrinterScriptablePropertyBag2) GetReadStreamAsXML(bstrName foundation.BSTR) (systemcomidiom.IUnknown, error) {
 	var _ppXmlNode *systemcom.IUnknown
 	_hr := self.Raw.GetReadStreamAsXML(bstrName, &_ppXmlNode)
-	return _ppXmlNode, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_ppXmlNode), win32.HRESULTError(int32(_hr))
 }
 
 // IPrinterScriptableSequentialStream is an idiomatic wrapper over the raw COM interface Graphics.Printing.IPrinterScriptableSequentialStream with error-returning methods.
@@ -2553,16 +2554,16 @@ func WrapIPrinterScriptableSequentialStream(raw *graphicsprinting.IPrinterScript
 }
 
 // Read wraps the raw Read call.
-func (self IPrinterScriptableSequentialStream) Read(cbRead int32) (*systemcom.IDispatch, error) {
+func (self IPrinterScriptableSequentialStream) Read(cbRead int32) (systemcomidiom.IDispatch, error) {
 	var _ppArray *systemcom.IDispatch
 	_hr := self.Raw.Read(cbRead, &_ppArray)
-	return _ppArray, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_ppArray), win32.HRESULTError(int32(_hr))
 }
 
 // Write wraps the raw Write call.
-func (self IPrinterScriptableSequentialStream) Write(pArray *systemcom.IDispatch) (int32, error) {
+func (self IPrinterScriptableSequentialStream) Write(pArray systemcomidiom.IDispatch) (int32, error) {
 	var _pcbWritten int32
-	_hr := self.Raw.Write(pArray, &_pcbWritten)
+	_hr := self.Raw.Write(pArray.Raw, &_pcbWritten)
 	return _pcbWritten, win32.HRESULTError(int32(_hr))
 }
 
@@ -2611,8 +2612,8 @@ func (self IXpsDocument) GetThumbnail(ppThumbnail **graphicsprinting.IPartThumbn
 }
 
 // SetThumbnail wraps the raw SetThumbnail call.
-func (self IXpsDocument) SetThumbnail(pThumbnail *graphicsprinting.IPartThumbnail) error {
-	return win32.HRESULTError(int32(self.Raw.SetThumbnail(pThumbnail)))
+func (self IXpsDocument) SetThumbnail(pThumbnail IPartThumbnail) error {
+	return win32.HRESULTError(int32(self.Raw.SetThumbnail(pThumbnail.Raw)))
 }
 
 // IXpsDocumentConsumer is an idiomatic wrapper over the raw COM interface Graphics.Printing.IXpsDocumentConsumer with error-returning methods.
@@ -2627,28 +2628,28 @@ func WrapIXpsDocumentConsumer(raw *graphicsprinting.IXpsDocumentConsumer) IXpsDo
 }
 
 // SendXpsUnknown wraps the raw SendXpsUnknown call.
-func (self IXpsDocumentConsumer) SendXpsUnknown(pUnknown *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SendXpsUnknown(pUnknown)))
+func (self IXpsDocumentConsumer) SendXpsUnknown(pUnknown systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SendXpsUnknown(pUnknown.Raw)))
 }
 
 // SendXpsDocument wraps the raw SendXpsDocument call.
-func (self IXpsDocumentConsumer) SendXpsDocument(pIXpsDocument *graphicsprinting.IXpsDocument) error {
-	return win32.HRESULTError(int32(self.Raw.SendXpsDocument(pIXpsDocument)))
+func (self IXpsDocumentConsumer) SendXpsDocument(pIXpsDocument IXpsDocument) error {
+	return win32.HRESULTError(int32(self.Raw.SendXpsDocument(pIXpsDocument.Raw)))
 }
 
 // SendFixedDocumentSequence wraps the raw SendFixedDocumentSequence call.
-func (self IXpsDocumentConsumer) SendFixedDocumentSequence(pIFixedDocumentSequence *graphicsprinting.IFixedDocumentSequence) error {
-	return win32.HRESULTError(int32(self.Raw.SendFixedDocumentSequence(pIFixedDocumentSequence)))
+func (self IXpsDocumentConsumer) SendFixedDocumentSequence(pIFixedDocumentSequence IFixedDocumentSequence) error {
+	return win32.HRESULTError(int32(self.Raw.SendFixedDocumentSequence(pIFixedDocumentSequence.Raw)))
 }
 
 // SendFixedDocument wraps the raw SendFixedDocument call.
-func (self IXpsDocumentConsumer) SendFixedDocument(pIFixedDocument *graphicsprinting.IFixedDocument) error {
-	return win32.HRESULTError(int32(self.Raw.SendFixedDocument(pIFixedDocument)))
+func (self IXpsDocumentConsumer) SendFixedDocument(pIFixedDocument IFixedDocument) error {
+	return win32.HRESULTError(int32(self.Raw.SendFixedDocument(pIFixedDocument.Raw)))
 }
 
 // SendFixedPage wraps the raw SendFixedPage call.
-func (self IXpsDocumentConsumer) SendFixedPage(pIFixedPage *graphicsprinting.IFixedPage) error {
-	return win32.HRESULTError(int32(self.Raw.SendFixedPage(pIFixedPage)))
+func (self IXpsDocumentConsumer) SendFixedPage(pIFixedPage IFixedPage) error {
+	return win32.HRESULTError(int32(self.Raw.SendFixedPage(pIFixedPage.Raw)))
 }
 
 // CloseSender wraps the raw CloseSender call.
@@ -2754,8 +2755,8 @@ func WrapIXpsRasterizer(raw *graphicsprinting.IXpsRasterizer) IXpsRasterizer {
 }
 
 // RasterizeRect wraps the raw RasterizeRect call.
-func (self IXpsRasterizer) RasterizeRect(x int32, y int32, width int32, height int32, notificationCallback *graphicsprinting.IXpsRasterizerNotificationCallback, bitmap **graphicsimaging.IWICBitmap) error {
-	return win32.HRESULTError(int32(self.Raw.RasterizeRect(x, y, width, height, notificationCallback, bitmap)))
+func (self IXpsRasterizer) RasterizeRect(x int32, y int32, width int32, height int32, notificationCallback IXpsRasterizerNotificationCallback, bitmap **graphicsimaging.IWICBitmap) error {
+	return win32.HRESULTError(int32(self.Raw.RasterizeRect(x, y, width, height, notificationCallback.Raw, bitmap)))
 }
 
 // SetMinimalLineWidth wraps the raw SetMinimalLineWidth call.

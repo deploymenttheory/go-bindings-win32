@@ -24,8 +24,8 @@ func WrapIXmlReader(raw *dataxmlxmllite.IXmlReader) IXmlReader {
 }
 
 // SetInput wraps the raw SetInput call.
-func (self IXmlReader) SetInput(pInput *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetInput(pInput)))
+func (self IXmlReader) SetInput(pInput systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetInput(pInput.Raw)))
 }
 
 // GetProperty wraps the raw GetProperty call.
@@ -171,8 +171,8 @@ func WrapIXmlWriter(raw *dataxmlxmllite.IXmlWriter) IXmlWriter {
 }
 
 // SetOutput wraps the raw SetOutput call.
-func (self IXmlWriter) SetOutput(pOutput *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutput(pOutput)))
+func (self IXmlWriter) SetOutput(pOutput systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutput(pOutput.Raw)))
 }
 
 // GetProperty wraps the raw GetProperty call.
@@ -186,9 +186,9 @@ func (self IXmlWriter) SetProperty(nProperty uint32, pValue uintptr) error {
 }
 
 // WriteAttributes wraps the raw WriteAttributes call.
-func (self IXmlWriter) WriteAttributes(pReader *dataxmlxmllite.IXmlReader, fWriteDefaultAttributes bool) error {
+func (self IXmlWriter) WriteAttributes(pReader IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := foundation.BOOL(win32.Bool32(fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(self.Raw.WriteAttributes(pReader, _fWriteDefaultAttributes)))
+	return win32.HRESULTError(int32(self.Raw.WriteAttributes(pReader.Raw, _fWriteDefaultAttributes)))
 }
 
 // WriteAttributeString wraps the raw WriteAttributeString call.
@@ -275,15 +275,15 @@ func (self IXmlWriter) WriteNmToken(pwszNmToken string) error {
 }
 
 // WriteNode wraps the raw WriteNode call.
-func (self IXmlWriter) WriteNode(pReader *dataxmlxmllite.IXmlReader, fWriteDefaultAttributes bool) error {
+func (self IXmlWriter) WriteNode(pReader IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := foundation.BOOL(win32.Bool32(fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(self.Raw.WriteNode(pReader, _fWriteDefaultAttributes)))
+	return win32.HRESULTError(int32(self.Raw.WriteNode(pReader.Raw, _fWriteDefaultAttributes)))
 }
 
 // WriteNodeShallow wraps the raw WriteNodeShallow call.
-func (self IXmlWriter) WriteNodeShallow(pReader *dataxmlxmllite.IXmlReader, fWriteDefaultAttributes bool) error {
+func (self IXmlWriter) WriteNodeShallow(pReader IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := foundation.BOOL(win32.Bool32(fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(self.Raw.WriteNodeShallow(pReader, _fWriteDefaultAttributes)))
+	return win32.HRESULTError(int32(self.Raw.WriteNodeShallow(pReader.Raw, _fWriteDefaultAttributes)))
 }
 
 // WriteProcessingInstruction wraps the raw WriteProcessingInstruction call.
@@ -359,8 +359,8 @@ func WrapIXmlWriterLite(raw *dataxmlxmllite.IXmlWriterLite) IXmlWriterLite {
 }
 
 // SetOutput wraps the raw SetOutput call.
-func (self IXmlWriterLite) SetOutput(pOutput *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutput(pOutput)))
+func (self IXmlWriterLite) SetOutput(pOutput systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutput(pOutput.Raw)))
 }
 
 // GetProperty wraps the raw GetProperty call.
@@ -374,9 +374,9 @@ func (self IXmlWriterLite) SetProperty(nProperty uint32, pValue uintptr) error {
 }
 
 // WriteAttributes wraps the raw WriteAttributes call.
-func (self IXmlWriterLite) WriteAttributes(pReader *dataxmlxmllite.IXmlReader, fWriteDefaultAttributes bool) error {
+func (self IXmlWriterLite) WriteAttributes(pReader IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := foundation.BOOL(win32.Bool32(fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(self.Raw.WriteAttributes(pReader, _fWriteDefaultAttributes)))
+	return win32.HRESULTError(int32(self.Raw.WriteAttributes(pReader.Raw, _fWriteDefaultAttributes)))
 }
 
 // WriteAttributeString wraps the raw WriteAttributeString call.
@@ -461,15 +461,15 @@ func (self IXmlWriterLite) WriteNmToken(pwszNmToken string) error {
 }
 
 // WriteNode wraps the raw WriteNode call.
-func (self IXmlWriterLite) WriteNode(pReader *dataxmlxmllite.IXmlReader, fWriteDefaultAttributes bool) error {
+func (self IXmlWriterLite) WriteNode(pReader IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := foundation.BOOL(win32.Bool32(fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(self.Raw.WriteNode(pReader, _fWriteDefaultAttributes)))
+	return win32.HRESULTError(int32(self.Raw.WriteNode(pReader.Raw, _fWriteDefaultAttributes)))
 }
 
 // WriteNodeShallow wraps the raw WriteNodeShallow call.
-func (self IXmlWriterLite) WriteNodeShallow(pReader *dataxmlxmllite.IXmlReader, fWriteDefaultAttributes bool) error {
+func (self IXmlWriterLite) WriteNodeShallow(pReader IXmlReader, fWriteDefaultAttributes bool) error {
 	_fWriteDefaultAttributes := foundation.BOOL(win32.Bool32(fWriteDefaultAttributes))
-	return win32.HRESULTError(int32(self.Raw.WriteNodeShallow(pReader, _fWriteDefaultAttributes)))
+	return win32.HRESULTError(int32(self.Raw.WriteNodeShallow(pReader.Raw, _fWriteDefaultAttributes)))
 }
 
 // WriteProcessingInstruction wraps the raw WriteProcessingInstruction call.

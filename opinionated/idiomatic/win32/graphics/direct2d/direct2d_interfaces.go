@@ -17,9 +17,11 @@ import (
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	graphicsimaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/imaging"
-	storagexpsprinting "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/xps/printing"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	graphicsdirect2dcommonidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct2d/common"
+	graphicsdirectwriteidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/directwrite"
+	graphicsdxgiidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/dxgi"
+	graphicsimagingidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/imaging"
+	storagexpsprintingidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/storage/xps/printing"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -56,13 +58,13 @@ func (self ID2D1Bitmap) GetDpi(dpiX *float32, dpiY *float32) {
 }
 
 // CopyFromBitmap wraps the raw CopyFromBitmap call.
-func (self ID2D1Bitmap) CopyFromBitmap(destPoint *graphicsdirect2dcommon.D2D_POINT_2U, bitmap *graphicsdirect2d.ID2D1Bitmap, srcRect *graphicsdirect2dcommon.D2D_RECT_U) error {
-	return win32.HRESULTError(int32(self.Raw.CopyFromBitmap(destPoint, bitmap, srcRect)))
+func (self ID2D1Bitmap) CopyFromBitmap(destPoint *graphicsdirect2dcommon.D2D_POINT_2U, bitmap ID2D1Bitmap, srcRect *graphicsdirect2dcommon.D2D_RECT_U) error {
+	return win32.HRESULTError(int32(self.Raw.CopyFromBitmap(destPoint, bitmap.Raw, srcRect)))
 }
 
 // CopyFromRenderTarget wraps the raw CopyFromRenderTarget call.
-func (self ID2D1Bitmap) CopyFromRenderTarget(destPoint *graphicsdirect2dcommon.D2D_POINT_2U, renderTarget *graphicsdirect2d.ID2D1RenderTarget, srcRect *graphicsdirect2dcommon.D2D_RECT_U) error {
-	return win32.HRESULTError(int32(self.Raw.CopyFromRenderTarget(destPoint, renderTarget, srcRect)))
+func (self ID2D1Bitmap) CopyFromRenderTarget(destPoint *graphicsdirect2dcommon.D2D_POINT_2U, renderTarget ID2D1RenderTarget, srcRect *graphicsdirect2dcommon.D2D_RECT_U) error {
+	return win32.HRESULTError(int32(self.Raw.CopyFromRenderTarget(destPoint, renderTarget.Raw, srcRect)))
 }
 
 // CopyFromMemory wraps the raw CopyFromMemory call.
@@ -133,8 +135,8 @@ func (self ID2D1BitmapBrush) SetInterpolationMode(interpolationMode graphicsdire
 }
 
 // SetBitmap wraps the raw SetBitmap call.
-func (self ID2D1BitmapBrush) SetBitmap(bitmap *graphicsdirect2d.ID2D1Bitmap) {
-	self.Raw.SetBitmap(bitmap)
+func (self ID2D1BitmapBrush) SetBitmap(bitmap ID2D1Bitmap) {
+	self.Raw.SetBitmap(bitmap.Raw)
 }
 
 // GetExtendModeX wraps the raw GetExtendModeX call.
@@ -352,8 +354,8 @@ func WrapID2D1CommandList(raw *graphicsdirect2d.ID2D1CommandList) ID2D1CommandLi
 }
 
 // Stream wraps the raw Stream call.
-func (self ID2D1CommandList) Stream(sink *graphicsdirect2d.ID2D1CommandSink) error {
-	return win32.HRESULTError(int32(self.Raw.Stream(sink)))
+func (self ID2D1CommandList) Stream(sink ID2D1CommandSink) error {
+	return win32.HRESULTError(int32(self.Raw.Stream(sink.Raw)))
 }
 
 // Close wraps the raw Close call.
@@ -398,8 +400,8 @@ func (self ID2D1CommandSink) SetTextAntialiasMode(textAntialiasMode graphicsdire
 }
 
 // SetTextRenderingParams wraps the raw SetTextRenderingParams call.
-func (self ID2D1CommandSink) SetTextRenderingParams(textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams) error {
-	return win32.HRESULTError(int32(self.Raw.SetTextRenderingParams(textRenderingParams)))
+func (self ID2D1CommandSink) SetTextRenderingParams(textRenderingParams graphicsdirectwriteidiom.IDWriteRenderingParams) error {
+	return win32.HRESULTError(int32(self.Raw.SetTextRenderingParams(textRenderingParams.Raw)))
 }
 
 // SetTransform wraps the raw SetTransform call.
@@ -423,33 +425,33 @@ func (self ID2D1CommandSink) Clear(color *graphicsdirect2dcommon.D2D1_COLOR_F) e
 }
 
 // DrawImage wraps the raw DrawImage call.
-func (self ID2D1CommandSink) DrawImage(image *graphicsdirect2d.ID2D1Image, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode graphicsdirect2d.D2D1_INTERPOLATION_MODE, compositeMode graphicsdirect2dcommon.D2D1_COMPOSITE_MODE) error {
-	return win32.HRESULTError(int32(self.Raw.DrawImage(image, targetOffset, imageRectangle, interpolationMode, compositeMode)))
+func (self ID2D1CommandSink) DrawImage(image ID2D1Image, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode graphicsdirect2d.D2D1_INTERPOLATION_MODE, compositeMode graphicsdirect2dcommon.D2D1_COMPOSITE_MODE) error {
+	return win32.HRESULTError(int32(self.Raw.DrawImage(image.Raw, targetOffset, imageRectangle, interpolationMode, compositeMode)))
 }
 
 // DrawGdiMetafile wraps the raw DrawGdiMetafile call.
-func (self ID2D1CommandSink) DrawGdiMetafile(gdiMetafile *graphicsdirect2d.ID2D1GdiMetafile, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F) error {
-	return win32.HRESULTError(int32(self.Raw.DrawGdiMetafile(gdiMetafile, targetOffset)))
+func (self ID2D1CommandSink) DrawGdiMetafile(gdiMetafile ID2D1GdiMetafile, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F) error {
+	return win32.HRESULTError(int32(self.Raw.DrawGdiMetafile(gdiMetafile.Raw, targetOffset)))
 }
 
 // FillMesh wraps the raw FillMesh call.
-func (self ID2D1CommandSink) FillMesh(mesh *graphicsdirect2d.ID2D1Mesh, brush *graphicsdirect2d.ID2D1Brush) error {
-	return win32.HRESULTError(int32(self.Raw.FillMesh(mesh, brush)))
+func (self ID2D1CommandSink) FillMesh(mesh ID2D1Mesh, brush ID2D1Brush) error {
+	return win32.HRESULTError(int32(self.Raw.FillMesh(mesh.Raw, brush.Raw)))
 }
 
 // FillOpacityMask wraps the raw FillOpacityMask call.
-func (self ID2D1CommandSink) FillOpacityMask(opacityMask *graphicsdirect2d.ID2D1Bitmap, brush *graphicsdirect2d.ID2D1Brush, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
-	return win32.HRESULTError(int32(self.Raw.FillOpacityMask(opacityMask, brush, destinationRectangle, sourceRectangle)))
+func (self ID2D1CommandSink) FillOpacityMask(opacityMask ID2D1Bitmap, brush ID2D1Brush, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
+	return win32.HRESULTError(int32(self.Raw.FillOpacityMask(opacityMask.Raw, brush.Raw, destinationRectangle, sourceRectangle)))
 }
 
 // FillGeometry wraps the raw FillGeometry call.
-func (self ID2D1CommandSink) FillGeometry(geometry *graphicsdirect2d.ID2D1Geometry, brush *graphicsdirect2d.ID2D1Brush, opacityBrush *graphicsdirect2d.ID2D1Brush) error {
-	return win32.HRESULTError(int32(self.Raw.FillGeometry(geometry, brush, opacityBrush)))
+func (self ID2D1CommandSink) FillGeometry(geometry ID2D1Geometry, brush ID2D1Brush, opacityBrush ID2D1Brush) error {
+	return win32.HRESULTError(int32(self.Raw.FillGeometry(geometry.Raw, brush.Raw, opacityBrush.Raw)))
 }
 
 // FillRectangle wraps the raw FillRectangle call.
-func (self ID2D1CommandSink) FillRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush *graphicsdirect2d.ID2D1Brush) error {
-	return win32.HRESULTError(int32(self.Raw.FillRectangle(rect, brush)))
+func (self ID2D1CommandSink) FillRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush ID2D1Brush) error {
+	return win32.HRESULTError(int32(self.Raw.FillRectangle(rect, brush.Raw)))
 }
 
 // PushAxisAlignedClip wraps the raw PushAxisAlignedClip call.
@@ -458,8 +460,8 @@ func (self ID2D1CommandSink) PushAxisAlignedClip(clipRect *graphicsdirect2dcommo
 }
 
 // PushLayer wraps the raw PushLayer call.
-func (self ID2D1CommandSink) PushLayer(layerParameters1 *graphicsdirect2d.D2D1_LAYER_PARAMETERS1, layer *graphicsdirect2d.ID2D1Layer) error {
-	return win32.HRESULTError(int32(self.Raw.PushLayer(layerParameters1, layer)))
+func (self ID2D1CommandSink) PushLayer(layerParameters1 *graphicsdirect2d.D2D1_LAYER_PARAMETERS1, layer ID2D1Layer) error {
+	return win32.HRESULTError(int32(self.Raw.PushLayer(layerParameters1, layer.Raw)))
 }
 
 // PopAxisAlignedClip wraps the raw PopAxisAlignedClip call.
@@ -500,18 +502,18 @@ func WrapID2D1CommandSink2(raw *graphicsdirect2d.ID2D1CommandSink2) ID2D1Command
 }
 
 // DrawInk wraps the raw DrawInk call.
-func (self ID2D1CommandSink2) DrawInk(ink *graphicsdirect2d.ID2D1Ink, brush *graphicsdirect2d.ID2D1Brush, inkStyle *graphicsdirect2d.ID2D1InkStyle) error {
-	return win32.HRESULTError(int32(self.Raw.DrawInk(ink, brush, inkStyle)))
+func (self ID2D1CommandSink2) DrawInk(ink ID2D1Ink, brush ID2D1Brush, inkStyle ID2D1InkStyle) error {
+	return win32.HRESULTError(int32(self.Raw.DrawInk(ink.Raw, brush.Raw, inkStyle.Raw)))
 }
 
 // DrawGradientMesh wraps the raw DrawGradientMesh call.
-func (self ID2D1CommandSink2) DrawGradientMesh(gradientMesh *graphicsdirect2d.ID2D1GradientMesh) error {
-	return win32.HRESULTError(int32(self.Raw.DrawGradientMesh(gradientMesh)))
+func (self ID2D1CommandSink2) DrawGradientMesh(gradientMesh ID2D1GradientMesh) error {
+	return win32.HRESULTError(int32(self.Raw.DrawGradientMesh(gradientMesh.Raw)))
 }
 
 // DrawGdiMetafile wraps the raw DrawGdiMetafile call.
-func (self ID2D1CommandSink2) DrawGdiMetafile(gdiMetafile *graphicsdirect2d.ID2D1GdiMetafile, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
-	return win32.HRESULTError(int32(self.Raw.DrawGdiMetafile(gdiMetafile, destinationRectangle, sourceRectangle)))
+func (self ID2D1CommandSink2) DrawGdiMetafile(gdiMetafile ID2D1GdiMetafile, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
+	return win32.HRESULTError(int32(self.Raw.DrawGdiMetafile(gdiMetafile.Raw, destinationRectangle, sourceRectangle)))
 }
 
 // ID2D1CommandSink3 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1CommandSink3 with error-returning methods.
@@ -526,8 +528,8 @@ func WrapID2D1CommandSink3(raw *graphicsdirect2d.ID2D1CommandSink3) ID2D1Command
 }
 
 // DrawSpriteBatch wraps the raw DrawSpriteBatch call.
-func (self ID2D1CommandSink3) DrawSpriteBatch(spriteBatch *graphicsdirect2d.ID2D1SpriteBatch, startIndex uint32, spriteCount uint32, bitmap *graphicsdirect2d.ID2D1Bitmap, interpolationMode graphicsdirect2d.D2D1_BITMAP_INTERPOLATION_MODE, spriteOptions graphicsdirect2d.D2D1_SPRITE_OPTIONS) error {
-	return win32.HRESULTError(int32(self.Raw.DrawSpriteBatch(spriteBatch, startIndex, spriteCount, bitmap, interpolationMode, spriteOptions)))
+func (self ID2D1CommandSink3) DrawSpriteBatch(spriteBatch ID2D1SpriteBatch, startIndex uint32, spriteCount uint32, bitmap ID2D1Bitmap, interpolationMode graphicsdirect2d.D2D1_BITMAP_INTERPOLATION_MODE, spriteOptions graphicsdirect2d.D2D1_SPRITE_OPTIONS) error {
+	return win32.HRESULTError(int32(self.Raw.DrawSpriteBatch(spriteBatch.Raw, startIndex, spriteCount, bitmap.Raw, interpolationMode, spriteOptions)))
 }
 
 // ID2D1CommandSink4 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1CommandSink4 with error-returning methods.
@@ -558,8 +560,8 @@ func WrapID2D1CommandSink5(raw *graphicsdirect2d.ID2D1CommandSink5) ID2D1Command
 }
 
 // BlendImage wraps the raw BlendImage call.
-func (self ID2D1CommandSink5) BlendImage(image *graphicsdirect2d.ID2D1Image, blendMode graphicsdirect2dcommon.D2D1_BLEND_MODE, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode graphicsdirect2d.D2D1_INTERPOLATION_MODE) error {
-	return win32.HRESULTError(int32(self.Raw.BlendImage(image, blendMode, targetOffset, imageRectangle, interpolationMode)))
+func (self ID2D1CommandSink5) BlendImage(image ID2D1Image, blendMode graphicsdirect2dcommon.D2D1_BLEND_MODE, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode graphicsdirect2d.D2D1_INTERPOLATION_MODE) error {
+	return win32.HRESULTError(int32(self.Raw.BlendImage(image.Raw, blendMode, targetOffset, imageRectangle, interpolationMode)))
 }
 
 // ID2D1ComputeInfo is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1ComputeInfo with error-returning methods.
@@ -584,8 +586,8 @@ func (self ID2D1ComputeInfo) SetComputeShader(shaderId *win32.GUID) error {
 }
 
 // SetResourceTexture wraps the raw SetResourceTexture call.
-func (self ID2D1ComputeInfo) SetResourceTexture(textureIndex uint32, resourceTexture *graphicsdirect2d.ID2D1ResourceTexture) error {
-	return win32.HRESULTError(int32(self.Raw.SetResourceTexture(textureIndex, resourceTexture)))
+func (self ID2D1ComputeInfo) SetResourceTexture(textureIndex uint32, resourceTexture ID2D1ResourceTexture) error {
+	return win32.HRESULTError(int32(self.Raw.SetResourceTexture(textureIndex, resourceTexture.Raw)))
 }
 
 // ID2D1ComputeTransform is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1ComputeTransform with error-returning methods.
@@ -600,8 +602,8 @@ func WrapID2D1ComputeTransform(raw *graphicsdirect2d.ID2D1ComputeTransform) ID2D
 }
 
 // SetComputeInfo wraps the raw SetComputeInfo call.
-func (self ID2D1ComputeTransform) SetComputeInfo(computeInfo *graphicsdirect2d.ID2D1ComputeInfo) error {
-	return win32.HRESULTError(int32(self.Raw.SetComputeInfo(computeInfo)))
+func (self ID2D1ComputeTransform) SetComputeInfo(computeInfo ID2D1ComputeInfo) error {
+	return win32.HRESULTError(int32(self.Raw.SetComputeInfo(computeInfo.Raw)))
 }
 
 // CalculateThreadgroups wraps the raw CalculateThreadgroups call.
@@ -664,8 +666,8 @@ func (self ID2D1Device) CreateDeviceContext(options graphicsdirect2d.D2D1_DEVICE
 }
 
 // CreatePrintControl wraps the raw CreatePrintControl call.
-func (self ID2D1Device) CreatePrintControl(wicFactory *graphicsimaging.IWICImagingFactory, documentTarget *storagexpsprinting.IPrintDocumentPackageTarget, printControlProperties *graphicsdirect2d.D2D1_PRINT_CONTROL_PROPERTIES, printControl **graphicsdirect2d.ID2D1PrintControl) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePrintControl(wicFactory, documentTarget, printControlProperties, printControl)))
+func (self ID2D1Device) CreatePrintControl(wicFactory graphicsimagingidiom.IWICImagingFactory, documentTarget storagexpsprintingidiom.IPrintDocumentPackageTarget, printControlProperties *graphicsdirect2d.D2D1_PRINT_CONTROL_PROPERTIES, printControl **graphicsdirect2d.ID2D1PrintControl) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePrintControl(wicFactory.Raw, documentTarget.Raw, printControlProperties, printControl)))
 }
 
 // SetMaximumTextureMemory wraps the raw SetMaximumTextureMemory call.
@@ -726,8 +728,8 @@ func (self ID2D1Device2) CreateDeviceContext(options graphicsdirect2d.D2D1_DEVIC
 }
 
 // FlushDeviceContexts wraps the raw FlushDeviceContexts call.
-func (self ID2D1Device2) FlushDeviceContexts(bitmap *graphicsdirect2d.ID2D1Bitmap) {
-	self.Raw.FlushDeviceContexts(bitmap)
+func (self ID2D1Device2) FlushDeviceContexts(bitmap ID2D1Bitmap) {
+	self.Raw.FlushDeviceContexts(bitmap.Raw)
 }
 
 // GetDxgiDevice wraps the raw GetDxgiDevice call.
@@ -837,8 +839,8 @@ func WrapID2D1DeviceContext(raw *graphicsdirect2d.ID2D1DeviceContext) ID2D1Devic
 }
 
 // CreateBitmapFromWicBitmap wraps the raw CreateBitmapFromWicBitmap call.
-func (self ID2D1DeviceContext) CreateBitmapFromWicBitmap(wicBitmapSource *graphicsimaging.IWICBitmapSource, bitmapProperties *graphicsdirect2d.D2D1_BITMAP_PROPERTIES1, bitmap **graphicsdirect2d.ID2D1Bitmap1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromWicBitmap(wicBitmapSource, bitmapProperties, bitmap)))
+func (self ID2D1DeviceContext) CreateBitmapFromWicBitmap(wicBitmapSource graphicsimagingidiom.IWICBitmapSource, bitmapProperties *graphicsdirect2d.D2D1_BITMAP_PROPERTIES1, bitmap **graphicsdirect2d.ID2D1Bitmap1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromWicBitmap(wicBitmapSource.Raw, bitmapProperties, bitmap)))
 }
 
 // CreateColorContext wraps the raw CreateColorContext call.
@@ -853,13 +855,13 @@ func (self ID2D1DeviceContext) CreateColorContextFromFilename(filename string, c
 }
 
 // CreateColorContextFromWicColorContext wraps the raw CreateColorContextFromWicColorContext call.
-func (self ID2D1DeviceContext) CreateColorContextFromWicColorContext(wicColorContext *graphicsimaging.IWICColorContext, colorContext **graphicsdirect2d.ID2D1ColorContext) error {
-	return win32.HRESULTError(int32(self.Raw.CreateColorContextFromWicColorContext(wicColorContext, colorContext)))
+func (self ID2D1DeviceContext) CreateColorContextFromWicColorContext(wicColorContext graphicsimagingidiom.IWICColorContext, colorContext **graphicsdirect2d.ID2D1ColorContext) error {
+	return win32.HRESULTError(int32(self.Raw.CreateColorContextFromWicColorContext(wicColorContext.Raw, colorContext)))
 }
 
 // CreateBitmapFromDxgiSurface wraps the raw CreateBitmapFromDxgiSurface call.
-func (self ID2D1DeviceContext) CreateBitmapFromDxgiSurface(surface *graphicsdxgi.IDXGISurface, bitmapProperties *graphicsdirect2d.D2D1_BITMAP_PROPERTIES1, bitmap **graphicsdirect2d.ID2D1Bitmap1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromDxgiSurface(surface, bitmapProperties, bitmap)))
+func (self ID2D1DeviceContext) CreateBitmapFromDxgiSurface(surface graphicsdxgiidiom.IDXGISurface, bitmapProperties *graphicsdirect2d.D2D1_BITMAP_PROPERTIES1, bitmap **graphicsdirect2d.ID2D1Bitmap1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromDxgiSurface(surface.Raw, bitmapProperties, bitmap)))
 }
 
 // CreateEffect wraps the raw CreateEffect call.
@@ -873,13 +875,13 @@ func (self ID2D1DeviceContext) CreateGradientStopCollection(straightAlphaGradien
 }
 
 // CreateImageBrush wraps the raw CreateImageBrush call.
-func (self ID2D1DeviceContext) CreateImageBrush(image *graphicsdirect2d.ID2D1Image, imageBrushProperties *graphicsdirect2d.D2D1_IMAGE_BRUSH_PROPERTIES, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, imageBrush **graphicsdirect2d.ID2D1ImageBrush) error {
-	return win32.HRESULTError(int32(self.Raw.CreateImageBrush(image, imageBrushProperties, brushProperties, imageBrush)))
+func (self ID2D1DeviceContext) CreateImageBrush(image ID2D1Image, imageBrushProperties *graphicsdirect2d.D2D1_IMAGE_BRUSH_PROPERTIES, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, imageBrush **graphicsdirect2d.ID2D1ImageBrush) error {
+	return win32.HRESULTError(int32(self.Raw.CreateImageBrush(image.Raw, imageBrushProperties, brushProperties, imageBrush)))
 }
 
 // CreateBitmapBrush wraps the raw CreateBitmapBrush call.
-func (self ID2D1DeviceContext) CreateBitmapBrush(bitmap *graphicsdirect2d.ID2D1Bitmap, bitmapBrushProperties *graphicsdirect2d.D2D1_BITMAP_BRUSH_PROPERTIES1, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, bitmapBrush **graphicsdirect2d.ID2D1BitmapBrush1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBitmapBrush(bitmap, bitmapBrushProperties, brushProperties, bitmapBrush)))
+func (self ID2D1DeviceContext) CreateBitmapBrush(bitmap ID2D1Bitmap, bitmapBrushProperties *graphicsdirect2d.D2D1_BITMAP_BRUSH_PROPERTIES1, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, bitmapBrush **graphicsdirect2d.ID2D1BitmapBrush1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBitmapBrush(bitmap.Raw, bitmapBrushProperties, brushProperties, bitmapBrush)))
 }
 
 // CreateCommandList wraps the raw CreateCommandList call.
@@ -898,13 +900,13 @@ func (self ID2D1DeviceContext) IsBufferPrecisionSupported(bufferPrecision graphi
 }
 
 // GetImageLocalBounds wraps the raw GetImageLocalBounds call.
-func (self ID2D1DeviceContext) GetImageLocalBounds(image *graphicsdirect2d.ID2D1Image, localBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
-	return win32.HRESULTError(int32(self.Raw.GetImageLocalBounds(image, localBounds)))
+func (self ID2D1DeviceContext) GetImageLocalBounds(image ID2D1Image, localBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
+	return win32.HRESULTError(int32(self.Raw.GetImageLocalBounds(image.Raw, localBounds)))
 }
 
 // GetImageWorldBounds wraps the raw GetImageWorldBounds call.
-func (self ID2D1DeviceContext) GetImageWorldBounds(image *graphicsdirect2d.ID2D1Image, worldBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
-	return win32.HRESULTError(int32(self.Raw.GetImageWorldBounds(image, worldBounds)))
+func (self ID2D1DeviceContext) GetImageWorldBounds(image ID2D1Image, worldBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
+	return win32.HRESULTError(int32(self.Raw.GetImageWorldBounds(image.Raw, worldBounds)))
 }
 
 // GetDevice wraps the raw GetDevice call.
@@ -913,8 +915,8 @@ func (self ID2D1DeviceContext) GetDevice(device **graphicsdirect2d.ID2D1Device) 
 }
 
 // SetTarget wraps the raw SetTarget call.
-func (self ID2D1DeviceContext) SetTarget(image *graphicsdirect2d.ID2D1Image) {
-	self.Raw.SetTarget(image)
+func (self ID2D1DeviceContext) SetTarget(image ID2D1Image) {
+	self.Raw.SetTarget(image.Raw)
 }
 
 // GetTarget wraps the raw GetTarget call.
@@ -953,43 +955,43 @@ func (self ID2D1DeviceContext) GetUnitMode() graphicsdirect2d.D2D1_UNIT_MODE {
 }
 
 // DrawImage wraps the raw DrawImage call.
-func (self ID2D1DeviceContext) DrawImage(image *graphicsdirect2d.ID2D1Image, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode graphicsdirect2d.D2D1_INTERPOLATION_MODE, compositeMode graphicsdirect2dcommon.D2D1_COMPOSITE_MODE) {
-	self.Raw.DrawImage(image, targetOffset, imageRectangle, interpolationMode, compositeMode)
+func (self ID2D1DeviceContext) DrawImage(image ID2D1Image, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode graphicsdirect2d.D2D1_INTERPOLATION_MODE, compositeMode graphicsdirect2dcommon.D2D1_COMPOSITE_MODE) {
+	self.Raw.DrawImage(image.Raw, targetOffset, imageRectangle, interpolationMode, compositeMode)
 }
 
 // DrawGdiMetafile wraps the raw DrawGdiMetafile call.
-func (self ID2D1DeviceContext) DrawGdiMetafile(gdiMetafile *graphicsdirect2d.ID2D1GdiMetafile, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F) {
-	self.Raw.DrawGdiMetafile(gdiMetafile, targetOffset)
+func (self ID2D1DeviceContext) DrawGdiMetafile(gdiMetafile ID2D1GdiMetafile, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F) {
+	self.Raw.DrawGdiMetafile(gdiMetafile.Raw, targetOffset)
 }
 
 // PushLayer wraps the raw PushLayer call.
-func (self ID2D1DeviceContext) PushLayer(layerParameters *graphicsdirect2d.D2D1_LAYER_PARAMETERS1, layer *graphicsdirect2d.ID2D1Layer) {
-	self.Raw.PushLayer(layerParameters, layer)
+func (self ID2D1DeviceContext) PushLayer(layerParameters *graphicsdirect2d.D2D1_LAYER_PARAMETERS1, layer ID2D1Layer) {
+	self.Raw.PushLayer(layerParameters, layer.Raw)
 }
 
 // InvalidateEffectInputRectangle wraps the raw InvalidateEffectInputRectangle call.
-func (self ID2D1DeviceContext) InvalidateEffectInputRectangle(effect *graphicsdirect2d.ID2D1Effect, input uint32, inputRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
-	return win32.HRESULTError(int32(self.Raw.InvalidateEffectInputRectangle(effect, input, inputRectangle)))
+func (self ID2D1DeviceContext) InvalidateEffectInputRectangle(effect ID2D1Effect, input uint32, inputRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
+	return win32.HRESULTError(int32(self.Raw.InvalidateEffectInputRectangle(effect.Raw, input, inputRectangle)))
 }
 
 // GetEffectInvalidRectangleCount wraps the raw GetEffectInvalidRectangleCount call.
-func (self ID2D1DeviceContext) GetEffectInvalidRectangleCount(effect *graphicsdirect2d.ID2D1Effect, rectangleCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetEffectInvalidRectangleCount(effect, rectangleCount)))
+func (self ID2D1DeviceContext) GetEffectInvalidRectangleCount(effect ID2D1Effect, rectangleCount *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetEffectInvalidRectangleCount(effect.Raw, rectangleCount)))
 }
 
 // GetEffectInvalidRectangles wraps the raw GetEffectInvalidRectangles call.
-func (self ID2D1DeviceContext) GetEffectInvalidRectangles(effect *graphicsdirect2d.ID2D1Effect, rectangles *graphicsdirect2dcommon.D2D_RECT_F, rectanglesCount uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetEffectInvalidRectangles(effect, rectangles, rectanglesCount)))
+func (self ID2D1DeviceContext) GetEffectInvalidRectangles(effect ID2D1Effect, rectangles *graphicsdirect2dcommon.D2D_RECT_F, rectanglesCount uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetEffectInvalidRectangles(effect.Raw, rectangles, rectanglesCount)))
 }
 
 // GetEffectRequiredInputRectangles wraps the raw GetEffectRequiredInputRectangles call.
-func (self ID2D1DeviceContext) GetEffectRequiredInputRectangles(renderEffect *graphicsdirect2d.ID2D1Effect, renderImageRectangle *graphicsdirect2dcommon.D2D_RECT_F, inputDescriptions *graphicsdirect2d.D2D1_EFFECT_INPUT_DESCRIPTION, requiredInputRects *graphicsdirect2dcommon.D2D_RECT_F, inputCount uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetEffectRequiredInputRectangles(renderEffect, renderImageRectangle, inputDescriptions, requiredInputRects, inputCount)))
+func (self ID2D1DeviceContext) GetEffectRequiredInputRectangles(renderEffect ID2D1Effect, renderImageRectangle *graphicsdirect2dcommon.D2D_RECT_F, inputDescriptions *graphicsdirect2d.D2D1_EFFECT_INPUT_DESCRIPTION, requiredInputRects *graphicsdirect2dcommon.D2D_RECT_F, inputCount uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetEffectRequiredInputRectangles(renderEffect.Raw, renderImageRectangle, inputDescriptions, requiredInputRects, inputCount)))
 }
 
 // FillOpacityMask wraps the raw FillOpacityMask call.
-func (self ID2D1DeviceContext) FillOpacityMask(opacityMask *graphicsdirect2d.ID2D1Bitmap, brush *graphicsdirect2d.ID2D1Brush, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) {
-	self.Raw.FillOpacityMask(opacityMask, brush, destinationRectangle, sourceRectangle)
+func (self ID2D1DeviceContext) FillOpacityMask(opacityMask ID2D1Bitmap, brush ID2D1Brush, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) {
+	self.Raw.FillOpacityMask(opacityMask.Raw, brush.Raw, destinationRectangle, sourceRectangle)
 }
 
 // ID2D1DeviceContext1 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1DeviceContext1 with error-returning methods.
@@ -1004,8 +1006,8 @@ func WrapID2D1DeviceContext1(raw *graphicsdirect2d.ID2D1DeviceContext1) ID2D1Dev
 }
 
 // DrawGeometryRealization wraps the raw DrawGeometryRealization call.
-func (self ID2D1DeviceContext1) DrawGeometryRealization(geometryRealization *graphicsdirect2d.ID2D1GeometryRealization, brush *graphicsdirect2d.ID2D1Brush) {
-	self.Raw.DrawGeometryRealization(geometryRealization, brush)
+func (self ID2D1DeviceContext1) DrawGeometryRealization(geometryRealization ID2D1GeometryRealization, brush ID2D1Brush) {
+	self.Raw.DrawGeometryRealization(geometryRealization.Raw, brush.Raw)
 }
 
 // ID2D1DeviceContext2 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1DeviceContext2 with error-returning methods.
@@ -1035,8 +1037,8 @@ func (self ID2D1DeviceContext2) CreateGradientMesh(patches *graphicsdirect2d.D2D
 }
 
 // CreateImageSourceFromWic wraps the raw CreateImageSourceFromWic call.
-func (self ID2D1DeviceContext2) CreateImageSourceFromWic(wicBitmapSource *graphicsimaging.IWICBitmapSource, loadingOptions graphicsdirect2d.D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphaMode graphicsdirect2dcommon.D2D1_ALPHA_MODE, imageSource **graphicsdirect2d.ID2D1ImageSourceFromWic) error {
-	return win32.HRESULTError(int32(self.Raw.CreateImageSourceFromWic(wicBitmapSource, loadingOptions, alphaMode, imageSource)))
+func (self ID2D1DeviceContext2) CreateImageSourceFromWic(wicBitmapSource graphicsimagingidiom.IWICBitmapSource, loadingOptions graphicsdirect2d.D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphaMode graphicsdirect2dcommon.D2D1_ALPHA_MODE, imageSource **graphicsdirect2d.ID2D1ImageSourceFromWic) error {
+	return win32.HRESULTError(int32(self.Raw.CreateImageSourceFromWic(wicBitmapSource.Raw, loadingOptions, alphaMode, imageSource)))
 }
 
 // CreateLookupTable3D wraps the raw CreateLookupTable3D call.
@@ -1050,28 +1052,28 @@ func (self ID2D1DeviceContext2) CreateImageSourceFromDxgi(surfaces **graphicsdxg
 }
 
 // GetGradientMeshWorldBounds wraps the raw GetGradientMeshWorldBounds call.
-func (self ID2D1DeviceContext2) GetGradientMeshWorldBounds(gradientMesh *graphicsdirect2d.ID2D1GradientMesh, pBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
-	return win32.HRESULTError(int32(self.Raw.GetGradientMeshWorldBounds(gradientMesh, pBounds)))
+func (self ID2D1DeviceContext2) GetGradientMeshWorldBounds(gradientMesh ID2D1GradientMesh, pBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
+	return win32.HRESULTError(int32(self.Raw.GetGradientMeshWorldBounds(gradientMesh.Raw, pBounds)))
 }
 
 // DrawInk wraps the raw DrawInk call.
-func (self ID2D1DeviceContext2) DrawInk(ink *graphicsdirect2d.ID2D1Ink, brush *graphicsdirect2d.ID2D1Brush, inkStyle *graphicsdirect2d.ID2D1InkStyle) {
-	self.Raw.DrawInk(ink, brush, inkStyle)
+func (self ID2D1DeviceContext2) DrawInk(ink ID2D1Ink, brush ID2D1Brush, inkStyle ID2D1InkStyle) {
+	self.Raw.DrawInk(ink.Raw, brush.Raw, inkStyle.Raw)
 }
 
 // DrawGradientMesh wraps the raw DrawGradientMesh call.
-func (self ID2D1DeviceContext2) DrawGradientMesh(gradientMesh *graphicsdirect2d.ID2D1GradientMesh) {
-	self.Raw.DrawGradientMesh(gradientMesh)
+func (self ID2D1DeviceContext2) DrawGradientMesh(gradientMesh ID2D1GradientMesh) {
+	self.Raw.DrawGradientMesh(gradientMesh.Raw)
 }
 
 // DrawGdiMetafile wraps the raw DrawGdiMetafile call.
-func (self ID2D1DeviceContext2) DrawGdiMetafile(gdiMetafile *graphicsdirect2d.ID2D1GdiMetafile, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) {
-	self.Raw.DrawGdiMetafile(gdiMetafile, destinationRectangle, sourceRectangle)
+func (self ID2D1DeviceContext2) DrawGdiMetafile(gdiMetafile ID2D1GdiMetafile, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) {
+	self.Raw.DrawGdiMetafile(gdiMetafile.Raw, destinationRectangle, sourceRectangle)
 }
 
 // CreateTransformedImageSource wraps the raw CreateTransformedImageSource call.
-func (self ID2D1DeviceContext2) CreateTransformedImageSource(imageSource *graphicsdirect2d.ID2D1ImageSource, properties *graphicsdirect2d.D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES, transformedImageSource **graphicsdirect2d.ID2D1TransformedImageSource) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTransformedImageSource(imageSource, properties, transformedImageSource)))
+func (self ID2D1DeviceContext2) CreateTransformedImageSource(imageSource ID2D1ImageSource, properties *graphicsdirect2d.D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES, transformedImageSource **graphicsdirect2d.ID2D1TransformedImageSource) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTransformedImageSource(imageSource.Raw, properties, transformedImageSource)))
 }
 
 // ID2D1DeviceContext3 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1DeviceContext3 with error-returning methods.
@@ -1091,8 +1093,8 @@ func (self ID2D1DeviceContext3) CreateSpriteBatch(spriteBatch **graphicsdirect2d
 }
 
 // DrawSpriteBatch wraps the raw DrawSpriteBatch call.
-func (self ID2D1DeviceContext3) DrawSpriteBatch(spriteBatch *graphicsdirect2d.ID2D1SpriteBatch, startIndex uint32, spriteCount uint32, bitmap *graphicsdirect2d.ID2D1Bitmap, interpolationMode graphicsdirect2d.D2D1_BITMAP_INTERPOLATION_MODE, spriteOptions graphicsdirect2d.D2D1_SPRITE_OPTIONS) {
-	self.Raw.DrawSpriteBatch(spriteBatch, startIndex, spriteCount, bitmap, interpolationMode, spriteOptions)
+func (self ID2D1DeviceContext3) DrawSpriteBatch(spriteBatch ID2D1SpriteBatch, startIndex uint32, spriteCount uint32, bitmap ID2D1Bitmap, interpolationMode graphicsdirect2d.D2D1_BITMAP_INTERPOLATION_MODE, spriteOptions graphicsdirect2d.D2D1_SPRITE_OPTIONS) {
+	self.Raw.DrawSpriteBatch(spriteBatch.Raw, startIndex, spriteCount, bitmap.Raw, interpolationMode, spriteOptions)
 }
 
 // ID2D1DeviceContext4 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1DeviceContext4 with error-returning methods.
@@ -1112,9 +1114,9 @@ func (self ID2D1DeviceContext4) CreateSvgGlyphStyle(svgGlyphStyle **graphicsdire
 }
 
 // DrawText wraps the raw DrawText call.
-func (self ID2D1DeviceContext4) DrawText(string_ string, stringLength uint32, textFormat *graphicsdirectwrite.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush *graphicsdirect2d.ID2D1Brush, svgGlyphStyle *graphicsdirect2d.ID2D1SvgGlyphStyle, colorPaletteIndex uint32, options graphicsdirect2d.D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
+func (self ID2D1DeviceContext4) DrawText(string_ string, stringLength uint32, textFormat graphicsdirectwriteidiom.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush ID2D1Brush, svgGlyphStyle ID2D1SvgGlyphStyle, colorPaletteIndex uint32, options graphicsdirect2d.D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
 	_string_ := win32.UTF16Ptr(string_)
-	self.Raw.DrawText(foundation.PWSTR(_string_), stringLength, textFormat, layoutRect, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, options, measuringMode)
+	self.Raw.DrawText(foundation.PWSTR(_string_), stringLength, textFormat.Raw, layoutRect, defaultFillBrush.Raw, svgGlyphStyle.Raw, colorPaletteIndex, options, measuringMode)
 }
 
 // ID2D1DeviceContext5 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1DeviceContext5 with error-returning methods.
@@ -1129,8 +1131,8 @@ func WrapID2D1DeviceContext5(raw *graphicsdirect2d.ID2D1DeviceContext5) ID2D1Dev
 }
 
 // DrawSvgDocument wraps the raw DrawSvgDocument call.
-func (self ID2D1DeviceContext5) DrawSvgDocument(svgDocument *graphicsdirect2d.ID2D1SvgDocument) {
-	self.Raw.DrawSvgDocument(svgDocument)
+func (self ID2D1DeviceContext5) DrawSvgDocument(svgDocument ID2D1SvgDocument) {
+	self.Raw.DrawSvgDocument(svgDocument.Raw)
 }
 
 // CreateColorContextFromDxgiColorSpace wraps the raw CreateColorContextFromDxgiColorSpace call.
@@ -1155,8 +1157,8 @@ func WrapID2D1DeviceContext6(raw *graphicsdirect2d.ID2D1DeviceContext6) ID2D1Dev
 }
 
 // BlendImage wraps the raw BlendImage call.
-func (self ID2D1DeviceContext6) BlendImage(image *graphicsdirect2d.ID2D1Image, blendMode graphicsdirect2dcommon.D2D1_BLEND_MODE, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode graphicsdirect2d.D2D1_INTERPOLATION_MODE) {
-	self.Raw.BlendImage(image, blendMode, targetOffset, imageRectangle, interpolationMode)
+func (self ID2D1DeviceContext6) BlendImage(image ID2D1Image, blendMode graphicsdirect2dcommon.D2D1_BLEND_MODE, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode graphicsdirect2d.D2D1_INTERPOLATION_MODE) {
+	self.Raw.BlendImage(image.Raw, blendMode, targetOffset, imageRectangle, interpolationMode)
 }
 
 // ID2D1DeviceContext7 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1DeviceContext7 with error-returning methods.
@@ -1192,8 +1194,8 @@ func (self ID2D1DrawInfo) SetPixelShaderConstantBuffer(buffer *byte, bufferCount
 }
 
 // SetResourceTexture wraps the raw SetResourceTexture call.
-func (self ID2D1DrawInfo) SetResourceTexture(textureIndex uint32, resourceTexture *graphicsdirect2d.ID2D1ResourceTexture) error {
-	return win32.HRESULTError(int32(self.Raw.SetResourceTexture(textureIndex, resourceTexture)))
+func (self ID2D1DrawInfo) SetResourceTexture(textureIndex uint32, resourceTexture ID2D1ResourceTexture) error {
+	return win32.HRESULTError(int32(self.Raw.SetResourceTexture(textureIndex, resourceTexture.Raw)))
 }
 
 // SetVertexShaderConstantBuffer wraps the raw SetVertexShaderConstantBuffer call.
@@ -1207,8 +1209,8 @@ func (self ID2D1DrawInfo) SetPixelShader(shaderId *win32.GUID, pixelOptions grap
 }
 
 // SetVertexProcessing wraps the raw SetVertexProcessing call.
-func (self ID2D1DrawInfo) SetVertexProcessing(vertexBuffer *graphicsdirect2d.ID2D1VertexBuffer, vertexOptions graphicsdirect2d.D2D1_VERTEX_OPTIONS, blendDescription *graphicsdirect2d.D2D1_BLEND_DESCRIPTION, vertexRange *graphicsdirect2d.D2D1_VERTEX_RANGE, vertexShader *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.SetVertexProcessing(vertexBuffer, vertexOptions, blendDescription, vertexRange, vertexShader)))
+func (self ID2D1DrawInfo) SetVertexProcessing(vertexBuffer ID2D1VertexBuffer, vertexOptions graphicsdirect2d.D2D1_VERTEX_OPTIONS, blendDescription *graphicsdirect2d.D2D1_BLEND_DESCRIPTION, vertexRange *graphicsdirect2d.D2D1_VERTEX_RANGE, vertexShader *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.SetVertexProcessing(vertexBuffer.Raw, vertexOptions, blendDescription, vertexRange, vertexShader)))
 }
 
 // ID2D1DrawTransform is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1DrawTransform with error-returning methods.
@@ -1223,8 +1225,8 @@ func WrapID2D1DrawTransform(raw *graphicsdirect2d.ID2D1DrawTransform) ID2D1DrawT
 }
 
 // SetDrawInfo wraps the raw SetDrawInfo call.
-func (self ID2D1DrawTransform) SetDrawInfo(drawInfo *graphicsdirect2d.ID2D1DrawInfo) error {
-	return win32.HRESULTError(int32(self.Raw.SetDrawInfo(drawInfo)))
+func (self ID2D1DrawTransform) SetDrawInfo(drawInfo ID2D1DrawInfo) error {
+	return win32.HRESULTError(int32(self.Raw.SetDrawInfo(drawInfo.Raw)))
 }
 
 // ID2D1DrawingStateBlock is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1DrawingStateBlock with error-returning methods.
@@ -1249,8 +1251,8 @@ func (self ID2D1DrawingStateBlock) SetDescription(stateDescription *graphicsdire
 }
 
 // SetTextRenderingParams wraps the raw SetTextRenderingParams call.
-func (self ID2D1DrawingStateBlock) SetTextRenderingParams(textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams) {
-	self.Raw.SetTextRenderingParams(textRenderingParams)
+func (self ID2D1DrawingStateBlock) SetTextRenderingParams(textRenderingParams graphicsdirectwriteidiom.IDWriteRenderingParams) {
+	self.Raw.SetTextRenderingParams(textRenderingParams.Raw)
 }
 
 // GetTextRenderingParams wraps the raw GetTextRenderingParams call.
@@ -1291,9 +1293,9 @@ func WrapID2D1Effect(raw *graphicsdirect2d.ID2D1Effect) ID2D1Effect {
 }
 
 // SetInput wraps the raw SetInput call.
-func (self ID2D1Effect) SetInput(index uint32, input *graphicsdirect2d.ID2D1Image, invalidate bool) {
+func (self ID2D1Effect) SetInput(index uint32, input ID2D1Image, invalidate bool) {
 	_invalidate := foundation.BOOL(win32.Bool32(invalidate))
-	self.Raw.SetInput(index, input, _invalidate)
+	self.Raw.SetInput(index, input.Raw, _invalidate)
 }
 
 // SetInputCount wraps the raw SetInputCount call.
@@ -1343,8 +1345,8 @@ func (self ID2D1EffectContext) GetMaximumSupportedFeatureLevel(featureLevels *gr
 }
 
 // CreateTransformNodeFromEffect wraps the raw CreateTransformNodeFromEffect call.
-func (self ID2D1EffectContext) CreateTransformNodeFromEffect(effect *graphicsdirect2d.ID2D1Effect, transformNode **graphicsdirect2d.ID2D1TransformNode) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTransformNodeFromEffect(effect, transformNode)))
+func (self ID2D1EffectContext) CreateTransformNodeFromEffect(effect ID2D1Effect, transformNode **graphicsdirect2d.ID2D1TransformNode) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTransformNodeFromEffect(effect.Raw, transformNode)))
 }
 
 // CreateBlendTransform wraps the raw CreateBlendTransform call.
@@ -1414,8 +1416,8 @@ func (self ID2D1EffectContext) CreateColorContextFromFilename(filename string, c
 }
 
 // CreateColorContextFromWicColorContext wraps the raw CreateColorContextFromWicColorContext call.
-func (self ID2D1EffectContext) CreateColorContextFromWicColorContext(wicColorContext *graphicsimaging.IWICColorContext, colorContext **graphicsdirect2d.ID2D1ColorContext) error {
-	return win32.HRESULTError(int32(self.Raw.CreateColorContextFromWicColorContext(wicColorContext, colorContext)))
+func (self ID2D1EffectContext) CreateColorContextFromWicColorContext(wicColorContext graphicsimagingidiom.IWICColorContext, colorContext **graphicsdirect2d.ID2D1ColorContext) error {
+	return win32.HRESULTError(int32(self.Raw.CreateColorContextFromWicColorContext(wicColorContext.Raw, colorContext)))
 }
 
 // CheckFeatureSupport wraps the raw CheckFeatureSupport call.
@@ -1477,8 +1479,8 @@ func WrapID2D1EffectImpl(raw *graphicsdirect2d.ID2D1EffectImpl) ID2D1EffectImpl 
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ID2D1EffectImpl) Initialize(effectContext *graphicsdirect2d.ID2D1EffectContext, transformGraph *graphicsdirect2d.ID2D1TransformGraph) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(effectContext, transformGraph)))
+func (self ID2D1EffectImpl) Initialize(effectContext ID2D1EffectContext, transformGraph ID2D1TransformGraph) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(effectContext.Raw, transformGraph.Raw)))
 }
 
 // PrepareForRender wraps the raw PrepareForRender call.
@@ -1487,8 +1489,8 @@ func (self ID2D1EffectImpl) PrepareForRender(changeType graphicsdirect2d.D2D1_CH
 }
 
 // SetGraph wraps the raw SetGraph call.
-func (self ID2D1EffectImpl) SetGraph(transformGraph *graphicsdirect2d.ID2D1TransformGraph) error {
-	return win32.HRESULTError(int32(self.Raw.SetGraph(transformGraph)))
+func (self ID2D1EffectImpl) SetGraph(transformGraph ID2D1TransformGraph) error {
+	return win32.HRESULTError(int32(self.Raw.SetGraph(transformGraph.Raw)))
 }
 
 // ID2D1EllipseGeometry is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1EllipseGeometry with error-returning methods.
@@ -1549,8 +1551,8 @@ func (self ID2D1Factory) CreateGeometryGroup(fillMode graphicsdirect2dcommon.D2D
 }
 
 // CreateTransformedGeometry wraps the raw CreateTransformedGeometry call.
-func (self ID2D1Factory) CreateTransformedGeometry(sourceGeometry *graphicsdirect2d.ID2D1Geometry, transform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, transformedGeometry **graphicsdirect2d.ID2D1TransformedGeometry) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTransformedGeometry(sourceGeometry, transform, transformedGeometry)))
+func (self ID2D1Factory) CreateTransformedGeometry(sourceGeometry ID2D1Geometry, transform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, transformedGeometry **graphicsdirect2d.ID2D1TransformedGeometry) error {
+	return win32.HRESULTError(int32(self.Raw.CreateTransformedGeometry(sourceGeometry.Raw, transform, transformedGeometry)))
 }
 
 // CreatePathGeometry wraps the raw CreatePathGeometry call.
@@ -1564,13 +1566,13 @@ func (self ID2D1Factory) CreateStrokeStyle(strokeStyleProperties *graphicsdirect
 }
 
 // CreateDrawingStateBlock wraps the raw CreateDrawingStateBlock call.
-func (self ID2D1Factory) CreateDrawingStateBlock(drawingStateDescription *graphicsdirect2d.D2D1_DRAWING_STATE_DESCRIPTION, textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams, drawingStateBlock **graphicsdirect2d.ID2D1DrawingStateBlock) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDrawingStateBlock(drawingStateDescription, textRenderingParams, drawingStateBlock)))
+func (self ID2D1Factory) CreateDrawingStateBlock(drawingStateDescription *graphicsdirect2d.D2D1_DRAWING_STATE_DESCRIPTION, textRenderingParams graphicsdirectwriteidiom.IDWriteRenderingParams, drawingStateBlock **graphicsdirect2d.ID2D1DrawingStateBlock) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDrawingStateBlock(drawingStateDescription, textRenderingParams.Raw, drawingStateBlock)))
 }
 
 // CreateWicBitmapRenderTarget wraps the raw CreateWicBitmapRenderTarget call.
-func (self ID2D1Factory) CreateWicBitmapRenderTarget(target *graphicsimaging.IWICBitmap, renderTargetProperties *graphicsdirect2d.D2D1_RENDER_TARGET_PROPERTIES, renderTarget **graphicsdirect2d.ID2D1RenderTarget) error {
-	return win32.HRESULTError(int32(self.Raw.CreateWicBitmapRenderTarget(target, renderTargetProperties, renderTarget)))
+func (self ID2D1Factory) CreateWicBitmapRenderTarget(target graphicsimagingidiom.IWICBitmap, renderTargetProperties *graphicsdirect2d.D2D1_RENDER_TARGET_PROPERTIES, renderTarget **graphicsdirect2d.ID2D1RenderTarget) error {
+	return win32.HRESULTError(int32(self.Raw.CreateWicBitmapRenderTarget(target.Raw, renderTargetProperties, renderTarget)))
 }
 
 // CreateHwndRenderTarget wraps the raw CreateHwndRenderTarget call.
@@ -1579,8 +1581,8 @@ func (self ID2D1Factory) CreateHwndRenderTarget(renderTargetProperties *graphics
 }
 
 // CreateDxgiSurfaceRenderTarget wraps the raw CreateDxgiSurfaceRenderTarget call.
-func (self ID2D1Factory) CreateDxgiSurfaceRenderTarget(dxgiSurface *graphicsdxgi.IDXGISurface, renderTargetProperties *graphicsdirect2d.D2D1_RENDER_TARGET_PROPERTIES, renderTarget **graphicsdirect2d.ID2D1RenderTarget) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDxgiSurfaceRenderTarget(dxgiSurface, renderTargetProperties, renderTarget)))
+func (self ID2D1Factory) CreateDxgiSurfaceRenderTarget(dxgiSurface graphicsdxgiidiom.IDXGISurface, renderTargetProperties *graphicsdirect2d.D2D1_RENDER_TARGET_PROPERTIES, renderTarget **graphicsdirect2d.ID2D1RenderTarget) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDxgiSurfaceRenderTarget(dxgiSurface.Raw, renderTargetProperties, renderTarget)))
 }
 
 // CreateDCRenderTarget wraps the raw CreateDCRenderTarget call.
@@ -1600,8 +1602,8 @@ func WrapID2D1Factory1(raw *graphicsdirect2d.ID2D1Factory1) ID2D1Factory1 {
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID2D1Factory1) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice **graphicsdirect2d.ID2D1Device) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice, d2dDevice)))
+func (self ID2D1Factory1) CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, d2dDevice **graphicsdirect2d.ID2D1Device) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice.Raw, d2dDevice)))
 }
 
 // CreateStrokeStyle wraps the raw CreateStrokeStyle call.
@@ -1615,18 +1617,18 @@ func (self ID2D1Factory1) CreatePathGeometry(pathGeometry **graphicsdirect2d.ID2
 }
 
 // CreateDrawingStateBlock wraps the raw CreateDrawingStateBlock call.
-func (self ID2D1Factory1) CreateDrawingStateBlock(drawingStateDescription *graphicsdirect2d.D2D1_DRAWING_STATE_DESCRIPTION1, textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams, drawingStateBlock **graphicsdirect2d.ID2D1DrawingStateBlock1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDrawingStateBlock(drawingStateDescription, textRenderingParams, drawingStateBlock)))
+func (self ID2D1Factory1) CreateDrawingStateBlock(drawingStateDescription *graphicsdirect2d.D2D1_DRAWING_STATE_DESCRIPTION1, textRenderingParams graphicsdirectwriteidiom.IDWriteRenderingParams, drawingStateBlock **graphicsdirect2d.ID2D1DrawingStateBlock1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDrawingStateBlock(drawingStateDescription, textRenderingParams.Raw, drawingStateBlock)))
 }
 
 // CreateGdiMetafile wraps the raw CreateGdiMetafile call.
-func (self ID2D1Factory1) CreateGdiMetafile(metafileStream *systemcom.IStream, metafile **graphicsdirect2d.ID2D1GdiMetafile) error {
-	return win32.HRESULTError(int32(self.Raw.CreateGdiMetafile(metafileStream, metafile)))
+func (self ID2D1Factory1) CreateGdiMetafile(metafileStream systemcomidiom.IStream, metafile **graphicsdirect2d.ID2D1GdiMetafile) error {
+	return win32.HRESULTError(int32(self.Raw.CreateGdiMetafile(metafileStream.Raw, metafile)))
 }
 
 // RegisterEffectFromStream wraps the raw RegisterEffectFromStream call.
-func (self ID2D1Factory1) RegisterEffectFromStream(classId *win32.GUID, propertyXml *systemcom.IStream, bindings *graphicsdirect2d.D2D1_PROPERTY_BINDING, bindingsCount uint32, effectFactory graphicsdirect2d.PD2D1_EFFECT_FACTORY) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterEffectFromStream(classId, propertyXml, bindings, bindingsCount, effectFactory)))
+func (self ID2D1Factory1) RegisterEffectFromStream(classId *win32.GUID, propertyXml systemcomidiom.IStream, bindings *graphicsdirect2d.D2D1_PROPERTY_BINDING, bindingsCount uint32, effectFactory graphicsdirect2d.PD2D1_EFFECT_FACTORY) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterEffectFromStream(classId, propertyXml.Raw, bindings, bindingsCount, effectFactory)))
 }
 
 // RegisterEffectFromString wraps the raw RegisterEffectFromString call.
@@ -1662,8 +1664,8 @@ func WrapID2D1Factory2(raw *graphicsdirect2d.ID2D1Factory2) ID2D1Factory2 {
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID2D1Factory2) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice1 **graphicsdirect2d.ID2D1Device1) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice, d2dDevice1)))
+func (self ID2D1Factory2) CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, d2dDevice1 **graphicsdirect2d.ID2D1Device1) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice.Raw, d2dDevice1)))
 }
 
 // ID2D1Factory3 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1Factory3 with error-returning methods.
@@ -1678,8 +1680,8 @@ func WrapID2D1Factory3(raw *graphicsdirect2d.ID2D1Factory3) ID2D1Factory3 {
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID2D1Factory3) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice2 **graphicsdirect2d.ID2D1Device2) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice, d2dDevice2)))
+func (self ID2D1Factory3) CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, d2dDevice2 **graphicsdirect2d.ID2D1Device2) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice.Raw, d2dDevice2)))
 }
 
 // ID2D1Factory4 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1Factory4 with error-returning methods.
@@ -1694,8 +1696,8 @@ func WrapID2D1Factory4(raw *graphicsdirect2d.ID2D1Factory4) ID2D1Factory4 {
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID2D1Factory4) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice3 **graphicsdirect2d.ID2D1Device3) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice, d2dDevice3)))
+func (self ID2D1Factory4) CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, d2dDevice3 **graphicsdirect2d.ID2D1Device3) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice.Raw, d2dDevice3)))
 }
 
 // ID2D1Factory5 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1Factory5 with error-returning methods.
@@ -1710,8 +1712,8 @@ func WrapID2D1Factory5(raw *graphicsdirect2d.ID2D1Factory5) ID2D1Factory5 {
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID2D1Factory5) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice4 **graphicsdirect2d.ID2D1Device4) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice, d2dDevice4)))
+func (self ID2D1Factory5) CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, d2dDevice4 **graphicsdirect2d.ID2D1Device4) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice.Raw, d2dDevice4)))
 }
 
 // ID2D1Factory6 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1Factory6 with error-returning methods.
@@ -1726,8 +1728,8 @@ func WrapID2D1Factory6(raw *graphicsdirect2d.ID2D1Factory6) ID2D1Factory6 {
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID2D1Factory6) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice5 **graphicsdirect2d.ID2D1Device5) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice, d2dDevice5)))
+func (self ID2D1Factory6) CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, d2dDevice5 **graphicsdirect2d.ID2D1Device5) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice.Raw, d2dDevice5)))
 }
 
 // ID2D1Factory7 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1Factory7 with error-returning methods.
@@ -1742,8 +1744,8 @@ func WrapID2D1Factory7(raw *graphicsdirect2d.ID2D1Factory7) ID2D1Factory7 {
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID2D1Factory7) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice6 **graphicsdirect2d.ID2D1Device6) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice, d2dDevice6)))
+func (self ID2D1Factory7) CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, d2dDevice6 **graphicsdirect2d.ID2D1Device6) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice.Raw, d2dDevice6)))
 }
 
 // ID2D1Factory8 is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1Factory8 with error-returning methods.
@@ -1758,8 +1760,8 @@ func WrapID2D1Factory8(raw *graphicsdirect2d.ID2D1Factory8) ID2D1Factory8 {
 }
 
 // CreateDevice wraps the raw CreateDevice call.
-func (self ID2D1Factory8) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice6 **graphicsdirect2d.ID2D1Device7) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice, d2dDevice6)))
+func (self ID2D1Factory8) CreateDevice(dxgiDevice graphicsdxgiidiom.IDXGIDevice, d2dDevice6 **graphicsdirect2d.ID2D1Device7) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDevice(dxgiDevice.Raw, d2dDevice6)))
 }
 
 // ID2D1GdiInteropRenderTarget is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1GdiInteropRenderTarget with error-returning methods.
@@ -1795,8 +1797,8 @@ func WrapID2D1GdiMetafile(raw *graphicsdirect2d.ID2D1GdiMetafile) ID2D1GdiMetafi
 }
 
 // Stream wraps the raw Stream call.
-func (self ID2D1GdiMetafile) Stream(sink *graphicsdirect2d.ID2D1GdiMetafileSink) error {
-	return win32.HRESULTError(int32(self.Raw.Stream(sink)))
+func (self ID2D1GdiMetafile) Stream(sink ID2D1GdiMetafileSink) error {
+	return win32.HRESULTError(int32(self.Raw.Stream(sink.Raw)))
 }
 
 // GetBounds wraps the raw GetBounds call.
@@ -2078,8 +2080,8 @@ func WrapID2D1ImageBrush(raw *graphicsdirect2d.ID2D1ImageBrush) ID2D1ImageBrush 
 }
 
 // SetImage wraps the raw SetImage call.
-func (self ID2D1ImageBrush) SetImage(image *graphicsdirect2d.ID2D1Image) {
-	self.Raw.SetImage(image)
+func (self ID2D1ImageBrush) SetImage(image ID2D1Image) {
+	self.Raw.SetImage(image.Raw)
 }
 
 // SetExtendModeX wraps the raw SetExtendModeX call.
@@ -2221,8 +2223,8 @@ func (self ID2D1Ink) GetSegments(startSegment uint32, segments *graphicsdirect2d
 }
 
 // GetBounds wraps the raw GetBounds call.
-func (self ID2D1Ink) GetBounds(inkStyle *graphicsdirect2d.ID2D1InkStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
-	return win32.HRESULTError(int32(self.Raw.GetBounds(inkStyle, worldTransform, bounds)))
+func (self ID2D1Ink) GetBounds(inkStyle ID2D1InkStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
+	return win32.HRESULTError(int32(self.Raw.GetBounds(inkStyle.Raw, worldTransform, bounds)))
 }
 
 // ID2D1InkStyle is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1InkStyle with error-returning methods.
@@ -2364,8 +2366,8 @@ func (self ID2D1PathGeometry) Open(geometrySink **graphicsdirect2d.ID2D1Geometry
 }
 
 // Stream wraps the raw Stream call.
-func (self ID2D1PathGeometry) Stream(geometrySink *graphicsdirect2d.ID2D1GeometrySink) error {
-	return win32.HRESULTError(int32(self.Raw.Stream(geometrySink)))
+func (self ID2D1PathGeometry) Stream(geometrySink ID2D1GeometrySink) error {
+	return win32.HRESULTError(int32(self.Raw.Stream(geometrySink.Raw)))
 }
 
 // GetSegmentCount wraps the raw GetSegmentCount call.
@@ -2545,8 +2547,8 @@ func WrapID2D1RenderTarget(raw *graphicsdirect2d.ID2D1RenderTarget) ID2D1RenderT
 }
 
 // CreateBitmapFromWicBitmap wraps the raw CreateBitmapFromWicBitmap call.
-func (self ID2D1RenderTarget) CreateBitmapFromWicBitmap(wicBitmapSource *graphicsimaging.IWICBitmapSource, bitmapProperties *graphicsdirect2d.D2D1_BITMAP_PROPERTIES, bitmap **graphicsdirect2d.ID2D1Bitmap) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromWicBitmap(wicBitmapSource, bitmapProperties, bitmap)))
+func (self ID2D1RenderTarget) CreateBitmapFromWicBitmap(wicBitmapSource graphicsimagingidiom.IWICBitmapSource, bitmapProperties *graphicsdirect2d.D2D1_BITMAP_PROPERTIES, bitmap **graphicsdirect2d.ID2D1Bitmap) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBitmapFromWicBitmap(wicBitmapSource.Raw, bitmapProperties, bitmap)))
 }
 
 // CreateSharedBitmap wraps the raw CreateSharedBitmap call.
@@ -2555,8 +2557,8 @@ func (self ID2D1RenderTarget) CreateSharedBitmap(riid *win32.GUID, data unsafe.P
 }
 
 // CreateBitmapBrush wraps the raw CreateBitmapBrush call.
-func (self ID2D1RenderTarget) CreateBitmapBrush(bitmap *graphicsdirect2d.ID2D1Bitmap, bitmapBrushProperties *graphicsdirect2d.D2D1_BITMAP_BRUSH_PROPERTIES, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, bitmapBrush **graphicsdirect2d.ID2D1BitmapBrush) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBitmapBrush(bitmap, bitmapBrushProperties, brushProperties, bitmapBrush)))
+func (self ID2D1RenderTarget) CreateBitmapBrush(bitmap ID2D1Bitmap, bitmapBrushProperties *graphicsdirect2d.D2D1_BITMAP_BRUSH_PROPERTIES, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, bitmapBrush **graphicsdirect2d.ID2D1BitmapBrush) error {
+	return win32.HRESULTError(int32(self.Raw.CreateBitmapBrush(bitmap.Raw, bitmapBrushProperties, brushProperties, bitmapBrush)))
 }
 
 // CreateSolidColorBrush wraps the raw CreateSolidColorBrush call.
@@ -2570,13 +2572,13 @@ func (self ID2D1RenderTarget) CreateGradientStopCollection(gradientStops *graphi
 }
 
 // CreateLinearGradientBrush wraps the raw CreateLinearGradientBrush call.
-func (self ID2D1RenderTarget) CreateLinearGradientBrush(linearGradientBrushProperties *graphicsdirect2d.D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, gradientStopCollection *graphicsdirect2d.ID2D1GradientStopCollection, linearGradientBrush **graphicsdirect2d.ID2D1LinearGradientBrush) error {
-	return win32.HRESULTError(int32(self.Raw.CreateLinearGradientBrush(linearGradientBrushProperties, brushProperties, gradientStopCollection, linearGradientBrush)))
+func (self ID2D1RenderTarget) CreateLinearGradientBrush(linearGradientBrushProperties *graphicsdirect2d.D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, gradientStopCollection ID2D1GradientStopCollection, linearGradientBrush **graphicsdirect2d.ID2D1LinearGradientBrush) error {
+	return win32.HRESULTError(int32(self.Raw.CreateLinearGradientBrush(linearGradientBrushProperties, brushProperties, gradientStopCollection.Raw, linearGradientBrush)))
 }
 
 // CreateRadialGradientBrush wraps the raw CreateRadialGradientBrush call.
-func (self ID2D1RenderTarget) CreateRadialGradientBrush(radialGradientBrushProperties *graphicsdirect2d.D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, gradientStopCollection *graphicsdirect2d.ID2D1GradientStopCollection, radialGradientBrush **graphicsdirect2d.ID2D1RadialGradientBrush) error {
-	return win32.HRESULTError(int32(self.Raw.CreateRadialGradientBrush(radialGradientBrushProperties, brushProperties, gradientStopCollection, radialGradientBrush)))
+func (self ID2D1RenderTarget) CreateRadialGradientBrush(radialGradientBrushProperties *graphicsdirect2d.D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES, brushProperties *graphicsdirect2d.D2D1_BRUSH_PROPERTIES, gradientStopCollection ID2D1GradientStopCollection, radialGradientBrush **graphicsdirect2d.ID2D1RadialGradientBrush) error {
+	return win32.HRESULTError(int32(self.Raw.CreateRadialGradientBrush(radialGradientBrushProperties, brushProperties, gradientStopCollection.Raw, radialGradientBrush)))
 }
 
 // CreateCompatibleRenderTarget wraps the raw CreateCompatibleRenderTarget call.
@@ -2595,39 +2597,39 @@ func (self ID2D1RenderTarget) CreateMesh(mesh **graphicsdirect2d.ID2D1Mesh) erro
 }
 
 // FillRectangle wraps the raw FillRectangle call.
-func (self ID2D1RenderTarget) FillRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush *graphicsdirect2d.ID2D1Brush) {
-	self.Raw.FillRectangle(rect, brush)
+func (self ID2D1RenderTarget) FillRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush ID2D1Brush) {
+	self.Raw.FillRectangle(rect, brush.Raw)
 }
 
 // FillRoundedRectangle wraps the raw FillRoundedRectangle call.
-func (self ID2D1RenderTarget) FillRoundedRectangle(roundedRect *graphicsdirect2d.D2D1_ROUNDED_RECT, brush *graphicsdirect2d.ID2D1Brush) {
-	self.Raw.FillRoundedRectangle(roundedRect, brush)
+func (self ID2D1RenderTarget) FillRoundedRectangle(roundedRect *graphicsdirect2d.D2D1_ROUNDED_RECT, brush ID2D1Brush) {
+	self.Raw.FillRoundedRectangle(roundedRect, brush.Raw)
 }
 
 // FillEllipse wraps the raw FillEllipse call.
-func (self ID2D1RenderTarget) FillEllipse(ellipse *graphicsdirect2d.D2D1_ELLIPSE, brush *graphicsdirect2d.ID2D1Brush) {
-	self.Raw.FillEllipse(ellipse, brush)
+func (self ID2D1RenderTarget) FillEllipse(ellipse *graphicsdirect2d.D2D1_ELLIPSE, brush ID2D1Brush) {
+	self.Raw.FillEllipse(ellipse, brush.Raw)
 }
 
 // FillGeometry wraps the raw FillGeometry call.
-func (self ID2D1RenderTarget) FillGeometry(geometry *graphicsdirect2d.ID2D1Geometry, brush *graphicsdirect2d.ID2D1Brush, opacityBrush *graphicsdirect2d.ID2D1Brush) {
-	self.Raw.FillGeometry(geometry, brush, opacityBrush)
+func (self ID2D1RenderTarget) FillGeometry(geometry ID2D1Geometry, brush ID2D1Brush, opacityBrush ID2D1Brush) {
+	self.Raw.FillGeometry(geometry.Raw, brush.Raw, opacityBrush.Raw)
 }
 
 // FillMesh wraps the raw FillMesh call.
-func (self ID2D1RenderTarget) FillMesh(mesh *graphicsdirect2d.ID2D1Mesh, brush *graphicsdirect2d.ID2D1Brush) {
-	self.Raw.FillMesh(mesh, brush)
+func (self ID2D1RenderTarget) FillMesh(mesh ID2D1Mesh, brush ID2D1Brush) {
+	self.Raw.FillMesh(mesh.Raw, brush.Raw)
 }
 
 // FillOpacityMask wraps the raw FillOpacityMask call.
-func (self ID2D1RenderTarget) FillOpacityMask(opacityMask *graphicsdirect2d.ID2D1Bitmap, brush *graphicsdirect2d.ID2D1Brush, content graphicsdirect2d.D2D1_OPACITY_MASK_CONTENT, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) {
-	self.Raw.FillOpacityMask(opacityMask, brush, content, destinationRectangle, sourceRectangle)
+func (self ID2D1RenderTarget) FillOpacityMask(opacityMask ID2D1Bitmap, brush ID2D1Brush, content graphicsdirect2d.D2D1_OPACITY_MASK_CONTENT, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) {
+	self.Raw.FillOpacityMask(opacityMask.Raw, brush.Raw, content, destinationRectangle, sourceRectangle)
 }
 
 // DrawText wraps the raw DrawText call.
-func (self ID2D1RenderTarget) DrawText(string_ string, stringLength uint32, textFormat *graphicsdirectwrite.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush *graphicsdirect2d.ID2D1Brush, options graphicsdirect2d.D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
+func (self ID2D1RenderTarget) DrawText(string_ string, stringLength uint32, textFormat graphicsdirectwriteidiom.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush ID2D1Brush, options graphicsdirect2d.D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
 	_string_ := win32.UTF16Ptr(string_)
-	self.Raw.DrawText(foundation.PWSTR(_string_), stringLength, textFormat, layoutRect, defaultFillBrush, options, measuringMode)
+	self.Raw.DrawText(foundation.PWSTR(_string_), stringLength, textFormat.Raw, layoutRect, defaultFillBrush.Raw, options, measuringMode)
 }
 
 // SetTransform wraps the raw SetTransform call.
@@ -2661,8 +2663,8 @@ func (self ID2D1RenderTarget) GetTextAntialiasMode() graphicsdirect2d.D2D1_TEXT_
 }
 
 // SetTextRenderingParams wraps the raw SetTextRenderingParams call.
-func (self ID2D1RenderTarget) SetTextRenderingParams(textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams) {
-	self.Raw.SetTextRenderingParams(textRenderingParams)
+func (self ID2D1RenderTarget) SetTextRenderingParams(textRenderingParams graphicsdirectwriteidiom.IDWriteRenderingParams) {
+	self.Raw.SetTextRenderingParams(textRenderingParams.Raw)
 }
 
 // GetTextRenderingParams wraps the raw GetTextRenderingParams call.
@@ -2681,8 +2683,8 @@ func (self ID2D1RenderTarget) GetTags(tag1 *uint64, tag2 *uint64) {
 }
 
 // PushLayer wraps the raw PushLayer call.
-func (self ID2D1RenderTarget) PushLayer(layerParameters *graphicsdirect2d.D2D1_LAYER_PARAMETERS, layer *graphicsdirect2d.ID2D1Layer) {
-	self.Raw.PushLayer(layerParameters, layer)
+func (self ID2D1RenderTarget) PushLayer(layerParameters *graphicsdirect2d.D2D1_LAYER_PARAMETERS, layer ID2D1Layer) {
+	self.Raw.PushLayer(layerParameters, layer.Raw)
 }
 
 // PopLayer wraps the raw PopLayer call.
@@ -2696,13 +2698,13 @@ func (self ID2D1RenderTarget) Flush(tag1 *uint64, tag2 *uint64) error {
 }
 
 // SaveDrawingState wraps the raw SaveDrawingState call.
-func (self ID2D1RenderTarget) SaveDrawingState(drawingStateBlock *graphicsdirect2d.ID2D1DrawingStateBlock) {
-	self.Raw.SaveDrawingState(drawingStateBlock)
+func (self ID2D1RenderTarget) SaveDrawingState(drawingStateBlock ID2D1DrawingStateBlock) {
+	self.Raw.SaveDrawingState(drawingStateBlock.Raw)
 }
 
 // RestoreDrawingState wraps the raw RestoreDrawingState call.
-func (self ID2D1RenderTarget) RestoreDrawingState(drawingStateBlock *graphicsdirect2d.ID2D1DrawingStateBlock) {
-	self.Raw.RestoreDrawingState(drawingStateBlock)
+func (self ID2D1RenderTarget) RestoreDrawingState(drawingStateBlock ID2D1DrawingStateBlock) {
+	self.Raw.RestoreDrawingState(drawingStateBlock.Raw)
 }
 
 // PushAxisAlignedClip wraps the raw PushAxisAlignedClip call.
@@ -2821,8 +2823,8 @@ func WrapID2D1SourceTransform(raw *graphicsdirect2d.ID2D1SourceTransform) ID2D1S
 }
 
 // SetRenderInfo wraps the raw SetRenderInfo call.
-func (self ID2D1SourceTransform) SetRenderInfo(renderInfo *graphicsdirect2d.ID2D1RenderInfo) error {
-	return win32.HRESULTError(int32(self.Raw.SetRenderInfo(renderInfo)))
+func (self ID2D1SourceTransform) SetRenderInfo(renderInfo ID2D1RenderInfo) error {
+	return win32.HRESULTError(int32(self.Raw.SetRenderInfo(renderInfo.Raw)))
 }
 
 // ID2D1SpriteBatch is an idiomatic wrapper over the raw COM interface Graphics.Direct2D.ID2D1SpriteBatch with error-returning methods.
@@ -2956,8 +2958,8 @@ func WrapID2D1SvgDocument(raw *graphicsdirect2d.ID2D1SvgDocument) ID2D1SvgDocume
 }
 
 // SetRoot wraps the raw SetRoot call.
-func (self ID2D1SvgDocument) SetRoot(root *graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.SetRoot(root)))
+func (self ID2D1SvgDocument) SetRoot(root ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.SetRoot(root.Raw)))
 }
 
 // GetRoot wraps the raw GetRoot call.
@@ -2972,13 +2974,13 @@ func (self ID2D1SvgDocument) FindElementById(id string, svgElement **graphicsdir
 }
 
 // Serialize wraps the raw Serialize call.
-func (self ID2D1SvgDocument) Serialize(outputXmlStream *systemcom.IStream, subtree *graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.Serialize(outputXmlStream, subtree)))
+func (self ID2D1SvgDocument) Serialize(outputXmlStream systemcomidiom.IStream, subtree ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.Serialize(outputXmlStream.Raw, subtree.Raw)))
 }
 
 // Deserialize wraps the raw Deserialize call.
-func (self ID2D1SvgDocument) Deserialize(inputXmlStream *systemcom.IStream, subtree **graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.Deserialize(inputXmlStream, subtree)))
+func (self ID2D1SvgDocument) Deserialize(inputXmlStream systemcomidiom.IStream, subtree **graphicsdirect2d.ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.Deserialize(inputXmlStream.Raw, subtree)))
 }
 
 // CreatePaint wraps the raw CreatePaint call.
@@ -3054,33 +3056,33 @@ func (self ID2D1SvgElement) GetLastChild(child **graphicsdirect2d.ID2D1SvgElemen
 }
 
 // GetPreviousChild wraps the raw GetPreviousChild call.
-func (self ID2D1SvgElement) GetPreviousChild(referenceChild *graphicsdirect2d.ID2D1SvgElement, previousChild **graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreviousChild(referenceChild, previousChild)))
+func (self ID2D1SvgElement) GetPreviousChild(referenceChild ID2D1SvgElement, previousChild **graphicsdirect2d.ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.GetPreviousChild(referenceChild.Raw, previousChild)))
 }
 
 // GetNextChild wraps the raw GetNextChild call.
-func (self ID2D1SvgElement) GetNextChild(referenceChild *graphicsdirect2d.ID2D1SvgElement, nextChild **graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetNextChild(referenceChild, nextChild)))
+func (self ID2D1SvgElement) GetNextChild(referenceChild ID2D1SvgElement, nextChild **graphicsdirect2d.ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.GetNextChild(referenceChild.Raw, nextChild)))
 }
 
 // InsertChildBefore wraps the raw InsertChildBefore call.
-func (self ID2D1SvgElement) InsertChildBefore(newChild *graphicsdirect2d.ID2D1SvgElement, referenceChild *graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.InsertChildBefore(newChild, referenceChild)))
+func (self ID2D1SvgElement) InsertChildBefore(newChild ID2D1SvgElement, referenceChild ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.InsertChildBefore(newChild.Raw, referenceChild.Raw)))
 }
 
 // AppendChild wraps the raw AppendChild call.
-func (self ID2D1SvgElement) AppendChild(newChild *graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.AppendChild(newChild)))
+func (self ID2D1SvgElement) AppendChild(newChild ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.AppendChild(newChild.Raw)))
 }
 
 // ReplaceChild wraps the raw ReplaceChild call.
-func (self ID2D1SvgElement) ReplaceChild(newChild *graphicsdirect2d.ID2D1SvgElement, oldChild *graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.ReplaceChild(newChild, oldChild)))
+func (self ID2D1SvgElement) ReplaceChild(newChild ID2D1SvgElement, oldChild ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.ReplaceChild(newChild.Raw, oldChild.Raw)))
 }
 
 // RemoveChild wraps the raw RemoveChild call.
-func (self ID2D1SvgElement) RemoveChild(oldChild *graphicsdirect2d.ID2D1SvgElement) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveChild(oldChild)))
+func (self ID2D1SvgElement) RemoveChild(oldChild ID2D1SvgElement) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveChild(oldChild.Raw)))
 }
 
 // CreateChild wraps the raw CreateChild call.
@@ -3133,9 +3135,9 @@ func (self ID2D1SvgElement) GetTextValueLength() uint32 {
 }
 
 // SetAttributeValue wraps the raw SetAttributeValue call.
-func (self ID2D1SvgElement) SetAttributeValue(name string, value *graphicsdirect2d.ID2D1SvgAttribute) error {
+func (self ID2D1SvgElement) SetAttributeValue(name string, value ID2D1SvgAttribute) error {
 	_name := win32.UTF16Ptr(name)
-	return win32.HRESULTError(int32(self.Raw.SetAttributeValue(foundation.PWSTR(_name), value)))
+	return win32.HRESULTError(int32(self.Raw.SetAttributeValue(foundation.PWSTR(_name), value.Raw)))
 }
 
 // SetAttributeValue wraps the raw SetAttributeValue_ call.
@@ -3187,8 +3189,8 @@ func WrapID2D1SvgGlyphStyle(raw *graphicsdirect2d.ID2D1SvgGlyphStyle) ID2D1SvgGl
 }
 
 // SetFill wraps the raw SetFill call.
-func (self ID2D1SvgGlyphStyle) SetFill(brush *graphicsdirect2d.ID2D1Brush) error {
-	return win32.HRESULTError(int32(self.Raw.SetFill(brush)))
+func (self ID2D1SvgGlyphStyle) SetFill(brush ID2D1Brush) error {
+	return win32.HRESULTError(int32(self.Raw.SetFill(brush.Raw)))
 }
 
 // GetFill wraps the raw GetFill call.
@@ -3440,33 +3442,33 @@ func (self ID2D1TransformGraph) GetInputCount() uint32 {
 }
 
 // SetSingleTransformNode wraps the raw SetSingleTransformNode call.
-func (self ID2D1TransformGraph) SetSingleTransformNode(node *graphicsdirect2d.ID2D1TransformNode) error {
-	return win32.HRESULTError(int32(self.Raw.SetSingleTransformNode(node)))
+func (self ID2D1TransformGraph) SetSingleTransformNode(node ID2D1TransformNode) error {
+	return win32.HRESULTError(int32(self.Raw.SetSingleTransformNode(node.Raw)))
 }
 
 // AddNode wraps the raw AddNode call.
-func (self ID2D1TransformGraph) AddNode(node *graphicsdirect2d.ID2D1TransformNode) error {
-	return win32.HRESULTError(int32(self.Raw.AddNode(node)))
+func (self ID2D1TransformGraph) AddNode(node ID2D1TransformNode) error {
+	return win32.HRESULTError(int32(self.Raw.AddNode(node.Raw)))
 }
 
 // RemoveNode wraps the raw RemoveNode call.
-func (self ID2D1TransformGraph) RemoveNode(node *graphicsdirect2d.ID2D1TransformNode) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveNode(node)))
+func (self ID2D1TransformGraph) RemoveNode(node ID2D1TransformNode) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveNode(node.Raw)))
 }
 
 // SetOutputNode wraps the raw SetOutputNode call.
-func (self ID2D1TransformGraph) SetOutputNode(node *graphicsdirect2d.ID2D1TransformNode) error {
-	return win32.HRESULTError(int32(self.Raw.SetOutputNode(node)))
+func (self ID2D1TransformGraph) SetOutputNode(node ID2D1TransformNode) error {
+	return win32.HRESULTError(int32(self.Raw.SetOutputNode(node.Raw)))
 }
 
 // ConnectNode wraps the raw ConnectNode call.
-func (self ID2D1TransformGraph) ConnectNode(fromNode *graphicsdirect2d.ID2D1TransformNode, toNode *graphicsdirect2d.ID2D1TransformNode, toNodeInputIndex uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectNode(fromNode, toNode, toNodeInputIndex)))
+func (self ID2D1TransformGraph) ConnectNode(fromNode ID2D1TransformNode, toNode ID2D1TransformNode, toNodeInputIndex uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectNode(fromNode.Raw, toNode.Raw, toNodeInputIndex)))
 }
 
 // ConnectToEffectInput wraps the raw ConnectToEffectInput call.
-func (self ID2D1TransformGraph) ConnectToEffectInput(toEffectInputIndex uint32, node *graphicsdirect2d.ID2D1TransformNode, toNodeInputIndex uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectToEffectInput(toEffectInputIndex, node, toNodeInputIndex)))
+func (self ID2D1TransformGraph) ConnectToEffectInput(toEffectInputIndex uint32, node ID2D1TransformNode, toNodeInputIndex uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectToEffectInput(toEffectInputIndex, node.Raw, toNodeInputIndex)))
 }
 
 // Clear wraps the raw Clear call.

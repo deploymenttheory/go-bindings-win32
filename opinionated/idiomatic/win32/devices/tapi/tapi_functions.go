@@ -10,15 +10,15 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	devicestapi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/tapi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemaddressbook "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/addressbook"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	systemaddressbookidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/addressbook"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // GetTnefStreamCodepage wraps the raw GetTnefStreamCodepage call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/gettnefstreamcodepage
-func GetTnefStreamCodepage(lpStream *systemcom.IStream, lpulCodepage *uint32, lpulSubCodepage *uint32) error {
-	return win32.HRESULTError(int32(devicestapi.GetTnefStreamCodepage(lpStream, lpulCodepage, lpulSubCodepage)))
+func GetTnefStreamCodepage(lpStream systemcomidiom.IStream, lpulCodepage *uint32, lpulSubCodepage *uint32) error {
+	return win32.HRESULTError(int32(devicestapi.GetTnefStreamCodepage(lpStream.Raw, lpulCodepage, lpulSubCodepage)))
 }
 
 // LineAddProvider wraps the raw LineAddProviderW call with idiomatic Go types.
@@ -328,14 +328,14 @@ func LineUnpark(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddre
 
 // OpenTnefStream wraps the raw OpenTnefStream call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstream
-func OpenTnefStream(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lppTNEF **devicestapi.ITnef) error {
-	return win32.HRESULTError(int32(devicestapi.OpenTnefStream(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lppTNEF)))
+func OpenTnefStream(lpvSupport unsafe.Pointer, lpStream systemcomidiom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage systemaddressbookidiom.IMessage, wKeyVal uint16, lppTNEF **devicestapi.ITnef) error {
+	return win32.HRESULTError(int32(devicestapi.OpenTnefStream(lpvSupport, lpStream.Raw, lpszStreamName, ulFlags, lpMessage.Raw, wKeyVal, lppTNEF)))
 }
 
 // OpenTnefStreamEx wraps the raw OpenTnefStreamEx call with idiomatic Go types.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstreamex
-func OpenTnefStreamEx(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lpAdressBook *systemaddressbook.IAddrBook, lppTNEF **devicestapi.ITnef) error {
-	return win32.HRESULTError(int32(devicestapi.OpenTnefStreamEx(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lpAdressBook, lppTNEF)))
+func OpenTnefStreamEx(lpvSupport unsafe.Pointer, lpStream systemcomidiom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage systemaddressbookidiom.IMessage, wKeyVal uint16, lpAdressBook systemaddressbookidiom.IAddrBook, lppTNEF **devicestapi.ITnef) error {
+	return win32.HRESULTError(int32(devicestapi.OpenTnefStreamEx(lpvSupport, lpStream.Raw, lpszStreamName, ulFlags, lpMessage.Raw, wKeyVal, lpAdressBook.Raw, lppTNEF)))
 }
 
 // PhoneConfigDialog wraps the raw PhoneConfigDialogW call with idiomatic Go types.

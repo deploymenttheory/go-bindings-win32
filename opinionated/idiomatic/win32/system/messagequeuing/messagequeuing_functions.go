@@ -14,6 +14,7 @@ import (
 	systemdistributedtransactioncoordinator "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/distributedtransactioncoordinator"
 	systemio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/io"
 	systemmessagequeuing "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/messagequeuing"
+	systemdistributedtransactioncoordinatoridiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/distributedtransactioncoordinator"
 )
 
 // MQADsPathToFormatName wraps the raw MQADsPathToFormatName call with idiomatic Go types.
@@ -139,8 +140,8 @@ func MQMgmtGetInfo(pComputerName string, pObjectName string, pMgmtProps *systemm
 }
 
 // MQMoveMessage wraps the raw MQMoveMessage call with idiomatic Go types.
-func MQMoveMessage(hSourceQueue uintptr, hDestinationQueue uintptr, ullLookupId uint64, pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
-	return win32.HRESULTError(int32(systemmessagequeuing.MQMoveMessage(hSourceQueue, hDestinationQueue, ullLookupId, pTransaction)))
+func MQMoveMessage(hSourceQueue uintptr, hDestinationQueue uintptr, ullLookupId uint64, pTransaction systemdistributedtransactioncoordinatoridiom.ITransaction) error {
+	return win32.HRESULTError(int32(systemmessagequeuing.MQMoveMessage(hSourceQueue, hDestinationQueue, ullLookupId, pTransaction.Raw)))
 }
 
 // MQOpenQueue wraps the raw MQOpenQueue call with idiomatic Go types.
@@ -161,13 +162,13 @@ func MQPurgeQueue(hQueue uintptr) error {
 }
 
 // MQReceiveMessage wraps the raw MQReceiveMessage call with idiomatic Go types.
-func MQReceiveMessage(hSource uintptr, dwTimeout uint32, dwAction uint32, pMessageProps *systemmessagequeuing.MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback systemmessagequeuing.PMQRECEIVECALLBACK, hCursor foundation.HANDLE, pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
-	return win32.HRESULTError(int32(systemmessagequeuing.MQReceiveMessage(hSource, dwTimeout, dwAction, pMessageProps, lpOverlapped, fnReceiveCallback, hCursor, pTransaction)))
+func MQReceiveMessage(hSource uintptr, dwTimeout uint32, dwAction uint32, pMessageProps *systemmessagequeuing.MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback systemmessagequeuing.PMQRECEIVECALLBACK, hCursor foundation.HANDLE, pTransaction systemdistributedtransactioncoordinatoridiom.ITransaction) error {
+	return win32.HRESULTError(int32(systemmessagequeuing.MQReceiveMessage(hSource, dwTimeout, dwAction, pMessageProps, lpOverlapped, fnReceiveCallback, hCursor, pTransaction.Raw)))
 }
 
 // MQReceiveMessageByLookupId wraps the raw MQReceiveMessageByLookupId call with idiomatic Go types.
-func MQReceiveMessageByLookupId(hSource uintptr, ullLookupId uint64, dwLookupAction uint32, pMessageProps *systemmessagequeuing.MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback systemmessagequeuing.PMQRECEIVECALLBACK, pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
-	return win32.HRESULTError(int32(systemmessagequeuing.MQReceiveMessageByLookupId(hSource, ullLookupId, dwLookupAction, pMessageProps, lpOverlapped, fnReceiveCallback, pTransaction)))
+func MQReceiveMessageByLookupId(hSource uintptr, ullLookupId uint64, dwLookupAction uint32, pMessageProps *systemmessagequeuing.MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback systemmessagequeuing.PMQRECEIVECALLBACK, pTransaction systemdistributedtransactioncoordinatoridiom.ITransaction) error {
+	return win32.HRESULTError(int32(systemmessagequeuing.MQReceiveMessageByLookupId(hSource, ullLookupId, dwLookupAction, pMessageProps, lpOverlapped, fnReceiveCallback, pTransaction.Raw)))
 }
 
 // MQRegisterCertificate wraps the raw MQRegisterCertificate call with idiomatic Go types.
@@ -176,8 +177,8 @@ func MQRegisterCertificate(dwFlags uint32, lpCertBuffer unsafe.Pointer, dwCertBu
 }
 
 // MQSendMessage wraps the raw MQSendMessage call with idiomatic Go types.
-func MQSendMessage(hDestinationQueue uintptr, pMessageProps *systemmessagequeuing.MQMSGPROPS, pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
-	return win32.HRESULTError(int32(systemmessagequeuing.MQSendMessage(hDestinationQueue, pMessageProps, pTransaction)))
+func MQSendMessage(hDestinationQueue uintptr, pMessageProps *systemmessagequeuing.MQMSGPROPS, pTransaction systemdistributedtransactioncoordinatoridiom.ITransaction) error {
+	return win32.HRESULTError(int32(systemmessagequeuing.MQSendMessage(hDestinationQueue, pMessageProps, pTransaction.Raw)))
 }
 
 // MQSetQueueProperties wraps the raw MQSetQueueProperties call with idiomatic Go types.

@@ -6,9 +6,8 @@ package pdf
 
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	graphicsdirect2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemwinrtpdf "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/pdf"
+	graphicsdirect2didiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct2d"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -24,6 +23,6 @@ func WrapIPdfRendererNative(raw *systemwinrtpdf.IPdfRendererNative) IPdfRenderer
 }
 
 // RenderPageToDeviceContext wraps the raw RenderPageToDeviceContext call.
-func (self IPdfRendererNative) RenderPageToDeviceContext(pdfPage *systemcom.IUnknown, pD2DDeviceContext *graphicsdirect2d.ID2D1DeviceContext, pRenderParams *systemwinrtpdf.PDF_RENDER_PARAMS) error {
-	return win32.HRESULTError(int32(self.Raw.RenderPageToDeviceContext(pdfPage, pD2DDeviceContext, pRenderParams)))
+func (self IPdfRendererNative) RenderPageToDeviceContext(pdfPage systemcomidiom.IUnknown, pD2DDeviceContext graphicsdirect2didiom.ID2D1DeviceContext, pRenderParams *systemwinrtpdf.PDF_RENDER_PARAMS) error {
+	return win32.HRESULTError(int32(self.Raw.RenderPageToDeviceContext(pdfPage.Raw, pD2DDeviceContext.Raw, pRenderParams)))
 }

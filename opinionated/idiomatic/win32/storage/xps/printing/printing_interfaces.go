@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	storagexpsprinting "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/xps/printing"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -89,10 +88,10 @@ func WrapIPrintDocumentPackageTargetFactory(raw *storagexpsprinting.IPrintDocume
 }
 
 // CreateDocumentPackageTargetForPrintJob wraps the raw CreateDocumentPackageTargetForPrintJob call.
-func (self IPrintDocumentPackageTargetFactory) CreateDocumentPackageTargetForPrintJob(printerName string, jobName string, jobOutputStream *systemcom.IStream, jobPrintTicketStream *systemcom.IStream, docPackageTarget **storagexpsprinting.IPrintDocumentPackageTarget) error {
+func (self IPrintDocumentPackageTargetFactory) CreateDocumentPackageTargetForPrintJob(printerName string, jobName string, jobOutputStream systemcomidiom.IStream, jobPrintTicketStream systemcomidiom.IStream, docPackageTarget **storagexpsprinting.IPrintDocumentPackageTarget) error {
 	_printerName := win32.UTF16Ptr(printerName)
 	_jobName := win32.UTF16Ptr(jobName)
-	return win32.HRESULTError(int32(self.Raw.CreateDocumentPackageTargetForPrintJob(foundation.PWSTR(_printerName), foundation.PWSTR(_jobName), jobOutputStream, jobPrintTicketStream, docPackageTarget)))
+	return win32.HRESULTError(int32(self.Raw.CreateDocumentPackageTargetForPrintJob(foundation.PWSTR(_printerName), foundation.PWSTR(_jobName), jobOutputStream.Raw, jobPrintTicketStream.Raw, docPackageTarget)))
 }
 
 // IXpsPrintJob is an idiomatic wrapper over the raw COM interface Storage.Xps.Printing.IXpsPrintJob with error-returning methods.

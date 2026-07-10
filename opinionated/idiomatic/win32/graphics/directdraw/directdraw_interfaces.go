@@ -11,7 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirectdraw "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directdraw"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -27,8 +26,8 @@ func WrapIDDVideoPortContainer(raw *graphicsdirectdraw.IDDVideoPortContainer) ID
 }
 
 // CreateVideoPort wraps the raw CreateVideoPort call.
-func (self IDDVideoPortContainer) CreateVideoPort(param0 uint32, param1 *graphicsdirectdraw.DDVIDEOPORTDESC, param2 **graphicsdirectdraw.IDirectDrawVideoPort, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVideoPort(param0, param1, param2, param3)))
+func (self IDDVideoPortContainer) CreateVideoPort(param0 uint32, param1 *graphicsdirectdraw.DDVIDEOPORTDESC, param2 **graphicsdirectdraw.IDirectDrawVideoPort, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateVideoPort(param0, param1, param2, param3.Raw)))
 }
 
 // EnumVideoPorts wraps the raw EnumVideoPorts call.
@@ -63,23 +62,23 @@ func (self IDirectDraw) Compact() error {
 }
 
 // CreateClipper wraps the raw CreateClipper call.
-func (self IDirectDraw) CreateClipper(param0 uint32, param1 **graphicsdirectdraw.IDirectDrawClipper, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateClipper(param0, param1, param2)))
+func (self IDirectDraw) CreateClipper(param0 uint32, param1 **graphicsdirectdraw.IDirectDrawClipper, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateClipper(param0, param1, param2.Raw)))
 }
 
 // CreatePalette wraps the raw CreatePalette call.
-func (self IDirectDraw) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **graphicsdirectdraw.IDirectDrawPalette, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePalette(param0, param1, param2, param3)))
+func (self IDirectDraw) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **graphicsdirectdraw.IDirectDrawPalette, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePalette(param0, param1, param2, param3.Raw)))
 }
 
 // CreateSurface wraps the raw CreateSurface call.
-func (self IDirectDraw) CreateSurface(param0 *graphicsdirectdraw.DDSURFACEDESC, param1 **graphicsdirectdraw.IDirectDrawSurface, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSurface(param0, param1, param2)))
+func (self IDirectDraw) CreateSurface(param0 *graphicsdirectdraw.DDSURFACEDESC, param1 **graphicsdirectdraw.IDirectDrawSurface, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSurface(param0, param1, param2.Raw)))
 }
 
 // DuplicateSurface wraps the raw DuplicateSurface call.
-func (self IDirectDraw) DuplicateSurface(param0 *graphicsdirectdraw.IDirectDrawSurface, param1 **graphicsdirectdraw.IDirectDrawSurface) error {
-	return win32.HRESULTError(int32(self.Raw.DuplicateSurface(param0, param1)))
+func (self IDirectDraw) DuplicateSurface(param0 IDirectDrawSurface, param1 **graphicsdirectdraw.IDirectDrawSurface) error {
+	return win32.HRESULTError(int32(self.Raw.DuplicateSurface(param0.Raw, param1)))
 }
 
 // EnumDisplayModes wraps the raw EnumDisplayModes call.
@@ -174,23 +173,23 @@ func (self IDirectDraw2) Compact() error {
 }
 
 // CreateClipper wraps the raw CreateClipper call.
-func (self IDirectDraw2) CreateClipper(param0 uint32, param1 **graphicsdirectdraw.IDirectDrawClipper, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateClipper(param0, param1, param2)))
+func (self IDirectDraw2) CreateClipper(param0 uint32, param1 **graphicsdirectdraw.IDirectDrawClipper, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateClipper(param0, param1, param2.Raw)))
 }
 
 // CreatePalette wraps the raw CreatePalette call.
-func (self IDirectDraw2) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **graphicsdirectdraw.IDirectDrawPalette, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePalette(param0, param1, param2, param3)))
+func (self IDirectDraw2) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **graphicsdirectdraw.IDirectDrawPalette, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePalette(param0, param1, param2, param3.Raw)))
 }
 
 // CreateSurface wraps the raw CreateSurface call.
-func (self IDirectDraw2) CreateSurface(param0 *graphicsdirectdraw.DDSURFACEDESC, param1 **graphicsdirectdraw.IDirectDrawSurface, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSurface(param0, param1, param2)))
+func (self IDirectDraw2) CreateSurface(param0 *graphicsdirectdraw.DDSURFACEDESC, param1 **graphicsdirectdraw.IDirectDrawSurface, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSurface(param0, param1, param2.Raw)))
 }
 
 // DuplicateSurface wraps the raw DuplicateSurface call.
-func (self IDirectDraw2) DuplicateSurface(param0 *graphicsdirectdraw.IDirectDrawSurface, param1 **graphicsdirectdraw.IDirectDrawSurface) error {
-	return win32.HRESULTError(int32(self.Raw.DuplicateSurface(param0, param1)))
+func (self IDirectDraw2) DuplicateSurface(param0 IDirectDrawSurface, param1 **graphicsdirectdraw.IDirectDrawSurface) error {
+	return win32.HRESULTError(int32(self.Raw.DuplicateSurface(param0.Raw, param1)))
 }
 
 // EnumDisplayModes wraps the raw EnumDisplayModes call.
@@ -290,23 +289,23 @@ func (self IDirectDraw4) Compact() error {
 }
 
 // CreateClipper wraps the raw CreateClipper call.
-func (self IDirectDraw4) CreateClipper(param0 uint32, param1 **graphicsdirectdraw.IDirectDrawClipper, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateClipper(param0, param1, param2)))
+func (self IDirectDraw4) CreateClipper(param0 uint32, param1 **graphicsdirectdraw.IDirectDrawClipper, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateClipper(param0, param1, param2.Raw)))
 }
 
 // CreatePalette wraps the raw CreatePalette call.
-func (self IDirectDraw4) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **graphicsdirectdraw.IDirectDrawPalette, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePalette(param0, param1, param2, param3)))
+func (self IDirectDraw4) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **graphicsdirectdraw.IDirectDrawPalette, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePalette(param0, param1, param2, param3.Raw)))
 }
 
 // CreateSurface wraps the raw CreateSurface call.
-func (self IDirectDraw4) CreateSurface(param0 *graphicsdirectdraw.DDSURFACEDESC2, param1 **graphicsdirectdraw.IDirectDrawSurface4, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSurface(param0, param1, param2)))
+func (self IDirectDraw4) CreateSurface(param0 *graphicsdirectdraw.DDSURFACEDESC2, param1 **graphicsdirectdraw.IDirectDrawSurface4, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSurface(param0, param1, param2.Raw)))
 }
 
 // DuplicateSurface wraps the raw DuplicateSurface call.
-func (self IDirectDraw4) DuplicateSurface(param0 *graphicsdirectdraw.IDirectDrawSurface4, param1 **graphicsdirectdraw.IDirectDrawSurface4) error {
-	return win32.HRESULTError(int32(self.Raw.DuplicateSurface(param0, param1)))
+func (self IDirectDraw4) DuplicateSurface(param0 IDirectDrawSurface4, param1 **graphicsdirectdraw.IDirectDrawSurface4) error {
+	return win32.HRESULTError(int32(self.Raw.DuplicateSurface(param0.Raw, param1)))
 }
 
 // EnumDisplayModes wraps the raw EnumDisplayModes call.
@@ -426,23 +425,23 @@ func (self IDirectDraw7) Compact() error {
 }
 
 // CreateClipper wraps the raw CreateClipper call.
-func (self IDirectDraw7) CreateClipper(param0 uint32, param1 **graphicsdirectdraw.IDirectDrawClipper, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateClipper(param0, param1, param2)))
+func (self IDirectDraw7) CreateClipper(param0 uint32, param1 **graphicsdirectdraw.IDirectDrawClipper, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateClipper(param0, param1, param2.Raw)))
 }
 
 // CreatePalette wraps the raw CreatePalette call.
-func (self IDirectDraw7) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **graphicsdirectdraw.IDirectDrawPalette, param3 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePalette(param0, param1, param2, param3)))
+func (self IDirectDraw7) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **graphicsdirectdraw.IDirectDrawPalette, param3 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePalette(param0, param1, param2, param3.Raw)))
 }
 
 // CreateSurface wraps the raw CreateSurface call.
-func (self IDirectDraw7) CreateSurface(param0 *graphicsdirectdraw.DDSURFACEDESC2, param1 **graphicsdirectdraw.IDirectDrawSurface7, param2 *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSurface(param0, param1, param2)))
+func (self IDirectDraw7) CreateSurface(param0 *graphicsdirectdraw.DDSURFACEDESC2, param1 **graphicsdirectdraw.IDirectDrawSurface7, param2 systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSurface(param0, param1, param2.Raw)))
 }
 
 // DuplicateSurface wraps the raw DuplicateSurface call.
-func (self IDirectDraw7) DuplicateSurface(param0 *graphicsdirectdraw.IDirectDrawSurface7, param1 **graphicsdirectdraw.IDirectDrawSurface7) error {
-	return win32.HRESULTError(int32(self.Raw.DuplicateSurface(param0, param1)))
+func (self IDirectDraw7) DuplicateSurface(param0 IDirectDrawSurface7, param1 **graphicsdirectdraw.IDirectDrawSurface7) error {
+	return win32.HRESULTError(int32(self.Raw.DuplicateSurface(param0.Raw, param1)))
 }
 
 // EnumDisplayModes wraps the raw EnumDisplayModes call.
@@ -577,8 +576,8 @@ func (self IDirectDrawClipper) GetHWnd(param0 *foundation.HWND) error {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectDrawClipper) Initialize(param0 *graphicsdirectdraw.IDirectDraw, param1 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(param0, param1)))
+func (self IDirectDrawClipper) Initialize(param0 IDirectDraw, param1 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(param0.Raw, param1)))
 }
 
 // IsClipListChanged wraps the raw IsClipListChanged call.
@@ -686,8 +685,8 @@ func (self IDirectDrawPalette) GetEntries(param0 uint32, param1 uint32, param2 u
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectDrawPalette) Initialize(param0 *graphicsdirectdraw.IDirectDraw, param1 uint32, param2 *graphicsgdi.PALETTEENTRY) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(param0, param1, param2)))
+func (self IDirectDrawPalette) Initialize(param0 IDirectDraw, param1 uint32, param2 *graphicsgdi.PALETTEENTRY) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(param0.Raw, param1, param2)))
 }
 
 // SetEntries wraps the raw SetEntries call.
@@ -707,8 +706,8 @@ func WrapIDirectDrawSurface(raw *graphicsdirectdraw.IDirectDrawSurface) IDirectD
 }
 
 // AddAttachedSurface wraps the raw AddAttachedSurface call.
-func (self IDirectDrawSurface) AddAttachedSurface(param0 *graphicsdirectdraw.IDirectDrawSurface) error {
-	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0)))
+func (self IDirectDrawSurface) AddAttachedSurface(param0 IDirectDrawSurface) error {
+	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0.Raw)))
 }
 
 // AddOverlayDirtyRect wraps the raw AddOverlayDirtyRect call.
@@ -717,8 +716,8 @@ func (self IDirectDrawSurface) AddOverlayDirtyRect(param0 *foundation.RECT) erro
 }
 
 // Blt wraps the raw Blt call.
-func (self IDirectDrawSurface) Blt(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
-	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface) Blt(param0 *foundation.RECT, param1 IDirectDrawSurface, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
+	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1.Raw, param2, param3, param4)))
 }
 
 // BltBatch wraps the raw BltBatch call.
@@ -727,13 +726,13 @@ func (self IDirectDrawSurface) BltBatch(param0 *graphicsdirectdraw.DDBLTBATCH, p
 }
 
 // BltFast wraps the raw BltFast call.
-func (self IDirectDrawSurface) BltFast(param0 uint32, param1 uint32, param2 *graphicsdirectdraw.IDirectDrawSurface, param3 *foundation.RECT, param4 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface) BltFast(param0 uint32, param1 uint32, param2 IDirectDrawSurface, param3 *foundation.RECT, param4 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2.Raw, param3, param4)))
 }
 
 // DeleteAttachedSurface wraps the raw DeleteAttachedSurface call.
-func (self IDirectDrawSurface) DeleteAttachedSurface(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1)))
+func (self IDirectDrawSurface) DeleteAttachedSurface(param0 uint32, param1 IDirectDrawSurface) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1.Raw)))
 }
 
 // EnumAttachedSurfaces wraps the raw EnumAttachedSurfaces call.
@@ -747,8 +746,8 @@ func (self IDirectDrawSurface) EnumOverlayZOrders(param0 uint32, param1 unsafe.P
 }
 
 // Flip wraps the raw Flip call.
-func (self IDirectDrawSurface) Flip(param0 *graphicsdirectdraw.IDirectDrawSurface, param1 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Flip(param0, param1)))
+func (self IDirectDrawSurface) Flip(param0 IDirectDrawSurface, param1 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Flip(param0.Raw, param1)))
 }
 
 // GetAttachedSurface wraps the raw GetAttachedSurface call.
@@ -807,8 +806,8 @@ func (self IDirectDrawSurface) GetSurfaceDesc(param0 *graphicsdirectdraw.DDSURFA
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectDrawSurface) Initialize(param0 *graphicsdirectdraw.IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(param0, param1)))
+func (self IDirectDrawSurface) Initialize(param0 IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(param0.Raw, param1)))
 }
 
 // IsLost wraps the raw IsLost call.
@@ -832,8 +831,8 @@ func (self IDirectDrawSurface) Restore() error {
 }
 
 // SetClipper wraps the raw SetClipper call.
-func (self IDirectDrawSurface) SetClipper(param0 *graphicsdirectdraw.IDirectDrawClipper) error {
-	return win32.HRESULTError(int32(self.Raw.SetClipper(param0)))
+func (self IDirectDrawSurface) SetClipper(param0 IDirectDrawClipper) error {
+	return win32.HRESULTError(int32(self.Raw.SetClipper(param0.Raw)))
 }
 
 // SetColorKey wraps the raw SetColorKey call.
@@ -847,8 +846,8 @@ func (self IDirectDrawSurface) SetOverlayPosition(param0 int32, param1 int32) er
 }
 
 // SetPalette wraps the raw SetPalette call.
-func (self IDirectDrawSurface) SetPalette(param0 *graphicsdirectdraw.IDirectDrawPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetPalette(param0)))
+func (self IDirectDrawSurface) SetPalette(param0 IDirectDrawPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetPalette(param0.Raw)))
 }
 
 // Unlock wraps the raw Unlock call.
@@ -857,8 +856,8 @@ func (self IDirectDrawSurface) Unlock(param0 unsafe.Pointer) error {
 }
 
 // UpdateOverlay wraps the raw UpdateOverlay call.
-func (self IDirectDrawSurface) UpdateOverlay(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface) UpdateOverlay(param0 *foundation.RECT, param1 IDirectDrawSurface, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1.Raw, param2, param3, param4)))
 }
 
 // UpdateOverlayDisplay wraps the raw UpdateOverlayDisplay call.
@@ -867,8 +866,8 @@ func (self IDirectDrawSurface) UpdateOverlayDisplay(param0 uint32) error {
 }
 
 // UpdateOverlayZOrder wraps the raw UpdateOverlayZOrder call.
-func (self IDirectDrawSurface) UpdateOverlayZOrder(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1)))
+func (self IDirectDrawSurface) UpdateOverlayZOrder(param0 uint32, param1 IDirectDrawSurface) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1.Raw)))
 }
 
 // IDirectDrawSurface2 is an idiomatic wrapper over the raw COM interface Graphics.DirectDraw.IDirectDrawSurface2 with error-returning methods.
@@ -883,8 +882,8 @@ func WrapIDirectDrawSurface2(raw *graphicsdirectdraw.IDirectDrawSurface2) IDirec
 }
 
 // AddAttachedSurface wraps the raw AddAttachedSurface call.
-func (self IDirectDrawSurface2) AddAttachedSurface(param0 *graphicsdirectdraw.IDirectDrawSurface2) error {
-	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0)))
+func (self IDirectDrawSurface2) AddAttachedSurface(param0 IDirectDrawSurface2) error {
+	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0.Raw)))
 }
 
 // AddOverlayDirtyRect wraps the raw AddOverlayDirtyRect call.
@@ -893,8 +892,8 @@ func (self IDirectDrawSurface2) AddOverlayDirtyRect(param0 *foundation.RECT) err
 }
 
 // Blt wraps the raw Blt call.
-func (self IDirectDrawSurface2) Blt(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface2, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
-	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface2) Blt(param0 *foundation.RECT, param1 IDirectDrawSurface2, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
+	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1.Raw, param2, param3, param4)))
 }
 
 // BltBatch wraps the raw BltBatch call.
@@ -903,13 +902,13 @@ func (self IDirectDrawSurface2) BltBatch(param0 *graphicsdirectdraw.DDBLTBATCH, 
 }
 
 // BltFast wraps the raw BltFast call.
-func (self IDirectDrawSurface2) BltFast(param0 uint32, param1 uint32, param2 *graphicsdirectdraw.IDirectDrawSurface2, param3 *foundation.RECT, param4 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface2) BltFast(param0 uint32, param1 uint32, param2 IDirectDrawSurface2, param3 *foundation.RECT, param4 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2.Raw, param3, param4)))
 }
 
 // DeleteAttachedSurface wraps the raw DeleteAttachedSurface call.
-func (self IDirectDrawSurface2) DeleteAttachedSurface(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface2) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1)))
+func (self IDirectDrawSurface2) DeleteAttachedSurface(param0 uint32, param1 IDirectDrawSurface2) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1.Raw)))
 }
 
 // EnumAttachedSurfaces wraps the raw EnumAttachedSurfaces call.
@@ -923,8 +922,8 @@ func (self IDirectDrawSurface2) EnumOverlayZOrders(param0 uint32, param1 unsafe.
 }
 
 // Flip wraps the raw Flip call.
-func (self IDirectDrawSurface2) Flip(param0 *graphicsdirectdraw.IDirectDrawSurface2, param1 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Flip(param0, param1)))
+func (self IDirectDrawSurface2) Flip(param0 IDirectDrawSurface2, param1 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Flip(param0.Raw, param1)))
 }
 
 // GetAttachedSurface wraps the raw GetAttachedSurface call.
@@ -983,8 +982,8 @@ func (self IDirectDrawSurface2) GetSurfaceDesc(param0 *graphicsdirectdraw.DDSURF
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectDrawSurface2) Initialize(param0 *graphicsdirectdraw.IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(param0, param1)))
+func (self IDirectDrawSurface2) Initialize(param0 IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(param0.Raw, param1)))
 }
 
 // IsLost wraps the raw IsLost call.
@@ -1008,8 +1007,8 @@ func (self IDirectDrawSurface2) Restore() error {
 }
 
 // SetClipper wraps the raw SetClipper call.
-func (self IDirectDrawSurface2) SetClipper(param0 *graphicsdirectdraw.IDirectDrawClipper) error {
-	return win32.HRESULTError(int32(self.Raw.SetClipper(param0)))
+func (self IDirectDrawSurface2) SetClipper(param0 IDirectDrawClipper) error {
+	return win32.HRESULTError(int32(self.Raw.SetClipper(param0.Raw)))
 }
 
 // SetColorKey wraps the raw SetColorKey call.
@@ -1023,8 +1022,8 @@ func (self IDirectDrawSurface2) SetOverlayPosition(param0 int32, param1 int32) e
 }
 
 // SetPalette wraps the raw SetPalette call.
-func (self IDirectDrawSurface2) SetPalette(param0 *graphicsdirectdraw.IDirectDrawPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetPalette(param0)))
+func (self IDirectDrawSurface2) SetPalette(param0 IDirectDrawPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetPalette(param0.Raw)))
 }
 
 // Unlock wraps the raw Unlock call.
@@ -1033,8 +1032,8 @@ func (self IDirectDrawSurface2) Unlock(param0 unsafe.Pointer) error {
 }
 
 // UpdateOverlay wraps the raw UpdateOverlay call.
-func (self IDirectDrawSurface2) UpdateOverlay(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface2, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface2) UpdateOverlay(param0 *foundation.RECT, param1 IDirectDrawSurface2, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1.Raw, param2, param3, param4)))
 }
 
 // UpdateOverlayDisplay wraps the raw UpdateOverlayDisplay call.
@@ -1043,8 +1042,8 @@ func (self IDirectDrawSurface2) UpdateOverlayDisplay(param0 uint32) error {
 }
 
 // UpdateOverlayZOrder wraps the raw UpdateOverlayZOrder call.
-func (self IDirectDrawSurface2) UpdateOverlayZOrder(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface2) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1)))
+func (self IDirectDrawSurface2) UpdateOverlayZOrder(param0 uint32, param1 IDirectDrawSurface2) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1.Raw)))
 }
 
 // GetDDInterface wraps the raw GetDDInterface call.
@@ -1074,8 +1073,8 @@ func WrapIDirectDrawSurface3(raw *graphicsdirectdraw.IDirectDrawSurface3) IDirec
 }
 
 // AddAttachedSurface wraps the raw AddAttachedSurface call.
-func (self IDirectDrawSurface3) AddAttachedSurface(param0 *graphicsdirectdraw.IDirectDrawSurface3) error {
-	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0)))
+func (self IDirectDrawSurface3) AddAttachedSurface(param0 IDirectDrawSurface3) error {
+	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0.Raw)))
 }
 
 // AddOverlayDirtyRect wraps the raw AddOverlayDirtyRect call.
@@ -1084,8 +1083,8 @@ func (self IDirectDrawSurface3) AddOverlayDirtyRect(param0 *foundation.RECT) err
 }
 
 // Blt wraps the raw Blt call.
-func (self IDirectDrawSurface3) Blt(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface3, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
-	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface3) Blt(param0 *foundation.RECT, param1 IDirectDrawSurface3, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
+	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1.Raw, param2, param3, param4)))
 }
 
 // BltBatch wraps the raw BltBatch call.
@@ -1094,13 +1093,13 @@ func (self IDirectDrawSurface3) BltBatch(param0 *graphicsdirectdraw.DDBLTBATCH, 
 }
 
 // BltFast wraps the raw BltFast call.
-func (self IDirectDrawSurface3) BltFast(param0 uint32, param1 uint32, param2 *graphicsdirectdraw.IDirectDrawSurface3, param3 *foundation.RECT, param4 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface3) BltFast(param0 uint32, param1 uint32, param2 IDirectDrawSurface3, param3 *foundation.RECT, param4 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2.Raw, param3, param4)))
 }
 
 // DeleteAttachedSurface wraps the raw DeleteAttachedSurface call.
-func (self IDirectDrawSurface3) DeleteAttachedSurface(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface3) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1)))
+func (self IDirectDrawSurface3) DeleteAttachedSurface(param0 uint32, param1 IDirectDrawSurface3) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1.Raw)))
 }
 
 // EnumAttachedSurfaces wraps the raw EnumAttachedSurfaces call.
@@ -1114,8 +1113,8 @@ func (self IDirectDrawSurface3) EnumOverlayZOrders(param0 uint32, param1 unsafe.
 }
 
 // Flip wraps the raw Flip call.
-func (self IDirectDrawSurface3) Flip(param0 *graphicsdirectdraw.IDirectDrawSurface3, param1 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Flip(param0, param1)))
+func (self IDirectDrawSurface3) Flip(param0 IDirectDrawSurface3, param1 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Flip(param0.Raw, param1)))
 }
 
 // GetAttachedSurface wraps the raw GetAttachedSurface call.
@@ -1174,8 +1173,8 @@ func (self IDirectDrawSurface3) GetSurfaceDesc(param0 *graphicsdirectdraw.DDSURF
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectDrawSurface3) Initialize(param0 *graphicsdirectdraw.IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(param0, param1)))
+func (self IDirectDrawSurface3) Initialize(param0 IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(param0.Raw, param1)))
 }
 
 // IsLost wraps the raw IsLost call.
@@ -1199,8 +1198,8 @@ func (self IDirectDrawSurface3) Restore() error {
 }
 
 // SetClipper wraps the raw SetClipper call.
-func (self IDirectDrawSurface3) SetClipper(param0 *graphicsdirectdraw.IDirectDrawClipper) error {
-	return win32.HRESULTError(int32(self.Raw.SetClipper(param0)))
+func (self IDirectDrawSurface3) SetClipper(param0 IDirectDrawClipper) error {
+	return win32.HRESULTError(int32(self.Raw.SetClipper(param0.Raw)))
 }
 
 // SetColorKey wraps the raw SetColorKey call.
@@ -1214,8 +1213,8 @@ func (self IDirectDrawSurface3) SetOverlayPosition(param0 int32, param1 int32) e
 }
 
 // SetPalette wraps the raw SetPalette call.
-func (self IDirectDrawSurface3) SetPalette(param0 *graphicsdirectdraw.IDirectDrawPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetPalette(param0)))
+func (self IDirectDrawSurface3) SetPalette(param0 IDirectDrawPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetPalette(param0.Raw)))
 }
 
 // Unlock wraps the raw Unlock call.
@@ -1224,8 +1223,8 @@ func (self IDirectDrawSurface3) Unlock(param0 unsafe.Pointer) error {
 }
 
 // UpdateOverlay wraps the raw UpdateOverlay call.
-func (self IDirectDrawSurface3) UpdateOverlay(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface3, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface3) UpdateOverlay(param0 *foundation.RECT, param1 IDirectDrawSurface3, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1.Raw, param2, param3, param4)))
 }
 
 // UpdateOverlayDisplay wraps the raw UpdateOverlayDisplay call.
@@ -1234,8 +1233,8 @@ func (self IDirectDrawSurface3) UpdateOverlayDisplay(param0 uint32) error {
 }
 
 // UpdateOverlayZOrder wraps the raw UpdateOverlayZOrder call.
-func (self IDirectDrawSurface3) UpdateOverlayZOrder(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface3) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1)))
+func (self IDirectDrawSurface3) UpdateOverlayZOrder(param0 uint32, param1 IDirectDrawSurface3) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1.Raw)))
 }
 
 // GetDDInterface wraps the raw GetDDInterface call.
@@ -1270,8 +1269,8 @@ func WrapIDirectDrawSurface4(raw *graphicsdirectdraw.IDirectDrawSurface4) IDirec
 }
 
 // AddAttachedSurface wraps the raw AddAttachedSurface call.
-func (self IDirectDrawSurface4) AddAttachedSurface(param0 *graphicsdirectdraw.IDirectDrawSurface4) error {
-	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0)))
+func (self IDirectDrawSurface4) AddAttachedSurface(param0 IDirectDrawSurface4) error {
+	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0.Raw)))
 }
 
 // AddOverlayDirtyRect wraps the raw AddOverlayDirtyRect call.
@@ -1280,8 +1279,8 @@ func (self IDirectDrawSurface4) AddOverlayDirtyRect(param0 *foundation.RECT) err
 }
 
 // Blt wraps the raw Blt call.
-func (self IDirectDrawSurface4) Blt(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface4, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
-	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface4) Blt(param0 *foundation.RECT, param1 IDirectDrawSurface4, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
+	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1.Raw, param2, param3, param4)))
 }
 
 // BltBatch wraps the raw BltBatch call.
@@ -1290,13 +1289,13 @@ func (self IDirectDrawSurface4) BltBatch(param0 *graphicsdirectdraw.DDBLTBATCH, 
 }
 
 // BltFast wraps the raw BltFast call.
-func (self IDirectDrawSurface4) BltFast(param0 uint32, param1 uint32, param2 *graphicsdirectdraw.IDirectDrawSurface4, param3 *foundation.RECT, param4 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface4) BltFast(param0 uint32, param1 uint32, param2 IDirectDrawSurface4, param3 *foundation.RECT, param4 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2.Raw, param3, param4)))
 }
 
 // DeleteAttachedSurface wraps the raw DeleteAttachedSurface call.
-func (self IDirectDrawSurface4) DeleteAttachedSurface(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface4) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1)))
+func (self IDirectDrawSurface4) DeleteAttachedSurface(param0 uint32, param1 IDirectDrawSurface4) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1.Raw)))
 }
 
 // EnumAttachedSurfaces wraps the raw EnumAttachedSurfaces call.
@@ -1310,8 +1309,8 @@ func (self IDirectDrawSurface4) EnumOverlayZOrders(param0 uint32, param1 unsafe.
 }
 
 // Flip wraps the raw Flip call.
-func (self IDirectDrawSurface4) Flip(param0 *graphicsdirectdraw.IDirectDrawSurface4, param1 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Flip(param0, param1)))
+func (self IDirectDrawSurface4) Flip(param0 IDirectDrawSurface4, param1 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Flip(param0.Raw, param1)))
 }
 
 // GetAttachedSurface wraps the raw GetAttachedSurface call.
@@ -1370,8 +1369,8 @@ func (self IDirectDrawSurface4) GetSurfaceDesc(param0 *graphicsdirectdraw.DDSURF
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectDrawSurface4) Initialize(param0 *graphicsdirectdraw.IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC2) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(param0, param1)))
+func (self IDirectDrawSurface4) Initialize(param0 IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC2) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(param0.Raw, param1)))
 }
 
 // IsLost wraps the raw IsLost call.
@@ -1395,8 +1394,8 @@ func (self IDirectDrawSurface4) Restore() error {
 }
 
 // SetClipper wraps the raw SetClipper call.
-func (self IDirectDrawSurface4) SetClipper(param0 *graphicsdirectdraw.IDirectDrawClipper) error {
-	return win32.HRESULTError(int32(self.Raw.SetClipper(param0)))
+func (self IDirectDrawSurface4) SetClipper(param0 IDirectDrawClipper) error {
+	return win32.HRESULTError(int32(self.Raw.SetClipper(param0.Raw)))
 }
 
 // SetColorKey wraps the raw SetColorKey call.
@@ -1410,8 +1409,8 @@ func (self IDirectDrawSurface4) SetOverlayPosition(param0 int32, param1 int32) e
 }
 
 // SetPalette wraps the raw SetPalette call.
-func (self IDirectDrawSurface4) SetPalette(param0 *graphicsdirectdraw.IDirectDrawPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetPalette(param0)))
+func (self IDirectDrawSurface4) SetPalette(param0 IDirectDrawPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetPalette(param0.Raw)))
 }
 
 // Unlock wraps the raw Unlock call.
@@ -1420,8 +1419,8 @@ func (self IDirectDrawSurface4) Unlock(param0 *foundation.RECT) error {
 }
 
 // UpdateOverlay wraps the raw UpdateOverlay call.
-func (self IDirectDrawSurface4) UpdateOverlay(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface4, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface4) UpdateOverlay(param0 *foundation.RECT, param1 IDirectDrawSurface4, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1.Raw, param2, param3, param4)))
 }
 
 // UpdateOverlayDisplay wraps the raw UpdateOverlayDisplay call.
@@ -1430,8 +1429,8 @@ func (self IDirectDrawSurface4) UpdateOverlayDisplay(param0 uint32) error {
 }
 
 // UpdateOverlayZOrder wraps the raw UpdateOverlayZOrder call.
-func (self IDirectDrawSurface4) UpdateOverlayZOrder(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface4) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1)))
+func (self IDirectDrawSurface4) UpdateOverlayZOrder(param0 uint32, param1 IDirectDrawSurface4) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1.Raw)))
 }
 
 // GetDDInterface wraps the raw GetDDInterface call.
@@ -1491,8 +1490,8 @@ func WrapIDirectDrawSurface7(raw *graphicsdirectdraw.IDirectDrawSurface7) IDirec
 }
 
 // AddAttachedSurface wraps the raw AddAttachedSurface call.
-func (self IDirectDrawSurface7) AddAttachedSurface(param0 *graphicsdirectdraw.IDirectDrawSurface7) error {
-	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0)))
+func (self IDirectDrawSurface7) AddAttachedSurface(param0 IDirectDrawSurface7) error {
+	return win32.HRESULTError(int32(self.Raw.AddAttachedSurface(param0.Raw)))
 }
 
 // AddOverlayDirtyRect wraps the raw AddOverlayDirtyRect call.
@@ -1501,8 +1500,8 @@ func (self IDirectDrawSurface7) AddOverlayDirtyRect(param0 *foundation.RECT) err
 }
 
 // Blt wraps the raw Blt call.
-func (self IDirectDrawSurface7) Blt(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface7, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
-	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface7) Blt(param0 *foundation.RECT, param1 IDirectDrawSurface7, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDBLTFX) error {
+	return win32.HRESULTError(int32(self.Raw.Blt(param0, param1.Raw, param2, param3, param4)))
 }
 
 // BltBatch wraps the raw BltBatch call.
@@ -1511,13 +1510,13 @@ func (self IDirectDrawSurface7) BltBatch(param0 *graphicsdirectdraw.DDBLTBATCH, 
 }
 
 // BltFast wraps the raw BltFast call.
-func (self IDirectDrawSurface7) BltFast(param0 uint32, param1 uint32, param2 *graphicsdirectdraw.IDirectDrawSurface7, param3 *foundation.RECT, param4 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface7) BltFast(param0 uint32, param1 uint32, param2 IDirectDrawSurface7, param3 *foundation.RECT, param4 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.BltFast(param0, param1, param2.Raw, param3, param4)))
 }
 
 // DeleteAttachedSurface wraps the raw DeleteAttachedSurface call.
-func (self IDirectDrawSurface7) DeleteAttachedSurface(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface7) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1)))
+func (self IDirectDrawSurface7) DeleteAttachedSurface(param0 uint32, param1 IDirectDrawSurface7) error {
+	return win32.HRESULTError(int32(self.Raw.DeleteAttachedSurface(param0, param1.Raw)))
 }
 
 // EnumAttachedSurfaces wraps the raw EnumAttachedSurfaces call.
@@ -1531,8 +1530,8 @@ func (self IDirectDrawSurface7) EnumOverlayZOrders(param0 uint32, param1 unsafe.
 }
 
 // Flip wraps the raw Flip call.
-func (self IDirectDrawSurface7) Flip(param0 *graphicsdirectdraw.IDirectDrawSurface7, param1 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Flip(param0, param1)))
+func (self IDirectDrawSurface7) Flip(param0 IDirectDrawSurface7, param1 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Flip(param0.Raw, param1)))
 }
 
 // GetAttachedSurface wraps the raw GetAttachedSurface call.
@@ -1591,8 +1590,8 @@ func (self IDirectDrawSurface7) GetSurfaceDesc(param0 *graphicsdirectdraw.DDSURF
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDirectDrawSurface7) Initialize(param0 *graphicsdirectdraw.IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC2) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(param0, param1)))
+func (self IDirectDrawSurface7) Initialize(param0 IDirectDraw, param1 *graphicsdirectdraw.DDSURFACEDESC2) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(param0.Raw, param1)))
 }
 
 // IsLost wraps the raw IsLost call.
@@ -1616,8 +1615,8 @@ func (self IDirectDrawSurface7) Restore() error {
 }
 
 // SetClipper wraps the raw SetClipper call.
-func (self IDirectDrawSurface7) SetClipper(param0 *graphicsdirectdraw.IDirectDrawClipper) error {
-	return win32.HRESULTError(int32(self.Raw.SetClipper(param0)))
+func (self IDirectDrawSurface7) SetClipper(param0 IDirectDrawClipper) error {
+	return win32.HRESULTError(int32(self.Raw.SetClipper(param0.Raw)))
 }
 
 // SetColorKey wraps the raw SetColorKey call.
@@ -1631,8 +1630,8 @@ func (self IDirectDrawSurface7) SetOverlayPosition(param0 int32, param1 int32) e
 }
 
 // SetPalette wraps the raw SetPalette call.
-func (self IDirectDrawSurface7) SetPalette(param0 *graphicsdirectdraw.IDirectDrawPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetPalette(param0)))
+func (self IDirectDrawSurface7) SetPalette(param0 IDirectDrawPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetPalette(param0.Raw)))
 }
 
 // Unlock wraps the raw Unlock call.
@@ -1641,8 +1640,8 @@ func (self IDirectDrawSurface7) Unlock(param0 *foundation.RECT) error {
 }
 
 // UpdateOverlay wraps the raw UpdateOverlay call.
-func (self IDirectDrawSurface7) UpdateOverlay(param0 *foundation.RECT, param1 *graphicsdirectdraw.IDirectDrawSurface7, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1, param2, param3, param4)))
+func (self IDirectDrawSurface7) UpdateOverlay(param0 *foundation.RECT, param1 IDirectDrawSurface7, param2 *foundation.RECT, param3 uint32, param4 *graphicsdirectdraw.DDOVERLAYFX) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlay(param0, param1.Raw, param2, param3, param4)))
 }
 
 // UpdateOverlayDisplay wraps the raw UpdateOverlayDisplay call.
@@ -1651,8 +1650,8 @@ func (self IDirectDrawSurface7) UpdateOverlayDisplay(param0 uint32) error {
 }
 
 // UpdateOverlayZOrder wraps the raw UpdateOverlayZOrder call.
-func (self IDirectDrawSurface7) UpdateOverlayZOrder(param0 uint32, param1 *graphicsdirectdraw.IDirectDrawSurface7) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1)))
+func (self IDirectDrawSurface7) UpdateOverlayZOrder(param0 uint32, param1 IDirectDrawSurface7) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateOverlayZOrder(param0, param1.Raw)))
 }
 
 // GetDDInterface wraps the raw GetDDInterface call.
@@ -1753,8 +1752,8 @@ func WrapIDirectDrawVideoPort(raw *graphicsdirectdraw.IDirectDrawVideoPort) IDir
 }
 
 // Flip wraps the raw Flip call.
-func (self IDirectDrawVideoPort) Flip(param0 *graphicsdirectdraw.IDirectDrawSurface, param1 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Flip(param0, param1)))
+func (self IDirectDrawVideoPort) Flip(param0 IDirectDrawSurface, param1 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Flip(param0.Raw, param1)))
 }
 
 // GetBandwidthInfo wraps the raw GetBandwidthInfo call.
@@ -1798,8 +1797,8 @@ func (self IDirectDrawVideoPort) SetColorControls(param0 *graphicsdirectdraw.DDC
 }
 
 // SetTargetSurface wraps the raw SetTargetSurface call.
-func (self IDirectDrawVideoPort) SetTargetSurface(param0 *graphicsdirectdraw.IDirectDrawSurface, param1 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetTargetSurface(param0, param1)))
+func (self IDirectDrawVideoPort) SetTargetSurface(param0 IDirectDrawSurface, param1 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetTargetSurface(param0.Raw, param1)))
 }
 
 // StartVideo wraps the raw StartVideo call.

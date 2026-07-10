@@ -11,10 +11,10 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	mediaspeech "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/speech"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
-	systemcomurlmon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/urlmon"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomurlmonidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/urlmon"
 )
 
 // IEnumSpObjectTokens is an idiomatic wrapper over the raw COM interface Media.Speech.IEnumSpObjectTokens with error-returning methods.
@@ -142,8 +142,8 @@ func (self ISpCFGInterpreter) InitGrammar(pszGrammarName string, pvGrammarData *
 }
 
 // Interpret wraps the raw Interpret call.
-func (self ISpCFGInterpreter) Interpret(pPhrase *mediaspeech.ISpPhraseBuilder, ulFirstElement uint32, ulCountOfElements uint32, pSite *mediaspeech.ISpCFGInterpreterSite) error {
-	return win32.HRESULTError(int32(self.Raw.Interpret(pPhrase, ulFirstElement, ulCountOfElements, pSite)))
+func (self ISpCFGInterpreter) Interpret(pPhrase ISpPhraseBuilder, ulFirstElement uint32, ulCountOfElements uint32, pSite ISpCFGInterpreterSite) error {
+	return win32.HRESULTError(int32(self.Raw.Interpret(pPhrase.Raw, ulFirstElement, ulCountOfElements, pSite.Raw)))
 }
 
 // ISpCFGInterpreterSite is an idiomatic wrapper over the raw COM interface Media.Speech.ISpCFGInterpreterSite with error-returning methods.
@@ -185,8 +185,8 @@ func WrapISpContainerLexicon(raw *mediaspeech.ISpContainerLexicon) ISpContainerL
 }
 
 // AddLexicon wraps the raw AddLexicon call.
-func (self ISpContainerLexicon) AddLexicon(pAddLexicon *mediaspeech.ISpLexicon, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddLexicon(pAddLexicon, dwFlags)))
+func (self ISpContainerLexicon) AddLexicon(pAddLexicon ISpLexicon, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddLexicon(pAddLexicon.Raw, dwFlags)))
 }
 
 // ISpDataKey is an idiomatic wrapper over the raw COM interface Media.Speech.ISpDataKey with error-returning methods.
@@ -412,8 +412,8 @@ func WrapISpGramCompBackend(raw *mediaspeech.ISpGramCompBackend) ISpGramCompBack
 }
 
 // SetSaveObjects wraps the raw SetSaveObjects call.
-func (self ISpGramCompBackend) SetSaveObjects(pStream *systemcom.IStream, pErrorLog *mediaspeech.ISpErrorLog) error {
-	return win32.HRESULTError(int32(self.Raw.SetSaveObjects(pStream, pErrorLog)))
+func (self ISpGramCompBackend) SetSaveObjects(pStream systemcomidiom.IStream, pErrorLog ISpErrorLog) error {
+	return win32.HRESULTError(int32(self.Raw.SetSaveObjects(pStream.Raw, pErrorLog.Raw)))
 }
 
 // InitFromBinaryGrammar wraps the raw InitFromBinaryGrammar call.
@@ -500,8 +500,8 @@ func WrapISpGrammarCompiler(raw *mediaspeech.ISpGrammarCompiler) ISpGrammarCompi
 }
 
 // CompileStream wraps the raw CompileStream call.
-func (self ISpGrammarCompiler) CompileStream(pSource *systemcom.IStream, pDest *systemcom.IStream, pHeader *systemcom.IStream, pReserved *systemcom.IUnknown, pErrorLog *mediaspeech.ISpErrorLog, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CompileStream(pSource, pDest, pHeader, pReserved, pErrorLog, dwFlags)))
+func (self ISpGrammarCompiler) CompileStream(pSource systemcomidiom.IStream, pDest systemcomidiom.IStream, pHeader systemcomidiom.IStream, pReserved systemcomidiom.IUnknown, pErrorLog ISpErrorLog, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CompileStream(pSource.Raw, pDest.Raw, pHeader.Raw, pReserved.Raw, pErrorLog.Raw, dwFlags)))
 }
 
 // ISpITNProcessor is an idiomatic wrapper over the raw COM interface Media.Speech.ISpITNProcessor with error-returning methods.
@@ -522,8 +522,8 @@ func (self ISpITNProcessor) LoadITNGrammar(pszCLSID string) error {
 }
 
 // ITNPhrase wraps the raw ITNPhrase call.
-func (self ISpITNProcessor) ITNPhrase(pPhrase *mediaspeech.ISpPhraseBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.ITNPhrase(pPhrase)))
+func (self ISpITNProcessor) ITNPhrase(pPhrase ISpPhraseBuilder) error {
+	return win32.HRESULTError(int32(self.Raw.ITNPhrase(pPhrase.Raw)))
 }
 
 // ISpLexicon is an idiomatic wrapper over the raw COM interface Media.Speech.ISpLexicon with error-returning methods.
@@ -649,8 +649,8 @@ func WrapISpNotifySource(raw *mediaspeech.ISpNotifySource) ISpNotifySource {
 }
 
 // SetNotifySink wraps the raw SetNotifySink call.
-func (self ISpNotifySource) SetNotifySink(pNotifySink *mediaspeech.ISpNotifySink) error {
-	return win32.HRESULTError(int32(self.Raw.SetNotifySink(pNotifySink)))
+func (self ISpNotifySource) SetNotifySink(pNotifySink ISpNotifySink) error {
+	return win32.HRESULTError(int32(self.Raw.SetNotifySink(pNotifySink.Raw)))
 }
 
 // SetNotifyWindowMessage wraps the raw SetNotifyWindowMessage call.
@@ -664,8 +664,8 @@ func (self ISpNotifySource) SetNotifyCallbackFunction(pfnCallback *mediaspeech.S
 }
 
 // SetNotifyCallbackInterface wraps the raw SetNotifyCallbackInterface call.
-func (self ISpNotifySource) SetNotifyCallbackInterface(pSpCallback *mediaspeech.ISpNotifyCallback, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
-	return win32.HRESULTError(int32(self.Raw.SetNotifyCallbackInterface(pSpCallback, wParam, lParam)))
+func (self ISpNotifySource) SetNotifyCallbackInterface(pSpCallback ISpNotifyCallback, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+	return win32.HRESULTError(int32(self.Raw.SetNotifyCallbackInterface(pSpCallback.Raw, wParam, lParam)))
 }
 
 // SetNotifyWin32Event wraps the raw SetNotifyWin32Event call.
@@ -705,8 +705,8 @@ func (self ISpNotifyTranslator) InitCallback(pfnCallback *mediaspeech.SPNOTIFYCA
 }
 
 // InitSpNotifyCallback wraps the raw InitSpNotifyCallback call.
-func (self ISpNotifyTranslator) InitSpNotifyCallback(pSpCallback *mediaspeech.ISpNotifyCallback, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
-	return win32.HRESULTError(int32(self.Raw.InitSpNotifyCallback(pSpCallback, wParam, lParam)))
+func (self ISpNotifyTranslator) InitSpNotifyCallback(pSpCallback ISpNotifyCallback, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+	return win32.HRESULTError(int32(self.Raw.InitSpNotifyCallback(pSpCallback.Raw, wParam, lParam)))
 }
 
 // InitWin32Event wraps the raw InitWin32Event call.
@@ -755,8 +755,8 @@ func (self ISpObjectToken) GetCategory(ppTokenCategory **mediaspeech.ISpObjectTo
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self ISpObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(pUnkOuter, dwClsContext, riid, ppvObject)))
+func (self ISpObjectToken) CreateInstance(pUnkOuter systemcomidiom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(pUnkOuter.Raw, dwClsContext, riid, ppvObject)))
 }
 
 // GetStorageFileName wraps the raw GetStorageFileName call.
@@ -779,16 +779,16 @@ func (self ISpObjectToken) Remove(pclsidCaller *win32.GUID) error {
 }
 
 // IsUISupported wraps the raw IsUISupported call.
-func (self ISpObjectToken) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown, pfSupported *foundation.BOOL) error {
+func (self ISpObjectToken) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject systemcomidiom.IUnknown, pfSupported *foundation.BOOL) error {
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
-	return win32.HRESULTError(int32(self.Raw.IsUISupported(foundation.PWSTR(_pszTypeOfUI), pvExtraData, cbExtraData, punkObject, pfSupported)))
+	return win32.HRESULTError(int32(self.Raw.IsUISupported(foundation.PWSTR(_pszTypeOfUI), pvExtraData, cbExtraData, punkObject.Raw, pfSupported)))
 }
 
 // DisplayUI wraps the raw DisplayUI call.
-func (self ISpObjectToken) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown) error {
+func (self ISpObjectToken) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject systemcomidiom.IUnknown) error {
 	_pszTitle := win32.UTF16Ptr(pszTitle)
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
-	return win32.HRESULTError(int32(self.Raw.DisplayUI(hwndParent, foundation.PWSTR(_pszTitle), foundation.PWSTR(_pszTypeOfUI), pvExtraData, cbExtraData, punkObject)))
+	return win32.HRESULTError(int32(self.Raw.DisplayUI(hwndParent, foundation.PWSTR(_pszTitle), foundation.PWSTR(_pszTypeOfUI), pvExtraData, cbExtraData, punkObject.Raw)))
 }
 
 // MatchesAttributes wraps the raw MatchesAttributes call.
@@ -867,15 +867,15 @@ func (self ISpObjectTokenEnumBuilder) AddTokens(cTokens uint32, pToken **mediasp
 }
 
 // AddTokensFromDataKey wraps the raw AddTokensFromDataKey call.
-func (self ISpObjectTokenEnumBuilder) AddTokensFromDataKey(pDataKey *mediaspeech.ISpDataKey, pszSubKey string, pszCategoryId string) error {
+func (self ISpObjectTokenEnumBuilder) AddTokensFromDataKey(pDataKey ISpDataKey, pszSubKey string, pszCategoryId string) error {
 	_pszSubKey := win32.UTF16Ptr(pszSubKey)
 	_pszCategoryId := win32.UTF16Ptr(pszCategoryId)
-	return win32.HRESULTError(int32(self.Raw.AddTokensFromDataKey(pDataKey, foundation.PWSTR(_pszSubKey), foundation.PWSTR(_pszCategoryId))))
+	return win32.HRESULTError(int32(self.Raw.AddTokensFromDataKey(pDataKey.Raw, foundation.PWSTR(_pszSubKey), foundation.PWSTR(_pszCategoryId))))
 }
 
 // AddTokensFromTokenEnum wraps the raw AddTokensFromTokenEnum call.
-func (self ISpObjectTokenEnumBuilder) AddTokensFromTokenEnum(pTokenEnum *mediaspeech.IEnumSpObjectTokens) error {
-	return win32.HRESULTError(int32(self.Raw.AddTokensFromTokenEnum(pTokenEnum)))
+func (self ISpObjectTokenEnumBuilder) AddTokensFromTokenEnum(pTokenEnum IEnumSpObjectTokens) error {
+	return win32.HRESULTError(int32(self.Raw.AddTokensFromTokenEnum(pTokenEnum.Raw)))
 }
 
 // Sort wraps the raw Sort call.
@@ -896,10 +896,10 @@ func WrapISpObjectTokenInit(raw *mediaspeech.ISpObjectTokenInit) ISpObjectTokenI
 }
 
 // InitFromDataKey wraps the raw InitFromDataKey call.
-func (self ISpObjectTokenInit) InitFromDataKey(pszCategoryId string, pszTokenId string, pDataKey *mediaspeech.ISpDataKey) error {
+func (self ISpObjectTokenInit) InitFromDataKey(pszCategoryId string, pszTokenId string, pDataKey ISpDataKey) error {
 	_pszCategoryId := win32.UTF16Ptr(pszCategoryId)
 	_pszTokenId := win32.UTF16Ptr(pszTokenId)
-	return win32.HRESULTError(int32(self.Raw.InitFromDataKey(foundation.PWSTR(_pszCategoryId), foundation.PWSTR(_pszTokenId), pDataKey)))
+	return win32.HRESULTError(int32(self.Raw.InitFromDataKey(foundation.PWSTR(_pszCategoryId), foundation.PWSTR(_pszTokenId), pDataKey.Raw)))
 }
 
 // ISpObjectWithToken is an idiomatic wrapper over the raw COM interface Media.Speech.ISpObjectWithToken with error-returning methods.
@@ -914,8 +914,8 @@ func WrapISpObjectWithToken(raw *mediaspeech.ISpObjectWithToken) ISpObjectWithTo
 }
 
 // SetObjectToken wraps the raw SetObjectToken call.
-func (self ISpObjectWithToken) SetObjectToken(pToken *mediaspeech.ISpObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.SetObjectToken(pToken)))
+func (self ISpObjectWithToken) SetObjectToken(pToken ISpObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.SetObjectToken(pToken.Raw)))
 }
 
 // GetObjectToken wraps the raw GetObjectToken call.
@@ -1254,9 +1254,9 @@ func (self ISpRecoContext) Resume(dwReserved uint32) error {
 }
 
 // SetVoice wraps the raw SetVoice call.
-func (self ISpRecoContext) SetVoice(pVoice *mediaspeech.ISpVoice, fAllowFormatChanges bool) error {
+func (self ISpRecoContext) SetVoice(pVoice ISpVoice, fAllowFormatChanges bool) error {
 	_fAllowFormatChanges := foundation.BOOL(win32.Bool32(fAllowFormatChanges))
-	return win32.HRESULTError(int32(self.Raw.SetVoice(pVoice, _fAllowFormatChanges)))
+	return win32.HRESULTError(int32(self.Raw.SetVoice(pVoice.Raw, _fAllowFormatChanges)))
 }
 
 // GetVoice wraps the raw GetVoice call.
@@ -1413,8 +1413,8 @@ func (self ISpRecoGrammar) SetGrammarState(eGrammarState mediaspeech.SPGRAMMARST
 }
 
 // SaveCmd wraps the raw SaveCmd call.
-func (self ISpRecoGrammar) SaveCmd(pStream *systemcom.IStream, ppszCoMemErrorText *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.SaveCmd(pStream, ppszCoMemErrorText)))
+func (self ISpRecoGrammar) SaveCmd(pStream systemcomidiom.IStream, ppszCoMemErrorText *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.SaveCmd(pStream.Raw, ppszCoMemErrorText)))
 }
 
 // GetGrammarState wraps the raw GetGrammarState call.
@@ -1460,13 +1460,13 @@ func (self ISpRecoGrammar2) SetRulePriority(pszRuleName string, ulRuleId uint32,
 }
 
 // SetGrammarLoader wraps the raw SetGrammarLoader call.
-func (self ISpRecoGrammar2) SetGrammarLoader(pLoader *mediaspeech.ISpeechResourceLoader) error {
-	return win32.HRESULTError(int32(self.Raw.SetGrammarLoader(pLoader)))
+func (self ISpRecoGrammar2) SetGrammarLoader(pLoader ISpeechResourceLoader) error {
+	return win32.HRESULTError(int32(self.Raw.SetGrammarLoader(pLoader.Raw)))
 }
 
 // SetSMLSecurityManager wraps the raw SetSMLSecurityManager call.
-func (self ISpRecoGrammar2) SetSMLSecurityManager(pSMLSecurityManager *systemcomurlmon.IInternetSecurityManager) error {
-	return win32.HRESULTError(int32(self.Raw.SetSMLSecurityManager(pSMLSecurityManager)))
+func (self ISpRecoGrammar2) SetSMLSecurityManager(pSMLSecurityManager systemcomurlmonidiom.IInternetSecurityManager) error {
+	return win32.HRESULTError(int32(self.Raw.SetSMLSecurityManager(pSMLSecurityManager.Raw)))
 }
 
 // ISpRecoResult is an idiomatic wrapper over the raw COM interface Media.Speech.ISpRecoResult with error-returning methods.
@@ -1527,8 +1527,8 @@ func WrapISpRecoResult2(raw *mediaspeech.ISpRecoResult2) ISpRecoResult2 {
 }
 
 // CommitAlternate wraps the raw CommitAlternate call.
-func (self ISpRecoResult2) CommitAlternate(pPhraseAlt *mediaspeech.ISpPhraseAlt, ppNewResult **mediaspeech.ISpRecoResult) error {
-	return win32.HRESULTError(int32(self.Raw.CommitAlternate(pPhraseAlt, ppNewResult)))
+func (self ISpRecoResult2) CommitAlternate(pPhraseAlt ISpPhraseAlt, ppNewResult **mediaspeech.ISpRecoResult) error {
+	return win32.HRESULTError(int32(self.Raw.CommitAlternate(pPhraseAlt.Raw, ppNewResult)))
 }
 
 // CommitText wraps the raw CommitText call.
@@ -1556,8 +1556,8 @@ func WrapISpRecognizer(raw *mediaspeech.ISpRecognizer) ISpRecognizer {
 }
 
 // SetRecognizer wraps the raw SetRecognizer call.
-func (self ISpRecognizer) SetRecognizer(pRecognizer *mediaspeech.ISpObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.SetRecognizer(pRecognizer)))
+func (self ISpRecognizer) SetRecognizer(pRecognizer ISpObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.SetRecognizer(pRecognizer.Raw)))
 }
 
 // GetRecognizer wraps the raw GetRecognizer call.
@@ -1566,9 +1566,9 @@ func (self ISpRecognizer) GetRecognizer(ppRecognizer **mediaspeech.ISpObjectToke
 }
 
 // SetInput wraps the raw SetInput call.
-func (self ISpRecognizer) SetInput(pUnkInput *systemcom.IUnknown, fAllowFormatChanges bool) error {
+func (self ISpRecognizer) SetInput(pUnkInput systemcomidiom.IUnknown, fAllowFormatChanges bool) error {
 	_fAllowFormatChanges := foundation.BOOL(win32.Bool32(fAllowFormatChanges))
-	return win32.HRESULTError(int32(self.Raw.SetInput(pUnkInput, _fAllowFormatChanges)))
+	return win32.HRESULTError(int32(self.Raw.SetInput(pUnkInput.Raw, _fAllowFormatChanges)))
 }
 
 // GetInputObjectToken wraps the raw GetInputObjectToken call.
@@ -1592,8 +1592,8 @@ func (self ISpRecognizer) GetRecoProfile(ppToken **mediaspeech.ISpObjectToken) e
 }
 
 // SetRecoProfile wraps the raw SetRecoProfile call.
-func (self ISpRecognizer) SetRecoProfile(pToken *mediaspeech.ISpObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.SetRecoProfile(pToken)))
+func (self ISpRecognizer) SetRecoProfile(pToken ISpObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.SetRecoProfile(pToken.Raw)))
 }
 
 // IsSharedInstance wraps the raw IsSharedInstance call.
@@ -1635,8 +1635,8 @@ func (self ISpRecognizer) DisplayUI(hwndParent foundation.HWND, pszTitle string,
 }
 
 // EmulateRecognition wraps the raw EmulateRecognition call.
-func (self ISpRecognizer) EmulateRecognition(pPhrase *mediaspeech.ISpPhrase) error {
-	return win32.HRESULTError(int32(self.Raw.EmulateRecognition(pPhrase)))
+func (self ISpRecognizer) EmulateRecognition(pPhrase ISpPhrase) error {
+	return win32.HRESULTError(int32(self.Raw.EmulateRecognition(pPhrase.Raw)))
 }
 
 // ISpRecognizer2 is an idiomatic wrapper over the raw COM interface Media.Speech.ISpRecognizer2 with error-returning methods.
@@ -1651,8 +1651,8 @@ func WrapISpRecognizer2(raw *mediaspeech.ISpRecognizer2) ISpRecognizer2 {
 }
 
 // EmulateRecognitionEx wraps the raw EmulateRecognitionEx call.
-func (self ISpRecognizer2) EmulateRecognitionEx(pPhrase *mediaspeech.ISpPhrase, dwCompareFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.EmulateRecognitionEx(pPhrase, dwCompareFlags)))
+func (self ISpRecognizer2) EmulateRecognitionEx(pPhrase ISpPhrase, dwCompareFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.EmulateRecognitionEx(pPhrase.Raw, dwCompareFlags)))
 }
 
 // SetTrainingState wraps the raw SetTrainingState call.
@@ -1696,8 +1696,8 @@ func WrapISpResourceManager(raw *mediaspeech.ISpResourceManager) ISpResourceMana
 }
 
 // SetObject wraps the raw SetObject call.
-func (self ISpResourceManager) SetObject(guidServiceId *win32.GUID, pUnkObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetObject(guidServiceId, pUnkObject)))
+func (self ISpResourceManager) SetObject(guidServiceId *win32.GUID, pUnkObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetObject(guidServiceId, pUnkObject.Raw)))
 }
 
 // GetObject wraps the raw GetObject call.
@@ -1756,8 +1756,8 @@ func WrapISpSREngine(raw *mediaspeech.ISpSREngine) ISpSREngine {
 }
 
 // SetSite wraps the raw SetSite call.
-func (self ISpSREngine) SetSite(pSite *mediaspeech.ISpSREngineSite) error {
-	return win32.HRESULTError(int32(self.Raw.SetSite(pSite)))
+func (self ISpSREngine) SetSite(pSite ISpSREngineSite) error {
+	return win32.HRESULTError(int32(self.Raw.SetSite(pSite.Raw)))
 }
 
 // GetInputAudioFormat wraps the raw GetInputAudioFormat call.
@@ -1766,15 +1766,15 @@ func (self ISpSREngine) GetInputAudioFormat(pguidSourceFormatId *win32.GUID, pSo
 }
 
 // RecognizeStream wraps the raw RecognizeStream call.
-func (self ISpSREngine) RecognizeStream(rguidFmtId *win32.GUID, pWaveFormatEx unsafe.Pointer, hRequestSync foundation.HANDLE, hDataAvailable foundation.HANDLE, hExit foundation.HANDLE, fNewAudioStream bool, fRealTimeAudio bool, pAudioObjectToken *mediaspeech.ISpObjectToken) error {
+func (self ISpSREngine) RecognizeStream(rguidFmtId *win32.GUID, pWaveFormatEx unsafe.Pointer, hRequestSync foundation.HANDLE, hDataAvailable foundation.HANDLE, hExit foundation.HANDLE, fNewAudioStream bool, fRealTimeAudio bool, pAudioObjectToken ISpObjectToken) error {
 	_fNewAudioStream := foundation.BOOL(win32.Bool32(fNewAudioStream))
 	_fRealTimeAudio := foundation.BOOL(win32.Bool32(fRealTimeAudio))
-	return win32.HRESULTError(int32(self.Raw.RecognizeStream(rguidFmtId, pWaveFormatEx, hRequestSync, hDataAvailable, hExit, _fNewAudioStream, _fRealTimeAudio, pAudioObjectToken)))
+	return win32.HRESULTError(int32(self.Raw.RecognizeStream(rguidFmtId, pWaveFormatEx, hRequestSync, hDataAvailable, hExit, _fNewAudioStream, _fRealTimeAudio, pAudioObjectToken.Raw)))
 }
 
 // SetRecoProfile wraps the raw SetRecoProfile call.
-func (self ISpSREngine) SetRecoProfile(pProfile *mediaspeech.ISpObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.SetRecoProfile(pProfile)))
+func (self ISpSREngine) SetRecoProfile(pProfile ISpObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.SetRecoProfile(pProfile.Raw)))
 }
 
 // OnCreateGrammar wraps the raw OnCreateGrammar call.
@@ -1949,8 +1949,8 @@ func (self ISpSREngine2) SetRulePriority(hRule mediaspeech.SPRULEHANDLE, pvClien
 }
 
 // EmulateRecognition wraps the raw EmulateRecognition call.
-func (self ISpSREngine2) EmulateRecognition(pPhrase *mediaspeech.ISpPhrase, dwCompareFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.EmulateRecognition(pPhrase, dwCompareFlags)))
+func (self ISpSREngine2) EmulateRecognition(pPhrase ISpPhrase, dwCompareFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.EmulateRecognition(pPhrase.Raw, dwCompareFlags)))
 }
 
 // SetTrainingState wraps the raw SetTrainingState call.
@@ -2196,8 +2196,8 @@ func WrapISpStream(raw *mediaspeech.ISpStream) ISpStream {
 }
 
 // SetBaseStream wraps the raw SetBaseStream call.
-func (self ISpStream) SetBaseStream(pStream *systemcom.IStream, rguidFormat *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.SetBaseStream(pStream, rguidFormat, pWaveFormatEx)))
+func (self ISpStream) SetBaseStream(pStream systemcomidiom.IStream, rguidFormat *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.SetBaseStream(pStream.Raw, rguidFormat, pWaveFormatEx)))
 }
 
 // GetBaseStream wraps the raw GetBaseStream call.
@@ -2244,10 +2244,10 @@ func WrapISpStreamFormatConverter(raw *mediaspeech.ISpStreamFormatConverter) ISp
 }
 
 // SetBaseStream wraps the raw SetBaseStream call.
-func (self ISpStreamFormatConverter) SetBaseStream(pStream *mediaspeech.ISpStreamFormat, fSetFormatToBaseStreamFormat bool, fWriteToBaseStream bool) error {
+func (self ISpStreamFormatConverter) SetBaseStream(pStream ISpStreamFormat, fSetFormatToBaseStreamFormat bool, fWriteToBaseStream bool) error {
 	_fSetFormatToBaseStreamFormat := foundation.BOOL(win32.Bool32(fSetFormatToBaseStreamFormat))
 	_fWriteToBaseStream := foundation.BOOL(win32.Bool32(fWriteToBaseStream))
-	return win32.HRESULTError(int32(self.Raw.SetBaseStream(pStream, _fSetFormatToBaseStreamFormat, _fWriteToBaseStream)))
+	return win32.HRESULTError(int32(self.Raw.SetBaseStream(pStream.Raw, _fSetFormatToBaseStreamFormat, _fWriteToBaseStream)))
 }
 
 // GetBaseStream wraps the raw GetBaseStream call.
@@ -2287,8 +2287,8 @@ func WrapISpTTSEngine(raw *mediaspeech.ISpTTSEngine) ISpTTSEngine {
 }
 
 // Speak wraps the raw Speak call.
-func (self ISpTTSEngine) Speak(dwSpeakFlags uint32, rguidFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer, pTextFragList *mediaspeech.SPVTEXTFRAG, pOutputSite *mediaspeech.ISpTTSEngineSite) error {
-	return win32.HRESULTError(int32(self.Raw.Speak(dwSpeakFlags, rguidFormatId, pWaveFormatEx, pTextFragList, pOutputSite)))
+func (self ISpTTSEngine) Speak(dwSpeakFlags uint32, rguidFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer, pTextFragList *mediaspeech.SPVTEXTFRAG, pOutputSite ISpTTSEngineSite) error {
+	return win32.HRESULTError(int32(self.Raw.Speak(dwSpeakFlags, rguidFormatId, pWaveFormatEx, pTextFragList, pOutputSite.Raw)))
 }
 
 // GetOutputFormat wraps the raw GetOutputFormat call.
@@ -2374,18 +2374,18 @@ func (self ISpTaskManager) GetThreadPoolInfo(pPoolInfo *mediaspeech.SPTMTHREADIN
 }
 
 // QueueTask wraps the raw QueueTask call.
-func (self ISpTaskManager) QueueTask(pTask *mediaspeech.ISpTask, pvTaskData unsafe.Pointer, hCompEvent foundation.HANDLE, pdwGroupId *uint32, pTaskID *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.QueueTask(pTask, pvTaskData, hCompEvent, pdwGroupId, pTaskID)))
+func (self ISpTaskManager) QueueTask(pTask ISpTask, pvTaskData unsafe.Pointer, hCompEvent foundation.HANDLE, pdwGroupId *uint32, pTaskID *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.QueueTask(pTask.Raw, pvTaskData, hCompEvent, pdwGroupId, pTaskID)))
 }
 
 // CreateReoccurringTask wraps the raw CreateReoccurringTask call.
-func (self ISpTaskManager) CreateReoccurringTask(pTask *mediaspeech.ISpTask, pvTaskData unsafe.Pointer, hCompEvent foundation.HANDLE, ppTaskCtrl **mediaspeech.ISpNotifySink) error {
-	return win32.HRESULTError(int32(self.Raw.CreateReoccurringTask(pTask, pvTaskData, hCompEvent, ppTaskCtrl)))
+func (self ISpTaskManager) CreateReoccurringTask(pTask ISpTask, pvTaskData unsafe.Pointer, hCompEvent foundation.HANDLE, ppTaskCtrl **mediaspeech.ISpNotifySink) error {
+	return win32.HRESULTError(int32(self.Raw.CreateReoccurringTask(pTask.Raw, pvTaskData, hCompEvent, ppTaskCtrl)))
 }
 
 // CreateThreadControl wraps the raw CreateThreadControl call.
-func (self ISpTaskManager) CreateThreadControl(pTask *mediaspeech.ISpThreadTask, pvTaskData unsafe.Pointer, nPriority int32, ppTaskCtrl **mediaspeech.ISpThreadControl) error {
-	return win32.HRESULTError(int32(self.Raw.CreateThreadControl(pTask, pvTaskData, nPriority, ppTaskCtrl)))
+func (self ISpTaskManager) CreateThreadControl(pTask ISpThreadTask, pvTaskData unsafe.Pointer, nPriority int32, ppTaskCtrl **mediaspeech.ISpThreadControl) error {
+	return win32.HRESULTError(int32(self.Raw.CreateThreadControl(pTask.Raw, pvTaskData, nPriority, ppTaskCtrl)))
 }
 
 // TerminateTask wraps the raw TerminateTask call.
@@ -2492,16 +2492,16 @@ func WrapISpTokenUI(raw *mediaspeech.ISpTokenUI) ISpTokenUI {
 }
 
 // IsUISupported wraps the raw IsUISupported call.
-func (self ISpTokenUI) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown, pfSupported *foundation.BOOL) error {
+func (self ISpTokenUI) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject systemcomidiom.IUnknown, pfSupported *foundation.BOOL) error {
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
-	return win32.HRESULTError(int32(self.Raw.IsUISupported(foundation.PWSTR(_pszTypeOfUI), pvExtraData, cbExtraData, punkObject, pfSupported)))
+	return win32.HRESULTError(int32(self.Raw.IsUISupported(foundation.PWSTR(_pszTypeOfUI), pvExtraData, cbExtraData, punkObject.Raw, pfSupported)))
 }
 
 // DisplayUI wraps the raw DisplayUI call.
-func (self ISpTokenUI) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pToken *mediaspeech.ISpObjectToken, punkObject *systemcom.IUnknown) error {
+func (self ISpTokenUI) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pToken ISpObjectToken, punkObject systemcomidiom.IUnknown) error {
 	_pszTitle := win32.UTF16Ptr(pszTitle)
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
-	return win32.HRESULTError(int32(self.Raw.DisplayUI(hwndParent, foundation.PWSTR(_pszTitle), foundation.PWSTR(_pszTypeOfUI), pvExtraData, cbExtraData, pToken, punkObject)))
+	return win32.HRESULTError(int32(self.Raw.DisplayUI(hwndParent, foundation.PWSTR(_pszTitle), foundation.PWSTR(_pszTypeOfUI), pvExtraData, cbExtraData, pToken.Raw, punkObject.Raw)))
 }
 
 // ISpTranscript is an idiomatic wrapper over the raw COM interface Media.Speech.ISpTranscript with error-returning methods.
@@ -2538,9 +2538,9 @@ func WrapISpVoice(raw *mediaspeech.ISpVoice) ISpVoice {
 }
 
 // SetOutput wraps the raw SetOutput call.
-func (self ISpVoice) SetOutput(pUnkOutput *systemcom.IUnknown, fAllowFormatChanges bool) error {
+func (self ISpVoice) SetOutput(pUnkOutput systemcomidiom.IUnknown, fAllowFormatChanges bool) error {
 	_fAllowFormatChanges := foundation.BOOL(win32.Bool32(fAllowFormatChanges))
-	return win32.HRESULTError(int32(self.Raw.SetOutput(pUnkOutput, _fAllowFormatChanges)))
+	return win32.HRESULTError(int32(self.Raw.SetOutput(pUnkOutput.Raw, _fAllowFormatChanges)))
 }
 
 // GetOutputObjectToken wraps the raw GetOutputObjectToken call.
@@ -2564,8 +2564,8 @@ func (self ISpVoice) Resume() error {
 }
 
 // SetVoice wraps the raw SetVoice call.
-func (self ISpVoice) SetVoice(pToken *mediaspeech.ISpObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.SetVoice(pToken)))
+func (self ISpVoice) SetVoice(pToken ISpObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.SetVoice(pToken.Raw)))
 }
 
 // GetVoice wraps the raw GetVoice call.
@@ -2580,8 +2580,8 @@ func (self ISpVoice) Speak(pwcs string, dwFlags uint32, pulStreamNumber *uint32)
 }
 
 // SpeakStream wraps the raw SpeakStream call.
-func (self ISpVoice) SpeakStream(pStream *systemcom.IStream, dwFlags uint32, pulStreamNumber *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SpeakStream(pStream, dwFlags, pulStreamNumber)))
+func (self ISpVoice) SpeakStream(pStream systemcomidiom.IStream, dwFlags uint32, pulStreamNumber *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SpeakStream(pStream.Raw, dwFlags, pulStreamNumber)))
 }
 
 // GetStatus wraps the raw GetStatus call.
@@ -2823,8 +2823,8 @@ func (self ISpeechAudioFormat) GetWaveFormatEx(SpeechWaveFormatEx **mediaspeech.
 }
 
 // SetWaveFormatEx wraps the raw SetWaveFormatEx call.
-func (self ISpeechAudioFormat) SetWaveFormatEx(SpeechWaveFormatEx *mediaspeech.ISpeechWaveFormatEx) error {
-	return win32.HRESULTError(int32(self.Raw.SetWaveFormatEx(SpeechWaveFormatEx)))
+func (self ISpeechAudioFormat) SetWaveFormatEx(SpeechWaveFormatEx ISpeechWaveFormatEx) error {
+	return win32.HRESULTError(int32(self.Raw.SetWaveFormatEx(SpeechWaveFormatEx.Raw)))
 }
 
 // ISpeechAudioStatus is an idiomatic wrapper over the raw COM interface Media.Speech.ISpeechAudioStatus with error-returning methods.
@@ -2880,8 +2880,8 @@ func (self ISpeechBaseStream) Get_Format(AudioFormat **mediaspeech.ISpeechAudioF
 }
 
 // Putref_Format wraps the raw Putref_Format call.
-func (self ISpeechBaseStream) Putref_Format(AudioFormat *mediaspeech.ISpeechAudioFormat) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Format(AudioFormat)))
+func (self ISpeechBaseStream) Putref_Format(AudioFormat ISpeechAudioFormat) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Format(AudioFormat.Raw)))
 }
 
 // Read wraps the raw Read call.
@@ -2906,8 +2906,8 @@ func (self ISpeechCustomStream) Get_BaseStream(ppUnkStream **systemcom.IUnknown)
 }
 
 // Putref_BaseStream wraps the raw Putref_BaseStream call.
-func (self ISpeechCustomStream) Putref_BaseStream(pUnkStream *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_BaseStream(pUnkStream)))
+func (self ISpeechCustomStream) Putref_BaseStream(pUnkStream systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_BaseStream(pUnkStream.Raw)))
 }
 
 // ISpeechDataKey is an idiomatic wrapper over the raw COM interface Media.Speech.ISpeechDataKey with error-returning methods.
@@ -3451,8 +3451,8 @@ func (self ISpeechObjectToken) GetAttribute(AttributeName foundation.BSTR, Attri
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self ISpeechObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, ClsContext mediaspeech.SpeechTokenContext, Object **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(pUnkOuter, ClsContext, Object)))
+func (self ISpeechObjectToken) CreateInstance(pUnkOuter systemcomidiom.IUnknown, ClsContext mediaspeech.SpeechTokenContext, Object **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstance(pUnkOuter.Raw, ClsContext, Object)))
 }
 
 // Remove wraps the raw Remove call.
@@ -3471,13 +3471,13 @@ func (self ISpeechObjectToken) RemoveStorageFileName(ObjectStorageCLSID foundati
 }
 
 // IsUISupported wraps the raw IsUISupported call.
-func (self ISpeechObjectToken) IsUISupported(TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Object *systemcom.IUnknown, Supported *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsUISupported(TypeOfUI, ExtraData, Object, Supported)))
+func (self ISpeechObjectToken) IsUISupported(TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Object systemcomidiom.IUnknown, Supported *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsUISupported(TypeOfUI, ExtraData, Object.Raw, Supported)))
 }
 
 // DisplayUI wraps the raw DisplayUI call.
-func (self ISpeechObjectToken) DisplayUI(hWnd int32, Title foundation.BSTR, TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Object *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.DisplayUI(hWnd, Title, TypeOfUI, ExtraData, Object)))
+func (self ISpeechObjectToken) DisplayUI(hWnd int32, Title foundation.BSTR, TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Object systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.DisplayUI(hWnd, Title, TypeOfUI, ExtraData, Object.Raw)))
 }
 
 // MatchesAttributes wraps the raw MatchesAttributes call.
@@ -4092,8 +4092,8 @@ func (self ISpeechRecoContext) Get_RequestedUIType(UIType *foundation.BSTR) erro
 }
 
 // Putref_Voice wraps the raw Putref_Voice call.
-func (self ISpeechRecoContext) Putref_Voice(Voice *mediaspeech.ISpeechVoice) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Voice(Voice)))
+func (self ISpeechRecoContext) Putref_Voice(Voice ISpeechVoice) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Voice(Voice.Raw)))
 }
 
 // Get_Voice wraps the raw Get_Voice call.
@@ -4162,8 +4162,8 @@ func (self ISpeechRecoContext) Get_RetainedAudio(Option *mediaspeech.SpeechRetai
 }
 
 // Putref_RetainedAudioFormat wraps the raw Putref_RetainedAudioFormat call.
-func (self ISpeechRecoContext) Putref_RetainedAudioFormat(Format *mediaspeech.ISpeechAudioFormat) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_RetainedAudioFormat(Format)))
+func (self ISpeechRecoContext) Putref_RetainedAudioFormat(Format ISpeechAudioFormat) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_RetainedAudioFormat(Format.Raw)))
 }
 
 // Get_RetainedAudioFormat wraps the raw Get_RetainedAudioFormat call.
@@ -4268,13 +4268,13 @@ func (self ISpeechRecoGrammar) DictationSetState(State mediaspeech.SpeechRuleSta
 }
 
 // SetWordSequenceData wraps the raw SetWordSequenceData call.
-func (self ISpeechRecoGrammar) SetWordSequenceData(Text foundation.BSTR, TextLength int32, Info *mediaspeech.ISpeechTextSelectionInformation) error {
-	return win32.HRESULTError(int32(self.Raw.SetWordSequenceData(Text, TextLength, Info)))
+func (self ISpeechRecoGrammar) SetWordSequenceData(Text foundation.BSTR, TextLength int32, Info ISpeechTextSelectionInformation) error {
+	return win32.HRESULTError(int32(self.Raw.SetWordSequenceData(Text, TextLength, Info.Raw)))
 }
 
 // SetTextSelection wraps the raw SetTextSelection call.
-func (self ISpeechRecoGrammar) SetTextSelection(Info *mediaspeech.ISpeechTextSelectionInformation) error {
-	return win32.HRESULTError(int32(self.Raw.SetTextSelection(Info)))
+func (self ISpeechRecoGrammar) SetTextSelection(Info ISpeechTextSelectionInformation) error {
+	return win32.HRESULTError(int32(self.Raw.SetTextSelection(Info.Raw)))
 }
 
 // IsPronounceable wraps the raw IsPronounceable call.
@@ -4304,8 +4304,8 @@ func (self ISpeechRecoResult) Get_Times(Times **mediaspeech.ISpeechRecoResultTim
 }
 
 // Putref_AudioFormat wraps the raw Putref_AudioFormat call.
-func (self ISpeechRecoResult) Putref_AudioFormat(Format *mediaspeech.ISpeechAudioFormat) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AudioFormat(Format)))
+func (self ISpeechRecoResult) Putref_AudioFormat(Format ISpeechAudioFormat) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AudioFormat(Format.Raw)))
 }
 
 // Get_AudioFormat wraps the raw Get_AudioFormat call.
@@ -4381,8 +4381,8 @@ func (self ISpeechRecoResultDispatch) Get_Times(Times **mediaspeech.ISpeechRecoR
 }
 
 // Putref_AudioFormat wraps the raw Putref_AudioFormat call.
-func (self ISpeechRecoResultDispatch) Putref_AudioFormat(Format *mediaspeech.ISpeechAudioFormat) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AudioFormat(Format)))
+func (self ISpeechRecoResultDispatch) Putref_AudioFormat(Format ISpeechAudioFormat) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AudioFormat(Format.Raw)))
 }
 
 // Get_AudioFormat wraps the raw Get_AudioFormat call.
@@ -4478,8 +4478,8 @@ func WrapISpeechRecognizer(raw *mediaspeech.ISpeechRecognizer) ISpeechRecognizer
 }
 
 // Putref_Recognizer wraps the raw Putref_Recognizer call.
-func (self ISpeechRecognizer) Putref_Recognizer(Recognizer *mediaspeech.ISpeechObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Recognizer(Recognizer)))
+func (self ISpeechRecognizer) Putref_Recognizer(Recognizer ISpeechObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Recognizer(Recognizer.Raw)))
 }
 
 // Get_Recognizer wraps the raw Get_Recognizer call.
@@ -4498,8 +4498,8 @@ func (self ISpeechRecognizer) Get_AllowAudioInputFormatChangesOnNextSet(Allow *f
 }
 
 // Putref_AudioInput wraps the raw Putref_AudioInput call.
-func (self ISpeechRecognizer) Putref_AudioInput(AudioInput *mediaspeech.ISpeechObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AudioInput(AudioInput)))
+func (self ISpeechRecognizer) Putref_AudioInput(AudioInput ISpeechObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AudioInput(AudioInput.Raw)))
 }
 
 // Get_AudioInput wraps the raw Get_AudioInput call.
@@ -4508,8 +4508,8 @@ func (self ISpeechRecognizer) Get_AudioInput(AudioInput **mediaspeech.ISpeechObj
 }
 
 // Putref_AudioInputStream wraps the raw Putref_AudioInputStream call.
-func (self ISpeechRecognizer) Putref_AudioInputStream(AudioInputStream *mediaspeech.ISpeechBaseStream) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AudioInputStream(AudioInputStream)))
+func (self ISpeechRecognizer) Putref_AudioInputStream(AudioInputStream ISpeechBaseStream) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AudioInputStream(AudioInputStream.Raw)))
 }
 
 // Get_AudioInputStream wraps the raw Get_AudioInputStream call.
@@ -4538,8 +4538,8 @@ func (self ISpeechRecognizer) Get_Status(Status **mediaspeech.ISpeechRecognizerS
 }
 
 // Putref_Profile wraps the raw Putref_Profile call.
-func (self ISpeechRecognizer) Putref_Profile(Profile *mediaspeech.ISpeechObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Profile(Profile)))
+func (self ISpeechRecognizer) Putref_Profile(Profile ISpeechObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Profile(Profile.Raw)))
 }
 
 // Get_Profile wraps the raw Get_Profile call.
@@ -4742,8 +4742,8 @@ func (self ISpeechVoice) Get_Voice(Voice **mediaspeech.ISpeechObjectToken) error
 }
 
 // Putref_Voice wraps the raw Putref_Voice call.
-func (self ISpeechVoice) Putref_Voice(Voice *mediaspeech.ISpeechObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_Voice(Voice)))
+func (self ISpeechVoice) Putref_Voice(Voice ISpeechObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_Voice(Voice.Raw)))
 }
 
 // Get_AudioOutput wraps the raw Get_AudioOutput call.
@@ -4752,8 +4752,8 @@ func (self ISpeechVoice) Get_AudioOutput(AudioOutput **mediaspeech.ISpeechObject
 }
 
 // Putref_AudioOutput wraps the raw Putref_AudioOutput call.
-func (self ISpeechVoice) Putref_AudioOutput(AudioOutput *mediaspeech.ISpeechObjectToken) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AudioOutput(AudioOutput)))
+func (self ISpeechVoice) Putref_AudioOutput(AudioOutput ISpeechObjectToken) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AudioOutput(AudioOutput.Raw)))
 }
 
 // Get_AudioOutputStream wraps the raw Get_AudioOutputStream call.
@@ -4762,8 +4762,8 @@ func (self ISpeechVoice) Get_AudioOutputStream(AudioOutputStream **mediaspeech.I
 }
 
 // Putref_AudioOutputStream wraps the raw Putref_AudioOutputStream call.
-func (self ISpeechVoice) Putref_AudioOutputStream(AudioOutputStream *mediaspeech.ISpeechBaseStream) error {
-	return win32.HRESULTError(int32(self.Raw.Putref_AudioOutputStream(AudioOutputStream)))
+func (self ISpeechVoice) Putref_AudioOutputStream(AudioOutputStream ISpeechBaseStream) error {
+	return win32.HRESULTError(int32(self.Raw.Putref_AudioOutputStream(AudioOutputStream.Raw)))
 }
 
 // Get_Rate wraps the raw Get_Rate call.
@@ -4842,8 +4842,8 @@ func (self ISpeechVoice) Speak(Text foundation.BSTR, Flags mediaspeech.SpeechVoi
 }
 
 // SpeakStream wraps the raw SpeakStream call.
-func (self ISpeechVoice) SpeakStream(Stream *mediaspeech.ISpeechBaseStream, Flags mediaspeech.SpeechVoiceSpeakFlags, StreamNumber *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SpeakStream(Stream, Flags, StreamNumber)))
+func (self ISpeechVoice) SpeakStream(Stream ISpeechBaseStream, Flags mediaspeech.SpeechVoiceSpeakFlags, StreamNumber *int32) error {
+	return win32.HRESULTError(int32(self.Raw.SpeakStream(Stream.Raw, Flags, StreamNumber)))
 }
 
 // Pause wraps the raw Pause call.

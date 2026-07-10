@@ -28,8 +28,8 @@ func WrapAsyncIDebugApplicationNodeEvents(raw *systemdiagnosticsdebugactivescrip
 }
 
 // Begin_onAddChild wraps the raw Begin_onAddChild call.
-func (self AsyncIDebugApplicationNodeEvents) Begin_onAddChild(prddpChild *systemdiagnosticsdebugactivescript.IDebugApplicationNode) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_onAddChild(prddpChild)))
+func (self AsyncIDebugApplicationNodeEvents) Begin_onAddChild(prddpChild IDebugApplicationNode) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_onAddChild(prddpChild.Raw)))
 }
 
 // Finish_onAddChild wraps the raw Finish_onAddChild call.
@@ -38,8 +38,8 @@ func (self AsyncIDebugApplicationNodeEvents) Finish_onAddChild() error {
 }
 
 // Begin_onRemoveChild wraps the raw Begin_onRemoveChild call.
-func (self AsyncIDebugApplicationNodeEvents) Begin_onRemoveChild(prddpChild *systemdiagnosticsdebugactivescript.IDebugApplicationNode) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_onRemoveChild(prddpChild)))
+func (self AsyncIDebugApplicationNodeEvents) Begin_onRemoveChild(prddpChild IDebugApplicationNode) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_onRemoveChild(prddpChild.Raw)))
 }
 
 // Finish_onRemoveChild wraps the raw Finish_onRemoveChild call.
@@ -58,8 +58,8 @@ func (self AsyncIDebugApplicationNodeEvents) Finish_onDetach() error {
 }
 
 // Begin_onAttach wraps the raw Begin_onAttach call.
-func (self AsyncIDebugApplicationNodeEvents) Begin_onAttach(prddpParent *systemdiagnosticsdebugactivescript.IDebugApplicationNode) error {
-	return win32.HRESULTError(int32(self.Raw.Begin_onAttach(prddpParent)))
+func (self AsyncIDebugApplicationNodeEvents) Begin_onAttach(prddpParent IDebugApplicationNode) error {
+	return win32.HRESULTError(int32(self.Raw.Begin_onAttach(prddpParent.Raw)))
 }
 
 // Finish_onAttach wraps the raw Finish_onAttach call.
@@ -79,8 +79,8 @@ func WrapIActiveScript(raw *systemdiagnosticsdebugactivescript.IActiveScript) IA
 }
 
 // SetScriptSite wraps the raw SetScriptSite call.
-func (self IActiveScript) SetScriptSite(pass *systemdiagnosticsdebugactivescript.IActiveScriptSite) error {
-	return win32.HRESULTError(int32(self.Raw.SetScriptSite(pass)))
+func (self IActiveScript) SetScriptSite(pass IActiveScriptSite) error {
+	return win32.HRESULTError(int32(self.Raw.SetScriptSite(pass.Raw)))
 }
 
 // GetScriptSite wraps the raw GetScriptSite call.
@@ -157,9 +157,9 @@ func WrapIActiveScriptAuthor(raw *systemdiagnosticsdebugactivescript.IActiveScri
 }
 
 // AddNamedItem wraps the raw AddNamedItem call.
-func (self IActiveScriptAuthor) AddNamedItem(pszName string, dwFlags uint32, pdisp *systemcom.IDispatch) error {
+func (self IActiveScriptAuthor) AddNamedItem(pszName string, dwFlags uint32, pdisp systemcomidiom.IDispatch) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(self.Raw.AddNamedItem(foundation.PWSTR(_pszName), dwFlags, pdisp)))
+	return win32.HRESULTError(int32(self.Raw.AddNamedItem(foundation.PWSTR(_pszName), dwFlags, pdisp.Raw)))
 }
 
 // AddScriptlet wraps the raw AddScriptlet call.
@@ -206,11 +206,11 @@ func (self IActiveScriptAuthor) GetLanguageFlags(pgrfasa *uint32) error {
 }
 
 // GetEventHandler wraps the raw GetEventHandler call.
-func (self IActiveScriptAuthor) GetEventHandler(pdisp *systemcom.IDispatch, pszItem string, pszSubItem string, pszEvent string, ppse **systemdiagnosticsdebugactivescript.IScriptEntry) error {
+func (self IActiveScriptAuthor) GetEventHandler(pdisp systemcomidiom.IDispatch, pszItem string, pszSubItem string, pszEvent string, ppse **systemdiagnosticsdebugactivescript.IScriptEntry) error {
 	_pszItem := win32.UTF16Ptr(pszItem)
 	_pszSubItem := win32.UTF16Ptr(pszSubItem)
 	_pszEvent := win32.UTF16Ptr(pszEvent)
-	return win32.HRESULTError(int32(self.Raw.GetEventHandler(pdisp, foundation.PWSTR(_pszItem), foundation.PWSTR(_pszSubItem), foundation.PWSTR(_pszEvent), ppse)))
+	return win32.HRESULTError(int32(self.Raw.GetEventHandler(pdisp.Raw, foundation.PWSTR(_pszItem), foundation.PWSTR(_pszSubItem), foundation.PWSTR(_pszEvent), ppse)))
 }
 
 // RemoveNamedItem wraps the raw RemoveNamedItem call.
@@ -257,13 +257,13 @@ func WrapIActiveScriptAuthorProcedure(raw *systemdiagnosticsdebugactivescript.IA
 }
 
 // ParseProcedureText wraps the raw ParseProcedureText call.
-func (self IActiveScriptAuthorProcedure) ParseProcedureText(pszCode string, pszFormalParams string, pszProcedureName string, pszItemName string, pszDelimiter string, dwCookie uint32, dwFlags uint32, pdispFor *systemcom.IDispatch) error {
+func (self IActiveScriptAuthorProcedure) ParseProcedureText(pszCode string, pszFormalParams string, pszProcedureName string, pszItemName string, pszDelimiter string, dwCookie uint32, dwFlags uint32, pdispFor systemcomidiom.IDispatch) error {
 	_pszCode := win32.UTF16Ptr(pszCode)
 	_pszFormalParams := win32.UTF16Ptr(pszFormalParams)
 	_pszProcedureName := win32.UTF16Ptr(pszProcedureName)
 	_pszItemName := win32.UTF16Ptr(pszItemName)
 	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
-	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pszCode), foundation.PWSTR(_pszFormalParams), foundation.PWSTR(_pszProcedureName), foundation.PWSTR(_pszItemName), foundation.PWSTR(_pszDelimiter), dwCookie, dwFlags, pdispFor)))
+	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pszCode), foundation.PWSTR(_pszFormalParams), foundation.PWSTR(_pszProcedureName), foundation.PWSTR(_pszItemName), foundation.PWSTR(_pszDelimiter), dwCookie, dwFlags, pdispFor.Raw)))
 }
 
 // IActiveScriptDebug32 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptDebug32 with error-returning methods.
@@ -493,11 +493,11 @@ func (self IActiveScriptParse32) AddScriptlet(pstrDefaultName string, pstrCode s
 }
 
 // ParseScriptText wraps the raw ParseScriptText call.
-func (self IActiveScriptParse32) ParseScriptText(pstrCode string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) error {
+func (self IActiveScriptParse32) ParseScriptText(pstrCode string, pstrItemName string, punkContext systemcomidiom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) error {
 	_pstrCode := win32.UTF16Ptr(pstrCode)
 	_pstrItemName := win32.UTF16Ptr(pstrItemName)
 	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
-	return win32.HRESULTError(int32(self.Raw.ParseScriptText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrItemName), punkContext, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, pvarResult, pexcepinfo)))
+	return win32.HRESULTError(int32(self.Raw.ParseScriptText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrItemName), punkContext.Raw, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, pvarResult, pexcepinfo)))
 }
 
 // IActiveScriptParse64 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptParse64 with error-returning methods.
@@ -528,11 +528,11 @@ func (self IActiveScriptParse64) AddScriptlet(pstrDefaultName string, pstrCode s
 }
 
 // ParseScriptText wraps the raw ParseScriptText call.
-func (self IActiveScriptParse64) ParseScriptText(pstrCode string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) error {
+func (self IActiveScriptParse64) ParseScriptText(pstrCode string, pstrItemName string, punkContext systemcomidiom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) error {
 	_pstrCode := win32.UTF16Ptr(pstrCode)
 	_pstrItemName := win32.UTF16Ptr(pstrItemName)
 	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
-	return win32.HRESULTError(int32(self.Raw.ParseScriptText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrItemName), punkContext, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, pvarResult, pexcepinfo)))
+	return win32.HRESULTError(int32(self.Raw.ParseScriptText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrItemName), punkContext.Raw, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, pvarResult, pexcepinfo)))
 }
 
 // IActiveScriptParseProcedure2_32 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptParseProcedure2_32 with error-returning methods.
@@ -569,13 +569,13 @@ func WrapIActiveScriptParseProcedure32(raw *systemdiagnosticsdebugactivescript.I
 }
 
 // ParseProcedureText wraps the raw ParseProcedureText call.
-func (self IActiveScriptParseProcedure32) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrProcedureName string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
+func (self IActiveScriptParseProcedure32) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrProcedureName string, pstrItemName string, punkContext systemcomidiom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
 	_pstrCode := win32.UTF16Ptr(pstrCode)
 	_pstrFormalParams := win32.UTF16Ptr(pstrFormalParams)
 	_pstrProcedureName := win32.UTF16Ptr(pstrProcedureName)
 	_pstrItemName := win32.UTF16Ptr(pstrItemName)
 	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
-	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrFormalParams), foundation.PWSTR(_pstrProcedureName), foundation.PWSTR(_pstrItemName), punkContext, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, ppdisp)))
+	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrFormalParams), foundation.PWSTR(_pstrProcedureName), foundation.PWSTR(_pstrItemName), punkContext.Raw, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, ppdisp)))
 }
 
 // IActiveScriptParseProcedure64 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptParseProcedure64 with error-returning methods.
@@ -590,13 +590,13 @@ func WrapIActiveScriptParseProcedure64(raw *systemdiagnosticsdebugactivescript.I
 }
 
 // ParseProcedureText wraps the raw ParseProcedureText call.
-func (self IActiveScriptParseProcedure64) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrProcedureName string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
+func (self IActiveScriptParseProcedure64) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrProcedureName string, pstrItemName string, punkContext systemcomidiom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
 	_pstrCode := win32.UTF16Ptr(pstrCode)
 	_pstrFormalParams := win32.UTF16Ptr(pstrFormalParams)
 	_pstrProcedureName := win32.UTF16Ptr(pstrProcedureName)
 	_pstrItemName := win32.UTF16Ptr(pstrItemName)
 	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
-	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrFormalParams), foundation.PWSTR(_pstrProcedureName), foundation.PWSTR(_pstrItemName), punkContext, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, ppdisp)))
+	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrFormalParams), foundation.PWSTR(_pstrProcedureName), foundation.PWSTR(_pstrItemName), punkContext.Raw, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, ppdisp)))
 }
 
 // IActiveScriptParseProcedureOld32 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptParseProcedureOld32 with error-returning methods.
@@ -611,12 +611,12 @@ func WrapIActiveScriptParseProcedureOld32(raw *systemdiagnosticsdebugactivescrip
 }
 
 // ParseProcedureText wraps the raw ParseProcedureText call.
-func (self IActiveScriptParseProcedureOld32) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
+func (self IActiveScriptParseProcedureOld32) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrItemName string, punkContext systemcomidiom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
 	_pstrCode := win32.UTF16Ptr(pstrCode)
 	_pstrFormalParams := win32.UTF16Ptr(pstrFormalParams)
 	_pstrItemName := win32.UTF16Ptr(pstrItemName)
 	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
-	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrFormalParams), foundation.PWSTR(_pstrItemName), punkContext, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, ppdisp)))
+	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrFormalParams), foundation.PWSTR(_pstrItemName), punkContext.Raw, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, ppdisp)))
 }
 
 // IActiveScriptParseProcedureOld64 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptParseProcedureOld64 with error-returning methods.
@@ -631,12 +631,12 @@ func WrapIActiveScriptParseProcedureOld64(raw *systemdiagnosticsdebugactivescrip
 }
 
 // ParseProcedureText wraps the raw ParseProcedureText call.
-func (self IActiveScriptParseProcedureOld64) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
+func (self IActiveScriptParseProcedureOld64) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrItemName string, punkContext systemcomidiom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
 	_pstrCode := win32.UTF16Ptr(pstrCode)
 	_pstrFormalParams := win32.UTF16Ptr(pstrFormalParams)
 	_pstrItemName := win32.UTF16Ptr(pstrItemName)
 	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
-	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrFormalParams), foundation.PWSTR(_pstrItemName), punkContext, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, ppdisp)))
+	return win32.HRESULTError(int32(self.Raw.ParseProcedureText(foundation.PWSTR(_pstrCode), foundation.PWSTR(_pstrFormalParams), foundation.PWSTR(_pstrItemName), punkContext.Raw, foundation.PWSTR(_pstrDelimiter), dwSourceContextCookie, ulStartingLineNumber, dwFlags, ppdisp)))
 }
 
 // IActiveScriptProfilerCallback is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptProfilerCallback with error-returning methods.
@@ -661,15 +661,15 @@ func (self IActiveScriptProfilerCallback) Shutdown(hrReason foundation.HRESULT) 
 }
 
 // ScriptCompiled wraps the raw ScriptCompiled call.
-func (self IActiveScriptProfilerCallback) ScriptCompiled(scriptId int32, type_ systemdiagnosticsdebugactivescript.PROFILER_SCRIPT_TYPE, pIDebugDocumentContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ScriptCompiled(scriptId, type_, pIDebugDocumentContext)))
+func (self IActiveScriptProfilerCallback) ScriptCompiled(scriptId int32, type_ systemdiagnosticsdebugactivescript.PROFILER_SCRIPT_TYPE, pIDebugDocumentContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ScriptCompiled(scriptId, type_, pIDebugDocumentContext.Raw)))
 }
 
 // FunctionCompiled wraps the raw FunctionCompiled call.
-func (self IActiveScriptProfilerCallback) FunctionCompiled(functionId int32, scriptId int32, pwszFunctionName string, pwszFunctionNameHint string, pIDebugDocumentContext *systemcom.IUnknown) error {
+func (self IActiveScriptProfilerCallback) FunctionCompiled(functionId int32, scriptId int32, pwszFunctionName string, pwszFunctionNameHint string, pIDebugDocumentContext systemcomidiom.IUnknown) error {
 	_pwszFunctionName := win32.UTF16Ptr(pwszFunctionName)
 	_pwszFunctionNameHint := win32.UTF16Ptr(pwszFunctionNameHint)
-	return win32.HRESULTError(int32(self.Raw.FunctionCompiled(functionId, scriptId, foundation.PWSTR(_pwszFunctionName), foundation.PWSTR(_pwszFunctionNameHint), pIDebugDocumentContext)))
+	return win32.HRESULTError(int32(self.Raw.FunctionCompiled(functionId, scriptId, foundation.PWSTR(_pwszFunctionName), foundation.PWSTR(_pwszFunctionNameHint), pIDebugDocumentContext.Raw)))
 }
 
 // OnFunctionEnter wraps the raw OnFunctionEnter call.
@@ -922,8 +922,8 @@ func (self IActiveScriptSite) OnStateChange(ssScriptState systemdiagnosticsdebug
 }
 
 // OnScriptError wraps the raw OnScriptError call.
-func (self IActiveScriptSite) OnScriptError(pscripterror *systemdiagnosticsdebugactivescript.IActiveScriptError) error {
-	return win32.HRESULTError(int32(self.Raw.OnScriptError(pscripterror)))
+func (self IActiveScriptSite) OnScriptError(pscripterror IActiveScriptError) error {
+	return win32.HRESULTError(int32(self.Raw.OnScriptError(pscripterror.Raw)))
 }
 
 // OnEnterScript wraps the raw OnEnterScript call.
@@ -963,8 +963,8 @@ func (self IActiveScriptSiteDebug32) GetRootApplicationNode(ppdanRoot **systemdi
 }
 
 // OnScriptErrorDebug wraps the raw OnScriptErrorDebug call.
-func (self IActiveScriptSiteDebug32) OnScriptErrorDebug(pErrorDebug *systemdiagnosticsdebugactivescript.IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnScriptErrorDebug(pErrorDebug, pfEnterDebugger, pfCallOnScriptErrorWhenContinuing)))
+func (self IActiveScriptSiteDebug32) OnScriptErrorDebug(pErrorDebug IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnScriptErrorDebug(pErrorDebug.Raw, pfEnterDebugger, pfCallOnScriptErrorWhenContinuing)))
 }
 
 // IActiveScriptSiteDebug64 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptSiteDebug64 with error-returning methods.
@@ -994,8 +994,8 @@ func (self IActiveScriptSiteDebug64) GetRootApplicationNode(ppdanRoot **systemdi
 }
 
 // OnScriptErrorDebug wraps the raw OnScriptErrorDebug call.
-func (self IActiveScriptSiteDebug64) OnScriptErrorDebug(pErrorDebug *systemdiagnosticsdebugactivescript.IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnScriptErrorDebug(pErrorDebug, pfEnterDebugger, pfCallOnScriptErrorWhenContinuing)))
+func (self IActiveScriptSiteDebug64) OnScriptErrorDebug(pErrorDebug IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnScriptErrorDebug(pErrorDebug.Raw, pfEnterDebugger, pfCallOnScriptErrorWhenContinuing)))
 }
 
 // IActiveScriptSiteDebugEx is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptSiteDebugEx with error-returning methods.
@@ -1010,8 +1010,8 @@ func WrapIActiveScriptSiteDebugEx(raw *systemdiagnosticsdebugactivescript.IActiv
 }
 
 // OnCanNotJITScriptErrorDebug wraps the raw OnCanNotJITScriptErrorDebug call.
-func (self IActiveScriptSiteDebugEx) OnCanNotJITScriptErrorDebug(pErrorDebug *systemdiagnosticsdebugactivescript.IActiveScriptErrorDebug, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnCanNotJITScriptErrorDebug(pErrorDebug, pfCallOnScriptErrorWhenContinuing)))
+func (self IActiveScriptSiteDebugEx) OnCanNotJITScriptErrorDebug(pErrorDebug IActiveScriptErrorDebug, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.OnCanNotJITScriptErrorDebug(pErrorDebug.Raw, pfCallOnScriptErrorWhenContinuing)))
 }
 
 // IActiveScriptSiteInterruptPoll is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptSiteInterruptPoll with error-returning methods.
@@ -1182,8 +1182,8 @@ func (self IApplicationDebugger) QueryAlive() error {
 }
 
 // CreateInstanceAtDebugger wraps the raw CreateInstanceAtDebugger call.
-func (self IApplicationDebugger) CreateInstanceAtDebugger(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceAtDebugger(rclsid, pUnkOuter, dwClsContext, riid, ppvObject)))
+func (self IApplicationDebugger) CreateInstanceAtDebugger(rclsid *win32.GUID, pUnkOuter systemcomidiom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceAtDebugger(rclsid, pUnkOuter.Raw, dwClsContext, riid, ppvObject)))
 }
 
 // OnDebugOutput wraps the raw OnDebugOutput call.
@@ -1193,8 +1193,8 @@ func (self IApplicationDebugger) OnDebugOutput(pstr string) error {
 }
 
 // OnHandleBreakPoint wraps the raw OnHandleBreakPoint call.
-func (self IApplicationDebugger) OnHandleBreakPoint(prpt *systemdiagnosticsdebugactivescript.IRemoteDebugApplicationThread, br systemdiagnosticsdebugactivescript.BREAKREASON, pError *systemdiagnosticsdebugactivescript.IActiveScriptErrorDebug) error {
-	return win32.HRESULTError(int32(self.Raw.OnHandleBreakPoint(prpt, br, pError)))
+func (self IApplicationDebugger) OnHandleBreakPoint(prpt IRemoteDebugApplicationThread, br systemdiagnosticsdebugactivescript.BREAKREASON, pError IActiveScriptErrorDebug) error {
+	return win32.HRESULTError(int32(self.Raw.OnHandleBreakPoint(prpt.Raw, br, pError.Raw)))
 }
 
 // OnClose wraps the raw OnClose call.
@@ -1203,8 +1203,8 @@ func (self IApplicationDebugger) OnClose() error {
 }
 
 // OnDebuggerEvent wraps the raw OnDebuggerEvent call.
-func (self IApplicationDebugger) OnDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.OnDebuggerEvent(riid, punk)))
+func (self IApplicationDebugger) OnDebuggerEvent(riid *win32.GUID, punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.OnDebuggerEvent(riid, punk.Raw)))
 }
 
 // IApplicationDebuggerUI is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IApplicationDebuggerUI with error-returning methods.
@@ -1219,13 +1219,13 @@ func WrapIApplicationDebuggerUI(raw *systemdiagnosticsdebugactivescript.IApplica
 }
 
 // BringDocumentToTop wraps the raw BringDocumentToTop call.
-func (self IApplicationDebuggerUI) BringDocumentToTop(pddt *systemdiagnosticsdebugactivescript.IDebugDocumentText) error {
-	return win32.HRESULTError(int32(self.Raw.BringDocumentToTop(pddt)))
+func (self IApplicationDebuggerUI) BringDocumentToTop(pddt IDebugDocumentText) error {
+	return win32.HRESULTError(int32(self.Raw.BringDocumentToTop(pddt.Raw)))
 }
 
 // BringDocumentContextToTop wraps the raw BringDocumentContextToTop call.
-func (self IApplicationDebuggerUI) BringDocumentContextToTop(pddc *systemdiagnosticsdebugactivescript.IDebugDocumentContext) error {
-	return win32.HRESULTError(int32(self.Raw.BringDocumentContextToTop(pddc)))
+func (self IApplicationDebuggerUI) BringDocumentContextToTop(pddc IDebugDocumentContext) error {
+	return win32.HRESULTError(int32(self.Raw.BringDocumentContextToTop(pddc.Raw)))
 }
 
 // IBindEventHandler is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IBindEventHandler with error-returning methods.
@@ -1240,9 +1240,9 @@ func WrapIBindEventHandler(raw *systemdiagnosticsdebugactivescript.IBindEventHan
 }
 
 // BindHandler wraps the raw BindHandler call.
-func (self IBindEventHandler) BindHandler(pstrEvent string, pdisp *systemcom.IDispatch) error {
+func (self IBindEventHandler) BindHandler(pstrEvent string, pdisp systemcomidiom.IDispatch) error {
 	_pstrEvent := win32.UTF16Ptr(pstrEvent)
-	return win32.HRESULTError(int32(self.Raw.BindHandler(foundation.PWSTR(_pstrEvent), pdisp)))
+	return win32.HRESULTError(int32(self.Raw.BindHandler(foundation.PWSTR(_pstrEvent), pdisp.Raw)))
 }
 
 // IDebugApplication11032 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugApplication11032 with error-returning methods.
@@ -1257,13 +1257,13 @@ func WrapIDebugApplication11032(raw *systemdiagnosticsdebugactivescript.IDebugAp
 }
 
 // SynchronousCallInMainThread wraps the raw SynchronousCallInMainThread call.
-func (self IDebugApplication11032) SynchronousCallInMainThread(pptc *systemdiagnosticsdebugactivescript.IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.SynchronousCallInMainThread(pptc, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplication11032) SynchronousCallInMainThread(pptc IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.SynchronousCallInMainThread(pptc.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // AsynchronousCallInMainThread wraps the raw AsynchronousCallInMainThread call.
-func (self IDebugApplication11032) AsynchronousCallInMainThread(pptc *systemdiagnosticsdebugactivescript.IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.AsynchronousCallInMainThread(pptc, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplication11032) AsynchronousCallInMainThread(pptc IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.AsynchronousCallInMainThread(pptc.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // CallableWaitForHandles wraps the raw CallableWaitForHandles call.
@@ -1283,13 +1283,13 @@ func WrapIDebugApplication11064(raw *systemdiagnosticsdebugactivescript.IDebugAp
 }
 
 // SynchronousCallInMainThread wraps the raw SynchronousCallInMainThread call.
-func (self IDebugApplication11064) SynchronousCallInMainThread(pptc *systemdiagnosticsdebugactivescript.IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.SynchronousCallInMainThread(pptc, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplication11064) SynchronousCallInMainThread(pptc IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.SynchronousCallInMainThread(pptc.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // AsynchronousCallInMainThread wraps the raw AsynchronousCallInMainThread call.
-func (self IDebugApplication11064) AsynchronousCallInMainThread(pptc *systemdiagnosticsdebugactivescript.IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.AsynchronousCallInMainThread(pptc, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplication11064) AsynchronousCallInMainThread(pptc IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.AsynchronousCallInMainThread(pptc.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // CallableWaitForHandles wraps the raw CallableWaitForHandles call.
@@ -1351,13 +1351,13 @@ func (self IDebugApplication32) GetCurrentThread(pat **systemdiagnosticsdebugact
 }
 
 // CreateAsyncDebugOperation wraps the raw CreateAsyncDebugOperation call.
-func (self IDebugApplication32) CreateAsyncDebugOperation(psdo *systemdiagnosticsdebugactivescript.IDebugSyncOperation, ppado **systemdiagnosticsdebugactivescript.IDebugAsyncOperation) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAsyncDebugOperation(psdo, ppado)))
+func (self IDebugApplication32) CreateAsyncDebugOperation(psdo IDebugSyncOperation, ppado **systemdiagnosticsdebugactivescript.IDebugAsyncOperation) error {
+	return win32.HRESULTError(int32(self.Raw.CreateAsyncDebugOperation(psdo.Raw, ppado)))
 }
 
 // AddStackFrameSniffer wraps the raw AddStackFrameSniffer call.
-func (self IDebugApplication32) AddStackFrameSniffer(pdsfs *systemdiagnosticsdebugactivescript.IDebugStackFrameSniffer, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddStackFrameSniffer(pdsfs, pdwCookie)))
+func (self IDebugApplication32) AddStackFrameSniffer(pdsfs IDebugStackFrameSniffer, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddStackFrameSniffer(pdsfs.Raw, pdwCookie)))
 }
 
 // RemoveStackFrameSniffer wraps the raw RemoveStackFrameSniffer call.
@@ -1371,8 +1371,8 @@ func (self IDebugApplication32) QueryCurrentThreadIsDebuggerThread() error {
 }
 
 // SynchronousCallInDebuggerThread wraps the raw SynchronousCallInDebuggerThread call.
-func (self IDebugApplication32) SynchronousCallInDebuggerThread(pptc *systemdiagnosticsdebugactivescript.IDebugThreadCall32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SynchronousCallInDebuggerThread(pptc, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplication32) SynchronousCallInDebuggerThread(pptc IDebugThreadCall32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SynchronousCallInDebuggerThread(pptc.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // CreateApplicationNode wraps the raw CreateApplicationNode call.
@@ -1381,13 +1381,13 @@ func (self IDebugApplication32) CreateApplicationNode(ppdanNew **systemdiagnosti
 }
 
 // FireDebuggerEvent wraps the raw FireDebuggerEvent call.
-func (self IDebugApplication32) FireDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.FireDebuggerEvent(riid, punk)))
+func (self IDebugApplication32) FireDebuggerEvent(riid *win32.GUID, punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.FireDebuggerEvent(riid, punk.Raw)))
 }
 
 // HandleRuntimeError wraps the raw HandleRuntimeError call.
-func (self IDebugApplication32) HandleRuntimeError(pErrorDebug *systemdiagnosticsdebugactivescript.IActiveScriptErrorDebug, pScriptSite *systemdiagnosticsdebugactivescript.IActiveScriptSite, pbra *systemdiagnosticsdebugactivescript.BREAKRESUMEACTION, perra *systemdiagnosticsdebugactivescript.ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.HandleRuntimeError(pErrorDebug, pScriptSite, pbra, perra, pfCallOnScriptError)))
+func (self IDebugApplication32) HandleRuntimeError(pErrorDebug IActiveScriptErrorDebug, pScriptSite IActiveScriptSite, pbra *systemdiagnosticsdebugactivescript.BREAKRESUMEACTION, perra *systemdiagnosticsdebugactivescript.ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.HandleRuntimeError(pErrorDebug.Raw, pScriptSite.Raw, pbra, perra, pfCallOnScriptError)))
 }
 
 // FCanJitDebug wraps the raw FCanJitDebug call.
@@ -1401,8 +1401,8 @@ func (self IDebugApplication32) FIsAutoJitDebugEnabled() foundation.BOOL {
 }
 
 // AddGlobalExpressionContextProvider wraps the raw AddGlobalExpressionContextProvider call.
-func (self IDebugApplication32) AddGlobalExpressionContextProvider(pdsfs *systemdiagnosticsdebugactivescript.IProvideExpressionContexts, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddGlobalExpressionContextProvider(pdsfs, pdwCookie)))
+func (self IDebugApplication32) AddGlobalExpressionContextProvider(pdsfs IProvideExpressionContexts, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddGlobalExpressionContextProvider(pdsfs.Raw, pdwCookie)))
 }
 
 // RemoveGlobalExpressionContextProvider wraps the raw RemoveGlobalExpressionContextProvider call.
@@ -1464,13 +1464,13 @@ func (self IDebugApplication64) GetCurrentThread(pat **systemdiagnosticsdebugact
 }
 
 // CreateAsyncDebugOperation wraps the raw CreateAsyncDebugOperation call.
-func (self IDebugApplication64) CreateAsyncDebugOperation(psdo *systemdiagnosticsdebugactivescript.IDebugSyncOperation, ppado **systemdiagnosticsdebugactivescript.IDebugAsyncOperation) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAsyncDebugOperation(psdo, ppado)))
+func (self IDebugApplication64) CreateAsyncDebugOperation(psdo IDebugSyncOperation, ppado **systemdiagnosticsdebugactivescript.IDebugAsyncOperation) error {
+	return win32.HRESULTError(int32(self.Raw.CreateAsyncDebugOperation(psdo.Raw, ppado)))
 }
 
 // AddStackFrameSniffer wraps the raw AddStackFrameSniffer call.
-func (self IDebugApplication64) AddStackFrameSniffer(pdsfs *systemdiagnosticsdebugactivescript.IDebugStackFrameSniffer, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddStackFrameSniffer(pdsfs, pdwCookie)))
+func (self IDebugApplication64) AddStackFrameSniffer(pdsfs IDebugStackFrameSniffer, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddStackFrameSniffer(pdsfs.Raw, pdwCookie)))
 }
 
 // RemoveStackFrameSniffer wraps the raw RemoveStackFrameSniffer call.
@@ -1484,8 +1484,8 @@ func (self IDebugApplication64) QueryCurrentThreadIsDebuggerThread() error {
 }
 
 // SynchronousCallInDebuggerThread wraps the raw SynchronousCallInDebuggerThread call.
-func (self IDebugApplication64) SynchronousCallInDebuggerThread(pptc *systemdiagnosticsdebugactivescript.IDebugThreadCall64, dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) error {
-	return win32.HRESULTError(int32(self.Raw.SynchronousCallInDebuggerThread(pptc, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplication64) SynchronousCallInDebuggerThread(pptc IDebugThreadCall64, dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) error {
+	return win32.HRESULTError(int32(self.Raw.SynchronousCallInDebuggerThread(pptc.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // CreateApplicationNode wraps the raw CreateApplicationNode call.
@@ -1494,13 +1494,13 @@ func (self IDebugApplication64) CreateApplicationNode(ppdanNew **systemdiagnosti
 }
 
 // FireDebuggerEvent wraps the raw FireDebuggerEvent call.
-func (self IDebugApplication64) FireDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.FireDebuggerEvent(riid, punk)))
+func (self IDebugApplication64) FireDebuggerEvent(riid *win32.GUID, punk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.FireDebuggerEvent(riid, punk.Raw)))
 }
 
 // HandleRuntimeError wraps the raw HandleRuntimeError call.
-func (self IDebugApplication64) HandleRuntimeError(pErrorDebug *systemdiagnosticsdebugactivescript.IActiveScriptErrorDebug, pScriptSite *systemdiagnosticsdebugactivescript.IActiveScriptSite, pbra *systemdiagnosticsdebugactivescript.BREAKRESUMEACTION, perra *systemdiagnosticsdebugactivescript.ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.HandleRuntimeError(pErrorDebug, pScriptSite, pbra, perra, pfCallOnScriptError)))
+func (self IDebugApplication64) HandleRuntimeError(pErrorDebug IActiveScriptErrorDebug, pScriptSite IActiveScriptSite, pbra *systemdiagnosticsdebugactivescript.BREAKRESUMEACTION, perra *systemdiagnosticsdebugactivescript.ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.HandleRuntimeError(pErrorDebug.Raw, pScriptSite.Raw, pbra, perra, pfCallOnScriptError)))
 }
 
 // FCanJitDebug wraps the raw FCanJitDebug call.
@@ -1514,8 +1514,8 @@ func (self IDebugApplication64) FIsAutoJitDebugEnabled() foundation.BOOL {
 }
 
 // AddGlobalExpressionContextProvider wraps the raw AddGlobalExpressionContextProvider call.
-func (self IDebugApplication64) AddGlobalExpressionContextProvider(pdsfs *systemdiagnosticsdebugactivescript.IProvideExpressionContexts, pdwCookie *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.AddGlobalExpressionContextProvider(pdsfs, pdwCookie)))
+func (self IDebugApplication64) AddGlobalExpressionContextProvider(pdsfs IProvideExpressionContexts, pdwCookie *uint64) error {
+	return win32.HRESULTError(int32(self.Raw.AddGlobalExpressionContextProvider(pdsfs.Raw, pdwCookie)))
 }
 
 // RemoveGlobalExpressionContextProvider wraps the raw RemoveGlobalExpressionContextProvider call.
@@ -1545,8 +1545,8 @@ func (self IDebugApplicationNode) GetParent(pprddp **systemdiagnosticsdebugactiv
 }
 
 // SetDocumentProvider wraps the raw SetDocumentProvider call.
-func (self IDebugApplicationNode) SetDocumentProvider(pddp *systemdiagnosticsdebugactivescript.IDebugDocumentProvider) error {
-	return win32.HRESULTError(int32(self.Raw.SetDocumentProvider(pddp)))
+func (self IDebugApplicationNode) SetDocumentProvider(pddp IDebugDocumentProvider) error {
+	return win32.HRESULTError(int32(self.Raw.SetDocumentProvider(pddp.Raw)))
 }
 
 // Close wraps the raw Close call.
@@ -1555,8 +1555,8 @@ func (self IDebugApplicationNode) Close() error {
 }
 
 // Attach wraps the raw Attach call.
-func (self IDebugApplicationNode) Attach(pdanParent *systemdiagnosticsdebugactivescript.IDebugApplicationNode) error {
-	return win32.HRESULTError(int32(self.Raw.Attach(pdanParent)))
+func (self IDebugApplicationNode) Attach(pdanParent IDebugApplicationNode) error {
+	return win32.HRESULTError(int32(self.Raw.Attach(pdanParent.Raw)))
 }
 
 // Detach wraps the raw Detach call.
@@ -1586,8 +1586,8 @@ func (self IDebugApplicationNode100) GetExcludedDocuments(filter systemdiagnosti
 }
 
 // QueryIsChildNode wraps the raw QueryIsChildNode call.
-func (self IDebugApplicationNode100) QueryIsChildNode(pSearchKey *systemdiagnosticsdebugactivescript.IDebugDocument) error {
-	return win32.HRESULTError(int32(self.Raw.QueryIsChildNode(pSearchKey)))
+func (self IDebugApplicationNode100) QueryIsChildNode(pSearchKey IDebugDocument) error {
+	return win32.HRESULTError(int32(self.Raw.QueryIsChildNode(pSearchKey.Raw)))
 }
 
 // IDebugApplicationNodeEvents is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugApplicationNodeEvents with error-returning methods.
@@ -1602,13 +1602,13 @@ func WrapIDebugApplicationNodeEvents(raw *systemdiagnosticsdebugactivescript.IDe
 }
 
 // OnAddChild wraps the raw OnAddChild call.
-func (self IDebugApplicationNodeEvents) OnAddChild(prddpChild *systemdiagnosticsdebugactivescript.IDebugApplicationNode) error {
-	return win32.HRESULTError(int32(self.Raw.OnAddChild(prddpChild)))
+func (self IDebugApplicationNodeEvents) OnAddChild(prddpChild IDebugApplicationNode) error {
+	return win32.HRESULTError(int32(self.Raw.OnAddChild(prddpChild.Raw)))
 }
 
 // OnRemoveChild wraps the raw OnRemoveChild call.
-func (self IDebugApplicationNodeEvents) OnRemoveChild(prddpChild *systemdiagnosticsdebugactivescript.IDebugApplicationNode) error {
-	return win32.HRESULTError(int32(self.Raw.OnRemoveChild(prddpChild)))
+func (self IDebugApplicationNodeEvents) OnRemoveChild(prddpChild IDebugApplicationNode) error {
+	return win32.HRESULTError(int32(self.Raw.OnRemoveChild(prddpChild.Raw)))
 }
 
 // OnDetach wraps the raw OnDetach call.
@@ -1617,8 +1617,8 @@ func (self IDebugApplicationNodeEvents) OnDetach() error {
 }
 
 // OnAttach wraps the raw OnAttach call.
-func (self IDebugApplicationNodeEvents) OnAttach(prddpParent *systemdiagnosticsdebugactivescript.IDebugApplicationNode) error {
-	return win32.HRESULTError(int32(self.Raw.OnAttach(prddpParent)))
+func (self IDebugApplicationNodeEvents) OnAttach(prddpParent IDebugApplicationNode) error {
+	return win32.HRESULTError(int32(self.Raw.OnAttach(prddpParent.Raw)))
 }
 
 // IDebugApplicationThread is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugApplicationThread with error-returning methods.
@@ -1633,8 +1633,8 @@ func WrapIDebugApplicationThread(raw *systemdiagnosticsdebugactivescript.IDebugA
 }
 
 // SynchronousCallIntoThread32 wraps the raw SynchronousCallIntoThread32 call.
-func (self IDebugApplicationThread) SynchronousCallIntoThread32(pstcb *systemdiagnosticsdebugactivescript.IDebugThreadCall32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SynchronousCallIntoThread32(pstcb, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplicationThread) SynchronousCallIntoThread32(pstcb IDebugThreadCall32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SynchronousCallIntoThread32(pstcb.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // QueryIsCurrentThread wraps the raw QueryIsCurrentThread call.
@@ -1686,8 +1686,8 @@ func (self IDebugApplicationThread11032) IsThreadCallable(pfIsCallable *foundati
 }
 
 // AsynchronousCallIntoThread wraps the raw AsynchronousCallIntoThread call.
-func (self IDebugApplicationThread11032) AsynchronousCallIntoThread(pptc *systemdiagnosticsdebugactivescript.IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.AsynchronousCallIntoThread(pptc, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplicationThread11032) AsynchronousCallIntoThread(pptc IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.AsynchronousCallIntoThread(pptc.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // IDebugApplicationThread11064 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugApplicationThread11064 with error-returning methods.
@@ -1717,8 +1717,8 @@ func (self IDebugApplicationThread11064) IsThreadCallable(pfIsCallable *foundati
 }
 
 // AsynchronousCallIntoThread wraps the raw AsynchronousCallIntoThread call.
-func (self IDebugApplicationThread11064) AsynchronousCallIntoThread(pptc *systemdiagnosticsdebugactivescript.IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.AsynchronousCallIntoThread(pptc, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplicationThread11064) AsynchronousCallIntoThread(pptc IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.AsynchronousCallIntoThread(pptc.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // IDebugApplicationThread64 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugApplicationThread64 with error-returning methods.
@@ -1733,8 +1733,8 @@ func WrapIDebugApplicationThread64(raw *systemdiagnosticsdebugactivescript.IDebu
 }
 
 // SynchronousCallIntoThread64 wraps the raw SynchronousCallIntoThread64 call.
-func (self IDebugApplicationThread64) SynchronousCallIntoThread64(pstcb *systemdiagnosticsdebugactivescript.IDebugThreadCall64, dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) error {
-	return win32.HRESULTError(int32(self.Raw.SynchronousCallIntoThread64(pstcb, dwParam1, dwParam2, dwParam3)))
+func (self IDebugApplicationThread64) SynchronousCallIntoThread64(pstcb IDebugThreadCall64, dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) error {
+	return win32.HRESULTError(int32(self.Raw.SynchronousCallIntoThread64(pstcb.Raw, dwParam1, dwParam2, dwParam3)))
 }
 
 // IDebugApplicationThreadEvents110 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugApplicationThreadEvents110 with error-returning methods.
@@ -1785,8 +1785,8 @@ func (self IDebugAsyncOperation) GetSyncDebugOperation(ppsdo **systemdiagnostics
 }
 
 // Start wraps the raw Start call.
-func (self IDebugAsyncOperation) Start(padocb *systemdiagnosticsdebugactivescript.IDebugAsyncOperationCallBack) error {
-	return win32.HRESULTError(int32(self.Raw.Start(padocb)))
+func (self IDebugAsyncOperation) Start(padocb IDebugAsyncOperationCallBack) error {
+	return win32.HRESULTError(int32(self.Raw.Start(padocb.Raw)))
 }
 
 // Abort wraps the raw Abort call.
@@ -1901,15 +1901,15 @@ func WrapIDebugDocumentHelper32(raw *systemdiagnosticsdebugactivescript.IDebugDo
 }
 
 // Init wraps the raw Init call.
-func (self IDebugDocumentHelper32) Init(pda *systemdiagnosticsdebugactivescript.IDebugApplication32, pszShortName string, pszLongName string, docAttr uint32) error {
+func (self IDebugDocumentHelper32) Init(pda IDebugApplication32, pszShortName string, pszLongName string, docAttr uint32) error {
 	_pszShortName := win32.UTF16Ptr(pszShortName)
 	_pszLongName := win32.UTF16Ptr(pszLongName)
-	return win32.HRESULTError(int32(self.Raw.Init(pda, foundation.PWSTR(_pszShortName), foundation.PWSTR(_pszLongName), docAttr)))
+	return win32.HRESULTError(int32(self.Raw.Init(pda.Raw, foundation.PWSTR(_pszShortName), foundation.PWSTR(_pszLongName), docAttr)))
 }
 
 // Attach wraps the raw Attach call.
-func (self IDebugDocumentHelper32) Attach(pddhParent *systemdiagnosticsdebugactivescript.IDebugDocumentHelper32) error {
-	return win32.HRESULTError(int32(self.Raw.Attach(pddhParent)))
+func (self IDebugDocumentHelper32) Attach(pddhParent IDebugDocumentHelper32) error {
+	return win32.HRESULTError(int32(self.Raw.Attach(pddhParent.Raw)))
 }
 
 // Detach wraps the raw Detach call.
@@ -1929,8 +1929,8 @@ func (self IDebugDocumentHelper32) AddDBCSText(pszText foundation.PSTR) error {
 }
 
 // SetDebugDocumentHost wraps the raw SetDebugDocumentHost call.
-func (self IDebugDocumentHelper32) SetDebugDocumentHost(pddh *systemdiagnosticsdebugactivescript.IDebugDocumentHost) error {
-	return win32.HRESULTError(int32(self.Raw.SetDebugDocumentHost(pddh)))
+func (self IDebugDocumentHelper32) SetDebugDocumentHost(pddh IDebugDocumentHost) error {
+	return win32.HRESULTError(int32(self.Raw.SetDebugDocumentHost(pddh.Raw)))
 }
 
 // AddDeferredText wraps the raw AddDeferredText call.
@@ -1939,9 +1939,9 @@ func (self IDebugDocumentHelper32) AddDeferredText(cChars uint32, dwTextStartCoo
 }
 
 // DefineScriptBlock wraps the raw DefineScriptBlock call.
-func (self IDebugDocumentHelper32) DefineScriptBlock(ulCharOffset uint32, cChars uint32, pas *systemdiagnosticsdebugactivescript.IActiveScript, fScriptlet bool, pdwSourceContext *uint32) error {
+func (self IDebugDocumentHelper32) DefineScriptBlock(ulCharOffset uint32, cChars uint32, pas IActiveScript, fScriptlet bool, pdwSourceContext *uint32) error {
 	_fScriptlet := foundation.BOOL(win32.Bool32(fScriptlet))
-	return win32.HRESULTError(int32(self.Raw.DefineScriptBlock(ulCharOffset, cChars, pas, _fScriptlet, pdwSourceContext)))
+	return win32.HRESULTError(int32(self.Raw.DefineScriptBlock(ulCharOffset, cChars, pas.Raw, _fScriptlet, pdwSourceContext)))
 }
 
 // SetDefaultTextAttr wraps the raw SetDefaultTextAttr call.
@@ -1992,8 +1992,8 @@ func (self IDebugDocumentHelper32) BringDocumentToTop() error {
 }
 
 // BringDocumentContextToTop wraps the raw BringDocumentContextToTop call.
-func (self IDebugDocumentHelper32) BringDocumentContextToTop(pddc *systemdiagnosticsdebugactivescript.IDebugDocumentContext) error {
-	return win32.HRESULTError(int32(self.Raw.BringDocumentContextToTop(pddc)))
+func (self IDebugDocumentHelper32) BringDocumentContextToTop(pddc IDebugDocumentContext) error {
+	return win32.HRESULTError(int32(self.Raw.BringDocumentContextToTop(pddc.Raw)))
 }
 
 // IDebugDocumentHelper64 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugDocumentHelper64 with error-returning methods.
@@ -2008,15 +2008,15 @@ func WrapIDebugDocumentHelper64(raw *systemdiagnosticsdebugactivescript.IDebugDo
 }
 
 // Init wraps the raw Init call.
-func (self IDebugDocumentHelper64) Init(pda *systemdiagnosticsdebugactivescript.IDebugApplication64, pszShortName string, pszLongName string, docAttr uint32) error {
+func (self IDebugDocumentHelper64) Init(pda IDebugApplication64, pszShortName string, pszLongName string, docAttr uint32) error {
 	_pszShortName := win32.UTF16Ptr(pszShortName)
 	_pszLongName := win32.UTF16Ptr(pszLongName)
-	return win32.HRESULTError(int32(self.Raw.Init(pda, foundation.PWSTR(_pszShortName), foundation.PWSTR(_pszLongName), docAttr)))
+	return win32.HRESULTError(int32(self.Raw.Init(pda.Raw, foundation.PWSTR(_pszShortName), foundation.PWSTR(_pszLongName), docAttr)))
 }
 
 // Attach wraps the raw Attach call.
-func (self IDebugDocumentHelper64) Attach(pddhParent *systemdiagnosticsdebugactivescript.IDebugDocumentHelper64) error {
-	return win32.HRESULTError(int32(self.Raw.Attach(pddhParent)))
+func (self IDebugDocumentHelper64) Attach(pddhParent IDebugDocumentHelper64) error {
+	return win32.HRESULTError(int32(self.Raw.Attach(pddhParent.Raw)))
 }
 
 // Detach wraps the raw Detach call.
@@ -2036,8 +2036,8 @@ func (self IDebugDocumentHelper64) AddDBCSText(pszText foundation.PSTR) error {
 }
 
 // SetDebugDocumentHost wraps the raw SetDebugDocumentHost call.
-func (self IDebugDocumentHelper64) SetDebugDocumentHost(pddh *systemdiagnosticsdebugactivescript.IDebugDocumentHost) error {
-	return win32.HRESULTError(int32(self.Raw.SetDebugDocumentHost(pddh)))
+func (self IDebugDocumentHelper64) SetDebugDocumentHost(pddh IDebugDocumentHost) error {
+	return win32.HRESULTError(int32(self.Raw.SetDebugDocumentHost(pddh.Raw)))
 }
 
 // AddDeferredText wraps the raw AddDeferredText call.
@@ -2046,9 +2046,9 @@ func (self IDebugDocumentHelper64) AddDeferredText(cChars uint32, dwTextStartCoo
 }
 
 // DefineScriptBlock wraps the raw DefineScriptBlock call.
-func (self IDebugDocumentHelper64) DefineScriptBlock(ulCharOffset uint32, cChars uint32, pas *systemdiagnosticsdebugactivescript.IActiveScript, fScriptlet bool, pdwSourceContext *uint64) error {
+func (self IDebugDocumentHelper64) DefineScriptBlock(ulCharOffset uint32, cChars uint32, pas IActiveScript, fScriptlet bool, pdwSourceContext *uint64) error {
 	_fScriptlet := foundation.BOOL(win32.Bool32(fScriptlet))
-	return win32.HRESULTError(int32(self.Raw.DefineScriptBlock(ulCharOffset, cChars, pas, _fScriptlet, pdwSourceContext)))
+	return win32.HRESULTError(int32(self.Raw.DefineScriptBlock(ulCharOffset, cChars, pas.Raw, _fScriptlet, pdwSourceContext)))
 }
 
 // SetDefaultTextAttr wraps the raw SetDefaultTextAttr call.
@@ -2099,8 +2099,8 @@ func (self IDebugDocumentHelper64) BringDocumentToTop() error {
 }
 
 // BringDocumentContextToTop wraps the raw BringDocumentContextToTop call.
-func (self IDebugDocumentHelper64) BringDocumentContextToTop(pddc *systemdiagnosticsdebugactivescript.IDebugDocumentContext) error {
-	return win32.HRESULTError(int32(self.Raw.BringDocumentContextToTop(pddc)))
+func (self IDebugDocumentHelper64) BringDocumentContextToTop(pddc IDebugDocumentContext) error {
+	return win32.HRESULTError(int32(self.Raw.BringDocumentContextToTop(pddc.Raw)))
 }
 
 // IDebugDocumentHost is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugDocumentHost with error-returning methods.
@@ -2220,8 +2220,8 @@ func (self IDebugDocumentText) GetText(cCharacterPosition uint32, pcharText foun
 }
 
 // GetPositionOfContext wraps the raw GetPositionOfContext call.
-func (self IDebugDocumentText) GetPositionOfContext(psc *systemdiagnosticsdebugactivescript.IDebugDocumentContext, pcCharacterPosition *uint32, cNumChars *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetPositionOfContext(psc, pcCharacterPosition, cNumChars)))
+func (self IDebugDocumentText) GetPositionOfContext(psc IDebugDocumentContext, pcCharacterPosition *uint32, cNumChars *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetPositionOfContext(psc.Raw, pcCharacterPosition, cNumChars)))
 }
 
 // GetContextOfPosition wraps the raw GetContextOfPosition call.
@@ -2336,8 +2336,8 @@ func WrapIDebugExpression(raw *systemdiagnosticsdebugactivescript.IDebugExpressi
 }
 
 // Start wraps the raw Start call.
-func (self IDebugExpression) Start(pdecb *systemdiagnosticsdebugactivescript.IDebugExpressionCallBack) error {
-	return win32.HRESULTError(int32(self.Raw.Start(pdecb)))
+func (self IDebugExpression) Start(pdecb IDebugExpressionCallBack) error {
+	return win32.HRESULTError(int32(self.Raw.Start(pdecb.Raw)))
 }
 
 // Abort wraps the raw Abort call.
@@ -2438,20 +2438,20 @@ func WrapIDebugHelper(raw *systemdiagnosticsdebugactivescript.IDebugHelper) IDeb
 }
 
 // CreatePropertyBrowser wraps the raw CreatePropertyBrowser call.
-func (self IDebugHelper) CreatePropertyBrowser(pvar *systemvariant.VARIANT, bstrName string, pdat *systemdiagnosticsdebugactivescript.IDebugApplicationThread, ppdob **systemdiagnosticsdebug.IDebugProperty) error {
+func (self IDebugHelper) CreatePropertyBrowser(pvar *systemvariant.VARIANT, bstrName string, pdat IDebugApplicationThread, ppdob **systemdiagnosticsdebug.IDebugProperty) error {
 	_bstrName := win32.UTF16Ptr(bstrName)
-	return win32.HRESULTError(int32(self.Raw.CreatePropertyBrowser(pvar, foundation.PWSTR(_bstrName), pdat, ppdob)))
+	return win32.HRESULTError(int32(self.Raw.CreatePropertyBrowser(pvar, foundation.PWSTR(_bstrName), pdat.Raw, ppdob)))
 }
 
 // CreatePropertyBrowserEx wraps the raw CreatePropertyBrowserEx call.
-func (self IDebugHelper) CreatePropertyBrowserEx(pvar *systemvariant.VARIANT, bstrName string, pdat *systemdiagnosticsdebugactivescript.IDebugApplicationThread, pdf *systemdiagnosticsdebugactivescript.IDebugFormatter, ppdob **systemdiagnosticsdebug.IDebugProperty) error {
+func (self IDebugHelper) CreatePropertyBrowserEx(pvar *systemvariant.VARIANT, bstrName string, pdat IDebugApplicationThread, pdf IDebugFormatter, ppdob **systemdiagnosticsdebug.IDebugProperty) error {
 	_bstrName := win32.UTF16Ptr(bstrName)
-	return win32.HRESULTError(int32(self.Raw.CreatePropertyBrowserEx(pvar, foundation.PWSTR(_bstrName), pdat, pdf, ppdob)))
+	return win32.HRESULTError(int32(self.Raw.CreatePropertyBrowserEx(pvar, foundation.PWSTR(_bstrName), pdat.Raw, pdf.Raw, ppdob)))
 }
 
 // CreateSimpleConnectionPoint wraps the raw CreateSimpleConnectionPoint call.
-func (self IDebugHelper) CreateSimpleConnectionPoint(pdisp *systemcom.IDispatch, ppscp **systemdiagnosticsdebugactivescript.ISimpleConnectionPoint) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSimpleConnectionPoint(pdisp, ppscp)))
+func (self IDebugHelper) CreateSimpleConnectionPoint(pdisp systemcomidiom.IDispatch, ppscp **systemdiagnosticsdebugactivescript.ISimpleConnectionPoint) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSimpleConnectionPoint(pdisp.Raw, ppscp)))
 }
 
 // IDebugSessionProvider is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugSessionProvider with error-returning methods.
@@ -2466,8 +2466,8 @@ func WrapIDebugSessionProvider(raw *systemdiagnosticsdebugactivescript.IDebugSes
 }
 
 // StartDebugSession wraps the raw StartDebugSession call.
-func (self IDebugSessionProvider) StartDebugSession(pda *systemdiagnosticsdebugactivescript.IRemoteDebugApplication) error {
-	return win32.HRESULTError(int32(self.Raw.StartDebugSession(pda)))
+func (self IDebugSessionProvider) StartDebugSession(pda IRemoteDebugApplication) error {
+	return win32.HRESULTError(int32(self.Raw.StartDebugSession(pda.Raw)))
 }
 
 // IDebugStackFrame is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IDebugStackFrame with error-returning methods.
@@ -2870,8 +2870,8 @@ func WrapIJsDebug(raw *systemdiagnosticsdebugactivescript.IJsDebug) IJsDebug {
 }
 
 // OpenVirtualProcess wraps the raw OpenVirtualProcess call.
-func (self IJsDebug) OpenVirtualProcess(processId uint32, runtimeJsBaseAddress uint64, pDataTarget *systemdiagnosticsdebugactivescript.IJsDebugDataTarget, ppProcess **systemdiagnosticsdebugactivescript.IJsDebugProcess) error {
-	return win32.HRESULTError(int32(self.Raw.OpenVirtualProcess(processId, runtimeJsBaseAddress, pDataTarget, ppProcess)))
+func (self IJsDebug) OpenVirtualProcess(processId uint32, runtimeJsBaseAddress uint64, pDataTarget IJsDebugDataTarget, ppProcess **systemdiagnosticsdebugactivescript.IJsDebugProcess) error {
+	return win32.HRESULTError(int32(self.Raw.OpenVirtualProcess(processId, runtimeJsBaseAddress, pDataTarget.Raw, ppProcess)))
 }
 
 // IJsDebugBreakPoint is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IJsDebugBreakPoint with error-returning methods.
@@ -3115,8 +3115,8 @@ func WrapIMachineDebugManager(raw *systemdiagnosticsdebugactivescript.IMachineDe
 }
 
 // AddApplication wraps the raw AddApplication call.
-func (self IMachineDebugManager) AddApplication(pda *systemdiagnosticsdebugactivescript.IRemoteDebugApplication, pdwAppCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddApplication(pda, pdwAppCookie)))
+func (self IMachineDebugManager) AddApplication(pda IRemoteDebugApplication, pdwAppCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddApplication(pda.Raw, pdwAppCookie)))
 }
 
 // RemoveApplication wraps the raw RemoveApplication call.
@@ -3141,8 +3141,8 @@ func WrapIMachineDebugManagerCookie(raw *systemdiagnosticsdebugactivescript.IMac
 }
 
 // AddApplication wraps the raw AddApplication call.
-func (self IMachineDebugManagerCookie) AddApplication(pda *systemdiagnosticsdebugactivescript.IRemoteDebugApplication, dwDebugAppCookie uint32, pdwAppCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddApplication(pda, dwDebugAppCookie, pdwAppCookie)))
+func (self IMachineDebugManagerCookie) AddApplication(pda IRemoteDebugApplication, dwDebugAppCookie uint32, pdwAppCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddApplication(pda.Raw, dwDebugAppCookie, pdwAppCookie)))
 }
 
 // RemoveApplication wraps the raw RemoveApplication call.
@@ -3167,13 +3167,13 @@ func WrapIMachineDebugManagerEvents(raw *systemdiagnosticsdebugactivescript.IMac
 }
 
 // OnAddApplication wraps the raw OnAddApplication call.
-func (self IMachineDebugManagerEvents) OnAddApplication(pda *systemdiagnosticsdebugactivescript.IRemoteDebugApplication, dwAppCookie uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnAddApplication(pda, dwAppCookie)))
+func (self IMachineDebugManagerEvents) OnAddApplication(pda IRemoteDebugApplication, dwAppCookie uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnAddApplication(pda.Raw, dwAppCookie)))
 }
 
 // OnRemoveApplication wraps the raw OnRemoveApplication call.
-func (self IMachineDebugManagerEvents) OnRemoveApplication(pda *systemdiagnosticsdebugactivescript.IRemoteDebugApplication, dwAppCookie uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnRemoveApplication(pda, dwAppCookie)))
+func (self IMachineDebugManagerEvents) OnRemoveApplication(pda IRemoteDebugApplication, dwAppCookie uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnRemoveApplication(pda.Raw, dwAppCookie)))
 }
 
 // IProcessDebugManager32 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IProcessDebugManager32 with error-returning methods.
@@ -3198,8 +3198,8 @@ func (self IProcessDebugManager32) GetDefaultApplication(ppda **systemdiagnostic
 }
 
 // AddApplication wraps the raw AddApplication call.
-func (self IProcessDebugManager32) AddApplication(pda *systemdiagnosticsdebugactivescript.IDebugApplication32, pdwAppCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddApplication(pda, pdwAppCookie)))
+func (self IProcessDebugManager32) AddApplication(pda IDebugApplication32, pdwAppCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddApplication(pda.Raw, pdwAppCookie)))
 }
 
 // RemoveApplication wraps the raw RemoveApplication call.
@@ -3208,8 +3208,8 @@ func (self IProcessDebugManager32) RemoveApplication(dwAppCookie uint32) error {
 }
 
 // CreateDebugDocumentHelper wraps the raw CreateDebugDocumentHelper call.
-func (self IProcessDebugManager32) CreateDebugDocumentHelper(punkOuter *systemcom.IUnknown, pddh **systemdiagnosticsdebugactivescript.IDebugDocumentHelper32) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDebugDocumentHelper(punkOuter, pddh)))
+func (self IProcessDebugManager32) CreateDebugDocumentHelper(punkOuter systemcomidiom.IUnknown, pddh **systemdiagnosticsdebugactivescript.IDebugDocumentHelper32) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDebugDocumentHelper(punkOuter.Raw, pddh)))
 }
 
 // IProcessDebugManager64 is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IProcessDebugManager64 with error-returning methods.
@@ -3234,8 +3234,8 @@ func (self IProcessDebugManager64) GetDefaultApplication(ppda **systemdiagnostic
 }
 
 // AddApplication wraps the raw AddApplication call.
-func (self IProcessDebugManager64) AddApplication(pda *systemdiagnosticsdebugactivescript.IDebugApplication64, pdwAppCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddApplication(pda, pdwAppCookie)))
+func (self IProcessDebugManager64) AddApplication(pda IDebugApplication64, pdwAppCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddApplication(pda.Raw, pdwAppCookie)))
 }
 
 // RemoveApplication wraps the raw RemoveApplication call.
@@ -3244,8 +3244,8 @@ func (self IProcessDebugManager64) RemoveApplication(dwAppCookie uint32) error {
 }
 
 // CreateDebugDocumentHelper wraps the raw CreateDebugDocumentHelper call.
-func (self IProcessDebugManager64) CreateDebugDocumentHelper(punkOuter *systemcom.IUnknown, pddh **systemdiagnosticsdebugactivescript.IDebugDocumentHelper64) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDebugDocumentHelper(punkOuter, pddh)))
+func (self IProcessDebugManager64) CreateDebugDocumentHelper(punkOuter systemcomidiom.IUnknown, pddh **systemdiagnosticsdebugactivescript.IDebugDocumentHelper64) error {
+	return win32.HRESULTError(int32(self.Raw.CreateDebugDocumentHelper(punkOuter.Raw, pddh)))
 }
 
 // IProvideExpressionContexts is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IProvideExpressionContexts with error-returning methods.
@@ -3276,8 +3276,8 @@ func WrapIRemoteDebugApplication(raw *systemdiagnosticsdebugactivescript.IRemote
 }
 
 // ResumeFromBreakPoint wraps the raw ResumeFromBreakPoint call.
-func (self IRemoteDebugApplication) ResumeFromBreakPoint(prptFocus *systemdiagnosticsdebugactivescript.IRemoteDebugApplicationThread, bra systemdiagnosticsdebugactivescript.BREAKRESUMEACTION, era systemdiagnosticsdebugactivescript.ERRORRESUMEACTION) error {
-	return win32.HRESULTError(int32(self.Raw.ResumeFromBreakPoint(prptFocus, bra, era)))
+func (self IRemoteDebugApplication) ResumeFromBreakPoint(prptFocus IRemoteDebugApplicationThread, bra systemdiagnosticsdebugactivescript.BREAKRESUMEACTION, era systemdiagnosticsdebugactivescript.ERRORRESUMEACTION) error {
+	return win32.HRESULTError(int32(self.Raw.ResumeFromBreakPoint(prptFocus.Raw, bra, era)))
 }
 
 // CauseBreak wraps the raw CauseBreak call.
@@ -3286,8 +3286,8 @@ func (self IRemoteDebugApplication) CauseBreak() error {
 }
 
 // ConnectDebugger wraps the raw ConnectDebugger call.
-func (self IRemoteDebugApplication) ConnectDebugger(pad *systemdiagnosticsdebugactivescript.IApplicationDebugger) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectDebugger(pad)))
+func (self IRemoteDebugApplication) ConnectDebugger(pad IApplicationDebugger) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectDebugger(pad.Raw)))
 }
 
 // DisconnectDebugger wraps the raw DisconnectDebugger call.
@@ -3301,8 +3301,8 @@ func (self IRemoteDebugApplication) GetDebugger(pad **systemdiagnosticsdebugacti
 }
 
 // CreateInstanceAtApplication wraps the raw CreateInstanceAtApplication call.
-func (self IRemoteDebugApplication) CreateInstanceAtApplication(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceAtApplication(rclsid, pUnkOuter, dwClsContext, riid, ppvObject)))
+func (self IRemoteDebugApplication) CreateInstanceAtApplication(rclsid *win32.GUID, pUnkOuter systemcomidiom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateInstanceAtApplication(rclsid, pUnkOuter.Raw, dwClsContext, riid, ppvObject)))
 }
 
 // QueryAlive wraps the raw QueryAlive call.
@@ -3368,8 +3368,8 @@ func WrapIRemoteDebugApplicationEvents(raw *systemdiagnosticsdebugactivescript.I
 }
 
 // OnConnectDebugger wraps the raw OnConnectDebugger call.
-func (self IRemoteDebugApplicationEvents) OnConnectDebugger(pad *systemdiagnosticsdebugactivescript.IApplicationDebugger) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnectDebugger(pad)))
+func (self IRemoteDebugApplicationEvents) OnConnectDebugger(pad IApplicationDebugger) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnectDebugger(pad.Raw)))
 }
 
 // OnDisconnectDebugger wraps the raw OnDisconnectDebugger call.
@@ -3395,28 +3395,28 @@ func (self IRemoteDebugApplicationEvents) OnClose() error {
 }
 
 // OnEnterBreakPoint wraps the raw OnEnterBreakPoint call.
-func (self IRemoteDebugApplicationEvents) OnEnterBreakPoint(prdat *systemdiagnosticsdebugactivescript.IRemoteDebugApplicationThread) error {
-	return win32.HRESULTError(int32(self.Raw.OnEnterBreakPoint(prdat)))
+func (self IRemoteDebugApplicationEvents) OnEnterBreakPoint(prdat IRemoteDebugApplicationThread) error {
+	return win32.HRESULTError(int32(self.Raw.OnEnterBreakPoint(prdat.Raw)))
 }
 
 // OnLeaveBreakPoint wraps the raw OnLeaveBreakPoint call.
-func (self IRemoteDebugApplicationEvents) OnLeaveBreakPoint(prdat *systemdiagnosticsdebugactivescript.IRemoteDebugApplicationThread) error {
-	return win32.HRESULTError(int32(self.Raw.OnLeaveBreakPoint(prdat)))
+func (self IRemoteDebugApplicationEvents) OnLeaveBreakPoint(prdat IRemoteDebugApplicationThread) error {
+	return win32.HRESULTError(int32(self.Raw.OnLeaveBreakPoint(prdat.Raw)))
 }
 
 // OnCreateThread wraps the raw OnCreateThread call.
-func (self IRemoteDebugApplicationEvents) OnCreateThread(prdat *systemdiagnosticsdebugactivescript.IRemoteDebugApplicationThread) error {
-	return win32.HRESULTError(int32(self.Raw.OnCreateThread(prdat)))
+func (self IRemoteDebugApplicationEvents) OnCreateThread(prdat IRemoteDebugApplicationThread) error {
+	return win32.HRESULTError(int32(self.Raw.OnCreateThread(prdat.Raw)))
 }
 
 // OnDestroyThread wraps the raw OnDestroyThread call.
-func (self IRemoteDebugApplicationEvents) OnDestroyThread(prdat *systemdiagnosticsdebugactivescript.IRemoteDebugApplicationThread) error {
-	return win32.HRESULTError(int32(self.Raw.OnDestroyThread(prdat)))
+func (self IRemoteDebugApplicationEvents) OnDestroyThread(prdat IRemoteDebugApplicationThread) error {
+	return win32.HRESULTError(int32(self.Raw.OnDestroyThread(prdat.Raw)))
 }
 
 // OnBreakFlagChange wraps the raw OnBreakFlagChange call.
-func (self IRemoteDebugApplicationEvents) OnBreakFlagChange(abf uint32, prdatSteppingThread *systemdiagnosticsdebugactivescript.IRemoteDebugApplicationThread) error {
-	return win32.HRESULTError(int32(self.Raw.OnBreakFlagChange(abf, prdatSteppingThread)))
+func (self IRemoteDebugApplicationEvents) OnBreakFlagChange(abf uint32, prdatSteppingThread IRemoteDebugApplicationThread) error {
+	return win32.HRESULTError(int32(self.Raw.OnBreakFlagChange(abf, prdatSteppingThread.Raw)))
 }
 
 // IRemoteDebugApplicationThread is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IRemoteDebugApplicationThread with error-returning methods.
@@ -3451,8 +3451,8 @@ func (self IRemoteDebugApplicationThread) GetDescription(pbstrDescription *found
 }
 
 // SetNextStatement wraps the raw SetNextStatement call.
-func (self IRemoteDebugApplicationThread) SetNextStatement(pStackFrame *systemdiagnosticsdebugactivescript.IDebugStackFrame, pCodeContext *systemdiagnosticsdebugactivescript.IDebugCodeContext) error {
-	return win32.HRESULTError(int32(self.Raw.SetNextStatement(pStackFrame, pCodeContext)))
+func (self IRemoteDebugApplicationThread) SetNextStatement(pStackFrame IDebugStackFrame, pCodeContext IDebugCodeContext) error {
+	return win32.HRESULTError(int32(self.Raw.SetNextStatement(pStackFrame.Raw, pCodeContext.Raw)))
 }
 
 // GetState wraps the raw GetState call.
@@ -3568,8 +3568,8 @@ func (self IScriptEntry) GetSignature(ppti **systemcom.ITypeInfo, piMethod *uint
 }
 
 // SetSignature wraps the raw SetSignature call.
-func (self IScriptEntry) SetSignature(pti *systemcom.ITypeInfo, iMethod uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetSignature(pti, iMethod)))
+func (self IScriptEntry) SetSignature(pti systemcomidiom.ITypeInfo, iMethod uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetSignature(pti.Raw, iMethod)))
 }
 
 // GetRange wraps the raw GetRange call.
@@ -3661,11 +3661,11 @@ func (self IScriptNode) CreateChildEntry(isn uint32, dwCookie uint32, pszDelimit
 }
 
 // CreateChildHandler wraps the raw CreateChildHandler call.
-func (self IScriptNode) CreateChildHandler(pszDefaultName string, prgpszNames *foundation.PWSTR, cpszNames uint32, pszEvent string, pszDelimiter string, ptiSignature *systemcom.ITypeInfo, iMethodSignature uint32, isn uint32, dwCookie uint32, ppse **systemdiagnosticsdebugactivescript.IScriptEntry) error {
+func (self IScriptNode) CreateChildHandler(pszDefaultName string, prgpszNames *foundation.PWSTR, cpszNames uint32, pszEvent string, pszDelimiter string, ptiSignature systemcomidiom.ITypeInfo, iMethodSignature uint32, isn uint32, dwCookie uint32, ppse **systemdiagnosticsdebugactivescript.IScriptEntry) error {
 	_pszDefaultName := win32.UTF16Ptr(pszDefaultName)
 	_pszEvent := win32.UTF16Ptr(pszEvent)
 	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
-	return win32.HRESULTError(int32(self.Raw.CreateChildHandler(foundation.PWSTR(_pszDefaultName), prgpszNames, cpszNames, foundation.PWSTR(_pszEvent), foundation.PWSTR(_pszDelimiter), ptiSignature, iMethodSignature, isn, dwCookie, ppse)))
+	return win32.HRESULTError(int32(self.Raw.CreateChildHandler(foundation.PWSTR(_pszDefaultName), prgpszNames, cpszNames, foundation.PWSTR(_pszEvent), foundation.PWSTR(_pszDelimiter), ptiSignature.Raw, iMethodSignature, isn, dwCookie, ppse)))
 }
 
 // IScriptScriptlet is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IScriptScriptlet with error-returning methods.
@@ -3734,8 +3734,8 @@ func (self ISimpleConnectionPoint) DescribeEvents(iEvent uint32, cEvents uint32,
 }
 
 // Advise wraps the raw Advise call.
-func (self ISimpleConnectionPoint) Advise(pdisp *systemcom.IDispatch, pdwCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pdisp, pdwCookie)))
+func (self ISimpleConnectionPoint) Advise(pdisp systemcomidiom.IDispatch, pdwCookie *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pdisp.Raw, pdwCookie)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -3772,8 +3772,8 @@ func WrapIWebAppDiagnosticsObjectInitialization(raw *systemdiagnosticsdebugactiv
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IWebAppDiagnosticsObjectInitialization) Initialize(hPassedHandle foundation.HANDLE_PTR, pDebugApplication *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(hPassedHandle, pDebugApplication)))
+func (self IWebAppDiagnosticsObjectInitialization) Initialize(hPassedHandle foundation.HANDLE_PTR, pDebugApplication systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(hPassedHandle, pDebugApplication.Raw)))
 }
 
 // IWebAppDiagnosticsSetup is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IWebAppDiagnosticsSetup with error-returning methods.

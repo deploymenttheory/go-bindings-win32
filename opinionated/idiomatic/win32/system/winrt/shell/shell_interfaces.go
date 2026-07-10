@@ -7,10 +7,9 @@ package shell
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemwinrtshell "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt/shell"
-	uishell "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	uishellidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/ui/shell"
 )
 
 // IDDEInitializer is an idiomatic wrapper over the raw COM interface System.WinRT.Shell.IDDEInitializer with error-returning methods.
@@ -25,12 +24,12 @@ func WrapIDDEInitializer(raw *systemwinrtshell.IDDEInitializer) IDDEInitializer 
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IDDEInitializer) Initialize(fileExtensionOrProtocol string, method systemwinrtshell.CreateProcessMethod, currentDirectory string, execTarget *uishell.IShellItem, site *systemcom.IUnknown, application string, targetFile string, arguments string, verb string) error {
+func (self IDDEInitializer) Initialize(fileExtensionOrProtocol string, method systemwinrtshell.CreateProcessMethod, currentDirectory string, execTarget uishellidiom.IShellItem, site systemcomidiom.IUnknown, application string, targetFile string, arguments string, verb string) error {
 	_fileExtensionOrProtocol := win32.UTF16Ptr(fileExtensionOrProtocol)
 	_currentDirectory := win32.UTF16Ptr(currentDirectory)
 	_application := win32.UTF16Ptr(application)
 	_targetFile := win32.UTF16Ptr(targetFile)
 	_arguments := win32.UTF16Ptr(arguments)
 	_verb := win32.UTF16Ptr(verb)
-	return win32.HRESULTError(int32(self.Raw.Initialize(foundation.PWSTR(_fileExtensionOrProtocol), method, foundation.PWSTR(_currentDirectory), execTarget, site, foundation.PWSTR(_application), foundation.PWSTR(_targetFile), foundation.PWSTR(_arguments), foundation.PWSTR(_verb))))
+	return win32.HRESULTError(int32(self.Raw.Initialize(foundation.PWSTR(_fileExtensionOrProtocol), method, foundation.PWSTR(_currentDirectory), execTarget.Raw, site.Raw, foundation.PWSTR(_application), foundation.PWSTR(_targetFile), foundation.PWSTR(_arguments), foundation.PWSTR(_verb))))
 }

@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
-	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
 	mediamediaplayer "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediaplayer"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	mediamediafoundationidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/mediafoundation"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // IFeed is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IFeed with error-returning methods.
@@ -81,10 +82,10 @@ func (self IFeed) Move(newParentPath foundation.BSTR) error {
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IFeed) Get_Parent() (*systemcom.IDispatch, error) {
+func (self IFeed) Get_Parent() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_Parent(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastWriteTime wraps the raw Get_LastWriteTime call.
@@ -153,17 +154,17 @@ func (self IFeed) Get_LocalEnclosurePath() (foundation.BSTR, error) {
 }
 
 // Get_Items wraps the raw Get_Items call.
-func (self IFeed) Get_Items() (*systemcom.IDispatch, error) {
+func (self IFeed) Get_Items() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_Items(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // GetItem wraps the raw GetItem call.
-func (self IFeed) GetItem(itemId int32) (*systemcom.IDispatch, error) {
+func (self IFeed) GetItem(itemId int32) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetItem(itemId, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Title wraps the raw Get_Title call.
@@ -292,10 +293,10 @@ func (self IFeed) MarkAllItemsRead() error {
 }
 
 // GetWatcher wraps the raw GetWatcher call.
-func (self IFeed) GetWatcher(scope mediamediaplayer.FEEDS_EVENTS_SCOPE, mask mediamediaplayer.FEEDS_EVENTS_MASK) (*systemcom.IDispatch, error) {
+func (self IFeed) GetWatcher(scope mediamediaplayer.FEEDS_EVENTS_SCOPE, mask mediamediaplayer.FEEDS_EVENTS_MASK) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetWatcher(scope, mask, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get_UnreadItemCount wraps the raw Get_UnreadItemCount call.
@@ -324,10 +325,10 @@ func WrapIFeed2(raw *mediamediaplayer.IFeed2) IFeed2 {
 }
 
 // GetItemByEffectiveId wraps the raw GetItemByEffectiveId call.
-func (self IFeed2) GetItemByEffectiveId(itemEffectiveId int32) (*systemcom.IDispatch, error) {
+func (self IFeed2) GetItemByEffectiveId(itemEffectiveId int32) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetItemByEffectiveId(itemEffectiveId, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastItemDownloadTime wraps the raw Get_LastItemDownloadTime call.
@@ -425,10 +426,10 @@ func (self IFeedEnclosure) Get_LocalPath() (foundation.BSTR, error) {
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IFeedEnclosure) Get_Parent() (*systemcom.IDispatch, error) {
+func (self IFeedEnclosure) Get_Parent() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_Parent(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get_DownloadUrl wraps the raw Get_DownloadUrl call.
@@ -518,31 +519,31 @@ func WrapIFeedFolder(raw *mediamediaplayer.IFeedFolder) IFeedFolder {
 }
 
 // Get_Feeds wraps the raw Get_Feeds call.
-func (self IFeedFolder) Get_Feeds() (*systemcom.IDispatch, error) {
+func (self IFeedFolder) Get_Feeds() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_Feeds(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Subfolders wraps the raw Get_Subfolders call.
-func (self IFeedFolder) Get_Subfolders() (*systemcom.IDispatch, error) {
+func (self IFeedFolder) Get_Subfolders() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_Subfolders(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // CreateFeed wraps the raw CreateFeed call.
-func (self IFeedFolder) CreateFeed(feedName foundation.BSTR, feedUrl foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IFeedFolder) CreateFeed(feedName foundation.BSTR, feedUrl foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.CreateFeed(feedName, feedUrl, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // CreateSubfolder wraps the raw CreateSubfolder call.
-func (self IFeedFolder) CreateSubfolder(folderName foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IFeedFolder) CreateSubfolder(folderName foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.CreateSubfolder(folderName, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // ExistsFeed wraps the raw ExistsFeed call.
@@ -553,10 +554,10 @@ func (self IFeedFolder) ExistsFeed(feedName foundation.BSTR) (foundation.VARIANT
 }
 
 // GetFeed wraps the raw GetFeed call.
-func (self IFeedFolder) GetFeed(feedName foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IFeedFolder) GetFeed(feedName foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetFeed(feedName, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // ExistsSubfolder wraps the raw ExistsSubfolder call.
@@ -567,10 +568,10 @@ func (self IFeedFolder) ExistsSubfolder(folderName foundation.BSTR) (foundation.
 }
 
 // GetSubfolder wraps the raw GetSubfolder call.
-func (self IFeedFolder) GetSubfolder(folderName foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IFeedFolder) GetSubfolder(folderName foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetSubfolder(folderName, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -603,10 +604,10 @@ func (self IFeedFolder) Move(newParentPath foundation.BSTR) error {
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IFeedFolder) Get_Parent() (*systemcom.IDispatch, error) {
+func (self IFeedFolder) Get_Parent() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_Parent(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsRoot wraps the raw Get_IsRoot call.
@@ -631,10 +632,10 @@ func (self IFeedFolder) Get_TotalItemCount() (int32, error) {
 }
 
 // GetWatcher wraps the raw GetWatcher call.
-func (self IFeedFolder) GetWatcher(scope mediamediaplayer.FEEDS_EVENTS_SCOPE, mask mediamediaplayer.FEEDS_EVENTS_MASK) (*systemcom.IDispatch, error) {
+func (self IFeedFolder) GetWatcher(scope mediamediaplayer.FEEDS_EVENTS_SCOPE, mask mediamediaplayer.FEEDS_EVENTS_MASK) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetWatcher(scope, mask, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // IFeedFolderEvents is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IFeedFolderEvents with error-returning methods.
@@ -796,10 +797,10 @@ func (self IFeedItem) Get_Author() (foundation.BSTR, error) {
 }
 
 // Get_Enclosure wraps the raw Get_Enclosure call.
-func (self IFeedItem) Get_Enclosure() (*systemcom.IDispatch, error) {
+func (self IFeedItem) Get_Enclosure() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_Enclosure(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsRead wraps the raw Get_IsRead call.
@@ -822,10 +823,10 @@ func (self IFeedItem) Get_LocalId() (int32, error) {
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IFeedItem) Get_Parent() (*systemcom.IDispatch, error) {
+func (self IFeedItem) Get_Parent() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_Parent(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -891,17 +892,17 @@ func (self IFeedsEnum) Get_Count() (int32, error) {
 }
 
 // Item wraps the raw Item call.
-func (self IFeedsEnum) Item(index int32) (*systemcom.IDispatch, error) {
+func (self IFeedsEnum) Item(index int32) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Item(index, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IFeedsEnum) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+func (self IFeedsEnum) Get__NewEnum() (systemoleidiom.IEnumVARIANT, error) {
 	var _enumVar *systemole.IEnumVARIANT
 	_hr := self.Raw.Get__NewEnum(&_enumVar)
-	return _enumVar, win32.HRESULTError(int32(_hr))
+	return systemoleidiom.WrapIEnumVARIANT(_enumVar), win32.HRESULTError(int32(_hr))
 }
 
 // IFeedsManager is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IFeedsManager with error-returning methods.
@@ -916,10 +917,10 @@ func WrapIFeedsManager(raw *mediamediaplayer.IFeedsManager) IFeedsManager {
 }
 
 // Get_RootFolder wraps the raw Get_RootFolder call.
-func (self IFeedsManager) Get_RootFolder() (*systemcom.IDispatch, error) {
+func (self IFeedsManager) Get_RootFolder() (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.Get_RootFolder(&_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // IsSubscribed wraps the raw IsSubscribed call.
@@ -937,17 +938,17 @@ func (self IFeedsManager) ExistsFeed(feedPath foundation.BSTR) (foundation.VARIA
 }
 
 // GetFeed wraps the raw GetFeed call.
-func (self IFeedsManager) GetFeed(feedPath foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IFeedsManager) GetFeed(feedPath foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetFeed(feedPath, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // GetFeedByUrl wraps the raw GetFeedByUrl call.
-func (self IFeedsManager) GetFeedByUrl(feedUrl foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IFeedsManager) GetFeedByUrl(feedUrl foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetFeedByUrl(feedUrl, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // ExistsFolder wraps the raw ExistsFolder call.
@@ -958,10 +959,10 @@ func (self IFeedsManager) ExistsFolder(folderPath foundation.BSTR) (foundation.V
 }
 
 // GetFolder wraps the raw GetFolder call.
-func (self IFeedsManager) GetFolder(folderPath foundation.BSTR) (*systemcom.IDispatch, error) {
+func (self IFeedsManager) GetFolder(folderPath foundation.BSTR) (systemcomidiom.IDispatch, error) {
 	var _disp *systemcom.IDispatch
 	_hr := self.Raw.GetFolder(folderPath, &_disp)
-	return _disp, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIDispatch(_disp), win32.HRESULTError(int32(_hr))
 }
 
 // DeleteFeed wraps the raw DeleteFeed call.
@@ -1111,8 +1112,8 @@ func (self IWMPCdromBurn) Get_burnPlaylist(ppPlaylist **mediamediaplayer.IWMPPla
 }
 
 // Put_burnPlaylist wraps the raw Put_burnPlaylist call.
-func (self IWMPCdromBurn) Put_burnPlaylist(pPlaylist *mediamediaplayer.IWMPPlaylist) error {
-	return win32.HRESULTError(int32(self.Raw.Put_burnPlaylist(pPlaylist)))
+func (self IWMPCdromBurn) Put_burnPlaylist(pPlaylist IWMPPlaylist) error {
+	return win32.HRESULTError(int32(self.Raw.Put_burnPlaylist(pPlaylist.Raw)))
 }
 
 // RefreshStatus wraps the raw RefreshStatus call.
@@ -1368,8 +1369,8 @@ func WrapIWMPContentPartner(raw *mediamediaplayer.IWMPContentPartner) IWMPConten
 }
 
 // SetCallback wraps the raw SetCallback call.
-func (self IWMPContentPartner) SetCallback(pCallback *mediamediaplayer.IWMPContentPartnerCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetCallback(pCallback)))
+func (self IWMPContentPartner) SetCallback(pCallback IWMPContentPartnerCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetCallback(pCallback.Raw)))
 }
 
 // Notify wraps the raw Notify call.
@@ -1398,13 +1399,13 @@ func (self IWMPContentPartner) InvokeCommand(dwCommandID uint32, location founda
 }
 
 // CanBuySilent wraps the raw CanBuySilent call.
-func (self IWMPContentPartner) CanBuySilent(pInfo *mediamediaplayer.IWMPContentContainerList, pbstrTotalPrice *foundation.BSTR, pSilentOK *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CanBuySilent(pInfo, pbstrTotalPrice, pSilentOK)))
+func (self IWMPContentPartner) CanBuySilent(pInfo IWMPContentContainerList, pbstrTotalPrice *foundation.BSTR, pSilentOK *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.CanBuySilent(pInfo.Raw, pbstrTotalPrice, pSilentOK)))
 }
 
 // Buy wraps the raw Buy call.
-func (self IWMPContentPartner) Buy(pInfo *mediamediaplayer.IWMPContentContainerList, cookie uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Buy(pInfo, cookie)))
+func (self IWMPContentPartner) Buy(pInfo IWMPContentContainerList, cookie uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Buy(pInfo.Raw, cookie)))
 }
 
 // GetStreamingURL wraps the raw GetStreamingURL call.
@@ -1413,8 +1414,8 @@ func (self IWMPContentPartner) GetStreamingURL(st mediamediaplayer.WMPStreamingT
 }
 
 // Download wraps the raw Download call.
-func (self IWMPContentPartner) Download(pInfo *mediamediaplayer.IWMPContentContainerList, cookie uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Download(pInfo, cookie)))
+func (self IWMPContentPartner) Download(pInfo IWMPContentContainerList, cookie uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Download(pInfo.Raw, cookie)))
 }
 
 // DownloadTrackComplete wraps the raw DownloadTrackComplete call.
@@ -1463,8 +1464,8 @@ func (self IWMPContentPartner) StationEvent(bstrStationEventType foundation.BSTR
 }
 
 // CompareContainerListPrices wraps the raw CompareContainerListPrices call.
-func (self IWMPContentPartner) CompareContainerListPrices(pListBase *mediamediaplayer.IWMPContentContainerList, pListCompare *mediamediaplayer.IWMPContentContainerList, pResult *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CompareContainerListPrices(pListBase, pListCompare, pResult)))
+func (self IWMPContentPartner) CompareContainerListPrices(pListBase IWMPContentContainerList, pListCompare IWMPContentContainerList, pResult *int32) error {
+	return win32.HRESULTError(int32(self.Raw.CompareContainerListPrices(pListBase.Raw, pListCompare.Raw, pResult)))
 }
 
 // VerifyPermission wraps the raw VerifyPermission call.
@@ -1615,8 +1616,8 @@ func (self IWMPControls) Get_currentItem(ppIWMPMedia **mediamediaplayer.IWMPMedi
 }
 
 // Put_currentItem wraps the raw Put_currentItem call.
-func (self IWMPControls) Put_currentItem(pIWMPMedia *mediamediaplayer.IWMPMedia) error {
-	return win32.HRESULTError(int32(self.Raw.Put_currentItem(pIWMPMedia)))
+func (self IWMPControls) Put_currentItem(pIWMPMedia IWMPMedia) error {
+	return win32.HRESULTError(int32(self.Raw.Put_currentItem(pIWMPMedia.Raw)))
 }
 
 // Get_currentMarker wraps the raw Get_currentMarker call.
@@ -1630,8 +1631,8 @@ func (self IWMPControls) Put_currentMarker(lMarker int32) error {
 }
 
 // PlayItem wraps the raw PlayItem call.
-func (self IWMPControls) PlayItem(pIWMPMedia *mediamediaplayer.IWMPMedia) error {
-	return win32.HRESULTError(int32(self.Raw.PlayItem(pIWMPMedia)))
+func (self IWMPControls) PlayItem(pIWMPMedia IWMPMedia) error {
+	return win32.HRESULTError(int32(self.Raw.PlayItem(pIWMPMedia.Raw)))
 }
 
 // IWMPControls2 is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPControls2 with error-returning methods.
@@ -1784,8 +1785,8 @@ func (self IWMPCore) Get_currentMedia(ppMedia **mediamediaplayer.IWMPMedia) erro
 }
 
 // Put_currentMedia wraps the raw Put_currentMedia call.
-func (self IWMPCore) Put_currentMedia(pMedia *mediamediaplayer.IWMPMedia) error {
-	return win32.HRESULTError(int32(self.Raw.Put_currentMedia(pMedia)))
+func (self IWMPCore) Put_currentMedia(pMedia IWMPMedia) error {
+	return win32.HRESULTError(int32(self.Raw.Put_currentMedia(pMedia.Raw)))
 }
 
 // Get_mediaCollection wraps the raw Get_mediaCollection call.
@@ -1819,8 +1820,8 @@ func (self IWMPCore) Get_currentPlaylist(ppPL **mediamediaplayer.IWMPPlaylist) e
 }
 
 // Put_currentPlaylist wraps the raw Put_currentPlaylist call.
-func (self IWMPCore) Put_currentPlaylist(pPL *mediamediaplayer.IWMPPlaylist) error {
-	return win32.HRESULTError(int32(self.Raw.Put_currentPlaylist(pPL)))
+func (self IWMPCore) Put_currentPlaylist(pPL IWMPPlaylist) error {
+	return win32.HRESULTError(int32(self.Raw.Put_currentPlaylist(pPL.Raw)))
 }
 
 // Get_cdromCollection wraps the raw Get_cdromCollection call.
@@ -2134,8 +2135,8 @@ func WrapIWMPEffects2(raw *mediamediaplayer.IWMPEffects2) IWMPEffects2 {
 }
 
 // SetCore wraps the raw SetCore call.
-func (self IWMPEffects2) SetCore(pPlayer *mediamediaplayer.IWMPCore) error {
-	return win32.HRESULTError(int32(self.Raw.SetCore(pPlayer)))
+func (self IWMPEffects2) SetCore(pPlayer IWMPCore) error {
+	return win32.HRESULTError(int32(self.Raw.SetCore(pPlayer.Raw)))
 }
 
 // Create wraps the raw Create call.
@@ -2149,8 +2150,8 @@ func (self IWMPEffects2) Destroy() error {
 }
 
 // NotifyNewMedia wraps the raw NotifyNewMedia call.
-func (self IWMPEffects2) NotifyNewMedia(pMedia *mediamediaplayer.IWMPMedia) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyNewMedia(pMedia)))
+func (self IWMPEffects2) NotifyNewMedia(pMedia IWMPMedia) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyNewMedia(pMedia.Raw)))
 }
 
 // OnWindowMessage wraps the raw OnWindowMessage call.
@@ -2329,8 +2330,8 @@ func (self IWMPEvents) CdromMediaChange(CdromNum int32) {
 }
 
 // PlaylistChange wraps the raw PlaylistChange call.
-func (self IWMPEvents) PlaylistChange(Playlist *systemcom.IDispatch, change mediamediaplayer.WMPPlaylistChangeEventType) {
-	self.Raw.PlaylistChange(Playlist, change)
+func (self IWMPEvents) PlaylistChange(Playlist systemcomidiom.IDispatch, change mediamediaplayer.WMPPlaylistChangeEventType) {
+	self.Raw.PlaylistChange(Playlist.Raw, change)
 }
 
 // CurrentPlaylistChange wraps the raw CurrentPlaylistChange call.
@@ -2344,8 +2345,8 @@ func (self IWMPEvents) CurrentPlaylistItemAvailable(bstrItemName foundation.BSTR
 }
 
 // MediaChange wraps the raw MediaChange call.
-func (self IWMPEvents) MediaChange(Item *systemcom.IDispatch) {
-	self.Raw.MediaChange(Item)
+func (self IWMPEvents) MediaChange(Item systemcomidiom.IDispatch) {
+	self.Raw.MediaChange(Item.Raw)
 }
 
 // CurrentMediaItemAvailable wraps the raw CurrentMediaItemAvailable call.
@@ -2354,8 +2355,8 @@ func (self IWMPEvents) CurrentMediaItemAvailable(bstrItemName foundation.BSTR) {
 }
 
 // CurrentItemChange wraps the raw CurrentItemChange call.
-func (self IWMPEvents) CurrentItemChange(pdispMedia *systemcom.IDispatch) {
-	self.Raw.CurrentItemChange(pdispMedia)
+func (self IWMPEvents) CurrentItemChange(pdispMedia systemcomidiom.IDispatch) {
+	self.Raw.CurrentItemChange(pdispMedia.Raw)
 }
 
 // MediaCollectionChange wraps the raw MediaCollectionChange call.
@@ -2404,13 +2405,13 @@ func (self IWMPEvents) ModeChange(ModeName foundation.BSTR, NewValue foundation.
 }
 
 // MediaError wraps the raw MediaError call.
-func (self IWMPEvents) MediaError(pMediaObject *systemcom.IDispatch) {
-	self.Raw.MediaError(pMediaObject)
+func (self IWMPEvents) MediaError(pMediaObject systemcomidiom.IDispatch) {
+	self.Raw.MediaError(pMediaObject.Raw)
 }
 
 // OpenPlaylistSwitch wraps the raw OpenPlaylistSwitch call.
-func (self IWMPEvents) OpenPlaylistSwitch(pItem *systemcom.IDispatch) {
-	self.Raw.OpenPlaylistSwitch(pItem)
+func (self IWMPEvents) OpenPlaylistSwitch(pItem systemcomidiom.IDispatch) {
+	self.Raw.OpenPlaylistSwitch(pItem.Raw)
 }
 
 // DomainChange wraps the raw DomainChange call.
@@ -2490,33 +2491,33 @@ func WrapIWMPEvents2(raw *mediamediaplayer.IWMPEvents2) IWMPEvents2 {
 }
 
 // DeviceConnect wraps the raw DeviceConnect call.
-func (self IWMPEvents2) DeviceConnect(pDevice *mediamediaplayer.IWMPSyncDevice) {
-	self.Raw.DeviceConnect(pDevice)
+func (self IWMPEvents2) DeviceConnect(pDevice IWMPSyncDevice) {
+	self.Raw.DeviceConnect(pDevice.Raw)
 }
 
 // DeviceDisconnect wraps the raw DeviceDisconnect call.
-func (self IWMPEvents2) DeviceDisconnect(pDevice *mediamediaplayer.IWMPSyncDevice) {
-	self.Raw.DeviceDisconnect(pDevice)
+func (self IWMPEvents2) DeviceDisconnect(pDevice IWMPSyncDevice) {
+	self.Raw.DeviceDisconnect(pDevice.Raw)
 }
 
 // DeviceStatusChange wraps the raw DeviceStatusChange call.
-func (self IWMPEvents2) DeviceStatusChange(pDevice *mediamediaplayer.IWMPSyncDevice, NewStatus mediamediaplayer.WMPDeviceStatus) {
-	self.Raw.DeviceStatusChange(pDevice, NewStatus)
+func (self IWMPEvents2) DeviceStatusChange(pDevice IWMPSyncDevice, NewStatus mediamediaplayer.WMPDeviceStatus) {
+	self.Raw.DeviceStatusChange(pDevice.Raw, NewStatus)
 }
 
 // DeviceSyncStateChange wraps the raw DeviceSyncStateChange call.
-func (self IWMPEvents2) DeviceSyncStateChange(pDevice *mediamediaplayer.IWMPSyncDevice, NewState mediamediaplayer.WMPSyncState) {
-	self.Raw.DeviceSyncStateChange(pDevice, NewState)
+func (self IWMPEvents2) DeviceSyncStateChange(pDevice IWMPSyncDevice, NewState mediamediaplayer.WMPSyncState) {
+	self.Raw.DeviceSyncStateChange(pDevice.Raw, NewState)
 }
 
 // DeviceSyncError wraps the raw DeviceSyncError call.
-func (self IWMPEvents2) DeviceSyncError(pDevice *mediamediaplayer.IWMPSyncDevice, pMedia *systemcom.IDispatch) {
-	self.Raw.DeviceSyncError(pDevice, pMedia)
+func (self IWMPEvents2) DeviceSyncError(pDevice IWMPSyncDevice, pMedia systemcomidiom.IDispatch) {
+	self.Raw.DeviceSyncError(pDevice.Raw, pMedia.Raw)
 }
 
 // CreatePartnershipComplete wraps the raw CreatePartnershipComplete call.
-func (self IWMPEvents2) CreatePartnershipComplete(pDevice *mediamediaplayer.IWMPSyncDevice, hrResult foundation.HRESULT) {
-	self.Raw.CreatePartnershipComplete(pDevice, hrResult)
+func (self IWMPEvents2) CreatePartnershipComplete(pDevice IWMPSyncDevice, hrResult foundation.HRESULT) {
+	self.Raw.CreatePartnershipComplete(pDevice.Raw, hrResult)
 }
 
 // IWMPEvents3 is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPEvents3 with error-returning methods.
@@ -2531,38 +2532,38 @@ func WrapIWMPEvents3(raw *mediamediaplayer.IWMPEvents3) IWMPEvents3 {
 }
 
 // CdromRipStateChange wraps the raw CdromRipStateChange call.
-func (self IWMPEvents3) CdromRipStateChange(pCdromRip *mediamediaplayer.IWMPCdromRip, wmprs mediamediaplayer.WMPRipState) {
-	self.Raw.CdromRipStateChange(pCdromRip, wmprs)
+func (self IWMPEvents3) CdromRipStateChange(pCdromRip IWMPCdromRip, wmprs mediamediaplayer.WMPRipState) {
+	self.Raw.CdromRipStateChange(pCdromRip.Raw, wmprs)
 }
 
 // CdromRipMediaError wraps the raw CdromRipMediaError call.
-func (self IWMPEvents3) CdromRipMediaError(pCdromRip *mediamediaplayer.IWMPCdromRip, pMedia *systemcom.IDispatch) {
-	self.Raw.CdromRipMediaError(pCdromRip, pMedia)
+func (self IWMPEvents3) CdromRipMediaError(pCdromRip IWMPCdromRip, pMedia systemcomidiom.IDispatch) {
+	self.Raw.CdromRipMediaError(pCdromRip.Raw, pMedia.Raw)
 }
 
 // CdromBurnStateChange wraps the raw CdromBurnStateChange call.
-func (self IWMPEvents3) CdromBurnStateChange(pCdromBurn *mediamediaplayer.IWMPCdromBurn, wmpbs mediamediaplayer.WMPBurnState) {
-	self.Raw.CdromBurnStateChange(pCdromBurn, wmpbs)
+func (self IWMPEvents3) CdromBurnStateChange(pCdromBurn IWMPCdromBurn, wmpbs mediamediaplayer.WMPBurnState) {
+	self.Raw.CdromBurnStateChange(pCdromBurn.Raw, wmpbs)
 }
 
 // CdromBurnMediaError wraps the raw CdromBurnMediaError call.
-func (self IWMPEvents3) CdromBurnMediaError(pCdromBurn *mediamediaplayer.IWMPCdromBurn, pMedia *systemcom.IDispatch) {
-	self.Raw.CdromBurnMediaError(pCdromBurn, pMedia)
+func (self IWMPEvents3) CdromBurnMediaError(pCdromBurn IWMPCdromBurn, pMedia systemcomidiom.IDispatch) {
+	self.Raw.CdromBurnMediaError(pCdromBurn.Raw, pMedia.Raw)
 }
 
 // CdromBurnError wraps the raw CdromBurnError call.
-func (self IWMPEvents3) CdromBurnError(pCdromBurn *mediamediaplayer.IWMPCdromBurn, hrError foundation.HRESULT) {
-	self.Raw.CdromBurnError(pCdromBurn, hrError)
+func (self IWMPEvents3) CdromBurnError(pCdromBurn IWMPCdromBurn, hrError foundation.HRESULT) {
+	self.Raw.CdromBurnError(pCdromBurn.Raw, hrError)
 }
 
 // LibraryConnect wraps the raw LibraryConnect call.
-func (self IWMPEvents3) LibraryConnect(pLibrary *mediamediaplayer.IWMPLibrary) {
-	self.Raw.LibraryConnect(pLibrary)
+func (self IWMPEvents3) LibraryConnect(pLibrary IWMPLibrary) {
+	self.Raw.LibraryConnect(pLibrary.Raw)
 }
 
 // LibraryDisconnect wraps the raw LibraryDisconnect call.
-func (self IWMPEvents3) LibraryDisconnect(pLibrary *mediamediaplayer.IWMPLibrary) {
-	self.Raw.LibraryDisconnect(pLibrary)
+func (self IWMPEvents3) LibraryDisconnect(pLibrary IWMPLibrary) {
+	self.Raw.LibraryDisconnect(pLibrary.Raw)
 }
 
 // FolderScanStateChange wraps the raw FolderScanStateChange call.
@@ -2571,18 +2572,18 @@ func (self IWMPEvents3) FolderScanStateChange(wmpfss mediamediaplayer.WMPFolderS
 }
 
 // StringCollectionChange wraps the raw StringCollectionChange call.
-func (self IWMPEvents3) StringCollectionChange(pdispStringCollection *systemcom.IDispatch, change mediamediaplayer.WMPStringCollectionChangeEventType, lCollectionIndex int32) {
-	self.Raw.StringCollectionChange(pdispStringCollection, change, lCollectionIndex)
+func (self IWMPEvents3) StringCollectionChange(pdispStringCollection systemcomidiom.IDispatch, change mediamediaplayer.WMPStringCollectionChangeEventType, lCollectionIndex int32) {
+	self.Raw.StringCollectionChange(pdispStringCollection.Raw, change, lCollectionIndex)
 }
 
 // MediaCollectionMediaAdded wraps the raw MediaCollectionMediaAdded call.
-func (self IWMPEvents3) MediaCollectionMediaAdded(pdispMedia *systemcom.IDispatch) {
-	self.Raw.MediaCollectionMediaAdded(pdispMedia)
+func (self IWMPEvents3) MediaCollectionMediaAdded(pdispMedia systemcomidiom.IDispatch) {
+	self.Raw.MediaCollectionMediaAdded(pdispMedia.Raw)
 }
 
 // MediaCollectionMediaRemoved wraps the raw MediaCollectionMediaRemoved call.
-func (self IWMPEvents3) MediaCollectionMediaRemoved(pdispMedia *systemcom.IDispatch) {
-	self.Raw.MediaCollectionMediaRemoved(pdispMedia)
+func (self IWMPEvents3) MediaCollectionMediaRemoved(pdispMedia systemcomidiom.IDispatch) {
+	self.Raw.MediaCollectionMediaRemoved(pdispMedia.Raw)
 }
 
 // IWMPEvents4 is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPEvents4 with error-returning methods.
@@ -2597,8 +2598,8 @@ func WrapIWMPEvents4(raw *mediamediaplayer.IWMPEvents4) IWMPEvents4 {
 }
 
 // DeviceEstimation wraps the raw DeviceEstimation call.
-func (self IWMPEvents4) DeviceEstimation(pDevice *mediamediaplayer.IWMPSyncDevice, hrResult foundation.HRESULT, qwEstimatedUsedSpace int64, qwEstimatedSpace int64) {
-	self.Raw.DeviceEstimation(pDevice, hrResult, qwEstimatedUsedSpace, qwEstimatedSpace)
+func (self IWMPEvents4) DeviceEstimation(pDevice IWMPSyncDevice, hrResult foundation.HRESULT, qwEstimatedUsedSpace int64, qwEstimatedSpace int64) {
+	self.Raw.DeviceEstimation(pDevice.Raw, hrResult, qwEstimatedUsedSpace, qwEstimatedSpace)
 }
 
 // IWMPFolderMonitorServices is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPFolderMonitorServices with error-returning methods.
@@ -2679,13 +2680,13 @@ func WrapIWMPGraphCreation(raw *mediamediaplayer.IWMPGraphCreation) IWMPGraphCre
 }
 
 // GraphCreationPreRender wraps the raw GraphCreationPreRender call.
-func (self IWMPGraphCreation) GraphCreationPreRender(pFilterGraph *systemcom.IUnknown, pReserved *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GraphCreationPreRender(pFilterGraph, pReserved)))
+func (self IWMPGraphCreation) GraphCreationPreRender(pFilterGraph systemcomidiom.IUnknown, pReserved systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GraphCreationPreRender(pFilterGraph.Raw, pReserved.Raw)))
 }
 
 // GraphCreationPostRender wraps the raw GraphCreationPostRender call.
-func (self IWMPGraphCreation) GraphCreationPostRender(pFilterGraph *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GraphCreationPostRender(pFilterGraph)))
+func (self IWMPGraphCreation) GraphCreationPostRender(pFilterGraph systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GraphCreationPostRender(pFilterGraph.Raw)))
 }
 
 // GetGraphCreationFlags wraps the raw GetGraphCreationFlags call.
@@ -2720,8 +2721,8 @@ func (self IWMPLibrary) Get_mediaCollection(ppIWMPMediaCollection **mediamediapl
 }
 
 // IsIdentical wraps the raw IsIdentical call.
-func (self IWMPLibrary) IsIdentical(pIWMPLibrary *mediamediaplayer.IWMPLibrary, pvbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsIdentical(pIWMPLibrary, pvbool)))
+func (self IWMPLibrary) IsIdentical(pIWMPLibrary IWMPLibrary, pvbool *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsIdentical(pIWMPLibrary.Raw, pvbool)))
 }
 
 // IWMPLibrary2 is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPLibrary2 with error-returning methods.
@@ -2799,8 +2800,8 @@ func WrapIWMPMedia(raw *mediamediaplayer.IWMPMedia) IWMPMedia {
 }
 
 // Get_isIdentical wraps the raw Get_isIdentical call.
-func (self IWMPMedia) Get_isIdentical(pIWMPMedia *mediamediaplayer.IWMPMedia, pvbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_isIdentical(pIWMPMedia, pvbool)))
+func (self IWMPMedia) Get_isIdentical(pIWMPMedia IWMPMedia, pvbool *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Get_isIdentical(pIWMPMedia.Raw, pvbool)))
 }
 
 // Get_sourceURL wraps the raw Get_sourceURL call.
@@ -2879,8 +2880,8 @@ func (self IWMPMedia) GetItemInfoByAtom(lAtom int32, pbstrVal *foundation.BSTR) 
 }
 
 // IsMemberOf wraps the raw IsMemberOf call.
-func (self IWMPMedia) IsMemberOf(pPlaylist *mediamediaplayer.IWMPPlaylist, pvarfIsMemberOf *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsMemberOf(pPlaylist, pvarfIsMemberOf)))
+func (self IWMPMedia) IsMemberOf(pPlaylist IWMPPlaylist, pvarfIsMemberOf *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsMemberOf(pPlaylist.Raw, pvarfIsMemberOf)))
 }
 
 // IsReadOnlyItem wraps the raw IsReadOnlyItem call.
@@ -2972,8 +2973,8 @@ func (self IWMPMediaCollection) GetByAttribute(bstrAttribute foundation.BSTR, bs
 }
 
 // Remove wraps the raw Remove call.
-func (self IWMPMediaCollection) Remove(pItem *mediamediaplayer.IWMPMedia, varfDeleteFile foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(pItem, varfDeleteFile)))
+func (self IWMPMediaCollection) Remove(pItem IWMPMedia, varfDeleteFile foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(pItem.Raw, varfDeleteFile)))
 }
 
 // GetAttributeStringCollection wraps the raw GetAttributeStringCollection call.
@@ -2987,13 +2988,13 @@ func (self IWMPMediaCollection) GetMediaAtom(bstrItemName foundation.BSTR, plAto
 }
 
 // SetDeleted wraps the raw SetDeleted call.
-func (self IWMPMediaCollection) SetDeleted(pItem *mediamediaplayer.IWMPMedia, varfIsDeleted foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.SetDeleted(pItem, varfIsDeleted)))
+func (self IWMPMediaCollection) SetDeleted(pItem IWMPMedia, varfIsDeleted foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.SetDeleted(pItem.Raw, varfIsDeleted)))
 }
 
 // IsDeleted wraps the raw IsDeleted call.
-func (self IWMPMediaCollection) IsDeleted(pItem *mediamediaplayer.IWMPMedia, pvarfIsDeleted *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsDeleted(pItem, pvarfIsDeleted)))
+func (self IWMPMediaCollection) IsDeleted(pItem IWMPMedia, pvarfIsDeleted *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsDeleted(pItem.Raw, pvarfIsDeleted)))
 }
 
 // IWMPMediaCollection2 is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPMediaCollection2 with error-returning methods.
@@ -3013,13 +3014,13 @@ func (self IWMPMediaCollection2) CreateQuery(ppQuery **mediamediaplayer.IWMPQuer
 }
 
 // GetPlaylistByQuery wraps the raw GetPlaylistByQuery call.
-func (self IWMPMediaCollection2) GetPlaylistByQuery(pQuery *mediamediaplayer.IWMPQuery, bstrMediaType foundation.BSTR, bstrSortAttribute foundation.BSTR, fSortAscending foundation.VARIANT_BOOL, ppPlaylist **mediamediaplayer.IWMPPlaylist) error {
-	return win32.HRESULTError(int32(self.Raw.GetPlaylistByQuery(pQuery, bstrMediaType, bstrSortAttribute, fSortAscending, ppPlaylist)))
+func (self IWMPMediaCollection2) GetPlaylistByQuery(pQuery IWMPQuery, bstrMediaType foundation.BSTR, bstrSortAttribute foundation.BSTR, fSortAscending foundation.VARIANT_BOOL, ppPlaylist **mediamediaplayer.IWMPPlaylist) error {
+	return win32.HRESULTError(int32(self.Raw.GetPlaylistByQuery(pQuery.Raw, bstrMediaType, bstrSortAttribute, fSortAscending, ppPlaylist)))
 }
 
 // GetStringCollectionByQuery wraps the raw GetStringCollectionByQuery call.
-func (self IWMPMediaCollection2) GetStringCollectionByQuery(bstrAttribute foundation.BSTR, pQuery *mediamediaplayer.IWMPQuery, bstrMediaType foundation.BSTR, bstrSortAttribute foundation.BSTR, fSortAscending foundation.VARIANT_BOOL, ppStringCollection **mediamediaplayer.IWMPStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetStringCollectionByQuery(bstrAttribute, pQuery, bstrMediaType, bstrSortAttribute, fSortAscending, ppStringCollection)))
+func (self IWMPMediaCollection2) GetStringCollectionByQuery(bstrAttribute foundation.BSTR, pQuery IWMPQuery, bstrMediaType foundation.BSTR, bstrSortAttribute foundation.BSTR, fSortAscending foundation.VARIANT_BOOL, ppStringCollection **mediamediaplayer.IWMPStringCollection) error {
+	return win32.HRESULTError(int32(self.Raw.GetStringCollectionByQuery(bstrAttribute, pQuery.Raw, bstrMediaType, bstrSortAttribute, fSortAscending, ppStringCollection)))
 }
 
 // GetByAttributeAndMediaType wraps the raw GetByAttributeAndMediaType call.
@@ -3785,8 +3786,8 @@ func (self IWMPPlaylist) SetItemInfo(bstrName foundation.BSTR, bstrValue foundat
 }
 
 // Get_isIdentical wraps the raw Get_isIdentical call.
-func (self IWMPPlaylist) Get_isIdentical(pIWMPPlaylist *mediamediaplayer.IWMPPlaylist, pvbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_isIdentical(pIWMPPlaylist, pvbool)))
+func (self IWMPPlaylist) Get_isIdentical(pIWMPPlaylist IWMPPlaylist, pvbool *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.Get_isIdentical(pIWMPPlaylist.Raw, pvbool)))
 }
 
 // Clear wraps the raw Clear call.
@@ -3795,18 +3796,18 @@ func (self IWMPPlaylist) Clear() error {
 }
 
 // InsertItem wraps the raw InsertItem call.
-func (self IWMPPlaylist) InsertItem(lIndex int32, pIWMPMedia *mediamediaplayer.IWMPMedia) error {
-	return win32.HRESULTError(int32(self.Raw.InsertItem(lIndex, pIWMPMedia)))
+func (self IWMPPlaylist) InsertItem(lIndex int32, pIWMPMedia IWMPMedia) error {
+	return win32.HRESULTError(int32(self.Raw.InsertItem(lIndex, pIWMPMedia.Raw)))
 }
 
 // AppendItem wraps the raw AppendItem call.
-func (self IWMPPlaylist) AppendItem(pIWMPMedia *mediamediaplayer.IWMPMedia) error {
-	return win32.HRESULTError(int32(self.Raw.AppendItem(pIWMPMedia)))
+func (self IWMPPlaylist) AppendItem(pIWMPMedia IWMPMedia) error {
+	return win32.HRESULTError(int32(self.Raw.AppendItem(pIWMPMedia.Raw)))
 }
 
 // RemoveItem wraps the raw RemoveItem call.
-func (self IWMPPlaylist) RemoveItem(pIWMPMedia *mediamediaplayer.IWMPMedia) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveItem(pIWMPMedia)))
+func (self IWMPPlaylist) RemoveItem(pIWMPMedia IWMPMedia) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveItem(pIWMPMedia.Raw)))
 }
 
 // MoveItem wraps the raw MoveItem call.
@@ -3862,23 +3863,23 @@ func (self IWMPPlaylistCollection) GetByName(bstrName foundation.BSTR, ppPlaylis
 }
 
 // Remove wraps the raw Remove call.
-func (self IWMPPlaylistCollection) Remove(pItem *mediamediaplayer.IWMPPlaylist) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(pItem)))
+func (self IWMPPlaylistCollection) Remove(pItem IWMPPlaylist) error {
+	return win32.HRESULTError(int32(self.Raw.Remove(pItem.Raw)))
 }
 
 // SetDeleted wraps the raw SetDeleted call.
-func (self IWMPPlaylistCollection) SetDeleted(pItem *mediamediaplayer.IWMPPlaylist, varfIsDeleted foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.SetDeleted(pItem, varfIsDeleted)))
+func (self IWMPPlaylistCollection) SetDeleted(pItem IWMPPlaylist, varfIsDeleted foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.SetDeleted(pItem.Raw, varfIsDeleted)))
 }
 
 // IsDeleted wraps the raw IsDeleted call.
-func (self IWMPPlaylistCollection) IsDeleted(pItem *mediamediaplayer.IWMPPlaylist, pvarfIsDeleted *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsDeleted(pItem, pvarfIsDeleted)))
+func (self IWMPPlaylistCollection) IsDeleted(pItem IWMPPlaylist, pvarfIsDeleted *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsDeleted(pItem.Raw, pvarfIsDeleted)))
 }
 
 // ImportPlaylist wraps the raw ImportPlaylist call.
-func (self IWMPPlaylistCollection) ImportPlaylist(pItem *mediamediaplayer.IWMPPlaylist, ppImportedItem **mediamediaplayer.IWMPPlaylist) error {
-	return win32.HRESULTError(int32(self.Raw.ImportPlaylist(pItem, ppImportedItem)))
+func (self IWMPPlaylistCollection) ImportPlaylist(pItem IWMPPlaylist, ppImportedItem **mediamediaplayer.IWMPPlaylist) error {
+	return win32.HRESULTError(int32(self.Raw.ImportPlaylist(pItem.Raw, ppImportedItem)))
 }
 
 // IWMPPlugin is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPPlugin with error-returning methods.
@@ -3913,8 +3914,8 @@ func (self IWMPPlugin) GetCaps(pdwFlags *uint32) error {
 }
 
 // AdviseWMPServices wraps the raw AdviseWMPServices call.
-func (self IWMPPlugin) AdviseWMPServices(pWMPServices *mediamediaplayer.IWMPServices) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseWMPServices(pWMPServices)))
+func (self IWMPPlugin) AdviseWMPServices(pWMPServices IWMPServices) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseWMPServices(pWMPServices.Raw)))
 }
 
 // UnAdviseWMPServices wraps the raw UnAdviseWMPServices call.
@@ -3956,8 +3957,8 @@ func WrapIWMPPluginUI(raw *mediamediaplayer.IWMPPluginUI) IWMPPluginUI {
 }
 
 // SetCore wraps the raw SetCore call.
-func (self IWMPPluginUI) SetCore(pCore *mediamediaplayer.IWMPCore) error {
-	return win32.HRESULTError(int32(self.Raw.SetCore(pCore)))
+func (self IWMPPluginUI) SetCore(pCore IWMPCore) error {
+	return win32.HRESULTError(int32(self.Raw.SetCore(pCore.Raw)))
 }
 
 // Create wraps the raw Create call.
@@ -4283,8 +4284,8 @@ func WrapIWMPStringCollection2(raw *mediamediaplayer.IWMPStringCollection2) IWMP
 }
 
 // IsIdentical wraps the raw IsIdentical call.
-func (self IWMPStringCollection2) IsIdentical(pIWMPStringCollection2 *mediamediaplayer.IWMPStringCollection2, pvbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsIdentical(pIWMPStringCollection2, pvbool)))
+func (self IWMPStringCollection2) IsIdentical(pIWMPStringCollection2 IWMPStringCollection2, pvbool *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsIdentical(pIWMPStringCollection2.Raw, pvbool)))
 }
 
 // GetItemInfo wraps the raw GetItemInfo call.
@@ -4314,18 +4315,18 @@ func WrapIWMPSubscriptionService(raw *mediamediaplayer.IWMPSubscriptionService) 
 }
 
 // AllowPlay wraps the raw AllowPlay call.
-func (self IWMPSubscriptionService) AllowPlay(hwnd foundation.HWND, pMedia *mediamediaplayer.IWMPMedia, pfAllowPlay *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.AllowPlay(hwnd, pMedia, pfAllowPlay)))
+func (self IWMPSubscriptionService) AllowPlay(hwnd foundation.HWND, pMedia IWMPMedia, pfAllowPlay *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.AllowPlay(hwnd, pMedia.Raw, pfAllowPlay)))
 }
 
 // AllowCDBurn wraps the raw AllowCDBurn call.
-func (self IWMPSubscriptionService) AllowCDBurn(hwnd foundation.HWND, pPlaylist *mediamediaplayer.IWMPPlaylist, pfAllowBurn *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.AllowCDBurn(hwnd, pPlaylist, pfAllowBurn)))
+func (self IWMPSubscriptionService) AllowCDBurn(hwnd foundation.HWND, pPlaylist IWMPPlaylist, pfAllowBurn *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.AllowCDBurn(hwnd, pPlaylist.Raw, pfAllowBurn)))
 }
 
 // AllowPDATransfer wraps the raw AllowPDATransfer call.
-func (self IWMPSubscriptionService) AllowPDATransfer(hwnd foundation.HWND, pPlaylist *mediamediaplayer.IWMPPlaylist, pfAllowTransfer *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.AllowPDATransfer(hwnd, pPlaylist, pfAllowTransfer)))
+func (self IWMPSubscriptionService) AllowPDATransfer(hwnd foundation.HWND, pPlaylist IWMPPlaylist, pfAllowTransfer *foundation.BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.AllowPDATransfer(hwnd, pPlaylist.Raw, pfAllowTransfer)))
 }
 
 // StartBackgroundProcessing wraps the raw StartBackgroundProcessing call.
@@ -4355,13 +4356,13 @@ func (self IWMPSubscriptionService2) ServiceEvent(event mediamediaplayer.WMPSubs
 }
 
 // DeviceAvailable wraps the raw DeviceAvailable call.
-func (self IWMPSubscriptionService2) DeviceAvailable(bstrDeviceName foundation.BSTR, pCB *mediamediaplayer.IWMPSubscriptionServiceCallback) error {
-	return win32.HRESULTError(int32(self.Raw.DeviceAvailable(bstrDeviceName, pCB)))
+func (self IWMPSubscriptionService2) DeviceAvailable(bstrDeviceName foundation.BSTR, pCB IWMPSubscriptionServiceCallback) error {
+	return win32.HRESULTError(int32(self.Raw.DeviceAvailable(bstrDeviceName, pCB.Raw)))
 }
 
 // PrepareForSync wraps the raw PrepareForSync call.
-func (self IWMPSubscriptionService2) PrepareForSync(bstrFilename foundation.BSTR, bstrDeviceName foundation.BSTR, pCB *mediamediaplayer.IWMPSubscriptionServiceCallback) error {
-	return win32.HRESULTError(int32(self.Raw.PrepareForSync(bstrFilename, bstrDeviceName, pCB)))
+func (self IWMPSubscriptionService2) PrepareForSync(bstrFilename foundation.BSTR, bstrDeviceName foundation.BSTR, pCB IWMPSubscriptionServiceCallback) error {
+	return win32.HRESULTError(int32(self.Raw.PrepareForSync(bstrFilename, bstrDeviceName, pCB.Raw)))
 }
 
 // IWMPSubscriptionServiceCallback is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPSubscriptionServiceCallback with error-returning methods.
@@ -4467,8 +4468,8 @@ func (self IWMPSyncDevice) ShowSettings() error {
 }
 
 // IsIdentical wraps the raw IsIdentical call.
-func (self IWMPSyncDevice) IsIdentical(pDevice *mediamediaplayer.IWMPSyncDevice, pvbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsIdentical(pDevice, pvbool)))
+func (self IWMPSyncDevice) IsIdentical(pDevice IWMPSyncDevice, pvbool *foundation.VARIANT_BOOL) error {
+	return win32.HRESULTError(int32(self.Raw.IsIdentical(pDevice.Raw, pvbool)))
 }
 
 // IWMPSyncDevice2 is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPSyncDevice2 with error-returning methods.
@@ -4499,8 +4500,8 @@ func WrapIWMPSyncDevice3(raw *mediamediaplayer.IWMPSyncDevice3) IWMPSyncDevice3 
 }
 
 // EstimateSyncSize wraps the raw EstimateSyncSize call.
-func (self IWMPSyncDevice3) EstimateSyncSize(pNonRulePlaylist *mediamediaplayer.IWMPPlaylist, pRulesPlaylist *mediamediaplayer.IWMPPlaylist) error {
-	return win32.HRESULTError(int32(self.Raw.EstimateSyncSize(pNonRulePlaylist, pRulesPlaylist)))
+func (self IWMPSyncDevice3) EstimateSyncSize(pNonRulePlaylist IWMPPlaylist, pRulesPlaylist IWMPPlaylist) error {
+	return win32.HRESULTError(int32(self.Raw.EstimateSyncSize(pNonRulePlaylist.Raw, pRulesPlaylist.Raw)))
 }
 
 // CancelEstimation wraps the raw CancelEstimation call.
@@ -4573,8 +4574,8 @@ func WrapIWMPVideoRenderConfig(raw *mediamediaplayer.IWMPVideoRenderConfig) IWMP
 }
 
 // Put_presenterActivate wraps the raw Put_presenterActivate call.
-func (self IWMPVideoRenderConfig) Put_presenterActivate(pActivate *mediamediafoundation.IMFActivate) error {
-	return win32.HRESULTError(int32(self.Raw.Put_presenterActivate(pActivate)))
+func (self IWMPVideoRenderConfig) Put_presenterActivate(pActivate mediamediafoundationidiom.IMFActivate) error {
+	return win32.HRESULTError(int32(self.Raw.Put_presenterActivate(pActivate.Raw)))
 }
 
 // IWMPWindowMessageSink is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPWindowMessageSink with error-returning methods.
@@ -4754,9 +4755,9 @@ func (self IXFeed) LastDownloadError(pfde *mediamediaplayer.FEEDS_DOWNLOAD_ERROR
 }
 
 // Merge wraps the raw Merge call.
-func (self IXFeed) Merge(pStream *systemcom.IStream, pszUrl string) error {
+func (self IXFeed) Merge(pStream systemcomidiom.IStream, pszUrl string) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
-	return win32.HRESULTError(int32(self.Raw.Merge(pStream, foundation.PWSTR(_pszUrl))))
+	return win32.HRESULTError(int32(self.Raw.Merge(pStream.Raw, foundation.PWSTR(_pszUrl))))
 }
 
 // DownloadUrl wraps the raw DownloadUrl call.
@@ -5458,8 +5459,8 @@ func (self IXFeedsManager) AsyncSyncAll() error {
 }
 
 // Normalize wraps the raw Normalize call.
-func (self IXFeedsManager) Normalize(pStreamIn *systemcom.IStream, ppStreamOut **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Normalize(pStreamIn, ppStreamOut)))
+func (self IXFeedsManager) Normalize(pStreamIn systemcomidiom.IStream, ppStreamOut **systemcom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.Normalize(pStreamIn.Raw, ppStreamOut)))
 }
 
 // ItemCountLimit wraps the raw ItemCountLimit call.

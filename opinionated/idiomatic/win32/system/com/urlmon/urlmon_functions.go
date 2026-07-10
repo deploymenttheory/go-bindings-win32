@@ -11,18 +11,19 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomurlmon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/urlmon"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // CoGetClassObjectFromURL wraps the raw CoGetClassObjectFromURL call with idiomatic Go types.
-func CoGetClassObjectFromURL(rCLASSID *win32.GUID, szCODE string, dwFileVersionMS uint32, dwFileVersionLS uint32, szTYPE string, pBindCtx *systemcom.IBindCtx, dwClsContext systemcom.CLSCTX, riid *win32.GUID, ppv *unsafe.Pointer) error {
+func CoGetClassObjectFromURL(rCLASSID *win32.GUID, szCODE string, dwFileVersionMS uint32, dwFileVersionLS uint32, szTYPE string, pBindCtx systemcomidiom.IBindCtx, dwClsContext systemcom.CLSCTX, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	_szCODE := win32.UTF16Ptr(szCODE)
 	_szTYPE := win32.UTF16Ptr(szTYPE)
-	return win32.HRESULTError(int32(systemcomurlmon.CoGetClassObjectFromURL(rCLASSID, foundation.PWSTR(_szCODE), dwFileVersionMS, dwFileVersionLS, foundation.PWSTR(_szTYPE), pBindCtx, dwClsContext, nil, riid, ppv)))
+	return win32.HRESULTError(int32(systemcomurlmon.CoGetClassObjectFromURL(rCLASSID, foundation.PWSTR(_szCODE), dwFileVersionMS, dwFileVersionLS, foundation.PWSTR(_szTYPE), pBindCtx.Raw, dwClsContext, nil, riid, ppv)))
 }
 
 // CoInternetCombineIUri wraps the raw CoInternetCombineIUri call with idiomatic Go types.
-func CoInternetCombineIUri(pBaseUri *systemcom.IUri, pRelativeUri *systemcom.IUri, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetCombineIUri(pBaseUri, pRelativeUri, dwCombineFlags, ppCombinedUri, dwReserved)))
+func CoInternetCombineIUri(pBaseUri systemcomidiom.IUri, pRelativeUri systemcomidiom.IUri, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetCombineIUri(pBaseUri.Raw, pRelativeUri.Raw, dwCombineFlags, ppCombinedUri, dwReserved)))
 }
 
 // CoInternetCombineUrl wraps the raw CoInternetCombineUrl call with idiomatic Go types.
@@ -33,9 +34,9 @@ func CoInternetCombineUrl(pwzBaseUrl string, pwzRelativeUrl string, dwCombineFla
 }
 
 // CoInternetCombineUrlEx wraps the raw CoInternetCombineUrlEx call with idiomatic Go types.
-func CoInternetCombineUrlEx(pBaseUri *systemcom.IUri, pwzRelativeUrl string, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) error {
+func CoInternetCombineUrlEx(pBaseUri systemcomidiom.IUri, pwzRelativeUrl string, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) error {
 	_pwzRelativeUrl := win32.UTF16Ptr(pwzRelativeUrl)
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetCombineUrlEx(pBaseUri, foundation.PWSTR(_pwzRelativeUrl), dwCombineFlags, ppCombinedUri, dwReserved)))
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetCombineUrlEx(pBaseUri.Raw, foundation.PWSTR(_pwzRelativeUrl), dwCombineFlags, ppCombinedUri, dwReserved)))
 }
 
 // CoInternetCompareUrl wraps the raw CoInternetCompareUrl call with idiomatic Go types.
@@ -46,13 +47,13 @@ func CoInternetCompareUrl(pwzUrl1 string, pwzUrl2 string, dwFlags uint32) error 
 }
 
 // CoInternetCreateSecurityManager wraps the raw CoInternetCreateSecurityManager call with idiomatic Go types.
-func CoInternetCreateSecurityManager(pSP *systemcom.IServiceProvider, ppSM **systemcomurlmon.IInternetSecurityManager, dwReserved uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetCreateSecurityManager(pSP, ppSM, dwReserved)))
+func CoInternetCreateSecurityManager(pSP systemcomidiom.IServiceProvider, ppSM **systemcomurlmon.IInternetSecurityManager, dwReserved uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetCreateSecurityManager(pSP.Raw, ppSM, dwReserved)))
 }
 
 // CoInternetCreateZoneManager wraps the raw CoInternetCreateZoneManager call with idiomatic Go types.
-func CoInternetCreateZoneManager(pSP *systemcom.IServiceProvider, ppZM **systemcomurlmon.IInternetZoneManager, dwReserved uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetCreateZoneManager(pSP, ppZM, dwReserved)))
+func CoInternetCreateZoneManager(pSP systemcomidiom.IServiceProvider, ppZM **systemcomurlmon.IInternetZoneManager, dwReserved uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetCreateZoneManager(pSP.Raw, ppZM, dwReserved)))
 }
 
 // CoInternetGetProtocolFlags wraps the raw CoInternetGetProtocolFlags call with idiomatic Go types.
@@ -68,8 +69,8 @@ func CoInternetGetSecurityUrl(pwszUrl string, ppwszSecUrl *foundation.PWSTR, psu
 }
 
 // CoInternetGetSecurityUrlEx wraps the raw CoInternetGetSecurityUrlEx call with idiomatic Go types.
-func CoInternetGetSecurityUrlEx(pUri *systemcom.IUri, ppSecUri **systemcom.IUri, psuAction systemcomurlmon.PSUACTION) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetGetSecurityUrlEx(pUri, ppSecUri, psuAction, 0)))
+func CoInternetGetSecurityUrlEx(pUri systemcomidiom.IUri, ppSecUri **systemcom.IUri, psuAction systemcomurlmon.PSUACTION) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetGetSecurityUrlEx(pUri.Raw, ppSecUri, psuAction, 0)))
 }
 
 // CoInternetGetSession wraps the raw CoInternetGetSession call with idiomatic Go types.
@@ -83,26 +84,26 @@ func CoInternetIsFeatureEnabled(FeatureEntry systemcomurlmon.INTERNETFEATURELIST
 }
 
 // CoInternetIsFeatureEnabledForIUri wraps the raw CoInternetIsFeatureEnabledForIUri call with idiomatic Go types.
-func CoInternetIsFeatureEnabledForIUri(FeatureEntry systemcomurlmon.INTERNETFEATURELIST, dwFlags uint32, pIUri *systemcom.IUri, pSecMgr *systemcomurlmon.IInternetSecurityManagerEx2) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetIsFeatureEnabledForIUri(FeatureEntry, dwFlags, pIUri, pSecMgr)))
+func CoInternetIsFeatureEnabledForIUri(FeatureEntry systemcomurlmon.INTERNETFEATURELIST, dwFlags uint32, pIUri systemcomidiom.IUri, pSecMgr IInternetSecurityManagerEx2) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetIsFeatureEnabledForIUri(FeatureEntry, dwFlags, pIUri.Raw, pSecMgr.Raw)))
 }
 
 // CoInternetIsFeatureEnabledForUrl wraps the raw CoInternetIsFeatureEnabledForUrl call with idiomatic Go types.
-func CoInternetIsFeatureEnabledForUrl(FeatureEntry systemcomurlmon.INTERNETFEATURELIST, dwFlags uint32, szURL string, pSecMgr *systemcomurlmon.IInternetSecurityManager) error {
+func CoInternetIsFeatureEnabledForUrl(FeatureEntry systemcomurlmon.INTERNETFEATURELIST, dwFlags uint32, szURL string, pSecMgr IInternetSecurityManager) error {
 	_szURL := win32.UTF16Ptr(szURL)
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetIsFeatureEnabledForUrl(FeatureEntry, dwFlags, foundation.PWSTR(_szURL), pSecMgr)))
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetIsFeatureEnabledForUrl(FeatureEntry, dwFlags, foundation.PWSTR(_szURL), pSecMgr.Raw)))
 }
 
 // CoInternetIsFeatureZoneElevationEnabled wraps the raw CoInternetIsFeatureZoneElevationEnabled call with idiomatic Go types.
-func CoInternetIsFeatureZoneElevationEnabled(szFromURL string, szToURL string, pSecMgr *systemcomurlmon.IInternetSecurityManager, dwFlags uint32) error {
+func CoInternetIsFeatureZoneElevationEnabled(szFromURL string, szToURL string, pSecMgr IInternetSecurityManager, dwFlags uint32) error {
 	_szFromURL := win32.UTF16Ptr(szFromURL)
 	_szToURL := win32.UTF16Ptr(szToURL)
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetIsFeatureZoneElevationEnabled(foundation.PWSTR(_szFromURL), foundation.PWSTR(_szToURL), pSecMgr, dwFlags)))
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetIsFeatureZoneElevationEnabled(foundation.PWSTR(_szFromURL), foundation.PWSTR(_szToURL), pSecMgr.Raw, dwFlags)))
 }
 
 // CoInternetParseIUri wraps the raw CoInternetParseIUri call with idiomatic Go types.
-func CoInternetParseIUri(pIUri *systemcom.IUri, ParseAction systemcomurlmon.PARSEACTION, dwFlags uint32, pwzResult foundation.PWSTR, cchResult uint32, pcchResult *uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CoInternetParseIUri(pIUri, ParseAction, dwFlags, pwzResult, cchResult, pcchResult, 0)))
+func CoInternetParseIUri(pIUri systemcomidiom.IUri, ParseAction systemcomurlmon.PARSEACTION, dwFlags uint32, pwzResult foundation.PWSTR, cchResult uint32, pcchResult *uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CoInternetParseIUri(pIUri.Raw, ParseAction, dwFlags, pwzResult, cchResult, pcchResult, 0)))
 }
 
 // CoInternetParseUrl wraps the raw CoInternetParseUrl call with idiomatic Go types.
@@ -153,13 +154,13 @@ func CopyStgMedium(pcstgmedSrc *systemcom.STGMEDIUM, pstgmedDest *systemcom.STGM
 
 // CreateAsyncBindCtx wraps the raw CreateAsyncBindCtx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/urlmon/nf-urlmon-createasyncbindctx
-func CreateAsyncBindCtx(reserved uint32, pBSCb *systemcom.IBindStatusCallback, pEFetc *systemcom.IEnumFORMATETC, ppBC **systemcom.IBindCtx) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CreateAsyncBindCtx(reserved, pBSCb, pEFetc, ppBC)))
+func CreateAsyncBindCtx(reserved uint32, pBSCb systemcomidiom.IBindStatusCallback, pEFetc systemcomidiom.IEnumFORMATETC, ppBC **systemcom.IBindCtx) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CreateAsyncBindCtx(reserved, pBSCb.Raw, pEFetc.Raw, ppBC)))
 }
 
 // CreateAsyncBindCtxEx wraps the raw CreateAsyncBindCtxEx call with idiomatic Go types.
-func CreateAsyncBindCtxEx(pbc *systemcom.IBindCtx, dwOptions uint32, pBSCb *systemcom.IBindStatusCallback, pEnum *systemcom.IEnumFORMATETC, ppBC **systemcom.IBindCtx, reserved uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CreateAsyncBindCtxEx(pbc, dwOptions, pBSCb, pEnum, ppBC, reserved)))
+func CreateAsyncBindCtxEx(pbc systemcomidiom.IBindCtx, dwOptions uint32, pBSCb systemcomidiom.IBindStatusCallback, pEnum systemcomidiom.IEnumFORMATETC, ppBC **systemcom.IBindCtx, reserved uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CreateAsyncBindCtxEx(pbc.Raw, dwOptions, pBSCb.Raw, pEnum.Raw, ppBC, reserved)))
 }
 
 // CreateFormatEnumerator wraps the raw CreateFormatEnumerator call with idiomatic Go types.
@@ -173,20 +174,20 @@ func CreateFormatEnumerator(rgfmtetc []systemcom.FORMATETC, ppenumfmtetc **syste
 }
 
 // CreateURLMoniker wraps the raw CreateURLMoniker call with idiomatic Go types.
-func CreateURLMoniker(pMkCtx *systemcom.IMoniker, szURL string, ppmk **systemcom.IMoniker) error {
+func CreateURLMoniker(pMkCtx systemcomidiom.IMoniker, szURL string, ppmk **systemcom.IMoniker) error {
 	_szURL := win32.UTF16Ptr(szURL)
-	return win32.HRESULTError(int32(systemcomurlmon.CreateURLMoniker(pMkCtx, foundation.PWSTR(_szURL), ppmk)))
+	return win32.HRESULTError(int32(systemcomurlmon.CreateURLMoniker(pMkCtx.Raw, foundation.PWSTR(_szURL), ppmk)))
 }
 
 // CreateURLMonikerEx wraps the raw CreateURLMonikerEx call with idiomatic Go types.
-func CreateURLMonikerEx(pMkCtx *systemcom.IMoniker, szURL string, ppmk **systemcom.IMoniker, dwFlags uint32) error {
+func CreateURLMonikerEx(pMkCtx systemcomidiom.IMoniker, szURL string, ppmk **systemcom.IMoniker, dwFlags uint32) error {
 	_szURL := win32.UTF16Ptr(szURL)
-	return win32.HRESULTError(int32(systemcomurlmon.CreateURLMonikerEx(pMkCtx, foundation.PWSTR(_szURL), ppmk, dwFlags)))
+	return win32.HRESULTError(int32(systemcomurlmon.CreateURLMonikerEx(pMkCtx.Raw, foundation.PWSTR(_szURL), ppmk, dwFlags)))
 }
 
 // CreateURLMonikerEx2 wraps the raw CreateURLMonikerEx2 call with idiomatic Go types.
-func CreateURLMonikerEx2(pMkCtx *systemcom.IMoniker, pUri *systemcom.IUri, ppmk **systemcom.IMoniker, dwFlags uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CreateURLMonikerEx2(pMkCtx, pUri, ppmk, dwFlags)))
+func CreateURLMonikerEx2(pMkCtx systemcomidiom.IMoniker, pUri systemcomidiom.IUri, ppmk **systemcom.IMoniker, dwFlags uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.CreateURLMonikerEx2(pMkCtx.Raw, pUri.Raw, ppmk, dwFlags)))
 }
 
 // FaultInIEFeature wraps the raw FaultInIEFeature call with idiomatic Go types.
@@ -200,22 +201,22 @@ func FindMediaType(rgszTypes foundation.PSTR, rgcfTypes *uint16) error {
 }
 
 // FindMediaTypeClass wraps the raw FindMediaTypeClass call with idiomatic Go types.
-func FindMediaTypeClass(pBC *systemcom.IBindCtx, szType foundation.PSTR, pclsID *win32.GUID, reserved uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.FindMediaTypeClass(pBC, szType, pclsID, reserved)))
+func FindMediaTypeClass(pBC systemcomidiom.IBindCtx, szType foundation.PSTR, pclsID *win32.GUID, reserved uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.FindMediaTypeClass(pBC.Raw, szType, pclsID, reserved)))
 }
 
 // FindMimeFromData wraps the raw FindMimeFromData call with idiomatic Go types.
-func FindMimeFromData(pBC *systemcom.IBindCtx, pwzUrl string, pBuffer unsafe.Pointer, cbSize uint32, pwzMimeProposed string, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR) error {
+func FindMimeFromData(pBC systemcomidiom.IBindCtx, pwzUrl string, pBuffer unsafe.Pointer, cbSize uint32, pwzMimeProposed string, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR) error {
 	_pwzUrl := win32.UTF16Ptr(pwzUrl)
 	_pwzMimeProposed := win32.UTF16Ptr(pwzMimeProposed)
-	return win32.HRESULTError(int32(systemcomurlmon.FindMimeFromData(pBC, foundation.PWSTR(_pwzUrl), pBuffer, cbSize, foundation.PWSTR(_pwzMimeProposed), dwMimeFlags, ppwzMimeOut, 0)))
+	return win32.HRESULTError(int32(systemcomurlmon.FindMimeFromData(pBC.Raw, foundation.PWSTR(_pwzUrl), pBuffer, cbSize, foundation.PWSTR(_pwzMimeProposed), dwMimeFlags, ppwzMimeOut, 0)))
 }
 
 // GetClassFileOrMime wraps the raw GetClassFileOrMime call with idiomatic Go types.
-func GetClassFileOrMime(pBC *systemcom.IBindCtx, szFilename string, pBuffer unsafe.Pointer, cbSize uint32, szMime string, dwReserved uint32, pclsid *win32.GUID) error {
+func GetClassFileOrMime(pBC systemcomidiom.IBindCtx, szFilename string, pBuffer unsafe.Pointer, cbSize uint32, szMime string, dwReserved uint32, pclsid *win32.GUID) error {
 	_szFilename := win32.UTF16Ptr(szFilename)
 	_szMime := win32.UTF16Ptr(szMime)
-	return win32.HRESULTError(int32(systemcomurlmon.GetClassFileOrMime(pBC, foundation.PWSTR(_szFilename), pBuffer, cbSize, foundation.PWSTR(_szMime), dwReserved, pclsid)))
+	return win32.HRESULTError(int32(systemcomurlmon.GetClassFileOrMime(pBC.Raw, foundation.PWSTR(_szFilename), pBuffer, cbSize, foundation.PWSTR(_szMime), dwReserved, pclsid)))
 }
 
 // GetClassURL wraps the raw GetClassURL call with idiomatic Go types.
@@ -236,39 +237,39 @@ func GetSoftwareUpdateInfo(szDistUnit string, psdi *systemcomurlmon.SOFTDISTINFO
 }
 
 // HlinkGoBack wraps the raw HlinkGoBack call with idiomatic Go types.
-func HlinkGoBack(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcomurlmon.HlinkGoBack(pUnk)))
+func HlinkGoBack(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(systemcomurlmon.HlinkGoBack(pUnk.Raw)))
 }
 
 // HlinkGoForward wraps the raw HlinkGoForward call with idiomatic Go types.
-func HlinkGoForward(pUnk *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(systemcomurlmon.HlinkGoForward(pUnk)))
+func HlinkGoForward(pUnk systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(systemcomurlmon.HlinkGoForward(pUnk.Raw)))
 }
 
 // HlinkNavigateMoniker wraps the raw HlinkNavigateMoniker call with idiomatic Go types.
-func HlinkNavigateMoniker(pUnk *systemcom.IUnknown, pmkTarget *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(systemcomurlmon.HlinkNavigateMoniker(pUnk, pmkTarget)))
+func HlinkNavigateMoniker(pUnk systemcomidiom.IUnknown, pmkTarget systemcomidiom.IMoniker) error {
+	return win32.HRESULTError(int32(systemcomurlmon.HlinkNavigateMoniker(pUnk.Raw, pmkTarget.Raw)))
 }
 
 // HlinkNavigateString wraps the raw HlinkNavigateString call with idiomatic Go types.
-func HlinkNavigateString(pUnk *systemcom.IUnknown, szTarget string) error {
+func HlinkNavigateString(pUnk systemcomidiom.IUnknown, szTarget string) error {
 	_szTarget := win32.UTF16Ptr(szTarget)
-	return win32.HRESULTError(int32(systemcomurlmon.HlinkNavigateString(pUnk, foundation.PWSTR(_szTarget))))
+	return win32.HRESULTError(int32(systemcomurlmon.HlinkNavigateString(pUnk.Raw, foundation.PWSTR(_szTarget))))
 }
 
 // HlinkSimpleNavigateToMoniker wraps the raw HlinkSimpleNavigateToMoniker call with idiomatic Go types.
-func HlinkSimpleNavigateToMoniker(pmkTarget *systemcom.IMoniker, szLocation string, szTargetFrameName string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
+func HlinkSimpleNavigateToMoniker(pmkTarget systemcomidiom.IMoniker, szLocation string, szTargetFrameName string, pUnk systemcomidiom.IUnknown, pbc systemcomidiom.IBindCtx, param5 systemcomidiom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
 	_szLocation := win32.UTF16Ptr(szLocation)
 	_szTargetFrameName := win32.UTF16Ptr(szTargetFrameName)
-	return win32.HRESULTError(int32(systemcomurlmon.HlinkSimpleNavigateToMoniker(pmkTarget, foundation.PWSTR(_szLocation), foundation.PWSTR(_szTargetFrameName), pUnk, pbc, param5, grfHLNF, dwReserved)))
+	return win32.HRESULTError(int32(systemcomurlmon.HlinkSimpleNavigateToMoniker(pmkTarget.Raw, foundation.PWSTR(_szLocation), foundation.PWSTR(_szTargetFrameName), pUnk.Raw, pbc.Raw, param5.Raw, grfHLNF, dwReserved)))
 }
 
 // HlinkSimpleNavigateToString wraps the raw HlinkSimpleNavigateToString call with idiomatic Go types.
-func HlinkSimpleNavigateToString(szTarget string, szLocation string, szTargetFrameName string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
+func HlinkSimpleNavigateToString(szTarget string, szLocation string, szTargetFrameName string, pUnk systemcomidiom.IUnknown, pbc systemcomidiom.IBindCtx, param5 systemcomidiom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
 	_szTarget := win32.UTF16Ptr(szTarget)
 	_szLocation := win32.UTF16Ptr(szLocation)
 	_szTargetFrameName := win32.UTF16Ptr(szTargetFrameName)
-	return win32.HRESULTError(int32(systemcomurlmon.HlinkSimpleNavigateToString(foundation.PWSTR(_szTarget), foundation.PWSTR(_szLocation), foundation.PWSTR(_szTargetFrameName), pUnk, pbc, param5, grfHLNF, dwReserved)))
+	return win32.HRESULTError(int32(systemcomurlmon.HlinkSimpleNavigateToString(foundation.PWSTR(_szTarget), foundation.PWSTR(_szLocation), foundation.PWSTR(_szTargetFrameName), pUnk.Raw, pbc.Raw, param5.Raw, grfHLNF, dwReserved)))
 }
 
 // IEInstallScope wraps the raw IEInstallScope call with idiomatic Go types.
@@ -277,8 +278,8 @@ func IEInstallScope(pdwScope *uint32) error {
 }
 
 // IsAsyncMoniker wraps the raw IsAsyncMoniker call with idiomatic Go types.
-func IsAsyncMoniker(pmk *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(systemcomurlmon.IsAsyncMoniker(pmk)))
+func IsAsyncMoniker(pmk systemcomidiom.IMoniker) error {
+	return win32.HRESULTError(int32(systemcomurlmon.IsAsyncMoniker(pmk.Raw)))
 }
 
 // IsLoggingEnabled wraps the raw IsLoggingEnabledW call with idiomatic Go types.
@@ -293,15 +294,15 @@ func IsLoggingEnabledA(pszUrl foundation.PSTR) bool {
 }
 
 // IsValidURL wraps the raw IsValidURL call with idiomatic Go types.
-func IsValidURL(pBC *systemcom.IBindCtx, szURL string, dwReserved uint32) error {
+func IsValidURL(pBC systemcomidiom.IBindCtx, szURL string, dwReserved uint32) error {
 	_szURL := win32.UTF16Ptr(szURL)
-	return win32.HRESULTError(int32(systemcomurlmon.IsValidURL(pBC, foundation.PWSTR(_szURL), dwReserved)))
+	return win32.HRESULTError(int32(systemcomurlmon.IsValidURL(pBC.Raw, foundation.PWSTR(_szURL), dwReserved)))
 }
 
 // MkParseDisplayNameEx wraps the raw MkParseDisplayNameEx call with idiomatic Go types.
-func MkParseDisplayNameEx(pbc *systemcom.IBindCtx, szDisplayName string, pchEaten *uint32, ppmk **systemcom.IMoniker) error {
+func MkParseDisplayNameEx(pbc systemcomidiom.IBindCtx, szDisplayName string, pchEaten *uint32, ppmk **systemcom.IMoniker) error {
 	_szDisplayName := win32.UTF16Ptr(szDisplayName)
-	return win32.HRESULTError(int32(systemcomurlmon.MkParseDisplayNameEx(pbc, foundation.PWSTR(_szDisplayName), pchEaten, ppmk)))
+	return win32.HRESULTError(int32(systemcomurlmon.MkParseDisplayNameEx(pbc.Raw, foundation.PWSTR(_szDisplayName), pchEaten, ppmk)))
 }
 
 // ObtainUserAgentString wraps the raw ObtainUserAgentString call with idiomatic Go types.
@@ -310,18 +311,18 @@ func ObtainUserAgentString(dwOption uint32, pszUAOut foundation.PSTR, cbSize *ui
 }
 
 // RegisterBindStatusCallback wraps the raw RegisterBindStatusCallback call with idiomatic Go types.
-func RegisterBindStatusCallback(pBC *systemcom.IBindCtx, pBSCb *systemcom.IBindStatusCallback, ppBSCBPrev **systemcom.IBindStatusCallback, dwReserved uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.RegisterBindStatusCallback(pBC, pBSCb, ppBSCBPrev, dwReserved)))
+func RegisterBindStatusCallback(pBC systemcomidiom.IBindCtx, pBSCb systemcomidiom.IBindStatusCallback, ppBSCBPrev **systemcom.IBindStatusCallback, dwReserved uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.RegisterBindStatusCallback(pBC.Raw, pBSCb.Raw, ppBSCBPrev, dwReserved)))
 }
 
 // RegisterFormatEnumerator wraps the raw RegisterFormatEnumerator call with idiomatic Go types.
-func RegisterFormatEnumerator(pBC *systemcom.IBindCtx, pEFetc *systemcom.IEnumFORMATETC, reserved uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.RegisterFormatEnumerator(pBC, pEFetc, reserved)))
+func RegisterFormatEnumerator(pBC systemcomidiom.IBindCtx, pEFetc systemcomidiom.IEnumFORMATETC, reserved uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.RegisterFormatEnumerator(pBC.Raw, pEFetc.Raw, reserved)))
 }
 
 // RegisterMediaTypeClass wraps the raw RegisterMediaTypeClass call with idiomatic Go types.
-func RegisterMediaTypeClass(pBC *systemcom.IBindCtx, ctypes uint32, rgszTypes *foundation.PSTR, rgclsID *win32.GUID, reserved uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.RegisterMediaTypeClass(pBC, ctypes, rgszTypes, rgclsID, reserved)))
+func RegisterMediaTypeClass(pBC systemcomidiom.IBindCtx, ctypes uint32, rgszTypes *foundation.PSTR, rgclsID *win32.GUID, reserved uint32) error {
+	return win32.HRESULTError(int32(systemcomurlmon.RegisterMediaTypeClass(pBC.Raw, ctypes, rgszTypes, rgclsID, reserved)))
 }
 
 // RegisterMediaTypes wraps the raw RegisterMediaTypes call with idiomatic Go types.
@@ -330,13 +331,13 @@ func RegisterMediaTypes(ctypes uint32, rgszTypes *foundation.PSTR, rgcfTypes *ui
 }
 
 // RevokeBindStatusCallback wraps the raw RevokeBindStatusCallback call with idiomatic Go types.
-func RevokeBindStatusCallback(pBC *systemcom.IBindCtx, pBSCb *systemcom.IBindStatusCallback) error {
-	return win32.HRESULTError(int32(systemcomurlmon.RevokeBindStatusCallback(pBC, pBSCb)))
+func RevokeBindStatusCallback(pBC systemcomidiom.IBindCtx, pBSCb systemcomidiom.IBindStatusCallback) error {
+	return win32.HRESULTError(int32(systemcomurlmon.RevokeBindStatusCallback(pBC.Raw, pBSCb.Raw)))
 }
 
 // RevokeFormatEnumerator wraps the raw RevokeFormatEnumerator call with idiomatic Go types.
-func RevokeFormatEnumerator(pBC *systemcom.IBindCtx, pEFetc *systemcom.IEnumFORMATETC) error {
-	return win32.HRESULTError(int32(systemcomurlmon.RevokeFormatEnumerator(pBC, pEFetc)))
+func RevokeFormatEnumerator(pBC systemcomidiom.IBindCtx, pEFetc systemcomidiom.IEnumFORMATETC) error {
+	return win32.HRESULTError(int32(systemcomurlmon.RevokeFormatEnumerator(pBC.Raw, pEFetc.Raw)))
 }
 
 // SetAccessForIEAppContainer wraps the raw SetAccessForIEAppContainer call with idiomatic Go types.
@@ -351,59 +352,59 @@ func SetSoftwareUpdateAdvertisementState(szDistUnit string, dwAdState uint32, dw
 }
 
 // URLDownloadToCacheFile wraps the raw URLDownloadToCacheFileW call with idiomatic Go types.
-func URLDownloadToCacheFile(param0 *systemcom.IUnknown, param1 string, param2 foundation.PWSTR, cchFileName uint32, param4 uint32, param5 *systemcom.IBindStatusCallback) error {
+func URLDownloadToCacheFile(param0 systemcomidiom.IUnknown, param1 string, param2 foundation.PWSTR, cchFileName uint32, param4 uint32, param5 systemcomidiom.IBindStatusCallback) error {
 	_param1 := win32.UTF16Ptr(param1)
-	return win32.HRESULTError(int32(systemcomurlmon.URLDownloadToCacheFileW(param0, foundation.PWSTR(_param1), param2, cchFileName, param4, param5)))
+	return win32.HRESULTError(int32(systemcomurlmon.URLDownloadToCacheFileW(param0.Raw, foundation.PWSTR(_param1), param2, cchFileName, param4, param5.Raw)))
 }
 
 // URLDownloadToCacheFileA wraps the raw URLDownloadToCacheFileA call with idiomatic Go types.
-func URLDownloadToCacheFileA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 foundation.PSTR, cchFileName uint32, param4 uint32, param5 *systemcom.IBindStatusCallback) error {
-	return win32.HRESULTError(int32(systemcomurlmon.URLDownloadToCacheFileA(param0, param1, param2, cchFileName, param4, param5)))
+func URLDownloadToCacheFileA(param0 systemcomidiom.IUnknown, param1 foundation.PSTR, param2 foundation.PSTR, cchFileName uint32, param4 uint32, param5 systemcomidiom.IBindStatusCallback) error {
+	return win32.HRESULTError(int32(systemcomurlmon.URLDownloadToCacheFileA(param0.Raw, param1, param2, cchFileName, param4, param5.Raw)))
 }
 
 // URLDownloadToFile wraps the raw URLDownloadToFileW call with idiomatic Go types.
-func URLDownloadToFile(param0 *systemcom.IUnknown, param1 string, param2 string, param3 uint32, param4 *systemcom.IBindStatusCallback) error {
+func URLDownloadToFile(param0 systemcomidiom.IUnknown, param1 string, param2 string, param3 uint32, param4 systemcomidiom.IBindStatusCallback) error {
 	_param1 := win32.UTF16Ptr(param1)
 	_param2 := win32.UTF16Ptr(param2)
-	return win32.HRESULTError(int32(systemcomurlmon.URLDownloadToFileW(param0, foundation.PWSTR(_param1), foundation.PWSTR(_param2), param3, param4)))
+	return win32.HRESULTError(int32(systemcomurlmon.URLDownloadToFileW(param0.Raw, foundation.PWSTR(_param1), foundation.PWSTR(_param2), param3, param4.Raw)))
 }
 
 // URLDownloadToFileA wraps the raw URLDownloadToFileA call with idiomatic Go types.
-func URLDownloadToFileA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 foundation.PSTR, param3 uint32, param4 *systemcom.IBindStatusCallback) error {
-	return win32.HRESULTError(int32(systemcomurlmon.URLDownloadToFileA(param0, param1, param2, param3, param4)))
+func URLDownloadToFileA(param0 systemcomidiom.IUnknown, param1 foundation.PSTR, param2 foundation.PSTR, param3 uint32, param4 systemcomidiom.IBindStatusCallback) error {
+	return win32.HRESULTError(int32(systemcomurlmon.URLDownloadToFileA(param0.Raw, param1, param2, param3, param4.Raw)))
 }
 
 // URLOpenBlockingStream wraps the raw URLOpenBlockingStreamW call with idiomatic Go types.
-func URLOpenBlockingStream(param0 *systemcom.IUnknown, param1 string, param2 **systemcom.IStream, param3 uint32, param4 *systemcom.IBindStatusCallback) error {
+func URLOpenBlockingStream(param0 systemcomidiom.IUnknown, param1 string, param2 **systemcom.IStream, param3 uint32, param4 systemcomidiom.IBindStatusCallback) error {
 	_param1 := win32.UTF16Ptr(param1)
-	return win32.HRESULTError(int32(systemcomurlmon.URLOpenBlockingStreamW(param0, foundation.PWSTR(_param1), param2, param3, param4)))
+	return win32.HRESULTError(int32(systemcomurlmon.URLOpenBlockingStreamW(param0.Raw, foundation.PWSTR(_param1), param2, param3, param4.Raw)))
 }
 
 // URLOpenBlockingStreamA wraps the raw URLOpenBlockingStreamA call with idiomatic Go types.
-func URLOpenBlockingStreamA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 **systemcom.IStream, param3 uint32, param4 *systemcom.IBindStatusCallback) error {
-	return win32.HRESULTError(int32(systemcomurlmon.URLOpenBlockingStreamA(param0, param1, param2, param3, param4)))
+func URLOpenBlockingStreamA(param0 systemcomidiom.IUnknown, param1 foundation.PSTR, param2 **systemcom.IStream, param3 uint32, param4 systemcomidiom.IBindStatusCallback) error {
+	return win32.HRESULTError(int32(systemcomurlmon.URLOpenBlockingStreamA(param0.Raw, param1, param2, param3, param4.Raw)))
 }
 
 // URLOpenPullStream wraps the raw URLOpenPullStreamW call with idiomatic Go types.
-func URLOpenPullStream(param0 *systemcom.IUnknown, param1 string, param2 uint32, param3 *systemcom.IBindStatusCallback) error {
+func URLOpenPullStream(param0 systemcomidiom.IUnknown, param1 string, param2 uint32, param3 systemcomidiom.IBindStatusCallback) error {
 	_param1 := win32.UTF16Ptr(param1)
-	return win32.HRESULTError(int32(systemcomurlmon.URLOpenPullStreamW(param0, foundation.PWSTR(_param1), param2, param3)))
+	return win32.HRESULTError(int32(systemcomurlmon.URLOpenPullStreamW(param0.Raw, foundation.PWSTR(_param1), param2, param3.Raw)))
 }
 
 // URLOpenPullStreamA wraps the raw URLOpenPullStreamA call with idiomatic Go types.
-func URLOpenPullStreamA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 uint32, param3 *systemcom.IBindStatusCallback) error {
-	return win32.HRESULTError(int32(systemcomurlmon.URLOpenPullStreamA(param0, param1, param2, param3)))
+func URLOpenPullStreamA(param0 systemcomidiom.IUnknown, param1 foundation.PSTR, param2 uint32, param3 systemcomidiom.IBindStatusCallback) error {
+	return win32.HRESULTError(int32(systemcomurlmon.URLOpenPullStreamA(param0.Raw, param1, param2, param3.Raw)))
 }
 
 // URLOpenStream wraps the raw URLOpenStreamW call with idiomatic Go types.
-func URLOpenStream(param0 *systemcom.IUnknown, param1 string, param2 uint32, param3 *systemcom.IBindStatusCallback) error {
+func URLOpenStream(param0 systemcomidiom.IUnknown, param1 string, param2 uint32, param3 systemcomidiom.IBindStatusCallback) error {
 	_param1 := win32.UTF16Ptr(param1)
-	return win32.HRESULTError(int32(systemcomurlmon.URLOpenStreamW(param0, foundation.PWSTR(_param1), param2, param3)))
+	return win32.HRESULTError(int32(systemcomurlmon.URLOpenStreamW(param0.Raw, foundation.PWSTR(_param1), param2, param3.Raw)))
 }
 
 // URLOpenStreamA wraps the raw URLOpenStreamA call with idiomatic Go types.
-func URLOpenStreamA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 uint32, param3 *systemcom.IBindStatusCallback) error {
-	return win32.HRESULTError(int32(systemcomurlmon.URLOpenStreamA(param0, param1, param2, param3)))
+func URLOpenStreamA(param0 systemcomidiom.IUnknown, param1 foundation.PSTR, param2 uint32, param3 systemcomidiom.IBindStatusCallback) error {
+	return win32.HRESULTError(int32(systemcomurlmon.URLOpenStreamA(param0.Raw, param1, param2, param3.Raw)))
 }
 
 // UrlMkGetSessionOption wraps the raw UrlMkGetSessionOption call with idiomatic Go types.

@@ -11,9 +11,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/media"
 	mediaaudiodirectmusic "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/directmusic"
-	mediaaudiodirectsound "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/directsound"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/io"
+	mediaidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media"
+	mediaaudiodirectsoundidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/audio/directsound"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -34,13 +34,13 @@ func (self IDirectMusic) EnumPort(dwIndex uint32, pPortCaps *mediaaudiodirectmus
 }
 
 // CreateMusicBuffer wraps the raw CreateMusicBuffer call.
-func (self IDirectMusic) CreateMusicBuffer(pBufferDesc *mediaaudiodirectmusic.DMUS_BUFFERDESC, ppBuffer **mediaaudiodirectmusic.IDirectMusicBuffer, pUnkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreateMusicBuffer(pBufferDesc, ppBuffer, pUnkOuter)))
+func (self IDirectMusic) CreateMusicBuffer(pBufferDesc *mediaaudiodirectmusic.DMUS_BUFFERDESC, ppBuffer **mediaaudiodirectmusic.IDirectMusicBuffer, pUnkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreateMusicBuffer(pBufferDesc, ppBuffer, pUnkOuter.Raw)))
 }
 
 // CreatePort wraps the raw CreatePort call.
-func (self IDirectMusic) CreatePort(rclsidPort *win32.GUID, pPortParams *mediaaudiodirectmusic.DMUS_PORTPARAMS8, ppPort **mediaaudiodirectmusic.IDirectMusicPort, pUnkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePort(rclsidPort, pPortParams, ppPort, pUnkOuter)))
+func (self IDirectMusic) CreatePort(rclsidPort *win32.GUID, pPortParams *mediaaudiodirectmusic.DMUS_PORTPARAMS8, ppPort **mediaaudiodirectmusic.IDirectMusicPort, pUnkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CreatePort(rclsidPort, pPortParams, ppPort, pUnkOuter.Raw)))
 }
 
 // EnumMasterClock wraps the raw EnumMasterClock call.
@@ -70,8 +70,8 @@ func (self IDirectMusic) GetDefaultPort(pguidPort *win32.GUID) error {
 }
 
 // SetDirectSound wraps the raw SetDirectSound call.
-func (self IDirectMusic) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, hWnd foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.SetDirectSound(pDirectSound, hWnd)))
+func (self IDirectMusic) SetDirectSound(pDirectSound mediaaudiodirectsoundidiom.IDirectSound, hWnd foundation.HWND) error {
+	return win32.HRESULTError(int32(self.Raw.SetDirectSound(pDirectSound.Raw, hWnd)))
 }
 
 // IDirectMusic8 is an idiomatic wrapper over the raw COM interface Media.Audio.DirectMusic.IDirectMusic8 with error-returning methods.
@@ -86,8 +86,8 @@ func WrapIDirectMusic8(raw *mediaaudiodirectmusic.IDirectMusic8) IDirectMusic8 {
 }
 
 // SetExternalMasterClock wraps the raw SetExternalMasterClock call.
-func (self IDirectMusic8) SetExternalMasterClock(pClock *media.IReferenceClock) error {
-	return win32.HRESULTError(int32(self.Raw.SetExternalMasterClock(pClock)))
+func (self IDirectMusic8) SetExternalMasterClock(pClock mediaidiom.IReferenceClock) error {
+	return win32.HRESULTError(int32(self.Raw.SetExternalMasterClock(pClock.Raw)))
 }
 
 // IDirectMusicBuffer is an idiomatic wrapper over the raw COM interface Media.Audio.DirectMusic.IDirectMusicBuffer with error-returning methods.
@@ -248,8 +248,8 @@ func WrapIDirectMusicPort(raw *mediaaudiodirectmusic.IDirectMusicPort) IDirectMu
 }
 
 // PlayBuffer wraps the raw PlayBuffer call.
-func (self IDirectMusicPort) PlayBuffer(pBuffer *mediaaudiodirectmusic.IDirectMusicBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.PlayBuffer(pBuffer)))
+func (self IDirectMusicPort) PlayBuffer(pBuffer IDirectMusicBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.PlayBuffer(pBuffer.Raw)))
 }
 
 // SetReadNotificationHandle wraps the raw SetReadNotificationHandle call.
@@ -258,18 +258,18 @@ func (self IDirectMusicPort) SetReadNotificationHandle(hEvent foundation.HANDLE)
 }
 
 // Read wraps the raw Read call.
-func (self IDirectMusicPort) Read(pBuffer *mediaaudiodirectmusic.IDirectMusicBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.Read(pBuffer)))
+func (self IDirectMusicPort) Read(pBuffer IDirectMusicBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.Read(pBuffer.Raw)))
 }
 
 // DownloadInstrument wraps the raw DownloadInstrument call.
-func (self IDirectMusicPort) DownloadInstrument(pInstrument *mediaaudiodirectmusic.IDirectMusicInstrument, ppDownloadedInstrument **mediaaudiodirectmusic.IDirectMusicDownloadedInstrument, pNoteRanges *mediaaudiodirectmusic.DMUS_NOTERANGE, dwNumNoteRanges uint32) error {
-	return win32.HRESULTError(int32(self.Raw.DownloadInstrument(pInstrument, ppDownloadedInstrument, pNoteRanges, dwNumNoteRanges)))
+func (self IDirectMusicPort) DownloadInstrument(pInstrument IDirectMusicInstrument, ppDownloadedInstrument **mediaaudiodirectmusic.IDirectMusicDownloadedInstrument, pNoteRanges *mediaaudiodirectmusic.DMUS_NOTERANGE, dwNumNoteRanges uint32) error {
+	return win32.HRESULTError(int32(self.Raw.DownloadInstrument(pInstrument.Raw, ppDownloadedInstrument, pNoteRanges, dwNumNoteRanges)))
 }
 
 // UnloadInstrument wraps the raw UnloadInstrument call.
-func (self IDirectMusicPort) UnloadInstrument(pDownloadedInstrument *mediaaudiodirectmusic.IDirectMusicDownloadedInstrument) error {
-	return win32.HRESULTError(int32(self.Raw.UnloadInstrument(pDownloadedInstrument)))
+func (self IDirectMusicPort) UnloadInstrument(pDownloadedInstrument IDirectMusicDownloadedInstrument) error {
+	return win32.HRESULTError(int32(self.Raw.UnloadInstrument(pDownloadedInstrument.Raw)))
 }
 
 // GetLatencyClock wraps the raw GetLatencyClock call.
@@ -324,8 +324,8 @@ func (self IDirectMusicPort) GetChannelPriority(dwChannelGroup uint32, dwChannel
 }
 
 // SetDirectSound wraps the raw SetDirectSound call.
-func (self IDirectMusicPort) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, pDirectSoundBuffer *mediaaudiodirectsound.IDirectSoundBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.SetDirectSound(pDirectSound, pDirectSoundBuffer)))
+func (self IDirectMusicPort) SetDirectSound(pDirectSound mediaaudiodirectsoundidiom.IDirectSound, pDirectSoundBuffer mediaaudiodirectsoundidiom.IDirectSoundBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.SetDirectSound(pDirectSound.Raw, pDirectSoundBuffer.Raw)))
 }
 
 // GetFormat wraps the raw GetFormat call.
@@ -365,13 +365,13 @@ func (self IDirectMusicPortDownload) GetAppend(pdwAppend *uint32) error {
 }
 
 // Download wraps the raw Download call.
-func (self IDirectMusicPortDownload) Download(pIDMDownload *mediaaudiodirectmusic.IDirectMusicDownload) error {
-	return win32.HRESULTError(int32(self.Raw.Download(pIDMDownload)))
+func (self IDirectMusicPortDownload) Download(pIDMDownload IDirectMusicDownload) error {
+	return win32.HRESULTError(int32(self.Raw.Download(pIDMDownload.Raw)))
 }
 
 // Unload wraps the raw Unload call.
-func (self IDirectMusicPortDownload) Unload(pIDMDownload *mediaaudiodirectmusic.IDirectMusicDownload) error {
-	return win32.HRESULTError(int32(self.Raw.Unload(pIDMDownload)))
+func (self IDirectMusicPortDownload) Unload(pIDMDownload IDirectMusicDownload) error {
+	return win32.HRESULTError(int32(self.Raw.Unload(pIDMDownload.Raw)))
 }
 
 // IDirectMusicSynth is an idiomatic wrapper over the raw COM interface Media.Audio.DirectMusic.IDirectMusicSynth with error-returning methods.
@@ -426,8 +426,8 @@ func (self IDirectMusicSynth) GetPortCaps(pCaps *mediaaudiodirectmusic.DMUS_PORT
 }
 
 // SetMasterClock wraps the raw SetMasterClock call.
-func (self IDirectMusicSynth) SetMasterClock(pClock *media.IReferenceClock) error {
-	return win32.HRESULTError(int32(self.Raw.SetMasterClock(pClock)))
+func (self IDirectMusicSynth) SetMasterClock(pClock mediaidiom.IReferenceClock) error {
+	return win32.HRESULTError(int32(self.Raw.SetMasterClock(pClock.Raw)))
 }
 
 // GetLatencyClock wraps the raw GetLatencyClock call.
@@ -442,8 +442,8 @@ func (self IDirectMusicSynth) Activate(fEnable bool) error {
 }
 
 // SetSynthSink wraps the raw SetSynthSink call.
-func (self IDirectMusicSynth) SetSynthSink(pSynthSink *mediaaudiodirectmusic.IDirectMusicSynthSink) error {
-	return win32.HRESULTError(int32(self.Raw.SetSynthSink(pSynthSink)))
+func (self IDirectMusicSynth) SetSynthSink(pSynthSink IDirectMusicSynthSink) error {
+	return win32.HRESULTError(int32(self.Raw.SetSynthSink(pSynthSink.Raw)))
 }
 
 // Render wraps the raw Render call.
@@ -519,13 +519,13 @@ func WrapIDirectMusicSynthSink(raw *mediaaudiodirectmusic.IDirectMusicSynthSink)
 }
 
 // Init wraps the raw Init call.
-func (self IDirectMusicSynthSink) Init(pSynth *mediaaudiodirectmusic.IDirectMusicSynth) error {
-	return win32.HRESULTError(int32(self.Raw.Init(pSynth)))
+func (self IDirectMusicSynthSink) Init(pSynth IDirectMusicSynth) error {
+	return win32.HRESULTError(int32(self.Raw.Init(pSynth.Raw)))
 }
 
 // SetMasterClock wraps the raw SetMasterClock call.
-func (self IDirectMusicSynthSink) SetMasterClock(pClock *media.IReferenceClock) error {
-	return win32.HRESULTError(int32(self.Raw.SetMasterClock(pClock)))
+func (self IDirectMusicSynthSink) SetMasterClock(pClock mediaidiom.IReferenceClock) error {
+	return win32.HRESULTError(int32(self.Raw.SetMasterClock(pClock.Raw)))
 }
 
 // GetLatencyClock wraps the raw GetLatencyClock call.
@@ -550,8 +550,8 @@ func (self IDirectMusicSynthSink) RefTimeToSample(rfTime int64, pllSampleTime *i
 }
 
 // SetDirectSound wraps the raw SetDirectSound call.
-func (self IDirectMusicSynthSink) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, pDirectSoundBuffer *mediaaudiodirectsound.IDirectSoundBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.SetDirectSound(pDirectSound, pDirectSoundBuffer)))
+func (self IDirectMusicSynthSink) SetDirectSound(pDirectSound mediaaudiodirectsoundidiom.IDirectSound, pDirectSoundBuffer mediaaudiodirectsoundidiom.IDirectSoundBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.SetDirectSound(pDirectSound.Raw, pDirectSoundBuffer.Raw)))
 }
 
 // GetDesiredBufferSize wraps the raw GetDesiredBufferSize call.
@@ -571,6 +571,6 @@ func WrapIDirectMusicThru(raw *mediaaudiodirectmusic.IDirectMusicThru) IDirectMu
 }
 
 // ThruChannel wraps the raw ThruChannel call.
-func (self IDirectMusicThru) ThruChannel(dwSourceChannelGroup uint32, dwSourceChannel uint32, dwDestinationChannelGroup uint32, dwDestinationChannel uint32, pDestinationPort *mediaaudiodirectmusic.IDirectMusicPort) error {
-	return win32.HRESULTError(int32(self.Raw.ThruChannel(dwSourceChannelGroup, dwSourceChannel, dwDestinationChannelGroup, dwDestinationChannel, pDestinationPort)))
+func (self IDirectMusicThru) ThruChannel(dwSourceChannelGroup uint32, dwSourceChannel uint32, dwDestinationChannelGroup uint32, dwDestinationChannel uint32, pDestinationPort IDirectMusicPort) error {
+	return win32.HRESULTError(int32(self.Raw.ThruChannel(dwSourceChannelGroup, dwSourceChannel, dwDestinationChannelGroup, dwDestinationChannel, pDestinationPort.Raw)))
 }

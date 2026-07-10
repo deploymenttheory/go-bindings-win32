@@ -8,11 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
-	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
-	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	uilegacywindowsenvironmentfeatures "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/legacywindowsenvironmentfeatures"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
+	systemoleidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/ole"
 )
 
 // IADesktopP2 is an idiomatic wrapper over the raw COM interface UI.LegacyWindowsEnvironmentFeatures.IADesktopP2 with error-returning methods.
@@ -42,8 +42,8 @@ func (self IADesktopP2) UpdateAllDesktopSubscriptions() error {
 }
 
 // MakeDynamicChanges wraps the raw MakeDynamicChanges call.
-func (self IADesktopP2) MakeDynamicChanges(pOleObj *systemole.IOleObject) error {
-	return win32.HRESULTError(int32(self.Raw.MakeDynamicChanges(pOleObj)))
+func (self IADesktopP2) MakeDynamicChanges(pOleObj systemoleidiom.IOleObject) error {
+	return win32.HRESULTError(int32(self.Raw.MakeDynamicChanges(pOleObj.Raw)))
 }
 
 // IActiveDesktopP is an idiomatic wrapper over the raw COM interface UI.LegacyWindowsEnvironmentFeatures.IActiveDesktopP with error-returning methods.
@@ -90,8 +90,8 @@ func WrapIBriefcaseInitiator(raw *uilegacywindowsenvironmentfeatures.IBriefcaseI
 }
 
 // IsMonikerInBriefcase wraps the raw IsMonikerInBriefcase call.
-func (self IBriefcaseInitiator) IsMonikerInBriefcase(pmk *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.IsMonikerInBriefcase(pmk)))
+func (self IBriefcaseInitiator) IsMonikerInBriefcase(pmk systemcomidiom.IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.IsMonikerInBriefcase(pmk.Raw)))
 }
 
 // IEmptyVolumeCache is an idiomatic wrapper over the raw COM interface UI.LegacyWindowsEnvironmentFeatures.IEmptyVolumeCache with error-returning methods.
@@ -112,13 +112,13 @@ func (self IEmptyVolumeCache) Initialize(hkRegKey systemregistry.HKEY, pcwszVolu
 }
 
 // GetSpaceUsed wraps the raw GetSpaceUsed call.
-func (self IEmptyVolumeCache) GetSpaceUsed(pdwlSpaceUsed *uint64, picb *uilegacywindowsenvironmentfeatures.IEmptyVolumeCacheCallBack) error {
-	return win32.HRESULTError(int32(self.Raw.GetSpaceUsed(pdwlSpaceUsed, picb)))
+func (self IEmptyVolumeCache) GetSpaceUsed(pdwlSpaceUsed *uint64, picb IEmptyVolumeCacheCallBack) error {
+	return win32.HRESULTError(int32(self.Raw.GetSpaceUsed(pdwlSpaceUsed, picb.Raw)))
 }
 
 // Purge wraps the raw Purge call.
-func (self IEmptyVolumeCache) Purge(dwlSpaceToFree uint64, picb *uilegacywindowsenvironmentfeatures.IEmptyVolumeCacheCallBack) error {
-	return win32.HRESULTError(int32(self.Raw.Purge(dwlSpaceToFree, picb)))
+func (self IEmptyVolumeCache) Purge(dwlSpaceToFree uint64, picb IEmptyVolumeCacheCallBack) error {
+	return win32.HRESULTError(int32(self.Raw.Purge(dwlSpaceToFree, picb.Raw)))
 }
 
 // ShowProperties wraps the raw ShowProperties call.
@@ -184,8 +184,8 @@ func WrapIReconcilableObject(raw *uilegacywindowsenvironmentfeatures.IReconcilab
 }
 
 // Reconcile wraps the raw Reconcile call.
-func (self IReconcilableObject) Reconcile(pInitiator *uilegacywindowsenvironmentfeatures.IReconcileInitiator, dwFlags uint32, hwndOwner foundation.HWND, hwndProgressFeedback foundation.HWND, ulcInput uint32, rgpmkOtherInput **systemcom.IMoniker, plOutIndex *int32, pstgNewResidues *systemcomstructuredstorage.IStorage) error {
-	return win32.HRESULTError(int32(self.Raw.Reconcile(pInitiator, dwFlags, hwndOwner, hwndProgressFeedback, ulcInput, rgpmkOtherInput, plOutIndex, pstgNewResidues, nil)))
+func (self IReconcilableObject) Reconcile(pInitiator IReconcileInitiator, dwFlags uint32, hwndOwner foundation.HWND, hwndProgressFeedback foundation.HWND, ulcInput uint32, rgpmkOtherInput **systemcom.IMoniker, plOutIndex *int32, pstgNewResidues systemcomstructuredstorageidiom.IStorage) error {
+	return win32.HRESULTError(int32(self.Raw.Reconcile(pInitiator.Raw, dwFlags, hwndOwner, hwndProgressFeedback, ulcInput, rgpmkOtherInput, plOutIndex, pstgNewResidues.Raw, nil)))
 }
 
 // GetProgressFeedbackMaxEstimate wraps the raw GetProgressFeedbackMaxEstimate call.
@@ -205,8 +205,8 @@ func WrapIReconcileInitiator(raw *uilegacywindowsenvironmentfeatures.IReconcileI
 }
 
 // SetAbortCallback wraps the raw SetAbortCallback call.
-func (self IReconcileInitiator) SetAbortCallback(punkForAbort *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetAbortCallback(punkForAbort)))
+func (self IReconcileInitiator) SetAbortCallback(punkForAbort systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetAbortCallback(punkForAbort.Raw)))
 }
 
 // SetProgressFeedback wraps the raw SetProgressFeedback call.

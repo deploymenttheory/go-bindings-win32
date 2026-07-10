@@ -9,7 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	graphicsdirect3ddxc "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d/dxc"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
 // DxcCreateInstance wraps the raw DxcCreateInstance call with idiomatic Go types.
@@ -18,6 +18,6 @@ func DxcCreateInstance(rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer
 }
 
 // DxcCreateInstance2 wraps the raw DxcCreateInstance2 call with idiomatic Go types.
-func DxcCreateInstance2(pMalloc *systemcom.IMalloc, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(graphicsdirect3ddxc.DxcCreateInstance2(pMalloc, rclsid, riid, ppv)))
+func DxcCreateInstance2(pMalloc systemcomidiom.IMalloc, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(graphicsdirect3ddxc.DxcCreateInstance2(pMalloc.Raw, rclsid, riid, ppv)))
 }

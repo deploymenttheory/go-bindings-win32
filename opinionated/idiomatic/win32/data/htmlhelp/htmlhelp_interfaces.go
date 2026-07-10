@@ -10,9 +10,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	datahtmlhelp "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/htmlhelp"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemsearch "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/search"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
+	systemsearchidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/search"
 )
 
 // IITDatabase is an idiomatic wrapper over the raw COM interface Data.HtmlHelp.IITDatabase with error-returning methods.
@@ -145,8 +145,8 @@ func (self IITPropList) GetDataSize(lpvHeader unsafe.Pointer, dwHdrSize uint32, 
 }
 
 // SaveDataToStream wraps the raw SaveDataToStream call.
-func (self IITPropList) SaveDataToStream(lpvHeader unsafe.Pointer, dwHdrSize uint32, pStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SaveDataToStream(lpvHeader, dwHdrSize, pStream)))
+func (self IITPropList) SaveDataToStream(lpvHeader unsafe.Pointer, dwHdrSize uint32, pStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SaveDataToStream(lpvHeader, dwHdrSize, pStream.Raw)))
 }
 
 // LoadFromMem wraps the raw LoadFromMem call.
@@ -233,13 +233,13 @@ func (self IITResultSet) Set___(lRowIndex int32, lpvHdr unsafe.Pointer, lpvData 
 }
 
 // Copy wraps the raw Copy call.
-func (self IITResultSet) Copy(pRSCopy *datahtmlhelp.IITResultSet) error {
-	return win32.HRESULTError(int32(self.Raw.Copy(pRSCopy)))
+func (self IITResultSet) Copy(pRSCopy IITResultSet) error {
+	return win32.HRESULTError(int32(self.Raw.Copy(pRSCopy.Raw)))
 }
 
 // AppendRows wraps the raw AppendRows call.
-func (self IITResultSet) AppendRows(pResSrc *datahtmlhelp.IITResultSet, lRowSrcFirst int32, cSrcRows int32, lRowFirstDest *int32) error {
-	return win32.HRESULTError(int32(self.Raw.AppendRows(pResSrc, lRowSrcFirst, cSrcRows, lRowFirstDest)))
+func (self IITResultSet) AppendRows(pResSrc IITResultSet, lRowSrcFirst int32, cSrcRows int32, lRowFirstDest *int32) error {
+	return win32.HRESULTError(int32(self.Raw.AppendRows(pResSrc.Raw, lRowSrcFirst, cSrcRows, lRowFirstDest)))
 }
 
 // Get wraps the raw Get call.
@@ -378,8 +378,8 @@ func (self IStemmerConfig) GetControlInfo(pgrfStemFlags *uint32, pdwReserved *ui
 }
 
 // LoadExternalStemmerData wraps the raw LoadExternalStemmerData call.
-func (self IStemmerConfig) LoadExternalStemmerData(pStream *systemcom.IStream, dwExtDataType uint32) error {
-	return win32.HRESULTError(int32(self.Raw.LoadExternalStemmerData(pStream, dwExtDataType)))
+func (self IStemmerConfig) LoadExternalStemmerData(pStream systemcomidiom.IStream, dwExtDataType uint32) error {
+	return win32.HRESULTError(int32(self.Raw.LoadExternalStemmerData(pStream.Raw, dwExtDataType)))
 }
 
 // IWordBreakerConfig is an idiomatic wrapper over the raw COM interface Data.HtmlHelp.IWordBreakerConfig with error-returning methods.
@@ -424,13 +424,13 @@ func (self IWordBreakerConfig) GetControlInfo(pgrfBreakFlags *uint32, pdwReserve
 }
 
 // LoadExternalBreakerData wraps the raw LoadExternalBreakerData call.
-func (self IWordBreakerConfig) LoadExternalBreakerData(pStream *systemcom.IStream, dwExtDataType uint32) error {
-	return win32.HRESULTError(int32(self.Raw.LoadExternalBreakerData(pStream, dwExtDataType)))
+func (self IWordBreakerConfig) LoadExternalBreakerData(pStream systemcomidiom.IStream, dwExtDataType uint32) error {
+	return win32.HRESULTError(int32(self.Raw.LoadExternalBreakerData(pStream.Raw, dwExtDataType)))
 }
 
 // SetWordStemmer wraps the raw SetWordStemmer call.
-func (self IWordBreakerConfig) SetWordStemmer(rclsid *win32.GUID, pStemmer *systemsearch.IStemmer) error {
-	return win32.HRESULTError(int32(self.Raw.SetWordStemmer(rclsid, pStemmer)))
+func (self IWordBreakerConfig) SetWordStemmer(rclsid *win32.GUID, pStemmer systemsearchidiom.IStemmer) error {
+	return win32.HRESULTError(int32(self.Raw.SetWordStemmer(rclsid, pStemmer.Raw)))
 }
 
 // GetWordStemmer wraps the raw GetWordStemmer call.

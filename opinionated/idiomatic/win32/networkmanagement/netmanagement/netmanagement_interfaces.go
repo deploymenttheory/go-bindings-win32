@@ -11,7 +11,6 @@ import (
 	dataxmlmsxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/msxml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	networkmanagementnetmanagement "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networkmanagement/netmanagement"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
@@ -194,13 +193,13 @@ func WrapINetCfgBindingPath(raw *networkmanagementnetmanagement.INetCfgBindingPa
 }
 
 // IsSamePathAs wraps the raw IsSamePathAs call.
-func (self INetCfgBindingPath) IsSamePathAs(pPath *networkmanagementnetmanagement.INetCfgBindingPath) error {
-	return win32.HRESULTError(int32(self.Raw.IsSamePathAs(pPath)))
+func (self INetCfgBindingPath) IsSamePathAs(pPath INetCfgBindingPath) error {
+	return win32.HRESULTError(int32(self.Raw.IsSamePathAs(pPath.Raw)))
 }
 
 // IsSubPathOf wraps the raw IsSubPathOf call.
-func (self INetCfgBindingPath) IsSubPathOf(pPath *networkmanagementnetmanagement.INetCfgBindingPath) error {
-	return win32.HRESULTError(int32(self.Raw.IsSubPathOf(pPath)))
+func (self INetCfgBindingPath) IsSubPathOf(pPath INetCfgBindingPath) error {
+	return win32.HRESULTError(int32(self.Raw.IsSubPathOf(pPath.Raw)))
 }
 
 // IsEnabled wraps the raw IsEnabled call.
@@ -281,8 +280,8 @@ func (self INetCfgClassSetup) Install(pszwInfId string, pOboToken *networkmanage
 }
 
 // DeInstall wraps the raw DeInstall call.
-func (self INetCfgClassSetup) DeInstall(pComponent *networkmanagementnetmanagement.INetCfgComponent, pOboToken *networkmanagementnetmanagement.OBO_TOKEN, pmszwRefs *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.DeInstall(pComponent, pOboToken, pmszwRefs)))
+func (self INetCfgClassSetup) DeInstall(pComponent INetCfgComponent, pOboToken *networkmanagementnetmanagement.OBO_TOKEN, pmszwRefs *foundation.PWSTR) error {
+	return win32.HRESULTError(int32(self.Raw.DeInstall(pComponent.Raw, pOboToken, pmszwRefs)))
 }
 
 // INetCfgClassSetup2 is an idiomatic wrapper over the raw COM interface NetworkManagement.NetManagement.INetCfgClassSetup2 with error-returning methods.
@@ -297,8 +296,8 @@ func WrapINetCfgClassSetup2(raw *networkmanagementnetmanagement.INetCfgClassSetu
 }
 
 // UpdateNonEnumeratedComponent wraps the raw UpdateNonEnumeratedComponent call.
-func (self INetCfgClassSetup2) UpdateNonEnumeratedComponent(pIComp *networkmanagementnetmanagement.INetCfgComponent) error {
-	return win32.HRESULTError(int32(self.Raw.UpdateNonEnumeratedComponent(pIComp, 0, 0)))
+func (self INetCfgClassSetup2) UpdateNonEnumeratedComponent(pIComp INetCfgComponent) error {
+	return win32.HRESULTError(int32(self.Raw.UpdateNonEnumeratedComponent(pIComp.Raw, 0, 0)))
 }
 
 // INetCfgComponent is an idiomatic wrapper over the raw COM interface NetworkManagement.NetManagement.INetCfgComponent with error-returning methods.
@@ -369,8 +368,8 @@ func (self INetCfgComponent) OpenParamKey(phkey *systemregistry.HKEY) error {
 }
 
 // RaisePropertyUi wraps the raw RaisePropertyUi call.
-func (self INetCfgComponent) RaisePropertyUi(hwndParent foundation.HWND, dwFlags uint32, punkContext *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RaisePropertyUi(hwndParent, dwFlags, punkContext)))
+func (self INetCfgComponent) RaisePropertyUi(hwndParent foundation.HWND, dwFlags uint32, punkContext systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RaisePropertyUi(hwndParent, dwFlags, punkContext.Raw)))
 }
 
 // INetCfgComponentBindings is an idiomatic wrapper over the raw COM interface NetworkManagement.NetManagement.INetCfgComponentBindings with error-returning methods.
@@ -385,13 +384,13 @@ func WrapINetCfgComponentBindings(raw *networkmanagementnetmanagement.INetCfgCom
 }
 
 // BindTo wraps the raw BindTo call.
-func (self INetCfgComponentBindings) BindTo(pnccItem *networkmanagementnetmanagement.INetCfgComponent) error {
-	return win32.HRESULTError(int32(self.Raw.BindTo(pnccItem)))
+func (self INetCfgComponentBindings) BindTo(pnccItem INetCfgComponent) error {
+	return win32.HRESULTError(int32(self.Raw.BindTo(pnccItem.Raw)))
 }
 
 // UnbindFrom wraps the raw UnbindFrom call.
-func (self INetCfgComponentBindings) UnbindFrom(pnccItem *networkmanagementnetmanagement.INetCfgComponent) error {
-	return win32.HRESULTError(int32(self.Raw.UnbindFrom(pnccItem)))
+func (self INetCfgComponentBindings) UnbindFrom(pnccItem INetCfgComponent) error {
+	return win32.HRESULTError(int32(self.Raw.UnbindFrom(pnccItem.Raw)))
 }
 
 // SupportsBindingInterface wraps the raw SupportsBindingInterface call.
@@ -401,13 +400,13 @@ func (self INetCfgComponentBindings) SupportsBindingInterface(dwFlags uint32, ps
 }
 
 // IsBoundTo wraps the raw IsBoundTo call.
-func (self INetCfgComponentBindings) IsBoundTo(pnccItem *networkmanagementnetmanagement.INetCfgComponent) error {
-	return win32.HRESULTError(int32(self.Raw.IsBoundTo(pnccItem)))
+func (self INetCfgComponentBindings) IsBoundTo(pnccItem INetCfgComponent) error {
+	return win32.HRESULTError(int32(self.Raw.IsBoundTo(pnccItem.Raw)))
 }
 
 // IsBindableTo wraps the raw IsBindableTo call.
-func (self INetCfgComponentBindings) IsBindableTo(pnccItem *networkmanagementnetmanagement.INetCfgComponent) error {
-	return win32.HRESULTError(int32(self.Raw.IsBindableTo(pnccItem)))
+func (self INetCfgComponentBindings) IsBindableTo(pnccItem INetCfgComponent) error {
+	return win32.HRESULTError(int32(self.Raw.IsBindableTo(pnccItem.Raw)))
 }
 
 // EnumBindingPaths wraps the raw EnumBindingPaths call.
@@ -416,13 +415,13 @@ func (self INetCfgComponentBindings) EnumBindingPaths(dwFlags uint32, ppIEnum **
 }
 
 // MoveBefore wraps the raw MoveBefore call.
-func (self INetCfgComponentBindings) MoveBefore(pncbItemSrc *networkmanagementnetmanagement.INetCfgBindingPath, pncbItemDest *networkmanagementnetmanagement.INetCfgBindingPath) error {
-	return win32.HRESULTError(int32(self.Raw.MoveBefore(pncbItemSrc, pncbItemDest)))
+func (self INetCfgComponentBindings) MoveBefore(pncbItemSrc INetCfgBindingPath, pncbItemDest INetCfgBindingPath) error {
+	return win32.HRESULTError(int32(self.Raw.MoveBefore(pncbItemSrc.Raw, pncbItemDest.Raw)))
 }
 
 // MoveAfter wraps the raw MoveAfter call.
-func (self INetCfgComponentBindings) MoveAfter(pncbItemSrc *networkmanagementnetmanagement.INetCfgBindingPath, pncbItemDest *networkmanagementnetmanagement.INetCfgBindingPath) error {
-	return win32.HRESULTError(int32(self.Raw.MoveAfter(pncbItemSrc, pncbItemDest)))
+func (self INetCfgComponentBindings) MoveAfter(pncbItemSrc INetCfgBindingPath, pncbItemDest INetCfgBindingPath) error {
+	return win32.HRESULTError(int32(self.Raw.MoveAfter(pncbItemSrc.Raw, pncbItemDest.Raw)))
 }
 
 // INetCfgComponentControl is an idiomatic wrapper over the raw COM interface NetworkManagement.NetManagement.INetCfgComponentControl with error-returning methods.
@@ -437,9 +436,9 @@ func WrapINetCfgComponentControl(raw *networkmanagementnetmanagement.INetCfgComp
 }
 
 // Initialize wraps the raw Initialize call.
-func (self INetCfgComponentControl) Initialize(pIComp *networkmanagementnetmanagement.INetCfgComponent, pINetCfg *networkmanagementnetmanagement.INetCfg, fInstalling bool) error {
+func (self INetCfgComponentControl) Initialize(pIComp INetCfgComponent, pINetCfg INetCfg, fInstalling bool) error {
 	_fInstalling := foundation.BOOL(win32.Bool32(fInstalling))
-	return win32.HRESULTError(int32(self.Raw.Initialize(pIComp, pINetCfg, _fInstalling)))
+	return win32.HRESULTError(int32(self.Raw.Initialize(pIComp.Raw, pINetCfg.Raw, _fInstalling)))
 }
 
 // ApplyRegistryChanges wraps the raw ApplyRegistryChanges call.
@@ -448,8 +447,8 @@ func (self INetCfgComponentControl) ApplyRegistryChanges() error {
 }
 
 // ApplyPnpChanges wraps the raw ApplyPnpChanges call.
-func (self INetCfgComponentControl) ApplyPnpChanges(pICallback *networkmanagementnetmanagement.INetCfgPnpReconfigCallback) error {
-	return win32.HRESULTError(int32(self.Raw.ApplyPnpChanges(pICallback)))
+func (self INetCfgComponentControl) ApplyPnpChanges(pICallback INetCfgPnpReconfigCallback) error {
+	return win32.HRESULTError(int32(self.Raw.ApplyPnpChanges(pICallback.Raw)))
 }
 
 // CancelChanges wraps the raw CancelChanges call.
@@ -469,13 +468,13 @@ func WrapINetCfgComponentNotifyBinding(raw *networkmanagementnetmanagement.INetC
 }
 
 // QueryBindingPath wraps the raw QueryBindingPath call.
-func (self INetCfgComponentNotifyBinding) QueryBindingPath(dwChangeFlag uint32, pIPath *networkmanagementnetmanagement.INetCfgBindingPath) error {
-	return win32.HRESULTError(int32(self.Raw.QueryBindingPath(dwChangeFlag, pIPath)))
+func (self INetCfgComponentNotifyBinding) QueryBindingPath(dwChangeFlag uint32, pIPath INetCfgBindingPath) error {
+	return win32.HRESULTError(int32(self.Raw.QueryBindingPath(dwChangeFlag, pIPath.Raw)))
 }
 
 // NotifyBindingPath wraps the raw NotifyBindingPath call.
-func (self INetCfgComponentNotifyBinding) NotifyBindingPath(dwChangeFlag uint32, pIPath *networkmanagementnetmanagement.INetCfgBindingPath) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyBindingPath(dwChangeFlag, pIPath)))
+func (self INetCfgComponentNotifyBinding) NotifyBindingPath(dwChangeFlag uint32, pIPath INetCfgBindingPath) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyBindingPath(dwChangeFlag, pIPath.Raw)))
 }
 
 // INetCfgComponentNotifyGlobal is an idiomatic wrapper over the raw COM interface NetworkManagement.NetManagement.INetCfgComponentNotifyGlobal with error-returning methods.
@@ -495,18 +494,18 @@ func (self INetCfgComponentNotifyGlobal) GetSupportedNotifications(dwNotificatio
 }
 
 // SysQueryBindingPath wraps the raw SysQueryBindingPath call.
-func (self INetCfgComponentNotifyGlobal) SysQueryBindingPath(dwChangeFlag uint32, pIPath *networkmanagementnetmanagement.INetCfgBindingPath) error {
-	return win32.HRESULTError(int32(self.Raw.SysQueryBindingPath(dwChangeFlag, pIPath)))
+func (self INetCfgComponentNotifyGlobal) SysQueryBindingPath(dwChangeFlag uint32, pIPath INetCfgBindingPath) error {
+	return win32.HRESULTError(int32(self.Raw.SysQueryBindingPath(dwChangeFlag, pIPath.Raw)))
 }
 
 // SysNotifyBindingPath wraps the raw SysNotifyBindingPath call.
-func (self INetCfgComponentNotifyGlobal) SysNotifyBindingPath(dwChangeFlag uint32, pIPath *networkmanagementnetmanagement.INetCfgBindingPath) error {
-	return win32.HRESULTError(int32(self.Raw.SysNotifyBindingPath(dwChangeFlag, pIPath)))
+func (self INetCfgComponentNotifyGlobal) SysNotifyBindingPath(dwChangeFlag uint32, pIPath INetCfgBindingPath) error {
+	return win32.HRESULTError(int32(self.Raw.SysNotifyBindingPath(dwChangeFlag, pIPath.Raw)))
 }
 
 // SysNotifyComponent wraps the raw SysNotifyComponent call.
-func (self INetCfgComponentNotifyGlobal) SysNotifyComponent(dwChangeFlag uint32, pIComp *networkmanagementnetmanagement.INetCfgComponent) error {
-	return win32.HRESULTError(int32(self.Raw.SysNotifyComponent(dwChangeFlag, pIComp)))
+func (self INetCfgComponentNotifyGlobal) SysNotifyComponent(dwChangeFlag uint32, pIComp INetCfgComponent) error {
+	return win32.HRESULTError(int32(self.Raw.SysNotifyComponent(dwChangeFlag, pIComp.Raw)))
 }
 
 // INetCfgComponentPropertyUi is an idiomatic wrapper over the raw COM interface NetworkManagement.NetManagement.INetCfgComponentPropertyUi with error-returning methods.
@@ -521,13 +520,13 @@ func WrapINetCfgComponentPropertyUi(raw *networkmanagementnetmanagement.INetCfgC
 }
 
 // QueryPropertyUi wraps the raw QueryPropertyUi call.
-func (self INetCfgComponentPropertyUi) QueryPropertyUi(pUnkReserved *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.QueryPropertyUi(pUnkReserved)))
+func (self INetCfgComponentPropertyUi) QueryPropertyUi(pUnkReserved systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.QueryPropertyUi(pUnkReserved.Raw)))
 }
 
 // SetContext wraps the raw SetContext call.
-func (self INetCfgComponentPropertyUi) SetContext(pUnkReserved *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetContext(pUnkReserved)))
+func (self INetCfgComponentPropertyUi) SetContext(pUnkReserved systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetContext(pUnkReserved.Raw)))
 }
 
 // MergePropPages wraps the raw MergePropPages call.
@@ -595,9 +594,9 @@ func WrapINetCfgComponentSysPrep(raw *networkmanagementnetmanagement.INetCfgComp
 }
 
 // SaveAdapterParameters wraps the raw SaveAdapterParameters call.
-func (self INetCfgComponentSysPrep) SaveAdapterParameters(pncsp *networkmanagementnetmanagement.INetCfgSysPrep, pszwAnswerSections string, pAdapterInstanceGuid *win32.GUID) error {
+func (self INetCfgComponentSysPrep) SaveAdapterParameters(pncsp INetCfgSysPrep, pszwAnswerSections string, pAdapterInstanceGuid *win32.GUID) error {
 	_pszwAnswerSections := win32.UTF16Ptr(pszwAnswerSections)
-	return win32.HRESULTError(int32(self.Raw.SaveAdapterParameters(pncsp, foundation.PWSTR(_pszwAnswerSections), pAdapterInstanceGuid)))
+	return win32.HRESULTError(int32(self.Raw.SaveAdapterParameters(pncsp.Raw, foundation.PWSTR(_pszwAnswerSections), pAdapterInstanceGuid)))
 }
 
 // RestoreAdapterParameters wraps the raw RestoreAdapterParameters call.
@@ -619,18 +618,18 @@ func WrapINetCfgComponentUpperEdge(raw *networkmanagementnetmanagement.INetCfgCo
 }
 
 // GetInterfaceIdsForAdapter wraps the raw GetInterfaceIdsForAdapter call.
-func (self INetCfgComponentUpperEdge) GetInterfaceIdsForAdapter(pAdapter *networkmanagementnetmanagement.INetCfgComponent, pdwNumInterfaces *uint32, ppguidInterfaceIds **win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetInterfaceIdsForAdapter(pAdapter, pdwNumInterfaces, ppguidInterfaceIds)))
+func (self INetCfgComponentUpperEdge) GetInterfaceIdsForAdapter(pAdapter INetCfgComponent, pdwNumInterfaces *uint32, ppguidInterfaceIds **win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.GetInterfaceIdsForAdapter(pAdapter.Raw, pdwNumInterfaces, ppguidInterfaceIds)))
 }
 
 // AddInterfacesToAdapter wraps the raw AddInterfacesToAdapter call.
-func (self INetCfgComponentUpperEdge) AddInterfacesToAdapter(pAdapter *networkmanagementnetmanagement.INetCfgComponent, dwNumInterfaces uint32) error {
-	return win32.HRESULTError(int32(self.Raw.AddInterfacesToAdapter(pAdapter, dwNumInterfaces)))
+func (self INetCfgComponentUpperEdge) AddInterfacesToAdapter(pAdapter INetCfgComponent, dwNumInterfaces uint32) error {
+	return win32.HRESULTError(int32(self.Raw.AddInterfacesToAdapter(pAdapter.Raw, dwNumInterfaces)))
 }
 
 // RemoveInterfacesFromAdapter wraps the raw RemoveInterfacesFromAdapter call.
-func (self INetCfgComponentUpperEdge) RemoveInterfacesFromAdapter(pAdapter *networkmanagementnetmanagement.INetCfgComponent, dwNumInterfaces uint32, pguidInterfaceIds *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveInterfacesFromAdapter(pAdapter, dwNumInterfaces, pguidInterfaceIds)))
+func (self INetCfgComponentUpperEdge) RemoveInterfacesFromAdapter(pAdapter INetCfgComponent, dwNumInterfaces uint32, pguidInterfaceIds *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveInterfacesFromAdapter(pAdapter.Raw, dwNumInterfaces, pguidInterfaceIds)))
 }
 
 // INetCfgLock is an idiomatic wrapper over the raw COM interface NetworkManagement.NetManagement.INetCfgLock with error-returning methods.

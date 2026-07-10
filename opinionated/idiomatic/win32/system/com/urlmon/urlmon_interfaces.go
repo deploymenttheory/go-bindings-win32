@@ -8,10 +8,10 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	dataxmlmsxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/msxml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomurlmon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/urlmon"
+	dataxmlmsxmlidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/data/xml/msxml"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 )
 
@@ -60,9 +60,9 @@ func WrapIBindProtocol(raw *systemcomurlmon.IBindProtocol) IBindProtocol {
 }
 
 // CreateBinding wraps the raw CreateBinding call.
-func (self IBindProtocol) CreateBinding(szUrl string, pbc *systemcom.IBindCtx, ppb **systemcom.IBinding) error {
+func (self IBindProtocol) CreateBinding(szUrl string, pbc systemcomidiom.IBindCtx, ppb **systemcom.IBinding) error {
 	_szUrl := win32.UTF16Ptr(szUrl)
-	return win32.HRESULTError(int32(self.Raw.CreateBinding(foundation.PWSTR(_szUrl), pbc, ppb)))
+	return win32.HRESULTError(int32(self.Raw.CreateBinding(foundation.PWSTR(_szUrl), pbc.Raw, ppb)))
 }
 
 // ICatalogFileInfo is an idiomatic wrapper over the raw COM interface System.Com.Urlmon.ICatalogFileInfo with error-returning methods.
@@ -375,8 +375,8 @@ func WrapIInternetProtocolEx(raw *systemcomurlmon.IInternetProtocolEx) IInternet
 }
 
 // StartEx wraps the raw StartEx call.
-func (self IInternetProtocolEx) StartEx(pUri *systemcom.IUri, pOIProtSink *systemcomurlmon.IInternetProtocolSink, pOIBindInfo *systemcomurlmon.IInternetBindInfo, grfPI uint32, dwReserved foundation.HANDLE_PTR) error {
-	return win32.HRESULTError(int32(self.Raw.StartEx(pUri, pOIProtSink, pOIBindInfo, grfPI, dwReserved)))
+func (self IInternetProtocolEx) StartEx(pUri systemcomidiom.IUri, pOIProtSink IInternetProtocolSink, pOIBindInfo IInternetBindInfo, grfPI uint32, dwReserved foundation.HANDLE_PTR) error {
+	return win32.HRESULTError(int32(self.Raw.StartEx(pUri.Raw, pOIProtSink.Raw, pOIBindInfo.Raw, grfPI, dwReserved)))
 }
 
 // IInternetProtocolInfo is an idiomatic wrapper over the raw COM interface System.Com.Urlmon.IInternetProtocolInfo with error-returning methods.
@@ -429,9 +429,9 @@ func WrapIInternetProtocolRoot(raw *systemcomurlmon.IInternetProtocolRoot) IInte
 }
 
 // Start wraps the raw Start call.
-func (self IInternetProtocolRoot) Start(szUrl string, pOIProtSink *systemcomurlmon.IInternetProtocolSink, pOIBindInfo *systemcomurlmon.IInternetBindInfo, grfPI uint32, dwReserved foundation.HANDLE_PTR) error {
+func (self IInternetProtocolRoot) Start(szUrl string, pOIProtSink IInternetProtocolSink, pOIBindInfo IInternetBindInfo, grfPI uint32, dwReserved foundation.HANDLE_PTR) error {
 	_szUrl := win32.UTF16Ptr(szUrl)
-	return win32.HRESULTError(int32(self.Raw.Start(foundation.PWSTR(_szUrl), pOIProtSink, pOIBindInfo, grfPI, dwReserved)))
+	return win32.HRESULTError(int32(self.Raw.Start(foundation.PWSTR(_szUrl), pOIProtSink.Raw, pOIBindInfo.Raw, grfPI, dwReserved)))
 }
 
 // Continue wraps the raw Continue call.
@@ -504,8 +504,8 @@ func WrapIInternetProtocolSinkStackable(raw *systemcomurlmon.IInternetProtocolSi
 }
 
 // SwitchSink wraps the raw SwitchSink call.
-func (self IInternetProtocolSinkStackable) SwitchSink(pOIProtSink *systemcomurlmon.IInternetProtocolSink) error {
-	return win32.HRESULTError(int32(self.Raw.SwitchSink(pOIProtSink)))
+func (self IInternetProtocolSinkStackable) SwitchSink(pOIProtSink IInternetProtocolSink) error {
+	return win32.HRESULTError(int32(self.Raw.SwitchSink(pOIProtSink.Raw)))
 }
 
 // CommitSwitch wraps the raw CommitSwitch call.
@@ -530,8 +530,8 @@ func WrapIInternetSecurityManager(raw *systemcomurlmon.IInternetSecurityManager)
 }
 
 // SetSecuritySite wraps the raw SetSecuritySite call.
-func (self IInternetSecurityManager) SetSecuritySite(pSite *systemcomurlmon.IInternetSecurityMgrSite) error {
-	return win32.HRESULTError(int32(self.Raw.SetSecuritySite(pSite)))
+func (self IInternetSecurityManager) SetSecuritySite(pSite IInternetSecurityMgrSite) error {
+	return win32.HRESULTError(int32(self.Raw.SetSecuritySite(pSite.Raw)))
 }
 
 // GetSecuritySite wraps the raw GetSecuritySite call.
@@ -603,23 +603,23 @@ func WrapIInternetSecurityManagerEx2(raw *systemcomurlmon.IInternetSecurityManag
 }
 
 // MapUrlToZoneEx2 wraps the raw MapUrlToZoneEx2 call.
-func (self IInternetSecurityManagerEx2) MapUrlToZoneEx2(pUri *systemcom.IUri, pdwZone *uint32, dwFlags uint32, ppwszMappedUrl *foundation.PWSTR, pdwOutFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.MapUrlToZoneEx2(pUri, pdwZone, dwFlags, ppwszMappedUrl, pdwOutFlags)))
+func (self IInternetSecurityManagerEx2) MapUrlToZoneEx2(pUri systemcomidiom.IUri, pdwZone *uint32, dwFlags uint32, ppwszMappedUrl *foundation.PWSTR, pdwOutFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.MapUrlToZoneEx2(pUri.Raw, pdwZone, dwFlags, ppwszMappedUrl, pdwOutFlags)))
 }
 
 // ProcessUrlActionEx2 wraps the raw ProcessUrlActionEx2 call.
-func (self IInternetSecurityManagerEx2) ProcessUrlActionEx2(pUri *systemcom.IUri, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uintptr, pdwOutFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.ProcessUrlActionEx2(pUri, dwAction, pPolicy, cbPolicy, pContext, cbContext, dwFlags, dwReserved, pdwOutFlags)))
+func (self IInternetSecurityManagerEx2) ProcessUrlActionEx2(pUri systemcomidiom.IUri, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uintptr, pdwOutFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.ProcessUrlActionEx2(pUri.Raw, dwAction, pPolicy, cbPolicy, pContext, cbContext, dwFlags, dwReserved, pdwOutFlags)))
 }
 
 // GetSecurityIdEx2 wraps the raw GetSecurityIdEx2 call.
-func (self IInternetSecurityManagerEx2) GetSecurityIdEx2(pUri *systemcom.IUri, pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.GetSecurityIdEx2(pUri, pbSecurityId, pcbSecurityId, dwReserved)))
+func (self IInternetSecurityManagerEx2) GetSecurityIdEx2(pUri systemcomidiom.IUri, pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.GetSecurityIdEx2(pUri.Raw, pbSecurityId, pcbSecurityId, dwReserved)))
 }
 
 // QueryCustomPolicyEx2 wraps the raw QueryCustomPolicyEx2 call.
-func (self IInternetSecurityManagerEx2) QueryCustomPolicyEx2(pUri *systemcom.IUri, guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.QueryCustomPolicyEx2(pUri, guidKey, ppPolicy, pcbPolicy, pContext, cbContext, dwReserved)))
+func (self IInternetSecurityManagerEx2) QueryCustomPolicyEx2(pUri systemcomidiom.IUri, guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.QueryCustomPolicyEx2(pUri.Raw, guidKey, ppPolicy, pcbPolicy, pContext, cbContext, dwReserved)))
 }
 
 // IInternetSecurityMgrSite is an idiomatic wrapper over the raw COM interface System.Com.Urlmon.IInternetSecurityMgrSite with error-returning methods.
@@ -656,33 +656,33 @@ func WrapIInternetSession(raw *systemcomurlmon.IInternetSession) IInternetSessio
 }
 
 // RegisterNameSpace wraps the raw RegisterNameSpace call.
-func (self IInternetSession) RegisterNameSpace(pCF *systemcom.IClassFactory, rclsid *win32.GUID, pwzProtocol string, cPatterns uint32, ppwzPatterns *foundation.PWSTR, dwReserved uint32) error {
+func (self IInternetSession) RegisterNameSpace(pCF systemcomidiom.IClassFactory, rclsid *win32.GUID, pwzProtocol string, cPatterns uint32, ppwzPatterns *foundation.PWSTR, dwReserved uint32) error {
 	_pwzProtocol := win32.UTF16Ptr(pwzProtocol)
-	return win32.HRESULTError(int32(self.Raw.RegisterNameSpace(pCF, rclsid, foundation.PWSTR(_pwzProtocol), cPatterns, ppwzPatterns, dwReserved)))
+	return win32.HRESULTError(int32(self.Raw.RegisterNameSpace(pCF.Raw, rclsid, foundation.PWSTR(_pwzProtocol), cPatterns, ppwzPatterns, dwReserved)))
 }
 
 // UnregisterNameSpace wraps the raw UnregisterNameSpace call.
-func (self IInternetSession) UnregisterNameSpace(pCF *systemcom.IClassFactory, pszProtocol string) error {
+func (self IInternetSession) UnregisterNameSpace(pCF systemcomidiom.IClassFactory, pszProtocol string) error {
 	_pszProtocol := win32.UTF16Ptr(pszProtocol)
-	return win32.HRESULTError(int32(self.Raw.UnregisterNameSpace(pCF, foundation.PWSTR(_pszProtocol))))
+	return win32.HRESULTError(int32(self.Raw.UnregisterNameSpace(pCF.Raw, foundation.PWSTR(_pszProtocol))))
 }
 
 // RegisterMimeFilter wraps the raw RegisterMimeFilter call.
-func (self IInternetSession) RegisterMimeFilter(pCF *systemcom.IClassFactory, rclsid *win32.GUID, pwzType string) error {
+func (self IInternetSession) RegisterMimeFilter(pCF systemcomidiom.IClassFactory, rclsid *win32.GUID, pwzType string) error {
 	_pwzType := win32.UTF16Ptr(pwzType)
-	return win32.HRESULTError(int32(self.Raw.RegisterMimeFilter(pCF, rclsid, foundation.PWSTR(_pwzType))))
+	return win32.HRESULTError(int32(self.Raw.RegisterMimeFilter(pCF.Raw, rclsid, foundation.PWSTR(_pwzType))))
 }
 
 // UnregisterMimeFilter wraps the raw UnregisterMimeFilter call.
-func (self IInternetSession) UnregisterMimeFilter(pCF *systemcom.IClassFactory, pwzType string) error {
+func (self IInternetSession) UnregisterMimeFilter(pCF systemcomidiom.IClassFactory, pwzType string) error {
 	_pwzType := win32.UTF16Ptr(pwzType)
-	return win32.HRESULTError(int32(self.Raw.UnregisterMimeFilter(pCF, foundation.PWSTR(_pwzType))))
+	return win32.HRESULTError(int32(self.Raw.UnregisterMimeFilter(pCF.Raw, foundation.PWSTR(_pwzType))))
 }
 
 // CreateBinding wraps the raw CreateBinding call.
-func (self IInternetSession) CreateBinding(pBC *systemcom.IBindCtx, szUrl string, pUnkOuter *systemcom.IUnknown, ppUnk **systemcom.IUnknown, ppOInetProt **systemcomurlmon.IInternetProtocol, dwOption uint32) error {
+func (self IInternetSession) CreateBinding(pBC systemcomidiom.IBindCtx, szUrl string, pUnkOuter systemcomidiom.IUnknown, ppUnk **systemcom.IUnknown, ppOInetProt **systemcomurlmon.IInternetProtocol, dwOption uint32) error {
 	_szUrl := win32.UTF16Ptr(szUrl)
-	return win32.HRESULTError(int32(self.Raw.CreateBinding(pBC, foundation.PWSTR(_szUrl), pUnkOuter, ppUnk, ppOInetProt, dwOption)))
+	return win32.HRESULTError(int32(self.Raw.CreateBinding(pBC.Raw, foundation.PWSTR(_szUrl), pUnkOuter.Raw, ppUnk, ppOInetProt, dwOption)))
 }
 
 // SetSessionOption wraps the raw SetSessionOption call.
@@ -885,20 +885,20 @@ func (self IPersistMoniker) IsDirty() error {
 }
 
 // Load wraps the raw Load call.
-func (self IPersistMoniker) Load(fFullyAvailable bool, pimkName *systemcom.IMoniker, pibc *systemcom.IBindCtx, grfMode uint32) error {
+func (self IPersistMoniker) Load(fFullyAvailable bool, pimkName systemcomidiom.IMoniker, pibc systemcomidiom.IBindCtx, grfMode uint32) error {
 	_fFullyAvailable := foundation.BOOL(win32.Bool32(fFullyAvailable))
-	return win32.HRESULTError(int32(self.Raw.Load(_fFullyAvailable, pimkName, pibc, grfMode)))
+	return win32.HRESULTError(int32(self.Raw.Load(_fFullyAvailable, pimkName.Raw, pibc.Raw, grfMode)))
 }
 
 // Save wraps the raw Save call.
-func (self IPersistMoniker) Save(pimkName *systemcom.IMoniker, pbc *systemcom.IBindCtx, fRemember bool) error {
+func (self IPersistMoniker) Save(pimkName systemcomidiom.IMoniker, pbc systemcomidiom.IBindCtx, fRemember bool) error {
 	_fRemember := foundation.BOOL(win32.Bool32(fRemember))
-	return win32.HRESULTError(int32(self.Raw.Save(pimkName, pbc, _fRemember)))
+	return win32.HRESULTError(int32(self.Raw.Save(pimkName.Raw, pbc.Raw, _fRemember)))
 }
 
 // SaveCompleted wraps the raw SaveCompleted call.
-func (self IPersistMoniker) SaveCompleted(pimkName *systemcom.IMoniker, pibc *systemcom.IBindCtx) error {
-	return win32.HRESULTError(int32(self.Raw.SaveCompleted(pimkName, pibc)))
+func (self IPersistMoniker) SaveCompleted(pimkName systemcomidiom.IMoniker, pibc systemcomidiom.IBindCtx) error {
+	return win32.HRESULTError(int32(self.Raw.SaveCompleted(pimkName.Raw, pibc.Raw)))
 }
 
 // GetCurMoniker wraps the raw GetCurMoniker call.
@@ -918,9 +918,9 @@ func WrapISoftDistExt(raw *systemcomurlmon.ISoftDistExt) ISoftDistExt {
 }
 
 // ProcessSoftDist wraps the raw ProcessSoftDist call.
-func (self ISoftDistExt) ProcessSoftDist(szCDFURL string, pSoftDistElement *dataxmlmsxml.IXMLElement, lpsdi *systemcomurlmon.SOFTDISTINFO) error {
+func (self ISoftDistExt) ProcessSoftDist(szCDFURL string, pSoftDistElement dataxmlmsxmlidiom.IXMLElement, lpsdi *systemcomurlmon.SOFTDISTINFO) error {
 	_szCDFURL := win32.UTF16Ptr(szCDFURL)
-	return win32.HRESULTError(int32(self.Raw.ProcessSoftDist(foundation.PWSTR(_szCDFURL), pSoftDistElement, lpsdi)))
+	return win32.HRESULTError(int32(self.Raw.ProcessSoftDist(foundation.PWSTR(_szCDFURL), pSoftDistElement.Raw, lpsdi)))
 }
 
 // GetFirstCodeBase wraps the raw GetFirstCodeBase call.
@@ -934,8 +934,8 @@ func (self ISoftDistExt) GetNextCodeBase(szCodeBase *foundation.PWSTR, dwMaxSize
 }
 
 // AsyncInstallDistributionUnit wraps the raw AsyncInstallDistributionUnit call.
-func (self ISoftDistExt) AsyncInstallDistributionUnit(pbc *systemcom.IBindCtx, pvReserved unsafe.Pointer, flags uint32, lpcbh *systemcomurlmon.CODEBASEHOLD) error {
-	return win32.HRESULTError(int32(self.Raw.AsyncInstallDistributionUnit(pbc, pvReserved, flags, lpcbh)))
+func (self ISoftDistExt) AsyncInstallDistributionUnit(pbc systemcomidiom.IBindCtx, pvReserved unsafe.Pointer, flags uint32, lpcbh *systemcomurlmon.CODEBASEHOLD) error {
+	return win32.HRESULTError(int32(self.Raw.AsyncInstallDistributionUnit(pbc.Raw, pvReserved, flags, lpcbh)))
 }
 
 // IUriBuilderFactory is an idiomatic wrapper over the raw COM interface System.Com.Urlmon.IUriBuilderFactory with error-returning methods.

@@ -48,8 +48,8 @@ func (self IDeviceModelPlugIn) ColorimetricToDeviceColorsWithBlack(cColors uint3
 }
 
 // SetTransformDeviceModelInfo wraps the raw SetTransformDeviceModelInfo call.
-func (self IDeviceModelPlugIn) SetTransformDeviceModelInfo(iModelPosition uint32, pIDeviceModelOther *uicolorsystem.IDeviceModelPlugIn) error {
-	return win32.HRESULTError(int32(self.Raw.SetTransformDeviceModelInfo(iModelPosition, pIDeviceModelOther)))
+func (self IDeviceModelPlugIn) SetTransformDeviceModelInfo(iModelPosition uint32, pIDeviceModelOther IDeviceModelPlugIn) error {
+	return win32.HRESULTError(int32(self.Raw.SetTransformDeviceModelInfo(iModelPosition, pIDeviceModelOther.Raw)))
 }
 
 // GetPrimarySamples wraps the raw GetPrimarySamples call.
@@ -89,8 +89,8 @@ func WrapIGamutMapModelPlugIn(raw *uicolorsystem.IGamutMapModelPlugIn) IGamutMap
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IGamutMapModelPlugIn) Initialize(bstrXml foundation.BSTR, pSrcPlugIn *uicolorsystem.IDeviceModelPlugIn, pDestPlugIn *uicolorsystem.IDeviceModelPlugIn, pSrcGBD *uicolorsystem.GamutBoundaryDescription, pDestGBD *uicolorsystem.GamutBoundaryDescription) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(bstrXml, pSrcPlugIn, pDestPlugIn, pSrcGBD, pDestGBD)))
+func (self IGamutMapModelPlugIn) Initialize(bstrXml foundation.BSTR, pSrcPlugIn IDeviceModelPlugIn, pDestPlugIn IDeviceModelPlugIn, pSrcGBD *uicolorsystem.GamutBoundaryDescription, pDestGBD *uicolorsystem.GamutBoundaryDescription) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(bstrXml, pSrcPlugIn.Raw, pDestPlugIn.Raw, pSrcGBD, pDestGBD)))
 }
 
 // SourceToDestinationAppearanceColors wraps the raw SourceToDestinationAppearanceColors call.

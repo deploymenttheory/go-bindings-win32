@@ -61,8 +61,8 @@ func WrapIActivateAudioInterfaceCompletionHandler(raw *mediaaudio.IActivateAudio
 }
 
 // ActivateCompleted wraps the raw ActivateCompleted call.
-func (self IActivateAudioInterfaceCompletionHandler) ActivateCompleted(activateOperation *mediaaudio.IActivateAudioInterfaceAsyncOperation) error {
-	return win32.HRESULTError(int32(self.Raw.ActivateCompleted(activateOperation)))
+func (self IActivateAudioInterfaceCompletionHandler) ActivateCompleted(activateOperation IActivateAudioInterfaceAsyncOperation) error {
+	return win32.HRESULTError(int32(self.Raw.ActivateCompleted(activateOperation.Raw)))
 }
 
 // IAudioAmbisonicsControl is an idiomatic wrapper over the raw COM interface Media.Audio.IAudioAmbisonicsControl with error-returning methods.
@@ -395,13 +395,13 @@ func WrapIAudioEffectsManager(raw *mediaaudio.IAudioEffectsManager) IAudioEffect
 }
 
 // RegisterAudioEffectsChangedNotificationCallback wraps the raw RegisterAudioEffectsChangedNotificationCallback call.
-func (self IAudioEffectsManager) RegisterAudioEffectsChangedNotificationCallback(client *mediaaudio.IAudioEffectsChangedNotificationClient) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterAudioEffectsChangedNotificationCallback(client)))
+func (self IAudioEffectsManager) RegisterAudioEffectsChangedNotificationCallback(client IAudioEffectsChangedNotificationClient) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterAudioEffectsChangedNotificationCallback(client.Raw)))
 }
 
 // UnregisterAudioEffectsChangedNotificationCallback wraps the raw UnregisterAudioEffectsChangedNotificationCallback call.
-func (self IAudioEffectsManager) UnregisterAudioEffectsChangedNotificationCallback(client *mediaaudio.IAudioEffectsChangedNotificationClient) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterAudioEffectsChangedNotificationCallback(client)))
+func (self IAudioEffectsManager) UnregisterAudioEffectsChangedNotificationCallback(client IAudioEffectsChangedNotificationClient) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterAudioEffectsChangedNotificationCallback(client.Raw)))
 }
 
 // GetAudioEffects wraps the raw GetAudioEffects call.
@@ -618,13 +618,13 @@ func (self IAudioSessionControl) SetGroupingParam(Override *win32.GUID, EventCon
 }
 
 // RegisterAudioSessionNotification wraps the raw RegisterAudioSessionNotification call.
-func (self IAudioSessionControl) RegisterAudioSessionNotification(NewNotifications *mediaaudio.IAudioSessionEvents) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterAudioSessionNotification(NewNotifications)))
+func (self IAudioSessionControl) RegisterAudioSessionNotification(NewNotifications IAudioSessionEvents) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterAudioSessionNotification(NewNotifications.Raw)))
 }
 
 // UnregisterAudioSessionNotification wraps the raw UnregisterAudioSessionNotification call.
-func (self IAudioSessionControl) UnregisterAudioSessionNotification(NewNotifications *mediaaudio.IAudioSessionEvents) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterAudioSessionNotification(NewNotifications)))
+func (self IAudioSessionControl) UnregisterAudioSessionNotification(NewNotifications IAudioSessionEvents) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterAudioSessionNotification(NewNotifications.Raw)))
 }
 
 // IAudioSessionControl2 is an idiomatic wrapper over the raw COM interface Media.Audio.IAudioSessionControl2 with error-returning methods.
@@ -761,31 +761,31 @@ func WrapIAudioSessionManager2(raw *mediaaudio.IAudioSessionManager2) IAudioSess
 }
 
 // GetSessionEnumerator wraps the raw GetSessionEnumerator call.
-func (self IAudioSessionManager2) GetSessionEnumerator() (*mediaaudio.IAudioSessionEnumerator, error) {
+func (self IAudioSessionManager2) GetSessionEnumerator() (IAudioSessionEnumerator, error) {
 	var _SessionEnum *mediaaudio.IAudioSessionEnumerator
 	_hr := self.Raw.GetSessionEnumerator(&_SessionEnum)
-	return _SessionEnum, win32.HRESULTError(int32(_hr))
+	return WrapIAudioSessionEnumerator(_SessionEnum), win32.HRESULTError(int32(_hr))
 }
 
 // RegisterSessionNotification wraps the raw RegisterSessionNotification call.
-func (self IAudioSessionManager2) RegisterSessionNotification(SessionNotification *mediaaudio.IAudioSessionNotification) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterSessionNotification(SessionNotification)))
+func (self IAudioSessionManager2) RegisterSessionNotification(SessionNotification IAudioSessionNotification) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterSessionNotification(SessionNotification.Raw)))
 }
 
 // UnregisterSessionNotification wraps the raw UnregisterSessionNotification call.
-func (self IAudioSessionManager2) UnregisterSessionNotification(SessionNotification *mediaaudio.IAudioSessionNotification) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterSessionNotification(SessionNotification)))
+func (self IAudioSessionManager2) UnregisterSessionNotification(SessionNotification IAudioSessionNotification) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterSessionNotification(SessionNotification.Raw)))
 }
 
 // RegisterDuckNotification wraps the raw RegisterDuckNotification call.
-func (self IAudioSessionManager2) RegisterDuckNotification(sessionID string, duckNotification *mediaaudio.IAudioVolumeDuckNotification) error {
+func (self IAudioSessionManager2) RegisterDuckNotification(sessionID string, duckNotification IAudioVolumeDuckNotification) error {
 	_sessionID := win32.UTF16Ptr(sessionID)
-	return win32.HRESULTError(int32(self.Raw.RegisterDuckNotification(foundation.PWSTR(_sessionID), duckNotification)))
+	return win32.HRESULTError(int32(self.Raw.RegisterDuckNotification(foundation.PWSTR(_sessionID), duckNotification.Raw)))
 }
 
 // UnregisterDuckNotification wraps the raw UnregisterDuckNotification call.
-func (self IAudioSessionManager2) UnregisterDuckNotification(duckNotification *mediaaudio.IAudioVolumeDuckNotification) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterDuckNotification(duckNotification)))
+func (self IAudioSessionManager2) UnregisterDuckNotification(duckNotification IAudioVolumeDuckNotification) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterDuckNotification(duckNotification.Raw)))
 }
 
 // IAudioSessionNotification is an idiomatic wrapper over the raw COM interface Media.Audio.IAudioSessionNotification with error-returning methods.
@@ -800,8 +800,8 @@ func WrapIAudioSessionNotification(raw *mediaaudio.IAudioSessionNotification) IA
 }
 
 // OnSessionCreated wraps the raw OnSessionCreated call.
-func (self IAudioSessionNotification) OnSessionCreated(NewSession *mediaaudio.IAudioSessionControl) error {
-	return win32.HRESULTError(int32(self.Raw.OnSessionCreated(NewSession)))
+func (self IAudioSessionNotification) OnSessionCreated(NewSession IAudioSessionControl) error {
+	return win32.HRESULTError(int32(self.Raw.OnSessionCreated(NewSession.Raw)))
 }
 
 // IAudioStateMonitor is an idiomatic wrapper over the raw COM interface Media.Audio.IAudioStateMonitor with error-returning methods.
@@ -909,13 +909,13 @@ func (self IAudioSystemEffectsPropertyStore) ResetVolatilePropertyStore() error 
 }
 
 // RegisterPropertyChangeNotification wraps the raw RegisterPropertyChangeNotification call.
-func (self IAudioSystemEffectsPropertyStore) RegisterPropertyChangeNotification(callback *mediaaudio.IAudioSystemEffectsPropertyChangeNotificationClient) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterPropertyChangeNotification(callback)))
+func (self IAudioSystemEffectsPropertyStore) RegisterPropertyChangeNotification(callback IAudioSystemEffectsPropertyChangeNotificationClient) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterPropertyChangeNotification(callback.Raw)))
 }
 
 // UnregisterPropertyChangeNotification wraps the raw UnregisterPropertyChangeNotification call.
-func (self IAudioSystemEffectsPropertyStore) UnregisterPropertyChangeNotification(callback *mediaaudio.IAudioSystemEffectsPropertyChangeNotificationClient) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterPropertyChangeNotification(callback)))
+func (self IAudioSystemEffectsPropertyStore) UnregisterPropertyChangeNotification(callback IAudioSystemEffectsPropertyChangeNotificationClient) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterPropertyChangeNotification(callback.Raw)))
 }
 
 // IAudioTreble is an idiomatic wrapper over the raw COM interface Media.Audio.IAudioTreble with error-returning methods.
@@ -1032,8 +1032,8 @@ func (self IConnector) GetDataFlow(pFlow *mediaaudio.DataFlow) error {
 }
 
 // ConnectTo wraps the raw ConnectTo call.
-func (self IConnector) ConnectTo(pConnectTo *mediaaudio.IConnector) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectTo(pConnectTo)))
+func (self IConnector) ConnectTo(pConnectTo IConnector) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectTo(pConnectTo.Raw)))
 }
 
 // Disconnect wraps the raw Disconnect call.
@@ -1171,9 +1171,9 @@ func (self IDeviceTopology) GetDeviceId(ppwstrDeviceId *foundation.PWSTR) error 
 }
 
 // GetSignalPath wraps the raw GetSignalPath call.
-func (self IDeviceTopology) GetSignalPath(pIPartFrom *mediaaudio.IPart, pIPartTo *mediaaudio.IPart, bRejectMixedPaths bool, ppParts **mediaaudio.IPartsList) error {
+func (self IDeviceTopology) GetSignalPath(pIPartFrom IPart, pIPartTo IPart, bRejectMixedPaths bool, ppParts **mediaaudio.IPartsList) error {
 	_bRejectMixedPaths := foundation.BOOL(win32.Bool32(bRejectMixedPaths))
-	return win32.HRESULTError(int32(self.Raw.GetSignalPath(pIPartFrom, pIPartTo, _bRejectMixedPaths, ppParts)))
+	return win32.HRESULTError(int32(self.Raw.GetSignalPath(pIPartFrom.Raw, pIPartTo.Raw, _bRejectMixedPaths, ppParts)))
 }
 
 // IMMDevice is an idiomatic wrapper over the raw COM interface Media.Audio.IMMDevice with error-returning methods.
@@ -1219,8 +1219,8 @@ func WrapIMMDeviceActivator(raw *mediaaudio.IMMDeviceActivator) IMMDeviceActivat
 }
 
 // Activate wraps the raw Activate call.
-func (self IMMDeviceActivator) Activate(iid *win32.GUID, pDevice *mediaaudio.IMMDevice, pActivationParams *systemcomstructuredstorage.PROPVARIANT, ppInterface *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.Activate(iid, pDevice, pActivationParams, ppInterface)))
+func (self IMMDeviceActivator) Activate(iid *win32.GUID, pDevice IMMDevice, pActivationParams *systemcomstructuredstorage.PROPVARIANT, ppInterface *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.Activate(iid, pDevice.Raw, pActivationParams, ppInterface)))
 }
 
 // IMMDeviceCollection is an idiomatic wrapper over the raw COM interface Media.Audio.IMMDeviceCollection with error-returning methods.
@@ -1272,13 +1272,13 @@ func (self IMMDeviceEnumerator) GetDevice(pwstrId string, ppDevice **mediaaudio.
 }
 
 // RegisterEndpointNotificationCallback wraps the raw RegisterEndpointNotificationCallback call.
-func (self IMMDeviceEnumerator) RegisterEndpointNotificationCallback(pClient *mediaaudio.IMMNotificationClient) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterEndpointNotificationCallback(pClient)))
+func (self IMMDeviceEnumerator) RegisterEndpointNotificationCallback(pClient IMMNotificationClient) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterEndpointNotificationCallback(pClient.Raw)))
 }
 
 // UnregisterEndpointNotificationCallback wraps the raw UnregisterEndpointNotificationCallback call.
-func (self IMMDeviceEnumerator) UnregisterEndpointNotificationCallback(pClient *mediaaudio.IMMNotificationClient) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterEndpointNotificationCallback(pClient)))
+func (self IMMDeviceEnumerator) UnregisterEndpointNotificationCallback(pClient IMMNotificationClient) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterEndpointNotificationCallback(pClient.Raw)))
 }
 
 // IMMEndpoint is an idiomatic wrapper over the raw COM interface Media.Audio.IMMEndpoint with error-returning methods.
@@ -1425,13 +1425,13 @@ func (self IPart) Activate(dwClsContext uint32, refiid *win32.GUID, ppvObject *u
 }
 
 // RegisterControlChangeCallback wraps the raw RegisterControlChangeCallback call.
-func (self IPart) RegisterControlChangeCallback(riid *win32.GUID, pNotify *mediaaudio.IControlChangeNotify) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterControlChangeCallback(riid, pNotify)))
+func (self IPart) RegisterControlChangeCallback(riid *win32.GUID, pNotify IControlChangeNotify) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterControlChangeCallback(riid, pNotify.Raw)))
 }
 
 // UnregisterControlChangeCallback wraps the raw UnregisterControlChangeCallback call.
-func (self IPart) UnregisterControlChangeCallback(pNotify *mediaaudio.IControlChangeNotify) error {
-	return win32.HRESULTError(int32(self.Raw.UnregisterControlChangeCallback(pNotify)))
+func (self IPart) UnregisterControlChangeCallback(pNotify IControlChangeNotify) error {
+	return win32.HRESULTError(int32(self.Raw.UnregisterControlChangeCallback(pNotify.Raw)))
 }
 
 // IPartsList is an idiomatic wrapper over the raw COM interface Media.Audio.IPartsList with error-returning methods.
@@ -1634,13 +1634,13 @@ func WrapISpatialAudioMetadataCopier(raw *mediaaudio.ISpatialAudioMetadataCopier
 }
 
 // Open wraps the raw Open call.
-func (self ISpatialAudioMetadataCopier) Open(metadataItems *mediaaudio.ISpatialAudioMetadataItems) error {
-	return win32.HRESULTError(int32(self.Raw.Open(metadataItems)))
+func (self ISpatialAudioMetadataCopier) Open(metadataItems ISpatialAudioMetadataItems) error {
+	return win32.HRESULTError(int32(self.Raw.Open(metadataItems.Raw)))
 }
 
 // CopyMetadataForFrames wraps the raw CopyMetadataForFrames call.
-func (self ISpatialAudioMetadataCopier) CopyMetadataForFrames(copyFrameCount uint16, copyMode mediaaudio.SpatialAudioMetadataCopyMode, dstMetadataItems *mediaaudio.ISpatialAudioMetadataItems, itemsCopied *uint16) error {
-	return win32.HRESULTError(int32(self.Raw.CopyMetadataForFrames(copyFrameCount, copyMode, dstMetadataItems, itemsCopied)))
+func (self ISpatialAudioMetadataCopier) CopyMetadataForFrames(copyFrameCount uint16, copyMode mediaaudio.SpatialAudioMetadataCopyMode, dstMetadataItems ISpatialAudioMetadataItems, itemsCopied *uint16) error {
+	return win32.HRESULTError(int32(self.Raw.CopyMetadataForFrames(copyFrameCount, copyMode, dstMetadataItems.Raw, itemsCopied)))
 }
 
 // Close wraps the raw Close call.
@@ -1722,8 +1722,8 @@ func WrapISpatialAudioMetadataReader(raw *mediaaudio.ISpatialAudioMetadataReader
 }
 
 // Open wraps the raw Open call.
-func (self ISpatialAudioMetadataReader) Open(metadataItems *mediaaudio.ISpatialAudioMetadataItems) error {
-	return win32.HRESULTError(int32(self.Raw.Open(metadataItems)))
+func (self ISpatialAudioMetadataReader) Open(metadataItems ISpatialAudioMetadataItems) error {
+	return win32.HRESULTError(int32(self.Raw.Open(metadataItems.Raw)))
 }
 
 // ReadNextItem wraps the raw ReadNextItem call.
@@ -1753,8 +1753,8 @@ func WrapISpatialAudioMetadataWriter(raw *mediaaudio.ISpatialAudioMetadataWriter
 }
 
 // Open wraps the raw Open call.
-func (self ISpatialAudioMetadataWriter) Open(metadataItems *mediaaudio.ISpatialAudioMetadataItems) error {
-	return win32.HRESULTError(int32(self.Raw.Open(metadataItems)))
+func (self ISpatialAudioMetadataWriter) Open(metadataItems ISpatialAudioMetadataItems) error {
+	return win32.HRESULTError(int32(self.Raw.Open(metadataItems.Raw)))
 }
 
 // WriteNextItem wraps the raw WriteNextItem call.
@@ -1988,8 +1988,8 @@ func WrapISpatialAudioObjectRenderStreamNotify(raw *mediaaudio.ISpatialAudioObje
 }
 
 // OnAvailableDynamicObjectCountChange wraps the raw OnAvailableDynamicObjectCountChange call.
-func (self ISpatialAudioObjectRenderStreamNotify) OnAvailableDynamicObjectCountChange(sender *mediaaudio.ISpatialAudioObjectRenderStreamBase, hnsComplianceDeadlineTime int64, availableDynamicObjectCountChange uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnAvailableDynamicObjectCountChange(sender, hnsComplianceDeadlineTime, availableDynamicObjectCountChange)))
+func (self ISpatialAudioObjectRenderStreamNotify) OnAvailableDynamicObjectCountChange(sender ISpatialAudioObjectRenderStreamBase, hnsComplianceDeadlineTime int64, availableDynamicObjectCountChange uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnAvailableDynamicObjectCountChange(sender.Raw, hnsComplianceDeadlineTime, availableDynamicObjectCountChange)))
 }
 
 // ISubunit is an idiomatic wrapper over the raw COM interface Media.Audio.ISubunit with error-returning methods.

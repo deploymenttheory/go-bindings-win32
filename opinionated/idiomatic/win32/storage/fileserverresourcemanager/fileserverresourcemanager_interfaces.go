@@ -391,10 +391,10 @@ func (self IFsrmAutoApplyQuota) Put_ExcludeFolders(folders *systemcom.SAFEARRAY)
 }
 
 // CommitAndUpdateDerived wraps the raw CommitAndUpdateDerived call.
-func (self IFsrmAutoApplyQuota) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (*storagefileserverresourcemanager.IFsrmDerivedObjectsResult, error) {
+func (self IFsrmAutoApplyQuota) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (IFsrmDerivedObjectsResult, error) {
 	var _derivedObjectsResult *storagefileserverresourcemanager.IFsrmDerivedObjectsResult
 	_hr := self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, &_derivedObjectsResult)
-	return _derivedObjectsResult, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmDerivedObjectsResult(_derivedObjectsResult), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmClassificationManager is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmClassificationManager with error-returning methods.
@@ -478,66 +478,66 @@ func (self IFsrmClassificationManager) Get_ClassificationRunningStatus() (storag
 }
 
 // EnumPropertyDefinitions wraps the raw EnumPropertyDefinitions call.
-func (self IFsrmClassificationManager) EnumPropertyDefinitions(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmClassificationManager) EnumPropertyDefinitions(options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCollection, error) {
 	var _propertyDefinitions *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumPropertyDefinitions(options, &_propertyDefinitions)
-	return _propertyDefinitions, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_propertyDefinitions), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePropertyDefinition wraps the raw CreatePropertyDefinition call.
-func (self IFsrmClassificationManager) CreatePropertyDefinition() (*storagefileserverresourcemanager.IFsrmPropertyDefinition, error) {
+func (self IFsrmClassificationManager) CreatePropertyDefinition() (IFsrmPropertyDefinition, error) {
 	var _propertyDefinition *storagefileserverresourcemanager.IFsrmPropertyDefinition
 	_hr := self.Raw.CreatePropertyDefinition(&_propertyDefinition)
-	return _propertyDefinition, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmPropertyDefinition(_propertyDefinition), win32.HRESULTError(int32(_hr))
 }
 
 // GetPropertyDefinition wraps the raw GetPropertyDefinition call.
-func (self IFsrmClassificationManager) GetPropertyDefinition(propertyName foundation.BSTR) (*storagefileserverresourcemanager.IFsrmPropertyDefinition, error) {
+func (self IFsrmClassificationManager) GetPropertyDefinition(propertyName foundation.BSTR) (IFsrmPropertyDefinition, error) {
 	var _propertyDefinition *storagefileserverresourcemanager.IFsrmPropertyDefinition
 	_hr := self.Raw.GetPropertyDefinition(propertyName, &_propertyDefinition)
-	return _propertyDefinition, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmPropertyDefinition(_propertyDefinition), win32.HRESULTError(int32(_hr))
 }
 
 // EnumRules wraps the raw EnumRules call.
-func (self IFsrmClassificationManager) EnumRules(ruleType storagefileserverresourcemanager.FsrmRuleType, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmClassificationManager) EnumRules(ruleType storagefileserverresourcemanager.FsrmRuleType, options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCollection, error) {
 	var _Rules *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumRules(ruleType, options, &_Rules)
-	return _Rules, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_Rules), win32.HRESULTError(int32(_hr))
 }
 
 // CreateRule wraps the raw CreateRule call.
-func (self IFsrmClassificationManager) CreateRule(ruleType storagefileserverresourcemanager.FsrmRuleType) (*storagefileserverresourcemanager.IFsrmRule, error) {
+func (self IFsrmClassificationManager) CreateRule(ruleType storagefileserverresourcemanager.FsrmRuleType) (IFsrmRule, error) {
 	var _Rule *storagefileserverresourcemanager.IFsrmRule
 	_hr := self.Raw.CreateRule(ruleType, &_Rule)
-	return _Rule, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmRule(_Rule), win32.HRESULTError(int32(_hr))
 }
 
 // GetRule wraps the raw GetRule call.
-func (self IFsrmClassificationManager) GetRule(ruleName foundation.BSTR, ruleType storagefileserverresourcemanager.FsrmRuleType) (*storagefileserverresourcemanager.IFsrmRule, error) {
+func (self IFsrmClassificationManager) GetRule(ruleName foundation.BSTR, ruleType storagefileserverresourcemanager.FsrmRuleType) (IFsrmRule, error) {
 	var _Rule *storagefileserverresourcemanager.IFsrmRule
 	_hr := self.Raw.GetRule(ruleName, ruleType, &_Rule)
-	return _Rule, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmRule(_Rule), win32.HRESULTError(int32(_hr))
 }
 
 // EnumModuleDefinitions wraps the raw EnumModuleDefinitions call.
-func (self IFsrmClassificationManager) EnumModuleDefinitions(moduleType storagefileserverresourcemanager.FsrmPipelineModuleType, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmClassificationManager) EnumModuleDefinitions(moduleType storagefileserverresourcemanager.FsrmPipelineModuleType, options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCollection, error) {
 	var _moduleDefinitions *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumModuleDefinitions(moduleType, options, &_moduleDefinitions)
-	return _moduleDefinitions, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_moduleDefinitions), win32.HRESULTError(int32(_hr))
 }
 
 // CreateModuleDefinition wraps the raw CreateModuleDefinition call.
-func (self IFsrmClassificationManager) CreateModuleDefinition(moduleType storagefileserverresourcemanager.FsrmPipelineModuleType) (*storagefileserverresourcemanager.IFsrmPipelineModuleDefinition, error) {
+func (self IFsrmClassificationManager) CreateModuleDefinition(moduleType storagefileserverresourcemanager.FsrmPipelineModuleType) (IFsrmPipelineModuleDefinition, error) {
 	var _moduleDefinition *storagefileserverresourcemanager.IFsrmPipelineModuleDefinition
 	_hr := self.Raw.CreateModuleDefinition(moduleType, &_moduleDefinition)
-	return _moduleDefinition, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmPipelineModuleDefinition(_moduleDefinition), win32.HRESULTError(int32(_hr))
 }
 
 // GetModuleDefinition wraps the raw GetModuleDefinition call.
-func (self IFsrmClassificationManager) GetModuleDefinition(moduleName foundation.BSTR, moduleType storagefileserverresourcemanager.FsrmPipelineModuleType) (*storagefileserverresourcemanager.IFsrmPipelineModuleDefinition, error) {
+func (self IFsrmClassificationManager) GetModuleDefinition(moduleName foundation.BSTR, moduleType storagefileserverresourcemanager.FsrmPipelineModuleType) (IFsrmPipelineModuleDefinition, error) {
 	var _moduleDefinition *storagefileserverresourcemanager.IFsrmPipelineModuleDefinition
 	_hr := self.Raw.GetModuleDefinition(moduleName, moduleType, &_moduleDefinition)
-	return _moduleDefinition, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmPipelineModuleDefinition(_moduleDefinition), win32.HRESULTError(int32(_hr))
 }
 
 // RunClassification wraps the raw RunClassification call.
@@ -558,17 +558,17 @@ func (self IFsrmClassificationManager) CancelClassification() error {
 }
 
 // EnumFileProperties wraps the raw EnumFileProperties call.
-func (self IFsrmClassificationManager) EnumFileProperties(filePath foundation.BSTR, options storagefileserverresourcemanager.FsrmGetFilePropertyOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmClassificationManager) EnumFileProperties(filePath foundation.BSTR, options storagefileserverresourcemanager.FsrmGetFilePropertyOptions) (IFsrmCollection, error) {
 	var _fileProperties *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumFileProperties(filePath, options, &_fileProperties)
-	return _fileProperties, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_fileProperties), win32.HRESULTError(int32(_hr))
 }
 
 // GetFileProperty wraps the raw GetFileProperty call.
-func (self IFsrmClassificationManager) GetFileProperty(filePath foundation.BSTR, propertyName foundation.BSTR, options storagefileserverresourcemanager.FsrmGetFilePropertyOptions) (*storagefileserverresourcemanager.IFsrmProperty, error) {
+func (self IFsrmClassificationManager) GetFileProperty(filePath foundation.BSTR, propertyName foundation.BSTR, options storagefileserverresourcemanager.FsrmGetFilePropertyOptions) (IFsrmProperty, error) {
 	var _property *storagefileserverresourcemanager.IFsrmProperty
 	_hr := self.Raw.GetFileProperty(filePath, propertyName, options, &_property)
-	return _property, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmProperty(_property), win32.HRESULTError(int32(_hr))
 }
 
 // SetFileProperty wraps the raw SetFileProperty call.
@@ -710,13 +710,13 @@ func (self IFsrmClassifierModuleImplementation) Get_LastModified() (systemvarian
 }
 
 // UseRulesAndDefinitions wraps the raw UseRulesAndDefinitions call.
-func (self IFsrmClassifierModuleImplementation) UseRulesAndDefinitions(rules *storagefileserverresourcemanager.IFsrmCollection, propertyDefinitions *storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.UseRulesAndDefinitions(rules, propertyDefinitions)))
+func (self IFsrmClassifierModuleImplementation) UseRulesAndDefinitions(rules IFsrmCollection, propertyDefinitions IFsrmCollection) error {
+	return win32.HRESULTError(int32(self.Raw.UseRulesAndDefinitions(rules.Raw, propertyDefinitions.Raw)))
 }
 
 // OnBeginFile wraps the raw OnBeginFile call.
-func (self IFsrmClassifierModuleImplementation) OnBeginFile(propertyBag *storagefileserverresourcemanager.IFsrmPropertyBag, arrayRuleIds *systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.OnBeginFile(propertyBag, arrayRuleIds)))
+func (self IFsrmClassifierModuleImplementation) OnBeginFile(propertyBag IFsrmPropertyBag, arrayRuleIds *systemcom.SAFEARRAY) error {
+	return win32.HRESULTError(int32(self.Raw.OnBeginFile(propertyBag.Raw, arrayRuleIds)))
 }
 
 // OnEndFile wraps the raw OnEndFile call.
@@ -736,10 +736,10 @@ func WrapIFsrmCollection(raw *storagefileserverresourcemanager.IFsrmCollection) 
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IFsrmCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+func (self IFsrmCollection) Get__NewEnum() (systemcomidiom.IUnknown, error) {
 	var _unknown *systemcom.IUnknown
 	_hr := self.Raw.Get__NewEnum(&_unknown)
-	return _unknown, win32.HRESULTError(int32(_hr))
+	return systemcomidiom.WrapIUnknown(_unknown), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
@@ -787,10 +787,10 @@ func WrapIFsrmCommittableCollection(raw *storagefileserverresourcemanager.IFsrmC
 }
 
 // Commit wraps the raw Commit call.
-func (self IFsrmCommittableCollection) Commit(options storagefileserverresourcemanager.FsrmCommitOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmCommittableCollection) Commit(options storagefileserverresourcemanager.FsrmCommitOptions) (IFsrmCollection, error) {
 	var _results *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.Commit(options, &_results)
-	return _results, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_results), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmDerivedObjectsResult is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmDerivedObjectsResult with error-returning methods.
@@ -805,17 +805,17 @@ func WrapIFsrmDerivedObjectsResult(raw *storagefileserverresourcemanager.IFsrmDe
 }
 
 // Get_DerivedObjects wraps the raw Get_DerivedObjects call.
-func (self IFsrmDerivedObjectsResult) Get_DerivedObjects() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmDerivedObjectsResult) Get_DerivedObjects() (IFsrmCollection, error) {
 	var _derivedObjects *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.Get_DerivedObjects(&_derivedObjects)
-	return _derivedObjects, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_derivedObjects), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Results wraps the raw Get_Results call.
-func (self IFsrmDerivedObjectsResult) Get_Results() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmDerivedObjectsResult) Get_Results() (IFsrmCollection, error) {
 	var _results *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.Get_Results(&_results)
-	return _results, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_results), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmExportImport is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmExportImport with error-returning methods.
@@ -835,10 +835,10 @@ func (self IFsrmExportImport) ExportFileGroups(filePath foundation.BSTR, fileGro
 }
 
 // ImportFileGroups wraps the raw ImportFileGroups call.
-func (self IFsrmExportImport) ImportFileGroups(filePath foundation.BSTR, fileGroupNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmExportImport) ImportFileGroups(filePath foundation.BSTR, fileGroupNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (IFsrmCommittableCollection, error) {
 	var _fileGroups *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.ImportFileGroups(filePath, fileGroupNamesSafeArray, remoteHost, &_fileGroups)
-	return _fileGroups, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_fileGroups), win32.HRESULTError(int32(_hr))
 }
 
 // ExportFileScreenTemplates wraps the raw ExportFileScreenTemplates call.
@@ -847,10 +847,10 @@ func (self IFsrmExportImport) ExportFileScreenTemplates(filePath foundation.BSTR
 }
 
 // ImportFileScreenTemplates wraps the raw ImportFileScreenTemplates call.
-func (self IFsrmExportImport) ImportFileScreenTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmExportImport) ImportFileScreenTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (IFsrmCommittableCollection, error) {
 	var _templates *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.ImportFileScreenTemplates(filePath, templateNamesSafeArray, remoteHost, &_templates)
-	return _templates, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_templates), win32.HRESULTError(int32(_hr))
 }
 
 // ExportQuotaTemplates wraps the raw ExportQuotaTemplates call.
@@ -859,10 +859,10 @@ func (self IFsrmExportImport) ExportQuotaTemplates(filePath foundation.BSTR, tem
 }
 
 // ImportQuotaTemplates wraps the raw ImportQuotaTemplates call.
-func (self IFsrmExportImport) ImportQuotaTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmExportImport) ImportQuotaTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (IFsrmCommittableCollection, error) {
 	var _templates *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.ImportQuotaTemplates(filePath, templateNamesSafeArray, remoteHost, &_templates)
-	return _templates, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_templates), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileCondition is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileCondition with error-returning methods.
@@ -978,27 +978,27 @@ func (self IFsrmFileGroup) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_Members wraps the raw Get_Members call.
-func (self IFsrmFileGroup) Get_Members() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+func (self IFsrmFileGroup) Get_Members() (IFsrmMutableCollection, error) {
 	var _members *storagefileserverresourcemanager.IFsrmMutableCollection
 	_hr := self.Raw.Get_Members(&_members)
-	return _members, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmMutableCollection(_members), win32.HRESULTError(int32(_hr))
 }
 
 // Put_Members wraps the raw Put_Members call.
-func (self IFsrmFileGroup) Put_Members(members *storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Put_Members(members)))
+func (self IFsrmFileGroup) Put_Members(members IFsrmMutableCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Put_Members(members.Raw)))
 }
 
 // Get_NonMembers wraps the raw Get_NonMembers call.
-func (self IFsrmFileGroup) Get_NonMembers() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+func (self IFsrmFileGroup) Get_NonMembers() (IFsrmMutableCollection, error) {
 	var _nonMembers *storagefileserverresourcemanager.IFsrmMutableCollection
 	_hr := self.Raw.Get_NonMembers(&_nonMembers)
-	return _nonMembers, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmMutableCollection(_nonMembers), win32.HRESULTError(int32(_hr))
 }
 
 // Put_NonMembers wraps the raw Put_NonMembers call.
-func (self IFsrmFileGroup) Put_NonMembers(nonMembers *storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Put_NonMembers(nonMembers)))
+func (self IFsrmFileGroup) Put_NonMembers(nonMembers IFsrmMutableCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Put_NonMembers(nonMembers.Raw)))
 }
 
 // IFsrmFileGroupImported is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileGroupImported with error-returning methods.
@@ -1036,24 +1036,24 @@ func WrapIFsrmFileGroupManager(raw *storagefileserverresourcemanager.IFsrmFileGr
 }
 
 // CreateFileGroup wraps the raw CreateFileGroup call.
-func (self IFsrmFileGroupManager) CreateFileGroup() (*storagefileserverresourcemanager.IFsrmFileGroup, error) {
+func (self IFsrmFileGroupManager) CreateFileGroup() (IFsrmFileGroup, error) {
 	var _fileGroup *storagefileserverresourcemanager.IFsrmFileGroup
 	_hr := self.Raw.CreateFileGroup(&_fileGroup)
-	return _fileGroup, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileGroup(_fileGroup), win32.HRESULTError(int32(_hr))
 }
 
 // GetFileGroup wraps the raw GetFileGroup call.
-func (self IFsrmFileGroupManager) GetFileGroup(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileGroup, error) {
+func (self IFsrmFileGroupManager) GetFileGroup(name foundation.BSTR) (IFsrmFileGroup, error) {
 	var _fileGroup *storagefileserverresourcemanager.IFsrmFileGroup
 	_hr := self.Raw.GetFileGroup(name, &_fileGroup)
-	return _fileGroup, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileGroup(_fileGroup), win32.HRESULTError(int32(_hr))
 }
 
 // EnumFileGroups wraps the raw EnumFileGroups call.
-func (self IFsrmFileGroupManager) EnumFileGroups(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmFileGroupManager) EnumFileGroups(options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCommittableCollection, error) {
 	var _fileGroups *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.EnumFileGroups(options, &_fileGroups)
-	return _fileGroups, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_fileGroups), win32.HRESULTError(int32(_hr))
 }
 
 // ExportFileGroups wraps the raw ExportFileGroups call.
@@ -1064,10 +1064,10 @@ func (self IFsrmFileGroupManager) ExportFileGroups(fileGroupNamesArray *systemva
 }
 
 // ImportFileGroups wraps the raw ImportFileGroups call.
-func (self IFsrmFileGroupManager) ImportFileGroups(serializedFileGroups foundation.BSTR, fileGroupNamesArray *systemvariant.VARIANT) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmFileGroupManager) ImportFileGroups(serializedFileGroups foundation.BSTR, fileGroupNamesArray *systemvariant.VARIANT) (IFsrmCommittableCollection, error) {
 	var _fileGroups *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.ImportFileGroups(serializedFileGroups, fileGroupNamesArray, &_fileGroups)
-	return _fileGroups, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_fileGroups), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileManagementJob is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileManagementJob with error-returning methods.
@@ -1142,10 +1142,10 @@ func (self IFsrmFileManagementJob) Put_ExpirationDirectory(expirationDirectory f
 }
 
 // Get_CustomAction wraps the raw Get_CustomAction call.
-func (self IFsrmFileManagementJob) Get_CustomAction() (*storagefileserverresourcemanager.IFsrmActionCommand, error) {
+func (self IFsrmFileManagementJob) Get_CustomAction() (IFsrmActionCommand, error) {
 	var _action *storagefileserverresourcemanager.IFsrmActionCommand
 	_hr := self.Raw.Get_CustomAction(&_action)
-	return _action, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmActionCommand(_action), win32.HRESULTError(int32(_hr))
 }
 
 // Get_Notifications wraps the raw Get_Notifications call.
@@ -1240,10 +1240,10 @@ func (self IFsrmFileManagementJob) Put_DaysSinceFileLastModified(daysSinceModify
 }
 
 // Get_PropertyConditions wraps the raw Get_PropertyConditions call.
-func (self IFsrmFileManagementJob) Get_PropertyConditions() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmFileManagementJob) Get_PropertyConditions() (IFsrmCollection, error) {
 	var _propertyConditions *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.Get_PropertyConditions(&_propertyConditions)
-	return _propertyConditions, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_propertyConditions), win32.HRESULTError(int32(_hr))
 }
 
 // Get_FromDate wraps the raw Get_FromDate call.
@@ -1350,31 +1350,31 @@ func (self IFsrmFileManagementJob) ModifyNotification(days int32, newDays int32)
 }
 
 // CreateNotificationAction wraps the raw CreateNotificationAction call.
-func (self IFsrmFileManagementJob) CreateNotificationAction(days int32, actionType storagefileserverresourcemanager.FsrmActionType) (*storagefileserverresourcemanager.IFsrmAction, error) {
+func (self IFsrmFileManagementJob) CreateNotificationAction(days int32, actionType storagefileserverresourcemanager.FsrmActionType) (IFsrmAction, error) {
 	var _action *storagefileserverresourcemanager.IFsrmAction
 	_hr := self.Raw.CreateNotificationAction(days, actionType, &_action)
-	return _action, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmAction(_action), win32.HRESULTError(int32(_hr))
 }
 
 // EnumNotificationActions wraps the raw EnumNotificationActions call.
-func (self IFsrmFileManagementJob) EnumNotificationActions(days int32) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmFileManagementJob) EnumNotificationActions(days int32) (IFsrmCollection, error) {
 	var _actions *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumNotificationActions(days, &_actions)
-	return _actions, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_actions), win32.HRESULTError(int32(_hr))
 }
 
 // CreatePropertyCondition wraps the raw CreatePropertyCondition call.
-func (self IFsrmFileManagementJob) CreatePropertyCondition(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmPropertyCondition, error) {
+func (self IFsrmFileManagementJob) CreatePropertyCondition(name foundation.BSTR) (IFsrmPropertyCondition, error) {
 	var _propertyCondition *storagefileserverresourcemanager.IFsrmPropertyCondition
 	_hr := self.Raw.CreatePropertyCondition(name, &_propertyCondition)
-	return _propertyCondition, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmPropertyCondition(_propertyCondition), win32.HRESULTError(int32(_hr))
 }
 
 // CreateCustomAction wraps the raw CreateCustomAction call.
-func (self IFsrmFileManagementJob) CreateCustomAction() (*storagefileserverresourcemanager.IFsrmActionCommand, error) {
+func (self IFsrmFileManagementJob) CreateCustomAction() (IFsrmActionCommand, error) {
 	var _customAction *storagefileserverresourcemanager.IFsrmActionCommand
 	_hr := self.Raw.CreateCustomAction(&_customAction)
-	return _customAction, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmActionCommand(_customAction), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileManagementJobManager is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileManagementJobManager with error-returning methods.
@@ -1403,24 +1403,24 @@ func (self IFsrmFileManagementJobManager) Get_ActionVariableDescriptions() (*sys
 }
 
 // EnumFileManagementJobs wraps the raw EnumFileManagementJobs call.
-func (self IFsrmFileManagementJobManager) EnumFileManagementJobs(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmFileManagementJobManager) EnumFileManagementJobs(options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCollection, error) {
 	var _fileManagementJobs *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumFileManagementJobs(options, &_fileManagementJobs)
-	return _fileManagementJobs, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_fileManagementJobs), win32.HRESULTError(int32(_hr))
 }
 
 // CreateFileManagementJob wraps the raw CreateFileManagementJob call.
-func (self IFsrmFileManagementJobManager) CreateFileManagementJob() (*storagefileserverresourcemanager.IFsrmFileManagementJob, error) {
+func (self IFsrmFileManagementJobManager) CreateFileManagementJob() (IFsrmFileManagementJob, error) {
 	var _fileManagementJob *storagefileserverresourcemanager.IFsrmFileManagementJob
 	_hr := self.Raw.CreateFileManagementJob(&_fileManagementJob)
-	return _fileManagementJob, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileManagementJob(_fileManagementJob), win32.HRESULTError(int32(_hr))
 }
 
 // GetFileManagementJob wraps the raw GetFileManagementJob call.
-func (self IFsrmFileManagementJobManager) GetFileManagementJob(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileManagementJob, error) {
+func (self IFsrmFileManagementJobManager) GetFileManagementJob(name foundation.BSTR) (IFsrmFileManagementJob, error) {
 	var _fileManagementJob *storagefileserverresourcemanager.IFsrmFileManagementJob
 	_hr := self.Raw.GetFileManagementJob(name, &_fileManagementJob)
-	return _fileManagementJob, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileManagementJob(_fileManagementJob), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileScreen is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreen with error-returning methods.
@@ -1486,15 +1486,15 @@ func WrapIFsrmFileScreenBase(raw *storagefileserverresourcemanager.IFsrmFileScre
 }
 
 // Get_BlockedFileGroups wraps the raw Get_BlockedFileGroups call.
-func (self IFsrmFileScreenBase) Get_BlockedFileGroups() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+func (self IFsrmFileScreenBase) Get_BlockedFileGroups() (IFsrmMutableCollection, error) {
 	var _blockList *storagefileserverresourcemanager.IFsrmMutableCollection
 	_hr := self.Raw.Get_BlockedFileGroups(&_blockList)
-	return _blockList, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmMutableCollection(_blockList), win32.HRESULTError(int32(_hr))
 }
 
 // Put_BlockedFileGroups wraps the raw Put_BlockedFileGroups call.
-func (self IFsrmFileScreenBase) Put_BlockedFileGroups(blockList *storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Put_BlockedFileGroups(blockList)))
+func (self IFsrmFileScreenBase) Put_BlockedFileGroups(blockList IFsrmMutableCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Put_BlockedFileGroups(blockList.Raw)))
 }
 
 // Get_FileScreenFlags wraps the raw Get_FileScreenFlags call.
@@ -1510,17 +1510,17 @@ func (self IFsrmFileScreenBase) Put_FileScreenFlags(fileScreenFlags int32) error
 }
 
 // CreateAction wraps the raw CreateAction call.
-func (self IFsrmFileScreenBase) CreateAction(actionType storagefileserverresourcemanager.FsrmActionType) (*storagefileserverresourcemanager.IFsrmAction, error) {
+func (self IFsrmFileScreenBase) CreateAction(actionType storagefileserverresourcemanager.FsrmActionType) (IFsrmAction, error) {
 	var _action *storagefileserverresourcemanager.IFsrmAction
 	_hr := self.Raw.CreateAction(actionType, &_action)
-	return _action, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmAction(_action), win32.HRESULTError(int32(_hr))
 }
 
 // EnumActions wraps the raw EnumActions call.
-func (self IFsrmFileScreenBase) EnumActions() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmFileScreenBase) EnumActions() (IFsrmCollection, error) {
 	var _actions *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumActions(&_actions)
-	return _actions, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_actions), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileScreenException is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreenException with error-returning methods.
@@ -1542,15 +1542,15 @@ func (self IFsrmFileScreenException) Get_Path() (foundation.BSTR, error) {
 }
 
 // Get_AllowedFileGroups wraps the raw Get_AllowedFileGroups call.
-func (self IFsrmFileScreenException) Get_AllowedFileGroups() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+func (self IFsrmFileScreenException) Get_AllowedFileGroups() (IFsrmMutableCollection, error) {
 	var _allowList *storagefileserverresourcemanager.IFsrmMutableCollection
 	_hr := self.Raw.Get_AllowedFileGroups(&_allowList)
-	return _allowList, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmMutableCollection(_allowList), win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowedFileGroups wraps the raw Put_AllowedFileGroups call.
-func (self IFsrmFileScreenException) Put_AllowedFileGroups(allowList *storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Put_AllowedFileGroups(allowList)))
+func (self IFsrmFileScreenException) Put_AllowedFileGroups(allowList IFsrmMutableCollection) error {
+	return win32.HRESULTError(int32(self.Raw.Put_AllowedFileGroups(allowList.Raw)))
 }
 
 // IFsrmFileScreenManager is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreenManager with error-returning methods.
@@ -1579,52 +1579,52 @@ func (self IFsrmFileScreenManager) Get_ActionVariableDescriptions() (*systemcom.
 }
 
 // CreateFileScreen wraps the raw CreateFileScreen call.
-func (self IFsrmFileScreenManager) CreateFileScreen(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreen, error) {
+func (self IFsrmFileScreenManager) CreateFileScreen(path foundation.BSTR) (IFsrmFileScreen, error) {
 	var _fileScreen *storagefileserverresourcemanager.IFsrmFileScreen
 	_hr := self.Raw.CreateFileScreen(path, &_fileScreen)
-	return _fileScreen, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileScreen(_fileScreen), win32.HRESULTError(int32(_hr))
 }
 
 // GetFileScreen wraps the raw GetFileScreen call.
-func (self IFsrmFileScreenManager) GetFileScreen(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreen, error) {
+func (self IFsrmFileScreenManager) GetFileScreen(path foundation.BSTR) (IFsrmFileScreen, error) {
 	var _fileScreen *storagefileserverresourcemanager.IFsrmFileScreen
 	_hr := self.Raw.GetFileScreen(path, &_fileScreen)
-	return _fileScreen, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileScreen(_fileScreen), win32.HRESULTError(int32(_hr))
 }
 
 // EnumFileScreens wraps the raw EnumFileScreens call.
-func (self IFsrmFileScreenManager) EnumFileScreens(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmFileScreenManager) EnumFileScreens(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCommittableCollection, error) {
 	var _fileScreens *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.EnumFileScreens(path, options, &_fileScreens)
-	return _fileScreens, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_fileScreens), win32.HRESULTError(int32(_hr))
 }
 
 // CreateFileScreenException wraps the raw CreateFileScreenException call.
-func (self IFsrmFileScreenManager) CreateFileScreenException(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreenException, error) {
+func (self IFsrmFileScreenManager) CreateFileScreenException(path foundation.BSTR) (IFsrmFileScreenException, error) {
 	var _fileScreenException *storagefileserverresourcemanager.IFsrmFileScreenException
 	_hr := self.Raw.CreateFileScreenException(path, &_fileScreenException)
-	return _fileScreenException, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileScreenException(_fileScreenException), win32.HRESULTError(int32(_hr))
 }
 
 // GetFileScreenException wraps the raw GetFileScreenException call.
-func (self IFsrmFileScreenManager) GetFileScreenException(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreenException, error) {
+func (self IFsrmFileScreenManager) GetFileScreenException(path foundation.BSTR) (IFsrmFileScreenException, error) {
 	var _fileScreenException *storagefileserverresourcemanager.IFsrmFileScreenException
 	_hr := self.Raw.GetFileScreenException(path, &_fileScreenException)
-	return _fileScreenException, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileScreenException(_fileScreenException), win32.HRESULTError(int32(_hr))
 }
 
 // EnumFileScreenExceptions wraps the raw EnumFileScreenExceptions call.
-func (self IFsrmFileScreenManager) EnumFileScreenExceptions(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmFileScreenManager) EnumFileScreenExceptions(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCommittableCollection, error) {
 	var _fileScreenExceptions *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.EnumFileScreenExceptions(path, options, &_fileScreenExceptions)
-	return _fileScreenExceptions, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_fileScreenExceptions), win32.HRESULTError(int32(_hr))
 }
 
 // CreateFileScreenCollection wraps the raw CreateFileScreenCollection call.
-func (self IFsrmFileScreenManager) CreateFileScreenCollection() (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmFileScreenManager) CreateFileScreenCollection() (IFsrmCommittableCollection, error) {
 	var _collection *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.CreateFileScreenCollection(&_collection)
-	return _collection, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_collection), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileScreenTemplate is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreenTemplate with error-returning methods.
@@ -1656,10 +1656,10 @@ func (self IFsrmFileScreenTemplate) CopyTemplate(fileScreenTemplateName foundati
 }
 
 // CommitAndUpdateDerived wraps the raw CommitAndUpdateDerived call.
-func (self IFsrmFileScreenTemplate) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (*storagefileserverresourcemanager.IFsrmDerivedObjectsResult, error) {
+func (self IFsrmFileScreenTemplate) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (IFsrmDerivedObjectsResult, error) {
 	var _derivedObjectsResult *storagefileserverresourcemanager.IFsrmDerivedObjectsResult
 	_hr := self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, &_derivedObjectsResult)
-	return _derivedObjectsResult, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmDerivedObjectsResult(_derivedObjectsResult), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileScreenTemplateImported is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreenTemplateImported with error-returning methods.
@@ -1697,24 +1697,24 @@ func WrapIFsrmFileScreenTemplateManager(raw *storagefileserverresourcemanager.IF
 }
 
 // CreateTemplate wraps the raw CreateTemplate call.
-func (self IFsrmFileScreenTemplateManager) CreateTemplate() (*storagefileserverresourcemanager.IFsrmFileScreenTemplate, error) {
+func (self IFsrmFileScreenTemplateManager) CreateTemplate() (IFsrmFileScreenTemplate, error) {
 	var _fileScreenTemplate *storagefileserverresourcemanager.IFsrmFileScreenTemplate
 	_hr := self.Raw.CreateTemplate(&_fileScreenTemplate)
-	return _fileScreenTemplate, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileScreenTemplate(_fileScreenTemplate), win32.HRESULTError(int32(_hr))
 }
 
 // GetTemplate wraps the raw GetTemplate call.
-func (self IFsrmFileScreenTemplateManager) GetTemplate(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreenTemplate, error) {
+func (self IFsrmFileScreenTemplateManager) GetTemplate(name foundation.BSTR) (IFsrmFileScreenTemplate, error) {
 	var _fileScreenTemplate *storagefileserverresourcemanager.IFsrmFileScreenTemplate
 	_hr := self.Raw.GetTemplate(name, &_fileScreenTemplate)
-	return _fileScreenTemplate, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmFileScreenTemplate(_fileScreenTemplate), win32.HRESULTError(int32(_hr))
 }
 
 // EnumTemplates wraps the raw EnumTemplates call.
-func (self IFsrmFileScreenTemplateManager) EnumTemplates(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmFileScreenTemplateManager) EnumTemplates(options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCommittableCollection, error) {
 	var _fileScreenTemplates *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.EnumTemplates(options, &_fileScreenTemplates)
-	return _fileScreenTemplates, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_fileScreenTemplates), win32.HRESULTError(int32(_hr))
 }
 
 // ExportTemplates wraps the raw ExportTemplates call.
@@ -1725,10 +1725,10 @@ func (self IFsrmFileScreenTemplateManager) ExportTemplates(fileScreenTemplateNam
 }
 
 // ImportTemplates wraps the raw ImportTemplates call.
-func (self IFsrmFileScreenTemplateManager) ImportTemplates(serializedFileScreenTemplates foundation.BSTR, fileScreenTemplateNamesArray *systemvariant.VARIANT) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmFileScreenTemplateManager) ImportTemplates(serializedFileScreenTemplates foundation.BSTR, fileScreenTemplateNamesArray *systemvariant.VARIANT) (IFsrmCommittableCollection, error) {
 	var _fileScreenTemplates *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.ImportTemplates(serializedFileScreenTemplates, fileScreenTemplateNamesArray, &_fileScreenTemplates)
-	return _fileScreenTemplates, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_fileScreenTemplates), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmMutableCollection is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmMutableCollection with error-returning methods.
@@ -1748,10 +1748,10 @@ func (self IFsrmMutableCollection) Remove(index int32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IFsrmMutableCollection) Clone() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+func (self IFsrmMutableCollection) Clone() (IFsrmMutableCollection, error) {
 	var _collection *storagefileserverresourcemanager.IFsrmMutableCollection
 	_hr := self.Raw.Clone(&_collection)
-	return _collection, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmMutableCollection(_collection), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmObject is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmObject with error-returning methods.
@@ -1824,10 +1824,10 @@ func WrapIFsrmPipelineModuleConnector(raw *storagefileserverresourcemanager.IFsr
 }
 
 // Get_ModuleImplementation wraps the raw Get_ModuleImplementation call.
-func (self IFsrmPipelineModuleConnector) Get_ModuleImplementation() (*storagefileserverresourcemanager.IFsrmPipelineModuleImplementation, error) {
+func (self IFsrmPipelineModuleConnector) Get_ModuleImplementation() (IFsrmPipelineModuleImplementation, error) {
 	var _pipelineModuleImplementation *storagefileserverresourcemanager.IFsrmPipelineModuleImplementation
 	_hr := self.Raw.Get_ModuleImplementation(&_pipelineModuleImplementation)
-	return _pipelineModuleImplementation, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmPipelineModuleImplementation(_pipelineModuleImplementation), win32.HRESULTError(int32(_hr))
 }
 
 // Get_ModuleName wraps the raw Get_ModuleName call.
@@ -1852,8 +1852,8 @@ func (self IFsrmPipelineModuleConnector) Get_HostingProcessPid() (int32, error) 
 }
 
 // Bind wraps the raw Bind call.
-func (self IFsrmPipelineModuleConnector) Bind(moduleDefinition *storagefileserverresourcemanager.IFsrmPipelineModuleDefinition, moduleImplementation *storagefileserverresourcemanager.IFsrmPipelineModuleImplementation) error {
-	return win32.HRESULTError(int32(self.Raw.Bind(moduleDefinition, moduleImplementation)))
+func (self IFsrmPipelineModuleConnector) Bind(moduleDefinition IFsrmPipelineModuleDefinition, moduleImplementation IFsrmPipelineModuleImplementation) error {
+	return win32.HRESULTError(int32(self.Raw.Bind(moduleDefinition.Raw, moduleImplementation.Raw)))
 }
 
 // IFsrmPipelineModuleDefinition is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmPipelineModuleDefinition with error-returning methods.
@@ -1994,8 +1994,8 @@ func WrapIFsrmPipelineModuleImplementation(raw *storagefileserverresourcemanager
 }
 
 // OnLoad wraps the raw OnLoad call.
-func (self IFsrmPipelineModuleImplementation) OnLoad(moduleDefinition *storagefileserverresourcemanager.IFsrmPipelineModuleDefinition, moduleConnector **storagefileserverresourcemanager.IFsrmPipelineModuleConnector) error {
-	return win32.HRESULTError(int32(self.Raw.OnLoad(moduleDefinition, moduleConnector)))
+func (self IFsrmPipelineModuleImplementation) OnLoad(moduleDefinition IFsrmPipelineModuleDefinition, moduleConnector **storagefileserverresourcemanager.IFsrmPipelineModuleConnector) error {
+	return win32.HRESULTError(int32(self.Raw.OnLoad(moduleDefinition.Raw, moduleConnector)))
 }
 
 // OnUnload wraps the raw OnUnload call.
@@ -2173,10 +2173,10 @@ func (self IFsrmPropertyBag) Get_PropertyBagFlags() (uint32, error) {
 }
 
 // GetFileProperty wraps the raw GetFileProperty call.
-func (self IFsrmPropertyBag) GetFileProperty(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmProperty, error) {
+func (self IFsrmPropertyBag) GetFileProperty(name foundation.BSTR) (IFsrmProperty, error) {
 	var _fileProperty *storagefileserverresourcemanager.IFsrmProperty
 	_hr := self.Raw.GetFileProperty(name, &_fileProperty)
-	return _fileProperty, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmProperty(_fileProperty), win32.HRESULTError(int32(_hr))
 }
 
 // SetFileProperty wraps the raw SetFileProperty call.
@@ -2215,10 +2215,10 @@ func (self IFsrmPropertyBag2) GetFieldValue(field storagefileserverresourcemanag
 }
 
 // GetUntrustedInFileProperties wraps the raw GetUntrustedInFileProperties call.
-func (self IFsrmPropertyBag2) GetUntrustedInFileProperties() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmPropertyBag2) GetUntrustedInFileProperties() (IFsrmCollection, error) {
 	var _props *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.GetUntrustedInFileProperties(&_props)
-	return _props, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_props), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmPropertyCondition is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmPropertyCondition with error-returning methods.
@@ -2382,10 +2382,10 @@ func (self IFsrmPropertyDefinition2) Get_AppliesTo() (int32, error) {
 }
 
 // Get_ValueDefinitions wraps the raw Get_ValueDefinitions call.
-func (self IFsrmPropertyDefinition2) Get_ValueDefinitions() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmPropertyDefinition2) Get_ValueDefinitions() (IFsrmCollection, error) {
 	var _valueDefinitions *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.Get_ValueDefinitions(&_valueDefinitions)
-	return _valueDefinitions, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_valueDefinitions), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmPropertyDefinitionValue is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmPropertyDefinitionValue with error-returning methods.
@@ -2522,17 +2522,17 @@ func (self IFsrmQuotaBase) ModifyThreshold(threshold int32, newThreshold int32) 
 }
 
 // CreateThresholdAction wraps the raw CreateThresholdAction call.
-func (self IFsrmQuotaBase) CreateThresholdAction(threshold int32, actionType storagefileserverresourcemanager.FsrmActionType) (*storagefileserverresourcemanager.IFsrmAction, error) {
+func (self IFsrmQuotaBase) CreateThresholdAction(threshold int32, actionType storagefileserverresourcemanager.FsrmActionType) (IFsrmAction, error) {
 	var _action *storagefileserverresourcemanager.IFsrmAction
 	_hr := self.Raw.CreateThresholdAction(threshold, actionType, &_action)
-	return _action, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmAction(_action), win32.HRESULTError(int32(_hr))
 }
 
 // EnumThresholdActions wraps the raw EnumThresholdActions call.
-func (self IFsrmQuotaBase) EnumThresholdActions(threshold int32) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmQuotaBase) EnumThresholdActions(threshold int32) (IFsrmCollection, error) {
 	var _actions *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumThresholdActions(threshold, &_actions)
-	return _actions, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_actions), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmQuotaManager is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmQuotaManager with error-returning methods.
@@ -2561,59 +2561,59 @@ func (self IFsrmQuotaManager) Get_ActionVariableDescriptions() (*systemcom.SAFEA
 }
 
 // CreateQuota wraps the raw CreateQuota call.
-func (self IFsrmQuotaManager) CreateQuota(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmQuota, error) {
+func (self IFsrmQuotaManager) CreateQuota(path foundation.BSTR) (IFsrmQuota, error) {
 	var _quota *storagefileserverresourcemanager.IFsrmQuota
 	_hr := self.Raw.CreateQuota(path, &_quota)
-	return _quota, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmQuota(_quota), win32.HRESULTError(int32(_hr))
 }
 
 // CreateAutoApplyQuota wraps the raw CreateAutoApplyQuota call.
-func (self IFsrmQuotaManager) CreateAutoApplyQuota(quotaTemplateName foundation.BSTR, path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmAutoApplyQuota, error) {
+func (self IFsrmQuotaManager) CreateAutoApplyQuota(quotaTemplateName foundation.BSTR, path foundation.BSTR) (IFsrmAutoApplyQuota, error) {
 	var _quota *storagefileserverresourcemanager.IFsrmAutoApplyQuota
 	_hr := self.Raw.CreateAutoApplyQuota(quotaTemplateName, path, &_quota)
-	return _quota, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmAutoApplyQuota(_quota), win32.HRESULTError(int32(_hr))
 }
 
 // GetQuota wraps the raw GetQuota call.
-func (self IFsrmQuotaManager) GetQuota(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmQuota, error) {
+func (self IFsrmQuotaManager) GetQuota(path foundation.BSTR) (IFsrmQuota, error) {
 	var _quota *storagefileserverresourcemanager.IFsrmQuota
 	_hr := self.Raw.GetQuota(path, &_quota)
-	return _quota, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmQuota(_quota), win32.HRESULTError(int32(_hr))
 }
 
 // GetAutoApplyQuota wraps the raw GetAutoApplyQuota call.
-func (self IFsrmQuotaManager) GetAutoApplyQuota(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmAutoApplyQuota, error) {
+func (self IFsrmQuotaManager) GetAutoApplyQuota(path foundation.BSTR) (IFsrmAutoApplyQuota, error) {
 	var _quota *storagefileserverresourcemanager.IFsrmAutoApplyQuota
 	_hr := self.Raw.GetAutoApplyQuota(path, &_quota)
-	return _quota, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmAutoApplyQuota(_quota), win32.HRESULTError(int32(_hr))
 }
 
 // GetRestrictiveQuota wraps the raw GetRestrictiveQuota call.
-func (self IFsrmQuotaManager) GetRestrictiveQuota(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmQuota, error) {
+func (self IFsrmQuotaManager) GetRestrictiveQuota(path foundation.BSTR) (IFsrmQuota, error) {
 	var _quota *storagefileserverresourcemanager.IFsrmQuota
 	_hr := self.Raw.GetRestrictiveQuota(path, &_quota)
-	return _quota, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmQuota(_quota), win32.HRESULTError(int32(_hr))
 }
 
 // EnumQuotas wraps the raw EnumQuotas call.
-func (self IFsrmQuotaManager) EnumQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmQuotaManager) EnumQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCommittableCollection, error) {
 	var _quotas *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.EnumQuotas(path, options, &_quotas)
-	return _quotas, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_quotas), win32.HRESULTError(int32(_hr))
 }
 
 // EnumAutoApplyQuotas wraps the raw EnumAutoApplyQuotas call.
-func (self IFsrmQuotaManager) EnumAutoApplyQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmQuotaManager) EnumAutoApplyQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCommittableCollection, error) {
 	var _quotas *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.EnumAutoApplyQuotas(path, options, &_quotas)
-	return _quotas, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_quotas), win32.HRESULTError(int32(_hr))
 }
 
 // EnumEffectiveQuotas wraps the raw EnumEffectiveQuotas call.
-func (self IFsrmQuotaManager) EnumEffectiveQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmQuotaManager) EnumEffectiveQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCommittableCollection, error) {
 	var _quotas *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.EnumEffectiveQuotas(path, options, &_quotas)
-	return _quotas, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_quotas), win32.HRESULTError(int32(_hr))
 }
 
 // Scan wraps the raw Scan call.
@@ -2622,10 +2622,10 @@ func (self IFsrmQuotaManager) Scan(strPath foundation.BSTR) error {
 }
 
 // CreateQuotaCollection wraps the raw CreateQuotaCollection call.
-func (self IFsrmQuotaManager) CreateQuotaCollection() (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmQuotaManager) CreateQuotaCollection() (IFsrmCommittableCollection, error) {
 	var _collection *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.CreateQuotaCollection(&_collection)
-	return _collection, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_collection), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmQuotaManagerEx is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmQuotaManagerEx with error-returning methods.
@@ -2726,10 +2726,10 @@ func (self IFsrmQuotaTemplate) CopyTemplate(quotaTemplateName foundation.BSTR) e
 }
 
 // CommitAndUpdateDerived wraps the raw CommitAndUpdateDerived call.
-func (self IFsrmQuotaTemplate) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (*storagefileserverresourcemanager.IFsrmDerivedObjectsResult, error) {
+func (self IFsrmQuotaTemplate) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (IFsrmDerivedObjectsResult, error) {
 	var _derivedObjectsResult *storagefileserverresourcemanager.IFsrmDerivedObjectsResult
 	_hr := self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, &_derivedObjectsResult)
-	return _derivedObjectsResult, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmDerivedObjectsResult(_derivedObjectsResult), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmQuotaTemplateImported is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmQuotaTemplateImported with error-returning methods.
@@ -2767,24 +2767,24 @@ func WrapIFsrmQuotaTemplateManager(raw *storagefileserverresourcemanager.IFsrmQu
 }
 
 // CreateTemplate wraps the raw CreateTemplate call.
-func (self IFsrmQuotaTemplateManager) CreateTemplate() (*storagefileserverresourcemanager.IFsrmQuotaTemplate, error) {
+func (self IFsrmQuotaTemplateManager) CreateTemplate() (IFsrmQuotaTemplate, error) {
 	var _quotaTemplate *storagefileserverresourcemanager.IFsrmQuotaTemplate
 	_hr := self.Raw.CreateTemplate(&_quotaTemplate)
-	return _quotaTemplate, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmQuotaTemplate(_quotaTemplate), win32.HRESULTError(int32(_hr))
 }
 
 // GetTemplate wraps the raw GetTemplate call.
-func (self IFsrmQuotaTemplateManager) GetTemplate(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmQuotaTemplate, error) {
+func (self IFsrmQuotaTemplateManager) GetTemplate(name foundation.BSTR) (IFsrmQuotaTemplate, error) {
 	var _quotaTemplate *storagefileserverresourcemanager.IFsrmQuotaTemplate
 	_hr := self.Raw.GetTemplate(name, &_quotaTemplate)
-	return _quotaTemplate, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmQuotaTemplate(_quotaTemplate), win32.HRESULTError(int32(_hr))
 }
 
 // EnumTemplates wraps the raw EnumTemplates call.
-func (self IFsrmQuotaTemplateManager) EnumTemplates(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmQuotaTemplateManager) EnumTemplates(options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCommittableCollection, error) {
 	var _quotaTemplates *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.EnumTemplates(options, &_quotaTemplates)
-	return _quotaTemplates, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_quotaTemplates), win32.HRESULTError(int32(_hr))
 }
 
 // ExportTemplates wraps the raw ExportTemplates call.
@@ -2795,10 +2795,10 @@ func (self IFsrmQuotaTemplateManager) ExportTemplates(quotaTemplateNamesArray *s
 }
 
 // ImportTemplates wraps the raw ImportTemplates call.
-func (self IFsrmQuotaTemplateManager) ImportTemplates(serializedQuotaTemplates foundation.BSTR, quotaTemplateNamesArray *systemvariant.VARIANT) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+func (self IFsrmQuotaTemplateManager) ImportTemplates(serializedQuotaTemplates foundation.BSTR, quotaTemplateNamesArray *systemvariant.VARIANT) (IFsrmCommittableCollection, error) {
 	var _quotaTemplates *storagefileserverresourcemanager.IFsrmCommittableCollection
 	_hr := self.Raw.ImportTemplates(serializedQuotaTemplates, quotaTemplateNamesArray, &_quotaTemplates)
-	return _quotaTemplates, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCommittableCollection(_quotaTemplates), win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmReport is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmReport with error-returning methods.
@@ -2950,17 +2950,17 @@ func (self IFsrmReportJob) Get_LastGeneratedInDirectory() (foundation.BSTR, erro
 }
 
 // EnumReports wraps the raw EnumReports call.
-func (self IFsrmReportJob) EnumReports() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmReportJob) EnumReports() (IFsrmCollection, error) {
 	var _reports *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumReports(&_reports)
-	return _reports, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_reports), win32.HRESULTError(int32(_hr))
 }
 
 // CreateReport wraps the raw CreateReport call.
-func (self IFsrmReportJob) CreateReport(reportType storagefileserverresourcemanager.FsrmReportType) (*storagefileserverresourcemanager.IFsrmReport, error) {
+func (self IFsrmReportJob) CreateReport(reportType storagefileserverresourcemanager.FsrmReportType) (IFsrmReport, error) {
 	var _report *storagefileserverresourcemanager.IFsrmReport
 	_hr := self.Raw.CreateReport(reportType, &_report)
-	return _report, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmReport(_report), win32.HRESULTError(int32(_hr))
 }
 
 // Run wraps the raw Run call.
@@ -2992,24 +2992,24 @@ func WrapIFsrmReportManager(raw *storagefileserverresourcemanager.IFsrmReportMan
 }
 
 // EnumReportJobs wraps the raw EnumReportJobs call.
-func (self IFsrmReportManager) EnumReportJobs(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+func (self IFsrmReportManager) EnumReportJobs(options storagefileserverresourcemanager.FsrmEnumOptions) (IFsrmCollection, error) {
 	var _reportJobs *storagefileserverresourcemanager.IFsrmCollection
 	_hr := self.Raw.EnumReportJobs(options, &_reportJobs)
-	return _reportJobs, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmCollection(_reportJobs), win32.HRESULTError(int32(_hr))
 }
 
 // CreateReportJob wraps the raw CreateReportJob call.
-func (self IFsrmReportManager) CreateReportJob() (*storagefileserverresourcemanager.IFsrmReportJob, error) {
+func (self IFsrmReportManager) CreateReportJob() (IFsrmReportJob, error) {
 	var _reportJob *storagefileserverresourcemanager.IFsrmReportJob
 	_hr := self.Raw.CreateReportJob(&_reportJob)
-	return _reportJob, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmReportJob(_reportJob), win32.HRESULTError(int32(_hr))
 }
 
 // GetReportJob wraps the raw GetReportJob call.
-func (self IFsrmReportManager) GetReportJob(taskName foundation.BSTR) (*storagefileserverresourcemanager.IFsrmReportJob, error) {
+func (self IFsrmReportManager) GetReportJob(taskName foundation.BSTR) (IFsrmReportJob, error) {
 	var _reportJob *storagefileserverresourcemanager.IFsrmReportJob
 	_hr := self.Raw.GetReportJob(taskName, &_reportJob)
-	return _reportJob, win32.HRESULTError(int32(_hr))
+	return WrapIFsrmReportJob(_reportJob), win32.HRESULTError(int32(_hr))
 }
 
 // GetOutputDirectory wraps the raw GetOutputDirectory call.
@@ -3308,16 +3308,16 @@ func WrapIFsrmStorageModuleImplementation(raw *storagefileserverresourcemanager.
 }
 
 // UseDefinitions wraps the raw UseDefinitions call.
-func (self IFsrmStorageModuleImplementation) UseDefinitions(propertyDefinitions *storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.UseDefinitions(propertyDefinitions)))
+func (self IFsrmStorageModuleImplementation) UseDefinitions(propertyDefinitions IFsrmCollection) error {
+	return win32.HRESULTError(int32(self.Raw.UseDefinitions(propertyDefinitions.Raw)))
 }
 
 // LoadProperties wraps the raw LoadProperties call.
-func (self IFsrmStorageModuleImplementation) LoadProperties(propertyBag *storagefileserverresourcemanager.IFsrmPropertyBag) error {
-	return win32.HRESULTError(int32(self.Raw.LoadProperties(propertyBag)))
+func (self IFsrmStorageModuleImplementation) LoadProperties(propertyBag IFsrmPropertyBag) error {
+	return win32.HRESULTError(int32(self.Raw.LoadProperties(propertyBag.Raw)))
 }
 
 // SaveProperties wraps the raw SaveProperties call.
-func (self IFsrmStorageModuleImplementation) SaveProperties(propertyBag *storagefileserverresourcemanager.IFsrmPropertyBag) error {
-	return win32.HRESULTError(int32(self.Raw.SaveProperties(propertyBag)))
+func (self IFsrmStorageModuleImplementation) SaveProperties(propertyBag IFsrmPropertyBag) error {
+	return win32.HRESULTError(int32(self.Raw.SaveProperties(propertyBag.Raw)))
 }

@@ -214,8 +214,8 @@ func (self IWiaAppErrorHandler) GetWindow(phwnd *foundation.HWND) error {
 }
 
 // ReportStatus wraps the raw ReportStatus call.
-func (self IWiaAppErrorHandler) ReportStatus(lFlags int32, pWiaItem2 *devicesimageacquisition.IWiaItem2, hrStatus foundation.HRESULT, lPercentComplete int32) error {
-	return win32.HRESULTError(int32(self.Raw.ReportStatus(lFlags, pWiaItem2, hrStatus, lPercentComplete)))
+func (self IWiaAppErrorHandler) ReportStatus(lFlags int32, pWiaItem2 IWiaItem2, hrStatus foundation.HRESULT, lPercentComplete int32) error {
+	return win32.HRESULTError(int32(self.Raw.ReportStatus(lFlags, pWiaItem2.Raw, hrStatus, lPercentComplete)))
 }
 
 // IWiaDataCallback is an idiomatic wrapper over the raw COM interface Devices.ImageAcquisition.IWiaDataCallback with error-returning methods.
@@ -246,13 +246,13 @@ func WrapIWiaDataTransfer(raw *devicesimageacquisition.IWiaDataTransfer) IWiaDat
 }
 
 // IdtGetData wraps the raw IdtGetData call.
-func (self IWiaDataTransfer) IdtGetData(pMedium *systemcom.STGMEDIUM, pIWiaDataCallback *devicesimageacquisition.IWiaDataCallback) error {
-	return win32.HRESULTError(int32(self.Raw.IdtGetData(pMedium, pIWiaDataCallback)))
+func (self IWiaDataTransfer) IdtGetData(pMedium *systemcom.STGMEDIUM, pIWiaDataCallback IWiaDataCallback) error {
+	return win32.HRESULTError(int32(self.Raw.IdtGetData(pMedium, pIWiaDataCallback.Raw)))
 }
 
 // IdtGetBandedData wraps the raw IdtGetBandedData call.
-func (self IWiaDataTransfer) IdtGetBandedData(pWiaDataTransInfo *devicesimageacquisition.WIA_DATA_TRANSFER_INFO, pIWiaDataCallback *devicesimageacquisition.IWiaDataCallback) error {
-	return win32.HRESULTError(int32(self.Raw.IdtGetBandedData(pWiaDataTransInfo, pIWiaDataCallback)))
+func (self IWiaDataTransfer) IdtGetBandedData(pWiaDataTransInfo *devicesimageacquisition.WIA_DATA_TRANSFER_INFO, pIWiaDataCallback IWiaDataCallback) error {
+	return win32.HRESULTError(int32(self.Raw.IdtGetBandedData(pWiaDataTransInfo, pIWiaDataCallback.Raw)))
 }
 
 // IdtQueryGetData wraps the raw IdtQueryGetData call.
@@ -302,8 +302,8 @@ func (self IWiaDevMgr) SelectDeviceDlgID(hwndParent foundation.HWND, lDeviceType
 }
 
 // GetImageDlg wraps the raw GetImageDlg call.
-func (self IWiaDevMgr) GetImageDlg(hwndParent foundation.HWND, lDeviceType int32, lFlags int32, lIntent int32, pItemRoot *devicesimageacquisition.IWiaItem, bstrFilename foundation.BSTR, pguidFormat *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetImageDlg(hwndParent, lDeviceType, lFlags, lIntent, pItemRoot, bstrFilename, pguidFormat)))
+func (self IWiaDevMgr) GetImageDlg(hwndParent foundation.HWND, lDeviceType int32, lFlags int32, lIntent int32, pItemRoot IWiaItem, bstrFilename foundation.BSTR, pguidFormat *win32.GUID) error {
+	return win32.HRESULTError(int32(self.Raw.GetImageDlg(hwndParent, lDeviceType, lFlags, lIntent, pItemRoot.Raw, bstrFilename, pguidFormat)))
 }
 
 // RegisterEventCallbackProgram wraps the raw RegisterEventCallbackProgram call.
@@ -312,8 +312,8 @@ func (self IWiaDevMgr) RegisterEventCallbackProgram(lFlags int32, bstrDeviceID f
 }
 
 // RegisterEventCallbackInterface wraps the raw RegisterEventCallbackInterface call.
-func (self IWiaDevMgr) RegisterEventCallbackInterface(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, pIWiaEventCallback *devicesimageacquisition.IWiaEventCallback, pEventObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterEventCallbackInterface(lFlags, bstrDeviceID, pEventGUID, pIWiaEventCallback, pEventObject)))
+func (self IWiaDevMgr) RegisterEventCallbackInterface(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, pIWiaEventCallback IWiaEventCallback, pEventObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterEventCallbackInterface(lFlags, bstrDeviceID, pEventGUID, pIWiaEventCallback.Raw, pEventObject)))
 }
 
 // RegisterEventCallbackCLSID wraps the raw RegisterEventCallbackCLSID call.
@@ -358,8 +358,8 @@ func (self IWiaDevMgr2) SelectDeviceDlgID(hwndParent foundation.HWND, lDeviceTyp
 }
 
 // RegisterEventCallbackInterface wraps the raw RegisterEventCallbackInterface call.
-func (self IWiaDevMgr2) RegisterEventCallbackInterface(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, pIWiaEventCallback *devicesimageacquisition.IWiaEventCallback, pEventObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterEventCallbackInterface(lFlags, bstrDeviceID, pEventGUID, pIWiaEventCallback, pEventObject)))
+func (self IWiaDevMgr2) RegisterEventCallbackInterface(lFlags int32, bstrDeviceID foundation.BSTR, pEventGUID *win32.GUID, pIWiaEventCallback IWiaEventCallback, pEventObject **systemcom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterEventCallbackInterface(lFlags, bstrDeviceID, pEventGUID, pIWiaEventCallback.Raw, pEventObject)))
 }
 
 // RegisterEventCallbackProgram wraps the raw RegisterEventCallbackProgram call.
@@ -409,8 +409,8 @@ func (self IWiaDrvItem) GetItemName(__MIDL__IWiaDrvItem0003 *foundation.BSTR) er
 }
 
 // AddItemToFolder wraps the raw AddItemToFolder call.
-func (self IWiaDrvItem) AddItemToFolder(__MIDL__IWiaDrvItem0004 *devicesimageacquisition.IWiaDrvItem) error {
-	return win32.HRESULTError(int32(self.Raw.AddItemToFolder(__MIDL__IWiaDrvItem0004)))
+func (self IWiaDrvItem) AddItemToFolder(__MIDL__IWiaDrvItem0004 IWiaDrvItem) error {
+	return win32.HRESULTError(int32(self.Raw.AddItemToFolder(__MIDL__IWiaDrvItem0004.Raw)))
 }
 
 // UnlinkItemTree wraps the raw UnlinkItemTree call.
@@ -465,13 +465,13 @@ func WrapIWiaErrorHandler(raw *devicesimageacquisition.IWiaErrorHandler) IWiaErr
 }
 
 // ReportStatus wraps the raw ReportStatus call.
-func (self IWiaErrorHandler) ReportStatus(lFlags int32, hwndParent foundation.HWND, pWiaItem2 *devicesimageacquisition.IWiaItem2, hrStatus foundation.HRESULT, lPercentComplete int32) error {
-	return win32.HRESULTError(int32(self.Raw.ReportStatus(lFlags, hwndParent, pWiaItem2, hrStatus, lPercentComplete)))
+func (self IWiaErrorHandler) ReportStatus(lFlags int32, hwndParent foundation.HWND, pWiaItem2 IWiaItem2, hrStatus foundation.HRESULT, lPercentComplete int32) error {
+	return win32.HRESULTError(int32(self.Raw.ReportStatus(lFlags, hwndParent, pWiaItem2.Raw, hrStatus, lPercentComplete)))
 }
 
 // GetStatusDescription wraps the raw GetStatusDescription call.
-func (self IWiaErrorHandler) GetStatusDescription(lFlags int32, pWiaItem2 *devicesimageacquisition.IWiaItem2, hrStatus foundation.HRESULT, pbstrDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetStatusDescription(lFlags, pWiaItem2, hrStatus, pbstrDescription)))
+func (self IWiaErrorHandler) GetStatusDescription(lFlags int32, pWiaItem2 IWiaItem2, hrStatus foundation.HRESULT, pbstrDescription *foundation.BSTR) error {
+	return win32.HRESULTError(int32(self.Raw.GetStatusDescription(lFlags, pWiaItem2.Raw, hrStatus, pbstrDescription)))
 }
 
 // IWiaEventCallback is an idiomatic wrapper over the raw COM interface Devices.ImageAcquisition.IWiaEventCallback with error-returning methods.
@@ -502,18 +502,18 @@ func WrapIWiaImageFilter(raw *devicesimageacquisition.IWiaImageFilter) IWiaImage
 }
 
 // InitializeFilter wraps the raw InitializeFilter call.
-func (self IWiaImageFilter) InitializeFilter(pWiaItem2 *devicesimageacquisition.IWiaItem2, pWiaTransferCallback *devicesimageacquisition.IWiaTransferCallback) error {
-	return win32.HRESULTError(int32(self.Raw.InitializeFilter(pWiaItem2, pWiaTransferCallback)))
+func (self IWiaImageFilter) InitializeFilter(pWiaItem2 IWiaItem2, pWiaTransferCallback IWiaTransferCallback) error {
+	return win32.HRESULTError(int32(self.Raw.InitializeFilter(pWiaItem2.Raw, pWiaTransferCallback.Raw)))
 }
 
 // SetNewCallback wraps the raw SetNewCallback call.
-func (self IWiaImageFilter) SetNewCallback(pWiaTransferCallback *devicesimageacquisition.IWiaTransferCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetNewCallback(pWiaTransferCallback)))
+func (self IWiaImageFilter) SetNewCallback(pWiaTransferCallback IWiaTransferCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetNewCallback(pWiaTransferCallback.Raw)))
 }
 
 // ApplyProperties wraps the raw ApplyProperties call.
-func (self IWiaImageFilter) ApplyProperties(pWiaPropertyStorage *devicesimageacquisition.IWiaPropertyStorage) error {
-	return win32.HRESULTError(int32(self.Raw.ApplyProperties(pWiaPropertyStorage)))
+func (self IWiaImageFilter) ApplyProperties(pWiaPropertyStorage IWiaPropertyStorage) error {
+	return win32.HRESULTError(int32(self.Raw.ApplyProperties(pWiaPropertyStorage.Raw)))
 }
 
 // IWiaItem is an idiomatic wrapper over the raw COM interface Devices.ImageAcquisition.IWiaItem with error-returning methods.
@@ -793,8 +793,8 @@ func WrapIWiaMiniDrv(raw *devicesimageacquisition.IWiaMiniDrv) IWiaMiniDrv {
 }
 
 // DrvInitializeWia wraps the raw DrvInitializeWia call.
-func (self IWiaMiniDrv) DrvInitializeWia(__MIDL__IWiaMiniDrv0000 *byte, __MIDL__IWiaMiniDrv0001 int32, __MIDL__IWiaMiniDrv0002 foundation.BSTR, __MIDL__IWiaMiniDrv0003 foundation.BSTR, __MIDL__IWiaMiniDrv0004 *systemcom.IUnknown, __MIDL__IWiaMiniDrv0005 *systemcom.IUnknown, __MIDL__IWiaMiniDrv0006 **devicesimageacquisition.IWiaDrvItem, __MIDL__IWiaMiniDrv0007 **systemcom.IUnknown, __MIDL__IWiaMiniDrv0008 *int32) error {
-	return win32.HRESULTError(int32(self.Raw.DrvInitializeWia(__MIDL__IWiaMiniDrv0000, __MIDL__IWiaMiniDrv0001, __MIDL__IWiaMiniDrv0002, __MIDL__IWiaMiniDrv0003, __MIDL__IWiaMiniDrv0004, __MIDL__IWiaMiniDrv0005, __MIDL__IWiaMiniDrv0006, __MIDL__IWiaMiniDrv0007, __MIDL__IWiaMiniDrv0008)))
+func (self IWiaMiniDrv) DrvInitializeWia(__MIDL__IWiaMiniDrv0000 *byte, __MIDL__IWiaMiniDrv0001 int32, __MIDL__IWiaMiniDrv0002 foundation.BSTR, __MIDL__IWiaMiniDrv0003 foundation.BSTR, __MIDL__IWiaMiniDrv0004 systemcomidiom.IUnknown, __MIDL__IWiaMiniDrv0005 systemcomidiom.IUnknown, __MIDL__IWiaMiniDrv0006 **devicesimageacquisition.IWiaDrvItem, __MIDL__IWiaMiniDrv0007 **systemcom.IUnknown, __MIDL__IWiaMiniDrv0008 *int32) error {
+	return win32.HRESULTError(int32(self.Raw.DrvInitializeWia(__MIDL__IWiaMiniDrv0000, __MIDL__IWiaMiniDrv0001, __MIDL__IWiaMiniDrv0002, __MIDL__IWiaMiniDrv0003, __MIDL__IWiaMiniDrv0004.Raw, __MIDL__IWiaMiniDrv0005.Raw, __MIDL__IWiaMiniDrv0006, __MIDL__IWiaMiniDrv0007, __MIDL__IWiaMiniDrv0008)))
 }
 
 // DrvAcquireItemData wraps the raw DrvAcquireItemData call.
@@ -942,13 +942,13 @@ func WrapIWiaPreview(raw *devicesimageacquisition.IWiaPreview) IWiaPreview {
 }
 
 // GetNewPreview wraps the raw GetNewPreview call.
-func (self IWiaPreview) GetNewPreview(lFlags int32, pWiaItem2 *devicesimageacquisition.IWiaItem2, pWiaTransferCallback *devicesimageacquisition.IWiaTransferCallback) error {
-	return win32.HRESULTError(int32(self.Raw.GetNewPreview(lFlags, pWiaItem2, pWiaTransferCallback)))
+func (self IWiaPreview) GetNewPreview(lFlags int32, pWiaItem2 IWiaItem2, pWiaTransferCallback IWiaTransferCallback) error {
+	return win32.HRESULTError(int32(self.Raw.GetNewPreview(lFlags, pWiaItem2.Raw, pWiaTransferCallback.Raw)))
 }
 
 // UpdatePreview wraps the raw UpdatePreview call.
-func (self IWiaPreview) UpdatePreview(lFlags int32, pChildWiaItem2 *devicesimageacquisition.IWiaItem2, pWiaTransferCallback *devicesimageacquisition.IWiaTransferCallback) error {
-	return win32.HRESULTError(int32(self.Raw.UpdatePreview(lFlags, pChildWiaItem2, pWiaTransferCallback)))
+func (self IWiaPreview) UpdatePreview(lFlags int32, pChildWiaItem2 IWiaItem2, pWiaTransferCallback IWiaTransferCallback) error {
+	return win32.HRESULTError(int32(self.Raw.UpdatePreview(lFlags, pChildWiaItem2.Raw, pWiaTransferCallback.Raw)))
 }
 
 // DetectRegions wraps the raw DetectRegions call.
@@ -1048,8 +1048,8 @@ func (self IWiaPropertyStorage) GetPropertyStream(pCompatibilityId *win32.GUID, 
 }
 
 // SetPropertyStream wraps the raw SetPropertyStream call.
-func (self IWiaPropertyStorage) SetPropertyStream(pCompatibilityId *win32.GUID, pIStream *systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.SetPropertyStream(pCompatibilityId, pIStream)))
+func (self IWiaPropertyStorage) SetPropertyStream(pCompatibilityId *win32.GUID, pIStream systemcomidiom.IStream) error {
+	return win32.HRESULTError(int32(self.Raw.SetPropertyStream(pCompatibilityId, pIStream.Raw)))
 }
 
 // IWiaSegmentationFilter is an idiomatic wrapper over the raw COM interface Devices.ImageAcquisition.IWiaSegmentationFilter with error-returning methods.
@@ -1064,8 +1064,8 @@ func WrapIWiaSegmentationFilter(raw *devicesimageacquisition.IWiaSegmentationFil
 }
 
 // DetectRegions wraps the raw DetectRegions call.
-func (self IWiaSegmentationFilter) DetectRegions(lFlags int32, pInputStream *systemcom.IStream, pWiaItem2 *devicesimageacquisition.IWiaItem2) error {
-	return win32.HRESULTError(int32(self.Raw.DetectRegions(lFlags, pInputStream, pWiaItem2)))
+func (self IWiaSegmentationFilter) DetectRegions(lFlags int32, pInputStream systemcomidiom.IStream, pWiaItem2 IWiaItem2) error {
+	return win32.HRESULTError(int32(self.Raw.DetectRegions(lFlags, pInputStream.Raw, pWiaItem2.Raw)))
 }
 
 // IWiaTransfer is an idiomatic wrapper over the raw COM interface Devices.ImageAcquisition.IWiaTransfer with error-returning methods.
@@ -1080,13 +1080,13 @@ func WrapIWiaTransfer(raw *devicesimageacquisition.IWiaTransfer) IWiaTransfer {
 }
 
 // Download wraps the raw Download call.
-func (self IWiaTransfer) Download(lFlags int32, pIWiaTransferCallback *devicesimageacquisition.IWiaTransferCallback) error {
-	return win32.HRESULTError(int32(self.Raw.Download(lFlags, pIWiaTransferCallback)))
+func (self IWiaTransfer) Download(lFlags int32, pIWiaTransferCallback IWiaTransferCallback) error {
+	return win32.HRESULTError(int32(self.Raw.Download(lFlags, pIWiaTransferCallback.Raw)))
 }
 
 // Upload wraps the raw Upload call.
-func (self IWiaTransfer) Upload(lFlags int32, pSource *systemcom.IStream, pIWiaTransferCallback *devicesimageacquisition.IWiaTransferCallback) error {
-	return win32.HRESULTError(int32(self.Raw.Upload(lFlags, pSource, pIWiaTransferCallback)))
+func (self IWiaTransfer) Upload(lFlags int32, pSource systemcomidiom.IStream, pIWiaTransferCallback IWiaTransferCallback) error {
+	return win32.HRESULTError(int32(self.Raw.Upload(lFlags, pSource.Raw, pIWiaTransferCallback.Raw)))
 }
 
 // Cancel wraps the raw Cancel call.

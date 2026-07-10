@@ -98,13 +98,13 @@ func WrapIMbnConnectionContextEvents(raw *networkmanagementmobilebroadband.IMbnC
 }
 
 // OnProvisionedContextListChange wraps the raw OnProvisionedContextListChange call.
-func (self IMbnConnectionContextEvents) OnProvisionedContextListChange(newInterface *networkmanagementmobilebroadband.IMbnConnectionContext) error {
-	return win32.HRESULTError(int32(self.Raw.OnProvisionedContextListChange(newInterface)))
+func (self IMbnConnectionContextEvents) OnProvisionedContextListChange(newInterface IMbnConnectionContext) error {
+	return win32.HRESULTError(int32(self.Raw.OnProvisionedContextListChange(newInterface.Raw)))
 }
 
 // OnSetProvisionedContextComplete wraps the raw OnSetProvisionedContextComplete call.
-func (self IMbnConnectionContextEvents) OnSetProvisionedContextComplete(newInterface *networkmanagementmobilebroadband.IMbnConnectionContext, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetProvisionedContextComplete(newInterface, requestID, status)))
+func (self IMbnConnectionContextEvents) OnSetProvisionedContextComplete(newInterface IMbnConnectionContext, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetProvisionedContextComplete(newInterface.Raw, requestID, status)))
 }
 
 // IMbnConnectionEvents is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnConnectionEvents with error-returning methods.
@@ -119,23 +119,23 @@ func WrapIMbnConnectionEvents(raw *networkmanagementmobilebroadband.IMbnConnecti
 }
 
 // OnConnectComplete wraps the raw OnConnectComplete call.
-func (self IMbnConnectionEvents) OnConnectComplete(newConnection *networkmanagementmobilebroadband.IMbnConnection, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnectComplete(newConnection, requestID, status)))
+func (self IMbnConnectionEvents) OnConnectComplete(newConnection IMbnConnection, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnectComplete(newConnection.Raw, requestID, status)))
 }
 
 // OnDisconnectComplete wraps the raw OnDisconnectComplete call.
-func (self IMbnConnectionEvents) OnDisconnectComplete(newConnection *networkmanagementmobilebroadband.IMbnConnection, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnDisconnectComplete(newConnection, requestID, status)))
+func (self IMbnConnectionEvents) OnDisconnectComplete(newConnection IMbnConnection, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnDisconnectComplete(newConnection.Raw, requestID, status)))
 }
 
 // OnConnectStateChange wraps the raw OnConnectStateChange call.
-func (self IMbnConnectionEvents) OnConnectStateChange(newConnection *networkmanagementmobilebroadband.IMbnConnection) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnectStateChange(newConnection)))
+func (self IMbnConnectionEvents) OnConnectStateChange(newConnection IMbnConnection) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnectStateChange(newConnection.Raw)))
 }
 
 // OnVoiceCallStateChange wraps the raw OnVoiceCallStateChange call.
-func (self IMbnConnectionEvents) OnVoiceCallStateChange(newConnection *networkmanagementmobilebroadband.IMbnConnection) error {
-	return win32.HRESULTError(int32(self.Raw.OnVoiceCallStateChange(newConnection)))
+func (self IMbnConnectionEvents) OnVoiceCallStateChange(newConnection IMbnConnection) error {
+	return win32.HRESULTError(int32(self.Raw.OnVoiceCallStateChange(newConnection.Raw)))
 }
 
 // IMbnConnectionManager is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnConnectionManager with error-returning methods.
@@ -172,13 +172,13 @@ func WrapIMbnConnectionManagerEvents(raw *networkmanagementmobilebroadband.IMbnC
 }
 
 // OnConnectionArrival wraps the raw OnConnectionArrival call.
-func (self IMbnConnectionManagerEvents) OnConnectionArrival(newConnection *networkmanagementmobilebroadband.IMbnConnection) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnectionArrival(newConnection)))
+func (self IMbnConnectionManagerEvents) OnConnectionArrival(newConnection IMbnConnection) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnectionArrival(newConnection.Raw)))
 }
 
 // OnConnectionRemoval wraps the raw OnConnectionRemoval call.
-func (self IMbnConnectionManagerEvents) OnConnectionRemoval(oldConnection *networkmanagementmobilebroadband.IMbnConnection) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnectionRemoval(oldConnection)))
+func (self IMbnConnectionManagerEvents) OnConnectionRemoval(oldConnection IMbnConnection) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnectionRemoval(oldConnection.Raw)))
 }
 
 // IMbnConnectionProfile is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnConnectionProfile with error-returning methods.
@@ -220,8 +220,8 @@ func WrapIMbnConnectionProfileEvents(raw *networkmanagementmobilebroadband.IMbnC
 }
 
 // OnProfileUpdate wraps the raw OnProfileUpdate call.
-func (self IMbnConnectionProfileEvents) OnProfileUpdate(newProfile *networkmanagementmobilebroadband.IMbnConnectionProfile) error {
-	return win32.HRESULTError(int32(self.Raw.OnProfileUpdate(newProfile)))
+func (self IMbnConnectionProfileEvents) OnProfileUpdate(newProfile IMbnConnectionProfile) error {
+	return win32.HRESULTError(int32(self.Raw.OnProfileUpdate(newProfile.Raw)))
 }
 
 // IMbnConnectionProfileManager is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnConnectionProfileManager with error-returning methods.
@@ -236,14 +236,14 @@ func WrapIMbnConnectionProfileManager(raw *networkmanagementmobilebroadband.IMbn
 }
 
 // GetConnectionProfiles wraps the raw GetConnectionProfiles call.
-func (self IMbnConnectionProfileManager) GetConnectionProfiles(mbnInterface *networkmanagementmobilebroadband.IMbnInterface, connectionProfiles **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnectionProfiles(mbnInterface, connectionProfiles)))
+func (self IMbnConnectionProfileManager) GetConnectionProfiles(mbnInterface IMbnInterface, connectionProfiles **systemcom.SAFEARRAY) error {
+	return win32.HRESULTError(int32(self.Raw.GetConnectionProfiles(mbnInterface.Raw, connectionProfiles)))
 }
 
 // GetConnectionProfile wraps the raw GetConnectionProfile call.
-func (self IMbnConnectionProfileManager) GetConnectionProfile(mbnInterface *networkmanagementmobilebroadband.IMbnInterface, profileName string, connectionProfile **networkmanagementmobilebroadband.IMbnConnectionProfile) error {
+func (self IMbnConnectionProfileManager) GetConnectionProfile(mbnInterface IMbnInterface, profileName string, connectionProfile **networkmanagementmobilebroadband.IMbnConnectionProfile) error {
 	_profileName := win32.UTF16Ptr(profileName)
-	return win32.HRESULTError(int32(self.Raw.GetConnectionProfile(mbnInterface, foundation.PWSTR(_profileName), connectionProfile)))
+	return win32.HRESULTError(int32(self.Raw.GetConnectionProfile(mbnInterface.Raw, foundation.PWSTR(_profileName), connectionProfile)))
 }
 
 // CreateConnectionProfile wraps the raw CreateConnectionProfile call.
@@ -264,13 +264,13 @@ func WrapIMbnConnectionProfileManagerEvents(raw *networkmanagementmobilebroadban
 }
 
 // OnConnectionProfileArrival wraps the raw OnConnectionProfileArrival call.
-func (self IMbnConnectionProfileManagerEvents) OnConnectionProfileArrival(newConnectionProfile *networkmanagementmobilebroadband.IMbnConnectionProfile) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnectionProfileArrival(newConnectionProfile)))
+func (self IMbnConnectionProfileManagerEvents) OnConnectionProfileArrival(newConnectionProfile IMbnConnectionProfile) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnectionProfileArrival(newConnectionProfile.Raw)))
 }
 
 // OnConnectionProfileRemoval wraps the raw OnConnectionProfileRemoval call.
-func (self IMbnConnectionProfileManagerEvents) OnConnectionProfileRemoval(oldConnectionProfile *networkmanagementmobilebroadband.IMbnConnectionProfile) error {
-	return win32.HRESULTError(int32(self.Raw.OnConnectionProfileRemoval(oldConnectionProfile)))
+func (self IMbnConnectionProfileManagerEvents) OnConnectionProfileRemoval(oldConnectionProfile IMbnConnectionProfile) error {
+	return win32.HRESULTError(int32(self.Raw.OnConnectionProfileRemoval(oldConnectionProfile.Raw)))
 }
 
 // IMbnDeviceService is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnDeviceService with error-returning methods.
@@ -405,53 +405,53 @@ func WrapIMbnDeviceServicesEvents(raw *networkmanagementmobilebroadband.IMbnDevi
 }
 
 // OnQuerySupportedCommandsComplete wraps the raw OnQuerySupportedCommandsComplete call.
-func (self IMbnDeviceServicesEvents) OnQuerySupportedCommandsComplete(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, commandIDList *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnQuerySupportedCommandsComplete(deviceService, commandIDList, status, requestID)))
+func (self IMbnDeviceServicesEvents) OnQuerySupportedCommandsComplete(deviceService IMbnDeviceService, commandIDList *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnQuerySupportedCommandsComplete(deviceService.Raw, commandIDList, status, requestID)))
 }
 
 // OnOpenCommandSessionComplete wraps the raw OnOpenCommandSessionComplete call.
-func (self IMbnDeviceServicesEvents) OnOpenCommandSessionComplete(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnOpenCommandSessionComplete(deviceService, status, requestID)))
+func (self IMbnDeviceServicesEvents) OnOpenCommandSessionComplete(deviceService IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnOpenCommandSessionComplete(deviceService.Raw, status, requestID)))
 }
 
 // OnCloseCommandSessionComplete wraps the raw OnCloseCommandSessionComplete call.
-func (self IMbnDeviceServicesEvents) OnCloseCommandSessionComplete(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnCloseCommandSessionComplete(deviceService, status, requestID)))
+func (self IMbnDeviceServicesEvents) OnCloseCommandSessionComplete(deviceService IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnCloseCommandSessionComplete(deviceService.Raw, status, requestID)))
 }
 
 // OnSetCommandComplete wraps the raw OnSetCommandComplete call.
-func (self IMbnDeviceServicesEvents) OnSetCommandComplete(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, responseID uint32, deviceServiceData *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetCommandComplete(deviceService, responseID, deviceServiceData, status, requestID)))
+func (self IMbnDeviceServicesEvents) OnSetCommandComplete(deviceService IMbnDeviceService, responseID uint32, deviceServiceData *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetCommandComplete(deviceService.Raw, responseID, deviceServiceData, status, requestID)))
 }
 
 // OnQueryCommandComplete wraps the raw OnQueryCommandComplete call.
-func (self IMbnDeviceServicesEvents) OnQueryCommandComplete(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, responseID uint32, deviceServiceData *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnQueryCommandComplete(deviceService, responseID, deviceServiceData, status, requestID)))
+func (self IMbnDeviceServicesEvents) OnQueryCommandComplete(deviceService IMbnDeviceService, responseID uint32, deviceServiceData *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnQueryCommandComplete(deviceService.Raw, responseID, deviceServiceData, status, requestID)))
 }
 
 // OnEventNotification wraps the raw OnEventNotification call.
-func (self IMbnDeviceServicesEvents) OnEventNotification(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, eventID uint32, deviceServiceData *systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.OnEventNotification(deviceService, eventID, deviceServiceData)))
+func (self IMbnDeviceServicesEvents) OnEventNotification(deviceService IMbnDeviceService, eventID uint32, deviceServiceData *systemcom.SAFEARRAY) error {
+	return win32.HRESULTError(int32(self.Raw.OnEventNotification(deviceService.Raw, eventID, deviceServiceData)))
 }
 
 // OnOpenDataSessionComplete wraps the raw OnOpenDataSessionComplete call.
-func (self IMbnDeviceServicesEvents) OnOpenDataSessionComplete(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnOpenDataSessionComplete(deviceService, status, requestID)))
+func (self IMbnDeviceServicesEvents) OnOpenDataSessionComplete(deviceService IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnOpenDataSessionComplete(deviceService.Raw, status, requestID)))
 }
 
 // OnCloseDataSessionComplete wraps the raw OnCloseDataSessionComplete call.
-func (self IMbnDeviceServicesEvents) OnCloseDataSessionComplete(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnCloseDataSessionComplete(deviceService, status, requestID)))
+func (self IMbnDeviceServicesEvents) OnCloseDataSessionComplete(deviceService IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnCloseDataSessionComplete(deviceService.Raw, status, requestID)))
 }
 
 // OnWriteDataComplete wraps the raw OnWriteDataComplete call.
-func (self IMbnDeviceServicesEvents) OnWriteDataComplete(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnWriteDataComplete(deviceService, status, requestID)))
+func (self IMbnDeviceServicesEvents) OnWriteDataComplete(deviceService IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnWriteDataComplete(deviceService.Raw, status, requestID)))
 }
 
 // OnReadData wraps the raw OnReadData call.
-func (self IMbnDeviceServicesEvents) OnReadData(deviceService *networkmanagementmobilebroadband.IMbnDeviceService, deviceServiceData *systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.OnReadData(deviceService, deviceServiceData)))
+func (self IMbnDeviceServicesEvents) OnReadData(deviceService IMbnDeviceService, deviceServiceData *systemcom.SAFEARRAY) error {
+	return win32.HRESULTError(int32(self.Raw.OnReadData(deviceService.Raw, deviceServiceData)))
 }
 
 // OnInterfaceStateChange wraps the raw OnInterfaceStateChange call.
@@ -497,10 +497,10 @@ func (self IMbnInterface) GetInterfaceCapability(interfaceCaps *networkmanagemen
 }
 
 // GetSubscriberInformation wraps the raw GetSubscriberInformation call.
-func (self IMbnInterface) GetSubscriberInformation() (*networkmanagementmobilebroadband.IMbnSubscriberInformation, error) {
+func (self IMbnInterface) GetSubscriberInformation() (IMbnSubscriberInformation, error) {
 	var _subscriberInformation *networkmanagementmobilebroadband.IMbnSubscriberInformation
 	_hr := self.Raw.GetSubscriberInformation(&_subscriberInformation)
-	return _subscriberInformation, win32.HRESULTError(int32(_hr))
+	return WrapIMbnSubscriberInformation(_subscriberInformation), win32.HRESULTError(int32(_hr))
 }
 
 // GetReadyState wraps the raw GetReadyState call.
@@ -541,10 +541,10 @@ func (self IMbnInterface) ScanNetwork(requestID *uint32) error {
 }
 
 // GetConnection wraps the raw GetConnection call.
-func (self IMbnInterface) GetConnection() (*networkmanagementmobilebroadband.IMbnConnection, error) {
+func (self IMbnInterface) GetConnection() (IMbnConnection, error) {
 	var _mbnConnection *networkmanagementmobilebroadband.IMbnConnection
 	_hr := self.Raw.GetConnection(&_mbnConnection)
-	return _mbnConnection, win32.HRESULTError(int32(_hr))
+	return WrapIMbnConnection(_mbnConnection), win32.HRESULTError(int32(_hr))
 }
 
 // IMbnInterfaceEvents is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnInterfaceEvents with error-returning methods.
@@ -559,43 +559,43 @@ func WrapIMbnInterfaceEvents(raw *networkmanagementmobilebroadband.IMbnInterface
 }
 
 // OnInterfaceCapabilityAvailable wraps the raw OnInterfaceCapabilityAvailable call.
-func (self IMbnInterfaceEvents) OnInterfaceCapabilityAvailable(newInterface *networkmanagementmobilebroadband.IMbnInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnInterfaceCapabilityAvailable(newInterface)))
+func (self IMbnInterfaceEvents) OnInterfaceCapabilityAvailable(newInterface IMbnInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnInterfaceCapabilityAvailable(newInterface.Raw)))
 }
 
 // OnSubscriberInformationChange wraps the raw OnSubscriberInformationChange call.
-func (self IMbnInterfaceEvents) OnSubscriberInformationChange(newInterface *networkmanagementmobilebroadband.IMbnInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnSubscriberInformationChange(newInterface)))
+func (self IMbnInterfaceEvents) OnSubscriberInformationChange(newInterface IMbnInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnSubscriberInformationChange(newInterface.Raw)))
 }
 
 // OnReadyStateChange wraps the raw OnReadyStateChange call.
-func (self IMbnInterfaceEvents) OnReadyStateChange(newInterface *networkmanagementmobilebroadband.IMbnInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnReadyStateChange(newInterface)))
+func (self IMbnInterfaceEvents) OnReadyStateChange(newInterface IMbnInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnReadyStateChange(newInterface.Raw)))
 }
 
 // OnEmergencyModeChange wraps the raw OnEmergencyModeChange call.
-func (self IMbnInterfaceEvents) OnEmergencyModeChange(newInterface *networkmanagementmobilebroadband.IMbnInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnEmergencyModeChange(newInterface)))
+func (self IMbnInterfaceEvents) OnEmergencyModeChange(newInterface IMbnInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnEmergencyModeChange(newInterface.Raw)))
 }
 
 // OnHomeProviderAvailable wraps the raw OnHomeProviderAvailable call.
-func (self IMbnInterfaceEvents) OnHomeProviderAvailable(newInterface *networkmanagementmobilebroadband.IMbnInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnHomeProviderAvailable(newInterface)))
+func (self IMbnInterfaceEvents) OnHomeProviderAvailable(newInterface IMbnInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnHomeProviderAvailable(newInterface.Raw)))
 }
 
 // OnPreferredProvidersChange wraps the raw OnPreferredProvidersChange call.
-func (self IMbnInterfaceEvents) OnPreferredProvidersChange(newInterface *networkmanagementmobilebroadband.IMbnInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnPreferredProvidersChange(newInterface)))
+func (self IMbnInterfaceEvents) OnPreferredProvidersChange(newInterface IMbnInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnPreferredProvidersChange(newInterface.Raw)))
 }
 
 // OnSetPreferredProvidersComplete wraps the raw OnSetPreferredProvidersComplete call.
-func (self IMbnInterfaceEvents) OnSetPreferredProvidersComplete(newInterface *networkmanagementmobilebroadband.IMbnInterface, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetPreferredProvidersComplete(newInterface, requestID, status)))
+func (self IMbnInterfaceEvents) OnSetPreferredProvidersComplete(newInterface IMbnInterface, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetPreferredProvidersComplete(newInterface.Raw, requestID, status)))
 }
 
 // OnScanNetworkComplete wraps the raw OnScanNetworkComplete call.
-func (self IMbnInterfaceEvents) OnScanNetworkComplete(newInterface *networkmanagementmobilebroadband.IMbnInterface, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnScanNetworkComplete(newInterface, requestID, status)))
+func (self IMbnInterfaceEvents) OnScanNetworkComplete(newInterface IMbnInterface, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnScanNetworkComplete(newInterface.Raw, requestID, status)))
 }
 
 // IMbnInterfaceManager is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnInterfaceManager with error-returning methods.
@@ -632,13 +632,13 @@ func WrapIMbnInterfaceManagerEvents(raw *networkmanagementmobilebroadband.IMbnIn
 }
 
 // OnInterfaceArrival wraps the raw OnInterfaceArrival call.
-func (self IMbnInterfaceManagerEvents) OnInterfaceArrival(newInterface *networkmanagementmobilebroadband.IMbnInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnInterfaceArrival(newInterface)))
+func (self IMbnInterfaceManagerEvents) OnInterfaceArrival(newInterface IMbnInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnInterfaceArrival(newInterface.Raw)))
 }
 
 // OnInterfaceRemoval wraps the raw OnInterfaceRemoval call.
-func (self IMbnInterfaceManagerEvents) OnInterfaceRemoval(oldInterface *networkmanagementmobilebroadband.IMbnInterface) error {
-	return win32.HRESULTError(int32(self.Raw.OnInterfaceRemoval(oldInterface)))
+func (self IMbnInterfaceManagerEvents) OnInterfaceRemoval(oldInterface IMbnInterface) error {
+	return win32.HRESULTError(int32(self.Raw.OnInterfaceRemoval(oldInterface.Raw)))
 }
 
 // IMbnMultiCarrier is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnMultiCarrier with error-returning methods.
@@ -696,28 +696,28 @@ func WrapIMbnMultiCarrierEvents(raw *networkmanagementmobilebroadband.IMbnMultiC
 }
 
 // OnSetHomeProviderComplete wraps the raw OnSetHomeProviderComplete call.
-func (self IMbnMultiCarrierEvents) OnSetHomeProviderComplete(mbnInterface *networkmanagementmobilebroadband.IMbnMultiCarrier, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetHomeProviderComplete(mbnInterface, requestID, status)))
+func (self IMbnMultiCarrierEvents) OnSetHomeProviderComplete(mbnInterface IMbnMultiCarrier, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetHomeProviderComplete(mbnInterface.Raw, requestID, status)))
 }
 
 // OnCurrentCellularClassChange wraps the raw OnCurrentCellularClassChange call.
-func (self IMbnMultiCarrierEvents) OnCurrentCellularClassChange(mbnInterface *networkmanagementmobilebroadband.IMbnMultiCarrier) error {
-	return win32.HRESULTError(int32(self.Raw.OnCurrentCellularClassChange(mbnInterface)))
+func (self IMbnMultiCarrierEvents) OnCurrentCellularClassChange(mbnInterface IMbnMultiCarrier) error {
+	return win32.HRESULTError(int32(self.Raw.OnCurrentCellularClassChange(mbnInterface.Raw)))
 }
 
 // OnPreferredProvidersChange wraps the raw OnPreferredProvidersChange call.
-func (self IMbnMultiCarrierEvents) OnPreferredProvidersChange(mbnInterface *networkmanagementmobilebroadband.IMbnMultiCarrier) error {
-	return win32.HRESULTError(int32(self.Raw.OnPreferredProvidersChange(mbnInterface)))
+func (self IMbnMultiCarrierEvents) OnPreferredProvidersChange(mbnInterface IMbnMultiCarrier) error {
+	return win32.HRESULTError(int32(self.Raw.OnPreferredProvidersChange(mbnInterface.Raw)))
 }
 
 // OnScanNetworkComplete wraps the raw OnScanNetworkComplete call.
-func (self IMbnMultiCarrierEvents) OnScanNetworkComplete(mbnInterface *networkmanagementmobilebroadband.IMbnMultiCarrier, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnScanNetworkComplete(mbnInterface, requestID, status)))
+func (self IMbnMultiCarrierEvents) OnScanNetworkComplete(mbnInterface IMbnMultiCarrier, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnScanNetworkComplete(mbnInterface.Raw, requestID, status)))
 }
 
 // OnInterfaceCapabilityChange wraps the raw OnInterfaceCapabilityChange call.
-func (self IMbnMultiCarrierEvents) OnInterfaceCapabilityChange(mbnInterface *networkmanagementmobilebroadband.IMbnMultiCarrier) error {
-	return win32.HRESULTError(int32(self.Raw.OnInterfaceCapabilityChange(mbnInterface)))
+func (self IMbnMultiCarrierEvents) OnInterfaceCapabilityChange(mbnInterface IMbnMultiCarrier) error {
+	return win32.HRESULTError(int32(self.Raw.OnInterfaceCapabilityChange(mbnInterface.Raw)))
 }
 
 // IMbnPin is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnPin with error-returning methods.
@@ -805,28 +805,28 @@ func WrapIMbnPinEvents(raw *networkmanagementmobilebroadband.IMbnPinEvents) IMbn
 }
 
 // OnEnableComplete wraps the raw OnEnableComplete call.
-func (self IMbnPinEvents) OnEnableComplete(pin *networkmanagementmobilebroadband.IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnEnableComplete(pin, pinInfo, requestID, status)))
+func (self IMbnPinEvents) OnEnableComplete(pin IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnEnableComplete(pin.Raw, pinInfo, requestID, status)))
 }
 
 // OnDisableComplete wraps the raw OnDisableComplete call.
-func (self IMbnPinEvents) OnDisableComplete(pin *networkmanagementmobilebroadband.IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnDisableComplete(pin, pinInfo, requestID, status)))
+func (self IMbnPinEvents) OnDisableComplete(pin IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnDisableComplete(pin.Raw, pinInfo, requestID, status)))
 }
 
 // OnEnterComplete wraps the raw OnEnterComplete call.
-func (self IMbnPinEvents) OnEnterComplete(Pin *networkmanagementmobilebroadband.IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnEnterComplete(Pin, pinInfo, requestID, status)))
+func (self IMbnPinEvents) OnEnterComplete(Pin IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnEnterComplete(Pin.Raw, pinInfo, requestID, status)))
 }
 
 // OnChangeComplete wraps the raw OnChangeComplete call.
-func (self IMbnPinEvents) OnChangeComplete(Pin *networkmanagementmobilebroadband.IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnChangeComplete(Pin, pinInfo, requestID, status)))
+func (self IMbnPinEvents) OnChangeComplete(Pin IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnChangeComplete(Pin.Raw, pinInfo, requestID, status)))
 }
 
 // OnUnblockComplete wraps the raw OnUnblockComplete call.
-func (self IMbnPinEvents) OnUnblockComplete(Pin *networkmanagementmobilebroadband.IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnUnblockComplete(Pin, pinInfo, requestID, status)))
+func (self IMbnPinEvents) OnUnblockComplete(Pin IMbnPin, pinInfo *networkmanagementmobilebroadband.MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnUnblockComplete(Pin.Raw, pinInfo, requestID, status)))
 }
 
 // IMbnPinManager is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnPinManager with error-returning methods.
@@ -867,8 +867,8 @@ func WrapIMbnPinManagerEvents(raw *networkmanagementmobilebroadband.IMbnPinManag
 }
 
 // OnPinListAvailable wraps the raw OnPinListAvailable call.
-func (self IMbnPinManagerEvents) OnPinListAvailable(pinManager *networkmanagementmobilebroadband.IMbnPinManager) error {
-	return win32.HRESULTError(int32(self.Raw.OnPinListAvailable(pinManager)))
+func (self IMbnPinManagerEvents) OnPinListAvailable(pinManager IMbnPinManager) error {
+	return win32.HRESULTError(int32(self.Raw.OnPinListAvailable(pinManager.Raw)))
 }
 
 // IMbnRadio is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnRadio with error-returning methods.
@@ -909,13 +909,13 @@ func WrapIMbnRadioEvents(raw *networkmanagementmobilebroadband.IMbnRadioEvents) 
 }
 
 // OnRadioStateChange wraps the raw OnRadioStateChange call.
-func (self IMbnRadioEvents) OnRadioStateChange(newInterface *networkmanagementmobilebroadband.IMbnRadio) error {
-	return win32.HRESULTError(int32(self.Raw.OnRadioStateChange(newInterface)))
+func (self IMbnRadioEvents) OnRadioStateChange(newInterface IMbnRadio) error {
+	return win32.HRESULTError(int32(self.Raw.OnRadioStateChange(newInterface.Raw)))
 }
 
 // OnSetSoftwareRadioStateComplete wraps the raw OnSetSoftwareRadioStateComplete call.
-func (self IMbnRadioEvents) OnSetSoftwareRadioStateComplete(newInterface *networkmanagementmobilebroadband.IMbnRadio, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetSoftwareRadioStateComplete(newInterface, requestID, status)))
+func (self IMbnRadioEvents) OnSetSoftwareRadioStateComplete(newInterface IMbnRadio, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetSoftwareRadioStateComplete(newInterface.Raw, requestID, status)))
 }
 
 // IMbnRegistration is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnRegistration with error-returning methods.
@@ -992,23 +992,23 @@ func WrapIMbnRegistrationEvents(raw *networkmanagementmobilebroadband.IMbnRegist
 }
 
 // OnRegisterModeAvailable wraps the raw OnRegisterModeAvailable call.
-func (self IMbnRegistrationEvents) OnRegisterModeAvailable(newInterface *networkmanagementmobilebroadband.IMbnRegistration) error {
-	return win32.HRESULTError(int32(self.Raw.OnRegisterModeAvailable(newInterface)))
+func (self IMbnRegistrationEvents) OnRegisterModeAvailable(newInterface IMbnRegistration) error {
+	return win32.HRESULTError(int32(self.Raw.OnRegisterModeAvailable(newInterface.Raw)))
 }
 
 // OnRegisterStateChange wraps the raw OnRegisterStateChange call.
-func (self IMbnRegistrationEvents) OnRegisterStateChange(newInterface *networkmanagementmobilebroadband.IMbnRegistration) error {
-	return win32.HRESULTError(int32(self.Raw.OnRegisterStateChange(newInterface)))
+func (self IMbnRegistrationEvents) OnRegisterStateChange(newInterface IMbnRegistration) error {
+	return win32.HRESULTError(int32(self.Raw.OnRegisterStateChange(newInterface.Raw)))
 }
 
 // OnPacketServiceStateChange wraps the raw OnPacketServiceStateChange call.
-func (self IMbnRegistrationEvents) OnPacketServiceStateChange(newInterface *networkmanagementmobilebroadband.IMbnRegistration) error {
-	return win32.HRESULTError(int32(self.Raw.OnPacketServiceStateChange(newInterface)))
+func (self IMbnRegistrationEvents) OnPacketServiceStateChange(newInterface IMbnRegistration) error {
+	return win32.HRESULTError(int32(self.Raw.OnPacketServiceStateChange(newInterface.Raw)))
 }
 
 // OnSetRegisterModeComplete wraps the raw OnSetRegisterModeComplete call.
-func (self IMbnRegistrationEvents) OnSetRegisterModeComplete(newInterface *networkmanagementmobilebroadband.IMbnRegistration, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetRegisterModeComplete(newInterface, requestID, status)))
+func (self IMbnRegistrationEvents) OnSetRegisterModeComplete(newInterface IMbnRegistration, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetRegisterModeComplete(newInterface.Raw, requestID, status)))
 }
 
 // IMbnServiceActivation is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnServiceActivation with error-returning methods.
@@ -1039,8 +1039,8 @@ func WrapIMbnServiceActivationEvents(raw *networkmanagementmobilebroadband.IMbnS
 }
 
 // OnActivationComplete wraps the raw OnActivationComplete call.
-func (self IMbnServiceActivationEvents) OnActivationComplete(serviceActivation *networkmanagementmobilebroadband.IMbnServiceActivation, vendorSpecificData *systemcom.SAFEARRAY, requestID uint32, status foundation.HRESULT, networkError uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnActivationComplete(serviceActivation, vendorSpecificData, requestID, status, networkError)))
+func (self IMbnServiceActivationEvents) OnActivationComplete(serviceActivation IMbnServiceActivation, vendorSpecificData *systemcom.SAFEARRAY, requestID uint32, status foundation.HRESULT, networkError uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnActivationComplete(serviceActivation.Raw, vendorSpecificData, requestID, status, networkError)))
 }
 
 // IMbnSignal is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnSignal with error-returning methods.
@@ -1076,8 +1076,8 @@ func WrapIMbnSignalEvents(raw *networkmanagementmobilebroadband.IMbnSignalEvents
 }
 
 // OnSignalStateChange wraps the raw OnSignalStateChange call.
-func (self IMbnSignalEvents) OnSignalStateChange(newInterface *networkmanagementmobilebroadband.IMbnSignal) error {
-	return win32.HRESULTError(int32(self.Raw.OnSignalStateChange(newInterface)))
+func (self IMbnSignalEvents) OnSignalStateChange(newInterface IMbnSignal) error {
+	return win32.HRESULTError(int32(self.Raw.OnSignalStateChange(newInterface.Raw)))
 }
 
 // IMbnSms is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnSms with error-returning methods.
@@ -1097,8 +1097,8 @@ func (self IMbnSms) GetSmsConfiguration(smsConfiguration **networkmanagementmobi
 }
 
 // SetSmsConfiguration wraps the raw SetSmsConfiguration call.
-func (self IMbnSms) SetSmsConfiguration(smsConfiguration *networkmanagementmobilebroadband.IMbnSmsConfiguration, requestID *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetSmsConfiguration(smsConfiguration, requestID)))
+func (self IMbnSms) SetSmsConfiguration(smsConfiguration IMbnSmsConfiguration, requestID *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetSmsConfiguration(smsConfiguration.Raw, requestID)))
 }
 
 // SmsSendPdu wraps the raw SmsSendPdu call.
@@ -1187,38 +1187,38 @@ func WrapIMbnSmsEvents(raw *networkmanagementmobilebroadband.IMbnSmsEvents) IMbn
 }
 
 // OnSmsConfigurationChange wraps the raw OnSmsConfigurationChange call.
-func (self IMbnSmsEvents) OnSmsConfigurationChange(sms *networkmanagementmobilebroadband.IMbnSms) error {
-	return win32.HRESULTError(int32(self.Raw.OnSmsConfigurationChange(sms)))
+func (self IMbnSmsEvents) OnSmsConfigurationChange(sms IMbnSms) error {
+	return win32.HRESULTError(int32(self.Raw.OnSmsConfigurationChange(sms.Raw)))
 }
 
 // OnSetSmsConfigurationComplete wraps the raw OnSetSmsConfigurationComplete call.
-func (self IMbnSmsEvents) OnSetSmsConfigurationComplete(sms *networkmanagementmobilebroadband.IMbnSms, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetSmsConfigurationComplete(sms, requestID, status)))
+func (self IMbnSmsEvents) OnSetSmsConfigurationComplete(sms IMbnSms, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetSmsConfigurationComplete(sms.Raw, requestID, status)))
 }
 
 // OnSmsSendComplete wraps the raw OnSmsSendComplete call.
-func (self IMbnSmsEvents) OnSmsSendComplete(sms *networkmanagementmobilebroadband.IMbnSms, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSmsSendComplete(sms, requestID, status)))
+func (self IMbnSmsEvents) OnSmsSendComplete(sms IMbnSms, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSmsSendComplete(sms.Raw, requestID, status)))
 }
 
 // OnSmsReadComplete wraps the raw OnSmsReadComplete call.
-func (self IMbnSmsEvents) OnSmsReadComplete(sms *networkmanagementmobilebroadband.IMbnSms, smsFormat networkmanagementmobilebroadband.MBN_SMS_FORMAT, readMsgs *systemcom.SAFEARRAY, moreMsgs foundation.VARIANT_BOOL, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSmsReadComplete(sms, smsFormat, readMsgs, moreMsgs, requestID, status)))
+func (self IMbnSmsEvents) OnSmsReadComplete(sms IMbnSms, smsFormat networkmanagementmobilebroadband.MBN_SMS_FORMAT, readMsgs *systemcom.SAFEARRAY, moreMsgs foundation.VARIANT_BOOL, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSmsReadComplete(sms.Raw, smsFormat, readMsgs, moreMsgs, requestID, status)))
 }
 
 // OnSmsNewClass0Message wraps the raw OnSmsNewClass0Message call.
-func (self IMbnSmsEvents) OnSmsNewClass0Message(sms *networkmanagementmobilebroadband.IMbnSms, smsFormat networkmanagementmobilebroadband.MBN_SMS_FORMAT, readMsgs *systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.OnSmsNewClass0Message(sms, smsFormat, readMsgs)))
+func (self IMbnSmsEvents) OnSmsNewClass0Message(sms IMbnSms, smsFormat networkmanagementmobilebroadband.MBN_SMS_FORMAT, readMsgs *systemcom.SAFEARRAY) error {
+	return win32.HRESULTError(int32(self.Raw.OnSmsNewClass0Message(sms.Raw, smsFormat, readMsgs)))
 }
 
 // OnSmsDeleteComplete wraps the raw OnSmsDeleteComplete call.
-func (self IMbnSmsEvents) OnSmsDeleteComplete(sms *networkmanagementmobilebroadband.IMbnSms, requestID uint32, status foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.OnSmsDeleteComplete(sms, requestID, status)))
+func (self IMbnSmsEvents) OnSmsDeleteComplete(sms IMbnSms, requestID uint32, status foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.OnSmsDeleteComplete(sms.Raw, requestID, status)))
 }
 
 // OnSmsStatusChange wraps the raw OnSmsStatusChange call.
-func (self IMbnSmsEvents) OnSmsStatusChange(sms *networkmanagementmobilebroadband.IMbnSms) error {
-	return win32.HRESULTError(int32(self.Raw.OnSmsStatusChange(sms)))
+func (self IMbnSmsEvents) OnSmsStatusChange(sms IMbnSms) error {
+	return win32.HRESULTError(int32(self.Raw.OnSmsStatusChange(sms.Raw)))
 }
 
 // IMbnSmsReadMsgPdu is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnSmsReadMsgPdu with error-returning methods.
@@ -1341,13 +1341,13 @@ func WrapIMbnVendorSpecificEvents(raw *networkmanagementmobilebroadband.IMbnVend
 }
 
 // OnEventNotification wraps the raw OnEventNotification call.
-func (self IMbnVendorSpecificEvents) OnEventNotification(vendorOperation *networkmanagementmobilebroadband.IMbnVendorSpecificOperation, vendorSpecificData *systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.OnEventNotification(vendorOperation, vendorSpecificData)))
+func (self IMbnVendorSpecificEvents) OnEventNotification(vendorOperation IMbnVendorSpecificOperation, vendorSpecificData *systemcom.SAFEARRAY) error {
+	return win32.HRESULTError(int32(self.Raw.OnEventNotification(vendorOperation.Raw, vendorSpecificData)))
 }
 
 // OnSetVendorSpecificComplete wraps the raw OnSetVendorSpecificComplete call.
-func (self IMbnVendorSpecificEvents) OnSetVendorSpecificComplete(vendorOperation *networkmanagementmobilebroadband.IMbnVendorSpecificOperation, vendorSpecificData *systemcom.SAFEARRAY, requestID uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OnSetVendorSpecificComplete(vendorOperation, vendorSpecificData, requestID)))
+func (self IMbnVendorSpecificEvents) OnSetVendorSpecificComplete(vendorOperation IMbnVendorSpecificOperation, vendorSpecificData *systemcom.SAFEARRAY, requestID uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OnSetVendorSpecificComplete(vendorOperation.Raw, vendorSpecificData, requestID)))
 }
 
 // IMbnVendorSpecificOperation is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnVendorSpecificOperation with error-returning methods.

@@ -22,6 +22,11 @@ import (
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
+	graphicsdirect3d9idiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/direct3d9"
+	graphicsdirectdrawidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/graphics/directdraw"
+	mediaidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media"
+	mediaaudiodirectsoundidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/audio/directsound"
+	mediawindowsmediaformatidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/media/windowsmediaformat"
 	systemcomidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com"
 	systemcomstructuredstorageidiom "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/com/structuredstorage"
 )
@@ -523,8 +528,8 @@ func (self IAMDevMemoryAllocator) Free(pBuffer *byte) error {
 }
 
 // GetDevMemoryObject wraps the raw GetDevMemoryObject call.
-func (self IAMDevMemoryAllocator) GetDevMemoryObject(ppUnkInnner **systemcom.IUnknown, pUnkOuter *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetDevMemoryObject(ppUnkInnner, pUnkOuter)))
+func (self IAMDevMemoryAllocator) GetDevMemoryObject(ppUnkInnner **systemcom.IUnknown, pUnkOuter systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.GetDevMemoryObject(ppUnkInnner, pUnkOuter.Raw)))
 }
 
 // IAMDevMemoryControl is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMDevMemoryControl with error-returning methods.
@@ -606,18 +611,18 @@ func (self IAMDirectSound) GetSecondaryBufferInterface(lplpdsb **mediaaudiodirec
 }
 
 // ReleaseDirectSoundInterface wraps the raw ReleaseDirectSoundInterface call.
-func (self IAMDirectSound) ReleaseDirectSoundInterface(lpds *mediaaudiodirectsound.IDirectSound) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseDirectSoundInterface(lpds)))
+func (self IAMDirectSound) ReleaseDirectSoundInterface(lpds mediaaudiodirectsoundidiom.IDirectSound) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseDirectSoundInterface(lpds.Raw)))
 }
 
 // ReleasePrimaryBufferInterface wraps the raw ReleasePrimaryBufferInterface call.
-func (self IAMDirectSound) ReleasePrimaryBufferInterface(lpdsb *mediaaudiodirectsound.IDirectSoundBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.ReleasePrimaryBufferInterface(lpdsb)))
+func (self IAMDirectSound) ReleasePrimaryBufferInterface(lpdsb mediaaudiodirectsoundidiom.IDirectSoundBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.ReleasePrimaryBufferInterface(lpdsb.Raw)))
 }
 
 // ReleaseSecondaryBufferInterface wraps the raw ReleaseSecondaryBufferInterface call.
-func (self IAMDirectSound) ReleaseSecondaryBufferInterface(lpdsb *mediaaudiodirectsound.IDirectSoundBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseSecondaryBufferInterface(lpdsb)))
+func (self IAMDirectSound) ReleaseSecondaryBufferInterface(lpdsb mediaaudiodirectsoundidiom.IDirectSoundBuffer) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseSecondaryBufferInterface(lpdsb.Raw)))
 }
 
 // SetFocusWindow wraps the raw SetFocusWindow call.
@@ -939,8 +944,8 @@ func WrapIAMFilterGraphCallback(raw *mediadirectshow.IAMFilterGraphCallback) IAM
 }
 
 // UnableToRender wraps the raw UnableToRender call.
-func (self IAMFilterGraphCallback) UnableToRender(pPin *mediadirectshow.IPin) error {
-	return win32.HRESULTError(int32(self.Raw.UnableToRender(pPin)))
+func (self IAMFilterGraphCallback) UnableToRender(pPin IPin) error {
+	return win32.HRESULTError(int32(self.Raw.UnableToRender(pPin.Raw)))
 }
 
 // IAMFilterMiscFlags is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMFilterMiscFlags with error-returning methods.
@@ -971,13 +976,13 @@ func WrapIAMGraphBuilderCallback(raw *mediadirectshow.IAMGraphBuilderCallback) I
 }
 
 // SelectedFilter wraps the raw SelectedFilter call.
-func (self IAMGraphBuilderCallback) SelectedFilter(pMon *systemcom.IMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.SelectedFilter(pMon)))
+func (self IAMGraphBuilderCallback) SelectedFilter(pMon systemcomidiom.IMoniker) error {
+	return win32.HRESULTError(int32(self.Raw.SelectedFilter(pMon.Raw)))
 }
 
 // CreatedFilter wraps the raw CreatedFilter call.
-func (self IAMGraphBuilderCallback) CreatedFilter(pFil *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.CreatedFilter(pFil)))
+func (self IAMGraphBuilderCallback) CreatedFilter(pFil IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.CreatedFilter(pFil.Raw)))
 }
 
 // IAMGraphStreams is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMGraphStreams with error-returning methods.
@@ -992,8 +997,8 @@ func WrapIAMGraphStreams(raw *mediadirectshow.IAMGraphStreams) IAMGraphStreams {
 }
 
 // FindUpstreamInterface wraps the raw FindUpstreamInterface call.
-func (self IAMGraphStreams) FindUpstreamInterface(pPin *mediadirectshow.IPin, riid *win32.GUID, ppvInterface *unsafe.Pointer, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.FindUpstreamInterface(pPin, riid, ppvInterface, dwFlags)))
+func (self IAMGraphStreams) FindUpstreamInterface(pPin IPin, riid *win32.GUID, ppvInterface *unsafe.Pointer, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.FindUpstreamInterface(pPin.Raw, riid, ppvInterface, dwFlags)))
 }
 
 // SyncUsingStreamOffset wraps the raw SyncUsingStreamOffset call.
@@ -1214,8 +1219,8 @@ func WrapIAMMediaStream(raw *mediadirectshow.IAMMediaStream) IAMMediaStream {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IAMMediaStream) Initialize(pSourceObject *systemcom.IUnknown, dwFlags uint32, PurposeId *win32.GUID, StreamType mediadirectshow.STREAM_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(pSourceObject, dwFlags, PurposeId, StreamType)))
+func (self IAMMediaStream) Initialize(pSourceObject systemcomidiom.IUnknown, dwFlags uint32, PurposeId *win32.GUID, StreamType mediadirectshow.STREAM_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(pSourceObject.Raw, dwFlags, PurposeId, StreamType)))
 }
 
 // SetState wraps the raw SetState call.
@@ -1224,18 +1229,18 @@ func (self IAMMediaStream) SetState(State mediadirectshow.FILTER_STATE) error {
 }
 
 // JoinAMMultiMediaStream wraps the raw JoinAMMultiMediaStream call.
-func (self IAMMediaStream) JoinAMMultiMediaStream(pAMMultiMediaStream *mediadirectshow.IAMMultiMediaStream) error {
-	return win32.HRESULTError(int32(self.Raw.JoinAMMultiMediaStream(pAMMultiMediaStream)))
+func (self IAMMediaStream) JoinAMMultiMediaStream(pAMMultiMediaStream IAMMultiMediaStream) error {
+	return win32.HRESULTError(int32(self.Raw.JoinAMMultiMediaStream(pAMMultiMediaStream.Raw)))
 }
 
 // JoinFilter wraps the raw JoinFilter call.
-func (self IAMMediaStream) JoinFilter(pMediaStreamFilter *mediadirectshow.IMediaStreamFilter) error {
-	return win32.HRESULTError(int32(self.Raw.JoinFilter(pMediaStreamFilter)))
+func (self IAMMediaStream) JoinFilter(pMediaStreamFilter IMediaStreamFilter) error {
+	return win32.HRESULTError(int32(self.Raw.JoinFilter(pMediaStreamFilter.Raw)))
 }
 
 // JoinFilterGraph wraps the raw JoinFilterGraph call.
-func (self IAMMediaStream) JoinFilterGraph(pFilterGraph *mediadirectshow.IFilterGraph) error {
-	return win32.HRESULTError(int32(self.Raw.JoinFilterGraph(pFilterGraph)))
+func (self IAMMediaStream) JoinFilterGraph(pFilterGraph IFilterGraph) error {
+	return win32.HRESULTError(int32(self.Raw.JoinFilterGraph(pFilterGraph.Raw)))
 }
 
 // IAMMediaTypeSample is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMMediaTypeSample with error-returning methods.
@@ -1359,8 +1364,8 @@ func (self IAMMediaTypeStream) SetFormat(pMediaType *mediamediafoundation.AM_MED
 }
 
 // CreateSample wraps the raw CreateSample call.
-func (self IAMMediaTypeStream) CreateSample(lSampleSize int32, pbBuffer *byte, dwFlags uint32, pUnkOuter *systemcom.IUnknown, ppAMMediaTypeSample **mediadirectshow.IAMMediaTypeSample) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSample(lSampleSize, pbBuffer, dwFlags, pUnkOuter, ppAMMediaTypeSample)))
+func (self IAMMediaTypeStream) CreateSample(lSampleSize int32, pbBuffer *byte, dwFlags uint32, pUnkOuter systemcomidiom.IUnknown, ppAMMediaTypeSample **mediadirectshow.IAMMediaTypeSample) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSample(lSampleSize, pbBuffer, dwFlags, pUnkOuter.Raw, ppAMMediaTypeSample)))
 }
 
 // GetStreamAllocatorRequirements wraps the raw GetStreamAllocatorRequirements call.
@@ -1385,8 +1390,8 @@ func WrapIAMMultiMediaStream(raw *mediadirectshow.IAMMultiMediaStream) IAMMultiM
 }
 
 // Initialize wraps the raw Initialize call.
-func (self IAMMultiMediaStream) Initialize(StreamType mediadirectshow.STREAM_TYPE, dwFlags uint32, pFilterGraph *mediadirectshow.IGraphBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(StreamType, dwFlags, pFilterGraph)))
+func (self IAMMultiMediaStream) Initialize(StreamType mediadirectshow.STREAM_TYPE, dwFlags uint32, pFilterGraph IGraphBuilder) error {
+	return win32.HRESULTError(int32(self.Raw.Initialize(StreamType, dwFlags, pFilterGraph.Raw)))
 }
 
 // GetFilterGraph wraps the raw GetFilterGraph call.
@@ -1400,8 +1405,8 @@ func (self IAMMultiMediaStream) GetFilter(ppFilter **mediadirectshow.IMediaStrea
 }
 
 // AddMediaStream wraps the raw AddMediaStream call.
-func (self IAMMultiMediaStream) AddMediaStream(pStreamObject *systemcom.IUnknown, PurposeId *win32.GUID, dwFlags uint32, ppNewStream **mediadirectshow.IMediaStream) error {
-	return win32.HRESULTError(int32(self.Raw.AddMediaStream(pStreamObject, PurposeId, dwFlags, ppNewStream)))
+func (self IAMMultiMediaStream) AddMediaStream(pStreamObject systemcomidiom.IUnknown, PurposeId *win32.GUID, dwFlags uint32, ppNewStream **mediadirectshow.IMediaStream) error {
+	return win32.HRESULTError(int32(self.Raw.AddMediaStream(pStreamObject.Raw, PurposeId, dwFlags, ppNewStream)))
 }
 
 // OpenFile wraps the raw OpenFile call.
@@ -1411,8 +1416,8 @@ func (self IAMMultiMediaStream) OpenFile(pszFileName string, dwFlags uint32) err
 }
 
 // OpenMoniker wraps the raw OpenMoniker call.
-func (self IAMMultiMediaStream) OpenMoniker(pCtx *systemcom.IBindCtx, pMoniker *systemcom.IMoniker, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.OpenMoniker(pCtx, pMoniker, dwFlags)))
+func (self IAMMultiMediaStream) OpenMoniker(pCtx systemcomidiom.IBindCtx, pMoniker systemcomidiom.IMoniker, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.OpenMoniker(pCtx.Raw, pMoniker.Raw, dwFlags)))
 }
 
 // Render wraps the raw Render call.
@@ -2124,13 +2129,13 @@ func (self IAMTVAudio) Put_TVAudioMode(lMode int32) error {
 }
 
 // RegisterNotificationCallBack wraps the raw RegisterNotificationCallBack call.
-func (self IAMTVAudio) RegisterNotificationCallBack(pNotify *mediadirectshow.IAMTunerNotification, lEvents int32) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterNotificationCallBack(pNotify, lEvents)))
+func (self IAMTVAudio) RegisterNotificationCallBack(pNotify IAMTunerNotification, lEvents int32) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterNotificationCallBack(pNotify.Raw, lEvents)))
 }
 
 // UnRegisterNotificationCallBack wraps the raw UnRegisterNotificationCallBack call.
-func (self IAMTVAudio) UnRegisterNotificationCallBack(pNotify *mediadirectshow.IAMTunerNotification) error {
-	return win32.HRESULTError(int32(self.Raw.UnRegisterNotificationCallBack(pNotify)))
+func (self IAMTVAudio) UnRegisterNotificationCallBack(pNotify IAMTunerNotification) error {
+	return win32.HRESULTError(int32(self.Raw.UnRegisterNotificationCallBack(pNotify.Raw)))
 }
 
 // IAMTVAudioNotification is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMTVAudioNotification with error-returning methods.
@@ -2400,13 +2405,13 @@ func (self IAMTuner) GetAvailableModes(plModes *int32) error {
 }
 
 // RegisterNotificationCallBack wraps the raw RegisterNotificationCallBack call.
-func (self IAMTuner) RegisterNotificationCallBack(pNotify *mediadirectshow.IAMTunerNotification, lEvents int32) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterNotificationCallBack(pNotify, lEvents)))
+func (self IAMTuner) RegisterNotificationCallBack(pNotify IAMTunerNotification, lEvents int32) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterNotificationCallBack(pNotify.Raw, lEvents)))
 }
 
 // UnRegisterNotificationCallBack wraps the raw UnRegisterNotificationCallBack call.
-func (self IAMTuner) UnRegisterNotificationCallBack(pNotify *mediadirectshow.IAMTunerNotification) error {
-	return win32.HRESULTError(int32(self.Raw.UnRegisterNotificationCallBack(pNotify)))
+func (self IAMTuner) UnRegisterNotificationCallBack(pNotify IAMTunerNotification) error {
+	return win32.HRESULTError(int32(self.Raw.UnRegisterNotificationCallBack(pNotify.Raw)))
 }
 
 // IAMTunerNotification is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMTunerNotification with error-returning methods.
@@ -2550,8 +2555,8 @@ func (self IAMVideoAccelerator) QueryRenderStatus(dwTypeIndex uint32, dwBufferIn
 }
 
 // DisplayFrame wraps the raw DisplayFrame call.
-func (self IAMVideoAccelerator) DisplayFrame(dwFlipToIndex uint32, pMediaSample *mediadirectshow.IMediaSample) error {
-	return win32.HRESULTError(int32(self.Raw.DisplayFrame(dwFlipToIndex, pMediaSample)))
+func (self IAMVideoAccelerator) DisplayFrame(dwFlipToIndex uint32, pMediaSample IMediaSample) error {
+	return win32.HRESULTError(int32(self.Raw.DisplayFrame(dwFlipToIndex, pMediaSample.Raw)))
 }
 
 // IAMVideoAcceleratorNotify is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMVideoAcceleratorNotify with error-returning methods.
@@ -2653,23 +2658,23 @@ func WrapIAMVideoControl(raw *mediadirectshow.IAMVideoControl) IAMVideoControl {
 }
 
 // GetCaps wraps the raw GetCaps call.
-func (self IAMVideoControl) GetCaps(pPin *mediadirectshow.IPin, pCapsFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetCaps(pPin, pCapsFlags)))
+func (self IAMVideoControl) GetCaps(pPin IPin, pCapsFlags *int32) error {
+	return win32.HRESULTError(int32(self.Raw.GetCaps(pPin.Raw, pCapsFlags)))
 }
 
 // SetMode wraps the raw SetMode call.
-func (self IAMVideoControl) SetMode(pPin *mediadirectshow.IPin, Mode int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetMode(pPin, Mode)))
+func (self IAMVideoControl) SetMode(pPin IPin, Mode int32) error {
+	return win32.HRESULTError(int32(self.Raw.SetMode(pPin.Raw, Mode)))
 }
 
 // GetMode wraps the raw GetMode call.
-func (self IAMVideoControl) GetMode(pPin *mediadirectshow.IPin, Mode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetMode(pPin, Mode)))
+func (self IAMVideoControl) GetMode(pPin IPin, Mode *int32) error {
+	return win32.HRESULTError(int32(self.Raw.GetMode(pPin.Raw, Mode)))
 }
 
 // GetCurrentActualFrameRate wraps the raw GetCurrentActualFrameRate call.
-func (self IAMVideoControl) GetCurrentActualFrameRate(pPin *mediadirectshow.IPin, ActualFrameRate *int64) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentActualFrameRate(pPin, ActualFrameRate)))
+func (self IAMVideoControl) GetCurrentActualFrameRate(pPin IPin, ActualFrameRate *int64) error {
+	return win32.HRESULTError(int32(self.Raw.GetCurrentActualFrameRate(pPin.Raw, ActualFrameRate)))
 }
 
 // IAMVideoDecimationProperties is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMVideoDecimationProperties with error-returning methods.
@@ -2731,8 +2736,8 @@ func WrapIAMWMBufferPass(raw *mediadirectshow.IAMWMBufferPass) IAMWMBufferPass {
 }
 
 // SetNotify wraps the raw SetNotify call.
-func (self IAMWMBufferPass) SetNotify(pCallback *mediadirectshow.IAMWMBufferPassCallback) error {
-	return win32.HRESULTError(int32(self.Raw.SetNotify(pCallback)))
+func (self IAMWMBufferPass) SetNotify(pCallback IAMWMBufferPassCallback) error {
+	return win32.HRESULTError(int32(self.Raw.SetNotify(pCallback.Raw)))
 }
 
 // IAMWMBufferPassCallback is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMWMBufferPassCallback with error-returning methods.
@@ -2747,8 +2752,8 @@ func WrapIAMWMBufferPassCallback(raw *mediadirectshow.IAMWMBufferPassCallback) I
 }
 
 // Notify wraps the raw Notify call.
-func (self IAMWMBufferPassCallback) Notify(pNSSBuffer3 *mediawindowsmediaformat.INSSBuffer3, pPin *mediadirectshow.IPin, prtStart *int64, prtEnd *int64) error {
-	return win32.HRESULTError(int32(self.Raw.Notify(pNSSBuffer3, pPin, prtStart, prtEnd)))
+func (self IAMWMBufferPassCallback) Notify(pNSSBuffer3 mediawindowsmediaformatidiom.INSSBuffer3, pPin IPin, prtStart *int64, prtEnd *int64) error {
+	return win32.HRESULTError(int32(self.Raw.Notify(pNSSBuffer3.Raw, pPin.Raw, prtStart, prtEnd)))
 }
 
 // IAMWstDecoder is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAMWstDecoder with error-returning methods.
@@ -2883,13 +2888,13 @@ func WrapIAsyncReader(raw *mediadirectshow.IAsyncReader) IAsyncReader {
 }
 
 // RequestAllocator wraps the raw RequestAllocator call.
-func (self IAsyncReader) RequestAllocator(pPreferred *mediadirectshow.IMemAllocator, pProps *mediadirectshow.ALLOCATOR_PROPERTIES, ppActual **mediadirectshow.IMemAllocator) error {
-	return win32.HRESULTError(int32(self.Raw.RequestAllocator(pPreferred, pProps, ppActual)))
+func (self IAsyncReader) RequestAllocator(pPreferred IMemAllocator, pProps *mediadirectshow.ALLOCATOR_PROPERTIES, ppActual **mediadirectshow.IMemAllocator) error {
+	return win32.HRESULTError(int32(self.Raw.RequestAllocator(pPreferred.Raw, pProps, ppActual)))
 }
 
 // Request wraps the raw Request call.
-func (self IAsyncReader) Request(pSample *mediadirectshow.IMediaSample, dwUser uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.Request(pSample, dwUser)))
+func (self IAsyncReader) Request(pSample IMediaSample, dwUser uintptr) error {
+	return win32.HRESULTError(int32(self.Raw.Request(pSample.Raw, dwUser)))
 }
 
 // WaitForNext wraps the raw WaitForNext call.
@@ -2898,8 +2903,8 @@ func (self IAsyncReader) WaitForNext(dwTimeout uint32, ppSample **mediadirectsho
 }
 
 // SyncReadAligned wraps the raw SyncReadAligned call.
-func (self IAsyncReader) SyncReadAligned(pSample *mediadirectshow.IMediaSample) error {
-	return win32.HRESULTError(int32(self.Raw.SyncReadAligned(pSample)))
+func (self IAsyncReader) SyncReadAligned(pSample IMediaSample) error {
+	return win32.HRESULTError(int32(self.Raw.SyncReadAligned(pSample.Raw)))
 }
 
 // SyncRead wraps the raw SyncRead call.
@@ -2965,8 +2970,8 @@ func (self IAudioMediaStream) SetFormat(lpWaveFormat unsafe.Pointer) error {
 }
 
 // CreateSample wraps the raw CreateSample call.
-func (self IAudioMediaStream) CreateSample(pAudioData *mediadirectshow.IAudioData, dwFlags uint32, ppSample **mediadirectshow.IAudioStreamSample) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSample(pAudioData, dwFlags, ppSample)))
+func (self IAudioMediaStream) CreateSample(pAudioData IAudioData, dwFlags uint32, ppSample **mediadirectshow.IAudioStreamSample) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSample(pAudioData.Raw, dwFlags, ppSample)))
 }
 
 // IAudioStreamSample is an idiomatic wrapper over the raw COM interface Media.DirectShow.IAudioStreamSample with error-returning methods.
@@ -4028,8 +4033,8 @@ func (self IBDA_NetworkProvider) GetTuningSpace(pguidTuingSpace *win32.GUID) err
 }
 
 // RegisterDeviceFilter wraps the raw RegisterDeviceFilter call.
-func (self IBDA_NetworkProvider) RegisterDeviceFilter(pUnkFilterControl *systemcom.IUnknown, ppvRegisitrationContext *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterDeviceFilter(pUnkFilterControl, ppvRegisitrationContext)))
+func (self IBDA_NetworkProvider) RegisterDeviceFilter(pUnkFilterControl systemcomidiom.IUnknown, ppvRegisitrationContext *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterDeviceFilter(pUnkFilterControl.Raw, ppvRegisitrationContext)))
 }
 
 // UnRegisterDeviceFilter wraps the raw UnRegisterDeviceFilter call.
@@ -4482,9 +4487,9 @@ func (self IBaseFilter) QueryFilterInfo(pInfo *mediadirectshow.FILTER_INFO) erro
 }
 
 // JoinFilterGraph wraps the raw JoinFilterGraph call.
-func (self IBaseFilter) JoinFilterGraph(pGraph *mediadirectshow.IFilterGraph, pName string) error {
+func (self IBaseFilter) JoinFilterGraph(pGraph IFilterGraph, pName string) error {
 	_pName := win32.UTF16Ptr(pName)
-	return win32.HRESULTError(int32(self.Raw.JoinFilterGraph(pGraph, foundation.PWSTR(_pName))))
+	return win32.HRESULTError(int32(self.Raw.JoinFilterGraph(pGraph.Raw, foundation.PWSTR(_pName))))
 }
 
 // QueryVendorInfo wraps the raw QueryVendorInfo call.
@@ -5100,8 +5105,8 @@ func WrapICaptureGraphBuilder(raw *mediadirectshow.ICaptureGraphBuilder) ICaptur
 }
 
 // SetFiltergraph wraps the raw SetFiltergraph call.
-func (self ICaptureGraphBuilder) SetFiltergraph(pfg *mediadirectshow.IGraphBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.SetFiltergraph(pfg)))
+func (self ICaptureGraphBuilder) SetFiltergraph(pfg IGraphBuilder) error {
+	return win32.HRESULTError(int32(self.Raw.SetFiltergraph(pfg.Raw)))
 }
 
 // GetFiltergraph wraps the raw GetFiltergraph call.
@@ -5116,18 +5121,18 @@ func (self ICaptureGraphBuilder) SetOutputFileName(pType *win32.GUID, lpstrFile 
 }
 
 // FindInterface wraps the raw FindInterface call.
-func (self ICaptureGraphBuilder) FindInterface(pCategory *win32.GUID, pf *mediadirectshow.IBaseFilter, riid *win32.GUID, ppint *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.FindInterface(pCategory, pf, riid, ppint)))
+func (self ICaptureGraphBuilder) FindInterface(pCategory *win32.GUID, pf IBaseFilter, riid *win32.GUID, ppint *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.FindInterface(pCategory, pf.Raw, riid, ppint)))
 }
 
 // RenderStream wraps the raw RenderStream call.
-func (self ICaptureGraphBuilder) RenderStream(pCategory *win32.GUID, pSource *systemcom.IUnknown, pfCompressor *mediadirectshow.IBaseFilter, pfRenderer *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.RenderStream(pCategory, pSource, pfCompressor, pfRenderer)))
+func (self ICaptureGraphBuilder) RenderStream(pCategory *win32.GUID, pSource systemcomidiom.IUnknown, pfCompressor IBaseFilter, pfRenderer IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.RenderStream(pCategory, pSource.Raw, pfCompressor.Raw, pfRenderer.Raw)))
 }
 
 // ControlStream wraps the raw ControlStream call.
-func (self ICaptureGraphBuilder) ControlStream(pCategory *win32.GUID, pFilter *mediadirectshow.IBaseFilter, pstart *int64, pstop *int64, wStartCookie uint16, wStopCookie uint16) error {
-	return win32.HRESULTError(int32(self.Raw.ControlStream(pCategory, pFilter, pstart, pstop, wStartCookie, wStopCookie)))
+func (self ICaptureGraphBuilder) ControlStream(pCategory *win32.GUID, pFilter IBaseFilter, pstart *int64, pstop *int64, wStartCookie uint16, wStopCookie uint16) error {
+	return win32.HRESULTError(int32(self.Raw.ControlStream(pCategory, pFilter.Raw, pstart, pstop, wStartCookie, wStopCookie)))
 }
 
 // AllocCapFile wraps the raw AllocCapFile call.
@@ -5137,10 +5142,10 @@ func (self ICaptureGraphBuilder) AllocCapFile(lpstr string, dwlSize uint64) erro
 }
 
 // CopyCaptureFile wraps the raw CopyCaptureFile call.
-func (self ICaptureGraphBuilder) CopyCaptureFile(lpwstrOld string, lpwstrNew string, fAllowEscAbort int32, pCallback *mediadirectshow.IAMCopyCaptureFileProgress) error {
+func (self ICaptureGraphBuilder) CopyCaptureFile(lpwstrOld string, lpwstrNew string, fAllowEscAbort int32, pCallback IAMCopyCaptureFileProgress) error {
 	_lpwstrOld := win32.UTF16Ptr(lpwstrOld)
 	_lpwstrNew := win32.UTF16Ptr(lpwstrNew)
-	return win32.HRESULTError(int32(self.Raw.CopyCaptureFile(foundation.PWSTR(_lpwstrOld), foundation.PWSTR(_lpwstrNew), fAllowEscAbort, pCallback)))
+	return win32.HRESULTError(int32(self.Raw.CopyCaptureFile(foundation.PWSTR(_lpwstrOld), foundation.PWSTR(_lpwstrNew), fAllowEscAbort, pCallback.Raw)))
 }
 
 // ICaptureGraphBuilder2 is an idiomatic wrapper over the raw COM interface Media.DirectShow.ICaptureGraphBuilder2 with error-returning methods.
@@ -5155,8 +5160,8 @@ func WrapICaptureGraphBuilder2(raw *mediadirectshow.ICaptureGraphBuilder2) ICapt
 }
 
 // SetFiltergraph wraps the raw SetFiltergraph call.
-func (self ICaptureGraphBuilder2) SetFiltergraph(pfg *mediadirectshow.IGraphBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.SetFiltergraph(pfg)))
+func (self ICaptureGraphBuilder2) SetFiltergraph(pfg IGraphBuilder) error {
+	return win32.HRESULTError(int32(self.Raw.SetFiltergraph(pfg.Raw)))
 }
 
 // GetFiltergraph wraps the raw GetFiltergraph call.
@@ -5171,18 +5176,18 @@ func (self ICaptureGraphBuilder2) SetOutputFileName(pType *win32.GUID, lpstrFile
 }
 
 // FindInterface wraps the raw FindInterface call.
-func (self ICaptureGraphBuilder2) FindInterface(pCategory *win32.GUID, pType *win32.GUID, pf *mediadirectshow.IBaseFilter, riid *win32.GUID, ppint *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(self.Raw.FindInterface(pCategory, pType, pf, riid, ppint)))
+func (self ICaptureGraphBuilder2) FindInterface(pCategory *win32.GUID, pType *win32.GUID, pf IBaseFilter, riid *win32.GUID, ppint *unsafe.Pointer) error {
+	return win32.HRESULTError(int32(self.Raw.FindInterface(pCategory, pType, pf.Raw, riid, ppint)))
 }
 
 // RenderStream wraps the raw RenderStream call.
-func (self ICaptureGraphBuilder2) RenderStream(pCategory *win32.GUID, pType *win32.GUID, pSource *systemcom.IUnknown, pfCompressor *mediadirectshow.IBaseFilter, pfRenderer *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.RenderStream(pCategory, pType, pSource, pfCompressor, pfRenderer)))
+func (self ICaptureGraphBuilder2) RenderStream(pCategory *win32.GUID, pType *win32.GUID, pSource systemcomidiom.IUnknown, pfCompressor IBaseFilter, pfRenderer IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.RenderStream(pCategory, pType, pSource.Raw, pfCompressor.Raw, pfRenderer.Raw)))
 }
 
 // ControlStream wraps the raw ControlStream call.
-func (self ICaptureGraphBuilder2) ControlStream(pCategory *win32.GUID, pType *win32.GUID, pFilter *mediadirectshow.IBaseFilter, pstart *int64, pstop *int64, wStartCookie uint16, wStopCookie uint16) error {
-	return win32.HRESULTError(int32(self.Raw.ControlStream(pCategory, pType, pFilter, pstart, pstop, wStartCookie, wStopCookie)))
+func (self ICaptureGraphBuilder2) ControlStream(pCategory *win32.GUID, pType *win32.GUID, pFilter IBaseFilter, pstart *int64, pstop *int64, wStartCookie uint16, wStopCookie uint16) error {
+	return win32.HRESULTError(int32(self.Raw.ControlStream(pCategory, pType, pFilter.Raw, pstart, pstop, wStartCookie, wStopCookie)))
 }
 
 // AllocCapFile wraps the raw AllocCapFile call.
@@ -5192,16 +5197,16 @@ func (self ICaptureGraphBuilder2) AllocCapFile(lpstr string, dwlSize uint64) err
 }
 
 // CopyCaptureFile wraps the raw CopyCaptureFile call.
-func (self ICaptureGraphBuilder2) CopyCaptureFile(lpwstrOld string, lpwstrNew string, fAllowEscAbort int32, pCallback *mediadirectshow.IAMCopyCaptureFileProgress) error {
+func (self ICaptureGraphBuilder2) CopyCaptureFile(lpwstrOld string, lpwstrNew string, fAllowEscAbort int32, pCallback IAMCopyCaptureFileProgress) error {
 	_lpwstrOld := win32.UTF16Ptr(lpwstrOld)
 	_lpwstrNew := win32.UTF16Ptr(lpwstrNew)
-	return win32.HRESULTError(int32(self.Raw.CopyCaptureFile(foundation.PWSTR(_lpwstrOld), foundation.PWSTR(_lpwstrNew), fAllowEscAbort, pCallback)))
+	return win32.HRESULTError(int32(self.Raw.CopyCaptureFile(foundation.PWSTR(_lpwstrOld), foundation.PWSTR(_lpwstrNew), fAllowEscAbort, pCallback.Raw)))
 }
 
 // FindPin wraps the raw FindPin call.
-func (self ICaptureGraphBuilder2) FindPin(pSource *systemcom.IUnknown, pindir mediadirectshow.PIN_DIRECTION, pCategory *win32.GUID, pType *win32.GUID, fUnconnected bool, num int32, ppPin **mediadirectshow.IPin) error {
+func (self ICaptureGraphBuilder2) FindPin(pSource systemcomidiom.IUnknown, pindir mediadirectshow.PIN_DIRECTION, pCategory *win32.GUID, pType *win32.GUID, fUnconnected bool, num int32, ppPin **mediadirectshow.IPin) error {
 	_fUnconnected := foundation.BOOL(win32.Bool32(fUnconnected))
-	return win32.HRESULTError(int32(self.Raw.FindPin(pSource, pindir, pCategory, pType, _fUnconnected, num, ppPin)))
+	return win32.HRESULTError(int32(self.Raw.FindPin(pSource.Raw, pindir, pCategory, pType, _fUnconnected, num, ppPin)))
 }
 
 // IConfigAsfWriter is an idiomatic wrapper over the raw COM interface Media.DirectShow.IConfigAsfWriter with error-returning methods.
@@ -5236,8 +5241,8 @@ func (self IConfigAsfWriter) GetCurrentProfileGuid(pProfileGuid *win32.GUID) err
 }
 
 // ConfigureFilterUsingProfile wraps the raw ConfigureFilterUsingProfile call.
-func (self IConfigAsfWriter) ConfigureFilterUsingProfile(pProfile *mediawindowsmediaformat.IWMProfile) error {
-	return win32.HRESULTError(int32(self.Raw.ConfigureFilterUsingProfile(pProfile)))
+func (self IConfigAsfWriter) ConfigureFilterUsingProfile(pProfile mediawindowsmediaformatidiom.IWMProfile) error {
+	return win32.HRESULTError(int32(self.Raw.ConfigureFilterUsingProfile(pProfile.Raw)))
 }
 
 // GetCurrentProfile wraps the raw GetCurrentProfile call.
@@ -5268,8 +5273,8 @@ func WrapIConfigAsfWriter2(raw *mediadirectshow.IConfigAsfWriter2) IConfigAsfWri
 }
 
 // StreamNumFromPin wraps the raw StreamNumFromPin call.
-func (self IConfigAsfWriter2) StreamNumFromPin(pPin *mediadirectshow.IPin, pwStreamNum *uint16) error {
-	return win32.HRESULTError(int32(self.Raw.StreamNumFromPin(pPin, pwStreamNum)))
+func (self IConfigAsfWriter2) StreamNumFromPin(pPin IPin, pwStreamNum *uint16) error {
+	return win32.HRESULTError(int32(self.Raw.StreamNumFromPin(pPin.Raw, pwStreamNum)))
 }
 
 // SetParam wraps the raw SetParam call.
@@ -5378,8 +5383,8 @@ func WrapIDDrawExclModeVideo(raw *mediadirectshow.IDDrawExclModeVideo) IDDrawExc
 }
 
 // SetDDrawObject wraps the raw SetDDrawObject call.
-func (self IDDrawExclModeVideo) SetDDrawObject(pDDrawObject *graphicsdirectdraw.IDirectDraw) error {
-	return win32.HRESULTError(int32(self.Raw.SetDDrawObject(pDDrawObject)))
+func (self IDDrawExclModeVideo) SetDDrawObject(pDDrawObject graphicsdirectdrawidiom.IDirectDraw) error {
+	return win32.HRESULTError(int32(self.Raw.SetDDrawObject(pDDrawObject.Raw)))
 }
 
 // GetDDrawObject wraps the raw GetDDrawObject call.
@@ -5388,8 +5393,8 @@ func (self IDDrawExclModeVideo) GetDDrawObject(ppDDrawObject **graphicsdirectdra
 }
 
 // SetDDrawSurface wraps the raw SetDDrawSurface call.
-func (self IDDrawExclModeVideo) SetDDrawSurface(pDDrawSurface *graphicsdirectdraw.IDirectDrawSurface) error {
-	return win32.HRESULTError(int32(self.Raw.SetDDrawSurface(pDDrawSurface)))
+func (self IDDrawExclModeVideo) SetDDrawSurface(pDDrawSurface graphicsdirectdrawidiom.IDirectDrawSurface) error {
+	return win32.HRESULTError(int32(self.Raw.SetDDrawSurface(pDDrawSurface.Raw)))
 }
 
 // GetDDrawSurface wraps the raw GetDDrawSurface call.
@@ -5408,8 +5413,8 @@ func (self IDDrawExclModeVideo) GetNativeVideoProps(pdwVideoWidth *uint32, pdwVi
 }
 
 // SetCallbackInterface wraps the raw SetCallbackInterface call.
-func (self IDDrawExclModeVideo) SetCallbackInterface(pCallback *mediadirectshow.IDDrawExclModeVideoCallback, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetCallbackInterface(pCallback, dwFlags)))
+func (self IDDrawExclModeVideo) SetCallbackInterface(pCallback IDDrawExclModeVideoCallback, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetCallbackInterface(pCallback.Raw, dwFlags)))
 }
 
 // IDDrawExclModeVideoCallback is an idiomatic wrapper over the raw COM interface Media.DirectShow.IDDrawExclModeVideoCallback with error-returning methods.
@@ -5633,8 +5638,8 @@ func (self IDirectDrawMediaStream) GetFormat(pDDSDCurrent *graphicsdirectdraw.DD
 }
 
 // SetFormat wraps the raw SetFormat call.
-func (self IDirectDrawMediaStream) SetFormat(pDDSurfaceDesc *graphicsdirectdraw.DDSURFACEDESC, pDirectDrawPalette *graphicsdirectdraw.IDirectDrawPalette) error {
-	return win32.HRESULTError(int32(self.Raw.SetFormat(pDDSurfaceDesc, pDirectDrawPalette)))
+func (self IDirectDrawMediaStream) SetFormat(pDDSurfaceDesc *graphicsdirectdraw.DDSURFACEDESC, pDirectDrawPalette graphicsdirectdrawidiom.IDirectDrawPalette) error {
+	return win32.HRESULTError(int32(self.Raw.SetFormat(pDDSurfaceDesc, pDirectDrawPalette.Raw)))
 }
 
 // GetDirectDraw wraps the raw GetDirectDraw call.
@@ -5643,13 +5648,13 @@ func (self IDirectDrawMediaStream) GetDirectDraw(ppDirectDraw **graphicsdirectdr
 }
 
 // SetDirectDraw wraps the raw SetDirectDraw call.
-func (self IDirectDrawMediaStream) SetDirectDraw(pDirectDraw *graphicsdirectdraw.IDirectDraw) error {
-	return win32.HRESULTError(int32(self.Raw.SetDirectDraw(pDirectDraw)))
+func (self IDirectDrawMediaStream) SetDirectDraw(pDirectDraw graphicsdirectdrawidiom.IDirectDraw) error {
+	return win32.HRESULTError(int32(self.Raw.SetDirectDraw(pDirectDraw.Raw)))
 }
 
 // CreateSample wraps the raw CreateSample call.
-func (self IDirectDrawMediaStream) CreateSample(pSurface *graphicsdirectdraw.IDirectDrawSurface, pRect *foundation.RECT, dwFlags uint32, ppSample **mediadirectshow.IDirectDrawStreamSample) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSample(pSurface, pRect, dwFlags, ppSample)))
+func (self IDirectDrawMediaStream) CreateSample(pSurface graphicsdirectdrawidiom.IDirectDrawSurface, pRect *foundation.RECT, dwFlags uint32, ppSample **mediadirectshow.IDirectDrawStreamSample) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSample(pSurface.Raw, pRect, dwFlags, ppSample)))
 }
 
 // GetTimePerFrame wraps the raw GetTimePerFrame call.
@@ -5720,8 +5725,8 @@ func (self IDirectDrawVideo) GetFourCCCodes(pCount *uint32, pCodes *uint32) erro
 }
 
 // SetDirectDraw wraps the raw SetDirectDraw call.
-func (self IDirectDrawVideo) SetDirectDraw(pDirectDraw *graphicsdirectdraw.IDirectDraw) error {
-	return win32.HRESULTError(int32(self.Raw.SetDirectDraw(pDirectDraw)))
+func (self IDirectDrawVideo) SetDirectDraw(pDirectDraw graphicsdirectdrawidiom.IDirectDraw) error {
+	return win32.HRESULTError(int32(self.Raw.SetDirectDraw(pDirectDraw.Raw)))
 }
 
 // GetDirectDraw wraps the raw GetDirectDraw call.
@@ -5796,8 +5801,8 @@ func (self IDistributorNotify) Run(tStart int64) error {
 }
 
 // SetSyncSource wraps the raw SetSyncSource call.
-func (self IDistributorNotify) SetSyncSource(pClock *media.IReferenceClock) error {
-	return win32.HRESULTError(int32(self.Raw.SetSyncSource(pClock)))
+func (self IDistributorNotify) SetSyncSource(pClock mediaidiom.IReferenceClock) error {
+	return win32.HRESULTError(int32(self.Raw.SetSyncSource(pClock.Raw)))
 }
 
 // NotifyGraphChange wraps the raw NotifyGraphChange call.
@@ -6187,8 +6192,8 @@ func (self IDvdControl2) SetOption(flag mediadirectshow.DVD_OPTION_FLAG, fState 
 }
 
 // SetState wraps the raw SetState call.
-func (self IDvdControl2) SetState(pState *mediadirectshow.IDvdState, dwFlags uint32, ppCmd **mediadirectshow.IDvdCmd) error {
-	return win32.HRESULTError(int32(self.Raw.SetState(pState, dwFlags, ppCmd)))
+func (self IDvdControl2) SetState(pState IDvdState, dwFlags uint32, ppCmd **mediadirectshow.IDvdCmd) error {
+	return win32.HRESULTError(int32(self.Raw.SetState(pState.Raw, dwFlags, ppCmd)))
 }
 
 // PlayPeriodInTitleAutoStop wraps the raw PlayPeriodInTitleAutoStop call.
@@ -6956,23 +6961,23 @@ func WrapIFilterChain(raw *mediadirectshow.IFilterChain) IFilterChain {
 }
 
 // StartChain wraps the raw StartChain call.
-func (self IFilterChain) StartChain(pStartFilter *mediadirectshow.IBaseFilter, pEndFilter *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.StartChain(pStartFilter, pEndFilter)))
+func (self IFilterChain) StartChain(pStartFilter IBaseFilter, pEndFilter IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.StartChain(pStartFilter.Raw, pEndFilter.Raw)))
 }
 
 // PauseChain wraps the raw PauseChain call.
-func (self IFilterChain) PauseChain(pStartFilter *mediadirectshow.IBaseFilter, pEndFilter *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.PauseChain(pStartFilter, pEndFilter)))
+func (self IFilterChain) PauseChain(pStartFilter IBaseFilter, pEndFilter IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.PauseChain(pStartFilter.Raw, pEndFilter.Raw)))
 }
 
 // StopChain wraps the raw StopChain call.
-func (self IFilterChain) StopChain(pStartFilter *mediadirectshow.IBaseFilter, pEndFilter *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.StopChain(pStartFilter, pEndFilter)))
+func (self IFilterChain) StopChain(pStartFilter IBaseFilter, pEndFilter IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.StopChain(pStartFilter.Raw, pEndFilter.Raw)))
 }
 
 // RemoveChain wraps the raw RemoveChain call.
-func (self IFilterChain) RemoveChain(pStartFilter *mediadirectshow.IBaseFilter, pEndFilter *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveChain(pStartFilter, pEndFilter)))
+func (self IFilterChain) RemoveChain(pStartFilter IBaseFilter, pEndFilter IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveChain(pStartFilter.Raw, pEndFilter.Raw)))
 }
 
 // IFilterGraph is an idiomatic wrapper over the raw COM interface Media.DirectShow.IFilterGraph with error-returning methods.
@@ -6987,14 +6992,14 @@ func WrapIFilterGraph(raw *mediadirectshow.IFilterGraph) IFilterGraph {
 }
 
 // AddFilter wraps the raw AddFilter call.
-func (self IFilterGraph) AddFilter(pFilter *mediadirectshow.IBaseFilter, pName string) error {
+func (self IFilterGraph) AddFilter(pFilter IBaseFilter, pName string) error {
 	_pName := win32.UTF16Ptr(pName)
-	return win32.HRESULTError(int32(self.Raw.AddFilter(pFilter, foundation.PWSTR(_pName))))
+	return win32.HRESULTError(int32(self.Raw.AddFilter(pFilter.Raw, foundation.PWSTR(_pName))))
 }
 
 // RemoveFilter wraps the raw RemoveFilter call.
-func (self IFilterGraph) RemoveFilter(pFilter *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveFilter(pFilter)))
+func (self IFilterGraph) RemoveFilter(pFilter IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveFilter(pFilter.Raw)))
 }
 
 // EnumFilters wraps the raw EnumFilters call.
@@ -7009,18 +7014,18 @@ func (self IFilterGraph) FindFilterByName(pName string, ppFilter **mediadirectsh
 }
 
 // ConnectDirect wraps the raw ConnectDirect call.
-func (self IFilterGraph) ConnectDirect(ppinOut *mediadirectshow.IPin, ppinIn *mediadirectshow.IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectDirect(ppinOut, ppinIn, pmt)))
+func (self IFilterGraph) ConnectDirect(ppinOut IPin, ppinIn IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectDirect(ppinOut.Raw, ppinIn.Raw, pmt)))
 }
 
 // Reconnect wraps the raw Reconnect call.
-func (self IFilterGraph) Reconnect(ppin *mediadirectshow.IPin) error {
-	return win32.HRESULTError(int32(self.Raw.Reconnect(ppin)))
+func (self IFilterGraph) Reconnect(ppin IPin) error {
+	return win32.HRESULTError(int32(self.Raw.Reconnect(ppin.Raw)))
 }
 
 // Disconnect wraps the raw Disconnect call.
-func (self IFilterGraph) Disconnect(ppin *mediadirectshow.IPin) error {
-	return win32.HRESULTError(int32(self.Raw.Disconnect(ppin)))
+func (self IFilterGraph) Disconnect(ppin IPin) error {
+	return win32.HRESULTError(int32(self.Raw.Disconnect(ppin.Raw)))
 }
 
 // SetDefaultSyncSource wraps the raw SetDefaultSyncSource call.
@@ -7040,19 +7045,19 @@ func WrapIFilterGraph2(raw *mediadirectshow.IFilterGraph2) IFilterGraph2 {
 }
 
 // AddSourceFilterForMoniker wraps the raw AddSourceFilterForMoniker call.
-func (self IFilterGraph2) AddSourceFilterForMoniker(pMoniker *systemcom.IMoniker, pCtx *systemcom.IBindCtx, lpcwstrFilterName string, ppFilter **mediadirectshow.IBaseFilter) error {
+func (self IFilterGraph2) AddSourceFilterForMoniker(pMoniker systemcomidiom.IMoniker, pCtx systemcomidiom.IBindCtx, lpcwstrFilterName string, ppFilter **mediadirectshow.IBaseFilter) error {
 	_lpcwstrFilterName := win32.UTF16Ptr(lpcwstrFilterName)
-	return win32.HRESULTError(int32(self.Raw.AddSourceFilterForMoniker(pMoniker, pCtx, foundation.PWSTR(_lpcwstrFilterName), ppFilter)))
+	return win32.HRESULTError(int32(self.Raw.AddSourceFilterForMoniker(pMoniker.Raw, pCtx.Raw, foundation.PWSTR(_lpcwstrFilterName), ppFilter)))
 }
 
 // ReconnectEx wraps the raw ReconnectEx call.
-func (self IFilterGraph2) ReconnectEx(ppin *mediadirectshow.IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.ReconnectEx(ppin, pmt)))
+func (self IFilterGraph2) ReconnectEx(ppin IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.ReconnectEx(ppin.Raw, pmt)))
 }
 
 // RenderEx wraps the raw RenderEx call.
-func (self IFilterGraph2) RenderEx(pPinOut *mediadirectshow.IPin, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RenderEx(pPinOut, dwFlags, nil)))
+func (self IFilterGraph2) RenderEx(pPinOut IPin, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RenderEx(pPinOut.Raw, dwFlags, nil)))
 }
 
 // IFilterGraph3 is an idiomatic wrapper over the raw COM interface Media.DirectShow.IFilterGraph3 with error-returning methods.
@@ -7067,8 +7072,8 @@ func WrapIFilterGraph3(raw *mediadirectshow.IFilterGraph3) IFilterGraph3 {
 }
 
 // SetSyncSourceEx wraps the raw SetSyncSourceEx call.
-func (self IFilterGraph3) SetSyncSourceEx(pClockForMostOfFilterGraph *media.IReferenceClock, pClockForFilter *media.IReferenceClock, pFilter *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.SetSyncSourceEx(pClockForMostOfFilterGraph, pClockForFilter, pFilter)))
+func (self IFilterGraph3) SetSyncSourceEx(pClockForMostOfFilterGraph mediaidiom.IReferenceClock, pClockForFilter mediaidiom.IReferenceClock, pFilter IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.SetSyncSourceEx(pClockForMostOfFilterGraph.Raw, pClockForFilter.Raw, pFilter.Raw)))
 }
 
 // IFilterInfo is an idiomatic wrapper over the raw COM interface Media.DirectShow.IFilterInfo with error-returning methods.
@@ -7384,13 +7389,13 @@ func WrapIGraphBuilder(raw *mediadirectshow.IGraphBuilder) IGraphBuilder {
 }
 
 // Connect wraps the raw Connect call.
-func (self IGraphBuilder) Connect(ppinOut *mediadirectshow.IPin, ppinIn *mediadirectshow.IPin) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(ppinOut, ppinIn)))
+func (self IGraphBuilder) Connect(ppinOut IPin, ppinIn IPin) error {
+	return win32.HRESULTError(int32(self.Raw.Connect(ppinOut.Raw, ppinIn.Raw)))
 }
 
 // Render wraps the raw Render call.
-func (self IGraphBuilder) Render(ppinOut *mediadirectshow.IPin) error {
-	return win32.HRESULTError(int32(self.Raw.Render(ppinOut)))
+func (self IGraphBuilder) Render(ppinOut IPin) error {
+	return win32.HRESULTError(int32(self.Raw.Render(ppinOut.Raw)))
 }
 
 // RenderFile wraps the raw RenderFile call.
@@ -7434,18 +7439,18 @@ func WrapIGraphConfig(raw *mediadirectshow.IGraphConfig) IGraphConfig {
 }
 
 // Reconnect wraps the raw Reconnect call.
-func (self IGraphConfig) Reconnect(pOutputPin *mediadirectshow.IPin, pInputPin *mediadirectshow.IPin, pmtFirstConnection *mediamediafoundation.AM_MEDIA_TYPE, pUsingFilter *mediadirectshow.IBaseFilter, hAbortEvent foundation.HANDLE, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Reconnect(pOutputPin, pInputPin, pmtFirstConnection, pUsingFilter, hAbortEvent, dwFlags)))
+func (self IGraphConfig) Reconnect(pOutputPin IPin, pInputPin IPin, pmtFirstConnection *mediamediafoundation.AM_MEDIA_TYPE, pUsingFilter IBaseFilter, hAbortEvent foundation.HANDLE, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Reconnect(pOutputPin.Raw, pInputPin.Raw, pmtFirstConnection, pUsingFilter.Raw, hAbortEvent, dwFlags)))
 }
 
 // Reconfigure wraps the raw Reconfigure call.
-func (self IGraphConfig) Reconfigure(pCallback *mediadirectshow.IGraphConfigCallback, pvContext unsafe.Pointer, dwFlags uint32, hAbortEvent foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.Reconfigure(pCallback, pvContext, dwFlags, hAbortEvent)))
+func (self IGraphConfig) Reconfigure(pCallback IGraphConfigCallback, pvContext unsafe.Pointer, dwFlags uint32, hAbortEvent foundation.HANDLE) error {
+	return win32.HRESULTError(int32(self.Raw.Reconfigure(pCallback.Raw, pvContext, dwFlags, hAbortEvent)))
 }
 
 // AddFilterToCache wraps the raw AddFilterToCache call.
-func (self IGraphConfig) AddFilterToCache(pFilter *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.AddFilterToCache(pFilter)))
+func (self IGraphConfig) AddFilterToCache(pFilter IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.AddFilterToCache(pFilter.Raw)))
 }
 
 // EnumCacheFilter wraps the raw EnumCacheFilter call.
@@ -7454,8 +7459,8 @@ func (self IGraphConfig) EnumCacheFilter(pEnum **mediadirectshow.IEnumFilters) e
 }
 
 // RemoveFilterFromCache wraps the raw RemoveFilterFromCache call.
-func (self IGraphConfig) RemoveFilterFromCache(pFilter *mediadirectshow.IBaseFilter) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveFilterFromCache(pFilter)))
+func (self IGraphConfig) RemoveFilterFromCache(pFilter IBaseFilter) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveFilterFromCache(pFilter.Raw)))
 }
 
 // GetStartTime wraps the raw GetStartTime call.
@@ -7464,23 +7469,23 @@ func (self IGraphConfig) GetStartTime(prtStart *int64) error {
 }
 
 // PushThroughData wraps the raw PushThroughData call.
-func (self IGraphConfig) PushThroughData(pOutputPin *mediadirectshow.IPin, pConnection *mediadirectshow.IPinConnection, hEventAbort foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.PushThroughData(pOutputPin, pConnection, hEventAbort)))
+func (self IGraphConfig) PushThroughData(pOutputPin IPin, pConnection IPinConnection, hEventAbort foundation.HANDLE) error {
+	return win32.HRESULTError(int32(self.Raw.PushThroughData(pOutputPin.Raw, pConnection.Raw, hEventAbort)))
 }
 
 // SetFilterFlags wraps the raw SetFilterFlags call.
-func (self IGraphConfig) SetFilterFlags(pFilter *mediadirectshow.IBaseFilter, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetFilterFlags(pFilter, dwFlags)))
+func (self IGraphConfig) SetFilterFlags(pFilter IBaseFilter, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetFilterFlags(pFilter.Raw, dwFlags)))
 }
 
 // GetFilterFlags wraps the raw GetFilterFlags call.
-func (self IGraphConfig) GetFilterFlags(pFilter *mediadirectshow.IBaseFilter, pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetFilterFlags(pFilter, pdwFlags)))
+func (self IGraphConfig) GetFilterFlags(pFilter IBaseFilter, pdwFlags *uint32) error {
+	return win32.HRESULTError(int32(self.Raw.GetFilterFlags(pFilter.Raw, pdwFlags)))
 }
 
 // RemoveFilterEx wraps the raw RemoveFilterEx call.
-func (self IGraphConfig) RemoveFilterEx(pFilter *mediadirectshow.IBaseFilter, Flags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveFilterEx(pFilter, Flags)))
+func (self IGraphConfig) RemoveFilterEx(pFilter IBaseFilter, Flags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.RemoveFilterEx(pFilter.Raw, Flags)))
 }
 
 // IGraphConfigCallback is an idiomatic wrapper over the raw COM interface Media.DirectShow.IGraphConfigCallback with error-returning methods.
@@ -7759,8 +7764,8 @@ func (self IMediaFilter) GetState(dwMilliSecsTimeout uint32, State *mediadirects
 }
 
 // SetSyncSource wraps the raw SetSyncSource call.
-func (self IMediaFilter) SetSyncSource(pClock *media.IReferenceClock) error {
-	return win32.HRESULTError(int32(self.Raw.SetSyncSource(pClock)))
+func (self IMediaFilter) SetSyncSource(pClock mediaidiom.IReferenceClock) error {
+	return win32.HRESULTError(int32(self.Raw.SetSyncSource(pClock.Raw)))
 }
 
 // GetSyncSource wraps the raw GetSyncSource call.
@@ -8141,8 +8146,8 @@ func (self IMediaStream) GetInformation(pPurposeId *win32.GUID, pType *mediadire
 }
 
 // SetSameFormat wraps the raw SetSameFormat call.
-func (self IMediaStream) SetSameFormat(pStreamThatHasDesiredFormat *mediadirectshow.IMediaStream, dwFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.SetSameFormat(pStreamThatHasDesiredFormat, dwFlags)))
+func (self IMediaStream) SetSameFormat(pStreamThatHasDesiredFormat IMediaStream, dwFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.SetSameFormat(pStreamThatHasDesiredFormat.Raw, dwFlags)))
 }
 
 // AllocateSample wraps the raw AllocateSample call.
@@ -8151,8 +8156,8 @@ func (self IMediaStream) AllocateSample(dwFlags uint32, ppSample **mediadirectsh
 }
 
 // CreateSharedSample wraps the raw CreateSharedSample call.
-func (self IMediaStream) CreateSharedSample(pExistingSample *mediadirectshow.IStreamSample, dwFlags uint32, ppNewSample **mediadirectshow.IStreamSample) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSharedSample(pExistingSample, dwFlags, ppNewSample)))
+func (self IMediaStream) CreateSharedSample(pExistingSample IStreamSample, dwFlags uint32, ppNewSample **mediadirectshow.IStreamSample) error {
+	return win32.HRESULTError(int32(self.Raw.CreateSharedSample(pExistingSample.Raw, dwFlags, ppNewSample)))
 }
 
 // SendEndOfStream wraps the raw SendEndOfStream call.
@@ -8172,8 +8177,8 @@ func WrapIMediaStreamFilter(raw *mediadirectshow.IMediaStreamFilter) IMediaStrea
 }
 
 // AddMediaStream wraps the raw AddMediaStream call.
-func (self IMediaStreamFilter) AddMediaStream(pAMMediaStream *mediadirectshow.IAMMediaStream) error {
-	return win32.HRESULTError(int32(self.Raw.AddMediaStream(pAMMediaStream)))
+func (self IMediaStreamFilter) AddMediaStream(pAMMediaStream IAMMediaStream) error {
+	return win32.HRESULTError(int32(self.Raw.AddMediaStream(pAMMediaStream.Raw)))
 }
 
 // GetMediaStream wraps the raw GetMediaStream call.
@@ -8276,8 +8281,8 @@ func (self IMemAllocator) GetBuffer(ppBuffer **mediadirectshow.IMediaSample, pSt
 }
 
 // ReleaseBuffer wraps the raw ReleaseBuffer call.
-func (self IMemAllocator) ReleaseBuffer(pBuffer *mediadirectshow.IMediaSample) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseBuffer(pBuffer)))
+func (self IMemAllocator) ReleaseBuffer(pBuffer IMediaSample) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseBuffer(pBuffer.Raw)))
 }
 
 // IMemAllocatorCallbackTemp is an idiomatic wrapper over the raw COM interface Media.DirectShow.IMemAllocatorCallbackTemp with error-returning methods.
@@ -8292,8 +8297,8 @@ func WrapIMemAllocatorCallbackTemp(raw *mediadirectshow.IMemAllocatorCallbackTem
 }
 
 // SetNotify wraps the raw SetNotify call.
-func (self IMemAllocatorCallbackTemp) SetNotify(pNotify *mediadirectshow.IMemAllocatorNotifyCallbackTemp) error {
-	return win32.HRESULTError(int32(self.Raw.SetNotify(pNotify)))
+func (self IMemAllocatorCallbackTemp) SetNotify(pNotify IMemAllocatorNotifyCallbackTemp) error {
+	return win32.HRESULTError(int32(self.Raw.SetNotify(pNotify.Raw)))
 }
 
 // GetFreeCount wraps the raw GetFreeCount call.
@@ -8334,9 +8339,9 @@ func (self IMemInputPin) GetAllocator(ppAllocator **mediadirectshow.IMemAllocato
 }
 
 // NotifyAllocator wraps the raw NotifyAllocator call.
-func (self IMemInputPin) NotifyAllocator(pAllocator *mediadirectshow.IMemAllocator, bReadOnly bool) error {
+func (self IMemInputPin) NotifyAllocator(pAllocator IMemAllocator, bReadOnly bool) error {
 	_bReadOnly := foundation.BOOL(win32.Bool32(bReadOnly))
-	return win32.HRESULTError(int32(self.Raw.NotifyAllocator(pAllocator, _bReadOnly)))
+	return win32.HRESULTError(int32(self.Raw.NotifyAllocator(pAllocator.Raw, _bReadOnly)))
 }
 
 // GetAllocatorRequirements wraps the raw GetAllocatorRequirements call.
@@ -8345,8 +8350,8 @@ func (self IMemInputPin) GetAllocatorRequirements(pProps *mediadirectshow.ALLOCA
 }
 
 // Receive wraps the raw Receive call.
-func (self IMemInputPin) Receive(pSample *mediadirectshow.IMediaSample) error {
-	return win32.HRESULTError(int32(self.Raw.Receive(pSample)))
+func (self IMemInputPin) Receive(pSample IMediaSample) error {
+	return win32.HRESULTError(int32(self.Raw.Receive(pSample.Raw)))
 }
 
 // ReceiveMultiple wraps the raw ReceiveMultiple call.
@@ -8427,8 +8432,8 @@ func (self IMixerOCX) SetDrawRegion(lpptTopLeftSC *foundation.POINT, prcDrawCC *
 }
 
 // Advise wraps the raw Advise call.
-func (self IMixerOCX) Advise(pmdns *mediadirectshow.IMixerOCXNotify) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pmdns)))
+func (self IMixerOCX) Advise(pmdns IMixerOCXNotify) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pmdns.Raw)))
 }
 
 // UnAdvise wraps the raw UnAdvise call.
@@ -8768,8 +8773,8 @@ func (self IOverlay) GetVideoPosition(pSourceRect *foundation.RECT, pDestination
 }
 
 // Advise wraps the raw Advise call.
-func (self IOverlay) Advise(pOverlayNotify *mediadirectshow.IOverlayNotify, dwInterests uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Advise(pOverlayNotify, dwInterests)))
+func (self IOverlay) Advise(pOverlayNotify IOverlayNotify, dwInterests uint32) error {
+	return win32.HRESULTError(int32(self.Raw.Advise(pOverlayNotify.Raw, dwInterests)))
 }
 
 // Unadvise wraps the raw Unadvise call.
@@ -8841,15 +8846,15 @@ func (self IPersistMediaPropertyBag) InitNew() error {
 }
 
 // Load wraps the raw Load call.
-func (self IPersistMediaPropertyBag) Load(pPropBag *mediadirectshow.IMediaPropertyBag, pErrorLog *systemcom.IErrorLog) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pPropBag, pErrorLog)))
+func (self IPersistMediaPropertyBag) Load(pPropBag IMediaPropertyBag, pErrorLog systemcomidiom.IErrorLog) error {
+	return win32.HRESULTError(int32(self.Raw.Load(pPropBag.Raw, pErrorLog.Raw)))
 }
 
 // Save wraps the raw Save call.
-func (self IPersistMediaPropertyBag) Save(pPropBag *mediadirectshow.IMediaPropertyBag, fClearDirty bool, fSaveAllProperties bool) error {
+func (self IPersistMediaPropertyBag) Save(pPropBag IMediaPropertyBag, fClearDirty bool, fSaveAllProperties bool) error {
 	_fClearDirty := foundation.BOOL(win32.Bool32(fClearDirty))
 	_fSaveAllProperties := foundation.BOOL(win32.Bool32(fSaveAllProperties))
-	return win32.HRESULTError(int32(self.Raw.Save(pPropBag, _fClearDirty, _fSaveAllProperties)))
+	return win32.HRESULTError(int32(self.Raw.Save(pPropBag.Raw, _fClearDirty, _fSaveAllProperties)))
 }
 
 // IPin is an idiomatic wrapper over the raw COM interface Media.DirectShow.IPin with error-returning methods.
@@ -8864,13 +8869,13 @@ func WrapIPin(raw *mediadirectshow.IPin) IPin {
 }
 
 // Connect wraps the raw Connect call.
-func (self IPin) Connect(pReceivePin *mediadirectshow.IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(pReceivePin, pmt)))
+func (self IPin) Connect(pReceivePin IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.Connect(pReceivePin.Raw, pmt)))
 }
 
 // ReceiveConnection wraps the raw ReceiveConnection call.
-func (self IPin) ReceiveConnection(pConnector *mediadirectshow.IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.ReceiveConnection(pConnector, pmt)))
+func (self IPin) ReceiveConnection(pConnector IPin, pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.ReceiveConnection(pConnector.Raw, pmt)))
 }
 
 // Disconnect wraps the raw Disconnect call.
@@ -9032,18 +9037,18 @@ func (self IPinInfo) Get_MediaTypes(ppUnk **systemcom.IDispatch) error {
 }
 
 // Connect wraps the raw Connect call.
-func (self IPinInfo) Connect(pPin *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(pPin)))
+func (self IPinInfo) Connect(pPin systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Connect(pPin.Raw)))
 }
 
 // ConnectDirect wraps the raw ConnectDirect call.
-func (self IPinInfo) ConnectDirect(pPin *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectDirect(pPin)))
+func (self IPinInfo) ConnectDirect(pPin systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectDirect(pPin.Raw)))
 }
 
 // ConnectWithType wraps the raw ConnectWithType call.
-func (self IPinInfo) ConnectWithType(pPin *systemcom.IUnknown, pMediaType *systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectWithType(pPin, pMediaType)))
+func (self IPinInfo) ConnectWithType(pPin systemcomidiom.IUnknown, pMediaType systemcomidiom.IDispatch) error {
+	return win32.HRESULTError(int32(self.Raw.ConnectWithType(pPin.Raw, pMediaType.Raw)))
 }
 
 // Disconnect wraps the raw Disconnect call.
@@ -9109,8 +9114,8 @@ func WrapIQualityControl(raw *mediadirectshow.IQualityControl) IQualityControl {
 }
 
 // SetSink wraps the raw SetSink call.
-func (self IQualityControl) SetSink(piqc *mediadirectshow.IQualityControl) error {
-	return win32.HRESULTError(int32(self.Raw.SetSink(piqc)))
+func (self IQualityControl) SetSink(piqc IQualityControl) error {
+	return win32.HRESULTError(int32(self.Raw.SetSink(piqc.Raw)))
 }
 
 // IQueueCommand is an idiomatic wrapper over the raw COM interface Media.DirectShow.IQueueCommand with error-returning methods.
@@ -9157,8 +9162,8 @@ func WrapIRegisterServiceProvider(raw *mediadirectshow.IRegisterServiceProvider)
 }
 
 // RegisterService wraps the raw RegisterService call.
-func (self IRegisterServiceProvider) RegisterService(guidService *win32.GUID, pUnkObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterService(guidService, pUnkObject)))
+func (self IRegisterServiceProvider) RegisterService(guidService *win32.GUID, pUnkObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.RegisterService(guidService, pUnkObject.Raw)))
 }
 
 // IResourceConsumer is an idiomatic wrapper over the raw COM interface Media.DirectShow.IResourceConsumer with error-returning methods.
@@ -9206,34 +9211,34 @@ func (self IResourceManager) RegisterGroup(pName string, cResource int32, palTok
 }
 
 // RequestResource wraps the raw RequestResource call.
-func (self IResourceManager) RequestResource(idResource int32, pFocusObject *systemcom.IUnknown, pConsumer *mediadirectshow.IResourceConsumer) error {
-	return win32.HRESULTError(int32(self.Raw.RequestResource(idResource, pFocusObject, pConsumer)))
+func (self IResourceManager) RequestResource(idResource int32, pFocusObject systemcomidiom.IUnknown, pConsumer IResourceConsumer) error {
+	return win32.HRESULTError(int32(self.Raw.RequestResource(idResource, pFocusObject.Raw, pConsumer.Raw)))
 }
 
 // NotifyAcquire wraps the raw NotifyAcquire call.
-func (self IResourceManager) NotifyAcquire(idResource int32, pConsumer *mediadirectshow.IResourceConsumer, hr foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.NotifyAcquire(idResource, pConsumer, hr)))
+func (self IResourceManager) NotifyAcquire(idResource int32, pConsumer IResourceConsumer, hr foundation.HRESULT) error {
+	return win32.HRESULTError(int32(self.Raw.NotifyAcquire(idResource, pConsumer.Raw, hr)))
 }
 
 // NotifyRelease wraps the raw NotifyRelease call.
-func (self IResourceManager) NotifyRelease(idResource int32, pConsumer *mediadirectshow.IResourceConsumer, bStillWant bool) error {
+func (self IResourceManager) NotifyRelease(idResource int32, pConsumer IResourceConsumer, bStillWant bool) error {
 	_bStillWant := foundation.BOOL(win32.Bool32(bStillWant))
-	return win32.HRESULTError(int32(self.Raw.NotifyRelease(idResource, pConsumer, _bStillWant)))
+	return win32.HRESULTError(int32(self.Raw.NotifyRelease(idResource, pConsumer.Raw, _bStillWant)))
 }
 
 // CancelRequest wraps the raw CancelRequest call.
-func (self IResourceManager) CancelRequest(idResource int32, pConsumer *mediadirectshow.IResourceConsumer) error {
-	return win32.HRESULTError(int32(self.Raw.CancelRequest(idResource, pConsumer)))
+func (self IResourceManager) CancelRequest(idResource int32, pConsumer IResourceConsumer) error {
+	return win32.HRESULTError(int32(self.Raw.CancelRequest(idResource, pConsumer.Raw)))
 }
 
 // SetFocus wraps the raw SetFocus call.
-func (self IResourceManager) SetFocus(pFocusObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.SetFocus(pFocusObject)))
+func (self IResourceManager) SetFocus(pFocusObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.SetFocus(pFocusObject.Raw)))
 }
 
 // ReleaseFocus wraps the raw ReleaseFocus call.
-func (self IResourceManager) ReleaseFocus(pFocusObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.ReleaseFocus(pFocusObject)))
+func (self IResourceManager) ReleaseFocus(pFocusObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.ReleaseFocus(pFocusObject.Raw)))
 }
 
 // ISeekingPassThru is an idiomatic wrapper over the raw COM interface Media.DirectShow.ISeekingPassThru with error-returning methods.
@@ -9248,9 +9253,9 @@ func WrapISeekingPassThru(raw *mediadirectshow.ISeekingPassThru) ISeekingPassThr
 }
 
 // Init wraps the raw Init call.
-func (self ISeekingPassThru) Init(bSupportRendering bool, pPin *mediadirectshow.IPin) error {
+func (self ISeekingPassThru) Init(bSupportRendering bool, pPin IPin) error {
 	_bSupportRendering := foundation.BOOL(win32.Bool32(bSupportRendering))
-	return win32.HRESULTError(int32(self.Raw.Init(_bSupportRendering, pPin)))
+	return win32.HRESULTError(int32(self.Raw.Init(_bSupportRendering, pPin.Raw)))
 }
 
 // ISelector is an idiomatic wrapper over the raw COM interface Media.DirectShow.ISelector with error-returning methods.
@@ -9307,13 +9312,13 @@ func WrapIStreamBuilder(raw *mediadirectshow.IStreamBuilder) IStreamBuilder {
 }
 
 // Render wraps the raw Render call.
-func (self IStreamBuilder) Render(ppinOut *mediadirectshow.IPin, pGraph *mediadirectshow.IGraphBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.Render(ppinOut, pGraph)))
+func (self IStreamBuilder) Render(ppinOut IPin, pGraph IGraphBuilder) error {
+	return win32.HRESULTError(int32(self.Raw.Render(ppinOut.Raw, pGraph.Raw)))
 }
 
 // Backout wraps the raw Backout call.
-func (self IStreamBuilder) Backout(ppinOut *mediadirectshow.IPin, pGraph *mediadirectshow.IGraphBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.Backout(ppinOut, pGraph)))
+func (self IStreamBuilder) Backout(ppinOut IPin, pGraph IGraphBuilder) error {
+	return win32.HRESULTError(int32(self.Raw.Backout(ppinOut.Raw, pGraph.Raw)))
 }
 
 // IStreamSample is an idiomatic wrapper over the raw COM interface Media.DirectShow.IStreamSample with error-returning methods.
@@ -9498,8 +9503,8 @@ func WrapIVMRFilterConfig(raw *mediadirectshow.IVMRFilterConfig) IVMRFilterConfi
 }
 
 // SetImageCompositor wraps the raw SetImageCompositor call.
-func (self IVMRFilterConfig) SetImageCompositor(lpVMRImgCompositor *mediadirectshow.IVMRImageCompositor) error {
-	return win32.HRESULTError(int32(self.Raw.SetImageCompositor(lpVMRImgCompositor)))
+func (self IVMRFilterConfig) SetImageCompositor(lpVMRImgCompositor IVMRImageCompositor) error {
+	return win32.HRESULTError(int32(self.Raw.SetImageCompositor(lpVMRImgCompositor.Raw)))
 }
 
 // SetNumberOfStreams wraps the raw SetNumberOfStreams call.
@@ -9544,8 +9549,8 @@ func WrapIVMRFilterConfig9(raw *mediadirectshow.IVMRFilterConfig9) IVMRFilterCon
 }
 
 // SetImageCompositor wraps the raw SetImageCompositor call.
-func (self IVMRFilterConfig9) SetImageCompositor(lpVMRImgCompositor *mediadirectshow.IVMRImageCompositor9) error {
-	return win32.HRESULTError(int32(self.Raw.SetImageCompositor(lpVMRImgCompositor)))
+func (self IVMRFilterConfig9) SetImageCompositor(lpVMRImgCompositor IVMRImageCompositor9) error {
+	return win32.HRESULTError(int32(self.Raw.SetImageCompositor(lpVMRImgCompositor.Raw)))
 }
 
 // SetNumberOfStreams wraps the raw SetNumberOfStreams call.
@@ -9590,13 +9595,13 @@ func WrapIVMRImageCompositor(raw *mediadirectshow.IVMRImageCompositor) IVMRImage
 }
 
 // InitCompositionTarget wraps the raw InitCompositionTarget call.
-func (self IVMRImageCompositor) InitCompositionTarget(pD3DDevice *systemcom.IUnknown, pddsRenderTarget *graphicsdirectdraw.IDirectDrawSurface7) error {
-	return win32.HRESULTError(int32(self.Raw.InitCompositionTarget(pD3DDevice, pddsRenderTarget)))
+func (self IVMRImageCompositor) InitCompositionTarget(pD3DDevice systemcomidiom.IUnknown, pddsRenderTarget graphicsdirectdrawidiom.IDirectDrawSurface7) error {
+	return win32.HRESULTError(int32(self.Raw.InitCompositionTarget(pD3DDevice.Raw, pddsRenderTarget.Raw)))
 }
 
 // TermCompositionTarget wraps the raw TermCompositionTarget call.
-func (self IVMRImageCompositor) TermCompositionTarget(pD3DDevice *systemcom.IUnknown, pddsRenderTarget *graphicsdirectdraw.IDirectDrawSurface7) error {
-	return win32.HRESULTError(int32(self.Raw.TermCompositionTarget(pD3DDevice, pddsRenderTarget)))
+func (self IVMRImageCompositor) TermCompositionTarget(pD3DDevice systemcomidiom.IUnknown, pddsRenderTarget graphicsdirectdrawidiom.IDirectDrawSurface7) error {
+	return win32.HRESULTError(int32(self.Raw.TermCompositionTarget(pD3DDevice.Raw, pddsRenderTarget.Raw)))
 }
 
 // SetStreamMediaType wraps the raw SetStreamMediaType call.
@@ -9606,8 +9611,8 @@ func (self IVMRImageCompositor) SetStreamMediaType(dwStrmID uint32, pmt *mediame
 }
 
 // CompositeImage wraps the raw CompositeImage call.
-func (self IVMRImageCompositor) CompositeImage(pD3DDevice *systemcom.IUnknown, pddsRenderTarget *graphicsdirectdraw.IDirectDrawSurface7, pmtRenderTarget *mediamediafoundation.AM_MEDIA_TYPE, rtStart int64, rtEnd int64, dwClrBkGnd uint32, pVideoStreamInfo *mediadirectshow.VMRVIDEOSTREAMINFO, cStreams uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CompositeImage(pD3DDevice, pddsRenderTarget, pmtRenderTarget, rtStart, rtEnd, dwClrBkGnd, pVideoStreamInfo, cStreams)))
+func (self IVMRImageCompositor) CompositeImage(pD3DDevice systemcomidiom.IUnknown, pddsRenderTarget graphicsdirectdrawidiom.IDirectDrawSurface7, pmtRenderTarget *mediamediafoundation.AM_MEDIA_TYPE, rtStart int64, rtEnd int64, dwClrBkGnd uint32, pVideoStreamInfo *mediadirectshow.VMRVIDEOSTREAMINFO, cStreams uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CompositeImage(pD3DDevice.Raw, pddsRenderTarget.Raw, pmtRenderTarget, rtStart, rtEnd, dwClrBkGnd, pVideoStreamInfo, cStreams)))
 }
 
 // IVMRImageCompositor9 is an idiomatic wrapper over the raw COM interface Media.DirectShow.IVMRImageCompositor9 with error-returning methods.
@@ -9622,13 +9627,13 @@ func WrapIVMRImageCompositor9(raw *mediadirectshow.IVMRImageCompositor9) IVMRIma
 }
 
 // InitCompositionDevice wraps the raw InitCompositionDevice call.
-func (self IVMRImageCompositor9) InitCompositionDevice(pD3DDevice *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.InitCompositionDevice(pD3DDevice)))
+func (self IVMRImageCompositor9) InitCompositionDevice(pD3DDevice systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.InitCompositionDevice(pD3DDevice.Raw)))
 }
 
 // TermCompositionDevice wraps the raw TermCompositionDevice call.
-func (self IVMRImageCompositor9) TermCompositionDevice(pD3DDevice *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.TermCompositionDevice(pD3DDevice)))
+func (self IVMRImageCompositor9) TermCompositionDevice(pD3DDevice systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.TermCompositionDevice(pD3DDevice.Raw)))
 }
 
 // SetStreamMediaType wraps the raw SetStreamMediaType call.
@@ -9638,8 +9643,8 @@ func (self IVMRImageCompositor9) SetStreamMediaType(dwStrmID uint32, pmt *mediam
 }
 
 // CompositeImage wraps the raw CompositeImage call.
-func (self IVMRImageCompositor9) CompositeImage(pD3DDevice *systemcom.IUnknown, pddsRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pmtRenderTarget *mediamediafoundation.AM_MEDIA_TYPE, rtStart int64, rtEnd int64, dwClrBkGnd uint32, pVideoStreamInfo *mediadirectshow.VMR9VideoStreamInfo, cStreams uint32) error {
-	return win32.HRESULTError(int32(self.Raw.CompositeImage(pD3DDevice, pddsRenderTarget, pmtRenderTarget, rtStart, rtEnd, dwClrBkGnd, pVideoStreamInfo, cStreams)))
+func (self IVMRImageCompositor9) CompositeImage(pD3DDevice systemcomidiom.IUnknown, pddsRenderTarget graphicsdirect3d9idiom.IDirect3DSurface9, pmtRenderTarget *mediamediafoundation.AM_MEDIA_TYPE, rtStart int64, rtEnd int64, dwClrBkGnd uint32, pVideoStreamInfo *mediadirectshow.VMR9VideoStreamInfo, cStreams uint32) error {
+	return win32.HRESULTError(int32(self.Raw.CompositeImage(pD3DDevice.Raw, pddsRenderTarget.Raw, pmtRenderTarget, rtStart, rtEnd, dwClrBkGnd, pVideoStreamInfo, cStreams)))
 }
 
 // IVMRImagePresenter is an idiomatic wrapper over the raw COM interface Media.DirectShow.IVMRImagePresenter with error-returning methods.
@@ -9748,8 +9753,8 @@ func WrapIVMRImagePresenterExclModeConfig(raw *mediadirectshow.IVMRImagePresente
 }
 
 // SetXlcModeDDObjAndPrimarySurface wraps the raw SetXlcModeDDObjAndPrimarySurface call.
-func (self IVMRImagePresenterExclModeConfig) SetXlcModeDDObjAndPrimarySurface(lpDDObj *graphicsdirectdraw.IDirectDraw7, lpPrimarySurf *graphicsdirectdraw.IDirectDrawSurface7) error {
-	return win32.HRESULTError(int32(self.Raw.SetXlcModeDDObjAndPrimarySurface(lpDDObj, lpPrimarySurf)))
+func (self IVMRImagePresenterExclModeConfig) SetXlcModeDDObjAndPrimarySurface(lpDDObj graphicsdirectdrawidiom.IDirectDraw7, lpPrimarySurf graphicsdirectdrawidiom.IDirectDrawSurface7) error {
+	return win32.HRESULTError(int32(self.Raw.SetXlcModeDDObjAndPrimarySurface(lpDDObj.Raw, lpPrimarySurf.Raw)))
 }
 
 // GetXlcModeDDObjAndPrimarySurface wraps the raw GetXlcModeDDObjAndPrimarySurface call.
@@ -10092,13 +10097,13 @@ func (self IVMRSurfaceAllocator) FreeSurface(dwID uintptr) error {
 }
 
 // PrepareSurface wraps the raw PrepareSurface call.
-func (self IVMRSurfaceAllocator) PrepareSurface(dwUserID uintptr, lpSurface *graphicsdirectdraw.IDirectDrawSurface7, dwSurfaceFlags uint32) error {
-	return win32.HRESULTError(int32(self.Raw.PrepareSurface(dwUserID, lpSurface, dwSurfaceFlags)))
+func (self IVMRSurfaceAllocator) PrepareSurface(dwUserID uintptr, lpSurface graphicsdirectdrawidiom.IDirectDrawSurface7, dwSurfaceFlags uint32) error {
+	return win32.HRESULTError(int32(self.Raw.PrepareSurface(dwUserID, lpSurface.Raw, dwSurfaceFlags)))
 }
 
 // AdviseNotify wraps the raw AdviseNotify call.
-func (self IVMRSurfaceAllocator) AdviseNotify(lpIVMRSurfAllocNotify *mediadirectshow.IVMRSurfaceAllocatorNotify) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseNotify(lpIVMRSurfAllocNotify)))
+func (self IVMRSurfaceAllocator) AdviseNotify(lpIVMRSurfAllocNotify IVMRSurfaceAllocatorNotify) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseNotify(lpIVMRSurfAllocNotify.Raw)))
 }
 
 // IVMRSurfaceAllocator9 is an idiomatic wrapper over the raw COM interface Media.DirectShow.IVMRSurfaceAllocator9 with error-returning methods.
@@ -10128,8 +10133,8 @@ func (self IVMRSurfaceAllocator9) GetSurface(dwUserID uintptr, SurfaceIndex uint
 }
 
 // AdviseNotify wraps the raw AdviseNotify call.
-func (self IVMRSurfaceAllocator9) AdviseNotify(lpIVMRSurfAllocNotify *mediadirectshow.IVMRSurfaceAllocatorNotify9) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseNotify(lpIVMRSurfAllocNotify)))
+func (self IVMRSurfaceAllocator9) AdviseNotify(lpIVMRSurfAllocNotify IVMRSurfaceAllocatorNotify9) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseNotify(lpIVMRSurfAllocNotify.Raw)))
 }
 
 // IVMRSurfaceAllocatorEx9 is an idiomatic wrapper over the raw COM interface Media.DirectShow.IVMRSurfaceAllocatorEx9 with error-returning methods.
@@ -10160,18 +10165,18 @@ func WrapIVMRSurfaceAllocatorNotify(raw *mediadirectshow.IVMRSurfaceAllocatorNot
 }
 
 // AdviseSurfaceAllocator wraps the raw AdviseSurfaceAllocator call.
-func (self IVMRSurfaceAllocatorNotify) AdviseSurfaceAllocator(dwUserID uintptr, lpIVRMSurfaceAllocator *mediadirectshow.IVMRSurfaceAllocator) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseSurfaceAllocator(dwUserID, lpIVRMSurfaceAllocator)))
+func (self IVMRSurfaceAllocatorNotify) AdviseSurfaceAllocator(dwUserID uintptr, lpIVRMSurfaceAllocator IVMRSurfaceAllocator) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseSurfaceAllocator(dwUserID, lpIVRMSurfaceAllocator.Raw)))
 }
 
 // SetDDrawDevice wraps the raw SetDDrawDevice call.
-func (self IVMRSurfaceAllocatorNotify) SetDDrawDevice(lpDDrawDevice *graphicsdirectdraw.IDirectDraw7, hMonitor graphicsgdi.HMONITOR) error {
-	return win32.HRESULTError(int32(self.Raw.SetDDrawDevice(lpDDrawDevice, hMonitor)))
+func (self IVMRSurfaceAllocatorNotify) SetDDrawDevice(lpDDrawDevice graphicsdirectdrawidiom.IDirectDraw7, hMonitor graphicsgdi.HMONITOR) error {
+	return win32.HRESULTError(int32(self.Raw.SetDDrawDevice(lpDDrawDevice.Raw, hMonitor)))
 }
 
 // ChangeDDrawDevice wraps the raw ChangeDDrawDevice call.
-func (self IVMRSurfaceAllocatorNotify) ChangeDDrawDevice(lpDDrawDevice *graphicsdirectdraw.IDirectDraw7, hMonitor graphicsgdi.HMONITOR) error {
-	return win32.HRESULTError(int32(self.Raw.ChangeDDrawDevice(lpDDrawDevice, hMonitor)))
+func (self IVMRSurfaceAllocatorNotify) ChangeDDrawDevice(lpDDrawDevice graphicsdirectdrawidiom.IDirectDraw7, hMonitor graphicsgdi.HMONITOR) error {
+	return win32.HRESULTError(int32(self.Raw.ChangeDDrawDevice(lpDDrawDevice.Raw, hMonitor)))
 }
 
 // RestoreDDrawSurfaces wraps the raw RestoreDDrawSurfaces call.
@@ -10201,18 +10206,18 @@ func WrapIVMRSurfaceAllocatorNotify9(raw *mediadirectshow.IVMRSurfaceAllocatorNo
 }
 
 // AdviseSurfaceAllocator wraps the raw AdviseSurfaceAllocator call.
-func (self IVMRSurfaceAllocatorNotify9) AdviseSurfaceAllocator(dwUserID uintptr, lpIVRMSurfaceAllocator *mediadirectshow.IVMRSurfaceAllocator9) error {
-	return win32.HRESULTError(int32(self.Raw.AdviseSurfaceAllocator(dwUserID, lpIVRMSurfaceAllocator)))
+func (self IVMRSurfaceAllocatorNotify9) AdviseSurfaceAllocator(dwUserID uintptr, lpIVRMSurfaceAllocator IVMRSurfaceAllocator9) error {
+	return win32.HRESULTError(int32(self.Raw.AdviseSurfaceAllocator(dwUserID, lpIVRMSurfaceAllocator.Raw)))
 }
 
 // SetD3DDevice wraps the raw SetD3DDevice call.
-func (self IVMRSurfaceAllocatorNotify9) SetD3DDevice(lpD3DDevice *graphicsdirect3d9.IDirect3DDevice9, hMonitor graphicsgdi.HMONITOR) error {
-	return win32.HRESULTError(int32(self.Raw.SetD3DDevice(lpD3DDevice, hMonitor)))
+func (self IVMRSurfaceAllocatorNotify9) SetD3DDevice(lpD3DDevice graphicsdirect3d9idiom.IDirect3DDevice9, hMonitor graphicsgdi.HMONITOR) error {
+	return win32.HRESULTError(int32(self.Raw.SetD3DDevice(lpD3DDevice.Raw, hMonitor)))
 }
 
 // ChangeD3DDevice wraps the raw ChangeD3DDevice call.
-func (self IVMRSurfaceAllocatorNotify9) ChangeD3DDevice(lpD3DDevice *graphicsdirect3d9.IDirect3DDevice9, hMonitor graphicsgdi.HMONITOR) error {
-	return win32.HRESULTError(int32(self.Raw.ChangeD3DDevice(lpD3DDevice, hMonitor)))
+func (self IVMRSurfaceAllocatorNotify9) ChangeD3DDevice(lpD3DDevice graphicsdirect3d9idiom.IDirect3DDevice9, hMonitor graphicsgdi.HMONITOR) error {
+	return win32.HRESULTError(int32(self.Raw.ChangeD3DDevice(lpD3DDevice.Raw, hMonitor)))
 }
 
 // AllocateSurfaceHelper wraps the raw AllocateSurfaceHelper call.
@@ -10663,13 +10668,13 @@ func WrapIVideoFrameStep(raw *mediadirectshow.IVideoFrameStep) IVideoFrameStep {
 }
 
 // Step wraps the raw Step call.
-func (self IVideoFrameStep) Step(dwFrames uint32, pStepObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Step(dwFrames, pStepObject)))
+func (self IVideoFrameStep) Step(dwFrames uint32, pStepObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.Step(dwFrames, pStepObject.Raw)))
 }
 
 // CanStep wraps the raw CanStep call.
-func (self IVideoFrameStep) CanStep(bMultiple int32, pStepObject *systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.CanStep(bMultiple, pStepObject)))
+func (self IVideoFrameStep) CanStep(bMultiple int32, pStepObject systemcomidiom.IUnknown) error {
+	return win32.HRESULTError(int32(self.Raw.CanStep(bMultiple, pStepObject.Raw)))
 }
 
 // CancelStep wraps the raw CancelStep call.
@@ -11101,8 +11106,8 @@ func WrapIWMCodecAMVideoAccelerator(raw *mediadirectshow.IWMCodecAMVideoAccelera
 }
 
 // SetAcceleratorInterface wraps the raw SetAcceleratorInterface call.
-func (self IWMCodecAMVideoAccelerator) SetAcceleratorInterface(pIAMVA *mediadirectshow.IAMVideoAccelerator) error {
-	return win32.HRESULTError(int32(self.Raw.SetAcceleratorInterface(pIAMVA)))
+func (self IWMCodecAMVideoAccelerator) SetAcceleratorInterface(pIAMVA IAMVideoAccelerator) error {
+	return win32.HRESULTError(int32(self.Raw.SetAcceleratorInterface(pIAMVA.Raw)))
 }
 
 // NegotiateConnection wraps the raw NegotiateConnection call.
@@ -11111,8 +11116,8 @@ func (self IWMCodecAMVideoAccelerator) NegotiateConnection(pMediaType *mediamedi
 }
 
 // SetPlayerNotify wraps the raw SetPlayerNotify call.
-func (self IWMCodecAMVideoAccelerator) SetPlayerNotify(pHook *mediawindowsmediaformat.IWMPlayerTimestampHook) error {
-	return win32.HRESULTError(int32(self.Raw.SetPlayerNotify(pHook)))
+func (self IWMCodecAMVideoAccelerator) SetPlayerNotify(pHook mediawindowsmediaformatidiom.IWMPlayerTimestampHook) error {
+	return win32.HRESULTError(int32(self.Raw.SetPlayerNotify(pHook.Raw)))
 }
 
 // IWMCodecVideoAccelerator is an idiomatic wrapper over the raw COM interface Media.DirectShow.IWMCodecVideoAccelerator with error-returning methods.
@@ -11127,11 +11132,11 @@ func WrapIWMCodecVideoAccelerator(raw *mediadirectshow.IWMCodecVideoAccelerator)
 }
 
 // NegotiateConnection wraps the raw NegotiateConnection call.
-func (self IWMCodecVideoAccelerator) NegotiateConnection(pIAMVA *mediadirectshow.IAMVideoAccelerator, pMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.NegotiateConnection(pIAMVA, pMediaType)))
+func (self IWMCodecVideoAccelerator) NegotiateConnection(pIAMVA IAMVideoAccelerator, pMediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
+	return win32.HRESULTError(int32(self.Raw.NegotiateConnection(pIAMVA.Raw, pMediaType)))
 }
 
 // SetPlayerNotify wraps the raw SetPlayerNotify call.
-func (self IWMCodecVideoAccelerator) SetPlayerNotify(pHook *mediawindowsmediaformat.IWMPlayerTimestampHook) error {
-	return win32.HRESULTError(int32(self.Raw.SetPlayerNotify(pHook)))
+func (self IWMCodecVideoAccelerator) SetPlayerNotify(pHook mediawindowsmediaformatidiom.IWMPlayerTimestampHook) error {
+	return win32.HRESULTError(int32(self.Raw.SetPlayerNotify(pHook.Raw)))
 }

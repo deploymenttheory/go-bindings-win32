@@ -25,6 +25,10 @@ type Generator struct {
 	// emittedFunctions is the raw tier's namespace → emitted-name set; the
 	// idiomatic tier only wraps functions the raw tier actually produced.
 	emittedFunctions map[string]map[string]bool
+	// emittedComMethods is the raw tier's "namespace\x00Interface" →
+	// metadata-index → emitted raw method name, so the idiomatic COM
+	// wrapper calls the exact (deduped, non-skipped) raw method.
+	emittedComMethods map[string]map[int]string
 
 	modulePath string
 	outDir     string
@@ -37,13 +41,14 @@ type Generator struct {
 
 // New builds an idiomatic Generator sharing the raw tier's mapper (so type
 // degradation decisions match exactly) and its emitted-function set.
-func New(registry *pipeline.Registry, mapper *typemap.Mapper, emittedFunctions map[string]map[string]bool, modulePath, outDir string) *Generator {
+func New(registry *pipeline.Registry, mapper *typemap.Mapper, emittedFunctions map[string]map[string]bool, emittedComMethods map[string]map[int]string, modulePath, outDir string) *Generator {
 	return &Generator{
-		registry:         registry,
-		mapper:           mapper,
-		emittedFunctions: emittedFunctions,
-		modulePath:       modulePath,
-		outDir:           outDir,
+		registry:          registry,
+		mapper:            mapper,
+		emittedFunctions:  emittedFunctions,
+		emittedComMethods: emittedComMethods,
+		modulePath:        modulePath,
+		outDir:            outDir,
 	}
 }
 
@@ -71,29 +76,49 @@ func (g *Generator) EmitAll() (int, error) {
 func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 	g.claimedNames = map[string]bool{}
 	packageName := naming.PackageName(meta.Namespace)
-	imports := typemap.ImportSet{}
+	packageDir := filepath.Join(g.outDir, filepath.FromSlash(naming.PackagePath(meta.Namespace)))
 
-	models := g.buildFunctionModels(meta, imports)
-	if len(models) == 0 {
+	// Interface wrapper type names claim before function names so a function
+	// can never shadow a wrapper's name.
+	interfaceImports := typemap.ImportSet{}
+	functionImports := typemap.ImportSet{}
+	interfaceModels := g.buildInterfaceModels(meta, interfaceImports)
+	functionModels := g.buildFunctionModels(meta, functionImports)
+	if len(functionModels) == 0 && len(interfaceModels) == 0 {
 		return false, nil
 	}
-	var body strings.Builder
-	for _, model := range models {
-		block, err := render.Function(model)
-		if err != nil {
+
+	if len(interfaceModels) > 0 {
+		var body strings.Builder
+		for _, model := range interfaceModels {
+			block, err := render.Interface(model)
+			if err != nil {
+				return false, err
+			}
+			body.WriteString(block)
+		}
+		if err := g.writeFile(packageDir, packageName+"_interfaces.go", packageName, interfaceImports, body.String()); err != nil {
 			return false, err
 		}
-		body.WriteString(block)
 	}
 
-	packageDir := filepath.Join(g.outDir, filepath.FromSlash(naming.PackagePath(meta.Namespace)))
-	if err := g.writeFile(packageDir, packageName+"_functions.go", packageName, imports, body.String()); err != nil {
-		return false, err
+	if len(functionModels) > 0 {
+		var body strings.Builder
+		for _, model := range functionModels {
+			block, err := render.Function(model)
+			if err != nil {
+				return false, err
+			}
+			body.WriteString(block)
+		}
+		if err := g.writeFile(packageDir, packageName+"_functions.go", packageName, functionImports, body.String()); err != nil {
+			return false, err
+		}
 	}
 
 	doc := fmt.Sprintf(
-		"%s\n\n//go:build windows\n\n// Package %s provides idiomatic Go wrappers over the raw Windows.Win32.%s bindings.\npackage %s\n",
-		generatedHeader, packageName, meta.Namespace, packageName)
+		"%s\n\n//go:build %s\n\n// Package %s provides idiomatic Go wrappers over the raw Windows.Win32.%s bindings.\npackage %s\n",
+		generatedHeader, fileasm.GeneratedBuildTag, packageName, meta.Namespace, packageName)
 	docPath := filepath.Join(packageDir, "doc.go")
 	g.writtenFiles[docPath] = true
 	return true, writeRawFile(docPath, []byte(doc))
@@ -120,7 +145,7 @@ func (g *Generator) writeFile(dir, fileName, packageName string, imports typemap
 	g.writtenFiles[path] = true
 	return fileasm.WriteGoFile(path, fileasm.File{
 		PackageName: packageName,
-		BuildTag:    "windows",
+		BuildTag:    fileasm.GeneratedBuildTag,
 		Imports:     pruned,
 		Body:        body,
 	})

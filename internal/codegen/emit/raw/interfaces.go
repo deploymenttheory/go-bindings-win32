@@ -43,6 +43,9 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 		g.diag("interface %s: unresolvable base chain, skipped", name)
 		return view.InterfaceModel{}, false
 	}
+	// Record the interface as emitted (even with zero un-skipped methods) so
+	// the idiomatic tier can embed it as a base.
+	g.markInterfaceEmitted(meta.Namespace, goName)
 	model := view.InterfaceModel{
 		TypeName: goName,
 		DocURL:   comInterface.Availability.DocURL,
@@ -100,8 +103,28 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 		}
 		methodNames[methodModel.GoName] = true
 		model.Methods = append(model.Methods, methodModel)
+		g.recordComMethod(meta.Namespace, goName, i, methodModel.GoName)
 	}
 	return model, true
+}
+
+// markInterfaceEmitted records that an interface was emitted, initializing
+// its (possibly empty) method map.
+func (g *Generator) markInterfaceEmitted(namespace, interfaceName string) {
+	if g.emittedComMethods == nil {
+		g.emittedComMethods = map[string]map[int]string{}
+	}
+	key := namespace + "\x00" + interfaceName
+	if g.emittedComMethods[key] == nil {
+		g.emittedComMethods[key] = map[int]string{}
+	}
+}
+
+// recordComMethod stores the emitted Go name of interface method index i so
+// the idiomatic tier can call it by its exact (deduped) name.
+func (g *Generator) recordComMethod(namespace, interfaceName string, metaIndex int, goName string) {
+	g.markInterfaceEmitted(namespace, interfaceName)
+	g.emittedComMethods[namespace+"\x00"+interfaceName][metaIndex] = goName
 }
 
 func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName string, method *win32meta.ComMethod, slot int, imports typemap.ImportSet) (view.ComMethodModel, bool) {

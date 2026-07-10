@@ -32,6 +32,14 @@ jobs:
       - name: Build idiomatic tier
         run: go build ./opinionated/...
 
+      # amd64 and arm64 share Win32's LLP64 layout, so the same bindings must
+      # compile for both; 386 is deliberately excluded by build constraints.
+      - name: Cross-compile for windows/arm64
+        run: go build ./bindings/... ./opinionated/...
+        env:
+          GOOS: windows
+          GOARCH: arm64
+
       - name: Unit tests (winmd reader + ingest)
         run: go test ./internal/...
 

@@ -13,12 +13,23 @@ import (
 //go:embed templates/*.tmpl
 var templateFS embed.FS
 
-var templates = template.Must(template.New("idiomatic").ParseFS(templateFS, "templates/*.tmpl"))
+var templates = template.Must(template.New("idiomatic").Funcs(template.FuncMap{
+	"join": strings.Join,
+}).ParseFS(templateFS, "templates/*.tmpl"))
 
 // Function renders one idiomatic function wrapper.
 func Function(model view.FunctionModel) (string, error) {
 	var builder strings.Builder
 	if err := templates.ExecuteTemplate(&builder, "function", model); err != nil {
+		return "", err
+	}
+	return builder.String(), nil
+}
+
+// Interface renders one idiomatic COM interface wrapper.
+func Interface(model view.InterfaceModel) (string, error) {
+	var builder strings.Builder
+	if err := templates.ExecuteTemplate(&builder, "interface", model); err != nil {
 		return "", err
 	}
 	return builder.String(), nil

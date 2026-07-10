@@ -219,7 +219,7 @@ func runIdiomatic(args []string) error {
 	if _, err := rawGen.EmitAll(nil); err != nil {
 		return err
 	}
-	idioGen := idiowin.New(registry, rawGen.Mapper(), rawGen.EmittedFunctions(), modulePath, *outDir)
+	idioGen := idiowin.New(registry, rawGen.Mapper(), rawGen.EmittedFunctions(), rawGen.EmittedComMethods(), modulePath, *outDir)
 	written, err := idioGen.EmitAll()
 	if err != nil {
 		return err

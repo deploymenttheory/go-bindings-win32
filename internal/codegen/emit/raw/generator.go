@@ -43,6 +43,11 @@ type Generator struct {
 	// idiomatic tier so it never wraps a skipped function.
 	emittedFunctions map[string]map[string]bool
 
+	// emittedComMethods records the exact emitted Go name of each COM
+	// method, keyed "namespace\x00Interface" → metadata-index → Go name, so
+	// the idiomatic tier calls the right (deduped, non-skipped) raw method.
+	emittedComMethods map[string]map[int]string
+
 	// Diagnostics collects all degradations and skips (ratchet input).
 	Diagnostics []string
 }
@@ -54,6 +59,12 @@ func (g *Generator) Mapper() *typemap.Mapper { return g.mapper }
 // EmittedFunctions returns namespace → set of emitted function Go names.
 func (g *Generator) EmittedFunctions() map[string]map[string]bool {
 	return g.emittedFunctions
+}
+
+// EmittedComMethods returns "namespace\x00Interface" → metadata-index → the
+// emitted raw Go method name.
+func (g *Generator) EmittedComMethods() map[string]map[int]string {
+	return g.emittedComMethods
 }
 
 // New builds a Generator. Import cycles among namespaces are computed up
@@ -80,6 +91,7 @@ func (g *Generator) EmitAll(filter map[string]bool) (int, error) {
 	g.abiRecords = map[string]ABIRecord{}
 	g.writtenFiles = map[string]bool{}
 	g.emittedFunctions = map[string]map[string]bool{}
+	g.emittedComMethods = map[string]map[int]string{}
 	emitted := map[string]bool{}
 	pending := make([]string, 0, len(g.registry.Namespaces))
 	if len(filter) > 0 {
@@ -295,8 +307,8 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	// Package doc: written directly because the package comment must sit
 	// above the package clause, which fileasm's scaffold doesn't model.
 	doc := fmt.Sprintf(
-		"%s\n\n//go:build windows\n\n// Package %s binds the Windows.Win32.%s API surface.\npackage %s\n",
-		generatedHeader, packageName, meta.Namespace, packageName)
+		"%s\n\n//go:build %s\n\n// Package %s binds the Windows.Win32.%s API surface.\npackage %s\n",
+		generatedHeader, fileasm.GeneratedBuildTag, packageName, meta.Namespace, packageName)
 	docPath := filepath.Join(packageDir, "doc.go")
 	g.writtenFiles[docPath] = true
 	return writeRawFile(docPath, []byte(doc))
@@ -342,7 +354,7 @@ func (g *Generator) writeFile(dir, fileName, packageName string, imports typemap
 	g.writtenFiles[path] = true
 	return fileasm.WriteGoFile(path, fileasm.File{
 		PackageName: packageName,
-		BuildTag:    "windows",
+		BuildTag:    fileasm.GeneratedBuildTag,
 		Imports:     pruned,
 		Body:        body,
 	})

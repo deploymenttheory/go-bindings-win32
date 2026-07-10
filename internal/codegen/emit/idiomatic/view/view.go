@@ -25,6 +25,44 @@ type FunctionModel struct {
 	RetExpr string
 }
 
+// InterfaceModel is an idiomatic COM wrapper: a struct holding the raw
+// interface pointer, embedding its idiomatic base, with error-returning
+// methods.
+type InterfaceModel struct {
+	CommentLines []string
+	TypeName     string
+	// RawType is the qualified raw interface type ("systemcomraw.IStream").
+	RawType string
+	// BaseType is the embedded idiomatic base wrapper type ("com.IUnknown"
+	// or a same-package name); "" for a root.
+	BaseType string
+	// BaseFieldName is the embedded field's Go name (the bare type name,
+	// unqualified), used as the struct-literal key.
+	BaseFieldName string
+	// BaseWrapCall constructs the embedded base from the raw base pointer,
+	// e.g. "WrapIUnknown(&raw.IUnknown)"; "" for a root.
+	BaseWrapCall string
+	// BaseRawField is the raw base embedded-field selector ("IUnknown").
+	BaseRawField string
+	Methods      []InterfaceMethodModel
+}
+
+// InterfaceMethodModel is one idiomatic COM method forwarding to the raw one.
+type InterfaceMethodModel struct {
+	CommentLines []string
+	GoName       string
+	// RawGoName is the exact raw method name to call.
+	RawGoName string
+	ParamStr  string
+	ReturnSig string
+	Preamble  []string
+	// RawArgs are the arguments passed to the raw method call.
+	RawArgs []string
+	// Shape: FuncErrorOnly (HRESULT→error) or FuncPassthrough (other).
+	Shape   int
+	RetExpr string
+}
+
 // Function body shapes.
 const (
 	// FuncPassthrough: `return <RawCall>` (or bare call for void).

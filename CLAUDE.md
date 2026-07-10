@@ -148,8 +148,24 @@ ergonomic wrapper per improvable function:
 Functions with nothing to improve are skipped (no pointless alias). Types
 resolve with `Context.QualifyOwn = true` so even same-namespace raw types are
 package-qualified. Selection mirrors the raw tier exactly (metadata order,
-first amd64 entry per name) so signatures always align. COM ergonomics are a
-later increment; v1 covers free functions (~8,200 wrappers, 208 packages).
+first amd64 entry per name) so signatures always align (~8,200 function
+wrappers, 208 packages).
+
+**Idiomatic COM** (`<pkg>_interfaces.go`): each raw COM interface gets a
+wrapper struct holding the raw pointer (`Raw *rawpkg.IFoo`) and embedding its
+idiomatic base wrapper (promoting inherited methods); `WrapIFoo(raw)`
+constructs it, threading the raw embedded base field. Methods forward to the
+raw vtable call, converting `HRESULT` → `error` and Go string/bool inputs.
+The raw tier records each emitted (deduped, non-skipped) COM method name so
+the wrapper calls the exact raw method; base embedding mirrors the raw tier's
+decision (severed cycle edges → rootless wrapper). ~43,600 wrappers.
+
+### Architecture support
+
+Generated files carry `//go:build windows && (amd64 || arm64)`
+(`fileasm.GeneratedBuildTag`). Win32 amd64 and arm64 share the LLP64 layout,
+so one binding set is correct on both; 386 (32-bit pointers) is deliberately
+excluded rather than silently miscompiled. CI cross-compiles for arm64.
 
 ### Name rules (`internal/codegen/naming/`)
 

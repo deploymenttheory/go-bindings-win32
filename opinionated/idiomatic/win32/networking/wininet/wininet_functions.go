@@ -401,10 +401,24 @@ func GopherFindFirstFile(hConnect unsafe.Pointer, lpszLocator string, lpszSearch
 
 // GopherGetAttribute wraps the raw GopherGetAttributeW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetattributew
-func GopherGetAttribute(hConnect unsafe.Pointer, lpszLocator string, lpszAttributeName string, lpBuffer *byte, dwBufferLength uint32, lpdwCharactersReturned *uint32, lpfnEnumerator networkingwininet.GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
+func GopherGetAttribute(hConnect unsafe.Pointer, lpszLocator string, lpszAttributeName string, lpBuffer []byte, lpdwCharactersReturned *uint32, lpfnEnumerator networkingwininet.GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
 	_lpszLocator := win32.UTF16Ptr(lpszLocator)
 	_lpszAttributeName := win32.UTF16Ptr(lpszAttributeName)
-	return networkingwininet.GopherGetAttributeW(hConnect, foundation.PWSTR(_lpszLocator), foundation.PWSTR(_lpszAttributeName), lpBuffer, dwBufferLength, lpdwCharactersReturned, lpfnEnumerator, dwContext)
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return networkingwininet.GopherGetAttributeW(hConnect, foundation.PWSTR(_lpszLocator), foundation.PWSTR(_lpszAttributeName), _lpBuffer, uint32(len(lpBuffer)), lpdwCharactersReturned, lpfnEnumerator, dwContext)
+}
+
+// GopherGetAttributeA wraps the raw GopherGetAttributeA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetattributea
+func GopherGetAttributeA(hConnect unsafe.Pointer, lpszLocator foundation.PSTR, lpszAttributeName foundation.PSTR, lpBuffer []byte, lpdwCharactersReturned *uint32, lpfnEnumerator networkingwininet.GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return networkingwininet.GopherGetAttributeA(hConnect, lpszLocator, lpszAttributeName, _lpBuffer, uint32(len(lpBuffer)), lpdwCharactersReturned, lpfnEnumerator, dwContext)
 }
 
 // GopherGetLocatorType wraps the raw GopherGetLocatorTypeW call with idiomatic Go types.

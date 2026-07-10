@@ -331,9 +331,13 @@ func PerfCreateInstance(ProviderHandle foundation.HANDLE, CounterSetGuid *win32.
 
 // PerfEnumerateCounterSet wraps the raw PerfEnumerateCounterSet call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/perflib/nf-perflib-perfenumeratecounterset
-func PerfEnumerateCounterSet(szMachine string, pCounterSetIds *win32.GUID, cCounterSetIds uint32, pcCounterSetIdsActual *uint32) uint32 {
+func PerfEnumerateCounterSet(szMachine string, pCounterSetIds []win32.GUID, pcCounterSetIdsActual *uint32) uint32 {
 	_szMachine := win32.UTF16Ptr(szMachine)
-	return systemperformance.PerfEnumerateCounterSet(foundation.PWSTR(_szMachine), pCounterSetIds, cCounterSetIds, pcCounterSetIdsActual)
+	var _pCounterSetIds *win32.GUID
+	if len(pCounterSetIds) > 0 {
+		_pCounterSetIds = &pCounterSetIds[0]
+	}
+	return systemperformance.PerfEnumerateCounterSet(foundation.PWSTR(_szMachine), _pCounterSetIds, uint32(len(pCounterSetIds)), pcCounterSetIdsActual)
 }
 
 // PerfEnumerateCounterSetInstances wraps the raw PerfEnumerateCounterSetInstances call with idiomatic Go types.

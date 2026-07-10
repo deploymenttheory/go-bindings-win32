@@ -31,6 +31,16 @@ func CommConfigDialog(lpszName string, hWnd foundation.HWND, lpCC *devicescommun
 	return devicescommunication.CommConfigDialogW(foundation.PWSTR(_lpszName), hWnd, lpCC)
 }
 
+// GetCommPorts wraps the raw GetCommPorts call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcommports
+func GetCommPorts(lpPortNumbers []uint32, puPortNumbersFound *uint32) uint32 {
+	var _lpPortNumbers *uint32
+	if len(lpPortNumbers) > 0 {
+		_lpPortNumbers = &lpPortNumbers[0]
+	}
+	return devicescommunication.GetCommPorts(_lpPortNumbers, uint32(len(lpPortNumbers)), puPortNumbersFound)
+}
+
 // GetDefaultCommConfig wraps the raw GetDefaultCommConfigW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdefaultcommconfigw
 func GetDefaultCommConfig(lpszName string, lpCC *devicescommunication.COMMCONFIG, lpdwSize *uint32) error {

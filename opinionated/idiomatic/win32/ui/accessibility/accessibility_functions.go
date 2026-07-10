@@ -23,8 +23,12 @@ func AccSetRunningUtilityState(hwndApp foundation.HWND, dwUtilityStateMask uint3
 
 // AccessibleChildren wraps the raw AccessibleChildren call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessiblechildren
-func AccessibleChildren(paccContainer *uiaccessibility.IAccessible, iChildStart int32, cChildren int32, rgvarChildren *systemvariant.VARIANT, pcObtained *int32) error {
-	return win32.HRESULTError(int32(uiaccessibility.AccessibleChildren(paccContainer, iChildStart, cChildren, rgvarChildren, pcObtained)))
+func AccessibleChildren(paccContainer *uiaccessibility.IAccessible, iChildStart int32, rgvarChildren []systemvariant.VARIANT, pcObtained *int32) error {
+	var _rgvarChildren *systemvariant.VARIANT
+	if len(rgvarChildren) > 0 {
+		_rgvarChildren = &rgvarChildren[0]
+	}
+	return win32.HRESULTError(int32(uiaccessibility.AccessibleChildren(paccContainer, iChildStart, int32(len(rgvarChildren)), _rgvarChildren, pcObtained)))
 }
 
 // AccessibleObjectFromEvent wraps the raw AccessibleObjectFromEvent call with idiomatic Go types.

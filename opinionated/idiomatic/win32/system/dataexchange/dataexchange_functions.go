@@ -139,6 +139,26 @@ func GetClipboardFormatName(format uint32, lpszFormatName foundation.PWSTR, cchM
 	return systemdataexchange.GetClipboardFormatNameW(format, lpszFormatName, cchMaxCount)
 }
 
+// GetPriorityClipboardFormat wraps the raw GetPriorityClipboardFormat call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpriorityclipboardformat
+func GetPriorityClipboardFormat(paFormatPriorityList []uint32) (int32, error) {
+	var _paFormatPriorityList *uint32
+	if len(paFormatPriorityList) > 0 {
+		_paFormatPriorityList = &paFormatPriorityList[0]
+	}
+	return systemdataexchange.GetPriorityClipboardFormat(_paFormatPriorityList, int32(len(paFormatPriorityList)))
+}
+
+// GetUpdatedClipboardFormats wraps the raw GetUpdatedClipboardFormats call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getupdatedclipboardformats
+func GetUpdatedClipboardFormats(lpuiFormats []uint32, pcFormatsOut *uint32) error {
+	var _lpuiFormats *uint32
+	if len(lpuiFormats) > 0 {
+		_lpuiFormats = &lpuiFormats[0]
+	}
+	return systemdataexchange.GetUpdatedClipboardFormats(_lpuiFormats, uint32(len(lpuiFormats)), pcFormatsOut)
+}
+
 // GlobalAddAtom wraps the raw GlobalAddAtomW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomw
 func GlobalAddAtom(lpString string) (uint16, error) {

@@ -124,8 +124,16 @@ func CoInternetSetFeatureEnabled(FeatureEntry systemcomurlmon.INTERNETFEATURELIS
 }
 
 // CompareSecurityIds wraps the raw CompareSecurityIds call with idiomatic Go types.
-func CompareSecurityIds(pbSecurityId1 *byte, dwLen1 uint32, pbSecurityId2 *byte, dwLen2 uint32, dwReserved uint32) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CompareSecurityIds(pbSecurityId1, dwLen1, pbSecurityId2, dwLen2, dwReserved)))
+func CompareSecurityIds(pbSecurityId1 []byte, pbSecurityId2 []byte, dwReserved uint32) error {
+	var _pbSecurityId1 *byte
+	if len(pbSecurityId1) > 0 {
+		_pbSecurityId1 = &pbSecurityId1[0]
+	}
+	var _pbSecurityId2 *byte
+	if len(pbSecurityId2) > 0 {
+		_pbSecurityId2 = &pbSecurityId2[0]
+	}
+	return win32.HRESULTError(int32(systemcomurlmon.CompareSecurityIds(_pbSecurityId1, uint32(len(pbSecurityId1)), _pbSecurityId2, uint32(len(pbSecurityId2)), dwReserved)))
 }
 
 // CompatFlagsFromClsid wraps the raw CompatFlagsFromClsid call with idiomatic Go types.
@@ -156,8 +164,12 @@ func CreateAsyncBindCtxEx(pbc *systemcom.IBindCtx, dwOptions uint32, pBSCb *syst
 
 // CreateFormatEnumerator wraps the raw CreateFormatEnumerator call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/urlmon/nf-urlmon-createformatenumerator
-func CreateFormatEnumerator(cfmtetc uint32, rgfmtetc *systemcom.FORMATETC, ppenumfmtetc **systemcom.IEnumFORMATETC) error {
-	return win32.HRESULTError(int32(systemcomurlmon.CreateFormatEnumerator(cfmtetc, rgfmtetc, ppenumfmtetc)))
+func CreateFormatEnumerator(rgfmtetc []systemcom.FORMATETC, ppenumfmtetc **systemcom.IEnumFORMATETC) error {
+	var _rgfmtetc *systemcom.FORMATETC
+	if len(rgfmtetc) > 0 {
+		_rgfmtetc = &rgfmtetc[0]
+	}
+	return win32.HRESULTError(int32(systemcomurlmon.CreateFormatEnumerator(uint32(len(rgfmtetc)), _rgfmtetc, ppenumfmtetc)))
 }
 
 // CreateURLMoniker wraps the raw CreateURLMoniker call with idiomatic Go types.

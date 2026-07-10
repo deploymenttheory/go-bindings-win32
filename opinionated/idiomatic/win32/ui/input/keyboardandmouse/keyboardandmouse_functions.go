@@ -30,6 +30,16 @@ func GetKeyNameText(lParam int32, lpString foundation.PWSTR, cchSize int32) (int
 	return uiinputkeyboardandmouse.GetKeyNameTextW(lParam, lpString, cchSize)
 }
 
+// GetKeyboardLayoutList wraps the raw GetKeyboardLayoutList call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeyboardlayoutlist
+func GetKeyboardLayoutList(lpList []uiinputkeyboardandmouse.HKL) (int32, error) {
+	var _lpList *uiinputkeyboardandmouse.HKL
+	if len(lpList) > 0 {
+		_lpList = &lpList[0]
+	}
+	return uiinputkeyboardandmouse.GetKeyboardLayoutList(int32(len(lpList)), _lpList)
+}
+
 // GetKeyboardLayoutName wraps the raw GetKeyboardLayoutNameW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeyboardlayoutnamew
 func GetKeyboardLayoutName(pwszKLID foundation.PWSTR) error {
@@ -40,6 +50,16 @@ func GetKeyboardLayoutName(pwszKLID foundation.PWSTR) error {
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getlastinputinfo
 func GetLastInputInfo(plii *uiinputkeyboardandmouse.LASTINPUTINFO) bool {
 	return uiinputkeyboardandmouse.GetLastInputInfo(plii) != 0
+}
+
+// GetMouseMovePointsEx wraps the raw GetMouseMovePointsEx call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmousemovepointsex
+func GetMouseMovePointsEx(cbSize uint32, lppt *uiinputkeyboardandmouse.MOUSEMOVEPOINT, lpptBuf []uiinputkeyboardandmouse.MOUSEMOVEPOINT, resolution uiinputkeyboardandmouse.GET_MOUSE_MOVE_POINTS_EX_RESOLUTION) (int32, error) {
+	var _lpptBuf *uiinputkeyboardandmouse.MOUSEMOVEPOINT
+	if len(lpptBuf) > 0 {
+		_lpptBuf = &lpptBuf[0]
+	}
+	return uiinputkeyboardandmouse.GetMouseMovePointsEx(cbSize, lppt, _lpptBuf, int32(len(lpptBuf)), resolution)
 }
 
 // IsWindowEnabled wraps the raw IsWindowEnabled call with idiomatic Go types.
@@ -65,6 +85,16 @@ func MapVirtualKey(uCode uint32, uMapType uiinputkeyboardandmouse.MAP_VIRTUAL_KE
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mapvirtualkeyexw
 func MapVirtualKeyEx(uCode uint32, uMapType uiinputkeyboardandmouse.MAP_VIRTUAL_KEY_TYPE, dwhkl uiinputkeyboardandmouse.HKL) uint32 {
 	return uiinputkeyboardandmouse.MapVirtualKeyExW(uCode, uMapType, dwhkl)
+}
+
+// SendInput wraps the raw SendInput call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendinput
+func SendInput(pInputs []uiinputkeyboardandmouse.INPUT, cbSize int32) (uint32, error) {
+	var _pInputs *uiinputkeyboardandmouse.INPUT
+	if len(pInputs) > 0 {
+		_pInputs = &pInputs[0]
+	}
+	return uiinputkeyboardandmouse.SendInput(uint32(len(pInputs)), _pInputs, cbSize)
 }
 
 // SwapMouseButton wraps the raw SwapMouseButton call with idiomatic Go types.

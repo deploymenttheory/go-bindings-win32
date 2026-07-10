@@ -5,13 +5,76 @@
 package extensibleauthenticationprotocol
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+	dataxmlmsxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/msxml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securityextensibleauthenticationprotocol "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/extensibleauthenticationprotocol"
 )
+
+// EapHostPeerCredentialsXml2Blob wraps the raw EapHostPeerCredentialsXml2Blob call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeercredentialsxml2blob
+func EapHostPeerCredentialsXml2Blob(dwFlags uint32, pCredentialsDoc *dataxmlmsxml.IXMLDOMNode, pConfigIn []byte, pdwSizeOfCredentialsOut *uint32, ppCredentialsOut **byte, pEapMethodType *securityextensibleauthenticationprotocol.EAP_METHOD_TYPE, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR) uint32 {
+	var _pConfigIn *byte
+	if len(pConfigIn) > 0 {
+		_pConfigIn = &pConfigIn[0]
+	}
+	return securityextensibleauthenticationprotocol.EapHostPeerCredentialsXml2Blob(dwFlags, pCredentialsDoc, uint32(len(pConfigIn)), _pConfigIn, pdwSizeOfCredentialsOut, ppCredentialsOut, pEapMethodType, ppEapError)
+}
 
 // EapHostPeerGetEncryptedPassword wraps the raw EapHostPeerGetEncryptedPassword call with idiomatic Go types.
 func EapHostPeerGetEncryptedPassword(dwSizeofPassword uint32, szPassword string, ppszEncPassword *foundation.PWSTR) uint32 {
 	_szPassword := win32.UTF16Ptr(szPassword)
 	return securityextensibleauthenticationprotocol.EapHostPeerGetEncryptedPassword(dwSizeofPassword, foundation.PWSTR(_szPassword), ppszEncPassword)
+}
+
+// EapHostPeerInvokeInteractiveUI wraps the raw EapHostPeerInvokeInteractiveUI call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerinvokeinteractiveui
+func EapHostPeerInvokeInteractiveUI(hwndParent foundation.HWND, pUIContextData []byte, pdwSizeOfDataFromInteractiveUI *uint32, ppDataFromInteractiveUI **byte, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR) uint32 {
+	var _pUIContextData *byte
+	if len(pUIContextData) > 0 {
+		_pUIContextData = &pUIContextData[0]
+	}
+	return securityextensibleauthenticationprotocol.EapHostPeerInvokeInteractiveUI(hwndParent, uint32(len(pUIContextData)), _pUIContextData, pdwSizeOfDataFromInteractiveUI, ppDataFromInteractiveUI, ppEapError)
+}
+
+// EapHostPeerProcessReceivedPacket wraps the raw EapHostPeerProcessReceivedPacket call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeerprocessreceivedpacket
+func EapHostPeerProcessReceivedPacket(sessionHandle uint32, pReceivePacket []byte, pEapOutput *securityextensibleauthenticationprotocol.EapHostPeerResponseAction, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR) uint32 {
+	var _pReceivePacket *byte
+	if len(pReceivePacket) > 0 {
+		_pReceivePacket = &pReceivePacket[0]
+	}
+	return securityextensibleauthenticationprotocol.EapHostPeerProcessReceivedPacket(sessionHandle, uint32(len(pReceivePacket)), _pReceivePacket, pEapOutput, ppEapError)
+}
+
+// EapHostPeerQueryInteractiveUIInputFields wraps the raw EapHostPeerQueryInteractiveUIInputFields call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerqueryinteractiveuiinputfields
+func EapHostPeerQueryInteractiveUIInputFields(dwVersion uint32, dwFlags uint32, pUIContextData []byte, pEapInteractiveUIData *securityextensibleauthenticationprotocol.EAP_INTERACTIVE_UI_DATA, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR, ppvReserved *unsafe.Pointer) uint32 {
+	var _pUIContextData *byte
+	if len(pUIContextData) > 0 {
+		_pUIContextData = &pUIContextData[0]
+	}
+	return securityextensibleauthenticationprotocol.EapHostPeerQueryInteractiveUIInputFields(dwVersion, dwFlags, uint32(len(pUIContextData)), _pUIContextData, pEapInteractiveUIData, ppEapError, ppvReserved)
+}
+
+// EapHostPeerQueryUIBlobFromInteractiveUIInputFields wraps the raw EapHostPeerQueryUIBlobFromInteractiveUIInputFields call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerqueryuiblobfrominteractiveuiinputfields
+func EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion uint32, dwFlags uint32, pUIContextData []byte, pEapInteractiveUIData *securityextensibleauthenticationprotocol.EAP_INTERACTIVE_UI_DATA, pdwSizeOfDataFromInteractiveUI *uint32, ppDataFromInteractiveUI **byte, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR, ppvReserved *unsafe.Pointer) uint32 {
+	var _pUIContextData *byte
+	if len(pUIContextData) > 0 {
+		_pUIContextData = &pUIContextData[0]
+	}
+	return securityextensibleauthenticationprotocol.EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion, dwFlags, uint32(len(pUIContextData)), _pUIContextData, pEapInteractiveUIData, pdwSizeOfDataFromInteractiveUI, ppDataFromInteractiveUI, ppEapError, ppvReserved)
+}
+
+// EapHostPeerSetUIContext wraps the raw EapHostPeerSetUIContext call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeersetuicontext
+func EapHostPeerSetUIContext(sessionHandle uint32, pUIContextData []byte, pEapOutput *securityextensibleauthenticationprotocol.EapHostPeerResponseAction, ppEapError **securityextensibleauthenticationprotocol.EAP_ERROR) uint32 {
+	var _pUIContextData *byte
+	if len(pUIContextData) > 0 {
+		_pUIContextData = &pUIContextData[0]
+	}
+	return securityextensibleauthenticationprotocol.EapHostPeerSetUIContext(sessionHandle, uint32(len(pUIContextData)), _pUIContextData, pEapOutput, ppEapError)
 }

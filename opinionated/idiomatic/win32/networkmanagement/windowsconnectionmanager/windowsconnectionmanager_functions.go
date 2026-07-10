@@ -61,7 +61,11 @@ func WcmSetProfileList(pProfileList *networkmanagementwindowsconnectionmanager.W
 
 // WcmSetProperty wraps the raw WcmSetProperty call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wcmapi/nf-wcmapi-wcmsetproperty
-func WcmSetProperty(pInterface *win32.GUID, strProfileName string, Property networkmanagementwindowsconnectionmanager.WCM_PROPERTY, dwDataSize uint32, pbData *byte) uint32 {
+func WcmSetProperty(pInterface *win32.GUID, strProfileName string, Property networkmanagementwindowsconnectionmanager.WCM_PROPERTY, pbData []byte) uint32 {
 	_strProfileName := win32.UTF16Ptr(strProfileName)
-	return networkmanagementwindowsconnectionmanager.WcmSetProperty(pInterface, foundation.PWSTR(_strProfileName), Property, nil, dwDataSize, pbData)
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	return networkmanagementwindowsconnectionmanager.WcmSetProperty(pInterface, foundation.PWSTR(_strProfileName), Property, nil, uint32(len(pbData)), _pbData)
 }

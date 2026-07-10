@@ -570,8 +570,12 @@ func MFCreatePresentationClock(ppPresentationClock **mediamediafoundation.IMFPre
 
 // MFCreatePresentationDescriptor wraps the raw MFCreatePresentationDescriptor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepresentationdescriptor
-func MFCreatePresentationDescriptor(cStreamDescriptors uint32, apStreamDescriptors **mediamediafoundation.IMFStreamDescriptor, ppPresentationDescriptor **mediamediafoundation.IMFPresentationDescriptor) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreatePresentationDescriptor(cStreamDescriptors, apStreamDescriptors, ppPresentationDescriptor)))
+func MFCreatePresentationDescriptor(apStreamDescriptors []*mediamediafoundation.IMFStreamDescriptor, ppPresentationDescriptor **mediamediafoundation.IMFPresentationDescriptor) error {
+	var _apStreamDescriptors **mediamediafoundation.IMFStreamDescriptor
+	if len(apStreamDescriptors) > 0 {
+		_apStreamDescriptors = &apStreamDescriptors[0]
+	}
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreatePresentationDescriptor(uint32(len(apStreamDescriptors)), _apStreamDescriptors, ppPresentationDescriptor)))
 }
 
 // MFCreatePresentationDescriptorFromASFProfile wraps the raw MFCreatePresentationDescriptorFromASFProfile call with idiomatic Go types.
@@ -727,8 +731,12 @@ func MFCreateStandardQualityManager(ppQualityManager **mediamediafoundation.IMFQ
 
 // MFCreateStreamDescriptor wraps the raw MFCreateStreamDescriptor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatestreamdescriptor
-func MFCreateStreamDescriptor(dwStreamIdentifier uint32, cMediaTypes uint32, apMediaTypes **mediamediafoundation.IMFMediaType, ppDescriptor **mediamediafoundation.IMFStreamDescriptor) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateStreamDescriptor(dwStreamIdentifier, cMediaTypes, apMediaTypes, ppDescriptor)))
+func MFCreateStreamDescriptor(dwStreamIdentifier uint32, apMediaTypes []*mediamediafoundation.IMFMediaType, ppDescriptor **mediamediafoundation.IMFStreamDescriptor) error {
+	var _apMediaTypes **mediamediafoundation.IMFMediaType
+	if len(apMediaTypes) > 0 {
+		_apMediaTypes = &apMediaTypes[0]
+	}
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateStreamDescriptor(dwStreamIdentifier, uint32(len(apMediaTypes)), _apMediaTypes, ppDescriptor)))
 }
 
 // MFCreateStreamOnMFByteStream wraps the raw MFCreateStreamOnMFByteStream call with idiomatic Go types.
@@ -884,10 +892,14 @@ func MFCreateVideoSampleFromSurface(pUnkSurface *systemcom.IUnknown, ppSample **
 
 // MFCreateVirtualCamera wraps the raw MFCreateVirtualCamera call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfvirtualcamera/nf-mfvirtualcamera-mfcreatevirtualcamera
-func MFCreateVirtualCamera(type_ mediamediafoundation.MFVirtualCameraType, lifetime mediamediafoundation.MFVirtualCameraLifetime, access mediamediafoundation.MFVirtualCameraAccess, friendlyName string, sourceId string, categories *win32.GUID, categoryCount uint32, virtualCamera **mediamediafoundation.IMFVirtualCamera) error {
+func MFCreateVirtualCamera(type_ mediamediafoundation.MFVirtualCameraType, lifetime mediamediafoundation.MFVirtualCameraLifetime, access mediamediafoundation.MFVirtualCameraAccess, friendlyName string, sourceId string, categories []win32.GUID, virtualCamera **mediamediafoundation.IMFVirtualCamera) error {
 	_friendlyName := win32.UTF16Ptr(friendlyName)
 	_sourceId := win32.UTF16Ptr(sourceId)
-	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVirtualCamera(type_, lifetime, access, foundation.PWSTR(_friendlyName), foundation.PWSTR(_sourceId), categories, categoryCount, virtualCamera)))
+	var _categories *win32.GUID
+	if len(categories) > 0 {
+		_categories = &categories[0]
+	}
+	return win32.HRESULTError(int32(mediamediafoundation.MFCreateVirtualCamera(type_, lifetime, access, foundation.PWSTR(_friendlyName), foundation.PWSTR(_sourceId), _categories, uint32(len(categories)), virtualCamera)))
 }
 
 // MFCreateWAVEMediaSink wraps the raw MFCreateWAVEMediaSink call with idiomatic Go types.
@@ -928,8 +940,12 @@ func MFDeserializeAttributesFromStream(pAttr *mediamediafoundation.IMFAttributes
 
 // MFDeserializePresentationDescriptor wraps the raw MFDeserializePresentationDescriptor call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfdeserializepresentationdescriptor
-func MFDeserializePresentationDescriptor(cbData uint32, pbData *byte, ppPD **mediamediafoundation.IMFPresentationDescriptor) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFDeserializePresentationDescriptor(cbData, pbData, ppPD)))
+func MFDeserializePresentationDescriptor(pbData []byte, ppPD **mediamediafoundation.IMFPresentationDescriptor) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	return win32.HRESULTError(int32(mediamediafoundation.MFDeserializePresentationDescriptor(uint32(len(pbData)), _pbData, ppPD)))
 }
 
 // MFEndCreateFile wraps the raw MFEndCreateFile call with idiomatic Go types.
@@ -1296,8 +1312,12 @@ func MFShutdownObject(pUnk *systemcom.IUnknown) error {
 
 // MFSplitSample wraps the raw MFSplitSample call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfsplitsample
-func MFSplitSample(pSample *mediamediafoundation.IMFSample, pOutputSamples **mediamediafoundation.IMFSample, dwOutputSampleMaxCount uint32, pdwOutputSampleCount *uint32) error {
-	return win32.HRESULTError(int32(mediamediafoundation.MFSplitSample(pSample, pOutputSamples, dwOutputSampleMaxCount, pdwOutputSampleCount)))
+func MFSplitSample(pSample *mediamediafoundation.IMFSample, pOutputSamples []*mediamediafoundation.IMFSample, pdwOutputSampleCount *uint32) error {
+	var _pOutputSamples **mediamediafoundation.IMFSample
+	if len(pOutputSamples) > 0 {
+		_pOutputSamples = &pOutputSamples[0]
+	}
+	return win32.HRESULTError(int32(mediamediafoundation.MFSplitSample(pSample, _pOutputSamples, uint32(len(pOutputSamples)), pdwOutputSampleCount)))
 }
 
 // MFStartup wraps the raw MFStartup call with idiomatic Go types.
@@ -1308,16 +1328,32 @@ func MFStartup(Version uint32, dwFlags uint32) error {
 
 // MFTRegisterLocal wraps the raw MFTRegisterLocal call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregisterlocal
-func MFTRegisterLocal(pClassFactory *systemcom.IClassFactory, guidCategory *win32.GUID, pszName string, Flags uint32, cInputTypes uint32, pInputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO, cOutputTypes uint32, pOutputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO) error {
+func MFTRegisterLocal(pClassFactory *systemcom.IClassFactory, guidCategory *win32.GUID, pszName string, Flags uint32, pInputTypes []mediamediafoundation.MFT_REGISTER_TYPE_INFO, pOutputTypes []mediamediafoundation.MFT_REGISTER_TYPE_INFO) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(mediamediafoundation.MFTRegisterLocal(pClassFactory, guidCategory, foundation.PWSTR(_pszName), Flags, cInputTypes, pInputTypes, cOutputTypes, pOutputTypes)))
+	var _pInputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO
+	if len(pInputTypes) > 0 {
+		_pInputTypes = &pInputTypes[0]
+	}
+	var _pOutputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO
+	if len(pOutputTypes) > 0 {
+		_pOutputTypes = &pOutputTypes[0]
+	}
+	return win32.HRESULTError(int32(mediamediafoundation.MFTRegisterLocal(pClassFactory, guidCategory, foundation.PWSTR(_pszName), Flags, uint32(len(pInputTypes)), _pInputTypes, uint32(len(pOutputTypes)), _pOutputTypes)))
 }
 
 // MFTRegisterLocalByCLSID wraps the raw MFTRegisterLocalByCLSID call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregisterlocalbyclsid
-func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, pszName string, Flags uint32, cInputTypes uint32, pInputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO, cOutputTypes uint32, pOutputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO) error {
+func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, pszName string, Flags uint32, pInputTypes []mediamediafoundation.MFT_REGISTER_TYPE_INFO, pOutputTypes []mediamediafoundation.MFT_REGISTER_TYPE_INFO) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(mediamediafoundation.MFTRegisterLocalByCLSID(clisdMFT, guidCategory, foundation.PWSTR(_pszName), Flags, cInputTypes, pInputTypes, cOutputTypes, pOutputTypes)))
+	var _pInputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO
+	if len(pInputTypes) > 0 {
+		_pInputTypes = &pInputTypes[0]
+	}
+	var _pOutputTypes *mediamediafoundation.MFT_REGISTER_TYPE_INFO
+	if len(pOutputTypes) > 0 {
+		_pOutputTypes = &pOutputTypes[0]
+	}
+	return win32.HRESULTError(int32(mediamediafoundation.MFTRegisterLocalByCLSID(clisdMFT, guidCategory, foundation.PWSTR(_pszName), Flags, uint32(len(pInputTypes)), _pInputTypes, uint32(len(pOutputTypes)), _pOutputTypes)))
 }
 
 // MFTUnregisterLocal wraps the raw MFTUnregisterLocal call with idiomatic Go types.

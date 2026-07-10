@@ -92,8 +92,12 @@ func WsAsyncExecute(asyncState *networkingwindowswebservices.WS_ASYNC_STATE, ope
 
 // WsCall wraps the raw WsCall call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscall
-func WsCall(serviceProxy *networkingwindowswebservices.WS_SERVICE_PROXY, operation *networkingwindowswebservices.WS_OPERATION_DESCRIPTION, arguments *unsafe.Pointer, heap *networkingwindowswebservices.WS_HEAP, callProperties *networkingwindowswebservices.WS_CALL_PROPERTY, callPropertyCount uint32, asyncContext *networkingwindowswebservices.WS_ASYNC_CONTEXT, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCall(serviceProxy, operation, arguments, heap, callProperties, callPropertyCount, asyncContext, error_)))
+func WsCall(serviceProxy *networkingwindowswebservices.WS_SERVICE_PROXY, operation *networkingwindowswebservices.WS_OPERATION_DESCRIPTION, arguments *unsafe.Pointer, heap *networkingwindowswebservices.WS_HEAP, callProperties []networkingwindowswebservices.WS_CALL_PROPERTY, asyncContext *networkingwindowswebservices.WS_ASYNC_CONTEXT, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _callProperties *networkingwindowswebservices.WS_CALL_PROPERTY
+	if len(callProperties) > 0 {
+		_callProperties = &callProperties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCall(serviceProxy, operation, arguments, heap, _callProperties, uint32(len(callProperties)), asyncContext, error_)))
 }
 
 // WsCheckMustUnderstandHeaders wraps the raw WsCheckMustUnderstandHeaders call with idiomatic Go types.
@@ -146,20 +150,32 @@ func WsCopyNode(writer *networkingwindowswebservices.WS_XML_WRITER, reader *netw
 
 // WsCreateChannel wraps the raw WsCreateChannel call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatechannel
-func WsCreateChannel(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, channelBinding networkingwindowswebservices.WS_CHANNEL_BINDING, properties *networkingwindowswebservices.WS_CHANNEL_PROPERTY, propertyCount uint32, securityDescription *networkingwindowswebservices.WS_SECURITY_DESCRIPTION, channel **networkingwindowswebservices.WS_CHANNEL, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateChannel(channelType, channelBinding, properties, propertyCount, securityDescription, channel, error_)))
+func WsCreateChannel(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, channelBinding networkingwindowswebservices.WS_CHANNEL_BINDING, properties []networkingwindowswebservices.WS_CHANNEL_PROPERTY, securityDescription *networkingwindowswebservices.WS_SECURITY_DESCRIPTION, channel **networkingwindowswebservices.WS_CHANNEL, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_CHANNEL_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateChannel(channelType, channelBinding, _properties, uint32(len(properties)), securityDescription, channel, error_)))
 }
 
 // WsCreateChannelForListener wraps the raw WsCreateChannelForListener call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatechannelforlistener
-func WsCreateChannelForListener(listener *networkingwindowswebservices.WS_LISTENER, properties *networkingwindowswebservices.WS_CHANNEL_PROPERTY, propertyCount uint32, channel **networkingwindowswebservices.WS_CHANNEL, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateChannelForListener(listener, properties, propertyCount, channel, error_)))
+func WsCreateChannelForListener(listener *networkingwindowswebservices.WS_LISTENER, properties []networkingwindowswebservices.WS_CHANNEL_PROPERTY, channel **networkingwindowswebservices.WS_CHANNEL, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_CHANNEL_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateChannelForListener(listener, _properties, uint32(len(properties)), channel, error_)))
 }
 
 // WsCreateError wraps the raw WsCreateError call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreateerror
-func WsCreateError(properties *networkingwindowswebservices.WS_ERROR_PROPERTY, propertyCount uint32, error_ **networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateError(properties, propertyCount, error_)))
+func WsCreateError(properties []networkingwindowswebservices.WS_ERROR_PROPERTY, error_ **networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_ERROR_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateError(_properties, uint32(len(properties)), error_)))
 }
 
 // WsCreateFaultFromError wraps the raw WsCreateFaultFromError call with idiomatic Go types.
@@ -176,74 +192,130 @@ func WsCreateHeap(maxSize uintptr, trimSize uintptr, properties *networkingwindo
 
 // WsCreateListener wraps the raw WsCreateListener call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatelistener
-func WsCreateListener(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, channelBinding networkingwindowswebservices.WS_CHANNEL_BINDING, properties *networkingwindowswebservices.WS_LISTENER_PROPERTY, propertyCount uint32, securityDescription *networkingwindowswebservices.WS_SECURITY_DESCRIPTION, listener **networkingwindowswebservices.WS_LISTENER, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateListener(channelType, channelBinding, properties, propertyCount, securityDescription, listener, error_)))
+func WsCreateListener(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, channelBinding networkingwindowswebservices.WS_CHANNEL_BINDING, properties []networkingwindowswebservices.WS_LISTENER_PROPERTY, securityDescription *networkingwindowswebservices.WS_SECURITY_DESCRIPTION, listener **networkingwindowswebservices.WS_LISTENER, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_LISTENER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateListener(channelType, channelBinding, _properties, uint32(len(properties)), securityDescription, listener, error_)))
 }
 
 // WsCreateMessage wraps the raw WsCreateMessage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatemessage
-func WsCreateMessage(envelopeVersion networkingwindowswebservices.WS_ENVELOPE_VERSION, addressingVersion networkingwindowswebservices.WS_ADDRESSING_VERSION, properties *networkingwindowswebservices.WS_MESSAGE_PROPERTY, propertyCount uint32, message **networkingwindowswebservices.WS_MESSAGE, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateMessage(envelopeVersion, addressingVersion, properties, propertyCount, message, error_)))
+func WsCreateMessage(envelopeVersion networkingwindowswebservices.WS_ENVELOPE_VERSION, addressingVersion networkingwindowswebservices.WS_ADDRESSING_VERSION, properties []networkingwindowswebservices.WS_MESSAGE_PROPERTY, message **networkingwindowswebservices.WS_MESSAGE, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_MESSAGE_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateMessage(envelopeVersion, addressingVersion, _properties, uint32(len(properties)), message, error_)))
 }
 
 // WsCreateMessageForChannel wraps the raw WsCreateMessageForChannel call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatemessageforchannel
-func WsCreateMessageForChannel(channel *networkingwindowswebservices.WS_CHANNEL, properties *networkingwindowswebservices.WS_MESSAGE_PROPERTY, propertyCount uint32, message **networkingwindowswebservices.WS_MESSAGE, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateMessageForChannel(channel, properties, propertyCount, message, error_)))
+func WsCreateMessageForChannel(channel *networkingwindowswebservices.WS_CHANNEL, properties []networkingwindowswebservices.WS_MESSAGE_PROPERTY, message **networkingwindowswebservices.WS_MESSAGE, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_MESSAGE_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateMessageForChannel(channel, _properties, uint32(len(properties)), message, error_)))
 }
 
 // WsCreateMetadata wraps the raw WsCreateMetadata call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatemetadata
-func WsCreateMetadata(properties *networkingwindowswebservices.WS_METADATA_PROPERTY, propertyCount uint32, metadata **networkingwindowswebservices.WS_METADATA, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateMetadata(properties, propertyCount, metadata, error_)))
+func WsCreateMetadata(properties []networkingwindowswebservices.WS_METADATA_PROPERTY, metadata **networkingwindowswebservices.WS_METADATA, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_METADATA_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateMetadata(_properties, uint32(len(properties)), metadata, error_)))
 }
 
 // WsCreateReader wraps the raw WsCreateReader call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatereader
-func WsCreateReader(properties *networkingwindowswebservices.WS_XML_READER_PROPERTY, propertyCount uint32, reader **networkingwindowswebservices.WS_XML_READER, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateReader(properties, propertyCount, reader, error_)))
+func WsCreateReader(properties []networkingwindowswebservices.WS_XML_READER_PROPERTY, reader **networkingwindowswebservices.WS_XML_READER, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_READER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateReader(_properties, uint32(len(properties)), reader, error_)))
 }
 
 // WsCreateServiceEndpointFromTemplate wraps the raw WsCreateServiceEndpointFromTemplate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreateserviceendpointfromtemplate
-func WsCreateServiceEndpointFromTemplate(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, properties *networkingwindowswebservices.WS_SERVICE_ENDPOINT_PROPERTY, propertyCount uint32, addressUrl *networkingwindowswebservices.WS_STRING, contract *networkingwindowswebservices.WS_SERVICE_CONTRACT, authorizationCallback networkingwindowswebservices.WS_SERVICE_SECURITY_CALLBACK, heap *networkingwindowswebservices.WS_HEAP, templateType networkingwindowswebservices.WS_BINDING_TEMPLATE_TYPE, templateValue unsafe.Pointer, templateSize uint32, templateDescription unsafe.Pointer, templateDescriptionSize uint32, serviceEndpoint **networkingwindowswebservices.WS_SERVICE_ENDPOINT, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateServiceEndpointFromTemplate(channelType, properties, propertyCount, addressUrl, contract, authorizationCallback, heap, templateType, templateValue, templateSize, templateDescription, templateDescriptionSize, serviceEndpoint, error_)))
+func WsCreateServiceEndpointFromTemplate(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, properties []networkingwindowswebservices.WS_SERVICE_ENDPOINT_PROPERTY, addressUrl *networkingwindowswebservices.WS_STRING, contract *networkingwindowswebservices.WS_SERVICE_CONTRACT, authorizationCallback networkingwindowswebservices.WS_SERVICE_SECURITY_CALLBACK, heap *networkingwindowswebservices.WS_HEAP, templateType networkingwindowswebservices.WS_BINDING_TEMPLATE_TYPE, templateValue unsafe.Pointer, templateSize uint32, templateDescription unsafe.Pointer, templateDescriptionSize uint32, serviceEndpoint **networkingwindowswebservices.WS_SERVICE_ENDPOINT, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_SERVICE_ENDPOINT_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateServiceEndpointFromTemplate(channelType, _properties, uint32(len(properties)), addressUrl, contract, authorizationCallback, heap, templateType, templateValue, templateSize, templateDescription, templateDescriptionSize, serviceEndpoint, error_)))
 }
 
 // WsCreateServiceHost wraps the raw WsCreateServiceHost call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreateservicehost
-func WsCreateServiceHost(endpoints **networkingwindowswebservices.WS_SERVICE_ENDPOINT, endpointCount uint16, serviceProperties *networkingwindowswebservices.WS_SERVICE_PROPERTY, servicePropertyCount uint32, serviceHost **networkingwindowswebservices.WS_SERVICE_HOST, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateServiceHost(endpoints, endpointCount, serviceProperties, servicePropertyCount, serviceHost, error_)))
+func WsCreateServiceHost(endpoints []*networkingwindowswebservices.WS_SERVICE_ENDPOINT, serviceProperties []networkingwindowswebservices.WS_SERVICE_PROPERTY, serviceHost **networkingwindowswebservices.WS_SERVICE_HOST, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _endpoints **networkingwindowswebservices.WS_SERVICE_ENDPOINT
+	if len(endpoints) > 0 {
+		_endpoints = &endpoints[0]
+	}
+	var _serviceProperties *networkingwindowswebservices.WS_SERVICE_PROPERTY
+	if len(serviceProperties) > 0 {
+		_serviceProperties = &serviceProperties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateServiceHost(_endpoints, uint16(len(endpoints)), _serviceProperties, uint32(len(serviceProperties)), serviceHost, error_)))
 }
 
 // WsCreateServiceProxy wraps the raw WsCreateServiceProxy call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreateserviceproxy
-func WsCreateServiceProxy(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, channelBinding networkingwindowswebservices.WS_CHANNEL_BINDING, securityDescription *networkingwindowswebservices.WS_SECURITY_DESCRIPTION, properties *networkingwindowswebservices.WS_PROXY_PROPERTY, propertyCount uint32, channelProperties *networkingwindowswebservices.WS_CHANNEL_PROPERTY, channelPropertyCount uint32, serviceProxy **networkingwindowswebservices.WS_SERVICE_PROXY, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateServiceProxy(channelType, channelBinding, securityDescription, properties, propertyCount, channelProperties, channelPropertyCount, serviceProxy, error_)))
+func WsCreateServiceProxy(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, channelBinding networkingwindowswebservices.WS_CHANNEL_BINDING, securityDescription *networkingwindowswebservices.WS_SECURITY_DESCRIPTION, properties []networkingwindowswebservices.WS_PROXY_PROPERTY, channelProperties []networkingwindowswebservices.WS_CHANNEL_PROPERTY, serviceProxy **networkingwindowswebservices.WS_SERVICE_PROXY, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_PROXY_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	var _channelProperties *networkingwindowswebservices.WS_CHANNEL_PROPERTY
+	if len(channelProperties) > 0 {
+		_channelProperties = &channelProperties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateServiceProxy(channelType, channelBinding, securityDescription, _properties, uint32(len(properties)), _channelProperties, uint32(len(channelProperties)), serviceProxy, error_)))
 }
 
 // WsCreateServiceProxyFromTemplate wraps the raw WsCreateServiceProxyFromTemplate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreateserviceproxyfromtemplate
-func WsCreateServiceProxyFromTemplate(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, properties *networkingwindowswebservices.WS_PROXY_PROPERTY, propertyCount uint32, templateType networkingwindowswebservices.WS_BINDING_TEMPLATE_TYPE, templateValue unsafe.Pointer, templateSize uint32, templateDescription unsafe.Pointer, templateDescriptionSize uint32, serviceProxy **networkingwindowswebservices.WS_SERVICE_PROXY, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateServiceProxyFromTemplate(channelType, properties, propertyCount, templateType, templateValue, templateSize, templateDescription, templateDescriptionSize, serviceProxy, error_)))
+func WsCreateServiceProxyFromTemplate(channelType networkingwindowswebservices.WS_CHANNEL_TYPE, properties []networkingwindowswebservices.WS_PROXY_PROPERTY, templateType networkingwindowswebservices.WS_BINDING_TEMPLATE_TYPE, templateValue unsafe.Pointer, templateSize uint32, templateDescription unsafe.Pointer, templateDescriptionSize uint32, serviceProxy **networkingwindowswebservices.WS_SERVICE_PROXY, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_PROXY_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateServiceProxyFromTemplate(channelType, _properties, uint32(len(properties)), templateType, templateValue, templateSize, templateDescription, templateDescriptionSize, serviceProxy, error_)))
 }
 
 // WsCreateWriter wraps the raw WsCreateWriter call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatewriter
-func WsCreateWriter(properties *networkingwindowswebservices.WS_XML_WRITER_PROPERTY, propertyCount uint32, writer **networkingwindowswebservices.WS_XML_WRITER, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateWriter(properties, propertyCount, writer, error_)))
+func WsCreateWriter(properties []networkingwindowswebservices.WS_XML_WRITER_PROPERTY, writer **networkingwindowswebservices.WS_XML_WRITER, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_WRITER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateWriter(_properties, uint32(len(properties)), writer, error_)))
 }
 
 // WsCreateXmlBuffer wraps the raw WsCreateXmlBuffer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatexmlbuffer
-func WsCreateXmlBuffer(heap *networkingwindowswebservices.WS_HEAP, properties *networkingwindowswebservices.WS_XML_BUFFER_PROPERTY, propertyCount uint32, buffer **networkingwindowswebservices.WS_XML_BUFFER, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateXmlBuffer(heap, properties, propertyCount, buffer, error_)))
+func WsCreateXmlBuffer(heap *networkingwindowswebservices.WS_HEAP, properties []networkingwindowswebservices.WS_XML_BUFFER_PROPERTY, buffer **networkingwindowswebservices.WS_XML_BUFFER, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_BUFFER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateXmlBuffer(heap, _properties, uint32(len(properties)), buffer, error_)))
 }
 
 // WsCreateXmlSecurityToken wraps the raw WsCreateXmlSecurityToken call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreatexmlsecuritytoken
-func WsCreateXmlSecurityToken(tokenXml *networkingwindowswebservices.WS_XML_BUFFER, tokenKey *networkingwindowswebservices.WS_SECURITY_KEY_HANDLE, properties *networkingwindowswebservices.WS_XML_SECURITY_TOKEN_PROPERTY, propertyCount uint32, token **networkingwindowswebservices.WS_SECURITY_TOKEN, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateXmlSecurityToken(tokenXml, tokenKey, properties, propertyCount, token, error_)))
+func WsCreateXmlSecurityToken(tokenXml *networkingwindowswebservices.WS_XML_BUFFER, tokenKey *networkingwindowswebservices.WS_SECURITY_KEY_HANDLE, properties []networkingwindowswebservices.WS_XML_SECURITY_TOKEN_PROPERTY, token **networkingwindowswebservices.WS_SECURITY_TOKEN, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_SECURITY_TOKEN_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsCreateXmlSecurityToken(tokenXml, tokenKey, _properties, uint32(len(properties)), token, error_)))
 }
 
 // WsDateTimeToFileTime wraps the raw WsDateTimeToFileTime call with idiomatic Go types.
@@ -600,8 +672,12 @@ func WsReadChars(reader *networkingwindowswebservices.WS_XML_READER, chars found
 
 // WsReadCharsUtf8 wraps the raw WsReadCharsUtf8 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadcharsutf8
-func WsReadCharsUtf8(reader *networkingwindowswebservices.WS_XML_READER, bytes *byte, maxByteCount uint32, actualByteCount *uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsReadCharsUtf8(reader, bytes, maxByteCount, actualByteCount, error_)))
+func WsReadCharsUtf8(reader *networkingwindowswebservices.WS_XML_READER, bytes []byte, actualByteCount *uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _bytes *byte
+	if len(bytes) > 0 {
+		_bytes = &bytes[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsReadCharsUtf8(reader, _bytes, uint32(len(bytes)), actualByteCount, error_)))
 }
 
 // WsReadElement wraps the raw WsReadElement call with idiomatic Go types.
@@ -708,14 +784,22 @@ func WsReadXmlBuffer(reader *networkingwindowswebservices.WS_XML_READER, heap *n
 
 // WsReadXmlBufferFromBytes wraps the raw WsReadXmlBufferFromBytes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadxmlbufferfrombytes
-func WsReadXmlBufferFromBytes(reader *networkingwindowswebservices.WS_XML_READER, encoding *networkingwindowswebservices.WS_XML_READER_ENCODING, properties *networkingwindowswebservices.WS_XML_READER_PROPERTY, propertyCount uint32, bytes unsafe.Pointer, byteCount uint32, heap *networkingwindowswebservices.WS_HEAP, xmlBuffer **networkingwindowswebservices.WS_XML_BUFFER, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsReadXmlBufferFromBytes(reader, encoding, properties, propertyCount, bytes, byteCount, heap, xmlBuffer, error_)))
+func WsReadXmlBufferFromBytes(reader *networkingwindowswebservices.WS_XML_READER, encoding *networkingwindowswebservices.WS_XML_READER_ENCODING, properties []networkingwindowswebservices.WS_XML_READER_PROPERTY, bytes unsafe.Pointer, byteCount uint32, heap *networkingwindowswebservices.WS_HEAP, xmlBuffer **networkingwindowswebservices.WS_XML_BUFFER, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_READER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsReadXmlBufferFromBytes(reader, encoding, _properties, uint32(len(properties)), bytes, byteCount, heap, xmlBuffer, error_)))
 }
 
 // WsReceiveMessage wraps the raw WsReceiveMessage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreceivemessage
-func WsReceiveMessage(channel *networkingwindowswebservices.WS_CHANNEL, message *networkingwindowswebservices.WS_MESSAGE, messageDescriptions **networkingwindowswebservices.WS_MESSAGE_DESCRIPTION, messageDescriptionCount uint32, receiveOption networkingwindowswebservices.WS_RECEIVE_OPTION, readBodyOption networkingwindowswebservices.WS_READ_OPTION, heap *networkingwindowswebservices.WS_HEAP, value unsafe.Pointer, valueSize uint32, index *uint32, asyncContext *networkingwindowswebservices.WS_ASYNC_CONTEXT, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsReceiveMessage(channel, message, messageDescriptions, messageDescriptionCount, receiveOption, readBodyOption, heap, value, valueSize, index, asyncContext, error_)))
+func WsReceiveMessage(channel *networkingwindowswebservices.WS_CHANNEL, message *networkingwindowswebservices.WS_MESSAGE, messageDescriptions []*networkingwindowswebservices.WS_MESSAGE_DESCRIPTION, receiveOption networkingwindowswebservices.WS_RECEIVE_OPTION, readBodyOption networkingwindowswebservices.WS_READ_OPTION, heap *networkingwindowswebservices.WS_HEAP, value unsafe.Pointer, valueSize uint32, index *uint32, asyncContext *networkingwindowswebservices.WS_ASYNC_CONTEXT, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _messageDescriptions **networkingwindowswebservices.WS_MESSAGE_DESCRIPTION
+	if len(messageDescriptions) > 0 {
+		_messageDescriptions = &messageDescriptions[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsReceiveMessage(channel, message, _messageDescriptions, uint32(len(messageDescriptions)), receiveOption, readBodyOption, heap, value, valueSize, index, asyncContext, error_)))
 }
 
 // WsRegisterOperationForCancel wraps the raw WsRegisterOperationForCancel call with idiomatic Go types.
@@ -756,8 +840,12 @@ func WsRequestReply(channel *networkingwindowswebservices.WS_CHANNEL, requestMes
 
 // WsRequestSecurityToken wraps the raw WsRequestSecurityToken call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsrequestsecuritytoken
-func WsRequestSecurityToken(channel *networkingwindowswebservices.WS_CHANNEL, properties *networkingwindowswebservices.WS_REQUEST_SECURITY_TOKEN_PROPERTY, propertyCount uint32, token **networkingwindowswebservices.WS_SECURITY_TOKEN, asyncContext *networkingwindowswebservices.WS_ASYNC_CONTEXT, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsRequestSecurityToken(channel, properties, propertyCount, token, asyncContext, error_)))
+func WsRequestSecurityToken(channel *networkingwindowswebservices.WS_CHANNEL, properties []networkingwindowswebservices.WS_REQUEST_SECURITY_TOKEN_PROPERTY, token **networkingwindowswebservices.WS_SECURITY_TOKEN, asyncContext *networkingwindowswebservices.WS_ASYNC_CONTEXT, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_REQUEST_SECURITY_TOKEN_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsRequestSecurityToken(channel, _properties, uint32(len(properties)), token, asyncContext, error_)))
 }
 
 // WsResetChannel wraps the raw WsResetChannel call with idiomatic Go types.
@@ -864,14 +952,22 @@ func WsSetHeader(message *networkingwindowswebservices.WS_MESSAGE, headerType ne
 
 // WsSetInput wraps the raw WsSetInput call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetinput
-func WsSetInput(reader *networkingwindowswebservices.WS_XML_READER, encoding *networkingwindowswebservices.WS_XML_READER_ENCODING, input *networkingwindowswebservices.WS_XML_READER_INPUT, properties *networkingwindowswebservices.WS_XML_READER_PROPERTY, propertyCount uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsSetInput(reader, encoding, input, properties, propertyCount, error_)))
+func WsSetInput(reader *networkingwindowswebservices.WS_XML_READER, encoding *networkingwindowswebservices.WS_XML_READER_ENCODING, input *networkingwindowswebservices.WS_XML_READER_INPUT, properties []networkingwindowswebservices.WS_XML_READER_PROPERTY, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_READER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsSetInput(reader, encoding, input, _properties, uint32(len(properties)), error_)))
 }
 
 // WsSetInputToBuffer wraps the raw WsSetInputToBuffer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetinputtobuffer
-func WsSetInputToBuffer(reader *networkingwindowswebservices.WS_XML_READER, buffer *networkingwindowswebservices.WS_XML_BUFFER, properties *networkingwindowswebservices.WS_XML_READER_PROPERTY, propertyCount uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsSetInputToBuffer(reader, buffer, properties, propertyCount, error_)))
+func WsSetInputToBuffer(reader *networkingwindowswebservices.WS_XML_READER, buffer *networkingwindowswebservices.WS_XML_BUFFER, properties []networkingwindowswebservices.WS_XML_READER_PROPERTY, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_READER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsSetInputToBuffer(reader, buffer, _properties, uint32(len(properties)), error_)))
 }
 
 // WsSetListenerProperty wraps the raw WsSetListenerProperty call with idiomatic Go types.
@@ -888,14 +984,22 @@ func WsSetMessageProperty(message *networkingwindowswebservices.WS_MESSAGE, id n
 
 // WsSetOutput wraps the raw WsSetOutput call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetoutput
-func WsSetOutput(writer *networkingwindowswebservices.WS_XML_WRITER, encoding *networkingwindowswebservices.WS_XML_WRITER_ENCODING, output *networkingwindowswebservices.WS_XML_WRITER_OUTPUT, properties *networkingwindowswebservices.WS_XML_WRITER_PROPERTY, propertyCount uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsSetOutput(writer, encoding, output, properties, propertyCount, error_)))
+func WsSetOutput(writer *networkingwindowswebservices.WS_XML_WRITER, encoding *networkingwindowswebservices.WS_XML_WRITER_ENCODING, output *networkingwindowswebservices.WS_XML_WRITER_OUTPUT, properties []networkingwindowswebservices.WS_XML_WRITER_PROPERTY, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_WRITER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsSetOutput(writer, encoding, output, _properties, uint32(len(properties)), error_)))
 }
 
 // WsSetOutputToBuffer wraps the raw WsSetOutputToBuffer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetoutputtobuffer
-func WsSetOutputToBuffer(writer *networkingwindowswebservices.WS_XML_WRITER, buffer *networkingwindowswebservices.WS_XML_BUFFER, properties *networkingwindowswebservices.WS_XML_WRITER_PROPERTY, propertyCount uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsSetOutputToBuffer(writer, buffer, properties, propertyCount, error_)))
+func WsSetOutputToBuffer(writer *networkingwindowswebservices.WS_XML_WRITER, buffer *networkingwindowswebservices.WS_XML_BUFFER, properties []networkingwindowswebservices.WS_XML_WRITER_PROPERTY, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_WRITER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsSetOutputToBuffer(writer, buffer, _properties, uint32(len(properties)), error_)))
 }
 
 // WsSetReaderPosition wraps the raw WsSetReaderPosition call with idiomatic Go types.
@@ -924,14 +1028,22 @@ func WsSkipNode(reader *networkingwindowswebservices.WS_XML_READER, error_ *netw
 
 // WsStartReaderCanonicalization wraps the raw WsStartReaderCanonicalization call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsstartreadercanonicalization
-func WsStartReaderCanonicalization(reader *networkingwindowswebservices.WS_XML_READER, writeCallback networkingwindowswebservices.WS_WRITE_CALLBACK, writeCallbackState unsafe.Pointer, properties *networkingwindowswebservices.WS_XML_CANONICALIZATION_PROPERTY, propertyCount uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsStartReaderCanonicalization(reader, writeCallback, writeCallbackState, properties, propertyCount, error_)))
+func WsStartReaderCanonicalization(reader *networkingwindowswebservices.WS_XML_READER, writeCallback networkingwindowswebservices.WS_WRITE_CALLBACK, writeCallbackState unsafe.Pointer, properties []networkingwindowswebservices.WS_XML_CANONICALIZATION_PROPERTY, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_CANONICALIZATION_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsStartReaderCanonicalization(reader, writeCallback, writeCallbackState, _properties, uint32(len(properties)), error_)))
 }
 
 // WsStartWriterCanonicalization wraps the raw WsStartWriterCanonicalization call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsstartwritercanonicalization
-func WsStartWriterCanonicalization(writer *networkingwindowswebservices.WS_XML_WRITER, writeCallback networkingwindowswebservices.WS_WRITE_CALLBACK, writeCallbackState unsafe.Pointer, properties *networkingwindowswebservices.WS_XML_CANONICALIZATION_PROPERTY, propertyCount uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsStartWriterCanonicalization(writer, writeCallback, writeCallbackState, properties, propertyCount, error_)))
+func WsStartWriterCanonicalization(writer *networkingwindowswebservices.WS_XML_WRITER, writeCallback networkingwindowswebservices.WS_WRITE_CALLBACK, writeCallbackState unsafe.Pointer, properties []networkingwindowswebservices.WS_XML_CANONICALIZATION_PROPERTY, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_CANONICALIZATION_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsStartWriterCanonicalization(writer, writeCallback, writeCallbackState, _properties, uint32(len(properties)), error_)))
 }
 
 // WsTrimXmlWhitespace wraps the raw WsTrimXmlWhitespace call with idiomatic Go types.
@@ -981,8 +1093,12 @@ func WsWriteChars(writer *networkingwindowswebservices.WS_XML_WRITER, chars stri
 
 // WsWriteCharsUtf8 wraps the raw WsWriteCharsUtf8 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswritecharsutf8
-func WsWriteCharsUtf8(writer *networkingwindowswebservices.WS_XML_WRITER, bytes *byte, byteCount uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsWriteCharsUtf8(writer, bytes, byteCount, error_)))
+func WsWriteCharsUtf8(writer *networkingwindowswebservices.WS_XML_WRITER, bytes []byte, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _bytes *byte
+	if len(bytes) > 0 {
+		_bytes = &bytes[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsWriteCharsUtf8(writer, _bytes, uint32(len(bytes)), error_)))
 }
 
 // WsWriteElement wraps the raw WsWriteElement call with idiomatic Go types.
@@ -1096,8 +1212,12 @@ func WsWriteXmlBuffer(writer *networkingwindowswebservices.WS_XML_WRITER, xmlBuf
 
 // WsWriteXmlBufferToBytes wraps the raw WsWriteXmlBufferToBytes call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswritexmlbuffertobytes
-func WsWriteXmlBufferToBytes(writer *networkingwindowswebservices.WS_XML_WRITER, xmlBuffer *networkingwindowswebservices.WS_XML_BUFFER, encoding *networkingwindowswebservices.WS_XML_WRITER_ENCODING, properties *networkingwindowswebservices.WS_XML_WRITER_PROPERTY, propertyCount uint32, heap *networkingwindowswebservices.WS_HEAP, bytes *unsafe.Pointer, byteCount *uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
-	return win32.HRESULTError(int32(networkingwindowswebservices.WsWriteXmlBufferToBytes(writer, xmlBuffer, encoding, properties, propertyCount, heap, bytes, byteCount, error_)))
+func WsWriteXmlBufferToBytes(writer *networkingwindowswebservices.WS_XML_WRITER, xmlBuffer *networkingwindowswebservices.WS_XML_BUFFER, encoding *networkingwindowswebservices.WS_XML_WRITER_ENCODING, properties []networkingwindowswebservices.WS_XML_WRITER_PROPERTY, heap *networkingwindowswebservices.WS_HEAP, bytes *unsafe.Pointer, byteCount *uint32, error_ *networkingwindowswebservices.WS_ERROR) error {
+	var _properties *networkingwindowswebservices.WS_XML_WRITER_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	return win32.HRESULTError(int32(networkingwindowswebservices.WsWriteXmlBufferToBytes(writer, xmlBuffer, encoding, _properties, uint32(len(properties)), heap, bytes, byteCount, error_)))
 }
 
 // WsWriteXmlnsAttribute wraps the raw WsWriteXmlnsAttribute call with idiomatic Go types.

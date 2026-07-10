@@ -17,8 +17,12 @@ func CryptSIPGetCaps(pSubjInfo *securitycryptographysip.SIP_SUBJECTINFO, pCaps *
 }
 
 // CryptSIPGetSealedDigest wraps the raw CryptSIPGetSealedDigest call with idiomatic Go types.
-func CryptSIPGetSealedDigest(pSubjectInfo *securitycryptographysip.SIP_SUBJECTINFO, pSig *byte, dwSig uint32, pbDigest *byte, pcbDigest *uint32) bool {
-	return securitycryptographysip.CryptSIPGetSealedDigest(pSubjectInfo, pSig, dwSig, pbDigest, pcbDigest) != 0
+func CryptSIPGetSealedDigest(pSubjectInfo *securitycryptographysip.SIP_SUBJECTINFO, pSig []byte, pbDigest *byte, pcbDigest *uint32) bool {
+	var _pSig *byte
+	if len(pSig) > 0 {
+		_pSig = &pSig[0]
+	}
+	return securitycryptographysip.CryptSIPGetSealedDigest(pSubjectInfo, _pSig, uint32(len(pSig)), pbDigest, pcbDigest) != 0
 }
 
 // CryptSIPRetrieveSubjectGuid wraps the raw CryptSIPRetrieveSubjectGuid call with idiomatic Go types.

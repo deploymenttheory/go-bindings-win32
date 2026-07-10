@@ -140,6 +140,16 @@ func GetConsoleOriginalTitle(lpConsoleTitle foundation.PWSTR, nSize uint32) (uin
 	return systemconsole.GetConsoleOriginalTitleW(lpConsoleTitle, nSize)
 }
 
+// GetConsoleProcessList wraps the raw GetConsoleProcessList call with idiomatic Go types.
+// https://learn.microsoft.com/windows/console/getconsoleprocesslist
+func GetConsoleProcessList(lpdwProcessList []uint32) (uint32, error) {
+	var _lpdwProcessList *uint32
+	if len(lpdwProcessList) > 0 {
+		_lpdwProcessList = &lpdwProcessList[0]
+	}
+	return systemconsole.GetConsoleProcessList(_lpdwProcessList, uint32(len(lpdwProcessList)))
+}
+
 // GetConsoleTitle wraps the raw GetConsoleTitleW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/console/getconsoletitle
 func GetConsoleTitle(lpConsoleTitle foundation.PWSTR, nSize uint32) (uint32, error) {
@@ -174,8 +184,22 @@ func OpenConsoleW(lpConsoleDevice string, dwDesiredAccess uint32, bInheritHandle
 
 // PeekConsoleInput wraps the raw PeekConsoleInputW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/console/peekconsoleinput
-func PeekConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer *systemconsole.INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32) error {
-	return systemconsole.PeekConsoleInputW(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead)
+func PeekConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsRead *uint32) error {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.PeekConsoleInputW(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsRead)
+}
+
+// PeekConsoleInputA wraps the raw PeekConsoleInputA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/console/peekconsoleinput
+func PeekConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsRead *uint32) error {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.PeekConsoleInputA(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsRead)
 }
 
 // ReadConsole wraps the raw ReadConsoleW call with idiomatic Go types.
@@ -186,20 +210,42 @@ func ReadConsole(hConsoleInput foundation.HANDLE, lpBuffer unsafe.Pointer, nNumb
 
 // ReadConsoleInput wraps the raw ReadConsoleInputW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/console/readconsoleinput
-func ReadConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer *systemconsole.INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32) error {
-	return systemconsole.ReadConsoleInputW(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead)
+func ReadConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsRead *uint32) error {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.ReadConsoleInputW(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsRead)
+}
+
+// ReadConsoleInputA wraps the raw ReadConsoleInputA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/console/readconsoleinput
+func ReadConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsRead *uint32) error {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.ReadConsoleInputA(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsRead)
 }
 
 // ReadConsoleInputEx wraps the raw ReadConsoleInputExW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/console/readconsoleinputex
-func ReadConsoleInputEx(hConsoleInput foundation.HANDLE, lpBuffer *systemconsole.INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32, wFlags uint16) bool {
-	return systemconsole.ReadConsoleInputExW(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead, wFlags) != 0
+func ReadConsoleInputEx(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsRead *uint32, wFlags uint16) bool {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.ReadConsoleInputExW(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsRead, wFlags) != 0
 }
 
 // ReadConsoleInputExA wraps the raw ReadConsoleInputExA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/console/readconsoleinputex
-func ReadConsoleInputExA(hConsoleInput foundation.HANDLE, lpBuffer *systemconsole.INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32, wFlags uint16) bool {
-	return systemconsole.ReadConsoleInputExA(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead, wFlags) != 0
+func ReadConsoleInputExA(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsRead *uint32, wFlags uint16) bool {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.ReadConsoleInputExA(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsRead, wFlags) != 0
 }
 
 // RegisterConsoleIME wraps the raw RegisterConsoleIME call with idiomatic Go types.
@@ -259,9 +305,13 @@ func SetConsoleInputExeNameA(lpExeName foundation.PSTR) bool {
 }
 
 // SetConsoleKeyShortcuts wraps the raw SetConsoleKeyShortcuts call with idiomatic Go types.
-func SetConsoleKeyShortcuts(bSet bool, bReserveKeys byte, lpAppKeys *systemconsole.APPKEY, dwNumAppKeys uint32) bool {
+func SetConsoleKeyShortcuts(bSet bool, bReserveKeys byte, lpAppKeys []systemconsole.APPKEY) bool {
 	_bSet := foundation.BOOL(win32.Bool32(bSet))
-	return systemconsole.SetConsoleKeyShortcuts(_bSet, bReserveKeys, lpAppKeys, dwNumAppKeys) != 0
+	var _lpAppKeys *systemconsole.APPKEY
+	if len(lpAppKeys) > 0 {
+		_lpAppKeys = &lpAppKeys[0]
+	}
+	return systemconsole.SetConsoleKeyShortcuts(_bSet, bReserveKeys, _lpAppKeys, uint32(len(lpAppKeys))) != 0
 }
 
 // SetConsoleMenuClose wraps the raw SetConsoleMenuClose call with idiomatic Go types.
@@ -360,16 +410,38 @@ func WriteConsoleA(hConsoleOutput foundation.HANDLE, lpBuffer foundation.PSTR, n
 
 // WriteConsoleInput wraps the raw WriteConsoleInputW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/console/writeconsoleinput
-func WriteConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer *systemconsole.INPUT_RECORD, nLength uint32, lpNumberOfEventsWritten *uint32) error {
-	return systemconsole.WriteConsoleInputW(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsWritten)
+func WriteConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsWritten *uint32) error {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.WriteConsoleInputW(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsWritten)
+}
+
+// WriteConsoleInputA wraps the raw WriteConsoleInputA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/console/writeconsoleinput
+func WriteConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsWritten *uint32) error {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.WriteConsoleInputA(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsWritten)
 }
 
 // WriteConsoleInputVDM wraps the raw WriteConsoleInputVDMW call with idiomatic Go types.
-func WriteConsoleInputVDM(hConsoleInput foundation.HANDLE, lpBuffer *systemconsole.INPUT_RECORD, nLength uint32, lpNumberOfEventsWritten *uint32) bool {
-	return systemconsole.WriteConsoleInputVDMW(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsWritten) != 0
+func WriteConsoleInputVDM(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsWritten *uint32) bool {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.WriteConsoleInputVDMW(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsWritten) != 0
 }
 
 // WriteConsoleInputVDMA wraps the raw WriteConsoleInputVDMA call with idiomatic Go types.
-func WriteConsoleInputVDMA(hConsoleInput foundation.HANDLE, lpBuffer *systemconsole.INPUT_RECORD, nLength uint32, lpNumberOfEventsWritten *uint32) bool {
-	return systemconsole.WriteConsoleInputVDMA(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsWritten) != 0
+func WriteConsoleInputVDMA(hConsoleInput foundation.HANDLE, lpBuffer []systemconsole.INPUT_RECORD, lpNumberOfEventsWritten *uint32) bool {
+	var _lpBuffer *systemconsole.INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	return systemconsole.WriteConsoleInputVDMA(hConsoleInput, _lpBuffer, uint32(len(lpBuffer)), lpNumberOfEventsWritten) != 0
 }

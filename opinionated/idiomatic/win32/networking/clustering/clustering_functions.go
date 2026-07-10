@@ -125,9 +125,13 @@ func ClusWorkerTerminateEx(ClusWorker *networkingclustering.CLUS_WORKER, Timeout
 
 // ClusWorkersTerminate wraps the raw ClusWorkersTerminate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-clusworkersterminate
-func ClusWorkersTerminate(ClusWorkers **networkingclustering.CLUS_WORKER, ClusWorkersCount uintptr, TimeoutInMilliseconds uint32, WaitOnly bool) uint32 {
+func ClusWorkersTerminate(ClusWorkers []*networkingclustering.CLUS_WORKER, TimeoutInMilliseconds uint32, WaitOnly bool) uint32 {
+	var _ClusWorkers **networkingclustering.CLUS_WORKER
+	if len(ClusWorkers) > 0 {
+		_ClusWorkers = &ClusWorkers[0]
+	}
 	_WaitOnly := foundation.BOOL(win32.Bool32(WaitOnly))
-	return networkingclustering.ClusWorkersTerminate(ClusWorkers, ClusWorkersCount, TimeoutInMilliseconds, _WaitOnly)
+	return networkingclustering.ClusWorkersTerminate(_ClusWorkers, uintptr(len(ClusWorkers)), TimeoutInMilliseconds, _WaitOnly)
 }
 
 // ClusterAddGroupToAffinityRule wraps the raw ClusterAddGroupToAffinityRule call with idiomatic Go types.
@@ -165,6 +169,16 @@ func ClusterControlEx(hCluster networkingclustering.HCLUSTER, hHostNode networki
 func ClusterCreateAffinityRule(hCluster networkingclustering.HCLUSTER, ruleName string, ruleType networkingclustering.CLUS_AFFINITY_RULE_TYPE) uint32 {
 	_ruleName := win32.UTF16Ptr(ruleName)
 	return networkingclustering.ClusterCreateAffinityRule(hCluster, foundation.PWSTR(_ruleName), ruleType)
+}
+
+// ClusterEncrypt wraps the raw ClusterEncrypt call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-clusterencrypt
+func ClusterEncrypt(hClusCryptProvider networkingclustering.HCLUSCRYPTPROVIDER, pData []byte, ppData **byte, pcbData *uint32) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	return networkingclustering.ClusterEncrypt(hClusCryptProvider, _pData, uint32(len(pData)), ppData, pcbData)
 }
 
 // ClusterGetVolumeNameForVolumeMountPoint wraps the raw ClusterGetVolumeNameForVolumeMountPoint call with idiomatic Go types.
@@ -1227,10 +1241,24 @@ func SetClusterGroupNameEx(hGroup networkingclustering.HGROUP, lpszGroupName str
 	return networkingclustering.SetClusterGroupNameEx(hGroup, foundation.PWSTR(_lpszGroupName), foundation.PWSTR(_lpszReason))
 }
 
+// SetClusterGroupNodeList wraps the raw SetClusterGroupNodeList call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-setclustergroupnodelist
+func SetClusterGroupNodeList(hGroup networkingclustering.HGROUP, NodeList []networkingclustering.HNODE) uint32 {
+	var _NodeList *networkingclustering.HNODE
+	if len(NodeList) > 0 {
+		_NodeList = &NodeList[0]
+	}
+	return networkingclustering.SetClusterGroupNodeList(hGroup, uint32(len(NodeList)), _NodeList)
+}
+
 // SetClusterGroupNodeListEx wraps the raw SetClusterGroupNodeListEx call with idiomatic Go types.
-func SetClusterGroupNodeListEx(hGroup networkingclustering.HGROUP, NodeCount uint32, NodeList *networkingclustering.HNODE, lpszReason string) uint32 {
+func SetClusterGroupNodeListEx(hGroup networkingclustering.HGROUP, NodeList []networkingclustering.HNODE, lpszReason string) uint32 {
+	var _NodeList *networkingclustering.HNODE
+	if len(NodeList) > 0 {
+		_NodeList = &NodeList[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	return networkingclustering.SetClusterGroupNodeListEx(hGroup, NodeCount, NodeList, foundation.PWSTR(_lpszReason))
+	return networkingclustering.SetClusterGroupNodeListEx(hGroup, uint32(len(NodeList)), _NodeList, foundation.PWSTR(_lpszReason))
 }
 
 // SetClusterGroupSetDependencyExpression wraps the raw SetClusterGroupSetDependencyExpression call with idiomatic Go types.
@@ -1273,6 +1301,16 @@ func SetClusterNetworkNameEx(hNetwork networkingclustering.HNETWORK, lpszName st
 	_lpszName := win32.UTF16Ptr(lpszName)
 	_lpszReason := win32.UTF16Ptr(lpszReason)
 	return networkingclustering.SetClusterNetworkNameEx(hNetwork, foundation.PWSTR(_lpszName), foundation.PWSTR(_lpszReason))
+}
+
+// SetClusterNetworkPriorityOrder wraps the raw SetClusterNetworkPriorityOrder call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-setclusternetworkpriorityorder
+func SetClusterNetworkPriorityOrder(hCluster networkingclustering.HCLUSTER, NetworkList []networkingclustering.HNETWORK) uint32 {
+	var _NetworkList *networkingclustering.HNETWORK
+	if len(NetworkList) > 0 {
+		_NetworkList = &NetworkList[0]
+	}
+	return networkingclustering.SetClusterNetworkPriorityOrder(hCluster, uint32(len(NetworkList)), _NetworkList)
 }
 
 // SetClusterQuorumResource wraps the raw SetClusterQuorumResource call with idiomatic Go types.

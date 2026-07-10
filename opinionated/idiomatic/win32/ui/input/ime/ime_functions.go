@@ -178,8 +178,22 @@ func ImmGetOpenStatus(param0 uiinputime.HIMC) bool {
 
 // ImmGetRegisterWordStyle wraps the raw ImmGetRegisterWordStyleW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetregisterwordstylew
-func ImmGetRegisterWordStyle(param0 uiinputkeyboardandmouse.HKL, nItem uint32, lpStyleBuf *uiinputime.STYLEBUFW) uint32 {
-	return uiinputime.ImmGetRegisterWordStyleW(param0, nItem, lpStyleBuf)
+func ImmGetRegisterWordStyle(param0 uiinputkeyboardandmouse.HKL, lpStyleBuf []uiinputime.STYLEBUFW) uint32 {
+	var _lpStyleBuf *uiinputime.STYLEBUFW
+	if len(lpStyleBuf) > 0 {
+		_lpStyleBuf = &lpStyleBuf[0]
+	}
+	return uiinputime.ImmGetRegisterWordStyleW(param0, uint32(len(lpStyleBuf)), _lpStyleBuf)
+}
+
+// ImmGetRegisterWordStyleA wraps the raw ImmGetRegisterWordStyleA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetregisterwordstylea
+func ImmGetRegisterWordStyleA(param0 uiinputkeyboardandmouse.HKL, lpStyleBuf []uiinputime.STYLEBUFA) uint32 {
+	var _lpStyleBuf *uiinputime.STYLEBUFA
+	if len(lpStyleBuf) > 0 {
+		_lpStyleBuf = &lpStyleBuf[0]
+	}
+	return uiinputime.ImmGetRegisterWordStyleA(param0, uint32(len(lpStyleBuf)), _lpStyleBuf)
 }
 
 // ImmGetStatusWindowPos wraps the raw ImmGetStatusWindowPos call with idiomatic Go types.

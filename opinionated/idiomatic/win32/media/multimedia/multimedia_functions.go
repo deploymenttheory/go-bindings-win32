@@ -109,8 +109,12 @@ func AVIMakeCompressedStream(ppsCompressed **mediamultimedia.IAVIStream, ppsSour
 
 // AVIMakeFileFromStreams wraps the raw AVIMakeFileFromStreams call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avimakefilefromstreams
-func AVIMakeFileFromStreams(ppfile **mediamultimedia.IAVIFile, nStreams int32, papStreams **mediamultimedia.IAVIStream) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVIMakeFileFromStreams(ppfile, nStreams, papStreams)))
+func AVIMakeFileFromStreams(ppfile **mediamultimedia.IAVIFile, papStreams []*mediamultimedia.IAVIStream) error {
+	var _papStreams **mediamultimedia.IAVIStream
+	if len(papStreams) > 0 {
+		_papStreams = &papStreams[0]
+	}
+	return win32.HRESULTError(int32(mediamultimedia.AVIMakeFileFromStreams(ppfile, int32(len(papStreams)), _papStreams)))
 }
 
 // AVIMakeStreamFromClipboard wraps the raw AVIMakeStreamFromClipboard call with idiomatic Go types.
@@ -140,8 +144,12 @@ func AVISaveA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback me
 
 // AVISaveOptionsFree wraps the raw AVISaveOptionsFree call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisaveoptionsfree
-func AVISaveOptionsFree(nStreams int32, plpOptions **mediamultimedia.AVICOMPRESSOPTIONS) error {
-	return win32.HRESULTError(int32(mediamultimedia.AVISaveOptionsFree(nStreams, plpOptions)))
+func AVISaveOptionsFree(plpOptions []*mediamultimedia.AVICOMPRESSOPTIONS) error {
+	var _plpOptions **mediamultimedia.AVICOMPRESSOPTIONS
+	if len(plpOptions) > 0 {
+		_plpOptions = &plpOptions[0]
+	}
+	return win32.HRESULTError(int32(mediamultimedia.AVISaveOptionsFree(int32(len(plpOptions)), _plpOptions)))
 }
 
 // AVISaveV wraps the raw AVISaveVW call with idiomatic Go types.
@@ -275,8 +283,12 @@ func DrawDibBegin(hdd uintptr, hdc graphicsgdi.HDC, dxDst int32, dyDst int32, lp
 
 // DrawDibChangePalette wraps the raw DrawDibChangePalette call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibchangepalette
-func DrawDibChangePalette(hdd uintptr, iStart int32, iLen int32, lppe *graphicsgdi.PALETTEENTRY) bool {
-	return mediamultimedia.DrawDibChangePalette(hdd, iStart, iLen, lppe) != 0
+func DrawDibChangePalette(hdd uintptr, iStart int32, lppe []graphicsgdi.PALETTEENTRY) bool {
+	var _lppe *graphicsgdi.PALETTEENTRY
+	if len(lppe) > 0 {
+		_lppe = &lppe[0]
+	}
+	return mediamultimedia.DrawDibChangePalette(hdd, iStart, int32(len(lppe)), _lppe) != 0
 }
 
 // DrawDibClose wraps the raw DrawDibClose call with idiomatic Go types.

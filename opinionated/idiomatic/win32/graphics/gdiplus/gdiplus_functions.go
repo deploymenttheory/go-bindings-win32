@@ -116,6 +116,24 @@ func GdipDrawString(graphics *graphicsgdiplus.GpGraphics, string_ string, length
 	return graphicsgdiplus.GdipDrawString(graphics, foundation.PWSTR(_string_), length, font, layoutRect, stringFormat, brush)
 }
 
+// GdipEmfToWmfBits wraps the raw GdipEmfToWmfBits call with idiomatic Go types.
+func GdipEmfToWmfBits(hemf graphicsgdi.HENHMETAFILE, pData16 []byte, iMapMode int32, eFlags int32) uint32 {
+	var _pData16 *byte
+	if len(pData16) > 0 {
+		_pData16 = &pData16[0]
+	}
+	return graphicsgdiplus.GdipEmfToWmfBits(hemf, uint32(len(pData16)), _pData16, iMapMode, eFlags)
+}
+
+// GdipGetFontCollectionFamilyList wraps the raw GdipGetFontCollectionFamilyList call with idiomatic Go types.
+func GdipGetFontCollectionFamilyList(fontCollection *graphicsgdiplus.GpFontCollection, gpfamilies []*graphicsgdiplus.GpFontFamily, numFound *int32) graphicsgdiplus.Status {
+	var _gpfamilies **graphicsgdiplus.GpFontFamily
+	if len(gpfamilies) > 0 {
+		_gpfamilies = &gpfamilies[0]
+	}
+	return graphicsgdiplus.GdipGetFontCollectionFamilyList(fontCollection, int32(len(gpfamilies)), _gpfamilies, numFound)
+}
+
 // GdipGetLogFont wraps the raw GdipGetLogFontW call with idiomatic Go types.
 func GdipGetLogFont(font *graphicsgdiplus.GpFont, graphics *graphicsgdiplus.GpGraphics, logfontW *graphicsgdi.LOGFONTW) graphicsgdiplus.Status {
 	return graphicsgdiplus.GdipGetLogFontW(font, graphics, logfontW)
@@ -125,6 +143,15 @@ func GdipGetLogFont(font *graphicsgdiplus.GpFont, graphics *graphicsgdiplus.GpGr
 func GdipGetMetafileHeaderFromFile(filename string, header *graphicsgdiplus.MetafileHeader) graphicsgdiplus.Status {
 	_filename := win32.UTF16Ptr(filename)
 	return graphicsgdiplus.GdipGetMetafileHeaderFromFile(foundation.PWSTR(_filename), header)
+}
+
+// GdipGetRegionData wraps the raw GdipGetRegionData call with idiomatic Go types.
+func GdipGetRegionData(region *graphicsgdiplus.GpRegion, buffer []byte, sizeFilled *uint32) graphicsgdiplus.Status {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	return graphicsgdiplus.GdipGetRegionData(region, _buffer, uint32(len(buffer)), sizeFilled)
 }
 
 // GdipInitializePalette wraps the raw GdipInitializePalette call with idiomatic Go types.

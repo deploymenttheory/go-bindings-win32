@@ -31,16 +31,24 @@ func DnsConnectionGetProxyInfo(pwszConnectionName string, Type networkmanagement
 }
 
 // DnsConnectionGetProxyInfoForHostUrl wraps the raw DnsConnectionGetProxyInfoForHostUrl call with idiomatic Go types.
-func DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl string, pSelectionContext *byte, dwSelectionContextLength uint32, dwExplicitInterfaceIndex uint32, pProxyInfoEx *networkmanagementdns.DNS_CONNECTION_PROXY_INFO_EX) uint32 {
+func DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl string, pSelectionContext []byte, dwExplicitInterfaceIndex uint32, pProxyInfoEx *networkmanagementdns.DNS_CONNECTION_PROXY_INFO_EX) uint32 {
 	_pwszHostUrl := win32.UTF16Ptr(pwszHostUrl)
-	return networkmanagementdns.DnsConnectionGetProxyInfoForHostUrl(foundation.PWSTR(_pwszHostUrl), pSelectionContext, dwSelectionContextLength, dwExplicitInterfaceIndex, pProxyInfoEx)
+	var _pSelectionContext *byte
+	if len(pSelectionContext) > 0 {
+		_pSelectionContext = &pSelectionContext[0]
+	}
+	return networkmanagementdns.DnsConnectionGetProxyInfoForHostUrl(foundation.PWSTR(_pwszHostUrl), _pSelectionContext, uint32(len(pSelectionContext)), dwExplicitInterfaceIndex, pProxyInfoEx)
 }
 
 // DnsConnectionGetProxyInfoForHostUrlEx wraps the raw DnsConnectionGetProxyInfoForHostUrlEx call with idiomatic Go types.
-func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl string, pSelectionContext *byte, dwSelectionContextLength uint32, dwExplicitInterfaceIndex uint32, pwszConnectionName string, pProxyInfoEx *networkmanagementdns.DNS_CONNECTION_PROXY_INFO_EX) uint32 {
+func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl string, pSelectionContext []byte, dwExplicitInterfaceIndex uint32, pwszConnectionName string, pProxyInfoEx *networkmanagementdns.DNS_CONNECTION_PROXY_INFO_EX) uint32 {
 	_pwszHostUrl := win32.UTF16Ptr(pwszHostUrl)
+	var _pSelectionContext *byte
+	if len(pSelectionContext) > 0 {
+		_pSelectionContext = &pSelectionContext[0]
+	}
 	_pwszConnectionName := win32.UTF16Ptr(pwszConnectionName)
-	return networkmanagementdns.DnsConnectionGetProxyInfoForHostUrlEx(foundation.PWSTR(_pwszHostUrl), pSelectionContext, dwSelectionContextLength, dwExplicitInterfaceIndex, foundation.PWSTR(_pwszConnectionName), pProxyInfoEx)
+	return networkmanagementdns.DnsConnectionGetProxyInfoForHostUrlEx(foundation.PWSTR(_pwszHostUrl), _pSelectionContext, uint32(len(pSelectionContext)), dwExplicitInterfaceIndex, foundation.PWSTR(_pwszConnectionName), pProxyInfoEx)
 }
 
 // DnsConnectionGetProxyList wraps the raw DnsConnectionGetProxyList call with idiomatic Go types.
@@ -127,6 +135,16 @@ func DnsServiceConstructInstance(pServiceName string, pHostName string, pIp4 *ui
 	_pServiceName := win32.UTF16Ptr(pServiceName)
 	_pHostName := win32.UTF16Ptr(pHostName)
 	return networkmanagementdns.DnsServiceConstructInstance(foundation.PWSTR(_pServiceName), foundation.PWSTR(_pHostName), pIp4, pIp6, wPort, wPriority, wWeight, dwPropertiesCount, keys, values)
+}
+
+// DnsSetApplicationSettings wraps the raw DnsSetApplicationSettings call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnssetapplicationsettings
+func DnsSetApplicationSettings(pServers []networkmanagementdns.DNS_CUSTOM_SERVER, pSettings *networkmanagementdns.DNS_APPLICATION_SETTINGS) uint32 {
+	var _pServers *networkmanagementdns.DNS_CUSTOM_SERVER
+	if len(pServers) > 0 {
+		_pServers = &pServers[0]
+	}
+	return networkmanagementdns.DnsSetApplicationSettings(uint32(len(pServers)), _pServers, pSettings)
 }
 
 // DnsValidateName_ wraps the raw DnsValidateName_W call with idiomatic Go types.

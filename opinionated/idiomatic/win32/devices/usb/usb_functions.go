@@ -26,11 +26,25 @@ func WinUsb_GetOverlappedResult(InterfaceHandle devicesusb.WINUSB_INTERFACE_HAND
 	return devicesusb.WinUsb_GetOverlappedResult(InterfaceHandle, lpOverlapped, lpNumberOfBytesTransferred, _bWait)
 }
 
+// WinUsb_ReadIsochPipe wraps the raw WinUsb_ReadIsochPipe call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_readisochpipe
+func WinUsb_ReadIsochPipe(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, FrameNumber *uint32, IsoPacketDescriptors []devicesusb.USBD_ISO_PACKET_DESCRIPTOR, Overlapped *systemio.OVERLAPPED) error {
+	var _IsoPacketDescriptors *devicesusb.USBD_ISO_PACKET_DESCRIPTOR
+	if len(IsoPacketDescriptors) > 0 {
+		_IsoPacketDescriptors = &IsoPacketDescriptors[0]
+	}
+	return devicesusb.WinUsb_ReadIsochPipe(BufferHandle, Offset, Length, FrameNumber, uint32(len(IsoPacketDescriptors)), _IsoPacketDescriptors, Overlapped)
+}
+
 // WinUsb_ReadIsochPipeAsap wraps the raw WinUsb_ReadIsochPipeAsap call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_readisochpipeasap
-func WinUsb_ReadIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, ContinueStream bool, NumberOfPackets uint32, IsoPacketDescriptors *devicesusb.USBD_ISO_PACKET_DESCRIPTOR, Overlapped *systemio.OVERLAPPED) error {
+func WinUsb_ReadIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, ContinueStream bool, IsoPacketDescriptors []devicesusb.USBD_ISO_PACKET_DESCRIPTOR, Overlapped *systemio.OVERLAPPED) error {
 	_ContinueStream := foundation.BOOL(win32.Bool32(ContinueStream))
-	return devicesusb.WinUsb_ReadIsochPipeAsap(BufferHandle, Offset, Length, _ContinueStream, NumberOfPackets, IsoPacketDescriptors, Overlapped)
+	var _IsoPacketDescriptors *devicesusb.USBD_ISO_PACKET_DESCRIPTOR
+	if len(IsoPacketDescriptors) > 0 {
+		_IsoPacketDescriptors = &IsoPacketDescriptors[0]
+	}
+	return devicesusb.WinUsb_ReadIsochPipeAsap(BufferHandle, Offset, Length, _ContinueStream, uint32(len(IsoPacketDescriptors)), _IsoPacketDescriptors, Overlapped)
 }
 
 // WinUsb_WriteIsochPipeAsap wraps the raw WinUsb_WriteIsochPipeAsap call with idiomatic Go types.

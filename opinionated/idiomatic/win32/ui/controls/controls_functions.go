@@ -288,6 +288,16 @@ func EndPanningFeedback(hwnd foundation.HWND, fAnimateBack bool) bool {
 	return uicontrols.EndPanningFeedback(hwnd, _fAnimateBack) != 0
 }
 
+// EvaluateProximityToPolygon wraps the raw EvaluateProximityToPolygon call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-evaluateproximitytopolygon
+func EvaluateProximityToPolygon(controlPolygon []foundation.POINT, pHitTestingInput *uicontrols.TOUCH_HIT_TESTING_INPUT, pProximityEval *uicontrols.TOUCH_HIT_TESTING_PROXIMITY_EVALUATION) error {
+	var _controlPolygon *foundation.POINT
+	if len(controlPolygon) > 0 {
+		_controlPolygon = &controlPolygon[0]
+	}
+	return uicontrols.EvaluateProximityToPolygon(uint32(len(controlPolygon)), _controlPolygon, pHitTestingInput, pProximityEval)
+}
+
 // FlatSB_EnableScrollBar wraps the raw FlatSB_EnableScrollBar call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_enablescrollbar
 func FlatSB_EnableScrollBar(param0 foundation.HWND, param1 int32, param2 uint32) bool {

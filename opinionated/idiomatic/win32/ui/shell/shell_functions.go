@@ -26,8 +26,12 @@ import (
 
 // AssocCreateForClasses wraps the raw AssocCreateForClasses call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-assoccreateforclasses
-func AssocCreateForClasses(rgClasses *uishell.ASSOCIATIONELEMENT, cClasses uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.AssocCreateForClasses(rgClasses, cClasses, riid, ppv)))
+func AssocCreateForClasses(rgClasses []uishell.ASSOCIATIONELEMENT, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	var _rgClasses *uishell.ASSOCIATIONELEMENT
+	if len(rgClasses) > 0 {
+		_rgClasses = &rgClasses[0]
+	}
+	return win32.HRESULTError(int32(uishell.AssocCreateForClasses(_rgClasses, uint32(len(rgClasses)), riid, ppv)))
 }
 
 // AssocGetDetailsOfPropKey wraps the raw AssocGetDetailsOfPropKey call with idiomatic Go types.
@@ -93,14 +97,26 @@ func AssocQueryStringByKeyA(flags uishell.ASSOCF, str uishell.ASSOCSTR, hkAssoc 
 
 // CDefFolderMenu_Create2 wraps the raw CDefFolderMenu_Create2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-cdeffoldermenu_create2
-func CDefFolderMenu_Create2(pidlFolder *uishellcommon.ITEMIDLIST, hwnd foundation.HWND, cidl uint32, apidl **uishellcommon.ITEMIDLIST, psf *uishell.IShellFolder, pfn uishell.LPFNDFMCALLBACK, nKeys uint32, ahkeys *systemregistry.HKEY, ppcm **uishell.IContextMenu) error {
-	return win32.HRESULTError(int32(uishell.CDefFolderMenu_Create2(pidlFolder, hwnd, cidl, apidl, psf, pfn, nKeys, ahkeys, ppcm)))
+func CDefFolderMenu_Create2(pidlFolder *uishellcommon.ITEMIDLIST, hwnd foundation.HWND, apidl []*uishellcommon.ITEMIDLIST, psf *uishell.IShellFolder, pfn uishell.LPFNDFMCALLBACK, ahkeys []systemregistry.HKEY, ppcm **uishell.IContextMenu) error {
+	var _apidl **uishellcommon.ITEMIDLIST
+	if len(apidl) > 0 {
+		_apidl = &apidl[0]
+	}
+	var _ahkeys *systemregistry.HKEY
+	if len(ahkeys) > 0 {
+		_ahkeys = &ahkeys[0]
+	}
+	return win32.HRESULTError(int32(uishell.CDefFolderMenu_Create2(pidlFolder, hwnd, uint32(len(apidl)), _apidl, psf, pfn, uint32(len(ahkeys)), _ahkeys, ppcm)))
 }
 
 // CIDLData_CreateFromIDArray wraps the raw CIDLData_CreateFromIDArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-cidldata_createfromidarray
-func CIDLData_CreateFromIDArray(pidlFolder *uishellcommon.ITEMIDLIST, cidl uint32, apidl **uishellcommon.ITEMIDLIST, ppdtobj **systemcom.IDataObject) error {
-	return win32.HRESULTError(int32(uishell.CIDLData_CreateFromIDArray(pidlFolder, cidl, apidl, ppdtobj)))
+func CIDLData_CreateFromIDArray(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*uishellcommon.ITEMIDLIST, ppdtobj **systemcom.IDataObject) error {
+	var _apidl **uishellcommon.ITEMIDLIST
+	if len(apidl) > 0 {
+		_apidl = &apidl[0]
+	}
+	return win32.HRESULTError(int32(uishell.CIDLData_CreateFromIDArray(pidlFolder, uint32(len(apidl)), _apidl, ppdtobj)))
 }
 
 // ChrCmpI wraps the raw ChrCmpIW call with idiomatic Go types.
@@ -1042,9 +1058,23 @@ func PathFindOnPathA(pszPath foundation.PSTR, ppszOtherDirs **int8) bool {
 
 // PathFindSuffixArray wraps the raw PathFindSuffixArrayW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-pathfindsuffixarrayw
-func PathFindSuffixArray(pszPath string, apszSuffix *foundation.PWSTR, iArraySize int32) foundation.PWSTR {
+func PathFindSuffixArray(pszPath string, apszSuffix []foundation.PWSTR) foundation.PWSTR {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	return uishell.PathFindSuffixArrayW(foundation.PWSTR(_pszPath), apszSuffix, iArraySize)
+	var _apszSuffix *foundation.PWSTR
+	if len(apszSuffix) > 0 {
+		_apszSuffix = &apszSuffix[0]
+	}
+	return uishell.PathFindSuffixArrayW(foundation.PWSTR(_pszPath), _apszSuffix, int32(len(apszSuffix)))
+}
+
+// PathFindSuffixArrayA wraps the raw PathFindSuffixArrayA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-pathfindsuffixarraya
+func PathFindSuffixArrayA(pszPath foundation.PSTR, apszSuffix []foundation.PSTR) foundation.PSTR {
+	var _apszSuffix *foundation.PSTR
+	if len(apszSuffix) > 0 {
+		_apszSuffix = &apszSuffix[0]
+	}
+	return uishell.PathFindSuffixArrayA(pszPath, _apszSuffix, int32(len(apszSuffix)))
 }
 
 // PathGetArgs wraps the raw PathGetArgsW call with idiomatic Go types.
@@ -1700,8 +1730,12 @@ func SHCreateAssociationRegistration(riid *win32.GUID, ppv *unsafe.Pointer) erro
 
 // SHCreateDataObject wraps the raw SHCreateDataObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreatedataobject
-func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, cidl uint32, apidl **uishellcommon.ITEMIDLIST, pdtInner *systemcom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishell.SHCreateDataObject(pidlFolder, cidl, apidl, pdtInner, riid, ppv)))
+func SHCreateDataObject(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*uishellcommon.ITEMIDLIST, pdtInner *systemcom.IDataObject, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	var _apidl **uishellcommon.ITEMIDLIST
+	if len(apidl) > 0 {
+		_apidl = &apidl[0]
+	}
+	return win32.HRESULTError(int32(uishell.SHCreateDataObject(pidlFolder, uint32(len(apidl)), _apidl, pdtInner, riid, ppv)))
 }
 
 // SHCreateDefaultContextMenu wraps the raw SHCreateDefaultContextMenu call with idiomatic Go types.
@@ -1809,8 +1843,12 @@ func SHCreateShellItem(pidlParent *uishellcommon.ITEMIDLIST, psfParent *uishell.
 
 // SHCreateShellItemArray wraps the raw SHCreateShellItemArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarray
-func SHCreateShellItemArray(pidlParent *uishellcommon.ITEMIDLIST, psf *uishell.IShellFolder, cidl uint32, ppidl **uishellcommon.ITEMIDLIST, ppsiItemArray **uishell.IShellItemArray) error {
-	return win32.HRESULTError(int32(uishell.SHCreateShellItemArray(pidlParent, psf, cidl, ppidl, ppsiItemArray)))
+func SHCreateShellItemArray(pidlParent *uishellcommon.ITEMIDLIST, psf *uishell.IShellFolder, ppidl []*uishellcommon.ITEMIDLIST, ppsiItemArray **uishell.IShellItemArray) error {
+	var _ppidl **uishellcommon.ITEMIDLIST
+	if len(ppidl) > 0 {
+		_ppidl = &ppidl[0]
+	}
+	return win32.HRESULTError(int32(uishell.SHCreateShellItemArray(pidlParent, psf, uint32(len(ppidl)), _ppidl, ppsiItemArray)))
 }
 
 // SHCreateShellItemArrayFromDataObject wraps the raw SHCreateShellItemArrayFromDataObject call with idiomatic Go types.
@@ -1821,8 +1859,12 @@ func SHCreateShellItemArrayFromDataObject(pdo *systemcom.IDataObject, riid *win3
 
 // SHCreateShellItemArrayFromIDLists wraps the raw SHCreateShellItemArrayFromIDLists call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateshellitemarrayfromidlists
-func SHCreateShellItemArrayFromIDLists(cidl uint32, rgpidl **uishellcommon.ITEMIDLIST, ppsiItemArray **uishell.IShellItemArray) error {
-	return win32.HRESULTError(int32(uishell.SHCreateShellItemArrayFromIDLists(cidl, rgpidl, ppsiItemArray)))
+func SHCreateShellItemArrayFromIDLists(rgpidl []*uishellcommon.ITEMIDLIST, ppsiItemArray **uishell.IShellItemArray) error {
+	var _rgpidl **uishellcommon.ITEMIDLIST
+	if len(rgpidl) > 0 {
+		_rgpidl = &rgpidl[0]
+	}
+	return win32.HRESULTError(int32(uishell.SHCreateShellItemArrayFromIDLists(uint32(len(rgpidl)), _rgpidl, ppsiItemArray)))
 }
 
 // SHCreateShellItemArrayFromShellItem wraps the raw SHCreateShellItemArrayFromShellItem call with idiomatic Go types.
@@ -1833,8 +1875,12 @@ func SHCreateShellItemArrayFromShellItem(psi *uishell.IShellItem, riid *win32.GU
 
 // SHCreateStdEnumFmtEtc wraps the raw SHCreateStdEnumFmtEtc call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcreatestdenumfmtetc
-func SHCreateStdEnumFmtEtc(cfmt uint32, afmt *systemcom.FORMATETC, ppenumFormatEtc **systemcom.IEnumFORMATETC) error {
-	return win32.HRESULTError(int32(uishell.SHCreateStdEnumFmtEtc(cfmt, afmt, ppenumFormatEtc)))
+func SHCreateStdEnumFmtEtc(afmt []systemcom.FORMATETC, ppenumFormatEtc **systemcom.IEnumFORMATETC) error {
+	var _afmt *systemcom.FORMATETC
+	if len(afmt) > 0 {
+		_afmt = &afmt[0]
+	}
+	return win32.HRESULTError(int32(uishell.SHCreateStdEnumFmtEtc(uint32(len(afmt)), _afmt, ppenumFormatEtc)))
 }
 
 // SHCreateStreamOnFile wraps the raw SHCreateStreamOnFileW call with idiomatic Go types.
@@ -2321,16 +2367,24 @@ func SHObjectProperties(hwnd foundation.HWND, shopObjectType uint32, pszObjectNa
 
 // SHOpenFolderAndSelectItems wraps the raw SHOpenFolderAndSelectItems call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shopenfolderandselectitems
-func SHOpenFolderAndSelectItems(pidlFolder *uishellcommon.ITEMIDLIST, cidl uint32, apidl **uishellcommon.ITEMIDLIST, dwFlags uint32) error {
-	return win32.HRESULTError(int32(uishell.SHOpenFolderAndSelectItems(pidlFolder, cidl, apidl, dwFlags)))
+func SHOpenFolderAndSelectItems(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*uishellcommon.ITEMIDLIST, dwFlags uint32) error {
+	var _apidl **uishellcommon.ITEMIDLIST
+	if len(apidl) > 0 {
+		_apidl = &apidl[0]
+	}
+	return win32.HRESULTError(int32(uishell.SHOpenFolderAndSelectItems(pidlFolder, uint32(len(apidl)), _apidl, dwFlags)))
 }
 
 // SHOpenPropSheet wraps the raw SHOpenPropSheetW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shopenpropsheetw
-func SHOpenPropSheet(pszCaption string, ahkeys *systemregistry.HKEY, ckeys uint32, pclsidDefault *win32.GUID, pdtobj *systemcom.IDataObject, psb *uishell.IShellBrowser, pStartPage string) bool {
+func SHOpenPropSheet(pszCaption string, ahkeys []systemregistry.HKEY, pclsidDefault *win32.GUID, pdtobj *systemcom.IDataObject, psb *uishell.IShellBrowser, pStartPage string) bool {
 	_pszCaption := win32.UTF16Ptr(pszCaption)
+	var _ahkeys *systemregistry.HKEY
+	if len(ahkeys) > 0 {
+		_ahkeys = &ahkeys[0]
+	}
 	_pStartPage := win32.UTF16Ptr(pStartPage)
-	return uishell.SHOpenPropSheetW(foundation.PWSTR(_pszCaption), ahkeys, ckeys, pclsidDefault, pdtobj, psb, foundation.PWSTR(_pStartPage)) != 0
+	return uishell.SHOpenPropSheetW(foundation.PWSTR(_pszCaption), _ahkeys, uint32(len(ahkeys)), pclsidDefault, pdtobj, psb, foundation.PWSTR(_pStartPage)) != 0
 }
 
 // SHOpenRegStream wraps the raw SHOpenRegStreamW call with idiomatic Go types.

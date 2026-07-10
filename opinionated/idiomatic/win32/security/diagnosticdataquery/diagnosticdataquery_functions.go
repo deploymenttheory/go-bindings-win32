@@ -80,8 +80,12 @@ func DdqGetDiagnosticRecordAtIndex(hRecord securitydiagnosticdataquery.HDIAGNOST
 
 // DdqGetDiagnosticRecordBinaryDistribution wraps the raw DdqGetDiagnosticRecordBinaryDistribution call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordbinarydistribution
-func DdqGetDiagnosticRecordBinaryDistribution(hSession securitydiagnosticdataquery.HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames *foundation.PWSTR, producerNameCount uint32, topNBinaries uint32, binaryStats **securitydiagnosticdataquery.DIAGNOSTIC_DATA_EVENT_BINARY_STATS, statCount *uint32) error {
-	return win32.HRESULTError(int32(securitydiagnosticdataquery.DdqGetDiagnosticRecordBinaryDistribution(hSession, producerNames, producerNameCount, topNBinaries, binaryStats, statCount)))
+func DdqGetDiagnosticRecordBinaryDistribution(hSession securitydiagnosticdataquery.HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames []foundation.PWSTR, topNBinaries uint32, binaryStats **securitydiagnosticdataquery.DIAGNOSTIC_DATA_EVENT_BINARY_STATS, statCount *uint32) error {
+	var _producerNames *foundation.PWSTR
+	if len(producerNames) > 0 {
+		_producerNames = &producerNames[0]
+	}
+	return win32.HRESULTError(int32(securitydiagnosticdataquery.DdqGetDiagnosticRecordBinaryDistribution(hSession, _producerNames, uint32(len(producerNames)), topNBinaries, binaryStats, statCount)))
 }
 
 // DdqGetDiagnosticRecordCategoryAtIndex wraps the raw DdqGetDiagnosticRecordCategoryAtIndex call with idiomatic Go types.
@@ -166,14 +170,22 @@ func DdqGetDiagnosticRecordStats(hSession securitydiagnosticdataquery.HDIAGNOSTI
 
 // DdqGetDiagnosticRecordSummary wraps the raw DdqGetDiagnosticRecordSummary call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordsummary
-func DdqGetDiagnosticRecordSummary(hSession securitydiagnosticdataquery.HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames *foundation.PWSTR, producerNameCount uint32, generalStats *securitydiagnosticdataquery.DIAGNOSTIC_DATA_GENERAL_STATS) error {
-	return win32.HRESULTError(int32(securitydiagnosticdataquery.DdqGetDiagnosticRecordSummary(hSession, producerNames, producerNameCount, generalStats)))
+func DdqGetDiagnosticRecordSummary(hSession securitydiagnosticdataquery.HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames []foundation.PWSTR, generalStats *securitydiagnosticdataquery.DIAGNOSTIC_DATA_GENERAL_STATS) error {
+	var _producerNames *foundation.PWSTR
+	if len(producerNames) > 0 {
+		_producerNames = &producerNames[0]
+	}
+	return win32.HRESULTError(int32(securitydiagnosticdataquery.DdqGetDiagnosticRecordSummary(hSession, _producerNames, uint32(len(producerNames)), generalStats)))
 }
 
 // DdqGetDiagnosticRecordTagDistribution wraps the raw DdqGetDiagnosticRecordTagDistribution call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordtagdistribution
-func DdqGetDiagnosticRecordTagDistribution(hSession securitydiagnosticdataquery.HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames *foundation.PWSTR, producerNameCount uint32, tagStats **securitydiagnosticdataquery.DIAGNOSTIC_DATA_EVENT_TAG_STATS, statCount *uint32) error {
-	return win32.HRESULTError(int32(securitydiagnosticdataquery.DdqGetDiagnosticRecordTagDistribution(hSession, producerNames, producerNameCount, tagStats, statCount)))
+func DdqGetDiagnosticRecordTagDistribution(hSession securitydiagnosticdataquery.HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames []foundation.PWSTR, tagStats **securitydiagnosticdataquery.DIAGNOSTIC_DATA_EVENT_TAG_STATS, statCount *uint32) error {
+	var _producerNames *foundation.PWSTR
+	if len(producerNames) > 0 {
+		_producerNames = &producerNames[0]
+	}
+	return win32.HRESULTError(int32(securitydiagnosticdataquery.DdqGetDiagnosticRecordTagDistribution(hSession, _producerNames, uint32(len(producerNames)), tagStats, statCount)))
 }
 
 // DdqGetDiagnosticReport wraps the raw DdqGetDiagnosticReport call with idiomatic Go types.

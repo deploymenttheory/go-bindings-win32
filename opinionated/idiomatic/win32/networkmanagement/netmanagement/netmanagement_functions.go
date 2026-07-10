@@ -28,13 +28,39 @@ func I_NetLogonControl2(ServerName string, FunctionCode uint32, QueryLevel uint3
 }
 
 // LogError wraps the raw LogErrorW call with idiomatic Go types.
-func LogError(dwMessageId uint32, cNumberOfSubStrings uint32, plpwsSubStrings *foundation.PWSTR, dwErrorCode uint32) {
-	networkmanagementnetmanagement.LogErrorW(dwMessageId, cNumberOfSubStrings, plpwsSubStrings, dwErrorCode)
+func LogError(dwMessageId uint32, plpwsSubStrings []foundation.PWSTR, dwErrorCode uint32) {
+	var _plpwsSubStrings *foundation.PWSTR
+	if len(plpwsSubStrings) > 0 {
+		_plpwsSubStrings = &plpwsSubStrings[0]
+	}
+	networkmanagementnetmanagement.LogErrorW(dwMessageId, uint32(len(plpwsSubStrings)), _plpwsSubStrings, dwErrorCode)
+}
+
+// LogErrorA wraps the raw LogErrorA call with idiomatic Go types.
+func LogErrorA(dwMessageId uint32, plpwsSubStrings []foundation.PSTR, dwErrorCode uint32) {
+	var _plpwsSubStrings *foundation.PSTR
+	if len(plpwsSubStrings) > 0 {
+		_plpwsSubStrings = &plpwsSubStrings[0]
+	}
+	networkmanagementnetmanagement.LogErrorA(dwMessageId, uint32(len(plpwsSubStrings)), _plpwsSubStrings, dwErrorCode)
 }
 
 // LogEvent wraps the raw LogEventW call with idiomatic Go types.
-func LogEvent(wEventType uint32, dwMessageId uint32, cNumberOfSubStrings uint32, plpwsSubStrings *foundation.PWSTR) {
-	networkmanagementnetmanagement.LogEventW(wEventType, dwMessageId, cNumberOfSubStrings, plpwsSubStrings)
+func LogEvent(wEventType uint32, dwMessageId uint32, plpwsSubStrings []foundation.PWSTR) {
+	var _plpwsSubStrings *foundation.PWSTR
+	if len(plpwsSubStrings) > 0 {
+		_plpwsSubStrings = &plpwsSubStrings[0]
+	}
+	networkmanagementnetmanagement.LogEventW(wEventType, dwMessageId, uint32(len(plpwsSubStrings)), _plpwsSubStrings)
+}
+
+// LogEventA wraps the raw LogEventA call with idiomatic Go types.
+func LogEventA(wEventType uint32, dwMessageId uint32, plpwsSubStrings []foundation.PSTR) {
+	var _plpwsSubStrings *foundation.PSTR
+	if len(plpwsSubStrings) > 0 {
+		_plpwsSubStrings = &plpwsSubStrings[0]
+	}
+	networkmanagementnetmanagement.LogEventA(wEventType, dwMessageId, uint32(len(plpwsSubStrings)), _plpwsSubStrings)
 }
 
 // NetAccessAdd wraps the raw NetAccessAdd call with idiomatic Go types.
@@ -785,10 +811,14 @@ func NetServiceGetInfo(servername string, service string, level uint32, bufptr *
 
 // NetServiceInstall wraps the raw NetServiceInstall call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netserviceinstall
-func NetServiceInstall(servername string, service string, argc uint32, argv *foundation.PWSTR, bufptr **byte) uint32 {
+func NetServiceInstall(servername string, service string, argv []foundation.PWSTR, bufptr **byte) uint32 {
 	_servername := win32.UTF16Ptr(servername)
 	_service := win32.UTF16Ptr(service)
-	return networkmanagementnetmanagement.NetServiceInstall(foundation.PWSTR(_servername), foundation.PWSTR(_service), argc, argv, bufptr)
+	var _argv *foundation.PWSTR
+	if len(argv) > 0 {
+		_argv = &argv[0]
+	}
+	return networkmanagementnetmanagement.NetServiceInstall(foundation.PWSTR(_servername), foundation.PWSTR(_service), uint32(len(argv)), _argv, bufptr)
 }
 
 // NetSetPrimaryComputerName wraps the raw NetSetPrimaryComputerName call with idiomatic Go types.
@@ -990,13 +1020,39 @@ func RouterLogDeregister(hLogHandle foundation.HANDLE) {
 }
 
 // RouterLogEvent wraps the raw RouterLogEventW call with idiomatic Go types.
-func RouterLogEvent(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PWSTR, dwErrorCode uint32) {
-	networkmanagementnetmanagement.RouterLogEventW(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwErrorCode)
+func RouterLogEvent(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PWSTR, dwErrorCode uint32) {
+	var _plpszSubStringArray *foundation.PWSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	networkmanagementnetmanagement.RouterLogEventW(hLogHandle, dwEventType, dwMessageId, uint32(len(plpszSubStringArray)), _plpszSubStringArray, dwErrorCode)
+}
+
+// RouterLogEventA wraps the raw RouterLogEventA call with idiomatic Go types.
+func RouterLogEventA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PSTR, dwErrorCode uint32) {
+	var _plpszSubStringArray *foundation.PSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	networkmanagementnetmanagement.RouterLogEventA(hLogHandle, dwEventType, dwMessageId, uint32(len(plpszSubStringArray)), _plpszSubStringArray, dwErrorCode)
 }
 
 // RouterLogEventData wraps the raw RouterLogEventDataW call with idiomatic Go types.
-func RouterLogEventData(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PWSTR, dwDataBytes uint32, lpDataBytes *byte) {
-	networkmanagementnetmanagement.RouterLogEventDataW(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwDataBytes, lpDataBytes)
+func RouterLogEventData(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PWSTR, dwDataBytes uint32, lpDataBytes *byte) {
+	var _plpszSubStringArray *foundation.PWSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	networkmanagementnetmanagement.RouterLogEventDataW(hLogHandle, dwEventType, dwMessageId, uint32(len(plpszSubStringArray)), _plpszSubStringArray, dwDataBytes, lpDataBytes)
+}
+
+// RouterLogEventDataA wraps the raw RouterLogEventDataA call with idiomatic Go types.
+func RouterLogEventDataA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PSTR, dwDataBytes uint32, lpDataBytes *byte) {
+	var _plpszSubStringArray *foundation.PSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	networkmanagementnetmanagement.RouterLogEventDataA(hLogHandle, dwEventType, dwMessageId, uint32(len(plpszSubStringArray)), _plpszSubStringArray, dwDataBytes, lpDataBytes)
 }
 
 // RouterLogEventEx wraps the raw RouterLogEventExW call with idiomatic Go types.
@@ -1006,8 +1062,21 @@ func RouterLogEventEx(hLogHandle foundation.HANDLE, dwEventType uint32, dwErrorC
 }
 
 // RouterLogEventString wraps the raw RouterLogEventStringW call with idiomatic Go types.
-func RouterLogEventString(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PWSTR, dwErrorCode uint32, dwErrorIndex uint32) {
-	networkmanagementnetmanagement.RouterLogEventStringW(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwErrorCode, dwErrorIndex)
+func RouterLogEventString(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PWSTR, dwErrorCode uint32, dwErrorIndex uint32) {
+	var _plpszSubStringArray *foundation.PWSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	networkmanagementnetmanagement.RouterLogEventStringW(hLogHandle, dwEventType, dwMessageId, uint32(len(plpszSubStringArray)), _plpszSubStringArray, dwErrorCode, dwErrorIndex)
+}
+
+// RouterLogEventStringA wraps the raw RouterLogEventStringA call with idiomatic Go types.
+func RouterLogEventStringA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PSTR, dwErrorCode uint32, dwErrorIndex uint32) {
+	var _plpszSubStringArray *foundation.PSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	networkmanagementnetmanagement.RouterLogEventStringA(hLogHandle, dwEventType, dwMessageId, uint32(len(plpszSubStringArray)), _plpszSubStringArray, dwErrorCode, dwErrorIndex)
 }
 
 // RouterLogEventValistEx wraps the raw RouterLogEventValistExW call with idiomatic Go types.

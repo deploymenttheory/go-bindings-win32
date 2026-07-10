@@ -45,6 +45,16 @@ func CredFindBestCredential(TargetName string, Type uint32, Flags uint32, Creden
 	return securitycredentials.CredFindBestCredentialW(foundation.PWSTR(_TargetName), Type, Flags, Credential)
 }
 
+// CredGetSessionTypes wraps the raw CredGetSessionTypes call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credgetsessiontypes
+func CredGetSessionTypes(MaximumPersist []uint32) error {
+	var _MaximumPersist *uint32
+	if len(MaximumPersist) > 0 {
+		_MaximumPersist = &MaximumPersist[0]
+	}
+	return securitycredentials.CredGetSessionTypes(uint32(len(MaximumPersist)), _MaximumPersist)
+}
+
 // CredGetTargetInfo wraps the raw CredGetTargetInfoW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credgettargetinfow
 func CredGetTargetInfo(TargetName string, Flags uint32, TargetInfo **securitycredentials.CREDENTIAL_TARGET_INFORMATIONW) error {
@@ -376,8 +386,22 @@ func SCardIntroduceReaderGroup(hContext uintptr, szGroupName string) int32 {
 
 // SCardListCards wraps the raw SCardListCardsW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistcardsw
-func SCardListCards(hContext uintptr, pbAtr *byte, rgquidInterfaces *win32.GUID, cguidInterfaceCount uint32, mszCards foundation.PWSTR, pcchCards *uint32) int32 {
-	return securitycredentials.SCardListCardsW(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount, mszCards, pcchCards)
+func SCardListCards(hContext uintptr, pbAtr *byte, rgquidInterfaces []win32.GUID, mszCards foundation.PWSTR, pcchCards *uint32) int32 {
+	var _rgquidInterfaces *win32.GUID
+	if len(rgquidInterfaces) > 0 {
+		_rgquidInterfaces = &rgquidInterfaces[0]
+	}
+	return securitycredentials.SCardListCardsW(hContext, pbAtr, _rgquidInterfaces, uint32(len(rgquidInterfaces)), mszCards, pcchCards)
+}
+
+// SCardListCardsA wraps the raw SCardListCardsA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistcardsa
+func SCardListCardsA(hContext uintptr, pbAtr *byte, rgquidInterfaces []win32.GUID, mszCards foundation.PSTR, pcchCards *uint32) int32 {
+	var _rgquidInterfaces *win32.GUID
+	if len(rgquidInterfaces) > 0 {
+		_rgquidInterfaces = &rgquidInterfaces[0]
+	}
+	return securitycredentials.SCardListCardsA(hContext, pbAtr, _rgquidInterfaces, uint32(len(rgquidInterfaces)), mszCards, pcchCards)
 }
 
 // SCardListInterfaces wraps the raw SCardListInterfacesW call with idiomatic Go types.

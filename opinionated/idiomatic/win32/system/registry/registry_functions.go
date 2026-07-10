@@ -253,8 +253,22 @@ func RegQueryInfoKeyA(hKey systemregistry.HKEY, lpClass foundation.PSTR, lpcchCl
 
 // RegQueryMultipleValues wraps the raw RegQueryMultipleValuesW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regquerymultiplevaluesw
-func RegQueryMultipleValues(hKey systemregistry.HKEY, val_list *systemregistry.VALENTW, num_vals uint32, lpValueBuf foundation.PWSTR, ldwTotsize *uint32) foundation.WIN32_ERROR {
-	return systemregistry.RegQueryMultipleValuesW(hKey, val_list, num_vals, lpValueBuf, ldwTotsize)
+func RegQueryMultipleValues(hKey systemregistry.HKEY, val_list []systemregistry.VALENTW, lpValueBuf foundation.PWSTR, ldwTotsize *uint32) foundation.WIN32_ERROR {
+	var _val_list *systemregistry.VALENTW
+	if len(val_list) > 0 {
+		_val_list = &val_list[0]
+	}
+	return systemregistry.RegQueryMultipleValuesW(hKey, _val_list, uint32(len(val_list)), lpValueBuf, ldwTotsize)
+}
+
+// RegQueryMultipleValuesA wraps the raw RegQueryMultipleValuesA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regquerymultiplevaluesa
+func RegQueryMultipleValuesA(hKey systemregistry.HKEY, val_list []systemregistry.VALENTA, lpValueBuf foundation.PSTR, ldwTotsize *uint32) foundation.WIN32_ERROR {
+	var _val_list *systemregistry.VALENTA
+	if len(val_list) > 0 {
+		_val_list = &val_list[0]
+	}
+	return systemregistry.RegQueryMultipleValuesA(hKey, _val_list, uint32(len(val_list)), lpValueBuf, ldwTotsize)
 }
 
 // RegQueryValue wraps the raw RegQueryValueW call with idiomatic Go types.

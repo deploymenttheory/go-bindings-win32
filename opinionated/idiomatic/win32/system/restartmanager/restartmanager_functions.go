@@ -25,6 +25,24 @@ func RmJoinSession(pSessionHandle *uint32, strSessionKey string) foundation.WIN3
 	return systemrestartmanager.RmJoinSession(pSessionHandle, foundation.PWSTR(_strSessionKey))
 }
 
+// RmRegisterResources wraps the raw RmRegisterResources call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmregisterresources
+func RmRegisterResources(dwSessionHandle uint32, rgsFileNames []foundation.PWSTR, rgApplications []systemrestartmanager.RM_UNIQUE_PROCESS, rgsServiceNames []foundation.PWSTR) foundation.WIN32_ERROR {
+	var _rgsFileNames *foundation.PWSTR
+	if len(rgsFileNames) > 0 {
+		_rgsFileNames = &rgsFileNames[0]
+	}
+	var _rgApplications *systemrestartmanager.RM_UNIQUE_PROCESS
+	if len(rgApplications) > 0 {
+		_rgApplications = &rgApplications[0]
+	}
+	var _rgsServiceNames *foundation.PWSTR
+	if len(rgsServiceNames) > 0 {
+		_rgsServiceNames = &rgsServiceNames[0]
+	}
+	return systemrestartmanager.RmRegisterResources(dwSessionHandle, uint32(len(rgsFileNames)), _rgsFileNames, uint32(len(rgApplications)), _rgApplications, uint32(len(rgsServiceNames)), _rgsServiceNames)
+}
+
 // RmRemoveFilter wraps the raw RmRemoveFilter call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmremovefilter
 func RmRemoveFilter(dwSessionHandle uint32, strModuleName string, pProcess *systemrestartmanager.RM_UNIQUE_PROCESS, strServiceShortName string) foundation.WIN32_ERROR {

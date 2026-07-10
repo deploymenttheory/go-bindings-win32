@@ -73,20 +73,61 @@ func JetCreateIndex(sesid storagejet.JET_SESID, tableid storagestructuredstorage
 
 // JetCreateIndex2 wraps the raw JetCreateIndex2W call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex2-function
-func JetCreateIndex2(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *storagejet.JET_INDEXCREATE_W, cIndexCreate uint32) int32 {
-	return storagejet.JetCreateIndex2W(sesid, tableid, pindexcreate, cIndexCreate)
+func JetCreateIndex2(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []storagejet.JET_INDEXCREATE_W) int32 {
+	var _pindexcreate *storagejet.JET_INDEXCREATE_W
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	return storagejet.JetCreateIndex2W(sesid, tableid, _pindexcreate, uint32(len(pindexcreate)))
+}
+
+// JetCreateIndex2A wraps the raw JetCreateIndex2A call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex2-function
+func JetCreateIndex2A(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []storagejet.JET_INDEXCREATE_A) int32 {
+	var _pindexcreate *storagejet.JET_INDEXCREATE_A
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	return storagejet.JetCreateIndex2A(sesid, tableid, _pindexcreate, uint32(len(pindexcreate)))
 }
 
 // JetCreateIndex3 wraps the raw JetCreateIndex3W call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex3-function
-func JetCreateIndex3(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *storagejet.JET_INDEXCREATE2_W, cIndexCreate uint32) int32 {
-	return storagejet.JetCreateIndex3W(sesid, tableid, pindexcreate, cIndexCreate)
+func JetCreateIndex3(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []storagejet.JET_INDEXCREATE2_W) int32 {
+	var _pindexcreate *storagejet.JET_INDEXCREATE2_W
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	return storagejet.JetCreateIndex3W(sesid, tableid, _pindexcreate, uint32(len(pindexcreate)))
+}
+
+// JetCreateIndex3A wraps the raw JetCreateIndex3A call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex3-function
+func JetCreateIndex3A(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []storagejet.JET_INDEXCREATE2_A) int32 {
+	var _pindexcreate *storagejet.JET_INDEXCREATE2_A
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	return storagejet.JetCreateIndex3A(sesid, tableid, _pindexcreate, uint32(len(pindexcreate)))
 }
 
 // JetCreateIndex4 wraps the raw JetCreateIndex4W call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex4w-function
-func JetCreateIndex4(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *storagejet.JET_INDEXCREATE3_W, cIndexCreate uint32) int32 {
-	return storagejet.JetCreateIndex4W(sesid, tableid, pindexcreate, cIndexCreate)
+func JetCreateIndex4(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []storagejet.JET_INDEXCREATE3_W) int32 {
+	var _pindexcreate *storagejet.JET_INDEXCREATE3_W
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	return storagejet.JetCreateIndex4W(sesid, tableid, _pindexcreate, uint32(len(pindexcreate)))
+}
+
+// JetCreateIndex4A wraps the raw JetCreateIndex4A call with idiomatic Go types.
+func JetCreateIndex4A(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []storagejet.JET_INDEXCREATE3_A) int32 {
+	var _pindexcreate *storagejet.JET_INDEXCREATE3_A
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	return storagejet.JetCreateIndex4A(sesid, tableid, _pindexcreate, uint32(len(pindexcreate)))
 }
 
 // JetCreateInstance wraps the raw JetCreateInstanceW call with idiomatic Go types.
@@ -186,20 +227,72 @@ func JetDetachDatabase2(sesid storagejet.JET_SESID, szFilename *uint16, grbit ui
 
 // JetEnableMultiInstance wraps the raw JetEnableMultiInstanceW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetenablemultiinstance-function
-func JetEnableMultiInstance(psetsysparam *storagejet.JET_SETSYSPARAM_W, csetsysparam uint32, pcsetsucceed *uint32) int32 {
-	return storagejet.JetEnableMultiInstanceW(psetsysparam, csetsysparam, pcsetsucceed)
+func JetEnableMultiInstance(psetsysparam []storagejet.JET_SETSYSPARAM_W, pcsetsucceed *uint32) int32 {
+	var _psetsysparam *storagejet.JET_SETSYSPARAM_W
+	if len(psetsysparam) > 0 {
+		_psetsysparam = &psetsysparam[0]
+	}
+	return storagejet.JetEnableMultiInstanceW(_psetsysparam, uint32(len(psetsysparam)), pcsetsucceed)
+}
+
+// JetEnableMultiInstanceA wraps the raw JetEnableMultiInstanceA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetenablemultiinstance-function
+func JetEnableMultiInstanceA(psetsysparam []storagejet.JET_SETSYSPARAM_A, pcsetsucceed *uint32) int32 {
+	var _psetsysparam *storagejet.JET_SETSYSPARAM_A
+	if len(psetsysparam) > 0 {
+		_psetsysparam = &psetsysparam[0]
+	}
+	return storagejet.JetEnableMultiInstanceA(_psetsysparam, uint32(len(psetsysparam)), pcsetsucceed)
+}
+
+// JetEnumerateColumns wraps the raw JetEnumerateColumns call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetenumeratecolumns-function
+func JetEnumerateColumns(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, rgEnumColumnId []storagejet.JET_ENUMCOLUMNID, pcEnumColumn *uint32, prgEnumColumn **storagejet.JET_ENUMCOLUMN, pfnRealloc storagejet.JET_PFNREALLOC, pvReallocContext unsafe.Pointer, cbDataMost uint32, grbit uint32) int32 {
+	var _rgEnumColumnId *storagejet.JET_ENUMCOLUMNID
+	if len(rgEnumColumnId) > 0 {
+		_rgEnumColumnId = &rgEnumColumnId[0]
+	}
+	return storagejet.JetEnumerateColumns(sesid, tableid, uint32(len(rgEnumColumnId)), _rgEnumColumnId, pcEnumColumn, prgEnumColumn, pfnRealloc, pvReallocContext, cbDataMost, grbit)
 }
 
 // JetExternalRestore wraps the raw JetExternalRestoreW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore-function
-func JetExternalRestore(szCheckpointFilePath *uint16, szLogPath *uint16, rgrstmap *storagejet.JET_RSTMAP_W, crstfilemap int32, szBackupLogPath *uint16, genLow int32, genHigh int32, pfn storagejet.JET_PFNSTATUS) int32 {
-	return storagejet.JetExternalRestoreW(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, genLow, genHigh, pfn)
+func JetExternalRestore(szCheckpointFilePath *uint16, szLogPath *uint16, rgrstmap []storagejet.JET_RSTMAP_W, szBackupLogPath *uint16, genLow int32, genHigh int32, pfn storagejet.JET_PFNSTATUS) int32 {
+	var _rgrstmap *storagejet.JET_RSTMAP_W
+	if len(rgrstmap) > 0 {
+		_rgrstmap = &rgrstmap[0]
+	}
+	return storagejet.JetExternalRestoreW(szCheckpointFilePath, szLogPath, _rgrstmap, int32(len(rgrstmap)), szBackupLogPath, genLow, genHigh, pfn)
 }
 
 // JetExternalRestore2 wraps the raw JetExternalRestore2W call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore2-function
-func JetExternalRestore2(szCheckpointFilePath *uint16, szLogPath *uint16, rgrstmap *storagejet.JET_RSTMAP_W, crstfilemap int32, szBackupLogPath *uint16, pLogInfo *storagejet.JET_LOGINFO_W, szTargetInstanceName *uint16, szTargetInstanceLogPath *uint16, szTargetInstanceCheckpointPath *uint16, pfn storagejet.JET_PFNSTATUS) int32 {
-	return storagejet.JetExternalRestore2W(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, pLogInfo, szTargetInstanceName, szTargetInstanceLogPath, szTargetInstanceCheckpointPath, pfn)
+func JetExternalRestore2(szCheckpointFilePath *uint16, szLogPath *uint16, rgrstmap []storagejet.JET_RSTMAP_W, szBackupLogPath *uint16, pLogInfo *storagejet.JET_LOGINFO_W, szTargetInstanceName *uint16, szTargetInstanceLogPath *uint16, szTargetInstanceCheckpointPath *uint16, pfn storagejet.JET_PFNSTATUS) int32 {
+	var _rgrstmap *storagejet.JET_RSTMAP_W
+	if len(rgrstmap) > 0 {
+		_rgrstmap = &rgrstmap[0]
+	}
+	return storagejet.JetExternalRestore2W(szCheckpointFilePath, szLogPath, _rgrstmap, int32(len(rgrstmap)), szBackupLogPath, pLogInfo, szTargetInstanceName, szTargetInstanceLogPath, szTargetInstanceCheckpointPath, pfn)
+}
+
+// JetExternalRestore2A wraps the raw JetExternalRestore2A call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore2-function
+func JetExternalRestore2A(szCheckpointFilePath *int8, szLogPath *int8, rgrstmap []storagejet.JET_RSTMAP_A, szBackupLogPath *int8, pLogInfo *storagejet.JET_LOGINFO_A, szTargetInstanceName *int8, szTargetInstanceLogPath *int8, szTargetInstanceCheckpointPath *int8, pfn storagejet.JET_PFNSTATUS) int32 {
+	var _rgrstmap *storagejet.JET_RSTMAP_A
+	if len(rgrstmap) > 0 {
+		_rgrstmap = &rgrstmap[0]
+	}
+	return storagejet.JetExternalRestore2A(szCheckpointFilePath, szLogPath, _rgrstmap, int32(len(rgrstmap)), szBackupLogPath, pLogInfo, szTargetInstanceName, szTargetInstanceLogPath, szTargetInstanceCheckpointPath, pfn)
+}
+
+// JetExternalRestoreA wraps the raw JetExternalRestoreA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore-function
+func JetExternalRestoreA(szCheckpointFilePath *int8, szLogPath *int8, rgrstmap []storagejet.JET_RSTMAP_A, szBackupLogPath *int8, genLow int32, genHigh int32, pfn storagejet.JET_PFNSTATUS) int32 {
+	var _rgrstmap *storagejet.JET_RSTMAP_A
+	if len(rgrstmap) > 0 {
+		_rgrstmap = &rgrstmap[0]
+	}
+	return storagejet.JetExternalRestoreA(szCheckpointFilePath, szLogPath, _rgrstmap, int32(len(rgrstmap)), szBackupLogPath, genLow, genHigh, pfn)
 }
 
 // JetGetAttachInfo wraps the raw JetGetAttachInfoW call with idiomatic Go types.
@@ -309,6 +402,16 @@ func JetInit3(pinstance *storagejet.JET_INSTANCE, prstInfo *storagejet.JET_RSTIN
 	return storagejet.JetInit3W(pinstance, prstInfo, grbit)
 }
 
+// JetIntersectIndexes wraps the raw JetIntersectIndexes call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetintersectindexes-function
+func JetIntersectIndexes(sesid storagejet.JET_SESID, rgindexrange []storagejet.JET_INDEXRANGE, precordlist *storagejet.JET_RECORDLIST, grbit uint32) int32 {
+	var _rgindexrange *storagejet.JET_INDEXRANGE
+	if len(rgindexrange) > 0 {
+		_rgindexrange = &rgindexrange[0]
+	}
+	return storagejet.JetIntersectIndexes(sesid, _rgindexrange, uint32(len(rgindexrange)), precordlist, grbit)
+}
+
 // JetOSSnapshotFreeze wraps the raw JetOSSnapshotFreezeW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetossnapshotfreeze-function
 func JetOSSnapshotFreeze(snapId storagejet.JET_OSSNAPID, pcInstanceInfo *uint32, paInstanceInfo **storagejet.JET_INSTANCE_INFO_W, grbit uint32) int32 {
@@ -345,6 +448,20 @@ func JetOpenTable(sesid storagejet.JET_SESID, dbid uint32, szTableName *uint16, 
 	return storagejet.JetOpenTableW(sesid, dbid, szTableName, pvParameters, cbParameters, grbit, ptableid)
 }
 
+// JetPrereadIndexRanges wraps the raw JetPrereadIndexRanges call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetprereadindexranges-function
+func JetPrereadIndexRanges(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, rgIndexRanges []storagejet.JET_INDEX_RANGE, pcRangesPreread *uint32, rgcolumnidPreread []uint32, grbit uint32) int32 {
+	var _rgIndexRanges *storagejet.JET_INDEX_RANGE
+	if len(rgIndexRanges) > 0 {
+		_rgIndexRanges = &rgIndexRanges[0]
+	}
+	var _rgcolumnidPreread *uint32
+	if len(rgcolumnidPreread) > 0 {
+		_rgcolumnidPreread = &rgcolumnidPreread[0]
+	}
+	return storagejet.JetPrereadIndexRanges(sesid, tableid, _rgIndexRanges, uint32(len(rgIndexRanges)), pcRangesPreread, _rgcolumnidPreread, uint32(len(rgcolumnidPreread)), grbit)
+}
+
 // JetRenameColumn wraps the raw JetRenameColumnW call with idiomatic Go types.
 func JetRenameColumn(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szName *uint16, szNameNew *uint16, grbit uint32) int32 {
 	return storagejet.JetRenameColumnW(sesid, tableid, szName, szNameNew, grbit)
@@ -374,9 +491,29 @@ func JetRestoreInstance(instance storagejet.JET_INSTANCE, sz *uint16, szDest *ui
 	return storagejet.JetRestoreInstanceW(instance, sz, szDest, pfn)
 }
 
+// JetRetrieveColumns wraps the raw JetRetrieveColumns call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetretrievecolumns-function
+func JetRetrieveColumns(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pretrievecolumn []storagejet.JET_RETRIEVECOLUMN) int32 {
+	var _pretrievecolumn *storagejet.JET_RETRIEVECOLUMN
+	if len(pretrievecolumn) > 0 {
+		_pretrievecolumn = &pretrievecolumn[0]
+	}
+	return storagejet.JetRetrieveColumns(sesid, tableid, _pretrievecolumn, uint32(len(pretrievecolumn)))
+}
+
 // JetSetColumnDefaultValue wraps the raw JetSetColumnDefaultValueW call with idiomatic Go types.
 func JetSetColumnDefaultValue(sesid storagejet.JET_SESID, dbid uint32, szTableName *uint16, szColumnName *uint16, pvData unsafe.Pointer, cbData uint32, grbit uint32) int32 {
 	return storagejet.JetSetColumnDefaultValueW(sesid, dbid, szTableName, szColumnName, pvData, cbData, grbit)
+}
+
+// JetSetColumns wraps the raw JetSetColumns call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcolumns-function
+func JetSetColumns(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, psetcolumn []storagejet.JET_SETCOLUMN) int32 {
+	var _psetcolumn *storagejet.JET_SETCOLUMN
+	if len(psetcolumn) > 0 {
+		_psetcolumn = &psetcolumn[0]
+	}
+	return storagejet.JetSetColumns(sesid, tableid, _psetcolumn, uint32(len(psetcolumn)))
 }
 
 // JetSetCurrentIndex wraps the raw JetSetCurrentIndexW call with idiomatic Go types.
@@ -401,6 +538,16 @@ func JetSetCurrentIndex3(sesid storagejet.JET_SESID, tableid storagestructuredst
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex4-function
 func JetSetCurrentIndex4(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, pindexid *storagejet.JET_INDEXID, grbit uint32, itagSequence uint32) int32 {
 	return storagejet.JetSetCurrentIndex4W(sesid, tableid, szIndexName, pindexid, grbit, itagSequence)
+}
+
+// JetSetCursorFilter wraps the raw JetSetCursorFilter call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcursorfilter-function
+func JetSetCursorFilter(sesid storagejet.JET_SESID, tableid storagestructuredstorage.JET_TABLEID, rgColumnFilters []storagejet.JET_INDEX_COLUMN, grbit uint32) int32 {
+	var _rgColumnFilters *storagejet.JET_INDEX_COLUMN
+	if len(rgColumnFilters) > 0 {
+		_rgColumnFilters = &rgColumnFilters[0]
+	}
+	return storagejet.JetSetCursorFilter(sesid, tableid, _rgColumnFilters, uint32(len(rgColumnFilters)), grbit)
 }
 
 // JetSetDatabaseSize wraps the raw JetSetDatabaseSizeW call with idiomatic Go types.

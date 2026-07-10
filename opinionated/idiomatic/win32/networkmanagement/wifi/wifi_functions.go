@@ -279,8 +279,12 @@ func WlanSetProfileEapXmlUserData(hClientHandle foundation.HANDLE, pInterfaceGui
 
 // WlanSetProfileList wraps the raw WlanSetProfileList call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofilelist
-func WlanSetProfileList(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, dwItems uint32, strProfileNames *foundation.PWSTR) uint32 {
-	return networkmanagementwifi.WlanSetProfileList(hClientHandle, pInterfaceGuid, dwItems, strProfileNames, nil)
+func WlanSetProfileList(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileNames []foundation.PWSTR) uint32 {
+	var _strProfileNames *foundation.PWSTR
+	if len(strProfileNames) > 0 {
+		_strProfileNames = &strProfileNames[0]
+	}
+	return networkmanagementwifi.WlanSetProfileList(hClientHandle, pInterfaceGuid, uint32(len(strProfileNames)), _strProfileNames, nil)
 }
 
 // WlanSetProfilePosition wraps the raw WlanSetProfilePosition call with idiomatic Go types.

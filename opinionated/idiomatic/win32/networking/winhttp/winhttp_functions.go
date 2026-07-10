@@ -19,6 +19,16 @@ func WinHttpAddRequestHeaders(hRequest unsafe.Pointer, lpszHeaders string, dwHea
 	return networkingwinhttp.WinHttpAddRequestHeaders(hRequest, foundation.PWSTR(_lpszHeaders), dwHeadersLength, dwModifiers)
 }
 
+// WinHttpAddRequestHeadersEx wraps the raw WinHttpAddRequestHeadersEx call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpaddrequestheadersex
+func WinHttpAddRequestHeadersEx(hRequest unsafe.Pointer, dwModifiers uint32, ullFlags uint64, ullExtra uint64, pHeaders []networkingwinhttp.WINHTTP_EXTENDED_HEADER) uint32 {
+	var _pHeaders *networkingwinhttp.WINHTTP_EXTENDED_HEADER
+	if len(pHeaders) > 0 {
+		_pHeaders = &pHeaders[0]
+	}
+	return networkingwinhttp.WinHttpAddRequestHeadersEx(hRequest, dwModifiers, ullFlags, ullExtra, uint32(len(pHeaders)), _pHeaders)
+}
+
 // WinHttpConnect wraps the raw WinHttpConnect call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpconnect
 func WinHttpConnect(hSession unsafe.Pointer, pswzServerName string, nServerPort uint16, dwReserved uint32) (unsafe.Pointer, error) {

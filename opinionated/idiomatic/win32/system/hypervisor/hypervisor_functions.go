@@ -184,8 +184,12 @@ func HdvInitializeDeviceHostEx(computeSystem systemhostcomputesystem.HCS_SYSTEM,
 
 // HdvReadGuestMemory wraps the raw HdvReadGuestMemory call with idiomatic Go types.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvReadGuestMemory
-func HdvReadGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, byteCount uint32, buffer *byte) error {
-	return win32.HRESULTError(int32(systemhypervisor.HdvReadGuestMemory(requestor, guestPhysicalAddress, byteCount, buffer)))
+func HdvReadGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, buffer []byte) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	return win32.HRESULTError(int32(systemhypervisor.HdvReadGuestMemory(requestor, guestPhysicalAddress, uint32(len(buffer)), _buffer)))
 }
 
 // HdvRegisterDoorbell wraps the raw HdvRegisterDoorbell call with idiomatic Go types.
@@ -206,8 +210,12 @@ func HdvUnregisterDoorbell(requestor unsafe.Pointer, BarIndex systemhypervisor.H
 
 // HdvWriteGuestMemory wraps the raw HdvWriteGuestMemory call with idiomatic Go types.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvWriteGuestMemory
-func HdvWriteGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, byteCount uint32, buffer *byte) error {
-	return win32.HRESULTError(int32(systemhypervisor.HdvWriteGuestMemory(requestor, guestPhysicalAddress, byteCount, buffer)))
+func HdvWriteGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, buffer []byte) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	return win32.HRESULTError(int32(systemhypervisor.HdvWriteGuestMemory(requestor, guestPhysicalAddress, uint32(len(buffer)), _buffer)))
 }
 
 // InKernelSpace wraps the raw InKernelSpace call with idiomatic Go types.
@@ -313,8 +321,12 @@ func WHvAcceptPartitionMigration(MigrationHandle foundation.HANDLE, Partition *s
 }
 
 // WHvAdviseGpaRange wraps the raw WHvAdviseGpaRange call with idiomatic Go types.
-func WHvAdviseGpaRange(Partition systemhypervisor.WHV_PARTITION_HANDLE, GpaRanges *systemhypervisor.WHV_MEMORY_RANGE_ENTRY, GpaRangesCount uint32, Advice systemhypervisor.WHV_ADVISE_GPA_RANGE_CODE, AdviceBuffer unsafe.Pointer, AdviceBufferSizeInBytes uint32) error {
-	return win32.HRESULTError(int32(systemhypervisor.WHvAdviseGpaRange(Partition, GpaRanges, GpaRangesCount, Advice, AdviceBuffer, AdviceBufferSizeInBytes)))
+func WHvAdviseGpaRange(Partition systemhypervisor.WHV_PARTITION_HANDLE, GpaRanges []systemhypervisor.WHV_MEMORY_RANGE_ENTRY, Advice systemhypervisor.WHV_ADVISE_GPA_RANGE_CODE, AdviceBuffer unsafe.Pointer, AdviceBufferSizeInBytes uint32) error {
+	var _GpaRanges *systemhypervisor.WHV_MEMORY_RANGE_ENTRY
+	if len(GpaRanges) > 0 {
+		_GpaRanges = &GpaRanges[0]
+	}
+	return win32.HRESULTError(int32(systemhypervisor.WHvAdviseGpaRange(Partition, _GpaRanges, uint32(len(GpaRanges)), Advice, AdviceBuffer, AdviceBufferSizeInBytes)))
 }
 
 // WHvAllocateVpciResource wraps the raw WHvAllocateVpciResource call with idiomatic Go types.
@@ -358,8 +370,12 @@ func WHvCreateVirtualProcessor(Partition systemhypervisor.WHV_PARTITION_HANDLE, 
 }
 
 // WHvCreateVirtualProcessor2 wraps the raw WHvCreateVirtualProcessor2 call with idiomatic Go types.
-func WHvCreateVirtualProcessor2(Partition systemhypervisor.WHV_PARTITION_HANDLE, VpIndex uint32, Properties *systemhypervisor.WHV_VIRTUAL_PROCESSOR_PROPERTY, PropertyCount uint32) error {
-	return win32.HRESULTError(int32(systemhypervisor.WHvCreateVirtualProcessor2(Partition, VpIndex, Properties, PropertyCount)))
+func WHvCreateVirtualProcessor2(Partition systemhypervisor.WHV_PARTITION_HANDLE, VpIndex uint32, Properties []systemhypervisor.WHV_VIRTUAL_PROCESSOR_PROPERTY) error {
+	var _Properties *systemhypervisor.WHV_VIRTUAL_PROCESSOR_PROPERTY
+	if len(Properties) > 0 {
+		_Properties = &Properties[0]
+	}
+	return win32.HRESULTError(int32(systemhypervisor.WHvCreateVirtualProcessor2(Partition, VpIndex, _Properties, uint32(len(Properties)))))
 }
 
 // WHvCreateVpciDevice wraps the raw WHvCreateVpciDevice call with idiomatic Go types.
@@ -418,8 +434,12 @@ func WHvGetCapability(CapabilityCode systemhypervisor.WHV_CAPABILITY_CODE, Capab
 }
 
 // WHvGetInterruptTargetVpSet wraps the raw WHvGetInterruptTargetVpSet call with idiomatic Go types.
-func WHvGetInterruptTargetVpSet(Partition systemhypervisor.WHV_PARTITION_HANDLE, Destination uint64, DestinationMode systemhypervisor.WHV_INTERRUPT_DESTINATION_MODE, TargetVps *uint32, VpCount uint32, TargetVpCount *uint32) error {
-	return win32.HRESULTError(int32(systemhypervisor.WHvGetInterruptTargetVpSet(Partition, Destination, DestinationMode, TargetVps, VpCount, TargetVpCount)))
+func WHvGetInterruptTargetVpSet(Partition systemhypervisor.WHV_PARTITION_HANDLE, Destination uint64, DestinationMode systemhypervisor.WHV_INTERRUPT_DESTINATION_MODE, TargetVps []uint32, TargetVpCount *uint32) error {
+	var _TargetVps *uint32
+	if len(TargetVps) > 0 {
+		_TargetVps = &TargetVps[0]
+	}
+	return win32.HRESULTError(int32(systemhypervisor.WHvGetInterruptTargetVpSet(Partition, Destination, DestinationMode, _TargetVps, uint32(len(TargetVps)), TargetVpCount)))
 }
 
 // WHvGetPartitionCounters wraps the raw WHvGetPartitionCounters call with idiomatic Go types.

@@ -611,38 +611,78 @@ func SetupDeleteError(hwndParent foundation.HWND, DialogTitle string, File strin
 	return devicesdeviceanddriverinstallation.SetupDeleteErrorW(hwndParent, foundation.PWSTR(_DialogTitle), foundation.PWSTR(_File), Win32ErrorCode, Style)
 }
 
+// SetupDiBuildClassInfoList wraps the raw SetupDiBuildClassInfoList call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdibuildclassinfolist
+func SetupDiBuildClassInfoList(Flags uint32, ClassGuidList []win32.GUID, RequiredSize *uint32) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiBuildClassInfoList(Flags, _ClassGuidList, uint32(len(ClassGuidList)), RequiredSize)
+}
+
 // SetupDiBuildClassInfoListEx wraps the raw SetupDiBuildClassInfoListExW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdibuildclassinfolistexw
-func SetupDiBuildClassInfoListEx(Flags uint32, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32, MachineName string) error {
+func SetupDiBuildClassInfoListEx(Flags uint32, ClassGuidList []win32.GUID, RequiredSize *uint32, MachineName string) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
 	_MachineName := win32.UTF16Ptr(MachineName)
-	return devicesdeviceanddriverinstallation.SetupDiBuildClassInfoListExW(Flags, ClassGuidList, ClassGuidListSize, RequiredSize, foundation.PWSTR(_MachineName), nil)
+	return devicesdeviceanddriverinstallation.SetupDiBuildClassInfoListExW(Flags, _ClassGuidList, uint32(len(ClassGuidList)), RequiredSize, foundation.PWSTR(_MachineName), nil)
 }
 
 // SetupDiBuildClassInfoListExA wraps the raw SetupDiBuildClassInfoListExA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdibuildclassinfolistexa
-func SetupDiBuildClassInfoListExA(Flags uint32, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32, MachineName foundation.PSTR) error {
-	return devicesdeviceanddriverinstallation.SetupDiBuildClassInfoListExA(Flags, ClassGuidList, ClassGuidListSize, RequiredSize, MachineName, nil)
+func SetupDiBuildClassInfoListExA(Flags uint32, ClassGuidList []win32.GUID, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiBuildClassInfoListExA(Flags, _ClassGuidList, uint32(len(ClassGuidList)), RequiredSize, MachineName, nil)
 }
 
 // SetupDiClassGuidsFromName wraps the raw SetupDiClassGuidsFromNameW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnamew
-func SetupDiClassGuidsFromName(ClassName string, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32) error {
+func SetupDiClassGuidsFromName(ClassName string, ClassGuidList []win32.GUID, RequiredSize *uint32) error {
 	_ClassName := win32.UTF16Ptr(ClassName)
-	return devicesdeviceanddriverinstallation.SetupDiClassGuidsFromNameW(foundation.PWSTR(_ClassName), ClassGuidList, ClassGuidListSize, RequiredSize)
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiClassGuidsFromNameW(foundation.PWSTR(_ClassName), _ClassGuidList, uint32(len(ClassGuidList)), RequiredSize)
+}
+
+// SetupDiClassGuidsFromNameA wraps the raw SetupDiClassGuidsFromNameA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnamea
+func SetupDiClassGuidsFromNameA(ClassName foundation.PSTR, ClassGuidList []win32.GUID, RequiredSize *uint32) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiClassGuidsFromNameA(ClassName, _ClassGuidList, uint32(len(ClassGuidList)), RequiredSize)
 }
 
 // SetupDiClassGuidsFromNameEx wraps the raw SetupDiClassGuidsFromNameExW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnameexw
-func SetupDiClassGuidsFromNameEx(ClassName string, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32, MachineName string) error {
+func SetupDiClassGuidsFromNameEx(ClassName string, ClassGuidList []win32.GUID, RequiredSize *uint32, MachineName string) error {
 	_ClassName := win32.UTF16Ptr(ClassName)
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
 	_MachineName := win32.UTF16Ptr(MachineName)
-	return devicesdeviceanddriverinstallation.SetupDiClassGuidsFromNameExW(foundation.PWSTR(_ClassName), ClassGuidList, ClassGuidListSize, RequiredSize, foundation.PWSTR(_MachineName), nil)
+	return devicesdeviceanddriverinstallation.SetupDiClassGuidsFromNameExW(foundation.PWSTR(_ClassName), _ClassGuidList, uint32(len(ClassGuidList)), RequiredSize, foundation.PWSTR(_MachineName), nil)
 }
 
 // SetupDiClassGuidsFromNameExA wraps the raw SetupDiClassGuidsFromNameExA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnameexa
-func SetupDiClassGuidsFromNameExA(ClassName foundation.PSTR, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32, MachineName foundation.PSTR) error {
-	return devicesdeviceanddriverinstallation.SetupDiClassGuidsFromNameExA(ClassName, ClassGuidList, ClassGuidListSize, RequiredSize, MachineName, nil)
+func SetupDiClassGuidsFromNameExA(ClassName foundation.PSTR, ClassGuidList []win32.GUID, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiClassGuidsFromNameExA(ClassName, _ClassGuidList, uint32(len(ClassGuidList)), RequiredSize, MachineName, nil)
 }
 
 // SetupDiClassNameFromGuid wraps the raw SetupDiClassNameFromGuidW call with idiomatic Go types.
@@ -828,11 +868,25 @@ func SetupDiGetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.D
 	return devicesdeviceanddriverinstallation.SetupDiGetClassPropertyExW(ClassGuid, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, RequiredSize, Flags, foundation.PWSTR(_MachineName), nil)
 }
 
+// SetupDiGetClassPropertyKeys wraps the raw SetupDiGetClassPropertyKeys call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclasspropertykeys
+func SetupDiGetClassPropertyKeys(ClassGuid *win32.GUID, PropertyKeyArray []foundation.DEVPROPKEY, RequiredPropertyKeyCount *uint32, Flags uint32) error {
+	var _PropertyKeyArray *foundation.DEVPROPKEY
+	if len(PropertyKeyArray) > 0 {
+		_PropertyKeyArray = &PropertyKeyArray[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiGetClassPropertyKeys(ClassGuid, _PropertyKeyArray, uint32(len(PropertyKeyArray)), RequiredPropertyKeyCount, Flags)
+}
+
 // SetupDiGetClassPropertyKeysExW wraps the raw SetupDiGetClassPropertyKeysExW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclasspropertykeysexw
-func SetupDiGetClassPropertyKeysExW(ClassGuid *win32.GUID, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount uint32, RequiredPropertyKeyCount *uint32, Flags uint32, MachineName string) error {
+func SetupDiGetClassPropertyKeysExW(ClassGuid *win32.GUID, PropertyKeyArray []foundation.DEVPROPKEY, RequiredPropertyKeyCount *uint32, Flags uint32, MachineName string) error {
+	var _PropertyKeyArray *foundation.DEVPROPKEY
+	if len(PropertyKeyArray) > 0 {
+		_PropertyKeyArray = &PropertyKeyArray[0]
+	}
 	_MachineName := win32.UTF16Ptr(MachineName)
-	return devicesdeviceanddriverinstallation.SetupDiGetClassPropertyKeysExW(ClassGuid, PropertyKeyArray, PropertyKeyCount, RequiredPropertyKeyCount, Flags, foundation.PWSTR(_MachineName), nil)
+	return devicesdeviceanddriverinstallation.SetupDiGetClassPropertyKeysExW(ClassGuid, _PropertyKeyArray, uint32(len(PropertyKeyArray)), RequiredPropertyKeyCount, Flags, foundation.PWSTR(_MachineName), nil)
 }
 
 // SetupDiGetClassRegistryProperty wraps the raw SetupDiGetClassRegistryPropertyW call with idiomatic Go types.
@@ -879,6 +933,26 @@ func SetupDiGetDeviceInterfaceDetail(DeviceInfoSet devicesdeviceanddriverinstall
 	return devicesdeviceanddriverinstallation.SetupDiGetDeviceInterfaceDetailW(DeviceInfoSet, DeviceInterfaceData, DeviceInterfaceDetailData, DeviceInterfaceDetailDataSize, RequiredSize, DeviceInfoData)
 }
 
+// SetupDiGetDeviceInterfacePropertyKeys wraps the raw SetupDiGetDeviceInterfacePropertyKeys call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinterfacepropertykeys
+func SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet devicesdeviceanddriverinstallation.HDEVINFO, DeviceInterfaceData *devicesdeviceanddriverinstallation.SP_DEVICE_INTERFACE_DATA, PropertyKeyArray []foundation.DEVPROPKEY, RequiredPropertyKeyCount *uint32, Flags uint32) error {
+	var _PropertyKeyArray *foundation.DEVPROPKEY
+	if len(PropertyKeyArray) > 0 {
+		_PropertyKeyArray = &PropertyKeyArray[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet, DeviceInterfaceData, _PropertyKeyArray, uint32(len(PropertyKeyArray)), RequiredPropertyKeyCount, Flags)
+}
+
+// SetupDiGetDevicePropertyKeys wraps the raw SetupDiGetDevicePropertyKeys call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdevicepropertykeys
+func SetupDiGetDevicePropertyKeys(DeviceInfoSet devicesdeviceanddriverinstallation.HDEVINFO, DeviceInfoData *devicesdeviceanddriverinstallation.SP_DEVINFO_DATA, PropertyKeyArray []foundation.DEVPROPKEY, RequiredPropertyKeyCount *uint32, Flags uint32) error {
+	var _PropertyKeyArray *foundation.DEVPROPKEY
+	if len(PropertyKeyArray) > 0 {
+		_PropertyKeyArray = &PropertyKeyArray[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiGetDevicePropertyKeys(DeviceInfoSet, DeviceInfoData, _PropertyKeyArray, uint32(len(PropertyKeyArray)), RequiredPropertyKeyCount, Flags)
+}
+
 // SetupDiGetDeviceRegistryProperty wraps the raw SetupDiGetDeviceRegistryPropertyW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceregistrypropertyw
 func SetupDiGetDeviceRegistryProperty(DeviceInfoSet devicesdeviceanddriverinstallation.HDEVINFO, DeviceInfoData *devicesdeviceanddriverinstallation.SP_DEVINFO_DATA, Property devicesdeviceanddriverinstallation.SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
@@ -916,17 +990,35 @@ func SetupDiGetHwProfileFriendlyNameExA(HwProfile uint32, FriendlyName foundatio
 	return devicesdeviceanddriverinstallation.SetupDiGetHwProfileFriendlyNameExA(HwProfile, FriendlyName, FriendlyNameSize, RequiredSize, MachineName, nil)
 }
 
+// SetupDiGetHwProfileList wraps the raw SetupDiGetHwProfileList call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilelist
+func SetupDiGetHwProfileList(HwProfileList []uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32) error {
+	var _HwProfileList *uint32
+	if len(HwProfileList) > 0 {
+		_HwProfileList = &HwProfileList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiGetHwProfileList(_HwProfileList, uint32(len(HwProfileList)), RequiredSize, CurrentlyActiveIndex)
+}
+
 // SetupDiGetHwProfileListEx wraps the raw SetupDiGetHwProfileListExW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilelistexw
-func SetupDiGetHwProfileListEx(HwProfileList *uint32, HwProfileListSize uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32, MachineName string) error {
+func SetupDiGetHwProfileListEx(HwProfileList []uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32, MachineName string) error {
+	var _HwProfileList *uint32
+	if len(HwProfileList) > 0 {
+		_HwProfileList = &HwProfileList[0]
+	}
 	_MachineName := win32.UTF16Ptr(MachineName)
-	return devicesdeviceanddriverinstallation.SetupDiGetHwProfileListExW(HwProfileList, HwProfileListSize, RequiredSize, CurrentlyActiveIndex, foundation.PWSTR(_MachineName), nil)
+	return devicesdeviceanddriverinstallation.SetupDiGetHwProfileListExW(_HwProfileList, uint32(len(HwProfileList)), RequiredSize, CurrentlyActiveIndex, foundation.PWSTR(_MachineName), nil)
 }
 
 // SetupDiGetHwProfileListExA wraps the raw SetupDiGetHwProfileListExA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilelistexa
-func SetupDiGetHwProfileListExA(HwProfileList *uint32, HwProfileListSize uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32, MachineName foundation.PSTR) error {
-	return devicesdeviceanddriverinstallation.SetupDiGetHwProfileListExA(HwProfileList, HwProfileListSize, RequiredSize, CurrentlyActiveIndex, MachineName, nil)
+func SetupDiGetHwProfileListExA(HwProfileList []uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32, MachineName foundation.PSTR) error {
+	var _HwProfileList *uint32
+	if len(HwProfileList) > 0 {
+		_HwProfileList = &HwProfileList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupDiGetHwProfileListExA(_HwProfileList, uint32(len(HwProfileList)), RequiredSize, CurrentlyActiveIndex, MachineName, nil)
 }
 
 // SetupDiGetINFClass wraps the raw SetupDiGetINFClassW call with idiomatic Go types.
@@ -1092,8 +1184,22 @@ func SetupFindNextMatchLine(ContextIn *devicesdeviceanddriverinstallation.INFCON
 
 // SetupFreeSourceList wraps the raw SetupFreeSourceListW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfreesourcelistw
-func SetupFreeSourceList(List **foundation.PWSTR, Count uint32) error {
-	return devicesdeviceanddriverinstallation.SetupFreeSourceListW(List, Count)
+func SetupFreeSourceList(List []*foundation.PWSTR) error {
+	var _List **foundation.PWSTR
+	if len(List) > 0 {
+		_List = &List[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupFreeSourceListW(_List, uint32(len(List)))
+}
+
+// SetupFreeSourceListA wraps the raw SetupFreeSourceListA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfreesourcelista
+func SetupFreeSourceListA(List []*foundation.PSTR) error {
+	var _List **foundation.PSTR
+	if len(List) > 0 {
+		_List = &List[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupFreeSourceListA(_List, uint32(len(List)))
 }
 
 // SetupGetBackupInformation wraps the raw SetupGetBackupInformationW call with idiomatic Go types.
@@ -1599,8 +1705,22 @@ func SetupSetPlatformPathOverride(Override string) error {
 
 // SetupSetSourceList wraps the raw SetupSetSourceListW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetsourcelistw
-func SetupSetSourceList(Flags uint32, SourceList *foundation.PWSTR, SourceCount uint32) error {
-	return devicesdeviceanddriverinstallation.SetupSetSourceListW(Flags, SourceList, SourceCount)
+func SetupSetSourceList(Flags uint32, SourceList []foundation.PWSTR) error {
+	var _SourceList *foundation.PWSTR
+	if len(SourceList) > 0 {
+		_SourceList = &SourceList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupSetSourceListW(Flags, _SourceList, uint32(len(SourceList)))
+}
+
+// SetupSetSourceListA wraps the raw SetupSetSourceListA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetsourcelista
+func SetupSetSourceListA(Flags uint32, SourceList []foundation.PSTR) error {
+	var _SourceList *foundation.PSTR
+	if len(SourceList) > 0 {
+		_SourceList = &SourceList[0]
+	}
+	return devicesdeviceanddriverinstallation.SetupSetSourceListA(Flags, _SourceList, uint32(len(SourceList)))
 }
 
 // SetupUninstallNewlyCopiedInfs wraps the raw SetupUninstallNewlyCopiedInfs call with idiomatic Go types.

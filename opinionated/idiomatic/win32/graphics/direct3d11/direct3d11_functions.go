@@ -16,14 +16,22 @@ import (
 
 // D3D11CreateDevice wraps the raw D3D11CreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d11/nf-d3d11-d3d11createdevice
-func D3D11CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags graphicsdirect3d11.D3D11_CREATE_DEVICE_FLAG, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, SDKVersion uint32, ppDevice **graphicsdirect3d11.ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3D11CreateDevice(pAdapter, DriverType, Software, Flags, pFeatureLevels, FeatureLevels, SDKVersion, ppDevice, pFeatureLevel, ppImmediateContext)))
+func D3D11CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags graphicsdirect3d11.D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, ppDevice **graphicsdirect3d11.ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext) error {
+	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
+	if len(pFeatureLevels) > 0 {
+		_pFeatureLevels = &pFeatureLevels[0]
+	}
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3D11CreateDevice(pAdapter, DriverType, Software, Flags, _pFeatureLevels, uint32(len(pFeatureLevels)), SDKVersion, ppDevice, pFeatureLevel, ppImmediateContext)))
 }
 
 // D3D11CreateDeviceAndSwapChain wraps the raw D3D11CreateDeviceAndSwapChain call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d11/nf-d3d11-d3d11createdeviceandswapchain
-func D3D11CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags graphicsdirect3d11.D3D11_CREATE_DEVICE_FLAG, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **graphicsdirect3d11.ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11.D3D11CreateDeviceAndSwapChain(pAdapter, DriverType, Software, Flags, pFeatureLevels, FeatureLevels, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice, pFeatureLevel, ppImmediateContext)))
+func D3D11CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags graphicsdirect3d11.D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **graphicsdirect3d11.ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext) error {
+	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
+	if len(pFeatureLevels) > 0 {
+		_pFeatureLevels = &pFeatureLevels[0]
+	}
+	return win32.HRESULTError(int32(graphicsdirect3d11.D3D11CreateDeviceAndSwapChain(pAdapter, DriverType, Software, Flags, _pFeatureLevels, uint32(len(pFeatureLevels)), SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice, pFeatureLevel, ppImmediateContext)))
 }
 
 // D3DDisassemble11Trace wraps the raw D3DDisassemble11Trace call with idiomatic Go types.

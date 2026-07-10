@@ -84,14 +84,22 @@ func CoCreateInstance(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCo
 
 // CoCreateInstanceEx wraps the raw CoCreateInstanceEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstanceex
-func CoCreateInstanceEx(Clsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pServerInfo *systemcom.COSERVERINFO, dwCount uint32, pResults *systemcom.MULTI_QI) error {
-	return win32.HRESULTError(int32(systemcom.CoCreateInstanceEx(Clsid, punkOuter, dwClsCtx, pServerInfo, dwCount, pResults)))
+func CoCreateInstanceEx(Clsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pServerInfo *systemcom.COSERVERINFO, pResults []systemcom.MULTI_QI) error {
+	var _pResults *systemcom.MULTI_QI
+	if len(pResults) > 0 {
+		_pResults = &pResults[0]
+	}
+	return win32.HRESULTError(int32(systemcom.CoCreateInstanceEx(Clsid, punkOuter, dwClsCtx, pServerInfo, uint32(len(pResults)), _pResults)))
 }
 
 // CoCreateInstanceFromApp wraps the raw CoCreateInstanceFromApp call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstancefromapp
-func CoCreateInstanceFromApp(Clsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, reserved unsafe.Pointer, dwCount uint32, pResults *systemcom.MULTI_QI) error {
-	return win32.HRESULTError(int32(systemcom.CoCreateInstanceFromApp(Clsid, punkOuter, dwClsCtx, reserved, dwCount, pResults)))
+func CoCreateInstanceFromApp(Clsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, reserved unsafe.Pointer, pResults []systemcom.MULTI_QI) error {
+	var _pResults *systemcom.MULTI_QI
+	if len(pResults) > 0 {
+		_pResults = &pResults[0]
+	}
+	return win32.HRESULTError(int32(systemcom.CoCreateInstanceFromApp(Clsid, punkOuter, dwClsCtx, reserved, uint32(len(pResults)), _pResults)))
 }
 
 // CoDecrementMTAUsage wraps the raw CoDecrementMTAUsage call with idiomatic Go types.
@@ -441,14 +449,22 @@ func CoTreatAsClass(clsidOld *win32.GUID, clsidNew *win32.GUID) error {
 
 // CoWaitForMultipleHandles wraps the raw CoWaitForMultipleHandles call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cowaitformultiplehandles
-func CoWaitForMultipleHandles(dwFlags uint32, dwTimeout uint32, cHandles uint32, pHandles *foundation.HANDLE, lpdwindex *uint32) error {
-	return win32.HRESULTError(int32(systemcom.CoWaitForMultipleHandles(dwFlags, dwTimeout, cHandles, pHandles, lpdwindex)))
+func CoWaitForMultipleHandles(dwFlags uint32, dwTimeout uint32, pHandles []foundation.HANDLE, lpdwindex *uint32) error {
+	var _pHandles *foundation.HANDLE
+	if len(pHandles) > 0 {
+		_pHandles = &pHandles[0]
+	}
+	return win32.HRESULTError(int32(systemcom.CoWaitForMultipleHandles(dwFlags, dwTimeout, uint32(len(pHandles)), _pHandles, lpdwindex)))
 }
 
 // CoWaitForMultipleObjects wraps the raw CoWaitForMultipleObjects call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cowaitformultipleobjects
-func CoWaitForMultipleObjects(dwFlags uint32, dwTimeout uint32, cHandles uint32, pHandles *foundation.HANDLE, lpdwindex *uint32) error {
-	return win32.HRESULTError(int32(systemcom.CoWaitForMultipleObjects(dwFlags, dwTimeout, cHandles, pHandles, lpdwindex)))
+func CoWaitForMultipleObjects(dwFlags uint32, dwTimeout uint32, pHandles []foundation.HANDLE, lpdwindex *uint32) error {
+	var _pHandles *foundation.HANDLE
+	if len(pHandles) > 0 {
+		_pHandles = &pHandles[0]
+	}
+	return win32.HRESULTError(int32(systemcom.CoWaitForMultipleObjects(dwFlags, dwTimeout, uint32(len(pHandles)), _pHandles, lpdwindex)))
 }
 
 // CreateAntiMoniker wraps the raw CreateAntiMoniker call with idiomatic Go types.

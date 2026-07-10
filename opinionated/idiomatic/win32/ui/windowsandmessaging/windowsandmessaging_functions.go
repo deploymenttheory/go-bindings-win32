@@ -67,6 +67,16 @@ func CancelShutdown() bool {
 	return uiwindowsandmessaging.CancelShutdown() != 0
 }
 
+// CascadeWindows wraps the raw CascadeWindows call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-cascadewindows
+func CascadeWindows(hwndParent foundation.HWND, wHow uiwindowsandmessaging.CASCADE_WINDOWS_HOW, lpRect *foundation.RECT, lpKids []foundation.HWND) (uint16, error) {
+	var _lpKids *foundation.HWND
+	if len(lpKids) > 0 {
+		_lpKids = &lpKids[0]
+	}
+	return uiwindowsandmessaging.CascadeWindows(hwndParent, wHow, lpRect, uint32(len(lpKids)), _lpKids)
+}
+
 // ChangeMenu wraps the raw ChangeMenuW call with idiomatic Go types.
 func ChangeMenu(hMenu uiwindowsandmessaging.HMENU, cmd uint32, lpszNewItem string, cmdInsert uint32, flags uint32) bool {
 	_lpszNewItem := win32.UTF16Ptr(lpszNewItem)
@@ -143,14 +153,42 @@ func ConvertToInterceptWindow(topLevelWindow foundation.HWND) bool {
 
 // CopyAcceleratorTable wraps the raw CopyAcceleratorTableW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-copyacceleratortablew
-func CopyAcceleratorTable(hAccelSrc uiwindowsandmessaging.HACCEL, lpAccelDst *uiwindowsandmessaging.ACCEL, cAccelEntries int32) int32 {
-	return uiwindowsandmessaging.CopyAcceleratorTableW(hAccelSrc, lpAccelDst, cAccelEntries)
+func CopyAcceleratorTable(hAccelSrc uiwindowsandmessaging.HACCEL, lpAccelDst []uiwindowsandmessaging.ACCEL) int32 {
+	var _lpAccelDst *uiwindowsandmessaging.ACCEL
+	if len(lpAccelDst) > 0 {
+		_lpAccelDst = &lpAccelDst[0]
+	}
+	return uiwindowsandmessaging.CopyAcceleratorTableW(hAccelSrc, _lpAccelDst, int32(len(lpAccelDst)))
+}
+
+// CopyAcceleratorTableA wraps the raw CopyAcceleratorTableA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-copyacceleratortablea
+func CopyAcceleratorTableA(hAccelSrc uiwindowsandmessaging.HACCEL, lpAccelDst []uiwindowsandmessaging.ACCEL) int32 {
+	var _lpAccelDst *uiwindowsandmessaging.ACCEL
+	if len(lpAccelDst) > 0 {
+		_lpAccelDst = &lpAccelDst[0]
+	}
+	return uiwindowsandmessaging.CopyAcceleratorTableA(hAccelSrc, _lpAccelDst, int32(len(lpAccelDst)))
 }
 
 // CreateAcceleratorTable wraps the raw CreateAcceleratorTableW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createacceleratortablew
-func CreateAcceleratorTable(paccel *uiwindowsandmessaging.ACCEL, cAccel int32) (uiwindowsandmessaging.HACCEL, error) {
-	return uiwindowsandmessaging.CreateAcceleratorTableW(paccel, cAccel)
+func CreateAcceleratorTable(paccel []uiwindowsandmessaging.ACCEL) (uiwindowsandmessaging.HACCEL, error) {
+	var _paccel *uiwindowsandmessaging.ACCEL
+	if len(paccel) > 0 {
+		_paccel = &paccel[0]
+	}
+	return uiwindowsandmessaging.CreateAcceleratorTableW(_paccel, int32(len(paccel)))
+}
+
+// CreateAcceleratorTableA wraps the raw CreateAcceleratorTableA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createacceleratortablea
+func CreateAcceleratorTableA(paccel []uiwindowsandmessaging.ACCEL) (uiwindowsandmessaging.HACCEL, error) {
+	var _paccel *uiwindowsandmessaging.ACCEL
+	if len(paccel) > 0 {
+		_paccel = &paccel[0]
+	}
+	return uiwindowsandmessaging.CreateAcceleratorTableA(_paccel, int32(len(paccel)))
 }
 
 // CreateDialogIndirectParam wraps the raw CreateDialogIndirectParamW call with idiomatic Go types.
@@ -242,9 +280,13 @@ func DestroyAcceleratorTable(hAccel uiwindowsandmessaging.HACCEL) bool {
 
 // DestroyIndexedResults wraps the raw DestroyIndexedResults call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/resourceindexer/nf-resourceindexer-destroyindexedresults
-func DestroyIndexedResults(resourceUri string, qualifierCount uint32, qualifiers *uiwindowsandmessaging.IndexedResourceQualifier) {
+func DestroyIndexedResults(resourceUri string, qualifiers []uiwindowsandmessaging.IndexedResourceQualifier) {
 	_resourceUri := win32.UTF16Ptr(resourceUri)
-	uiwindowsandmessaging.DestroyIndexedResults(foundation.PWSTR(_resourceUri), qualifierCount, qualifiers)
+	var _qualifiers *uiwindowsandmessaging.IndexedResourceQualifier
+	if len(qualifiers) > 0 {
+		_qualifiers = &qualifiers[0]
+	}
+	uiwindowsandmessaging.DestroyIndexedResults(foundation.PWSTR(_resourceUri), uint32(len(qualifiers)), _qualifiers)
 }
 
 // DialogBoxIndirectParam wraps the raw DialogBoxIndirectParamW call with idiomatic Go types.
@@ -856,9 +898,23 @@ func MrmGetPriFileContentChecksum(priFile string, checksum *uint32) error {
 
 // MsgWaitForMultipleObjects wraps the raw MsgWaitForMultipleObjects call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-msgwaitformultipleobjects
-func MsgWaitForMultipleObjects(nCount uint32, pHandles *foundation.HANDLE, fWaitAll bool, dwMilliseconds uint32, dwWakeMask uiwindowsandmessaging.QUEUE_STATUS_FLAGS) (foundation.WAIT_EVENT, error) {
+func MsgWaitForMultipleObjects(pHandles []foundation.HANDLE, fWaitAll bool, dwMilliseconds uint32, dwWakeMask uiwindowsandmessaging.QUEUE_STATUS_FLAGS) (foundation.WAIT_EVENT, error) {
+	var _pHandles *foundation.HANDLE
+	if len(pHandles) > 0 {
+		_pHandles = &pHandles[0]
+	}
 	_fWaitAll := foundation.BOOL(win32.Bool32(fWaitAll))
-	return uiwindowsandmessaging.MsgWaitForMultipleObjects(nCount, pHandles, _fWaitAll, dwMilliseconds, dwWakeMask)
+	return uiwindowsandmessaging.MsgWaitForMultipleObjects(uint32(len(pHandles)), _pHandles, _fWaitAll, dwMilliseconds, dwWakeMask)
+}
+
+// MsgWaitForMultipleObjectsEx wraps the raw MsgWaitForMultipleObjectsEx call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-msgwaitformultipleobjectsex
+func MsgWaitForMultipleObjectsEx(pHandles []foundation.HANDLE, dwMilliseconds uint32, dwWakeMask uiwindowsandmessaging.QUEUE_STATUS_FLAGS, dwFlags uiwindowsandmessaging.MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS) (foundation.WAIT_EVENT, error) {
+	var _pHandles *foundation.HANDLE
+	if len(pHandles) > 0 {
+		_pHandles = &pHandles[0]
+	}
+	return uiwindowsandmessaging.MsgWaitForMultipleObjectsEx(uint32(len(pHandles)), _pHandles, dwMilliseconds, dwWakeMask, dwFlags)
 }
 
 // OemToChar wraps the raw OemToCharW call with idiomatic Go types.
@@ -905,9 +961,23 @@ func PostThreadMessage(idThread uint32, Msg uint32, wParam foundation.WPARAM, lP
 
 // PrivateExtractIcons wraps the raw PrivateExtractIconsW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-privateextracticonsw
-func PrivateExtractIcons(szFileName string, nIconIndex int32, cxIcon int32, cyIcon int32, phicon *uiwindowsandmessaging.HICON, piconid *uint32, nIcons uint32, flags uint32) uint32 {
+func PrivateExtractIcons(szFileName string, nIconIndex int32, cxIcon int32, cyIcon int32, phicon []uiwindowsandmessaging.HICON, piconid *uint32, flags uint32) uint32 {
 	_szFileName := win32.UTF16Ptr(szFileName)
-	return uiwindowsandmessaging.PrivateExtractIconsW(foundation.PWSTR(_szFileName), nIconIndex, cxIcon, cyIcon, phicon, piconid, nIcons, flags)
+	var _phicon *uiwindowsandmessaging.HICON
+	if len(phicon) > 0 {
+		_phicon = &phicon[0]
+	}
+	return uiwindowsandmessaging.PrivateExtractIconsW(foundation.PWSTR(_szFileName), nIconIndex, cxIcon, cyIcon, _phicon, piconid, uint32(len(phicon)), flags)
+}
+
+// PrivateExtractIconsA wraps the raw PrivateExtractIconsA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-privateextracticonsa
+func PrivateExtractIconsA(szFileName foundation.PSTR, nIconIndex int32, cxIcon int32, cyIcon int32, phicon []uiwindowsandmessaging.HICON, piconid *uint32, flags uint32) uint32 {
+	var _phicon *uiwindowsandmessaging.HICON
+	if len(phicon) > 0 {
+		_phicon = &phicon[0]
+	}
+	return uiwindowsandmessaging.PrivateExtractIconsA(szFileName, nIconIndex, cxIcon, cyIcon, _phicon, piconid, uint32(len(phicon)), flags)
 }
 
 // RealGetWindowClass wraps the raw RealGetWindowClassW call with idiomatic Go types.
@@ -1004,8 +1074,12 @@ func SendNotifyMessage(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARA
 
 // SetAdditionalForegroundBoostProcesses wraps the raw SetAdditionalForegroundBoostProcesses call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setadditionalforegroundboostprocesses
-func SetAdditionalForegroundBoostProcesses(topLevelWindow foundation.HWND, processHandleCount uint32, processHandleArray *foundation.HANDLE) bool {
-	return uiwindowsandmessaging.SetAdditionalForegroundBoostProcesses(topLevelWindow, processHandleCount, processHandleArray) != 0
+func SetAdditionalForegroundBoostProcesses(topLevelWindow foundation.HWND, processHandleArray []foundation.HANDLE) bool {
+	var _processHandleArray *foundation.HANDLE
+	if len(processHandleArray) > 0 {
+		_processHandleArray = &processHandleArray[0]
+	}
+	return uiwindowsandmessaging.SetAdditionalForegroundBoostProcesses(topLevelWindow, uint32(len(processHandleArray)), _processHandleArray) != 0
 }
 
 // SetClassLong wraps the raw SetClassLongW call with idiomatic Go types.
@@ -1145,6 +1219,16 @@ func SwitchToThisWindow(hwnd foundation.HWND, fUnknown bool) {
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-systemparametersinfow
 func SystemParametersInfo(uiAction uiwindowsandmessaging.SYSTEM_PARAMETERS_INFO_ACTION, uiParam uint32, pvParam unsafe.Pointer, fWinIni uiwindowsandmessaging.SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) error {
 	return uiwindowsandmessaging.SystemParametersInfoW(uiAction, uiParam, pvParam, fWinIni)
+}
+
+// TileWindows wraps the raw TileWindows call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tilewindows
+func TileWindows(hwndParent foundation.HWND, wHow uiwindowsandmessaging.TILE_WINDOWS_HOW, lpRect *foundation.RECT, lpKids []foundation.HWND) (uint16, error) {
+	var _lpKids *foundation.HWND
+	if len(lpKids) > 0 {
+		_lpKids = &lpKids[0]
+	}
+	return uiwindowsandmessaging.TileWindows(hwndParent, wHow, lpRect, uint32(len(lpKids)), _lpKids)
 }
 
 // TrackPopupMenu wraps the raw TrackPopupMenu call with idiomatic Go types.

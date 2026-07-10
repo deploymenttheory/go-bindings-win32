@@ -36,8 +36,12 @@ func CMCheckColors(hcmTransform uintptr, lpaInputColors *uicolorsystem.COLOR, nC
 
 // CMCheckColorsInGamut wraps the raw CMCheckColorsInGamut call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcheckcolorsingamut
-func CMCheckColorsInGamut(hcmTransform uintptr, lpaRGBTriple *graphicsgdi.RGBTRIPLE, lpaResult *byte, nCount uint32) bool {
-	return uicolorsystem.CMCheckColorsInGamut(hcmTransform, lpaRGBTriple, lpaResult, nCount) != 0
+func CMCheckColorsInGamut(hcmTransform uintptr, lpaRGBTriple []graphicsgdi.RGBTRIPLE, lpaResult *byte) bool {
+	var _lpaRGBTriple *graphicsgdi.RGBTRIPLE
+	if len(lpaRGBTriple) > 0 {
+		_lpaRGBTriple = &lpaRGBTriple[0]
+	}
+	return uicolorsystem.CMCheckColorsInGamut(hcmTransform, _lpaRGBTriple, lpaResult, uint32(len(lpaRGBTriple))) != 0
 }
 
 // CMCheckRGBs wraps the raw CMCheckRGBs call with idiomatic Go types.
@@ -60,8 +64,30 @@ func CMConvertIndexToColorName(hProfile uintptr, paIndex *uint32, paColorName **
 
 // CMCreateDeviceLinkProfile wraps the raw CMCreateDeviceLinkProfile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcreatedevicelinkprofile
-func CMCreateDeviceLinkProfile(pahProfiles *uintptr, nProfiles uint32, padwIntents *uint32, nIntents uint32, dwFlags uint32, lpProfileData **byte) bool {
-	return uicolorsystem.CMCreateDeviceLinkProfile(pahProfiles, nProfiles, padwIntents, nIntents, dwFlags, lpProfileData) != 0
+func CMCreateDeviceLinkProfile(pahProfiles []uintptr, padwIntents []uint32, dwFlags uint32, lpProfileData **byte) bool {
+	var _pahProfiles *uintptr
+	if len(pahProfiles) > 0 {
+		_pahProfiles = &pahProfiles[0]
+	}
+	var _padwIntents *uint32
+	if len(padwIntents) > 0 {
+		_padwIntents = &padwIntents[0]
+	}
+	return uicolorsystem.CMCreateDeviceLinkProfile(_pahProfiles, uint32(len(pahProfiles)), _padwIntents, uint32(len(padwIntents)), dwFlags, lpProfileData) != 0
+}
+
+// CMCreateMultiProfileTransform wraps the raw CMCreateMultiProfileTransform call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcreatemultiprofiletransform
+func CMCreateMultiProfileTransform(pahProfiles []uintptr, padwIntents []uint32, dwFlags uint32) uintptr {
+	var _pahProfiles *uintptr
+	if len(pahProfiles) > 0 {
+		_pahProfiles = &pahProfiles[0]
+	}
+	var _padwIntents *uint32
+	if len(padwIntents) > 0 {
+		_padwIntents = &padwIntents[0]
+	}
+	return uicolorsystem.CMCreateMultiProfileTransform(_pahProfiles, uint32(len(pahProfiles)), _padwIntents, uint32(len(padwIntents)), dwFlags)
 }
 
 // CMCreateProfile wraps the raw CMCreateProfile call with idiomatic Go types.
@@ -144,8 +170,12 @@ func CheckColors(hColorTransform uintptr, paInputColors *uicolorsystem.COLOR, nC
 
 // CheckColorsInGamut wraps the raw CheckColorsInGamut call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-checkcolorsingamut
-func CheckColorsInGamut(hdc graphicsgdi.HDC, lpRGBTriple *graphicsgdi.RGBTRIPLE, dlpBuffer unsafe.Pointer, nCount uint32) bool {
-	return uicolorsystem.CheckColorsInGamut(hdc, lpRGBTriple, dlpBuffer, nCount) != 0
+func CheckColorsInGamut(hdc graphicsgdi.HDC, lpRGBTriple []graphicsgdi.RGBTRIPLE, dlpBuffer unsafe.Pointer) bool {
+	var _lpRGBTriple *graphicsgdi.RGBTRIPLE
+	if len(lpRGBTriple) > 0 {
+		_lpRGBTriple = &lpRGBTriple[0]
+	}
+	return uicolorsystem.CheckColorsInGamut(hdc, _lpRGBTriple, dlpBuffer, uint32(len(lpRGBTriple))) != 0
 }
 
 // CloseColorProfile wraps the raw CloseColorProfile call with idiomatic Go types.
@@ -192,8 +222,30 @@ func CreateColorTransform(pLogColorSpace *uicolorsystem.LOGCOLORSPACEW, hDestPro
 
 // CreateDeviceLinkProfile wraps the raw CreateDeviceLinkProfile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createdevicelinkprofile
-func CreateDeviceLinkProfile(hProfile *uintptr, nProfiles uint32, padwIntent *uint32, nIntents uint32, dwFlags uint32, pProfileData **byte, indexPreferredCMM uint32) bool {
-	return uicolorsystem.CreateDeviceLinkProfile(hProfile, nProfiles, padwIntent, nIntents, dwFlags, pProfileData, indexPreferredCMM) != 0
+func CreateDeviceLinkProfile(hProfile []uintptr, padwIntent []uint32, dwFlags uint32, pProfileData **byte, indexPreferredCMM uint32) bool {
+	var _hProfile *uintptr
+	if len(hProfile) > 0 {
+		_hProfile = &hProfile[0]
+	}
+	var _padwIntent *uint32
+	if len(padwIntent) > 0 {
+		_padwIntent = &padwIntent[0]
+	}
+	return uicolorsystem.CreateDeviceLinkProfile(_hProfile, uint32(len(hProfile)), _padwIntent, uint32(len(padwIntent)), dwFlags, pProfileData, indexPreferredCMM) != 0
+}
+
+// CreateMultiProfileTransform wraps the raw CreateMultiProfileTransform call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createmultiprofiletransform
+func CreateMultiProfileTransform(pahProfiles []uintptr, padwIntent []uint32, dwFlags uint32, indexPreferredCMM uint32) uintptr {
+	var _pahProfiles *uintptr
+	if len(pahProfiles) > 0 {
+		_pahProfiles = &pahProfiles[0]
+	}
+	var _padwIntent *uint32
+	if len(padwIntent) > 0 {
+		_padwIntent = &padwIntent[0]
+	}
+	return uicolorsystem.CreateMultiProfileTransform(_pahProfiles, uint32(len(pahProfiles)), _padwIntent, uint32(len(padwIntent)), dwFlags, indexPreferredCMM)
 }
 
 // CreateProfileFromLogColorSpace wraps the raw CreateProfileFromLogColorSpaceW call with idiomatic Go types.
@@ -550,8 +602,12 @@ func WcsAssociateColorProfileWithDevice(scope uicolorsystem.WCS_PROFILE_MANAGEME
 
 // WcsCheckColors wraps the raw WcsCheckColors call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcscheckcolors
-func WcsCheckColors(hColorTransform uintptr, nColors uint32, nInputChannels uint32, cdtInput uicolorsystem.COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, paResult *byte) bool {
-	return uicolorsystem.WcsCheckColors(hColorTransform, nColors, nInputChannels, cdtInput, cbInput, pInputData, paResult) != 0
+func WcsCheckColors(hColorTransform uintptr, nInputChannels uint32, cdtInput uicolorsystem.COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, paResult []byte) bool {
+	var _paResult *byte
+	if len(paResult) > 0 {
+		_paResult = &paResult[0]
+	}
+	return uicolorsystem.WcsCheckColors(hColorTransform, uint32(len(paResult)), nInputChannels, cdtInput, cbInput, pInputData, _paResult) != 0
 }
 
 // WcsDisassociateColorProfileFromDevice wraps the raw WcsDisassociateColorProfileFromDevice call with idiomatic Go types.

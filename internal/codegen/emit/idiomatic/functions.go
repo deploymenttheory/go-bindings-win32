@@ -75,11 +75,40 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 	context := typemap.Context{Namespace: meta.Namespace, QualifyOwn: true}
 	scratch := typemap.ImportSet{}
 
+	// Resolve every parameter up front, then plan array→slice collapses
+	// (which span two params: the pointer and its count).
+	resolvedParams := make([]typemap.Resolved, len(function.Params))
+	for i := range function.Params {
+		resolvedParams[i] = g.mapper.GoType(&function.Params[i].Type, context, scratch)
+	}
+	slicePlans, elidedCounts := planSliceParams(function, resolvedParams)
+
 	var decls, preamble, rawArgs []string
 	improved := false
 	for i := range function.Params {
 		param := &function.Params[i]
-		resolved := g.mapper.GoType(&param.Type, context, scratch)
+		resolved := resolvedParams[i]
+
+		// A count parameter collapsed into a slice: drop it, derive its
+		// value from the slice length at the call site.
+		if arrayIndex, ok := elidedCounts[i]; ok {
+			arrayName := naming.ParamName(function.Params[arrayIndex].Name)
+			rawArgs = append(rawArgs, resolved.GoType+"(len("+arrayName+"))")
+			improved = true
+			continue
+		}
+		// An array pointer collapsed into a []T parameter.
+		if plan, ok := slicePlans[i]; ok {
+			name := naming.ParamName(param.Name)
+			local := "_" + name
+			decls = append(decls, name+" []"+plan.element)
+			preamble = append(preamble, "var "+local+" "+plan.rawPointerType)
+			preamble = append(preamble, "if len("+name+") > 0 { "+local+" = &"+name+"[0] }")
+			rawArgs = append(rawArgs, local)
+			improved = true
+			continue
+		}
+
 		idiomatic := g.idiomaticParam(param, resolved, i)
 		if idiomatic.decl == "" && idiomatic.preamble == "" {
 			// Elided reserved parameter.
@@ -219,6 +248,71 @@ func (g *Generator) buildReturn(model *view.FunctionModel, function *win32meta.F
 	model.Shape = view.FuncPassthrough
 	model.ReturnSig = resolved.GoType
 	return true
+}
+
+// slicePlan describes an array-pointer parameter to collapse into a []T.
+type slicePlan struct {
+	element        string // Go element type ("foundation.XXX")
+	rawPointerType string // raw pointer type passed to the call ("*foundation.XXX")
+	countIndex     int    // the count parameter this slice supplies
+}
+
+// planSliceParams finds (array pointer, input count) parameter pairs — via
+// the ingested [NativeArrayInfo] CountParamIndex — and plans collapsing each
+// into a single []T parameter. Returns the array-index→plan map and the
+// count-index→array-index elision map.
+//
+// A pair qualifies only when the count is referenced by exactly one array
+// (unambiguous length), the array is a typed pointer (not void*), and the
+// count is an input integer (not out/inout, not a pointer). Shared or
+// out-counts are left as raw parameters.
+func planSliceParams(function *win32meta.Function, resolved []typemap.Resolved) (map[int]slicePlan, map[int]int) {
+	references := map[int]int{}
+	for i := range function.Params {
+		if j := function.Params[i].NativeArrayCountParamIndex; j >= 0 {
+			references[j]++
+		}
+	}
+
+	plans := map[int]slicePlan{}
+	elided := map[int]int{}
+	for i := range function.Params {
+		param := &function.Params[i]
+		countIndex := param.NativeArrayCountParamIndex
+		if countIndex < 0 || countIndex >= len(function.Params) || countIndex == i {
+			continue
+		}
+		if references[countIndex] != 1 {
+			continue // ambiguous shared count
+		}
+		array := resolved[i]
+		if array.Kind != typemap.KindPointer || !strings.HasPrefix(array.GoType, "*") {
+			continue
+		}
+		element := array.GoType[1:]
+		if element == "" || strings.Contains(element, "unsafe.") {
+			continue
+		}
+		countParam := &function.Params[countIndex]
+		if countParam.IsOut || countParam.IsReserved || !isIntegerCount(resolved[countIndex]) {
+			continue
+		}
+		plans[i] = slicePlan{element: element, rawPointerType: array.GoType, countIndex: countIndex}
+		elided[countIndex] = i
+	}
+	return plans, elided
+}
+
+// isIntegerCount reports whether a resolved type is an integer usable as a
+// slice length (excludes bool/float/pointers).
+func isIntegerCount(resolved typemap.Resolved) bool {
+	switch resolved.Kind {
+	case typemap.KindScalar:
+		return resolved.GoType != "bool" && resolved.GoType != "float32" && resolved.GoType != "float64"
+	case typemap.KindScalarTypedef, typemap.KindEnum:
+		return true
+	}
+	return false
 }
 
 // zeroValue renders the raw type's zero for an elided argument: nil for

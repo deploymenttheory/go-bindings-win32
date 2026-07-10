@@ -76,3 +76,13 @@ func DCompositionGetStatistics(frameId uint64, frameStats *graphicsdirectcomposi
 func DCompositionGetTargetStatistics(frameId uint64, targetId *graphicsdirectcomposition.COMPOSITION_TARGET_ID, targetStats *graphicsdirectcomposition.COMPOSITION_TARGET_STATS) error {
 	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionGetTargetStatistics(frameId, targetId, targetStats)))
 }
+
+// DCompositionWaitForCompositorClock wraps the raw DCompositionWaitForCompositorClock call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionwaitforcompositorclock
+func DCompositionWaitForCompositorClock(handles []foundation.HANDLE, timeoutInMs uint32) uint32 {
+	var _handles *foundation.HANDLE
+	if len(handles) > 0 {
+		_handles = &handles[0]
+	}
+	return graphicsdirectcomposition.DCompositionWaitForCompositorClock(uint32(len(handles)), _handles, timeoutInMs)
+}

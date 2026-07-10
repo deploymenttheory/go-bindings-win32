@@ -1798,9 +1798,13 @@ func VarSub(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, p
 
 // VarTokenizeFormatString wraps the raw VarTokenizeFormatString call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vartokenizeformatstring
-func VarTokenizeFormatString(pstrFormat string, rgbTok *byte, cbTok int32, iFirstDay systemole.VARFORMAT_FIRST_DAY, iFirstWeek systemole.VARFORMAT_FIRST_WEEK, lcid uint32, pcbActual *int32) error {
+func VarTokenizeFormatString(pstrFormat string, rgbTok []byte, iFirstDay systemole.VARFORMAT_FIRST_DAY, iFirstWeek systemole.VARFORMAT_FIRST_WEEK, lcid uint32, pcbActual *int32) error {
 	_pstrFormat := win32.UTF16Ptr(pstrFormat)
-	return win32.HRESULTError(int32(systemole.VarTokenizeFormatString(foundation.PWSTR(_pstrFormat), rgbTok, cbTok, iFirstDay, iFirstWeek, lcid, pcbActual)))
+	var _rgbTok *byte
+	if len(rgbTok) > 0 {
+		_rgbTok = &rgbTok[0]
+	}
+	return win32.HRESULTError(int32(systemole.VarTokenizeFormatString(foundation.PWSTR(_pstrFormat), _rgbTok, int32(len(rgbTok)), iFirstDay, iFirstWeek, lcid, pcbActual)))
 }
 
 // VarUI1FromBool wraps the raw VarUI1FromBool call with idiomatic Go types.

@@ -52,9 +52,13 @@ func NdfCreateGroupingIncident(CloudName string, GroupName string, Identity stri
 
 // NdfCreateIncident wraps the raw NdfCreateIncident call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreateincident
-func NdfCreateIncident(helperClassName string, celt uint32, attributes *networkmanagementnetworkdiagnosticsframework.HELPER_ATTRIBUTE, handle *unsafe.Pointer) error {
+func NdfCreateIncident(helperClassName string, attributes []networkmanagementnetworkdiagnosticsframework.HELPER_ATTRIBUTE, handle *unsafe.Pointer) error {
 	_helperClassName := win32.UTF16Ptr(helperClassName)
-	return win32.HRESULTError(int32(networkmanagementnetworkdiagnosticsframework.NdfCreateIncident(foundation.PWSTR(_helperClassName), celt, attributes, handle)))
+	var _attributes *networkmanagementnetworkdiagnosticsframework.HELPER_ATTRIBUTE
+	if len(attributes) > 0 {
+		_attributes = &attributes[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementnetworkdiagnosticsframework.NdfCreateIncident(foundation.PWSTR(_helperClassName), uint32(len(attributes)), _attributes, handle)))
 }
 
 // NdfCreatePnrpIncident wraps the raw NdfCreatePnrpIncident call with idiomatic Go types.

@@ -19,8 +19,12 @@ func CreateJobObject(lpJobAttributes *security.SECURITY_ATTRIBUTES, lpName strin
 }
 
 // CreateJobSet wraps the raw CreateJobSet call with idiomatic Go types.
-func CreateJobSet(NumJob uint32, UserJobSet *systemjobobjects.JOB_SET_ARRAY, Flags uint32) bool {
-	return systemjobobjects.CreateJobSet(NumJob, UserJobSet, Flags) != 0
+func CreateJobSet(UserJobSet []systemjobobjects.JOB_SET_ARRAY, Flags uint32) bool {
+	var _UserJobSet *systemjobobjects.JOB_SET_ARRAY
+	if len(UserJobSet) > 0 {
+		_UserJobSet = &UserJobSet[0]
+	}
+	return systemjobobjects.CreateJobSet(uint32(len(UserJobSet)), _UserJobSet, Flags) != 0
 }
 
 // OpenJobObject wraps the raw OpenJobObjectW call with idiomatic Go types.

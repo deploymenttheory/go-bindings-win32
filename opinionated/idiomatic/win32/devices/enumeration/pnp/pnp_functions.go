@@ -15,10 +15,14 @@ import (
 
 // SwDeviceCreate wraps the raw SwDeviceCreate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdevicecreate
-func SwDeviceCreate(pszEnumeratorName string, pszParentDeviceInstance string, pCreateInfo *devicesenumerationpnp.SW_DEVICE_CREATE_INFO, cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY, pCallback devicesenumerationpnp.SW_DEVICE_CREATE_CALLBACK, pContext unsafe.Pointer, phSwDevice *devicesenumerationpnp.HSWDEVICE) error {
+func SwDeviceCreate(pszEnumeratorName string, pszParentDeviceInstance string, pCreateInfo *devicesenumerationpnp.SW_DEVICE_CREATE_INFO, pProperties []devicesproperties.DEVPROPERTY, pCallback devicesenumerationpnp.SW_DEVICE_CREATE_CALLBACK, pContext unsafe.Pointer, phSwDevice *devicesenumerationpnp.HSWDEVICE) error {
 	_pszEnumeratorName := win32.UTF16Ptr(pszEnumeratorName)
 	_pszParentDeviceInstance := win32.UTF16Ptr(pszParentDeviceInstance)
-	return win32.HRESULTError(int32(devicesenumerationpnp.SwDeviceCreate(foundation.PWSTR(_pszEnumeratorName), foundation.PWSTR(_pszParentDeviceInstance), pCreateInfo, cPropertyCount, pProperties, pCallback, pContext, phSwDevice)))
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	return win32.HRESULTError(int32(devicesenumerationpnp.SwDeviceCreate(foundation.PWSTR(_pszEnumeratorName), foundation.PWSTR(_pszParentDeviceInstance), pCreateInfo, uint32(len(pProperties)), _pProperties, pCallback, pContext, phSwDevice)))
 }
 
 // SwDeviceGetLifetime wraps the raw SwDeviceGetLifetime call with idiomatic Go types.
@@ -29,17 +33,25 @@ func SwDeviceGetLifetime(hSwDevice devicesenumerationpnp.HSWDEVICE, pLifetime *d
 
 // SwDeviceInterfacePropertySet wraps the raw SwDeviceInterfacePropertySet call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdeviceinterfacepropertyset
-func SwDeviceInterfacePropertySet(hSwDevice devicesenumerationpnp.HSWDEVICE, pszDeviceInterfaceId string, cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY) error {
+func SwDeviceInterfacePropertySet(hSwDevice devicesenumerationpnp.HSWDEVICE, pszDeviceInterfaceId string, pProperties []devicesproperties.DEVPROPERTY) error {
 	_pszDeviceInterfaceId := win32.UTF16Ptr(pszDeviceInterfaceId)
-	return win32.HRESULTError(int32(devicesenumerationpnp.SwDeviceInterfacePropertySet(hSwDevice, foundation.PWSTR(_pszDeviceInterfaceId), cPropertyCount, pProperties)))
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	return win32.HRESULTError(int32(devicesenumerationpnp.SwDeviceInterfacePropertySet(hSwDevice, foundation.PWSTR(_pszDeviceInterfaceId), uint32(len(pProperties)), _pProperties)))
 }
 
 // SwDeviceInterfaceRegister wraps the raw SwDeviceInterfaceRegister call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdeviceinterfaceregister
-func SwDeviceInterfaceRegister(hSwDevice devicesenumerationpnp.HSWDEVICE, pInterfaceClassGuid *win32.GUID, pszReferenceString string, cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY, fEnabled bool, ppszDeviceInterfaceId *foundation.PWSTR) error {
+func SwDeviceInterfaceRegister(hSwDevice devicesenumerationpnp.HSWDEVICE, pInterfaceClassGuid *win32.GUID, pszReferenceString string, pProperties []devicesproperties.DEVPROPERTY, fEnabled bool, ppszDeviceInterfaceId *foundation.PWSTR) error {
 	_pszReferenceString := win32.UTF16Ptr(pszReferenceString)
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
 	_fEnabled := foundation.BOOL(win32.Bool32(fEnabled))
-	return win32.HRESULTError(int32(devicesenumerationpnp.SwDeviceInterfaceRegister(hSwDevice, pInterfaceClassGuid, foundation.PWSTR(_pszReferenceString), cPropertyCount, pProperties, _fEnabled, ppszDeviceInterfaceId)))
+	return win32.HRESULTError(int32(devicesenumerationpnp.SwDeviceInterfaceRegister(hSwDevice, pInterfaceClassGuid, foundation.PWSTR(_pszReferenceString), uint32(len(pProperties)), _pProperties, _fEnabled, ppszDeviceInterfaceId)))
 }
 
 // SwDeviceInterfaceSetState wraps the raw SwDeviceInterfaceSetState call with idiomatic Go types.
@@ -52,8 +64,12 @@ func SwDeviceInterfaceSetState(hSwDevice devicesenumerationpnp.HSWDEVICE, pszDev
 
 // SwDevicePropertySet wraps the raw SwDevicePropertySet call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdevicepropertyset
-func SwDevicePropertySet(hSwDevice devicesenumerationpnp.HSWDEVICE, cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY) error {
-	return win32.HRESULTError(int32(devicesenumerationpnp.SwDevicePropertySet(hSwDevice, cPropertyCount, pProperties)))
+func SwDevicePropertySet(hSwDevice devicesenumerationpnp.HSWDEVICE, pProperties []devicesproperties.DEVPROPERTY) error {
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	return win32.HRESULTError(int32(devicesenumerationpnp.SwDevicePropertySet(hSwDevice, uint32(len(pProperties)), _pProperties)))
 }
 
 // SwDeviceSetLifetime wraps the raw SwDeviceSetLifetime call with idiomatic Go types.

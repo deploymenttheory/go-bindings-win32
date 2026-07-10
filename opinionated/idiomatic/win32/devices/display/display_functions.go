@@ -240,6 +240,20 @@ func SetDisplayAutoRotationPreferences(orientation devicesdisplay.ORIENTATION_PR
 	return devicesdisplay.SetDisplayAutoRotationPreferences(orientation) != 0
 }
 
+// SetDisplayConfig wraps the raw SetDisplayConfig call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setdisplayconfig
+func SetDisplayConfig(pathArray []devicesdisplay.DISPLAYCONFIG_PATH_INFO, modeInfoArray []devicesdisplay.DISPLAYCONFIG_MODE_INFO, flags devicesdisplay.SET_DISPLAY_CONFIG_FLAGS) int32 {
+	var _pathArray *devicesdisplay.DISPLAYCONFIG_PATH_INFO
+	if len(pathArray) > 0 {
+		_pathArray = &pathArray[0]
+	}
+	var _modeInfoArray *devicesdisplay.DISPLAYCONFIG_MODE_INFO
+	if len(modeInfoArray) > 0 {
+		_modeInfoArray = &modeInfoArray[0]
+	}
+	return devicesdisplay.SetDisplayConfig(uint32(len(pathArray)), _pathArray, uint32(len(modeInfoArray)), _modeInfoArray, flags)
+}
+
 // XFORMOBJ_bApplyXform wraps the raw XFORMOBJ_bApplyXform call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-xformobj_bapplyxform
 func XFORMOBJ_bApplyXform(pxo *devicesdisplay.XFORMOBJ, iMode uint32, cPoints uint32, pvIn unsafe.Pointer, pvOut unsafe.Pointer) bool {

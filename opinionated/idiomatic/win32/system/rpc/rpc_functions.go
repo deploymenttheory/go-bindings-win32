@@ -372,8 +372,30 @@ func RpcServerInqDefaultPrincName(AuthnSvc uint32, PrincName *foundation.PWSTR) 
 
 // RpcServerInterfaceGroupCreate wraps the raw RpcServerInterfaceGroupCreateW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverinterfacegroupcreatew
-func RpcServerInterfaceGroupCreate(Interfaces *systemrpc.RPC_INTERFACE_TEMPLATEW, NumIfs uint32, Endpoints *systemrpc.RPC_ENDPOINT_TEMPLATEW, NumEndpoints uint32, IdlePeriod uint32, IdleCallbackFn systemrpc.RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext unsafe.Pointer, IfGroup *unsafe.Pointer) systemrpc.RPC_STATUS {
-	return systemrpc.RpcServerInterfaceGroupCreateW(Interfaces, NumIfs, Endpoints, NumEndpoints, IdlePeriod, IdleCallbackFn, IdleCallbackContext, IfGroup)
+func RpcServerInterfaceGroupCreate(Interfaces []systemrpc.RPC_INTERFACE_TEMPLATEW, Endpoints []systemrpc.RPC_ENDPOINT_TEMPLATEW, IdlePeriod uint32, IdleCallbackFn systemrpc.RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext unsafe.Pointer, IfGroup *unsafe.Pointer) systemrpc.RPC_STATUS {
+	var _Interfaces *systemrpc.RPC_INTERFACE_TEMPLATEW
+	if len(Interfaces) > 0 {
+		_Interfaces = &Interfaces[0]
+	}
+	var _Endpoints *systemrpc.RPC_ENDPOINT_TEMPLATEW
+	if len(Endpoints) > 0 {
+		_Endpoints = &Endpoints[0]
+	}
+	return systemrpc.RpcServerInterfaceGroupCreateW(_Interfaces, uint32(len(Interfaces)), _Endpoints, uint32(len(Endpoints)), IdlePeriod, IdleCallbackFn, IdleCallbackContext, IfGroup)
+}
+
+// RpcServerInterfaceGroupCreateA wraps the raw RpcServerInterfaceGroupCreateA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverinterfacegroupcreatea
+func RpcServerInterfaceGroupCreateA(Interfaces []systemrpc.RPC_INTERFACE_TEMPLATEA, Endpoints []systemrpc.RPC_ENDPOINT_TEMPLATEA, IdlePeriod uint32, IdleCallbackFn systemrpc.RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext unsafe.Pointer, IfGroup *unsafe.Pointer) systemrpc.RPC_STATUS {
+	var _Interfaces *systemrpc.RPC_INTERFACE_TEMPLATEA
+	if len(Interfaces) > 0 {
+		_Interfaces = &Interfaces[0]
+	}
+	var _Endpoints *systemrpc.RPC_ENDPOINT_TEMPLATEA
+	if len(Endpoints) > 0 {
+		_Endpoints = &Endpoints[0]
+	}
+	return systemrpc.RpcServerInterfaceGroupCreateA(_Interfaces, uint32(len(Interfaces)), _Endpoints, uint32(len(Endpoints)), IdlePeriod, IdleCallbackFn, IdleCallbackContext, IfGroup)
 }
 
 // RpcServerRegisterAuthInfo wraps the raw RpcServerRegisterAuthInfoW call with idiomatic Go types.

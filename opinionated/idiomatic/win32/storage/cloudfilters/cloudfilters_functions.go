@@ -29,9 +29,13 @@ func CfConvertToPlaceholder(FileHandle foundation.HANDLE, FileIdentity unsafe.Po
 
 // CfCreatePlaceholders wraps the raw CfCreatePlaceholders call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfcreateplaceholders
-func CfCreatePlaceholders(BaseDirectoryPath string, PlaceholderArray *storagecloudfilters.CF_PLACEHOLDER_CREATE_INFO, PlaceholderCount uint32, CreateFlags storagecloudfilters.CF_CREATE_FLAGS, EntriesProcessed *uint32) error {
+func CfCreatePlaceholders(BaseDirectoryPath string, PlaceholderArray []storagecloudfilters.CF_PLACEHOLDER_CREATE_INFO, CreateFlags storagecloudfilters.CF_CREATE_FLAGS, EntriesProcessed *uint32) error {
 	_BaseDirectoryPath := win32.UTF16Ptr(BaseDirectoryPath)
-	return win32.HRESULTError(int32(storagecloudfilters.CfCreatePlaceholders(foundation.PWSTR(_BaseDirectoryPath), PlaceholderArray, PlaceholderCount, CreateFlags, EntriesProcessed)))
+	var _PlaceholderArray *storagecloudfilters.CF_PLACEHOLDER_CREATE_INFO
+	if len(PlaceholderArray) > 0 {
+		_PlaceholderArray = &PlaceholderArray[0]
+	}
+	return win32.HRESULTError(int32(storagecloudfilters.CfCreatePlaceholders(foundation.PWSTR(_BaseDirectoryPath), _PlaceholderArray, uint32(len(PlaceholderArray)), CreateFlags, EntriesProcessed)))
 }
 
 // CfDehydratePlaceholder wraps the raw CfDehydratePlaceholder call with idiomatic Go types.
@@ -178,8 +182,12 @@ func CfUnregisterSyncRoot(SyncRootPath string) error {
 
 // CfUpdatePlaceholder wraps the raw CfUpdatePlaceholder call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfupdateplaceholder
-func CfUpdatePlaceholder(FileHandle foundation.HANDLE, FsMetadata *storagecloudfilters.CF_FS_METADATA, FileIdentity unsafe.Pointer, FileIdentityLength uint32, DehydrateRangeArray *storagecloudfilters.CF_FILE_RANGE, DehydrateRangeCount uint32, UpdateFlags storagecloudfilters.CF_UPDATE_FLAGS, UpdateUsn *int64, Overlapped *systemio.OVERLAPPED) error {
-	return win32.HRESULTError(int32(storagecloudfilters.CfUpdatePlaceholder(FileHandle, FsMetadata, FileIdentity, FileIdentityLength, DehydrateRangeArray, DehydrateRangeCount, UpdateFlags, UpdateUsn, Overlapped)))
+func CfUpdatePlaceholder(FileHandle foundation.HANDLE, FsMetadata *storagecloudfilters.CF_FS_METADATA, FileIdentity unsafe.Pointer, FileIdentityLength uint32, DehydrateRangeArray []storagecloudfilters.CF_FILE_RANGE, UpdateFlags storagecloudfilters.CF_UPDATE_FLAGS, UpdateUsn *int64, Overlapped *systemio.OVERLAPPED) error {
+	var _DehydrateRangeArray *storagecloudfilters.CF_FILE_RANGE
+	if len(DehydrateRangeArray) > 0 {
+		_DehydrateRangeArray = &DehydrateRangeArray[0]
+	}
+	return win32.HRESULTError(int32(storagecloudfilters.CfUpdatePlaceholder(FileHandle, FsMetadata, FileIdentity, FileIdentityLength, _DehydrateRangeArray, uint32(len(DehydrateRangeArray)), UpdateFlags, UpdateUsn, Overlapped)))
 }
 
 // CfUpdateSyncProviderStatus wraps the raw CfUpdateSyncProviderStatus call with idiomatic Go types.

@@ -51,9 +51,13 @@ func WinBioAsyncOpenFramework(NotificationMethod devicesbiometricframework.WINBI
 
 // WinBioAsyncOpenSession wraps the raw WinBioAsyncOpenSession call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioasyncopensession
-func WinBioAsyncOpenSession(Factor uint32, PoolType devicesbiometricframework.WINBIO_POOL, Flags uint32, UnitArray *uint32, UnitCount uintptr, DatabaseId *win32.GUID, NotificationMethod devicesbiometricframework.WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow foundation.HWND, MessageCode uint32, CallbackRoutine devicesbiometricframework.PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData unsafe.Pointer, AsynchronousOpen bool, SessionHandle *uint32) error {
+func WinBioAsyncOpenSession(Factor uint32, PoolType devicesbiometricframework.WINBIO_POOL, Flags uint32, UnitArray []uint32, DatabaseId *win32.GUID, NotificationMethod devicesbiometricframework.WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow foundation.HWND, MessageCode uint32, CallbackRoutine devicesbiometricframework.PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData unsafe.Pointer, AsynchronousOpen bool, SessionHandle *uint32) error {
+	var _UnitArray *uint32
+	if len(UnitArray) > 0 {
+		_UnitArray = &UnitArray[0]
+	}
 	_AsynchronousOpen := foundation.BOOL(win32.Bool32(AsynchronousOpen))
-	return win32.HRESULTError(int32(devicesbiometricframework.WinBioAsyncOpenSession(Factor, PoolType, Flags, UnitArray, UnitCount, DatabaseId, NotificationMethod, TargetWindow, MessageCode, CallbackRoutine, UserData, _AsynchronousOpen, SessionHandle)))
+	return win32.HRESULTError(int32(devicesbiometricframework.WinBioAsyncOpenSession(Factor, PoolType, Flags, _UnitArray, uintptr(len(UnitArray)), DatabaseId, NotificationMethod, TargetWindow, MessageCode, CallbackRoutine, UserData, _AsynchronousOpen, SessionHandle)))
 }
 
 // WinBioCancel wraps the raw WinBioCancel call with idiomatic Go types.
@@ -241,8 +245,12 @@ func WinBioMonitorPresence(SessionHandle uint32, UnitId uint32) error {
 
 // WinBioOpenSession wraps the raw WinBioOpenSession call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioopensession
-func WinBioOpenSession(Factor uint32, PoolType devicesbiometricframework.WINBIO_POOL, Flags uint32, UnitArray *uint32, UnitCount uintptr, DatabaseId *win32.GUID, SessionHandle *uint32) error {
-	return win32.HRESULTError(int32(devicesbiometricframework.WinBioOpenSession(Factor, PoolType, Flags, UnitArray, UnitCount, DatabaseId, SessionHandle)))
+func WinBioOpenSession(Factor uint32, PoolType devicesbiometricframework.WINBIO_POOL, Flags uint32, UnitArray []uint32, DatabaseId *win32.GUID, SessionHandle *uint32) error {
+	var _UnitArray *uint32
+	if len(UnitArray) > 0 {
+		_UnitArray = &UnitArray[0]
+	}
+	return win32.HRESULTError(int32(devicesbiometricframework.WinBioOpenSession(Factor, PoolType, Flags, _UnitArray, uintptr(len(UnitArray)), DatabaseId, SessionHandle)))
 }
 
 // WinBioRegisterEventMonitor wraps the raw WinBioRegisterEventMonitor call with idiomatic Go types.

@@ -127,8 +127,12 @@ func HttpSendHttpResponse(RequestQueueHandle foundation.HANDLE, RequestId uint64
 
 // HttpSendResponseEntityBody wraps the raw HttpSendResponseEntityBody call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsendresponseentitybody
-func HttpSendResponseEntityBody(RequestQueueHandle foundation.HANDLE, RequestId uint64, Flags uint32, EntityChunkCount uint16, EntityChunks *networkinghttpserver.HTTP_DATA_CHUNK, BytesSent *uint32, Overlapped *systemio.OVERLAPPED, LogData *networkinghttpserver.HTTP_LOG_DATA) uint32 {
-	return networkinghttpserver.HttpSendResponseEntityBody(RequestQueueHandle, RequestId, Flags, EntityChunkCount, EntityChunks, BytesSent, nil, 0, Overlapped, LogData)
+func HttpSendResponseEntityBody(RequestQueueHandle foundation.HANDLE, RequestId uint64, Flags uint32, EntityChunks []networkinghttpserver.HTTP_DATA_CHUNK, BytesSent *uint32, Overlapped *systemio.OVERLAPPED, LogData *networkinghttpserver.HTTP_LOG_DATA) uint32 {
+	var _EntityChunks *networkinghttpserver.HTTP_DATA_CHUNK
+	if len(EntityChunks) > 0 {
+		_EntityChunks = &EntityChunks[0]
+	}
+	return networkinghttpserver.HttpSendResponseEntityBody(RequestQueueHandle, RequestId, Flags, uint16(len(EntityChunks)), _EntityChunks, BytesSent, nil, 0, Overlapped, LogData)
 }
 
 // HttpSetRequestQueueProperty wraps the raw HttpSetRequestQueueProperty call with idiomatic Go types.

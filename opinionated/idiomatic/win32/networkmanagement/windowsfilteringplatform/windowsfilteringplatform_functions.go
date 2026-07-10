@@ -14,6 +14,15 @@ import (
 	systemrpc "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/rpc"
 )
 
+// FwpmConnectionPolicyAdd0 wraps the raw FwpmConnectionPolicyAdd0 call with idiomatic Go types.
+func FwpmConnectionPolicyAdd0(engineHandle networkmanagementwindowsfilteringplatform.FWPM_ENGINE_HANDLE, connectionPolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT3, ipVersion networkmanagementwindowsfilteringplatform.FWP_IP_VERSION, weight uint64, filterConditions []networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	return networkmanagementwindowsfilteringplatform.FwpmConnectionPolicyAdd0(engineHandle, connectionPolicy, ipVersion, weight, uint32(len(filterConditions)), _filterConditions, sd)
+}
+
 // FwpmEngineOpen0 wraps the raw FwpmEngineOpen0 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmengineopen0
 func FwpmEngineOpen0(authnService uint32, authIdentity *systemrpc.SEC_WINNT_AUTH_IDENTITY_W, session *networkmanagementwindowsfilteringplatform.FWPM_SESSION0, engineHandle *networkmanagementwindowsfilteringplatform.FWPM_ENGINE_HANDLE) uint32 {
@@ -25,6 +34,45 @@ func FwpmEngineOpen0(authnService uint32, authIdentity *systemrpc.SEC_WINNT_AUTH
 func FwpmGetAppIdFromFileName0(fileName string, appId **networkmanagementwindowsfilteringplatform.FWP_BYTE_BLOB) uint32 {
 	_fileName := win32.UTF16Ptr(fileName)
 	return networkmanagementwindowsfilteringplatform.FwpmGetAppIdFromFileName0(foundation.PWSTR(_fileName), appId)
+}
+
+// FwpmIPsecTunnelAdd0 wraps the raw FwpmIPsecTunnelAdd0 call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmipsectunneladd0
+func FwpmIPsecTunnelAdd0(engineHandle networkmanagementwindowsfilteringplatform.FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT0, tunnelPolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT0, filterConditions []networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	return networkmanagementwindowsfilteringplatform.FwpmIPsecTunnelAdd0(engineHandle, flags, mainModePolicy, tunnelPolicy, uint32(len(filterConditions)), _filterConditions, sd)
+}
+
+// FwpmIPsecTunnelAdd1 wraps the raw FwpmIPsecTunnelAdd1 call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmipsectunneladd1
+func FwpmIPsecTunnelAdd1(engineHandle networkmanagementwindowsfilteringplatform.FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT1, tunnelPolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT1, filterConditions []networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	return networkmanagementwindowsfilteringplatform.FwpmIPsecTunnelAdd1(engineHandle, flags, mainModePolicy, tunnelPolicy, uint32(len(filterConditions)), _filterConditions, keyModKey, sd)
+}
+
+// FwpmIPsecTunnelAdd2 wraps the raw FwpmIPsecTunnelAdd2 call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmipsectunneladd2
+func FwpmIPsecTunnelAdd2(engineHandle networkmanagementwindowsfilteringplatform.FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT2, tunnelPolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT2, filterConditions []networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	return networkmanagementwindowsfilteringplatform.FwpmIPsecTunnelAdd2(engineHandle, flags, mainModePolicy, tunnelPolicy, uint32(len(filterConditions)), _filterConditions, keyModKey, sd)
+}
+
+// FwpmIPsecTunnelAdd3 wraps the raw FwpmIPsecTunnelAdd3 call with idiomatic Go types.
+func FwpmIPsecTunnelAdd3(engineHandle networkmanagementwindowsfilteringplatform.FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT3, tunnelPolicy *networkmanagementwindowsfilteringplatform.FWPM_PROVIDER_CONTEXT3, filterConditions []networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *networkmanagementwindowsfilteringplatform.FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	return networkmanagementwindowsfilteringplatform.FwpmIPsecTunnelAdd3(engineHandle, flags, mainModePolicy, tunnelPolicy, uint32(len(filterConditions)), _filterConditions, keyModKey, sd)
 }
 
 // FwpmSystemPortsSubscribe0 wraps the raw FwpmSystemPortsSubscribe0 call with idiomatic Go types.

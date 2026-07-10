@@ -27,6 +27,20 @@ func CompareString(Locale uint32, dwCmpFlags uint32, lpString1 string, cchCount1
 	return globalization.CompareStringW(Locale, dwCmpFlags, foundation.PWSTR(_lpString1), cchCount1, foundation.PWSTR(_lpString2), cchCount2)
 }
 
+// CompareStringA wraps the raw CompareStringA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-comparestringa
+func CompareStringA(Locale uint32, dwCmpFlags uint32, lpString1 []int8, lpString2 []int8) globalization.COMPARESTRING_RESULT {
+	var _lpString1 *int8
+	if len(lpString1) > 0 {
+		_lpString1 = &lpString1[0]
+	}
+	var _lpString2 *int8
+	if len(lpString2) > 0 {
+		_lpString2 = &lpString2[0]
+	}
+	return globalization.CompareStringA(Locale, dwCmpFlags, _lpString1, int32(len(lpString1)), _lpString2, int32(len(lpString2)))
+}
+
 // CompareStringEx wraps the raw CompareStringEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-comparestringex
 func CompareStringEx(lpLocaleName string, dwCmpFlags globalization.COMPARE_STRING_FLAGS, lpString1 string, cchCount1 int32, lpString2 string, cchCount2 int32) (globalization.COMPARESTRING_RESULT, error) {
@@ -602,9 +616,13 @@ func ScriptBreak(pwcChars string, cChars int32, psa *globalization.SCRIPT_ANALYS
 
 // ScriptCPtoX wraps the raw ScriptCPtoX call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptcptox
-func ScriptCPtoX(iCP int32, fTrailing bool, cChars int32, cGlyphs int32, pwLogClust *uint16, psva *globalization.SCRIPT_VISATTR, piAdvance *int32, psa *globalization.SCRIPT_ANALYSIS, piX *int32) error {
+func ScriptCPtoX(iCP int32, fTrailing bool, cGlyphs int32, pwLogClust []uint16, psva *globalization.SCRIPT_VISATTR, piAdvance *int32, psa *globalization.SCRIPT_ANALYSIS, piX *int32) error {
 	_fTrailing := foundation.BOOL(win32.Bool32(fTrailing))
-	return win32.HRESULTError(int32(globalization.ScriptCPtoX(iCP, _fTrailing, cChars, cGlyphs, pwLogClust, psva, piAdvance, psa, piX)))
+	var _pwLogClust *uint16
+	if len(pwLogClust) > 0 {
+		_pwLogClust = &pwLogClust[0]
+	}
+	return win32.HRESULTError(int32(globalization.ScriptCPtoX(iCP, _fTrailing, int32(len(pwLogClust)), cGlyphs, _pwLogClust, psva, piAdvance, psa, piX)))
 }
 
 // ScriptCacheGetHeight wraps the raw ScriptCacheGetHeight call with idiomatic Go types.
@@ -628,20 +646,32 @@ func ScriptGetCMap(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwcInChars string, 
 
 // ScriptGetFontAlternateGlyphs wraps the raw ScriptGetFontAlternateGlyphs call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontalternateglyphs
-func ScriptGetFontAlternateGlyphs(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *globalization.SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, tagFeature uint32, wGlyphId uint16, cMaxAlternates int32, pAlternateGlyphs *uint16, pcAlternates *int32) error {
-	return win32.HRESULTError(int32(globalization.ScriptGetFontAlternateGlyphs(hdc, psc, psa, tagScript, tagLangSys, tagFeature, wGlyphId, cMaxAlternates, pAlternateGlyphs, pcAlternates)))
+func ScriptGetFontAlternateGlyphs(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *globalization.SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, tagFeature uint32, wGlyphId uint16, pAlternateGlyphs []uint16, pcAlternates *int32) error {
+	var _pAlternateGlyphs *uint16
+	if len(pAlternateGlyphs) > 0 {
+		_pAlternateGlyphs = &pAlternateGlyphs[0]
+	}
+	return win32.HRESULTError(int32(globalization.ScriptGetFontAlternateGlyphs(hdc, psc, psa, tagScript, tagLangSys, tagFeature, wGlyphId, int32(len(pAlternateGlyphs)), _pAlternateGlyphs, pcAlternates)))
 }
 
 // ScriptGetFontFeatureTags wraps the raw ScriptGetFontFeatureTags call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontfeaturetags
-func ScriptGetFontFeatureTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *globalization.SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, cMaxTags int32, pFeatureTags *uint32, pcTags *int32) error {
-	return win32.HRESULTError(int32(globalization.ScriptGetFontFeatureTags(hdc, psc, psa, tagScript, tagLangSys, cMaxTags, pFeatureTags, pcTags)))
+func ScriptGetFontFeatureTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *globalization.SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, pFeatureTags []uint32, pcTags *int32) error {
+	var _pFeatureTags *uint32
+	if len(pFeatureTags) > 0 {
+		_pFeatureTags = &pFeatureTags[0]
+	}
+	return win32.HRESULTError(int32(globalization.ScriptGetFontFeatureTags(hdc, psc, psa, tagScript, tagLangSys, int32(len(pFeatureTags)), _pFeatureTags, pcTags)))
 }
 
 // ScriptGetFontLanguageTags wraps the raw ScriptGetFontLanguageTags call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontlanguagetags
-func ScriptGetFontLanguageTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *globalization.SCRIPT_ANALYSIS, tagScript uint32, cMaxTags int32, pLangsysTags *uint32, pcTags *int32) error {
-	return win32.HRESULTError(int32(globalization.ScriptGetFontLanguageTags(hdc, psc, psa, tagScript, cMaxTags, pLangsysTags, pcTags)))
+func ScriptGetFontLanguageTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *globalization.SCRIPT_ANALYSIS, tagScript uint32, pLangsysTags []uint32, pcTags *int32) error {
+	var _pLangsysTags *uint32
+	if len(pLangsysTags) > 0 {
+		_pLangsysTags = &pLangsysTags[0]
+	}
+	return win32.HRESULTError(int32(globalization.ScriptGetFontLanguageTags(hdc, psc, psa, tagScript, int32(len(pLangsysTags)), _pLangsysTags, pcTags)))
 }
 
 // ScriptGetFontProperties wraps the raw ScriptGetFontProperties call with idiomatic Go types.
@@ -652,8 +682,12 @@ func ScriptGetFontProperties(hdc graphicsgdi.HDC, psc *unsafe.Pointer, sfp *glob
 
 // ScriptGetFontScriptTags wraps the raw ScriptGetFontScriptTags call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontscripttags
-func ScriptGetFontScriptTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *globalization.SCRIPT_ANALYSIS, cMaxTags int32, pScriptTags *uint32, pcTags *int32) error {
-	return win32.HRESULTError(int32(globalization.ScriptGetFontScriptTags(hdc, psc, psa, cMaxTags, pScriptTags, pcTags)))
+func ScriptGetFontScriptTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *globalization.SCRIPT_ANALYSIS, pScriptTags []uint32, pcTags *int32) error {
+	var _pScriptTags *uint32
+	if len(pScriptTags) > 0 {
+		_pScriptTags = &pScriptTags[0]
+	}
+	return win32.HRESULTError(int32(globalization.ScriptGetFontScriptTags(hdc, psc, psa, int32(len(pScriptTags)), _pScriptTags, pcTags)))
 }
 
 // ScriptGetGlyphABCWidth wraps the raw ScriptGetGlyphABCWidth call with idiomatic Go types.
@@ -683,9 +717,13 @@ func ScriptIsComplex(pwcInChars string, cInChars int32, dwFlags globalization.SC
 
 // ScriptItemize wraps the raw ScriptItemize call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptitemize
-func ScriptItemize(pwcInChars string, cInChars int32, cMaxItems int32, psControl *globalization.SCRIPT_CONTROL, psState *globalization.SCRIPT_STATE, pItems *globalization.SCRIPT_ITEM, pcItems *int32) error {
+func ScriptItemize(pwcInChars string, cInChars int32, psControl *globalization.SCRIPT_CONTROL, psState *globalization.SCRIPT_STATE, pItems []globalization.SCRIPT_ITEM, pcItems *int32) error {
 	_pwcInChars := win32.UTF16Ptr(pwcInChars)
-	return win32.HRESULTError(int32(globalization.ScriptItemize(foundation.PWSTR(_pwcInChars), cInChars, cMaxItems, psControl, psState, pItems, pcItems)))
+	var _pItems *globalization.SCRIPT_ITEM
+	if len(pItems) > 0 {
+		_pItems = &pItems[0]
+	}
+	return win32.HRESULTError(int32(globalization.ScriptItemize(foundation.PWSTR(_pwcInChars), cInChars, int32(len(pItems)), psControl, psState, _pItems, pcItems)))
 }
 
 // ScriptItemizeOpenType wraps the raw ScriptItemizeOpenType call with idiomatic Go types.
@@ -804,8 +842,12 @@ func ScriptTextOut(hdc graphicsgdi.HDC, psc *unsafe.Pointer, x int32, y int32, f
 
 // ScriptXtoCP wraps the raw ScriptXtoCP call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptxtocp
-func ScriptXtoCP(iX int32, cChars int32, cGlyphs int32, pwLogClust *uint16, psva *globalization.SCRIPT_VISATTR, piAdvance *int32, psa *globalization.SCRIPT_ANALYSIS, piCP *int32, piTrailing *int32) error {
-	return win32.HRESULTError(int32(globalization.ScriptXtoCP(iX, cChars, cGlyphs, pwLogClust, psva, piAdvance, psa, piCP, piTrailing)))
+func ScriptXtoCP(iX int32, cGlyphs int32, pwLogClust []uint16, psva *globalization.SCRIPT_VISATTR, piAdvance *int32, psa *globalization.SCRIPT_ANALYSIS, piCP *int32, piTrailing *int32) error {
+	var _pwLogClust *uint16
+	if len(pwLogClust) > 0 {
+		_pwLogClust = &pwLogClust[0]
+	}
+	return win32.HRESULTError(int32(globalization.ScriptXtoCP(iX, int32(len(pwLogClust)), cGlyphs, _pwLogClust, psva, piAdvance, psa, piCP, piTrailing)))
 }
 
 // SetCalendarInfo wraps the raw SetCalendarInfoW call with idiomatic Go types.

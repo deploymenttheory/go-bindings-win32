@@ -37,8 +37,12 @@ func RoGetMetaDataFile(name systemwinrt.HSTRING, metaDataDispenser *systemwinrtm
 
 // RoGetParameterizedTypeInstanceIID wraps the raw RoGetParameterizedTypeInstanceIID call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/roparameterizediid/nf-roparameterizediid-rogetparameterizedtypeinstanceiid
-func RoGetParameterizedTypeInstanceIID(nameElementCount uint32, nameElements *foundation.PWSTR, metaDataLocator *systemwinrtmetadata.IRoMetaDataLocator, iid *win32.GUID, pExtra *systemwinrtmetadata.ROPARAMIIDHANDLE) error {
-	return win32.HRESULTError(int32(systemwinrtmetadata.RoGetParameterizedTypeInstanceIID(nameElementCount, nameElements, metaDataLocator, iid, pExtra)))
+func RoGetParameterizedTypeInstanceIID(nameElements []foundation.PWSTR, metaDataLocator *systemwinrtmetadata.IRoMetaDataLocator, iid *win32.GUID, pExtra *systemwinrtmetadata.ROPARAMIIDHANDLE) error {
+	var _nameElements *foundation.PWSTR
+	if len(nameElements) > 0 {
+		_nameElements = &nameElements[0]
+	}
+	return win32.HRESULTError(int32(systemwinrtmetadata.RoGetParameterizedTypeInstanceIID(uint32(len(nameElements)), _nameElements, metaDataLocator, iid, pExtra)))
 }
 
 // RoIsApiContractMajorVersionPresent wraps the raw RoIsApiContractMajorVersionPresent call with idiomatic Go types.
@@ -63,6 +67,10 @@ func RoParseTypeName(typeName systemwinrt.HSTRING, partsCount *uint32, typeNameP
 
 // RoResolveNamespace wraps the raw RoResolveNamespace call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-roresolvenamespace
-func RoResolveNamespace(name systemwinrt.HSTRING, windowsMetaDataDir systemwinrt.HSTRING, packageGraphDirsCount uint32, packageGraphDirs *systemwinrt.HSTRING, metaDataFilePathsCount *uint32, metaDataFilePaths **systemwinrt.HSTRING, subNamespacesCount *uint32, subNamespaces **systemwinrt.HSTRING) error {
-	return win32.HRESULTError(int32(systemwinrtmetadata.RoResolveNamespace(name, windowsMetaDataDir, packageGraphDirsCount, packageGraphDirs, metaDataFilePathsCount, metaDataFilePaths, subNamespacesCount, subNamespaces)))
+func RoResolveNamespace(name systemwinrt.HSTRING, windowsMetaDataDir systemwinrt.HSTRING, packageGraphDirs []systemwinrt.HSTRING, metaDataFilePathsCount *uint32, metaDataFilePaths **systemwinrt.HSTRING, subNamespacesCount *uint32, subNamespaces **systemwinrt.HSTRING) error {
+	var _packageGraphDirs *systemwinrt.HSTRING
+	if len(packageGraphDirs) > 0 {
+		_packageGraphDirs = &packageGraphDirs[0]
+	}
+	return win32.HRESULTError(int32(systemwinrtmetadata.RoResolveNamespace(name, windowsMetaDataDir, uint32(len(packageGraphDirs)), _packageGraphDirs, metaDataFilePathsCount, metaDataFilePaths, subNamespacesCount, subNamespaces)))
 }

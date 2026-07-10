@@ -13,11 +13,15 @@ import (
 
 // StartXpsPrintJob wraps the raw StartXpsPrintJob call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/xpsprint/nf-xpsprint-startxpsprintjob
-func StartXpsPrintJob(printerName string, jobName string, outputFileName string, progressEvent foundation.HANDLE, completionEvent foundation.HANDLE, printablePagesOn *byte, printablePagesOnCount uint32, xpsPrintJob **storagexpsprinting.IXpsPrintJob, documentStream **storagexpsprinting.IXpsPrintJobStream, printTicketStream **storagexpsprinting.IXpsPrintJobStream) error {
+func StartXpsPrintJob(printerName string, jobName string, outputFileName string, progressEvent foundation.HANDLE, completionEvent foundation.HANDLE, printablePagesOn []byte, xpsPrintJob **storagexpsprinting.IXpsPrintJob, documentStream **storagexpsprinting.IXpsPrintJobStream, printTicketStream **storagexpsprinting.IXpsPrintJobStream) error {
 	_printerName := win32.UTF16Ptr(printerName)
 	_jobName := win32.UTF16Ptr(jobName)
 	_outputFileName := win32.UTF16Ptr(outputFileName)
-	return win32.HRESULTError(int32(storagexpsprinting.StartXpsPrintJob(foundation.PWSTR(_printerName), foundation.PWSTR(_jobName), foundation.PWSTR(_outputFileName), progressEvent, completionEvent, printablePagesOn, printablePagesOnCount, xpsPrintJob, documentStream, printTicketStream)))
+	var _printablePagesOn *byte
+	if len(printablePagesOn) > 0 {
+		_printablePagesOn = &printablePagesOn[0]
+	}
+	return win32.HRESULTError(int32(storagexpsprinting.StartXpsPrintJob(foundation.PWSTR(_printerName), foundation.PWSTR(_jobName), foundation.PWSTR(_outputFileName), progressEvent, completionEvent, _printablePagesOn, uint32(len(printablePagesOn)), xpsPrintJob, documentStream, printTicketStream)))
 }
 
 // StartXpsPrintJob1 wraps the raw StartXpsPrintJob1 call with idiomatic Go types.

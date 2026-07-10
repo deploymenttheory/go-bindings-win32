@@ -441,8 +441,22 @@ func EnumPrintProcessorsA(pName foundation.PSTR, pEnvironment foundation.PSTR, L
 
 // EnumPrinterData wraps the raw EnumPrinterDataW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinterdata
-func EnumPrinterData(hPrinter graphicsprinting.PRINTER_HANDLE, dwIndex uint32, pValueName foundation.PWSTR, cbValueName uint32, pcbValueName *uint32, pType *uint32, pData *byte, cbData uint32, pcbData *uint32) uint32 {
-	return graphicsprinting.EnumPrinterDataW(hPrinter, dwIndex, pValueName, cbValueName, pcbValueName, pType, pData, cbData, pcbData)
+func EnumPrinterData(hPrinter graphicsprinting.PRINTER_HANDLE, dwIndex uint32, pValueName foundation.PWSTR, cbValueName uint32, pcbValueName *uint32, pType *uint32, pData []byte, pcbData *uint32) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	return graphicsprinting.EnumPrinterDataW(hPrinter, dwIndex, pValueName, cbValueName, pcbValueName, pType, _pData, uint32(len(pData)), pcbData)
+}
+
+// EnumPrinterDataA wraps the raw EnumPrinterDataA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/printdocs/enumprinterdata
+func EnumPrinterDataA(hPrinter graphicsprinting.PRINTER_HANDLE, dwIndex uint32, pValueName foundation.PSTR, cbValueName uint32, pcbValueName *uint32, pType *uint32, pData []byte, pcbData *uint32) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	return graphicsprinting.EnumPrinterDataA(hPrinter, dwIndex, pValueName, cbValueName, pcbValueName, pType, _pData, uint32(len(pData)), pcbData)
 }
 
 // EnumPrinterDataEx wraps the raw EnumPrinterDataExW call with idiomatic Go types.
@@ -490,6 +504,15 @@ func FindNextPrinterChangeNotification(hChange graphicsprinting.FINDPRINTERCHANG
 // https://learn.microsoft.com/windows/win32/printdocs/flushprinter
 func FlushPrinter(hPrinter graphicsprinting.PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pcWritten *uint32, cSleep uint32) bool {
 	return graphicsprinting.FlushPrinter(hPrinter, pBuf, cbBuf, pcWritten, cSleep) != 0
+}
+
+// FreePrintNamedPropertyArray wraps the raw FreePrintNamedPropertyArray call with idiomatic Go types.
+func FreePrintNamedPropertyArray(ppProperties []*graphicsprinting.PrintNamedProperty) {
+	var _ppProperties **graphicsprinting.PrintNamedProperty
+	if len(ppProperties) > 0 {
+		_ppProperties = &ppProperties[0]
+	}
+	graphicsprinting.FreePrintNamedPropertyArray(uint32(len(ppProperties)), _ppProperties)
 }
 
 // FreePrinterNotifyInfo wraps the raw FreePrinterNotifyInfo call with idiomatic Go types.
@@ -554,17 +577,25 @@ func GenerateCopyFilePaths(pszPrinterName string, pszDirectory string, pSplClien
 
 // GetCorePrinterDrivers wraps the raw GetCorePrinterDriversW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/printdocs/getcoreprinterdrivers
-func GetCorePrinterDrivers(pszServer string, pszEnvironment string, pszzCoreDriverDependencies string, cCorePrinterDrivers uint32, pCorePrinterDrivers *graphicsprinting.CORE_PRINTER_DRIVERW) error {
+func GetCorePrinterDrivers(pszServer string, pszEnvironment string, pszzCoreDriverDependencies string, pCorePrinterDrivers []graphicsprinting.CORE_PRINTER_DRIVERW) error {
 	_pszServer := win32.UTF16Ptr(pszServer)
 	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
 	_pszzCoreDriverDependencies := win32.UTF16Ptr(pszzCoreDriverDependencies)
-	return win32.HRESULTError(int32(graphicsprinting.GetCorePrinterDriversW(foundation.PWSTR(_pszServer), foundation.PWSTR(_pszEnvironment), foundation.PWSTR(_pszzCoreDriverDependencies), cCorePrinterDrivers, pCorePrinterDrivers)))
+	var _pCorePrinterDrivers *graphicsprinting.CORE_PRINTER_DRIVERW
+	if len(pCorePrinterDrivers) > 0 {
+		_pCorePrinterDrivers = &pCorePrinterDrivers[0]
+	}
+	return win32.HRESULTError(int32(graphicsprinting.GetCorePrinterDriversW(foundation.PWSTR(_pszServer), foundation.PWSTR(_pszEnvironment), foundation.PWSTR(_pszzCoreDriverDependencies), uint32(len(pCorePrinterDrivers)), _pCorePrinterDrivers)))
 }
 
 // GetCorePrinterDriversA wraps the raw GetCorePrinterDriversA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/printdocs/getcoreprinterdrivers
-func GetCorePrinterDriversA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, pszzCoreDriverDependencies foundation.PSTR, cCorePrinterDrivers uint32, pCorePrinterDrivers *graphicsprinting.CORE_PRINTER_DRIVERA) error {
-	return win32.HRESULTError(int32(graphicsprinting.GetCorePrinterDriversA(pszServer, pszEnvironment, pszzCoreDriverDependencies, cCorePrinterDrivers, pCorePrinterDrivers)))
+func GetCorePrinterDriversA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, pszzCoreDriverDependencies foundation.PSTR, pCorePrinterDrivers []graphicsprinting.CORE_PRINTER_DRIVERA) error {
+	var _pCorePrinterDrivers *graphicsprinting.CORE_PRINTER_DRIVERA
+	if len(pCorePrinterDrivers) > 0 {
+		_pCorePrinterDrivers = &pCorePrinterDrivers[0]
+	}
+	return win32.HRESULTError(int32(graphicsprinting.GetCorePrinterDriversA(pszServer, pszEnvironment, pszzCoreDriverDependencies, uint32(len(pCorePrinterDrivers)), _pCorePrinterDrivers)))
 }
 
 // GetDefaultPrinter wraps the raw GetDefaultPrinterW call with idiomatic Go types.

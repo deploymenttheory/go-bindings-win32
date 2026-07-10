@@ -17,6 +17,46 @@ func EnableMouseInPointer(fEnable bool) error {
 	return uiinputpointer.EnableMouseInPointer(_fEnable)
 }
 
+// GetPointerInputTransform wraps the raw GetPointerInputTransform call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpointerinputtransform
+func GetPointerInputTransform(pointerId uint32, inputTransform []uiinputpointer.INPUT_TRANSFORM) error {
+	var _inputTransform *uiinputpointer.INPUT_TRANSFORM
+	if len(inputTransform) > 0 {
+		_inputTransform = &inputTransform[0]
+	}
+	return uiinputpointer.GetPointerInputTransform(pointerId, uint32(len(inputTransform)), _inputTransform)
+}
+
+// GetRawPointerDeviceData wraps the raw GetRawPointerDeviceData call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getrawpointerdevicedata
+func GetRawPointerDeviceData(pointerId uint32, historyCount uint32, pProperties []uiinputpointer.POINTER_DEVICE_PROPERTY, pValues *int32) error {
+	var _pProperties *uiinputpointer.POINTER_DEVICE_PROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	return uiinputpointer.GetRawPointerDeviceData(pointerId, historyCount, uint32(len(pProperties)), _pProperties, pValues)
+}
+
+// InjectSyntheticPointerInput wraps the raw InjectSyntheticPointerInput call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-injectsyntheticpointerinput
+func InjectSyntheticPointerInput(device uiinputpointer.HSYNTHETICPOINTERDEVICE, pointerInfo []uiinputpointer.POINTER_TYPE_INFO) error {
+	var _pointerInfo *uiinputpointer.POINTER_TYPE_INFO
+	if len(pointerInfo) > 0 {
+		_pointerInfo = &pointerInfo[0]
+	}
+	return uiinputpointer.InjectSyntheticPointerInput(device, _pointerInfo, uint32(len(pointerInfo)))
+}
+
+// InjectTouchInput wraps the raw InjectTouchInput call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-injecttouchinput
+func InjectTouchInput(contacts []uiinputpointer.POINTER_TOUCH_INFO) error {
+	var _contacts *uiinputpointer.POINTER_TOUCH_INFO
+	if len(contacts) > 0 {
+		_contacts = &contacts[0]
+	}
+	return uiinputpointer.InjectTouchInput(uint32(len(contacts)), _contacts)
+}
+
 // IsMouseInPointerEnabled wraps the raw IsMouseInPointerEnabled call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ismouseinpointerenabled
 func IsMouseInPointerEnabled() bool {

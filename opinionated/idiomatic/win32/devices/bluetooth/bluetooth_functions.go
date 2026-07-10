@@ -19,6 +19,16 @@ func BluetoothAuthenticateDevice(hwndParent foundation.HWND, hRadio foundation.H
 	return devicesbluetooth.BluetoothAuthenticateDevice(hwndParent, hRadio, pbtbi, foundation.PWSTR(_pszPasskey), ulPasskeyLength)
 }
 
+// BluetoothAuthenticateMultipleDevices wraps the raw BluetoothAuthenticateMultipleDevices call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothauthenticatemultipledevices
+func BluetoothAuthenticateMultipleDevices(hwndParent foundation.HWND, hRadio foundation.HANDLE, rgbtdi []devicesbluetooth.BLUETOOTH_DEVICE_INFO) uint32 {
+	var _rgbtdi *devicesbluetooth.BLUETOOTH_DEVICE_INFO
+	if len(rgbtdi) > 0 {
+		_rgbtdi = &rgbtdi[0]
+	}
+	return devicesbluetooth.BluetoothAuthenticateMultipleDevices(hwndParent, hRadio, uint32(len(rgbtdi)), _rgbtdi)
+}
+
 // BluetoothEnableDiscovery wraps the raw BluetoothEnableDiscovery call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothenablediscovery
 func BluetoothEnableDiscovery(hRadio foundation.HANDLE, fEnabled bool) bool {
@@ -59,8 +69,12 @@ func BluetoothGATTGetCharacteristicValue(hDevice foundation.HANDLE, Characterist
 
 // BluetoothGATTGetCharacteristics wraps the raw BluetoothGATTGetCharacteristics call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetcharacteristics
-func BluetoothGATTGetCharacteristics(hDevice foundation.HANDLE, Service *devicesbluetooth.BTH_LE_GATT_SERVICE, CharacteristicsBufferCount uint16, CharacteristicsBuffer *devicesbluetooth.BTH_LE_GATT_CHARACTERISTIC, CharacteristicsBufferActual *uint16, Flags uint32) error {
-	return win32.HRESULTError(int32(devicesbluetooth.BluetoothGATTGetCharacteristics(hDevice, Service, CharacteristicsBufferCount, CharacteristicsBuffer, CharacteristicsBufferActual, Flags)))
+func BluetoothGATTGetCharacteristics(hDevice foundation.HANDLE, Service *devicesbluetooth.BTH_LE_GATT_SERVICE, CharacteristicsBuffer []devicesbluetooth.BTH_LE_GATT_CHARACTERISTIC, CharacteristicsBufferActual *uint16, Flags uint32) error {
+	var _CharacteristicsBuffer *devicesbluetooth.BTH_LE_GATT_CHARACTERISTIC
+	if len(CharacteristicsBuffer) > 0 {
+		_CharacteristicsBuffer = &CharacteristicsBuffer[0]
+	}
+	return win32.HRESULTError(int32(devicesbluetooth.BluetoothGATTGetCharacteristics(hDevice, Service, uint16(len(CharacteristicsBuffer)), _CharacteristicsBuffer, CharacteristicsBufferActual, Flags)))
 }
 
 // BluetoothGATTGetDescriptorValue wraps the raw BluetoothGATTGetDescriptorValue call with idiomatic Go types.
@@ -71,20 +85,32 @@ func BluetoothGATTGetDescriptorValue(hDevice foundation.HANDLE, Descriptor *devi
 
 // BluetoothGATTGetDescriptors wraps the raw BluetoothGATTGetDescriptors call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetdescriptors
-func BluetoothGATTGetDescriptors(hDevice foundation.HANDLE, Characteristic *devicesbluetooth.BTH_LE_GATT_CHARACTERISTIC, DescriptorsBufferCount uint16, DescriptorsBuffer *devicesbluetooth.BTH_LE_GATT_DESCRIPTOR, DescriptorsBufferActual *uint16, Flags uint32) error {
-	return win32.HRESULTError(int32(devicesbluetooth.BluetoothGATTGetDescriptors(hDevice, Characteristic, DescriptorsBufferCount, DescriptorsBuffer, DescriptorsBufferActual, Flags)))
+func BluetoothGATTGetDescriptors(hDevice foundation.HANDLE, Characteristic *devicesbluetooth.BTH_LE_GATT_CHARACTERISTIC, DescriptorsBuffer []devicesbluetooth.BTH_LE_GATT_DESCRIPTOR, DescriptorsBufferActual *uint16, Flags uint32) error {
+	var _DescriptorsBuffer *devicesbluetooth.BTH_LE_GATT_DESCRIPTOR
+	if len(DescriptorsBuffer) > 0 {
+		_DescriptorsBuffer = &DescriptorsBuffer[0]
+	}
+	return win32.HRESULTError(int32(devicesbluetooth.BluetoothGATTGetDescriptors(hDevice, Characteristic, uint16(len(DescriptorsBuffer)), _DescriptorsBuffer, DescriptorsBufferActual, Flags)))
 }
 
 // BluetoothGATTGetIncludedServices wraps the raw BluetoothGATTGetIncludedServices call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetincludedservices
-func BluetoothGATTGetIncludedServices(hDevice foundation.HANDLE, ParentService *devicesbluetooth.BTH_LE_GATT_SERVICE, IncludedServicesBufferCount uint16, IncludedServicesBuffer *devicesbluetooth.BTH_LE_GATT_SERVICE, IncludedServicesBufferActual *uint16, Flags uint32) error {
-	return win32.HRESULTError(int32(devicesbluetooth.BluetoothGATTGetIncludedServices(hDevice, ParentService, IncludedServicesBufferCount, IncludedServicesBuffer, IncludedServicesBufferActual, Flags)))
+func BluetoothGATTGetIncludedServices(hDevice foundation.HANDLE, ParentService *devicesbluetooth.BTH_LE_GATT_SERVICE, IncludedServicesBuffer []devicesbluetooth.BTH_LE_GATT_SERVICE, IncludedServicesBufferActual *uint16, Flags uint32) error {
+	var _IncludedServicesBuffer *devicesbluetooth.BTH_LE_GATT_SERVICE
+	if len(IncludedServicesBuffer) > 0 {
+		_IncludedServicesBuffer = &IncludedServicesBuffer[0]
+	}
+	return win32.HRESULTError(int32(devicesbluetooth.BluetoothGATTGetIncludedServices(hDevice, ParentService, uint16(len(IncludedServicesBuffer)), _IncludedServicesBuffer, IncludedServicesBufferActual, Flags)))
 }
 
 // BluetoothGATTGetServices wraps the raw BluetoothGATTGetServices call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetservices
-func BluetoothGATTGetServices(hDevice foundation.HANDLE, ServicesBufferCount uint16, ServicesBuffer *devicesbluetooth.BTH_LE_GATT_SERVICE, ServicesBufferActual *uint16, Flags uint32) error {
-	return win32.HRESULTError(int32(devicesbluetooth.BluetoothGATTGetServices(hDevice, ServicesBufferCount, ServicesBuffer, ServicesBufferActual, Flags)))
+func BluetoothGATTGetServices(hDevice foundation.HANDLE, ServicesBuffer []devicesbluetooth.BTH_LE_GATT_SERVICE, ServicesBufferActual *uint16, Flags uint32) error {
+	var _ServicesBuffer *devicesbluetooth.BTH_LE_GATT_SERVICE
+	if len(ServicesBuffer) > 0 {
+		_ServicesBuffer = &ServicesBuffer[0]
+	}
+	return win32.HRESULTError(int32(devicesbluetooth.BluetoothGATTGetServices(hDevice, uint16(len(ServicesBuffer)), _ServicesBuffer, ServicesBufferActual, Flags)))
 }
 
 // BluetoothGATTRegisterEvent wraps the raw BluetoothGATTRegisterEvent call with idiomatic Go types.

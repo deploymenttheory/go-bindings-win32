@@ -17,3 +17,21 @@ import (
 func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut *unsafe.Pointer, punkOuter *systemcom.IUnknown) error {
 	return win32.HRESULTError(int32(deviceshumaninterfacedevice.DirectInput8Create(hinst, dwVersion, riidltf, ppvOut, punkOuter)))
 }
+
+// HidP_SetButtonArray wraps the raw HidP_SetButtonArray call with idiomatic Go types.
+func HidP_SetButtonArray(ReportType deviceshumaninterfacedevice.HIDP_REPORT_TYPE, UsagePage uint16, LinkCollection uint16, Usage uint16, ButtonData []deviceshumaninterfacedevice.HIDP_BUTTON_ARRAY_DATA, PreparsedData deviceshumaninterfacedevice.PHIDP_PREPARSED_DATA, Report foundation.PSTR, ReportLength uint32) foundation.NTSTATUS {
+	var _ButtonData *deviceshumaninterfacedevice.HIDP_BUTTON_ARRAY_DATA
+	if len(ButtonData) > 0 {
+		_ButtonData = &ButtonData[0]
+	}
+	return deviceshumaninterfacedevice.HidP_SetButtonArray(ReportType, UsagePage, LinkCollection, Usage, _ButtonData, uint16(len(ButtonData)), PreparsedData, Report, ReportLength)
+}
+
+// HidP_TranslateUsagesToI8042ScanCodes wraps the raw HidP_TranslateUsagesToI8042ScanCodes call with idiomatic Go types.
+func HidP_TranslateUsagesToI8042ScanCodes(ChangedUsageList []uint16, KeyAction deviceshumaninterfacedevice.HIDP_KEYBOARD_DIRECTION, ModifierState *deviceshumaninterfacedevice.HIDP_KEYBOARD_MODIFIER_STATE, InsertCodesProcedure deviceshumaninterfacedevice.PHIDP_INSERT_SCANCODES, InsertCodesContext unsafe.Pointer) foundation.NTSTATUS {
+	var _ChangedUsageList *uint16
+	if len(ChangedUsageList) > 0 {
+		_ChangedUsageList = &ChangedUsageList[0]
+	}
+	return deviceshumaninterfacedevice.HidP_TranslateUsagesToI8042ScanCodes(_ChangedUsageList, uint32(len(ChangedUsageList)), KeyAction, ModifierState, InsertCodesProcedure, InsertCodesContext)
+}

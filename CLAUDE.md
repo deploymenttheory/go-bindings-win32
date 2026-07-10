@@ -144,6 +144,10 @@ ergonomic wrapper per improvable function:
 - `HRESULT` return (no SetLastError) → `error`
 - `[Reserved]` params elided (passed as the raw type's zero)
 - `-W` functions de-suffixed when the bare name is free
+- an array-pointer param + its input count param (`[NativeArrayInfo]`
+  `CountParamIndex`) collapse into a single `[]T` (count derived from `len`
+  at the call site). Applies only to typed-pointer arrays with a unique,
+  input-only integer count; shared/out counts stay raw. (~600 wrappers)
 
 Functions with nothing to improve are skipped (no pointless alias). Types
 resolve with `Context.QualifyOwn = true` so even same-namespace raw types are

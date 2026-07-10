@@ -26,7 +26,11 @@ func GetOverlappedResultEx(hFile foundation.HANDLE, lpOverlapped *systemio.OVERL
 
 // GetQueuedCompletionStatusEx wraps the raw GetQueuedCompletionStatusEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-getqueuedcompletionstatusex
-func GetQueuedCompletionStatusEx(CompletionPort foundation.HANDLE, lpCompletionPortEntries *systemio.OVERLAPPED_ENTRY, ulCount uint32, ulNumEntriesRemoved *uint32, dwMilliseconds uint32, fAlertable bool) error {
+func GetQueuedCompletionStatusEx(CompletionPort foundation.HANDLE, lpCompletionPortEntries []systemio.OVERLAPPED_ENTRY, ulNumEntriesRemoved *uint32, dwMilliseconds uint32, fAlertable bool) error {
+	var _lpCompletionPortEntries *systemio.OVERLAPPED_ENTRY
+	if len(lpCompletionPortEntries) > 0 {
+		_lpCompletionPortEntries = &lpCompletionPortEntries[0]
+	}
 	_fAlertable := foundation.BOOL(win32.Bool32(fAlertable))
-	return systemio.GetQueuedCompletionStatusEx(CompletionPort, lpCompletionPortEntries, ulCount, ulNumEntriesRemoved, dwMilliseconds, _fAlertable)
+	return systemio.GetQueuedCompletionStatusEx(CompletionPort, _lpCompletionPortEntries, uint32(len(lpCompletionPortEntries)), ulNumEntriesRemoved, dwMilliseconds, _fAlertable)
 }

@@ -46,8 +46,12 @@ func AddFontResourceExA(name foundation.PSTR, fl graphicsgdi.FONT_RESOURCE_CHARA
 
 // AnimatePalette wraps the raw AnimatePalette call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-animatepalette
-func AnimatePalette(hPal graphicsgdi.HPALETTE, iStartIndex uint32, cEntries uint32, ppe *graphicsgdi.PALETTEENTRY) bool {
-	return graphicsgdi.AnimatePalette(hPal, iStartIndex, cEntries, ppe) != 0
+func AnimatePalette(hPal graphicsgdi.HPALETTE, iStartIndex uint32, ppe []graphicsgdi.PALETTEENTRY) bool {
+	var _ppe *graphicsgdi.PALETTEENTRY
+	if len(ppe) > 0 {
+		_ppe = &ppe[0]
+	}
+	return graphicsgdi.AnimatePalette(hPal, iStartIndex, uint32(len(ppe)), _ppe) != 0
 }
 
 // Arc wraps the raw Arc call with idiomatic Go types.
@@ -189,6 +193,26 @@ func CreateMetaFile(pszFile string) graphicsgdi.HDC {
 	return graphicsgdi.CreateMetaFileW(foundation.PWSTR(_pszFile))
 }
 
+// CreatePolyPolygonRgn wraps the raw CreatePolyPolygonRgn call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createpolypolygonrgn
+func CreatePolyPolygonRgn(pptl *foundation.POINT, pc []int32, iMode graphicsgdi.CREATE_POLYGON_RGN_MODE) graphicsgdi.HRGN {
+	var _pc *int32
+	if len(pc) > 0 {
+		_pc = &pc[0]
+	}
+	return graphicsgdi.CreatePolyPolygonRgn(pptl, _pc, int32(len(pc)), iMode)
+}
+
+// CreatePolygonRgn wraps the raw CreatePolygonRgn call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createpolygonrgn
+func CreatePolygonRgn(pptl []foundation.POINT, iMode graphicsgdi.CREATE_POLYGON_RGN_MODE) graphicsgdi.HRGN {
+	var _pptl *foundation.POINT
+	if len(pptl) > 0 {
+		_pptl = &pptl[0]
+	}
+	return graphicsgdi.CreatePolygonRgn(_pptl, int32(len(pptl)), iMode)
+}
+
 // CreateScalableFontResource wraps the raw CreateScalableFontResourceW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createscalablefontresourcew
 func CreateScalableFontResource(fdwHidden uint32, lpszFont string, lpszFile string, lpszPath string) error {
@@ -200,8 +224,12 @@ func CreateScalableFontResource(fdwHidden uint32, lpszFont string, lpszFile stri
 
 // DPtoLP wraps the raw DPtoLP call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-dptolp
-func DPtoLP(hdc graphicsgdi.HDC, lppt *foundation.POINT, c int32) bool {
-	return graphicsgdi.DPtoLP(hdc, lppt, c) != 0
+func DPtoLP(hdc graphicsgdi.HDC, lppt []foundation.POINT) bool {
+	var _lppt *foundation.POINT
+	if len(lppt) > 0 {
+		_lppt = &lppt[0]
+	}
+	return graphicsgdi.DPtoLP(hdc, _lppt, int32(len(lppt))) != 0
 }
 
 // DeleteDC wraps the raw DeleteDC call with idiomatic Go types.
@@ -389,6 +417,16 @@ func EqualRgn(hrgn1 graphicsgdi.HRGN, hrgn2 graphicsgdi.HRGN) bool {
 	return graphicsgdi.EqualRgn(hrgn1, hrgn2) != 0
 }
 
+// ExtCreatePen wraps the raw ExtCreatePen call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-extcreatepen
+func ExtCreatePen(iPenStyle uint32, cWidth uint32, plbrush *graphicsgdi.LOGBRUSH, pstyle []uint32) graphicsgdi.HPEN {
+	var _pstyle *uint32
+	if len(pstyle) > 0 {
+		_pstyle = &pstyle[0]
+	}
+	return graphicsgdi.ExtCreatePen(iPenStyle, cWidth, plbrush, uint32(len(pstyle)), _pstyle)
+}
+
 // ExtFloodFill wraps the raw ExtFloodFill call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-extfloodfill
 func ExtFloodFill(hdc graphicsgdi.HDC, x int32, y int32, color foundation.COLORREF, type_ graphicsgdi.EXT_FLOOD_FILL_TYPE) bool {
@@ -457,8 +495,12 @@ func GdiFlush() bool {
 
 // GdiGradientFill wraps the raw GdiGradientFill call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gdigradientfill
-func GdiGradientFill(hdc graphicsgdi.HDC, pVertex *graphicsgdi.TRIVERTEX, nVertex uint32, pMesh unsafe.Pointer, nCount uint32, ulMode graphicsgdi.GRADIENT_FILL) bool {
-	return graphicsgdi.GdiGradientFill(hdc, pVertex, nVertex, pMesh, nCount, ulMode) != 0
+func GdiGradientFill(hdc graphicsgdi.HDC, pVertex []graphicsgdi.TRIVERTEX, pMesh unsafe.Pointer, nCount uint32, ulMode graphicsgdi.GRADIENT_FILL) bool {
+	var _pVertex *graphicsgdi.TRIVERTEX
+	if len(pVertex) > 0 {
+		_pVertex = &pVertex[0]
+	}
+	return graphicsgdi.GdiGradientFill(hdc, _pVertex, uint32(len(pVertex)), pMesh, nCount, ulMode) != 0
 }
 
 // GdiTransparentBlt wraps the raw GdiTransparentBlt call with idiomatic Go types.
@@ -582,6 +624,16 @@ func GetDCOrgEx(hdc graphicsgdi.HDC, lppt *foundation.POINT) bool {
 	return graphicsgdi.GetDCOrgEx(hdc, lppt) != 0
 }
 
+// GetDIBColorTable wraps the raw GetDIBColorTable call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getdibcolortable
+func GetDIBColorTable(hdc graphicsgdi.HDC, iStart uint32, prgbq []graphicsgdi.RGBQUAD) uint32 {
+	var _prgbq *graphicsgdi.RGBQUAD
+	if len(prgbq) > 0 {
+		_prgbq = &prgbq[0]
+	}
+	return graphicsgdi.GetDIBColorTable(hdc, iStart, uint32(len(prgbq)), _prgbq)
+}
+
 // GetEnhMetaFile wraps the raw GetEnhMetaFileW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafilew
 func GetEnhMetaFile(lpName string) graphicsgdi.HENHMETAFILE {
@@ -593,6 +645,16 @@ func GetEnhMetaFile(lpName string) graphicsgdi.HENHMETAFILE {
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafiledescriptionw
 func GetEnhMetaFileDescription(hemf graphicsgdi.HENHMETAFILE, cchBuffer uint32, lpDescription foundation.PWSTR) uint32 {
 	return graphicsgdi.GetEnhMetaFileDescriptionW(hemf, cchBuffer, lpDescription)
+}
+
+// GetEnhMetaFilePaletteEntries wraps the raw GetEnhMetaFilePaletteEntries call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafilepaletteentries
+func GetEnhMetaFilePaletteEntries(hemf graphicsgdi.HENHMETAFILE, lpPaletteEntries []graphicsgdi.PALETTEENTRY) uint32 {
+	var _lpPaletteEntries *graphicsgdi.PALETTEENTRY
+	if len(lpPaletteEntries) > 0 {
+		_lpPaletteEntries = &lpPaletteEntries[0]
+	}
+	return graphicsgdi.GetEnhMetaFilePaletteEntries(hemf, uint32(len(lpPaletteEntries)), _lpPaletteEntries)
 }
 
 // GetGlyphIndices wraps the raw GetGlyphIndicesW call with idiomatic Go types.
@@ -610,8 +672,22 @@ func GetGlyphOutline(hdc graphicsgdi.HDC, uChar uint32, fuFormat graphicsgdi.GET
 
 // GetKerningPairs wraps the raw GetKerningPairsW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getkerningpairsw
-func GetKerningPairs(hdc graphicsgdi.HDC, nPairs uint32, lpKernPair *graphicsgdi.KERNINGPAIR) uint32 {
-	return graphicsgdi.GetKerningPairsW(hdc, nPairs, lpKernPair)
+func GetKerningPairs(hdc graphicsgdi.HDC, lpKernPair []graphicsgdi.KERNINGPAIR) uint32 {
+	var _lpKernPair *graphicsgdi.KERNINGPAIR
+	if len(lpKernPair) > 0 {
+		_lpKernPair = &lpKernPair[0]
+	}
+	return graphicsgdi.GetKerningPairsW(hdc, uint32(len(lpKernPair)), _lpKernPair)
+}
+
+// GetKerningPairsA wraps the raw GetKerningPairsA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getkerningpairsa
+func GetKerningPairsA(hdc graphicsgdi.HDC, lpKernPair []graphicsgdi.KERNINGPAIR) uint32 {
+	var _lpKernPair *graphicsgdi.KERNINGPAIR
+	if len(lpKernPair) > 0 {
+		_lpKernPair = &lpKernPair[0]
+	}
+	return graphicsgdi.GetKerningPairsA(hdc, uint32(len(lpKernPair)), _lpKernPair)
 }
 
 // GetMetaFile wraps the raw GetMetaFileW call with idiomatic Go types.
@@ -651,17 +727,51 @@ func GetOutlineTextMetrics(hdc graphicsgdi.HDC, cjCopy uint32, potm *graphicsgdi
 	return graphicsgdi.GetOutlineTextMetricsW(hdc, cjCopy, potm)
 }
 
+// GetPaletteEntries wraps the raw GetPaletteEntries call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getpaletteentries
+func GetPaletteEntries(hpal graphicsgdi.HPALETTE, iStart uint32, pPalEntries []graphicsgdi.PALETTEENTRY) uint32 {
+	var _pPalEntries *graphicsgdi.PALETTEENTRY
+	if len(pPalEntries) > 0 {
+		_pPalEntries = &pPalEntries[0]
+	}
+	return graphicsgdi.GetPaletteEntries(hpal, iStart, uint32(len(pPalEntries)), _pPalEntries)
+}
+
 // GetRasterizerCaps wraps the raw GetRasterizerCaps call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getrasterizercaps
 func GetRasterizerCaps(lpraststat *graphicsgdi.RASTERIZER_STATUS, cjBytes uint32) bool {
 	return graphicsgdi.GetRasterizerCaps(lpraststat, cjBytes) != 0
 }
 
+// GetSystemPaletteEntries wraps the raw GetSystemPaletteEntries call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getsystempaletteentries
+func GetSystemPaletteEntries(hdc graphicsgdi.HDC, iStart uint32, pPalEntries []graphicsgdi.PALETTEENTRY) uint32 {
+	var _pPalEntries *graphicsgdi.PALETTEENTRY
+	if len(pPalEntries) > 0 {
+		_pPalEntries = &pPalEntries[0]
+	}
+	return graphicsgdi.GetSystemPaletteEntries(hdc, iStart, uint32(len(pPalEntries)), _pPalEntries)
+}
+
 // GetTabbedTextExtent wraps the raw GetTabbedTextExtentW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-gettabbedtextextentw
-func GetTabbedTextExtent(hdc graphicsgdi.HDC, lpString string, chCount int32, nTabPositions int32, lpnTabStopPositions *int32) uint32 {
+func GetTabbedTextExtent(hdc graphicsgdi.HDC, lpString string, chCount int32, lpnTabStopPositions []int32) uint32 {
 	_lpString := win32.UTF16Ptr(lpString)
-	return graphicsgdi.GetTabbedTextExtentW(hdc, foundation.PWSTR(_lpString), chCount, nTabPositions, lpnTabStopPositions)
+	var _lpnTabStopPositions *int32
+	if len(lpnTabStopPositions) > 0 {
+		_lpnTabStopPositions = &lpnTabStopPositions[0]
+	}
+	return graphicsgdi.GetTabbedTextExtentW(hdc, foundation.PWSTR(_lpString), chCount, int32(len(lpnTabStopPositions)), _lpnTabStopPositions)
+}
+
+// GetTabbedTextExtentA wraps the raw GetTabbedTextExtentA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-gettabbedtextextenta
+func GetTabbedTextExtentA(hdc graphicsgdi.HDC, lpString foundation.PSTR, chCount int32, lpnTabStopPositions []int32) uint32 {
+	var _lpnTabStopPositions *int32
+	if len(lpnTabStopPositions) > 0 {
+		_lpnTabStopPositions = &lpnTabStopPositions[0]
+	}
+	return graphicsgdi.GetTabbedTextExtentA(hdc, lpString, chCount, int32(len(lpnTabStopPositions)), _lpnTabStopPositions)
 }
 
 // GetTextExtentExPoint wraps the raw GetTextExtentExPointW call with idiomatic Go types.
@@ -711,8 +821,12 @@ func GetTextExtentPointA(hdc graphicsgdi.HDC, lpString foundation.PSTR, c int32,
 
 // GetTextExtentPointI wraps the raw GetTextExtentPointI call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentpointi
-func GetTextExtentPointI(hdc graphicsgdi.HDC, pgiIn *uint16, cgi int32, psize *foundation.SIZE) bool {
-	return graphicsgdi.GetTextExtentPointI(hdc, pgiIn, cgi, psize) != 0
+func GetTextExtentPointI(hdc graphicsgdi.HDC, pgiIn []uint16, psize *foundation.SIZE) bool {
+	var _pgiIn *uint16
+	if len(pgiIn) > 0 {
+		_pgiIn = &pgiIn[0]
+	}
+	return graphicsgdi.GetTextExtentPointI(hdc, _pgiIn, int32(len(pgiIn)), psize) != 0
 }
 
 // GetTextFace wraps the raw GetTextFaceW call with idiomatic Go types.
@@ -779,8 +893,12 @@ func GetWorldTransform(hdc graphicsgdi.HDC, lpxf *graphicsgdi.XFORM) bool {
 
 // GradientFill wraps the raw GradientFill call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gradientfill
-func GradientFill(hdc graphicsgdi.HDC, pVertex *graphicsgdi.TRIVERTEX, nVertex uint32, pMesh unsafe.Pointer, nMesh uint32, ulMode graphicsgdi.GRADIENT_FILL) bool {
-	return graphicsgdi.GradientFill(hdc, pVertex, nVertex, pMesh, nMesh, ulMode) != 0
+func GradientFill(hdc graphicsgdi.HDC, pVertex []graphicsgdi.TRIVERTEX, pMesh unsafe.Pointer, nMesh uint32, ulMode graphicsgdi.GRADIENT_FILL) bool {
+	var _pVertex *graphicsgdi.TRIVERTEX
+	if len(pVertex) > 0 {
+		_pVertex = &pVertex[0]
+	}
+	return graphicsgdi.GradientFill(hdc, _pVertex, uint32(len(pVertex)), pMesh, nMesh, ulMode) != 0
 }
 
 // GrayString wraps the raw GrayStringW call with idiomatic Go types.
@@ -841,8 +959,12 @@ func IsRectEmpty(lprc *foundation.RECT) bool {
 
 // LPtoDP wraps the raw LPtoDP call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-lptodp
-func LPtoDP(hdc graphicsgdi.HDC, lppt *foundation.POINT, c int32) bool {
-	return graphicsgdi.LPtoDP(hdc, lppt, c) != 0
+func LPtoDP(hdc graphicsgdi.HDC, lppt []foundation.POINT) bool {
+	var _lppt *foundation.POINT
+	if len(lppt) > 0 {
+		_lppt = &lppt[0]
+	}
+	return graphicsgdi.LPtoDP(hdc, _lppt, int32(len(lppt))) != 0
 }
 
 // LineDDA wraps the raw LineDDA call with idiomatic Go types.
@@ -868,6 +990,16 @@ func LoadBitmap(hInstance foundation.HINSTANCE, lpBitmapName string) graphicsgdi
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-lockwindowupdate
 func LockWindowUpdate(hWndLock foundation.HWND) bool {
 	return graphicsgdi.LockWindowUpdate(hWndLock) != 0
+}
+
+// MapWindowPoints wraps the raw MapWindowPoints call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mapwindowpoints
+func MapWindowPoints(hWndFrom foundation.HWND, hWndTo foundation.HWND, lpPoints []foundation.POINT) int32 {
+	var _lpPoints *foundation.POINT
+	if len(lpPoints) > 0 {
+		_lpPoints = &lpPoints[0]
+	}
+	return graphicsgdi.MapWindowPoints(hWndFrom, hWndTo, _lpPoints, uint32(len(lpPoints)))
 }
 
 // MaskBlt wraps the raw MaskBlt call with idiomatic Go types.
@@ -938,8 +1070,12 @@ func PlayEnhMetaFile(hdc graphicsgdi.HDC, hmf graphicsgdi.HENHMETAFILE, lprect *
 
 // PlayEnhMetaFileRecord wraps the raw PlayEnhMetaFileRecord call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-playenhmetafilerecord
-func PlayEnhMetaFileRecord(hdc graphicsgdi.HDC, pht *graphicsgdi.HANDLETABLE, pmr *graphicsgdi.ENHMETARECORD, cht uint32) bool {
-	return graphicsgdi.PlayEnhMetaFileRecord(hdc, pht, pmr, cht) != 0
+func PlayEnhMetaFileRecord(hdc graphicsgdi.HDC, pht []graphicsgdi.HANDLETABLE, pmr *graphicsgdi.ENHMETARECORD) bool {
+	var _pht *graphicsgdi.HANDLETABLE
+	if len(pht) > 0 {
+		_pht = &pht[0]
+	}
+	return graphicsgdi.PlayEnhMetaFileRecord(hdc, _pht, pmr, uint32(len(pht))) != 0
 }
 
 // PlayMetaFile wraps the raw PlayMetaFile call with idiomatic Go types.
@@ -950,8 +1086,12 @@ func PlayMetaFile(hdc graphicsgdi.HDC, hmf graphicsgdi.HMETAFILE) bool {
 
 // PlayMetaFileRecord wraps the raw PlayMetaFileRecord call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-playmetafilerecord
-func PlayMetaFileRecord(hdc graphicsgdi.HDC, lpHandleTable *graphicsgdi.HANDLETABLE, lpMR *graphicsgdi.METARECORD, noObjs uint32) bool {
-	return graphicsgdi.PlayMetaFileRecord(hdc, lpHandleTable, lpMR, noObjs) != 0
+func PlayMetaFileRecord(hdc graphicsgdi.HDC, lpHandleTable []graphicsgdi.HANDLETABLE, lpMR *graphicsgdi.METARECORD) bool {
+	var _lpHandleTable *graphicsgdi.HANDLETABLE
+	if len(lpHandleTable) > 0 {
+		_lpHandleTable = &lpHandleTable[0]
+	}
+	return graphicsgdi.PlayMetaFileRecord(hdc, _lpHandleTable, lpMR, uint32(len(lpHandleTable))) != 0
 }
 
 // PlgBlt wraps the raw PlgBlt call with idiomatic Go types.
@@ -962,14 +1102,22 @@ func PlgBlt(hdcDest graphicsgdi.HDC, lpPoint *foundation.POINT, hdcSrc graphicsg
 
 // PolyBezier wraps the raw PolyBezier call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polybezier
-func PolyBezier(hdc graphicsgdi.HDC, apt *foundation.POINT, cpt uint32) bool {
-	return graphicsgdi.PolyBezier(hdc, apt, cpt) != 0
+func PolyBezier(hdc graphicsgdi.HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	return graphicsgdi.PolyBezier(hdc, _apt, uint32(len(apt))) != 0
 }
 
 // PolyBezierTo wraps the raw PolyBezierTo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polybezierto
-func PolyBezierTo(hdc graphicsgdi.HDC, apt *foundation.POINT, cpt uint32) bool {
-	return graphicsgdi.PolyBezierTo(hdc, apt, cpt) != 0
+func PolyBezierTo(hdc graphicsgdi.HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	return graphicsgdi.PolyBezierTo(hdc, _apt, uint32(len(apt))) != 0
 }
 
 // PolyDraw wraps the raw PolyDraw call with idiomatic Go types.
@@ -980,44 +1128,72 @@ func PolyDraw(hdc graphicsgdi.HDC, apt *foundation.POINT, aj *byte, cpt int32) b
 
 // PolyPolygon wraps the raw PolyPolygon call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polypolygon
-func PolyPolygon(hdc graphicsgdi.HDC, apt *foundation.POINT, asz *int32, csz int32) bool {
-	return graphicsgdi.PolyPolygon(hdc, apt, asz, csz) != 0
+func PolyPolygon(hdc graphicsgdi.HDC, apt *foundation.POINT, asz []int32) bool {
+	var _asz *int32
+	if len(asz) > 0 {
+		_asz = &asz[0]
+	}
+	return graphicsgdi.PolyPolygon(hdc, apt, _asz, int32(len(asz))) != 0
 }
 
 // PolyPolyline wraps the raw PolyPolyline call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polypolyline
-func PolyPolyline(hdc graphicsgdi.HDC, apt *foundation.POINT, asz *uint32, csz uint32) bool {
-	return graphicsgdi.PolyPolyline(hdc, apt, asz, csz) != 0
+func PolyPolyline(hdc graphicsgdi.HDC, apt *foundation.POINT, asz []uint32) bool {
+	var _asz *uint32
+	if len(asz) > 0 {
+		_asz = &asz[0]
+	}
+	return graphicsgdi.PolyPolyline(hdc, apt, _asz, uint32(len(asz))) != 0
 }
 
 // PolyTextOut wraps the raw PolyTextOutW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polytextoutw
-func PolyTextOut(hdc graphicsgdi.HDC, ppt *graphicsgdi.POLYTEXTW, nstrings int32) bool {
-	return graphicsgdi.PolyTextOutW(hdc, ppt, nstrings) != 0
+func PolyTextOut(hdc graphicsgdi.HDC, ppt []graphicsgdi.POLYTEXTW) bool {
+	var _ppt *graphicsgdi.POLYTEXTW
+	if len(ppt) > 0 {
+		_ppt = &ppt[0]
+	}
+	return graphicsgdi.PolyTextOutW(hdc, _ppt, int32(len(ppt))) != 0
 }
 
 // PolyTextOutA wraps the raw PolyTextOutA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polytextouta
-func PolyTextOutA(hdc graphicsgdi.HDC, ppt *graphicsgdi.POLYTEXTA, nstrings int32) bool {
-	return graphicsgdi.PolyTextOutA(hdc, ppt, nstrings) != 0
+func PolyTextOutA(hdc graphicsgdi.HDC, ppt []graphicsgdi.POLYTEXTA) bool {
+	var _ppt *graphicsgdi.POLYTEXTA
+	if len(ppt) > 0 {
+		_ppt = &ppt[0]
+	}
+	return graphicsgdi.PolyTextOutA(hdc, _ppt, int32(len(ppt))) != 0
 }
 
 // Polygon wraps the raw Polygon call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polygon
-func Polygon(hdc graphicsgdi.HDC, apt *foundation.POINT, cpt int32) bool {
-	return graphicsgdi.Polygon(hdc, apt, cpt) != 0
+func Polygon(hdc graphicsgdi.HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	return graphicsgdi.Polygon(hdc, _apt, int32(len(apt))) != 0
 }
 
 // Polyline wraps the raw Polyline call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polyline
-func Polyline(hdc graphicsgdi.HDC, apt *foundation.POINT, cpt int32) bool {
-	return graphicsgdi.Polyline(hdc, apt, cpt) != 0
+func Polyline(hdc graphicsgdi.HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	return graphicsgdi.Polyline(hdc, _apt, int32(len(apt))) != 0
 }
 
 // PolylineTo wraps the raw PolylineTo call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polylineto
-func PolylineTo(hdc graphicsgdi.HDC, apt *foundation.POINT, cpt uint32) bool {
-	return graphicsgdi.PolylineTo(hdc, apt, cpt) != 0
+func PolylineTo(hdc graphicsgdi.HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	return graphicsgdi.PolylineTo(hdc, _apt, uint32(len(apt))) != 0
 }
 
 // PtInRegion wraps the raw PtInRegion call with idiomatic Go types.
@@ -1161,6 +1337,26 @@ func SetColorAdjustment(hdc graphicsgdi.HDC, lpca *graphicsgdi.COLORADJUSTMENT) 
 	return graphicsgdi.SetColorAdjustment(hdc, lpca) != 0
 }
 
+// SetDIBColorTable wraps the raw SetDIBColorTable call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setdibcolortable
+func SetDIBColorTable(hdc graphicsgdi.HDC, iStart uint32, prgbq []graphicsgdi.RGBQUAD) uint32 {
+	var _prgbq *graphicsgdi.RGBQUAD
+	if len(prgbq) > 0 {
+		_prgbq = &prgbq[0]
+	}
+	return graphicsgdi.SetDIBColorTable(hdc, iStart, uint32(len(prgbq)), _prgbq)
+}
+
+// SetPaletteEntries wraps the raw SetPaletteEntries call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setpaletteentries
+func SetPaletteEntries(hpal graphicsgdi.HPALETTE, iStart uint32, pPalEntries []graphicsgdi.PALETTEENTRY) uint32 {
+	var _pPalEntries *graphicsgdi.PALETTEENTRY
+	if len(pPalEntries) > 0 {
+		_pPalEntries = &pPalEntries[0]
+	}
+	return graphicsgdi.SetPaletteEntries(hpal, iStart, uint32(len(pPalEntries)), _pPalEntries)
+}
+
 // SetPixelV wraps the raw SetPixelV call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setpixelv
 func SetPixelV(hdc graphicsgdi.HDC, x int32, y int32, color foundation.COLORREF) bool {
@@ -1252,6 +1448,50 @@ func SubtractRect(lprcDst *foundation.RECT, lprcSrc1 *foundation.RECT, lprcSrc2 
 	return graphicsgdi.SubtractRect(lprcDst, lprcSrc1, lprcSrc2) != 0
 }
 
+// TTCharToUnicode wraps the raw TTCharToUnicode call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttchartounicode
+func TTCharToUnicode(hDC graphicsgdi.HDC, pucCharCodes []byte, pusShortCodes []uint16, ulFlags uint32) int32 {
+	var _pucCharCodes *byte
+	if len(pucCharCodes) > 0 {
+		_pucCharCodes = &pucCharCodes[0]
+	}
+	var _pusShortCodes *uint16
+	if len(pusShortCodes) > 0 {
+		_pusShortCodes = &pusShortCodes[0]
+	}
+	return graphicsgdi.TTCharToUnicode(hDC, _pucCharCodes, uint32(len(pucCharCodes)), _pusShortCodes, uint32(len(pusShortCodes)), ulFlags)
+}
+
+// TTEmbedFont wraps the raw TTEmbedFont call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttembedfont
+func TTEmbedFont(hDC graphicsgdi.HDC, ulFlags graphicsgdi.TTEMBED_FLAGS, ulCharSet graphicsgdi.EMBED_FONT_CHARSET, pulPrivStatus *graphicsgdi.EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream graphicsgdi.WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pusCharCodeSet []uint16, usLanguage uint16, pTTEmbedInfo *graphicsgdi.TTEMBEDINFO) int32 {
+	var _pusCharCodeSet *uint16
+	if len(pusCharCodeSet) > 0 {
+		_pusCharCodeSet = &pusCharCodeSet[0]
+	}
+	return graphicsgdi.TTEmbedFont(hDC, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, _pusCharCodeSet, uint16(len(pusCharCodeSet)), usLanguage, pTTEmbedInfo)
+}
+
+// TTEmbedFontEx wraps the raw TTEmbedFontEx call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttembedfontex
+func TTEmbedFontEx(hDC graphicsgdi.HDC, ulFlags graphicsgdi.TTEMBED_FLAGS, ulCharSet graphicsgdi.EMBED_FONT_CHARSET, pulPrivStatus *graphicsgdi.EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream graphicsgdi.WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pulCharCodeSet []uint32, usLanguage uint16, pTTEmbedInfo *graphicsgdi.TTEMBEDINFO) int32 {
+	var _pulCharCodeSet *uint32
+	if len(pulCharCodeSet) > 0 {
+		_pulCharCodeSet = &pulCharCodeSet[0]
+	}
+	return graphicsgdi.TTEmbedFontEx(hDC, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, _pulCharCodeSet, uint16(len(pulCharCodeSet)), usLanguage, pTTEmbedInfo)
+}
+
+// TTEmbedFontFromFileA wraps the raw TTEmbedFontFromFileA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttembedfontfromfilea
+func TTEmbedFontFromFileA(hDC graphicsgdi.HDC, szFontFileName foundation.PSTR, usTTCIndex uint16, ulFlags graphicsgdi.TTEMBED_FLAGS, ulCharSet graphicsgdi.EMBED_FONT_CHARSET, pulPrivStatus *graphicsgdi.EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream graphicsgdi.WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pusCharCodeSet []uint16, usLanguage uint16, pTTEmbedInfo *graphicsgdi.TTEMBEDINFO) int32 {
+	var _pusCharCodeSet *uint16
+	if len(pusCharCodeSet) > 0 {
+		_pusCharCodeSet = &pusCharCodeSet[0]
+	}
+	return graphicsgdi.TTEmbedFontFromFileA(hDC, szFontFileName, usTTCIndex, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, _pusCharCodeSet, uint16(len(pusCharCodeSet)), usLanguage, pTTEmbedInfo)
+}
+
 // TTEnableEmbeddingForFacename wraps the raw TTEnableEmbeddingForFacename call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttenableembeddingforfacename
 func TTEnableEmbeddingForFacename(lpszFacename foundation.PSTR, bEnable bool) int32 {
@@ -1268,9 +1508,23 @@ func TTLoadEmbeddedFont(phFontReference *foundation.HANDLE, ulFlags uint32, pulP
 
 // TabbedTextOut wraps the raw TabbedTextOutW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tabbedtextoutw
-func TabbedTextOut(hdc graphicsgdi.HDC, x int32, y int32, lpString string, chCount int32, nTabPositions int32, lpnTabStopPositions *int32, nTabOrigin int32) int32 {
+func TabbedTextOut(hdc graphicsgdi.HDC, x int32, y int32, lpString string, chCount int32, lpnTabStopPositions []int32, nTabOrigin int32) int32 {
 	_lpString := win32.UTF16Ptr(lpString)
-	return graphicsgdi.TabbedTextOutW(hdc, x, y, foundation.PWSTR(_lpString), chCount, nTabPositions, lpnTabStopPositions, nTabOrigin)
+	var _lpnTabStopPositions *int32
+	if len(lpnTabStopPositions) > 0 {
+		_lpnTabStopPositions = &lpnTabStopPositions[0]
+	}
+	return graphicsgdi.TabbedTextOutW(hdc, x, y, foundation.PWSTR(_lpString), chCount, int32(len(lpnTabStopPositions)), _lpnTabStopPositions, nTabOrigin)
+}
+
+// TabbedTextOutA wraps the raw TabbedTextOutA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tabbedtextouta
+func TabbedTextOutA(hdc graphicsgdi.HDC, x int32, y int32, lpString foundation.PSTR, chCount int32, lpnTabStopPositions []int32, nTabOrigin int32) int32 {
+	var _lpnTabStopPositions *int32
+	if len(lpnTabStopPositions) > 0 {
+		_lpnTabStopPositions = &lpnTabStopPositions[0]
+	}
+	return graphicsgdi.TabbedTextOutA(hdc, x, y, lpString, chCount, int32(len(lpnTabStopPositions)), _lpnTabStopPositions, nTabOrigin)
 }
 
 // TextOut wraps the raw TextOutW call with idiomatic Go types.

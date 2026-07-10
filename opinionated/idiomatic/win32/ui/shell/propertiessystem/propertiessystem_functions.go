@@ -30,8 +30,12 @@ func PSCreateAdapterFromPropertyStore(pps *uishellpropertiessystem.IPropertyStor
 
 // PSCreateDelayedMultiplexPropertyStore wraps the raw PSCreateDelayedMultiplexPropertyStore call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatedelayedmultiplexpropertystore
-func PSCreateDelayedMultiplexPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, pdpsf *uishellpropertiessystem.IDelayedPropertyStoreFactory, rgStoreIds *uint32, cStores uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreateDelayedMultiplexPropertyStore(flags, pdpsf, rgStoreIds, cStores, riid, ppv)))
+func PSCreateDelayedMultiplexPropertyStore(flags uishellpropertiessystem.GETPROPERTYSTOREFLAGS, pdpsf *uishellpropertiessystem.IDelayedPropertyStoreFactory, rgStoreIds []uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	var _rgStoreIds *uint32
+	if len(rgStoreIds) > 0 {
+		_rgStoreIds = &rgStoreIds[0]
+	}
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreateDelayedMultiplexPropertyStore(flags, pdpsf, _rgStoreIds, uint32(len(rgStoreIds)), riid, ppv)))
 }
 
 // PSCreateMemoryPropertyStore wraps the raw PSCreateMemoryPropertyStore call with idiomatic Go types.
@@ -42,8 +46,12 @@ func PSCreateMemoryPropertyStore(riid *win32.GUID, ppv *unsafe.Pointer) error {
 
 // PSCreateMultiplexPropertyStore wraps the raw PSCreateMultiplexPropertyStore call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatemultiplexpropertystore
-func PSCreateMultiplexPropertyStore(prgpunkStores **systemcom.IUnknown, cStores uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreateMultiplexPropertyStore(prgpunkStores, cStores, riid, ppv)))
+func PSCreateMultiplexPropertyStore(prgpunkStores []*systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	var _prgpunkStores **systemcom.IUnknown
+	if len(prgpunkStores) > 0 {
+		_prgpunkStores = &prgpunkStores[0]
+	}
+	return win32.HRESULTError(int32(uishellpropertiessystem.PSCreateMultiplexPropertyStore(_prgpunkStores, uint32(len(prgpunkStores)), riid, ppv)))
 }
 
 // PSCreatePropertyChangeArray wraps the raw PSCreatePropertyChangeArray call with idiomatic Go types.

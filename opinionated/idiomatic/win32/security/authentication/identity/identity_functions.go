@@ -67,6 +67,26 @@ func ApplyControlToken(phContext *securitycredentials.SecHandle, pInput *securit
 	return win32.HRESULTError(int32(securityauthenticationidentity.ApplyControlToken(phContext, pInput)))
 }
 
+// AuditComputeEffectivePolicyBySid wraps the raw AuditComputeEffectivePolicyBySid call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-auditcomputeeffectivepolicybysid
+func AuditComputeEffectivePolicyBySid(pSid security.PSID, pSubCategoryGuids []win32.GUID, ppAuditPolicy **securityauthenticationidentity.AUDIT_POLICY_INFORMATION) (foundation.BOOLEAN, error) {
+	var _pSubCategoryGuids *win32.GUID
+	if len(pSubCategoryGuids) > 0 {
+		_pSubCategoryGuids = &pSubCategoryGuids[0]
+	}
+	return securityauthenticationidentity.AuditComputeEffectivePolicyBySid(pSid, _pSubCategoryGuids, uint32(len(pSubCategoryGuids)), ppAuditPolicy)
+}
+
+// AuditComputeEffectivePolicyByToken wraps the raw AuditComputeEffectivePolicyByToken call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-auditcomputeeffectivepolicybytoken
+func AuditComputeEffectivePolicyByToken(hTokenHandle foundation.HANDLE, pSubCategoryGuids []win32.GUID, ppAuditPolicy **securityauthenticationidentity.AUDIT_POLICY_INFORMATION) (foundation.BOOLEAN, error) {
+	var _pSubCategoryGuids *win32.GUID
+	if len(pSubCategoryGuids) > 0 {
+		_pSubCategoryGuids = &pSubCategoryGuids[0]
+	}
+	return securityauthenticationidentity.AuditComputeEffectivePolicyByToken(hTokenHandle, _pSubCategoryGuids, uint32(len(pSubCategoryGuids)), ppAuditPolicy)
+}
+
 // AuditLookupCategoryName wraps the raw AuditLookupCategoryNameW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-auditlookupcategorynamew
 func AuditLookupCategoryName(pAuditCategoryGuid *win32.GUID, ppszCategoryName *foundation.PWSTR) (foundation.BOOLEAN, error) {
@@ -86,11 +106,51 @@ func AuditQueryGlobalSacl(ObjectTypeName string, Acl **security.ACL) (foundation
 	return securityauthenticationidentity.AuditQueryGlobalSaclW(foundation.PWSTR(_ObjectTypeName), Acl)
 }
 
+// AuditQueryPerUserPolicy wraps the raw AuditQueryPerUserPolicy call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-auditqueryperuserpolicy
+func AuditQueryPerUserPolicy(pSid security.PSID, pSubCategoryGuids []win32.GUID, ppAuditPolicy **securityauthenticationidentity.AUDIT_POLICY_INFORMATION) (foundation.BOOLEAN, error) {
+	var _pSubCategoryGuids *win32.GUID
+	if len(pSubCategoryGuids) > 0 {
+		_pSubCategoryGuids = &pSubCategoryGuids[0]
+	}
+	return securityauthenticationidentity.AuditQueryPerUserPolicy(pSid, _pSubCategoryGuids, uint32(len(pSubCategoryGuids)), ppAuditPolicy)
+}
+
+// AuditQuerySystemPolicy wraps the raw AuditQuerySystemPolicy call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-auditquerysystempolicy
+func AuditQuerySystemPolicy(pSubCategoryGuids []win32.GUID, ppAuditPolicy **securityauthenticationidentity.AUDIT_POLICY_INFORMATION) (foundation.BOOLEAN, error) {
+	var _pSubCategoryGuids *win32.GUID
+	if len(pSubCategoryGuids) > 0 {
+		_pSubCategoryGuids = &pSubCategoryGuids[0]
+	}
+	return securityauthenticationidentity.AuditQuerySystemPolicy(_pSubCategoryGuids, uint32(len(pSubCategoryGuids)), ppAuditPolicy)
+}
+
 // AuditSetGlobalSacl wraps the raw AuditSetGlobalSaclW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-auditsetglobalsaclw
 func AuditSetGlobalSacl(ObjectTypeName string, Acl *security.ACL) (foundation.BOOLEAN, error) {
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
 	return securityauthenticationidentity.AuditSetGlobalSaclW(foundation.PWSTR(_ObjectTypeName), Acl)
+}
+
+// AuditSetPerUserPolicy wraps the raw AuditSetPerUserPolicy call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-auditsetperuserpolicy
+func AuditSetPerUserPolicy(pSid security.PSID, pAuditPolicy []securityauthenticationidentity.AUDIT_POLICY_INFORMATION) (foundation.BOOLEAN, error) {
+	var _pAuditPolicy *securityauthenticationidentity.AUDIT_POLICY_INFORMATION
+	if len(pAuditPolicy) > 0 {
+		_pAuditPolicy = &pAuditPolicy[0]
+	}
+	return securityauthenticationidentity.AuditSetPerUserPolicy(pSid, _pAuditPolicy, uint32(len(pAuditPolicy)))
+}
+
+// AuditSetSystemPolicy wraps the raw AuditSetSystemPolicy call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-auditsetsystempolicy
+func AuditSetSystemPolicy(pAuditPolicy []securityauthenticationidentity.AUDIT_POLICY_INFORMATION) (foundation.BOOLEAN, error) {
+	var _pAuditPolicy *securityauthenticationidentity.AUDIT_POLICY_INFORMATION
+	if len(pAuditPolicy) > 0 {
+		_pAuditPolicy = &pAuditPolicy[0]
+	}
+	return securityauthenticationidentity.AuditSetSystemPolicy(_pAuditPolicy, uint32(len(pAuditPolicy)))
 }
 
 // ChangeAccountPassword wraps the raw ChangeAccountPasswordW call with idiomatic Go types.
@@ -219,6 +279,45 @@ func InitializeSecurityContext(phCredential *securitycredentials.SecHandle, phCo
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-initializesecuritycontexta
 func InitializeSecurityContextA(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName *int8, fContextReq securityauthenticationidentity.ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *securityauthenticationidentity.SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *securityauthenticationidentity.SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
 	return win32.HRESULTError(int32(securityauthenticationidentity.InitializeSecurityContextA(phCredential, phContext, pszTargetName, fContextReq, Reserved1, TargetDataRep, pInput, Reserved2, phNewContext, pOutput, pfContextAttr, ptsExpiry)))
+}
+
+// LsaAddAccountRights wraps the raw LsaAddAccountRights call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-lsaaddaccountrights
+func LsaAddAccountRights(PolicyHandle securityauthenticationidentity.LSA_HANDLE, AccountSid security.PSID, UserRights []securityauthenticationidentity.LSA_UNICODE_STRING) foundation.NTSTATUS {
+	var _UserRights *securityauthenticationidentity.LSA_UNICODE_STRING
+	if len(UserRights) > 0 {
+		_UserRights = &UserRights[0]
+	}
+	return securityauthenticationidentity.LsaAddAccountRights(PolicyHandle, AccountSid, _UserRights, uint32(len(UserRights)))
+}
+
+// LsaQueryCAPs wraps the raw LsaQueryCAPs call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntlsa/nf-ntlsa-lsaquerycaps
+func LsaQueryCAPs(CAPIDs []security.PSID, CAPs **securityauthenticationidentity.CENTRAL_ACCESS_POLICY, CAPCount *uint32) foundation.NTSTATUS {
+	var _CAPIDs *security.PSID
+	if len(CAPIDs) > 0 {
+		_CAPIDs = &CAPIDs[0]
+	}
+	return securityauthenticationidentity.LsaQueryCAPs(_CAPIDs, uint32(len(CAPIDs)), CAPs, CAPCount)
+}
+
+// LsaRemoveAccountRights wraps the raw LsaRemoveAccountRights call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-lsaremoveaccountrights
+func LsaRemoveAccountRights(PolicyHandle securityauthenticationidentity.LSA_HANDLE, AccountSid security.PSID, AllRights foundation.BOOLEAN, UserRights []securityauthenticationidentity.LSA_UNICODE_STRING) foundation.NTSTATUS {
+	var _UserRights *securityauthenticationidentity.LSA_UNICODE_STRING
+	if len(UserRights) > 0 {
+		_UserRights = &UserRights[0]
+	}
+	return securityauthenticationidentity.LsaRemoveAccountRights(PolicyHandle, AccountSid, AllRights, _UserRights, uint32(len(UserRights)))
+}
+
+// LsaSetCAPs wraps the raw LsaSetCAPs call with idiomatic Go types.
+func LsaSetCAPs(CAPDNs []securityauthenticationidentity.LSA_UNICODE_STRING, Flags uint32) foundation.NTSTATUS {
+	var _CAPDNs *securityauthenticationidentity.LSA_UNICODE_STRING
+	if len(CAPDNs) > 0 {
+		_CAPDNs = &CAPDNs[0]
+	}
+	return securityauthenticationidentity.LsaSetCAPs(_CAPDNs, uint32(len(CAPDNs)), Flags)
 }
 
 // MakeSignature wraps the raw MakeSignature call with idiomatic Go types.
@@ -691,8 +790,16 @@ func SslEmptyCacheA(pszTargetName foundation.PSTR, dwFlags uint32) bool {
 }
 
 // SslGetExtensions wraps the raw SslGetExtensions call with idiomatic Go types.
-func SslGetExtensions(clientHello *byte, clientHelloByteSize uint32, genericExtensions *securityauthenticationidentity.SCH_EXTENSION_DATA, genericExtensionsCount byte, bytesToRead *uint32, flags securityauthenticationidentity.SchGetExtensionsOptions) error {
-	return win32.HRESULTError(int32(securityauthenticationidentity.SslGetExtensions(clientHello, clientHelloByteSize, genericExtensions, genericExtensionsCount, bytesToRead, flags)))
+func SslGetExtensions(clientHello []byte, genericExtensions []securityauthenticationidentity.SCH_EXTENSION_DATA, bytesToRead *uint32, flags securityauthenticationidentity.SchGetExtensionsOptions) error {
+	var _clientHello *byte
+	if len(clientHello) > 0 {
+		_clientHello = &clientHello[0]
+	}
+	var _genericExtensions *securityauthenticationidentity.SCH_EXTENSION_DATA
+	if len(genericExtensions) > 0 {
+		_genericExtensions = &genericExtensions[0]
+	}
+	return win32.HRESULTError(int32(securityauthenticationidentity.SslGetExtensions(_clientHello, uint32(len(clientHello)), _genericExtensions, byte(len(genericExtensions)), bytesToRead, flags)))
 }
 
 // SslGetServerIdentity wraps the raw SslGetServerIdentity call with idiomatic Go types.

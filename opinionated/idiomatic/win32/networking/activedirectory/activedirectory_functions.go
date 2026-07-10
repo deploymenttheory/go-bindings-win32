@@ -33,8 +33,12 @@ func ADsBuildVarArrayInt(lpdwObjectTypes *uint32, dwObjectTypes uint32, pVar *sy
 
 // ADsBuildVarArrayStr wraps the raw ADsBuildVarArrayStr call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-adsbuildvararraystr
-func ADsBuildVarArrayStr(lppPathNames *foundation.PWSTR, dwPathNames uint32, pVar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(networkingactivedirectory.ADsBuildVarArrayStr(lppPathNames, dwPathNames, pVar)))
+func ADsBuildVarArrayStr(lppPathNames []foundation.PWSTR, pVar *systemvariant.VARIANT) error {
+	var _lppPathNames *foundation.PWSTR
+	if len(lppPathNames) > 0 {
+		_lppPathNames = &lppPathNames[0]
+	}
+	return win32.HRESULTError(int32(networkingactivedirectory.ADsBuildVarArrayStr(_lppPathNames, uint32(len(lppPathNames)), pVar)))
 }
 
 // ADsDecodeBinaryData wraps the raw ADsDecodeBinaryData call with idiomatic Go types.
@@ -169,16 +173,44 @@ func DsAddSidHistoryA(hDS foundation.HANDLE, SrcDomain foundation.PSTR, SrcPrinc
 
 // DsAddressToSiteNames wraps the raw DsAddressToSiteNamesW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsaddresstositenamesw
-func DsAddressToSiteNames(ComputerName string, EntryCount uint32, SocketAddresses *networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PWSTR) uint32 {
+func DsAddressToSiteNames(ComputerName string, SocketAddresses []networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PWSTR) uint32 {
 	_ComputerName := win32.UTF16Ptr(ComputerName)
-	return networkingactivedirectory.DsAddressToSiteNamesW(foundation.PWSTR(_ComputerName), EntryCount, SocketAddresses, SiteNames)
+	var _SocketAddresses *networkingwinsock.SOCKET_ADDRESS
+	if len(SocketAddresses) > 0 {
+		_SocketAddresses = &SocketAddresses[0]
+	}
+	return networkingactivedirectory.DsAddressToSiteNamesW(foundation.PWSTR(_ComputerName), uint32(len(SocketAddresses)), _SocketAddresses, SiteNames)
+}
+
+// DsAddressToSiteNamesA wraps the raw DsAddressToSiteNamesA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsaddresstositenamesa
+func DsAddressToSiteNamesA(ComputerName foundation.PSTR, SocketAddresses []networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PSTR) uint32 {
+	var _SocketAddresses *networkingwinsock.SOCKET_ADDRESS
+	if len(SocketAddresses) > 0 {
+		_SocketAddresses = &SocketAddresses[0]
+	}
+	return networkingactivedirectory.DsAddressToSiteNamesA(ComputerName, uint32(len(SocketAddresses)), _SocketAddresses, SiteNames)
 }
 
 // DsAddressToSiteNamesEx wraps the raw DsAddressToSiteNamesExW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsaddresstositenamesexw
-func DsAddressToSiteNamesEx(ComputerName string, EntryCount uint32, SocketAddresses *networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PWSTR, SubnetNames **foundation.PWSTR) uint32 {
+func DsAddressToSiteNamesEx(ComputerName string, SocketAddresses []networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PWSTR, SubnetNames **foundation.PWSTR) uint32 {
 	_ComputerName := win32.UTF16Ptr(ComputerName)
-	return networkingactivedirectory.DsAddressToSiteNamesExW(foundation.PWSTR(_ComputerName), EntryCount, SocketAddresses, SiteNames, SubnetNames)
+	var _SocketAddresses *networkingwinsock.SOCKET_ADDRESS
+	if len(SocketAddresses) > 0 {
+		_SocketAddresses = &SocketAddresses[0]
+	}
+	return networkingactivedirectory.DsAddressToSiteNamesExW(foundation.PWSTR(_ComputerName), uint32(len(SocketAddresses)), _SocketAddresses, SiteNames, SubnetNames)
+}
+
+// DsAddressToSiteNamesExA wraps the raw DsAddressToSiteNamesExA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsaddresstositenamesexa
+func DsAddressToSiteNamesExA(ComputerName foundation.PSTR, SocketAddresses []networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PSTR, SubnetNames **foundation.PSTR) uint32 {
+	var _SocketAddresses *networkingwinsock.SOCKET_ADDRESS
+	if len(SocketAddresses) > 0 {
+		_SocketAddresses = &SocketAddresses[0]
+	}
+	return networkingactivedirectory.DsAddressToSiteNamesExA(ComputerName, uint32(len(SocketAddresses)), _SocketAddresses, SiteNames, SubnetNames)
 }
 
 // DsBind wraps the raw DsBindW call with idiomatic Go types.
@@ -248,8 +280,22 @@ func DsClientMakeSpnForTargetServer(ServiceClass string, ServiceName string, pcS
 
 // DsCrackNames wraps the raw DsCrackNamesW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dscracknamesw
-func DsCrackNames(hDS foundation.HANDLE, flags networkingactivedirectory.DS_NAME_FLAGS, formatOffered networkingactivedirectory.DS_NAME_FORMAT, formatDesired networkingactivedirectory.DS_NAME_FORMAT, cNames uint32, rpNames *foundation.PWSTR, ppResult **networkingactivedirectory.DS_NAME_RESULTW) uint32 {
-	return networkingactivedirectory.DsCrackNamesW(hDS, flags, formatOffered, formatDesired, cNames, rpNames, ppResult)
+func DsCrackNames(hDS foundation.HANDLE, flags networkingactivedirectory.DS_NAME_FLAGS, formatOffered networkingactivedirectory.DS_NAME_FORMAT, formatDesired networkingactivedirectory.DS_NAME_FORMAT, rpNames []foundation.PWSTR, ppResult **networkingactivedirectory.DS_NAME_RESULTW) uint32 {
+	var _rpNames *foundation.PWSTR
+	if len(rpNames) > 0 {
+		_rpNames = &rpNames[0]
+	}
+	return networkingactivedirectory.DsCrackNamesW(hDS, flags, formatOffered, formatDesired, uint32(len(rpNames)), _rpNames, ppResult)
+}
+
+// DsCrackNamesA wraps the raw DsCrackNamesA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dscracknamesa
+func DsCrackNamesA(hDS foundation.HANDLE, flags networkingactivedirectory.DS_NAME_FLAGS, formatOffered networkingactivedirectory.DS_NAME_FORMAT, formatDesired networkingactivedirectory.DS_NAME_FORMAT, rpNames []foundation.PSTR, ppResult **networkingactivedirectory.DS_NAME_RESULTA) uint32 {
+	var _rpNames *foundation.PSTR
+	if len(rpNames) > 0 {
+		_rpNames = &rpNames[0]
+	}
+	return networkingactivedirectory.DsCrackNamesA(hDS, flags, formatOffered, formatDesired, uint32(len(rpNames)), _rpNames, ppResult)
 }
 
 // DsCrackSpn wraps the raw DsCrackSpnW call with idiomatic Go types.
@@ -326,8 +372,22 @@ func DsFreeSchemaGuidMap(pGuidMap *networkingactivedirectory.DS_SCHEMA_GUID_MAPW
 
 // DsFreeSpnArray wraps the raw DsFreeSpnArrayW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsfreespnarrayw
-func DsFreeSpnArray(cSpn uint32, rpszSpn *foundation.PWSTR) {
-	networkingactivedirectory.DsFreeSpnArrayW(cSpn, rpszSpn)
+func DsFreeSpnArray(rpszSpn []foundation.PWSTR) {
+	var _rpszSpn *foundation.PWSTR
+	if len(rpszSpn) > 0 {
+		_rpszSpn = &rpszSpn[0]
+	}
+	networkingactivedirectory.DsFreeSpnArrayW(uint32(len(rpszSpn)), _rpszSpn)
+}
+
+// DsFreeSpnArrayA wraps the raw DsFreeSpnArrayA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsfreespnarraya
+func DsFreeSpnArrayA(rpszSpn []foundation.PSTR) {
+	var _rpszSpn *foundation.PSTR
+	if len(rpszSpn) > 0 {
+		_rpszSpn = &rpszSpn[0]
+	}
+	networkingactivedirectory.DsFreeSpnArrayA(uint32(len(rpszSpn)), _rpszSpn)
 }
 
 // DsGetDcName wraps the raw DsGetDcNameW call with idiomatic Go types.
@@ -507,8 +567,22 @@ func DsMakeSpn(ServiceClass string, ServiceName string, InstanceName string, Ins
 
 // DsMapSchemaGuids wraps the raw DsMapSchemaGuidsW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsmapschemaguidsw
-func DsMapSchemaGuids(hDs foundation.HANDLE, cGuids uint32, rGuids *win32.GUID, ppGuidMap **networkingactivedirectory.DS_SCHEMA_GUID_MAPW) uint32 {
-	return networkingactivedirectory.DsMapSchemaGuidsW(hDs, cGuids, rGuids, ppGuidMap)
+func DsMapSchemaGuids(hDs foundation.HANDLE, rGuids []win32.GUID, ppGuidMap **networkingactivedirectory.DS_SCHEMA_GUID_MAPW) uint32 {
+	var _rGuids *win32.GUID
+	if len(rGuids) > 0 {
+		_rGuids = &rGuids[0]
+	}
+	return networkingactivedirectory.DsMapSchemaGuidsW(hDs, uint32(len(rGuids)), _rGuids, ppGuidMap)
+}
+
+// DsMapSchemaGuidsA wraps the raw DsMapSchemaGuidsA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsmapschemaguidsa
+func DsMapSchemaGuidsA(hDs foundation.HANDLE, rGuids []win32.GUID, ppGuidMap **networkingactivedirectory.DS_SCHEMA_GUID_MAPA) uint32 {
+	var _rGuids *win32.GUID
+	if len(rGuids) > 0 {
+		_rGuids = &rGuids[0]
+	}
+	return networkingactivedirectory.DsMapSchemaGuidsA(hDs, uint32(len(rGuids)), _rGuids, ppGuidMap)
 }
 
 // DsMergeForestTrustInformationW wraps the raw DsMergeForestTrustInformationW call with idiomatic Go types.
@@ -520,15 +594,23 @@ func DsMergeForestTrustInformationW(DomainName string, NewForestTrustInfo *secur
 
 // DsQuerySitesByCost wraps the raw DsQuerySitesByCostW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsquerysitesbycostw
-func DsQuerySitesByCost(hDS foundation.HANDLE, pwszFromSite string, rgwszToSites *foundation.PWSTR, cToSites uint32, prgSiteInfo **networkingactivedirectory.DS_SITE_COST_INFO) uint32 {
+func DsQuerySitesByCost(hDS foundation.HANDLE, pwszFromSite string, rgwszToSites []foundation.PWSTR, prgSiteInfo **networkingactivedirectory.DS_SITE_COST_INFO) uint32 {
 	_pwszFromSite := win32.UTF16Ptr(pwszFromSite)
-	return networkingactivedirectory.DsQuerySitesByCostW(hDS, foundation.PWSTR(_pwszFromSite), rgwszToSites, cToSites, 0, prgSiteInfo)
+	var _rgwszToSites *foundation.PWSTR
+	if len(rgwszToSites) > 0 {
+		_rgwszToSites = &rgwszToSites[0]
+	}
+	return networkingactivedirectory.DsQuerySitesByCostW(hDS, foundation.PWSTR(_pwszFromSite), _rgwszToSites, uint32(len(rgwszToSites)), 0, prgSiteInfo)
 }
 
 // DsQuerySitesByCostA wraps the raw DsQuerySitesByCostA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsquerysitesbycosta
-func DsQuerySitesByCostA(hDS foundation.HANDLE, pszFromSite foundation.PSTR, rgszToSites *foundation.PSTR, cToSites uint32, prgSiteInfo **networkingactivedirectory.DS_SITE_COST_INFO) uint32 {
-	return networkingactivedirectory.DsQuerySitesByCostA(hDS, pszFromSite, rgszToSites, cToSites, 0, prgSiteInfo)
+func DsQuerySitesByCostA(hDS foundation.HANDLE, pszFromSite foundation.PSTR, rgszToSites []foundation.PSTR, prgSiteInfo **networkingactivedirectory.DS_SITE_COST_INFO) uint32 {
+	var _rgszToSites *foundation.PSTR
+	if len(rgszToSites) > 0 {
+		_rgszToSites = &rgszToSites[0]
+	}
+	return networkingactivedirectory.DsQuerySitesByCostA(hDS, pszFromSite, _rgszToSites, uint32(len(rgszToSites)), 0, prgSiteInfo)
 }
 
 // DsQuoteRdnValue wraps the raw DsQuoteRdnValueW call with idiomatic Go types.
@@ -675,9 +757,23 @@ func DsValidateSubnetName(SubnetName string) uint32 {
 
 // DsWriteAccountSpn wraps the raw DsWriteAccountSpnW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dswriteaccountspnw
-func DsWriteAccountSpn(hDS foundation.HANDLE, Operation networkingactivedirectory.DS_SPN_WRITE_OP, pszAccount string, cSpn uint32, rpszSpn *foundation.PWSTR) uint32 {
+func DsWriteAccountSpn(hDS foundation.HANDLE, Operation networkingactivedirectory.DS_SPN_WRITE_OP, pszAccount string, rpszSpn []foundation.PWSTR) uint32 {
 	_pszAccount := win32.UTF16Ptr(pszAccount)
-	return networkingactivedirectory.DsWriteAccountSpnW(hDS, Operation, foundation.PWSTR(_pszAccount), cSpn, rpszSpn)
+	var _rpszSpn *foundation.PWSTR
+	if len(rpszSpn) > 0 {
+		_rpszSpn = &rpszSpn[0]
+	}
+	return networkingactivedirectory.DsWriteAccountSpnW(hDS, Operation, foundation.PWSTR(_pszAccount), uint32(len(rpszSpn)), _rpszSpn)
+}
+
+// DsWriteAccountSpnA wraps the raw DsWriteAccountSpnA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dswriteaccountspna
+func DsWriteAccountSpnA(hDS foundation.HANDLE, Operation networkingactivedirectory.DS_SPN_WRITE_OP, pszAccount foundation.PSTR, rpszSpn []foundation.PSTR) uint32 {
+	var _rpszSpn *foundation.PSTR
+	if len(rpszSpn) > 0 {
+		_rpszSpn = &rpszSpn[0]
+	}
+	return networkingactivedirectory.DsWriteAccountSpnA(hDS, Operation, pszAccount, uint32(len(rpszSpn)), _rpszSpn)
 }
 
 // FreeADsMem wraps the raw FreeADsMem call with idiomatic Go types.

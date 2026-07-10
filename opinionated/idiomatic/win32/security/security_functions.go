@@ -29,21 +29,39 @@ func AccessCheckAndAuditAlarmA(SubsystemName foundation.PSTR, HandleId unsafe.Po
 	return security.AccessCheckAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, DesiredAccess, GenericMapping, _ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)
 }
 
+// AccessCheckByType wraps the raw AccessCheckByType call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckbytype
+func AccessCheckByType(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, PrincipalSelfSid security.PSID, ClientToken foundation.HANDLE, DesiredAccess uint32, ObjectTypeList []security.OBJECT_TYPE_LIST, GenericMapping *security.GENERIC_MAPPING, PrivilegeSet *security.PRIVILEGE_SET, PrivilegeSetLength *uint32, GrantedAccess *uint32, AccessStatus *foundation.BOOL) error {
+	var _ObjectTypeList *security.OBJECT_TYPE_LIST
+	if len(ObjectTypeList) > 0 {
+		_ObjectTypeList = &ObjectTypeList[0]
+	}
+	return security.AccessCheckByType(pSecurityDescriptor, PrincipalSelfSid, ClientToken, DesiredAccess, _ObjectTypeList, uint32(len(ObjectTypeList)), GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus)
+}
+
 // AccessCheckByTypeAndAuditAlarm wraps the raw AccessCheckByTypeAndAuditAlarmW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckbytypeandauditalarmw
-func AccessCheckByTypeAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, SecurityDescriptor security.PSECURITY_DESCRIPTOR, PrincipalSelfSid security.PSID, DesiredAccess uint32, AuditType security.AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *security.OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *security.GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckByTypeAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, SecurityDescriptor security.PSECURITY_DESCRIPTOR, PrincipalSelfSid security.PSID, DesiredAccess uint32, AuditType security.AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList []security.OBJECT_TYPE_LIST, GenericMapping *security.GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
 	_ObjectName := win32.UTF16Ptr(ObjectName)
+	var _ObjectTypeList *security.OBJECT_TYPE_LIST
+	if len(ObjectTypeList) > 0 {
+		_ObjectTypeList = &ObjectTypeList[0]
+	}
 	_ObjectCreation := foundation.BOOL(win32.Bool32(ObjectCreation))
-	return security.AccessCheckByTypeAndAuditAlarmW(foundation.PWSTR(_SubsystemName), HandleId, foundation.PWSTR(_ObjectTypeName), foundation.PWSTR(_ObjectName), SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, _ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose) != 0
+	return security.AccessCheckByTypeAndAuditAlarmW(foundation.PWSTR(_SubsystemName), HandleId, foundation.PWSTR(_ObjectTypeName), foundation.PWSTR(_ObjectName), SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, _ObjectTypeList, uint32(len(ObjectTypeList)), GenericMapping, _ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose) != 0
 }
 
 // AccessCheckByTypeAndAuditAlarmA wraps the raw AccessCheckByTypeAndAuditAlarmA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-accesscheckbytypeandauditalarma
-func AccessCheckByTypeAndAuditAlarmA(SubsystemName foundation.PSTR, HandleId unsafe.Pointer, ObjectTypeName foundation.PSTR, ObjectName foundation.PSTR, SecurityDescriptor security.PSECURITY_DESCRIPTOR, PrincipalSelfSid security.PSID, DesiredAccess uint32, AuditType security.AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *security.OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *security.GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) error {
+func AccessCheckByTypeAndAuditAlarmA(SubsystemName foundation.PSTR, HandleId unsafe.Pointer, ObjectTypeName foundation.PSTR, ObjectName foundation.PSTR, SecurityDescriptor security.PSECURITY_DESCRIPTOR, PrincipalSelfSid security.PSID, DesiredAccess uint32, AuditType security.AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList []security.OBJECT_TYPE_LIST, GenericMapping *security.GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) error {
+	var _ObjectTypeList *security.OBJECT_TYPE_LIST
+	if len(ObjectTypeList) > 0 {
+		_ObjectTypeList = &ObjectTypeList[0]
+	}
 	_ObjectCreation := foundation.BOOL(win32.Bool32(ObjectCreation))
-	return security.AccessCheckByTypeAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, _ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)
+	return security.AccessCheckByTypeAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, _ObjectTypeList, uint32(len(ObjectTypeList)), GenericMapping, _ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)
 }
 
 // AccessCheckByTypeResultListAndAuditAlarm wraps the raw AccessCheckByTypeResultListAndAuditAlarmW call with idiomatic Go types.
@@ -153,9 +171,31 @@ func CreatePrivateObjectSecurityEx(ParentDescriptor security.PSECURITY_DESCRIPTO
 
 // CreatePrivateObjectSecurityWithMultipleInheritance wraps the raw CreatePrivateObjectSecurityWithMultipleInheritance call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-createprivateobjectsecuritywithmultipleinheritance
-func CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor security.PSECURITY_DESCRIPTOR, CreatorDescriptor security.PSECURITY_DESCRIPTOR, NewDescriptor *security.PSECURITY_DESCRIPTOR, ObjectTypes **win32.GUID, GuidCount uint32, IsContainerObject bool, AutoInheritFlags security.SECURITY_AUTO_INHERIT_FLAGS, Token foundation.HANDLE, GenericMapping *security.GENERIC_MAPPING) error {
+func CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor security.PSECURITY_DESCRIPTOR, CreatorDescriptor security.PSECURITY_DESCRIPTOR, NewDescriptor *security.PSECURITY_DESCRIPTOR, ObjectTypes []*win32.GUID, IsContainerObject bool, AutoInheritFlags security.SECURITY_AUTO_INHERIT_FLAGS, Token foundation.HANDLE, GenericMapping *security.GENERIC_MAPPING) error {
+	var _ObjectTypes **win32.GUID
+	if len(ObjectTypes) > 0 {
+		_ObjectTypes = &ObjectTypes[0]
+	}
 	_IsContainerObject := foundation.BOOL(win32.Bool32(IsContainerObject))
-	return security.CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor, CreatorDescriptor, NewDescriptor, ObjectTypes, GuidCount, _IsContainerObject, AutoInheritFlags, Token, GenericMapping)
+	return security.CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor, CreatorDescriptor, NewDescriptor, _ObjectTypes, uint32(len(ObjectTypes)), _IsContainerObject, AutoInheritFlags, Token, GenericMapping)
+}
+
+// CreateRestrictedToken wraps the raw CreateRestrictedToken call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-createrestrictedtoken
+func CreateRestrictedToken(ExistingTokenHandle foundation.HANDLE, Flags security.CREATE_RESTRICTED_TOKEN_FLAGS, SidsToDisable []security.SID_AND_ATTRIBUTES, PrivilegesToDelete []security.LUID_AND_ATTRIBUTES, SidsToRestrict []security.SID_AND_ATTRIBUTES, NewTokenHandle *foundation.HANDLE) error {
+	var _SidsToDisable *security.SID_AND_ATTRIBUTES
+	if len(SidsToDisable) > 0 {
+		_SidsToDisable = &SidsToDisable[0]
+	}
+	var _PrivilegesToDelete *security.LUID_AND_ATTRIBUTES
+	if len(PrivilegesToDelete) > 0 {
+		_PrivilegesToDelete = &PrivilegesToDelete[0]
+	}
+	var _SidsToRestrict *security.SID_AND_ATTRIBUTES
+	if len(SidsToRestrict) > 0 {
+		_SidsToRestrict = &SidsToRestrict[0]
+	}
+	return security.CreateRestrictedToken(ExistingTokenHandle, Flags, uint32(len(SidsToDisable)), _SidsToDisable, uint32(len(PrivilegesToDelete)), _PrivilegesToDelete, uint32(len(SidsToRestrict)), _SidsToRestrict, NewTokenHandle)
 }
 
 // DeriveCapabilitySidsFromName wraps the raw DeriveCapabilitySidsFromName call with idiomatic Go types.
@@ -346,8 +386,12 @@ func PrivilegedServiceAuditAlarmA(SubsystemName foundation.PSTR, ServiceName fou
 
 // SetCachedSigningLevel wraps the raw SetCachedSigningLevel call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-setcachedsigninglevel
-func SetCachedSigningLevel(SourceFiles *foundation.HANDLE, SourceFileCount uint32, Flags uint32, TargetFile foundation.HANDLE) bool {
-	return security.SetCachedSigningLevel(SourceFiles, SourceFileCount, Flags, TargetFile) != 0
+func SetCachedSigningLevel(SourceFiles []foundation.HANDLE, Flags uint32, TargetFile foundation.HANDLE) bool {
+	var _SourceFiles *foundation.HANDLE
+	if len(SourceFiles) > 0 {
+		_SourceFiles = &SourceFiles[0]
+	}
+	return security.SetCachedSigningLevel(_SourceFiles, uint32(len(SourceFiles)), Flags, TargetFile) != 0
 }
 
 // SetFileSecurity wraps the raw SetFileSecurityW call with idiomatic Go types.

@@ -11,6 +11,16 @@ import (
 	uiinput "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input"
 )
 
+// DefRawInputProc wraps the raw DefRawInputProc call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defrawinputproc
+func DefRawInputProc(paRawInput []*uiinput.RAWINPUT, cbSizeHeader uint32) foundation.LRESULT {
+	var _paRawInput **uiinput.RAWINPUT
+	if len(paRawInput) > 0 {
+		_paRawInput = &paRawInput[0]
+	}
+	return uiinput.DefRawInputProc(_paRawInput, int32(len(paRawInput)), cbSizeHeader)
+}
+
 // GetCIMSSM wraps the raw GetCIMSSM call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getcimssm
 func GetCIMSSM(inputMessageSource *uiinput.INPUT_MESSAGE_SOURCE) bool {
@@ -21,4 +31,14 @@ func GetCIMSSM(inputMessageSource *uiinput.INPUT_MESSAGE_SOURCE) bool {
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getrawinputdeviceinfow
 func GetRawInputDeviceInfo(hDevice foundation.HANDLE, uiCommand uiinput.RAW_INPUT_DEVICE_INFO_COMMAND, pData unsafe.Pointer, pcbSize *uint32) (uint32, error) {
 	return uiinput.GetRawInputDeviceInfoW(hDevice, uiCommand, pData, pcbSize)
+}
+
+// RegisterRawInputDevices wraps the raw RegisterRawInputDevices call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerrawinputdevices
+func RegisterRawInputDevices(pRawInputDevices []uiinput.RAWINPUTDEVICE, cbSize uint32) error {
+	var _pRawInputDevices *uiinput.RAWINPUTDEVICE
+	if len(pRawInputDevices) > 0 {
+		_pRawInputDevices = &pRawInputDevices[0]
+	}
+	return uiinput.RegisterRawInputDevices(_pRawInputDevices, uint32(len(pRawInputDevices)), cbSize)
 }

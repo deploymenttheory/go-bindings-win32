@@ -20,11 +20,31 @@ func PxeDhcpIsValid(pPacket unsafe.Pointer, uPacketLen uint32, bRequestPacket bo
 	return systemdeploymentservices.PxeDhcpIsValid(pPacket, uPacketLen, _bRequestPacket, pbPxeOptionPresent)
 }
 
+// PxeDhcpv6CreateRelayRepl wraps the raw PxeDhcpv6CreateRelayRepl call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6createrelayrepl
+func PxeDhcpv6CreateRelayRepl(pRelayMessages []systemdeploymentservices.PXE_DHCPV6_NESTED_RELAY_MESSAGE, pInnerPacket *byte, cbInnerPacket uint32, pReplyBuffer unsafe.Pointer, cbReplyBuffer uint32, pcbReplyBuffer *uint32) uint32 {
+	var _pRelayMessages *systemdeploymentservices.PXE_DHCPV6_NESTED_RELAY_MESSAGE
+	if len(pRelayMessages) > 0 {
+		_pRelayMessages = &pRelayMessages[0]
+	}
+	return systemdeploymentservices.PxeDhcpv6CreateRelayRepl(_pRelayMessages, uint32(len(pRelayMessages)), pInnerPacket, cbInnerPacket, pReplyBuffer, cbReplyBuffer, pcbReplyBuffer)
+}
+
 // PxeDhcpv6IsValid wraps the raw PxeDhcpv6IsValid call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6isvalid
 func PxeDhcpv6IsValid(pPacket unsafe.Pointer, uPacketLen uint32, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
 	_bRequestPacket := foundation.BOOL(win32.Bool32(bRequestPacket))
 	return systemdeploymentservices.PxeDhcpv6IsValid(pPacket, uPacketLen, _bRequestPacket, pbPxeOptionPresent)
+}
+
+// PxeDhcpv6ParseRelayForw wraps the raw PxeDhcpv6ParseRelayForw call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6parserelayforw
+func PxeDhcpv6ParseRelayForw(pRelayForwPacket unsafe.Pointer, uRelayForwPacketLen uint32, pRelayMessages []systemdeploymentservices.PXE_DHCPV6_NESTED_RELAY_MESSAGE, pnRelayMessages *uint32, ppInnerPacket **byte, pcbInnerPacket *uint32) uint32 {
+	var _pRelayMessages *systemdeploymentservices.PXE_DHCPV6_NESTED_RELAY_MESSAGE
+	if len(pRelayMessages) > 0 {
+		_pRelayMessages = &pRelayMessages[0]
+	}
+	return systemdeploymentservices.PxeDhcpv6ParseRelayForw(pRelayForwPacket, uRelayForwPacketLen, _pRelayMessages, uint32(len(pRelayMessages)), pnRelayMessages, ppInnerPacket, pcbInnerPacket)
 }
 
 // PxeProviderQueryIndex wraps the raw PxeProviderQueryIndex call with idiomatic Go types.
@@ -102,8 +122,12 @@ func WdsCliFindNextImage(Handle foundation.HANDLE) error {
 
 // WdsCliFreeStringArray wraps the raw WdsCliFreeStringArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclifreestringarray
-func WdsCliFreeStringArray(ppwszArray *foundation.PWSTR, ulCount uint32) error {
-	return win32.HRESULTError(int32(systemdeploymentservices.WdsCliFreeStringArray(ppwszArray, ulCount)))
+func WdsCliFreeStringArray(ppwszArray []foundation.PWSTR) error {
+	var _ppwszArray *foundation.PWSTR
+	if len(ppwszArray) > 0 {
+		_ppwszArray = &ppwszArray[0]
+	}
+	return win32.HRESULTError(int32(systemdeploymentservices.WdsCliFreeStringArray(_ppwszArray, uint32(len(ppwszArray)))))
 }
 
 // WdsCliGetDriverQueryXml wraps the raw WdsCliGetDriverQueryXml call with idiomatic Go types.

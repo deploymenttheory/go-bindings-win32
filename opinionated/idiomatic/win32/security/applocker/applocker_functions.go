@@ -25,6 +25,16 @@ func SaferGetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass securityap
 	return securityapplocker.SaferGetPolicyInformation(dwScopeId, SaferPolicyInfoClass, InfoBufferSize, InfoBuffer, InfoBufferRetSize, nil)
 }
 
+// SaferIdentifyLevel wraps the raw SaferIdentifyLevel call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-saferidentifylevel
+func SaferIdentifyLevel(pCodeProperties []securityapplocker.SAFER_CODE_PROPERTIES_V2, pLevelHandle *security.SAFER_LEVEL_HANDLE, lpReserved unsafe.Pointer) error {
+	var _pCodeProperties *securityapplocker.SAFER_CODE_PROPERTIES_V2
+	if len(pCodeProperties) > 0 {
+		_pCodeProperties = &pCodeProperties[0]
+	}
+	return securityapplocker.SaferIdentifyLevel(uint32(len(pCodeProperties)), _pCodeProperties, pLevelHandle, lpReserved)
+}
+
 // SaferRecordEventLogEntry wraps the raw SaferRecordEventLogEntry call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-saferrecordeventlogentry
 func SaferRecordEventLogEntry(hLevel security.SAFER_LEVEL_HANDLE, szTargetPath string) error {

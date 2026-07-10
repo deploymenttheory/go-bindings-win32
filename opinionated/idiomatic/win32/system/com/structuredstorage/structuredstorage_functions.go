@@ -15,17 +15,35 @@ import (
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
+// ClearPropVariantArray wraps the raw ClearPropVariantArray call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-clearpropvariantarray
+func ClearPropVariantArray(rgPropVar []systemcomstructuredstorage.PROPVARIANT) {
+	var _rgPropVar *systemcomstructuredstorage.PROPVARIANT
+	if len(rgPropVar) > 0 {
+		_rgPropVar = &rgPropVar[0]
+	}
+	systemcomstructuredstorage.ClearPropVariantArray(_rgPropVar, uint32(len(rgPropVar)))
+}
+
 // CoGetInstanceFromFile wraps the raw CoGetInstanceFromFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetinstancefromfile
-func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, grfMode uint32, pwszName string, dwCount uint32, pResults *systemcom.MULTI_QI) error {
+func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, grfMode uint32, pwszName string, pResults []systemcom.MULTI_QI) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
-	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInstanceFromFile(pServerInfo, pClsid, punkOuter, dwClsCtx, grfMode, foundation.PWSTR(_pwszName), dwCount, pResults)))
+	var _pResults *systemcom.MULTI_QI
+	if len(pResults) > 0 {
+		_pResults = &pResults[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInstanceFromFile(pServerInfo, pClsid, punkOuter, dwClsCtx, grfMode, foundation.PWSTR(_pwszName), uint32(len(pResults)), _pResults)))
 }
 
 // CoGetInstanceFromIStorage wraps the raw CoGetInstanceFromIStorage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetinstancefromistorage
-func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pstg *systemcomstructuredstorage.IStorage, dwCount uint32, pResults *systemcom.MULTI_QI) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInstanceFromIStorage(pServerInfo, pClsid, punkOuter, dwClsCtx, pstg, dwCount, pResults)))
+func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pstg *systemcomstructuredstorage.IStorage, pResults []systemcom.MULTI_QI) error {
+	var _pResults *systemcom.MULTI_QI
+	if len(pResults) > 0 {
+		_pResults = &pResults[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.CoGetInstanceFromIStorage(pServerInfo, pClsid, punkOuter, dwClsCtx, pstg, uint32(len(pResults)), _pResults)))
 }
 
 // CoGetInterfaceAndReleaseStream wraps the raw CoGetInterfaceAndReleaseStream call with idiomatic Go types.
@@ -56,8 +74,12 @@ func FmtIdToPropStgName(pfmtid *win32.GUID, oszName foundation.PWSTR) error {
 
 // FreePropVariantArray wraps the raw FreePropVariantArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-freepropvariantarray
-func FreePropVariantArray(cVariants uint32, rgvars *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.FreePropVariantArray(cVariants, rgvars)))
+func FreePropVariantArray(rgvars []systemcomstructuredstorage.PROPVARIANT) error {
+	var _rgvars *systemcomstructuredstorage.PROPVARIANT
+	if len(rgvars) > 0 {
+		_rgvars = &rgvars[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.FreePropVariantArray(uint32(len(rgvars)), _rgvars)))
 }
 
 // GetConvertStg wraps the raw GetConvertStg call with idiomatic Go types.
@@ -80,8 +102,12 @@ func GetHGlobalFromStream(pstm *systemcom.IStream, phglobal *foundation.HGLOBAL)
 
 // InitPropVariantFromBooleanVector wraps the raw InitPropVariantFromBooleanVector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfrombooleanvector
-func InitPropVariantFromBooleanVector(prgf *foundation.BOOL, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromBooleanVector(prgf, cElems, ppropvar)))
+func InitPropVariantFromBooleanVector(prgf []foundation.BOOL, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgf *foundation.BOOL
+	if len(prgf) > 0 {
+		_prgf = &prgf[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromBooleanVector(_prgf, uint32(len(prgf)), ppropvar)))
 }
 
 // InitPropVariantFromBuffer wraps the raw InitPropVariantFromBuffer call with idiomatic Go types.
@@ -98,8 +124,12 @@ func InitPropVariantFromCLSID(clsid *win32.GUID, ppropvar *systemcomstructuredst
 
 // InitPropVariantFromDoubleVector wraps the raw InitPropVariantFromDoubleVector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromdoublevector
-func InitPropVariantFromDoubleVector(prgn *float64, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromDoubleVector(prgn, cElems, ppropvar)))
+func InitPropVariantFromDoubleVector(prgn []float64, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgn *float64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromDoubleVector(_prgn, uint32(len(prgn)), ppropvar)))
 }
 
 // InitPropVariantFromFileTime wraps the raw InitPropVariantFromFileTime call with idiomatic Go types.
@@ -110,8 +140,12 @@ func InitPropVariantFromFileTime(pftIn *foundation.FILETIME, ppropvar *systemcom
 
 // InitPropVariantFromFileTimeVector wraps the raw InitPropVariantFromFileTimeVector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromfiletimevector
-func InitPropVariantFromFileTimeVector(prgft *foundation.FILETIME, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromFileTimeVector(prgft, cElems, ppropvar)))
+func InitPropVariantFromFileTimeVector(prgft []foundation.FILETIME, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgft *foundation.FILETIME
+	if len(prgft) > 0 {
+		_prgft = &prgft[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromFileTimeVector(_prgft, uint32(len(prgft)), ppropvar)))
 }
 
 // InitPropVariantFromGUIDAsString wraps the raw InitPropVariantFromGUIDAsString call with idiomatic Go types.
@@ -122,20 +156,32 @@ func InitPropVariantFromGUIDAsString(guid *win32.GUID, ppropvar *systemcomstruct
 
 // InitPropVariantFromInt16Vector wraps the raw InitPropVariantFromInt16Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromint16vector
-func InitPropVariantFromInt16Vector(prgn *int16, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromInt16Vector(prgn, cElems, ppropvar)))
+func InitPropVariantFromInt16Vector(prgn []int16, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgn *int16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromInt16Vector(_prgn, uint32(len(prgn)), ppropvar)))
 }
 
 // InitPropVariantFromInt32Vector wraps the raw InitPropVariantFromInt32Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromint32vector
-func InitPropVariantFromInt32Vector(prgn *int32, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromInt32Vector(prgn, cElems, ppropvar)))
+func InitPropVariantFromInt32Vector(prgn []int32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgn *int32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromInt32Vector(_prgn, uint32(len(prgn)), ppropvar)))
 }
 
 // InitPropVariantFromInt64Vector wraps the raw InitPropVariantFromInt64Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromint64vector
-func InitPropVariantFromInt64Vector(prgn *int64, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromInt64Vector(prgn, cElems, ppropvar)))
+func InitPropVariantFromInt64Vector(prgn []int64, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgn *int64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromInt64Vector(_prgn, uint32(len(prgn)), ppropvar)))
 }
 
 // InitPropVariantFromPropVariantVectorElem wraps the raw InitPropVariantFromPropVariantVectorElem call with idiomatic Go types.
@@ -159,26 +205,42 @@ func InitPropVariantFromStringAsVector(psz string, ppropvar *systemcomstructured
 
 // InitPropVariantFromStringVector wraps the raw InitPropVariantFromStringVector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromstringvector
-func InitPropVariantFromStringVector(prgsz *foundation.PWSTR, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromStringVector(prgsz, cElems, ppropvar)))
+func InitPropVariantFromStringVector(prgsz []foundation.PWSTR, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgsz *foundation.PWSTR
+	if len(prgsz) > 0 {
+		_prgsz = &prgsz[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromStringVector(_prgsz, uint32(len(prgsz)), ppropvar)))
 }
 
 // InitPropVariantFromUInt16Vector wraps the raw InitPropVariantFromUInt16Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromuint16vector
-func InitPropVariantFromUInt16Vector(prgn *uint16, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromUInt16Vector(prgn, cElems, ppropvar)))
+func InitPropVariantFromUInt16Vector(prgn []uint16, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgn *uint16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromUInt16Vector(_prgn, uint32(len(prgn)), ppropvar)))
 }
 
 // InitPropVariantFromUInt32Vector wraps the raw InitPropVariantFromUInt32Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromuint32vector
-func InitPropVariantFromUInt32Vector(prgn *uint32, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromUInt32Vector(prgn, cElems, ppropvar)))
+func InitPropVariantFromUInt32Vector(prgn []uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgn *uint32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromUInt32Vector(_prgn, uint32(len(prgn)), ppropvar)))
 }
 
 // InitPropVariantFromUInt64Vector wraps the raw InitPropVariantFromUInt64Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromuint64vector
-func InitPropVariantFromUInt64Vector(prgn *uint64, cElems uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromUInt64Vector(prgn, cElems, ppropvar)))
+func InitPropVariantFromUInt64Vector(prgn []uint64, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _prgn *uint64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.InitPropVariantFromUInt64Vector(_prgn, uint32(len(prgn)), ppropvar)))
 }
 
 // InitPropVariantVectorFromPropVariant wraps the raw InitPropVariantVectorFromPropVariant call with idiomatic Go types.
@@ -310,8 +372,12 @@ func PropVariantToBoolean(propvarIn *systemcomstructuredstorage.PROPVARIANT, pfR
 
 // PropVariantToBooleanVector wraps the raw PropVariantToBooleanVector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttobooleanvector
-func PropVariantToBooleanVector(propvar *systemcomstructuredstorage.PROPVARIANT, prgf *foundation.BOOL, crgf uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToBooleanVector(propvar, prgf, crgf, pcElem)))
+func PropVariantToBooleanVector(propvar *systemcomstructuredstorage.PROPVARIANT, prgf []foundation.BOOL, pcElem *uint32) error {
+	var _prgf *foundation.BOOL
+	if len(prgf) > 0 {
+		_prgf = &prgf[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToBooleanVector(propvar, _prgf, uint32(len(prgf)), pcElem)))
 }
 
 // PropVariantToBooleanVectorAlloc wraps the raw PropVariantToBooleanVectorAlloc call with idiomatic Go types.
@@ -341,8 +407,12 @@ func PropVariantToDouble(propvarIn *systemcomstructuredstorage.PROPVARIANT, pdbl
 
 // PropVariantToDoubleVector wraps the raw PropVariantToDoubleVector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttodoublevector
-func PropVariantToDoubleVector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn *float64, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToDoubleVector(propvar, prgn, crgn, pcElem)))
+func PropVariantToDoubleVector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn []float64, pcElem *uint32) error {
+	var _prgn *float64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToDoubleVector(propvar, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // PropVariantToDoubleVectorAlloc wraps the raw PropVariantToDoubleVectorAlloc call with idiomatic Go types.
@@ -359,8 +429,12 @@ func PropVariantToFileTime(propvar *systemcomstructuredstorage.PROPVARIANT, pstf
 
 // PropVariantToFileTimeVector wraps the raw PropVariantToFileTimeVector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttofiletimevector
-func PropVariantToFileTimeVector(propvar *systemcomstructuredstorage.PROPVARIANT, prgft *foundation.FILETIME, crgft uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToFileTimeVector(propvar, prgft, crgft, pcElem)))
+func PropVariantToFileTimeVector(propvar *systemcomstructuredstorage.PROPVARIANT, prgft []foundation.FILETIME, pcElem *uint32) error {
+	var _prgft *foundation.FILETIME
+	if len(prgft) > 0 {
+		_prgft = &prgft[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToFileTimeVector(propvar, _prgft, uint32(len(prgft)), pcElem)))
 }
 
 // PropVariantToFileTimeVectorAlloc wraps the raw PropVariantToFileTimeVectorAlloc call with idiomatic Go types.
@@ -383,8 +457,12 @@ func PropVariantToInt16(propvarIn *systemcomstructuredstorage.PROPVARIANT, piRet
 
 // PropVariantToInt16Vector wraps the raw PropVariantToInt16Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint16vector
-func PropVariantToInt16Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn *int16, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToInt16Vector(propvar, prgn, crgn, pcElem)))
+func PropVariantToInt16Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn []int16, pcElem *uint32) error {
+	var _prgn *int16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToInt16Vector(propvar, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // PropVariantToInt16VectorAlloc wraps the raw PropVariantToInt16VectorAlloc call with idiomatic Go types.
@@ -401,8 +479,12 @@ func PropVariantToInt32(propvarIn *systemcomstructuredstorage.PROPVARIANT, plRet
 
 // PropVariantToInt32Vector wraps the raw PropVariantToInt32Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint32vector
-func PropVariantToInt32Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn *int32, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToInt32Vector(propvar, prgn, crgn, pcElem)))
+func PropVariantToInt32Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn []int32, pcElem *uint32) error {
+	var _prgn *int32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToInt32Vector(propvar, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // PropVariantToInt32VectorAlloc wraps the raw PropVariantToInt32VectorAlloc call with idiomatic Go types.
@@ -419,8 +501,12 @@ func PropVariantToInt64(propvarIn *systemcomstructuredstorage.PROPVARIANT, pllRe
 
 // PropVariantToInt64Vector wraps the raw PropVariantToInt64Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint64vector
-func PropVariantToInt64Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn *int64, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToInt64Vector(propvar, prgn, crgn, pcElem)))
+func PropVariantToInt64Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn []int64, pcElem *uint32) error {
+	var _prgn *int64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToInt64Vector(propvar, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // PropVariantToInt64VectorAlloc wraps the raw PropVariantToInt64VectorAlloc call with idiomatic Go types.
@@ -443,8 +529,12 @@ func PropVariantToStringAlloc(propvar *systemcomstructuredstorage.PROPVARIANT, p
 
 // PropVariantToStringVector wraps the raw PropVariantToStringVector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostringvector
-func PropVariantToStringVector(propvar *systemcomstructuredstorage.PROPVARIANT, prgsz *foundation.PWSTR, crgsz uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToStringVector(propvar, prgsz, crgsz, pcElem)))
+func PropVariantToStringVector(propvar *systemcomstructuredstorage.PROPVARIANT, prgsz []foundation.PWSTR, pcElem *uint32) error {
+	var _prgsz *foundation.PWSTR
+	if len(prgsz) > 0 {
+		_prgsz = &prgsz[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToStringVector(propvar, _prgsz, uint32(len(prgsz)), pcElem)))
 }
 
 // PropVariantToStringVectorAlloc wraps the raw PropVariantToStringVectorAlloc call with idiomatic Go types.
@@ -468,8 +558,12 @@ func PropVariantToUInt16(propvarIn *systemcomstructuredstorage.PROPVARIANT, puiR
 
 // PropVariantToUInt16Vector wraps the raw PropVariantToUInt16Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint16vector
-func PropVariantToUInt16Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn *uint16, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToUInt16Vector(propvar, prgn, crgn, pcElem)))
+func PropVariantToUInt16Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn []uint16, pcElem *uint32) error {
+	var _prgn *uint16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToUInt16Vector(propvar, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // PropVariantToUInt16VectorAlloc wraps the raw PropVariantToUInt16VectorAlloc call with idiomatic Go types.
@@ -486,8 +580,12 @@ func PropVariantToUInt32(propvarIn *systemcomstructuredstorage.PROPVARIANT, pulR
 
 // PropVariantToUInt32Vector wraps the raw PropVariantToUInt32Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint32vector
-func PropVariantToUInt32Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn *uint32, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToUInt32Vector(propvar, prgn, crgn, pcElem)))
+func PropVariantToUInt32Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn []uint32, pcElem *uint32) error {
+	var _prgn *uint32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToUInt32Vector(propvar, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // PropVariantToUInt32VectorAlloc wraps the raw PropVariantToUInt32VectorAlloc call with idiomatic Go types.
@@ -504,8 +602,12 @@ func PropVariantToUInt64(propvarIn *systemcomstructuredstorage.PROPVARIANT, pull
 
 // PropVariantToUInt64Vector wraps the raw PropVariantToUInt64Vector call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint64vector
-func PropVariantToUInt64Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn *uint64, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToUInt64Vector(propvar, prgn, crgn, pcElem)))
+func PropVariantToUInt64Vector(propvar *systemcomstructuredstorage.PROPVARIANT, prgn []uint64, pcElem *uint32) error {
+	var _prgn *uint64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemcomstructuredstorage.PropVariantToUInt64Vector(propvar, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // PropVariantToUInt64VectorAlloc wraps the raw PropVariantToUInt64VectorAlloc call with idiomatic Go types.

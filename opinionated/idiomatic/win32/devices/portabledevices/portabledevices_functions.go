@@ -11,7 +11,11 @@ import (
 )
 
 // DMProcessConfigXMLFiltered wraps the raw DMProcessConfigXMLFiltered call with idiomatic Go types.
-func DMProcessConfigXMLFiltered(pszXmlIn string, rgszAllowedCspNodes *foundation.PWSTR, dwNumAllowedCspNodes uint32, pbstrXmlOut *foundation.BSTR) error {
+func DMProcessConfigXMLFiltered(pszXmlIn string, rgszAllowedCspNodes []foundation.PWSTR, pbstrXmlOut *foundation.BSTR) error {
 	_pszXmlIn := win32.UTF16Ptr(pszXmlIn)
-	return win32.HRESULTError(int32(devicesportabledevices.DMProcessConfigXMLFiltered(foundation.PWSTR(_pszXmlIn), rgszAllowedCspNodes, dwNumAllowedCspNodes, pbstrXmlOut)))
+	var _rgszAllowedCspNodes *foundation.PWSTR
+	if len(rgszAllowedCspNodes) > 0 {
+		_rgszAllowedCspNodes = &rgszAllowedCspNodes[0]
+	}
+	return win32.HRESULTError(int32(devicesportabledevices.DMProcessConfigXMLFiltered(foundation.PWSTR(_pszXmlIn), _rgszAllowedCspNodes, uint32(len(rgszAllowedCspNodes)), pbstrXmlOut)))
 }

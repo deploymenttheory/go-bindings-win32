@@ -42,9 +42,44 @@ func ODBCSetTryWaitValue(dwValue uint32) bool {
 	return systemsearch.ODBCSetTryWaitValue(dwValue) != 0
 }
 
-// SQLBrowseConnect wraps the raw SQLBrowseConnectW call with idiomatic Go types.
-func SQLBrowseConnect(hdbc unsafe.Pointer, szConnStrIn *uint16, cchConnStrIn int16, szConnStrOut *uint16, cchConnStrOutMax int16, pcchConnStrOut *int16) int16 {
-	return systemsearch.SQLBrowseConnectW(hdbc, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut)
+// SQLBrowseConnect wraps the raw SQLBrowseConnect call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlbrowseconnect-function
+func SQLBrowseConnect(hdbc unsafe.Pointer, szConnStrIn []byte, szConnStrOut []byte, pcchConnStrOut *int16) int16 {
+	var _szConnStrIn *byte
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *byte
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	return systemsearch.SQLBrowseConnect(hdbc, _szConnStrIn, int16(len(szConnStrIn)), _szConnStrOut, int16(len(szConnStrOut)), pcchConnStrOut)
+}
+
+// SQLBrowseConnectA wraps the raw SQLBrowseConnectA call with idiomatic Go types.
+func SQLBrowseConnectA(hdbc unsafe.Pointer, szConnStrIn []byte, szConnStrOut []byte, pcbConnStrOut *int16) int16 {
+	var _szConnStrIn *byte
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *byte
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	return systemsearch.SQLBrowseConnectA(hdbc, _szConnStrIn, int16(len(szConnStrIn)), _szConnStrOut, int16(len(szConnStrOut)), pcbConnStrOut)
+}
+
+// SQLBrowseConnectW wraps the raw SQLBrowseConnectW call with idiomatic Go types.
+func SQLBrowseConnectW(hdbc unsafe.Pointer, szConnStrIn []uint16, szConnStrOut []uint16, pcchConnStrOut *int16) int16 {
+	var _szConnStrIn *uint16
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *uint16
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	return systemsearch.SQLBrowseConnectW(hdbc, _szConnStrIn, int16(len(szConnStrIn)), _szConnStrOut, int16(len(szConnStrOut)), pcchConnStrOut)
 }
 
 // SQLColAttribute wraps the raw SQLColAttributeW call with idiomatic Go types.
@@ -57,54 +92,476 @@ func SQLColAttributes(hstmt unsafe.Pointer, icol uint16, fDescType uint16, rgbDe
 	return systemsearch.SQLColAttributesW(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
 }
 
-// SQLColumnPrivileges wraps the raw SQLColumnPrivilegesW call with idiomatic Go types.
-func SQLColumnPrivileges(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, szColumnName *uint16, cchColumnName int16) int16 {
-	return systemsearch.SQLColumnPrivilegesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+// SQLColumnPrivileges wraps the raw SQLColumnPrivileges call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlcolumnprivileges-function
+func SQLColumnPrivileges(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	return systemsearch.SQLColumnPrivileges(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), _szColumnName, int16(len(szColumnName)))
 }
 
-// SQLColumns wraps the raw SQLColumnsW call with idiomatic Go types.
-func SQLColumns(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, szColumnName *uint16, cchColumnName int16) int16 {
-	return systemsearch.SQLColumnsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+// SQLColumnPrivilegesA wraps the raw SQLColumnPrivilegesA call with idiomatic Go types.
+func SQLColumnPrivilegesA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	return systemsearch.SQLColumnPrivilegesA(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), _szColumnName, int16(len(szColumnName)))
 }
 
-// SQLConnect wraps the raw SQLConnectW call with idiomatic Go types.
-func SQLConnect(hdbc unsafe.Pointer, szDSN *uint16, cchDSN int16, szUID *uint16, cchUID int16, szAuthStr *uint16, cchAuthStr int16) int16 {
-	return systemsearch.SQLConnectW(hdbc, szDSN, cchDSN, szUID, cchUID, szAuthStr, cchAuthStr)
+// SQLColumnPrivilegesW wraps the raw SQLColumnPrivilegesW call with idiomatic Go types.
+func SQLColumnPrivilegesW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, szColumnName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *uint16
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	return systemsearch.SQLColumnPrivilegesW(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), _szColumnName, int16(len(szColumnName)))
 }
 
-// SQLDataSources wraps the raw SQLDataSourcesW call with idiomatic Go types.
-func SQLDataSources(henv unsafe.Pointer, fDirection uint16, szDSN *uint16, cchDSNMax int16, pcchDSN *int16, wszDescription *uint16, cchDescriptionMax int16, pcchDescription *int16) int16 {
-	return systemsearch.SQLDataSourcesW(henv, fDirection, szDSN, cchDSNMax, pcchDSN, wszDescription, cchDescriptionMax, pcchDescription)
+// SQLColumns wraps the raw SQLColumns call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlcolumns-function
+func SQLColumns(StatementHandle unsafe.Pointer, CatalogName []byte, SchemaName []byte, TableName []byte, ColumnName []byte) int16 {
+	var _CatalogName *byte
+	if len(CatalogName) > 0 {
+		_CatalogName = &CatalogName[0]
+	}
+	var _SchemaName *byte
+	if len(SchemaName) > 0 {
+		_SchemaName = &SchemaName[0]
+	}
+	var _TableName *byte
+	if len(TableName) > 0 {
+		_TableName = &TableName[0]
+	}
+	var _ColumnName *byte
+	if len(ColumnName) > 0 {
+		_ColumnName = &ColumnName[0]
+	}
+	return systemsearch.SQLColumns(StatementHandle, _CatalogName, int16(len(CatalogName)), _SchemaName, int16(len(SchemaName)), _TableName, int16(len(TableName)), _ColumnName, int16(len(ColumnName)))
 }
 
-// SQLDescribeCol wraps the raw SQLDescribeColW call with idiomatic Go types.
-func SQLDescribeCol(hstmt unsafe.Pointer, icol uint16, szColName *uint16, cchColNameMax int16, pcchColName *int16, pfSqlType *int16, pcbColDef *uint64, pibScale *int16, pfNullable *int16) int16 {
-	return systemsearch.SQLDescribeColW(hstmt, icol, szColName, cchColNameMax, pcchColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+// SQLColumnsA wraps the raw SQLColumnsA call with idiomatic Go types.
+func SQLColumnsA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	return systemsearch.SQLColumnsA(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), _szColumnName, int16(len(szColumnName)))
 }
 
-// SQLDriverConnect wraps the raw SQLDriverConnectW call with idiomatic Go types.
-func SQLDriverConnect(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn *uint16, cchConnStrIn int16, szConnStrOut *uint16, cchConnStrOutMax int16, pcchConnStrOut *int16, fDriverCompletion uint16) int16 {
-	return systemsearch.SQLDriverConnectW(hdbc, hwnd, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut, fDriverCompletion)
+// SQLColumnsW wraps the raw SQLColumnsW call with idiomatic Go types.
+func SQLColumnsW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, szColumnName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *uint16
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	return systemsearch.SQLColumnsW(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), _szColumnName, int16(len(szColumnName)))
 }
 
-// SQLDrivers wraps the raw SQLDriversW call with idiomatic Go types.
-func SQLDrivers(henv unsafe.Pointer, fDirection uint16, szDriverDesc *uint16, cchDriverDescMax int16, pcchDriverDesc *int16, szDriverAttributes *uint16, cchDrvrAttrMax int16, pcchDrvrAttr *int16) int16 {
-	return systemsearch.SQLDriversW(henv, fDirection, szDriverDesc, cchDriverDescMax, pcchDriverDesc, szDriverAttributes, cchDrvrAttrMax, pcchDrvrAttr)
+// SQLConnect wraps the raw SQLConnect call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlconnect-function
+func SQLConnect(ConnectionHandle unsafe.Pointer, ServerName []byte, UserName []byte, Authentication []byte) int16 {
+	var _ServerName *byte
+	if len(ServerName) > 0 {
+		_ServerName = &ServerName[0]
+	}
+	var _UserName *byte
+	if len(UserName) > 0 {
+		_UserName = &UserName[0]
+	}
+	var _Authentication *byte
+	if len(Authentication) > 0 {
+		_Authentication = &Authentication[0]
+	}
+	return systemsearch.SQLConnect(ConnectionHandle, _ServerName, int16(len(ServerName)), _UserName, int16(len(UserName)), _Authentication, int16(len(Authentication)))
 }
 
-// SQLError wraps the raw SQLErrorW call with idiomatic Go types.
-func SQLError(henv unsafe.Pointer, hdbc unsafe.Pointer, hstmt unsafe.Pointer, wszSqlState *uint16, pfNativeError *int32, wszErrorMsg *uint16, cchErrorMsgMax int16, pcchErrorMsg *int16) int16 {
-	return systemsearch.SQLErrorW(henv, hdbc, hstmt, wszSqlState, pfNativeError, wszErrorMsg, cchErrorMsgMax, pcchErrorMsg)
+// SQLConnectA wraps the raw SQLConnectA call with idiomatic Go types.
+func SQLConnectA(hdbc unsafe.Pointer, szDSN []byte, szUID []byte, szAuthStr []byte) int16 {
+	var _szDSN *byte
+	if len(szDSN) > 0 {
+		_szDSN = &szDSN[0]
+	}
+	var _szUID *byte
+	if len(szUID) > 0 {
+		_szUID = &szUID[0]
+	}
+	var _szAuthStr *byte
+	if len(szAuthStr) > 0 {
+		_szAuthStr = &szAuthStr[0]
+	}
+	return systemsearch.SQLConnectA(hdbc, _szDSN, int16(len(szDSN)), _szUID, int16(len(szUID)), _szAuthStr, int16(len(szAuthStr)))
 }
 
-// SQLExecDirect wraps the raw SQLExecDirectW call with idiomatic Go types.
-func SQLExecDirect(hstmt unsafe.Pointer, szSqlStr *uint16, TextLength int32) int16 {
-	return systemsearch.SQLExecDirectW(hstmt, szSqlStr, TextLength)
+// SQLConnectW wraps the raw SQLConnectW call with idiomatic Go types.
+func SQLConnectW(hdbc unsafe.Pointer, szDSN []uint16, szUID []uint16, szAuthStr []uint16) int16 {
+	var _szDSN *uint16
+	if len(szDSN) > 0 {
+		_szDSN = &szDSN[0]
+	}
+	var _szUID *uint16
+	if len(szUID) > 0 {
+		_szUID = &szUID[0]
+	}
+	var _szAuthStr *uint16
+	if len(szAuthStr) > 0 {
+		_szAuthStr = &szAuthStr[0]
+	}
+	return systemsearch.SQLConnectW(hdbc, _szDSN, int16(len(szDSN)), _szUID, int16(len(szUID)), _szAuthStr, int16(len(szAuthStr)))
 }
 
-// SQLForeignKeys wraps the raw SQLForeignKeysW call with idiomatic Go types.
-func SQLForeignKeys(hstmt unsafe.Pointer, szPkCatalogName *uint16, cchPkCatalogName int16, szPkSchemaName *uint16, cchPkSchemaName int16, szPkTableName *uint16, cchPkTableName int16, szFkCatalogName *uint16, cchFkCatalogName int16, szFkSchemaName *uint16, cchFkSchemaName int16, szFkTableName *uint16, cchFkTableName int16) int16 {
-	return systemsearch.SQLForeignKeysW(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName)
+// SQLDataSources wraps the raw SQLDataSources call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqldatasources-function
+func SQLDataSources(EnvironmentHandle unsafe.Pointer, Direction uint16, ServerName []byte, NameLength1Ptr *int16, Description []byte, NameLength2Ptr *int16) int16 {
+	var _ServerName *byte
+	if len(ServerName) > 0 {
+		_ServerName = &ServerName[0]
+	}
+	var _Description *byte
+	if len(Description) > 0 {
+		_Description = &Description[0]
+	}
+	return systemsearch.SQLDataSources(EnvironmentHandle, Direction, _ServerName, int16(len(ServerName)), NameLength1Ptr, _Description, int16(len(Description)), NameLength2Ptr)
+}
+
+// SQLDataSourcesA wraps the raw SQLDataSourcesA call with idiomatic Go types.
+func SQLDataSourcesA(henv unsafe.Pointer, fDirection uint16, szDSN []byte, pcbDSN *int16, szDescription []byte, pcbDescription *int16) int16 {
+	var _szDSN *byte
+	if len(szDSN) > 0 {
+		_szDSN = &szDSN[0]
+	}
+	var _szDescription *byte
+	if len(szDescription) > 0 {
+		_szDescription = &szDescription[0]
+	}
+	return systemsearch.SQLDataSourcesA(henv, fDirection, _szDSN, int16(len(szDSN)), pcbDSN, _szDescription, int16(len(szDescription)), pcbDescription)
+}
+
+// SQLDataSourcesW wraps the raw SQLDataSourcesW call with idiomatic Go types.
+func SQLDataSourcesW(henv unsafe.Pointer, fDirection uint16, szDSN []uint16, pcchDSN *int16, wszDescription []uint16, pcchDescription *int16) int16 {
+	var _szDSN *uint16
+	if len(szDSN) > 0 {
+		_szDSN = &szDSN[0]
+	}
+	var _wszDescription *uint16
+	if len(wszDescription) > 0 {
+		_wszDescription = &wszDescription[0]
+	}
+	return systemsearch.SQLDataSourcesW(henv, fDirection, _szDSN, int16(len(szDSN)), pcchDSN, _wszDescription, int16(len(wszDescription)), pcchDescription)
+}
+
+// SQLDescribeCol wraps the raw SQLDescribeCol call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqldescribecol-function
+func SQLDescribeCol(StatementHandle unsafe.Pointer, ColumnNumber uint16, ColumnName []byte, NameLength *int16, DataType *int16, ColumnSize *uint64, DecimalDigits *int16, Nullable *int16) int16 {
+	var _ColumnName *byte
+	if len(ColumnName) > 0 {
+		_ColumnName = &ColumnName[0]
+	}
+	return systemsearch.SQLDescribeCol(StatementHandle, ColumnNumber, _ColumnName, int16(len(ColumnName)), NameLength, DataType, ColumnSize, DecimalDigits, Nullable)
+}
+
+// SQLDescribeColA wraps the raw SQLDescribeColA call with idiomatic Go types.
+func SQLDescribeColA(hstmt unsafe.Pointer, icol uint16, szColName []byte, pcbColName *int16, pfSqlType *int16, pcbColDef *uint64, pibScale *int16, pfNullable *int16) int16 {
+	var _szColName *byte
+	if len(szColName) > 0 {
+		_szColName = &szColName[0]
+	}
+	return systemsearch.SQLDescribeColA(hstmt, icol, _szColName, int16(len(szColName)), pcbColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+}
+
+// SQLDescribeColW wraps the raw SQLDescribeColW call with idiomatic Go types.
+func SQLDescribeColW(hstmt unsafe.Pointer, icol uint16, szColName []uint16, pcchColName *int16, pfSqlType *int16, pcbColDef *uint64, pibScale *int16, pfNullable *int16) int16 {
+	var _szColName *uint16
+	if len(szColName) > 0 {
+		_szColName = &szColName[0]
+	}
+	return systemsearch.SQLDescribeColW(hstmt, icol, _szColName, int16(len(szColName)), pcchColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+}
+
+// SQLDriverConnect wraps the raw SQLDriverConnect call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqldriverconnect-function
+func SQLDriverConnect(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn []byte, szConnStrOut []byte, pcchConnStrOut *int16, fDriverCompletion uint16) int16 {
+	var _szConnStrIn *byte
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *byte
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	return systemsearch.SQLDriverConnect(hdbc, hwnd, _szConnStrIn, int16(len(szConnStrIn)), _szConnStrOut, int16(len(szConnStrOut)), pcchConnStrOut, fDriverCompletion)
+}
+
+// SQLDriverConnectA wraps the raw SQLDriverConnectA call with idiomatic Go types.
+func SQLDriverConnectA(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn []byte, szConnStrOut []byte, pcbConnStrOut *int16, fDriverCompletion uint16) int16 {
+	var _szConnStrIn *byte
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *byte
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	return systemsearch.SQLDriverConnectA(hdbc, hwnd, _szConnStrIn, int16(len(szConnStrIn)), _szConnStrOut, int16(len(szConnStrOut)), pcbConnStrOut, fDriverCompletion)
+}
+
+// SQLDriverConnectW wraps the raw SQLDriverConnectW call with idiomatic Go types.
+func SQLDriverConnectW(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn []uint16, szConnStrOut []uint16, pcchConnStrOut *int16, fDriverCompletion uint16) int16 {
+	var _szConnStrIn *uint16
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *uint16
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	return systemsearch.SQLDriverConnectW(hdbc, hwnd, _szConnStrIn, int16(len(szConnStrIn)), _szConnStrOut, int16(len(szConnStrOut)), pcchConnStrOut, fDriverCompletion)
+}
+
+// SQLDrivers wraps the raw SQLDrivers call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqldrivers-function
+func SQLDrivers(henv unsafe.Pointer, fDirection uint16, szDriverDesc []byte, pcchDriverDesc *int16, szDriverAttributes []byte, pcchDrvrAttr *int16) int16 {
+	var _szDriverDesc *byte
+	if len(szDriverDesc) > 0 {
+		_szDriverDesc = &szDriverDesc[0]
+	}
+	var _szDriverAttributes *byte
+	if len(szDriverAttributes) > 0 {
+		_szDriverAttributes = &szDriverAttributes[0]
+	}
+	return systemsearch.SQLDrivers(henv, fDirection, _szDriverDesc, int16(len(szDriverDesc)), pcchDriverDesc, _szDriverAttributes, int16(len(szDriverAttributes)), pcchDrvrAttr)
+}
+
+// SQLDriversA wraps the raw SQLDriversA call with idiomatic Go types.
+func SQLDriversA(henv unsafe.Pointer, fDirection uint16, szDriverDesc []byte, pcbDriverDesc *int16, szDriverAttributes []byte, pcbDrvrAttr *int16) int16 {
+	var _szDriverDesc *byte
+	if len(szDriverDesc) > 0 {
+		_szDriverDesc = &szDriverDesc[0]
+	}
+	var _szDriverAttributes *byte
+	if len(szDriverAttributes) > 0 {
+		_szDriverAttributes = &szDriverAttributes[0]
+	}
+	return systemsearch.SQLDriversA(henv, fDirection, _szDriverDesc, int16(len(szDriverDesc)), pcbDriverDesc, _szDriverAttributes, int16(len(szDriverAttributes)), pcbDrvrAttr)
+}
+
+// SQLDriversW wraps the raw SQLDriversW call with idiomatic Go types.
+func SQLDriversW(henv unsafe.Pointer, fDirection uint16, szDriverDesc []uint16, pcchDriverDesc *int16, szDriverAttributes []uint16, pcchDrvrAttr *int16) int16 {
+	var _szDriverDesc *uint16
+	if len(szDriverDesc) > 0 {
+		_szDriverDesc = &szDriverDesc[0]
+	}
+	var _szDriverAttributes *uint16
+	if len(szDriverAttributes) > 0 {
+		_szDriverAttributes = &szDriverAttributes[0]
+	}
+	return systemsearch.SQLDriversW(henv, fDirection, _szDriverDesc, int16(len(szDriverDesc)), pcchDriverDesc, _szDriverAttributes, int16(len(szDriverAttributes)), pcchDrvrAttr)
+}
+
+// SQLError wraps the raw SQLError call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlerror-function
+func SQLError(EnvironmentHandle unsafe.Pointer, ConnectionHandle unsafe.Pointer, StatementHandle unsafe.Pointer, Sqlstate *byte, NativeError *int32, MessageText []byte, TextLength *int16) int16 {
+	var _MessageText *byte
+	if len(MessageText) > 0 {
+		_MessageText = &MessageText[0]
+	}
+	return systemsearch.SQLError(EnvironmentHandle, ConnectionHandle, StatementHandle, Sqlstate, NativeError, _MessageText, int16(len(MessageText)), TextLength)
+}
+
+// SQLErrorA wraps the raw SQLErrorA call with idiomatic Go types.
+func SQLErrorA(henv unsafe.Pointer, hdbc unsafe.Pointer, hstmt unsafe.Pointer, szSqlState *byte, pfNativeError *int32, szErrorMsg []byte, pcbErrorMsg *int16) int16 {
+	var _szErrorMsg *byte
+	if len(szErrorMsg) > 0 {
+		_szErrorMsg = &szErrorMsg[0]
+	}
+	return systemsearch.SQLErrorA(henv, hdbc, hstmt, szSqlState, pfNativeError, _szErrorMsg, int16(len(szErrorMsg)), pcbErrorMsg)
+}
+
+// SQLErrorW wraps the raw SQLErrorW call with idiomatic Go types.
+func SQLErrorW(henv unsafe.Pointer, hdbc unsafe.Pointer, hstmt unsafe.Pointer, wszSqlState *uint16, pfNativeError *int32, wszErrorMsg []uint16, pcchErrorMsg *int16) int16 {
+	var _wszErrorMsg *uint16
+	if len(wszErrorMsg) > 0 {
+		_wszErrorMsg = &wszErrorMsg[0]
+	}
+	return systemsearch.SQLErrorW(henv, hdbc, hstmt, wszSqlState, pfNativeError, _wszErrorMsg, int16(len(wszErrorMsg)), pcchErrorMsg)
+}
+
+// SQLExecDirect wraps the raw SQLExecDirect call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlexecdirect-function
+func SQLExecDirect(StatementHandle unsafe.Pointer, StatementText []byte) int16 {
+	var _StatementText *byte
+	if len(StatementText) > 0 {
+		_StatementText = &StatementText[0]
+	}
+	return systemsearch.SQLExecDirect(StatementHandle, _StatementText, int32(len(StatementText)))
+}
+
+// SQLExecDirectA wraps the raw SQLExecDirectA call with idiomatic Go types.
+func SQLExecDirectA(hstmt unsafe.Pointer, szSqlStr []byte) int16 {
+	var _szSqlStr *byte
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	return systemsearch.SQLExecDirectA(hstmt, _szSqlStr, int32(len(szSqlStr)))
+}
+
+// SQLExecDirectW wraps the raw SQLExecDirectW call with idiomatic Go types.
+func SQLExecDirectW(hstmt unsafe.Pointer, szSqlStr []uint16) int16 {
+	var _szSqlStr *uint16
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	return systemsearch.SQLExecDirectW(hstmt, _szSqlStr, int32(len(szSqlStr)))
+}
+
+// SQLForeignKeys wraps the raw SQLForeignKeys call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlforeignkeys-function
+func SQLForeignKeys(hstmt unsafe.Pointer, szPkCatalogName []byte, szPkSchemaName []byte, szPkTableName []byte, szFkCatalogName []byte, szFkSchemaName []byte, szFkTableName []byte) int16 {
+	var _szPkCatalogName *byte
+	if len(szPkCatalogName) > 0 {
+		_szPkCatalogName = &szPkCatalogName[0]
+	}
+	var _szPkSchemaName *byte
+	if len(szPkSchemaName) > 0 {
+		_szPkSchemaName = &szPkSchemaName[0]
+	}
+	var _szPkTableName *byte
+	if len(szPkTableName) > 0 {
+		_szPkTableName = &szPkTableName[0]
+	}
+	var _szFkCatalogName *byte
+	if len(szFkCatalogName) > 0 {
+		_szFkCatalogName = &szFkCatalogName[0]
+	}
+	var _szFkSchemaName *byte
+	if len(szFkSchemaName) > 0 {
+		_szFkSchemaName = &szFkSchemaName[0]
+	}
+	var _szFkTableName *byte
+	if len(szFkTableName) > 0 {
+		_szFkTableName = &szFkTableName[0]
+	}
+	return systemsearch.SQLForeignKeys(hstmt, _szPkCatalogName, int16(len(szPkCatalogName)), _szPkSchemaName, int16(len(szPkSchemaName)), _szPkTableName, int16(len(szPkTableName)), _szFkCatalogName, int16(len(szFkCatalogName)), _szFkSchemaName, int16(len(szFkSchemaName)), _szFkTableName, int16(len(szFkTableName)))
+}
+
+// SQLForeignKeysA wraps the raw SQLForeignKeysA call with idiomatic Go types.
+func SQLForeignKeysA(hstmt unsafe.Pointer, szPkCatalogName []byte, szPkSchemaName []byte, szPkTableName []byte, szFkCatalogName []byte, szFkSchemaName []byte, szFkTableName []byte) int16 {
+	var _szPkCatalogName *byte
+	if len(szPkCatalogName) > 0 {
+		_szPkCatalogName = &szPkCatalogName[0]
+	}
+	var _szPkSchemaName *byte
+	if len(szPkSchemaName) > 0 {
+		_szPkSchemaName = &szPkSchemaName[0]
+	}
+	var _szPkTableName *byte
+	if len(szPkTableName) > 0 {
+		_szPkTableName = &szPkTableName[0]
+	}
+	var _szFkCatalogName *byte
+	if len(szFkCatalogName) > 0 {
+		_szFkCatalogName = &szFkCatalogName[0]
+	}
+	var _szFkSchemaName *byte
+	if len(szFkSchemaName) > 0 {
+		_szFkSchemaName = &szFkSchemaName[0]
+	}
+	var _szFkTableName *byte
+	if len(szFkTableName) > 0 {
+		_szFkTableName = &szFkTableName[0]
+	}
+	return systemsearch.SQLForeignKeysA(hstmt, _szPkCatalogName, int16(len(szPkCatalogName)), _szPkSchemaName, int16(len(szPkSchemaName)), _szPkTableName, int16(len(szPkTableName)), _szFkCatalogName, int16(len(szFkCatalogName)), _szFkSchemaName, int16(len(szFkSchemaName)), _szFkTableName, int16(len(szFkTableName)))
+}
+
+// SQLForeignKeysW wraps the raw SQLForeignKeysW call with idiomatic Go types.
+func SQLForeignKeysW(hstmt unsafe.Pointer, szPkCatalogName []uint16, szPkSchemaName []uint16, szPkTableName []uint16, szFkCatalogName []uint16, szFkSchemaName []uint16, szFkTableName []uint16) int16 {
+	var _szPkCatalogName *uint16
+	if len(szPkCatalogName) > 0 {
+		_szPkCatalogName = &szPkCatalogName[0]
+	}
+	var _szPkSchemaName *uint16
+	if len(szPkSchemaName) > 0 {
+		_szPkSchemaName = &szPkSchemaName[0]
+	}
+	var _szPkTableName *uint16
+	if len(szPkTableName) > 0 {
+		_szPkTableName = &szPkTableName[0]
+	}
+	var _szFkCatalogName *uint16
+	if len(szFkCatalogName) > 0 {
+		_szFkCatalogName = &szFkCatalogName[0]
+	}
+	var _szFkSchemaName *uint16
+	if len(szFkSchemaName) > 0 {
+		_szFkSchemaName = &szFkSchemaName[0]
+	}
+	var _szFkTableName *uint16
+	if len(szFkTableName) > 0 {
+		_szFkTableName = &szFkTableName[0]
+	}
+	return systemsearch.SQLForeignKeysW(hstmt, _szPkCatalogName, int16(len(szPkCatalogName)), _szPkSchemaName, int16(len(szPkSchemaName)), _szPkTableName, int16(len(szPkTableName)), _szFkCatalogName, int16(len(szFkCatalogName)), _szFkSchemaName, int16(len(szFkSchemaName)), _szFkTableName, int16(len(szFkTableName)))
 }
 
 // SQLGetConnectAttr wraps the raw SQLGetConnectAttrW call with idiomatic Go types.
@@ -117,9 +574,32 @@ func SQLGetConnectOption(hdbc unsafe.Pointer, fOption uint16, pvParam unsafe.Poi
 	return systemsearch.SQLGetConnectOptionW(hdbc, fOption, pvParam)
 }
 
-// SQLGetCursorName wraps the raw SQLGetCursorNameW call with idiomatic Go types.
-func SQLGetCursorName(hstmt unsafe.Pointer, szCursor *uint16, cchCursorMax int16, pcchCursor *int16) int16 {
-	return systemsearch.SQLGetCursorNameW(hstmt, szCursor, cchCursorMax, pcchCursor)
+// SQLGetCursorName wraps the raw SQLGetCursorName call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlgetcursorname-function
+func SQLGetCursorName(StatementHandle unsafe.Pointer, CursorName []byte, NameLengthPtr *int16) int16 {
+	var _CursorName *byte
+	if len(CursorName) > 0 {
+		_CursorName = &CursorName[0]
+	}
+	return systemsearch.SQLGetCursorName(StatementHandle, _CursorName, int16(len(CursorName)), NameLengthPtr)
+}
+
+// SQLGetCursorNameA wraps the raw SQLGetCursorNameA call with idiomatic Go types.
+func SQLGetCursorNameA(hstmt unsafe.Pointer, szCursor []byte, pcbCursor *int16) int16 {
+	var _szCursor *byte
+	if len(szCursor) > 0 {
+		_szCursor = &szCursor[0]
+	}
+	return systemsearch.SQLGetCursorNameA(hstmt, _szCursor, int16(len(szCursor)), pcbCursor)
+}
+
+// SQLGetCursorNameW wraps the raw SQLGetCursorNameW call with idiomatic Go types.
+func SQLGetCursorNameW(hstmt unsafe.Pointer, szCursor []uint16, pcchCursor *int16) int16 {
+	var _szCursor *uint16
+	if len(szCursor) > 0 {
+		_szCursor = &szCursor[0]
+	}
+	return systemsearch.SQLGetCursorNameW(hstmt, _szCursor, int16(len(szCursor)), pcchCursor)
 }
 
 // SQLGetDescField wraps the raw SQLGetDescFieldW call with idiomatic Go types.
@@ -127,9 +607,32 @@ func SQLGetDescField(hdesc unsafe.Pointer, iRecord int16, iField int16, rgbValue
 	return systemsearch.SQLGetDescFieldW(hdesc, iRecord, iField, rgbValue, cbBufferLength, StringLength)
 }
 
-// SQLGetDescRec wraps the raw SQLGetDescRecW call with idiomatic Go types.
-func SQLGetDescRec(hdesc unsafe.Pointer, iRecord int16, szName *uint16, cchNameMax int16, pcchName *int16, pfType *int16, pfSubType *int16, pLength *int64, pPrecision *int16, pScale *int16, pNullable *int16) int16 {
-	return systemsearch.SQLGetDescRecW(hdesc, iRecord, szName, cchNameMax, pcchName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+// SQLGetDescRec wraps the raw SQLGetDescRec call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlgetdescrec-function
+func SQLGetDescRec(DescriptorHandle unsafe.Pointer, RecNumber int16, Name []byte, StringLengthPtr *int16, TypePtr *int16, SubTypePtr *int16, LengthPtr *int64, PrecisionPtr *int16, ScalePtr *int16, NullablePtr *int16) int16 {
+	var _Name *byte
+	if len(Name) > 0 {
+		_Name = &Name[0]
+	}
+	return systemsearch.SQLGetDescRec(DescriptorHandle, RecNumber, _Name, int16(len(Name)), StringLengthPtr, TypePtr, SubTypePtr, LengthPtr, PrecisionPtr, ScalePtr, NullablePtr)
+}
+
+// SQLGetDescRecA wraps the raw SQLGetDescRecA call with idiomatic Go types.
+func SQLGetDescRecA(hdesc unsafe.Pointer, iRecord int16, szName []byte, pcbName *int16, pfType *int16, pfSubType *int16, pLength *int64, pPrecision *int16, pScale *int16, pNullable *int16) int16 {
+	var _szName *byte
+	if len(szName) > 0 {
+		_szName = &szName[0]
+	}
+	return systemsearch.SQLGetDescRecA(hdesc, iRecord, _szName, int16(len(szName)), pcbName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+}
+
+// SQLGetDescRecW wraps the raw SQLGetDescRecW call with idiomatic Go types.
+func SQLGetDescRecW(hdesc unsafe.Pointer, iRecord int16, szName []uint16, pcchName *int16, pfType *int16, pfSubType *int16, pLength *int64, pPrecision *int16, pScale *int16, pNullable *int16) int16 {
+	var _szName *uint16
+	if len(szName) > 0 {
+		_szName = &szName[0]
+	}
+	return systemsearch.SQLGetDescRecW(hdesc, iRecord, _szName, int16(len(szName)), pcchName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
 }
 
 // SQLGetDiagField wraps the raw SQLGetDiagFieldW call with idiomatic Go types.
@@ -137,9 +640,32 @@ func SQLGetDiagField(fHandleType int16, handle unsafe.Pointer, iRecord int16, fD
 	return systemsearch.SQLGetDiagFieldW(fHandleType, handle, iRecord, fDiagField, rgbDiagInfo, cbBufferLength, pcbStringLength)
 }
 
-// SQLGetDiagRec wraps the raw SQLGetDiagRecW call with idiomatic Go types.
-func SQLGetDiagRec(fHandleType int16, handle unsafe.Pointer, iRecord int16, szSqlState *uint16, pfNativeError *int32, szErrorMsg *uint16, cchErrorMsgMax int16, pcchErrorMsg *int16) int16 {
-	return systemsearch.SQLGetDiagRecW(fHandleType, handle, iRecord, szSqlState, pfNativeError, szErrorMsg, cchErrorMsgMax, pcchErrorMsg)
+// SQLGetDiagRec wraps the raw SQLGetDiagRec call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlgetdiagrec-function
+func SQLGetDiagRec(HandleType int16, Handle unsafe.Pointer, RecNumber int16, Sqlstate *byte, NativeError *int32, MessageText []byte, TextLength *int16) int16 {
+	var _MessageText *byte
+	if len(MessageText) > 0 {
+		_MessageText = &MessageText[0]
+	}
+	return systemsearch.SQLGetDiagRec(HandleType, Handle, RecNumber, Sqlstate, NativeError, _MessageText, int16(len(MessageText)), TextLength)
+}
+
+// SQLGetDiagRecA wraps the raw SQLGetDiagRecA call with idiomatic Go types.
+func SQLGetDiagRecA(fHandleType int16, handle unsafe.Pointer, iRecord int16, szSqlState *byte, pfNativeError *int32, szErrorMsg []byte, pcbErrorMsg *int16) int16 {
+	var _szErrorMsg *byte
+	if len(szErrorMsg) > 0 {
+		_szErrorMsg = &szErrorMsg[0]
+	}
+	return systemsearch.SQLGetDiagRecA(fHandleType, handle, iRecord, szSqlState, pfNativeError, _szErrorMsg, int16(len(szErrorMsg)), pcbErrorMsg)
+}
+
+// SQLGetDiagRecW wraps the raw SQLGetDiagRecW call with idiomatic Go types.
+func SQLGetDiagRecW(fHandleType int16, handle unsafe.Pointer, iRecord int16, szSqlState *uint16, pfNativeError *int32, szErrorMsg []uint16, pcchErrorMsg *int16) int16 {
+	var _szErrorMsg *uint16
+	if len(szErrorMsg) > 0 {
+		_szErrorMsg = &szErrorMsg[0]
+	}
+	return systemsearch.SQLGetDiagRecW(fHandleType, handle, iRecord, szSqlState, pfNativeError, _szErrorMsg, int16(len(szErrorMsg)), pcchErrorMsg)
 }
 
 // SQLGetInfo wraps the raw SQLGetInfoW call with idiomatic Go types.
@@ -170,29 +696,240 @@ func SQLLinkedCatalogs(param0 unsafe.Pointer, param1 string, param2 int16) int16
 	return systemsearch.SQLLinkedCatalogsW(param0, foundation.PWSTR(_param1), param2)
 }
 
-// SQLNativeSql wraps the raw SQLNativeSqlW call with idiomatic Go types.
-func SQLNativeSql(hdbc unsafe.Pointer, szSqlStrIn *uint16, cchSqlStrIn int32, szSqlStr *uint16, cchSqlStrMax int32, pcchSqlStr *int32) int16 {
-	return systemsearch.SQLNativeSqlW(hdbc, szSqlStrIn, cchSqlStrIn, szSqlStr, cchSqlStrMax, pcchSqlStr)
+// SQLNativeSql wraps the raw SQLNativeSql call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlnativesql-function
+func SQLNativeSql(hdbc unsafe.Pointer, szSqlStrIn []byte, szSqlStr []byte, pcbSqlStr *int32) int16 {
+	var _szSqlStrIn *byte
+	if len(szSqlStrIn) > 0 {
+		_szSqlStrIn = &szSqlStrIn[0]
+	}
+	var _szSqlStr *byte
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	return systemsearch.SQLNativeSql(hdbc, _szSqlStrIn, int32(len(szSqlStrIn)), _szSqlStr, int32(len(szSqlStr)), pcbSqlStr)
 }
 
-// SQLPrepare wraps the raw SQLPrepareW call with idiomatic Go types.
-func SQLPrepare(hstmt unsafe.Pointer, szSqlStr *uint16, cchSqlStr int32) int16 {
-	return systemsearch.SQLPrepareW(hstmt, szSqlStr, cchSqlStr)
+// SQLNativeSqlA wraps the raw SQLNativeSqlA call with idiomatic Go types.
+func SQLNativeSqlA(hdbc unsafe.Pointer, szSqlStrIn []byte, szSqlStr []byte, pcbSqlStr *int32) int16 {
+	var _szSqlStrIn *byte
+	if len(szSqlStrIn) > 0 {
+		_szSqlStrIn = &szSqlStrIn[0]
+	}
+	var _szSqlStr *byte
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	return systemsearch.SQLNativeSqlA(hdbc, _szSqlStrIn, int32(len(szSqlStrIn)), _szSqlStr, int32(len(szSqlStr)), pcbSqlStr)
 }
 
-// SQLPrimaryKeys wraps the raw SQLPrimaryKeysW call with idiomatic Go types.
-func SQLPrimaryKeys(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16) int16 {
-	return systemsearch.SQLPrimaryKeysW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+// SQLNativeSqlW wraps the raw SQLNativeSqlW call with idiomatic Go types.
+func SQLNativeSqlW(hdbc unsafe.Pointer, szSqlStrIn []uint16, szSqlStr []uint16, pcchSqlStr *int32) int16 {
+	var _szSqlStrIn *uint16
+	if len(szSqlStrIn) > 0 {
+		_szSqlStrIn = &szSqlStrIn[0]
+	}
+	var _szSqlStr *uint16
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	return systemsearch.SQLNativeSqlW(hdbc, _szSqlStrIn, int32(len(szSqlStrIn)), _szSqlStr, int32(len(szSqlStr)), pcchSqlStr)
 }
 
-// SQLProcedureColumns wraps the raw SQLProcedureColumnsW call with idiomatic Go types.
-func SQLProcedureColumns(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szProcName *uint16, cchProcName int16, szColumnName *uint16, cchColumnName int16) int16 {
-	return systemsearch.SQLProcedureColumnsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName)
+// SQLPrepare wraps the raw SQLPrepare call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlprepare-function
+func SQLPrepare(StatementHandle unsafe.Pointer, StatementText []byte) int16 {
+	var _StatementText *byte
+	if len(StatementText) > 0 {
+		_StatementText = &StatementText[0]
+	}
+	return systemsearch.SQLPrepare(StatementHandle, _StatementText, int32(len(StatementText)))
 }
 
-// SQLProcedures wraps the raw SQLProceduresW call with idiomatic Go types.
-func SQLProcedures(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szProcName *uint16, cchProcName int16) int16 {
-	return systemsearch.SQLProceduresW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName)
+// SQLPrepareA wraps the raw SQLPrepareA call with idiomatic Go types.
+func SQLPrepareA(hstmt unsafe.Pointer, szSqlStr []byte) int16 {
+	var _szSqlStr *byte
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	return systemsearch.SQLPrepareA(hstmt, _szSqlStr, int32(len(szSqlStr)))
+}
+
+// SQLPrepareW wraps the raw SQLPrepareW call with idiomatic Go types.
+func SQLPrepareW(hstmt unsafe.Pointer, szSqlStr []uint16) int16 {
+	var _szSqlStr *uint16
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	return systemsearch.SQLPrepareW(hstmt, _szSqlStr, int32(len(szSqlStr)))
+}
+
+// SQLPrimaryKeys wraps the raw SQLPrimaryKeys call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlprimarykeys-function
+func SQLPrimaryKeys(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLPrimaryKeys(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)))
+}
+
+// SQLPrimaryKeysA wraps the raw SQLPrimaryKeysA call with idiomatic Go types.
+func SQLPrimaryKeysA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLPrimaryKeysA(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)))
+}
+
+// SQLPrimaryKeysW wraps the raw SQLPrimaryKeysW call with idiomatic Go types.
+func SQLPrimaryKeysW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLPrimaryKeysW(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)))
+}
+
+// SQLProcedureColumns wraps the raw SQLProcedureColumns call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlprocedurecolumns-function
+func SQLProcedureColumns(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szProcName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *byte
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	return systemsearch.SQLProcedureColumns(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szProcName, int16(len(szProcName)), _szColumnName, int16(len(szColumnName)))
+}
+
+// SQLProcedureColumnsA wraps the raw SQLProcedureColumnsA call with idiomatic Go types.
+func SQLProcedureColumnsA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szProcName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *byte
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	return systemsearch.SQLProcedureColumnsA(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szProcName, int16(len(szProcName)), _szColumnName, int16(len(szColumnName)))
+}
+
+// SQLProcedureColumnsW wraps the raw SQLProcedureColumnsW call with idiomatic Go types.
+func SQLProcedureColumnsW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szProcName []uint16, szColumnName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *uint16
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	var _szColumnName *uint16
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	return systemsearch.SQLProcedureColumnsW(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szProcName, int16(len(szProcName)), _szColumnName, int16(len(szColumnName)))
+}
+
+// SQLProcedures wraps the raw SQLProcedures call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlprocedures-function
+func SQLProcedures(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szProcName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *byte
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	return systemsearch.SQLProcedures(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szProcName, int16(len(szProcName)))
+}
+
+// SQLProceduresA wraps the raw SQLProceduresA call with idiomatic Go types.
+func SQLProceduresA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szProcName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *byte
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	return systemsearch.SQLProceduresA(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szProcName, int16(len(szProcName)))
+}
+
+// SQLProceduresW wraps the raw SQLProceduresW call with idiomatic Go types.
+func SQLProceduresW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szProcName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *uint16
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	return systemsearch.SQLProceduresW(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szProcName, int16(len(szProcName)))
 }
 
 // SQLSetConnectAttr wraps the raw SQLSetConnectAttrW call with idiomatic Go types.
@@ -205,9 +942,32 @@ func SQLSetConnectOption(hdbc unsafe.Pointer, fOption uint16, vParam uint64) int
 	return systemsearch.SQLSetConnectOptionW(hdbc, fOption, vParam)
 }
 
-// SQLSetCursorName wraps the raw SQLSetCursorNameW call with idiomatic Go types.
-func SQLSetCursorName(hstmt unsafe.Pointer, szCursor *uint16, cchCursor int16) int16 {
-	return systemsearch.SQLSetCursorNameW(hstmt, szCursor, cchCursor)
+// SQLSetCursorName wraps the raw SQLSetCursorName call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlsetcursorname-function
+func SQLSetCursorName(StatementHandle unsafe.Pointer, CursorName []byte) int16 {
+	var _CursorName *byte
+	if len(CursorName) > 0 {
+		_CursorName = &CursorName[0]
+	}
+	return systemsearch.SQLSetCursorName(StatementHandle, _CursorName, int16(len(CursorName)))
+}
+
+// SQLSetCursorNameA wraps the raw SQLSetCursorNameA call with idiomatic Go types.
+func SQLSetCursorNameA(hstmt unsafe.Pointer, szCursor []byte) int16 {
+	var _szCursor *byte
+	if len(szCursor) > 0 {
+		_szCursor = &szCursor[0]
+	}
+	return systemsearch.SQLSetCursorNameA(hstmt, _szCursor, int16(len(szCursor)))
+}
+
+// SQLSetCursorNameW wraps the raw SQLSetCursorNameW call with idiomatic Go types.
+func SQLSetCursorNameW(hstmt unsafe.Pointer, szCursor []uint16) int16 {
+	var _szCursor *uint16
+	if len(szCursor) > 0 {
+		_szCursor = &szCursor[0]
+	}
+	return systemsearch.SQLSetCursorNameW(hstmt, _szCursor, int16(len(szCursor)))
 }
 
 // SQLSetDescField wraps the raw SQLSetDescFieldW call with idiomatic Go types.
@@ -220,22 +980,222 @@ func SQLSetStmtAttr(hstmt unsafe.Pointer, fAttribute int32, rgbValue unsafe.Poin
 	return systemsearch.SQLSetStmtAttrW(hstmt, fAttribute, rgbValue, cbValueMax)
 }
 
-// SQLSpecialColumns wraps the raw SQLSpecialColumnsW call with idiomatic Go types.
-func SQLSpecialColumns(hstmt unsafe.Pointer, fColType uint16, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, fScope uint16, fNullable uint16) int16 {
-	return systemsearch.SQLSpecialColumnsW(hstmt, fColType, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, fScope, fNullable)
+// SQLSpecialColumns wraps the raw SQLSpecialColumns call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlspecialcolumns-function
+func SQLSpecialColumns(StatementHandle unsafe.Pointer, IdentifierType uint16, CatalogName []byte, SchemaName []byte, TableName []byte, Scope uint16, Nullable uint16) int16 {
+	var _CatalogName *byte
+	if len(CatalogName) > 0 {
+		_CatalogName = &CatalogName[0]
+	}
+	var _SchemaName *byte
+	if len(SchemaName) > 0 {
+		_SchemaName = &SchemaName[0]
+	}
+	var _TableName *byte
+	if len(TableName) > 0 {
+		_TableName = &TableName[0]
+	}
+	return systemsearch.SQLSpecialColumns(StatementHandle, IdentifierType, _CatalogName, int16(len(CatalogName)), _SchemaName, int16(len(SchemaName)), _TableName, int16(len(TableName)), Scope, Nullable)
 }
 
-// SQLStatistics wraps the raw SQLStatisticsW call with idiomatic Go types.
-func SQLStatistics(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, fUnique uint16, fAccuracy uint16) int16 {
-	return systemsearch.SQLStatisticsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, fUnique, fAccuracy)
+// SQLSpecialColumnsA wraps the raw SQLSpecialColumnsA call with idiomatic Go types.
+func SQLSpecialColumnsA(hstmt unsafe.Pointer, fColType uint16, szCatalogName []byte, szSchemaName []byte, szTableName []byte, fScope uint16, fNullable uint16) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLSpecialColumnsA(hstmt, fColType, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), fScope, fNullable)
 }
 
-// SQLTablePrivileges wraps the raw SQLTablePrivilegesW call with idiomatic Go types.
-func SQLTablePrivileges(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16) int16 {
-	return systemsearch.SQLTablePrivilegesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+// SQLSpecialColumnsW wraps the raw SQLSpecialColumnsW call with idiomatic Go types.
+func SQLSpecialColumnsW(hstmt unsafe.Pointer, fColType uint16, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, fScope uint16, fNullable uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLSpecialColumnsW(hstmt, fColType, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), fScope, fNullable)
 }
 
-// SQLTables wraps the raw SQLTablesW call with idiomatic Go types.
-func SQLTables(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, szTableType *uint16, cchTableType int16) int16 {
-	return systemsearch.SQLTablesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szTableType, cchTableType)
+// SQLStatistics wraps the raw SQLStatistics call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqlstatistics-function
+func SQLStatistics(StatementHandle unsafe.Pointer, CatalogName []byte, SchemaName []byte, TableName []byte, Unique uint16, Reserved uint16) int16 {
+	var _CatalogName *byte
+	if len(CatalogName) > 0 {
+		_CatalogName = &CatalogName[0]
+	}
+	var _SchemaName *byte
+	if len(SchemaName) > 0 {
+		_SchemaName = &SchemaName[0]
+	}
+	var _TableName *byte
+	if len(TableName) > 0 {
+		_TableName = &TableName[0]
+	}
+	return systemsearch.SQLStatistics(StatementHandle, _CatalogName, int16(len(CatalogName)), _SchemaName, int16(len(SchemaName)), _TableName, int16(len(TableName)), Unique, Reserved)
+}
+
+// SQLStatisticsA wraps the raw SQLStatisticsA call with idiomatic Go types.
+func SQLStatisticsA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, fUnique uint16, fAccuracy uint16) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLStatisticsA(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), fUnique, fAccuracy)
+}
+
+// SQLStatisticsW wraps the raw SQLStatisticsW call with idiomatic Go types.
+func SQLStatisticsW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, fUnique uint16, fAccuracy uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLStatisticsW(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), fUnique, fAccuracy)
+}
+
+// SQLTablePrivileges wraps the raw SQLTablePrivileges call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqltableprivileges-function
+func SQLTablePrivileges(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLTablePrivileges(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)))
+}
+
+// SQLTablePrivilegesA wraps the raw SQLTablePrivilegesA call with idiomatic Go types.
+func SQLTablePrivilegesA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLTablePrivilegesA(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)))
+}
+
+// SQLTablePrivilegesW wraps the raw SQLTablePrivilegesW call with idiomatic Go types.
+func SQLTablePrivilegesW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	return systemsearch.SQLTablePrivilegesW(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)))
+}
+
+// SQLTables wraps the raw SQLTables call with idiomatic Go types.
+// https://learn.microsoft.com/sql/odbc/reference/syntax/sqltables-function
+func SQLTables(StatementHandle unsafe.Pointer, CatalogName []byte, SchemaName []byte, TableName []byte, TableType []byte) int16 {
+	var _CatalogName *byte
+	if len(CatalogName) > 0 {
+		_CatalogName = &CatalogName[0]
+	}
+	var _SchemaName *byte
+	if len(SchemaName) > 0 {
+		_SchemaName = &SchemaName[0]
+	}
+	var _TableName *byte
+	if len(TableName) > 0 {
+		_TableName = &TableName[0]
+	}
+	var _TableType *byte
+	if len(TableType) > 0 {
+		_TableType = &TableType[0]
+	}
+	return systemsearch.SQLTables(StatementHandle, _CatalogName, int16(len(CatalogName)), _SchemaName, int16(len(SchemaName)), _TableName, int16(len(TableName)), _TableType, int16(len(TableType)))
+}
+
+// SQLTablesA wraps the raw SQLTablesA call with idiomatic Go types.
+func SQLTablesA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, szTableType []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szTableType *byte
+	if len(szTableType) > 0 {
+		_szTableType = &szTableType[0]
+	}
+	return systemsearch.SQLTablesA(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), _szTableType, int16(len(szTableType)))
+}
+
+// SQLTablesW wraps the raw SQLTablesW call with idiomatic Go types.
+func SQLTablesW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, szTableType []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szTableType *uint16
+	if len(szTableType) > 0 {
+		_szTableType = &szTableType[0]
+	}
+	return systemsearch.SQLTablesW(hstmt, _szCatalogName, int16(len(szCatalogName)), _szSchemaName, int16(len(szSchemaName)), _szTableName, int16(len(szTableName)), _szTableType, int16(len(szTableType)))
 }

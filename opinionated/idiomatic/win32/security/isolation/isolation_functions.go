@@ -16,11 +16,15 @@ import (
 
 // CreateAppContainerProfile wraps the raw CreateAppContainerProfile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-createappcontainerprofile
-func CreateAppContainerProfile(pszAppContainerName string, pszDisplayName string, pszDescription string, pCapabilities *security.SID_AND_ATTRIBUTES, dwCapabilityCount uint32, ppSidAppContainerSid *security.PSID) error {
+func CreateAppContainerProfile(pszAppContainerName string, pszDisplayName string, pszDescription string, pCapabilities []security.SID_AND_ATTRIBUTES, ppSidAppContainerSid *security.PSID) error {
 	_pszAppContainerName := win32.UTF16Ptr(pszAppContainerName)
 	_pszDisplayName := win32.UTF16Ptr(pszDisplayName)
 	_pszDescription := win32.UTF16Ptr(pszDescription)
-	return win32.HRESULTError(int32(securityisolation.CreateAppContainerProfile(foundation.PWSTR(_pszAppContainerName), foundation.PWSTR(_pszDisplayName), foundation.PWSTR(_pszDescription), pCapabilities, dwCapabilityCount, ppSidAppContainerSid)))
+	var _pCapabilities *security.SID_AND_ATTRIBUTES
+	if len(pCapabilities) > 0 {
+		_pCapabilities = &pCapabilities[0]
+	}
+	return win32.HRESULTError(int32(securityisolation.CreateAppContainerProfile(foundation.PWSTR(_pszAppContainerName), foundation.PWSTR(_pszDisplayName), foundation.PWSTR(_pszDescription), _pCapabilities, uint32(len(pCapabilities)), ppSidAppContainerSid)))
 }
 
 // DeleteAppContainerProfile wraps the raw DeleteAppContainerProfile call with idiomatic Go types.

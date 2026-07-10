@@ -9,8 +9,28 @@ import (
 	uiinputtouch "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input/touch"
 )
 
+// GetTouchInputInfo wraps the raw GetTouchInputInfo call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-gettouchinputinfo
+func GetTouchInputInfo(hTouchInput uiinputtouch.HTOUCHINPUT, pInputs []uiinputtouch.TOUCHINPUT, cbSize int32) error {
+	var _pInputs *uiinputtouch.TOUCHINPUT
+	if len(pInputs) > 0 {
+		_pInputs = &pInputs[0]
+	}
+	return uiinputtouch.GetTouchInputInfo(hTouchInput, uint32(len(pInputs)), _pInputs, cbSize)
+}
+
 // IsTouchWindow wraps the raw IsTouchWindow call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-istouchwindow
 func IsTouchWindow(hwnd foundation.HWND, pulFlags *uint32) bool {
 	return uiinputtouch.IsTouchWindow(hwnd, pulFlags) != 0
+}
+
+// SetGestureConfig wraps the raw SetGestureConfig call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setgestureconfig
+func SetGestureConfig(hwnd foundation.HWND, dwReserved uint32, pGestureConfig []uiinputtouch.GESTURECONFIG, cbSize uint32) error {
+	var _pGestureConfig *uiinputtouch.GESTURECONFIG
+	if len(pGestureConfig) > 0 {
+		_pGestureConfig = &pGestureConfig[0]
+	}
+	return uiinputtouch.SetGestureConfig(hwnd, dwReserved, uint32(len(pGestureConfig)), _pGestureConfig, cbSize)
 }

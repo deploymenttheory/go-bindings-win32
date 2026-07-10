@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	securityauthenticationidentity "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/authentication/identity"
 	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
 	securitycryptographycertificates "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography/certificates"
 )
@@ -128,9 +129,32 @@ func CertSrvServerControlW(pwszServerName string, dwControlFlags uint32, pcbOut 
 
 // PstGetCertificates wraps the raw PstGetCertificates call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/certpoleng/nf-certpoleng-pstgetcertificates
-func PstGetCertificates(pTargetName *foundation.UNICODE_STRING, cCriteria uint32, rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA, bIsClient bool, pdwCertChainContextCount *uint32, ppCertChainContexts ***securitycryptography.CERT_CHAIN_CONTEXT) foundation.NTSTATUS {
+func PstGetCertificates(pTargetName *foundation.UNICODE_STRING, rgpCriteria []securitycryptography.CERT_SELECT_CRITERIA, bIsClient bool, pdwCertChainContextCount *uint32, ppCertChainContexts ***securitycryptography.CERT_CHAIN_CONTEXT) foundation.NTSTATUS {
+	var _rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA
+	if len(rgpCriteria) > 0 {
+		_rgpCriteria = &rgpCriteria[0]
+	}
 	_bIsClient := foundation.BOOL(win32.Bool32(bIsClient))
-	return securitycryptographycertificates.PstGetCertificates(pTargetName, cCriteria, rgpCriteria, _bIsClient, pdwCertChainContextCount, ppCertChainContexts)
+	return securitycryptographycertificates.PstGetCertificates(pTargetName, uint32(len(rgpCriteria)), _rgpCriteria, _bIsClient, pdwCertChainContextCount, ppCertChainContexts)
+}
+
+// PstGetTrustAnchors wraps the raw PstGetTrustAnchors call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/certpoleng/nf-certpoleng-pstgettrustanchors
+func PstGetTrustAnchors(pTargetName *foundation.UNICODE_STRING, rgpCriteria []securitycryptography.CERT_SELECT_CRITERIA, ppTrustedIssuers **securityauthenticationidentity.SecPkgContext_IssuerListInfoEx) foundation.NTSTATUS {
+	var _rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA
+	if len(rgpCriteria) > 0 {
+		_rgpCriteria = &rgpCriteria[0]
+	}
+	return securitycryptographycertificates.PstGetTrustAnchors(pTargetName, uint32(len(rgpCriteria)), _rgpCriteria, ppTrustedIssuers)
+}
+
+// PstGetTrustAnchorsEx wraps the raw PstGetTrustAnchorsEx call with idiomatic Go types.
+func PstGetTrustAnchorsEx(pTargetName *foundation.UNICODE_STRING, rgpCriteria []securitycryptography.CERT_SELECT_CRITERIA, pCertContext *securitycryptography.CERT_CONTEXT, ppTrustedIssuers **securityauthenticationidentity.SecPkgContext_IssuerListInfoEx) foundation.NTSTATUS {
+	var _rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA
+	if len(rgpCriteria) > 0 {
+		_rgpCriteria = &rgpCriteria[0]
+	}
+	return securitycryptographycertificates.PstGetTrustAnchorsEx(pTargetName, uint32(len(rgpCriteria)), _rgpCriteria, pCertContext, ppTrustedIssuers)
 }
 
 // PstValidate wraps the raw PstValidate call with idiomatic Go types.

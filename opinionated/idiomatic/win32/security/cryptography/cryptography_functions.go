@@ -241,8 +241,12 @@ func CertComparePublicKeyInfo(dwCertEncodingType securitycryptography.CERT_QUERY
 
 // CertCreateCTLEntryFromCertificateContextProperties wraps the raw CertCreateCTLEntryFromCertificateContextProperties call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certcreatectlentryfromcertificatecontextproperties
-func CertCreateCTLEntryFromCertificateContextProperties(pCertContext *securitycryptography.CERT_CONTEXT, cOptAttr uint32, rgOptAttr *securitycryptography.CRYPT_ATTRIBUTE, dwFlags uint32, pCtlEntry *securitycryptography.CTL_ENTRY, pcbCtlEntry *uint32) error {
-	return securitycryptography.CertCreateCTLEntryFromCertificateContextProperties(pCertContext, cOptAttr, rgOptAttr, dwFlags, nil, pCtlEntry, pcbCtlEntry)
+func CertCreateCTLEntryFromCertificateContextProperties(pCertContext *securitycryptography.CERT_CONTEXT, rgOptAttr []securitycryptography.CRYPT_ATTRIBUTE, dwFlags uint32, pCtlEntry *securitycryptography.CTL_ENTRY, pcbCtlEntry *uint32) error {
+	var _rgOptAttr *securitycryptography.CRYPT_ATTRIBUTE
+	if len(rgOptAttr) > 0 {
+		_rgOptAttr = &rgOptAttr[0]
+	}
+	return securitycryptography.CertCreateCTLEntryFromCertificateContextProperties(pCertContext, uint32(len(rgOptAttr)), _rgOptAttr, dwFlags, nil, pCtlEntry, pcbCtlEntry)
 }
 
 // CertEnumSubjectInSortedCTL wraps the raw CertEnumSubjectInSortedCTL call with idiomatic Go types.
@@ -263,10 +267,30 @@ func CertEnumSystemStoreLocation(dwFlags uint32, pvArg unsafe.Pointer, pfnEnum s
 	return securitycryptography.CertEnumSystemStoreLocation(dwFlags, pvArg, pfnEnum) != 0
 }
 
+// CertFindAttribute wraps the raw CertFindAttribute call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certfindattribute
+func CertFindAttribute(pszObjId foundation.PSTR, rgAttr []securitycryptography.CRYPT_ATTRIBUTE) *securitycryptography.CRYPT_ATTRIBUTE {
+	var _rgAttr *securitycryptography.CRYPT_ATTRIBUTE
+	if len(rgAttr) > 0 {
+		_rgAttr = &rgAttr[0]
+	}
+	return securitycryptography.CertFindAttribute(pszObjId, uint32(len(rgAttr)), _rgAttr)
+}
+
 // CertFindCertificateInCRL wraps the raw CertFindCertificateInCRL call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certfindcertificateincrl
 func CertFindCertificateInCRL(pCert *securitycryptography.CERT_CONTEXT, pCrlContext *securitycryptography.CRL_CONTEXT, dwFlags uint32, ppCrlEntry **securitycryptography.CRL_ENTRY) bool {
 	return securitycryptography.CertFindCertificateInCRL(pCert, pCrlContext, dwFlags, nil, ppCrlEntry) != 0
+}
+
+// CertFindExtension wraps the raw CertFindExtension call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certfindextension
+func CertFindExtension(pszObjId foundation.PSTR, rgExtensions []securitycryptography.CERT_EXTENSION) *securitycryptography.CERT_EXTENSION {
+	var _rgExtensions *securitycryptography.CERT_EXTENSION
+	if len(rgExtensions) > 0 {
+		_rgExtensions = &rgExtensions[0]
+	}
+	return securitycryptography.CertFindExtension(pszObjId, uint32(len(rgExtensions)), _rgExtensions)
 }
 
 // CertFindSubjectInSortedCTL wraps the raw CertFindSubjectInSortedCTL call with idiomatic Go types.
@@ -309,6 +333,16 @@ func CertGetNameString(pCertContext *securitycryptography.CERT_CONTEXT, dwType u
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetserverocspresponsecontext
 func CertGetServerOcspResponseContext(hServerOcspResponse unsafe.Pointer, dwFlags uint32) *securitycryptography.CERT_SERVER_OCSP_RESPONSE_CONTEXT {
 	return securitycryptography.CertGetServerOcspResponseContext(hServerOcspResponse, dwFlags, nil)
+}
+
+// CertGetValidUsages wraps the raw CertGetValidUsages call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetvalidusages
+func CertGetValidUsages(rghCerts []*securitycryptography.CERT_CONTEXT, cNumOIDs *int32, rghOIDs *foundation.PSTR, pcbOIDs *uint32) error {
+	var _rghCerts **securitycryptography.CERT_CONTEXT
+	if len(rghCerts) > 0 {
+		_rghCerts = &rghCerts[0]
+	}
+	return securitycryptography.CertGetValidUsages(uint32(len(rghCerts)), _rghCerts, cNumOIDs, rghOIDs, pcbOIDs)
 }
 
 // CertIsStrongHashToSign wraps the raw CertIsStrongHashToSign call with idiomatic Go types.
@@ -375,6 +409,16 @@ func CertRetrieveLogoOrBiometricInfo(pCertContext *securitycryptography.CERT_CON
 	return securitycryptography.CertRetrieveLogoOrBiometricInfo(pCertContext, lpszLogoOrBiometricType, dwRetrievalFlags, dwTimeout, dwFlags, nil, ppbData, pcbData, ppwszMimeType)
 }
 
+// CertSelectCertificateChains wraps the raw CertSelectCertificateChains call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certselectcertificatechains
+func CertSelectCertificateChains(pSelectionContext *win32.GUID, dwFlags uint32, pChainParameters *securitycryptography.CERT_SELECT_CHAIN_PARA, rgpCriteria []securitycryptography.CERT_SELECT_CRITERIA, hStore securitycryptography.HCERTSTORE, pcSelection *uint32, pprgpSelection ***securitycryptography.CERT_CHAIN_CONTEXT) error {
+	var _rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA
+	if len(rgpCriteria) > 0 {
+		_rgpCriteria = &rgpCriteria[0]
+	}
+	return securitycryptography.CertSelectCertificateChains(pSelectionContext, dwFlags, pChainParameters, uint32(len(rgpCriteria)), _rgpCriteria, hStore, pcSelection, pprgpSelection)
+}
+
 // CertSetStoreProperty wraps the raw CertSetStoreProperty call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certsetstoreproperty
 func CertSetStoreProperty(hCertStore securitycryptography.HCERTSTORE, dwPropId uint32, dwFlags uint32, pvData unsafe.Pointer) bool {
@@ -409,8 +453,12 @@ func CertUnregisterSystemStore(pvSystemStore unsafe.Pointer, dwFlags uint32) boo
 
 // CertVerifyCRLRevocation wraps the raw CertVerifyCRLRevocation call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certverifycrlrevocation
-func CertVerifyCRLRevocation(dwCertEncodingType securitycryptography.CERT_QUERY_ENCODING_TYPE, pCertId *securitycryptography.CERT_INFO, cCrlInfo uint32, rgpCrlInfo **securitycryptography.CRL_INFO) bool {
-	return securitycryptography.CertVerifyCRLRevocation(dwCertEncodingType, pCertId, cCrlInfo, rgpCrlInfo) != 0
+func CertVerifyCRLRevocation(dwCertEncodingType securitycryptography.CERT_QUERY_ENCODING_TYPE, pCertId *securitycryptography.CERT_INFO, rgpCrlInfo []*securitycryptography.CRL_INFO) bool {
+	var _rgpCrlInfo **securitycryptography.CRL_INFO
+	if len(rgpCrlInfo) > 0 {
+		_rgpCrlInfo = &rgpCrlInfo[0]
+	}
+	return securitycryptography.CertVerifyCRLRevocation(dwCertEncodingType, pCertId, uint32(len(rgpCrlInfo)), _rgpCrlInfo) != 0
 }
 
 // CertVerifyCertificateChainPolicy wraps the raw CertVerifyCertificateChainPolicy call with idiomatic Go types.
@@ -498,6 +546,16 @@ func CryptDuplicateKey(hKey uintptr, dwFlags uint32, phKey *uintptr) error {
 func CryptEncrypt(hKey uintptr, hHash uintptr, Final bool, dwFlags uint32, pbData *byte, pdwDataLen *uint32, dwBufLen uint32) error {
 	_Final := foundation.BOOL(win32.Bool32(Final))
 	return securitycryptography.CryptEncrypt(hKey, hHash, _Final, dwFlags, pbData, pdwDataLen, dwBufLen)
+}
+
+// CryptEncryptMessage wraps the raw CryptEncryptMessage call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptencryptmessage
+func CryptEncryptMessage(pEncryptPara *securitycryptography.CRYPT_ENCRYPT_MESSAGE_PARA, rgpRecipientCert []*securitycryptography.CERT_CONTEXT, pbToBeEncrypted *byte, cbToBeEncrypted uint32, pbEncryptedBlob *byte, pcbEncryptedBlob *uint32) error {
+	var _rgpRecipientCert **securitycryptography.CERT_CONTEXT
+	if len(rgpRecipientCert) > 0 {
+		_rgpRecipientCert = &rgpRecipientCert[0]
+	}
+	return securitycryptography.CryptEncryptMessage(pEncryptPara, uint32(len(rgpRecipientCert)), _rgpRecipientCert, pbToBeEncrypted, cbToBeEncrypted, pbEncryptedBlob, pcbEncryptedBlob)
 }
 
 // CryptEnumKeyIdentifierProperties wraps the raw CryptEnumKeyIdentifierProperties call with idiomatic Go types.
@@ -634,8 +692,42 @@ func CryptInstallDefaultContext(hCryptProv uintptr, dwDefaultType securitycrypto
 
 // CryptInstallOIDFunctionAddress wraps the raw CryptInstallOIDFunctionAddress call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptinstalloidfunctionaddress
-func CryptInstallOIDFunctionAddress(hModule foundation.HMODULE, dwEncodingType uint32, pszFuncName foundation.PSTR, cFuncEntry uint32, rgFuncEntry *securitycryptography.CRYPT_OID_FUNC_ENTRY, dwFlags uint32) bool {
-	return securitycryptography.CryptInstallOIDFunctionAddress(hModule, dwEncodingType, pszFuncName, cFuncEntry, rgFuncEntry, dwFlags) != 0
+func CryptInstallOIDFunctionAddress(hModule foundation.HMODULE, dwEncodingType uint32, pszFuncName foundation.PSTR, rgFuncEntry []securitycryptography.CRYPT_OID_FUNC_ENTRY, dwFlags uint32) bool {
+	var _rgFuncEntry *securitycryptography.CRYPT_OID_FUNC_ENTRY
+	if len(rgFuncEntry) > 0 {
+		_rgFuncEntry = &rgFuncEntry[0]
+	}
+	return securitycryptography.CryptInstallOIDFunctionAddress(hModule, dwEncodingType, pszFuncName, uint32(len(rgFuncEntry)), _rgFuncEntry, dwFlags) != 0
+}
+
+// CryptMsgCountersign wraps the raw CryptMsgCountersign call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptmsgcountersign
+func CryptMsgCountersign(hCryptMsg unsafe.Pointer, dwIndex uint32, rgCountersigners []securitycryptography.CMSG_SIGNER_ENCODE_INFO) error {
+	var _rgCountersigners *securitycryptography.CMSG_SIGNER_ENCODE_INFO
+	if len(rgCountersigners) > 0 {
+		_rgCountersigners = &rgCountersigners[0]
+	}
+	return securitycryptography.CryptMsgCountersign(hCryptMsg, dwIndex, uint32(len(rgCountersigners)), _rgCountersigners)
+}
+
+// CryptMsgCountersignEncoded wraps the raw CryptMsgCountersignEncoded call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptmsgcountersignencoded
+func CryptMsgCountersignEncoded(dwEncodingType uint32, pbSignerInfo *byte, cbSignerInfo uint32, rgCountersigners []securitycryptography.CMSG_SIGNER_ENCODE_INFO, pbCountersignature *byte, pcbCountersignature *uint32) error {
+	var _rgCountersigners *securitycryptography.CMSG_SIGNER_ENCODE_INFO
+	if len(rgCountersigners) > 0 {
+		_rgCountersigners = &rgCountersigners[0]
+	}
+	return securitycryptography.CryptMsgCountersignEncoded(dwEncodingType, pbSignerInfo, cbSignerInfo, uint32(len(rgCountersigners)), _rgCountersigners, pbCountersignature, pcbCountersignature)
+}
+
+// CryptMsgGetAndVerifySigner wraps the raw CryptMsgGetAndVerifySigner call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptmsggetandverifysigner
+func CryptMsgGetAndVerifySigner(hCryptMsg unsafe.Pointer, rghSignerStore []securitycryptography.HCERTSTORE, dwFlags uint32, ppSigner **securitycryptography.CERT_CONTEXT, pdwSignerIndex *uint32) error {
+	var _rghSignerStore *securitycryptography.HCERTSTORE
+	if len(rghSignerStore) > 0 {
+		_rghSignerStore = &rghSignerStore[0]
+	}
+	return securitycryptography.CryptMsgGetAndVerifySigner(hCryptMsg, uint32(len(rghSignerStore)), _rghSignerStore, dwFlags, ppSigner, pdwSignerIndex)
 }
 
 // CryptMsgOpenToDecode wraps the raw CryptMsgOpenToDecode call with idiomatic Go types.
@@ -738,6 +830,16 @@ func CryptSetProviderExA(pszProvName foundation.PSTR, dwProvType uint32, dwFlags
 	return securitycryptography.CryptSetProviderExA(pszProvName, dwProvType, nil, dwFlags)
 }
 
+// CryptSignAndEncryptMessage wraps the raw CryptSignAndEncryptMessage call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptsignandencryptmessage
+func CryptSignAndEncryptMessage(pSignPara *securitycryptography.CRYPT_SIGN_MESSAGE_PARA, pEncryptPara *securitycryptography.CRYPT_ENCRYPT_MESSAGE_PARA, rgpRecipientCert []*securitycryptography.CERT_CONTEXT, pbToBeSignedAndEncrypted *byte, cbToBeSignedAndEncrypted uint32, pbSignedAndEncryptedBlob *byte, pcbSignedAndEncryptedBlob *uint32) error {
+	var _rgpRecipientCert **securitycryptography.CERT_CONTEXT
+	if len(rgpRecipientCert) > 0 {
+		_rgpRecipientCert = &rgpRecipientCert[0]
+	}
+	return securitycryptography.CryptSignAndEncryptMessage(pSignPara, pEncryptPara, uint32(len(rgpRecipientCert)), _rgpRecipientCert, pbToBeSignedAndEncrypted, cbToBeSignedAndEncrypted, pbSignedAndEncryptedBlob, pcbSignedAndEncryptedBlob)
+}
+
 // CryptSignHash wraps the raw CryptSignHashW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptsignhashw
 func CryptSignHash(hHash uintptr, dwKeySpec uint32, szDescription string, dwFlags uint32, pbSignature *byte, pdwSigLen *uint32) error {
@@ -811,8 +913,12 @@ func CryptVerifySignature(hHash uintptr, pbSignature *byte, dwSigLen uint32, hPu
 
 // CryptXmlAddObject wraps the raw CryptXmlAddObject call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmladdobject
-func CryptXmlAddObject(hSignatureOrObject unsafe.Pointer, dwFlags uint32, rgProperty *securitycryptography.CRYPT_XML_PROPERTY, cProperty uint32, pEncoded *securitycryptography.CRYPT_XML_BLOB, ppObject **securitycryptography.CRYPT_XML_OBJECT) error {
-	return win32.HRESULTError(int32(securitycryptography.CryptXmlAddObject(hSignatureOrObject, dwFlags, rgProperty, cProperty, pEncoded, ppObject)))
+func CryptXmlAddObject(hSignatureOrObject unsafe.Pointer, dwFlags uint32, rgProperty []securitycryptography.CRYPT_XML_PROPERTY, pEncoded *securitycryptography.CRYPT_XML_BLOB, ppObject **securitycryptography.CRYPT_XML_OBJECT) error {
+	var _rgProperty *securitycryptography.CRYPT_XML_PROPERTY
+	if len(rgProperty) > 0 {
+		_rgProperty = &rgProperty[0]
+	}
+	return win32.HRESULTError(int32(securitycryptography.CryptXmlAddObject(hSignatureOrObject, dwFlags, _rgProperty, uint32(len(rgProperty)), pEncoded, ppObject)))
 }
 
 // CryptXmlClose wraps the raw CryptXmlClose call with idiomatic Go types.
@@ -823,11 +929,15 @@ func CryptXmlClose(hCryptXml unsafe.Pointer) error {
 
 // CryptXmlCreateReference wraps the raw CryptXmlCreateReference call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmlcreatereference
-func CryptXmlCreateReference(hCryptXml unsafe.Pointer, dwFlags uint32, wszId string, wszURI string, wszType string, pDigestMethod *securitycryptography.CRYPT_XML_ALGORITHM, cTransform uint32, rgTransform *securitycryptography.CRYPT_XML_ALGORITHM, phReference *unsafe.Pointer) error {
+func CryptXmlCreateReference(hCryptXml unsafe.Pointer, dwFlags uint32, wszId string, wszURI string, wszType string, pDigestMethod *securitycryptography.CRYPT_XML_ALGORITHM, rgTransform []securitycryptography.CRYPT_XML_ALGORITHM, phReference *unsafe.Pointer) error {
 	_wszId := win32.UTF16Ptr(wszId)
 	_wszURI := win32.UTF16Ptr(wszURI)
 	_wszType := win32.UTF16Ptr(wszType)
-	return win32.HRESULTError(int32(securitycryptography.CryptXmlCreateReference(hCryptXml, dwFlags, foundation.PWSTR(_wszId), foundation.PWSTR(_wszURI), foundation.PWSTR(_wszType), pDigestMethod, cTransform, rgTransform, phReference)))
+	var _rgTransform *securitycryptography.CRYPT_XML_ALGORITHM
+	if len(rgTransform) > 0 {
+		_rgTransform = &rgTransform[0]
+	}
+	return win32.HRESULTError(int32(securitycryptography.CryptXmlCreateReference(hCryptXml, dwFlags, foundation.PWSTR(_wszId), foundation.PWSTR(_wszURI), foundation.PWSTR(_wszType), pDigestMethod, uint32(len(rgTransform)), _rgTransform, phReference)))
 }
 
 // CryptXmlDigestReference wraps the raw CryptXmlDigestReference call with idiomatic Go types.
@@ -838,8 +948,12 @@ func CryptXmlDigestReference(hReference unsafe.Pointer, dwFlags uint32, pDataPro
 
 // CryptXmlEncode wraps the raw CryptXmlEncode call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmlencode
-func CryptXmlEncode(hCryptXml unsafe.Pointer, dwCharset securitycryptography.CRYPT_XML_CHARSET, rgProperty *securitycryptography.CRYPT_XML_PROPERTY, cProperty uint32, pvCallbackState unsafe.Pointer, pfnWrite securitycryptography.PFN_CRYPT_XML_WRITE_CALLBACK) error {
-	return win32.HRESULTError(int32(securitycryptography.CryptXmlEncode(hCryptXml, dwCharset, rgProperty, cProperty, pvCallbackState, pfnWrite)))
+func CryptXmlEncode(hCryptXml unsafe.Pointer, dwCharset securitycryptography.CRYPT_XML_CHARSET, rgProperty []securitycryptography.CRYPT_XML_PROPERTY, pvCallbackState unsafe.Pointer, pfnWrite securitycryptography.PFN_CRYPT_XML_WRITE_CALLBACK) error {
+	var _rgProperty *securitycryptography.CRYPT_XML_PROPERTY
+	if len(rgProperty) > 0 {
+		_rgProperty = &rgProperty[0]
+	}
+	return win32.HRESULTError(int32(securitycryptography.CryptXmlEncode(hCryptXml, dwCharset, _rgProperty, uint32(len(rgProperty)), pvCallbackState, pfnWrite)))
 }
 
 // CryptXmlEnumAlgorithmInfo wraps the raw CryptXmlEnumAlgorithmInfo call with idiomatic Go types.
@@ -891,15 +1005,23 @@ func CryptXmlImportPublicKey(dwFlags securitycryptography.CRYPT_XML_FLAGS, pKeyV
 
 // CryptXmlOpenToDecode wraps the raw CryptXmlOpenToDecode call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmlopentodecode
-func CryptXmlOpenToDecode(pConfig *securitycryptography.CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags securitycryptography.CRYPT_XML_FLAGS, rgProperty *securitycryptography.CRYPT_XML_PROPERTY, cProperty uint32, pEncoded *securitycryptography.CRYPT_XML_BLOB, phCryptXml *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(securitycryptography.CryptXmlOpenToDecode(pConfig, dwFlags, rgProperty, cProperty, pEncoded, phCryptXml)))
+func CryptXmlOpenToDecode(pConfig *securitycryptography.CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags securitycryptography.CRYPT_XML_FLAGS, rgProperty []securitycryptography.CRYPT_XML_PROPERTY, pEncoded *securitycryptography.CRYPT_XML_BLOB, phCryptXml *unsafe.Pointer) error {
+	var _rgProperty *securitycryptography.CRYPT_XML_PROPERTY
+	if len(rgProperty) > 0 {
+		_rgProperty = &rgProperty[0]
+	}
+	return win32.HRESULTError(int32(securitycryptography.CryptXmlOpenToDecode(pConfig, dwFlags, _rgProperty, uint32(len(rgProperty)), pEncoded, phCryptXml)))
 }
 
 // CryptXmlOpenToEncode wraps the raw CryptXmlOpenToEncode call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmlopentoencode
-func CryptXmlOpenToEncode(pConfig *securitycryptography.CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags securitycryptography.CRYPT_XML_FLAGS, wszId string, rgProperty *securitycryptography.CRYPT_XML_PROPERTY, cProperty uint32, pEncoded *securitycryptography.CRYPT_XML_BLOB, phSignature *unsafe.Pointer) error {
+func CryptXmlOpenToEncode(pConfig *securitycryptography.CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags securitycryptography.CRYPT_XML_FLAGS, wszId string, rgProperty []securitycryptography.CRYPT_XML_PROPERTY, pEncoded *securitycryptography.CRYPT_XML_BLOB, phSignature *unsafe.Pointer) error {
 	_wszId := win32.UTF16Ptr(wszId)
-	return win32.HRESULTError(int32(securitycryptography.CryptXmlOpenToEncode(pConfig, dwFlags, foundation.PWSTR(_wszId), rgProperty, cProperty, pEncoded, phSignature)))
+	var _rgProperty *securitycryptography.CRYPT_XML_PROPERTY
+	if len(rgProperty) > 0 {
+		_rgProperty = &rgProperty[0]
+	}
+	return win32.HRESULTError(int32(securitycryptography.CryptXmlOpenToEncode(pConfig, dwFlags, foundation.PWSTR(_wszId), _rgProperty, uint32(len(rgProperty)), pEncoded, phSignature)))
 }
 
 // CryptXmlSetHMACSecret wraps the raw CryptXmlSetHMACSecret call with idiomatic Go types.
@@ -1028,8 +1150,12 @@ func GetSignatureInterface(pszProviderName string, pszAlgId string, ppFunctionTa
 }
 
 // GetToken wraps the raw GetToken call with idiomatic Go types.
-func GetToken(cPolicyChain uint32, pPolicyChain *securitycryptography.POLICY_ELEMENT, securityToken *unsafe.Pointer, phProofTokenCrypto **securitycryptography.INFORMATIONCARD_CRYPTO_HANDLE) error {
-	return win32.HRESULTError(int32(securitycryptography.GetToken(cPolicyChain, pPolicyChain, securityToken, phProofTokenCrypto)))
+func GetToken(pPolicyChain []securitycryptography.POLICY_ELEMENT, securityToken *unsafe.Pointer, phProofTokenCrypto **securitycryptography.INFORMATIONCARD_CRYPTO_HANDLE) error {
+	var _pPolicyChain *securitycryptography.POLICY_ELEMENT
+	if len(pPolicyChain) > 0 {
+		_pPolicyChain = &pPolicyChain[0]
+	}
+	return win32.HRESULTError(int32(securitycryptography.GetToken(uint32(len(pPolicyChain)), _pPolicyChain, securityToken, phProofTokenCrypto)))
 }
 
 // HashCore wraps the raw HashCore call with idiomatic Go types.

@@ -152,8 +152,22 @@ func SetServiceBits(hServiceStatus systemservices.SERVICE_STATUS_HANDLE, dwServi
 
 // StartService wraps the raw StartServiceW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-startservicew
-func StartService(hService systemservices.SC_HANDLE, dwNumServiceArgs uint32, lpServiceArgVectors *foundation.PWSTR) error {
-	return systemservices.StartServiceW(hService, dwNumServiceArgs, lpServiceArgVectors)
+func StartService(hService systemservices.SC_HANDLE, lpServiceArgVectors []foundation.PWSTR) error {
+	var _lpServiceArgVectors *foundation.PWSTR
+	if len(lpServiceArgVectors) > 0 {
+		_lpServiceArgVectors = &lpServiceArgVectors[0]
+	}
+	return systemservices.StartServiceW(hService, uint32(len(lpServiceArgVectors)), _lpServiceArgVectors)
+}
+
+// StartServiceA wraps the raw StartServiceA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-startservicea
+func StartServiceA(hService systemservices.SC_HANDLE, lpServiceArgVectors []foundation.PSTR) error {
+	var _lpServiceArgVectors *foundation.PSTR
+	if len(lpServiceArgVectors) > 0 {
+		_lpServiceArgVectors = &lpServiceArgVectors[0]
+	}
+	return systemservices.StartServiceA(hService, uint32(len(lpServiceArgVectors)), _lpServiceArgVectors)
 }
 
 // StartServiceCtrlDispatcher wraps the raw StartServiceCtrlDispatcherW call with idiomatic Go types.

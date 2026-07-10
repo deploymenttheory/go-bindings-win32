@@ -99,6 +99,16 @@ func GetXStateFeaturesMask(Context *systemdiagnosticsdebug.CONTEXT, FeatureMask 
 	return systemdiagnosticsdebug.GetXStateFeaturesMask(Context, FeatureMask) != 0
 }
 
+// ImageEnumerateCertificates wraps the raw ImageEnumerateCertificates call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-imageenumeratecertificates
+func ImageEnumerateCertificates(FileHandle foundation.HANDLE, TypeFilter uint16, CertificateCount *uint32, Indices []uint32) error {
+	var _Indices *uint32
+	if len(Indices) > 0 {
+		_Indices = &Indices[0]
+	}
+	return systemdiagnosticsdebug.ImageEnumerateCertificates(FileHandle, TypeFilter, CertificateCount, _Indices, uint32(len(Indices)))
+}
+
 // IsDebuggerPresent wraps the raw IsDebuggerPresent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-isdebuggerpresent
 func IsDebuggerPresent() bool {
@@ -131,6 +141,16 @@ func MiniDumpReadDumpStream(BaseOfDump unsafe.Pointer, StreamNumber uint32, Dir 
 func OutputDebugString(lpOutputString string) {
 	_lpOutputString := win32.UTF16Ptr(lpOutputString)
 	systemdiagnosticsdebug.OutputDebugStringW(foundation.PWSTR(_lpOutputString))
+}
+
+// RaiseException wraps the raw RaiseException call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-raiseexception
+func RaiseException(dwExceptionCode uint32, dwExceptionFlags uint32, lpArguments []uintptr) {
+	var _lpArguments *uintptr
+	if len(lpArguments) > 0 {
+		_lpArguments = &lpArguments[0]
+	}
+	systemdiagnosticsdebug.RaiseException(dwExceptionCode, dwExceptionFlags, uint32(len(lpArguments)), _lpArguments)
 }
 
 // RangeMapAddPeImageSections wraps the raw RangeMapAddPeImageSections call with idiomatic Go types.
@@ -176,6 +196,26 @@ func ReBaseImage64(CurrentImageName foundation.PSTR, SymbolPath foundation.PSTR,
 func ReportSymbolLoadSummary(hProcess foundation.HANDLE, pLoadModule string, pSymbolData *systemdiagnosticsdebug.DBGHELP_DATA_REPORT_STRUCT) bool {
 	_pLoadModule := win32.UTF16Ptr(pLoadModule)
 	return systemdiagnosticsdebug.ReportSymbolLoadSummary(hProcess, foundation.PWSTR(_pLoadModule), pSymbolData) != 0
+}
+
+// RtlAddFunctionTable wraps the raw RtlAddFunctionTable call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winnt/nf-winnt-rtladdfunctiontable
+func RtlAddFunctionTable(FunctionTable []systemdiagnosticsdebug.IMAGE_RUNTIME_FUNCTION_ENTRY, BaseAddress uint64) foundation.BOOLEAN {
+	var _FunctionTable *systemdiagnosticsdebug.IMAGE_RUNTIME_FUNCTION_ENTRY
+	if len(FunctionTable) > 0 {
+		_FunctionTable = &FunctionTable[0]
+	}
+	return systemdiagnosticsdebug.RtlAddFunctionTable(_FunctionTable, uint32(len(FunctionTable)), BaseAddress)
+}
+
+// RtlAddGrowableFunctionTable wraps the raw RtlAddGrowableFunctionTable call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winnt/nf-winnt-rtladdgrowablefunctiontable
+func RtlAddGrowableFunctionTable(DynamicTable *unsafe.Pointer, FunctionTable []systemdiagnosticsdebug.IMAGE_RUNTIME_FUNCTION_ENTRY, EntryCount uint32, RangeBase uintptr, RangeEnd uintptr) uint32 {
+	var _FunctionTable *systemdiagnosticsdebug.IMAGE_RUNTIME_FUNCTION_ENTRY
+	if len(FunctionTable) > 0 {
+		_FunctionTable = &FunctionTable[0]
+	}
+	return systemdiagnosticsdebug.RtlAddGrowableFunctionTable(DynamicTable, _FunctionTable, EntryCount, uint32(len(FunctionTable)), RangeBase, RangeEnd)
 }
 
 // RtlInstallFunctionTableCallback wraps the raw RtlInstallFunctionTableCallback call with idiomatic Go types.
@@ -363,6 +403,16 @@ func SymGetExtendedOption(option systemdiagnosticsdebug.IMAGEHLP_EXTENDED_OPTION
 	return systemdiagnosticsdebug.SymGetExtendedOption(option) != 0
 }
 
+// SymGetFileLineOffsets64 wraps the raw SymGetFileLineOffsets64 call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetfilelineoffsets64
+func SymGetFileLineOffsets64(hProcess foundation.HANDLE, ModuleName foundation.PSTR, FileName foundation.PSTR, Buffer []uint64) (uint32, error) {
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	return systemdiagnosticsdebug.SymGetFileLineOffsets64(hProcess, ModuleName, FileName, _Buffer, uint32(len(Buffer)))
+}
+
 // SymGetHomeDirectory wraps the raw SymGetHomeDirectoryW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgethomedirectoryw
 func SymGetHomeDirectory(type_ uint32, dir foundation.PWSTR, size uintptr) (foundation.PWSTR, error) {
@@ -408,11 +458,25 @@ func SymGetSourceFile(hProcess foundation.HANDLE, Base uint64, Params string, Fi
 	return systemdiagnosticsdebug.SymGetSourceFileW(hProcess, Base, foundation.PWSTR(_Params), foundation.PWSTR(_FileSpec), FilePath, Size)
 }
 
-// SymGetSourceFileChecksum wraps the raw SymGetSourceFileChecksumW call with idiomatic Go types.
+// SymGetSourceFileChecksum wraps the raw SymGetSourceFileChecksum call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsourcefilechecksum
+func SymGetSourceFileChecksum(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PSTR, pCheckSumType *uint32, pChecksum []byte, pActualBytesWritten *uint32) error {
+	var _pChecksum *byte
+	if len(pChecksum) > 0 {
+		_pChecksum = &pChecksum[0]
+	}
+	return systemdiagnosticsdebug.SymGetSourceFileChecksum(hProcess, Base, FileSpec, pCheckSumType, _pChecksum, uint32(len(pChecksum)), pActualBytesWritten)
+}
+
+// SymGetSourceFileChecksumW wraps the raw SymGetSourceFileChecksumW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsourcefilechecksumw
-func SymGetSourceFileChecksum(hProcess foundation.HANDLE, Base uint64, FileSpec string, pCheckSumType *uint32, pChecksum *byte, checksumSize uint32, pActualBytesWritten *uint32) error {
+func SymGetSourceFileChecksumW(hProcess foundation.HANDLE, Base uint64, FileSpec string, pCheckSumType *uint32, pChecksum []byte, pActualBytesWritten *uint32) error {
 	_FileSpec := win32.UTF16Ptr(FileSpec)
-	return systemdiagnosticsdebug.SymGetSourceFileChecksumW(hProcess, Base, foundation.PWSTR(_FileSpec), pCheckSumType, pChecksum, checksumSize, pActualBytesWritten)
+	var _pChecksum *byte
+	if len(pChecksum) > 0 {
+		_pChecksum = &pChecksum[0]
+	}
+	return systemdiagnosticsdebug.SymGetSourceFileChecksumW(hProcess, Base, foundation.PWSTR(_FileSpec), pCheckSumType, _pChecksum, uint32(len(pChecksum)), pActualBytesWritten)
 }
 
 // SymGetSourceFileFromToken wraps the raw SymGetSourceFileFromTokenW call with idiomatic Go types.

@@ -248,8 +248,12 @@ func GetMachineTypeAttributes(Machine uint16, MachineTypeAttributes *systemthrea
 
 // GetNumaNodeProcessorMask2 wraps the raw GetNumaNodeProcessorMask2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/systemtopologyapi/nf-systemtopologyapi-getnumanodeprocessormask2
-func GetNumaNodeProcessorMask2(NodeNumber uint16, ProcessorMasks *systemsysteminformation.GROUP_AFFINITY, ProcessorMaskCount uint16, RequiredMaskCount *uint16) bool {
-	return systemthreading.GetNumaNodeProcessorMask2(NodeNumber, ProcessorMasks, ProcessorMaskCount, RequiredMaskCount) != 0
+func GetNumaNodeProcessorMask2(NodeNumber uint16, ProcessorMasks []systemsysteminformation.GROUP_AFFINITY, RequiredMaskCount *uint16) bool {
+	var _ProcessorMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(ProcessorMasks) > 0 {
+		_ProcessorMasks = &ProcessorMasks[0]
+	}
+	return systemthreading.GetNumaNodeProcessorMask2(NodeNumber, _ProcessorMasks, uint16(len(ProcessorMasks)), RequiredMaskCount) != 0
 }
 
 // GetNumaNodeProcessorMaskEx wraps the raw GetNumaNodeProcessorMaskEx call with idiomatic Go types.
@@ -266,14 +270,22 @@ func GetNumaProximityNodeEx(ProximityId uint32, NodeNumber *uint16) bool {
 
 // GetProcessDefaultCpuSetMasks wraps the raw GetProcessDefaultCpuSetMasks call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessdefaultcpusetmasks
-func GetProcessDefaultCpuSetMasks(Process foundation.HANDLE, CpuSetMasks *systemsysteminformation.GROUP_AFFINITY, CpuSetMaskCount uint16, RequiredMaskCount *uint16) bool {
-	return systemthreading.GetProcessDefaultCpuSetMasks(Process, CpuSetMasks, CpuSetMaskCount, RequiredMaskCount) != 0
+func GetProcessDefaultCpuSetMasks(Process foundation.HANDLE, CpuSetMasks []systemsysteminformation.GROUP_AFFINITY, RequiredMaskCount *uint16) bool {
+	var _CpuSetMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(CpuSetMasks) > 0 {
+		_CpuSetMasks = &CpuSetMasks[0]
+	}
+	return systemthreading.GetProcessDefaultCpuSetMasks(Process, _CpuSetMasks, uint16(len(CpuSetMasks)), RequiredMaskCount) != 0
 }
 
 // GetProcessDefaultCpuSets wraps the raw GetProcessDefaultCpuSets call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessdefaultcpusets
-func GetProcessDefaultCpuSets(Process foundation.HANDLE, CpuSetIds *uint32, CpuSetIdCount uint32, RequiredIdCount *uint32) bool {
-	return systemthreading.GetProcessDefaultCpuSets(Process, CpuSetIds, CpuSetIdCount, RequiredIdCount) != 0
+func GetProcessDefaultCpuSets(Process foundation.HANDLE, CpuSetIds []uint32, RequiredIdCount *uint32) bool {
+	var _CpuSetIds *uint32
+	if len(CpuSetIds) > 0 {
+		_CpuSetIds = &CpuSetIds[0]
+	}
+	return systemthreading.GetProcessDefaultCpuSets(Process, _CpuSetIds, uint32(len(CpuSetIds)), RequiredIdCount) != 0
 }
 
 // GetProcessGroupAffinity wraps the raw GetProcessGroupAffinity call with idiomatic Go types.
@@ -302,14 +314,22 @@ func GetThreadGroupAffinity(hThread foundation.HANDLE, GroupAffinity *systemsyst
 
 // GetThreadSelectedCpuSetMasks wraps the raw GetThreadSelectedCpuSetMasks call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadselectedcpusetmasks
-func GetThreadSelectedCpuSetMasks(Thread foundation.HANDLE, CpuSetMasks *systemsysteminformation.GROUP_AFFINITY, CpuSetMaskCount uint16, RequiredMaskCount *uint16) bool {
-	return systemthreading.GetThreadSelectedCpuSetMasks(Thread, CpuSetMasks, CpuSetMaskCount, RequiredMaskCount) != 0
+func GetThreadSelectedCpuSetMasks(Thread foundation.HANDLE, CpuSetMasks []systemsysteminformation.GROUP_AFFINITY, RequiredMaskCount *uint16) bool {
+	var _CpuSetMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(CpuSetMasks) > 0 {
+		_CpuSetMasks = &CpuSetMasks[0]
+	}
+	return systemthreading.GetThreadSelectedCpuSetMasks(Thread, _CpuSetMasks, uint16(len(CpuSetMasks)), RequiredMaskCount) != 0
 }
 
 // GetThreadSelectedCpuSets wraps the raw GetThreadSelectedCpuSets call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadselectedcpusets
-func GetThreadSelectedCpuSets(Thread foundation.HANDLE, CpuSetIds *uint32, CpuSetIdCount uint32, RequiredIdCount *uint32) bool {
-	return systemthreading.GetThreadSelectedCpuSets(Thread, CpuSetIds, CpuSetIdCount, RequiredIdCount) != 0
+func GetThreadSelectedCpuSets(Thread foundation.HANDLE, CpuSetIds []uint32, RequiredIdCount *uint32) bool {
+	var _CpuSetIds *uint32
+	if len(CpuSetIds) > 0 {
+		_CpuSetIds = &CpuSetIds[0]
+	}
+	return systemthreading.GetThreadSelectedCpuSets(Thread, _CpuSetIds, uint32(len(CpuSetIds)), RequiredIdCount) != 0
 }
 
 // GetUmsSystemThreadInformation wraps the raw GetUmsSystemThreadInformation call with idiomatic Go types.
@@ -638,20 +658,42 @@ func RtwqUnregisterPlatformFromMMCSS() error {
 
 // SetProcessDefaultCpuSetMasks wraps the raw SetProcessDefaultCpuSetMasks call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessdefaultcpusetmasks
-func SetProcessDefaultCpuSetMasks(Process foundation.HANDLE, CpuSetMasks *systemsysteminformation.GROUP_AFFINITY, CpuSetMaskCount uint16) bool {
-	return systemthreading.SetProcessDefaultCpuSetMasks(Process, CpuSetMasks, CpuSetMaskCount) != 0
+func SetProcessDefaultCpuSetMasks(Process foundation.HANDLE, CpuSetMasks []systemsysteminformation.GROUP_AFFINITY) bool {
+	var _CpuSetMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(CpuSetMasks) > 0 {
+		_CpuSetMasks = &CpuSetMasks[0]
+	}
+	return systemthreading.SetProcessDefaultCpuSetMasks(Process, _CpuSetMasks, uint16(len(CpuSetMasks))) != 0
 }
 
 // SetProcessDefaultCpuSets wraps the raw SetProcessDefaultCpuSets call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessdefaultcpusets
-func SetProcessDefaultCpuSets(Process foundation.HANDLE, CpuSetIds *uint32, CpuSetIdCount uint32) bool {
-	return systemthreading.SetProcessDefaultCpuSets(Process, CpuSetIds, CpuSetIdCount) != 0
+func SetProcessDefaultCpuSets(Process foundation.HANDLE, CpuSetIds []uint32) bool {
+	var _CpuSetIds *uint32
+	if len(CpuSetIds) > 0 {
+		_CpuSetIds = &CpuSetIds[0]
+	}
+	return systemthreading.SetProcessDefaultCpuSets(Process, _CpuSetIds, uint32(len(CpuSetIds))) != 0
+}
+
+// SetProcessDynamicEHContinuationTargets wraps the raw SetProcessDynamicEHContinuationTargets call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessdynamicehcontinuationtargets
+func SetProcessDynamicEHContinuationTargets(Process foundation.HANDLE, Targets []systemthreading.PROCESS_DYNAMIC_EH_CONTINUATION_TARGET) error {
+	var _Targets *systemthreading.PROCESS_DYNAMIC_EH_CONTINUATION_TARGET
+	if len(Targets) > 0 {
+		_Targets = &Targets[0]
+	}
+	return systemthreading.SetProcessDynamicEHContinuationTargets(Process, uint16(len(Targets)), _Targets)
 }
 
 // SetProcessDynamicEnforcedCetCompatibleRanges wraps the raw SetProcessDynamicEnforcedCetCompatibleRanges call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessdynamicenforcedcetcompatibleranges
-func SetProcessDynamicEnforcedCetCompatibleRanges(Process foundation.HANDLE, NumberOfRanges uint16, Ranges *systemthreading.PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE) bool {
-	return systemthreading.SetProcessDynamicEnforcedCetCompatibleRanges(Process, NumberOfRanges, Ranges) != 0
+func SetProcessDynamicEnforcedCetCompatibleRanges(Process foundation.HANDLE, Ranges []systemthreading.PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE) bool {
+	var _Ranges *systemthreading.PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE
+	if len(Ranges) > 0 {
+		_Ranges = &Ranges[0]
+	}
+	return systemthreading.SetProcessDynamicEnforcedCetCompatibleRanges(Process, uint16(len(Ranges)), _Ranges) != 0
 }
 
 // SetProcessPriorityBoost wraps the raw SetProcessPriorityBoost call with idiomatic Go types.
@@ -690,14 +732,22 @@ func SetThreadPriorityBoost(hThread foundation.HANDLE, bDisablePriorityBoost boo
 
 // SetThreadSelectedCpuSetMasks wraps the raw SetThreadSelectedCpuSetMasks call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setthreadselectedcpusetmasks
-func SetThreadSelectedCpuSetMasks(Thread foundation.HANDLE, CpuSetMasks *systemsysteminformation.GROUP_AFFINITY, CpuSetMaskCount uint16) bool {
-	return systemthreading.SetThreadSelectedCpuSetMasks(Thread, CpuSetMasks, CpuSetMaskCount) != 0
+func SetThreadSelectedCpuSetMasks(Thread foundation.HANDLE, CpuSetMasks []systemsysteminformation.GROUP_AFFINITY) bool {
+	var _CpuSetMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(CpuSetMasks) > 0 {
+		_CpuSetMasks = &CpuSetMasks[0]
+	}
+	return systemthreading.SetThreadSelectedCpuSetMasks(Thread, _CpuSetMasks, uint16(len(CpuSetMasks))) != 0
 }
 
 // SetThreadSelectedCpuSets wraps the raw SetThreadSelectedCpuSets call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setthreadselectedcpusets
-func SetThreadSelectedCpuSets(Thread foundation.HANDLE, CpuSetIds *uint32, CpuSetIdCount uint32) bool {
-	return systemthreading.SetThreadSelectedCpuSets(Thread, CpuSetIds, CpuSetIdCount) != 0
+func SetThreadSelectedCpuSets(Thread foundation.HANDLE, CpuSetIds []uint32) bool {
+	var _CpuSetIds *uint32
+	if len(CpuSetIds) > 0 {
+		_CpuSetIds = &CpuSetIds[0]
+	}
+	return systemthreading.SetThreadSelectedCpuSets(Thread, _CpuSetIds, uint32(len(CpuSetIds))) != 0
 }
 
 // SetThreadpoolTimerEx wraps the raw SetThreadpoolTimerEx call with idiomatic Go types.
@@ -753,17 +803,25 @@ func TryEnterCriticalSection(lpCriticalSection *systemthreading.CRITICAL_SECTION
 
 // WaitForMultipleObjects wraps the raw WaitForMultipleObjects call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-waitformultipleobjects
-func WaitForMultipleObjects(nCount uint32, lpHandles *foundation.HANDLE, bWaitAll bool, dwMilliseconds uint32) (foundation.WAIT_EVENT, error) {
+func WaitForMultipleObjects(lpHandles []foundation.HANDLE, bWaitAll bool, dwMilliseconds uint32) (foundation.WAIT_EVENT, error) {
+	var _lpHandles *foundation.HANDLE
+	if len(lpHandles) > 0 {
+		_lpHandles = &lpHandles[0]
+	}
 	_bWaitAll := foundation.BOOL(win32.Bool32(bWaitAll))
-	return systemthreading.WaitForMultipleObjects(nCount, lpHandles, _bWaitAll, dwMilliseconds)
+	return systemthreading.WaitForMultipleObjects(uint32(len(lpHandles)), _lpHandles, _bWaitAll, dwMilliseconds)
 }
 
 // WaitForMultipleObjectsEx wraps the raw WaitForMultipleObjectsEx call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-waitformultipleobjectsex
-func WaitForMultipleObjectsEx(nCount uint32, lpHandles *foundation.HANDLE, bWaitAll bool, dwMilliseconds uint32, bAlertable bool) (foundation.WAIT_EVENT, error) {
+func WaitForMultipleObjectsEx(lpHandles []foundation.HANDLE, bWaitAll bool, dwMilliseconds uint32, bAlertable bool) (foundation.WAIT_EVENT, error) {
+	var _lpHandles *foundation.HANDLE
+	if len(lpHandles) > 0 {
+		_lpHandles = &lpHandles[0]
+	}
 	_bWaitAll := foundation.BOOL(win32.Bool32(bWaitAll))
 	_bAlertable := foundation.BOOL(win32.Bool32(bAlertable))
-	return systemthreading.WaitForMultipleObjectsEx(nCount, lpHandles, _bWaitAll, dwMilliseconds, _bAlertable)
+	return systemthreading.WaitForMultipleObjectsEx(uint32(len(lpHandles)), _lpHandles, _bWaitAll, dwMilliseconds, _bAlertable)
 }
 
 // WaitForSingleObjectEx wraps the raw WaitForSingleObjectEx call with idiomatic Go types.

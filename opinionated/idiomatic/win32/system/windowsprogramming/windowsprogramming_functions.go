@@ -635,9 +635,13 @@ func WinWatchNotify(hWW systemwindowsprogramming.HWINWATCH, NotifyCallback syste
 
 // WldpCanExecuteBuffer wraps the raw WldpCanExecuteBuffer call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutebuffer
-func WldpCanExecuteBuffer(host *win32.GUID, options systemwindowsprogramming.WLDP_EXECUTION_EVALUATION_OPTIONS, buffer *byte, bufferSize uint32, auditInfo string, result *systemwindowsprogramming.WLDP_EXECUTION_POLICY) error {
+func WldpCanExecuteBuffer(host *win32.GUID, options systemwindowsprogramming.WLDP_EXECUTION_EVALUATION_OPTIONS, buffer []byte, auditInfo string, result *systemwindowsprogramming.WLDP_EXECUTION_POLICY) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
 	_auditInfo := win32.UTF16Ptr(auditInfo)
-	return win32.HRESULTError(int32(systemwindowsprogramming.WldpCanExecuteBuffer(host, options, buffer, bufferSize, foundation.PWSTR(_auditInfo), result)))
+	return win32.HRESULTError(int32(systemwindowsprogramming.WldpCanExecuteBuffer(host, options, _buffer, uint32(len(buffer)), foundation.PWSTR(_auditInfo), result)))
 }
 
 // WldpCanExecuteFile wraps the raw WldpCanExecuteFile call with idiomatic Go types.
@@ -716,8 +720,12 @@ func WldpIsWcosProductionConfiguration(IsProductionConfiguration *foundation.BOO
 }
 
 // WldpQueryDeviceSecurityInformation wraps the raw WldpQueryDeviceSecurityInformation call with idiomatic Go types.
-func WldpQueryDeviceSecurityInformation(information *systemwindowsprogramming.WLDP_DEVICE_SECURITY_INFORMATION, informationLength uint32, returnLength *uint32) error {
-	return win32.HRESULTError(int32(systemwindowsprogramming.WldpQueryDeviceSecurityInformation(information, informationLength, returnLength)))
+func WldpQueryDeviceSecurityInformation(information []systemwindowsprogramming.WLDP_DEVICE_SECURITY_INFORMATION, returnLength *uint32) error {
+	var _information *systemwindowsprogramming.WLDP_DEVICE_SECURITY_INFORMATION
+	if len(information) > 0 {
+		_information = &information[0]
+	}
+	return win32.HRESULTError(int32(systemwindowsprogramming.WldpQueryDeviceSecurityInformation(_information, uint32(len(information)), returnLength)))
 }
 
 // WldpQueryDynamicCodeTrust wraps the raw WldpQueryDynamicCodeTrust call with idiomatic Go types.

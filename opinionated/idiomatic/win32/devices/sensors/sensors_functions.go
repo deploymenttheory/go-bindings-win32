@@ -7,10 +7,24 @@ package sensors
 import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	devicessensors "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/sensors"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 )
 
 // InitPropVariantFromCLSIDArray wraps the raw InitPropVariantFromCLSIDArray call with idiomatic Go types.
-func InitPropVariantFromCLSIDArray(members *win32.GUID, size uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(devicessensors.InitPropVariantFromCLSIDArray(members, size, ppropvar)))
+func InitPropVariantFromCLSIDArray(members []win32.GUID, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _members *win32.GUID
+	if len(members) > 0 {
+		_members = &members[0]
+	}
+	return win32.HRESULTError(int32(devicessensors.InitPropVariantFromCLSIDArray(_members, uint32(len(members)), ppropvar)))
+}
+
+// IsGUIDPresentInList wraps the raw IsGUIDPresentInList call with idiomatic Go types.
+func IsGUIDPresentInList(guidArray []win32.GUID, guidElem *win32.GUID) foundation.BOOLEAN {
+	var _guidArray *win32.GUID
+	if len(guidArray) > 0 {
+		_guidArray = &guidArray[0]
+	}
+	return devicessensors.IsGUIDPresentInList(_guidArray, uint32(len(guidArray)), guidElem)
 }

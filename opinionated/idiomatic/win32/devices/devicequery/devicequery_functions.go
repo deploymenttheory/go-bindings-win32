@@ -14,63 +14,177 @@ import (
 )
 
 // DevCreateObjectQuery wraps the raw DevCreateObjectQuery call with idiomatic Go types.
-func DevCreateObjectQuery(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
-	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQuery(ObjectType, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)))
+func DevCreateObjectQuery(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQuery(ObjectType, QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, pCallback, pContext, phDevQuery)))
 }
 
 // DevCreateObjectQueryEx wraps the raw DevCreateObjectQueryEx call with idiomatic Go types.
-func DevCreateObjectQueryEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION, cExtendedParameterCount uint32, pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
-	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryEx(ObjectType, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)))
+func DevCreateObjectQueryEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pExtendedParameters []devicesdevicequery.DEV_QUERY_PARAMETER, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	var _pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryEx(ObjectType, QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, uint32(len(pExtendedParameters)), _pExtendedParameters, pCallback, pContext, phDevQuery)))
 }
 
 // DevCreateObjectQueryFromId wraps the raw DevCreateObjectQueryFromId call with idiomatic Go types.
-func DevCreateObjectQueryFromId(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
+func DevCreateObjectQueryFromId(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
 	_pszObjectId := win32.UTF16Ptr(pszObjectId)
-	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryFromId(ObjectType, foundation.PWSTR(_pszObjectId), QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)))
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryFromId(ObjectType, foundation.PWSTR(_pszObjectId), QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, pCallback, pContext, phDevQuery)))
 }
 
 // DevCreateObjectQueryFromIdEx wraps the raw DevCreateObjectQueryFromIdEx call with idiomatic Go types.
-func DevCreateObjectQueryFromIdEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION, cExtendedParameterCount uint32, pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
+func DevCreateObjectQueryFromIdEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pExtendedParameters []devicesdevicequery.DEV_QUERY_PARAMETER, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
 	_pszObjectId := win32.UTF16Ptr(pszObjectId)
-	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryFromIdEx(ObjectType, foundation.PWSTR(_pszObjectId), QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)))
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	var _pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryFromIdEx(ObjectType, foundation.PWSTR(_pszObjectId), QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, uint32(len(pExtendedParameters)), _pExtendedParameters, pCallback, pContext, phDevQuery)))
 }
 
 // DevCreateObjectQueryFromIds wraps the raw DevCreateObjectQueryFromIds call with idiomatic Go types.
-func DevCreateObjectQueryFromIds(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszzObjectIds string, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
+func DevCreateObjectQueryFromIds(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszzObjectIds string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
 	_pszzObjectIds := win32.UTF16Ptr(pszzObjectIds)
-	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryFromIds(ObjectType, foundation.PWSTR(_pszzObjectIds), QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)))
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryFromIds(ObjectType, foundation.PWSTR(_pszzObjectIds), QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, pCallback, pContext, phDevQuery)))
 }
 
 // DevCreateObjectQueryFromIdsEx wraps the raw DevCreateObjectQueryFromIdsEx call with idiomatic Go types.
-func DevCreateObjectQueryFromIdsEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszzObjectIds string, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION, cExtendedParameterCount uint32, pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
+func DevCreateObjectQueryFromIdsEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszzObjectIds string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pExtendedParameters []devicesdevicequery.DEV_QUERY_PARAMETER, pCallback devicesdevicequery.PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *devicesdevicequery.HDEVQUERY) error {
 	_pszzObjectIds := win32.UTF16Ptr(pszzObjectIds)
-	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryFromIdsEx(ObjectType, foundation.PWSTR(_pszzObjectIds), QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)))
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	var _pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevCreateObjectQueryFromIdsEx(ObjectType, foundation.PWSTR(_pszzObjectIds), QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, uint32(len(pExtendedParameters)), _pExtendedParameters, pCallback, pContext, phDevQuery)))
 }
 
 // DevFindProperty wraps the raw DevFindProperty call with idiomatic Go types.
-func DevFindProperty(pKey *foundation.DEVPROPKEY, Store devicesproperties.DEVPROPSTORE, pszLocaleName string, cProperties uint32, pProperties *devicesproperties.DEVPROPERTY) *devicesproperties.DEVPROPERTY {
+func DevFindProperty(pKey *foundation.DEVPROPKEY, Store devicesproperties.DEVPROPSTORE, pszLocaleName string, pProperties []devicesproperties.DEVPROPERTY) *devicesproperties.DEVPROPERTY {
 	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
-	return devicesdevicequery.DevFindProperty(pKey, Store, foundation.PWSTR(_pszLocaleName), cProperties, pProperties)
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	return devicesdevicequery.DevFindProperty(pKey, Store, foundation.PWSTR(_pszLocaleName), uint32(len(pProperties)), _pProperties)
+}
+
+// DevFreeObjectProperties wraps the raw DevFreeObjectProperties call with idiomatic Go types.
+func DevFreeObjectProperties(pProperties []devicesproperties.DEVPROPERTY) {
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	devicesdevicequery.DevFreeObjectProperties(uint32(len(pProperties)), _pProperties)
+}
+
+// DevFreeObjects wraps the raw DevFreeObjects call with idiomatic Go types.
+func DevFreeObjects(pObjects []devicesdevicequery.DEV_OBJECT) {
+	var _pObjects *devicesdevicequery.DEV_OBJECT
+	if len(pObjects) > 0 {
+		_pObjects = &pObjects[0]
+	}
+	devicesdevicequery.DevFreeObjects(uint32(len(pObjects)), _pObjects)
 }
 
 // DevGetObjectProperties wraps the raw DevGetObjectProperties call with idiomatic Go types.
-func DevGetObjectProperties(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, pcPropertyCount *uint32, ppProperties **devicesproperties.DEVPROPERTY) error {
+func DevGetObjectProperties(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pcPropertyCount *uint32, ppProperties **devicesproperties.DEVPROPERTY) error {
 	_pszObjectId := win32.UTF16Ptr(pszObjectId)
-	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjectProperties(ObjectType, foundation.PWSTR(_pszObjectId), QueryFlags, cRequestedProperties, pRequestedProperties, pcPropertyCount, ppProperties)))
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjectProperties(ObjectType, foundation.PWSTR(_pszObjectId), QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, pcPropertyCount, ppProperties)))
 }
 
 // DevGetObjectPropertiesEx wraps the raw DevGetObjectPropertiesEx call with idiomatic Go types.
-func DevGetObjectPropertiesEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cExtendedParameterCount uint32, pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER, pcPropertyCount *uint32, ppProperties **devicesproperties.DEVPROPERTY) error {
+func DevGetObjectPropertiesEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pExtendedParameters []devicesdevicequery.DEV_QUERY_PARAMETER, pcPropertyCount *uint32, ppProperties **devicesproperties.DEVPROPERTY) error {
 	_pszObjectId := win32.UTF16Ptr(pszObjectId)
-	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjectPropertiesEx(ObjectType, foundation.PWSTR(_pszObjectId), QueryFlags, cRequestedProperties, pRequestedProperties, cExtendedParameterCount, pExtendedParameters, pcPropertyCount, ppProperties)))
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjectPropertiesEx(ObjectType, foundation.PWSTR(_pszObjectId), QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pExtendedParameters)), _pExtendedParameters, pcPropertyCount, ppProperties)))
 }
 
 // DevGetObjects wraps the raw DevGetObjects call with idiomatic Go types.
-func DevGetObjects(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pcObjectCount *uint32, ppObjects **devicesdevicequery.DEV_OBJECT) error {
-	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjects(ObjectType, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pcObjectCount, ppObjects)))
+func DevGetObjects(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pcObjectCount *uint32, ppObjects **devicesdevicequery.DEV_OBJECT) error {
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjects(ObjectType, QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, pcObjectCount, ppObjects)))
 }
 
 // DevGetObjectsEx wraps the raw DevGetObjectsEx call with idiomatic Go types.
-func DevGetObjectsEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION, cExtendedParameterCount uint32, pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER, pcObjectCount *uint32, ppObjects **devicesdevicequery.DEV_OBJECT) error {
-	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjectsEx(ObjectType, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pcObjectCount, ppObjects)))
+func DevGetObjectsEx(ObjectType devicesdevicequery.DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []devicesdevicequery.DEVPROP_FILTER_EXPRESSION, pExtendedParameters []devicesdevicequery.DEV_QUERY_PARAMETER, pcObjectCount *uint32, ppObjects **devicesdevicequery.DEV_OBJECT) error {
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *devicesdevicequery.DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	var _pExtendedParameters *devicesdevicequery.DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	return win32.HRESULTError(int32(devicesdevicequery.DevGetObjectsEx(ObjectType, QueryFlags, uint32(len(pRequestedProperties)), _pRequestedProperties, uint32(len(pFilter)), _pFilter, uint32(len(pExtendedParameters)), _pExtendedParameters, pcObjectCount, ppObjects)))
 }

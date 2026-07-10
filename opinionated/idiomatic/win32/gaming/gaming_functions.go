@@ -129,13 +129,29 @@ func ShowGameInviteUIWithContextForUser(user *systemwinrt.IInspectable, serviceC
 
 // ShowPlayerPickerUI wraps the raw ShowPlayerPickerUI call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-showplayerpickerui
-func ShowPlayerPickerUI(promptDisplayText systemwinrt.HSTRING, xuids *systemwinrt.HSTRING, xuidsCount uintptr, preSelectedXuids *systemwinrt.HSTRING, preSelectedXuidsCount uintptr, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine gaming.PlayerPickerUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowPlayerPickerUI(promptDisplayText, xuids, xuidsCount, preSelectedXuids, preSelectedXuidsCount, minSelectionCount, maxSelectionCount, completionRoutine, context)))
+func ShowPlayerPickerUI(promptDisplayText systemwinrt.HSTRING, xuids []systemwinrt.HSTRING, preSelectedXuids []systemwinrt.HSTRING, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine gaming.PlayerPickerUICompletionRoutine, context unsafe.Pointer) error {
+	var _xuids *systemwinrt.HSTRING
+	if len(xuids) > 0 {
+		_xuids = &xuids[0]
+	}
+	var _preSelectedXuids *systemwinrt.HSTRING
+	if len(preSelectedXuids) > 0 {
+		_preSelectedXuids = &preSelectedXuids[0]
+	}
+	return win32.HRESULTError(int32(gaming.ShowPlayerPickerUI(promptDisplayText, _xuids, uintptr(len(xuids)), _preSelectedXuids, uintptr(len(preSelectedXuids)), minSelectionCount, maxSelectionCount, completionRoutine, context)))
 }
 
 // ShowPlayerPickerUIForUser wraps the raw ShowPlayerPickerUIForUser call with idiomatic Go types.
-func ShowPlayerPickerUIForUser(user *systemwinrt.IInspectable, promptDisplayText systemwinrt.HSTRING, xuids *systemwinrt.HSTRING, xuidsCount uintptr, preSelectedXuids *systemwinrt.HSTRING, preSelectedXuidsCount uintptr, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine gaming.PlayerPickerUICompletionRoutine, context unsafe.Pointer) error {
-	return win32.HRESULTError(int32(gaming.ShowPlayerPickerUIForUser(user, promptDisplayText, xuids, xuidsCount, preSelectedXuids, preSelectedXuidsCount, minSelectionCount, maxSelectionCount, completionRoutine, context)))
+func ShowPlayerPickerUIForUser(user *systemwinrt.IInspectable, promptDisplayText systemwinrt.HSTRING, xuids []systemwinrt.HSTRING, preSelectedXuids []systemwinrt.HSTRING, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine gaming.PlayerPickerUICompletionRoutine, context unsafe.Pointer) error {
+	var _xuids *systemwinrt.HSTRING
+	if len(xuids) > 0 {
+		_xuids = &xuids[0]
+	}
+	var _preSelectedXuids *systemwinrt.HSTRING
+	if len(preSelectedXuids) > 0 {
+		_preSelectedXuids = &preSelectedXuids[0]
+	}
+	return win32.HRESULTError(int32(gaming.ShowPlayerPickerUIForUser(user, promptDisplayText, _xuids, uintptr(len(xuids)), _preSelectedXuids, uintptr(len(preSelectedXuids)), minSelectionCount, maxSelectionCount, completionRoutine, context)))
 }
 
 // ShowProfileCardUI wraps the raw ShowProfileCardUI call with idiomatic Go types.

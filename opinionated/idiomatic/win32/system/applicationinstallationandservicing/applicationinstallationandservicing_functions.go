@@ -94,22 +94,34 @@ func CreatePatchFileByHandles(OldFileHandle foundation.HANDLE, NewFileHandle fou
 }
 
 // CreatePatchFileByHandlesEx wraps the raw CreatePatchFileByHandlesEx call with idiomatic Go types.
-func CreatePatchFileByHandlesEx(OldFileCount uint32, OldFileInfoArray *systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_H, NewFileHandle foundation.HANDLE, PatchFileHandle foundation.HANDLE, OptionFlags uint32, OptionData *systemapplicationinstallationandservicing.PATCH_OPTION_DATA, ProgressCallback systemapplicationinstallationandservicing.PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
-	return systemapplicationinstallationandservicing.CreatePatchFileByHandlesEx(OldFileCount, OldFileInfoArray, NewFileHandle, PatchFileHandle, OptionFlags, OptionData, ProgressCallback, CallbackContext) != 0
+func CreatePatchFileByHandlesEx(OldFileInfoArray []systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_H, NewFileHandle foundation.HANDLE, PatchFileHandle foundation.HANDLE, OptionFlags uint32, OptionData *systemapplicationinstallationandservicing.PATCH_OPTION_DATA, ProgressCallback systemapplicationinstallationandservicing.PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+	var _OldFileInfoArray *systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_H
+	if len(OldFileInfoArray) > 0 {
+		_OldFileInfoArray = &OldFileInfoArray[0]
+	}
+	return systemapplicationinstallationandservicing.CreatePatchFileByHandlesEx(uint32(len(OldFileInfoArray)), _OldFileInfoArray, NewFileHandle, PatchFileHandle, OptionFlags, OptionData, ProgressCallback, CallbackContext) != 0
 }
 
 // CreatePatchFileEx wraps the raw CreatePatchFileExW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/DevNotes/patchapi-createpatchfileex
-func CreatePatchFileEx(OldFileCount uint32, OldFileInfoArray *systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_W, NewFileName string, PatchFileName string, OptionFlags uint32, OptionData *systemapplicationinstallationandservicing.PATCH_OPTION_DATA, ProgressCallback systemapplicationinstallationandservicing.PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+func CreatePatchFileEx(OldFileInfoArray []systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_W, NewFileName string, PatchFileName string, OptionFlags uint32, OptionData *systemapplicationinstallationandservicing.PATCH_OPTION_DATA, ProgressCallback systemapplicationinstallationandservicing.PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+	var _OldFileInfoArray *systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_W
+	if len(OldFileInfoArray) > 0 {
+		_OldFileInfoArray = &OldFileInfoArray[0]
+	}
 	_NewFileName := win32.UTF16Ptr(NewFileName)
 	_PatchFileName := win32.UTF16Ptr(PatchFileName)
-	return systemapplicationinstallationandservicing.CreatePatchFileExW(OldFileCount, OldFileInfoArray, foundation.PWSTR(_NewFileName), foundation.PWSTR(_PatchFileName), OptionFlags, OptionData, ProgressCallback, CallbackContext) != 0
+	return systemapplicationinstallationandservicing.CreatePatchFileExW(uint32(len(OldFileInfoArray)), _OldFileInfoArray, foundation.PWSTR(_NewFileName), foundation.PWSTR(_PatchFileName), OptionFlags, OptionData, ProgressCallback, CallbackContext) != 0
 }
 
 // CreatePatchFileExA wraps the raw CreatePatchFileExA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/DevNotes/patchapi-createpatchfileex
-func CreatePatchFileExA(OldFileCount uint32, OldFileInfoArray *systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_A, NewFileName foundation.PSTR, PatchFileName foundation.PSTR, OptionFlags uint32, OptionData *systemapplicationinstallationandservicing.PATCH_OPTION_DATA, ProgressCallback systemapplicationinstallationandservicing.PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
-	return systemapplicationinstallationandservicing.CreatePatchFileExA(OldFileCount, OldFileInfoArray, NewFileName, PatchFileName, OptionFlags, OptionData, ProgressCallback, CallbackContext) != 0
+func CreatePatchFileExA(OldFileInfoArray []systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_A, NewFileName foundation.PSTR, PatchFileName foundation.PSTR, OptionFlags uint32, OptionData *systemapplicationinstallationandservicing.PATCH_OPTION_DATA, ProgressCallback systemapplicationinstallationandservicing.PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+	var _OldFileInfoArray *systemapplicationinstallationandservicing.PATCH_OLD_FILE_INFO_A
+	if len(OldFileInfoArray) > 0 {
+		_OldFileInfoArray = &OldFileInfoArray[0]
+	}
+	return systemapplicationinstallationandservicing.CreatePatchFileExA(uint32(len(OldFileInfoArray)), _OldFileInfoArray, NewFileName, PatchFileName, OptionFlags, OptionData, ProgressCallback, CallbackContext) != 0
 }
 
 // DeltaFree wraps the raw DeltaFree call with idiomatic Go types.
@@ -179,24 +191,56 @@ func GetDeltaSignatureA(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID
 }
 
 // GetFilePatchSignature wraps the raw GetFilePatchSignatureW call with idiomatic Go types.
-func GetFilePatchSignature(FileName string, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeCount uint32, IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PWSTR) bool {
+func GetFilePatchSignature(FileName string, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeArray []systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PWSTR) bool {
 	_FileName := win32.UTF16Ptr(FileName)
-	return systemapplicationinstallationandservicing.GetFilePatchSignatureW(foundation.PWSTR(_FileName), OptionFlags, OptionData, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray, SignatureBufferSize, SignatureBuffer) != 0
+	var _IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	return systemapplicationinstallationandservicing.GetFilePatchSignatureW(foundation.PWSTR(_FileName), OptionFlags, OptionData, uint32(len(IgnoreRangeArray)), _IgnoreRangeArray, uint32(len(RetainRangeArray)), _RetainRangeArray, SignatureBufferSize, SignatureBuffer) != 0
 }
 
 // GetFilePatchSignatureA wraps the raw GetFilePatchSignatureA call with idiomatic Go types.
-func GetFilePatchSignatureA(FileName foundation.PSTR, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeCount uint32, IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
-	return systemapplicationinstallationandservicing.GetFilePatchSignatureA(FileName, OptionFlags, OptionData, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray, SignatureBufferSize, SignatureBuffer) != 0
+func GetFilePatchSignatureA(FileName foundation.PSTR, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeArray []systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
+	var _IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	return systemapplicationinstallationandservicing.GetFilePatchSignatureA(FileName, OptionFlags, OptionData, uint32(len(IgnoreRangeArray)), _IgnoreRangeArray, uint32(len(RetainRangeArray)), _RetainRangeArray, SignatureBufferSize, SignatureBuffer) != 0
 }
 
 // GetFilePatchSignatureByBuffer wraps the raw GetFilePatchSignatureByBuffer call with idiomatic Go types.
-func GetFilePatchSignatureByBuffer(FileBufferWritable *byte, FileSize uint32, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeCount uint32, IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
-	return systemapplicationinstallationandservicing.GetFilePatchSignatureByBuffer(FileBufferWritable, FileSize, OptionFlags, OptionData, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray, SignatureBufferSize, SignatureBuffer) != 0
+func GetFilePatchSignatureByBuffer(FileBufferWritable *byte, FileSize uint32, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeArray []systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
+	var _IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	return systemapplicationinstallationandservicing.GetFilePatchSignatureByBuffer(FileBufferWritable, FileSize, OptionFlags, OptionData, uint32(len(IgnoreRangeArray)), _IgnoreRangeArray, uint32(len(RetainRangeArray)), _RetainRangeArray, SignatureBufferSize, SignatureBuffer) != 0
 }
 
 // GetFilePatchSignatureByHandle wraps the raw GetFilePatchSignatureByHandle call with idiomatic Go types.
-func GetFilePatchSignatureByHandle(FileHandle foundation.HANDLE, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeCount uint32, IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
-	return systemapplicationinstallationandservicing.GetFilePatchSignatureByHandle(FileHandle, OptionFlags, OptionData, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray, SignatureBufferSize, SignatureBuffer) != 0
+func GetFilePatchSignatureByHandle(FileHandle foundation.HANDLE, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeArray []systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
+	var _IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	return systemapplicationinstallationandservicing.GetFilePatchSignatureByHandle(FileHandle, OptionFlags, OptionData, uint32(len(IgnoreRangeArray)), _IgnoreRangeArray, uint32(len(RetainRangeArray)), _RetainRangeArray, SignatureBufferSize, SignatureBuffer) != 0
 }
 
 // MsiAdvertiseProduct wraps the raw MsiAdvertiseProductW call with idiomatic Go types.
@@ -361,17 +405,45 @@ func MsiDatabaseOpenView(hDatabase systemapplicationinstallationandservicing.MSI
 
 // MsiDetermineApplicablePatches wraps the raw MsiDetermineApplicablePatchesW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msidetermineapplicablepatchesw
-func MsiDetermineApplicablePatches(szProductPackagePath string, cPatchInfo uint32, pPatchInfo *systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOW) uint32 {
+func MsiDetermineApplicablePatches(szProductPackagePath string, pPatchInfo []systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOW) uint32 {
 	_szProductPackagePath := win32.UTF16Ptr(szProductPackagePath)
-	return systemapplicationinstallationandservicing.MsiDetermineApplicablePatchesW(foundation.PWSTR(_szProductPackagePath), cPatchInfo, pPatchInfo)
+	var _pPatchInfo *systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOW
+	if len(pPatchInfo) > 0 {
+		_pPatchInfo = &pPatchInfo[0]
+	}
+	return systemapplicationinstallationandservicing.MsiDetermineApplicablePatchesW(foundation.PWSTR(_szProductPackagePath), uint32(len(pPatchInfo)), _pPatchInfo)
+}
+
+// MsiDetermineApplicablePatchesA wraps the raw MsiDetermineApplicablePatchesA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msidetermineapplicablepatchesa
+func MsiDetermineApplicablePatchesA(szProductPackagePath foundation.PSTR, pPatchInfo []systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOA) uint32 {
+	var _pPatchInfo *systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOA
+	if len(pPatchInfo) > 0 {
+		_pPatchInfo = &pPatchInfo[0]
+	}
+	return systemapplicationinstallationandservicing.MsiDetermineApplicablePatchesA(szProductPackagePath, uint32(len(pPatchInfo)), _pPatchInfo)
 }
 
 // MsiDeterminePatchSequence wraps the raw MsiDeterminePatchSequenceW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msideterminepatchsequencew
-func MsiDeterminePatchSequence(szProductCode string, szUserSid string, dwContext systemapplicationinstallationandservicing.MSIINSTALLCONTEXT, cPatchInfo uint32, pPatchInfo *systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOW) uint32 {
+func MsiDeterminePatchSequence(szProductCode string, szUserSid string, dwContext systemapplicationinstallationandservicing.MSIINSTALLCONTEXT, pPatchInfo []systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOW) uint32 {
 	_szProductCode := win32.UTF16Ptr(szProductCode)
 	_szUserSid := win32.UTF16Ptr(szUserSid)
-	return systemapplicationinstallationandservicing.MsiDeterminePatchSequenceW(foundation.PWSTR(_szProductCode), foundation.PWSTR(_szUserSid), dwContext, cPatchInfo, pPatchInfo)
+	var _pPatchInfo *systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOW
+	if len(pPatchInfo) > 0 {
+		_pPatchInfo = &pPatchInfo[0]
+	}
+	return systemapplicationinstallationandservicing.MsiDeterminePatchSequenceW(foundation.PWSTR(_szProductCode), foundation.PWSTR(_szUserSid), dwContext, uint32(len(pPatchInfo)), _pPatchInfo)
+}
+
+// MsiDeterminePatchSequenceA wraps the raw MsiDeterminePatchSequenceA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msideterminepatchsequencea
+func MsiDeterminePatchSequenceA(szProductCode foundation.PSTR, szUserSid foundation.PSTR, dwContext systemapplicationinstallationandservicing.MSIINSTALLCONTEXT, pPatchInfo []systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOA) uint32 {
+	var _pPatchInfo *systemapplicationinstallationandservicing.MSIPATCHSEQUENCEINFOA
+	if len(pPatchInfo) > 0 {
+		_pPatchInfo = &pPatchInfo[0]
+	}
+	return systemapplicationinstallationandservicing.MsiDeterminePatchSequenceA(szProductCode, szUserSid, dwContext, uint32(len(pPatchInfo)), _pPatchInfo)
 }
 
 // MsiDoAction wraps the raw MsiDoActionW call with idiomatic Go types.
@@ -1168,6 +1240,19 @@ func MsiVerifyPackage(szPackagePath string) uint32 {
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msiviewgeterrorw
 func MsiViewGetError(hView systemapplicationinstallationandservicing.MSIHANDLE, szColumnNameBuffer foundation.PWSTR, pcchBuf *uint32) systemapplicationinstallationandservicing.MSIDBERROR {
 	return systemapplicationinstallationandservicing.MsiViewGetErrorW(hView, szColumnNameBuffer, pcchBuf)
+}
+
+// NormalizeFileForPatchSignature wraps the raw NormalizeFileForPatchSignature call with idiomatic Go types.
+func NormalizeFileForPatchSignature(FileBuffer unsafe.Pointer, FileSize uint32, OptionFlags uint32, OptionData *systemapplicationinstallationandservicing.PATCH_OPTION_DATA, NewFileCoffBase uint32, NewFileCoffTime uint32, IgnoreRangeArray []systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE, RetainRangeArray []systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE) int32 {
+	var _IgnoreRangeArray *systemapplicationinstallationandservicing.PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *systemapplicationinstallationandservicing.PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	return systemapplicationinstallationandservicing.NormalizeFileForPatchSignature(FileBuffer, FileSize, OptionFlags, OptionData, NewFileCoffBase, NewFileCoffTime, uint32(len(IgnoreRangeArray)), _IgnoreRangeArray, uint32(len(RetainRangeArray)), _RetainRangeArray)
 }
 
 // QueryActCtxSettingsW wraps the raw QueryActCtxSettingsW call with idiomatic Go types.

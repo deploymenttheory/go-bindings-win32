@@ -36,8 +36,12 @@ func D3DCompileFromFile(pFileName string, pDefines *graphicsdirect3d.D3D_SHADER_
 
 // D3DCompressShaders wraps the raw D3DCompressShaders call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders
-func D3DCompressShaders(uNumShaders uint32, pShaderData *graphicsdirect3dfxc.D3D_SHADER_DATA, uFlags uint32, ppCompressedData **graphicsdirect3d.ID3DBlob) error {
-	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DCompressShaders(uNumShaders, pShaderData, uFlags, ppCompressedData)))
+func D3DCompressShaders(pShaderData []graphicsdirect3dfxc.D3D_SHADER_DATA, uFlags uint32, ppCompressedData **graphicsdirect3d.ID3DBlob) error {
+	var _pShaderData *graphicsdirect3dfxc.D3D_SHADER_DATA
+	if len(pShaderData) > 0 {
+		_pShaderData = &pShaderData[0]
+	}
+	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DCompressShaders(uint32(len(pShaderData)), _pShaderData, uFlags, ppCompressedData)))
 }
 
 // D3DCreateBlob wraps the raw D3DCreateBlob call with idiomatic Go types.
@@ -114,8 +118,12 @@ func D3DGetOutputSignatureBlob(pSrcData unsafe.Pointer, SrcDataSize uintptr, ppS
 
 // D3DGetTraceInstructionOffsets wraps the raw D3DGetTraceInstructionOffsets call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets
-func D3DGetTraceInstructionOffsets(pSrcData unsafe.Pointer, SrcDataSize uintptr, Flags uint32, StartInstIndex uintptr, NumInsts uintptr, pOffsets *uintptr, pTotalInsts *uintptr) error {
-	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DGetTraceInstructionOffsets(pSrcData, SrcDataSize, Flags, StartInstIndex, NumInsts, pOffsets, pTotalInsts)))
+func D3DGetTraceInstructionOffsets(pSrcData unsafe.Pointer, SrcDataSize uintptr, Flags uint32, StartInstIndex uintptr, pOffsets []uintptr, pTotalInsts *uintptr) error {
+	var _pOffsets *uintptr
+	if len(pOffsets) > 0 {
+		_pOffsets = &pOffsets[0]
+	}
+	return win32.HRESULTError(int32(graphicsdirect3dfxc.D3DGetTraceInstructionOffsets(pSrcData, SrcDataSize, Flags, StartInstIndex, uintptr(len(pOffsets)), _pOffsets, pTotalInsts)))
 }
 
 // D3DLoadModule wraps the raw D3DLoadModule call with idiomatic Go types.

@@ -22,9 +22,13 @@ func DRMAcquireAdvisories(hLicenseStorage uint32, wszLicense string, wszURL stri
 
 // DRMAcquireIssuanceLicenseTemplate wraps the raw DRMAcquireIssuanceLicenseTemplate call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmacquireissuancelicensetemplate
-func DRMAcquireIssuanceLicenseTemplate(hClient uint32, uFlags uint32, pvReserved unsafe.Pointer, cTemplates uint32, pwszTemplateIds *foundation.PWSTR, wszUrl string, pvContext unsafe.Pointer) error {
+func DRMAcquireIssuanceLicenseTemplate(hClient uint32, uFlags uint32, pvReserved unsafe.Pointer, pwszTemplateIds []foundation.PWSTR, wszUrl string, pvContext unsafe.Pointer) error {
+	var _pwszTemplateIds *foundation.PWSTR
+	if len(pwszTemplateIds) > 0 {
+		_pwszTemplateIds = &pwszTemplateIds[0]
+	}
 	_wszUrl := win32.UTF16Ptr(wszUrl)
-	return win32.HRESULTError(int32(datarightsmanagement.DRMAcquireIssuanceLicenseTemplate(hClient, uFlags, pvReserved, cTemplates, pwszTemplateIds, foundation.PWSTR(_wszUrl), pvContext)))
+	return win32.HRESULTError(int32(datarightsmanagement.DRMAcquireIssuanceLicenseTemplate(hClient, uFlags, pvReserved, uint32(len(pwszTemplateIds)), _pwszTemplateIds, foundation.PWSTR(_wszUrl), pvContext)))
 }
 
 // DRMAcquireLicense wraps the raw DRMAcquireLicense call with idiomatic Go types.
@@ -107,8 +111,12 @@ func DRMCloseSession(hSession uint32) error {
 
 // DRMConstructCertificateChain wraps the raw DRMConstructCertificateChain call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmconstructcertificatechain
-func DRMConstructCertificateChain(cCertificates uint32, rgwszCertificates *foundation.PWSTR, pcChain *uint32, wszChain foundation.PWSTR) error {
-	return win32.HRESULTError(int32(datarightsmanagement.DRMConstructCertificateChain(cCertificates, rgwszCertificates, pcChain, wszChain)))
+func DRMConstructCertificateChain(rgwszCertificates []foundation.PWSTR, pcChain *uint32, wszChain foundation.PWSTR) error {
+	var _rgwszCertificates *foundation.PWSTR
+	if len(rgwszCertificates) > 0 {
+		_rgwszCertificates = &rgwszCertificates[0]
+	}
+	return win32.HRESULTError(int32(datarightsmanagement.DRMConstructCertificateChain(uint32(len(rgwszCertificates)), _rgwszCertificates, pcChain, wszChain)))
 }
 
 // DRMCreateBoundLicense wraps the raw DRMCreateBoundLicense call with idiomatic Go types.

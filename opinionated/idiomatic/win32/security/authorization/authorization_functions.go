@@ -13,6 +13,16 @@ import (
 	securityauthorization "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/authorization"
 )
 
+// AuthzAccessCheck wraps the raw AuthzAccessCheck call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzaccesscheck
+func AuthzAccessCheck(Flags securityauthorization.AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext securityauthorization.AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *securityauthorization.AUTHZ_ACCESS_REQUEST, hAuditEvent securityauthorization.AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorArray []security.PSECURITY_DESCRIPTOR, pReply *securityauthorization.AUTHZ_ACCESS_REPLY, phAccessCheckResults *securityauthorization.AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) error {
+	var _OptionalSecurityDescriptorArray *security.PSECURITY_DESCRIPTOR
+	if len(OptionalSecurityDescriptorArray) > 0 {
+		_OptionalSecurityDescriptorArray = &OptionalSecurityDescriptorArray[0]
+	}
+	return securityauthorization.AuthzAccessCheck(Flags, hAuthzClientContext, pRequest, hAuditEvent, pSecurityDescriptor, _OptionalSecurityDescriptorArray, uint32(len(OptionalSecurityDescriptorArray)), pReply, phAccessCheckResults)
+}
+
 // AuthzEvaluateSacl wraps the raw AuthzEvaluateSacl call with idiomatic Go types.
 func AuthzEvaluateSacl(AuthzClientContext securityauthorization.AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *securityauthorization.AUTHZ_ACCESS_REQUEST, Sacl *security.ACL, GrantedAccess uint32, AccessGranted bool, pbGenerateAudit *foundation.BOOL) bool {
 	_AccessGranted := foundation.BOOL(win32.Bool32(AccessGranted))
@@ -47,11 +57,31 @@ func AuthzInitializeResourceManager(Flags uint32, pfnDynamicAccessCheck security
 	return securityauthorization.AuthzInitializeResourceManager(Flags, pfnDynamicAccessCheck, pfnComputeDynamicGroups, pfnFreeDynamicGroups, foundation.PWSTR(_szResourceManagerName), phAuthzResourceManager)
 }
 
+// AuthzOpenObjectAudit wraps the raw AuthzOpenObjectAudit call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzopenobjectaudit
+func AuthzOpenObjectAudit(Flags uint32, hAuthzClientContext securityauthorization.AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *securityauthorization.AUTHZ_ACCESS_REQUEST, hAuditEvent securityauthorization.AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorArray []security.PSECURITY_DESCRIPTOR, pReply *securityauthorization.AUTHZ_ACCESS_REPLY) error {
+	var _OptionalSecurityDescriptorArray *security.PSECURITY_DESCRIPTOR
+	if len(OptionalSecurityDescriptorArray) > 0 {
+		_OptionalSecurityDescriptorArray = &OptionalSecurityDescriptorArray[0]
+	}
+	return securityauthorization.AuthzOpenObjectAudit(Flags, hAuthzClientContext, pRequest, hAuditEvent, pSecurityDescriptor, _OptionalSecurityDescriptorArray, uint32(len(OptionalSecurityDescriptorArray)), pReply)
+}
+
 // AuthzRegisterSecurityEventSource wraps the raw AuthzRegisterSecurityEventSource call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzregistersecurityeventsource
 func AuthzRegisterSecurityEventSource(dwFlags uint32, szEventSourceName string, phEventProvider *securityauthorization.AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE) error {
 	_szEventSourceName := win32.UTF16Ptr(szEventSourceName)
 	return securityauthorization.AuthzRegisterSecurityEventSource(dwFlags, foundation.PWSTR(_szEventSourceName), phEventProvider)
+}
+
+// AuthzSetAppContainerInformation wraps the raw AuthzSetAppContainerInformation call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzsetappcontainerinformation
+func AuthzSetAppContainerInformation(hAuthzClientContext securityauthorization.AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid security.PSID, pCapabilitySids []security.SID_AND_ATTRIBUTES) error {
+	var _pCapabilitySids *security.SID_AND_ATTRIBUTES
+	if len(pCapabilitySids) > 0 {
+		_pCapabilitySids = &pCapabilitySids[0]
+	}
+	return securityauthorization.AuthzSetAppContainerInformation(hAuthzClientContext, pAppContainerSid, uint32(len(pCapabilitySids)), _pCapabilitySids)
 }
 
 // AuthzUninstallSecurityEventSource wraps the raw AuthzUninstallSecurityEventSource call with idiomatic Go types.
@@ -81,8 +111,30 @@ func BuildImpersonateTrustee(pTrustee *securityauthorization.TRUSTEE_W, pImperso
 
 // BuildSecurityDescriptor wraps the raw BuildSecurityDescriptorW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildsecuritydescriptorw
-func BuildSecurityDescriptor(pOwner *securityauthorization.TRUSTEE_W, pGroup *securityauthorization.TRUSTEE_W, cCountOfAccessEntries uint32, pListOfAccessEntries *securityauthorization.EXPLICIT_ACCESS_W, cCountOfAuditEntries uint32, pListOfAuditEntries *securityauthorization.EXPLICIT_ACCESS_W, pOldSD security.PSECURITY_DESCRIPTOR, pSizeNewSD *uint32, pNewSD *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
-	return securityauthorization.BuildSecurityDescriptorW(pOwner, pGroup, cCountOfAccessEntries, pListOfAccessEntries, cCountOfAuditEntries, pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
+func BuildSecurityDescriptor(pOwner *securityauthorization.TRUSTEE_W, pGroup *securityauthorization.TRUSTEE_W, pListOfAccessEntries []securityauthorization.EXPLICIT_ACCESS_W, pListOfAuditEntries []securityauthorization.EXPLICIT_ACCESS_W, pOldSD security.PSECURITY_DESCRIPTOR, pSizeNewSD *uint32, pNewSD *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
+	var _pListOfAccessEntries *securityauthorization.EXPLICIT_ACCESS_W
+	if len(pListOfAccessEntries) > 0 {
+		_pListOfAccessEntries = &pListOfAccessEntries[0]
+	}
+	var _pListOfAuditEntries *securityauthorization.EXPLICIT_ACCESS_W
+	if len(pListOfAuditEntries) > 0 {
+		_pListOfAuditEntries = &pListOfAuditEntries[0]
+	}
+	return securityauthorization.BuildSecurityDescriptorW(pOwner, pGroup, uint32(len(pListOfAccessEntries)), _pListOfAccessEntries, uint32(len(pListOfAuditEntries)), _pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
+}
+
+// BuildSecurityDescriptorA wraps the raw BuildSecurityDescriptorA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildsecuritydescriptora
+func BuildSecurityDescriptorA(pOwner *securityauthorization.TRUSTEE_A, pGroup *securityauthorization.TRUSTEE_A, pListOfAccessEntries []securityauthorization.EXPLICIT_ACCESS_A, pListOfAuditEntries []securityauthorization.EXPLICIT_ACCESS_A, pOldSD security.PSECURITY_DESCRIPTOR, pSizeNewSD *uint32, pNewSD *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
+	var _pListOfAccessEntries *securityauthorization.EXPLICIT_ACCESS_A
+	if len(pListOfAccessEntries) > 0 {
+		_pListOfAccessEntries = &pListOfAccessEntries[0]
+	}
+	var _pListOfAuditEntries *securityauthorization.EXPLICIT_ACCESS_A
+	if len(pListOfAuditEntries) > 0 {
+		_pListOfAuditEntries = &pListOfAuditEntries[0]
+	}
+	return securityauthorization.BuildSecurityDescriptorA(pOwner, pGroup, uint32(len(pListOfAccessEntries)), _pListOfAccessEntries, uint32(len(pListOfAuditEntries)), _pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
 }
 
 // BuildTrusteeWithName wraps the raw BuildTrusteeWithNameW call with idiomatic Go types.
@@ -139,6 +191,16 @@ func ConvertStringSidToSid(StringSid string, Sid *security.PSID) error {
 	return securityauthorization.ConvertStringSidToSidW(foundation.PWSTR(_StringSid), Sid)
 }
 
+// FreeInheritedFromArray wraps the raw FreeInheritedFromArray call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-freeinheritedfromarray
+func FreeInheritedFromArray(pInheritArray []securityauthorization.INHERITED_FROMW, pfnArray *securityauthorization.FN_OBJECT_MGR_FUNCTS) foundation.WIN32_ERROR {
+	var _pInheritArray *securityauthorization.INHERITED_FROMW
+	if len(pInheritArray) > 0 {
+		_pInheritArray = &pInheritArray[0]
+	}
+	return securityauthorization.FreeInheritedFromArray(_pInheritArray, uint16(len(pInheritArray)), pfnArray)
+}
+
 // GetAuditedPermissionsFromAcl wraps the raw GetAuditedPermissionsFromAclW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getauditedpermissionsfromaclw
 func GetAuditedPermissionsFromAcl(pacl *security.ACL, pTrustee *securityauthorization.TRUSTEE_W, pSuccessfulAuditedRights *uint32, pFailedAuditRights *uint32) foundation.WIN32_ERROR {
@@ -159,17 +221,25 @@ func GetExplicitEntriesFromAcl(pacl *security.ACL, pcCountOfExplicitEntries *uin
 
 // GetInheritanceSource wraps the raw GetInheritanceSourceW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getinheritancesourcew
-func GetInheritanceSource(pObjectName string, ObjectType securityauthorization.SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, Container bool, pObjectClassGuids **win32.GUID, GuidCount uint32, pAcl *security.ACL, pfnArray *securityauthorization.FN_OBJECT_MGR_FUNCTS, pGenericMapping *security.GENERIC_MAPPING, pInheritArray *securityauthorization.INHERITED_FROMW) foundation.WIN32_ERROR {
+func GetInheritanceSource(pObjectName string, ObjectType securityauthorization.SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, Container bool, pObjectClassGuids []*win32.GUID, pAcl *security.ACL, pfnArray *securityauthorization.FN_OBJECT_MGR_FUNCTS, pGenericMapping *security.GENERIC_MAPPING, pInheritArray *securityauthorization.INHERITED_FROMW) foundation.WIN32_ERROR {
 	_pObjectName := win32.UTF16Ptr(pObjectName)
 	_Container := foundation.BOOL(win32.Bool32(Container))
-	return securityauthorization.GetInheritanceSourceW(foundation.PWSTR(_pObjectName), ObjectType, SecurityInfo, _Container, pObjectClassGuids, GuidCount, pAcl, pfnArray, pGenericMapping, pInheritArray)
+	var _pObjectClassGuids **win32.GUID
+	if len(pObjectClassGuids) > 0 {
+		_pObjectClassGuids = &pObjectClassGuids[0]
+	}
+	return securityauthorization.GetInheritanceSourceW(foundation.PWSTR(_pObjectName), ObjectType, SecurityInfo, _Container, _pObjectClassGuids, uint32(len(pObjectClassGuids)), pAcl, pfnArray, pGenericMapping, pInheritArray)
 }
 
 // GetInheritanceSourceA wraps the raw GetInheritanceSourceA call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getinheritancesourcea
-func GetInheritanceSourceA(pObjectName foundation.PSTR, ObjectType securityauthorization.SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, Container bool, pObjectClassGuids **win32.GUID, GuidCount uint32, pAcl *security.ACL, pfnArray *securityauthorization.FN_OBJECT_MGR_FUNCTS, pGenericMapping *security.GENERIC_MAPPING, pInheritArray *securityauthorization.INHERITED_FROMA) foundation.WIN32_ERROR {
+func GetInheritanceSourceA(pObjectName foundation.PSTR, ObjectType securityauthorization.SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, Container bool, pObjectClassGuids []*win32.GUID, pAcl *security.ACL, pfnArray *securityauthorization.FN_OBJECT_MGR_FUNCTS, pGenericMapping *security.GENERIC_MAPPING, pInheritArray *securityauthorization.INHERITED_FROMA) foundation.WIN32_ERROR {
 	_Container := foundation.BOOL(win32.Bool32(Container))
-	return securityauthorization.GetInheritanceSourceA(pObjectName, ObjectType, SecurityInfo, _Container, pObjectClassGuids, GuidCount, pAcl, pfnArray, pGenericMapping, pInheritArray)
+	var _pObjectClassGuids **win32.GUID
+	if len(pObjectClassGuids) > 0 {
+		_pObjectClassGuids = &pObjectClassGuids[0]
+	}
+	return securityauthorization.GetInheritanceSourceA(pObjectName, ObjectType, SecurityInfo, _Container, _pObjectClassGuids, uint32(len(pObjectClassGuids)), pAcl, pfnArray, pGenericMapping, pInheritArray)
 }
 
 // GetMultipleTrustee wraps the raw GetMultipleTrusteeW call with idiomatic Go types.
@@ -215,8 +285,22 @@ func LookupSecurityDescriptorParts(ppOwner **securityauthorization.TRUSTEE_W, pp
 
 // SetEntriesInAcl wraps the raw SetEntriesInAclW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-setentriesinaclw
-func SetEntriesInAcl(cCountOfExplicitEntries uint32, pListOfExplicitEntries *securityauthorization.EXPLICIT_ACCESS_W, OldAcl *security.ACL, NewAcl **security.ACL) foundation.WIN32_ERROR {
-	return securityauthorization.SetEntriesInAclW(cCountOfExplicitEntries, pListOfExplicitEntries, OldAcl, NewAcl)
+func SetEntriesInAcl(pListOfExplicitEntries []securityauthorization.EXPLICIT_ACCESS_W, OldAcl *security.ACL, NewAcl **security.ACL) foundation.WIN32_ERROR {
+	var _pListOfExplicitEntries *securityauthorization.EXPLICIT_ACCESS_W
+	if len(pListOfExplicitEntries) > 0 {
+		_pListOfExplicitEntries = &pListOfExplicitEntries[0]
+	}
+	return securityauthorization.SetEntriesInAclW(uint32(len(pListOfExplicitEntries)), _pListOfExplicitEntries, OldAcl, NewAcl)
+}
+
+// SetEntriesInAclA wraps the raw SetEntriesInAclA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-setentriesinacla
+func SetEntriesInAclA(pListOfExplicitEntries []securityauthorization.EXPLICIT_ACCESS_A, OldAcl *security.ACL, NewAcl **security.ACL) foundation.WIN32_ERROR {
+	var _pListOfExplicitEntries *securityauthorization.EXPLICIT_ACCESS_A
+	if len(pListOfExplicitEntries) > 0 {
+		_pListOfExplicitEntries = &pListOfExplicitEntries[0]
+	}
+	return securityauthorization.SetEntriesInAclA(uint32(len(pListOfExplicitEntries)), _pListOfExplicitEntries, OldAcl, NewAcl)
 }
 
 // SetNamedSecurityInfo wraps the raw SetNamedSecurityInfoW call with idiomatic Go types.

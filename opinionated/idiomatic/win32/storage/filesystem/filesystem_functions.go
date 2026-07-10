@@ -21,6 +21,16 @@ func AddLogContainer(hLog foundation.HANDLE, pcbContainer *uint64, pwszContainer
 	return storagefilesystem.AddLogContainer(hLog, pcbContainer, foundation.PWSTR(_pwszContainerPath), pReserved)
 }
 
+// AddLogContainerSet wraps the raw AddLogContainerSet call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-addlogcontainerset
+func AddLogContainerSet(hLog foundation.HANDLE, pcbContainer *uint64, rgwszContainerPath []foundation.PWSTR, pReserved unsafe.Pointer) error {
+	var _rgwszContainerPath *foundation.PWSTR
+	if len(rgwszContainerPath) > 0 {
+		_rgwszContainerPath = &rgwszContainerPath[0]
+	}
+	return storagefilesystem.AddLogContainerSet(hLog, uint16(len(rgwszContainerPath)), pcbContainer, _rgwszContainerPath, pReserved)
+}
+
 // AddUsersToEncryptedFile wraps the raw AddUsersToEncryptedFile call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winefs/nf-winefs-adduserstoencryptedfile
 func AddUsersToEncryptedFile(lpFileName string, pEncryptionCertificates *storagefilesystem.ENCRYPTION_CERTIFICATE_LIST) uint32 {
@@ -58,14 +68,22 @@ func BackupWrite(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite 
 
 // BuildIoRingRegisterBuffers wraps the raw BuildIoRingRegisterBuffers call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringregisterbuffers
-func BuildIoRingRegisterBuffers(ioRing storagefilesystem.HIORING, count uint32, buffers *storagefilesystem.IORING_BUFFER_INFO, userData uintptr) error {
-	return win32.HRESULTError(int32(storagefilesystem.BuildIoRingRegisterBuffers(ioRing, count, buffers, userData)))
+func BuildIoRingRegisterBuffers(ioRing storagefilesystem.HIORING, buffers []storagefilesystem.IORING_BUFFER_INFO, userData uintptr) error {
+	var _buffers *storagefilesystem.IORING_BUFFER_INFO
+	if len(buffers) > 0 {
+		_buffers = &buffers[0]
+	}
+	return win32.HRESULTError(int32(storagefilesystem.BuildIoRingRegisterBuffers(ioRing, uint32(len(buffers)), _buffers, userData)))
 }
 
 // BuildIoRingRegisterFileHandles wraps the raw BuildIoRingRegisterFileHandles call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringregisterfilehandles
-func BuildIoRingRegisterFileHandles(ioRing storagefilesystem.HIORING, count uint32, handles *foundation.HANDLE, userData uintptr) error {
-	return win32.HRESULTError(int32(storagefilesystem.BuildIoRingRegisterFileHandles(ioRing, count, handles, userData)))
+func BuildIoRingRegisterFileHandles(ioRing storagefilesystem.HIORING, handles []foundation.HANDLE, userData uintptr) error {
+	var _handles *foundation.HANDLE
+	if len(handles) > 0 {
+		_handles = &handles[0]
+	}
+	return win32.HRESULTError(int32(storagefilesystem.BuildIoRingRegisterFileHandles(ioRing, uint32(len(handles)), _handles, userData)))
 }
 
 // CheckNameLegalDOS8Dot3 wraps the raw CheckNameLegalDOS8Dot3W call with idiomatic Go types.
@@ -131,10 +149,14 @@ func CopyFileTransacted(lpExistingFileName string, lpNewFileName string, lpProgr
 }
 
 // CreateBindLink wraps the raw CreateBindLink call with idiomatic Go types.
-func CreateBindLink(virtualPath string, backingPath string, createBindLinkFlags storagefilesystem.CREATE_BIND_LINK_FLAGS, exceptionCount uint32, exceptionPaths *foundation.PWSTR) error {
+func CreateBindLink(virtualPath string, backingPath string, createBindLinkFlags storagefilesystem.CREATE_BIND_LINK_FLAGS, exceptionPaths []foundation.PWSTR) error {
 	_virtualPath := win32.UTF16Ptr(virtualPath)
 	_backingPath := win32.UTF16Ptr(backingPath)
-	return win32.HRESULTError(int32(storagefilesystem.CreateBindLink(foundation.PWSTR(_virtualPath), foundation.PWSTR(_backingPath), createBindLinkFlags, exceptionCount, exceptionPaths)))
+	var _exceptionPaths *foundation.PWSTR
+	if len(exceptionPaths) > 0 {
+		_exceptionPaths = &exceptionPaths[0]
+	}
+	return win32.HRESULTError(int32(storagefilesystem.CreateBindLink(foundation.PWSTR(_virtualPath), foundation.PWSTR(_backingPath), createBindLinkFlags, uint32(len(exceptionPaths)), _exceptionPaths)))
 }
 
 // CreateDirectory wraps the raw CreateDirectoryW call with idiomatic Go types.
@@ -1095,9 +1117,13 @@ func RemoveLogContainer(hLog foundation.HANDLE, pwszContainerPath string, fForce
 
 // RemoveLogContainerSet wraps the raw RemoveLogContainerSet call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-removelogcontainerset
-func RemoveLogContainerSet(hLog foundation.HANDLE, cContainer uint16, rgwszContainerPath *foundation.PWSTR, fForce bool, pReserved unsafe.Pointer) error {
+func RemoveLogContainerSet(hLog foundation.HANDLE, rgwszContainerPath []foundation.PWSTR, fForce bool, pReserved unsafe.Pointer) error {
+	var _rgwszContainerPath *foundation.PWSTR
+	if len(rgwszContainerPath) > 0 {
+		_rgwszContainerPath = &rgwszContainerPath[0]
+	}
 	_fForce := foundation.BOOL(win32.Bool32(fForce))
-	return storagefilesystem.RemoveLogContainerSet(hLog, cContainer, rgwszContainerPath, _fForce, pReserved)
+	return storagefilesystem.RemoveLogContainerSet(hLog, uint16(len(rgwszContainerPath)), _rgwszContainerPath, _fForce, pReserved)
 }
 
 // RemoveUsersFromEncryptedFile wraps the raw RemoveUsersFromEncryptedFile call with idiomatic Go types.

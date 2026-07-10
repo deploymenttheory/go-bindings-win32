@@ -27,11 +27,51 @@ func CveEventWrite(CveId string, AdditionalDetails string) int32 {
 	return systemdiagnosticsetw.CveEventWrite(foundation.PWSTR(_CveId), foundation.PWSTR(_AdditionalDetails))
 }
 
+// EnumerateTraceGuids wraps the raw EnumerateTraceGuids call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-enumeratetraceguids
+func EnumerateTraceGuids(GuidPropertiesArray []*systemdiagnosticsetw.TRACE_GUID_PROPERTIES, GuidCount *uint32) foundation.WIN32_ERROR {
+	var _GuidPropertiesArray **systemdiagnosticsetw.TRACE_GUID_PROPERTIES
+	if len(GuidPropertiesArray) > 0 {
+		_GuidPropertiesArray = &GuidPropertiesArray[0]
+	}
+	return systemdiagnosticsetw.EnumerateTraceGuids(_GuidPropertiesArray, uint32(len(GuidPropertiesArray)), GuidCount)
+}
+
+// EventWrite wraps the raw EventWrite call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventwrite
+func EventWrite(RegHandle systemdiagnosticsetw.REGHANDLE, EventDescriptor *systemdiagnosticsetw.EVENT_DESCRIPTOR, UserData []systemdiagnosticsetw.EVENT_DATA_DESCRIPTOR) uint32 {
+	var _UserData *systemdiagnosticsetw.EVENT_DATA_DESCRIPTOR
+	if len(UserData) > 0 {
+		_UserData = &UserData[0]
+	}
+	return systemdiagnosticsetw.EventWrite(RegHandle, EventDescriptor, uint32(len(UserData)), _UserData)
+}
+
+// EventWriteEx wraps the raw EventWriteEx call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventwriteex
+func EventWriteEx(RegHandle systemdiagnosticsetw.REGHANDLE, EventDescriptor *systemdiagnosticsetw.EVENT_DESCRIPTOR, Filter uint64, Flags uint32, ActivityId *win32.GUID, RelatedActivityId *win32.GUID, UserData []systemdiagnosticsetw.EVENT_DATA_DESCRIPTOR) uint32 {
+	var _UserData *systemdiagnosticsetw.EVENT_DATA_DESCRIPTOR
+	if len(UserData) > 0 {
+		_UserData = &UserData[0]
+	}
+	return systemdiagnosticsetw.EventWriteEx(RegHandle, EventDescriptor, Filter, Flags, ActivityId, RelatedActivityId, uint32(len(UserData)), _UserData)
+}
+
 // EventWriteString wraps the raw EventWriteString call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventwritestring
 func EventWriteString(RegHandle systemdiagnosticsetw.REGHANDLE, Level byte, Keyword uint64, String string) uint32 {
 	_String := win32.UTF16Ptr(String)
 	return systemdiagnosticsetw.EventWriteString(RegHandle, Level, Keyword, foundation.PWSTR(_String))
+}
+
+// EventWriteTransfer wraps the raw EventWriteTransfer call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventwritetransfer
+func EventWriteTransfer(RegHandle systemdiagnosticsetw.REGHANDLE, EventDescriptor *systemdiagnosticsetw.EVENT_DESCRIPTOR, ActivityId *win32.GUID, RelatedActivityId *win32.GUID, UserData []systemdiagnosticsetw.EVENT_DATA_DESCRIPTOR) uint32 {
+	var _UserData *systemdiagnosticsetw.EVENT_DATA_DESCRIPTOR
+	if len(UserData) > 0 {
+		_UserData = &UserData[0]
+	}
+	return systemdiagnosticsetw.EventWriteTransfer(RegHandle, EventDescriptor, ActivityId, RelatedActivityId, uint32(len(UserData)), _UserData)
 }
 
 // FlushTrace wraps the raw FlushTraceW call with idiomatic Go types.
@@ -68,10 +108,34 @@ func OpenTraceFromRealTimeLoggerWithAllocationOptions(LoggerName string, Options
 	return systemdiagnosticsetw.OpenTraceFromRealTimeLoggerWithAllocationOptions(foundation.PWSTR(_LoggerName), Options, AllocationSize, MemoryPartitionHandle, LogFileHeader)
 }
 
+// ProcessTrace wraps the raw ProcessTrace call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-processtrace
+func ProcessTrace(HandleArray []systemdiagnosticsetw.PROCESSTRACE_HANDLE, StartTime *foundation.FILETIME, EndTime *foundation.FILETIME) foundation.WIN32_ERROR {
+	var _HandleArray *systemdiagnosticsetw.PROCESSTRACE_HANDLE
+	if len(HandleArray) > 0 {
+		_HandleArray = &HandleArray[0]
+	}
+	return systemdiagnosticsetw.ProcessTrace(_HandleArray, uint32(len(HandleArray)), StartTime, EndTime)
+}
+
 // QueryAllTraces wraps the raw QueryAllTracesW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-queryalltracesw
-func QueryAllTraces(PropertyArray **systemdiagnosticsetw.EVENT_TRACE_PROPERTIES, PropertyArrayCount uint32, LoggerCount *uint32) foundation.WIN32_ERROR {
-	return systemdiagnosticsetw.QueryAllTracesW(PropertyArray, PropertyArrayCount, LoggerCount)
+func QueryAllTraces(PropertyArray []*systemdiagnosticsetw.EVENT_TRACE_PROPERTIES, LoggerCount *uint32) foundation.WIN32_ERROR {
+	var _PropertyArray **systemdiagnosticsetw.EVENT_TRACE_PROPERTIES
+	if len(PropertyArray) > 0 {
+		_PropertyArray = &PropertyArray[0]
+	}
+	return systemdiagnosticsetw.QueryAllTracesW(_PropertyArray, uint32(len(PropertyArray)), LoggerCount)
+}
+
+// QueryAllTracesA wraps the raw QueryAllTracesA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-queryalltracesa
+func QueryAllTracesA(PropertyArray []*systemdiagnosticsetw.EVENT_TRACE_PROPERTIES, LoggerCount *uint32) foundation.WIN32_ERROR {
+	var _PropertyArray **systemdiagnosticsetw.EVENT_TRACE_PROPERTIES
+	if len(PropertyArray) > 0 {
+		_PropertyArray = &PropertyArray[0]
+	}
+	return systemdiagnosticsetw.QueryAllTracesA(_PropertyArray, uint32(len(PropertyArray)), LoggerCount)
 }
 
 // QueryTrace wraps the raw QueryTraceW call with idiomatic Go types.
@@ -83,10 +147,24 @@ func QueryTrace(TraceId uint64, InstanceName string, Properties *systemdiagnosti
 
 // RegisterTraceGuids wraps the raw RegisterTraceGuidsW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-registertraceguidsw
-func RegisterTraceGuids(RequestAddress systemdiagnosticsetw.WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, GuidCount uint32, TraceGuidReg *systemdiagnosticsetw.TRACE_GUID_REGISTRATION, MofImagePath string, MofResourceName string, RegistrationHandle *uint64) uint32 {
+func RegisterTraceGuids(RequestAddress systemdiagnosticsetw.WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, TraceGuidReg []systemdiagnosticsetw.TRACE_GUID_REGISTRATION, MofImagePath string, MofResourceName string, RegistrationHandle *uint64) uint32 {
+	var _TraceGuidReg *systemdiagnosticsetw.TRACE_GUID_REGISTRATION
+	if len(TraceGuidReg) > 0 {
+		_TraceGuidReg = &TraceGuidReg[0]
+	}
 	_MofImagePath := win32.UTF16Ptr(MofImagePath)
 	_MofResourceName := win32.UTF16Ptr(MofResourceName)
-	return systemdiagnosticsetw.RegisterTraceGuidsW(RequestAddress, RequestContext, ControlGuid, GuidCount, TraceGuidReg, foundation.PWSTR(_MofImagePath), foundation.PWSTR(_MofResourceName), RegistrationHandle)
+	return systemdiagnosticsetw.RegisterTraceGuidsW(RequestAddress, RequestContext, ControlGuid, uint32(len(TraceGuidReg)), _TraceGuidReg, foundation.PWSTR(_MofImagePath), foundation.PWSTR(_MofResourceName), RegistrationHandle)
+}
+
+// RegisterTraceGuidsA wraps the raw RegisterTraceGuidsA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-registertraceguidsa
+func RegisterTraceGuidsA(RequestAddress systemdiagnosticsetw.WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, TraceGuidReg []systemdiagnosticsetw.TRACE_GUID_REGISTRATION, MofImagePath foundation.PSTR, MofResourceName foundation.PSTR, RegistrationHandle *uint64) uint32 {
+	var _TraceGuidReg *systemdiagnosticsetw.TRACE_GUID_REGISTRATION
+	if len(TraceGuidReg) > 0 {
+		_TraceGuidReg = &TraceGuidReg[0]
+	}
+	return systemdiagnosticsetw.RegisterTraceGuidsA(RequestAddress, RequestContext, ControlGuid, uint32(len(TraceGuidReg)), _TraceGuidReg, MofImagePath, MofResourceName, RegistrationHandle)
 }
 
 // StartTrace wraps the raw StartTraceW call with idiomatic Go types.
@@ -103,11 +181,69 @@ func StopTrace(TraceId uint64, InstanceName string, Properties *systemdiagnostic
 	return systemdiagnosticsetw.StopTraceW(TraceId, foundation.PWSTR(_InstanceName), Properties)
 }
 
+// TdhCreatePayloadFilter wraps the raw TdhCreatePayloadFilter call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhcreatepayloadfilter
+func TdhCreatePayloadFilter(ProviderGuid *win32.GUID, EventDescriptor *systemdiagnosticsetw.EVENT_DESCRIPTOR, EventMatchANY foundation.BOOLEAN, PayloadPredicates []systemdiagnosticsetw.PAYLOAD_FILTER_PREDICATE, PayloadFilter *unsafe.Pointer) uint32 {
+	var _PayloadPredicates *systemdiagnosticsetw.PAYLOAD_FILTER_PREDICATE
+	if len(PayloadPredicates) > 0 {
+		_PayloadPredicates = &PayloadPredicates[0]
+	}
+	return systemdiagnosticsetw.TdhCreatePayloadFilter(ProviderGuid, EventDescriptor, EventMatchANY, uint32(len(PayloadPredicates)), _PayloadPredicates, PayloadFilter)
+}
+
+// TdhEnumerateProviderFilters wraps the raw TdhEnumerateProviderFilters call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhenumerateproviderfilters
+func TdhEnumerateProviderFilters(Guid *win32.GUID, TdhContext []systemdiagnosticsetw.TDH_CONTEXT, FilterCount *uint32, Buffer **systemdiagnosticsetw.PROVIDER_FILTER_INFO, BufferSize *uint32) uint32 {
+	var _TdhContext *systemdiagnosticsetw.TDH_CONTEXT
+	if len(TdhContext) > 0 {
+		_TdhContext = &TdhContext[0]
+	}
+	return systemdiagnosticsetw.TdhEnumerateProviderFilters(Guid, uint32(len(TdhContext)), _TdhContext, FilterCount, Buffer, BufferSize)
+}
+
+// TdhGetEventInformation wraps the raw TdhGetEventInformation call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgeteventinformation
+func TdhGetEventInformation(Event *systemdiagnosticsetw.EVENT_RECORD, TdhContext []systemdiagnosticsetw.TDH_CONTEXT, Buffer *systemdiagnosticsetw.TRACE_EVENT_INFO, BufferSize *uint32) uint32 {
+	var _TdhContext *systemdiagnosticsetw.TDH_CONTEXT
+	if len(TdhContext) > 0 {
+		_TdhContext = &TdhContext[0]
+	}
+	return systemdiagnosticsetw.TdhGetEventInformation(Event, uint32(len(TdhContext)), _TdhContext, Buffer, BufferSize)
+}
+
 // TdhGetEventMapInformation wraps the raw TdhGetEventMapInformation call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgeteventmapinformation
 func TdhGetEventMapInformation(pEvent *systemdiagnosticsetw.EVENT_RECORD, pMapName string, pBuffer *systemdiagnosticsetw.EVENT_MAP_INFO, pBufferSize *uint32) uint32 {
 	_pMapName := win32.UTF16Ptr(pMapName)
 	return systemdiagnosticsetw.TdhGetEventMapInformation(pEvent, foundation.PWSTR(_pMapName), pBuffer, pBufferSize)
+}
+
+// TdhGetProperty wraps the raw TdhGetProperty call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgetproperty
+func TdhGetProperty(pEvent *systemdiagnosticsetw.EVENT_RECORD, pTdhContext []systemdiagnosticsetw.TDH_CONTEXT, pPropertyData []systemdiagnosticsetw.PROPERTY_DATA_DESCRIPTOR, BufferSize uint32, pBuffer *byte) uint32 {
+	var _pTdhContext *systemdiagnosticsetw.TDH_CONTEXT
+	if len(pTdhContext) > 0 {
+		_pTdhContext = &pTdhContext[0]
+	}
+	var _pPropertyData *systemdiagnosticsetw.PROPERTY_DATA_DESCRIPTOR
+	if len(pPropertyData) > 0 {
+		_pPropertyData = &pPropertyData[0]
+	}
+	return systemdiagnosticsetw.TdhGetProperty(pEvent, uint32(len(pTdhContext)), _pTdhContext, uint32(len(pPropertyData)), _pPropertyData, BufferSize, pBuffer)
+}
+
+// TdhGetPropertySize wraps the raw TdhGetPropertySize call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgetpropertysize
+func TdhGetPropertySize(pEvent *systemdiagnosticsetw.EVENT_RECORD, pTdhContext []systemdiagnosticsetw.TDH_CONTEXT, pPropertyData []systemdiagnosticsetw.PROPERTY_DATA_DESCRIPTOR, pPropertySize *uint32) uint32 {
+	var _pTdhContext *systemdiagnosticsetw.TDH_CONTEXT
+	if len(pTdhContext) > 0 {
+		_pTdhContext = &pTdhContext[0]
+	}
+	var _pPropertyData *systemdiagnosticsetw.PROPERTY_DATA_DESCRIPTOR
+	if len(pPropertyData) > 0 {
+		_pPropertyData = &pPropertyData[0]
+	}
+	return systemdiagnosticsetw.TdhGetPropertySize(pEvent, uint32(len(pTdhContext)), _pTdhContext, uint32(len(pPropertyData)), _pPropertyData, pPropertySize)
 }
 
 // TdhGetWppProperty wraps the raw TdhGetWppProperty call with idiomatic Go types.
@@ -136,6 +272,15 @@ func TdhLoadManifestFromBinary(BinaryPath string) uint32 {
 func TdhUnloadManifest(Manifest string) uint32 {
 	_Manifest := win32.UTF16Ptr(Manifest)
 	return systemdiagnosticsetw.TdhUnloadManifest(foundation.PWSTR(_Manifest))
+}
+
+// TraceConfigureLastBranchRecord wraps the raw TraceConfigureLastBranchRecord call with idiomatic Go types.
+func TraceConfigureLastBranchRecord(TraceId uint64, LbrConfiguration systemdiagnosticsetw.TRACE_LBR_CONFIGURATION, Events []systemdiagnosticsetw.CLASSIC_EVENT_ID) uint32 {
+	var _Events *systemdiagnosticsetw.CLASSIC_EVENT_ID
+	if len(Events) > 0 {
+		_Events = &Events[0]
+	}
+	return systemdiagnosticsetw.TraceConfigureLastBranchRecord(TraceId, LbrConfiguration, _Events, uint32(len(Events)))
 }
 
 // UpdateTrace wraps the raw UpdateTraceW call with idiomatic Go types.

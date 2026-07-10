@@ -170,6 +170,16 @@ func MidiOutGetErrorText(mmrError uint32, pszText foundation.PWSTR, cchText uint
 	return mediaaudio.MidiOutGetErrorTextW(mmrError, pszText, cchText)
 }
 
+// MidiStreamOpen wraps the raw MidiStreamOpen call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midistreamopen
+func MidiStreamOpen(phms *mediaaudio.HMIDISTRM, puDeviceID []uint32, dwCallback uintptr, dwInstance uintptr, fdwOpen uint32) uint32 {
+	var _puDeviceID *uint32
+	if len(puDeviceID) > 0 {
+		_puDeviceID = &puDeviceID[0]
+	}
+	return mediaaudio.MidiStreamOpen(phms, _puDeviceID, uint32(len(puDeviceID)), dwCallback, dwInstance, fdwOpen)
+}
+
 // MixerGetControlDetails wraps the raw MixerGetControlDetailsW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetcontroldetailsw
 func MixerGetControlDetails(hmxobj mediaaudio.HMIXEROBJ, pmxcd unsafe.Pointer, fdwDetails uint32) uint32 {

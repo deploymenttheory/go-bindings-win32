@@ -14,6 +14,14 @@ import (
 
 // D3D11On12CreateDevice wraps the raw D3D11On12CreateDevice call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/d3d11on12/nf-d3d11on12-d3d11on12createdevice
-func D3D11On12CreateDevice(pDevice *systemcom.IUnknown, Flags uint32, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, ppCommandQueues **systemcom.IUnknown, NumQueues uint32, NodeMask uint32, ppDevice **graphicsdirect3d11.ID3D11Device, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) error {
-	return win32.HRESULTError(int32(graphicsdirect3d11on12.D3D11On12CreateDevice(pDevice, Flags, pFeatureLevels, FeatureLevels, ppCommandQueues, NumQueues, NodeMask, ppDevice, ppImmediateContext, pChosenFeatureLevel)))
+func D3D11On12CreateDevice(pDevice *systemcom.IUnknown, Flags uint32, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, ppCommandQueues []*systemcom.IUnknown, NodeMask uint32, ppDevice **graphicsdirect3d11.ID3D11Device, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) error {
+	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
+	if len(pFeatureLevels) > 0 {
+		_pFeatureLevels = &pFeatureLevels[0]
+	}
+	var _ppCommandQueues **systemcom.IUnknown
+	if len(ppCommandQueues) > 0 {
+		_ppCommandQueues = &ppCommandQueues[0]
+	}
+	return win32.HRESULTError(int32(graphicsdirect3d11on12.D3D11On12CreateDevice(pDevice, Flags, _pFeatureLevels, uint32(len(pFeatureLevels)), _ppCommandQueues, uint32(len(ppCommandQueues)), NodeMask, ppDevice, ppImmediateContext, pChosenFeatureLevel)))
 }

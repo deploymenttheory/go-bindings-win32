@@ -14,8 +14,12 @@ import (
 )
 
 // AllocateUserPhysicalPages2 wraps the raw AllocateUserPhysicalPages2 call with idiomatic Go types.
-func AllocateUserPhysicalPages2(ObjectHandle foundation.HANDLE, NumberOfPages *uintptr, PageArray *uintptr, ExtendedParameters *systemmemory.MEM_EXTENDED_PARAMETER, ExtendedParameterCount uint32) bool {
-	return systemmemory.AllocateUserPhysicalPages2(ObjectHandle, NumberOfPages, PageArray, ExtendedParameters, ExtendedParameterCount) != 0
+func AllocateUserPhysicalPages2(ObjectHandle foundation.HANDLE, NumberOfPages *uintptr, PageArray *uintptr, ExtendedParameters []systemmemory.MEM_EXTENDED_PARAMETER) bool {
+	var _ExtendedParameters *systemmemory.MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	return systemmemory.AllocateUserPhysicalPages2(ObjectHandle, NumberOfPages, PageArray, _ExtendedParameters, uint32(len(ExtendedParameters))) != 0
 }
 
 // CreateFileMapping wraps the raw CreateFileMappingW call with idiomatic Go types.
@@ -27,9 +31,13 @@ func CreateFileMapping(hFile foundation.HANDLE, lpFileMappingAttributes *securit
 
 // CreateFileMapping2 wraps the raw CreateFileMapping2 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemapping2
-func CreateFileMapping2(File foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, DesiredAccess uint32, PageProtection systemmemory.PAGE_PROTECTION_FLAGS, AllocationAttributes uint32, MaximumSize uint64, Name string, ExtendedParameters *systemmemory.MEM_EXTENDED_PARAMETER, ParameterCount uint32) (foundation.HANDLE, error) {
+func CreateFileMapping2(File foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, DesiredAccess uint32, PageProtection systemmemory.PAGE_PROTECTION_FLAGS, AllocationAttributes uint32, MaximumSize uint64, Name string, ExtendedParameters []systemmemory.MEM_EXTENDED_PARAMETER) (foundation.HANDLE, error) {
 	_Name := win32.UTF16Ptr(Name)
-	return systemmemory.CreateFileMapping2(File, SecurityAttributes, DesiredAccess, PageProtection, AllocationAttributes, MaximumSize, foundation.PWSTR(_Name), ExtendedParameters, ParameterCount)
+	var _ExtendedParameters *systemmemory.MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	return systemmemory.CreateFileMapping2(File, SecurityAttributes, DesiredAccess, PageProtection, AllocationAttributes, MaximumSize, foundation.PWSTR(_Name), _ExtendedParameters, uint32(len(ExtendedParameters)))
 }
 
 // CreateFileMappingFromApp wraps the raw CreateFileMappingFromApp call with idiomatic Go types.
@@ -54,6 +62,16 @@ func GetMemoryNumaClosestInitiatorNode(TargetNodeNumber uint32, InitiatorNodeNum
 // GetMemoryNumaPerformanceInformation wraps the raw GetMemoryNumaPerformanceInformation call with idiomatic Go types.
 func GetMemoryNumaPerformanceInformation(NodeNumber uint32, DataType byte, PerfInfo **systemmemory.WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT) bool {
 	return systemmemory.GetMemoryNumaPerformanceInformation(NodeNumber, DataType, PerfInfo) != 0
+}
+
+// GetProcessHeaps wraps the raw GetProcessHeaps call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-getprocessheaps
+func GetProcessHeaps(ProcessHeaps []foundation.HANDLE) (uint32, error) {
+	var _ProcessHeaps *foundation.HANDLE
+	if len(ProcessHeaps) > 0 {
+		_ProcessHeaps = &ProcessHeaps[0]
+	}
+	return systemmemory.GetProcessHeaps(uint32(len(ProcessHeaps)), _ProcessHeaps)
 }
 
 // GetProcessWorkingSetSizeEx wraps the raw GetProcessWorkingSetSizeEx call with idiomatic Go types.
@@ -99,6 +117,36 @@ func IsBadWritePtr(lp unsafe.Pointer, ucb uintptr) bool {
 	return systemmemory.IsBadWritePtr(lp, ucb) != 0
 }
 
+// MapUserPhysicalPages wraps the raw MapUserPhysicalPages call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-mapuserphysicalpages
+func MapUserPhysicalPages(VirtualAddress unsafe.Pointer, PageArray []uintptr) error {
+	var _PageArray *uintptr
+	if len(PageArray) > 0 {
+		_PageArray = &PageArray[0]
+	}
+	return systemmemory.MapUserPhysicalPages(VirtualAddress, uintptr(len(PageArray)), _PageArray)
+}
+
+// MapViewOfFile3 wraps the raw MapViewOfFile3 call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile3
+func MapViewOfFile3(FileMapping foundation.HANDLE, Process foundation.HANDLE, BaseAddress unsafe.Pointer, Offset uint64, ViewSize uintptr, AllocationType systemmemory.VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters []systemmemory.MEM_EXTENDED_PARAMETER) (systemmemory.MEMORY_MAPPED_VIEW_ADDRESS, error) {
+	var _ExtendedParameters *systemmemory.MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	return systemmemory.MapViewOfFile3(FileMapping, Process, BaseAddress, Offset, ViewSize, AllocationType, PageProtection, _ExtendedParameters, uint32(len(ExtendedParameters)))
+}
+
+// MapViewOfFile3FromApp wraps the raw MapViewOfFile3FromApp call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile3fromapp
+func MapViewOfFile3FromApp(FileMapping foundation.HANDLE, Process foundation.HANDLE, BaseAddress unsafe.Pointer, Offset uint64, ViewSize uintptr, AllocationType systemmemory.VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters []systemmemory.MEM_EXTENDED_PARAMETER) (systemmemory.MEMORY_MAPPED_VIEW_ADDRESS, error) {
+	var _ExtendedParameters *systemmemory.MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	return systemmemory.MapViewOfFile3FromApp(FileMapping, Process, BaseAddress, Offset, ViewSize, AllocationType, PageProtection, _ExtendedParameters, uint32(len(ExtendedParameters)))
+}
+
 // OpenDedicatedMemoryPartition wraps the raw OpenDedicatedMemoryPartition call with idiomatic Go types.
 func OpenDedicatedMemoryPartition(Partition foundation.HANDLE, DedicatedMemoryTypeId uint64, DesiredAccess uint32, InheritHandle bool) foundation.HANDLE {
 	_InheritHandle := foundation.BOOL(win32.Bool32(InheritHandle))
@@ -128,6 +176,16 @@ func OpenFileMappingFromApp(DesiredAccess uint32, InheritHandle bool, Name strin
 	return systemmemory.OpenFileMappingFromApp(DesiredAccess, _InheritHandle, foundation.PWSTR(_Name))
 }
 
+// PrefetchVirtualMemory wraps the raw PrefetchVirtualMemory call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-prefetchvirtualmemory
+func PrefetchVirtualMemory(hProcess foundation.HANDLE, VirtualAddresses []systemmemory.WIN32_MEMORY_RANGE_ENTRY, Flags uint32) error {
+	var _VirtualAddresses *systemmemory.WIN32_MEMORY_RANGE_ENTRY
+	if len(VirtualAddresses) > 0 {
+		_VirtualAddresses = &VirtualAddresses[0]
+	}
+	return systemmemory.PrefetchVirtualMemory(hProcess, uintptr(len(VirtualAddresses)), _VirtualAddresses, Flags)
+}
+
 // QueryPartitionInformation wraps the raw QueryPartitionInformation call with idiomatic Go types.
 func QueryPartitionInformation(Partition foundation.HANDLE, PartitionInformationClass systemmemory.WIN32_MEMORY_PARTITION_INFORMATION_CLASS, PartitionInformation unsafe.Pointer, PartitionInformationLength uint32) bool {
 	return systemmemory.QueryPartitionInformation(Partition, PartitionInformationClass, PartitionInformation, PartitionInformationLength) != 0
@@ -139,9 +197,43 @@ func RemoveSecureMemoryCacheCallback(pfnCallBack systemmemory.PSECURE_MEMORY_CAC
 	return systemmemory.RemoveSecureMemoryCacheCallback(pfnCallBack) != 0
 }
 
+// SetProcessValidCallTargets wraps the raw SetProcessValidCallTargets call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-setprocessvalidcalltargets
+func SetProcessValidCallTargets(hProcess foundation.HANDLE, VirtualAddress unsafe.Pointer, RegionSize uintptr, OffsetInformation []systemmemory.CFG_CALL_TARGET_INFO) error {
+	var _OffsetInformation *systemmemory.CFG_CALL_TARGET_INFO
+	if len(OffsetInformation) > 0 {
+		_OffsetInformation = &OffsetInformation[0]
+	}
+	return systemmemory.SetProcessValidCallTargets(hProcess, VirtualAddress, RegionSize, uint32(len(OffsetInformation)), _OffsetInformation)
+}
+
 // SetProcessValidCallTargetsForMappedView wraps the raw SetProcessValidCallTargetsForMappedView call with idiomatic Go types.
-func SetProcessValidCallTargetsForMappedView(Process foundation.HANDLE, VirtualAddress unsafe.Pointer, RegionSize uintptr, NumberOfOffsets uint32, OffsetInformation *systemmemory.CFG_CALL_TARGET_INFO, Section foundation.HANDLE, ExpectedFileOffset uint64) bool {
-	return systemmemory.SetProcessValidCallTargetsForMappedView(Process, VirtualAddress, RegionSize, NumberOfOffsets, OffsetInformation, Section, ExpectedFileOffset) != 0
+func SetProcessValidCallTargetsForMappedView(Process foundation.HANDLE, VirtualAddress unsafe.Pointer, RegionSize uintptr, OffsetInformation []systemmemory.CFG_CALL_TARGET_INFO, Section foundation.HANDLE, ExpectedFileOffset uint64) bool {
+	var _OffsetInformation *systemmemory.CFG_CALL_TARGET_INFO
+	if len(OffsetInformation) > 0 {
+		_OffsetInformation = &OffsetInformation[0]
+	}
+	return systemmemory.SetProcessValidCallTargetsForMappedView(Process, VirtualAddress, RegionSize, uint32(len(OffsetInformation)), _OffsetInformation, Section, ExpectedFileOffset) != 0
+}
+
+// VirtualAlloc2 wraps the raw VirtualAlloc2 call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc2
+func VirtualAlloc2(Process foundation.HANDLE, BaseAddress unsafe.Pointer, Size uintptr, AllocationType systemmemory.VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters []systemmemory.MEM_EXTENDED_PARAMETER) (unsafe.Pointer, error) {
+	var _ExtendedParameters *systemmemory.MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	return systemmemory.VirtualAlloc2(Process, BaseAddress, Size, AllocationType, PageProtection, _ExtendedParameters, uint32(len(ExtendedParameters)))
+}
+
+// VirtualAlloc2FromApp wraps the raw VirtualAlloc2FromApp call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc2fromapp
+func VirtualAlloc2FromApp(Process foundation.HANDLE, BaseAddress unsafe.Pointer, Size uintptr, AllocationType systemmemory.VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters []systemmemory.MEM_EXTENDED_PARAMETER) (unsafe.Pointer, error) {
+	var _ExtendedParameters *systemmemory.MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	return systemmemory.VirtualAlloc2FromApp(Process, BaseAddress, Size, AllocationType, PageProtection, _ExtendedParameters, uint32(len(ExtendedParameters)))
 }
 
 // VirtualUnlockEx wraps the raw VirtualUnlockEx call with idiomatic Go types.

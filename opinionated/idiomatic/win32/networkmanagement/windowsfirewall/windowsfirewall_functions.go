@@ -48,12 +48,26 @@ func NetworkIsolationGetEnterpriseIdClose(hOperation foundation.HANDLE, bWaitFor
 	return networkmanagementwindowsfirewall.NetworkIsolationGetEnterpriseIdClose(hOperation, _bWaitForOperation)
 }
 
+// NetworkIsolationSetAppContainerConfig wraps the raw NetworkIsolationSetAppContainerConfig call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationsetappcontainerconfig
+func NetworkIsolationSetAppContainerConfig(appContainerSids []security.SID_AND_ATTRIBUTES) uint32 {
+	var _appContainerSids *security.SID_AND_ATTRIBUTES
+	if len(appContainerSids) > 0 {
+		_appContainerSids = &appContainerSids[0]
+	}
+	return networkmanagementwindowsfirewall.NetworkIsolationSetAppContainerConfig(uint32(len(appContainerSids)), _appContainerSids)
+}
+
 // NetworkIsolationSetupAppContainerBinaries wraps the raw NetworkIsolationSetupAppContainerBinaries call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationsetupappcontainerbinaries
-func NetworkIsolationSetupAppContainerBinaries(applicationContainerSid security.PSID, packageFullName string, packageFolder string, displayName string, bBinariesFullyComputed bool, binaries *foundation.PWSTR, binariesCount uint32) error {
+func NetworkIsolationSetupAppContainerBinaries(applicationContainerSid security.PSID, packageFullName string, packageFolder string, displayName string, bBinariesFullyComputed bool, binaries []foundation.PWSTR) error {
 	_packageFullName := win32.UTF16Ptr(packageFullName)
 	_packageFolder := win32.UTF16Ptr(packageFolder)
 	_displayName := win32.UTF16Ptr(displayName)
 	_bBinariesFullyComputed := foundation.BOOL(win32.Bool32(bBinariesFullyComputed))
-	return win32.HRESULTError(int32(networkmanagementwindowsfirewall.NetworkIsolationSetupAppContainerBinaries(applicationContainerSid, foundation.PWSTR(_packageFullName), foundation.PWSTR(_packageFolder), foundation.PWSTR(_displayName), _bBinariesFullyComputed, binaries, binariesCount)))
+	var _binaries *foundation.PWSTR
+	if len(binaries) > 0 {
+		_binaries = &binaries[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementwindowsfirewall.NetworkIsolationSetupAppContainerBinaries(applicationContainerSid, foundation.PWSTR(_packageFullName), foundation.PWSTR(_packageFolder), foundation.PWSTR(_displayName), _bBinariesFullyComputed, _binaries, uint32(len(binaries)))))
 }

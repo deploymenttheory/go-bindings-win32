@@ -82,6 +82,20 @@ func InetPtonW(Family int32, pszAddrString string, pAddrBuf unsafe.Pointer) int3
 	return networkingwinsock.InetPtonW(Family, foundation.PWSTR(_pszAddrString), pAddrBuf)
 }
 
+// ProcessSocketNotifications wraps the raw ProcessSocketNotifications call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-processsocketnotifications
+func ProcessSocketNotifications(completionPort foundation.HANDLE, registrationInfos []networkingwinsock.SOCK_NOTIFY_REGISTRATION, timeoutMs uint32, completionPortEntries []systemio.OVERLAPPED_ENTRY, receivedEntryCount *uint32) uint32 {
+	var _registrationInfos *networkingwinsock.SOCK_NOTIFY_REGISTRATION
+	if len(registrationInfos) > 0 {
+		_registrationInfos = &registrationInfos[0]
+	}
+	var _completionPortEntries *systemio.OVERLAPPED_ENTRY
+	if len(completionPortEntries) > 0 {
+		_completionPortEntries = &completionPortEntries[0]
+	}
+	return networkingwinsock.ProcessSocketNotifications(completionPort, uint32(len(registrationInfos)), _registrationInfos, timeoutMs, uint32(len(completionPortEntries)), _completionPortEntries, receivedEntryCount)
+}
+
 // RtlEthernetAddressToString wraps the raw RtlEthernetAddressToStringW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlethernetaddresstostringw
 func RtlEthernetAddressToString(Addr *networkingwinsock.DL_EUI48, S foundation.PWSTR) foundation.PWSTR {
@@ -261,6 +275,46 @@ func WSALookupServiceNext(hLookup foundation.HANDLE, dwControlFlags uint32, lpdw
 	return networkingwinsock.WSALookupServiceNextW(hLookup, dwControlFlags, lpdwBufferLength, lpqsResults)
 }
 
+// WSARecv wraps the raw WSARecv call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsarecv
+func WSARecv(s networkingwinsock.SOCKET, lpBuffers []networkingwinsock.WSABUF, lpNumberOfBytesRecvd *uint32, lpFlags *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine networkingwinsock.LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpBuffers *networkingwinsock.WSABUF
+	if len(lpBuffers) > 0 {
+		_lpBuffers = &lpBuffers[0]
+	}
+	return networkingwinsock.WSARecv(s, _lpBuffers, uint32(len(lpBuffers)), lpNumberOfBytesRecvd, lpFlags, lpOverlapped, lpCompletionRoutine)
+}
+
+// WSARecvFrom wraps the raw WSARecvFrom call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsarecvfrom
+func WSARecvFrom(s networkingwinsock.SOCKET, lpBuffers []networkingwinsock.WSABUF, lpNumberOfBytesRecvd *uint32, lpFlags *uint32, lpFrom *networkingwinsock.SOCKADDR, lpFromlen *int32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine networkingwinsock.LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpBuffers *networkingwinsock.WSABUF
+	if len(lpBuffers) > 0 {
+		_lpBuffers = &lpBuffers[0]
+	}
+	return networkingwinsock.WSARecvFrom(s, _lpBuffers, uint32(len(lpBuffers)), lpNumberOfBytesRecvd, lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine)
+}
+
+// WSASend wraps the raw WSASend call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasend
+func WSASend(s networkingwinsock.SOCKET, lpBuffers []networkingwinsock.WSABUF, lpNumberOfBytesSent *uint32, dwFlags uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine networkingwinsock.LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpBuffers *networkingwinsock.WSABUF
+	if len(lpBuffers) > 0 {
+		_lpBuffers = &lpBuffers[0]
+	}
+	return networkingwinsock.WSASend(s, _lpBuffers, uint32(len(lpBuffers)), lpNumberOfBytesSent, dwFlags, lpOverlapped, lpCompletionRoutine)
+}
+
+// WSASendTo wraps the raw WSASendTo call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasendto
+func WSASendTo(s networkingwinsock.SOCKET, lpBuffers []networkingwinsock.WSABUF, lpNumberOfBytesSent *uint32, dwFlags uint32, lpTo *networkingwinsock.SOCKADDR, iTolen int32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine networkingwinsock.LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpBuffers *networkingwinsock.WSABUF
+	if len(lpBuffers) > 0 {
+		_lpBuffers = &lpBuffers[0]
+	}
+	return networkingwinsock.WSASendTo(s, _lpBuffers, uint32(len(lpBuffers)), lpNumberOfBytesSent, dwFlags, lpTo, iTolen, lpOverlapped, lpCompletionRoutine)
+}
+
 // WSASetService wraps the raw WSASetServiceW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetservicew
 func WSASetService(lpqsRegInfo *networkingwinsock.WSAQUERYSETW, essoperation networkingwinsock.WSAESETSERVICEOP, dwControlFlags uint32) (int32, error) {
@@ -282,10 +336,14 @@ func WSAStringToAddress(AddressString string, AddressFamily int32, lpProtocolInf
 
 // WSAWaitForMultipleEvents wraps the raw WSAWaitForMultipleEvents call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
-func WSAWaitForMultipleEvents(cEvents uint32, lphEvents *foundation.HANDLE, fWaitAll bool, dwTimeout uint32, fAlertable bool) (foundation.WAIT_EVENT, error) {
+func WSAWaitForMultipleEvents(lphEvents []foundation.HANDLE, fWaitAll bool, dwTimeout uint32, fAlertable bool) (foundation.WAIT_EVENT, error) {
+	var _lphEvents *foundation.HANDLE
+	if len(lphEvents) > 0 {
+		_lphEvents = &lphEvents[0]
+	}
 	_fWaitAll := foundation.BOOL(win32.Bool32(fWaitAll))
 	_fAlertable := foundation.BOOL(win32.Bool32(fAlertable))
-	return networkingwinsock.WSAWaitForMultipleEvents(cEvents, lphEvents, _fWaitAll, dwTimeout, _fAlertable)
+	return networkingwinsock.WSAWaitForMultipleEvents(uint32(len(lphEvents)), _lphEvents, _fWaitAll, dwTimeout, _fAlertable)
 }
 
 // WSCEnableNSProvider wraps the raw WSCEnableNSProvider call with idiomatic Go types.
@@ -344,25 +402,37 @@ func WSCInstallNameSpaceEx32(lpszIdentifier string, lpszPathName string, dwNameS
 
 // WSCInstallProvider wraps the raw WSCInstallProvider call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallprovider
-func WSCInstallProvider(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpErrno *int32) int32 {
+func WSCInstallProvider(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList []networkingwinsock.WSAPROTOCOL_INFOW, lpErrno *int32) int32 {
 	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
-	return networkingwinsock.WSCInstallProvider(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+	var _lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	return networkingwinsock.WSCInstallProvider(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), _lpProtocolInfoList, uint32(len(lpProtocolInfoList)), lpErrno)
 }
 
 // WSCInstallProvider64_32 wraps the raw WSCInstallProvider64_32 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallprovider64_32
-func WSCInstallProvider64_32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpErrno *int32) int32 {
+func WSCInstallProvider64_32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList []networkingwinsock.WSAPROTOCOL_INFOW, lpErrno *int32) int32 {
 	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
-	return networkingwinsock.WSCInstallProvider64_32(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+	var _lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	return networkingwinsock.WSCInstallProvider64_32(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), _lpProtocolInfoList, uint32(len(lpProtocolInfoList)), lpErrno)
 }
 
 // WSCInstallProviderAndChains64_32 wraps the raw WSCInstallProviderAndChains64_32 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallproviderandchains64_32
-func WSCInstallProviderAndChains64_32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpszProviderDllPath32 string, lpszLspName string, dwServiceFlags uint32, lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpdwCatalogEntryId *uint32, lpErrno *int32) int32 {
+func WSCInstallProviderAndChains64_32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpszProviderDllPath32 string, lpszLspName string, dwServiceFlags uint32, lpProtocolInfoList []networkingwinsock.WSAPROTOCOL_INFOW, lpdwCatalogEntryId *uint32, lpErrno *int32) int32 {
 	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
 	_lpszProviderDllPath32 := win32.UTF16Ptr(lpszProviderDllPath32)
 	_lpszLspName := win32.UTF16Ptr(lpszLspName)
-	return networkingwinsock.WSCInstallProviderAndChains64_32(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), foundation.PWSTR(_lpszProviderDllPath32), foundation.PWSTR(_lpszLspName), dwServiceFlags, lpProtocolInfoList, dwNumberOfEntries, lpdwCatalogEntryId, lpErrno)
+	var _lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	return networkingwinsock.WSCInstallProviderAndChains64_32(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), foundation.PWSTR(_lpszProviderDllPath32), foundation.PWSTR(_lpszLspName), dwServiceFlags, _lpProtocolInfoList, uint32(len(lpProtocolInfoList)), lpdwCatalogEntryId, lpErrno)
 }
 
 // WSCSetApplicationCategory wraps the raw WSCSetApplicationCategory call with idiomatic Go types.
@@ -375,14 +445,22 @@ func WSCSetApplicationCategory(Path string, PathLength uint32, Extra string, Ext
 
 // WSCUpdateProvider wraps the raw WSCUpdateProvider call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscupdateprovider
-func WSCUpdateProvider(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpErrno *int32) int32 {
+func WSCUpdateProvider(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList []networkingwinsock.WSAPROTOCOL_INFOW, lpErrno *int32) int32 {
 	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
-	return networkingwinsock.WSCUpdateProvider(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+	var _lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	return networkingwinsock.WSCUpdateProvider(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), _lpProtocolInfoList, uint32(len(lpProtocolInfoList)), lpErrno)
 }
 
 // WSCUpdateProvider32 wraps the raw WSCUpdateProvider32 call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscupdateprovider32
-func WSCUpdateProvider32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpErrno *int32) int32 {
+func WSCUpdateProvider32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList []networkingwinsock.WSAPROTOCOL_INFOW, lpErrno *int32) int32 {
 	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
-	return networkingwinsock.WSCUpdateProvider32(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+	var _lpProtocolInfoList *networkingwinsock.WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	return networkingwinsock.WSCUpdateProvider32(lpProviderId, foundation.PWSTR(_lpszProviderDllPath), _lpProtocolInfoList, uint32(len(lpProtocolInfoList)), lpErrno)
 }

@@ -326,8 +326,12 @@ func PeerCollabRegisterApplication(pcApplication *networkmanagementp2p.PEER_APPL
 
 // PeerCollabRegisterEvent wraps the raw PeerCollabRegisterEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabregisterevent
-func PeerCollabRegisterEvent(hEvent foundation.HANDLE, cEventRegistration uint32, pEventRegistrations *networkmanagementp2p.PEER_COLLAB_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(networkmanagementp2p.PeerCollabRegisterEvent(hEvent, cEventRegistration, pEventRegistrations, phPeerEvent)))
+func PeerCollabRegisterEvent(hEvent foundation.HANDLE, pEventRegistrations []networkmanagementp2p.PEER_COLLAB_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
+	var _pEventRegistrations *networkmanagementp2p.PEER_COLLAB_EVENT_REGISTRATION
+	if len(pEventRegistrations) > 0 {
+		_pEventRegistrations = &pEventRegistrations[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementp2p.PeerCollabRegisterEvent(hEvent, uint32(len(pEventRegistrations)), _pEventRegistrations, phPeerEvent)))
 }
 
 // PeerCollabSetEndpointName wraps the raw PeerCollabSetEndpointName call with idiomatic Go types.
@@ -587,11 +591,15 @@ func PeerGraphListen(hGraph unsafe.Pointer, dwScope uint32, dwScopeId uint32, wP
 
 // PeerGraphOpen wraps the raw PeerGraphOpen call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphopen
-func PeerGraphOpen(pwzGraphId string, pwzPeerId string, pwzDatabaseName string, pSecurityInterface *networkmanagementp2p.PEER_SECURITY_INTERFACE, cRecordTypeSyncPrecedence uint32, pRecordTypeSyncPrecedence *win32.GUID, phGraph *unsafe.Pointer) error {
+func PeerGraphOpen(pwzGraphId string, pwzPeerId string, pwzDatabaseName string, pSecurityInterface *networkmanagementp2p.PEER_SECURITY_INTERFACE, pRecordTypeSyncPrecedence []win32.GUID, phGraph *unsafe.Pointer) error {
 	_pwzGraphId := win32.UTF16Ptr(pwzGraphId)
 	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
 	_pwzDatabaseName := win32.UTF16Ptr(pwzDatabaseName)
-	return win32.HRESULTError(int32(networkmanagementp2p.PeerGraphOpen(foundation.PWSTR(_pwzGraphId), foundation.PWSTR(_pwzPeerId), foundation.PWSTR(_pwzDatabaseName), pSecurityInterface, cRecordTypeSyncPrecedence, pRecordTypeSyncPrecedence, phGraph)))
+	var _pRecordTypeSyncPrecedence *win32.GUID
+	if len(pRecordTypeSyncPrecedence) > 0 {
+		_pRecordTypeSyncPrecedence = &pRecordTypeSyncPrecedence[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementp2p.PeerGraphOpen(foundation.PWSTR(_pwzGraphId), foundation.PWSTR(_pwzPeerId), foundation.PWSTR(_pwzDatabaseName), pSecurityInterface, uint32(len(pRecordTypeSyncPrecedence)), _pRecordTypeSyncPrecedence, phGraph)))
 }
 
 // PeerGraphOpenDirectConnection wraps the raw PeerGraphOpenDirectConnection call with idiomatic Go types.
@@ -609,8 +617,12 @@ func PeerGraphPeerTimeToUniversalTime(hGraph unsafe.Pointer, pftPeerTime *founda
 
 // PeerGraphRegisterEvent wraps the raw PeerGraphRegisterEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphregisterevent
-func PeerGraphRegisterEvent(hGraph unsafe.Pointer, hEvent foundation.HANDLE, cEventRegistrations uint32, pEventRegistrations *networkmanagementp2p.PEER_GRAPH_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(networkmanagementp2p.PeerGraphRegisterEvent(hGraph, hEvent, cEventRegistrations, pEventRegistrations, phPeerEvent)))
+func PeerGraphRegisterEvent(hGraph unsafe.Pointer, hEvent foundation.HANDLE, pEventRegistrations []networkmanagementp2p.PEER_GRAPH_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
+	var _pEventRegistrations *networkmanagementp2p.PEER_GRAPH_EVENT_REGISTRATION
+	if len(pEventRegistrations) > 0 {
+		_pEventRegistrations = &pEventRegistrations[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementp2p.PeerGraphRegisterEvent(hGraph, hEvent, uint32(len(pEventRegistrations)), _pEventRegistrations, phPeerEvent)))
 }
 
 // PeerGraphSearchRecords wraps the raw PeerGraphSearchRecords call with idiomatic Go types.
@@ -678,8 +690,12 @@ func PeerGraphUpdateRecord(hGraph unsafe.Pointer, pRecord *networkmanagementp2p.
 
 // PeerGraphValidateDeferredRecords wraps the raw PeerGraphValidateDeferredRecords call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphvalidatedeferredrecords
-func PeerGraphValidateDeferredRecords(hGraph unsafe.Pointer, cRecordIds uint32, pRecordIds *win32.GUID) error {
-	return win32.HRESULTError(int32(networkmanagementp2p.PeerGraphValidateDeferredRecords(hGraph, cRecordIds, pRecordIds)))
+func PeerGraphValidateDeferredRecords(hGraph unsafe.Pointer, pRecordIds []win32.GUID) error {
+	var _pRecordIds *win32.GUID
+	if len(pRecordIds) > 0 {
+		_pRecordIds = &pRecordIds[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementp2p.PeerGraphValidateDeferredRecords(hGraph, uint32(len(pRecordIds)), _pRecordIds)))
 }
 
 // PeerGroupAddRecord wraps the raw PeerGroupAddRecord call with idiomatic Go types.
@@ -708,8 +724,12 @@ func PeerGroupConnect(hGroup unsafe.Pointer) error {
 
 // PeerGroupConnectByAddress wraps the raw PeerGroupConnectByAddress call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupconnectbyaddress
-func PeerGroupConnectByAddress(hGroup unsafe.Pointer, cAddresses uint32, pAddresses *networkmanagementp2p.PEER_ADDRESS) error {
-	return win32.HRESULTError(int32(networkmanagementp2p.PeerGroupConnectByAddress(hGroup, cAddresses, pAddresses)))
+func PeerGroupConnectByAddress(hGroup unsafe.Pointer, pAddresses []networkmanagementp2p.PEER_ADDRESS) error {
+	var _pAddresses *networkmanagementp2p.PEER_ADDRESS
+	if len(pAddresses) > 0 {
+		_pAddresses = &pAddresses[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementp2p.PeerGroupConnectByAddress(hGroup, uint32(len(pAddresses)), _pAddresses)))
 }
 
 // PeerGroupCreate wraps the raw PeerGroupCreate call with idiomatic Go types.
@@ -720,9 +740,13 @@ func PeerGroupCreate(pProperties *networkmanagementp2p.PEER_GROUP_PROPERTIES, ph
 
 // PeerGroupCreateInvitation wraps the raw PeerGroupCreateInvitation call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupcreateinvitation
-func PeerGroupCreateInvitation(hGroup unsafe.Pointer, pwzIdentityInfo string, pftExpiration *foundation.FILETIME, cRoles uint32, pRoles *win32.GUID, ppwzInvitation *foundation.PWSTR) error {
+func PeerGroupCreateInvitation(hGroup unsafe.Pointer, pwzIdentityInfo string, pftExpiration *foundation.FILETIME, pRoles []win32.GUID, ppwzInvitation *foundation.PWSTR) error {
 	_pwzIdentityInfo := win32.UTF16Ptr(pwzIdentityInfo)
-	return win32.HRESULTError(int32(networkmanagementp2p.PeerGroupCreateInvitation(hGroup, foundation.PWSTR(_pwzIdentityInfo), pftExpiration, cRoles, pRoles, ppwzInvitation)))
+	var _pRoles *win32.GUID
+	if len(pRoles) > 0 {
+		_pRoles = &pRoles[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementp2p.PeerGroupCreateInvitation(hGroup, foundation.PWSTR(_pwzIdentityInfo), pftExpiration, uint32(len(pRoles)), _pRoles, ppwzInvitation)))
 }
 
 // PeerGroupCreatePasswordInvitation wraps the raw PeerGroupCreatePasswordInvitation call with idiomatic Go types.
@@ -875,8 +899,12 @@ func PeerGroupPeerTimeToUniversalTime(hGroup unsafe.Pointer, pftPeerTime *founda
 
 // PeerGroupRegisterEvent wraps the raw PeerGroupRegisterEvent call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupregisterevent
-func PeerGroupRegisterEvent(hGroup unsafe.Pointer, hEvent foundation.HANDLE, cEventRegistration uint32, pEventRegistrations *networkmanagementp2p.PEER_GROUP_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
-	return win32.HRESULTError(int32(networkmanagementp2p.PeerGroupRegisterEvent(hGroup, hEvent, cEventRegistration, pEventRegistrations, phPeerEvent)))
+func PeerGroupRegisterEvent(hGroup unsafe.Pointer, hEvent foundation.HANDLE, pEventRegistrations []networkmanagementp2p.PEER_GROUP_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
+	var _pEventRegistrations *networkmanagementp2p.PEER_GROUP_EVENT_REGISTRATION
+	if len(pEventRegistrations) > 0 {
+		_pEventRegistrations = &pEventRegistrations[0]
+	}
+	return win32.HRESULTError(int32(networkmanagementp2p.PeerGroupRegisterEvent(hGroup, hEvent, uint32(len(pEventRegistrations)), _pEventRegistrations, phPeerEvent)))
 }
 
 // PeerGroupResumePasswordAuthentication wraps the raw PeerGroupResumePasswordAuthentication call with idiomatic Go types.

@@ -25,6 +25,20 @@ func MatchToken(pwszUserToken string, pwszCmdToken string) bool {
 	return networkmanagementnetshell.MatchToken(foundation.PWSTR(_pwszUserToken), foundation.PWSTR(_pwszCmdToken)) != 0
 }
 
+// PreprocessCommand wraps the raw PreprocessCommand call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/netsh/nf-netsh-preprocesscommand
+func PreprocessCommand(hModule foundation.HANDLE, ppwcArguments []foundation.PWSTR, dwCurrentIndex uint32, pttTags []networkmanagementnetshell.TAG_TYPE, dwMinArgs uint32, dwMaxArgs uint32, pdwTagType *uint32) uint32 {
+	var _ppwcArguments *foundation.PWSTR
+	if len(ppwcArguments) > 0 {
+		_ppwcArguments = &ppwcArguments[0]
+	}
+	var _pttTags *networkmanagementnetshell.TAG_TYPE
+	if len(pttTags) > 0 {
+		_pttTags = &pttTags[0]
+	}
+	return networkmanagementnetshell.PreprocessCommand(hModule, _ppwcArguments, dwCurrentIndex, uint32(len(ppwcArguments)), _pttTags, uint32(len(pttTags)), dwMinArgs, dwMaxArgs, pdwTagType)
+}
+
 // PrintMessage wraps the raw PrintMessage call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/netsh/nf-netsh-printmessage
 func PrintMessage(pwszFormat string) uint32 {

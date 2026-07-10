@@ -20,8 +20,12 @@ func AddPointerInteractionContext(interactionContext uiinteractioncontext.HINTER
 
 // BufferPointerPacketsInteractionContext wraps the raw BufferPointerPacketsInteractionContext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-bufferpointerpacketsinteractioncontext
-func BufferPointerPacketsInteractionContext(interactionContext uiinteractioncontext.HINTERACTIONCONTEXT, entriesCount uint32, pointerInfo *uiinputpointer.POINTER_INFO) error {
-	return win32.HRESULTError(int32(uiinteractioncontext.BufferPointerPacketsInteractionContext(interactionContext, entriesCount, pointerInfo)))
+func BufferPointerPacketsInteractionContext(interactionContext uiinteractioncontext.HINTERACTIONCONTEXT, pointerInfo []uiinputpointer.POINTER_INFO) error {
+	var _pointerInfo *uiinputpointer.POINTER_INFO
+	if len(pointerInfo) > 0 {
+		_pointerInfo = &pointerInfo[0]
+	}
+	return win32.HRESULTError(int32(uiinteractioncontext.BufferPointerPacketsInteractionContext(interactionContext, uint32(len(pointerInfo)), _pointerInfo)))
 }
 
 // CreateInteractionContext wraps the raw CreateInteractionContext call with idiomatic Go types.
@@ -55,8 +59,12 @@ func GetInertiaParameterInteractionContext(interactionContext uiinteractionconte
 
 // GetInteractionConfigurationInteractionContext wraps the raw GetInteractionConfigurationInteractionContext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-getinteractionconfigurationinteractioncontext
-func GetInteractionConfigurationInteractionContext(interactionContext uiinteractioncontext.HINTERACTIONCONTEXT, configurationCount uint32, configuration *uiinteractioncontext.INTERACTION_CONTEXT_CONFIGURATION) error {
-	return win32.HRESULTError(int32(uiinteractioncontext.GetInteractionConfigurationInteractionContext(interactionContext, configurationCount, configuration)))
+func GetInteractionConfigurationInteractionContext(interactionContext uiinteractioncontext.HINTERACTIONCONTEXT, configuration []uiinteractioncontext.INTERACTION_CONTEXT_CONFIGURATION) error {
+	var _configuration *uiinteractioncontext.INTERACTION_CONTEXT_CONFIGURATION
+	if len(configuration) > 0 {
+		_configuration = &configuration[0]
+	}
+	return win32.HRESULTError(int32(uiinteractioncontext.GetInteractionConfigurationInteractionContext(interactionContext, uint32(len(configuration)), _configuration)))
 }
 
 // GetMouseWheelParameterInteractionContext wraps the raw GetMouseWheelParameterInteractionContext call with idiomatic Go types.
@@ -130,14 +138,22 @@ func ResetInteractionContext(interactionContext uiinteractioncontext.HINTERACTIO
 
 // SetCrossSlideParametersInteractionContext wraps the raw SetCrossSlideParametersInteractionContext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-setcrossslideparametersinteractioncontext
-func SetCrossSlideParametersInteractionContext(interactionContext uiinteractioncontext.HINTERACTIONCONTEXT, parameterCount uint32, crossSlideParameters *uiinteractioncontext.CROSS_SLIDE_PARAMETER) error {
-	return win32.HRESULTError(int32(uiinteractioncontext.SetCrossSlideParametersInteractionContext(interactionContext, parameterCount, crossSlideParameters)))
+func SetCrossSlideParametersInteractionContext(interactionContext uiinteractioncontext.HINTERACTIONCONTEXT, crossSlideParameters []uiinteractioncontext.CROSS_SLIDE_PARAMETER) error {
+	var _crossSlideParameters *uiinteractioncontext.CROSS_SLIDE_PARAMETER
+	if len(crossSlideParameters) > 0 {
+		_crossSlideParameters = &crossSlideParameters[0]
+	}
+	return win32.HRESULTError(int32(uiinteractioncontext.SetCrossSlideParametersInteractionContext(interactionContext, uint32(len(crossSlideParameters)), _crossSlideParameters)))
 }
 
 // SetInteractionConfigurationInteractionContext wraps the raw SetInteractionConfigurationInteractionContext call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-setinteractionconfigurationinteractioncontext
-func SetInteractionConfigurationInteractionContext(interactionContext uiinteractioncontext.HINTERACTIONCONTEXT, configurationCount uint32, configuration *uiinteractioncontext.INTERACTION_CONTEXT_CONFIGURATION) error {
-	return win32.HRESULTError(int32(uiinteractioncontext.SetInteractionConfigurationInteractionContext(interactionContext, configurationCount, configuration)))
+func SetInteractionConfigurationInteractionContext(interactionContext uiinteractioncontext.HINTERACTIONCONTEXT, configuration []uiinteractioncontext.INTERACTION_CONTEXT_CONFIGURATION) error {
+	var _configuration *uiinteractioncontext.INTERACTION_CONTEXT_CONFIGURATION
+	if len(configuration) > 0 {
+		_configuration = &configuration[0]
+	}
+	return win32.HRESULTError(int32(uiinteractioncontext.SetInteractionConfigurationInteractionContext(interactionContext, uint32(len(configuration)), _configuration)))
 }
 
 // SetPropertyInteractionContext wraps the raw SetPropertyInteractionContext call with idiomatic Go types.

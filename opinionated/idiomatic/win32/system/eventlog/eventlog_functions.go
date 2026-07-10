@@ -49,6 +49,16 @@ func EvtCreateBookmark(BookmarkXml string) (systemeventlog.EVT_HANDLE, error) {
 	return systemeventlog.EvtCreateBookmark(foundation.PWSTR(_BookmarkXml))
 }
 
+// EvtCreateRenderContext wraps the raw EvtCreateRenderContext call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtcreaterendercontext
+func EvtCreateRenderContext(ValuePaths []foundation.PWSTR, Flags uint32) (systemeventlog.EVT_HANDLE, error) {
+	var _ValuePaths *foundation.PWSTR
+	if len(ValuePaths) > 0 {
+		_ValuePaths = &ValuePaths[0]
+	}
+	return systemeventlog.EvtCreateRenderContext(uint32(len(ValuePaths)), _ValuePaths, Flags)
+}
+
 // EvtExportLog wraps the raw EvtExportLog call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtexportlog
 func EvtExportLog(Session systemeventlog.EVT_HANDLE, Path string, Query string, TargetFilePath string, Flags uint32) error {
@@ -56,6 +66,26 @@ func EvtExportLog(Session systemeventlog.EVT_HANDLE, Path string, Query string, 
 	_Query := win32.UTF16Ptr(Query)
 	_TargetFilePath := win32.UTF16Ptr(TargetFilePath)
 	return systemeventlog.EvtExportLog(Session, foundation.PWSTR(_Path), foundation.PWSTR(_Query), foundation.PWSTR(_TargetFilePath), Flags)
+}
+
+// EvtFormatMessage wraps the raw EvtFormatMessage call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtformatmessage
+func EvtFormatMessage(PublisherMetadata systemeventlog.EVT_HANDLE, Event systemeventlog.EVT_HANDLE, MessageId uint32, Values []systemeventlog.EVT_VARIANT, Flags uint32, BufferSize uint32, Buffer foundation.PWSTR, BufferUsed *uint32) error {
+	var _Values *systemeventlog.EVT_VARIANT
+	if len(Values) > 0 {
+		_Values = &Values[0]
+	}
+	return systemeventlog.EvtFormatMessage(PublisherMetadata, Event, MessageId, uint32(len(Values)), _Values, Flags, BufferSize, Buffer, BufferUsed)
+}
+
+// EvtNext wraps the raw EvtNext call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtnext
+func EvtNext(ResultSet systemeventlog.EVT_HANDLE, Events []uintptr, Timeout uint32, Flags uint32, Returned *uint32) error {
+	var _Events *uintptr
+	if len(Events) > 0 {
+		_Events = &Events[0]
+	}
+	return systemeventlog.EvtNext(ResultSet, uint32(len(Events)), _Events, Timeout, Flags, Returned)
 }
 
 // EvtOpenChannelConfig wraps the raw EvtOpenChannelConfig call with idiomatic Go types.
@@ -140,6 +170,20 @@ func RegisterEventSource(lpUNCServerName string, lpSourceName string) (foundatio
 
 // ReportEvent wraps the raw ReportEventW call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reporteventw
-func ReportEvent(hEventLog foundation.HANDLE, wType systemeventlog.REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, wNumStrings uint16, dwDataSize uint32, lpStrings *foundation.PWSTR, lpRawData unsafe.Pointer) error {
-	return systemeventlog.ReportEventW(hEventLog, wType, wCategory, dwEventID, lpUserSid, wNumStrings, dwDataSize, lpStrings, lpRawData)
+func ReportEvent(hEventLog foundation.HANDLE, wType systemeventlog.REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, dwDataSize uint32, lpStrings []foundation.PWSTR, lpRawData unsafe.Pointer) error {
+	var _lpStrings *foundation.PWSTR
+	if len(lpStrings) > 0 {
+		_lpStrings = &lpStrings[0]
+	}
+	return systemeventlog.ReportEventW(hEventLog, wType, wCategory, dwEventID, lpUserSid, uint16(len(lpStrings)), dwDataSize, _lpStrings, lpRawData)
+}
+
+// ReportEventA wraps the raw ReportEventA call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reporteventa
+func ReportEventA(hEventLog foundation.HANDLE, wType systemeventlog.REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, dwDataSize uint32, lpStrings []foundation.PSTR, lpRawData unsafe.Pointer) error {
+	var _lpStrings *foundation.PSTR
+	if len(lpStrings) > 0 {
+		_lpStrings = &lpStrings[0]
+	}
+	return systemeventlog.ReportEventA(hEventLog, wType, wCategory, dwEventID, lpUserSid, uint16(len(lpStrings)), dwDataSize, _lpStrings, lpRawData)
 }

@@ -12,10 +12,24 @@ import (
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
+// ClearVariantArray wraps the raw ClearVariantArray call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-clearvariantarray
+func ClearVariantArray(pvars []systemvariant.VARIANT) {
+	var _pvars *systemvariant.VARIANT
+	if len(pvars) > 0 {
+		_pvars = &pvars[0]
+	}
+	systemvariant.ClearVariantArray(_pvars, uint32(len(pvars)))
+}
+
 // InitVariantFromBooleanArray wraps the raw InitVariantFromBooleanArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfrombooleanarray
-func InitVariantFromBooleanArray(prgf *foundation.BOOL, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromBooleanArray(prgf, cElems, pvar)))
+func InitVariantFromBooleanArray(prgf []foundation.BOOL, pvar *systemvariant.VARIANT) error {
+	var _prgf *foundation.BOOL
+	if len(prgf) > 0 {
+		_prgf = &prgf[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromBooleanArray(_prgf, uint32(len(prgf)), pvar)))
 }
 
 // InitVariantFromBuffer wraps the raw InitVariantFromBuffer call with idiomatic Go types.
@@ -26,8 +40,12 @@ func InitVariantFromBuffer(pv unsafe.Pointer, cb uint32, pvar *systemvariant.VAR
 
 // InitVariantFromDoubleArray wraps the raw InitVariantFromDoubleArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromdoublearray
-func InitVariantFromDoubleArray(prgn *float64, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromDoubleArray(prgn, cElems, pvar)))
+func InitVariantFromDoubleArray(prgn []float64, pvar *systemvariant.VARIANT) error {
+	var _prgn *float64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromDoubleArray(_prgn, uint32(len(prgn)), pvar)))
 }
 
 // InitVariantFromFileTime wraps the raw InitVariantFromFileTime call with idiomatic Go types.
@@ -38,8 +56,12 @@ func InitVariantFromFileTime(pft *foundation.FILETIME, pvar *systemvariant.VARIA
 
 // InitVariantFromFileTimeArray wraps the raw InitVariantFromFileTimeArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromfiletimearray
-func InitVariantFromFileTimeArray(prgft *foundation.FILETIME, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromFileTimeArray(prgft, cElems, pvar)))
+func InitVariantFromFileTimeArray(prgft []foundation.FILETIME, pvar *systemvariant.VARIANT) error {
+	var _prgft *foundation.FILETIME
+	if len(prgft) > 0 {
+		_prgft = &prgft[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromFileTimeArray(_prgft, uint32(len(prgft)), pvar)))
 }
 
 // InitVariantFromGUIDAsString wraps the raw InitVariantFromGUIDAsString call with idiomatic Go types.
@@ -50,20 +72,32 @@ func InitVariantFromGUIDAsString(guid *win32.GUID, pvar *systemvariant.VARIANT) 
 
 // InitVariantFromInt16Array wraps the raw InitVariantFromInt16Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromint16array
-func InitVariantFromInt16Array(prgn *int16, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromInt16Array(prgn, cElems, pvar)))
+func InitVariantFromInt16Array(prgn []int16, pvar *systemvariant.VARIANT) error {
+	var _prgn *int16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromInt16Array(_prgn, uint32(len(prgn)), pvar)))
 }
 
 // InitVariantFromInt32Array wraps the raw InitVariantFromInt32Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromint32array
-func InitVariantFromInt32Array(prgn *int32, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromInt32Array(prgn, cElems, pvar)))
+func InitVariantFromInt32Array(prgn []int32, pvar *systemvariant.VARIANT) error {
+	var _prgn *int32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromInt32Array(_prgn, uint32(len(prgn)), pvar)))
 }
 
 // InitVariantFromInt64Array wraps the raw InitVariantFromInt64Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromint64array
-func InitVariantFromInt64Array(prgn *int64, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromInt64Array(prgn, cElems, pvar)))
+func InitVariantFromInt64Array(prgn []int64, pvar *systemvariant.VARIANT) error {
+	var _prgn *int64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromInt64Array(_prgn, uint32(len(prgn)), pvar)))
 }
 
 // InitVariantFromResource wraps the raw InitVariantFromResource call with idiomatic Go types.
@@ -74,26 +108,42 @@ func InitVariantFromResource(hinst foundation.HINSTANCE, id uint32, pvar *system
 
 // InitVariantFromStringArray wraps the raw InitVariantFromStringArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromstringarray
-func InitVariantFromStringArray(prgsz *foundation.PWSTR, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromStringArray(prgsz, cElems, pvar)))
+func InitVariantFromStringArray(prgsz []foundation.PWSTR, pvar *systemvariant.VARIANT) error {
+	var _prgsz *foundation.PWSTR
+	if len(prgsz) > 0 {
+		_prgsz = &prgsz[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromStringArray(_prgsz, uint32(len(prgsz)), pvar)))
 }
 
 // InitVariantFromUInt16Array wraps the raw InitVariantFromUInt16Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromuint16array
-func InitVariantFromUInt16Array(prgn *uint16, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromUInt16Array(prgn, cElems, pvar)))
+func InitVariantFromUInt16Array(prgn []uint16, pvar *systemvariant.VARIANT) error {
+	var _prgn *uint16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromUInt16Array(_prgn, uint32(len(prgn)), pvar)))
 }
 
 // InitVariantFromUInt32Array wraps the raw InitVariantFromUInt32Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromuint32array
-func InitVariantFromUInt32Array(prgn *uint32, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromUInt32Array(prgn, cElems, pvar)))
+func InitVariantFromUInt32Array(prgn []uint32, pvar *systemvariant.VARIANT) error {
+	var _prgn *uint32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromUInt32Array(_prgn, uint32(len(prgn)), pvar)))
 }
 
 // InitVariantFromUInt64Array wraps the raw InitVariantFromUInt64Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfromuint64array
-func InitVariantFromUInt64Array(prgn *uint64, cElems uint32, pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(systemvariant.InitVariantFromUInt64Array(prgn, cElems, pvar)))
+func InitVariantFromUInt64Array(prgn []uint64, pvar *systemvariant.VARIANT) error {
+	var _prgn *uint64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.InitVariantFromUInt64Array(_prgn, uint32(len(prgn)), pvar)))
 }
 
 // InitVariantFromVariantArrayElem wraps the raw InitVariantFromVariantArrayElem call with idiomatic Go types.
@@ -194,8 +244,12 @@ func VariantToBoolean(varIn *systemvariant.VARIANT, pfRet *foundation.BOOL) erro
 
 // VariantToBooleanArray wraps the raw VariantToBooleanArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttobooleanarray
-func VariantToBooleanArray(var_ *systemvariant.VARIANT, prgf *foundation.BOOL, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToBooleanArray(var_, prgf, crgn, pcElem)))
+func VariantToBooleanArray(var_ *systemvariant.VARIANT, prgf []foundation.BOOL, pcElem *uint32) error {
+	var _prgf *foundation.BOOL
+	if len(prgf) > 0 {
+		_prgf = &prgf[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToBooleanArray(var_, _prgf, uint32(len(prgf)), pcElem)))
 }
 
 // VariantToBooleanArrayAlloc wraps the raw VariantToBooleanArrayAlloc call with idiomatic Go types.
@@ -231,8 +285,12 @@ func VariantToDouble(varIn *systemvariant.VARIANT, pdblRet *float64) error {
 
 // VariantToDoubleArray wraps the raw VariantToDoubleArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttodoublearray
-func VariantToDoubleArray(var_ *systemvariant.VARIANT, prgn *float64, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToDoubleArray(var_, prgn, crgn, pcElem)))
+func VariantToDoubleArray(var_ *systemvariant.VARIANT, prgn []float64, pcElem *uint32) error {
+	var _prgn *float64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToDoubleArray(var_, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // VariantToDoubleArrayAlloc wraps the raw VariantToDoubleArrayAlloc call with idiomatic Go types.
@@ -261,8 +319,12 @@ func VariantToInt16(varIn *systemvariant.VARIANT, piRet *int16) error {
 
 // VariantToInt16Array wraps the raw VariantToInt16Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttoint16array
-func VariantToInt16Array(var_ *systemvariant.VARIANT, prgn *int16, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToInt16Array(var_, prgn, crgn, pcElem)))
+func VariantToInt16Array(var_ *systemvariant.VARIANT, prgn []int16, pcElem *uint32) error {
+	var _prgn *int16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToInt16Array(var_, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // VariantToInt16ArrayAlloc wraps the raw VariantToInt16ArrayAlloc call with idiomatic Go types.
@@ -279,8 +341,12 @@ func VariantToInt32(varIn *systemvariant.VARIANT, plRet *int32) error {
 
 // VariantToInt32Array wraps the raw VariantToInt32Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttoint32array
-func VariantToInt32Array(var_ *systemvariant.VARIANT, prgn *int32, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToInt32Array(var_, prgn, crgn, pcElem)))
+func VariantToInt32Array(var_ *systemvariant.VARIANT, prgn []int32, pcElem *uint32) error {
+	var _prgn *int32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToInt32Array(var_, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // VariantToInt32ArrayAlloc wraps the raw VariantToInt32ArrayAlloc call with idiomatic Go types.
@@ -297,8 +363,12 @@ func VariantToInt64(varIn *systemvariant.VARIANT, pllRet *int64) error {
 
 // VariantToInt64Array wraps the raw VariantToInt64Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttoint64array
-func VariantToInt64Array(var_ *systemvariant.VARIANT, prgn *int64, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToInt64Array(var_, prgn, crgn, pcElem)))
+func VariantToInt64Array(var_ *systemvariant.VARIANT, prgn []int64, pcElem *uint32) error {
+	var _prgn *int64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToInt64Array(var_, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // VariantToInt64ArrayAlloc wraps the raw VariantToInt64ArrayAlloc call with idiomatic Go types.
@@ -321,8 +391,12 @@ func VariantToStringAlloc(varIn *systemvariant.VARIANT, ppszBuf *foundation.PWST
 
 // VariantToStringArray wraps the raw VariantToStringArray call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttostringarray
-func VariantToStringArray(var_ *systemvariant.VARIANT, prgsz *foundation.PWSTR, crgsz uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToStringArray(var_, prgsz, crgsz, pcElem)))
+func VariantToStringArray(var_ *systemvariant.VARIANT, prgsz []foundation.PWSTR, pcElem *uint32) error {
+	var _prgsz *foundation.PWSTR
+	if len(prgsz) > 0 {
+		_prgsz = &prgsz[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToStringArray(var_, _prgsz, uint32(len(prgsz)), pcElem)))
 }
 
 // VariantToStringArrayAlloc wraps the raw VariantToStringArrayAlloc call with idiomatic Go types.
@@ -346,8 +420,12 @@ func VariantToUInt16(varIn *systemvariant.VARIANT, puiRet *uint16) error {
 
 // VariantToUInt16Array wraps the raw VariantToUInt16Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttouint16array
-func VariantToUInt16Array(var_ *systemvariant.VARIANT, prgn *uint16, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToUInt16Array(var_, prgn, crgn, pcElem)))
+func VariantToUInt16Array(var_ *systemvariant.VARIANT, prgn []uint16, pcElem *uint32) error {
+	var _prgn *uint16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToUInt16Array(var_, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // VariantToUInt16ArrayAlloc wraps the raw VariantToUInt16ArrayAlloc call with idiomatic Go types.
@@ -364,8 +442,12 @@ func VariantToUInt32(varIn *systemvariant.VARIANT, pulRet *uint32) error {
 
 // VariantToUInt32Array wraps the raw VariantToUInt32Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttouint32array
-func VariantToUInt32Array(var_ *systemvariant.VARIANT, prgn *uint32, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToUInt32Array(var_, prgn, crgn, pcElem)))
+func VariantToUInt32Array(var_ *systemvariant.VARIANT, prgn []uint32, pcElem *uint32) error {
+	var _prgn *uint32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToUInt32Array(var_, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // VariantToUInt32ArrayAlloc wraps the raw VariantToUInt32ArrayAlloc call with idiomatic Go types.
@@ -382,8 +464,12 @@ func VariantToUInt64(varIn *systemvariant.VARIANT, pullRet *uint64) error {
 
 // VariantToUInt64Array wraps the raw VariantToUInt64Array call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttouint64array
-func VariantToUInt64Array(var_ *systemvariant.VARIANT, prgn *uint64, crgn uint32, pcElem *uint32) error {
-	return win32.HRESULTError(int32(systemvariant.VariantToUInt64Array(var_, prgn, crgn, pcElem)))
+func VariantToUInt64Array(var_ *systemvariant.VARIANT, prgn []uint64, pcElem *uint32) error {
+	var _prgn *uint64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	return win32.HRESULTError(int32(systemvariant.VariantToUInt64Array(var_, _prgn, uint32(len(prgn)), pcElem)))
 }
 
 // VariantToUInt64ArrayAlloc wraps the raw VariantToUInt64ArrayAlloc call with idiomatic Go types.

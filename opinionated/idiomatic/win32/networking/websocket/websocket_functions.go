@@ -14,32 +14,64 @@ import (
 
 // WebSocketBeginClientHandshake wraps the raw WebSocketBeginClientHandshake call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketbeginclienthandshake
-func WebSocketBeginClientHandshake(hWebSocket networkingwebsocket.WEB_SOCKET_HANDLE, pszSubprotocols *foundation.PSTR, ulSubprotocolCount uint32, pszExtensions *foundation.PSTR, ulExtensionCount uint32, pInitialHeaders *networkingwebsocket.WEB_SOCKET_HTTP_HEADER, ulInitialHeaderCount uint32, pAdditionalHeaders **networkingwebsocket.WEB_SOCKET_HTTP_HEADER, pulAdditionalHeaderCount *uint32) error {
-	return win32.HRESULTError(int32(networkingwebsocket.WebSocketBeginClientHandshake(hWebSocket, pszSubprotocols, ulSubprotocolCount, pszExtensions, ulExtensionCount, pInitialHeaders, ulInitialHeaderCount, pAdditionalHeaders, pulAdditionalHeaderCount)))
+func WebSocketBeginClientHandshake(hWebSocket networkingwebsocket.WEB_SOCKET_HANDLE, pszSubprotocols []foundation.PSTR, pszExtensions []foundation.PSTR, pInitialHeaders []networkingwebsocket.WEB_SOCKET_HTTP_HEADER, pAdditionalHeaders **networkingwebsocket.WEB_SOCKET_HTTP_HEADER, pulAdditionalHeaderCount *uint32) error {
+	var _pszSubprotocols *foundation.PSTR
+	if len(pszSubprotocols) > 0 {
+		_pszSubprotocols = &pszSubprotocols[0]
+	}
+	var _pszExtensions *foundation.PSTR
+	if len(pszExtensions) > 0 {
+		_pszExtensions = &pszExtensions[0]
+	}
+	var _pInitialHeaders *networkingwebsocket.WEB_SOCKET_HTTP_HEADER
+	if len(pInitialHeaders) > 0 {
+		_pInitialHeaders = &pInitialHeaders[0]
+	}
+	return win32.HRESULTError(int32(networkingwebsocket.WebSocketBeginClientHandshake(hWebSocket, _pszSubprotocols, uint32(len(pszSubprotocols)), _pszExtensions, uint32(len(pszExtensions)), _pInitialHeaders, uint32(len(pInitialHeaders)), pAdditionalHeaders, pulAdditionalHeaderCount)))
 }
 
 // WebSocketBeginServerHandshake wraps the raw WebSocketBeginServerHandshake call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketbeginserverhandshake
-func WebSocketBeginServerHandshake(hWebSocket networkingwebsocket.WEB_SOCKET_HANDLE, pszSubprotocolSelected foundation.PSTR, pszExtensionSelected *foundation.PSTR, ulExtensionSelectedCount uint32, pRequestHeaders *networkingwebsocket.WEB_SOCKET_HTTP_HEADER, ulRequestHeaderCount uint32, pResponseHeaders **networkingwebsocket.WEB_SOCKET_HTTP_HEADER, pulResponseHeaderCount *uint32) error {
-	return win32.HRESULTError(int32(networkingwebsocket.WebSocketBeginServerHandshake(hWebSocket, pszSubprotocolSelected, pszExtensionSelected, ulExtensionSelectedCount, pRequestHeaders, ulRequestHeaderCount, pResponseHeaders, pulResponseHeaderCount)))
+func WebSocketBeginServerHandshake(hWebSocket networkingwebsocket.WEB_SOCKET_HANDLE, pszSubprotocolSelected foundation.PSTR, pszExtensionSelected []foundation.PSTR, pRequestHeaders []networkingwebsocket.WEB_SOCKET_HTTP_HEADER, pResponseHeaders **networkingwebsocket.WEB_SOCKET_HTTP_HEADER, pulResponseHeaderCount *uint32) error {
+	var _pszExtensionSelected *foundation.PSTR
+	if len(pszExtensionSelected) > 0 {
+		_pszExtensionSelected = &pszExtensionSelected[0]
+	}
+	var _pRequestHeaders *networkingwebsocket.WEB_SOCKET_HTTP_HEADER
+	if len(pRequestHeaders) > 0 {
+		_pRequestHeaders = &pRequestHeaders[0]
+	}
+	return win32.HRESULTError(int32(networkingwebsocket.WebSocketBeginServerHandshake(hWebSocket, pszSubprotocolSelected, _pszExtensionSelected, uint32(len(pszExtensionSelected)), _pRequestHeaders, uint32(len(pRequestHeaders)), pResponseHeaders, pulResponseHeaderCount)))
 }
 
 // WebSocketCreateClientHandle wraps the raw WebSocketCreateClientHandle call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketcreateclienthandle
-func WebSocketCreateClientHandle(pProperties *networkingwebsocket.WEB_SOCKET_PROPERTY, ulPropertyCount uint32, phWebSocket *networkingwebsocket.WEB_SOCKET_HANDLE) error {
-	return win32.HRESULTError(int32(networkingwebsocket.WebSocketCreateClientHandle(pProperties, ulPropertyCount, phWebSocket)))
+func WebSocketCreateClientHandle(pProperties []networkingwebsocket.WEB_SOCKET_PROPERTY, phWebSocket *networkingwebsocket.WEB_SOCKET_HANDLE) error {
+	var _pProperties *networkingwebsocket.WEB_SOCKET_PROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	return win32.HRESULTError(int32(networkingwebsocket.WebSocketCreateClientHandle(_pProperties, uint32(len(pProperties)), phWebSocket)))
 }
 
 // WebSocketCreateServerHandle wraps the raw WebSocketCreateServerHandle call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketcreateserverhandle
-func WebSocketCreateServerHandle(pProperties *networkingwebsocket.WEB_SOCKET_PROPERTY, ulPropertyCount uint32, phWebSocket *networkingwebsocket.WEB_SOCKET_HANDLE) error {
-	return win32.HRESULTError(int32(networkingwebsocket.WebSocketCreateServerHandle(pProperties, ulPropertyCount, phWebSocket)))
+func WebSocketCreateServerHandle(pProperties []networkingwebsocket.WEB_SOCKET_PROPERTY, phWebSocket *networkingwebsocket.WEB_SOCKET_HANDLE) error {
+	var _pProperties *networkingwebsocket.WEB_SOCKET_PROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	return win32.HRESULTError(int32(networkingwebsocket.WebSocketCreateServerHandle(_pProperties, uint32(len(pProperties)), phWebSocket)))
 }
 
 // WebSocketEndClientHandshake wraps the raw WebSocketEndClientHandshake call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketendclienthandshake
-func WebSocketEndClientHandshake(hWebSocket networkingwebsocket.WEB_SOCKET_HANDLE, pResponseHeaders *networkingwebsocket.WEB_SOCKET_HTTP_HEADER, ulReponseHeaderCount uint32, pulSelectedExtensions *uint32, pulSelectedExtensionCount *uint32, pulSelectedSubprotocol *uint32) error {
-	return win32.HRESULTError(int32(networkingwebsocket.WebSocketEndClientHandshake(hWebSocket, pResponseHeaders, ulReponseHeaderCount, pulSelectedExtensions, pulSelectedExtensionCount, pulSelectedSubprotocol)))
+func WebSocketEndClientHandshake(hWebSocket networkingwebsocket.WEB_SOCKET_HANDLE, pResponseHeaders []networkingwebsocket.WEB_SOCKET_HTTP_HEADER, pulSelectedExtensions *uint32, pulSelectedExtensionCount *uint32, pulSelectedSubprotocol *uint32) error {
+	var _pResponseHeaders *networkingwebsocket.WEB_SOCKET_HTTP_HEADER
+	if len(pResponseHeaders) > 0 {
+		_pResponseHeaders = &pResponseHeaders[0]
+	}
+	return win32.HRESULTError(int32(networkingwebsocket.WebSocketEndClientHandshake(hWebSocket, _pResponseHeaders, uint32(len(pResponseHeaders)), pulSelectedExtensions, pulSelectedExtensionCount, pulSelectedSubprotocol)))
 }
 
 // WebSocketEndServerHandshake wraps the raw WebSocketEndServerHandshake call with idiomatic Go types.

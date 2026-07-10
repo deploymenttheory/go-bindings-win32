@@ -143,6 +143,16 @@ func RegisterGPNotification(hEvent foundation.HANDLE, bMachine bool) error {
 	return systemgrouppolicy.RegisterGPNotification(hEvent, _bMachine)
 }
 
+// RsopAccessCheckByType wraps the raw RsopAccessCheckByType call with idiomatic Go types.
+// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopaccesscheckbytype
+func RsopAccessCheckByType(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pPrincipalSelfSid security.PSID, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pObjectTypeList []security.OBJECT_TYPE_LIST, pGenericMapping *security.GENERIC_MAPPING, pPrivilegeSet *security.PRIVILEGE_SET, pdwPrivilegeSetLength *uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) (foundation.HRESULT, error) {
+	var _pObjectTypeList *security.OBJECT_TYPE_LIST
+	if len(pObjectTypeList) > 0 {
+		_pObjectTypeList = &pObjectTypeList[0]
+	}
+	return systemgrouppolicy.RsopAccessCheckByType(pSecurityDescriptor, pPrincipalSelfSid, pRsopToken, dwDesiredAccessMask, _pObjectTypeList, uint32(len(pObjectTypeList)), pGenericMapping, pPrivilegeSet, pdwPrivilegeSetLength, pdwGrantedAccessMask, pbAccessStatus)
+}
+
 // RsopFileAccessCheck wraps the raw RsopFileAccessCheck call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopfileaccesscheck
 func RsopFileAccessCheck(pszFileName string, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) error {
@@ -158,8 +168,12 @@ func RsopResetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServ
 
 // RsopSetPolicySettingStatus wraps the raw RsopSetPolicySettingStatus call with idiomatic Go types.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopsetpolicysettingstatus
-func RsopSetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject, nInfo uint32, pStatus *systemgrouppolicy.POLICYSETTINGSTATUSINFO) error {
-	return win32.HRESULTError(int32(systemgrouppolicy.RsopSetPolicySettingStatus(dwFlags, pServices, pSettingInstance, nInfo, pStatus)))
+func RsopSetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject, pStatus []systemgrouppolicy.POLICYSETTINGSTATUSINFO) error {
+	var _pStatus *systemgrouppolicy.POLICYSETTINGSTATUSINFO
+	if len(pStatus) > 0 {
+		_pStatus = &pStatus[0]
+	}
+	return win32.HRESULTError(int32(systemgrouppolicy.RsopSetPolicySettingStatus(dwFlags, pServices, pSettingInstance, uint32(len(pStatus)), _pStatus)))
 }
 
 // UninstallApplication wraps the raw UninstallApplication call with idiomatic Go types.

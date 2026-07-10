@@ -121,8 +121,12 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
 
 One package per namespace, directory = namespace path
 (`System.Threading` → `bindings/win32/system/threading`, import alias for
-cross-refs = all segments joined: `systemthreading`). Files per package:
-`doc.go`, `<pkg>_types.go`, `<pkg>_constants.go`, `<pkg>_functions.go`.
+cross-refs = all segments joined: `systemthreading`). Files per package, split
+by construct: `doc.go`, `<pkg>_typedefs.go`, `<pkg>_enums.go`,
+`<pkg>_structs.go`, `<pkg>_delegates.go`, `<pkg>_constants.go`,
+`<pkg>_interfaces.go` (COM), `<pkg>_functions.go` (empty files are not
+written). The idiomatic package uses the **same** file names for its
+re-exports, plus `<pkg>_handles.go` for the closers.
 
 Function shapes (view.ReturnKind):
 - void → no return
@@ -174,10 +178,11 @@ idiomatic tier does not itself improve is re-exported: types as aliases
 (`type USER_INFO_1 = raw.USER_INFO_1`), constants as `const`/`var` aliases,
 and pass-through functions as `var Name = raw.Name`. Because the aliases keep
 type identity, a re-exported struct is still assignable to the raw calls the
-wrappers make. Re-exports are grouped into the same file names the raw tier
-uses — `<pkg>_types.go`, `<pkg>_constants.go`, and pass-through functions in
-`<pkg>_functions.go` — so every namespace emits an idiomatic package (324),
-not just those with improvable functions.
+wrappers make. Re-exports are grouped into the same per-construct file names
+the raw tier uses (`_typedefs.go`/`_enums.go`/`_structs.go`/`_delegates.go`/
+`_constants.go`, and pass-through functions in `_functions.go`) — so every
+namespace emits an idiomatic package (324), not just those with improvable
+functions.
 
 **One command, both tiers.** `generate bindings` clears and re-emits *both*
 `bindings/win32/` and `opinionated/idiomatic/win32/` in a single run (the

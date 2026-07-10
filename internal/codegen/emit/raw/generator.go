@@ -81,10 +81,14 @@ func (g *Generator) EmittedComMethods() map[string]map[int]string {
 type SymbolKind uint8
 
 const (
-	SymbolType  SymbolKind = iota // struct/enum/typedef/delegate/interface
-	SymbolConst                   // const declaration
-	SymbolVar                     // var declaration (GUIDs, IIDs, struct inits)
-	SymbolFunc                    // function
+	SymbolTypedef  SymbolKind = iota // handle/scalar typedef
+	SymbolEnum                       // enum type
+	SymbolStruct                     // struct/union
+	SymbolDelegate                   // callback function-pointer type
+	SymbolType                       // other named type (COM interface)
+	SymbolConst                      // const declaration
+	SymbolVar                        // var declaration (GUIDs, IIDs, struct inits)
+	SymbolFunc                       // function
 )
 
 // Symbol is one emitted top-level identifier.
@@ -272,37 +276,55 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	packageName := naming.PackageName(meta.Namespace)
 	packageDir := filepath.Join(g.outDir, filepath.FromSlash(naming.PackagePath(meta.Namespace)))
 
-	// Types file: typedefs, enums, structs, delegates.
-	typesImports := typemap.ImportSet{}
-	var typesBody strings.Builder
-	for _, model := range g.buildTypedefModels(meta, typesImports) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolType)
-		if err := renderInto(&typesBody, render.Typedef, model); err != nil {
+	// Types are split by construct into separate files (matching the macOS
+	// sibling generator): typedefs, enums, structs, delegates.
+	typedefImports := typemap.ImportSet{}
+	var typedefBody strings.Builder
+	for _, model := range g.buildTypedefModels(meta, typedefImports) {
+		g.recordSymbol(meta.Namespace, model.TypeName, SymbolTypedef)
+		if err := renderInto(&typedefBody, render.Typedef, model); err != nil {
 			return err
 		}
 	}
+	if err := g.writeFile(packageDir, packageName+"_typedefs.go", packageName, typedefImports, typedefBody.String()); err != nil {
+		return err
+	}
+
+	var enumBody strings.Builder
 	for _, model := range g.buildEnumModels(meta) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolType)
+		g.recordSymbol(meta.Namespace, model.TypeName, SymbolEnum)
 		for _, member := range model.Members {
 			g.recordSymbol(meta.Namespace, member.Name, SymbolConst)
 		}
-		if err := renderInto(&typesBody, render.Enum, model); err != nil {
+		if err := renderInto(&enumBody, render.Enum, model); err != nil {
 			return err
 		}
 	}
-	for _, model := range g.buildStructModels(meta, typesImports) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolType)
-		if err := renderInto(&typesBody, render.Struct, model); err != nil {
+	if err := g.writeFile(packageDir, packageName+"_enums.go", packageName, nil, enumBody.String()); err != nil {
+		return err
+	}
+
+	structImports := typemap.ImportSet{}
+	var structBody strings.Builder
+	for _, model := range g.buildStructModels(meta, structImports) {
+		g.recordSymbol(meta.Namespace, model.TypeName, SymbolStruct)
+		if err := renderInto(&structBody, render.Struct, model); err != nil {
 			return err
 		}
 	}
-	for _, model := range g.buildDelegateModels(meta, typesImports) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolType)
-		if err := renderInto(&typesBody, render.Delegate, model); err != nil {
+	if err := g.writeFile(packageDir, packageName+"_structs.go", packageName, structImports, structBody.String()); err != nil {
+		return err
+	}
+
+	delegateImports := typemap.ImportSet{}
+	var delegateBody strings.Builder
+	for _, model := range g.buildDelegateModels(meta, delegateImports) {
+		g.recordSymbol(meta.Namespace, model.TypeName, SymbolDelegate)
+		if err := renderInto(&delegateBody, render.Delegate, model); err != nil {
 			return err
 		}
 	}
-	if err := g.writeFile(packageDir, packageName+"_types.go", packageName, typesImports, typesBody.String()); err != nil {
+	if err := g.writeFile(packageDir, packageName+"_delegates.go", packageName, delegateImports, delegateBody.String()); err != nil {
 		return err
 	}
 

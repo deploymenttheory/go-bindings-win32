@@ -231,10 +231,14 @@ const modulePath = "github.com/deploymenttheory/go-bindings-win32"
 // decoupled from the raw emitter's Symbol type).
 func reExportsFrom(rawGen *rawwin.Generator) map[string][]idiowin.ReExport {
 	kinds := map[rawwin.SymbolKind]string{
-		rawwin.SymbolType:  "type",
-		rawwin.SymbolConst: "const",
-		rawwin.SymbolVar:   "var",
-		rawwin.SymbolFunc:  "func",
+		rawwin.SymbolTypedef:  "typedef",
+		rawwin.SymbolEnum:     "enum",
+		rawwin.SymbolStruct:   "struct",
+		rawwin.SymbolDelegate: "delegate",
+		rawwin.SymbolType:     "type",
+		rawwin.SymbolConst:    "const",
+		rawwin.SymbolVar:      "var",
+		rawwin.SymbolFunc:     "func",
 	}
 	out := map[string][]idiowin.ReExport{}
 	for namespace, symbols := range rawGen.EmittedSymbols() {

@@ -102,8 +102,7 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 	// clash; they make the idiomatic package self-contained and are grouped
 	// into the same files the raw tier uses (types / constants / functions).
 	reExports := g.buildReExports(meta)
-	if len(functionModels) == 0 && len(interfaceModels) == 0 && handleBody == "" &&
-		reExports.types == "" && reExports.constants == "" && reExports.functions == "" {
+	if len(functionModels) == 0 && len(interfaceModels) == 0 && handleBody == "" && reExports.empty() {
 		return false, nil
 	}
 
@@ -146,16 +145,26 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 		}
 	}
 
-	// Re-exported types and constants mirror the raw tier's file names.
-	if reExports.types != "" {
-		imports := typemap.ImportSet{reExports.rawAlias: g.rawImportPath(meta.Namespace)}
-		if err := g.writeFile(packageDir, packageName+"_types.go", packageName, imports, reExports.types); err != nil {
-			return false, err
-		}
+	// Re-exported types and constants mirror the raw tier's per-construct
+	// file names.
+	rawImport := func() typemap.ImportSet {
+		return typemap.ImportSet{reExports.rawAlias: g.rawImportPath(meta.Namespace)}
 	}
-	if reExports.constants != "" {
-		imports := typemap.ImportSet{reExports.rawAlias: g.rawImportPath(meta.Namespace)}
-		if err := g.writeFile(packageDir, packageName+"_constants.go", packageName, imports, reExports.constants); err != nil {
+	reExportFiles := []struct {
+		suffix string
+		body   string
+	}{
+		{"_typedefs.go", reExports.typedefs},
+		{"_enums.go", reExports.enums},
+		{"_structs.go", reExports.structs},
+		{"_delegates.go", reExports.delegates},
+		{"_constants.go", reExports.constants},
+	}
+	for _, file := range reExportFiles {
+		if file.body == "" {
+			continue
+		}
+		if err := g.writeFile(packageDir, packageName+file.suffix, packageName, rawImport(), file.body); err != nil {
 			return false, err
 		}
 	}

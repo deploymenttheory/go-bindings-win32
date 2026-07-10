@@ -17,12 +17,21 @@ type ReExport struct {
 }
 
 // reExportBodies holds the re-export source split by the file it belongs to,
-// mirroring the raw tier's file layout.
+// mirroring the raw tier's per-construct file layout.
 type reExportBodies struct {
-	types     string // type aliases → <pkg>_types.go
+	typedefs  string // typedef aliases → <pkg>_typedefs.go
+	enums     string // enum aliases → <pkg>_enums.go
+	structs   string // struct aliases → <pkg>_structs.go
+	delegates string // delegate aliases → <pkg>_delegates.go
 	constants string // const/var aliases → <pkg>_constants.go
 	functions string // pass-through function aliases → <pkg>_functions.go
 	rawAlias  string // the raw package import alias these bodies reference
+}
+
+// empty reports whether no re-exports were produced.
+func (b reExportBodies) empty() bool {
+	return b.typedefs == "" && b.enums == "" && b.structs == "" &&
+		b.delegates == "" && b.constants == "" && b.functions == ""
 }
 
 // buildReExports makes the idiomatic package self-contained: every raw
@@ -45,7 +54,7 @@ func (g *Generator) buildReExports(meta *win32meta.NamespaceMeta) reExportBodies
 	sort.Slice(sorted, func(i, j int) bool { return sorted[i].Name < sorted[j].Name })
 
 	rawAlias := naming.ImportAlias(meta.Namespace)
-	var types, constants, functions strings.Builder
+	var typedefs, enums, structs, delegates, constants, functions strings.Builder
 	for _, symbol := range sorted {
 		// Already defined by the idiomatic package (a wrapper or improved
 		// function) — the improved version wins.
@@ -57,8 +66,16 @@ func (g *Generator) buildReExports(meta *win32meta.NamespaceMeta) reExportBodies
 		}
 		qualified := rawAlias + "." + symbol.Name
 		switch symbol.Kind {
-		case "type":
-			fmt.Fprintf(&types, "type %s = %s\n", symbol.Name, qualified)
+		case "typedef":
+			fmt.Fprintf(&typedefs, "type %s = %s\n", symbol.Name, qualified)
+		case "enum":
+			fmt.Fprintf(&enums, "type %s = %s\n", symbol.Name, qualified)
+		case "struct":
+			fmt.Fprintf(&structs, "type %s = %s\n", symbol.Name, qualified)
+		case "delegate":
+			fmt.Fprintf(&delegates, "type %s = %s\n", symbol.Name, qualified)
+		case "type": // other named type (e.g. an unwrapped COM interface)
+			fmt.Fprintf(&typedefs, "type %s = %s\n", symbol.Name, qualified)
 		case "const":
 			fmt.Fprintf(&constants, "const %s = %s\n", symbol.Name, qualified)
 		case "var":
@@ -68,7 +85,10 @@ func (g *Generator) buildReExports(meta *win32meta.NamespaceMeta) reExportBodies
 		}
 	}
 	return reExportBodies{
-		types:     types.String(),
+		typedefs:  typedefs.String(),
+		enums:     enums.String(),
+		structs:   structs.String(),
+		delegates: delegates.String(),
 		constants: constants.String(),
 		functions: functions.String(),
 		rawAlias:  rawAlias,

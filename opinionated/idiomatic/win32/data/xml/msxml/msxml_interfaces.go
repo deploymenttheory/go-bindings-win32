@@ -86,8 +86,10 @@ func (self IMXNamespaceManager) PutAllowOverride(fOverride foundation.VARIANT_BO
 }
 
 // GetAllowOverride wraps the raw GetAllowOverride call.
-func (self IMXNamespaceManager) GetAllowOverride(fOverride *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetAllowOverride(fOverride)))
+func (self IMXNamespaceManager) GetAllowOverride() (foundation.VARIANT_BOOL, error) {
+	var _fOverride foundation.VARIANT_BOOL
+	_hr := self.Raw.GetAllowOverride(&_fOverride)
+	return _fOverride, win32.HRESULTError(int32(_hr))
 }
 
 // Reset wraps the raw Reset call.
@@ -146,18 +148,24 @@ func WrapIMXNamespacePrefixes(raw *dataxmlmsxml.IMXNamespacePrefixes) IMXNamespa
 }
 
 // Get_item wraps the raw Get_item call.
-func (self IMXNamespacePrefixes) Get_item(index int32, prefix *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_item(index, prefix)))
+func (self IMXNamespacePrefixes) Get_item(index int32) (foundation.BSTR, error) {
+	var _prefix foundation.BSTR
+	_hr := self.Raw.Get_item(index, &_prefix)
+	return _prefix, win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
-func (self IMXNamespacePrefixes) Get_length(length *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(length)))
+func (self IMXNamespacePrefixes) Get_length() (int32, error) {
+	var _length int32
+	_hr := self.Raw.Get_length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IMXNamespacePrefixes) Get__newEnum(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__newEnum(ppUnk)))
+func (self IMXNamespacePrefixes) Get__newEnum() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__newEnum(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // IMXReaderControl is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IMXReaderControl with error-returning methods.
@@ -214,8 +222,10 @@ func WrapIMXWriter(raw *dataxmlmsxml.IMXWriter) IMXWriter {
 }
 
 // Get_output wraps the raw Get_output call.
-func (self IMXWriter) Get_output(varDestination *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_output(varDestination)))
+func (self IMXWriter) Get_output() (systemvariant.VARIANT, error) {
+	var _varDestination systemvariant.VARIANT
+	_hr := self.Raw.Get_output(&_varDestination)
+	return _varDestination, win32.HRESULTError(int32(_hr))
 }
 
 // Put_encoding wraps the raw Put_encoding call.
@@ -224,8 +234,10 @@ func (self IMXWriter) Put_encoding(strEncoding foundation.BSTR) error {
 }
 
 // Get_encoding wraps the raw Get_encoding call.
-func (self IMXWriter) Get_encoding(strEncoding *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_encoding(strEncoding)))
+func (self IMXWriter) Get_encoding() (foundation.BSTR, error) {
+	var _strEncoding foundation.BSTR
+	_hr := self.Raw.Get_encoding(&_strEncoding)
+	return _strEncoding, win32.HRESULTError(int32(_hr))
 }
 
 // Put_byteOrderMark wraps the raw Put_byteOrderMark call.
@@ -234,8 +246,10 @@ func (self IMXWriter) Put_byteOrderMark(fWriteByteOrderMark foundation.VARIANT_B
 }
 
 // Get_byteOrderMark wraps the raw Get_byteOrderMark call.
-func (self IMXWriter) Get_byteOrderMark(fWriteByteOrderMark *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_byteOrderMark(fWriteByteOrderMark)))
+func (self IMXWriter) Get_byteOrderMark() (foundation.VARIANT_BOOL, error) {
+	var _fWriteByteOrderMark foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_byteOrderMark(&_fWriteByteOrderMark)
+	return _fWriteByteOrderMark, win32.HRESULTError(int32(_hr))
 }
 
 // Put_indent wraps the raw Put_indent call.
@@ -244,8 +258,10 @@ func (self IMXWriter) Put_indent(fIndentMode foundation.VARIANT_BOOL) error {
 }
 
 // Get_indent wraps the raw Get_indent call.
-func (self IMXWriter) Get_indent(fIndentMode *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_indent(fIndentMode)))
+func (self IMXWriter) Get_indent() (foundation.VARIANT_BOOL, error) {
+	var _fIndentMode foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_indent(&_fIndentMode)
+	return _fIndentMode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_standalone wraps the raw Put_standalone call.
@@ -254,8 +270,10 @@ func (self IMXWriter) Put_standalone(fValue foundation.VARIANT_BOOL) error {
 }
 
 // Get_standalone wraps the raw Get_standalone call.
-func (self IMXWriter) Get_standalone(fValue *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_standalone(fValue)))
+func (self IMXWriter) Get_standalone() (foundation.VARIANT_BOOL, error) {
+	var _fValue foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_standalone(&_fValue)
+	return _fValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_omitXMLDeclaration wraps the raw Put_omitXMLDeclaration call.
@@ -264,8 +282,10 @@ func (self IMXWriter) Put_omitXMLDeclaration(fValue foundation.VARIANT_BOOL) err
 }
 
 // Get_omitXMLDeclaration wraps the raw Get_omitXMLDeclaration call.
-func (self IMXWriter) Get_omitXMLDeclaration(fValue *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_omitXMLDeclaration(fValue)))
+func (self IMXWriter) Get_omitXMLDeclaration() (foundation.VARIANT_BOOL, error) {
+	var _fValue foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_omitXMLDeclaration(&_fValue)
+	return _fValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_version wraps the raw Put_version call.
@@ -274,8 +294,10 @@ func (self IMXWriter) Put_version(strVersion foundation.BSTR) error {
 }
 
 // Get_version wraps the raw Get_version call.
-func (self IMXWriter) Get_version(strVersion *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_version(strVersion)))
+func (self IMXWriter) Get_version() (foundation.BSTR, error) {
+	var _strVersion foundation.BSTR
+	_hr := self.Raw.Get_version(&_strVersion)
+	return _strVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Put_disableOutputEscaping wraps the raw Put_disableOutputEscaping call.
@@ -284,8 +306,10 @@ func (self IMXWriter) Put_disableOutputEscaping(fValue foundation.VARIANT_BOOL) 
 }
 
 // Get_disableOutputEscaping wraps the raw Get_disableOutputEscaping call.
-func (self IMXWriter) Get_disableOutputEscaping(fValue *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_disableOutputEscaping(fValue)))
+func (self IMXWriter) Get_disableOutputEscaping() (foundation.VARIANT_BOOL, error) {
+	var _fValue foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_disableOutputEscaping(&_fValue)
+	return _fValue, win32.HRESULTError(int32(_hr))
 }
 
 // Flush wraps the raw Flush call.
@@ -305,8 +329,10 @@ func WrapIMXXMLFilter(raw *dataxmlmsxml.IMXXMLFilter) IMXXMLFilter {
 }
 
 // GetFeature wraps the raw GetFeature call.
-func (self IMXXMLFilter) GetFeature(strName foundation.BSTR, fValue *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetFeature(strName, fValue)))
+func (self IMXXMLFilter) GetFeature(strName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _fValue foundation.VARIANT_BOOL
+	_hr := self.Raw.GetFeature(strName, &_fValue)
+	return _fValue, win32.HRESULTError(int32(_hr))
 }
 
 // PutFeature wraps the raw PutFeature call.
@@ -315,13 +341,17 @@ func (self IMXXMLFilter) PutFeature(strName foundation.BSTR, fValue foundation.V
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self IMXXMLFilter) GetProperty(strName foundation.BSTR, varValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(strName, varValue)))
+func (self IMXXMLFilter) GetProperty(strName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _varValue systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(strName, &_varValue)
+	return _varValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_entityResolver wraps the raw Get_entityResolver call.
-func (self IMXXMLFilter) Get_entityResolver(oResolver **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_entityResolver(oResolver)))
+func (self IMXXMLFilter) Get_entityResolver() (*systemcom.IUnknown, error) {
+	var _oResolver *systemcom.IUnknown
+	_hr := self.Raw.Get_entityResolver(&_oResolver)
+	return _oResolver, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_entityResolver wraps the raw Putref_entityResolver call.
@@ -330,8 +360,10 @@ func (self IMXXMLFilter) Putref_entityResolver(oResolver *systemcom.IUnknown) er
 }
 
 // Get_contentHandler wraps the raw Get_contentHandler call.
-func (self IMXXMLFilter) Get_contentHandler(oHandler **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_contentHandler(oHandler)))
+func (self IMXXMLFilter) Get_contentHandler() (*systemcom.IUnknown, error) {
+	var _oHandler *systemcom.IUnknown
+	_hr := self.Raw.Get_contentHandler(&_oHandler)
+	return _oHandler, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_contentHandler wraps the raw Putref_contentHandler call.
@@ -340,8 +372,10 @@ func (self IMXXMLFilter) Putref_contentHandler(oHandler *systemcom.IUnknown) err
 }
 
 // Get_dtdHandler wraps the raw Get_dtdHandler call.
-func (self IMXXMLFilter) Get_dtdHandler(oHandler **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_dtdHandler(oHandler)))
+func (self IMXXMLFilter) Get_dtdHandler() (*systemcom.IUnknown, error) {
+	var _oHandler *systemcom.IUnknown
+	_hr := self.Raw.Get_dtdHandler(&_oHandler)
+	return _oHandler, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_dtdHandler wraps the raw Putref_dtdHandler call.
@@ -350,8 +384,10 @@ func (self IMXXMLFilter) Putref_dtdHandler(oHandler *systemcom.IUnknown) error {
 }
 
 // Get_errorHandler wraps the raw Get_errorHandler call.
-func (self IMXXMLFilter) Get_errorHandler(oHandler **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_errorHandler(oHandler)))
+func (self IMXXMLFilter) Get_errorHandler() (*systemcom.IUnknown, error) {
+	var _oHandler *systemcom.IUnknown
+	_hr := self.Raw.Get_errorHandler(&_oHandler)
+	return _oHandler, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_errorHandler wraps the raw Putref_errorHandler call.
@@ -371,8 +407,10 @@ func WrapISAXAttributes(raw *dataxmlmsxml.ISAXAttributes) ISAXAttributes {
 }
 
 // GetLength wraps the raw GetLength call.
-func (self ISAXAttributes) GetLength(pnLength *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetLength(pnLength)))
+func (self ISAXAttributes) GetLength() (int32, error) {
+	var _pnLength int32
+	_hr := self.Raw.GetLength(&_pnLength)
+	return _pnLength, win32.HRESULTError(int32(_hr))
 }
 
 // GetURI wraps the raw GetURI call.
@@ -396,16 +434,20 @@ func (self ISAXAttributes) GetName(nIndex int32, ppwchUri **uint16, pcchUri *int
 }
 
 // GetIndexFromName wraps the raw GetIndexFromName call.
-func (self ISAXAttributes) GetIndexFromName(pwchUri string, cchUri int32, pwchLocalName string, cchLocalName int32, pnIndex *int32) error {
+func (self ISAXAttributes) GetIndexFromName(pwchUri string, cchUri int32, pwchLocalName string, cchLocalName int32) (int32, error) {
 	_pwchUri := win32.UTF16Ptr(pwchUri)
 	_pwchLocalName := win32.UTF16Ptr(pwchLocalName)
-	return win32.HRESULTError(int32(self.Raw.GetIndexFromName(foundation.PWSTR(_pwchUri), cchUri, foundation.PWSTR(_pwchLocalName), cchLocalName, pnIndex)))
+	var _pnIndex int32
+	_hr := self.Raw.GetIndexFromName(foundation.PWSTR(_pwchUri), cchUri, foundation.PWSTR(_pwchLocalName), cchLocalName, &_pnIndex)
+	return _pnIndex, win32.HRESULTError(int32(_hr))
 }
 
 // GetIndexFromQName wraps the raw GetIndexFromQName call.
-func (self ISAXAttributes) GetIndexFromQName(pwchQName string, cchQName int32, pnIndex *int32) error {
+func (self ISAXAttributes) GetIndexFromQName(pwchQName string, cchQName int32) (int32, error) {
 	_pwchQName := win32.UTF16Ptr(pwchQName)
-	return win32.HRESULTError(int32(self.Raw.GetIndexFromQName(foundation.PWSTR(_pwchQName), cchQName, pnIndex)))
+	var _pnIndex int32
+	_hr := self.Raw.GetIndexFromQName(foundation.PWSTR(_pwchQName), cchQName, &_pnIndex)
+	return _pnIndex, win32.HRESULTError(int32(_hr))
 }
 
 // GetType wraps the raw GetType call.
@@ -607,10 +649,12 @@ func WrapISAXEntityResolver(raw *dataxmlmsxml.ISAXEntityResolver) ISAXEntityReso
 }
 
 // ResolveEntity wraps the raw ResolveEntity call.
-func (self ISAXEntityResolver) ResolveEntity(pwchPublicId string, pwchSystemId string, pvarInput *systemvariant.VARIANT) error {
+func (self ISAXEntityResolver) ResolveEntity(pwchPublicId string, pwchSystemId string) (systemvariant.VARIANT, error) {
 	_pwchPublicId := win32.UTF16Ptr(pwchPublicId)
 	_pwchSystemId := win32.UTF16Ptr(pwchSystemId)
-	return win32.HRESULTError(int32(self.Raw.ResolveEntity(foundation.PWSTR(_pwchPublicId), foundation.PWSTR(_pwchSystemId), pvarInput)))
+	var _pvarInput systemvariant.VARIANT
+	_hr := self.Raw.ResolveEntity(foundation.PWSTR(_pwchPublicId), foundation.PWSTR(_pwchSystemId), &_pvarInput)
+	return _pvarInput, win32.HRESULTError(int32(_hr))
 }
 
 // ISAXErrorHandler is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISAXErrorHandler with error-returning methods.
@@ -706,23 +750,31 @@ func WrapISAXLocator(raw *dataxmlmsxml.ISAXLocator) ISAXLocator {
 }
 
 // GetColumnNumber wraps the raw GetColumnNumber call.
-func (self ISAXLocator) GetColumnNumber(pnColumn *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetColumnNumber(pnColumn)))
+func (self ISAXLocator) GetColumnNumber() (int32, error) {
+	var _pnColumn int32
+	_hr := self.Raw.GetColumnNumber(&_pnColumn)
+	return _pnColumn, win32.HRESULTError(int32(_hr))
 }
 
 // GetLineNumber wraps the raw GetLineNumber call.
-func (self ISAXLocator) GetLineNumber(pnLine *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetLineNumber(pnLine)))
+func (self ISAXLocator) GetLineNumber() (int32, error) {
+	var _pnLine int32
+	_hr := self.Raw.GetLineNumber(&_pnLine)
+	return _pnLine, win32.HRESULTError(int32(_hr))
 }
 
 // GetPublicId wraps the raw GetPublicId call.
-func (self ISAXLocator) GetPublicId(ppwchPublicId **uint16) error {
-	return win32.HRESULTError(int32(self.Raw.GetPublicId(ppwchPublicId)))
+func (self ISAXLocator) GetPublicId() (*uint16, error) {
+	var _ppwchPublicId *uint16
+	_hr := self.Raw.GetPublicId(&_ppwchPublicId)
+	return _ppwchPublicId, win32.HRESULTError(int32(_hr))
 }
 
 // GetSystemId wraps the raw GetSystemId call.
-func (self ISAXLocator) GetSystemId(ppwchSystemId **uint16) error {
-	return win32.HRESULTError(int32(self.Raw.GetSystemId(ppwchSystemId)))
+func (self ISAXLocator) GetSystemId() (*uint16, error) {
+	var _ppwchSystemId *uint16
+	_hr := self.Raw.GetSystemId(&_ppwchSystemId)
+	return _ppwchSystemId, win32.HRESULTError(int32(_hr))
 }
 
 // ISAXXMLFilter is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISAXXMLFilter with error-returning methods.
@@ -737,8 +789,10 @@ func WrapISAXXMLFilter(raw *dataxmlmsxml.ISAXXMLFilter) ISAXXMLFilter {
 }
 
 // GetParent wraps the raw GetParent call.
-func (self ISAXXMLFilter) GetParent(ppReader **dataxmlmsxml.ISAXXMLReader) error {
-	return win32.HRESULTError(int32(self.Raw.GetParent(ppReader)))
+func (self ISAXXMLFilter) GetParent() (*dataxmlmsxml.ISAXXMLReader, error) {
+	var _ppReader *dataxmlmsxml.ISAXXMLReader
+	_hr := self.Raw.GetParent(&_ppReader)
+	return _ppReader, win32.HRESULTError(int32(_hr))
 }
 
 // PutParent wraps the raw PutParent call.
@@ -758,9 +812,11 @@ func WrapISAXXMLReader(raw *dataxmlmsxml.ISAXXMLReader) ISAXXMLReader {
 }
 
 // GetFeature wraps the raw GetFeature call.
-func (self ISAXXMLReader) GetFeature(pwchName string, pvfValue *foundation.VARIANT_BOOL) error {
+func (self ISAXXMLReader) GetFeature(pwchName string) (foundation.VARIANT_BOOL, error) {
 	_pwchName := win32.UTF16Ptr(pwchName)
-	return win32.HRESULTError(int32(self.Raw.GetFeature(foundation.PWSTR(_pwchName), pvfValue)))
+	var _pvfValue foundation.VARIANT_BOOL
+	_hr := self.Raw.GetFeature(foundation.PWSTR(_pwchName), &_pvfValue)
+	return _pvfValue, win32.HRESULTError(int32(_hr))
 }
 
 // PutFeature wraps the raw PutFeature call.
@@ -770,14 +826,18 @@ func (self ISAXXMLReader) PutFeature(pwchName string, vfValue foundation.VARIANT
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self ISAXXMLReader) GetProperty(pwchName string, pvarValue *systemvariant.VARIANT) error {
+func (self ISAXXMLReader) GetProperty(pwchName string) (systemvariant.VARIANT, error) {
 	_pwchName := win32.UTF16Ptr(pwchName)
-	return win32.HRESULTError(int32(self.Raw.GetProperty(foundation.PWSTR(_pwchName), pvarValue)))
+	var _pvarValue systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(foundation.PWSTR(_pwchName), &_pvarValue)
+	return _pvarValue, win32.HRESULTError(int32(_hr))
 }
 
 // GetEntityResolver wraps the raw GetEntityResolver call.
-func (self ISAXXMLReader) GetEntityResolver(ppResolver **dataxmlmsxml.ISAXEntityResolver) error {
-	return win32.HRESULTError(int32(self.Raw.GetEntityResolver(ppResolver)))
+func (self ISAXXMLReader) GetEntityResolver() (*dataxmlmsxml.ISAXEntityResolver, error) {
+	var _ppResolver *dataxmlmsxml.ISAXEntityResolver
+	_hr := self.Raw.GetEntityResolver(&_ppResolver)
+	return _ppResolver, win32.HRESULTError(int32(_hr))
 }
 
 // PutEntityResolver wraps the raw PutEntityResolver call.
@@ -786,8 +846,10 @@ func (self ISAXXMLReader) PutEntityResolver(pResolver *dataxmlmsxml.ISAXEntityRe
 }
 
 // GetContentHandler wraps the raw GetContentHandler call.
-func (self ISAXXMLReader) GetContentHandler(ppHandler **dataxmlmsxml.ISAXContentHandler) error {
-	return win32.HRESULTError(int32(self.Raw.GetContentHandler(ppHandler)))
+func (self ISAXXMLReader) GetContentHandler() (*dataxmlmsxml.ISAXContentHandler, error) {
+	var _ppHandler *dataxmlmsxml.ISAXContentHandler
+	_hr := self.Raw.GetContentHandler(&_ppHandler)
+	return _ppHandler, win32.HRESULTError(int32(_hr))
 }
 
 // PutContentHandler wraps the raw PutContentHandler call.
@@ -796,8 +858,10 @@ func (self ISAXXMLReader) PutContentHandler(pHandler *dataxmlmsxml.ISAXContentHa
 }
 
 // GetDTDHandler wraps the raw GetDTDHandler call.
-func (self ISAXXMLReader) GetDTDHandler(ppHandler **dataxmlmsxml.ISAXDTDHandler) error {
-	return win32.HRESULTError(int32(self.Raw.GetDTDHandler(ppHandler)))
+func (self ISAXXMLReader) GetDTDHandler() (*dataxmlmsxml.ISAXDTDHandler, error) {
+	var _ppHandler *dataxmlmsxml.ISAXDTDHandler
+	_hr := self.Raw.GetDTDHandler(&_ppHandler)
+	return _ppHandler, win32.HRESULTError(int32(_hr))
 }
 
 // PutDTDHandler wraps the raw PutDTDHandler call.
@@ -806,8 +870,10 @@ func (self ISAXXMLReader) PutDTDHandler(pHandler *dataxmlmsxml.ISAXDTDHandler) e
 }
 
 // GetErrorHandler wraps the raw GetErrorHandler call.
-func (self ISAXXMLReader) GetErrorHandler(ppHandler **dataxmlmsxml.ISAXErrorHandler) error {
-	return win32.HRESULTError(int32(self.Raw.GetErrorHandler(ppHandler)))
+func (self ISAXXMLReader) GetErrorHandler() (*dataxmlmsxml.ISAXErrorHandler, error) {
+	var _ppHandler *dataxmlmsxml.ISAXErrorHandler
+	_hr := self.Raw.GetErrorHandler(&_ppHandler)
+	return _ppHandler, win32.HRESULTError(int32(_hr))
 }
 
 // PutErrorHandler wraps the raw PutErrorHandler call.
@@ -816,8 +882,10 @@ func (self ISAXXMLReader) PutErrorHandler(pHandler *dataxmlmsxml.ISAXErrorHandle
 }
 
 // GetBaseURL wraps the raw GetBaseURL call.
-func (self ISAXXMLReader) GetBaseURL(ppwchBaseUrl **uint16) error {
-	return win32.HRESULTError(int32(self.Raw.GetBaseURL(ppwchBaseUrl)))
+func (self ISAXXMLReader) GetBaseURL() (*uint16, error) {
+	var _ppwchBaseUrl *uint16
+	_hr := self.Raw.GetBaseURL(&_ppwchBaseUrl)
+	return _ppwchBaseUrl, win32.HRESULTError(int32(_hr))
 }
 
 // PutBaseURL wraps the raw PutBaseURL call.
@@ -827,8 +895,10 @@ func (self ISAXXMLReader) PutBaseURL(pwchBaseUrl string) error {
 }
 
 // GetSecureBaseURL wraps the raw GetSecureBaseURL call.
-func (self ISAXXMLReader) GetSecureBaseURL(ppwchSecureBaseUrl **uint16) error {
-	return win32.HRESULTError(int32(self.Raw.GetSecureBaseURL(ppwchSecureBaseUrl)))
+func (self ISAXXMLReader) GetSecureBaseURL() (*uint16, error) {
+	var _ppwchSecureBaseUrl *uint16
+	_hr := self.Raw.GetSecureBaseURL(&_ppwchSecureBaseUrl)
+	return _ppwchSecureBaseUrl, win32.HRESULTError(int32(_hr))
 }
 
 // PutSecureBaseURL wraps the raw PutSecureBaseURL call.
@@ -855,48 +925,66 @@ func WrapISchema(raw *dataxmlmsxml.ISchema) ISchema {
 }
 
 // Get_targetNamespace wraps the raw Get_targetNamespace call.
-func (self ISchema) Get_targetNamespace(targetNamespace *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_targetNamespace(targetNamespace)))
+func (self ISchema) Get_targetNamespace() (foundation.BSTR, error) {
+	var _targetNamespace foundation.BSTR
+	_hr := self.Raw.Get_targetNamespace(&_targetNamespace)
+	return _targetNamespace, win32.HRESULTError(int32(_hr))
 }
 
 // Get_version wraps the raw Get_version call.
-func (self ISchema) Get_version(version *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_version(version)))
+func (self ISchema) Get_version() (foundation.BSTR, error) {
+	var _version foundation.BSTR
+	_hr := self.Raw.Get_version(&_version)
+	return _version, win32.HRESULTError(int32(_hr))
 }
 
 // Get_types wraps the raw Get_types call.
-func (self ISchema) Get_types(types **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_types(types)))
+func (self ISchema) Get_types() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _types *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_types(&_types)
+	return _types, win32.HRESULTError(int32(_hr))
 }
 
 // Get_elements wraps the raw Get_elements call.
-func (self ISchema) Get_elements(elements **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_elements(elements)))
+func (self ISchema) Get_elements() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _elements *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_elements(&_elements)
+	return _elements, win32.HRESULTError(int32(_hr))
 }
 
 // Get_attributes wraps the raw Get_attributes call.
-func (self ISchema) Get_attributes(attributes **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_attributes(attributes)))
+func (self ISchema) Get_attributes() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _attributes *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_attributes(&_attributes)
+	return _attributes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_attributeGroups wraps the raw Get_attributeGroups call.
-func (self ISchema) Get_attributeGroups(attributeGroups **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_attributeGroups(attributeGroups)))
+func (self ISchema) Get_attributeGroups() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _attributeGroups *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_attributeGroups(&_attributeGroups)
+	return _attributeGroups, win32.HRESULTError(int32(_hr))
 }
 
 // Get_modelGroups wraps the raw Get_modelGroups call.
-func (self ISchema) Get_modelGroups(modelGroups **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_modelGroups(modelGroups)))
+func (self ISchema) Get_modelGroups() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _modelGroups *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_modelGroups(&_modelGroups)
+	return _modelGroups, win32.HRESULTError(int32(_hr))
 }
 
 // Get_notations wraps the raw Get_notations call.
-func (self ISchema) Get_notations(notations **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_notations(notations)))
+func (self ISchema) Get_notations() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _notations *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_notations(&_notations)
+	return _notations, win32.HRESULTError(int32(_hr))
 }
 
 // Get_schemaLocations wraps the raw Get_schemaLocations call.
-func (self ISchema) Get_schemaLocations(schemaLocations **dataxmlmsxml.ISchemaStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_schemaLocations(schemaLocations)))
+func (self ISchema) Get_schemaLocations() (*dataxmlmsxml.ISchemaStringCollection, error) {
+	var _schemaLocations *dataxmlmsxml.ISchemaStringCollection
+	_hr := self.Raw.Get_schemaLocations(&_schemaLocations)
+	return _schemaLocations, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaAny is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaAny with error-returning methods.
@@ -911,13 +999,17 @@ func WrapISchemaAny(raw *dataxmlmsxml.ISchemaAny) ISchemaAny {
 }
 
 // Get_namespaces wraps the raw Get_namespaces call.
-func (self ISchemaAny) Get_namespaces(namespaces **dataxmlmsxml.ISchemaStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_namespaces(namespaces)))
+func (self ISchemaAny) Get_namespaces() (*dataxmlmsxml.ISchemaStringCollection, error) {
+	var _namespaces *dataxmlmsxml.ISchemaStringCollection
+	_hr := self.Raw.Get_namespaces(&_namespaces)
+	return _namespaces, win32.HRESULTError(int32(_hr))
 }
 
 // Get_processContents wraps the raw Get_processContents call.
-func (self ISchemaAny) Get_processContents(processContents *dataxmlmsxml.SCHEMAPROCESSCONTENTS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_processContents(processContents)))
+func (self ISchemaAny) Get_processContents() (dataxmlmsxml.SCHEMAPROCESSCONTENTS, error) {
+	var _processContents dataxmlmsxml.SCHEMAPROCESSCONTENTS
+	_hr := self.Raw.Get_processContents(&_processContents)
+	return _processContents, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaAttribute is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaAttribute with error-returning methods.
@@ -932,33 +1024,45 @@ func WrapISchemaAttribute(raw *dataxmlmsxml.ISchemaAttribute) ISchemaAttribute {
 }
 
 // Get_type wraps the raw Get_type call.
-func (self ISchemaAttribute) Get_type(type_ **dataxmlmsxml.ISchemaType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_type(type_)))
+func (self ISchemaAttribute) Get_type() (*dataxmlmsxml.ISchemaType, error) {
+	var _type_ *dataxmlmsxml.ISchemaType
+	_hr := self.Raw.Get_type(&_type_)
+	return _type_, win32.HRESULTError(int32(_hr))
 }
 
 // Get_scope wraps the raw Get_scope call.
-func (self ISchemaAttribute) Get_scope(scope **dataxmlmsxml.ISchemaComplexType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_scope(scope)))
+func (self ISchemaAttribute) Get_scope() (*dataxmlmsxml.ISchemaComplexType, error) {
+	var _scope *dataxmlmsxml.ISchemaComplexType
+	_hr := self.Raw.Get_scope(&_scope)
+	return _scope, win32.HRESULTError(int32(_hr))
 }
 
 // Get_defaultValue wraps the raw Get_defaultValue call.
-func (self ISchemaAttribute) Get_defaultValue(defaultValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_defaultValue(defaultValue)))
+func (self ISchemaAttribute) Get_defaultValue() (foundation.BSTR, error) {
+	var _defaultValue foundation.BSTR
+	_hr := self.Raw.Get_defaultValue(&_defaultValue)
+	return _defaultValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fixedValue wraps the raw Get_fixedValue call.
-func (self ISchemaAttribute) Get_fixedValue(fixedValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fixedValue(fixedValue)))
+func (self ISchemaAttribute) Get_fixedValue() (foundation.BSTR, error) {
+	var _fixedValue foundation.BSTR
+	_hr := self.Raw.Get_fixedValue(&_fixedValue)
+	return _fixedValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_use wraps the raw Get_use call.
-func (self ISchemaAttribute) Get_use(use *dataxmlmsxml.SCHEMAUSE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_use(use)))
+func (self ISchemaAttribute) Get_use() (dataxmlmsxml.SCHEMAUSE, error) {
+	var _use dataxmlmsxml.SCHEMAUSE
+	_hr := self.Raw.Get_use(&_use)
+	return _use, win32.HRESULTError(int32(_hr))
 }
 
 // Get_isReference wraps the raw Get_isReference call.
-func (self ISchemaAttribute) Get_isReference(reference *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_isReference(reference)))
+func (self ISchemaAttribute) Get_isReference() (foundation.VARIANT_BOOL, error) {
+	var _reference foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_isReference(&_reference)
+	return _reference, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaAttributeGroup is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaAttributeGroup with error-returning methods.
@@ -973,13 +1077,17 @@ func WrapISchemaAttributeGroup(raw *dataxmlmsxml.ISchemaAttributeGroup) ISchemaA
 }
 
 // Get_anyAttribute wraps the raw Get_anyAttribute call.
-func (self ISchemaAttributeGroup) Get_anyAttribute(anyAttribute **dataxmlmsxml.ISchemaAny) error {
-	return win32.HRESULTError(int32(self.Raw.Get_anyAttribute(anyAttribute)))
+func (self ISchemaAttributeGroup) Get_anyAttribute() (*dataxmlmsxml.ISchemaAny, error) {
+	var _anyAttribute *dataxmlmsxml.ISchemaAny
+	_hr := self.Raw.Get_anyAttribute(&_anyAttribute)
+	return _anyAttribute, win32.HRESULTError(int32(_hr))
 }
 
 // Get_attributes wraps the raw Get_attributes call.
-func (self ISchemaAttributeGroup) Get_attributes(attributes **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_attributes(attributes)))
+func (self ISchemaAttributeGroup) Get_attributes() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _attributes *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_attributes(&_attributes)
+	return _attributes, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaComplexType is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaComplexType with error-returning methods.
@@ -994,33 +1102,45 @@ func WrapISchemaComplexType(raw *dataxmlmsxml.ISchemaComplexType) ISchemaComplex
 }
 
 // Get_isAbstract wraps the raw Get_isAbstract call.
-func (self ISchemaComplexType) Get_isAbstract(abstract *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_isAbstract(abstract)))
+func (self ISchemaComplexType) Get_isAbstract() (foundation.VARIANT_BOOL, error) {
+	var _abstract foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_isAbstract(&_abstract)
+	return _abstract, win32.HRESULTError(int32(_hr))
 }
 
 // Get_anyAttribute wraps the raw Get_anyAttribute call.
-func (self ISchemaComplexType) Get_anyAttribute(anyAttribute **dataxmlmsxml.ISchemaAny) error {
-	return win32.HRESULTError(int32(self.Raw.Get_anyAttribute(anyAttribute)))
+func (self ISchemaComplexType) Get_anyAttribute() (*dataxmlmsxml.ISchemaAny, error) {
+	var _anyAttribute *dataxmlmsxml.ISchemaAny
+	_hr := self.Raw.Get_anyAttribute(&_anyAttribute)
+	return _anyAttribute, win32.HRESULTError(int32(_hr))
 }
 
 // Get_attributes wraps the raw Get_attributes call.
-func (self ISchemaComplexType) Get_attributes(attributes **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_attributes(attributes)))
+func (self ISchemaComplexType) Get_attributes() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _attributes *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_attributes(&_attributes)
+	return _attributes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_contentType wraps the raw Get_contentType call.
-func (self ISchemaComplexType) Get_contentType(contentType *dataxmlmsxml.SCHEMACONTENTTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_contentType(contentType)))
+func (self ISchemaComplexType) Get_contentType() (dataxmlmsxml.SCHEMACONTENTTYPE, error) {
+	var _contentType dataxmlmsxml.SCHEMACONTENTTYPE
+	_hr := self.Raw.Get_contentType(&_contentType)
+	return _contentType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_contentModel wraps the raw Get_contentModel call.
-func (self ISchemaComplexType) Get_contentModel(contentModel **dataxmlmsxml.ISchemaModelGroup) error {
-	return win32.HRESULTError(int32(self.Raw.Get_contentModel(contentModel)))
+func (self ISchemaComplexType) Get_contentModel() (*dataxmlmsxml.ISchemaModelGroup, error) {
+	var _contentModel *dataxmlmsxml.ISchemaModelGroup
+	_hr := self.Raw.Get_contentModel(&_contentModel)
+	return _contentModel, win32.HRESULTError(int32(_hr))
 }
 
 // Get_prohibitedSubstitutions wraps the raw Get_prohibitedSubstitutions call.
-func (self ISchemaComplexType) Get_prohibitedSubstitutions(prohibited *dataxmlmsxml.SCHEMADERIVATIONMETHOD) error {
-	return win32.HRESULTError(int32(self.Raw.Get_prohibitedSubstitutions(prohibited)))
+func (self ISchemaComplexType) Get_prohibitedSubstitutions() (dataxmlmsxml.SCHEMADERIVATIONMETHOD, error) {
+	var _prohibited dataxmlmsxml.SCHEMADERIVATIONMETHOD
+	_hr := self.Raw.Get_prohibitedSubstitutions(&_prohibited)
+	return _prohibited, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaElement is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaElement with error-returning methods.
@@ -1035,58 +1155,80 @@ func WrapISchemaElement(raw *dataxmlmsxml.ISchemaElement) ISchemaElement {
 }
 
 // Get_type wraps the raw Get_type call.
-func (self ISchemaElement) Get_type(type_ **dataxmlmsxml.ISchemaType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_type(type_)))
+func (self ISchemaElement) Get_type() (*dataxmlmsxml.ISchemaType, error) {
+	var _type_ *dataxmlmsxml.ISchemaType
+	_hr := self.Raw.Get_type(&_type_)
+	return _type_, win32.HRESULTError(int32(_hr))
 }
 
 // Get_scope wraps the raw Get_scope call.
-func (self ISchemaElement) Get_scope(scope **dataxmlmsxml.ISchemaComplexType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_scope(scope)))
+func (self ISchemaElement) Get_scope() (*dataxmlmsxml.ISchemaComplexType, error) {
+	var _scope *dataxmlmsxml.ISchemaComplexType
+	_hr := self.Raw.Get_scope(&_scope)
+	return _scope, win32.HRESULTError(int32(_hr))
 }
 
 // Get_defaultValue wraps the raw Get_defaultValue call.
-func (self ISchemaElement) Get_defaultValue(defaultValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_defaultValue(defaultValue)))
+func (self ISchemaElement) Get_defaultValue() (foundation.BSTR, error) {
+	var _defaultValue foundation.BSTR
+	_hr := self.Raw.Get_defaultValue(&_defaultValue)
+	return _defaultValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fixedValue wraps the raw Get_fixedValue call.
-func (self ISchemaElement) Get_fixedValue(fixedValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fixedValue(fixedValue)))
+func (self ISchemaElement) Get_fixedValue() (foundation.BSTR, error) {
+	var _fixedValue foundation.BSTR
+	_hr := self.Raw.Get_fixedValue(&_fixedValue)
+	return _fixedValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_isNillable wraps the raw Get_isNillable call.
-func (self ISchemaElement) Get_isNillable(nillable *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_isNillable(nillable)))
+func (self ISchemaElement) Get_isNillable() (foundation.VARIANT_BOOL, error) {
+	var _nillable foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_isNillable(&_nillable)
+	return _nillable, win32.HRESULTError(int32(_hr))
 }
 
 // Get_identityConstraints wraps the raw Get_identityConstraints call.
-func (self ISchemaElement) Get_identityConstraints(constraints **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_identityConstraints(constraints)))
+func (self ISchemaElement) Get_identityConstraints() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _constraints *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_identityConstraints(&_constraints)
+	return _constraints, win32.HRESULTError(int32(_hr))
 }
 
 // Get_substitutionGroup wraps the raw Get_substitutionGroup call.
-func (self ISchemaElement) Get_substitutionGroup(element **dataxmlmsxml.ISchemaElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_substitutionGroup(element)))
+func (self ISchemaElement) Get_substitutionGroup() (*dataxmlmsxml.ISchemaElement, error) {
+	var _element *dataxmlmsxml.ISchemaElement
+	_hr := self.Raw.Get_substitutionGroup(&_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // Get_substitutionGroupExclusions wraps the raw Get_substitutionGroupExclusions call.
-func (self ISchemaElement) Get_substitutionGroupExclusions(exclusions *dataxmlmsxml.SCHEMADERIVATIONMETHOD) error {
-	return win32.HRESULTError(int32(self.Raw.Get_substitutionGroupExclusions(exclusions)))
+func (self ISchemaElement) Get_substitutionGroupExclusions() (dataxmlmsxml.SCHEMADERIVATIONMETHOD, error) {
+	var _exclusions dataxmlmsxml.SCHEMADERIVATIONMETHOD
+	_hr := self.Raw.Get_substitutionGroupExclusions(&_exclusions)
+	return _exclusions, win32.HRESULTError(int32(_hr))
 }
 
 // Get_disallowedSubstitutions wraps the raw Get_disallowedSubstitutions call.
-func (self ISchemaElement) Get_disallowedSubstitutions(disallowed *dataxmlmsxml.SCHEMADERIVATIONMETHOD) error {
-	return win32.HRESULTError(int32(self.Raw.Get_disallowedSubstitutions(disallowed)))
+func (self ISchemaElement) Get_disallowedSubstitutions() (dataxmlmsxml.SCHEMADERIVATIONMETHOD, error) {
+	var _disallowed dataxmlmsxml.SCHEMADERIVATIONMETHOD
+	_hr := self.Raw.Get_disallowedSubstitutions(&_disallowed)
+	return _disallowed, win32.HRESULTError(int32(_hr))
 }
 
 // Get_isAbstract wraps the raw Get_isAbstract call.
-func (self ISchemaElement) Get_isAbstract(abstract *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_isAbstract(abstract)))
+func (self ISchemaElement) Get_isAbstract() (foundation.VARIANT_BOOL, error) {
+	var _abstract foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_isAbstract(&_abstract)
+	return _abstract, win32.HRESULTError(int32(_hr))
 }
 
 // Get_isReference wraps the raw Get_isReference call.
-func (self ISchemaElement) Get_isReference(reference *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_isReference(reference)))
+func (self ISchemaElement) Get_isReference() (foundation.VARIANT_BOOL, error) {
+	var _reference foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_isReference(&_reference)
+	return _reference, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaIdentityConstraint is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaIdentityConstraint with error-returning methods.
@@ -1101,18 +1243,24 @@ func WrapISchemaIdentityConstraint(raw *dataxmlmsxml.ISchemaIdentityConstraint) 
 }
 
 // Get_selector wraps the raw Get_selector call.
-func (self ISchemaIdentityConstraint) Get_selector(selector *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_selector(selector)))
+func (self ISchemaIdentityConstraint) Get_selector() (foundation.BSTR, error) {
+	var _selector foundation.BSTR
+	_hr := self.Raw.Get_selector(&_selector)
+	return _selector, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fields wraps the raw Get_fields call.
-func (self ISchemaIdentityConstraint) Get_fields(fields **dataxmlmsxml.ISchemaStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fields(fields)))
+func (self ISchemaIdentityConstraint) Get_fields() (*dataxmlmsxml.ISchemaStringCollection, error) {
+	var _fields *dataxmlmsxml.ISchemaStringCollection
+	_hr := self.Raw.Get_fields(&_fields)
+	return _fields, win32.HRESULTError(int32(_hr))
 }
 
 // Get_referencedKey wraps the raw Get_referencedKey call.
-func (self ISchemaIdentityConstraint) Get_referencedKey(key **dataxmlmsxml.ISchemaIdentityConstraint) error {
-	return win32.HRESULTError(int32(self.Raw.Get_referencedKey(key)))
+func (self ISchemaIdentityConstraint) Get_referencedKey() (*dataxmlmsxml.ISchemaIdentityConstraint, error) {
+	var _key *dataxmlmsxml.ISchemaIdentityConstraint
+	_hr := self.Raw.Get_referencedKey(&_key)
+	return _key, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaItem is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaItem with error-returning methods.
@@ -1127,38 +1275,52 @@ func WrapISchemaItem(raw *dataxmlmsxml.ISchemaItem) ISchemaItem {
 }
 
 // Get_name wraps the raw Get_name call.
-func (self ISchemaItem) Get_name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_name(name)))
+func (self ISchemaItem) Get_name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_namespaceURI wraps the raw Get_namespaceURI call.
-func (self ISchemaItem) Get_namespaceURI(namespaceURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_namespaceURI(namespaceURI)))
+func (self ISchemaItem) Get_namespaceURI() (foundation.BSTR, error) {
+	var _namespaceURI foundation.BSTR
+	_hr := self.Raw.Get_namespaceURI(&_namespaceURI)
+	return _namespaceURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_schema wraps the raw Get_schema call.
-func (self ISchemaItem) Get_schema(schema **dataxmlmsxml.ISchema) error {
-	return win32.HRESULTError(int32(self.Raw.Get_schema(schema)))
+func (self ISchemaItem) Get_schema() (*dataxmlmsxml.ISchema, error) {
+	var _schema *dataxmlmsxml.ISchema
+	_hr := self.Raw.Get_schema(&_schema)
+	return _schema, win32.HRESULTError(int32(_hr))
 }
 
 // Get_id wraps the raw Get_id call.
-func (self ISchemaItem) Get_id(id *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_id(id)))
+func (self ISchemaItem) Get_id() (foundation.BSTR, error) {
+	var _id foundation.BSTR
+	_hr := self.Raw.Get_id(&_id)
+	return _id, win32.HRESULTError(int32(_hr))
 }
 
 // Get_itemType wraps the raw Get_itemType call.
-func (self ISchemaItem) Get_itemType(itemType *dataxmlmsxml.SOMITEMTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_itemType(itemType)))
+func (self ISchemaItem) Get_itemType() (dataxmlmsxml.SOMITEMTYPE, error) {
+	var _itemType dataxmlmsxml.SOMITEMTYPE
+	_hr := self.Raw.Get_itemType(&_itemType)
+	return _itemType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_unhandledAttributes wraps the raw Get_unhandledAttributes call.
-func (self ISchemaItem) Get_unhandledAttributes(attributes **dataxmlmsxml.IVBSAXAttributes) error {
-	return win32.HRESULTError(int32(self.Raw.Get_unhandledAttributes(attributes)))
+func (self ISchemaItem) Get_unhandledAttributes() (*dataxmlmsxml.IVBSAXAttributes, error) {
+	var _attributes *dataxmlmsxml.IVBSAXAttributes
+	_hr := self.Raw.Get_unhandledAttributes(&_attributes)
+	return _attributes, win32.HRESULTError(int32(_hr))
 }
 
 // WriteAnnotation wraps the raw WriteAnnotation call.
-func (self ISchemaItem) WriteAnnotation(annotationSink *systemcom.IUnknown, isWritten *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.WriteAnnotation(annotationSink, isWritten)))
+func (self ISchemaItem) WriteAnnotation(annotationSink *systemcom.IUnknown) (foundation.VARIANT_BOOL, error) {
+	var _isWritten foundation.VARIANT_BOOL
+	_hr := self.Raw.WriteAnnotation(annotationSink, &_isWritten)
+	return _isWritten, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaItemCollection is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaItemCollection with error-returning methods.
@@ -1173,28 +1335,38 @@ func WrapISchemaItemCollection(raw *dataxmlmsxml.ISchemaItemCollection) ISchemaI
 }
 
 // Get_item wraps the raw Get_item call.
-func (self ISchemaItemCollection) Get_item(index int32, item **dataxmlmsxml.ISchemaItem) error {
-	return win32.HRESULTError(int32(self.Raw.Get_item(index, item)))
+func (self ISchemaItemCollection) Get_item(index int32) (*dataxmlmsxml.ISchemaItem, error) {
+	var _item *dataxmlmsxml.ISchemaItem
+	_hr := self.Raw.Get_item(index, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // ItemByName wraps the raw ItemByName call.
-func (self ISchemaItemCollection) ItemByName(name foundation.BSTR, item **dataxmlmsxml.ISchemaItem) error {
-	return win32.HRESULTError(int32(self.Raw.ItemByName(name, item)))
+func (self ISchemaItemCollection) ItemByName(name foundation.BSTR) (*dataxmlmsxml.ISchemaItem, error) {
+	var _item *dataxmlmsxml.ISchemaItem
+	_hr := self.Raw.ItemByName(name, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // ItemByQName wraps the raw ItemByQName call.
-func (self ISchemaItemCollection) ItemByQName(name foundation.BSTR, namespaceURI foundation.BSTR, item **dataxmlmsxml.ISchemaItem) error {
-	return win32.HRESULTError(int32(self.Raw.ItemByQName(name, namespaceURI, item)))
+func (self ISchemaItemCollection) ItemByQName(name foundation.BSTR, namespaceURI foundation.BSTR) (*dataxmlmsxml.ISchemaItem, error) {
+	var _item *dataxmlmsxml.ISchemaItem
+	_hr := self.Raw.ItemByQName(name, namespaceURI, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
-func (self ISchemaItemCollection) Get_length(length *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(length)))
+func (self ISchemaItemCollection) Get_length() (int32, error) {
+	var _length int32
+	_hr := self.Raw.Get_length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self ISchemaItemCollection) Get__newEnum(ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__newEnum(ppunk)))
+func (self ISchemaItemCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.Get__newEnum(&_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaModelGroup is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaModelGroup with error-returning methods.
@@ -1209,8 +1381,10 @@ func WrapISchemaModelGroup(raw *dataxmlmsxml.ISchemaModelGroup) ISchemaModelGrou
 }
 
 // Get_particles wraps the raw Get_particles call.
-func (self ISchemaModelGroup) Get_particles(particles **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_particles(particles)))
+func (self ISchemaModelGroup) Get_particles() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _particles *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_particles(&_particles)
+	return _particles, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaNotation is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaNotation with error-returning methods.
@@ -1225,13 +1399,17 @@ func WrapISchemaNotation(raw *dataxmlmsxml.ISchemaNotation) ISchemaNotation {
 }
 
 // Get_systemIdentifier wraps the raw Get_systemIdentifier call.
-func (self ISchemaNotation) Get_systemIdentifier(uri *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_systemIdentifier(uri)))
+func (self ISchemaNotation) Get_systemIdentifier() (foundation.BSTR, error) {
+	var _uri foundation.BSTR
+	_hr := self.Raw.Get_systemIdentifier(&_uri)
+	return _uri, win32.HRESULTError(int32(_hr))
 }
 
 // Get_publicIdentifier wraps the raw Get_publicIdentifier call.
-func (self ISchemaNotation) Get_publicIdentifier(uri *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_publicIdentifier(uri)))
+func (self ISchemaNotation) Get_publicIdentifier() (foundation.BSTR, error) {
+	var _uri foundation.BSTR
+	_hr := self.Raw.Get_publicIdentifier(&_uri)
+	return _uri, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaParticle is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaParticle with error-returning methods.
@@ -1246,13 +1424,17 @@ func WrapISchemaParticle(raw *dataxmlmsxml.ISchemaParticle) ISchemaParticle {
 }
 
 // Get_minOccurs wraps the raw Get_minOccurs call.
-func (self ISchemaParticle) Get_minOccurs(minOccurs *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_minOccurs(minOccurs)))
+func (self ISchemaParticle) Get_minOccurs() (systemvariant.VARIANT, error) {
+	var _minOccurs systemvariant.VARIANT
+	_hr := self.Raw.Get_minOccurs(&_minOccurs)
+	return _minOccurs, win32.HRESULTError(int32(_hr))
 }
 
 // Get_maxOccurs wraps the raw Get_maxOccurs call.
-func (self ISchemaParticle) Get_maxOccurs(maxOccurs *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_maxOccurs(maxOccurs)))
+func (self ISchemaParticle) Get_maxOccurs() (systemvariant.VARIANT, error) {
+	var _maxOccurs systemvariant.VARIANT
+	_hr := self.Raw.Get_maxOccurs(&_maxOccurs)
+	return _maxOccurs, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaStringCollection is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaStringCollection with error-returning methods.
@@ -1267,18 +1449,24 @@ func WrapISchemaStringCollection(raw *dataxmlmsxml.ISchemaStringCollection) ISch
 }
 
 // Get_item wraps the raw Get_item call.
-func (self ISchemaStringCollection) Get_item(index int32, bstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_item(index, bstr)))
+func (self ISchemaStringCollection) Get_item(index int32) (foundation.BSTR, error) {
+	var _bstr foundation.BSTR
+	_hr := self.Raw.Get_item(index, &_bstr)
+	return _bstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
-func (self ISchemaStringCollection) Get_length(length *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(length)))
+func (self ISchemaStringCollection) Get_length() (int32, error) {
+	var _length int32
+	_hr := self.Raw.Get_length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self ISchemaStringCollection) Get__newEnum(ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__newEnum(ppunk)))
+func (self ISchemaStringCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.Get__newEnum(&_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaType is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.ISchemaType with error-returning methods.
@@ -1293,88 +1481,122 @@ func WrapISchemaType(raw *dataxmlmsxml.ISchemaType) ISchemaType {
 }
 
 // Get_baseTypes wraps the raw Get_baseTypes call.
-func (self ISchemaType) Get_baseTypes(baseTypes **dataxmlmsxml.ISchemaItemCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_baseTypes(baseTypes)))
+func (self ISchemaType) Get_baseTypes() (*dataxmlmsxml.ISchemaItemCollection, error) {
+	var _baseTypes *dataxmlmsxml.ISchemaItemCollection
+	_hr := self.Raw.Get_baseTypes(&_baseTypes)
+	return _baseTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_final wraps the raw Get_final call.
-func (self ISchemaType) Get_final(final *dataxmlmsxml.SCHEMADERIVATIONMETHOD) error {
-	return win32.HRESULTError(int32(self.Raw.Get_final(final)))
+func (self ISchemaType) Get_final() (dataxmlmsxml.SCHEMADERIVATIONMETHOD, error) {
+	var _final dataxmlmsxml.SCHEMADERIVATIONMETHOD
+	_hr := self.Raw.Get_final(&_final)
+	return _final, win32.HRESULTError(int32(_hr))
 }
 
 // Get_variety wraps the raw Get_variety call.
-func (self ISchemaType) Get_variety(variety *dataxmlmsxml.SCHEMATYPEVARIETY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_variety(variety)))
+func (self ISchemaType) Get_variety() (dataxmlmsxml.SCHEMATYPEVARIETY, error) {
+	var _variety dataxmlmsxml.SCHEMATYPEVARIETY
+	_hr := self.Raw.Get_variety(&_variety)
+	return _variety, win32.HRESULTError(int32(_hr))
 }
 
 // Get_derivedBy wraps the raw Get_derivedBy call.
-func (self ISchemaType) Get_derivedBy(derivedBy *dataxmlmsxml.SCHEMADERIVATIONMETHOD) error {
-	return win32.HRESULTError(int32(self.Raw.Get_derivedBy(derivedBy)))
+func (self ISchemaType) Get_derivedBy() (dataxmlmsxml.SCHEMADERIVATIONMETHOD, error) {
+	var _derivedBy dataxmlmsxml.SCHEMADERIVATIONMETHOD
+	_hr := self.Raw.Get_derivedBy(&_derivedBy)
+	return _derivedBy, win32.HRESULTError(int32(_hr))
 }
 
 // IsValid wraps the raw IsValid call.
-func (self ISchemaType) IsValid(data foundation.BSTR, valid *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsValid(data, valid)))
+func (self ISchemaType) IsValid(data foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _valid foundation.VARIANT_BOOL
+	_hr := self.Raw.IsValid(data, &_valid)
+	return _valid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_minExclusive wraps the raw Get_minExclusive call.
-func (self ISchemaType) Get_minExclusive(minExclusive *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_minExclusive(minExclusive)))
+func (self ISchemaType) Get_minExclusive() (foundation.BSTR, error) {
+	var _minExclusive foundation.BSTR
+	_hr := self.Raw.Get_minExclusive(&_minExclusive)
+	return _minExclusive, win32.HRESULTError(int32(_hr))
 }
 
 // Get_minInclusive wraps the raw Get_minInclusive call.
-func (self ISchemaType) Get_minInclusive(minInclusive *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_minInclusive(minInclusive)))
+func (self ISchemaType) Get_minInclusive() (foundation.BSTR, error) {
+	var _minInclusive foundation.BSTR
+	_hr := self.Raw.Get_minInclusive(&_minInclusive)
+	return _minInclusive, win32.HRESULTError(int32(_hr))
 }
 
 // Get_maxExclusive wraps the raw Get_maxExclusive call.
-func (self ISchemaType) Get_maxExclusive(maxExclusive *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_maxExclusive(maxExclusive)))
+func (self ISchemaType) Get_maxExclusive() (foundation.BSTR, error) {
+	var _maxExclusive foundation.BSTR
+	_hr := self.Raw.Get_maxExclusive(&_maxExclusive)
+	return _maxExclusive, win32.HRESULTError(int32(_hr))
 }
 
 // Get_maxInclusive wraps the raw Get_maxInclusive call.
-func (self ISchemaType) Get_maxInclusive(maxInclusive *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_maxInclusive(maxInclusive)))
+func (self ISchemaType) Get_maxInclusive() (foundation.BSTR, error) {
+	var _maxInclusive foundation.BSTR
+	_hr := self.Raw.Get_maxInclusive(&_maxInclusive)
+	return _maxInclusive, win32.HRESULTError(int32(_hr))
 }
 
 // Get_totalDigits wraps the raw Get_totalDigits call.
-func (self ISchemaType) Get_totalDigits(totalDigits *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_totalDigits(totalDigits)))
+func (self ISchemaType) Get_totalDigits() (systemvariant.VARIANT, error) {
+	var _totalDigits systemvariant.VARIANT
+	_hr := self.Raw.Get_totalDigits(&_totalDigits)
+	return _totalDigits, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fractionDigits wraps the raw Get_fractionDigits call.
-func (self ISchemaType) Get_fractionDigits(fractionDigits *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fractionDigits(fractionDigits)))
+func (self ISchemaType) Get_fractionDigits() (systemvariant.VARIANT, error) {
+	var _fractionDigits systemvariant.VARIANT
+	_hr := self.Raw.Get_fractionDigits(&_fractionDigits)
+	return _fractionDigits, win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
-func (self ISchemaType) Get_length(length *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(length)))
+func (self ISchemaType) Get_length() (systemvariant.VARIANT, error) {
+	var _length systemvariant.VARIANT
+	_hr := self.Raw.Get_length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // Get_minLength wraps the raw Get_minLength call.
-func (self ISchemaType) Get_minLength(minLength *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_minLength(minLength)))
+func (self ISchemaType) Get_minLength() (systemvariant.VARIANT, error) {
+	var _minLength systemvariant.VARIANT
+	_hr := self.Raw.Get_minLength(&_minLength)
+	return _minLength, win32.HRESULTError(int32(_hr))
 }
 
 // Get_maxLength wraps the raw Get_maxLength call.
-func (self ISchemaType) Get_maxLength(maxLength *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_maxLength(maxLength)))
+func (self ISchemaType) Get_maxLength() (systemvariant.VARIANT, error) {
+	var _maxLength systemvariant.VARIANT
+	_hr := self.Raw.Get_maxLength(&_maxLength)
+	return _maxLength, win32.HRESULTError(int32(_hr))
 }
 
 // Get_enumeration wraps the raw Get_enumeration call.
-func (self ISchemaType) Get_enumeration(enumeration **dataxmlmsxml.ISchemaStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_enumeration(enumeration)))
+func (self ISchemaType) Get_enumeration() (*dataxmlmsxml.ISchemaStringCollection, error) {
+	var _enumeration *dataxmlmsxml.ISchemaStringCollection
+	_hr := self.Raw.Get_enumeration(&_enumeration)
+	return _enumeration, win32.HRESULTError(int32(_hr))
 }
 
 // Get_whitespace wraps the raw Get_whitespace call.
-func (self ISchemaType) Get_whitespace(whitespace *dataxmlmsxml.SCHEMAWHITESPACE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_whitespace(whitespace)))
+func (self ISchemaType) Get_whitespace() (dataxmlmsxml.SCHEMAWHITESPACE, error) {
+	var _whitespace dataxmlmsxml.SCHEMAWHITESPACE
+	_hr := self.Raw.Get_whitespace(&_whitespace)
+	return _whitespace, win32.HRESULTError(int32(_hr))
 }
 
 // Get_patterns wraps the raw Get_patterns call.
-func (self ISchemaType) Get_patterns(patterns **dataxmlmsxml.ISchemaStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_patterns(patterns)))
+func (self ISchemaType) Get_patterns() (*dataxmlmsxml.ISchemaStringCollection, error) {
+	var _patterns *dataxmlmsxml.ISchemaStringCollection
+	_hr := self.Raw.Get_patterns(&_patterns)
+	return _patterns, win32.HRESULTError(int32(_hr))
 }
 
 // IServerXMLHTTPRequest is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IServerXMLHTTPRequest with error-returning methods.
@@ -1394,8 +1616,10 @@ func (self IServerXMLHTTPRequest) SetTimeouts(resolveTimeout int32, connectTimeo
 }
 
 // GetOption wraps the raw GetOption call.
-func (self IServerXMLHTTPRequest) GetOption(option dataxmlmsxml.SERVERXMLHTTP_OPTION, value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetOption(option, value)))
+func (self IServerXMLHTTPRequest) GetOption(option dataxmlmsxml.SERVERXMLHTTP_OPTION) (systemvariant.VARIANT, error) {
+	var _value systemvariant.VARIANT
+	_hr := self.Raw.GetOption(option, &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IServerXMLHTTPRequest2 is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IServerXMLHTTPRequest2 with error-returning methods.
@@ -1431,8 +1655,10 @@ func (self IVBMXNamespaceManager) Put_allowOverride(fOverride foundation.VARIANT
 }
 
 // Get_allowOverride wraps the raw Get_allowOverride call.
-func (self IVBMXNamespaceManager) Get_allowOverride(fOverride *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_allowOverride(fOverride)))
+func (self IVBMXNamespaceManager) Get_allowOverride() (foundation.VARIANT_BOOL, error) {
+	var _fOverride foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_allowOverride(&_fOverride)
+	return _fOverride, win32.HRESULTError(int32(_hr))
 }
 
 // Reset wraps the raw Reset call.
@@ -1461,23 +1687,31 @@ func (self IVBMXNamespaceManager) DeclarePrefix(prefix foundation.BSTR, namespac
 }
 
 // GetDeclaredPrefixes wraps the raw GetDeclaredPrefixes call.
-func (self IVBMXNamespaceManager) GetDeclaredPrefixes(prefixes **dataxmlmsxml.IMXNamespacePrefixes) error {
-	return win32.HRESULTError(int32(self.Raw.GetDeclaredPrefixes(prefixes)))
+func (self IVBMXNamespaceManager) GetDeclaredPrefixes() (*dataxmlmsxml.IMXNamespacePrefixes, error) {
+	var _prefixes *dataxmlmsxml.IMXNamespacePrefixes
+	_hr := self.Raw.GetDeclaredPrefixes(&_prefixes)
+	return _prefixes, win32.HRESULTError(int32(_hr))
 }
 
 // GetPrefixes wraps the raw GetPrefixes call.
-func (self IVBMXNamespaceManager) GetPrefixes(namespaceURI foundation.BSTR, prefixes **dataxmlmsxml.IMXNamespacePrefixes) error {
-	return win32.HRESULTError(int32(self.Raw.GetPrefixes(namespaceURI, prefixes)))
+func (self IVBMXNamespaceManager) GetPrefixes(namespaceURI foundation.BSTR) (*dataxmlmsxml.IMXNamespacePrefixes, error) {
+	var _prefixes *dataxmlmsxml.IMXNamespacePrefixes
+	_hr := self.Raw.GetPrefixes(namespaceURI, &_prefixes)
+	return _prefixes, win32.HRESULTError(int32(_hr))
 }
 
 // GetURI wraps the raw GetURI call.
-func (self IVBMXNamespaceManager) GetURI(prefix foundation.BSTR, uri *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetURI(prefix, uri)))
+func (self IVBMXNamespaceManager) GetURI(prefix foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _uri systemvariant.VARIANT
+	_hr := self.Raw.GetURI(prefix, &_uri)
+	return _uri, win32.HRESULTError(int32(_hr))
 }
 
 // GetURIFromNode wraps the raw GetURIFromNode call.
-func (self IVBMXNamespaceManager) GetURIFromNode(strPrefix foundation.BSTR, contextNode *dataxmlmsxml.IXMLDOMNode, uri *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetURIFromNode(strPrefix, contextNode, uri)))
+func (self IVBMXNamespaceManager) GetURIFromNode(strPrefix foundation.BSTR, contextNode *dataxmlmsxml.IXMLDOMNode) (systemvariant.VARIANT, error) {
+	var _uri systemvariant.VARIANT
+	_hr := self.Raw.GetURIFromNode(strPrefix, contextNode, &_uri)
+	return _uri, win32.HRESULTError(int32(_hr))
 }
 
 // IVBSAXAttributes is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IVBSAXAttributes with error-returning methods.
@@ -1492,63 +1726,87 @@ func WrapIVBSAXAttributes(raw *dataxmlmsxml.IVBSAXAttributes) IVBSAXAttributes {
 }
 
 // Get_length wraps the raw Get_length call.
-func (self IVBSAXAttributes) Get_length(nLength *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(nLength)))
+func (self IVBSAXAttributes) Get_length() (int32, error) {
+	var _nLength int32
+	_hr := self.Raw.Get_length(&_nLength)
+	return _nLength, win32.HRESULTError(int32(_hr))
 }
 
 // GetURI wraps the raw GetURI call.
-func (self IVBSAXAttributes) GetURI(nIndex int32, strURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetURI(nIndex, strURI)))
+func (self IVBSAXAttributes) GetURI(nIndex int32) (foundation.BSTR, error) {
+	var _strURI foundation.BSTR
+	_hr := self.Raw.GetURI(nIndex, &_strURI)
+	return _strURI, win32.HRESULTError(int32(_hr))
 }
 
 // GetLocalName wraps the raw GetLocalName call.
-func (self IVBSAXAttributes) GetLocalName(nIndex int32, strLocalName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetLocalName(nIndex, strLocalName)))
+func (self IVBSAXAttributes) GetLocalName(nIndex int32) (foundation.BSTR, error) {
+	var _strLocalName foundation.BSTR
+	_hr := self.Raw.GetLocalName(nIndex, &_strLocalName)
+	return _strLocalName, win32.HRESULTError(int32(_hr))
 }
 
 // GetQName wraps the raw GetQName call.
-func (self IVBSAXAttributes) GetQName(nIndex int32, strQName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetQName(nIndex, strQName)))
+func (self IVBSAXAttributes) GetQName(nIndex int32) (foundation.BSTR, error) {
+	var _strQName foundation.BSTR
+	_hr := self.Raw.GetQName(nIndex, &_strQName)
+	return _strQName, win32.HRESULTError(int32(_hr))
 }
 
 // GetIndexFromName wraps the raw GetIndexFromName call.
-func (self IVBSAXAttributes) GetIndexFromName(strURI foundation.BSTR, strLocalName foundation.BSTR, nIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetIndexFromName(strURI, strLocalName, nIndex)))
+func (self IVBSAXAttributes) GetIndexFromName(strURI foundation.BSTR, strLocalName foundation.BSTR) (int32, error) {
+	var _nIndex int32
+	_hr := self.Raw.GetIndexFromName(strURI, strLocalName, &_nIndex)
+	return _nIndex, win32.HRESULTError(int32(_hr))
 }
 
 // GetIndexFromQName wraps the raw GetIndexFromQName call.
-func (self IVBSAXAttributes) GetIndexFromQName(strQName foundation.BSTR, nIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetIndexFromQName(strQName, nIndex)))
+func (self IVBSAXAttributes) GetIndexFromQName(strQName foundation.BSTR) (int32, error) {
+	var _nIndex int32
+	_hr := self.Raw.GetIndexFromQName(strQName, &_nIndex)
+	return _nIndex, win32.HRESULTError(int32(_hr))
 }
 
 // GetType wraps the raw GetType call.
-func (self IVBSAXAttributes) GetType(nIndex int32, strType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetType(nIndex, strType)))
+func (self IVBSAXAttributes) GetType(nIndex int32) (foundation.BSTR, error) {
+	var _strType foundation.BSTR
+	_hr := self.Raw.GetType(nIndex, &_strType)
+	return _strType, win32.HRESULTError(int32(_hr))
 }
 
 // GetTypeFromName wraps the raw GetTypeFromName call.
-func (self IVBSAXAttributes) GetTypeFromName(strURI foundation.BSTR, strLocalName foundation.BSTR, strType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetTypeFromName(strURI, strLocalName, strType)))
+func (self IVBSAXAttributes) GetTypeFromName(strURI foundation.BSTR, strLocalName foundation.BSTR) (foundation.BSTR, error) {
+	var _strType foundation.BSTR
+	_hr := self.Raw.GetTypeFromName(strURI, strLocalName, &_strType)
+	return _strType, win32.HRESULTError(int32(_hr))
 }
 
 // GetTypeFromQName wraps the raw GetTypeFromQName call.
-func (self IVBSAXAttributes) GetTypeFromQName(strQName foundation.BSTR, strType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetTypeFromQName(strQName, strType)))
+func (self IVBSAXAttributes) GetTypeFromQName(strQName foundation.BSTR) (foundation.BSTR, error) {
+	var _strType foundation.BSTR
+	_hr := self.Raw.GetTypeFromQName(strQName, &_strType)
+	return _strType, win32.HRESULTError(int32(_hr))
 }
 
 // GetValue wraps the raw GetValue call.
-func (self IVBSAXAttributes) GetValue(nIndex int32, strValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetValue(nIndex, strValue)))
+func (self IVBSAXAttributes) GetValue(nIndex int32) (foundation.BSTR, error) {
+	var _strValue foundation.BSTR
+	_hr := self.Raw.GetValue(nIndex, &_strValue)
+	return _strValue, win32.HRESULTError(int32(_hr))
 }
 
 // GetValueFromName wraps the raw GetValueFromName call.
-func (self IVBSAXAttributes) GetValueFromName(strURI foundation.BSTR, strLocalName foundation.BSTR, strValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetValueFromName(strURI, strLocalName, strValue)))
+func (self IVBSAXAttributes) GetValueFromName(strURI foundation.BSTR, strLocalName foundation.BSTR) (foundation.BSTR, error) {
+	var _strValue foundation.BSTR
+	_hr := self.Raw.GetValueFromName(strURI, strLocalName, &_strValue)
+	return _strValue, win32.HRESULTError(int32(_hr))
 }
 
 // GetValueFromQName wraps the raw GetValueFromQName call.
-func (self IVBSAXAttributes) GetValueFromQName(strQName foundation.BSTR, strValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetValueFromQName(strQName, strValue)))
+func (self IVBSAXAttributes) GetValueFromQName(strQName foundation.BSTR) (foundation.BSTR, error) {
+	var _strValue foundation.BSTR
+	_hr := self.Raw.GetValueFromQName(strQName, &_strValue)
+	return _strValue, win32.HRESULTError(int32(_hr))
 }
 
 // IVBSAXContentHandler is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IVBSAXContentHandler with error-returning methods.
@@ -1681,8 +1939,10 @@ func WrapIVBSAXEntityResolver(raw *dataxmlmsxml.IVBSAXEntityResolver) IVBSAXEnti
 }
 
 // ResolveEntity wraps the raw ResolveEntity call.
-func (self IVBSAXEntityResolver) ResolveEntity(strPublicId *foundation.BSTR, strSystemId *foundation.BSTR, varInput *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.ResolveEntity(strPublicId, strSystemId, varInput)))
+func (self IVBSAXEntityResolver) ResolveEntity(strPublicId *foundation.BSTR, strSystemId *foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _varInput systemvariant.VARIANT
+	_hr := self.Raw.ResolveEntity(strPublicId, strSystemId, &_varInput)
+	return _varInput, win32.HRESULTError(int32(_hr))
 }
 
 // IVBSAXErrorHandler is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IVBSAXErrorHandler with error-returning methods.
@@ -1769,23 +2029,31 @@ func WrapIVBSAXLocator(raw *dataxmlmsxml.IVBSAXLocator) IVBSAXLocator {
 }
 
 // Get_columnNumber wraps the raw Get_columnNumber call.
-func (self IVBSAXLocator) Get_columnNumber(nColumn *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_columnNumber(nColumn)))
+func (self IVBSAXLocator) Get_columnNumber() (int32, error) {
+	var _nColumn int32
+	_hr := self.Raw.Get_columnNumber(&_nColumn)
+	return _nColumn, win32.HRESULTError(int32(_hr))
 }
 
 // Get_lineNumber wraps the raw Get_lineNumber call.
-func (self IVBSAXLocator) Get_lineNumber(nLine *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_lineNumber(nLine)))
+func (self IVBSAXLocator) Get_lineNumber() (int32, error) {
+	var _nLine int32
+	_hr := self.Raw.Get_lineNumber(&_nLine)
+	return _nLine, win32.HRESULTError(int32(_hr))
 }
 
 // Get_publicId wraps the raw Get_publicId call.
-func (self IVBSAXLocator) Get_publicId(strPublicId *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_publicId(strPublicId)))
+func (self IVBSAXLocator) Get_publicId() (foundation.BSTR, error) {
+	var _strPublicId foundation.BSTR
+	_hr := self.Raw.Get_publicId(&_strPublicId)
+	return _strPublicId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_systemId wraps the raw Get_systemId call.
-func (self IVBSAXLocator) Get_systemId(strSystemId *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_systemId(strSystemId)))
+func (self IVBSAXLocator) Get_systemId() (foundation.BSTR, error) {
+	var _strSystemId foundation.BSTR
+	_hr := self.Raw.Get_systemId(&_strSystemId)
+	return _strSystemId, win32.HRESULTError(int32(_hr))
 }
 
 // IVBSAXXMLFilter is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IVBSAXXMLFilter with error-returning methods.
@@ -1800,8 +2068,10 @@ func WrapIVBSAXXMLFilter(raw *dataxmlmsxml.IVBSAXXMLFilter) IVBSAXXMLFilter {
 }
 
 // Get_parent wraps the raw Get_parent call.
-func (self IVBSAXXMLFilter) Get_parent(oReader **dataxmlmsxml.IVBSAXXMLReader) error {
-	return win32.HRESULTError(int32(self.Raw.Get_parent(oReader)))
+func (self IVBSAXXMLFilter) Get_parent() (*dataxmlmsxml.IVBSAXXMLReader, error) {
+	var _oReader *dataxmlmsxml.IVBSAXXMLReader
+	_hr := self.Raw.Get_parent(&_oReader)
+	return _oReader, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_parent wraps the raw Putref_parent call.
@@ -1821,8 +2091,10 @@ func WrapIVBSAXXMLReader(raw *dataxmlmsxml.IVBSAXXMLReader) IVBSAXXMLReader {
 }
 
 // GetFeature wraps the raw GetFeature call.
-func (self IVBSAXXMLReader) GetFeature(strName foundation.BSTR, fValue *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetFeature(strName, fValue)))
+func (self IVBSAXXMLReader) GetFeature(strName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _fValue foundation.VARIANT_BOOL
+	_hr := self.Raw.GetFeature(strName, &_fValue)
+	return _fValue, win32.HRESULTError(int32(_hr))
 }
 
 // PutFeature wraps the raw PutFeature call.
@@ -1831,13 +2103,17 @@ func (self IVBSAXXMLReader) PutFeature(strName foundation.BSTR, fValue foundatio
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self IVBSAXXMLReader) GetProperty(strName foundation.BSTR, varValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(strName, varValue)))
+func (self IVBSAXXMLReader) GetProperty(strName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _varValue systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(strName, &_varValue)
+	return _varValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_entityResolver wraps the raw Get_entityResolver call.
-func (self IVBSAXXMLReader) Get_entityResolver(oResolver **dataxmlmsxml.IVBSAXEntityResolver) error {
-	return win32.HRESULTError(int32(self.Raw.Get_entityResolver(oResolver)))
+func (self IVBSAXXMLReader) Get_entityResolver() (*dataxmlmsxml.IVBSAXEntityResolver, error) {
+	var _oResolver *dataxmlmsxml.IVBSAXEntityResolver
+	_hr := self.Raw.Get_entityResolver(&_oResolver)
+	return _oResolver, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_entityResolver wraps the raw Putref_entityResolver call.
@@ -1846,8 +2122,10 @@ func (self IVBSAXXMLReader) Putref_entityResolver(oResolver *dataxmlmsxml.IVBSAX
 }
 
 // Get_contentHandler wraps the raw Get_contentHandler call.
-func (self IVBSAXXMLReader) Get_contentHandler(oHandler **dataxmlmsxml.IVBSAXContentHandler) error {
-	return win32.HRESULTError(int32(self.Raw.Get_contentHandler(oHandler)))
+func (self IVBSAXXMLReader) Get_contentHandler() (*dataxmlmsxml.IVBSAXContentHandler, error) {
+	var _oHandler *dataxmlmsxml.IVBSAXContentHandler
+	_hr := self.Raw.Get_contentHandler(&_oHandler)
+	return _oHandler, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_contentHandler wraps the raw Putref_contentHandler call.
@@ -1856,8 +2134,10 @@ func (self IVBSAXXMLReader) Putref_contentHandler(oHandler *dataxmlmsxml.IVBSAXC
 }
 
 // Get_dtdHandler wraps the raw Get_dtdHandler call.
-func (self IVBSAXXMLReader) Get_dtdHandler(oHandler **dataxmlmsxml.IVBSAXDTDHandler) error {
-	return win32.HRESULTError(int32(self.Raw.Get_dtdHandler(oHandler)))
+func (self IVBSAXXMLReader) Get_dtdHandler() (*dataxmlmsxml.IVBSAXDTDHandler, error) {
+	var _oHandler *dataxmlmsxml.IVBSAXDTDHandler
+	_hr := self.Raw.Get_dtdHandler(&_oHandler)
+	return _oHandler, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_dtdHandler wraps the raw Putref_dtdHandler call.
@@ -1866,8 +2146,10 @@ func (self IVBSAXXMLReader) Putref_dtdHandler(oHandler *dataxmlmsxml.IVBSAXDTDHa
 }
 
 // Get_errorHandler wraps the raw Get_errorHandler call.
-func (self IVBSAXXMLReader) Get_errorHandler(oHandler **dataxmlmsxml.IVBSAXErrorHandler) error {
-	return win32.HRESULTError(int32(self.Raw.Get_errorHandler(oHandler)))
+func (self IVBSAXXMLReader) Get_errorHandler() (*dataxmlmsxml.IVBSAXErrorHandler, error) {
+	var _oHandler *dataxmlmsxml.IVBSAXErrorHandler
+	_hr := self.Raw.Get_errorHandler(&_oHandler)
+	return _oHandler, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_errorHandler wraps the raw Putref_errorHandler call.
@@ -1876,8 +2158,10 @@ func (self IVBSAXXMLReader) Putref_errorHandler(oHandler *dataxmlmsxml.IVBSAXErr
 }
 
 // Get_baseURL wraps the raw Get_baseURL call.
-func (self IVBSAXXMLReader) Get_baseURL(strBaseURL *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_baseURL(strBaseURL)))
+func (self IVBSAXXMLReader) Get_baseURL() (foundation.BSTR, error) {
+	var _strBaseURL foundation.BSTR
+	_hr := self.Raw.Get_baseURL(&_strBaseURL)
+	return _strBaseURL, win32.HRESULTError(int32(_hr))
 }
 
 // Put_baseURL wraps the raw Put_baseURL call.
@@ -1886,8 +2170,10 @@ func (self IVBSAXXMLReader) Put_baseURL(strBaseURL foundation.BSTR) error {
 }
 
 // Get_secureBaseURL wraps the raw Get_secureBaseURL call.
-func (self IVBSAXXMLReader) Get_secureBaseURL(strSecureBaseURL *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_secureBaseURL(strSecureBaseURL)))
+func (self IVBSAXXMLReader) Get_secureBaseURL() (foundation.BSTR, error) {
+	var _strSecureBaseURL foundation.BSTR
+	_hr := self.Raw.Get_secureBaseURL(&_strSecureBaseURL)
+	return _strSecureBaseURL, win32.HRESULTError(int32(_hr))
 }
 
 // Put_secureBaseURL wraps the raw Put_secureBaseURL call.
@@ -1912,13 +2198,17 @@ func WrapIXMLAttribute(raw *dataxmlmsxml.IXMLAttribute) IXMLAttribute {
 }
 
 // Get_name wraps the raw Get_name call.
-func (self IXMLAttribute) Get_name(n *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_name(n)))
+func (self IXMLAttribute) Get_name() (foundation.BSTR, error) {
+	var _n foundation.BSTR
+	_hr := self.Raw.Get_name(&_n)
+	return _n, win32.HRESULTError(int32(_hr))
 }
 
 // Get_value wraps the raw Get_value call.
-func (self IXMLAttribute) Get_value(v *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_value(v)))
+func (self IXMLAttribute) Get_value() (foundation.BSTR, error) {
+	var _v foundation.BSTR
+	_hr := self.Raw.Get_value(&_v)
+	return _v, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMAttribute is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMAttribute with error-returning methods.
@@ -1933,13 +2223,17 @@ func WrapIXMLDOMAttribute(raw *dataxmlmsxml.IXMLDOMAttribute) IXMLDOMAttribute {
 }
 
 // Get_name wraps the raw Get_name call.
-func (self IXMLDOMAttribute) Get_name(attributeName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_name(attributeName)))
+func (self IXMLDOMAttribute) Get_name() (foundation.BSTR, error) {
+	var _attributeName foundation.BSTR
+	_hr := self.Raw.Get_name(&_attributeName)
+	return _attributeName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_value wraps the raw Get_value call.
-func (self IXMLDOMAttribute) Get_value(attributeValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_value(attributeValue)))
+func (self IXMLDOMAttribute) Get_value() (systemvariant.VARIANT, error) {
+	var _attributeValue systemvariant.VARIANT
+	_hr := self.Raw.Get_value(&_attributeValue)
+	return _attributeValue, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMCDATASection is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMCDATASection with error-returning methods.
@@ -1965,8 +2259,10 @@ func WrapIXMLDOMCharacterData(raw *dataxmlmsxml.IXMLDOMCharacterData) IXMLDOMCha
 }
 
 // Get_data wraps the raw Get_data call.
-func (self IXMLDOMCharacterData) Get_data(data *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_data(data)))
+func (self IXMLDOMCharacterData) Get_data() (foundation.BSTR, error) {
+	var _data foundation.BSTR
+	_hr := self.Raw.Get_data(&_data)
+	return _data, win32.HRESULTError(int32(_hr))
 }
 
 // Put_data wraps the raw Put_data call.
@@ -1975,13 +2271,17 @@ func (self IXMLDOMCharacterData) Put_data(data foundation.BSTR) error {
 }
 
 // Get_length wraps the raw Get_length call.
-func (self IXMLDOMCharacterData) Get_length(dataLength *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(dataLength)))
+func (self IXMLDOMCharacterData) Get_length() (int32, error) {
+	var _dataLength int32
+	_hr := self.Raw.Get_length(&_dataLength)
+	return _dataLength, win32.HRESULTError(int32(_hr))
 }
 
 // SubstringData wraps the raw SubstringData call.
-func (self IXMLDOMCharacterData) SubstringData(offset int32, count int32, data *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.SubstringData(offset, count, data)))
+func (self IXMLDOMCharacterData) SubstringData(offset int32, count int32) (foundation.BSTR, error) {
+	var _data foundation.BSTR
+	_hr := self.Raw.SubstringData(offset, count, &_data)
+	return _data, win32.HRESULTError(int32(_hr))
 }
 
 // AppendData wraps the raw AppendData call.
@@ -2027,18 +2327,24 @@ func WrapIXMLDOMDocument(raw *dataxmlmsxml.IXMLDOMDocument) IXMLDOMDocument {
 }
 
 // Get_doctype wraps the raw Get_doctype call.
-func (self IXMLDOMDocument) Get_doctype(documentType **dataxmlmsxml.IXMLDOMDocumentType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_doctype(documentType)))
+func (self IXMLDOMDocument) Get_doctype() (*dataxmlmsxml.IXMLDOMDocumentType, error) {
+	var _documentType *dataxmlmsxml.IXMLDOMDocumentType
+	_hr := self.Raw.Get_doctype(&_documentType)
+	return _documentType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_implementation wraps the raw Get_implementation call.
-func (self IXMLDOMDocument) Get_implementation(impl **dataxmlmsxml.IXMLDOMImplementation) error {
-	return win32.HRESULTError(int32(self.Raw.Get_implementation(impl)))
+func (self IXMLDOMDocument) Get_implementation() (*dataxmlmsxml.IXMLDOMImplementation, error) {
+	var _impl *dataxmlmsxml.IXMLDOMImplementation
+	_hr := self.Raw.Get_implementation(&_impl)
+	return _impl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_documentElement wraps the raw Get_documentElement call.
-func (self IXMLDOMDocument) Get_documentElement(DOMElement **dataxmlmsxml.IXMLDOMElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_documentElement(DOMElement)))
+func (self IXMLDOMDocument) Get_documentElement() (*dataxmlmsxml.IXMLDOMElement, error) {
+	var _DOMElement *dataxmlmsxml.IXMLDOMElement
+	_hr := self.Raw.Get_documentElement(&_DOMElement)
+	return _DOMElement, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_documentElement wraps the raw Putref_documentElement call.
@@ -2047,73 +2353,101 @@ func (self IXMLDOMDocument) Putref_documentElement(DOMElement *dataxmlmsxml.IXML
 }
 
 // CreateElement wraps the raw CreateElement call.
-func (self IXMLDOMDocument) CreateElement(tagName foundation.BSTR, element **dataxmlmsxml.IXMLDOMElement) error {
-	return win32.HRESULTError(int32(self.Raw.CreateElement(tagName, element)))
+func (self IXMLDOMDocument) CreateElement(tagName foundation.BSTR) (*dataxmlmsxml.IXMLDOMElement, error) {
+	var _element *dataxmlmsxml.IXMLDOMElement
+	_hr := self.Raw.CreateElement(tagName, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // CreateDocumentFragment wraps the raw CreateDocumentFragment call.
-func (self IXMLDOMDocument) CreateDocumentFragment(docFrag **dataxmlmsxml.IXMLDOMDocumentFragment) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDocumentFragment(docFrag)))
+func (self IXMLDOMDocument) CreateDocumentFragment() (*dataxmlmsxml.IXMLDOMDocumentFragment, error) {
+	var _docFrag *dataxmlmsxml.IXMLDOMDocumentFragment
+	_hr := self.Raw.CreateDocumentFragment(&_docFrag)
+	return _docFrag, win32.HRESULTError(int32(_hr))
 }
 
 // CreateTextNode wraps the raw CreateTextNode call.
-func (self IXMLDOMDocument) CreateTextNode(data foundation.BSTR, text **dataxmlmsxml.IXMLDOMText) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTextNode(data, text)))
+func (self IXMLDOMDocument) CreateTextNode(data foundation.BSTR) (*dataxmlmsxml.IXMLDOMText, error) {
+	var _text *dataxmlmsxml.IXMLDOMText
+	_hr := self.Raw.CreateTextNode(data, &_text)
+	return _text, win32.HRESULTError(int32(_hr))
 }
 
 // CreateComment wraps the raw CreateComment call.
-func (self IXMLDOMDocument) CreateComment(data foundation.BSTR, comment **dataxmlmsxml.IXMLDOMComment) error {
-	return win32.HRESULTError(int32(self.Raw.CreateComment(data, comment)))
+func (self IXMLDOMDocument) CreateComment(data foundation.BSTR) (*dataxmlmsxml.IXMLDOMComment, error) {
+	var _comment *dataxmlmsxml.IXMLDOMComment
+	_hr := self.Raw.CreateComment(data, &_comment)
+	return _comment, win32.HRESULTError(int32(_hr))
 }
 
 // CreateCDATASection wraps the raw CreateCDATASection call.
-func (self IXMLDOMDocument) CreateCDATASection(data foundation.BSTR, cdata **dataxmlmsxml.IXMLDOMCDATASection) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCDATASection(data, cdata)))
+func (self IXMLDOMDocument) CreateCDATASection(data foundation.BSTR) (*dataxmlmsxml.IXMLDOMCDATASection, error) {
+	var _cdata *dataxmlmsxml.IXMLDOMCDATASection
+	_hr := self.Raw.CreateCDATASection(data, &_cdata)
+	return _cdata, win32.HRESULTError(int32(_hr))
 }
 
 // CreateProcessingInstruction wraps the raw CreateProcessingInstruction call.
-func (self IXMLDOMDocument) CreateProcessingInstruction(target foundation.BSTR, data foundation.BSTR, pi **dataxmlmsxml.IXMLDOMProcessingInstruction) error {
-	return win32.HRESULTError(int32(self.Raw.CreateProcessingInstruction(target, data, pi)))
+func (self IXMLDOMDocument) CreateProcessingInstruction(target foundation.BSTR, data foundation.BSTR) (*dataxmlmsxml.IXMLDOMProcessingInstruction, error) {
+	var _pi *dataxmlmsxml.IXMLDOMProcessingInstruction
+	_hr := self.Raw.CreateProcessingInstruction(target, data, &_pi)
+	return _pi, win32.HRESULTError(int32(_hr))
 }
 
 // CreateAttribute wraps the raw CreateAttribute call.
-func (self IXMLDOMDocument) CreateAttribute(name foundation.BSTR, attribute **dataxmlmsxml.IXMLDOMAttribute) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAttribute(name, attribute)))
+func (self IXMLDOMDocument) CreateAttribute(name foundation.BSTR) (*dataxmlmsxml.IXMLDOMAttribute, error) {
+	var _attribute *dataxmlmsxml.IXMLDOMAttribute
+	_hr := self.Raw.CreateAttribute(name, &_attribute)
+	return _attribute, win32.HRESULTError(int32(_hr))
 }
 
 // CreateEntityReference wraps the raw CreateEntityReference call.
-func (self IXMLDOMDocument) CreateEntityReference(name foundation.BSTR, entityRef **dataxmlmsxml.IXMLDOMEntityReference) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEntityReference(name, entityRef)))
+func (self IXMLDOMDocument) CreateEntityReference(name foundation.BSTR) (*dataxmlmsxml.IXMLDOMEntityReference, error) {
+	var _entityRef *dataxmlmsxml.IXMLDOMEntityReference
+	_hr := self.Raw.CreateEntityReference(name, &_entityRef)
+	return _entityRef, win32.HRESULTError(int32(_hr))
 }
 
 // GetElementsByTagName wraps the raw GetElementsByTagName call.
-func (self IXMLDOMDocument) GetElementsByTagName(tagName foundation.BSTR, resultList **dataxmlmsxml.IXMLDOMNodeList) error {
-	return win32.HRESULTError(int32(self.Raw.GetElementsByTagName(tagName, resultList)))
+func (self IXMLDOMDocument) GetElementsByTagName(tagName foundation.BSTR) (*dataxmlmsxml.IXMLDOMNodeList, error) {
+	var _resultList *dataxmlmsxml.IXMLDOMNodeList
+	_hr := self.Raw.GetElementsByTagName(tagName, &_resultList)
+	return _resultList, win32.HRESULTError(int32(_hr))
 }
 
 // NodeFromID wraps the raw NodeFromID call.
-func (self IXMLDOMDocument) NodeFromID(idString foundation.BSTR, node **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.NodeFromID(idString, node)))
+func (self IXMLDOMDocument) NodeFromID(idString foundation.BSTR) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _node *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.NodeFromID(idString, &_node)
+	return _node, win32.HRESULTError(int32(_hr))
 }
 
 // Get_readyState wraps the raw Get_readyState call.
-func (self IXMLDOMDocument) Get_readyState(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_readyState(value)))
+func (self IXMLDOMDocument) Get_readyState() (int32, error) {
+	var _value int32
+	_hr := self.Raw.Get_readyState(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_parseError wraps the raw Get_parseError call.
-func (self IXMLDOMDocument) Get_parseError(errorObj **dataxmlmsxml.IXMLDOMParseError) error {
-	return win32.HRESULTError(int32(self.Raw.Get_parseError(errorObj)))
+func (self IXMLDOMDocument) Get_parseError() (*dataxmlmsxml.IXMLDOMParseError, error) {
+	var _errorObj *dataxmlmsxml.IXMLDOMParseError
+	_hr := self.Raw.Get_parseError(&_errorObj)
+	return _errorObj, win32.HRESULTError(int32(_hr))
 }
 
 // Get_url wraps the raw Get_url call.
-func (self IXMLDOMDocument) Get_url(urlString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_url(urlString)))
+func (self IXMLDOMDocument) Get_url() (foundation.BSTR, error) {
+	var _urlString foundation.BSTR
+	_hr := self.Raw.Get_url(&_urlString)
+	return _urlString, win32.HRESULTError(int32(_hr))
 }
 
 // Get_async wraps the raw Get_async call.
-func (self IXMLDOMDocument) Get_async(isAsync *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_async(isAsync)))
+func (self IXMLDOMDocument) Get_async() (foundation.VARIANT_BOOL, error) {
+	var _isAsync foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_async(&_isAsync)
+	return _isAsync, win32.HRESULTError(int32(_hr))
 }
 
 // Put_async wraps the raw Put_async call.
@@ -2127,13 +2461,17 @@ func (self IXMLDOMDocument) Abort() error {
 }
 
 // LoadXML wraps the raw LoadXML call.
-func (self IXMLDOMDocument) LoadXML(bstrXML foundation.BSTR, isSuccessful *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.LoadXML(bstrXML, isSuccessful)))
+func (self IXMLDOMDocument) LoadXML(bstrXML foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _isSuccessful foundation.VARIANT_BOOL
+	_hr := self.Raw.LoadXML(bstrXML, &_isSuccessful)
+	return _isSuccessful, win32.HRESULTError(int32(_hr))
 }
 
 // Get_validateOnParse wraps the raw Get_validateOnParse call.
-func (self IXMLDOMDocument) Get_validateOnParse(isValidating *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_validateOnParse(isValidating)))
+func (self IXMLDOMDocument) Get_validateOnParse() (foundation.VARIANT_BOOL, error) {
+	var _isValidating foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_validateOnParse(&_isValidating)
+	return _isValidating, win32.HRESULTError(int32(_hr))
 }
 
 // Put_validateOnParse wraps the raw Put_validateOnParse call.
@@ -2142,8 +2480,10 @@ func (self IXMLDOMDocument) Put_validateOnParse(isValidating foundation.VARIANT_
 }
 
 // Get_resolveExternals wraps the raw Get_resolveExternals call.
-func (self IXMLDOMDocument) Get_resolveExternals(isResolving *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_resolveExternals(isResolving)))
+func (self IXMLDOMDocument) Get_resolveExternals() (foundation.VARIANT_BOOL, error) {
+	var _isResolving foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_resolveExternals(&_isResolving)
+	return _isResolving, win32.HRESULTError(int32(_hr))
 }
 
 // Put_resolveExternals wraps the raw Put_resolveExternals call.
@@ -2152,8 +2492,10 @@ func (self IXMLDOMDocument) Put_resolveExternals(isResolving foundation.VARIANT_
 }
 
 // Get_preserveWhiteSpace wraps the raw Get_preserveWhiteSpace call.
-func (self IXMLDOMDocument) Get_preserveWhiteSpace(isPreserving *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_preserveWhiteSpace(isPreserving)))
+func (self IXMLDOMDocument) Get_preserveWhiteSpace() (foundation.VARIANT_BOOL, error) {
+	var _isPreserving foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_preserveWhiteSpace(&_isPreserving)
+	return _isPreserving, win32.HRESULTError(int32(_hr))
 }
 
 // Put_preserveWhiteSpace wraps the raw Put_preserveWhiteSpace call.
@@ -2173,23 +2515,31 @@ func WrapIXMLDOMDocument2(raw *dataxmlmsxml.IXMLDOMDocument2) IXMLDOMDocument2 {
 }
 
 // Get_namespaces wraps the raw Get_namespaces call.
-func (self IXMLDOMDocument2) Get_namespaces(namespaceCollection **dataxmlmsxml.IXMLDOMSchemaCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_namespaces(namespaceCollection)))
+func (self IXMLDOMDocument2) Get_namespaces() (*dataxmlmsxml.IXMLDOMSchemaCollection, error) {
+	var _namespaceCollection *dataxmlmsxml.IXMLDOMSchemaCollection
+	_hr := self.Raw.Get_namespaces(&_namespaceCollection)
+	return _namespaceCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_schemas wraps the raw Get_schemas call.
-func (self IXMLDOMDocument2) Get_schemas(otherCollection *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_schemas(otherCollection)))
+func (self IXMLDOMDocument2) Get_schemas() (systemvariant.VARIANT, error) {
+	var _otherCollection systemvariant.VARIANT
+	_hr := self.Raw.Get_schemas(&_otherCollection)
+	return _otherCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Validate wraps the raw Validate call.
-func (self IXMLDOMDocument2) Validate(errorObj **dataxmlmsxml.IXMLDOMParseError) error {
-	return win32.HRESULTError(int32(self.Raw.Validate(errorObj)))
+func (self IXMLDOMDocument2) Validate() (*dataxmlmsxml.IXMLDOMParseError, error) {
+	var _errorObj *dataxmlmsxml.IXMLDOMParseError
+	_hr := self.Raw.Validate(&_errorObj)
+	return _errorObj, win32.HRESULTError(int32(_hr))
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self IXMLDOMDocument2) GetProperty(name foundation.BSTR, value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(name, value)))
+func (self IXMLDOMDocument2) GetProperty(name foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _value systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(name, &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMDocument3 is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMDocument3 with error-returning methods.
@@ -2204,13 +2554,17 @@ func WrapIXMLDOMDocument3(raw *dataxmlmsxml.IXMLDOMDocument3) IXMLDOMDocument3 {
 }
 
 // ValidateNode wraps the raw ValidateNode call.
-func (self IXMLDOMDocument3) ValidateNode(node *dataxmlmsxml.IXMLDOMNode, errorObj **dataxmlmsxml.IXMLDOMParseError) error {
-	return win32.HRESULTError(int32(self.Raw.ValidateNode(node, errorObj)))
+func (self IXMLDOMDocument3) ValidateNode(node *dataxmlmsxml.IXMLDOMNode) (*dataxmlmsxml.IXMLDOMParseError, error) {
+	var _errorObj *dataxmlmsxml.IXMLDOMParseError
+	_hr := self.Raw.ValidateNode(node, &_errorObj)
+	return _errorObj, win32.HRESULTError(int32(_hr))
 }
 
 // ImportNode wraps the raw ImportNode call.
-func (self IXMLDOMDocument3) ImportNode(node *dataxmlmsxml.IXMLDOMNode, deep foundation.VARIANT_BOOL, clone **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.ImportNode(node, deep, clone)))
+func (self IXMLDOMDocument3) ImportNode(node *dataxmlmsxml.IXMLDOMNode, deep foundation.VARIANT_BOOL) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _clone *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.ImportNode(node, deep, &_clone)
+	return _clone, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMDocumentFragment is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMDocumentFragment with error-returning methods.
@@ -2236,18 +2590,24 @@ func WrapIXMLDOMDocumentType(raw *dataxmlmsxml.IXMLDOMDocumentType) IXMLDOMDocum
 }
 
 // Get_name wraps the raw Get_name call.
-func (self IXMLDOMDocumentType) Get_name(rootName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_name(rootName)))
+func (self IXMLDOMDocumentType) Get_name() (foundation.BSTR, error) {
+	var _rootName foundation.BSTR
+	_hr := self.Raw.Get_name(&_rootName)
+	return _rootName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_entities wraps the raw Get_entities call.
-func (self IXMLDOMDocumentType) Get_entities(entityMap **dataxmlmsxml.IXMLDOMNamedNodeMap) error {
-	return win32.HRESULTError(int32(self.Raw.Get_entities(entityMap)))
+func (self IXMLDOMDocumentType) Get_entities() (*dataxmlmsxml.IXMLDOMNamedNodeMap, error) {
+	var _entityMap *dataxmlmsxml.IXMLDOMNamedNodeMap
+	_hr := self.Raw.Get_entities(&_entityMap)
+	return _entityMap, win32.HRESULTError(int32(_hr))
 }
 
 // Get_notations wraps the raw Get_notations call.
-func (self IXMLDOMDocumentType) Get_notations(notationMap **dataxmlmsxml.IXMLDOMNamedNodeMap) error {
-	return win32.HRESULTError(int32(self.Raw.Get_notations(notationMap)))
+func (self IXMLDOMDocumentType) Get_notations() (*dataxmlmsxml.IXMLDOMNamedNodeMap, error) {
+	var _notationMap *dataxmlmsxml.IXMLDOMNamedNodeMap
+	_hr := self.Raw.Get_notations(&_notationMap)
+	return _notationMap, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMElement is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMElement with error-returning methods.
@@ -2262,13 +2622,17 @@ func WrapIXMLDOMElement(raw *dataxmlmsxml.IXMLDOMElement) IXMLDOMElement {
 }
 
 // Get_tagName wraps the raw Get_tagName call.
-func (self IXMLDOMElement) Get_tagName(tagName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_tagName(tagName)))
+func (self IXMLDOMElement) Get_tagName() (foundation.BSTR, error) {
+	var _tagName foundation.BSTR
+	_hr := self.Raw.Get_tagName(&_tagName)
+	return _tagName, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttribute wraps the raw GetAttribute call.
-func (self IXMLDOMElement) GetAttribute(name foundation.BSTR, value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttribute(name, value)))
+func (self IXMLDOMElement) GetAttribute(name foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _value systemvariant.VARIANT
+	_hr := self.Raw.GetAttribute(name, &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttribute wraps the raw RemoveAttribute call.
@@ -2277,23 +2641,31 @@ func (self IXMLDOMElement) RemoveAttribute(name foundation.BSTR) error {
 }
 
 // GetAttributeNode wraps the raw GetAttributeNode call.
-func (self IXMLDOMElement) GetAttributeNode(name foundation.BSTR, attributeNode **dataxmlmsxml.IXMLDOMAttribute) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttributeNode(name, attributeNode)))
+func (self IXMLDOMElement) GetAttributeNode(name foundation.BSTR) (*dataxmlmsxml.IXMLDOMAttribute, error) {
+	var _attributeNode *dataxmlmsxml.IXMLDOMAttribute
+	_hr := self.Raw.GetAttributeNode(name, &_attributeNode)
+	return _attributeNode, win32.HRESULTError(int32(_hr))
 }
 
 // SetAttributeNode wraps the raw SetAttributeNode call.
-func (self IXMLDOMElement) SetAttributeNode(DOMAttribute *dataxmlmsxml.IXMLDOMAttribute, attributeNode **dataxmlmsxml.IXMLDOMAttribute) error {
-	return win32.HRESULTError(int32(self.Raw.SetAttributeNode(DOMAttribute, attributeNode)))
+func (self IXMLDOMElement) SetAttributeNode(DOMAttribute *dataxmlmsxml.IXMLDOMAttribute) (*dataxmlmsxml.IXMLDOMAttribute, error) {
+	var _attributeNode *dataxmlmsxml.IXMLDOMAttribute
+	_hr := self.Raw.SetAttributeNode(DOMAttribute, &_attributeNode)
+	return _attributeNode, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttributeNode wraps the raw RemoveAttributeNode call.
-func (self IXMLDOMElement) RemoveAttributeNode(DOMAttribute *dataxmlmsxml.IXMLDOMAttribute, attributeNode **dataxmlmsxml.IXMLDOMAttribute) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveAttributeNode(DOMAttribute, attributeNode)))
+func (self IXMLDOMElement) RemoveAttributeNode(DOMAttribute *dataxmlmsxml.IXMLDOMAttribute) (*dataxmlmsxml.IXMLDOMAttribute, error) {
+	var _attributeNode *dataxmlmsxml.IXMLDOMAttribute
+	_hr := self.Raw.RemoveAttributeNode(DOMAttribute, &_attributeNode)
+	return _attributeNode, win32.HRESULTError(int32(_hr))
 }
 
 // GetElementsByTagName wraps the raw GetElementsByTagName call.
-func (self IXMLDOMElement) GetElementsByTagName(tagName foundation.BSTR, resultList **dataxmlmsxml.IXMLDOMNodeList) error {
-	return win32.HRESULTError(int32(self.Raw.GetElementsByTagName(tagName, resultList)))
+func (self IXMLDOMElement) GetElementsByTagName(tagName foundation.BSTR) (*dataxmlmsxml.IXMLDOMNodeList, error) {
+	var _resultList *dataxmlmsxml.IXMLDOMNodeList
+	_hr := self.Raw.GetElementsByTagName(tagName, &_resultList)
+	return _resultList, win32.HRESULTError(int32(_hr))
 }
 
 // Normalize wraps the raw Normalize call.
@@ -2313,18 +2685,24 @@ func WrapIXMLDOMEntity(raw *dataxmlmsxml.IXMLDOMEntity) IXMLDOMEntity {
 }
 
 // Get_publicId wraps the raw Get_publicId call.
-func (self IXMLDOMEntity) Get_publicId(publicID *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_publicId(publicID)))
+func (self IXMLDOMEntity) Get_publicId() (systemvariant.VARIANT, error) {
+	var _publicID systemvariant.VARIANT
+	_hr := self.Raw.Get_publicId(&_publicID)
+	return _publicID, win32.HRESULTError(int32(_hr))
 }
 
 // Get_systemId wraps the raw Get_systemId call.
-func (self IXMLDOMEntity) Get_systemId(systemID *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_systemId(systemID)))
+func (self IXMLDOMEntity) Get_systemId() (systemvariant.VARIANT, error) {
+	var _systemID systemvariant.VARIANT
+	_hr := self.Raw.Get_systemId(&_systemID)
+	return _systemID, win32.HRESULTError(int32(_hr))
 }
 
 // Get_notationName wraps the raw Get_notationName call.
-func (self IXMLDOMEntity) Get_notationName(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_notationName(name)))
+func (self IXMLDOMEntity) Get_notationName() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_notationName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMEntityReference is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMEntityReference with error-returning methods.
@@ -2350,8 +2728,10 @@ func WrapIXMLDOMImplementation(raw *dataxmlmsxml.IXMLDOMImplementation) IXMLDOMI
 }
 
 // HasFeature wraps the raw HasFeature call.
-func (self IXMLDOMImplementation) HasFeature(feature foundation.BSTR, version foundation.BSTR, hasFeature *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.HasFeature(feature, version, hasFeature)))
+func (self IXMLDOMImplementation) HasFeature(feature foundation.BSTR, version foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _hasFeature foundation.VARIANT_BOOL
+	_hr := self.Raw.HasFeature(feature, version, &_hasFeature)
+	return _hasFeature, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMNamedNodeMap is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMNamedNodeMap with error-returning methods.
@@ -2366,43 +2746,59 @@ func WrapIXMLDOMNamedNodeMap(raw *dataxmlmsxml.IXMLDOMNamedNodeMap) IXMLDOMNamed
 }
 
 // GetNamedItem wraps the raw GetNamedItem call.
-func (self IXMLDOMNamedNodeMap) GetNamedItem(name foundation.BSTR, namedItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.GetNamedItem(name, namedItem)))
+func (self IXMLDOMNamedNodeMap) GetNamedItem(name foundation.BSTR) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _namedItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.GetNamedItem(name, &_namedItem)
+	return _namedItem, win32.HRESULTError(int32(_hr))
 }
 
 // SetNamedItem wraps the raw SetNamedItem call.
-func (self IXMLDOMNamedNodeMap) SetNamedItem(newItem *dataxmlmsxml.IXMLDOMNode, nameItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.SetNamedItem(newItem, nameItem)))
+func (self IXMLDOMNamedNodeMap) SetNamedItem(newItem *dataxmlmsxml.IXMLDOMNode) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _nameItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.SetNamedItem(newItem, &_nameItem)
+	return _nameItem, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveNamedItem wraps the raw RemoveNamedItem call.
-func (self IXMLDOMNamedNodeMap) RemoveNamedItem(name foundation.BSTR, namedItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveNamedItem(name, namedItem)))
+func (self IXMLDOMNamedNodeMap) RemoveNamedItem(name foundation.BSTR) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _namedItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.RemoveNamedItem(name, &_namedItem)
+	return _namedItem, win32.HRESULTError(int32(_hr))
 }
 
 // Get_item wraps the raw Get_item call.
-func (self IXMLDOMNamedNodeMap) Get_item(index int32, listItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_item(index, listItem)))
+func (self IXMLDOMNamedNodeMap) Get_item(index int32) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _listItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_item(index, &_listItem)
+	return _listItem, win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
-func (self IXMLDOMNamedNodeMap) Get_length(listLength *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(listLength)))
+func (self IXMLDOMNamedNodeMap) Get_length() (int32, error) {
+	var _listLength int32
+	_hr := self.Raw.Get_length(&_listLength)
+	return _listLength, win32.HRESULTError(int32(_hr))
 }
 
 // GetQualifiedItem wraps the raw GetQualifiedItem call.
-func (self IXMLDOMNamedNodeMap) GetQualifiedItem(baseName foundation.BSTR, namespaceURI foundation.BSTR, qualifiedItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.GetQualifiedItem(baseName, namespaceURI, qualifiedItem)))
+func (self IXMLDOMNamedNodeMap) GetQualifiedItem(baseName foundation.BSTR, namespaceURI foundation.BSTR) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _qualifiedItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.GetQualifiedItem(baseName, namespaceURI, &_qualifiedItem)
+	return _qualifiedItem, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveQualifiedItem wraps the raw RemoveQualifiedItem call.
-func (self IXMLDOMNamedNodeMap) RemoveQualifiedItem(baseName foundation.BSTR, namespaceURI foundation.BSTR, qualifiedItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveQualifiedItem(baseName, namespaceURI, qualifiedItem)))
+func (self IXMLDOMNamedNodeMap) RemoveQualifiedItem(baseName foundation.BSTR, namespaceURI foundation.BSTR) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _qualifiedItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.RemoveQualifiedItem(baseName, namespaceURI, &_qualifiedItem)
+	return _qualifiedItem, win32.HRESULTError(int32(_hr))
 }
 
 // NextNode wraps the raw NextNode call.
-func (self IXMLDOMNamedNodeMap) NextNode(nextItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.NextNode(nextItem)))
+func (self IXMLDOMNamedNodeMap) NextNode() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _nextItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.NextNode(&_nextItem)
+	return _nextItem, win32.HRESULTError(int32(_hr))
 }
 
 // Reset wraps the raw Reset call.
@@ -2411,8 +2807,10 @@ func (self IXMLDOMNamedNodeMap) Reset() error {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IXMLDOMNamedNodeMap) Get__newEnum(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__newEnum(ppUnk)))
+func (self IXMLDOMNamedNodeMap) Get__newEnum() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__newEnum(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMNode is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMNode with error-returning methods.
@@ -2427,93 +2825,129 @@ func WrapIXMLDOMNode(raw *dataxmlmsxml.IXMLDOMNode) IXMLDOMNode {
 }
 
 // Get_nodeName wraps the raw Get_nodeName call.
-func (self IXMLDOMNode) Get_nodeName(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_nodeName(name)))
+func (self IXMLDOMNode) Get_nodeName() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_nodeName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_nodeValue wraps the raw Get_nodeValue call.
-func (self IXMLDOMNode) Get_nodeValue(value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_nodeValue(value)))
+func (self IXMLDOMNode) Get_nodeValue() (systemvariant.VARIANT, error) {
+	var _value systemvariant.VARIANT
+	_hr := self.Raw.Get_nodeValue(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_nodeType wraps the raw Get_nodeType call.
-func (self IXMLDOMNode) Get_nodeType(type_ *dataxmlmsxml.DOMNodeType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_nodeType(type_)))
+func (self IXMLDOMNode) Get_nodeType() (dataxmlmsxml.DOMNodeType, error) {
+	var _type_ dataxmlmsxml.DOMNodeType
+	_hr := self.Raw.Get_nodeType(&_type_)
+	return _type_, win32.HRESULTError(int32(_hr))
 }
 
 // Get_parentNode wraps the raw Get_parentNode call.
-func (self IXMLDOMNode) Get_parentNode(parent **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_parentNode(parent)))
+func (self IXMLDOMNode) Get_parentNode() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _parent *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_parentNode(&_parent)
+	return _parent, win32.HRESULTError(int32(_hr))
 }
 
 // Get_childNodes wraps the raw Get_childNodes call.
-func (self IXMLDOMNode) Get_childNodes(childList **dataxmlmsxml.IXMLDOMNodeList) error {
-	return win32.HRESULTError(int32(self.Raw.Get_childNodes(childList)))
+func (self IXMLDOMNode) Get_childNodes() (*dataxmlmsxml.IXMLDOMNodeList, error) {
+	var _childList *dataxmlmsxml.IXMLDOMNodeList
+	_hr := self.Raw.Get_childNodes(&_childList)
+	return _childList, win32.HRESULTError(int32(_hr))
 }
 
 // Get_firstChild wraps the raw Get_firstChild call.
-func (self IXMLDOMNode) Get_firstChild(firstChild **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_firstChild(firstChild)))
+func (self IXMLDOMNode) Get_firstChild() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _firstChild *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_firstChild(&_firstChild)
+	return _firstChild, win32.HRESULTError(int32(_hr))
 }
 
 // Get_lastChild wraps the raw Get_lastChild call.
-func (self IXMLDOMNode) Get_lastChild(lastChild **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_lastChild(lastChild)))
+func (self IXMLDOMNode) Get_lastChild() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _lastChild *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_lastChild(&_lastChild)
+	return _lastChild, win32.HRESULTError(int32(_hr))
 }
 
 // Get_previousSibling wraps the raw Get_previousSibling call.
-func (self IXMLDOMNode) Get_previousSibling(previousSibling **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_previousSibling(previousSibling)))
+func (self IXMLDOMNode) Get_previousSibling() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _previousSibling *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_previousSibling(&_previousSibling)
+	return _previousSibling, win32.HRESULTError(int32(_hr))
 }
 
 // Get_nextSibling wraps the raw Get_nextSibling call.
-func (self IXMLDOMNode) Get_nextSibling(nextSibling **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_nextSibling(nextSibling)))
+func (self IXMLDOMNode) Get_nextSibling() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _nextSibling *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_nextSibling(&_nextSibling)
+	return _nextSibling, win32.HRESULTError(int32(_hr))
 }
 
 // Get_attributes wraps the raw Get_attributes call.
-func (self IXMLDOMNode) Get_attributes(attributeMap **dataxmlmsxml.IXMLDOMNamedNodeMap) error {
-	return win32.HRESULTError(int32(self.Raw.Get_attributes(attributeMap)))
+func (self IXMLDOMNode) Get_attributes() (*dataxmlmsxml.IXMLDOMNamedNodeMap, error) {
+	var _attributeMap *dataxmlmsxml.IXMLDOMNamedNodeMap
+	_hr := self.Raw.Get_attributes(&_attributeMap)
+	return _attributeMap, win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceChild wraps the raw ReplaceChild call.
-func (self IXMLDOMNode) ReplaceChild(newChild *dataxmlmsxml.IXMLDOMNode, oldChild *dataxmlmsxml.IXMLDOMNode, outOldChild **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.ReplaceChild(newChild, oldChild, outOldChild)))
+func (self IXMLDOMNode) ReplaceChild(newChild *dataxmlmsxml.IXMLDOMNode, oldChild *dataxmlmsxml.IXMLDOMNode) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _outOldChild *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.ReplaceChild(newChild, oldChild, &_outOldChild)
+	return _outOldChild, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveChild wraps the raw RemoveChild call.
-func (self IXMLDOMNode) RemoveChild(childNode *dataxmlmsxml.IXMLDOMNode, oldChild **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveChild(childNode, oldChild)))
+func (self IXMLDOMNode) RemoveChild(childNode *dataxmlmsxml.IXMLDOMNode) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _oldChild *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.RemoveChild(childNode, &_oldChild)
+	return _oldChild, win32.HRESULTError(int32(_hr))
 }
 
 // AppendChild wraps the raw AppendChild call.
-func (self IXMLDOMNode) AppendChild(newChild *dataxmlmsxml.IXMLDOMNode, outNewChild **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.AppendChild(newChild, outNewChild)))
+func (self IXMLDOMNode) AppendChild(newChild *dataxmlmsxml.IXMLDOMNode) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _outNewChild *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.AppendChild(newChild, &_outNewChild)
+	return _outNewChild, win32.HRESULTError(int32(_hr))
 }
 
 // HasChildNodes wraps the raw HasChildNodes call.
-func (self IXMLDOMNode) HasChildNodes(hasChild *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.HasChildNodes(hasChild)))
+func (self IXMLDOMNode) HasChildNodes() (foundation.VARIANT_BOOL, error) {
+	var _hasChild foundation.VARIANT_BOOL
+	_hr := self.Raw.HasChildNodes(&_hasChild)
+	return _hasChild, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ownerDocument wraps the raw Get_ownerDocument call.
-func (self IXMLDOMNode) Get_ownerDocument(XMLDOMDocument **dataxmlmsxml.IXMLDOMDocument) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ownerDocument(XMLDOMDocument)))
+func (self IXMLDOMNode) Get_ownerDocument() (*dataxmlmsxml.IXMLDOMDocument, error) {
+	var _XMLDOMDocument *dataxmlmsxml.IXMLDOMDocument
+	_hr := self.Raw.Get_ownerDocument(&_XMLDOMDocument)
+	return _XMLDOMDocument, win32.HRESULTError(int32(_hr))
 }
 
 // CloneNode wraps the raw CloneNode call.
-func (self IXMLDOMNode) CloneNode(deep foundation.VARIANT_BOOL, cloneRoot **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.CloneNode(deep, cloneRoot)))
+func (self IXMLDOMNode) CloneNode(deep foundation.VARIANT_BOOL) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _cloneRoot *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.CloneNode(deep, &_cloneRoot)
+	return _cloneRoot, win32.HRESULTError(int32(_hr))
 }
 
 // Get_nodeTypeString wraps the raw Get_nodeTypeString call.
-func (self IXMLDOMNode) Get_nodeTypeString(nodeType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_nodeTypeString(nodeType)))
+func (self IXMLDOMNode) Get_nodeTypeString() (foundation.BSTR, error) {
+	var _nodeType foundation.BSTR
+	_hr := self.Raw.Get_nodeTypeString(&_nodeType)
+	return _nodeType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_text wraps the raw Get_text call.
-func (self IXMLDOMNode) Get_text(text *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_text(text)))
+func (self IXMLDOMNode) Get_text() (foundation.BSTR, error) {
+	var _text foundation.BSTR
+	_hr := self.Raw.Get_text(&_text)
+	return _text, win32.HRESULTError(int32(_hr))
 }
 
 // Put_text wraps the raw Put_text call.
@@ -2522,23 +2956,31 @@ func (self IXMLDOMNode) Put_text(text foundation.BSTR) error {
 }
 
 // Get_specified wraps the raw Get_specified call.
-func (self IXMLDOMNode) Get_specified(isSpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_specified(isSpecified)))
+func (self IXMLDOMNode) Get_specified() (foundation.VARIANT_BOOL, error) {
+	var _isSpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_specified(&_isSpecified)
+	return _isSpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Get_definition wraps the raw Get_definition call.
-func (self IXMLDOMNode) Get_definition(definitionNode **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_definition(definitionNode)))
+func (self IXMLDOMNode) Get_definition() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _definitionNode *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_definition(&_definitionNode)
+	return _definitionNode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_nodeTypedValue wraps the raw Get_nodeTypedValue call.
-func (self IXMLDOMNode) Get_nodeTypedValue(typedValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_nodeTypedValue(typedValue)))
+func (self IXMLDOMNode) Get_nodeTypedValue() (systemvariant.VARIANT, error) {
+	var _typedValue systemvariant.VARIANT
+	_hr := self.Raw.Get_nodeTypedValue(&_typedValue)
+	return _typedValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_dataType wraps the raw Get_dataType call.
-func (self IXMLDOMNode) Get_dataType(dataTypeName *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_dataType(dataTypeName)))
+func (self IXMLDOMNode) Get_dataType() (systemvariant.VARIANT, error) {
+	var _dataTypeName systemvariant.VARIANT
+	_hr := self.Raw.Get_dataType(&_dataTypeName)
+	return _dataTypeName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_dataType wraps the raw Put_dataType call.
@@ -2547,43 +2989,59 @@ func (self IXMLDOMNode) Put_dataType(dataTypeName foundation.BSTR) error {
 }
 
 // Get_xml wraps the raw Get_xml call.
-func (self IXMLDOMNode) Get_xml(xmlString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_xml(xmlString)))
+func (self IXMLDOMNode) Get_xml() (foundation.BSTR, error) {
+	var _xmlString foundation.BSTR
+	_hr := self.Raw.Get_xml(&_xmlString)
+	return _xmlString, win32.HRESULTError(int32(_hr))
 }
 
 // TransformNode wraps the raw TransformNode call.
-func (self IXMLDOMNode) TransformNode(stylesheet *dataxmlmsxml.IXMLDOMNode, xmlString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.TransformNode(stylesheet, xmlString)))
+func (self IXMLDOMNode) TransformNode(stylesheet *dataxmlmsxml.IXMLDOMNode) (foundation.BSTR, error) {
+	var _xmlString foundation.BSTR
+	_hr := self.Raw.TransformNode(stylesheet, &_xmlString)
+	return _xmlString, win32.HRESULTError(int32(_hr))
 }
 
 // SelectNodes wraps the raw SelectNodes call.
-func (self IXMLDOMNode) SelectNodes(queryString foundation.BSTR, resultList **dataxmlmsxml.IXMLDOMNodeList) error {
-	return win32.HRESULTError(int32(self.Raw.SelectNodes(queryString, resultList)))
+func (self IXMLDOMNode) SelectNodes(queryString foundation.BSTR) (*dataxmlmsxml.IXMLDOMNodeList, error) {
+	var _resultList *dataxmlmsxml.IXMLDOMNodeList
+	_hr := self.Raw.SelectNodes(queryString, &_resultList)
+	return _resultList, win32.HRESULTError(int32(_hr))
 }
 
 // SelectSingleNode wraps the raw SelectSingleNode call.
-func (self IXMLDOMNode) SelectSingleNode(queryString foundation.BSTR, resultNode **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.SelectSingleNode(queryString, resultNode)))
+func (self IXMLDOMNode) SelectSingleNode(queryString foundation.BSTR) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _resultNode *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.SelectSingleNode(queryString, &_resultNode)
+	return _resultNode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_parsed wraps the raw Get_parsed call.
-func (self IXMLDOMNode) Get_parsed(isParsed *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_parsed(isParsed)))
+func (self IXMLDOMNode) Get_parsed() (foundation.VARIANT_BOOL, error) {
+	var _isParsed foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_parsed(&_isParsed)
+	return _isParsed, win32.HRESULTError(int32(_hr))
 }
 
 // Get_namespaceURI wraps the raw Get_namespaceURI call.
-func (self IXMLDOMNode) Get_namespaceURI(namespaceURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_namespaceURI(namespaceURI)))
+func (self IXMLDOMNode) Get_namespaceURI() (foundation.BSTR, error) {
+	var _namespaceURI foundation.BSTR
+	_hr := self.Raw.Get_namespaceURI(&_namespaceURI)
+	return _namespaceURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_prefix wraps the raw Get_prefix call.
-func (self IXMLDOMNode) Get_prefix(prefixString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_prefix(prefixString)))
+func (self IXMLDOMNode) Get_prefix() (foundation.BSTR, error) {
+	var _prefixString foundation.BSTR
+	_hr := self.Raw.Get_prefix(&_prefixString)
+	return _prefixString, win32.HRESULTError(int32(_hr))
 }
 
 // Get_baseName wraps the raw Get_baseName call.
-func (self IXMLDOMNode) Get_baseName(nameString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_baseName(nameString)))
+func (self IXMLDOMNode) Get_baseName() (foundation.BSTR, error) {
+	var _nameString foundation.BSTR
+	_hr := self.Raw.Get_baseName(&_nameString)
+	return _nameString, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMNodeList is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMNodeList with error-returning methods.
@@ -2598,18 +3056,24 @@ func WrapIXMLDOMNodeList(raw *dataxmlmsxml.IXMLDOMNodeList) IXMLDOMNodeList {
 }
 
 // Get_item wraps the raw Get_item call.
-func (self IXMLDOMNodeList) Get_item(index int32, listItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_item(index, listItem)))
+func (self IXMLDOMNodeList) Get_item(index int32) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _listItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_item(index, &_listItem)
+	return _listItem, win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
-func (self IXMLDOMNodeList) Get_length(listLength *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(listLength)))
+func (self IXMLDOMNodeList) Get_length() (int32, error) {
+	var _listLength int32
+	_hr := self.Raw.Get_length(&_listLength)
+	return _listLength, win32.HRESULTError(int32(_hr))
 }
 
 // NextNode wraps the raw NextNode call.
-func (self IXMLDOMNodeList) NextNode(nextItem **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.NextNode(nextItem)))
+func (self IXMLDOMNodeList) NextNode() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _nextItem *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.NextNode(&_nextItem)
+	return _nextItem, win32.HRESULTError(int32(_hr))
 }
 
 // Reset wraps the raw Reset call.
@@ -2618,8 +3082,10 @@ func (self IXMLDOMNodeList) Reset() error {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IXMLDOMNodeList) Get__newEnum(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__newEnum(ppUnk)))
+func (self IXMLDOMNodeList) Get__newEnum() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__newEnum(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMNotation is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMNotation with error-returning methods.
@@ -2634,13 +3100,17 @@ func WrapIXMLDOMNotation(raw *dataxmlmsxml.IXMLDOMNotation) IXMLDOMNotation {
 }
 
 // Get_publicId wraps the raw Get_publicId call.
-func (self IXMLDOMNotation) Get_publicId(publicID *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_publicId(publicID)))
+func (self IXMLDOMNotation) Get_publicId() (systemvariant.VARIANT, error) {
+	var _publicID systemvariant.VARIANT
+	_hr := self.Raw.Get_publicId(&_publicID)
+	return _publicID, win32.HRESULTError(int32(_hr))
 }
 
 // Get_systemId wraps the raw Get_systemId call.
-func (self IXMLDOMNotation) Get_systemId(systemID *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_systemId(systemID)))
+func (self IXMLDOMNotation) Get_systemId() (systemvariant.VARIANT, error) {
+	var _systemID systemvariant.VARIANT
+	_hr := self.Raw.Get_systemId(&_systemID)
+	return _systemID, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMParseError is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMParseError with error-returning methods.
@@ -2655,38 +3125,52 @@ func WrapIXMLDOMParseError(raw *dataxmlmsxml.IXMLDOMParseError) IXMLDOMParseErro
 }
 
 // Get_errorCode wraps the raw Get_errorCode call.
-func (self IXMLDOMParseError) Get_errorCode(errorCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_errorCode(errorCode)))
+func (self IXMLDOMParseError) Get_errorCode() (int32, error) {
+	var _errorCode int32
+	_hr := self.Raw.Get_errorCode(&_errorCode)
+	return _errorCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_url wraps the raw Get_url call.
-func (self IXMLDOMParseError) Get_url(urlString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_url(urlString)))
+func (self IXMLDOMParseError) Get_url() (foundation.BSTR, error) {
+	var _urlString foundation.BSTR
+	_hr := self.Raw.Get_url(&_urlString)
+	return _urlString, win32.HRESULTError(int32(_hr))
 }
 
 // Get_reason wraps the raw Get_reason call.
-func (self IXMLDOMParseError) Get_reason(reasonString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_reason(reasonString)))
+func (self IXMLDOMParseError) Get_reason() (foundation.BSTR, error) {
+	var _reasonString foundation.BSTR
+	_hr := self.Raw.Get_reason(&_reasonString)
+	return _reasonString, win32.HRESULTError(int32(_hr))
 }
 
 // Get_srcText wraps the raw Get_srcText call.
-func (self IXMLDOMParseError) Get_srcText(sourceString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_srcText(sourceString)))
+func (self IXMLDOMParseError) Get_srcText() (foundation.BSTR, error) {
+	var _sourceString foundation.BSTR
+	_hr := self.Raw.Get_srcText(&_sourceString)
+	return _sourceString, win32.HRESULTError(int32(_hr))
 }
 
 // Get_line wraps the raw Get_line call.
-func (self IXMLDOMParseError) Get_line(lineNumber *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_line(lineNumber)))
+func (self IXMLDOMParseError) Get_line() (int32, error) {
+	var _lineNumber int32
+	_hr := self.Raw.Get_line(&_lineNumber)
+	return _lineNumber, win32.HRESULTError(int32(_hr))
 }
 
 // Get_linepos wraps the raw Get_linepos call.
-func (self IXMLDOMParseError) Get_linepos(linePosition *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_linepos(linePosition)))
+func (self IXMLDOMParseError) Get_linepos() (int32, error) {
+	var _linePosition int32
+	_hr := self.Raw.Get_linepos(&_linePosition)
+	return _linePosition, win32.HRESULTError(int32(_hr))
 }
 
 // Get_filepos wraps the raw Get_filepos call.
-func (self IXMLDOMParseError) Get_filepos(filePosition *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_filepos(filePosition)))
+func (self IXMLDOMParseError) Get_filepos() (int32, error) {
+	var _filePosition int32
+	_hr := self.Raw.Get_filepos(&_filePosition)
+	return _filePosition, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMParseError2 is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMParseError2 with error-returning methods.
@@ -2701,23 +3185,31 @@ func WrapIXMLDOMParseError2(raw *dataxmlmsxml.IXMLDOMParseError2) IXMLDOMParseEr
 }
 
 // Get_errorXPath wraps the raw Get_errorXPath call.
-func (self IXMLDOMParseError2) Get_errorXPath(xpathexpr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_errorXPath(xpathexpr)))
+func (self IXMLDOMParseError2) Get_errorXPath() (foundation.BSTR, error) {
+	var _xpathexpr foundation.BSTR
+	_hr := self.Raw.Get_errorXPath(&_xpathexpr)
+	return _xpathexpr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_allErrors wraps the raw Get_allErrors call.
-func (self IXMLDOMParseError2) Get_allErrors(allErrors **dataxmlmsxml.IXMLDOMParseErrorCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_allErrors(allErrors)))
+func (self IXMLDOMParseError2) Get_allErrors() (*dataxmlmsxml.IXMLDOMParseErrorCollection, error) {
+	var _allErrors *dataxmlmsxml.IXMLDOMParseErrorCollection
+	_hr := self.Raw.Get_allErrors(&_allErrors)
+	return _allErrors, win32.HRESULTError(int32(_hr))
 }
 
 // ErrorParameters wraps the raw ErrorParameters call.
-func (self IXMLDOMParseError2) ErrorParameters(index int32, param1 *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.ErrorParameters(index, param1)))
+func (self IXMLDOMParseError2) ErrorParameters(index int32) (foundation.BSTR, error) {
+	var _param1 foundation.BSTR
+	_hr := self.Raw.ErrorParameters(index, &_param1)
+	return _param1, win32.HRESULTError(int32(_hr))
 }
 
 // Get_errorParametersCount wraps the raw Get_errorParametersCount call.
-func (self IXMLDOMParseError2) Get_errorParametersCount(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_errorParametersCount(count)))
+func (self IXMLDOMParseError2) Get_errorParametersCount() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_errorParametersCount(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMParseErrorCollection is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMParseErrorCollection with error-returning methods.
@@ -2732,18 +3224,24 @@ func WrapIXMLDOMParseErrorCollection(raw *dataxmlmsxml.IXMLDOMParseErrorCollecti
 }
 
 // Get_item wraps the raw Get_item call.
-func (self IXMLDOMParseErrorCollection) Get_item(index int32, error_ **dataxmlmsxml.IXMLDOMParseError2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_item(index, error_)))
+func (self IXMLDOMParseErrorCollection) Get_item(index int32) (*dataxmlmsxml.IXMLDOMParseError2, error) {
+	var _error_ *dataxmlmsxml.IXMLDOMParseError2
+	_hr := self.Raw.Get_item(index, &_error_)
+	return _error_, win32.HRESULTError(int32(_hr))
 }
 
 // Get_length wraps the raw Get_length call.
-func (self IXMLDOMParseErrorCollection) Get_length(length *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(length)))
+func (self IXMLDOMParseErrorCollection) Get_length() (int32, error) {
+	var _length int32
+	_hr := self.Raw.Get_length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // Get_next wraps the raw Get_next call.
-func (self IXMLDOMParseErrorCollection) Get_next(error_ **dataxmlmsxml.IXMLDOMParseError2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_next(error_)))
+func (self IXMLDOMParseErrorCollection) Get_next() (*dataxmlmsxml.IXMLDOMParseError2, error) {
+	var _error_ *dataxmlmsxml.IXMLDOMParseError2
+	_hr := self.Raw.Get_next(&_error_)
+	return _error_, win32.HRESULTError(int32(_hr))
 }
 
 // Reset wraps the raw Reset call.
@@ -2752,8 +3250,10 @@ func (self IXMLDOMParseErrorCollection) Reset() error {
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IXMLDOMParseErrorCollection) Get__newEnum(ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__newEnum(ppunk)))
+func (self IXMLDOMParseErrorCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.Get__newEnum(&_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMProcessingInstruction is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMProcessingInstruction with error-returning methods.
@@ -2768,13 +3268,17 @@ func WrapIXMLDOMProcessingInstruction(raw *dataxmlmsxml.IXMLDOMProcessingInstruc
 }
 
 // Get_target wraps the raw Get_target call.
-func (self IXMLDOMProcessingInstruction) Get_target(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_target(name)))
+func (self IXMLDOMProcessingInstruction) Get_target() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_target(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_data wraps the raw Get_data call.
-func (self IXMLDOMProcessingInstruction) Get_data(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_data(value)))
+func (self IXMLDOMProcessingInstruction) Get_data() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_data(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_data wraps the raw Put_data call.
@@ -2794,8 +3298,10 @@ func WrapIXMLDOMSchemaCollection(raw *dataxmlmsxml.IXMLDOMSchemaCollection) IXML
 }
 
 // Get wraps the raw Get call.
-func (self IXMLDOMSchemaCollection) Get(namespaceURI foundation.BSTR, schemaNode **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get(namespaceURI, schemaNode)))
+func (self IXMLDOMSchemaCollection) Get(namespaceURI foundation.BSTR) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _schemaNode *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get(namespaceURI, &_schemaNode)
+	return _schemaNode, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -2804,13 +3310,17 @@ func (self IXMLDOMSchemaCollection) Remove(namespaceURI foundation.BSTR) error {
 }
 
 // Get_length wraps the raw Get_length call.
-func (self IXMLDOMSchemaCollection) Get_length(length *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(length)))
+func (self IXMLDOMSchemaCollection) Get_length() (int32, error) {
+	var _length int32
+	_hr := self.Raw.Get_length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // Get_namespaceURI wraps the raw Get_namespaceURI call.
-func (self IXMLDOMSchemaCollection) Get_namespaceURI(index int32, length *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_namespaceURI(index, length)))
+func (self IXMLDOMSchemaCollection) Get_namespaceURI(index int32) (foundation.BSTR, error) {
+	var _length foundation.BSTR
+	_hr := self.Raw.Get_namespaceURI(index, &_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // AddCollection wraps the raw AddCollection call.
@@ -2819,8 +3329,10 @@ func (self IXMLDOMSchemaCollection) AddCollection(otherCollection *dataxmlmsxml.
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IXMLDOMSchemaCollection) Get__newEnum(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__newEnum(ppUnk)))
+func (self IXMLDOMSchemaCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__newEnum(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMSchemaCollection2 is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMSchemaCollection2 with error-returning methods.
@@ -2845,18 +3357,24 @@ func (self IXMLDOMSchemaCollection2) Put_validateOnLoad(validateOnLoad foundatio
 }
 
 // Get_validateOnLoad wraps the raw Get_validateOnLoad call.
-func (self IXMLDOMSchemaCollection2) Get_validateOnLoad(validateOnLoad *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_validateOnLoad(validateOnLoad)))
+func (self IXMLDOMSchemaCollection2) Get_validateOnLoad() (foundation.VARIANT_BOOL, error) {
+	var _validateOnLoad foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_validateOnLoad(&_validateOnLoad)
+	return _validateOnLoad, win32.HRESULTError(int32(_hr))
 }
 
 // GetSchema wraps the raw GetSchema call.
-func (self IXMLDOMSchemaCollection2) GetSchema(namespaceURI foundation.BSTR, schema **dataxmlmsxml.ISchema) error {
-	return win32.HRESULTError(int32(self.Raw.GetSchema(namespaceURI, schema)))
+func (self IXMLDOMSchemaCollection2) GetSchema(namespaceURI foundation.BSTR) (*dataxmlmsxml.ISchema, error) {
+	var _schema *dataxmlmsxml.ISchema
+	_hr := self.Raw.GetSchema(namespaceURI, &_schema)
+	return _schema, win32.HRESULTError(int32(_hr))
 }
 
 // GetDeclaration wraps the raw GetDeclaration call.
-func (self IXMLDOMSchemaCollection2) GetDeclaration(node *dataxmlmsxml.IXMLDOMNode, item **dataxmlmsxml.ISchemaItem) error {
-	return win32.HRESULTError(int32(self.Raw.GetDeclaration(node, item)))
+func (self IXMLDOMSchemaCollection2) GetDeclaration(node *dataxmlmsxml.IXMLDOMNode) (*dataxmlmsxml.ISchemaItem, error) {
+	var _item *dataxmlmsxml.ISchemaItem
+	_hr := self.Raw.GetDeclaration(node, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMSelection is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMSelection with error-returning methods.
@@ -2871,8 +3389,10 @@ func WrapIXMLDOMSelection(raw *dataxmlmsxml.IXMLDOMSelection) IXMLDOMSelection {
 }
 
 // Get_expr wraps the raw Get_expr call.
-func (self IXMLDOMSelection) Get_expr(expression *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_expr(expression)))
+func (self IXMLDOMSelection) Get_expr() (foundation.BSTR, error) {
+	var _expression foundation.BSTR
+	_hr := self.Raw.Get_expr(&_expression)
+	return _expression, win32.HRESULTError(int32(_hr))
 }
 
 // Put_expr wraps the raw Put_expr call.
@@ -2881,8 +3401,10 @@ func (self IXMLDOMSelection) Put_expr(expression foundation.BSTR) error {
 }
 
 // Get_context wraps the raw Get_context call.
-func (self IXMLDOMSelection) Get_context(ppNode **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_context(ppNode)))
+func (self IXMLDOMSelection) Get_context() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _ppNode *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_context(&_ppNode)
+	return _ppNode, win32.HRESULTError(int32(_hr))
 }
 
 // Putref_context wraps the raw Putref_context call.
@@ -2891,18 +3413,24 @@ func (self IXMLDOMSelection) Putref_context(pNode *dataxmlmsxml.IXMLDOMNode) err
 }
 
 // PeekNode wraps the raw PeekNode call.
-func (self IXMLDOMSelection) PeekNode(ppNode **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.PeekNode(ppNode)))
+func (self IXMLDOMSelection) PeekNode() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _ppNode *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.PeekNode(&_ppNode)
+	return _ppNode, win32.HRESULTError(int32(_hr))
 }
 
 // Matches wraps the raw Matches call.
-func (self IXMLDOMSelection) Matches(pNode *dataxmlmsxml.IXMLDOMNode, ppNode **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Matches(pNode, ppNode)))
+func (self IXMLDOMSelection) Matches(pNode *dataxmlmsxml.IXMLDOMNode) (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _ppNode *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Matches(pNode, &_ppNode)
+	return _ppNode, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveNext wraps the raw RemoveNext call.
-func (self IXMLDOMSelection) RemoveNext(ppNode **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.RemoveNext(ppNode)))
+func (self IXMLDOMSelection) RemoveNext() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _ppNode *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.RemoveNext(&_ppNode)
+	return _ppNode, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAll wraps the raw RemoveAll call.
@@ -2911,13 +3439,17 @@ func (self IXMLDOMSelection) RemoveAll() error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IXMLDOMSelection) Clone(ppNode **dataxmlmsxml.IXMLDOMSelection) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppNode)))
+func (self IXMLDOMSelection) Clone() (*dataxmlmsxml.IXMLDOMSelection, error) {
+	var _ppNode *dataxmlmsxml.IXMLDOMSelection
+	_hr := self.Raw.Clone(&_ppNode)
+	return _ppNode, win32.HRESULTError(int32(_hr))
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self IXMLDOMSelection) GetProperty(name foundation.BSTR, value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(name, value)))
+func (self IXMLDOMSelection) GetProperty(name foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _value systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(name, &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDOMText is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDOMText with error-returning methods.
@@ -2932,8 +3464,10 @@ func WrapIXMLDOMText(raw *dataxmlmsxml.IXMLDOMText) IXMLDOMText {
 }
 
 // SplitText wraps the raw SplitText call.
-func (self IXMLDOMText) SplitText(offset int32, rightHandTextNode **dataxmlmsxml.IXMLDOMText) error {
-	return win32.HRESULTError(int32(self.Raw.SplitText(offset, rightHandTextNode)))
+func (self IXMLDOMText) SplitText(offset int32) (*dataxmlmsxml.IXMLDOMText, error) {
+	var _rightHandTextNode *dataxmlmsxml.IXMLDOMText
+	_hr := self.Raw.SplitText(offset, &_rightHandTextNode)
+	return _rightHandTextNode, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDSOControl is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDSOControl with error-returning methods.
@@ -2948,8 +3482,10 @@ func WrapIXMLDSOControl(raw *dataxmlmsxml.IXMLDSOControl) IXMLDSOControl {
 }
 
 // Get_XMLDocument wraps the raw Get_XMLDocument call.
-func (self IXMLDSOControl) Get_XMLDocument(ppDoc **dataxmlmsxml.IXMLDOMDocument) error {
-	return win32.HRESULTError(int32(self.Raw.Get_XMLDocument(ppDoc)))
+func (self IXMLDSOControl) Get_XMLDocument() (*dataxmlmsxml.IXMLDOMDocument, error) {
+	var _ppDoc *dataxmlmsxml.IXMLDOMDocument
+	_hr := self.Raw.Get_XMLDocument(&_ppDoc)
+	return _ppDoc, win32.HRESULTError(int32(_hr))
 }
 
 // Put_XMLDocument wraps the raw Put_XMLDocument call.
@@ -2958,8 +3494,10 @@ func (self IXMLDSOControl) Put_XMLDocument(ppDoc *dataxmlmsxml.IXMLDOMDocument) 
 }
 
 // Get_JavaDSOCompatible wraps the raw Get_JavaDSOCompatible call.
-func (self IXMLDSOControl) Get_JavaDSOCompatible(fJavaDSOCompatible *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_JavaDSOCompatible(fJavaDSOCompatible)))
+func (self IXMLDSOControl) Get_JavaDSOCompatible() (foundation.BOOL, error) {
+	var _fJavaDSOCompatible foundation.BOOL
+	_hr := self.Raw.Get_JavaDSOCompatible(&_fJavaDSOCompatible)
+	return _fJavaDSOCompatible, win32.HRESULTError(int32(_hr))
 }
 
 // Put_JavaDSOCompatible wraps the raw Put_JavaDSOCompatible call.
@@ -2969,8 +3507,10 @@ func (self IXMLDSOControl) Put_JavaDSOCompatible(fJavaDSOCompatible bool) error 
 }
 
 // Get_readyState wraps the raw Get_readyState call.
-func (self IXMLDSOControl) Get_readyState(state *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_readyState(state)))
+func (self IXMLDSOControl) Get_readyState() (int32, error) {
+	var _state int32
+	_hr := self.Raw.Get_readyState(&_state)
+	return _state, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDocument is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDocument with error-returning methods.
@@ -2985,28 +3525,38 @@ func WrapIXMLDocument(raw *dataxmlmsxml.IXMLDocument) IXMLDocument {
 }
 
 // Get_root wraps the raw Get_root call.
-func (self IXMLDocument) Get_root(p **dataxmlmsxml.IXMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_root(p)))
+func (self IXMLDocument) Get_root() (*dataxmlmsxml.IXMLElement, error) {
+	var _p *dataxmlmsxml.IXMLElement
+	_hr := self.Raw.Get_root(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fileSize wraps the raw Get_fileSize call.
-func (self IXMLDocument) Get_fileSize(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fileSize(p)))
+func (self IXMLDocument) Get_fileSize() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_fileSize(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fileModifiedDate wraps the raw Get_fileModifiedDate call.
-func (self IXMLDocument) Get_fileModifiedDate(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fileModifiedDate(p)))
+func (self IXMLDocument) Get_fileModifiedDate() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_fileModifiedDate(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fileUpdatedDate wraps the raw Get_fileUpdatedDate call.
-func (self IXMLDocument) Get_fileUpdatedDate(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fileUpdatedDate(p)))
+func (self IXMLDocument) Get_fileUpdatedDate() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_fileUpdatedDate(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_URL wraps the raw Get_URL call.
-func (self IXMLDocument) Get_URL(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_URL(p)))
+func (self IXMLDocument) Get_URL() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_URL(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_URL wraps the raw Put_URL call.
@@ -3015,18 +3565,24 @@ func (self IXMLDocument) Put_URL(p foundation.BSTR) error {
 }
 
 // Get_mimeType wraps the raw Get_mimeType call.
-func (self IXMLDocument) Get_mimeType(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_mimeType(p)))
+func (self IXMLDocument) Get_mimeType() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_mimeType(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_readyState wraps the raw Get_readyState call.
-func (self IXMLDocument) Get_readyState(pl *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_readyState(pl)))
+func (self IXMLDocument) Get_readyState() (int32, error) {
+	var _pl int32
+	_hr := self.Raw.Get_readyState(&_pl)
+	return _pl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_charset wraps the raw Get_charset call.
-func (self IXMLDocument) Get_charset(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_charset(p)))
+func (self IXMLDocument) Get_charset() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_charset(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_charset wraps the raw Put_charset call.
@@ -3035,18 +3591,24 @@ func (self IXMLDocument) Put_charset(p foundation.BSTR) error {
 }
 
 // Get_version wraps the raw Get_version call.
-func (self IXMLDocument) Get_version(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_version(p)))
+func (self IXMLDocument) Get_version() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_version(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_doctype wraps the raw Get_doctype call.
-func (self IXMLDocument) Get_doctype(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_doctype(p)))
+func (self IXMLDocument) Get_doctype() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_doctype(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_dtdURL wraps the raw Get_dtdURL call.
-func (self IXMLDocument) Get_dtdURL(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_dtdURL(p)))
+func (self IXMLDocument) Get_dtdURL() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_dtdURL(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLDocument2 is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLDocument2 with error-returning methods.
@@ -3061,28 +3623,38 @@ func WrapIXMLDocument2(raw *dataxmlmsxml.IXMLDocument2) IXMLDocument2 {
 }
 
 // Get_root wraps the raw Get_root call.
-func (self IXMLDocument2) Get_root(p **dataxmlmsxml.IXMLElement2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_root(p)))
+func (self IXMLDocument2) Get_root() (*dataxmlmsxml.IXMLElement2, error) {
+	var _p *dataxmlmsxml.IXMLElement2
+	_hr := self.Raw.Get_root(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fileSize wraps the raw Get_fileSize call.
-func (self IXMLDocument2) Get_fileSize(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fileSize(p)))
+func (self IXMLDocument2) Get_fileSize() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_fileSize(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fileModifiedDate wraps the raw Get_fileModifiedDate call.
-func (self IXMLDocument2) Get_fileModifiedDate(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fileModifiedDate(p)))
+func (self IXMLDocument2) Get_fileModifiedDate() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_fileModifiedDate(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_fileUpdatedDate wraps the raw Get_fileUpdatedDate call.
-func (self IXMLDocument2) Get_fileUpdatedDate(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_fileUpdatedDate(p)))
+func (self IXMLDocument2) Get_fileUpdatedDate() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_fileUpdatedDate(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_URL wraps the raw Get_URL call.
-func (self IXMLDocument2) Get_URL(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_URL(p)))
+func (self IXMLDocument2) Get_URL() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_URL(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_URL wraps the raw Put_URL call.
@@ -3091,18 +3663,24 @@ func (self IXMLDocument2) Put_URL(p foundation.BSTR) error {
 }
 
 // Get_mimeType wraps the raw Get_mimeType call.
-func (self IXMLDocument2) Get_mimeType(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_mimeType(p)))
+func (self IXMLDocument2) Get_mimeType() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_mimeType(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_readyState wraps the raw Get_readyState call.
-func (self IXMLDocument2) Get_readyState(pl *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_readyState(pl)))
+func (self IXMLDocument2) Get_readyState() (int32, error) {
+	var _pl int32
+	_hr := self.Raw.Get_readyState(&_pl)
+	return _pl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_charset wraps the raw Get_charset call.
-func (self IXMLDocument2) Get_charset(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_charset(p)))
+func (self IXMLDocument2) Get_charset() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_charset(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_charset wraps the raw Put_charset call.
@@ -3111,23 +3689,31 @@ func (self IXMLDocument2) Put_charset(p foundation.BSTR) error {
 }
 
 // Get_version wraps the raw Get_version call.
-func (self IXMLDocument2) Get_version(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_version(p)))
+func (self IXMLDocument2) Get_version() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_version(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_doctype wraps the raw Get_doctype call.
-func (self IXMLDocument2) Get_doctype(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_doctype(p)))
+func (self IXMLDocument2) Get_doctype() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_doctype(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_dtdURL wraps the raw Get_dtdURL call.
-func (self IXMLDocument2) Get_dtdURL(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_dtdURL(p)))
+func (self IXMLDocument2) Get_dtdURL() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_dtdURL(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_async wraps the raw Get_async call.
-func (self IXMLDocument2) Get_async(pf *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_async(pf)))
+func (self IXMLDocument2) Get_async() (foundation.VARIANT_BOOL, error) {
+	var _pf foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_async(&_pf)
+	return _pf, win32.HRESULTError(int32(_hr))
 }
 
 // Put_async wraps the raw Put_async call.
@@ -3147,8 +3733,10 @@ func WrapIXMLElement(raw *dataxmlmsxml.IXMLElement) IXMLElement {
 }
 
 // Get_tagName wraps the raw Get_tagName call.
-func (self IXMLElement) Get_tagName(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_tagName(p)))
+func (self IXMLElement) Get_tagName() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_tagName(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_tagName wraps the raw Put_tagName call.
@@ -3157,13 +3745,17 @@ func (self IXMLElement) Put_tagName(p foundation.BSTR) error {
 }
 
 // Get_parent wraps the raw Get_parent call.
-func (self IXMLElement) Get_parent(ppParent **dataxmlmsxml.IXMLElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_parent(ppParent)))
+func (self IXMLElement) Get_parent() (*dataxmlmsxml.IXMLElement, error) {
+	var _ppParent *dataxmlmsxml.IXMLElement
+	_hr := self.Raw.Get_parent(&_ppParent)
+	return _ppParent, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttribute wraps the raw GetAttribute call.
-func (self IXMLElement) GetAttribute(strPropertyName foundation.BSTR, PropertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttribute(strPropertyName, PropertyValue)))
+func (self IXMLElement) GetAttribute(strPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _PropertyValue systemvariant.VARIANT
+	_hr := self.Raw.GetAttribute(strPropertyName, &_PropertyValue)
+	return _PropertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttribute wraps the raw RemoveAttribute call.
@@ -3172,18 +3764,24 @@ func (self IXMLElement) RemoveAttribute(strPropertyName foundation.BSTR) error {
 }
 
 // Get_children wraps the raw Get_children call.
-func (self IXMLElement) Get_children(pp **dataxmlmsxml.IXMLElementCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_children(pp)))
+func (self IXMLElement) Get_children() (*dataxmlmsxml.IXMLElementCollection, error) {
+	var _pp *dataxmlmsxml.IXMLElementCollection
+	_hr := self.Raw.Get_children(&_pp)
+	return _pp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_type wraps the raw Get_type call.
-func (self IXMLElement) Get_type(plType *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_type(plType)))
+func (self IXMLElement) Get_type() (int32, error) {
+	var _plType int32
+	_hr := self.Raw.Get_type(&_plType)
+	return _plType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_text wraps the raw Get_text call.
-func (self IXMLElement) Get_text(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_text(p)))
+func (self IXMLElement) Get_text() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_text(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_text wraps the raw Put_text call.
@@ -3213,8 +3811,10 @@ func WrapIXMLElement2(raw *dataxmlmsxml.IXMLElement2) IXMLElement2 {
 }
 
 // Get_tagName wraps the raw Get_tagName call.
-func (self IXMLElement2) Get_tagName(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_tagName(p)))
+func (self IXMLElement2) Get_tagName() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_tagName(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_tagName wraps the raw Put_tagName call.
@@ -3223,13 +3823,17 @@ func (self IXMLElement2) Put_tagName(p foundation.BSTR) error {
 }
 
 // Get_parent wraps the raw Get_parent call.
-func (self IXMLElement2) Get_parent(ppParent **dataxmlmsxml.IXMLElement2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_parent(ppParent)))
+func (self IXMLElement2) Get_parent() (*dataxmlmsxml.IXMLElement2, error) {
+	var _ppParent *dataxmlmsxml.IXMLElement2
+	_hr := self.Raw.Get_parent(&_ppParent)
+	return _ppParent, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttribute wraps the raw GetAttribute call.
-func (self IXMLElement2) GetAttribute(strPropertyName foundation.BSTR, PropertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttribute(strPropertyName, PropertyValue)))
+func (self IXMLElement2) GetAttribute(strPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _PropertyValue systemvariant.VARIANT
+	_hr := self.Raw.GetAttribute(strPropertyName, &_PropertyValue)
+	return _PropertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttribute wraps the raw RemoveAttribute call.
@@ -3238,18 +3842,24 @@ func (self IXMLElement2) RemoveAttribute(strPropertyName foundation.BSTR) error 
 }
 
 // Get_children wraps the raw Get_children call.
-func (self IXMLElement2) Get_children(pp **dataxmlmsxml.IXMLElementCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_children(pp)))
+func (self IXMLElement2) Get_children() (*dataxmlmsxml.IXMLElementCollection, error) {
+	var _pp *dataxmlmsxml.IXMLElementCollection
+	_hr := self.Raw.Get_children(&_pp)
+	return _pp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_type wraps the raw Get_type call.
-func (self IXMLElement2) Get_type(plType *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_type(plType)))
+func (self IXMLElement2) Get_type() (int32, error) {
+	var _plType int32
+	_hr := self.Raw.Get_type(&_plType)
+	return _plType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_text wraps the raw Get_text call.
-func (self IXMLElement2) Get_text(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_text(p)))
+func (self IXMLElement2) Get_text() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_text(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_text wraps the raw Put_text call.
@@ -3268,8 +3878,10 @@ func (self IXMLElement2) RemoveChild(pChildElem *dataxmlmsxml.IXMLElement2) erro
 }
 
 // Get_attributes wraps the raw Get_attributes call.
-func (self IXMLElement2) Get_attributes(pp **dataxmlmsxml.IXMLElementCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_attributes(pp)))
+func (self IXMLElement2) Get_attributes() (*dataxmlmsxml.IXMLElementCollection, error) {
+	var _pp *dataxmlmsxml.IXMLElementCollection
+	_hr := self.Raw.Get_attributes(&_pp)
+	return _pp, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLElementCollection is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLElementCollection with error-returning methods.
@@ -3289,13 +3901,17 @@ func (self IXMLElementCollection) Put_length(v int32) error {
 }
 
 // Get_length wraps the raw Get_length call.
-func (self IXMLElementCollection) Get_length(p *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_length(p)))
+func (self IXMLElementCollection) Get_length() (int32, error) {
+	var _p int32
+	_hr := self.Raw.Get_length(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get__newEnum wraps the raw Get__newEnum call.
-func (self IXMLElementCollection) Get__newEnum(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__newEnum(ppUnk)))
+func (self IXMLElementCollection) Get__newEnum() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__newEnum(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // IXMLError is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXMLError with error-returning methods.
@@ -3331,13 +3947,17 @@ func (self IXMLHTTPRequest) SetRequestHeader(bstrHeader foundation.BSTR, bstrVal
 }
 
 // GetResponseHeader wraps the raw GetResponseHeader call.
-func (self IXMLHTTPRequest) GetResponseHeader(bstrHeader foundation.BSTR, pbstrValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetResponseHeader(bstrHeader, pbstrValue)))
+func (self IXMLHTTPRequest) GetResponseHeader(bstrHeader foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrValue foundation.BSTR
+	_hr := self.Raw.GetResponseHeader(bstrHeader, &_pbstrValue)
+	return _pbstrValue, win32.HRESULTError(int32(_hr))
 }
 
 // GetAllResponseHeaders wraps the raw GetAllResponseHeaders call.
-func (self IXMLHTTPRequest) GetAllResponseHeaders(pbstrHeaders *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetAllResponseHeaders(pbstrHeaders)))
+func (self IXMLHTTPRequest) GetAllResponseHeaders() (foundation.BSTR, error) {
+	var _pbstrHeaders foundation.BSTR
+	_hr := self.Raw.GetAllResponseHeaders(&_pbstrHeaders)
+	return _pbstrHeaders, win32.HRESULTError(int32(_hr))
 }
 
 // Abort wraps the raw Abort call.
@@ -3346,38 +3966,52 @@ func (self IXMLHTTPRequest) Abort() error {
 }
 
 // Get_status wraps the raw Get_status call.
-func (self IXMLHTTPRequest) Get_status(plStatus *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_status(plStatus)))
+func (self IXMLHTTPRequest) Get_status() (int32, error) {
+	var _plStatus int32
+	_hr := self.Raw.Get_status(&_plStatus)
+	return _plStatus, win32.HRESULTError(int32(_hr))
 }
 
 // Get_statusText wraps the raw Get_statusText call.
-func (self IXMLHTTPRequest) Get_statusText(pbstrStatus *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_statusText(pbstrStatus)))
+func (self IXMLHTTPRequest) Get_statusText() (foundation.BSTR, error) {
+	var _pbstrStatus foundation.BSTR
+	_hr := self.Raw.Get_statusText(&_pbstrStatus)
+	return _pbstrStatus, win32.HRESULTError(int32(_hr))
 }
 
 // Get_responseXML wraps the raw Get_responseXML call.
-func (self IXMLHTTPRequest) Get_responseXML(ppBody **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_responseXML(ppBody)))
+func (self IXMLHTTPRequest) Get_responseXML() (*systemcom.IDispatch, error) {
+	var _ppBody *systemcom.IDispatch
+	_hr := self.Raw.Get_responseXML(&_ppBody)
+	return _ppBody, win32.HRESULTError(int32(_hr))
 }
 
 // Get_responseText wraps the raw Get_responseText call.
-func (self IXMLHTTPRequest) Get_responseText(pbstrBody *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_responseText(pbstrBody)))
+func (self IXMLHTTPRequest) Get_responseText() (foundation.BSTR, error) {
+	var _pbstrBody foundation.BSTR
+	_hr := self.Raw.Get_responseText(&_pbstrBody)
+	return _pbstrBody, win32.HRESULTError(int32(_hr))
 }
 
 // Get_responseBody wraps the raw Get_responseBody call.
-func (self IXMLHTTPRequest) Get_responseBody(pvarBody *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_responseBody(pvarBody)))
+func (self IXMLHTTPRequest) Get_responseBody() (systemvariant.VARIANT, error) {
+	var _pvarBody systemvariant.VARIANT
+	_hr := self.Raw.Get_responseBody(&_pvarBody)
+	return _pvarBody, win32.HRESULTError(int32(_hr))
 }
 
 // Get_responseStream wraps the raw Get_responseStream call.
-func (self IXMLHTTPRequest) Get_responseStream(pvarBody *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_responseStream(pvarBody)))
+func (self IXMLHTTPRequest) Get_responseStream() (systemvariant.VARIANT, error) {
+	var _pvarBody systemvariant.VARIANT
+	_hr := self.Raw.Get_responseStream(&_pvarBody)
+	return _pvarBody, win32.HRESULTError(int32(_hr))
 }
 
 // Get_readyState wraps the raw Get_readyState call.
-func (self IXMLHTTPRequest) Get_readyState(plState *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_readyState(plState)))
+func (self IXMLHTTPRequest) Get_readyState() (int32, error) {
+	var _plState int32
+	_hr := self.Raw.Get_readyState(&_plState)
+	return _plState, win32.HRESULTError(int32(_hr))
 }
 
 // Put_onreadystatechange wraps the raw Put_onreadystatechange call.
@@ -3545,13 +4179,17 @@ func WrapIXSLProcessor(raw *dataxmlmsxml.IXSLProcessor) IXSLProcessor {
 }
 
 // Get_input wraps the raw Get_input call.
-func (self IXSLProcessor) Get_input(pVar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_input(pVar)))
+func (self IXSLProcessor) Get_input() (systemvariant.VARIANT, error) {
+	var _pVar systemvariant.VARIANT
+	_hr := self.Raw.Get_input(&_pVar)
+	return _pVar, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ownerTemplate wraps the raw Get_ownerTemplate call.
-func (self IXSLProcessor) Get_ownerTemplate(ppTemplate **dataxmlmsxml.IXSLTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ownerTemplate(ppTemplate)))
+func (self IXSLProcessor) Get_ownerTemplate() (*dataxmlmsxml.IXSLTemplate, error) {
+	var _ppTemplate *dataxmlmsxml.IXSLTemplate
+	_hr := self.Raw.Get_ownerTemplate(&_ppTemplate)
+	return _ppTemplate, win32.HRESULTError(int32(_hr))
 }
 
 // SetStartMode wraps the raw SetStartMode call.
@@ -3560,23 +4198,31 @@ func (self IXSLProcessor) SetStartMode(mode foundation.BSTR, namespaceURI founda
 }
 
 // Get_startMode wraps the raw Get_startMode call.
-func (self IXSLProcessor) Get_startMode(mode *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_startMode(mode)))
+func (self IXSLProcessor) Get_startMode() (foundation.BSTR, error) {
+	var _mode foundation.BSTR
+	_hr := self.Raw.Get_startMode(&_mode)
+	return _mode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_startModeURI wraps the raw Get_startModeURI call.
-func (self IXSLProcessor) Get_startModeURI(namespaceURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_startModeURI(namespaceURI)))
+func (self IXSLProcessor) Get_startModeURI() (foundation.BSTR, error) {
+	var _namespaceURI foundation.BSTR
+	_hr := self.Raw.Get_startModeURI(&_namespaceURI)
+	return _namespaceURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_output wraps the raw Get_output call.
-func (self IXSLProcessor) Get_output(pOutput *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_output(pOutput)))
+func (self IXSLProcessor) Get_output() (systemvariant.VARIANT, error) {
+	var _pOutput systemvariant.VARIANT
+	_hr := self.Raw.Get_output(&_pOutput)
+	return _pOutput, win32.HRESULTError(int32(_hr))
 }
 
 // Transform wraps the raw Transform call.
-func (self IXSLProcessor) Transform(pDone *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Transform(pDone)))
+func (self IXSLProcessor) Transform() (foundation.VARIANT_BOOL, error) {
+	var _pDone foundation.VARIANT_BOOL
+	_hr := self.Raw.Transform(&_pDone)
+	return _pDone, win32.HRESULTError(int32(_hr))
 }
 
 // Reset wraps the raw Reset call.
@@ -3585,8 +4231,10 @@ func (self IXSLProcessor) Reset() error {
 }
 
 // Get_readyState wraps the raw Get_readyState call.
-func (self IXSLProcessor) Get_readyState(pReadyState *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_readyState(pReadyState)))
+func (self IXSLProcessor) Get_readyState() (int32, error) {
+	var _pReadyState int32
+	_hr := self.Raw.Get_readyState(&_pReadyState)
+	return _pReadyState, win32.HRESULTError(int32(_hr))
 }
 
 // AddObject wraps the raw AddObject call.
@@ -3595,8 +4243,10 @@ func (self IXSLProcessor) AddObject(obj *systemcom.IDispatch, namespaceURI found
 }
 
 // Get_stylesheet wraps the raw Get_stylesheet call.
-func (self IXSLProcessor) Get_stylesheet(stylesheet **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_stylesheet(stylesheet)))
+func (self IXSLProcessor) Get_stylesheet() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _stylesheet *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_stylesheet(&_stylesheet)
+	return _stylesheet, win32.HRESULTError(int32(_hr))
 }
 
 // IXSLTemplate is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXSLTemplate with error-returning methods.
@@ -3616,13 +4266,17 @@ func (self IXSLTemplate) Putref_stylesheet(stylesheet *dataxmlmsxml.IXMLDOMNode)
 }
 
 // Get_stylesheet wraps the raw Get_stylesheet call.
-func (self IXSLTemplate) Get_stylesheet(stylesheet **dataxmlmsxml.IXMLDOMNode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_stylesheet(stylesheet)))
+func (self IXSLTemplate) Get_stylesheet() (*dataxmlmsxml.IXMLDOMNode, error) {
+	var _stylesheet *dataxmlmsxml.IXMLDOMNode
+	_hr := self.Raw.Get_stylesheet(&_stylesheet)
+	return _stylesheet, win32.HRESULTError(int32(_hr))
 }
 
 // CreateProcessor wraps the raw CreateProcessor call.
-func (self IXSLTemplate) CreateProcessor(ppProcessor **dataxmlmsxml.IXSLProcessor) error {
-	return win32.HRESULTError(int32(self.Raw.CreateProcessor(ppProcessor)))
+func (self IXSLTemplate) CreateProcessor() (*dataxmlmsxml.IXSLProcessor, error) {
+	var _ppProcessor *dataxmlmsxml.IXSLProcessor
+	_hr := self.Raw.CreateProcessor(&_ppProcessor)
+	return _ppProcessor, win32.HRESULTError(int32(_hr))
 }
 
 // IXTLRuntime is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.IXTLRuntime with error-returning methods.
@@ -3637,33 +4291,45 @@ func WrapIXTLRuntime(raw *dataxmlmsxml.IXTLRuntime) IXTLRuntime {
 }
 
 // UniqueID wraps the raw UniqueID call.
-func (self IXTLRuntime) UniqueID(pNode *dataxmlmsxml.IXMLDOMNode, pID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.UniqueID(pNode, pID)))
+func (self IXTLRuntime) UniqueID(pNode *dataxmlmsxml.IXMLDOMNode) (int32, error) {
+	var _pID int32
+	_hr := self.Raw.UniqueID(pNode, &_pID)
+	return _pID, win32.HRESULTError(int32(_hr))
 }
 
 // Depth wraps the raw Depth call.
-func (self IXTLRuntime) Depth(pNode *dataxmlmsxml.IXMLDOMNode, pDepth *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Depth(pNode, pDepth)))
+func (self IXTLRuntime) Depth(pNode *dataxmlmsxml.IXMLDOMNode) (int32, error) {
+	var _pDepth int32
+	_hr := self.Raw.Depth(pNode, &_pDepth)
+	return _pDepth, win32.HRESULTError(int32(_hr))
 }
 
 // ChildNumber wraps the raw ChildNumber call.
-func (self IXTLRuntime) ChildNumber(pNode *dataxmlmsxml.IXMLDOMNode, pNumber *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ChildNumber(pNode, pNumber)))
+func (self IXTLRuntime) ChildNumber(pNode *dataxmlmsxml.IXMLDOMNode) (int32, error) {
+	var _pNumber int32
+	_hr := self.Raw.ChildNumber(pNode, &_pNumber)
+	return _pNumber, win32.HRESULTError(int32(_hr))
 }
 
 // AncestorChildNumber wraps the raw AncestorChildNumber call.
-func (self IXTLRuntime) AncestorChildNumber(bstrNodeName foundation.BSTR, pNode *dataxmlmsxml.IXMLDOMNode, pNumber *int32) error {
-	return win32.HRESULTError(int32(self.Raw.AncestorChildNumber(bstrNodeName, pNode, pNumber)))
+func (self IXTLRuntime) AncestorChildNumber(bstrNodeName foundation.BSTR, pNode *dataxmlmsxml.IXMLDOMNode) (int32, error) {
+	var _pNumber int32
+	_hr := self.Raw.AncestorChildNumber(bstrNodeName, pNode, &_pNumber)
+	return _pNumber, win32.HRESULTError(int32(_hr))
 }
 
 // AbsoluteChildNumber wraps the raw AbsoluteChildNumber call.
-func (self IXTLRuntime) AbsoluteChildNumber(pNode *dataxmlmsxml.IXMLDOMNode, pNumber *int32) error {
-	return win32.HRESULTError(int32(self.Raw.AbsoluteChildNumber(pNode, pNumber)))
+func (self IXTLRuntime) AbsoluteChildNumber(pNode *dataxmlmsxml.IXMLDOMNode) (int32, error) {
+	var _pNumber int32
+	_hr := self.Raw.AbsoluteChildNumber(pNode, &_pNumber)
+	return _pNumber, win32.HRESULTError(int32(_hr))
 }
 
 // FormatIndex wraps the raw FormatIndex call.
-func (self IXTLRuntime) FormatIndex(lIndex int32, bstrFormat foundation.BSTR, pbstrFormattedString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.FormatIndex(lIndex, bstrFormat, pbstrFormattedString)))
+func (self IXTLRuntime) FormatIndex(lIndex int32, bstrFormat foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrFormattedString foundation.BSTR
+	_hr := self.Raw.FormatIndex(lIndex, bstrFormat, &_pbstrFormattedString)
+	return _pbstrFormattedString, win32.HRESULTError(int32(_hr))
 }
 
 // XMLDOMDocumentEvents is an idiomatic wrapper over the raw COM interface Data.Xml.MsXml.XMLDOMDocumentEvents with error-returning methods.

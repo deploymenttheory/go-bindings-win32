@@ -36,8 +36,10 @@ func WrapIFsrmAccessDeniedRemediationClient(raw *storagefileserverresourcemanage
 }
 
 // Show wraps the raw Show call.
-func (self IFsrmAccessDeniedRemediationClient) Show(parentWnd uintptr, accessPath foundation.BSTR, errorType storagefileserverresourcemanager.AdrClientErrorType, flags int32, windowTitle foundation.BSTR, windowMessage foundation.BSTR, result *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Show(parentWnd, accessPath, errorType, flags, windowTitle, windowMessage, result)))
+func (self IFsrmAccessDeniedRemediationClient) Show(parentWnd uintptr, accessPath foundation.BSTR, errorType storagefileserverresourcemanager.AdrClientErrorType, flags int32, windowTitle foundation.BSTR, windowMessage foundation.BSTR) (int32, error) {
+	var _result int32
+	_hr := self.Raw.Show(parentWnd, accessPath, errorType, flags, windowTitle, windowMessage, &_result)
+	return _result, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmAction is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmAction with error-returning methods.
@@ -52,18 +54,24 @@ func WrapIFsrmAction(raw *storagefileserverresourcemanager.IFsrmAction) IFsrmAct
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IFsrmAction) Get_Id(id *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(id)))
+func (self IFsrmAction) Get_Id() (win32.GUID, error) {
+	var _id win32.GUID
+	_hr := self.Raw.Get_Id(&_id)
+	return _id, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ActionType wraps the raw Get_ActionType call.
-func (self IFsrmAction) Get_ActionType(actionType *storagefileserverresourcemanager.FsrmActionType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActionType(actionType)))
+func (self IFsrmAction) Get_ActionType() (storagefileserverresourcemanager.FsrmActionType, error) {
+	var _actionType storagefileserverresourcemanager.FsrmActionType
+	_hr := self.Raw.Get_ActionType(&_actionType)
+	return _actionType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RunLimitInterval wraps the raw Get_RunLimitInterval call.
-func (self IFsrmAction) Get_RunLimitInterval(minutes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RunLimitInterval(minutes)))
+func (self IFsrmAction) Get_RunLimitInterval() (int32, error) {
+	var _minutes int32
+	_hr := self.Raw.Get_RunLimitInterval(&_minutes)
+	return _minutes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RunLimitInterval wraps the raw Put_RunLimitInterval call.
@@ -88,8 +96,10 @@ func WrapIFsrmActionCommand(raw *storagefileserverresourcemanager.IFsrmActionCom
 }
 
 // Get_ExecutablePath wraps the raw Get_ExecutablePath call.
-func (self IFsrmActionCommand) Get_ExecutablePath(executablePath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExecutablePath(executablePath)))
+func (self IFsrmActionCommand) Get_ExecutablePath() (foundation.BSTR, error) {
+	var _executablePath foundation.BSTR
+	_hr := self.Raw.Get_ExecutablePath(&_executablePath)
+	return _executablePath, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ExecutablePath wraps the raw Put_ExecutablePath call.
@@ -98,8 +108,10 @@ func (self IFsrmActionCommand) Put_ExecutablePath(executablePath foundation.BSTR
 }
 
 // Get_Arguments wraps the raw Get_Arguments call.
-func (self IFsrmActionCommand) Get_Arguments(arguments *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Arguments(arguments)))
+func (self IFsrmActionCommand) Get_Arguments() (foundation.BSTR, error) {
+	var _arguments foundation.BSTR
+	_hr := self.Raw.Get_Arguments(&_arguments)
+	return _arguments, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Arguments wraps the raw Put_Arguments call.
@@ -108,8 +120,10 @@ func (self IFsrmActionCommand) Put_Arguments(arguments foundation.BSTR) error {
 }
 
 // Get_Account wraps the raw Get_Account call.
-func (self IFsrmActionCommand) Get_Account(account *storagefileserverresourcemanager.FsrmAccountType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Account(account)))
+func (self IFsrmActionCommand) Get_Account() (storagefileserverresourcemanager.FsrmAccountType, error) {
+	var _account storagefileserverresourcemanager.FsrmAccountType
+	_hr := self.Raw.Get_Account(&_account)
+	return _account, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Account wraps the raw Put_Account call.
@@ -118,8 +132,10 @@ func (self IFsrmActionCommand) Put_Account(account storagefileserverresourcemana
 }
 
 // Get_WorkingDirectory wraps the raw Get_WorkingDirectory call.
-func (self IFsrmActionCommand) Get_WorkingDirectory(workingDirectory *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WorkingDirectory(workingDirectory)))
+func (self IFsrmActionCommand) Get_WorkingDirectory() (foundation.BSTR, error) {
+	var _workingDirectory foundation.BSTR
+	_hr := self.Raw.Get_WorkingDirectory(&_workingDirectory)
+	return _workingDirectory, win32.HRESULTError(int32(_hr))
 }
 
 // Put_WorkingDirectory wraps the raw Put_WorkingDirectory call.
@@ -128,8 +144,10 @@ func (self IFsrmActionCommand) Put_WorkingDirectory(workingDirectory foundation.
 }
 
 // Get_MonitorCommand wraps the raw Get_MonitorCommand call.
-func (self IFsrmActionCommand) Get_MonitorCommand(monitorCommand *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MonitorCommand(monitorCommand)))
+func (self IFsrmActionCommand) Get_MonitorCommand() (foundation.VARIANT_BOOL, error) {
+	var _monitorCommand foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MonitorCommand(&_monitorCommand)
+	return _monitorCommand, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MonitorCommand wraps the raw Put_MonitorCommand call.
@@ -138,8 +156,10 @@ func (self IFsrmActionCommand) Put_MonitorCommand(monitorCommand foundation.VARI
 }
 
 // Get_KillTimeOut wraps the raw Get_KillTimeOut call.
-func (self IFsrmActionCommand) Get_KillTimeOut(minutes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_KillTimeOut(minutes)))
+func (self IFsrmActionCommand) Get_KillTimeOut() (int32, error) {
+	var _minutes int32
+	_hr := self.Raw.Get_KillTimeOut(&_minutes)
+	return _minutes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_KillTimeOut wraps the raw Put_KillTimeOut call.
@@ -148,8 +168,10 @@ func (self IFsrmActionCommand) Put_KillTimeOut(minutes int32) error {
 }
 
 // Get_LogResult wraps the raw Get_LogResult call.
-func (self IFsrmActionCommand) Get_LogResult(logResults *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LogResult(logResults)))
+func (self IFsrmActionCommand) Get_LogResult() (foundation.VARIANT_BOOL, error) {
+	var _logResults foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_LogResult(&_logResults)
+	return _logResults, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LogResult wraps the raw Put_LogResult call.
@@ -169,8 +191,10 @@ func WrapIFsrmActionEmail(raw *storagefileserverresourcemanager.IFsrmActionEmail
 }
 
 // Get_MailFrom wraps the raw Get_MailFrom call.
-func (self IFsrmActionEmail) Get_MailFrom(mailFrom *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailFrom(mailFrom)))
+func (self IFsrmActionEmail) Get_MailFrom() (foundation.BSTR, error) {
+	var _mailFrom foundation.BSTR
+	_hr := self.Raw.Get_MailFrom(&_mailFrom)
+	return _mailFrom, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailFrom wraps the raw Put_MailFrom call.
@@ -179,8 +203,10 @@ func (self IFsrmActionEmail) Put_MailFrom(mailFrom foundation.BSTR) error {
 }
 
 // Get_MailReplyTo wraps the raw Get_MailReplyTo call.
-func (self IFsrmActionEmail) Get_MailReplyTo(mailReplyTo *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailReplyTo(mailReplyTo)))
+func (self IFsrmActionEmail) Get_MailReplyTo() (foundation.BSTR, error) {
+	var _mailReplyTo foundation.BSTR
+	_hr := self.Raw.Get_MailReplyTo(&_mailReplyTo)
+	return _mailReplyTo, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailReplyTo wraps the raw Put_MailReplyTo call.
@@ -189,8 +215,10 @@ func (self IFsrmActionEmail) Put_MailReplyTo(mailReplyTo foundation.BSTR) error 
 }
 
 // Get_MailTo wraps the raw Get_MailTo call.
-func (self IFsrmActionEmail) Get_MailTo(mailTo *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailTo(mailTo)))
+func (self IFsrmActionEmail) Get_MailTo() (foundation.BSTR, error) {
+	var _mailTo foundation.BSTR
+	_hr := self.Raw.Get_MailTo(&_mailTo)
+	return _mailTo, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailTo wraps the raw Put_MailTo call.
@@ -199,8 +227,10 @@ func (self IFsrmActionEmail) Put_MailTo(mailTo foundation.BSTR) error {
 }
 
 // Get_MailCc wraps the raw Get_MailCc call.
-func (self IFsrmActionEmail) Get_MailCc(mailCc *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailCc(mailCc)))
+func (self IFsrmActionEmail) Get_MailCc() (foundation.BSTR, error) {
+	var _mailCc foundation.BSTR
+	_hr := self.Raw.Get_MailCc(&_mailCc)
+	return _mailCc, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailCc wraps the raw Put_MailCc call.
@@ -209,8 +239,10 @@ func (self IFsrmActionEmail) Put_MailCc(mailCc foundation.BSTR) error {
 }
 
 // Get_MailBcc wraps the raw Get_MailBcc call.
-func (self IFsrmActionEmail) Get_MailBcc(mailBcc *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailBcc(mailBcc)))
+func (self IFsrmActionEmail) Get_MailBcc() (foundation.BSTR, error) {
+	var _mailBcc foundation.BSTR
+	_hr := self.Raw.Get_MailBcc(&_mailBcc)
+	return _mailBcc, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailBcc wraps the raw Put_MailBcc call.
@@ -219,8 +251,10 @@ func (self IFsrmActionEmail) Put_MailBcc(mailBcc foundation.BSTR) error {
 }
 
 // Get_MailSubject wraps the raw Get_MailSubject call.
-func (self IFsrmActionEmail) Get_MailSubject(mailSubject *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailSubject(mailSubject)))
+func (self IFsrmActionEmail) Get_MailSubject() (foundation.BSTR, error) {
+	var _mailSubject foundation.BSTR
+	_hr := self.Raw.Get_MailSubject(&_mailSubject)
+	return _mailSubject, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailSubject wraps the raw Put_MailSubject call.
@@ -229,8 +263,10 @@ func (self IFsrmActionEmail) Put_MailSubject(mailSubject foundation.BSTR) error 
 }
 
 // Get_MessageText wraps the raw Get_MessageText call.
-func (self IFsrmActionEmail) Get_MessageText(messageText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MessageText(messageText)))
+func (self IFsrmActionEmail) Get_MessageText() (foundation.BSTR, error) {
+	var _messageText foundation.BSTR
+	_hr := self.Raw.Get_MessageText(&_messageText)
+	return _messageText, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MessageText wraps the raw Put_MessageText call.
@@ -250,8 +286,10 @@ func WrapIFsrmActionEmail2(raw *storagefileserverresourcemanager.IFsrmActionEmai
 }
 
 // Get_AttachmentFileListSize wraps the raw Get_AttachmentFileListSize call.
-func (self IFsrmActionEmail2) Get_AttachmentFileListSize(attachmentFileListSize *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AttachmentFileListSize(attachmentFileListSize)))
+func (self IFsrmActionEmail2) Get_AttachmentFileListSize() (int32, error) {
+	var _attachmentFileListSize int32
+	_hr := self.Raw.Get_AttachmentFileListSize(&_attachmentFileListSize)
+	return _attachmentFileListSize, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AttachmentFileListSize wraps the raw Put_AttachmentFileListSize call.
@@ -271,8 +309,10 @@ func WrapIFsrmActionEventLog(raw *storagefileserverresourcemanager.IFsrmActionEv
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IFsrmActionEventLog) Get_EventType(eventType *storagefileserverresourcemanager.FsrmEventType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(eventType)))
+func (self IFsrmActionEventLog) Get_EventType() (storagefileserverresourcemanager.FsrmEventType, error) {
+	var _eventType storagefileserverresourcemanager.FsrmEventType
+	_hr := self.Raw.Get_EventType(&_eventType)
+	return _eventType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EventType wraps the raw Put_EventType call.
@@ -281,8 +321,10 @@ func (self IFsrmActionEventLog) Put_EventType(eventType storagefileserverresourc
 }
 
 // Get_MessageText wraps the raw Get_MessageText call.
-func (self IFsrmActionEventLog) Get_MessageText(messageText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MessageText(messageText)))
+func (self IFsrmActionEventLog) Get_MessageText() (foundation.BSTR, error) {
+	var _messageText foundation.BSTR
+	_hr := self.Raw.Get_MessageText(&_messageText)
+	return _messageText, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MessageText wraps the raw Put_MessageText call.
@@ -302,8 +344,10 @@ func WrapIFsrmActionReport(raw *storagefileserverresourcemanager.IFsrmActionRepo
 }
 
 // Get_ReportTypes wraps the raw Get_ReportTypes call.
-func (self IFsrmActionReport) Get_ReportTypes(reportTypes **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReportTypes(reportTypes)))
+func (self IFsrmActionReport) Get_ReportTypes() (*systemcom.SAFEARRAY, error) {
+	var _reportTypes *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ReportTypes(&_reportTypes)
+	return _reportTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ReportTypes wraps the raw Put_ReportTypes call.
@@ -312,8 +356,10 @@ func (self IFsrmActionReport) Put_ReportTypes(reportTypes *systemcom.SAFEARRAY) 
 }
 
 // Get_MailTo wraps the raw Get_MailTo call.
-func (self IFsrmActionReport) Get_MailTo(mailTo *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailTo(mailTo)))
+func (self IFsrmActionReport) Get_MailTo() (foundation.BSTR, error) {
+	var _mailTo foundation.BSTR
+	_hr := self.Raw.Get_MailTo(&_mailTo)
+	return _mailTo, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailTo wraps the raw Put_MailTo call.
@@ -333,8 +379,10 @@ func WrapIFsrmAutoApplyQuota(raw *storagefileserverresourcemanager.IFsrmAutoAppl
 }
 
 // Get_ExcludeFolders wraps the raw Get_ExcludeFolders call.
-func (self IFsrmAutoApplyQuota) Get_ExcludeFolders(folders **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExcludeFolders(folders)))
+func (self IFsrmAutoApplyQuota) Get_ExcludeFolders() (*systemcom.SAFEARRAY, error) {
+	var _folders *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ExcludeFolders(&_folders)
+	return _folders, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ExcludeFolders wraps the raw Put_ExcludeFolders call.
@@ -343,8 +391,10 @@ func (self IFsrmAutoApplyQuota) Put_ExcludeFolders(folders *systemcom.SAFEARRAY)
 }
 
 // CommitAndUpdateDerived wraps the raw CommitAndUpdateDerived call.
-func (self IFsrmAutoApplyQuota) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions, derivedObjectsResult **storagefileserverresourcemanager.IFsrmDerivedObjectsResult) error {
-	return win32.HRESULTError(int32(self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, derivedObjectsResult)))
+func (self IFsrmAutoApplyQuota) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (*storagefileserverresourcemanager.IFsrmDerivedObjectsResult, error) {
+	var _derivedObjectsResult *storagefileserverresourcemanager.IFsrmDerivedObjectsResult
+	_hr := self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, &_derivedObjectsResult)
+	return _derivedObjectsResult, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmClassificationManager is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmClassificationManager with error-returning methods.
@@ -359,8 +409,10 @@ func WrapIFsrmClassificationManager(raw *storagefileserverresourcemanager.IFsrmC
 }
 
 // Get_ClassificationReportFormats wraps the raw Get_ClassificationReportFormats call.
-func (self IFsrmClassificationManager) Get_ClassificationReportFormats(formats **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClassificationReportFormats(formats)))
+func (self IFsrmClassificationManager) Get_ClassificationReportFormats() (*systemcom.SAFEARRAY, error) {
+	var _formats *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ClassificationReportFormats(&_formats)
+	return _formats, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClassificationReportFormats wraps the raw Put_ClassificationReportFormats call.
@@ -369,8 +421,10 @@ func (self IFsrmClassificationManager) Put_ClassificationReportFormats(formats *
 }
 
 // Get_Logging wraps the raw Get_Logging call.
-func (self IFsrmClassificationManager) Get_Logging(logging *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Logging(logging)))
+func (self IFsrmClassificationManager) Get_Logging() (int32, error) {
+	var _logging int32
+	_hr := self.Raw.Get_Logging(&_logging)
+	return _logging, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Logging wraps the raw Put_Logging call.
@@ -379,8 +433,10 @@ func (self IFsrmClassificationManager) Put_Logging(logging int32) error {
 }
 
 // Get_ClassificationReportMailTo wraps the raw Get_ClassificationReportMailTo call.
-func (self IFsrmClassificationManager) Get_ClassificationReportMailTo(mailTo *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClassificationReportMailTo(mailTo)))
+func (self IFsrmClassificationManager) Get_ClassificationReportMailTo() (foundation.BSTR, error) {
+	var _mailTo foundation.BSTR
+	_hr := self.Raw.Get_ClassificationReportMailTo(&_mailTo)
+	return _mailTo, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClassificationReportMailTo wraps the raw Put_ClassificationReportMailTo call.
@@ -389,8 +445,10 @@ func (self IFsrmClassificationManager) Put_ClassificationReportMailTo(mailTo fou
 }
 
 // Get_ClassificationReportEnabled wraps the raw Get_ClassificationReportEnabled call.
-func (self IFsrmClassificationManager) Get_ClassificationReportEnabled(reportEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClassificationReportEnabled(reportEnabled)))
+func (self IFsrmClassificationManager) Get_ClassificationReportEnabled() (foundation.VARIANT_BOOL, error) {
+	var _reportEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ClassificationReportEnabled(&_reportEnabled)
+	return _reportEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClassificationReportEnabled wraps the raw Put_ClassificationReportEnabled call.
@@ -399,63 +457,87 @@ func (self IFsrmClassificationManager) Put_ClassificationReportEnabled(reportEna
 }
 
 // Get_ClassificationLastReportPathWithoutExtension wraps the raw Get_ClassificationLastReportPathWithoutExtension call.
-func (self IFsrmClassificationManager) Get_ClassificationLastReportPathWithoutExtension(lastReportPath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClassificationLastReportPathWithoutExtension(lastReportPath)))
+func (self IFsrmClassificationManager) Get_ClassificationLastReportPathWithoutExtension() (foundation.BSTR, error) {
+	var _lastReportPath foundation.BSTR
+	_hr := self.Raw.Get_ClassificationLastReportPathWithoutExtension(&_lastReportPath)
+	return _lastReportPath, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClassificationLastError wraps the raw Get_ClassificationLastError call.
-func (self IFsrmClassificationManager) Get_ClassificationLastError(lastError *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClassificationLastError(lastError)))
+func (self IFsrmClassificationManager) Get_ClassificationLastError() (foundation.BSTR, error) {
+	var _lastError foundation.BSTR
+	_hr := self.Raw.Get_ClassificationLastError(&_lastError)
+	return _lastError, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClassificationRunningStatus wraps the raw Get_ClassificationRunningStatus call.
-func (self IFsrmClassificationManager) Get_ClassificationRunningStatus(runningStatus *storagefileserverresourcemanager.FsrmReportRunningStatus) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClassificationRunningStatus(runningStatus)))
+func (self IFsrmClassificationManager) Get_ClassificationRunningStatus() (storagefileserverresourcemanager.FsrmReportRunningStatus, error) {
+	var _runningStatus storagefileserverresourcemanager.FsrmReportRunningStatus
+	_hr := self.Raw.Get_ClassificationRunningStatus(&_runningStatus)
+	return _runningStatus, win32.HRESULTError(int32(_hr))
 }
 
 // EnumPropertyDefinitions wraps the raw EnumPropertyDefinitions call.
-func (self IFsrmClassificationManager) EnumPropertyDefinitions(options storagefileserverresourcemanager.FsrmEnumOptions, propertyDefinitions **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumPropertyDefinitions(options, propertyDefinitions)))
+func (self IFsrmClassificationManager) EnumPropertyDefinitions(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _propertyDefinitions *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumPropertyDefinitions(options, &_propertyDefinitions)
+	return _propertyDefinitions, win32.HRESULTError(int32(_hr))
 }
 
 // CreatePropertyDefinition wraps the raw CreatePropertyDefinition call.
-func (self IFsrmClassificationManager) CreatePropertyDefinition(propertyDefinition **storagefileserverresourcemanager.IFsrmPropertyDefinition) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePropertyDefinition(propertyDefinition)))
+func (self IFsrmClassificationManager) CreatePropertyDefinition() (*storagefileserverresourcemanager.IFsrmPropertyDefinition, error) {
+	var _propertyDefinition *storagefileserverresourcemanager.IFsrmPropertyDefinition
+	_hr := self.Raw.CreatePropertyDefinition(&_propertyDefinition)
+	return _propertyDefinition, win32.HRESULTError(int32(_hr))
 }
 
 // GetPropertyDefinition wraps the raw GetPropertyDefinition call.
-func (self IFsrmClassificationManager) GetPropertyDefinition(propertyName foundation.BSTR, propertyDefinition **storagefileserverresourcemanager.IFsrmPropertyDefinition) error {
-	return win32.HRESULTError(int32(self.Raw.GetPropertyDefinition(propertyName, propertyDefinition)))
+func (self IFsrmClassificationManager) GetPropertyDefinition(propertyName foundation.BSTR) (*storagefileserverresourcemanager.IFsrmPropertyDefinition, error) {
+	var _propertyDefinition *storagefileserverresourcemanager.IFsrmPropertyDefinition
+	_hr := self.Raw.GetPropertyDefinition(propertyName, &_propertyDefinition)
+	return _propertyDefinition, win32.HRESULTError(int32(_hr))
 }
 
 // EnumRules wraps the raw EnumRules call.
-func (self IFsrmClassificationManager) EnumRules(ruleType storagefileserverresourcemanager.FsrmRuleType, options storagefileserverresourcemanager.FsrmEnumOptions, Rules **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumRules(ruleType, options, Rules)))
+func (self IFsrmClassificationManager) EnumRules(ruleType storagefileserverresourcemanager.FsrmRuleType, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _Rules *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumRules(ruleType, options, &_Rules)
+	return _Rules, win32.HRESULTError(int32(_hr))
 }
 
 // CreateRule wraps the raw CreateRule call.
-func (self IFsrmClassificationManager) CreateRule(ruleType storagefileserverresourcemanager.FsrmRuleType, Rule **storagefileserverresourcemanager.IFsrmRule) error {
-	return win32.HRESULTError(int32(self.Raw.CreateRule(ruleType, Rule)))
+func (self IFsrmClassificationManager) CreateRule(ruleType storagefileserverresourcemanager.FsrmRuleType) (*storagefileserverresourcemanager.IFsrmRule, error) {
+	var _Rule *storagefileserverresourcemanager.IFsrmRule
+	_hr := self.Raw.CreateRule(ruleType, &_Rule)
+	return _Rule, win32.HRESULTError(int32(_hr))
 }
 
 // GetRule wraps the raw GetRule call.
-func (self IFsrmClassificationManager) GetRule(ruleName foundation.BSTR, ruleType storagefileserverresourcemanager.FsrmRuleType, Rule **storagefileserverresourcemanager.IFsrmRule) error {
-	return win32.HRESULTError(int32(self.Raw.GetRule(ruleName, ruleType, Rule)))
+func (self IFsrmClassificationManager) GetRule(ruleName foundation.BSTR, ruleType storagefileserverresourcemanager.FsrmRuleType) (*storagefileserverresourcemanager.IFsrmRule, error) {
+	var _Rule *storagefileserverresourcemanager.IFsrmRule
+	_hr := self.Raw.GetRule(ruleName, ruleType, &_Rule)
+	return _Rule, win32.HRESULTError(int32(_hr))
 }
 
 // EnumModuleDefinitions wraps the raw EnumModuleDefinitions call.
-func (self IFsrmClassificationManager) EnumModuleDefinitions(moduleType storagefileserverresourcemanager.FsrmPipelineModuleType, options storagefileserverresourcemanager.FsrmEnumOptions, moduleDefinitions **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumModuleDefinitions(moduleType, options, moduleDefinitions)))
+func (self IFsrmClassificationManager) EnumModuleDefinitions(moduleType storagefileserverresourcemanager.FsrmPipelineModuleType, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _moduleDefinitions *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumModuleDefinitions(moduleType, options, &_moduleDefinitions)
+	return _moduleDefinitions, win32.HRESULTError(int32(_hr))
 }
 
 // CreateModuleDefinition wraps the raw CreateModuleDefinition call.
-func (self IFsrmClassificationManager) CreateModuleDefinition(moduleType storagefileserverresourcemanager.FsrmPipelineModuleType, moduleDefinition **storagefileserverresourcemanager.IFsrmPipelineModuleDefinition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateModuleDefinition(moduleType, moduleDefinition)))
+func (self IFsrmClassificationManager) CreateModuleDefinition(moduleType storagefileserverresourcemanager.FsrmPipelineModuleType) (*storagefileserverresourcemanager.IFsrmPipelineModuleDefinition, error) {
+	var _moduleDefinition *storagefileserverresourcemanager.IFsrmPipelineModuleDefinition
+	_hr := self.Raw.CreateModuleDefinition(moduleType, &_moduleDefinition)
+	return _moduleDefinition, win32.HRESULTError(int32(_hr))
 }
 
 // GetModuleDefinition wraps the raw GetModuleDefinition call.
-func (self IFsrmClassificationManager) GetModuleDefinition(moduleName foundation.BSTR, moduleType storagefileserverresourcemanager.FsrmPipelineModuleType, moduleDefinition **storagefileserverresourcemanager.IFsrmPipelineModuleDefinition) error {
-	return win32.HRESULTError(int32(self.Raw.GetModuleDefinition(moduleName, moduleType, moduleDefinition)))
+func (self IFsrmClassificationManager) GetModuleDefinition(moduleName foundation.BSTR, moduleType storagefileserverresourcemanager.FsrmPipelineModuleType) (*storagefileserverresourcemanager.IFsrmPipelineModuleDefinition, error) {
+	var _moduleDefinition *storagefileserverresourcemanager.IFsrmPipelineModuleDefinition
+	_hr := self.Raw.GetModuleDefinition(moduleName, moduleType, &_moduleDefinition)
+	return _moduleDefinition, win32.HRESULTError(int32(_hr))
 }
 
 // RunClassification wraps the raw RunClassification call.
@@ -464,8 +546,10 @@ func (self IFsrmClassificationManager) RunClassification(context storagefileserv
 }
 
 // WaitForClassificationCompletion wraps the raw WaitForClassificationCompletion call.
-func (self IFsrmClassificationManager) WaitForClassificationCompletion(waitSeconds int32, completed *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.WaitForClassificationCompletion(waitSeconds, completed)))
+func (self IFsrmClassificationManager) WaitForClassificationCompletion(waitSeconds int32) (foundation.VARIANT_BOOL, error) {
+	var _completed foundation.VARIANT_BOOL
+	_hr := self.Raw.WaitForClassificationCompletion(waitSeconds, &_completed)
+	return _completed, win32.HRESULTError(int32(_hr))
 }
 
 // CancelClassification wraps the raw CancelClassification call.
@@ -474,13 +558,17 @@ func (self IFsrmClassificationManager) CancelClassification() error {
 }
 
 // EnumFileProperties wraps the raw EnumFileProperties call.
-func (self IFsrmClassificationManager) EnumFileProperties(filePath foundation.BSTR, options storagefileserverresourcemanager.FsrmGetFilePropertyOptions, fileProperties **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumFileProperties(filePath, options, fileProperties)))
+func (self IFsrmClassificationManager) EnumFileProperties(filePath foundation.BSTR, options storagefileserverresourcemanager.FsrmGetFilePropertyOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _fileProperties *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumFileProperties(filePath, options, &_fileProperties)
+	return _fileProperties, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileProperty wraps the raw GetFileProperty call.
-func (self IFsrmClassificationManager) GetFileProperty(filePath foundation.BSTR, propertyName foundation.BSTR, options storagefileserverresourcemanager.FsrmGetFilePropertyOptions, property **storagefileserverresourcemanager.IFsrmProperty) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileProperty(filePath, propertyName, options, property)))
+func (self IFsrmClassificationManager) GetFileProperty(filePath foundation.BSTR, propertyName foundation.BSTR, options storagefileserverresourcemanager.FsrmGetFilePropertyOptions) (*storagefileserverresourcemanager.IFsrmProperty, error) {
+	var _property *storagefileserverresourcemanager.IFsrmProperty
+	_hr := self.Raw.GetFileProperty(filePath, propertyName, options, &_property)
+	return _property, win32.HRESULTError(int32(_hr))
 }
 
 // SetFileProperty wraps the raw SetFileProperty call.
@@ -521,8 +609,10 @@ func WrapIFsrmClassificationRule(raw *storagefileserverresourcemanager.IFsrmClas
 }
 
 // Get_ExecutionOption wraps the raw Get_ExecutionOption call.
-func (self IFsrmClassificationRule) Get_ExecutionOption(executionOption *storagefileserverresourcemanager.FsrmExecutionOption) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExecutionOption(executionOption)))
+func (self IFsrmClassificationRule) Get_ExecutionOption() (storagefileserverresourcemanager.FsrmExecutionOption, error) {
+	var _executionOption storagefileserverresourcemanager.FsrmExecutionOption
+	_hr := self.Raw.Get_ExecutionOption(&_executionOption)
+	return _executionOption, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ExecutionOption wraps the raw Put_ExecutionOption call.
@@ -531,8 +621,10 @@ func (self IFsrmClassificationRule) Put_ExecutionOption(executionOption storagef
 }
 
 // Get_PropertyAffected wraps the raw Get_PropertyAffected call.
-func (self IFsrmClassificationRule) Get_PropertyAffected(property *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyAffected(property)))
+func (self IFsrmClassificationRule) Get_PropertyAffected() (foundation.BSTR, error) {
+	var _property foundation.BSTR
+	_hr := self.Raw.Get_PropertyAffected(&_property)
+	return _property, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PropertyAffected wraps the raw Put_PropertyAffected call.
@@ -541,8 +633,10 @@ func (self IFsrmClassificationRule) Put_PropertyAffected(property foundation.BST
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IFsrmClassificationRule) Get_Value(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(value)))
+func (self IFsrmClassificationRule) Get_Value() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_Value(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Value wraps the raw Put_Value call.
@@ -562,8 +656,10 @@ func WrapIFsrmClassifierModuleDefinition(raw *storagefileserverresourcemanager.I
 }
 
 // Get_PropertiesAffected wraps the raw Get_PropertiesAffected call.
-func (self IFsrmClassifierModuleDefinition) Get_PropertiesAffected(propertiesAffected **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertiesAffected(propertiesAffected)))
+func (self IFsrmClassifierModuleDefinition) Get_PropertiesAffected() (*systemcom.SAFEARRAY, error) {
+	var _propertiesAffected *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_PropertiesAffected(&_propertiesAffected)
+	return _propertiesAffected, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PropertiesAffected wraps the raw Put_PropertiesAffected call.
@@ -572,8 +668,10 @@ func (self IFsrmClassifierModuleDefinition) Put_PropertiesAffected(propertiesAff
 }
 
 // Get_PropertiesUsed wraps the raw Get_PropertiesUsed call.
-func (self IFsrmClassifierModuleDefinition) Get_PropertiesUsed(propertiesUsed **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertiesUsed(propertiesUsed)))
+func (self IFsrmClassifierModuleDefinition) Get_PropertiesUsed() (*systemcom.SAFEARRAY, error) {
+	var _propertiesUsed *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_PropertiesUsed(&_propertiesUsed)
+	return _propertiesUsed, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PropertiesUsed wraps the raw Put_PropertiesUsed call.
@@ -582,8 +680,10 @@ func (self IFsrmClassifierModuleDefinition) Put_PropertiesUsed(propertiesUsed *s
 }
 
 // Get_NeedsExplicitValue wraps the raw Get_NeedsExplicitValue call.
-func (self IFsrmClassifierModuleDefinition) Get_NeedsExplicitValue(needsExplicitValue *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NeedsExplicitValue(needsExplicitValue)))
+func (self IFsrmClassifierModuleDefinition) Get_NeedsExplicitValue() (foundation.VARIANT_BOOL, error) {
+	var _needsExplicitValue foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_NeedsExplicitValue(&_needsExplicitValue)
+	return _needsExplicitValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NeedsExplicitValue wraps the raw Put_NeedsExplicitValue call.
@@ -603,8 +703,10 @@ func WrapIFsrmClassifierModuleImplementation(raw *storagefileserverresourcemanag
 }
 
 // Get_LastModified wraps the raw Get_LastModified call.
-func (self IFsrmClassifierModuleImplementation) Get_LastModified(lastModified *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastModified(lastModified)))
+func (self IFsrmClassifierModuleImplementation) Get_LastModified() (systemvariant.VARIANT, error) {
+	var _lastModified systemvariant.VARIANT
+	_hr := self.Raw.Get_LastModified(&_lastModified)
+	return _lastModified, win32.HRESULTError(int32(_hr))
 }
 
 // UseRulesAndDefinitions wraps the raw UseRulesAndDefinitions call.
@@ -634,23 +736,31 @@ func WrapIFsrmCollection(raw *storagefileserverresourcemanager.IFsrmCollection) 
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IFsrmCollection) Get__NewEnum(unknown **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(unknown)))
+func (self IFsrmCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _unknown *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_unknown)
+	return _unknown, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IFsrmCollection) Get_Item(index int32, item *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, item)))
+func (self IFsrmCollection) Get_Item(index int32) (systemvariant.VARIANT, error) {
+	var _item systemvariant.VARIANT
+	_hr := self.Raw.Get_Item(index, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IFsrmCollection) Get_Count(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(count)))
+func (self IFsrmCollection) Get_Count() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_Count(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IFsrmCollection) Get_State(state *storagefileserverresourcemanager.FsrmCollectionState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(state)))
+func (self IFsrmCollection) Get_State() (storagefileserverresourcemanager.FsrmCollectionState, error) {
+	var _state storagefileserverresourcemanager.FsrmCollectionState
+	_hr := self.Raw.Get_State(&_state)
+	return _state, win32.HRESULTError(int32(_hr))
 }
 
 // Cancel wraps the raw Cancel call.
@@ -659,8 +769,10 @@ func (self IFsrmCollection) Cancel() error {
 }
 
 // WaitForCompletion wraps the raw WaitForCompletion call.
-func (self IFsrmCollection) WaitForCompletion(waitSeconds int32, completed *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.WaitForCompletion(waitSeconds, completed)))
+func (self IFsrmCollection) WaitForCompletion(waitSeconds int32) (foundation.VARIANT_BOOL, error) {
+	var _completed foundation.VARIANT_BOOL
+	_hr := self.Raw.WaitForCompletion(waitSeconds, &_completed)
+	return _completed, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmCommittableCollection is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmCommittableCollection with error-returning methods.
@@ -675,8 +787,10 @@ func WrapIFsrmCommittableCollection(raw *storagefileserverresourcemanager.IFsrmC
 }
 
 // Commit wraps the raw Commit call.
-func (self IFsrmCommittableCollection) Commit(options storagefileserverresourcemanager.FsrmCommitOptions, results **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Commit(options, results)))
+func (self IFsrmCommittableCollection) Commit(options storagefileserverresourcemanager.FsrmCommitOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _results *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.Commit(options, &_results)
+	return _results, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmDerivedObjectsResult is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmDerivedObjectsResult with error-returning methods.
@@ -691,13 +805,17 @@ func WrapIFsrmDerivedObjectsResult(raw *storagefileserverresourcemanager.IFsrmDe
 }
 
 // Get_DerivedObjects wraps the raw Get_DerivedObjects call.
-func (self IFsrmDerivedObjectsResult) Get_DerivedObjects(derivedObjects **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DerivedObjects(derivedObjects)))
+func (self IFsrmDerivedObjectsResult) Get_DerivedObjects() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _derivedObjects *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.Get_DerivedObjects(&_derivedObjects)
+	return _derivedObjects, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Results wraps the raw Get_Results call.
-func (self IFsrmDerivedObjectsResult) Get_Results(results **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Results(results)))
+func (self IFsrmDerivedObjectsResult) Get_Results() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _results *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.Get_Results(&_results)
+	return _results, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmExportImport is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmExportImport with error-returning methods.
@@ -717,8 +835,10 @@ func (self IFsrmExportImport) ExportFileGroups(filePath foundation.BSTR, fileGro
 }
 
 // ImportFileGroups wraps the raw ImportFileGroups call.
-func (self IFsrmExportImport) ImportFileGroups(filePath foundation.BSTR, fileGroupNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR, fileGroups **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.ImportFileGroups(filePath, fileGroupNamesSafeArray, remoteHost, fileGroups)))
+func (self IFsrmExportImport) ImportFileGroups(filePath foundation.BSTR, fileGroupNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _fileGroups *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.ImportFileGroups(filePath, fileGroupNamesSafeArray, remoteHost, &_fileGroups)
+	return _fileGroups, win32.HRESULTError(int32(_hr))
 }
 
 // ExportFileScreenTemplates wraps the raw ExportFileScreenTemplates call.
@@ -727,8 +847,10 @@ func (self IFsrmExportImport) ExportFileScreenTemplates(filePath foundation.BSTR
 }
 
 // ImportFileScreenTemplates wraps the raw ImportFileScreenTemplates call.
-func (self IFsrmExportImport) ImportFileScreenTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR, templates **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.ImportFileScreenTemplates(filePath, templateNamesSafeArray, remoteHost, templates)))
+func (self IFsrmExportImport) ImportFileScreenTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _templates *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.ImportFileScreenTemplates(filePath, templateNamesSafeArray, remoteHost, &_templates)
+	return _templates, win32.HRESULTError(int32(_hr))
 }
 
 // ExportQuotaTemplates wraps the raw ExportQuotaTemplates call.
@@ -737,8 +859,10 @@ func (self IFsrmExportImport) ExportQuotaTemplates(filePath foundation.BSTR, tem
 }
 
 // ImportQuotaTemplates wraps the raw ImportQuotaTemplates call.
-func (self IFsrmExportImport) ImportQuotaTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR, templates **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.ImportQuotaTemplates(filePath, templateNamesSafeArray, remoteHost, templates)))
+func (self IFsrmExportImport) ImportQuotaTemplates(filePath foundation.BSTR, templateNamesSafeArray *systemvariant.VARIANT, remoteHost foundation.BSTR) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _templates *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.ImportQuotaTemplates(filePath, templateNamesSafeArray, remoteHost, &_templates)
+	return _templates, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileCondition is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileCondition with error-returning methods.
@@ -753,8 +877,10 @@ func WrapIFsrmFileCondition(raw *storagefileserverresourcemanager.IFsrmFileCondi
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IFsrmFileCondition) Get_Type(pVal *storagefileserverresourcemanager.FsrmFileConditionType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(pVal)))
+func (self IFsrmFileCondition) Get_Type() (storagefileserverresourcemanager.FsrmFileConditionType, error) {
+	var _pVal storagefileserverresourcemanager.FsrmFileConditionType
+	_hr := self.Raw.Get_Type(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -774,8 +900,10 @@ func WrapIFsrmFileConditionProperty(raw *storagefileserverresourcemanager.IFsrmF
 }
 
 // Get_PropertyName wraps the raw Get_PropertyName call.
-func (self IFsrmFileConditionProperty) Get_PropertyName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyName(pVal)))
+func (self IFsrmFileConditionProperty) Get_PropertyName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_PropertyName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PropertyName wraps the raw Put_PropertyName call.
@@ -784,8 +912,10 @@ func (self IFsrmFileConditionProperty) Put_PropertyName(newVal foundation.BSTR) 
 }
 
 // Get_PropertyId wraps the raw Get_PropertyId call.
-func (self IFsrmFileConditionProperty) Get_PropertyId(pVal *storagefileserverresourcemanager.FsrmFileSystemPropertyId) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyId(pVal)))
+func (self IFsrmFileConditionProperty) Get_PropertyId() (storagefileserverresourcemanager.FsrmFileSystemPropertyId, error) {
+	var _pVal storagefileserverresourcemanager.FsrmFileSystemPropertyId
+	_hr := self.Raw.Get_PropertyId(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PropertyId wraps the raw Put_PropertyId call.
@@ -794,8 +924,10 @@ func (self IFsrmFileConditionProperty) Put_PropertyId(newVal storagefileserverre
 }
 
 // Get_Operator wraps the raw Get_Operator call.
-func (self IFsrmFileConditionProperty) Get_Operator(pVal *storagefileserverresourcemanager.FsrmPropertyConditionType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Operator(pVal)))
+func (self IFsrmFileConditionProperty) Get_Operator() (storagefileserverresourcemanager.FsrmPropertyConditionType, error) {
+	var _pVal storagefileserverresourcemanager.FsrmPropertyConditionType
+	_hr := self.Raw.Get_Operator(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Operator wraps the raw Put_Operator call.
@@ -804,8 +936,10 @@ func (self IFsrmFileConditionProperty) Put_Operator(newVal storagefileserverreso
 }
 
 // Get_ValueType wraps the raw Get_ValueType call.
-func (self IFsrmFileConditionProperty) Get_ValueType(pVal *storagefileserverresourcemanager.FsrmPropertyValueType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ValueType(pVal)))
+func (self IFsrmFileConditionProperty) Get_ValueType() (storagefileserverresourcemanager.FsrmPropertyValueType, error) {
+	var _pVal storagefileserverresourcemanager.FsrmPropertyValueType
+	_hr := self.Raw.Get_ValueType(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ValueType wraps the raw Put_ValueType call.
@@ -814,8 +948,10 @@ func (self IFsrmFileConditionProperty) Put_ValueType(newVal storagefileserverres
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IFsrmFileConditionProperty) Get_Value(pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(pVal)))
+func (self IFsrmFileConditionProperty) Get_Value() (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.Get_Value(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileGroup is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileGroup with error-returning methods.
@@ -830,8 +966,10 @@ func WrapIFsrmFileGroup(raw *storagefileserverresourcemanager.IFsrmFileGroup) IF
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmFileGroup) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmFileGroup) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -840,8 +978,10 @@ func (self IFsrmFileGroup) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_Members wraps the raw Get_Members call.
-func (self IFsrmFileGroup) Get_Members(members **storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Members(members)))
+func (self IFsrmFileGroup) Get_Members() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+	var _members *storagefileserverresourcemanager.IFsrmMutableCollection
+	_hr := self.Raw.Get_Members(&_members)
+	return _members, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Members wraps the raw Put_Members call.
@@ -850,8 +990,10 @@ func (self IFsrmFileGroup) Put_Members(members *storagefileserverresourcemanager
 }
 
 // Get_NonMembers wraps the raw Get_NonMembers call.
-func (self IFsrmFileGroup) Get_NonMembers(nonMembers **storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NonMembers(nonMembers)))
+func (self IFsrmFileGroup) Get_NonMembers() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+	var _nonMembers *storagefileserverresourcemanager.IFsrmMutableCollection
+	_hr := self.Raw.Get_NonMembers(&_nonMembers)
+	return _nonMembers, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NonMembers wraps the raw Put_NonMembers call.
@@ -871,8 +1013,10 @@ func WrapIFsrmFileGroupImported(raw *storagefileserverresourcemanager.IFsrmFileG
 }
 
 // Get_OverwriteOnCommit wraps the raw Get_OverwriteOnCommit call.
-func (self IFsrmFileGroupImported) Get_OverwriteOnCommit(overwrite *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OverwriteOnCommit(overwrite)))
+func (self IFsrmFileGroupImported) Get_OverwriteOnCommit() (foundation.VARIANT_BOOL, error) {
+	var _overwrite foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_OverwriteOnCommit(&_overwrite)
+	return _overwrite, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OverwriteOnCommit wraps the raw Put_OverwriteOnCommit call.
@@ -892,28 +1036,38 @@ func WrapIFsrmFileGroupManager(raw *storagefileserverresourcemanager.IFsrmFileGr
 }
 
 // CreateFileGroup wraps the raw CreateFileGroup call.
-func (self IFsrmFileGroupManager) CreateFileGroup(fileGroup **storagefileserverresourcemanager.IFsrmFileGroup) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFileGroup(fileGroup)))
+func (self IFsrmFileGroupManager) CreateFileGroup() (*storagefileserverresourcemanager.IFsrmFileGroup, error) {
+	var _fileGroup *storagefileserverresourcemanager.IFsrmFileGroup
+	_hr := self.Raw.CreateFileGroup(&_fileGroup)
+	return _fileGroup, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileGroup wraps the raw GetFileGroup call.
-func (self IFsrmFileGroupManager) GetFileGroup(name foundation.BSTR, fileGroup **storagefileserverresourcemanager.IFsrmFileGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileGroup(name, fileGroup)))
+func (self IFsrmFileGroupManager) GetFileGroup(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileGroup, error) {
+	var _fileGroup *storagefileserverresourcemanager.IFsrmFileGroup
+	_hr := self.Raw.GetFileGroup(name, &_fileGroup)
+	return _fileGroup, win32.HRESULTError(int32(_hr))
 }
 
 // EnumFileGroups wraps the raw EnumFileGroups call.
-func (self IFsrmFileGroupManager) EnumFileGroups(options storagefileserverresourcemanager.FsrmEnumOptions, fileGroups **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumFileGroups(options, fileGroups)))
+func (self IFsrmFileGroupManager) EnumFileGroups(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _fileGroups *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.EnumFileGroups(options, &_fileGroups)
+	return _fileGroups, win32.HRESULTError(int32(_hr))
 }
 
 // ExportFileGroups wraps the raw ExportFileGroups call.
-func (self IFsrmFileGroupManager) ExportFileGroups(fileGroupNamesArray *systemvariant.VARIANT, serializedFileGroups *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.ExportFileGroups(fileGroupNamesArray, serializedFileGroups)))
+func (self IFsrmFileGroupManager) ExportFileGroups(fileGroupNamesArray *systemvariant.VARIANT) (foundation.BSTR, error) {
+	var _serializedFileGroups foundation.BSTR
+	_hr := self.Raw.ExportFileGroups(fileGroupNamesArray, &_serializedFileGroups)
+	return _serializedFileGroups, win32.HRESULTError(int32(_hr))
 }
 
 // ImportFileGroups wraps the raw ImportFileGroups call.
-func (self IFsrmFileGroupManager) ImportFileGroups(serializedFileGroups foundation.BSTR, fileGroupNamesArray *systemvariant.VARIANT, fileGroups **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.ImportFileGroups(serializedFileGroups, fileGroupNamesArray, fileGroups)))
+func (self IFsrmFileGroupManager) ImportFileGroups(serializedFileGroups foundation.BSTR, fileGroupNamesArray *systemvariant.VARIANT) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _fileGroups *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.ImportFileGroups(serializedFileGroups, fileGroupNamesArray, &_fileGroups)
+	return _fileGroups, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileManagementJob is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileManagementJob with error-returning methods.
@@ -928,8 +1082,10 @@ func WrapIFsrmFileManagementJob(raw *storagefileserverresourcemanager.IFsrmFileM
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmFileManagementJob) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmFileManagementJob) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -938,8 +1094,10 @@ func (self IFsrmFileManagementJob) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_NamespaceRoots wraps the raw Get_NamespaceRoots call.
-func (self IFsrmFileManagementJob) Get_NamespaceRoots(namespaceRoots **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NamespaceRoots(namespaceRoots)))
+func (self IFsrmFileManagementJob) Get_NamespaceRoots() (*systemcom.SAFEARRAY, error) {
+	var _namespaceRoots *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_NamespaceRoots(&_namespaceRoots)
+	return _namespaceRoots, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NamespaceRoots wraps the raw Put_NamespaceRoots call.
@@ -948,8 +1106,10 @@ func (self IFsrmFileManagementJob) Put_NamespaceRoots(namespaceRoots *systemcom.
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self IFsrmFileManagementJob) Get_Enabled(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(enabled)))
+func (self IFsrmFileManagementJob) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -958,8 +1118,10 @@ func (self IFsrmFileManagementJob) Put_Enabled(enabled foundation.VARIANT_BOOL) 
 }
 
 // Get_OperationType wraps the raw Get_OperationType call.
-func (self IFsrmFileManagementJob) Get_OperationType(operationType *storagefileserverresourcemanager.FsrmFileManagementType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OperationType(operationType)))
+func (self IFsrmFileManagementJob) Get_OperationType() (storagefileserverresourcemanager.FsrmFileManagementType, error) {
+	var _operationType storagefileserverresourcemanager.FsrmFileManagementType
+	_hr := self.Raw.Get_OperationType(&_operationType)
+	return _operationType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OperationType wraps the raw Put_OperationType call.
@@ -968,8 +1130,10 @@ func (self IFsrmFileManagementJob) Put_OperationType(operationType storagefilese
 }
 
 // Get_ExpirationDirectory wraps the raw Get_ExpirationDirectory call.
-func (self IFsrmFileManagementJob) Get_ExpirationDirectory(expirationDirectory *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExpirationDirectory(expirationDirectory)))
+func (self IFsrmFileManagementJob) Get_ExpirationDirectory() (foundation.BSTR, error) {
+	var _expirationDirectory foundation.BSTR
+	_hr := self.Raw.Get_ExpirationDirectory(&_expirationDirectory)
+	return _expirationDirectory, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ExpirationDirectory wraps the raw Put_ExpirationDirectory call.
@@ -978,18 +1142,24 @@ func (self IFsrmFileManagementJob) Put_ExpirationDirectory(expirationDirectory f
 }
 
 // Get_CustomAction wraps the raw Get_CustomAction call.
-func (self IFsrmFileManagementJob) Get_CustomAction(action **storagefileserverresourcemanager.IFsrmActionCommand) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CustomAction(action)))
+func (self IFsrmFileManagementJob) Get_CustomAction() (*storagefileserverresourcemanager.IFsrmActionCommand, error) {
+	var _action *storagefileserverresourcemanager.IFsrmActionCommand
+	_hr := self.Raw.Get_CustomAction(&_action)
+	return _action, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Notifications wraps the raw Get_Notifications call.
-func (self IFsrmFileManagementJob) Get_Notifications(notifications **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Notifications(notifications)))
+func (self IFsrmFileManagementJob) Get_Notifications() (*systemcom.SAFEARRAY, error) {
+	var _notifications *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Notifications(&_notifications)
+	return _notifications, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Logging wraps the raw Get_Logging call.
-func (self IFsrmFileManagementJob) Get_Logging(loggingFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Logging(loggingFlags)))
+func (self IFsrmFileManagementJob) Get_Logging() (int32, error) {
+	var _loggingFlags int32
+	_hr := self.Raw.Get_Logging(&_loggingFlags)
+	return _loggingFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Logging wraps the raw Put_Logging call.
@@ -998,8 +1168,10 @@ func (self IFsrmFileManagementJob) Put_Logging(loggingFlags int32) error {
 }
 
 // Get_ReportEnabled wraps the raw Get_ReportEnabled call.
-func (self IFsrmFileManagementJob) Get_ReportEnabled(reportEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReportEnabled(reportEnabled)))
+func (self IFsrmFileManagementJob) Get_ReportEnabled() (foundation.VARIANT_BOOL, error) {
+	var _reportEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ReportEnabled(&_reportEnabled)
+	return _reportEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ReportEnabled wraps the raw Put_ReportEnabled call.
@@ -1008,8 +1180,10 @@ func (self IFsrmFileManagementJob) Put_ReportEnabled(reportEnabled foundation.VA
 }
 
 // Get_Formats wraps the raw Get_Formats call.
-func (self IFsrmFileManagementJob) Get_Formats(formats **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Formats(formats)))
+func (self IFsrmFileManagementJob) Get_Formats() (*systemcom.SAFEARRAY, error) {
+	var _formats *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Formats(&_formats)
+	return _formats, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Formats wraps the raw Put_Formats call.
@@ -1018,8 +1192,10 @@ func (self IFsrmFileManagementJob) Put_Formats(formats *systemcom.SAFEARRAY) err
 }
 
 // Get_MailTo wraps the raw Get_MailTo call.
-func (self IFsrmFileManagementJob) Get_MailTo(mailTo *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailTo(mailTo)))
+func (self IFsrmFileManagementJob) Get_MailTo() (foundation.BSTR, error) {
+	var _mailTo foundation.BSTR
+	_hr := self.Raw.Get_MailTo(&_mailTo)
+	return _mailTo, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailTo wraps the raw Put_MailTo call.
@@ -1028,8 +1204,10 @@ func (self IFsrmFileManagementJob) Put_MailTo(mailTo foundation.BSTR) error {
 }
 
 // Get_DaysSinceFileCreated wraps the raw Get_DaysSinceFileCreated call.
-func (self IFsrmFileManagementJob) Get_DaysSinceFileCreated(daysSinceCreation *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DaysSinceFileCreated(daysSinceCreation)))
+func (self IFsrmFileManagementJob) Get_DaysSinceFileCreated() (int32, error) {
+	var _daysSinceCreation int32
+	_hr := self.Raw.Get_DaysSinceFileCreated(&_daysSinceCreation)
+	return _daysSinceCreation, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DaysSinceFileCreated wraps the raw Put_DaysSinceFileCreated call.
@@ -1038,8 +1216,10 @@ func (self IFsrmFileManagementJob) Put_DaysSinceFileCreated(daysSinceCreation in
 }
 
 // Get_DaysSinceFileLastAccessed wraps the raw Get_DaysSinceFileLastAccessed call.
-func (self IFsrmFileManagementJob) Get_DaysSinceFileLastAccessed(daysSinceAccess *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DaysSinceFileLastAccessed(daysSinceAccess)))
+func (self IFsrmFileManagementJob) Get_DaysSinceFileLastAccessed() (int32, error) {
+	var _daysSinceAccess int32
+	_hr := self.Raw.Get_DaysSinceFileLastAccessed(&_daysSinceAccess)
+	return _daysSinceAccess, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DaysSinceFileLastAccessed wraps the raw Put_DaysSinceFileLastAccessed call.
@@ -1048,8 +1228,10 @@ func (self IFsrmFileManagementJob) Put_DaysSinceFileLastAccessed(daysSinceAccess
 }
 
 // Get_DaysSinceFileLastModified wraps the raw Get_DaysSinceFileLastModified call.
-func (self IFsrmFileManagementJob) Get_DaysSinceFileLastModified(daysSinceModify *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DaysSinceFileLastModified(daysSinceModify)))
+func (self IFsrmFileManagementJob) Get_DaysSinceFileLastModified() (int32, error) {
+	var _daysSinceModify int32
+	_hr := self.Raw.Get_DaysSinceFileLastModified(&_daysSinceModify)
+	return _daysSinceModify, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DaysSinceFileLastModified wraps the raw Put_DaysSinceFileLastModified call.
@@ -1058,18 +1240,24 @@ func (self IFsrmFileManagementJob) Put_DaysSinceFileLastModified(daysSinceModify
 }
 
 // Get_PropertyConditions wraps the raw Get_PropertyConditions call.
-func (self IFsrmFileManagementJob) Get_PropertyConditions(propertyConditions **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyConditions(propertyConditions)))
+func (self IFsrmFileManagementJob) Get_PropertyConditions() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _propertyConditions *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.Get_PropertyConditions(&_propertyConditions)
+	return _propertyConditions, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FromDate wraps the raw Get_FromDate call.
-func (self IFsrmFileManagementJob) Get_FromDate(fromDate *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FromDate(fromDate)))
+func (self IFsrmFileManagementJob) Get_FromDate() (float64, error) {
+	var _fromDate float64
+	_hr := self.Raw.Get_FromDate(&_fromDate)
+	return _fromDate, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Task wraps the raw Get_Task call.
-func (self IFsrmFileManagementJob) Get_Task(taskName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Task(taskName)))
+func (self IFsrmFileManagementJob) Get_Task() (foundation.BSTR, error) {
+	var _taskName foundation.BSTR
+	_hr := self.Raw.Get_Task(&_taskName)
+	return _taskName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Task wraps the raw Put_Task call.
@@ -1078,8 +1266,10 @@ func (self IFsrmFileManagementJob) Put_Task(taskName foundation.BSTR) error {
 }
 
 // Get_Parameters wraps the raw Get_Parameters call.
-func (self IFsrmFileManagementJob) Get_Parameters(parameters **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parameters(parameters)))
+func (self IFsrmFileManagementJob) Get_Parameters() (*systemcom.SAFEARRAY, error) {
+	var _parameters *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Parameters(&_parameters)
+	return _parameters, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Parameters wraps the raw Put_Parameters call.
@@ -1088,28 +1278,38 @@ func (self IFsrmFileManagementJob) Put_Parameters(parameters *systemcom.SAFEARRA
 }
 
 // Get_RunningStatus wraps the raw Get_RunningStatus call.
-func (self IFsrmFileManagementJob) Get_RunningStatus(runningStatus *storagefileserverresourcemanager.FsrmReportRunningStatus) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RunningStatus(runningStatus)))
+func (self IFsrmFileManagementJob) Get_RunningStatus() (storagefileserverresourcemanager.FsrmReportRunningStatus, error) {
+	var _runningStatus storagefileserverresourcemanager.FsrmReportRunningStatus
+	_hr := self.Raw.Get_RunningStatus(&_runningStatus)
+	return _runningStatus, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastError wraps the raw Get_LastError call.
-func (self IFsrmFileManagementJob) Get_LastError(lastError *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastError(lastError)))
+func (self IFsrmFileManagementJob) Get_LastError() (foundation.BSTR, error) {
+	var _lastError foundation.BSTR
+	_hr := self.Raw.Get_LastError(&_lastError)
+	return _lastError, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastReportPathWithoutExtension wraps the raw Get_LastReportPathWithoutExtension call.
-func (self IFsrmFileManagementJob) Get_LastReportPathWithoutExtension(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastReportPathWithoutExtension(path)))
+func (self IFsrmFileManagementJob) Get_LastReportPathWithoutExtension() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_LastReportPathWithoutExtension(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastRun wraps the raw Get_LastRun call.
-func (self IFsrmFileManagementJob) Get_LastRun(lastRun *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastRun(lastRun)))
+func (self IFsrmFileManagementJob) Get_LastRun() (float64, error) {
+	var _lastRun float64
+	_hr := self.Raw.Get_LastRun(&_lastRun)
+	return _lastRun, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FileNamePattern wraps the raw Get_FileNamePattern call.
-func (self IFsrmFileManagementJob) Get_FileNamePattern(fileNamePattern *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FileNamePattern(fileNamePattern)))
+func (self IFsrmFileManagementJob) Get_FileNamePattern() (foundation.BSTR, error) {
+	var _fileNamePattern foundation.BSTR
+	_hr := self.Raw.Get_FileNamePattern(&_fileNamePattern)
+	return _fileNamePattern, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FileNamePattern wraps the raw Put_FileNamePattern call.
@@ -1123,8 +1323,10 @@ func (self IFsrmFileManagementJob) Run(context storagefileserverresourcemanager.
 }
 
 // WaitForCompletion wraps the raw WaitForCompletion call.
-func (self IFsrmFileManagementJob) WaitForCompletion(waitSeconds int32, completed *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.WaitForCompletion(waitSeconds, completed)))
+func (self IFsrmFileManagementJob) WaitForCompletion(waitSeconds int32) (foundation.VARIANT_BOOL, error) {
+	var _completed foundation.VARIANT_BOOL
+	_hr := self.Raw.WaitForCompletion(waitSeconds, &_completed)
+	return _completed, win32.HRESULTError(int32(_hr))
 }
 
 // Cancel wraps the raw Cancel call.
@@ -1148,23 +1350,31 @@ func (self IFsrmFileManagementJob) ModifyNotification(days int32, newDays int32)
 }
 
 // CreateNotificationAction wraps the raw CreateNotificationAction call.
-func (self IFsrmFileManagementJob) CreateNotificationAction(days int32, actionType storagefileserverresourcemanager.FsrmActionType, action **storagefileserverresourcemanager.IFsrmAction) error {
-	return win32.HRESULTError(int32(self.Raw.CreateNotificationAction(days, actionType, action)))
+func (self IFsrmFileManagementJob) CreateNotificationAction(days int32, actionType storagefileserverresourcemanager.FsrmActionType) (*storagefileserverresourcemanager.IFsrmAction, error) {
+	var _action *storagefileserverresourcemanager.IFsrmAction
+	_hr := self.Raw.CreateNotificationAction(days, actionType, &_action)
+	return _action, win32.HRESULTError(int32(_hr))
 }
 
 // EnumNotificationActions wraps the raw EnumNotificationActions call.
-func (self IFsrmFileManagementJob) EnumNotificationActions(days int32, actions **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumNotificationActions(days, actions)))
+func (self IFsrmFileManagementJob) EnumNotificationActions(days int32) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _actions *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumNotificationActions(days, &_actions)
+	return _actions, win32.HRESULTError(int32(_hr))
 }
 
 // CreatePropertyCondition wraps the raw CreatePropertyCondition call.
-func (self IFsrmFileManagementJob) CreatePropertyCondition(name foundation.BSTR, propertyCondition **storagefileserverresourcemanager.IFsrmPropertyCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePropertyCondition(name, propertyCondition)))
+func (self IFsrmFileManagementJob) CreatePropertyCondition(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmPropertyCondition, error) {
+	var _propertyCondition *storagefileserverresourcemanager.IFsrmPropertyCondition
+	_hr := self.Raw.CreatePropertyCondition(name, &_propertyCondition)
+	return _propertyCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateCustomAction wraps the raw CreateCustomAction call.
-func (self IFsrmFileManagementJob) CreateCustomAction(customAction **storagefileserverresourcemanager.IFsrmActionCommand) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCustomAction(customAction)))
+func (self IFsrmFileManagementJob) CreateCustomAction() (*storagefileserverresourcemanager.IFsrmActionCommand, error) {
+	var _customAction *storagefileserverresourcemanager.IFsrmActionCommand
+	_hr := self.Raw.CreateCustomAction(&_customAction)
+	return _customAction, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileManagementJobManager is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileManagementJobManager with error-returning methods.
@@ -1179,28 +1389,38 @@ func WrapIFsrmFileManagementJobManager(raw *storagefileserverresourcemanager.IFs
 }
 
 // Get_ActionVariables wraps the raw Get_ActionVariables call.
-func (self IFsrmFileManagementJobManager) Get_ActionVariables(variables **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActionVariables(variables)))
+func (self IFsrmFileManagementJobManager) Get_ActionVariables() (*systemcom.SAFEARRAY, error) {
+	var _variables *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ActionVariables(&_variables)
+	return _variables, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ActionVariableDescriptions wraps the raw Get_ActionVariableDescriptions call.
-func (self IFsrmFileManagementJobManager) Get_ActionVariableDescriptions(descriptions **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActionVariableDescriptions(descriptions)))
+func (self IFsrmFileManagementJobManager) Get_ActionVariableDescriptions() (*systemcom.SAFEARRAY, error) {
+	var _descriptions *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ActionVariableDescriptions(&_descriptions)
+	return _descriptions, win32.HRESULTError(int32(_hr))
 }
 
 // EnumFileManagementJobs wraps the raw EnumFileManagementJobs call.
-func (self IFsrmFileManagementJobManager) EnumFileManagementJobs(options storagefileserverresourcemanager.FsrmEnumOptions, fileManagementJobs **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumFileManagementJobs(options, fileManagementJobs)))
+func (self IFsrmFileManagementJobManager) EnumFileManagementJobs(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _fileManagementJobs *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumFileManagementJobs(options, &_fileManagementJobs)
+	return _fileManagementJobs, win32.HRESULTError(int32(_hr))
 }
 
 // CreateFileManagementJob wraps the raw CreateFileManagementJob call.
-func (self IFsrmFileManagementJobManager) CreateFileManagementJob(fileManagementJob **storagefileserverresourcemanager.IFsrmFileManagementJob) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFileManagementJob(fileManagementJob)))
+func (self IFsrmFileManagementJobManager) CreateFileManagementJob() (*storagefileserverresourcemanager.IFsrmFileManagementJob, error) {
+	var _fileManagementJob *storagefileserverresourcemanager.IFsrmFileManagementJob
+	_hr := self.Raw.CreateFileManagementJob(&_fileManagementJob)
+	return _fileManagementJob, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileManagementJob wraps the raw GetFileManagementJob call.
-func (self IFsrmFileManagementJobManager) GetFileManagementJob(name foundation.BSTR, fileManagementJob **storagefileserverresourcemanager.IFsrmFileManagementJob) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileManagementJob(name, fileManagementJob)))
+func (self IFsrmFileManagementJobManager) GetFileManagementJob(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileManagementJob, error) {
+	var _fileManagementJob *storagefileserverresourcemanager.IFsrmFileManagementJob
+	_hr := self.Raw.GetFileManagementJob(name, &_fileManagementJob)
+	return _fileManagementJob, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileScreen is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreen with error-returning methods.
@@ -1215,28 +1435,38 @@ func WrapIFsrmFileScreen(raw *storagefileserverresourcemanager.IFsrmFileScreen) 
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self IFsrmFileScreen) Get_Path(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(path)))
+func (self IFsrmFileScreen) Get_Path() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_Path(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SourceTemplateName wraps the raw Get_SourceTemplateName call.
-func (self IFsrmFileScreen) Get_SourceTemplateName(fileScreenTemplateName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SourceTemplateName(fileScreenTemplateName)))
+func (self IFsrmFileScreen) Get_SourceTemplateName() (foundation.BSTR, error) {
+	var _fileScreenTemplateName foundation.BSTR
+	_hr := self.Raw.Get_SourceTemplateName(&_fileScreenTemplateName)
+	return _fileScreenTemplateName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MatchesSourceTemplate wraps the raw Get_MatchesSourceTemplate call.
-func (self IFsrmFileScreen) Get_MatchesSourceTemplate(matches *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MatchesSourceTemplate(matches)))
+func (self IFsrmFileScreen) Get_MatchesSourceTemplate() (foundation.VARIANT_BOOL, error) {
+	var _matches foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MatchesSourceTemplate(&_matches)
+	return _matches, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserSid wraps the raw Get_UserSid call.
-func (self IFsrmFileScreen) Get_UserSid(userSid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserSid(userSid)))
+func (self IFsrmFileScreen) Get_UserSid() (foundation.BSTR, error) {
+	var _userSid foundation.BSTR
+	_hr := self.Raw.Get_UserSid(&_userSid)
+	return _userSid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserAccount wraps the raw Get_UserAccount call.
-func (self IFsrmFileScreen) Get_UserAccount(userAccount *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserAccount(userAccount)))
+func (self IFsrmFileScreen) Get_UserAccount() (foundation.BSTR, error) {
+	var _userAccount foundation.BSTR
+	_hr := self.Raw.Get_UserAccount(&_userAccount)
+	return _userAccount, win32.HRESULTError(int32(_hr))
 }
 
 // ApplyTemplate wraps the raw ApplyTemplate call.
@@ -1256,8 +1486,10 @@ func WrapIFsrmFileScreenBase(raw *storagefileserverresourcemanager.IFsrmFileScre
 }
 
 // Get_BlockedFileGroups wraps the raw Get_BlockedFileGroups call.
-func (self IFsrmFileScreenBase) Get_BlockedFileGroups(blockList **storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockedFileGroups(blockList)))
+func (self IFsrmFileScreenBase) Get_BlockedFileGroups() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+	var _blockList *storagefileserverresourcemanager.IFsrmMutableCollection
+	_hr := self.Raw.Get_BlockedFileGroups(&_blockList)
+	return _blockList, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BlockedFileGroups wraps the raw Put_BlockedFileGroups call.
@@ -1266,8 +1498,10 @@ func (self IFsrmFileScreenBase) Put_BlockedFileGroups(blockList *storagefileserv
 }
 
 // Get_FileScreenFlags wraps the raw Get_FileScreenFlags call.
-func (self IFsrmFileScreenBase) Get_FileScreenFlags(fileScreenFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FileScreenFlags(fileScreenFlags)))
+func (self IFsrmFileScreenBase) Get_FileScreenFlags() (int32, error) {
+	var _fileScreenFlags int32
+	_hr := self.Raw.Get_FileScreenFlags(&_fileScreenFlags)
+	return _fileScreenFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FileScreenFlags wraps the raw Put_FileScreenFlags call.
@@ -1276,13 +1510,17 @@ func (self IFsrmFileScreenBase) Put_FileScreenFlags(fileScreenFlags int32) error
 }
 
 // CreateAction wraps the raw CreateAction call.
-func (self IFsrmFileScreenBase) CreateAction(actionType storagefileserverresourcemanager.FsrmActionType, action **storagefileserverresourcemanager.IFsrmAction) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAction(actionType, action)))
+func (self IFsrmFileScreenBase) CreateAction(actionType storagefileserverresourcemanager.FsrmActionType) (*storagefileserverresourcemanager.IFsrmAction, error) {
+	var _action *storagefileserverresourcemanager.IFsrmAction
+	_hr := self.Raw.CreateAction(actionType, &_action)
+	return _action, win32.HRESULTError(int32(_hr))
 }
 
 // EnumActions wraps the raw EnumActions call.
-func (self IFsrmFileScreenBase) EnumActions(actions **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumActions(actions)))
+func (self IFsrmFileScreenBase) EnumActions() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _actions *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumActions(&_actions)
+	return _actions, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileScreenException is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreenException with error-returning methods.
@@ -1297,13 +1535,17 @@ func WrapIFsrmFileScreenException(raw *storagefileserverresourcemanager.IFsrmFil
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self IFsrmFileScreenException) Get_Path(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(path)))
+func (self IFsrmFileScreenException) Get_Path() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_Path(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AllowedFileGroups wraps the raw Get_AllowedFileGroups call.
-func (self IFsrmFileScreenException) Get_AllowedFileGroups(allowList **storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowedFileGroups(allowList)))
+func (self IFsrmFileScreenException) Get_AllowedFileGroups() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+	var _allowList *storagefileserverresourcemanager.IFsrmMutableCollection
+	_hr := self.Raw.Get_AllowedFileGroups(&_allowList)
+	return _allowList, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowedFileGroups wraps the raw Put_AllowedFileGroups call.
@@ -1323,48 +1565,66 @@ func WrapIFsrmFileScreenManager(raw *storagefileserverresourcemanager.IFsrmFileS
 }
 
 // Get_ActionVariables wraps the raw Get_ActionVariables call.
-func (self IFsrmFileScreenManager) Get_ActionVariables(variables **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActionVariables(variables)))
+func (self IFsrmFileScreenManager) Get_ActionVariables() (*systemcom.SAFEARRAY, error) {
+	var _variables *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ActionVariables(&_variables)
+	return _variables, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ActionVariableDescriptions wraps the raw Get_ActionVariableDescriptions call.
-func (self IFsrmFileScreenManager) Get_ActionVariableDescriptions(descriptions **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActionVariableDescriptions(descriptions)))
+func (self IFsrmFileScreenManager) Get_ActionVariableDescriptions() (*systemcom.SAFEARRAY, error) {
+	var _descriptions *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ActionVariableDescriptions(&_descriptions)
+	return _descriptions, win32.HRESULTError(int32(_hr))
 }
 
 // CreateFileScreen wraps the raw CreateFileScreen call.
-func (self IFsrmFileScreenManager) CreateFileScreen(path foundation.BSTR, fileScreen **storagefileserverresourcemanager.IFsrmFileScreen) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFileScreen(path, fileScreen)))
+func (self IFsrmFileScreenManager) CreateFileScreen(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreen, error) {
+	var _fileScreen *storagefileserverresourcemanager.IFsrmFileScreen
+	_hr := self.Raw.CreateFileScreen(path, &_fileScreen)
+	return _fileScreen, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileScreen wraps the raw GetFileScreen call.
-func (self IFsrmFileScreenManager) GetFileScreen(path foundation.BSTR, fileScreen **storagefileserverresourcemanager.IFsrmFileScreen) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileScreen(path, fileScreen)))
+func (self IFsrmFileScreenManager) GetFileScreen(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreen, error) {
+	var _fileScreen *storagefileserverresourcemanager.IFsrmFileScreen
+	_hr := self.Raw.GetFileScreen(path, &_fileScreen)
+	return _fileScreen, win32.HRESULTError(int32(_hr))
 }
 
 // EnumFileScreens wraps the raw EnumFileScreens call.
-func (self IFsrmFileScreenManager) EnumFileScreens(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions, fileScreens **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumFileScreens(path, options, fileScreens)))
+func (self IFsrmFileScreenManager) EnumFileScreens(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _fileScreens *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.EnumFileScreens(path, options, &_fileScreens)
+	return _fileScreens, win32.HRESULTError(int32(_hr))
 }
 
 // CreateFileScreenException wraps the raw CreateFileScreenException call.
-func (self IFsrmFileScreenManager) CreateFileScreenException(path foundation.BSTR, fileScreenException **storagefileserverresourcemanager.IFsrmFileScreenException) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFileScreenException(path, fileScreenException)))
+func (self IFsrmFileScreenManager) CreateFileScreenException(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreenException, error) {
+	var _fileScreenException *storagefileserverresourcemanager.IFsrmFileScreenException
+	_hr := self.Raw.CreateFileScreenException(path, &_fileScreenException)
+	return _fileScreenException, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileScreenException wraps the raw GetFileScreenException call.
-func (self IFsrmFileScreenManager) GetFileScreenException(path foundation.BSTR, fileScreenException **storagefileserverresourcemanager.IFsrmFileScreenException) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileScreenException(path, fileScreenException)))
+func (self IFsrmFileScreenManager) GetFileScreenException(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreenException, error) {
+	var _fileScreenException *storagefileserverresourcemanager.IFsrmFileScreenException
+	_hr := self.Raw.GetFileScreenException(path, &_fileScreenException)
+	return _fileScreenException, win32.HRESULTError(int32(_hr))
 }
 
 // EnumFileScreenExceptions wraps the raw EnumFileScreenExceptions call.
-func (self IFsrmFileScreenManager) EnumFileScreenExceptions(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions, fileScreenExceptions **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumFileScreenExceptions(path, options, fileScreenExceptions)))
+func (self IFsrmFileScreenManager) EnumFileScreenExceptions(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _fileScreenExceptions *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.EnumFileScreenExceptions(path, options, &_fileScreenExceptions)
+	return _fileScreenExceptions, win32.HRESULTError(int32(_hr))
 }
 
 // CreateFileScreenCollection wraps the raw CreateFileScreenCollection call.
-func (self IFsrmFileScreenManager) CreateFileScreenCollection(collection **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFileScreenCollection(collection)))
+func (self IFsrmFileScreenManager) CreateFileScreenCollection() (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _collection *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.CreateFileScreenCollection(&_collection)
+	return _collection, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileScreenTemplate is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreenTemplate with error-returning methods.
@@ -1379,8 +1639,10 @@ func WrapIFsrmFileScreenTemplate(raw *storagefileserverresourcemanager.IFsrmFile
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmFileScreenTemplate) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmFileScreenTemplate) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -1394,8 +1656,10 @@ func (self IFsrmFileScreenTemplate) CopyTemplate(fileScreenTemplateName foundati
 }
 
 // CommitAndUpdateDerived wraps the raw CommitAndUpdateDerived call.
-func (self IFsrmFileScreenTemplate) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions, derivedObjectsResult **storagefileserverresourcemanager.IFsrmDerivedObjectsResult) error {
-	return win32.HRESULTError(int32(self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, derivedObjectsResult)))
+func (self IFsrmFileScreenTemplate) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (*storagefileserverresourcemanager.IFsrmDerivedObjectsResult, error) {
+	var _derivedObjectsResult *storagefileserverresourcemanager.IFsrmDerivedObjectsResult
+	_hr := self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, &_derivedObjectsResult)
+	return _derivedObjectsResult, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmFileScreenTemplateImported is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmFileScreenTemplateImported with error-returning methods.
@@ -1410,8 +1674,10 @@ func WrapIFsrmFileScreenTemplateImported(raw *storagefileserverresourcemanager.I
 }
 
 // Get_OverwriteOnCommit wraps the raw Get_OverwriteOnCommit call.
-func (self IFsrmFileScreenTemplateImported) Get_OverwriteOnCommit(overwrite *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OverwriteOnCommit(overwrite)))
+func (self IFsrmFileScreenTemplateImported) Get_OverwriteOnCommit() (foundation.VARIANT_BOOL, error) {
+	var _overwrite foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_OverwriteOnCommit(&_overwrite)
+	return _overwrite, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OverwriteOnCommit wraps the raw Put_OverwriteOnCommit call.
@@ -1431,28 +1697,38 @@ func WrapIFsrmFileScreenTemplateManager(raw *storagefileserverresourcemanager.IF
 }
 
 // CreateTemplate wraps the raw CreateTemplate call.
-func (self IFsrmFileScreenTemplateManager) CreateTemplate(fileScreenTemplate **storagefileserverresourcemanager.IFsrmFileScreenTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTemplate(fileScreenTemplate)))
+func (self IFsrmFileScreenTemplateManager) CreateTemplate() (*storagefileserverresourcemanager.IFsrmFileScreenTemplate, error) {
+	var _fileScreenTemplate *storagefileserverresourcemanager.IFsrmFileScreenTemplate
+	_hr := self.Raw.CreateTemplate(&_fileScreenTemplate)
+	return _fileScreenTemplate, win32.HRESULTError(int32(_hr))
 }
 
 // GetTemplate wraps the raw GetTemplate call.
-func (self IFsrmFileScreenTemplateManager) GetTemplate(name foundation.BSTR, fileScreenTemplate **storagefileserverresourcemanager.IFsrmFileScreenTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.GetTemplate(name, fileScreenTemplate)))
+func (self IFsrmFileScreenTemplateManager) GetTemplate(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmFileScreenTemplate, error) {
+	var _fileScreenTemplate *storagefileserverresourcemanager.IFsrmFileScreenTemplate
+	_hr := self.Raw.GetTemplate(name, &_fileScreenTemplate)
+	return _fileScreenTemplate, win32.HRESULTError(int32(_hr))
 }
 
 // EnumTemplates wraps the raw EnumTemplates call.
-func (self IFsrmFileScreenTemplateManager) EnumTemplates(options storagefileserverresourcemanager.FsrmEnumOptions, fileScreenTemplates **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumTemplates(options, fileScreenTemplates)))
+func (self IFsrmFileScreenTemplateManager) EnumTemplates(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _fileScreenTemplates *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.EnumTemplates(options, &_fileScreenTemplates)
+	return _fileScreenTemplates, win32.HRESULTError(int32(_hr))
 }
 
 // ExportTemplates wraps the raw ExportTemplates call.
-func (self IFsrmFileScreenTemplateManager) ExportTemplates(fileScreenTemplateNamesArray *systemvariant.VARIANT, serializedFileScreenTemplates *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.ExportTemplates(fileScreenTemplateNamesArray, serializedFileScreenTemplates)))
+func (self IFsrmFileScreenTemplateManager) ExportTemplates(fileScreenTemplateNamesArray *systemvariant.VARIANT) (foundation.BSTR, error) {
+	var _serializedFileScreenTemplates foundation.BSTR
+	_hr := self.Raw.ExportTemplates(fileScreenTemplateNamesArray, &_serializedFileScreenTemplates)
+	return _serializedFileScreenTemplates, win32.HRESULTError(int32(_hr))
 }
 
 // ImportTemplates wraps the raw ImportTemplates call.
-func (self IFsrmFileScreenTemplateManager) ImportTemplates(serializedFileScreenTemplates foundation.BSTR, fileScreenTemplateNamesArray *systemvariant.VARIANT, fileScreenTemplates **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.ImportTemplates(serializedFileScreenTemplates, fileScreenTemplateNamesArray, fileScreenTemplates)))
+func (self IFsrmFileScreenTemplateManager) ImportTemplates(serializedFileScreenTemplates foundation.BSTR, fileScreenTemplateNamesArray *systemvariant.VARIANT) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _fileScreenTemplates *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.ImportTemplates(serializedFileScreenTemplates, fileScreenTemplateNamesArray, &_fileScreenTemplates)
+	return _fileScreenTemplates, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmMutableCollection is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmMutableCollection with error-returning methods.
@@ -1472,8 +1748,10 @@ func (self IFsrmMutableCollection) Remove(index int32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IFsrmMutableCollection) Clone(collection **storagefileserverresourcemanager.IFsrmMutableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(collection)))
+func (self IFsrmMutableCollection) Clone() (*storagefileserverresourcemanager.IFsrmMutableCollection, error) {
+	var _collection *storagefileserverresourcemanager.IFsrmMutableCollection
+	_hr := self.Raw.Clone(&_collection)
+	return _collection, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmObject is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmObject with error-returning methods.
@@ -1488,13 +1766,17 @@ func WrapIFsrmObject(raw *storagefileserverresourcemanager.IFsrmObject) IFsrmObj
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IFsrmObject) Get_Id(id *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(id)))
+func (self IFsrmObject) Get_Id() (win32.GUID, error) {
+	var _id win32.GUID
+	_hr := self.Raw.Get_Id(&_id)
+	return _id, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IFsrmObject) Get_Description(description *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(description)))
+func (self IFsrmObject) Get_Description() (foundation.BSTR, error) {
+	var _description foundation.BSTR
+	_hr := self.Raw.Get_Description(&_description)
+	return _description, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -1524,8 +1806,10 @@ func WrapIFsrmPathMapper(raw *storagefileserverresourcemanager.IFsrmPathMapper) 
 }
 
 // GetSharePathsForLocalPath wraps the raw GetSharePathsForLocalPath call.
-func (self IFsrmPathMapper) GetSharePathsForLocalPath(localPath foundation.BSTR, sharePaths **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetSharePathsForLocalPath(localPath, sharePaths)))
+func (self IFsrmPathMapper) GetSharePathsForLocalPath(localPath foundation.BSTR) (*systemcom.SAFEARRAY, error) {
+	var _sharePaths *systemcom.SAFEARRAY
+	_hr := self.Raw.GetSharePathsForLocalPath(localPath, &_sharePaths)
+	return _sharePaths, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmPipelineModuleConnector is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmPipelineModuleConnector with error-returning methods.
@@ -1540,23 +1824,31 @@ func WrapIFsrmPipelineModuleConnector(raw *storagefileserverresourcemanager.IFsr
 }
 
 // Get_ModuleImplementation wraps the raw Get_ModuleImplementation call.
-func (self IFsrmPipelineModuleConnector) Get_ModuleImplementation(pipelineModuleImplementation **storagefileserverresourcemanager.IFsrmPipelineModuleImplementation) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModuleImplementation(pipelineModuleImplementation)))
+func (self IFsrmPipelineModuleConnector) Get_ModuleImplementation() (*storagefileserverresourcemanager.IFsrmPipelineModuleImplementation, error) {
+	var _pipelineModuleImplementation *storagefileserverresourcemanager.IFsrmPipelineModuleImplementation
+	_hr := self.Raw.Get_ModuleImplementation(&_pipelineModuleImplementation)
+	return _pipelineModuleImplementation, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ModuleName wraps the raw Get_ModuleName call.
-func (self IFsrmPipelineModuleConnector) Get_ModuleName(userName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModuleName(userName)))
+func (self IFsrmPipelineModuleConnector) Get_ModuleName() (foundation.BSTR, error) {
+	var _userName foundation.BSTR
+	_hr := self.Raw.Get_ModuleName(&_userName)
+	return _userName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HostingUserAccount wraps the raw Get_HostingUserAccount call.
-func (self IFsrmPipelineModuleConnector) Get_HostingUserAccount(userAccount *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HostingUserAccount(userAccount)))
+func (self IFsrmPipelineModuleConnector) Get_HostingUserAccount() (foundation.BSTR, error) {
+	var _userAccount foundation.BSTR
+	_hr := self.Raw.Get_HostingUserAccount(&_userAccount)
+	return _userAccount, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HostingProcessPid wraps the raw Get_HostingProcessPid call.
-func (self IFsrmPipelineModuleConnector) Get_HostingProcessPid(pid *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HostingProcessPid(pid)))
+func (self IFsrmPipelineModuleConnector) Get_HostingProcessPid() (int32, error) {
+	var _pid int32
+	_hr := self.Raw.Get_HostingProcessPid(&_pid)
+	return _pid, win32.HRESULTError(int32(_hr))
 }
 
 // Bind wraps the raw Bind call.
@@ -1576,8 +1868,10 @@ func WrapIFsrmPipelineModuleDefinition(raw *storagefileserverresourcemanager.IFs
 }
 
 // Get_ModuleClsid wraps the raw Get_ModuleClsid call.
-func (self IFsrmPipelineModuleDefinition) Get_ModuleClsid(moduleClsid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModuleClsid(moduleClsid)))
+func (self IFsrmPipelineModuleDefinition) Get_ModuleClsid() (foundation.BSTR, error) {
+	var _moduleClsid foundation.BSTR
+	_hr := self.Raw.Get_ModuleClsid(&_moduleClsid)
+	return _moduleClsid, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ModuleClsid wraps the raw Put_ModuleClsid call.
@@ -1586,8 +1880,10 @@ func (self IFsrmPipelineModuleDefinition) Put_ModuleClsid(moduleClsid foundation
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmPipelineModuleDefinition) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmPipelineModuleDefinition) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -1596,8 +1892,10 @@ func (self IFsrmPipelineModuleDefinition) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_Company wraps the raw Get_Company call.
-func (self IFsrmPipelineModuleDefinition) Get_Company(company *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Company(company)))
+func (self IFsrmPipelineModuleDefinition) Get_Company() (foundation.BSTR, error) {
+	var _company foundation.BSTR
+	_hr := self.Raw.Get_Company(&_company)
+	return _company, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Company wraps the raw Put_Company call.
@@ -1606,8 +1904,10 @@ func (self IFsrmPipelineModuleDefinition) Put_Company(company foundation.BSTR) e
 }
 
 // Get_Version wraps the raw Get_Version call.
-func (self IFsrmPipelineModuleDefinition) Get_Version(version *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Version(version)))
+func (self IFsrmPipelineModuleDefinition) Get_Version() (foundation.BSTR, error) {
+	var _version foundation.BSTR
+	_hr := self.Raw.Get_Version(&_version)
+	return _version, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Version wraps the raw Put_Version call.
@@ -1616,13 +1916,17 @@ func (self IFsrmPipelineModuleDefinition) Put_Version(version foundation.BSTR) e
 }
 
 // Get_ModuleType wraps the raw Get_ModuleType call.
-func (self IFsrmPipelineModuleDefinition) Get_ModuleType(moduleType *storagefileserverresourcemanager.FsrmPipelineModuleType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModuleType(moduleType)))
+func (self IFsrmPipelineModuleDefinition) Get_ModuleType() (storagefileserverresourcemanager.FsrmPipelineModuleType, error) {
+	var _moduleType storagefileserverresourcemanager.FsrmPipelineModuleType
+	_hr := self.Raw.Get_ModuleType(&_moduleType)
+	return _moduleType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self IFsrmPipelineModuleDefinition) Get_Enabled(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(enabled)))
+func (self IFsrmPipelineModuleDefinition) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -1631,8 +1935,10 @@ func (self IFsrmPipelineModuleDefinition) Put_Enabled(enabled foundation.VARIANT
 }
 
 // Get_NeedsFileContent wraps the raw Get_NeedsFileContent call.
-func (self IFsrmPipelineModuleDefinition) Get_NeedsFileContent(needsFileContent *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NeedsFileContent(needsFileContent)))
+func (self IFsrmPipelineModuleDefinition) Get_NeedsFileContent() (foundation.VARIANT_BOOL, error) {
+	var _needsFileContent foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_NeedsFileContent(&_needsFileContent)
+	return _needsFileContent, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NeedsFileContent wraps the raw Put_NeedsFileContent call.
@@ -1641,8 +1947,10 @@ func (self IFsrmPipelineModuleDefinition) Put_NeedsFileContent(needsFileContent 
 }
 
 // Get_Account wraps the raw Get_Account call.
-func (self IFsrmPipelineModuleDefinition) Get_Account(retrievalAccount *storagefileserverresourcemanager.FsrmAccountType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Account(retrievalAccount)))
+func (self IFsrmPipelineModuleDefinition) Get_Account() (storagefileserverresourcemanager.FsrmAccountType, error) {
+	var _retrievalAccount storagefileserverresourcemanager.FsrmAccountType
+	_hr := self.Raw.Get_Account(&_retrievalAccount)
+	return _retrievalAccount, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Account wraps the raw Put_Account call.
@@ -1651,8 +1959,10 @@ func (self IFsrmPipelineModuleDefinition) Put_Account(retrievalAccount storagefi
 }
 
 // Get_SupportedExtensions wraps the raw Get_SupportedExtensions call.
-func (self IFsrmPipelineModuleDefinition) Get_SupportedExtensions(supportedExtensions **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SupportedExtensions(supportedExtensions)))
+func (self IFsrmPipelineModuleDefinition) Get_SupportedExtensions() (*systemcom.SAFEARRAY, error) {
+	var _supportedExtensions *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_SupportedExtensions(&_supportedExtensions)
+	return _supportedExtensions, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SupportedExtensions wraps the raw Put_SupportedExtensions call.
@@ -1661,8 +1971,10 @@ func (self IFsrmPipelineModuleDefinition) Put_SupportedExtensions(supportedExten
 }
 
 // Get_Parameters wraps the raw Get_Parameters call.
-func (self IFsrmPipelineModuleDefinition) Get_Parameters(parameters **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parameters(parameters)))
+func (self IFsrmPipelineModuleDefinition) Get_Parameters() (*systemcom.SAFEARRAY, error) {
+	var _parameters *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Parameters(&_parameters)
+	return _parameters, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Parameters wraps the raw Put_Parameters call.
@@ -1703,23 +2015,31 @@ func WrapIFsrmProperty(raw *storagefileserverresourcemanager.IFsrmProperty) IFsr
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmProperty) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmProperty) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IFsrmProperty) Get_Value(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(value)))
+func (self IFsrmProperty) Get_Value() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_Value(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Sources wraps the raw Get_Sources call.
-func (self IFsrmProperty) Get_Sources(sources **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Sources(sources)))
+func (self IFsrmProperty) Get_Sources() (*systemcom.SAFEARRAY, error) {
+	var _sources *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Sources(&_sources)
+	return _sources, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PropertyFlags wraps the raw Get_PropertyFlags call.
-func (self IFsrmProperty) Get_PropertyFlags(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyFlags(flags)))
+func (self IFsrmProperty) Get_PropertyFlags() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.Get_PropertyFlags(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmPropertyBag is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmPropertyBag with error-returning methods.
@@ -1734,93 +2054,129 @@ func WrapIFsrmPropertyBag(raw *storagefileserverresourcemanager.IFsrmPropertyBag
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmPropertyBag) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmPropertyBag) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RelativePath wraps the raw Get_RelativePath call.
-func (self IFsrmPropertyBag) Get_RelativePath(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RelativePath(path)))
+func (self IFsrmPropertyBag) Get_RelativePath() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_RelativePath(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VolumeName wraps the raw Get_VolumeName call.
-func (self IFsrmPropertyBag) Get_VolumeName(volumeName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VolumeName(volumeName)))
+func (self IFsrmPropertyBag) Get_VolumeName() (foundation.BSTR, error) {
+	var _volumeName foundation.BSTR
+	_hr := self.Raw.Get_VolumeName(&_volumeName)
+	return _volumeName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RelativeNamespaceRoot wraps the raw Get_RelativeNamespaceRoot call.
-func (self IFsrmPropertyBag) Get_RelativeNamespaceRoot(relativeNamespaceRoot *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RelativeNamespaceRoot(relativeNamespaceRoot)))
+func (self IFsrmPropertyBag) Get_RelativeNamespaceRoot() (foundation.BSTR, error) {
+	var _relativeNamespaceRoot foundation.BSTR
+	_hr := self.Raw.Get_RelativeNamespaceRoot(&_relativeNamespaceRoot)
+	return _relativeNamespaceRoot, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VolumeIndex wraps the raw Get_VolumeIndex call.
-func (self IFsrmPropertyBag) Get_VolumeIndex(volumeId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VolumeIndex(volumeId)))
+func (self IFsrmPropertyBag) Get_VolumeIndex() (uint32, error) {
+	var _volumeId uint32
+	_hr := self.Raw.Get_VolumeIndex(&_volumeId)
+	return _volumeId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FileId wraps the raw Get_FileId call.
-func (self IFsrmPropertyBag) Get_FileId(fileId *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FileId(fileId)))
+func (self IFsrmPropertyBag) Get_FileId() (systemvariant.VARIANT, error) {
+	var _fileId systemvariant.VARIANT
+	_hr := self.Raw.Get_FileId(&_fileId)
+	return _fileId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ParentDirectoryId wraps the raw Get_ParentDirectoryId call.
-func (self IFsrmPropertyBag) Get_ParentDirectoryId(parentDirectoryId *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ParentDirectoryId(parentDirectoryId)))
+func (self IFsrmPropertyBag) Get_ParentDirectoryId() (systemvariant.VARIANT, error) {
+	var _parentDirectoryId systemvariant.VARIANT
+	_hr := self.Raw.Get_ParentDirectoryId(&_parentDirectoryId)
+	return _parentDirectoryId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Size wraps the raw Get_Size call.
-func (self IFsrmPropertyBag) Get_Size(size *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Size(size)))
+func (self IFsrmPropertyBag) Get_Size() (systemvariant.VARIANT, error) {
+	var _size systemvariant.VARIANT
+	_hr := self.Raw.Get_Size(&_size)
+	return _size, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SizeAllocated wraps the raw Get_SizeAllocated call.
-func (self IFsrmPropertyBag) Get_SizeAllocated(sizeAllocated *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SizeAllocated(sizeAllocated)))
+func (self IFsrmPropertyBag) Get_SizeAllocated() (systemvariant.VARIANT, error) {
+	var _sizeAllocated systemvariant.VARIANT
+	_hr := self.Raw.Get_SizeAllocated(&_sizeAllocated)
+	return _sizeAllocated, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CreationTime wraps the raw Get_CreationTime call.
-func (self IFsrmPropertyBag) Get_CreationTime(creationTime *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CreationTime(creationTime)))
+func (self IFsrmPropertyBag) Get_CreationTime() (systemvariant.VARIANT, error) {
+	var _creationTime systemvariant.VARIANT
+	_hr := self.Raw.Get_CreationTime(&_creationTime)
+	return _creationTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastAccessTime wraps the raw Get_LastAccessTime call.
-func (self IFsrmPropertyBag) Get_LastAccessTime(lastAccessTime *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastAccessTime(lastAccessTime)))
+func (self IFsrmPropertyBag) Get_LastAccessTime() (systemvariant.VARIANT, error) {
+	var _lastAccessTime systemvariant.VARIANT
+	_hr := self.Raw.Get_LastAccessTime(&_lastAccessTime)
+	return _lastAccessTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastModificationTime wraps the raw Get_LastModificationTime call.
-func (self IFsrmPropertyBag) Get_LastModificationTime(lastModificationTime *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastModificationTime(lastModificationTime)))
+func (self IFsrmPropertyBag) Get_LastModificationTime() (systemvariant.VARIANT, error) {
+	var _lastModificationTime systemvariant.VARIANT
+	_hr := self.Raw.Get_LastModificationTime(&_lastModificationTime)
+	return _lastModificationTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Attributes wraps the raw Get_Attributes call.
-func (self IFsrmPropertyBag) Get_Attributes(attributes *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Attributes(attributes)))
+func (self IFsrmPropertyBag) Get_Attributes() (uint32, error) {
+	var _attributes uint32
+	_hr := self.Raw.Get_Attributes(&_attributes)
+	return _attributes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_OwnerSid wraps the raw Get_OwnerSid call.
-func (self IFsrmPropertyBag) Get_OwnerSid(ownerSid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OwnerSid(ownerSid)))
+func (self IFsrmPropertyBag) Get_OwnerSid() (foundation.BSTR, error) {
+	var _ownerSid foundation.BSTR
+	_hr := self.Raw.Get_OwnerSid(&_ownerSid)
+	return _ownerSid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FilePropertyNames wraps the raw Get_FilePropertyNames call.
-func (self IFsrmPropertyBag) Get_FilePropertyNames(filePropertyNames **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FilePropertyNames(filePropertyNames)))
+func (self IFsrmPropertyBag) Get_FilePropertyNames() (*systemcom.SAFEARRAY, error) {
+	var _filePropertyNames *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_FilePropertyNames(&_filePropertyNames)
+	return _filePropertyNames, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Messages wraps the raw Get_Messages call.
-func (self IFsrmPropertyBag) Get_Messages(messages **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Messages(messages)))
+func (self IFsrmPropertyBag) Get_Messages() (*systemcom.SAFEARRAY, error) {
+	var _messages *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Messages(&_messages)
+	return _messages, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PropertyBagFlags wraps the raw Get_PropertyBagFlags call.
-func (self IFsrmPropertyBag) Get_PropertyBagFlags(flags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyBagFlags(flags)))
+func (self IFsrmPropertyBag) Get_PropertyBagFlags() (uint32, error) {
+	var _flags uint32
+	_hr := self.Raw.Get_PropertyBagFlags(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileProperty wraps the raw GetFileProperty call.
-func (self IFsrmPropertyBag) GetFileProperty(name foundation.BSTR, fileProperty **storagefileserverresourcemanager.IFsrmProperty) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileProperty(name, fileProperty)))
+func (self IFsrmPropertyBag) GetFileProperty(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmProperty, error) {
+	var _fileProperty *storagefileserverresourcemanager.IFsrmProperty
+	_hr := self.Raw.GetFileProperty(name, &_fileProperty)
+	return _fileProperty, win32.HRESULTError(int32(_hr))
 }
 
 // SetFileProperty wraps the raw SetFileProperty call.
@@ -1834,8 +2190,10 @@ func (self IFsrmPropertyBag) AddMessage(message foundation.BSTR) error {
 }
 
 // GetFileStreamInterface wraps the raw GetFileStreamInterface call.
-func (self IFsrmPropertyBag) GetFileStreamInterface(accessMode storagefileserverresourcemanager.FsrmFileStreamingMode, interfaceType storagefileserverresourcemanager.FsrmFileStreamingInterfaceType, pStreamInterface *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileStreamInterface(accessMode, interfaceType, pStreamInterface)))
+func (self IFsrmPropertyBag) GetFileStreamInterface(accessMode storagefileserverresourcemanager.FsrmFileStreamingMode, interfaceType storagefileserverresourcemanager.FsrmFileStreamingInterfaceType) (systemvariant.VARIANT, error) {
+	var _pStreamInterface systemvariant.VARIANT
+	_hr := self.Raw.GetFileStreamInterface(accessMode, interfaceType, &_pStreamInterface)
+	return _pStreamInterface, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmPropertyBag2 is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmPropertyBag2 with error-returning methods.
@@ -1850,13 +2208,17 @@ func WrapIFsrmPropertyBag2(raw *storagefileserverresourcemanager.IFsrmPropertyBa
 }
 
 // GetFieldValue wraps the raw GetFieldValue call.
-func (self IFsrmPropertyBag2) GetFieldValue(field storagefileserverresourcemanager.FsrmPropertyBagField, value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetFieldValue(field, value)))
+func (self IFsrmPropertyBag2) GetFieldValue(field storagefileserverresourcemanager.FsrmPropertyBagField) (systemvariant.VARIANT, error) {
+	var _value systemvariant.VARIANT
+	_hr := self.Raw.GetFieldValue(field, &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetUntrustedInFileProperties wraps the raw GetUntrustedInFileProperties call.
-func (self IFsrmPropertyBag2) GetUntrustedInFileProperties(props **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetUntrustedInFileProperties(props)))
+func (self IFsrmPropertyBag2) GetUntrustedInFileProperties() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _props *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.GetUntrustedInFileProperties(&_props)
+	return _props, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmPropertyCondition is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmPropertyCondition with error-returning methods.
@@ -1871,8 +2233,10 @@ func WrapIFsrmPropertyCondition(raw *storagefileserverresourcemanager.IFsrmPrope
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmPropertyCondition) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmPropertyCondition) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -1881,8 +2245,10 @@ func (self IFsrmPropertyCondition) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IFsrmPropertyCondition) Get_Type(type_ *storagefileserverresourcemanager.FsrmPropertyConditionType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(type_)))
+func (self IFsrmPropertyCondition) Get_Type() (storagefileserverresourcemanager.FsrmPropertyConditionType, error) {
+	var _type_ storagefileserverresourcemanager.FsrmPropertyConditionType
+	_hr := self.Raw.Get_Type(&_type_)
+	return _type_, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Type wraps the raw Put_Type call.
@@ -1891,8 +2257,10 @@ func (self IFsrmPropertyCondition) Put_Type(type_ storagefileserverresourcemanag
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IFsrmPropertyCondition) Get_Value(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(value)))
+func (self IFsrmPropertyCondition) Get_Value() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_Value(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Value wraps the raw Put_Value call.
@@ -1917,8 +2285,10 @@ func WrapIFsrmPropertyDefinition(raw *storagefileserverresourcemanager.IFsrmProp
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmPropertyDefinition) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmPropertyDefinition) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -1927,8 +2297,10 @@ func (self IFsrmPropertyDefinition) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IFsrmPropertyDefinition) Get_Type(type_ *storagefileserverresourcemanager.FsrmPropertyDefinitionType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(type_)))
+func (self IFsrmPropertyDefinition) Get_Type() (storagefileserverresourcemanager.FsrmPropertyDefinitionType, error) {
+	var _type_ storagefileserverresourcemanager.FsrmPropertyDefinitionType
+	_hr := self.Raw.Get_Type(&_type_)
+	return _type_, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Type wraps the raw Put_Type call.
@@ -1937,8 +2309,10 @@ func (self IFsrmPropertyDefinition) Put_Type(type_ storagefileserverresourcemana
 }
 
 // Get_PossibleValues wraps the raw Get_PossibleValues call.
-func (self IFsrmPropertyDefinition) Get_PossibleValues(possibleValues **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PossibleValues(possibleValues)))
+func (self IFsrmPropertyDefinition) Get_PossibleValues() (*systemcom.SAFEARRAY, error) {
+	var _possibleValues *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_PossibleValues(&_possibleValues)
+	return _possibleValues, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PossibleValues wraps the raw Put_PossibleValues call.
@@ -1947,8 +2321,10 @@ func (self IFsrmPropertyDefinition) Put_PossibleValues(possibleValues *systemcom
 }
 
 // Get_ValueDescriptions wraps the raw Get_ValueDescriptions call.
-func (self IFsrmPropertyDefinition) Get_ValueDescriptions(valueDescriptions **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ValueDescriptions(valueDescriptions)))
+func (self IFsrmPropertyDefinition) Get_ValueDescriptions() (*systemcom.SAFEARRAY, error) {
+	var _valueDescriptions *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ValueDescriptions(&_valueDescriptions)
+	return _valueDescriptions, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ValueDescriptions wraps the raw Put_ValueDescriptions call.
@@ -1957,8 +2333,10 @@ func (self IFsrmPropertyDefinition) Put_ValueDescriptions(valueDescriptions *sys
 }
 
 // Get_Parameters wraps the raw Get_Parameters call.
-func (self IFsrmPropertyDefinition) Get_Parameters(parameters **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parameters(parameters)))
+func (self IFsrmPropertyDefinition) Get_Parameters() (*systemcom.SAFEARRAY, error) {
+	var _parameters *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Parameters(&_parameters)
+	return _parameters, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Parameters wraps the raw Put_Parameters call.
@@ -1978,13 +2356,17 @@ func WrapIFsrmPropertyDefinition2(raw *storagefileserverresourcemanager.IFsrmPro
 }
 
 // Get_PropertyDefinitionFlags wraps the raw Get_PropertyDefinitionFlags call.
-func (self IFsrmPropertyDefinition2) Get_PropertyDefinitionFlags(propertyDefinitionFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyDefinitionFlags(propertyDefinitionFlags)))
+func (self IFsrmPropertyDefinition2) Get_PropertyDefinitionFlags() (int32, error) {
+	var _propertyDefinitionFlags int32
+	_hr := self.Raw.Get_PropertyDefinitionFlags(&_propertyDefinitionFlags)
+	return _propertyDefinitionFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DisplayName wraps the raw Get_DisplayName call.
-func (self IFsrmPropertyDefinition2) Get_DisplayName(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisplayName(name)))
+func (self IFsrmPropertyDefinition2) Get_DisplayName() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_DisplayName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DisplayName wraps the raw Put_DisplayName call.
@@ -1993,13 +2375,17 @@ func (self IFsrmPropertyDefinition2) Put_DisplayName(name foundation.BSTR) error
 }
 
 // Get_AppliesTo wraps the raw Get_AppliesTo call.
-func (self IFsrmPropertyDefinition2) Get_AppliesTo(appliesTo *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AppliesTo(appliesTo)))
+func (self IFsrmPropertyDefinition2) Get_AppliesTo() (int32, error) {
+	var _appliesTo int32
+	_hr := self.Raw.Get_AppliesTo(&_appliesTo)
+	return _appliesTo, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ValueDefinitions wraps the raw Get_ValueDefinitions call.
-func (self IFsrmPropertyDefinition2) Get_ValueDefinitions(valueDefinitions **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ValueDefinitions(valueDefinitions)))
+func (self IFsrmPropertyDefinition2) Get_ValueDefinitions() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _valueDefinitions *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.Get_ValueDefinitions(&_valueDefinitions)
+	return _valueDefinitions, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmPropertyDefinitionValue is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmPropertyDefinitionValue with error-returning methods.
@@ -2014,23 +2400,31 @@ func WrapIFsrmPropertyDefinitionValue(raw *storagefileserverresourcemanager.IFsr
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmPropertyDefinitionValue) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmPropertyDefinitionValue) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DisplayName wraps the raw Get_DisplayName call.
-func (self IFsrmPropertyDefinitionValue) Get_DisplayName(displayName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisplayName(displayName)))
+func (self IFsrmPropertyDefinitionValue) Get_DisplayName() (foundation.BSTR, error) {
+	var _displayName foundation.BSTR
+	_hr := self.Raw.Get_DisplayName(&_displayName)
+	return _displayName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IFsrmPropertyDefinitionValue) Get_Description(description *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(description)))
+func (self IFsrmPropertyDefinitionValue) Get_Description() (foundation.BSTR, error) {
+	var _description foundation.BSTR
+	_hr := self.Raw.Get_Description(&_description)
+	return _description, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UniqueID wraps the raw Get_UniqueID call.
-func (self IFsrmPropertyDefinitionValue) Get_UniqueID(uniqueID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UniqueID(uniqueID)))
+func (self IFsrmPropertyDefinitionValue) Get_UniqueID() (foundation.BSTR, error) {
+	var _uniqueID foundation.BSTR
+	_hr := self.Raw.Get_UniqueID(&_uniqueID)
+	return _uniqueID, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmQuota is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmQuota with error-returning methods.
@@ -2045,18 +2439,24 @@ func WrapIFsrmQuota(raw *storagefileserverresourcemanager.IFsrmQuota) IFsrmQuota
 }
 
 // Get_QuotaUsed wraps the raw Get_QuotaUsed call.
-func (self IFsrmQuota) Get_QuotaUsed(used *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QuotaUsed(used)))
+func (self IFsrmQuota) Get_QuotaUsed() (systemvariant.VARIANT, error) {
+	var _used systemvariant.VARIANT
+	_hr := self.Raw.Get_QuotaUsed(&_used)
+	return _used, win32.HRESULTError(int32(_hr))
 }
 
 // Get_QuotaPeakUsage wraps the raw Get_QuotaPeakUsage call.
-func (self IFsrmQuota) Get_QuotaPeakUsage(peakUsage *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QuotaPeakUsage(peakUsage)))
+func (self IFsrmQuota) Get_QuotaPeakUsage() (systemvariant.VARIANT, error) {
+	var _peakUsage systemvariant.VARIANT
+	_hr := self.Raw.Get_QuotaPeakUsage(&_peakUsage)
+	return _peakUsage, win32.HRESULTError(int32(_hr))
 }
 
 // Get_QuotaPeakUsageTime wraps the raw Get_QuotaPeakUsageTime call.
-func (self IFsrmQuota) Get_QuotaPeakUsageTime(peakUsageDateTime *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QuotaPeakUsageTime(peakUsageDateTime)))
+func (self IFsrmQuota) Get_QuotaPeakUsageTime() (float64, error) {
+	var _peakUsageDateTime float64
+	_hr := self.Raw.Get_QuotaPeakUsageTime(&_peakUsageDateTime)
+	return _peakUsageDateTime, win32.HRESULTError(int32(_hr))
 }
 
 // ResetPeakUsage wraps the raw ResetPeakUsage call.
@@ -2081,13 +2481,17 @@ func WrapIFsrmQuotaBase(raw *storagefileserverresourcemanager.IFsrmQuotaBase) IF
 }
 
 // Get_QuotaLimit wraps the raw Get_QuotaLimit call.
-func (self IFsrmQuotaBase) Get_QuotaLimit(quotaLimit *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QuotaLimit(quotaLimit)))
+func (self IFsrmQuotaBase) Get_QuotaLimit() (systemvariant.VARIANT, error) {
+	var _quotaLimit systemvariant.VARIANT
+	_hr := self.Raw.Get_QuotaLimit(&_quotaLimit)
+	return _quotaLimit, win32.HRESULTError(int32(_hr))
 }
 
 // Get_QuotaFlags wraps the raw Get_QuotaFlags call.
-func (self IFsrmQuotaBase) Get_QuotaFlags(quotaFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QuotaFlags(quotaFlags)))
+func (self IFsrmQuotaBase) Get_QuotaFlags() (int32, error) {
+	var _quotaFlags int32
+	_hr := self.Raw.Get_QuotaFlags(&_quotaFlags)
+	return _quotaFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QuotaFlags wraps the raw Put_QuotaFlags call.
@@ -2096,8 +2500,10 @@ func (self IFsrmQuotaBase) Put_QuotaFlags(quotaFlags int32) error {
 }
 
 // Get_Thresholds wraps the raw Get_Thresholds call.
-func (self IFsrmQuotaBase) Get_Thresholds(thresholds **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Thresholds(thresholds)))
+func (self IFsrmQuotaBase) Get_Thresholds() (*systemcom.SAFEARRAY, error) {
+	var _thresholds *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Thresholds(&_thresholds)
+	return _thresholds, win32.HRESULTError(int32(_hr))
 }
 
 // AddThreshold wraps the raw AddThreshold call.
@@ -2116,13 +2522,17 @@ func (self IFsrmQuotaBase) ModifyThreshold(threshold int32, newThreshold int32) 
 }
 
 // CreateThresholdAction wraps the raw CreateThresholdAction call.
-func (self IFsrmQuotaBase) CreateThresholdAction(threshold int32, actionType storagefileserverresourcemanager.FsrmActionType, action **storagefileserverresourcemanager.IFsrmAction) error {
-	return win32.HRESULTError(int32(self.Raw.CreateThresholdAction(threshold, actionType, action)))
+func (self IFsrmQuotaBase) CreateThresholdAction(threshold int32, actionType storagefileserverresourcemanager.FsrmActionType) (*storagefileserverresourcemanager.IFsrmAction, error) {
+	var _action *storagefileserverresourcemanager.IFsrmAction
+	_hr := self.Raw.CreateThresholdAction(threshold, actionType, &_action)
+	return _action, win32.HRESULTError(int32(_hr))
 }
 
 // EnumThresholdActions wraps the raw EnumThresholdActions call.
-func (self IFsrmQuotaBase) EnumThresholdActions(threshold int32, actions **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumThresholdActions(threshold, actions)))
+func (self IFsrmQuotaBase) EnumThresholdActions(threshold int32) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _actions *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumThresholdActions(threshold, &_actions)
+	return _actions, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmQuotaManager is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmQuotaManager with error-returning methods.
@@ -2137,53 +2547,73 @@ func WrapIFsrmQuotaManager(raw *storagefileserverresourcemanager.IFsrmQuotaManag
 }
 
 // Get_ActionVariables wraps the raw Get_ActionVariables call.
-func (self IFsrmQuotaManager) Get_ActionVariables(variables **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActionVariables(variables)))
+func (self IFsrmQuotaManager) Get_ActionVariables() (*systemcom.SAFEARRAY, error) {
+	var _variables *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ActionVariables(&_variables)
+	return _variables, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ActionVariableDescriptions wraps the raw Get_ActionVariableDescriptions call.
-func (self IFsrmQuotaManager) Get_ActionVariableDescriptions(descriptions **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActionVariableDescriptions(descriptions)))
+func (self IFsrmQuotaManager) Get_ActionVariableDescriptions() (*systemcom.SAFEARRAY, error) {
+	var _descriptions *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_ActionVariableDescriptions(&_descriptions)
+	return _descriptions, win32.HRESULTError(int32(_hr))
 }
 
 // CreateQuota wraps the raw CreateQuota call.
-func (self IFsrmQuotaManager) CreateQuota(path foundation.BSTR, quota **storagefileserverresourcemanager.IFsrmQuota) error {
-	return win32.HRESULTError(int32(self.Raw.CreateQuota(path, quota)))
+func (self IFsrmQuotaManager) CreateQuota(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmQuota, error) {
+	var _quota *storagefileserverresourcemanager.IFsrmQuota
+	_hr := self.Raw.CreateQuota(path, &_quota)
+	return _quota, win32.HRESULTError(int32(_hr))
 }
 
 // CreateAutoApplyQuota wraps the raw CreateAutoApplyQuota call.
-func (self IFsrmQuotaManager) CreateAutoApplyQuota(quotaTemplateName foundation.BSTR, path foundation.BSTR, quota **storagefileserverresourcemanager.IFsrmAutoApplyQuota) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAutoApplyQuota(quotaTemplateName, path, quota)))
+func (self IFsrmQuotaManager) CreateAutoApplyQuota(quotaTemplateName foundation.BSTR, path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmAutoApplyQuota, error) {
+	var _quota *storagefileserverresourcemanager.IFsrmAutoApplyQuota
+	_hr := self.Raw.CreateAutoApplyQuota(quotaTemplateName, path, &_quota)
+	return _quota, win32.HRESULTError(int32(_hr))
 }
 
 // GetQuota wraps the raw GetQuota call.
-func (self IFsrmQuotaManager) GetQuota(path foundation.BSTR, quota **storagefileserverresourcemanager.IFsrmQuota) error {
-	return win32.HRESULTError(int32(self.Raw.GetQuota(path, quota)))
+func (self IFsrmQuotaManager) GetQuota(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmQuota, error) {
+	var _quota *storagefileserverresourcemanager.IFsrmQuota
+	_hr := self.Raw.GetQuota(path, &_quota)
+	return _quota, win32.HRESULTError(int32(_hr))
 }
 
 // GetAutoApplyQuota wraps the raw GetAutoApplyQuota call.
-func (self IFsrmQuotaManager) GetAutoApplyQuota(path foundation.BSTR, quota **storagefileserverresourcemanager.IFsrmAutoApplyQuota) error {
-	return win32.HRESULTError(int32(self.Raw.GetAutoApplyQuota(path, quota)))
+func (self IFsrmQuotaManager) GetAutoApplyQuota(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmAutoApplyQuota, error) {
+	var _quota *storagefileserverresourcemanager.IFsrmAutoApplyQuota
+	_hr := self.Raw.GetAutoApplyQuota(path, &_quota)
+	return _quota, win32.HRESULTError(int32(_hr))
 }
 
 // GetRestrictiveQuota wraps the raw GetRestrictiveQuota call.
-func (self IFsrmQuotaManager) GetRestrictiveQuota(path foundation.BSTR, quota **storagefileserverresourcemanager.IFsrmQuota) error {
-	return win32.HRESULTError(int32(self.Raw.GetRestrictiveQuota(path, quota)))
+func (self IFsrmQuotaManager) GetRestrictiveQuota(path foundation.BSTR) (*storagefileserverresourcemanager.IFsrmQuota, error) {
+	var _quota *storagefileserverresourcemanager.IFsrmQuota
+	_hr := self.Raw.GetRestrictiveQuota(path, &_quota)
+	return _quota, win32.HRESULTError(int32(_hr))
 }
 
 // EnumQuotas wraps the raw EnumQuotas call.
-func (self IFsrmQuotaManager) EnumQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions, quotas **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumQuotas(path, options, quotas)))
+func (self IFsrmQuotaManager) EnumQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _quotas *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.EnumQuotas(path, options, &_quotas)
+	return _quotas, win32.HRESULTError(int32(_hr))
 }
 
 // EnumAutoApplyQuotas wraps the raw EnumAutoApplyQuotas call.
-func (self IFsrmQuotaManager) EnumAutoApplyQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions, quotas **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumAutoApplyQuotas(path, options, quotas)))
+func (self IFsrmQuotaManager) EnumAutoApplyQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _quotas *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.EnumAutoApplyQuotas(path, options, &_quotas)
+	return _quotas, win32.HRESULTError(int32(_hr))
 }
 
 // EnumEffectiveQuotas wraps the raw EnumEffectiveQuotas call.
-func (self IFsrmQuotaManager) EnumEffectiveQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions, quotas **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumEffectiveQuotas(path, options, quotas)))
+func (self IFsrmQuotaManager) EnumEffectiveQuotas(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _quotas *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.EnumEffectiveQuotas(path, options, &_quotas)
+	return _quotas, win32.HRESULTError(int32(_hr))
 }
 
 // Scan wraps the raw Scan call.
@@ -2192,8 +2622,10 @@ func (self IFsrmQuotaManager) Scan(strPath foundation.BSTR) error {
 }
 
 // CreateQuotaCollection wraps the raw CreateQuotaCollection call.
-func (self IFsrmQuotaManager) CreateQuotaCollection(collection **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.CreateQuotaCollection(collection)))
+func (self IFsrmQuotaManager) CreateQuotaCollection() (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _collection *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.CreateQuotaCollection(&_collection)
+	return _collection, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmQuotaManagerEx is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmQuotaManagerEx with error-returning methods.
@@ -2208,8 +2640,10 @@ func WrapIFsrmQuotaManagerEx(raw *storagefileserverresourcemanager.IFsrmQuotaMan
 }
 
 // IsAffectedByQuota wraps the raw IsAffectedByQuota call.
-func (self IFsrmQuotaManagerEx) IsAffectedByQuota(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions, affected *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsAffectedByQuota(path, options, affected)))
+func (self IFsrmQuotaManagerEx) IsAffectedByQuota(path foundation.BSTR, options storagefileserverresourcemanager.FsrmEnumOptions) (foundation.VARIANT_BOOL, error) {
+	var _affected foundation.VARIANT_BOOL
+	_hr := self.Raw.IsAffectedByQuota(path, options, &_affected)
+	return _affected, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmQuotaObject is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmQuotaObject with error-returning methods.
@@ -2224,28 +2658,38 @@ func WrapIFsrmQuotaObject(raw *storagefileserverresourcemanager.IFsrmQuotaObject
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self IFsrmQuotaObject) Get_Path(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(path)))
+func (self IFsrmQuotaObject) Get_Path() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_Path(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserSid wraps the raw Get_UserSid call.
-func (self IFsrmQuotaObject) Get_UserSid(userSid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserSid(userSid)))
+func (self IFsrmQuotaObject) Get_UserSid() (foundation.BSTR, error) {
+	var _userSid foundation.BSTR
+	_hr := self.Raw.Get_UserSid(&_userSid)
+	return _userSid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserAccount wraps the raw Get_UserAccount call.
-func (self IFsrmQuotaObject) Get_UserAccount(userAccount *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserAccount(userAccount)))
+func (self IFsrmQuotaObject) Get_UserAccount() (foundation.BSTR, error) {
+	var _userAccount foundation.BSTR
+	_hr := self.Raw.Get_UserAccount(&_userAccount)
+	return _userAccount, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SourceTemplateName wraps the raw Get_SourceTemplateName call.
-func (self IFsrmQuotaObject) Get_SourceTemplateName(quotaTemplateName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SourceTemplateName(quotaTemplateName)))
+func (self IFsrmQuotaObject) Get_SourceTemplateName() (foundation.BSTR, error) {
+	var _quotaTemplateName foundation.BSTR
+	_hr := self.Raw.Get_SourceTemplateName(&_quotaTemplateName)
+	return _quotaTemplateName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MatchesSourceTemplate wraps the raw Get_MatchesSourceTemplate call.
-func (self IFsrmQuotaObject) Get_MatchesSourceTemplate(matches *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MatchesSourceTemplate(matches)))
+func (self IFsrmQuotaObject) Get_MatchesSourceTemplate() (foundation.VARIANT_BOOL, error) {
+	var _matches foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MatchesSourceTemplate(&_matches)
+	return _matches, win32.HRESULTError(int32(_hr))
 }
 
 // ApplyTemplate wraps the raw ApplyTemplate call.
@@ -2265,8 +2709,10 @@ func WrapIFsrmQuotaTemplate(raw *storagefileserverresourcemanager.IFsrmQuotaTemp
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmQuotaTemplate) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmQuotaTemplate) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -2280,8 +2726,10 @@ func (self IFsrmQuotaTemplate) CopyTemplate(quotaTemplateName foundation.BSTR) e
 }
 
 // CommitAndUpdateDerived wraps the raw CommitAndUpdateDerived call.
-func (self IFsrmQuotaTemplate) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions, derivedObjectsResult **storagefileserverresourcemanager.IFsrmDerivedObjectsResult) error {
-	return win32.HRESULTError(int32(self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, derivedObjectsResult)))
+func (self IFsrmQuotaTemplate) CommitAndUpdateDerived(commitOptions storagefileserverresourcemanager.FsrmCommitOptions, applyOptions storagefileserverresourcemanager.FsrmTemplateApplyOptions) (*storagefileserverresourcemanager.IFsrmDerivedObjectsResult, error) {
+	var _derivedObjectsResult *storagefileserverresourcemanager.IFsrmDerivedObjectsResult
+	_hr := self.Raw.CommitAndUpdateDerived(commitOptions, applyOptions, &_derivedObjectsResult)
+	return _derivedObjectsResult, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmQuotaTemplateImported is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmQuotaTemplateImported with error-returning methods.
@@ -2296,8 +2744,10 @@ func WrapIFsrmQuotaTemplateImported(raw *storagefileserverresourcemanager.IFsrmQ
 }
 
 // Get_OverwriteOnCommit wraps the raw Get_OverwriteOnCommit call.
-func (self IFsrmQuotaTemplateImported) Get_OverwriteOnCommit(overwrite *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OverwriteOnCommit(overwrite)))
+func (self IFsrmQuotaTemplateImported) Get_OverwriteOnCommit() (foundation.VARIANT_BOOL, error) {
+	var _overwrite foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_OverwriteOnCommit(&_overwrite)
+	return _overwrite, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OverwriteOnCommit wraps the raw Put_OverwriteOnCommit call.
@@ -2317,28 +2767,38 @@ func WrapIFsrmQuotaTemplateManager(raw *storagefileserverresourcemanager.IFsrmQu
 }
 
 // CreateTemplate wraps the raw CreateTemplate call.
-func (self IFsrmQuotaTemplateManager) CreateTemplate(quotaTemplate **storagefileserverresourcemanager.IFsrmQuotaTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTemplate(quotaTemplate)))
+func (self IFsrmQuotaTemplateManager) CreateTemplate() (*storagefileserverresourcemanager.IFsrmQuotaTemplate, error) {
+	var _quotaTemplate *storagefileserverresourcemanager.IFsrmQuotaTemplate
+	_hr := self.Raw.CreateTemplate(&_quotaTemplate)
+	return _quotaTemplate, win32.HRESULTError(int32(_hr))
 }
 
 // GetTemplate wraps the raw GetTemplate call.
-func (self IFsrmQuotaTemplateManager) GetTemplate(name foundation.BSTR, quotaTemplate **storagefileserverresourcemanager.IFsrmQuotaTemplate) error {
-	return win32.HRESULTError(int32(self.Raw.GetTemplate(name, quotaTemplate)))
+func (self IFsrmQuotaTemplateManager) GetTemplate(name foundation.BSTR) (*storagefileserverresourcemanager.IFsrmQuotaTemplate, error) {
+	var _quotaTemplate *storagefileserverresourcemanager.IFsrmQuotaTemplate
+	_hr := self.Raw.GetTemplate(name, &_quotaTemplate)
+	return _quotaTemplate, win32.HRESULTError(int32(_hr))
 }
 
 // EnumTemplates wraps the raw EnumTemplates call.
-func (self IFsrmQuotaTemplateManager) EnumTemplates(options storagefileserverresourcemanager.FsrmEnumOptions, quotaTemplates **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumTemplates(options, quotaTemplates)))
+func (self IFsrmQuotaTemplateManager) EnumTemplates(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _quotaTemplates *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.EnumTemplates(options, &_quotaTemplates)
+	return _quotaTemplates, win32.HRESULTError(int32(_hr))
 }
 
 // ExportTemplates wraps the raw ExportTemplates call.
-func (self IFsrmQuotaTemplateManager) ExportTemplates(quotaTemplateNamesArray *systemvariant.VARIANT, serializedQuotaTemplates *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.ExportTemplates(quotaTemplateNamesArray, serializedQuotaTemplates)))
+func (self IFsrmQuotaTemplateManager) ExportTemplates(quotaTemplateNamesArray *systemvariant.VARIANT) (foundation.BSTR, error) {
+	var _serializedQuotaTemplates foundation.BSTR
+	_hr := self.Raw.ExportTemplates(quotaTemplateNamesArray, &_serializedQuotaTemplates)
+	return _serializedQuotaTemplates, win32.HRESULTError(int32(_hr))
 }
 
 // ImportTemplates wraps the raw ImportTemplates call.
-func (self IFsrmQuotaTemplateManager) ImportTemplates(serializedQuotaTemplates foundation.BSTR, quotaTemplateNamesArray *systemvariant.VARIANT, quotaTemplates **storagefileserverresourcemanager.IFsrmCommittableCollection) error {
-	return win32.HRESULTError(int32(self.Raw.ImportTemplates(serializedQuotaTemplates, quotaTemplateNamesArray, quotaTemplates)))
+func (self IFsrmQuotaTemplateManager) ImportTemplates(serializedQuotaTemplates foundation.BSTR, quotaTemplateNamesArray *systemvariant.VARIANT) (*storagefileserverresourcemanager.IFsrmCommittableCollection, error) {
+	var _quotaTemplates *storagefileserverresourcemanager.IFsrmCommittableCollection
+	_hr := self.Raw.ImportTemplates(serializedQuotaTemplates, quotaTemplateNamesArray, &_quotaTemplates)
+	return _quotaTemplates, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmReport is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmReport with error-returning methods.
@@ -2353,13 +2813,17 @@ func WrapIFsrmReport(raw *storagefileserverresourcemanager.IFsrmReport) IFsrmRep
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IFsrmReport) Get_Type(reportType *storagefileserverresourcemanager.FsrmReportType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(reportType)))
+func (self IFsrmReport) Get_Type() (storagefileserverresourcemanager.FsrmReportType, error) {
+	var _reportType storagefileserverresourcemanager.FsrmReportType
+	_hr := self.Raw.Get_Type(&_reportType)
+	return _reportType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmReport) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmReport) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -2368,8 +2832,10 @@ func (self IFsrmReport) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IFsrmReport) Get_Description(description *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(description)))
+func (self IFsrmReport) Get_Description() (foundation.BSTR, error) {
+	var _description foundation.BSTR
+	_hr := self.Raw.Get_Description(&_description)
+	return _description, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -2378,13 +2844,17 @@ func (self IFsrmReport) Put_Description(description foundation.BSTR) error {
 }
 
 // Get_LastGeneratedFileNamePrefix wraps the raw Get_LastGeneratedFileNamePrefix call.
-func (self IFsrmReport) Get_LastGeneratedFileNamePrefix(prefix *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastGeneratedFileNamePrefix(prefix)))
+func (self IFsrmReport) Get_LastGeneratedFileNamePrefix() (foundation.BSTR, error) {
+	var _prefix foundation.BSTR
+	_hr := self.Raw.Get_LastGeneratedFileNamePrefix(&_prefix)
+	return _prefix, win32.HRESULTError(int32(_hr))
 }
 
 // GetFilter wraps the raw GetFilter call.
-func (self IFsrmReport) GetFilter(filter storagefileserverresourcemanager.FsrmReportFilter, filterValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetFilter(filter, filterValue)))
+func (self IFsrmReport) GetFilter(filter storagefileserverresourcemanager.FsrmReportFilter) (systemvariant.VARIANT, error) {
+	var _filterValue systemvariant.VARIANT
+	_hr := self.Raw.GetFilter(filter, &_filterValue)
+	return _filterValue, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -2404,8 +2874,10 @@ func WrapIFsrmReportJob(raw *storagefileserverresourcemanager.IFsrmReportJob) IF
 }
 
 // Get_Task wraps the raw Get_Task call.
-func (self IFsrmReportJob) Get_Task(taskName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Task(taskName)))
+func (self IFsrmReportJob) Get_Task() (foundation.BSTR, error) {
+	var _taskName foundation.BSTR
+	_hr := self.Raw.Get_Task(&_taskName)
+	return _taskName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Task wraps the raw Put_Task call.
@@ -2414,8 +2886,10 @@ func (self IFsrmReportJob) Put_Task(taskName foundation.BSTR) error {
 }
 
 // Get_NamespaceRoots wraps the raw Get_NamespaceRoots call.
-func (self IFsrmReportJob) Get_NamespaceRoots(namespaceRoots **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NamespaceRoots(namespaceRoots)))
+func (self IFsrmReportJob) Get_NamespaceRoots() (*systemcom.SAFEARRAY, error) {
+	var _namespaceRoots *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_NamespaceRoots(&_namespaceRoots)
+	return _namespaceRoots, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NamespaceRoots wraps the raw Put_NamespaceRoots call.
@@ -2424,8 +2898,10 @@ func (self IFsrmReportJob) Put_NamespaceRoots(namespaceRoots *systemcom.SAFEARRA
 }
 
 // Get_Formats wraps the raw Get_Formats call.
-func (self IFsrmReportJob) Get_Formats(formats **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Formats(formats)))
+func (self IFsrmReportJob) Get_Formats() (*systemcom.SAFEARRAY, error) {
+	var _formats *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Formats(&_formats)
+	return _formats, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Formats wraps the raw Put_Formats call.
@@ -2434,8 +2910,10 @@ func (self IFsrmReportJob) Put_Formats(formats *systemcom.SAFEARRAY) error {
 }
 
 // Get_MailTo wraps the raw Get_MailTo call.
-func (self IFsrmReportJob) Get_MailTo(mailTo *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailTo(mailTo)))
+func (self IFsrmReportJob) Get_MailTo() (foundation.BSTR, error) {
+	var _mailTo foundation.BSTR
+	_hr := self.Raw.Get_MailTo(&_mailTo)
+	return _mailTo, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailTo wraps the raw Put_MailTo call.
@@ -2444,33 +2922,45 @@ func (self IFsrmReportJob) Put_MailTo(mailTo foundation.BSTR) error {
 }
 
 // Get_RunningStatus wraps the raw Get_RunningStatus call.
-func (self IFsrmReportJob) Get_RunningStatus(runningStatus *storagefileserverresourcemanager.FsrmReportRunningStatus) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RunningStatus(runningStatus)))
+func (self IFsrmReportJob) Get_RunningStatus() (storagefileserverresourcemanager.FsrmReportRunningStatus, error) {
+	var _runningStatus storagefileserverresourcemanager.FsrmReportRunningStatus
+	_hr := self.Raw.Get_RunningStatus(&_runningStatus)
+	return _runningStatus, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastRun wraps the raw Get_LastRun call.
-func (self IFsrmReportJob) Get_LastRun(lastRun *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastRun(lastRun)))
+func (self IFsrmReportJob) Get_LastRun() (float64, error) {
+	var _lastRun float64
+	_hr := self.Raw.Get_LastRun(&_lastRun)
+	return _lastRun, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastError wraps the raw Get_LastError call.
-func (self IFsrmReportJob) Get_LastError(lastError *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastError(lastError)))
+func (self IFsrmReportJob) Get_LastError() (foundation.BSTR, error) {
+	var _lastError foundation.BSTR
+	_hr := self.Raw.Get_LastError(&_lastError)
+	return _lastError, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastGeneratedInDirectory wraps the raw Get_LastGeneratedInDirectory call.
-func (self IFsrmReportJob) Get_LastGeneratedInDirectory(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastGeneratedInDirectory(path)))
+func (self IFsrmReportJob) Get_LastGeneratedInDirectory() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_LastGeneratedInDirectory(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // EnumReports wraps the raw EnumReports call.
-func (self IFsrmReportJob) EnumReports(reports **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumReports(reports)))
+func (self IFsrmReportJob) EnumReports() (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _reports *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumReports(&_reports)
+	return _reports, win32.HRESULTError(int32(_hr))
 }
 
 // CreateReport wraps the raw CreateReport call.
-func (self IFsrmReportJob) CreateReport(reportType storagefileserverresourcemanager.FsrmReportType, report **storagefileserverresourcemanager.IFsrmReport) error {
-	return win32.HRESULTError(int32(self.Raw.CreateReport(reportType, report)))
+func (self IFsrmReportJob) CreateReport(reportType storagefileserverresourcemanager.FsrmReportType) (*storagefileserverresourcemanager.IFsrmReport, error) {
+	var _report *storagefileserverresourcemanager.IFsrmReport
+	_hr := self.Raw.CreateReport(reportType, &_report)
+	return _report, win32.HRESULTError(int32(_hr))
 }
 
 // Run wraps the raw Run call.
@@ -2479,8 +2969,10 @@ func (self IFsrmReportJob) Run(context storagefileserverresourcemanager.FsrmRepo
 }
 
 // WaitForCompletion wraps the raw WaitForCompletion call.
-func (self IFsrmReportJob) WaitForCompletion(waitSeconds int32, completed *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.WaitForCompletion(waitSeconds, completed)))
+func (self IFsrmReportJob) WaitForCompletion(waitSeconds int32) (foundation.VARIANT_BOOL, error) {
+	var _completed foundation.VARIANT_BOOL
+	_hr := self.Raw.WaitForCompletion(waitSeconds, &_completed)
+	return _completed, win32.HRESULTError(int32(_hr))
 }
 
 // Cancel wraps the raw Cancel call.
@@ -2500,23 +2992,31 @@ func WrapIFsrmReportManager(raw *storagefileserverresourcemanager.IFsrmReportMan
 }
 
 // EnumReportJobs wraps the raw EnumReportJobs call.
-func (self IFsrmReportManager) EnumReportJobs(options storagefileserverresourcemanager.FsrmEnumOptions, reportJobs **storagefileserverresourcemanager.IFsrmCollection) error {
-	return win32.HRESULTError(int32(self.Raw.EnumReportJobs(options, reportJobs)))
+func (self IFsrmReportManager) EnumReportJobs(options storagefileserverresourcemanager.FsrmEnumOptions) (*storagefileserverresourcemanager.IFsrmCollection, error) {
+	var _reportJobs *storagefileserverresourcemanager.IFsrmCollection
+	_hr := self.Raw.EnumReportJobs(options, &_reportJobs)
+	return _reportJobs, win32.HRESULTError(int32(_hr))
 }
 
 // CreateReportJob wraps the raw CreateReportJob call.
-func (self IFsrmReportManager) CreateReportJob(reportJob **storagefileserverresourcemanager.IFsrmReportJob) error {
-	return win32.HRESULTError(int32(self.Raw.CreateReportJob(reportJob)))
+func (self IFsrmReportManager) CreateReportJob() (*storagefileserverresourcemanager.IFsrmReportJob, error) {
+	var _reportJob *storagefileserverresourcemanager.IFsrmReportJob
+	_hr := self.Raw.CreateReportJob(&_reportJob)
+	return _reportJob, win32.HRESULTError(int32(_hr))
 }
 
 // GetReportJob wraps the raw GetReportJob call.
-func (self IFsrmReportManager) GetReportJob(taskName foundation.BSTR, reportJob **storagefileserverresourcemanager.IFsrmReportJob) error {
-	return win32.HRESULTError(int32(self.Raw.GetReportJob(taskName, reportJob)))
+func (self IFsrmReportManager) GetReportJob(taskName foundation.BSTR) (*storagefileserverresourcemanager.IFsrmReportJob, error) {
+	var _reportJob *storagefileserverresourcemanager.IFsrmReportJob
+	_hr := self.Raw.GetReportJob(taskName, &_reportJob)
+	return _reportJob, win32.HRESULTError(int32(_hr))
 }
 
 // GetOutputDirectory wraps the raw GetOutputDirectory call.
-func (self IFsrmReportManager) GetOutputDirectory(context storagefileserverresourcemanager.FsrmReportGenerationContext, path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetOutputDirectory(context, path)))
+func (self IFsrmReportManager) GetOutputDirectory(context storagefileserverresourcemanager.FsrmReportGenerationContext) (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.GetOutputDirectory(context, &_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // SetOutputDirectory wraps the raw SetOutputDirectory call.
@@ -2525,18 +3025,24 @@ func (self IFsrmReportManager) SetOutputDirectory(context storagefileserverresou
 }
 
 // IsFilterValidForReportType wraps the raw IsFilterValidForReportType call.
-func (self IFsrmReportManager) IsFilterValidForReportType(reportType storagefileserverresourcemanager.FsrmReportType, filter storagefileserverresourcemanager.FsrmReportFilter, valid *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsFilterValidForReportType(reportType, filter, valid)))
+func (self IFsrmReportManager) IsFilterValidForReportType(reportType storagefileserverresourcemanager.FsrmReportType, filter storagefileserverresourcemanager.FsrmReportFilter) (foundation.VARIANT_BOOL, error) {
+	var _valid foundation.VARIANT_BOOL
+	_hr := self.Raw.IsFilterValidForReportType(reportType, filter, &_valid)
+	return _valid, win32.HRESULTError(int32(_hr))
 }
 
 // GetDefaultFilter wraps the raw GetDefaultFilter call.
-func (self IFsrmReportManager) GetDefaultFilter(reportType storagefileserverresourcemanager.FsrmReportType, filter storagefileserverresourcemanager.FsrmReportFilter, filterValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetDefaultFilter(reportType, filter, filterValue)))
+func (self IFsrmReportManager) GetDefaultFilter(reportType storagefileserverresourcemanager.FsrmReportType, filter storagefileserverresourcemanager.FsrmReportFilter) (systemvariant.VARIANT, error) {
+	var _filterValue systemvariant.VARIANT
+	_hr := self.Raw.GetDefaultFilter(reportType, filter, &_filterValue)
+	return _filterValue, win32.HRESULTError(int32(_hr))
 }
 
 // GetReportSizeLimit wraps the raw GetReportSizeLimit call.
-func (self IFsrmReportManager) GetReportSizeLimit(limit storagefileserverresourcemanager.FsrmReportLimit, limitValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetReportSizeLimit(limit, limitValue)))
+func (self IFsrmReportManager) GetReportSizeLimit(limit storagefileserverresourcemanager.FsrmReportLimit) (systemvariant.VARIANT, error) {
+	var _limitValue systemvariant.VARIANT
+	_hr := self.Raw.GetReportSizeLimit(limit, &_limitValue)
+	return _limitValue, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmReportScheduler is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmReportScheduler with error-returning methods.
@@ -2582,8 +3088,10 @@ func WrapIFsrmRule(raw *storagefileserverresourcemanager.IFsrmRule) IFsrmRule {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsrmRule) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFsrmRule) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -2592,13 +3100,17 @@ func (self IFsrmRule) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_RuleType wraps the raw Get_RuleType call.
-func (self IFsrmRule) Get_RuleType(ruleType *storagefileserverresourcemanager.FsrmRuleType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RuleType(ruleType)))
+func (self IFsrmRule) Get_RuleType() (storagefileserverresourcemanager.FsrmRuleType, error) {
+	var _ruleType storagefileserverresourcemanager.FsrmRuleType
+	_hr := self.Raw.Get_RuleType(&_ruleType)
+	return _ruleType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ModuleDefinitionName wraps the raw Get_ModuleDefinitionName call.
-func (self IFsrmRule) Get_ModuleDefinitionName(moduleDefinitionName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModuleDefinitionName(moduleDefinitionName)))
+func (self IFsrmRule) Get_ModuleDefinitionName() (foundation.BSTR, error) {
+	var _moduleDefinitionName foundation.BSTR
+	_hr := self.Raw.Get_ModuleDefinitionName(&_moduleDefinitionName)
+	return _moduleDefinitionName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ModuleDefinitionName wraps the raw Put_ModuleDefinitionName call.
@@ -2607,8 +3119,10 @@ func (self IFsrmRule) Put_ModuleDefinitionName(moduleDefinitionName foundation.B
 }
 
 // Get_NamespaceRoots wraps the raw Get_NamespaceRoots call.
-func (self IFsrmRule) Get_NamespaceRoots(namespaceRoots **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NamespaceRoots(namespaceRoots)))
+func (self IFsrmRule) Get_NamespaceRoots() (*systemcom.SAFEARRAY, error) {
+	var _namespaceRoots *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_NamespaceRoots(&_namespaceRoots)
+	return _namespaceRoots, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NamespaceRoots wraps the raw Put_NamespaceRoots call.
@@ -2617,8 +3131,10 @@ func (self IFsrmRule) Put_NamespaceRoots(namespaceRoots *systemcom.SAFEARRAY) er
 }
 
 // Get_RuleFlags wraps the raw Get_RuleFlags call.
-func (self IFsrmRule) Get_RuleFlags(ruleFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RuleFlags(ruleFlags)))
+func (self IFsrmRule) Get_RuleFlags() (int32, error) {
+	var _ruleFlags int32
+	_hr := self.Raw.Get_RuleFlags(&_ruleFlags)
+	return _ruleFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RuleFlags wraps the raw Put_RuleFlags call.
@@ -2627,8 +3143,10 @@ func (self IFsrmRule) Put_RuleFlags(ruleFlags int32) error {
 }
 
 // Get_Parameters wraps the raw Get_Parameters call.
-func (self IFsrmRule) Get_Parameters(parameters **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parameters(parameters)))
+func (self IFsrmRule) Get_Parameters() (*systemcom.SAFEARRAY, error) {
+	var _parameters *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Parameters(&_parameters)
+	return _parameters, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Parameters wraps the raw Put_Parameters call.
@@ -2637,8 +3155,10 @@ func (self IFsrmRule) Put_Parameters(parameters *systemcom.SAFEARRAY) error {
 }
 
 // Get_LastModified wraps the raw Get_LastModified call.
-func (self IFsrmRule) Get_LastModified(lastModified *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastModified(lastModified)))
+func (self IFsrmRule) Get_LastModified() (systemvariant.VARIANT, error) {
+	var _lastModified systemvariant.VARIANT
+	_hr := self.Raw.Get_LastModified(&_lastModified)
+	return _lastModified, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmSetting is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmSetting with error-returning methods.
@@ -2653,8 +3173,10 @@ func WrapIFsrmSetting(raw *storagefileserverresourcemanager.IFsrmSetting) IFsrmS
 }
 
 // Get_SmtpServer wraps the raw Get_SmtpServer call.
-func (self IFsrmSetting) Get_SmtpServer(smtpServer *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SmtpServer(smtpServer)))
+func (self IFsrmSetting) Get_SmtpServer() (foundation.BSTR, error) {
+	var _smtpServer foundation.BSTR
+	_hr := self.Raw.Get_SmtpServer(&_smtpServer)
+	return _smtpServer, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SmtpServer wraps the raw Put_SmtpServer call.
@@ -2663,8 +3185,10 @@ func (self IFsrmSetting) Put_SmtpServer(smtpServer foundation.BSTR) error {
 }
 
 // Get_MailFrom wraps the raw Get_MailFrom call.
-func (self IFsrmSetting) Get_MailFrom(mailFrom *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MailFrom(mailFrom)))
+func (self IFsrmSetting) Get_MailFrom() (foundation.BSTR, error) {
+	var _mailFrom foundation.BSTR
+	_hr := self.Raw.Get_MailFrom(&_mailFrom)
+	return _mailFrom, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MailFrom wraps the raw Put_MailFrom call.
@@ -2673,8 +3197,10 @@ func (self IFsrmSetting) Put_MailFrom(mailFrom foundation.BSTR) error {
 }
 
 // Get_AdminEmail wraps the raw Get_AdminEmail call.
-func (self IFsrmSetting) Get_AdminEmail(adminEmail *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AdminEmail(adminEmail)))
+func (self IFsrmSetting) Get_AdminEmail() (foundation.BSTR, error) {
+	var _adminEmail foundation.BSTR
+	_hr := self.Raw.Get_AdminEmail(&_adminEmail)
+	return _adminEmail, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AdminEmail wraps the raw Put_AdminEmail call.
@@ -2683,8 +3209,10 @@ func (self IFsrmSetting) Put_AdminEmail(adminEmail foundation.BSTR) error {
 }
 
 // Get_DisableCommandLine wraps the raw Get_DisableCommandLine call.
-func (self IFsrmSetting) Get_DisableCommandLine(disableCommandLine *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisableCommandLine(disableCommandLine)))
+func (self IFsrmSetting) Get_DisableCommandLine() (foundation.VARIANT_BOOL, error) {
+	var _disableCommandLine foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_DisableCommandLine(&_disableCommandLine)
+	return _disableCommandLine, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DisableCommandLine wraps the raw Put_DisableCommandLine call.
@@ -2693,8 +3221,10 @@ func (self IFsrmSetting) Put_DisableCommandLine(disableCommandLine foundation.VA
 }
 
 // Get_EnableScreeningAudit wraps the raw Get_EnableScreeningAudit call.
-func (self IFsrmSetting) Get_EnableScreeningAudit(enableScreeningAudit *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnableScreeningAudit(enableScreeningAudit)))
+func (self IFsrmSetting) Get_EnableScreeningAudit() (foundation.VARIANT_BOOL, error) {
+	var _enableScreeningAudit foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_EnableScreeningAudit(&_enableScreeningAudit)
+	return _enableScreeningAudit, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EnableScreeningAudit wraps the raw Put_EnableScreeningAudit call.
@@ -2713,8 +3243,10 @@ func (self IFsrmSetting) SetActionRunLimitInterval(actionType storagefileserverr
 }
 
 // GetActionRunLimitInterval wraps the raw GetActionRunLimitInterval call.
-func (self IFsrmSetting) GetActionRunLimitInterval(actionType storagefileserverresourcemanager.FsrmActionType, delayTimeMinutes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetActionRunLimitInterval(actionType, delayTimeMinutes)))
+func (self IFsrmSetting) GetActionRunLimitInterval(actionType storagefileserverresourcemanager.FsrmActionType) (int32, error) {
+	var _delayTimeMinutes int32
+	_hr := self.Raw.GetActionRunLimitInterval(actionType, &_delayTimeMinutes)
+	return _delayTimeMinutes, win32.HRESULTError(int32(_hr))
 }
 
 // IFsrmStorageModuleDefinition is an idiomatic wrapper over the raw COM interface Storage.FileServerResourceManager.IFsrmStorageModuleDefinition with error-returning methods.
@@ -2729,8 +3261,10 @@ func WrapIFsrmStorageModuleDefinition(raw *storagefileserverresourcemanager.IFsr
 }
 
 // Get_Capabilities wraps the raw Get_Capabilities call.
-func (self IFsrmStorageModuleDefinition) Get_Capabilities(capabilities *storagefileserverresourcemanager.FsrmStorageModuleCaps) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Capabilities(capabilities)))
+func (self IFsrmStorageModuleDefinition) Get_Capabilities() (storagefileserverresourcemanager.FsrmStorageModuleCaps, error) {
+	var _capabilities storagefileserverresourcemanager.FsrmStorageModuleCaps
+	_hr := self.Raw.Get_Capabilities(&_capabilities)
+	return _capabilities, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Capabilities wraps the raw Put_Capabilities call.
@@ -2739,8 +3273,10 @@ func (self IFsrmStorageModuleDefinition) Put_Capabilities(capabilities storagefi
 }
 
 // Get_StorageType wraps the raw Get_StorageType call.
-func (self IFsrmStorageModuleDefinition) Get_StorageType(storageType *storagefileserverresourcemanager.FsrmStorageModuleType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StorageType(storageType)))
+func (self IFsrmStorageModuleDefinition) Get_StorageType() (storagefileserverresourcemanager.FsrmStorageModuleType, error) {
+	var _storageType storagefileserverresourcemanager.FsrmStorageModuleType
+	_hr := self.Raw.Get_StorageType(&_storageType)
+	return _storageType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_StorageType wraps the raw Put_StorageType call.
@@ -2749,8 +3285,10 @@ func (self IFsrmStorageModuleDefinition) Put_StorageType(storageType storagefile
 }
 
 // Get_UpdatesFileContent wraps the raw Get_UpdatesFileContent call.
-func (self IFsrmStorageModuleDefinition) Get_UpdatesFileContent(updatesFileContent *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UpdatesFileContent(updatesFileContent)))
+func (self IFsrmStorageModuleDefinition) Get_UpdatesFileContent() (foundation.VARIANT_BOOL, error) {
+	var _updatesFileContent foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_UpdatesFileContent(&_updatesFileContent)
+	return _updatesFileContent, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UpdatesFileContent wraps the raw Put_UpdatesFileContent call.

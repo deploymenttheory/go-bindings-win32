@@ -27,13 +27,17 @@ func WrapIMILBitmapEffect(raw *uiwpf.IMILBitmapEffect) IMILBitmapEffect {
 }
 
 // GetOutput wraps the raw GetOutput call.
-func (self IMILBitmapEffect) GetOutput(uiIndex uint32, pContext *uiwpf.IMILBitmapEffectRenderContext, ppBitmapSource **graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(self.Raw.GetOutput(uiIndex, pContext, ppBitmapSource)))
+func (self IMILBitmapEffect) GetOutput(uiIndex uint32, pContext *uiwpf.IMILBitmapEffectRenderContext) (*graphicsimaging.IWICBitmapSource, error) {
+	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
+	_hr := self.Raw.GetOutput(uiIndex, pContext, &_ppBitmapSource)
+	return _ppBitmapSource, win32.HRESULTError(int32(_hr))
 }
 
 // GetParentEffect wraps the raw GetParentEffect call.
-func (self IMILBitmapEffect) GetParentEffect(ppParentEffect **uiwpf.IMILBitmapEffectGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetParentEffect(ppParentEffect)))
+func (self IMILBitmapEffect) GetParentEffect() (*uiwpf.IMILBitmapEffectGroup, error) {
+	var _ppParentEffect *uiwpf.IMILBitmapEffectGroup
+	_hr := self.Raw.GetParentEffect(&_ppParentEffect)
+	return _ppParentEffect, win32.HRESULTError(int32(_hr))
 }
 
 // SetInputSource wraps the raw SetInputSource call.
@@ -53,13 +57,17 @@ func WrapIMILBitmapEffectConnections(raw *uiwpf.IMILBitmapEffectConnections) IMI
 }
 
 // GetInputConnector wraps the raw GetInputConnector call.
-func (self IMILBitmapEffectConnections) GetInputConnector(uiIndex uint32, ppConnector **uiwpf.IMILBitmapEffectInputConnector) error {
-	return win32.HRESULTError(int32(self.Raw.GetInputConnector(uiIndex, ppConnector)))
+func (self IMILBitmapEffectConnections) GetInputConnector(uiIndex uint32) (*uiwpf.IMILBitmapEffectInputConnector, error) {
+	var _ppConnector *uiwpf.IMILBitmapEffectInputConnector
+	_hr := self.Raw.GetInputConnector(uiIndex, &_ppConnector)
+	return _ppConnector, win32.HRESULTError(int32(_hr))
 }
 
 // GetOutputConnector wraps the raw GetOutputConnector call.
-func (self IMILBitmapEffectConnections) GetOutputConnector(uiIndex uint32, ppConnector **uiwpf.IMILBitmapEffectOutputConnector) error {
-	return win32.HRESULTError(int32(self.Raw.GetOutputConnector(uiIndex, ppConnector)))
+func (self IMILBitmapEffectConnections) GetOutputConnector(uiIndex uint32) (*uiwpf.IMILBitmapEffectOutputConnector, error) {
+	var _ppConnector *uiwpf.IMILBitmapEffectOutputConnector
+	_hr := self.Raw.GetOutputConnector(uiIndex, &_ppConnector)
+	return _ppConnector, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectConnectionsInfo is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectConnectionsInfo with error-returning methods.
@@ -74,13 +82,17 @@ func WrapIMILBitmapEffectConnectionsInfo(raw *uiwpf.IMILBitmapEffectConnectionsI
 }
 
 // GetNumberInputs wraps the raw GetNumberInputs call.
-func (self IMILBitmapEffectConnectionsInfo) GetNumberInputs(puiNumInputs *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetNumberInputs(puiNumInputs)))
+func (self IMILBitmapEffectConnectionsInfo) GetNumberInputs() (uint32, error) {
+	var _puiNumInputs uint32
+	_hr := self.Raw.GetNumberInputs(&_puiNumInputs)
+	return _puiNumInputs, win32.HRESULTError(int32(_hr))
 }
 
 // GetNumberOutputs wraps the raw GetNumberOutputs call.
-func (self IMILBitmapEffectConnectionsInfo) GetNumberOutputs(puiNumOutputs *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetNumberOutputs(puiNumOutputs)))
+func (self IMILBitmapEffectConnectionsInfo) GetNumberOutputs() (uint32, error) {
+	var _puiNumOutputs uint32
+	_hr := self.Raw.GetNumberOutputs(&_puiNumOutputs)
+	return _puiNumOutputs, win32.HRESULTError(int32(_hr))
 }
 
 // GetInputConnectorInfo wraps the raw GetInputConnectorInfo call.
@@ -105,13 +117,17 @@ func WrapIMILBitmapEffectConnector(raw *uiwpf.IMILBitmapEffectConnector) IMILBit
 }
 
 // IsConnected wraps the raw IsConnected call.
-func (self IMILBitmapEffectConnector) IsConnected(pfConnected *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsConnected(pfConnected)))
+func (self IMILBitmapEffectConnector) IsConnected() (foundation.VARIANT_BOOL, error) {
+	var _pfConnected foundation.VARIANT_BOOL
+	_hr := self.Raw.IsConnected(&_pfConnected)
+	return _pfConnected, win32.HRESULTError(int32(_hr))
 }
 
 // GetBitmapEffect wraps the raw GetBitmapEffect call.
-func (self IMILBitmapEffectConnector) GetBitmapEffect(ppEffect **uiwpf.IMILBitmapEffect) error {
-	return win32.HRESULTError(int32(self.Raw.GetBitmapEffect(ppEffect)))
+func (self IMILBitmapEffectConnector) GetBitmapEffect() (*uiwpf.IMILBitmapEffect, error) {
+	var _ppEffect *uiwpf.IMILBitmapEffect
+	_hr := self.Raw.GetBitmapEffect(&_ppEffect)
+	return _ppEffect, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectConnectorInfo is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectConnectorInfo with error-returning methods.
@@ -126,23 +142,31 @@ func WrapIMILBitmapEffectConnectorInfo(raw *uiwpf.IMILBitmapEffectConnectorInfo)
 }
 
 // GetIndex wraps the raw GetIndex call.
-func (self IMILBitmapEffectConnectorInfo) GetIndex(puiIndex *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetIndex(puiIndex)))
+func (self IMILBitmapEffectConnectorInfo) GetIndex() (uint32, error) {
+	var _puiIndex uint32
+	_hr := self.Raw.GetIndex(&_puiIndex)
+	return _puiIndex, win32.HRESULTError(int32(_hr))
 }
 
 // GetOptimalFormat wraps the raw GetOptimalFormat call.
-func (self IMILBitmapEffectConnectorInfo) GetOptimalFormat(pFormat *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetOptimalFormat(pFormat)))
+func (self IMILBitmapEffectConnectorInfo) GetOptimalFormat() (win32.GUID, error) {
+	var _pFormat win32.GUID
+	_hr := self.Raw.GetOptimalFormat(&_pFormat)
+	return _pFormat, win32.HRESULTError(int32(_hr))
 }
 
 // GetNumberFormats wraps the raw GetNumberFormats call.
-func (self IMILBitmapEffectConnectorInfo) GetNumberFormats(pulNumberFormats *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetNumberFormats(pulNumberFormats)))
+func (self IMILBitmapEffectConnectorInfo) GetNumberFormats() (uint32, error) {
+	var _pulNumberFormats uint32
+	_hr := self.Raw.GetNumberFormats(&_pulNumberFormats)
+	return _pulNumberFormats, win32.HRESULTError(int32(_hr))
 }
 
 // GetFormat wraps the raw GetFormat call.
-func (self IMILBitmapEffectConnectorInfo) GetFormat(ulIndex uint32, pFormat *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetFormat(ulIndex, pFormat)))
+func (self IMILBitmapEffectConnectorInfo) GetFormat(ulIndex uint32) (win32.GUID, error) {
+	var _pFormat win32.GUID
+	_hr := self.Raw.GetFormat(ulIndex, &_pFormat)
+	return _pFormat, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectEvents is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectEvents with error-returning methods.
@@ -204,13 +228,17 @@ func WrapIMILBitmapEffectGroup(raw *uiwpf.IMILBitmapEffectGroup) IMILBitmapEffec
 }
 
 // GetInteriorInputConnector wraps the raw GetInteriorInputConnector call.
-func (self IMILBitmapEffectGroup) GetInteriorInputConnector(uiIndex uint32, ppConnector **uiwpf.IMILBitmapEffectOutputConnector) error {
-	return win32.HRESULTError(int32(self.Raw.GetInteriorInputConnector(uiIndex, ppConnector)))
+func (self IMILBitmapEffectGroup) GetInteriorInputConnector(uiIndex uint32) (*uiwpf.IMILBitmapEffectOutputConnector, error) {
+	var _ppConnector *uiwpf.IMILBitmapEffectOutputConnector
+	_hr := self.Raw.GetInteriorInputConnector(uiIndex, &_ppConnector)
+	return _ppConnector, win32.HRESULTError(int32(_hr))
 }
 
 // GetInteriorOutputConnector wraps the raw GetInteriorOutputConnector call.
-func (self IMILBitmapEffectGroup) GetInteriorOutputConnector(uiIndex uint32, ppConnector **uiwpf.IMILBitmapEffectInputConnector) error {
-	return win32.HRESULTError(int32(self.Raw.GetInteriorOutputConnector(uiIndex, ppConnector)))
+func (self IMILBitmapEffectGroup) GetInteriorOutputConnector(uiIndex uint32) (*uiwpf.IMILBitmapEffectInputConnector, error) {
+	var _ppConnector *uiwpf.IMILBitmapEffectInputConnector
+	_hr := self.Raw.GetInteriorOutputConnector(uiIndex, &_ppConnector)
+	return _ppConnector, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -235,13 +263,17 @@ func (self IMILBitmapEffectGroupImpl) Preprocess(pContext *uiwpf.IMILBitmapEffec
 }
 
 // GetNumberChildren wraps the raw GetNumberChildren call.
-func (self IMILBitmapEffectGroupImpl) GetNumberChildren(puiNumberChildren *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetNumberChildren(puiNumberChildren)))
+func (self IMILBitmapEffectGroupImpl) GetNumberChildren() (uint32, error) {
+	var _puiNumberChildren uint32
+	_hr := self.Raw.GetNumberChildren(&_puiNumberChildren)
+	return _puiNumberChildren, win32.HRESULTError(int32(_hr))
 }
 
 // GetChildren wraps the raw GetChildren call.
-func (self IMILBitmapEffectGroupImpl) GetChildren(pChildren **uiwpf.IMILBitmapEffects) error {
-	return win32.HRESULTError(int32(self.Raw.GetChildren(pChildren)))
+func (self IMILBitmapEffectGroupImpl) GetChildren() (*uiwpf.IMILBitmapEffects, error) {
+	var _pChildren *uiwpf.IMILBitmapEffects
+	_hr := self.Raw.GetChildren(&_pChildren)
+	return _pChildren, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectImpl is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectImpl with error-returning methods.
@@ -266,8 +298,10 @@ func (self IMILBitmapEffectImpl) SetParentEffect(pParentEffect *uiwpf.IMILBitmap
 }
 
 // GetInputSource wraps the raw GetInputSource call.
-func (self IMILBitmapEffectImpl) GetInputSource(uiIndex uint32, ppBitmapSource **graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(self.Raw.GetInputSource(uiIndex, ppBitmapSource)))
+func (self IMILBitmapEffectImpl) GetInputSource(uiIndex uint32) (*graphicsimaging.IWICBitmapSource, error) {
+	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
+	_hr := self.Raw.GetInputSource(uiIndex, &_ppBitmapSource)
+	return _ppBitmapSource, win32.HRESULTError(int32(_hr))
 }
 
 // GetInputSourceBounds wraps the raw GetInputSourceBounds call.
@@ -276,13 +310,17 @@ func (self IMILBitmapEffectImpl) GetInputSourceBounds(uiIndex uint32, pRect *uiw
 }
 
 // GetInputBitmapSource wraps the raw GetInputBitmapSource call.
-func (self IMILBitmapEffectImpl) GetInputBitmapSource(uiIndex uint32, pRenderContext *uiwpf.IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL, ppBitmapSource **graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(self.Raw.GetInputBitmapSource(uiIndex, pRenderContext, pfModifyInPlace, ppBitmapSource)))
+func (self IMILBitmapEffectImpl) GetInputBitmapSource(uiIndex uint32, pRenderContext *uiwpf.IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL) (*graphicsimaging.IWICBitmapSource, error) {
+	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
+	_hr := self.Raw.GetInputBitmapSource(uiIndex, pRenderContext, pfModifyInPlace, &_ppBitmapSource)
+	return _ppBitmapSource, win32.HRESULTError(int32(_hr))
 }
 
 // GetOutputBitmapSource wraps the raw GetOutputBitmapSource call.
-func (self IMILBitmapEffectImpl) GetOutputBitmapSource(uiIndex uint32, pRenderContext *uiwpf.IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL, ppBitmapSource **graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(self.Raw.GetOutputBitmapSource(uiIndex, pRenderContext, pfModifyInPlace, ppBitmapSource)))
+func (self IMILBitmapEffectImpl) GetOutputBitmapSource(uiIndex uint32, pRenderContext *uiwpf.IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL) (*graphicsimaging.IWICBitmapSource, error) {
+	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
+	_hr := self.Raw.GetOutputBitmapSource(uiIndex, pRenderContext, pfModifyInPlace, &_ppBitmapSource)
+	return _ppBitmapSource, win32.HRESULTError(int32(_hr))
 }
 
 // Initialize wraps the raw Initialize call.
@@ -307,8 +345,10 @@ func (self IMILBitmapEffectInputConnector) ConnectTo(pConnector *uiwpf.IMILBitma
 }
 
 // GetConnection wraps the raw GetConnection call.
-func (self IMILBitmapEffectInputConnector) GetConnection(ppConnector **uiwpf.IMILBitmapEffectOutputConnector) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnection(ppConnector)))
+func (self IMILBitmapEffectInputConnector) GetConnection() (*uiwpf.IMILBitmapEffectOutputConnector, error) {
+	var _ppConnector *uiwpf.IMILBitmapEffectOutputConnector
+	_hr := self.Raw.GetConnection(&_ppConnector)
+	return _ppConnector, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectInteriorInputConnector is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectInteriorInputConnector with error-returning methods.
@@ -323,8 +363,10 @@ func WrapIMILBitmapEffectInteriorInputConnector(raw *uiwpf.IMILBitmapEffectInter
 }
 
 // GetInputConnector wraps the raw GetInputConnector call.
-func (self IMILBitmapEffectInteriorInputConnector) GetInputConnector(pInputConnector **uiwpf.IMILBitmapEffectInputConnector) error {
-	return win32.HRESULTError(int32(self.Raw.GetInputConnector(pInputConnector)))
+func (self IMILBitmapEffectInteriorInputConnector) GetInputConnector() (*uiwpf.IMILBitmapEffectInputConnector, error) {
+	var _pInputConnector *uiwpf.IMILBitmapEffectInputConnector
+	_hr := self.Raw.GetInputConnector(&_pInputConnector)
+	return _pInputConnector, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectInteriorOutputConnector is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectInteriorOutputConnector with error-returning methods.
@@ -339,8 +381,10 @@ func WrapIMILBitmapEffectInteriorOutputConnector(raw *uiwpf.IMILBitmapEffectInte
 }
 
 // GetOutputConnector wraps the raw GetOutputConnector call.
-func (self IMILBitmapEffectInteriorOutputConnector) GetOutputConnector(pOutputConnector **uiwpf.IMILBitmapEffectOutputConnector) error {
-	return win32.HRESULTError(int32(self.Raw.GetOutputConnector(pOutputConnector)))
+func (self IMILBitmapEffectInteriorOutputConnector) GetOutputConnector() (*uiwpf.IMILBitmapEffectOutputConnector, error) {
+	var _pOutputConnector *uiwpf.IMILBitmapEffectOutputConnector
+	_hr := self.Raw.GetOutputConnector(&_pOutputConnector)
+	return _pOutputConnector, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectOutputConnector is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectOutputConnector with error-returning methods.
@@ -355,13 +399,17 @@ func WrapIMILBitmapEffectOutputConnector(raw *uiwpf.IMILBitmapEffectOutputConnec
 }
 
 // GetNumberConnections wraps the raw GetNumberConnections call.
-func (self IMILBitmapEffectOutputConnector) GetNumberConnections(puiNumberConnections *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetNumberConnections(puiNumberConnections)))
+func (self IMILBitmapEffectOutputConnector) GetNumberConnections() (uint32, error) {
+	var _puiNumberConnections uint32
+	_hr := self.Raw.GetNumberConnections(&_puiNumberConnections)
+	return _puiNumberConnections, win32.HRESULTError(int32(_hr))
 }
 
 // GetConnection wraps the raw GetConnection call.
-func (self IMILBitmapEffectOutputConnector) GetConnection(uiIndex uint32, ppConnection **uiwpf.IMILBitmapEffectInputConnector) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnection(uiIndex, ppConnection)))
+func (self IMILBitmapEffectOutputConnector) GetConnection(uiIndex uint32) (*uiwpf.IMILBitmapEffectInputConnector, error) {
+	var _ppConnection *uiwpf.IMILBitmapEffectInputConnector
+	_hr := self.Raw.GetConnection(uiIndex, &_ppConnection)
+	return _ppConnection, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectOutputConnectorImpl is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectOutputConnectorImpl with error-returning methods.
@@ -397,8 +445,10 @@ func WrapIMILBitmapEffectPrimitive(raw *uiwpf.IMILBitmapEffectPrimitive) IMILBit
 }
 
 // GetOutput wraps the raw GetOutput call.
-func (self IMILBitmapEffectPrimitive) GetOutput(uiIndex uint32, pContext *uiwpf.IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL, ppBitmapSource **graphicsimaging.IWICBitmapSource) error {
-	return win32.HRESULTError(int32(self.Raw.GetOutput(uiIndex, pContext, pfModifyInPlace, ppBitmapSource)))
+func (self IMILBitmapEffectPrimitive) GetOutput(uiIndex uint32, pContext *uiwpf.IMILBitmapEffectRenderContext, pfModifyInPlace *foundation.VARIANT_BOOL) (*graphicsimaging.IWICBitmapSource, error) {
+	var _ppBitmapSource *graphicsimaging.IWICBitmapSource
+	_hr := self.Raw.GetOutput(uiIndex, pContext, pfModifyInPlace, &_ppBitmapSource)
+	return _ppBitmapSource, win32.HRESULTError(int32(_hr))
 }
 
 // TransformPoint wraps the raw TransformPoint call.
@@ -438,13 +488,17 @@ func WrapIMILBitmapEffectPrimitiveImpl(raw *uiwpf.IMILBitmapEffectPrimitiveImpl)
 }
 
 // IsDirty wraps the raw IsDirty call.
-func (self IMILBitmapEffectPrimitiveImpl) IsDirty(uiOutputIndex uint32, pfDirty *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsDirty(uiOutputIndex, pfDirty)))
+func (self IMILBitmapEffectPrimitiveImpl) IsDirty(uiOutputIndex uint32) (foundation.VARIANT_BOOL, error) {
+	var _pfDirty foundation.VARIANT_BOOL
+	_hr := self.Raw.IsDirty(uiOutputIndex, &_pfDirty)
+	return _pfDirty, win32.HRESULTError(int32(_hr))
 }
 
 // IsVolatile wraps the raw IsVolatile call.
-func (self IMILBitmapEffectPrimitiveImpl) IsVolatile(uiOutputIndex uint32, pfVolatile *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsVolatile(uiOutputIndex, pfVolatile)))
+func (self IMILBitmapEffectPrimitiveImpl) IsVolatile(uiOutputIndex uint32) (foundation.VARIANT_BOOL, error) {
+	var _pfVolatile foundation.VARIANT_BOOL
+	_hr := self.Raw.IsVolatile(uiOutputIndex, &_pfVolatile)
+	return _pfVolatile, win32.HRESULTError(int32(_hr))
 }
 
 // IMILBitmapEffectRenderContext is an idiomatic wrapper over the raw COM interface UI.Wpf.IMILBitmapEffectRenderContext with error-returning methods.
@@ -464,8 +518,10 @@ func (self IMILBitmapEffectRenderContext) SetOutputPixelFormat(format *win32.GUI
 }
 
 // GetOutputPixelFormat wraps the raw GetOutputPixelFormat call.
-func (self IMILBitmapEffectRenderContext) GetOutputPixelFormat(pFormat *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetOutputPixelFormat(pFormat)))
+func (self IMILBitmapEffectRenderContext) GetOutputPixelFormat() (win32.GUID, error) {
+	var _pFormat win32.GUID
+	_hr := self.Raw.GetOutputPixelFormat(&_pFormat)
+	return _pFormat, win32.HRESULTError(int32(_hr))
 }
 
 // SetUseSoftwareRenderer wraps the raw SetUseSoftwareRenderer call.
@@ -505,8 +561,10 @@ func WrapIMILBitmapEffectRenderContextImpl(raw *uiwpf.IMILBitmapEffectRenderCont
 }
 
 // GetUseSoftwareRenderer wraps the raw GetUseSoftwareRenderer call.
-func (self IMILBitmapEffectRenderContextImpl) GetUseSoftwareRenderer(pfSoftware *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetUseSoftwareRenderer(pfSoftware)))
+func (self IMILBitmapEffectRenderContextImpl) GetUseSoftwareRenderer() (foundation.VARIANT_BOOL, error) {
+	var _pfSoftware foundation.VARIANT_BOOL
+	_hr := self.Raw.GetUseSoftwareRenderer(&_pfSoftware)
+	return _pfSoftware, win32.HRESULTError(int32(_hr))
 }
 
 // GetTransform wraps the raw GetTransform call.
@@ -541,21 +599,29 @@ func WrapIMILBitmapEffects(raw *uiwpf.IMILBitmapEffects) IMILBitmapEffects {
 }
 
 // NewEnum wraps the raw NewEnum call.
-func (self IMILBitmapEffects) NewEnum(ppiuReturn **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.NewEnum(ppiuReturn)))
+func (self IMILBitmapEffects) NewEnum() (*systemcom.IUnknown, error) {
+	var _ppiuReturn *systemcom.IUnknown
+	_hr := self.Raw.NewEnum(&_ppiuReturn)
+	return _ppiuReturn, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IMILBitmapEffects) Get_Parent(ppEffect **uiwpf.IMILBitmapEffectGroup) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppEffect)))
+func (self IMILBitmapEffects) Get_Parent() (*uiwpf.IMILBitmapEffectGroup, error) {
+	var _ppEffect *uiwpf.IMILBitmapEffectGroup
+	_hr := self.Raw.Get_Parent(&_ppEffect)
+	return _ppEffect, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IMILBitmapEffects) Item(uindex uint32, ppEffect **uiwpf.IMILBitmapEffect) error {
-	return win32.HRESULTError(int32(self.Raw.Item(uindex, ppEffect)))
+func (self IMILBitmapEffects) Item(uindex uint32) (*uiwpf.IMILBitmapEffect, error) {
+	var _ppEffect *uiwpf.IMILBitmapEffect
+	_hr := self.Raw.Item(uindex, &_ppEffect)
+	return _ppEffect, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IMILBitmapEffects) Get_Count(puiCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(puiCount)))
+func (self IMILBitmapEffects) Get_Count() (uint32, error) {
+	var _puiCount uint32
+	_hr := self.Raw.Get_Count(&_puiCount)
+	return _puiCount, win32.HRESULTError(int32(_hr))
 }

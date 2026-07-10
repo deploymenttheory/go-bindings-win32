@@ -25,9 +25,11 @@ func WrapIComprehensiveSpellCheckProvider(raw *globalization.IComprehensiveSpell
 }
 
 // ComprehensiveCheck wraps the raw ComprehensiveCheck call.
-func (self IComprehensiveSpellCheckProvider) ComprehensiveCheck(text string, value **globalization.IEnumSpellingError) error {
+func (self IComprehensiveSpellCheckProvider) ComprehensiveCheck(text string) (*globalization.IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
-	return win32.HRESULTError(int32(self.Raw.ComprehensiveCheck(foundation.PWSTR(_text), value)))
+	var _value *globalization.IEnumSpellingError
+	_hr := self.Raw.ComprehensiveCheck(foundation.PWSTR(_text), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IEnumCodePage is an idiomatic wrapper over the raw COM interface Globalization.IEnumCodePage with error-returning methods.
@@ -135,8 +137,10 @@ func WrapIEnumSpellingError(raw *globalization.IEnumSpellingError) IEnumSpelling
 }
 
 // Next wraps the raw Next call.
-func (self IEnumSpellingError) Next(value **globalization.ISpellingError) error {
-	return win32.HRESULTError(int32(self.Raw.Next(value)))
+func (self IEnumSpellingError) Next() (*globalization.ISpellingError, error) {
+	var _value *globalization.ISpellingError
+	_hr := self.Raw.Next(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IMLangCodePages is an idiomatic wrapper over the raw COM interface Globalization.IMLangCodePages with error-returning methods.
@@ -805,23 +809,31 @@ func WrapIOptionDescription(raw *globalization.IOptionDescription) IOptionDescri
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IOptionDescription) Get_Id(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(value)))
+func (self IOptionDescription) Get_Id() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_Id(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Heading wraps the raw Get_Heading call.
-func (self IOptionDescription) Get_Heading(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Heading(value)))
+func (self IOptionDescription) Get_Heading() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_Heading(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IOptionDescription) Get_Description(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(value)))
+func (self IOptionDescription) Get_Description() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_Description(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Labels wraps the raw Get_Labels call.
-func (self IOptionDescription) Get_Labels(value **systemcom.IEnumString) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Labels(value)))
+func (self IOptionDescription) Get_Labels() (*systemcom.IEnumString, error) {
+	var _value *systemcom.IEnumString
+	_hr := self.Raw.Get_Labels(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ISpellCheckProvider is an idiomatic wrapper over the raw COM interface Globalization.ISpellCheckProvider with error-returning methods.
@@ -836,26 +848,34 @@ func WrapISpellCheckProvider(raw *globalization.ISpellCheckProvider) ISpellCheck
 }
 
 // Get_LanguageTag wraps the raw Get_LanguageTag call.
-func (self ISpellCheckProvider) Get_LanguageTag(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LanguageTag(value)))
+func (self ISpellCheckProvider) Get_LanguageTag() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_LanguageTag(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Check wraps the raw Check call.
-func (self ISpellCheckProvider) Check(text string, value **globalization.IEnumSpellingError) error {
+func (self ISpellCheckProvider) Check(text string) (*globalization.IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
-	return win32.HRESULTError(int32(self.Raw.Check(foundation.PWSTR(_text), value)))
+	var _value *globalization.IEnumSpellingError
+	_hr := self.Raw.Check(foundation.PWSTR(_text), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Suggest wraps the raw Suggest call.
-func (self ISpellCheckProvider) Suggest(word string, value **systemcom.IEnumString) error {
+func (self ISpellCheckProvider) Suggest(word string) (*systemcom.IEnumString, error) {
 	_word := win32.UTF16Ptr(word)
-	return win32.HRESULTError(int32(self.Raw.Suggest(foundation.PWSTR(_word), value)))
+	var _value *systemcom.IEnumString
+	_hr := self.Raw.Suggest(foundation.PWSTR(_word), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetOptionValue wraps the raw GetOptionValue call.
-func (self ISpellCheckProvider) GetOptionValue(optionId string, value *byte) error {
+func (self ISpellCheckProvider) GetOptionValue(optionId string) (byte, error) {
 	_optionId := win32.UTF16Ptr(optionId)
-	return win32.HRESULTError(int32(self.Raw.GetOptionValue(foundation.PWSTR(_optionId), value)))
+	var _value byte
+	_hr := self.Raw.GetOptionValue(foundation.PWSTR(_optionId), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // SetOptionValue wraps the raw SetOptionValue call.
@@ -865,24 +885,32 @@ func (self ISpellCheckProvider) SetOptionValue(optionId string, value byte) erro
 }
 
 // Get_OptionIds wraps the raw Get_OptionIds call.
-func (self ISpellCheckProvider) Get_OptionIds(value **systemcom.IEnumString) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OptionIds(value)))
+func (self ISpellCheckProvider) Get_OptionIds() (*systemcom.IEnumString, error) {
+	var _value *systemcom.IEnumString
+	_hr := self.Raw.Get_OptionIds(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self ISpellCheckProvider) Get_Id(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(value)))
+func (self ISpellCheckProvider) Get_Id() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_Id(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalizedName wraps the raw Get_LocalizedName call.
-func (self ISpellCheckProvider) Get_LocalizedName(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalizedName(value)))
+func (self ISpellCheckProvider) Get_LocalizedName() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_LocalizedName(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetOptionDescription wraps the raw GetOptionDescription call.
-func (self ISpellCheckProvider) GetOptionDescription(optionId string, value **globalization.IOptionDescription) error {
+func (self ISpellCheckProvider) GetOptionDescription(optionId string) (*globalization.IOptionDescription, error) {
 	_optionId := win32.UTF16Ptr(optionId)
-	return win32.HRESULTError(int32(self.Raw.GetOptionDescription(foundation.PWSTR(_optionId), value)))
+	var _value *globalization.IOptionDescription
+	_hr := self.Raw.GetOptionDescription(foundation.PWSTR(_optionId), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // InitializeWordlist wraps the raw InitializeWordlist call.
@@ -902,20 +930,26 @@ func WrapISpellCheckProviderFactory(raw *globalization.ISpellCheckProviderFactor
 }
 
 // Get_SupportedLanguages wraps the raw Get_SupportedLanguages call.
-func (self ISpellCheckProviderFactory) Get_SupportedLanguages(value **systemcom.IEnumString) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SupportedLanguages(value)))
+func (self ISpellCheckProviderFactory) Get_SupportedLanguages() (*systemcom.IEnumString, error) {
+	var _value *systemcom.IEnumString
+	_hr := self.Raw.Get_SupportedLanguages(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IsSupported wraps the raw IsSupported call.
-func (self ISpellCheckProviderFactory) IsSupported(languageTag string, value *foundation.BOOL) error {
+func (self ISpellCheckProviderFactory) IsSupported(languageTag string) (foundation.BOOL, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
-	return win32.HRESULTError(int32(self.Raw.IsSupported(foundation.PWSTR(_languageTag), value)))
+	var _value foundation.BOOL
+	_hr := self.Raw.IsSupported(foundation.PWSTR(_languageTag), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // CreateSpellCheckProvider wraps the raw CreateSpellCheckProvider call.
-func (self ISpellCheckProviderFactory) CreateSpellCheckProvider(languageTag string, value **globalization.ISpellCheckProvider) error {
+func (self ISpellCheckProviderFactory) CreateSpellCheckProvider(languageTag string) (*globalization.ISpellCheckProvider, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
-	return win32.HRESULTError(int32(self.Raw.CreateSpellCheckProvider(foundation.PWSTR(_languageTag), value)))
+	var _value *globalization.ISpellCheckProvider
+	_hr := self.Raw.CreateSpellCheckProvider(foundation.PWSTR(_languageTag), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ISpellChecker is an idiomatic wrapper over the raw COM interface Globalization.ISpellChecker with error-returning methods.
@@ -930,20 +964,26 @@ func WrapISpellChecker(raw *globalization.ISpellChecker) ISpellChecker {
 }
 
 // Get_LanguageTag wraps the raw Get_LanguageTag call.
-func (self ISpellChecker) Get_LanguageTag(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LanguageTag(value)))
+func (self ISpellChecker) Get_LanguageTag() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_LanguageTag(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Check wraps the raw Check call.
-func (self ISpellChecker) Check(text string, value **globalization.IEnumSpellingError) error {
+func (self ISpellChecker) Check(text string) (*globalization.IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
-	return win32.HRESULTError(int32(self.Raw.Check(foundation.PWSTR(_text), value)))
+	var _value *globalization.IEnumSpellingError
+	_hr := self.Raw.Check(foundation.PWSTR(_text), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Suggest wraps the raw Suggest call.
-func (self ISpellChecker) Suggest(word string, value **systemcom.IEnumString) error {
+func (self ISpellChecker) Suggest(word string) (*systemcom.IEnumString, error) {
 	_word := win32.UTF16Ptr(word)
-	return win32.HRESULTError(int32(self.Raw.Suggest(foundation.PWSTR(_word), value)))
+	var _value *systemcom.IEnumString
+	_hr := self.Raw.Suggest(foundation.PWSTR(_word), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -966,29 +1006,39 @@ func (self ISpellChecker) AutoCorrect(from string, to string) error {
 }
 
 // GetOptionValue wraps the raw GetOptionValue call.
-func (self ISpellChecker) GetOptionValue(optionId string, value *byte) error {
+func (self ISpellChecker) GetOptionValue(optionId string) (byte, error) {
 	_optionId := win32.UTF16Ptr(optionId)
-	return win32.HRESULTError(int32(self.Raw.GetOptionValue(foundation.PWSTR(_optionId), value)))
+	var _value byte
+	_hr := self.Raw.GetOptionValue(foundation.PWSTR(_optionId), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_OptionIds wraps the raw Get_OptionIds call.
-func (self ISpellChecker) Get_OptionIds(value **systemcom.IEnumString) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OptionIds(value)))
+func (self ISpellChecker) Get_OptionIds() (*systemcom.IEnumString, error) {
+	var _value *systemcom.IEnumString
+	_hr := self.Raw.Get_OptionIds(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self ISpellChecker) Get_Id(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(value)))
+func (self ISpellChecker) Get_Id() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_Id(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalizedName wraps the raw Get_LocalizedName call.
-func (self ISpellChecker) Get_LocalizedName(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalizedName(value)))
+func (self ISpellChecker) Get_LocalizedName() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_LocalizedName(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Add_SpellCheckerChanged wraps the raw Add_SpellCheckerChanged call.
-func (self ISpellChecker) Add_SpellCheckerChanged(handler *globalization.ISpellCheckerChangedEventHandler, eventCookie *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Add_SpellCheckerChanged(handler, eventCookie)))
+func (self ISpellChecker) Add_SpellCheckerChanged(handler *globalization.ISpellCheckerChangedEventHandler) (uint32, error) {
+	var _eventCookie uint32
+	_hr := self.Raw.Add_SpellCheckerChanged(handler, &_eventCookie)
+	return _eventCookie, win32.HRESULTError(int32(_hr))
 }
 
 // Remove_SpellCheckerChanged wraps the raw Remove_SpellCheckerChanged call.
@@ -997,15 +1047,19 @@ func (self ISpellChecker) Remove_SpellCheckerChanged(eventCookie uint32) error {
 }
 
 // GetOptionDescription wraps the raw GetOptionDescription call.
-func (self ISpellChecker) GetOptionDescription(optionId string, value **globalization.IOptionDescription) error {
+func (self ISpellChecker) GetOptionDescription(optionId string) (*globalization.IOptionDescription, error) {
 	_optionId := win32.UTF16Ptr(optionId)
-	return win32.HRESULTError(int32(self.Raw.GetOptionDescription(foundation.PWSTR(_optionId), value)))
+	var _value *globalization.IOptionDescription
+	_hr := self.Raw.GetOptionDescription(foundation.PWSTR(_optionId), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ComprehensiveCheck wraps the raw ComprehensiveCheck call.
-func (self ISpellChecker) ComprehensiveCheck(text string, value **globalization.IEnumSpellingError) error {
+func (self ISpellChecker) ComprehensiveCheck(text string) (*globalization.IEnumSpellingError, error) {
 	_text := win32.UTF16Ptr(text)
-	return win32.HRESULTError(int32(self.Raw.ComprehensiveCheck(foundation.PWSTR(_text), value)))
+	var _value *globalization.IEnumSpellingError
+	_hr := self.Raw.ComprehensiveCheck(foundation.PWSTR(_text), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ISpellChecker2 is an idiomatic wrapper over the raw COM interface Globalization.ISpellChecker2 with error-returning methods.
@@ -1053,20 +1107,26 @@ func WrapISpellCheckerFactory(raw *globalization.ISpellCheckerFactory) ISpellChe
 }
 
 // Get_SupportedLanguages wraps the raw Get_SupportedLanguages call.
-func (self ISpellCheckerFactory) Get_SupportedLanguages(value **systemcom.IEnumString) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SupportedLanguages(value)))
+func (self ISpellCheckerFactory) Get_SupportedLanguages() (*systemcom.IEnumString, error) {
+	var _value *systemcom.IEnumString
+	_hr := self.Raw.Get_SupportedLanguages(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IsSupported wraps the raw IsSupported call.
-func (self ISpellCheckerFactory) IsSupported(languageTag string, value *foundation.BOOL) error {
+func (self ISpellCheckerFactory) IsSupported(languageTag string) (foundation.BOOL, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
-	return win32.HRESULTError(int32(self.Raw.IsSupported(foundation.PWSTR(_languageTag), value)))
+	var _value foundation.BOOL
+	_hr := self.Raw.IsSupported(foundation.PWSTR(_languageTag), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // CreateSpellChecker wraps the raw CreateSpellChecker call.
-func (self ISpellCheckerFactory) CreateSpellChecker(languageTag string, value **globalization.ISpellChecker) error {
+func (self ISpellCheckerFactory) CreateSpellChecker(languageTag string) (*globalization.ISpellChecker, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
-	return win32.HRESULTError(int32(self.Raw.CreateSpellChecker(foundation.PWSTR(_languageTag), value)))
+	var _value *globalization.ISpellChecker
+	_hr := self.Raw.CreateSpellChecker(foundation.PWSTR(_languageTag), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ISpellingError is an idiomatic wrapper over the raw COM interface Globalization.ISpellingError with error-returning methods.
@@ -1081,23 +1141,31 @@ func WrapISpellingError(raw *globalization.ISpellingError) ISpellingError {
 }
 
 // Get_StartIndex wraps the raw Get_StartIndex call.
-func (self ISpellingError) Get_StartIndex(value *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StartIndex(value)))
+func (self ISpellingError) Get_StartIndex() (uint32, error) {
+	var _value uint32
+	_hr := self.Raw.Get_StartIndex(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Length wraps the raw Get_Length call.
-func (self ISpellingError) Get_Length(value *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Length(value)))
+func (self ISpellingError) Get_Length() (uint32, error) {
+	var _value uint32
+	_hr := self.Raw.Get_Length(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CorrectiveAction wraps the raw Get_CorrectiveAction call.
-func (self ISpellingError) Get_CorrectiveAction(value *globalization.CORRECTIVE_ACTION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CorrectiveAction(value)))
+func (self ISpellingError) Get_CorrectiveAction() (globalization.CORRECTIVE_ACTION, error) {
+	var _value globalization.CORRECTIVE_ACTION
+	_hr := self.Raw.Get_CorrectiveAction(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Replacement wraps the raw Get_Replacement call.
-func (self ISpellingError) Get_Replacement(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Replacement(value)))
+func (self ISpellingError) Get_Replacement() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.Get_Replacement(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IUserDictionariesRegistrar is an idiomatic wrapper over the raw COM interface Globalization.IUserDictionariesRegistrar with error-returning methods.

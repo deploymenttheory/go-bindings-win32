@@ -23,6 +23,8 @@ func WrapIIsolatedEnvironmentInterop(raw *systemwinrtisolation.IIsolatedEnvironm
 }
 
 // GetHostHwndInterop wraps the raw GetHostHwndInterop call.
-func (self IIsolatedEnvironmentInterop) GetHostHwndInterop(containerHwnd foundation.HWND, hostHwnd *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.GetHostHwndInterop(containerHwnd, hostHwnd)))
+func (self IIsolatedEnvironmentInterop) GetHostHwndInterop(containerHwnd foundation.HWND) (foundation.HWND, error) {
+	var _hostHwnd foundation.HWND
+	_hr := self.Raw.GetHostHwndInterop(containerHwnd, &_hostHwnd)
+	return _hostHwnd, win32.HRESULTError(int32(_hr))
 }

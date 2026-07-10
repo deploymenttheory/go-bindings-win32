@@ -1117,8 +1117,10 @@ func WrapIActiveScriptStringCompare(raw *systemdiagnosticsdebugactivescript.IAct
 }
 
 // StrComp wraps the raw StrComp call.
-func (self IActiveScriptStringCompare) StrComp(bszStr1 foundation.BSTR, bszStr2 foundation.BSTR, iRet *int32) error {
-	return win32.HRESULTError(int32(self.Raw.StrComp(bszStr1, bszStr2, iRet)))
+func (self IActiveScriptStringCompare) StrComp(bszStr1 foundation.BSTR, bszStr2 foundation.BSTR) (int32, error) {
+	var _iRet int32
+	_hr := self.Raw.StrComp(bszStr1, bszStr2, &_iRet)
+	return _iRet, win32.HRESULTError(int32(_hr))
 }
 
 // IActiveScriptTraceInfo is an idiomatic wrapper over the raw COM interface System.Diagnostics.Debug.ActiveScript.IActiveScriptTraceInfo with error-returning methods.
@@ -3786,8 +3788,10 @@ func WrapIWebAppDiagnosticsSetup(raw *systemdiagnosticsdebugactivescript.IWebApp
 }
 
 // DiagnosticsSupported wraps the raw DiagnosticsSupported call.
-func (self IWebAppDiagnosticsSetup) DiagnosticsSupported(pRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.DiagnosticsSupported(pRetVal)))
+func (self IWebAppDiagnosticsSetup) DiagnosticsSupported() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.DiagnosticsSupported(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // CreateObjectWithSiteAtWebApp wraps the raw CreateObjectWithSiteAtWebApp call.

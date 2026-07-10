@@ -22,6 +22,8 @@ func WrapIWaaSAssessor(raw *systemupdateassessment.IWaaSAssessor) IWaaSAssessor 
 }
 
 // GetOSUpdateAssessment wraps the raw GetOSUpdateAssessment call.
-func (self IWaaSAssessor) GetOSUpdateAssessment(result *systemupdateassessment.OSUpdateAssessment) error {
-	return win32.HRESULTError(int32(self.Raw.GetOSUpdateAssessment(result)))
+func (self IWaaSAssessor) GetOSUpdateAssessment() (systemupdateassessment.OSUpdateAssessment, error) {
+	var _result systemupdateassessment.OSUpdateAssessment
+	_hr := self.Raw.GetOSUpdateAssessment(&_result)
+	return _result, win32.HRESULTError(int32(_hr))
 }

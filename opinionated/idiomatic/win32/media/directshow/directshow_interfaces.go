@@ -4811,8 +4811,10 @@ func WrapICCSubStreamFiltering(raw *mediadirectshow.ICCSubStreamFiltering) ICCSu
 }
 
 // Get_SubstreamTypes wraps the raw Get_SubstreamTypes call.
-func (self ICCSubStreamFiltering) Get_SubstreamTypes(pTypes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubstreamTypes(pTypes)))
+func (self ICCSubStreamFiltering) Get_SubstreamTypes() (int32, error) {
+	var _pTypes int32
+	_hr := self.Raw.Get_SubstreamTypes(&_pTypes)
+	return _pTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SubstreamTypes wraps the raw Put_SubstreamTypes call.
@@ -6602,13 +6604,17 @@ func WrapIESEvent(raw *mediadirectshow.IESEvent) IESEvent {
 }
 
 // GetEventId wraps the raw GetEventId call.
-func (self IESEvent) GetEventId(pdwEventId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetEventId(pdwEventId)))
+func (self IESEvent) GetEventId() (uint32, error) {
+	var _pdwEventId uint32
+	_hr := self.Raw.GetEventId(&_pdwEventId)
+	return _pdwEventId, win32.HRESULTError(int32(_hr))
 }
 
 // GetEventType wraps the raw GetEventType call.
-func (self IESEvent) GetEventType(pguidEventType *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetEventType(pguidEventType)))
+func (self IESEvent) GetEventType() (win32.GUID, error) {
+	var _pguidEventType win32.GUID
+	_hr := self.Raw.GetEventType(&_pguidEventType)
+	return _pguidEventType, win32.HRESULTError(int32(_hr))
 }
 
 // SetCompletionStatus wraps the raw SetCompletionStatus call.
@@ -6617,13 +6623,17 @@ func (self IESEvent) SetCompletionStatus(dwResult uint32) error {
 }
 
 // GetData wraps the raw GetData call.
-func (self IESEvent) GetData(pbData **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetData(pbData)))
+func (self IESEvent) GetData() (*systemcom.SAFEARRAY, error) {
+	var _pbData *systemcom.SAFEARRAY
+	_hr := self.Raw.GetData(&_pbData)
+	return _pbData, win32.HRESULTError(int32(_hr))
 }
 
 // GetStringData wraps the raw GetStringData call.
-func (self IESEvent) GetStringData(pbstrData *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetStringData(pbstrData)))
+func (self IESEvent) GetStringData() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	_hr := self.Raw.GetStringData(&_pbstrData)
+	return _pbstrData, win32.HRESULTError(int32(_hr))
 }
 
 // IESEvents is an idiomatic wrapper over the raw COM interface Media.DirectShow.IESEvents with error-returning methods.

@@ -347,13 +347,17 @@ func WrapICorrelationVectorInformation(raw *systemwinrt.ICorrelationVectorInform
 }
 
 // Get_LastCorrelationVectorForThread wraps the raw Get_LastCorrelationVectorForThread call.
-func (self ICorrelationVectorInformation) Get_LastCorrelationVectorForThread(cv *systemwinrt.HSTRING) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastCorrelationVectorForThread(cv)))
+func (self ICorrelationVectorInformation) Get_LastCorrelationVectorForThread() (systemwinrt.HSTRING, error) {
+	var _cv systemwinrt.HSTRING
+	_hr := self.Raw.Get_LastCorrelationVectorForThread(&_cv)
+	return _cv, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NextCorrelationVectorForThread wraps the raw Get_NextCorrelationVectorForThread call.
-func (self ICorrelationVectorInformation) Get_NextCorrelationVectorForThread(cv *systemwinrt.HSTRING) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NextCorrelationVectorForThread(cv)))
+func (self ICorrelationVectorInformation) Get_NextCorrelationVectorForThread() (systemwinrt.HSTRING, error) {
+	var _cv systemwinrt.HSTRING
+	_hr := self.Raw.Get_NextCorrelationVectorForThread(&_cv)
+	return _cv, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NextCorrelationVectorForThread wraps the raw Put_NextCorrelationVectorForThread call.
@@ -373,8 +377,10 @@ func WrapICorrelationVectorSource(raw *systemwinrt.ICorrelationVectorSource) ICo
 }
 
 // Get_CorrelationVector wraps the raw Get_CorrelationVector call.
-func (self ICorrelationVectorSource) Get_CorrelationVector(cv *systemwinrt.HSTRING) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CorrelationVector(cv)))
+func (self ICorrelationVectorSource) Get_CorrelationVector() (systemwinrt.HSTRING, error) {
+	var _cv systemwinrt.HSTRING
+	_hr := self.Raw.Get_CorrelationVector(&_cv)
+	return _cv, win32.HRESULTError(int32(_hr))
 }
 
 // IDragDropManagerInterop is an idiomatic wrapper over the raw COM interface System.WinRT.IDragDropManagerInterop with error-returning methods.
@@ -611,8 +617,10 @@ func WrapIShareWindowCommandEventArgsInterop(raw *systemwinrt.IShareWindowComman
 }
 
 // GetWindow wraps the raw GetWindow call.
-func (self IShareWindowCommandEventArgsInterop) GetWindow(value *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.GetWindow(value)))
+func (self IShareWindowCommandEventArgsInterop) GetWindow() (foundation.HWND, error) {
+	var _value foundation.HWND
+	_hr := self.Raw.GetWindow(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IShareWindowCommandSourceInterop is an idiomatic wrapper over the raw COM interface System.WinRT.IShareWindowCommandSourceInterop with error-returning methods.

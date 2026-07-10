@@ -25,8 +25,10 @@ func WrapITraceEvent(raw *systemdiagnosticsetw.ITraceEvent) ITraceEvent {
 }
 
 // Clone wraps the raw Clone call.
-func (self ITraceEvent) Clone(NewEvent **systemdiagnosticsetw.ITraceEvent) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewEvent)))
+func (self ITraceEvent) Clone() (*systemdiagnosticsetw.ITraceEvent, error) {
+	var _NewEvent *systemdiagnosticsetw.ITraceEvent
+	_hr := self.Raw.Clone(&_NewEvent)
+	return _NewEvent, win32.HRESULTError(int32(_hr))
 }
 
 // GetUserContext wraps the raw GetUserContext call.
@@ -35,8 +37,10 @@ func (self ITraceEvent) GetUserContext(UserContext *unsafe.Pointer) error {
 }
 
 // GetEventRecord wraps the raw GetEventRecord call.
-func (self ITraceEvent) GetEventRecord(EventRecord **systemdiagnosticsetw.EVENT_RECORD) error {
-	return win32.HRESULTError(int32(self.Raw.GetEventRecord(EventRecord)))
+func (self ITraceEvent) GetEventRecord() (*systemdiagnosticsetw.EVENT_RECORD, error) {
+	var _EventRecord *systemdiagnosticsetw.EVENT_RECORD
+	_hr := self.Raw.GetEventRecord(&_EventRecord)
+	return _EventRecord, win32.HRESULTError(int32(_hr))
 }
 
 // SetPayload wraps the raw SetPayload call.
@@ -122,13 +126,17 @@ func WrapITraceRelogger(raw *systemdiagnosticsetw.ITraceRelogger) ITraceRelogger
 }
 
 // AddLogfileTraceStream wraps the raw AddLogfileTraceStream call.
-func (self ITraceRelogger) AddLogfileTraceStream(LogfileName foundation.BSTR, UserContext unsafe.Pointer, TraceStreamId *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.AddLogfileTraceStream(LogfileName, UserContext, TraceStreamId)))
+func (self ITraceRelogger) AddLogfileTraceStream(LogfileName foundation.BSTR, UserContext unsafe.Pointer) (uint64, error) {
+	var _TraceStreamId uint64
+	_hr := self.Raw.AddLogfileTraceStream(LogfileName, UserContext, &_TraceStreamId)
+	return _TraceStreamId, win32.HRESULTError(int32(_hr))
 }
 
 // AddRealtimeTraceStream wraps the raw AddRealtimeTraceStream call.
-func (self ITraceRelogger) AddRealtimeTraceStream(LoggerName foundation.BSTR, UserContext unsafe.Pointer, TraceStreamId *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.AddRealtimeTraceStream(LoggerName, UserContext, TraceStreamId)))
+func (self ITraceRelogger) AddRealtimeTraceStream(LoggerName foundation.BSTR, UserContext unsafe.Pointer) (uint64, error) {
+	var _TraceStreamId uint64
+	_hr := self.Raw.AddRealtimeTraceStream(LoggerName, UserContext, &_TraceStreamId)
+	return _TraceStreamId, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterCallback wraps the raw RegisterCallback call.
@@ -142,8 +150,10 @@ func (self ITraceRelogger) Inject(Event *systemdiagnosticsetw.ITraceEvent) error
 }
 
 // CreateEventInstance wraps the raw CreateEventInstance call.
-func (self ITraceRelogger) CreateEventInstance(TraceStreamId uint64, Flags uint32, Event **systemdiagnosticsetw.ITraceEvent) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEventInstance(TraceStreamId, Flags, Event)))
+func (self ITraceRelogger) CreateEventInstance(TraceStreamId uint64, Flags uint32) (*systemdiagnosticsetw.ITraceEvent, error) {
+	var _Event *systemdiagnosticsetw.ITraceEvent
+	_hr := self.Raw.CreateEventInstance(TraceStreamId, Flags, &_Event)
+	return _Event, win32.HRESULTError(int32(_hr))
 }
 
 // ProcessTrace wraps the raw ProcessTrace call.

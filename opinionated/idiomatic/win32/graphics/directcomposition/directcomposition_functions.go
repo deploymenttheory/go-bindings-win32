@@ -73,8 +73,10 @@ func DCompositionGetStatistics(frameId uint64, frameStats *graphicsdirectcomposi
 }
 
 // DCompositionGetTargetStatistics wraps the raw DCompositionGetTargetStatistics call with idiomatic Go types.
-func DCompositionGetTargetStatistics(frameId uint64, targetId *graphicsdirectcomposition.COMPOSITION_TARGET_ID, targetStats *graphicsdirectcomposition.COMPOSITION_TARGET_STATS) error {
-	return win32.HRESULTError(int32(graphicsdirectcomposition.DCompositionGetTargetStatistics(frameId, targetId, targetStats)))
+func DCompositionGetTargetStatistics(frameId uint64, targetId *graphicsdirectcomposition.COMPOSITION_TARGET_ID) (graphicsdirectcomposition.COMPOSITION_TARGET_STATS, error) {
+	var _targetStats graphicsdirectcomposition.COMPOSITION_TARGET_STATS
+	_hr := graphicsdirectcomposition.DCompositionGetTargetStatistics(frameId, targetId, &_targetStats)
+	return _targetStats, win32.HRESULTError(int32(_hr))
 }
 
 // DCompositionWaitForCompositorClock wraps the raw DCompositionWaitForCompositorClock call with idiomatic Go types.

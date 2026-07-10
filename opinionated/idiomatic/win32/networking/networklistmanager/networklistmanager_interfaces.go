@@ -24,8 +24,10 @@ func WrapIEnumNetworkConnections(raw *networkingnetworklistmanager.IEnumNetworkC
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IEnumNetworkConnections) Get__NewEnum(ppEnumVar **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppEnumVar)))
+func (self IEnumNetworkConnections) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _ppEnumVar *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_ppEnumVar)
+	return _ppEnumVar, win32.HRESULTError(int32(_hr))
 }
 
 // Next wraps the raw Next call.
@@ -44,8 +46,10 @@ func (self IEnumNetworkConnections) Reset() error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumNetworkConnections) Clone(ppEnumNetwork **networkingnetworklistmanager.IEnumNetworkConnections) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnumNetwork)))
+func (self IEnumNetworkConnections) Clone() (*networkingnetworklistmanager.IEnumNetworkConnections, error) {
+	var _ppEnumNetwork *networkingnetworklistmanager.IEnumNetworkConnections
+	_hr := self.Raw.Clone(&_ppEnumNetwork)
+	return _ppEnumNetwork, win32.HRESULTError(int32(_hr))
 }
 
 // IEnumNetworks is an idiomatic wrapper over the raw COM interface Networking.NetworkListManager.IEnumNetworks with error-returning methods.
@@ -60,8 +64,10 @@ func WrapIEnumNetworks(raw *networkingnetworklistmanager.IEnumNetworks) IEnumNet
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IEnumNetworks) Get__NewEnum(ppEnumVar **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppEnumVar)))
+func (self IEnumNetworks) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _ppEnumVar *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_ppEnumVar)
+	return _ppEnumVar, win32.HRESULTError(int32(_hr))
 }
 
 // Next wraps the raw Next call.
@@ -80,8 +86,10 @@ func (self IEnumNetworks) Reset() error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumNetworks) Clone(ppEnumNetwork **networkingnetworklistmanager.IEnumNetworks) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnumNetwork)))
+func (self IEnumNetworks) Clone() (*networkingnetworklistmanager.IEnumNetworks, error) {
+	var _ppEnumNetwork *networkingnetworklistmanager.IEnumNetworks
+	_hr := self.Raw.Clone(&_ppEnumNetwork)
+	return _ppEnumNetwork, win32.HRESULTError(int32(_hr))
 }
 
 // INetwork is an idiomatic wrapper over the raw COM interface Networking.NetworkListManager.INetwork with error-returning methods.
@@ -96,8 +104,10 @@ func WrapINetwork(raw *networkingnetworklistmanager.INetwork) INetwork {
 }
 
 // GetName wraps the raw GetName call.
-func (self INetwork) GetName(pszNetworkName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(pszNetworkName)))
+func (self INetwork) GetName() (foundation.BSTR, error) {
+	var _pszNetworkName foundation.BSTR
+	_hr := self.Raw.GetName(&_pszNetworkName)
+	return _pszNetworkName, win32.HRESULTError(int32(_hr))
 }
 
 // SetName wraps the raw SetName call.
@@ -106,8 +116,10 @@ func (self INetwork) SetName(szNetworkNewName foundation.BSTR) error {
 }
 
 // GetDescription wraps the raw GetDescription call.
-func (self INetwork) GetDescription(pszDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDescription(pszDescription)))
+func (self INetwork) GetDescription() (foundation.BSTR, error) {
+	var _pszDescription foundation.BSTR
+	_hr := self.Raw.GetDescription(&_pszDescription)
+	return _pszDescription, win32.HRESULTError(int32(_hr))
 }
 
 // SetDescription wraps the raw SetDescription call.
@@ -116,18 +128,24 @@ func (self INetwork) SetDescription(szDescription foundation.BSTR) error {
 }
 
 // GetNetworkId wraps the raw GetNetworkId call.
-func (self INetwork) GetNetworkId(pgdGuidNetworkId *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetNetworkId(pgdGuidNetworkId)))
+func (self INetwork) GetNetworkId() (win32.GUID, error) {
+	var _pgdGuidNetworkId win32.GUID
+	_hr := self.Raw.GetNetworkId(&_pgdGuidNetworkId)
+	return _pgdGuidNetworkId, win32.HRESULTError(int32(_hr))
 }
 
 // GetDomainType wraps the raw GetDomainType call.
-func (self INetwork) GetDomainType(pNetworkType *networkingnetworklistmanager.NLM_DOMAIN_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.GetDomainType(pNetworkType)))
+func (self INetwork) GetDomainType() (networkingnetworklistmanager.NLM_DOMAIN_TYPE, error) {
+	var _pNetworkType networkingnetworklistmanager.NLM_DOMAIN_TYPE
+	_hr := self.Raw.GetDomainType(&_pNetworkType)
+	return _pNetworkType, win32.HRESULTError(int32(_hr))
 }
 
 // GetNetworkConnections wraps the raw GetNetworkConnections call.
-func (self INetwork) GetNetworkConnections(ppEnumNetworkConnection **networkingnetworklistmanager.IEnumNetworkConnections) error {
-	return win32.HRESULTError(int32(self.Raw.GetNetworkConnections(ppEnumNetworkConnection)))
+func (self INetwork) GetNetworkConnections() (*networkingnetworklistmanager.IEnumNetworkConnections, error) {
+	var _ppEnumNetworkConnection *networkingnetworklistmanager.IEnumNetworkConnections
+	_hr := self.Raw.GetNetworkConnections(&_ppEnumNetworkConnection)
+	return _ppEnumNetworkConnection, win32.HRESULTError(int32(_hr))
 }
 
 // GetTimeCreatedAndConnected wraps the raw GetTimeCreatedAndConnected call.
@@ -136,23 +154,31 @@ func (self INetwork) GetTimeCreatedAndConnected(pdwLowDateTimeCreated *uint32, p
 }
 
 // Get_IsConnectedToInternet wraps the raw Get_IsConnectedToInternet call.
-func (self INetwork) Get_IsConnectedToInternet(pbIsConnected *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsConnectedToInternet(pbIsConnected)))
+func (self INetwork) Get_IsConnectedToInternet() (foundation.VARIANT_BOOL, error) {
+	var _pbIsConnected foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsConnectedToInternet(&_pbIsConnected)
+	return _pbIsConnected, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsConnected wraps the raw Get_IsConnected call.
-func (self INetwork) Get_IsConnected(pbIsConnected *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsConnected(pbIsConnected)))
+func (self INetwork) Get_IsConnected() (foundation.VARIANT_BOOL, error) {
+	var _pbIsConnected foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsConnected(&_pbIsConnected)
+	return _pbIsConnected, win32.HRESULTError(int32(_hr))
 }
 
 // GetConnectivity wraps the raw GetConnectivity call.
-func (self INetwork) GetConnectivity(pConnectivity *networkingnetworklistmanager.NLM_CONNECTIVITY) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnectivity(pConnectivity)))
+func (self INetwork) GetConnectivity() (networkingnetworklistmanager.NLM_CONNECTIVITY, error) {
+	var _pConnectivity networkingnetworklistmanager.NLM_CONNECTIVITY
+	_hr := self.Raw.GetConnectivity(&_pConnectivity)
+	return _pConnectivity, win32.HRESULTError(int32(_hr))
 }
 
 // GetCategory wraps the raw GetCategory call.
-func (self INetwork) GetCategory(pCategory *networkingnetworklistmanager.NLM_NETWORK_CATEGORY) error {
-	return win32.HRESULTError(int32(self.Raw.GetCategory(pCategory)))
+func (self INetwork) GetCategory() (networkingnetworklistmanager.NLM_NETWORK_CATEGORY, error) {
+	var _pCategory networkingnetworklistmanager.NLM_NETWORK_CATEGORY
+	_hr := self.Raw.GetCategory(&_pCategory)
+	return _pCategory, win32.HRESULTError(int32(_hr))
 }
 
 // SetCategory wraps the raw SetCategory call.
@@ -172,8 +198,10 @@ func WrapINetwork2(raw *networkingnetworklistmanager.INetwork2) INetwork2 {
 }
 
 // IsDomainAuthenticatedBy wraps the raw IsDomainAuthenticatedBy call.
-func (self INetwork2) IsDomainAuthenticatedBy(domainAuthenticationKind networkingnetworklistmanager.NLM_DOMAIN_AUTHENTICATION_KIND, pValue *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsDomainAuthenticatedBy(domainAuthenticationKind, pValue)))
+func (self INetwork2) IsDomainAuthenticatedBy(domainAuthenticationKind networkingnetworklistmanager.NLM_DOMAIN_AUTHENTICATION_KIND) (foundation.BOOL, error) {
+	var _pValue foundation.BOOL
+	_hr := self.Raw.IsDomainAuthenticatedBy(domainAuthenticationKind, &_pValue)
+	return _pValue, win32.HRESULTError(int32(_hr))
 }
 
 // INetworkConnection is an idiomatic wrapper over the raw COM interface Networking.NetworkListManager.INetworkConnection with error-returning methods.
@@ -188,38 +216,52 @@ func WrapINetworkConnection(raw *networkingnetworklistmanager.INetworkConnection
 }
 
 // GetNetwork wraps the raw GetNetwork call.
-func (self INetworkConnection) GetNetwork(ppNetwork **networkingnetworklistmanager.INetwork) error {
-	return win32.HRESULTError(int32(self.Raw.GetNetwork(ppNetwork)))
+func (self INetworkConnection) GetNetwork() (*networkingnetworklistmanager.INetwork, error) {
+	var _ppNetwork *networkingnetworklistmanager.INetwork
+	_hr := self.Raw.GetNetwork(&_ppNetwork)
+	return _ppNetwork, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsConnectedToInternet wraps the raw Get_IsConnectedToInternet call.
-func (self INetworkConnection) Get_IsConnectedToInternet(pbIsConnected *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsConnectedToInternet(pbIsConnected)))
+func (self INetworkConnection) Get_IsConnectedToInternet() (foundation.VARIANT_BOOL, error) {
+	var _pbIsConnected foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsConnectedToInternet(&_pbIsConnected)
+	return _pbIsConnected, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsConnected wraps the raw Get_IsConnected call.
-func (self INetworkConnection) Get_IsConnected(pbIsConnected *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsConnected(pbIsConnected)))
+func (self INetworkConnection) Get_IsConnected() (foundation.VARIANT_BOOL, error) {
+	var _pbIsConnected foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsConnected(&_pbIsConnected)
+	return _pbIsConnected, win32.HRESULTError(int32(_hr))
 }
 
 // GetConnectivity wraps the raw GetConnectivity call.
-func (self INetworkConnection) GetConnectivity(pConnectivity *networkingnetworklistmanager.NLM_CONNECTIVITY) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnectivity(pConnectivity)))
+func (self INetworkConnection) GetConnectivity() (networkingnetworklistmanager.NLM_CONNECTIVITY, error) {
+	var _pConnectivity networkingnetworklistmanager.NLM_CONNECTIVITY
+	_hr := self.Raw.GetConnectivity(&_pConnectivity)
+	return _pConnectivity, win32.HRESULTError(int32(_hr))
 }
 
 // GetConnectionId wraps the raw GetConnectionId call.
-func (self INetworkConnection) GetConnectionId(pgdConnectionId *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnectionId(pgdConnectionId)))
+func (self INetworkConnection) GetConnectionId() (win32.GUID, error) {
+	var _pgdConnectionId win32.GUID
+	_hr := self.Raw.GetConnectionId(&_pgdConnectionId)
+	return _pgdConnectionId, win32.HRESULTError(int32(_hr))
 }
 
 // GetAdapterId wraps the raw GetAdapterId call.
-func (self INetworkConnection) GetAdapterId(pgdAdapterId *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetAdapterId(pgdAdapterId)))
+func (self INetworkConnection) GetAdapterId() (win32.GUID, error) {
+	var _pgdAdapterId win32.GUID
+	_hr := self.Raw.GetAdapterId(&_pgdAdapterId)
+	return _pgdAdapterId, win32.HRESULTError(int32(_hr))
 }
 
 // GetDomainType wraps the raw GetDomainType call.
-func (self INetworkConnection) GetDomainType(pDomainType *networkingnetworklistmanager.NLM_DOMAIN_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.GetDomainType(pDomainType)))
+func (self INetworkConnection) GetDomainType() (networkingnetworklistmanager.NLM_DOMAIN_TYPE, error) {
+	var _pDomainType networkingnetworklistmanager.NLM_DOMAIN_TYPE
+	_hr := self.Raw.GetDomainType(&_pDomainType)
+	return _pDomainType, win32.HRESULTError(int32(_hr))
 }
 
 // INetworkConnection2 is an idiomatic wrapper over the raw COM interface Networking.NetworkListManager.INetworkConnection2 with error-returning methods.
@@ -351,28 +393,38 @@ func WrapINetworkListManager(raw *networkingnetworklistmanager.INetworkListManag
 }
 
 // GetNetworks wraps the raw GetNetworks call.
-func (self INetworkListManager) GetNetworks(Flags networkingnetworklistmanager.NLM_ENUM_NETWORK, ppEnumNetwork **networkingnetworklistmanager.IEnumNetworks) error {
-	return win32.HRESULTError(int32(self.Raw.GetNetworks(Flags, ppEnumNetwork)))
+func (self INetworkListManager) GetNetworks(Flags networkingnetworklistmanager.NLM_ENUM_NETWORK) (*networkingnetworklistmanager.IEnumNetworks, error) {
+	var _ppEnumNetwork *networkingnetworklistmanager.IEnumNetworks
+	_hr := self.Raw.GetNetworks(Flags, &_ppEnumNetwork)
+	return _ppEnumNetwork, win32.HRESULTError(int32(_hr))
 }
 
 // GetNetworkConnections wraps the raw GetNetworkConnections call.
-func (self INetworkListManager) GetNetworkConnections(ppEnum **networkingnetworklistmanager.IEnumNetworkConnections) error {
-	return win32.HRESULTError(int32(self.Raw.GetNetworkConnections(ppEnum)))
+func (self INetworkListManager) GetNetworkConnections() (*networkingnetworklistmanager.IEnumNetworkConnections, error) {
+	var _ppEnum *networkingnetworklistmanager.IEnumNetworkConnections
+	_hr := self.Raw.GetNetworkConnections(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsConnectedToInternet wraps the raw Get_IsConnectedToInternet call.
-func (self INetworkListManager) Get_IsConnectedToInternet(pbIsConnected *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsConnectedToInternet(pbIsConnected)))
+func (self INetworkListManager) Get_IsConnectedToInternet() (foundation.VARIANT_BOOL, error) {
+	var _pbIsConnected foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsConnectedToInternet(&_pbIsConnected)
+	return _pbIsConnected, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsConnected wraps the raw Get_IsConnected call.
-func (self INetworkListManager) Get_IsConnected(pbIsConnected *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsConnected(pbIsConnected)))
+func (self INetworkListManager) Get_IsConnected() (foundation.VARIANT_BOOL, error) {
+	var _pbIsConnected foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsConnected(&_pbIsConnected)
+	return _pbIsConnected, win32.HRESULTError(int32(_hr))
 }
 
 // GetConnectivity wraps the raw GetConnectivity call.
-func (self INetworkListManager) GetConnectivity(pConnectivity *networkingnetworklistmanager.NLM_CONNECTIVITY) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnectivity(pConnectivity)))
+func (self INetworkListManager) GetConnectivity() (networkingnetworklistmanager.NLM_CONNECTIVITY, error) {
+	var _pConnectivity networkingnetworklistmanager.NLM_CONNECTIVITY
+	_hr := self.Raw.GetConnectivity(&_pConnectivity)
+	return _pConnectivity, win32.HRESULTError(int32(_hr))
 }
 
 // SetSimulatedProfileInfo wraps the raw SetSimulatedProfileInfo call.

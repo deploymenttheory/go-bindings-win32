@@ -24,23 +24,31 @@ func WrapIWSMan(raw *systemremotemanagement.IWSMan) IWSMan {
 }
 
 // CreateSession wraps the raw CreateSession call.
-func (self IWSMan) CreateSession(connection foundation.BSTR, flags int32, connectionOptions *systemcom.IDispatch, session **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSession(connection, flags, connectionOptions, session)))
+func (self IWSMan) CreateSession(connection foundation.BSTR, flags int32, connectionOptions *systemcom.IDispatch) (*systemcom.IDispatch, error) {
+	var _session *systemcom.IDispatch
+	_hr := self.Raw.CreateSession(connection, flags, connectionOptions, &_session)
+	return _session, win32.HRESULTError(int32(_hr))
 }
 
 // CreateConnectionOptions wraps the raw CreateConnectionOptions call.
-func (self IWSMan) CreateConnectionOptions(connectionOptions **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.CreateConnectionOptions(connectionOptions)))
+func (self IWSMan) CreateConnectionOptions() (*systemcom.IDispatch, error) {
+	var _connectionOptions *systemcom.IDispatch
+	_hr := self.Raw.CreateConnectionOptions(&_connectionOptions)
+	return _connectionOptions, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CommandLine wraps the raw Get_CommandLine call.
-func (self IWSMan) Get_CommandLine(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CommandLine(value)))
+func (self IWSMan) Get_CommandLine() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_CommandLine(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Error wraps the raw Get_Error call.
-func (self IWSMan) Get_Error(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Error(value)))
+func (self IWSMan) Get_Error() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_Error(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IWSManConnectionOptions is an idiomatic wrapper over the raw COM interface System.RemoteManagement.IWSManConnectionOptions with error-returning methods.
@@ -55,8 +63,10 @@ func WrapIWSManConnectionOptions(raw *systemremotemanagement.IWSManConnectionOpt
 }
 
 // Get_UserName wraps the raw Get_UserName call.
-func (self IWSManConnectionOptions) Get_UserName(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserName(name)))
+func (self IWSManConnectionOptions) Get_UserName() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_UserName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UserName wraps the raw Put_UserName call.
@@ -81,8 +91,10 @@ func WrapIWSManConnectionOptionsEx(raw *systemremotemanagement.IWSManConnectionO
 }
 
 // Get_CertificateThumbprint wraps the raw Get_CertificateThumbprint call.
-func (self IWSManConnectionOptionsEx) Get_CertificateThumbprint(thumbprint *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CertificateThumbprint(thumbprint)))
+func (self IWSManConnectionOptionsEx) Get_CertificateThumbprint() (foundation.BSTR, error) {
+	var _thumbprint foundation.BSTR
+	_hr := self.Raw.Get_CertificateThumbprint(&_thumbprint)
+	return _thumbprint, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CertificateThumbprint wraps the raw Put_CertificateThumbprint call.
@@ -107,38 +119,52 @@ func (self IWSManConnectionOptionsEx2) SetProxy(accessType int32, authentication
 }
 
 // ProxyIEConfig wraps the raw ProxyIEConfig call.
-func (self IWSManConnectionOptionsEx2) ProxyIEConfig(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ProxyIEConfig(value)))
+func (self IWSManConnectionOptionsEx2) ProxyIEConfig() (int32, error) {
+	var _value int32
+	_hr := self.Raw.ProxyIEConfig(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ProxyWinHttpConfig wraps the raw ProxyWinHttpConfig call.
-func (self IWSManConnectionOptionsEx2) ProxyWinHttpConfig(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ProxyWinHttpConfig(value)))
+func (self IWSManConnectionOptionsEx2) ProxyWinHttpConfig() (int32, error) {
+	var _value int32
+	_hr := self.Raw.ProxyWinHttpConfig(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ProxyAutoDetect wraps the raw ProxyAutoDetect call.
-func (self IWSManConnectionOptionsEx2) ProxyAutoDetect(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ProxyAutoDetect(value)))
+func (self IWSManConnectionOptionsEx2) ProxyAutoDetect() (int32, error) {
+	var _value int32
+	_hr := self.Raw.ProxyAutoDetect(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ProxyNoProxyServer wraps the raw ProxyNoProxyServer call.
-func (self IWSManConnectionOptionsEx2) ProxyNoProxyServer(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ProxyNoProxyServer(value)))
+func (self IWSManConnectionOptionsEx2) ProxyNoProxyServer() (int32, error) {
+	var _value int32
+	_hr := self.Raw.ProxyNoProxyServer(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ProxyAuthenticationUseNegotiate wraps the raw ProxyAuthenticationUseNegotiate call.
-func (self IWSManConnectionOptionsEx2) ProxyAuthenticationUseNegotiate(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ProxyAuthenticationUseNegotiate(value)))
+func (self IWSManConnectionOptionsEx2) ProxyAuthenticationUseNegotiate() (int32, error) {
+	var _value int32
+	_hr := self.Raw.ProxyAuthenticationUseNegotiate(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ProxyAuthenticationUseBasic wraps the raw ProxyAuthenticationUseBasic call.
-func (self IWSManConnectionOptionsEx2) ProxyAuthenticationUseBasic(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ProxyAuthenticationUseBasic(value)))
+func (self IWSManConnectionOptionsEx2) ProxyAuthenticationUseBasic() (int32, error) {
+	var _value int32
+	_hr := self.Raw.ProxyAuthenticationUseBasic(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // ProxyAuthenticationUseDigest wraps the raw ProxyAuthenticationUseDigest call.
-func (self IWSManConnectionOptionsEx2) ProxyAuthenticationUseDigest(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ProxyAuthenticationUseDigest(value)))
+func (self IWSManConnectionOptionsEx2) ProxyAuthenticationUseDigest() (int32, error) {
+	var _value int32
+	_hr := self.Raw.ProxyAuthenticationUseDigest(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IWSManEnumerator is an idiomatic wrapper over the raw COM interface System.RemoteManagement.IWSManEnumerator with error-returning methods.
@@ -153,18 +179,24 @@ func WrapIWSManEnumerator(raw *systemremotemanagement.IWSManEnumerator) IWSManEn
 }
 
 // ReadItem wraps the raw ReadItem call.
-func (self IWSManEnumerator) ReadItem(resource *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.ReadItem(resource)))
+func (self IWSManEnumerator) ReadItem() (foundation.BSTR, error) {
+	var _resource foundation.BSTR
+	_hr := self.Raw.ReadItem(&_resource)
+	return _resource, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AtEndOfStream wraps the raw Get_AtEndOfStream call.
-func (self IWSManEnumerator) Get_AtEndOfStream(eos *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AtEndOfStream(eos)))
+func (self IWSManEnumerator) Get_AtEndOfStream() (foundation.VARIANT_BOOL, error) {
+	var _eos foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AtEndOfStream(&_eos)
+	return _eos, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Error wraps the raw Get_Error call.
-func (self IWSManEnumerator) Get_Error(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Error(value)))
+func (self IWSManEnumerator) Get_Error() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_Error(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IWSManEx is an idiomatic wrapper over the raw COM interface System.RemoteManagement.IWSManEx with error-returning methods.
@@ -179,103 +211,143 @@ func WrapIWSManEx(raw *systemremotemanagement.IWSManEx) IWSManEx {
 }
 
 // CreateResourceLocator wraps the raw CreateResourceLocator call.
-func (self IWSManEx) CreateResourceLocator(strResourceLocator foundation.BSTR, newResourceLocator **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.CreateResourceLocator(strResourceLocator, newResourceLocator)))
+func (self IWSManEx) CreateResourceLocator(strResourceLocator foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _newResourceLocator *systemcom.IDispatch
+	_hr := self.Raw.CreateResourceLocator(strResourceLocator, &_newResourceLocator)
+	return _newResourceLocator, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUTF8 wraps the raw SessionFlagUTF8 call.
-func (self IWSManEx) SessionFlagUTF8(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUTF8(flags)))
+func (self IWSManEx) SessionFlagUTF8() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUTF8(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagCredUsernamePassword wraps the raw SessionFlagCredUsernamePassword call.
-func (self IWSManEx) SessionFlagCredUsernamePassword(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagCredUsernamePassword(flags)))
+func (self IWSManEx) SessionFlagCredUsernamePassword() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagCredUsernamePassword(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagSkipCACheck wraps the raw SessionFlagSkipCACheck call.
-func (self IWSManEx) SessionFlagSkipCACheck(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagSkipCACheck(flags)))
+func (self IWSManEx) SessionFlagSkipCACheck() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagSkipCACheck(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagSkipCNCheck wraps the raw SessionFlagSkipCNCheck call.
-func (self IWSManEx) SessionFlagSkipCNCheck(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagSkipCNCheck(flags)))
+func (self IWSManEx) SessionFlagSkipCNCheck() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagSkipCNCheck(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUseDigest wraps the raw SessionFlagUseDigest call.
-func (self IWSManEx) SessionFlagUseDigest(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUseDigest(flags)))
+func (self IWSManEx) SessionFlagUseDigest() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUseDigest(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUseNegotiate wraps the raw SessionFlagUseNegotiate call.
-func (self IWSManEx) SessionFlagUseNegotiate(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUseNegotiate(flags)))
+func (self IWSManEx) SessionFlagUseNegotiate() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUseNegotiate(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUseBasic wraps the raw SessionFlagUseBasic call.
-func (self IWSManEx) SessionFlagUseBasic(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUseBasic(flags)))
+func (self IWSManEx) SessionFlagUseBasic() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUseBasic(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUseKerberos wraps the raw SessionFlagUseKerberos call.
-func (self IWSManEx) SessionFlagUseKerberos(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUseKerberos(flags)))
+func (self IWSManEx) SessionFlagUseKerberos() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUseKerberos(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagNoEncryption wraps the raw SessionFlagNoEncryption call.
-func (self IWSManEx) SessionFlagNoEncryption(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagNoEncryption(flags)))
+func (self IWSManEx) SessionFlagNoEncryption() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagNoEncryption(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagEnableSPNServerPort wraps the raw SessionFlagEnableSPNServerPort call.
-func (self IWSManEx) SessionFlagEnableSPNServerPort(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagEnableSPNServerPort(flags)))
+func (self IWSManEx) SessionFlagEnableSPNServerPort() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagEnableSPNServerPort(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUseNoAuthentication wraps the raw SessionFlagUseNoAuthentication call.
-func (self IWSManEx) SessionFlagUseNoAuthentication(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUseNoAuthentication(flags)))
+func (self IWSManEx) SessionFlagUseNoAuthentication() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUseNoAuthentication(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagNonXmlText wraps the raw EnumerationFlagNonXmlText call.
-func (self IWSManEx) EnumerationFlagNonXmlText(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagNonXmlText(flags)))
+func (self IWSManEx) EnumerationFlagNonXmlText() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagNonXmlText(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagReturnEPR wraps the raw EnumerationFlagReturnEPR call.
-func (self IWSManEx) EnumerationFlagReturnEPR(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagReturnEPR(flags)))
+func (self IWSManEx) EnumerationFlagReturnEPR() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagReturnEPR(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagReturnObjectAndEPR wraps the raw EnumerationFlagReturnObjectAndEPR call.
-func (self IWSManEx) EnumerationFlagReturnObjectAndEPR(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagReturnObjectAndEPR(flags)))
+func (self IWSManEx) EnumerationFlagReturnObjectAndEPR() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagReturnObjectAndEPR(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // GetErrorMessage wraps the raw GetErrorMessage call.
-func (self IWSManEx) GetErrorMessage(errorNumber uint32, errorMessage *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetErrorMessage(errorNumber, errorMessage)))
+func (self IWSManEx) GetErrorMessage(errorNumber uint32) (foundation.BSTR, error) {
+	var _errorMessage foundation.BSTR
+	_hr := self.Raw.GetErrorMessage(errorNumber, &_errorMessage)
+	return _errorMessage, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagHierarchyDeep wraps the raw EnumerationFlagHierarchyDeep call.
-func (self IWSManEx) EnumerationFlagHierarchyDeep(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagHierarchyDeep(flags)))
+func (self IWSManEx) EnumerationFlagHierarchyDeep() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagHierarchyDeep(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagHierarchyShallow wraps the raw EnumerationFlagHierarchyShallow call.
-func (self IWSManEx) EnumerationFlagHierarchyShallow(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagHierarchyShallow(flags)))
+func (self IWSManEx) EnumerationFlagHierarchyShallow() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagHierarchyShallow(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagHierarchyDeepBasePropsOnly wraps the raw EnumerationFlagHierarchyDeepBasePropsOnly call.
-func (self IWSManEx) EnumerationFlagHierarchyDeepBasePropsOnly(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagHierarchyDeepBasePropsOnly(flags)))
+func (self IWSManEx) EnumerationFlagHierarchyDeepBasePropsOnly() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagHierarchyDeepBasePropsOnly(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagReturnObject wraps the raw EnumerationFlagReturnObject call.
-func (self IWSManEx) EnumerationFlagReturnObject(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagReturnObject(flags)))
+func (self IWSManEx) EnumerationFlagReturnObject() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagReturnObject(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // IWSManEx2 is an idiomatic wrapper over the raw COM interface System.RemoteManagement.IWSManEx2 with error-returning methods.
@@ -290,8 +362,10 @@ func WrapIWSManEx2(raw *systemremotemanagement.IWSManEx2) IWSManEx2 {
 }
 
 // SessionFlagUseClientCertificate wraps the raw SessionFlagUseClientCertificate call.
-func (self IWSManEx2) SessionFlagUseClientCertificate(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUseClientCertificate(flags)))
+func (self IWSManEx2) SessionFlagUseClientCertificate() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUseClientCertificate(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // IWSManEx3 is an idiomatic wrapper over the raw COM interface System.RemoteManagement.IWSManEx3 with error-returning methods.
@@ -306,38 +380,52 @@ func WrapIWSManEx3(raw *systemremotemanagement.IWSManEx3) IWSManEx3 {
 }
 
 // SessionFlagUTF16 wraps the raw SessionFlagUTF16 call.
-func (self IWSManEx3) SessionFlagUTF16(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUTF16(flags)))
+func (self IWSManEx3) SessionFlagUTF16() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUTF16(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUseCredSsp wraps the raw SessionFlagUseCredSsp call.
-func (self IWSManEx3) SessionFlagUseCredSsp(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUseCredSsp(flags)))
+func (self IWSManEx3) SessionFlagUseCredSsp() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUseCredSsp(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagAssociationInstance wraps the raw EnumerationFlagAssociationInstance call.
-func (self IWSManEx3) EnumerationFlagAssociationInstance(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagAssociationInstance(flags)))
+func (self IWSManEx3) EnumerationFlagAssociationInstance() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagAssociationInstance(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerationFlagAssociatedInstance wraps the raw EnumerationFlagAssociatedInstance call.
-func (self IWSManEx3) EnumerationFlagAssociatedInstance(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerationFlagAssociatedInstance(flags)))
+func (self IWSManEx3) EnumerationFlagAssociatedInstance() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.EnumerationFlagAssociatedInstance(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagSkipRevocationCheck wraps the raw SessionFlagSkipRevocationCheck call.
-func (self IWSManEx3) SessionFlagSkipRevocationCheck(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagSkipRevocationCheck(flags)))
+func (self IWSManEx3) SessionFlagSkipRevocationCheck() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagSkipRevocationCheck(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagAllowNegotiateImplicitCredentials wraps the raw SessionFlagAllowNegotiateImplicitCredentials call.
-func (self IWSManEx3) SessionFlagAllowNegotiateImplicitCredentials(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagAllowNegotiateImplicitCredentials(flags)))
+func (self IWSManEx3) SessionFlagAllowNegotiateImplicitCredentials() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagAllowNegotiateImplicitCredentials(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // SessionFlagUseSsl wraps the raw SessionFlagUseSsl call.
-func (self IWSManEx3) SessionFlagUseSsl(flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SessionFlagUseSsl(flags)))
+func (self IWSManEx3) SessionFlagUseSsl() (int32, error) {
+	var _flags int32
+	_hr := self.Raw.SessionFlagUseSsl(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // IWSManInternal is an idiomatic wrapper over the raw COM interface System.RemoteManagement.IWSManInternal with error-returning methods.
@@ -368,8 +456,10 @@ func (self IWSManResourceLocator) Put_ResourceURI(uri foundation.BSTR) error {
 }
 
 // Get_ResourceURI wraps the raw Get_ResourceURI call.
-func (self IWSManResourceLocator) Get_ResourceURI(uri *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResourceURI(uri)))
+func (self IWSManResourceLocator) Get_ResourceURI() (foundation.BSTR, error) {
+	var _uri foundation.BSTR
+	_hr := self.Raw.Get_ResourceURI(&_uri)
+	return _uri, win32.HRESULTError(int32(_hr))
 }
 
 // ClearSelectors wraps the raw ClearSelectors call.
@@ -378,8 +468,10 @@ func (self IWSManResourceLocator) ClearSelectors() error {
 }
 
 // Get_FragmentPath wraps the raw Get_FragmentPath call.
-func (self IWSManResourceLocator) Get_FragmentPath(text *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FragmentPath(text)))
+func (self IWSManResourceLocator) Get_FragmentPath() (foundation.BSTR, error) {
+	var _text foundation.BSTR
+	_hr := self.Raw.Get_FragmentPath(&_text)
+	return _text, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FragmentPath wraps the raw Put_FragmentPath call.
@@ -388,8 +480,10 @@ func (self IWSManResourceLocator) Put_FragmentPath(text foundation.BSTR) error {
 }
 
 // Get_FragmentDialect wraps the raw Get_FragmentDialect call.
-func (self IWSManResourceLocator) Get_FragmentDialect(text *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FragmentDialect(text)))
+func (self IWSManResourceLocator) Get_FragmentDialect() (foundation.BSTR, error) {
+	var _text foundation.BSTR
+	_hr := self.Raw.Get_FragmentDialect(&_text)
+	return _text, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FragmentDialect wraps the raw Put_FragmentDialect call.
@@ -404,8 +498,10 @@ func (self IWSManResourceLocator) Put_MustUnderstandOptions(mustUnderstand bool)
 }
 
 // Get_MustUnderstandOptions wraps the raw Get_MustUnderstandOptions call.
-func (self IWSManResourceLocator) Get_MustUnderstandOptions(mustUnderstand *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MustUnderstandOptions(mustUnderstand)))
+func (self IWSManResourceLocator) Get_MustUnderstandOptions() (foundation.BOOL, error) {
+	var _mustUnderstand foundation.BOOL
+	_hr := self.Raw.Get_MustUnderstandOptions(&_mustUnderstand)
+	return _mustUnderstand, win32.HRESULTError(int32(_hr))
 }
 
 // ClearOptions wraps the raw ClearOptions call.
@@ -414,8 +510,10 @@ func (self IWSManResourceLocator) ClearOptions() error {
 }
 
 // Get_Error wraps the raw Get_Error call.
-func (self IWSManResourceLocator) Get_Error(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Error(value)))
+func (self IWSManResourceLocator) Get_Error() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_Error(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IWSManResourceLocatorInternal is an idiomatic wrapper over the raw COM interface System.RemoteManagement.IWSManResourceLocatorInternal with error-returning methods.
@@ -441,18 +539,24 @@ func WrapIWSManSession(raw *systemremotemanagement.IWSManSession) IWSManSession 
 }
 
 // Identify wraps the raw Identify call.
-func (self IWSManSession) Identify(flags int32, result *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Identify(flags, result)))
+func (self IWSManSession) Identify(flags int32) (foundation.BSTR, error) {
+	var _result foundation.BSTR
+	_hr := self.Raw.Identify(flags, &_result)
+	return _result, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Error wraps the raw Get_Error call.
-func (self IWSManSession) Get_Error(value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Error(value)))
+func (self IWSManSession) Get_Error() (foundation.BSTR, error) {
+	var _value foundation.BSTR
+	_hr := self.Raw.Get_Error(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_BatchItems wraps the raw Get_BatchItems call.
-func (self IWSManSession) Get_BatchItems(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BatchItems(value)))
+func (self IWSManSession) Get_BatchItems() (int32, error) {
+	var _value int32
+	_hr := self.Raw.Get_BatchItems(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BatchItems wraps the raw Put_BatchItems call.
@@ -461,8 +565,10 @@ func (self IWSManSession) Put_BatchItems(value int32) error {
 }
 
 // Get_Timeout wraps the raw Get_Timeout call.
-func (self IWSManSession) Get_Timeout(value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Timeout(value)))
+func (self IWSManSession) Get_Timeout() (int32, error) {
+	var _value int32
+	_hr := self.Raw.Get_Timeout(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Timeout wraps the raw Put_Timeout call.

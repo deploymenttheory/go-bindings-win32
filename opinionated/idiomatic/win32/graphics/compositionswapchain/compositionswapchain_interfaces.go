@@ -116,13 +116,17 @@ func WrapIPresentationBuffer(raw *graphicscompositionswapchain.IPresentationBuff
 }
 
 // GetAvailableEvent wraps the raw GetAvailableEvent call.
-func (self IPresentationBuffer) GetAvailableEvent(availableEventHandle *foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.GetAvailableEvent(availableEventHandle)))
+func (self IPresentationBuffer) GetAvailableEvent() (foundation.HANDLE, error) {
+	var _availableEventHandle foundation.HANDLE
+	_hr := self.Raw.GetAvailableEvent(&_availableEventHandle)
+	return _availableEventHandle, win32.HRESULTError(int32(_hr))
 }
 
 // IsAvailable wraps the raw IsAvailable call.
-func (self IPresentationBuffer) IsAvailable(isAvailable *byte) error {
-	return win32.HRESULTError(int32(self.Raw.IsAvailable(isAvailable)))
+func (self IPresentationBuffer) IsAvailable() (byte, error) {
+	var _isAvailable byte
+	_hr := self.Raw.IsAvailable(&_isAvailable)
+	return _isAvailable, win32.HRESULTError(int32(_hr))
 }
 
 // IPresentationContent is an idiomatic wrapper over the raw COM interface Graphics.CompositionSwapchain.IPresentationContent with error-returning methods.
@@ -163,8 +167,10 @@ func (self IPresentationFactory) IsPresentationSupportedWithIndependentFlip() by
 }
 
 // CreatePresentationManager wraps the raw CreatePresentationManager call.
-func (self IPresentationFactory) CreatePresentationManager(ppPresentationManager **graphicscompositionswapchain.IPresentationManager) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePresentationManager(ppPresentationManager)))
+func (self IPresentationFactory) CreatePresentationManager() (*graphicscompositionswapchain.IPresentationManager, error) {
+	var _ppPresentationManager *graphicscompositionswapchain.IPresentationManager
+	_hr := self.Raw.CreatePresentationManager(&_ppPresentationManager)
+	return _ppPresentationManager, win32.HRESULTError(int32(_hr))
 }
 
 // IPresentationFactory_SupportHdrAware is an idiomatic wrapper over the raw COM interface Graphics.CompositionSwapchain.IPresentationFactory_SupportHdrAware with error-returning methods.
@@ -190,13 +196,17 @@ func WrapIPresentationManager(raw *graphicscompositionswapchain.IPresentationMan
 }
 
 // AddBufferFromResource wraps the raw AddBufferFromResource call.
-func (self IPresentationManager) AddBufferFromResource(resource *systemcom.IUnknown, presentationBuffer **graphicscompositionswapchain.IPresentationBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.AddBufferFromResource(resource, presentationBuffer)))
+func (self IPresentationManager) AddBufferFromResource(resource *systemcom.IUnknown) (*graphicscompositionswapchain.IPresentationBuffer, error) {
+	var _presentationBuffer *graphicscompositionswapchain.IPresentationBuffer
+	_hr := self.Raw.AddBufferFromResource(resource, &_presentationBuffer)
+	return _presentationBuffer, win32.HRESULTError(int32(_hr))
 }
 
 // CreatePresentationSurface wraps the raw CreatePresentationSurface call.
-func (self IPresentationManager) CreatePresentationSurface(compositionSurfaceHandle foundation.HANDLE, presentationSurface **graphicscompositionswapchain.IPresentationSurface) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePresentationSurface(compositionSurfaceHandle, presentationSurface)))
+func (self IPresentationManager) CreatePresentationSurface(compositionSurfaceHandle foundation.HANDLE) (*graphicscompositionswapchain.IPresentationSurface, error) {
+	var _presentationSurface *graphicscompositionswapchain.IPresentationSurface
+	_hr := self.Raw.CreatePresentationSurface(compositionSurfaceHandle, &_presentationSurface)
+	return _presentationSurface, win32.HRESULTError(int32(_hr))
 }
 
 // GetNextPresentId wraps the raw GetNextPresentId call.
@@ -225,13 +235,17 @@ func (self IPresentationManager) CancelPresentsFrom(presentIdToCancelFrom uint64
 }
 
 // GetLostEvent wraps the raw GetLostEvent call.
-func (self IPresentationManager) GetLostEvent(lostEventHandle *foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.GetLostEvent(lostEventHandle)))
+func (self IPresentationManager) GetLostEvent() (foundation.HANDLE, error) {
+	var _lostEventHandle foundation.HANDLE
+	_hr := self.Raw.GetLostEvent(&_lostEventHandle)
+	return _lostEventHandle, win32.HRESULTError(int32(_hr))
 }
 
 // GetPresentStatisticsAvailableEvent wraps the raw GetPresentStatisticsAvailableEvent call.
-func (self IPresentationManager) GetPresentStatisticsAvailableEvent(presentStatisticsAvailableEventHandle *foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.GetPresentStatisticsAvailableEvent(presentStatisticsAvailableEventHandle)))
+func (self IPresentationManager) GetPresentStatisticsAvailableEvent() (foundation.HANDLE, error) {
+	var _presentStatisticsAvailableEventHandle foundation.HANDLE
+	_hr := self.Raw.GetPresentStatisticsAvailableEvent(&_presentStatisticsAvailableEventHandle)
+	return _presentStatisticsAvailableEventHandle, win32.HRESULTError(int32(_hr))
 }
 
 // EnablePresentStatisticsKind wraps the raw EnablePresentStatisticsKind call.
@@ -240,8 +254,10 @@ func (self IPresentationManager) EnablePresentStatisticsKind(presentStatisticsKi
 }
 
 // GetNextPresentStatistics wraps the raw GetNextPresentStatistics call.
-func (self IPresentationManager) GetNextPresentStatistics(nextPresentStatistics **graphicscompositionswapchain.IPresentStatistics) error {
-	return win32.HRESULTError(int32(self.Raw.GetNextPresentStatistics(nextPresentStatistics)))
+func (self IPresentationManager) GetNextPresentStatistics() (*graphicscompositionswapchain.IPresentStatistics, error) {
+	var _nextPresentStatistics *graphicscompositionswapchain.IPresentStatistics
+	_hr := self.Raw.GetNextPresentStatistics(&_nextPresentStatistics)
+	return _nextPresentStatistics, win32.HRESULTError(int32(_hr))
 }
 
 // IPresentationSurface is an idiomatic wrapper over the raw COM interface Graphics.CompositionSwapchain.IPresentationSurface with error-returning methods.

@@ -45,13 +45,17 @@ func (self IAutomaticUpdates) ShowSettingsDialog() error {
 }
 
 // Get_Settings wraps the raw Get_Settings call.
-func (self IAutomaticUpdates) Get_Settings(retval **systemupdateagent.IAutomaticUpdatesSettings) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Settings(retval)))
+func (self IAutomaticUpdates) Get_Settings() (*systemupdateagent.IAutomaticUpdatesSettings, error) {
+	var _retval *systemupdateagent.IAutomaticUpdatesSettings
+	_hr := self.Raw.Get_Settings(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServiceEnabled wraps the raw Get_ServiceEnabled call.
-func (self IAutomaticUpdates) Get_ServiceEnabled(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceEnabled(retval)))
+func (self IAutomaticUpdates) Get_ServiceEnabled() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ServiceEnabled(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // EnableService wraps the raw EnableService call.
@@ -71,8 +75,10 @@ func WrapIAutomaticUpdates2(raw *systemupdateagent.IAutomaticUpdates2) IAutomati
 }
 
 // Get_Results wraps the raw Get_Results call.
-func (self IAutomaticUpdates2) Get_Results(retval **systemupdateagent.IAutomaticUpdatesResults) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Results(retval)))
+func (self IAutomaticUpdates2) Get_Results() (*systemupdateagent.IAutomaticUpdatesResults, error) {
+	var _retval *systemupdateagent.IAutomaticUpdatesResults
+	_hr := self.Raw.Get_Results(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IAutomaticUpdatesResults is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IAutomaticUpdatesResults with error-returning methods.
@@ -87,13 +93,17 @@ func WrapIAutomaticUpdatesResults(raw *systemupdateagent.IAutomaticUpdatesResult
 }
 
 // Get_LastSearchSuccessDate wraps the raw Get_LastSearchSuccessDate call.
-func (self IAutomaticUpdatesResults) Get_LastSearchSuccessDate(retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastSearchSuccessDate(retval)))
+func (self IAutomaticUpdatesResults) Get_LastSearchSuccessDate() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.Get_LastSearchSuccessDate(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastInstallationSuccessDate wraps the raw Get_LastInstallationSuccessDate call.
-func (self IAutomaticUpdatesResults) Get_LastInstallationSuccessDate(retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastInstallationSuccessDate(retval)))
+func (self IAutomaticUpdatesResults) Get_LastInstallationSuccessDate() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.Get_LastInstallationSuccessDate(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IAutomaticUpdatesSettings is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IAutomaticUpdatesSettings with error-returning methods.
@@ -108,8 +118,10 @@ func WrapIAutomaticUpdatesSettings(raw *systemupdateagent.IAutomaticUpdatesSetti
 }
 
 // Get_NotificationLevel wraps the raw Get_NotificationLevel call.
-func (self IAutomaticUpdatesSettings) Get_NotificationLevel(retval *systemupdateagent.AutomaticUpdatesNotificationLevel) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NotificationLevel(retval)))
+func (self IAutomaticUpdatesSettings) Get_NotificationLevel() (systemupdateagent.AutomaticUpdatesNotificationLevel, error) {
+	var _retval systemupdateagent.AutomaticUpdatesNotificationLevel
+	_hr := self.Raw.Get_NotificationLevel(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NotificationLevel wraps the raw Put_NotificationLevel call.
@@ -118,18 +130,24 @@ func (self IAutomaticUpdatesSettings) Put_NotificationLevel(value systemupdateag
 }
 
 // Get_ReadOnly wraps the raw Get_ReadOnly call.
-func (self IAutomaticUpdatesSettings) Get_ReadOnly(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReadOnly(retval)))
+func (self IAutomaticUpdatesSettings) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ReadOnly(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Required wraps the raw Get_Required call.
-func (self IAutomaticUpdatesSettings) Get_Required(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Required(retval)))
+func (self IAutomaticUpdatesSettings) Get_Required() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Required(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ScheduledInstallationDay wraps the raw Get_ScheduledInstallationDay call.
-func (self IAutomaticUpdatesSettings) Get_ScheduledInstallationDay(retval *systemupdateagent.AutomaticUpdatesScheduledInstallationDay) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ScheduledInstallationDay(retval)))
+func (self IAutomaticUpdatesSettings) Get_ScheduledInstallationDay() (systemupdateagent.AutomaticUpdatesScheduledInstallationDay, error) {
+	var _retval systemupdateagent.AutomaticUpdatesScheduledInstallationDay
+	_hr := self.Raw.Get_ScheduledInstallationDay(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ScheduledInstallationDay wraps the raw Put_ScheduledInstallationDay call.
@@ -138,8 +156,10 @@ func (self IAutomaticUpdatesSettings) Put_ScheduledInstallationDay(value systemu
 }
 
 // Get_ScheduledInstallationTime wraps the raw Get_ScheduledInstallationTime call.
-func (self IAutomaticUpdatesSettings) Get_ScheduledInstallationTime(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ScheduledInstallationTime(retval)))
+func (self IAutomaticUpdatesSettings) Get_ScheduledInstallationTime() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_ScheduledInstallationTime(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ScheduledInstallationTime wraps the raw Put_ScheduledInstallationTime call.
@@ -169,8 +189,10 @@ func WrapIAutomaticUpdatesSettings2(raw *systemupdateagent.IAutomaticUpdatesSett
 }
 
 // Get_IncludeRecommendedUpdates wraps the raw Get_IncludeRecommendedUpdates call.
-func (self IAutomaticUpdatesSettings2) Get_IncludeRecommendedUpdates(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IncludeRecommendedUpdates(retval)))
+func (self IAutomaticUpdatesSettings2) Get_IncludeRecommendedUpdates() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IncludeRecommendedUpdates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IncludeRecommendedUpdates wraps the raw Put_IncludeRecommendedUpdates call.
@@ -179,8 +201,10 @@ func (self IAutomaticUpdatesSettings2) Put_IncludeRecommendedUpdates(value found
 }
 
 // CheckPermission wraps the raw CheckPermission call.
-func (self IAutomaticUpdatesSettings2) CheckPermission(userType systemupdateagent.AutomaticUpdatesUserType, permissionType systemupdateagent.AutomaticUpdatesPermissionType, userHasPermission *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CheckPermission(userType, permissionType, userHasPermission)))
+func (self IAutomaticUpdatesSettings2) CheckPermission(userType systemupdateagent.AutomaticUpdatesUserType, permissionType systemupdateagent.AutomaticUpdatesPermissionType) (foundation.VARIANT_BOOL, error) {
+	var _userHasPermission foundation.VARIANT_BOOL
+	_hr := self.Raw.CheckPermission(userType, permissionType, &_userHasPermission)
+	return _userHasPermission, win32.HRESULTError(int32(_hr))
 }
 
 // IAutomaticUpdatesSettings3 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IAutomaticUpdatesSettings3 with error-returning methods.
@@ -195,8 +219,10 @@ func WrapIAutomaticUpdatesSettings3(raw *systemupdateagent.IAutomaticUpdatesSett
 }
 
 // Get_NonAdministratorsElevated wraps the raw Get_NonAdministratorsElevated call.
-func (self IAutomaticUpdatesSettings3) Get_NonAdministratorsElevated(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NonAdministratorsElevated(retval)))
+func (self IAutomaticUpdatesSettings3) Get_NonAdministratorsElevated() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_NonAdministratorsElevated(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NonAdministratorsElevated wraps the raw Put_NonAdministratorsElevated call.
@@ -205,8 +231,10 @@ func (self IAutomaticUpdatesSettings3) Put_NonAdministratorsElevated(value found
 }
 
 // Get_FeaturedUpdatesEnabled wraps the raw Get_FeaturedUpdatesEnabled call.
-func (self IAutomaticUpdatesSettings3) Get_FeaturedUpdatesEnabled(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FeaturedUpdatesEnabled(retval)))
+func (self IAutomaticUpdatesSettings3) Get_FeaturedUpdatesEnabled() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_FeaturedUpdatesEnabled(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FeaturedUpdatesEnabled wraps the raw Put_FeaturedUpdatesEnabled call.
@@ -226,48 +254,66 @@ func WrapICategory(raw *systemupdateagent.ICategory) ICategory {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ICategory) Get_Name(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(retval)))
+func (self ICategory) Get_Name() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Name(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CategoryID wraps the raw Get_CategoryID call.
-func (self ICategory) Get_CategoryID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CategoryID(retval)))
+func (self ICategory) Get_CategoryID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_CategoryID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Children wraps the raw Get_Children call.
-func (self ICategory) Get_Children(retval **systemupdateagent.ICategoryCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Children(retval)))
+func (self ICategory) Get_Children() (*systemupdateagent.ICategoryCollection, error) {
+	var _retval *systemupdateagent.ICategoryCollection
+	_hr := self.Raw.Get_Children(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self ICategory) Get_Description(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(retval)))
+func (self ICategory) Get_Description() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Description(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Image wraps the raw Get_Image call.
-func (self ICategory) Get_Image(retval **systemupdateagent.IImageInformation) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Image(retval)))
+func (self ICategory) Get_Image() (*systemupdateagent.IImageInformation, error) {
+	var _retval *systemupdateagent.IImageInformation
+	_hr := self.Raw.Get_Image(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Order wraps the raw Get_Order call.
-func (self ICategory) Get_Order(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Order(retval)))
+func (self ICategory) Get_Order() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Order(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self ICategory) Get_Parent(retval **systemupdateagent.ICategory) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(retval)))
+func (self ICategory) Get_Parent() (*systemupdateagent.ICategory, error) {
+	var _retval *systemupdateagent.ICategory
+	_hr := self.Raw.Get_Parent(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self ICategory) Get_Type(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(retval)))
+func (self ICategory) Get_Type() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Type(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Updates wraps the raw Get_Updates call.
-func (self ICategory) Get_Updates(retval **systemupdateagent.IUpdateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Updates(retval)))
+func (self ICategory) Get_Updates() (*systemupdateagent.IUpdateCollection, error) {
+	var _retval *systemupdateagent.IUpdateCollection
+	_hr := self.Raw.Get_Updates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // ICategoryCollection is an idiomatic wrapper over the raw COM interface System.UpdateAgent.ICategoryCollection with error-returning methods.
@@ -282,18 +328,24 @@ func WrapICategoryCollection(raw *systemupdateagent.ICategoryCollection) ICatego
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self ICategoryCollection) Get_Item(index int32, retval **systemupdateagent.ICategory) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, retval)))
+func (self ICategoryCollection) Get_Item(index int32) (*systemupdateagent.ICategory, error) {
+	var _retval *systemupdateagent.ICategory
+	_hr := self.Raw.Get_Item(index, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ICategoryCollection) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self ICategoryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ICategoryCollection) Get_Count(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(retval)))
+func (self ICategoryCollection) Get_Count() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Count(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IDownloadCompletedCallback is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IDownloadCompletedCallback with error-returning methods.
@@ -335,18 +387,24 @@ func WrapIDownloadJob(raw *systemupdateagent.IDownloadJob) IDownloadJob {
 }
 
 // Get_AsyncState wraps the raw Get_AsyncState call.
-func (self IDownloadJob) Get_AsyncState(retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AsyncState(retval)))
+func (self IDownloadJob) Get_AsyncState() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.Get_AsyncState(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsCompleted wraps the raw Get_IsCompleted call.
-func (self IDownloadJob) Get_IsCompleted(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsCompleted(retval)))
+func (self IDownloadJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsCompleted(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Updates wraps the raw Get_Updates call.
-func (self IDownloadJob) Get_Updates(retval **systemupdateagent.IUpdateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Updates(retval)))
+func (self IDownloadJob) Get_Updates() (*systemupdateagent.IUpdateCollection, error) {
+	var _retval *systemupdateagent.IUpdateCollection
+	_hr := self.Raw.Get_Updates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CleanUp wraps the raw CleanUp call.
@@ -355,8 +413,10 @@ func (self IDownloadJob) CleanUp() error {
 }
 
 // GetProgress wraps the raw GetProgress call.
-func (self IDownloadJob) GetProgress(retval **systemupdateagent.IDownloadProgress) error {
-	return win32.HRESULTError(int32(self.Raw.GetProgress(retval)))
+func (self IDownloadJob) GetProgress() (*systemupdateagent.IDownloadProgress, error) {
+	var _retval *systemupdateagent.IDownloadProgress
+	_hr := self.Raw.GetProgress(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // RequestAbort wraps the raw RequestAbort call.
@@ -376,48 +436,66 @@ func WrapIDownloadProgress(raw *systemupdateagent.IDownloadProgress) IDownloadPr
 }
 
 // Get_CurrentUpdateBytesDownloaded wraps the raw Get_CurrentUpdateBytesDownloaded call.
-func (self IDownloadProgress) Get_CurrentUpdateBytesDownloaded(retval *foundation.DECIMAL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentUpdateBytesDownloaded(retval)))
+func (self IDownloadProgress) Get_CurrentUpdateBytesDownloaded() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	_hr := self.Raw.Get_CurrentUpdateBytesDownloaded(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentUpdateBytesToDownload wraps the raw Get_CurrentUpdateBytesToDownload call.
-func (self IDownloadProgress) Get_CurrentUpdateBytesToDownload(retval *foundation.DECIMAL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentUpdateBytesToDownload(retval)))
+func (self IDownloadProgress) Get_CurrentUpdateBytesToDownload() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	_hr := self.Raw.Get_CurrentUpdateBytesToDownload(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentUpdateIndex wraps the raw Get_CurrentUpdateIndex call.
-func (self IDownloadProgress) Get_CurrentUpdateIndex(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentUpdateIndex(retval)))
+func (self IDownloadProgress) Get_CurrentUpdateIndex() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_CurrentUpdateIndex(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PercentComplete wraps the raw Get_PercentComplete call.
-func (self IDownloadProgress) Get_PercentComplete(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PercentComplete(retval)))
+func (self IDownloadProgress) Get_PercentComplete() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_PercentComplete(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TotalBytesDownloaded wraps the raw Get_TotalBytesDownloaded call.
-func (self IDownloadProgress) Get_TotalBytesDownloaded(retval *foundation.DECIMAL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TotalBytesDownloaded(retval)))
+func (self IDownloadProgress) Get_TotalBytesDownloaded() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	_hr := self.Raw.Get_TotalBytesDownloaded(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TotalBytesToDownload wraps the raw Get_TotalBytesToDownload call.
-func (self IDownloadProgress) Get_TotalBytesToDownload(retval *foundation.DECIMAL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TotalBytesToDownload(retval)))
+func (self IDownloadProgress) Get_TotalBytesToDownload() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	_hr := self.Raw.Get_TotalBytesToDownload(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // GetUpdateResult wraps the raw GetUpdateResult call.
-func (self IDownloadProgress) GetUpdateResult(updateIndex int32, retval **systemupdateagent.IUpdateDownloadResult) error {
-	return win32.HRESULTError(int32(self.Raw.GetUpdateResult(updateIndex, retval)))
+func (self IDownloadProgress) GetUpdateResult(updateIndex int32) (*systemupdateagent.IUpdateDownloadResult, error) {
+	var _retval *systemupdateagent.IUpdateDownloadResult
+	_hr := self.Raw.GetUpdateResult(updateIndex, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentUpdateDownloadPhase wraps the raw Get_CurrentUpdateDownloadPhase call.
-func (self IDownloadProgress) Get_CurrentUpdateDownloadPhase(retval *systemupdateagent.DownloadPhase) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentUpdateDownloadPhase(retval)))
+func (self IDownloadProgress) Get_CurrentUpdateDownloadPhase() (systemupdateagent.DownloadPhase, error) {
+	var _retval systemupdateagent.DownloadPhase
+	_hr := self.Raw.Get_CurrentUpdateDownloadPhase(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentUpdatePercentComplete wraps the raw Get_CurrentUpdatePercentComplete call.
-func (self IDownloadProgress) Get_CurrentUpdatePercentComplete(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentUpdatePercentComplete(retval)))
+func (self IDownloadProgress) Get_CurrentUpdatePercentComplete() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_CurrentUpdatePercentComplete(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IDownloadProgressChangedCallback is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IDownloadProgressChangedCallback with error-returning methods.
@@ -448,8 +526,10 @@ func WrapIDownloadProgressChangedCallbackArgs(raw *systemupdateagent.IDownloadPr
 }
 
 // Get_Progress wraps the raw Get_Progress call.
-func (self IDownloadProgressChangedCallbackArgs) Get_Progress(retval **systemupdateagent.IDownloadProgress) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Progress(retval)))
+func (self IDownloadProgressChangedCallbackArgs) Get_Progress() (*systemupdateagent.IDownloadProgress, error) {
+	var _retval *systemupdateagent.IDownloadProgress
+	_hr := self.Raw.Get_Progress(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IDownloadResult is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IDownloadResult with error-returning methods.
@@ -464,18 +544,24 @@ func WrapIDownloadResult(raw *systemupdateagent.IDownloadResult) IDownloadResult
 }
 
 // Get_HResult wraps the raw Get_HResult call.
-func (self IDownloadResult) Get_HResult(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HResult(retval)))
+func (self IDownloadResult) Get_HResult() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_HResult(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResultCode wraps the raw Get_ResultCode call.
-func (self IDownloadResult) Get_ResultCode(retval *systemupdateagent.OperationResultCode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResultCode(retval)))
+func (self IDownloadResult) Get_ResultCode() (systemupdateagent.OperationResultCode, error) {
+	var _retval systemupdateagent.OperationResultCode
+	_hr := self.Raw.Get_ResultCode(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // GetUpdateResult wraps the raw GetUpdateResult call.
-func (self IDownloadResult) GetUpdateResult(updateIndex int32, retval **systemupdateagent.IUpdateDownloadResult) error {
-	return win32.HRESULTError(int32(self.Raw.GetUpdateResult(updateIndex, retval)))
+func (self IDownloadResult) GetUpdateResult(updateIndex int32) (*systemupdateagent.IUpdateDownloadResult, error) {
+	var _retval *systemupdateagent.IUpdateDownloadResult
+	_hr := self.Raw.GetUpdateResult(updateIndex, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IImageInformation is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IImageInformation with error-returning methods.
@@ -490,23 +576,31 @@ func WrapIImageInformation(raw *systemupdateagent.IImageInformation) IImageInfor
 }
 
 // Get_AltText wraps the raw Get_AltText call.
-func (self IImageInformation) Get_AltText(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AltText(retval)))
+func (self IImageInformation) Get_AltText() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_AltText(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Height wraps the raw Get_Height call.
-func (self IImageInformation) Get_Height(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Height(retval)))
+func (self IImageInformation) Get_Height() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Height(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Source wraps the raw Get_Source call.
-func (self IImageInformation) Get_Source(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Source(retval)))
+func (self IImageInformation) Get_Source() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Source(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Width wraps the raw Get_Width call.
-func (self IImageInformation) Get_Width(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Width(retval)))
+func (self IImageInformation) Get_Width() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Width(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IInstallationAgent is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IInstallationAgent with error-returning methods.
@@ -537,23 +631,31 @@ func WrapIInstallationBehavior(raw *systemupdateagent.IInstallationBehavior) IIn
 }
 
 // Get_CanRequestUserInput wraps the raw Get_CanRequestUserInput call.
-func (self IInstallationBehavior) Get_CanRequestUserInput(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanRequestUserInput(retval)))
+func (self IInstallationBehavior) Get_CanRequestUserInput() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_CanRequestUserInput(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Impact wraps the raw Get_Impact call.
-func (self IInstallationBehavior) Get_Impact(retval *systemupdateagent.InstallationImpact) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Impact(retval)))
+func (self IInstallationBehavior) Get_Impact() (systemupdateagent.InstallationImpact, error) {
+	var _retval systemupdateagent.InstallationImpact
+	_hr := self.Raw.Get_Impact(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RebootBehavior wraps the raw Get_RebootBehavior call.
-func (self IInstallationBehavior) Get_RebootBehavior(retval *systemupdateagent.InstallationRebootBehavior) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RebootBehavior(retval)))
+func (self IInstallationBehavior) Get_RebootBehavior() (systemupdateagent.InstallationRebootBehavior, error) {
+	var _retval systemupdateagent.InstallationRebootBehavior
+	_hr := self.Raw.Get_RebootBehavior(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RequiresNetworkConnectivity wraps the raw Get_RequiresNetworkConnectivity call.
-func (self IInstallationBehavior) Get_RequiresNetworkConnectivity(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RequiresNetworkConnectivity(retval)))
+func (self IInstallationBehavior) Get_RequiresNetworkConnectivity() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RequiresNetworkConnectivity(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IInstallationCompletedCallback is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IInstallationCompletedCallback with error-returning methods.
@@ -595,18 +697,24 @@ func WrapIInstallationJob(raw *systemupdateagent.IInstallationJob) IInstallation
 }
 
 // Get_AsyncState wraps the raw Get_AsyncState call.
-func (self IInstallationJob) Get_AsyncState(retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AsyncState(retval)))
+func (self IInstallationJob) Get_AsyncState() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.Get_AsyncState(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsCompleted wraps the raw Get_IsCompleted call.
-func (self IInstallationJob) Get_IsCompleted(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsCompleted(retval)))
+func (self IInstallationJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsCompleted(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Updates wraps the raw Get_Updates call.
-func (self IInstallationJob) Get_Updates(retval **systemupdateagent.IUpdateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Updates(retval)))
+func (self IInstallationJob) Get_Updates() (*systemupdateagent.IUpdateCollection, error) {
+	var _retval *systemupdateagent.IUpdateCollection
+	_hr := self.Raw.Get_Updates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CleanUp wraps the raw CleanUp call.
@@ -615,8 +723,10 @@ func (self IInstallationJob) CleanUp() error {
 }
 
 // GetProgress wraps the raw GetProgress call.
-func (self IInstallationJob) GetProgress(retval **systemupdateagent.IInstallationProgress) error {
-	return win32.HRESULTError(int32(self.Raw.GetProgress(retval)))
+func (self IInstallationJob) GetProgress() (*systemupdateagent.IInstallationProgress, error) {
+	var _retval *systemupdateagent.IInstallationProgress
+	_hr := self.Raw.GetProgress(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // RequestAbort wraps the raw RequestAbort call.
@@ -636,23 +746,31 @@ func WrapIInstallationProgress(raw *systemupdateagent.IInstallationProgress) IIn
 }
 
 // Get_CurrentUpdateIndex wraps the raw Get_CurrentUpdateIndex call.
-func (self IInstallationProgress) Get_CurrentUpdateIndex(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentUpdateIndex(retval)))
+func (self IInstallationProgress) Get_CurrentUpdateIndex() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_CurrentUpdateIndex(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentUpdatePercentComplete wraps the raw Get_CurrentUpdatePercentComplete call.
-func (self IInstallationProgress) Get_CurrentUpdatePercentComplete(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentUpdatePercentComplete(retval)))
+func (self IInstallationProgress) Get_CurrentUpdatePercentComplete() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_CurrentUpdatePercentComplete(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PercentComplete wraps the raw Get_PercentComplete call.
-func (self IInstallationProgress) Get_PercentComplete(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PercentComplete(retval)))
+func (self IInstallationProgress) Get_PercentComplete() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_PercentComplete(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // GetUpdateResult wraps the raw GetUpdateResult call.
-func (self IInstallationProgress) GetUpdateResult(updateIndex int32, retval **systemupdateagent.IUpdateInstallationResult) error {
-	return win32.HRESULTError(int32(self.Raw.GetUpdateResult(updateIndex, retval)))
+func (self IInstallationProgress) GetUpdateResult(updateIndex int32) (*systemupdateagent.IUpdateInstallationResult, error) {
+	var _retval *systemupdateagent.IUpdateInstallationResult
+	_hr := self.Raw.GetUpdateResult(updateIndex, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IInstallationProgressChangedCallback is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IInstallationProgressChangedCallback with error-returning methods.
@@ -683,8 +801,10 @@ func WrapIInstallationProgressChangedCallbackArgs(raw *systemupdateagent.IInstal
 }
 
 // Get_Progress wraps the raw Get_Progress call.
-func (self IInstallationProgressChangedCallbackArgs) Get_Progress(retval **systemupdateagent.IInstallationProgress) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Progress(retval)))
+func (self IInstallationProgressChangedCallbackArgs) Get_Progress() (*systemupdateagent.IInstallationProgress, error) {
+	var _retval *systemupdateagent.IInstallationProgress
+	_hr := self.Raw.Get_Progress(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IInstallationResult is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IInstallationResult with error-returning methods.
@@ -699,23 +819,31 @@ func WrapIInstallationResult(raw *systemupdateagent.IInstallationResult) IInstal
 }
 
 // Get_HResult wraps the raw Get_HResult call.
-func (self IInstallationResult) Get_HResult(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HResult(retval)))
+func (self IInstallationResult) Get_HResult() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_HResult(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RebootRequired wraps the raw Get_RebootRequired call.
-func (self IInstallationResult) Get_RebootRequired(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RebootRequired(retval)))
+func (self IInstallationResult) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RebootRequired(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResultCode wraps the raw Get_ResultCode call.
-func (self IInstallationResult) Get_ResultCode(retval *systemupdateagent.OperationResultCode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResultCode(retval)))
+func (self IInstallationResult) Get_ResultCode() (systemupdateagent.OperationResultCode, error) {
+	var _retval systemupdateagent.OperationResultCode
+	_hr := self.Raw.Get_ResultCode(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // GetUpdateResult wraps the raw GetUpdateResult call.
-func (self IInstallationResult) GetUpdateResult(updateIndex int32, retval **systemupdateagent.IUpdateInstallationResult) error {
-	return win32.HRESULTError(int32(self.Raw.GetUpdateResult(updateIndex, retval)))
+func (self IInstallationResult) GetUpdateResult(updateIndex int32) (*systemupdateagent.IUpdateInstallationResult, error) {
+	var _retval *systemupdateagent.IUpdateInstallationResult
+	_hr := self.Raw.GetUpdateResult(updateIndex, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IInvalidProductLicenseException is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IInvalidProductLicenseException with error-returning methods.
@@ -730,8 +858,10 @@ func WrapIInvalidProductLicenseException(raw *systemupdateagent.IInvalidProductL
 }
 
 // Get_Product wraps the raw Get_Product call.
-func (self IInvalidProductLicenseException) Get_Product(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Product(retval)))
+func (self IInvalidProductLicenseException) Get_Product() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Product(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // ISearchCompletedCallback is an idiomatic wrapper over the raw COM interface System.UpdateAgent.ISearchCompletedCallback with error-returning methods.
@@ -773,13 +903,17 @@ func WrapISearchJob(raw *systemupdateagent.ISearchJob) ISearchJob {
 }
 
 // Get_AsyncState wraps the raw Get_AsyncState call.
-func (self ISearchJob) Get_AsyncState(retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AsyncState(retval)))
+func (self ISearchJob) Get_AsyncState() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.Get_AsyncState(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsCompleted wraps the raw Get_IsCompleted call.
-func (self ISearchJob) Get_IsCompleted(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsCompleted(retval)))
+func (self ISearchJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsCompleted(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CleanUp wraps the raw CleanUp call.
@@ -804,23 +938,31 @@ func WrapISearchResult(raw *systemupdateagent.ISearchResult) ISearchResult {
 }
 
 // Get_ResultCode wraps the raw Get_ResultCode call.
-func (self ISearchResult) Get_ResultCode(retval *systemupdateagent.OperationResultCode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResultCode(retval)))
+func (self ISearchResult) Get_ResultCode() (systemupdateagent.OperationResultCode, error) {
+	var _retval systemupdateagent.OperationResultCode
+	_hr := self.Raw.Get_ResultCode(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RootCategories wraps the raw Get_RootCategories call.
-func (self ISearchResult) Get_RootCategories(retval **systemupdateagent.ICategoryCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RootCategories(retval)))
+func (self ISearchResult) Get_RootCategories() (*systemupdateagent.ICategoryCollection, error) {
+	var _retval *systemupdateagent.ICategoryCollection
+	_hr := self.Raw.Get_RootCategories(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Updates wraps the raw Get_Updates call.
-func (self ISearchResult) Get_Updates(retval **systemupdateagent.IUpdateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Updates(retval)))
+func (self ISearchResult) Get_Updates() (*systemupdateagent.IUpdateCollection, error) {
+	var _retval *systemupdateagent.IUpdateCollection
+	_hr := self.Raw.Get_Updates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Warnings wraps the raw Get_Warnings call.
-func (self ISearchResult) Get_Warnings(retval **systemupdateagent.IUpdateExceptionCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Warnings(retval)))
+func (self ISearchResult) Get_Warnings() (*systemupdateagent.IUpdateExceptionCollection, error) {
+	var _retval *systemupdateagent.IUpdateExceptionCollection
+	_hr := self.Raw.Get_Warnings(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IStringCollection is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IStringCollection with error-returning methods.
@@ -835,8 +977,10 @@ func WrapIStringCollection(raw *systemupdateagent.IStringCollection) IStringColl
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IStringCollection) Get_Item(index int32, retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, retval)))
+func (self IStringCollection) Get_Item(index int32) (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Item(index, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Item wraps the raw Put_Item call.
@@ -845,23 +989,31 @@ func (self IStringCollection) Put_Item(index int32, value foundation.BSTR) error
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IStringCollection) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IStringCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IStringCollection) Get_Count(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(retval)))
+func (self IStringCollection) Get_Count() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Count(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReadOnly wraps the raw Get_ReadOnly call.
-func (self IStringCollection) Get_ReadOnly(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReadOnly(retval)))
+func (self IStringCollection) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ReadOnly(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self IStringCollection) Add(value foundation.BSTR, retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Add(value, retval)))
+func (self IStringCollection) Add(value foundation.BSTR) (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Add(value, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Clear wraps the raw Clear call.
@@ -870,8 +1022,10 @@ func (self IStringCollection) Clear() error {
 }
 
 // Copy wraps the raw Copy call.
-func (self IStringCollection) Copy(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Copy(retval)))
+func (self IStringCollection) Copy() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Copy(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Insert wraps the raw Insert call.
@@ -896,13 +1050,17 @@ func WrapISystemInformation(raw *systemupdateagent.ISystemInformation) ISystemIn
 }
 
 // Get_OemHardwareSupportLink wraps the raw Get_OemHardwareSupportLink call.
-func (self ISystemInformation) Get_OemHardwareSupportLink(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OemHardwareSupportLink(retval)))
+func (self ISystemInformation) Get_OemHardwareSupportLink() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_OemHardwareSupportLink(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RebootRequired wraps the raw Get_RebootRequired call.
-func (self ISystemInformation) Get_RebootRequired(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RebootRequired(retval)))
+func (self ISystemInformation) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RebootRequired(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdate is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdate with error-returning methods.
@@ -917,93 +1075,129 @@ func WrapIUpdate(raw *systemupdateagent.IUpdate) IUpdate {
 }
 
 // Get_Title wraps the raw Get_Title call.
-func (self IUpdate) Get_Title(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Title(retval)))
+func (self IUpdate) Get_Title() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Title(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AutoSelectOnWebSites wraps the raw Get_AutoSelectOnWebSites call.
-func (self IUpdate) Get_AutoSelectOnWebSites(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoSelectOnWebSites(retval)))
+func (self IUpdate) Get_AutoSelectOnWebSites() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AutoSelectOnWebSites(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_BundledUpdates wraps the raw Get_BundledUpdates call.
-func (self IUpdate) Get_BundledUpdates(retval **systemupdateagent.IUpdateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BundledUpdates(retval)))
+func (self IUpdate) Get_BundledUpdates() (*systemupdateagent.IUpdateCollection, error) {
+	var _retval *systemupdateagent.IUpdateCollection
+	_hr := self.Raw.Get_BundledUpdates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanRequireSource wraps the raw Get_CanRequireSource call.
-func (self IUpdate) Get_CanRequireSource(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanRequireSource(retval)))
+func (self IUpdate) Get_CanRequireSource() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_CanRequireSource(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Categories wraps the raw Get_Categories call.
-func (self IUpdate) Get_Categories(retval **systemupdateagent.ICategoryCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Categories(retval)))
+func (self IUpdate) Get_Categories() (*systemupdateagent.ICategoryCollection, error) {
+	var _retval *systemupdateagent.ICategoryCollection
+	_hr := self.Raw.Get_Categories(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Deadline wraps the raw Get_Deadline call.
-func (self IUpdate) Get_Deadline(retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Deadline(retval)))
+func (self IUpdate) Get_Deadline() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.Get_Deadline(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DeltaCompressedContentAvailable wraps the raw Get_DeltaCompressedContentAvailable call.
-func (self IUpdate) Get_DeltaCompressedContentAvailable(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DeltaCompressedContentAvailable(retval)))
+func (self IUpdate) Get_DeltaCompressedContentAvailable() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_DeltaCompressedContentAvailable(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DeltaCompressedContentPreferred wraps the raw Get_DeltaCompressedContentPreferred call.
-func (self IUpdate) Get_DeltaCompressedContentPreferred(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DeltaCompressedContentPreferred(retval)))
+func (self IUpdate) Get_DeltaCompressedContentPreferred() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_DeltaCompressedContentPreferred(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IUpdate) Get_Description(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(retval)))
+func (self IUpdate) Get_Description() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Description(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EulaAccepted wraps the raw Get_EulaAccepted call.
-func (self IUpdate) Get_EulaAccepted(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EulaAccepted(retval)))
+func (self IUpdate) Get_EulaAccepted() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_EulaAccepted(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EulaText wraps the raw Get_EulaText call.
-func (self IUpdate) Get_EulaText(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EulaText(retval)))
+func (self IUpdate) Get_EulaText() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_EulaText(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HandlerID wraps the raw Get_HandlerID call.
-func (self IUpdate) Get_HandlerID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HandlerID(retval)))
+func (self IUpdate) Get_HandlerID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_HandlerID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Identity wraps the raw Get_Identity call.
-func (self IUpdate) Get_Identity(retval **systemupdateagent.IUpdateIdentity) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Identity(retval)))
+func (self IUpdate) Get_Identity() (*systemupdateagent.IUpdateIdentity, error) {
+	var _retval *systemupdateagent.IUpdateIdentity
+	_hr := self.Raw.Get_Identity(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Image wraps the raw Get_Image call.
-func (self IUpdate) Get_Image(retval **systemupdateagent.IImageInformation) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Image(retval)))
+func (self IUpdate) Get_Image() (*systemupdateagent.IImageInformation, error) {
+	var _retval *systemupdateagent.IImageInformation
+	_hr := self.Raw.Get_Image(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InstallationBehavior wraps the raw Get_InstallationBehavior call.
-func (self IUpdate) Get_InstallationBehavior(retval **systemupdateagent.IInstallationBehavior) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InstallationBehavior(retval)))
+func (self IUpdate) Get_InstallationBehavior() (*systemupdateagent.IInstallationBehavior, error) {
+	var _retval *systemupdateagent.IInstallationBehavior
+	_hr := self.Raw.Get_InstallationBehavior(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsBeta wraps the raw Get_IsBeta call.
-func (self IUpdate) Get_IsBeta(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsBeta(retval)))
+func (self IUpdate) Get_IsBeta() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsBeta(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsDownloaded wraps the raw Get_IsDownloaded call.
-func (self IUpdate) Get_IsDownloaded(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsDownloaded(retval)))
+func (self IUpdate) Get_IsDownloaded() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsDownloaded(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsHidden wraps the raw Get_IsHidden call.
-func (self IUpdate) Get_IsHidden(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsHidden(retval)))
+func (self IUpdate) Get_IsHidden() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsHidden(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsHidden wraps the raw Put_IsHidden call.
@@ -1012,108 +1206,150 @@ func (self IUpdate) Put_IsHidden(value foundation.VARIANT_BOOL) error {
 }
 
 // Get_IsInstalled wraps the raw Get_IsInstalled call.
-func (self IUpdate) Get_IsInstalled(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsInstalled(retval)))
+func (self IUpdate) Get_IsInstalled() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsInstalled(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsMandatory wraps the raw Get_IsMandatory call.
-func (self IUpdate) Get_IsMandatory(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsMandatory(retval)))
+func (self IUpdate) Get_IsMandatory() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsMandatory(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsUninstallable wraps the raw Get_IsUninstallable call.
-func (self IUpdate) Get_IsUninstallable(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsUninstallable(retval)))
+func (self IUpdate) Get_IsUninstallable() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsUninstallable(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Languages wraps the raw Get_Languages call.
-func (self IUpdate) Get_Languages(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Languages(retval)))
+func (self IUpdate) Get_Languages() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_Languages(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastDeploymentChangeTime wraps the raw Get_LastDeploymentChangeTime call.
-func (self IUpdate) Get_LastDeploymentChangeTime(retval *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastDeploymentChangeTime(retval)))
+func (self IUpdate) Get_LastDeploymentChangeTime() (float64, error) {
+	var _retval float64
+	_hr := self.Raw.Get_LastDeploymentChangeTime(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MaxDownloadSize wraps the raw Get_MaxDownloadSize call.
-func (self IUpdate) Get_MaxDownloadSize(retval *foundation.DECIMAL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxDownloadSize(retval)))
+func (self IUpdate) Get_MaxDownloadSize() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	_hr := self.Raw.Get_MaxDownloadSize(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MinDownloadSize wraps the raw Get_MinDownloadSize call.
-func (self IUpdate) Get_MinDownloadSize(retval *foundation.DECIMAL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinDownloadSize(retval)))
+func (self IUpdate) Get_MinDownloadSize() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	_hr := self.Raw.Get_MinDownloadSize(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MoreInfoUrls wraps the raw Get_MoreInfoUrls call.
-func (self IUpdate) Get_MoreInfoUrls(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MoreInfoUrls(retval)))
+func (self IUpdate) Get_MoreInfoUrls() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_MoreInfoUrls(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MsrcSeverity wraps the raw Get_MsrcSeverity call.
-func (self IUpdate) Get_MsrcSeverity(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MsrcSeverity(retval)))
+func (self IUpdate) Get_MsrcSeverity() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_MsrcSeverity(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RecommendedCpuSpeed wraps the raw Get_RecommendedCpuSpeed call.
-func (self IUpdate) Get_RecommendedCpuSpeed(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RecommendedCpuSpeed(retval)))
+func (self IUpdate) Get_RecommendedCpuSpeed() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_RecommendedCpuSpeed(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RecommendedHardDiskSpace wraps the raw Get_RecommendedHardDiskSpace call.
-func (self IUpdate) Get_RecommendedHardDiskSpace(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RecommendedHardDiskSpace(retval)))
+func (self IUpdate) Get_RecommendedHardDiskSpace() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_RecommendedHardDiskSpace(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RecommendedMemory wraps the raw Get_RecommendedMemory call.
-func (self IUpdate) Get_RecommendedMemory(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RecommendedMemory(retval)))
+func (self IUpdate) Get_RecommendedMemory() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_RecommendedMemory(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReleaseNotes wraps the raw Get_ReleaseNotes call.
-func (self IUpdate) Get_ReleaseNotes(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReleaseNotes(retval)))
+func (self IUpdate) Get_ReleaseNotes() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ReleaseNotes(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SecurityBulletinIDs wraps the raw Get_SecurityBulletinIDs call.
-func (self IUpdate) Get_SecurityBulletinIDs(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SecurityBulletinIDs(retval)))
+func (self IUpdate) Get_SecurityBulletinIDs() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_SecurityBulletinIDs(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SupersededUpdateIDs wraps the raw Get_SupersededUpdateIDs call.
-func (self IUpdate) Get_SupersededUpdateIDs(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SupersededUpdateIDs(retval)))
+func (self IUpdate) Get_SupersededUpdateIDs() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_SupersededUpdateIDs(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SupportUrl wraps the raw Get_SupportUrl call.
-func (self IUpdate) Get_SupportUrl(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SupportUrl(retval)))
+func (self IUpdate) Get_SupportUrl() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_SupportUrl(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IUpdate) Get_Type(retval *systemupdateagent.UpdateType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(retval)))
+func (self IUpdate) Get_Type() (systemupdateagent.UpdateType, error) {
+	var _retval systemupdateagent.UpdateType
+	_hr := self.Raw.Get_Type(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UninstallationNotes wraps the raw Get_UninstallationNotes call.
-func (self IUpdate) Get_UninstallationNotes(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UninstallationNotes(retval)))
+func (self IUpdate) Get_UninstallationNotes() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_UninstallationNotes(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UninstallationBehavior wraps the raw Get_UninstallationBehavior call.
-func (self IUpdate) Get_UninstallationBehavior(retval **systemupdateagent.IInstallationBehavior) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UninstallationBehavior(retval)))
+func (self IUpdate) Get_UninstallationBehavior() (*systemupdateagent.IInstallationBehavior, error) {
+	var _retval *systemupdateagent.IInstallationBehavior
+	_hr := self.Raw.Get_UninstallationBehavior(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UninstallationSteps wraps the raw Get_UninstallationSteps call.
-func (self IUpdate) Get_UninstallationSteps(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UninstallationSteps(retval)))
+func (self IUpdate) Get_UninstallationSteps() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_UninstallationSteps(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_KBArticleIDs wraps the raw Get_KBArticleIDs call.
-func (self IUpdate) Get_KBArticleIDs(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_KBArticleIDs(retval)))
+func (self IUpdate) Get_KBArticleIDs() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_KBArticleIDs(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // AcceptEula wraps the raw AcceptEula call.
@@ -1122,8 +1358,10 @@ func (self IUpdate) AcceptEula() error {
 }
 
 // Get_DeploymentAction wraps the raw Get_DeploymentAction call.
-func (self IUpdate) Get_DeploymentAction(retval *systemupdateagent.DeploymentAction) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DeploymentAction(retval)))
+func (self IUpdate) Get_DeploymentAction() (systemupdateagent.DeploymentAction, error) {
+	var _retval systemupdateagent.DeploymentAction
+	_hr := self.Raw.Get_DeploymentAction(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CopyFromCache wraps the raw CopyFromCache call.
@@ -1132,13 +1370,17 @@ func (self IUpdate) CopyFromCache(path foundation.BSTR, toExtractCabFiles founda
 }
 
 // Get_DownloadPriority wraps the raw Get_DownloadPriority call.
-func (self IUpdate) Get_DownloadPriority(retval *systemupdateagent.DownloadPriority) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadPriority(retval)))
+func (self IUpdate) Get_DownloadPriority() (systemupdateagent.DownloadPriority, error) {
+	var _retval systemupdateagent.DownloadPriority
+	_hr := self.Raw.Get_DownloadPriority(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DownloadContents wraps the raw Get_DownloadContents call.
-func (self IUpdate) Get_DownloadContents(retval **systemupdateagent.IUpdateDownloadContentCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadContents(retval)))
+func (self IUpdate) Get_DownloadContents() (*systemupdateagent.IUpdateDownloadContentCollection, error) {
+	var _retval *systemupdateagent.IUpdateDownloadContentCollection
+	_hr := self.Raw.Get_DownloadContents(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdate2 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdate2 with error-returning methods.
@@ -1153,18 +1395,24 @@ func WrapIUpdate2(raw *systemupdateagent.IUpdate2) IUpdate2 {
 }
 
 // Get_RebootRequired wraps the raw Get_RebootRequired call.
-func (self IUpdate2) Get_RebootRequired(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RebootRequired(retval)))
+func (self IUpdate2) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RebootRequired(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsPresent wraps the raw Get_IsPresent call.
-func (self IUpdate2) Get_IsPresent(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsPresent(retval)))
+func (self IUpdate2) Get_IsPresent() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsPresent(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CveIDs wraps the raw Get_CveIDs call.
-func (self IUpdate2) Get_CveIDs(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CveIDs(retval)))
+func (self IUpdate2) Get_CveIDs() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_CveIDs(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CopyToCache wraps the raw CopyToCache call.
@@ -1184,8 +1432,10 @@ func WrapIUpdate3(raw *systemupdateagent.IUpdate3) IUpdate3 {
 }
 
 // Get_BrowseOnly wraps the raw Get_BrowseOnly call.
-func (self IUpdate3) Get_BrowseOnly(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BrowseOnly(retval)))
+func (self IUpdate3) Get_BrowseOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_BrowseOnly(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdate4 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdate4 with error-returning methods.
@@ -1200,8 +1450,10 @@ func WrapIUpdate4(raw *systemupdateagent.IUpdate4) IUpdate4 {
 }
 
 // Get_PerUser wraps the raw Get_PerUser call.
-func (self IUpdate4) Get_PerUser(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PerUser(retval)))
+func (self IUpdate4) Get_PerUser() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_PerUser(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdate5 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdate5 with error-returning methods.
@@ -1216,13 +1468,17 @@ func WrapIUpdate5(raw *systemupdateagent.IUpdate5) IUpdate5 {
 }
 
 // Get_AutoSelection wraps the raw Get_AutoSelection call.
-func (self IUpdate5) Get_AutoSelection(retval *systemupdateagent.AutoSelectionMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoSelection(retval)))
+func (self IUpdate5) Get_AutoSelection() (systemupdateagent.AutoSelectionMode, error) {
+	var _retval systemupdateagent.AutoSelectionMode
+	_hr := self.Raw.Get_AutoSelection(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AutoDownload wraps the raw Get_AutoDownload call.
-func (self IUpdate5) Get_AutoDownload(retval *systemupdateagent.AutoDownloadMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoDownload(retval)))
+func (self IUpdate5) Get_AutoDownload() (systemupdateagent.AutoDownloadMode, error) {
+	var _retval systemupdateagent.AutoDownloadMode
+	_hr := self.Raw.Get_AutoDownload(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateCollection is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateCollection with error-returning methods.
@@ -1237,8 +1493,10 @@ func WrapIUpdateCollection(raw *systemupdateagent.IUpdateCollection) IUpdateColl
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUpdateCollection) Get_Item(index int32, retval **systemupdateagent.IUpdate) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, retval)))
+func (self IUpdateCollection) Get_Item(index int32) (*systemupdateagent.IUpdate, error) {
+	var _retval *systemupdateagent.IUpdate
+	_hr := self.Raw.Get_Item(index, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Item wraps the raw Put_Item call.
@@ -1247,23 +1505,31 @@ func (self IUpdateCollection) Put_Item(index int32, value *systemupdateagent.IUp
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUpdateCollection) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IUpdateCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IUpdateCollection) Get_Count(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(retval)))
+func (self IUpdateCollection) Get_Count() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Count(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReadOnly wraps the raw Get_ReadOnly call.
-func (self IUpdateCollection) Get_ReadOnly(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReadOnly(retval)))
+func (self IUpdateCollection) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ReadOnly(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self IUpdateCollection) Add(value *systemupdateagent.IUpdate, retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Add(value, retval)))
+func (self IUpdateCollection) Add(value *systemupdateagent.IUpdate) (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Add(value, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Clear wraps the raw Clear call.
@@ -1272,8 +1538,10 @@ func (self IUpdateCollection) Clear() error {
 }
 
 // Copy wraps the raw Copy call.
-func (self IUpdateCollection) Copy(retval **systemupdateagent.IUpdateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Copy(retval)))
+func (self IUpdateCollection) Copy() (*systemupdateagent.IUpdateCollection, error) {
+	var _retval *systemupdateagent.IUpdateCollection
+	_hr := self.Raw.Copy(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Insert wraps the raw Insert call.
@@ -1298,8 +1566,10 @@ func WrapIUpdateDownloadContent(raw *systemupdateagent.IUpdateDownloadContent) I
 }
 
 // Get_DownloadUrl wraps the raw Get_DownloadUrl call.
-func (self IUpdateDownloadContent) Get_DownloadUrl(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadUrl(retval)))
+func (self IUpdateDownloadContent) Get_DownloadUrl() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DownloadUrl(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateDownloadContent2 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateDownloadContent2 with error-returning methods.
@@ -1314,8 +1584,10 @@ func WrapIUpdateDownloadContent2(raw *systemupdateagent.IUpdateDownloadContent2)
 }
 
 // Get_IsDeltaCompressedContent wraps the raw Get_IsDeltaCompressedContent call.
-func (self IUpdateDownloadContent2) Get_IsDeltaCompressedContent(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsDeltaCompressedContent(retval)))
+func (self IUpdateDownloadContent2) Get_IsDeltaCompressedContent() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsDeltaCompressedContent(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateDownloadContentCollection is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateDownloadContentCollection with error-returning methods.
@@ -1330,18 +1602,24 @@ func WrapIUpdateDownloadContentCollection(raw *systemupdateagent.IUpdateDownload
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUpdateDownloadContentCollection) Get_Item(index int32, retval **systemupdateagent.IUpdateDownloadContent) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, retval)))
+func (self IUpdateDownloadContentCollection) Get_Item(index int32) (*systemupdateagent.IUpdateDownloadContent, error) {
+	var _retval *systemupdateagent.IUpdateDownloadContent
+	_hr := self.Raw.Get_Item(index, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUpdateDownloadContentCollection) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IUpdateDownloadContentCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IUpdateDownloadContentCollection) Get_Count(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(retval)))
+func (self IUpdateDownloadContentCollection) Get_Count() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Count(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateDownloadResult is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateDownloadResult with error-returning methods.
@@ -1356,13 +1634,17 @@ func WrapIUpdateDownloadResult(raw *systemupdateagent.IUpdateDownloadResult) IUp
 }
 
 // Get_HResult wraps the raw Get_HResult call.
-func (self IUpdateDownloadResult) Get_HResult(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HResult(retval)))
+func (self IUpdateDownloadResult) Get_HResult() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_HResult(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResultCode wraps the raw Get_ResultCode call.
-func (self IUpdateDownloadResult) Get_ResultCode(retval *systemupdateagent.OperationResultCode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResultCode(retval)))
+func (self IUpdateDownloadResult) Get_ResultCode() (systemupdateagent.OperationResultCode, error) {
+	var _retval systemupdateagent.OperationResultCode
+	_hr := self.Raw.Get_ResultCode(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateDownloader is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateDownloader with error-returning methods.
@@ -1377,8 +1659,10 @@ func WrapIUpdateDownloader(raw *systemupdateagent.IUpdateDownloader) IUpdateDown
 }
 
 // Get_ClientApplicationID wraps the raw Get_ClientApplicationID call.
-func (self IUpdateDownloader) Get_ClientApplicationID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientApplicationID(retval)))
+func (self IUpdateDownloader) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ClientApplicationID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClientApplicationID wraps the raw Put_ClientApplicationID call.
@@ -1387,8 +1671,10 @@ func (self IUpdateDownloader) Put_ClientApplicationID(value foundation.BSTR) err
 }
 
 // Get_IsForced wraps the raw Get_IsForced call.
-func (self IUpdateDownloader) Get_IsForced(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsForced(retval)))
+func (self IUpdateDownloader) Get_IsForced() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsForced(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsForced wraps the raw Put_IsForced call.
@@ -1397,8 +1683,10 @@ func (self IUpdateDownloader) Put_IsForced(value foundation.VARIANT_BOOL) error 
 }
 
 // Get_Priority wraps the raw Get_Priority call.
-func (self IUpdateDownloader) Get_Priority(retval *systemupdateagent.DownloadPriority) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Priority(retval)))
+func (self IUpdateDownloader) Get_Priority() (systemupdateagent.DownloadPriority, error) {
+	var _retval systemupdateagent.DownloadPriority
+	_hr := self.Raw.Get_Priority(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Priority wraps the raw Put_Priority call.
@@ -1407,8 +1695,10 @@ func (self IUpdateDownloader) Put_Priority(value systemupdateagent.DownloadPrior
 }
 
 // Get_Updates wraps the raw Get_Updates call.
-func (self IUpdateDownloader) Get_Updates(retval **systemupdateagent.IUpdateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Updates(retval)))
+func (self IUpdateDownloader) Get_Updates() (*systemupdateagent.IUpdateCollection, error) {
+	var _retval *systemupdateagent.IUpdateCollection
+	_hr := self.Raw.Get_Updates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Updates wraps the raw Put_Updates call.
@@ -1417,13 +1707,17 @@ func (self IUpdateDownloader) Put_Updates(value *systemupdateagent.IUpdateCollec
 }
 
 // Download wraps the raw Download call.
-func (self IUpdateDownloader) Download(retval **systemupdateagent.IDownloadResult) error {
-	return win32.HRESULTError(int32(self.Raw.Download(retval)))
+func (self IUpdateDownloader) Download() (*systemupdateagent.IDownloadResult, error) {
+	var _retval *systemupdateagent.IDownloadResult
+	_hr := self.Raw.Download(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // EndDownload wraps the raw EndDownload call.
-func (self IUpdateDownloader) EndDownload(value *systemupdateagent.IDownloadJob, retval **systemupdateagent.IDownloadResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndDownload(value, retval)))
+func (self IUpdateDownloader) EndDownload(value *systemupdateagent.IDownloadJob) (*systemupdateagent.IDownloadResult, error) {
+	var _retval *systemupdateagent.IDownloadResult
+	_hr := self.Raw.EndDownload(value, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateDownloaderEx is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateDownloaderEx with error-returning methods.
@@ -1438,8 +1732,10 @@ func WrapIUpdateDownloaderEx(raw *systemupdateagent.IUpdateDownloaderEx) IUpdate
 }
 
 // Download2 wraps the raw Download2 call.
-func (self IUpdateDownloaderEx) Download2(downloadType systemupdateagent.DownloadType, retval **systemupdateagent.IDownloadResult) error {
-	return win32.HRESULTError(int32(self.Raw.Download2(downloadType, retval)))
+func (self IUpdateDownloaderEx) Download2(downloadType systemupdateagent.DownloadType) (*systemupdateagent.IDownloadResult, error) {
+	var _retval *systemupdateagent.IDownloadResult
+	_hr := self.Raw.Download2(downloadType, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateEx is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateEx with error-returning methods.
@@ -1454,13 +1750,17 @@ func WrapIUpdateEx(raw *systemupdateagent.IUpdateEx) IUpdateEx {
 }
 
 // Get_ExtendedStaticProperty wraps the raw Get_ExtendedStaticProperty call.
-func (self IUpdateEx) Get_ExtendedStaticProperty(propertyName foundation.BSTR, retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExtendedStaticProperty(propertyName, retval)))
+func (self IUpdateEx) Get_ExtendedStaticProperty(propertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.Get_ExtendedStaticProperty(propertyName, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // EvaluateExtendedDynamicProperty wraps the raw EvaluateExtendedDynamicProperty call.
-func (self IUpdateEx) EvaluateExtendedDynamicProperty(propertyName foundation.BSTR, retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.EvaluateExtendedDynamicProperty(propertyName, retval)))
+func (self IUpdateEx) EvaluateExtendedDynamicProperty(propertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.EvaluateExtendedDynamicProperty(propertyName, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateException is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateException with error-returning methods.
@@ -1475,18 +1775,24 @@ func WrapIUpdateException(raw *systemupdateagent.IUpdateException) IUpdateExcept
 }
 
 // Get_Message wraps the raw Get_Message call.
-func (self IUpdateException) Get_Message(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Message(retval)))
+func (self IUpdateException) Get_Message() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Message(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HResult wraps the raw Get_HResult call.
-func (self IUpdateException) Get_HResult(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HResult(retval)))
+func (self IUpdateException) Get_HResult() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_HResult(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Context wraps the raw Get_Context call.
-func (self IUpdateException) Get_Context(retval *systemupdateagent.UpdateExceptionContext) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Context(retval)))
+func (self IUpdateException) Get_Context() (systemupdateagent.UpdateExceptionContext, error) {
+	var _retval systemupdateagent.UpdateExceptionContext
+	_hr := self.Raw.Get_Context(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateExceptionCollection is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateExceptionCollection with error-returning methods.
@@ -1501,18 +1807,24 @@ func WrapIUpdateExceptionCollection(raw *systemupdateagent.IUpdateExceptionColle
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUpdateExceptionCollection) Get_Item(index int32, retval **systemupdateagent.IUpdateException) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, retval)))
+func (self IUpdateExceptionCollection) Get_Item(index int32) (*systemupdateagent.IUpdateException, error) {
+	var _retval *systemupdateagent.IUpdateException
+	_hr := self.Raw.Get_Item(index, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUpdateExceptionCollection) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IUpdateExceptionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IUpdateExceptionCollection) Get_Count(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(retval)))
+func (self IUpdateExceptionCollection) Get_Count() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Count(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateHistoryEntry is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateHistoryEntry with error-returning methods.
@@ -1527,73 +1839,101 @@ func WrapIUpdateHistoryEntry(raw *systemupdateagent.IUpdateHistoryEntry) IUpdate
 }
 
 // Get_Operation wraps the raw Get_Operation call.
-func (self IUpdateHistoryEntry) Get_Operation(retval *systemupdateagent.UpdateOperation) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Operation(retval)))
+func (self IUpdateHistoryEntry) Get_Operation() (systemupdateagent.UpdateOperation, error) {
+	var _retval systemupdateagent.UpdateOperation
+	_hr := self.Raw.Get_Operation(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResultCode wraps the raw Get_ResultCode call.
-func (self IUpdateHistoryEntry) Get_ResultCode(retval *systemupdateagent.OperationResultCode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResultCode(retval)))
+func (self IUpdateHistoryEntry) Get_ResultCode() (systemupdateagent.OperationResultCode, error) {
+	var _retval systemupdateagent.OperationResultCode
+	_hr := self.Raw.Get_ResultCode(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HResult wraps the raw Get_HResult call.
-func (self IUpdateHistoryEntry) Get_HResult(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HResult(retval)))
+func (self IUpdateHistoryEntry) Get_HResult() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_HResult(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Date wraps the raw Get_Date call.
-func (self IUpdateHistoryEntry) Get_Date(retval *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Date(retval)))
+func (self IUpdateHistoryEntry) Get_Date() (float64, error) {
+	var _retval float64
+	_hr := self.Raw.Get_Date(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UpdateIdentity wraps the raw Get_UpdateIdentity call.
-func (self IUpdateHistoryEntry) Get_UpdateIdentity(retval **systemupdateagent.IUpdateIdentity) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UpdateIdentity(retval)))
+func (self IUpdateHistoryEntry) Get_UpdateIdentity() (*systemupdateagent.IUpdateIdentity, error) {
+	var _retval *systemupdateagent.IUpdateIdentity
+	_hr := self.Raw.Get_UpdateIdentity(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Title wraps the raw Get_Title call.
-func (self IUpdateHistoryEntry) Get_Title(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Title(retval)))
+func (self IUpdateHistoryEntry) Get_Title() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Title(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IUpdateHistoryEntry) Get_Description(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(retval)))
+func (self IUpdateHistoryEntry) Get_Description() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Description(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UnmappedResultCode wraps the raw Get_UnmappedResultCode call.
-func (self IUpdateHistoryEntry) Get_UnmappedResultCode(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UnmappedResultCode(retval)))
+func (self IUpdateHistoryEntry) Get_UnmappedResultCode() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_UnmappedResultCode(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClientApplicationID wraps the raw Get_ClientApplicationID call.
-func (self IUpdateHistoryEntry) Get_ClientApplicationID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientApplicationID(retval)))
+func (self IUpdateHistoryEntry) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ClientApplicationID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServerSelection wraps the raw Get_ServerSelection call.
-func (self IUpdateHistoryEntry) Get_ServerSelection(retval *systemupdateagent.ServerSelection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServerSelection(retval)))
+func (self IUpdateHistoryEntry) Get_ServerSelection() (systemupdateagent.ServerSelection, error) {
+	var _retval systemupdateagent.ServerSelection
+	_hr := self.Raw.Get_ServerSelection(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServiceID wraps the raw Get_ServiceID call.
-func (self IUpdateHistoryEntry) Get_ServiceID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceID(retval)))
+func (self IUpdateHistoryEntry) Get_ServiceID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ServiceID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UninstallationSteps wraps the raw Get_UninstallationSteps call.
-func (self IUpdateHistoryEntry) Get_UninstallationSteps(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UninstallationSteps(retval)))
+func (self IUpdateHistoryEntry) Get_UninstallationSteps() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_UninstallationSteps(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UninstallationNotes wraps the raw Get_UninstallationNotes call.
-func (self IUpdateHistoryEntry) Get_UninstallationNotes(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UninstallationNotes(retval)))
+func (self IUpdateHistoryEntry) Get_UninstallationNotes() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_UninstallationNotes(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SupportUrl wraps the raw Get_SupportUrl call.
-func (self IUpdateHistoryEntry) Get_SupportUrl(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SupportUrl(retval)))
+func (self IUpdateHistoryEntry) Get_SupportUrl() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_SupportUrl(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateHistoryEntry2 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateHistoryEntry2 with error-returning methods.
@@ -1608,8 +1948,10 @@ func WrapIUpdateHistoryEntry2(raw *systemupdateagent.IUpdateHistoryEntry2) IUpda
 }
 
 // Get_Categories wraps the raw Get_Categories call.
-func (self IUpdateHistoryEntry2) Get_Categories(retval **systemupdateagent.ICategoryCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Categories(retval)))
+func (self IUpdateHistoryEntry2) Get_Categories() (*systemupdateagent.ICategoryCollection, error) {
+	var _retval *systemupdateagent.ICategoryCollection
+	_hr := self.Raw.Get_Categories(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateHistoryEntryCollection is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateHistoryEntryCollection with error-returning methods.
@@ -1624,18 +1966,24 @@ func WrapIUpdateHistoryEntryCollection(raw *systemupdateagent.IUpdateHistoryEntr
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUpdateHistoryEntryCollection) Get_Item(index int32, retval **systemupdateagent.IUpdateHistoryEntry) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, retval)))
+func (self IUpdateHistoryEntryCollection) Get_Item(index int32) (*systemupdateagent.IUpdateHistoryEntry, error) {
+	var _retval *systemupdateagent.IUpdateHistoryEntry
+	_hr := self.Raw.Get_Item(index, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUpdateHistoryEntryCollection) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IUpdateHistoryEntryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IUpdateHistoryEntryCollection) Get_Count(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(retval)))
+func (self IUpdateHistoryEntryCollection) Get_Count() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Count(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateIdentity is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateIdentity with error-returning methods.
@@ -1650,13 +1998,17 @@ func WrapIUpdateIdentity(raw *systemupdateagent.IUpdateIdentity) IUpdateIdentity
 }
 
 // Get_RevisionNumber wraps the raw Get_RevisionNumber call.
-func (self IUpdateIdentity) Get_RevisionNumber(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RevisionNumber(retval)))
+func (self IUpdateIdentity) Get_RevisionNumber() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_RevisionNumber(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UpdateID wraps the raw Get_UpdateID call.
-func (self IUpdateIdentity) Get_UpdateID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UpdateID(retval)))
+func (self IUpdateIdentity) Get_UpdateID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_UpdateID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateInstallationResult is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateInstallationResult with error-returning methods.
@@ -1671,18 +2023,24 @@ func WrapIUpdateInstallationResult(raw *systemupdateagent.IUpdateInstallationRes
 }
 
 // Get_HResult wraps the raw Get_HResult call.
-func (self IUpdateInstallationResult) Get_HResult(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HResult(retval)))
+func (self IUpdateInstallationResult) Get_HResult() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_HResult(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RebootRequired wraps the raw Get_RebootRequired call.
-func (self IUpdateInstallationResult) Get_RebootRequired(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RebootRequired(retval)))
+func (self IUpdateInstallationResult) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RebootRequired(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResultCode wraps the raw Get_ResultCode call.
-func (self IUpdateInstallationResult) Get_ResultCode(retval *systemupdateagent.OperationResultCode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResultCode(retval)))
+func (self IUpdateInstallationResult) Get_ResultCode() (systemupdateagent.OperationResultCode, error) {
+	var _retval systemupdateagent.OperationResultCode
+	_hr := self.Raw.Get_ResultCode(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateInstaller is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateInstaller with error-returning methods.
@@ -1697,8 +2055,10 @@ func WrapIUpdateInstaller(raw *systemupdateagent.IUpdateInstaller) IUpdateInstal
 }
 
 // Get_ClientApplicationID wraps the raw Get_ClientApplicationID call.
-func (self IUpdateInstaller) Get_ClientApplicationID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientApplicationID(retval)))
+func (self IUpdateInstaller) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ClientApplicationID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClientApplicationID wraps the raw Put_ClientApplicationID call.
@@ -1707,8 +2067,10 @@ func (self IUpdateInstaller) Put_ClientApplicationID(value foundation.BSTR) erro
 }
 
 // Get_IsForced wraps the raw Get_IsForced call.
-func (self IUpdateInstaller) Get_IsForced(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsForced(retval)))
+func (self IUpdateInstaller) Get_IsForced() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsForced(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsForced wraps the raw Put_IsForced call.
@@ -1717,8 +2079,10 @@ func (self IUpdateInstaller) Put_IsForced(value foundation.VARIANT_BOOL) error {
 }
 
 // Get_ParentHwnd wraps the raw Get_ParentHwnd call.
-func (self IUpdateInstaller) Get_ParentHwnd(retval *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ParentHwnd(retval)))
+func (self IUpdateInstaller) Get_ParentHwnd() (foundation.HWND, error) {
+	var _retval foundation.HWND
+	_hr := self.Raw.Get_ParentHwnd(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ParentHwnd wraps the raw Put_ParentHwnd call.
@@ -1732,13 +2096,17 @@ func (self IUpdateInstaller) Put_ParentWindow(value *systemcom.IUnknown) error {
 }
 
 // Get_ParentWindow wraps the raw Get_ParentWindow call.
-func (self IUpdateInstaller) Get_ParentWindow(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ParentWindow(retval)))
+func (self IUpdateInstaller) Get_ParentWindow() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get_ParentWindow(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Updates wraps the raw Get_Updates call.
-func (self IUpdateInstaller) Get_Updates(retval **systemupdateagent.IUpdateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Updates(retval)))
+func (self IUpdateInstaller) Get_Updates() (*systemupdateagent.IUpdateCollection, error) {
+	var _retval *systemupdateagent.IUpdateCollection
+	_hr := self.Raw.Get_Updates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Updates wraps the raw Put_Updates call.
@@ -1747,38 +2115,52 @@ func (self IUpdateInstaller) Put_Updates(value *systemupdateagent.IUpdateCollect
 }
 
 // EndInstall wraps the raw EndInstall call.
-func (self IUpdateInstaller) EndInstall(value *systemupdateagent.IInstallationJob, retval **systemupdateagent.IInstallationResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndInstall(value, retval)))
+func (self IUpdateInstaller) EndInstall(value *systemupdateagent.IInstallationJob) (*systemupdateagent.IInstallationResult, error) {
+	var _retval *systemupdateagent.IInstallationResult
+	_hr := self.Raw.EndInstall(value, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // EndUninstall wraps the raw EndUninstall call.
-func (self IUpdateInstaller) EndUninstall(value *systemupdateagent.IInstallationJob, retval **systemupdateagent.IInstallationResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndUninstall(value, retval)))
+func (self IUpdateInstaller) EndUninstall(value *systemupdateagent.IInstallationJob) (*systemupdateagent.IInstallationResult, error) {
+	var _retval *systemupdateagent.IInstallationResult
+	_hr := self.Raw.EndUninstall(value, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Install wraps the raw Install call.
-func (self IUpdateInstaller) Install(retval **systemupdateagent.IInstallationResult) error {
-	return win32.HRESULTError(int32(self.Raw.Install(retval)))
+func (self IUpdateInstaller) Install() (*systemupdateagent.IInstallationResult, error) {
+	var _retval *systemupdateagent.IInstallationResult
+	_hr := self.Raw.Install(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // RunWizard wraps the raw RunWizard call.
-func (self IUpdateInstaller) RunWizard(dialogTitle foundation.BSTR, retval **systemupdateagent.IInstallationResult) error {
-	return win32.HRESULTError(int32(self.Raw.RunWizard(dialogTitle, retval)))
+func (self IUpdateInstaller) RunWizard(dialogTitle foundation.BSTR) (*systemupdateagent.IInstallationResult, error) {
+	var _retval *systemupdateagent.IInstallationResult
+	_hr := self.Raw.RunWizard(dialogTitle, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsBusy wraps the raw Get_IsBusy call.
-func (self IUpdateInstaller) Get_IsBusy(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsBusy(retval)))
+func (self IUpdateInstaller) Get_IsBusy() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsBusy(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Uninstall wraps the raw Uninstall call.
-func (self IUpdateInstaller) Uninstall(retval **systemupdateagent.IInstallationResult) error {
-	return win32.HRESULTError(int32(self.Raw.Uninstall(retval)))
+func (self IUpdateInstaller) Uninstall() (*systemupdateagent.IInstallationResult, error) {
+	var _retval *systemupdateagent.IInstallationResult
+	_hr := self.Raw.Uninstall(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AllowSourcePrompts wraps the raw Get_AllowSourcePrompts call.
-func (self IUpdateInstaller) Get_AllowSourcePrompts(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowSourcePrompts(retval)))
+func (self IUpdateInstaller) Get_AllowSourcePrompts() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowSourcePrompts(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowSourcePrompts wraps the raw Put_AllowSourcePrompts call.
@@ -1787,8 +2169,10 @@ func (self IUpdateInstaller) Put_AllowSourcePrompts(value foundation.VARIANT_BOO
 }
 
 // Get_RebootRequiredBeforeInstallation wraps the raw Get_RebootRequiredBeforeInstallation call.
-func (self IUpdateInstaller) Get_RebootRequiredBeforeInstallation(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RebootRequiredBeforeInstallation(retval)))
+func (self IUpdateInstaller) Get_RebootRequiredBeforeInstallation() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RebootRequiredBeforeInstallation(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateInstaller2 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateInstaller2 with error-returning methods.
@@ -1803,8 +2187,10 @@ func WrapIUpdateInstaller2(raw *systemupdateagent.IUpdateInstaller2) IUpdateInst
 }
 
 // Get_ForceQuiet wraps the raw Get_ForceQuiet call.
-func (self IUpdateInstaller2) Get_ForceQuiet(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ForceQuiet(retval)))
+func (self IUpdateInstaller2) Get_ForceQuiet() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ForceQuiet(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ForceQuiet wraps the raw Put_ForceQuiet call.
@@ -1824,8 +2210,10 @@ func WrapIUpdateInstaller3(raw *systemupdateagent.IUpdateInstaller3) IUpdateInst
 }
 
 // Get_AttemptCloseAppsIfNecessary wraps the raw Get_AttemptCloseAppsIfNecessary call.
-func (self IUpdateInstaller3) Get_AttemptCloseAppsIfNecessary(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AttemptCloseAppsIfNecessary(retval)))
+func (self IUpdateInstaller3) Get_AttemptCloseAppsIfNecessary() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AttemptCloseAppsIfNecessary(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AttemptCloseAppsIfNecessary wraps the raw Put_AttemptCloseAppsIfNecessary call.
@@ -1877,8 +2265,10 @@ func WrapIUpdateSearcher(raw *systemupdateagent.IUpdateSearcher) IUpdateSearcher
 }
 
 // Get_CanAutomaticallyUpgradeService wraps the raw Get_CanAutomaticallyUpgradeService call.
-func (self IUpdateSearcher) Get_CanAutomaticallyUpgradeService(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanAutomaticallyUpgradeService(retval)))
+func (self IUpdateSearcher) Get_CanAutomaticallyUpgradeService() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_CanAutomaticallyUpgradeService(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CanAutomaticallyUpgradeService wraps the raw Put_CanAutomaticallyUpgradeService call.
@@ -1887,8 +2277,10 @@ func (self IUpdateSearcher) Put_CanAutomaticallyUpgradeService(value foundation.
 }
 
 // Get_ClientApplicationID wraps the raw Get_ClientApplicationID call.
-func (self IUpdateSearcher) Get_ClientApplicationID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientApplicationID(retval)))
+func (self IUpdateSearcher) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ClientApplicationID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClientApplicationID wraps the raw Put_ClientApplicationID call.
@@ -1897,8 +2289,10 @@ func (self IUpdateSearcher) Put_ClientApplicationID(value foundation.BSTR) error
 }
 
 // Get_IncludePotentiallySupersededUpdates wraps the raw Get_IncludePotentiallySupersededUpdates call.
-func (self IUpdateSearcher) Get_IncludePotentiallySupersededUpdates(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IncludePotentiallySupersededUpdates(retval)))
+func (self IUpdateSearcher) Get_IncludePotentiallySupersededUpdates() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IncludePotentiallySupersededUpdates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IncludePotentiallySupersededUpdates wraps the raw Put_IncludePotentiallySupersededUpdates call.
@@ -1907,8 +2301,10 @@ func (self IUpdateSearcher) Put_IncludePotentiallySupersededUpdates(value founda
 }
 
 // Get_ServerSelection wraps the raw Get_ServerSelection call.
-func (self IUpdateSearcher) Get_ServerSelection(retval *systemupdateagent.ServerSelection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServerSelection(retval)))
+func (self IUpdateSearcher) Get_ServerSelection() (systemupdateagent.ServerSelection, error) {
+	var _retval systemupdateagent.ServerSelection
+	_hr := self.Raw.Get_ServerSelection(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ServerSelection wraps the raw Put_ServerSelection call.
@@ -1917,28 +2313,38 @@ func (self IUpdateSearcher) Put_ServerSelection(value systemupdateagent.ServerSe
 }
 
 // EndSearch wraps the raw EndSearch call.
-func (self IUpdateSearcher) EndSearch(searchJob *systemupdateagent.ISearchJob, retval **systemupdateagent.ISearchResult) error {
-	return win32.HRESULTError(int32(self.Raw.EndSearch(searchJob, retval)))
+func (self IUpdateSearcher) EndSearch(searchJob *systemupdateagent.ISearchJob) (*systemupdateagent.ISearchResult, error) {
+	var _retval *systemupdateagent.ISearchResult
+	_hr := self.Raw.EndSearch(searchJob, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // EscapeString wraps the raw EscapeString call.
-func (self IUpdateSearcher) EscapeString(unescaped foundation.BSTR, retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.EscapeString(unescaped, retval)))
+func (self IUpdateSearcher) EscapeString(unescaped foundation.BSTR) (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.EscapeString(unescaped, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // QueryHistory wraps the raw QueryHistory call.
-func (self IUpdateSearcher) QueryHistory(startIndex int32, count int32, retval **systemupdateagent.IUpdateHistoryEntryCollection) error {
-	return win32.HRESULTError(int32(self.Raw.QueryHistory(startIndex, count, retval)))
+func (self IUpdateSearcher) QueryHistory(startIndex int32, count int32) (*systemupdateagent.IUpdateHistoryEntryCollection, error) {
+	var _retval *systemupdateagent.IUpdateHistoryEntryCollection
+	_hr := self.Raw.QueryHistory(startIndex, count, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Search wraps the raw Search call.
-func (self IUpdateSearcher) Search(criteria foundation.BSTR, retval **systemupdateagent.ISearchResult) error {
-	return win32.HRESULTError(int32(self.Raw.Search(criteria, retval)))
+func (self IUpdateSearcher) Search(criteria foundation.BSTR) (*systemupdateagent.ISearchResult, error) {
+	var _retval *systemupdateagent.ISearchResult
+	_hr := self.Raw.Search(criteria, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Online wraps the raw Get_Online call.
-func (self IUpdateSearcher) Get_Online(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Online(retval)))
+func (self IUpdateSearcher) Get_Online() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Online(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Online wraps the raw Put_Online call.
@@ -1947,13 +2353,17 @@ func (self IUpdateSearcher) Put_Online(value foundation.VARIANT_BOOL) error {
 }
 
 // GetTotalHistoryCount wraps the raw GetTotalHistoryCount call.
-func (self IUpdateSearcher) GetTotalHistoryCount(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetTotalHistoryCount(retval)))
+func (self IUpdateSearcher) GetTotalHistoryCount() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.GetTotalHistoryCount(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServiceID wraps the raw Get_ServiceID call.
-func (self IUpdateSearcher) Get_ServiceID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceID(retval)))
+func (self IUpdateSearcher) Get_ServiceID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ServiceID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ServiceID wraps the raw Put_ServiceID call.
@@ -1973,8 +2383,10 @@ func WrapIUpdateSearcher2(raw *systemupdateagent.IUpdateSearcher2) IUpdateSearch
 }
 
 // Get_IgnoreDownloadPriority wraps the raw Get_IgnoreDownloadPriority call.
-func (self IUpdateSearcher2) Get_IgnoreDownloadPriority(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IgnoreDownloadPriority(retval)))
+func (self IUpdateSearcher2) Get_IgnoreDownloadPriority() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IgnoreDownloadPriority(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IgnoreDownloadPriority wraps the raw Put_IgnoreDownloadPriority call.
@@ -1994,8 +2406,10 @@ func WrapIUpdateSearcher3(raw *systemupdateagent.IUpdateSearcher3) IUpdateSearch
 }
 
 // Get_SearchScope wraps the raw Get_SearchScope call.
-func (self IUpdateSearcher3) Get_SearchScope(retval *systemupdateagent.SearchScope) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SearchScope(retval)))
+func (self IUpdateSearcher3) Get_SearchScope() (systemupdateagent.SearchScope, error) {
+	var _retval systemupdateagent.SearchScope
+	_hr := self.Raw.Get_SearchScope(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SearchScope wraps the raw Put_SearchScope call.
@@ -2015,68 +2429,94 @@ func WrapIUpdateService(raw *systemupdateagent.IUpdateService) IUpdateService {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IUpdateService) Get_Name(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(retval)))
+func (self IUpdateService) Get_Name() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Name(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ContentValidationCert wraps the raw Get_ContentValidationCert call.
-func (self IUpdateService) Get_ContentValidationCert(retval *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ContentValidationCert(retval)))
+func (self IUpdateService) Get_ContentValidationCert() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	_hr := self.Raw.Get_ContentValidationCert(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ExpirationDate wraps the raw Get_ExpirationDate call.
-func (self IUpdateService) Get_ExpirationDate(retval *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExpirationDate(retval)))
+func (self IUpdateService) Get_ExpirationDate() (float64, error) {
+	var _retval float64
+	_hr := self.Raw.Get_ExpirationDate(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsManaged wraps the raw Get_IsManaged call.
-func (self IUpdateService) Get_IsManaged(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsManaged(retval)))
+func (self IUpdateService) Get_IsManaged() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsManaged(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsRegisteredWithAU wraps the raw Get_IsRegisteredWithAU call.
-func (self IUpdateService) Get_IsRegisteredWithAU(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsRegisteredWithAU(retval)))
+func (self IUpdateService) Get_IsRegisteredWithAU() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsRegisteredWithAU(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IssueDate wraps the raw Get_IssueDate call.
-func (self IUpdateService) Get_IssueDate(retval *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IssueDate(retval)))
+func (self IUpdateService) Get_IssueDate() (float64, error) {
+	var _retval float64
+	_hr := self.Raw.Get_IssueDate(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_OffersWindowsUpdates wraps the raw Get_OffersWindowsUpdates call.
-func (self IUpdateService) Get_OffersWindowsUpdates(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OffersWindowsUpdates(retval)))
+func (self IUpdateService) Get_OffersWindowsUpdates() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_OffersWindowsUpdates(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RedirectUrls wraps the raw Get_RedirectUrls call.
-func (self IUpdateService) Get_RedirectUrls(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RedirectUrls(retval)))
+func (self IUpdateService) Get_RedirectUrls() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_RedirectUrls(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServiceID wraps the raw Get_ServiceID call.
-func (self IUpdateService) Get_ServiceID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceID(retval)))
+func (self IUpdateService) Get_ServiceID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ServiceID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsScanPackageService wraps the raw Get_IsScanPackageService call.
-func (self IUpdateService) Get_IsScanPackageService(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsScanPackageService(retval)))
+func (self IUpdateService) Get_IsScanPackageService() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsScanPackageService(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanRegisterWithAU wraps the raw Get_CanRegisterWithAU call.
-func (self IUpdateService) Get_CanRegisterWithAU(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanRegisterWithAU(retval)))
+func (self IUpdateService) Get_CanRegisterWithAU() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_CanRegisterWithAU(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServiceUrl wraps the raw Get_ServiceUrl call.
-func (self IUpdateService) Get_ServiceUrl(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceUrl(retval)))
+func (self IUpdateService) Get_ServiceUrl() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ServiceUrl(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SetupPrefix wraps the raw Get_SetupPrefix call.
-func (self IUpdateService) Get_SetupPrefix(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SetupPrefix(retval)))
+func (self IUpdateService) Get_SetupPrefix() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_SetupPrefix(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateService2 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateService2 with error-returning methods.
@@ -2091,8 +2531,10 @@ func WrapIUpdateService2(raw *systemupdateagent.IUpdateService2) IUpdateService2
 }
 
 // Get_IsDefaultAUService wraps the raw Get_IsDefaultAUService call.
-func (self IUpdateService2) Get_IsDefaultAUService(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsDefaultAUService(retval)))
+func (self IUpdateService2) Get_IsDefaultAUService() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsDefaultAUService(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateServiceCollection is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateServiceCollection with error-returning methods.
@@ -2107,18 +2549,24 @@ func WrapIUpdateServiceCollection(raw *systemupdateagent.IUpdateServiceCollectio
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUpdateServiceCollection) Get_Item(index int32, retval **systemupdateagent.IUpdateService) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, retval)))
+func (self IUpdateServiceCollection) Get_Item(index int32) (*systemupdateagent.IUpdateService, error) {
+	var _retval *systemupdateagent.IUpdateService
+	_hr := self.Raw.Get_Item(index, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUpdateServiceCollection) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IUpdateServiceCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IUpdateServiceCollection) Get_Count(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(retval)))
+func (self IUpdateServiceCollection) Get_Count() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Count(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateServiceManager is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateServiceManager with error-returning methods.
@@ -2133,13 +2581,17 @@ func WrapIUpdateServiceManager(raw *systemupdateagent.IUpdateServiceManager) IUp
 }
 
 // Get_Services wraps the raw Get_Services call.
-func (self IUpdateServiceManager) Get_Services(retval **systemupdateagent.IUpdateServiceCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Services(retval)))
+func (self IUpdateServiceManager) Get_Services() (*systemupdateagent.IUpdateServiceCollection, error) {
+	var _retval *systemupdateagent.IUpdateServiceCollection
+	_hr := self.Raw.Get_Services(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // AddService wraps the raw AddService call.
-func (self IUpdateServiceManager) AddService(serviceID foundation.BSTR, authorizationCabPath foundation.BSTR, retval **systemupdateagent.IUpdateService) error {
-	return win32.HRESULTError(int32(self.Raw.AddService(serviceID, authorizationCabPath, retval)))
+func (self IUpdateServiceManager) AddService(serviceID foundation.BSTR, authorizationCabPath foundation.BSTR) (*systemupdateagent.IUpdateService, error) {
+	var _retval *systemupdateagent.IUpdateService
+	_hr := self.Raw.AddService(serviceID, authorizationCabPath, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterServiceWithAU wraps the raw RegisterServiceWithAU call.
@@ -2158,8 +2610,10 @@ func (self IUpdateServiceManager) UnregisterServiceWithAU(serviceID foundation.B
 }
 
 // AddScanPackageService wraps the raw AddScanPackageService call.
-func (self IUpdateServiceManager) AddScanPackageService(serviceName foundation.BSTR, scanFileLocation foundation.BSTR, flags int32, ppService **systemupdateagent.IUpdateService) error {
-	return win32.HRESULTError(int32(self.Raw.AddScanPackageService(serviceName, scanFileLocation, flags, ppService)))
+func (self IUpdateServiceManager) AddScanPackageService(serviceName foundation.BSTR, scanFileLocation foundation.BSTR, flags int32) (*systemupdateagent.IUpdateService, error) {
+	var _ppService *systemupdateagent.IUpdateService
+	_hr := self.Raw.AddScanPackageService(serviceName, scanFileLocation, flags, &_ppService)
+	return _ppService, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateServiceManager2 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateServiceManager2 with error-returning methods.
@@ -2174,8 +2628,10 @@ func WrapIUpdateServiceManager2(raw *systemupdateagent.IUpdateServiceManager2) I
 }
 
 // Get_ClientApplicationID wraps the raw Get_ClientApplicationID call.
-func (self IUpdateServiceManager2) Get_ClientApplicationID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientApplicationID(retval)))
+func (self IUpdateServiceManager2) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ClientApplicationID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClientApplicationID wraps the raw Put_ClientApplicationID call.
@@ -2184,13 +2640,17 @@ func (self IUpdateServiceManager2) Put_ClientApplicationID(value foundation.BSTR
 }
 
 // QueryServiceRegistration wraps the raw QueryServiceRegistration call.
-func (self IUpdateServiceManager2) QueryServiceRegistration(serviceID foundation.BSTR, retval **systemupdateagent.IUpdateServiceRegistration) error {
-	return win32.HRESULTError(int32(self.Raw.QueryServiceRegistration(serviceID, retval)))
+func (self IUpdateServiceManager2) QueryServiceRegistration(serviceID foundation.BSTR) (*systemupdateagent.IUpdateServiceRegistration, error) {
+	var _retval *systemupdateagent.IUpdateServiceRegistration
+	_hr := self.Raw.QueryServiceRegistration(serviceID, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // AddService2 wraps the raw AddService2 call.
-func (self IUpdateServiceManager2) AddService2(serviceID foundation.BSTR, flags int32, authorizationCabPath foundation.BSTR, retval **systemupdateagent.IUpdateServiceRegistration) error {
-	return win32.HRESULTError(int32(self.Raw.AddService2(serviceID, flags, authorizationCabPath, retval)))
+func (self IUpdateServiceManager2) AddService2(serviceID foundation.BSTR, flags int32, authorizationCabPath foundation.BSTR) (*systemupdateagent.IUpdateServiceRegistration, error) {
+	var _retval *systemupdateagent.IUpdateServiceRegistration
+	_hr := self.Raw.AddService2(serviceID, flags, authorizationCabPath, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateServiceRegistration is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateServiceRegistration with error-returning methods.
@@ -2205,23 +2665,31 @@ func WrapIUpdateServiceRegistration(raw *systemupdateagent.IUpdateServiceRegistr
 }
 
 // Get_RegistrationState wraps the raw Get_RegistrationState call.
-func (self IUpdateServiceRegistration) Get_RegistrationState(retval *systemupdateagent.UpdateServiceRegistrationState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RegistrationState(retval)))
+func (self IUpdateServiceRegistration) Get_RegistrationState() (systemupdateagent.UpdateServiceRegistrationState, error) {
+	var _retval systemupdateagent.UpdateServiceRegistrationState
+	_hr := self.Raw.Get_RegistrationState(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServiceID wraps the raw Get_ServiceID call.
-func (self IUpdateServiceRegistration) Get_ServiceID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceID(retval)))
+func (self IUpdateServiceRegistration) Get_ServiceID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ServiceID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsPendingRegistrationWithAU wraps the raw Get_IsPendingRegistrationWithAU call.
-func (self IUpdateServiceRegistration) Get_IsPendingRegistrationWithAU(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsPendingRegistrationWithAU(retval)))
+func (self IUpdateServiceRegistration) Get_IsPendingRegistrationWithAU() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsPendingRegistrationWithAU(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Service wraps the raw Get_Service call.
-func (self IUpdateServiceRegistration) Get_Service(retval **systemupdateagent.IUpdateService2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Service(retval)))
+func (self IUpdateServiceRegistration) Get_Service() (*systemupdateagent.IUpdateService2, error) {
+	var _retval *systemupdateagent.IUpdateService2
+	_hr := self.Raw.Get_Service(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateSession is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateSession with error-returning methods.
@@ -2236,8 +2704,10 @@ func WrapIUpdateSession(raw *systemupdateagent.IUpdateSession) IUpdateSession {
 }
 
 // Get_ClientApplicationID wraps the raw Get_ClientApplicationID call.
-func (self IUpdateSession) Get_ClientApplicationID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientApplicationID(retval)))
+func (self IUpdateSession) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_ClientApplicationID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClientApplicationID wraps the raw Put_ClientApplicationID call.
@@ -2246,13 +2716,17 @@ func (self IUpdateSession) Put_ClientApplicationID(value foundation.BSTR) error 
 }
 
 // Get_ReadOnly wraps the raw Get_ReadOnly call.
-func (self IUpdateSession) Get_ReadOnly(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReadOnly(retval)))
+func (self IUpdateSession) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ReadOnly(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_WebProxy wraps the raw Get_WebProxy call.
-func (self IUpdateSession) Get_WebProxy(retval **systemupdateagent.IWebProxy) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WebProxy(retval)))
+func (self IUpdateSession) Get_WebProxy() (*systemupdateagent.IWebProxy, error) {
+	var _retval *systemupdateagent.IWebProxy
+	_hr := self.Raw.Get_WebProxy(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_WebProxy wraps the raw Put_WebProxy call.
@@ -2261,18 +2735,24 @@ func (self IUpdateSession) Put_WebProxy(value *systemupdateagent.IWebProxy) erro
 }
 
 // CreateUpdateSearcher wraps the raw CreateUpdateSearcher call.
-func (self IUpdateSession) CreateUpdateSearcher(retval **systemupdateagent.IUpdateSearcher) error {
-	return win32.HRESULTError(int32(self.Raw.CreateUpdateSearcher(retval)))
+func (self IUpdateSession) CreateUpdateSearcher() (*systemupdateagent.IUpdateSearcher, error) {
+	var _retval *systemupdateagent.IUpdateSearcher
+	_hr := self.Raw.CreateUpdateSearcher(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CreateUpdateDownloader wraps the raw CreateUpdateDownloader call.
-func (self IUpdateSession) CreateUpdateDownloader(retval **systemupdateagent.IUpdateDownloader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateUpdateDownloader(retval)))
+func (self IUpdateSession) CreateUpdateDownloader() (*systemupdateagent.IUpdateDownloader, error) {
+	var _retval *systemupdateagent.IUpdateDownloader
+	_hr := self.Raw.CreateUpdateDownloader(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CreateUpdateInstaller wraps the raw CreateUpdateInstaller call.
-func (self IUpdateSession) CreateUpdateInstaller(retval **systemupdateagent.IUpdateInstaller) error {
-	return win32.HRESULTError(int32(self.Raw.CreateUpdateInstaller(retval)))
+func (self IUpdateSession) CreateUpdateInstaller() (*systemupdateagent.IUpdateInstaller, error) {
+	var _retval *systemupdateagent.IUpdateInstaller
+	_hr := self.Raw.CreateUpdateInstaller(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IUpdateSession2 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IUpdateSession2 with error-returning methods.
@@ -2287,8 +2767,10 @@ func WrapIUpdateSession2(raw *systemupdateagent.IUpdateSession2) IUpdateSession2
 }
 
 // Get_UserLocale wraps the raw Get_UserLocale call.
-func (self IUpdateSession2) Get_UserLocale(retval *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserLocale(retval)))
+func (self IUpdateSession2) Get_UserLocale() (uint32, error) {
+	var _retval uint32
+	_hr := self.Raw.Get_UserLocale(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UserLocale wraps the raw Put_UserLocale call.
@@ -2308,13 +2790,17 @@ func WrapIUpdateSession3(raw *systemupdateagent.IUpdateSession3) IUpdateSession3
 }
 
 // CreateUpdateServiceManager wraps the raw CreateUpdateServiceManager call.
-func (self IUpdateSession3) CreateUpdateServiceManager(retval **systemupdateagent.IUpdateServiceManager2) error {
-	return win32.HRESULTError(int32(self.Raw.CreateUpdateServiceManager(retval)))
+func (self IUpdateSession3) CreateUpdateServiceManager() (*systemupdateagent.IUpdateServiceManager2, error) {
+	var _retval *systemupdateagent.IUpdateServiceManager2
+	_hr := self.Raw.CreateUpdateServiceManager(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // QueryHistory wraps the raw QueryHistory call.
-func (self IUpdateSession3) QueryHistory(criteria foundation.BSTR, startIndex int32, count int32, retval **systemupdateagent.IUpdateHistoryEntryCollection) error {
-	return win32.HRESULTError(int32(self.Raw.QueryHistory(criteria, startIndex, count, retval)))
+func (self IUpdateSession3) QueryHistory(criteria foundation.BSTR, startIndex int32, count int32) (*systemupdateagent.IUpdateHistoryEntryCollection, error) {
+	var _retval *systemupdateagent.IUpdateHistoryEntryCollection
+	_hr := self.Raw.QueryHistory(criteria, startIndex, count, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IWebProxy is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IWebProxy with error-returning methods.
@@ -2329,8 +2815,10 @@ func WrapIWebProxy(raw *systemupdateagent.IWebProxy) IWebProxy {
 }
 
 // Get_Address wraps the raw Get_Address call.
-func (self IWebProxy) Get_Address(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Address(retval)))
+func (self IWebProxy) Get_Address() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_Address(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Address wraps the raw Put_Address call.
@@ -2339,8 +2827,10 @@ func (self IWebProxy) Put_Address(value foundation.BSTR) error {
 }
 
 // Get_BypassList wraps the raw Get_BypassList call.
-func (self IWebProxy) Get_BypassList(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BypassList(retval)))
+func (self IWebProxy) Get_BypassList() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_BypassList(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BypassList wraps the raw Put_BypassList call.
@@ -2349,8 +2839,10 @@ func (self IWebProxy) Put_BypassList(value *systemupdateagent.IStringCollection)
 }
 
 // Get_BypassProxyOnLocal wraps the raw Get_BypassProxyOnLocal call.
-func (self IWebProxy) Get_BypassProxyOnLocal(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BypassProxyOnLocal(retval)))
+func (self IWebProxy) Get_BypassProxyOnLocal() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_BypassProxyOnLocal(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BypassProxyOnLocal wraps the raw Put_BypassProxyOnLocal call.
@@ -2359,13 +2851,17 @@ func (self IWebProxy) Put_BypassProxyOnLocal(value foundation.VARIANT_BOOL) erro
 }
 
 // Get_ReadOnly wraps the raw Get_ReadOnly call.
-func (self IWebProxy) Get_ReadOnly(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReadOnly(retval)))
+func (self IWebProxy) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ReadOnly(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserName wraps the raw Get_UserName call.
-func (self IWebProxy) Get_UserName(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserName(retval)))
+func (self IWebProxy) Get_UserName() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_UserName(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UserName wraps the raw Put_UserName call.
@@ -2389,8 +2885,10 @@ func (self IWebProxy) PromptForCredentialsFromHwnd(parentWindow foundation.HWND,
 }
 
 // Get_AutoDetect wraps the raw Get_AutoDetect call.
-func (self IWebProxy) Get_AutoDetect(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoDetect(retval)))
+func (self IWebProxy) Get_AutoDetect() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AutoDetect(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AutoDetect wraps the raw Put_AutoDetect call.
@@ -2410,43 +2908,59 @@ func WrapIWindowsDriverUpdate(raw *systemupdateagent.IWindowsDriverUpdate) IWind
 }
 
 // Get_DriverClass wraps the raw Get_DriverClass call.
-func (self IWindowsDriverUpdate) Get_DriverClass(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverClass(retval)))
+func (self IWindowsDriverUpdate) Get_DriverClass() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverClass(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverHardwareID wraps the raw Get_DriverHardwareID call.
-func (self IWindowsDriverUpdate) Get_DriverHardwareID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverHardwareID(retval)))
+func (self IWindowsDriverUpdate) Get_DriverHardwareID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverHardwareID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverManufacturer wraps the raw Get_DriverManufacturer call.
-func (self IWindowsDriverUpdate) Get_DriverManufacturer(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverManufacturer(retval)))
+func (self IWindowsDriverUpdate) Get_DriverManufacturer() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverManufacturer(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverModel wraps the raw Get_DriverModel call.
-func (self IWindowsDriverUpdate) Get_DriverModel(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverModel(retval)))
+func (self IWindowsDriverUpdate) Get_DriverModel() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverModel(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverProvider wraps the raw Get_DriverProvider call.
-func (self IWindowsDriverUpdate) Get_DriverProvider(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverProvider(retval)))
+func (self IWindowsDriverUpdate) Get_DriverProvider() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverProvider(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverVerDate wraps the raw Get_DriverVerDate call.
-func (self IWindowsDriverUpdate) Get_DriverVerDate(retval *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverVerDate(retval)))
+func (self IWindowsDriverUpdate) Get_DriverVerDate() (float64, error) {
+	var _retval float64
+	_hr := self.Raw.Get_DriverVerDate(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DeviceProblemNumber wraps the raw Get_DeviceProblemNumber call.
-func (self IWindowsDriverUpdate) Get_DeviceProblemNumber(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DeviceProblemNumber(retval)))
+func (self IWindowsDriverUpdate) Get_DeviceProblemNumber() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_DeviceProblemNumber(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DeviceStatus wraps the raw Get_DeviceStatus call.
-func (self IWindowsDriverUpdate) Get_DeviceStatus(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DeviceStatus(retval)))
+func (self IWindowsDriverUpdate) Get_DeviceStatus() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_DeviceStatus(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsDriverUpdate2 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IWindowsDriverUpdate2 with error-returning methods.
@@ -2461,18 +2975,24 @@ func WrapIWindowsDriverUpdate2(raw *systemupdateagent.IWindowsDriverUpdate2) IWi
 }
 
 // Get_RebootRequired wraps the raw Get_RebootRequired call.
-func (self IWindowsDriverUpdate2) Get_RebootRequired(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RebootRequired(retval)))
+func (self IWindowsDriverUpdate2) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RebootRequired(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsPresent wraps the raw Get_IsPresent call.
-func (self IWindowsDriverUpdate2) Get_IsPresent(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsPresent(retval)))
+func (self IWindowsDriverUpdate2) Get_IsPresent() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsPresent(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CveIDs wraps the raw Get_CveIDs call.
-func (self IWindowsDriverUpdate2) Get_CveIDs(retval **systemupdateagent.IStringCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CveIDs(retval)))
+func (self IWindowsDriverUpdate2) Get_CveIDs() (*systemupdateagent.IStringCollection, error) {
+	var _retval *systemupdateagent.IStringCollection
+	_hr := self.Raw.Get_CveIDs(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CopyToCache wraps the raw CopyToCache call.
@@ -2492,8 +3012,10 @@ func WrapIWindowsDriverUpdate3(raw *systemupdateagent.IWindowsDriverUpdate3) IWi
 }
 
 // Get_BrowseOnly wraps the raw Get_BrowseOnly call.
-func (self IWindowsDriverUpdate3) Get_BrowseOnly(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BrowseOnly(retval)))
+func (self IWindowsDriverUpdate3) Get_BrowseOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_BrowseOnly(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsDriverUpdate4 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IWindowsDriverUpdate4 with error-returning methods.
@@ -2508,13 +3030,17 @@ func WrapIWindowsDriverUpdate4(raw *systemupdateagent.IWindowsDriverUpdate4) IWi
 }
 
 // Get_WindowsDriverUpdateEntries wraps the raw Get_WindowsDriverUpdateEntries call.
-func (self IWindowsDriverUpdate4) Get_WindowsDriverUpdateEntries(retval **systemupdateagent.IWindowsDriverUpdateEntryCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WindowsDriverUpdateEntries(retval)))
+func (self IWindowsDriverUpdate4) Get_WindowsDriverUpdateEntries() (*systemupdateagent.IWindowsDriverUpdateEntryCollection, error) {
+	var _retval *systemupdateagent.IWindowsDriverUpdateEntryCollection
+	_hr := self.Raw.Get_WindowsDriverUpdateEntries(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PerUser wraps the raw Get_PerUser call.
-func (self IWindowsDriverUpdate4) Get_PerUser(retval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PerUser(retval)))
+func (self IWindowsDriverUpdate4) Get_PerUser() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_PerUser(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsDriverUpdate5 is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IWindowsDriverUpdate5 with error-returning methods.
@@ -2529,13 +3055,17 @@ func WrapIWindowsDriverUpdate5(raw *systemupdateagent.IWindowsDriverUpdate5) IWi
 }
 
 // Get_AutoSelection wraps the raw Get_AutoSelection call.
-func (self IWindowsDriverUpdate5) Get_AutoSelection(retval *systemupdateagent.AutoSelectionMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoSelection(retval)))
+func (self IWindowsDriverUpdate5) Get_AutoSelection() (systemupdateagent.AutoSelectionMode, error) {
+	var _retval systemupdateagent.AutoSelectionMode
+	_hr := self.Raw.Get_AutoSelection(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AutoDownload wraps the raw Get_AutoDownload call.
-func (self IWindowsDriverUpdate5) Get_AutoDownload(retval *systemupdateagent.AutoDownloadMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoDownload(retval)))
+func (self IWindowsDriverUpdate5) Get_AutoDownload() (systemupdateagent.AutoDownloadMode, error) {
+	var _retval systemupdateagent.AutoDownloadMode
+	_hr := self.Raw.Get_AutoDownload(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsDriverUpdateEntry is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IWindowsDriverUpdateEntry with error-returning methods.
@@ -2550,43 +3080,59 @@ func WrapIWindowsDriverUpdateEntry(raw *systemupdateagent.IWindowsDriverUpdateEn
 }
 
 // Get_DriverClass wraps the raw Get_DriverClass call.
-func (self IWindowsDriverUpdateEntry) Get_DriverClass(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverClass(retval)))
+func (self IWindowsDriverUpdateEntry) Get_DriverClass() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverClass(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverHardwareID wraps the raw Get_DriverHardwareID call.
-func (self IWindowsDriverUpdateEntry) Get_DriverHardwareID(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverHardwareID(retval)))
+func (self IWindowsDriverUpdateEntry) Get_DriverHardwareID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverHardwareID(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverManufacturer wraps the raw Get_DriverManufacturer call.
-func (self IWindowsDriverUpdateEntry) Get_DriverManufacturer(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverManufacturer(retval)))
+func (self IWindowsDriverUpdateEntry) Get_DriverManufacturer() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverManufacturer(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverModel wraps the raw Get_DriverModel call.
-func (self IWindowsDriverUpdateEntry) Get_DriverModel(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverModel(retval)))
+func (self IWindowsDriverUpdateEntry) Get_DriverModel() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverModel(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverProvider wraps the raw Get_DriverProvider call.
-func (self IWindowsDriverUpdateEntry) Get_DriverProvider(retval *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverProvider(retval)))
+func (self IWindowsDriverUpdateEntry) Get_DriverProvider() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	_hr := self.Raw.Get_DriverProvider(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverVerDate wraps the raw Get_DriverVerDate call.
-func (self IWindowsDriverUpdateEntry) Get_DriverVerDate(retval *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverVerDate(retval)))
+func (self IWindowsDriverUpdateEntry) Get_DriverVerDate() (float64, error) {
+	var _retval float64
+	_hr := self.Raw.Get_DriverVerDate(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DeviceProblemNumber wraps the raw Get_DeviceProblemNumber call.
-func (self IWindowsDriverUpdateEntry) Get_DeviceProblemNumber(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DeviceProblemNumber(retval)))
+func (self IWindowsDriverUpdateEntry) Get_DeviceProblemNumber() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_DeviceProblemNumber(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DeviceStatus wraps the raw Get_DeviceStatus call.
-func (self IWindowsDriverUpdateEntry) Get_DeviceStatus(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DeviceStatus(retval)))
+func (self IWindowsDriverUpdateEntry) Get_DeviceStatus() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_DeviceStatus(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsDriverUpdateEntryCollection is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IWindowsDriverUpdateEntryCollection with error-returning methods.
@@ -2601,18 +3147,24 @@ func WrapIWindowsDriverUpdateEntryCollection(raw *systemupdateagent.IWindowsDriv
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IWindowsDriverUpdateEntryCollection) Get_Item(index int32, retval **systemupdateagent.IWindowsDriverUpdateEntry) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(index, retval)))
+func (self IWindowsDriverUpdateEntryCollection) Get_Item(index int32) (*systemupdateagent.IWindowsDriverUpdateEntry, error) {
+	var _retval *systemupdateagent.IWindowsDriverUpdateEntry
+	_hr := self.Raw.Get_Item(index, &_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IWindowsDriverUpdateEntryCollection) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IWindowsDriverUpdateEntryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IWindowsDriverUpdateEntryCollection) Get_Count(retval *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(retval)))
+func (self IWindowsDriverUpdateEntryCollection) Get_Count() (int32, error) {
+	var _retval int32
+	_hr := self.Raw.Get_Count(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsUpdateAgentInfo is an idiomatic wrapper over the raw COM interface System.UpdateAgent.IWindowsUpdateAgentInfo with error-returning methods.

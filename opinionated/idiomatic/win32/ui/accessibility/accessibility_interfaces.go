@@ -116,28 +116,38 @@ func WrapIAccessible(raw *uiaccessibility.IAccessible) IAccessible {
 }
 
 // Get_accParent wraps the raw Get_accParent call.
-func (self IAccessible) Get_accParent(ppdispParent **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_accParent(ppdispParent)))
+func (self IAccessible) Get_accParent() (*systemcom.IDispatch, error) {
+	var _ppdispParent *systemcom.IDispatch
+	_hr := self.Raw.Get_accParent(&_ppdispParent)
+	return _ppdispParent, win32.HRESULTError(int32(_hr))
 }
 
 // Get_accChildCount wraps the raw Get_accChildCount call.
-func (self IAccessible) Get_accChildCount(pcountChildren *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_accChildCount(pcountChildren)))
+func (self IAccessible) Get_accChildCount() (int32, error) {
+	var _pcountChildren int32
+	_hr := self.Raw.Get_accChildCount(&_pcountChildren)
+	return _pcountChildren, win32.HRESULTError(int32(_hr))
 }
 
 // Get_accFocus wraps the raw Get_accFocus call.
-func (self IAccessible) Get_accFocus(pvarChild *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_accFocus(pvarChild)))
+func (self IAccessible) Get_accFocus() (systemvariant.VARIANT, error) {
+	var _pvarChild systemvariant.VARIANT
+	_hr := self.Raw.Get_accFocus(&_pvarChild)
+	return _pvarChild, win32.HRESULTError(int32(_hr))
 }
 
 // Get_accSelection wraps the raw Get_accSelection call.
-func (self IAccessible) Get_accSelection(pvarChildren *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_accSelection(pvarChildren)))
+func (self IAccessible) Get_accSelection() (systemvariant.VARIANT, error) {
+	var _pvarChildren systemvariant.VARIANT
+	_hr := self.Raw.Get_accSelection(&_pvarChildren)
+	return _pvarChildren, win32.HRESULTError(int32(_hr))
 }
 
 // AccHitTest wraps the raw AccHitTest call.
-func (self IAccessible) AccHitTest(xLeft int32, yTop int32, pvarChild *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.AccHitTest(xLeft, yTop, pvarChild)))
+func (self IAccessible) AccHitTest(xLeft int32, yTop int32) (systemvariant.VARIANT, error) {
+	var _pvarChild systemvariant.VARIANT
+	_hr := self.Raw.AccHitTest(xLeft, yTop, &_pvarChild)
+	return _pvarChild, win32.HRESULTError(int32(_hr))
 }
 
 // IAccessibleEx is an idiomatic wrapper over the raw COM interface UI.Accessibility.IAccessibleEx with error-returning methods.
@@ -152,8 +162,10 @@ func WrapIAccessibleEx(raw *uiaccessibility.IAccessibleEx) IAccessibleEx {
 }
 
 // GetObjectForChild wraps the raw GetObjectForChild call.
-func (self IAccessibleEx) GetObjectForChild(idChild int32, pRetVal **uiaccessibility.IAccessibleEx) error {
-	return win32.HRESULTError(int32(self.Raw.GetObjectForChild(idChild, pRetVal)))
+func (self IAccessibleEx) GetObjectForChild(idChild int32) (*uiaccessibility.IAccessibleEx, error) {
+	var _pRetVal *uiaccessibility.IAccessibleEx
+	_hr := self.Raw.GetObjectForChild(idChild, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetIAccessiblePair wraps the raw GetIAccessiblePair call.
@@ -162,8 +174,10 @@ func (self IAccessibleEx) GetIAccessiblePair(ppAcc **uiaccessibility.IAccessible
 }
 
 // GetRuntimeId wraps the raw GetRuntimeId call.
-func (self IAccessibleEx) GetRuntimeId(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetRuntimeId(pRetVal)))
+func (self IAccessibleEx) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetRuntimeId(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ConvertReturnedElement wraps the raw ConvertReturnedElement call.
@@ -199,8 +213,10 @@ func WrapIAccessibleHostingElementProviders(raw *uiaccessibility.IAccessibleHost
 }
 
 // GetEmbeddedFragmentRoots wraps the raw GetEmbeddedFragmentRoots call.
-func (self IAccessibleHostingElementProviders) GetEmbeddedFragmentRoots(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetEmbeddedFragmentRoots(pRetVal)))
+func (self IAccessibleHostingElementProviders) GetEmbeddedFragmentRoots() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetEmbeddedFragmentRoots(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetObjectIdForProvider wraps the raw GetObjectIdForProvider call.
@@ -251,28 +267,38 @@ func WrapIAnnotationProvider(raw *uiaccessibility.IAnnotationProvider) IAnnotati
 }
 
 // Get_AnnotationTypeId wraps the raw Get_AnnotationTypeId call.
-func (self IAnnotationProvider) Get_AnnotationTypeId(retVal *uiaccessibility.UIA_ANNOTATIONTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AnnotationTypeId(retVal)))
+func (self IAnnotationProvider) Get_AnnotationTypeId() (uiaccessibility.UIA_ANNOTATIONTYPE, error) {
+	var _retVal uiaccessibility.UIA_ANNOTATIONTYPE
+	_hr := self.Raw.Get_AnnotationTypeId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AnnotationTypeName wraps the raw Get_AnnotationTypeName call.
-func (self IAnnotationProvider) Get_AnnotationTypeName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AnnotationTypeName(retVal)))
+func (self IAnnotationProvider) Get_AnnotationTypeName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_AnnotationTypeName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Author wraps the raw Get_Author call.
-func (self IAnnotationProvider) Get_Author(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Author(retVal)))
+func (self IAnnotationProvider) Get_Author() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_Author(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DateTime wraps the raw Get_DateTime call.
-func (self IAnnotationProvider) Get_DateTime(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DateTime(retVal)))
+func (self IAnnotationProvider) Get_DateTime() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_DateTime(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Target wraps the raw Get_Target call.
-func (self IAnnotationProvider) Get_Target(retVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Target(retVal)))
+func (self IAnnotationProvider) Get_Target() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _retVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Get_Target(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // ICustomNavigationProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ICustomNavigationProvider with error-returning methods.
@@ -287,8 +313,10 @@ func WrapICustomNavigationProvider(raw *uiaccessibility.ICustomNavigationProvide
 }
 
 // Navigate wraps the raw Navigate call.
-func (self ICustomNavigationProvider) Navigate(direction uiaccessibility.NavigateDirection, pRetVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Navigate(direction, pRetVal)))
+func (self ICustomNavigationProvider) Navigate(direction uiaccessibility.NavigateDirection) (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Navigate(direction, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IDockProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IDockProvider with error-returning methods.
@@ -308,8 +336,10 @@ func (self IDockProvider) SetDockPosition(dockPosition uiaccessibility.DockPosit
 }
 
 // Get_DockPosition wraps the raw Get_DockPosition call.
-func (self IDockProvider) Get_DockPosition(pRetVal *uiaccessibility.DockPosition) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DockPosition(pRetVal)))
+func (self IDockProvider) Get_DockPosition() (uiaccessibility.DockPosition, error) {
+	var _pRetVal uiaccessibility.DockPosition
+	_hr := self.Raw.Get_DockPosition(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IDragProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IDragProvider with error-returning methods.
@@ -324,23 +354,31 @@ func WrapIDragProvider(raw *uiaccessibility.IDragProvider) IDragProvider {
 }
 
 // Get_IsGrabbed wraps the raw Get_IsGrabbed call.
-func (self IDragProvider) Get_IsGrabbed(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsGrabbed(pRetVal)))
+func (self IDragProvider) Get_IsGrabbed() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_IsGrabbed(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DropEffect wraps the raw Get_DropEffect call.
-func (self IDragProvider) Get_DropEffect(pRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DropEffect(pRetVal)))
+func (self IDragProvider) Get_DropEffect() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	_hr := self.Raw.Get_DropEffect(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DropEffects wraps the raw Get_DropEffects call.
-func (self IDragProvider) Get_DropEffects(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DropEffects(pRetVal)))
+func (self IDragProvider) Get_DropEffects() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_DropEffects(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetGrabbedItems wraps the raw GetGrabbedItems call.
-func (self IDragProvider) GetGrabbedItems(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetGrabbedItems(pRetVal)))
+func (self IDragProvider) GetGrabbedItems() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetGrabbedItems(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IDropTargetProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IDropTargetProvider with error-returning methods.
@@ -355,13 +393,17 @@ func WrapIDropTargetProvider(raw *uiaccessibility.IDropTargetProvider) IDropTarg
 }
 
 // Get_DropTargetEffect wraps the raw Get_DropTargetEffect call.
-func (self IDropTargetProvider) Get_DropTargetEffect(pRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DropTargetEffect(pRetVal)))
+func (self IDropTargetProvider) Get_DropTargetEffect() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	_hr := self.Raw.Get_DropTargetEffect(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DropTargetEffects wraps the raw Get_DropTargetEffects call.
-func (self IDropTargetProvider) Get_DropTargetEffects(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DropTargetEffects(pRetVal)))
+func (self IDropTargetProvider) Get_DropTargetEffects() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_DropTargetEffects(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IExpandCollapseProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IExpandCollapseProvider with error-returning methods.
@@ -386,8 +428,10 @@ func (self IExpandCollapseProvider) Collapse() error {
 }
 
 // Get_ExpandCollapseState wraps the raw Get_ExpandCollapseState call.
-func (self IExpandCollapseProvider) Get_ExpandCollapseState(pRetVal *uiaccessibility.ExpandCollapseState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExpandCollapseState(pRetVal)))
+func (self IExpandCollapseProvider) Get_ExpandCollapseState() (uiaccessibility.ExpandCollapseState, error) {
+	var _pRetVal uiaccessibility.ExpandCollapseState
+	_hr := self.Raw.Get_ExpandCollapseState(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IGridItemProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IGridItemProvider with error-returning methods.
@@ -402,28 +446,38 @@ func WrapIGridItemProvider(raw *uiaccessibility.IGridItemProvider) IGridItemProv
 }
 
 // Get_Row wraps the raw Get_Row call.
-func (self IGridItemProvider) Get_Row(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Row(pRetVal)))
+func (self IGridItemProvider) Get_Row() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_Row(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Column wraps the raw Get_Column call.
-func (self IGridItemProvider) Get_Column(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Column(pRetVal)))
+func (self IGridItemProvider) Get_Column() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_Column(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RowSpan wraps the raw Get_RowSpan call.
-func (self IGridItemProvider) Get_RowSpan(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RowSpan(pRetVal)))
+func (self IGridItemProvider) Get_RowSpan() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_RowSpan(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ColumnSpan wraps the raw Get_ColumnSpan call.
-func (self IGridItemProvider) Get_ColumnSpan(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ColumnSpan(pRetVal)))
+func (self IGridItemProvider) Get_ColumnSpan() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_ColumnSpan(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ContainingGrid wraps the raw Get_ContainingGrid call.
-func (self IGridItemProvider) Get_ContainingGrid(pRetVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ContainingGrid(pRetVal)))
+func (self IGridItemProvider) Get_ContainingGrid() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Get_ContainingGrid(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IGridProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IGridProvider with error-returning methods.
@@ -438,18 +492,24 @@ func WrapIGridProvider(raw *uiaccessibility.IGridProvider) IGridProvider {
 }
 
 // GetItem wraps the raw GetItem call.
-func (self IGridProvider) GetItem(row int32, column int32, pRetVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.GetItem(row, column, pRetVal)))
+func (self IGridProvider) GetItem(row int32, column int32) (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.GetItem(row, column, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RowCount wraps the raw Get_RowCount call.
-func (self IGridProvider) Get_RowCount(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RowCount(pRetVal)))
+func (self IGridProvider) Get_RowCount() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_RowCount(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ColumnCount wraps the raw Get_ColumnCount call.
-func (self IGridProvider) Get_ColumnCount(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ColumnCount(pRetVal)))
+func (self IGridProvider) Get_ColumnCount() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_ColumnCount(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IInvokeProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IInvokeProvider with error-returning methods.
@@ -507,58 +567,80 @@ func (self ILegacyIAccessibleProvider) SetValue(szValue string) error {
 }
 
 // GetIAccessible wraps the raw GetIAccessible call.
-func (self ILegacyIAccessibleProvider) GetIAccessible(ppAccessible **uiaccessibility.IAccessible) error {
-	return win32.HRESULTError(int32(self.Raw.GetIAccessible(ppAccessible)))
+func (self ILegacyIAccessibleProvider) GetIAccessible() (*uiaccessibility.IAccessible, error) {
+	var _ppAccessible *uiaccessibility.IAccessible
+	_hr := self.Raw.GetIAccessible(&_ppAccessible)
+	return _ppAccessible, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ChildId wraps the raw Get_ChildId call.
-func (self ILegacyIAccessibleProvider) Get_ChildId(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ChildId(pRetVal)))
+func (self ILegacyIAccessibleProvider) Get_ChildId() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_ChildId(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ILegacyIAccessibleProvider) Get_Name(pszName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pszName)))
+func (self ILegacyIAccessibleProvider) Get_Name() (foundation.BSTR, error) {
+	var _pszName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pszName)
+	return _pszName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self ILegacyIAccessibleProvider) Get_Value(pszValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(pszValue)))
+func (self ILegacyIAccessibleProvider) Get_Value() (foundation.BSTR, error) {
+	var _pszValue foundation.BSTR
+	_hr := self.Raw.Get_Value(&_pszValue)
+	return _pszValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self ILegacyIAccessibleProvider) Get_Description(pszDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pszDescription)))
+func (self ILegacyIAccessibleProvider) Get_Description() (foundation.BSTR, error) {
+	var _pszDescription foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pszDescription)
+	return _pszDescription, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Role wraps the raw Get_Role call.
-func (self ILegacyIAccessibleProvider) Get_Role(pdwRole *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Role(pdwRole)))
+func (self ILegacyIAccessibleProvider) Get_Role() (uint32, error) {
+	var _pdwRole uint32
+	_hr := self.Raw.Get_Role(&_pdwRole)
+	return _pdwRole, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self ILegacyIAccessibleProvider) Get_State(pdwState *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(pdwState)))
+func (self ILegacyIAccessibleProvider) Get_State() (uint32, error) {
+	var _pdwState uint32
+	_hr := self.Raw.Get_State(&_pdwState)
+	return _pdwState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Help wraps the raw Get_Help call.
-func (self ILegacyIAccessibleProvider) Get_Help(pszHelp *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Help(pszHelp)))
+func (self ILegacyIAccessibleProvider) Get_Help() (foundation.BSTR, error) {
+	var _pszHelp foundation.BSTR
+	_hr := self.Raw.Get_Help(&_pszHelp)
+	return _pszHelp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_KeyboardShortcut wraps the raw Get_KeyboardShortcut call.
-func (self ILegacyIAccessibleProvider) Get_KeyboardShortcut(pszKeyboardShortcut *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_KeyboardShortcut(pszKeyboardShortcut)))
+func (self ILegacyIAccessibleProvider) Get_KeyboardShortcut() (foundation.BSTR, error) {
+	var _pszKeyboardShortcut foundation.BSTR
+	_hr := self.Raw.Get_KeyboardShortcut(&_pszKeyboardShortcut)
+	return _pszKeyboardShortcut, win32.HRESULTError(int32(_hr))
 }
 
 // GetSelection wraps the raw GetSelection call.
-func (self ILegacyIAccessibleProvider) GetSelection(pvarSelectedChildren **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetSelection(pvarSelectedChildren)))
+func (self ILegacyIAccessibleProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
+	var _pvarSelectedChildren *systemcom.SAFEARRAY
+	_hr := self.Raw.GetSelection(&_pvarSelectedChildren)
+	return _pvarSelectedChildren, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DefaultAction wraps the raw Get_DefaultAction call.
-func (self ILegacyIAccessibleProvider) Get_DefaultAction(pszDefaultAction *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultAction(pszDefaultAction)))
+func (self ILegacyIAccessibleProvider) Get_DefaultAction() (foundation.BSTR, error) {
+	var _pszDefaultAction foundation.BSTR
+	_hr := self.Raw.Get_DefaultAction(&_pszDefaultAction)
+	return _pszDefaultAction, win32.HRESULTError(int32(_hr))
 }
 
 // IMultipleViewProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IMultipleViewProvider with error-returning methods.
@@ -573,8 +655,10 @@ func WrapIMultipleViewProvider(raw *uiaccessibility.IMultipleViewProvider) IMult
 }
 
 // GetViewName wraps the raw GetViewName call.
-func (self IMultipleViewProvider) GetViewName(viewId int32, pRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetViewName(viewId, pRetVal)))
+func (self IMultipleViewProvider) GetViewName(viewId int32) (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	_hr := self.Raw.GetViewName(viewId, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // SetCurrentView wraps the raw SetCurrentView call.
@@ -583,13 +667,17 @@ func (self IMultipleViewProvider) SetCurrentView(viewId int32) error {
 }
 
 // Get_CurrentView wraps the raw Get_CurrentView call.
-func (self IMultipleViewProvider) Get_CurrentView(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentView(pRetVal)))
+func (self IMultipleViewProvider) Get_CurrentView() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_CurrentView(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetSupportedViews wraps the raw GetSupportedViews call.
-func (self IMultipleViewProvider) GetSupportedViews(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetSupportedViews(pRetVal)))
+func (self IMultipleViewProvider) GetSupportedViews() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetSupportedViews(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IObjectModelProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IObjectModelProvider with error-returning methods.
@@ -604,8 +692,10 @@ func WrapIObjectModelProvider(raw *uiaccessibility.IObjectModelProvider) IObject
 }
 
 // GetUnderlyingObjectModel wraps the raw GetUnderlyingObjectModel call.
-func (self IObjectModelProvider) GetUnderlyingObjectModel(ppUnknown **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetUnderlyingObjectModel(ppUnknown)))
+func (self IObjectModelProvider) GetUnderlyingObjectModel() (*systemcom.IUnknown, error) {
+	var _ppUnknown *systemcom.IUnknown
+	_hr := self.Raw.GetUnderlyingObjectModel(&_ppUnknown)
+	return _ppUnknown, win32.HRESULTError(int32(_hr))
 }
 
 // IProxyProviderWinEventHandler is an idiomatic wrapper over the raw COM interface UI.Accessibility.IProxyProviderWinEventHandler with error-returning methods.
@@ -657,33 +747,45 @@ func WrapIRangeValueProvider(raw *uiaccessibility.IRangeValueProvider) IRangeVal
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IRangeValueProvider) Get_Value(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(pRetVal)))
+func (self IRangeValueProvider) Get_Value() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_Value(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsReadOnly wraps the raw Get_IsReadOnly call.
-func (self IRangeValueProvider) Get_IsReadOnly(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsReadOnly(pRetVal)))
+func (self IRangeValueProvider) Get_IsReadOnly() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_IsReadOnly(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Maximum wraps the raw Get_Maximum call.
-func (self IRangeValueProvider) Get_Maximum(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Maximum(pRetVal)))
+func (self IRangeValueProvider) Get_Maximum() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_Maximum(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Minimum wraps the raw Get_Minimum call.
-func (self IRangeValueProvider) Get_Minimum(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Minimum(pRetVal)))
+func (self IRangeValueProvider) Get_Minimum() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_Minimum(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LargeChange wraps the raw Get_LargeChange call.
-func (self IRangeValueProvider) Get_LargeChange(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LargeChange(pRetVal)))
+func (self IRangeValueProvider) Get_LargeChange() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_LargeChange(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SmallChange wraps the raw Get_SmallChange call.
-func (self IRangeValueProvider) Get_SmallChange(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SmallChange(pRetVal)))
+func (self IRangeValueProvider) Get_SmallChange() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_SmallChange(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRawElementProviderAdviseEvents is an idiomatic wrapper over the raw COM interface UI.Accessibility.IRawElementProviderAdviseEvents with error-returning methods.
@@ -719,23 +821,31 @@ func WrapIRawElementProviderFragment(raw *uiaccessibility.IRawElementProviderFra
 }
 
 // Navigate wraps the raw Navigate call.
-func (self IRawElementProviderFragment) Navigate(direction uiaccessibility.NavigateDirection, pRetVal **uiaccessibility.IRawElementProviderFragment) error {
-	return win32.HRESULTError(int32(self.Raw.Navigate(direction, pRetVal)))
+func (self IRawElementProviderFragment) Navigate(direction uiaccessibility.NavigateDirection) (*uiaccessibility.IRawElementProviderFragment, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderFragment
+	_hr := self.Raw.Navigate(direction, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetRuntimeId wraps the raw GetRuntimeId call.
-func (self IRawElementProviderFragment) GetRuntimeId(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetRuntimeId(pRetVal)))
+func (self IRawElementProviderFragment) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetRuntimeId(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_BoundingRectangle wraps the raw Get_BoundingRectangle call.
-func (self IRawElementProviderFragment) Get_BoundingRectangle(pRetVal *uiaccessibility.UiaRect) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BoundingRectangle(pRetVal)))
+func (self IRawElementProviderFragment) Get_BoundingRectangle() (uiaccessibility.UiaRect, error) {
+	var _pRetVal uiaccessibility.UiaRect
+	_hr := self.Raw.Get_BoundingRectangle(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetEmbeddedFragmentRoots wraps the raw GetEmbeddedFragmentRoots call.
-func (self IRawElementProviderFragment) GetEmbeddedFragmentRoots(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetEmbeddedFragmentRoots(pRetVal)))
+func (self IRawElementProviderFragment) GetEmbeddedFragmentRoots() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetEmbeddedFragmentRoots(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // SetFocus wraps the raw SetFocus call.
@@ -744,8 +854,10 @@ func (self IRawElementProviderFragment) SetFocus() error {
 }
 
 // Get_FragmentRoot wraps the raw Get_FragmentRoot call.
-func (self IRawElementProviderFragment) Get_FragmentRoot(pRetVal **uiaccessibility.IRawElementProviderFragmentRoot) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FragmentRoot(pRetVal)))
+func (self IRawElementProviderFragment) Get_FragmentRoot() (*uiaccessibility.IRawElementProviderFragmentRoot, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderFragmentRoot
+	_hr := self.Raw.Get_FragmentRoot(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRawElementProviderFragmentRoot is an idiomatic wrapper over the raw COM interface UI.Accessibility.IRawElementProviderFragmentRoot with error-returning methods.
@@ -760,8 +872,10 @@ func WrapIRawElementProviderFragmentRoot(raw *uiaccessibility.IRawElementProvide
 }
 
 // GetFocus wraps the raw GetFocus call.
-func (self IRawElementProviderFragmentRoot) GetFocus(pRetVal **uiaccessibility.IRawElementProviderFragment) error {
-	return win32.HRESULTError(int32(self.Raw.GetFocus(pRetVal)))
+func (self IRawElementProviderFragmentRoot) GetFocus() (*uiaccessibility.IRawElementProviderFragment, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderFragment
+	_hr := self.Raw.GetFocus(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRawElementProviderHostingAccessibles is an idiomatic wrapper over the raw COM interface UI.Accessibility.IRawElementProviderHostingAccessibles with error-returning methods.
@@ -776,8 +890,10 @@ func WrapIRawElementProviderHostingAccessibles(raw *uiaccessibility.IRawElementP
 }
 
 // GetEmbeddedAccessibles wraps the raw GetEmbeddedAccessibles call.
-func (self IRawElementProviderHostingAccessibles) GetEmbeddedAccessibles(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetEmbeddedAccessibles(pRetVal)))
+func (self IRawElementProviderHostingAccessibles) GetEmbeddedAccessibles() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetEmbeddedAccessibles(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRawElementProviderHwndOverride is an idiomatic wrapper over the raw COM interface UI.Accessibility.IRawElementProviderHwndOverride with error-returning methods.
@@ -792,8 +908,10 @@ func WrapIRawElementProviderHwndOverride(raw *uiaccessibility.IRawElementProvide
 }
 
 // GetOverrideProviderForHwnd wraps the raw GetOverrideProviderForHwnd call.
-func (self IRawElementProviderHwndOverride) GetOverrideProviderForHwnd(hwnd foundation.HWND, pRetVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.GetOverrideProviderForHwnd(hwnd, pRetVal)))
+func (self IRawElementProviderHwndOverride) GetOverrideProviderForHwnd(hwnd foundation.HWND) (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.GetOverrideProviderForHwnd(hwnd, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRawElementProviderSimple is an idiomatic wrapper over the raw COM interface UI.Accessibility.IRawElementProviderSimple with error-returning methods.
@@ -808,23 +926,31 @@ func WrapIRawElementProviderSimple(raw *uiaccessibility.IRawElementProviderSimpl
 }
 
 // Get_ProviderOptions wraps the raw Get_ProviderOptions call.
-func (self IRawElementProviderSimple) Get_ProviderOptions(pRetVal *uiaccessibility.ProviderOptions) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProviderOptions(pRetVal)))
+func (self IRawElementProviderSimple) Get_ProviderOptions() (uiaccessibility.ProviderOptions, error) {
+	var _pRetVal uiaccessibility.ProviderOptions
+	_hr := self.Raw.Get_ProviderOptions(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetPatternProvider wraps the raw GetPatternProvider call.
-func (self IRawElementProviderSimple) GetPatternProvider(patternId uiaccessibility.UIA_PATTERN_ID, pRetVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetPatternProvider(patternId, pRetVal)))
+func (self IRawElementProviderSimple) GetPatternProvider(patternId uiaccessibility.UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
+	var _pRetVal *systemcom.IUnknown
+	_hr := self.Raw.GetPatternProvider(patternId, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetPropertyValue wraps the raw GetPropertyValue call.
-func (self IRawElementProviderSimple) GetPropertyValue(propertyId uiaccessibility.UIA_PROPERTY_ID, pRetVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetPropertyValue(propertyId, pRetVal)))
+func (self IRawElementProviderSimple) GetPropertyValue(propertyId uiaccessibility.UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
+	var _pRetVal systemvariant.VARIANT
+	_hr := self.Raw.GetPropertyValue(propertyId, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HostRawElementProvider wraps the raw Get_HostRawElementProvider call.
-func (self IRawElementProviderSimple) Get_HostRawElementProvider(pRetVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HostRawElementProvider(pRetVal)))
+func (self IRawElementProviderSimple) Get_HostRawElementProvider() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Get_HostRawElementProvider(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRawElementProviderSimple2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IRawElementProviderSimple2 with error-returning methods.
@@ -855,8 +981,10 @@ func WrapIRawElementProviderSimple3(raw *uiaccessibility.IRawElementProviderSimp
 }
 
 // GetMetadataValue wraps the raw GetMetadataValue call.
-func (self IRawElementProviderSimple3) GetMetadataValue(targetId int32, metadataId uiaccessibility.UIA_METADATA_ID, returnVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetMetadataValue(targetId, metadataId, returnVal)))
+func (self IRawElementProviderSimple3) GetMetadataValue(targetId int32, metadataId uiaccessibility.UIA_METADATA_ID) (systemvariant.VARIANT, error) {
+	var _returnVal systemvariant.VARIANT
+	_hr := self.Raw.GetMetadataValue(targetId, metadataId, &_returnVal)
+	return _returnVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRawElementProviderWindowlessSite is an idiomatic wrapper over the raw COM interface UI.Accessibility.IRawElementProviderWindowlessSite with error-returning methods.
@@ -871,13 +999,17 @@ func WrapIRawElementProviderWindowlessSite(raw *uiaccessibility.IRawElementProvi
 }
 
 // GetAdjacentFragment wraps the raw GetAdjacentFragment call.
-func (self IRawElementProviderWindowlessSite) GetAdjacentFragment(direction uiaccessibility.NavigateDirection, ppParent **uiaccessibility.IRawElementProviderFragment) error {
-	return win32.HRESULTError(int32(self.Raw.GetAdjacentFragment(direction, ppParent)))
+func (self IRawElementProviderWindowlessSite) GetAdjacentFragment(direction uiaccessibility.NavigateDirection) (*uiaccessibility.IRawElementProviderFragment, error) {
+	var _ppParent *uiaccessibility.IRawElementProviderFragment
+	_hr := self.Raw.GetAdjacentFragment(direction, &_ppParent)
+	return _ppParent, win32.HRESULTError(int32(_hr))
 }
 
 // GetRuntimeIdPrefix wraps the raw GetRuntimeIdPrefix call.
-func (self IRawElementProviderWindowlessSite) GetRuntimeIdPrefix(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetRuntimeIdPrefix(pRetVal)))
+func (self IRawElementProviderWindowlessSite) GetRuntimeIdPrefix() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetRuntimeIdPrefix(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRichEditUiaInformation is an idiomatic wrapper over the raw COM interface UI.Accessibility.IRichEditUiaInformation with error-returning methods.
@@ -950,33 +1082,45 @@ func (self IScrollProvider) Scroll(horizontalAmount uiaccessibility.ScrollAmount
 }
 
 // Get_HorizontalScrollPercent wraps the raw Get_HorizontalScrollPercent call.
-func (self IScrollProvider) Get_HorizontalScrollPercent(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HorizontalScrollPercent(pRetVal)))
+func (self IScrollProvider) Get_HorizontalScrollPercent() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_HorizontalScrollPercent(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VerticalScrollPercent wraps the raw Get_VerticalScrollPercent call.
-func (self IScrollProvider) Get_VerticalScrollPercent(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VerticalScrollPercent(pRetVal)))
+func (self IScrollProvider) Get_VerticalScrollPercent() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_VerticalScrollPercent(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HorizontalViewSize wraps the raw Get_HorizontalViewSize call.
-func (self IScrollProvider) Get_HorizontalViewSize(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HorizontalViewSize(pRetVal)))
+func (self IScrollProvider) Get_HorizontalViewSize() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_HorizontalViewSize(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VerticalViewSize wraps the raw Get_VerticalViewSize call.
-func (self IScrollProvider) Get_VerticalViewSize(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VerticalViewSize(pRetVal)))
+func (self IScrollProvider) Get_VerticalViewSize() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_VerticalViewSize(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HorizontallyScrollable wraps the raw Get_HorizontallyScrollable call.
-func (self IScrollProvider) Get_HorizontallyScrollable(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HorizontallyScrollable(pRetVal)))
+func (self IScrollProvider) Get_HorizontallyScrollable() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_HorizontallyScrollable(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VerticallyScrollable wraps the raw Get_VerticallyScrollable call.
-func (self IScrollProvider) Get_VerticallyScrollable(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VerticallyScrollable(pRetVal)))
+func (self IScrollProvider) Get_VerticallyScrollable() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_VerticallyScrollable(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ISelectionItemProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ISelectionItemProvider with error-returning methods.
@@ -1006,13 +1150,17 @@ func (self ISelectionItemProvider) RemoveFromSelection() error {
 }
 
 // Get_IsSelected wraps the raw Get_IsSelected call.
-func (self ISelectionItemProvider) Get_IsSelected(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsSelected(pRetVal)))
+func (self ISelectionItemProvider) Get_IsSelected() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_IsSelected(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SelectionContainer wraps the raw Get_SelectionContainer call.
-func (self ISelectionItemProvider) Get_SelectionContainer(pRetVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SelectionContainer(pRetVal)))
+func (self ISelectionItemProvider) Get_SelectionContainer() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Get_SelectionContainer(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ISelectionProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ISelectionProvider with error-returning methods.
@@ -1027,18 +1175,24 @@ func WrapISelectionProvider(raw *uiaccessibility.ISelectionProvider) ISelectionP
 }
 
 // GetSelection wraps the raw GetSelection call.
-func (self ISelectionProvider) GetSelection(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetSelection(pRetVal)))
+func (self ISelectionProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetSelection(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanSelectMultiple wraps the raw Get_CanSelectMultiple call.
-func (self ISelectionProvider) Get_CanSelectMultiple(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanSelectMultiple(pRetVal)))
+func (self ISelectionProvider) Get_CanSelectMultiple() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_CanSelectMultiple(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsSelectionRequired wraps the raw Get_IsSelectionRequired call.
-func (self ISelectionProvider) Get_IsSelectionRequired(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsSelectionRequired(pRetVal)))
+func (self ISelectionProvider) Get_IsSelectionRequired() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_IsSelectionRequired(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ISelectionProvider2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.ISelectionProvider2 with error-returning methods.
@@ -1053,23 +1207,31 @@ func WrapISelectionProvider2(raw *uiaccessibility.ISelectionProvider2) ISelectio
 }
 
 // Get_FirstSelectedItem wraps the raw Get_FirstSelectedItem call.
-func (self ISelectionProvider2) Get_FirstSelectedItem(retVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FirstSelectedItem(retVal)))
+func (self ISelectionProvider2) Get_FirstSelectedItem() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _retVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Get_FirstSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastSelectedItem wraps the raw Get_LastSelectedItem call.
-func (self ISelectionProvider2) Get_LastSelectedItem(retVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastSelectedItem(retVal)))
+func (self ISelectionProvider2) Get_LastSelectedItem() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _retVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Get_LastSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentSelectedItem wraps the raw Get_CurrentSelectedItem call.
-func (self ISelectionProvider2) Get_CurrentSelectedItem(retVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentSelectedItem(retVal)))
+func (self ISelectionProvider2) Get_CurrentSelectedItem() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _retVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Get_CurrentSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ItemCount wraps the raw Get_ItemCount call.
-func (self ISelectionProvider2) Get_ItemCount(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ItemCount(retVal)))
+func (self ISelectionProvider2) Get_ItemCount() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_ItemCount(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // ISpreadsheetItemProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ISpreadsheetItemProvider with error-returning methods.
@@ -1084,18 +1246,24 @@ func WrapISpreadsheetItemProvider(raw *uiaccessibility.ISpreadsheetItemProvider)
 }
 
 // Get_Formula wraps the raw Get_Formula call.
-func (self ISpreadsheetItemProvider) Get_Formula(pRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Formula(pRetVal)))
+func (self ISpreadsheetItemProvider) Get_Formula() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	_hr := self.Raw.Get_Formula(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetAnnotationObjects wraps the raw GetAnnotationObjects call.
-func (self ISpreadsheetItemProvider) GetAnnotationObjects(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetAnnotationObjects(pRetVal)))
+func (self ISpreadsheetItemProvider) GetAnnotationObjects() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetAnnotationObjects(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetAnnotationTypes wraps the raw GetAnnotationTypes call.
-func (self ISpreadsheetItemProvider) GetAnnotationTypes(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetAnnotationTypes(pRetVal)))
+func (self ISpreadsheetItemProvider) GetAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetAnnotationTypes(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ISpreadsheetProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ISpreadsheetProvider with error-returning methods.
@@ -1110,9 +1278,11 @@ func WrapISpreadsheetProvider(raw *uiaccessibility.ISpreadsheetProvider) ISpread
 }
 
 // GetItemByName wraps the raw GetItemByName call.
-func (self ISpreadsheetProvider) GetItemByName(name string, pRetVal **uiaccessibility.IRawElementProviderSimple) error {
+func (self ISpreadsheetProvider) GetItemByName(name string) (*uiaccessibility.IRawElementProviderSimple, error) {
 	_name := win32.UTF16Ptr(name)
-	return win32.HRESULTError(int32(self.Raw.GetItemByName(foundation.PWSTR(_name), pRetVal)))
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.GetItemByName(foundation.PWSTR(_name), &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IStylesProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IStylesProvider with error-returning methods.
@@ -1127,38 +1297,52 @@ func WrapIStylesProvider(raw *uiaccessibility.IStylesProvider) IStylesProvider {
 }
 
 // Get_StyleId wraps the raw Get_StyleId call.
-func (self IStylesProvider) Get_StyleId(retVal *uiaccessibility.UIA_STYLE_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StyleId(retVal)))
+func (self IStylesProvider) Get_StyleId() (uiaccessibility.UIA_STYLE_ID, error) {
+	var _retVal uiaccessibility.UIA_STYLE_ID
+	_hr := self.Raw.Get_StyleId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StyleName wraps the raw Get_StyleName call.
-func (self IStylesProvider) Get_StyleName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StyleName(retVal)))
+func (self IStylesProvider) Get_StyleName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_StyleName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FillColor wraps the raw Get_FillColor call.
-func (self IStylesProvider) Get_FillColor(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FillColor(retVal)))
+func (self IStylesProvider) Get_FillColor() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_FillColor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FillPatternStyle wraps the raw Get_FillPatternStyle call.
-func (self IStylesProvider) Get_FillPatternStyle(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FillPatternStyle(retVal)))
+func (self IStylesProvider) Get_FillPatternStyle() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_FillPatternStyle(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Shape wraps the raw Get_Shape call.
-func (self IStylesProvider) Get_Shape(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Shape(retVal)))
+func (self IStylesProvider) Get_Shape() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_Shape(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FillPatternColor wraps the raw Get_FillPatternColor call.
-func (self IStylesProvider) Get_FillPatternColor(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FillPatternColor(retVal)))
+func (self IStylesProvider) Get_FillPatternColor() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_FillPatternColor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ExtendedProperties wraps the raw Get_ExtendedProperties call.
-func (self IStylesProvider) Get_ExtendedProperties(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExtendedProperties(retVal)))
+func (self IStylesProvider) Get_ExtendedProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_ExtendedProperties(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // ISynchronizedInputProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ISynchronizedInputProvider with error-returning methods.
@@ -1194,13 +1378,17 @@ func WrapITableItemProvider(raw *uiaccessibility.ITableItemProvider) ITableItemP
 }
 
 // GetRowHeaderItems wraps the raw GetRowHeaderItems call.
-func (self ITableItemProvider) GetRowHeaderItems(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetRowHeaderItems(pRetVal)))
+func (self ITableItemProvider) GetRowHeaderItems() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetRowHeaderItems(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetColumnHeaderItems wraps the raw GetColumnHeaderItems call.
-func (self ITableItemProvider) GetColumnHeaderItems(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetColumnHeaderItems(pRetVal)))
+func (self ITableItemProvider) GetColumnHeaderItems() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetColumnHeaderItems(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITableProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITableProvider with error-returning methods.
@@ -1215,18 +1403,24 @@ func WrapITableProvider(raw *uiaccessibility.ITableProvider) ITableProvider {
 }
 
 // GetRowHeaders wraps the raw GetRowHeaders call.
-func (self ITableProvider) GetRowHeaders(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetRowHeaders(pRetVal)))
+func (self ITableProvider) GetRowHeaders() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetRowHeaders(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetColumnHeaders wraps the raw GetColumnHeaders call.
-func (self ITableProvider) GetColumnHeaders(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetColumnHeaders(pRetVal)))
+func (self ITableProvider) GetColumnHeaders() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetColumnHeaders(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RowOrColumnMajor wraps the raw Get_RowOrColumnMajor call.
-func (self ITableProvider) Get_RowOrColumnMajor(pRetVal *uiaccessibility.RowOrColumnMajor) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RowOrColumnMajor(pRetVal)))
+func (self ITableProvider) Get_RowOrColumnMajor() (uiaccessibility.RowOrColumnMajor, error) {
+	var _pRetVal uiaccessibility.RowOrColumnMajor
+	_hr := self.Raw.Get_RowOrColumnMajor(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITextChildProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITextChildProvider with error-returning methods.
@@ -1241,13 +1435,17 @@ func WrapITextChildProvider(raw *uiaccessibility.ITextChildProvider) ITextChildP
 }
 
 // Get_TextContainer wraps the raw Get_TextContainer call.
-func (self ITextChildProvider) Get_TextContainer(pRetVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TextContainer(pRetVal)))
+func (self ITextChildProvider) Get_TextContainer() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.Get_TextContainer(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TextRange wraps the raw Get_TextRange call.
-func (self ITextChildProvider) Get_TextRange(pRetVal **uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TextRange(pRetVal)))
+func (self ITextChildProvider) Get_TextRange() (*uiaccessibility.ITextRangeProvider, error) {
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.Get_TextRange(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITextEditProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITextEditProvider with error-returning methods.
@@ -1262,13 +1460,17 @@ func WrapITextEditProvider(raw *uiaccessibility.ITextEditProvider) ITextEditProv
 }
 
 // GetActiveComposition wraps the raw GetActiveComposition call.
-func (self ITextEditProvider) GetActiveComposition(pRetVal **uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(self.Raw.GetActiveComposition(pRetVal)))
+func (self ITextEditProvider) GetActiveComposition() (*uiaccessibility.ITextRangeProvider, error) {
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.GetActiveComposition(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetConversionTarget wraps the raw GetConversionTarget call.
-func (self ITextEditProvider) GetConversionTarget(pRetVal **uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(self.Raw.GetConversionTarget(pRetVal)))
+func (self ITextEditProvider) GetConversionTarget() (*uiaccessibility.ITextRangeProvider, error) {
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.GetConversionTarget(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITextProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITextProvider with error-returning methods.
@@ -1283,28 +1485,38 @@ func WrapITextProvider(raw *uiaccessibility.ITextProvider) ITextProvider {
 }
 
 // GetSelection wraps the raw GetSelection call.
-func (self ITextProvider) GetSelection(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetSelection(pRetVal)))
+func (self ITextProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetSelection(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetVisibleRanges wraps the raw GetVisibleRanges call.
-func (self ITextProvider) GetVisibleRanges(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetVisibleRanges(pRetVal)))
+func (self ITextProvider) GetVisibleRanges() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetVisibleRanges(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // RangeFromChild wraps the raw RangeFromChild call.
-func (self ITextProvider) RangeFromChild(childElement *uiaccessibility.IRawElementProviderSimple, pRetVal **uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(self.Raw.RangeFromChild(childElement, pRetVal)))
+func (self ITextProvider) RangeFromChild(childElement *uiaccessibility.IRawElementProviderSimple) (*uiaccessibility.ITextRangeProvider, error) {
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.RangeFromChild(childElement, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DocumentRange wraps the raw Get_DocumentRange call.
-func (self ITextProvider) Get_DocumentRange(pRetVal **uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DocumentRange(pRetVal)))
+func (self ITextProvider) Get_DocumentRange() (*uiaccessibility.ITextRangeProvider, error) {
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.Get_DocumentRange(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SupportedTextSelection wraps the raw Get_SupportedTextSelection call.
-func (self ITextProvider) Get_SupportedTextSelection(pRetVal *uiaccessibility.SupportedTextSelection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SupportedTextSelection(pRetVal)))
+func (self ITextProvider) Get_SupportedTextSelection() (uiaccessibility.SupportedTextSelection, error) {
+	var _pRetVal uiaccessibility.SupportedTextSelection
+	_hr := self.Raw.Get_SupportedTextSelection(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITextProvider2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITextProvider2 with error-returning methods.
@@ -1319,13 +1531,17 @@ func WrapITextProvider2(raw *uiaccessibility.ITextProvider2) ITextProvider2 {
 }
 
 // RangeFromAnnotation wraps the raw RangeFromAnnotation call.
-func (self ITextProvider2) RangeFromAnnotation(annotationElement *uiaccessibility.IRawElementProviderSimple, pRetVal **uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(self.Raw.RangeFromAnnotation(annotationElement, pRetVal)))
+func (self ITextProvider2) RangeFromAnnotation(annotationElement *uiaccessibility.IRawElementProviderSimple) (*uiaccessibility.ITextRangeProvider, error) {
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.RangeFromAnnotation(annotationElement, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCaretRange wraps the raw GetCaretRange call.
-func (self ITextProvider2) GetCaretRange(isActive *foundation.BOOL, pRetVal **uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(self.Raw.GetCaretRange(isActive, pRetVal)))
+func (self ITextProvider2) GetCaretRange(isActive *foundation.BOOL) (*uiaccessibility.ITextRangeProvider, error) {
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.GetCaretRange(isActive, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITextRangeProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITextRangeProvider with error-returning methods.
@@ -1340,18 +1556,24 @@ func WrapITextRangeProvider(raw *uiaccessibility.ITextRangeProvider) ITextRangeP
 }
 
 // Clone wraps the raw Clone call.
-func (self ITextRangeProvider) Clone(pRetVal **uiaccessibility.ITextRangeProvider) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(pRetVal)))
+func (self ITextRangeProvider) Clone() (*uiaccessibility.ITextRangeProvider, error) {
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.Clone(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Compare wraps the raw Compare call.
-func (self ITextRangeProvider) Compare(range_ *uiaccessibility.ITextRangeProvider, pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Compare(range_, pRetVal)))
+func (self ITextRangeProvider) Compare(range_ *uiaccessibility.ITextRangeProvider) (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Compare(range_, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // CompareEndpoints wraps the raw CompareEndpoints call.
-func (self ITextRangeProvider) CompareEndpoints(endpoint uiaccessibility.TextPatternRangeEndpoint, targetRange *uiaccessibility.ITextRangeProvider, targetEndpoint uiaccessibility.TextPatternRangeEndpoint, pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CompareEndpoints(endpoint, targetRange, targetEndpoint, pRetVal)))
+func (self ITextRangeProvider) CompareEndpoints(endpoint uiaccessibility.TextPatternRangeEndpoint, targetRange *uiaccessibility.ITextRangeProvider, targetEndpoint uiaccessibility.TextPatternRangeEndpoint) (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.CompareEndpoints(endpoint, targetRange, targetEndpoint, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ExpandToEnclosingUnit wraps the raw ExpandToEnclosingUnit call.
@@ -1360,40 +1582,54 @@ func (self ITextRangeProvider) ExpandToEnclosingUnit(unit uiaccessibility.TextUn
 }
 
 // FindText wraps the raw FindText call.
-func (self ITextRangeProvider) FindText(text foundation.BSTR, backward bool, ignoreCase bool, pRetVal **uiaccessibility.ITextRangeProvider) error {
+func (self ITextRangeProvider) FindText(text foundation.BSTR, backward bool, ignoreCase bool) (*uiaccessibility.ITextRangeProvider, error) {
 	_backward := foundation.BOOL(win32.Bool32(backward))
 	_ignoreCase := foundation.BOOL(win32.Bool32(ignoreCase))
-	return win32.HRESULTError(int32(self.Raw.FindText(text, _backward, _ignoreCase, pRetVal)))
+	var _pRetVal *uiaccessibility.ITextRangeProvider
+	_hr := self.Raw.FindText(text, _backward, _ignoreCase, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttributeValue wraps the raw GetAttributeValue call.
-func (self ITextRangeProvider) GetAttributeValue(attributeId uiaccessibility.UIA_TEXTATTRIBUTE_ID, pRetVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttributeValue(attributeId, pRetVal)))
+func (self ITextRangeProvider) GetAttributeValue(attributeId uiaccessibility.UIA_TEXTATTRIBUTE_ID) (systemvariant.VARIANT, error) {
+	var _pRetVal systemvariant.VARIANT
+	_hr := self.Raw.GetAttributeValue(attributeId, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetBoundingRectangles wraps the raw GetBoundingRectangles call.
-func (self ITextRangeProvider) GetBoundingRectangles(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetBoundingRectangles(pRetVal)))
+func (self ITextRangeProvider) GetBoundingRectangles() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetBoundingRectangles(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetEnclosingElement wraps the raw GetEnclosingElement call.
-func (self ITextRangeProvider) GetEnclosingElement(pRetVal **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnclosingElement(pRetVal)))
+func (self ITextRangeProvider) GetEnclosingElement() (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _pRetVal *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.GetEnclosingElement(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetText wraps the raw GetText call.
-func (self ITextRangeProvider) GetText(maxLength int32, pRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetText(maxLength, pRetVal)))
+func (self ITextRangeProvider) GetText(maxLength int32) (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	_hr := self.Raw.GetText(maxLength, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Move wraps the raw Move call.
-func (self ITextRangeProvider) Move(unit uiaccessibility.TextUnit, count int32, pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Move(unit, count, pRetVal)))
+func (self ITextRangeProvider) Move(unit uiaccessibility.TextUnit, count int32) (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Move(unit, count, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // MoveEndpointByUnit wraps the raw MoveEndpointByUnit call.
-func (self ITextRangeProvider) MoveEndpointByUnit(endpoint uiaccessibility.TextPatternRangeEndpoint, unit uiaccessibility.TextUnit, count int32, pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.MoveEndpointByUnit(endpoint, unit, count, pRetVal)))
+func (self ITextRangeProvider) MoveEndpointByUnit(endpoint uiaccessibility.TextPatternRangeEndpoint, unit uiaccessibility.TextUnit, count int32) (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.MoveEndpointByUnit(endpoint, unit, count, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // MoveEndpointByRange wraps the raw MoveEndpointByRange call.
@@ -1423,8 +1659,10 @@ func (self ITextRangeProvider) ScrollIntoView(alignToTop bool) error {
 }
 
 // GetChildren wraps the raw GetChildren call.
-func (self ITextRangeProvider) GetChildren(pRetVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetChildren(pRetVal)))
+func (self ITextRangeProvider) GetChildren() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetChildren(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITextRangeProvider2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITextRangeProvider2 with error-returning methods.
@@ -1460,8 +1698,10 @@ func (self IToggleProvider) Toggle() error {
 }
 
 // Get_ToggleState wraps the raw Get_ToggleState call.
-func (self IToggleProvider) Get_ToggleState(pRetVal *uiaccessibility.ToggleState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ToggleState(pRetVal)))
+func (self IToggleProvider) Get_ToggleState() (uiaccessibility.ToggleState, error) {
+	var _pRetVal uiaccessibility.ToggleState
+	_hr := self.Raw.Get_ToggleState(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITransformProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITransformProvider with error-returning methods.
@@ -1476,18 +1716,24 @@ func WrapITransformProvider(raw *uiaccessibility.ITransformProvider) ITransformP
 }
 
 // Get_CanMove wraps the raw Get_CanMove call.
-func (self ITransformProvider) Get_CanMove(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanMove(pRetVal)))
+func (self ITransformProvider) Get_CanMove() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_CanMove(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanResize wraps the raw Get_CanResize call.
-func (self ITransformProvider) Get_CanResize(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanResize(pRetVal)))
+func (self ITransformProvider) Get_CanResize() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_CanResize(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanRotate wraps the raw Get_CanRotate call.
-func (self ITransformProvider) Get_CanRotate(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanRotate(pRetVal)))
+func (self ITransformProvider) Get_CanRotate() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_CanRotate(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITransformProvider2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.ITransformProvider2 with error-returning methods.
@@ -1502,23 +1748,31 @@ func WrapITransformProvider2(raw *uiaccessibility.ITransformProvider2) ITransfor
 }
 
 // Get_CanZoom wraps the raw Get_CanZoom call.
-func (self ITransformProvider2) Get_CanZoom(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanZoom(pRetVal)))
+func (self ITransformProvider2) Get_CanZoom() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_CanZoom(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ZoomLevel wraps the raw Get_ZoomLevel call.
-func (self ITransformProvider2) Get_ZoomLevel(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ZoomLevel(pRetVal)))
+func (self ITransformProvider2) Get_ZoomLevel() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_ZoomLevel(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ZoomMinimum wraps the raw Get_ZoomMinimum call.
-func (self ITransformProvider2) Get_ZoomMinimum(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ZoomMinimum(pRetVal)))
+func (self ITransformProvider2) Get_ZoomMinimum() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_ZoomMinimum(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ZoomMaximum wraps the raw Get_ZoomMaximum call.
-func (self ITransformProvider2) Get_ZoomMaximum(pRetVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ZoomMaximum(pRetVal)))
+func (self ITransformProvider2) Get_ZoomMaximum() (float64, error) {
+	var _pRetVal float64
+	_hr := self.Raw.Get_ZoomMaximum(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ZoomByUnit wraps the raw ZoomByUnit call.
@@ -1538,128 +1792,178 @@ func WrapIUIAutomation(raw *uiaccessibility.IUIAutomation) IUIAutomation {
 }
 
 // CompareElements wraps the raw CompareElements call.
-func (self IUIAutomation) CompareElements(el1 *uiaccessibility.IUIAutomationElement, el2 *uiaccessibility.IUIAutomationElement, areSame *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CompareElements(el1, el2, areSame)))
+func (self IUIAutomation) CompareElements(el1 *uiaccessibility.IUIAutomationElement, el2 *uiaccessibility.IUIAutomationElement) (foundation.BOOL, error) {
+	var _areSame foundation.BOOL
+	_hr := self.Raw.CompareElements(el1, el2, &_areSame)
+	return _areSame, win32.HRESULTError(int32(_hr))
 }
 
 // CompareRuntimeIds wraps the raw CompareRuntimeIds call.
-func (self IUIAutomation) CompareRuntimeIds(runtimeId1 *systemcom.SAFEARRAY, runtimeId2 *systemcom.SAFEARRAY, areSame *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CompareRuntimeIds(runtimeId1, runtimeId2, areSame)))
+func (self IUIAutomation) CompareRuntimeIds(runtimeId1 *systemcom.SAFEARRAY, runtimeId2 *systemcom.SAFEARRAY) (foundation.BOOL, error) {
+	var _areSame foundation.BOOL
+	_hr := self.Raw.CompareRuntimeIds(runtimeId1, runtimeId2, &_areSame)
+	return _areSame, win32.HRESULTError(int32(_hr))
 }
 
 // GetRootElement wraps the raw GetRootElement call.
-func (self IUIAutomation) GetRootElement(root **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetRootElement(root)))
+func (self IUIAutomation) GetRootElement() (*uiaccessibility.IUIAutomationElement, error) {
+	var _root *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetRootElement(&_root)
+	return _root, win32.HRESULTError(int32(_hr))
 }
 
 // ElementFromHandle wraps the raw ElementFromHandle call.
-func (self IUIAutomation) ElementFromHandle(hwnd foundation.HWND, element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.ElementFromHandle(hwnd, element)))
+func (self IUIAutomation) ElementFromHandle(hwnd foundation.HWND) (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.ElementFromHandle(hwnd, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // GetFocusedElement wraps the raw GetFocusedElement call.
-func (self IUIAutomation) GetFocusedElement(element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetFocusedElement(element)))
+func (self IUIAutomation) GetFocusedElement() (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetFocusedElement(&_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // GetRootElementBuildCache wraps the raw GetRootElementBuildCache call.
-func (self IUIAutomation) GetRootElementBuildCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest, root **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetRootElementBuildCache(cacheRequest, root)))
+func (self IUIAutomation) GetRootElementBuildCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _root *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetRootElementBuildCache(cacheRequest, &_root)
+	return _root, win32.HRESULTError(int32(_hr))
 }
 
 // ElementFromHandleBuildCache wraps the raw ElementFromHandleBuildCache call.
-func (self IUIAutomation) ElementFromHandleBuildCache(hwnd foundation.HWND, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.ElementFromHandleBuildCache(hwnd, cacheRequest, element)))
+func (self IUIAutomation) ElementFromHandleBuildCache(hwnd foundation.HWND, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.ElementFromHandleBuildCache(hwnd, cacheRequest, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // GetFocusedElementBuildCache wraps the raw GetFocusedElementBuildCache call.
-func (self IUIAutomation) GetFocusedElementBuildCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest, element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetFocusedElementBuildCache(cacheRequest, element)))
+func (self IUIAutomation) GetFocusedElementBuildCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetFocusedElementBuildCache(cacheRequest, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // CreateTreeWalker wraps the raw CreateTreeWalker call.
-func (self IUIAutomation) CreateTreeWalker(pCondition *uiaccessibility.IUIAutomationCondition, walker **uiaccessibility.IUIAutomationTreeWalker) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTreeWalker(pCondition, walker)))
+func (self IUIAutomation) CreateTreeWalker(pCondition *uiaccessibility.IUIAutomationCondition) (*uiaccessibility.IUIAutomationTreeWalker, error) {
+	var _walker *uiaccessibility.IUIAutomationTreeWalker
+	_hr := self.Raw.CreateTreeWalker(pCondition, &_walker)
+	return _walker, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ControlViewWalker wraps the raw Get_ControlViewWalker call.
-func (self IUIAutomation) Get_ControlViewWalker(walker **uiaccessibility.IUIAutomationTreeWalker) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ControlViewWalker(walker)))
+func (self IUIAutomation) Get_ControlViewWalker() (*uiaccessibility.IUIAutomationTreeWalker, error) {
+	var _walker *uiaccessibility.IUIAutomationTreeWalker
+	_hr := self.Raw.Get_ControlViewWalker(&_walker)
+	return _walker, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ContentViewWalker wraps the raw Get_ContentViewWalker call.
-func (self IUIAutomation) Get_ContentViewWalker(walker **uiaccessibility.IUIAutomationTreeWalker) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ContentViewWalker(walker)))
+func (self IUIAutomation) Get_ContentViewWalker() (*uiaccessibility.IUIAutomationTreeWalker, error) {
+	var _walker *uiaccessibility.IUIAutomationTreeWalker
+	_hr := self.Raw.Get_ContentViewWalker(&_walker)
+	return _walker, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RawViewWalker wraps the raw Get_RawViewWalker call.
-func (self IUIAutomation) Get_RawViewWalker(walker **uiaccessibility.IUIAutomationTreeWalker) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RawViewWalker(walker)))
+func (self IUIAutomation) Get_RawViewWalker() (*uiaccessibility.IUIAutomationTreeWalker, error) {
+	var _walker *uiaccessibility.IUIAutomationTreeWalker
+	_hr := self.Raw.Get_RawViewWalker(&_walker)
+	return _walker, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RawViewCondition wraps the raw Get_RawViewCondition call.
-func (self IUIAutomation) Get_RawViewCondition(condition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RawViewCondition(condition)))
+func (self IUIAutomation) Get_RawViewCondition() (*uiaccessibility.IUIAutomationCondition, error) {
+	var _condition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.Get_RawViewCondition(&_condition)
+	return _condition, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ControlViewCondition wraps the raw Get_ControlViewCondition call.
-func (self IUIAutomation) Get_ControlViewCondition(condition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ControlViewCondition(condition)))
+func (self IUIAutomation) Get_ControlViewCondition() (*uiaccessibility.IUIAutomationCondition, error) {
+	var _condition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.Get_ControlViewCondition(&_condition)
+	return _condition, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ContentViewCondition wraps the raw Get_ContentViewCondition call.
-func (self IUIAutomation) Get_ContentViewCondition(condition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ContentViewCondition(condition)))
+func (self IUIAutomation) Get_ContentViewCondition() (*uiaccessibility.IUIAutomationCondition, error) {
+	var _condition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.Get_ContentViewCondition(&_condition)
+	return _condition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateCacheRequest wraps the raw CreateCacheRequest call.
-func (self IUIAutomation) CreateCacheRequest(cacheRequest **uiaccessibility.IUIAutomationCacheRequest) error {
-	return win32.HRESULTError(int32(self.Raw.CreateCacheRequest(cacheRequest)))
+func (self IUIAutomation) CreateCacheRequest() (*uiaccessibility.IUIAutomationCacheRequest, error) {
+	var _cacheRequest *uiaccessibility.IUIAutomationCacheRequest
+	_hr := self.Raw.CreateCacheRequest(&_cacheRequest)
+	return _cacheRequest, win32.HRESULTError(int32(_hr))
 }
 
 // CreateTrueCondition wraps the raw CreateTrueCondition call.
-func (self IUIAutomation) CreateTrueCondition(newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTrueCondition(newCondition)))
+func (self IUIAutomation) CreateTrueCondition() (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateTrueCondition(&_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateFalseCondition wraps the raw CreateFalseCondition call.
-func (self IUIAutomation) CreateFalseCondition(newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFalseCondition(newCondition)))
+func (self IUIAutomation) CreateFalseCondition() (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateFalseCondition(&_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateAndCondition wraps the raw CreateAndCondition call.
-func (self IUIAutomation) CreateAndCondition(condition1 *uiaccessibility.IUIAutomationCondition, condition2 *uiaccessibility.IUIAutomationCondition, newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAndCondition(condition1, condition2, newCondition)))
+func (self IUIAutomation) CreateAndCondition(condition1 *uiaccessibility.IUIAutomationCondition, condition2 *uiaccessibility.IUIAutomationCondition) (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateAndCondition(condition1, condition2, &_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateAndConditionFromArray wraps the raw CreateAndConditionFromArray call.
-func (self IUIAutomation) CreateAndConditionFromArray(conditions *systemcom.SAFEARRAY, newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAndConditionFromArray(conditions, newCondition)))
+func (self IUIAutomation) CreateAndConditionFromArray(conditions *systemcom.SAFEARRAY) (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateAndConditionFromArray(conditions, &_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateAndConditionFromNativeArray wraps the raw CreateAndConditionFromNativeArray call.
-func (self IUIAutomation) CreateAndConditionFromNativeArray(conditions **uiaccessibility.IUIAutomationCondition, conditionCount int32, newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAndConditionFromNativeArray(conditions, conditionCount, newCondition)))
+func (self IUIAutomation) CreateAndConditionFromNativeArray(conditions **uiaccessibility.IUIAutomationCondition, conditionCount int32) (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateAndConditionFromNativeArray(conditions, conditionCount, &_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateOrCondition wraps the raw CreateOrCondition call.
-func (self IUIAutomation) CreateOrCondition(condition1 *uiaccessibility.IUIAutomationCondition, condition2 *uiaccessibility.IUIAutomationCondition, newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateOrCondition(condition1, condition2, newCondition)))
+func (self IUIAutomation) CreateOrCondition(condition1 *uiaccessibility.IUIAutomationCondition, condition2 *uiaccessibility.IUIAutomationCondition) (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateOrCondition(condition1, condition2, &_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateOrConditionFromArray wraps the raw CreateOrConditionFromArray call.
-func (self IUIAutomation) CreateOrConditionFromArray(conditions *systemcom.SAFEARRAY, newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateOrConditionFromArray(conditions, newCondition)))
+func (self IUIAutomation) CreateOrConditionFromArray(conditions *systemcom.SAFEARRAY) (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateOrConditionFromArray(conditions, &_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateOrConditionFromNativeArray wraps the raw CreateOrConditionFromNativeArray call.
-func (self IUIAutomation) CreateOrConditionFromNativeArray(conditions **uiaccessibility.IUIAutomationCondition, conditionCount int32, newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateOrConditionFromNativeArray(conditions, conditionCount, newCondition)))
+func (self IUIAutomation) CreateOrConditionFromNativeArray(conditions **uiaccessibility.IUIAutomationCondition, conditionCount int32) (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateOrConditionFromNativeArray(conditions, conditionCount, &_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // CreateNotCondition wraps the raw CreateNotCondition call.
-func (self IUIAutomation) CreateNotCondition(condition *uiaccessibility.IUIAutomationCondition, newCondition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.CreateNotCondition(condition, newCondition)))
+func (self IUIAutomation) CreateNotCondition(condition *uiaccessibility.IUIAutomationCondition) (*uiaccessibility.IUIAutomationCondition, error) {
+	var _newCondition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.CreateNotCondition(condition, &_newCondition)
+	return _newCondition, win32.HRESULTError(int32(_hr))
 }
 
 // AddAutomationEventHandler wraps the raw AddAutomationEventHandler call.
@@ -1713,38 +2017,52 @@ func (self IUIAutomation) RemoveAllEventHandlers() error {
 }
 
 // IntNativeArrayToSafeArray wraps the raw IntNativeArrayToSafeArray call.
-func (self IUIAutomation) IntNativeArrayToSafeArray(array *int32, arrayCount int32, safeArray **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.IntNativeArrayToSafeArray(array, arrayCount, safeArray)))
+func (self IUIAutomation) IntNativeArrayToSafeArray(array *int32, arrayCount int32) (*systemcom.SAFEARRAY, error) {
+	var _safeArray *systemcom.SAFEARRAY
+	_hr := self.Raw.IntNativeArrayToSafeArray(array, arrayCount, &_safeArray)
+	return _safeArray, win32.HRESULTError(int32(_hr))
 }
 
 // IntSafeArrayToNativeArray wraps the raw IntSafeArrayToNativeArray call.
-func (self IUIAutomation) IntSafeArrayToNativeArray(intArray *systemcom.SAFEARRAY, array **int32, arrayCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.IntSafeArrayToNativeArray(intArray, array, arrayCount)))
+func (self IUIAutomation) IntSafeArrayToNativeArray(intArray *systemcom.SAFEARRAY, array **int32) (int32, error) {
+	var _arrayCount int32
+	_hr := self.Raw.IntSafeArrayToNativeArray(intArray, array, &_arrayCount)
+	return _arrayCount, win32.HRESULTError(int32(_hr))
 }
 
 // SafeArrayToRectNativeArray wraps the raw SafeArrayToRectNativeArray call.
-func (self IUIAutomation) SafeArrayToRectNativeArray(rects *systemcom.SAFEARRAY, rectArray **foundation.RECT, rectArrayCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SafeArrayToRectNativeArray(rects, rectArray, rectArrayCount)))
+func (self IUIAutomation) SafeArrayToRectNativeArray(rects *systemcom.SAFEARRAY, rectArray **foundation.RECT) (int32, error) {
+	var _rectArrayCount int32
+	_hr := self.Raw.SafeArrayToRectNativeArray(rects, rectArray, &_rectArrayCount)
+	return _rectArrayCount, win32.HRESULTError(int32(_hr))
 }
 
 // CreateProxyFactoryEntry wraps the raw CreateProxyFactoryEntry call.
-func (self IUIAutomation) CreateProxyFactoryEntry(factory *uiaccessibility.IUIAutomationProxyFactory, factoryEntry **uiaccessibility.IUIAutomationProxyFactoryEntry) error {
-	return win32.HRESULTError(int32(self.Raw.CreateProxyFactoryEntry(factory, factoryEntry)))
+func (self IUIAutomation) CreateProxyFactoryEntry(factory *uiaccessibility.IUIAutomationProxyFactory) (*uiaccessibility.IUIAutomationProxyFactoryEntry, error) {
+	var _factoryEntry *uiaccessibility.IUIAutomationProxyFactoryEntry
+	_hr := self.Raw.CreateProxyFactoryEntry(factory, &_factoryEntry)
+	return _factoryEntry, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProxyFactoryMapping wraps the raw Get_ProxyFactoryMapping call.
-func (self IUIAutomation) Get_ProxyFactoryMapping(factoryMapping **uiaccessibility.IUIAutomationProxyFactoryMapping) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProxyFactoryMapping(factoryMapping)))
+func (self IUIAutomation) Get_ProxyFactoryMapping() (*uiaccessibility.IUIAutomationProxyFactoryMapping, error) {
+	var _factoryMapping *uiaccessibility.IUIAutomationProxyFactoryMapping
+	_hr := self.Raw.Get_ProxyFactoryMapping(&_factoryMapping)
+	return _factoryMapping, win32.HRESULTError(int32(_hr))
 }
 
 // GetPropertyProgrammaticName wraps the raw GetPropertyProgrammaticName call.
-func (self IUIAutomation) GetPropertyProgrammaticName(property uiaccessibility.UIA_PROPERTY_ID, name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPropertyProgrammaticName(property, name)))
+func (self IUIAutomation) GetPropertyProgrammaticName(property uiaccessibility.UIA_PROPERTY_ID) (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.GetPropertyProgrammaticName(property, &_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetPatternProgrammaticName wraps the raw GetPatternProgrammaticName call.
-func (self IUIAutomation) GetPatternProgrammaticName(pattern uiaccessibility.UIA_PATTERN_ID, name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPatternProgrammaticName(pattern, name)))
+func (self IUIAutomation) GetPatternProgrammaticName(pattern uiaccessibility.UIA_PATTERN_ID) (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.GetPatternProgrammaticName(pattern, &_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // PollForPotentialSupportedPatterns wraps the raw PollForPotentialSupportedPatterns call.
@@ -1758,23 +2076,31 @@ func (self IUIAutomation) PollForPotentialSupportedProperties(pElement *uiaccess
 }
 
 // Get_ReservedNotSupportedValue wraps the raw Get_ReservedNotSupportedValue call.
-func (self IUIAutomation) Get_ReservedNotSupportedValue(notSupportedValue **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReservedNotSupportedValue(notSupportedValue)))
+func (self IUIAutomation) Get_ReservedNotSupportedValue() (*systemcom.IUnknown, error) {
+	var _notSupportedValue *systemcom.IUnknown
+	_hr := self.Raw.Get_ReservedNotSupportedValue(&_notSupportedValue)
+	return _notSupportedValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReservedMixedAttributeValue wraps the raw Get_ReservedMixedAttributeValue call.
-func (self IUIAutomation) Get_ReservedMixedAttributeValue(mixedAttributeValue **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReservedMixedAttributeValue(mixedAttributeValue)))
+func (self IUIAutomation) Get_ReservedMixedAttributeValue() (*systemcom.IUnknown, error) {
+	var _mixedAttributeValue *systemcom.IUnknown
+	_hr := self.Raw.Get_ReservedMixedAttributeValue(&_mixedAttributeValue)
+	return _mixedAttributeValue, win32.HRESULTError(int32(_hr))
 }
 
 // ElementFromIAccessible wraps the raw ElementFromIAccessible call.
-func (self IUIAutomation) ElementFromIAccessible(accessible *uiaccessibility.IAccessible, childId int32, element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.ElementFromIAccessible(accessible, childId, element)))
+func (self IUIAutomation) ElementFromIAccessible(accessible *uiaccessibility.IAccessible, childId int32) (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.ElementFromIAccessible(accessible, childId, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // ElementFromIAccessibleBuildCache wraps the raw ElementFromIAccessibleBuildCache call.
-func (self IUIAutomation) ElementFromIAccessibleBuildCache(accessible *uiaccessibility.IAccessible, childId int32, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.ElementFromIAccessibleBuildCache(accessible, childId, cacheRequest, element)))
+func (self IUIAutomation) ElementFromIAccessibleBuildCache(accessible *uiaccessibility.IAccessible, childId int32, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.ElementFromIAccessibleBuildCache(accessible, childId, cacheRequest, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomation2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomation2 with error-returning methods.
@@ -1789,8 +2115,10 @@ func WrapIUIAutomation2(raw *uiaccessibility.IUIAutomation2) IUIAutomation2 {
 }
 
 // Get_AutoSetFocus wraps the raw Get_AutoSetFocus call.
-func (self IUIAutomation2) Get_AutoSetFocus(autoSetFocus *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoSetFocus(autoSetFocus)))
+func (self IUIAutomation2) Get_AutoSetFocus() (foundation.BOOL, error) {
+	var _autoSetFocus foundation.BOOL
+	_hr := self.Raw.Get_AutoSetFocus(&_autoSetFocus)
+	return _autoSetFocus, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AutoSetFocus wraps the raw Put_AutoSetFocus call.
@@ -1800,8 +2128,10 @@ func (self IUIAutomation2) Put_AutoSetFocus(autoSetFocus bool) error {
 }
 
 // Get_ConnectionTimeout wraps the raw Get_ConnectionTimeout call.
-func (self IUIAutomation2) Get_ConnectionTimeout(timeout *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ConnectionTimeout(timeout)))
+func (self IUIAutomation2) Get_ConnectionTimeout() (uint32, error) {
+	var _timeout uint32
+	_hr := self.Raw.Get_ConnectionTimeout(&_timeout)
+	return _timeout, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ConnectionTimeout wraps the raw Put_ConnectionTimeout call.
@@ -1810,8 +2140,10 @@ func (self IUIAutomation2) Put_ConnectionTimeout(timeout uint32) error {
 }
 
 // Get_TransactionTimeout wraps the raw Get_TransactionTimeout call.
-func (self IUIAutomation2) Get_TransactionTimeout(timeout *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TransactionTimeout(timeout)))
+func (self IUIAutomation2) Get_TransactionTimeout() (uint32, error) {
+	var _timeout uint32
+	_hr := self.Raw.Get_TransactionTimeout(&_timeout)
+	return _timeout, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TransactionTimeout wraps the raw Put_TransactionTimeout call.
@@ -1909,8 +2241,10 @@ func (self IUIAutomation6) RemoveEventHandlerGroup(element *uiaccessibility.IUIA
 }
 
 // Get_ConnectionRecoveryBehavior wraps the raw Get_ConnectionRecoveryBehavior call.
-func (self IUIAutomation6) Get_ConnectionRecoveryBehavior(connectionRecoveryBehaviorOptions *uiaccessibility.ConnectionRecoveryBehaviorOptions) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ConnectionRecoveryBehavior(connectionRecoveryBehaviorOptions)))
+func (self IUIAutomation6) Get_ConnectionRecoveryBehavior() (uiaccessibility.ConnectionRecoveryBehaviorOptions, error) {
+	var _connectionRecoveryBehaviorOptions uiaccessibility.ConnectionRecoveryBehaviorOptions
+	_hr := self.Raw.Get_ConnectionRecoveryBehavior(&_connectionRecoveryBehaviorOptions)
+	return _connectionRecoveryBehaviorOptions, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ConnectionRecoveryBehavior wraps the raw Put_ConnectionRecoveryBehavior call.
@@ -1919,8 +2253,10 @@ func (self IUIAutomation6) Put_ConnectionRecoveryBehavior(connectionRecoveryBeha
 }
 
 // Get_CoalesceEvents wraps the raw Get_CoalesceEvents call.
-func (self IUIAutomation6) Get_CoalesceEvents(coalesceEventsOptions *uiaccessibility.CoalesceEventsOptions) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CoalesceEvents(coalesceEventsOptions)))
+func (self IUIAutomation6) Get_CoalesceEvents() (uiaccessibility.CoalesceEventsOptions, error) {
+	var _coalesceEventsOptions uiaccessibility.CoalesceEventsOptions
+	_hr := self.Raw.Get_CoalesceEvents(&_coalesceEventsOptions)
+	return _coalesceEventsOptions, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CoalesceEvents wraps the raw Put_CoalesceEvents call.
@@ -1966,8 +2302,10 @@ func WrapIUIAutomationAndCondition(raw *uiaccessibility.IUIAutomationAndConditio
 }
 
 // Get_ChildCount wraps the raw Get_ChildCount call.
-func (self IUIAutomationAndCondition) Get_ChildCount(childCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ChildCount(childCount)))
+func (self IUIAutomationAndCondition) Get_ChildCount() (int32, error) {
+	var _childCount int32
+	_hr := self.Raw.Get_ChildCount(&_childCount)
+	return _childCount, win32.HRESULTError(int32(_hr))
 }
 
 // GetChildrenAsNativeArray wraps the raw GetChildrenAsNativeArray call.
@@ -1976,8 +2314,10 @@ func (self IUIAutomationAndCondition) GetChildrenAsNativeArray(childArray ***uia
 }
 
 // GetChildren wraps the raw GetChildren call.
-func (self IUIAutomationAndCondition) GetChildren(childArray **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetChildren(childArray)))
+func (self IUIAutomationAndCondition) GetChildren() (*systemcom.SAFEARRAY, error) {
+	var _childArray *systemcom.SAFEARRAY
+	_hr := self.Raw.GetChildren(&_childArray)
+	return _childArray, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationAnnotationPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationAnnotationPattern with error-returning methods.
@@ -1992,53 +2332,73 @@ func WrapIUIAutomationAnnotationPattern(raw *uiaccessibility.IUIAutomationAnnota
 }
 
 // Get_CurrentAnnotationTypeId wraps the raw Get_CurrentAnnotationTypeId call.
-func (self IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeId(retVal *uiaccessibility.UIA_ANNOTATIONTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAnnotationTypeId(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeId() (uiaccessibility.UIA_ANNOTATIONTYPE, error) {
+	var _retVal uiaccessibility.UIA_ANNOTATIONTYPE
+	_hr := self.Raw.Get_CurrentAnnotationTypeId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAnnotationTypeName wraps the raw Get_CurrentAnnotationTypeName call.
-func (self IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAnnotationTypeName(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentAnnotationTypeName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAuthor wraps the raw Get_CurrentAuthor call.
-func (self IUIAutomationAnnotationPattern) Get_CurrentAuthor(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAuthor(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CurrentAuthor() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentAuthor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDateTime wraps the raw Get_CurrentDateTime call.
-func (self IUIAutomationAnnotationPattern) Get_CurrentDateTime(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDateTime(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CurrentDateTime() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentDateTime(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentTarget wraps the raw Get_CurrentTarget call.
-func (self IUIAutomationAnnotationPattern) Get_CurrentTarget(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentTarget(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CurrentTarget() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CurrentTarget(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAnnotationTypeId wraps the raw Get_CachedAnnotationTypeId call.
-func (self IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeId(retVal *uiaccessibility.UIA_ANNOTATIONTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAnnotationTypeId(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeId() (uiaccessibility.UIA_ANNOTATIONTYPE, error) {
+	var _retVal uiaccessibility.UIA_ANNOTATIONTYPE
+	_hr := self.Raw.Get_CachedAnnotationTypeId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAnnotationTypeName wraps the raw Get_CachedAnnotationTypeName call.
-func (self IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAnnotationTypeName(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedAnnotationTypeName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAuthor wraps the raw Get_CachedAuthor call.
-func (self IUIAutomationAnnotationPattern) Get_CachedAuthor(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAuthor(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CachedAuthor() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedAuthor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDateTime wraps the raw Get_CachedDateTime call.
-func (self IUIAutomationAnnotationPattern) Get_CachedDateTime(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDateTime(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CachedDateTime() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedDateTime(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedTarget wraps the raw Get_CachedTarget call.
-func (self IUIAutomationAnnotationPattern) Get_CachedTarget(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedTarget(retVal)))
+func (self IUIAutomationAnnotationPattern) Get_CachedTarget() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CachedTarget(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationBoolCondition is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationBoolCondition with error-returning methods.
@@ -2053,8 +2413,10 @@ func WrapIUIAutomationBoolCondition(raw *uiaccessibility.IUIAutomationBoolCondit
 }
 
 // Get_BooleanValue wraps the raw Get_BooleanValue call.
-func (self IUIAutomationBoolCondition) Get_BooleanValue(boolVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BooleanValue(boolVal)))
+func (self IUIAutomationBoolCondition) Get_BooleanValue() (foundation.BOOL, error) {
+	var _boolVal foundation.BOOL
+	_hr := self.Raw.Get_BooleanValue(&_boolVal)
+	return _boolVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationCacheRequest is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationCacheRequest with error-returning methods.
@@ -2079,13 +2441,17 @@ func (self IUIAutomationCacheRequest) AddPattern(patternId uiaccessibility.UIA_P
 }
 
 // Clone wraps the raw Clone call.
-func (self IUIAutomationCacheRequest) Clone(clonedRequest **uiaccessibility.IUIAutomationCacheRequest) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(clonedRequest)))
+func (self IUIAutomationCacheRequest) Clone() (*uiaccessibility.IUIAutomationCacheRequest, error) {
+	var _clonedRequest *uiaccessibility.IUIAutomationCacheRequest
+	_hr := self.Raw.Clone(&_clonedRequest)
+	return _clonedRequest, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TreeScope wraps the raw Get_TreeScope call.
-func (self IUIAutomationCacheRequest) Get_TreeScope(scope *uiaccessibility.TreeScope) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TreeScope(scope)))
+func (self IUIAutomationCacheRequest) Get_TreeScope() (uiaccessibility.TreeScope, error) {
+	var _scope uiaccessibility.TreeScope
+	_hr := self.Raw.Get_TreeScope(&_scope)
+	return _scope, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TreeScope wraps the raw Put_TreeScope call.
@@ -2094,8 +2460,10 @@ func (self IUIAutomationCacheRequest) Put_TreeScope(scope uiaccessibility.TreeSc
 }
 
 // Get_TreeFilter wraps the raw Get_TreeFilter call.
-func (self IUIAutomationCacheRequest) Get_TreeFilter(filter **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TreeFilter(filter)))
+func (self IUIAutomationCacheRequest) Get_TreeFilter() (*uiaccessibility.IUIAutomationCondition, error) {
+	var _filter *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.Get_TreeFilter(&_filter)
+	return _filter, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TreeFilter wraps the raw Put_TreeFilter call.
@@ -2104,8 +2472,10 @@ func (self IUIAutomationCacheRequest) Put_TreeFilter(filter *uiaccessibility.IUI
 }
 
 // Get_AutomationElementMode wraps the raw Get_AutomationElementMode call.
-func (self IUIAutomationCacheRequest) Get_AutomationElementMode(mode *uiaccessibility.AutomationElementMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutomationElementMode(mode)))
+func (self IUIAutomationCacheRequest) Get_AutomationElementMode() (uiaccessibility.AutomationElementMode, error) {
+	var _mode uiaccessibility.AutomationElementMode
+	_hr := self.Raw.Get_AutomationElementMode(&_mode)
+	return _mode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AutomationElementMode wraps the raw Put_AutomationElementMode call.
@@ -2193,8 +2563,10 @@ func (self IUIAutomationClientInfoSource) UnregisterClientConnectionCallback(han
 }
 
 // GetConnectedClients wraps the raw GetConnectedClients call.
-func (self IUIAutomationClientInfoSource) GetConnectedClients(clients **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnectedClients(clients)))
+func (self IUIAutomationClientInfoSource) GetConnectedClients() (*systemcom.SAFEARRAY, error) {
+	var _clients *systemcom.SAFEARRAY
+	_hr := self.Raw.GetConnectedClients(&_clients)
+	return _clients, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationCondition is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationCondition with error-returning methods.
@@ -2220,8 +2592,10 @@ func WrapIUIAutomationCustomNavigationPattern(raw *uiaccessibility.IUIAutomation
 }
 
 // Navigate wraps the raw Navigate call.
-func (self IUIAutomationCustomNavigationPattern) Navigate(direction uiaccessibility.NavigateDirection, pRetVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Navigate(direction, pRetVal)))
+func (self IUIAutomationCustomNavigationPattern) Navigate(direction uiaccessibility.NavigateDirection) (*uiaccessibility.IUIAutomationElement, error) {
+	var _pRetVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Navigate(direction, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationDockPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationDockPattern with error-returning methods.
@@ -2241,13 +2615,17 @@ func (self IUIAutomationDockPattern) SetDockPosition(dockPos uiaccessibility.Doc
 }
 
 // Get_CurrentDockPosition wraps the raw Get_CurrentDockPosition call.
-func (self IUIAutomationDockPattern) Get_CurrentDockPosition(retVal *uiaccessibility.DockPosition) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDockPosition(retVal)))
+func (self IUIAutomationDockPattern) Get_CurrentDockPosition() (uiaccessibility.DockPosition, error) {
+	var _retVal uiaccessibility.DockPosition
+	_hr := self.Raw.Get_CurrentDockPosition(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDockPosition wraps the raw Get_CachedDockPosition call.
-func (self IUIAutomationDockPattern) Get_CachedDockPosition(retVal *uiaccessibility.DockPosition) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDockPosition(retVal)))
+func (self IUIAutomationDockPattern) Get_CachedDockPosition() (uiaccessibility.DockPosition, error) {
+	var _retVal uiaccessibility.DockPosition
+	_hr := self.Raw.Get_CachedDockPosition(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationDragPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationDragPattern with error-returning methods.
@@ -2262,43 +2640,59 @@ func WrapIUIAutomationDragPattern(raw *uiaccessibility.IUIAutomationDragPattern)
 }
 
 // Get_CurrentIsGrabbed wraps the raw Get_CurrentIsGrabbed call.
-func (self IUIAutomationDragPattern) Get_CurrentIsGrabbed(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsGrabbed(retVal)))
+func (self IUIAutomationDragPattern) Get_CurrentIsGrabbed() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsGrabbed(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsGrabbed wraps the raw Get_CachedIsGrabbed call.
-func (self IUIAutomationDragPattern) Get_CachedIsGrabbed(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsGrabbed(retVal)))
+func (self IUIAutomationDragPattern) Get_CachedIsGrabbed() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsGrabbed(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDropEffect wraps the raw Get_CurrentDropEffect call.
-func (self IUIAutomationDragPattern) Get_CurrentDropEffect(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDropEffect(retVal)))
+func (self IUIAutomationDragPattern) Get_CurrentDropEffect() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentDropEffect(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDropEffect wraps the raw Get_CachedDropEffect call.
-func (self IUIAutomationDragPattern) Get_CachedDropEffect(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDropEffect(retVal)))
+func (self IUIAutomationDragPattern) Get_CachedDropEffect() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedDropEffect(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDropEffects wraps the raw Get_CurrentDropEffects call.
-func (self IUIAutomationDragPattern) Get_CurrentDropEffects(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDropEffects(retVal)))
+func (self IUIAutomationDragPattern) Get_CurrentDropEffects() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_CurrentDropEffects(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDropEffects wraps the raw Get_CachedDropEffects call.
-func (self IUIAutomationDragPattern) Get_CachedDropEffects(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDropEffects(retVal)))
+func (self IUIAutomationDragPattern) Get_CachedDropEffects() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_CachedDropEffects(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentGrabbedItems wraps the raw GetCurrentGrabbedItems call.
-func (self IUIAutomationDragPattern) GetCurrentGrabbedItems(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentGrabbedItems(retVal)))
+func (self IUIAutomationDragPattern) GetCurrentGrabbedItems() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCurrentGrabbedItems(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedGrabbedItems wraps the raw GetCachedGrabbedItems call.
-func (self IUIAutomationDragPattern) GetCachedGrabbedItems(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedGrabbedItems(retVal)))
+func (self IUIAutomationDragPattern) GetCachedGrabbedItems() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedGrabbedItems(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationDropTargetPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationDropTargetPattern with error-returning methods.
@@ -2313,23 +2707,31 @@ func WrapIUIAutomationDropTargetPattern(raw *uiaccessibility.IUIAutomationDropTa
 }
 
 // Get_CurrentDropTargetEffect wraps the raw Get_CurrentDropTargetEffect call.
-func (self IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffect(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDropTargetEffect(retVal)))
+func (self IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffect() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentDropTargetEffect(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDropTargetEffect wraps the raw Get_CachedDropTargetEffect call.
-func (self IUIAutomationDropTargetPattern) Get_CachedDropTargetEffect(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDropTargetEffect(retVal)))
+func (self IUIAutomationDropTargetPattern) Get_CachedDropTargetEffect() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedDropTargetEffect(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDropTargetEffects wraps the raw Get_CurrentDropTargetEffects call.
-func (self IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffects(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDropTargetEffects(retVal)))
+func (self IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffects() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_CurrentDropTargetEffects(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDropTargetEffects wraps the raw Get_CachedDropTargetEffects call.
-func (self IUIAutomationDropTargetPattern) Get_CachedDropTargetEffects(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDropTargetEffects(retVal)))
+func (self IUIAutomationDropTargetPattern) Get_CachedDropTargetEffects() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_CachedDropTargetEffects(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement with error-returning methods.
@@ -2349,55 +2751,75 @@ func (self IUIAutomationElement) SetFocus() error {
 }
 
 // GetRuntimeId wraps the raw GetRuntimeId call.
-func (self IUIAutomationElement) GetRuntimeId(runtimeId **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetRuntimeId(runtimeId)))
+func (self IUIAutomationElement) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
+	var _runtimeId *systemcom.SAFEARRAY
+	_hr := self.Raw.GetRuntimeId(&_runtimeId)
+	return _runtimeId, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirst wraps the raw FindFirst call.
-func (self IUIAutomationElement) FindFirst(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, found **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirst(scope, condition, found)))
+func (self IUIAutomationElement) FindFirst(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition) (*uiaccessibility.IUIAutomationElement, error) {
+	var _found *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.FindFirst(scope, condition, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // FindAll wraps the raw FindAll call.
-func (self IUIAutomationElement) FindAll(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, found **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.FindAll(scope, condition, found)))
+func (self IUIAutomationElement) FindAll(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition) (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _found *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.FindAll(scope, condition, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstBuildCache wraps the raw FindFirstBuildCache call.
-func (self IUIAutomationElement) FindFirstBuildCache(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, found **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirstBuildCache(scope, condition, cacheRequest, found)))
+func (self IUIAutomationElement) FindFirstBuildCache(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _found *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.FindFirstBuildCache(scope, condition, cacheRequest, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // FindAllBuildCache wraps the raw FindAllBuildCache call.
-func (self IUIAutomationElement) FindAllBuildCache(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, found **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.FindAllBuildCache(scope, condition, cacheRequest, found)))
+func (self IUIAutomationElement) FindAllBuildCache(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _found *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.FindAllBuildCache(scope, condition, cacheRequest, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // BuildUpdatedCache wraps the raw BuildUpdatedCache call.
-func (self IUIAutomationElement) BuildUpdatedCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest, updatedElement **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.BuildUpdatedCache(cacheRequest, updatedElement)))
+func (self IUIAutomationElement) BuildUpdatedCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _updatedElement *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.BuildUpdatedCache(cacheRequest, &_updatedElement)
+	return _updatedElement, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentPropertyValue wraps the raw GetCurrentPropertyValue call.
-func (self IUIAutomationElement) GetCurrentPropertyValue(propertyId uiaccessibility.UIA_PROPERTY_ID, retVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentPropertyValue(propertyId, retVal)))
+func (self IUIAutomationElement) GetCurrentPropertyValue(propertyId uiaccessibility.UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
+	var _retVal systemvariant.VARIANT
+	_hr := self.Raw.GetCurrentPropertyValue(propertyId, &_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentPropertyValueEx wraps the raw GetCurrentPropertyValueEx call.
-func (self IUIAutomationElement) GetCurrentPropertyValueEx(propertyId uiaccessibility.UIA_PROPERTY_ID, ignoreDefaultValue bool, retVal *systemvariant.VARIANT) error {
+func (self IUIAutomationElement) GetCurrentPropertyValueEx(propertyId uiaccessibility.UIA_PROPERTY_ID, ignoreDefaultValue bool) (systemvariant.VARIANT, error) {
 	_ignoreDefaultValue := foundation.BOOL(win32.Bool32(ignoreDefaultValue))
-	return win32.HRESULTError(int32(self.Raw.GetCurrentPropertyValueEx(propertyId, _ignoreDefaultValue, retVal)))
+	var _retVal systemvariant.VARIANT
+	_hr := self.Raw.GetCurrentPropertyValueEx(propertyId, _ignoreDefaultValue, &_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedPropertyValue wraps the raw GetCachedPropertyValue call.
-func (self IUIAutomationElement) GetCachedPropertyValue(propertyId uiaccessibility.UIA_PROPERTY_ID, retVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedPropertyValue(propertyId, retVal)))
+func (self IUIAutomationElement) GetCachedPropertyValue(propertyId uiaccessibility.UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
+	var _retVal systemvariant.VARIANT
+	_hr := self.Raw.GetCachedPropertyValue(propertyId, &_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedPropertyValueEx wraps the raw GetCachedPropertyValueEx call.
-func (self IUIAutomationElement) GetCachedPropertyValueEx(propertyId uiaccessibility.UIA_PROPERTY_ID, ignoreDefaultValue bool, retVal *systemvariant.VARIANT) error {
+func (self IUIAutomationElement) GetCachedPropertyValueEx(propertyId uiaccessibility.UIA_PROPERTY_ID, ignoreDefaultValue bool) (systemvariant.VARIANT, error) {
 	_ignoreDefaultValue := foundation.BOOL(win32.Bool32(ignoreDefaultValue))
-	return win32.HRESULTError(int32(self.Raw.GetCachedPropertyValueEx(propertyId, _ignoreDefaultValue, retVal)))
+	var _retVal systemvariant.VARIANT
+	_hr := self.Raw.GetCachedPropertyValueEx(propertyId, _ignoreDefaultValue, &_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentPatternAs wraps the raw GetCurrentPatternAs call.
@@ -2411,348 +2833,486 @@ func (self IUIAutomationElement) GetCachedPatternAs(patternId uiaccessibility.UI
 }
 
 // GetCurrentPattern wraps the raw GetCurrentPattern call.
-func (self IUIAutomationElement) GetCurrentPattern(patternId uiaccessibility.UIA_PATTERN_ID, patternObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentPattern(patternId, patternObject)))
+func (self IUIAutomationElement) GetCurrentPattern(patternId uiaccessibility.UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
+	var _patternObject *systemcom.IUnknown
+	_hr := self.Raw.GetCurrentPattern(patternId, &_patternObject)
+	return _patternObject, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedPattern wraps the raw GetCachedPattern call.
-func (self IUIAutomationElement) GetCachedPattern(patternId uiaccessibility.UIA_PATTERN_ID, patternObject **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedPattern(patternId, patternObject)))
+func (self IUIAutomationElement) GetCachedPattern(patternId uiaccessibility.UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
+	var _patternObject *systemcom.IUnknown
+	_hr := self.Raw.GetCachedPattern(patternId, &_patternObject)
+	return _patternObject, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedParent wraps the raw GetCachedParent call.
-func (self IUIAutomationElement) GetCachedParent(parent **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedParent(parent)))
+func (self IUIAutomationElement) GetCachedParent() (*uiaccessibility.IUIAutomationElement, error) {
+	var _parent *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetCachedParent(&_parent)
+	return _parent, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedChildren wraps the raw GetCachedChildren call.
-func (self IUIAutomationElement) GetCachedChildren(children **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedChildren(children)))
+func (self IUIAutomationElement) GetCachedChildren() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _children *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedChildren(&_children)
+	return _children, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentProcessId wraps the raw Get_CurrentProcessId call.
-func (self IUIAutomationElement) Get_CurrentProcessId(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentProcessId(retVal)))
+func (self IUIAutomationElement) Get_CurrentProcessId() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentProcessId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentControlType wraps the raw Get_CurrentControlType call.
-func (self IUIAutomationElement) Get_CurrentControlType(retVal *uiaccessibility.UIA_CONTROLTYPE_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentControlType(retVal)))
+func (self IUIAutomationElement) Get_CurrentControlType() (uiaccessibility.UIA_CONTROLTYPE_ID, error) {
+	var _retVal uiaccessibility.UIA_CONTROLTYPE_ID
+	_hr := self.Raw.Get_CurrentControlType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentLocalizedControlType wraps the raw Get_CurrentLocalizedControlType call.
-func (self IUIAutomationElement) Get_CurrentLocalizedControlType(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentLocalizedControlType(retVal)))
+func (self IUIAutomationElement) Get_CurrentLocalizedControlType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentLocalizedControlType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentName wraps the raw Get_CurrentName call.
-func (self IUIAutomationElement) Get_CurrentName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentName(retVal)))
+func (self IUIAutomationElement) Get_CurrentName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAcceleratorKey wraps the raw Get_CurrentAcceleratorKey call.
-func (self IUIAutomationElement) Get_CurrentAcceleratorKey(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAcceleratorKey(retVal)))
+func (self IUIAutomationElement) Get_CurrentAcceleratorKey() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentAcceleratorKey(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAccessKey wraps the raw Get_CurrentAccessKey call.
-func (self IUIAutomationElement) Get_CurrentAccessKey(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAccessKey(retVal)))
+func (self IUIAutomationElement) Get_CurrentAccessKey() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentAccessKey(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentHasKeyboardFocus wraps the raw Get_CurrentHasKeyboardFocus call.
-func (self IUIAutomationElement) Get_CurrentHasKeyboardFocus(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentHasKeyboardFocus(retVal)))
+func (self IUIAutomationElement) Get_CurrentHasKeyboardFocus() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentHasKeyboardFocus(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsKeyboardFocusable wraps the raw Get_CurrentIsKeyboardFocusable call.
-func (self IUIAutomationElement) Get_CurrentIsKeyboardFocusable(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsKeyboardFocusable(retVal)))
+func (self IUIAutomationElement) Get_CurrentIsKeyboardFocusable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsKeyboardFocusable(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsEnabled wraps the raw Get_CurrentIsEnabled call.
-func (self IUIAutomationElement) Get_CurrentIsEnabled(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsEnabled(retVal)))
+func (self IUIAutomationElement) Get_CurrentIsEnabled() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsEnabled(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAutomationId wraps the raw Get_CurrentAutomationId call.
-func (self IUIAutomationElement) Get_CurrentAutomationId(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAutomationId(retVal)))
+func (self IUIAutomationElement) Get_CurrentAutomationId() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentAutomationId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentClassName wraps the raw Get_CurrentClassName call.
-func (self IUIAutomationElement) Get_CurrentClassName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentClassName(retVal)))
+func (self IUIAutomationElement) Get_CurrentClassName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentClassName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentHelpText wraps the raw Get_CurrentHelpText call.
-func (self IUIAutomationElement) Get_CurrentHelpText(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentHelpText(retVal)))
+func (self IUIAutomationElement) Get_CurrentHelpText() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentHelpText(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentCulture wraps the raw Get_CurrentCulture call.
-func (self IUIAutomationElement) Get_CurrentCulture(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCulture(retVal)))
+func (self IUIAutomationElement) Get_CurrentCulture() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentCulture(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsControlElement wraps the raw Get_CurrentIsControlElement call.
-func (self IUIAutomationElement) Get_CurrentIsControlElement(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsControlElement(retVal)))
+func (self IUIAutomationElement) Get_CurrentIsControlElement() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsControlElement(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsContentElement wraps the raw Get_CurrentIsContentElement call.
-func (self IUIAutomationElement) Get_CurrentIsContentElement(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsContentElement(retVal)))
+func (self IUIAutomationElement) Get_CurrentIsContentElement() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsContentElement(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsPassword wraps the raw Get_CurrentIsPassword call.
-func (self IUIAutomationElement) Get_CurrentIsPassword(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsPassword(retVal)))
+func (self IUIAutomationElement) Get_CurrentIsPassword() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsPassword(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentNativeWindowHandle wraps the raw Get_CurrentNativeWindowHandle call.
-func (self IUIAutomationElement) Get_CurrentNativeWindowHandle(retVal *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentNativeWindowHandle(retVal)))
+func (self IUIAutomationElement) Get_CurrentNativeWindowHandle() (foundation.HWND, error) {
+	var _retVal foundation.HWND
+	_hr := self.Raw.Get_CurrentNativeWindowHandle(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentItemType wraps the raw Get_CurrentItemType call.
-func (self IUIAutomationElement) Get_CurrentItemType(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentItemType(retVal)))
+func (self IUIAutomationElement) Get_CurrentItemType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentItemType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsOffscreen wraps the raw Get_CurrentIsOffscreen call.
-func (self IUIAutomationElement) Get_CurrentIsOffscreen(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsOffscreen(retVal)))
+func (self IUIAutomationElement) Get_CurrentIsOffscreen() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsOffscreen(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentOrientation wraps the raw Get_CurrentOrientation call.
-func (self IUIAutomationElement) Get_CurrentOrientation(retVal *uiaccessibility.OrientationType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentOrientation(retVal)))
+func (self IUIAutomationElement) Get_CurrentOrientation() (uiaccessibility.OrientationType, error) {
+	var _retVal uiaccessibility.OrientationType
+	_hr := self.Raw.Get_CurrentOrientation(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentFrameworkId wraps the raw Get_CurrentFrameworkId call.
-func (self IUIAutomationElement) Get_CurrentFrameworkId(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFrameworkId(retVal)))
+func (self IUIAutomationElement) Get_CurrentFrameworkId() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentFrameworkId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsRequiredForForm wraps the raw Get_CurrentIsRequiredForForm call.
-func (self IUIAutomationElement) Get_CurrentIsRequiredForForm(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsRequiredForForm(retVal)))
+func (self IUIAutomationElement) Get_CurrentIsRequiredForForm() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsRequiredForForm(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentItemStatus wraps the raw Get_CurrentItemStatus call.
-func (self IUIAutomationElement) Get_CurrentItemStatus(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentItemStatus(retVal)))
+func (self IUIAutomationElement) Get_CurrentItemStatus() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentItemStatus(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentBoundingRectangle wraps the raw Get_CurrentBoundingRectangle call.
-func (self IUIAutomationElement) Get_CurrentBoundingRectangle(retVal *foundation.RECT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentBoundingRectangle(retVal)))
+func (self IUIAutomationElement) Get_CurrentBoundingRectangle() (foundation.RECT, error) {
+	var _retVal foundation.RECT
+	_hr := self.Raw.Get_CurrentBoundingRectangle(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentLabeledBy wraps the raw Get_CurrentLabeledBy call.
-func (self IUIAutomationElement) Get_CurrentLabeledBy(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentLabeledBy(retVal)))
+func (self IUIAutomationElement) Get_CurrentLabeledBy() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CurrentLabeledBy(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAriaRole wraps the raw Get_CurrentAriaRole call.
-func (self IUIAutomationElement) Get_CurrentAriaRole(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAriaRole(retVal)))
+func (self IUIAutomationElement) Get_CurrentAriaRole() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentAriaRole(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAriaProperties wraps the raw Get_CurrentAriaProperties call.
-func (self IUIAutomationElement) Get_CurrentAriaProperties(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAriaProperties(retVal)))
+func (self IUIAutomationElement) Get_CurrentAriaProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentAriaProperties(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsDataValidForForm wraps the raw Get_CurrentIsDataValidForForm call.
-func (self IUIAutomationElement) Get_CurrentIsDataValidForForm(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsDataValidForForm(retVal)))
+func (self IUIAutomationElement) Get_CurrentIsDataValidForForm() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsDataValidForForm(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentControllerFor wraps the raw Get_CurrentControllerFor call.
-func (self IUIAutomationElement) Get_CurrentControllerFor(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentControllerFor(retVal)))
+func (self IUIAutomationElement) Get_CurrentControllerFor() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CurrentControllerFor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDescribedBy wraps the raw Get_CurrentDescribedBy call.
-func (self IUIAutomationElement) Get_CurrentDescribedBy(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDescribedBy(retVal)))
+func (self IUIAutomationElement) Get_CurrentDescribedBy() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CurrentDescribedBy(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentFlowsTo wraps the raw Get_CurrentFlowsTo call.
-func (self IUIAutomationElement) Get_CurrentFlowsTo(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFlowsTo(retVal)))
+func (self IUIAutomationElement) Get_CurrentFlowsTo() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CurrentFlowsTo(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentProviderDescription wraps the raw Get_CurrentProviderDescription call.
-func (self IUIAutomationElement) Get_CurrentProviderDescription(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentProviderDescription(retVal)))
+func (self IUIAutomationElement) Get_CurrentProviderDescription() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentProviderDescription(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedProcessId wraps the raw Get_CachedProcessId call.
-func (self IUIAutomationElement) Get_CachedProcessId(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedProcessId(retVal)))
+func (self IUIAutomationElement) Get_CachedProcessId() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedProcessId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedControlType wraps the raw Get_CachedControlType call.
-func (self IUIAutomationElement) Get_CachedControlType(retVal *uiaccessibility.UIA_CONTROLTYPE_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedControlType(retVal)))
+func (self IUIAutomationElement) Get_CachedControlType() (uiaccessibility.UIA_CONTROLTYPE_ID, error) {
+	var _retVal uiaccessibility.UIA_CONTROLTYPE_ID
+	_hr := self.Raw.Get_CachedControlType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedLocalizedControlType wraps the raw Get_CachedLocalizedControlType call.
-func (self IUIAutomationElement) Get_CachedLocalizedControlType(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedLocalizedControlType(retVal)))
+func (self IUIAutomationElement) Get_CachedLocalizedControlType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedLocalizedControlType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedName wraps the raw Get_CachedName call.
-func (self IUIAutomationElement) Get_CachedName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedName(retVal)))
+func (self IUIAutomationElement) Get_CachedName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAcceleratorKey wraps the raw Get_CachedAcceleratorKey call.
-func (self IUIAutomationElement) Get_CachedAcceleratorKey(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAcceleratorKey(retVal)))
+func (self IUIAutomationElement) Get_CachedAcceleratorKey() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedAcceleratorKey(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAccessKey wraps the raw Get_CachedAccessKey call.
-func (self IUIAutomationElement) Get_CachedAccessKey(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAccessKey(retVal)))
+func (self IUIAutomationElement) Get_CachedAccessKey() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedAccessKey(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedHasKeyboardFocus wraps the raw Get_CachedHasKeyboardFocus call.
-func (self IUIAutomationElement) Get_CachedHasKeyboardFocus(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedHasKeyboardFocus(retVal)))
+func (self IUIAutomationElement) Get_CachedHasKeyboardFocus() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedHasKeyboardFocus(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsKeyboardFocusable wraps the raw Get_CachedIsKeyboardFocusable call.
-func (self IUIAutomationElement) Get_CachedIsKeyboardFocusable(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsKeyboardFocusable(retVal)))
+func (self IUIAutomationElement) Get_CachedIsKeyboardFocusable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsKeyboardFocusable(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsEnabled wraps the raw Get_CachedIsEnabled call.
-func (self IUIAutomationElement) Get_CachedIsEnabled(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsEnabled(retVal)))
+func (self IUIAutomationElement) Get_CachedIsEnabled() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsEnabled(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAutomationId wraps the raw Get_CachedAutomationId call.
-func (self IUIAutomationElement) Get_CachedAutomationId(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAutomationId(retVal)))
+func (self IUIAutomationElement) Get_CachedAutomationId() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedAutomationId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedClassName wraps the raw Get_CachedClassName call.
-func (self IUIAutomationElement) Get_CachedClassName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedClassName(retVal)))
+func (self IUIAutomationElement) Get_CachedClassName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedClassName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedHelpText wraps the raw Get_CachedHelpText call.
-func (self IUIAutomationElement) Get_CachedHelpText(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedHelpText(retVal)))
+func (self IUIAutomationElement) Get_CachedHelpText() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedHelpText(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCulture wraps the raw Get_CachedCulture call.
-func (self IUIAutomationElement) Get_CachedCulture(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCulture(retVal)))
+func (self IUIAutomationElement) Get_CachedCulture() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedCulture(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsControlElement wraps the raw Get_CachedIsControlElement call.
-func (self IUIAutomationElement) Get_CachedIsControlElement(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsControlElement(retVal)))
+func (self IUIAutomationElement) Get_CachedIsControlElement() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsControlElement(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsContentElement wraps the raw Get_CachedIsContentElement call.
-func (self IUIAutomationElement) Get_CachedIsContentElement(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsContentElement(retVal)))
+func (self IUIAutomationElement) Get_CachedIsContentElement() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsContentElement(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsPassword wraps the raw Get_CachedIsPassword call.
-func (self IUIAutomationElement) Get_CachedIsPassword(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsPassword(retVal)))
+func (self IUIAutomationElement) Get_CachedIsPassword() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsPassword(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedNativeWindowHandle wraps the raw Get_CachedNativeWindowHandle call.
-func (self IUIAutomationElement) Get_CachedNativeWindowHandle(retVal *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedNativeWindowHandle(retVal)))
+func (self IUIAutomationElement) Get_CachedNativeWindowHandle() (foundation.HWND, error) {
+	var _retVal foundation.HWND
+	_hr := self.Raw.Get_CachedNativeWindowHandle(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedItemType wraps the raw Get_CachedItemType call.
-func (self IUIAutomationElement) Get_CachedItemType(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedItemType(retVal)))
+func (self IUIAutomationElement) Get_CachedItemType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedItemType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsOffscreen wraps the raw Get_CachedIsOffscreen call.
-func (self IUIAutomationElement) Get_CachedIsOffscreen(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsOffscreen(retVal)))
+func (self IUIAutomationElement) Get_CachedIsOffscreen() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsOffscreen(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedOrientation wraps the raw Get_CachedOrientation call.
-func (self IUIAutomationElement) Get_CachedOrientation(retVal *uiaccessibility.OrientationType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedOrientation(retVal)))
+func (self IUIAutomationElement) Get_CachedOrientation() (uiaccessibility.OrientationType, error) {
+	var _retVal uiaccessibility.OrientationType
+	_hr := self.Raw.Get_CachedOrientation(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFrameworkId wraps the raw Get_CachedFrameworkId call.
-func (self IUIAutomationElement) Get_CachedFrameworkId(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFrameworkId(retVal)))
+func (self IUIAutomationElement) Get_CachedFrameworkId() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedFrameworkId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsRequiredForForm wraps the raw Get_CachedIsRequiredForForm call.
-func (self IUIAutomationElement) Get_CachedIsRequiredForForm(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsRequiredForForm(retVal)))
+func (self IUIAutomationElement) Get_CachedIsRequiredForForm() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsRequiredForForm(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedItemStatus wraps the raw Get_CachedItemStatus call.
-func (self IUIAutomationElement) Get_CachedItemStatus(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedItemStatus(retVal)))
+func (self IUIAutomationElement) Get_CachedItemStatus() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedItemStatus(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedBoundingRectangle wraps the raw Get_CachedBoundingRectangle call.
-func (self IUIAutomationElement) Get_CachedBoundingRectangle(retVal *foundation.RECT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedBoundingRectangle(retVal)))
+func (self IUIAutomationElement) Get_CachedBoundingRectangle() (foundation.RECT, error) {
+	var _retVal foundation.RECT
+	_hr := self.Raw.Get_CachedBoundingRectangle(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedLabeledBy wraps the raw Get_CachedLabeledBy call.
-func (self IUIAutomationElement) Get_CachedLabeledBy(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedLabeledBy(retVal)))
+func (self IUIAutomationElement) Get_CachedLabeledBy() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CachedLabeledBy(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAriaRole wraps the raw Get_CachedAriaRole call.
-func (self IUIAutomationElement) Get_CachedAriaRole(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAriaRole(retVal)))
+func (self IUIAutomationElement) Get_CachedAriaRole() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedAriaRole(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAriaProperties wraps the raw Get_CachedAriaProperties call.
-func (self IUIAutomationElement) Get_CachedAriaProperties(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAriaProperties(retVal)))
+func (self IUIAutomationElement) Get_CachedAriaProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedAriaProperties(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsDataValidForForm wraps the raw Get_CachedIsDataValidForForm call.
-func (self IUIAutomationElement) Get_CachedIsDataValidForForm(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsDataValidForForm(retVal)))
+func (self IUIAutomationElement) Get_CachedIsDataValidForForm() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsDataValidForForm(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedControllerFor wraps the raw Get_CachedControllerFor call.
-func (self IUIAutomationElement) Get_CachedControllerFor(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedControllerFor(retVal)))
+func (self IUIAutomationElement) Get_CachedControllerFor() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CachedControllerFor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDescribedBy wraps the raw Get_CachedDescribedBy call.
-func (self IUIAutomationElement) Get_CachedDescribedBy(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDescribedBy(retVal)))
+func (self IUIAutomationElement) Get_CachedDescribedBy() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CachedDescribedBy(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFlowsTo wraps the raw Get_CachedFlowsTo call.
-func (self IUIAutomationElement) Get_CachedFlowsTo(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFlowsTo(retVal)))
+func (self IUIAutomationElement) Get_CachedFlowsTo() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CachedFlowsTo(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedProviderDescription wraps the raw Get_CachedProviderDescription call.
-func (self IUIAutomationElement) Get_CachedProviderDescription(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedProviderDescription(retVal)))
+func (self IUIAutomationElement) Get_CachedProviderDescription() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedProviderDescription(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetClickablePoint wraps the raw GetClickablePoint call.
-func (self IUIAutomationElement) GetClickablePoint(clickable *foundation.POINT, gotClickable *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetClickablePoint(clickable, gotClickable)))
+func (self IUIAutomationElement) GetClickablePoint(clickable *foundation.POINT) (foundation.BOOL, error) {
+	var _gotClickable foundation.BOOL
+	_hr := self.Raw.GetClickablePoint(clickable, &_gotClickable)
+	return _gotClickable, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement2 with error-returning methods.
@@ -2767,33 +3327,45 @@ func WrapIUIAutomationElement2(raw *uiaccessibility.IUIAutomationElement2) IUIAu
 }
 
 // Get_CurrentOptimizeForVisualContent wraps the raw Get_CurrentOptimizeForVisualContent call.
-func (self IUIAutomationElement2) Get_CurrentOptimizeForVisualContent(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentOptimizeForVisualContent(retVal)))
+func (self IUIAutomationElement2) Get_CurrentOptimizeForVisualContent() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentOptimizeForVisualContent(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedOptimizeForVisualContent wraps the raw Get_CachedOptimizeForVisualContent call.
-func (self IUIAutomationElement2) Get_CachedOptimizeForVisualContent(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedOptimizeForVisualContent(retVal)))
+func (self IUIAutomationElement2) Get_CachedOptimizeForVisualContent() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedOptimizeForVisualContent(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentLiveSetting wraps the raw Get_CurrentLiveSetting call.
-func (self IUIAutomationElement2) Get_CurrentLiveSetting(retVal *uiaccessibility.LiveSetting) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentLiveSetting(retVal)))
+func (self IUIAutomationElement2) Get_CurrentLiveSetting() (uiaccessibility.LiveSetting, error) {
+	var _retVal uiaccessibility.LiveSetting
+	_hr := self.Raw.Get_CurrentLiveSetting(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedLiveSetting wraps the raw Get_CachedLiveSetting call.
-func (self IUIAutomationElement2) Get_CachedLiveSetting(retVal *uiaccessibility.LiveSetting) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedLiveSetting(retVal)))
+func (self IUIAutomationElement2) Get_CachedLiveSetting() (uiaccessibility.LiveSetting, error) {
+	var _retVal uiaccessibility.LiveSetting
+	_hr := self.Raw.Get_CachedLiveSetting(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentFlowsFrom wraps the raw Get_CurrentFlowsFrom call.
-func (self IUIAutomationElement2) Get_CurrentFlowsFrom(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFlowsFrom(retVal)))
+func (self IUIAutomationElement2) Get_CurrentFlowsFrom() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CurrentFlowsFrom(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFlowsFrom wraps the raw Get_CachedFlowsFrom call.
-func (self IUIAutomationElement2) Get_CachedFlowsFrom(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFlowsFrom(retVal)))
+func (self IUIAutomationElement2) Get_CachedFlowsFrom() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CachedFlowsFrom(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement3 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement3 with error-returning methods.
@@ -2813,13 +3385,17 @@ func (self IUIAutomationElement3) ShowContextMenu() error {
 }
 
 // Get_CurrentIsPeripheral wraps the raw Get_CurrentIsPeripheral call.
-func (self IUIAutomationElement3) Get_CurrentIsPeripheral(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsPeripheral(retVal)))
+func (self IUIAutomationElement3) Get_CurrentIsPeripheral() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsPeripheral(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsPeripheral wraps the raw Get_CachedIsPeripheral call.
-func (self IUIAutomationElement3) Get_CachedIsPeripheral(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsPeripheral(retVal)))
+func (self IUIAutomationElement3) Get_CachedIsPeripheral() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsPeripheral(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement4 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement4 with error-returning methods.
@@ -2834,53 +3410,73 @@ func WrapIUIAutomationElement4(raw *uiaccessibility.IUIAutomationElement4) IUIAu
 }
 
 // Get_CurrentPositionInSet wraps the raw Get_CurrentPositionInSet call.
-func (self IUIAutomationElement4) Get_CurrentPositionInSet(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentPositionInSet(retVal)))
+func (self IUIAutomationElement4) Get_CurrentPositionInSet() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentPositionInSet(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentSizeOfSet wraps the raw Get_CurrentSizeOfSet call.
-func (self IUIAutomationElement4) Get_CurrentSizeOfSet(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentSizeOfSet(retVal)))
+func (self IUIAutomationElement4) Get_CurrentSizeOfSet() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentSizeOfSet(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentLevel wraps the raw Get_CurrentLevel call.
-func (self IUIAutomationElement4) Get_CurrentLevel(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentLevel(retVal)))
+func (self IUIAutomationElement4) Get_CurrentLevel() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentLevel(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAnnotationTypes wraps the raw Get_CurrentAnnotationTypes call.
-func (self IUIAutomationElement4) Get_CurrentAnnotationTypes(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAnnotationTypes(retVal)))
+func (self IUIAutomationElement4) Get_CurrentAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_CurrentAnnotationTypes(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAnnotationObjects wraps the raw Get_CurrentAnnotationObjects call.
-func (self IUIAutomationElement4) Get_CurrentAnnotationObjects(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAnnotationObjects(retVal)))
+func (self IUIAutomationElement4) Get_CurrentAnnotationObjects() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CurrentAnnotationObjects(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedPositionInSet wraps the raw Get_CachedPositionInSet call.
-func (self IUIAutomationElement4) Get_CachedPositionInSet(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedPositionInSet(retVal)))
+func (self IUIAutomationElement4) Get_CachedPositionInSet() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedPositionInSet(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedSizeOfSet wraps the raw Get_CachedSizeOfSet call.
-func (self IUIAutomationElement4) Get_CachedSizeOfSet(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedSizeOfSet(retVal)))
+func (self IUIAutomationElement4) Get_CachedSizeOfSet() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedSizeOfSet(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedLevel wraps the raw Get_CachedLevel call.
-func (self IUIAutomationElement4) Get_CachedLevel(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedLevel(retVal)))
+func (self IUIAutomationElement4) Get_CachedLevel() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedLevel(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAnnotationTypes wraps the raw Get_CachedAnnotationTypes call.
-func (self IUIAutomationElement4) Get_CachedAnnotationTypes(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAnnotationTypes(retVal)))
+func (self IUIAutomationElement4) Get_CachedAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_CachedAnnotationTypes(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedAnnotationObjects wraps the raw Get_CachedAnnotationObjects call.
-func (self IUIAutomationElement4) Get_CachedAnnotationObjects(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedAnnotationObjects(retVal)))
+func (self IUIAutomationElement4) Get_CachedAnnotationObjects() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.Get_CachedAnnotationObjects(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement5 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement5 with error-returning methods.
@@ -2895,23 +3491,31 @@ func WrapIUIAutomationElement5(raw *uiaccessibility.IUIAutomationElement5) IUIAu
 }
 
 // Get_CurrentLandmarkType wraps the raw Get_CurrentLandmarkType call.
-func (self IUIAutomationElement5) Get_CurrentLandmarkType(retVal *uiaccessibility.UIA_LANDMARKTYPE_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentLandmarkType(retVal)))
+func (self IUIAutomationElement5) Get_CurrentLandmarkType() (uiaccessibility.UIA_LANDMARKTYPE_ID, error) {
+	var _retVal uiaccessibility.UIA_LANDMARKTYPE_ID
+	_hr := self.Raw.Get_CurrentLandmarkType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentLocalizedLandmarkType wraps the raw Get_CurrentLocalizedLandmarkType call.
-func (self IUIAutomationElement5) Get_CurrentLocalizedLandmarkType(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentLocalizedLandmarkType(retVal)))
+func (self IUIAutomationElement5) Get_CurrentLocalizedLandmarkType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentLocalizedLandmarkType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedLandmarkType wraps the raw Get_CachedLandmarkType call.
-func (self IUIAutomationElement5) Get_CachedLandmarkType(retVal *uiaccessibility.UIA_LANDMARKTYPE_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedLandmarkType(retVal)))
+func (self IUIAutomationElement5) Get_CachedLandmarkType() (uiaccessibility.UIA_LANDMARKTYPE_ID, error) {
+	var _retVal uiaccessibility.UIA_LANDMARKTYPE_ID
+	_hr := self.Raw.Get_CachedLandmarkType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedLocalizedLandmarkType wraps the raw Get_CachedLocalizedLandmarkType call.
-func (self IUIAutomationElement5) Get_CachedLocalizedLandmarkType(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedLocalizedLandmarkType(retVal)))
+func (self IUIAutomationElement5) Get_CachedLocalizedLandmarkType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedLocalizedLandmarkType(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement6 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement6 with error-returning methods.
@@ -2926,13 +3530,17 @@ func WrapIUIAutomationElement6(raw *uiaccessibility.IUIAutomationElement6) IUIAu
 }
 
 // Get_CurrentFullDescription wraps the raw Get_CurrentFullDescription call.
-func (self IUIAutomationElement6) Get_CurrentFullDescription(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFullDescription(retVal)))
+func (self IUIAutomationElement6) Get_CurrentFullDescription() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentFullDescription(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFullDescription wraps the raw Get_CachedFullDescription call.
-func (self IUIAutomationElement6) Get_CachedFullDescription(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFullDescription(retVal)))
+func (self IUIAutomationElement6) Get_CachedFullDescription() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedFullDescription(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement7 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement7 with error-returning methods.
@@ -2947,28 +3555,38 @@ func WrapIUIAutomationElement7(raw *uiaccessibility.IUIAutomationElement7) IUIAu
 }
 
 // FindFirstWithOptions wraps the raw FindFirstWithOptions call.
-func (self IUIAutomationElement7) FindFirstWithOptions(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, traversalOptions uiaccessibility.TreeTraversalOptions, root *uiaccessibility.IUIAutomationElement, found **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirstWithOptions(scope, condition, traversalOptions, root, found)))
+func (self IUIAutomationElement7) FindFirstWithOptions(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, traversalOptions uiaccessibility.TreeTraversalOptions, root *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElement, error) {
+	var _found *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.FindFirstWithOptions(scope, condition, traversalOptions, root, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // FindAllWithOptions wraps the raw FindAllWithOptions call.
-func (self IUIAutomationElement7) FindAllWithOptions(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, traversalOptions uiaccessibility.TreeTraversalOptions, root *uiaccessibility.IUIAutomationElement, found **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.FindAllWithOptions(scope, condition, traversalOptions, root, found)))
+func (self IUIAutomationElement7) FindAllWithOptions(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, traversalOptions uiaccessibility.TreeTraversalOptions, root *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _found *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.FindAllWithOptions(scope, condition, traversalOptions, root, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstWithOptionsBuildCache wraps the raw FindFirstWithOptionsBuildCache call.
-func (self IUIAutomationElement7) FindFirstWithOptionsBuildCache(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, traversalOptions uiaccessibility.TreeTraversalOptions, root *uiaccessibility.IUIAutomationElement, found **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirstWithOptionsBuildCache(scope, condition, cacheRequest, traversalOptions, root, found)))
+func (self IUIAutomationElement7) FindFirstWithOptionsBuildCache(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, traversalOptions uiaccessibility.TreeTraversalOptions, root *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElement, error) {
+	var _found *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.FindFirstWithOptionsBuildCache(scope, condition, cacheRequest, traversalOptions, root, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // FindAllWithOptionsBuildCache wraps the raw FindAllWithOptionsBuildCache call.
-func (self IUIAutomationElement7) FindAllWithOptionsBuildCache(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, traversalOptions uiaccessibility.TreeTraversalOptions, root *uiaccessibility.IUIAutomationElement, found **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.FindAllWithOptionsBuildCache(scope, condition, cacheRequest, traversalOptions, root, found)))
+func (self IUIAutomationElement7) FindAllWithOptionsBuildCache(scope uiaccessibility.TreeScope, condition *uiaccessibility.IUIAutomationCondition, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, traversalOptions uiaccessibility.TreeTraversalOptions, root *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _found *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.FindAllWithOptionsBuildCache(scope, condition, cacheRequest, traversalOptions, root, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentMetadataValue wraps the raw GetCurrentMetadataValue call.
-func (self IUIAutomationElement7) GetCurrentMetadataValue(targetId int32, metadataId uiaccessibility.UIA_METADATA_ID, returnVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentMetadataValue(targetId, metadataId, returnVal)))
+func (self IUIAutomationElement7) GetCurrentMetadataValue(targetId int32, metadataId uiaccessibility.UIA_METADATA_ID) (systemvariant.VARIANT, error) {
+	var _returnVal systemvariant.VARIANT
+	_hr := self.Raw.GetCurrentMetadataValue(targetId, metadataId, &_returnVal)
+	return _returnVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement8 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement8 with error-returning methods.
@@ -2983,13 +3601,17 @@ func WrapIUIAutomationElement8(raw *uiaccessibility.IUIAutomationElement8) IUIAu
 }
 
 // Get_CurrentHeadingLevel wraps the raw Get_CurrentHeadingLevel call.
-func (self IUIAutomationElement8) Get_CurrentHeadingLevel(retVal *uiaccessibility.UIA_HEADINGLEVEL_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentHeadingLevel(retVal)))
+func (self IUIAutomationElement8) Get_CurrentHeadingLevel() (uiaccessibility.UIA_HEADINGLEVEL_ID, error) {
+	var _retVal uiaccessibility.UIA_HEADINGLEVEL_ID
+	_hr := self.Raw.Get_CurrentHeadingLevel(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedHeadingLevel wraps the raw Get_CachedHeadingLevel call.
-func (self IUIAutomationElement8) Get_CachedHeadingLevel(retVal *uiaccessibility.UIA_HEADINGLEVEL_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedHeadingLevel(retVal)))
+func (self IUIAutomationElement8) Get_CachedHeadingLevel() (uiaccessibility.UIA_HEADINGLEVEL_ID, error) {
+	var _retVal uiaccessibility.UIA_HEADINGLEVEL_ID
+	_hr := self.Raw.Get_CachedHeadingLevel(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElement9 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElement9 with error-returning methods.
@@ -3004,13 +3626,17 @@ func WrapIUIAutomationElement9(raw *uiaccessibility.IUIAutomationElement9) IUIAu
 }
 
 // Get_CurrentIsDialog wraps the raw Get_CurrentIsDialog call.
-func (self IUIAutomationElement9) Get_CurrentIsDialog(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsDialog(retVal)))
+func (self IUIAutomationElement9) Get_CurrentIsDialog() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsDialog(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsDialog wraps the raw Get_CachedIsDialog call.
-func (self IUIAutomationElement9) Get_CachedIsDialog(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsDialog(retVal)))
+func (self IUIAutomationElement9) Get_CachedIsDialog() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsDialog(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationElementArray is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationElementArray with error-returning methods.
@@ -3025,13 +3651,17 @@ func WrapIUIAutomationElementArray(raw *uiaccessibility.IUIAutomationElementArra
 }
 
 // Get_Length wraps the raw Get_Length call.
-func (self IUIAutomationElementArray) Get_Length(length *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Length(length)))
+func (self IUIAutomationElementArray) Get_Length() (int32, error) {
+	var _length int32
+	_hr := self.Raw.Get_Length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // GetElement wraps the raw GetElement call.
-func (self IUIAutomationElementArray) GetElement(index int32, element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetElement(index, element)))
+func (self IUIAutomationElementArray) GetElement(index int32) (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetElement(index, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationEventHandler is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationEventHandler with error-returning methods.
@@ -3118,13 +3748,17 @@ func (self IUIAutomationExpandCollapsePattern) Collapse() error {
 }
 
 // Get_CurrentExpandCollapseState wraps the raw Get_CurrentExpandCollapseState call.
-func (self IUIAutomationExpandCollapsePattern) Get_CurrentExpandCollapseState(retVal *uiaccessibility.ExpandCollapseState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentExpandCollapseState(retVal)))
+func (self IUIAutomationExpandCollapsePattern) Get_CurrentExpandCollapseState() (uiaccessibility.ExpandCollapseState, error) {
+	var _retVal uiaccessibility.ExpandCollapseState
+	_hr := self.Raw.Get_CurrentExpandCollapseState(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedExpandCollapseState wraps the raw Get_CachedExpandCollapseState call.
-func (self IUIAutomationExpandCollapsePattern) Get_CachedExpandCollapseState(retVal *uiaccessibility.ExpandCollapseState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedExpandCollapseState(retVal)))
+func (self IUIAutomationExpandCollapsePattern) Get_CachedExpandCollapseState() (uiaccessibility.ExpandCollapseState, error) {
+	var _retVal uiaccessibility.ExpandCollapseState
+	_hr := self.Raw.Get_CachedExpandCollapseState(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationFocusChangedEventHandler is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationFocusChangedEventHandler with error-returning methods.
@@ -3155,53 +3789,73 @@ func WrapIUIAutomationGridItemPattern(raw *uiaccessibility.IUIAutomationGridItem
 }
 
 // Get_CurrentContainingGrid wraps the raw Get_CurrentContainingGrid call.
-func (self IUIAutomationGridItemPattern) Get_CurrentContainingGrid(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentContainingGrid(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CurrentContainingGrid() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CurrentContainingGrid(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentRow wraps the raw Get_CurrentRow call.
-func (self IUIAutomationGridItemPattern) Get_CurrentRow(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentRow(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CurrentRow() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentRow(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentColumn wraps the raw Get_CurrentColumn call.
-func (self IUIAutomationGridItemPattern) Get_CurrentColumn(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentColumn(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CurrentColumn() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentColumn(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentRowSpan wraps the raw Get_CurrentRowSpan call.
-func (self IUIAutomationGridItemPattern) Get_CurrentRowSpan(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentRowSpan(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CurrentRowSpan() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentRowSpan(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentColumnSpan wraps the raw Get_CurrentColumnSpan call.
-func (self IUIAutomationGridItemPattern) Get_CurrentColumnSpan(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentColumnSpan(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CurrentColumnSpan() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentColumnSpan(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedContainingGrid wraps the raw Get_CachedContainingGrid call.
-func (self IUIAutomationGridItemPattern) Get_CachedContainingGrid(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedContainingGrid(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CachedContainingGrid() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CachedContainingGrid(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedRow wraps the raw Get_CachedRow call.
-func (self IUIAutomationGridItemPattern) Get_CachedRow(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedRow(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CachedRow() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedRow(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedColumn wraps the raw Get_CachedColumn call.
-func (self IUIAutomationGridItemPattern) Get_CachedColumn(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedColumn(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CachedColumn() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedColumn(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedRowSpan wraps the raw Get_CachedRowSpan call.
-func (self IUIAutomationGridItemPattern) Get_CachedRowSpan(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedRowSpan(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CachedRowSpan() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedRowSpan(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedColumnSpan wraps the raw Get_CachedColumnSpan call.
-func (self IUIAutomationGridItemPattern) Get_CachedColumnSpan(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedColumnSpan(retVal)))
+func (self IUIAutomationGridItemPattern) Get_CachedColumnSpan() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedColumnSpan(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationGridPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationGridPattern with error-returning methods.
@@ -3216,28 +3870,38 @@ func WrapIUIAutomationGridPattern(raw *uiaccessibility.IUIAutomationGridPattern)
 }
 
 // GetItem wraps the raw GetItem call.
-func (self IUIAutomationGridPattern) GetItem(row int32, column int32, element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetItem(row, column, element)))
+func (self IUIAutomationGridPattern) GetItem(row int32, column int32) (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetItem(row, column, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentRowCount wraps the raw Get_CurrentRowCount call.
-func (self IUIAutomationGridPattern) Get_CurrentRowCount(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentRowCount(retVal)))
+func (self IUIAutomationGridPattern) Get_CurrentRowCount() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentRowCount(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentColumnCount wraps the raw Get_CurrentColumnCount call.
-func (self IUIAutomationGridPattern) Get_CurrentColumnCount(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentColumnCount(retVal)))
+func (self IUIAutomationGridPattern) Get_CurrentColumnCount() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentColumnCount(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedRowCount wraps the raw Get_CachedRowCount call.
-func (self IUIAutomationGridPattern) Get_CachedRowCount(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedRowCount(retVal)))
+func (self IUIAutomationGridPattern) Get_CachedRowCount() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedRowCount(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedColumnCount wraps the raw Get_CachedColumnCount call.
-func (self IUIAutomationGridPattern) Get_CachedColumnCount(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedColumnCount(retVal)))
+func (self IUIAutomationGridPattern) Get_CachedColumnCount() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedColumnCount(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationInvokePattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationInvokePattern with error-returning methods.
@@ -3295,108 +3959,150 @@ func (self IUIAutomationLegacyIAccessiblePattern) SetValue(szValue string) error
 }
 
 // Get_CurrentChildId wraps the raw Get_CurrentChildId call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentChildId(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentChildId(pRetVal)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentChildId() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_CurrentChildId(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentName wraps the raw Get_CurrentName call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentName(pszName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentName(pszName)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentName() (foundation.BSTR, error) {
+	var _pszName foundation.BSTR
+	_hr := self.Raw.Get_CurrentName(&_pszName)
+	return _pszName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentValue wraps the raw Get_CurrentValue call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentValue(pszValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentValue(pszValue)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentValue() (foundation.BSTR, error) {
+	var _pszValue foundation.BSTR
+	_hr := self.Raw.Get_CurrentValue(&_pszValue)
+	return _pszValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDescription wraps the raw Get_CurrentDescription call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentDescription(pszDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDescription(pszDescription)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentDescription() (foundation.BSTR, error) {
+	var _pszDescription foundation.BSTR
+	_hr := self.Raw.Get_CurrentDescription(&_pszDescription)
+	return _pszDescription, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentRole wraps the raw Get_CurrentRole call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentRole(pdwRole *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentRole(pdwRole)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentRole() (uint32, error) {
+	var _pdwRole uint32
+	_hr := self.Raw.Get_CurrentRole(&_pdwRole)
+	return _pdwRole, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentState wraps the raw Get_CurrentState call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentState(pdwState *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentState(pdwState)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentState() (uint32, error) {
+	var _pdwState uint32
+	_hr := self.Raw.Get_CurrentState(&_pdwState)
+	return _pdwState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentHelp wraps the raw Get_CurrentHelp call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentHelp(pszHelp *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentHelp(pszHelp)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentHelp() (foundation.BSTR, error) {
+	var _pszHelp foundation.BSTR
+	_hr := self.Raw.Get_CurrentHelp(&_pszHelp)
+	return _pszHelp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentKeyboardShortcut wraps the raw Get_CurrentKeyboardShortcut call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentKeyboardShortcut(pszKeyboardShortcut *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentKeyboardShortcut(pszKeyboardShortcut)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentKeyboardShortcut() (foundation.BSTR, error) {
+	var _pszKeyboardShortcut foundation.BSTR
+	_hr := self.Raw.Get_CurrentKeyboardShortcut(&_pszKeyboardShortcut)
+	return _pszKeyboardShortcut, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentSelection wraps the raw GetCurrentSelection call.
-func (self IUIAutomationLegacyIAccessiblePattern) GetCurrentSelection(pvarSelectedChildren **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentSelection(pvarSelectedChildren)))
+func (self IUIAutomationLegacyIAccessiblePattern) GetCurrentSelection() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _pvarSelectedChildren *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCurrentSelection(&_pvarSelectedChildren)
+	return _pvarSelectedChildren, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDefaultAction wraps the raw Get_CurrentDefaultAction call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentDefaultAction(pszDefaultAction *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDefaultAction(pszDefaultAction)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CurrentDefaultAction() (foundation.BSTR, error) {
+	var _pszDefaultAction foundation.BSTR
+	_hr := self.Raw.Get_CurrentDefaultAction(&_pszDefaultAction)
+	return _pszDefaultAction, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedChildId wraps the raw Get_CachedChildId call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedChildId(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedChildId(pRetVal)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedChildId() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_CachedChildId(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedName wraps the raw Get_CachedName call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedName(pszName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedName(pszName)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedName() (foundation.BSTR, error) {
+	var _pszName foundation.BSTR
+	_hr := self.Raw.Get_CachedName(&_pszName)
+	return _pszName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedValue wraps the raw Get_CachedValue call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedValue(pszValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedValue(pszValue)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedValue() (foundation.BSTR, error) {
+	var _pszValue foundation.BSTR
+	_hr := self.Raw.Get_CachedValue(&_pszValue)
+	return _pszValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDescription wraps the raw Get_CachedDescription call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedDescription(pszDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDescription(pszDescription)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedDescription() (foundation.BSTR, error) {
+	var _pszDescription foundation.BSTR
+	_hr := self.Raw.Get_CachedDescription(&_pszDescription)
+	return _pszDescription, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedRole wraps the raw Get_CachedRole call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedRole(pdwRole *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedRole(pdwRole)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedRole() (uint32, error) {
+	var _pdwRole uint32
+	_hr := self.Raw.Get_CachedRole(&_pdwRole)
+	return _pdwRole, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedState wraps the raw Get_CachedState call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedState(pdwState *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedState(pdwState)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedState() (uint32, error) {
+	var _pdwState uint32
+	_hr := self.Raw.Get_CachedState(&_pdwState)
+	return _pdwState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedHelp wraps the raw Get_CachedHelp call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedHelp(pszHelp *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedHelp(pszHelp)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedHelp() (foundation.BSTR, error) {
+	var _pszHelp foundation.BSTR
+	_hr := self.Raw.Get_CachedHelp(&_pszHelp)
+	return _pszHelp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedKeyboardShortcut wraps the raw Get_CachedKeyboardShortcut call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedKeyboardShortcut(pszKeyboardShortcut *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedKeyboardShortcut(pszKeyboardShortcut)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedKeyboardShortcut() (foundation.BSTR, error) {
+	var _pszKeyboardShortcut foundation.BSTR
+	_hr := self.Raw.Get_CachedKeyboardShortcut(&_pszKeyboardShortcut)
+	return _pszKeyboardShortcut, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedSelection wraps the raw GetCachedSelection call.
-func (self IUIAutomationLegacyIAccessiblePattern) GetCachedSelection(pvarSelectedChildren **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedSelection(pvarSelectedChildren)))
+func (self IUIAutomationLegacyIAccessiblePattern) GetCachedSelection() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _pvarSelectedChildren *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedSelection(&_pvarSelectedChildren)
+	return _pvarSelectedChildren, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedDefaultAction wraps the raw Get_CachedDefaultAction call.
-func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedDefaultAction(pszDefaultAction *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedDefaultAction(pszDefaultAction)))
+func (self IUIAutomationLegacyIAccessiblePattern) Get_CachedDefaultAction() (foundation.BSTR, error) {
+	var _pszDefaultAction foundation.BSTR
+	_hr := self.Raw.Get_CachedDefaultAction(&_pszDefaultAction)
+	return _pszDefaultAction, win32.HRESULTError(int32(_hr))
 }
 
 // GetIAccessible wraps the raw GetIAccessible call.
-func (self IUIAutomationLegacyIAccessiblePattern) GetIAccessible(ppAccessible **uiaccessibility.IAccessible) error {
-	return win32.HRESULTError(int32(self.Raw.GetIAccessible(ppAccessible)))
+func (self IUIAutomationLegacyIAccessiblePattern) GetIAccessible() (*uiaccessibility.IAccessible, error) {
+	var _ppAccessible *uiaccessibility.IAccessible
+	_hr := self.Raw.GetIAccessible(&_ppAccessible)
+	return _ppAccessible, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationMultipleViewPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationMultipleViewPattern with error-returning methods.
@@ -3411,8 +4117,10 @@ func WrapIUIAutomationMultipleViewPattern(raw *uiaccessibility.IUIAutomationMult
 }
 
 // GetViewName wraps the raw GetViewName call.
-func (self IUIAutomationMultipleViewPattern) GetViewName(view int32, name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetViewName(view, name)))
+func (self IUIAutomationMultipleViewPattern) GetViewName(view int32) (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.GetViewName(view, &_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // SetCurrentView wraps the raw SetCurrentView call.
@@ -3421,23 +4129,31 @@ func (self IUIAutomationMultipleViewPattern) SetCurrentView(view int32) error {
 }
 
 // Get_CurrentCurrentView wraps the raw Get_CurrentCurrentView call.
-func (self IUIAutomationMultipleViewPattern) Get_CurrentCurrentView(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCurrentView(retVal)))
+func (self IUIAutomationMultipleViewPattern) Get_CurrentCurrentView() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentCurrentView(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentSupportedViews wraps the raw GetCurrentSupportedViews call.
-func (self IUIAutomationMultipleViewPattern) GetCurrentSupportedViews(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentSupportedViews(retVal)))
+func (self IUIAutomationMultipleViewPattern) GetCurrentSupportedViews() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetCurrentSupportedViews(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCurrentView wraps the raw Get_CachedCurrentView call.
-func (self IUIAutomationMultipleViewPattern) Get_CachedCurrentView(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCurrentView(retVal)))
+func (self IUIAutomationMultipleViewPattern) Get_CachedCurrentView() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedCurrentView(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedSupportedViews wraps the raw GetCachedSupportedViews call.
-func (self IUIAutomationMultipleViewPattern) GetCachedSupportedViews(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedSupportedViews(retVal)))
+func (self IUIAutomationMultipleViewPattern) GetCachedSupportedViews() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetCachedSupportedViews(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationNotCondition is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationNotCondition with error-returning methods.
@@ -3452,8 +4168,10 @@ func WrapIUIAutomationNotCondition(raw *uiaccessibility.IUIAutomationNotConditio
 }
 
 // GetChild wraps the raw GetChild call.
-func (self IUIAutomationNotCondition) GetChild(condition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.GetChild(condition)))
+func (self IUIAutomationNotCondition) GetChild() (*uiaccessibility.IUIAutomationCondition, error) {
+	var _condition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.GetChild(&_condition)
+	return _condition, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationNotificationEventHandler is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationNotificationEventHandler with error-returning methods.
@@ -3484,8 +4202,10 @@ func WrapIUIAutomationObjectModelPattern(raw *uiaccessibility.IUIAutomationObjec
 }
 
 // GetUnderlyingObjectModel wraps the raw GetUnderlyingObjectModel call.
-func (self IUIAutomationObjectModelPattern) GetUnderlyingObjectModel(retVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetUnderlyingObjectModel(retVal)))
+func (self IUIAutomationObjectModelPattern) GetUnderlyingObjectModel() (*systemcom.IUnknown, error) {
+	var _retVal *systemcom.IUnknown
+	_hr := self.Raw.GetUnderlyingObjectModel(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationOrCondition is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationOrCondition with error-returning methods.
@@ -3500,8 +4220,10 @@ func WrapIUIAutomationOrCondition(raw *uiaccessibility.IUIAutomationOrCondition)
 }
 
 // Get_ChildCount wraps the raw Get_ChildCount call.
-func (self IUIAutomationOrCondition) Get_ChildCount(childCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ChildCount(childCount)))
+func (self IUIAutomationOrCondition) Get_ChildCount() (int32, error) {
+	var _childCount int32
+	_hr := self.Raw.Get_ChildCount(&_childCount)
+	return _childCount, win32.HRESULTError(int32(_hr))
 }
 
 // GetChildrenAsNativeArray wraps the raw GetChildrenAsNativeArray call.
@@ -3510,8 +4232,10 @@ func (self IUIAutomationOrCondition) GetChildrenAsNativeArray(childArray ***uiac
 }
 
 // GetChildren wraps the raw GetChildren call.
-func (self IUIAutomationOrCondition) GetChildren(childArray **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetChildren(childArray)))
+func (self IUIAutomationOrCondition) GetChildren() (*systemcom.SAFEARRAY, error) {
+	var _childArray *systemcom.SAFEARRAY
+	_hr := self.Raw.GetChildren(&_childArray)
+	return _childArray, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationPatternHandler is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationPatternHandler with error-returning methods.
@@ -3580,18 +4304,24 @@ func WrapIUIAutomationPropertyCondition(raw *uiaccessibility.IUIAutomationProper
 }
 
 // Get_PropertyId wraps the raw Get_PropertyId call.
-func (self IUIAutomationPropertyCondition) Get_PropertyId(propertyId *uiaccessibility.UIA_PROPERTY_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyId(propertyId)))
+func (self IUIAutomationPropertyCondition) Get_PropertyId() (uiaccessibility.UIA_PROPERTY_ID, error) {
+	var _propertyId uiaccessibility.UIA_PROPERTY_ID
+	_hr := self.Raw.Get_PropertyId(&_propertyId)
+	return _propertyId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PropertyValue wraps the raw Get_PropertyValue call.
-func (self IUIAutomationPropertyCondition) Get_PropertyValue(propertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyValue(propertyValue)))
+func (self IUIAutomationPropertyCondition) Get_PropertyValue() (systemvariant.VARIANT, error) {
+	var _propertyValue systemvariant.VARIANT
+	_hr := self.Raw.Get_PropertyValue(&_propertyValue)
+	return _propertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PropertyConditionFlags wraps the raw Get_PropertyConditionFlags call.
-func (self IUIAutomationPropertyCondition) Get_PropertyConditionFlags(flags *uiaccessibility.PropertyConditionFlags) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropertyConditionFlags(flags)))
+func (self IUIAutomationPropertyCondition) Get_PropertyConditionFlags() (uiaccessibility.PropertyConditionFlags, error) {
+	var _flags uiaccessibility.PropertyConditionFlags
+	_hr := self.Raw.Get_PropertyConditionFlags(&_flags)
+	return _flags, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationProxyFactory is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationProxyFactory with error-returning methods.
@@ -3606,13 +4336,17 @@ func WrapIUIAutomationProxyFactory(raw *uiaccessibility.IUIAutomationProxyFactor
 }
 
 // CreateProvider wraps the raw CreateProvider call.
-func (self IUIAutomationProxyFactory) CreateProvider(hwnd foundation.HWND, idObject int32, idChild int32, provider **uiaccessibility.IRawElementProviderSimple) error {
-	return win32.HRESULTError(int32(self.Raw.CreateProvider(hwnd, idObject, idChild, provider)))
+func (self IUIAutomationProxyFactory) CreateProvider(hwnd foundation.HWND, idObject int32, idChild int32) (*uiaccessibility.IRawElementProviderSimple, error) {
+	var _provider *uiaccessibility.IRawElementProviderSimple
+	_hr := self.Raw.CreateProvider(hwnd, idObject, idChild, &_provider)
+	return _provider, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProxyFactoryId wraps the raw Get_ProxyFactoryId call.
-func (self IUIAutomationProxyFactory) Get_ProxyFactoryId(factoryId *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProxyFactoryId(factoryId)))
+func (self IUIAutomationProxyFactory) Get_ProxyFactoryId() (foundation.BSTR, error) {
+	var _factoryId foundation.BSTR
+	_hr := self.Raw.Get_ProxyFactoryId(&_factoryId)
+	return _factoryId, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationProxyFactoryEntry is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationProxyFactoryEntry with error-returning methods.
@@ -3627,33 +4361,45 @@ func WrapIUIAutomationProxyFactoryEntry(raw *uiaccessibility.IUIAutomationProxyF
 }
 
 // Get_ProxyFactory wraps the raw Get_ProxyFactory call.
-func (self IUIAutomationProxyFactoryEntry) Get_ProxyFactory(factory **uiaccessibility.IUIAutomationProxyFactory) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProxyFactory(factory)))
+func (self IUIAutomationProxyFactoryEntry) Get_ProxyFactory() (*uiaccessibility.IUIAutomationProxyFactory, error) {
+	var _factory *uiaccessibility.IUIAutomationProxyFactory
+	_hr := self.Raw.Get_ProxyFactory(&_factory)
+	return _factory, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClassName wraps the raw Get_ClassName call.
-func (self IUIAutomationProxyFactoryEntry) Get_ClassName(className *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClassName(className)))
+func (self IUIAutomationProxyFactoryEntry) Get_ClassName() (foundation.BSTR, error) {
+	var _className foundation.BSTR
+	_hr := self.Raw.Get_ClassName(&_className)
+	return _className, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ImageName wraps the raw Get_ImageName call.
-func (self IUIAutomationProxyFactoryEntry) Get_ImageName(imageName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ImageName(imageName)))
+func (self IUIAutomationProxyFactoryEntry) Get_ImageName() (foundation.BSTR, error) {
+	var _imageName foundation.BSTR
+	_hr := self.Raw.Get_ImageName(&_imageName)
+	return _imageName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AllowSubstringMatch wraps the raw Get_AllowSubstringMatch call.
-func (self IUIAutomationProxyFactoryEntry) Get_AllowSubstringMatch(allowSubstringMatch *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowSubstringMatch(allowSubstringMatch)))
+func (self IUIAutomationProxyFactoryEntry) Get_AllowSubstringMatch() (foundation.BOOL, error) {
+	var _allowSubstringMatch foundation.BOOL
+	_hr := self.Raw.Get_AllowSubstringMatch(&_allowSubstringMatch)
+	return _allowSubstringMatch, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanCheckBaseClass wraps the raw Get_CanCheckBaseClass call.
-func (self IUIAutomationProxyFactoryEntry) Get_CanCheckBaseClass(canCheckBaseClass *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanCheckBaseClass(canCheckBaseClass)))
+func (self IUIAutomationProxyFactoryEntry) Get_CanCheckBaseClass() (foundation.BOOL, error) {
+	var _canCheckBaseClass foundation.BOOL
+	_hr := self.Raw.Get_CanCheckBaseClass(&_canCheckBaseClass)
+	return _canCheckBaseClass, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NeedsAdviseEvents wraps the raw Get_NeedsAdviseEvents call.
-func (self IUIAutomationProxyFactoryEntry) Get_NeedsAdviseEvents(adviseEvents *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NeedsAdviseEvents(adviseEvents)))
+func (self IUIAutomationProxyFactoryEntry) Get_NeedsAdviseEvents() (foundation.BOOL, error) {
+	var _adviseEvents foundation.BOOL
+	_hr := self.Raw.Get_NeedsAdviseEvents(&_adviseEvents)
+	return _adviseEvents, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClassName wraps the raw Put_ClassName call.
@@ -3692,8 +4438,10 @@ func (self IUIAutomationProxyFactoryEntry) SetWinEventsForAutomationEvent(eventI
 }
 
 // GetWinEventsForAutomationEvent wraps the raw GetWinEventsForAutomationEvent call.
-func (self IUIAutomationProxyFactoryEntry) GetWinEventsForAutomationEvent(eventId uiaccessibility.UIA_EVENT_ID, propertyId uiaccessibility.UIA_PROPERTY_ID, winEvents **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetWinEventsForAutomationEvent(eventId, propertyId, winEvents)))
+func (self IUIAutomationProxyFactoryEntry) GetWinEventsForAutomationEvent(eventId uiaccessibility.UIA_EVENT_ID, propertyId uiaccessibility.UIA_PROPERTY_ID) (*systemcom.SAFEARRAY, error) {
+	var _winEvents *systemcom.SAFEARRAY
+	_hr := self.Raw.GetWinEventsForAutomationEvent(eventId, propertyId, &_winEvents)
+	return _winEvents, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationProxyFactoryMapping is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationProxyFactoryMapping with error-returning methods.
@@ -3708,18 +4456,24 @@ func WrapIUIAutomationProxyFactoryMapping(raw *uiaccessibility.IUIAutomationProx
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IUIAutomationProxyFactoryMapping) Get_Count(count *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(count)))
+func (self IUIAutomationProxyFactoryMapping) Get_Count() (uint32, error) {
+	var _count uint32
+	_hr := self.Raw.Get_Count(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // GetTable wraps the raw GetTable call.
-func (self IUIAutomationProxyFactoryMapping) GetTable(table **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetTable(table)))
+func (self IUIAutomationProxyFactoryMapping) GetTable() (*systemcom.SAFEARRAY, error) {
+	var _table *systemcom.SAFEARRAY
+	_hr := self.Raw.GetTable(&_table)
+	return _table, win32.HRESULTError(int32(_hr))
 }
 
 // GetEntry wraps the raw GetEntry call.
-func (self IUIAutomationProxyFactoryMapping) GetEntry(index uint32, entry **uiaccessibility.IUIAutomationProxyFactoryEntry) error {
-	return win32.HRESULTError(int32(self.Raw.GetEntry(index, entry)))
+func (self IUIAutomationProxyFactoryMapping) GetEntry(index uint32) (*uiaccessibility.IUIAutomationProxyFactoryEntry, error) {
+	var _entry *uiaccessibility.IUIAutomationProxyFactoryEntry
+	_hr := self.Raw.GetEntry(index, &_entry)
+	return _entry, win32.HRESULTError(int32(_hr))
 }
 
 // SetTable wraps the raw SetTable call.
@@ -3764,63 +4518,87 @@ func WrapIUIAutomationRangeValuePattern(raw *uiaccessibility.IUIAutomationRangeV
 }
 
 // Get_CurrentValue wraps the raw Get_CurrentValue call.
-func (self IUIAutomationRangeValuePattern) Get_CurrentValue(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentValue(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CurrentValue() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentValue(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsReadOnly wraps the raw Get_CurrentIsReadOnly call.
-func (self IUIAutomationRangeValuePattern) Get_CurrentIsReadOnly(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsReadOnly(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CurrentIsReadOnly() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsReadOnly(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentMaximum wraps the raw Get_CurrentMaximum call.
-func (self IUIAutomationRangeValuePattern) Get_CurrentMaximum(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentMaximum(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CurrentMaximum() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentMaximum(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentMinimum wraps the raw Get_CurrentMinimum call.
-func (self IUIAutomationRangeValuePattern) Get_CurrentMinimum(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentMinimum(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CurrentMinimum() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentMinimum(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentLargeChange wraps the raw Get_CurrentLargeChange call.
-func (self IUIAutomationRangeValuePattern) Get_CurrentLargeChange(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentLargeChange(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CurrentLargeChange() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentLargeChange(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentSmallChange wraps the raw Get_CurrentSmallChange call.
-func (self IUIAutomationRangeValuePattern) Get_CurrentSmallChange(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentSmallChange(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CurrentSmallChange() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentSmallChange(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedValue wraps the raw Get_CachedValue call.
-func (self IUIAutomationRangeValuePattern) Get_CachedValue(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedValue(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CachedValue() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedValue(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsReadOnly wraps the raw Get_CachedIsReadOnly call.
-func (self IUIAutomationRangeValuePattern) Get_CachedIsReadOnly(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsReadOnly(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CachedIsReadOnly() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsReadOnly(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedMaximum wraps the raw Get_CachedMaximum call.
-func (self IUIAutomationRangeValuePattern) Get_CachedMaximum(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedMaximum(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CachedMaximum() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedMaximum(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedMinimum wraps the raw Get_CachedMinimum call.
-func (self IUIAutomationRangeValuePattern) Get_CachedMinimum(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedMinimum(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CachedMinimum() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedMinimum(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedLargeChange wraps the raw Get_CachedLargeChange call.
-func (self IUIAutomationRangeValuePattern) Get_CachedLargeChange(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedLargeChange(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CachedLargeChange() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedLargeChange(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedSmallChange wraps the raw Get_CachedSmallChange call.
-func (self IUIAutomationRangeValuePattern) Get_CachedSmallChange(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedSmallChange(retVal)))
+func (self IUIAutomationRangeValuePattern) Get_CachedSmallChange() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedSmallChange(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationRegistrar is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationRegistrar with error-returning methods.
@@ -3882,63 +4660,87 @@ func (self IUIAutomationScrollPattern) Scroll(horizontalAmount uiaccessibility.S
 }
 
 // Get_CurrentHorizontalScrollPercent wraps the raw Get_CurrentHorizontalScrollPercent call.
-func (self IUIAutomationScrollPattern) Get_CurrentHorizontalScrollPercent(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentHorizontalScrollPercent(retVal)))
+func (self IUIAutomationScrollPattern) Get_CurrentHorizontalScrollPercent() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentHorizontalScrollPercent(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentVerticalScrollPercent wraps the raw Get_CurrentVerticalScrollPercent call.
-func (self IUIAutomationScrollPattern) Get_CurrentVerticalScrollPercent(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentVerticalScrollPercent(retVal)))
+func (self IUIAutomationScrollPattern) Get_CurrentVerticalScrollPercent() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentVerticalScrollPercent(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentHorizontalViewSize wraps the raw Get_CurrentHorizontalViewSize call.
-func (self IUIAutomationScrollPattern) Get_CurrentHorizontalViewSize(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentHorizontalViewSize(retVal)))
+func (self IUIAutomationScrollPattern) Get_CurrentHorizontalViewSize() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentHorizontalViewSize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentVerticalViewSize wraps the raw Get_CurrentVerticalViewSize call.
-func (self IUIAutomationScrollPattern) Get_CurrentVerticalViewSize(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentVerticalViewSize(retVal)))
+func (self IUIAutomationScrollPattern) Get_CurrentVerticalViewSize() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentVerticalViewSize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentHorizontallyScrollable wraps the raw Get_CurrentHorizontallyScrollable call.
-func (self IUIAutomationScrollPattern) Get_CurrentHorizontallyScrollable(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentHorizontallyScrollable(retVal)))
+func (self IUIAutomationScrollPattern) Get_CurrentHorizontallyScrollable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentHorizontallyScrollable(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentVerticallyScrollable wraps the raw Get_CurrentVerticallyScrollable call.
-func (self IUIAutomationScrollPattern) Get_CurrentVerticallyScrollable(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentVerticallyScrollable(retVal)))
+func (self IUIAutomationScrollPattern) Get_CurrentVerticallyScrollable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentVerticallyScrollable(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedHorizontalScrollPercent wraps the raw Get_CachedHorizontalScrollPercent call.
-func (self IUIAutomationScrollPattern) Get_CachedHorizontalScrollPercent(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedHorizontalScrollPercent(retVal)))
+func (self IUIAutomationScrollPattern) Get_CachedHorizontalScrollPercent() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedHorizontalScrollPercent(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedVerticalScrollPercent wraps the raw Get_CachedVerticalScrollPercent call.
-func (self IUIAutomationScrollPattern) Get_CachedVerticalScrollPercent(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedVerticalScrollPercent(retVal)))
+func (self IUIAutomationScrollPattern) Get_CachedVerticalScrollPercent() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedVerticalScrollPercent(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedHorizontalViewSize wraps the raw Get_CachedHorizontalViewSize call.
-func (self IUIAutomationScrollPattern) Get_CachedHorizontalViewSize(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedHorizontalViewSize(retVal)))
+func (self IUIAutomationScrollPattern) Get_CachedHorizontalViewSize() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedHorizontalViewSize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedVerticalViewSize wraps the raw Get_CachedVerticalViewSize call.
-func (self IUIAutomationScrollPattern) Get_CachedVerticalViewSize(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedVerticalViewSize(retVal)))
+func (self IUIAutomationScrollPattern) Get_CachedVerticalViewSize() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedVerticalViewSize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedHorizontallyScrollable wraps the raw Get_CachedHorizontallyScrollable call.
-func (self IUIAutomationScrollPattern) Get_CachedHorizontallyScrollable(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedHorizontallyScrollable(retVal)))
+func (self IUIAutomationScrollPattern) Get_CachedHorizontallyScrollable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedHorizontallyScrollable(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedVerticallyScrollable wraps the raw Get_CachedVerticallyScrollable call.
-func (self IUIAutomationScrollPattern) Get_CachedVerticallyScrollable(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedVerticallyScrollable(retVal)))
+func (self IUIAutomationScrollPattern) Get_CachedVerticallyScrollable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedVerticallyScrollable(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationSelectionItemPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationSelectionItemPattern with error-returning methods.
@@ -3968,23 +4770,31 @@ func (self IUIAutomationSelectionItemPattern) RemoveFromSelection() error {
 }
 
 // Get_CurrentIsSelected wraps the raw Get_CurrentIsSelected call.
-func (self IUIAutomationSelectionItemPattern) Get_CurrentIsSelected(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsSelected(retVal)))
+func (self IUIAutomationSelectionItemPattern) Get_CurrentIsSelected() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsSelected(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentSelectionContainer wraps the raw Get_CurrentSelectionContainer call.
-func (self IUIAutomationSelectionItemPattern) Get_CurrentSelectionContainer(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentSelectionContainer(retVal)))
+func (self IUIAutomationSelectionItemPattern) Get_CurrentSelectionContainer() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CurrentSelectionContainer(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsSelected wraps the raw Get_CachedIsSelected call.
-func (self IUIAutomationSelectionItemPattern) Get_CachedIsSelected(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsSelected(retVal)))
+func (self IUIAutomationSelectionItemPattern) Get_CachedIsSelected() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsSelected(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedSelectionContainer wraps the raw Get_CachedSelectionContainer call.
-func (self IUIAutomationSelectionItemPattern) Get_CachedSelectionContainer(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedSelectionContainer(retVal)))
+func (self IUIAutomationSelectionItemPattern) Get_CachedSelectionContainer() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CachedSelectionContainer(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationSelectionPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationSelectionPattern with error-returning methods.
@@ -3999,33 +4809,45 @@ func WrapIUIAutomationSelectionPattern(raw *uiaccessibility.IUIAutomationSelecti
 }
 
 // GetCurrentSelection wraps the raw GetCurrentSelection call.
-func (self IUIAutomationSelectionPattern) GetCurrentSelection(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentSelection(retVal)))
+func (self IUIAutomationSelectionPattern) GetCurrentSelection() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCurrentSelection(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentCanSelectMultiple wraps the raw Get_CurrentCanSelectMultiple call.
-func (self IUIAutomationSelectionPattern) Get_CurrentCanSelectMultiple(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCanSelectMultiple(retVal)))
+func (self IUIAutomationSelectionPattern) Get_CurrentCanSelectMultiple() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentCanSelectMultiple(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsSelectionRequired wraps the raw Get_CurrentIsSelectionRequired call.
-func (self IUIAutomationSelectionPattern) Get_CurrentIsSelectionRequired(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsSelectionRequired(retVal)))
+func (self IUIAutomationSelectionPattern) Get_CurrentIsSelectionRequired() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsSelectionRequired(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedSelection wraps the raw GetCachedSelection call.
-func (self IUIAutomationSelectionPattern) GetCachedSelection(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedSelection(retVal)))
+func (self IUIAutomationSelectionPattern) GetCachedSelection() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedSelection(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCanSelectMultiple wraps the raw Get_CachedCanSelectMultiple call.
-func (self IUIAutomationSelectionPattern) Get_CachedCanSelectMultiple(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCanSelectMultiple(retVal)))
+func (self IUIAutomationSelectionPattern) Get_CachedCanSelectMultiple() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedCanSelectMultiple(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsSelectionRequired wraps the raw Get_CachedIsSelectionRequired call.
-func (self IUIAutomationSelectionPattern) Get_CachedIsSelectionRequired(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsSelectionRequired(retVal)))
+func (self IUIAutomationSelectionPattern) Get_CachedIsSelectionRequired() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsSelectionRequired(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationSelectionPattern2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationSelectionPattern2 with error-returning methods.
@@ -4040,43 +4862,59 @@ func WrapIUIAutomationSelectionPattern2(raw *uiaccessibility.IUIAutomationSelect
 }
 
 // Get_CurrentFirstSelectedItem wraps the raw Get_CurrentFirstSelectedItem call.
-func (self IUIAutomationSelectionPattern2) Get_CurrentFirstSelectedItem(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFirstSelectedItem(retVal)))
+func (self IUIAutomationSelectionPattern2) Get_CurrentFirstSelectedItem() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CurrentFirstSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentLastSelectedItem wraps the raw Get_CurrentLastSelectedItem call.
-func (self IUIAutomationSelectionPattern2) Get_CurrentLastSelectedItem(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentLastSelectedItem(retVal)))
+func (self IUIAutomationSelectionPattern2) Get_CurrentLastSelectedItem() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CurrentLastSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentCurrentSelectedItem wraps the raw Get_CurrentCurrentSelectedItem call.
-func (self IUIAutomationSelectionPattern2) Get_CurrentCurrentSelectedItem(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCurrentSelectedItem(retVal)))
+func (self IUIAutomationSelectionPattern2) Get_CurrentCurrentSelectedItem() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CurrentCurrentSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentItemCount wraps the raw Get_CurrentItemCount call.
-func (self IUIAutomationSelectionPattern2) Get_CurrentItemCount(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentItemCount(retVal)))
+func (self IUIAutomationSelectionPattern2) Get_CurrentItemCount() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentItemCount(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFirstSelectedItem wraps the raw Get_CachedFirstSelectedItem call.
-func (self IUIAutomationSelectionPattern2) Get_CachedFirstSelectedItem(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFirstSelectedItem(retVal)))
+func (self IUIAutomationSelectionPattern2) Get_CachedFirstSelectedItem() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CachedFirstSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedLastSelectedItem wraps the raw Get_CachedLastSelectedItem call.
-func (self IUIAutomationSelectionPattern2) Get_CachedLastSelectedItem(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedLastSelectedItem(retVal)))
+func (self IUIAutomationSelectionPattern2) Get_CachedLastSelectedItem() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CachedLastSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCurrentSelectedItem wraps the raw Get_CachedCurrentSelectedItem call.
-func (self IUIAutomationSelectionPattern2) Get_CachedCurrentSelectedItem(retVal **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCurrentSelectedItem(retVal)))
+func (self IUIAutomationSelectionPattern2) Get_CachedCurrentSelectedItem() (*uiaccessibility.IUIAutomationElement, error) {
+	var _retVal *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_CachedCurrentSelectedItem(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedItemCount wraps the raw Get_CachedItemCount call.
-func (self IUIAutomationSelectionPattern2) Get_CachedItemCount(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedItemCount(retVal)))
+func (self IUIAutomationSelectionPattern2) Get_CachedItemCount() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedItemCount(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationSpreadsheetItemPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationSpreadsheetItemPattern with error-returning methods.
@@ -4091,33 +4929,45 @@ func WrapIUIAutomationSpreadsheetItemPattern(raw *uiaccessibility.IUIAutomationS
 }
 
 // Get_CurrentFormula wraps the raw Get_CurrentFormula call.
-func (self IUIAutomationSpreadsheetItemPattern) Get_CurrentFormula(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFormula(retVal)))
+func (self IUIAutomationSpreadsheetItemPattern) Get_CurrentFormula() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentFormula(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentAnnotationObjects wraps the raw GetCurrentAnnotationObjects call.
-func (self IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationObjects(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentAnnotationObjects(retVal)))
+func (self IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationObjects() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCurrentAnnotationObjects(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentAnnotationTypes wraps the raw GetCurrentAnnotationTypes call.
-func (self IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationTypes(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentAnnotationTypes(retVal)))
+func (self IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetCurrentAnnotationTypes(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFormula wraps the raw Get_CachedFormula call.
-func (self IUIAutomationSpreadsheetItemPattern) Get_CachedFormula(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFormula(retVal)))
+func (self IUIAutomationSpreadsheetItemPattern) Get_CachedFormula() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedFormula(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedAnnotationObjects wraps the raw GetCachedAnnotationObjects call.
-func (self IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationObjects(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedAnnotationObjects(retVal)))
+func (self IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationObjects() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedAnnotationObjects(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedAnnotationTypes wraps the raw GetCachedAnnotationTypes call.
-func (self IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationTypes(retVal **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedAnnotationTypes(retVal)))
+func (self IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	_hr := self.Raw.GetCachedAnnotationTypes(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationSpreadsheetPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationSpreadsheetPattern with error-returning methods.
@@ -4132,8 +4982,10 @@ func WrapIUIAutomationSpreadsheetPattern(raw *uiaccessibility.IUIAutomationSprea
 }
 
 // GetItemByName wraps the raw GetItemByName call.
-func (self IUIAutomationSpreadsheetPattern) GetItemByName(name foundation.BSTR, element **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetItemByName(name, element)))
+func (self IUIAutomationSpreadsheetPattern) GetItemByName(name foundation.BSTR) (*uiaccessibility.IUIAutomationElement, error) {
+	var _element *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetItemByName(name, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationStructureChangedEventHandler is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationStructureChangedEventHandler with error-returning methods.
@@ -4164,38 +5016,52 @@ func WrapIUIAutomationStylesPattern(raw *uiaccessibility.IUIAutomationStylesPatt
 }
 
 // Get_CurrentStyleId wraps the raw Get_CurrentStyleId call.
-func (self IUIAutomationStylesPattern) Get_CurrentStyleId(retVal *uiaccessibility.UIA_STYLE_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentStyleId(retVal)))
+func (self IUIAutomationStylesPattern) Get_CurrentStyleId() (uiaccessibility.UIA_STYLE_ID, error) {
+	var _retVal uiaccessibility.UIA_STYLE_ID
+	_hr := self.Raw.Get_CurrentStyleId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentStyleName wraps the raw Get_CurrentStyleName call.
-func (self IUIAutomationStylesPattern) Get_CurrentStyleName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentStyleName(retVal)))
+func (self IUIAutomationStylesPattern) Get_CurrentStyleName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentStyleName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentFillColor wraps the raw Get_CurrentFillColor call.
-func (self IUIAutomationStylesPattern) Get_CurrentFillColor(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFillColor(retVal)))
+func (self IUIAutomationStylesPattern) Get_CurrentFillColor() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentFillColor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentFillPatternStyle wraps the raw Get_CurrentFillPatternStyle call.
-func (self IUIAutomationStylesPattern) Get_CurrentFillPatternStyle(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFillPatternStyle(retVal)))
+func (self IUIAutomationStylesPattern) Get_CurrentFillPatternStyle() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentFillPatternStyle(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentShape wraps the raw Get_CurrentShape call.
-func (self IUIAutomationStylesPattern) Get_CurrentShape(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentShape(retVal)))
+func (self IUIAutomationStylesPattern) Get_CurrentShape() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentShape(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentFillPatternColor wraps the raw Get_CurrentFillPatternColor call.
-func (self IUIAutomationStylesPattern) Get_CurrentFillPatternColor(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFillPatternColor(retVal)))
+func (self IUIAutomationStylesPattern) Get_CurrentFillPatternColor() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CurrentFillPatternColor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentExtendedProperties wraps the raw Get_CurrentExtendedProperties call.
-func (self IUIAutomationStylesPattern) Get_CurrentExtendedProperties(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentExtendedProperties(retVal)))
+func (self IUIAutomationStylesPattern) Get_CurrentExtendedProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentExtendedProperties(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentExtendedPropertiesAsArray wraps the raw GetCurrentExtendedPropertiesAsArray call.
@@ -4204,38 +5070,52 @@ func (self IUIAutomationStylesPattern) GetCurrentExtendedPropertiesAsArray(prope
 }
 
 // Get_CachedStyleId wraps the raw Get_CachedStyleId call.
-func (self IUIAutomationStylesPattern) Get_CachedStyleId(retVal *uiaccessibility.UIA_STYLE_ID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedStyleId(retVal)))
+func (self IUIAutomationStylesPattern) Get_CachedStyleId() (uiaccessibility.UIA_STYLE_ID, error) {
+	var _retVal uiaccessibility.UIA_STYLE_ID
+	_hr := self.Raw.Get_CachedStyleId(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedStyleName wraps the raw Get_CachedStyleName call.
-func (self IUIAutomationStylesPattern) Get_CachedStyleName(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedStyleName(retVal)))
+func (self IUIAutomationStylesPattern) Get_CachedStyleName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedStyleName(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFillColor wraps the raw Get_CachedFillColor call.
-func (self IUIAutomationStylesPattern) Get_CachedFillColor(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFillColor(retVal)))
+func (self IUIAutomationStylesPattern) Get_CachedFillColor() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedFillColor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFillPatternStyle wraps the raw Get_CachedFillPatternStyle call.
-func (self IUIAutomationStylesPattern) Get_CachedFillPatternStyle(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFillPatternStyle(retVal)))
+func (self IUIAutomationStylesPattern) Get_CachedFillPatternStyle() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedFillPatternStyle(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedShape wraps the raw Get_CachedShape call.
-func (self IUIAutomationStylesPattern) Get_CachedShape(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedShape(retVal)))
+func (self IUIAutomationStylesPattern) Get_CachedShape() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedShape(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedFillPatternColor wraps the raw Get_CachedFillPatternColor call.
-func (self IUIAutomationStylesPattern) Get_CachedFillPatternColor(retVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedFillPatternColor(retVal)))
+func (self IUIAutomationStylesPattern) Get_CachedFillPatternColor() (int32, error) {
+	var _retVal int32
+	_hr := self.Raw.Get_CachedFillPatternColor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedExtendedProperties wraps the raw Get_CachedExtendedProperties call.
-func (self IUIAutomationStylesPattern) Get_CachedExtendedProperties(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedExtendedProperties(retVal)))
+func (self IUIAutomationStylesPattern) Get_CachedExtendedProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedExtendedProperties(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedExtendedPropertiesAsArray wraps the raw GetCachedExtendedPropertiesAsArray call.
@@ -4276,23 +5156,31 @@ func WrapIUIAutomationTableItemPattern(raw *uiaccessibility.IUIAutomationTableIt
 }
 
 // GetCurrentRowHeaderItems wraps the raw GetCurrentRowHeaderItems call.
-func (self IUIAutomationTableItemPattern) GetCurrentRowHeaderItems(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentRowHeaderItems(retVal)))
+func (self IUIAutomationTableItemPattern) GetCurrentRowHeaderItems() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCurrentRowHeaderItems(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentColumnHeaderItems wraps the raw GetCurrentColumnHeaderItems call.
-func (self IUIAutomationTableItemPattern) GetCurrentColumnHeaderItems(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentColumnHeaderItems(retVal)))
+func (self IUIAutomationTableItemPattern) GetCurrentColumnHeaderItems() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCurrentColumnHeaderItems(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedRowHeaderItems wraps the raw GetCachedRowHeaderItems call.
-func (self IUIAutomationTableItemPattern) GetCachedRowHeaderItems(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedRowHeaderItems(retVal)))
+func (self IUIAutomationTableItemPattern) GetCachedRowHeaderItems() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedRowHeaderItems(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedColumnHeaderItems wraps the raw GetCachedColumnHeaderItems call.
-func (self IUIAutomationTableItemPattern) GetCachedColumnHeaderItems(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedColumnHeaderItems(retVal)))
+func (self IUIAutomationTableItemPattern) GetCachedColumnHeaderItems() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedColumnHeaderItems(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTablePattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTablePattern with error-returning methods.
@@ -4307,33 +5195,45 @@ func WrapIUIAutomationTablePattern(raw *uiaccessibility.IUIAutomationTablePatter
 }
 
 // GetCurrentRowHeaders wraps the raw GetCurrentRowHeaders call.
-func (self IUIAutomationTablePattern) GetCurrentRowHeaders(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentRowHeaders(retVal)))
+func (self IUIAutomationTablePattern) GetCurrentRowHeaders() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCurrentRowHeaders(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentColumnHeaders wraps the raw GetCurrentColumnHeaders call.
-func (self IUIAutomationTablePattern) GetCurrentColumnHeaders(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentColumnHeaders(retVal)))
+func (self IUIAutomationTablePattern) GetCurrentColumnHeaders() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCurrentColumnHeaders(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentRowOrColumnMajor wraps the raw Get_CurrentRowOrColumnMajor call.
-func (self IUIAutomationTablePattern) Get_CurrentRowOrColumnMajor(retVal *uiaccessibility.RowOrColumnMajor) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentRowOrColumnMajor(retVal)))
+func (self IUIAutomationTablePattern) Get_CurrentRowOrColumnMajor() (uiaccessibility.RowOrColumnMajor, error) {
+	var _retVal uiaccessibility.RowOrColumnMajor
+	_hr := self.Raw.Get_CurrentRowOrColumnMajor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedRowHeaders wraps the raw GetCachedRowHeaders call.
-func (self IUIAutomationTablePattern) GetCachedRowHeaders(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedRowHeaders(retVal)))
+func (self IUIAutomationTablePattern) GetCachedRowHeaders() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedRowHeaders(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCachedColumnHeaders wraps the raw GetCachedColumnHeaders call.
-func (self IUIAutomationTablePattern) GetCachedColumnHeaders(retVal **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetCachedColumnHeaders(retVal)))
+func (self IUIAutomationTablePattern) GetCachedColumnHeaders() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _retVal *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetCachedColumnHeaders(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedRowOrColumnMajor wraps the raw Get_CachedRowOrColumnMajor call.
-func (self IUIAutomationTablePattern) Get_CachedRowOrColumnMajor(retVal *uiaccessibility.RowOrColumnMajor) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedRowOrColumnMajor(retVal)))
+func (self IUIAutomationTablePattern) Get_CachedRowOrColumnMajor() (uiaccessibility.RowOrColumnMajor, error) {
+	var _retVal uiaccessibility.RowOrColumnMajor
+	_hr := self.Raw.Get_CachedRowOrColumnMajor(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTextChildPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTextChildPattern with error-returning methods.
@@ -4348,13 +5248,17 @@ func WrapIUIAutomationTextChildPattern(raw *uiaccessibility.IUIAutomationTextChi
 }
 
 // Get_TextContainer wraps the raw Get_TextContainer call.
-func (self IUIAutomationTextChildPattern) Get_TextContainer(container **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TextContainer(container)))
+func (self IUIAutomationTextChildPattern) Get_TextContainer() (*uiaccessibility.IUIAutomationElement, error) {
+	var _container *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.Get_TextContainer(&_container)
+	return _container, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TextRange wraps the raw Get_TextRange call.
-func (self IUIAutomationTextChildPattern) Get_TextRange(range_ **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TextRange(range_)))
+func (self IUIAutomationTextChildPattern) Get_TextRange() (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _range_ *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.Get_TextRange(&_range_)
+	return _range_, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTextEditPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTextEditPattern with error-returning methods.
@@ -4369,13 +5273,17 @@ func WrapIUIAutomationTextEditPattern(raw *uiaccessibility.IUIAutomationTextEdit
 }
 
 // GetActiveComposition wraps the raw GetActiveComposition call.
-func (self IUIAutomationTextEditPattern) GetActiveComposition(range_ **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.GetActiveComposition(range_)))
+func (self IUIAutomationTextEditPattern) GetActiveComposition() (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _range_ *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.GetActiveComposition(&_range_)
+	return _range_, win32.HRESULTError(int32(_hr))
 }
 
 // GetConversionTarget wraps the raw GetConversionTarget call.
-func (self IUIAutomationTextEditPattern) GetConversionTarget(range_ **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.GetConversionTarget(range_)))
+func (self IUIAutomationTextEditPattern) GetConversionTarget() (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _range_ *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.GetConversionTarget(&_range_)
+	return _range_, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTextEditTextChangedEventHandler is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTextEditTextChangedEventHandler with error-returning methods.
@@ -4406,28 +5314,38 @@ func WrapIUIAutomationTextPattern(raw *uiaccessibility.IUIAutomationTextPattern)
 }
 
 // RangeFromChild wraps the raw RangeFromChild call.
-func (self IUIAutomationTextPattern) RangeFromChild(child *uiaccessibility.IUIAutomationElement, range_ **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.RangeFromChild(child, range_)))
+func (self IUIAutomationTextPattern) RangeFromChild(child *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _range_ *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.RangeFromChild(child, &_range_)
+	return _range_, win32.HRESULTError(int32(_hr))
 }
 
 // GetSelection wraps the raw GetSelection call.
-func (self IUIAutomationTextPattern) GetSelection(ranges **uiaccessibility.IUIAutomationTextRangeArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetSelection(ranges)))
+func (self IUIAutomationTextPattern) GetSelection() (*uiaccessibility.IUIAutomationTextRangeArray, error) {
+	var _ranges *uiaccessibility.IUIAutomationTextRangeArray
+	_hr := self.Raw.GetSelection(&_ranges)
+	return _ranges, win32.HRESULTError(int32(_hr))
 }
 
 // GetVisibleRanges wraps the raw GetVisibleRanges call.
-func (self IUIAutomationTextPattern) GetVisibleRanges(ranges **uiaccessibility.IUIAutomationTextRangeArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetVisibleRanges(ranges)))
+func (self IUIAutomationTextPattern) GetVisibleRanges() (*uiaccessibility.IUIAutomationTextRangeArray, error) {
+	var _ranges *uiaccessibility.IUIAutomationTextRangeArray
+	_hr := self.Raw.GetVisibleRanges(&_ranges)
+	return _ranges, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DocumentRange wraps the raw Get_DocumentRange call.
-func (self IUIAutomationTextPattern) Get_DocumentRange(range_ **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DocumentRange(range_)))
+func (self IUIAutomationTextPattern) Get_DocumentRange() (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _range_ *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.Get_DocumentRange(&_range_)
+	return _range_, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SupportedTextSelection wraps the raw Get_SupportedTextSelection call.
-func (self IUIAutomationTextPattern) Get_SupportedTextSelection(supportedTextSelection *uiaccessibility.SupportedTextSelection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SupportedTextSelection(supportedTextSelection)))
+func (self IUIAutomationTextPattern) Get_SupportedTextSelection() (uiaccessibility.SupportedTextSelection, error) {
+	var _supportedTextSelection uiaccessibility.SupportedTextSelection
+	_hr := self.Raw.Get_SupportedTextSelection(&_supportedTextSelection)
+	return _supportedTextSelection, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTextPattern2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTextPattern2 with error-returning methods.
@@ -4442,13 +5360,17 @@ func WrapIUIAutomationTextPattern2(raw *uiaccessibility.IUIAutomationTextPattern
 }
 
 // RangeFromAnnotation wraps the raw RangeFromAnnotation call.
-func (self IUIAutomationTextPattern2) RangeFromAnnotation(annotation *uiaccessibility.IUIAutomationElement, range_ **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.RangeFromAnnotation(annotation, range_)))
+func (self IUIAutomationTextPattern2) RangeFromAnnotation(annotation *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _range_ *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.RangeFromAnnotation(annotation, &_range_)
+	return _range_, win32.HRESULTError(int32(_hr))
 }
 
 // GetCaretRange wraps the raw GetCaretRange call.
-func (self IUIAutomationTextPattern2) GetCaretRange(isActive *foundation.BOOL, range_ **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.GetCaretRange(isActive, range_)))
+func (self IUIAutomationTextPattern2) GetCaretRange(isActive *foundation.BOOL) (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _range_ *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.GetCaretRange(isActive, &_range_)
+	return _range_, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTextRange is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTextRange with error-returning methods.
@@ -4463,18 +5385,24 @@ func WrapIUIAutomationTextRange(raw *uiaccessibility.IUIAutomationTextRange) IUI
 }
 
 // Clone wraps the raw Clone call.
-func (self IUIAutomationTextRange) Clone(clonedRange **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(clonedRange)))
+func (self IUIAutomationTextRange) Clone() (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _clonedRange *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.Clone(&_clonedRange)
+	return _clonedRange, win32.HRESULTError(int32(_hr))
 }
 
 // Compare wraps the raw Compare call.
-func (self IUIAutomationTextRange) Compare(range_ *uiaccessibility.IUIAutomationTextRange, areSame *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Compare(range_, areSame)))
+func (self IUIAutomationTextRange) Compare(range_ *uiaccessibility.IUIAutomationTextRange) (foundation.BOOL, error) {
+	var _areSame foundation.BOOL
+	_hr := self.Raw.Compare(range_, &_areSame)
+	return _areSame, win32.HRESULTError(int32(_hr))
 }
 
 // CompareEndpoints wraps the raw CompareEndpoints call.
-func (self IUIAutomationTextRange) CompareEndpoints(srcEndPoint uiaccessibility.TextPatternRangeEndpoint, range_ *uiaccessibility.IUIAutomationTextRange, targetEndPoint uiaccessibility.TextPatternRangeEndpoint, compValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CompareEndpoints(srcEndPoint, range_, targetEndPoint, compValue)))
+func (self IUIAutomationTextRange) CompareEndpoints(srcEndPoint uiaccessibility.TextPatternRangeEndpoint, range_ *uiaccessibility.IUIAutomationTextRange, targetEndPoint uiaccessibility.TextPatternRangeEndpoint) (int32, error) {
+	var _compValue int32
+	_hr := self.Raw.CompareEndpoints(srcEndPoint, range_, targetEndPoint, &_compValue)
+	return _compValue, win32.HRESULTError(int32(_hr))
 }
 
 // ExpandToEnclosingUnit wraps the raw ExpandToEnclosingUnit call.
@@ -4483,40 +5411,54 @@ func (self IUIAutomationTextRange) ExpandToEnclosingUnit(textUnit uiaccessibilit
 }
 
 // FindText wraps the raw FindText call.
-func (self IUIAutomationTextRange) FindText(text foundation.BSTR, backward bool, ignoreCase bool, found **uiaccessibility.IUIAutomationTextRange) error {
+func (self IUIAutomationTextRange) FindText(text foundation.BSTR, backward bool, ignoreCase bool) (*uiaccessibility.IUIAutomationTextRange, error) {
 	_backward := foundation.BOOL(win32.Bool32(backward))
 	_ignoreCase := foundation.BOOL(win32.Bool32(ignoreCase))
-	return win32.HRESULTError(int32(self.Raw.FindText(text, _backward, _ignoreCase, found)))
+	var _found *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.FindText(text, _backward, _ignoreCase, &_found)
+	return _found, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttributeValue wraps the raw GetAttributeValue call.
-func (self IUIAutomationTextRange) GetAttributeValue(attr uiaccessibility.UIA_TEXTATTRIBUTE_ID, value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttributeValue(attr, value)))
+func (self IUIAutomationTextRange) GetAttributeValue(attr uiaccessibility.UIA_TEXTATTRIBUTE_ID) (systemvariant.VARIANT, error) {
+	var _value systemvariant.VARIANT
+	_hr := self.Raw.GetAttributeValue(attr, &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetBoundingRectangles wraps the raw GetBoundingRectangles call.
-func (self IUIAutomationTextRange) GetBoundingRectangles(boundingRects **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetBoundingRectangles(boundingRects)))
+func (self IUIAutomationTextRange) GetBoundingRectangles() (*systemcom.SAFEARRAY, error) {
+	var _boundingRects *systemcom.SAFEARRAY
+	_hr := self.Raw.GetBoundingRectangles(&_boundingRects)
+	return _boundingRects, win32.HRESULTError(int32(_hr))
 }
 
 // GetEnclosingElement wraps the raw GetEnclosingElement call.
-func (self IUIAutomationTextRange) GetEnclosingElement(enclosingElement **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnclosingElement(enclosingElement)))
+func (self IUIAutomationTextRange) GetEnclosingElement() (*uiaccessibility.IUIAutomationElement, error) {
+	var _enclosingElement *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetEnclosingElement(&_enclosingElement)
+	return _enclosingElement, win32.HRESULTError(int32(_hr))
 }
 
 // GetText wraps the raw GetText call.
-func (self IUIAutomationTextRange) GetText(maxLength int32, text *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetText(maxLength, text)))
+func (self IUIAutomationTextRange) GetText(maxLength int32) (foundation.BSTR, error) {
+	var _text foundation.BSTR
+	_hr := self.Raw.GetText(maxLength, &_text)
+	return _text, win32.HRESULTError(int32(_hr))
 }
 
 // Move wraps the raw Move call.
-func (self IUIAutomationTextRange) Move(unit uiaccessibility.TextUnit, count int32, moved *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Move(unit, count, moved)))
+func (self IUIAutomationTextRange) Move(unit uiaccessibility.TextUnit, count int32) (int32, error) {
+	var _moved int32
+	_hr := self.Raw.Move(unit, count, &_moved)
+	return _moved, win32.HRESULTError(int32(_hr))
 }
 
 // MoveEndpointByUnit wraps the raw MoveEndpointByUnit call.
-func (self IUIAutomationTextRange) MoveEndpointByUnit(endpoint uiaccessibility.TextPatternRangeEndpoint, unit uiaccessibility.TextUnit, count int32, moved *int32) error {
-	return win32.HRESULTError(int32(self.Raw.MoveEndpointByUnit(endpoint, unit, count, moved)))
+func (self IUIAutomationTextRange) MoveEndpointByUnit(endpoint uiaccessibility.TextPatternRangeEndpoint, unit uiaccessibility.TextUnit, count int32) (int32, error) {
+	var _moved int32
+	_hr := self.Raw.MoveEndpointByUnit(endpoint, unit, count, &_moved)
+	return _moved, win32.HRESULTError(int32(_hr))
 }
 
 // MoveEndpointByRange wraps the raw MoveEndpointByRange call.
@@ -4546,8 +5488,10 @@ func (self IUIAutomationTextRange) ScrollIntoView(alignToTop bool) error {
 }
 
 // GetChildren wraps the raw GetChildren call.
-func (self IUIAutomationTextRange) GetChildren(children **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetChildren(children)))
+func (self IUIAutomationTextRange) GetChildren() (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _children *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetChildren(&_children)
+	return _children, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTextRange2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTextRange2 with error-returning methods.
@@ -4578,18 +5522,24 @@ func WrapIUIAutomationTextRange3(raw *uiaccessibility.IUIAutomationTextRange3) I
 }
 
 // GetEnclosingElementBuildCache wraps the raw GetEnclosingElementBuildCache call.
-func (self IUIAutomationTextRange3) GetEnclosingElementBuildCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest, enclosingElement **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnclosingElementBuildCache(cacheRequest, enclosingElement)))
+func (self IUIAutomationTextRange3) GetEnclosingElementBuildCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _enclosingElement *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetEnclosingElementBuildCache(cacheRequest, &_enclosingElement)
+	return _enclosingElement, win32.HRESULTError(int32(_hr))
 }
 
 // GetChildrenBuildCache wraps the raw GetChildrenBuildCache call.
-func (self IUIAutomationTextRange3) GetChildrenBuildCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest, children **uiaccessibility.IUIAutomationElementArray) error {
-	return win32.HRESULTError(int32(self.Raw.GetChildrenBuildCache(cacheRequest, children)))
+func (self IUIAutomationTextRange3) GetChildrenBuildCache(cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElementArray, error) {
+	var _children *uiaccessibility.IUIAutomationElementArray
+	_hr := self.Raw.GetChildrenBuildCache(cacheRequest, &_children)
+	return _children, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttributeValues wraps the raw GetAttributeValues call.
-func (self IUIAutomationTextRange3) GetAttributeValues(attributeIds *uiaccessibility.UIA_TEXTATTRIBUTE_ID, attributeIdCount int32, attributeValues **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttributeValues(attributeIds, attributeIdCount, attributeValues)))
+func (self IUIAutomationTextRange3) GetAttributeValues(attributeIds *uiaccessibility.UIA_TEXTATTRIBUTE_ID, attributeIdCount int32) (*systemcom.SAFEARRAY, error) {
+	var _attributeValues *systemcom.SAFEARRAY
+	_hr := self.Raw.GetAttributeValues(attributeIds, attributeIdCount, &_attributeValues)
+	return _attributeValues, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTextRangeArray is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTextRangeArray with error-returning methods.
@@ -4604,13 +5554,17 @@ func WrapIUIAutomationTextRangeArray(raw *uiaccessibility.IUIAutomationTextRange
 }
 
 // Get_Length wraps the raw Get_Length call.
-func (self IUIAutomationTextRangeArray) Get_Length(length *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Length(length)))
+func (self IUIAutomationTextRangeArray) Get_Length() (int32, error) {
+	var _length int32
+	_hr := self.Raw.Get_Length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // GetElement wraps the raw GetElement call.
-func (self IUIAutomationTextRangeArray) GetElement(index int32, element **uiaccessibility.IUIAutomationTextRange) error {
-	return win32.HRESULTError(int32(self.Raw.GetElement(index, element)))
+func (self IUIAutomationTextRangeArray) GetElement(index int32) (*uiaccessibility.IUIAutomationTextRange, error) {
+	var _element *uiaccessibility.IUIAutomationTextRange
+	_hr := self.Raw.GetElement(index, &_element)
+	return _element, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTogglePattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTogglePattern with error-returning methods.
@@ -4630,13 +5584,17 @@ func (self IUIAutomationTogglePattern) Toggle() error {
 }
 
 // Get_CurrentToggleState wraps the raw Get_CurrentToggleState call.
-func (self IUIAutomationTogglePattern) Get_CurrentToggleState(retVal *uiaccessibility.ToggleState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentToggleState(retVal)))
+func (self IUIAutomationTogglePattern) Get_CurrentToggleState() (uiaccessibility.ToggleState, error) {
+	var _retVal uiaccessibility.ToggleState
+	_hr := self.Raw.Get_CurrentToggleState(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedToggleState wraps the raw Get_CachedToggleState call.
-func (self IUIAutomationTogglePattern) Get_CachedToggleState(retVal *uiaccessibility.ToggleState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedToggleState(retVal)))
+func (self IUIAutomationTogglePattern) Get_CachedToggleState() (uiaccessibility.ToggleState, error) {
+	var _retVal uiaccessibility.ToggleState
+	_hr := self.Raw.Get_CachedToggleState(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTransformPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTransformPattern with error-returning methods.
@@ -4651,33 +5609,45 @@ func WrapIUIAutomationTransformPattern(raw *uiaccessibility.IUIAutomationTransfo
 }
 
 // Get_CurrentCanMove wraps the raw Get_CurrentCanMove call.
-func (self IUIAutomationTransformPattern) Get_CurrentCanMove(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCanMove(retVal)))
+func (self IUIAutomationTransformPattern) Get_CurrentCanMove() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentCanMove(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentCanResize wraps the raw Get_CurrentCanResize call.
-func (self IUIAutomationTransformPattern) Get_CurrentCanResize(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCanResize(retVal)))
+func (self IUIAutomationTransformPattern) Get_CurrentCanResize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentCanResize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentCanRotate wraps the raw Get_CurrentCanRotate call.
-func (self IUIAutomationTransformPattern) Get_CurrentCanRotate(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCanRotate(retVal)))
+func (self IUIAutomationTransformPattern) Get_CurrentCanRotate() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentCanRotate(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCanMove wraps the raw Get_CachedCanMove call.
-func (self IUIAutomationTransformPattern) Get_CachedCanMove(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCanMove(retVal)))
+func (self IUIAutomationTransformPattern) Get_CachedCanMove() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedCanMove(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCanResize wraps the raw Get_CachedCanResize call.
-func (self IUIAutomationTransformPattern) Get_CachedCanResize(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCanResize(retVal)))
+func (self IUIAutomationTransformPattern) Get_CachedCanResize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedCanResize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCanRotate wraps the raw Get_CachedCanRotate call.
-func (self IUIAutomationTransformPattern) Get_CachedCanRotate(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCanRotate(retVal)))
+func (self IUIAutomationTransformPattern) Get_CachedCanRotate() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedCanRotate(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTransformPattern2 is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTransformPattern2 with error-returning methods.
@@ -4697,43 +5667,59 @@ func (self IUIAutomationTransformPattern2) ZoomByUnit(zoomUnit uiaccessibility.Z
 }
 
 // Get_CurrentCanZoom wraps the raw Get_CurrentCanZoom call.
-func (self IUIAutomationTransformPattern2) Get_CurrentCanZoom(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCanZoom(retVal)))
+func (self IUIAutomationTransformPattern2) Get_CurrentCanZoom() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentCanZoom(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCanZoom wraps the raw Get_CachedCanZoom call.
-func (self IUIAutomationTransformPattern2) Get_CachedCanZoom(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCanZoom(retVal)))
+func (self IUIAutomationTransformPattern2) Get_CachedCanZoom() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedCanZoom(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentZoomLevel wraps the raw Get_CurrentZoomLevel call.
-func (self IUIAutomationTransformPattern2) Get_CurrentZoomLevel(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentZoomLevel(retVal)))
+func (self IUIAutomationTransformPattern2) Get_CurrentZoomLevel() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentZoomLevel(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedZoomLevel wraps the raw Get_CachedZoomLevel call.
-func (self IUIAutomationTransformPattern2) Get_CachedZoomLevel(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedZoomLevel(retVal)))
+func (self IUIAutomationTransformPattern2) Get_CachedZoomLevel() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedZoomLevel(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentZoomMinimum wraps the raw Get_CurrentZoomMinimum call.
-func (self IUIAutomationTransformPattern2) Get_CurrentZoomMinimum(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentZoomMinimum(retVal)))
+func (self IUIAutomationTransformPattern2) Get_CurrentZoomMinimum() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentZoomMinimum(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedZoomMinimum wraps the raw Get_CachedZoomMinimum call.
-func (self IUIAutomationTransformPattern2) Get_CachedZoomMinimum(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedZoomMinimum(retVal)))
+func (self IUIAutomationTransformPattern2) Get_CachedZoomMinimum() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedZoomMinimum(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentZoomMaximum wraps the raw Get_CurrentZoomMaximum call.
-func (self IUIAutomationTransformPattern2) Get_CurrentZoomMaximum(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentZoomMaximum(retVal)))
+func (self IUIAutomationTransformPattern2) Get_CurrentZoomMaximum() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CurrentZoomMaximum(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedZoomMaximum wraps the raw Get_CachedZoomMaximum call.
-func (self IUIAutomationTransformPattern2) Get_CachedZoomMaximum(retVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedZoomMaximum(retVal)))
+func (self IUIAutomationTransformPattern2) Get_CachedZoomMaximum() (float64, error) {
+	var _retVal float64
+	_hr := self.Raw.Get_CachedZoomMaximum(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationTreeWalker is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationTreeWalker with error-returning methods.
@@ -4748,68 +5734,94 @@ func WrapIUIAutomationTreeWalker(raw *uiaccessibility.IUIAutomationTreeWalker) I
 }
 
 // GetParentElement wraps the raw GetParentElement call.
-func (self IUIAutomationTreeWalker) GetParentElement(element *uiaccessibility.IUIAutomationElement, parent **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetParentElement(element, parent)))
+func (self IUIAutomationTreeWalker) GetParentElement(element *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElement, error) {
+	var _parent *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetParentElement(element, &_parent)
+	return _parent, win32.HRESULTError(int32(_hr))
 }
 
 // GetFirstChildElement wraps the raw GetFirstChildElement call.
-func (self IUIAutomationTreeWalker) GetFirstChildElement(element *uiaccessibility.IUIAutomationElement, first **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetFirstChildElement(element, first)))
+func (self IUIAutomationTreeWalker) GetFirstChildElement(element *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElement, error) {
+	var _first *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetFirstChildElement(element, &_first)
+	return _first, win32.HRESULTError(int32(_hr))
 }
 
 // GetLastChildElement wraps the raw GetLastChildElement call.
-func (self IUIAutomationTreeWalker) GetLastChildElement(element *uiaccessibility.IUIAutomationElement, last **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetLastChildElement(element, last)))
+func (self IUIAutomationTreeWalker) GetLastChildElement(element *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElement, error) {
+	var _last *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetLastChildElement(element, &_last)
+	return _last, win32.HRESULTError(int32(_hr))
 }
 
 // GetNextSiblingElement wraps the raw GetNextSiblingElement call.
-func (self IUIAutomationTreeWalker) GetNextSiblingElement(element *uiaccessibility.IUIAutomationElement, next **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetNextSiblingElement(element, next)))
+func (self IUIAutomationTreeWalker) GetNextSiblingElement(element *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElement, error) {
+	var _next *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetNextSiblingElement(element, &_next)
+	return _next, win32.HRESULTError(int32(_hr))
 }
 
 // GetPreviousSiblingElement wraps the raw GetPreviousSiblingElement call.
-func (self IUIAutomationTreeWalker) GetPreviousSiblingElement(element *uiaccessibility.IUIAutomationElement, previous **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreviousSiblingElement(element, previous)))
+func (self IUIAutomationTreeWalker) GetPreviousSiblingElement(element *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElement, error) {
+	var _previous *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetPreviousSiblingElement(element, &_previous)
+	return _previous, win32.HRESULTError(int32(_hr))
 }
 
 // NormalizeElement wraps the raw NormalizeElement call.
-func (self IUIAutomationTreeWalker) NormalizeElement(element *uiaccessibility.IUIAutomationElement, normalized **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.NormalizeElement(element, normalized)))
+func (self IUIAutomationTreeWalker) NormalizeElement(element *uiaccessibility.IUIAutomationElement) (*uiaccessibility.IUIAutomationElement, error) {
+	var _normalized *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.NormalizeElement(element, &_normalized)
+	return _normalized, win32.HRESULTError(int32(_hr))
 }
 
 // GetParentElementBuildCache wraps the raw GetParentElementBuildCache call.
-func (self IUIAutomationTreeWalker) GetParentElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, parent **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetParentElementBuildCache(element, cacheRequest, parent)))
+func (self IUIAutomationTreeWalker) GetParentElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _parent *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetParentElementBuildCache(element, cacheRequest, &_parent)
+	return _parent, win32.HRESULTError(int32(_hr))
 }
 
 // GetFirstChildElementBuildCache wraps the raw GetFirstChildElementBuildCache call.
-func (self IUIAutomationTreeWalker) GetFirstChildElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, first **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetFirstChildElementBuildCache(element, cacheRequest, first)))
+func (self IUIAutomationTreeWalker) GetFirstChildElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _first *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetFirstChildElementBuildCache(element, cacheRequest, &_first)
+	return _first, win32.HRESULTError(int32(_hr))
 }
 
 // GetLastChildElementBuildCache wraps the raw GetLastChildElementBuildCache call.
-func (self IUIAutomationTreeWalker) GetLastChildElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, last **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetLastChildElementBuildCache(element, cacheRequest, last)))
+func (self IUIAutomationTreeWalker) GetLastChildElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _last *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetLastChildElementBuildCache(element, cacheRequest, &_last)
+	return _last, win32.HRESULTError(int32(_hr))
 }
 
 // GetNextSiblingElementBuildCache wraps the raw GetNextSiblingElementBuildCache call.
-func (self IUIAutomationTreeWalker) GetNextSiblingElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, next **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetNextSiblingElementBuildCache(element, cacheRequest, next)))
+func (self IUIAutomationTreeWalker) GetNextSiblingElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _next *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetNextSiblingElementBuildCache(element, cacheRequest, &_next)
+	return _next, win32.HRESULTError(int32(_hr))
 }
 
 // GetPreviousSiblingElementBuildCache wraps the raw GetPreviousSiblingElementBuildCache call.
-func (self IUIAutomationTreeWalker) GetPreviousSiblingElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, previous **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreviousSiblingElementBuildCache(element, cacheRequest, previous)))
+func (self IUIAutomationTreeWalker) GetPreviousSiblingElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _previous *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.GetPreviousSiblingElementBuildCache(element, cacheRequest, &_previous)
+	return _previous, win32.HRESULTError(int32(_hr))
 }
 
 // NormalizeElementBuildCache wraps the raw NormalizeElementBuildCache call.
-func (self IUIAutomationTreeWalker) NormalizeElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest, normalized **uiaccessibility.IUIAutomationElement) error {
-	return win32.HRESULTError(int32(self.Raw.NormalizeElementBuildCache(element, cacheRequest, normalized)))
+func (self IUIAutomationTreeWalker) NormalizeElementBuildCache(element *uiaccessibility.IUIAutomationElement, cacheRequest *uiaccessibility.IUIAutomationCacheRequest) (*uiaccessibility.IUIAutomationElement, error) {
+	var _normalized *uiaccessibility.IUIAutomationElement
+	_hr := self.Raw.NormalizeElementBuildCache(element, cacheRequest, &_normalized)
+	return _normalized, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Condition wraps the raw Get_Condition call.
-func (self IUIAutomationTreeWalker) Get_Condition(condition **uiaccessibility.IUIAutomationCondition) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Condition(condition)))
+func (self IUIAutomationTreeWalker) Get_Condition() (*uiaccessibility.IUIAutomationCondition, error) {
+	var _condition *uiaccessibility.IUIAutomationCondition
+	_hr := self.Raw.Get_Condition(&_condition)
+	return _condition, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationValuePattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationValuePattern with error-returning methods.
@@ -4829,23 +5841,31 @@ func (self IUIAutomationValuePattern) SetValue(val foundation.BSTR) error {
 }
 
 // Get_CurrentValue wraps the raw Get_CurrentValue call.
-func (self IUIAutomationValuePattern) Get_CurrentValue(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentValue(retVal)))
+func (self IUIAutomationValuePattern) Get_CurrentValue() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentValue(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsReadOnly wraps the raw Get_CurrentIsReadOnly call.
-func (self IUIAutomationValuePattern) Get_CurrentIsReadOnly(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsReadOnly(retVal)))
+func (self IUIAutomationValuePattern) Get_CurrentIsReadOnly() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsReadOnly(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedValue wraps the raw Get_CachedValue call.
-func (self IUIAutomationValuePattern) Get_CachedValue(retVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedValue(retVal)))
+func (self IUIAutomationValuePattern) Get_CachedValue() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	_hr := self.Raw.Get_CachedValue(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsReadOnly wraps the raw Get_CachedIsReadOnly call.
-func (self IUIAutomationValuePattern) Get_CachedIsReadOnly(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsReadOnly(retVal)))
+func (self IUIAutomationValuePattern) Get_CachedIsReadOnly() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsReadOnly(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IUIAutomationVirtualizedItemPattern is an idiomatic wrapper over the raw COM interface UI.Accessibility.IUIAutomationVirtualizedItemPattern with error-returning methods.
@@ -4881,8 +5901,10 @@ func (self IUIAutomationWindowPattern) Close() error {
 }
 
 // WaitForInputIdle wraps the raw WaitForInputIdle call.
-func (self IUIAutomationWindowPattern) WaitForInputIdle(milliseconds int32, success *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.WaitForInputIdle(milliseconds, success)))
+func (self IUIAutomationWindowPattern) WaitForInputIdle(milliseconds int32) (foundation.BOOL, error) {
+	var _success foundation.BOOL
+	_hr := self.Raw.WaitForInputIdle(milliseconds, &_success)
+	return _success, win32.HRESULTError(int32(_hr))
 }
 
 // SetWindowVisualState wraps the raw SetWindowVisualState call.
@@ -4891,63 +5913,87 @@ func (self IUIAutomationWindowPattern) SetWindowVisualState(state uiaccessibilit
 }
 
 // Get_CurrentCanMaximize wraps the raw Get_CurrentCanMaximize call.
-func (self IUIAutomationWindowPattern) Get_CurrentCanMaximize(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCanMaximize(retVal)))
+func (self IUIAutomationWindowPattern) Get_CurrentCanMaximize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentCanMaximize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentCanMinimize wraps the raw Get_CurrentCanMinimize call.
-func (self IUIAutomationWindowPattern) Get_CurrentCanMinimize(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentCanMinimize(retVal)))
+func (self IUIAutomationWindowPattern) Get_CurrentCanMinimize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentCanMinimize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsModal wraps the raw Get_CurrentIsModal call.
-func (self IUIAutomationWindowPattern) Get_CurrentIsModal(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsModal(retVal)))
+func (self IUIAutomationWindowPattern) Get_CurrentIsModal() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsModal(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentIsTopmost wraps the raw Get_CurrentIsTopmost call.
-func (self IUIAutomationWindowPattern) Get_CurrentIsTopmost(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentIsTopmost(retVal)))
+func (self IUIAutomationWindowPattern) Get_CurrentIsTopmost() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CurrentIsTopmost(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentWindowVisualState wraps the raw Get_CurrentWindowVisualState call.
-func (self IUIAutomationWindowPattern) Get_CurrentWindowVisualState(retVal *uiaccessibility.WindowVisualState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentWindowVisualState(retVal)))
+func (self IUIAutomationWindowPattern) Get_CurrentWindowVisualState() (uiaccessibility.WindowVisualState, error) {
+	var _retVal uiaccessibility.WindowVisualState
+	_hr := self.Raw.Get_CurrentWindowVisualState(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentWindowInteractionState wraps the raw Get_CurrentWindowInteractionState call.
-func (self IUIAutomationWindowPattern) Get_CurrentWindowInteractionState(retVal *uiaccessibility.WindowInteractionState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentWindowInteractionState(retVal)))
+func (self IUIAutomationWindowPattern) Get_CurrentWindowInteractionState() (uiaccessibility.WindowInteractionState, error) {
+	var _retVal uiaccessibility.WindowInteractionState
+	_hr := self.Raw.Get_CurrentWindowInteractionState(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCanMaximize wraps the raw Get_CachedCanMaximize call.
-func (self IUIAutomationWindowPattern) Get_CachedCanMaximize(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCanMaximize(retVal)))
+func (self IUIAutomationWindowPattern) Get_CachedCanMaximize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedCanMaximize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedCanMinimize wraps the raw Get_CachedCanMinimize call.
-func (self IUIAutomationWindowPattern) Get_CachedCanMinimize(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedCanMinimize(retVal)))
+func (self IUIAutomationWindowPattern) Get_CachedCanMinimize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedCanMinimize(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsModal wraps the raw Get_CachedIsModal call.
-func (self IUIAutomationWindowPattern) Get_CachedIsModal(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsModal(retVal)))
+func (self IUIAutomationWindowPattern) Get_CachedIsModal() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsModal(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedIsTopmost wraps the raw Get_CachedIsTopmost call.
-func (self IUIAutomationWindowPattern) Get_CachedIsTopmost(retVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedIsTopmost(retVal)))
+func (self IUIAutomationWindowPattern) Get_CachedIsTopmost() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	_hr := self.Raw.Get_CachedIsTopmost(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedWindowVisualState wraps the raw Get_CachedWindowVisualState call.
-func (self IUIAutomationWindowPattern) Get_CachedWindowVisualState(retVal *uiaccessibility.WindowVisualState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedWindowVisualState(retVal)))
+func (self IUIAutomationWindowPattern) Get_CachedWindowVisualState() (uiaccessibility.WindowVisualState, error) {
+	var _retVal uiaccessibility.WindowVisualState
+	_hr := self.Raw.Get_CachedWindowVisualState(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CachedWindowInteractionState wraps the raw Get_CachedWindowInteractionState call.
-func (self IUIAutomationWindowPattern) Get_CachedWindowInteractionState(retVal *uiaccessibility.WindowInteractionState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CachedWindowInteractionState(retVal)))
+func (self IUIAutomationWindowPattern) Get_CachedWindowInteractionState() (uiaccessibility.WindowInteractionState, error) {
+	var _retVal uiaccessibility.WindowInteractionState
+	_hr := self.Raw.Get_CachedWindowInteractionState(&_retVal)
+	return _retVal, win32.HRESULTError(int32(_hr))
 }
 
 // IValueProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IValueProvider with error-returning methods.
@@ -4968,13 +6014,17 @@ func (self IValueProvider) SetValue(val string) error {
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IValueProvider) Get_Value(pRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(pRetVal)))
+func (self IValueProvider) Get_Value() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	_hr := self.Raw.Get_Value(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsReadOnly wraps the raw Get_IsReadOnly call.
-func (self IValueProvider) Get_IsReadOnly(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsReadOnly(pRetVal)))
+func (self IValueProvider) Get_IsReadOnly() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_IsReadOnly(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IVirtualizedItemProvider is an idiomatic wrapper over the raw COM interface UI.Accessibility.IVirtualizedItemProvider with error-returning methods.
@@ -5015,36 +6065,50 @@ func (self IWindowProvider) Close() error {
 }
 
 // WaitForInputIdle wraps the raw WaitForInputIdle call.
-func (self IWindowProvider) WaitForInputIdle(milliseconds int32, pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.WaitForInputIdle(milliseconds, pRetVal)))
+func (self IWindowProvider) WaitForInputIdle(milliseconds int32) (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.WaitForInputIdle(milliseconds, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanMaximize wraps the raw Get_CanMaximize call.
-func (self IWindowProvider) Get_CanMaximize(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanMaximize(pRetVal)))
+func (self IWindowProvider) Get_CanMaximize() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_CanMaximize(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanMinimize wraps the raw Get_CanMinimize call.
-func (self IWindowProvider) Get_CanMinimize(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanMinimize(pRetVal)))
+func (self IWindowProvider) Get_CanMinimize() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_CanMinimize(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsModal wraps the raw Get_IsModal call.
-func (self IWindowProvider) Get_IsModal(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsModal(pRetVal)))
+func (self IWindowProvider) Get_IsModal() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_IsModal(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_WindowVisualState wraps the raw Get_WindowVisualState call.
-func (self IWindowProvider) Get_WindowVisualState(pRetVal *uiaccessibility.WindowVisualState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WindowVisualState(pRetVal)))
+func (self IWindowProvider) Get_WindowVisualState() (uiaccessibility.WindowVisualState, error) {
+	var _pRetVal uiaccessibility.WindowVisualState
+	_hr := self.Raw.Get_WindowVisualState(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_WindowInteractionState wraps the raw Get_WindowInteractionState call.
-func (self IWindowProvider) Get_WindowInteractionState(pRetVal *uiaccessibility.WindowInteractionState) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WindowInteractionState(pRetVal)))
+func (self IWindowProvider) Get_WindowInteractionState() (uiaccessibility.WindowInteractionState, error) {
+	var _pRetVal uiaccessibility.WindowInteractionState
+	_hr := self.Raw.Get_WindowInteractionState(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsTopmost wraps the raw Get_IsTopmost call.
-func (self IWindowProvider) Get_IsTopmost(pRetVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsTopmost(pRetVal)))
+func (self IWindowProvider) Get_IsTopmost() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	_hr := self.Raw.Get_IsTopmost(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }

@@ -35,43 +35,59 @@ func (self IWinHttpRequest) SetRequestHeader(Header foundation.BSTR, Value found
 }
 
 // GetResponseHeader wraps the raw GetResponseHeader call.
-func (self IWinHttpRequest) GetResponseHeader(Header foundation.BSTR, Value *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetResponseHeader(Header, Value)))
+func (self IWinHttpRequest) GetResponseHeader(Header foundation.BSTR) (foundation.BSTR, error) {
+	var _Value foundation.BSTR
+	_hr := self.Raw.GetResponseHeader(Header, &_Value)
+	return _Value, win32.HRESULTError(int32(_hr))
 }
 
 // GetAllResponseHeaders wraps the raw GetAllResponseHeaders call.
-func (self IWinHttpRequest) GetAllResponseHeaders(Headers *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetAllResponseHeaders(Headers)))
+func (self IWinHttpRequest) GetAllResponseHeaders() (foundation.BSTR, error) {
+	var _Headers foundation.BSTR
+	_hr := self.Raw.GetAllResponseHeaders(&_Headers)
+	return _Headers, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Status wraps the raw Get_Status call.
-func (self IWinHttpRequest) Get_Status(Status *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Status(Status)))
+func (self IWinHttpRequest) Get_Status() (int32, error) {
+	var _Status int32
+	_hr := self.Raw.Get_Status(&_Status)
+	return _Status, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IWinHttpRequest) Get_StatusText(Status *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(Status)))
+func (self IWinHttpRequest) Get_StatusText() (foundation.BSTR, error) {
+	var _Status foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_Status)
+	return _Status, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResponseText wraps the raw Get_ResponseText call.
-func (self IWinHttpRequest) Get_ResponseText(Body *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResponseText(Body)))
+func (self IWinHttpRequest) Get_ResponseText() (foundation.BSTR, error) {
+	var _Body foundation.BSTR
+	_hr := self.Raw.Get_ResponseText(&_Body)
+	return _Body, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResponseBody wraps the raw Get_ResponseBody call.
-func (self IWinHttpRequest) Get_ResponseBody(Body *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResponseBody(Body)))
+func (self IWinHttpRequest) Get_ResponseBody() (systemvariant.VARIANT, error) {
+	var _Body systemvariant.VARIANT
+	_hr := self.Raw.Get_ResponseBody(&_Body)
+	return _Body, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ResponseStream wraps the raw Get_ResponseStream call.
-func (self IWinHttpRequest) Get_ResponseStream(Body *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ResponseStream(Body)))
+func (self IWinHttpRequest) Get_ResponseStream() (systemvariant.VARIANT, error) {
+	var _Body systemvariant.VARIANT
+	_hr := self.Raw.Get_ResponseStream(&_Body)
+	return _Body, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Option wraps the raw Get_Option call.
-func (self IWinHttpRequest) Get_Option(Option networkingwinhttp.WinHttpRequestOption, Value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Option(Option, Value)))
+func (self IWinHttpRequest) Get_Option(Option networkingwinhttp.WinHttpRequestOption) (systemvariant.VARIANT, error) {
+	var _Value systemvariant.VARIANT
+	_hr := self.Raw.Get_Option(Option, &_Value)
+	return _Value, win32.HRESULTError(int32(_hr))
 }
 
 // Abort wraps the raw Abort call.

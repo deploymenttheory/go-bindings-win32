@@ -101,8 +101,10 @@ func WrapISWbemDateTime(raw *systemwmi.ISWbemDateTime) ISWbemDateTime {
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self ISWbemDateTime) Get_Value(strValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(strValue)))
+func (self ISWbemDateTime) Get_Value() (foundation.BSTR, error) {
+	var _strValue foundation.BSTR
+	_hr := self.Raw.Get_Value(&_strValue)
+	return _strValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Value wraps the raw Put_Value call.
@@ -111,8 +113,10 @@ func (self ISWbemDateTime) Put_Value(strValue foundation.BSTR) error {
 }
 
 // Get_Year wraps the raw Get_Year call.
-func (self ISWbemDateTime) Get_Year(iYear *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Year(iYear)))
+func (self ISWbemDateTime) Get_Year() (int32, error) {
+	var _iYear int32
+	_hr := self.Raw.Get_Year(&_iYear)
+	return _iYear, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Year wraps the raw Put_Year call.
@@ -121,8 +125,10 @@ func (self ISWbemDateTime) Put_Year(iYear int32) error {
 }
 
 // Get_YearSpecified wraps the raw Get_YearSpecified call.
-func (self ISWbemDateTime) Get_YearSpecified(bYearSpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_YearSpecified(bYearSpecified)))
+func (self ISWbemDateTime) Get_YearSpecified() (foundation.VARIANT_BOOL, error) {
+	var _bYearSpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_YearSpecified(&_bYearSpecified)
+	return _bYearSpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Put_YearSpecified wraps the raw Put_YearSpecified call.
@@ -131,8 +137,10 @@ func (self ISWbemDateTime) Put_YearSpecified(bYearSpecified foundation.VARIANT_B
 }
 
 // Get_Month wraps the raw Get_Month call.
-func (self ISWbemDateTime) Get_Month(iMonth *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Month(iMonth)))
+func (self ISWbemDateTime) Get_Month() (int32, error) {
+	var _iMonth int32
+	_hr := self.Raw.Get_Month(&_iMonth)
+	return _iMonth, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Month wraps the raw Put_Month call.
@@ -141,8 +149,10 @@ func (self ISWbemDateTime) Put_Month(iMonth int32) error {
 }
 
 // Get_MonthSpecified wraps the raw Get_MonthSpecified call.
-func (self ISWbemDateTime) Get_MonthSpecified(bMonthSpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MonthSpecified(bMonthSpecified)))
+func (self ISWbemDateTime) Get_MonthSpecified() (foundation.VARIANT_BOOL, error) {
+	var _bMonthSpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MonthSpecified(&_bMonthSpecified)
+	return _bMonthSpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MonthSpecified wraps the raw Put_MonthSpecified call.
@@ -151,8 +161,10 @@ func (self ISWbemDateTime) Put_MonthSpecified(bMonthSpecified foundation.VARIANT
 }
 
 // Get_Day wraps the raw Get_Day call.
-func (self ISWbemDateTime) Get_Day(iDay *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Day(iDay)))
+func (self ISWbemDateTime) Get_Day() (int32, error) {
+	var _iDay int32
+	_hr := self.Raw.Get_Day(&_iDay)
+	return _iDay, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Day wraps the raw Put_Day call.
@@ -161,8 +173,10 @@ func (self ISWbemDateTime) Put_Day(iDay int32) error {
 }
 
 // Get_DaySpecified wraps the raw Get_DaySpecified call.
-func (self ISWbemDateTime) Get_DaySpecified(bDaySpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DaySpecified(bDaySpecified)))
+func (self ISWbemDateTime) Get_DaySpecified() (foundation.VARIANT_BOOL, error) {
+	var _bDaySpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_DaySpecified(&_bDaySpecified)
+	return _bDaySpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DaySpecified wraps the raw Put_DaySpecified call.
@@ -171,8 +185,10 @@ func (self ISWbemDateTime) Put_DaySpecified(bDaySpecified foundation.VARIANT_BOO
 }
 
 // Get_Hours wraps the raw Get_Hours call.
-func (self ISWbemDateTime) Get_Hours(iHours *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Hours(iHours)))
+func (self ISWbemDateTime) Get_Hours() (int32, error) {
+	var _iHours int32
+	_hr := self.Raw.Get_Hours(&_iHours)
+	return _iHours, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Hours wraps the raw Put_Hours call.
@@ -181,8 +197,10 @@ func (self ISWbemDateTime) Put_Hours(iHours int32) error {
 }
 
 // Get_HoursSpecified wraps the raw Get_HoursSpecified call.
-func (self ISWbemDateTime) Get_HoursSpecified(bHoursSpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HoursSpecified(bHoursSpecified)))
+func (self ISWbemDateTime) Get_HoursSpecified() (foundation.VARIANT_BOOL, error) {
+	var _bHoursSpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_HoursSpecified(&_bHoursSpecified)
+	return _bHoursSpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Put_HoursSpecified wraps the raw Put_HoursSpecified call.
@@ -191,8 +209,10 @@ func (self ISWbemDateTime) Put_HoursSpecified(bHoursSpecified foundation.VARIANT
 }
 
 // Get_Minutes wraps the raw Get_Minutes call.
-func (self ISWbemDateTime) Get_Minutes(iMinutes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Minutes(iMinutes)))
+func (self ISWbemDateTime) Get_Minutes() (int32, error) {
+	var _iMinutes int32
+	_hr := self.Raw.Get_Minutes(&_iMinutes)
+	return _iMinutes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Minutes wraps the raw Put_Minutes call.
@@ -201,8 +221,10 @@ func (self ISWbemDateTime) Put_Minutes(iMinutes int32) error {
 }
 
 // Get_MinutesSpecified wraps the raw Get_MinutesSpecified call.
-func (self ISWbemDateTime) Get_MinutesSpecified(bMinutesSpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinutesSpecified(bMinutesSpecified)))
+func (self ISWbemDateTime) Get_MinutesSpecified() (foundation.VARIANT_BOOL, error) {
+	var _bMinutesSpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MinutesSpecified(&_bMinutesSpecified)
+	return _bMinutesSpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinutesSpecified wraps the raw Put_MinutesSpecified call.
@@ -211,8 +233,10 @@ func (self ISWbemDateTime) Put_MinutesSpecified(bMinutesSpecified foundation.VAR
 }
 
 // Get_Seconds wraps the raw Get_Seconds call.
-func (self ISWbemDateTime) Get_Seconds(iSeconds *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Seconds(iSeconds)))
+func (self ISWbemDateTime) Get_Seconds() (int32, error) {
+	var _iSeconds int32
+	_hr := self.Raw.Get_Seconds(&_iSeconds)
+	return _iSeconds, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Seconds wraps the raw Put_Seconds call.
@@ -221,8 +245,10 @@ func (self ISWbemDateTime) Put_Seconds(iSeconds int32) error {
 }
 
 // Get_SecondsSpecified wraps the raw Get_SecondsSpecified call.
-func (self ISWbemDateTime) Get_SecondsSpecified(bSecondsSpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SecondsSpecified(bSecondsSpecified)))
+func (self ISWbemDateTime) Get_SecondsSpecified() (foundation.VARIANT_BOOL, error) {
+	var _bSecondsSpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SecondsSpecified(&_bSecondsSpecified)
+	return _bSecondsSpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SecondsSpecified wraps the raw Put_SecondsSpecified call.
@@ -231,8 +257,10 @@ func (self ISWbemDateTime) Put_SecondsSpecified(bSecondsSpecified foundation.VAR
 }
 
 // Get_Microseconds wraps the raw Get_Microseconds call.
-func (self ISWbemDateTime) Get_Microseconds(iMicroseconds *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Microseconds(iMicroseconds)))
+func (self ISWbemDateTime) Get_Microseconds() (int32, error) {
+	var _iMicroseconds int32
+	_hr := self.Raw.Get_Microseconds(&_iMicroseconds)
+	return _iMicroseconds, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Microseconds wraps the raw Put_Microseconds call.
@@ -241,8 +269,10 @@ func (self ISWbemDateTime) Put_Microseconds(iMicroseconds int32) error {
 }
 
 // Get_MicrosecondsSpecified wraps the raw Get_MicrosecondsSpecified call.
-func (self ISWbemDateTime) Get_MicrosecondsSpecified(bMicrosecondsSpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MicrosecondsSpecified(bMicrosecondsSpecified)))
+func (self ISWbemDateTime) Get_MicrosecondsSpecified() (foundation.VARIANT_BOOL, error) {
+	var _bMicrosecondsSpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MicrosecondsSpecified(&_bMicrosecondsSpecified)
+	return _bMicrosecondsSpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MicrosecondsSpecified wraps the raw Put_MicrosecondsSpecified call.
@@ -251,8 +281,10 @@ func (self ISWbemDateTime) Put_MicrosecondsSpecified(bMicrosecondsSpecified foun
 }
 
 // Get_UTC wraps the raw Get_UTC call.
-func (self ISWbemDateTime) Get_UTC(iUTC *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UTC(iUTC)))
+func (self ISWbemDateTime) Get_UTC() (int32, error) {
+	var _iUTC int32
+	_hr := self.Raw.Get_UTC(&_iUTC)
+	return _iUTC, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UTC wraps the raw Put_UTC call.
@@ -261,8 +293,10 @@ func (self ISWbemDateTime) Put_UTC(iUTC int32) error {
 }
 
 // Get_UTCSpecified wraps the raw Get_UTCSpecified call.
-func (self ISWbemDateTime) Get_UTCSpecified(bUTCSpecified *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UTCSpecified(bUTCSpecified)))
+func (self ISWbemDateTime) Get_UTCSpecified() (foundation.VARIANT_BOOL, error) {
+	var _bUTCSpecified foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_UTCSpecified(&_bUTCSpecified)
+	return _bUTCSpecified, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UTCSpecified wraps the raw Put_UTCSpecified call.
@@ -271,8 +305,10 @@ func (self ISWbemDateTime) Put_UTCSpecified(bUTCSpecified foundation.VARIANT_BOO
 }
 
 // Get_IsInterval wraps the raw Get_IsInterval call.
-func (self ISWbemDateTime) Get_IsInterval(bIsInterval *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsInterval(bIsInterval)))
+func (self ISWbemDateTime) Get_IsInterval() (foundation.VARIANT_BOOL, error) {
+	var _bIsInterval foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsInterval(&_bIsInterval)
+	return _bIsInterval, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsInterval wraps the raw Put_IsInterval call.
@@ -281,13 +317,17 @@ func (self ISWbemDateTime) Put_IsInterval(bIsInterval foundation.VARIANT_BOOL) e
 }
 
 // GetVarDate wraps the raw GetVarDate call.
-func (self ISWbemDateTime) GetVarDate(bIsLocal foundation.VARIANT_BOOL, dVarDate *float64) error {
-	return win32.HRESULTError(int32(self.Raw.GetVarDate(bIsLocal, dVarDate)))
+func (self ISWbemDateTime) GetVarDate(bIsLocal foundation.VARIANT_BOOL) (float64, error) {
+	var _dVarDate float64
+	_hr := self.Raw.GetVarDate(bIsLocal, &_dVarDate)
+	return _dVarDate, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileTime wraps the raw GetFileTime call.
-func (self ISWbemDateTime) GetFileTime(bIsLocal foundation.VARIANT_BOOL, strFileTime *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileTime(bIsLocal, strFileTime)))
+func (self ISWbemDateTime) GetFileTime(bIsLocal foundation.VARIANT_BOOL) (foundation.BSTR, error) {
+	var _strFileTime foundation.BSTR
+	_hr := self.Raw.GetFileTime(bIsLocal, &_strFileTime)
+	return _strFileTime, win32.HRESULTError(int32(_hr))
 }
 
 // SetFileTime wraps the raw SetFileTime call.
@@ -307,13 +347,17 @@ func WrapISWbemEventSource(raw *systemwmi.ISWbemEventSource) ISWbemEventSource {
 }
 
 // NextEvent wraps the raw NextEvent call.
-func (self ISWbemEventSource) NextEvent(iTimeoutMs int32, objWbemObject **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.NextEvent(iTimeoutMs, objWbemObject)))
+func (self ISWbemEventSource) NextEvent(iTimeoutMs int32) (*systemwmi.ISWbemObject, error) {
+	var _objWbemObject *systemwmi.ISWbemObject
+	_hr := self.Raw.NextEvent(iTimeoutMs, &_objWbemObject)
+	return _objWbemObject, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemEventSource) Get_Security_(objWbemSecurity **systemwmi.ISWbemSecurity) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Security_(objWbemSecurity)))
+func (self ISWbemEventSource) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+	var _objWbemSecurity *systemwmi.ISWbemSecurity
+	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
+	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemLastError is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemLastError with error-returning methods.
@@ -339,13 +383,17 @@ func WrapISWbemLocator(raw *systemwmi.ISWbemLocator) ISWbemLocator {
 }
 
 // ConnectServer wraps the raw ConnectServer call.
-func (self ISWbemLocator) ConnectServer(strServer foundation.BSTR, strNamespace foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, strAuthority foundation.BSTR, iSecurityFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemServices **systemwmi.ISWbemServices) error {
-	return win32.HRESULTError(int32(self.Raw.ConnectServer(strServer, strNamespace, strUser, strPassword, strLocale, strAuthority, iSecurityFlags, objWbemNamedValueSet, objWbemServices)))
+func (self ISWbemLocator) ConnectServer(strServer foundation.BSTR, strNamespace foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, strAuthority foundation.BSTR, iSecurityFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemServices, error) {
+	var _objWbemServices *systemwmi.ISWbemServices
+	_hr := self.Raw.ConnectServer(strServer, strNamespace, strUser, strPassword, strLocale, strAuthority, iSecurityFlags, objWbemNamedValueSet, &_objWbemServices)
+	return _objWbemServices, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemLocator) Get_Security_(objWbemSecurity **systemwmi.ISWbemSecurity) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Security_(objWbemSecurity)))
+func (self ISWbemLocator) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+	var _objWbemSecurity *systemwmi.ISWbemSecurity
+	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
+	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemMethod is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemMethod with error-returning methods.
@@ -360,28 +408,38 @@ func WrapISWbemMethod(raw *systemwmi.ISWbemMethod) ISWbemMethod {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ISWbemMethod) Get_Name(strName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(strName)))
+func (self ISWbemMethod) Get_Name() (foundation.BSTR, error) {
+	var _strName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_strName)
+	return _strName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Origin wraps the raw Get_Origin call.
-func (self ISWbemMethod) Get_Origin(strOrigin *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Origin(strOrigin)))
+func (self ISWbemMethod) Get_Origin() (foundation.BSTR, error) {
+	var _strOrigin foundation.BSTR
+	_hr := self.Raw.Get_Origin(&_strOrigin)
+	return _strOrigin, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InParameters wraps the raw Get_InParameters call.
-func (self ISWbemMethod) Get_InParameters(objWbemInParameters **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InParameters(objWbemInParameters)))
+func (self ISWbemMethod) Get_InParameters() (*systemwmi.ISWbemObject, error) {
+	var _objWbemInParameters *systemwmi.ISWbemObject
+	_hr := self.Raw.Get_InParameters(&_objWbemInParameters)
+	return _objWbemInParameters, win32.HRESULTError(int32(_hr))
 }
 
 // Get_OutParameters wraps the raw Get_OutParameters call.
-func (self ISWbemMethod) Get_OutParameters(objWbemOutParameters **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OutParameters(objWbemOutParameters)))
+func (self ISWbemMethod) Get_OutParameters() (*systemwmi.ISWbemObject, error) {
+	var _objWbemOutParameters *systemwmi.ISWbemObject
+	_hr := self.Raw.Get_OutParameters(&_objWbemOutParameters)
+	return _objWbemOutParameters, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Qualifiers_ wraps the raw Get_Qualifiers_ call.
-func (self ISWbemMethod) Get_Qualifiers_(objWbemQualifierSet **systemwmi.ISWbemQualifierSet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Qualifiers_(objWbemQualifierSet)))
+func (self ISWbemMethod) Get_Qualifiers_() (*systemwmi.ISWbemQualifierSet, error) {
+	var _objWbemQualifierSet *systemwmi.ISWbemQualifierSet
+	_hr := self.Raw.Get_Qualifiers_(&_objWbemQualifierSet)
+	return _objWbemQualifierSet, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemMethodSet is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemMethodSet with error-returning methods.
@@ -396,18 +454,24 @@ func WrapISWbemMethodSet(raw *systemwmi.ISWbemMethodSet) ISWbemMethodSet {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemMethodSet) Get__NewEnum(pUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pUnk)))
+func (self ISWbemMethodSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pUnk)
+	return _pUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemMethodSet) Item(strName foundation.BSTR, iFlags int32, objWbemMethod **systemwmi.ISWbemMethod) error {
-	return win32.HRESULTError(int32(self.Raw.Item(strName, iFlags, objWbemMethod)))
+func (self ISWbemMethodSet) Item(strName foundation.BSTR, iFlags int32) (*systemwmi.ISWbemMethod, error) {
+	var _objWbemMethod *systemwmi.ISWbemMethod
+	_hr := self.Raw.Item(strName, iFlags, &_objWbemMethod)
+	return _objWbemMethod, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ISWbemMethodSet) Get_Count(iCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(iCount)))
+func (self ISWbemMethodSet) Get_Count() (int32, error) {
+	var _iCount int32
+	_hr := self.Raw.Get_Count(&_iCount)
+	return _iCount, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemNamedValue is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemNamedValue with error-returning methods.
@@ -422,8 +486,10 @@ func WrapISWbemNamedValue(raw *systemwmi.ISWbemNamedValue) ISWbemNamedValue {
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self ISWbemNamedValue) Get_Value(varValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(varValue)))
+func (self ISWbemNamedValue) Get_Value() (systemvariant.VARIANT, error) {
+	var _varValue systemvariant.VARIANT
+	_hr := self.Raw.Get_Value(&_varValue)
+	return _varValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Value wraps the raw Put_Value call.
@@ -432,8 +498,10 @@ func (self ISWbemNamedValue) Put_Value(varValue *systemvariant.VARIANT) error {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ISWbemNamedValue) Get_Name(strName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(strName)))
+func (self ISWbemNamedValue) Get_Name() (foundation.BSTR, error) {
+	var _strName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_strName)
+	return _strName, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemNamedValueSet is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemNamedValueSet with error-returning methods.
@@ -448,23 +516,31 @@ func WrapISWbemNamedValueSet(raw *systemwmi.ISWbemNamedValueSet) ISWbemNamedValu
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemNamedValueSet) Get__NewEnum(pUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pUnk)))
+func (self ISWbemNamedValueSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pUnk)
+	return _pUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemNamedValueSet) Item(strName foundation.BSTR, iFlags int32, objWbemNamedValue **systemwmi.ISWbemNamedValue) error {
-	return win32.HRESULTError(int32(self.Raw.Item(strName, iFlags, objWbemNamedValue)))
+func (self ISWbemNamedValueSet) Item(strName foundation.BSTR, iFlags int32) (*systemwmi.ISWbemNamedValue, error) {
+	var _objWbemNamedValue *systemwmi.ISWbemNamedValue
+	_hr := self.Raw.Item(strName, iFlags, &_objWbemNamedValue)
+	return _objWbemNamedValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ISWbemNamedValueSet) Get_Count(iCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(iCount)))
+func (self ISWbemNamedValueSet) Get_Count() (int32, error) {
+	var _iCount int32
+	_hr := self.Raw.Get_Count(&_iCount)
+	return _iCount, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemNamedValueSet) Add(strName foundation.BSTR, varValue *systemvariant.VARIANT, iFlags int32, objWbemNamedValue **systemwmi.ISWbemNamedValue) error {
-	return win32.HRESULTError(int32(self.Raw.Add(strName, varValue, iFlags, objWbemNamedValue)))
+func (self ISWbemNamedValueSet) Add(strName foundation.BSTR, varValue *systemvariant.VARIANT, iFlags int32) (*systemwmi.ISWbemNamedValue, error) {
+	var _objWbemNamedValue *systemwmi.ISWbemNamedValue
+	_hr := self.Raw.Add(strName, varValue, iFlags, &_objWbemNamedValue)
+	return _objWbemNamedValue, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -473,8 +549,10 @@ func (self ISWbemNamedValueSet) Remove(strName foundation.BSTR, iFlags int32) er
 }
 
 // Clone wraps the raw Clone call.
-func (self ISWbemNamedValueSet) Clone(objWbemNamedValueSet **systemwmi.ISWbemNamedValueSet) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(objWbemNamedValueSet)))
+func (self ISWbemNamedValueSet) Clone() (*systemwmi.ISWbemNamedValueSet, error) {
+	var _objWbemNamedValueSet *systemwmi.ISWbemNamedValueSet
+	_hr := self.Raw.Clone(&_objWbemNamedValueSet)
+	return _objWbemNamedValueSet, win32.HRESULTError(int32(_hr))
 }
 
 // DeleteAll wraps the raw DeleteAll call.
@@ -494,8 +572,10 @@ func WrapISWbemObject(raw *systemwmi.ISWbemObject) ISWbemObject {
 }
 
 // Put_ wraps the raw Put_ call.
-func (self ISWbemObject) Put_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectPath **systemwmi.ISWbemObjectPath) error {
-	return win32.HRESULTError(int32(self.Raw.Put_(iFlags, objWbemNamedValueSet, objWbemObjectPath)))
+func (self ISWbemObject) Put_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectPath, error) {
+	var _objWbemObjectPath *systemwmi.ISWbemObjectPath
+	_hr := self.Raw.Put_(iFlags, objWbemNamedValueSet, &_objWbemObjectPath)
+	return _objWbemObjectPath, win32.HRESULTError(int32(_hr))
 }
 
 // PutAsync_ wraps the raw PutAsync_ call.
@@ -514,8 +594,10 @@ func (self ISWbemObject) DeleteAsync_(objWbemSink *systemcom.IDispatch, iFlags i
 }
 
 // Instances_ wraps the raw Instances_ call.
-func (self ISWbemObject) Instances_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.Instances_(iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemObject) Instances_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.Instances_(iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // InstancesAsync_ wraps the raw InstancesAsync_ call.
@@ -524,8 +606,10 @@ func (self ISWbemObject) InstancesAsync_(objWbemSink *systemcom.IDispatch, iFlag
 }
 
 // Subclasses_ wraps the raw Subclasses_ call.
-func (self ISWbemObject) Subclasses_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.Subclasses_(iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemObject) Subclasses_(iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.Subclasses_(iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // SubclassesAsync_ wraps the raw SubclassesAsync_ call.
@@ -534,8 +618,10 @@ func (self ISWbemObject) SubclassesAsync_(objWbemSink *systemcom.IDispatch, iFla
 }
 
 // Associators_ wraps the raw Associators_ call.
-func (self ISWbemObject) Associators_(strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.Associators_(strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemObject) Associators_(strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.Associators_(strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // AssociatorsAsync_ wraps the raw AssociatorsAsync_ call.
@@ -544,8 +630,10 @@ func (self ISWbemObject) AssociatorsAsync_(objWbemSink *systemcom.IDispatch, str
 }
 
 // References_ wraps the raw References_ call.
-func (self ISWbemObject) References_(strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.References_(strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemObject) References_(strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.References_(strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // ReferencesAsync_ wraps the raw ReferencesAsync_ call.
@@ -554,8 +642,10 @@ func (self ISWbemObject) ReferencesAsync_(objWbemSink *systemcom.IDispatch, strR
 }
 
 // ExecMethod_ wraps the raw ExecMethod_ call.
-func (self ISWbemObject) ExecMethod_(strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemOutParameters **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.ExecMethod_(strMethodName, objWbemInParameters, iFlags, objWbemNamedValueSet, objWbemOutParameters)))
+func (self ISWbemObject) ExecMethod_(strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObject, error) {
+	var _objWbemOutParameters *systemwmi.ISWbemObject
+	_hr := self.Raw.ExecMethod_(strMethodName, objWbemInParameters, iFlags, objWbemNamedValueSet, &_objWbemOutParameters)
+	return _objWbemOutParameters, win32.HRESULTError(int32(_hr))
 }
 
 // ExecMethodAsync_ wraps the raw ExecMethodAsync_ call.
@@ -564,58 +654,80 @@ func (self ISWbemObject) ExecMethodAsync_(objWbemSink *systemcom.IDispatch, strM
 }
 
 // Clone_ wraps the raw Clone_ call.
-func (self ISWbemObject) Clone_(objWbemObject **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.Clone_(objWbemObject)))
+func (self ISWbemObject) Clone_() (*systemwmi.ISWbemObject, error) {
+	var _objWbemObject *systemwmi.ISWbemObject
+	_hr := self.Raw.Clone_(&_objWbemObject)
+	return _objWbemObject, win32.HRESULTError(int32(_hr))
 }
 
 // GetObjectText_ wraps the raw GetObjectText_ call.
-func (self ISWbemObject) GetObjectText_(iFlags int32, strObjectText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetObjectText_(iFlags, strObjectText)))
+func (self ISWbemObject) GetObjectText_(iFlags int32) (foundation.BSTR, error) {
+	var _strObjectText foundation.BSTR
+	_hr := self.Raw.GetObjectText_(iFlags, &_strObjectText)
+	return _strObjectText, win32.HRESULTError(int32(_hr))
 }
 
 // SpawnDerivedClass_ wraps the raw SpawnDerivedClass_ call.
-func (self ISWbemObject) SpawnDerivedClass_(iFlags int32, objWbemObject **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.SpawnDerivedClass_(iFlags, objWbemObject)))
+func (self ISWbemObject) SpawnDerivedClass_(iFlags int32) (*systemwmi.ISWbemObject, error) {
+	var _objWbemObject *systemwmi.ISWbemObject
+	_hr := self.Raw.SpawnDerivedClass_(iFlags, &_objWbemObject)
+	return _objWbemObject, win32.HRESULTError(int32(_hr))
 }
 
 // SpawnInstance_ wraps the raw SpawnInstance_ call.
-func (self ISWbemObject) SpawnInstance_(iFlags int32, objWbemObject **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.SpawnInstance_(iFlags, objWbemObject)))
+func (self ISWbemObject) SpawnInstance_(iFlags int32) (*systemwmi.ISWbemObject, error) {
+	var _objWbemObject *systemwmi.ISWbemObject
+	_hr := self.Raw.SpawnInstance_(iFlags, &_objWbemObject)
+	return _objWbemObject, win32.HRESULTError(int32(_hr))
 }
 
 // CompareTo_ wraps the raw CompareTo_ call.
-func (self ISWbemObject) CompareTo_(objWbemObject *systemcom.IDispatch, iFlags int32, bResult *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CompareTo_(objWbemObject, iFlags, bResult)))
+func (self ISWbemObject) CompareTo_(objWbemObject *systemcom.IDispatch, iFlags int32) (foundation.VARIANT_BOOL, error) {
+	var _bResult foundation.VARIANT_BOOL
+	_hr := self.Raw.CompareTo_(objWbemObject, iFlags, &_bResult)
+	return _bResult, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Qualifiers_ wraps the raw Get_Qualifiers_ call.
-func (self ISWbemObject) Get_Qualifiers_(objWbemQualifierSet **systemwmi.ISWbemQualifierSet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Qualifiers_(objWbemQualifierSet)))
+func (self ISWbemObject) Get_Qualifiers_() (*systemwmi.ISWbemQualifierSet, error) {
+	var _objWbemQualifierSet *systemwmi.ISWbemQualifierSet
+	_hr := self.Raw.Get_Qualifiers_(&_objWbemQualifierSet)
+	return _objWbemQualifierSet, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Properties_ wraps the raw Get_Properties_ call.
-func (self ISWbemObject) Get_Properties_(objWbemPropertySet **systemwmi.ISWbemPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Properties_(objWbemPropertySet)))
+func (self ISWbemObject) Get_Properties_() (*systemwmi.ISWbemPropertySet, error) {
+	var _objWbemPropertySet *systemwmi.ISWbemPropertySet
+	_hr := self.Raw.Get_Properties_(&_objWbemPropertySet)
+	return _objWbemPropertySet, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Methods_ wraps the raw Get_Methods_ call.
-func (self ISWbemObject) Get_Methods_(objWbemMethodSet **systemwmi.ISWbemMethodSet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Methods_(objWbemMethodSet)))
+func (self ISWbemObject) Get_Methods_() (*systemwmi.ISWbemMethodSet, error) {
+	var _objWbemMethodSet *systemwmi.ISWbemMethodSet
+	_hr := self.Raw.Get_Methods_(&_objWbemMethodSet)
+	return _objWbemMethodSet, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Derivation_ wraps the raw Get_Derivation_ call.
-func (self ISWbemObject) Get_Derivation_(strClassNameArray *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Derivation_(strClassNameArray)))
+func (self ISWbemObject) Get_Derivation_() (systemvariant.VARIANT, error) {
+	var _strClassNameArray systemvariant.VARIANT
+	_hr := self.Raw.Get_Derivation_(&_strClassNameArray)
+	return _strClassNameArray, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Path_ wraps the raw Get_Path_ call.
-func (self ISWbemObject) Get_Path_(objWbemObjectPath **systemwmi.ISWbemObjectPath) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path_(objWbemObjectPath)))
+func (self ISWbemObject) Get_Path_() (*systemwmi.ISWbemObjectPath, error) {
+	var _objWbemObjectPath *systemwmi.ISWbemObjectPath
+	_hr := self.Raw.Get_Path_(&_objWbemObjectPath)
+	return _objWbemObjectPath, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemObject) Get_Security_(objWbemSecurity **systemwmi.ISWbemSecurity) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Security_(objWbemSecurity)))
+func (self ISWbemObject) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+	var _objWbemSecurity *systemwmi.ISWbemSecurity
+	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
+	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemObjectEx is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemObjectEx with error-returning methods.
@@ -635,13 +747,17 @@ func (self ISWbemObjectEx) Refresh_(iFlags int32, objWbemNamedValueSet *systemco
 }
 
 // Get_SystemProperties_ wraps the raw Get_SystemProperties_ call.
-func (self ISWbemObjectEx) Get_SystemProperties_(objWbemPropertySet **systemwmi.ISWbemPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SystemProperties_(objWbemPropertySet)))
+func (self ISWbemObjectEx) Get_SystemProperties_() (*systemwmi.ISWbemPropertySet, error) {
+	var _objWbemPropertySet *systemwmi.ISWbemPropertySet
+	_hr := self.Raw.Get_SystemProperties_(&_objWbemPropertySet)
+	return _objWbemPropertySet, win32.HRESULTError(int32(_hr))
 }
 
 // GetText_ wraps the raw GetText_ call.
-func (self ISWbemObjectEx) GetText_(iObjectTextFormat systemwmi.WbemObjectTextFormatEnum, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, bsText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetText_(iObjectTextFormat, iFlags, objWbemNamedValueSet, bsText)))
+func (self ISWbemObjectEx) GetText_(iObjectTextFormat systemwmi.WbemObjectTextFormatEnum, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (foundation.BSTR, error) {
+	var _bsText foundation.BSTR
+	_hr := self.Raw.GetText_(iObjectTextFormat, iFlags, objWbemNamedValueSet, &_bsText)
+	return _bsText, win32.HRESULTError(int32(_hr))
 }
 
 // SetFromText_ wraps the raw SetFromText_ call.
@@ -661,8 +777,10 @@ func WrapISWbemObjectPath(raw *systemwmi.ISWbemObjectPath) ISWbemObjectPath {
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self ISWbemObjectPath) Get_Path(strPath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(strPath)))
+func (self ISWbemObjectPath) Get_Path() (foundation.BSTR, error) {
+	var _strPath foundation.BSTR
+	_hr := self.Raw.Get_Path(&_strPath)
+	return _strPath, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Path wraps the raw Put_Path call.
@@ -671,8 +789,10 @@ func (self ISWbemObjectPath) Put_Path(strPath foundation.BSTR) error {
 }
 
 // Get_RelPath wraps the raw Get_RelPath call.
-func (self ISWbemObjectPath) Get_RelPath(strRelPath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RelPath(strRelPath)))
+func (self ISWbemObjectPath) Get_RelPath() (foundation.BSTR, error) {
+	var _strRelPath foundation.BSTR
+	_hr := self.Raw.Get_RelPath(&_strRelPath)
+	return _strRelPath, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RelPath wraps the raw Put_RelPath call.
@@ -681,8 +801,10 @@ func (self ISWbemObjectPath) Put_RelPath(strRelPath foundation.BSTR) error {
 }
 
 // Get_Server wraps the raw Get_Server call.
-func (self ISWbemObjectPath) Get_Server(strServer *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Server(strServer)))
+func (self ISWbemObjectPath) Get_Server() (foundation.BSTR, error) {
+	var _strServer foundation.BSTR
+	_hr := self.Raw.Get_Server(&_strServer)
+	return _strServer, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Server wraps the raw Put_Server call.
@@ -691,8 +813,10 @@ func (self ISWbemObjectPath) Put_Server(strServer foundation.BSTR) error {
 }
 
 // Get_Namespace wraps the raw Get_Namespace call.
-func (self ISWbemObjectPath) Get_Namespace(strNamespace *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Namespace(strNamespace)))
+func (self ISWbemObjectPath) Get_Namespace() (foundation.BSTR, error) {
+	var _strNamespace foundation.BSTR
+	_hr := self.Raw.Get_Namespace(&_strNamespace)
+	return _strNamespace, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Namespace wraps the raw Put_Namespace call.
@@ -701,13 +825,17 @@ func (self ISWbemObjectPath) Put_Namespace(strNamespace foundation.BSTR) error {
 }
 
 // Get_ParentNamespace wraps the raw Get_ParentNamespace call.
-func (self ISWbemObjectPath) Get_ParentNamespace(strParentNamespace *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ParentNamespace(strParentNamespace)))
+func (self ISWbemObjectPath) Get_ParentNamespace() (foundation.BSTR, error) {
+	var _strParentNamespace foundation.BSTR
+	_hr := self.Raw.Get_ParentNamespace(&_strParentNamespace)
+	return _strParentNamespace, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DisplayName wraps the raw Get_DisplayName call.
-func (self ISWbemObjectPath) Get_DisplayName(strDisplayName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisplayName(strDisplayName)))
+func (self ISWbemObjectPath) Get_DisplayName() (foundation.BSTR, error) {
+	var _strDisplayName foundation.BSTR
+	_hr := self.Raw.Get_DisplayName(&_strDisplayName)
+	return _strDisplayName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DisplayName wraps the raw Put_DisplayName call.
@@ -716,8 +844,10 @@ func (self ISWbemObjectPath) Put_DisplayName(strDisplayName foundation.BSTR) err
 }
 
 // Get_Class wraps the raw Get_Class call.
-func (self ISWbemObjectPath) Get_Class(strClass *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Class(strClass)))
+func (self ISWbemObjectPath) Get_Class() (foundation.BSTR, error) {
+	var _strClass foundation.BSTR
+	_hr := self.Raw.Get_Class(&_strClass)
+	return _strClass, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Class wraps the raw Put_Class call.
@@ -726,8 +856,10 @@ func (self ISWbemObjectPath) Put_Class(strClass foundation.BSTR) error {
 }
 
 // Get_IsClass wraps the raw Get_IsClass call.
-func (self ISWbemObjectPath) Get_IsClass(bIsClass *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsClass(bIsClass)))
+func (self ISWbemObjectPath) Get_IsClass() (foundation.VARIANT_BOOL, error) {
+	var _bIsClass foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsClass(&_bIsClass)
+	return _bIsClass, win32.HRESULTError(int32(_hr))
 }
 
 // SetAsClass wraps the raw SetAsClass call.
@@ -736,8 +868,10 @@ func (self ISWbemObjectPath) SetAsClass() error {
 }
 
 // Get_IsSingleton wraps the raw Get_IsSingleton call.
-func (self ISWbemObjectPath) Get_IsSingleton(bIsSingleton *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsSingleton(bIsSingleton)))
+func (self ISWbemObjectPath) Get_IsSingleton() (foundation.VARIANT_BOOL, error) {
+	var _bIsSingleton foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsSingleton(&_bIsSingleton)
+	return _bIsSingleton, win32.HRESULTError(int32(_hr))
 }
 
 // SetAsSingleton wraps the raw SetAsSingleton call.
@@ -746,18 +880,24 @@ func (self ISWbemObjectPath) SetAsSingleton() error {
 }
 
 // Get_Keys wraps the raw Get_Keys call.
-func (self ISWbemObjectPath) Get_Keys(objWbemNamedValueSet **systemwmi.ISWbemNamedValueSet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Keys(objWbemNamedValueSet)))
+func (self ISWbemObjectPath) Get_Keys() (*systemwmi.ISWbemNamedValueSet, error) {
+	var _objWbemNamedValueSet *systemwmi.ISWbemNamedValueSet
+	_hr := self.Raw.Get_Keys(&_objWbemNamedValueSet)
+	return _objWbemNamedValueSet, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemObjectPath) Get_Security_(objWbemSecurity **systemwmi.ISWbemSecurity) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Security_(objWbemSecurity)))
+func (self ISWbemObjectPath) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+	var _objWbemSecurity *systemwmi.ISWbemSecurity
+	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
+	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Locale wraps the raw Get_Locale call.
-func (self ISWbemObjectPath) Get_Locale(strLocale *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Locale(strLocale)))
+func (self ISWbemObjectPath) Get_Locale() (foundation.BSTR, error) {
+	var _strLocale foundation.BSTR
+	_hr := self.Raw.Get_Locale(&_strLocale)
+	return _strLocale, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Locale wraps the raw Put_Locale call.
@@ -766,8 +906,10 @@ func (self ISWbemObjectPath) Put_Locale(strLocale foundation.BSTR) error {
 }
 
 // Get_Authority wraps the raw Get_Authority call.
-func (self ISWbemObjectPath) Get_Authority(strAuthority *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Authority(strAuthority)))
+func (self ISWbemObjectPath) Get_Authority() (foundation.BSTR, error) {
+	var _strAuthority foundation.BSTR
+	_hr := self.Raw.Get_Authority(&_strAuthority)
+	return _strAuthority, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Authority wraps the raw Put_Authority call.
@@ -787,28 +929,38 @@ func WrapISWbemObjectSet(raw *systemwmi.ISWbemObjectSet) ISWbemObjectSet {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemObjectSet) Get__NewEnum(pUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pUnk)))
+func (self ISWbemObjectSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pUnk)
+	return _pUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemObjectSet) Item(strObjectPath foundation.BSTR, iFlags int32, objWbemObject **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.Item(strObjectPath, iFlags, objWbemObject)))
+func (self ISWbemObjectSet) Item(strObjectPath foundation.BSTR, iFlags int32) (*systemwmi.ISWbemObject, error) {
+	var _objWbemObject *systemwmi.ISWbemObject
+	_hr := self.Raw.Item(strObjectPath, iFlags, &_objWbemObject)
+	return _objWbemObject, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ISWbemObjectSet) Get_Count(iCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(iCount)))
+func (self ISWbemObjectSet) Get_Count() (int32, error) {
+	var _iCount int32
+	_hr := self.Raw.Get_Count(&_iCount)
+	return _iCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemObjectSet) Get_Security_(objWbemSecurity **systemwmi.ISWbemSecurity) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Security_(objWbemSecurity)))
+func (self ISWbemObjectSet) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+	var _objWbemSecurity *systemwmi.ISWbemSecurity
+	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
+	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
 }
 
 // ItemIndex wraps the raw ItemIndex call.
-func (self ISWbemObjectSet) ItemIndex(lIndex int32, objWbemObject **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.ItemIndex(lIndex, objWbemObject)))
+func (self ISWbemObjectSet) ItemIndex(lIndex int32) (*systemwmi.ISWbemObject, error) {
+	var _objWbemObject *systemwmi.ISWbemObject
+	_hr := self.Raw.ItemIndex(lIndex, &_objWbemObject)
+	return _objWbemObject, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemPrivilege is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemPrivilege with error-returning methods.
@@ -823,8 +975,10 @@ func WrapISWbemPrivilege(raw *systemwmi.ISWbemPrivilege) ISWbemPrivilege {
 }
 
 // Get_IsEnabled wraps the raw Get_IsEnabled call.
-func (self ISWbemPrivilege) Get_IsEnabled(bIsEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsEnabled(bIsEnabled)))
+func (self ISWbemPrivilege) Get_IsEnabled() (foundation.VARIANT_BOOL, error) {
+	var _bIsEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsEnabled(&_bIsEnabled)
+	return _bIsEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsEnabled wraps the raw Put_IsEnabled call.
@@ -833,18 +987,24 @@ func (self ISWbemPrivilege) Put_IsEnabled(bIsEnabled foundation.VARIANT_BOOL) er
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ISWbemPrivilege) Get_Name(strDisplayName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(strDisplayName)))
+func (self ISWbemPrivilege) Get_Name() (foundation.BSTR, error) {
+	var _strDisplayName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_strDisplayName)
+	return _strDisplayName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DisplayName wraps the raw Get_DisplayName call.
-func (self ISWbemPrivilege) Get_DisplayName(strDisplayName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisplayName(strDisplayName)))
+func (self ISWbemPrivilege) Get_DisplayName() (foundation.BSTR, error) {
+	var _strDisplayName foundation.BSTR
+	_hr := self.Raw.Get_DisplayName(&_strDisplayName)
+	return _strDisplayName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Identifier wraps the raw Get_Identifier call.
-func (self ISWbemPrivilege) Get_Identifier(iPrivilege *systemwmi.WbemPrivilegeEnum) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Identifier(iPrivilege)))
+func (self ISWbemPrivilege) Get_Identifier() (systemwmi.WbemPrivilegeEnum, error) {
+	var _iPrivilege systemwmi.WbemPrivilegeEnum
+	_hr := self.Raw.Get_Identifier(&_iPrivilege)
+	return _iPrivilege, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemPrivilegeSet is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemPrivilegeSet with error-returning methods.
@@ -859,23 +1019,31 @@ func WrapISWbemPrivilegeSet(raw *systemwmi.ISWbemPrivilegeSet) ISWbemPrivilegeSe
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemPrivilegeSet) Get__NewEnum(pUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pUnk)))
+func (self ISWbemPrivilegeSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pUnk)
+	return _pUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemPrivilegeSet) Item(iPrivilege systemwmi.WbemPrivilegeEnum, objWbemPrivilege **systemwmi.ISWbemPrivilege) error {
-	return win32.HRESULTError(int32(self.Raw.Item(iPrivilege, objWbemPrivilege)))
+func (self ISWbemPrivilegeSet) Item(iPrivilege systemwmi.WbemPrivilegeEnum) (*systemwmi.ISWbemPrivilege, error) {
+	var _objWbemPrivilege *systemwmi.ISWbemPrivilege
+	_hr := self.Raw.Item(iPrivilege, &_objWbemPrivilege)
+	return _objWbemPrivilege, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ISWbemPrivilegeSet) Get_Count(iCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(iCount)))
+func (self ISWbemPrivilegeSet) Get_Count() (int32, error) {
+	var _iCount int32
+	_hr := self.Raw.Get_Count(&_iCount)
+	return _iCount, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemPrivilegeSet) Add(iPrivilege systemwmi.WbemPrivilegeEnum, bIsEnabled foundation.VARIANT_BOOL, objWbemPrivilege **systemwmi.ISWbemPrivilege) error {
-	return win32.HRESULTError(int32(self.Raw.Add(iPrivilege, bIsEnabled, objWbemPrivilege)))
+func (self ISWbemPrivilegeSet) Add(iPrivilege systemwmi.WbemPrivilegeEnum, bIsEnabled foundation.VARIANT_BOOL) (*systemwmi.ISWbemPrivilege, error) {
+	var _objWbemPrivilege *systemwmi.ISWbemPrivilege
+	_hr := self.Raw.Add(iPrivilege, bIsEnabled, &_objWbemPrivilege)
+	return _objWbemPrivilege, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -889,8 +1057,10 @@ func (self ISWbemPrivilegeSet) DeleteAll() error {
 }
 
 // AddAsString wraps the raw AddAsString call.
-func (self ISWbemPrivilegeSet) AddAsString(strPrivilege foundation.BSTR, bIsEnabled foundation.VARIANT_BOOL, objWbemPrivilege **systemwmi.ISWbemPrivilege) error {
-	return win32.HRESULTError(int32(self.Raw.AddAsString(strPrivilege, bIsEnabled, objWbemPrivilege)))
+func (self ISWbemPrivilegeSet) AddAsString(strPrivilege foundation.BSTR, bIsEnabled foundation.VARIANT_BOOL) (*systemwmi.ISWbemPrivilege, error) {
+	var _objWbemPrivilege *systemwmi.ISWbemPrivilege
+	_hr := self.Raw.AddAsString(strPrivilege, bIsEnabled, &_objWbemPrivilege)
+	return _objWbemPrivilege, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemProperty is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemProperty with error-returning methods.
@@ -905,8 +1075,10 @@ func WrapISWbemProperty(raw *systemwmi.ISWbemProperty) ISWbemProperty {
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self ISWbemProperty) Get_Value(varValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(varValue)))
+func (self ISWbemProperty) Get_Value() (systemvariant.VARIANT, error) {
+	var _varValue systemvariant.VARIANT
+	_hr := self.Raw.Get_Value(&_varValue)
+	return _varValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Value wraps the raw Put_Value call.
@@ -915,33 +1087,45 @@ func (self ISWbemProperty) Put_Value(varValue *systemvariant.VARIANT) error {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ISWbemProperty) Get_Name(strName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(strName)))
+func (self ISWbemProperty) Get_Name() (foundation.BSTR, error) {
+	var _strName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_strName)
+	return _strName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsLocal wraps the raw Get_IsLocal call.
-func (self ISWbemProperty) Get_IsLocal(bIsLocal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsLocal(bIsLocal)))
+func (self ISWbemProperty) Get_IsLocal() (foundation.VARIANT_BOOL, error) {
+	var _bIsLocal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsLocal(&_bIsLocal)
+	return _bIsLocal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Origin wraps the raw Get_Origin call.
-func (self ISWbemProperty) Get_Origin(strOrigin *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Origin(strOrigin)))
+func (self ISWbemProperty) Get_Origin() (foundation.BSTR, error) {
+	var _strOrigin foundation.BSTR
+	_hr := self.Raw.Get_Origin(&_strOrigin)
+	return _strOrigin, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CIMType wraps the raw Get_CIMType call.
-func (self ISWbemProperty) Get_CIMType(iCimType *systemwmi.WbemCimtypeEnum) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CIMType(iCimType)))
+func (self ISWbemProperty) Get_CIMType() (systemwmi.WbemCimtypeEnum, error) {
+	var _iCimType systemwmi.WbemCimtypeEnum
+	_hr := self.Raw.Get_CIMType(&_iCimType)
+	return _iCimType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Qualifiers_ wraps the raw Get_Qualifiers_ call.
-func (self ISWbemProperty) Get_Qualifiers_(objWbemQualifierSet **systemwmi.ISWbemQualifierSet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Qualifiers_(objWbemQualifierSet)))
+func (self ISWbemProperty) Get_Qualifiers_() (*systemwmi.ISWbemQualifierSet, error) {
+	var _objWbemQualifierSet *systemwmi.ISWbemQualifierSet
+	_hr := self.Raw.Get_Qualifiers_(&_objWbemQualifierSet)
+	return _objWbemQualifierSet, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsArray wraps the raw Get_IsArray call.
-func (self ISWbemProperty) Get_IsArray(bIsArray *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsArray(bIsArray)))
+func (self ISWbemProperty) Get_IsArray() (foundation.VARIANT_BOOL, error) {
+	var _bIsArray foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsArray(&_bIsArray)
+	return _bIsArray, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemPropertySet is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemPropertySet with error-returning methods.
@@ -956,23 +1140,31 @@ func WrapISWbemPropertySet(raw *systemwmi.ISWbemPropertySet) ISWbemPropertySet {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemPropertySet) Get__NewEnum(pUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pUnk)))
+func (self ISWbemPropertySet) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pUnk)
+	return _pUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemPropertySet) Item(strName foundation.BSTR, iFlags int32, objWbemProperty **systemwmi.ISWbemProperty) error {
-	return win32.HRESULTError(int32(self.Raw.Item(strName, iFlags, objWbemProperty)))
+func (self ISWbemPropertySet) Item(strName foundation.BSTR, iFlags int32) (*systemwmi.ISWbemProperty, error) {
+	var _objWbemProperty *systemwmi.ISWbemProperty
+	_hr := self.Raw.Item(strName, iFlags, &_objWbemProperty)
+	return _objWbemProperty, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ISWbemPropertySet) Get_Count(iCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(iCount)))
+func (self ISWbemPropertySet) Get_Count() (int32, error) {
+	var _iCount int32
+	_hr := self.Raw.Get_Count(&_iCount)
+	return _iCount, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemPropertySet) Add(strName foundation.BSTR, iCIMType systemwmi.WbemCimtypeEnum, bIsArray foundation.VARIANT_BOOL, iFlags int32, objWbemProperty **systemwmi.ISWbemProperty) error {
-	return win32.HRESULTError(int32(self.Raw.Add(strName, iCIMType, bIsArray, iFlags, objWbemProperty)))
+func (self ISWbemPropertySet) Add(strName foundation.BSTR, iCIMType systemwmi.WbemCimtypeEnum, bIsArray foundation.VARIANT_BOOL, iFlags int32) (*systemwmi.ISWbemProperty, error) {
+	var _objWbemProperty *systemwmi.ISWbemProperty
+	_hr := self.Raw.Add(strName, iCIMType, bIsArray, iFlags, &_objWbemProperty)
+	return _objWbemProperty, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -992,8 +1184,10 @@ func WrapISWbemQualifier(raw *systemwmi.ISWbemQualifier) ISWbemQualifier {
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self ISWbemQualifier) Get_Value(varValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(varValue)))
+func (self ISWbemQualifier) Get_Value() (systemvariant.VARIANT, error) {
+	var _varValue systemvariant.VARIANT
+	_hr := self.Raw.Get_Value(&_varValue)
+	return _varValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Value wraps the raw Put_Value call.
@@ -1002,18 +1196,24 @@ func (self ISWbemQualifier) Put_Value(varValue *systemvariant.VARIANT) error {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ISWbemQualifier) Get_Name(strName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(strName)))
+func (self ISWbemQualifier) Get_Name() (foundation.BSTR, error) {
+	var _strName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_strName)
+	return _strName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsLocal wraps the raw Get_IsLocal call.
-func (self ISWbemQualifier) Get_IsLocal(bIsLocal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsLocal(bIsLocal)))
+func (self ISWbemQualifier) Get_IsLocal() (foundation.VARIANT_BOOL, error) {
+	var _bIsLocal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsLocal(&_bIsLocal)
+	return _bIsLocal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PropagatesToSubclass wraps the raw Get_PropagatesToSubclass call.
-func (self ISWbemQualifier) Get_PropagatesToSubclass(bPropagatesToSubclass *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropagatesToSubclass(bPropagatesToSubclass)))
+func (self ISWbemQualifier) Get_PropagatesToSubclass() (foundation.VARIANT_BOOL, error) {
+	var _bPropagatesToSubclass foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_PropagatesToSubclass(&_bPropagatesToSubclass)
+	return _bPropagatesToSubclass, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PropagatesToSubclass wraps the raw Put_PropagatesToSubclass call.
@@ -1022,8 +1222,10 @@ func (self ISWbemQualifier) Put_PropagatesToSubclass(bPropagatesToSubclass found
 }
 
 // Get_PropagatesToInstance wraps the raw Get_PropagatesToInstance call.
-func (self ISWbemQualifier) Get_PropagatesToInstance(bPropagatesToInstance *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PropagatesToInstance(bPropagatesToInstance)))
+func (self ISWbemQualifier) Get_PropagatesToInstance() (foundation.VARIANT_BOOL, error) {
+	var _bPropagatesToInstance foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_PropagatesToInstance(&_bPropagatesToInstance)
+	return _bPropagatesToInstance, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PropagatesToInstance wraps the raw Put_PropagatesToInstance call.
@@ -1032,8 +1234,10 @@ func (self ISWbemQualifier) Put_PropagatesToInstance(bPropagatesToInstance found
 }
 
 // Get_IsOverridable wraps the raw Get_IsOverridable call.
-func (self ISWbemQualifier) Get_IsOverridable(bIsOverridable *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsOverridable(bIsOverridable)))
+func (self ISWbemQualifier) Get_IsOverridable() (foundation.VARIANT_BOOL, error) {
+	var _bIsOverridable foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsOverridable(&_bIsOverridable)
+	return _bIsOverridable, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsOverridable wraps the raw Put_IsOverridable call.
@@ -1042,8 +1246,10 @@ func (self ISWbemQualifier) Put_IsOverridable(bIsOverridable foundation.VARIANT_
 }
 
 // Get_IsAmended wraps the raw Get_IsAmended call.
-func (self ISWbemQualifier) Get_IsAmended(bIsAmended *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsAmended(bIsAmended)))
+func (self ISWbemQualifier) Get_IsAmended() (foundation.VARIANT_BOOL, error) {
+	var _bIsAmended foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsAmended(&_bIsAmended)
+	return _bIsAmended, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemQualifierSet is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemQualifierSet with error-returning methods.
@@ -1058,23 +1264,31 @@ func WrapISWbemQualifierSet(raw *systemwmi.ISWbemQualifierSet) ISWbemQualifierSe
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemQualifierSet) Get__NewEnum(pUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pUnk)))
+func (self ISWbemQualifierSet) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pUnk)
+	return _pUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemQualifierSet) Item(name foundation.BSTR, iFlags int32, objWbemQualifier **systemwmi.ISWbemQualifier) error {
-	return win32.HRESULTError(int32(self.Raw.Item(name, iFlags, objWbemQualifier)))
+func (self ISWbemQualifierSet) Item(name foundation.BSTR, iFlags int32) (*systemwmi.ISWbemQualifier, error) {
+	var _objWbemQualifier *systemwmi.ISWbemQualifier
+	_hr := self.Raw.Item(name, iFlags, &_objWbemQualifier)
+	return _objWbemQualifier, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ISWbemQualifierSet) Get_Count(iCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(iCount)))
+func (self ISWbemQualifierSet) Get_Count() (int32, error) {
+	var _iCount int32
+	_hr := self.Raw.Get_Count(&_iCount)
+	return _iCount, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemQualifierSet) Add(strName foundation.BSTR, varVal *systemvariant.VARIANT, bPropagatesToSubclass foundation.VARIANT_BOOL, bPropagatesToInstance foundation.VARIANT_BOOL, bIsOverridable foundation.VARIANT_BOOL, iFlags int32, objWbemQualifier **systemwmi.ISWbemQualifier) error {
-	return win32.HRESULTError(int32(self.Raw.Add(strName, varVal, bPropagatesToSubclass, bPropagatesToInstance, bIsOverridable, iFlags, objWbemQualifier)))
+func (self ISWbemQualifierSet) Add(strName foundation.BSTR, varVal *systemvariant.VARIANT, bPropagatesToSubclass foundation.VARIANT_BOOL, bPropagatesToInstance foundation.VARIANT_BOOL, bIsOverridable foundation.VARIANT_BOOL, iFlags int32) (*systemwmi.ISWbemQualifier, error) {
+	var _objWbemQualifier *systemwmi.ISWbemQualifier
+	_hr := self.Raw.Add(strName, varVal, bPropagatesToSubclass, bPropagatesToInstance, bIsOverridable, iFlags, &_objWbemQualifier)
+	return _objWbemQualifier, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1094,28 +1308,38 @@ func WrapISWbemRefreshableItem(raw *systemwmi.ISWbemRefreshableItem) ISWbemRefre
 }
 
 // Get_Index wraps the raw Get_Index call.
-func (self ISWbemRefreshableItem) Get_Index(iIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Index(iIndex)))
+func (self ISWbemRefreshableItem) Get_Index() (int32, error) {
+	var _iIndex int32
+	_hr := self.Raw.Get_Index(&_iIndex)
+	return _iIndex, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Refresher wraps the raw Get_Refresher call.
-func (self ISWbemRefreshableItem) Get_Refresher(objWbemRefresher **systemwmi.ISWbemRefresher) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Refresher(objWbemRefresher)))
+func (self ISWbemRefreshableItem) Get_Refresher() (*systemwmi.ISWbemRefresher, error) {
+	var _objWbemRefresher *systemwmi.ISWbemRefresher
+	_hr := self.Raw.Get_Refresher(&_objWbemRefresher)
+	return _objWbemRefresher, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsSet wraps the raw Get_IsSet call.
-func (self ISWbemRefreshableItem) Get_IsSet(bIsSet *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsSet(bIsSet)))
+func (self ISWbemRefreshableItem) Get_IsSet() (foundation.VARIANT_BOOL, error) {
+	var _bIsSet foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsSet(&_bIsSet)
+	return _bIsSet, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Object wraps the raw Get_Object call.
-func (self ISWbemRefreshableItem) Get_Object(objWbemObject **systemwmi.ISWbemObjectEx) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Object(objWbemObject)))
+func (self ISWbemRefreshableItem) Get_Object() (*systemwmi.ISWbemObjectEx, error) {
+	var _objWbemObject *systemwmi.ISWbemObjectEx
+	_hr := self.Raw.Get_Object(&_objWbemObject)
+	return _objWbemObject, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ObjectSet wraps the raw Get_ObjectSet call.
-func (self ISWbemRefreshableItem) Get_ObjectSet(objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ObjectSet(objWbemObjectSet)))
+func (self ISWbemRefreshableItem) Get_ObjectSet() (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.Get_ObjectSet(&_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1135,28 +1359,38 @@ func WrapISWbemRefresher(raw *systemwmi.ISWbemRefresher) ISWbemRefresher {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISWbemRefresher) Get__NewEnum(pUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pUnk)))
+func (self ISWbemRefresher) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pUnk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pUnk)
+	return _pUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISWbemRefresher) Item(iIndex int32, objWbemRefreshableItem **systemwmi.ISWbemRefreshableItem) error {
-	return win32.HRESULTError(int32(self.Raw.Item(iIndex, objWbemRefreshableItem)))
+func (self ISWbemRefresher) Item(iIndex int32) (*systemwmi.ISWbemRefreshableItem, error) {
+	var _objWbemRefreshableItem *systemwmi.ISWbemRefreshableItem
+	_hr := self.Raw.Item(iIndex, &_objWbemRefreshableItem)
+	return _objWbemRefreshableItem, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ISWbemRefresher) Get_Count(iCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(iCount)))
+func (self ISWbemRefresher) Get_Count() (int32, error) {
+	var _iCount int32
+	_hr := self.Raw.Get_Count(&_iCount)
+	return _iCount, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self ISWbemRefresher) Add(objWbemServices *systemwmi.ISWbemServicesEx, bsInstancePath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemRefreshableItem **systemwmi.ISWbemRefreshableItem) error {
-	return win32.HRESULTError(int32(self.Raw.Add(objWbemServices, bsInstancePath, iFlags, objWbemNamedValueSet, objWbemRefreshableItem)))
+func (self ISWbemRefresher) Add(objWbemServices *systemwmi.ISWbemServicesEx, bsInstancePath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemRefreshableItem, error) {
+	var _objWbemRefreshableItem *systemwmi.ISWbemRefreshableItem
+	_hr := self.Raw.Add(objWbemServices, bsInstancePath, iFlags, objWbemNamedValueSet, &_objWbemRefreshableItem)
+	return _objWbemRefreshableItem, win32.HRESULTError(int32(_hr))
 }
 
 // AddEnum wraps the raw AddEnum call.
-func (self ISWbemRefresher) AddEnum(objWbemServices *systemwmi.ISWbemServicesEx, bsClassName foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemRefreshableItem **systemwmi.ISWbemRefreshableItem) error {
-	return win32.HRESULTError(int32(self.Raw.AddEnum(objWbemServices, bsClassName, iFlags, objWbemNamedValueSet, objWbemRefreshableItem)))
+func (self ISWbemRefresher) AddEnum(objWbemServices *systemwmi.ISWbemServicesEx, bsClassName foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemRefreshableItem, error) {
+	var _objWbemRefreshableItem *systemwmi.ISWbemRefreshableItem
+	_hr := self.Raw.AddEnum(objWbemServices, bsClassName, iFlags, objWbemNamedValueSet, &_objWbemRefreshableItem)
+	return _objWbemRefreshableItem, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1170,8 +1404,10 @@ func (self ISWbemRefresher) Refresh(iFlags int32) error {
 }
 
 // Get_AutoReconnect wraps the raw Get_AutoReconnect call.
-func (self ISWbemRefresher) Get_AutoReconnect(bCount *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoReconnect(bCount)))
+func (self ISWbemRefresher) Get_AutoReconnect() (foundation.VARIANT_BOOL, error) {
+	var _bCount foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AutoReconnect(&_bCount)
+	return _bCount, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AutoReconnect wraps the raw Put_AutoReconnect call.
@@ -1196,8 +1432,10 @@ func WrapISWbemSecurity(raw *systemwmi.ISWbemSecurity) ISWbemSecurity {
 }
 
 // Get_ImpersonationLevel wraps the raw Get_ImpersonationLevel call.
-func (self ISWbemSecurity) Get_ImpersonationLevel(iImpersonationLevel *systemwmi.WbemImpersonationLevelEnum) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ImpersonationLevel(iImpersonationLevel)))
+func (self ISWbemSecurity) Get_ImpersonationLevel() (systemwmi.WbemImpersonationLevelEnum, error) {
+	var _iImpersonationLevel systemwmi.WbemImpersonationLevelEnum
+	_hr := self.Raw.Get_ImpersonationLevel(&_iImpersonationLevel)
+	return _iImpersonationLevel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ImpersonationLevel wraps the raw Put_ImpersonationLevel call.
@@ -1206,8 +1444,10 @@ func (self ISWbemSecurity) Put_ImpersonationLevel(iImpersonationLevel systemwmi.
 }
 
 // Get_AuthenticationLevel wraps the raw Get_AuthenticationLevel call.
-func (self ISWbemSecurity) Get_AuthenticationLevel(iAuthenticationLevel *systemwmi.WbemAuthenticationLevelEnum) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AuthenticationLevel(iAuthenticationLevel)))
+func (self ISWbemSecurity) Get_AuthenticationLevel() (systemwmi.WbemAuthenticationLevelEnum, error) {
+	var _iAuthenticationLevel systemwmi.WbemAuthenticationLevelEnum
+	_hr := self.Raw.Get_AuthenticationLevel(&_iAuthenticationLevel)
+	return _iAuthenticationLevel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AuthenticationLevel wraps the raw Put_AuthenticationLevel call.
@@ -1216,8 +1456,10 @@ func (self ISWbemSecurity) Put_AuthenticationLevel(iAuthenticationLevel systemwm
 }
 
 // Get_Privileges wraps the raw Get_Privileges call.
-func (self ISWbemSecurity) Get_Privileges(objWbemPrivilegeSet **systemwmi.ISWbemPrivilegeSet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Privileges(objWbemPrivilegeSet)))
+func (self ISWbemSecurity) Get_Privileges() (*systemwmi.ISWbemPrivilegeSet, error) {
+	var _objWbemPrivilegeSet *systemwmi.ISWbemPrivilegeSet
+	_hr := self.Raw.Get_Privileges(&_objWbemPrivilegeSet)
+	return _objWbemPrivilegeSet, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemServices is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemServices with error-returning methods.
@@ -1232,8 +1474,10 @@ func WrapISWbemServices(raw *systemwmi.ISWbemServices) ISWbemServices {
 }
 
 // Get wraps the raw Get call.
-func (self ISWbemServices) Get(strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObject **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.Get(strObjectPath, iFlags, objWbemNamedValueSet, objWbemObject)))
+func (self ISWbemServices) Get(strObjectPath foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObject, error) {
+	var _objWbemObject *systemwmi.ISWbemObject
+	_hr := self.Raw.Get(strObjectPath, iFlags, objWbemNamedValueSet, &_objWbemObject)
+	return _objWbemObject, win32.HRESULTError(int32(_hr))
 }
 
 // GetAsync wraps the raw GetAsync call.
@@ -1252,8 +1496,10 @@ func (self ISWbemServices) DeleteAsync(objWbemSink *systemcom.IDispatch, strObje
 }
 
 // InstancesOf wraps the raw InstancesOf call.
-func (self ISWbemServices) InstancesOf(strClass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.InstancesOf(strClass, iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemServices) InstancesOf(strClass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.InstancesOf(strClass, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // InstancesOfAsync wraps the raw InstancesOfAsync call.
@@ -1262,8 +1508,10 @@ func (self ISWbemServices) InstancesOfAsync(objWbemSink *systemcom.IDispatch, st
 }
 
 // SubclassesOf wraps the raw SubclassesOf call.
-func (self ISWbemServices) SubclassesOf(strSuperclass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.SubclassesOf(strSuperclass, iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemServices) SubclassesOf(strSuperclass foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.SubclassesOf(strSuperclass, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // SubclassesOfAsync wraps the raw SubclassesOfAsync call.
@@ -1272,8 +1520,10 @@ func (self ISWbemServices) SubclassesOfAsync(objWbemSink *systemcom.IDispatch, s
 }
 
 // ExecQuery wraps the raw ExecQuery call.
-func (self ISWbemServices) ExecQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.ExecQuery(strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemServices) ExecQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.ExecQuery(strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // ExecQueryAsync wraps the raw ExecQueryAsync call.
@@ -1282,8 +1532,10 @@ func (self ISWbemServices) ExecQueryAsync(objWbemSink *systemcom.IDispatch, strQ
 }
 
 // AssociatorsOf wraps the raw AssociatorsOf call.
-func (self ISWbemServices) AssociatorsOf(strObjectPath foundation.BSTR, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.AssociatorsOf(strObjectPath, strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemServices) AssociatorsOf(strObjectPath foundation.BSTR, strAssocClass foundation.BSTR, strResultClass foundation.BSTR, strResultRole foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredAssocQualifier foundation.BSTR, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.AssociatorsOf(strObjectPath, strAssocClass, strResultClass, strResultRole, strRole, bClassesOnly, bSchemaOnly, strRequiredAssocQualifier, strRequiredQualifier, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // AssociatorsOfAsync wraps the raw AssociatorsOfAsync call.
@@ -1292,8 +1544,10 @@ func (self ISWbemServices) AssociatorsOfAsync(objWbemSink *systemcom.IDispatch, 
 }
 
 // ReferencesTo wraps the raw ReferencesTo call.
-func (self ISWbemServices) ReferencesTo(strObjectPath foundation.BSTR, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectSet **systemwmi.ISWbemObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.ReferencesTo(strObjectPath, strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet, objWbemObjectSet)))
+func (self ISWbemServices) ReferencesTo(strObjectPath foundation.BSTR, strResultClass foundation.BSTR, strRole foundation.BSTR, bClassesOnly foundation.VARIANT_BOOL, bSchemaOnly foundation.VARIANT_BOOL, strRequiredQualifier foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectSet, error) {
+	var _objWbemObjectSet *systemwmi.ISWbemObjectSet
+	_hr := self.Raw.ReferencesTo(strObjectPath, strResultClass, strRole, bClassesOnly, bSchemaOnly, strRequiredQualifier, iFlags, objWbemNamedValueSet, &_objWbemObjectSet)
+	return _objWbemObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // ReferencesToAsync wraps the raw ReferencesToAsync call.
@@ -1302,8 +1556,10 @@ func (self ISWbemServices) ReferencesToAsync(objWbemSink *systemcom.IDispatch, s
 }
 
 // ExecNotificationQuery wraps the raw ExecNotificationQuery call.
-func (self ISWbemServices) ExecNotificationQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemEventSource **systemwmi.ISWbemEventSource) error {
-	return win32.HRESULTError(int32(self.Raw.ExecNotificationQuery(strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet, objWbemEventSource)))
+func (self ISWbemServices) ExecNotificationQuery(strQuery foundation.BSTR, strQueryLanguage foundation.BSTR, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemEventSource, error) {
+	var _objWbemEventSource *systemwmi.ISWbemEventSource
+	_hr := self.Raw.ExecNotificationQuery(strQuery, strQueryLanguage, iFlags, objWbemNamedValueSet, &_objWbemEventSource)
+	return _objWbemEventSource, win32.HRESULTError(int32(_hr))
 }
 
 // ExecNotificationQueryAsync wraps the raw ExecNotificationQueryAsync call.
@@ -1312,8 +1568,10 @@ func (self ISWbemServices) ExecNotificationQueryAsync(objWbemSink *systemcom.IDi
 }
 
 // ExecMethod wraps the raw ExecMethod call.
-func (self ISWbemServices) ExecMethod(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemOutParameters **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.ExecMethod(strObjectPath, strMethodName, objWbemInParameters, iFlags, objWbemNamedValueSet, objWbemOutParameters)))
+func (self ISWbemServices) ExecMethod(strObjectPath foundation.BSTR, strMethodName foundation.BSTR, objWbemInParameters *systemcom.IDispatch, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObject, error) {
+	var _objWbemOutParameters *systemwmi.ISWbemObject
+	_hr := self.Raw.ExecMethod(strObjectPath, strMethodName, objWbemInParameters, iFlags, objWbemNamedValueSet, &_objWbemOutParameters)
+	return _objWbemOutParameters, win32.HRESULTError(int32(_hr))
 }
 
 // ExecMethodAsync wraps the raw ExecMethodAsync call.
@@ -1322,8 +1580,10 @@ func (self ISWbemServices) ExecMethodAsync(objWbemSink *systemcom.IDispatch, str
 }
 
 // Get_Security_ wraps the raw Get_Security_ call.
-func (self ISWbemServices) Get_Security_(objWbemSecurity **systemwmi.ISWbemSecurity) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Security_(objWbemSecurity)))
+func (self ISWbemServices) Get_Security_() (*systemwmi.ISWbemSecurity, error) {
+	var _objWbemSecurity *systemwmi.ISWbemSecurity
+	_hr := self.Raw.Get_Security_(&_objWbemSecurity)
+	return _objWbemSecurity, win32.HRESULTError(int32(_hr))
 }
 
 // ISWbemServicesEx is an idiomatic wrapper over the raw COM interface System.Wmi.ISWbemServicesEx with error-returning methods.
@@ -1338,8 +1598,10 @@ func WrapISWbemServicesEx(raw *systemwmi.ISWbemServicesEx) ISWbemServicesEx {
 }
 
 // Put wraps the raw Put call.
-func (self ISWbemServicesEx) Put(objWbemObject *systemwmi.ISWbemObjectEx, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch, objWbemObjectPath **systemwmi.ISWbemObjectPath) error {
-	return win32.HRESULTError(int32(self.Raw.Put(objWbemObject, iFlags, objWbemNamedValueSet, objWbemObjectPath)))
+func (self ISWbemServicesEx) Put(objWbemObject *systemwmi.ISWbemObjectEx, iFlags int32, objWbemNamedValueSet *systemcom.IDispatch) (*systemwmi.ISWbemObjectPath, error) {
+	var _objWbemObjectPath *systemwmi.ISWbemObjectPath
+	_hr := self.Raw.Put(objWbemObject, iFlags, objWbemNamedValueSet, &_objWbemObjectPath)
+	return _objWbemObjectPath, win32.HRESULTError(int32(_hr))
 }
 
 // PutAsync wraps the raw PutAsync call.
@@ -1402,18 +1664,24 @@ func WrapIWMIExtension(raw *systemwmi.IWMIExtension) IWMIExtension {
 }
 
 // Get_WMIObjectPath wraps the raw Get_WMIObjectPath call.
-func (self IWMIExtension) Get_WMIObjectPath(strWMIObjectPath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WMIObjectPath(strWMIObjectPath)))
+func (self IWMIExtension) Get_WMIObjectPath() (foundation.BSTR, error) {
+	var _strWMIObjectPath foundation.BSTR
+	_hr := self.Raw.Get_WMIObjectPath(&_strWMIObjectPath)
+	return _strWMIObjectPath, win32.HRESULTError(int32(_hr))
 }
 
 // GetWMIObject wraps the raw GetWMIObject call.
-func (self IWMIExtension) GetWMIObject(objWMIObject **systemwmi.ISWbemObject) error {
-	return win32.HRESULTError(int32(self.Raw.GetWMIObject(objWMIObject)))
+func (self IWMIExtension) GetWMIObject() (*systemwmi.ISWbemObject, error) {
+	var _objWMIObject *systemwmi.ISWbemObject
+	_hr := self.Raw.GetWMIObject(&_objWMIObject)
+	return _objWMIObject, win32.HRESULTError(int32(_hr))
 }
 
 // GetWMIServices wraps the raw GetWMIServices call.
-func (self IWMIExtension) GetWMIServices(objWMIServices **systemwmi.ISWbemServices) error {
-	return win32.HRESULTError(int32(self.Raw.GetWMIServices(objWMIServices)))
+func (self IWMIExtension) GetWMIServices() (*systemwmi.ISWbemServices, error) {
+	var _objWMIServices *systemwmi.ISWbemServices
+	_hr := self.Raw.GetWMIServices(&_objWMIServices)
+	return _objWMIServices, win32.HRESULTError(int32(_hr))
 }
 
 // IWbemAddressResolution is an idiomatic wrapper over the raw COM interface System.Wmi.IWbemAddressResolution with error-returning methods.

@@ -71,8 +71,10 @@ func (self IContactAggregationAggregate) Get_Groups(options systemcontacts.CONTA
 }
 
 // Get_AntiLink wraps the raw Get_AntiLink call.
-func (self IContactAggregationAggregate) Get_AntiLink(ppAntiLink *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AntiLink(ppAntiLink)))
+func (self IContactAggregationAggregate) Get_AntiLink() (foundation.PWSTR, error) {
+	var _ppAntiLink foundation.PWSTR
+	_hr := self.Raw.Get_AntiLink(&_ppAntiLink)
+	return _ppAntiLink, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AntiLink wraps the raw Put_AntiLink call.
@@ -82,8 +84,10 @@ func (self IContactAggregationAggregate) Put_AntiLink(pAntiLink string) error {
 }
 
 // Get_FavoriteOrder wraps the raw Get_FavoriteOrder call.
-func (self IContactAggregationAggregate) Get_FavoriteOrder(pFavoriteOrder *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FavoriteOrder(pFavoriteOrder)))
+func (self IContactAggregationAggregate) Get_FavoriteOrder() (uint32, error) {
+	var _pFavoriteOrder uint32
+	_hr := self.Raw.Get_FavoriteOrder(&_pFavoriteOrder)
+	return _pFavoriteOrder, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FavoriteOrder wraps the raw Put_FavoriteOrder call.
@@ -92,8 +96,10 @@ func (self IContactAggregationAggregate) Put_FavoriteOrder(favoriteOrder uint32)
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IContactAggregationAggregate) Get_Id(ppItemId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(ppItemId)))
+func (self IContactAggregationAggregate) Get_Id() (foundation.PWSTR, error) {
+	var _ppItemId foundation.PWSTR
+	_hr := self.Raw.Get_Id(&_ppItemId)
+	return _ppItemId, win32.HRESULTError(int32(_hr))
 }
 
 // IContactAggregationAggregateCollection is an idiomatic wrapper over the raw COM interface System.Contacts.IContactAggregationAggregateCollection with error-returning methods.
@@ -108,24 +114,32 @@ func WrapIContactAggregationAggregateCollection(raw *systemcontacts.IContactAggr
 }
 
 // FindFirst wraps the raw FindFirst call.
-func (self IContactAggregationAggregateCollection) FindFirst(ppAggregate **systemcontacts.IContactAggregationAggregate) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirst(ppAggregate)))
+func (self IContactAggregationAggregateCollection) FindFirst() (*systemcontacts.IContactAggregationAggregate, error) {
+	var _ppAggregate *systemcontacts.IContactAggregationAggregate
+	_hr := self.Raw.FindFirst(&_ppAggregate)
+	return _ppAggregate, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstByAntiLinkId wraps the raw FindFirstByAntiLinkId call.
-func (self IContactAggregationAggregateCollection) FindFirstByAntiLinkId(pAntiLinkId string, ppAggregate **systemcontacts.IContactAggregationAggregate) error {
+func (self IContactAggregationAggregateCollection) FindFirstByAntiLinkId(pAntiLinkId string) (*systemcontacts.IContactAggregationAggregate, error) {
 	_pAntiLinkId := win32.UTF16Ptr(pAntiLinkId)
-	return win32.HRESULTError(int32(self.Raw.FindFirstByAntiLinkId(foundation.PWSTR(_pAntiLinkId), ppAggregate)))
+	var _ppAggregate *systemcontacts.IContactAggregationAggregate
+	_hr := self.Raw.FindFirstByAntiLinkId(foundation.PWSTR(_pAntiLinkId), &_ppAggregate)
+	return _ppAggregate, win32.HRESULTError(int32(_hr))
 }
 
 // FindNext wraps the raw FindNext call.
-func (self IContactAggregationAggregateCollection) FindNext(ppAggregate **systemcontacts.IContactAggregationAggregate) error {
-	return win32.HRESULTError(int32(self.Raw.FindNext(ppAggregate)))
+func (self IContactAggregationAggregateCollection) FindNext() (*systemcontacts.IContactAggregationAggregate, error) {
+	var _ppAggregate *systemcontacts.IContactAggregationAggregate
+	_hr := self.Raw.FindNext(&_ppAggregate)
+	return _ppAggregate, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IContactAggregationAggregateCollection) Get_Count(pCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pCount)))
+func (self IContactAggregationAggregateCollection) Get_Count() (int32, error) {
+	var _pCount int32
+	_hr := self.Raw.Get_Count(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // IContactAggregationContact is an idiomatic wrapper over the raw COM interface System.Contacts.IContactAggregationContact with error-returning methods.
@@ -161,8 +175,10 @@ func (self IContactAggregationContact) Unlink() error {
 }
 
 // Get_AccountId wraps the raw Get_AccountId call.
-func (self IContactAggregationContact) Get_AccountId(ppAccountId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AccountId(ppAccountId)))
+func (self IContactAggregationContact) Get_AccountId() (foundation.PWSTR, error) {
+	var _ppAccountId foundation.PWSTR
+	_hr := self.Raw.Get_AccountId(&_ppAccountId)
+	return _ppAccountId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AccountId wraps the raw Put_AccountId call.
@@ -177,23 +193,31 @@ func (self IContactAggregationContact) Get_AggregateId(ppAggregateId *foundation
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IContactAggregationContact) Get_Id(ppItemId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(ppItemId)))
+func (self IContactAggregationContact) Get_Id() (foundation.PWSTR, error) {
+	var _ppItemId foundation.PWSTR
+	_hr := self.Raw.Get_Id(&_ppItemId)
+	return _ppItemId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsMe wraps the raw Get_IsMe call.
-func (self IContactAggregationContact) Get_IsMe(pIsMe *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsMe(pIsMe)))
+func (self IContactAggregationContact) Get_IsMe() (foundation.BOOL, error) {
+	var _pIsMe foundation.BOOL
+	_hr := self.Raw.Get_IsMe(&_pIsMe)
+	return _pIsMe, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsExternal wraps the raw Get_IsExternal call.
-func (self IContactAggregationContact) Get_IsExternal(pIsExternal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsExternal(pIsExternal)))
+func (self IContactAggregationContact) Get_IsExternal() (foundation.BOOL, error) {
+	var _pIsExternal foundation.BOOL
+	_hr := self.Raw.Get_IsExternal(&_pIsExternal)
+	return _pIsExternal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetworkSourceId wraps the raw Get_NetworkSourceId call.
-func (self IContactAggregationContact) Get_NetworkSourceId(pNetworkSourceId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkSourceId(pNetworkSourceId)))
+func (self IContactAggregationContact) Get_NetworkSourceId() (uint32, error) {
+	var _pNetworkSourceId uint32
+	_hr := self.Raw.Get_NetworkSourceId(&_pNetworkSourceId)
+	return _pNetworkSourceId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NetworkSourceId wraps the raw Put_NetworkSourceId call.
@@ -202,8 +226,10 @@ func (self IContactAggregationContact) Put_NetworkSourceId(networkSourceId uint3
 }
 
 // Get_NetworkSourceIdString wraps the raw Get_NetworkSourceIdString call.
-func (self IContactAggregationContact) Get_NetworkSourceIdString(ppNetworkSourceId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkSourceIdString(ppNetworkSourceId)))
+func (self IContactAggregationContact) Get_NetworkSourceIdString() (foundation.PWSTR, error) {
+	var _ppNetworkSourceId foundation.PWSTR
+	_hr := self.Raw.Get_NetworkSourceIdString(&_ppNetworkSourceId)
+	return _ppNetworkSourceId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NetworkSourceIdString wraps the raw Put_NetworkSourceIdString call.
@@ -213,8 +239,10 @@ func (self IContactAggregationContact) Put_NetworkSourceIdString(pNetworkSourceI
 }
 
 // Get_RemoteObjectId wraps the raw Get_RemoteObjectId call.
-func (self IContactAggregationContact) Get_RemoteObjectId(ppRemoteObjectId **systemcontacts.CONTACT_AGGREGATION_BLOB) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteObjectId(ppRemoteObjectId)))
+func (self IContactAggregationContact) Get_RemoteObjectId() (*systemcontacts.CONTACT_AGGREGATION_BLOB, error) {
+	var _ppRemoteObjectId *systemcontacts.CONTACT_AGGREGATION_BLOB
+	_hr := self.Raw.Get_RemoteObjectId(&_ppRemoteObjectId)
+	return _ppRemoteObjectId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteObjectId wraps the raw Put_RemoteObjectId call.
@@ -223,8 +251,10 @@ func (self IContactAggregationContact) Put_RemoteObjectId(pRemoteObjectId *syste
 }
 
 // Get_SyncIdentityHash wraps the raw Get_SyncIdentityHash call.
-func (self IContactAggregationContact) Get_SyncIdentityHash(ppSyncIdentityHash **systemcontacts.CONTACT_AGGREGATION_BLOB) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SyncIdentityHash(ppSyncIdentityHash)))
+func (self IContactAggregationContact) Get_SyncIdentityHash() (*systemcontacts.CONTACT_AGGREGATION_BLOB, error) {
+	var _ppSyncIdentityHash *systemcontacts.CONTACT_AGGREGATION_BLOB
+	_hr := self.Raw.Get_SyncIdentityHash(&_ppSyncIdentityHash)
+	return _ppSyncIdentityHash, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SyncIdentityHash wraps the raw Put_SyncIdentityHash call.
@@ -244,32 +274,42 @@ func WrapIContactAggregationContactCollection(raw *systemcontacts.IContactAggreg
 }
 
 // FindFirst wraps the raw FindFirst call.
-func (self IContactAggregationContactCollection) FindFirst(ppItem **systemcontacts.IContactAggregationContact) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirst(ppItem)))
+func (self IContactAggregationContactCollection) FindFirst() (*systemcontacts.IContactAggregationContact, error) {
+	var _ppItem *systemcontacts.IContactAggregationContact
+	_hr := self.Raw.FindFirst(&_ppItem)
+	return _ppItem, win32.HRESULTError(int32(_hr))
 }
 
 // FindNext wraps the raw FindNext call.
-func (self IContactAggregationContactCollection) FindNext(ppItem **systemcontacts.IContactAggregationContact) error {
-	return win32.HRESULTError(int32(self.Raw.FindNext(ppItem)))
+func (self IContactAggregationContactCollection) FindNext() (*systemcontacts.IContactAggregationContact, error) {
+	var _ppItem *systemcontacts.IContactAggregationContact
+	_hr := self.Raw.FindNext(&_ppItem)
+	return _ppItem, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstByIdentityHash wraps the raw FindFirstByIdentityHash call.
-func (self IContactAggregationContactCollection) FindFirstByIdentityHash(pSourceType string, pAccountId string, pIdentityHash *systemcontacts.CONTACT_AGGREGATION_BLOB, ppItem **systemcontacts.IContactAggregationContact) error {
+func (self IContactAggregationContactCollection) FindFirstByIdentityHash(pSourceType string, pAccountId string, pIdentityHash *systemcontacts.CONTACT_AGGREGATION_BLOB) (*systemcontacts.IContactAggregationContact, error) {
 	_pSourceType := win32.UTF16Ptr(pSourceType)
 	_pAccountId := win32.UTF16Ptr(pAccountId)
-	return win32.HRESULTError(int32(self.Raw.FindFirstByIdentityHash(foundation.PWSTR(_pSourceType), foundation.PWSTR(_pAccountId), pIdentityHash, ppItem)))
+	var _ppItem *systemcontacts.IContactAggregationContact
+	_hr := self.Raw.FindFirstByIdentityHash(foundation.PWSTR(_pSourceType), foundation.PWSTR(_pAccountId), pIdentityHash, &_ppItem)
+	return _ppItem, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IContactAggregationContactCollection) Get_Count(pCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pCount)))
+func (self IContactAggregationContactCollection) Get_Count() (int32, error) {
+	var _pCount int32
+	_hr := self.Raw.Get_Count(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstByRemoteId wraps the raw FindFirstByRemoteId call.
-func (self IContactAggregationContactCollection) FindFirstByRemoteId(pSourceType string, pAccountId string, pRemoteObjectId *systemcontacts.CONTACT_AGGREGATION_BLOB, ppItem **systemcontacts.IContactAggregationContact) error {
+func (self IContactAggregationContactCollection) FindFirstByRemoteId(pSourceType string, pAccountId string, pRemoteObjectId *systemcontacts.CONTACT_AGGREGATION_BLOB) (*systemcontacts.IContactAggregationContact, error) {
 	_pSourceType := win32.UTF16Ptr(pSourceType)
 	_pAccountId := win32.UTF16Ptr(pAccountId)
-	return win32.HRESULTError(int32(self.Raw.FindFirstByRemoteId(foundation.PWSTR(_pSourceType), foundation.PWSTR(_pAccountId), pRemoteObjectId, ppItem)))
+	var _ppItem *systemcontacts.IContactAggregationContact
+	_hr := self.Raw.FindFirstByRemoteId(foundation.PWSTR(_pSourceType), foundation.PWSTR(_pAccountId), pRemoteObjectId, &_ppItem)
+	return _ppItem, win32.HRESULTError(int32(_hr))
 }
 
 // IContactAggregationGroup is an idiomatic wrapper over the raw COM interface System.Contacts.IContactAggregationGroup with error-returning methods.
@@ -306,13 +346,17 @@ func (self IContactAggregationGroup) Remove(pAggregateId string) error {
 }
 
 // Get_Members wraps the raw Get_Members call.
-func (self IContactAggregationGroup) Get_Members(ppAggregateContactCollection **systemcontacts.IContactAggregationAggregateCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Members(ppAggregateContactCollection)))
+func (self IContactAggregationGroup) Get_Members() (*systemcontacts.IContactAggregationAggregateCollection, error) {
+	var _ppAggregateContactCollection *systemcontacts.IContactAggregationAggregateCollection
+	_hr := self.Raw.Get_Members(&_ppAggregateContactCollection)
+	return _ppAggregateContactCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_GlobalObjectId wraps the raw Get_GlobalObjectId call.
-func (self IContactAggregationGroup) Get_GlobalObjectId(pGlobalObjectId *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GlobalObjectId(pGlobalObjectId)))
+func (self IContactAggregationGroup) Get_GlobalObjectId() (win32.GUID, error) {
+	var _pGlobalObjectId win32.GUID
+	_hr := self.Raw.Get_GlobalObjectId(&_pGlobalObjectId)
+	return _pGlobalObjectId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_GlobalObjectId wraps the raw Put_GlobalObjectId call.
@@ -321,13 +365,17 @@ func (self IContactAggregationGroup) Put_GlobalObjectId(pGlobalObjectId *win32.G
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IContactAggregationGroup) Get_Id(ppItemId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(ppItemId)))
+func (self IContactAggregationGroup) Get_Id() (foundation.PWSTR, error) {
+	var _ppItemId foundation.PWSTR
+	_hr := self.Raw.Get_Id(&_ppItemId)
+	return _ppItemId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IContactAggregationGroup) Get_Name(ppName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(ppName)))
+func (self IContactAggregationGroup) Get_Name() (foundation.PWSTR, error) {
+	var _ppName foundation.PWSTR
+	_hr := self.Raw.Get_Name(&_ppName)
+	return _ppName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -348,23 +396,31 @@ func WrapIContactAggregationGroupCollection(raw *systemcontacts.IContactAggregat
 }
 
 // FindFirst wraps the raw FindFirst call.
-func (self IContactAggregationGroupCollection) FindFirst(ppGroup **systemcontacts.IContactAggregationGroup) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirst(ppGroup)))
+func (self IContactAggregationGroupCollection) FindFirst() (*systemcontacts.IContactAggregationGroup, error) {
+	var _ppGroup *systemcontacts.IContactAggregationGroup
+	_hr := self.Raw.FindFirst(&_ppGroup)
+	return _ppGroup, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstByGlobalObjectId wraps the raw FindFirstByGlobalObjectId call.
-func (self IContactAggregationGroupCollection) FindFirstByGlobalObjectId(pGlobalObjectId *win32.GUID, ppGroup **systemcontacts.IContactAggregationGroup) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirstByGlobalObjectId(pGlobalObjectId, ppGroup)))
+func (self IContactAggregationGroupCollection) FindFirstByGlobalObjectId(pGlobalObjectId *win32.GUID) (*systemcontacts.IContactAggregationGroup, error) {
+	var _ppGroup *systemcontacts.IContactAggregationGroup
+	_hr := self.Raw.FindFirstByGlobalObjectId(pGlobalObjectId, &_ppGroup)
+	return _ppGroup, win32.HRESULTError(int32(_hr))
 }
 
 // FindNext wraps the raw FindNext call.
-func (self IContactAggregationGroupCollection) FindNext(ppGroup **systemcontacts.IContactAggregationGroup) error {
-	return win32.HRESULTError(int32(self.Raw.FindNext(ppGroup)))
+func (self IContactAggregationGroupCollection) FindNext() (*systemcontacts.IContactAggregationGroup, error) {
+	var _ppGroup *systemcontacts.IContactAggregationGroup
+	_hr := self.Raw.FindNext(&_ppGroup)
+	return _ppGroup, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IContactAggregationGroupCollection) Get_Count(pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pCount)))
+func (self IContactAggregationGroupCollection) Get_Count() (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.Get_Count(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // IContactAggregationLink is an idiomatic wrapper over the raw COM interface System.Contacts.IContactAggregationLink with error-returning methods.
@@ -389,8 +445,10 @@ func (self IContactAggregationLink) Save() error {
 }
 
 // Get_AccountId wraps the raw Get_AccountId call.
-func (self IContactAggregationLink) Get_AccountId(ppAccountId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AccountId(ppAccountId)))
+func (self IContactAggregationLink) Get_AccountId() (foundation.PWSTR, error) {
+	var _ppAccountId foundation.PWSTR
+	_hr := self.Raw.Get_AccountId(&_ppAccountId)
+	return _ppAccountId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AccountId wraps the raw Put_AccountId call.
@@ -400,13 +458,17 @@ func (self IContactAggregationLink) Put_AccountId(pAccountId string) error {
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IContactAggregationLink) Get_Id(ppItemId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(ppItemId)))
+func (self IContactAggregationLink) Get_Id() (foundation.PWSTR, error) {
+	var _ppItemId foundation.PWSTR
+	_hr := self.Raw.Get_Id(&_ppItemId)
+	return _ppItemId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsLinkResolved wraps the raw Get_IsLinkResolved call.
-func (self IContactAggregationLink) Get_IsLinkResolved(pIsLinkResolved *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsLinkResolved(pIsLinkResolved)))
+func (self IContactAggregationLink) Get_IsLinkResolved() (foundation.BOOL, error) {
+	var _pIsLinkResolved foundation.BOOL
+	_hr := self.Raw.Get_IsLinkResolved(&_pIsLinkResolved)
+	return _pIsLinkResolved, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsLinkResolved wraps the raw Put_IsLinkResolved call.
@@ -416,8 +478,10 @@ func (self IContactAggregationLink) Put_IsLinkResolved(isLinkResolved bool) erro
 }
 
 // Get_NetworkSourceIdString wraps the raw Get_NetworkSourceIdString call.
-func (self IContactAggregationLink) Get_NetworkSourceIdString(ppNetworkSourceId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkSourceIdString(ppNetworkSourceId)))
+func (self IContactAggregationLink) Get_NetworkSourceIdString() (foundation.PWSTR, error) {
+	var _ppNetworkSourceId foundation.PWSTR
+	_hr := self.Raw.Get_NetworkSourceIdString(&_ppNetworkSourceId)
+	return _ppNetworkSourceId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NetworkSourceIdString wraps the raw Put_NetworkSourceIdString call.
@@ -427,8 +491,10 @@ func (self IContactAggregationLink) Put_NetworkSourceIdString(pNetworkSourceId s
 }
 
 // Get_RemoteObjectId wraps the raw Get_RemoteObjectId call.
-func (self IContactAggregationLink) Get_RemoteObjectId(ppRemoteObjectId **systemcontacts.CONTACT_AGGREGATION_BLOB) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteObjectId(ppRemoteObjectId)))
+func (self IContactAggregationLink) Get_RemoteObjectId() (*systemcontacts.CONTACT_AGGREGATION_BLOB, error) {
+	var _ppRemoteObjectId *systemcontacts.CONTACT_AGGREGATION_BLOB
+	_hr := self.Raw.Get_RemoteObjectId(&_ppRemoteObjectId)
+	return _ppRemoteObjectId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteObjectId wraps the raw Put_RemoteObjectId call.
@@ -437,8 +503,10 @@ func (self IContactAggregationLink) Put_RemoteObjectId(pRemoteObjectId *systemco
 }
 
 // Get_ServerPerson wraps the raw Get_ServerPerson call.
-func (self IContactAggregationLink) Get_ServerPerson(ppServerPersonId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServerPerson(ppServerPersonId)))
+func (self IContactAggregationLink) Get_ServerPerson() (foundation.PWSTR, error) {
+	var _ppServerPersonId foundation.PWSTR
+	_hr := self.Raw.Get_ServerPerson(&_ppServerPersonId)
+	return _ppServerPersonId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ServerPerson wraps the raw Put_ServerPerson call.
@@ -448,8 +516,10 @@ func (self IContactAggregationLink) Put_ServerPerson(pServerPersonId string) err
 }
 
 // Get_ServerPersonBaseline wraps the raw Get_ServerPersonBaseline call.
-func (self IContactAggregationLink) Get_ServerPersonBaseline(ppServerPersonId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServerPersonBaseline(ppServerPersonId)))
+func (self IContactAggregationLink) Get_ServerPersonBaseline() (foundation.PWSTR, error) {
+	var _ppServerPersonId foundation.PWSTR
+	_hr := self.Raw.Get_ServerPersonBaseline(&_ppServerPersonId)
+	return _ppServerPersonId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ServerPersonBaseline wraps the raw Put_ServerPersonBaseline call.
@@ -459,8 +529,10 @@ func (self IContactAggregationLink) Put_ServerPersonBaseline(pServerPersonId str
 }
 
 // Get_SyncIdentityHash wraps the raw Get_SyncIdentityHash call.
-func (self IContactAggregationLink) Get_SyncIdentityHash(ppSyncIdentityHash **systemcontacts.CONTACT_AGGREGATION_BLOB) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SyncIdentityHash(ppSyncIdentityHash)))
+func (self IContactAggregationLink) Get_SyncIdentityHash() (*systemcontacts.CONTACT_AGGREGATION_BLOB, error) {
+	var _ppSyncIdentityHash *systemcontacts.CONTACT_AGGREGATION_BLOB
+	_hr := self.Raw.Get_SyncIdentityHash(&_ppSyncIdentityHash)
+	return _ppSyncIdentityHash, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SyncIdentityHash wraps the raw Put_SyncIdentityHash call.
@@ -480,25 +552,33 @@ func WrapIContactAggregationLinkCollection(raw *systemcontacts.IContactAggregati
 }
 
 // FindFirst wraps the raw FindFirst call.
-func (self IContactAggregationLinkCollection) FindFirst(ppServerContactLink **systemcontacts.IContactAggregationLink) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirst(ppServerContactLink)))
+func (self IContactAggregationLinkCollection) FindFirst() (*systemcontacts.IContactAggregationLink, error) {
+	var _ppServerContactLink *systemcontacts.IContactAggregationLink
+	_hr := self.Raw.FindFirst(&_ppServerContactLink)
+	return _ppServerContactLink, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstByRemoteId wraps the raw FindFirstByRemoteId call.
-func (self IContactAggregationLinkCollection) FindFirstByRemoteId(pSourceType string, pAccountId string, pRemoteId *systemcontacts.CONTACT_AGGREGATION_BLOB, ppServerContactLink **systemcontacts.IContactAggregationLink) error {
+func (self IContactAggregationLinkCollection) FindFirstByRemoteId(pSourceType string, pAccountId string, pRemoteId *systemcontacts.CONTACT_AGGREGATION_BLOB) (*systemcontacts.IContactAggregationLink, error) {
 	_pSourceType := win32.UTF16Ptr(pSourceType)
 	_pAccountId := win32.UTF16Ptr(pAccountId)
-	return win32.HRESULTError(int32(self.Raw.FindFirstByRemoteId(foundation.PWSTR(_pSourceType), foundation.PWSTR(_pAccountId), pRemoteId, ppServerContactLink)))
+	var _ppServerContactLink *systemcontacts.IContactAggregationLink
+	_hr := self.Raw.FindFirstByRemoteId(foundation.PWSTR(_pSourceType), foundation.PWSTR(_pAccountId), pRemoteId, &_ppServerContactLink)
+	return _ppServerContactLink, win32.HRESULTError(int32(_hr))
 }
 
 // FindNext wraps the raw FindNext call.
-func (self IContactAggregationLinkCollection) FindNext(ppServerContactLink **systemcontacts.IContactAggregationLink) error {
-	return win32.HRESULTError(int32(self.Raw.FindNext(ppServerContactLink)))
+func (self IContactAggregationLinkCollection) FindNext() (*systemcontacts.IContactAggregationLink, error) {
+	var _ppServerContactLink *systemcontacts.IContactAggregationLink
+	_hr := self.Raw.FindNext(&_ppServerContactLink)
+	return _ppServerContactLink, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IContactAggregationLinkCollection) Get_Count(pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pCount)))
+func (self IContactAggregationLinkCollection) Get_Count() (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.Get_Count(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // IContactAggregationManager is an idiomatic wrapper over the raw COM interface System.Contacts.IContactAggregationManager with error-returning methods.
@@ -518,14 +598,18 @@ func (self IContactAggregationManager) GetVersionInfo(plMajorVersion *int32, plM
 }
 
 // CreateOrOpenGroup wraps the raw CreateOrOpenGroup call.
-func (self IContactAggregationManager) CreateOrOpenGroup(pGroupName string, options systemcontacts.CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, pCreatedGroup *foundation.BOOL, ppGroup **systemcontacts.IContactAggregationGroup) error {
+func (self IContactAggregationManager) CreateOrOpenGroup(pGroupName string, options systemcontacts.CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, pCreatedGroup *foundation.BOOL) (*systemcontacts.IContactAggregationGroup, error) {
 	_pGroupName := win32.UTF16Ptr(pGroupName)
-	return win32.HRESULTError(int32(self.Raw.CreateOrOpenGroup(foundation.PWSTR(_pGroupName), options, pCreatedGroup, ppGroup)))
+	var _ppGroup *systemcontacts.IContactAggregationGroup
+	_hr := self.Raw.CreateOrOpenGroup(foundation.PWSTR(_pGroupName), options, pCreatedGroup, &_ppGroup)
+	return _ppGroup, win32.HRESULTError(int32(_hr))
 }
 
 // CreateExternalContact wraps the raw CreateExternalContact call.
-func (self IContactAggregationManager) CreateExternalContact(ppItem **systemcontacts.IContactAggregationContact) error {
-	return win32.HRESULTError(int32(self.Raw.CreateExternalContact(ppItem)))
+func (self IContactAggregationManager) CreateExternalContact() (*systemcontacts.IContactAggregationContact, error) {
+	var _ppItem *systemcontacts.IContactAggregationContact
+	_hr := self.Raw.CreateExternalContact(&_ppItem)
+	return _ppItem, win32.HRESULTError(int32(_hr))
 }
 
 // CreateServerPerson wraps the raw CreateServerPerson call.
@@ -568,8 +652,10 @@ func (self IContactAggregationManager) OpenServerPerson(pItemId string, ppItem *
 }
 
 // Get_Contacts wraps the raw Get_Contacts call.
-func (self IContactAggregationManager) Get_Contacts(options systemcontacts.CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppItems **systemcontacts.IContactAggregationContactCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Contacts(options, ppItems)))
+func (self IContactAggregationManager) Get_Contacts(options systemcontacts.CONTACT_AGGREGATION_COLLECTION_OPTIONS) (*systemcontacts.IContactAggregationContactCollection, error) {
+	var _ppItems *systemcontacts.IContactAggregationContactCollection
+	_hr := self.Raw.Get_Contacts(options, &_ppItems)
+	return _ppItems, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AggregateContacts wraps the raw Get_AggregateContacts call.
@@ -615,8 +701,10 @@ func (self IContactAggregationServerPerson) Save() error {
 }
 
 // Get_AggregateId wraps the raw Get_AggregateId call.
-func (self IContactAggregationServerPerson) Get_AggregateId(ppAggregateId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AggregateId(ppAggregateId)))
+func (self IContactAggregationServerPerson) Get_AggregateId() (foundation.PWSTR, error) {
+	var _ppAggregateId foundation.PWSTR
+	_hr := self.Raw.Get_AggregateId(&_ppAggregateId)
+	return _ppAggregateId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AggregateId wraps the raw Put_AggregateId call.
@@ -626,8 +714,10 @@ func (self IContactAggregationServerPerson) Put_AggregateId(pAggregateId string)
 }
 
 // Get_AntiLink wraps the raw Get_AntiLink call.
-func (self IContactAggregationServerPerson) Get_AntiLink(ppAntiLink *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AntiLink(ppAntiLink)))
+func (self IContactAggregationServerPerson) Get_AntiLink() (foundation.PWSTR, error) {
+	var _ppAntiLink foundation.PWSTR
+	_hr := self.Raw.Get_AntiLink(&_ppAntiLink)
+	return _ppAntiLink, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AntiLink wraps the raw Put_AntiLink call.
@@ -637,8 +727,10 @@ func (self IContactAggregationServerPerson) Put_AntiLink(pAntiLink string) error
 }
 
 // Get_AntiLinkBaseline wraps the raw Get_AntiLinkBaseline call.
-func (self IContactAggregationServerPerson) Get_AntiLinkBaseline(ppAntiLink *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AntiLinkBaseline(ppAntiLink)))
+func (self IContactAggregationServerPerson) Get_AntiLinkBaseline() (foundation.PWSTR, error) {
+	var _ppAntiLink foundation.PWSTR
+	_hr := self.Raw.Get_AntiLinkBaseline(&_ppAntiLink)
+	return _ppAntiLink, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AntiLinkBaseline wraps the raw Put_AntiLinkBaseline call.
@@ -648,8 +740,10 @@ func (self IContactAggregationServerPerson) Put_AntiLinkBaseline(pAntiLink strin
 }
 
 // Get_FavoriteOrder wraps the raw Get_FavoriteOrder call.
-func (self IContactAggregationServerPerson) Get_FavoriteOrder(pFavoriteOrder *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FavoriteOrder(pFavoriteOrder)))
+func (self IContactAggregationServerPerson) Get_FavoriteOrder() (uint32, error) {
+	var _pFavoriteOrder uint32
+	_hr := self.Raw.Get_FavoriteOrder(&_pFavoriteOrder)
+	return _pFavoriteOrder, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FavoriteOrder wraps the raw Put_FavoriteOrder call.
@@ -658,8 +752,10 @@ func (self IContactAggregationServerPerson) Put_FavoriteOrder(favoriteOrder uint
 }
 
 // Get_FavoriteOrderBaseline wraps the raw Get_FavoriteOrderBaseline call.
-func (self IContactAggregationServerPerson) Get_FavoriteOrderBaseline(pFavoriteOrder *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FavoriteOrderBaseline(pFavoriteOrder)))
+func (self IContactAggregationServerPerson) Get_FavoriteOrderBaseline() (uint32, error) {
+	var _pFavoriteOrder uint32
+	_hr := self.Raw.Get_FavoriteOrderBaseline(&_pFavoriteOrder)
+	return _pFavoriteOrder, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FavoriteOrderBaseline wraps the raw Put_FavoriteOrderBaseline call.
@@ -668,8 +764,10 @@ func (self IContactAggregationServerPerson) Put_FavoriteOrderBaseline(favoriteOr
 }
 
 // Get_Groups wraps the raw Get_Groups call.
-func (self IContactAggregationServerPerson) Get_Groups(pGroups **systemcontacts.CONTACT_AGGREGATION_BLOB) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Groups(pGroups)))
+func (self IContactAggregationServerPerson) Get_Groups() (*systemcontacts.CONTACT_AGGREGATION_BLOB, error) {
+	var _pGroups *systemcontacts.CONTACT_AGGREGATION_BLOB
+	_hr := self.Raw.Get_Groups(&_pGroups)
+	return _pGroups, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Groups wraps the raw Put_Groups call.
@@ -678,8 +776,10 @@ func (self IContactAggregationServerPerson) Put_Groups(pGroups *systemcontacts.C
 }
 
 // Get_GroupsBaseline wraps the raw Get_GroupsBaseline call.
-func (self IContactAggregationServerPerson) Get_GroupsBaseline(ppGroups **systemcontacts.CONTACT_AGGREGATION_BLOB) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GroupsBaseline(ppGroups)))
+func (self IContactAggregationServerPerson) Get_GroupsBaseline() (*systemcontacts.CONTACT_AGGREGATION_BLOB, error) {
+	var _ppGroups *systemcontacts.CONTACT_AGGREGATION_BLOB
+	_hr := self.Raw.Get_GroupsBaseline(&_ppGroups)
+	return _ppGroups, win32.HRESULTError(int32(_hr))
 }
 
 // Put_GroupsBaseline wraps the raw Put_GroupsBaseline call.
@@ -688,13 +788,17 @@ func (self IContactAggregationServerPerson) Put_GroupsBaseline(pGroups *systemco
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IContactAggregationServerPerson) Get_Id(ppId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(ppId)))
+func (self IContactAggregationServerPerson) Get_Id() (foundation.PWSTR, error) {
+	var _ppId foundation.PWSTR
+	_hr := self.Raw.Get_Id(&_ppId)
+	return _ppId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsTombstone wraps the raw Get_IsTombstone call.
-func (self IContactAggregationServerPerson) Get_IsTombstone(pIsTombstone *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsTombstone(pIsTombstone)))
+func (self IContactAggregationServerPerson) Get_IsTombstone() (foundation.BOOL, error) {
+	var _pIsTombstone foundation.BOOL
+	_hr := self.Raw.Get_IsTombstone(&_pIsTombstone)
+	return _pIsTombstone, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsTombstone wraps the raw Put_IsTombstone call.
@@ -704,8 +808,10 @@ func (self IContactAggregationServerPerson) Put_IsTombstone(isTombstone bool) er
 }
 
 // Get_LinkedAggregateId wraps the raw Get_LinkedAggregateId call.
-func (self IContactAggregationServerPerson) Get_LinkedAggregateId(ppLinkedAggregateId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LinkedAggregateId(ppLinkedAggregateId)))
+func (self IContactAggregationServerPerson) Get_LinkedAggregateId() (foundation.PWSTR, error) {
+	var _ppLinkedAggregateId foundation.PWSTR
+	_hr := self.Raw.Get_LinkedAggregateId(&_ppLinkedAggregateId)
+	return _ppLinkedAggregateId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LinkedAggregateId wraps the raw Put_LinkedAggregateId call.
@@ -715,8 +821,10 @@ func (self IContactAggregationServerPerson) Put_LinkedAggregateId(pLinkedAggrega
 }
 
 // Get_ObjectId wraps the raw Get_ObjectId call.
-func (self IContactAggregationServerPerson) Get_ObjectId(ppObjectId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ObjectId(ppObjectId)))
+func (self IContactAggregationServerPerson) Get_ObjectId() (foundation.PWSTR, error) {
+	var _ppObjectId foundation.PWSTR
+	_hr := self.Raw.Get_ObjectId(&_ppObjectId)
+	return _ppObjectId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ObjectId wraps the raw Put_ObjectId call.
@@ -737,36 +845,48 @@ func WrapIContactAggregationServerPersonCollection(raw *systemcontacts.IContactA
 }
 
 // FindFirst wraps the raw FindFirst call.
-func (self IContactAggregationServerPersonCollection) FindFirst(ppServerPerson **systemcontacts.IContactAggregationServerPerson) error {
-	return win32.HRESULTError(int32(self.Raw.FindFirst(ppServerPerson)))
+func (self IContactAggregationServerPersonCollection) FindFirst() (*systemcontacts.IContactAggregationServerPerson, error) {
+	var _ppServerPerson *systemcontacts.IContactAggregationServerPerson
+	_hr := self.Raw.FindFirst(&_ppServerPerson)
+	return _ppServerPerson, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstByServerId wraps the raw FindFirstByServerId call.
-func (self IContactAggregationServerPersonCollection) FindFirstByServerId(pServerId string, ppServerPerson **systemcontacts.IContactAggregationServerPerson) error {
+func (self IContactAggregationServerPersonCollection) FindFirstByServerId(pServerId string) (*systemcontacts.IContactAggregationServerPerson, error) {
 	_pServerId := win32.UTF16Ptr(pServerId)
-	return win32.HRESULTError(int32(self.Raw.FindFirstByServerId(foundation.PWSTR(_pServerId), ppServerPerson)))
+	var _ppServerPerson *systemcontacts.IContactAggregationServerPerson
+	_hr := self.Raw.FindFirstByServerId(foundation.PWSTR(_pServerId), &_ppServerPerson)
+	return _ppServerPerson, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstByAggregateId wraps the raw FindFirstByAggregateId call.
-func (self IContactAggregationServerPersonCollection) FindFirstByAggregateId(pAggregateId string, ppServerPerson **systemcontacts.IContactAggregationServerPerson) error {
+func (self IContactAggregationServerPersonCollection) FindFirstByAggregateId(pAggregateId string) (*systemcontacts.IContactAggregationServerPerson, error) {
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
-	return win32.HRESULTError(int32(self.Raw.FindFirstByAggregateId(foundation.PWSTR(_pAggregateId), ppServerPerson)))
+	var _ppServerPerson *systemcontacts.IContactAggregationServerPerson
+	_hr := self.Raw.FindFirstByAggregateId(foundation.PWSTR(_pAggregateId), &_ppServerPerson)
+	return _ppServerPerson, win32.HRESULTError(int32(_hr))
 }
 
 // FindFirstByLinkedAggregateId wraps the raw FindFirstByLinkedAggregateId call.
-func (self IContactAggregationServerPersonCollection) FindFirstByLinkedAggregateId(pAggregateId string, ppServerPerson **systemcontacts.IContactAggregationServerPerson) error {
+func (self IContactAggregationServerPersonCollection) FindFirstByLinkedAggregateId(pAggregateId string) (*systemcontacts.IContactAggregationServerPerson, error) {
 	_pAggregateId := win32.UTF16Ptr(pAggregateId)
-	return win32.HRESULTError(int32(self.Raw.FindFirstByLinkedAggregateId(foundation.PWSTR(_pAggregateId), ppServerPerson)))
+	var _ppServerPerson *systemcontacts.IContactAggregationServerPerson
+	_hr := self.Raw.FindFirstByLinkedAggregateId(foundation.PWSTR(_pAggregateId), &_ppServerPerson)
+	return _ppServerPerson, win32.HRESULTError(int32(_hr))
 }
 
 // FindNext wraps the raw FindNext call.
-func (self IContactAggregationServerPersonCollection) FindNext(ppServerPerson **systemcontacts.IContactAggregationServerPerson) error {
-	return win32.HRESULTError(int32(self.Raw.FindNext(ppServerPerson)))
+func (self IContactAggregationServerPersonCollection) FindNext() (*systemcontacts.IContactAggregationServerPerson, error) {
+	var _ppServerPerson *systemcontacts.IContactAggregationServerPerson
+	_hr := self.Raw.FindNext(&_ppServerPerson)
+	return _ppServerPerson, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IContactAggregationServerPersonCollection) Get_Count(pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pCount)))
+func (self IContactAggregationServerPersonCollection) Get_Count() (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.Get_Count(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // IContactCollection is an idiomatic wrapper over the raw COM interface System.Contacts.IContactCollection with error-returning methods.

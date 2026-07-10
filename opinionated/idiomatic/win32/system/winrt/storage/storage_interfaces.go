@@ -104,8 +104,10 @@ func WrapIUnbufferedFileHandleProvider(raw *systemwinrtstorage.IUnbufferedFileHa
 }
 
 // OpenUnbufferedFileHandle wraps the raw OpenUnbufferedFileHandle call.
-func (self IUnbufferedFileHandleProvider) OpenUnbufferedFileHandle(oplockBreakCallback *systemwinrtstorage.IUnbufferedFileHandleOplockCallback, fileHandle *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.OpenUnbufferedFileHandle(oplockBreakCallback, fileHandle)))
+func (self IUnbufferedFileHandleProvider) OpenUnbufferedFileHandle(oplockBreakCallback *systemwinrtstorage.IUnbufferedFileHandleOplockCallback) (uintptr, error) {
+	var _fileHandle uintptr
+	_hr := self.Raw.OpenUnbufferedFileHandle(oplockBreakCallback, &_fileHandle)
+	return _fileHandle, win32.HRESULTError(int32(_hr))
 }
 
 // CloseUnbufferedFileHandle wraps the raw CloseUnbufferedFileHandle call.

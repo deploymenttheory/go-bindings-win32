@@ -168,8 +168,10 @@ func (self IAudioChannelConfig) SetChannelConfig(dwConfig uint32, pguidEventCont
 }
 
 // GetChannelConfig wraps the raw GetChannelConfig call.
-func (self IAudioChannelConfig) GetChannelConfig(pdwConfig *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetChannelConfig(pdwConfig)))
+func (self IAudioChannelConfig) GetChannelConfig() (uint32, error) {
+	var _pdwConfig uint32
+	_hr := self.Raw.GetChannelConfig(&_pdwConfig)
+	return _pdwConfig, win32.HRESULTError(int32(_hr))
 }
 
 // IAudioClient is an idiomatic wrapper over the raw COM interface Media.Audio.IAudioClient with error-returning methods.
@@ -759,8 +761,10 @@ func WrapIAudioSessionManager2(raw *mediaaudio.IAudioSessionManager2) IAudioSess
 }
 
 // GetSessionEnumerator wraps the raw GetSessionEnumerator call.
-func (self IAudioSessionManager2) GetSessionEnumerator(SessionEnum **mediaaudio.IAudioSessionEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetSessionEnumerator(SessionEnum)))
+func (self IAudioSessionManager2) GetSessionEnumerator() (*mediaaudio.IAudioSessionEnumerator, error) {
+	var _SessionEnum *mediaaudio.IAudioSessionEnumerator
+	_hr := self.Raw.GetSessionEnumerator(&_SessionEnum)
+	return _SessionEnum, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterSessionNotification wraps the raw RegisterSessionNotification call.

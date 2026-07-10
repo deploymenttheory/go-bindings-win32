@@ -372,8 +372,10 @@ func WrapIMbnDeviceServicesContext(raw *networkmanagementmobilebroadband.IMbnDev
 }
 
 // EnumerateDeviceServices wraps the raw EnumerateDeviceServices call.
-func (self IMbnDeviceServicesContext) EnumerateDeviceServices(deviceServices **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateDeviceServices(deviceServices)))
+func (self IMbnDeviceServicesContext) EnumerateDeviceServices() (*systemcom.SAFEARRAY, error) {
+	var _deviceServices *systemcom.SAFEARRAY
+	_hr := self.Raw.EnumerateDeviceServices(&_deviceServices)
+	return _deviceServices, win32.HRESULTError(int32(_hr))
 }
 
 // GetDeviceService wraps the raw GetDeviceService call.
@@ -495,8 +497,10 @@ func (self IMbnInterface) GetInterfaceCapability(interfaceCaps *networkmanagemen
 }
 
 // GetSubscriberInformation wraps the raw GetSubscriberInformation call.
-func (self IMbnInterface) GetSubscriberInformation(subscriberInformation **networkmanagementmobilebroadband.IMbnSubscriberInformation) error {
-	return win32.HRESULTError(int32(self.Raw.GetSubscriberInformation(subscriberInformation)))
+func (self IMbnInterface) GetSubscriberInformation() (*networkmanagementmobilebroadband.IMbnSubscriberInformation, error) {
+	var _subscriberInformation *networkmanagementmobilebroadband.IMbnSubscriberInformation
+	_hr := self.Raw.GetSubscriberInformation(&_subscriberInformation)
+	return _subscriberInformation, win32.HRESULTError(int32(_hr))
 }
 
 // GetReadyState wraps the raw GetReadyState call.
@@ -525,8 +529,10 @@ func (self IMbnInterface) SetPreferredProviders(preferredProviders *systemcom.SA
 }
 
 // GetVisibleProviders wraps the raw GetVisibleProviders call.
-func (self IMbnInterface) GetVisibleProviders(age *uint32, visibleProviders **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetVisibleProviders(age, visibleProviders)))
+func (self IMbnInterface) GetVisibleProviders(age *uint32) (*systemcom.SAFEARRAY, error) {
+	var _visibleProviders *systemcom.SAFEARRAY
+	_hr := self.Raw.GetVisibleProviders(age, &_visibleProviders)
+	return _visibleProviders, win32.HRESULTError(int32(_hr))
 }
 
 // ScanNetwork wraps the raw ScanNetwork call.
@@ -535,8 +541,10 @@ func (self IMbnInterface) ScanNetwork(requestID *uint32) error {
 }
 
 // GetConnection wraps the raw GetConnection call.
-func (self IMbnInterface) GetConnection(mbnConnection **networkmanagementmobilebroadband.IMbnConnection) error {
-	return win32.HRESULTError(int32(self.Raw.GetConnection(mbnConnection)))
+func (self IMbnInterface) GetConnection() (*networkmanagementmobilebroadband.IMbnConnection, error) {
+	var _mbnConnection *networkmanagementmobilebroadband.IMbnConnection
+	_hr := self.Raw.GetConnection(&_mbnConnection)
+	return _mbnConnection, win32.HRESULTError(int32(_hr))
 }
 
 // IMbnInterfaceEvents is an idiomatic wrapper over the raw COM interface NetworkManagement.MobileBroadband.IMbnInterfaceEvents with error-returning methods.
@@ -655,8 +663,10 @@ func (self IMbnMultiCarrier) GetPreferredProviders(preferredMulticarrierProvider
 }
 
 // GetVisibleProviders wraps the raw GetVisibleProviders call.
-func (self IMbnMultiCarrier) GetVisibleProviders(age *uint32, visibleProviders **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetVisibleProviders(age, visibleProviders)))
+func (self IMbnMultiCarrier) GetVisibleProviders(age *uint32) (*systemcom.SAFEARRAY, error) {
+	var _visibleProviders *systemcom.SAFEARRAY
+	_hr := self.Raw.GetVisibleProviders(age, &_visibleProviders)
+	return _visibleProviders, win32.HRESULTError(int32(_hr))
 }
 
 // GetSupportedCellularClasses wraps the raw GetSupportedCellularClasses call.

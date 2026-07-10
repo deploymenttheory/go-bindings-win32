@@ -83,11 +83,32 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 	}
 	slicePlans, elidedCounts := planSliceParams(function, resolvedParams)
 
-	var decls, preamble, rawArgs []string
+	returnContext := context
+	returnContext.IsReturn = true
+	returnResolved := g.mapper.GoType(&function.Return, returnContext, scratch)
+
+	// [out,retval] elevation is viable only when the raw return is a clean
+	// status (HRESULT, BOOL+SetLastError→error, or void). A raw
+	// (value, error) return would collide with the elevated values.
+	retValMode := retValElevationMode(function, returnResolved)
+
+	var decls, preamble, rawArgs, returnValues, returnTypes []string
 	improved := false
 	for i := range function.Params {
 		param := &function.Params[i]
 		resolved := resolvedParams[i]
+
+		if retValMode != retValNone {
+			if element, ok := retValElement(param, resolved); ok {
+				local := "_" + naming.ParamName(param.Name)
+				preamble = append(preamble, "var "+local+" "+element)
+				rawArgs = append(rawArgs, "&"+local)
+				returnValues = append(returnValues, local)
+				returnTypes = append(returnTypes, element)
+				improved = true
+				continue
+			}
+		}
 
 		// A count parameter collapsed into a slice: drop it, derive its
 		// value from the slice length at the call site.
@@ -124,17 +145,30 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		rawArgs = append(rawArgs, idiomatic.rawArg)
 	}
 
-	returnContext := context
-	returnContext.IsReturn = true
-	returnContext.QualifyOwn = true
-	returnResolved := g.mapper.GoType(&function.Return, returnContext, scratch)
-
 	model := view.FunctionModel{
 		ParamStr: strings.Join(decls, ", "),
 		RawCall:  rawAlias + "." + rawName + "(" + strings.Join(rawArgs, ", ") + ")",
 		Preamble: preamble,
 	}
-	if !g.buildReturn(&model, function, returnResolved, &improved) {
+	if len(returnValues) > 0 {
+		model.ReturnValues = returnValues
+		switch retValMode {
+		case retValHRESULT:
+			model.Shape = view.FuncRetValHRESULT
+			imports["win32"] = g.modulePath + "/bindings/runtime/win32"
+			model.ReturnSig = "(" + strings.Join(append(returnTypes, "error"), ", ") + ")"
+		case retValRawError:
+			model.Shape = view.FuncRetValRawError
+			model.ReturnSig = "(" + strings.Join(append(returnTypes, "error"), ", ") + ")"
+		case retValVoid:
+			model.Shape = view.FuncRetValVoid
+			if len(returnTypes) == 1 {
+				model.ReturnSig = returnTypes[0]
+			} else {
+				model.ReturnSig = "(" + strings.Join(returnTypes, ", ") + ")"
+			}
+		}
+	} else if !g.buildReturn(&model, function, returnResolved, &improved) {
 		return view.FunctionModel{}, false
 	}
 
@@ -301,6 +335,46 @@ func planSliceParams(function *win32meta.Function, resolved []typemap.Resolved) 
 		elided[countIndex] = i
 	}
 	return plans, elided
+}
+
+// retVal elevation modes for flat functions.
+const (
+	retValNone = iota
+	retValHRESULT
+	retValRawError // raw call already returns a bare error (BOOL+SetLastError)
+	retValVoid
+)
+
+// retValElevationMode decides whether a flat function's [out,retval] params
+// can be elevated, based on the raw return shape. Only clean status returns
+// qualify — a raw (value, error) return would collide with elevated values.
+func retValElevationMode(function *win32meta.Function, returnResolved typemap.Resolved) int {
+	switch {
+	case isHRESULT(returnResolved):
+		return retValHRESULT
+	case function.SetLastError && isBOOL(returnResolved):
+		return retValRawError
+	case returnResolved.Kind == typemap.KindVoid:
+		return retValVoid
+	}
+	return retValNone
+}
+
+// retValElement reports whether a parameter is an elevatable [out,retval]
+// pointer and, if so, the Go element type behind the pointer. It excludes
+// void pointers (untyped) and non-pointer params.
+func retValElement(param *win32meta.Param, resolved typemap.Resolved) (string, bool) {
+	if !param.IsRetVal || param.IsIn {
+		return "", false
+	}
+	if resolved.Kind != typemap.KindPointer || !strings.HasPrefix(resolved.GoType, "*") {
+		return "", false
+	}
+	element := resolved.GoType[1:]
+	if element == "" || strings.Contains(element, "unsafe.") {
+		return "", false
+	}
+	return element, true
 }
 
 // isIntegerCount reports whether a resolved type is an integer usable as a

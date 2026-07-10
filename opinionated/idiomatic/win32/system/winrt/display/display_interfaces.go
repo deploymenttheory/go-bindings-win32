@@ -25,8 +25,10 @@ func WrapIDisplayDeviceInterop(raw *systemwinrtdisplay.IDisplayDeviceInterop) ID
 }
 
 // CreateSharedHandle wraps the raw CreateSharedHandle call.
-func (self IDisplayDeviceInterop) CreateSharedHandle(pObject *systemwinrt.IInspectable, pSecurityAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name systemwinrt.HSTRING, pHandle *foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSharedHandle(pObject, pSecurityAttributes, Access, Name, pHandle)))
+func (self IDisplayDeviceInterop) CreateSharedHandle(pObject *systemwinrt.IInspectable, pSecurityAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name systemwinrt.HSTRING) (foundation.HANDLE, error) {
+	var _pHandle foundation.HANDLE
+	_hr := self.Raw.CreateSharedHandle(pObject, pSecurityAttributes, Access, Name, &_pHandle)
+	return _pHandle, win32.HRESULTError(int32(_hr))
 }
 
 // IDisplayPathInterop is an idiomatic wrapper over the raw COM interface System.WinRT.Display.IDisplayPathInterop with error-returning methods.
@@ -41,11 +43,15 @@ func WrapIDisplayPathInterop(raw *systemwinrtdisplay.IDisplayPathInterop) IDispl
 }
 
 // CreateSourcePresentationHandle wraps the raw CreateSourcePresentationHandle call.
-func (self IDisplayPathInterop) CreateSourcePresentationHandle(pValue *foundation.HANDLE) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSourcePresentationHandle(pValue)))
+func (self IDisplayPathInterop) CreateSourcePresentationHandle() (foundation.HANDLE, error) {
+	var _pValue foundation.HANDLE
+	_hr := self.Raw.CreateSourcePresentationHandle(&_pValue)
+	return _pValue, win32.HRESULTError(int32(_hr))
 }
 
 // GetSourceId wraps the raw GetSourceId call.
-func (self IDisplayPathInterop) GetSourceId(pSourceId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetSourceId(pSourceId)))
+func (self IDisplayPathInterop) GetSourceId() (uint32, error) {
+	var _pSourceId uint32
+	_hr := self.Raw.GetSourceId(&_pSourceId)
+	return _pSourceId, win32.HRESULTError(int32(_hr))
 }

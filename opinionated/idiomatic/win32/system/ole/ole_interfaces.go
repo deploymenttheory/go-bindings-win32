@@ -636,8 +636,10 @@ func (self IEnterpriseDropTarget) SetDropSourceEnterpriseId(identity string) err
 }
 
 // IsEvaluatingEdpPolicy wraps the raw IsEvaluatingEdpPolicy call.
-func (self IEnterpriseDropTarget) IsEvaluatingEdpPolicy(value *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEvaluatingEdpPolicy(value)))
+func (self IEnterpriseDropTarget) IsEvaluatingEdpPolicy() (foundation.BOOL, error) {
+	var _value foundation.BOOL
+	_hr := self.Raw.IsEvaluatingEdpPolicy(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IEnumOLEVERB is an idiomatic wrapper over the raw COM interface System.Ole.IEnumOLEVERB with error-returning methods.

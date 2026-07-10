@@ -144,28 +144,38 @@ func WrapICOMAdminCatalog(raw *systemcomponentservices.ICOMAdminCatalog) ICOMAdm
 }
 
 // GetCollection wraps the raw GetCollection call.
-func (self ICOMAdminCatalog) GetCollection(bstrCollName foundation.BSTR, ppCatalogCollection **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetCollection(bstrCollName, ppCatalogCollection)))
+func (self ICOMAdminCatalog) GetCollection(bstrCollName foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _ppCatalogCollection *systemcom.IDispatch
+	_hr := self.Raw.GetCollection(bstrCollName, &_ppCatalogCollection)
+	return _ppCatalogCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Connect wraps the raw Connect call.
-func (self ICOMAdminCatalog) Connect(bstrCatalogServerName foundation.BSTR, ppCatalogCollection **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Connect(bstrCatalogServerName, ppCatalogCollection)))
+func (self ICOMAdminCatalog) Connect(bstrCatalogServerName foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _ppCatalogCollection *systemcom.IDispatch
+	_hr := self.Raw.Connect(bstrCatalogServerName, &_ppCatalogCollection)
+	return _ppCatalogCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MajorVersion wraps the raw Get_MajorVersion call.
-func (self ICOMAdminCatalog) Get_MajorVersion(plMajorVersion *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MajorVersion(plMajorVersion)))
+func (self ICOMAdminCatalog) Get_MajorVersion() (int32, error) {
+	var _plMajorVersion int32
+	_hr := self.Raw.Get_MajorVersion(&_plMajorVersion)
+	return _plMajorVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MinorVersion wraps the raw Get_MinorVersion call.
-func (self ICOMAdminCatalog) Get_MinorVersion(plMinorVersion *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinorVersion(plMinorVersion)))
+func (self ICOMAdminCatalog) Get_MinorVersion() (int32, error) {
+	var _plMinorVersion int32
+	_hr := self.Raw.Get_MinorVersion(&_plMinorVersion)
+	return _plMinorVersion, win32.HRESULTError(int32(_hr))
 }
 
 // GetCollectionByQuery wraps the raw GetCollectionByQuery call.
-func (self ICOMAdminCatalog) GetCollectionByQuery(bstrCollName foundation.BSTR, ppsaVarQuery **systemcom.SAFEARRAY, ppCatalogCollection **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetCollectionByQuery(bstrCollName, ppsaVarQuery, ppCatalogCollection)))
+func (self ICOMAdminCatalog) GetCollectionByQuery(bstrCollName foundation.BSTR, ppsaVarQuery **systemcom.SAFEARRAY) (*systemcom.IDispatch, error) {
+	var _ppCatalogCollection *systemcom.IDispatch
+	_hr := self.Raw.GetCollectionByQuery(bstrCollName, ppsaVarQuery, &_ppCatalogCollection)
+	return _ppCatalogCollection, win32.HRESULTError(int32(_hr))
 }
 
 // ImportComponent wraps the raw ImportComponent call.
@@ -254,8 +264,10 @@ func (self ICOMAdminCatalog) StartApplication(bstrApplIdOrName foundation.BSTR) 
 }
 
 // ServiceCheck wraps the raw ServiceCheck call.
-func (self ICOMAdminCatalog) ServiceCheck(lService int32, plStatus *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ServiceCheck(lService, plStatus)))
+func (self ICOMAdminCatalog) ServiceCheck(lService int32) (int32, error) {
+	var _plStatus int32
+	_hr := self.Raw.ServiceCheck(lService, &_plStatus)
+	return _plStatus, win32.HRESULTError(int32(_hr))
 }
 
 // InstallMultipleEventClasses wraps the raw InstallMultipleEventClasses call.
@@ -285,13 +297,17 @@ func WrapICOMAdminCatalog2(raw *systemcomponentservices.ICOMAdminCatalog2) ICOMA
 }
 
 // GetCollectionByQuery2 wraps the raw GetCollectionByQuery2 call.
-func (self ICOMAdminCatalog2) GetCollectionByQuery2(bstrCollectionName foundation.BSTR, pVarQueryStrings *systemvariant.VARIANT, ppCatalogCollection **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetCollectionByQuery2(bstrCollectionName, pVarQueryStrings, ppCatalogCollection)))
+func (self ICOMAdminCatalog2) GetCollectionByQuery2(bstrCollectionName foundation.BSTR, pVarQueryStrings *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	var _ppCatalogCollection *systemcom.IDispatch
+	_hr := self.Raw.GetCollectionByQuery2(bstrCollectionName, pVarQueryStrings, &_ppCatalogCollection)
+	return _ppCatalogCollection, win32.HRESULTError(int32(_hr))
 }
 
 // GetApplicationInstanceIDFromProcessID wraps the raw GetApplicationInstanceIDFromProcessID call.
-func (self ICOMAdminCatalog2) GetApplicationInstanceIDFromProcessID(lProcessID int32, pbstrApplicationInstanceID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetApplicationInstanceIDFromProcessID(lProcessID, pbstrApplicationInstanceID)))
+func (self ICOMAdminCatalog2) GetApplicationInstanceIDFromProcessID(lProcessID int32) (foundation.BSTR, error) {
+	var _pbstrApplicationInstanceID foundation.BSTR
+	_hr := self.Raw.GetApplicationInstanceIDFromProcessID(lProcessID, &_pbstrApplicationInstanceID)
+	return _pbstrApplicationInstanceID, win32.HRESULTError(int32(_hr))
 }
 
 // ShutdownApplicationInstances wraps the raw ShutdownApplicationInstances call.
@@ -315,18 +331,24 @@ func (self ICOMAdminCatalog2) RecycleApplicationInstances(pVarApplicationInstanc
 }
 
 // AreApplicationInstancesPaused wraps the raw AreApplicationInstancesPaused call.
-func (self ICOMAdminCatalog2) AreApplicationInstancesPaused(pVarApplicationInstanceID *systemvariant.VARIANT, pVarBoolPaused *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.AreApplicationInstancesPaused(pVarApplicationInstanceID, pVarBoolPaused)))
+func (self ICOMAdminCatalog2) AreApplicationInstancesPaused(pVarApplicationInstanceID *systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	var _pVarBoolPaused foundation.VARIANT_BOOL
+	_hr := self.Raw.AreApplicationInstancesPaused(pVarApplicationInstanceID, &_pVarBoolPaused)
+	return _pVarBoolPaused, win32.HRESULTError(int32(_hr))
 }
 
 // DumpApplicationInstance wraps the raw DumpApplicationInstance call.
-func (self ICOMAdminCatalog2) DumpApplicationInstance(bstrApplicationInstanceID foundation.BSTR, bstrDirectory foundation.BSTR, lMaxImages int32, pbstrDumpFile *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.DumpApplicationInstance(bstrApplicationInstanceID, bstrDirectory, lMaxImages, pbstrDumpFile)))
+func (self ICOMAdminCatalog2) DumpApplicationInstance(bstrApplicationInstanceID foundation.BSTR, bstrDirectory foundation.BSTR, lMaxImages int32) (foundation.BSTR, error) {
+	var _pbstrDumpFile foundation.BSTR
+	_hr := self.Raw.DumpApplicationInstance(bstrApplicationInstanceID, bstrDirectory, lMaxImages, &_pbstrDumpFile)
+	return _pbstrDumpFile, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsApplicationInstanceDumpSupported wraps the raw Get_IsApplicationInstanceDumpSupported call.
-func (self ICOMAdminCatalog2) Get_IsApplicationInstanceDumpSupported(pVarBoolDumpSupported *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsApplicationInstanceDumpSupported(pVarBoolDumpSupported)))
+func (self ICOMAdminCatalog2) Get_IsApplicationInstanceDumpSupported() (foundation.VARIANT_BOOL, error) {
+	var _pVarBoolDumpSupported foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsApplicationInstanceDumpSupported(&_pVarBoolDumpSupported)
+	return _pVarBoolDumpSupported, win32.HRESULTError(int32(_hr))
 }
 
 // CreateServiceForApplication wraps the raw CreateServiceForApplication call.
@@ -340,13 +362,17 @@ func (self ICOMAdminCatalog2) DeleteServiceForApplication(bstrApplicationIDOrNam
 }
 
 // GetPartitionID wraps the raw GetPartitionID call.
-func (self ICOMAdminCatalog2) GetPartitionID(bstrApplicationIDOrName foundation.BSTR, pbstrPartitionID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPartitionID(bstrApplicationIDOrName, pbstrPartitionID)))
+func (self ICOMAdminCatalog2) GetPartitionID(bstrApplicationIDOrName foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrPartitionID foundation.BSTR
+	_hr := self.Raw.GetPartitionID(bstrApplicationIDOrName, &_pbstrPartitionID)
+	return _pbstrPartitionID, win32.HRESULTError(int32(_hr))
 }
 
 // GetPartitionName wraps the raw GetPartitionName call.
-func (self ICOMAdminCatalog2) GetPartitionName(bstrApplicationIDOrName foundation.BSTR, pbstrPartitionName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPartitionName(bstrApplicationIDOrName, pbstrPartitionName)))
+func (self ICOMAdminCatalog2) GetPartitionName(bstrApplicationIDOrName foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrPartitionName foundation.BSTR
+	_hr := self.Raw.GetPartitionName(bstrApplicationIDOrName, &_pbstrPartitionName)
+	return _pbstrPartitionName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CurrentPartition wraps the raw Put_CurrentPartition call.
@@ -355,18 +381,24 @@ func (self ICOMAdminCatalog2) Put_CurrentPartition(bstrPartitionIDOrName foundat
 }
 
 // Get_CurrentPartitionID wraps the raw Get_CurrentPartitionID call.
-func (self ICOMAdminCatalog2) Get_CurrentPartitionID(pbstrPartitionID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentPartitionID(pbstrPartitionID)))
+func (self ICOMAdminCatalog2) Get_CurrentPartitionID() (foundation.BSTR, error) {
+	var _pbstrPartitionID foundation.BSTR
+	_hr := self.Raw.Get_CurrentPartitionID(&_pbstrPartitionID)
+	return _pbstrPartitionID, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentPartitionName wraps the raw Get_CurrentPartitionName call.
-func (self ICOMAdminCatalog2) Get_CurrentPartitionName(pbstrPartitionName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentPartitionName(pbstrPartitionName)))
+func (self ICOMAdminCatalog2) Get_CurrentPartitionName() (foundation.BSTR, error) {
+	var _pbstrPartitionName foundation.BSTR
+	_hr := self.Raw.Get_CurrentPartitionName(&_pbstrPartitionName)
+	return _pbstrPartitionName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_GlobalPartitionID wraps the raw Get_GlobalPartitionID call.
-func (self ICOMAdminCatalog2) Get_GlobalPartitionID(pbstrGlobalPartitionID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GlobalPartitionID(pbstrGlobalPartitionID)))
+func (self ICOMAdminCatalog2) Get_GlobalPartitionID() (foundation.BSTR, error) {
+	var _pbstrGlobalPartitionID foundation.BSTR
+	_hr := self.Raw.Get_GlobalPartitionID(&_pbstrGlobalPartitionID)
+	return _pbstrGlobalPartitionID, win32.HRESULTError(int32(_hr))
 }
 
 // FlushPartitionCache wraps the raw FlushPartitionCache call.
@@ -395,8 +427,10 @@ func (self ICOMAdminCatalog2) AliasComponent(bstrSrcApplicationIDOrName foundati
 }
 
 // IsSafeToDelete wraps the raw IsSafeToDelete call.
-func (self ICOMAdminCatalog2) IsSafeToDelete(bstrDllName foundation.BSTR, pCOMAdminInUse *systemcomponentservices.COMAdminInUse) error {
-	return win32.HRESULTError(int32(self.Raw.IsSafeToDelete(bstrDllName, pCOMAdminInUse)))
+func (self ICOMAdminCatalog2) IsSafeToDelete(bstrDllName foundation.BSTR) (systemcomponentservices.COMAdminInUse, error) {
+	var _pCOMAdminInUse systemcomponentservices.COMAdminInUse
+	_hr := self.Raw.IsSafeToDelete(bstrDllName, &_pCOMAdminInUse)
+	return _pCOMAdminInUse, win32.HRESULTError(int32(_hr))
 }
 
 // ImportUnconfiguredComponents wraps the raw ImportUnconfiguredComponents call.
@@ -415,8 +449,10 @@ func (self ICOMAdminCatalog2) ImportComponents(bstrApplicationIDOrName foundatio
 }
 
 // Get_Is64BitCatalogServer wraps the raw Get_Is64BitCatalogServer call.
-func (self ICOMAdminCatalog2) Get_Is64BitCatalogServer(pbIs64Bit *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Is64BitCatalogServer(pbIs64Bit)))
+func (self ICOMAdminCatalog2) Get_Is64BitCatalogServer() (foundation.VARIANT_BOOL, error) {
+	var _pbIs64Bit foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Is64BitCatalogServer(&_pbIs64Bit)
+	return _pbIs64Bit, win32.HRESULTError(int32(_hr))
 }
 
 // ExportPartition wraps the raw ExportPartition call.
@@ -430,13 +466,17 @@ func (self ICOMAdminCatalog2) InstallPartition(bstrFileName foundation.BSTR, bst
 }
 
 // QueryApplicationFile2 wraps the raw QueryApplicationFile2 call.
-func (self ICOMAdminCatalog2) QueryApplicationFile2(bstrApplicationFile foundation.BSTR, ppFilesForImport **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.QueryApplicationFile2(bstrApplicationFile, ppFilesForImport)))
+func (self ICOMAdminCatalog2) QueryApplicationFile2(bstrApplicationFile foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _ppFilesForImport *systemcom.IDispatch
+	_hr := self.Raw.QueryApplicationFile2(bstrApplicationFile, &_ppFilesForImport)
+	return _ppFilesForImport, win32.HRESULTError(int32(_hr))
 }
 
 // GetComponentVersionCount wraps the raw GetComponentVersionCount call.
-func (self ICOMAdminCatalog2) GetComponentVersionCount(bstrCLSIDOrProgID foundation.BSTR, plVersionCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetComponentVersionCount(bstrCLSIDOrProgID, plVersionCount)))
+func (self ICOMAdminCatalog2) GetComponentVersionCount(bstrCLSIDOrProgID foundation.BSTR) (int32, error) {
+	var _plVersionCount int32
+	_hr := self.Raw.GetComponentVersionCount(bstrCLSIDOrProgID, &_plVersionCount)
+	return _plVersionCount, win32.HRESULTError(int32(_hr))
 }
 
 // ICOMLBArguments is an idiomatic wrapper over the raw COM interface System.ComponentServices.ICOMLBArguments with error-returning methods.
@@ -483,18 +523,24 @@ func WrapICatalogCollection(raw *systemcomponentservices.ICatalogCollection) ICa
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ICatalogCollection) Get__NewEnum(ppEnumVariant **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppEnumVariant)))
+func (self ICatalogCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppEnumVariant *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppEnumVariant)
+	return _ppEnumVariant, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self ICatalogCollection) Get_Item(lIndex int32, ppCatalogObject **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(lIndex, ppCatalogObject)))
+func (self ICatalogCollection) Get_Item(lIndex int32) (*systemcom.IDispatch, error) {
+	var _ppCatalogObject *systemcom.IDispatch
+	_hr := self.Raw.Get_Item(lIndex, &_ppCatalogObject)
+	return _ppCatalogObject, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ICatalogCollection) Get_Count(plObjectCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(plObjectCount)))
+func (self ICatalogCollection) Get_Count() (int32, error) {
+	var _plObjectCount int32
+	_hr := self.Raw.Get_Count(&_plObjectCount)
+	return _plObjectCount, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -503,8 +549,10 @@ func (self ICatalogCollection) Remove(lIndex int32) error {
 }
 
 // Add wraps the raw Add call.
-func (self ICatalogCollection) Add(ppCatalogObject **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Add(ppCatalogObject)))
+func (self ICatalogCollection) Add() (*systemcom.IDispatch, error) {
+	var _ppCatalogObject *systemcom.IDispatch
+	_hr := self.Raw.Add(&_ppCatalogObject)
+	return _ppCatalogObject, win32.HRESULTError(int32(_hr))
 }
 
 // Populate wraps the raw Populate call.
@@ -513,38 +561,52 @@ func (self ICatalogCollection) Populate() error {
 }
 
 // SaveChanges wraps the raw SaveChanges call.
-func (self ICatalogCollection) SaveChanges(pcChanges *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SaveChanges(pcChanges)))
+func (self ICatalogCollection) SaveChanges() (int32, error) {
+	var _pcChanges int32
+	_hr := self.Raw.SaveChanges(&_pcChanges)
+	return _pcChanges, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ICatalogCollection) Get_Name(pVarNamel *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pVarNamel)))
+func (self ICatalogCollection) Get_Name() (systemvariant.VARIANT, error) {
+	var _pVarNamel systemvariant.VARIANT
+	_hr := self.Raw.Get_Name(&_pVarNamel)
+	return _pVarNamel, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AddEnabled wraps the raw Get_AddEnabled call.
-func (self ICatalogCollection) Get_AddEnabled(pVarBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AddEnabled(pVarBool)))
+func (self ICatalogCollection) Get_AddEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pVarBool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AddEnabled(&_pVarBool)
+	return _pVarBool, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RemoveEnabled wraps the raw Get_RemoveEnabled call.
-func (self ICatalogCollection) Get_RemoveEnabled(pVarBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoveEnabled(pVarBool)))
+func (self ICatalogCollection) Get_RemoveEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pVarBool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RemoveEnabled(&_pVarBool)
+	return _pVarBool, win32.HRESULTError(int32(_hr))
 }
 
 // GetUtilInterface wraps the raw GetUtilInterface call.
-func (self ICatalogCollection) GetUtilInterface(ppIDispatch **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetUtilInterface(ppIDispatch)))
+func (self ICatalogCollection) GetUtilInterface() (*systemcom.IDispatch, error) {
+	var _ppIDispatch *systemcom.IDispatch
+	_hr := self.Raw.GetUtilInterface(&_ppIDispatch)
+	return _ppIDispatch, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DataStoreMajorVersion wraps the raw Get_DataStoreMajorVersion call.
-func (self ICatalogCollection) Get_DataStoreMajorVersion(plMajorVersion *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DataStoreMajorVersion(plMajorVersion)))
+func (self ICatalogCollection) Get_DataStoreMajorVersion() (int32, error) {
+	var _plMajorVersion int32
+	_hr := self.Raw.Get_DataStoreMajorVersion(&_plMajorVersion)
+	return _plMajorVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DataStoreMinorVersion wraps the raw Get_DataStoreMinorVersion call.
-func (self ICatalogCollection) Get_DataStoreMinorVersion(plMinorVersionl *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DataStoreMinorVersion(plMinorVersionl)))
+func (self ICatalogCollection) Get_DataStoreMinorVersion() (int32, error) {
+	var _plMinorVersionl int32
+	_hr := self.Raw.Get_DataStoreMinorVersion(&_plMinorVersionl)
+	return _plMinorVersionl, win32.HRESULTError(int32(_hr))
 }
 
 // PopulateByKey wraps the raw PopulateByKey call.
@@ -569,33 +631,45 @@ func WrapICatalogObject(raw *systemcomponentservices.ICatalogObject) ICatalogObj
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self ICatalogObject) Get_Value(bstrPropName foundation.BSTR, pvarRetVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(bstrPropName, pvarRetVal)))
+func (self ICatalogObject) Get_Value(bstrPropName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pvarRetVal systemvariant.VARIANT
+	_hr := self.Raw.Get_Value(bstrPropName, &_pvarRetVal)
+	return _pvarRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Key wraps the raw Get_Key call.
-func (self ICatalogObject) Get_Key(pvarRetVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Key(pvarRetVal)))
+func (self ICatalogObject) Get_Key() (systemvariant.VARIANT, error) {
+	var _pvarRetVal systemvariant.VARIANT
+	_hr := self.Raw.Get_Key(&_pvarRetVal)
+	return _pvarRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ICatalogObject) Get_Name(pvarRetVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pvarRetVal)))
+func (self ICatalogObject) Get_Name() (systemvariant.VARIANT, error) {
+	var _pvarRetVal systemvariant.VARIANT
+	_hr := self.Raw.Get_Name(&_pvarRetVal)
+	return _pvarRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IsPropertyReadOnly wraps the raw IsPropertyReadOnly call.
-func (self ICatalogObject) IsPropertyReadOnly(bstrPropName foundation.BSTR, pbRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsPropertyReadOnly(bstrPropName, pbRetVal)))
+func (self ICatalogObject) IsPropertyReadOnly(bstrPropName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _pbRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.IsPropertyReadOnly(bstrPropName, &_pbRetVal)
+	return _pbRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Valid wraps the raw Get_Valid call.
-func (self ICatalogObject) Get_Valid(pbRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Valid(pbRetVal)))
+func (self ICatalogObject) Get_Valid() (foundation.VARIANT_BOOL, error) {
+	var _pbRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Valid(&_pbRetVal)
+	return _pbRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IsPropertyWriteOnly wraps the raw IsPropertyWriteOnly call.
-func (self ICatalogObject) IsPropertyWriteOnly(bstrPropName foundation.BSTR, pbRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsPropertyWriteOnly(bstrPropName, pbRetVal)))
+func (self ICatalogObject) IsPropertyWriteOnly(bstrPropName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _pbRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.IsPropertyWriteOnly(bstrPropName, &_pbRetVal)
+	return _pbRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // ICheckSxsConfig is an idiomatic wrapper over the raw COM interface System.ComponentServices.ICheckSxsConfig with error-returning methods.

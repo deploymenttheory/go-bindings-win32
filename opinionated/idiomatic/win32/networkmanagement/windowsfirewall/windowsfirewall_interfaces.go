@@ -25,53 +25,73 @@ func WrapIDynamicPortMapping(raw *networkmanagementwindowsfirewall.IDynamicPortM
 }
 
 // Get_ExternalIPAddress wraps the raw Get_ExternalIPAddress call.
-func (self IDynamicPortMapping) Get_ExternalIPAddress(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExternalIPAddress(pVal)))
+func (self IDynamicPortMapping) Get_ExternalIPAddress() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_ExternalIPAddress(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RemoteHost wraps the raw Get_RemoteHost call.
-func (self IDynamicPortMapping) Get_RemoteHost(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteHost(pVal)))
+func (self IDynamicPortMapping) Get_RemoteHost() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_RemoteHost(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ExternalPort wraps the raw Get_ExternalPort call.
-func (self IDynamicPortMapping) Get_ExternalPort(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExternalPort(pVal)))
+func (self IDynamicPortMapping) Get_ExternalPort() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_ExternalPort(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Protocol wraps the raw Get_Protocol call.
-func (self IDynamicPortMapping) Get_Protocol(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Protocol(pVal)))
+func (self IDynamicPortMapping) Get_Protocol() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_Protocol(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InternalPort wraps the raw Get_InternalPort call.
-func (self IDynamicPortMapping) Get_InternalPort(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InternalPort(pVal)))
+func (self IDynamicPortMapping) Get_InternalPort() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_InternalPort(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InternalClient wraps the raw Get_InternalClient call.
-func (self IDynamicPortMapping) Get_InternalClient(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InternalClient(pVal)))
+func (self IDynamicPortMapping) Get_InternalClient() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_InternalClient(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self IDynamicPortMapping) Get_Enabled(pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(pVal)))
+func (self IDynamicPortMapping) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IDynamicPortMapping) Get_Description(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pVal)))
+func (self IDynamicPortMapping) Get_Description() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LeaseDuration wraps the raw Get_LeaseDuration call.
-func (self IDynamicPortMapping) Get_LeaseDuration(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LeaseDuration(pVal)))
+func (self IDynamicPortMapping) Get_LeaseDuration() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_LeaseDuration(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // RenewLease wraps the raw RenewLease call.
-func (self IDynamicPortMapping) RenewLease(lLeaseDurationDesired int32, pLeaseDurationReturned *int32) error {
-	return win32.HRESULTError(int32(self.Raw.RenewLease(lLeaseDurationDesired, pLeaseDurationReturned)))
+func (self IDynamicPortMapping) RenewLease(lLeaseDurationDesired int32) (int32, error) {
+	var _pLeaseDurationReturned int32
+	_hr := self.Raw.RenewLease(lLeaseDurationDesired, &_pLeaseDurationReturned)
+	return _pLeaseDurationReturned, win32.HRESULTError(int32(_hr))
 }
 
 // EditInternalClient wraps the raw EditInternalClient call.
@@ -106,18 +126,24 @@ func WrapIDynamicPortMappingCollection(raw *networkmanagementwindowsfirewall.IDy
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IDynamicPortMappingCollection) Get__NewEnum(pVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pVal)))
+func (self IDynamicPortMappingCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IDynamicPortMappingCollection) Get_Item(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR, ppDPM **networkmanagementwindowsfirewall.IDynamicPortMapping) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(bstrRemoteHost, lExternalPort, bstrProtocol, ppDPM)))
+func (self IDynamicPortMappingCollection) Get_Item(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR) (*networkmanagementwindowsfirewall.IDynamicPortMapping, error) {
+	var _ppDPM *networkmanagementwindowsfirewall.IDynamicPortMapping
+	_hr := self.Raw.Get_Item(bstrRemoteHost, lExternalPort, bstrProtocol, &_ppDPM)
+	return _ppDPM, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IDynamicPortMappingCollection) Get_Count(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pVal)))
+func (self IDynamicPortMappingCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Count(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -126,8 +152,10 @@ func (self IDynamicPortMappingCollection) Remove(bstrRemoteHost foundation.BSTR,
 }
 
 // Add wraps the raw Add call.
-func (self IDynamicPortMappingCollection) Add(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR, lInternalPort int32, bstrInternalClient foundation.BSTR, bEnabled foundation.VARIANT_BOOL, bstrDescription foundation.BSTR, lLeaseDuration int32, ppDPM **networkmanagementwindowsfirewall.IDynamicPortMapping) error {
-	return win32.HRESULTError(int32(self.Raw.Add(bstrRemoteHost, lExternalPort, bstrProtocol, lInternalPort, bstrInternalClient, bEnabled, bstrDescription, lLeaseDuration, ppDPM)))
+func (self IDynamicPortMappingCollection) Add(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR, lInternalPort int32, bstrInternalClient foundation.BSTR, bEnabled foundation.VARIANT_BOOL, bstrDescription foundation.BSTR, lLeaseDuration int32) (*networkmanagementwindowsfirewall.IDynamicPortMapping, error) {
+	var _ppDPM *networkmanagementwindowsfirewall.IDynamicPortMapping
+	_hr := self.Raw.Add(bstrRemoteHost, lExternalPort, bstrProtocol, lInternalPort, bstrInternalClient, bEnabled, bstrDescription, lLeaseDuration, &_ppDPM)
+	return _ppDPM, win32.HRESULTError(int32(_hr))
 }
 
 // IEnumNetConnection is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.IEnumNetConnection with error-returning methods.
@@ -440,33 +468,45 @@ func WrapINetConnectionProps(raw *networkmanagementwindowsfirewall.INetConnectio
 }
 
 // Get_Guid wraps the raw Get_Guid call.
-func (self INetConnectionProps) Get_Guid(pbstrGuid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Guid(pbstrGuid)))
+func (self INetConnectionProps) Get_Guid() (foundation.BSTR, error) {
+	var _pbstrGuid foundation.BSTR
+	_hr := self.Raw.Get_Guid(&_pbstrGuid)
+	return _pbstrGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self INetConnectionProps) Get_Name(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbstrName)))
+func (self INetConnectionProps) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DeviceName wraps the raw Get_DeviceName call.
-func (self INetConnectionProps) Get_DeviceName(pbstrDeviceName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DeviceName(pbstrDeviceName)))
+func (self INetConnectionProps) Get_DeviceName() (foundation.BSTR, error) {
+	var _pbstrDeviceName foundation.BSTR
+	_hr := self.Raw.Get_DeviceName(&_pbstrDeviceName)
+	return _pbstrDeviceName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Status wraps the raw Get_Status call.
-func (self INetConnectionProps) Get_Status(pStatus *networkmanagementwindowsfirewall.NETCON_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Status(pStatus)))
+func (self INetConnectionProps) Get_Status() (networkmanagementwindowsfirewall.NETCON_STATUS, error) {
+	var _pStatus networkmanagementwindowsfirewall.NETCON_STATUS
+	_hr := self.Raw.Get_Status(&_pStatus)
+	return _pStatus, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MediaType wraps the raw Get_MediaType call.
-func (self INetConnectionProps) Get_MediaType(pMediaType *networkmanagementwindowsfirewall.NETCON_MEDIATYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MediaType(pMediaType)))
+func (self INetConnectionProps) Get_MediaType() (networkmanagementwindowsfirewall.NETCON_MEDIATYPE, error) {
+	var _pMediaType networkmanagementwindowsfirewall.NETCON_MEDIATYPE
+	_hr := self.Raw.Get_MediaType(&_pMediaType)
+	return _pMediaType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Characteristics wraps the raw Get_Characteristics call.
-func (self INetConnectionProps) Get_Characteristics(pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Characteristics(pdwFlags)))
+func (self INetConnectionProps) Get_Characteristics() (uint32, error) {
+	var _pdwFlags uint32
+	_hr := self.Raw.Get_Characteristics(&_pdwFlags)
+	return _pdwFlags, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwAuthorizedApplication is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwAuthorizedApplication with error-returning methods.
@@ -481,8 +521,10 @@ func WrapINetFwAuthorizedApplication(raw *networkmanagementwindowsfirewall.INetF
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self INetFwAuthorizedApplication) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self INetFwAuthorizedApplication) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -491,8 +533,10 @@ func (self INetFwAuthorizedApplication) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_ProcessImageFileName wraps the raw Get_ProcessImageFileName call.
-func (self INetFwAuthorizedApplication) Get_ProcessImageFileName(imageFileName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProcessImageFileName(imageFileName)))
+func (self INetFwAuthorizedApplication) Get_ProcessImageFileName() (foundation.BSTR, error) {
+	var _imageFileName foundation.BSTR
+	_hr := self.Raw.Get_ProcessImageFileName(&_imageFileName)
+	return _imageFileName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ProcessImageFileName wraps the raw Put_ProcessImageFileName call.
@@ -501,8 +545,10 @@ func (self INetFwAuthorizedApplication) Put_ProcessImageFileName(imageFileName f
 }
 
 // Get_IpVersion wraps the raw Get_IpVersion call.
-func (self INetFwAuthorizedApplication) Get_IpVersion(ipVersion *networkmanagementwindowsfirewall.NET_FW_IP_VERSION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IpVersion(ipVersion)))
+func (self INetFwAuthorizedApplication) Get_IpVersion() (networkmanagementwindowsfirewall.NET_FW_IP_VERSION, error) {
+	var _ipVersion networkmanagementwindowsfirewall.NET_FW_IP_VERSION
+	_hr := self.Raw.Get_IpVersion(&_ipVersion)
+	return _ipVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IpVersion wraps the raw Put_IpVersion call.
@@ -511,8 +557,10 @@ func (self INetFwAuthorizedApplication) Put_IpVersion(ipVersion networkmanagemen
 }
 
 // Get_Scope wraps the raw Get_Scope call.
-func (self INetFwAuthorizedApplication) Get_Scope(scope *networkmanagementwindowsfirewall.NET_FW_SCOPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Scope(scope)))
+func (self INetFwAuthorizedApplication) Get_Scope() (networkmanagementwindowsfirewall.NET_FW_SCOPE, error) {
+	var _scope networkmanagementwindowsfirewall.NET_FW_SCOPE
+	_hr := self.Raw.Get_Scope(&_scope)
+	return _scope, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Scope wraps the raw Put_Scope call.
@@ -521,8 +569,10 @@ func (self INetFwAuthorizedApplication) Put_Scope(scope networkmanagementwindows
 }
 
 // Get_RemoteAddresses wraps the raw Get_RemoteAddresses call.
-func (self INetFwAuthorizedApplication) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteAddresses(remoteAddrs)))
+func (self INetFwAuthorizedApplication) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	_hr := self.Raw.Get_RemoteAddresses(&_remoteAddrs)
+	return _remoteAddrs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteAddresses wraps the raw Put_RemoteAddresses call.
@@ -531,8 +581,10 @@ func (self INetFwAuthorizedApplication) Put_RemoteAddresses(remoteAddrs foundati
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self INetFwAuthorizedApplication) Get_Enabled(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(enabled)))
+func (self INetFwAuthorizedApplication) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -552,8 +604,10 @@ func WrapINetFwAuthorizedApplications(raw *networkmanagementwindowsfirewall.INet
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetFwAuthorizedApplications) Get_Count(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(count)))
+func (self INetFwAuthorizedApplications) Get_Count() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_Count(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -567,13 +621,17 @@ func (self INetFwAuthorizedApplications) Remove(imageFileName foundation.BSTR) e
 }
 
 // Item wraps the raw Item call.
-func (self INetFwAuthorizedApplications) Item(imageFileName foundation.BSTR, app **networkmanagementwindowsfirewall.INetFwAuthorizedApplication) error {
-	return win32.HRESULTError(int32(self.Raw.Item(imageFileName, app)))
+func (self INetFwAuthorizedApplications) Item(imageFileName foundation.BSTR) (*networkmanagementwindowsfirewall.INetFwAuthorizedApplication, error) {
+	var _app *networkmanagementwindowsfirewall.INetFwAuthorizedApplication
+	_hr := self.Raw.Item(imageFileName, &_app)
+	return _app, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetFwAuthorizedApplications) Get__NewEnum(newEnum **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(newEnum)))
+func (self INetFwAuthorizedApplications) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_newEnum)
+	return _newEnum, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwIcmpSettings is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwIcmpSettings with error-returning methods.
@@ -588,8 +646,10 @@ func WrapINetFwIcmpSettings(raw *networkmanagementwindowsfirewall.INetFwIcmpSett
 }
 
 // Get_AllowOutboundDestinationUnreachable wraps the raw Get_AllowOutboundDestinationUnreachable call.
-func (self INetFwIcmpSettings) Get_AllowOutboundDestinationUnreachable(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowOutboundDestinationUnreachable(allow)))
+func (self INetFwIcmpSettings) Get_AllowOutboundDestinationUnreachable() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowOutboundDestinationUnreachable(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowOutboundDestinationUnreachable wraps the raw Put_AllowOutboundDestinationUnreachable call.
@@ -598,8 +658,10 @@ func (self INetFwIcmpSettings) Put_AllowOutboundDestinationUnreachable(allow fou
 }
 
 // Get_AllowRedirect wraps the raw Get_AllowRedirect call.
-func (self INetFwIcmpSettings) Get_AllowRedirect(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowRedirect(allow)))
+func (self INetFwIcmpSettings) Get_AllowRedirect() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowRedirect(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowRedirect wraps the raw Put_AllowRedirect call.
@@ -608,8 +670,10 @@ func (self INetFwIcmpSettings) Put_AllowRedirect(allow foundation.VARIANT_BOOL) 
 }
 
 // Get_AllowInboundEchoRequest wraps the raw Get_AllowInboundEchoRequest call.
-func (self INetFwIcmpSettings) Get_AllowInboundEchoRequest(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowInboundEchoRequest(allow)))
+func (self INetFwIcmpSettings) Get_AllowInboundEchoRequest() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowInboundEchoRequest(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowInboundEchoRequest wraps the raw Put_AllowInboundEchoRequest call.
@@ -618,8 +682,10 @@ func (self INetFwIcmpSettings) Put_AllowInboundEchoRequest(allow foundation.VARI
 }
 
 // Get_AllowOutboundTimeExceeded wraps the raw Get_AllowOutboundTimeExceeded call.
-func (self INetFwIcmpSettings) Get_AllowOutboundTimeExceeded(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowOutboundTimeExceeded(allow)))
+func (self INetFwIcmpSettings) Get_AllowOutboundTimeExceeded() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowOutboundTimeExceeded(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowOutboundTimeExceeded wraps the raw Put_AllowOutboundTimeExceeded call.
@@ -628,8 +694,10 @@ func (self INetFwIcmpSettings) Put_AllowOutboundTimeExceeded(allow foundation.VA
 }
 
 // Get_AllowOutboundParameterProblem wraps the raw Get_AllowOutboundParameterProblem call.
-func (self INetFwIcmpSettings) Get_AllowOutboundParameterProblem(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowOutboundParameterProblem(allow)))
+func (self INetFwIcmpSettings) Get_AllowOutboundParameterProblem() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowOutboundParameterProblem(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowOutboundParameterProblem wraps the raw Put_AllowOutboundParameterProblem call.
@@ -638,8 +706,10 @@ func (self INetFwIcmpSettings) Put_AllowOutboundParameterProblem(allow foundatio
 }
 
 // Get_AllowOutboundSourceQuench wraps the raw Get_AllowOutboundSourceQuench call.
-func (self INetFwIcmpSettings) Get_AllowOutboundSourceQuench(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowOutboundSourceQuench(allow)))
+func (self INetFwIcmpSettings) Get_AllowOutboundSourceQuench() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowOutboundSourceQuench(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowOutboundSourceQuench wraps the raw Put_AllowOutboundSourceQuench call.
@@ -648,8 +718,10 @@ func (self INetFwIcmpSettings) Put_AllowOutboundSourceQuench(allow foundation.VA
 }
 
 // Get_AllowInboundRouterRequest wraps the raw Get_AllowInboundRouterRequest call.
-func (self INetFwIcmpSettings) Get_AllowInboundRouterRequest(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowInboundRouterRequest(allow)))
+func (self INetFwIcmpSettings) Get_AllowInboundRouterRequest() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowInboundRouterRequest(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowInboundRouterRequest wraps the raw Put_AllowInboundRouterRequest call.
@@ -658,8 +730,10 @@ func (self INetFwIcmpSettings) Put_AllowInboundRouterRequest(allow foundation.VA
 }
 
 // Get_AllowInboundTimestampRequest wraps the raw Get_AllowInboundTimestampRequest call.
-func (self INetFwIcmpSettings) Get_AllowInboundTimestampRequest(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowInboundTimestampRequest(allow)))
+func (self INetFwIcmpSettings) Get_AllowInboundTimestampRequest() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowInboundTimestampRequest(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowInboundTimestampRequest wraps the raw Put_AllowInboundTimestampRequest call.
@@ -668,8 +742,10 @@ func (self INetFwIcmpSettings) Put_AllowInboundTimestampRequest(allow foundation
 }
 
 // Get_AllowInboundMaskRequest wraps the raw Get_AllowInboundMaskRequest call.
-func (self INetFwIcmpSettings) Get_AllowInboundMaskRequest(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowInboundMaskRequest(allow)))
+func (self INetFwIcmpSettings) Get_AllowInboundMaskRequest() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowInboundMaskRequest(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowInboundMaskRequest wraps the raw Put_AllowInboundMaskRequest call.
@@ -678,8 +754,10 @@ func (self INetFwIcmpSettings) Put_AllowInboundMaskRequest(allow foundation.VARI
 }
 
 // Get_AllowOutboundPacketTooBig wraps the raw Get_AllowOutboundPacketTooBig call.
-func (self INetFwIcmpSettings) Get_AllowOutboundPacketTooBig(allow *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowOutboundPacketTooBig(allow)))
+func (self INetFwIcmpSettings) Get_AllowOutboundPacketTooBig() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AllowOutboundPacketTooBig(&_allow)
+	return _allow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowOutboundPacketTooBig wraps the raw Put_AllowOutboundPacketTooBig call.
@@ -699,13 +777,17 @@ func WrapINetFwMgr(raw *networkmanagementwindowsfirewall.INetFwMgr) INetFwMgr {
 }
 
 // Get_LocalPolicy wraps the raw Get_LocalPolicy call.
-func (self INetFwMgr) Get_LocalPolicy(localPolicy **networkmanagementwindowsfirewall.INetFwPolicy) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalPolicy(localPolicy)))
+func (self INetFwMgr) Get_LocalPolicy() (*networkmanagementwindowsfirewall.INetFwPolicy, error) {
+	var _localPolicy *networkmanagementwindowsfirewall.INetFwPolicy
+	_hr := self.Raw.Get_LocalPolicy(&_localPolicy)
+	return _localPolicy, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentProfileType wraps the raw Get_CurrentProfileType call.
-func (self INetFwMgr) Get_CurrentProfileType(profileType *networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentProfileType(profileType)))
+func (self INetFwMgr) Get_CurrentProfileType() (networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE, error) {
+	var _profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE
+	_hr := self.Raw.Get_CurrentProfileType(&_profileType)
+	return _profileType, win32.HRESULTError(int32(_hr))
 }
 
 // RestoreDefaults wraps the raw RestoreDefaults call.
@@ -735,8 +817,10 @@ func WrapINetFwOpenPort(raw *networkmanagementwindowsfirewall.INetFwOpenPort) IN
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self INetFwOpenPort) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self INetFwOpenPort) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -745,8 +829,10 @@ func (self INetFwOpenPort) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_IpVersion wraps the raw Get_IpVersion call.
-func (self INetFwOpenPort) Get_IpVersion(ipVersion *networkmanagementwindowsfirewall.NET_FW_IP_VERSION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IpVersion(ipVersion)))
+func (self INetFwOpenPort) Get_IpVersion() (networkmanagementwindowsfirewall.NET_FW_IP_VERSION, error) {
+	var _ipVersion networkmanagementwindowsfirewall.NET_FW_IP_VERSION
+	_hr := self.Raw.Get_IpVersion(&_ipVersion)
+	return _ipVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IpVersion wraps the raw Put_IpVersion call.
@@ -755,8 +841,10 @@ func (self INetFwOpenPort) Put_IpVersion(ipVersion networkmanagementwindowsfirew
 }
 
 // Get_Protocol wraps the raw Get_Protocol call.
-func (self INetFwOpenPort) Get_Protocol(ipProtocol *networkmanagementwindowsfirewall.NET_FW_IP_PROTOCOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Protocol(ipProtocol)))
+func (self INetFwOpenPort) Get_Protocol() (networkmanagementwindowsfirewall.NET_FW_IP_PROTOCOL, error) {
+	var _ipProtocol networkmanagementwindowsfirewall.NET_FW_IP_PROTOCOL
+	_hr := self.Raw.Get_Protocol(&_ipProtocol)
+	return _ipProtocol, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Protocol wraps the raw Put_Protocol call.
@@ -765,8 +853,10 @@ func (self INetFwOpenPort) Put_Protocol(ipProtocol networkmanagementwindowsfirew
 }
 
 // Get_Port wraps the raw Get_Port call.
-func (self INetFwOpenPort) Get_Port(portNumber *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Port(portNumber)))
+func (self INetFwOpenPort) Get_Port() (int32, error) {
+	var _portNumber int32
+	_hr := self.Raw.Get_Port(&_portNumber)
+	return _portNumber, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Port wraps the raw Put_Port call.
@@ -775,8 +865,10 @@ func (self INetFwOpenPort) Put_Port(portNumber int32) error {
 }
 
 // Get_Scope wraps the raw Get_Scope call.
-func (self INetFwOpenPort) Get_Scope(scope *networkmanagementwindowsfirewall.NET_FW_SCOPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Scope(scope)))
+func (self INetFwOpenPort) Get_Scope() (networkmanagementwindowsfirewall.NET_FW_SCOPE, error) {
+	var _scope networkmanagementwindowsfirewall.NET_FW_SCOPE
+	_hr := self.Raw.Get_Scope(&_scope)
+	return _scope, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Scope wraps the raw Put_Scope call.
@@ -785,8 +877,10 @@ func (self INetFwOpenPort) Put_Scope(scope networkmanagementwindowsfirewall.NET_
 }
 
 // Get_RemoteAddresses wraps the raw Get_RemoteAddresses call.
-func (self INetFwOpenPort) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteAddresses(remoteAddrs)))
+func (self INetFwOpenPort) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	_hr := self.Raw.Get_RemoteAddresses(&_remoteAddrs)
+	return _remoteAddrs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteAddresses wraps the raw Put_RemoteAddresses call.
@@ -795,8 +889,10 @@ func (self INetFwOpenPort) Put_RemoteAddresses(remoteAddrs foundation.BSTR) erro
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self INetFwOpenPort) Get_Enabled(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(enabled)))
+func (self INetFwOpenPort) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -805,8 +901,10 @@ func (self INetFwOpenPort) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 }
 
 // Get_BuiltIn wraps the raw Get_BuiltIn call.
-func (self INetFwOpenPort) Get_BuiltIn(builtIn *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BuiltIn(builtIn)))
+func (self INetFwOpenPort) Get_BuiltIn() (foundation.VARIANT_BOOL, error) {
+	var _builtIn foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_BuiltIn(&_builtIn)
+	return _builtIn, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwOpenPorts is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwOpenPorts with error-returning methods.
@@ -821,8 +919,10 @@ func WrapINetFwOpenPorts(raw *networkmanagementwindowsfirewall.INetFwOpenPorts) 
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetFwOpenPorts) Get_Count(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(count)))
+func (self INetFwOpenPorts) Get_Count() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_Count(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -836,13 +936,17 @@ func (self INetFwOpenPorts) Remove(portNumber int32, ipProtocol networkmanagemen
 }
 
 // Item wraps the raw Item call.
-func (self INetFwOpenPorts) Item(portNumber int32, ipProtocol networkmanagementwindowsfirewall.NET_FW_IP_PROTOCOL, openPort **networkmanagementwindowsfirewall.INetFwOpenPort) error {
-	return win32.HRESULTError(int32(self.Raw.Item(portNumber, ipProtocol, openPort)))
+func (self INetFwOpenPorts) Item(portNumber int32, ipProtocol networkmanagementwindowsfirewall.NET_FW_IP_PROTOCOL) (*networkmanagementwindowsfirewall.INetFwOpenPort, error) {
+	var _openPort *networkmanagementwindowsfirewall.INetFwOpenPort
+	_hr := self.Raw.Item(portNumber, ipProtocol, &_openPort)
+	return _openPort, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetFwOpenPorts) Get__NewEnum(newEnum **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(newEnum)))
+func (self INetFwOpenPorts) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_newEnum)
+	return _newEnum, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwPolicy is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwPolicy with error-returning methods.
@@ -857,13 +961,17 @@ func WrapINetFwPolicy(raw *networkmanagementwindowsfirewall.INetFwPolicy) INetFw
 }
 
 // Get_CurrentProfile wraps the raw Get_CurrentProfile call.
-func (self INetFwPolicy) Get_CurrentProfile(profile **networkmanagementwindowsfirewall.INetFwProfile) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentProfile(profile)))
+func (self INetFwPolicy) Get_CurrentProfile() (*networkmanagementwindowsfirewall.INetFwProfile, error) {
+	var _profile *networkmanagementwindowsfirewall.INetFwProfile
+	_hr := self.Raw.Get_CurrentProfile(&_profile)
+	return _profile, win32.HRESULTError(int32(_hr))
 }
 
 // GetProfileByType wraps the raw GetProfileByType call.
-func (self INetFwPolicy) GetProfileByType(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE, profile **networkmanagementwindowsfirewall.INetFwProfile) error {
-	return win32.HRESULTError(int32(self.Raw.GetProfileByType(profileType, profile)))
+func (self INetFwPolicy) GetProfileByType(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE) (*networkmanagementwindowsfirewall.INetFwProfile, error) {
+	var _profile *networkmanagementwindowsfirewall.INetFwProfile
+	_hr := self.Raw.GetProfileByType(profileType, &_profile)
+	return _profile, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwPolicy2 is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwPolicy2 with error-returning methods.
@@ -878,13 +986,17 @@ func WrapINetFwPolicy2(raw *networkmanagementwindowsfirewall.INetFwPolicy2) INet
 }
 
 // Get_CurrentProfileTypes wraps the raw Get_CurrentProfileTypes call.
-func (self INetFwPolicy2) Get_CurrentProfileTypes(profileTypesBitmask *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentProfileTypes(profileTypesBitmask)))
+func (self INetFwPolicy2) Get_CurrentProfileTypes() (int32, error) {
+	var _profileTypesBitmask int32
+	_hr := self.Raw.Get_CurrentProfileTypes(&_profileTypesBitmask)
+	return _profileTypesBitmask, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FirewallEnabled wraps the raw Get_FirewallEnabled call.
-func (self INetFwPolicy2) Get_FirewallEnabled(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2, enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FirewallEnabled(profileType, enabled)))
+func (self INetFwPolicy2) Get_FirewallEnabled(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_FirewallEnabled(profileType, &_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FirewallEnabled wraps the raw Put_FirewallEnabled call.
@@ -893,13 +1005,17 @@ func (self INetFwPolicy2) Put_FirewallEnabled(profileType networkmanagementwindo
 }
 
 // Get_ExcludedInterfaces wraps the raw Get_ExcludedInterfaces call.
-func (self INetFwPolicy2) Get_ExcludedInterfaces(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2, interfaces *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExcludedInterfaces(profileType, interfaces)))
+func (self INetFwPolicy2) Get_ExcludedInterfaces(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2) (systemvariant.VARIANT, error) {
+	var _interfaces systemvariant.VARIANT
+	_hr := self.Raw.Get_ExcludedInterfaces(profileType, &_interfaces)
+	return _interfaces, win32.HRESULTError(int32(_hr))
 }
 
 // Get_BlockAllInboundTraffic wraps the raw Get_BlockAllInboundTraffic call.
-func (self INetFwPolicy2) Get_BlockAllInboundTraffic(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2, Block *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockAllInboundTraffic(profileType, Block)))
+func (self INetFwPolicy2) Get_BlockAllInboundTraffic(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
+	var _Block foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_BlockAllInboundTraffic(profileType, &_Block)
+	return _Block, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BlockAllInboundTraffic wraps the raw Put_BlockAllInboundTraffic call.
@@ -908,8 +1024,10 @@ func (self INetFwPolicy2) Put_BlockAllInboundTraffic(profileType networkmanageme
 }
 
 // Get_NotificationsDisabled wraps the raw Get_NotificationsDisabled call.
-func (self INetFwPolicy2) Get_NotificationsDisabled(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2, disabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NotificationsDisabled(profileType, disabled)))
+func (self INetFwPolicy2) Get_NotificationsDisabled(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
+	var _disabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_NotificationsDisabled(profileType, &_disabled)
+	return _disabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NotificationsDisabled wraps the raw Put_NotificationsDisabled call.
@@ -918,8 +1036,10 @@ func (self INetFwPolicy2) Put_NotificationsDisabled(profileType networkmanagemen
 }
 
 // Get_UnicastResponsesToMulticastBroadcastDisabled wraps the raw Get_UnicastResponsesToMulticastBroadcastDisabled call.
-func (self INetFwPolicy2) Get_UnicastResponsesToMulticastBroadcastDisabled(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2, disabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UnicastResponsesToMulticastBroadcastDisabled(profileType, disabled)))
+func (self INetFwPolicy2) Get_UnicastResponsesToMulticastBroadcastDisabled(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
+	var _disabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_UnicastResponsesToMulticastBroadcastDisabled(profileType, &_disabled)
+	return _disabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UnicastResponsesToMulticastBroadcastDisabled wraps the raw Put_UnicastResponsesToMulticastBroadcastDisabled call.
@@ -928,13 +1048,17 @@ func (self INetFwPolicy2) Put_UnicastResponsesToMulticastBroadcastDisabled(profi
 }
 
 // Get_Rules wraps the raw Get_Rules call.
-func (self INetFwPolicy2) Get_Rules(rules **networkmanagementwindowsfirewall.INetFwRules) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Rules(rules)))
+func (self INetFwPolicy2) Get_Rules() (*networkmanagementwindowsfirewall.INetFwRules, error) {
+	var _rules *networkmanagementwindowsfirewall.INetFwRules
+	_hr := self.Raw.Get_Rules(&_rules)
+	return _rules, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServiceRestriction wraps the raw Get_ServiceRestriction call.
-func (self INetFwPolicy2) Get_ServiceRestriction(ServiceRestriction **networkmanagementwindowsfirewall.INetFwServiceRestriction) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceRestriction(ServiceRestriction)))
+func (self INetFwPolicy2) Get_ServiceRestriction() (*networkmanagementwindowsfirewall.INetFwServiceRestriction, error) {
+	var _ServiceRestriction *networkmanagementwindowsfirewall.INetFwServiceRestriction
+	_hr := self.Raw.Get_ServiceRestriction(&_ServiceRestriction)
+	return _ServiceRestriction, win32.HRESULTError(int32(_hr))
 }
 
 // EnableRuleGroup wraps the raw EnableRuleGroup call.
@@ -943,8 +1067,10 @@ func (self INetFwPolicy2) EnableRuleGroup(profileTypesBitmask int32, group found
 }
 
 // IsRuleGroupEnabled wraps the raw IsRuleGroupEnabled call.
-func (self INetFwPolicy2) IsRuleGroupEnabled(profileTypesBitmask int32, group foundation.BSTR, enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsRuleGroupEnabled(profileTypesBitmask, group, enabled)))
+func (self INetFwPolicy2) IsRuleGroupEnabled(profileTypesBitmask int32, group foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.IsRuleGroupEnabled(profileTypesBitmask, group, &_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // RestoreLocalFirewallDefaults wraps the raw RestoreLocalFirewallDefaults call.
@@ -953,8 +1079,10 @@ func (self INetFwPolicy2) RestoreLocalFirewallDefaults() error {
 }
 
 // Get_DefaultInboundAction wraps the raw Get_DefaultInboundAction call.
-func (self INetFwPolicy2) Get_DefaultInboundAction(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2, action *networkmanagementwindowsfirewall.NET_FW_ACTION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultInboundAction(profileType, action)))
+func (self INetFwPolicy2) Get_DefaultInboundAction(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2) (networkmanagementwindowsfirewall.NET_FW_ACTION, error) {
+	var _action networkmanagementwindowsfirewall.NET_FW_ACTION
+	_hr := self.Raw.Get_DefaultInboundAction(profileType, &_action)
+	return _action, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultInboundAction wraps the raw Put_DefaultInboundAction call.
@@ -963,8 +1091,10 @@ func (self INetFwPolicy2) Put_DefaultInboundAction(profileType networkmanagement
 }
 
 // Get_DefaultOutboundAction wraps the raw Get_DefaultOutboundAction call.
-func (self INetFwPolicy2) Get_DefaultOutboundAction(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2, action *networkmanagementwindowsfirewall.NET_FW_ACTION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultOutboundAction(profileType, action)))
+func (self INetFwPolicy2) Get_DefaultOutboundAction(profileType networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE2) (networkmanagementwindowsfirewall.NET_FW_ACTION, error) {
+	var _action networkmanagementwindowsfirewall.NET_FW_ACTION
+	_hr := self.Raw.Get_DefaultOutboundAction(profileType, &_action)
+	return _action, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultOutboundAction wraps the raw Put_DefaultOutboundAction call.
@@ -973,13 +1103,17 @@ func (self INetFwPolicy2) Put_DefaultOutboundAction(profileType networkmanagemen
 }
 
 // Get_IsRuleGroupCurrentlyEnabled wraps the raw Get_IsRuleGroupCurrentlyEnabled call.
-func (self INetFwPolicy2) Get_IsRuleGroupCurrentlyEnabled(group foundation.BSTR, enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsRuleGroupCurrentlyEnabled(group, enabled)))
+func (self INetFwPolicy2) Get_IsRuleGroupCurrentlyEnabled(group foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsRuleGroupCurrentlyEnabled(group, &_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalPolicyModifyState wraps the raw Get_LocalPolicyModifyState call.
-func (self INetFwPolicy2) Get_LocalPolicyModifyState(modifyState *networkmanagementwindowsfirewall.NET_FW_MODIFY_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalPolicyModifyState(modifyState)))
+func (self INetFwPolicy2) Get_LocalPolicyModifyState() (networkmanagementwindowsfirewall.NET_FW_MODIFY_STATE, error) {
+	var _modifyState networkmanagementwindowsfirewall.NET_FW_MODIFY_STATE
+	_hr := self.Raw.Get_LocalPolicyModifyState(&_modifyState)
+	return _modifyState, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwProduct is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwProduct with error-returning methods.
@@ -994,13 +1128,17 @@ func WrapINetFwProduct(raw *networkmanagementwindowsfirewall.INetFwProduct) INet
 }
 
 // Get_RuleCategories wraps the raw Get_RuleCategories call.
-func (self INetFwProduct) Get_RuleCategories(ruleCategories *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RuleCategories(ruleCategories)))
+func (self INetFwProduct) Get_RuleCategories() (systemvariant.VARIANT, error) {
+	var _ruleCategories systemvariant.VARIANT
+	_hr := self.Raw.Get_RuleCategories(&_ruleCategories)
+	return _ruleCategories, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DisplayName wraps the raw Get_DisplayName call.
-func (self INetFwProduct) Get_DisplayName(displayName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisplayName(displayName)))
+func (self INetFwProduct) Get_DisplayName() (foundation.BSTR, error) {
+	var _displayName foundation.BSTR
+	_hr := self.Raw.Get_DisplayName(&_displayName)
+	return _displayName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DisplayName wraps the raw Put_DisplayName call.
@@ -1009,8 +1147,10 @@ func (self INetFwProduct) Put_DisplayName(displayName foundation.BSTR) error {
 }
 
 // Get_PathToSignedProductExe wraps the raw Get_PathToSignedProductExe call.
-func (self INetFwProduct) Get_PathToSignedProductExe(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PathToSignedProductExe(path)))
+func (self INetFwProduct) Get_PathToSignedProductExe() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_PathToSignedProductExe(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwProducts is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwProducts with error-returning methods.
@@ -1025,23 +1165,31 @@ func WrapINetFwProducts(raw *networkmanagementwindowsfirewall.INetFwProducts) IN
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetFwProducts) Get_Count(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(count)))
+func (self INetFwProducts) Get_Count() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_Count(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Register wraps the raw Register call.
-func (self INetFwProducts) Register(product *networkmanagementwindowsfirewall.INetFwProduct, registration **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Register(product, registration)))
+func (self INetFwProducts) Register(product *networkmanagementwindowsfirewall.INetFwProduct) (*systemcom.IUnknown, error) {
+	var _registration *systemcom.IUnknown
+	_hr := self.Raw.Register(product, &_registration)
+	return _registration, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self INetFwProducts) Item(index int32, product **networkmanagementwindowsfirewall.INetFwProduct) error {
-	return win32.HRESULTError(int32(self.Raw.Item(index, product)))
+func (self INetFwProducts) Item(index int32) (*networkmanagementwindowsfirewall.INetFwProduct, error) {
+	var _product *networkmanagementwindowsfirewall.INetFwProduct
+	_hr := self.Raw.Item(index, &_product)
+	return _product, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetFwProducts) Get__NewEnum(newEnum **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(newEnum)))
+func (self INetFwProducts) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_newEnum)
+	return _newEnum, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwProfile is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwProfile with error-returning methods.
@@ -1056,13 +1204,17 @@ func WrapINetFwProfile(raw *networkmanagementwindowsfirewall.INetFwProfile) INet
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self INetFwProfile) Get_Type(type_ *networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(type_)))
+func (self INetFwProfile) Get_Type() (networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE, error) {
+	var _type_ networkmanagementwindowsfirewall.NET_FW_PROFILE_TYPE
+	_hr := self.Raw.Get_Type(&_type_)
+	return _type_, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FirewallEnabled wraps the raw Get_FirewallEnabled call.
-func (self INetFwProfile) Get_FirewallEnabled(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FirewallEnabled(enabled)))
+func (self INetFwProfile) Get_FirewallEnabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_FirewallEnabled(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FirewallEnabled wraps the raw Put_FirewallEnabled call.
@@ -1071,8 +1223,10 @@ func (self INetFwProfile) Put_FirewallEnabled(enabled foundation.VARIANT_BOOL) e
 }
 
 // Get_ExceptionsNotAllowed wraps the raw Get_ExceptionsNotAllowed call.
-func (self INetFwProfile) Get_ExceptionsNotAllowed(notAllowed *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExceptionsNotAllowed(notAllowed)))
+func (self INetFwProfile) Get_ExceptionsNotAllowed() (foundation.VARIANT_BOOL, error) {
+	var _notAllowed foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ExceptionsNotAllowed(&_notAllowed)
+	return _notAllowed, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ExceptionsNotAllowed wraps the raw Put_ExceptionsNotAllowed call.
@@ -1081,8 +1235,10 @@ func (self INetFwProfile) Put_ExceptionsNotAllowed(notAllowed foundation.VARIANT
 }
 
 // Get_NotificationsDisabled wraps the raw Get_NotificationsDisabled call.
-func (self INetFwProfile) Get_NotificationsDisabled(disabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NotificationsDisabled(disabled)))
+func (self INetFwProfile) Get_NotificationsDisabled() (foundation.VARIANT_BOOL, error) {
+	var _disabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_NotificationsDisabled(&_disabled)
+	return _disabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NotificationsDisabled wraps the raw Put_NotificationsDisabled call.
@@ -1091,8 +1247,10 @@ func (self INetFwProfile) Put_NotificationsDisabled(disabled foundation.VARIANT_
 }
 
 // Get_UnicastResponsesToMulticastBroadcastDisabled wraps the raw Get_UnicastResponsesToMulticastBroadcastDisabled call.
-func (self INetFwProfile) Get_UnicastResponsesToMulticastBroadcastDisabled(disabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UnicastResponsesToMulticastBroadcastDisabled(disabled)))
+func (self INetFwProfile) Get_UnicastResponsesToMulticastBroadcastDisabled() (foundation.VARIANT_BOOL, error) {
+	var _disabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_UnicastResponsesToMulticastBroadcastDisabled(&_disabled)
+	return _disabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UnicastResponsesToMulticastBroadcastDisabled wraps the raw Put_UnicastResponsesToMulticastBroadcastDisabled call.
@@ -1101,28 +1259,38 @@ func (self INetFwProfile) Put_UnicastResponsesToMulticastBroadcastDisabled(disab
 }
 
 // Get_RemoteAdminSettings wraps the raw Get_RemoteAdminSettings call.
-func (self INetFwProfile) Get_RemoteAdminSettings(remoteAdminSettings **networkmanagementwindowsfirewall.INetFwRemoteAdminSettings) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteAdminSettings(remoteAdminSettings)))
+func (self INetFwProfile) Get_RemoteAdminSettings() (*networkmanagementwindowsfirewall.INetFwRemoteAdminSettings, error) {
+	var _remoteAdminSettings *networkmanagementwindowsfirewall.INetFwRemoteAdminSettings
+	_hr := self.Raw.Get_RemoteAdminSettings(&_remoteAdminSettings)
+	return _remoteAdminSettings, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IcmpSettings wraps the raw Get_IcmpSettings call.
-func (self INetFwProfile) Get_IcmpSettings(icmpSettings **networkmanagementwindowsfirewall.INetFwIcmpSettings) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IcmpSettings(icmpSettings)))
+func (self INetFwProfile) Get_IcmpSettings() (*networkmanagementwindowsfirewall.INetFwIcmpSettings, error) {
+	var _icmpSettings *networkmanagementwindowsfirewall.INetFwIcmpSettings
+	_hr := self.Raw.Get_IcmpSettings(&_icmpSettings)
+	return _icmpSettings, win32.HRESULTError(int32(_hr))
 }
 
 // Get_GloballyOpenPorts wraps the raw Get_GloballyOpenPorts call.
-func (self INetFwProfile) Get_GloballyOpenPorts(openPorts **networkmanagementwindowsfirewall.INetFwOpenPorts) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GloballyOpenPorts(openPorts)))
+func (self INetFwProfile) Get_GloballyOpenPorts() (*networkmanagementwindowsfirewall.INetFwOpenPorts, error) {
+	var _openPorts *networkmanagementwindowsfirewall.INetFwOpenPorts
+	_hr := self.Raw.Get_GloballyOpenPorts(&_openPorts)
+	return _openPorts, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Services wraps the raw Get_Services call.
-func (self INetFwProfile) Get_Services(services **networkmanagementwindowsfirewall.INetFwServices) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Services(services)))
+func (self INetFwProfile) Get_Services() (*networkmanagementwindowsfirewall.INetFwServices, error) {
+	var _services *networkmanagementwindowsfirewall.INetFwServices
+	_hr := self.Raw.Get_Services(&_services)
+	return _services, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AuthorizedApplications wraps the raw Get_AuthorizedApplications call.
-func (self INetFwProfile) Get_AuthorizedApplications(apps **networkmanagementwindowsfirewall.INetFwAuthorizedApplications) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AuthorizedApplications(apps)))
+func (self INetFwProfile) Get_AuthorizedApplications() (*networkmanagementwindowsfirewall.INetFwAuthorizedApplications, error) {
+	var _apps *networkmanagementwindowsfirewall.INetFwAuthorizedApplications
+	_hr := self.Raw.Get_AuthorizedApplications(&_apps)
+	return _apps, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwRemoteAdminSettings is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwRemoteAdminSettings with error-returning methods.
@@ -1137,8 +1305,10 @@ func WrapINetFwRemoteAdminSettings(raw *networkmanagementwindowsfirewall.INetFwR
 }
 
 // Get_IpVersion wraps the raw Get_IpVersion call.
-func (self INetFwRemoteAdminSettings) Get_IpVersion(ipVersion *networkmanagementwindowsfirewall.NET_FW_IP_VERSION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IpVersion(ipVersion)))
+func (self INetFwRemoteAdminSettings) Get_IpVersion() (networkmanagementwindowsfirewall.NET_FW_IP_VERSION, error) {
+	var _ipVersion networkmanagementwindowsfirewall.NET_FW_IP_VERSION
+	_hr := self.Raw.Get_IpVersion(&_ipVersion)
+	return _ipVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IpVersion wraps the raw Put_IpVersion call.
@@ -1147,8 +1317,10 @@ func (self INetFwRemoteAdminSettings) Put_IpVersion(ipVersion networkmanagementw
 }
 
 // Get_Scope wraps the raw Get_Scope call.
-func (self INetFwRemoteAdminSettings) Get_Scope(scope *networkmanagementwindowsfirewall.NET_FW_SCOPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Scope(scope)))
+func (self INetFwRemoteAdminSettings) Get_Scope() (networkmanagementwindowsfirewall.NET_FW_SCOPE, error) {
+	var _scope networkmanagementwindowsfirewall.NET_FW_SCOPE
+	_hr := self.Raw.Get_Scope(&_scope)
+	return _scope, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Scope wraps the raw Put_Scope call.
@@ -1157,8 +1329,10 @@ func (self INetFwRemoteAdminSettings) Put_Scope(scope networkmanagementwindowsfi
 }
 
 // Get_RemoteAddresses wraps the raw Get_RemoteAddresses call.
-func (self INetFwRemoteAdminSettings) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteAddresses(remoteAddrs)))
+func (self INetFwRemoteAdminSettings) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	_hr := self.Raw.Get_RemoteAddresses(&_remoteAddrs)
+	return _remoteAddrs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteAddresses wraps the raw Put_RemoteAddresses call.
@@ -1167,8 +1341,10 @@ func (self INetFwRemoteAdminSettings) Put_RemoteAddresses(remoteAddrs foundation
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self INetFwRemoteAdminSettings) Get_Enabled(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(enabled)))
+func (self INetFwRemoteAdminSettings) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -1188,8 +1364,10 @@ func WrapINetFwRule(raw *networkmanagementwindowsfirewall.INetFwRule) INetFwRule
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self INetFwRule) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self INetFwRule) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -1198,8 +1376,10 @@ func (self INetFwRule) Put_Name(name foundation.BSTR) error {
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self INetFwRule) Get_Description(desc *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(desc)))
+func (self INetFwRule) Get_Description() (foundation.BSTR, error) {
+	var _desc foundation.BSTR
+	_hr := self.Raw.Get_Description(&_desc)
+	return _desc, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -1208,8 +1388,10 @@ func (self INetFwRule) Put_Description(desc foundation.BSTR) error {
 }
 
 // Get_ApplicationName wraps the raw Get_ApplicationName call.
-func (self INetFwRule) Get_ApplicationName(imageFileName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ApplicationName(imageFileName)))
+func (self INetFwRule) Get_ApplicationName() (foundation.BSTR, error) {
+	var _imageFileName foundation.BSTR
+	_hr := self.Raw.Get_ApplicationName(&_imageFileName)
+	return _imageFileName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ApplicationName wraps the raw Put_ApplicationName call.
@@ -1218,8 +1400,10 @@ func (self INetFwRule) Put_ApplicationName(imageFileName foundation.BSTR) error 
 }
 
 // Get_ServiceName wraps the raw Get_ServiceName call.
-func (self INetFwRule) Get_ServiceName(serviceName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceName(serviceName)))
+func (self INetFwRule) Get_ServiceName() (foundation.BSTR, error) {
+	var _serviceName foundation.BSTR
+	_hr := self.Raw.Get_ServiceName(&_serviceName)
+	return _serviceName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ServiceName wraps the raw Put_ServiceName call.
@@ -1228,8 +1412,10 @@ func (self INetFwRule) Put_ServiceName(serviceName foundation.BSTR) error {
 }
 
 // Get_Protocol wraps the raw Get_Protocol call.
-func (self INetFwRule) Get_Protocol(protocol *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Protocol(protocol)))
+func (self INetFwRule) Get_Protocol() (int32, error) {
+	var _protocol int32
+	_hr := self.Raw.Get_Protocol(&_protocol)
+	return _protocol, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Protocol wraps the raw Put_Protocol call.
@@ -1238,8 +1424,10 @@ func (self INetFwRule) Put_Protocol(protocol int32) error {
 }
 
 // Get_LocalPorts wraps the raw Get_LocalPorts call.
-func (self INetFwRule) Get_LocalPorts(portNumbers *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalPorts(portNumbers)))
+func (self INetFwRule) Get_LocalPorts() (foundation.BSTR, error) {
+	var _portNumbers foundation.BSTR
+	_hr := self.Raw.Get_LocalPorts(&_portNumbers)
+	return _portNumbers, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalPorts wraps the raw Put_LocalPorts call.
@@ -1248,8 +1436,10 @@ func (self INetFwRule) Put_LocalPorts(portNumbers foundation.BSTR) error {
 }
 
 // Get_RemotePorts wraps the raw Get_RemotePorts call.
-func (self INetFwRule) Get_RemotePorts(portNumbers *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemotePorts(portNumbers)))
+func (self INetFwRule) Get_RemotePorts() (foundation.BSTR, error) {
+	var _portNumbers foundation.BSTR
+	_hr := self.Raw.Get_RemotePorts(&_portNumbers)
+	return _portNumbers, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemotePorts wraps the raw Put_RemotePorts call.
@@ -1258,8 +1448,10 @@ func (self INetFwRule) Put_RemotePorts(portNumbers foundation.BSTR) error {
 }
 
 // Get_LocalAddresses wraps the raw Get_LocalAddresses call.
-func (self INetFwRule) Get_LocalAddresses(localAddrs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalAddresses(localAddrs)))
+func (self INetFwRule) Get_LocalAddresses() (foundation.BSTR, error) {
+	var _localAddrs foundation.BSTR
+	_hr := self.Raw.Get_LocalAddresses(&_localAddrs)
+	return _localAddrs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalAddresses wraps the raw Put_LocalAddresses call.
@@ -1268,8 +1460,10 @@ func (self INetFwRule) Put_LocalAddresses(localAddrs foundation.BSTR) error {
 }
 
 // Get_RemoteAddresses wraps the raw Get_RemoteAddresses call.
-func (self INetFwRule) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteAddresses(remoteAddrs)))
+func (self INetFwRule) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	_hr := self.Raw.Get_RemoteAddresses(&_remoteAddrs)
+	return _remoteAddrs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteAddresses wraps the raw Put_RemoteAddresses call.
@@ -1278,8 +1472,10 @@ func (self INetFwRule) Put_RemoteAddresses(remoteAddrs foundation.BSTR) error {
 }
 
 // Get_IcmpTypesAndCodes wraps the raw Get_IcmpTypesAndCodes call.
-func (self INetFwRule) Get_IcmpTypesAndCodes(icmpTypesAndCodes *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IcmpTypesAndCodes(icmpTypesAndCodes)))
+func (self INetFwRule) Get_IcmpTypesAndCodes() (foundation.BSTR, error) {
+	var _icmpTypesAndCodes foundation.BSTR
+	_hr := self.Raw.Get_IcmpTypesAndCodes(&_icmpTypesAndCodes)
+	return _icmpTypesAndCodes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IcmpTypesAndCodes wraps the raw Put_IcmpTypesAndCodes call.
@@ -1288,8 +1484,10 @@ func (self INetFwRule) Put_IcmpTypesAndCodes(icmpTypesAndCodes foundation.BSTR) 
 }
 
 // Get_Direction wraps the raw Get_Direction call.
-func (self INetFwRule) Get_Direction(dir *networkmanagementwindowsfirewall.NET_FW_RULE_DIRECTION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Direction(dir)))
+func (self INetFwRule) Get_Direction() (networkmanagementwindowsfirewall.NET_FW_RULE_DIRECTION, error) {
+	var _dir networkmanagementwindowsfirewall.NET_FW_RULE_DIRECTION
+	_hr := self.Raw.Get_Direction(&_dir)
+	return _dir, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Direction wraps the raw Put_Direction call.
@@ -1298,13 +1496,17 @@ func (self INetFwRule) Put_Direction(dir networkmanagementwindowsfirewall.NET_FW
 }
 
 // Get_Interfaces wraps the raw Get_Interfaces call.
-func (self INetFwRule) Get_Interfaces(interfaces *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Interfaces(interfaces)))
+func (self INetFwRule) Get_Interfaces() (systemvariant.VARIANT, error) {
+	var _interfaces systemvariant.VARIANT
+	_hr := self.Raw.Get_Interfaces(&_interfaces)
+	return _interfaces, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InterfaceTypes wraps the raw Get_InterfaceTypes call.
-func (self INetFwRule) Get_InterfaceTypes(interfaceTypes *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InterfaceTypes(interfaceTypes)))
+func (self INetFwRule) Get_InterfaceTypes() (foundation.BSTR, error) {
+	var _interfaceTypes foundation.BSTR
+	_hr := self.Raw.Get_InterfaceTypes(&_interfaceTypes)
+	return _interfaceTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_InterfaceTypes wraps the raw Put_InterfaceTypes call.
@@ -1313,8 +1515,10 @@ func (self INetFwRule) Put_InterfaceTypes(interfaceTypes foundation.BSTR) error 
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self INetFwRule) Get_Enabled(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(enabled)))
+func (self INetFwRule) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -1323,8 +1527,10 @@ func (self INetFwRule) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 }
 
 // Get_Grouping wraps the raw Get_Grouping call.
-func (self INetFwRule) Get_Grouping(context *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Grouping(context)))
+func (self INetFwRule) Get_Grouping() (foundation.BSTR, error) {
+	var _context foundation.BSTR
+	_hr := self.Raw.Get_Grouping(&_context)
+	return _context, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Grouping wraps the raw Put_Grouping call.
@@ -1333,8 +1539,10 @@ func (self INetFwRule) Put_Grouping(context foundation.BSTR) error {
 }
 
 // Get_Profiles wraps the raw Get_Profiles call.
-func (self INetFwRule) Get_Profiles(profileTypesBitmask *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profiles(profileTypesBitmask)))
+func (self INetFwRule) Get_Profiles() (int32, error) {
+	var _profileTypesBitmask int32
+	_hr := self.Raw.Get_Profiles(&_profileTypesBitmask)
+	return _profileTypesBitmask, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Profiles wraps the raw Put_Profiles call.
@@ -1343,8 +1551,10 @@ func (self INetFwRule) Put_Profiles(profileTypesBitmask int32) error {
 }
 
 // Get_EdgeTraversal wraps the raw Get_EdgeTraversal call.
-func (self INetFwRule) Get_EdgeTraversal(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EdgeTraversal(enabled)))
+func (self INetFwRule) Get_EdgeTraversal() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_EdgeTraversal(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EdgeTraversal wraps the raw Put_EdgeTraversal call.
@@ -1353,8 +1563,10 @@ func (self INetFwRule) Put_EdgeTraversal(enabled foundation.VARIANT_BOOL) error 
 }
 
 // Get_Action wraps the raw Get_Action call.
-func (self INetFwRule) Get_Action(action *networkmanagementwindowsfirewall.NET_FW_ACTION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Action(action)))
+func (self INetFwRule) Get_Action() (networkmanagementwindowsfirewall.NET_FW_ACTION, error) {
+	var _action networkmanagementwindowsfirewall.NET_FW_ACTION
+	_hr := self.Raw.Get_Action(&_action)
+	return _action, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Action wraps the raw Put_Action call.
@@ -1374,8 +1586,10 @@ func WrapINetFwRule2(raw *networkmanagementwindowsfirewall.INetFwRule2) INetFwRu
 }
 
 // Get_EdgeTraversalOptions wraps the raw Get_EdgeTraversalOptions call.
-func (self INetFwRule2) Get_EdgeTraversalOptions(lOptions *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EdgeTraversalOptions(lOptions)))
+func (self INetFwRule2) Get_EdgeTraversalOptions() (int32, error) {
+	var _lOptions int32
+	_hr := self.Raw.Get_EdgeTraversalOptions(&_lOptions)
+	return _lOptions, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EdgeTraversalOptions wraps the raw Put_EdgeTraversalOptions call.
@@ -1395,8 +1609,10 @@ func WrapINetFwRule3(raw *networkmanagementwindowsfirewall.INetFwRule3) INetFwRu
 }
 
 // Get_LocalAppPackageId wraps the raw Get_LocalAppPackageId call.
-func (self INetFwRule3) Get_LocalAppPackageId(wszPackageId *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalAppPackageId(wszPackageId)))
+func (self INetFwRule3) Get_LocalAppPackageId() (foundation.BSTR, error) {
+	var _wszPackageId foundation.BSTR
+	_hr := self.Raw.Get_LocalAppPackageId(&_wszPackageId)
+	return _wszPackageId, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalAppPackageId wraps the raw Put_LocalAppPackageId call.
@@ -1405,8 +1621,10 @@ func (self INetFwRule3) Put_LocalAppPackageId(wszPackageId foundation.BSTR) erro
 }
 
 // Get_LocalUserOwner wraps the raw Get_LocalUserOwner call.
-func (self INetFwRule3) Get_LocalUserOwner(wszUserOwner *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalUserOwner(wszUserOwner)))
+func (self INetFwRule3) Get_LocalUserOwner() (foundation.BSTR, error) {
+	var _wszUserOwner foundation.BSTR
+	_hr := self.Raw.Get_LocalUserOwner(&_wszUserOwner)
+	return _wszUserOwner, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalUserOwner wraps the raw Put_LocalUserOwner call.
@@ -1415,8 +1633,10 @@ func (self INetFwRule3) Put_LocalUserOwner(wszUserOwner foundation.BSTR) error {
 }
 
 // Get_LocalUserAuthorizedList wraps the raw Get_LocalUserAuthorizedList call.
-func (self INetFwRule3) Get_LocalUserAuthorizedList(wszUserAuthList *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalUserAuthorizedList(wszUserAuthList)))
+func (self INetFwRule3) Get_LocalUserAuthorizedList() (foundation.BSTR, error) {
+	var _wszUserAuthList foundation.BSTR
+	_hr := self.Raw.Get_LocalUserAuthorizedList(&_wszUserAuthList)
+	return _wszUserAuthList, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalUserAuthorizedList wraps the raw Put_LocalUserAuthorizedList call.
@@ -1425,8 +1645,10 @@ func (self INetFwRule3) Put_LocalUserAuthorizedList(wszUserAuthList foundation.B
 }
 
 // Get_RemoteUserAuthorizedList wraps the raw Get_RemoteUserAuthorizedList call.
-func (self INetFwRule3) Get_RemoteUserAuthorizedList(wszUserAuthList *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteUserAuthorizedList(wszUserAuthList)))
+func (self INetFwRule3) Get_RemoteUserAuthorizedList() (foundation.BSTR, error) {
+	var _wszUserAuthList foundation.BSTR
+	_hr := self.Raw.Get_RemoteUserAuthorizedList(&_wszUserAuthList)
+	return _wszUserAuthList, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteUserAuthorizedList wraps the raw Put_RemoteUserAuthorizedList call.
@@ -1435,8 +1657,10 @@ func (self INetFwRule3) Put_RemoteUserAuthorizedList(wszUserAuthList foundation.
 }
 
 // Get_RemoteMachineAuthorizedList wraps the raw Get_RemoteMachineAuthorizedList call.
-func (self INetFwRule3) Get_RemoteMachineAuthorizedList(wszUserAuthList *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteMachineAuthorizedList(wszUserAuthList)))
+func (self INetFwRule3) Get_RemoteMachineAuthorizedList() (foundation.BSTR, error) {
+	var _wszUserAuthList foundation.BSTR
+	_hr := self.Raw.Get_RemoteMachineAuthorizedList(&_wszUserAuthList)
+	return _wszUserAuthList, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteMachineAuthorizedList wraps the raw Put_RemoteMachineAuthorizedList call.
@@ -1445,8 +1669,10 @@ func (self INetFwRule3) Put_RemoteMachineAuthorizedList(wszUserAuthList foundati
 }
 
 // Get_SecureFlags wraps the raw Get_SecureFlags call.
-func (self INetFwRule3) Get_SecureFlags(lOptions *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SecureFlags(lOptions)))
+func (self INetFwRule3) Get_SecureFlags() (int32, error) {
+	var _lOptions int32
+	_hr := self.Raw.Get_SecureFlags(&_lOptions)
+	return _lOptions, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SecureFlags wraps the raw Put_SecureFlags call.
@@ -1466,8 +1692,10 @@ func WrapINetFwRules(raw *networkmanagementwindowsfirewall.INetFwRules) INetFwRu
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetFwRules) Get_Count(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(count)))
+func (self INetFwRules) Get_Count() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_Count(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -1481,13 +1709,17 @@ func (self INetFwRules) Remove(name foundation.BSTR) error {
 }
 
 // Item wraps the raw Item call.
-func (self INetFwRules) Item(name foundation.BSTR, rule **networkmanagementwindowsfirewall.INetFwRule) error {
-	return win32.HRESULTError(int32(self.Raw.Item(name, rule)))
+func (self INetFwRules) Item(name foundation.BSTR) (*networkmanagementwindowsfirewall.INetFwRule, error) {
+	var _rule *networkmanagementwindowsfirewall.INetFwRule
+	_hr := self.Raw.Item(name, &_rule)
+	return _rule, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetFwRules) Get__NewEnum(newEnum **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(newEnum)))
+func (self INetFwRules) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_newEnum)
+	return _newEnum, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwService is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwService with error-returning methods.
@@ -1502,23 +1734,31 @@ func WrapINetFwService(raw *networkmanagementwindowsfirewall.INetFwService) INet
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self INetFwService) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self INetFwService) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self INetFwService) Get_Type(type_ *networkmanagementwindowsfirewall.NET_FW_SERVICE_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(type_)))
+func (self INetFwService) Get_Type() (networkmanagementwindowsfirewall.NET_FW_SERVICE_TYPE, error) {
+	var _type_ networkmanagementwindowsfirewall.NET_FW_SERVICE_TYPE
+	_hr := self.Raw.Get_Type(&_type_)
+	return _type_, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Customized wraps the raw Get_Customized call.
-func (self INetFwService) Get_Customized(customized *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Customized(customized)))
+func (self INetFwService) Get_Customized() (foundation.VARIANT_BOOL, error) {
+	var _customized foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Customized(&_customized)
+	return _customized, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IpVersion wraps the raw Get_IpVersion call.
-func (self INetFwService) Get_IpVersion(ipVersion *networkmanagementwindowsfirewall.NET_FW_IP_VERSION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IpVersion(ipVersion)))
+func (self INetFwService) Get_IpVersion() (networkmanagementwindowsfirewall.NET_FW_IP_VERSION, error) {
+	var _ipVersion networkmanagementwindowsfirewall.NET_FW_IP_VERSION
+	_hr := self.Raw.Get_IpVersion(&_ipVersion)
+	return _ipVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IpVersion wraps the raw Put_IpVersion call.
@@ -1527,8 +1767,10 @@ func (self INetFwService) Put_IpVersion(ipVersion networkmanagementwindowsfirewa
 }
 
 // Get_Scope wraps the raw Get_Scope call.
-func (self INetFwService) Get_Scope(scope *networkmanagementwindowsfirewall.NET_FW_SCOPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Scope(scope)))
+func (self INetFwService) Get_Scope() (networkmanagementwindowsfirewall.NET_FW_SCOPE, error) {
+	var _scope networkmanagementwindowsfirewall.NET_FW_SCOPE
+	_hr := self.Raw.Get_Scope(&_scope)
+	return _scope, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Scope wraps the raw Put_Scope call.
@@ -1537,8 +1779,10 @@ func (self INetFwService) Put_Scope(scope networkmanagementwindowsfirewall.NET_F
 }
 
 // Get_RemoteAddresses wraps the raw Get_RemoteAddresses call.
-func (self INetFwService) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteAddresses(remoteAddrs)))
+func (self INetFwService) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	_hr := self.Raw.Get_RemoteAddresses(&_remoteAddrs)
+	return _remoteAddrs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RemoteAddresses wraps the raw Put_RemoteAddresses call.
@@ -1547,8 +1791,10 @@ func (self INetFwService) Put_RemoteAddresses(remoteAddrs foundation.BSTR) error
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self INetFwService) Get_Enabled(enabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(enabled)))
+func (self INetFwService) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_enabled)
+	return _enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -1557,8 +1803,10 @@ func (self INetFwService) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 }
 
 // Get_GloballyOpenPorts wraps the raw Get_GloballyOpenPorts call.
-func (self INetFwService) Get_GloballyOpenPorts(openPorts **networkmanagementwindowsfirewall.INetFwOpenPorts) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GloballyOpenPorts(openPorts)))
+func (self INetFwService) Get_GloballyOpenPorts() (*networkmanagementwindowsfirewall.INetFwOpenPorts, error) {
+	var _openPorts *networkmanagementwindowsfirewall.INetFwOpenPorts
+	_hr := self.Raw.Get_GloballyOpenPorts(&_openPorts)
+	return _openPorts, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwServiceRestriction is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwServiceRestriction with error-returning methods.
@@ -1578,13 +1826,17 @@ func (self INetFwServiceRestriction) RestrictService(serviceName foundation.BSTR
 }
 
 // ServiceRestricted wraps the raw ServiceRestricted call.
-func (self INetFwServiceRestriction) ServiceRestricted(serviceName foundation.BSTR, appName foundation.BSTR, serviceRestricted *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ServiceRestricted(serviceName, appName, serviceRestricted)))
+func (self INetFwServiceRestriction) ServiceRestricted(serviceName foundation.BSTR, appName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _serviceRestricted foundation.VARIANT_BOOL
+	_hr := self.Raw.ServiceRestricted(serviceName, appName, &_serviceRestricted)
+	return _serviceRestricted, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Rules wraps the raw Get_Rules call.
-func (self INetFwServiceRestriction) Get_Rules(rules **networkmanagementwindowsfirewall.INetFwRules) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Rules(rules)))
+func (self INetFwServiceRestriction) Get_Rules() (*networkmanagementwindowsfirewall.INetFwRules, error) {
+	var _rules *networkmanagementwindowsfirewall.INetFwRules
+	_hr := self.Raw.Get_Rules(&_rules)
+	return _rules, win32.HRESULTError(int32(_hr))
 }
 
 // INetFwServices is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetFwServices with error-returning methods.
@@ -1599,18 +1851,24 @@ func WrapINetFwServices(raw *networkmanagementwindowsfirewall.INetFwServices) IN
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetFwServices) Get_Count(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(count)))
+func (self INetFwServices) Get_Count() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_Count(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self INetFwServices) Item(svcType networkmanagementwindowsfirewall.NET_FW_SERVICE_TYPE, service **networkmanagementwindowsfirewall.INetFwService) error {
-	return win32.HRESULTError(int32(self.Raw.Item(svcType, service)))
+func (self INetFwServices) Item(svcType networkmanagementwindowsfirewall.NET_FW_SERVICE_TYPE) (*networkmanagementwindowsfirewall.INetFwService, error) {
+	var _service *networkmanagementwindowsfirewall.INetFwService
+	_hr := self.Raw.Item(svcType, &_service)
+	return _service, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetFwServices) Get__NewEnum(newEnum **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(newEnum)))
+func (self INetFwServices) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_newEnum)
+	return _newEnum, win32.HRESULTError(int32(_hr))
 }
 
 // INetSharingConfiguration is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetSharingConfiguration with error-returning methods.
@@ -1625,13 +1883,17 @@ func WrapINetSharingConfiguration(raw *networkmanagementwindowsfirewall.INetShar
 }
 
 // Get_SharingEnabled wraps the raw Get_SharingEnabled call.
-func (self INetSharingConfiguration) Get_SharingEnabled(pbEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SharingEnabled(pbEnabled)))
+func (self INetSharingConfiguration) Get_SharingEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pbEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SharingEnabled(&_pbEnabled)
+	return _pbEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SharingConnectionType wraps the raw Get_SharingConnectionType call.
-func (self INetSharingConfiguration) Get_SharingConnectionType(pType *networkmanagementwindowsfirewall.SHARINGCONNECTIONTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SharingConnectionType(pType)))
+func (self INetSharingConfiguration) Get_SharingConnectionType() (networkmanagementwindowsfirewall.SHARINGCONNECTIONTYPE, error) {
+	var _pType networkmanagementwindowsfirewall.SHARINGCONNECTIONTYPE
+	_hr := self.Raw.Get_SharingConnectionType(&_pType)
+	return _pType, win32.HRESULTError(int32(_hr))
 }
 
 // DisableSharing wraps the raw DisableSharing call.
@@ -1645,8 +1907,10 @@ func (self INetSharingConfiguration) EnableSharing(Type networkmanagementwindows
 }
 
 // Get_InternetFirewallEnabled wraps the raw Get_InternetFirewallEnabled call.
-func (self INetSharingConfiguration) Get_InternetFirewallEnabled(pbEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InternetFirewallEnabled(pbEnabled)))
+func (self INetSharingConfiguration) Get_InternetFirewallEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pbEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_InternetFirewallEnabled(&_pbEnabled)
+	return _pbEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // DisableInternetFirewall wraps the raw DisableInternetFirewall call.
@@ -1660,13 +1924,17 @@ func (self INetSharingConfiguration) EnableInternetFirewall() error {
 }
 
 // Get_EnumPortMappings wraps the raw Get_EnumPortMappings call.
-func (self INetSharingConfiguration) Get_EnumPortMappings(Flags networkmanagementwindowsfirewall.SHARINGCONNECTION_ENUM_FLAGS, ppColl **networkmanagementwindowsfirewall.INetSharingPortMappingCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumPortMappings(Flags, ppColl)))
+func (self INetSharingConfiguration) Get_EnumPortMappings(Flags networkmanagementwindowsfirewall.SHARINGCONNECTION_ENUM_FLAGS) (*networkmanagementwindowsfirewall.INetSharingPortMappingCollection, error) {
+	var _ppColl *networkmanagementwindowsfirewall.INetSharingPortMappingCollection
+	_hr := self.Raw.Get_EnumPortMappings(Flags, &_ppColl)
+	return _ppColl, win32.HRESULTError(int32(_hr))
 }
 
 // AddPortMapping wraps the raw AddPortMapping call.
-func (self INetSharingConfiguration) AddPortMapping(bstrName foundation.BSTR, ucIPProtocol byte, usExternalPort uint16, usInternalPort uint16, dwOptions uint32, bstrTargetNameOrIPAddress foundation.BSTR, eTargetType networkmanagementwindowsfirewall.ICS_TARGETTYPE, ppMapping **networkmanagementwindowsfirewall.INetSharingPortMapping) error {
-	return win32.HRESULTError(int32(self.Raw.AddPortMapping(bstrName, ucIPProtocol, usExternalPort, usInternalPort, dwOptions, bstrTargetNameOrIPAddress, eTargetType, ppMapping)))
+func (self INetSharingConfiguration) AddPortMapping(bstrName foundation.BSTR, ucIPProtocol byte, usExternalPort uint16, usInternalPort uint16, dwOptions uint32, bstrTargetNameOrIPAddress foundation.BSTR, eTargetType networkmanagementwindowsfirewall.ICS_TARGETTYPE) (*networkmanagementwindowsfirewall.INetSharingPortMapping, error) {
+	var _ppMapping *networkmanagementwindowsfirewall.INetSharingPortMapping
+	_hr := self.Raw.AddPortMapping(bstrName, ucIPProtocol, usExternalPort, usInternalPort, dwOptions, bstrTargetNameOrIPAddress, eTargetType, &_ppMapping)
+	return _ppMapping, win32.HRESULTError(int32(_hr))
 }
 
 // RemovePortMapping wraps the raw RemovePortMapping call.
@@ -1686,13 +1954,17 @@ func WrapINetSharingEveryConnectionCollection(raw *networkmanagementwindowsfirew
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetSharingEveryConnectionCollection) Get__NewEnum(pVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pVal)))
+func (self INetSharingEveryConnectionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetSharingEveryConnectionCollection) Get_Count(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pVal)))
+func (self INetSharingEveryConnectionCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Count(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // INetSharingManager is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetSharingManager with error-returning methods.
@@ -1707,33 +1979,45 @@ func WrapINetSharingManager(raw *networkmanagementwindowsfirewall.INetSharingMan
 }
 
 // Get_SharingInstalled wraps the raw Get_SharingInstalled call.
-func (self INetSharingManager) Get_SharingInstalled(pbInstalled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SharingInstalled(pbInstalled)))
+func (self INetSharingManager) Get_SharingInstalled() (foundation.VARIANT_BOOL, error) {
+	var _pbInstalled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SharingInstalled(&_pbInstalled)
+	return _pbInstalled, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnumPublicConnections wraps the raw Get_EnumPublicConnections call.
-func (self INetSharingManager) Get_EnumPublicConnections(Flags networkmanagementwindowsfirewall.SHARINGCONNECTION_ENUM_FLAGS, ppColl **networkmanagementwindowsfirewall.INetSharingPublicConnectionCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumPublicConnections(Flags, ppColl)))
+func (self INetSharingManager) Get_EnumPublicConnections(Flags networkmanagementwindowsfirewall.SHARINGCONNECTION_ENUM_FLAGS) (*networkmanagementwindowsfirewall.INetSharingPublicConnectionCollection, error) {
+	var _ppColl *networkmanagementwindowsfirewall.INetSharingPublicConnectionCollection
+	_hr := self.Raw.Get_EnumPublicConnections(Flags, &_ppColl)
+	return _ppColl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnumPrivateConnections wraps the raw Get_EnumPrivateConnections call.
-func (self INetSharingManager) Get_EnumPrivateConnections(Flags networkmanagementwindowsfirewall.SHARINGCONNECTION_ENUM_FLAGS, ppColl **networkmanagementwindowsfirewall.INetSharingPrivateConnectionCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumPrivateConnections(Flags, ppColl)))
+func (self INetSharingManager) Get_EnumPrivateConnections(Flags networkmanagementwindowsfirewall.SHARINGCONNECTION_ENUM_FLAGS) (*networkmanagementwindowsfirewall.INetSharingPrivateConnectionCollection, error) {
+	var _ppColl *networkmanagementwindowsfirewall.INetSharingPrivateConnectionCollection
+	_hr := self.Raw.Get_EnumPrivateConnections(Flags, &_ppColl)
+	return _ppColl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_INetSharingConfigurationForINetConnection wraps the raw Get_INetSharingConfigurationForINetConnection call.
-func (self INetSharingManager) Get_INetSharingConfigurationForINetConnection(pNetConnection *networkmanagementwindowsfirewall.INetConnection, ppNetSharingConfiguration **networkmanagementwindowsfirewall.INetSharingConfiguration) error {
-	return win32.HRESULTError(int32(self.Raw.Get_INetSharingConfigurationForINetConnection(pNetConnection, ppNetSharingConfiguration)))
+func (self INetSharingManager) Get_INetSharingConfigurationForINetConnection(pNetConnection *networkmanagementwindowsfirewall.INetConnection) (*networkmanagementwindowsfirewall.INetSharingConfiguration, error) {
+	var _ppNetSharingConfiguration *networkmanagementwindowsfirewall.INetSharingConfiguration
+	_hr := self.Raw.Get_INetSharingConfigurationForINetConnection(pNetConnection, &_ppNetSharingConfiguration)
+	return _ppNetSharingConfiguration, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnumEveryConnection wraps the raw Get_EnumEveryConnection call.
-func (self INetSharingManager) Get_EnumEveryConnection(ppColl **networkmanagementwindowsfirewall.INetSharingEveryConnectionCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumEveryConnection(ppColl)))
+func (self INetSharingManager) Get_EnumEveryConnection() (*networkmanagementwindowsfirewall.INetSharingEveryConnectionCollection, error) {
+	var _ppColl *networkmanagementwindowsfirewall.INetSharingEveryConnectionCollection
+	_hr := self.Raw.Get_EnumEveryConnection(&_ppColl)
+	return _ppColl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetConnectionProps wraps the raw Get_NetConnectionProps call.
-func (self INetSharingManager) Get_NetConnectionProps(pNetConnection *networkmanagementwindowsfirewall.INetConnection, ppProps **networkmanagementwindowsfirewall.INetConnectionProps) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetConnectionProps(pNetConnection, ppProps)))
+func (self INetSharingManager) Get_NetConnectionProps(pNetConnection *networkmanagementwindowsfirewall.INetConnection) (*networkmanagementwindowsfirewall.INetConnectionProps, error) {
+	var _ppProps *networkmanagementwindowsfirewall.INetConnectionProps
+	_hr := self.Raw.Get_NetConnectionProps(pNetConnection, &_ppProps)
+	return _ppProps, win32.HRESULTError(int32(_hr))
 }
 
 // INetSharingPortMapping is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetSharingPortMapping with error-returning methods.
@@ -1758,8 +2042,10 @@ func (self INetSharingPortMapping) Enable() error {
 }
 
 // Get_Properties wraps the raw Get_Properties call.
-func (self INetSharingPortMapping) Get_Properties(ppNSPMP **networkmanagementwindowsfirewall.INetSharingPortMappingProps) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Properties(ppNSPMP)))
+func (self INetSharingPortMapping) Get_Properties() (*networkmanagementwindowsfirewall.INetSharingPortMappingProps, error) {
+	var _ppNSPMP *networkmanagementwindowsfirewall.INetSharingPortMappingProps
+	_hr := self.Raw.Get_Properties(&_ppNSPMP)
+	return _ppNSPMP, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -1779,13 +2065,17 @@ func WrapINetSharingPortMappingCollection(raw *networkmanagementwindowsfirewall.
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetSharingPortMappingCollection) Get__NewEnum(pVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pVal)))
+func (self INetSharingPortMappingCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetSharingPortMappingCollection) Get_Count(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pVal)))
+func (self INetSharingPortMappingCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Count(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // INetSharingPortMappingProps is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetSharingPortMappingProps with error-returning methods.
@@ -1800,43 +2090,59 @@ func WrapINetSharingPortMappingProps(raw *networkmanagementwindowsfirewall.INetS
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self INetSharingPortMappingProps) Get_Name(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbstrName)))
+func (self INetSharingPortMappingProps) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IPProtocol wraps the raw Get_IPProtocol call.
-func (self INetSharingPortMappingProps) Get_IPProtocol(pucIPProt *byte) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IPProtocol(pucIPProt)))
+func (self INetSharingPortMappingProps) Get_IPProtocol() (byte, error) {
+	var _pucIPProt byte
+	_hr := self.Raw.Get_IPProtocol(&_pucIPProt)
+	return _pucIPProt, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ExternalPort wraps the raw Get_ExternalPort call.
-func (self INetSharingPortMappingProps) Get_ExternalPort(pusPort *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExternalPort(pusPort)))
+func (self INetSharingPortMappingProps) Get_ExternalPort() (int32, error) {
+	var _pusPort int32
+	_hr := self.Raw.Get_ExternalPort(&_pusPort)
+	return _pusPort, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InternalPort wraps the raw Get_InternalPort call.
-func (self INetSharingPortMappingProps) Get_InternalPort(pusPort *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InternalPort(pusPort)))
+func (self INetSharingPortMappingProps) Get_InternalPort() (int32, error) {
+	var _pusPort int32
+	_hr := self.Raw.Get_InternalPort(&_pusPort)
+	return _pusPort, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Options wraps the raw Get_Options call.
-func (self INetSharingPortMappingProps) Get_Options(pdwOptions *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Options(pdwOptions)))
+func (self INetSharingPortMappingProps) Get_Options() (int32, error) {
+	var _pdwOptions int32
+	_hr := self.Raw.Get_Options(&_pdwOptions)
+	return _pdwOptions, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TargetName wraps the raw Get_TargetName call.
-func (self INetSharingPortMappingProps) Get_TargetName(pbstrTargetName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetName(pbstrTargetName)))
+func (self INetSharingPortMappingProps) Get_TargetName() (foundation.BSTR, error) {
+	var _pbstrTargetName foundation.BSTR
+	_hr := self.Raw.Get_TargetName(&_pbstrTargetName)
+	return _pbstrTargetName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TargetIPAddress wraps the raw Get_TargetIPAddress call.
-func (self INetSharingPortMappingProps) Get_TargetIPAddress(pbstrTargetIPAddress *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetIPAddress(pbstrTargetIPAddress)))
+func (self INetSharingPortMappingProps) Get_TargetIPAddress() (foundation.BSTR, error) {
+	var _pbstrTargetIPAddress foundation.BSTR
+	_hr := self.Raw.Get_TargetIPAddress(&_pbstrTargetIPAddress)
+	return _pbstrTargetIPAddress, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self INetSharingPortMappingProps) Get_Enabled(pbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(pbool)))
+func (self INetSharingPortMappingProps) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pbool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_pbool)
+	return _pbool, win32.HRESULTError(int32(_hr))
 }
 
 // INetSharingPrivateConnectionCollection is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetSharingPrivateConnectionCollection with error-returning methods.
@@ -1851,13 +2157,17 @@ func WrapINetSharingPrivateConnectionCollection(raw *networkmanagementwindowsfir
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetSharingPrivateConnectionCollection) Get__NewEnum(pVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pVal)))
+func (self INetSharingPrivateConnectionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetSharingPrivateConnectionCollection) Get_Count(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pVal)))
+func (self INetSharingPrivateConnectionCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Count(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // INetSharingPublicConnectionCollection is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.INetSharingPublicConnectionCollection with error-returning methods.
@@ -1872,13 +2182,17 @@ func WrapINetSharingPublicConnectionCollection(raw *networkmanagementwindowsfire
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self INetSharingPublicConnectionCollection) Get__NewEnum(pVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pVal)))
+func (self INetSharingPublicConnectionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self INetSharingPublicConnectionCollection) Get_Count(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pVal)))
+func (self INetSharingPublicConnectionCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Count(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // IStaticPortMapping is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.IStaticPortMapping with error-returning methods.
@@ -1893,38 +2207,52 @@ func WrapIStaticPortMapping(raw *networkmanagementwindowsfirewall.IStaticPortMap
 }
 
 // Get_ExternalIPAddress wraps the raw Get_ExternalIPAddress call.
-func (self IStaticPortMapping) Get_ExternalIPAddress(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExternalIPAddress(pVal)))
+func (self IStaticPortMapping) Get_ExternalIPAddress() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_ExternalIPAddress(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ExternalPort wraps the raw Get_ExternalPort call.
-func (self IStaticPortMapping) Get_ExternalPort(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExternalPort(pVal)))
+func (self IStaticPortMapping) Get_ExternalPort() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_ExternalPort(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InternalPort wraps the raw Get_InternalPort call.
-func (self IStaticPortMapping) Get_InternalPort(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InternalPort(pVal)))
+func (self IStaticPortMapping) Get_InternalPort() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_InternalPort(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Protocol wraps the raw Get_Protocol call.
-func (self IStaticPortMapping) Get_Protocol(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Protocol(pVal)))
+func (self IStaticPortMapping) Get_Protocol() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_Protocol(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InternalClient wraps the raw Get_InternalClient call.
-func (self IStaticPortMapping) Get_InternalClient(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InternalClient(pVal)))
+func (self IStaticPortMapping) Get_InternalClient() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_InternalClient(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self IStaticPortMapping) Get_Enabled(pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(pVal)))
+func (self IStaticPortMapping) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IStaticPortMapping) Get_Description(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pVal)))
+func (self IStaticPortMapping) Get_Description() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // EditInternalClient wraps the raw EditInternalClient call.
@@ -1959,18 +2287,24 @@ func WrapIStaticPortMappingCollection(raw *networkmanagementwindowsfirewall.ISta
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IStaticPortMappingCollection) Get__NewEnum(pVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pVal)))
+func (self IStaticPortMappingCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IStaticPortMappingCollection) Get_Item(lExternalPort int32, bstrProtocol foundation.BSTR, ppSPM **networkmanagementwindowsfirewall.IStaticPortMapping) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(lExternalPort, bstrProtocol, ppSPM)))
+func (self IStaticPortMappingCollection) Get_Item(lExternalPort int32, bstrProtocol foundation.BSTR) (*networkmanagementwindowsfirewall.IStaticPortMapping, error) {
+	var _ppSPM *networkmanagementwindowsfirewall.IStaticPortMapping
+	_hr := self.Raw.Get_Item(lExternalPort, bstrProtocol, &_ppSPM)
+	return _ppSPM, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IStaticPortMappingCollection) Get_Count(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pVal)))
+func (self IStaticPortMappingCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Count(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1979,8 +2313,10 @@ func (self IStaticPortMappingCollection) Remove(lExternalPort int32, bstrProtoco
 }
 
 // Add wraps the raw Add call.
-func (self IStaticPortMappingCollection) Add(lExternalPort int32, bstrProtocol foundation.BSTR, lInternalPort int32, bstrInternalClient foundation.BSTR, bEnabled foundation.VARIANT_BOOL, bstrDescription foundation.BSTR, ppSPM **networkmanagementwindowsfirewall.IStaticPortMapping) error {
-	return win32.HRESULTError(int32(self.Raw.Add(lExternalPort, bstrProtocol, lInternalPort, bstrInternalClient, bEnabled, bstrDescription, ppSPM)))
+func (self IStaticPortMappingCollection) Add(lExternalPort int32, bstrProtocol foundation.BSTR, lInternalPort int32, bstrInternalClient foundation.BSTR, bEnabled foundation.VARIANT_BOOL, bstrDescription foundation.BSTR) (*networkmanagementwindowsfirewall.IStaticPortMapping, error) {
+	var _ppSPM *networkmanagementwindowsfirewall.IStaticPortMapping
+	_hr := self.Raw.Add(lExternalPort, bstrProtocol, lInternalPort, bstrInternalClient, bEnabled, bstrDescription, &_ppSPM)
+	return _ppSPM, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPNAT is an idiomatic wrapper over the raw COM interface NetworkManagement.WindowsFirewall.IUPnPNAT with error-returning methods.
@@ -1995,16 +2331,22 @@ func WrapIUPnPNAT(raw *networkmanagementwindowsfirewall.IUPnPNAT) IUPnPNAT {
 }
 
 // Get_StaticPortMappingCollection wraps the raw Get_StaticPortMappingCollection call.
-func (self IUPnPNAT) Get_StaticPortMappingCollection(ppSPMs **networkmanagementwindowsfirewall.IStaticPortMappingCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StaticPortMappingCollection(ppSPMs)))
+func (self IUPnPNAT) Get_StaticPortMappingCollection() (*networkmanagementwindowsfirewall.IStaticPortMappingCollection, error) {
+	var _ppSPMs *networkmanagementwindowsfirewall.IStaticPortMappingCollection
+	_hr := self.Raw.Get_StaticPortMappingCollection(&_ppSPMs)
+	return _ppSPMs, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DynamicPortMappingCollection wraps the raw Get_DynamicPortMappingCollection call.
-func (self IUPnPNAT) Get_DynamicPortMappingCollection(ppDPMs **networkmanagementwindowsfirewall.IDynamicPortMappingCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DynamicPortMappingCollection(ppDPMs)))
+func (self IUPnPNAT) Get_DynamicPortMappingCollection() (*networkmanagementwindowsfirewall.IDynamicPortMappingCollection, error) {
+	var _ppDPMs *networkmanagementwindowsfirewall.IDynamicPortMappingCollection
+	_hr := self.Raw.Get_DynamicPortMappingCollection(&_ppDPMs)
+	return _ppDPMs, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NATEventManager wraps the raw Get_NATEventManager call.
-func (self IUPnPNAT) Get_NATEventManager(ppNEM **networkmanagementwindowsfirewall.INATEventManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NATEventManager(ppNEM)))
+func (self IUPnPNAT) Get_NATEventManager() (*networkmanagementwindowsfirewall.INATEventManager, error) {
+	var _ppNEM *networkmanagementwindowsfirewall.INATEventManager
+	_hr := self.Raw.Get_NATEventManager(&_ppNEM)
+	return _ppNEM, win32.HRESULTError(int32(_hr))
 }

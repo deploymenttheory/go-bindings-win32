@@ -34,18 +34,24 @@ func WrapDataSource(raw *systemsearch.DataSource) DataSource {
 }
 
 // GetDataMember wraps the raw GetDataMember call.
-func (self DataSource) GetDataMember(bstrDM *uint16, riid *win32.GUID, ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetDataMember(bstrDM, riid, ppunk)))
+func (self DataSource) GetDataMember(bstrDM *uint16, riid *win32.GUID) (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.GetDataMember(bstrDM, riid, &_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // GetDataMemberName wraps the raw GetDataMemberName call.
-func (self DataSource) GetDataMemberName(lIndex int32, pbstrDM **uint16) error {
-	return win32.HRESULTError(int32(self.Raw.GetDataMemberName(lIndex, pbstrDM)))
+func (self DataSource) GetDataMemberName(lIndex int32) (*uint16, error) {
+	var _pbstrDM *uint16
+	_hr := self.Raw.GetDataMemberName(lIndex, &_pbstrDM)
+	return _pbstrDM, win32.HRESULTError(int32(_hr))
 }
 
 // GetDataMemberCount wraps the raw GetDataMemberCount call.
-func (self DataSource) GetDataMemberCount(plCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetDataMemberCount(plCount)))
+func (self DataSource) GetDataMemberCount() (int32, error) {
+	var _plCount int32
+	_hr := self.Raw.GetDataMemberCount(&_plCount)
+	return _plCount, win32.HRESULTError(int32(_hr))
 }
 
 // AddDataSourceListener wraps the raw AddDataSourceListener call.
@@ -557,8 +563,10 @@ func WrapICondition(raw *systemsearch.ICondition) ICondition {
 }
 
 // GetConditionType wraps the raw GetConditionType call.
-func (self ICondition) GetConditionType(pNodeType *systemsearchcommon.CONDITION_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.GetConditionType(pNodeType)))
+func (self ICondition) GetConditionType() (systemsearchcommon.CONDITION_TYPE, error) {
+	var _pNodeType systemsearchcommon.CONDITION_TYPE
+	_hr := self.Raw.GetConditionType(&_pNodeType)
+	return _pNodeType, win32.HRESULTError(int32(_hr))
 }
 
 // GetSubConditions wraps the raw GetSubConditions call.
@@ -572,13 +580,17 @@ func (self ICondition) GetComparisonInfo(ppszPropertyName *foundation.PWSTR, pco
 }
 
 // GetValueType wraps the raw GetValueType call.
-func (self ICondition) GetValueType(ppszValueTypeName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetValueType(ppszValueTypeName)))
+func (self ICondition) GetValueType() (foundation.PWSTR, error) {
+	var _ppszValueTypeName foundation.PWSTR
+	_hr := self.Raw.GetValueType(&_ppszValueTypeName)
+	return _ppszValueTypeName, win32.HRESULTError(int32(_hr))
 }
 
 // GetValueNormalization wraps the raw GetValueNormalization call.
-func (self ICondition) GetValueNormalization(ppszNormalization *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetValueNormalization(ppszNormalization)))
+func (self ICondition) GetValueNormalization() (foundation.PWSTR, error) {
+	var _ppszNormalization foundation.PWSTR
+	_hr := self.Raw.GetValueNormalization(&_ppszNormalization)
+	return _ppszNormalization, win32.HRESULTError(int32(_hr))
 }
 
 // GetInputTerms wraps the raw GetInputTerms call.
@@ -587,8 +599,10 @@ func (self ICondition) GetInputTerms(ppPropertyTerm **systemsearch.IRichChunk, p
 }
 
 // Clone wraps the raw Clone call.
-func (self ICondition) Clone(ppc **systemsearch.ICondition) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppc)))
+func (self ICondition) Clone() (*systemsearch.ICondition, error) {
+	var _ppc *systemsearch.ICondition
+	_hr := self.Raw.Clone(&_ppc)
+	return _ppc, win32.HRESULTError(int32(_hr))
 }
 
 // ICondition2 is an idiomatic wrapper over the raw COM interface System.Search.ICondition2 with error-returning methods.
@@ -624,23 +638,29 @@ func WrapIConditionFactory(raw *systemsearch.IConditionFactory) IConditionFactor
 }
 
 // MakeNot wraps the raw MakeNot call.
-func (self IConditionFactory) MakeNot(pcSub *systemsearch.ICondition, fSimplify bool, ppcResult **systemsearch.ICondition) error {
+func (self IConditionFactory) MakeNot(pcSub *systemsearch.ICondition, fSimplify bool) (*systemsearch.ICondition, error) {
 	_fSimplify := foundation.BOOL(win32.Bool32(fSimplify))
-	return win32.HRESULTError(int32(self.Raw.MakeNot(pcSub, _fSimplify, ppcResult)))
+	var _ppcResult *systemsearch.ICondition
+	_hr := self.Raw.MakeNot(pcSub, _fSimplify, &_ppcResult)
+	return _ppcResult, win32.HRESULTError(int32(_hr))
 }
 
 // MakeAndOr wraps the raw MakeAndOr call.
-func (self IConditionFactory) MakeAndOr(ct systemsearchcommon.CONDITION_TYPE, peuSubs *systemcom.IEnumUnknown, fSimplify bool, ppcResult **systemsearch.ICondition) error {
+func (self IConditionFactory) MakeAndOr(ct systemsearchcommon.CONDITION_TYPE, peuSubs *systemcom.IEnumUnknown, fSimplify bool) (*systemsearch.ICondition, error) {
 	_fSimplify := foundation.BOOL(win32.Bool32(fSimplify))
-	return win32.HRESULTError(int32(self.Raw.MakeAndOr(ct, peuSubs, _fSimplify, ppcResult)))
+	var _ppcResult *systemsearch.ICondition
+	_hr := self.Raw.MakeAndOr(ct, peuSubs, _fSimplify, &_ppcResult)
+	return _ppcResult, win32.HRESULTError(int32(_hr))
 }
 
 // MakeLeaf wraps the raw MakeLeaf call.
-func (self IConditionFactory) MakeLeaf(pszPropertyName string, cop systemsearchcommon.CONDITION_OPERATION, pszValueType string, ppropvar *systemcomstructuredstorage.PROPVARIANT, pPropertyNameTerm *systemsearch.IRichChunk, pOperationTerm *systemsearch.IRichChunk, pValueTerm *systemsearch.IRichChunk, fExpand bool, ppcResult **systemsearch.ICondition) error {
+func (self IConditionFactory) MakeLeaf(pszPropertyName string, cop systemsearchcommon.CONDITION_OPERATION, pszValueType string, ppropvar *systemcomstructuredstorage.PROPVARIANT, pPropertyNameTerm *systemsearch.IRichChunk, pOperationTerm *systemsearch.IRichChunk, pValueTerm *systemsearch.IRichChunk, fExpand bool) (*systemsearch.ICondition, error) {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	_pszValueType := win32.UTF16Ptr(pszValueType)
 	_fExpand := foundation.BOOL(win32.Bool32(fExpand))
-	return win32.HRESULTError(int32(self.Raw.MakeLeaf(foundation.PWSTR(_pszPropertyName), cop, foundation.PWSTR(_pszValueType), ppropvar, pPropertyNameTerm, pOperationTerm, pValueTerm, _fExpand, ppcResult)))
+	var _ppcResult *systemsearch.ICondition
+	_hr := self.Raw.MakeLeaf(foundation.PWSTR(_pszPropertyName), cop, foundation.PWSTR(_pszValueType), ppropvar, pPropertyNameTerm, pOperationTerm, pValueTerm, _fExpand, &_ppcResult)
+	return _ppcResult, win32.HRESULTError(int32(_hr))
 }
 
 // Resolve wraps the raw Resolve call.
@@ -733,13 +753,15 @@ func (self IConditionGenerator) RecognizeNamedEntities(pszInputString string, lc
 }
 
 // GenerateForLeaf wraps the raw GenerateForLeaf call.
-func (self IConditionGenerator) GenerateForLeaf(pConditionFactory *systemsearch.IConditionFactory, pszPropertyName string, cop systemsearchcommon.CONDITION_OPERATION, pszValueType string, pszValue string, pszValue2 string, pPropertyNameTerm *systemsearch.IRichChunk, pOperationTerm *systemsearch.IRichChunk, pValueTerm *systemsearch.IRichChunk, automaticWildcard bool, pNoStringQuery *foundation.BOOL, ppQueryExpression **systemsearch.ICondition) error {
+func (self IConditionGenerator) GenerateForLeaf(pConditionFactory *systemsearch.IConditionFactory, pszPropertyName string, cop systemsearchcommon.CONDITION_OPERATION, pszValueType string, pszValue string, pszValue2 string, pPropertyNameTerm *systemsearch.IRichChunk, pOperationTerm *systemsearch.IRichChunk, pValueTerm *systemsearch.IRichChunk, automaticWildcard bool, pNoStringQuery *foundation.BOOL) (*systemsearch.ICondition, error) {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	_pszValueType := win32.UTF16Ptr(pszValueType)
 	_pszValue := win32.UTF16Ptr(pszValue)
 	_pszValue2 := win32.UTF16Ptr(pszValue2)
 	_automaticWildcard := foundation.BOOL(win32.Bool32(automaticWildcard))
-	return win32.HRESULTError(int32(self.Raw.GenerateForLeaf(pConditionFactory, foundation.PWSTR(_pszPropertyName), cop, foundation.PWSTR(_pszValueType), foundation.PWSTR(_pszValue), foundation.PWSTR(_pszValue2), pPropertyNameTerm, pOperationTerm, pValueTerm, _automaticWildcard, pNoStringQuery, ppQueryExpression)))
+	var _ppQueryExpression *systemsearch.ICondition
+	_hr := self.Raw.GenerateForLeaf(pConditionFactory, foundation.PWSTR(_pszPropertyName), cop, foundation.PWSTR(_pszValueType), foundation.PWSTR(_pszValue), foundation.PWSTR(_pszValue2), pPropertyNameTerm, pOperationTerm, pValueTerm, _automaticWildcard, pNoStringQuery, &_ppQueryExpression)
+	return _ppQueryExpression, win32.HRESULTError(int32(_hr))
 }
 
 // DefaultPhrase wraps the raw DefaultPhrase call.
@@ -1186,8 +1208,10 @@ func (self IEntity) Name(ppszName *foundation.PWSTR) error {
 }
 
 // Base wraps the raw Base call.
-func (self IEntity) Base(pBaseEntity **systemsearch.IEntity) error {
-	return win32.HRESULTError(int32(self.Raw.Base(pBaseEntity)))
+func (self IEntity) Base() (*systemsearch.IEntity, error) {
+	var _pBaseEntity *systemsearch.IEntity
+	_hr := self.Raw.Base(&_pBaseEntity)
+	return _pBaseEntity, win32.HRESULTError(int32(_hr))
 }
 
 // Relationships wraps the raw Relationships call.
@@ -1196,9 +1220,11 @@ func (self IEntity) Relationships(riid *win32.GUID, pRelationships *unsafe.Point
 }
 
 // GetRelationship wraps the raw GetRelationship call.
-func (self IEntity) GetRelationship(pszRelationName string, pRelationship **systemsearch.IRelationship) error {
+func (self IEntity) GetRelationship(pszRelationName string) (*systemsearch.IRelationship, error) {
 	_pszRelationName := win32.UTF16Ptr(pszRelationName)
-	return win32.HRESULTError(int32(self.Raw.GetRelationship(foundation.PWSTR(_pszRelationName), pRelationship)))
+	var _pRelationship *systemsearch.IRelationship
+	_hr := self.Raw.GetRelationship(foundation.PWSTR(_pszRelationName), &_pRelationship)
+	return _pRelationship, win32.HRESULTError(int32(_hr))
 }
 
 // MetaData wraps the raw MetaData call.
@@ -1212,9 +1238,11 @@ func (self IEntity) NamedEntities(riid *win32.GUID, pNamedEntities *unsafe.Point
 }
 
 // GetNamedEntity wraps the raw GetNamedEntity call.
-func (self IEntity) GetNamedEntity(pszValue string, ppNamedEntity **systemsearch.INamedEntity) error {
+func (self IEntity) GetNamedEntity(pszValue string) (*systemsearch.INamedEntity, error) {
 	_pszValue := win32.UTF16Ptr(pszValue)
-	return win32.HRESULTError(int32(self.Raw.GetNamedEntity(foundation.PWSTR(_pszValue), ppNamedEntity)))
+	var _ppNamedEntity *systemsearch.INamedEntity
+	_hr := self.Raw.GetNamedEntity(foundation.PWSTR(_pszValue), &_ppNamedEntity)
+	return _ppNamedEntity, win32.HRESULTError(int32(_hr))
 }
 
 // DefaultPhrase wraps the raw DefaultPhrase call.
@@ -1285,8 +1313,10 @@ func (self IEnumSearchRoots) Reset() error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumSearchRoots) Clone(ppenum **systemsearch.IEnumSearchRoots) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppenum)))
+func (self IEnumSearchRoots) Clone() (*systemsearch.IEnumSearchRoots, error) {
+	var _ppenum *systemsearch.IEnumSearchRoots
+	_hr := self.Raw.Clone(&_ppenum)
+	return _ppenum, win32.HRESULTError(int32(_hr))
 }
 
 // IEnumSearchScopeRules is an idiomatic wrapper over the raw COM interface System.Search.IEnumSearchScopeRules with error-returning methods.
@@ -1316,8 +1346,10 @@ func (self IEnumSearchScopeRules) Reset() error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IEnumSearchScopeRules) Clone(ppenum **systemsearch.IEnumSearchScopeRules) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppenum)))
+func (self IEnumSearchScopeRules) Clone() (*systemsearch.IEnumSearchScopeRules, error) {
+	var _ppenum *systemsearch.IEnumSearchScopeRules
+	_hr := self.Raw.Clone(&_ppenum)
+	return _ppenum, win32.HRESULTError(int32(_hr))
 }
 
 // IEnumSubscription is an idiomatic wrapper over the raw COM interface System.Search.IEnumSubscription with error-returning methods.
@@ -1694,8 +1726,10 @@ func WrapINamedEntity(raw *systemsearch.INamedEntity) INamedEntity {
 }
 
 // GetValue wraps the raw GetValue call.
-func (self INamedEntity) GetValue(ppszValue *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetValue(ppszValue)))
+func (self INamedEntity) GetValue() (foundation.PWSTR, error) {
+	var _ppszValue foundation.PWSTR
+	_hr := self.Raw.GetValue(&_ppszValue)
+	return _ppszValue, win32.HRESULTError(int32(_hr))
 }
 
 // DefaultPhrase wraps the raw DefaultPhrase call.
@@ -1860,9 +1894,11 @@ func WrapIQueryParser(raw *systemsearch.IQueryParser) IQueryParser {
 }
 
 // Parse wraps the raw Parse call.
-func (self IQueryParser) Parse(pszInputString string, pCustomProperties *systemcom.IEnumUnknown, ppSolution **systemsearch.IQuerySolution) error {
+func (self IQueryParser) Parse(pszInputString string, pCustomProperties *systemcom.IEnumUnknown) (*systemsearch.IQuerySolution, error) {
 	_pszInputString := win32.UTF16Ptr(pszInputString)
-	return win32.HRESULTError(int32(self.Raw.Parse(foundation.PWSTR(_pszInputString), pCustomProperties, ppSolution)))
+	var _ppSolution *systemsearch.IQuerySolution
+	_hr := self.Raw.Parse(foundation.PWSTR(_pszInputString), pCustomProperties, &_ppSolution)
+	return _ppSolution, win32.HRESULTError(int32(_hr))
 }
 
 // SetOption wraps the raw SetOption call.
@@ -1871,8 +1907,10 @@ func (self IQueryParser) SetOption(option systemsearch.STRUCTURED_QUERY_SINGLE_O
 }
 
 // GetOption wraps the raw GetOption call.
-func (self IQueryParser) GetOption(option systemsearch.STRUCTURED_QUERY_SINGLE_OPTION, pOptionValue *systemcomstructuredstorage.PROPVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetOption(option, pOptionValue)))
+func (self IQueryParser) GetOption(option systemsearch.STRUCTURED_QUERY_SINGLE_OPTION) (systemcomstructuredstorage.PROPVARIANT, error) {
+	var _pOptionValue systemcomstructuredstorage.PROPVARIANT
+	_hr := self.Raw.GetOption(option, &_pOptionValue)
+	return _pOptionValue, win32.HRESULTError(int32(_hr))
 }
 
 // SetMultiOption wraps the raw SetMultiOption call.
@@ -1882,8 +1920,10 @@ func (self IQueryParser) SetMultiOption(option systemsearch.STRUCTURED_QUERY_MUL
 }
 
 // GetSchemaProvider wraps the raw GetSchemaProvider call.
-func (self IQueryParser) GetSchemaProvider(ppSchemaProvider **systemsearch.ISchemaProvider) error {
-	return win32.HRESULTError(int32(self.Raw.GetSchemaProvider(ppSchemaProvider)))
+func (self IQueryParser) GetSchemaProvider() (*systemsearch.ISchemaProvider, error) {
+	var _ppSchemaProvider *systemsearch.ISchemaProvider
+	_hr := self.Raw.GetSchemaProvider(&_ppSchemaProvider)
+	return _ppSchemaProvider, win32.HRESULTError(int32(_hr))
 }
 
 // RestateToString wraps the raw RestateToString call.
@@ -1893,10 +1933,12 @@ func (self IQueryParser) RestateToString(pCondition *systemsearch.ICondition, fU
 }
 
 // ParsePropertyValue wraps the raw ParsePropertyValue call.
-func (self IQueryParser) ParsePropertyValue(pszPropertyName string, pszInputString string, ppSolution **systemsearch.IQuerySolution) error {
+func (self IQueryParser) ParsePropertyValue(pszPropertyName string, pszInputString string) (*systemsearch.IQuerySolution, error) {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	_pszInputString := win32.UTF16Ptr(pszInputString)
-	return win32.HRESULTError(int32(self.Raw.ParsePropertyValue(foundation.PWSTR(_pszPropertyName), foundation.PWSTR(_pszInputString), ppSolution)))
+	var _ppSolution *systemsearch.IQuerySolution
+	_hr := self.Raw.ParsePropertyValue(foundation.PWSTR(_pszPropertyName), foundation.PWSTR(_pszInputString), &_ppSolution)
+	return _ppSolution, win32.HRESULTError(int32(_hr))
 }
 
 // RestatePropertyValueToString wraps the raw RestatePropertyValueToString call.
@@ -2027,13 +2069,17 @@ func (self IRelationship) Name(ppszName *foundation.PWSTR) error {
 }
 
 // IsReal wraps the raw IsReal call.
-func (self IRelationship) IsReal(pIsReal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsReal(pIsReal)))
+func (self IRelationship) IsReal() (foundation.BOOL, error) {
+	var _pIsReal foundation.BOOL
+	_hr := self.Raw.IsReal(&_pIsReal)
+	return _pIsReal, win32.HRESULTError(int32(_hr))
 }
 
 // Destination wraps the raw Destination call.
-func (self IRelationship) Destination(pDestinationEntity **systemsearch.IEntity) error {
-	return win32.HRESULTError(int32(self.Raw.Destination(pDestinationEntity)))
+func (self IRelationship) Destination() (*systemsearch.IEntity, error) {
+	var _pDestinationEntity *systemsearch.IEntity
+	_hr := self.Raw.Destination(&_pDestinationEntity)
+	return _pDestinationEntity, win32.HRESULTError(int32(_hr))
 }
 
 // MetaData wraps the raw MetaData call.
@@ -2975,9 +3021,11 @@ func WrapISchemaLocalizerSupport(raw *systemsearch.ISchemaLocalizerSupport) ISch
 }
 
 // Localize wraps the raw Localize call.
-func (self ISchemaLocalizerSupport) Localize(pszGlobalString string, ppszLocalString *foundation.PWSTR) error {
+func (self ISchemaLocalizerSupport) Localize(pszGlobalString string) (foundation.PWSTR, error) {
 	_pszGlobalString := win32.UTF16Ptr(pszGlobalString)
-	return win32.HRESULTError(int32(self.Raw.Localize(foundation.PWSTR(_pszGlobalString), ppszLocalString)))
+	var _ppszLocalString foundation.PWSTR
+	_hr := self.Raw.Localize(foundation.PWSTR(_pszGlobalString), &_ppszLocalString)
+	return _ppszLocalString, win32.HRESULTError(int32(_hr))
 }
 
 // ISchemaLock is an idiomatic wrapper over the raw COM interface System.Search.ISchemaLock with error-returning methods.
@@ -3018,14 +3066,18 @@ func (self ISchemaProvider) Entities(riid *win32.GUID, pEntities *unsafe.Pointer
 }
 
 // RootEntity wraps the raw RootEntity call.
-func (self ISchemaProvider) RootEntity(pRootEntity **systemsearch.IEntity) error {
-	return win32.HRESULTError(int32(self.Raw.RootEntity(pRootEntity)))
+func (self ISchemaProvider) RootEntity() (*systemsearch.IEntity, error) {
+	var _pRootEntity *systemsearch.IEntity
+	_hr := self.Raw.RootEntity(&_pRootEntity)
+	return _pRootEntity, win32.HRESULTError(int32(_hr))
 }
 
 // GetEntity wraps the raw GetEntity call.
-func (self ISchemaProvider) GetEntity(pszEntityName string, pEntity **systemsearch.IEntity) error {
+func (self ISchemaProvider) GetEntity(pszEntityName string) (*systemsearch.IEntity, error) {
 	_pszEntityName := win32.UTF16Ptr(pszEntityName)
-	return win32.HRESULTError(int32(self.Raw.GetEntity(foundation.PWSTR(_pszEntityName), pEntity)))
+	var _pEntity *systemsearch.IEntity
+	_hr := self.Raw.GetEntity(foundation.PWSTR(_pszEntityName), &_pEntity)
+	return _pEntity, win32.HRESULTError(int32(_hr))
 }
 
 // MetaData wraps the raw MetaData call.
@@ -3093,14 +3145,18 @@ func WrapISearchCatalogManager(raw *systemsearch.ISearchCatalogManager) ISearchC
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ISearchCatalogManager) Get_Name(pszName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pszName)))
+func (self ISearchCatalogManager) Get_Name() (foundation.PWSTR, error) {
+	var _pszName foundation.PWSTR
+	_hr := self.Raw.Get_Name(&_pszName)
+	return _pszName, win32.HRESULTError(int32(_hr))
 }
 
 // GetParameter wraps the raw GetParameter call.
-func (self ISearchCatalogManager) GetParameter(pszName string, ppValue **systemcomstructuredstorage.PROPVARIANT) error {
+func (self ISearchCatalogManager) GetParameter(pszName string) (*systemcomstructuredstorage.PROPVARIANT, error) {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(self.Raw.GetParameter(foundation.PWSTR(_pszName), ppValue)))
+	var _ppValue *systemcomstructuredstorage.PROPVARIANT
+	_hr := self.Raw.GetParameter(foundation.PWSTR(_pszName), &_ppValue)
+	return _ppValue, win32.HRESULTError(int32(_hr))
 }
 
 // SetParameter wraps the raw SetParameter call.
@@ -3142,8 +3198,10 @@ func (self ISearchCatalogManager) Put_ConnectTimeout(dwConnectTimeout uint32) er
 }
 
 // Get_ConnectTimeout wraps the raw Get_ConnectTimeout call.
-func (self ISearchCatalogManager) Get_ConnectTimeout(pdwConnectTimeout *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ConnectTimeout(pdwConnectTimeout)))
+func (self ISearchCatalogManager) Get_ConnectTimeout() (uint32, error) {
+	var _pdwConnectTimeout uint32
+	_hr := self.Raw.Get_ConnectTimeout(&_pdwConnectTimeout)
+	return _pdwConnectTimeout, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DataTimeout wraps the raw Put_DataTimeout call.
@@ -3152,13 +3210,17 @@ func (self ISearchCatalogManager) Put_DataTimeout(dwDataTimeout uint32) error {
 }
 
 // Get_DataTimeout wraps the raw Get_DataTimeout call.
-func (self ISearchCatalogManager) Get_DataTimeout(pdwDataTimeout *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DataTimeout(pdwDataTimeout)))
+func (self ISearchCatalogManager) Get_DataTimeout() (uint32, error) {
+	var _pdwDataTimeout uint32
+	_hr := self.Raw.Get_DataTimeout(&_pdwDataTimeout)
+	return _pdwDataTimeout, win32.HRESULTError(int32(_hr))
 }
 
 // NumberOfItems wraps the raw NumberOfItems call.
-func (self ISearchCatalogManager) NumberOfItems(plCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.NumberOfItems(plCount)))
+func (self ISearchCatalogManager) NumberOfItems() (int32, error) {
+	var _plCount int32
+	_hr := self.Raw.NumberOfItems(&_plCount)
+	return _plCount, win32.HRESULTError(int32(_hr))
 }
 
 // NumberOfItemsToIndex wraps the raw NumberOfItemsToIndex call.
@@ -3167,19 +3229,25 @@ func (self ISearchCatalogManager) NumberOfItemsToIndex(plIncrementalCount *int32
 }
 
 // URLBeingIndexed wraps the raw URLBeingIndexed call.
-func (self ISearchCatalogManager) URLBeingIndexed(pszUrl *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.URLBeingIndexed(pszUrl)))
+func (self ISearchCatalogManager) URLBeingIndexed() (foundation.PWSTR, error) {
+	var _pszUrl foundation.PWSTR
+	_hr := self.Raw.URLBeingIndexed(&_pszUrl)
+	return _pszUrl, win32.HRESULTError(int32(_hr))
 }
 
 // GetURLIndexingState wraps the raw GetURLIndexingState call.
-func (self ISearchCatalogManager) GetURLIndexingState(pszURL string, pdwState *uint32) error {
+func (self ISearchCatalogManager) GetURLIndexingState(pszURL string) (uint32, error) {
 	_pszURL := win32.UTF16Ptr(pszURL)
-	return win32.HRESULTError(int32(self.Raw.GetURLIndexingState(foundation.PWSTR(_pszURL), pdwState)))
+	var _pdwState uint32
+	_hr := self.Raw.GetURLIndexingState(foundation.PWSTR(_pszURL), &_pdwState)
+	return _pdwState, win32.HRESULTError(int32(_hr))
 }
 
 // GetPersistentItemsChangedSink wraps the raw GetPersistentItemsChangedSink call.
-func (self ISearchCatalogManager) GetPersistentItemsChangedSink(ppISearchPersistentItemsChangedSink **systemsearch.ISearchPersistentItemsChangedSink) error {
-	return win32.HRESULTError(int32(self.Raw.GetPersistentItemsChangedSink(ppISearchPersistentItemsChangedSink)))
+func (self ISearchCatalogManager) GetPersistentItemsChangedSink() (*systemsearch.ISearchPersistentItemsChangedSink, error) {
+	var _ppISearchPersistentItemsChangedSink *systemsearch.ISearchPersistentItemsChangedSink
+	_hr := self.Raw.GetPersistentItemsChangedSink(&_ppISearchPersistentItemsChangedSink)
+	return _ppISearchPersistentItemsChangedSink, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterViewForNotification wraps the raw RegisterViewForNotification call.
@@ -3206,13 +3274,17 @@ func (self ISearchCatalogManager) SetExtensionClusion(pszExtension string, fExcl
 }
 
 // EnumerateExcludedExtensions wraps the raw EnumerateExcludedExtensions call.
-func (self ISearchCatalogManager) EnumerateExcludedExtensions(ppExtensions **systemcom.IEnumString) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateExcludedExtensions(ppExtensions)))
+func (self ISearchCatalogManager) EnumerateExcludedExtensions() (*systemcom.IEnumString, error) {
+	var _ppExtensions *systemcom.IEnumString
+	_hr := self.Raw.EnumerateExcludedExtensions(&_ppExtensions)
+	return _ppExtensions, win32.HRESULTError(int32(_hr))
 }
 
 // GetQueryHelper wraps the raw GetQueryHelper call.
-func (self ISearchCatalogManager) GetQueryHelper(ppSearchQueryHelper **systemsearch.ISearchQueryHelper) error {
-	return win32.HRESULTError(int32(self.Raw.GetQueryHelper(ppSearchQueryHelper)))
+func (self ISearchCatalogManager) GetQueryHelper() (*systemsearch.ISearchQueryHelper, error) {
+	var _ppSearchQueryHelper *systemsearch.ISearchQueryHelper
+	_hr := self.Raw.GetQueryHelper(&_ppSearchQueryHelper)
+	return _ppSearchQueryHelper, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DiacriticSensitivity wraps the raw Put_DiacriticSensitivity call.
@@ -3222,13 +3294,17 @@ func (self ISearchCatalogManager) Put_DiacriticSensitivity(fDiacriticSensitive b
 }
 
 // Get_DiacriticSensitivity wraps the raw Get_DiacriticSensitivity call.
-func (self ISearchCatalogManager) Get_DiacriticSensitivity(pfDiacriticSensitive *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DiacriticSensitivity(pfDiacriticSensitive)))
+func (self ISearchCatalogManager) Get_DiacriticSensitivity() (foundation.BOOL, error) {
+	var _pfDiacriticSensitive foundation.BOOL
+	_hr := self.Raw.Get_DiacriticSensitivity(&_pfDiacriticSensitive)
+	return _pfDiacriticSensitive, win32.HRESULTError(int32(_hr))
 }
 
 // GetCrawlScopeManager wraps the raw GetCrawlScopeManager call.
-func (self ISearchCatalogManager) GetCrawlScopeManager(ppCrawlScopeManager **systemsearch.ISearchCrawlScopeManager) error {
-	return win32.HRESULTError(int32(self.Raw.GetCrawlScopeManager(ppCrawlScopeManager)))
+func (self ISearchCatalogManager) GetCrawlScopeManager() (*systemsearch.ISearchCrawlScopeManager, error) {
+	var _ppCrawlScopeManager *systemsearch.ISearchCrawlScopeManager
+	_hr := self.Raw.GetCrawlScopeManager(&_ppCrawlScopeManager)
+	return _ppCrawlScopeManager, win32.HRESULTError(int32(_hr))
 }
 
 // ISearchCatalogManager2 is an idiomatic wrapper over the raw COM interface System.Search.ISearchCatalogManager2 with error-returning methods.
@@ -3260,8 +3336,10 @@ func WrapISearchCatalogManager3(raw *systemsearch.ISearchCatalogManager3) ISearc
 }
 
 // IsContainsSemanticSupported wraps the raw IsContainsSemanticSupported call.
-func (self ISearchCatalogManager3) IsContainsSemanticSupported(isContainsSemanticSupported *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsContainsSemanticSupported(isContainsSemanticSupported)))
+func (self ISearchCatalogManager3) IsContainsSemanticSupported() (foundation.BOOL, error) {
+	var _isContainsSemanticSupported foundation.BOOL
+	_hr := self.Raw.IsContainsSemanticSupported(&_isContainsSemanticSupported)
+	return _isContainsSemanticSupported, win32.HRESULTError(int32(_hr))
 }
 
 // ISearchCrawlScopeManager is an idiomatic wrapper over the raw COM interface System.Search.ISearchCrawlScopeManager with error-returning methods.
@@ -3294,8 +3372,10 @@ func (self ISearchCrawlScopeManager) RemoveRoot(pszURL string) error {
 }
 
 // EnumerateRoots wraps the raw EnumerateRoots call.
-func (self ISearchCrawlScopeManager) EnumerateRoots(ppSearchRoots **systemsearch.IEnumSearchRoots) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateRoots(ppSearchRoots)))
+func (self ISearchCrawlScopeManager) EnumerateRoots() (*systemsearch.IEnumSearchRoots, error) {
+	var _ppSearchRoots *systemsearch.IEnumSearchRoots
+	_hr := self.Raw.EnumerateRoots(&_ppSearchRoots)
+	return _ppSearchRoots, win32.HRESULTError(int32(_hr))
 }
 
 // AddHierarchicalScope wraps the raw AddHierarchicalScope call.
@@ -3322,26 +3402,34 @@ func (self ISearchCrawlScopeManager) RemoveScopeRule(pszRule string) error {
 }
 
 // EnumerateScopeRules wraps the raw EnumerateScopeRules call.
-func (self ISearchCrawlScopeManager) EnumerateScopeRules(ppSearchScopeRules **systemsearch.IEnumSearchScopeRules) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateScopeRules(ppSearchScopeRules)))
+func (self ISearchCrawlScopeManager) EnumerateScopeRules() (*systemsearch.IEnumSearchScopeRules, error) {
+	var _ppSearchScopeRules *systemsearch.IEnumSearchScopeRules
+	_hr := self.Raw.EnumerateScopeRules(&_ppSearchScopeRules)
+	return _ppSearchScopeRules, win32.HRESULTError(int32(_hr))
 }
 
 // HasParentScopeRule wraps the raw HasParentScopeRule call.
-func (self ISearchCrawlScopeManager) HasParentScopeRule(pszURL string, pfHasParentRule *foundation.BOOL) error {
+func (self ISearchCrawlScopeManager) HasParentScopeRule(pszURL string) (foundation.BOOL, error) {
 	_pszURL := win32.UTF16Ptr(pszURL)
-	return win32.HRESULTError(int32(self.Raw.HasParentScopeRule(foundation.PWSTR(_pszURL), pfHasParentRule)))
+	var _pfHasParentRule foundation.BOOL
+	_hr := self.Raw.HasParentScopeRule(foundation.PWSTR(_pszURL), &_pfHasParentRule)
+	return _pfHasParentRule, win32.HRESULTError(int32(_hr))
 }
 
 // HasChildScopeRule wraps the raw HasChildScopeRule call.
-func (self ISearchCrawlScopeManager) HasChildScopeRule(pszURL string, pfHasChildRule *foundation.BOOL) error {
+func (self ISearchCrawlScopeManager) HasChildScopeRule(pszURL string) (foundation.BOOL, error) {
 	_pszURL := win32.UTF16Ptr(pszURL)
-	return win32.HRESULTError(int32(self.Raw.HasChildScopeRule(foundation.PWSTR(_pszURL), pfHasChildRule)))
+	var _pfHasChildRule foundation.BOOL
+	_hr := self.Raw.HasChildScopeRule(foundation.PWSTR(_pszURL), &_pfHasChildRule)
+	return _pfHasChildRule, win32.HRESULTError(int32(_hr))
 }
 
 // IncludedInCrawlScope wraps the raw IncludedInCrawlScope call.
-func (self ISearchCrawlScopeManager) IncludedInCrawlScope(pszURL string, pfIsIncluded *foundation.BOOL) error {
+func (self ISearchCrawlScopeManager) IncludedInCrawlScope(pszURL string) (foundation.BOOL, error) {
 	_pszURL := win32.UTF16Ptr(pszURL)
-	return win32.HRESULTError(int32(self.Raw.IncludedInCrawlScope(foundation.PWSTR(_pszURL), pfIsIncluded)))
+	var _pfIsIncluded foundation.BOOL
+	_hr := self.Raw.IncludedInCrawlScope(foundation.PWSTR(_pszURL), &_pfIsIncluded)
+	return _pfIsIncluded, win32.HRESULTError(int32(_hr))
 }
 
 // IncludedInCrawlScopeEx wraps the raw IncludedInCrawlScopeEx call.
@@ -3361,9 +3449,11 @@ func (self ISearchCrawlScopeManager) SaveAll() error {
 }
 
 // GetParentScopeVersionId wraps the raw GetParentScopeVersionId call.
-func (self ISearchCrawlScopeManager) GetParentScopeVersionId(pszURL string, plScopeId *int32) error {
+func (self ISearchCrawlScopeManager) GetParentScopeVersionId(pszURL string) (int32, error) {
 	_pszURL := win32.UTF16Ptr(pszURL)
-	return win32.HRESULTError(int32(self.Raw.GetParentScopeVersionId(foundation.PWSTR(_pszURL), plScopeId)))
+	var _plScopeId int32
+	_hr := self.Raw.GetParentScopeVersionId(foundation.PWSTR(_pszURL), &_plScopeId)
+	return _plScopeId, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveDefaultScopeRule wraps the raw RemoveDefaultScopeRule call.
@@ -3434,8 +3524,10 @@ func (self ISearchLanguageSupport) SetDiacriticSensitivity(fDiacriticSensitive b
 }
 
 // GetDiacriticSensitivity wraps the raw GetDiacriticSensitivity call.
-func (self ISearchLanguageSupport) GetDiacriticSensitivity(pfDiacriticSensitive *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetDiacriticSensitivity(pfDiacriticSensitive)))
+func (self ISearchLanguageSupport) GetDiacriticSensitivity() (foundation.BOOL, error) {
+	var _pfDiacriticSensitive foundation.BOOL
+	_hr := self.Raw.GetDiacriticSensitivity(&_pfDiacriticSensitive)
+	return _pfDiacriticSensitive, win32.HRESULTError(int32(_hr))
 }
 
 // LoadWordBreaker wraps the raw LoadWordBreaker call.
@@ -3477,9 +3569,11 @@ func (self ISearchManager) GetIndexerVersion(pdwMajor *uint32, pdwMinor *uint32)
 }
 
 // GetParameter wraps the raw GetParameter call.
-func (self ISearchManager) GetParameter(pszName string, ppValue **systemcomstructuredstorage.PROPVARIANT) error {
+func (self ISearchManager) GetParameter(pszName string) (*systemcomstructuredstorage.PROPVARIANT, error) {
 	_pszName := win32.UTF16Ptr(pszName)
-	return win32.HRESULTError(int32(self.Raw.GetParameter(foundation.PWSTR(_pszName), ppValue)))
+	var _ppValue *systemcomstructuredstorage.PROPVARIANT
+	_hr := self.Raw.GetParameter(foundation.PWSTR(_pszName), &_ppValue)
+	return _ppValue, win32.HRESULTError(int32(_hr))
 }
 
 // SetParameter wraps the raw SetParameter call.
@@ -3489,13 +3583,17 @@ func (self ISearchManager) SetParameter(pszName string, pValue *systemcomstructu
 }
 
 // Get_ProxyName wraps the raw Get_ProxyName call.
-func (self ISearchManager) Get_ProxyName(ppszProxyName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProxyName(ppszProxyName)))
+func (self ISearchManager) Get_ProxyName() (foundation.PWSTR, error) {
+	var _ppszProxyName foundation.PWSTR
+	_hr := self.Raw.Get_ProxyName(&_ppszProxyName)
+	return _ppszProxyName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_BypassList wraps the raw Get_BypassList call.
-func (self ISearchManager) Get_BypassList(ppszBypassList *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BypassList(ppszBypassList)))
+func (self ISearchManager) Get_BypassList() (foundation.PWSTR, error) {
+	var _ppszBypassList foundation.PWSTR
+	_hr := self.Raw.Get_BypassList(&_ppszBypassList)
+	return _ppszBypassList, win32.HRESULTError(int32(_hr))
 }
 
 // SetProxy wraps the raw SetProxy call.
@@ -3507,14 +3605,18 @@ func (self ISearchManager) SetProxy(sUseProxy systemsearch.PROXY_ACCESS, fLocalB
 }
 
 // GetCatalog wraps the raw GetCatalog call.
-func (self ISearchManager) GetCatalog(pszCatalog string, ppCatalogManager **systemsearch.ISearchCatalogManager) error {
+func (self ISearchManager) GetCatalog(pszCatalog string) (*systemsearch.ISearchCatalogManager, error) {
 	_pszCatalog := win32.UTF16Ptr(pszCatalog)
-	return win32.HRESULTError(int32(self.Raw.GetCatalog(foundation.PWSTR(_pszCatalog), ppCatalogManager)))
+	var _ppCatalogManager *systemsearch.ISearchCatalogManager
+	_hr := self.Raw.GetCatalog(foundation.PWSTR(_pszCatalog), &_ppCatalogManager)
+	return _ppCatalogManager, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserAgent wraps the raw Get_UserAgent call.
-func (self ISearchManager) Get_UserAgent(ppszUserAgent *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserAgent(ppszUserAgent)))
+func (self ISearchManager) Get_UserAgent() (foundation.PWSTR, error) {
+	var _ppszUserAgent foundation.PWSTR
+	_hr := self.Raw.Get_UserAgent(&_ppszUserAgent)
+	return _ppszUserAgent, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UserAgent wraps the raw Put_UserAgent call.
@@ -3524,18 +3626,24 @@ func (self ISearchManager) Put_UserAgent(pszUserAgent string) error {
 }
 
 // Get_UseProxy wraps the raw Get_UseProxy call.
-func (self ISearchManager) Get_UseProxy(pUseProxy *systemsearch.PROXY_ACCESS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UseProxy(pUseProxy)))
+func (self ISearchManager) Get_UseProxy() (systemsearch.PROXY_ACCESS, error) {
+	var _pUseProxy systemsearch.PROXY_ACCESS
+	_hr := self.Raw.Get_UseProxy(&_pUseProxy)
+	return _pUseProxy, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalBypass wraps the raw Get_LocalBypass call.
-func (self ISearchManager) Get_LocalBypass(pfLocalBypass *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalBypass(pfLocalBypass)))
+func (self ISearchManager) Get_LocalBypass() (foundation.BOOL, error) {
+	var _pfLocalBypass foundation.BOOL
+	_hr := self.Raw.Get_LocalBypass(&_pfLocalBypass)
+	return _pfLocalBypass, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PortNumber wraps the raw Get_PortNumber call.
-func (self ISearchManager) Get_PortNumber(pdwPortNumber *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PortNumber(pdwPortNumber)))
+func (self ISearchManager) Get_PortNumber() (uint32, error) {
+	var _pdwPortNumber uint32
+	_hr := self.Raw.Get_PortNumber(&_pdwPortNumber)
+	return _pdwPortNumber, win32.HRESULTError(int32(_hr))
 }
 
 // ISearchManager2 is an idiomatic wrapper over the raw COM interface System.Search.ISearchManager2 with error-returning methods.
@@ -3697,8 +3805,10 @@ func WrapISearchQueryHelper(raw *systemsearch.ISearchQueryHelper) ISearchQueryHe
 }
 
 // Get_ConnectionString wraps the raw Get_ConnectionString call.
-func (self ISearchQueryHelper) Get_ConnectionString(pszConnectionString *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ConnectionString(pszConnectionString)))
+func (self ISearchQueryHelper) Get_ConnectionString() (foundation.PWSTR, error) {
+	var _pszConnectionString foundation.PWSTR
+	_hr := self.Raw.Get_ConnectionString(&_pszConnectionString)
+	return _pszConnectionString, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QueryContentLocale wraps the raw Put_QueryContentLocale call.
@@ -3707,8 +3817,10 @@ func (self ISearchQueryHelper) Put_QueryContentLocale(lcid uint32) error {
 }
 
 // Get_QueryContentLocale wraps the raw Get_QueryContentLocale call.
-func (self ISearchQueryHelper) Get_QueryContentLocale(plcid *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QueryContentLocale(plcid)))
+func (self ISearchQueryHelper) Get_QueryContentLocale() (uint32, error) {
+	var _plcid uint32
+	_hr := self.Raw.Get_QueryContentLocale(&_plcid)
+	return _plcid, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QueryKeywordLocale wraps the raw Put_QueryKeywordLocale call.
@@ -3717,8 +3829,10 @@ func (self ISearchQueryHelper) Put_QueryKeywordLocale(lcid uint32) error {
 }
 
 // Get_QueryKeywordLocale wraps the raw Get_QueryKeywordLocale call.
-func (self ISearchQueryHelper) Get_QueryKeywordLocale(plcid *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QueryKeywordLocale(plcid)))
+func (self ISearchQueryHelper) Get_QueryKeywordLocale() (uint32, error) {
+	var _plcid uint32
+	_hr := self.Raw.Get_QueryKeywordLocale(&_plcid)
+	return _plcid, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QueryTermExpansion wraps the raw Put_QueryTermExpansion call.
@@ -3727,8 +3841,10 @@ func (self ISearchQueryHelper) Put_QueryTermExpansion(expandTerms systemsearch.S
 }
 
 // Get_QueryTermExpansion wraps the raw Get_QueryTermExpansion call.
-func (self ISearchQueryHelper) Get_QueryTermExpansion(pExpandTerms *systemsearch.SEARCH_TERM_EXPANSION) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QueryTermExpansion(pExpandTerms)))
+func (self ISearchQueryHelper) Get_QueryTermExpansion() (systemsearch.SEARCH_TERM_EXPANSION, error) {
+	var _pExpandTerms systemsearch.SEARCH_TERM_EXPANSION
+	_hr := self.Raw.Get_QueryTermExpansion(&_pExpandTerms)
+	return _pExpandTerms, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QuerySyntax wraps the raw Put_QuerySyntax call.
@@ -3737,8 +3853,10 @@ func (self ISearchQueryHelper) Put_QuerySyntax(querySyntax systemsearch.SEARCH_Q
 }
 
 // Get_QuerySyntax wraps the raw Get_QuerySyntax call.
-func (self ISearchQueryHelper) Get_QuerySyntax(pQuerySyntax *systemsearch.SEARCH_QUERY_SYNTAX) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QuerySyntax(pQuerySyntax)))
+func (self ISearchQueryHelper) Get_QuerySyntax() (systemsearch.SEARCH_QUERY_SYNTAX, error) {
+	var _pQuerySyntax systemsearch.SEARCH_QUERY_SYNTAX
+	_hr := self.Raw.Get_QuerySyntax(&_pQuerySyntax)
+	return _pQuerySyntax, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QueryContentProperties wraps the raw Put_QueryContentProperties call.
@@ -3748,8 +3866,10 @@ func (self ISearchQueryHelper) Put_QueryContentProperties(pszContentProperties s
 }
 
 // Get_QueryContentProperties wraps the raw Get_QueryContentProperties call.
-func (self ISearchQueryHelper) Get_QueryContentProperties(ppszContentProperties *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QueryContentProperties(ppszContentProperties)))
+func (self ISearchQueryHelper) Get_QueryContentProperties() (foundation.PWSTR, error) {
+	var _ppszContentProperties foundation.PWSTR
+	_hr := self.Raw.Get_QueryContentProperties(&_ppszContentProperties)
+	return _ppszContentProperties, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QuerySelectColumns wraps the raw Put_QuerySelectColumns call.
@@ -3759,8 +3879,10 @@ func (self ISearchQueryHelper) Put_QuerySelectColumns(pszSelectColumns string) e
 }
 
 // Get_QuerySelectColumns wraps the raw Get_QuerySelectColumns call.
-func (self ISearchQueryHelper) Get_QuerySelectColumns(ppszSelectColumns *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QuerySelectColumns(ppszSelectColumns)))
+func (self ISearchQueryHelper) Get_QuerySelectColumns() (foundation.PWSTR, error) {
+	var _ppszSelectColumns foundation.PWSTR
+	_hr := self.Raw.Get_QuerySelectColumns(&_ppszSelectColumns)
+	return _ppszSelectColumns, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QueryWhereRestrictions wraps the raw Put_QueryWhereRestrictions call.
@@ -3770,8 +3892,10 @@ func (self ISearchQueryHelper) Put_QueryWhereRestrictions(pszRestrictions string
 }
 
 // Get_QueryWhereRestrictions wraps the raw Get_QueryWhereRestrictions call.
-func (self ISearchQueryHelper) Get_QueryWhereRestrictions(ppszRestrictions *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QueryWhereRestrictions(ppszRestrictions)))
+func (self ISearchQueryHelper) Get_QueryWhereRestrictions() (foundation.PWSTR, error) {
+	var _ppszRestrictions foundation.PWSTR
+	_hr := self.Raw.Get_QueryWhereRestrictions(&_ppszRestrictions)
+	return _ppszRestrictions, win32.HRESULTError(int32(_hr))
 }
 
 // Put_QuerySorting wraps the raw Put_QuerySorting call.
@@ -3781,14 +3905,18 @@ func (self ISearchQueryHelper) Put_QuerySorting(pszSorting string) error {
 }
 
 // Get_QuerySorting wraps the raw Get_QuerySorting call.
-func (self ISearchQueryHelper) Get_QuerySorting(ppszSorting *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QuerySorting(ppszSorting)))
+func (self ISearchQueryHelper) Get_QuerySorting() (foundation.PWSTR, error) {
+	var _ppszSorting foundation.PWSTR
+	_hr := self.Raw.Get_QuerySorting(&_ppszSorting)
+	return _ppszSorting, win32.HRESULTError(int32(_hr))
 }
 
 // GenerateSQLFromUserQuery wraps the raw GenerateSQLFromUserQuery call.
-func (self ISearchQueryHelper) GenerateSQLFromUserQuery(pszQuery string, ppszSQL *foundation.PWSTR) error {
+func (self ISearchQueryHelper) GenerateSQLFromUserQuery(pszQuery string) (foundation.PWSTR, error) {
 	_pszQuery := win32.UTF16Ptr(pszQuery)
-	return win32.HRESULTError(int32(self.Raw.GenerateSQLFromUserQuery(foundation.PWSTR(_pszQuery), ppszSQL)))
+	var _ppszSQL foundation.PWSTR
+	_hr := self.Raw.GenerateSQLFromUserQuery(foundation.PWSTR(_pszQuery), &_ppszSQL)
+	return _ppszSQL, win32.HRESULTError(int32(_hr))
 }
 
 // WriteProperties wraps the raw WriteProperties call.
@@ -3802,8 +3930,10 @@ func (self ISearchQueryHelper) Put_QueryMaxResults(cMaxResults int32) error {
 }
 
 // Get_QueryMaxResults wraps the raw Get_QueryMaxResults call.
-func (self ISearchQueryHelper) Get_QueryMaxResults(pcMaxResults *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QueryMaxResults(pcMaxResults)))
+func (self ISearchQueryHelper) Get_QueryMaxResults() (int32, error) {
+	var _pcMaxResults int32
+	_hr := self.Raw.Get_QueryMaxResults(&_pcMaxResults)
+	return _pcMaxResults, win32.HRESULTError(int32(_hr))
 }
 
 // ISearchQueryHits is an idiomatic wrapper over the raw COM interface System.Search.ISearchQueryHits with error-returning methods.
@@ -3850,8 +3980,10 @@ func (self ISearchRoot) Put_Schedule(pszTaskArg string) error {
 }
 
 // Get_Schedule wraps the raw Get_Schedule call.
-func (self ISearchRoot) Get_Schedule(ppszTaskArg *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Schedule(ppszTaskArg)))
+func (self ISearchRoot) Get_Schedule() (foundation.PWSTR, error) {
+	var _ppszTaskArg foundation.PWSTR
+	_hr := self.Raw.Get_Schedule(&_ppszTaskArg)
+	return _ppszTaskArg, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RootURL wraps the raw Put_RootURL call.
@@ -3861,8 +3993,10 @@ func (self ISearchRoot) Put_RootURL(pszURL string) error {
 }
 
 // Get_RootURL wraps the raw Get_RootURL call.
-func (self ISearchRoot) Get_RootURL(ppszURL *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RootURL(ppszURL)))
+func (self ISearchRoot) Get_RootURL() (foundation.PWSTR, error) {
+	var _ppszURL foundation.PWSTR
+	_hr := self.Raw.Get_RootURL(&_ppszURL)
+	return _ppszURL, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsHierarchical wraps the raw Put_IsHierarchical call.
@@ -3872,8 +4006,10 @@ func (self ISearchRoot) Put_IsHierarchical(fIsHierarchical bool) error {
 }
 
 // Get_IsHierarchical wraps the raw Get_IsHierarchical call.
-func (self ISearchRoot) Get_IsHierarchical(pfIsHierarchical *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsHierarchical(pfIsHierarchical)))
+func (self ISearchRoot) Get_IsHierarchical() (foundation.BOOL, error) {
+	var _pfIsHierarchical foundation.BOOL
+	_hr := self.Raw.Get_IsHierarchical(&_pfIsHierarchical)
+	return _pfIsHierarchical, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ProvidesNotifications wraps the raw Put_ProvidesNotifications call.
@@ -3883,8 +4019,10 @@ func (self ISearchRoot) Put_ProvidesNotifications(fProvidesNotifications bool) e
 }
 
 // Get_ProvidesNotifications wraps the raw Get_ProvidesNotifications call.
-func (self ISearchRoot) Get_ProvidesNotifications(pfProvidesNotifications *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProvidesNotifications(pfProvidesNotifications)))
+func (self ISearchRoot) Get_ProvidesNotifications() (foundation.BOOL, error) {
+	var _pfProvidesNotifications foundation.BOOL
+	_hr := self.Raw.Get_ProvidesNotifications(&_pfProvidesNotifications)
+	return _pfProvidesNotifications, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UseNotificationsOnly wraps the raw Put_UseNotificationsOnly call.
@@ -3894,8 +4032,10 @@ func (self ISearchRoot) Put_UseNotificationsOnly(fUseNotificationsOnly bool) err
 }
 
 // Get_UseNotificationsOnly wraps the raw Get_UseNotificationsOnly call.
-func (self ISearchRoot) Get_UseNotificationsOnly(pfUseNotificationsOnly *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UseNotificationsOnly(pfUseNotificationsOnly)))
+func (self ISearchRoot) Get_UseNotificationsOnly() (foundation.BOOL, error) {
+	var _pfUseNotificationsOnly foundation.BOOL
+	_hr := self.Raw.Get_UseNotificationsOnly(&_pfUseNotificationsOnly)
+	return _pfUseNotificationsOnly, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EnumerationDepth wraps the raw Put_EnumerationDepth call.
@@ -3904,8 +4044,10 @@ func (self ISearchRoot) Put_EnumerationDepth(dwDepth uint32) error {
 }
 
 // Get_EnumerationDepth wraps the raw Get_EnumerationDepth call.
-func (self ISearchRoot) Get_EnumerationDepth(pdwDepth *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumerationDepth(pdwDepth)))
+func (self ISearchRoot) Get_EnumerationDepth() (uint32, error) {
+	var _pdwDepth uint32
+	_hr := self.Raw.Get_EnumerationDepth(&_pdwDepth)
+	return _pdwDepth, win32.HRESULTError(int32(_hr))
 }
 
 // Put_HostDepth wraps the raw Put_HostDepth call.
@@ -3914,8 +4056,10 @@ func (self ISearchRoot) Put_HostDepth(dwDepth uint32) error {
 }
 
 // Get_HostDepth wraps the raw Get_HostDepth call.
-func (self ISearchRoot) Get_HostDepth(pdwDepth *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HostDepth(pdwDepth)))
+func (self ISearchRoot) Get_HostDepth() (uint32, error) {
+	var _pdwDepth uint32
+	_hr := self.Raw.Get_HostDepth(&_pdwDepth)
+	return _pdwDepth, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FollowDirectories wraps the raw Put_FollowDirectories call.
@@ -3925,8 +4069,10 @@ func (self ISearchRoot) Put_FollowDirectories(fFollowDirectories bool) error {
 }
 
 // Get_FollowDirectories wraps the raw Get_FollowDirectories call.
-func (self ISearchRoot) Get_FollowDirectories(pfFollowDirectories *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FollowDirectories(pfFollowDirectories)))
+func (self ISearchRoot) Get_FollowDirectories() (foundation.BOOL, error) {
+	var _pfFollowDirectories foundation.BOOL
+	_hr := self.Raw.Get_FollowDirectories(&_pfFollowDirectories)
+	return _pfFollowDirectories, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AuthenticationType wraps the raw Put_AuthenticationType call.
@@ -3935,8 +4081,10 @@ func (self ISearchRoot) Put_AuthenticationType(authType systemsearch.AUTH_TYPE) 
 }
 
 // Get_AuthenticationType wraps the raw Get_AuthenticationType call.
-func (self ISearchRoot) Get_AuthenticationType(pAuthType *systemsearch.AUTH_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AuthenticationType(pAuthType)))
+func (self ISearchRoot) Get_AuthenticationType() (systemsearch.AUTH_TYPE, error) {
+	var _pAuthType systemsearch.AUTH_TYPE
+	_hr := self.Raw.Get_AuthenticationType(&_pAuthType)
+	return _pAuthType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_User wraps the raw Put_User call.
@@ -3946,8 +4094,10 @@ func (self ISearchRoot) Put_User(pszUser string) error {
 }
 
 // Get_User wraps the raw Get_User call.
-func (self ISearchRoot) Get_User(ppszUser *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_User(ppszUser)))
+func (self ISearchRoot) Get_User() (foundation.PWSTR, error) {
+	var _ppszUser foundation.PWSTR
+	_hr := self.Raw.Get_User(&_ppszUser)
+	return _ppszUser, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Password wraps the raw Put_Password call.
@@ -3957,8 +4107,10 @@ func (self ISearchRoot) Put_Password(pszPassword string) error {
 }
 
 // Get_Password wraps the raw Get_Password call.
-func (self ISearchRoot) Get_Password(ppszPassword *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Password(ppszPassword)))
+func (self ISearchRoot) Get_Password() (foundation.PWSTR, error) {
+	var _ppszPassword foundation.PWSTR
+	_hr := self.Raw.Get_Password(&_ppszPassword)
+	return _ppszPassword, win32.HRESULTError(int32(_hr))
 }
 
 // ISearchScopeRule is an idiomatic wrapper over the raw COM interface System.Search.ISearchScopeRule with error-returning methods.
@@ -3973,23 +4125,31 @@ func WrapISearchScopeRule(raw *systemsearch.ISearchScopeRule) ISearchScopeRule {
 }
 
 // Get_PatternOrURL wraps the raw Get_PatternOrURL call.
-func (self ISearchScopeRule) Get_PatternOrURL(ppszPatternOrURL *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PatternOrURL(ppszPatternOrURL)))
+func (self ISearchScopeRule) Get_PatternOrURL() (foundation.PWSTR, error) {
+	var _ppszPatternOrURL foundation.PWSTR
+	_hr := self.Raw.Get_PatternOrURL(&_ppszPatternOrURL)
+	return _ppszPatternOrURL, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsIncluded wraps the raw Get_IsIncluded call.
-func (self ISearchScopeRule) Get_IsIncluded(pfIsIncluded *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsIncluded(pfIsIncluded)))
+func (self ISearchScopeRule) Get_IsIncluded() (foundation.BOOL, error) {
+	var _pfIsIncluded foundation.BOOL
+	_hr := self.Raw.Get_IsIncluded(&_pfIsIncluded)
+	return _pfIsIncluded, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsDefault wraps the raw Get_IsDefault call.
-func (self ISearchScopeRule) Get_IsDefault(pfIsDefault *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsDefault(pfIsDefault)))
+func (self ISearchScopeRule) Get_IsDefault() (foundation.BOOL, error) {
+	var _pfIsDefault foundation.BOOL
+	_hr := self.Raw.Get_IsDefault(&_pfIsDefault)
+	return _pfIsDefault, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FollowFlags wraps the raw Get_FollowFlags call.
-func (self ISearchScopeRule) Get_FollowFlags(pFollowFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FollowFlags(pFollowFlags)))
+func (self ISearchScopeRule) Get_FollowFlags() (uint32, error) {
+	var _pFollowFlags uint32
+	_hr := self.Raw.Get_FollowFlags(&_pFollowFlags)
+	return _pFollowFlags, win32.HRESULTError(int32(_hr))
 }
 
 // ISearchViewChangedSink is an idiomatic wrapper over the raw COM interface System.Search.ISearchViewChangedSink with error-returning methods.
@@ -4922,38 +5082,52 @@ func WrapOLEDBSimpleProvider(raw *systemsearch.OLEDBSimpleProvider) OLEDBSimpleP
 }
 
 // GetRowCount wraps the raw GetRowCount call.
-func (self OLEDBSimpleProvider) GetRowCount(pcRows *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.GetRowCount(pcRows)))
+func (self OLEDBSimpleProvider) GetRowCount() (uintptr, error) {
+	var _pcRows uintptr
+	_hr := self.Raw.GetRowCount(&_pcRows)
+	return _pcRows, win32.HRESULTError(int32(_hr))
 }
 
 // GetColumnCount wraps the raw GetColumnCount call.
-func (self OLEDBSimpleProvider) GetColumnCount(pcColumns *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.GetColumnCount(pcColumns)))
+func (self OLEDBSimpleProvider) GetColumnCount() (uintptr, error) {
+	var _pcColumns uintptr
+	_hr := self.Raw.GetColumnCount(&_pcColumns)
+	return _pcColumns, win32.HRESULTError(int32(_hr))
 }
 
 // GetRWStatus wraps the raw GetRWStatus call.
-func (self OLEDBSimpleProvider) GetRWStatus(iRow uintptr, iColumn uintptr, prwStatus *systemsearch.OSPRW) error {
-	return win32.HRESULTError(int32(self.Raw.GetRWStatus(iRow, iColumn, prwStatus)))
+func (self OLEDBSimpleProvider) GetRWStatus(iRow uintptr, iColumn uintptr) (systemsearch.OSPRW, error) {
+	var _prwStatus systemsearch.OSPRW
+	_hr := self.Raw.GetRWStatus(iRow, iColumn, &_prwStatus)
+	return _prwStatus, win32.HRESULTError(int32(_hr))
 }
 
 // GetVariant wraps the raw GetVariant call.
-func (self OLEDBSimpleProvider) GetVariant(iRow uintptr, iColumn uintptr, format systemsearch.OSPFORMAT, pVar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetVariant(iRow, iColumn, format, pVar)))
+func (self OLEDBSimpleProvider) GetVariant(iRow uintptr, iColumn uintptr, format systemsearch.OSPFORMAT) (systemvariant.VARIANT, error) {
+	var _pVar systemvariant.VARIANT
+	_hr := self.Raw.GetVariant(iRow, iColumn, format, &_pVar)
+	return _pVar, win32.HRESULTError(int32(_hr))
 }
 
 // GetLocale wraps the raw GetLocale call.
-func (self OLEDBSimpleProvider) GetLocale(pbstrLocale *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetLocale(pbstrLocale)))
+func (self OLEDBSimpleProvider) GetLocale() (foundation.BSTR, error) {
+	var _pbstrLocale foundation.BSTR
+	_hr := self.Raw.GetLocale(&_pbstrLocale)
+	return _pbstrLocale, win32.HRESULTError(int32(_hr))
 }
 
 // DeleteRows wraps the raw DeleteRows call.
-func (self OLEDBSimpleProvider) DeleteRows(iRow uintptr, cRows uintptr, pcRowsDeleted *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteRows(iRow, cRows, pcRowsDeleted)))
+func (self OLEDBSimpleProvider) DeleteRows(iRow uintptr, cRows uintptr) (uintptr, error) {
+	var _pcRowsDeleted uintptr
+	_hr := self.Raw.DeleteRows(iRow, cRows, &_pcRowsDeleted)
+	return _pcRowsDeleted, win32.HRESULTError(int32(_hr))
 }
 
 // InsertRows wraps the raw InsertRows call.
-func (self OLEDBSimpleProvider) InsertRows(iRow uintptr, cRows uintptr, pcRowsInserted *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.InsertRows(iRow, cRows, pcRowsInserted)))
+func (self OLEDBSimpleProvider) InsertRows(iRow uintptr, cRows uintptr) (uintptr, error) {
+	var _pcRowsInserted uintptr
+	_hr := self.Raw.InsertRows(iRow, cRows, &_pcRowsInserted)
+	return _pcRowsInserted, win32.HRESULTError(int32(_hr))
 }
 
 // AddOLEDBSimpleProviderListener wraps the raw AddOLEDBSimpleProviderListener call.
@@ -4967,13 +5141,17 @@ func (self OLEDBSimpleProvider) RemoveOLEDBSimpleProviderListener(pospIListener 
 }
 
 // IsAsync wraps the raw IsAsync call.
-func (self OLEDBSimpleProvider) IsAsync(pbAsynch *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsAsync(pbAsynch)))
+func (self OLEDBSimpleProvider) IsAsync() (foundation.BOOL, error) {
+	var _pbAsynch foundation.BOOL
+	_hr := self.Raw.IsAsync(&_pbAsynch)
+	return _pbAsynch, win32.HRESULTError(int32(_hr))
 }
 
 // GetEstimatedRows wraps the raw GetEstimatedRows call.
-func (self OLEDBSimpleProvider) GetEstimatedRows(piRows *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.GetEstimatedRows(piRows)))
+func (self OLEDBSimpleProvider) GetEstimatedRows() (uintptr, error) {
+	var _piRows uintptr
+	_hr := self.Raw.GetEstimatedRows(&_piRows)
+	return _piRows, win32.HRESULTError(int32(_hr))
 }
 
 // StopTransfer wraps the raw StopTransfer call.

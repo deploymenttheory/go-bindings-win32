@@ -312,8 +312,10 @@ func (self IDCompositionDevice) WaitForCommitCompletion() error {
 }
 
 // GetFrameStatistics wraps the raw GetFrameStatistics call.
-func (self IDCompositionDevice) GetFrameStatistics(statistics *graphicsdirectcomposition.DCOMPOSITION_FRAME_STATISTICS) error {
-	return win32.HRESULTError(int32(self.Raw.GetFrameStatistics(statistics)))
+func (self IDCompositionDevice) GetFrameStatistics() (graphicsdirectcomposition.DCOMPOSITION_FRAME_STATISTICS, error) {
+	var _statistics graphicsdirectcomposition.DCOMPOSITION_FRAME_STATISTICS
+	_hr := self.Raw.GetFrameStatistics(&_statistics)
+	return _statistics, win32.HRESULTError(int32(_hr))
 }
 
 // CreateTargetForHwnd wraps the raw CreateTargetForHwnd call.
@@ -444,8 +446,10 @@ func (self IDCompositionDevice2) WaitForCommitCompletion() error {
 }
 
 // GetFrameStatistics wraps the raw GetFrameStatistics call.
-func (self IDCompositionDevice2) GetFrameStatistics(statistics *graphicsdirectcomposition.DCOMPOSITION_FRAME_STATISTICS) error {
-	return win32.HRESULTError(int32(self.Raw.GetFrameStatistics(statistics)))
+func (self IDCompositionDevice2) GetFrameStatistics() (graphicsdirectcomposition.DCOMPOSITION_FRAME_STATISTICS, error) {
+	var _statistics graphicsdirectcomposition.DCOMPOSITION_FRAME_STATISTICS
+	_hr := self.Raw.GetFrameStatistics(&_statistics)
+	return _statistics, win32.HRESULTError(int32(_hr))
 }
 
 // CreateVisual wraps the raw CreateVisual call.

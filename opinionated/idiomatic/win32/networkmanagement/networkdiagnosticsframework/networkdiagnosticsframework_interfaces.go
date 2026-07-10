@@ -46,8 +46,10 @@ func (self INetDiagHelper) Initialize(celt uint32, rgAttributes *networkmanageme
 }
 
 // GetDiagnosticsInfo wraps the raw GetDiagnosticsInfo call.
-func (self INetDiagHelper) GetDiagnosticsInfo(ppInfo **networkmanagementnetworkdiagnosticsframework.DiagnosticsInfo) error {
-	return win32.HRESULTError(int32(self.Raw.GetDiagnosticsInfo(ppInfo)))
+func (self INetDiagHelper) GetDiagnosticsInfo() (*networkmanagementnetworkdiagnosticsframework.DiagnosticsInfo, error) {
+	var _ppInfo *networkmanagementnetworkdiagnosticsframework.DiagnosticsInfo
+	_hr := self.Raw.GetDiagnosticsInfo(&_ppInfo)
+	return _ppInfo, win32.HRESULTError(int32(_hr))
 }
 
 // GetKeyAttributes wraps the raw GetKeyAttributes call.

@@ -70,8 +70,10 @@ func (self IVisualTreeService) GetEnums(pCount *uint32, ppEnums **uixamldiagnost
 }
 
 // CreateInstance wraps the raw CreateInstance call.
-func (self IVisualTreeService) CreateInstance(typeName foundation.BSTR, value foundation.BSTR, pInstanceHandle *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInstance(typeName, value, pInstanceHandle)))
+func (self IVisualTreeService) CreateInstance(typeName foundation.BSTR, value foundation.BSTR) (uint64, error) {
+	var _pInstanceHandle uint64
+	_hr := self.Raw.CreateInstance(typeName, value, &_pInstanceHandle)
+	return _pInstanceHandle, win32.HRESULTError(int32(_hr))
 }
 
 // GetPropertyValuesChain wraps the raw GetPropertyValuesChain call.
@@ -220,36 +222,50 @@ func WrapIXamlDiagnostics(raw *uixamldiagnostics.IXamlDiagnostics) IXamlDiagnost
 }
 
 // GetDispatcher wraps the raw GetDispatcher call.
-func (self IXamlDiagnostics) GetDispatcher(ppDispatcher **systemwinrt.IInspectable) error {
-	return win32.HRESULTError(int32(self.Raw.GetDispatcher(ppDispatcher)))
+func (self IXamlDiagnostics) GetDispatcher() (*systemwinrt.IInspectable, error) {
+	var _ppDispatcher *systemwinrt.IInspectable
+	_hr := self.Raw.GetDispatcher(&_ppDispatcher)
+	return _ppDispatcher, win32.HRESULTError(int32(_hr))
 }
 
 // GetUiLayer wraps the raw GetUiLayer call.
-func (self IXamlDiagnostics) GetUiLayer(ppLayer **systemwinrt.IInspectable) error {
-	return win32.HRESULTError(int32(self.Raw.GetUiLayer(ppLayer)))
+func (self IXamlDiagnostics) GetUiLayer() (*systemwinrt.IInspectable, error) {
+	var _ppLayer *systemwinrt.IInspectable
+	_hr := self.Raw.GetUiLayer(&_ppLayer)
+	return _ppLayer, win32.HRESULTError(int32(_hr))
 }
 
 // GetApplication wraps the raw GetApplication call.
-func (self IXamlDiagnostics) GetApplication(ppApplication **systemwinrt.IInspectable) error {
-	return win32.HRESULTError(int32(self.Raw.GetApplication(ppApplication)))
+func (self IXamlDiagnostics) GetApplication() (*systemwinrt.IInspectable, error) {
+	var _ppApplication *systemwinrt.IInspectable
+	_hr := self.Raw.GetApplication(&_ppApplication)
+	return _ppApplication, win32.HRESULTError(int32(_hr))
 }
 
 // GetIInspectableFromHandle wraps the raw GetIInspectableFromHandle call.
-func (self IXamlDiagnostics) GetIInspectableFromHandle(instanceHandle uint64, ppInstance **systemwinrt.IInspectable) error {
-	return win32.HRESULTError(int32(self.Raw.GetIInspectableFromHandle(instanceHandle, ppInstance)))
+func (self IXamlDiagnostics) GetIInspectableFromHandle(instanceHandle uint64) (*systemwinrt.IInspectable, error) {
+	var _ppInstance *systemwinrt.IInspectable
+	_hr := self.Raw.GetIInspectableFromHandle(instanceHandle, &_ppInstance)
+	return _ppInstance, win32.HRESULTError(int32(_hr))
 }
 
 // GetHandleFromIInspectable wraps the raw GetHandleFromIInspectable call.
-func (self IXamlDiagnostics) GetHandleFromIInspectable(pInstance *systemwinrt.IInspectable, pHandle *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetHandleFromIInspectable(pInstance, pHandle)))
+func (self IXamlDiagnostics) GetHandleFromIInspectable(pInstance *systemwinrt.IInspectable) (uint64, error) {
+	var _pHandle uint64
+	_hr := self.Raw.GetHandleFromIInspectable(pInstance, &_pHandle)
+	return _pHandle, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterInstance wraps the raw RegisterInstance call.
-func (self IXamlDiagnostics) RegisterInstance(pInstance *systemwinrt.IInspectable, pInstanceHandle *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterInstance(pInstance, pInstanceHandle)))
+func (self IXamlDiagnostics) RegisterInstance(pInstance *systemwinrt.IInspectable) (uint64, error) {
+	var _pInstanceHandle uint64
+	_hr := self.Raw.RegisterInstance(pInstance, &_pInstanceHandle)
+	return _pInstanceHandle, win32.HRESULTError(int32(_hr))
 }
 
 // GetInitializationData wraps the raw GetInitializationData call.
-func (self IXamlDiagnostics) GetInitializationData(pInitializationData *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetInitializationData(pInitializationData)))
+func (self IXamlDiagnostics) GetInitializationData() (foundation.BSTR, error) {
+	var _pInitializationData foundation.BSTR
+	_hr := self.Raw.GetInitializationData(&_pInitializationData)
+	return _pInitializationData, win32.HRESULTError(int32(_hr))
 }

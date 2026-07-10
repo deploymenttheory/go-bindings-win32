@@ -464,13 +464,17 @@ func (self ICLRMetaHost) GetVersionFromFile(pwzFilePath string, pwzBuffer founda
 }
 
 // EnumerateInstalledRuntimes wraps the raw EnumerateInstalledRuntimes call.
-func (self ICLRMetaHost) EnumerateInstalledRuntimes(ppEnumerator **systemcom.IEnumUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateInstalledRuntimes(ppEnumerator)))
+func (self ICLRMetaHost) EnumerateInstalledRuntimes() (*systemcom.IEnumUnknown, error) {
+	var _ppEnumerator *systemcom.IEnumUnknown
+	_hr := self.Raw.EnumerateInstalledRuntimes(&_ppEnumerator)
+	return _ppEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // EnumerateLoadedRuntimes wraps the raw EnumerateLoadedRuntimes call.
-func (self ICLRMetaHost) EnumerateLoadedRuntimes(hndProcess foundation.HANDLE, ppEnumerator **systemcom.IEnumUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateLoadedRuntimes(hndProcess, ppEnumerator)))
+func (self ICLRMetaHost) EnumerateLoadedRuntimes(hndProcess foundation.HANDLE) (*systemcom.IEnumUnknown, error) {
+	var _ppEnumerator *systemcom.IEnumUnknown
+	_hr := self.Raw.EnumerateLoadedRuntimes(hndProcess, &_ppEnumerator)
+	return _ppEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // RequestRuntimeLoadedNotification wraps the raw RequestRuntimeLoadedNotification call.
@@ -700,8 +704,10 @@ func (self ICLRRuntimeInfo) GetRuntimeDirectory(pwzBuffer foundation.PWSTR, pcch
 }
 
 // IsLoaded wraps the raw IsLoaded call.
-func (self ICLRRuntimeInfo) IsLoaded(hndProcess foundation.HANDLE, pbLoaded *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsLoaded(hndProcess, pbLoaded)))
+func (self ICLRRuntimeInfo) IsLoaded(hndProcess foundation.HANDLE) (foundation.BOOL, error) {
+	var _pbLoaded foundation.BOOL
+	_hr := self.Raw.IsLoaded(hndProcess, &_pbLoaded)
+	return _pbLoaded, win32.HRESULTError(int32(_hr))
 }
 
 // LoadErrorString wraps the raw LoadErrorString call.
@@ -710,9 +716,11 @@ func (self ICLRRuntimeInfo) LoadErrorString(iResourceID uint32, pwzBuffer founda
 }
 
 // LoadLibraryA wraps the raw LoadLibraryA call.
-func (self ICLRRuntimeInfo) LoadLibraryA(pwzDllName string, phndModule *foundation.HMODULE) error {
+func (self ICLRRuntimeInfo) LoadLibraryA(pwzDllName string) (foundation.HMODULE, error) {
 	_pwzDllName := win32.UTF16Ptr(pwzDllName)
-	return win32.HRESULTError(int32(self.Raw.LoadLibraryA(foundation.PWSTR(_pwzDllName), phndModule)))
+	var _phndModule foundation.HMODULE
+	_hr := self.Raw.LoadLibraryA(foundation.PWSTR(_pwzDllName), &_phndModule)
+	return _phndModule, win32.HRESULTError(int32(_hr))
 }
 
 // GetProcAddress wraps the raw GetProcAddress call.
@@ -726,8 +734,10 @@ func (self ICLRRuntimeInfo) GetInterface(rclsid *win32.GUID, riid *win32.GUID, p
 }
 
 // IsLoadable wraps the raw IsLoadable call.
-func (self ICLRRuntimeInfo) IsLoadable(pbLoadable *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsLoadable(pbLoadable)))
+func (self ICLRRuntimeInfo) IsLoadable() (foundation.BOOL, error) {
+	var _pbLoadable foundation.BOOL
+	_hr := self.Raw.IsLoadable(&_pbLoadable)
+	return _pbLoadable, win32.HRESULTError(int32(_hr))
 }
 
 // SetDefaultStartupFlags wraps the raw SetDefaultStartupFlags call.
@@ -795,10 +805,12 @@ func (self ICLRStrongName) GetHashFromHandle(hFile foundation.HANDLE, piHashAlg 
 }
 
 // StrongNameCompareAssemblies wraps the raw StrongNameCompareAssemblies call.
-func (self ICLRStrongName) StrongNameCompareAssemblies(pwzAssembly1 string, pwzAssembly2 string, pdwResult *uint32) error {
+func (self ICLRStrongName) StrongNameCompareAssemblies(pwzAssembly1 string, pwzAssembly2 string) (uint32, error) {
 	_pwzAssembly1 := win32.UTF16Ptr(pwzAssembly1)
 	_pwzAssembly2 := win32.UTF16Ptr(pwzAssembly2)
-	return win32.HRESULTError(int32(self.Raw.StrongNameCompareAssemblies(foundation.PWSTR(_pwzAssembly1), foundation.PWSTR(_pwzAssembly2), pdwResult)))
+	var _pdwResult uint32
+	_hr := self.Raw.StrongNameCompareAssemblies(foundation.PWSTR(_pwzAssembly1), foundation.PWSTR(_pwzAssembly2), &_pdwResult)
+	return _pdwResult, win32.HRESULTError(int32(_hr))
 }
 
 // StrongNameFreeBuffer wraps the raw StrongNameFreeBuffer call.
@@ -824,8 +836,10 @@ func (self ICLRStrongName) StrongNameGetPublicKey(pwzKeyContainer string, pbKeyB
 }
 
 // StrongNameHashSize wraps the raw StrongNameHashSize call.
-func (self ICLRStrongName) StrongNameHashSize(ulHashAlg uint32, pcbSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.StrongNameHashSize(ulHashAlg, pcbSize)))
+func (self ICLRStrongName) StrongNameHashSize(ulHashAlg uint32) (uint32, error) {
+	var _pcbSize uint32
+	_hr := self.Raw.StrongNameHashSize(ulHashAlg, &_pcbSize)
+	return _pcbSize, win32.HRESULTError(int32(_hr))
 }
 
 // StrongNameKeyDelete wraps the raw StrongNameKeyDelete call.
@@ -872,20 +886,26 @@ func (self ICLRStrongName) StrongNameSignatureSize(pbPublicKeyBlob *byte, cbPubl
 }
 
 // StrongNameSignatureVerification wraps the raw StrongNameSignatureVerification call.
-func (self ICLRStrongName) StrongNameSignatureVerification(pwzFilePath string, dwInFlags uint32, pdwOutFlags *uint32) error {
+func (self ICLRStrongName) StrongNameSignatureVerification(pwzFilePath string, dwInFlags uint32) (uint32, error) {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
-	return win32.HRESULTError(int32(self.Raw.StrongNameSignatureVerification(foundation.PWSTR(_pwzFilePath), dwInFlags, pdwOutFlags)))
+	var _pdwOutFlags uint32
+	_hr := self.Raw.StrongNameSignatureVerification(foundation.PWSTR(_pwzFilePath), dwInFlags, &_pdwOutFlags)
+	return _pdwOutFlags, win32.HRESULTError(int32(_hr))
 }
 
 // StrongNameSignatureVerificationEx wraps the raw StrongNameSignatureVerificationEx call.
-func (self ICLRStrongName) StrongNameSignatureVerificationEx(pwzFilePath string, fForceVerification foundation.BOOLEAN, pfWasVerified *byte) error {
+func (self ICLRStrongName) StrongNameSignatureVerificationEx(pwzFilePath string, fForceVerification foundation.BOOLEAN) (byte, error) {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
-	return win32.HRESULTError(int32(self.Raw.StrongNameSignatureVerificationEx(foundation.PWSTR(_pwzFilePath), fForceVerification, pfWasVerified)))
+	var _pfWasVerified byte
+	_hr := self.Raw.StrongNameSignatureVerificationEx(foundation.PWSTR(_pwzFilePath), fForceVerification, &_pfWasVerified)
+	return _pfWasVerified, win32.HRESULTError(int32(_hr))
 }
 
 // StrongNameSignatureVerificationFromImage wraps the raw StrongNameSignatureVerificationFromImage call.
-func (self ICLRStrongName) StrongNameSignatureVerificationFromImage(pbBase *byte, dwLength uint32, dwInFlags uint32, pdwOutFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.StrongNameSignatureVerificationFromImage(pbBase, dwLength, dwInFlags, pdwOutFlags)))
+func (self ICLRStrongName) StrongNameSignatureVerificationFromImage(pbBase *byte, dwLength uint32, dwInFlags uint32) (uint32, error) {
+	var _pdwOutFlags uint32
+	_hr := self.Raw.StrongNameSignatureVerificationFromImage(pbBase, dwLength, dwInFlags, &_pdwOutFlags)
+	return _pdwOutFlags, win32.HRESULTError(int32(_hr))
 }
 
 // StrongNameTokenFromAssembly wraps the raw StrongNameTokenFromAssembly call.
@@ -2175,8 +2195,10 @@ func WrapIObjectHandle(raw *systemclrhosting.IObjectHandle) IObjectHandle {
 }
 
 // Unwrap wraps the raw Unwrap call.
-func (self IObjectHandle) Unwrap(ppv *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Unwrap(ppv)))
+func (self IObjectHandle) Unwrap() (systemvariant.VARIANT, error) {
+	var _ppv systemvariant.VARIANT
+	_hr := self.Raw.Unwrap(&_ppv)
+	return _ppv, win32.HRESULTError(int32(_hr))
 }
 
 // ITypeName is an idiomatic wrapper over the raw COM interface System.ClrHosting.ITypeName with error-returning methods.
@@ -2191,38 +2213,52 @@ func WrapITypeName(raw *systemclrhosting.ITypeName) ITypeName {
 }
 
 // GetNameCount wraps the raw GetNameCount call.
-func (self ITypeName) GetNameCount(pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetNameCount(pCount)))
+func (self ITypeName) GetNameCount() (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.GetNameCount(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // GetNames wraps the raw GetNames call.
-func (self ITypeName) GetNames(count uint32, rgbszNames *foundation.BSTR, pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetNames(count, rgbszNames, pCount)))
+func (self ITypeName) GetNames(count uint32, rgbszNames *foundation.BSTR) (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.GetNames(count, rgbszNames, &_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // GetTypeArgumentCount wraps the raw GetTypeArgumentCount call.
-func (self ITypeName) GetTypeArgumentCount(pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetTypeArgumentCount(pCount)))
+func (self ITypeName) GetTypeArgumentCount() (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.GetTypeArgumentCount(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // GetTypeArguments wraps the raw GetTypeArguments call.
-func (self ITypeName) GetTypeArguments(count uint32, rgpArguments **systemclrhosting.ITypeName, pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetTypeArguments(count, rgpArguments, pCount)))
+func (self ITypeName) GetTypeArguments(count uint32, rgpArguments **systemclrhosting.ITypeName) (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.GetTypeArguments(count, rgpArguments, &_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // GetModifierLength wraps the raw GetModifierLength call.
-func (self ITypeName) GetModifierLength(pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetModifierLength(pCount)))
+func (self ITypeName) GetModifierLength() (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.GetModifierLength(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // GetModifiers wraps the raw GetModifiers call.
-func (self ITypeName) GetModifiers(count uint32, rgModifiers *uint32, pCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetModifiers(count, rgModifiers, pCount)))
+func (self ITypeName) GetModifiers(count uint32, rgModifiers *uint32) (uint32, error) {
+	var _pCount uint32
+	_hr := self.Raw.GetModifiers(count, rgModifiers, &_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // GetAssemblyName wraps the raw GetAssemblyName call.
-func (self ITypeName) GetAssemblyName(rgbszAssemblyNames *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetAssemblyName(rgbszAssemblyNames)))
+func (self ITypeName) GetAssemblyName() (foundation.BSTR, error) {
+	var _rgbszAssemblyNames foundation.BSTR
+	_hr := self.Raw.GetAssemblyName(&_rgbszAssemblyNames)
+	return _rgbszAssemblyNames, win32.HRESULTError(int32(_hr))
 }
 
 // ITypeNameBuilder is an idiomatic wrapper over the raw COM interface System.ClrHosting.ITypeNameBuilder with error-returning methods.
@@ -2289,8 +2325,10 @@ func (self ITypeNameBuilder) AddAssemblySpec(szAssemblySpec string) error {
 }
 
 // ToString wraps the raw ToString call.
-func (self ITypeNameBuilder) ToString(pszStringRepresentation *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.ToString(pszStringRepresentation)))
+func (self ITypeNameBuilder) ToString() (foundation.BSTR, error) {
+	var _pszStringRepresentation foundation.BSTR
+	_hr := self.Raw.ToString(&_pszStringRepresentation)
+	return _pszStringRepresentation, win32.HRESULTError(int32(_hr))
 }
 
 // Clear wraps the raw Clear call.
@@ -2310,12 +2348,16 @@ func WrapITypeNameFactory(raw *systemclrhosting.ITypeNameFactory) ITypeNameFacto
 }
 
 // ParseTypeName wraps the raw ParseTypeName call.
-func (self ITypeNameFactory) ParseTypeName(szName string, pError *uint32, ppTypeName **systemclrhosting.ITypeName) error {
+func (self ITypeNameFactory) ParseTypeName(szName string, pError *uint32) (*systemclrhosting.ITypeName, error) {
 	_szName := win32.UTF16Ptr(szName)
-	return win32.HRESULTError(int32(self.Raw.ParseTypeName(foundation.PWSTR(_szName), pError, ppTypeName)))
+	var _ppTypeName *systemclrhosting.ITypeName
+	_hr := self.Raw.ParseTypeName(foundation.PWSTR(_szName), pError, &_ppTypeName)
+	return _ppTypeName, win32.HRESULTError(int32(_hr))
 }
 
 // GetTypeNameBuilder wraps the raw GetTypeNameBuilder call.
-func (self ITypeNameFactory) GetTypeNameBuilder(ppTypeBuilder **systemclrhosting.ITypeNameBuilder) error {
-	return win32.HRESULTError(int32(self.Raw.GetTypeNameBuilder(ppTypeBuilder)))
+func (self ITypeNameFactory) GetTypeNameBuilder() (*systemclrhosting.ITypeNameBuilder, error) {
+	var _ppTypeBuilder *systemclrhosting.ITypeNameBuilder
+	_hr := self.Raw.GetTypeNameBuilder(&_ppTypeBuilder)
+	return _ppTypeBuilder, win32.HRESULTError(int32(_hr))
 }

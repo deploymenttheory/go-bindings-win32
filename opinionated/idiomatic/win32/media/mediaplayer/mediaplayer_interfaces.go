@@ -31,13 +31,17 @@ func WrapIFeed(raw *mediamediaplayer.IFeed) IFeed {
 }
 
 // Xml wraps the raw Xml call.
-func (self IFeed) Xml(count int32, sortProperty mediamediaplayer.FEEDS_XML_SORT_PROPERTY, sortOrder mediamediaplayer.FEEDS_XML_SORT_ORDER, filterFlags mediamediaplayer.FEEDS_XML_FILTER_FLAGS, includeFlags mediamediaplayer.FEEDS_XML_INCLUDE_FLAGS, xml *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Xml(count, sortProperty, sortOrder, filterFlags, includeFlags, xml)))
+func (self IFeed) Xml(count int32, sortProperty mediamediaplayer.FEEDS_XML_SORT_PROPERTY, sortOrder mediamediaplayer.FEEDS_XML_SORT_ORDER, filterFlags mediamediaplayer.FEEDS_XML_FILTER_FLAGS, includeFlags mediamediaplayer.FEEDS_XML_INCLUDE_FLAGS) (foundation.BSTR, error) {
+	var _xml foundation.BSTR
+	_hr := self.Raw.Xml(count, sortProperty, sortOrder, filterFlags, includeFlags, &_xml)
+	return _xml, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFeed) Get_Name(name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(name)))
+func (self IFeed) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // Rename wraps the raw Rename call.
@@ -46,8 +50,10 @@ func (self IFeed) Rename(name foundation.BSTR) error {
 }
 
 // Get_Url wraps the raw Get_Url call.
-func (self IFeed) Get_Url(feedUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Url(feedUrl)))
+func (self IFeed) Get_Url() (foundation.BSTR, error) {
+	var _feedUrl foundation.BSTR
+	_hr := self.Raw.Get_Url(&_feedUrl)
+	return _feedUrl, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Url wraps the raw Put_Url call.
@@ -56,13 +62,17 @@ func (self IFeed) Put_Url(feedUrl foundation.BSTR) error {
 }
 
 // Get_LocalId wraps the raw Get_LocalId call.
-func (self IFeed) Get_LocalId(feedGuid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalId(feedGuid)))
+func (self IFeed) Get_LocalId() (foundation.BSTR, error) {
+	var _feedGuid foundation.BSTR
+	_hr := self.Raw.Get_LocalId(&_feedGuid)
+	return _feedGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self IFeed) Get_Path(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(path)))
+func (self IFeed) Get_Path() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_Path(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // Move wraps the raw Move call.
@@ -71,13 +81,17 @@ func (self IFeed) Move(newParentPath foundation.BSTR) error {
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IFeed) Get_Parent(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(disp)))
+func (self IFeed) Get_Parent() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastWriteTime wraps the raw Get_LastWriteTime call.
-func (self IFeed) Get_LastWriteTime(lastWrite *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastWriteTime(lastWrite)))
+func (self IFeed) Get_LastWriteTime() (float64, error) {
+	var _lastWrite float64
+	_hr := self.Raw.Get_LastWriteTime(&_lastWrite)
+	return _lastWrite, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -101,8 +115,10 @@ func (self IFeed) CancelAsyncDownload() error {
 }
 
 // Get_SyncSetting wraps the raw Get_SyncSetting call.
-func (self IFeed) Get_SyncSetting(syncSetting *mediamediaplayer.FEEDS_SYNC_SETTING) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SyncSetting(syncSetting)))
+func (self IFeed) Get_SyncSetting() (mediamediaplayer.FEEDS_SYNC_SETTING, error) {
+	var _syncSetting mediamediaplayer.FEEDS_SYNC_SETTING
+	_hr := self.Raw.Get_SyncSetting(&_syncSetting)
+	return _syncSetting, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SyncSetting wraps the raw Put_SyncSetting call.
@@ -111,8 +127,10 @@ func (self IFeed) Put_SyncSetting(syncSetting mediamediaplayer.FEEDS_SYNC_SETTIN
 }
 
 // Get_Interval wraps the raw Get_Interval call.
-func (self IFeed) Get_Interval(minutes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Interval(minutes)))
+func (self IFeed) Get_Interval() (int32, error) {
+	var _minutes int32
+	_hr := self.Raw.Get_Interval(&_minutes)
+	return _minutes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Interval wraps the raw Put_Interval call.
@@ -121,73 +139,101 @@ func (self IFeed) Put_Interval(minutes int32) error {
 }
 
 // Get_LastDownloadTime wraps the raw Get_LastDownloadTime call.
-func (self IFeed) Get_LastDownloadTime(lastDownload *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastDownloadTime(lastDownload)))
+func (self IFeed) Get_LastDownloadTime() (float64, error) {
+	var _lastDownload float64
+	_hr := self.Raw.Get_LastDownloadTime(&_lastDownload)
+	return _lastDownload, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalEnclosurePath wraps the raw Get_LocalEnclosurePath call.
-func (self IFeed) Get_LocalEnclosurePath(path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalEnclosurePath(path)))
+func (self IFeed) Get_LocalEnclosurePath() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	_hr := self.Raw.Get_LocalEnclosurePath(&_path)
+	return _path, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Items wraps the raw Get_Items call.
-func (self IFeed) Get_Items(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Items(disp)))
+func (self IFeed) Get_Items() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_Items(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // GetItem wraps the raw GetItem call.
-func (self IFeed) GetItem(itemId int32, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetItem(itemId, disp)))
+func (self IFeed) GetItem(itemId int32) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetItem(itemId, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Title wraps the raw Get_Title call.
-func (self IFeed) Get_Title(title *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Title(title)))
+func (self IFeed) Get_Title() (foundation.BSTR, error) {
+	var _title foundation.BSTR
+	_hr := self.Raw.Get_Title(&_title)
+	return _title, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IFeed) Get_Description(description *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(description)))
+func (self IFeed) Get_Description() (foundation.BSTR, error) {
+	var _description foundation.BSTR
+	_hr := self.Raw.Get_Description(&_description)
+	return _description, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Link wraps the raw Get_Link call.
-func (self IFeed) Get_Link(homePage *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Link(homePage)))
+func (self IFeed) Get_Link() (foundation.BSTR, error) {
+	var _homePage foundation.BSTR
+	_hr := self.Raw.Get_Link(&_homePage)
+	return _homePage, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Image wraps the raw Get_Image call.
-func (self IFeed) Get_Image(imageUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Image(imageUrl)))
+func (self IFeed) Get_Image() (foundation.BSTR, error) {
+	var _imageUrl foundation.BSTR
+	_hr := self.Raw.Get_Image(&_imageUrl)
+	return _imageUrl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastBuildDate wraps the raw Get_LastBuildDate call.
-func (self IFeed) Get_LastBuildDate(lastBuildDate *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastBuildDate(lastBuildDate)))
+func (self IFeed) Get_LastBuildDate() (float64, error) {
+	var _lastBuildDate float64
+	_hr := self.Raw.Get_LastBuildDate(&_lastBuildDate)
+	return _lastBuildDate, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PubDate wraps the raw Get_PubDate call.
-func (self IFeed) Get_PubDate(lastPopulateDate *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PubDate(lastPopulateDate)))
+func (self IFeed) Get_PubDate() (float64, error) {
+	var _lastPopulateDate float64
+	_hr := self.Raw.Get_PubDate(&_lastPopulateDate)
+	return _lastPopulateDate, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Ttl wraps the raw Get_Ttl call.
-func (self IFeed) Get_Ttl(ttl *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Ttl(ttl)))
+func (self IFeed) Get_Ttl() (int32, error) {
+	var _ttl int32
+	_hr := self.Raw.Get_Ttl(&_ttl)
+	return _ttl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Language wraps the raw Get_Language call.
-func (self IFeed) Get_Language(language *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Language(language)))
+func (self IFeed) Get_Language() (foundation.BSTR, error) {
+	var _language foundation.BSTR
+	_hr := self.Raw.Get_Language(&_language)
+	return _language, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Copyright wraps the raw Get_Copyright call.
-func (self IFeed) Get_Copyright(copyright *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Copyright(copyright)))
+func (self IFeed) Get_Copyright() (foundation.BSTR, error) {
+	var _copyright foundation.BSTR
+	_hr := self.Raw.Get_Copyright(&_copyright)
+	return _copyright, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MaxItemCount wraps the raw Get_MaxItemCount call.
-func (self IFeed) Get_MaxItemCount(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxItemCount(count)))
+func (self IFeed) Get_MaxItemCount() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_MaxItemCount(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxItemCount wraps the raw Put_MaxItemCount call.
@@ -196,8 +242,10 @@ func (self IFeed) Put_MaxItemCount(count int32) error {
 }
 
 // Get_DownloadEnclosuresAutomatically wraps the raw Get_DownloadEnclosuresAutomatically call.
-func (self IFeed) Get_DownloadEnclosuresAutomatically(downloadEnclosuresAutomatically *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadEnclosuresAutomatically(downloadEnclosuresAutomatically)))
+func (self IFeed) Get_DownloadEnclosuresAutomatically() (foundation.VARIANT_BOOL, error) {
+	var _downloadEnclosuresAutomatically foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_DownloadEnclosuresAutomatically(&_downloadEnclosuresAutomatically)
+	return _downloadEnclosuresAutomatically, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DownloadEnclosuresAutomatically wraps the raw Put_DownloadEnclosuresAutomatically call.
@@ -206,13 +254,17 @@ func (self IFeed) Put_DownloadEnclosuresAutomatically(downloadEnclosuresAutomati
 }
 
 // Get_DownloadStatus wraps the raw Get_DownloadStatus call.
-func (self IFeed) Get_DownloadStatus(status *mediamediaplayer.FEEDS_DOWNLOAD_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadStatus(status)))
+func (self IFeed) Get_DownloadStatus() (mediamediaplayer.FEEDS_DOWNLOAD_STATUS, error) {
+	var _status mediamediaplayer.FEEDS_DOWNLOAD_STATUS
+	_hr := self.Raw.Get_DownloadStatus(&_status)
+	return _status, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastDownloadError wraps the raw Get_LastDownloadError call.
-func (self IFeed) Get_LastDownloadError(error_ *mediamediaplayer.FEEDS_DOWNLOAD_ERROR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastDownloadError(error_)))
+func (self IFeed) Get_LastDownloadError() (mediamediaplayer.FEEDS_DOWNLOAD_ERROR, error) {
+	var _error_ mediamediaplayer.FEEDS_DOWNLOAD_ERROR
+	_hr := self.Raw.Get_LastDownloadError(&_error_)
+	return _error_, win32.HRESULTError(int32(_hr))
 }
 
 // Merge wraps the raw Merge call.
@@ -221,13 +273,17 @@ func (self IFeed) Merge(feedXml foundation.BSTR, feedUrl foundation.BSTR) error 
 }
 
 // Get_DownloadUrl wraps the raw Get_DownloadUrl call.
-func (self IFeed) Get_DownloadUrl(feedUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadUrl(feedUrl)))
+func (self IFeed) Get_DownloadUrl() (foundation.BSTR, error) {
+	var _feedUrl foundation.BSTR
+	_hr := self.Raw.Get_DownloadUrl(&_feedUrl)
+	return _feedUrl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsList wraps the raw Get_IsList call.
-func (self IFeed) Get_IsList(isList *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsList(isList)))
+func (self IFeed) Get_IsList() (foundation.VARIANT_BOOL, error) {
+	var _isList foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsList(&_isList)
+	return _isList, win32.HRESULTError(int32(_hr))
 }
 
 // MarkAllItemsRead wraps the raw MarkAllItemsRead call.
@@ -236,18 +292,24 @@ func (self IFeed) MarkAllItemsRead() error {
 }
 
 // GetWatcher wraps the raw GetWatcher call.
-func (self IFeed) GetWatcher(scope mediamediaplayer.FEEDS_EVENTS_SCOPE, mask mediamediaplayer.FEEDS_EVENTS_MASK, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetWatcher(scope, mask, disp)))
+func (self IFeed) GetWatcher(scope mediamediaplayer.FEEDS_EVENTS_SCOPE, mask mediamediaplayer.FEEDS_EVENTS_MASK) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetWatcher(scope, mask, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UnreadItemCount wraps the raw Get_UnreadItemCount call.
-func (self IFeed) Get_UnreadItemCount(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UnreadItemCount(count)))
+func (self IFeed) Get_UnreadItemCount() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_UnreadItemCount(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ItemCount wraps the raw Get_ItemCount call.
-func (self IFeed) Get_ItemCount(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ItemCount(count)))
+func (self IFeed) Get_ItemCount() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_ItemCount(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // IFeed2 is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IFeed2 with error-returning methods.
@@ -262,23 +324,31 @@ func WrapIFeed2(raw *mediamediaplayer.IFeed2) IFeed2 {
 }
 
 // GetItemByEffectiveId wraps the raw GetItemByEffectiveId call.
-func (self IFeed2) GetItemByEffectiveId(itemEffectiveId int32, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetItemByEffectiveId(itemEffectiveId, disp)))
+func (self IFeed2) GetItemByEffectiveId(itemEffectiveId int32) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetItemByEffectiveId(itemEffectiveId, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastItemDownloadTime wraps the raw Get_LastItemDownloadTime call.
-func (self IFeed2) Get_LastItemDownloadTime(lastItemDownloadTime *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastItemDownloadTime(lastItemDownloadTime)))
+func (self IFeed2) Get_LastItemDownloadTime() (float64, error) {
+	var _lastItemDownloadTime float64
+	_hr := self.Raw.Get_LastItemDownloadTime(&_lastItemDownloadTime)
+	return _lastItemDownloadTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Username wraps the raw Get_Username call.
-func (self IFeed2) Get_Username(username *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Username(username)))
+func (self IFeed2) Get_Username() (foundation.BSTR, error) {
+	var _username foundation.BSTR
+	_hr := self.Raw.Get_Username(&_username)
+	return _username, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Password wraps the raw Get_Password call.
-func (self IFeed2) Get_Password(password *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Password(password)))
+func (self IFeed2) Get_Password() (foundation.BSTR, error) {
+	var _password foundation.BSTR
+	_hr := self.Raw.Get_Password(&_password)
+	return _password, win32.HRESULTError(int32(_hr))
 }
 
 // SetCredentials wraps the raw SetCredentials call.
@@ -303,18 +373,24 @@ func WrapIFeedEnclosure(raw *mediamediaplayer.IFeedEnclosure) IFeedEnclosure {
 }
 
 // Get_Url wraps the raw Get_Url call.
-func (self IFeedEnclosure) Get_Url(enclosureUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Url(enclosureUrl)))
+func (self IFeedEnclosure) Get_Url() (foundation.BSTR, error) {
+	var _enclosureUrl foundation.BSTR
+	_hr := self.Raw.Get_Url(&_enclosureUrl)
+	return _enclosureUrl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IFeedEnclosure) Get_Type(mimeType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(mimeType)))
+func (self IFeedEnclosure) Get_Type() (foundation.BSTR, error) {
+	var _mimeType foundation.BSTR
+	_hr := self.Raw.Get_Type(&_mimeType)
+	return _mimeType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Length wraps the raw Get_Length call.
-func (self IFeedEnclosure) Get_Length(length *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Length(length)))
+func (self IFeedEnclosure) Get_Length() (int32, error) {
+	var _length int32
+	_hr := self.Raw.Get_Length(&_length)
+	return _length, win32.HRESULTError(int32(_hr))
 }
 
 // AsyncDownload wraps the raw AsyncDownload call.
@@ -328,33 +404,45 @@ func (self IFeedEnclosure) CancelAsyncDownload() error {
 }
 
 // Get_DownloadStatus wraps the raw Get_DownloadStatus call.
-func (self IFeedEnclosure) Get_DownloadStatus(status *mediamediaplayer.FEEDS_DOWNLOAD_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadStatus(status)))
+func (self IFeedEnclosure) Get_DownloadStatus() (mediamediaplayer.FEEDS_DOWNLOAD_STATUS, error) {
+	var _status mediamediaplayer.FEEDS_DOWNLOAD_STATUS
+	_hr := self.Raw.Get_DownloadStatus(&_status)
+	return _status, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastDownloadError wraps the raw Get_LastDownloadError call.
-func (self IFeedEnclosure) Get_LastDownloadError(error_ *mediamediaplayer.FEEDS_DOWNLOAD_ERROR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastDownloadError(error_)))
+func (self IFeedEnclosure) Get_LastDownloadError() (mediamediaplayer.FEEDS_DOWNLOAD_ERROR, error) {
+	var _error_ mediamediaplayer.FEEDS_DOWNLOAD_ERROR
+	_hr := self.Raw.Get_LastDownloadError(&_error_)
+	return _error_, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalPath wraps the raw Get_LocalPath call.
-func (self IFeedEnclosure) Get_LocalPath(localPath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalPath(localPath)))
+func (self IFeedEnclosure) Get_LocalPath() (foundation.BSTR, error) {
+	var _localPath foundation.BSTR
+	_hr := self.Raw.Get_LocalPath(&_localPath)
+	return _localPath, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IFeedEnclosure) Get_Parent(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(disp)))
+func (self IFeedEnclosure) Get_Parent() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DownloadUrl wraps the raw Get_DownloadUrl call.
-func (self IFeedEnclosure) Get_DownloadUrl(enclosureUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadUrl(enclosureUrl)))
+func (self IFeedEnclosure) Get_DownloadUrl() (foundation.BSTR, error) {
+	var _enclosureUrl foundation.BSTR
+	_hr := self.Raw.Get_DownloadUrl(&_enclosureUrl)
+	return _enclosureUrl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DownloadMimeType wraps the raw Get_DownloadMimeType call.
-func (self IFeedEnclosure) Get_DownloadMimeType(mimeType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadMimeType(mimeType)))
+func (self IFeedEnclosure) Get_DownloadMimeType() (foundation.BSTR, error) {
+	var _mimeType foundation.BSTR
+	_hr := self.Raw.Get_DownloadMimeType(&_mimeType)
+	return _mimeType, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveFile wraps the raw RemoveFile call.
@@ -430,43 +518,59 @@ func WrapIFeedFolder(raw *mediamediaplayer.IFeedFolder) IFeedFolder {
 }
 
 // Get_Feeds wraps the raw Get_Feeds call.
-func (self IFeedFolder) Get_Feeds(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Feeds(disp)))
+func (self IFeedFolder) Get_Feeds() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_Feeds(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Subfolders wraps the raw Get_Subfolders call.
-func (self IFeedFolder) Get_Subfolders(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Subfolders(disp)))
+func (self IFeedFolder) Get_Subfolders() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_Subfolders(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // CreateFeed wraps the raw CreateFeed call.
-func (self IFeedFolder) CreateFeed(feedName foundation.BSTR, feedUrl foundation.BSTR, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.CreateFeed(feedName, feedUrl, disp)))
+func (self IFeedFolder) CreateFeed(feedName foundation.BSTR, feedUrl foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.CreateFeed(feedName, feedUrl, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // CreateSubfolder wraps the raw CreateSubfolder call.
-func (self IFeedFolder) CreateSubfolder(folderName foundation.BSTR, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSubfolder(folderName, disp)))
+func (self IFeedFolder) CreateSubfolder(folderName foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.CreateSubfolder(folderName, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // ExistsFeed wraps the raw ExistsFeed call.
-func (self IFeedFolder) ExistsFeed(feedName foundation.BSTR, exists *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ExistsFeed(feedName, exists)))
+func (self IFeedFolder) ExistsFeed(feedName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _exists foundation.VARIANT_BOOL
+	_hr := self.Raw.ExistsFeed(feedName, &_exists)
+	return _exists, win32.HRESULTError(int32(_hr))
 }
 
 // GetFeed wraps the raw GetFeed call.
-func (self IFeedFolder) GetFeed(feedName foundation.BSTR, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetFeed(feedName, disp)))
+func (self IFeedFolder) GetFeed(feedName foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetFeed(feedName, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // ExistsSubfolder wraps the raw ExistsSubfolder call.
-func (self IFeedFolder) ExistsSubfolder(folderName foundation.BSTR, exists *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ExistsSubfolder(folderName, exists)))
+func (self IFeedFolder) ExistsSubfolder(folderName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _exists foundation.VARIANT_BOOL
+	_hr := self.Raw.ExistsSubfolder(folderName, &_exists)
+	return _exists, win32.HRESULTError(int32(_hr))
 }
 
 // GetSubfolder wraps the raw GetSubfolder call.
-func (self IFeedFolder) GetSubfolder(folderName foundation.BSTR, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetSubfolder(folderName, disp)))
+func (self IFeedFolder) GetSubfolder(folderName foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetSubfolder(folderName, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -475,8 +579,10 @@ func (self IFeedFolder) Delete() error {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFeedFolder) Get_Name(folderName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(folderName)))
+func (self IFeedFolder) Get_Name() (foundation.BSTR, error) {
+	var _folderName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_folderName)
+	return _folderName, win32.HRESULTError(int32(_hr))
 }
 
 // Rename wraps the raw Rename call.
@@ -485,8 +591,10 @@ func (self IFeedFolder) Rename(folderName foundation.BSTR) error {
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self IFeedFolder) Get_Path(folderPath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(folderPath)))
+func (self IFeedFolder) Get_Path() (foundation.BSTR, error) {
+	var _folderPath foundation.BSTR
+	_hr := self.Raw.Get_Path(&_folderPath)
+	return _folderPath, win32.HRESULTError(int32(_hr))
 }
 
 // Move wraps the raw Move call.
@@ -495,28 +603,38 @@ func (self IFeedFolder) Move(newParentPath foundation.BSTR) error {
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IFeedFolder) Get_Parent(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(disp)))
+func (self IFeedFolder) Get_Parent() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsRoot wraps the raw Get_IsRoot call.
-func (self IFeedFolder) Get_IsRoot(isRoot *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsRoot(isRoot)))
+func (self IFeedFolder) Get_IsRoot() (foundation.VARIANT_BOOL, error) {
+	var _isRoot foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsRoot(&_isRoot)
+	return _isRoot, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TotalUnreadItemCount wraps the raw Get_TotalUnreadItemCount call.
-func (self IFeedFolder) Get_TotalUnreadItemCount(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TotalUnreadItemCount(count)))
+func (self IFeedFolder) Get_TotalUnreadItemCount() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_TotalUnreadItemCount(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TotalItemCount wraps the raw Get_TotalItemCount call.
-func (self IFeedFolder) Get_TotalItemCount(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TotalItemCount(count)))
+func (self IFeedFolder) Get_TotalItemCount() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_TotalItemCount(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // GetWatcher wraps the raw GetWatcher call.
-func (self IFeedFolder) GetWatcher(scope mediamediaplayer.FEEDS_EVENTS_SCOPE, mask mediamediaplayer.FEEDS_EVENTS_MASK, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetWatcher(scope, mask, disp)))
+func (self IFeedFolder) GetWatcher(scope mediamediaplayer.FEEDS_EVENTS_SCOPE, mask mediamediaplayer.FEEDS_EVENTS_MASK) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetWatcher(scope, mask, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // IFeedFolderEvents is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IFeedFolderEvents with error-returning methods.
@@ -622,53 +740,73 @@ func WrapIFeedItem(raw *mediamediaplayer.IFeedItem) IFeedItem {
 }
 
 // Xml wraps the raw Xml call.
-func (self IFeedItem) Xml(includeFlags mediamediaplayer.FEEDS_XML_INCLUDE_FLAGS, xml *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Xml(includeFlags, xml)))
+func (self IFeedItem) Xml(includeFlags mediamediaplayer.FEEDS_XML_INCLUDE_FLAGS) (foundation.BSTR, error) {
+	var _xml foundation.BSTR
+	_hr := self.Raw.Xml(includeFlags, &_xml)
+	return _xml, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Title wraps the raw Get_Title call.
-func (self IFeedItem) Get_Title(title *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Title(title)))
+func (self IFeedItem) Get_Title() (foundation.BSTR, error) {
+	var _title foundation.BSTR
+	_hr := self.Raw.Get_Title(&_title)
+	return _title, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Link wraps the raw Get_Link call.
-func (self IFeedItem) Get_Link(linkUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Link(linkUrl)))
+func (self IFeedItem) Get_Link() (foundation.BSTR, error) {
+	var _linkUrl foundation.BSTR
+	_hr := self.Raw.Get_Link(&_linkUrl)
+	return _linkUrl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Guid wraps the raw Get_Guid call.
-func (self IFeedItem) Get_Guid(itemGuid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Guid(itemGuid)))
+func (self IFeedItem) Get_Guid() (foundation.BSTR, error) {
+	var _itemGuid foundation.BSTR
+	_hr := self.Raw.Get_Guid(&_itemGuid)
+	return _itemGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IFeedItem) Get_Description(description *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(description)))
+func (self IFeedItem) Get_Description() (foundation.BSTR, error) {
+	var _description foundation.BSTR
+	_hr := self.Raw.Get_Description(&_description)
+	return _description, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PubDate wraps the raw Get_PubDate call.
-func (self IFeedItem) Get_PubDate(pubDate *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PubDate(pubDate)))
+func (self IFeedItem) Get_PubDate() (float64, error) {
+	var _pubDate float64
+	_hr := self.Raw.Get_PubDate(&_pubDate)
+	return _pubDate, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Comments wraps the raw Get_Comments call.
-func (self IFeedItem) Get_Comments(comments *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Comments(comments)))
+func (self IFeedItem) Get_Comments() (foundation.BSTR, error) {
+	var _comments foundation.BSTR
+	_hr := self.Raw.Get_Comments(&_comments)
+	return _comments, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Author wraps the raw Get_Author call.
-func (self IFeedItem) Get_Author(author *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Author(author)))
+func (self IFeedItem) Get_Author() (foundation.BSTR, error) {
+	var _author foundation.BSTR
+	_hr := self.Raw.Get_Author(&_author)
+	return _author, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Enclosure wraps the raw Get_Enclosure call.
-func (self IFeedItem) Get_Enclosure(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enclosure(disp)))
+func (self IFeedItem) Get_Enclosure() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_Enclosure(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsRead wraps the raw Get_IsRead call.
-func (self IFeedItem) Get_IsRead(isRead *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsRead(isRead)))
+func (self IFeedItem) Get_IsRead() (foundation.VARIANT_BOOL, error) {
+	var _isRead foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsRead(&_isRead)
+	return _isRead, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsRead wraps the raw Put_IsRead call.
@@ -677,13 +815,17 @@ func (self IFeedItem) Put_IsRead(isRead foundation.VARIANT_BOOL) error {
 }
 
 // Get_LocalId wraps the raw Get_LocalId call.
-func (self IFeedItem) Get_LocalId(itemId *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalId(itemId)))
+func (self IFeedItem) Get_LocalId() (int32, error) {
+	var _itemId int32
+	_hr := self.Raw.Get_LocalId(&_itemId)
+	return _itemId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IFeedItem) Get_Parent(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(disp)))
+func (self IFeedItem) Get_Parent() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -692,18 +834,24 @@ func (self IFeedItem) Delete() error {
 }
 
 // Get_DownloadUrl wraps the raw Get_DownloadUrl call.
-func (self IFeedItem) Get_DownloadUrl(itemUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DownloadUrl(itemUrl)))
+func (self IFeedItem) Get_DownloadUrl() (foundation.BSTR, error) {
+	var _itemUrl foundation.BSTR
+	_hr := self.Raw.Get_DownloadUrl(&_itemUrl)
+	return _itemUrl, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastDownloadTime wraps the raw Get_LastDownloadTime call.
-func (self IFeedItem) Get_LastDownloadTime(lastDownload *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastDownloadTime(lastDownload)))
+func (self IFeedItem) Get_LastDownloadTime() (float64, error) {
+	var _lastDownload float64
+	_hr := self.Raw.Get_LastDownloadTime(&_lastDownload)
+	return _lastDownload, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Modified wraps the raw Get_Modified call.
-func (self IFeedItem) Get_Modified(modified *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Modified(modified)))
+func (self IFeedItem) Get_Modified() (float64, error) {
+	var _modified float64
+	_hr := self.Raw.Get_Modified(&_modified)
+	return _modified, win32.HRESULTError(int32(_hr))
 }
 
 // IFeedItem2 is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IFeedItem2 with error-returning methods.
@@ -718,8 +866,10 @@ func WrapIFeedItem2(raw *mediamediaplayer.IFeedItem2) IFeedItem2 {
 }
 
 // Get_EffectiveId wraps the raw Get_EffectiveId call.
-func (self IFeedItem2) Get_EffectiveId(effectiveId *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EffectiveId(effectiveId)))
+func (self IFeedItem2) Get_EffectiveId() (int32, error) {
+	var _effectiveId int32
+	_hr := self.Raw.Get_EffectiveId(&_effectiveId)
+	return _effectiveId, win32.HRESULTError(int32(_hr))
 }
 
 // IFeedsEnum is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IFeedsEnum with error-returning methods.
@@ -734,18 +884,24 @@ func WrapIFeedsEnum(raw *mediamediaplayer.IFeedsEnum) IFeedsEnum {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IFeedsEnum) Get_Count(count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(count)))
+func (self IFeedsEnum) Get_Count() (int32, error) {
+	var _count int32
+	_hr := self.Raw.Get_Count(&_count)
+	return _count, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IFeedsEnum) Item(index int32, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Item(index, disp)))
+func (self IFeedsEnum) Item(index int32) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Item(index, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IFeedsEnum) Get__NewEnum(enumVar **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(enumVar)))
+func (self IFeedsEnum) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _enumVar *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_enumVar)
+	return _enumVar, win32.HRESULTError(int32(_hr))
 }
 
 // IFeedsManager is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IFeedsManager with error-returning methods.
@@ -760,38 +916,52 @@ func WrapIFeedsManager(raw *mediamediaplayer.IFeedsManager) IFeedsManager {
 }
 
 // Get_RootFolder wraps the raw Get_RootFolder call.
-func (self IFeedsManager) Get_RootFolder(disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RootFolder(disp)))
+func (self IFeedsManager) Get_RootFolder() (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.Get_RootFolder(&_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // IsSubscribed wraps the raw IsSubscribed call.
-func (self IFeedsManager) IsSubscribed(feedUrl foundation.BSTR, subscribed *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSubscribed(feedUrl, subscribed)))
+func (self IFeedsManager) IsSubscribed(feedUrl foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _subscribed foundation.VARIANT_BOOL
+	_hr := self.Raw.IsSubscribed(feedUrl, &_subscribed)
+	return _subscribed, win32.HRESULTError(int32(_hr))
 }
 
 // ExistsFeed wraps the raw ExistsFeed call.
-func (self IFeedsManager) ExistsFeed(feedPath foundation.BSTR, exists *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ExistsFeed(feedPath, exists)))
+func (self IFeedsManager) ExistsFeed(feedPath foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _exists foundation.VARIANT_BOOL
+	_hr := self.Raw.ExistsFeed(feedPath, &_exists)
+	return _exists, win32.HRESULTError(int32(_hr))
 }
 
 // GetFeed wraps the raw GetFeed call.
-func (self IFeedsManager) GetFeed(feedPath foundation.BSTR, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetFeed(feedPath, disp)))
+func (self IFeedsManager) GetFeed(feedPath foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetFeed(feedPath, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // GetFeedByUrl wraps the raw GetFeedByUrl call.
-func (self IFeedsManager) GetFeedByUrl(feedUrl foundation.BSTR, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetFeedByUrl(feedUrl, disp)))
+func (self IFeedsManager) GetFeedByUrl(feedUrl foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetFeedByUrl(feedUrl, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // ExistsFolder wraps the raw ExistsFolder call.
-func (self IFeedsManager) ExistsFolder(folderPath foundation.BSTR, exists *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ExistsFolder(folderPath, exists)))
+func (self IFeedsManager) ExistsFolder(folderPath foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _exists foundation.VARIANT_BOOL
+	_hr := self.Raw.ExistsFolder(folderPath, &_exists)
+	return _exists, win32.HRESULTError(int32(_hr))
 }
 
 // GetFolder wraps the raw GetFolder call.
-func (self IFeedsManager) GetFolder(folderPath foundation.BSTR, disp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetFolder(folderPath, disp)))
+func (self IFeedsManager) GetFolder(folderPath foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _disp *systemcom.IDispatch
+	_hr := self.Raw.GetFolder(folderPath, &_disp)
+	return _disp, win32.HRESULTError(int32(_hr))
 }
 
 // DeleteFeed wraps the raw DeleteFeed call.
@@ -810,13 +980,17 @@ func (self IFeedsManager) BackgroundSync(action mediamediaplayer.FEEDS_BACKGROUN
 }
 
 // Get_BackgroundSyncStatus wraps the raw Get_BackgroundSyncStatus call.
-func (self IFeedsManager) Get_BackgroundSyncStatus(status *mediamediaplayer.FEEDS_BACKGROUNDSYNC_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BackgroundSyncStatus(status)))
+func (self IFeedsManager) Get_BackgroundSyncStatus() (mediamediaplayer.FEEDS_BACKGROUNDSYNC_STATUS, error) {
+	var _status mediamediaplayer.FEEDS_BACKGROUNDSYNC_STATUS
+	_hr := self.Raw.Get_BackgroundSyncStatus(&_status)
+	return _status, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DefaultInterval wraps the raw Get_DefaultInterval call.
-func (self IFeedsManager) Get_DefaultInterval(minutes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultInterval(minutes)))
+func (self IFeedsManager) Get_DefaultInterval() (int32, error) {
+	var _minutes int32
+	_hr := self.Raw.Get_DefaultInterval(&_minutes)
+	return _minutes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultInterval wraps the raw Put_DefaultInterval call.
@@ -830,13 +1004,17 @@ func (self IFeedsManager) AsyncSyncAll() error {
 }
 
 // Normalize wraps the raw Normalize call.
-func (self IFeedsManager) Normalize(feedXmlIn foundation.BSTR, feedXmlOut *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Normalize(feedXmlIn, feedXmlOut)))
+func (self IFeedsManager) Normalize(feedXmlIn foundation.BSTR) (foundation.BSTR, error) {
+	var _feedXmlOut foundation.BSTR
+	_hr := self.Raw.Normalize(feedXmlIn, &_feedXmlOut)
+	return _feedXmlOut, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ItemCountLimit wraps the raw Get_ItemCountLimit call.
-func (self IFeedsManager) Get_ItemCountLimit(itemCountLimit *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ItemCountLimit(itemCountLimit)))
+func (self IFeedsManager) Get_ItemCountLimit() (int32, error) {
+	var _itemCountLimit int32
+	_hr := self.Raw.Get_ItemCountLimit(&_itemCountLimit)
+	return _itemCountLimit, win32.HRESULTError(int32(_hr))
 }
 
 // IWMPAudioRenderConfig is an idiomatic wrapper over the raw COM interface Media.MediaPlayer.IWMPAudioRenderConfig with error-returning methods.

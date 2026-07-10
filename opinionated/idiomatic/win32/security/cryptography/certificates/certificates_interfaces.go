@@ -1314,8 +1314,10 @@ func WrapICertExit(raw *securitycryptographycertificates.ICertExit) ICertExit {
 }
 
 // Initialize wraps the raw Initialize call.
-func (self ICertExit) Initialize(strConfig foundation.BSTR, pEventMask *securitycryptographycertificates.CERT_EXIT_EVENT_MASK) error {
-	return win32.HRESULTError(int32(self.Raw.Initialize(strConfig, pEventMask)))
+func (self ICertExit) Initialize(strConfig foundation.BSTR) (securitycryptographycertificates.CERT_EXIT_EVENT_MASK, error) {
+	var _pEventMask securitycryptographycertificates.CERT_EXIT_EVENT_MASK
+	_hr := self.Raw.Initialize(strConfig, &_pEventMask)
+	return _pEventMask, win32.HRESULTError(int32(_hr))
 }
 
 // Notify wraps the raw Notify call.
@@ -1324,8 +1326,10 @@ func (self ICertExit) Notify(ExitEvent int32, Context int32) error {
 }
 
 // GetDescription wraps the raw GetDescription call.
-func (self ICertExit) GetDescription(pstrDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDescription(pstrDescription)))
+func (self ICertExit) GetDescription() (foundation.BSTR, error) {
+	var _pstrDescription foundation.BSTR
+	_hr := self.Raw.GetDescription(&_pstrDescription)
+	return _pstrDescription, win32.HRESULTError(int32(_hr))
 }
 
 // ICertExit2 is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICertExit2 with error-returning methods.
@@ -1340,8 +1344,10 @@ func WrapICertExit2(raw *securitycryptographycertificates.ICertExit2) ICertExit2
 }
 
 // GetManageModule wraps the raw GetManageModule call.
-func (self ICertExit2) GetManageModule(ppManageModule **securitycryptographycertificates.ICertManageModule) error {
-	return win32.HRESULTError(int32(self.Raw.GetManageModule(ppManageModule)))
+func (self ICertExit2) GetManageModule() (*securitycryptographycertificates.ICertManageModule, error) {
+	var _ppManageModule *securitycryptographycertificates.ICertManageModule
+	_hr := self.Raw.GetManageModule(&_ppManageModule)
+	return _ppManageModule, win32.HRESULTError(int32(_hr))
 }
 
 // ICertGetConfig is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICertGetConfig with error-returning methods.
@@ -1372,8 +1378,10 @@ func WrapICertManageModule(raw *securitycryptographycertificates.ICertManageModu
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self ICertManageModule) GetProperty(strConfig foundation.BSTR, strStorageLocation foundation.BSTR, strPropertyName foundation.BSTR, Flags int32, pvarProperty *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(strConfig, strStorageLocation, strPropertyName, Flags, pvarProperty)))
+func (self ICertManageModule) GetProperty(strConfig foundation.BSTR, strStorageLocation foundation.BSTR, strPropertyName foundation.BSTR, Flags int32) (systemvariant.VARIANT, error) {
+	var _pvarProperty systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(strConfig, strStorageLocation, strPropertyName, Flags, &_pvarProperty)
+	return _pvarProperty, win32.HRESULTError(int32(_hr))
 }
 
 // SetProperty wraps the raw SetProperty call.
@@ -1403,13 +1411,17 @@ func (self ICertPolicy) Initialize(strConfig foundation.BSTR) error {
 }
 
 // VerifyRequest wraps the raw VerifyRequest call.
-func (self ICertPolicy) VerifyRequest(strConfig foundation.BSTR, Context int32, bNewRequest int32, Flags int32, pDisposition *int32) error {
-	return win32.HRESULTError(int32(self.Raw.VerifyRequest(strConfig, Context, bNewRequest, Flags, pDisposition)))
+func (self ICertPolicy) VerifyRequest(strConfig foundation.BSTR, Context int32, bNewRequest int32, Flags int32) (int32, error) {
+	var _pDisposition int32
+	_hr := self.Raw.VerifyRequest(strConfig, Context, bNewRequest, Flags, &_pDisposition)
+	return _pDisposition, win32.HRESULTError(int32(_hr))
 }
 
 // GetDescription wraps the raw GetDescription call.
-func (self ICertPolicy) GetDescription(pstrDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDescription(pstrDescription)))
+func (self ICertPolicy) GetDescription() (foundation.BSTR, error) {
+	var _pstrDescription foundation.BSTR
+	_hr := self.Raw.GetDescription(&_pstrDescription)
+	return _pstrDescription, win32.HRESULTError(int32(_hr))
 }
 
 // ShutDown wraps the raw ShutDown call.
@@ -1429,8 +1441,10 @@ func WrapICertPolicy2(raw *securitycryptographycertificates.ICertPolicy2) ICertP
 }
 
 // GetManageModule wraps the raw GetManageModule call.
-func (self ICertPolicy2) GetManageModule(ppManageModule **securitycryptographycertificates.ICertManageModule) error {
-	return win32.HRESULTError(int32(self.Raw.GetManageModule(ppManageModule)))
+func (self ICertPolicy2) GetManageModule() (*securitycryptographycertificates.ICertManageModule, error) {
+	var _ppManageModule *securitycryptographycertificates.ICertManageModule
+	_hr := self.Raw.GetManageModule(&_ppManageModule)
+	return _ppManageModule, win32.HRESULTError(int32(_hr))
 }
 
 // ICertProperties is an idiomatic wrapper over the raw COM interface Security.Cryptography.Certificates.ICertProperties with error-returning methods.
@@ -3788,17 +3802,21 @@ func (self INDESPolicy) Uninitialize() error {
 }
 
 // GenerateChallenge wraps the raw GenerateChallenge call.
-func (self INDESPolicy) GenerateChallenge(pwszTemplate string, pwszParams string, ppwszResponse *foundation.PWSTR) error {
+func (self INDESPolicy) GenerateChallenge(pwszTemplate string, pwszParams string) (foundation.PWSTR, error) {
 	_pwszTemplate := win32.UTF16Ptr(pwszTemplate)
 	_pwszParams := win32.UTF16Ptr(pwszParams)
-	return win32.HRESULTError(int32(self.Raw.GenerateChallenge(foundation.PWSTR(_pwszTemplate), foundation.PWSTR(_pwszParams), ppwszResponse)))
+	var _ppwszResponse foundation.PWSTR
+	_hr := self.Raw.GenerateChallenge(foundation.PWSTR(_pwszTemplate), foundation.PWSTR(_pwszParams), &_ppwszResponse)
+	return _ppwszResponse, win32.HRESULTError(int32(_hr))
 }
 
 // VerifyRequest wraps the raw VerifyRequest call.
-func (self INDESPolicy) VerifyRequest(pctbRequest *securitycryptographycertificates.CERTTRANSBLOB, pctbSigningCertEncoded *securitycryptographycertificates.CERTTRANSBLOB, pwszTemplate string, pwszTransactionId string, pfVerified *foundation.BOOL) error {
+func (self INDESPolicy) VerifyRequest(pctbRequest *securitycryptographycertificates.CERTTRANSBLOB, pctbSigningCertEncoded *securitycryptographycertificates.CERTTRANSBLOB, pwszTemplate string, pwszTransactionId string) (foundation.BOOL, error) {
 	_pwszTemplate := win32.UTF16Ptr(pwszTemplate)
 	_pwszTransactionId := win32.UTF16Ptr(pwszTransactionId)
-	return win32.HRESULTError(int32(self.Raw.VerifyRequest(pctbRequest, pctbSigningCertEncoded, foundation.PWSTR(_pwszTemplate), foundation.PWSTR(_pwszTransactionId), pfVerified)))
+	var _pfVerified foundation.BOOL
+	_hr := self.Raw.VerifyRequest(pctbRequest, pctbSigningCertEncoded, foundation.PWSTR(_pwszTemplate), foundation.PWSTR(_pwszTransactionId), &_pfVerified)
+	return _pfVerified, win32.HRESULTError(int32(_hr))
 }
 
 // Notify wraps the raw Notify call.

@@ -33,8 +33,10 @@ func (self IDesktopWindowXamlSourceNative) AttachToWindow(parentWnd foundation.H
 }
 
 // Get_WindowHandle wraps the raw Get_WindowHandle call.
-func (self IDesktopWindowXamlSourceNative) Get_WindowHandle(hWnd *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WindowHandle(hWnd)))
+func (self IDesktopWindowXamlSourceNative) Get_WindowHandle() (foundation.HWND, error) {
+	var _hWnd foundation.HWND
+	_hr := self.Raw.Get_WindowHandle(&_hWnd)
+	return _hWnd, win32.HRESULTError(int32(_hr))
 }
 
 // IDesktopWindowXamlSourceNative2 is an idiomatic wrapper over the raw COM interface System.WinRT.Xaml.IDesktopWindowXamlSourceNative2 with error-returning methods.
@@ -362,8 +364,10 @@ func WrapITrackerOwner(raw *systemwinrtxaml.ITrackerOwner) ITrackerOwner {
 }
 
 // CreateTrackerHandle wraps the raw CreateTrackerHandle call.
-func (self ITrackerOwner) CreateTrackerHandle(returnValue *systemwinrtxaml.TrackerHandle) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTrackerHandle(returnValue)))
+func (self ITrackerOwner) CreateTrackerHandle() (systemwinrtxaml.TrackerHandle, error) {
+	var _returnValue systemwinrtxaml.TrackerHandle
+	_hr := self.Raw.CreateTrackerHandle(&_returnValue)
+	return _returnValue, win32.HRESULTError(int32(_hr))
 }
 
 // DeleteTrackerHandle wraps the raw DeleteTrackerHandle call.

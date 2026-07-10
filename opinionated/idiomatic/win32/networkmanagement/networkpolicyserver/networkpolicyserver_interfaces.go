@@ -25,13 +25,17 @@ func WrapISdo(raw *networkmanagementnetworkpolicyserver.ISdo) ISdo {
 }
 
 // GetPropertyInfo wraps the raw GetPropertyInfo call.
-func (self ISdo) GetPropertyInfo(Id int32, ppPropertyInfo **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetPropertyInfo(Id, ppPropertyInfo)))
+func (self ISdo) GetPropertyInfo(Id int32) (*systemcom.IUnknown, error) {
+	var _ppPropertyInfo *systemcom.IUnknown
+	_hr := self.Raw.GetPropertyInfo(Id, &_ppPropertyInfo)
+	return _ppPropertyInfo, win32.HRESULTError(int32(_hr))
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self ISdo) GetProperty(Id int32, pValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(Id, pValue)))
+func (self ISdo) GetProperty(Id int32) (systemvariant.VARIANT, error) {
+	var _pValue systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(Id, &_pValue)
+	return _pValue, win32.HRESULTError(int32(_hr))
 }
 
 // PutProperty wraps the raw PutProperty call.
@@ -55,8 +59,10 @@ func (self ISdo) Restore() error {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISdo) Get__NewEnum(ppEnumVARIANT **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppEnumVARIANT)))
+func (self ISdo) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppEnumVARIANT *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppEnumVARIANT)
+	return _ppEnumVARIANT, win32.HRESULTError(int32(_hr))
 }
 
 // ISdoCollection is an idiomatic wrapper over the raw COM interface NetworkManagement.NetworkPolicyServer.ISdoCollection with error-returning methods.
@@ -71,8 +77,10 @@ func WrapISdoCollection(raw *networkmanagementnetworkpolicyserver.ISdoCollection
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ISdoCollection) Get_Count(pCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pCount)))
+func (self ISdoCollection) Get_Count() (int32, error) {
+	var _pCount int32
+	_hr := self.Raw.Get_Count(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -96,18 +104,24 @@ func (self ISdoCollection) Reload() error {
 }
 
 // IsNameUnique wraps the raw IsNameUnique call.
-func (self ISdoCollection) IsNameUnique(bstrName foundation.BSTR, pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsNameUnique(bstrName, pBool)))
+func (self ISdoCollection) IsNameUnique(bstrName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.IsNameUnique(bstrName, &_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self ISdoCollection) Item(Name *systemvariant.VARIANT, pItem **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Item(Name, pItem)))
+func (self ISdoCollection) Item(Name *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	var _pItem *systemcom.IDispatch
+	_hr := self.Raw.Item(Name, &_pItem)
+	return _pItem, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ISdoCollection) Get__NewEnum(ppEnumVARIANT **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppEnumVARIANT)))
+func (self ISdoCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppEnumVARIANT *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppEnumVARIANT)
+	return _ppEnumVARIANT, win32.HRESULTError(int32(_hr))
 }
 
 // ISdoDictionaryOld is an idiomatic wrapper over the raw COM interface NetworkManagement.NetworkPolicyServer.ISdoDictionaryOld with error-returning methods.
@@ -122,28 +136,38 @@ func WrapISdoDictionaryOld(raw *networkmanagementnetworkpolicyserver.ISdoDiction
 }
 
 // EnumAttributes wraps the raw EnumAttributes call.
-func (self ISdoDictionaryOld) EnumAttributes(Id *systemvariant.VARIANT, pValues *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.EnumAttributes(Id, pValues)))
+func (self ISdoDictionaryOld) EnumAttributes(Id *systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	var _pValues systemvariant.VARIANT
+	_hr := self.Raw.EnumAttributes(Id, &_pValues)
+	return _pValues, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttributeInfo wraps the raw GetAttributeInfo call.
-func (self ISdoDictionaryOld) GetAttributeInfo(Id networkmanagementnetworkpolicyserver.ATTRIBUTEID, pInfoIDs *systemvariant.VARIANT, pInfoValues *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttributeInfo(Id, pInfoIDs, pInfoValues)))
+func (self ISdoDictionaryOld) GetAttributeInfo(Id networkmanagementnetworkpolicyserver.ATTRIBUTEID, pInfoIDs *systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	var _pInfoValues systemvariant.VARIANT
+	_hr := self.Raw.GetAttributeInfo(Id, pInfoIDs, &_pInfoValues)
+	return _pInfoValues, win32.HRESULTError(int32(_hr))
 }
 
 // EnumAttributeValues wraps the raw EnumAttributeValues call.
-func (self ISdoDictionaryOld) EnumAttributeValues(Id networkmanagementnetworkpolicyserver.ATTRIBUTEID, pValueIds *systemvariant.VARIANT, pValuesDesc *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.EnumAttributeValues(Id, pValueIds, pValuesDesc)))
+func (self ISdoDictionaryOld) EnumAttributeValues(Id networkmanagementnetworkpolicyserver.ATTRIBUTEID, pValueIds *systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	var _pValuesDesc systemvariant.VARIANT
+	_hr := self.Raw.EnumAttributeValues(Id, pValueIds, &_pValuesDesc)
+	return _pValuesDesc, win32.HRESULTError(int32(_hr))
 }
 
 // CreateAttribute wraps the raw CreateAttribute call.
-func (self ISdoDictionaryOld) CreateAttribute(Id networkmanagementnetworkpolicyserver.ATTRIBUTEID, ppAttributeObject **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAttribute(Id, ppAttributeObject)))
+func (self ISdoDictionaryOld) CreateAttribute(Id networkmanagementnetworkpolicyserver.ATTRIBUTEID) (*systemcom.IDispatch, error) {
+	var _ppAttributeObject *systemcom.IDispatch
+	_hr := self.Raw.CreateAttribute(Id, &_ppAttributeObject)
+	return _ppAttributeObject, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttributeID wraps the raw GetAttributeID call.
-func (self ISdoDictionaryOld) GetAttributeID(bstrAttributeName foundation.BSTR, pId *networkmanagementnetworkpolicyserver.ATTRIBUTEID) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttributeID(bstrAttributeName, pId)))
+func (self ISdoDictionaryOld) GetAttributeID(bstrAttributeName foundation.BSTR) (networkmanagementnetworkpolicyserver.ATTRIBUTEID, error) {
+	var _pId networkmanagementnetworkpolicyserver.ATTRIBUTEID
+	_hr := self.Raw.GetAttributeID(bstrAttributeName, &_pId)
+	return _pId, win32.HRESULTError(int32(_hr))
 }
 
 // ISdoMachine is an idiomatic wrapper over the raw COM interface NetworkManagement.NetworkPolicyServer.ISdoMachine with error-returning methods.
@@ -163,43 +187,59 @@ func (self ISdoMachine) Attach(bstrComputerName foundation.BSTR) error {
 }
 
 // GetDictionarySDO wraps the raw GetDictionarySDO call.
-func (self ISdoMachine) GetDictionarySDO(ppDictionarySDO **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetDictionarySDO(ppDictionarySDO)))
+func (self ISdoMachine) GetDictionarySDO() (*systemcom.IUnknown, error) {
+	var _ppDictionarySDO *systemcom.IUnknown
+	_hr := self.Raw.GetDictionarySDO(&_ppDictionarySDO)
+	return _ppDictionarySDO, win32.HRESULTError(int32(_hr))
 }
 
 // GetServiceSDO wraps the raw GetServiceSDO call.
-func (self ISdoMachine) GetServiceSDO(eDataStore networkmanagementnetworkpolicyserver.IASDATASTORE, bstrServiceName foundation.BSTR, ppServiceSDO **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetServiceSDO(eDataStore, bstrServiceName, ppServiceSDO)))
+func (self ISdoMachine) GetServiceSDO(eDataStore networkmanagementnetworkpolicyserver.IASDATASTORE, bstrServiceName foundation.BSTR) (*systemcom.IUnknown, error) {
+	var _ppServiceSDO *systemcom.IUnknown
+	_hr := self.Raw.GetServiceSDO(eDataStore, bstrServiceName, &_ppServiceSDO)
+	return _ppServiceSDO, win32.HRESULTError(int32(_hr))
 }
 
 // GetUserSDO wraps the raw GetUserSDO call.
-func (self ISdoMachine) GetUserSDO(eDataStore networkmanagementnetworkpolicyserver.IASDATASTORE, bstrUserName foundation.BSTR, ppUserSDO **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetUserSDO(eDataStore, bstrUserName, ppUserSDO)))
+func (self ISdoMachine) GetUserSDO(eDataStore networkmanagementnetworkpolicyserver.IASDATASTORE, bstrUserName foundation.BSTR) (*systemcom.IUnknown, error) {
+	var _ppUserSDO *systemcom.IUnknown
+	_hr := self.Raw.GetUserSDO(eDataStore, bstrUserName, &_ppUserSDO)
+	return _ppUserSDO, win32.HRESULTError(int32(_hr))
 }
 
 // GetOSType wraps the raw GetOSType call.
-func (self ISdoMachine) GetOSType(eOSType *networkmanagementnetworkpolicyserver.IASOSTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.GetOSType(eOSType)))
+func (self ISdoMachine) GetOSType() (networkmanagementnetworkpolicyserver.IASOSTYPE, error) {
+	var _eOSType networkmanagementnetworkpolicyserver.IASOSTYPE
+	_hr := self.Raw.GetOSType(&_eOSType)
+	return _eOSType, win32.HRESULTError(int32(_hr))
 }
 
 // GetDomainType wraps the raw GetDomainType call.
-func (self ISdoMachine) GetDomainType(eDomainType *networkmanagementnetworkpolicyserver.IASDOMAINTYPE) error {
-	return win32.HRESULTError(int32(self.Raw.GetDomainType(eDomainType)))
+func (self ISdoMachine) GetDomainType() (networkmanagementnetworkpolicyserver.IASDOMAINTYPE, error) {
+	var _eDomainType networkmanagementnetworkpolicyserver.IASDOMAINTYPE
+	_hr := self.Raw.GetDomainType(&_eDomainType)
+	return _eDomainType, win32.HRESULTError(int32(_hr))
 }
 
 // IsDirectoryAvailable wraps the raw IsDirectoryAvailable call.
-func (self ISdoMachine) IsDirectoryAvailable(boolDirectoryAvailable *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsDirectoryAvailable(boolDirectoryAvailable)))
+func (self ISdoMachine) IsDirectoryAvailable() (foundation.VARIANT_BOOL, error) {
+	var _boolDirectoryAvailable foundation.VARIANT_BOOL
+	_hr := self.Raw.IsDirectoryAvailable(&_boolDirectoryAvailable)
+	return _boolDirectoryAvailable, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttachedComputer wraps the raw GetAttachedComputer call.
-func (self ISdoMachine) GetAttachedComputer(bstrComputerName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttachedComputer(bstrComputerName)))
+func (self ISdoMachine) GetAttachedComputer() (foundation.BSTR, error) {
+	var _bstrComputerName foundation.BSTR
+	_hr := self.Raw.GetAttachedComputer(&_bstrComputerName)
+	return _bstrComputerName, win32.HRESULTError(int32(_hr))
 }
 
 // GetSDOSchema wraps the raw GetSDOSchema call.
-func (self ISdoMachine) GetSDOSchema(ppSDOSchema **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetSDOSchema(ppSDOSchema)))
+func (self ISdoMachine) GetSDOSchema() (*systemcom.IUnknown, error) {
+	var _ppSDOSchema *systemcom.IUnknown
+	_hr := self.Raw.GetSDOSchema(&_ppSDOSchema)
+	return _ppSDOSchema, win32.HRESULTError(int32(_hr))
 }
 
 // ISdoMachine2 is an idiomatic wrapper over the raw COM interface NetworkManagement.NetworkPolicyServer.ISdoMachine2 with error-returning methods.
@@ -214,8 +254,10 @@ func WrapISdoMachine2(raw *networkmanagementnetworkpolicyserver.ISdoMachine2) IS
 }
 
 // GetTemplatesSDO wraps the raw GetTemplatesSDO call.
-func (self ISdoMachine2) GetTemplatesSDO(bstrServiceName foundation.BSTR, ppTemplatesSDO **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetTemplatesSDO(bstrServiceName, ppTemplatesSDO)))
+func (self ISdoMachine2) GetTemplatesSDO(bstrServiceName foundation.BSTR) (*systemcom.IUnknown, error) {
+	var _ppTemplatesSDO *systemcom.IUnknown
+	_hr := self.Raw.GetTemplatesSDO(bstrServiceName, &_ppTemplatesSDO)
+	return _ppTemplatesSDO, win32.HRESULTError(int32(_hr))
 }
 
 // EnableTemplates wraps the raw EnableTemplates call.
@@ -260,8 +302,10 @@ func (self ISdoServiceControl) StopService() error {
 }
 
 // GetServiceStatus wraps the raw GetServiceStatus call.
-func (self ISdoServiceControl) GetServiceStatus(status *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetServiceStatus(status)))
+func (self ISdoServiceControl) GetServiceStatus() (int32, error) {
+	var _status int32
+	_hr := self.Raw.GetServiceStatus(&_status)
+	return _status, win32.HRESULTError(int32(_hr))
 }
 
 // ResetService wraps the raw ResetService call.

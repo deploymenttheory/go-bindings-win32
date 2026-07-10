@@ -62,8 +62,10 @@ func WrapIUPnPDescriptionDocument(raw *devicesenumerationpnp.IUPnPDescriptionDoc
 }
 
 // Get_ReadyState wraps the raw Get_ReadyState call.
-func (self IUPnPDescriptionDocument) Get_ReadyState(plReadyState *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReadyState(plReadyState)))
+func (self IUPnPDescriptionDocument) Get_ReadyState() (int32, error) {
+	var _plReadyState int32
+	_hr := self.Raw.Get_ReadyState(&_plReadyState)
+	return _plReadyState, win32.HRESULTError(int32(_hr))
 }
 
 // Load wraps the raw Load call.
@@ -77,8 +79,10 @@ func (self IUPnPDescriptionDocument) LoadAsync(bstrUrl foundation.BSTR, punkCall
 }
 
 // Get_LoadResult wraps the raw Get_LoadResult call.
-func (self IUPnPDescriptionDocument) Get_LoadResult(phrError *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LoadResult(phrError)))
+func (self IUPnPDescriptionDocument) Get_LoadResult() (int32, error) {
+	var _phrError int32
+	_hr := self.Raw.Get_LoadResult(&_phrError)
+	return _phrError, win32.HRESULTError(int32(_hr))
 }
 
 // Abort wraps the raw Abort call.
@@ -87,13 +91,17 @@ func (self IUPnPDescriptionDocument) Abort() error {
 }
 
 // RootDevice wraps the raw RootDevice call.
-func (self IUPnPDescriptionDocument) RootDevice(ppudRootDevice **devicesenumerationpnp.IUPnPDevice) error {
-	return win32.HRESULTError(int32(self.Raw.RootDevice(ppudRootDevice)))
+func (self IUPnPDescriptionDocument) RootDevice() (*devicesenumerationpnp.IUPnPDevice, error) {
+	var _ppudRootDevice *devicesenumerationpnp.IUPnPDevice
+	_hr := self.Raw.RootDevice(&_ppudRootDevice)
+	return _ppudRootDevice, win32.HRESULTError(int32(_hr))
 }
 
 // DeviceByUDN wraps the raw DeviceByUDN call.
-func (self IUPnPDescriptionDocument) DeviceByUDN(bstrUDN foundation.BSTR, ppudDevice **devicesenumerationpnp.IUPnPDevice) error {
-	return win32.HRESULTError(int32(self.Raw.DeviceByUDN(bstrUDN, ppudDevice)))
+func (self IUPnPDescriptionDocument) DeviceByUDN(bstrUDN foundation.BSTR) (*devicesenumerationpnp.IUPnPDevice, error) {
+	var _ppudDevice *devicesenumerationpnp.IUPnPDevice
+	_hr := self.Raw.DeviceByUDN(bstrUDN, &_ppudDevice)
+	return _ppudDevice, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDescriptionDocumentCallback is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDescriptionDocumentCallback with error-returning methods.
@@ -124,98 +132,136 @@ func WrapIUPnPDevice(raw *devicesenumerationpnp.IUPnPDevice) IUPnPDevice {
 }
 
 // Get_IsRootDevice wraps the raw Get_IsRootDevice call.
-func (self IUPnPDevice) Get_IsRootDevice(pvarb *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsRootDevice(pvarb)))
+func (self IUPnPDevice) Get_IsRootDevice() (foundation.VARIANT_BOOL, error) {
+	var _pvarb foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsRootDevice(&_pvarb)
+	return _pvarb, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RootDevice wraps the raw Get_RootDevice call.
-func (self IUPnPDevice) Get_RootDevice(ppudRootDevice **devicesenumerationpnp.IUPnPDevice) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RootDevice(ppudRootDevice)))
+func (self IUPnPDevice) Get_RootDevice() (*devicesenumerationpnp.IUPnPDevice, error) {
+	var _ppudRootDevice *devicesenumerationpnp.IUPnPDevice
+	_hr := self.Raw.Get_RootDevice(&_ppudRootDevice)
+	return _ppudRootDevice, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ParentDevice wraps the raw Get_ParentDevice call.
-func (self IUPnPDevice) Get_ParentDevice(ppudDeviceParent **devicesenumerationpnp.IUPnPDevice) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ParentDevice(ppudDeviceParent)))
+func (self IUPnPDevice) Get_ParentDevice() (*devicesenumerationpnp.IUPnPDevice, error) {
+	var _ppudDeviceParent *devicesenumerationpnp.IUPnPDevice
+	_hr := self.Raw.Get_ParentDevice(&_ppudDeviceParent)
+	return _ppudDeviceParent, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HasChildren wraps the raw Get_HasChildren call.
-func (self IUPnPDevice) Get_HasChildren(pvarb *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HasChildren(pvarb)))
+func (self IUPnPDevice) Get_HasChildren() (foundation.VARIANT_BOOL, error) {
+	var _pvarb foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_HasChildren(&_pvarb)
+	return _pvarb, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Children wraps the raw Get_Children call.
-func (self IUPnPDevice) Get_Children(ppudChildren **devicesenumerationpnp.IUPnPDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Children(ppudChildren)))
+func (self IUPnPDevice) Get_Children() (*devicesenumerationpnp.IUPnPDevices, error) {
+	var _ppudChildren *devicesenumerationpnp.IUPnPDevices
+	_hr := self.Raw.Get_Children(&_ppudChildren)
+	return _ppudChildren, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UniqueDeviceName wraps the raw Get_UniqueDeviceName call.
-func (self IUPnPDevice) Get_UniqueDeviceName(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UniqueDeviceName(pbstr)))
+func (self IUPnPDevice) Get_UniqueDeviceName() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_UniqueDeviceName(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FriendlyName wraps the raw Get_FriendlyName call.
-func (self IUPnPDevice) Get_FriendlyName(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FriendlyName(pbstr)))
+func (self IUPnPDevice) Get_FriendlyName() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_FriendlyName(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IUPnPDevice) Get_Type(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(pbstr)))
+func (self IUPnPDevice) Get_Type() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_Type(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PresentationURL wraps the raw Get_PresentationURL call.
-func (self IUPnPDevice) Get_PresentationURL(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PresentationURL(pbstr)))
+func (self IUPnPDevice) Get_PresentationURL() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_PresentationURL(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ManufacturerName wraps the raw Get_ManufacturerName call.
-func (self IUPnPDevice) Get_ManufacturerName(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ManufacturerName(pbstr)))
+func (self IUPnPDevice) Get_ManufacturerName() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_ManufacturerName(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ManufacturerURL wraps the raw Get_ManufacturerURL call.
-func (self IUPnPDevice) Get_ManufacturerURL(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ManufacturerURL(pbstr)))
+func (self IUPnPDevice) Get_ManufacturerURL() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_ManufacturerURL(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ModelName wraps the raw Get_ModelName call.
-func (self IUPnPDevice) Get_ModelName(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModelName(pbstr)))
+func (self IUPnPDevice) Get_ModelName() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_ModelName(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ModelNumber wraps the raw Get_ModelNumber call.
-func (self IUPnPDevice) Get_ModelNumber(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModelNumber(pbstr)))
+func (self IUPnPDevice) Get_ModelNumber() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_ModelNumber(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IUPnPDevice) Get_Description(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pbstr)))
+func (self IUPnPDevice) Get_Description() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ModelURL wraps the raw Get_ModelURL call.
-func (self IUPnPDevice) Get_ModelURL(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModelURL(pbstr)))
+func (self IUPnPDevice) Get_ModelURL() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_ModelURL(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UPC wraps the raw Get_UPC call.
-func (self IUPnPDevice) Get_UPC(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UPC(pbstr)))
+func (self IUPnPDevice) Get_UPC() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_UPC(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SerialNumber wraps the raw Get_SerialNumber call.
-func (self IUPnPDevice) Get_SerialNumber(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SerialNumber(pbstr)))
+func (self IUPnPDevice) Get_SerialNumber() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_SerialNumber(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // IconURL wraps the raw IconURL call.
-func (self IUPnPDevice) IconURL(bstrEncodingFormat foundation.BSTR, lSizeX int32, lSizeY int32, lBitDepth int32, pbstrIconURL *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.IconURL(bstrEncodingFormat, lSizeX, lSizeY, lBitDepth, pbstrIconURL)))
+func (self IUPnPDevice) IconURL(bstrEncodingFormat foundation.BSTR, lSizeX int32, lSizeY int32, lBitDepth int32) (foundation.BSTR, error) {
+	var _pbstrIconURL foundation.BSTR
+	_hr := self.Raw.IconURL(bstrEncodingFormat, lSizeX, lSizeY, lBitDepth, &_pbstrIconURL)
+	return _pbstrIconURL, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Services wraps the raw Get_Services call.
-func (self IUPnPDevice) Get_Services(ppusServices **devicesenumerationpnp.IUPnPServices) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Services(ppusServices)))
+func (self IUPnPDevice) Get_Services() (*devicesenumerationpnp.IUPnPServices, error) {
+	var _ppusServices *devicesenumerationpnp.IUPnPServices
+	_hr := self.Raw.Get_Services(&_ppusServices)
+	return _ppusServices, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceControl is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceControl with error-returning methods.
@@ -235,8 +281,10 @@ func (self IUPnPDeviceControl) Initialize(bstrXMLDesc foundation.BSTR, bstrDevic
 }
 
 // GetServiceObject wraps the raw GetServiceObject call.
-func (self IUPnPDeviceControl) GetServiceObject(bstrUDN foundation.BSTR, bstrServiceId foundation.BSTR, ppdispService **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.GetServiceObject(bstrUDN, bstrServiceId, ppdispService)))
+func (self IUPnPDeviceControl) GetServiceObject(bstrUDN foundation.BSTR, bstrServiceId foundation.BSTR) (*systemcom.IDispatch, error) {
+	var _ppdispService *systemcom.IDispatch
+	_hr := self.Raw.GetServiceObject(bstrUDN, bstrServiceId, &_ppdispService)
+	return _ppdispService, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceControlHttpHeaders is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceControlHttpHeaders with error-returning methods.
@@ -251,8 +299,10 @@ func WrapIUPnPDeviceControlHttpHeaders(raw *devicesenumerationpnp.IUPnPDeviceCon
 }
 
 // GetAdditionalResponseHeaders wraps the raw GetAdditionalResponseHeaders call.
-func (self IUPnPDeviceControlHttpHeaders) GetAdditionalResponseHeaders(bstrHttpResponseHeaders *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetAdditionalResponseHeaders(bstrHttpResponseHeaders)))
+func (self IUPnPDeviceControlHttpHeaders) GetAdditionalResponseHeaders() (foundation.BSTR, error) {
+	var _bstrHttpResponseHeaders foundation.BSTR
+	_hr := self.Raw.GetAdditionalResponseHeaders(&_bstrHttpResponseHeaders)
+	return _bstrHttpResponseHeaders, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceDocumentAccess is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceDocumentAccess with error-returning methods.
@@ -267,8 +317,10 @@ func WrapIUPnPDeviceDocumentAccess(raw *devicesenumerationpnp.IUPnPDeviceDocumen
 }
 
 // GetDocumentURL wraps the raw GetDocumentURL call.
-func (self IUPnPDeviceDocumentAccess) GetDocumentURL(pbstrDocument *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDocumentURL(pbstrDocument)))
+func (self IUPnPDeviceDocumentAccess) GetDocumentURL() (foundation.BSTR, error) {
+	var _pbstrDocument foundation.BSTR
+	_hr := self.Raw.GetDocumentURL(&_pbstrDocument)
+	return _pbstrDocument, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceDocumentAccessEx is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceDocumentAccessEx with error-returning methods.
@@ -283,8 +335,10 @@ func WrapIUPnPDeviceDocumentAccessEx(raw *devicesenumerationpnp.IUPnPDeviceDocum
 }
 
 // GetDocument wraps the raw GetDocument call.
-func (self IUPnPDeviceDocumentAccessEx) GetDocument(pbstrDocument *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDocument(pbstrDocument)))
+func (self IUPnPDeviceDocumentAccessEx) GetDocument() (foundation.BSTR, error) {
+	var _pbstrDocument foundation.BSTR
+	_hr := self.Raw.GetDocument(&_pbstrDocument)
+	return _pbstrDocument, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceFinder is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceFinder with error-returning methods.
@@ -299,13 +353,17 @@ func WrapIUPnPDeviceFinder(raw *devicesenumerationpnp.IUPnPDeviceFinder) IUPnPDe
 }
 
 // FindByType wraps the raw FindByType call.
-func (self IUPnPDeviceFinder) FindByType(bstrTypeURI foundation.BSTR, dwFlags uint32, pDevices **devicesenumerationpnp.IUPnPDevices) error {
-	return win32.HRESULTError(int32(self.Raw.FindByType(bstrTypeURI, dwFlags, pDevices)))
+func (self IUPnPDeviceFinder) FindByType(bstrTypeURI foundation.BSTR, dwFlags uint32) (*devicesenumerationpnp.IUPnPDevices, error) {
+	var _pDevices *devicesenumerationpnp.IUPnPDevices
+	_hr := self.Raw.FindByType(bstrTypeURI, dwFlags, &_pDevices)
+	return _pDevices, win32.HRESULTError(int32(_hr))
 }
 
 // CreateAsyncFind wraps the raw CreateAsyncFind call.
-func (self IUPnPDeviceFinder) CreateAsyncFind(bstrTypeURI foundation.BSTR, dwFlags uint32, punkDeviceFinderCallback *systemcom.IUnknown, plFindData *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CreateAsyncFind(bstrTypeURI, dwFlags, punkDeviceFinderCallback, plFindData)))
+func (self IUPnPDeviceFinder) CreateAsyncFind(bstrTypeURI foundation.BSTR, dwFlags uint32, punkDeviceFinderCallback *systemcom.IUnknown) (int32, error) {
+	var _plFindData int32
+	_hr := self.Raw.CreateAsyncFind(bstrTypeURI, dwFlags, punkDeviceFinderCallback, &_plFindData)
+	return _plFindData, win32.HRESULTError(int32(_hr))
 }
 
 // StartAsyncFind wraps the raw StartAsyncFind call.
@@ -319,8 +377,10 @@ func (self IUPnPDeviceFinder) CancelAsyncFind(lFindData int32) error {
 }
 
 // FindByUDN wraps the raw FindByUDN call.
-func (self IUPnPDeviceFinder) FindByUDN(bstrUDN foundation.BSTR, pDevice **devicesenumerationpnp.IUPnPDevice) error {
-	return win32.HRESULTError(int32(self.Raw.FindByUDN(bstrUDN, pDevice)))
+func (self IUPnPDeviceFinder) FindByUDN(bstrUDN foundation.BSTR) (*devicesenumerationpnp.IUPnPDevice, error) {
+	var _pDevice *devicesenumerationpnp.IUPnPDevice
+	_hr := self.Raw.FindByUDN(bstrUDN, &_pDevice)
+	return _pDevice, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPDeviceFinderAddCallbackWithInterface is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPDeviceFinderAddCallbackWithInterface with error-returning methods.
@@ -398,18 +458,24 @@ func WrapIUPnPDevices(raw *devicesenumerationpnp.IUPnPDevices) IUPnPDevices {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IUPnPDevices) Get_Count(plCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(plCount)))
+func (self IUPnPDevices) Get_Count() (int32, error) {
+	var _plCount int32
+	_hr := self.Raw.Get_Count(&_plCount)
+	return _plCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUPnPDevices) Get__NewEnum(ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppunk)))
+func (self IUPnPDevices) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUPnPDevices) Get_Item(bstrUDN foundation.BSTR, ppDevice **devicesenumerationpnp.IUPnPDevice) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(bstrUDN, ppDevice)))
+func (self IUPnPDevices) Get_Item(bstrUDN foundation.BSTR) (*devicesenumerationpnp.IUPnPDevice, error) {
+	var _ppDevice *devicesenumerationpnp.IUPnPDevice
+	_hr := self.Raw.Get_Item(bstrUDN, &_ppDevice)
+	return _ppDevice, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPEventSink is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPEventSink with error-returning methods.
@@ -477,13 +543,17 @@ func WrapIUPnPRegistrar(raw *devicesenumerationpnp.IUPnPRegistrar) IUPnPRegistra
 }
 
 // RegisterDevice wraps the raw RegisterDevice call.
-func (self IUPnPRegistrar) RegisterDevice(bstrXMLDesc foundation.BSTR, bstrProgIDDeviceControlClass foundation.BSTR, bstrInitString foundation.BSTR, bstrContainerId foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32, pbstrDeviceIdentifier *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterDevice(bstrXMLDesc, bstrProgIDDeviceControlClass, bstrInitString, bstrContainerId, bstrResourcePath, nLifeTime, pbstrDeviceIdentifier)))
+func (self IUPnPRegistrar) RegisterDevice(bstrXMLDesc foundation.BSTR, bstrProgIDDeviceControlClass foundation.BSTR, bstrInitString foundation.BSTR, bstrContainerId foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32) (foundation.BSTR, error) {
+	var _pbstrDeviceIdentifier foundation.BSTR
+	_hr := self.Raw.RegisterDevice(bstrXMLDesc, bstrProgIDDeviceControlClass, bstrInitString, bstrContainerId, bstrResourcePath, nLifeTime, &_pbstrDeviceIdentifier)
+	return _pbstrDeviceIdentifier, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterRunningDevice wraps the raw RegisterRunningDevice call.
-func (self IUPnPRegistrar) RegisterRunningDevice(bstrXMLDesc foundation.BSTR, punkDeviceControl *systemcom.IUnknown, bstrInitString foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32, pbstrDeviceIdentifier *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.RegisterRunningDevice(bstrXMLDesc, punkDeviceControl, bstrInitString, bstrResourcePath, nLifeTime, pbstrDeviceIdentifier)))
+func (self IUPnPRegistrar) RegisterRunningDevice(bstrXMLDesc foundation.BSTR, punkDeviceControl *systemcom.IUnknown, bstrInitString foundation.BSTR, bstrResourcePath foundation.BSTR, nLifeTime int32) (foundation.BSTR, error) {
+	var _pbstrDeviceIdentifier foundation.BSTR
+	_hr := self.Raw.RegisterRunningDevice(bstrXMLDesc, punkDeviceControl, bstrInitString, bstrResourcePath, nLifeTime, &_pbstrDeviceIdentifier)
+	return _pbstrDeviceIdentifier, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterDeviceProvider wraps the raw RegisterDeviceProvider call.
@@ -492,8 +562,10 @@ func (self IUPnPRegistrar) RegisterDeviceProvider(bstrProviderName foundation.BS
 }
 
 // GetUniqueDeviceName wraps the raw GetUniqueDeviceName call.
-func (self IUPnPRegistrar) GetUniqueDeviceName(bstrDeviceIdentifier foundation.BSTR, bstrTemplateUDN foundation.BSTR, pbstrUDN *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetUniqueDeviceName(bstrDeviceIdentifier, bstrTemplateUDN, pbstrUDN)))
+func (self IUPnPRegistrar) GetUniqueDeviceName(bstrDeviceIdentifier foundation.BSTR, bstrTemplateUDN foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrUDN foundation.BSTR
+	_hr := self.Raw.GetUniqueDeviceName(bstrDeviceIdentifier, bstrTemplateUDN, &_pbstrUDN)
+	return _pbstrUDN, win32.HRESULTError(int32(_hr))
 }
 
 // UnregisterDevice wraps the raw UnregisterDevice call.
@@ -566,13 +638,17 @@ func WrapIUPnPService(raw *devicesenumerationpnp.IUPnPService) IUPnPService {
 }
 
 // QueryStateVariable wraps the raw QueryStateVariable call.
-func (self IUPnPService) QueryStateVariable(bstrVariableName foundation.BSTR, pValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.QueryStateVariable(bstrVariableName, pValue)))
+func (self IUPnPService) QueryStateVariable(bstrVariableName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pValue systemvariant.VARIANT
+	_hr := self.Raw.QueryStateVariable(bstrVariableName, &_pValue)
+	return _pValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServiceTypeIdentifier wraps the raw Get_ServiceTypeIdentifier call.
-func (self IUPnPService) Get_ServiceTypeIdentifier(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServiceTypeIdentifier(pVal)))
+func (self IUPnPService) Get_ServiceTypeIdentifier() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_ServiceTypeIdentifier(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // AddCallback wraps the raw AddCallback call.
@@ -581,13 +657,17 @@ func (self IUPnPService) AddCallback(pUnkCallback *systemcom.IUnknown) error {
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IUPnPService) Get_Id(pbstrId *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(pbstrId)))
+func (self IUPnPService) Get_Id() (foundation.BSTR, error) {
+	var _pbstrId foundation.BSTR
+	_hr := self.Raw.Get_Id(&_pbstrId)
+	return _pbstrId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastTransportStatus wraps the raw Get_LastTransportStatus call.
-func (self IUPnPService) Get_LastTransportStatus(plValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastTransportStatus(plValue)))
+func (self IUPnPService) Get_LastTransportStatus() (int32, error) {
+	var _plValue int32
+	_hr := self.Raw.Get_LastTransportStatus(&_plValue)
+	return _plValue, win32.HRESULTError(int32(_hr))
 }
 
 // IUPnPServiceAsync is an idiomatic wrapper over the raw COM interface Devices.Enumeration.Pnp.IUPnPServiceAsync with error-returning methods.
@@ -706,16 +786,22 @@ func WrapIUPnPServices(raw *devicesenumerationpnp.IUPnPServices) IUPnPServices {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IUPnPServices) Get_Count(plCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(plCount)))
+func (self IUPnPServices) Get_Count() (int32, error) {
+	var _plCount int32
+	_hr := self.Raw.Get_Count(&_plCount)
+	return _plCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IUPnPServices) Get__NewEnum(ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppunk)))
+func (self IUPnPServices) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IUPnPServices) Get_Item(bstrServiceId foundation.BSTR, ppService **devicesenumerationpnp.IUPnPService) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(bstrServiceId, ppService)))
+func (self IUPnPServices) Get_Item(bstrServiceId foundation.BSTR) (*devicesenumerationpnp.IUPnPService, error) {
+	var _ppService *devicesenumerationpnp.IUPnPService
+	_hr := self.Raw.Get_Item(bstrServiceId, &_ppService)
+	return _ppService, win32.HRESULTError(int32(_hr))
 }

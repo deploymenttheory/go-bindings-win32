@@ -48,13 +48,17 @@ func WrapIPluginAuthenticator(raw *securityauthenticationwebauthn.IPluginAuthent
 }
 
 // MakeCredential wraps the raw MakeCredential call.
-func (self IPluginAuthenticator) MakeCredential(request *securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_REQUEST, response *securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_RESPONSE) error {
-	return win32.HRESULTError(int32(self.Raw.MakeCredential(request, response)))
+func (self IPluginAuthenticator) MakeCredential(request *securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_REQUEST) (securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_RESPONSE, error) {
+	var _response securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_RESPONSE
+	_hr := self.Raw.MakeCredential(request, &_response)
+	return _response, win32.HRESULTError(int32(_hr))
 }
 
 // GetAssertion wraps the raw GetAssertion call.
-func (self IPluginAuthenticator) GetAssertion(request *securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_REQUEST, response *securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_RESPONSE) error {
-	return win32.HRESULTError(int32(self.Raw.GetAssertion(request, response)))
+func (self IPluginAuthenticator) GetAssertion(request *securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_REQUEST) (securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_RESPONSE, error) {
+	var _response securityauthenticationwebauthn.WEBAUTHN_PLUGIN_OPERATION_RESPONSE
+	_hr := self.Raw.GetAssertion(request, &_response)
+	return _response, win32.HRESULTError(int32(_hr))
 }
 
 // CancelOperation wraps the raw CancelOperation call.
@@ -63,6 +67,8 @@ func (self IPluginAuthenticator) CancelOperation(request *securityauthentication
 }
 
 // GetLockStatus wraps the raw GetLockStatus call.
-func (self IPluginAuthenticator) GetLockStatus(lockStatus *securityauthenticationwebauthn.PLUGIN_LOCK_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.GetLockStatus(lockStatus)))
+func (self IPluginAuthenticator) GetLockStatus() (securityauthenticationwebauthn.PLUGIN_LOCK_STATUS, error) {
+	var _lockStatus securityauthenticationwebauthn.PLUGIN_LOCK_STATUS
+	_hr := self.Raw.GetLockStatus(&_lockStatus)
+	return _lockStatus, win32.HRESULTError(int32(_hr))
 }

@@ -198,13 +198,17 @@ func WrapIBootOptions(raw *storageimapi.IBootOptions) IBootOptions {
 }
 
 // Get_BootImage wraps the raw Get_BootImage call.
-func (self IBootOptions) Get_BootImage(pVal **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BootImage(pVal)))
+func (self IBootOptions) Get_BootImage() (*systemcom.IStream, error) {
+	var _pVal *systemcom.IStream
+	_hr := self.Raw.Get_BootImage(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Manufacturer wraps the raw Get_Manufacturer call.
-func (self IBootOptions) Get_Manufacturer(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Manufacturer(pVal)))
+func (self IBootOptions) Get_Manufacturer() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_Manufacturer(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Manufacturer wraps the raw Put_Manufacturer call.
@@ -213,8 +217,10 @@ func (self IBootOptions) Put_Manufacturer(newVal foundation.BSTR) error {
 }
 
 // Get_PlatformId wraps the raw Get_PlatformId call.
-func (self IBootOptions) Get_PlatformId(pVal *storageimapi.PlatformId) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PlatformId(pVal)))
+func (self IBootOptions) Get_PlatformId() (storageimapi.PlatformId, error) {
+	var _pVal storageimapi.PlatformId
+	_hr := self.Raw.Get_PlatformId(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PlatformId wraps the raw Put_PlatformId call.
@@ -223,8 +229,10 @@ func (self IBootOptions) Put_PlatformId(newVal storageimapi.PlatformId) error {
 }
 
 // Get_Emulation wraps the raw Get_Emulation call.
-func (self IBootOptions) Get_Emulation(pVal *storageimapi.EmulationType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Emulation(pVal)))
+func (self IBootOptions) Get_Emulation() (storageimapi.EmulationType, error) {
+	var _pVal storageimapi.EmulationType
+	_hr := self.Raw.Get_Emulation(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Emulation wraps the raw Put_Emulation call.
@@ -233,8 +241,10 @@ func (self IBootOptions) Put_Emulation(newVal storageimapi.EmulationType) error 
 }
 
 // Get_ImageSize wraps the raw Get_ImageSize call.
-func (self IBootOptions) Get_ImageSize(pVal *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ImageSize(pVal)))
+func (self IBootOptions) Get_ImageSize() (uint32, error) {
+	var _pVal uint32
+	_hr := self.Raw.Get_ImageSize(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // AssignBootImage wraps the raw AssignBootImage call.
@@ -1781,28 +1791,38 @@ func WrapIFileSystemImageResult(raw *storageimapi.IFileSystemImageResult) IFileS
 }
 
 // Get_ImageStream wraps the raw Get_ImageStream call.
-func (self IFileSystemImageResult) Get_ImageStream(pVal **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ImageStream(pVal)))
+func (self IFileSystemImageResult) Get_ImageStream() (*systemcom.IStream, error) {
+	var _pVal *systemcom.IStream
+	_hr := self.Raw.Get_ImageStream(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProgressItems wraps the raw Get_ProgressItems call.
-func (self IFileSystemImageResult) Get_ProgressItems(pVal **storageimapi.IProgressItems) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProgressItems(pVal)))
+func (self IFileSystemImageResult) Get_ProgressItems() (*storageimapi.IProgressItems, error) {
+	var _pVal *storageimapi.IProgressItems
+	_hr := self.Raw.Get_ProgressItems(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TotalBlocks wraps the raw Get_TotalBlocks call.
-func (self IFileSystemImageResult) Get_TotalBlocks(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TotalBlocks(pVal)))
+func (self IFileSystemImageResult) Get_TotalBlocks() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_TotalBlocks(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_BlockSize wraps the raw Get_BlockSize call.
-func (self IFileSystemImageResult) Get_BlockSize(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockSize(pVal)))
+func (self IFileSystemImageResult) Get_BlockSize() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_BlockSize(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DiscId wraps the raw Get_DiscId call.
-func (self IFileSystemImageResult) Get_DiscId(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DiscId(pVal)))
+func (self IFileSystemImageResult) Get_DiscId() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_DiscId(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // IFileSystemImageResult2 is an idiomatic wrapper over the raw COM interface Storage.Imapi.IFileSystemImageResult2 with error-returning methods.
@@ -1833,23 +1853,31 @@ func WrapIFsiDirectoryItem(raw *storageimapi.IFsiDirectoryItem) IFsiDirectoryIte
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IFsiDirectoryItem) Get__NewEnum(NewEnum **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(NewEnum)))
+func (self IFsiDirectoryItem) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _NewEnum *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_NewEnum)
+	return _NewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IFsiDirectoryItem) Get_Item(path foundation.BSTR, item **storageimapi.IFsiItem) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(path, item)))
+func (self IFsiDirectoryItem) Get_Item(path foundation.BSTR) (*storageimapi.IFsiItem, error) {
+	var _item *storageimapi.IFsiItem
+	_hr := self.Raw.Get_Item(path, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IFsiDirectoryItem) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self IFsiDirectoryItem) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnumFsiItems wraps the raw Get_EnumFsiItems call.
-func (self IFsiDirectoryItem) Get_EnumFsiItems(NewEnum **storageimapi.IEnumFsiItems) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumFsiItems(NewEnum)))
+func (self IFsiDirectoryItem) Get_EnumFsiItems() (*storageimapi.IEnumFsiItems, error) {
+	var _NewEnum *storageimapi.IEnumFsiItems
+	_hr := self.Raw.Get_EnumFsiItems(&_NewEnum)
+	return _NewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // AddDirectory wraps the raw AddDirectory call.
@@ -1910,23 +1938,31 @@ func WrapIFsiFileItem(raw *storageimapi.IFsiFileItem) IFsiFileItem {
 }
 
 // Get_DataSize wraps the raw Get_DataSize call.
-func (self IFsiFileItem) Get_DataSize(pVal *int64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DataSize(pVal)))
+func (self IFsiFileItem) Get_DataSize() (int64, error) {
+	var _pVal int64
+	_hr := self.Raw.Get_DataSize(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DataSize32BitLow wraps the raw Get_DataSize32BitLow call.
-func (self IFsiFileItem) Get_DataSize32BitLow(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DataSize32BitLow(pVal)))
+func (self IFsiFileItem) Get_DataSize32BitLow() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_DataSize32BitLow(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DataSize32BitHigh wraps the raw Get_DataSize32BitHigh call.
-func (self IFsiFileItem) Get_DataSize32BitHigh(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DataSize32BitHigh(pVal)))
+func (self IFsiFileItem) Get_DataSize32BitHigh() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_DataSize32BitHigh(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Data wraps the raw Get_Data call.
-func (self IFsiFileItem) Get_Data(pVal **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Data(pVal)))
+func (self IFsiFileItem) Get_Data() (*systemcom.IStream, error) {
+	var _pVal *systemcom.IStream
+	_hr := self.Raw.Get_Data(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Data wraps the raw Put_Data call.
@@ -1987,33 +2023,45 @@ func WrapIFsiItem(raw *storageimapi.IFsiItem) IFsiItem {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IFsiItem) Get_Name(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pVal)))
+func (self IFsiItem) Get_Name() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FullPath wraps the raw Get_FullPath call.
-func (self IFsiItem) Get_FullPath(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FullPath(pVal)))
+func (self IFsiItem) Get_FullPath() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_FullPath(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CreationTime wraps the raw Get_CreationTime call.
-func (self IFsiItem) Get_CreationTime(pVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CreationTime(pVal)))
+func (self IFsiItem) Get_CreationTime() (float64, error) {
+	var _pVal float64
+	_hr := self.Raw.Get_CreationTime(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastAccessedTime wraps the raw Get_LastAccessedTime call.
-func (self IFsiItem) Get_LastAccessedTime(pVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastAccessedTime(pVal)))
+func (self IFsiItem) Get_LastAccessedTime() (float64, error) {
+	var _pVal float64
+	_hr := self.Raw.Get_LastAccessedTime(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastModifiedTime wraps the raw Get_LastModifiedTime call.
-func (self IFsiItem) Get_LastModifiedTime(pVal *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastModifiedTime(pVal)))
+func (self IFsiItem) Get_LastModifiedTime() (float64, error) {
+	var _pVal float64
+	_hr := self.Raw.Get_LastModifiedTime(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsHidden wraps the raw Get_IsHidden call.
-func (self IFsiItem) Get_IsHidden(pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsHidden(pVal)))
+func (self IFsiItem) Get_IsHidden() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsHidden(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IsHidden wraps the raw Put_IsHidden call.
@@ -2022,13 +2070,17 @@ func (self IFsiItem) Put_IsHidden(newVal foundation.VARIANT_BOOL) error {
 }
 
 // FileSystemName wraps the raw FileSystemName call.
-func (self IFsiItem) FileSystemName(fileSystem storageimapi.FsiFileSystems, pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.FileSystemName(fileSystem, pVal)))
+func (self IFsiItem) FileSystemName(fileSystem storageimapi.FsiFileSystems) (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.FileSystemName(fileSystem, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // FileSystemPath wraps the raw FileSystemPath call.
-func (self IFsiItem) FileSystemPath(fileSystem storageimapi.FsiFileSystems, pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.FileSystemPath(fileSystem, pVal)))
+func (self IFsiItem) FileSystemPath(fileSystem storageimapi.FsiFileSystems) (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.FileSystemPath(fileSystem, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // IFsiNamedStreams is an idiomatic wrapper over the raw COM interface Storage.Imapi.IFsiNamedStreams with error-returning methods.
@@ -2079,8 +2131,10 @@ func (self IIsoImageManager) Get_Path(pVal *foundation.BSTR) error {
 }
 
 // Get_Stream wraps the raw Get_Stream call.
-func (self IIsoImageManager) Get_Stream(data **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Stream(data)))
+func (self IIsoImageManager) Get_Stream() (*systemcom.IStream, error) {
+	var _data *systemcom.IStream
+	_hr := self.Raw.Get_Stream(&_data)
+	return _data, win32.HRESULTError(int32(_hr))
 }
 
 // SetPath wraps the raw SetPath call.
@@ -2260,23 +2314,31 @@ func WrapIProgressItem(raw *storageimapi.IProgressItem) IProgressItem {
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IProgressItem) Get_Description(desc *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(desc)))
+func (self IProgressItem) Get_Description() (foundation.BSTR, error) {
+	var _desc foundation.BSTR
+	_hr := self.Raw.Get_Description(&_desc)
+	return _desc, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FirstBlock wraps the raw Get_FirstBlock call.
-func (self IProgressItem) Get_FirstBlock(block *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FirstBlock(block)))
+func (self IProgressItem) Get_FirstBlock() (uint32, error) {
+	var _block uint32
+	_hr := self.Raw.Get_FirstBlock(&_block)
+	return _block, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LastBlock wraps the raw Get_LastBlock call.
-func (self IProgressItem) Get_LastBlock(block *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LastBlock(block)))
+func (self IProgressItem) Get_LastBlock() (uint32, error) {
+	var _block uint32
+	_hr := self.Raw.Get_LastBlock(&_block)
+	return _block, win32.HRESULTError(int32(_hr))
 }
 
 // Get_BlockCount wraps the raw Get_BlockCount call.
-func (self IProgressItem) Get_BlockCount(blocks *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockCount(blocks)))
+func (self IProgressItem) Get_BlockCount() (uint32, error) {
+	var _blocks uint32
+	_hr := self.Raw.Get_BlockCount(&_blocks)
+	return _blocks, win32.HRESULTError(int32(_hr))
 }
 
 // IProgressItems is an idiomatic wrapper over the raw COM interface Storage.Imapi.IProgressItems with error-returning methods.
@@ -2291,33 +2353,45 @@ func WrapIProgressItems(raw *storageimapi.IProgressItems) IProgressItems {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IProgressItems) Get__NewEnum(NewEnum **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(NewEnum)))
+func (self IProgressItems) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _NewEnum *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_NewEnum)
+	return _NewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IProgressItems) Get_Item(Index int32, item **storageimapi.IProgressItem) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(Index, item)))
+func (self IProgressItems) Get_Item(Index int32) (*storageimapi.IProgressItem, error) {
+	var _item *storageimapi.IProgressItem
+	_hr := self.Raw.Get_Item(Index, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IProgressItems) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self IProgressItems) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // ProgressItemFromBlock wraps the raw ProgressItemFromBlock call.
-func (self IProgressItems) ProgressItemFromBlock(block uint32, item **storageimapi.IProgressItem) error {
-	return win32.HRESULTError(int32(self.Raw.ProgressItemFromBlock(block, item)))
+func (self IProgressItems) ProgressItemFromBlock(block uint32) (*storageimapi.IProgressItem, error) {
+	var _item *storageimapi.IProgressItem
+	_hr := self.Raw.ProgressItemFromBlock(block, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // ProgressItemFromDescription wraps the raw ProgressItemFromDescription call.
-func (self IProgressItems) ProgressItemFromDescription(description foundation.BSTR, item **storageimapi.IProgressItem) error {
-	return win32.HRESULTError(int32(self.Raw.ProgressItemFromDescription(description, item)))
+func (self IProgressItems) ProgressItemFromDescription(description foundation.BSTR) (*storageimapi.IProgressItem, error) {
+	var _item *storageimapi.IProgressItem
+	_hr := self.Raw.ProgressItemFromDescription(description, &_item)
+	return _item, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnumProgressItems wraps the raw Get_EnumProgressItems call.
-func (self IProgressItems) Get_EnumProgressItems(NewEnum **storageimapi.IEnumProgressItems) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumProgressItems(NewEnum)))
+func (self IProgressItems) Get_EnumProgressItems() (*storageimapi.IEnumProgressItems, error) {
+	var _NewEnum *storageimapi.IEnumProgressItems
+	_hr := self.Raw.Get_EnumProgressItems(&_NewEnum)
+	return _NewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRawCDImageCreator is an idiomatic wrapper over the raw COM interface Storage.Imapi.IRawCDImageCreator with error-returning methods.
@@ -2332,13 +2406,17 @@ func WrapIRawCDImageCreator(raw *storageimapi.IRawCDImageCreator) IRawCDImageCre
 }
 
 // CreateResultImage wraps the raw CreateResultImage call.
-func (self IRawCDImageCreator) CreateResultImage(resultStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.CreateResultImage(resultStream)))
+func (self IRawCDImageCreator) CreateResultImage() (*systemcom.IStream, error) {
+	var _resultStream *systemcom.IStream
+	_hr := self.Raw.CreateResultImage(&_resultStream)
+	return _resultStream, win32.HRESULTError(int32(_hr))
 }
 
 // AddTrack wraps the raw AddTrack call.
-func (self IRawCDImageCreator) AddTrack(dataType storageimapi.IMAPI_CD_SECTOR_TYPE, data *systemcom.IStream, trackIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.AddTrack(dataType, data, trackIndex)))
+func (self IRawCDImageCreator) AddTrack(dataType storageimapi.IMAPI_CD_SECTOR_TYPE, data *systemcom.IStream) (int32, error) {
+	var _trackIndex int32
+	_hr := self.Raw.AddTrack(dataType, data, &_trackIndex)
+	return _trackIndex, win32.HRESULTError(int32(_hr))
 }
 
 // AddSpecialPregap wraps the raw AddSpecialPregap call.

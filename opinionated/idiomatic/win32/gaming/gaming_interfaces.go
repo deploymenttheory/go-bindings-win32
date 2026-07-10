@@ -258,93 +258,129 @@ func (self IXblIdpAuthTokenResult) GetErrorCode(errorCode *foundation.HRESULT) e
 }
 
 // GetToken wraps the raw GetToken call.
-func (self IXblIdpAuthTokenResult) GetToken(token *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetToken(token)))
+func (self IXblIdpAuthTokenResult) GetToken() (foundation.PWSTR, error) {
+	var _token foundation.PWSTR
+	_hr := self.Raw.GetToken(&_token)
+	return _token, win32.HRESULTError(int32(_hr))
 }
 
 // GetSignature wraps the raw GetSignature call.
-func (self IXblIdpAuthTokenResult) GetSignature(signature *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignature(signature)))
+func (self IXblIdpAuthTokenResult) GetSignature() (foundation.PWSTR, error) {
+	var _signature foundation.PWSTR
+	_hr := self.Raw.GetSignature(&_signature)
+	return _signature, win32.HRESULTError(int32(_hr))
 }
 
 // GetSandbox wraps the raw GetSandbox call.
-func (self IXblIdpAuthTokenResult) GetSandbox(sandbox *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetSandbox(sandbox)))
+func (self IXblIdpAuthTokenResult) GetSandbox() (foundation.PWSTR, error) {
+	var _sandbox foundation.PWSTR
+	_hr := self.Raw.GetSandbox(&_sandbox)
+	return _sandbox, win32.HRESULTError(int32(_hr))
 }
 
 // GetEnvironment wraps the raw GetEnvironment call.
-func (self IXblIdpAuthTokenResult) GetEnvironment(environment *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnvironment(environment)))
+func (self IXblIdpAuthTokenResult) GetEnvironment() (foundation.PWSTR, error) {
+	var _environment foundation.PWSTR
+	_hr := self.Raw.GetEnvironment(&_environment)
+	return _environment, win32.HRESULTError(int32(_hr))
 }
 
 // GetMsaAccountId wraps the raw GetMsaAccountId call.
-func (self IXblIdpAuthTokenResult) GetMsaAccountId(msaAccountId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetMsaAccountId(msaAccountId)))
+func (self IXblIdpAuthTokenResult) GetMsaAccountId() (foundation.PWSTR, error) {
+	var _msaAccountId foundation.PWSTR
+	_hr := self.Raw.GetMsaAccountId(&_msaAccountId)
+	return _msaAccountId, win32.HRESULTError(int32(_hr))
 }
 
 // GetXuid wraps the raw GetXuid call.
-func (self IXblIdpAuthTokenResult) GetXuid(xuid *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetXuid(xuid)))
+func (self IXblIdpAuthTokenResult) GetXuid() (foundation.PWSTR, error) {
+	var _xuid foundation.PWSTR
+	_hr := self.Raw.GetXuid(&_xuid)
+	return _xuid, win32.HRESULTError(int32(_hr))
 }
 
 // GetGamertag wraps the raw GetGamertag call.
-func (self IXblIdpAuthTokenResult) GetGamertag(gamertag *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetGamertag(gamertag)))
+func (self IXblIdpAuthTokenResult) GetGamertag() (foundation.PWSTR, error) {
+	var _gamertag foundation.PWSTR
+	_hr := self.Raw.GetGamertag(&_gamertag)
+	return _gamertag, win32.HRESULTError(int32(_hr))
 }
 
 // GetAgeGroup wraps the raw GetAgeGroup call.
-func (self IXblIdpAuthTokenResult) GetAgeGroup(ageGroup *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetAgeGroup(ageGroup)))
+func (self IXblIdpAuthTokenResult) GetAgeGroup() (foundation.PWSTR, error) {
+	var _ageGroup foundation.PWSTR
+	_hr := self.Raw.GetAgeGroup(&_ageGroup)
+	return _ageGroup, win32.HRESULTError(int32(_hr))
 }
 
 // GetPrivileges wraps the raw GetPrivileges call.
-func (self IXblIdpAuthTokenResult) GetPrivileges(privileges *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPrivileges(privileges)))
+func (self IXblIdpAuthTokenResult) GetPrivileges() (foundation.PWSTR, error) {
+	var _privileges foundation.PWSTR
+	_hr := self.Raw.GetPrivileges(&_privileges)
+	return _privileges, win32.HRESULTError(int32(_hr))
 }
 
 // GetMsaTarget wraps the raw GetMsaTarget call.
-func (self IXblIdpAuthTokenResult) GetMsaTarget(msaTarget *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetMsaTarget(msaTarget)))
+func (self IXblIdpAuthTokenResult) GetMsaTarget() (foundation.PWSTR, error) {
+	var _msaTarget foundation.PWSTR
+	_hr := self.Raw.GetMsaTarget(&_msaTarget)
+	return _msaTarget, win32.HRESULTError(int32(_hr))
 }
 
 // GetMsaPolicy wraps the raw GetMsaPolicy call.
-func (self IXblIdpAuthTokenResult) GetMsaPolicy(msaPolicy *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetMsaPolicy(msaPolicy)))
+func (self IXblIdpAuthTokenResult) GetMsaPolicy() (foundation.PWSTR, error) {
+	var _msaPolicy foundation.PWSTR
+	_hr := self.Raw.GetMsaPolicy(&_msaPolicy)
+	return _msaPolicy, win32.HRESULTError(int32(_hr))
 }
 
 // GetMsaAppId wraps the raw GetMsaAppId call.
-func (self IXblIdpAuthTokenResult) GetMsaAppId(msaAppId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetMsaAppId(msaAppId)))
+func (self IXblIdpAuthTokenResult) GetMsaAppId() (foundation.PWSTR, error) {
+	var _msaAppId foundation.PWSTR
+	_hr := self.Raw.GetMsaAppId(&_msaAppId)
+	return _msaAppId, win32.HRESULTError(int32(_hr))
 }
 
 // GetRedirect wraps the raw GetRedirect call.
-func (self IXblIdpAuthTokenResult) GetRedirect(redirect *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetRedirect(redirect)))
+func (self IXblIdpAuthTokenResult) GetRedirect() (foundation.PWSTR, error) {
+	var _redirect foundation.PWSTR
+	_hr := self.Raw.GetRedirect(&_redirect)
+	return _redirect, win32.HRESULTError(int32(_hr))
 }
 
 // GetMessage wraps the raw GetMessage call.
-func (self IXblIdpAuthTokenResult) GetMessage(message *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetMessage(message)))
+func (self IXblIdpAuthTokenResult) GetMessage() (foundation.PWSTR, error) {
+	var _message foundation.PWSTR
+	_hr := self.Raw.GetMessage(&_message)
+	return _message, win32.HRESULTError(int32(_hr))
 }
 
 // GetHelpId wraps the raw GetHelpId call.
-func (self IXblIdpAuthTokenResult) GetHelpId(helpId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetHelpId(helpId)))
+func (self IXblIdpAuthTokenResult) GetHelpId() (foundation.PWSTR, error) {
+	var _helpId foundation.PWSTR
+	_hr := self.Raw.GetHelpId(&_helpId)
+	return _helpId, win32.HRESULTError(int32(_hr))
 }
 
 // GetEnforcementBans wraps the raw GetEnforcementBans call.
-func (self IXblIdpAuthTokenResult) GetEnforcementBans(enforcementBans *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnforcementBans(enforcementBans)))
+func (self IXblIdpAuthTokenResult) GetEnforcementBans() (foundation.PWSTR, error) {
+	var _enforcementBans foundation.PWSTR
+	_hr := self.Raw.GetEnforcementBans(&_enforcementBans)
+	return _enforcementBans, win32.HRESULTError(int32(_hr))
 }
 
 // GetRestrictions wraps the raw GetRestrictions call.
-func (self IXblIdpAuthTokenResult) GetRestrictions(restrictions *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetRestrictions(restrictions)))
+func (self IXblIdpAuthTokenResult) GetRestrictions() (foundation.PWSTR, error) {
+	var _restrictions foundation.PWSTR
+	_hr := self.Raw.GetRestrictions(&_restrictions)
+	return _restrictions, win32.HRESULTError(int32(_hr))
 }
 
 // GetTitleRestrictions wraps the raw GetTitleRestrictions call.
-func (self IXblIdpAuthTokenResult) GetTitleRestrictions(titleRestrictions *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetTitleRestrictions(titleRestrictions)))
+func (self IXblIdpAuthTokenResult) GetTitleRestrictions() (foundation.PWSTR, error) {
+	var _titleRestrictions foundation.PWSTR
+	_hr := self.Raw.GetTitleRestrictions(&_titleRestrictions)
+	return _titleRestrictions, win32.HRESULTError(int32(_hr))
 }
 
 // IXblIdpAuthTokenResult2 is an idiomatic wrapper over the raw COM interface Gaming.IXblIdpAuthTokenResult2 with error-returning methods.
@@ -359,16 +395,22 @@ func WrapIXblIdpAuthTokenResult2(raw *gaming.IXblIdpAuthTokenResult2) IXblIdpAut
 }
 
 // GetModernGamertag wraps the raw GetModernGamertag call.
-func (self IXblIdpAuthTokenResult2) GetModernGamertag(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetModernGamertag(value)))
+func (self IXblIdpAuthTokenResult2) GetModernGamertag() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.GetModernGamertag(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetModernGamertagSuffix wraps the raw GetModernGamertagSuffix call.
-func (self IXblIdpAuthTokenResult2) GetModernGamertagSuffix(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetModernGamertagSuffix(value)))
+func (self IXblIdpAuthTokenResult2) GetModernGamertagSuffix() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.GetModernGamertagSuffix(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetUniqueModernGamertag wraps the raw GetUniqueModernGamertag call.
-func (self IXblIdpAuthTokenResult2) GetUniqueModernGamertag(value *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetUniqueModernGamertag(value)))
+func (self IXblIdpAuthTokenResult2) GetUniqueModernGamertag() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	_hr := self.Raw.GetUniqueModernGamertag(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }

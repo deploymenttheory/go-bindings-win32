@@ -89,18 +89,24 @@ func WrapIPrintWorkflowConfigurationNative(raw *systemwinrtprinting.IPrintWorkfl
 }
 
 // Get_PrinterQueue wraps the raw Get_PrinterQueue call.
-func (self IPrintWorkflowConfigurationNative) Get_PrinterQueue(value **graphicsprinting.IPrinterQueue) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PrinterQueue(value)))
+func (self IPrintWorkflowConfigurationNative) Get_PrinterQueue() (*graphicsprinting.IPrinterQueue, error) {
+	var _value *graphicsprinting.IPrinterQueue
+	_hr := self.Raw.Get_PrinterQueue(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DriverProperties wraps the raw Get_DriverProperties call.
-func (self IPrintWorkflowConfigurationNative) Get_DriverProperties(value **graphicsprinting.IPrinterPropertyBag) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DriverProperties(value)))
+func (self IPrintWorkflowConfigurationNative) Get_DriverProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+	var _value *graphicsprinting.IPrinterPropertyBag
+	_hr := self.Raw.Get_DriverProperties(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserProperties wraps the raw Get_UserProperties call.
-func (self IPrintWorkflowConfigurationNative) Get_UserProperties(value **graphicsprinting.IPrinterPropertyBag) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserProperties(value)))
+func (self IPrintWorkflowConfigurationNative) Get_UserProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+	var _value *graphicsprinting.IPrinterPropertyBag
+	_hr := self.Raw.Get_UserProperties(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IPrintWorkflowObjectModelSourceFileContentNative is an idiomatic wrapper over the raw COM interface System.WinRT.Printing.IPrintWorkflowObjectModelSourceFileContentNative with error-returning methods.
@@ -120,8 +126,10 @@ func (self IPrintWorkflowObjectModelSourceFileContentNative) StartXpsOMGeneratio
 }
 
 // Get_ObjectFactory wraps the raw Get_ObjectFactory call.
-func (self IPrintWorkflowObjectModelSourceFileContentNative) Get_ObjectFactory(value **storagexps.IXpsOMObjectFactory1) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ObjectFactory(value)))
+func (self IPrintWorkflowObjectModelSourceFileContentNative) Get_ObjectFactory() (*storagexps.IXpsOMObjectFactory1, error) {
+	var _value *storagexps.IXpsOMObjectFactory1
+	_hr := self.Raw.Get_ObjectFactory(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IPrintWorkflowXpsObjectModelTargetPackageNative is an idiomatic wrapper over the raw COM interface System.WinRT.Printing.IPrintWorkflowXpsObjectModelTargetPackageNative with error-returning methods.
@@ -136,8 +144,10 @@ func WrapIPrintWorkflowXpsObjectModelTargetPackageNative(raw *systemwinrtprintin
 }
 
 // Get_DocumentPackageTarget wraps the raw Get_DocumentPackageTarget call.
-func (self IPrintWorkflowXpsObjectModelTargetPackageNative) Get_DocumentPackageTarget(value **storagexps.IXpsDocumentPackageTarget) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DocumentPackageTarget(value)))
+func (self IPrintWorkflowXpsObjectModelTargetPackageNative) Get_DocumentPackageTarget() (*storagexps.IXpsDocumentPackageTarget, error) {
+	var _value *storagexps.IXpsDocumentPackageTarget
+	_hr := self.Raw.Get_DocumentPackageTarget(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IPrintWorkflowXpsReceiver is an idiomatic wrapper over the raw COM interface System.WinRT.Printing.IPrintWorkflowXpsReceiver with error-returning methods.

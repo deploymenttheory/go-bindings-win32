@@ -41,8 +41,10 @@ func WrapIWindowsDevicesAllJoynBusAttachmentInterop(raw *systemwinrtalljoyn.IWin
 }
 
 // Get_Win32Handle wraps the raw Get_Win32Handle call.
-func (self IWindowsDevicesAllJoynBusAttachmentInterop) Get_Win32Handle(value *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Win32Handle(value)))
+func (self IWindowsDevicesAllJoynBusAttachmentInterop) Get_Win32Handle() (uint64, error) {
+	var _value uint64
+	_hr := self.Raw.Get_Win32Handle(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IWindowsDevicesAllJoynBusObjectFactoryInterop is an idiomatic wrapper over the raw COM interface System.WinRT.AllJoyn.IWindowsDevicesAllJoynBusObjectFactoryInterop with error-returning methods.
@@ -83,6 +85,8 @@ func (self IWindowsDevicesAllJoynBusObjectInterop) AddPropertySetHandler(context
 }
 
 // Get_Win32Handle wraps the raw Get_Win32Handle call.
-func (self IWindowsDevicesAllJoynBusObjectInterop) Get_Win32Handle(value *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Win32Handle(value)))
+func (self IWindowsDevicesAllJoynBusObjectInterop) Get_Win32Handle() (uint64, error) {
+	var _value uint64
+	_hr := self.Raw.Get_Win32Handle(&_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }

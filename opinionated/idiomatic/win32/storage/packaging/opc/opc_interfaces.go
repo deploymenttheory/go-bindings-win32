@@ -26,23 +26,31 @@ func WrapIOpcCertificateEnumerator(raw *storagepackagingopc.IOpcCertificateEnume
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcCertificateEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcCertificateEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcCertificateEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcCertificateEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcCertificateEnumerator) GetCurrent(certificate **securitycryptography.CERT_CONTEXT) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(certificate)))
+func (self IOpcCertificateEnumerator) GetCurrent() (*securitycryptography.CERT_CONTEXT, error) {
+	var _certificate *securitycryptography.CERT_CONTEXT
+	_hr := self.Raw.GetCurrent(&_certificate)
+	return _certificate, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcCertificateEnumerator) Clone(copy_ **storagepackagingopc.IOpcCertificateEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcCertificateEnumerator) Clone() (*storagepackagingopc.IOpcCertificateEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcCertificateEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcCertificateSet is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcCertificateSet with error-returning methods.
@@ -67,8 +75,10 @@ func (self IOpcCertificateSet) Remove(certificate *securitycryptography.CERT_CON
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self IOpcCertificateSet) GetEnumerator(certificateEnumerator **storagepackagingopc.IOpcCertificateEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnumerator(certificateEnumerator)))
+func (self IOpcCertificateSet) GetEnumerator() (*storagepackagingopc.IOpcCertificateEnumerator, error) {
+	var _certificateEnumerator *storagepackagingopc.IOpcCertificateEnumerator
+	_hr := self.Raw.GetEnumerator(&_certificateEnumerator)
+	return _certificateEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcDigitalSignature is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcDigitalSignature with error-returning methods.
@@ -93,8 +103,10 @@ func (self IOpcDigitalSignature) GetSignatureId(signatureId *foundation.PWSTR) e
 }
 
 // GetSignaturePartName wraps the raw GetSignaturePartName call.
-func (self IOpcDigitalSignature) GetSignaturePartName(signaturePartName **storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignaturePartName(signaturePartName)))
+func (self IOpcDigitalSignature) GetSignaturePartName() (*storagepackagingopc.IOpcPartUri, error) {
+	var _signaturePartName *storagepackagingopc.IOpcPartUri
+	_hr := self.Raw.GetSignaturePartName(&_signaturePartName)
+	return _signaturePartName, win32.HRESULTError(int32(_hr))
 }
 
 // GetSignatureMethod wraps the raw GetSignatureMethod call.
@@ -103,8 +115,10 @@ func (self IOpcDigitalSignature) GetSignatureMethod(signatureMethod *foundation.
 }
 
 // GetCanonicalizationMethod wraps the raw GetCanonicalizationMethod call.
-func (self IOpcDigitalSignature) GetCanonicalizationMethod(canonicalizationMethod *storagepackagingopc.OPC_CANONICALIZATION_METHOD) error {
-	return win32.HRESULTError(int32(self.Raw.GetCanonicalizationMethod(canonicalizationMethod)))
+func (self IOpcDigitalSignature) GetCanonicalizationMethod() (storagepackagingopc.OPC_CANONICALIZATION_METHOD, error) {
+	var _canonicalizationMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD
+	_hr := self.Raw.GetCanonicalizationMethod(&_canonicalizationMethod)
+	return _canonicalizationMethod, win32.HRESULTError(int32(_hr))
 }
 
 // GetSignatureValue wraps the raw GetSignatureValue call.
@@ -113,13 +127,17 @@ func (self IOpcDigitalSignature) GetSignatureValue(signatureValue **byte, count 
 }
 
 // GetSignaturePartReferenceEnumerator wraps the raw GetSignaturePartReferenceEnumerator call.
-func (self IOpcDigitalSignature) GetSignaturePartReferenceEnumerator(partReferenceEnumerator **storagepackagingopc.IOpcSignaturePartReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignaturePartReferenceEnumerator(partReferenceEnumerator)))
+func (self IOpcDigitalSignature) GetSignaturePartReferenceEnumerator() (*storagepackagingopc.IOpcSignaturePartReferenceEnumerator, error) {
+	var _partReferenceEnumerator *storagepackagingopc.IOpcSignaturePartReferenceEnumerator
+	_hr := self.Raw.GetSignaturePartReferenceEnumerator(&_partReferenceEnumerator)
+	return _partReferenceEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetSignatureRelationshipReferenceEnumerator wraps the raw GetSignatureRelationshipReferenceEnumerator call.
-func (self IOpcDigitalSignature) GetSignatureRelationshipReferenceEnumerator(relationshipReferenceEnumerator **storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignatureRelationshipReferenceEnumerator(relationshipReferenceEnumerator)))
+func (self IOpcDigitalSignature) GetSignatureRelationshipReferenceEnumerator() (*storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator, error) {
+	var _relationshipReferenceEnumerator *storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator
+	_hr := self.Raw.GetSignatureRelationshipReferenceEnumerator(&_relationshipReferenceEnumerator)
+	return _relationshipReferenceEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetSigningTime wraps the raw GetSigningTime call.
@@ -128,28 +146,38 @@ func (self IOpcDigitalSignature) GetSigningTime(signingTime *foundation.PWSTR) e
 }
 
 // GetTimeFormat wraps the raw GetTimeFormat call.
-func (self IOpcDigitalSignature) GetTimeFormat(timeFormat *storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT) error {
-	return win32.HRESULTError(int32(self.Raw.GetTimeFormat(timeFormat)))
+func (self IOpcDigitalSignature) GetTimeFormat() (storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT, error) {
+	var _timeFormat storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT
+	_hr := self.Raw.GetTimeFormat(&_timeFormat)
+	return _timeFormat, win32.HRESULTError(int32(_hr))
 }
 
 // GetPackageObjectReference wraps the raw GetPackageObjectReference call.
-func (self IOpcDigitalSignature) GetPackageObjectReference(packageObjectReference **storagepackagingopc.IOpcSignatureReference) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageObjectReference(packageObjectReference)))
+func (self IOpcDigitalSignature) GetPackageObjectReference() (*storagepackagingopc.IOpcSignatureReference, error) {
+	var _packageObjectReference *storagepackagingopc.IOpcSignatureReference
+	_hr := self.Raw.GetPackageObjectReference(&_packageObjectReference)
+	return _packageObjectReference, win32.HRESULTError(int32(_hr))
 }
 
 // GetCertificateEnumerator wraps the raw GetCertificateEnumerator call.
-func (self IOpcDigitalSignature) GetCertificateEnumerator(certificateEnumerator **storagepackagingopc.IOpcCertificateEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetCertificateEnumerator(certificateEnumerator)))
+func (self IOpcDigitalSignature) GetCertificateEnumerator() (*storagepackagingopc.IOpcCertificateEnumerator, error) {
+	var _certificateEnumerator *storagepackagingopc.IOpcCertificateEnumerator
+	_hr := self.Raw.GetCertificateEnumerator(&_certificateEnumerator)
+	return _certificateEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetCustomReferenceEnumerator wraps the raw GetCustomReferenceEnumerator call.
-func (self IOpcDigitalSignature) GetCustomReferenceEnumerator(customReferenceEnumerator **storagepackagingopc.IOpcSignatureReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetCustomReferenceEnumerator(customReferenceEnumerator)))
+func (self IOpcDigitalSignature) GetCustomReferenceEnumerator() (*storagepackagingopc.IOpcSignatureReferenceEnumerator, error) {
+	var _customReferenceEnumerator *storagepackagingopc.IOpcSignatureReferenceEnumerator
+	_hr := self.Raw.GetCustomReferenceEnumerator(&_customReferenceEnumerator)
+	return _customReferenceEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetCustomObjectEnumerator wraps the raw GetCustomObjectEnumerator call.
-func (self IOpcDigitalSignature) GetCustomObjectEnumerator(customObjectEnumerator **storagepackagingopc.IOpcSignatureCustomObjectEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetCustomObjectEnumerator(customObjectEnumerator)))
+func (self IOpcDigitalSignature) GetCustomObjectEnumerator() (*storagepackagingopc.IOpcSignatureCustomObjectEnumerator, error) {
+	var _customObjectEnumerator *storagepackagingopc.IOpcSignatureCustomObjectEnumerator
+	_hr := self.Raw.GetCustomObjectEnumerator(&_customObjectEnumerator)
+	return _customObjectEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetSignatureXml wraps the raw GetSignatureXml call.
@@ -169,23 +197,31 @@ func WrapIOpcDigitalSignatureEnumerator(raw *storagepackagingopc.IOpcDigitalSign
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcDigitalSignatureEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcDigitalSignatureEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcDigitalSignatureEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcDigitalSignatureEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcDigitalSignatureEnumerator) GetCurrent(digitalSignature **storagepackagingopc.IOpcDigitalSignature) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(digitalSignature)))
+func (self IOpcDigitalSignatureEnumerator) GetCurrent() (*storagepackagingopc.IOpcDigitalSignature, error) {
+	var _digitalSignature *storagepackagingopc.IOpcDigitalSignature
+	_hr := self.Raw.GetCurrent(&_digitalSignature)
+	return _digitalSignature, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcDigitalSignatureEnumerator) Clone(copy_ **storagepackagingopc.IOpcDigitalSignatureEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcDigitalSignatureEnumerator) Clone() (*storagepackagingopc.IOpcDigitalSignatureEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcDigitalSignatureEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcDigitalSignatureManager is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcDigitalSignatureManager with error-returning methods.
@@ -200,8 +236,10 @@ func WrapIOpcDigitalSignatureManager(raw *storagepackagingopc.IOpcDigitalSignatu
 }
 
 // GetSignatureOriginPartName wraps the raw GetSignatureOriginPartName call.
-func (self IOpcDigitalSignatureManager) GetSignatureOriginPartName(signatureOriginPartName **storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignatureOriginPartName(signatureOriginPartName)))
+func (self IOpcDigitalSignatureManager) GetSignatureOriginPartName() (*storagepackagingopc.IOpcPartUri, error) {
+	var _signatureOriginPartName *storagepackagingopc.IOpcPartUri
+	_hr := self.Raw.GetSignatureOriginPartName(&_signatureOriginPartName)
+	return _signatureOriginPartName, win32.HRESULTError(int32(_hr))
 }
 
 // SetSignatureOriginPartName wraps the raw SetSignatureOriginPartName call.
@@ -210,8 +248,10 @@ func (self IOpcDigitalSignatureManager) SetSignatureOriginPartName(signatureOrig
 }
 
 // GetSignatureEnumerator wraps the raw GetSignatureEnumerator call.
-func (self IOpcDigitalSignatureManager) GetSignatureEnumerator(signatureEnumerator **storagepackagingopc.IOpcDigitalSignatureEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignatureEnumerator(signatureEnumerator)))
+func (self IOpcDigitalSignatureManager) GetSignatureEnumerator() (*storagepackagingopc.IOpcDigitalSignatureEnumerator, error) {
+	var _signatureEnumerator *storagepackagingopc.IOpcDigitalSignatureEnumerator
+	_hr := self.Raw.GetSignatureEnumerator(&_signatureEnumerator)
+	return _signatureEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveSignature wraps the raw RemoveSignature call.
@@ -220,23 +260,31 @@ func (self IOpcDigitalSignatureManager) RemoveSignature(signaturePartName *stora
 }
 
 // CreateSigningOptions wraps the raw CreateSigningOptions call.
-func (self IOpcDigitalSignatureManager) CreateSigningOptions(signingOptions **storagepackagingopc.IOpcSigningOptions) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSigningOptions(signingOptions)))
+func (self IOpcDigitalSignatureManager) CreateSigningOptions() (*storagepackagingopc.IOpcSigningOptions, error) {
+	var _signingOptions *storagepackagingopc.IOpcSigningOptions
+	_hr := self.Raw.CreateSigningOptions(&_signingOptions)
+	return _signingOptions, win32.HRESULTError(int32(_hr))
 }
 
 // Validate wraps the raw Validate call.
-func (self IOpcDigitalSignatureManager) Validate(signature *storagepackagingopc.IOpcDigitalSignature, certificate *securitycryptography.CERT_CONTEXT, validationResult *storagepackagingopc.OPC_SIGNATURE_VALIDATION_RESULT) error {
-	return win32.HRESULTError(int32(self.Raw.Validate(signature, certificate, validationResult)))
+func (self IOpcDigitalSignatureManager) Validate(signature *storagepackagingopc.IOpcDigitalSignature, certificate *securitycryptography.CERT_CONTEXT) (storagepackagingopc.OPC_SIGNATURE_VALIDATION_RESULT, error) {
+	var _validationResult storagepackagingopc.OPC_SIGNATURE_VALIDATION_RESULT
+	_hr := self.Raw.Validate(signature, certificate, &_validationResult)
+	return _validationResult, win32.HRESULTError(int32(_hr))
 }
 
 // Sign wraps the raw Sign call.
-func (self IOpcDigitalSignatureManager) Sign(certificate *securitycryptography.CERT_CONTEXT, signingOptions *storagepackagingopc.IOpcSigningOptions, digitalSignature **storagepackagingopc.IOpcDigitalSignature) error {
-	return win32.HRESULTError(int32(self.Raw.Sign(certificate, signingOptions, digitalSignature)))
+func (self IOpcDigitalSignatureManager) Sign(certificate *securitycryptography.CERT_CONTEXT, signingOptions *storagepackagingopc.IOpcSigningOptions) (*storagepackagingopc.IOpcDigitalSignature, error) {
+	var _digitalSignature *storagepackagingopc.IOpcDigitalSignature
+	_hr := self.Raw.Sign(certificate, signingOptions, &_digitalSignature)
+	return _digitalSignature, win32.HRESULTError(int32(_hr))
 }
 
 // ReplaceSignatureXml wraps the raw ReplaceSignatureXml call.
-func (self IOpcDigitalSignatureManager) ReplaceSignatureXml(signaturePartName *storagepackagingopc.IOpcPartUri, newSignatureXml *byte, count uint32, digitalSignature **storagepackagingopc.IOpcDigitalSignature) error {
-	return win32.HRESULTError(int32(self.Raw.ReplaceSignatureXml(signaturePartName, newSignatureXml, count, digitalSignature)))
+func (self IOpcDigitalSignatureManager) ReplaceSignatureXml(signaturePartName *storagepackagingopc.IOpcPartUri, newSignatureXml *byte, count uint32) (*storagepackagingopc.IOpcDigitalSignature, error) {
+	var _digitalSignature *storagepackagingopc.IOpcDigitalSignature
+	_hr := self.Raw.ReplaceSignatureXml(signaturePartName, newSignatureXml, count, &_digitalSignature)
+	return _digitalSignature, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcFactory is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcFactory with error-returning methods.
@@ -251,30 +299,40 @@ func WrapIOpcFactory(raw *storagepackagingopc.IOpcFactory) IOpcFactory {
 }
 
 // CreatePackageRootUri wraps the raw CreatePackageRootUri call.
-func (self IOpcFactory) CreatePackageRootUri(rootUri **storagepackagingopc.IOpcUri) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePackageRootUri(rootUri)))
+func (self IOpcFactory) CreatePackageRootUri() (*storagepackagingopc.IOpcUri, error) {
+	var _rootUri *storagepackagingopc.IOpcUri
+	_hr := self.Raw.CreatePackageRootUri(&_rootUri)
+	return _rootUri, win32.HRESULTError(int32(_hr))
 }
 
 // CreatePartUri wraps the raw CreatePartUri call.
-func (self IOpcFactory) CreatePartUri(pwzUri string, partUri **storagepackagingopc.IOpcPartUri) error {
+func (self IOpcFactory) CreatePartUri(pwzUri string) (*storagepackagingopc.IOpcPartUri, error) {
 	_pwzUri := win32.UTF16Ptr(pwzUri)
-	return win32.HRESULTError(int32(self.Raw.CreatePartUri(foundation.PWSTR(_pwzUri), partUri)))
+	var _partUri *storagepackagingopc.IOpcPartUri
+	_hr := self.Raw.CreatePartUri(foundation.PWSTR(_pwzUri), &_partUri)
+	return _partUri, win32.HRESULTError(int32(_hr))
 }
 
 // CreateStreamOnFile wraps the raw CreateStreamOnFile call.
-func (self IOpcFactory) CreateStreamOnFile(filename string, ioMode storagepackagingopc.OPC_STREAM_IO_MODE, securityAttributes *security.SECURITY_ATTRIBUTES, dwFlagsAndAttributes uint32, stream **systemcom.IStream) error {
+func (self IOpcFactory) CreateStreamOnFile(filename string, ioMode storagepackagingopc.OPC_STREAM_IO_MODE, securityAttributes *security.SECURITY_ATTRIBUTES, dwFlagsAndAttributes uint32) (*systemcom.IStream, error) {
 	_filename := win32.UTF16Ptr(filename)
-	return win32.HRESULTError(int32(self.Raw.CreateStreamOnFile(foundation.PWSTR(_filename), ioMode, securityAttributes, dwFlagsAndAttributes, stream)))
+	var _stream *systemcom.IStream
+	_hr := self.Raw.CreateStreamOnFile(foundation.PWSTR(_filename), ioMode, securityAttributes, dwFlagsAndAttributes, &_stream)
+	return _stream, win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackage wraps the raw CreatePackage call.
-func (self IOpcFactory) CreatePackage(package_ **storagepackagingopc.IOpcPackage) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePackage(package_)))
+func (self IOpcFactory) CreatePackage() (*storagepackagingopc.IOpcPackage, error) {
+	var _package_ *storagepackagingopc.IOpcPackage
+	_hr := self.Raw.CreatePackage(&_package_)
+	return _package_, win32.HRESULTError(int32(_hr))
 }
 
 // ReadPackageFromStream wraps the raw ReadPackageFromStream call.
-func (self IOpcFactory) ReadPackageFromStream(stream *systemcom.IStream, flags storagepackagingopc.OPC_READ_FLAGS, package_ **storagepackagingopc.IOpcPackage) error {
-	return win32.HRESULTError(int32(self.Raw.ReadPackageFromStream(stream, flags, package_)))
+func (self IOpcFactory) ReadPackageFromStream(stream *systemcom.IStream, flags storagepackagingopc.OPC_READ_FLAGS) (*storagepackagingopc.IOpcPackage, error) {
+	var _package_ *storagepackagingopc.IOpcPackage
+	_hr := self.Raw.ReadPackageFromStream(stream, flags, &_package_)
+	return _package_, win32.HRESULTError(int32(_hr))
 }
 
 // WritePackageToStream wraps the raw WritePackageToStream call.
@@ -283,8 +341,10 @@ func (self IOpcFactory) WritePackageToStream(package_ *storagepackagingopc.IOpcP
 }
 
 // CreateDigitalSignatureManager wraps the raw CreateDigitalSignatureManager call.
-func (self IOpcFactory) CreateDigitalSignatureManager(package_ *storagepackagingopc.IOpcPackage, signatureManager **storagepackagingopc.IOpcDigitalSignatureManager) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDigitalSignatureManager(package_, signatureManager)))
+func (self IOpcFactory) CreateDigitalSignatureManager(package_ *storagepackagingopc.IOpcPackage) (*storagepackagingopc.IOpcDigitalSignatureManager, error) {
+	var _signatureManager *storagepackagingopc.IOpcDigitalSignatureManager
+	_hr := self.Raw.CreateDigitalSignatureManager(package_, &_signatureManager)
+	return _signatureManager, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcPackage is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcPackage with error-returning methods.
@@ -299,13 +359,17 @@ func WrapIOpcPackage(raw *storagepackagingopc.IOpcPackage) IOpcPackage {
 }
 
 // GetPartSet wraps the raw GetPartSet call.
-func (self IOpcPackage) GetPartSet(partSet **storagepackagingopc.IOpcPartSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetPartSet(partSet)))
+func (self IOpcPackage) GetPartSet() (*storagepackagingopc.IOpcPartSet, error) {
+	var _partSet *storagepackagingopc.IOpcPartSet
+	_hr := self.Raw.GetPartSet(&_partSet)
+	return _partSet, win32.HRESULTError(int32(_hr))
 }
 
 // GetRelationshipSet wraps the raw GetRelationshipSet call.
-func (self IOpcPackage) GetRelationshipSet(relationshipSet **storagepackagingopc.IOpcRelationshipSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetRelationshipSet(relationshipSet)))
+func (self IOpcPackage) GetRelationshipSet() (*storagepackagingopc.IOpcRelationshipSet, error) {
+	var _relationshipSet *storagepackagingopc.IOpcRelationshipSet
+	_hr := self.Raw.GetRelationshipSet(&_relationshipSet)
+	return _relationshipSet, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcPart is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcPart with error-returning methods.
@@ -320,28 +384,38 @@ func WrapIOpcPart(raw *storagepackagingopc.IOpcPart) IOpcPart {
 }
 
 // GetRelationshipSet wraps the raw GetRelationshipSet call.
-func (self IOpcPart) GetRelationshipSet(relationshipSet **storagepackagingopc.IOpcRelationshipSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetRelationshipSet(relationshipSet)))
+func (self IOpcPart) GetRelationshipSet() (*storagepackagingopc.IOpcRelationshipSet, error) {
+	var _relationshipSet *storagepackagingopc.IOpcRelationshipSet
+	_hr := self.Raw.GetRelationshipSet(&_relationshipSet)
+	return _relationshipSet, win32.HRESULTError(int32(_hr))
 }
 
 // GetContentStream wraps the raw GetContentStream call.
-func (self IOpcPart) GetContentStream(stream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.GetContentStream(stream)))
+func (self IOpcPart) GetContentStream() (*systemcom.IStream, error) {
+	var _stream *systemcom.IStream
+	_hr := self.Raw.GetContentStream(&_stream)
+	return _stream, win32.HRESULTError(int32(_hr))
 }
 
 // GetName wraps the raw GetName call.
-func (self IOpcPart) GetName(name **storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IOpcPart) GetName() (*storagepackagingopc.IOpcPartUri, error) {
+	var _name *storagepackagingopc.IOpcPartUri
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetContentType wraps the raw GetContentType call.
-func (self IOpcPart) GetContentType(contentType *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetContentType(contentType)))
+func (self IOpcPart) GetContentType() (foundation.PWSTR, error) {
+	var _contentType foundation.PWSTR
+	_hr := self.Raw.GetContentType(&_contentType)
+	return _contentType, win32.HRESULTError(int32(_hr))
 }
 
 // GetCompressionOptions wraps the raw GetCompressionOptions call.
-func (self IOpcPart) GetCompressionOptions(compressionOptions *storagepackagingopc.OPC_COMPRESSION_OPTIONS) error {
-	return win32.HRESULTError(int32(self.Raw.GetCompressionOptions(compressionOptions)))
+func (self IOpcPart) GetCompressionOptions() (storagepackagingopc.OPC_COMPRESSION_OPTIONS, error) {
+	var _compressionOptions storagepackagingopc.OPC_COMPRESSION_OPTIONS
+	_hr := self.Raw.GetCompressionOptions(&_compressionOptions)
+	return _compressionOptions, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcPartEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcPartEnumerator with error-returning methods.
@@ -356,23 +430,31 @@ func WrapIOpcPartEnumerator(raw *storagepackagingopc.IOpcPartEnumerator) IOpcPar
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcPartEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcPartEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcPartEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcPartEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcPartEnumerator) GetCurrent(part **storagepackagingopc.IOpcPart) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(part)))
+func (self IOpcPartEnumerator) GetCurrent() (*storagepackagingopc.IOpcPart, error) {
+	var _part *storagepackagingopc.IOpcPart
+	_hr := self.Raw.GetCurrent(&_part)
+	return _part, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcPartEnumerator) Clone(copy_ **storagepackagingopc.IOpcPartEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcPartEnumerator) Clone() (*storagepackagingopc.IOpcPartEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcPartEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcPartSet is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcPartSet with error-returning methods.
@@ -387,14 +469,18 @@ func WrapIOpcPartSet(raw *storagepackagingopc.IOpcPartSet) IOpcPartSet {
 }
 
 // GetPart wraps the raw GetPart call.
-func (self IOpcPartSet) GetPart(name *storagepackagingopc.IOpcPartUri, part **storagepackagingopc.IOpcPart) error {
-	return win32.HRESULTError(int32(self.Raw.GetPart(name, part)))
+func (self IOpcPartSet) GetPart(name *storagepackagingopc.IOpcPartUri) (*storagepackagingopc.IOpcPart, error) {
+	var _part *storagepackagingopc.IOpcPart
+	_hr := self.Raw.GetPart(name, &_part)
+	return _part, win32.HRESULTError(int32(_hr))
 }
 
 // CreatePart wraps the raw CreatePart call.
-func (self IOpcPartSet) CreatePart(name *storagepackagingopc.IOpcPartUri, contentType string, compressionOptions storagepackagingopc.OPC_COMPRESSION_OPTIONS, part **storagepackagingopc.IOpcPart) error {
+func (self IOpcPartSet) CreatePart(name *storagepackagingopc.IOpcPartUri, contentType string, compressionOptions storagepackagingopc.OPC_COMPRESSION_OPTIONS) (*storagepackagingopc.IOpcPart, error) {
 	_contentType := win32.UTF16Ptr(contentType)
-	return win32.HRESULTError(int32(self.Raw.CreatePart(name, foundation.PWSTR(_contentType), compressionOptions, part)))
+	var _part *storagepackagingopc.IOpcPart
+	_hr := self.Raw.CreatePart(name, foundation.PWSTR(_contentType), compressionOptions, &_part)
+	return _part, win32.HRESULTError(int32(_hr))
 }
 
 // DeletePart wraps the raw DeletePart call.
@@ -403,13 +489,17 @@ func (self IOpcPartSet) DeletePart(name *storagepackagingopc.IOpcPartUri) error 
 }
 
 // PartExists wraps the raw PartExists call.
-func (self IOpcPartSet) PartExists(name *storagepackagingopc.IOpcPartUri, partExists *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.PartExists(name, partExists)))
+func (self IOpcPartSet) PartExists(name *storagepackagingopc.IOpcPartUri) (foundation.BOOL, error) {
+	var _partExists foundation.BOOL
+	_hr := self.Raw.PartExists(name, &_partExists)
+	return _partExists, win32.HRESULTError(int32(_hr))
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self IOpcPartSet) GetEnumerator(partEnumerator **storagepackagingopc.IOpcPartEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnumerator(partEnumerator)))
+func (self IOpcPartSet) GetEnumerator() (*storagepackagingopc.IOpcPartEnumerator, error) {
+	var _partEnumerator *storagepackagingopc.IOpcPartEnumerator
+	_hr := self.Raw.GetEnumerator(&_partEnumerator)
+	return _partEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcPartUri is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcPartUri with error-returning methods.
@@ -424,18 +514,24 @@ func WrapIOpcPartUri(raw *storagepackagingopc.IOpcPartUri) IOpcPartUri {
 }
 
 // ComparePartUri wraps the raw ComparePartUri call.
-func (self IOpcPartUri) ComparePartUri(partUri *storagepackagingopc.IOpcPartUri, comparisonResult *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ComparePartUri(partUri, comparisonResult)))
+func (self IOpcPartUri) ComparePartUri(partUri *storagepackagingopc.IOpcPartUri) (int32, error) {
+	var _comparisonResult int32
+	_hr := self.Raw.ComparePartUri(partUri, &_comparisonResult)
+	return _comparisonResult, win32.HRESULTError(int32(_hr))
 }
 
 // GetSourceUri wraps the raw GetSourceUri call.
-func (self IOpcPartUri) GetSourceUri(sourceUri **storagepackagingopc.IOpcUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetSourceUri(sourceUri)))
+func (self IOpcPartUri) GetSourceUri() (*storagepackagingopc.IOpcUri, error) {
+	var _sourceUri *storagepackagingopc.IOpcUri
+	_hr := self.Raw.GetSourceUri(&_sourceUri)
+	return _sourceUri, win32.HRESULTError(int32(_hr))
 }
 
 // IsRelationshipsPartUri wraps the raw IsRelationshipsPartUri call.
-func (self IOpcPartUri) IsRelationshipsPartUri(isRelationshipUri *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsRelationshipsPartUri(isRelationshipUri)))
+func (self IOpcPartUri) IsRelationshipsPartUri() (foundation.BOOL, error) {
+	var _isRelationshipUri foundation.BOOL
+	_hr := self.Raw.IsRelationshipsPartUri(&_isRelationshipUri)
+	return _isRelationshipUri, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcRelationship is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcRelationship with error-returning methods.
@@ -450,28 +546,38 @@ func WrapIOpcRelationship(raw *storagepackagingopc.IOpcRelationship) IOpcRelatio
 }
 
 // GetId wraps the raw GetId call.
-func (self IOpcRelationship) GetId(relationshipIdentifier *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetId(relationshipIdentifier)))
+func (self IOpcRelationship) GetId() (foundation.PWSTR, error) {
+	var _relationshipIdentifier foundation.PWSTR
+	_hr := self.Raw.GetId(&_relationshipIdentifier)
+	return _relationshipIdentifier, win32.HRESULTError(int32(_hr))
 }
 
 // GetRelationshipType wraps the raw GetRelationshipType call.
-func (self IOpcRelationship) GetRelationshipType(relationshipType *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetRelationshipType(relationshipType)))
+func (self IOpcRelationship) GetRelationshipType() (foundation.PWSTR, error) {
+	var _relationshipType foundation.PWSTR
+	_hr := self.Raw.GetRelationshipType(&_relationshipType)
+	return _relationshipType, win32.HRESULTError(int32(_hr))
 }
 
 // GetSourceUri wraps the raw GetSourceUri call.
-func (self IOpcRelationship) GetSourceUri(sourceUri **storagepackagingopc.IOpcUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetSourceUri(sourceUri)))
+func (self IOpcRelationship) GetSourceUri() (*storagepackagingopc.IOpcUri, error) {
+	var _sourceUri *storagepackagingopc.IOpcUri
+	_hr := self.Raw.GetSourceUri(&_sourceUri)
+	return _sourceUri, win32.HRESULTError(int32(_hr))
 }
 
 // GetTargetUri wraps the raw GetTargetUri call.
-func (self IOpcRelationship) GetTargetUri(targetUri **systemcom.IUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetTargetUri(targetUri)))
+func (self IOpcRelationship) GetTargetUri() (*systemcom.IUri, error) {
+	var _targetUri *systemcom.IUri
+	_hr := self.Raw.GetTargetUri(&_targetUri)
+	return _targetUri, win32.HRESULTError(int32(_hr))
 }
 
 // GetTargetMode wraps the raw GetTargetMode call.
-func (self IOpcRelationship) GetTargetMode(targetMode *storagepackagingopc.OPC_URI_TARGET_MODE) error {
-	return win32.HRESULTError(int32(self.Raw.GetTargetMode(targetMode)))
+func (self IOpcRelationship) GetTargetMode() (storagepackagingopc.OPC_URI_TARGET_MODE, error) {
+	var _targetMode storagepackagingopc.OPC_URI_TARGET_MODE
+	_hr := self.Raw.GetTargetMode(&_targetMode)
+	return _targetMode, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcRelationshipEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcRelationshipEnumerator with error-returning methods.
@@ -486,23 +592,31 @@ func WrapIOpcRelationshipEnumerator(raw *storagepackagingopc.IOpcRelationshipEnu
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcRelationshipEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcRelationshipEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcRelationshipEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcRelationshipEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcRelationshipEnumerator) GetCurrent(relationship **storagepackagingopc.IOpcRelationship) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(relationship)))
+func (self IOpcRelationshipEnumerator) GetCurrent() (*storagepackagingopc.IOpcRelationship, error) {
+	var _relationship *storagepackagingopc.IOpcRelationship
+	_hr := self.Raw.GetCurrent(&_relationship)
+	return _relationship, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcRelationshipEnumerator) Clone(copy_ **storagepackagingopc.IOpcRelationshipEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcRelationshipEnumerator) Clone() (*storagepackagingopc.IOpcRelationshipEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcRelationshipEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcRelationshipSelector is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcRelationshipSelector with error-returning methods.
@@ -517,13 +631,17 @@ func WrapIOpcRelationshipSelector(raw *storagepackagingopc.IOpcRelationshipSelec
 }
 
 // GetSelectorType wraps the raw GetSelectorType call.
-func (self IOpcRelationshipSelector) GetSelectorType(selector *storagepackagingopc.OPC_RELATIONSHIP_SELECTOR) error {
-	return win32.HRESULTError(int32(self.Raw.GetSelectorType(selector)))
+func (self IOpcRelationshipSelector) GetSelectorType() (storagepackagingopc.OPC_RELATIONSHIP_SELECTOR, error) {
+	var _selector storagepackagingopc.OPC_RELATIONSHIP_SELECTOR
+	_hr := self.Raw.GetSelectorType(&_selector)
+	return _selector, win32.HRESULTError(int32(_hr))
 }
 
 // GetSelectionCriterion wraps the raw GetSelectionCriterion call.
-func (self IOpcRelationshipSelector) GetSelectionCriterion(selectionCriterion *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetSelectionCriterion(selectionCriterion)))
+func (self IOpcRelationshipSelector) GetSelectionCriterion() (foundation.PWSTR, error) {
+	var _selectionCriterion foundation.PWSTR
+	_hr := self.Raw.GetSelectionCriterion(&_selectionCriterion)
+	return _selectionCriterion, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcRelationshipSelectorEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcRelationshipSelectorEnumerator with error-returning methods.
@@ -538,23 +656,31 @@ func WrapIOpcRelationshipSelectorEnumerator(raw *storagepackagingopc.IOpcRelatio
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcRelationshipSelectorEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcRelationshipSelectorEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcRelationshipSelectorEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcRelationshipSelectorEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcRelationshipSelectorEnumerator) GetCurrent(relationshipSelector **storagepackagingopc.IOpcRelationshipSelector) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(relationshipSelector)))
+func (self IOpcRelationshipSelectorEnumerator) GetCurrent() (*storagepackagingopc.IOpcRelationshipSelector, error) {
+	var _relationshipSelector *storagepackagingopc.IOpcRelationshipSelector
+	_hr := self.Raw.GetCurrent(&_relationshipSelector)
+	return _relationshipSelector, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcRelationshipSelectorEnumerator) Clone(copy_ **storagepackagingopc.IOpcRelationshipSelectorEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcRelationshipSelectorEnumerator) Clone() (*storagepackagingopc.IOpcRelationshipSelectorEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcRelationshipSelectorEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcRelationshipSelectorSet is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcRelationshipSelectorSet with error-returning methods.
@@ -569,9 +695,11 @@ func WrapIOpcRelationshipSelectorSet(raw *storagepackagingopc.IOpcRelationshipSe
 }
 
 // Create wraps the raw Create call.
-func (self IOpcRelationshipSelectorSet) Create(selector storagepackagingopc.OPC_RELATIONSHIP_SELECTOR, selectionCriterion string, relationshipSelector **storagepackagingopc.IOpcRelationshipSelector) error {
+func (self IOpcRelationshipSelectorSet) Create(selector storagepackagingopc.OPC_RELATIONSHIP_SELECTOR, selectionCriterion string) (*storagepackagingopc.IOpcRelationshipSelector, error) {
 	_selectionCriterion := win32.UTF16Ptr(selectionCriterion)
-	return win32.HRESULTError(int32(self.Raw.Create(selector, foundation.PWSTR(_selectionCriterion), relationshipSelector)))
+	var _relationshipSelector *storagepackagingopc.IOpcRelationshipSelector
+	_hr := self.Raw.Create(selector, foundation.PWSTR(_selectionCriterion), &_relationshipSelector)
+	return _relationshipSelector, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -580,8 +708,10 @@ func (self IOpcRelationshipSelectorSet) Delete(relationshipSelector *storagepack
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self IOpcRelationshipSelectorSet) GetEnumerator(relationshipSelectorEnumerator **storagepackagingopc.IOpcRelationshipSelectorEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnumerator(relationshipSelectorEnumerator)))
+func (self IOpcRelationshipSelectorSet) GetEnumerator() (*storagepackagingopc.IOpcRelationshipSelectorEnumerator, error) {
+	var _relationshipSelectorEnumerator *storagepackagingopc.IOpcRelationshipSelectorEnumerator
+	_hr := self.Raw.GetEnumerator(&_relationshipSelectorEnumerator)
+	return _relationshipSelectorEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcRelationshipSet is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcRelationshipSet with error-returning methods.
@@ -596,16 +726,20 @@ func WrapIOpcRelationshipSet(raw *storagepackagingopc.IOpcRelationshipSet) IOpcR
 }
 
 // GetRelationship wraps the raw GetRelationship call.
-func (self IOpcRelationshipSet) GetRelationship(relationshipIdentifier string, relationship **storagepackagingopc.IOpcRelationship) error {
+func (self IOpcRelationshipSet) GetRelationship(relationshipIdentifier string) (*storagepackagingopc.IOpcRelationship, error) {
 	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
-	return win32.HRESULTError(int32(self.Raw.GetRelationship(foundation.PWSTR(_relationshipIdentifier), relationship)))
+	var _relationship *storagepackagingopc.IOpcRelationship
+	_hr := self.Raw.GetRelationship(foundation.PWSTR(_relationshipIdentifier), &_relationship)
+	return _relationship, win32.HRESULTError(int32(_hr))
 }
 
 // CreateRelationship wraps the raw CreateRelationship call.
-func (self IOpcRelationshipSet) CreateRelationship(relationshipIdentifier string, relationshipType string, targetUri *systemcom.IUri, targetMode storagepackagingopc.OPC_URI_TARGET_MODE, relationship **storagepackagingopc.IOpcRelationship) error {
+func (self IOpcRelationshipSet) CreateRelationship(relationshipIdentifier string, relationshipType string, targetUri *systemcom.IUri, targetMode storagepackagingopc.OPC_URI_TARGET_MODE) (*storagepackagingopc.IOpcRelationship, error) {
 	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
 	_relationshipType := win32.UTF16Ptr(relationshipType)
-	return win32.HRESULTError(int32(self.Raw.CreateRelationship(foundation.PWSTR(_relationshipIdentifier), foundation.PWSTR(_relationshipType), targetUri, targetMode, relationship)))
+	var _relationship *storagepackagingopc.IOpcRelationship
+	_hr := self.Raw.CreateRelationship(foundation.PWSTR(_relationshipIdentifier), foundation.PWSTR(_relationshipType), targetUri, targetMode, &_relationship)
+	return _relationship, win32.HRESULTError(int32(_hr))
 }
 
 // DeleteRelationship wraps the raw DeleteRelationship call.
@@ -615,25 +749,33 @@ func (self IOpcRelationshipSet) DeleteRelationship(relationshipIdentifier string
 }
 
 // RelationshipExists wraps the raw RelationshipExists call.
-func (self IOpcRelationshipSet) RelationshipExists(relationshipIdentifier string, relationshipExists *foundation.BOOL) error {
+func (self IOpcRelationshipSet) RelationshipExists(relationshipIdentifier string) (foundation.BOOL, error) {
 	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
-	return win32.HRESULTError(int32(self.Raw.RelationshipExists(foundation.PWSTR(_relationshipIdentifier), relationshipExists)))
+	var _relationshipExists foundation.BOOL
+	_hr := self.Raw.RelationshipExists(foundation.PWSTR(_relationshipIdentifier), &_relationshipExists)
+	return _relationshipExists, win32.HRESULTError(int32(_hr))
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self IOpcRelationshipSet) GetEnumerator(relationshipEnumerator **storagepackagingopc.IOpcRelationshipEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnumerator(relationshipEnumerator)))
+func (self IOpcRelationshipSet) GetEnumerator() (*storagepackagingopc.IOpcRelationshipEnumerator, error) {
+	var _relationshipEnumerator *storagepackagingopc.IOpcRelationshipEnumerator
+	_hr := self.Raw.GetEnumerator(&_relationshipEnumerator)
+	return _relationshipEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetEnumeratorForType wraps the raw GetEnumeratorForType call.
-func (self IOpcRelationshipSet) GetEnumeratorForType(relationshipType string, relationshipEnumerator **storagepackagingopc.IOpcRelationshipEnumerator) error {
+func (self IOpcRelationshipSet) GetEnumeratorForType(relationshipType string) (*storagepackagingopc.IOpcRelationshipEnumerator, error) {
 	_relationshipType := win32.UTF16Ptr(relationshipType)
-	return win32.HRESULTError(int32(self.Raw.GetEnumeratorForType(foundation.PWSTR(_relationshipType), relationshipEnumerator)))
+	var _relationshipEnumerator *storagepackagingopc.IOpcRelationshipEnumerator
+	_hr := self.Raw.GetEnumeratorForType(foundation.PWSTR(_relationshipType), &_relationshipEnumerator)
+	return _relationshipEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetRelationshipsContentStream wraps the raw GetRelationshipsContentStream call.
-func (self IOpcRelationshipSet) GetRelationshipsContentStream(contents **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.GetRelationshipsContentStream(contents)))
+func (self IOpcRelationshipSet) GetRelationshipsContentStream() (*systemcom.IStream, error) {
+	var _contents *systemcom.IStream
+	_hr := self.Raw.GetRelationshipsContentStream(&_contents)
+	return _contents, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignatureCustomObject is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignatureCustomObject with error-returning methods.
@@ -664,23 +806,31 @@ func WrapIOpcSignatureCustomObjectEnumerator(raw *storagepackagingopc.IOpcSignat
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcSignatureCustomObjectEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcSignatureCustomObjectEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcSignatureCustomObjectEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcSignatureCustomObjectEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcSignatureCustomObjectEnumerator) GetCurrent(customObject **storagepackagingopc.IOpcSignatureCustomObject) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(customObject)))
+func (self IOpcSignatureCustomObjectEnumerator) GetCurrent() (*storagepackagingopc.IOpcSignatureCustomObject, error) {
+	var _customObject *storagepackagingopc.IOpcSignatureCustomObject
+	_hr := self.Raw.GetCurrent(&_customObject)
+	return _customObject, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcSignatureCustomObjectEnumerator) Clone(copy_ **storagepackagingopc.IOpcSignatureCustomObjectEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcSignatureCustomObjectEnumerator) Clone() (*storagepackagingopc.IOpcSignatureCustomObjectEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcSignatureCustomObjectEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignatureCustomObjectSet is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignatureCustomObjectSet with error-returning methods.
@@ -695,8 +845,10 @@ func WrapIOpcSignatureCustomObjectSet(raw *storagepackagingopc.IOpcSignatureCust
 }
 
 // Create wraps the raw Create call.
-func (self IOpcSignatureCustomObjectSet) Create(xmlMarkup *byte, count uint32, customObject **storagepackagingopc.IOpcSignatureCustomObject) error {
-	return win32.HRESULTError(int32(self.Raw.Create(xmlMarkup, count, customObject)))
+func (self IOpcSignatureCustomObjectSet) Create(xmlMarkup *byte, count uint32) (*storagepackagingopc.IOpcSignatureCustomObject, error) {
+	var _customObject *storagepackagingopc.IOpcSignatureCustomObject
+	_hr := self.Raw.Create(xmlMarkup, count, &_customObject)
+	return _customObject, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -705,8 +857,10 @@ func (self IOpcSignatureCustomObjectSet) Delete(customObject *storagepackagingop
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self IOpcSignatureCustomObjectSet) GetEnumerator(customObjectEnumerator **storagepackagingopc.IOpcSignatureCustomObjectEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnumerator(customObjectEnumerator)))
+func (self IOpcSignatureCustomObjectSet) GetEnumerator() (*storagepackagingopc.IOpcSignatureCustomObjectEnumerator, error) {
+	var _customObjectEnumerator *storagepackagingopc.IOpcSignatureCustomObjectEnumerator
+	_hr := self.Raw.GetEnumerator(&_customObjectEnumerator)
+	return _customObjectEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignaturePartReference is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignaturePartReference with error-returning methods.
@@ -721,18 +875,24 @@ func WrapIOpcSignaturePartReference(raw *storagepackagingopc.IOpcSignaturePartRe
 }
 
 // GetPartName wraps the raw GetPartName call.
-func (self IOpcSignaturePartReference) GetPartName(partName **storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetPartName(partName)))
+func (self IOpcSignaturePartReference) GetPartName() (*storagepackagingopc.IOpcPartUri, error) {
+	var _partName *storagepackagingopc.IOpcPartUri
+	_hr := self.Raw.GetPartName(&_partName)
+	return _partName, win32.HRESULTError(int32(_hr))
 }
 
 // GetContentType wraps the raw GetContentType call.
-func (self IOpcSignaturePartReference) GetContentType(contentType *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetContentType(contentType)))
+func (self IOpcSignaturePartReference) GetContentType() (foundation.PWSTR, error) {
+	var _contentType foundation.PWSTR
+	_hr := self.Raw.GetContentType(&_contentType)
+	return _contentType, win32.HRESULTError(int32(_hr))
 }
 
 // GetDigestMethod wraps the raw GetDigestMethod call.
-func (self IOpcSignaturePartReference) GetDigestMethod(digestMethod *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDigestMethod(digestMethod)))
+func (self IOpcSignaturePartReference) GetDigestMethod() (foundation.PWSTR, error) {
+	var _digestMethod foundation.PWSTR
+	_hr := self.Raw.GetDigestMethod(&_digestMethod)
+	return _digestMethod, win32.HRESULTError(int32(_hr))
 }
 
 // GetDigestValue wraps the raw GetDigestValue call.
@@ -741,8 +901,10 @@ func (self IOpcSignaturePartReference) GetDigestValue(digestValue **byte, count 
 }
 
 // GetTransformMethod wraps the raw GetTransformMethod call.
-func (self IOpcSignaturePartReference) GetTransformMethod(transformMethod *storagepackagingopc.OPC_CANONICALIZATION_METHOD) error {
-	return win32.HRESULTError(int32(self.Raw.GetTransformMethod(transformMethod)))
+func (self IOpcSignaturePartReference) GetTransformMethod() (storagepackagingopc.OPC_CANONICALIZATION_METHOD, error) {
+	var _transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD
+	_hr := self.Raw.GetTransformMethod(&_transformMethod)
+	return _transformMethod, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignaturePartReferenceEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignaturePartReferenceEnumerator with error-returning methods.
@@ -757,23 +919,31 @@ func WrapIOpcSignaturePartReferenceEnumerator(raw *storagepackagingopc.IOpcSigna
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcSignaturePartReferenceEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcSignaturePartReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcSignaturePartReferenceEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcSignaturePartReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcSignaturePartReferenceEnumerator) GetCurrent(partReference **storagepackagingopc.IOpcSignaturePartReference) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(partReference)))
+func (self IOpcSignaturePartReferenceEnumerator) GetCurrent() (*storagepackagingopc.IOpcSignaturePartReference, error) {
+	var _partReference *storagepackagingopc.IOpcSignaturePartReference
+	_hr := self.Raw.GetCurrent(&_partReference)
+	return _partReference, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcSignaturePartReferenceEnumerator) Clone(copy_ **storagepackagingopc.IOpcSignaturePartReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcSignaturePartReferenceEnumerator) Clone() (*storagepackagingopc.IOpcSignaturePartReferenceEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcSignaturePartReferenceEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignaturePartReferenceSet is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignaturePartReferenceSet with error-returning methods.
@@ -788,9 +958,11 @@ func WrapIOpcSignaturePartReferenceSet(raw *storagepackagingopc.IOpcSignaturePar
 }
 
 // Create wraps the raw Create call.
-func (self IOpcSignaturePartReferenceSet) Create(partUri *storagepackagingopc.IOpcPartUri, digestMethod string, transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD, partReference **storagepackagingopc.IOpcSignaturePartReference) error {
+func (self IOpcSignaturePartReferenceSet) Create(partUri *storagepackagingopc.IOpcPartUri, digestMethod string, transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD) (*storagepackagingopc.IOpcSignaturePartReference, error) {
 	_digestMethod := win32.UTF16Ptr(digestMethod)
-	return win32.HRESULTError(int32(self.Raw.Create(partUri, foundation.PWSTR(_digestMethod), transformMethod, partReference)))
+	var _partReference *storagepackagingopc.IOpcSignaturePartReference
+	_hr := self.Raw.Create(partUri, foundation.PWSTR(_digestMethod), transformMethod, &_partReference)
+	return _partReference, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -799,8 +971,10 @@ func (self IOpcSignaturePartReferenceSet) Delete(partReference *storagepackaging
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self IOpcSignaturePartReferenceSet) GetEnumerator(partReferenceEnumerator **storagepackagingopc.IOpcSignaturePartReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnumerator(partReferenceEnumerator)))
+func (self IOpcSignaturePartReferenceSet) GetEnumerator() (*storagepackagingopc.IOpcSignaturePartReferenceEnumerator, error) {
+	var _partReferenceEnumerator *storagepackagingopc.IOpcSignaturePartReferenceEnumerator
+	_hr := self.Raw.GetEnumerator(&_partReferenceEnumerator)
+	return _partReferenceEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignatureReference is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignatureReference with error-returning methods.
@@ -815,28 +989,38 @@ func WrapIOpcSignatureReference(raw *storagepackagingopc.IOpcSignatureReference)
 }
 
 // GetId wraps the raw GetId call.
-func (self IOpcSignatureReference) GetId(referenceId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetId(referenceId)))
+func (self IOpcSignatureReference) GetId() (foundation.PWSTR, error) {
+	var _referenceId foundation.PWSTR
+	_hr := self.Raw.GetId(&_referenceId)
+	return _referenceId, win32.HRESULTError(int32(_hr))
 }
 
 // GetUri wraps the raw GetUri call.
-func (self IOpcSignatureReference) GetUri(referenceUri **systemcom.IUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetUri(referenceUri)))
+func (self IOpcSignatureReference) GetUri() (*systemcom.IUri, error) {
+	var _referenceUri *systemcom.IUri
+	_hr := self.Raw.GetUri(&_referenceUri)
+	return _referenceUri, win32.HRESULTError(int32(_hr))
 }
 
 // GetType wraps the raw GetType call.
-func (self IOpcSignatureReference) GetType(type_ *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetType(type_)))
+func (self IOpcSignatureReference) GetType() (foundation.PWSTR, error) {
+	var _type_ foundation.PWSTR
+	_hr := self.Raw.GetType(&_type_)
+	return _type_, win32.HRESULTError(int32(_hr))
 }
 
 // GetTransformMethod wraps the raw GetTransformMethod call.
-func (self IOpcSignatureReference) GetTransformMethod(transformMethod *storagepackagingopc.OPC_CANONICALIZATION_METHOD) error {
-	return win32.HRESULTError(int32(self.Raw.GetTransformMethod(transformMethod)))
+func (self IOpcSignatureReference) GetTransformMethod() (storagepackagingopc.OPC_CANONICALIZATION_METHOD, error) {
+	var _transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD
+	_hr := self.Raw.GetTransformMethod(&_transformMethod)
+	return _transformMethod, win32.HRESULTError(int32(_hr))
 }
 
 // GetDigestMethod wraps the raw GetDigestMethod call.
-func (self IOpcSignatureReference) GetDigestMethod(digestMethod *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDigestMethod(digestMethod)))
+func (self IOpcSignatureReference) GetDigestMethod() (foundation.PWSTR, error) {
+	var _digestMethod foundation.PWSTR
+	_hr := self.Raw.GetDigestMethod(&_digestMethod)
+	return _digestMethod, win32.HRESULTError(int32(_hr))
 }
 
 // GetDigestValue wraps the raw GetDigestValue call.
@@ -856,23 +1040,31 @@ func WrapIOpcSignatureReferenceEnumerator(raw *storagepackagingopc.IOpcSignature
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcSignatureReferenceEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcSignatureReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcSignatureReferenceEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcSignatureReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcSignatureReferenceEnumerator) GetCurrent(reference **storagepackagingopc.IOpcSignatureReference) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(reference)))
+func (self IOpcSignatureReferenceEnumerator) GetCurrent() (*storagepackagingopc.IOpcSignatureReference, error) {
+	var _reference *storagepackagingopc.IOpcSignatureReference
+	_hr := self.Raw.GetCurrent(&_reference)
+	return _reference, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcSignatureReferenceEnumerator) Clone(copy_ **storagepackagingopc.IOpcSignatureReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcSignatureReferenceEnumerator) Clone() (*storagepackagingopc.IOpcSignatureReferenceEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcSignatureReferenceEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignatureReferenceSet is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignatureReferenceSet with error-returning methods.
@@ -887,11 +1079,13 @@ func WrapIOpcSignatureReferenceSet(raw *storagepackagingopc.IOpcSignatureReferen
 }
 
 // Create wraps the raw Create call.
-func (self IOpcSignatureReferenceSet) Create(referenceUri *systemcom.IUri, referenceId string, type_ string, digestMethod string, transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD, reference **storagepackagingopc.IOpcSignatureReference) error {
+func (self IOpcSignatureReferenceSet) Create(referenceUri *systemcom.IUri, referenceId string, type_ string, digestMethod string, transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD) (*storagepackagingopc.IOpcSignatureReference, error) {
 	_referenceId := win32.UTF16Ptr(referenceId)
 	_type_ := win32.UTF16Ptr(type_)
 	_digestMethod := win32.UTF16Ptr(digestMethod)
-	return win32.HRESULTError(int32(self.Raw.Create(referenceUri, foundation.PWSTR(_referenceId), foundation.PWSTR(_type_), foundation.PWSTR(_digestMethod), transformMethod, reference)))
+	var _reference *storagepackagingopc.IOpcSignatureReference
+	_hr := self.Raw.Create(referenceUri, foundation.PWSTR(_referenceId), foundation.PWSTR(_type_), foundation.PWSTR(_digestMethod), transformMethod, &_reference)
+	return _reference, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -900,8 +1094,10 @@ func (self IOpcSignatureReferenceSet) Delete(reference *storagepackagingopc.IOpc
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self IOpcSignatureReferenceSet) GetEnumerator(referenceEnumerator **storagepackagingopc.IOpcSignatureReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnumerator(referenceEnumerator)))
+func (self IOpcSignatureReferenceSet) GetEnumerator() (*storagepackagingopc.IOpcSignatureReferenceEnumerator, error) {
+	var _referenceEnumerator *storagepackagingopc.IOpcSignatureReferenceEnumerator
+	_hr := self.Raw.GetEnumerator(&_referenceEnumerator)
+	return _referenceEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignatureRelationshipReference is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignatureRelationshipReference with error-returning methods.
@@ -916,13 +1112,17 @@ func WrapIOpcSignatureRelationshipReference(raw *storagepackagingopc.IOpcSignatu
 }
 
 // GetSourceUri wraps the raw GetSourceUri call.
-func (self IOpcSignatureRelationshipReference) GetSourceUri(sourceUri **storagepackagingopc.IOpcUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetSourceUri(sourceUri)))
+func (self IOpcSignatureRelationshipReference) GetSourceUri() (*storagepackagingopc.IOpcUri, error) {
+	var _sourceUri *storagepackagingopc.IOpcUri
+	_hr := self.Raw.GetSourceUri(&_sourceUri)
+	return _sourceUri, win32.HRESULTError(int32(_hr))
 }
 
 // GetDigestMethod wraps the raw GetDigestMethod call.
-func (self IOpcSignatureRelationshipReference) GetDigestMethod(digestMethod *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDigestMethod(digestMethod)))
+func (self IOpcSignatureRelationshipReference) GetDigestMethod() (foundation.PWSTR, error) {
+	var _digestMethod foundation.PWSTR
+	_hr := self.Raw.GetDigestMethod(&_digestMethod)
+	return _digestMethod, win32.HRESULTError(int32(_hr))
 }
 
 // GetDigestValue wraps the raw GetDigestValue call.
@@ -931,18 +1131,24 @@ func (self IOpcSignatureRelationshipReference) GetDigestValue(digestValue **byte
 }
 
 // GetTransformMethod wraps the raw GetTransformMethod call.
-func (self IOpcSignatureRelationshipReference) GetTransformMethod(transformMethod *storagepackagingopc.OPC_CANONICALIZATION_METHOD) error {
-	return win32.HRESULTError(int32(self.Raw.GetTransformMethod(transformMethod)))
+func (self IOpcSignatureRelationshipReference) GetTransformMethod() (storagepackagingopc.OPC_CANONICALIZATION_METHOD, error) {
+	var _transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD
+	_hr := self.Raw.GetTransformMethod(&_transformMethod)
+	return _transformMethod, win32.HRESULTError(int32(_hr))
 }
 
 // GetRelationshipSigningOption wraps the raw GetRelationshipSigningOption call.
-func (self IOpcSignatureRelationshipReference) GetRelationshipSigningOption(relationshipSigningOption *storagepackagingopc.OPC_RELATIONSHIPS_SIGNING_OPTION) error {
-	return win32.HRESULTError(int32(self.Raw.GetRelationshipSigningOption(relationshipSigningOption)))
+func (self IOpcSignatureRelationshipReference) GetRelationshipSigningOption() (storagepackagingopc.OPC_RELATIONSHIPS_SIGNING_OPTION, error) {
+	var _relationshipSigningOption storagepackagingopc.OPC_RELATIONSHIPS_SIGNING_OPTION
+	_hr := self.Raw.GetRelationshipSigningOption(&_relationshipSigningOption)
+	return _relationshipSigningOption, win32.HRESULTError(int32(_hr))
 }
 
 // GetRelationshipSelectorEnumerator wraps the raw GetRelationshipSelectorEnumerator call.
-func (self IOpcSignatureRelationshipReference) GetRelationshipSelectorEnumerator(selectorEnumerator **storagepackagingopc.IOpcRelationshipSelectorEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetRelationshipSelectorEnumerator(selectorEnumerator)))
+func (self IOpcSignatureRelationshipReference) GetRelationshipSelectorEnumerator() (*storagepackagingopc.IOpcRelationshipSelectorEnumerator, error) {
+	var _selectorEnumerator *storagepackagingopc.IOpcRelationshipSelectorEnumerator
+	_hr := self.Raw.GetRelationshipSelectorEnumerator(&_selectorEnumerator)
+	return _selectorEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignatureRelationshipReferenceEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignatureRelationshipReferenceEnumerator with error-returning methods.
@@ -957,23 +1163,31 @@ func WrapIOpcSignatureRelationshipReferenceEnumerator(raw *storagepackagingopc.I
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IOpcSignatureRelationshipReferenceEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IOpcSignatureRelationshipReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // MovePrevious wraps the raw MovePrevious call.
-func (self IOpcSignatureRelationshipReferenceEnumerator) MovePrevious(hasPrevious *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MovePrevious(hasPrevious)))
+func (self IOpcSignatureRelationshipReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	_hr := self.Raw.MovePrevious(&_hasPrevious)
+	return _hasPrevious, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IOpcSignatureRelationshipReferenceEnumerator) GetCurrent(relationshipReference **storagepackagingopc.IOpcSignatureRelationshipReference) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(relationshipReference)))
+func (self IOpcSignatureRelationshipReferenceEnumerator) GetCurrent() (*storagepackagingopc.IOpcSignatureRelationshipReference, error) {
+	var _relationshipReference *storagepackagingopc.IOpcSignatureRelationshipReference
+	_hr := self.Raw.GetCurrent(&_relationshipReference)
+	return _relationshipReference, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IOpcSignatureRelationshipReferenceEnumerator) Clone(copy_ **storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(copy_)))
+func (self IOpcSignatureRelationshipReferenceEnumerator) Clone() (*storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator, error) {
+	var _copy_ *storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator
+	_hr := self.Raw.Clone(&_copy_)
+	return _copy_, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSignatureRelationshipReferenceSet is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSignatureRelationshipReferenceSet with error-returning methods.
@@ -988,9 +1202,11 @@ func WrapIOpcSignatureRelationshipReferenceSet(raw *storagepackagingopc.IOpcSign
 }
 
 // Create wraps the raw Create call.
-func (self IOpcSignatureRelationshipReferenceSet) Create(sourceUri *storagepackagingopc.IOpcUri, digestMethod string, relationshipSigningOption storagepackagingopc.OPC_RELATIONSHIPS_SIGNING_OPTION, selectorSet *storagepackagingopc.IOpcRelationshipSelectorSet, transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD, relationshipReference **storagepackagingopc.IOpcSignatureRelationshipReference) error {
+func (self IOpcSignatureRelationshipReferenceSet) Create(sourceUri *storagepackagingopc.IOpcUri, digestMethod string, relationshipSigningOption storagepackagingopc.OPC_RELATIONSHIPS_SIGNING_OPTION, selectorSet *storagepackagingopc.IOpcRelationshipSelectorSet, transformMethod storagepackagingopc.OPC_CANONICALIZATION_METHOD) (*storagepackagingopc.IOpcSignatureRelationshipReference, error) {
 	_digestMethod := win32.UTF16Ptr(digestMethod)
-	return win32.HRESULTError(int32(self.Raw.Create(sourceUri, foundation.PWSTR(_digestMethod), relationshipSigningOption, selectorSet, transformMethod, relationshipReference)))
+	var _relationshipReference *storagepackagingopc.IOpcSignatureRelationshipReference
+	_hr := self.Raw.Create(sourceUri, foundation.PWSTR(_digestMethod), relationshipSigningOption, selectorSet, transformMethod, &_relationshipReference)
+	return _relationshipReference, win32.HRESULTError(int32(_hr))
 }
 
 // CreateRelationshipSelectorSet wraps the raw CreateRelationshipSelectorSet call.
@@ -1004,8 +1220,10 @@ func (self IOpcSignatureRelationshipReferenceSet) Delete(relationshipReference *
 }
 
 // GetEnumerator wraps the raw GetEnumerator call.
-func (self IOpcSignatureRelationshipReferenceSet) GetEnumerator(relationshipReferenceEnumerator **storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetEnumerator(relationshipReferenceEnumerator)))
+func (self IOpcSignatureRelationshipReferenceSet) GetEnumerator() (*storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator, error) {
+	var _relationshipReferenceEnumerator *storagepackagingopc.IOpcSignatureRelationshipReferenceEnumerator
+	_hr := self.Raw.GetEnumerator(&_relationshipReferenceEnumerator)
+	return _relationshipReferenceEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IOpcSigningOptions is an idiomatic wrapper over the raw COM interface Storage.Packaging.Opc.IOpcSigningOptions with error-returning methods.
@@ -1020,8 +1238,10 @@ func WrapIOpcSigningOptions(raw *storagepackagingopc.IOpcSigningOptions) IOpcSig
 }
 
 // GetSignatureId wraps the raw GetSignatureId call.
-func (self IOpcSigningOptions) GetSignatureId(signatureId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignatureId(signatureId)))
+func (self IOpcSigningOptions) GetSignatureId() (foundation.PWSTR, error) {
+	var _signatureId foundation.PWSTR
+	_hr := self.Raw.GetSignatureId(&_signatureId)
+	return _signatureId, win32.HRESULTError(int32(_hr))
 }
 
 // SetSignatureId wraps the raw SetSignatureId call.
@@ -1031,8 +1251,10 @@ func (self IOpcSigningOptions) SetSignatureId(signatureId string) error {
 }
 
 // GetSignatureMethod wraps the raw GetSignatureMethod call.
-func (self IOpcSigningOptions) GetSignatureMethod(signatureMethod *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignatureMethod(signatureMethod)))
+func (self IOpcSigningOptions) GetSignatureMethod() (foundation.PWSTR, error) {
+	var _signatureMethod foundation.PWSTR
+	_hr := self.Raw.GetSignatureMethod(&_signatureMethod)
+	return _signatureMethod, win32.HRESULTError(int32(_hr))
 }
 
 // SetSignatureMethod wraps the raw SetSignatureMethod call.
@@ -1042,8 +1264,10 @@ func (self IOpcSigningOptions) SetSignatureMethod(signatureMethod string) error 
 }
 
 // GetDefaultDigestMethod wraps the raw GetDefaultDigestMethod call.
-func (self IOpcSigningOptions) GetDefaultDigestMethod(digestMethod *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDefaultDigestMethod(digestMethod)))
+func (self IOpcSigningOptions) GetDefaultDigestMethod() (foundation.PWSTR, error) {
+	var _digestMethod foundation.PWSTR
+	_hr := self.Raw.GetDefaultDigestMethod(&_digestMethod)
+	return _digestMethod, win32.HRESULTError(int32(_hr))
 }
 
 // SetDefaultDigestMethod wraps the raw SetDefaultDigestMethod call.
@@ -1053,8 +1277,10 @@ func (self IOpcSigningOptions) SetDefaultDigestMethod(digestMethod string) error
 }
 
 // GetCertificateEmbeddingOption wraps the raw GetCertificateEmbeddingOption call.
-func (self IOpcSigningOptions) GetCertificateEmbeddingOption(embeddingOption *storagepackagingopc.OPC_CERTIFICATE_EMBEDDING_OPTION) error {
-	return win32.HRESULTError(int32(self.Raw.GetCertificateEmbeddingOption(embeddingOption)))
+func (self IOpcSigningOptions) GetCertificateEmbeddingOption() (storagepackagingopc.OPC_CERTIFICATE_EMBEDDING_OPTION, error) {
+	var _embeddingOption storagepackagingopc.OPC_CERTIFICATE_EMBEDDING_OPTION
+	_hr := self.Raw.GetCertificateEmbeddingOption(&_embeddingOption)
+	return _embeddingOption, win32.HRESULTError(int32(_hr))
 }
 
 // SetCertificateEmbeddingOption wraps the raw SetCertificateEmbeddingOption call.
@@ -1063,8 +1289,10 @@ func (self IOpcSigningOptions) SetCertificateEmbeddingOption(embeddingOption sto
 }
 
 // GetTimeFormat wraps the raw GetTimeFormat call.
-func (self IOpcSigningOptions) GetTimeFormat(timeFormat *storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT) error {
-	return win32.HRESULTError(int32(self.Raw.GetTimeFormat(timeFormat)))
+func (self IOpcSigningOptions) GetTimeFormat() (storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT, error) {
+	var _timeFormat storagepackagingopc.OPC_SIGNATURE_TIME_FORMAT
+	_hr := self.Raw.GetTimeFormat(&_timeFormat)
+	return _timeFormat, win32.HRESULTError(int32(_hr))
 }
 
 // SetTimeFormat wraps the raw SetTimeFormat call.
@@ -1073,33 +1301,45 @@ func (self IOpcSigningOptions) SetTimeFormat(timeFormat storagepackagingopc.OPC_
 }
 
 // GetSignaturePartReferenceSet wraps the raw GetSignaturePartReferenceSet call.
-func (self IOpcSigningOptions) GetSignaturePartReferenceSet(partReferenceSet **storagepackagingopc.IOpcSignaturePartReferenceSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignaturePartReferenceSet(partReferenceSet)))
+func (self IOpcSigningOptions) GetSignaturePartReferenceSet() (*storagepackagingopc.IOpcSignaturePartReferenceSet, error) {
+	var _partReferenceSet *storagepackagingopc.IOpcSignaturePartReferenceSet
+	_hr := self.Raw.GetSignaturePartReferenceSet(&_partReferenceSet)
+	return _partReferenceSet, win32.HRESULTError(int32(_hr))
 }
 
 // GetSignatureRelationshipReferenceSet wraps the raw GetSignatureRelationshipReferenceSet call.
-func (self IOpcSigningOptions) GetSignatureRelationshipReferenceSet(relationshipReferenceSet **storagepackagingopc.IOpcSignatureRelationshipReferenceSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignatureRelationshipReferenceSet(relationshipReferenceSet)))
+func (self IOpcSigningOptions) GetSignatureRelationshipReferenceSet() (*storagepackagingopc.IOpcSignatureRelationshipReferenceSet, error) {
+	var _relationshipReferenceSet *storagepackagingopc.IOpcSignatureRelationshipReferenceSet
+	_hr := self.Raw.GetSignatureRelationshipReferenceSet(&_relationshipReferenceSet)
+	return _relationshipReferenceSet, win32.HRESULTError(int32(_hr))
 }
 
 // GetCustomObjectSet wraps the raw GetCustomObjectSet call.
-func (self IOpcSigningOptions) GetCustomObjectSet(customObjectSet **storagepackagingopc.IOpcSignatureCustomObjectSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetCustomObjectSet(customObjectSet)))
+func (self IOpcSigningOptions) GetCustomObjectSet() (*storagepackagingopc.IOpcSignatureCustomObjectSet, error) {
+	var _customObjectSet *storagepackagingopc.IOpcSignatureCustomObjectSet
+	_hr := self.Raw.GetCustomObjectSet(&_customObjectSet)
+	return _customObjectSet, win32.HRESULTError(int32(_hr))
 }
 
 // GetCustomReferenceSet wraps the raw GetCustomReferenceSet call.
-func (self IOpcSigningOptions) GetCustomReferenceSet(customReferenceSet **storagepackagingopc.IOpcSignatureReferenceSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetCustomReferenceSet(customReferenceSet)))
+func (self IOpcSigningOptions) GetCustomReferenceSet() (*storagepackagingopc.IOpcSignatureReferenceSet, error) {
+	var _customReferenceSet *storagepackagingopc.IOpcSignatureReferenceSet
+	_hr := self.Raw.GetCustomReferenceSet(&_customReferenceSet)
+	return _customReferenceSet, win32.HRESULTError(int32(_hr))
 }
 
 // GetCertificateSet wraps the raw GetCertificateSet call.
-func (self IOpcSigningOptions) GetCertificateSet(certificateSet **storagepackagingopc.IOpcCertificateSet) error {
-	return win32.HRESULTError(int32(self.Raw.GetCertificateSet(certificateSet)))
+func (self IOpcSigningOptions) GetCertificateSet() (*storagepackagingopc.IOpcCertificateSet, error) {
+	var _certificateSet *storagepackagingopc.IOpcCertificateSet
+	_hr := self.Raw.GetCertificateSet(&_certificateSet)
+	return _certificateSet, win32.HRESULTError(int32(_hr))
 }
 
 // GetSignaturePartName wraps the raw GetSignaturePartName call.
-func (self IOpcSigningOptions) GetSignaturePartName(signaturePartName **storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetSignaturePartName(signaturePartName)))
+func (self IOpcSigningOptions) GetSignaturePartName() (*storagepackagingopc.IOpcPartUri, error) {
+	var _signaturePartName *storagepackagingopc.IOpcPartUri
+	_hr := self.Raw.GetSignaturePartName(&_signaturePartName)
+	return _signaturePartName, win32.HRESULTError(int32(_hr))
 }
 
 // SetSignaturePartName wraps the raw SetSignaturePartName call.
@@ -1119,16 +1359,22 @@ func WrapIOpcUri(raw *storagepackagingopc.IOpcUri) IOpcUri {
 }
 
 // GetRelationshipsPartUri wraps the raw GetRelationshipsPartUri call.
-func (self IOpcUri) GetRelationshipsPartUri(relationshipPartUri **storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetRelationshipsPartUri(relationshipPartUri)))
+func (self IOpcUri) GetRelationshipsPartUri() (*storagepackagingopc.IOpcPartUri, error) {
+	var _relationshipPartUri *storagepackagingopc.IOpcPartUri
+	_hr := self.Raw.GetRelationshipsPartUri(&_relationshipPartUri)
+	return _relationshipPartUri, win32.HRESULTError(int32(_hr))
 }
 
 // GetRelativeUri wraps the raw GetRelativeUri call.
-func (self IOpcUri) GetRelativeUri(targetPartUri *storagepackagingopc.IOpcPartUri, relativeUri **systemcom.IUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetRelativeUri(targetPartUri, relativeUri)))
+func (self IOpcUri) GetRelativeUri(targetPartUri *storagepackagingopc.IOpcPartUri) (*systemcom.IUri, error) {
+	var _relativeUri *systemcom.IUri
+	_hr := self.Raw.GetRelativeUri(targetPartUri, &_relativeUri)
+	return _relativeUri, win32.HRESULTError(int32(_hr))
 }
 
 // CombinePartUri wraps the raw CombinePartUri call.
-func (self IOpcUri) CombinePartUri(relativeUri *systemcom.IUri, combinedUri **storagepackagingopc.IOpcPartUri) error {
-	return win32.HRESULTError(int32(self.Raw.CombinePartUri(relativeUri, combinedUri)))
+func (self IOpcUri) CombinePartUri(relativeUri *systemcom.IUri) (*storagepackagingopc.IOpcPartUri, error) {
+	var _combinedUri *storagepackagingopc.IOpcPartUri
+	_hr := self.Raw.CombinePartUri(relativeUri, &_combinedUri)
+	return _combinedUri, win32.HRESULTError(int32(_hr))
 }

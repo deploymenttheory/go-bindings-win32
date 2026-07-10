@@ -13,6 +13,14 @@ func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
 	{{.RetExpr}}
 {{- else if eq .Shape 3}}
 	return {{.RawCall}} != 0
+{{- else if eq .Shape 5}}
+	return {{range .ReturnValues}}{{.}}, {{end}}{{.RawCall}}
+{{- else if eq .Shape 6}}
+	_hr := {{.RawCall}}
+	return {{range .ReturnValues}}{{.}}, {{end}}win32.HRESULTError(int32(_hr))
+{{- else if eq .Shape 7}}
+	{{.RawCall}}
+	return {{join .ReturnValues ", "}}
 {{- end}}
 }
 

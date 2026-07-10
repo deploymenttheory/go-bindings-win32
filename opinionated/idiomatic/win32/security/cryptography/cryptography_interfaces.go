@@ -25,13 +25,17 @@ func WrapICertSrvSetup(raw *securitycryptography.ICertSrvSetup) ICertSrvSetup {
 }
 
 // Get_CAErrorId wraps the raw Get_CAErrorId call.
-func (self ICertSrvSetup) Get_CAErrorId(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CAErrorId(pVal)))
+func (self ICertSrvSetup) Get_CAErrorId() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CAErrorId(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CAErrorString wraps the raw Get_CAErrorString call.
-func (self ICertSrvSetup) Get_CAErrorString(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CAErrorString(pVal)))
+func (self ICertSrvSetup) Get_CAErrorString() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_CAErrorString(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // InitializeDefaults wraps the raw InitializeDefaults call.
@@ -40,8 +44,10 @@ func (self ICertSrvSetup) InitializeDefaults(bServer foundation.VARIANT_BOOL, bC
 }
 
 // GetCASetupProperty wraps the raw GetCASetupProperty call.
-func (self ICertSrvSetup) GetCASetupProperty(propertyId securitycryptography.CASetupProperty, pPropertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetCASetupProperty(propertyId, pPropertyValue)))
+func (self ICertSrvSetup) GetCASetupProperty(propertyId securitycryptography.CASetupProperty) (systemvariant.VARIANT, error) {
+	var _pPropertyValue systemvariant.VARIANT
+	_hr := self.Raw.GetCASetupProperty(propertyId, &_pPropertyValue)
+	return _pPropertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // SetCASetupProperty wraps the raw SetCASetupProperty call.
@@ -50,43 +56,59 @@ func (self ICertSrvSetup) SetCASetupProperty(propertyId securitycryptography.CAS
 }
 
 // IsPropertyEditable wraps the raw IsPropertyEditable call.
-func (self ICertSrvSetup) IsPropertyEditable(propertyId securitycryptography.CASetupProperty, pbEditable *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsPropertyEditable(propertyId, pbEditable)))
+func (self ICertSrvSetup) IsPropertyEditable(propertyId securitycryptography.CASetupProperty) (foundation.VARIANT_BOOL, error) {
+	var _pbEditable foundation.VARIANT_BOOL
+	_hr := self.Raw.IsPropertyEditable(propertyId, &_pbEditable)
+	return _pbEditable, win32.HRESULTError(int32(_hr))
 }
 
 // GetSupportedCATypes wraps the raw GetSupportedCATypes call.
-func (self ICertSrvSetup) GetSupportedCATypes(pCATypes *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetSupportedCATypes(pCATypes)))
+func (self ICertSrvSetup) GetSupportedCATypes() (systemvariant.VARIANT, error) {
+	var _pCATypes systemvariant.VARIANT
+	_hr := self.Raw.GetSupportedCATypes(&_pCATypes)
+	return _pCATypes, win32.HRESULTError(int32(_hr))
 }
 
 // GetProviderNameList wraps the raw GetProviderNameList call.
-func (self ICertSrvSetup) GetProviderNameList(pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProviderNameList(pVal)))
+func (self ICertSrvSetup) GetProviderNameList() (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.GetProviderNameList(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetKeyLengthList wraps the raw GetKeyLengthList call.
-func (self ICertSrvSetup) GetKeyLengthList(bstrProviderName foundation.BSTR, pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetKeyLengthList(bstrProviderName, pVal)))
+func (self ICertSrvSetup) GetKeyLengthList(bstrProviderName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.GetKeyLengthList(bstrProviderName, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetHashAlgorithmList wraps the raw GetHashAlgorithmList call.
-func (self ICertSrvSetup) GetHashAlgorithmList(bstrProviderName foundation.BSTR, pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetHashAlgorithmList(bstrProviderName, pVal)))
+func (self ICertSrvSetup) GetHashAlgorithmList(bstrProviderName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.GetHashAlgorithmList(bstrProviderName, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetPrivateKeyContainerList wraps the raw GetPrivateKeyContainerList call.
-func (self ICertSrvSetup) GetPrivateKeyContainerList(bstrProviderName foundation.BSTR, pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetPrivateKeyContainerList(bstrProviderName, pVal)))
+func (self ICertSrvSetup) GetPrivateKeyContainerList(bstrProviderName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.GetPrivateKeyContainerList(bstrProviderName, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetExistingCACertificates wraps the raw GetExistingCACertificates call.
-func (self ICertSrvSetup) GetExistingCACertificates(ppVal **securitycryptography.ICertSrvSetupKeyInformationCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetExistingCACertificates(ppVal)))
+func (self ICertSrvSetup) GetExistingCACertificates() (*securitycryptography.ICertSrvSetupKeyInformationCollection, error) {
+	var _ppVal *securitycryptography.ICertSrvSetupKeyInformationCollection
+	_hr := self.Raw.GetExistingCACertificates(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // CAImportPFX wraps the raw CAImportPFX call.
-func (self ICertSrvSetup) CAImportPFX(bstrFileName foundation.BSTR, bstrPasswd foundation.BSTR, bOverwriteExistingKey foundation.VARIANT_BOOL, ppVal **securitycryptography.ICertSrvSetupKeyInformation) error {
-	return win32.HRESULTError(int32(self.Raw.CAImportPFX(bstrFileName, bstrPasswd, bOverwriteExistingKey, ppVal)))
+func (self ICertSrvSetup) CAImportPFX(bstrFileName foundation.BSTR, bstrPasswd foundation.BSTR, bOverwriteExistingKey foundation.VARIANT_BOOL) (*securitycryptography.ICertSrvSetupKeyInformation, error) {
+	var _ppVal *securitycryptography.ICertSrvSetupKeyInformation
+	_hr := self.Raw.CAImportPFX(bstrFileName, bstrPasswd, bOverwriteExistingKey, &_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // SetCADistinguishedName wraps the raw SetCADistinguishedName call.
@@ -136,8 +158,10 @@ func WrapICertSrvSetupKeyInformation(raw *securitycryptography.ICertSrvSetupKeyI
 }
 
 // Get_ProviderName wraps the raw Get_ProviderName call.
-func (self ICertSrvSetupKeyInformation) Get_ProviderName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProviderName(pVal)))
+func (self ICertSrvSetupKeyInformation) Get_ProviderName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_ProviderName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ProviderName wraps the raw Put_ProviderName call.
@@ -146,8 +170,10 @@ func (self ICertSrvSetupKeyInformation) Put_ProviderName(bstrVal foundation.BSTR
 }
 
 // Get_Length wraps the raw Get_Length call.
-func (self ICertSrvSetupKeyInformation) Get_Length(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Length(pVal)))
+func (self ICertSrvSetupKeyInformation) Get_Length() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Length(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Length wraps the raw Put_Length call.
@@ -156,8 +182,10 @@ func (self ICertSrvSetupKeyInformation) Put_Length(lVal int32) error {
 }
 
 // Get_Existing wraps the raw Get_Existing call.
-func (self ICertSrvSetupKeyInformation) Get_Existing(pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Existing(pVal)))
+func (self ICertSrvSetupKeyInformation) Get_Existing() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Existing(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Existing wraps the raw Put_Existing call.
@@ -166,8 +194,10 @@ func (self ICertSrvSetupKeyInformation) Put_Existing(bVal foundation.VARIANT_BOO
 }
 
 // Get_ContainerName wraps the raw Get_ContainerName call.
-func (self ICertSrvSetupKeyInformation) Get_ContainerName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ContainerName(pVal)))
+func (self ICertSrvSetupKeyInformation) Get_ContainerName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_ContainerName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ContainerName wraps the raw Put_ContainerName call.
@@ -176,8 +206,10 @@ func (self ICertSrvSetupKeyInformation) Put_ContainerName(bstrVal foundation.BST
 }
 
 // Get_HashAlgorithm wraps the raw Get_HashAlgorithm call.
-func (self ICertSrvSetupKeyInformation) Get_HashAlgorithm(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HashAlgorithm(pVal)))
+func (self ICertSrvSetupKeyInformation) Get_HashAlgorithm() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_HashAlgorithm(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_HashAlgorithm wraps the raw Put_HashAlgorithm call.
@@ -186,8 +218,10 @@ func (self ICertSrvSetupKeyInformation) Put_HashAlgorithm(bstrVal foundation.BST
 }
 
 // Get_ExistingCACertificate wraps the raw Get_ExistingCACertificate call.
-func (self ICertSrvSetupKeyInformation) Get_ExistingCACertificate(pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ExistingCACertificate(pVal)))
+func (self ICertSrvSetupKeyInformation) Get_ExistingCACertificate() (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.Get_ExistingCACertificate(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // ICertSrvSetupKeyInformationCollection is an idiomatic wrapper over the raw COM interface Security.Cryptography.ICertSrvSetupKeyInformationCollection with error-returning methods.
@@ -202,18 +236,24 @@ func WrapICertSrvSetupKeyInformationCollection(raw *securitycryptography.ICertSr
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ICertSrvSetupKeyInformationCollection) Get__NewEnum(ppVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppVal)))
+func (self ICertSrvSetupKeyInformationCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppVal *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self ICertSrvSetupKeyInformationCollection) Get_Item(Index int32, pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(Index, pVal)))
+func (self ICertSrvSetupKeyInformationCollection) Get_Item(Index int32) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.Get_Item(Index, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ICertSrvSetupKeyInformationCollection) Get_Count(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pVal)))
+func (self ICertSrvSetupKeyInformationCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Count(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -233,8 +273,10 @@ func WrapICertificateEnrollmentPolicyServerSetup(raw *securitycryptography.ICert
 }
 
 // Get_ErrorString wraps the raw Get_ErrorString call.
-func (self ICertificateEnrollmentPolicyServerSetup) Get_ErrorString(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ErrorString(pVal)))
+func (self ICertificateEnrollmentPolicyServerSetup) Get_ErrorString() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_ErrorString(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // InitializeInstallDefaults wraps the raw InitializeInstallDefaults call.
@@ -243,8 +285,10 @@ func (self ICertificateEnrollmentPolicyServerSetup) InitializeInstallDefaults() 
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self ICertificateEnrollmentPolicyServerSetup) GetProperty(propertyId securitycryptography.CEPSetupProperty, pPropertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(propertyId, pPropertyValue)))
+func (self ICertificateEnrollmentPolicyServerSetup) GetProperty(propertyId securitycryptography.CEPSetupProperty) (systemvariant.VARIANT, error) {
+	var _pPropertyValue systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(propertyId, &_pPropertyValue)
+	return _pPropertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // SetProperty wraps the raw SetProperty call.
@@ -274,8 +318,10 @@ func WrapICertificateEnrollmentServerSetup(raw *securitycryptography.ICertificat
 }
 
 // Get_ErrorString wraps the raw Get_ErrorString call.
-func (self ICertificateEnrollmentServerSetup) Get_ErrorString(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ErrorString(pVal)))
+func (self ICertificateEnrollmentServerSetup) Get_ErrorString() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_ErrorString(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // InitializeInstallDefaults wraps the raw InitializeInstallDefaults call.
@@ -284,8 +330,10 @@ func (self ICertificateEnrollmentServerSetup) InitializeInstallDefaults() error 
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self ICertificateEnrollmentServerSetup) GetProperty(propertyId securitycryptography.CESSetupProperty, pPropertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(propertyId, pPropertyValue)))
+func (self ICertificateEnrollmentServerSetup) GetProperty(propertyId securitycryptography.CESSetupProperty) (systemvariant.VARIANT, error) {
+	var _pPropertyValue systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(propertyId, &_pPropertyValue)
+	return _pPropertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // SetProperty wraps the raw SetProperty call.
@@ -320,13 +368,17 @@ func WrapIMSCEPSetup(raw *securitycryptography.IMSCEPSetup) IMSCEPSetup {
 }
 
 // Get_MSCEPErrorId wraps the raw Get_MSCEPErrorId call.
-func (self IMSCEPSetup) Get_MSCEPErrorId(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MSCEPErrorId(pVal)))
+func (self IMSCEPSetup) Get_MSCEPErrorId() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_MSCEPErrorId(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MSCEPErrorString wraps the raw Get_MSCEPErrorString call.
-func (self IMSCEPSetup) Get_MSCEPErrorString(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MSCEPErrorString(pVal)))
+func (self IMSCEPSetup) Get_MSCEPErrorString() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_MSCEPErrorString(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // InitializeDefaults wraps the raw InitializeDefaults call.
@@ -335,8 +387,10 @@ func (self IMSCEPSetup) InitializeDefaults() error {
 }
 
 // GetMSCEPSetupProperty wraps the raw GetMSCEPSetupProperty call.
-func (self IMSCEPSetup) GetMSCEPSetupProperty(propertyId securitycryptography.MSCEPSetupProperty, pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetMSCEPSetupProperty(propertyId, pVal)))
+func (self IMSCEPSetup) GetMSCEPSetupProperty(propertyId securitycryptography.MSCEPSetupProperty) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.GetMSCEPSetupProperty(propertyId, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // SetMSCEPSetupProperty wraps the raw SetMSCEPSetupProperty call.
@@ -350,18 +404,24 @@ func (self IMSCEPSetup) SetAccountInformation(bstrUserName foundation.BSTR, bstr
 }
 
 // IsMSCEPStoreEmpty wraps the raw IsMSCEPStoreEmpty call.
-func (self IMSCEPSetup) IsMSCEPStoreEmpty(pbEmpty *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsMSCEPStoreEmpty(pbEmpty)))
+func (self IMSCEPSetup) IsMSCEPStoreEmpty() (foundation.VARIANT_BOOL, error) {
+	var _pbEmpty foundation.VARIANT_BOOL
+	_hr := self.Raw.IsMSCEPStoreEmpty(&_pbEmpty)
+	return _pbEmpty, win32.HRESULTError(int32(_hr))
 }
 
 // GetProviderNameList wraps the raw GetProviderNameList call.
-func (self IMSCEPSetup) GetProviderNameList(bExchange foundation.VARIANT_BOOL, pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProviderNameList(bExchange, pVal)))
+func (self IMSCEPSetup) GetProviderNameList(bExchange foundation.VARIANT_BOOL) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.GetProviderNameList(bExchange, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetKeyLengthList wraps the raw GetKeyLengthList call.
-func (self IMSCEPSetup) GetKeyLengthList(bExchange foundation.VARIANT_BOOL, bstrProviderName foundation.BSTR, pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetKeyLengthList(bExchange, bstrProviderName, pVal)))
+func (self IMSCEPSetup) GetKeyLengthList(bExchange foundation.VARIANT_BOOL, bstrProviderName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.GetKeyLengthList(bExchange, bstrProviderName, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Install wraps the raw Install call.

@@ -25,18 +25,24 @@ func WrapIRDPSRAPIApplication(raw *systemdesktopsharing.IRDPSRAPIApplication) IR
 }
 
 // Get_Windows wraps the raw Get_Windows call.
-func (self IRDPSRAPIApplication) Get_Windows(pWindowList **systemdesktopsharing.IRDPSRAPIWindowList) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Windows(pWindowList)))
+func (self IRDPSRAPIApplication) Get_Windows() (*systemdesktopsharing.IRDPSRAPIWindowList, error) {
+	var _pWindowList *systemdesktopsharing.IRDPSRAPIWindowList
+	_hr := self.Raw.Get_Windows(&_pWindowList)
+	return _pWindowList, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IRDPSRAPIApplication) Get_Id(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(pRetVal)))
+func (self IRDPSRAPIApplication) Get_Id() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_Id(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Shared wraps the raw Get_Shared call.
-func (self IRDPSRAPIApplication) Get_Shared(pRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Shared(pRetVal)))
+func (self IRDPSRAPIApplication) Get_Shared() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Shared(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Shared wraps the raw Put_Shared call.
@@ -45,13 +51,17 @@ func (self IRDPSRAPIApplication) Put_Shared(NewVal foundation.VARIANT_BOOL) erro
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IRDPSRAPIApplication) Get_Name(pRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pRetVal)))
+func (self IRDPSRAPIApplication) Get_Name() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Flags wraps the raw Get_Flags call.
-func (self IRDPSRAPIApplication) Get_Flags(pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Flags(pdwFlags)))
+func (self IRDPSRAPIApplication) Get_Flags() (uint32, error) {
+	var _pdwFlags uint32
+	_hr := self.Raw.Get_Flags(&_pdwFlags)
+	return _pdwFlags, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIApplicationFilter is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIApplicationFilter with error-returning methods.
@@ -66,18 +76,24 @@ func WrapIRDPSRAPIApplicationFilter(raw *systemdesktopsharing.IRDPSRAPIApplicati
 }
 
 // Get_Applications wraps the raw Get_Applications call.
-func (self IRDPSRAPIApplicationFilter) Get_Applications(pApplications **systemdesktopsharing.IRDPSRAPIApplicationList) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Applications(pApplications)))
+func (self IRDPSRAPIApplicationFilter) Get_Applications() (*systemdesktopsharing.IRDPSRAPIApplicationList, error) {
+	var _pApplications *systemdesktopsharing.IRDPSRAPIApplicationList
+	_hr := self.Raw.Get_Applications(&_pApplications)
+	return _pApplications, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Windows wraps the raw Get_Windows call.
-func (self IRDPSRAPIApplicationFilter) Get_Windows(pWindows **systemdesktopsharing.IRDPSRAPIWindowList) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Windows(pWindows)))
+func (self IRDPSRAPIApplicationFilter) Get_Windows() (*systemdesktopsharing.IRDPSRAPIWindowList, error) {
+	var _pWindows *systemdesktopsharing.IRDPSRAPIWindowList
+	_hr := self.Raw.Get_Windows(&_pWindows)
+	return _pWindows, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self IRDPSRAPIApplicationFilter) Get_Enabled(pRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(pRetVal)))
+func (self IRDPSRAPIApplicationFilter) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -97,13 +113,17 @@ func WrapIRDPSRAPIApplicationList(raw *systemdesktopsharing.IRDPSRAPIApplication
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IRDPSRAPIApplicationList) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IRDPSRAPIApplicationList) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IRDPSRAPIApplicationList) Get_Item(item int32, pApplication **systemdesktopsharing.IRDPSRAPIApplication) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(item, pApplication)))
+func (self IRDPSRAPIApplicationList) Get_Item(item int32) (*systemdesktopsharing.IRDPSRAPIApplication, error) {
+	var _pApplication *systemdesktopsharing.IRDPSRAPIApplication
+	_hr := self.Raw.Get_Item(item, &_pApplication)
+	return _pApplication, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIAttendee is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIAttendee with error-returning methods.
@@ -118,18 +138,24 @@ func WrapIRDPSRAPIAttendee(raw *systemdesktopsharing.IRDPSRAPIAttendee) IRDPSRAP
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IRDPSRAPIAttendee) Get_Id(pId *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(pId)))
+func (self IRDPSRAPIAttendee) Get_Id() (int32, error) {
+	var _pId int32
+	_hr := self.Raw.Get_Id(&_pId)
+	return _pId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RemoteName wraps the raw Get_RemoteName call.
-func (self IRDPSRAPIAttendee) Get_RemoteName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemoteName(pVal)))
+func (self IRDPSRAPIAttendee) Get_RemoteName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_RemoteName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ControlLevel wraps the raw Get_ControlLevel call.
-func (self IRDPSRAPIAttendee) Get_ControlLevel(pVal *systemdesktopsharing.CTRL_LEVEL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ControlLevel(pVal)))
+func (self IRDPSRAPIAttendee) Get_ControlLevel() (systemdesktopsharing.CTRL_LEVEL, error) {
+	var _pVal systemdesktopsharing.CTRL_LEVEL
+	_hr := self.Raw.Get_ControlLevel(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ControlLevel wraps the raw Put_ControlLevel call.
@@ -138,8 +164,10 @@ func (self IRDPSRAPIAttendee) Put_ControlLevel(pNewVal systemdesktopsharing.CTRL
 }
 
 // Get_Invitation wraps the raw Get_Invitation call.
-func (self IRDPSRAPIAttendee) Get_Invitation(ppVal **systemdesktopsharing.IRDPSRAPIInvitation) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Invitation(ppVal)))
+func (self IRDPSRAPIAttendee) Get_Invitation() (*systemdesktopsharing.IRDPSRAPIInvitation, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIInvitation
+	_hr := self.Raw.Get_Invitation(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // TerminateConnection wraps the raw TerminateConnection call.
@@ -148,13 +176,17 @@ func (self IRDPSRAPIAttendee) TerminateConnection() error {
 }
 
 // Get_Flags wraps the raw Get_Flags call.
-func (self IRDPSRAPIAttendee) Get_Flags(plFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Flags(plFlags)))
+func (self IRDPSRAPIAttendee) Get_Flags() (int32, error) {
+	var _plFlags int32
+	_hr := self.Raw.Get_Flags(&_plFlags)
+	return _plFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ConnectivityInfo wraps the raw Get_ConnectivityInfo call.
-func (self IRDPSRAPIAttendee) Get_ConnectivityInfo(ppVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ConnectivityInfo(ppVal)))
+func (self IRDPSRAPIAttendee) Get_ConnectivityInfo() (*systemcom.IUnknown, error) {
+	var _ppVal *systemcom.IUnknown
+	_hr := self.Raw.Get_ConnectivityInfo(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIAttendeeDisconnectInfo is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIAttendeeDisconnectInfo with error-returning methods.
@@ -169,18 +201,24 @@ func WrapIRDPSRAPIAttendeeDisconnectInfo(raw *systemdesktopsharing.IRDPSRAPIAtte
 }
 
 // Get_Attendee wraps the raw Get_Attendee call.
-func (self IRDPSRAPIAttendeeDisconnectInfo) Get_Attendee(retval **systemdesktopsharing.IRDPSRAPIAttendee) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Attendee(retval)))
+func (self IRDPSRAPIAttendeeDisconnectInfo) Get_Attendee() (*systemdesktopsharing.IRDPSRAPIAttendee, error) {
+	var _retval *systemdesktopsharing.IRDPSRAPIAttendee
+	_hr := self.Raw.Get_Attendee(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Reason wraps the raw Get_Reason call.
-func (self IRDPSRAPIAttendeeDisconnectInfo) Get_Reason(pReason *systemdesktopsharing.ATTENDEE_DISCONNECT_REASON) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Reason(pReason)))
+func (self IRDPSRAPIAttendeeDisconnectInfo) Get_Reason() (systemdesktopsharing.ATTENDEE_DISCONNECT_REASON, error) {
+	var _pReason systemdesktopsharing.ATTENDEE_DISCONNECT_REASON
+	_hr := self.Raw.Get_Reason(&_pReason)
+	return _pReason, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Code wraps the raw Get_Code call.
-func (self IRDPSRAPIAttendeeDisconnectInfo) Get_Code(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Code(pVal)))
+func (self IRDPSRAPIAttendeeDisconnectInfo) Get_Code() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_Code(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIAttendeeManager is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIAttendeeManager with error-returning methods.
@@ -195,13 +233,17 @@ func WrapIRDPSRAPIAttendeeManager(raw *systemdesktopsharing.IRDPSRAPIAttendeeMan
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IRDPSRAPIAttendeeManager) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IRDPSRAPIAttendeeManager) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IRDPSRAPIAttendeeManager) Get_Item(id int32, ppItem **systemdesktopsharing.IRDPSRAPIAttendee) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(id, ppItem)))
+func (self IRDPSRAPIAttendeeManager) Get_Item(id int32) (*systemdesktopsharing.IRDPSRAPIAttendee, error) {
+	var _ppItem *systemdesktopsharing.IRDPSRAPIAttendee
+	_hr := self.Raw.Get_Item(id, &_ppItem)
+	return _ppItem, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIAudioStream is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIAudioStream with error-returning methods.
@@ -252,8 +294,10 @@ func WrapIRDPSRAPIClipboardUseEvents(raw *systemdesktopsharing.IRDPSRAPIClipboar
 }
 
 // OnPasteFromClipboard wraps the raw OnPasteFromClipboard call.
-func (self IRDPSRAPIClipboardUseEvents) OnPasteFromClipboard(clipboardFormat uint32, pAttendee *systemcom.IDispatch, pRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.OnPasteFromClipboard(clipboardFormat, pAttendee, pRetVal)))
+func (self IRDPSRAPIClipboardUseEvents) OnPasteFromClipboard(clipboardFormat uint32, pAttendee *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.OnPasteFromClipboard(clipboardFormat, pAttendee, &_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIDebug is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIDebug with error-returning methods.
@@ -273,8 +317,10 @@ func (self IRDPSRAPIDebug) Put_CLXCmdLine(CLXCmdLine foundation.BSTR) error {
 }
 
 // Get_CLXCmdLine wraps the raw Get_CLXCmdLine call.
-func (self IRDPSRAPIDebug) Get_CLXCmdLine(pCLXCmdLine *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CLXCmdLine(pCLXCmdLine)))
+func (self IRDPSRAPIDebug) Get_CLXCmdLine() (foundation.BSTR, error) {
+	var _pCLXCmdLine foundation.BSTR
+	_hr := self.Raw.Get_CLXCmdLine(&_pCLXCmdLine)
+	return _pCLXCmdLine, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIFrameBuffer is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIFrameBuffer with error-returning methods.
@@ -289,23 +335,31 @@ func WrapIRDPSRAPIFrameBuffer(raw *systemdesktopsharing.IRDPSRAPIFrameBuffer) IR
 }
 
 // Get_Width wraps the raw Get_Width call.
-func (self IRDPSRAPIFrameBuffer) Get_Width(plWidth *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Width(plWidth)))
+func (self IRDPSRAPIFrameBuffer) Get_Width() (int32, error) {
+	var _plWidth int32
+	_hr := self.Raw.Get_Width(&_plWidth)
+	return _plWidth, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Height wraps the raw Get_Height call.
-func (self IRDPSRAPIFrameBuffer) Get_Height(plHeight *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Height(plHeight)))
+func (self IRDPSRAPIFrameBuffer) Get_Height() (int32, error) {
+	var _plHeight int32
+	_hr := self.Raw.Get_Height(&_plHeight)
+	return _plHeight, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Bpp wraps the raw Get_Bpp call.
-func (self IRDPSRAPIFrameBuffer) Get_Bpp(plBpp *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Bpp(plBpp)))
+func (self IRDPSRAPIFrameBuffer) Get_Bpp() (int32, error) {
+	var _plBpp int32
+	_hr := self.Raw.Get_Bpp(&_plBpp)
+	return _plBpp, win32.HRESULTError(int32(_hr))
 }
 
 // GetFrameBufferBits wraps the raw GetFrameBufferBits call.
-func (self IRDPSRAPIFrameBuffer) GetFrameBufferBits(x int32, y int32, Width int32, Heigth int32, ppBits **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetFrameBufferBits(x, y, Width, Heigth, ppBits)))
+func (self IRDPSRAPIFrameBuffer) GetFrameBufferBits(x int32, y int32, Width int32, Heigth int32) (*systemcom.SAFEARRAY, error) {
+	var _ppBits *systemcom.SAFEARRAY
+	_hr := self.Raw.GetFrameBufferBits(x, y, Width, Heigth, &_ppBits)
+	return _ppBits, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIInvitation is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIInvitation with error-returning methods.
@@ -320,23 +374,31 @@ func WrapIRDPSRAPIInvitation(raw *systemdesktopsharing.IRDPSRAPIInvitation) IRDP
 }
 
 // Get_ConnectionString wraps the raw Get_ConnectionString call.
-func (self IRDPSRAPIInvitation) Get_ConnectionString(pbstrVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ConnectionString(pbstrVal)))
+func (self IRDPSRAPIInvitation) Get_ConnectionString() (foundation.BSTR, error) {
+	var _pbstrVal foundation.BSTR
+	_hr := self.Raw.Get_ConnectionString(&_pbstrVal)
+	return _pbstrVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_GroupName wraps the raw Get_GroupName call.
-func (self IRDPSRAPIInvitation) Get_GroupName(pbstrVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GroupName(pbstrVal)))
+func (self IRDPSRAPIInvitation) Get_GroupName() (foundation.BSTR, error) {
+	var _pbstrVal foundation.BSTR
+	_hr := self.Raw.Get_GroupName(&_pbstrVal)
+	return _pbstrVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Password wraps the raw Get_Password call.
-func (self IRDPSRAPIInvitation) Get_Password(pbstrVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Password(pbstrVal)))
+func (self IRDPSRAPIInvitation) Get_Password() (foundation.BSTR, error) {
+	var _pbstrVal foundation.BSTR
+	_hr := self.Raw.Get_Password(&_pbstrVal)
+	return _pbstrVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AttendeeLimit wraps the raw Get_AttendeeLimit call.
-func (self IRDPSRAPIInvitation) Get_AttendeeLimit(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AttendeeLimit(pRetVal)))
+func (self IRDPSRAPIInvitation) Get_AttendeeLimit() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_AttendeeLimit(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AttendeeLimit wraps the raw Put_AttendeeLimit call.
@@ -345,8 +407,10 @@ func (self IRDPSRAPIInvitation) Put_AttendeeLimit(NewVal int32) error {
 }
 
 // Get_Revoked wraps the raw Get_Revoked call.
-func (self IRDPSRAPIInvitation) Get_Revoked(pRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Revoked(pRetVal)))
+func (self IRDPSRAPIInvitation) Get_Revoked() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Revoked(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Revoked wraps the raw Put_Revoked call.
@@ -366,18 +430,24 @@ func WrapIRDPSRAPIInvitationManager(raw *systemdesktopsharing.IRDPSRAPIInvitatio
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IRDPSRAPIInvitationManager) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IRDPSRAPIInvitationManager) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IRDPSRAPIInvitationManager) Get_Count(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pRetVal)))
+func (self IRDPSRAPIInvitationManager) Get_Count() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_Count(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // CreateInvitation wraps the raw CreateInvitation call.
-func (self IRDPSRAPIInvitationManager) CreateInvitation(bstrAuthString foundation.BSTR, bstrGroupName foundation.BSTR, bstrPassword foundation.BSTR, AttendeeLimit int32, ppInvitation **systemdesktopsharing.IRDPSRAPIInvitation) error {
-	return win32.HRESULTError(int32(self.Raw.CreateInvitation(bstrAuthString, bstrGroupName, bstrPassword, AttendeeLimit, ppInvitation)))
+func (self IRDPSRAPIInvitationManager) CreateInvitation(bstrAuthString foundation.BSTR, bstrGroupName foundation.BSTR, bstrPassword foundation.BSTR, AttendeeLimit int32) (*systemdesktopsharing.IRDPSRAPIInvitation, error) {
+	var _ppInvitation *systemdesktopsharing.IRDPSRAPIInvitation
+	_hr := self.Raw.CreateInvitation(bstrAuthString, bstrGroupName, bstrPassword, AttendeeLimit, &_ppInvitation)
+	return _ppInvitation, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIPerfCounterLogger is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIPerfCounterLogger with error-returning methods.
@@ -424,8 +494,10 @@ func WrapIRDPSRAPISessionProperties(raw *systemdesktopsharing.IRDPSRAPISessionPr
 }
 
 // Get_Property wraps the raw Get_Property call.
-func (self IRDPSRAPISessionProperties) Get_Property(PropertyName foundation.BSTR, pVal *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Property(PropertyName, pVal)))
+func (self IRDPSRAPISessionProperties) Get_Property(PropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	_hr := self.Raw.Get_Property(PropertyName, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPISharingSession is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPISharingSession with error-returning methods.
@@ -455,33 +527,45 @@ func (self IRDPSRAPISharingSession) Put_ColorDepth(colorDepth int32) error {
 }
 
 // Get_ColorDepth wraps the raw Get_ColorDepth call.
-func (self IRDPSRAPISharingSession) Get_ColorDepth(pColorDepth *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ColorDepth(pColorDepth)))
+func (self IRDPSRAPISharingSession) Get_ColorDepth() (int32, error) {
+	var _pColorDepth int32
+	_hr := self.Raw.Get_ColorDepth(&_pColorDepth)
+	return _pColorDepth, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Properties wraps the raw Get_Properties call.
-func (self IRDPSRAPISharingSession) Get_Properties(ppVal **systemdesktopsharing.IRDPSRAPISessionProperties) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Properties(ppVal)))
+func (self IRDPSRAPISharingSession) Get_Properties() (*systemdesktopsharing.IRDPSRAPISessionProperties, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPISessionProperties
+	_hr := self.Raw.Get_Properties(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Attendees wraps the raw Get_Attendees call.
-func (self IRDPSRAPISharingSession) Get_Attendees(ppVal **systemdesktopsharing.IRDPSRAPIAttendeeManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Attendees(ppVal)))
+func (self IRDPSRAPISharingSession) Get_Attendees() (*systemdesktopsharing.IRDPSRAPIAttendeeManager, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIAttendeeManager
+	_hr := self.Raw.Get_Attendees(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Invitations wraps the raw Get_Invitations call.
-func (self IRDPSRAPISharingSession) Get_Invitations(ppVal **systemdesktopsharing.IRDPSRAPIInvitationManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Invitations(ppVal)))
+func (self IRDPSRAPISharingSession) Get_Invitations() (*systemdesktopsharing.IRDPSRAPIInvitationManager, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIInvitationManager
+	_hr := self.Raw.Get_Invitations(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ApplicationFilter wraps the raw Get_ApplicationFilter call.
-func (self IRDPSRAPISharingSession) Get_ApplicationFilter(ppVal **systemdesktopsharing.IRDPSRAPIApplicationFilter) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ApplicationFilter(ppVal)))
+func (self IRDPSRAPISharingSession) Get_ApplicationFilter() (*systemdesktopsharing.IRDPSRAPIApplicationFilter, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIApplicationFilter
+	_hr := self.Raw.Get_ApplicationFilter(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VirtualChannelManager wraps the raw Get_VirtualChannelManager call.
-func (self IRDPSRAPISharingSession) Get_VirtualChannelManager(ppVal **systemdesktopsharing.IRDPSRAPIVirtualChannelManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VirtualChannelManager(ppVal)))
+func (self IRDPSRAPISharingSession) Get_VirtualChannelManager() (*systemdesktopsharing.IRDPSRAPIVirtualChannelManager, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIVirtualChannelManager
+	_hr := self.Raw.Get_VirtualChannelManager(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Pause wraps the raw Pause call.
@@ -526,8 +610,10 @@ func (self IRDPSRAPISharingSession2) ConnectUsingTransportStream(pStream *system
 }
 
 // Get_FrameBuffer wraps the raw Get_FrameBuffer call.
-func (self IRDPSRAPISharingSession2) Get_FrameBuffer(ppVal **systemdesktopsharing.IRDPSRAPIFrameBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FrameBuffer(ppVal)))
+func (self IRDPSRAPISharingSession2) Get_FrameBuffer() (*systemdesktopsharing.IRDPSRAPIFrameBuffer, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIFrameBuffer
+	_hr := self.Raw.Get_FrameBuffer(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // SendControlLevelChangeResponse wraps the raw SendControlLevelChangeResponse call.
@@ -547,28 +633,38 @@ func WrapIRDPSRAPITcpConnectionInfo(raw *systemdesktopsharing.IRDPSRAPITcpConnec
 }
 
 // Get_Protocol wraps the raw Get_Protocol call.
-func (self IRDPSRAPITcpConnectionInfo) Get_Protocol(plProtocol *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Protocol(plProtocol)))
+func (self IRDPSRAPITcpConnectionInfo) Get_Protocol() (int32, error) {
+	var _plProtocol int32
+	_hr := self.Raw.Get_Protocol(&_plProtocol)
+	return _plProtocol, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalPort wraps the raw Get_LocalPort call.
-func (self IRDPSRAPITcpConnectionInfo) Get_LocalPort(plPort *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalPort(plPort)))
+func (self IRDPSRAPITcpConnectionInfo) Get_LocalPort() (int32, error) {
+	var _plPort int32
+	_hr := self.Raw.Get_LocalPort(&_plPort)
+	return _plPort, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalIP wraps the raw Get_LocalIP call.
-func (self IRDPSRAPITcpConnectionInfo) Get_LocalIP(pbsrLocalIP *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalIP(pbsrLocalIP)))
+func (self IRDPSRAPITcpConnectionInfo) Get_LocalIP() (foundation.BSTR, error) {
+	var _pbsrLocalIP foundation.BSTR
+	_hr := self.Raw.Get_LocalIP(&_pbsrLocalIP)
+	return _pbsrLocalIP, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PeerPort wraps the raw Get_PeerPort call.
-func (self IRDPSRAPITcpConnectionInfo) Get_PeerPort(plPort *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PeerPort(plPort)))
+func (self IRDPSRAPITcpConnectionInfo) Get_PeerPort() (int32, error) {
+	var _plPort int32
+	_hr := self.Raw.Get_PeerPort(&_plPort)
+	return _plPort, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PeerIP wraps the raw Get_PeerIP call.
-func (self IRDPSRAPITcpConnectionInfo) Get_PeerIP(pbstrIP *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PeerIP(pbstrIP)))
+func (self IRDPSRAPITcpConnectionInfo) Get_PeerIP() (foundation.BSTR, error) {
+	var _pbstrIP foundation.BSTR
+	_hr := self.Raw.Get_PeerIP(&_pbstrIP)
+	return _pbstrIP, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPITransportStream is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPITransportStream with error-returning methods.
@@ -583,8 +679,10 @@ func WrapIRDPSRAPITransportStream(raw *systemdesktopsharing.IRDPSRAPITransportSt
 }
 
 // AllocBuffer wraps the raw AllocBuffer call.
-func (self IRDPSRAPITransportStream) AllocBuffer(maxPayload int32, ppBuffer **systemdesktopsharing.IRDPSRAPITransportStreamBuffer) error {
-	return win32.HRESULTError(int32(self.Raw.AllocBuffer(maxPayload, ppBuffer)))
+func (self IRDPSRAPITransportStream) AllocBuffer(maxPayload int32) (*systemdesktopsharing.IRDPSRAPITransportStreamBuffer, error) {
+	var _ppBuffer *systemdesktopsharing.IRDPSRAPITransportStreamBuffer
+	_hr := self.Raw.AllocBuffer(maxPayload, &_ppBuffer)
+	return _ppBuffer, win32.HRESULTError(int32(_hr))
 }
 
 // FreeBuffer wraps the raw FreeBuffer call.
@@ -624,18 +722,24 @@ func WrapIRDPSRAPITransportStreamBuffer(raw *systemdesktopsharing.IRDPSRAPITrans
 }
 
 // Get_Storage wraps the raw Get_Storage call.
-func (self IRDPSRAPITransportStreamBuffer) Get_Storage(ppbStorage **byte) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Storage(ppbStorage)))
+func (self IRDPSRAPITransportStreamBuffer) Get_Storage() (*byte, error) {
+	var _ppbStorage *byte
+	_hr := self.Raw.Get_Storage(&_ppbStorage)
+	return _ppbStorage, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StorageSize wraps the raw Get_StorageSize call.
-func (self IRDPSRAPITransportStreamBuffer) Get_StorageSize(plMaxStore *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StorageSize(plMaxStore)))
+func (self IRDPSRAPITransportStreamBuffer) Get_StorageSize() (int32, error) {
+	var _plMaxStore int32
+	_hr := self.Raw.Get_StorageSize(&_plMaxStore)
+	return _plMaxStore, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PayloadSize wraps the raw Get_PayloadSize call.
-func (self IRDPSRAPITransportStreamBuffer) Get_PayloadSize(plRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PayloadSize(plRetVal)))
+func (self IRDPSRAPITransportStreamBuffer) Get_PayloadSize() (int32, error) {
+	var _plRetVal int32
+	_hr := self.Raw.Get_PayloadSize(&_plRetVal)
+	return _plRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PayloadSize wraps the raw Put_PayloadSize call.
@@ -644,8 +748,10 @@ func (self IRDPSRAPITransportStreamBuffer) Put_PayloadSize(lVal int32) error {
 }
 
 // Get_PayloadOffset wraps the raw Get_PayloadOffset call.
-func (self IRDPSRAPITransportStreamBuffer) Get_PayloadOffset(plRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PayloadOffset(plRetVal)))
+func (self IRDPSRAPITransportStreamBuffer) Get_PayloadOffset() (int32, error) {
+	var _plRetVal int32
+	_hr := self.Raw.Get_PayloadOffset(&_plRetVal)
+	return _plRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PayloadOffset wraps the raw Put_PayloadOffset call.
@@ -654,8 +760,10 @@ func (self IRDPSRAPITransportStreamBuffer) Put_PayloadOffset(lRetVal int32) erro
 }
 
 // Get_Flags wraps the raw Get_Flags call.
-func (self IRDPSRAPITransportStreamBuffer) Get_Flags(plFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Flags(plFlags)))
+func (self IRDPSRAPITransportStreamBuffer) Get_Flags() (int32, error) {
+	var _plFlags int32
+	_hr := self.Raw.Get_Flags(&_plFlags)
+	return _plFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Flags wraps the raw Put_Flags call.
@@ -664,8 +772,10 @@ func (self IRDPSRAPITransportStreamBuffer) Put_Flags(lFlags int32) error {
 }
 
 // Get_Context wraps the raw Get_Context call.
-func (self IRDPSRAPITransportStreamBuffer) Get_Context(ppContext **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Context(ppContext)))
+func (self IRDPSRAPITransportStreamBuffer) Get_Context() (*systemcom.IUnknown, error) {
+	var _ppContext *systemcom.IUnknown
+	_hr := self.Raw.Get_Context(&_ppContext)
+	return _ppContext, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Context wraps the raw Put_Context call.
@@ -721,23 +831,31 @@ func (self IRDPSRAPIViewer) Disconnect() error {
 }
 
 // Get_Attendees wraps the raw Get_Attendees call.
-func (self IRDPSRAPIViewer) Get_Attendees(ppVal **systemdesktopsharing.IRDPSRAPIAttendeeManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Attendees(ppVal)))
+func (self IRDPSRAPIViewer) Get_Attendees() (*systemdesktopsharing.IRDPSRAPIAttendeeManager, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIAttendeeManager
+	_hr := self.Raw.Get_Attendees(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Invitations wraps the raw Get_Invitations call.
-func (self IRDPSRAPIViewer) Get_Invitations(ppVal **systemdesktopsharing.IRDPSRAPIInvitationManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Invitations(ppVal)))
+func (self IRDPSRAPIViewer) Get_Invitations() (*systemdesktopsharing.IRDPSRAPIInvitationManager, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIInvitationManager
+	_hr := self.Raw.Get_Invitations(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ApplicationFilter wraps the raw Get_ApplicationFilter call.
-func (self IRDPSRAPIViewer) Get_ApplicationFilter(ppVal **systemdesktopsharing.IRDPSRAPIApplicationFilter) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ApplicationFilter(ppVal)))
+func (self IRDPSRAPIViewer) Get_ApplicationFilter() (*systemdesktopsharing.IRDPSRAPIApplicationFilter, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIApplicationFilter
+	_hr := self.Raw.Get_ApplicationFilter(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VirtualChannelManager wraps the raw Get_VirtualChannelManager call.
-func (self IRDPSRAPIViewer) Get_VirtualChannelManager(ppVal **systemdesktopsharing.IRDPSRAPIVirtualChannelManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VirtualChannelManager(ppVal)))
+func (self IRDPSRAPIViewer) Get_VirtualChannelManager() (*systemdesktopsharing.IRDPSRAPIVirtualChannelManager, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPIVirtualChannelManager
+	_hr := self.Raw.Get_VirtualChannelManager(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SmartSizing wraps the raw Put_SmartSizing call.
@@ -746,8 +864,10 @@ func (self IRDPSRAPIViewer) Put_SmartSizing(vbSmartSizing foundation.VARIANT_BOO
 }
 
 // Get_SmartSizing wraps the raw Get_SmartSizing call.
-func (self IRDPSRAPIViewer) Get_SmartSizing(pvbSmartSizing *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SmartSizing(pvbSmartSizing)))
+func (self IRDPSRAPIViewer) Get_SmartSizing() (foundation.VARIANT_BOOL, error) {
+	var _pvbSmartSizing foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SmartSizing(&_pvbSmartSizing)
+	return _pvbSmartSizing, win32.HRESULTError(int32(_hr))
 }
 
 // RequestControl wraps the raw RequestControl call.
@@ -761,8 +881,10 @@ func (self IRDPSRAPIViewer) Put_DisconnectedText(bstrDisconnectedText foundation
 }
 
 // Get_DisconnectedText wraps the raw Get_DisconnectedText call.
-func (self IRDPSRAPIViewer) Get_DisconnectedText(pbstrDisconnectedText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisconnectedText(pbstrDisconnectedText)))
+func (self IRDPSRAPIViewer) Get_DisconnectedText() (foundation.BSTR, error) {
+	var _pbstrDisconnectedText foundation.BSTR
+	_hr := self.Raw.Get_DisconnectedText(&_pbstrDisconnectedText)
+	return _pbstrDisconnectedText, win32.HRESULTError(int32(_hr))
 }
 
 // RequestColorDepthChange wraps the raw RequestColorDepthChange call.
@@ -771,13 +893,17 @@ func (self IRDPSRAPIViewer) RequestColorDepthChange(Bpp int32) error {
 }
 
 // Get_Properties wraps the raw Get_Properties call.
-func (self IRDPSRAPIViewer) Get_Properties(ppVal **systemdesktopsharing.IRDPSRAPISessionProperties) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Properties(ppVal)))
+func (self IRDPSRAPIViewer) Get_Properties() (*systemdesktopsharing.IRDPSRAPISessionProperties, error) {
+	var _ppVal *systemdesktopsharing.IRDPSRAPISessionProperties
+	_hr := self.Raw.Get_Properties(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // StartReverseConnectListener wraps the raw StartReverseConnectListener call.
-func (self IRDPSRAPIViewer) StartReverseConnectListener(bstrConnectionString foundation.BSTR, bstrUserName foundation.BSTR, bstrPassword foundation.BSTR, pbstrReverseConnectString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.StartReverseConnectListener(bstrConnectionString, bstrUserName, bstrPassword, pbstrReverseConnectString)))
+func (self IRDPSRAPIViewer) StartReverseConnectListener(bstrConnectionString foundation.BSTR, bstrUserName foundation.BSTR, bstrPassword foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrReverseConnectString foundation.BSTR
+	_hr := self.Raw.StartReverseConnectListener(bstrConnectionString, bstrUserName, bstrPassword, &_pbstrReverseConnectString)
+	return _pbstrReverseConnectString, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIVirtualChannel is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIVirtualChannel with error-returning methods.
@@ -802,18 +928,24 @@ func (self IRDPSRAPIVirtualChannel) SetAccess(lAttendeeId int32, AccessType syst
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IRDPSRAPIVirtualChannel) Get_Name(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbstrName)))
+func (self IRDPSRAPIVirtualChannel) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Flags wraps the raw Get_Flags call.
-func (self IRDPSRAPIVirtualChannel) Get_Flags(plFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Flags(plFlags)))
+func (self IRDPSRAPIVirtualChannel) Get_Flags() (int32, error) {
+	var _plFlags int32
+	_hr := self.Raw.Get_Flags(&_plFlags)
+	return _plFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Priority wraps the raw Get_Priority call.
-func (self IRDPSRAPIVirtualChannel) Get_Priority(pPriority *systemdesktopsharing.CHANNEL_PRIORITY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Priority(pPriority)))
+func (self IRDPSRAPIVirtualChannel) Get_Priority() (systemdesktopsharing.CHANNEL_PRIORITY, error) {
+	var _pPriority systemdesktopsharing.CHANNEL_PRIORITY
+	_hr := self.Raw.Get_Priority(&_pPriority)
+	return _pPriority, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIVirtualChannelManager is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIVirtualChannelManager with error-returning methods.
@@ -828,13 +960,17 @@ func WrapIRDPSRAPIVirtualChannelManager(raw *systemdesktopsharing.IRDPSRAPIVirtu
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IRDPSRAPIVirtualChannelManager) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IRDPSRAPIVirtualChannelManager) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // CreateVirtualChannel wraps the raw CreateVirtualChannel call.
-func (self IRDPSRAPIVirtualChannelManager) CreateVirtualChannel(bstrChannelName foundation.BSTR, Priority systemdesktopsharing.CHANNEL_PRIORITY, ChannelFlags uint32, ppChannel **systemdesktopsharing.IRDPSRAPIVirtualChannel) error {
-	return win32.HRESULTError(int32(self.Raw.CreateVirtualChannel(bstrChannelName, Priority, ChannelFlags, ppChannel)))
+func (self IRDPSRAPIVirtualChannelManager) CreateVirtualChannel(bstrChannelName foundation.BSTR, Priority systemdesktopsharing.CHANNEL_PRIORITY, ChannelFlags uint32) (*systemdesktopsharing.IRDPSRAPIVirtualChannel, error) {
+	var _ppChannel *systemdesktopsharing.IRDPSRAPIVirtualChannel
+	_hr := self.Raw.CreateVirtualChannel(bstrChannelName, Priority, ChannelFlags, &_ppChannel)
+	return _ppChannel, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIWindow is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIWindow with error-returning methods.
@@ -849,18 +985,24 @@ func WrapIRDPSRAPIWindow(raw *systemdesktopsharing.IRDPSRAPIWindow) IRDPSRAPIWin
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IRDPSRAPIWindow) Get_Id(pRetVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(pRetVal)))
+func (self IRDPSRAPIWindow) Get_Id() (int32, error) {
+	var _pRetVal int32
+	_hr := self.Raw.Get_Id(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self IRDPSRAPIWindow) Get_Application(pApplication **systemdesktopsharing.IRDPSRAPIApplication) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(pApplication)))
+func (self IRDPSRAPIWindow) Get_Application() (*systemdesktopsharing.IRDPSRAPIApplication, error) {
+	var _pApplication *systemdesktopsharing.IRDPSRAPIApplication
+	_hr := self.Raw.Get_Application(&_pApplication)
+	return _pApplication, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Shared wraps the raw Get_Shared call.
-func (self IRDPSRAPIWindow) Get_Shared(pRetVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Shared(pRetVal)))
+func (self IRDPSRAPIWindow) Get_Shared() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Shared(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Shared wraps the raw Put_Shared call.
@@ -869,8 +1011,10 @@ func (self IRDPSRAPIWindow) Put_Shared(NewVal foundation.VARIANT_BOOL) error {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IRDPSRAPIWindow) Get_Name(pRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pRetVal)))
+func (self IRDPSRAPIWindow) Get_Name() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pRetVal)
+	return _pRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Show wraps the raw Show call.
@@ -879,8 +1023,10 @@ func (self IRDPSRAPIWindow) Show() error {
 }
 
 // Get_Flags wraps the raw Get_Flags call.
-func (self IRDPSRAPIWindow) Get_Flags(pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Flags(pdwFlags)))
+func (self IRDPSRAPIWindow) Get_Flags() (uint32, error) {
+	var _pdwFlags uint32
+	_hr := self.Raw.Get_Flags(&_pdwFlags)
+	return _pdwFlags, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPSRAPIWindowList is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPSRAPIWindowList with error-returning methods.
@@ -895,13 +1041,17 @@ func WrapIRDPSRAPIWindowList(raw *systemdesktopsharing.IRDPSRAPIWindowList) IRDP
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IRDPSRAPIWindowList) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self IRDPSRAPIWindowList) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IRDPSRAPIWindowList) Get_Item(item int32, pWindow **systemdesktopsharing.IRDPSRAPIWindow) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(item, pWindow)))
+func (self IRDPSRAPIWindowList) Get_Item(item int32) (*systemdesktopsharing.IRDPSRAPIWindow, error) {
+	var _pWindow *systemdesktopsharing.IRDPSRAPIWindow
+	_hr := self.Raw.Get_Item(item, &_pWindow)
+	return _pWindow, win32.HRESULTError(int32(_hr))
 }
 
 // IRDPViewerInputSink is an idiomatic wrapper over the raw COM interface System.DesktopSharing.IRDPViewerInputSink with error-returning methods.

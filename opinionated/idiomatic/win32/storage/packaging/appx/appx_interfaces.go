@@ -25,8 +25,10 @@ func WrapIAppxAppInstallerReader(raw *storagepackagingappx.IAppxAppInstallerRead
 }
 
 // GetXmlDom wraps the raw GetXmlDom call.
-func (self IAppxAppInstallerReader) GetXmlDom(dom **dataxmlmsxml.IXMLDOMDocument) error {
-	return win32.HRESULTError(int32(self.Raw.GetXmlDom(dom)))
+func (self IAppxAppInstallerReader) GetXmlDom() (*dataxmlmsxml.IXMLDOMDocument, error) {
+	var _dom *dataxmlmsxml.IXMLDOMDocument
+	_hr := self.Raw.GetXmlDom(&_dom)
+	return _dom, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBlockMapBlock is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBlockMapBlock with error-returning methods.
@@ -41,13 +43,17 @@ func WrapIAppxBlockMapBlock(raw *storagepackagingappx.IAppxBlockMapBlock) IAppxB
 }
 
 // GetHash wraps the raw GetHash call.
-func (self IAppxBlockMapBlock) GetHash(bufferSize *uint32, buffer **byte) error {
-	return win32.HRESULTError(int32(self.Raw.GetHash(bufferSize, buffer)))
+func (self IAppxBlockMapBlock) GetHash(bufferSize *uint32) (*byte, error) {
+	var _buffer *byte
+	_hr := self.Raw.GetHash(bufferSize, &_buffer)
+	return _buffer, win32.HRESULTError(int32(_hr))
 }
 
 // GetCompressedSize wraps the raw GetCompressedSize call.
-func (self IAppxBlockMapBlock) GetCompressedSize(size *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetCompressedSize(size)))
+func (self IAppxBlockMapBlock) GetCompressedSize() (uint32, error) {
+	var _size uint32
+	_hr := self.Raw.GetCompressedSize(&_size)
+	return _size, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBlockMapBlocksEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBlockMapBlocksEnumerator with error-returning methods.
@@ -62,18 +68,24 @@ func WrapIAppxBlockMapBlocksEnumerator(raw *storagepackagingappx.IAppxBlockMapBl
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxBlockMapBlocksEnumerator) GetCurrent(block **storagepackagingappx.IAppxBlockMapBlock) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(block)))
+func (self IAppxBlockMapBlocksEnumerator) GetCurrent() (*storagepackagingappx.IAppxBlockMapBlock, error) {
+	var _block *storagepackagingappx.IAppxBlockMapBlock
+	_hr := self.Raw.GetCurrent(&_block)
+	return _block, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxBlockMapBlocksEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxBlockMapBlocksEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxBlockMapBlocksEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxBlockMapBlocksEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBlockMapFile is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBlockMapFile with error-returning methods.
@@ -88,28 +100,38 @@ func WrapIAppxBlockMapFile(raw *storagepackagingappx.IAppxBlockMapFile) IAppxBlo
 }
 
 // GetBlocks wraps the raw GetBlocks call.
-func (self IAppxBlockMapFile) GetBlocks(blocks **storagepackagingappx.IAppxBlockMapBlocksEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlocks(blocks)))
+func (self IAppxBlockMapFile) GetBlocks() (*storagepackagingappx.IAppxBlockMapBlocksEnumerator, error) {
+	var _blocks *storagepackagingappx.IAppxBlockMapBlocksEnumerator
+	_hr := self.Raw.GetBlocks(&_blocks)
+	return _blocks, win32.HRESULTError(int32(_hr))
 }
 
 // GetLocalFileHeaderSize wraps the raw GetLocalFileHeaderSize call.
-func (self IAppxBlockMapFile) GetLocalFileHeaderSize(lfhSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetLocalFileHeaderSize(lfhSize)))
+func (self IAppxBlockMapFile) GetLocalFileHeaderSize() (uint32, error) {
+	var _lfhSize uint32
+	_hr := self.Raw.GetLocalFileHeaderSize(&_lfhSize)
+	return _lfhSize, win32.HRESULTError(int32(_hr))
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxBlockMapFile) GetName(name *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IAppxBlockMapFile) GetName() (foundation.PWSTR, error) {
+	var _name foundation.PWSTR
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetUncompressedSize wraps the raw GetUncompressedSize call.
-func (self IAppxBlockMapFile) GetUncompressedSize(size *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetUncompressedSize(size)))
+func (self IAppxBlockMapFile) GetUncompressedSize() (uint64, error) {
+	var _size uint64
+	_hr := self.Raw.GetUncompressedSize(&_size)
+	return _size, win32.HRESULTError(int32(_hr))
 }
 
 // ValidateFileHash wraps the raw ValidateFileHash call.
-func (self IAppxBlockMapFile) ValidateFileHash(fileStream *systemcom.IStream, isValid *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ValidateFileHash(fileStream, isValid)))
+func (self IAppxBlockMapFile) ValidateFileHash(fileStream *systemcom.IStream) (foundation.BOOL, error) {
+	var _isValid foundation.BOOL
+	_hr := self.Raw.ValidateFileHash(fileStream, &_isValid)
+	return _isValid, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBlockMapFile2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBlockMapFile2 with error-returning methods.
@@ -124,8 +146,10 @@ func WrapIAppxBlockMapFile2(raw *storagepackagingappx.IAppxBlockMapFile2) IAppxB
 }
 
 // GetBlockSize wraps the raw GetBlockSize call.
-func (self IAppxBlockMapFile2) GetBlockSize(blockSize *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlockSize(blockSize)))
+func (self IAppxBlockMapFile2) GetBlockSize() (uint64, error) {
+	var _blockSize uint64
+	_hr := self.Raw.GetBlockSize(&_blockSize)
+	return _blockSize, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBlockMapFilesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBlockMapFilesEnumerator with error-returning methods.
@@ -140,18 +164,24 @@ func WrapIAppxBlockMapFilesEnumerator(raw *storagepackagingappx.IAppxBlockMapFil
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxBlockMapFilesEnumerator) GetCurrent(file **storagepackagingappx.IAppxBlockMapFile) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(file)))
+func (self IAppxBlockMapFilesEnumerator) GetCurrent() (*storagepackagingappx.IAppxBlockMapFile, error) {
+	var _file *storagepackagingappx.IAppxBlockMapFile
+	_hr := self.Raw.GetCurrent(&_file)
+	return _file, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxBlockMapFilesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxBlockMapFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxBlockMapFilesEnumerator) MoveNext(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasCurrent)))
+func (self IAppxBlockMapFilesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBlockMapReader is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBlockMapReader with error-returning methods.
@@ -166,24 +196,32 @@ func WrapIAppxBlockMapReader(raw *storagepackagingappx.IAppxBlockMapReader) IApp
 }
 
 // GetFile wraps the raw GetFile call.
-func (self IAppxBlockMapReader) GetFile(filename string, file **storagepackagingappx.IAppxBlockMapFile) error {
+func (self IAppxBlockMapReader) GetFile(filename string) (*storagepackagingappx.IAppxBlockMapFile, error) {
 	_filename := win32.UTF16Ptr(filename)
-	return win32.HRESULTError(int32(self.Raw.GetFile(foundation.PWSTR(_filename), file)))
+	var _file *storagepackagingappx.IAppxBlockMapFile
+	_hr := self.Raw.GetFile(foundation.PWSTR(_filename), &_file)
+	return _file, win32.HRESULTError(int32(_hr))
 }
 
 // GetFiles wraps the raw GetFiles call.
-func (self IAppxBlockMapReader) GetFiles(enumerator **storagepackagingappx.IAppxBlockMapFilesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetFiles(enumerator)))
+func (self IAppxBlockMapReader) GetFiles() (*storagepackagingappx.IAppxBlockMapFilesEnumerator, error) {
+	var _enumerator *storagepackagingappx.IAppxBlockMapFilesEnumerator
+	_hr := self.Raw.GetFiles(&_enumerator)
+	return _enumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetHashMethod wraps the raw GetHashMethod call.
-func (self IAppxBlockMapReader) GetHashMethod(hashMethod **systemcom.IUri) error {
-	return win32.HRESULTError(int32(self.Raw.GetHashMethod(hashMethod)))
+func (self IAppxBlockMapReader) GetHashMethod() (*systemcom.IUri, error) {
+	var _hashMethod *systemcom.IUri
+	_hr := self.Raw.GetHashMethod(&_hashMethod)
+	return _hashMethod, win32.HRESULTError(int32(_hr))
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IAppxBlockMapReader) GetStream(blockMapStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.GetStream(blockMapStream)))
+func (self IAppxBlockMapReader) GetStream() (*systemcom.IStream, error) {
+	var _blockMapStream *systemcom.IStream
+	_hr := self.Raw.GetStream(&_blockMapStream)
+	return _blockMapStream, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleFactory is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleFactory with error-returning methods.
@@ -198,18 +236,24 @@ func WrapIAppxBundleFactory(raw *storagepackagingappx.IAppxBundleFactory) IAppxB
 }
 
 // CreateBundleWriter wraps the raw CreateBundleWriter call.
-func (self IAppxBundleFactory) CreateBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64, bundleWriter **storagepackagingappx.IAppxBundleWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBundleWriter(outputStream, bundleVersion, bundleWriter)))
+func (self IAppxBundleFactory) CreateBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64) (*storagepackagingappx.IAppxBundleWriter, error) {
+	var _bundleWriter *storagepackagingappx.IAppxBundleWriter
+	_hr := self.Raw.CreateBundleWriter(outputStream, bundleVersion, &_bundleWriter)
+	return _bundleWriter, win32.HRESULTError(int32(_hr))
 }
 
 // CreateBundleReader wraps the raw CreateBundleReader call.
-func (self IAppxBundleFactory) CreateBundleReader(inputStream *systemcom.IStream, bundleReader **storagepackagingappx.IAppxBundleReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBundleReader(inputStream, bundleReader)))
+func (self IAppxBundleFactory) CreateBundleReader(inputStream *systemcom.IStream) (*storagepackagingappx.IAppxBundleReader, error) {
+	var _bundleReader *storagepackagingappx.IAppxBundleReader
+	_hr := self.Raw.CreateBundleReader(inputStream, &_bundleReader)
+	return _bundleReader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateBundleManifestReader wraps the raw CreateBundleManifestReader call.
-func (self IAppxBundleFactory) CreateBundleManifestReader(inputStream *systemcom.IStream, manifestReader **storagepackagingappx.IAppxBundleManifestReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBundleManifestReader(inputStream, manifestReader)))
+func (self IAppxBundleFactory) CreateBundleManifestReader(inputStream *systemcom.IStream) (*storagepackagingappx.IAppxBundleManifestReader, error) {
+	var _manifestReader *storagepackagingappx.IAppxBundleManifestReader
+	_hr := self.Raw.CreateBundleManifestReader(inputStream, &_manifestReader)
+	return _manifestReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleFactory2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleFactory2 with error-returning methods.
@@ -224,9 +268,11 @@ func WrapIAppxBundleFactory2(raw *storagepackagingappx.IAppxBundleFactory2) IApp
 }
 
 // CreateBundleReader2 wraps the raw CreateBundleReader2 call.
-func (self IAppxBundleFactory2) CreateBundleReader2(inputStream *systemcom.IStream, expectedDigest string, bundleReader **storagepackagingappx.IAppxBundleReader) error {
+func (self IAppxBundleFactory2) CreateBundleReader2(inputStream *systemcom.IStream, expectedDigest string) (*storagepackagingappx.IAppxBundleReader, error) {
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
-	return win32.HRESULTError(int32(self.Raw.CreateBundleReader2(inputStream, foundation.PWSTR(_expectedDigest), bundleReader)))
+	var _bundleReader *storagepackagingappx.IAppxBundleReader
+	_hr := self.Raw.CreateBundleReader2(inputStream, foundation.PWSTR(_expectedDigest), &_bundleReader)
+	return _bundleReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleFactory3 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleFactory3 with error-returning methods.
@@ -241,10 +287,12 @@ func WrapIAppxBundleFactory3(raw *storagepackagingappx.IAppxBundleFactory3) IApp
 }
 
 // CreateBundleReaderFromSourceUri wraps the raw CreateBundleReaderFromSourceUri call.
-func (self IAppxBundleFactory3) CreateBundleReaderFromSourceUri(uri string, expectedDigest string, bundleReader **storagepackagingappx.IAppxBundleReader) error {
+func (self IAppxBundleFactory3) CreateBundleReaderFromSourceUri(uri string, expectedDigest string) (*storagepackagingappx.IAppxBundleReader, error) {
 	_uri := win32.UTF16Ptr(uri)
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
-	return win32.HRESULTError(int32(self.Raw.CreateBundleReaderFromSourceUri(foundation.PWSTR(_uri), foundation.PWSTR(_expectedDigest), bundleReader)))
+	var _bundleReader *storagepackagingappx.IAppxBundleReader
+	_hr := self.Raw.CreateBundleReaderFromSourceUri(foundation.PWSTR(_uri), foundation.PWSTR(_expectedDigest), &_bundleReader)
+	return _bundleReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestOptionalBundleInfo is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestOptionalBundleInfo with error-returning methods.
@@ -259,18 +307,24 @@ func WrapIAppxBundleManifestOptionalBundleInfo(raw *storagepackagingappx.IAppxBu
 }
 
 // GetPackageId wraps the raw GetPackageId call.
-func (self IAppxBundleManifestOptionalBundleInfo) GetPackageId(packageId **storagepackagingappx.IAppxManifestPackageId) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageId(packageId)))
+func (self IAppxBundleManifestOptionalBundleInfo) GetPackageId() (*storagepackagingappx.IAppxManifestPackageId, error) {
+	var _packageId *storagepackagingappx.IAppxManifestPackageId
+	_hr := self.Raw.GetPackageId(&_packageId)
+	return _packageId, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileName wraps the raw GetFileName call.
-func (self IAppxBundleManifestOptionalBundleInfo) GetFileName(fileName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileName(fileName)))
+func (self IAppxBundleManifestOptionalBundleInfo) GetFileName() (foundation.PWSTR, error) {
+	var _fileName foundation.PWSTR
+	_hr := self.Raw.GetFileName(&_fileName)
+	return _fileName, win32.HRESULTError(int32(_hr))
 }
 
 // GetPackageInfoItems wraps the raw GetPackageInfoItems call.
-func (self IAppxBundleManifestOptionalBundleInfo) GetPackageInfoItems(packageInfoItems **storagepackagingappx.IAppxBundleManifestPackageInfoEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageInfoItems(packageInfoItems)))
+func (self IAppxBundleManifestOptionalBundleInfo) GetPackageInfoItems() (*storagepackagingappx.IAppxBundleManifestPackageInfoEnumerator, error) {
+	var _packageInfoItems *storagepackagingappx.IAppxBundleManifestPackageInfoEnumerator
+	_hr := self.Raw.GetPackageInfoItems(&_packageInfoItems)
+	return _packageInfoItems, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestOptionalBundleInfoEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestOptionalBundleInfoEnumerator with error-returning methods.
@@ -285,18 +339,24 @@ func WrapIAppxBundleManifestOptionalBundleInfoEnumerator(raw *storagepackagingap
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxBundleManifestOptionalBundleInfoEnumerator) GetCurrent(optionalBundle **storagepackagingappx.IAppxBundleManifestOptionalBundleInfo) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(optionalBundle)))
+func (self IAppxBundleManifestOptionalBundleInfoEnumerator) GetCurrent() (*storagepackagingappx.IAppxBundleManifestOptionalBundleInfo, error) {
+	var _optionalBundle *storagepackagingappx.IAppxBundleManifestOptionalBundleInfo
+	_hr := self.Raw.GetCurrent(&_optionalBundle)
+	return _optionalBundle, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxBundleManifestOptionalBundleInfoEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxBundleManifestOptionalBundleInfoEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxBundleManifestOptionalBundleInfoEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxBundleManifestOptionalBundleInfoEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestPackageInfo is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestPackageInfo with error-returning methods.
@@ -311,33 +371,45 @@ func WrapIAppxBundleManifestPackageInfo(raw *storagepackagingappx.IAppxBundleMan
 }
 
 // GetPackageType wraps the raw GetPackageType call.
-func (self IAppxBundleManifestPackageInfo) GetPackageType(packageType *storagepackagingappx.APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageType(packageType)))
+func (self IAppxBundleManifestPackageInfo) GetPackageType() (storagepackagingappx.APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE, error) {
+	var _packageType storagepackagingappx.APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE
+	_hr := self.Raw.GetPackageType(&_packageType)
+	return _packageType, win32.HRESULTError(int32(_hr))
 }
 
 // GetPackageId wraps the raw GetPackageId call.
-func (self IAppxBundleManifestPackageInfo) GetPackageId(packageId **storagepackagingappx.IAppxManifestPackageId) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageId(packageId)))
+func (self IAppxBundleManifestPackageInfo) GetPackageId() (*storagepackagingappx.IAppxManifestPackageId, error) {
+	var _packageId *storagepackagingappx.IAppxManifestPackageId
+	_hr := self.Raw.GetPackageId(&_packageId)
+	return _packageId, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileName wraps the raw GetFileName call.
-func (self IAppxBundleManifestPackageInfo) GetFileName(fileName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileName(fileName)))
+func (self IAppxBundleManifestPackageInfo) GetFileName() (foundation.PWSTR, error) {
+	var _fileName foundation.PWSTR
+	_hr := self.Raw.GetFileName(&_fileName)
+	return _fileName, win32.HRESULTError(int32(_hr))
 }
 
 // GetOffset wraps the raw GetOffset call.
-func (self IAppxBundleManifestPackageInfo) GetOffset(offset *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetOffset(offset)))
+func (self IAppxBundleManifestPackageInfo) GetOffset() (uint64, error) {
+	var _offset uint64
+	_hr := self.Raw.GetOffset(&_offset)
+	return _offset, win32.HRESULTError(int32(_hr))
 }
 
 // GetSize wraps the raw GetSize call.
-func (self IAppxBundleManifestPackageInfo) GetSize(size *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetSize(size)))
+func (self IAppxBundleManifestPackageInfo) GetSize() (uint64, error) {
+	var _size uint64
+	_hr := self.Raw.GetSize(&_size)
+	return _size, win32.HRESULTError(int32(_hr))
 }
 
 // GetResources wraps the raw GetResources call.
-func (self IAppxBundleManifestPackageInfo) GetResources(resources **storagepackagingappx.IAppxManifestQualifiedResourcesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetResources(resources)))
+func (self IAppxBundleManifestPackageInfo) GetResources() (*storagepackagingappx.IAppxManifestQualifiedResourcesEnumerator, error) {
+	var _resources *storagepackagingappx.IAppxManifestQualifiedResourcesEnumerator
+	_hr := self.Raw.GetResources(&_resources)
+	return _resources, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestPackageInfo2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestPackageInfo2 with error-returning methods.
@@ -352,18 +424,24 @@ func WrapIAppxBundleManifestPackageInfo2(raw *storagepackagingappx.IAppxBundleMa
 }
 
 // GetIsPackageReference wraps the raw GetIsPackageReference call.
-func (self IAppxBundleManifestPackageInfo2) GetIsPackageReference(isPackageReference *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetIsPackageReference(isPackageReference)))
+func (self IAppxBundleManifestPackageInfo2) GetIsPackageReference() (foundation.BOOL, error) {
+	var _isPackageReference foundation.BOOL
+	_hr := self.Raw.GetIsPackageReference(&_isPackageReference)
+	return _isPackageReference, win32.HRESULTError(int32(_hr))
 }
 
 // GetIsNonQualifiedResourcePackage wraps the raw GetIsNonQualifiedResourcePackage call.
-func (self IAppxBundleManifestPackageInfo2) GetIsNonQualifiedResourcePackage(isNonQualifiedResourcePackage *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetIsNonQualifiedResourcePackage(isNonQualifiedResourcePackage)))
+func (self IAppxBundleManifestPackageInfo2) GetIsNonQualifiedResourcePackage() (foundation.BOOL, error) {
+	var _isNonQualifiedResourcePackage foundation.BOOL
+	_hr := self.Raw.GetIsNonQualifiedResourcePackage(&_isNonQualifiedResourcePackage)
+	return _isNonQualifiedResourcePackage, win32.HRESULTError(int32(_hr))
 }
 
 // GetIsDefaultApplicablePackage wraps the raw GetIsDefaultApplicablePackage call.
-func (self IAppxBundleManifestPackageInfo2) GetIsDefaultApplicablePackage(isDefaultApplicablePackage *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetIsDefaultApplicablePackage(isDefaultApplicablePackage)))
+func (self IAppxBundleManifestPackageInfo2) GetIsDefaultApplicablePackage() (foundation.BOOL, error) {
+	var _isDefaultApplicablePackage foundation.BOOL
+	_hr := self.Raw.GetIsDefaultApplicablePackage(&_isDefaultApplicablePackage)
+	return _isDefaultApplicablePackage, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestPackageInfo3 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestPackageInfo3 with error-returning methods.
@@ -378,8 +456,10 @@ func WrapIAppxBundleManifestPackageInfo3(raw *storagepackagingappx.IAppxBundleMa
 }
 
 // GetTargetDeviceFamilies wraps the raw GetTargetDeviceFamilies call.
-func (self IAppxBundleManifestPackageInfo3) GetTargetDeviceFamilies(targetDeviceFamilies **storagepackagingappx.IAppxManifestTargetDeviceFamiliesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetTargetDeviceFamilies(targetDeviceFamilies)))
+func (self IAppxBundleManifestPackageInfo3) GetTargetDeviceFamilies() (*storagepackagingappx.IAppxManifestTargetDeviceFamiliesEnumerator, error) {
+	var _targetDeviceFamilies *storagepackagingappx.IAppxManifestTargetDeviceFamiliesEnumerator
+	_hr := self.Raw.GetTargetDeviceFamilies(&_targetDeviceFamilies)
+	return _targetDeviceFamilies, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestPackageInfo4 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestPackageInfo4 with error-returning methods.
@@ -394,8 +474,10 @@ func WrapIAppxBundleManifestPackageInfo4(raw *storagepackagingappx.IAppxBundleMa
 }
 
 // GetIsStub wraps the raw GetIsStub call.
-func (self IAppxBundleManifestPackageInfo4) GetIsStub(isStub *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetIsStub(isStub)))
+func (self IAppxBundleManifestPackageInfo4) GetIsStub() (foundation.BOOL, error) {
+	var _isStub foundation.BOOL
+	_hr := self.Raw.GetIsStub(&_isStub)
+	return _isStub, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestPackageInfoEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestPackageInfoEnumerator with error-returning methods.
@@ -410,18 +492,24 @@ func WrapIAppxBundleManifestPackageInfoEnumerator(raw *storagepackagingappx.IApp
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxBundleManifestPackageInfoEnumerator) GetCurrent(packageInfo **storagepackagingappx.IAppxBundleManifestPackageInfo) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(packageInfo)))
+func (self IAppxBundleManifestPackageInfoEnumerator) GetCurrent() (*storagepackagingappx.IAppxBundleManifestPackageInfo, error) {
+	var _packageInfo *storagepackagingappx.IAppxBundleManifestPackageInfo
+	_hr := self.Raw.GetCurrent(&_packageInfo)
+	return _packageInfo, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxBundleManifestPackageInfoEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxBundleManifestPackageInfoEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxBundleManifestPackageInfoEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxBundleManifestPackageInfoEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestReader is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestReader with error-returning methods.
@@ -436,18 +524,24 @@ func WrapIAppxBundleManifestReader(raw *storagepackagingappx.IAppxBundleManifest
 }
 
 // GetPackageId wraps the raw GetPackageId call.
-func (self IAppxBundleManifestReader) GetPackageId(packageId **storagepackagingappx.IAppxManifestPackageId) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageId(packageId)))
+func (self IAppxBundleManifestReader) GetPackageId() (*storagepackagingappx.IAppxManifestPackageId, error) {
+	var _packageId *storagepackagingappx.IAppxManifestPackageId
+	_hr := self.Raw.GetPackageId(&_packageId)
+	return _packageId, win32.HRESULTError(int32(_hr))
 }
 
 // GetPackageInfoItems wraps the raw GetPackageInfoItems call.
-func (self IAppxBundleManifestReader) GetPackageInfoItems(packageInfoItems **storagepackagingappx.IAppxBundleManifestPackageInfoEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageInfoItems(packageInfoItems)))
+func (self IAppxBundleManifestReader) GetPackageInfoItems() (*storagepackagingappx.IAppxBundleManifestPackageInfoEnumerator, error) {
+	var _packageInfoItems *storagepackagingappx.IAppxBundleManifestPackageInfoEnumerator
+	_hr := self.Raw.GetPackageInfoItems(&_packageInfoItems)
+	return _packageInfoItems, win32.HRESULTError(int32(_hr))
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IAppxBundleManifestReader) GetStream(manifestStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.GetStream(manifestStream)))
+func (self IAppxBundleManifestReader) GetStream() (*systemcom.IStream, error) {
+	var _manifestStream *systemcom.IStream
+	_hr := self.Raw.GetStream(&_manifestStream)
+	return _manifestStream, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleManifestReader2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleManifestReader2 with error-returning methods.
@@ -462,8 +556,10 @@ func WrapIAppxBundleManifestReader2(raw *storagepackagingappx.IAppxBundleManifes
 }
 
 // GetOptionalBundles wraps the raw GetOptionalBundles call.
-func (self IAppxBundleManifestReader2) GetOptionalBundles(optionalBundles **storagepackagingappx.IAppxBundleManifestOptionalBundleInfoEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetOptionalBundles(optionalBundles)))
+func (self IAppxBundleManifestReader2) GetOptionalBundles() (*storagepackagingappx.IAppxBundleManifestOptionalBundleInfoEnumerator, error) {
+	var _optionalBundles *storagepackagingappx.IAppxBundleManifestOptionalBundleInfoEnumerator
+	_hr := self.Raw.GetOptionalBundles(&_optionalBundles)
+	return _optionalBundles, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleReader is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleReader with error-returning methods.
@@ -478,29 +574,39 @@ func WrapIAppxBundleReader(raw *storagepackagingappx.IAppxBundleReader) IAppxBun
 }
 
 // GetFootprintFile wraps the raw GetFootprintFile call.
-func (self IAppxBundleReader) GetFootprintFile(fileType storagepackagingappx.APPX_BUNDLE_FOOTPRINT_FILE_TYPE, footprintFile **storagepackagingappx.IAppxFile) error {
-	return win32.HRESULTError(int32(self.Raw.GetFootprintFile(fileType, footprintFile)))
+func (self IAppxBundleReader) GetFootprintFile(fileType storagepackagingappx.APPX_BUNDLE_FOOTPRINT_FILE_TYPE) (*storagepackagingappx.IAppxFile, error) {
+	var _footprintFile *storagepackagingappx.IAppxFile
+	_hr := self.Raw.GetFootprintFile(fileType, &_footprintFile)
+	return _footprintFile, win32.HRESULTError(int32(_hr))
 }
 
 // GetBlockMap wraps the raw GetBlockMap call.
-func (self IAppxBundleReader) GetBlockMap(blockMapReader **storagepackagingappx.IAppxBlockMapReader) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlockMap(blockMapReader)))
+func (self IAppxBundleReader) GetBlockMap() (*storagepackagingappx.IAppxBlockMapReader, error) {
+	var _blockMapReader *storagepackagingappx.IAppxBlockMapReader
+	_hr := self.Raw.GetBlockMap(&_blockMapReader)
+	return _blockMapReader, win32.HRESULTError(int32(_hr))
 }
 
 // GetManifest wraps the raw GetManifest call.
-func (self IAppxBundleReader) GetManifest(manifestReader **storagepackagingappx.IAppxBundleManifestReader) error {
-	return win32.HRESULTError(int32(self.Raw.GetManifest(manifestReader)))
+func (self IAppxBundleReader) GetManifest() (*storagepackagingappx.IAppxBundleManifestReader, error) {
+	var _manifestReader *storagepackagingappx.IAppxBundleManifestReader
+	_hr := self.Raw.GetManifest(&_manifestReader)
+	return _manifestReader, win32.HRESULTError(int32(_hr))
 }
 
 // GetPayloadPackages wraps the raw GetPayloadPackages call.
-func (self IAppxBundleReader) GetPayloadPackages(payloadPackages **storagepackagingappx.IAppxFilesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetPayloadPackages(payloadPackages)))
+func (self IAppxBundleReader) GetPayloadPackages() (*storagepackagingappx.IAppxFilesEnumerator, error) {
+	var _payloadPackages *storagepackagingappx.IAppxFilesEnumerator
+	_hr := self.Raw.GetPayloadPackages(&_payloadPackages)
+	return _payloadPackages, win32.HRESULTError(int32(_hr))
 }
 
 // GetPayloadPackage wraps the raw GetPayloadPackage call.
-func (self IAppxBundleReader) GetPayloadPackage(fileName string, payloadPackage **storagepackagingappx.IAppxFile) error {
+func (self IAppxBundleReader) GetPayloadPackage(fileName string) (*storagepackagingappx.IAppxFile, error) {
 	_fileName := win32.UTF16Ptr(fileName)
-	return win32.HRESULTError(int32(self.Raw.GetPayloadPackage(foundation.PWSTR(_fileName), payloadPackage)))
+	var _payloadPackage *storagepackagingappx.IAppxFile
+	_hr := self.Raw.GetPayloadPackage(foundation.PWSTR(_fileName), &_payloadPackage)
+	return _payloadPackage, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleReader2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleReader2 with error-returning methods.
@@ -515,9 +621,11 @@ func WrapIAppxBundleReader2(raw *storagepackagingappx.IAppxBundleReader2) IAppxB
 }
 
 // GetPayloadPackageReader wraps the raw GetPayloadPackageReader call.
-func (self IAppxBundleReader2) GetPayloadPackageReader(fileName string, payloadPackageReader **storagepackagingappx.IAppxPackageReader) error {
+func (self IAppxBundleReader2) GetPayloadPackageReader(fileName string) (*storagepackagingappx.IAppxPackageReader, error) {
 	_fileName := win32.UTF16Ptr(fileName)
-	return win32.HRESULTError(int32(self.Raw.GetPayloadPackageReader(foundation.PWSTR(_fileName), payloadPackageReader)))
+	var _payloadPackageReader *storagepackagingappx.IAppxPackageReader
+	_hr := self.Raw.GetPayloadPackageReader(foundation.PWSTR(_fileName), &_payloadPackageReader)
+	return _payloadPackageReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxBundleWriter is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxBundleWriter with error-returning methods.
@@ -626,13 +734,17 @@ func WrapIAppxContentGroup(raw *storagepackagingappx.IAppxContentGroup) IAppxCon
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxContentGroup) GetName(groupName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(groupName)))
+func (self IAppxContentGroup) GetName() (foundation.PWSTR, error) {
+	var _groupName foundation.PWSTR
+	_hr := self.Raw.GetName(&_groupName)
+	return _groupName, win32.HRESULTError(int32(_hr))
 }
 
 // GetFiles wraps the raw GetFiles call.
-func (self IAppxContentGroup) GetFiles(enumerator **storagepackagingappx.IAppxContentGroupFilesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetFiles(enumerator)))
+func (self IAppxContentGroup) GetFiles() (*storagepackagingappx.IAppxContentGroupFilesEnumerator, error) {
+	var _enumerator *storagepackagingappx.IAppxContentGroupFilesEnumerator
+	_hr := self.Raw.GetFiles(&_enumerator)
+	return _enumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxContentGroupFilesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxContentGroupFilesEnumerator with error-returning methods.
@@ -647,18 +759,24 @@ func WrapIAppxContentGroupFilesEnumerator(raw *storagepackagingappx.IAppxContent
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxContentGroupFilesEnumerator) GetCurrent(file *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(file)))
+func (self IAppxContentGroupFilesEnumerator) GetCurrent() (foundation.PWSTR, error) {
+	var _file foundation.PWSTR
+	_hr := self.Raw.GetCurrent(&_file)
+	return _file, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxContentGroupFilesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxContentGroupFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxContentGroupFilesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxContentGroupFilesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxContentGroupMapReader is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxContentGroupMapReader with error-returning methods.
@@ -673,13 +791,17 @@ func WrapIAppxContentGroupMapReader(raw *storagepackagingappx.IAppxContentGroupM
 }
 
 // GetRequiredGroup wraps the raw GetRequiredGroup call.
-func (self IAppxContentGroupMapReader) GetRequiredGroup(requiredGroup **storagepackagingappx.IAppxContentGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetRequiredGroup(requiredGroup)))
+func (self IAppxContentGroupMapReader) GetRequiredGroup() (*storagepackagingappx.IAppxContentGroup, error) {
+	var _requiredGroup *storagepackagingappx.IAppxContentGroup
+	_hr := self.Raw.GetRequiredGroup(&_requiredGroup)
+	return _requiredGroup, win32.HRESULTError(int32(_hr))
 }
 
 // GetAutomaticGroups wraps the raw GetAutomaticGroups call.
-func (self IAppxContentGroupMapReader) GetAutomaticGroups(automaticGroupsEnumerator **storagepackagingappx.IAppxContentGroupsEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetAutomaticGroups(automaticGroupsEnumerator)))
+func (self IAppxContentGroupMapReader) GetAutomaticGroups() (*storagepackagingappx.IAppxContentGroupsEnumerator, error) {
+	var _automaticGroupsEnumerator *storagepackagingappx.IAppxContentGroupsEnumerator
+	_hr := self.Raw.GetAutomaticGroups(&_automaticGroupsEnumerator)
+	return _automaticGroupsEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxContentGroupMapWriter is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxContentGroupMapWriter with error-returning methods.
@@ -722,18 +844,24 @@ func WrapIAppxContentGroupsEnumerator(raw *storagepackagingappx.IAppxContentGrou
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxContentGroupsEnumerator) GetCurrent(stream **storagepackagingappx.IAppxContentGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(stream)))
+func (self IAppxContentGroupsEnumerator) GetCurrent() (*storagepackagingappx.IAppxContentGroup, error) {
+	var _stream *storagepackagingappx.IAppxContentGroup
+	_hr := self.Raw.GetCurrent(&_stream)
+	return _stream, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxContentGroupsEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxContentGroupsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxContentGroupsEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxContentGroupsEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxDigestProvider is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxDigestProvider with error-returning methods.
@@ -748,8 +876,10 @@ func WrapIAppxDigestProvider(raw *storagepackagingappx.IAppxDigestProvider) IApp
 }
 
 // GetDigest wraps the raw GetDigest call.
-func (self IAppxDigestProvider) GetDigest(digest *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDigest(digest)))
+func (self IAppxDigestProvider) GetDigest() (foundation.PWSTR, error) {
+	var _digest foundation.PWSTR
+	_hr := self.Raw.GetDigest(&_digest)
+	return _digest, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxEncryptedBundleWriter is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxEncryptedBundleWriter with error-returning methods.
@@ -876,13 +1006,17 @@ func (self IAppxEncryptionFactory) DecryptPackage(inputStream *systemcom.IStream
 }
 
 // CreateEncryptedPackageWriter wraps the raw CreateEncryptedPackageWriter call.
-func (self IAppxEncryptionFactory) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS, packageWriter **storagepackagingappx.IAppxEncryptedPackageWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedPackageWriter(outputStream, manifestStream, settings, keyInfo, exemptedFiles, packageWriter)))
+func (self IAppxEncryptionFactory) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS) (*storagepackagingappx.IAppxEncryptedPackageWriter, error) {
+	var _packageWriter *storagepackagingappx.IAppxEncryptedPackageWriter
+	_hr := self.Raw.CreateEncryptedPackageWriter(outputStream, manifestStream, settings, keyInfo, exemptedFiles, &_packageWriter)
+	return _packageWriter, win32.HRESULTError(int32(_hr))
 }
 
 // CreateEncryptedPackageReader wraps the raw CreateEncryptedPackageReader call.
-func (self IAppxEncryptionFactory) CreateEncryptedPackageReader(inputStream *systemcom.IStream, keyInfo *storagepackagingappx.APPX_KEY_INFO, packageReader **storagepackagingappx.IAppxPackageReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedPackageReader(inputStream, keyInfo, packageReader)))
+func (self IAppxEncryptionFactory) CreateEncryptedPackageReader(inputStream *systemcom.IStream, keyInfo *storagepackagingappx.APPX_KEY_INFO) (*storagepackagingappx.IAppxPackageReader, error) {
+	var _packageReader *storagepackagingappx.IAppxPackageReader
+	_hr := self.Raw.CreateEncryptedPackageReader(inputStream, keyInfo, &_packageReader)
+	return _packageReader, win32.HRESULTError(int32(_hr))
 }
 
 // EncryptBundle wraps the raw EncryptBundle call.
@@ -896,13 +1030,17 @@ func (self IAppxEncryptionFactory) DecryptBundle(inputStream *systemcom.IStream,
 }
 
 // CreateEncryptedBundleWriter wraps the raw CreateEncryptedBundleWriter call.
-func (self IAppxEncryptionFactory) CreateEncryptedBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS, bundleWriter **storagepackagingappx.IAppxEncryptedBundleWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedBundleWriter(outputStream, bundleVersion, settings, keyInfo, exemptedFiles, bundleWriter)))
+func (self IAppxEncryptionFactory) CreateEncryptedBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS) (*storagepackagingappx.IAppxEncryptedBundleWriter, error) {
+	var _bundleWriter *storagepackagingappx.IAppxEncryptedBundleWriter
+	_hr := self.Raw.CreateEncryptedBundleWriter(outputStream, bundleVersion, settings, keyInfo, exemptedFiles, &_bundleWriter)
+	return _bundleWriter, win32.HRESULTError(int32(_hr))
 }
 
 // CreateEncryptedBundleReader wraps the raw CreateEncryptedBundleReader call.
-func (self IAppxEncryptionFactory) CreateEncryptedBundleReader(inputStream *systemcom.IStream, keyInfo *storagepackagingappx.APPX_KEY_INFO, bundleReader **storagepackagingappx.IAppxBundleReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedBundleReader(inputStream, keyInfo, bundleReader)))
+func (self IAppxEncryptionFactory) CreateEncryptedBundleReader(inputStream *systemcom.IStream, keyInfo *storagepackagingappx.APPX_KEY_INFO) (*storagepackagingappx.IAppxBundleReader, error) {
+	var _bundleReader *storagepackagingappx.IAppxBundleReader
+	_hr := self.Raw.CreateEncryptedBundleReader(inputStream, keyInfo, &_bundleReader)
+	return _bundleReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxEncryptionFactory2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxEncryptionFactory2 with error-returning methods.
@@ -917,8 +1055,10 @@ func WrapIAppxEncryptionFactory2(raw *storagepackagingappx.IAppxEncryptionFactor
 }
 
 // CreateEncryptedPackageWriter wraps the raw CreateEncryptedPackageWriter call.
-func (self IAppxEncryptionFactory2) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, contentGroupMapStream *systemcom.IStream, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS, packageWriter **storagepackagingappx.IAppxEncryptedPackageWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedPackageWriter(outputStream, manifestStream, contentGroupMapStream, settings, keyInfo, exemptedFiles, packageWriter)))
+func (self IAppxEncryptionFactory2) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, contentGroupMapStream *systemcom.IStream, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS) (*storagepackagingappx.IAppxEncryptedPackageWriter, error) {
+	var _packageWriter *storagepackagingappx.IAppxEncryptedPackageWriter
+	_hr := self.Raw.CreateEncryptedPackageWriter(outputStream, manifestStream, contentGroupMapStream, settings, keyInfo, exemptedFiles, &_packageWriter)
+	return _packageWriter, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxEncryptionFactory3 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxEncryptionFactory3 with error-returning methods.
@@ -938,8 +1078,10 @@ func (self IAppxEncryptionFactory3) EncryptPackage(inputStream *systemcom.IStrea
 }
 
 // CreateEncryptedPackageWriter wraps the raw CreateEncryptedPackageWriter call.
-func (self IAppxEncryptionFactory3) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, contentGroupMapStream *systemcom.IStream, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS, packageWriter **storagepackagingappx.IAppxEncryptedPackageWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedPackageWriter(outputStream, manifestStream, contentGroupMapStream, settings, keyInfo, exemptedFiles, packageWriter)))
+func (self IAppxEncryptionFactory3) CreateEncryptedPackageWriter(outputStream *systemcom.IStream, manifestStream *systemcom.IStream, contentGroupMapStream *systemcom.IStream, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS) (*storagepackagingappx.IAppxEncryptedPackageWriter, error) {
+	var _packageWriter *storagepackagingappx.IAppxEncryptedPackageWriter
+	_hr := self.Raw.CreateEncryptedPackageWriter(outputStream, manifestStream, contentGroupMapStream, settings, keyInfo, exemptedFiles, &_packageWriter)
+	return _packageWriter, win32.HRESULTError(int32(_hr))
 }
 
 // EncryptBundle wraps the raw EncryptBundle call.
@@ -948,8 +1090,10 @@ func (self IAppxEncryptionFactory3) EncryptBundle(inputStream *systemcom.IStream
 }
 
 // CreateEncryptedBundleWriter wraps the raw CreateEncryptedBundleWriter call.
-func (self IAppxEncryptionFactory3) CreateEncryptedBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS, bundleWriter **storagepackagingappx.IAppxEncryptedBundleWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedBundleWriter(outputStream, bundleVersion, settings, keyInfo, exemptedFiles, bundleWriter)))
+func (self IAppxEncryptionFactory3) CreateEncryptedBundleWriter(outputStream *systemcom.IStream, bundleVersion uint64, settings *storagepackagingappx.APPX_ENCRYPTED_PACKAGE_SETTINGS2, keyInfo *storagepackagingappx.APPX_KEY_INFO, exemptedFiles *storagepackagingappx.APPX_ENCRYPTED_EXEMPTIONS) (*storagepackagingappx.IAppxEncryptedBundleWriter, error) {
+	var _bundleWriter *storagepackagingappx.IAppxEncryptedBundleWriter
+	_hr := self.Raw.CreateEncryptedBundleWriter(outputStream, bundleVersion, settings, keyInfo, exemptedFiles, &_bundleWriter)
+	return _bundleWriter, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxEncryptionFactory4 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxEncryptionFactory4 with error-returning methods.
@@ -980,15 +1124,19 @@ func WrapIAppxEncryptionFactory5(raw *storagepackagingappx.IAppxEncryptionFactor
 }
 
 // CreateEncryptedPackageReader2 wraps the raw CreateEncryptedPackageReader2 call.
-func (self IAppxEncryptionFactory5) CreateEncryptedPackageReader2(inputStream *systemcom.IStream, keyInfo *storagepackagingappx.APPX_KEY_INFO, expectedDigest string, packageReader **storagepackagingappx.IAppxPackageReader) error {
+func (self IAppxEncryptionFactory5) CreateEncryptedPackageReader2(inputStream *systemcom.IStream, keyInfo *storagepackagingappx.APPX_KEY_INFO, expectedDigest string) (*storagepackagingappx.IAppxPackageReader, error) {
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedPackageReader2(inputStream, keyInfo, foundation.PWSTR(_expectedDigest), packageReader)))
+	var _packageReader *storagepackagingappx.IAppxPackageReader
+	_hr := self.Raw.CreateEncryptedPackageReader2(inputStream, keyInfo, foundation.PWSTR(_expectedDigest), &_packageReader)
+	return _packageReader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateEncryptedBundleReader2 wraps the raw CreateEncryptedBundleReader2 call.
-func (self IAppxEncryptionFactory5) CreateEncryptedBundleReader2(inputStream *systemcom.IStream, keyInfo *storagepackagingappx.APPX_KEY_INFO, expectedDigest string, bundleReader **storagepackagingappx.IAppxBundleReader) error {
+func (self IAppxEncryptionFactory5) CreateEncryptedBundleReader2(inputStream *systemcom.IStream, keyInfo *storagepackagingappx.APPX_KEY_INFO, expectedDigest string) (*storagepackagingappx.IAppxBundleReader, error) {
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
-	return win32.HRESULTError(int32(self.Raw.CreateEncryptedBundleReader2(inputStream, keyInfo, foundation.PWSTR(_expectedDigest), bundleReader)))
+	var _bundleReader *storagepackagingappx.IAppxBundleReader
+	_hr := self.Raw.CreateEncryptedBundleReader2(inputStream, keyInfo, foundation.PWSTR(_expectedDigest), &_bundleReader)
+	return _bundleReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxFactory is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxFactory with error-returning methods.
@@ -1003,29 +1151,39 @@ func WrapIAppxFactory(raw *storagepackagingappx.IAppxFactory) IAppxFactory {
 }
 
 // CreatePackageWriter wraps the raw CreatePackageWriter call.
-func (self IAppxFactory) CreatePackageWriter(outputStream *systemcom.IStream, settings *storagepackagingappx.APPX_PACKAGE_SETTINGS, packageWriter **storagepackagingappx.IAppxPackageWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePackageWriter(outputStream, settings, packageWriter)))
+func (self IAppxFactory) CreatePackageWriter(outputStream *systemcom.IStream, settings *storagepackagingappx.APPX_PACKAGE_SETTINGS) (*storagepackagingappx.IAppxPackageWriter, error) {
+	var _packageWriter *storagepackagingappx.IAppxPackageWriter
+	_hr := self.Raw.CreatePackageWriter(outputStream, settings, &_packageWriter)
+	return _packageWriter, win32.HRESULTError(int32(_hr))
 }
 
 // CreatePackageReader wraps the raw CreatePackageReader call.
-func (self IAppxFactory) CreatePackageReader(inputStream *systemcom.IStream, packageReader **storagepackagingappx.IAppxPackageReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePackageReader(inputStream, packageReader)))
+func (self IAppxFactory) CreatePackageReader(inputStream *systemcom.IStream) (*storagepackagingappx.IAppxPackageReader, error) {
+	var _packageReader *storagepackagingappx.IAppxPackageReader
+	_hr := self.Raw.CreatePackageReader(inputStream, &_packageReader)
+	return _packageReader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateManifestReader wraps the raw CreateManifestReader call.
-func (self IAppxFactory) CreateManifestReader(inputStream *systemcom.IStream, manifestReader **storagepackagingappx.IAppxManifestReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateManifestReader(inputStream, manifestReader)))
+func (self IAppxFactory) CreateManifestReader(inputStream *systemcom.IStream) (*storagepackagingappx.IAppxManifestReader, error) {
+	var _manifestReader *storagepackagingappx.IAppxManifestReader
+	_hr := self.Raw.CreateManifestReader(inputStream, &_manifestReader)
+	return _manifestReader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateBlockMapReader wraps the raw CreateBlockMapReader call.
-func (self IAppxFactory) CreateBlockMapReader(inputStream *systemcom.IStream, blockMapReader **storagepackagingappx.IAppxBlockMapReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateBlockMapReader(inputStream, blockMapReader)))
+func (self IAppxFactory) CreateBlockMapReader(inputStream *systemcom.IStream) (*storagepackagingappx.IAppxBlockMapReader, error) {
+	var _blockMapReader *storagepackagingappx.IAppxBlockMapReader
+	_hr := self.Raw.CreateBlockMapReader(inputStream, &_blockMapReader)
+	return _blockMapReader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateValidatedBlockMapReader wraps the raw CreateValidatedBlockMapReader call.
-func (self IAppxFactory) CreateValidatedBlockMapReader(blockMapStream *systemcom.IStream, signatureFileName string, blockMapReader **storagepackagingappx.IAppxBlockMapReader) error {
+func (self IAppxFactory) CreateValidatedBlockMapReader(blockMapStream *systemcom.IStream, signatureFileName string) (*storagepackagingappx.IAppxBlockMapReader, error) {
 	_signatureFileName := win32.UTF16Ptr(signatureFileName)
-	return win32.HRESULTError(int32(self.Raw.CreateValidatedBlockMapReader(blockMapStream, foundation.PWSTR(_signatureFileName), blockMapReader)))
+	var _blockMapReader *storagepackagingappx.IAppxBlockMapReader
+	_hr := self.Raw.CreateValidatedBlockMapReader(blockMapStream, foundation.PWSTR(_signatureFileName), &_blockMapReader)
+	return _blockMapReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxFactory2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxFactory2 with error-returning methods.
@@ -1040,18 +1198,24 @@ func WrapIAppxFactory2(raw *storagepackagingappx.IAppxFactory2) IAppxFactory2 {
 }
 
 // CreateContentGroupMapReader wraps the raw CreateContentGroupMapReader call.
-func (self IAppxFactory2) CreateContentGroupMapReader(inputStream *systemcom.IStream, contentGroupMapReader **storagepackagingappx.IAppxContentGroupMapReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateContentGroupMapReader(inputStream, contentGroupMapReader)))
+func (self IAppxFactory2) CreateContentGroupMapReader(inputStream *systemcom.IStream) (*storagepackagingappx.IAppxContentGroupMapReader, error) {
+	var _contentGroupMapReader *storagepackagingappx.IAppxContentGroupMapReader
+	_hr := self.Raw.CreateContentGroupMapReader(inputStream, &_contentGroupMapReader)
+	return _contentGroupMapReader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateSourceContentGroupMapReader wraps the raw CreateSourceContentGroupMapReader call.
-func (self IAppxFactory2) CreateSourceContentGroupMapReader(inputStream *systemcom.IStream, reader **storagepackagingappx.IAppxSourceContentGroupMapReader) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSourceContentGroupMapReader(inputStream, reader)))
+func (self IAppxFactory2) CreateSourceContentGroupMapReader(inputStream *systemcom.IStream) (*storagepackagingappx.IAppxSourceContentGroupMapReader, error) {
+	var _reader *storagepackagingappx.IAppxSourceContentGroupMapReader
+	_hr := self.Raw.CreateSourceContentGroupMapReader(inputStream, &_reader)
+	return _reader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateContentGroupMapWriter wraps the raw CreateContentGroupMapWriter call.
-func (self IAppxFactory2) CreateContentGroupMapWriter(stream *systemcom.IStream, contentGroupMapWriter **storagepackagingappx.IAppxContentGroupMapWriter) error {
-	return win32.HRESULTError(int32(self.Raw.CreateContentGroupMapWriter(stream, contentGroupMapWriter)))
+func (self IAppxFactory2) CreateContentGroupMapWriter(stream *systemcom.IStream) (*storagepackagingappx.IAppxContentGroupMapWriter, error) {
+	var _contentGroupMapWriter *storagepackagingappx.IAppxContentGroupMapWriter
+	_hr := self.Raw.CreateContentGroupMapWriter(stream, &_contentGroupMapWriter)
+	return _contentGroupMapWriter, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxFactory3 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxFactory3 with error-returning methods.
@@ -1066,21 +1230,27 @@ func WrapIAppxFactory3(raw *storagepackagingappx.IAppxFactory3) IAppxFactory3 {
 }
 
 // CreatePackageReader2 wraps the raw CreatePackageReader2 call.
-func (self IAppxFactory3) CreatePackageReader2(inputStream *systemcom.IStream, expectedDigest string, packageReader **storagepackagingappx.IAppxPackageReader) error {
+func (self IAppxFactory3) CreatePackageReader2(inputStream *systemcom.IStream, expectedDigest string) (*storagepackagingappx.IAppxPackageReader, error) {
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
-	return win32.HRESULTError(int32(self.Raw.CreatePackageReader2(inputStream, foundation.PWSTR(_expectedDigest), packageReader)))
+	var _packageReader *storagepackagingappx.IAppxPackageReader
+	_hr := self.Raw.CreatePackageReader2(inputStream, foundation.PWSTR(_expectedDigest), &_packageReader)
+	return _packageReader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateManifestReader2 wraps the raw CreateManifestReader2 call.
-func (self IAppxFactory3) CreateManifestReader2(inputStream *systemcom.IStream, expectedDigest string, manifestReader **storagepackagingappx.IAppxManifestReader) error {
+func (self IAppxFactory3) CreateManifestReader2(inputStream *systemcom.IStream, expectedDigest string) (*storagepackagingappx.IAppxManifestReader, error) {
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
-	return win32.HRESULTError(int32(self.Raw.CreateManifestReader2(inputStream, foundation.PWSTR(_expectedDigest), manifestReader)))
+	var _manifestReader *storagepackagingappx.IAppxManifestReader
+	_hr := self.Raw.CreateManifestReader2(inputStream, foundation.PWSTR(_expectedDigest), &_manifestReader)
+	return _manifestReader, win32.HRESULTError(int32(_hr))
 }
 
 // CreateAppInstallerReader wraps the raw CreateAppInstallerReader call.
-func (self IAppxFactory3) CreateAppInstallerReader(inputStream *systemcom.IStream, expectedDigest string, appInstallerReader **storagepackagingappx.IAppxAppInstallerReader) error {
+func (self IAppxFactory3) CreateAppInstallerReader(inputStream *systemcom.IStream, expectedDigest string) (*storagepackagingappx.IAppxAppInstallerReader, error) {
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
-	return win32.HRESULTError(int32(self.Raw.CreateAppInstallerReader(inputStream, foundation.PWSTR(_expectedDigest), appInstallerReader)))
+	var _appInstallerReader *storagepackagingappx.IAppxAppInstallerReader
+	_hr := self.Raw.CreateAppInstallerReader(inputStream, foundation.PWSTR(_expectedDigest), &_appInstallerReader)
+	return _appInstallerReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxFactory4 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxFactory4 with error-returning methods.
@@ -1095,10 +1265,12 @@ func WrapIAppxFactory4(raw *storagepackagingappx.IAppxFactory4) IAppxFactory4 {
 }
 
 // CreatePackageReaderFromSourceUri wraps the raw CreatePackageReaderFromSourceUri call.
-func (self IAppxFactory4) CreatePackageReaderFromSourceUri(uri string, expectedDigest string, packageReader **storagepackagingappx.IAppxPackageReader) error {
+func (self IAppxFactory4) CreatePackageReaderFromSourceUri(uri string, expectedDigest string) (*storagepackagingappx.IAppxPackageReader, error) {
 	_uri := win32.UTF16Ptr(uri)
 	_expectedDigest := win32.UTF16Ptr(expectedDigest)
-	return win32.HRESULTError(int32(self.Raw.CreatePackageReaderFromSourceUri(foundation.PWSTR(_uri), foundation.PWSTR(_expectedDigest), packageReader)))
+	var _packageReader *storagepackagingappx.IAppxPackageReader
+	_hr := self.Raw.CreatePackageReaderFromSourceUri(foundation.PWSTR(_uri), foundation.PWSTR(_expectedDigest), &_packageReader)
+	return _packageReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxFile is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxFile with error-returning methods.
@@ -1113,28 +1285,38 @@ func WrapIAppxFile(raw *storagepackagingappx.IAppxFile) IAppxFile {
 }
 
 // GetCompressionOption wraps the raw GetCompressionOption call.
-func (self IAppxFile) GetCompressionOption(compressionOption *storagepackagingappx.APPX_COMPRESSION_OPTION) error {
-	return win32.HRESULTError(int32(self.Raw.GetCompressionOption(compressionOption)))
+func (self IAppxFile) GetCompressionOption() (storagepackagingappx.APPX_COMPRESSION_OPTION, error) {
+	var _compressionOption storagepackagingappx.APPX_COMPRESSION_OPTION
+	_hr := self.Raw.GetCompressionOption(&_compressionOption)
+	return _compressionOption, win32.HRESULTError(int32(_hr))
 }
 
 // GetContentType wraps the raw GetContentType call.
-func (self IAppxFile) GetContentType(contentType *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetContentType(contentType)))
+func (self IAppxFile) GetContentType() (foundation.PWSTR, error) {
+	var _contentType foundation.PWSTR
+	_hr := self.Raw.GetContentType(&_contentType)
+	return _contentType, win32.HRESULTError(int32(_hr))
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxFile) GetName(fileName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(fileName)))
+func (self IAppxFile) GetName() (foundation.PWSTR, error) {
+	var _fileName foundation.PWSTR
+	_hr := self.Raw.GetName(&_fileName)
+	return _fileName, win32.HRESULTError(int32(_hr))
 }
 
 // GetSize wraps the raw GetSize call.
-func (self IAppxFile) GetSize(size *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetSize(size)))
+func (self IAppxFile) GetSize() (uint64, error) {
+	var _size uint64
+	_hr := self.Raw.GetSize(&_size)
+	return _size, win32.HRESULTError(int32(_hr))
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IAppxFile) GetStream(stream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.GetStream(stream)))
+func (self IAppxFile) GetStream() (*systemcom.IStream, error) {
+	var _stream *systemcom.IStream
+	_hr := self.Raw.GetStream(&_stream)
+	return _stream, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxFile2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxFile2 with error-returning methods.
@@ -1149,8 +1331,10 @@ func WrapIAppxFile2(raw *storagepackagingappx.IAppxFile2) IAppxFile2 {
 }
 
 // GetBlockSize wraps the raw GetBlockSize call.
-func (self IAppxFile2) GetBlockSize(blockSize *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlockSize(blockSize)))
+func (self IAppxFile2) GetBlockSize() (uint64, error) {
+	var _blockSize uint64
+	_hr := self.Raw.GetBlockSize(&_blockSize)
+	return _blockSize, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxFilesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxFilesEnumerator with error-returning methods.
@@ -1165,18 +1349,24 @@ func WrapIAppxFilesEnumerator(raw *storagepackagingappx.IAppxFilesEnumerator) IA
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxFilesEnumerator) GetCurrent(file **storagepackagingappx.IAppxFile) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(file)))
+func (self IAppxFilesEnumerator) GetCurrent() (*storagepackagingappx.IAppxFile, error) {
+	var _file *storagepackagingappx.IAppxFile
+	_hr := self.Raw.GetCurrent(&_file)
+	return _file, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxFilesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxFilesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxFilesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestApplication is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestApplication with error-returning methods.
@@ -1191,14 +1381,18 @@ func WrapIAppxManifestApplication(raw *storagepackagingappx.IAppxManifestApplica
 }
 
 // GetStringValue wraps the raw GetStringValue call.
-func (self IAppxManifestApplication) GetStringValue(name string, value *foundation.PWSTR) error {
+func (self IAppxManifestApplication) GetStringValue(name string) (foundation.PWSTR, error) {
 	_name := win32.UTF16Ptr(name)
-	return win32.HRESULTError(int32(self.Raw.GetStringValue(foundation.PWSTR(_name), value)))
+	var _value foundation.PWSTR
+	_hr := self.Raw.GetStringValue(foundation.PWSTR(_name), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetAppUserModelId wraps the raw GetAppUserModelId call.
-func (self IAppxManifestApplication) GetAppUserModelId(appUserModelId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetAppUserModelId(appUserModelId)))
+func (self IAppxManifestApplication) GetAppUserModelId() (foundation.PWSTR, error) {
+	var _appUserModelId foundation.PWSTR
+	_hr := self.Raw.GetAppUserModelId(&_appUserModelId)
+	return _appUserModelId, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestApplicationsEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestApplicationsEnumerator with error-returning methods.
@@ -1213,18 +1407,24 @@ func WrapIAppxManifestApplicationsEnumerator(raw *storagepackagingappx.IAppxMani
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestApplicationsEnumerator) GetCurrent(application **storagepackagingappx.IAppxManifestApplication) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(application)))
+func (self IAppxManifestApplicationsEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestApplication, error) {
+	var _application *storagepackagingappx.IAppxManifestApplication
+	_hr := self.Raw.GetCurrent(&_application)
+	return _application, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestApplicationsEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestApplicationsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestApplicationsEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestApplicationsEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestCapabilitiesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestCapabilitiesEnumerator with error-returning methods.
@@ -1239,18 +1439,24 @@ func WrapIAppxManifestCapabilitiesEnumerator(raw *storagepackagingappx.IAppxMani
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestCapabilitiesEnumerator) GetCurrent(capability *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(capability)))
+func (self IAppxManifestCapabilitiesEnumerator) GetCurrent() (foundation.PWSTR, error) {
+	var _capability foundation.PWSTR
+	_hr := self.Raw.GetCurrent(&_capability)
+	return _capability, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestCapabilitiesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestCapabilitiesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestCapabilitiesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestCapabilitiesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestDeviceCapabilitiesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestDeviceCapabilitiesEnumerator with error-returning methods.
@@ -1265,18 +1471,24 @@ func WrapIAppxManifestDeviceCapabilitiesEnumerator(raw *storagepackagingappx.IAp
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestDeviceCapabilitiesEnumerator) GetCurrent(deviceCapability *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(deviceCapability)))
+func (self IAppxManifestDeviceCapabilitiesEnumerator) GetCurrent() (foundation.PWSTR, error) {
+	var _deviceCapability foundation.PWSTR
+	_hr := self.Raw.GetCurrent(&_deviceCapability)
+	return _deviceCapability, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestDeviceCapabilitiesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestDeviceCapabilitiesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestDeviceCapabilitiesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestDeviceCapabilitiesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestDriverConstraint is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestDriverConstraint with error-returning methods.
@@ -1291,18 +1503,24 @@ func WrapIAppxManifestDriverConstraint(raw *storagepackagingappx.IAppxManifestDr
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxManifestDriverConstraint) GetName(name *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IAppxManifestDriverConstraint) GetName() (foundation.PWSTR, error) {
+	var _name foundation.PWSTR
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetMinVersion wraps the raw GetMinVersion call.
-func (self IAppxManifestDriverConstraint) GetMinVersion(minVersion *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetMinVersion(minVersion)))
+func (self IAppxManifestDriverConstraint) GetMinVersion() (uint64, error) {
+	var _minVersion uint64
+	_hr := self.Raw.GetMinVersion(&_minVersion)
+	return _minVersion, win32.HRESULTError(int32(_hr))
 }
 
 // GetMinDate wraps the raw GetMinDate call.
-func (self IAppxManifestDriverConstraint) GetMinDate(minDate *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetMinDate(minDate)))
+func (self IAppxManifestDriverConstraint) GetMinDate() (foundation.PWSTR, error) {
+	var _minDate foundation.PWSTR
+	_hr := self.Raw.GetMinDate(&_minDate)
+	return _minDate, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestDriverConstraintsEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestDriverConstraintsEnumerator with error-returning methods.
@@ -1317,18 +1535,24 @@ func WrapIAppxManifestDriverConstraintsEnumerator(raw *storagepackagingappx.IApp
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestDriverConstraintsEnumerator) GetCurrent(driverConstraint **storagepackagingappx.IAppxManifestDriverConstraint) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(driverConstraint)))
+func (self IAppxManifestDriverConstraintsEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestDriverConstraint, error) {
+	var _driverConstraint *storagepackagingappx.IAppxManifestDriverConstraint
+	_hr := self.Raw.GetCurrent(&_driverConstraint)
+	return _driverConstraint, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestDriverConstraintsEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestDriverConstraintsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestDriverConstraintsEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestDriverConstraintsEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestDriverDependenciesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestDriverDependenciesEnumerator with error-returning methods.
@@ -1343,18 +1567,24 @@ func WrapIAppxManifestDriverDependenciesEnumerator(raw *storagepackagingappx.IAp
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestDriverDependenciesEnumerator) GetCurrent(driverDependency **storagepackagingappx.IAppxManifestDriverDependency) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(driverDependency)))
+func (self IAppxManifestDriverDependenciesEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestDriverDependency, error) {
+	var _driverDependency *storagepackagingappx.IAppxManifestDriverDependency
+	_hr := self.Raw.GetCurrent(&_driverDependency)
+	return _driverDependency, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestDriverDependenciesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestDriverDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestDriverDependenciesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestDriverDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestDriverDependency is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestDriverDependency with error-returning methods.
@@ -1369,8 +1599,10 @@ func WrapIAppxManifestDriverDependency(raw *storagepackagingappx.IAppxManifestDr
 }
 
 // GetDriverConstraints wraps the raw GetDriverConstraints call.
-func (self IAppxManifestDriverDependency) GetDriverConstraints(driverConstraints **storagepackagingappx.IAppxManifestDriverConstraintsEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetDriverConstraints(driverConstraints)))
+func (self IAppxManifestDriverDependency) GetDriverConstraints() (*storagepackagingappx.IAppxManifestDriverConstraintsEnumerator, error) {
+	var _driverConstraints *storagepackagingappx.IAppxManifestDriverConstraintsEnumerator
+	_hr := self.Raw.GetDriverConstraints(&_driverConstraints)
+	return _driverConstraints, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestHostRuntimeDependenciesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestHostRuntimeDependenciesEnumerator with error-returning methods.
@@ -1385,18 +1617,24 @@ func WrapIAppxManifestHostRuntimeDependenciesEnumerator(raw *storagepackagingapp
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestHostRuntimeDependenciesEnumerator) GetCurrent(hostRuntimeDependency **storagepackagingappx.IAppxManifestHostRuntimeDependency) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(hostRuntimeDependency)))
+func (self IAppxManifestHostRuntimeDependenciesEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestHostRuntimeDependency, error) {
+	var _hostRuntimeDependency *storagepackagingappx.IAppxManifestHostRuntimeDependency
+	_hr := self.Raw.GetCurrent(&_hostRuntimeDependency)
+	return _hostRuntimeDependency, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestHostRuntimeDependenciesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestHostRuntimeDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestHostRuntimeDependenciesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestHostRuntimeDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestHostRuntimeDependency is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestHostRuntimeDependency with error-returning methods.
@@ -1411,18 +1649,24 @@ func WrapIAppxManifestHostRuntimeDependency(raw *storagepackagingappx.IAppxManif
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxManifestHostRuntimeDependency) GetName(name *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IAppxManifestHostRuntimeDependency) GetName() (foundation.PWSTR, error) {
+	var _name foundation.PWSTR
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetPublisher wraps the raw GetPublisher call.
-func (self IAppxManifestHostRuntimeDependency) GetPublisher(publisher *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPublisher(publisher)))
+func (self IAppxManifestHostRuntimeDependency) GetPublisher() (foundation.PWSTR, error) {
+	var _publisher foundation.PWSTR
+	_hr := self.Raw.GetPublisher(&_publisher)
+	return _publisher, win32.HRESULTError(int32(_hr))
 }
 
 // GetMinVersion wraps the raw GetMinVersion call.
-func (self IAppxManifestHostRuntimeDependency) GetMinVersion(minVersion *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetMinVersion(minVersion)))
+func (self IAppxManifestHostRuntimeDependency) GetMinVersion() (uint64, error) {
+	var _minVersion uint64
+	_hr := self.Raw.GetMinVersion(&_minVersion)
+	return _minVersion, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestHostRuntimeDependency2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestHostRuntimeDependency2 with error-returning methods.
@@ -1437,8 +1681,10 @@ func WrapIAppxManifestHostRuntimeDependency2(raw *storagepackagingappx.IAppxMani
 }
 
 // GetPackageFamilyName wraps the raw GetPackageFamilyName call.
-func (self IAppxManifestHostRuntimeDependency2) GetPackageFamilyName(packageFamilyName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageFamilyName(packageFamilyName)))
+func (self IAppxManifestHostRuntimeDependency2) GetPackageFamilyName() (foundation.PWSTR, error) {
+	var _packageFamilyName foundation.PWSTR
+	_hr := self.Raw.GetPackageFamilyName(&_packageFamilyName)
+	return _packageFamilyName, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestMainPackageDependenciesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestMainPackageDependenciesEnumerator with error-returning methods.
@@ -1453,18 +1699,24 @@ func WrapIAppxManifestMainPackageDependenciesEnumerator(raw *storagepackagingapp
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestMainPackageDependenciesEnumerator) GetCurrent(mainPackageDependency **storagepackagingappx.IAppxManifestMainPackageDependency) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(mainPackageDependency)))
+func (self IAppxManifestMainPackageDependenciesEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestMainPackageDependency, error) {
+	var _mainPackageDependency *storagepackagingappx.IAppxManifestMainPackageDependency
+	_hr := self.Raw.GetCurrent(&_mainPackageDependency)
+	return _mainPackageDependency, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestMainPackageDependenciesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestMainPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestMainPackageDependenciesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestMainPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestMainPackageDependency is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestMainPackageDependency with error-returning methods.
@@ -1479,18 +1731,24 @@ func WrapIAppxManifestMainPackageDependency(raw *storagepackagingappx.IAppxManif
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxManifestMainPackageDependency) GetName(name *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IAppxManifestMainPackageDependency) GetName() (foundation.PWSTR, error) {
+	var _name foundation.PWSTR
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetPublisher wraps the raw GetPublisher call.
-func (self IAppxManifestMainPackageDependency) GetPublisher(publisher *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPublisher(publisher)))
+func (self IAppxManifestMainPackageDependency) GetPublisher() (foundation.PWSTR, error) {
+	var _publisher foundation.PWSTR
+	_hr := self.Raw.GetPublisher(&_publisher)
+	return _publisher, win32.HRESULTError(int32(_hr))
 }
 
 // GetPackageFamilyName wraps the raw GetPackageFamilyName call.
-func (self IAppxManifestMainPackageDependency) GetPackageFamilyName(packageFamilyName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageFamilyName(packageFamilyName)))
+func (self IAppxManifestMainPackageDependency) GetPackageFamilyName() (foundation.PWSTR, error) {
+	var _packageFamilyName foundation.PWSTR
+	_hr := self.Raw.GetPackageFamilyName(&_packageFamilyName)
+	return _packageFamilyName, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestOSPackageDependenciesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestOSPackageDependenciesEnumerator with error-returning methods.
@@ -1505,18 +1763,24 @@ func WrapIAppxManifestOSPackageDependenciesEnumerator(raw *storagepackagingappx.
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestOSPackageDependenciesEnumerator) GetCurrent(osPackageDependency **storagepackagingappx.IAppxManifestOSPackageDependency) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(osPackageDependency)))
+func (self IAppxManifestOSPackageDependenciesEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestOSPackageDependency, error) {
+	var _osPackageDependency *storagepackagingappx.IAppxManifestOSPackageDependency
+	_hr := self.Raw.GetCurrent(&_osPackageDependency)
+	return _osPackageDependency, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestOSPackageDependenciesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestOSPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestOSPackageDependenciesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestOSPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestOSPackageDependency is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestOSPackageDependency with error-returning methods.
@@ -1531,13 +1795,17 @@ func WrapIAppxManifestOSPackageDependency(raw *storagepackagingappx.IAppxManifes
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxManifestOSPackageDependency) GetName(name *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IAppxManifestOSPackageDependency) GetName() (foundation.PWSTR, error) {
+	var _name foundation.PWSTR
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetVersion wraps the raw GetVersion call.
-func (self IAppxManifestOSPackageDependency) GetVersion(version *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetVersion(version)))
+func (self IAppxManifestOSPackageDependency) GetVersion() (uint64, error) {
+	var _version uint64
+	_hr := self.Raw.GetVersion(&_version)
+	return _version, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestOptionalPackageInfo is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestOptionalPackageInfo with error-returning methods.
@@ -1552,13 +1820,17 @@ func WrapIAppxManifestOptionalPackageInfo(raw *storagepackagingappx.IAppxManifes
 }
 
 // GetIsOptionalPackage wraps the raw GetIsOptionalPackage call.
-func (self IAppxManifestOptionalPackageInfo) GetIsOptionalPackage(isOptionalPackage *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetIsOptionalPackage(isOptionalPackage)))
+func (self IAppxManifestOptionalPackageInfo) GetIsOptionalPackage() (foundation.BOOL, error) {
+	var _isOptionalPackage foundation.BOOL
+	_hr := self.Raw.GetIsOptionalPackage(&_isOptionalPackage)
+	return _isOptionalPackage, win32.HRESULTError(int32(_hr))
 }
 
 // GetMainPackageName wraps the raw GetMainPackageName call.
-func (self IAppxManifestOptionalPackageInfo) GetMainPackageName(mainPackageName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetMainPackageName(mainPackageName)))
+func (self IAppxManifestOptionalPackageInfo) GetMainPackageName() (foundation.PWSTR, error) {
+	var _mainPackageName foundation.PWSTR
+	_hr := self.Raw.GetMainPackageName(&_mainPackageName)
+	return _mainPackageName, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestPackageDependenciesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestPackageDependenciesEnumerator with error-returning methods.
@@ -1573,18 +1845,24 @@ func WrapIAppxManifestPackageDependenciesEnumerator(raw *storagepackagingappx.IA
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestPackageDependenciesEnumerator) GetCurrent(dependency **storagepackagingappx.IAppxManifestPackageDependency) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(dependency)))
+func (self IAppxManifestPackageDependenciesEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestPackageDependency, error) {
+	var _dependency *storagepackagingappx.IAppxManifestPackageDependency
+	_hr := self.Raw.GetCurrent(&_dependency)
+	return _dependency, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestPackageDependenciesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestPackageDependenciesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestPackageDependency is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestPackageDependency with error-returning methods.
@@ -1599,18 +1877,24 @@ func WrapIAppxManifestPackageDependency(raw *storagepackagingappx.IAppxManifestP
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxManifestPackageDependency) GetName(name *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IAppxManifestPackageDependency) GetName() (foundation.PWSTR, error) {
+	var _name foundation.PWSTR
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetPublisher wraps the raw GetPublisher call.
-func (self IAppxManifestPackageDependency) GetPublisher(publisher *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPublisher(publisher)))
+func (self IAppxManifestPackageDependency) GetPublisher() (foundation.PWSTR, error) {
+	var _publisher foundation.PWSTR
+	_hr := self.Raw.GetPublisher(&_publisher)
+	return _publisher, win32.HRESULTError(int32(_hr))
 }
 
 // GetMinVersion wraps the raw GetMinVersion call.
-func (self IAppxManifestPackageDependency) GetMinVersion(minVersion *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetMinVersion(minVersion)))
+func (self IAppxManifestPackageDependency) GetMinVersion() (uint64, error) {
+	var _minVersion uint64
+	_hr := self.Raw.GetMinVersion(&_minVersion)
+	return _minVersion, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestPackageDependency2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestPackageDependency2 with error-returning methods.
@@ -1625,8 +1909,10 @@ func WrapIAppxManifestPackageDependency2(raw *storagepackagingappx.IAppxManifest
 }
 
 // GetMaxMajorVersionTested wraps the raw GetMaxMajorVersionTested call.
-func (self IAppxManifestPackageDependency2) GetMaxMajorVersionTested(maxMajorVersionTested *uint16) error {
-	return win32.HRESULTError(int32(self.Raw.GetMaxMajorVersionTested(maxMajorVersionTested)))
+func (self IAppxManifestPackageDependency2) GetMaxMajorVersionTested() (uint16, error) {
+	var _maxMajorVersionTested uint16
+	_hr := self.Raw.GetMaxMajorVersionTested(&_maxMajorVersionTested)
+	return _maxMajorVersionTested, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestPackageDependency3 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestPackageDependency3 with error-returning methods.
@@ -1641,8 +1927,10 @@ func WrapIAppxManifestPackageDependency3(raw *storagepackagingappx.IAppxManifest
 }
 
 // GetIsOptional wraps the raw GetIsOptional call.
-func (self IAppxManifestPackageDependency3) GetIsOptional(isOptional *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetIsOptional(isOptional)))
+func (self IAppxManifestPackageDependency3) GetIsOptional() (foundation.BOOL, error) {
+	var _isOptional foundation.BOOL
+	_hr := self.Raw.GetIsOptional(&_isOptional)
+	return _isOptional, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestPackageId is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestPackageId with error-returning methods.
@@ -1657,44 +1945,60 @@ func WrapIAppxManifestPackageId(raw *storagepackagingappx.IAppxManifestPackageId
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxManifestPackageId) GetName(name *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IAppxManifestPackageId) GetName() (foundation.PWSTR, error) {
+	var _name foundation.PWSTR
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetArchitecture wraps the raw GetArchitecture call.
-func (self IAppxManifestPackageId) GetArchitecture(architecture *storagepackagingappx.APPX_PACKAGE_ARCHITECTURE) error {
-	return win32.HRESULTError(int32(self.Raw.GetArchitecture(architecture)))
+func (self IAppxManifestPackageId) GetArchitecture() (storagepackagingappx.APPX_PACKAGE_ARCHITECTURE, error) {
+	var _architecture storagepackagingappx.APPX_PACKAGE_ARCHITECTURE
+	_hr := self.Raw.GetArchitecture(&_architecture)
+	return _architecture, win32.HRESULTError(int32(_hr))
 }
 
 // GetPublisher wraps the raw GetPublisher call.
-func (self IAppxManifestPackageId) GetPublisher(publisher *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPublisher(publisher)))
+func (self IAppxManifestPackageId) GetPublisher() (foundation.PWSTR, error) {
+	var _publisher foundation.PWSTR
+	_hr := self.Raw.GetPublisher(&_publisher)
+	return _publisher, win32.HRESULTError(int32(_hr))
 }
 
 // GetVersion wraps the raw GetVersion call.
-func (self IAppxManifestPackageId) GetVersion(packageVersion *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetVersion(packageVersion)))
+func (self IAppxManifestPackageId) GetVersion() (uint64, error) {
+	var _packageVersion uint64
+	_hr := self.Raw.GetVersion(&_packageVersion)
+	return _packageVersion, win32.HRESULTError(int32(_hr))
 }
 
 // GetResourceId wraps the raw GetResourceId call.
-func (self IAppxManifestPackageId) GetResourceId(resourceId *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetResourceId(resourceId)))
+func (self IAppxManifestPackageId) GetResourceId() (foundation.PWSTR, error) {
+	var _resourceId foundation.PWSTR
+	_hr := self.Raw.GetResourceId(&_resourceId)
+	return _resourceId, win32.HRESULTError(int32(_hr))
 }
 
 // ComparePublisher wraps the raw ComparePublisher call.
-func (self IAppxManifestPackageId) ComparePublisher(other string, isSame *foundation.BOOL) error {
+func (self IAppxManifestPackageId) ComparePublisher(other string) (foundation.BOOL, error) {
 	_other := win32.UTF16Ptr(other)
-	return win32.HRESULTError(int32(self.Raw.ComparePublisher(foundation.PWSTR(_other), isSame)))
+	var _isSame foundation.BOOL
+	_hr := self.Raw.ComparePublisher(foundation.PWSTR(_other), &_isSame)
+	return _isSame, win32.HRESULTError(int32(_hr))
 }
 
 // GetPackageFullName wraps the raw GetPackageFullName call.
-func (self IAppxManifestPackageId) GetPackageFullName(packageFullName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageFullName(packageFullName)))
+func (self IAppxManifestPackageId) GetPackageFullName() (foundation.PWSTR, error) {
+	var _packageFullName foundation.PWSTR
+	_hr := self.Raw.GetPackageFullName(&_packageFullName)
+	return _packageFullName, win32.HRESULTError(int32(_hr))
 }
 
 // GetPackageFamilyName wraps the raw GetPackageFamilyName call.
-func (self IAppxManifestPackageId) GetPackageFamilyName(packageFamilyName *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageFamilyName(packageFamilyName)))
+func (self IAppxManifestPackageId) GetPackageFamilyName() (foundation.PWSTR, error) {
+	var _packageFamilyName foundation.PWSTR
+	_hr := self.Raw.GetPackageFamilyName(&_packageFamilyName)
+	return _packageFamilyName, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestPackageId2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestPackageId2 with error-returning methods.
@@ -1709,8 +2013,10 @@ func WrapIAppxManifestPackageId2(raw *storagepackagingappx.IAppxManifestPackageI
 }
 
 // GetArchitecture2 wraps the raw GetArchitecture2 call.
-func (self IAppxManifestPackageId2) GetArchitecture2(architecture *storagepackagingappx.APPX_PACKAGE_ARCHITECTURE2) error {
-	return win32.HRESULTError(int32(self.Raw.GetArchitecture2(architecture)))
+func (self IAppxManifestPackageId2) GetArchitecture2() (storagepackagingappx.APPX_PACKAGE_ARCHITECTURE2, error) {
+	var _architecture storagepackagingappx.APPX_PACKAGE_ARCHITECTURE2
+	_hr := self.Raw.GetArchitecture2(&_architecture)
+	return _architecture, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestProperties is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestProperties with error-returning methods.
@@ -1725,15 +2031,19 @@ func WrapIAppxManifestProperties(raw *storagepackagingappx.IAppxManifestProperti
 }
 
 // GetBoolValue wraps the raw GetBoolValue call.
-func (self IAppxManifestProperties) GetBoolValue(name string, value *foundation.BOOL) error {
+func (self IAppxManifestProperties) GetBoolValue(name string) (foundation.BOOL, error) {
 	_name := win32.UTF16Ptr(name)
-	return win32.HRESULTError(int32(self.Raw.GetBoolValue(foundation.PWSTR(_name), value)))
+	var _value foundation.BOOL
+	_hr := self.Raw.GetBoolValue(foundation.PWSTR(_name), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetStringValue wraps the raw GetStringValue call.
-func (self IAppxManifestProperties) GetStringValue(name string, value *foundation.PWSTR) error {
+func (self IAppxManifestProperties) GetStringValue(name string) (foundation.PWSTR, error) {
 	_name := win32.UTF16Ptr(name)
-	return win32.HRESULTError(int32(self.Raw.GetStringValue(foundation.PWSTR(_name), value)))
+	var _value foundation.PWSTR
+	_hr := self.Raw.GetStringValue(foundation.PWSTR(_name), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestQualifiedResource is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestQualifiedResource with error-returning methods.
@@ -1748,18 +2058,24 @@ func WrapIAppxManifestQualifiedResource(raw *storagepackagingappx.IAppxManifestQ
 }
 
 // GetLanguage wraps the raw GetLanguage call.
-func (self IAppxManifestQualifiedResource) GetLanguage(language *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetLanguage(language)))
+func (self IAppxManifestQualifiedResource) GetLanguage() (foundation.PWSTR, error) {
+	var _language foundation.PWSTR
+	_hr := self.Raw.GetLanguage(&_language)
+	return _language, win32.HRESULTError(int32(_hr))
 }
 
 // GetScale wraps the raw GetScale call.
-func (self IAppxManifestQualifiedResource) GetScale(scale *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetScale(scale)))
+func (self IAppxManifestQualifiedResource) GetScale() (uint32, error) {
+	var _scale uint32
+	_hr := self.Raw.GetScale(&_scale)
+	return _scale, win32.HRESULTError(int32(_hr))
 }
 
 // GetDXFeatureLevel wraps the raw GetDXFeatureLevel call.
-func (self IAppxManifestQualifiedResource) GetDXFeatureLevel(dxFeatureLevel *storagepackagingappx.DX_FEATURE_LEVEL) error {
-	return win32.HRESULTError(int32(self.Raw.GetDXFeatureLevel(dxFeatureLevel)))
+func (self IAppxManifestQualifiedResource) GetDXFeatureLevel() (storagepackagingappx.DX_FEATURE_LEVEL, error) {
+	var _dxFeatureLevel storagepackagingappx.DX_FEATURE_LEVEL
+	_hr := self.Raw.GetDXFeatureLevel(&_dxFeatureLevel)
+	return _dxFeatureLevel, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestQualifiedResourcesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestQualifiedResourcesEnumerator with error-returning methods.
@@ -1774,18 +2090,24 @@ func WrapIAppxManifestQualifiedResourcesEnumerator(raw *storagepackagingappx.IAp
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestQualifiedResourcesEnumerator) GetCurrent(resource **storagepackagingappx.IAppxManifestQualifiedResource) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(resource)))
+func (self IAppxManifestQualifiedResourcesEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestQualifiedResource, error) {
+	var _resource *storagepackagingappx.IAppxManifestQualifiedResource
+	_hr := self.Raw.GetCurrent(&_resource)
+	return _resource, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestQualifiedResourcesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestQualifiedResourcesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestQualifiedResourcesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestQualifiedResourcesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestReader is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestReader with error-returning methods.
@@ -1800,49 +2122,67 @@ func WrapIAppxManifestReader(raw *storagepackagingappx.IAppxManifestReader) IApp
 }
 
 // GetPackageId wraps the raw GetPackageId call.
-func (self IAppxManifestReader) GetPackageId(packageId **storagepackagingappx.IAppxManifestPackageId) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageId(packageId)))
+func (self IAppxManifestReader) GetPackageId() (*storagepackagingappx.IAppxManifestPackageId, error) {
+	var _packageId *storagepackagingappx.IAppxManifestPackageId
+	_hr := self.Raw.GetPackageId(&_packageId)
+	return _packageId, win32.HRESULTError(int32(_hr))
 }
 
 // GetProperties wraps the raw GetProperties call.
-func (self IAppxManifestReader) GetProperties(packageProperties **storagepackagingappx.IAppxManifestProperties) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperties(packageProperties)))
+func (self IAppxManifestReader) GetProperties() (*storagepackagingappx.IAppxManifestProperties, error) {
+	var _packageProperties *storagepackagingappx.IAppxManifestProperties
+	_hr := self.Raw.GetProperties(&_packageProperties)
+	return _packageProperties, win32.HRESULTError(int32(_hr))
 }
 
 // GetPackageDependencies wraps the raw GetPackageDependencies call.
-func (self IAppxManifestReader) GetPackageDependencies(dependencies **storagepackagingappx.IAppxManifestPackageDependenciesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetPackageDependencies(dependencies)))
+func (self IAppxManifestReader) GetPackageDependencies() (*storagepackagingappx.IAppxManifestPackageDependenciesEnumerator, error) {
+	var _dependencies *storagepackagingappx.IAppxManifestPackageDependenciesEnumerator
+	_hr := self.Raw.GetPackageDependencies(&_dependencies)
+	return _dependencies, win32.HRESULTError(int32(_hr))
 }
 
 // GetCapabilities wraps the raw GetCapabilities call.
-func (self IAppxManifestReader) GetCapabilities(capabilities *storagepackagingappx.APPX_CAPABILITIES) error {
-	return win32.HRESULTError(int32(self.Raw.GetCapabilities(capabilities)))
+func (self IAppxManifestReader) GetCapabilities() (storagepackagingappx.APPX_CAPABILITIES, error) {
+	var _capabilities storagepackagingappx.APPX_CAPABILITIES
+	_hr := self.Raw.GetCapabilities(&_capabilities)
+	return _capabilities, win32.HRESULTError(int32(_hr))
 }
 
 // GetResources wraps the raw GetResources call.
-func (self IAppxManifestReader) GetResources(resources **storagepackagingappx.IAppxManifestResourcesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetResources(resources)))
+func (self IAppxManifestReader) GetResources() (*storagepackagingappx.IAppxManifestResourcesEnumerator, error) {
+	var _resources *storagepackagingappx.IAppxManifestResourcesEnumerator
+	_hr := self.Raw.GetResources(&_resources)
+	return _resources, win32.HRESULTError(int32(_hr))
 }
 
 // GetDeviceCapabilities wraps the raw GetDeviceCapabilities call.
-func (self IAppxManifestReader) GetDeviceCapabilities(deviceCapabilities **storagepackagingappx.IAppxManifestDeviceCapabilitiesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetDeviceCapabilities(deviceCapabilities)))
+func (self IAppxManifestReader) GetDeviceCapabilities() (*storagepackagingappx.IAppxManifestDeviceCapabilitiesEnumerator, error) {
+	var _deviceCapabilities *storagepackagingappx.IAppxManifestDeviceCapabilitiesEnumerator
+	_hr := self.Raw.GetDeviceCapabilities(&_deviceCapabilities)
+	return _deviceCapabilities, win32.HRESULTError(int32(_hr))
 }
 
 // GetPrerequisite wraps the raw GetPrerequisite call.
-func (self IAppxManifestReader) GetPrerequisite(name string, value *uint64) error {
+func (self IAppxManifestReader) GetPrerequisite(name string) (uint64, error) {
 	_name := win32.UTF16Ptr(name)
-	return win32.HRESULTError(int32(self.Raw.GetPrerequisite(foundation.PWSTR(_name), value)))
+	var _value uint64
+	_hr := self.Raw.GetPrerequisite(foundation.PWSTR(_name), &_value)
+	return _value, win32.HRESULTError(int32(_hr))
 }
 
 // GetApplications wraps the raw GetApplications call.
-func (self IAppxManifestReader) GetApplications(applications **storagepackagingappx.IAppxManifestApplicationsEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetApplications(applications)))
+func (self IAppxManifestReader) GetApplications() (*storagepackagingappx.IAppxManifestApplicationsEnumerator, error) {
+	var _applications *storagepackagingappx.IAppxManifestApplicationsEnumerator
+	_hr := self.Raw.GetApplications(&_applications)
+	return _applications, win32.HRESULTError(int32(_hr))
 }
 
 // GetStream wraps the raw GetStream call.
-func (self IAppxManifestReader) GetStream(manifestStream **systemcom.IStream) error {
-	return win32.HRESULTError(int32(self.Raw.GetStream(manifestStream)))
+func (self IAppxManifestReader) GetStream() (*systemcom.IStream, error) {
+	var _manifestStream *systemcom.IStream
+	_hr := self.Raw.GetStream(&_manifestStream)
+	return _manifestStream, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestReader2 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestReader2 with error-returning methods.
@@ -1857,8 +2197,10 @@ func WrapIAppxManifestReader2(raw *storagepackagingappx.IAppxManifestReader2) IA
 }
 
 // GetQualifiedResources wraps the raw GetQualifiedResources call.
-func (self IAppxManifestReader2) GetQualifiedResources(resources **storagepackagingappx.IAppxManifestQualifiedResourcesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetQualifiedResources(resources)))
+func (self IAppxManifestReader2) GetQualifiedResources() (*storagepackagingappx.IAppxManifestQualifiedResourcesEnumerator, error) {
+	var _resources *storagepackagingappx.IAppxManifestQualifiedResourcesEnumerator
+	_hr := self.Raw.GetQualifiedResources(&_resources)
+	return _resources, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestReader3 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestReader3 with error-returning methods.
@@ -1873,13 +2215,17 @@ func WrapIAppxManifestReader3(raw *storagepackagingappx.IAppxManifestReader3) IA
 }
 
 // GetCapabilitiesByCapabilityClass wraps the raw GetCapabilitiesByCapabilityClass call.
-func (self IAppxManifestReader3) GetCapabilitiesByCapabilityClass(capabilityClass storagepackagingappx.APPX_CAPABILITY_CLASS_TYPE, capabilities **storagepackagingappx.IAppxManifestCapabilitiesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetCapabilitiesByCapabilityClass(capabilityClass, capabilities)))
+func (self IAppxManifestReader3) GetCapabilitiesByCapabilityClass(capabilityClass storagepackagingappx.APPX_CAPABILITY_CLASS_TYPE) (*storagepackagingappx.IAppxManifestCapabilitiesEnumerator, error) {
+	var _capabilities *storagepackagingappx.IAppxManifestCapabilitiesEnumerator
+	_hr := self.Raw.GetCapabilitiesByCapabilityClass(capabilityClass, &_capabilities)
+	return _capabilities, win32.HRESULTError(int32(_hr))
 }
 
 // GetTargetDeviceFamilies wraps the raw GetTargetDeviceFamilies call.
-func (self IAppxManifestReader3) GetTargetDeviceFamilies(targetDeviceFamilies **storagepackagingappx.IAppxManifestTargetDeviceFamiliesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetTargetDeviceFamilies(targetDeviceFamilies)))
+func (self IAppxManifestReader3) GetTargetDeviceFamilies() (*storagepackagingappx.IAppxManifestTargetDeviceFamiliesEnumerator, error) {
+	var _targetDeviceFamilies *storagepackagingappx.IAppxManifestTargetDeviceFamiliesEnumerator
+	_hr := self.Raw.GetTargetDeviceFamilies(&_targetDeviceFamilies)
+	return _targetDeviceFamilies, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestReader4 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestReader4 with error-returning methods.
@@ -1894,8 +2240,10 @@ func WrapIAppxManifestReader4(raw *storagepackagingappx.IAppxManifestReader4) IA
 }
 
 // GetOptionalPackageInfo wraps the raw GetOptionalPackageInfo call.
-func (self IAppxManifestReader4) GetOptionalPackageInfo(optionalPackageInfo **storagepackagingappx.IAppxManifestOptionalPackageInfo) error {
-	return win32.HRESULTError(int32(self.Raw.GetOptionalPackageInfo(optionalPackageInfo)))
+func (self IAppxManifestReader4) GetOptionalPackageInfo() (*storagepackagingappx.IAppxManifestOptionalPackageInfo, error) {
+	var _optionalPackageInfo *storagepackagingappx.IAppxManifestOptionalPackageInfo
+	_hr := self.Raw.GetOptionalPackageInfo(&_optionalPackageInfo)
+	return _optionalPackageInfo, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestReader5 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestReader5 with error-returning methods.
@@ -1910,8 +2258,10 @@ func WrapIAppxManifestReader5(raw *storagepackagingappx.IAppxManifestReader5) IA
 }
 
 // GetMainPackageDependencies wraps the raw GetMainPackageDependencies call.
-func (self IAppxManifestReader5) GetMainPackageDependencies(mainPackageDependencies **storagepackagingappx.IAppxManifestMainPackageDependenciesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetMainPackageDependencies(mainPackageDependencies)))
+func (self IAppxManifestReader5) GetMainPackageDependencies() (*storagepackagingappx.IAppxManifestMainPackageDependenciesEnumerator, error) {
+	var _mainPackageDependencies *storagepackagingappx.IAppxManifestMainPackageDependenciesEnumerator
+	_hr := self.Raw.GetMainPackageDependencies(&_mainPackageDependencies)
+	return _mainPackageDependencies, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestReader6 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestReader6 with error-returning methods.
@@ -1926,8 +2276,10 @@ func WrapIAppxManifestReader6(raw *storagepackagingappx.IAppxManifestReader6) IA
 }
 
 // GetIsNonQualifiedResourcePackage wraps the raw GetIsNonQualifiedResourcePackage call.
-func (self IAppxManifestReader6) GetIsNonQualifiedResourcePackage(isNonQualifiedResourcePackage *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetIsNonQualifiedResourcePackage(isNonQualifiedResourcePackage)))
+func (self IAppxManifestReader6) GetIsNonQualifiedResourcePackage() (foundation.BOOL, error) {
+	var _isNonQualifiedResourcePackage foundation.BOOL
+	_hr := self.Raw.GetIsNonQualifiedResourcePackage(&_isNonQualifiedResourcePackage)
+	return _isNonQualifiedResourcePackage, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestReader7 is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestReader7 with error-returning methods.
@@ -1942,18 +2294,24 @@ func WrapIAppxManifestReader7(raw *storagepackagingappx.IAppxManifestReader7) IA
 }
 
 // GetDriverDependencies wraps the raw GetDriverDependencies call.
-func (self IAppxManifestReader7) GetDriverDependencies(driverDependencies **storagepackagingappx.IAppxManifestDriverDependenciesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetDriverDependencies(driverDependencies)))
+func (self IAppxManifestReader7) GetDriverDependencies() (*storagepackagingappx.IAppxManifestDriverDependenciesEnumerator, error) {
+	var _driverDependencies *storagepackagingappx.IAppxManifestDriverDependenciesEnumerator
+	_hr := self.Raw.GetDriverDependencies(&_driverDependencies)
+	return _driverDependencies, win32.HRESULTError(int32(_hr))
 }
 
 // GetOSPackageDependencies wraps the raw GetOSPackageDependencies call.
-func (self IAppxManifestReader7) GetOSPackageDependencies(osPackageDependencies **storagepackagingappx.IAppxManifestOSPackageDependenciesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetOSPackageDependencies(osPackageDependencies)))
+func (self IAppxManifestReader7) GetOSPackageDependencies() (*storagepackagingappx.IAppxManifestOSPackageDependenciesEnumerator, error) {
+	var _osPackageDependencies *storagepackagingappx.IAppxManifestOSPackageDependenciesEnumerator
+	_hr := self.Raw.GetOSPackageDependencies(&_osPackageDependencies)
+	return _osPackageDependencies, win32.HRESULTError(int32(_hr))
 }
 
 // GetHostRuntimeDependencies wraps the raw GetHostRuntimeDependencies call.
-func (self IAppxManifestReader7) GetHostRuntimeDependencies(hostRuntimeDependencies **storagepackagingappx.IAppxManifestHostRuntimeDependenciesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetHostRuntimeDependencies(hostRuntimeDependencies)))
+func (self IAppxManifestReader7) GetHostRuntimeDependencies() (*storagepackagingappx.IAppxManifestHostRuntimeDependenciesEnumerator, error) {
+	var _hostRuntimeDependencies *storagepackagingappx.IAppxManifestHostRuntimeDependenciesEnumerator
+	_hr := self.Raw.GetHostRuntimeDependencies(&_hostRuntimeDependencies)
+	return _hostRuntimeDependencies, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestResourcesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestResourcesEnumerator with error-returning methods.
@@ -1968,18 +2326,24 @@ func WrapIAppxManifestResourcesEnumerator(raw *storagepackagingappx.IAppxManifes
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestResourcesEnumerator) GetCurrent(resource *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(resource)))
+func (self IAppxManifestResourcesEnumerator) GetCurrent() (foundation.PWSTR, error) {
+	var _resource foundation.PWSTR
+	_hr := self.Raw.GetCurrent(&_resource)
+	return _resource, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestResourcesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestResourcesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestResourcesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestResourcesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestTargetDeviceFamiliesEnumerator is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestTargetDeviceFamiliesEnumerator with error-returning methods.
@@ -1994,18 +2358,24 @@ func WrapIAppxManifestTargetDeviceFamiliesEnumerator(raw *storagepackagingappx.I
 }
 
 // GetCurrent wraps the raw GetCurrent call.
-func (self IAppxManifestTargetDeviceFamiliesEnumerator) GetCurrent(targetDeviceFamily **storagepackagingappx.IAppxManifestTargetDeviceFamily) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrent(targetDeviceFamily)))
+func (self IAppxManifestTargetDeviceFamiliesEnumerator) GetCurrent() (*storagepackagingappx.IAppxManifestTargetDeviceFamily, error) {
+	var _targetDeviceFamily *storagepackagingappx.IAppxManifestTargetDeviceFamily
+	_hr := self.Raw.GetCurrent(&_targetDeviceFamily)
+	return _targetDeviceFamily, win32.HRESULTError(int32(_hr))
 }
 
 // GetHasCurrent wraps the raw GetHasCurrent call.
-func (self IAppxManifestTargetDeviceFamiliesEnumerator) GetHasCurrent(hasCurrent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetHasCurrent(hasCurrent)))
+func (self IAppxManifestTargetDeviceFamiliesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+	var _hasCurrent foundation.BOOL
+	_hr := self.Raw.GetHasCurrent(&_hasCurrent)
+	return _hasCurrent, win32.HRESULTError(int32(_hr))
 }
 
 // MoveNext wraps the raw MoveNext call.
-func (self IAppxManifestTargetDeviceFamiliesEnumerator) MoveNext(hasNext *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MoveNext(hasNext)))
+func (self IAppxManifestTargetDeviceFamiliesEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	_hr := self.Raw.MoveNext(&_hasNext)
+	return _hasNext, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxManifestTargetDeviceFamily is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxManifestTargetDeviceFamily with error-returning methods.
@@ -2020,18 +2390,24 @@ func WrapIAppxManifestTargetDeviceFamily(raw *storagepackagingappx.IAppxManifest
 }
 
 // GetName wraps the raw GetName call.
-func (self IAppxManifestTargetDeviceFamily) GetName(name *foundation.PWSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetName(name)))
+func (self IAppxManifestTargetDeviceFamily) GetName() (foundation.PWSTR, error) {
+	var _name foundation.PWSTR
+	_hr := self.Raw.GetName(&_name)
+	return _name, win32.HRESULTError(int32(_hr))
 }
 
 // GetMinVersion wraps the raw GetMinVersion call.
-func (self IAppxManifestTargetDeviceFamily) GetMinVersion(minVersion *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetMinVersion(minVersion)))
+func (self IAppxManifestTargetDeviceFamily) GetMinVersion() (uint64, error) {
+	var _minVersion uint64
+	_hr := self.Raw.GetMinVersion(&_minVersion)
+	return _minVersion, win32.HRESULTError(int32(_hr))
 }
 
 // GetMaxVersionTested wraps the raw GetMaxVersionTested call.
-func (self IAppxManifestTargetDeviceFamily) GetMaxVersionTested(maxVersionTested *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetMaxVersionTested(maxVersionTested)))
+func (self IAppxManifestTargetDeviceFamily) GetMaxVersionTested() (uint64, error) {
+	var _maxVersionTested uint64
+	_hr := self.Raw.GetMaxVersionTested(&_maxVersionTested)
+	return _maxVersionTested, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxPackageEditor is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxPackageEditor with error-returning methods.
@@ -2090,29 +2466,39 @@ func WrapIAppxPackageReader(raw *storagepackagingappx.IAppxPackageReader) IAppxP
 }
 
 // GetBlockMap wraps the raw GetBlockMap call.
-func (self IAppxPackageReader) GetBlockMap(blockMapReader **storagepackagingappx.IAppxBlockMapReader) error {
-	return win32.HRESULTError(int32(self.Raw.GetBlockMap(blockMapReader)))
+func (self IAppxPackageReader) GetBlockMap() (*storagepackagingappx.IAppxBlockMapReader, error) {
+	var _blockMapReader *storagepackagingappx.IAppxBlockMapReader
+	_hr := self.Raw.GetBlockMap(&_blockMapReader)
+	return _blockMapReader, win32.HRESULTError(int32(_hr))
 }
 
 // GetFootprintFile wraps the raw GetFootprintFile call.
-func (self IAppxPackageReader) GetFootprintFile(type_ storagepackagingappx.APPX_FOOTPRINT_FILE_TYPE, file **storagepackagingappx.IAppxFile) error {
-	return win32.HRESULTError(int32(self.Raw.GetFootprintFile(type_, file)))
+func (self IAppxPackageReader) GetFootprintFile(type_ storagepackagingappx.APPX_FOOTPRINT_FILE_TYPE) (*storagepackagingappx.IAppxFile, error) {
+	var _file *storagepackagingappx.IAppxFile
+	_hr := self.Raw.GetFootprintFile(type_, &_file)
+	return _file, win32.HRESULTError(int32(_hr))
 }
 
 // GetPayloadFile wraps the raw GetPayloadFile call.
-func (self IAppxPackageReader) GetPayloadFile(fileName string, file **storagepackagingappx.IAppxFile) error {
+func (self IAppxPackageReader) GetPayloadFile(fileName string) (*storagepackagingappx.IAppxFile, error) {
 	_fileName := win32.UTF16Ptr(fileName)
-	return win32.HRESULTError(int32(self.Raw.GetPayloadFile(foundation.PWSTR(_fileName), file)))
+	var _file *storagepackagingappx.IAppxFile
+	_hr := self.Raw.GetPayloadFile(foundation.PWSTR(_fileName), &_file)
+	return _file, win32.HRESULTError(int32(_hr))
 }
 
 // GetPayloadFiles wraps the raw GetPayloadFiles call.
-func (self IAppxPackageReader) GetPayloadFiles(filesEnumerator **storagepackagingappx.IAppxFilesEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetPayloadFiles(filesEnumerator)))
+func (self IAppxPackageReader) GetPayloadFiles() (*storagepackagingappx.IAppxFilesEnumerator, error) {
+	var _filesEnumerator *storagepackagingappx.IAppxFilesEnumerator
+	_hr := self.Raw.GetPayloadFiles(&_filesEnumerator)
+	return _filesEnumerator, win32.HRESULTError(int32(_hr))
 }
 
 // GetManifest wraps the raw GetManifest call.
-func (self IAppxPackageReader) GetManifest(manifestReader **storagepackagingappx.IAppxManifestReader) error {
-	return win32.HRESULTError(int32(self.Raw.GetManifest(manifestReader)))
+func (self IAppxPackageReader) GetManifest() (*storagepackagingappx.IAppxManifestReader, error) {
+	var _manifestReader *storagepackagingappx.IAppxManifestReader
+	_hr := self.Raw.GetManifest(&_manifestReader)
+	return _manifestReader, win32.HRESULTError(int32(_hr))
 }
 
 // IAppxPackageWriter is an idiomatic wrapper over the raw COM interface Storage.Packaging.Appx.IAppxPackageWriter with error-returning methods.
@@ -2222,11 +2608,15 @@ func WrapIAppxSourceContentGroupMapReader(raw *storagepackagingappx.IAppxSourceC
 }
 
 // GetRequiredGroup wraps the raw GetRequiredGroup call.
-func (self IAppxSourceContentGroupMapReader) GetRequiredGroup(requiredGroup **storagepackagingappx.IAppxContentGroup) error {
-	return win32.HRESULTError(int32(self.Raw.GetRequiredGroup(requiredGroup)))
+func (self IAppxSourceContentGroupMapReader) GetRequiredGroup() (*storagepackagingappx.IAppxContentGroup, error) {
+	var _requiredGroup *storagepackagingappx.IAppxContentGroup
+	_hr := self.Raw.GetRequiredGroup(&_requiredGroup)
+	return _requiredGroup, win32.HRESULTError(int32(_hr))
 }
 
 // GetAutomaticGroups wraps the raw GetAutomaticGroups call.
-func (self IAppxSourceContentGroupMapReader) GetAutomaticGroups(automaticGroupsEnumerator **storagepackagingappx.IAppxContentGroupsEnumerator) error {
-	return win32.HRESULTError(int32(self.Raw.GetAutomaticGroups(automaticGroupsEnumerator)))
+func (self IAppxSourceContentGroupMapReader) GetAutomaticGroups() (*storagepackagingappx.IAppxContentGroupsEnumerator, error) {
+	var _automaticGroupsEnumerator *storagepackagingappx.IAppxContentGroupsEnumerator
+	_hr := self.Raw.GetAutomaticGroups(&_automaticGroupsEnumerator)
+	return _automaticGroupsEnumerator, win32.HRESULTError(int32(_hr))
 }

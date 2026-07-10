@@ -103,10 +103,27 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, method *win32m
 	context := typemap.Context{Namespace: meta.Namespace, QualifyOwn: true}
 	scratch := typemap.ImportSet{}
 
-	var decls, preamble, rawArgs []string
+	returnContext := context
+	returnContext.IsReturn = true
+	returnResolved := g.mapper.GoType(&method.Return, returnContext, scratch)
+	// RetVal elevation only makes sense when the status travels in the
+	// HRESULT return (which becomes the trailing error).
+	elevate := isHRESULT(returnResolved)
+
+	var decls, preamble, rawArgs, returnValues, returnTypes []string
 	for i := range method.Params {
 		param := &method.Params[i]
 		resolved := g.mapper.GoType(&param.Type, context, scratch)
+		if elevate {
+			if element, ok := retValElement(param, resolved); ok {
+				local := "_" + naming.ParamName(param.Name)
+				preamble = append(preamble, "var "+local+" "+element)
+				rawArgs = append(rawArgs, "&"+local)
+				returnValues = append(returnValues, local)
+				returnTypes = append(returnTypes, element)
+				continue
+			}
+		}
 		idiomatic := g.idiomaticParam(param, resolved, i)
 		if idiomatic.decl != "" {
 			decls = append(decls, idiomatic.decl)
@@ -117,10 +134,6 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, method *win32m
 		rawArgs = append(rawArgs, idiomatic.rawArg)
 	}
 
-	returnContext := context
-	returnContext.IsReturn = true
-	returnResolved := g.mapper.GoType(&method.Return, returnContext, scratch)
-
 	model := view.InterfaceMethodModel{
 		GoName:    naming.Export(method.Name),
 		RawGoName: rawGoName,
@@ -128,13 +141,19 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, method *win32m
 		Preamble:  preamble,
 		RawArgs:   rawArgs,
 	}
-	if isHRESULT(returnResolved) {
+	switch {
+	case isHRESULT(returnResolved) && len(returnValues) > 0:
+		model.Shape = view.FuncRetValError
+		model.ReturnValues = returnValues
+		model.ReturnSig = "(" + strings.Join(append(returnTypes, "error"), ", ") + ")"
+		imports["win32"] = g.modulePath + "/bindings/runtime/win32"
+	case isHRESULT(returnResolved):
 		model.Shape = view.FuncErrorOnly
 		model.ReturnSig = "error"
 		imports["win32"] = g.modulePath + "/bindings/runtime/win32"
-	} else if returnResolved.Kind == typemap.KindVoid {
+	case returnResolved.Kind == typemap.KindVoid:
 		model.Shape = view.FuncPassthrough
-	} else {
+	default:
 		model.Shape = view.FuncPassthrough
 		model.ReturnSig = returnResolved.GoType
 	}

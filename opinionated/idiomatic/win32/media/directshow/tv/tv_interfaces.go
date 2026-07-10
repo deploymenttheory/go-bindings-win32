@@ -34,8 +34,10 @@ func WrapIATSCChannelTuneRequest(raw *mediadirectshowtv.IATSCChannelTuneRequest)
 }
 
 // Get_MinorChannel wraps the raw Get_MinorChannel call.
-func (self IATSCChannelTuneRequest) Get_MinorChannel(MinorChannel *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinorChannel(MinorChannel)))
+func (self IATSCChannelTuneRequest) Get_MinorChannel() (int32, error) {
+	var _MinorChannel int32
+	_hr := self.Raw.Get_MinorChannel(&_MinorChannel)
+	return _MinorChannel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinorChannel wraps the raw Put_MinorChannel call.
@@ -55,8 +57,10 @@ func WrapIATSCComponentType(raw *mediadirectshowtv.IATSCComponentType) IATSCComp
 }
 
 // Get_Flags wraps the raw Get_Flags call.
-func (self IATSCComponentType) Get_Flags(Flags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Flags(Flags)))
+func (self IATSCComponentType) Get_Flags() (int32, error) {
+	var _Flags int32
+	_hr := self.Raw.Get_Flags(&_Flags)
+	return _Flags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Flags wraps the raw Put_Flags call.
@@ -76,8 +80,10 @@ func WrapIATSCLocator(raw *mediadirectshowtv.IATSCLocator) IATSCLocator {
 }
 
 // Get_PhysicalChannel wraps the raw Get_PhysicalChannel call.
-func (self IATSCLocator) Get_PhysicalChannel(PhysicalChannel *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PhysicalChannel(PhysicalChannel)))
+func (self IATSCLocator) Get_PhysicalChannel() (int32, error) {
+	var _PhysicalChannel int32
+	_hr := self.Raw.Get_PhysicalChannel(&_PhysicalChannel)
+	return _PhysicalChannel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PhysicalChannel wraps the raw Put_PhysicalChannel call.
@@ -86,8 +92,10 @@ func (self IATSCLocator) Put_PhysicalChannel(PhysicalChannel int32) error {
 }
 
 // Get_TSID wraps the raw Get_TSID call.
-func (self IATSCLocator) Get_TSID(TSID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TSID(TSID)))
+func (self IATSCLocator) Get_TSID() (int32, error) {
+	var _TSID int32
+	_hr := self.Raw.Get_TSID(&_TSID)
+	return _TSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TSID wraps the raw Put_TSID call.
@@ -107,8 +115,10 @@ func WrapIATSCLocator2(raw *mediadirectshowtv.IATSCLocator2) IATSCLocator2 {
 }
 
 // Get_ProgramNumber wraps the raw Get_ProgramNumber call.
-func (self IATSCLocator2) Get_ProgramNumber(ProgramNumber *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProgramNumber(ProgramNumber)))
+func (self IATSCLocator2) Get_ProgramNumber() (int32, error) {
+	var _ProgramNumber int32
+	_hr := self.Raw.Get_ProgramNumber(&_ProgramNumber)
+	return _ProgramNumber, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ProgramNumber wraps the raw Put_ProgramNumber call.
@@ -128,8 +138,10 @@ func WrapIATSCTuningSpace(raw *mediadirectshowtv.IATSCTuningSpace) IATSCTuningSp
 }
 
 // Get_MinMinorChannel wraps the raw Get_MinMinorChannel call.
-func (self IATSCTuningSpace) Get_MinMinorChannel(MinMinorChannelVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinMinorChannel(MinMinorChannelVal)))
+func (self IATSCTuningSpace) Get_MinMinorChannel() (int32, error) {
+	var _MinMinorChannelVal int32
+	_hr := self.Raw.Get_MinMinorChannel(&_MinMinorChannelVal)
+	return _MinMinorChannelVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinMinorChannel wraps the raw Put_MinMinorChannel call.
@@ -138,8 +150,10 @@ func (self IATSCTuningSpace) Put_MinMinorChannel(NewMinMinorChannelVal int32) er
 }
 
 // Get_MaxMinorChannel wraps the raw Get_MaxMinorChannel call.
-func (self IATSCTuningSpace) Get_MaxMinorChannel(MaxMinorChannelVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxMinorChannel(MaxMinorChannelVal)))
+func (self IATSCTuningSpace) Get_MaxMinorChannel() (int32, error) {
+	var _MaxMinorChannelVal int32
+	_hr := self.Raw.Get_MaxMinorChannel(&_MaxMinorChannelVal)
+	return _MaxMinorChannelVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxMinorChannel wraps the raw Put_MaxMinorChannel call.
@@ -148,8 +162,10 @@ func (self IATSCTuningSpace) Put_MaxMinorChannel(NewMaxMinorChannelVal int32) er
 }
 
 // Get_MinPhysicalChannel wraps the raw Get_MinPhysicalChannel call.
-func (self IATSCTuningSpace) Get_MinPhysicalChannel(MinPhysicalChannelVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinPhysicalChannel(MinPhysicalChannelVal)))
+func (self IATSCTuningSpace) Get_MinPhysicalChannel() (int32, error) {
+	var _MinPhysicalChannelVal int32
+	_hr := self.Raw.Get_MinPhysicalChannel(&_MinPhysicalChannelVal)
+	return _MinPhysicalChannelVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinPhysicalChannel wraps the raw Put_MinPhysicalChannel call.
@@ -158,8 +174,10 @@ func (self IATSCTuningSpace) Put_MinPhysicalChannel(NewMinPhysicalChannelVal int
 }
 
 // Get_MaxPhysicalChannel wraps the raw Get_MaxPhysicalChannel call.
-func (self IATSCTuningSpace) Get_MaxPhysicalChannel(MaxPhysicalChannelVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxPhysicalChannel(MaxPhysicalChannelVal)))
+func (self IATSCTuningSpace) Get_MaxPhysicalChannel() (int32, error) {
+	var _MaxPhysicalChannelVal int32
+	_hr := self.Raw.Get_MaxPhysicalChannel(&_MaxPhysicalChannelVal)
+	return _MaxPhysicalChannelVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxPhysicalChannel wraps the raw Put_MaxPhysicalChannel call.
@@ -559,8 +577,10 @@ func WrapIAnalogAudioComponentType(raw *mediadirectshowtv.IAnalogAudioComponentT
 }
 
 // Get_AnalogAudioMode wraps the raw Get_AnalogAudioMode call.
-func (self IAnalogAudioComponentType) Get_AnalogAudioMode(Mode *mediadirectshow.TVAudioMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AnalogAudioMode(Mode)))
+func (self IAnalogAudioComponentType) Get_AnalogAudioMode() (mediadirectshow.TVAudioMode, error) {
+	var _Mode mediadirectshow.TVAudioMode
+	_hr := self.Raw.Get_AnalogAudioMode(&_Mode)
+	return _Mode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AnalogAudioMode wraps the raw Put_AnalogAudioMode call.
@@ -580,8 +600,10 @@ func WrapIAnalogLocator(raw *mediadirectshowtv.IAnalogLocator) IAnalogLocator {
 }
 
 // Get_VideoStandard wraps the raw Get_VideoStandard call.
-func (self IAnalogLocator) Get_VideoStandard(AVS *mediadirectshow.AnalogVideoStandard) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VideoStandard(AVS)))
+func (self IAnalogLocator) Get_VideoStandard() (mediadirectshow.AnalogVideoStandard, error) {
+	var _AVS mediadirectshow.AnalogVideoStandard
+	_hr := self.Raw.Get_VideoStandard(&_AVS)
+	return _AVS, win32.HRESULTError(int32(_hr))
 }
 
 // Put_VideoStandard wraps the raw Put_VideoStandard call.
@@ -601,8 +623,10 @@ func WrapIAnalogRadioTuningSpace(raw *mediadirectshowtv.IAnalogRadioTuningSpace)
 }
 
 // Get_MinFrequency wraps the raw Get_MinFrequency call.
-func (self IAnalogRadioTuningSpace) Get_MinFrequency(MinFrequencyVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinFrequency(MinFrequencyVal)))
+func (self IAnalogRadioTuningSpace) Get_MinFrequency() (int32, error) {
+	var _MinFrequencyVal int32
+	_hr := self.Raw.Get_MinFrequency(&_MinFrequencyVal)
+	return _MinFrequencyVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinFrequency wraps the raw Put_MinFrequency call.
@@ -611,8 +635,10 @@ func (self IAnalogRadioTuningSpace) Put_MinFrequency(NewMinFrequencyVal int32) e
 }
 
 // Get_MaxFrequency wraps the raw Get_MaxFrequency call.
-func (self IAnalogRadioTuningSpace) Get_MaxFrequency(MaxFrequencyVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxFrequency(MaxFrequencyVal)))
+func (self IAnalogRadioTuningSpace) Get_MaxFrequency() (int32, error) {
+	var _MaxFrequencyVal int32
+	_hr := self.Raw.Get_MaxFrequency(&_MaxFrequencyVal)
+	return _MaxFrequencyVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxFrequency wraps the raw Put_MaxFrequency call.
@@ -621,8 +647,10 @@ func (self IAnalogRadioTuningSpace) Put_MaxFrequency(NewMaxFrequencyVal int32) e
 }
 
 // Get_Step wraps the raw Get_Step call.
-func (self IAnalogRadioTuningSpace) Get_Step(StepVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Step(StepVal)))
+func (self IAnalogRadioTuningSpace) Get_Step() (int32, error) {
+	var _StepVal int32
+	_hr := self.Raw.Get_Step(&_StepVal)
+	return _StepVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Step wraps the raw Put_Step call.
@@ -642,8 +670,10 @@ func WrapIAnalogRadioTuningSpace2(raw *mediadirectshowtv.IAnalogRadioTuningSpace
 }
 
 // Get_CountryCode wraps the raw Get_CountryCode call.
-func (self IAnalogRadioTuningSpace2) Get_CountryCode(CountryCodeVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CountryCode(CountryCodeVal)))
+func (self IAnalogRadioTuningSpace2) Get_CountryCode() (int32, error) {
+	var _CountryCodeVal int32
+	_hr := self.Raw.Get_CountryCode(&_CountryCodeVal)
+	return _CountryCodeVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CountryCode wraps the raw Put_CountryCode call.
@@ -663,8 +693,10 @@ func WrapIAnalogTVTuningSpace(raw *mediadirectshowtv.IAnalogTVTuningSpace) IAnal
 }
 
 // Get_MinChannel wraps the raw Get_MinChannel call.
-func (self IAnalogTVTuningSpace) Get_MinChannel(MinChannelVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinChannel(MinChannelVal)))
+func (self IAnalogTVTuningSpace) Get_MinChannel() (int32, error) {
+	var _MinChannelVal int32
+	_hr := self.Raw.Get_MinChannel(&_MinChannelVal)
+	return _MinChannelVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinChannel wraps the raw Put_MinChannel call.
@@ -673,8 +705,10 @@ func (self IAnalogTVTuningSpace) Put_MinChannel(NewMinChannelVal int32) error {
 }
 
 // Get_MaxChannel wraps the raw Get_MaxChannel call.
-func (self IAnalogTVTuningSpace) Get_MaxChannel(MaxChannelVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxChannel(MaxChannelVal)))
+func (self IAnalogTVTuningSpace) Get_MaxChannel() (int32, error) {
+	var _MaxChannelVal int32
+	_hr := self.Raw.Get_MaxChannel(&_MaxChannelVal)
+	return _MaxChannelVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxChannel wraps the raw Put_MaxChannel call.
@@ -683,8 +717,10 @@ func (self IAnalogTVTuningSpace) Put_MaxChannel(NewMaxChannelVal int32) error {
 }
 
 // Get_InputType wraps the raw Get_InputType call.
-func (self IAnalogTVTuningSpace) Get_InputType(InputTypeVal *mediadirectshow.TunerInputType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InputType(InputTypeVal)))
+func (self IAnalogTVTuningSpace) Get_InputType() (mediadirectshow.TunerInputType, error) {
+	var _InputTypeVal mediadirectshow.TunerInputType
+	_hr := self.Raw.Get_InputType(&_InputTypeVal)
+	return _InputTypeVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_InputType wraps the raw Put_InputType call.
@@ -693,8 +729,10 @@ func (self IAnalogTVTuningSpace) Put_InputType(NewInputTypeVal mediadirectshow.T
 }
 
 // Get_CountryCode wraps the raw Get_CountryCode call.
-func (self IAnalogTVTuningSpace) Get_CountryCode(CountryCodeVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CountryCode(CountryCodeVal)))
+func (self IAnalogTVTuningSpace) Get_CountryCode() (int32, error) {
+	var _CountryCodeVal int32
+	_hr := self.Raw.Get_CountryCode(&_CountryCodeVal)
+	return _CountryCodeVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CountryCode wraps the raw Put_CountryCode call.
@@ -875,8 +913,10 @@ func WrapIAuxInTuningSpace2(raw *mediadirectshowtv.IAuxInTuningSpace2) IAuxInTun
 }
 
 // Get_CountryCode wraps the raw Get_CountryCode call.
-func (self IAuxInTuningSpace2) Get_CountryCode(CountryCodeVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CountryCode(CountryCodeVal)))
+func (self IAuxInTuningSpace2) Get_CountryCode() (int32, error) {
+	var _CountryCodeVal int32
+	_hr := self.Raw.Get_CountryCode(&_CountryCodeVal)
+	return _CountryCodeVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CountryCode wraps the raw Put_CountryCode call.
@@ -896,33 +936,45 @@ func WrapIBDAComparable(raw *mediadirectshowtv.IBDAComparable) IBDAComparable {
 }
 
 // CompareExact wraps the raw CompareExact call.
-func (self IBDAComparable) CompareExact(CompareTo *systemcom.IDispatch, Result *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CompareExact(CompareTo, Result)))
+func (self IBDAComparable) CompareExact(CompareTo *systemcom.IDispatch) (int32, error) {
+	var _Result int32
+	_hr := self.Raw.CompareExact(CompareTo, &_Result)
+	return _Result, win32.HRESULTError(int32(_hr))
 }
 
 // CompareEquivalent wraps the raw CompareEquivalent call.
-func (self IBDAComparable) CompareEquivalent(CompareTo *systemcom.IDispatch, dwFlags uint32, Result *int32) error {
-	return win32.HRESULTError(int32(self.Raw.CompareEquivalent(CompareTo, dwFlags, Result)))
+func (self IBDAComparable) CompareEquivalent(CompareTo *systemcom.IDispatch, dwFlags uint32) (int32, error) {
+	var _Result int32
+	_hr := self.Raw.CompareEquivalent(CompareTo, dwFlags, &_Result)
+	return _Result, win32.HRESULTError(int32(_hr))
 }
 
 // HashExact wraps the raw HashExact call.
-func (self IBDAComparable) HashExact(Result *int64) error {
-	return win32.HRESULTError(int32(self.Raw.HashExact(Result)))
+func (self IBDAComparable) HashExact() (int64, error) {
+	var _Result int64
+	_hr := self.Raw.HashExact(&_Result)
+	return _Result, win32.HRESULTError(int32(_hr))
 }
 
 // HashExactIncremental wraps the raw HashExactIncremental call.
-func (self IBDAComparable) HashExactIncremental(PartialResult int64, Result *int64) error {
-	return win32.HRESULTError(int32(self.Raw.HashExactIncremental(PartialResult, Result)))
+func (self IBDAComparable) HashExactIncremental(PartialResult int64) (int64, error) {
+	var _Result int64
+	_hr := self.Raw.HashExactIncremental(PartialResult, &_Result)
+	return _Result, win32.HRESULTError(int32(_hr))
 }
 
 // HashEquivalent wraps the raw HashEquivalent call.
-func (self IBDAComparable) HashEquivalent(dwFlags uint32, Result *int64) error {
-	return win32.HRESULTError(int32(self.Raw.HashEquivalent(dwFlags, Result)))
+func (self IBDAComparable) HashEquivalent(dwFlags uint32) (int64, error) {
+	var _Result int64
+	_hr := self.Raw.HashEquivalent(dwFlags, &_Result)
+	return _Result, win32.HRESULTError(int32(_hr))
 }
 
 // HashEquivalentIncremental wraps the raw HashEquivalentIncremental call.
-func (self IBDAComparable) HashEquivalentIncremental(PartialResult int64, dwFlags uint32, Result *int64) error {
-	return win32.HRESULTError(int32(self.Raw.HashEquivalentIncremental(PartialResult, dwFlags, Result)))
+func (self IBDAComparable) HashEquivalentIncremental(PartialResult int64, dwFlags uint32) (int64, error) {
+	var _Result int64
+	_hr := self.Raw.HashEquivalentIncremental(PartialResult, dwFlags, &_Result)
+	return _Result, win32.HRESULTError(int32(_hr))
 }
 
 // IBDACreateTuneRequestEx is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IBDACreateTuneRequestEx with error-returning methods.
@@ -937,8 +989,10 @@ func WrapIBDACreateTuneRequestEx(raw *mediadirectshowtv.IBDACreateTuneRequestEx)
 }
 
 // CreateTuneRequestEx wraps the raw CreateTuneRequestEx call.
-func (self IBDACreateTuneRequestEx) CreateTuneRequestEx(TuneRequestIID *win32.GUID, TuneRequest **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTuneRequestEx(TuneRequestIID, TuneRequest)))
+func (self IBDACreateTuneRequestEx) CreateTuneRequestEx(TuneRequestIID *win32.GUID) (*mediadirectshowtv.ITuneRequest, error) {
+	var _TuneRequest *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.CreateTuneRequestEx(TuneRequestIID, &_TuneRequest)
+	return _TuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // IBDA_TIF_REGISTRATION is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IBDA_TIF_REGISTRATION with error-returning methods.
@@ -1071,8 +1125,10 @@ func WrapIChannelIDTuneRequest(raw *mediadirectshowtv.IChannelIDTuneRequest) ICh
 }
 
 // Get_ChannelID wraps the raw Get_ChannelID call.
-func (self IChannelIDTuneRequest) Get_ChannelID(ChannelID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ChannelID(ChannelID)))
+func (self IChannelIDTuneRequest) Get_ChannelID() (foundation.BSTR, error) {
+	var _ChannelID foundation.BSTR
+	_hr := self.Raw.Get_ChannelID(&_ChannelID)
+	return _ChannelID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ChannelID wraps the raw Put_ChannelID call.
@@ -1092,8 +1148,10 @@ func WrapIChannelTuneRequest(raw *mediadirectshowtv.IChannelTuneRequest) IChanne
 }
 
 // Get_Channel wraps the raw Get_Channel call.
-func (self IChannelTuneRequest) Get_Channel(Channel *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Channel(Channel)))
+func (self IChannelTuneRequest) Get_Channel() (int32, error) {
+	var _Channel int32
+	_hr := self.Raw.Get_Channel(&_Channel)
+	return _Channel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Channel wraps the raw Put_Channel call.
@@ -1113,8 +1171,10 @@ func WrapIComponent(raw *mediadirectshowtv.IComponent) IComponent {
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IComponent) Get_Type(CT **mediadirectshowtv.IComponentType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(CT)))
+func (self IComponent) Get_Type() (*mediadirectshowtv.IComponentType, error) {
+	var _CT *mediadirectshowtv.IComponentType
+	_hr := self.Raw.Get_Type(&_CT)
+	return _CT, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Type wraps the raw Put_Type call.
@@ -1123,8 +1183,10 @@ func (self IComponent) Put_Type(CT *mediadirectshowtv.IComponentType) error {
 }
 
 // Get_DescLangID wraps the raw Get_DescLangID call.
-func (self IComponent) Get_DescLangID(LangID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DescLangID(LangID)))
+func (self IComponent) Get_DescLangID() (int32, error) {
+	var _LangID int32
+	_hr := self.Raw.Get_DescLangID(&_LangID)
+	return _LangID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DescLangID wraps the raw Put_DescLangID call.
@@ -1133,8 +1195,10 @@ func (self IComponent) Put_DescLangID(LangID int32) error {
 }
 
 // Get_Status wraps the raw Get_Status call.
-func (self IComponent) Get_Status(Status *mediadirectshow.ComponentStatus) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Status(Status)))
+func (self IComponent) Get_Status() (mediadirectshow.ComponentStatus, error) {
+	var _Status mediadirectshow.ComponentStatus
+	_hr := self.Raw.Get_Status(&_Status)
+	return _Status, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Status wraps the raw Put_Status call.
@@ -1143,8 +1207,10 @@ func (self IComponent) Put_Status(Status mediadirectshow.ComponentStatus) error 
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IComponent) Get_Description(Description *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(Description)))
+func (self IComponent) Get_Description() (foundation.BSTR, error) {
+	var _Description foundation.BSTR
+	_hr := self.Raw.Get_Description(&_Description)
+	return _Description, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -1153,8 +1219,10 @@ func (self IComponent) Put_Description(Description foundation.BSTR) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IComponent) Clone(NewComponent **mediadirectshowtv.IComponent) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewComponent)))
+func (self IComponent) Clone() (*mediadirectshowtv.IComponent, error) {
+	var _NewComponent *mediadirectshowtv.IComponent
+	_hr := self.Raw.Clone(&_NewComponent)
+	return _NewComponent, win32.HRESULTError(int32(_hr))
 }
 
 // IComponentType is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IComponentType with error-returning methods.
@@ -1169,8 +1237,10 @@ func WrapIComponentType(raw *mediadirectshowtv.IComponentType) IComponentType {
 }
 
 // Get_Category wraps the raw Get_Category call.
-func (self IComponentType) Get_Category(Category *mediadirectshow.ComponentCategory) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Category(Category)))
+func (self IComponentType) Get_Category() (mediadirectshow.ComponentCategory, error) {
+	var _Category mediadirectshow.ComponentCategory
+	_hr := self.Raw.Get_Category(&_Category)
+	return _Category, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Category wraps the raw Put_Category call.
@@ -1179,8 +1249,10 @@ func (self IComponentType) Put_Category(Category mediadirectshow.ComponentCatego
 }
 
 // Get_MediaMajorType wraps the raw Get_MediaMajorType call.
-func (self IComponentType) Get_MediaMajorType(MediaMajorType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MediaMajorType(MediaMajorType)))
+func (self IComponentType) Get_MediaMajorType() (foundation.BSTR, error) {
+	var _MediaMajorType foundation.BSTR
+	_hr := self.Raw.Get_MediaMajorType(&_MediaMajorType)
+	return _MediaMajorType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MediaMajorType wraps the raw Put_MediaMajorType call.
@@ -1189,8 +1261,10 @@ func (self IComponentType) Put_MediaMajorType(MediaMajorType foundation.BSTR) er
 }
 
 // Get__MediaMajorType wraps the raw Get__MediaMajorType call.
-func (self IComponentType) Get__MediaMajorType(MediaMajorTypeGuid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__MediaMajorType(MediaMajorTypeGuid)))
+func (self IComponentType) Get__MediaMajorType() (win32.GUID, error) {
+	var _MediaMajorTypeGuid win32.GUID
+	_hr := self.Raw.Get__MediaMajorType(&_MediaMajorTypeGuid)
+	return _MediaMajorTypeGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Put__MediaMajorType wraps the raw Put__MediaMajorType call.
@@ -1199,8 +1273,10 @@ func (self IComponentType) Put__MediaMajorType(MediaMajorTypeGuid *win32.GUID) e
 }
 
 // Get_MediaSubType wraps the raw Get_MediaSubType call.
-func (self IComponentType) Get_MediaSubType(MediaSubType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MediaSubType(MediaSubType)))
+func (self IComponentType) Get_MediaSubType() (foundation.BSTR, error) {
+	var _MediaSubType foundation.BSTR
+	_hr := self.Raw.Get_MediaSubType(&_MediaSubType)
+	return _MediaSubType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MediaSubType wraps the raw Put_MediaSubType call.
@@ -1209,8 +1285,10 @@ func (self IComponentType) Put_MediaSubType(MediaSubType foundation.BSTR) error 
 }
 
 // Get__MediaSubType wraps the raw Get__MediaSubType call.
-func (self IComponentType) Get__MediaSubType(MediaSubTypeGuid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__MediaSubType(MediaSubTypeGuid)))
+func (self IComponentType) Get__MediaSubType() (win32.GUID, error) {
+	var _MediaSubTypeGuid win32.GUID
+	_hr := self.Raw.Get__MediaSubType(&_MediaSubTypeGuid)
+	return _MediaSubTypeGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Put__MediaSubType wraps the raw Put__MediaSubType call.
@@ -1219,8 +1297,10 @@ func (self IComponentType) Put__MediaSubType(MediaSubTypeGuid *win32.GUID) error
 }
 
 // Get_MediaFormatType wraps the raw Get_MediaFormatType call.
-func (self IComponentType) Get_MediaFormatType(MediaFormatType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MediaFormatType(MediaFormatType)))
+func (self IComponentType) Get_MediaFormatType() (foundation.BSTR, error) {
+	var _MediaFormatType foundation.BSTR
+	_hr := self.Raw.Get_MediaFormatType(&_MediaFormatType)
+	return _MediaFormatType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MediaFormatType wraps the raw Put_MediaFormatType call.
@@ -1229,8 +1309,10 @@ func (self IComponentType) Put_MediaFormatType(MediaFormatType foundation.BSTR) 
 }
 
 // Get__MediaFormatType wraps the raw Get__MediaFormatType call.
-func (self IComponentType) Get__MediaFormatType(MediaFormatTypeGuid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__MediaFormatType(MediaFormatTypeGuid)))
+func (self IComponentType) Get__MediaFormatType() (win32.GUID, error) {
+	var _MediaFormatTypeGuid win32.GUID
+	_hr := self.Raw.Get__MediaFormatType(&_MediaFormatTypeGuid)
+	return _MediaFormatTypeGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Put__MediaFormatType wraps the raw Put__MediaFormatType call.
@@ -1239,8 +1321,10 @@ func (self IComponentType) Put__MediaFormatType(MediaFormatTypeGuid *win32.GUID)
 }
 
 // Get_MediaType wraps the raw Get_MediaType call.
-func (self IComponentType) Get_MediaType(MediaType *mediamediafoundation.AM_MEDIA_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MediaType(MediaType)))
+func (self IComponentType) Get_MediaType() (mediamediafoundation.AM_MEDIA_TYPE, error) {
+	var _MediaType mediamediafoundation.AM_MEDIA_TYPE
+	_hr := self.Raw.Get_MediaType(&_MediaType)
+	return _MediaType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MediaType wraps the raw Put_MediaType call.
@@ -1249,8 +1333,10 @@ func (self IComponentType) Put_MediaType(MediaType *mediamediafoundation.AM_MEDI
 }
 
 // Clone wraps the raw Clone call.
-func (self IComponentType) Clone(NewCT **mediadirectshowtv.IComponentType) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewCT)))
+func (self IComponentType) Clone() (*mediadirectshowtv.IComponentType, error) {
+	var _NewCT *mediadirectshowtv.IComponentType
+	_hr := self.Raw.Clone(&_NewCT)
+	return _NewCT, win32.HRESULTError(int32(_hr))
 }
 
 // IComponentTypes is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IComponentTypes with error-returning methods.
@@ -1265,28 +1351,38 @@ func WrapIComponentTypes(raw *mediadirectshowtv.IComponentTypes) IComponentTypes
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IComponentTypes) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self IComponentTypes) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IComponentTypes) Get__NewEnum(ppNewEnum **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppNewEnum)))
+func (self IComponentTypes) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _ppNewEnum *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_ppNewEnum)
+	return _ppNewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // EnumComponentTypes wraps the raw EnumComponentTypes call.
-func (self IComponentTypes) EnumComponentTypes(ppNewEnum **mediadirectshowtv.IEnumComponentTypes) error {
-	return win32.HRESULTError(int32(self.Raw.EnumComponentTypes(ppNewEnum)))
+func (self IComponentTypes) EnumComponentTypes() (*mediadirectshowtv.IEnumComponentTypes, error) {
+	var _ppNewEnum *mediadirectshowtv.IEnumComponentTypes
+	_hr := self.Raw.EnumComponentTypes(&_ppNewEnum)
+	return _ppNewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self IComponentTypes) Add(ComponentType *mediadirectshowtv.IComponentType, NewIndex *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Add(ComponentType, NewIndex)))
+func (self IComponentTypes) Add(ComponentType *mediadirectshowtv.IComponentType) (systemvariant.VARIANT, error) {
+	var _NewIndex systemvariant.VARIANT
+	_hr := self.Raw.Add(ComponentType, &_NewIndex)
+	return _NewIndex, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IComponentTypes) Clone(NewList **mediadirectshowtv.IComponentTypes) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewList)))
+func (self IComponentTypes) Clone() (*mediadirectshowtv.IComponentTypes, error) {
+	var _NewList *mediadirectshowtv.IComponentTypes
+	_hr := self.Raw.Clone(&_NewList)
+	return _NewList, win32.HRESULTError(int32(_hr))
 }
 
 // IComponents is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IComponents with error-returning methods.
@@ -1301,28 +1397,38 @@ func WrapIComponents(raw *mediadirectshowtv.IComponents) IComponents {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IComponents) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self IComponents) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IComponents) Get__NewEnum(ppNewEnum **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppNewEnum)))
+func (self IComponents) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _ppNewEnum *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_ppNewEnum)
+	return _ppNewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // EnumComponents wraps the raw EnumComponents call.
-func (self IComponents) EnumComponents(ppNewEnum **mediadirectshowtv.IEnumComponents) error {
-	return win32.HRESULTError(int32(self.Raw.EnumComponents(ppNewEnum)))
+func (self IComponents) EnumComponents() (*mediadirectshowtv.IEnumComponents, error) {
+	var _ppNewEnum *mediadirectshowtv.IEnumComponents
+	_hr := self.Raw.EnumComponents(&_ppNewEnum)
+	return _ppNewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self IComponents) Add(Component *mediadirectshowtv.IComponent, NewIndex *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Add(Component, NewIndex)))
+func (self IComponents) Add(Component *mediadirectshowtv.IComponent) (systemvariant.VARIANT, error) {
+	var _NewIndex systemvariant.VARIANT
+	_hr := self.Raw.Add(Component, &_NewIndex)
+	return _NewIndex, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IComponents) Clone(NewList **mediadirectshowtv.IComponents) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewList)))
+func (self IComponents) Clone() (*mediadirectshowtv.IComponents, error) {
+	var _NewList *mediadirectshowtv.IComponents
+	_hr := self.Raw.Clone(&_NewList)
+	return _NewList, win32.HRESULTError(int32(_hr))
 }
 
 // IComponentsOld is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IComponentsOld with error-returning methods.
@@ -1337,28 +1443,38 @@ func WrapIComponentsOld(raw *mediadirectshowtv.IComponentsOld) IComponentsOld {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IComponentsOld) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self IComponentsOld) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IComponentsOld) Get__NewEnum(ppNewEnum **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppNewEnum)))
+func (self IComponentsOld) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _ppNewEnum *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_ppNewEnum)
+	return _ppNewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // EnumComponents wraps the raw EnumComponents call.
-func (self IComponentsOld) EnumComponents(ppNewEnum **mediadirectshowtv.IEnumComponents) error {
-	return win32.HRESULTError(int32(self.Raw.EnumComponents(ppNewEnum)))
+func (self IComponentsOld) EnumComponents() (*mediadirectshowtv.IEnumComponents, error) {
+	var _ppNewEnum *mediadirectshowtv.IEnumComponents
+	_hr := self.Raw.EnumComponents(&_ppNewEnum)
+	return _ppNewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self IComponentsOld) Add(Component *mediadirectshowtv.IComponent, NewIndex *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Add(Component, NewIndex)))
+func (self IComponentsOld) Add(Component *mediadirectshowtv.IComponent) (systemvariant.VARIANT, error) {
+	var _NewIndex systemvariant.VARIANT
+	_hr := self.Raw.Add(Component, &_NewIndex)
+	return _NewIndex, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self IComponentsOld) Clone(NewList **mediadirectshowtv.IComponents) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewList)))
+func (self IComponentsOld) Clone() (*mediadirectshowtv.IComponents, error) {
+	var _NewList *mediadirectshowtv.IComponents
+	_hr := self.Raw.Clone(&_NewList)
+	return _NewList, win32.HRESULTError(int32(_hr))
 }
 
 // ICreatePropBagOnRegKey is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.ICreatePropBagOnRegKey with error-returning methods.
@@ -1390,8 +1506,10 @@ func WrapIDTFilter(raw *mediadirectshowtv.IDTFilter) IDTFilter {
 }
 
 // Get_EvalRatObjOK wraps the raw Get_EvalRatObjOK call.
-func (self IDTFilter) Get_EvalRatObjOK(pHrCoCreateRetVal *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EvalRatObjOK(pHrCoCreateRetVal)))
+func (self IDTFilter) Get_EvalRatObjOK() (foundation.HRESULT, error) {
+	var _pHrCoCreateRetVal foundation.HRESULT
+	_hr := self.Raw.Get_EvalRatObjOK(&_pHrCoCreateRetVal)
+	return _pHrCoCreateRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrRating wraps the raw GetCurrRating call.
@@ -1400,8 +1518,10 @@ func (self IDTFilter) GetCurrRating(pEnSystem *mediadirectshowtv.EnTvRat_System,
 }
 
 // Get_BlockedRatingAttributes wraps the raw Get_BlockedRatingAttributes call.
-func (self IDTFilter) Get_BlockedRatingAttributes(enSystem mediadirectshowtv.EnTvRat_System, enLevel mediadirectshowtv.EnTvRat_GenericLevel, plbfEnAttr *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockedRatingAttributes(enSystem, enLevel, plbfEnAttr)))
+func (self IDTFilter) Get_BlockedRatingAttributes(enSystem mediadirectshowtv.EnTvRat_System, enLevel mediadirectshowtv.EnTvRat_GenericLevel) (int32, error) {
+	var _plbfEnAttr int32
+	_hr := self.Raw.Get_BlockedRatingAttributes(enSystem, enLevel, &_plbfEnAttr)
+	return _plbfEnAttr, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BlockedRatingAttributes wraps the raw Put_BlockedRatingAttributes call.
@@ -1410,8 +1530,10 @@ func (self IDTFilter) Put_BlockedRatingAttributes(enSystem mediadirectshowtv.EnT
 }
 
 // Get_BlockUnRated wraps the raw Get_BlockUnRated call.
-func (self IDTFilter) Get_BlockUnRated(pfBlockUnRatedShows *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockUnRated(pfBlockUnRatedShows)))
+func (self IDTFilter) Get_BlockUnRated() (foundation.BOOL, error) {
+	var _pfBlockUnRatedShows foundation.BOOL
+	_hr := self.Raw.Get_BlockUnRated(&_pfBlockUnRatedShows)
+	return _pfBlockUnRatedShows, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BlockUnRated wraps the raw Put_BlockUnRated call.
@@ -1421,8 +1543,10 @@ func (self IDTFilter) Put_BlockUnRated(fBlockUnRatedShows bool) error {
 }
 
 // Get_BlockUnRatedDelay wraps the raw Get_BlockUnRatedDelay call.
-func (self IDTFilter) Get_BlockUnRatedDelay(pmsecsDelayBeforeBlock *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockUnRatedDelay(pmsecsDelayBeforeBlock)))
+func (self IDTFilter) Get_BlockUnRatedDelay() (int32, error) {
+	var _pmsecsDelayBeforeBlock int32
+	_hr := self.Raw.Get_BlockUnRatedDelay(&_pmsecsDelayBeforeBlock)
+	return _pmsecsDelayBeforeBlock, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BlockUnRatedDelay wraps the raw Put_BlockUnRatedDelay call.
@@ -1548,8 +1672,10 @@ func WrapIDVBSLocator(raw *mediadirectshowtv.IDVBSLocator) IDVBSLocator {
 }
 
 // Get_SignalPolarisation wraps the raw Get_SignalPolarisation call.
-func (self IDVBSLocator) Get_SignalPolarisation(PolarisationVal *mediadirectshow.Polarisation) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SignalPolarisation(PolarisationVal)))
+func (self IDVBSLocator) Get_SignalPolarisation() (mediadirectshow.Polarisation, error) {
+	var _PolarisationVal mediadirectshow.Polarisation
+	_hr := self.Raw.Get_SignalPolarisation(&_PolarisationVal)
+	return _PolarisationVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SignalPolarisation wraps the raw Put_SignalPolarisation call.
@@ -1558,8 +1684,10 @@ func (self IDVBSLocator) Put_SignalPolarisation(PolarisationVal mediadirectshow.
 }
 
 // Get_WestPosition wraps the raw Get_WestPosition call.
-func (self IDVBSLocator) Get_WestPosition(WestLongitude *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WestPosition(WestLongitude)))
+func (self IDVBSLocator) Get_WestPosition() (foundation.VARIANT_BOOL, error) {
+	var _WestLongitude foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_WestPosition(&_WestLongitude)
+	return _WestLongitude, win32.HRESULTError(int32(_hr))
 }
 
 // Put_WestPosition wraps the raw Put_WestPosition call.
@@ -1568,8 +1696,10 @@ func (self IDVBSLocator) Put_WestPosition(WestLongitude foundation.VARIANT_BOOL)
 }
 
 // Get_OrbitalPosition wraps the raw Get_OrbitalPosition call.
-func (self IDVBSLocator) Get_OrbitalPosition(longitude *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OrbitalPosition(longitude)))
+func (self IDVBSLocator) Get_OrbitalPosition() (int32, error) {
+	var _longitude int32
+	_hr := self.Raw.Get_OrbitalPosition(&_longitude)
+	return _longitude, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OrbitalPosition wraps the raw Put_OrbitalPosition call.
@@ -1578,8 +1708,10 @@ func (self IDVBSLocator) Put_OrbitalPosition(longitude int32) error {
 }
 
 // Get_Azimuth wraps the raw Get_Azimuth call.
-func (self IDVBSLocator) Get_Azimuth(Azimuth *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Azimuth(Azimuth)))
+func (self IDVBSLocator) Get_Azimuth() (int32, error) {
+	var _Azimuth int32
+	_hr := self.Raw.Get_Azimuth(&_Azimuth)
+	return _Azimuth, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Azimuth wraps the raw Put_Azimuth call.
@@ -1588,8 +1720,10 @@ func (self IDVBSLocator) Put_Azimuth(Azimuth int32) error {
 }
 
 // Get_Elevation wraps the raw Get_Elevation call.
-func (self IDVBSLocator) Get_Elevation(Elevation *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Elevation(Elevation)))
+func (self IDVBSLocator) Get_Elevation() (int32, error) {
+	var _Elevation int32
+	_hr := self.Raw.Get_Elevation(&_Elevation)
+	return _Elevation, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Elevation wraps the raw Put_Elevation call.
@@ -1609,8 +1743,10 @@ func WrapIDVBSLocator2(raw *mediadirectshowtv.IDVBSLocator2) IDVBSLocator2 {
 }
 
 // Get_DiseqLNBSource wraps the raw Get_DiseqLNBSource call.
-func (self IDVBSLocator2) Get_DiseqLNBSource(DiseqLNBSourceVal *mediadirectshow.LNB_Source) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DiseqLNBSource(DiseqLNBSourceVal)))
+func (self IDVBSLocator2) Get_DiseqLNBSource() (mediadirectshow.LNB_Source, error) {
+	var _DiseqLNBSourceVal mediadirectshow.LNB_Source
+	_hr := self.Raw.Get_DiseqLNBSource(&_DiseqLNBSourceVal)
+	return _DiseqLNBSourceVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DiseqLNBSource wraps the raw Put_DiseqLNBSource call.
@@ -1619,8 +1755,10 @@ func (self IDVBSLocator2) Put_DiseqLNBSource(DiseqLNBSourceVal mediadirectshow.L
 }
 
 // Get_LocalOscillatorOverrideLow wraps the raw Get_LocalOscillatorOverrideLow call.
-func (self IDVBSLocator2) Get_LocalOscillatorOverrideLow(LocalOscillatorOverrideLowVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalOscillatorOverrideLow(LocalOscillatorOverrideLowVal)))
+func (self IDVBSLocator2) Get_LocalOscillatorOverrideLow() (int32, error) {
+	var _LocalOscillatorOverrideLowVal int32
+	_hr := self.Raw.Get_LocalOscillatorOverrideLow(&_LocalOscillatorOverrideLowVal)
+	return _LocalOscillatorOverrideLowVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalOscillatorOverrideLow wraps the raw Put_LocalOscillatorOverrideLow call.
@@ -1629,8 +1767,10 @@ func (self IDVBSLocator2) Put_LocalOscillatorOverrideLow(LocalOscillatorOverride
 }
 
 // Get_LocalOscillatorOverrideHigh wraps the raw Get_LocalOscillatorOverrideHigh call.
-func (self IDVBSLocator2) Get_LocalOscillatorOverrideHigh(LocalOscillatorOverrideHighVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalOscillatorOverrideHigh(LocalOscillatorOverrideHighVal)))
+func (self IDVBSLocator2) Get_LocalOscillatorOverrideHigh() (int32, error) {
+	var _LocalOscillatorOverrideHighVal int32
+	_hr := self.Raw.Get_LocalOscillatorOverrideHigh(&_LocalOscillatorOverrideHighVal)
+	return _LocalOscillatorOverrideHighVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalOscillatorOverrideHigh wraps the raw Put_LocalOscillatorOverrideHigh call.
@@ -1639,8 +1779,10 @@ func (self IDVBSLocator2) Put_LocalOscillatorOverrideHigh(LocalOscillatorOverrid
 }
 
 // Get_LocalLNBSwitchOverride wraps the raw Get_LocalLNBSwitchOverride call.
-func (self IDVBSLocator2) Get_LocalLNBSwitchOverride(LocalLNBSwitchOverrideVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalLNBSwitchOverride(LocalLNBSwitchOverrideVal)))
+func (self IDVBSLocator2) Get_LocalLNBSwitchOverride() (int32, error) {
+	var _LocalLNBSwitchOverrideVal int32
+	_hr := self.Raw.Get_LocalLNBSwitchOverride(&_LocalLNBSwitchOverrideVal)
+	return _LocalLNBSwitchOverrideVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalLNBSwitchOverride wraps the raw Put_LocalLNBSwitchOverride call.
@@ -1649,8 +1791,10 @@ func (self IDVBSLocator2) Put_LocalLNBSwitchOverride(LocalLNBSwitchOverrideVal i
 }
 
 // Get_LocalSpectralInversionOverride wraps the raw Get_LocalSpectralInversionOverride call.
-func (self IDVBSLocator2) Get_LocalSpectralInversionOverride(LocalSpectralInversionOverrideVal *mediadirectshow.SpectralInversion) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalSpectralInversionOverride(LocalSpectralInversionOverrideVal)))
+func (self IDVBSLocator2) Get_LocalSpectralInversionOverride() (mediadirectshow.SpectralInversion, error) {
+	var _LocalSpectralInversionOverrideVal mediadirectshow.SpectralInversion
+	_hr := self.Raw.Get_LocalSpectralInversionOverride(&_LocalSpectralInversionOverrideVal)
+	return _LocalSpectralInversionOverrideVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalSpectralInversionOverride wraps the raw Put_LocalSpectralInversionOverride call.
@@ -1659,8 +1803,10 @@ func (self IDVBSLocator2) Put_LocalSpectralInversionOverride(LocalSpectralInvers
 }
 
 // Get_SignalRollOff wraps the raw Get_SignalRollOff call.
-func (self IDVBSLocator2) Get_SignalRollOff(RollOffVal *mediadirectshow.RollOff) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SignalRollOff(RollOffVal)))
+func (self IDVBSLocator2) Get_SignalRollOff() (mediadirectshow.RollOff, error) {
+	var _RollOffVal mediadirectshow.RollOff
+	_hr := self.Raw.Get_SignalRollOff(&_RollOffVal)
+	return _RollOffVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SignalRollOff wraps the raw Put_SignalRollOff call.
@@ -1669,8 +1815,10 @@ func (self IDVBSLocator2) Put_SignalRollOff(RollOffVal mediadirectshow.RollOff) 
 }
 
 // Get_SignalPilot wraps the raw Get_SignalPilot call.
-func (self IDVBSLocator2) Get_SignalPilot(PilotVal *mediadirectshow.Pilot) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SignalPilot(PilotVal)))
+func (self IDVBSLocator2) Get_SignalPilot() (mediadirectshow.Pilot, error) {
+	var _PilotVal mediadirectshow.Pilot
+	_hr := self.Raw.Get_SignalPilot(&_PilotVal)
+	return _PilotVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SignalPilot wraps the raw Put_SignalPilot call.
@@ -1690,8 +1838,10 @@ func WrapIDVBSTuningSpace(raw *mediadirectshowtv.IDVBSTuningSpace) IDVBSTuningSp
 }
 
 // Get_LowOscillator wraps the raw Get_LowOscillator call.
-func (self IDVBSTuningSpace) Get_LowOscillator(LowOscillator *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LowOscillator(LowOscillator)))
+func (self IDVBSTuningSpace) Get_LowOscillator() (int32, error) {
+	var _LowOscillator int32
+	_hr := self.Raw.Get_LowOscillator(&_LowOscillator)
+	return _LowOscillator, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LowOscillator wraps the raw Put_LowOscillator call.
@@ -1700,8 +1850,10 @@ func (self IDVBSTuningSpace) Put_LowOscillator(LowOscillator int32) error {
 }
 
 // Get_HighOscillator wraps the raw Get_HighOscillator call.
-func (self IDVBSTuningSpace) Get_HighOscillator(HighOscillator *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HighOscillator(HighOscillator)))
+func (self IDVBSTuningSpace) Get_HighOscillator() (int32, error) {
+	var _HighOscillator int32
+	_hr := self.Raw.Get_HighOscillator(&_HighOscillator)
+	return _HighOscillator, win32.HRESULTError(int32(_hr))
 }
 
 // Put_HighOscillator wraps the raw Put_HighOscillator call.
@@ -1710,8 +1862,10 @@ func (self IDVBSTuningSpace) Put_HighOscillator(HighOscillator int32) error {
 }
 
 // Get_LNBSwitch wraps the raw Get_LNBSwitch call.
-func (self IDVBSTuningSpace) Get_LNBSwitch(LNBSwitch *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LNBSwitch(LNBSwitch)))
+func (self IDVBSTuningSpace) Get_LNBSwitch() (int32, error) {
+	var _LNBSwitch int32
+	_hr := self.Raw.Get_LNBSwitch(&_LNBSwitch)
+	return _LNBSwitch, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LNBSwitch wraps the raw Put_LNBSwitch call.
@@ -1720,8 +1874,10 @@ func (self IDVBSTuningSpace) Put_LNBSwitch(LNBSwitch int32) error {
 }
 
 // Get_InputRange wraps the raw Get_InputRange call.
-func (self IDVBSTuningSpace) Get_InputRange(InputRange *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InputRange(InputRange)))
+func (self IDVBSTuningSpace) Get_InputRange() (foundation.BSTR, error) {
+	var _InputRange foundation.BSTR
+	_hr := self.Raw.Get_InputRange(&_InputRange)
+	return _InputRange, win32.HRESULTError(int32(_hr))
 }
 
 // Put_InputRange wraps the raw Put_InputRange call.
@@ -1730,8 +1886,10 @@ func (self IDVBSTuningSpace) Put_InputRange(InputRange foundation.BSTR) error {
 }
 
 // Get_SpectralInversion wraps the raw Get_SpectralInversion call.
-func (self IDVBSTuningSpace) Get_SpectralInversion(SpectralInversionVal *mediadirectshow.SpectralInversion) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SpectralInversion(SpectralInversionVal)))
+func (self IDVBSTuningSpace) Get_SpectralInversion() (mediadirectshow.SpectralInversion, error) {
+	var _SpectralInversionVal mediadirectshow.SpectralInversion
+	_hr := self.Raw.Get_SpectralInversion(&_SpectralInversionVal)
+	return _SpectralInversionVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SpectralInversion wraps the raw Put_SpectralInversion call.
@@ -1751,8 +1909,10 @@ func WrapIDVBTLocator(raw *mediadirectshowtv.IDVBTLocator) IDVBTLocator {
 }
 
 // Get_Bandwidth wraps the raw Get_Bandwidth call.
-func (self IDVBTLocator) Get_Bandwidth(BandWidthVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Bandwidth(BandWidthVal)))
+func (self IDVBTLocator) Get_Bandwidth() (int32, error) {
+	var _BandWidthVal int32
+	_hr := self.Raw.Get_Bandwidth(&_BandWidthVal)
+	return _BandWidthVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Bandwidth wraps the raw Put_Bandwidth call.
@@ -1761,8 +1921,10 @@ func (self IDVBTLocator) Put_Bandwidth(BandwidthVal int32) error {
 }
 
 // Get_LPInnerFEC wraps the raw Get_LPInnerFEC call.
-func (self IDVBTLocator) Get_LPInnerFEC(FEC *mediadirectshow.FECMethod) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LPInnerFEC(FEC)))
+func (self IDVBTLocator) Get_LPInnerFEC() (mediadirectshow.FECMethod, error) {
+	var _FEC mediadirectshow.FECMethod
+	_hr := self.Raw.Get_LPInnerFEC(&_FEC)
+	return _FEC, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LPInnerFEC wraps the raw Put_LPInnerFEC call.
@@ -1771,8 +1933,10 @@ func (self IDVBTLocator) Put_LPInnerFEC(FEC mediadirectshow.FECMethod) error {
 }
 
 // Get_LPInnerFECRate wraps the raw Get_LPInnerFECRate call.
-func (self IDVBTLocator) Get_LPInnerFECRate(FEC *mediadirectshow.BinaryConvolutionCodeRate) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LPInnerFECRate(FEC)))
+func (self IDVBTLocator) Get_LPInnerFECRate() (mediadirectshow.BinaryConvolutionCodeRate, error) {
+	var _FEC mediadirectshow.BinaryConvolutionCodeRate
+	_hr := self.Raw.Get_LPInnerFECRate(&_FEC)
+	return _FEC, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LPInnerFECRate wraps the raw Put_LPInnerFECRate call.
@@ -1781,8 +1945,10 @@ func (self IDVBTLocator) Put_LPInnerFECRate(FEC mediadirectshow.BinaryConvolutio
 }
 
 // Get_HAlpha wraps the raw Get_HAlpha call.
-func (self IDVBTLocator) Get_HAlpha(Alpha *mediadirectshow.HierarchyAlpha) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HAlpha(Alpha)))
+func (self IDVBTLocator) Get_HAlpha() (mediadirectshow.HierarchyAlpha, error) {
+	var _Alpha mediadirectshow.HierarchyAlpha
+	_hr := self.Raw.Get_HAlpha(&_Alpha)
+	return _Alpha, win32.HRESULTError(int32(_hr))
 }
 
 // Put_HAlpha wraps the raw Put_HAlpha call.
@@ -1791,8 +1957,10 @@ func (self IDVBTLocator) Put_HAlpha(Alpha mediadirectshow.HierarchyAlpha) error 
 }
 
 // Get_Guard wraps the raw Get_Guard call.
-func (self IDVBTLocator) Get_Guard(GI *mediadirectshow.GuardInterval) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Guard(GI)))
+func (self IDVBTLocator) Get_Guard() (mediadirectshow.GuardInterval, error) {
+	var _GI mediadirectshow.GuardInterval
+	_hr := self.Raw.Get_Guard(&_GI)
+	return _GI, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Guard wraps the raw Put_Guard call.
@@ -1801,8 +1969,10 @@ func (self IDVBTLocator) Put_Guard(GI mediadirectshow.GuardInterval) error {
 }
 
 // Get_Mode wraps the raw Get_Mode call.
-func (self IDVBTLocator) Get_Mode(mode *mediadirectshow.TransmissionMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Mode(mode)))
+func (self IDVBTLocator) Get_Mode() (mediadirectshow.TransmissionMode, error) {
+	var _mode mediadirectshow.TransmissionMode
+	_hr := self.Raw.Get_Mode(&_mode)
+	return _mode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Mode wraps the raw Put_Mode call.
@@ -1811,8 +1981,10 @@ func (self IDVBTLocator) Put_Mode(mode mediadirectshow.TransmissionMode) error {
 }
 
 // Get_OtherFrequencyInUse wraps the raw Get_OtherFrequencyInUse call.
-func (self IDVBTLocator) Get_OtherFrequencyInUse(OtherFrequencyInUseVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OtherFrequencyInUse(OtherFrequencyInUseVal)))
+func (self IDVBTLocator) Get_OtherFrequencyInUse() (foundation.VARIANT_BOOL, error) {
+	var _OtherFrequencyInUseVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_OtherFrequencyInUse(&_OtherFrequencyInUseVal)
+	return _OtherFrequencyInUseVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OtherFrequencyInUse wraps the raw Put_OtherFrequencyInUse call.
@@ -1832,8 +2004,10 @@ func WrapIDVBTLocator2(raw *mediadirectshowtv.IDVBTLocator2) IDVBTLocator2 {
 }
 
 // Get_PhysicalLayerPipeId wraps the raw Get_PhysicalLayerPipeId call.
-func (self IDVBTLocator2) Get_PhysicalLayerPipeId(PhysicalLayerPipeIdVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PhysicalLayerPipeId(PhysicalLayerPipeIdVal)))
+func (self IDVBTLocator2) Get_PhysicalLayerPipeId() (int32, error) {
+	var _PhysicalLayerPipeIdVal int32
+	_hr := self.Raw.Get_PhysicalLayerPipeId(&_PhysicalLayerPipeIdVal)
+	return _PhysicalLayerPipeIdVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PhysicalLayerPipeId wraps the raw Put_PhysicalLayerPipeId call.
@@ -1853,8 +2027,10 @@ func WrapIDVBTuneRequest(raw *mediadirectshowtv.IDVBTuneRequest) IDVBTuneRequest
 }
 
 // Get_ONID wraps the raw Get_ONID call.
-func (self IDVBTuneRequest) Get_ONID(ONID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ONID(ONID)))
+func (self IDVBTuneRequest) Get_ONID() (int32, error) {
+	var _ONID int32
+	_hr := self.Raw.Get_ONID(&_ONID)
+	return _ONID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ONID wraps the raw Put_ONID call.
@@ -1863,8 +2039,10 @@ func (self IDVBTuneRequest) Put_ONID(ONID int32) error {
 }
 
 // Get_TSID wraps the raw Get_TSID call.
-func (self IDVBTuneRequest) Get_TSID(TSID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TSID(TSID)))
+func (self IDVBTuneRequest) Get_TSID() (int32, error) {
+	var _TSID int32
+	_hr := self.Raw.Get_TSID(&_TSID)
+	return _TSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TSID wraps the raw Put_TSID call.
@@ -1873,8 +2051,10 @@ func (self IDVBTuneRequest) Put_TSID(TSID int32) error {
 }
 
 // Get_SID wraps the raw Get_SID call.
-func (self IDVBTuneRequest) Get_SID(SID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SID(SID)))
+func (self IDVBTuneRequest) Get_SID() (int32, error) {
+	var _SID int32
+	_hr := self.Raw.Get_SID(&_SID)
+	return _SID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SID wraps the raw Put_SID call.
@@ -1894,8 +2074,10 @@ func WrapIDVBTuningSpace(raw *mediadirectshowtv.IDVBTuningSpace) IDVBTuningSpace
 }
 
 // Get_SystemType wraps the raw Get_SystemType call.
-func (self IDVBTuningSpace) Get_SystemType(SysType *mediadirectshow.DVBSystemType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SystemType(SysType)))
+func (self IDVBTuningSpace) Get_SystemType() (mediadirectshow.DVBSystemType, error) {
+	var _SysType mediadirectshow.DVBSystemType
+	_hr := self.Raw.Get_SystemType(&_SysType)
+	return _SysType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SystemType wraps the raw Put_SystemType call.
@@ -1915,8 +2097,10 @@ func WrapIDVBTuningSpace2(raw *mediadirectshowtv.IDVBTuningSpace2) IDVBTuningSpa
 }
 
 // Get_NetworkID wraps the raw Get_NetworkID call.
-func (self IDVBTuningSpace2) Get_NetworkID(NetworkID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkID(NetworkID)))
+func (self IDVBTuningSpace2) Get_NetworkID() (int32, error) {
+	var _NetworkID int32
+	_hr := self.Raw.Get_NetworkID(&_NetworkID)
+	return _NetworkID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NetworkID wraps the raw Put_NetworkID call.
@@ -2608,8 +2792,10 @@ func WrapIDigitalCableTuneRequest(raw *mediadirectshowtv.IDigitalCableTuneReques
 }
 
 // Get_MajorChannel wraps the raw Get_MajorChannel call.
-func (self IDigitalCableTuneRequest) Get_MajorChannel(pMajorChannel *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MajorChannel(pMajorChannel)))
+func (self IDigitalCableTuneRequest) Get_MajorChannel() (int32, error) {
+	var _pMajorChannel int32
+	_hr := self.Raw.Get_MajorChannel(&_pMajorChannel)
+	return _pMajorChannel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MajorChannel wraps the raw Put_MajorChannel call.
@@ -2618,8 +2804,10 @@ func (self IDigitalCableTuneRequest) Put_MajorChannel(MajorChannel int32) error 
 }
 
 // Get_SourceID wraps the raw Get_SourceID call.
-func (self IDigitalCableTuneRequest) Get_SourceID(pSourceID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SourceID(pSourceID)))
+func (self IDigitalCableTuneRequest) Get_SourceID() (int32, error) {
+	var _pSourceID int32
+	_hr := self.Raw.Get_SourceID(&_pSourceID)
+	return _pSourceID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SourceID wraps the raw Put_SourceID call.
@@ -2639,8 +2827,10 @@ func WrapIDigitalCableTuningSpace(raw *mediadirectshowtv.IDigitalCableTuningSpac
 }
 
 // Get_MinMajorChannel wraps the raw Get_MinMajorChannel call.
-func (self IDigitalCableTuningSpace) Get_MinMajorChannel(MinMajorChannelVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinMajorChannel(MinMajorChannelVal)))
+func (self IDigitalCableTuningSpace) Get_MinMajorChannel() (int32, error) {
+	var _MinMajorChannelVal int32
+	_hr := self.Raw.Get_MinMajorChannel(&_MinMajorChannelVal)
+	return _MinMajorChannelVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinMajorChannel wraps the raw Put_MinMajorChannel call.
@@ -2649,8 +2839,10 @@ func (self IDigitalCableTuningSpace) Put_MinMajorChannel(NewMinMajorChannelVal i
 }
 
 // Get_MaxMajorChannel wraps the raw Get_MaxMajorChannel call.
-func (self IDigitalCableTuningSpace) Get_MaxMajorChannel(MaxMajorChannelVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxMajorChannel(MaxMajorChannelVal)))
+func (self IDigitalCableTuningSpace) Get_MaxMajorChannel() (int32, error) {
+	var _MaxMajorChannelVal int32
+	_hr := self.Raw.Get_MaxMajorChannel(&_MaxMajorChannelVal)
+	return _MaxMajorChannelVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxMajorChannel wraps the raw Put_MaxMajorChannel call.
@@ -2659,8 +2851,10 @@ func (self IDigitalCableTuningSpace) Put_MaxMajorChannel(NewMaxMajorChannelVal i
 }
 
 // Get_MinSourceID wraps the raw Get_MinSourceID call.
-func (self IDigitalCableTuningSpace) Get_MinSourceID(MinSourceIDVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinSourceID(MinSourceIDVal)))
+func (self IDigitalCableTuningSpace) Get_MinSourceID() (int32, error) {
+	var _MinSourceIDVal int32
+	_hr := self.Raw.Get_MinSourceID(&_MinSourceIDVal)
+	return _MinSourceIDVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinSourceID wraps the raw Put_MinSourceID call.
@@ -2669,8 +2863,10 @@ func (self IDigitalCableTuningSpace) Put_MinSourceID(NewMinSourceIDVal int32) er
 }
 
 // Get_MaxSourceID wraps the raw Get_MaxSourceID call.
-func (self IDigitalCableTuningSpace) Get_MaxSourceID(MaxSourceIDVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxSourceID(MaxSourceIDVal)))
+func (self IDigitalCableTuningSpace) Get_MaxSourceID() (int32, error) {
+	var _MaxSourceIDVal int32
+	_hr := self.Raw.Get_MaxSourceID(&_MaxSourceIDVal)
+	return _MaxSourceIDVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxSourceID wraps the raw Put_MaxSourceID call.
@@ -3946,8 +4142,10 @@ func WrapIESCloseMmiEvent(raw *mediadirectshowtv.IESCloseMmiEvent) IESCloseMmiEv
 }
 
 // GetDialogNumber wraps the raw GetDialogNumber call.
-func (self IESCloseMmiEvent) GetDialogNumber(pDialogNumber *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetDialogNumber(pDialogNumber)))
+func (self IESCloseMmiEvent) GetDialogNumber() (uint32, error) {
+	var _pDialogNumber uint32
+	_hr := self.Raw.GetDialogNumber(&_pDialogNumber)
+	return _pDialogNumber, win32.HRESULTError(int32(_hr))
 }
 
 // IESEventFactory is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IESEventFactory with error-returning methods.
@@ -4030,33 +4228,45 @@ func WrapIESFileExpiryDateEvent(raw *mediadirectshowtv.IESFileExpiryDateEvent) I
 }
 
 // GetTunerId wraps the raw GetTunerId call.
-func (self IESFileExpiryDateEvent) GetTunerId(pguidTunerId *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetTunerId(pguidTunerId)))
+func (self IESFileExpiryDateEvent) GetTunerId() (win32.GUID, error) {
+	var _pguidTunerId win32.GUID
+	_hr := self.Raw.GetTunerId(&_pguidTunerId)
+	return _pguidTunerId, win32.HRESULTError(int32(_hr))
 }
 
 // GetExpiryDate wraps the raw GetExpiryDate call.
-func (self IESFileExpiryDateEvent) GetExpiryDate(pqwExpiryDate *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetExpiryDate(pqwExpiryDate)))
+func (self IESFileExpiryDateEvent) GetExpiryDate() (uint64, error) {
+	var _pqwExpiryDate uint64
+	_hr := self.Raw.GetExpiryDate(&_pqwExpiryDate)
+	return _pqwExpiryDate, win32.HRESULTError(int32(_hr))
 }
 
 // GetFinalExpiryDate wraps the raw GetFinalExpiryDate call.
-func (self IESFileExpiryDateEvent) GetFinalExpiryDate(pqwExpiryDate *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetFinalExpiryDate(pqwExpiryDate)))
+func (self IESFileExpiryDateEvent) GetFinalExpiryDate() (uint64, error) {
+	var _pqwExpiryDate uint64
+	_hr := self.Raw.GetFinalExpiryDate(&_pqwExpiryDate)
+	return _pqwExpiryDate, win32.HRESULTError(int32(_hr))
 }
 
 // GetMaxRenewalCount wraps the raw GetMaxRenewalCount call.
-func (self IESFileExpiryDateEvent) GetMaxRenewalCount(dwMaxRenewalCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetMaxRenewalCount(dwMaxRenewalCount)))
+func (self IESFileExpiryDateEvent) GetMaxRenewalCount() (uint32, error) {
+	var _dwMaxRenewalCount uint32
+	_hr := self.Raw.GetMaxRenewalCount(&_dwMaxRenewalCount)
+	return _dwMaxRenewalCount, win32.HRESULTError(int32(_hr))
 }
 
 // IsEntitlementTokenPresent wraps the raw IsEntitlementTokenPresent call.
-func (self IESFileExpiryDateEvent) IsEntitlementTokenPresent(pfEntTokenPresent *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEntitlementTokenPresent(pfEntTokenPresent)))
+func (self IESFileExpiryDateEvent) IsEntitlementTokenPresent() (foundation.BOOL, error) {
+	var _pfEntTokenPresent foundation.BOOL
+	_hr := self.Raw.IsEntitlementTokenPresent(&_pfEntTokenPresent)
+	return _pfEntTokenPresent, win32.HRESULTError(int32(_hr))
 }
 
 // DoesExpireAfterFirstUse wraps the raw DoesExpireAfterFirstUse call.
-func (self IESFileExpiryDateEvent) DoesExpireAfterFirstUse(pfExpireAfterFirstUse *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.DoesExpireAfterFirstUse(pfExpireAfterFirstUse)))
+func (self IESFileExpiryDateEvent) DoesExpireAfterFirstUse() (foundation.BOOL, error) {
+	var _pfExpireAfterFirstUse foundation.BOOL
+	_hr := self.Raw.DoesExpireAfterFirstUse(&_pfExpireAfterFirstUse)
+	return _pfExpireAfterFirstUse, win32.HRESULTError(int32(_hr))
 }
 
 // IESIsdbCasResponseEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IESIsdbCasResponseEvent with error-returning methods.
@@ -4071,23 +4281,31 @@ func WrapIESIsdbCasResponseEvent(raw *mediadirectshowtv.IESIsdbCasResponseEvent)
 }
 
 // GetRequestId wraps the raw GetRequestId call.
-func (self IESIsdbCasResponseEvent) GetRequestId(pRequestId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetRequestId(pRequestId)))
+func (self IESIsdbCasResponseEvent) GetRequestId() (uint32, error) {
+	var _pRequestId uint32
+	_hr := self.Raw.GetRequestId(&_pRequestId)
+	return _pRequestId, win32.HRESULTError(int32(_hr))
 }
 
 // GetStatus wraps the raw GetStatus call.
-func (self IESIsdbCasResponseEvent) GetStatus(pStatus *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetStatus(pStatus)))
+func (self IESIsdbCasResponseEvent) GetStatus() (uint32, error) {
+	var _pStatus uint32
+	_hr := self.Raw.GetStatus(&_pStatus)
+	return _pStatus, win32.HRESULTError(int32(_hr))
 }
 
 // GetDataLength wraps the raw GetDataLength call.
-func (self IESIsdbCasResponseEvent) GetDataLength(pRequestLength *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetDataLength(pRequestLength)))
+func (self IESIsdbCasResponseEvent) GetDataLength() (uint32, error) {
+	var _pRequestLength uint32
+	_hr := self.Raw.GetDataLength(&_pRequestLength)
+	return _pRequestLength, win32.HRESULTError(int32(_hr))
 }
 
 // GetResponseData wraps the raw GetResponseData call.
-func (self IESIsdbCasResponseEvent) GetResponseData(pbData **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetResponseData(pbData)))
+func (self IESIsdbCasResponseEvent) GetResponseData() (*systemcom.SAFEARRAY, error) {
+	var _pbData *systemcom.SAFEARRAY
+	_hr := self.Raw.GetResponseData(&_pbData)
+	return _pbData, win32.HRESULTError(int32(_hr))
 }
 
 // IESLicenseRenewalResultEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IESLicenseRenewalResultEvent with error-returning methods.
@@ -4102,58 +4320,80 @@ func WrapIESLicenseRenewalResultEvent(raw *mediadirectshowtv.IESLicenseRenewalRe
 }
 
 // GetCallersId wraps the raw GetCallersId call.
-func (self IESLicenseRenewalResultEvent) GetCallersId(pdwCallersId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetCallersId(pdwCallersId)))
+func (self IESLicenseRenewalResultEvent) GetCallersId() (uint32, error) {
+	var _pdwCallersId uint32
+	_hr := self.Raw.GetCallersId(&_pdwCallersId)
+	return _pdwCallersId, win32.HRESULTError(int32(_hr))
 }
 
 // GetFileName wraps the raw GetFileName call.
-func (self IESLicenseRenewalResultEvent) GetFileName(pbstrFilename *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetFileName(pbstrFilename)))
+func (self IESLicenseRenewalResultEvent) GetFileName() (foundation.BSTR, error) {
+	var _pbstrFilename foundation.BSTR
+	_hr := self.Raw.GetFileName(&_pbstrFilename)
+	return _pbstrFilename, win32.HRESULTError(int32(_hr))
 }
 
 // IsRenewalSuccessful wraps the raw IsRenewalSuccessful call.
-func (self IESLicenseRenewalResultEvent) IsRenewalSuccessful(pfRenewalSuccessful *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsRenewalSuccessful(pfRenewalSuccessful)))
+func (self IESLicenseRenewalResultEvent) IsRenewalSuccessful() (foundation.BOOL, error) {
+	var _pfRenewalSuccessful foundation.BOOL
+	_hr := self.Raw.IsRenewalSuccessful(&_pfRenewalSuccessful)
+	return _pfRenewalSuccessful, win32.HRESULTError(int32(_hr))
 }
 
 // IsCheckEntitlementCallRequired wraps the raw IsCheckEntitlementCallRequired call.
-func (self IESLicenseRenewalResultEvent) IsCheckEntitlementCallRequired(pfCheckEntTokenCallNeeded *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsCheckEntitlementCallRequired(pfCheckEntTokenCallNeeded)))
+func (self IESLicenseRenewalResultEvent) IsCheckEntitlementCallRequired() (foundation.BOOL, error) {
+	var _pfCheckEntTokenCallNeeded foundation.BOOL
+	_hr := self.Raw.IsCheckEntitlementCallRequired(&_pfCheckEntTokenCallNeeded)
+	return _pfCheckEntTokenCallNeeded, win32.HRESULTError(int32(_hr))
 }
 
 // GetDescrambledStatus wraps the raw GetDescrambledStatus call.
-func (self IESLicenseRenewalResultEvent) GetDescrambledStatus(pDescrambledStatus *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetDescrambledStatus(pDescrambledStatus)))
+func (self IESLicenseRenewalResultEvent) GetDescrambledStatus() (uint32, error) {
+	var _pDescrambledStatus uint32
+	_hr := self.Raw.GetDescrambledStatus(&_pDescrambledStatus)
+	return _pDescrambledStatus, win32.HRESULTError(int32(_hr))
 }
 
 // GetRenewalResultCode wraps the raw GetRenewalResultCode call.
-func (self IESLicenseRenewalResultEvent) GetRenewalResultCode(pdwRenewalResultCode *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetRenewalResultCode(pdwRenewalResultCode)))
+func (self IESLicenseRenewalResultEvent) GetRenewalResultCode() (uint32, error) {
+	var _pdwRenewalResultCode uint32
+	_hr := self.Raw.GetRenewalResultCode(&_pdwRenewalResultCode)
+	return _pdwRenewalResultCode, win32.HRESULTError(int32(_hr))
 }
 
 // GetCASFailureCode wraps the raw GetCASFailureCode call.
-func (self IESLicenseRenewalResultEvent) GetCASFailureCode(pdwCASFailureCode *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetCASFailureCode(pdwCASFailureCode)))
+func (self IESLicenseRenewalResultEvent) GetCASFailureCode() (uint32, error) {
+	var _pdwCASFailureCode uint32
+	_hr := self.Raw.GetCASFailureCode(&_pdwCASFailureCode)
+	return _pdwCASFailureCode, win32.HRESULTError(int32(_hr))
 }
 
 // GetRenewalHResult wraps the raw GetRenewalHResult call.
-func (self IESLicenseRenewalResultEvent) GetRenewalHResult(phr *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.GetRenewalHResult(phr)))
+func (self IESLicenseRenewalResultEvent) GetRenewalHResult() (foundation.HRESULT, error) {
+	var _phr foundation.HRESULT
+	_hr := self.Raw.GetRenewalHResult(&_phr)
+	return _phr, win32.HRESULTError(int32(_hr))
 }
 
 // GetEntitlementTokenLength wraps the raw GetEntitlementTokenLength call.
-func (self IESLicenseRenewalResultEvent) GetEntitlementTokenLength(pdwLength *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetEntitlementTokenLength(pdwLength)))
+func (self IESLicenseRenewalResultEvent) GetEntitlementTokenLength() (uint32, error) {
+	var _pdwLength uint32
+	_hr := self.Raw.GetEntitlementTokenLength(&_pdwLength)
+	return _pdwLength, win32.HRESULTError(int32(_hr))
 }
 
 // GetEntitlementToken wraps the raw GetEntitlementToken call.
-func (self IESLicenseRenewalResultEvent) GetEntitlementToken(pbData **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetEntitlementToken(pbData)))
+func (self IESLicenseRenewalResultEvent) GetEntitlementToken() (*systemcom.SAFEARRAY, error) {
+	var _pbData *systemcom.SAFEARRAY
+	_hr := self.Raw.GetEntitlementToken(&_pbData)
+	return _pbData, win32.HRESULTError(int32(_hr))
 }
 
 // GetExpiryDate wraps the raw GetExpiryDate call.
-func (self IESLicenseRenewalResultEvent) GetExpiryDate(pqwExpiryDate *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.GetExpiryDate(pqwExpiryDate)))
+func (self IESLicenseRenewalResultEvent) GetExpiryDate() (uint64, error) {
+	var _pqwExpiryDate uint64
+	_hr := self.Raw.GetExpiryDate(&_pqwExpiryDate)
+	return _pqwExpiryDate, win32.HRESULTError(int32(_hr))
 }
 
 // IESOpenMmiEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IESOpenMmiEvent with error-returning methods.
@@ -4168,23 +4408,31 @@ func WrapIESOpenMmiEvent(raw *mediadirectshowtv.IESOpenMmiEvent) IESOpenMmiEvent
 }
 
 // GetDialogNumber wraps the raw GetDialogNumber call.
-func (self IESOpenMmiEvent) GetDialogNumber(pDialogRequest *uint32, pDialogNumber *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetDialogNumber(pDialogRequest, pDialogNumber)))
+func (self IESOpenMmiEvent) GetDialogNumber(pDialogRequest *uint32) (uint32, error) {
+	var _pDialogNumber uint32
+	_hr := self.Raw.GetDialogNumber(pDialogRequest, &_pDialogNumber)
+	return _pDialogNumber, win32.HRESULTError(int32(_hr))
 }
 
 // GetDialogType wraps the raw GetDialogType call.
-func (self IESOpenMmiEvent) GetDialogType(guidDialogType *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.GetDialogType(guidDialogType)))
+func (self IESOpenMmiEvent) GetDialogType() (win32.GUID, error) {
+	var _guidDialogType win32.GUID
+	_hr := self.Raw.GetDialogType(&_guidDialogType)
+	return _guidDialogType, win32.HRESULTError(int32(_hr))
 }
 
 // GetDialogData wraps the raw GetDialogData call.
-func (self IESOpenMmiEvent) GetDialogData(pbData **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetDialogData(pbData)))
+func (self IESOpenMmiEvent) GetDialogData() (*systemcom.SAFEARRAY, error) {
+	var _pbData *systemcom.SAFEARRAY
+	_hr := self.Raw.GetDialogData(&_pbData)
+	return _pbData, win32.HRESULTError(int32(_hr))
 }
 
 // GetDialogStringData wraps the raw GetDialogStringData call.
-func (self IESOpenMmiEvent) GetDialogStringData(pbstrBaseUrl *foundation.BSTR, pbstrData *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetDialogStringData(pbstrBaseUrl, pbstrData)))
+func (self IESOpenMmiEvent) GetDialogStringData(pbstrBaseUrl *foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	_hr := self.Raw.GetDialogStringData(pbstrBaseUrl, &_pbstrData)
+	return _pbstrData, win32.HRESULTError(int32(_hr))
 }
 
 // IESRequestTunerEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IESRequestTunerEvent with error-returning methods.
@@ -4199,23 +4447,31 @@ func WrapIESRequestTunerEvent(raw *mediadirectshowtv.IESRequestTunerEvent) IESRe
 }
 
 // GetPriority wraps the raw GetPriority call.
-func (self IESRequestTunerEvent) GetPriority(pbyPriority *byte) error {
-	return win32.HRESULTError(int32(self.Raw.GetPriority(pbyPriority)))
+func (self IESRequestTunerEvent) GetPriority() (byte, error) {
+	var _pbyPriority byte
+	_hr := self.Raw.GetPriority(&_pbyPriority)
+	return _pbyPriority, win32.HRESULTError(int32(_hr))
 }
 
 // GetReason wraps the raw GetReason call.
-func (self IESRequestTunerEvent) GetReason(pbyReason *byte) error {
-	return win32.HRESULTError(int32(self.Raw.GetReason(pbyReason)))
+func (self IESRequestTunerEvent) GetReason() (byte, error) {
+	var _pbyReason byte
+	_hr := self.Raw.GetReason(&_pbyReason)
+	return _pbyReason, win32.HRESULTError(int32(_hr))
 }
 
 // GetConsequences wraps the raw GetConsequences call.
-func (self IESRequestTunerEvent) GetConsequences(pbyConsequences *byte) error {
-	return win32.HRESULTError(int32(self.Raw.GetConsequences(pbyConsequences)))
+func (self IESRequestTunerEvent) GetConsequences() (byte, error) {
+	var _pbyConsequences byte
+	_hr := self.Raw.GetConsequences(&_pbyConsequences)
+	return _pbyConsequences, win32.HRESULTError(int32(_hr))
 }
 
 // GetEstimatedTime wraps the raw GetEstimatedTime call.
-func (self IESRequestTunerEvent) GetEstimatedTime(pdwEstimatedTime *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetEstimatedTime(pdwEstimatedTime)))
+func (self IESRequestTunerEvent) GetEstimatedTime() (uint32, error) {
+	var _pdwEstimatedTime uint32
+	_hr := self.Raw.GetEstimatedTime(&_pdwEstimatedTime)
+	return _pdwEstimatedTime, win32.HRESULTError(int32(_hr))
 }
 
 // IESValueUpdatedEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IESValueUpdatedEvent with error-returning methods.
@@ -4230,8 +4486,10 @@ func WrapIESValueUpdatedEvent(raw *mediadirectshowtv.IESValueUpdatedEvent) IESVa
 }
 
 // GetValueNames wraps the raw GetValueNames call.
-func (self IESValueUpdatedEvent) GetValueNames(pbstrNames **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.GetValueNames(pbstrNames)))
+func (self IESValueUpdatedEvent) GetValueNames() (*systemcom.SAFEARRAY, error) {
+	var _pbstrNames *systemcom.SAFEARRAY
+	_hr := self.Raw.GetValueNames(&_pbstrNames)
+	return _pbstrNames, win32.HRESULTError(int32(_hr))
 }
 
 // IETFilter is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IETFilter with error-returning methods.
@@ -4246,8 +4504,10 @@ func WrapIETFilter(raw *mediadirectshowtv.IETFilter) IETFilter {
 }
 
 // Get_EvalRatObjOK wraps the raw Get_EvalRatObjOK call.
-func (self IETFilter) Get_EvalRatObjOK(pHrCoCreateRetVal *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EvalRatObjOK(pHrCoCreateRetVal)))
+func (self IETFilter) Get_EvalRatObjOK() (foundation.HRESULT, error) {
+	var _pHrCoCreateRetVal foundation.HRESULT
+	_hr := self.Raw.Get_EvalRatObjOK(&_pHrCoCreateRetVal)
+	return _pHrCoCreateRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrRating wraps the raw GetCurrRating call.
@@ -4532,8 +4792,10 @@ func WrapIEvalRat(raw *mediadirectshowtv.IEvalRat) IEvalRat {
 }
 
 // Get_BlockedRatingAttributes wraps the raw Get_BlockedRatingAttributes call.
-func (self IEvalRat) Get_BlockedRatingAttributes(enSystem mediadirectshowtv.EnTvRat_System, enLevel mediadirectshowtv.EnTvRat_GenericLevel, plbfAttrs *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockedRatingAttributes(enSystem, enLevel, plbfAttrs)))
+func (self IEvalRat) Get_BlockedRatingAttributes(enSystem mediadirectshowtv.EnTvRat_System, enLevel mediadirectshowtv.EnTvRat_GenericLevel) (int32, error) {
+	var _plbfAttrs int32
+	_hr := self.Raw.Get_BlockedRatingAttributes(enSystem, enLevel, &_plbfAttrs)
+	return _plbfAttrs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BlockedRatingAttributes wraps the raw Put_BlockedRatingAttributes call.
@@ -4542,8 +4804,10 @@ func (self IEvalRat) Put_BlockedRatingAttributes(enSystem mediadirectshowtv.EnTv
 }
 
 // Get_BlockUnRated wraps the raw Get_BlockUnRated call.
-func (self IEvalRat) Get_BlockUnRated(pfBlockUnRatedShows *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockUnRated(pfBlockUnRatedShows)))
+func (self IEvalRat) Get_BlockUnRated() (foundation.BOOL, error) {
+	var _pfBlockUnRatedShows foundation.BOOL
+	_hr := self.Raw.Get_BlockUnRated(&_pfBlockUnRatedShows)
+	return _pfBlockUnRatedShows, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BlockUnRated wraps the raw Put_BlockUnRated call.
@@ -4626,8 +4890,10 @@ func WrapIGpnvsCommonBase(raw *mediadirectshowtv.IGpnvsCommonBase) IGpnvsCommonB
 }
 
 // GetValueUpdateName wraps the raw GetValueUpdateName call.
-func (self IGpnvsCommonBase) GetValueUpdateName(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetValueUpdateName(pbstrName)))
+func (self IGpnvsCommonBase) GetValueUpdateName() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.GetValueUpdateName(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // IGuideData is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IGuideData with error-returning methods.
@@ -4642,23 +4908,31 @@ func WrapIGuideData(raw *mediadirectshowtv.IGuideData) IGuideData {
 }
 
 // GetServices wraps the raw GetServices call.
-func (self IGuideData) GetServices(ppEnumTuneRequests **mediadirectshowtv.IEnumTuneRequests) error {
-	return win32.HRESULTError(int32(self.Raw.GetServices(ppEnumTuneRequests)))
+func (self IGuideData) GetServices() (*mediadirectshowtv.IEnumTuneRequests, error) {
+	var _ppEnumTuneRequests *mediadirectshowtv.IEnumTuneRequests
+	_hr := self.Raw.GetServices(&_ppEnumTuneRequests)
+	return _ppEnumTuneRequests, win32.HRESULTError(int32(_hr))
 }
 
 // GetServiceProperties wraps the raw GetServiceProperties call.
-func (self IGuideData) GetServiceProperties(pTuneRequest *mediadirectshowtv.ITuneRequest, ppEnumProperties **mediadirectshowtv.IEnumGuideDataProperties) error {
-	return win32.HRESULTError(int32(self.Raw.GetServiceProperties(pTuneRequest, ppEnumProperties)))
+func (self IGuideData) GetServiceProperties(pTuneRequest *mediadirectshowtv.ITuneRequest) (*mediadirectshowtv.IEnumGuideDataProperties, error) {
+	var _ppEnumProperties *mediadirectshowtv.IEnumGuideDataProperties
+	_hr := self.Raw.GetServiceProperties(pTuneRequest, &_ppEnumProperties)
+	return _ppEnumProperties, win32.HRESULTError(int32(_hr))
 }
 
 // GetGuideProgramIDs wraps the raw GetGuideProgramIDs call.
-func (self IGuideData) GetGuideProgramIDs(pEnumPrograms **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetGuideProgramIDs(pEnumPrograms)))
+func (self IGuideData) GetGuideProgramIDs() (*systemole.IEnumVARIANT, error) {
+	var _pEnumPrograms *systemole.IEnumVARIANT
+	_hr := self.Raw.GetGuideProgramIDs(&_pEnumPrograms)
+	return _pEnumPrograms, win32.HRESULTError(int32(_hr))
 }
 
 // GetScheduleEntryIDs wraps the raw GetScheduleEntryIDs call.
-func (self IGuideData) GetScheduleEntryIDs(pEnumScheduleEntries **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetScheduleEntryIDs(pEnumScheduleEntries)))
+func (self IGuideData) GetScheduleEntryIDs() (*systemole.IEnumVARIANT, error) {
+	var _pEnumScheduleEntries *systemole.IEnumVARIANT
+	_hr := self.Raw.GetScheduleEntryIDs(&_pEnumScheduleEntries)
+	return _pEnumScheduleEntries, win32.HRESULTError(int32(_hr))
 }
 
 // IGuideDataEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IGuideDataEvent with error-returning methods.
@@ -6126,8 +6400,10 @@ func WrapILanguageComponentType(raw *mediadirectshowtv.ILanguageComponentType) I
 }
 
 // Get_LangID wraps the raw Get_LangID call.
-func (self ILanguageComponentType) Get_LangID(LangID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LangID(LangID)))
+func (self ILanguageComponentType) Get_LangID() (int32, error) {
+	var _LangID int32
+	_hr := self.Raw.Get_LangID(&_LangID)
+	return _LangID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LangID wraps the raw Put_LangID call.
@@ -6147,8 +6423,10 @@ func WrapILocator(raw *mediadirectshowtv.ILocator) ILocator {
 }
 
 // Get_CarrierFrequency wraps the raw Get_CarrierFrequency call.
-func (self ILocator) Get_CarrierFrequency(Frequency *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CarrierFrequency(Frequency)))
+func (self ILocator) Get_CarrierFrequency() (int32, error) {
+	var _Frequency int32
+	_hr := self.Raw.Get_CarrierFrequency(&_Frequency)
+	return _Frequency, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CarrierFrequency wraps the raw Put_CarrierFrequency call.
@@ -6157,8 +6435,10 @@ func (self ILocator) Put_CarrierFrequency(Frequency int32) error {
 }
 
 // Get_InnerFEC wraps the raw Get_InnerFEC call.
-func (self ILocator) Get_InnerFEC(FEC *mediadirectshow.FECMethod) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InnerFEC(FEC)))
+func (self ILocator) Get_InnerFEC() (mediadirectshow.FECMethod, error) {
+	var _FEC mediadirectshow.FECMethod
+	_hr := self.Raw.Get_InnerFEC(&_FEC)
+	return _FEC, win32.HRESULTError(int32(_hr))
 }
 
 // Put_InnerFEC wraps the raw Put_InnerFEC call.
@@ -6167,8 +6447,10 @@ func (self ILocator) Put_InnerFEC(FEC mediadirectshow.FECMethod) error {
 }
 
 // Get_InnerFECRate wraps the raw Get_InnerFECRate call.
-func (self ILocator) Get_InnerFECRate(FEC *mediadirectshow.BinaryConvolutionCodeRate) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InnerFECRate(FEC)))
+func (self ILocator) Get_InnerFECRate() (mediadirectshow.BinaryConvolutionCodeRate, error) {
+	var _FEC mediadirectshow.BinaryConvolutionCodeRate
+	_hr := self.Raw.Get_InnerFECRate(&_FEC)
+	return _FEC, win32.HRESULTError(int32(_hr))
 }
 
 // Put_InnerFECRate wraps the raw Put_InnerFECRate call.
@@ -6177,8 +6459,10 @@ func (self ILocator) Put_InnerFECRate(FEC mediadirectshow.BinaryConvolutionCodeR
 }
 
 // Get_OuterFEC wraps the raw Get_OuterFEC call.
-func (self ILocator) Get_OuterFEC(FEC *mediadirectshow.FECMethod) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OuterFEC(FEC)))
+func (self ILocator) Get_OuterFEC() (mediadirectshow.FECMethod, error) {
+	var _FEC mediadirectshow.FECMethod
+	_hr := self.Raw.Get_OuterFEC(&_FEC)
+	return _FEC, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OuterFEC wraps the raw Put_OuterFEC call.
@@ -6187,8 +6471,10 @@ func (self ILocator) Put_OuterFEC(FEC mediadirectshow.FECMethod) error {
 }
 
 // Get_OuterFECRate wraps the raw Get_OuterFECRate call.
-func (self ILocator) Get_OuterFECRate(FEC *mediadirectshow.BinaryConvolutionCodeRate) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OuterFECRate(FEC)))
+func (self ILocator) Get_OuterFECRate() (mediadirectshow.BinaryConvolutionCodeRate, error) {
+	var _FEC mediadirectshow.BinaryConvolutionCodeRate
+	_hr := self.Raw.Get_OuterFECRate(&_FEC)
+	return _FEC, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OuterFECRate wraps the raw Put_OuterFECRate call.
@@ -6197,8 +6483,10 @@ func (self ILocator) Put_OuterFECRate(FEC mediadirectshow.BinaryConvolutionCodeR
 }
 
 // Get_Modulation wraps the raw Get_Modulation call.
-func (self ILocator) Get_Modulation(Modulation *mediadirectshow.ModulationType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Modulation(Modulation)))
+func (self ILocator) Get_Modulation() (mediadirectshow.ModulationType, error) {
+	var _Modulation mediadirectshow.ModulationType
+	_hr := self.Raw.Get_Modulation(&_Modulation)
+	return _Modulation, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Modulation wraps the raw Put_Modulation call.
@@ -6207,8 +6495,10 @@ func (self ILocator) Put_Modulation(Modulation mediadirectshow.ModulationType) e
 }
 
 // Get_SymbolRate wraps the raw Get_SymbolRate call.
-func (self ILocator) Get_SymbolRate(Rate *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SymbolRate(Rate)))
+func (self ILocator) Get_SymbolRate() (int32, error) {
+	var _Rate int32
+	_hr := self.Raw.Get_SymbolRate(&_Rate)
+	return _Rate, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SymbolRate wraps the raw Put_SymbolRate call.
@@ -6217,8 +6507,10 @@ func (self ILocator) Put_SymbolRate(Rate int32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self ILocator) Clone(NewLocator **mediadirectshowtv.ILocator) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewLocator)))
+func (self ILocator) Clone() (*mediadirectshowtv.ILocator, error) {
+	var _NewLocator *mediadirectshowtv.ILocator
+	_hr := self.Raw.Clone(&_NewLocator)
+	return _NewLocator, win32.HRESULTError(int32(_hr))
 }
 
 // IMPEG2Component is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMPEG2Component with error-returning methods.
@@ -6233,8 +6525,10 @@ func WrapIMPEG2Component(raw *mediadirectshowtv.IMPEG2Component) IMPEG2Component
 }
 
 // Get_PID wraps the raw Get_PID call.
-func (self IMPEG2Component) Get_PID(PID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PID(PID)))
+func (self IMPEG2Component) Get_PID() (int32, error) {
+	var _PID int32
+	_hr := self.Raw.Get_PID(&_PID)
+	return _PID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PID wraps the raw Put_PID call.
@@ -6243,8 +6537,10 @@ func (self IMPEG2Component) Put_PID(PID int32) error {
 }
 
 // Get_PCRPID wraps the raw Get_PCRPID call.
-func (self IMPEG2Component) Get_PCRPID(PCRPID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PCRPID(PCRPID)))
+func (self IMPEG2Component) Get_PCRPID() (int32, error) {
+	var _PCRPID int32
+	_hr := self.Raw.Get_PCRPID(&_PCRPID)
+	return _PCRPID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PCRPID wraps the raw Put_PCRPID call.
@@ -6253,8 +6549,10 @@ func (self IMPEG2Component) Put_PCRPID(PCRPID int32) error {
 }
 
 // Get_ProgramNumber wraps the raw Get_ProgramNumber call.
-func (self IMPEG2Component) Get_ProgramNumber(ProgramNumber *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProgramNumber(ProgramNumber)))
+func (self IMPEG2Component) Get_ProgramNumber() (int32, error) {
+	var _ProgramNumber int32
+	_hr := self.Raw.Get_ProgramNumber(&_ProgramNumber)
+	return _ProgramNumber, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ProgramNumber wraps the raw Put_ProgramNumber call.
@@ -6274,8 +6572,10 @@ func WrapIMPEG2ComponentType(raw *mediadirectshowtv.IMPEG2ComponentType) IMPEG2C
 }
 
 // Get_StreamType wraps the raw Get_StreamType call.
-func (self IMPEG2ComponentType) Get_StreamType(MP2StreamType *mediadirectshow.MPEG2StreamType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StreamType(MP2StreamType)))
+func (self IMPEG2ComponentType) Get_StreamType() (mediadirectshow.MPEG2StreamType, error) {
+	var _MP2StreamType mediadirectshow.MPEG2StreamType
+	_hr := self.Raw.Get_StreamType(&_MP2StreamType)
+	return _MP2StreamType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_StreamType wraps the raw Put_StreamType call.
@@ -6295,8 +6595,10 @@ func WrapIMPEG2TuneRequest(raw *mediadirectshowtv.IMPEG2TuneRequest) IMPEG2TuneR
 }
 
 // Get_TSID wraps the raw Get_TSID call.
-func (self IMPEG2TuneRequest) Get_TSID(TSID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TSID(TSID)))
+func (self IMPEG2TuneRequest) Get_TSID() (int32, error) {
+	var _TSID int32
+	_hr := self.Raw.Get_TSID(&_TSID)
+	return _TSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TSID wraps the raw Put_TSID call.
@@ -6305,8 +6607,10 @@ func (self IMPEG2TuneRequest) Put_TSID(TSID int32) error {
 }
 
 // Get_ProgNo wraps the raw Get_ProgNo call.
-func (self IMPEG2TuneRequest) Get_ProgNo(ProgNo *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProgNo(ProgNo)))
+func (self IMPEG2TuneRequest) Get_ProgNo() (int32, error) {
+	var _ProgNo int32
+	_hr := self.Raw.Get_ProgNo(&_ProgNo)
+	return _ProgNo, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ProgNo wraps the raw Put_ProgNo call.
@@ -6326,8 +6630,10 @@ func WrapIMPEG2TuneRequestFactory(raw *mediadirectshowtv.IMPEG2TuneRequestFactor
 }
 
 // CreateTuneRequest wraps the raw CreateTuneRequest call.
-func (self IMPEG2TuneRequestFactory) CreateTuneRequest(TuningSpace *mediadirectshowtv.ITuningSpace, TuneRequest **mediadirectshowtv.IMPEG2TuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTuneRequest(TuningSpace, TuneRequest)))
+func (self IMPEG2TuneRequestFactory) CreateTuneRequest(TuningSpace *mediadirectshowtv.ITuningSpace) (*mediadirectshowtv.IMPEG2TuneRequest, error) {
+	var _TuneRequest *mediadirectshowtv.IMPEG2TuneRequest
+	_hr := self.Raw.CreateTuneRequest(TuningSpace, &_TuneRequest)
+	return _TuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // IMPEG2TuneRequestSupport is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMPEG2TuneRequestSupport with error-returning methods.
@@ -6394,8 +6700,10 @@ func WrapIMSEventBinder(raw *mediadirectshowtv.IMSEventBinder) IMSEventBinder {
 }
 
 // Bind wraps the raw Bind call.
-func (self IMSEventBinder) Bind(pEventObject *systemcom.IDispatch, EventName foundation.BSTR, EventHandler foundation.BSTR, CancelID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Bind(pEventObject, EventName, EventHandler, CancelID)))
+func (self IMSEventBinder) Bind(pEventObject *systemcom.IDispatch, EventName foundation.BSTR, EventHandler foundation.BSTR) (int32, error) {
+	var _CancelID int32
+	_hr := self.Raw.Bind(pEventObject, EventName, EventHandler, &_CancelID)
+	return _CancelID, win32.HRESULTError(int32(_hr))
 }
 
 // Unbind wraps the raw Unbind call.
@@ -6415,8 +6723,10 @@ func WrapIMSVidAnalogTuner(raw *mediadirectshowtv.IMSVidAnalogTuner) IMSVidAnalo
 }
 
 // Get_Channel wraps the raw Get_Channel call.
-func (self IMSVidAnalogTuner) Get_Channel(Channel *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Channel(Channel)))
+func (self IMSVidAnalogTuner) Get_Channel() (int32, error) {
+	var _Channel int32
+	_hr := self.Raw.Get_Channel(&_Channel)
+	return _Channel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Channel wraps the raw Put_Channel call.
@@ -6425,18 +6735,24 @@ func (self IMSVidAnalogTuner) Put_Channel(Channel int32) error {
 }
 
 // Get_VideoFrequency wraps the raw Get_VideoFrequency call.
-func (self IMSVidAnalogTuner) Get_VideoFrequency(lcc *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VideoFrequency(lcc)))
+func (self IMSVidAnalogTuner) Get_VideoFrequency() (int32, error) {
+	var _lcc int32
+	_hr := self.Raw.Get_VideoFrequency(&_lcc)
+	return _lcc, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AudioFrequency wraps the raw Get_AudioFrequency call.
-func (self IMSVidAnalogTuner) Get_AudioFrequency(lcc *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioFrequency(lcc)))
+func (self IMSVidAnalogTuner) Get_AudioFrequency() (int32, error) {
+	var _lcc int32
+	_hr := self.Raw.Get_AudioFrequency(&_lcc)
+	return _lcc, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CountryCode wraps the raw Get_CountryCode call.
-func (self IMSVidAnalogTuner) Get_CountryCode(lcc *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CountryCode(lcc)))
+func (self IMSVidAnalogTuner) Get_CountryCode() (int32, error) {
+	var _lcc int32
+	_hr := self.Raw.Get_CountryCode(&_lcc)
+	return _lcc, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CountryCode wraps the raw Put_CountryCode call.
@@ -6445,8 +6761,10 @@ func (self IMSVidAnalogTuner) Put_CountryCode(lcc int32) error {
 }
 
 // Get_SAP wraps the raw Get_SAP call.
-func (self IMSVidAnalogTuner) Get_SAP(pfSapOn *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SAP(pfSapOn)))
+func (self IMSVidAnalogTuner) Get_SAP() (foundation.VARIANT_BOOL, error) {
+	var _pfSapOn foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SAP(&_pfSapOn)
+	return _pfSapOn, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SAP wraps the raw Put_SAP call.
@@ -6455,8 +6773,10 @@ func (self IMSVidAnalogTuner) Put_SAP(fSapOn foundation.VARIANT_BOOL) error {
 }
 
 // ChannelAvailable wraps the raw ChannelAvailable call.
-func (self IMSVidAnalogTuner) ChannelAvailable(nChannel int32, SignalStrength *int32, fSignalPresent *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ChannelAvailable(nChannel, SignalStrength, fSignalPresent)))
+func (self IMSVidAnalogTuner) ChannelAvailable(nChannel int32, SignalStrength *int32) (foundation.VARIANT_BOOL, error) {
+	var _fSignalPresent foundation.VARIANT_BOOL
+	_hr := self.Raw.ChannelAvailable(nChannel, SignalStrength, &_fSignalPresent)
+	return _fSignalPresent, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidAnalogTuner2 is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidAnalogTuner2 with error-returning methods.
@@ -6471,18 +6791,24 @@ func WrapIMSVidAnalogTuner2(raw *mediadirectshowtv.IMSVidAnalogTuner2) IMSVidAna
 }
 
 // Get_TVFormats wraps the raw Get_TVFormats call.
-func (self IMSVidAnalogTuner2) Get_TVFormats(Formats *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TVFormats(Formats)))
+func (self IMSVidAnalogTuner2) Get_TVFormats() (int32, error) {
+	var _Formats int32
+	_hr := self.Raw.Get_TVFormats(&_Formats)
+	return _Formats, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TunerModes wraps the raw Get_TunerModes call.
-func (self IMSVidAnalogTuner2) Get_TunerModes(Modes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TunerModes(Modes)))
+func (self IMSVidAnalogTuner2) Get_TunerModes() (int32, error) {
+	var _Modes int32
+	_hr := self.Raw.Get_TunerModes(&_Modes)
+	return _Modes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NumAuxInputs wraps the raw Get_NumAuxInputs call.
-func (self IMSVidAnalogTuner2) Get_NumAuxInputs(Inputs *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NumAuxInputs(Inputs)))
+func (self IMSVidAnalogTuner2) Get_NumAuxInputs() (int32, error) {
+	var _Inputs int32
+	_hr := self.Raw.Get_NumAuxInputs(&_Inputs)
+	return _Inputs, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidAnalogTunerEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidAnalogTunerEvent with error-returning methods.
@@ -6513,8 +6839,10 @@ func (self IMSVidAudioRenderer) Put_Volume(lVol int32) error {
 }
 
 // Get_Volume wraps the raw Get_Volume call.
-func (self IMSVidAudioRenderer) Get_Volume(lVol *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Volume(lVol)))
+func (self IMSVidAudioRenderer) Get_Volume() (int32, error) {
+	var _lVol int32
+	_hr := self.Raw.Get_Volume(&_lVol)
+	return _lVol, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Balance wraps the raw Put_Balance call.
@@ -6523,8 +6851,10 @@ func (self IMSVidAudioRenderer) Put_Balance(lBal int32) error {
 }
 
 // Get_Balance wraps the raw Get_Balance call.
-func (self IMSVidAudioRenderer) Get_Balance(lBal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Balance(lBal)))
+func (self IMSVidAudioRenderer) Get_Balance() (int32, error) {
+	var _lBal int32
+	_hr := self.Raw.Get_Balance(&_lBal)
+	return _lBal, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidAudioRendererDevices is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidAudioRendererDevices with error-returning methods.
@@ -6539,13 +6869,17 @@ func WrapIMSVidAudioRendererDevices(raw *mediadirectshowtv.IMSVidAudioRendererDe
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IMSVidAudioRendererDevices) Get_Count(lCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(lCount)))
+func (self IMSVidAudioRendererDevices) Get_Count() (int32, error) {
+	var _lCount int32
+	_hr := self.Raw.Get_Count(&_lCount)
+	return _lCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IMSVidAudioRendererDevices) Get__NewEnum(pD **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pD)))
+func (self IMSVidAudioRendererDevices) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _pD *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_pD)
+	return _pD, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -6627,8 +6961,10 @@ func WrapIMSVidClosedCaptioning(raw *mediadirectshowtv.IMSVidClosedCaptioning) I
 }
 
 // Get_Enable wraps the raw Get_Enable call.
-func (self IMSVidClosedCaptioning) Get_Enable(On *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enable(On)))
+func (self IMSVidClosedCaptioning) Get_Enable() (foundation.VARIANT_BOOL, error) {
+	var _On foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enable(&_On)
+	return _On, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enable wraps the raw Put_Enable call.
@@ -6648,8 +6984,10 @@ func WrapIMSVidClosedCaptioning2(raw *mediadirectshowtv.IMSVidClosedCaptioning2)
 }
 
 // Get_Service wraps the raw Get_Service call.
-func (self IMSVidClosedCaptioning2) Get_Service(On *mediadirectshowtv.MSVidCCService) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Service(On)))
+func (self IMSVidClosedCaptioning2) Get_Service() (mediadirectshowtv.MSVidCCService, error) {
+	var _On mediadirectshowtv.MSVidCCService
+	_hr := self.Raw.Get_Service(&_On)
+	return _On, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Service wraps the raw Put_Service call.
@@ -6669,8 +7007,10 @@ func WrapIMSVidClosedCaptioning3(raw *mediadirectshowtv.IMSVidClosedCaptioning3)
 }
 
 // Get_TeleTextFilter wraps the raw Get_TeleTextFilter call.
-func (self IMSVidClosedCaptioning3) Get_TeleTextFilter(punkTTFilter **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TeleTextFilter(punkTTFilter)))
+func (self IMSVidClosedCaptioning3) Get_TeleTextFilter() (*systemcom.IUnknown, error) {
+	var _punkTTFilter *systemcom.IUnknown
+	_hr := self.Raw.Get_TeleTextFilter(&_punkTTFilter)
+	return _punkTTFilter, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidCompositionSegment is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidCompositionSegment with error-returning methods.
@@ -6711,8 +7051,10 @@ func WrapIMSVidCtl(raw *mediadirectshowtv.IMSVidCtl) IMSVidCtl {
 }
 
 // Get_AutoSize wraps the raw Get_AutoSize call.
-func (self IMSVidCtl) Get_AutoSize(pbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoSize(pbool)))
+func (self IMSVidCtl) Get_AutoSize() (foundation.VARIANT_BOOL, error) {
+	var _pbool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AutoSize(&_pbool)
+	return _pbool, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AutoSize wraps the raw Put_AutoSize call.
@@ -6721,8 +7063,10 @@ func (self IMSVidCtl) Put_AutoSize(vbool foundation.VARIANT_BOOL) error {
 }
 
 // Get_BackColor wraps the raw Get_BackColor call.
-func (self IMSVidCtl) Get_BackColor(backcolor *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BackColor(backcolor)))
+func (self IMSVidCtl) Get_BackColor() (uint32, error) {
+	var _backcolor uint32
+	_hr := self.Raw.Get_BackColor(&_backcolor)
+	return _backcolor, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BackColor wraps the raw Put_BackColor call.
@@ -6731,8 +7075,10 @@ func (self IMSVidCtl) Put_BackColor(backcolor uint32) error {
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self IMSVidCtl) Get_Enabled(pbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(pbool)))
+func (self IMSVidCtl) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pbool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_pbool)
+	return _pbool, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -6741,8 +7087,10 @@ func (self IMSVidCtl) Put_Enabled(vbool foundation.VARIANT_BOOL) error {
 }
 
 // Get_TabStop wraps the raw Get_TabStop call.
-func (self IMSVidCtl) Get_TabStop(pbool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TabStop(pbool)))
+func (self IMSVidCtl) Get_TabStop() (foundation.VARIANT_BOOL, error) {
+	var _pbool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_TabStop(&_pbool)
+	return _pbool, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TabStop wraps the raw Put_TabStop call.
@@ -6751,8 +7099,10 @@ func (self IMSVidCtl) Put_TabStop(vbool foundation.VARIANT_BOOL) error {
 }
 
 // Get_Window wraps the raw Get_Window call.
-func (self IMSVidCtl) Get_Window(phwnd *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Window(phwnd)))
+func (self IMSVidCtl) Get_Window() (foundation.HWND, error) {
+	var _phwnd foundation.HWND
+	_hr := self.Raw.Get_Window(&_phwnd)
+	return _phwnd, win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -6761,8 +7111,10 @@ func (self IMSVidCtl) Refresh() error {
 }
 
 // Get_DisplaySize wraps the raw Get_DisplaySize call.
-func (self IMSVidCtl) Get_DisplaySize(CurrentValue *mediadirectshowtv.DisplaySizeList) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisplaySize(CurrentValue)))
+func (self IMSVidCtl) Get_DisplaySize() (mediadirectshowtv.DisplaySizeList, error) {
+	var _CurrentValue mediadirectshowtv.DisplaySizeList
+	_hr := self.Raw.Get_DisplaySize(&_CurrentValue)
+	return _CurrentValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DisplaySize wraps the raw Put_DisplaySize call.
@@ -6771,8 +7123,10 @@ func (self IMSVidCtl) Put_DisplaySize(NewValue mediadirectshowtv.DisplaySizeList
 }
 
 // Get_MaintainAspectRatio wraps the raw Get_MaintainAspectRatio call.
-func (self IMSVidCtl) Get_MaintainAspectRatio(CurrentValue *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaintainAspectRatio(CurrentValue)))
+func (self IMSVidCtl) Get_MaintainAspectRatio() (foundation.VARIANT_BOOL, error) {
+	var _CurrentValue foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MaintainAspectRatio(&_CurrentValue)
+	return _CurrentValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaintainAspectRatio wraps the raw Put_MaintainAspectRatio call.
@@ -6781,8 +7135,10 @@ func (self IMSVidCtl) Put_MaintainAspectRatio(NewValue foundation.VARIANT_BOOL) 
 }
 
 // Get_ColorKey wraps the raw Get_ColorKey call.
-func (self IMSVidCtl) Get_ColorKey(CurrentValue *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ColorKey(CurrentValue)))
+func (self IMSVidCtl) Get_ColorKey() (uint32, error) {
+	var _CurrentValue uint32
+	_hr := self.Raw.Get_ColorKey(&_CurrentValue)
+	return _CurrentValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ColorKey wraps the raw Put_ColorKey call.
@@ -6791,43 +7147,59 @@ func (self IMSVidCtl) Put_ColorKey(NewValue uint32) error {
 }
 
 // Get_InputsAvailable wraps the raw Get_InputsAvailable call.
-func (self IMSVidCtl) Get_InputsAvailable(CategoryGuid foundation.BSTR, pVal **mediadirectshowtv.IMSVidInputDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InputsAvailable(CategoryGuid, pVal)))
+func (self IMSVidCtl) Get_InputsAvailable(CategoryGuid foundation.BSTR) (*mediadirectshowtv.IMSVidInputDevices, error) {
+	var _pVal *mediadirectshowtv.IMSVidInputDevices
+	_hr := self.Raw.Get_InputsAvailable(CategoryGuid, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_OutputsAvailable wraps the raw Get_OutputsAvailable call.
-func (self IMSVidCtl) Get_OutputsAvailable(CategoryGuid foundation.BSTR, pVal **mediadirectshowtv.IMSVidOutputDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OutputsAvailable(CategoryGuid, pVal)))
+func (self IMSVidCtl) Get_OutputsAvailable(CategoryGuid foundation.BSTR) (*mediadirectshowtv.IMSVidOutputDevices, error) {
+	var _pVal *mediadirectshowtv.IMSVidOutputDevices
+	_hr := self.Raw.Get_OutputsAvailable(CategoryGuid, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get__InputsAvailable wraps the raw Get__InputsAvailable call.
-func (self IMSVidCtl) Get__InputsAvailable(CategoryGuid *win32.GUID, pVal **mediadirectshowtv.IMSVidInputDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Get__InputsAvailable(CategoryGuid, pVal)))
+func (self IMSVidCtl) Get__InputsAvailable(CategoryGuid *win32.GUID) (*mediadirectshowtv.IMSVidInputDevices, error) {
+	var _pVal *mediadirectshowtv.IMSVidInputDevices
+	_hr := self.Raw.Get__InputsAvailable(CategoryGuid, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get__OutputsAvailable wraps the raw Get__OutputsAvailable call.
-func (self IMSVidCtl) Get__OutputsAvailable(CategoryGuid *win32.GUID, pVal **mediadirectshowtv.IMSVidOutputDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Get__OutputsAvailable(CategoryGuid, pVal)))
+func (self IMSVidCtl) Get__OutputsAvailable(CategoryGuid *win32.GUID) (*mediadirectshowtv.IMSVidOutputDevices, error) {
+	var _pVal *mediadirectshowtv.IMSVidOutputDevices
+	_hr := self.Raw.Get__OutputsAvailable(CategoryGuid, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VideoRenderersAvailable wraps the raw Get_VideoRenderersAvailable call.
-func (self IMSVidCtl) Get_VideoRenderersAvailable(pVal **mediadirectshowtv.IMSVidVideoRendererDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VideoRenderersAvailable(pVal)))
+func (self IMSVidCtl) Get_VideoRenderersAvailable() (*mediadirectshowtv.IMSVidVideoRendererDevices, error) {
+	var _pVal *mediadirectshowtv.IMSVidVideoRendererDevices
+	_hr := self.Raw.Get_VideoRenderersAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AudioRenderersAvailable wraps the raw Get_AudioRenderersAvailable call.
-func (self IMSVidCtl) Get_AudioRenderersAvailable(pVal **mediadirectshowtv.IMSVidAudioRendererDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioRenderersAvailable(pVal)))
+func (self IMSVidCtl) Get_AudioRenderersAvailable() (*mediadirectshowtv.IMSVidAudioRendererDevices, error) {
+	var _pVal *mediadirectshowtv.IMSVidAudioRendererDevices
+	_hr := self.Raw.Get_AudioRenderersAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FeaturesAvailable wraps the raw Get_FeaturesAvailable call.
-func (self IMSVidCtl) Get_FeaturesAvailable(pVal **mediadirectshowtv.IMSVidFeatures) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FeaturesAvailable(pVal)))
+func (self IMSVidCtl) Get_FeaturesAvailable() (*mediadirectshowtv.IMSVidFeatures, error) {
+	var _pVal *mediadirectshowtv.IMSVidFeatures
+	_hr := self.Raw.Get_FeaturesAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InputActive wraps the raw Get_InputActive call.
-func (self IMSVidCtl) Get_InputActive(pVal **mediadirectshowtv.IMSVidInputDevice) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InputActive(pVal)))
+func (self IMSVidCtl) Get_InputActive() (*mediadirectshowtv.IMSVidInputDevice, error) {
+	var _pVal *mediadirectshowtv.IMSVidInputDevice
+	_hr := self.Raw.Get_InputActive(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_InputActive wraps the raw Put_InputActive call.
@@ -6836,8 +7208,10 @@ func (self IMSVidCtl) Put_InputActive(pVal *mediadirectshowtv.IMSVidInputDevice)
 }
 
 // Get_OutputsActive wraps the raw Get_OutputsActive call.
-func (self IMSVidCtl) Get_OutputsActive(pVal **mediadirectshowtv.IMSVidOutputDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OutputsActive(pVal)))
+func (self IMSVidCtl) Get_OutputsActive() (*mediadirectshowtv.IMSVidOutputDevices, error) {
+	var _pVal *mediadirectshowtv.IMSVidOutputDevices
+	_hr := self.Raw.Get_OutputsActive(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OutputsActive wraps the raw Put_OutputsActive call.
@@ -6846,8 +7220,10 @@ func (self IMSVidCtl) Put_OutputsActive(pVal *mediadirectshowtv.IMSVidOutputDevi
 }
 
 // Get_VideoRendererActive wraps the raw Get_VideoRendererActive call.
-func (self IMSVidCtl) Get_VideoRendererActive(pVal **mediadirectshowtv.IMSVidVideoRenderer) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VideoRendererActive(pVal)))
+func (self IMSVidCtl) Get_VideoRendererActive() (*mediadirectshowtv.IMSVidVideoRenderer, error) {
+	var _pVal *mediadirectshowtv.IMSVidVideoRenderer
+	_hr := self.Raw.Get_VideoRendererActive(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_VideoRendererActive wraps the raw Put_VideoRendererActive call.
@@ -6856,8 +7232,10 @@ func (self IMSVidCtl) Put_VideoRendererActive(pVal *mediadirectshowtv.IMSVidVide
 }
 
 // Get_AudioRendererActive wraps the raw Get_AudioRendererActive call.
-func (self IMSVidCtl) Get_AudioRendererActive(pVal **mediadirectshowtv.IMSVidAudioRenderer) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioRendererActive(pVal)))
+func (self IMSVidCtl) Get_AudioRendererActive() (*mediadirectshowtv.IMSVidAudioRenderer, error) {
+	var _pVal *mediadirectshowtv.IMSVidAudioRenderer
+	_hr := self.Raw.Get_AudioRendererActive(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AudioRendererActive wraps the raw Put_AudioRendererActive call.
@@ -6866,8 +7244,10 @@ func (self IMSVidCtl) Put_AudioRendererActive(pVal *mediadirectshowtv.IMSVidAudi
 }
 
 // Get_FeaturesActive wraps the raw Get_FeaturesActive call.
-func (self IMSVidCtl) Get_FeaturesActive(pVal **mediadirectshowtv.IMSVidFeatures) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FeaturesActive(pVal)))
+func (self IMSVidCtl) Get_FeaturesActive() (*mediadirectshowtv.IMSVidFeatures, error) {
+	var _pVal *mediadirectshowtv.IMSVidFeatures
+	_hr := self.Raw.Get_FeaturesActive(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FeaturesActive wraps the raw Put_FeaturesActive call.
@@ -6876,8 +7256,10 @@ func (self IMSVidCtl) Put_FeaturesActive(pVal *mediadirectshowtv.IMSVidFeatures)
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IMSVidCtl) Get_State(lState *mediadirectshowtv.MSVidCtlStateList) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(lState)))
+func (self IMSVidCtl) Get_State() (mediadirectshowtv.MSVidCtlStateList, error) {
+	var _lState mediadirectshowtv.MSVidCtlStateList
+	_hr := self.Raw.Get_State(&_lState)
+	return _lState, win32.HRESULTError(int32(_hr))
 }
 
 // View wraps the raw View call.
@@ -6959,13 +7341,17 @@ func WrapIMSVidDevice(raw *mediadirectshowtv.IMSVidDevice) IMSVidDevice {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IMSVidDevice) Get_Name(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(Name)))
+func (self IMSVidDevice) Get_Name() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Status wraps the raw Get_Status call.
-func (self IMSVidDevice) Get_Status(Status *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Status(Status)))
+func (self IMSVidDevice) Get_Status() (int32, error) {
+	var _Status int32
+	_hr := self.Raw.Get_Status(&_Status)
+	return _Status, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Power wraps the raw Put_Power call.
@@ -6974,33 +7360,45 @@ func (self IMSVidDevice) Put_Power(Power foundation.VARIANT_BOOL) error {
 }
 
 // Get_Power wraps the raw Get_Power call.
-func (self IMSVidDevice) Get_Power(Power *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Power(Power)))
+func (self IMSVidDevice) Get_Power() (foundation.VARIANT_BOOL, error) {
+	var _Power foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Power(&_Power)
+	return _Power, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Category wraps the raw Get_Category call.
-func (self IMSVidDevice) Get_Category(Guid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Category(Guid)))
+func (self IMSVidDevice) Get_Category() (foundation.BSTR, error) {
+	var _Guid foundation.BSTR
+	_hr := self.Raw.Get_Category(&_Guid)
+	return _Guid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClassID wraps the raw Get_ClassID call.
-func (self IMSVidDevice) Get_ClassID(Clsid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClassID(Clsid)))
+func (self IMSVidDevice) Get_ClassID() (foundation.BSTR, error) {
+	var _Clsid foundation.BSTR
+	_hr := self.Raw.Get_ClassID(&_Clsid)
+	return _Clsid, win32.HRESULTError(int32(_hr))
 }
 
 // Get__Category wraps the raw Get__Category call.
-func (self IMSVidDevice) Get__Category(Guid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__Category(Guid)))
+func (self IMSVidDevice) Get__Category() (win32.GUID, error) {
+	var _Guid win32.GUID
+	_hr := self.Raw.Get__Category(&_Guid)
+	return _Guid, win32.HRESULTError(int32(_hr))
 }
 
 // Get__ClassID wraps the raw Get__ClassID call.
-func (self IMSVidDevice) Get__ClassID(Clsid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__ClassID(Clsid)))
+func (self IMSVidDevice) Get__ClassID() (win32.GUID, error) {
+	var _Clsid win32.GUID
+	_hr := self.Raw.Get__ClassID(&_Clsid)
+	return _Clsid, win32.HRESULTError(int32(_hr))
 }
 
 // IsEqualDevice wraps the raw IsEqualDevice call.
-func (self IMSVidDevice) IsEqualDevice(Device *mediadirectshowtv.IMSVidDevice, IsEqual *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsEqualDevice(Device, IsEqual)))
+func (self IMSVidDevice) IsEqualDevice(Device *mediadirectshowtv.IMSVidDevice) (foundation.VARIANT_BOOL, error) {
+	var _IsEqual foundation.VARIANT_BOOL
+	_hr := self.Raw.IsEqualDevice(Device, &_IsEqual)
+	return _IsEqual, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidDevice2 is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidDevice2 with error-returning methods.
@@ -7015,8 +7413,10 @@ func WrapIMSVidDevice2(raw *mediadirectshowtv.IMSVidDevice2) IMSVidDevice2 {
 }
 
 // Get_DevicePath wraps the raw Get_DevicePath call.
-func (self IMSVidDevice2) Get_DevicePath(DevPath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DevicePath(DevPath)))
+func (self IMSVidDevice2) Get_DevicePath() (foundation.BSTR, error) {
+	var _DevPath foundation.BSTR
+	_hr := self.Raw.Get_DevicePath(&_DevPath)
+	return _DevPath, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidDeviceEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidDeviceEvent with error-returning methods.
@@ -7047,8 +7447,10 @@ func WrapIMSVidEVR(raw *mediadirectshowtv.IMSVidEVR) IMSVidEVR {
 }
 
 // Get_Presenter wraps the raw Get_Presenter call.
-func (self IMSVidEVR) Get_Presenter(ppAllocPresent **mediamediafoundation.IMFVideoPresenter) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Presenter(ppAllocPresent)))
+func (self IMSVidEVR) Get_Presenter() (*mediamediafoundation.IMFVideoPresenter, error) {
+	var _ppAllocPresent *mediamediafoundation.IMFVideoPresenter
+	_hr := self.Raw.Get_Presenter(&_ppAllocPresent)
+	return _ppAllocPresent, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Presenter wraps the raw Put_Presenter call.
@@ -7062,8 +7464,10 @@ func (self IMSVidEVR) Put_SuppressEffects(bSuppress foundation.VARIANT_BOOL) err
 }
 
 // Get_SuppressEffects wraps the raw Get_SuppressEffects call.
-func (self IMSVidEVR) Get_SuppressEffects(bSuppress *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SuppressEffects(bSuppress)))
+func (self IMSVidEVR) Get_SuppressEffects() (foundation.VARIANT_BOOL, error) {
+	var _bSuppress foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SuppressEffects(&_bSuppress)
+	return _bSuppress, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidEVREvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidEVREvent with error-returning methods.
@@ -7094,13 +7498,17 @@ func WrapIMSVidEncoder(raw *mediadirectshowtv.IMSVidEncoder) IMSVidEncoder {
 }
 
 // Get_VideoEncoderInterface wraps the raw Get_VideoEncoderInterface call.
-func (self IMSVidEncoder) Get_VideoEncoderInterface(ppEncInt **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VideoEncoderInterface(ppEncInt)))
+func (self IMSVidEncoder) Get_VideoEncoderInterface() (*systemcom.IUnknown, error) {
+	var _ppEncInt *systemcom.IUnknown
+	_hr := self.Raw.Get_VideoEncoderInterface(&_ppEncInt)
+	return _ppEncInt, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AudioEncoderInterface wraps the raw Get_AudioEncoderInterface call.
-func (self IMSVidEncoder) Get_AudioEncoderInterface(ppEncInt **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioEncoderInterface(ppEncInt)))
+func (self IMSVidEncoder) Get_AudioEncoderInterface() (*systemcom.IUnknown, error) {
+	var _ppEncInt *systemcom.IUnknown
+	_hr := self.Raw.Get_AudioEncoderInterface(&_ppEncInt)
+	return _ppEncInt, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidFeature is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidFeature with error-returning methods.
@@ -7137,13 +7545,17 @@ func WrapIMSVidFeatures(raw *mediadirectshowtv.IMSVidFeatures) IMSVidFeatures {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IMSVidFeatures) Get_Count(lCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(lCount)))
+func (self IMSVidFeatures) Get_Count() (int32, error) {
+	var _lCount int32
+	_hr := self.Raw.Get_Count(&_lCount)
+	return _lCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IMSVidFeatures) Get__NewEnum(pD **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pD)))
+func (self IMSVidFeatures) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _pD *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_pD)
+	return _pD, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -7163,8 +7575,10 @@ func WrapIMSVidFilePlayback(raw *mediadirectshowtv.IMSVidFilePlayback) IMSVidFil
 }
 
 // Get_FileName wraps the raw Get_FileName call.
-func (self IMSVidFilePlayback) Get_FileName(FileName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FileName(FileName)))
+func (self IMSVidFilePlayback) Get_FileName() (foundation.BSTR, error) {
+	var _FileName foundation.BSTR
+	_hr := self.Raw.Get_FileName(&_FileName)
+	return _FileName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FileName wraps the raw Put_FileName call.
@@ -7216,8 +7630,10 @@ func (self IMSVidGenericSink) SetSinkFilter(bstrName foundation.BSTR) error {
 }
 
 // Get_SinkStreams wraps the raw Get_SinkStreams call.
-func (self IMSVidGenericSink) Get_SinkStreams(pStreams *mediadirectshowtv.MSVidSinkStreams) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SinkStreams(pStreams)))
+func (self IMSVidGenericSink) Get_SinkStreams() (mediadirectshowtv.MSVidSinkStreams, error) {
+	var _pStreams mediadirectshowtv.MSVidSinkStreams
+	_hr := self.Raw.Get_SinkStreams(&_pStreams)
+	return _pStreams, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SinkStreams wraps the raw Put_SinkStreams call.
@@ -7258,8 +7674,10 @@ func WrapIMSVidGraphSegment(raw *mediadirectshowtv.IMSVidGraphSegment) IMSVidGra
 }
 
 // Get_Init wraps the raw Get_Init call.
-func (self IMSVidGraphSegment) Get_Init(pInit **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Init(pInit)))
+func (self IMSVidGraphSegment) Get_Init() (*systemcom.IUnknown, error) {
+	var _pInit *systemcom.IUnknown
+	_hr := self.Raw.Get_Init(&_pInit)
+	return _pInit, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Init wraps the raw Put_Init call.
@@ -7273,8 +7691,10 @@ func (self IMSVidGraphSegment) EnumFilters(pNewEnum **mediadirectshow.IEnumFilte
 }
 
 // Get_Container wraps the raw Get_Container call.
-func (self IMSVidGraphSegment) Get_Container(ppCtl **mediadirectshowtv.IMSVidGraphSegmentContainer) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Container(ppCtl)))
+func (self IMSVidGraphSegment) Get_Container() (*mediadirectshowtv.IMSVidGraphSegmentContainer, error) {
+	var _ppCtl *mediadirectshowtv.IMSVidGraphSegmentContainer
+	_hr := self.Raw.Get_Container(&_ppCtl)
+	return _ppCtl, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Container wraps the raw Put_Container call.
@@ -7283,13 +7703,17 @@ func (self IMSVidGraphSegment) Put_Container(pCtl *mediadirectshowtv.IMSVidGraph
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IMSVidGraphSegment) Get_Type(pType *mediadirectshowtv.MSVidSegmentType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(pType)))
+func (self IMSVidGraphSegment) Get_Type() (mediadirectshowtv.MSVidSegmentType, error) {
+	var _pType mediadirectshowtv.MSVidSegmentType
+	_hr := self.Raw.Get_Type(&_pType)
+	return _pType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Category wraps the raw Get_Category call.
-func (self IMSVidGraphSegment) Get_Category(pGuid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Category(pGuid)))
+func (self IMSVidGraphSegment) Get_Category() (win32.GUID, error) {
+	var _pGuid win32.GUID
+	_hr := self.Raw.Get_Category(&_pGuid)
+	return _pGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Build wraps the raw Build call.
@@ -7461,8 +7885,10 @@ func WrapIMSVidInputDevice(raw *mediadirectshowtv.IMSVidInputDevice) IMSVidInput
 }
 
 // IsViewable wraps the raw IsViewable call.
-func (self IMSVidInputDevice) IsViewable(v *systemvariant.VARIANT, pfViewable *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsViewable(v, pfViewable)))
+func (self IMSVidInputDevice) IsViewable(v *systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	var _pfViewable foundation.VARIANT_BOOL
+	_hr := self.Raw.IsViewable(v, &_pfViewable)
+	return _pfViewable, win32.HRESULTError(int32(_hr))
 }
 
 // View wraps the raw View call.
@@ -7493,13 +7919,17 @@ func WrapIMSVidInputDevices(raw *mediadirectshowtv.IMSVidInputDevices) IMSVidInp
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IMSVidInputDevices) Get_Count(lCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(lCount)))
+func (self IMSVidInputDevices) Get_Count() (int32, error) {
+	var _lCount int32
+	_hr := self.Raw.Get_Count(&_lCount)
+	return _lCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IMSVidInputDevices) Get__NewEnum(pD **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pD)))
+func (self IMSVidInputDevices) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _pD *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_pD)
+	return _pD, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -7541,13 +7971,17 @@ func WrapIMSVidOutputDevices(raw *mediadirectshowtv.IMSVidOutputDevices) IMSVidO
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IMSVidOutputDevices) Get_Count(lCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(lCount)))
+func (self IMSVidOutputDevices) Get_Count() (int32, error) {
+	var _lCount int32
+	_hr := self.Raw.Get_Count(&_lCount)
+	return _lCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IMSVidOutputDevices) Get__NewEnum(pD **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pD)))
+func (self IMSVidOutputDevices) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _pD *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_pD)
+	return _pD, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -7567,8 +8001,10 @@ func WrapIMSVidPlayback(raw *mediadirectshowtv.IMSVidPlayback) IMSVidPlayback {
 }
 
 // Get_EnableResetOnStop wraps the raw Get_EnableResetOnStop call.
-func (self IMSVidPlayback) Get_EnableResetOnStop(pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnableResetOnStop(pVal)))
+func (self IMSVidPlayback) Get_EnableResetOnStop() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_EnableResetOnStop(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EnableResetOnStop wraps the raw Put_EnableResetOnStop call.
@@ -7592,8 +8028,10 @@ func (self IMSVidPlayback) Stop() error {
 }
 
 // Get_CanStep wraps the raw Get_CanStep call.
-func (self IMSVidPlayback) Get_CanStep(fBackwards foundation.VARIANT_BOOL, pfCan *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanStep(fBackwards, pfCan)))
+func (self IMSVidPlayback) Get_CanStep(fBackwards foundation.VARIANT_BOOL) (foundation.VARIANT_BOOL, error) {
+	var _pfCan foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_CanStep(fBackwards, &_pfCan)
+	return _pfCan, win32.HRESULTError(int32(_hr))
 }
 
 // Step wraps the raw Step call.
@@ -7602,8 +8040,10 @@ func (self IMSVidPlayback) Step(lStep int32) error {
 }
 
 // Get_Rate wraps the raw Get_Rate call.
-func (self IMSVidPlayback) Get_Rate(plRate *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Rate(plRate)))
+func (self IMSVidPlayback) Get_Rate() (float64, error) {
+	var _plRate float64
+	_hr := self.Raw.Get_Rate(&_plRate)
+	return _plRate, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CurrentPosition wraps the raw Put_CurrentPosition call.
@@ -7612,8 +8052,10 @@ func (self IMSVidPlayback) Put_CurrentPosition(lPosition int32) error {
 }
 
 // Get_CurrentPosition wraps the raw Get_CurrentPosition call.
-func (self IMSVidPlayback) Get_CurrentPosition(lPosition *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentPosition(lPosition)))
+func (self IMSVidPlayback) Get_CurrentPosition() (int32, error) {
+	var _lPosition int32
+	_hr := self.Raw.Get_CurrentPosition(&_lPosition)
+	return _lPosition, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PositionMode wraps the raw Put_PositionMode call.
@@ -7622,13 +8064,17 @@ func (self IMSVidPlayback) Put_PositionMode(lPositionMode mediadirectshowtv.Posi
 }
 
 // Get_PositionMode wraps the raw Get_PositionMode call.
-func (self IMSVidPlayback) Get_PositionMode(lPositionMode *mediadirectshowtv.PositionModeList) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PositionMode(lPositionMode)))
+func (self IMSVidPlayback) Get_PositionMode() (mediadirectshowtv.PositionModeList, error) {
+	var _lPositionMode mediadirectshowtv.PositionModeList
+	_hr := self.Raw.Get_PositionMode(&_lPositionMode)
+	return _lPositionMode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Length wraps the raw Get_Length call.
-func (self IMSVidPlayback) Get_Length(lLength *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Length(lLength)))
+func (self IMSVidPlayback) Get_Length() (int32, error) {
+	var _lLength int32
+	_hr := self.Raw.Get_Length(&_lLength)
+	return _lLength, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidPlaybackEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidPlaybackEvent with error-returning methods.
@@ -7659,8 +8105,10 @@ func WrapIMSVidRect(raw *mediadirectshowtv.IMSVidRect) IMSVidRect {
 }
 
 // Get_Top wraps the raw Get_Top call.
-func (self IMSVidRect) Get_Top(TopVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Top(TopVal)))
+func (self IMSVidRect) Get_Top() (int32, error) {
+	var _TopVal int32
+	_hr := self.Raw.Get_Top(&_TopVal)
+	return _TopVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Top wraps the raw Put_Top call.
@@ -7669,8 +8117,10 @@ func (self IMSVidRect) Put_Top(TopVal int32) error {
 }
 
 // Get_Left wraps the raw Get_Left call.
-func (self IMSVidRect) Get_Left(LeftVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Left(LeftVal)))
+func (self IMSVidRect) Get_Left() (int32, error) {
+	var _LeftVal int32
+	_hr := self.Raw.Get_Left(&_LeftVal)
+	return _LeftVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Left wraps the raw Put_Left call.
@@ -7679,8 +8129,10 @@ func (self IMSVidRect) Put_Left(LeftVal int32) error {
 }
 
 // Get_Width wraps the raw Get_Width call.
-func (self IMSVidRect) Get_Width(WidthVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Width(WidthVal)))
+func (self IMSVidRect) Get_Width() (int32, error) {
+	var _WidthVal int32
+	_hr := self.Raw.Get_Width(&_WidthVal)
+	return _WidthVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Width wraps the raw Put_Width call.
@@ -7689,8 +8141,10 @@ func (self IMSVidRect) Put_Width(WidthVal int32) error {
 }
 
 // Get_Height wraps the raw Get_Height call.
-func (self IMSVidRect) Get_Height(HeightVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Height(HeightVal)))
+func (self IMSVidRect) Get_Height() (int32, error) {
+	var _HeightVal int32
+	_hr := self.Raw.Get_Height(&_HeightVal)
+	return _HeightVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Height wraps the raw Put_Height call.
@@ -7699,8 +8153,10 @@ func (self IMSVidRect) Put_Height(HeightVal int32) error {
 }
 
 // Get_HWnd wraps the raw Get_HWnd call.
-func (self IMSVidRect) Get_HWnd(HWndVal *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HWnd(HWndVal)))
+func (self IMSVidRect) Get_HWnd() (foundation.HWND, error) {
+	var _HWndVal foundation.HWND
+	_hr := self.Raw.Get_HWnd(&_HWndVal)
+	return _HWndVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_HWnd wraps the raw Put_HWnd call.
@@ -7725,8 +8181,10 @@ func WrapIMSVidStreamBufferRecordingControl(raw *mediadirectshowtv.IMSVidStreamB
 }
 
 // Get_StartTime wraps the raw Get_StartTime call.
-func (self IMSVidStreamBufferRecordingControl) Get_StartTime(rtStart *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StartTime(rtStart)))
+func (self IMSVidStreamBufferRecordingControl) Get_StartTime() (int32, error) {
+	var _rtStart int32
+	_hr := self.Raw.Get_StartTime(&_rtStart)
+	return _rtStart, win32.HRESULTError(int32(_hr))
 }
 
 // Put_StartTime wraps the raw Put_StartTime call.
@@ -7735,8 +8193,10 @@ func (self IMSVidStreamBufferRecordingControl) Put_StartTime(rtStart int32) erro
 }
 
 // Get_StopTime wraps the raw Get_StopTime call.
-func (self IMSVidStreamBufferRecordingControl) Get_StopTime(rtStop *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StopTime(rtStop)))
+func (self IMSVidStreamBufferRecordingControl) Get_StopTime() (int32, error) {
+	var _rtStop int32
+	_hr := self.Raw.Get_StopTime(&_rtStop)
+	return _rtStop, win32.HRESULTError(int32(_hr))
 }
 
 // Put_StopTime wraps the raw Put_StopTime call.
@@ -7745,23 +8205,31 @@ func (self IMSVidStreamBufferRecordingControl) Put_StopTime(rtStop int32) error 
 }
 
 // Get_RecordingStopped wraps the raw Get_RecordingStopped call.
-func (self IMSVidStreamBufferRecordingControl) Get_RecordingStopped(phResult *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RecordingStopped(phResult)))
+func (self IMSVidStreamBufferRecordingControl) Get_RecordingStopped() (foundation.VARIANT_BOOL, error) {
+	var _phResult foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RecordingStopped(&_phResult)
+	return _phResult, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RecordingStarted wraps the raw Get_RecordingStarted call.
-func (self IMSVidStreamBufferRecordingControl) Get_RecordingStarted(phResult *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RecordingStarted(phResult)))
+func (self IMSVidStreamBufferRecordingControl) Get_RecordingStarted() (foundation.VARIANT_BOOL, error) {
+	var _phResult foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RecordingStarted(&_phResult)
+	return _phResult, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RecordingType wraps the raw Get_RecordingType call.
-func (self IMSVidStreamBufferRecordingControl) Get_RecordingType(dwType *mediadirectshowtv.RecordingType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RecordingType(dwType)))
+func (self IMSVidStreamBufferRecordingControl) Get_RecordingType() (mediadirectshowtv.RecordingType, error) {
+	var _dwType mediadirectshowtv.RecordingType
+	_hr := self.Raw.Get_RecordingType(&_dwType)
+	return _dwType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RecordingAttribute wraps the raw Get_RecordingAttribute call.
-func (self IMSVidStreamBufferRecordingControl) Get_RecordingAttribute(pRecordingAttribute **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RecordingAttribute(pRecordingAttribute)))
+func (self IMSVidStreamBufferRecordingControl) Get_RecordingAttribute() (*systemcom.IUnknown, error) {
+	var _pRecordingAttribute *systemcom.IUnknown
+	_hr := self.Raw.Get_RecordingAttribute(&_pRecordingAttribute)
+	return _pRecordingAttribute, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidStreamBufferSink is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidStreamBufferSink with error-returning methods.
@@ -7776,18 +8244,24 @@ func WrapIMSVidStreamBufferSink(raw *mediadirectshowtv.IMSVidStreamBufferSink) I
 }
 
 // Get_ContentRecorder wraps the raw Get_ContentRecorder call.
-func (self IMSVidStreamBufferSink) Get_ContentRecorder(pszFilename foundation.BSTR, pRecordingIUnknown **mediadirectshowtv.IMSVidStreamBufferRecordingControl) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ContentRecorder(pszFilename, pRecordingIUnknown)))
+func (self IMSVidStreamBufferSink) Get_ContentRecorder(pszFilename foundation.BSTR) (*mediadirectshowtv.IMSVidStreamBufferRecordingControl, error) {
+	var _pRecordingIUnknown *mediadirectshowtv.IMSVidStreamBufferRecordingControl
+	_hr := self.Raw.Get_ContentRecorder(pszFilename, &_pRecordingIUnknown)
+	return _pRecordingIUnknown, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReferenceRecorder wraps the raw Get_ReferenceRecorder call.
-func (self IMSVidStreamBufferSink) Get_ReferenceRecorder(pszFilename foundation.BSTR, pRecordingIUnknown **mediadirectshowtv.IMSVidStreamBufferRecordingControl) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReferenceRecorder(pszFilename, pRecordingIUnknown)))
+func (self IMSVidStreamBufferSink) Get_ReferenceRecorder(pszFilename foundation.BSTR) (*mediadirectshowtv.IMSVidStreamBufferRecordingControl, error) {
+	var _pRecordingIUnknown *mediadirectshowtv.IMSVidStreamBufferRecordingControl
+	_hr := self.Raw.Get_ReferenceRecorder(pszFilename, &_pRecordingIUnknown)
+	return _pRecordingIUnknown, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SinkName wraps the raw Get_SinkName call.
-func (self IMSVidStreamBufferSink) Get_SinkName(pName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SinkName(pName)))
+func (self IMSVidStreamBufferSink) Get_SinkName() (foundation.BSTR, error) {
+	var _pName foundation.BSTR
+	_hr := self.Raw.Get_SinkName(&_pName)
+	return _pName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SinkName wraps the raw Put_SinkName call.
@@ -7801,8 +8275,10 @@ func (self IMSVidStreamBufferSink) NameSetLock() error {
 }
 
 // Get_SBESink wraps the raw Get_SBESink call.
-func (self IMSVidStreamBufferSink) Get_SBESink(sbeConfig **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SBESink(sbeConfig)))
+func (self IMSVidStreamBufferSink) Get_SBESink() (*systemcom.IUnknown, error) {
+	var _sbeConfig *systemcom.IUnknown
+	_hr := self.Raw.Get_SBESink(&_sbeConfig)
+	return _sbeConfig, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidStreamBufferSink2 is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidStreamBufferSink2 with error-returning methods.
@@ -7833,28 +8309,38 @@ func WrapIMSVidStreamBufferSink3(raw *mediadirectshowtv.IMSVidStreamBufferSink3)
 }
 
 // SetMinSeek wraps the raw SetMinSeek call.
-func (self IMSVidStreamBufferSink3) SetMinSeek(pdwMin *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetMinSeek(pdwMin)))
+func (self IMSVidStreamBufferSink3) SetMinSeek() (int32, error) {
+	var _pdwMin int32
+	_hr := self.Raw.SetMinSeek(&_pdwMin)
+	return _pdwMin, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AudioCounter wraps the raw Get_AudioCounter call.
-func (self IMSVidStreamBufferSink3) Get_AudioCounter(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioCounter(ppUnk)))
+func (self IMSVidStreamBufferSink3) Get_AudioCounter() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get_AudioCounter(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VideoCounter wraps the raw Get_VideoCounter call.
-func (self IMSVidStreamBufferSink3) Get_VideoCounter(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VideoCounter(ppUnk)))
+func (self IMSVidStreamBufferSink3) Get_VideoCounter() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get_VideoCounter(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CCCounter wraps the raw Get_CCCounter call.
-func (self IMSVidStreamBufferSink3) Get_CCCounter(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CCCounter(ppUnk)))
+func (self IMSVidStreamBufferSink3) Get_CCCounter() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get_CCCounter(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Get_WSTCounter wraps the raw Get_WSTCounter call.
-func (self IMSVidStreamBufferSink3) Get_WSTCounter(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WSTCounter(ppUnk)))
+func (self IMSVidStreamBufferSink3) Get_WSTCounter() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get_WSTCounter(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AudioAnalysisFilter wraps the raw Put_AudioAnalysisFilter call.
@@ -7863,13 +8349,17 @@ func (self IMSVidStreamBufferSink3) Put_AudioAnalysisFilter(szCLSID foundation.B
 }
 
 // Get_AudioAnalysisFilter wraps the raw Get_AudioAnalysisFilter call.
-func (self IMSVidStreamBufferSink3) Get_AudioAnalysisFilter(pszCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioAnalysisFilter(pszCLSID)))
+func (self IMSVidStreamBufferSink3) Get_AudioAnalysisFilter() (foundation.BSTR, error) {
+	var _pszCLSID foundation.BSTR
+	_hr := self.Raw.Get_AudioAnalysisFilter(&_pszCLSID)
+	return _pszCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Get__AudioAnalysisFilter wraps the raw Get__AudioAnalysisFilter call.
-func (self IMSVidStreamBufferSink3) Get__AudioAnalysisFilter(pGuid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__AudioAnalysisFilter(pGuid)))
+func (self IMSVidStreamBufferSink3) Get__AudioAnalysisFilter() (win32.GUID, error) {
+	var _pGuid win32.GUID
+	_hr := self.Raw.Get__AudioAnalysisFilter(&_pGuid)
+	return _pGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Put_VideoAnalysisFilter wraps the raw Put_VideoAnalysisFilter call.
@@ -7878,13 +8368,17 @@ func (self IMSVidStreamBufferSink3) Put_VideoAnalysisFilter(szCLSID foundation.B
 }
 
 // Get_VideoAnalysisFilter wraps the raw Get_VideoAnalysisFilter call.
-func (self IMSVidStreamBufferSink3) Get_VideoAnalysisFilter(pszCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VideoAnalysisFilter(pszCLSID)))
+func (self IMSVidStreamBufferSink3) Get_VideoAnalysisFilter() (foundation.BSTR, error) {
+	var _pszCLSID foundation.BSTR
+	_hr := self.Raw.Get_VideoAnalysisFilter(&_pszCLSID)
+	return _pszCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Get__VideoAnalysisFilter wraps the raw Get__VideoAnalysisFilter call.
-func (self IMSVidStreamBufferSink3) Get__VideoAnalysisFilter(pGuid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__VideoAnalysisFilter(pGuid)))
+func (self IMSVidStreamBufferSink3) Get__VideoAnalysisFilter() (win32.GUID, error) {
+	var _pGuid win32.GUID
+	_hr := self.Raw.Get__VideoAnalysisFilter(&_pGuid)
+	return _pGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DataAnalysisFilter wraps the raw Put_DataAnalysisFilter call.
@@ -7893,18 +8387,24 @@ func (self IMSVidStreamBufferSink3) Put_DataAnalysisFilter(szCLSID foundation.BS
 }
 
 // Get_DataAnalysisFilter wraps the raw Get_DataAnalysisFilter call.
-func (self IMSVidStreamBufferSink3) Get_DataAnalysisFilter(pszCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DataAnalysisFilter(pszCLSID)))
+func (self IMSVidStreamBufferSink3) Get_DataAnalysisFilter() (foundation.BSTR, error) {
+	var _pszCLSID foundation.BSTR
+	_hr := self.Raw.Get_DataAnalysisFilter(&_pszCLSID)
+	return _pszCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Get__DataAnalysisFilter wraps the raw Get__DataAnalysisFilter call.
-func (self IMSVidStreamBufferSink3) Get__DataAnalysisFilter(pGuid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__DataAnalysisFilter(pGuid)))
+func (self IMSVidStreamBufferSink3) Get__DataAnalysisFilter() (win32.GUID, error) {
+	var _pGuid win32.GUID
+	_hr := self.Raw.Get__DataAnalysisFilter(&_pGuid)
+	return _pGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LicenseErrorCode wraps the raw Get_LicenseErrorCode call.
-func (self IMSVidStreamBufferSink3) Get_LicenseErrorCode(hres *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LicenseErrorCode(hres)))
+func (self IMSVidStreamBufferSink3) Get_LicenseErrorCode() (foundation.HRESULT, error) {
+	var _hres foundation.HRESULT
+	_hr := self.Raw.Get_LicenseErrorCode(&_hres)
+	return _hres, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidStreamBufferSinkEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidStreamBufferSinkEvent with error-returning methods.
@@ -7998,13 +8498,17 @@ func WrapIMSVidStreamBufferSource(raw *mediadirectshowtv.IMSVidStreamBufferSourc
 }
 
 // Get_Start wraps the raw Get_Start call.
-func (self IMSVidStreamBufferSource) Get_Start(lStart *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Start(lStart)))
+func (self IMSVidStreamBufferSource) Get_Start() (int32, error) {
+	var _lStart int32
+	_hr := self.Raw.Get_Start(&_lStart)
+	return _lStart, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RecordingAttribute wraps the raw Get_RecordingAttribute call.
-func (self IMSVidStreamBufferSource) Get_RecordingAttribute(pRecordingAttribute **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RecordingAttribute(pRecordingAttribute)))
+func (self IMSVidStreamBufferSource) Get_RecordingAttribute() (*systemcom.IUnknown, error) {
+	var _pRecordingAttribute *systemcom.IUnknown
+	_hr := self.Raw.Get_RecordingAttribute(&_pRecordingAttribute)
+	return _pRecordingAttribute, win32.HRESULTError(int32(_hr))
 }
 
 // CurrentRatings wraps the raw CurrentRatings call.
@@ -8028,8 +8532,10 @@ func (self IMSVidStreamBufferSource) Put_UnratedDelay(dwDelay int32) error {
 }
 
 // Get_SBESource wraps the raw Get_SBESource call.
-func (self IMSVidStreamBufferSource) Get_SBESource(sbeFilter **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SBESource(sbeFilter)))
+func (self IMSVidStreamBufferSource) Get_SBESource() (*systemcom.IUnknown, error) {
+	var _sbeFilter *systemcom.IUnknown
+	_hr := self.Raw.Get_SBESource(&_sbeFilter)
+	return _sbeFilter, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidStreamBufferSource2 is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidStreamBufferSource2 with error-returning methods.
@@ -8044,23 +8550,31 @@ func WrapIMSVidStreamBufferSource2(raw *mediadirectshowtv.IMSVidStreamBufferSour
 }
 
 // Get_AudioCounter wraps the raw Get_AudioCounter call.
-func (self IMSVidStreamBufferSource2) Get_AudioCounter(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioCounter(ppUnk)))
+func (self IMSVidStreamBufferSource2) Get_AudioCounter() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get_AudioCounter(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VideoCounter wraps the raw Get_VideoCounter call.
-func (self IMSVidStreamBufferSource2) Get_VideoCounter(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VideoCounter(ppUnk)))
+func (self IMSVidStreamBufferSource2) Get_VideoCounter() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get_VideoCounter(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CCCounter wraps the raw Get_CCCounter call.
-func (self IMSVidStreamBufferSource2) Get_CCCounter(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CCCounter(ppUnk)))
+func (self IMSVidStreamBufferSource2) Get_CCCounter() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get_CCCounter(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // Get_WSTCounter wraps the raw Get_WSTCounter call.
-func (self IMSVidStreamBufferSource2) Get_WSTCounter(ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WSTCounter(ppUnk)))
+func (self IMSVidStreamBufferSource2) Get_WSTCounter() (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.Get_WSTCounter(&_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidStreamBufferSourceEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidStreamBufferSourceEvent with error-returning methods.
@@ -8229,8 +8743,10 @@ func WrapIMSVidTuner(raw *mediadirectshowtv.IMSVidTuner) IMSVidTuner {
 }
 
 // Get_Tune wraps the raw Get_Tune call.
-func (self IMSVidTuner) Get_Tune(ppTR **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Tune(ppTR)))
+func (self IMSVidTuner) Get_Tune() (*mediadirectshowtv.ITuneRequest, error) {
+	var _ppTR *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.Get_Tune(&_ppTR)
+	return _ppTR, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Tune wraps the raw Put_Tune call.
@@ -8239,8 +8755,10 @@ func (self IMSVidTuner) Put_Tune(pTR *mediadirectshowtv.ITuneRequest) error {
 }
 
 // Get_TuningSpace wraps the raw Get_TuningSpace call.
-func (self IMSVidTuner) Get_TuningSpace(plTS **mediadirectshowtv.ITuningSpace) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TuningSpace(plTS)))
+func (self IMSVidTuner) Get_TuningSpace() (*mediadirectshowtv.ITuningSpace, error) {
+	var _plTS *mediadirectshowtv.ITuningSpace
+	_hr := self.Raw.Get_TuningSpace(&_plTS)
+	return _plTS, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TuningSpace wraps the raw Put_TuningSpace call.
@@ -8276,8 +8794,10 @@ func WrapIMSVidVMR9(raw *mediadirectshowtv.IMSVidVMR9) IMSVidVMR9 {
 }
 
 // Get_Allocator_ID wraps the raw Get_Allocator_ID call.
-func (self IMSVidVMR9) Get_Allocator_ID(ID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Allocator_ID(ID)))
+func (self IMSVidVMR9) Get_Allocator_ID() (int32, error) {
+	var _ID int32
+	_hr := self.Raw.Get_Allocator_ID(&_ID)
+	return _ID, win32.HRESULTError(int32(_hr))
 }
 
 // SetAllocator wraps the raw SetAllocator call.
@@ -8291,13 +8811,17 @@ func (self IMSVidVMR9) Put_SuppressEffects(bSuppress foundation.VARIANT_BOOL) er
 }
 
 // Get_SuppressEffects wraps the raw Get_SuppressEffects call.
-func (self IMSVidVMR9) Get_SuppressEffects(bSuppress *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SuppressEffects(bSuppress)))
+func (self IMSVidVMR9) Get_SuppressEffects() (foundation.VARIANT_BOOL, error) {
+	var _bSuppress foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SuppressEffects(&_bSuppress)
+	return _bSuppress, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Allocator wraps the raw Get_Allocator call.
-func (self IMSVidVMR9) Get_Allocator(AllocPresent **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Allocator(AllocPresent)))
+func (self IMSVidVMR9) Get_Allocator() (*systemcom.IUnknown, error) {
+	var _AllocPresent *systemcom.IUnknown
+	_hr := self.Raw.Get_Allocator(&_AllocPresent)
+	return _AllocPresent, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidVRGraphSegment is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidVRGraphSegment with error-returning methods.
@@ -8322,13 +8846,17 @@ func (self IMSVidVRGraphSegment) Put_Owner(Window foundation.HWND) error {
 }
 
 // Get_Owner wraps the raw Get_Owner call.
-func (self IMSVidVRGraphSegment) Get_Owner(Window *foundation.HWND) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Owner(Window)))
+func (self IMSVidVRGraphSegment) Get_Owner() (foundation.HWND, error) {
+	var _Window foundation.HWND
+	_hr := self.Raw.Get_Owner(&_Window)
+	return _Window, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UseOverlay wraps the raw Get_UseOverlay call.
-func (self IMSVidVRGraphSegment) Get_UseOverlay(UseOverlayVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UseOverlay(UseOverlayVal)))
+func (self IMSVidVRGraphSegment) Get_UseOverlay() (foundation.VARIANT_BOOL, error) {
+	var _UseOverlayVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_UseOverlay(&_UseOverlayVal)
+	return _UseOverlayVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UseOverlay wraps the raw Put_UseOverlay call.
@@ -8337,8 +8865,10 @@ func (self IMSVidVRGraphSegment) Put_UseOverlay(UseOverlayVal foundation.VARIANT
 }
 
 // Get_Visible wraps the raw Get_Visible call.
-func (self IMSVidVRGraphSegment) Get_Visible(Visible *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Visible(Visible)))
+func (self IMSVidVRGraphSegment) Get_Visible() (foundation.VARIANT_BOOL, error) {
+	var _Visible foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Visible(&_Visible)
+	return _Visible, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Visible wraps the raw Put_Visible call.
@@ -8347,8 +8877,10 @@ func (self IMSVidVRGraphSegment) Put_Visible(Visible foundation.VARIANT_BOOL) er
 }
 
 // Get_ColorKey wraps the raw Get_ColorKey call.
-func (self IMSVidVRGraphSegment) Get_ColorKey(ColorKey *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ColorKey(ColorKey)))
+func (self IMSVidVRGraphSegment) Get_ColorKey() (uint32, error) {
+	var _ColorKey uint32
+	_hr := self.Raw.Get_ColorKey(&_ColorKey)
+	return _ColorKey, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ColorKey wraps the raw Put_ColorKey call.
@@ -8357,13 +8889,17 @@ func (self IMSVidVRGraphSegment) Put_ColorKey(ColorKey uint32) error {
 }
 
 // Get_Source wraps the raw Get_Source call.
-func (self IMSVidVRGraphSegment) Get_Source(r *foundation.RECT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Source(r)))
+func (self IMSVidVRGraphSegment) Get_Source() (foundation.RECT, error) {
+	var _r foundation.RECT
+	_hr := self.Raw.Get_Source(&_r)
+	return _r, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Destination wraps the raw Get_Destination call.
-func (self IMSVidVRGraphSegment) Get_Destination(r *foundation.RECT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Destination(r)))
+func (self IMSVidVRGraphSegment) Get_Destination() (foundation.RECT, error) {
+	var _r foundation.RECT
+	_hr := self.Raw.Get_Destination(&_r)
+	return _r, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NativeSize wraps the raw Get_NativeSize call.
@@ -8372,8 +8908,10 @@ func (self IMSVidVRGraphSegment) Get_NativeSize(sizeval *foundation.SIZE, aspect
 }
 
 // Get_BorderColor wraps the raw Get_BorderColor call.
-func (self IMSVidVRGraphSegment) Get_BorderColor(color *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BorderColor(color)))
+func (self IMSVidVRGraphSegment) Get_BorderColor() (uint32, error) {
+	var _color uint32
+	_hr := self.Raw.Get_BorderColor(&_color)
+	return _color, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BorderColor wraps the raw Put_BorderColor call.
@@ -8382,8 +8920,10 @@ func (self IMSVidVRGraphSegment) Put_BorderColor(color uint32) error {
 }
 
 // Get_MaintainAspectRatio wraps the raw Get_MaintainAspectRatio call.
-func (self IMSVidVRGraphSegment) Get_MaintainAspectRatio(fMaintain *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaintainAspectRatio(fMaintain)))
+func (self IMSVidVRGraphSegment) Get_MaintainAspectRatio() (foundation.VARIANT_BOOL, error) {
+	var _fMaintain foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MaintainAspectRatio(&_fMaintain)
+	return _fMaintain, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaintainAspectRatio wraps the raw Put_MaintainAspectRatio call.
@@ -8429,8 +8969,10 @@ func WrapIMSVidVideoRenderer(raw *mediadirectshowtv.IMSVidVideoRenderer) IMSVidV
 }
 
 // Get_CustomCompositorClass wraps the raw Get_CustomCompositorClass call.
-func (self IMSVidVideoRenderer) Get_CustomCompositorClass(CompositorCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CustomCompositorClass(CompositorCLSID)))
+func (self IMSVidVideoRenderer) Get_CustomCompositorClass() (foundation.BSTR, error) {
+	var _CompositorCLSID foundation.BSTR
+	_hr := self.Raw.Get_CustomCompositorClass(&_CompositorCLSID)
+	return _CompositorCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CustomCompositorClass wraps the raw Put_CustomCompositorClass call.
@@ -8439,8 +8981,10 @@ func (self IMSVidVideoRenderer) Put_CustomCompositorClass(CompositorCLSID founda
 }
 
 // Get__CustomCompositorClass wraps the raw Get__CustomCompositorClass call.
-func (self IMSVidVideoRenderer) Get__CustomCompositorClass(CompositorCLSID *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__CustomCompositorClass(CompositorCLSID)))
+func (self IMSVidVideoRenderer) Get__CustomCompositorClass() (win32.GUID, error) {
+	var _CompositorCLSID win32.GUID
+	_hr := self.Raw.Get__CustomCompositorClass(&_CompositorCLSID)
+	return _CompositorCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put__CustomCompositorClass wraps the raw Put__CustomCompositorClass call.
@@ -8449,8 +8993,10 @@ func (self IMSVidVideoRenderer) Put__CustomCompositorClass(CompositorCLSID *win3
 }
 
 // Get__CustomCompositor wraps the raw Get__CustomCompositor call.
-func (self IMSVidVideoRenderer) Get__CustomCompositor(Compositor **mediadirectshow.IVMRImageCompositor) error {
-	return win32.HRESULTError(int32(self.Raw.Get__CustomCompositor(Compositor)))
+func (self IMSVidVideoRenderer) Get__CustomCompositor() (*mediadirectshow.IVMRImageCompositor, error) {
+	var _Compositor *mediadirectshow.IVMRImageCompositor
+	_hr := self.Raw.Get__CustomCompositor(&_Compositor)
+	return _Compositor, win32.HRESULTError(int32(_hr))
 }
 
 // Put__CustomCompositor wraps the raw Put__CustomCompositor call.
@@ -8459,13 +9005,17 @@ func (self IMSVidVideoRenderer) Put__CustomCompositor(Compositor *mediadirectsho
 }
 
 // Get_MixerBitmap wraps the raw Get_MixerBitmap call.
-func (self IMSVidVideoRenderer) Get_MixerBitmap(MixerPictureDisp **systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MixerBitmap(MixerPictureDisp)))
+func (self IMSVidVideoRenderer) Get_MixerBitmap() (*systemole.IPictureDisp, error) {
+	var _MixerPictureDisp *systemole.IPictureDisp
+	_hr := self.Raw.Get_MixerBitmap(&_MixerPictureDisp)
+	return _MixerPictureDisp, win32.HRESULTError(int32(_hr))
 }
 
 // Get__MixerBitmap wraps the raw Get__MixerBitmap call.
-func (self IMSVidVideoRenderer) Get__MixerBitmap(MixerPicture **mediadirectshow.IVMRMixerBitmap) error {
-	return win32.HRESULTError(int32(self.Raw.Get__MixerBitmap(MixerPicture)))
+func (self IMSVidVideoRenderer) Get__MixerBitmap() (*mediadirectshow.IVMRMixerBitmap, error) {
+	var _MixerPicture *mediadirectshow.IVMRMixerBitmap
+	_hr := self.Raw.Get__MixerBitmap(&_MixerPicture)
+	return _MixerPicture, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MixerBitmap wraps the raw Put_MixerBitmap call.
@@ -8479,8 +9029,10 @@ func (self IMSVidVideoRenderer) Put__MixerBitmap(MixerPicture *mediadirectshow.V
 }
 
 // Get_MixerBitmapPositionRect wraps the raw Get_MixerBitmapPositionRect call.
-func (self IMSVidVideoRenderer) Get_MixerBitmapPositionRect(rDest **mediadirectshowtv.IMSVidRect) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MixerBitmapPositionRect(rDest)))
+func (self IMSVidVideoRenderer) Get_MixerBitmapPositionRect() (*mediadirectshowtv.IMSVidRect, error) {
+	var _rDest *mediadirectshowtv.IMSVidRect
+	_hr := self.Raw.Get_MixerBitmapPositionRect(&_rDest)
+	return _rDest, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MixerBitmapPositionRect wraps the raw Put_MixerBitmapPositionRect call.
@@ -8489,8 +9041,10 @@ func (self IMSVidVideoRenderer) Put_MixerBitmapPositionRect(rDest *mediadirectsh
 }
 
 // Get_MixerBitmapOpacity wraps the raw Get_MixerBitmapOpacity call.
-func (self IMSVidVideoRenderer) Get_MixerBitmapOpacity(opacity *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MixerBitmapOpacity(opacity)))
+func (self IMSVidVideoRenderer) Get_MixerBitmapOpacity() (int32, error) {
+	var _opacity int32
+	_hr := self.Raw.Get_MixerBitmapOpacity(&_opacity)
+	return _opacity, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MixerBitmapOpacity wraps the raw Put_MixerBitmapOpacity call.
@@ -8504,8 +9058,10 @@ func (self IMSVidVideoRenderer) SetupMixerBitmap(MixerPictureDisp *systemole.IPi
 }
 
 // Get_SourceSize wraps the raw Get_SourceSize call.
-func (self IMSVidVideoRenderer) Get_SourceSize(CurrentSize *mediadirectshowtv.SourceSizeList) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SourceSize(CurrentSize)))
+func (self IMSVidVideoRenderer) Get_SourceSize() (mediadirectshowtv.SourceSizeList, error) {
+	var _CurrentSize mediadirectshowtv.SourceSizeList
+	_hr := self.Raw.Get_SourceSize(&_CurrentSize)
+	return _CurrentSize, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SourceSize wraps the raw Put_SourceSize call.
@@ -8514,8 +9070,10 @@ func (self IMSVidVideoRenderer) Put_SourceSize(NewSize mediadirectshowtv.SourceS
 }
 
 // Get_OverScan wraps the raw Get_OverScan call.
-func (self IMSVidVideoRenderer) Get_OverScan(plPercent *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OverScan(plPercent)))
+func (self IMSVidVideoRenderer) Get_OverScan() (int32, error) {
+	var _plPercent int32
+	_hr := self.Raw.Get_OverScan(&_plPercent)
+	return _plPercent, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OverScan wraps the raw Put_OverScan call.
@@ -8524,23 +9082,31 @@ func (self IMSVidVideoRenderer) Put_OverScan(lPercent int32) error {
 }
 
 // Get_AvailableSourceRect wraps the raw Get_AvailableSourceRect call.
-func (self IMSVidVideoRenderer) Get_AvailableSourceRect(pRect **mediadirectshowtv.IMSVidRect) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AvailableSourceRect(pRect)))
+func (self IMSVidVideoRenderer) Get_AvailableSourceRect() (*mediadirectshowtv.IMSVidRect, error) {
+	var _pRect *mediadirectshowtv.IMSVidRect
+	_hr := self.Raw.Get_AvailableSourceRect(&_pRect)
+	return _pRect, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MaxVidRect wraps the raw Get_MaxVidRect call.
-func (self IMSVidVideoRenderer) Get_MaxVidRect(ppVidRect **mediadirectshowtv.IMSVidRect) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxVidRect(ppVidRect)))
+func (self IMSVidVideoRenderer) Get_MaxVidRect() (*mediadirectshowtv.IMSVidRect, error) {
+	var _ppVidRect *mediadirectshowtv.IMSVidRect
+	_hr := self.Raw.Get_MaxVidRect(&_ppVidRect)
+	return _ppVidRect, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MinVidRect wraps the raw Get_MinVidRect call.
-func (self IMSVidVideoRenderer) Get_MinVidRect(ppVidRect **mediadirectshowtv.IMSVidRect) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinVidRect(ppVidRect)))
+func (self IMSVidVideoRenderer) Get_MinVidRect() (*mediadirectshowtv.IMSVidRect, error) {
+	var _ppVidRect *mediadirectshowtv.IMSVidRect
+	_hr := self.Raw.Get_MinVidRect(&_ppVidRect)
+	return _ppVidRect, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClippedSourceRect wraps the raw Get_ClippedSourceRect call.
-func (self IMSVidVideoRenderer) Get_ClippedSourceRect(pRect **mediadirectshowtv.IMSVidRect) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClippedSourceRect(pRect)))
+func (self IMSVidVideoRenderer) Get_ClippedSourceRect() (*mediadirectshowtv.IMSVidRect, error) {
+	var _pRect *mediadirectshowtv.IMSVidRect
+	_hr := self.Raw.Get_ClippedSourceRect(&_pRect)
+	return _pRect, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClippedSourceRect wraps the raw Put_ClippedSourceRect call.
@@ -8549,8 +9115,10 @@ func (self IMSVidVideoRenderer) Put_ClippedSourceRect(pRect *mediadirectshowtv.I
 }
 
 // Get_UsingOverlay wraps the raw Get_UsingOverlay call.
-func (self IMSVidVideoRenderer) Get_UsingOverlay(UseOverlayVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UsingOverlay(UseOverlayVal)))
+func (self IMSVidVideoRenderer) Get_UsingOverlay() (foundation.VARIANT_BOOL, error) {
+	var _UseOverlayVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_UsingOverlay(&_UseOverlayVal)
+	return _UseOverlayVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UsingOverlay wraps the raw Put_UsingOverlay call.
@@ -8559,18 +9127,24 @@ func (self IMSVidVideoRenderer) Put_UsingOverlay(UseOverlayVal foundation.VARIAN
 }
 
 // Capture wraps the raw Capture call.
-func (self IMSVidVideoRenderer) Capture(currentImage **systemole.IPictureDisp) error {
-	return win32.HRESULTError(int32(self.Raw.Capture(currentImage)))
+func (self IMSVidVideoRenderer) Capture() (*systemole.IPictureDisp, error) {
+	var _currentImage *systemole.IPictureDisp
+	_hr := self.Raw.Capture(&_currentImage)
+	return _currentImage, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FramesPerSecond wraps the raw Get_FramesPerSecond call.
-func (self IMSVidVideoRenderer) Get_FramesPerSecond(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FramesPerSecond(pVal)))
+func (self IMSVidVideoRenderer) Get_FramesPerSecond() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_FramesPerSecond(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DecimateInput wraps the raw Get_DecimateInput call.
-func (self IMSVidVideoRenderer) Get_DecimateInput(pDeci *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DecimateInput(pDeci)))
+func (self IMSVidVideoRenderer) Get_DecimateInput() (foundation.VARIANT_BOOL, error) {
+	var _pDeci foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_DecimateInput(&_pDeci)
+	return _pDeci, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DecimateInput wraps the raw Put_DecimateInput call.
@@ -8590,18 +9164,24 @@ func WrapIMSVidVideoRenderer2(raw *mediadirectshowtv.IMSVidVideoRenderer2) IMSVi
 }
 
 // Get_Allocator wraps the raw Get_Allocator call.
-func (self IMSVidVideoRenderer2) Get_Allocator(AllocPresent **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Allocator(AllocPresent)))
+func (self IMSVidVideoRenderer2) Get_Allocator() (*systemcom.IUnknown, error) {
+	var _AllocPresent *systemcom.IUnknown
+	_hr := self.Raw.Get_Allocator(&_AllocPresent)
+	return _AllocPresent, win32.HRESULTError(int32(_hr))
 }
 
 // Get__Allocator wraps the raw Get__Allocator call.
-func (self IMSVidVideoRenderer2) Get__Allocator(AllocPresent **mediadirectshow.IVMRSurfaceAllocator) error {
-	return win32.HRESULTError(int32(self.Raw.Get__Allocator(AllocPresent)))
+func (self IMSVidVideoRenderer2) Get__Allocator() (*mediadirectshow.IVMRSurfaceAllocator, error) {
+	var _AllocPresent *mediadirectshow.IVMRSurfaceAllocator
+	_hr := self.Raw.Get__Allocator(&_AllocPresent)
+	return _AllocPresent, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Allocator_ID wraps the raw Get_Allocator_ID call.
-func (self IMSVidVideoRenderer2) Get_Allocator_ID(ID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Allocator_ID(ID)))
+func (self IMSVidVideoRenderer2) Get_Allocator_ID() (int32, error) {
+	var _ID int32
+	_hr := self.Raw.Get_Allocator_ID(&_ID)
+	return _ID, win32.HRESULTError(int32(_hr))
 }
 
 // SetAllocator wraps the raw SetAllocator call.
@@ -8620,8 +9200,10 @@ func (self IMSVidVideoRenderer2) Put_SuppressEffects(bSuppress foundation.VARIAN
 }
 
 // Get_SuppressEffects wraps the raw Get_SuppressEffects call.
-func (self IMSVidVideoRenderer2) Get_SuppressEffects(bSuppress *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SuppressEffects(bSuppress)))
+func (self IMSVidVideoRenderer2) Get_SuppressEffects() (foundation.VARIANT_BOOL, error) {
+	var _bSuppress foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SuppressEffects(&_bSuppress)
+	return _bSuppress, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidVideoRendererDevices is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidVideoRendererDevices with error-returning methods.
@@ -8636,13 +9218,17 @@ func WrapIMSVidVideoRendererDevices(raw *mediadirectshowtv.IMSVidVideoRendererDe
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IMSVidVideoRendererDevices) Get_Count(lCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(lCount)))
+func (self IMSVidVideoRendererDevices) Get_Count() (int32, error) {
+	var _lCount int32
+	_hr := self.Raw.Get_Count(&_lCount)
+	return _lCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IMSVidVideoRendererDevices) Get__NewEnum(pD **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(pD)))
+func (self IMSVidVideoRendererDevices) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _pD *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_pD)
+	return _pD, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -8754,8 +9340,10 @@ func (self IMSVidWebDVD) StillOff() error {
 }
 
 // Get_AudioLanguage wraps the raw Get_AudioLanguage call.
-func (self IMSVidWebDVD) Get_AudioLanguage(lStream int32, fFormat foundation.VARIANT_BOOL, strAudioLang *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioLanguage(lStream, fFormat, strAudioLang)))
+func (self IMSVidWebDVD) Get_AudioLanguage(lStream int32, fFormat foundation.VARIANT_BOOL) (foundation.BSTR, error) {
+	var _strAudioLang foundation.BSTR
+	_hr := self.Raw.Get_AudioLanguage(lStream, fFormat, &_strAudioLang)
+	return _strAudioLang, win32.HRESULTError(int32(_hr))
 }
 
 // ShowMenu wraps the raw ShowMenu call.
@@ -8774,13 +9362,17 @@ func (self IMSVidWebDVD) ReturnFromSubmenu() error {
 }
 
 // Get_ButtonsAvailable wraps the raw Get_ButtonsAvailable call.
-func (self IMSVidWebDVD) Get_ButtonsAvailable(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ButtonsAvailable(pVal)))
+func (self IMSVidWebDVD) Get_ButtonsAvailable() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_ButtonsAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentButton wraps the raw Get_CurrentButton call.
-func (self IMSVidWebDVD) Get_CurrentButton(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentButton(pVal)))
+func (self IMSVidWebDVD) Get_CurrentButton() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentButton(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // SelectAndActivateButton wraps the raw SelectAndActivateButton call.
@@ -8824,68 +9416,94 @@ func (self IMSVidWebDVD) SelectAtPosition(xPos int32, yPos int32) error {
 }
 
 // Get_ButtonAtPosition wraps the raw Get_ButtonAtPosition call.
-func (self IMSVidWebDVD) Get_ButtonAtPosition(xPos int32, yPos int32, plButton *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ButtonAtPosition(xPos, yPos, plButton)))
+func (self IMSVidWebDVD) Get_ButtonAtPosition(xPos int32, yPos int32) (int32, error) {
+	var _plButton int32
+	_hr := self.Raw.Get_ButtonAtPosition(xPos, yPos, &_plButton)
+	return _plButton, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NumberOfChapters wraps the raw Get_NumberOfChapters call.
-func (self IMSVidWebDVD) Get_NumberOfChapters(lTitle int32, pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NumberOfChapters(lTitle, pVal)))
+func (self IMSVidWebDVD) Get_NumberOfChapters(lTitle int32) (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_NumberOfChapters(lTitle, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TotalTitleTime wraps the raw Get_TotalTitleTime call.
-func (self IMSVidWebDVD) Get_TotalTitleTime(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TotalTitleTime(pVal)))
+func (self IMSVidWebDVD) Get_TotalTitleTime() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_TotalTitleTime(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TitlesAvailable wraps the raw Get_TitlesAvailable call.
-func (self IMSVidWebDVD) Get_TitlesAvailable(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TitlesAvailable(pVal)))
+func (self IMSVidWebDVD) Get_TitlesAvailable() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_TitlesAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_VolumesAvailable wraps the raw Get_VolumesAvailable call.
-func (self IMSVidWebDVD) Get_VolumesAvailable(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_VolumesAvailable(pVal)))
+func (self IMSVidWebDVD) Get_VolumesAvailable() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_VolumesAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentVolume wraps the raw Get_CurrentVolume call.
-func (self IMSVidWebDVD) Get_CurrentVolume(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentVolume(pVal)))
+func (self IMSVidWebDVD) Get_CurrentVolume() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentVolume(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDiscSide wraps the raw Get_CurrentDiscSide call.
-func (self IMSVidWebDVD) Get_CurrentDiscSide(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDiscSide(pVal)))
+func (self IMSVidWebDVD) Get_CurrentDiscSide() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentDiscSide(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentDomain wraps the raw Get_CurrentDomain call.
-func (self IMSVidWebDVD) Get_CurrentDomain(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentDomain(pVal)))
+func (self IMSVidWebDVD) Get_CurrentDomain() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentDomain(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentChapter wraps the raw Get_CurrentChapter call.
-func (self IMSVidWebDVD) Get_CurrentChapter(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentChapter(pVal)))
+func (self IMSVidWebDVD) Get_CurrentChapter() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentChapter(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentTitle wraps the raw Get_CurrentTitle call.
-func (self IMSVidWebDVD) Get_CurrentTitle(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentTitle(pVal)))
+func (self IMSVidWebDVD) Get_CurrentTitle() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentTitle(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentTime wraps the raw Get_CurrentTime call.
-func (self IMSVidWebDVD) Get_CurrentTime(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentTime(pVal)))
+func (self IMSVidWebDVD) Get_CurrentTime() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_CurrentTime(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // DVDTimeCode2bstr wraps the raw DVDTimeCode2bstr call.
-func (self IMSVidWebDVD) DVDTimeCode2bstr(timeCode int32, pTimeStr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.DVDTimeCode2bstr(timeCode, pTimeStr)))
+func (self IMSVidWebDVD) DVDTimeCode2bstr(timeCode int32) (foundation.BSTR, error) {
+	var _pTimeStr foundation.BSTR
+	_hr := self.Raw.DVDTimeCode2bstr(timeCode, &_pTimeStr)
+	return _pTimeStr, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DVDDirectory wraps the raw Get_DVDDirectory call.
-func (self IMSVidWebDVD) Get_DVDDirectory(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDDirectory(pVal)))
+func (self IMSVidWebDVD) Get_DVDDirectory() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_DVDDirectory(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DVDDirectory wraps the raw Put_DVDDirectory call.
@@ -8894,18 +9512,24 @@ func (self IMSVidWebDVD) Put_DVDDirectory(newVal foundation.BSTR) error {
 }
 
 // IsSubpictureStreamEnabled wraps the raw IsSubpictureStreamEnabled call.
-func (self IMSVidWebDVD) IsSubpictureStreamEnabled(lstream int32, fEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSubpictureStreamEnabled(lstream, fEnabled)))
+func (self IMSVidWebDVD) IsSubpictureStreamEnabled(lstream int32) (foundation.VARIANT_BOOL, error) {
+	var _fEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.IsSubpictureStreamEnabled(lstream, &_fEnabled)
+	return _fEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // IsAudioStreamEnabled wraps the raw IsAudioStreamEnabled call.
-func (self IMSVidWebDVD) IsAudioStreamEnabled(lstream int32, fEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsAudioStreamEnabled(lstream, fEnabled)))
+func (self IMSVidWebDVD) IsAudioStreamEnabled(lstream int32) (foundation.VARIANT_BOOL, error) {
+	var _fEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.IsAudioStreamEnabled(lstream, &_fEnabled)
+	return _fEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentSubpictureStream wraps the raw Get_CurrentSubpictureStream call.
-func (self IMSVidWebDVD) Get_CurrentSubpictureStream(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentSubpictureStream(pVal)))
+func (self IMSVidWebDVD) Get_CurrentSubpictureStream() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentSubpictureStream(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CurrentSubpictureStream wraps the raw Put_CurrentSubpictureStream call.
@@ -8914,13 +9538,17 @@ func (self IMSVidWebDVD) Put_CurrentSubpictureStream(newVal int32) error {
 }
 
 // Get_SubpictureLanguage wraps the raw Get_SubpictureLanguage call.
-func (self IMSVidWebDVD) Get_SubpictureLanguage(lStream int32, strLanguage *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubpictureLanguage(lStream, strLanguage)))
+func (self IMSVidWebDVD) Get_SubpictureLanguage(lStream int32) (foundation.BSTR, error) {
+	var _strLanguage foundation.BSTR
+	_hr := self.Raw.Get_SubpictureLanguage(lStream, &_strLanguage)
+	return _strLanguage, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAudioStream wraps the raw Get_CurrentAudioStream call.
-func (self IMSVidWebDVD) Get_CurrentAudioStream(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAudioStream(pVal)))
+func (self IMSVidWebDVD) Get_CurrentAudioStream() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentAudioStream(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CurrentAudioStream wraps the raw Put_CurrentAudioStream call.
@@ -8929,18 +9557,24 @@ func (self IMSVidWebDVD) Put_CurrentAudioStream(newVal int32) error {
 }
 
 // Get_AudioStreamsAvailable wraps the raw Get_AudioStreamsAvailable call.
-func (self IMSVidWebDVD) Get_AudioStreamsAvailable(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioStreamsAvailable(pVal)))
+func (self IMSVidWebDVD) Get_AudioStreamsAvailable() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_AudioStreamsAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AnglesAvailable wraps the raw Get_AnglesAvailable call.
-func (self IMSVidWebDVD) Get_AnglesAvailable(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AnglesAvailable(pVal)))
+func (self IMSVidWebDVD) Get_AnglesAvailable() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_AnglesAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentAngle wraps the raw Get_CurrentAngle call.
-func (self IMSVidWebDVD) Get_CurrentAngle(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentAngle(pVal)))
+func (self IMSVidWebDVD) Get_CurrentAngle() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_CurrentAngle(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CurrentAngle wraps the raw Put_CurrentAngle call.
@@ -8949,13 +9583,17 @@ func (self IMSVidWebDVD) Put_CurrentAngle(newVal int32) error {
 }
 
 // Get_SubpictureStreamsAvailable wraps the raw Get_SubpictureStreamsAvailable call.
-func (self IMSVidWebDVD) Get_SubpictureStreamsAvailable(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubpictureStreamsAvailable(pVal)))
+func (self IMSVidWebDVD) Get_SubpictureStreamsAvailable() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_SubpictureStreamsAvailable(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SubpictureOn wraps the raw Get_SubpictureOn call.
-func (self IMSVidWebDVD) Get_SubpictureOn(pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubpictureOn(pVal)))
+func (self IMSVidWebDVD) Get_SubpictureOn() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SubpictureOn(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SubpictureOn wraps the raw Put_SubpictureOn call.
@@ -8964,8 +9602,10 @@ func (self IMSVidWebDVD) Put_SubpictureOn(newVal foundation.VARIANT_BOOL) error 
 }
 
 // Get_DVDUniqueID wraps the raw Get_DVDUniqueID call.
-func (self IMSVidWebDVD) Get_DVDUniqueID(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDUniqueID(pVal)))
+func (self IMSVidWebDVD) Get_DVDUniqueID() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_DVDUniqueID(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // AcceptParentalLevelChange wraps the raw AcceptParentalLevelChange call.
@@ -8989,18 +9629,24 @@ func (self IMSVidWebDVD) SelectParentalLevel(lParentalLevel int32, strUserName f
 }
 
 // Get_TitleParentalLevels wraps the raw Get_TitleParentalLevels call.
-func (self IMSVidWebDVD) Get_TitleParentalLevels(lTitle int32, plParentalLevels *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TitleParentalLevels(lTitle, plParentalLevels)))
+func (self IMSVidWebDVD) Get_TitleParentalLevels(lTitle int32) (int32, error) {
+	var _plParentalLevels int32
+	_hr := self.Raw.Get_TitleParentalLevels(lTitle, &_plParentalLevels)
+	return _plParentalLevels, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PlayerParentalCountry wraps the raw Get_PlayerParentalCountry call.
-func (self IMSVidWebDVD) Get_PlayerParentalCountry(plCountryCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PlayerParentalCountry(plCountryCode)))
+func (self IMSVidWebDVD) Get_PlayerParentalCountry() (int32, error) {
+	var _plCountryCode int32
+	_hr := self.Raw.Get_PlayerParentalCountry(&_plCountryCode)
+	return _plCountryCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PlayerParentalLevel wraps the raw Get_PlayerParentalLevel call.
-func (self IMSVidWebDVD) Get_PlayerParentalLevel(plParentalLevel *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PlayerParentalLevel(plParentalLevel)))
+func (self IMSVidWebDVD) Get_PlayerParentalLevel() (int32, error) {
+	var _plParentalLevel int32
+	_hr := self.Raw.Get_PlayerParentalLevel(&_plParentalLevel)
+	return _plParentalLevel, win32.HRESULTError(int32(_hr))
 }
 
 // Eject wraps the raw Eject call.
@@ -9009,18 +9655,24 @@ func (self IMSVidWebDVD) Eject() error {
 }
 
 // UOPValid wraps the raw UOPValid call.
-func (self IMSVidWebDVD) UOPValid(lUOP int32, pfValid *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.UOPValid(lUOP, pfValid)))
+func (self IMSVidWebDVD) UOPValid(lUOP int32) (foundation.VARIANT_BOOL, error) {
+	var _pfValid foundation.VARIANT_BOOL
+	_hr := self.Raw.UOPValid(lUOP, &_pfValid)
+	return _pfValid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SPRM wraps the raw Get_SPRM call.
-func (self IMSVidWebDVD) Get_SPRM(lIndex int32, psSPRM *int16) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SPRM(lIndex, psSPRM)))
+func (self IMSVidWebDVD) Get_SPRM(lIndex int32) (int16, error) {
+	var _psSPRM int16
+	_hr := self.Raw.Get_SPRM(lIndex, &_psSPRM)
+	return _psSPRM, win32.HRESULTError(int32(_hr))
 }
 
 // Get_GPRM wraps the raw Get_GPRM call.
-func (self IMSVidWebDVD) Get_GPRM(lIndex int32, psSPRM *int16) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GPRM(lIndex, psSPRM)))
+func (self IMSVidWebDVD) Get_GPRM(lIndex int32) (int16, error) {
+	var _psSPRM int16
+	_hr := self.Raw.Get_GPRM(lIndex, &_psSPRM)
+	return _psSPRM, win32.HRESULTError(int32(_hr))
 }
 
 // Put_GPRM wraps the raw Put_GPRM call.
@@ -9029,28 +9681,38 @@ func (self IMSVidWebDVD) Put_GPRM(lIndex int32, sValue int16) error {
 }
 
 // Get_DVDTextStringType wraps the raw Get_DVDTextStringType call.
-func (self IMSVidWebDVD) Get_DVDTextStringType(lLangIndex int32, lStringIndex int32, pType *mediadirectshowtv.DVDTextStringType) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDTextStringType(lLangIndex, lStringIndex, pType)))
+func (self IMSVidWebDVD) Get_DVDTextStringType(lLangIndex int32, lStringIndex int32) (mediadirectshowtv.DVDTextStringType, error) {
+	var _pType mediadirectshowtv.DVDTextStringType
+	_hr := self.Raw.Get_DVDTextStringType(lLangIndex, lStringIndex, &_pType)
+	return _pType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DVDTextString wraps the raw Get_DVDTextString call.
-func (self IMSVidWebDVD) Get_DVDTextString(lLangIndex int32, lStringIndex int32, pstrText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDTextString(lLangIndex, lStringIndex, pstrText)))
+func (self IMSVidWebDVD) Get_DVDTextString(lLangIndex int32, lStringIndex int32) (foundation.BSTR, error) {
+	var _pstrText foundation.BSTR
+	_hr := self.Raw.Get_DVDTextString(lLangIndex, lStringIndex, &_pstrText)
+	return _pstrText, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DVDTextNumberOfStrings wraps the raw Get_DVDTextNumberOfStrings call.
-func (self IMSVidWebDVD) Get_DVDTextNumberOfStrings(lLangIndex int32, plNumOfStrings *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDTextNumberOfStrings(lLangIndex, plNumOfStrings)))
+func (self IMSVidWebDVD) Get_DVDTextNumberOfStrings(lLangIndex int32) (int32, error) {
+	var _plNumOfStrings int32
+	_hr := self.Raw.Get_DVDTextNumberOfStrings(lLangIndex, &_plNumOfStrings)
+	return _plNumOfStrings, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DVDTextNumberOfLanguages wraps the raw Get_DVDTextNumberOfLanguages call.
-func (self IMSVidWebDVD) Get_DVDTextNumberOfLanguages(plNumOfLangs *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDTextNumberOfLanguages(plNumOfLangs)))
+func (self IMSVidWebDVD) Get_DVDTextNumberOfLanguages() (int32, error) {
+	var _plNumOfLangs int32
+	_hr := self.Raw.Get_DVDTextNumberOfLanguages(&_plNumOfLangs)
+	return _plNumOfLangs, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DVDTextLanguageLCID wraps the raw Get_DVDTextLanguageLCID call.
-func (self IMSVidWebDVD) Get_DVDTextLanguageLCID(lLangIndex int32, lcid *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDTextLanguageLCID(lLangIndex, lcid)))
+func (self IMSVidWebDVD) Get_DVDTextLanguageLCID(lLangIndex int32) (int32, error) {
+	var _lcid int32
+	_hr := self.Raw.Get_DVDTextLanguageLCID(lLangIndex, &_lcid)
+	return _lcid, win32.HRESULTError(int32(_hr))
 }
 
 // RegionChange wraps the raw RegionChange call.
@@ -9059,8 +9721,10 @@ func (self IMSVidWebDVD) RegionChange() error {
 }
 
 // Get_DVDAdm wraps the raw Get_DVDAdm call.
-func (self IMSVidWebDVD) Get_DVDAdm(pVal **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDAdm(pVal)))
+func (self IMSVidWebDVD) Get_DVDAdm() (*systemcom.IDispatch, error) {
+	var _pVal *systemcom.IDispatch
+	_hr := self.Raw.Get_DVDAdm(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // DeleteBookmark wraps the raw DeleteBookmark call.
@@ -9089,13 +9753,17 @@ func (self IMSVidWebDVD) SelectDefaultSubpictureLanguage(lang int32, ext mediadi
 }
 
 // Get_PreferredSubpictureStream wraps the raw Get_PreferredSubpictureStream call.
-func (self IMSVidWebDVD) Get_PreferredSubpictureStream(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredSubpictureStream(pVal)))
+func (self IMSVidWebDVD) Get_PreferredSubpictureStream() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_PreferredSubpictureStream(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DefaultMenuLanguage wraps the raw Get_DefaultMenuLanguage call.
-func (self IMSVidWebDVD) Get_DefaultMenuLanguage(lang *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultMenuLanguage(lang)))
+func (self IMSVidWebDVD) Get_DefaultMenuLanguage() (int32, error) {
+	var _lang int32
+	_hr := self.Raw.Get_DefaultMenuLanguage(&_lang)
+	return _lang, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultMenuLanguage wraps the raw Put_DefaultMenuLanguage call.
@@ -9104,33 +9772,45 @@ func (self IMSVidWebDVD) Put_DefaultMenuLanguage(lang int32) error {
 }
 
 // Get_DefaultSubpictureLanguage wraps the raw Get_DefaultSubpictureLanguage call.
-func (self IMSVidWebDVD) Get_DefaultSubpictureLanguage(lang *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultSubpictureLanguage(lang)))
+func (self IMSVidWebDVD) Get_DefaultSubpictureLanguage() (int32, error) {
+	var _lang int32
+	_hr := self.Raw.Get_DefaultSubpictureLanguage(&_lang)
+	return _lang, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DefaultAudioLanguage wraps the raw Get_DefaultAudioLanguage call.
-func (self IMSVidWebDVD) Get_DefaultAudioLanguage(lang *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultAudioLanguage(lang)))
+func (self IMSVidWebDVD) Get_DefaultAudioLanguage() (int32, error) {
+	var _lang int32
+	_hr := self.Raw.Get_DefaultAudioLanguage(&_lang)
+	return _lang, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DefaultSubpictureLanguageExt wraps the raw Get_DefaultSubpictureLanguageExt call.
-func (self IMSVidWebDVD) Get_DefaultSubpictureLanguageExt(ext *mediadirectshowtv.DVDSPExt) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultSubpictureLanguageExt(ext)))
+func (self IMSVidWebDVD) Get_DefaultSubpictureLanguageExt() (mediadirectshowtv.DVDSPExt, error) {
+	var _ext mediadirectshowtv.DVDSPExt
+	_hr := self.Raw.Get_DefaultSubpictureLanguageExt(&_ext)
+	return _ext, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DefaultAudioLanguageExt wraps the raw Get_DefaultAudioLanguageExt call.
-func (self IMSVidWebDVD) Get_DefaultAudioLanguageExt(ext *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultAudioLanguageExt(ext)))
+func (self IMSVidWebDVD) Get_DefaultAudioLanguageExt() (int32, error) {
+	var _ext int32
+	_hr := self.Raw.Get_DefaultAudioLanguageExt(&_ext)
+	return _ext, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LanguageFromLCID wraps the raw Get_LanguageFromLCID call.
-func (self IMSVidWebDVD) Get_LanguageFromLCID(lcid int32, lang *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LanguageFromLCID(lcid, lang)))
+func (self IMSVidWebDVD) Get_LanguageFromLCID(lcid int32) (foundation.BSTR, error) {
+	var _lang foundation.BSTR
+	_hr := self.Raw.Get_LanguageFromLCID(lcid, &_lang)
+	return _lang, win32.HRESULTError(int32(_hr))
 }
 
 // Get_KaraokeAudioPresentationMode wraps the raw Get_KaraokeAudioPresentationMode call.
-func (self IMSVidWebDVD) Get_KaraokeAudioPresentationMode(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_KaraokeAudioPresentationMode(pVal)))
+func (self IMSVidWebDVD) Get_KaraokeAudioPresentationMode() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_KaraokeAudioPresentationMode(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_KaraokeAudioPresentationMode wraps the raw Put_KaraokeAudioPresentationMode call.
@@ -9139,13 +9819,17 @@ func (self IMSVidWebDVD) Put_KaraokeAudioPresentationMode(newVal int32) error {
 }
 
 // Get_KaraokeChannelContent wraps the raw Get_KaraokeChannelContent call.
-func (self IMSVidWebDVD) Get_KaraokeChannelContent(lStream int32, lChan int32, lContent *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_KaraokeChannelContent(lStream, lChan, lContent)))
+func (self IMSVidWebDVD) Get_KaraokeChannelContent(lStream int32, lChan int32) (int32, error) {
+	var _lContent int32
+	_hr := self.Raw.Get_KaraokeChannelContent(lStream, lChan, &_lContent)
+	return _lContent, win32.HRESULTError(int32(_hr))
 }
 
 // Get_KaraokeChannelAssignment wraps the raw Get_KaraokeChannelAssignment call.
-func (self IMSVidWebDVD) Get_KaraokeChannelAssignment(lStream int32, lChannelAssignment *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_KaraokeChannelAssignment(lStream, lChannelAssignment)))
+func (self IMSVidWebDVD) Get_KaraokeChannelAssignment(lStream int32) (int32, error) {
+	var _lChannelAssignment int32
+	_hr := self.Raw.Get_KaraokeChannelAssignment(lStream, &_lChannelAssignment)
+	return _lChannelAssignment, win32.HRESULTError(int32(_hr))
 }
 
 // RestorePreferredSettings wraps the raw RestorePreferredSettings call.
@@ -9154,13 +9838,17 @@ func (self IMSVidWebDVD) RestorePreferredSettings() error {
 }
 
 // Get_ButtonRect wraps the raw Get_ButtonRect call.
-func (self IMSVidWebDVD) Get_ButtonRect(lButton int32, pRect **mediadirectshowtv.IMSVidRect) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ButtonRect(lButton, pRect)))
+func (self IMSVidWebDVD) Get_ButtonRect(lButton int32) (*mediadirectshowtv.IMSVidRect, error) {
+	var _pRect *mediadirectshowtv.IMSVidRect
+	_hr := self.Raw.Get_ButtonRect(lButton, &_pRect)
+	return _pRect, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DVDScreenInMouseCoordinates wraps the raw Get_DVDScreenInMouseCoordinates call.
-func (self IMSVidWebDVD) Get_DVDScreenInMouseCoordinates(ppRect **mediadirectshowtv.IMSVidRect) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DVDScreenInMouseCoordinates(ppRect)))
+func (self IMSVidWebDVD) Get_DVDScreenInMouseCoordinates() (*mediadirectshowtv.IMSVidRect, error) {
+	var _ppRect *mediadirectshowtv.IMSVidRect
+	_hr := self.Raw.Get_DVDScreenInMouseCoordinates(&_ppRect)
+	return _ppRect, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DVDScreenInMouseCoordinates wraps the raw Put_DVDScreenInMouseCoordinates call.
@@ -9216,23 +9904,31 @@ func (self IMSVidWebDVDAdm) SaveParentalCountry(country int32, strUserName found
 }
 
 // ConfirmPassword wraps the raw ConfirmPassword call.
-func (self IMSVidWebDVDAdm) ConfirmPassword(strUserName foundation.BSTR, strPassword foundation.BSTR, pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.ConfirmPassword(strUserName, strPassword, pVal)))
+func (self IMSVidWebDVDAdm) ConfirmPassword(strUserName foundation.BSTR, strPassword foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.ConfirmPassword(strUserName, strPassword, &_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetParentalLevel wraps the raw GetParentalLevel call.
-func (self IMSVidWebDVDAdm) GetParentalLevel(lLevel *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetParentalLevel(lLevel)))
+func (self IMSVidWebDVDAdm) GetParentalLevel() (int32, error) {
+	var _lLevel int32
+	_hr := self.Raw.GetParentalLevel(&_lLevel)
+	return _lLevel, win32.HRESULTError(int32(_hr))
 }
 
 // GetParentalCountry wraps the raw GetParentalCountry call.
-func (self IMSVidWebDVDAdm) GetParentalCountry(lCountry *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetParentalCountry(lCountry)))
+func (self IMSVidWebDVDAdm) GetParentalCountry() (int32, error) {
+	var _lCountry int32
+	_hr := self.Raw.GetParentalCountry(&_lCountry)
+	return _lCountry, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DefaultAudioLCID wraps the raw Get_DefaultAudioLCID call.
-func (self IMSVidWebDVDAdm) Get_DefaultAudioLCID(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultAudioLCID(pVal)))
+func (self IMSVidWebDVDAdm) Get_DefaultAudioLCID() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_DefaultAudioLCID(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultAudioLCID wraps the raw Put_DefaultAudioLCID call.
@@ -9241,8 +9937,10 @@ func (self IMSVidWebDVDAdm) Put_DefaultAudioLCID(newVal int32) error {
 }
 
 // Get_DefaultSubpictureLCID wraps the raw Get_DefaultSubpictureLCID call.
-func (self IMSVidWebDVDAdm) Get_DefaultSubpictureLCID(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultSubpictureLCID(pVal)))
+func (self IMSVidWebDVDAdm) Get_DefaultSubpictureLCID() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_DefaultSubpictureLCID(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultSubpictureLCID wraps the raw Put_DefaultSubpictureLCID call.
@@ -9251,8 +9949,10 @@ func (self IMSVidWebDVDAdm) Put_DefaultSubpictureLCID(newVal int32) error {
 }
 
 // Get_DefaultMenuLCID wraps the raw Get_DefaultMenuLCID call.
-func (self IMSVidWebDVDAdm) Get_DefaultMenuLCID(pVal *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultMenuLCID(pVal)))
+func (self IMSVidWebDVDAdm) Get_DefaultMenuLCID() (int32, error) {
+	var _pVal int32
+	_hr := self.Raw.Get_DefaultMenuLCID(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultMenuLCID wraps the raw Put_DefaultMenuLCID call.
@@ -9261,8 +9961,10 @@ func (self IMSVidWebDVDAdm) Put_DefaultMenuLCID(newVal int32) error {
 }
 
 // Get_BookmarkOnStop wraps the raw Get_BookmarkOnStop call.
-func (self IMSVidWebDVDAdm) Get_BookmarkOnStop(pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BookmarkOnStop(pVal)))
+func (self IMSVidWebDVDAdm) Get_BookmarkOnStop() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_BookmarkOnStop(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_BookmarkOnStop wraps the raw Put_BookmarkOnStop call.
@@ -9403,8 +10105,10 @@ func WrapIMSVidXDS(raw *mediadirectshowtv.IMSVidXDS) IMSVidXDS {
 }
 
 // Get_ChannelChangeInterface wraps the raw Get_ChannelChangeInterface call.
-func (self IMSVidXDS) Get_ChannelChangeInterface(punkCC **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ChannelChangeInterface(punkCC)))
+func (self IMSVidXDS) Get_ChannelChangeInterface() (*systemcom.IUnknown, error) {
+	var _punkCC *systemcom.IUnknown
+	_hr := self.Raw.Get_ChannelChangeInterface(&_punkCC)
+	return _punkCC, win32.HRESULTError(int32(_hr))
 }
 
 // IMSVidXDSEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IMSVidXDSEvent with error-returning methods.
@@ -9953,8 +10657,10 @@ func WrapIPersistTuneXmlUtility2(raw *mediadirectshowtv.IPersistTuneXmlUtility2)
 }
 
 // Serialize wraps the raw Serialize call.
-func (self IPersistTuneXmlUtility2) Serialize(piTuneRequest *mediadirectshowtv.ITuneRequest, pString *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Serialize(piTuneRequest, pString)))
+func (self IPersistTuneXmlUtility2) Serialize(piTuneRequest *mediadirectshowtv.ITuneRequest) (foundation.BSTR, error) {
+	var _pString foundation.BSTR
+	_hr := self.Raw.Serialize(piTuneRequest, &_pString)
+	return _pString, win32.HRESULTError(int32(_hr))
 }
 
 // IRegisterTuner is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IRegisterTuner with error-returning methods.
@@ -10340,8 +11046,10 @@ func (self ISIInbandEPG) StopSIEPGScan() error {
 }
 
 // IsSIEPGScanRunning wraps the raw IsSIEPGScanRunning call.
-func (self ISIInbandEPG) IsSIEPGScanRunning(bRunning *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSIEPGScanRunning(bRunning)))
+func (self ISIInbandEPG) IsSIEPGScanRunning() (foundation.BOOL, error) {
+	var _bRunning foundation.BOOL
+	_hr := self.Raw.IsSIEPGScanRunning(&_bRunning)
+	return _bRunning, win32.HRESULTError(int32(_hr))
 }
 
 // ISIInbandEPGEvent is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.ISIInbandEPGEvent with error-returning methods.
@@ -10418,8 +11126,10 @@ func (self IScanningTunerEx) PerformExhaustiveScan(dwLowerFreq int32, dwHigherFr
 }
 
 // TerminateCurrentScan wraps the raw TerminateCurrentScan call.
-func (self IScanningTunerEx) TerminateCurrentScan(pcurrentFreq *int32) error {
-	return win32.HRESULTError(int32(self.Raw.TerminateCurrentScan(pcurrentFreq)))
+func (self IScanningTunerEx) TerminateCurrentScan() (int32, error) {
+	var _pcurrentFreq int32
+	_hr := self.Raw.TerminateCurrentScan(&_pcurrentFreq)
+	return _pcurrentFreq, win32.HRESULTError(int32(_hr))
 }
 
 // ResumeCurrentScan wraps the raw ResumeCurrentScan call.
@@ -10947,23 +11657,31 @@ func WrapITuneRequest(raw *mediadirectshowtv.ITuneRequest) ITuneRequest {
 }
 
 // Get_TuningSpace wraps the raw Get_TuningSpace call.
-func (self ITuneRequest) Get_TuningSpace(TuningSpace **mediadirectshowtv.ITuningSpace) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TuningSpace(TuningSpace)))
+func (self ITuneRequest) Get_TuningSpace() (*mediadirectshowtv.ITuningSpace, error) {
+	var _TuningSpace *mediadirectshowtv.ITuningSpace
+	_hr := self.Raw.Get_TuningSpace(&_TuningSpace)
+	return _TuningSpace, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Components wraps the raw Get_Components call.
-func (self ITuneRequest) Get_Components(Components **mediadirectshowtv.IComponents) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Components(Components)))
+func (self ITuneRequest) Get_Components() (*mediadirectshowtv.IComponents, error) {
+	var _Components *mediadirectshowtv.IComponents
+	_hr := self.Raw.Get_Components(&_Components)
+	return _Components, win32.HRESULTError(int32(_hr))
 }
 
 // Clone wraps the raw Clone call.
-func (self ITuneRequest) Clone(NewTuneRequest **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewTuneRequest)))
+func (self ITuneRequest) Clone() (*mediadirectshowtv.ITuneRequest, error) {
+	var _NewTuneRequest *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.Clone(&_NewTuneRequest)
+	return _NewTuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Locator wraps the raw Get_Locator call.
-func (self ITuneRequest) Get_Locator(Locator **mediadirectshowtv.ILocator) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Locator(Locator)))
+func (self ITuneRequest) Get_Locator() (*mediadirectshowtv.ILocator, error) {
+	var _Locator *mediadirectshowtv.ILocator
+	_hr := self.Raw.Get_Locator(&_Locator)
+	return _Locator, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Locator wraps the raw Put_Locator call.
@@ -10998,23 +11716,31 @@ func (self ITuneRequestInfo) CreateComponentList(CurrentRequest *mediadirectshow
 }
 
 // GetNextProgram wraps the raw GetNextProgram call.
-func (self ITuneRequestInfo) GetNextProgram(CurrentRequest *mediadirectshowtv.ITuneRequest, TuneRequest **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.GetNextProgram(CurrentRequest, TuneRequest)))
+func (self ITuneRequestInfo) GetNextProgram(CurrentRequest *mediadirectshowtv.ITuneRequest) (*mediadirectshowtv.ITuneRequest, error) {
+	var _TuneRequest *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.GetNextProgram(CurrentRequest, &_TuneRequest)
+	return _TuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // GetPreviousProgram wraps the raw GetPreviousProgram call.
-func (self ITuneRequestInfo) GetPreviousProgram(CurrentRequest *mediadirectshowtv.ITuneRequest, TuneRequest **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreviousProgram(CurrentRequest, TuneRequest)))
+func (self ITuneRequestInfo) GetPreviousProgram(CurrentRequest *mediadirectshowtv.ITuneRequest) (*mediadirectshowtv.ITuneRequest, error) {
+	var _TuneRequest *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.GetPreviousProgram(CurrentRequest, &_TuneRequest)
+	return _TuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // GetNextLocator wraps the raw GetNextLocator call.
-func (self ITuneRequestInfo) GetNextLocator(CurrentRequest *mediadirectshowtv.ITuneRequest, TuneRequest **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.GetNextLocator(CurrentRequest, TuneRequest)))
+func (self ITuneRequestInfo) GetNextLocator(CurrentRequest *mediadirectshowtv.ITuneRequest) (*mediadirectshowtv.ITuneRequest, error) {
+	var _TuneRequest *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.GetNextLocator(CurrentRequest, &_TuneRequest)
+	return _TuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // GetPreviousLocator wraps the raw GetPreviousLocator call.
-func (self ITuneRequestInfo) GetPreviousLocator(CurrentRequest *mediadirectshowtv.ITuneRequest, TuneRequest **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.GetPreviousLocator(CurrentRequest, TuneRequest)))
+func (self ITuneRequestInfo) GetPreviousLocator(CurrentRequest *mediadirectshowtv.ITuneRequest) (*mediadirectshowtv.ITuneRequest, error) {
+	var _TuneRequest *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.GetPreviousLocator(CurrentRequest, &_TuneRequest)
+	return _TuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // ITuneRequestInfoEx is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.ITuneRequestInfoEx with error-returning methods.
@@ -11045,8 +11771,10 @@ func WrapITuner(raw *mediadirectshowtv.ITuner) ITuner {
 }
 
 // Get_TuningSpace wraps the raw Get_TuningSpace call.
-func (self ITuner) Get_TuningSpace(TuningSpace **mediadirectshowtv.ITuningSpace) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TuningSpace(TuningSpace)))
+func (self ITuner) Get_TuningSpace() (*mediadirectshowtv.ITuningSpace, error) {
+	var _TuningSpace *mediadirectshowtv.ITuningSpace
+	_hr := self.Raw.Get_TuningSpace(&_TuningSpace)
+	return _TuningSpace, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TuningSpace wraps the raw Put_TuningSpace call.
@@ -11055,13 +11783,17 @@ func (self ITuner) Put_TuningSpace(TuningSpace *mediadirectshowtv.ITuningSpace) 
 }
 
 // EnumTuningSpaces wraps the raw EnumTuningSpaces call.
-func (self ITuner) EnumTuningSpaces(ppEnum **mediadirectshowtv.IEnumTuningSpaces) error {
-	return win32.HRESULTError(int32(self.Raw.EnumTuningSpaces(ppEnum)))
+func (self ITuner) EnumTuningSpaces() (*mediadirectshowtv.IEnumTuningSpaces, error) {
+	var _ppEnum *mediadirectshowtv.IEnumTuningSpaces
+	_hr := self.Raw.EnumTuningSpaces(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TuneRequest wraps the raw Get_TuneRequest call.
-func (self ITuner) Get_TuneRequest(TuneRequest **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TuneRequest(TuneRequest)))
+func (self ITuner) Get_TuneRequest() (*mediadirectshowtv.ITuneRequest, error) {
+	var _TuneRequest *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.Get_TuneRequest(&_TuneRequest)
+	return _TuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TuneRequest wraps the raw Put_TuneRequest call.
@@ -11075,8 +11807,10 @@ func (self ITuner) Validate(TuneRequest *mediadirectshowtv.ITuneRequest) error {
 }
 
 // Get_PreferredComponentTypes wraps the raw Get_PreferredComponentTypes call.
-func (self ITuner) Get_PreferredComponentTypes(ComponentTypes **mediadirectshowtv.IComponentTypes) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredComponentTypes(ComponentTypes)))
+func (self ITuner) Get_PreferredComponentTypes() (*mediadirectshowtv.IComponentTypes, error) {
+	var _ComponentTypes *mediadirectshowtv.IComponentTypes
+	_hr := self.Raw.Get_PreferredComponentTypes(&_ComponentTypes)
+	return _ComponentTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PreferredComponentTypes wraps the raw Put_PreferredComponentTypes call.
@@ -11085,8 +11819,10 @@ func (self ITuner) Put_PreferredComponentTypes(ComponentTypes *mediadirectshowtv
 }
 
 // Get_SignalStrength wraps the raw Get_SignalStrength call.
-func (self ITuner) Get_SignalStrength(Strength *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SignalStrength(Strength)))
+func (self ITuner) Get_SignalStrength() (int32, error) {
+	var _Strength int32
+	_hr := self.Raw.Get_SignalStrength(&_Strength)
+	return _Strength, win32.HRESULTError(int32(_hr))
 }
 
 // TriggerSignalEvents wraps the raw TriggerSignalEvents call.
@@ -11132,8 +11868,10 @@ func WrapITunerCapEx(raw *mediadirectshowtv.ITunerCapEx) ITunerCapEx {
 }
 
 // Get_Has608_708Caption wraps the raw Get_Has608_708Caption call.
-func (self ITunerCapEx) Get_Has608_708Caption(pbHasCaption *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Has608_708Caption(pbHasCaption)))
+func (self ITunerCapEx) Get_Has608_708Caption() (foundation.VARIANT_BOOL, error) {
+	var _pbHasCaption foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Has608_708Caption(&_pbHasCaption)
+	return _pbHasCaption, win32.HRESULTError(int32(_hr))
 }
 
 // ITuningSpace is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.ITuningSpace with error-returning methods.
@@ -11148,8 +11886,10 @@ func WrapITuningSpace(raw *mediadirectshowtv.ITuningSpace) ITuningSpace {
 }
 
 // Get_UniqueName wraps the raw Get_UniqueName call.
-func (self ITuningSpace) Get_UniqueName(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UniqueName(Name)))
+func (self ITuningSpace) Get_UniqueName() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_UniqueName(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UniqueName wraps the raw Put_UniqueName call.
@@ -11158,8 +11898,10 @@ func (self ITuningSpace) Put_UniqueName(Name foundation.BSTR) error {
 }
 
 // Get_FriendlyName wraps the raw Get_FriendlyName call.
-func (self ITuningSpace) Get_FriendlyName(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FriendlyName(Name)))
+func (self ITuningSpace) Get_FriendlyName() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_FriendlyName(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FriendlyName wraps the raw Put_FriendlyName call.
@@ -11168,13 +11910,17 @@ func (self ITuningSpace) Put_FriendlyName(Name foundation.BSTR) error {
 }
 
 // Get_CLSID wraps the raw Get_CLSID call.
-func (self ITuningSpace) Get_CLSID(SpaceCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CLSID(SpaceCLSID)))
+func (self ITuningSpace) Get_CLSID() (foundation.BSTR, error) {
+	var _SpaceCLSID foundation.BSTR
+	_hr := self.Raw.Get_CLSID(&_SpaceCLSID)
+	return _SpaceCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetworkType wraps the raw Get_NetworkType call.
-func (self ITuningSpace) Get_NetworkType(NetworkTypeGuid *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkType(NetworkTypeGuid)))
+func (self ITuningSpace) Get_NetworkType() (foundation.BSTR, error) {
+	var _NetworkTypeGuid foundation.BSTR
+	_hr := self.Raw.Get_NetworkType(&_NetworkTypeGuid)
+	return _NetworkTypeGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NetworkType wraps the raw Put_NetworkType call.
@@ -11183,8 +11929,10 @@ func (self ITuningSpace) Put_NetworkType(NetworkTypeGuid foundation.BSTR) error 
 }
 
 // Get__NetworkType wraps the raw Get__NetworkType call.
-func (self ITuningSpace) Get__NetworkType(NetworkTypeGuid *win32.GUID) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NetworkType(NetworkTypeGuid)))
+func (self ITuningSpace) Get__NetworkType() (win32.GUID, error) {
+	var _NetworkTypeGuid win32.GUID
+	_hr := self.Raw.Get__NetworkType(&_NetworkTypeGuid)
+	return _NetworkTypeGuid, win32.HRESULTError(int32(_hr))
 }
 
 // Put__NetworkType wraps the raw Put__NetworkType call.
@@ -11193,23 +11941,31 @@ func (self ITuningSpace) Put__NetworkType(NetworkTypeGuid *win32.GUID) error {
 }
 
 // CreateTuneRequest wraps the raw CreateTuneRequest call.
-func (self ITuningSpace) CreateTuneRequest(TuneRequest **mediadirectshowtv.ITuneRequest) error {
-	return win32.HRESULTError(int32(self.Raw.CreateTuneRequest(TuneRequest)))
+func (self ITuningSpace) CreateTuneRequest() (*mediadirectshowtv.ITuneRequest, error) {
+	var _TuneRequest *mediadirectshowtv.ITuneRequest
+	_hr := self.Raw.CreateTuneRequest(&_TuneRequest)
+	return _TuneRequest, win32.HRESULTError(int32(_hr))
 }
 
 // EnumCategoryGUIDs wraps the raw EnumCategoryGUIDs call.
-func (self ITuningSpace) EnumCategoryGUIDs(ppEnum **systemcom.IEnumGUID) error {
-	return win32.HRESULTError(int32(self.Raw.EnumCategoryGUIDs(ppEnum)))
+func (self ITuningSpace) EnumCategoryGUIDs() (*systemcom.IEnumGUID, error) {
+	var _ppEnum *systemcom.IEnumGUID
+	_hr := self.Raw.EnumCategoryGUIDs(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // EnumDeviceMonikers wraps the raw EnumDeviceMonikers call.
-func (self ITuningSpace) EnumDeviceMonikers(ppEnum **systemcom.IEnumMoniker) error {
-	return win32.HRESULTError(int32(self.Raw.EnumDeviceMonikers(ppEnum)))
+func (self ITuningSpace) EnumDeviceMonikers() (*systemcom.IEnumMoniker, error) {
+	var _ppEnum *systemcom.IEnumMoniker
+	_hr := self.Raw.EnumDeviceMonikers(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DefaultPreferredComponentTypes wraps the raw Get_DefaultPreferredComponentTypes call.
-func (self ITuningSpace) Get_DefaultPreferredComponentTypes(ComponentTypes **mediadirectshowtv.IComponentTypes) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultPreferredComponentTypes(ComponentTypes)))
+func (self ITuningSpace) Get_DefaultPreferredComponentTypes() (*mediadirectshowtv.IComponentTypes, error) {
+	var _ComponentTypes *mediadirectshowtv.IComponentTypes
+	_hr := self.Raw.Get_DefaultPreferredComponentTypes(&_ComponentTypes)
+	return _ComponentTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultPreferredComponentTypes wraps the raw Put_DefaultPreferredComponentTypes call.
@@ -11218,8 +11974,10 @@ func (self ITuningSpace) Put_DefaultPreferredComponentTypes(NewComponentTypes *m
 }
 
 // Get_FrequencyMapping wraps the raw Get_FrequencyMapping call.
-func (self ITuningSpace) Get_FrequencyMapping(pMapping *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FrequencyMapping(pMapping)))
+func (self ITuningSpace) Get_FrequencyMapping() (foundation.BSTR, error) {
+	var _pMapping foundation.BSTR
+	_hr := self.Raw.Get_FrequencyMapping(&_pMapping)
+	return _pMapping, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FrequencyMapping wraps the raw Put_FrequencyMapping call.
@@ -11228,8 +11986,10 @@ func (self ITuningSpace) Put_FrequencyMapping(Mapping foundation.BSTR) error {
 }
 
 // Get_DefaultLocator wraps the raw Get_DefaultLocator call.
-func (self ITuningSpace) Get_DefaultLocator(LocatorVal **mediadirectshowtv.ILocator) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DefaultLocator(LocatorVal)))
+func (self ITuningSpace) Get_DefaultLocator() (*mediadirectshowtv.ILocator, error) {
+	var _LocatorVal *mediadirectshowtv.ILocator
+	_hr := self.Raw.Get_DefaultLocator(&_LocatorVal)
+	return _LocatorVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DefaultLocator wraps the raw Put_DefaultLocator call.
@@ -11238,8 +11998,10 @@ func (self ITuningSpace) Put_DefaultLocator(LocatorVal *mediadirectshowtv.ILocat
 }
 
 // Clone wraps the raw Clone call.
-func (self ITuningSpace) Clone(NewTS **mediadirectshowtv.ITuningSpace) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(NewTS)))
+func (self ITuningSpace) Clone() (*mediadirectshowtv.ITuningSpace, error) {
+	var _NewTS *mediadirectshowtv.ITuningSpace
+	_hr := self.Raw.Clone(&_NewTS)
+	return _NewTS, win32.HRESULTError(int32(_hr))
 }
 
 // ITuningSpaceContainer is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.ITuningSpaceContainer with error-returning methods.
@@ -11254,48 +12016,66 @@ func WrapITuningSpaceContainer(raw *mediadirectshowtv.ITuningSpaceContainer) ITu
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ITuningSpaceContainer) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self ITuningSpaceContainer) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ITuningSpaceContainer) Get__NewEnum(NewEnum **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(NewEnum)))
+func (self ITuningSpaceContainer) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _NewEnum *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_NewEnum)
+	return _NewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // TuningSpacesForCLSID wraps the raw TuningSpacesForCLSID call.
-func (self ITuningSpaceContainer) TuningSpacesForCLSID(SpaceCLSID foundation.BSTR, NewColl **mediadirectshowtv.ITuningSpaces) error {
-	return win32.HRESULTError(int32(self.Raw.TuningSpacesForCLSID(SpaceCLSID, NewColl)))
+func (self ITuningSpaceContainer) TuningSpacesForCLSID(SpaceCLSID foundation.BSTR) (*mediadirectshowtv.ITuningSpaces, error) {
+	var _NewColl *mediadirectshowtv.ITuningSpaces
+	_hr := self.Raw.TuningSpacesForCLSID(SpaceCLSID, &_NewColl)
+	return _NewColl, win32.HRESULTError(int32(_hr))
 }
 
 // TuningSpacesForCLSID2 wraps the raw TuningSpacesForCLSID2 call.
-func (self ITuningSpaceContainer) TuningSpacesForCLSID2(SpaceCLSID *win32.GUID, NewColl **mediadirectshowtv.ITuningSpaces) error {
-	return win32.HRESULTError(int32(self.Raw.TuningSpacesForCLSID2(SpaceCLSID, NewColl)))
+func (self ITuningSpaceContainer) TuningSpacesForCLSID2(SpaceCLSID *win32.GUID) (*mediadirectshowtv.ITuningSpaces, error) {
+	var _NewColl *mediadirectshowtv.ITuningSpaces
+	_hr := self.Raw.TuningSpacesForCLSID2(SpaceCLSID, &_NewColl)
+	return _NewColl, win32.HRESULTError(int32(_hr))
 }
 
 // TuningSpacesForName wraps the raw TuningSpacesForName call.
-func (self ITuningSpaceContainer) TuningSpacesForName(Name foundation.BSTR, NewColl **mediadirectshowtv.ITuningSpaces) error {
-	return win32.HRESULTError(int32(self.Raw.TuningSpacesForName(Name, NewColl)))
+func (self ITuningSpaceContainer) TuningSpacesForName(Name foundation.BSTR) (*mediadirectshowtv.ITuningSpaces, error) {
+	var _NewColl *mediadirectshowtv.ITuningSpaces
+	_hr := self.Raw.TuningSpacesForName(Name, &_NewColl)
+	return _NewColl, win32.HRESULTError(int32(_hr))
 }
 
 // FindID wraps the raw FindID call.
-func (self ITuningSpaceContainer) FindID(TuningSpace *mediadirectshowtv.ITuningSpace, ID *int32) error {
-	return win32.HRESULTError(int32(self.Raw.FindID(TuningSpace, ID)))
+func (self ITuningSpaceContainer) FindID(TuningSpace *mediadirectshowtv.ITuningSpace) (int32, error) {
+	var _ID int32
+	_hr := self.Raw.FindID(TuningSpace, &_ID)
+	return _ID, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
-func (self ITuningSpaceContainer) Add(TuningSpace *mediadirectshowtv.ITuningSpace, NewIndex *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Add(TuningSpace, NewIndex)))
+func (self ITuningSpaceContainer) Add(TuningSpace *mediadirectshowtv.ITuningSpace) (systemvariant.VARIANT, error) {
+	var _NewIndex systemvariant.VARIANT
+	_hr := self.Raw.Add(TuningSpace, &_NewIndex)
+	return _NewIndex, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnumTuningSpaces wraps the raw Get_EnumTuningSpaces call.
-func (self ITuningSpaceContainer) Get_EnumTuningSpaces(ppEnum **mediadirectshowtv.IEnumTuningSpaces) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumTuningSpaces(ppEnum)))
+func (self ITuningSpaceContainer) Get_EnumTuningSpaces() (*mediadirectshowtv.IEnumTuningSpaces, error) {
+	var _ppEnum *mediadirectshowtv.IEnumTuningSpaces
+	_hr := self.Raw.Get_EnumTuningSpaces(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MaxCount wraps the raw Get_MaxCount call.
-func (self ITuningSpaceContainer) Get_MaxCount(MaxCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxCount(MaxCount)))
+func (self ITuningSpaceContainer) Get_MaxCount() (int32, error) {
+	var _MaxCount int32
+	_hr := self.Raw.Get_MaxCount(&_MaxCount)
+	return _MaxCount, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxCount wraps the raw Put_MaxCount call.
@@ -11315,18 +12095,24 @@ func WrapITuningSpaces(raw *mediadirectshowtv.ITuningSpaces) ITuningSpaces {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ITuningSpaces) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self ITuningSpaces) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ITuningSpaces) Get__NewEnum(NewEnum **systemole.IEnumVARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(NewEnum)))
+func (self ITuningSpaces) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
+	var _NewEnum *systemole.IEnumVARIANT
+	_hr := self.Raw.Get__NewEnum(&_NewEnum)
+	return _NewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnumTuningSpaces wraps the raw Get_EnumTuningSpaces call.
-func (self ITuningSpaces) Get_EnumTuningSpaces(NewEnum **mediadirectshowtv.IEnumTuningSpaces) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumTuningSpaces(NewEnum)))
+func (self ITuningSpaces) Get_EnumTuningSpaces() (*mediadirectshowtv.IEnumTuningSpaces, error) {
+	var _NewEnum *mediadirectshowtv.IEnumTuningSpaces
+	_hr := self.Raw.Get_EnumTuningSpaces(&_NewEnum)
+	return _NewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IXDSCodec is an idiomatic wrapper over the raw COM interface Media.DirectShow.Tv.IXDSCodec with error-returning methods.
@@ -11341,8 +12127,10 @@ func WrapIXDSCodec(raw *mediadirectshowtv.IXDSCodec) IXDSCodec {
 }
 
 // Get_XDSToRatObjOK wraps the raw Get_XDSToRatObjOK call.
-func (self IXDSCodec) Get_XDSToRatObjOK(pHrCoCreateRetVal *foundation.HRESULT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_XDSToRatObjOK(pHrCoCreateRetVal)))
+func (self IXDSCodec) Get_XDSToRatObjOK() (foundation.HRESULT, error) {
+	var _pHrCoCreateRetVal foundation.HRESULT
+	_hr := self.Raw.Get_XDSToRatObjOK(&_pHrCoCreateRetVal)
+	return _pHrCoCreateRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CCSubstreamService wraps the raw Put_CCSubstreamService call.
@@ -11351,8 +12139,10 @@ func (self IXDSCodec) Put_CCSubstreamService(SubstreamMask int32) error {
 }
 
 // Get_CCSubstreamService wraps the raw Get_CCSubstreamService call.
-func (self IXDSCodec) Get_CCSubstreamService(pSubstreamMask *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CCSubstreamService(pSubstreamMask)))
+func (self IXDSCodec) Get_CCSubstreamService() (int32, error) {
+	var _pSubstreamMask int32
+	_hr := self.Raw.Get_CCSubstreamService(&_pSubstreamMask)
+	return _pSubstreamMask, win32.HRESULTError(int32(_hr))
 }
 
 // GetContentAdvisoryRating wraps the raw GetContentAdvisoryRating call.

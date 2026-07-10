@@ -34,8 +34,10 @@ func (self IDXGIAdapter) EnumOutputs(Output uint32, ppOutput **graphicsdxgi.IDXG
 }
 
 // GetDesc wraps the raw GetDesc call.
-func (self IDXGIAdapter) GetDesc(pDesc *graphicsdxgi.DXGI_ADAPTER_DESC) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc(pDesc)))
+func (self IDXGIAdapter) GetDesc() (graphicsdxgi.DXGI_ADAPTER_DESC, error) {
+	var _pDesc graphicsdxgi.DXGI_ADAPTER_DESC
+	_hr := self.Raw.GetDesc(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // CheckInterfaceSupport wraps the raw CheckInterfaceSupport call.
@@ -55,8 +57,10 @@ func WrapIDXGIAdapter1(raw *graphicsdxgi.IDXGIAdapter1) IDXGIAdapter1 {
 }
 
 // GetDesc1 wraps the raw GetDesc1 call.
-func (self IDXGIAdapter1) GetDesc1(pDesc *graphicsdxgi.DXGI_ADAPTER_DESC1) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc1(pDesc)))
+func (self IDXGIAdapter1) GetDesc1() (graphicsdxgi.DXGI_ADAPTER_DESC1, error) {
+	var _pDesc graphicsdxgi.DXGI_ADAPTER_DESC1
+	_hr := self.Raw.GetDesc1(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // IDXGIAdapter2 is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIAdapter2 with error-returning methods.
@@ -71,8 +75,10 @@ func WrapIDXGIAdapter2(raw *graphicsdxgi.IDXGIAdapter2) IDXGIAdapter2 {
 }
 
 // GetDesc2 wraps the raw GetDesc2 call.
-func (self IDXGIAdapter2) GetDesc2(pDesc *graphicsdxgi.DXGI_ADAPTER_DESC2) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc2(pDesc)))
+func (self IDXGIAdapter2) GetDesc2() (graphicsdxgi.DXGI_ADAPTER_DESC2, error) {
+	var _pDesc graphicsdxgi.DXGI_ADAPTER_DESC2
+	_hr := self.Raw.GetDesc2(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // IDXGIAdapter3 is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIAdapter3 with error-returning methods.
@@ -128,8 +134,10 @@ func WrapIDXGIAdapter4(raw *graphicsdxgi.IDXGIAdapter4) IDXGIAdapter4 {
 }
 
 // GetDesc3 wraps the raw GetDesc3 call.
-func (self IDXGIAdapter4) GetDesc3(pDesc *graphicsdxgi.DXGI_ADAPTER_DESC3) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc3(pDesc)))
+func (self IDXGIAdapter4) GetDesc3() (graphicsdxgi.DXGI_ADAPTER_DESC3, error) {
+	var _pDesc graphicsdxgi.DXGI_ADAPTER_DESC3
+	_hr := self.Raw.GetDesc3(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // IDXGIDebug is an idiomatic wrapper over the raw COM interface Graphics.Dxgi.IDXGIDebug with error-returning methods.
@@ -692,8 +700,10 @@ func WrapIDXGIOutput(raw *graphicsdxgi.IDXGIOutput) IDXGIOutput {
 }
 
 // GetDesc wraps the raw GetDesc call.
-func (self IDXGIOutput) GetDesc(pDesc *graphicsdxgi.DXGI_OUTPUT_DESC) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc(pDesc)))
+func (self IDXGIOutput) GetDesc() (graphicsdxgi.DXGI_OUTPUT_DESC, error) {
+	var _pDesc graphicsdxgi.DXGI_OUTPUT_DESC
+	_hr := self.Raw.GetDesc(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // GetDisplayModeList wraps the raw GetDisplayModeList call.
@@ -859,8 +869,10 @@ func WrapIDXGIOutput6(raw *graphicsdxgi.IDXGIOutput6) IDXGIOutput6 {
 }
 
 // GetDesc1 wraps the raw GetDesc1 call.
-func (self IDXGIOutput6) GetDesc1(pDesc *graphicsdxgi.DXGI_OUTPUT_DESC1) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc1(pDesc)))
+func (self IDXGIOutput6) GetDesc1() (graphicsdxgi.DXGI_OUTPUT_DESC1, error) {
+	var _pDesc graphicsdxgi.DXGI_OUTPUT_DESC1
+	_hr := self.Raw.GetDesc1(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // CheckHardwareCompositionSupport wraps the raw CheckHardwareCompositionSupport call.
@@ -984,8 +996,10 @@ func WrapIDXGISurface(raw *graphicsdxgi.IDXGISurface) IDXGISurface {
 }
 
 // GetDesc wraps the raw GetDesc call.
-func (self IDXGISurface) GetDesc(pDesc *graphicsdxgi.DXGI_SURFACE_DESC) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc(pDesc)))
+func (self IDXGISurface) GetDesc() (graphicsdxgi.DXGI_SURFACE_DESC, error) {
+	var _pDesc graphicsdxgi.DXGI_SURFACE_DESC
+	_hr := self.Raw.GetDesc(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // Map wraps the raw Map call.
@@ -1069,8 +1083,10 @@ func (self IDXGISwapChain) GetFullscreenState(pFullscreen *foundation.BOOL, ppTa
 }
 
 // GetDesc wraps the raw GetDesc call.
-func (self IDXGISwapChain) GetDesc(pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc(pDesc)))
+func (self IDXGISwapChain) GetDesc() (graphicsdxgi.DXGI_SWAP_CHAIN_DESC, error) {
+	var _pDesc graphicsdxgi.DXGI_SWAP_CHAIN_DESC
+	_hr := self.Raw.GetDesc(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // ResizeBuffers wraps the raw ResizeBuffers call.
@@ -1110,13 +1126,17 @@ func WrapIDXGISwapChain1(raw *graphicsdxgi.IDXGISwapChain1) IDXGISwapChain1 {
 }
 
 // GetDesc1 wraps the raw GetDesc1 call.
-func (self IDXGISwapChain1) GetDesc1(pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC1) error {
-	return win32.HRESULTError(int32(self.Raw.GetDesc1(pDesc)))
+func (self IDXGISwapChain1) GetDesc1() (graphicsdxgi.DXGI_SWAP_CHAIN_DESC1, error) {
+	var _pDesc graphicsdxgi.DXGI_SWAP_CHAIN_DESC1
+	_hr := self.Raw.GetDesc1(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // GetFullscreenDesc wraps the raw GetFullscreenDesc call.
-func (self IDXGISwapChain1) GetFullscreenDesc(pDesc *graphicsdxgi.DXGI_SWAP_CHAIN_FULLSCREEN_DESC) error {
-	return win32.HRESULTError(int32(self.Raw.GetFullscreenDesc(pDesc)))
+func (self IDXGISwapChain1) GetFullscreenDesc() (graphicsdxgi.DXGI_SWAP_CHAIN_FULLSCREEN_DESC, error) {
+	var _pDesc graphicsdxgi.DXGI_SWAP_CHAIN_FULLSCREEN_DESC
+	_hr := self.Raw.GetFullscreenDesc(&_pDesc)
+	return _pDesc, win32.HRESULTError(int32(_hr))
 }
 
 // GetHwnd wraps the raw GetHwnd call.

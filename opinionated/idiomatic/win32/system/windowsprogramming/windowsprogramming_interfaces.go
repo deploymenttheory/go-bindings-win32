@@ -132,8 +132,10 @@ func WrapIContainerActivationHelper(raw *systemwindowsprogramming.IContainerActi
 }
 
 // CanActivateClientVM wraps the raw CanActivateClientVM call.
-func (self IContainerActivationHelper) CanActivateClientVM(isAllowed *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CanActivateClientVM(isAllowed)))
+func (self IContainerActivationHelper) CanActivateClientVM() (foundation.VARIANT_BOOL, error) {
+	var _isAllowed foundation.VARIANT_BOOL
+	_hr := self.Raw.CanActivateClientVM(&_isAllowed)
+	return _isAllowed, win32.HRESULTError(int32(_hr))
 }
 
 // IDefaultBrowserSyncSettings is an idiomatic wrapper over the raw COM interface System.WindowsProgramming.IDefaultBrowserSyncSettings with error-returning methods.

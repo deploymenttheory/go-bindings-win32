@@ -67,8 +67,10 @@ func WrapIEventClass(raw *systemcomevents.IEventClass) IEventClass {
 }
 
 // Get_EventClassID wraps the raw Get_EventClassID call.
-func (self IEventClass) Get_EventClassID(pbstrEventClassID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventClassID(pbstrEventClassID)))
+func (self IEventClass) Get_EventClassID() (foundation.BSTR, error) {
+	var _pbstrEventClassID foundation.BSTR
+	_hr := self.Raw.Get_EventClassID(&_pbstrEventClassID)
+	return _pbstrEventClassID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EventClassID wraps the raw Put_EventClassID call.
@@ -77,8 +79,10 @@ func (self IEventClass) Put_EventClassID(bstrEventClassID foundation.BSTR) error
 }
 
 // Get_EventClassName wraps the raw Get_EventClassName call.
-func (self IEventClass) Get_EventClassName(pbstrEventClassName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventClassName(pbstrEventClassName)))
+func (self IEventClass) Get_EventClassName() (foundation.BSTR, error) {
+	var _pbstrEventClassName foundation.BSTR
+	_hr := self.Raw.Get_EventClassName(&_pbstrEventClassName)
+	return _pbstrEventClassName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EventClassName wraps the raw Put_EventClassName call.
@@ -87,8 +91,10 @@ func (self IEventClass) Put_EventClassName(bstrEventClassName foundation.BSTR) e
 }
 
 // Get_OwnerSID wraps the raw Get_OwnerSID call.
-func (self IEventClass) Get_OwnerSID(pbstrOwnerSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OwnerSID(pbstrOwnerSID)))
+func (self IEventClass) Get_OwnerSID() (foundation.BSTR, error) {
+	var _pbstrOwnerSID foundation.BSTR
+	_hr := self.Raw.Get_OwnerSID(&_pbstrOwnerSID)
+	return _pbstrOwnerSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OwnerSID wraps the raw Put_OwnerSID call.
@@ -97,8 +103,10 @@ func (self IEventClass) Put_OwnerSID(bstrOwnerSID foundation.BSTR) error {
 }
 
 // Get_FiringInterfaceID wraps the raw Get_FiringInterfaceID call.
-func (self IEventClass) Get_FiringInterfaceID(pbstrFiringInterfaceID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FiringInterfaceID(pbstrFiringInterfaceID)))
+func (self IEventClass) Get_FiringInterfaceID() (foundation.BSTR, error) {
+	var _pbstrFiringInterfaceID foundation.BSTR
+	_hr := self.Raw.Get_FiringInterfaceID(&_pbstrFiringInterfaceID)
+	return _pbstrFiringInterfaceID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FiringInterfaceID wraps the raw Put_FiringInterfaceID call.
@@ -107,8 +115,10 @@ func (self IEventClass) Put_FiringInterfaceID(bstrFiringInterfaceID foundation.B
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IEventClass) Get_Description(pbstrDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pbstrDescription)))
+func (self IEventClass) Get_Description() (foundation.BSTR, error) {
+	var _pbstrDescription foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pbstrDescription)
+	return _pbstrDescription, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -117,8 +127,10 @@ func (self IEventClass) Put_Description(bstrDescription foundation.BSTR) error {
 }
 
 // Get_CustomConfigCLSID wraps the raw Get_CustomConfigCLSID call.
-func (self IEventClass) Get_CustomConfigCLSID(pbstrCustomConfigCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CustomConfigCLSID(pbstrCustomConfigCLSID)))
+func (self IEventClass) Get_CustomConfigCLSID() (foundation.BSTR, error) {
+	var _pbstrCustomConfigCLSID foundation.BSTR
+	_hr := self.Raw.Get_CustomConfigCLSID(&_pbstrCustomConfigCLSID)
+	return _pbstrCustomConfigCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CustomConfigCLSID wraps the raw Put_CustomConfigCLSID call.
@@ -127,8 +139,10 @@ func (self IEventClass) Put_CustomConfigCLSID(bstrCustomConfigCLSID foundation.B
 }
 
 // Get_TypeLib wraps the raw Get_TypeLib call.
-func (self IEventClass) Get_TypeLib(pbstrTypeLib *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TypeLib(pbstrTypeLib)))
+func (self IEventClass) Get_TypeLib() (foundation.BSTR, error) {
+	var _pbstrTypeLib foundation.BSTR
+	_hr := self.Raw.Get_TypeLib(&_pbstrTypeLib)
+	return _pbstrTypeLib, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TypeLib wraps the raw Put_TypeLib call.
@@ -148,8 +162,10 @@ func WrapIEventClass2(raw *systemcomevents.IEventClass2) IEventClass2 {
 }
 
 // Get_PublisherID wraps the raw Get_PublisherID call.
-func (self IEventClass2) Get_PublisherID(pbstrPublisherID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PublisherID(pbstrPublisherID)))
+func (self IEventClass2) Get_PublisherID() (foundation.BSTR, error) {
+	var _pbstrPublisherID foundation.BSTR
+	_hr := self.Raw.Get_PublisherID(&_pbstrPublisherID)
+	return _pbstrPublisherID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PublisherID wraps the raw Put_PublisherID call.
@@ -158,8 +174,10 @@ func (self IEventClass2) Put_PublisherID(bstrPublisherID foundation.BSTR) error 
 }
 
 // Get_MultiInterfacePublisherFilterCLSID wraps the raw Get_MultiInterfacePublisherFilterCLSID call.
-func (self IEventClass2) Get_MultiInterfacePublisherFilterCLSID(pbstrPubFilCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MultiInterfacePublisherFilterCLSID(pbstrPubFilCLSID)))
+func (self IEventClass2) Get_MultiInterfacePublisherFilterCLSID() (foundation.BSTR, error) {
+	var _pbstrPubFilCLSID foundation.BSTR
+	_hr := self.Raw.Get_MultiInterfacePublisherFilterCLSID(&_pbstrPubFilCLSID)
+	return _pbstrPubFilCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MultiInterfacePublisherFilterCLSID wraps the raw Put_MultiInterfacePublisherFilterCLSID call.
@@ -168,8 +186,10 @@ func (self IEventClass2) Put_MultiInterfacePublisherFilterCLSID(bstrPubFilCLSID 
 }
 
 // Get_AllowInprocActivation wraps the raw Get_AllowInprocActivation call.
-func (self IEventClass2) Get_AllowInprocActivation(pfAllowInprocActivation *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowInprocActivation(pfAllowInprocActivation)))
+func (self IEventClass2) Get_AllowInprocActivation() (foundation.BOOL, error) {
+	var _pfAllowInprocActivation foundation.BOOL
+	_hr := self.Raw.Get_AllowInprocActivation(&_pfAllowInprocActivation)
+	return _pfAllowInprocActivation, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowInprocActivation wraps the raw Put_AllowInprocActivation call.
@@ -179,8 +199,10 @@ func (self IEventClass2) Put_AllowInprocActivation(fAllowInprocActivation bool) 
 }
 
 // Get_FireInParallel wraps the raw Get_FireInParallel call.
-func (self IEventClass2) Get_FireInParallel(pfFireInParallel *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FireInParallel(pfFireInParallel)))
+func (self IEventClass2) Get_FireInParallel() (foundation.BOOL, error) {
+	var _pfFireInParallel foundation.BOOL
+	_hr := self.Raw.Get_FireInParallel(&_pfFireInParallel)
+	return _pfFireInParallel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FireInParallel wraps the raw Put_FireInParallel call.
@@ -206,8 +228,10 @@ func (self IEventControl) SetPublisherFilter(methodName foundation.BSTR, pPublis
 }
 
 // Get_AllowInprocActivation wraps the raw Get_AllowInprocActivation call.
-func (self IEventControl) Get_AllowInprocActivation(pfAllowInprocActivation *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowInprocActivation(pfAllowInprocActivation)))
+func (self IEventControl) Get_AllowInprocActivation() (foundation.BOOL, error) {
+	var _pfAllowInprocActivation foundation.BOOL
+	_hr := self.Raw.Get_AllowInprocActivation(&_pfAllowInprocActivation)
+	return _pfAllowInprocActivation, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowInprocActivation wraps the raw Put_AllowInprocActivation call.
@@ -217,13 +241,17 @@ func (self IEventControl) Put_AllowInprocActivation(fAllowInprocActivation bool)
 }
 
 // GetSubscriptions wraps the raw GetSubscriptions call.
-func (self IEventControl) GetSubscriptions(methodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32, ppCollection **systemcomevents.IEventObjectCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetSubscriptions(methodName, optionalCriteria, optionalErrorIndex, ppCollection)))
+func (self IEventControl) GetSubscriptions(methodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32) (*systemcomevents.IEventObjectCollection, error) {
+	var _ppCollection *systemcomevents.IEventObjectCollection
+	_hr := self.Raw.GetSubscriptions(methodName, optionalCriteria, optionalErrorIndex, &_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // SetDefaultQuery wraps the raw SetDefaultQuery call.
-func (self IEventControl) SetDefaultQuery(methodName foundation.BSTR, criteria foundation.BSTR, errorIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetDefaultQuery(methodName, criteria, errorIndex)))
+func (self IEventControl) SetDefaultQuery(methodName foundation.BSTR, criteria foundation.BSTR) (int32, error) {
+	var _errorIndex int32
+	_hr := self.Raw.SetDefaultQuery(methodName, criteria, &_errorIndex)
+	return _errorIndex, win32.HRESULTError(int32(_hr))
 }
 
 // IEventObjectChange is an idiomatic wrapper over the raw COM interface System.Com.Events.IEventObjectChange with error-returning methods.
@@ -285,23 +313,31 @@ func WrapIEventObjectCollection(raw *systemcomevents.IEventObjectCollection) IEv
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IEventObjectCollection) Get__NewEnum(ppUnkEnum **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppUnkEnum)))
+func (self IEventObjectCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppUnkEnum *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppUnkEnum)
+	return _ppUnkEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IEventObjectCollection) Get_Item(objectID foundation.BSTR, pItem *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(objectID, pItem)))
+func (self IEventObjectCollection) Get_Item(objectID foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pItem systemvariant.VARIANT
+	_hr := self.Raw.Get_Item(objectID, &_pItem)
+	return _pItem, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NewEnum wraps the raw Get_NewEnum call.
-func (self IEventObjectCollection) Get_NewEnum(ppEnum **systemcomevents.IEnumEventObject) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NewEnum(ppEnum)))
+func (self IEventObjectCollection) Get_NewEnum() (*systemcomevents.IEnumEventObject, error) {
+	var _ppEnum *systemcomevents.IEnumEventObject
+	_hr := self.Raw.Get_NewEnum(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IEventObjectCollection) Get_Count(pCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pCount)))
+func (self IEventObjectCollection) Get_Count() (int32, error) {
+	var _pCount int32
+	_hr := self.Raw.Get_Count(&_pCount)
+	return _pCount, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -326,8 +362,10 @@ func WrapIEventProperty(raw *systemcomevents.IEventProperty) IEventProperty {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IEventProperty) Get_Name(propertyName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(propertyName)))
+func (self IEventProperty) Get_Name() (foundation.BSTR, error) {
+	var _propertyName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_propertyName)
+	return _propertyName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -336,8 +374,10 @@ func (self IEventProperty) Put_Name(propertyName foundation.BSTR) error {
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IEventProperty) Get_Value(propertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(propertyValue)))
+func (self IEventProperty) Get_Value() (systemvariant.VARIANT, error) {
+	var _propertyValue systemvariant.VARIANT
+	_hr := self.Raw.Get_Value(&_propertyValue)
+	return _propertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Value wraps the raw Put_Value call.
@@ -357,8 +397,10 @@ func WrapIEventPublisher(raw *systemcomevents.IEventPublisher) IEventPublisher {
 }
 
 // Get_PublisherID wraps the raw Get_PublisherID call.
-func (self IEventPublisher) Get_PublisherID(pbstrPublisherID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PublisherID(pbstrPublisherID)))
+func (self IEventPublisher) Get_PublisherID() (foundation.BSTR, error) {
+	var _pbstrPublisherID foundation.BSTR
+	_hr := self.Raw.Get_PublisherID(&_pbstrPublisherID)
+	return _pbstrPublisherID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PublisherID wraps the raw Put_PublisherID call.
@@ -367,8 +409,10 @@ func (self IEventPublisher) Put_PublisherID(bstrPublisherID foundation.BSTR) err
 }
 
 // Get_PublisherName wraps the raw Get_PublisherName call.
-func (self IEventPublisher) Get_PublisherName(pbstrPublisherName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PublisherName(pbstrPublisherName)))
+func (self IEventPublisher) Get_PublisherName() (foundation.BSTR, error) {
+	var _pbstrPublisherName foundation.BSTR
+	_hr := self.Raw.Get_PublisherName(&_pbstrPublisherName)
+	return _pbstrPublisherName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PublisherName wraps the raw Put_PublisherName call.
@@ -377,8 +421,10 @@ func (self IEventPublisher) Put_PublisherName(bstrPublisherName foundation.BSTR)
 }
 
 // Get_PublisherType wraps the raw Get_PublisherType call.
-func (self IEventPublisher) Get_PublisherType(pbstrPublisherType *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PublisherType(pbstrPublisherType)))
+func (self IEventPublisher) Get_PublisherType() (foundation.BSTR, error) {
+	var _pbstrPublisherType foundation.BSTR
+	_hr := self.Raw.Get_PublisherType(&_pbstrPublisherType)
+	return _pbstrPublisherType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PublisherType wraps the raw Put_PublisherType call.
@@ -387,8 +433,10 @@ func (self IEventPublisher) Put_PublisherType(bstrPublisherType foundation.BSTR)
 }
 
 // Get_OwnerSID wraps the raw Get_OwnerSID call.
-func (self IEventPublisher) Get_OwnerSID(pbstrOwnerSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OwnerSID(pbstrOwnerSID)))
+func (self IEventPublisher) Get_OwnerSID() (foundation.BSTR, error) {
+	var _pbstrOwnerSID foundation.BSTR
+	_hr := self.Raw.Get_OwnerSID(&_pbstrOwnerSID)
+	return _pbstrOwnerSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OwnerSID wraps the raw Put_OwnerSID call.
@@ -397,8 +445,10 @@ func (self IEventPublisher) Put_OwnerSID(bstrOwnerSID foundation.BSTR) error {
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IEventPublisher) Get_Description(pbstrDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pbstrDescription)))
+func (self IEventPublisher) Get_Description() (foundation.BSTR, error) {
+	var _pbstrDescription foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pbstrDescription)
+	return _pbstrDescription, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -407,8 +457,10 @@ func (self IEventPublisher) Put_Description(bstrDescription foundation.BSTR) err
 }
 
 // GetDefaultProperty wraps the raw GetDefaultProperty call.
-func (self IEventPublisher) GetDefaultProperty(bstrPropertyName foundation.BSTR, propertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetDefaultProperty(bstrPropertyName, propertyValue)))
+func (self IEventPublisher) GetDefaultProperty(bstrPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _propertyValue systemvariant.VARIANT
+	_hr := self.Raw.GetDefaultProperty(bstrPropertyName, &_propertyValue)
+	return _propertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // PutDefaultProperty wraps the raw PutDefaultProperty call.
@@ -422,8 +474,10 @@ func (self IEventPublisher) RemoveDefaultProperty(bstrPropertyName foundation.BS
 }
 
 // GetDefaultPropertyCollection wraps the raw GetDefaultPropertyCollection call.
-func (self IEventPublisher) GetDefaultPropertyCollection(collection **systemcomevents.IEventObjectCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetDefaultPropertyCollection(collection)))
+func (self IEventPublisher) GetDefaultPropertyCollection() (*systemcomevents.IEventObjectCollection, error) {
+	var _collection *systemcomevents.IEventObjectCollection
+	_hr := self.Raw.GetDefaultPropertyCollection(&_collection)
+	return _collection, win32.HRESULTError(int32(_hr))
 }
 
 // IEventSubscription is an idiomatic wrapper over the raw COM interface System.Com.Events.IEventSubscription with error-returning methods.
@@ -438,8 +492,10 @@ func WrapIEventSubscription(raw *systemcomevents.IEventSubscription) IEventSubsc
 }
 
 // Get_SubscriptionID wraps the raw Get_SubscriptionID call.
-func (self IEventSubscription) Get_SubscriptionID(pbstrSubscriptionID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubscriptionID(pbstrSubscriptionID)))
+func (self IEventSubscription) Get_SubscriptionID() (foundation.BSTR, error) {
+	var _pbstrSubscriptionID foundation.BSTR
+	_hr := self.Raw.Get_SubscriptionID(&_pbstrSubscriptionID)
+	return _pbstrSubscriptionID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SubscriptionID wraps the raw Put_SubscriptionID call.
@@ -448,8 +504,10 @@ func (self IEventSubscription) Put_SubscriptionID(bstrSubscriptionID foundation.
 }
 
 // Get_SubscriptionName wraps the raw Get_SubscriptionName call.
-func (self IEventSubscription) Get_SubscriptionName(pbstrSubscriptionName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubscriptionName(pbstrSubscriptionName)))
+func (self IEventSubscription) Get_SubscriptionName() (foundation.BSTR, error) {
+	var _pbstrSubscriptionName foundation.BSTR
+	_hr := self.Raw.Get_SubscriptionName(&_pbstrSubscriptionName)
+	return _pbstrSubscriptionName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SubscriptionName wraps the raw Put_SubscriptionName call.
@@ -458,8 +516,10 @@ func (self IEventSubscription) Put_SubscriptionName(bstrSubscriptionName foundat
 }
 
 // Get_PublisherID wraps the raw Get_PublisherID call.
-func (self IEventSubscription) Get_PublisherID(pbstrPublisherID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PublisherID(pbstrPublisherID)))
+func (self IEventSubscription) Get_PublisherID() (foundation.BSTR, error) {
+	var _pbstrPublisherID foundation.BSTR
+	_hr := self.Raw.Get_PublisherID(&_pbstrPublisherID)
+	return _pbstrPublisherID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PublisherID wraps the raw Put_PublisherID call.
@@ -468,8 +528,10 @@ func (self IEventSubscription) Put_PublisherID(bstrPublisherID foundation.BSTR) 
 }
 
 // Get_EventClassID wraps the raw Get_EventClassID call.
-func (self IEventSubscription) Get_EventClassID(pbstrEventClassID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventClassID(pbstrEventClassID)))
+func (self IEventSubscription) Get_EventClassID() (foundation.BSTR, error) {
+	var _pbstrEventClassID foundation.BSTR
+	_hr := self.Raw.Get_EventClassID(&_pbstrEventClassID)
+	return _pbstrEventClassID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EventClassID wraps the raw Put_EventClassID call.
@@ -478,8 +540,10 @@ func (self IEventSubscription) Put_EventClassID(bstrEventClassID foundation.BSTR
 }
 
 // Get_MethodName wraps the raw Get_MethodName call.
-func (self IEventSubscription) Get_MethodName(pbstrMethodName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MethodName(pbstrMethodName)))
+func (self IEventSubscription) Get_MethodName() (foundation.BSTR, error) {
+	var _pbstrMethodName foundation.BSTR
+	_hr := self.Raw.Get_MethodName(&_pbstrMethodName)
+	return _pbstrMethodName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MethodName wraps the raw Put_MethodName call.
@@ -488,8 +552,10 @@ func (self IEventSubscription) Put_MethodName(bstrMethodName foundation.BSTR) er
 }
 
 // Get_SubscriberCLSID wraps the raw Get_SubscriberCLSID call.
-func (self IEventSubscription) Get_SubscriberCLSID(pbstrSubscriberCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubscriberCLSID(pbstrSubscriberCLSID)))
+func (self IEventSubscription) Get_SubscriberCLSID() (foundation.BSTR, error) {
+	var _pbstrSubscriberCLSID foundation.BSTR
+	_hr := self.Raw.Get_SubscriberCLSID(&_pbstrSubscriberCLSID)
+	return _pbstrSubscriberCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SubscriberCLSID wraps the raw Put_SubscriberCLSID call.
@@ -498,8 +564,10 @@ func (self IEventSubscription) Put_SubscriberCLSID(bstrSubscriberCLSID foundatio
 }
 
 // Get_SubscriberInterface wraps the raw Get_SubscriberInterface call.
-func (self IEventSubscription) Get_SubscriberInterface(ppSubscriberInterface **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubscriberInterface(ppSubscriberInterface)))
+func (self IEventSubscription) Get_SubscriberInterface() (*systemcom.IUnknown, error) {
+	var _ppSubscriberInterface *systemcom.IUnknown
+	_hr := self.Raw.Get_SubscriberInterface(&_ppSubscriberInterface)
+	return _ppSubscriberInterface, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SubscriberInterface wraps the raw Put_SubscriberInterface call.
@@ -508,8 +576,10 @@ func (self IEventSubscription) Put_SubscriberInterface(pSubscriberInterface *sys
 }
 
 // Get_PerUser wraps the raw Get_PerUser call.
-func (self IEventSubscription) Get_PerUser(pfPerUser *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PerUser(pfPerUser)))
+func (self IEventSubscription) Get_PerUser() (foundation.BOOL, error) {
+	var _pfPerUser foundation.BOOL
+	_hr := self.Raw.Get_PerUser(&_pfPerUser)
+	return _pfPerUser, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PerUser wraps the raw Put_PerUser call.
@@ -519,8 +589,10 @@ func (self IEventSubscription) Put_PerUser(fPerUser bool) error {
 }
 
 // Get_OwnerSID wraps the raw Get_OwnerSID call.
-func (self IEventSubscription) Get_OwnerSID(pbstrOwnerSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OwnerSID(pbstrOwnerSID)))
+func (self IEventSubscription) Get_OwnerSID() (foundation.BSTR, error) {
+	var _pbstrOwnerSID foundation.BSTR
+	_hr := self.Raw.Get_OwnerSID(&_pbstrOwnerSID)
+	return _pbstrOwnerSID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OwnerSID wraps the raw Put_OwnerSID call.
@@ -529,8 +601,10 @@ func (self IEventSubscription) Put_OwnerSID(bstrOwnerSID foundation.BSTR) error 
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self IEventSubscription) Get_Enabled(pfEnabled *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(pfEnabled)))
+func (self IEventSubscription) Get_Enabled() (foundation.BOOL, error) {
+	var _pfEnabled foundation.BOOL
+	_hr := self.Raw.Get_Enabled(&_pfEnabled)
+	return _pfEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -540,8 +614,10 @@ func (self IEventSubscription) Put_Enabled(fEnabled bool) error {
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IEventSubscription) Get_Description(pbstrDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pbstrDescription)))
+func (self IEventSubscription) Get_Description() (foundation.BSTR, error) {
+	var _pbstrDescription foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pbstrDescription)
+	return _pbstrDescription, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -550,8 +626,10 @@ func (self IEventSubscription) Put_Description(bstrDescription foundation.BSTR) 
 }
 
 // Get_MachineName wraps the raw Get_MachineName call.
-func (self IEventSubscription) Get_MachineName(pbstrMachineName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MachineName(pbstrMachineName)))
+func (self IEventSubscription) Get_MachineName() (foundation.BSTR, error) {
+	var _pbstrMachineName foundation.BSTR
+	_hr := self.Raw.Get_MachineName(&_pbstrMachineName)
+	return _pbstrMachineName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MachineName wraps the raw Put_MachineName call.
@@ -560,8 +638,10 @@ func (self IEventSubscription) Put_MachineName(bstrMachineName foundation.BSTR) 
 }
 
 // GetPublisherProperty wraps the raw GetPublisherProperty call.
-func (self IEventSubscription) GetPublisherProperty(bstrPropertyName foundation.BSTR, propertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetPublisherProperty(bstrPropertyName, propertyValue)))
+func (self IEventSubscription) GetPublisherProperty(bstrPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _propertyValue systemvariant.VARIANT
+	_hr := self.Raw.GetPublisherProperty(bstrPropertyName, &_propertyValue)
+	return _propertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // PutPublisherProperty wraps the raw PutPublisherProperty call.
@@ -575,13 +655,17 @@ func (self IEventSubscription) RemovePublisherProperty(bstrPropertyName foundati
 }
 
 // GetPublisherPropertyCollection wraps the raw GetPublisherPropertyCollection call.
-func (self IEventSubscription) GetPublisherPropertyCollection(collection **systemcomevents.IEventObjectCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetPublisherPropertyCollection(collection)))
+func (self IEventSubscription) GetPublisherPropertyCollection() (*systemcomevents.IEventObjectCollection, error) {
+	var _collection *systemcomevents.IEventObjectCollection
+	_hr := self.Raw.GetPublisherPropertyCollection(&_collection)
+	return _collection, win32.HRESULTError(int32(_hr))
 }
 
 // GetSubscriberProperty wraps the raw GetSubscriberProperty call.
-func (self IEventSubscription) GetSubscriberProperty(bstrPropertyName foundation.BSTR, propertyValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetSubscriberProperty(bstrPropertyName, propertyValue)))
+func (self IEventSubscription) GetSubscriberProperty(bstrPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _propertyValue systemvariant.VARIANT
+	_hr := self.Raw.GetSubscriberProperty(bstrPropertyName, &_propertyValue)
+	return _propertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // PutSubscriberProperty wraps the raw PutSubscriberProperty call.
@@ -595,13 +679,17 @@ func (self IEventSubscription) RemoveSubscriberProperty(bstrPropertyName foundat
 }
 
 // GetSubscriberPropertyCollection wraps the raw GetSubscriberPropertyCollection call.
-func (self IEventSubscription) GetSubscriberPropertyCollection(collection **systemcomevents.IEventObjectCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetSubscriberPropertyCollection(collection)))
+func (self IEventSubscription) GetSubscriberPropertyCollection() (*systemcomevents.IEventObjectCollection, error) {
+	var _collection *systemcomevents.IEventObjectCollection
+	_hr := self.Raw.GetSubscriberPropertyCollection(&_collection)
+	return _collection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InterfaceID wraps the raw Get_InterfaceID call.
-func (self IEventSubscription) Get_InterfaceID(pbstrInterfaceID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InterfaceID(pbstrInterfaceID)))
+func (self IEventSubscription) Get_InterfaceID() (foundation.BSTR, error) {
+	var _pbstrInterfaceID foundation.BSTR
+	_hr := self.Raw.Get_InterfaceID(&_pbstrInterfaceID)
+	return _pbstrInterfaceID, win32.HRESULTError(int32(_hr))
 }
 
 // Put_InterfaceID wraps the raw Put_InterfaceID call.
@@ -621,8 +709,10 @@ func WrapIEventSystem(raw *systemcomevents.IEventSystem) IEventSystem {
 }
 
 // Query wraps the raw Query call.
-func (self IEventSystem) Query(progID foundation.BSTR, queryCriteria foundation.BSTR, errorIndex *int32, ppInterface **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Query(progID, queryCriteria, errorIndex, ppInterface)))
+func (self IEventSystem) Query(progID foundation.BSTR, queryCriteria foundation.BSTR, errorIndex *int32) (*systemcom.IUnknown, error) {
+	var _ppInterface *systemcom.IUnknown
+	_hr := self.Raw.Query(progID, queryCriteria, errorIndex, &_ppInterface)
+	return _ppInterface, win32.HRESULTError(int32(_hr))
 }
 
 // Store wraps the raw Store call.
@@ -636,13 +726,17 @@ func (self IEventSystem) Remove(progID foundation.BSTR, queryCriteria foundation
 }
 
 // Get_EventObjectChangeEventClassID wraps the raw Get_EventObjectChangeEventClassID call.
-func (self IEventSystem) Get_EventObjectChangeEventClassID(pbstrEventClassID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventObjectChangeEventClassID(pbstrEventClassID)))
+func (self IEventSystem) Get_EventObjectChangeEventClassID() (foundation.BSTR, error) {
+	var _pbstrEventClassID foundation.BSTR
+	_hr := self.Raw.Get_EventObjectChangeEventClassID(&_pbstrEventClassID)
+	return _pbstrEventClassID, win32.HRESULTError(int32(_hr))
 }
 
 // QueryS wraps the raw QueryS call.
-func (self IEventSystem) QueryS(progID foundation.BSTR, queryCriteria foundation.BSTR, ppInterface **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.QueryS(progID, queryCriteria, ppInterface)))
+func (self IEventSystem) QueryS(progID foundation.BSTR, queryCriteria foundation.BSTR) (*systemcom.IUnknown, error) {
+	var _ppInterface *systemcom.IUnknown
+	_hr := self.Raw.QueryS(progID, queryCriteria, &_ppInterface)
+	return _ppInterface, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveS wraps the raw RemoveS call.
@@ -683,18 +777,24 @@ func (self IMultiInterfaceEventControl) SetMultiInterfacePublisherFilter(classFi
 }
 
 // GetSubscriptions wraps the raw GetSubscriptions call.
-func (self IMultiInterfaceEventControl) GetSubscriptions(eventIID *win32.GUID, bstrMethodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32, ppCollection **systemcomevents.IEventObjectCollection) error {
-	return win32.HRESULTError(int32(self.Raw.GetSubscriptions(eventIID, bstrMethodName, optionalCriteria, optionalErrorIndex, ppCollection)))
+func (self IMultiInterfaceEventControl) GetSubscriptions(eventIID *win32.GUID, bstrMethodName foundation.BSTR, optionalCriteria foundation.BSTR, optionalErrorIndex *int32) (*systemcomevents.IEventObjectCollection, error) {
+	var _ppCollection *systemcomevents.IEventObjectCollection
+	_hr := self.Raw.GetSubscriptions(eventIID, bstrMethodName, optionalCriteria, optionalErrorIndex, &_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // SetDefaultQuery wraps the raw SetDefaultQuery call.
-func (self IMultiInterfaceEventControl) SetDefaultQuery(eventIID *win32.GUID, bstrMethodName foundation.BSTR, bstrCriteria foundation.BSTR, errorIndex *int32) error {
-	return win32.HRESULTError(int32(self.Raw.SetDefaultQuery(eventIID, bstrMethodName, bstrCriteria, errorIndex)))
+func (self IMultiInterfaceEventControl) SetDefaultQuery(eventIID *win32.GUID, bstrMethodName foundation.BSTR, bstrCriteria foundation.BSTR) (int32, error) {
+	var _errorIndex int32
+	_hr := self.Raw.SetDefaultQuery(eventIID, bstrMethodName, bstrCriteria, &_errorIndex)
+	return _errorIndex, win32.HRESULTError(int32(_hr))
 }
 
 // Get_AllowInprocActivation wraps the raw Get_AllowInprocActivation call.
-func (self IMultiInterfaceEventControl) Get_AllowInprocActivation(pfAllowInprocActivation *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowInprocActivation(pfAllowInprocActivation)))
+func (self IMultiInterfaceEventControl) Get_AllowInprocActivation() (foundation.BOOL, error) {
+	var _pfAllowInprocActivation foundation.BOOL
+	_hr := self.Raw.Get_AllowInprocActivation(&_pfAllowInprocActivation)
+	return _pfAllowInprocActivation, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowInprocActivation wraps the raw Put_AllowInprocActivation call.
@@ -704,8 +804,10 @@ func (self IMultiInterfaceEventControl) Put_AllowInprocActivation(fAllowInprocAc
 }
 
 // Get_FireInParallel wraps the raw Get_FireInParallel call.
-func (self IMultiInterfaceEventControl) Get_FireInParallel(pfFireInParallel *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FireInParallel(pfFireInParallel)))
+func (self IMultiInterfaceEventControl) Get_FireInParallel() (foundation.BOOL, error) {
+	var _pfFireInParallel foundation.BOOL
+	_hr := self.Raw.Get_FireInParallel(&_pfFireInParallel)
+	return _pfFireInParallel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FireInParallel wraps the raw Put_FireInParallel call.

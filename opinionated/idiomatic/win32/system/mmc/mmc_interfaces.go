@@ -39,13 +39,17 @@ func WrapColumn(raw *systemmmc.Column) Column {
 }
 
 // Name wraps the raw Name call.
-func (self Column) Name(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Name(Name)))
+func (self Column) Name() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Name(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Width wraps the raw Get_Width call.
-func (self Column) Get_Width(Width *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Width(Width)))
+func (self Column) Get_Width() (int32, error) {
+	var _Width int32
+	_hr := self.Raw.Get_Width(&_Width)
+	return _Width, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Width wraps the raw Put_Width call.
@@ -54,8 +58,10 @@ func (self Column) Put_Width(Width int32) error {
 }
 
 // Get_DisplayPosition wraps the raw Get_DisplayPosition call.
-func (self Column) Get_DisplayPosition(DisplayPosition *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisplayPosition(DisplayPosition)))
+func (self Column) Get_DisplayPosition() (int32, error) {
+	var _DisplayPosition int32
+	_hr := self.Raw.Get_DisplayPosition(&_DisplayPosition)
+	return _DisplayPosition, win32.HRESULTError(int32(_hr))
 }
 
 // Put_DisplayPosition wraps the raw Put_DisplayPosition call.
@@ -64,8 +70,10 @@ func (self Column) Put_DisplayPosition(Index int32) error {
 }
 
 // Get_Hidden wraps the raw Get_Hidden call.
-func (self Column) Get_Hidden(Hidden *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Hidden(Hidden)))
+func (self Column) Get_Hidden() (foundation.BOOL, error) {
+	var _Hidden foundation.BOOL
+	_hr := self.Raw.Get_Hidden(&_Hidden)
+	return _Hidden, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Hidden wraps the raw Put_Hidden call.
@@ -80,8 +88,10 @@ func (self Column) SetAsSortColumn(SortOrder systemmmc.ColumnSortOrder) error {
 }
 
 // IsSortColumn wraps the raw IsSortColumn call.
-func (self Column) IsSortColumn(IsSortColumn *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSortColumn(IsSortColumn)))
+func (self Column) IsSortColumn() (foundation.BOOL, error) {
+	var _IsSortColumn foundation.BOOL
+	_hr := self.Raw.IsSortColumn(&_IsSortColumn)
+	return _IsSortColumn, win32.HRESULTError(int32(_hr))
 }
 
 // Columns is an idiomatic wrapper over the raw COM interface System.Mmc.Columns with error-returning methods.
@@ -96,18 +106,24 @@ func WrapColumns(raw *systemmmc.Columns) Columns {
 }
 
 // Item wraps the raw Item call.
-func (self Columns) Item(Index int32, Column **systemmmc.Column) error {
-	return win32.HRESULTError(int32(self.Raw.Item(Index, Column)))
+func (self Columns) Item(Index int32) (*systemmmc.Column, error) {
+	var _Column *systemmmc.Column
+	_hr := self.Raw.Item(Index, &_Column)
+	return _Column, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self Columns) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self Columns) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self Columns) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self Columns) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // ContextMenu is an idiomatic wrapper over the raw COM interface System.Mmc.ContextMenu with error-returning methods.
@@ -122,13 +138,17 @@ func WrapContextMenu(raw *systemmmc.ContextMenu) ContextMenu {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self ContextMenu) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self ContextMenu) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self ContextMenu) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self ContextMenu) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Document is an idiomatic wrapper over the raw COM interface System.Mmc.Document with error-returning methods.
@@ -159,23 +179,31 @@ func (self Document) Close(SaveChanges bool) error {
 }
 
 // Get_Views wraps the raw Get_Views call.
-func (self Document) Get_Views(Views **systemmmc.Views) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Views(Views)))
+func (self Document) Get_Views() (*systemmmc.Views, error) {
+	var _Views *systemmmc.Views
+	_hr := self.Raw.Get_Views(&_Views)
+	return _Views, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SnapIns wraps the raw Get_SnapIns call.
-func (self Document) Get_SnapIns(SnapIns **systemmmc.SnapIns) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SnapIns(SnapIns)))
+func (self Document) Get_SnapIns() (*systemmmc.SnapIns, error) {
+	var _SnapIns *systemmmc.SnapIns
+	_hr := self.Raw.Get_SnapIns(&_SnapIns)
+	return _SnapIns, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ActiveView wraps the raw Get_ActiveView call.
-func (self Document) Get_ActiveView(View **systemmmc.View) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActiveView(View)))
+func (self Document) Get_ActiveView() (*systemmmc.View, error) {
+	var _View *systemmmc.View
+	_hr := self.Raw.Get_ActiveView(&_View)
+	return _View, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self Document) Get_Name(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(Name)))
+func (self Document) Get_Name() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -184,18 +212,24 @@ func (self Document) Put_Name(Name foundation.BSTR) error {
 }
 
 // Get_Location wraps the raw Get_Location call.
-func (self Document) Get_Location(Location *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Location(Location)))
+func (self Document) Get_Location() (foundation.BSTR, error) {
+	var _Location foundation.BSTR
+	_hr := self.Raw.Get_Location(&_Location)
+	return _Location, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsSaved wraps the raw Get_IsSaved call.
-func (self Document) Get_IsSaved(IsSaved *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsSaved(IsSaved)))
+func (self Document) Get_IsSaved() (foundation.BOOL, error) {
+	var _IsSaved foundation.BOOL
+	_hr := self.Raw.Get_IsSaved(&_IsSaved)
+	return _IsSaved, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Mode wraps the raw Get_Mode call.
-func (self Document) Get_Mode(Mode *systemmmc.DocumentMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Mode(Mode)))
+func (self Document) Get_Mode() (systemmmc.DocumentMode, error) {
+	var _Mode systemmmc.DocumentMode
+	_hr := self.Raw.Get_Mode(&_Mode)
+	return _Mode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Mode wraps the raw Put_Mode call.
@@ -204,23 +238,31 @@ func (self Document) Put_Mode(Mode systemmmc.DocumentMode) error {
 }
 
 // Get_RootNode wraps the raw Get_RootNode call.
-func (self Document) Get_RootNode(Node **systemmmc.Node) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RootNode(Node)))
+func (self Document) Get_RootNode() (*systemmmc.Node, error) {
+	var _Node *systemmmc.Node
+	_hr := self.Raw.Get_RootNode(&_Node)
+	return _Node, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ScopeNamespace wraps the raw Get_ScopeNamespace call.
-func (self Document) Get_ScopeNamespace(ScopeNamespace **systemmmc.ScopeNamespace) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ScopeNamespace(ScopeNamespace)))
+func (self Document) Get_ScopeNamespace() (*systemmmc.ScopeNamespace, error) {
+	var _ScopeNamespace *systemmmc.ScopeNamespace
+	_hr := self.Raw.Get_ScopeNamespace(&_ScopeNamespace)
+	return _ScopeNamespace, win32.HRESULTError(int32(_hr))
 }
 
 // CreateProperties wraps the raw CreateProperties call.
-func (self Document) CreateProperties(Properties **systemmmc.Properties) error {
-	return win32.HRESULTError(int32(self.Raw.CreateProperties(Properties)))
+func (self Document) CreateProperties() (*systemmmc.Properties, error) {
+	var _Properties *systemmmc.Properties
+	_hr := self.Raw.CreateProperties(&_Properties)
+	return _Properties, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self Document) Get_Application(Application **systemmmc.Application) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(Application)))
+func (self Document) Get_Application() (*systemmmc.Application, error) {
+	var _Application *systemmmc.Application
+	_hr := self.Raw.Get_Application(&_Application)
+	return _Application, win32.HRESULTError(int32(_hr))
 }
 
 // Extension is an idiomatic wrapper over the raw COM interface System.Mmc.Extension with error-returning methods.
@@ -235,28 +277,38 @@ func WrapExtension(raw *systemmmc.Extension) Extension {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self Extension) Get_Name(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(Name)))
+func (self Extension) Get_Name() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Vendor wraps the raw Get_Vendor call.
-func (self Extension) Get_Vendor(Vendor *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Vendor(Vendor)))
+func (self Extension) Get_Vendor() (foundation.BSTR, error) {
+	var _Vendor foundation.BSTR
+	_hr := self.Raw.Get_Vendor(&_Vendor)
+	return _Vendor, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Version wraps the raw Get_Version call.
-func (self Extension) Get_Version(Version *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Version(Version)))
+func (self Extension) Get_Version() (foundation.BSTR, error) {
+	var _Version foundation.BSTR
+	_hr := self.Raw.Get_Version(&_Version)
+	return _Version, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Extensions wraps the raw Get_Extensions call.
-func (self Extension) Get_Extensions(Extensions **systemmmc.Extensions) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Extensions(Extensions)))
+func (self Extension) Get_Extensions() (*systemmmc.Extensions, error) {
+	var _Extensions *systemmmc.Extensions
+	_hr := self.Raw.Get_Extensions(&_Extensions)
+	return _Extensions, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SnapinCLSID wraps the raw Get_SnapinCLSID call.
-func (self Extension) Get_SnapinCLSID(SnapinCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SnapinCLSID(SnapinCLSID)))
+func (self Extension) Get_SnapinCLSID() (foundation.BSTR, error) {
+	var _SnapinCLSID foundation.BSTR
+	_hr := self.Raw.Get_SnapinCLSID(&_SnapinCLSID)
+	return _SnapinCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // EnableAllExtensions wraps the raw EnableAllExtensions call.
@@ -283,18 +335,24 @@ func WrapExtensions(raw *systemmmc.Extensions) Extensions {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self Extensions) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self Extensions) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self Extensions) Item(Index int32, Extension **systemmmc.Extension) error {
-	return win32.HRESULTError(int32(self.Raw.Item(Index, Extension)))
+func (self Extensions) Item(Index int32) (*systemmmc.Extension, error) {
+	var _Extension *systemmmc.Extension
+	_hr := self.Raw.Item(Index, &_Extension)
+	return _Extension, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self Extensions) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self Extensions) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Frame is an idiomatic wrapper over the raw COM interface System.Mmc.Frame with error-returning methods.
@@ -324,8 +382,10 @@ func (self Frame) Restore() error {
 }
 
 // Get_Top wraps the raw Get_Top call.
-func (self Frame) Get_Top(Top *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Top(Top)))
+func (self Frame) Get_Top() (int32, error) {
+	var _Top int32
+	_hr := self.Raw.Get_Top(&_Top)
+	return _Top, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Top wraps the raw Put_Top call.
@@ -334,8 +394,10 @@ func (self Frame) Put_Top(top int32) error {
 }
 
 // Get_Bottom wraps the raw Get_Bottom call.
-func (self Frame) Get_Bottom(Bottom *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Bottom(Bottom)))
+func (self Frame) Get_Bottom() (int32, error) {
+	var _Bottom int32
+	_hr := self.Raw.Get_Bottom(&_Bottom)
+	return _Bottom, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Bottom wraps the raw Put_Bottom call.
@@ -344,8 +406,10 @@ func (self Frame) Put_Bottom(bottom int32) error {
 }
 
 // Get_Left wraps the raw Get_Left call.
-func (self Frame) Get_Left(Left *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Left(Left)))
+func (self Frame) Get_Left() (int32, error) {
+	var _Left int32
+	_hr := self.Raw.Get_Left(&_Left)
+	return _Left, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Left wraps the raw Put_Left call.
@@ -354,8 +418,10 @@ func (self Frame) Put_Left(left int32) error {
 }
 
 // Get_Right wraps the raw Get_Right call.
-func (self Frame) Get_Right(Right *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Right(Right)))
+func (self Frame) Get_Right() (int32, error) {
+	var _Right int32
+	_hr := self.Raw.Get_Right(&_Right)
+	return _Right, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Right wraps the raw Put_Right call.
@@ -835,8 +901,10 @@ func (self IContextMenuProvider) AddThirdPartyExtensionItems(piDataObject *syste
 }
 
 // ShowContextMenu wraps the raw ShowContextMenu call.
-func (self IContextMenuProvider) ShowContextMenu(hwndParent foundation.HWND, xPos int32, yPos int32, plSelected *int32) error {
-	return win32.HRESULTError(int32(self.Raw.ShowContextMenu(hwndParent, xPos, yPos, plSelected)))
+func (self IContextMenuProvider) ShowContextMenu(hwndParent foundation.HWND, xPos int32, yPos int32) (int32, error) {
+	var _plSelected int32
+	_hr := self.Raw.ShowContextMenu(hwndParent, xPos, yPos, &_plSelected)
+	return _plSelected, win32.HRESULTError(int32(_hr))
 }
 
 // IControlbar is an idiomatic wrapper over the raw COM interface System.Mmc.IControlbar with error-returning methods.
@@ -1716,23 +1784,31 @@ func WrapMenuItem(raw *systemmmc.MenuItem) MenuItem {
 }
 
 // Get_DisplayName wraps the raw Get_DisplayName call.
-func (self MenuItem) Get_DisplayName(DisplayName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisplayName(DisplayName)))
+func (self MenuItem) Get_DisplayName() (foundation.BSTR, error) {
+	var _DisplayName foundation.BSTR
+	_hr := self.Raw.Get_DisplayName(&_DisplayName)
+	return _DisplayName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LanguageIndependentName wraps the raw Get_LanguageIndependentName call.
-func (self MenuItem) Get_LanguageIndependentName(LanguageIndependentName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LanguageIndependentName(LanguageIndependentName)))
+func (self MenuItem) Get_LanguageIndependentName() (foundation.BSTR, error) {
+	var _LanguageIndependentName foundation.BSTR
+	_hr := self.Raw.Get_LanguageIndependentName(&_LanguageIndependentName)
+	return _LanguageIndependentName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self MenuItem) Get_Path(Path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(Path)))
+func (self MenuItem) Get_Path() (foundation.BSTR, error) {
+	var _Path foundation.BSTR
+	_hr := self.Raw.Get_Path(&_Path)
+	return _Path, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LanguageIndependentPath wraps the raw Get_LanguageIndependentPath call.
-func (self MenuItem) Get_LanguageIndependentPath(LanguageIndependentPath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LanguageIndependentPath(LanguageIndependentPath)))
+func (self MenuItem) Get_LanguageIndependentPath() (foundation.BSTR, error) {
+	var _LanguageIndependentPath foundation.BSTR
+	_hr := self.Raw.Get_LanguageIndependentPath(&_LanguageIndependentPath)
+	return _LanguageIndependentPath, win32.HRESULTError(int32(_hr))
 }
 
 // Execute wraps the raw Execute call.
@@ -1741,8 +1817,10 @@ func (self MenuItem) Execute() error {
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self MenuItem) Get_Enabled(Enabled *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(Enabled)))
+func (self MenuItem) Get_Enabled() (foundation.BOOL, error) {
+	var _Enabled foundation.BOOL
+	_hr := self.Raw.Get_Enabled(&_Enabled)
+	return _Enabled, win32.HRESULTError(int32(_hr))
 }
 
 // Node is an idiomatic wrapper over the raw COM interface System.Mmc.Node with error-returning methods.
@@ -1757,28 +1835,38 @@ func WrapNode(raw *systemmmc.Node) Node {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self Node) Get_Name(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(Name)))
+func (self Node) Get_Name() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Property wraps the raw Get_Property call.
-func (self Node) Get_Property(PropertyName foundation.BSTR, PropertyValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Property(PropertyName, PropertyValue)))
+func (self Node) Get_Property(PropertyName foundation.BSTR) (foundation.BSTR, error) {
+	var _PropertyValue foundation.BSTR
+	_hr := self.Raw.Get_Property(PropertyName, &_PropertyValue)
+	return _PropertyValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Bookmark wraps the raw Get_Bookmark call.
-func (self Node) Get_Bookmark(Bookmark *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Bookmark(Bookmark)))
+func (self Node) Get_Bookmark() (foundation.BSTR, error) {
+	var _Bookmark foundation.BSTR
+	_hr := self.Raw.Get_Bookmark(&_Bookmark)
+	return _Bookmark, win32.HRESULTError(int32(_hr))
 }
 
 // IsScopeNode wraps the raw IsScopeNode call.
-func (self Node) IsScopeNode(IsScopeNode *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsScopeNode(IsScopeNode)))
+func (self Node) IsScopeNode() (foundation.BOOL, error) {
+	var _IsScopeNode foundation.BOOL
+	_hr := self.Raw.IsScopeNode(&_IsScopeNode)
+	return _IsScopeNode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Nodetype wraps the raw Get_Nodetype call.
-func (self Node) Get_Nodetype(Nodetype *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Nodetype(Nodetype)))
+func (self Node) Get_Nodetype() (foundation.BSTR, error) {
+	var _Nodetype foundation.BSTR
+	_hr := self.Raw.Get_Nodetype(&_Nodetype)
+	return _Nodetype, win32.HRESULTError(int32(_hr))
 }
 
 // Nodes is an idiomatic wrapper over the raw COM interface System.Mmc.Nodes with error-returning methods.
@@ -1793,18 +1881,24 @@ func WrapNodes(raw *systemmmc.Nodes) Nodes {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self Nodes) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self Nodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self Nodes) Item(Index int32, Node **systemmmc.Node) error {
-	return win32.HRESULTError(int32(self.Raw.Item(Index, Node)))
+func (self Nodes) Item(Index int32) (*systemmmc.Node, error) {
+	var _Node *systemmmc.Node
+	_hr := self.Raw.Item(Index, &_Node)
+	return _Node, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self Nodes) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self Nodes) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Properties is an idiomatic wrapper over the raw COM interface System.Mmc.Properties with error-returning methods.
@@ -1819,18 +1913,24 @@ func WrapProperties(raw *systemmmc.Properties) Properties {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self Properties) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self Properties) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self Properties) Item(Name foundation.BSTR, Property **systemmmc.Property) error {
-	return win32.HRESULTError(int32(self.Raw.Item(Name, Property)))
+func (self Properties) Item(Name foundation.BSTR) (*systemmmc.Property, error) {
+	var _Property *systemmmc.Property
+	_hr := self.Raw.Item(Name, &_Property)
+	return _Property, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self Properties) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self Properties) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1850,13 +1950,17 @@ func WrapProperty(raw *systemmmc.Property) Property {
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self Property) Get_Value(Value *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(Value)))
+func (self Property) Get_Value() (systemvariant.VARIANT, error) {
+	var _Value systemvariant.VARIANT
+	_hr := self.Raw.Get_Value(&_Value)
+	return _Value, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self Property) Get_Name(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(Name)))
+func (self Property) Get_Name() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // ScopeNamespace is an idiomatic wrapper over the raw COM interface System.Mmc.ScopeNamespace with error-returning methods.
@@ -1871,23 +1975,31 @@ func WrapScopeNamespace(raw *systemmmc.ScopeNamespace) ScopeNamespace {
 }
 
 // GetParent wraps the raw GetParent call.
-func (self ScopeNamespace) GetParent(Node *systemmmc.Node, Parent **systemmmc.Node) error {
-	return win32.HRESULTError(int32(self.Raw.GetParent(Node, Parent)))
+func (self ScopeNamespace) GetParent(Node *systemmmc.Node) (*systemmmc.Node, error) {
+	var _Parent *systemmmc.Node
+	_hr := self.Raw.GetParent(Node, &_Parent)
+	return _Parent, win32.HRESULTError(int32(_hr))
 }
 
 // GetChild wraps the raw GetChild call.
-func (self ScopeNamespace) GetChild(Node *systemmmc.Node, Child **systemmmc.Node) error {
-	return win32.HRESULTError(int32(self.Raw.GetChild(Node, Child)))
+func (self ScopeNamespace) GetChild(Node *systemmmc.Node) (*systemmmc.Node, error) {
+	var _Child *systemmmc.Node
+	_hr := self.Raw.GetChild(Node, &_Child)
+	return _Child, win32.HRESULTError(int32(_hr))
 }
 
 // GetNext wraps the raw GetNext call.
-func (self ScopeNamespace) GetNext(Node *systemmmc.Node, Next **systemmmc.Node) error {
-	return win32.HRESULTError(int32(self.Raw.GetNext(Node, Next)))
+func (self ScopeNamespace) GetNext(Node *systemmmc.Node) (*systemmmc.Node, error) {
+	var _Next *systemmmc.Node
+	_hr := self.Raw.GetNext(Node, &_Next)
+	return _Next, win32.HRESULTError(int32(_hr))
 }
 
 // GetRoot wraps the raw GetRoot call.
-func (self ScopeNamespace) GetRoot(Root **systemmmc.Node) error {
-	return win32.HRESULTError(int32(self.Raw.GetRoot(Root)))
+func (self ScopeNamespace) GetRoot() (*systemmmc.Node, error) {
+	var _Root *systemmmc.Node
+	_hr := self.Raw.GetRoot(&_Root)
+	return _Root, win32.HRESULTError(int32(_hr))
 }
 
 // Expand wraps the raw Expand call.
@@ -1907,33 +2019,45 @@ func WrapSnapIn(raw *systemmmc.SnapIn) SnapIn {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self SnapIn) Get_Name(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(Name)))
+func (self SnapIn) Get_Name() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Vendor wraps the raw Get_Vendor call.
-func (self SnapIn) Get_Vendor(Vendor *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Vendor(Vendor)))
+func (self SnapIn) Get_Vendor() (foundation.BSTR, error) {
+	var _Vendor foundation.BSTR
+	_hr := self.Raw.Get_Vendor(&_Vendor)
+	return _Vendor, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Version wraps the raw Get_Version call.
-func (self SnapIn) Get_Version(Version *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Version(Version)))
+func (self SnapIn) Get_Version() (foundation.BSTR, error) {
+	var _Version foundation.BSTR
+	_hr := self.Raw.Get_Version(&_Version)
+	return _Version, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Extensions wraps the raw Get_Extensions call.
-func (self SnapIn) Get_Extensions(Extensions **systemmmc.Extensions) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Extensions(Extensions)))
+func (self SnapIn) Get_Extensions() (*systemmmc.Extensions, error) {
+	var _Extensions *systemmmc.Extensions
+	_hr := self.Raw.Get_Extensions(&_Extensions)
+	return _Extensions, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SnapinCLSID wraps the raw Get_SnapinCLSID call.
-func (self SnapIn) Get_SnapinCLSID(SnapinCLSID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SnapinCLSID(SnapinCLSID)))
+func (self SnapIn) Get_SnapinCLSID() (foundation.BSTR, error) {
+	var _SnapinCLSID foundation.BSTR
+	_hr := self.Raw.Get_SnapinCLSID(&_SnapinCLSID)
+	return _SnapinCLSID, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Properties wraps the raw Get_Properties call.
-func (self SnapIn) Get_Properties(Properties **systemmmc.Properties) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Properties(Properties)))
+func (self SnapIn) Get_Properties() (*systemmmc.Properties, error) {
+	var _Properties *systemmmc.Properties
+	_hr := self.Raw.Get_Properties(&_Properties)
+	return _Properties, win32.HRESULTError(int32(_hr))
 }
 
 // EnableAllExtensions wraps the raw EnableAllExtensions call.
@@ -1954,18 +2078,24 @@ func WrapSnapIns(raw *systemmmc.SnapIns) SnapIns {
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self SnapIns) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self SnapIns) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self SnapIns) Item(Index int32, SnapIn **systemmmc.SnapIn) error {
-	return win32.HRESULTError(int32(self.Raw.Item(Index, SnapIn)))
+func (self SnapIns) Item(Index int32) (*systemmmc.SnapIn, error) {
+	var _SnapIn *systemmmc.SnapIn
+	_hr := self.Raw.Item(Index, &_SnapIn)
+	return _SnapIn, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self SnapIns) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self SnapIns) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Remove wraps the raw Remove call.
@@ -1985,8 +2115,10 @@ func WrapView(raw *systemmmc.View) View {
 }
 
 // Get_ActiveScopeNode wraps the raw Get_ActiveScopeNode call.
-func (self View) Get_ActiveScopeNode(Node **systemmmc.Node) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActiveScopeNode(Node)))
+func (self View) Get_ActiveScopeNode() (*systemmmc.Node, error) {
+	var _Node *systemmmc.Node
+	_hr := self.Raw.Get_ActiveScopeNode(&_Node)
+	return _Node, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ActiveScopeNode wraps the raw Put_ActiveScopeNode call.
@@ -1995,28 +2127,38 @@ func (self View) Put_ActiveScopeNode(Node *systemmmc.Node) error {
 }
 
 // Get_Selection wraps the raw Get_Selection call.
-func (self View) Get_Selection(Nodes **systemmmc.Nodes) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Selection(Nodes)))
+func (self View) Get_Selection() (*systemmmc.Nodes, error) {
+	var _Nodes *systemmmc.Nodes
+	_hr := self.Raw.Get_Selection(&_Nodes)
+	return _Nodes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ListItems wraps the raw Get_ListItems call.
-func (self View) Get_ListItems(Nodes **systemmmc.Nodes) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ListItems(Nodes)))
+func (self View) Get_ListItems() (*systemmmc.Nodes, error) {
+	var _Nodes *systemmmc.Nodes
+	_hr := self.Raw.Get_ListItems(&_Nodes)
+	return _Nodes, win32.HRESULTError(int32(_hr))
 }
 
 // SnapinSelectionObject wraps the raw SnapinSelectionObject call.
-func (self View) SnapinSelectionObject(SelectionObject **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SnapinSelectionObject(SelectionObject)))
+func (self View) SnapinSelectionObject() (*systemcom.IDispatch, error) {
+	var _SelectionObject *systemcom.IDispatch
+	_hr := self.Raw.SnapinSelectionObject(&_SelectionObject)
+	return _SelectionObject, win32.HRESULTError(int32(_hr))
 }
 
 // Is wraps the raw Is call.
-func (self View) Is(View *systemmmc.View, TheSame *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Is(View, TheSame)))
+func (self View) Is(View *systemmmc.View) (foundation.VARIANT_BOOL, error) {
+	var _TheSame foundation.VARIANT_BOOL
+	_hr := self.Raw.Is(View, &_TheSame)
+	return _TheSame, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Document wraps the raw Get_Document call.
-func (self View) Get_Document(Document **systemmmc.Document) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Document(Document)))
+func (self View) Get_Document() (*systemmmc.Document, error) {
+	var _Document *systemmmc.Document
+	_hr := self.Raw.Get_Document(&_Document)
+	return _Document, win32.HRESULTError(int32(_hr))
 }
 
 // SelectAll wraps the raw SelectAll call.
@@ -2035,8 +2177,10 @@ func (self View) Deselect(Node *systemmmc.Node) error {
 }
 
 // IsSelected wraps the raw IsSelected call.
-func (self View) IsSelected(Node *systemmmc.Node, IsSelected *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSelected(Node, IsSelected)))
+func (self View) IsSelected(Node *systemmmc.Node) (foundation.BOOL, error) {
+	var _IsSelected foundation.BOOL
+	_hr := self.Raw.IsSelected(Node, &_IsSelected)
+	return _IsSelected, win32.HRESULTError(int32(_hr))
 }
 
 // DisplaySelectionPropertySheet wraps the raw DisplaySelectionPropertySheet call.
@@ -2060,8 +2204,10 @@ func (self View) RenameSelectedItem(NewName foundation.BSTR) error {
 }
 
 // Get_SelectionContextMenu wraps the raw Get_SelectionContextMenu call.
-func (self View) Get_SelectionContextMenu(ContextMenu **systemmmc.ContextMenu) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SelectionContextMenu(ContextMenu)))
+func (self View) Get_SelectionContextMenu() (*systemmmc.ContextMenu, error) {
+	var _ContextMenu *systemmmc.ContextMenu
+	_hr := self.Raw.Get_SelectionContextMenu(&_ContextMenu)
+	return _ContextMenu, win32.HRESULTError(int32(_hr))
 }
 
 // RefreshSelection wraps the raw RefreshSelection call.
@@ -2080,8 +2226,10 @@ func (self View) ExecuteShellCommand(Command foundation.BSTR, Directory foundati
 }
 
 // Get_Frame wraps the raw Get_Frame call.
-func (self View) Get_Frame(Frame **systemmmc.Frame) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Frame(Frame)))
+func (self View) Get_Frame() (*systemmmc.Frame, error) {
+	var _Frame *systemmmc.Frame
+	_hr := self.Raw.Get_Frame(&_Frame)
+	return _Frame, win32.HRESULTError(int32(_hr))
 }
 
 // Close wraps the raw Close call.
@@ -2090,8 +2238,10 @@ func (self View) Close() error {
 }
 
 // Get_ScopeTreeVisible wraps the raw Get_ScopeTreeVisible call.
-func (self View) Get_ScopeTreeVisible(Visible *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ScopeTreeVisible(Visible)))
+func (self View) Get_ScopeTreeVisible() (foundation.BOOL, error) {
+	var _Visible foundation.BOOL
+	_hr := self.Raw.Get_ScopeTreeVisible(&_Visible)
+	return _Visible, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ScopeTreeVisible wraps the raw Put_ScopeTreeVisible call.
@@ -2116,8 +2266,10 @@ func (self View) Put_StatusBarText(StatusBarText foundation.BSTR) error {
 }
 
 // Get_Memento wraps the raw Get_Memento call.
-func (self View) Get_Memento(Memento *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Memento(Memento)))
+func (self View) Get_Memento() (foundation.BSTR, error) {
+	var _Memento foundation.BSTR
+	_hr := self.Raw.Get_Memento(&_Memento)
+	return _Memento, win32.HRESULTError(int32(_hr))
 }
 
 // ViewMemento wraps the raw ViewMemento call.
@@ -2126,13 +2278,17 @@ func (self View) ViewMemento(Memento foundation.BSTR) error {
 }
 
 // Get_Columns wraps the raw Get_Columns call.
-func (self View) Get_Columns(Columns **systemmmc.Columns) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Columns(Columns)))
+func (self View) Get_Columns() (*systemmmc.Columns, error) {
+	var _Columns *systemmmc.Columns
+	_hr := self.Raw.Get_Columns(&_Columns)
+	return _Columns, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CellContents wraps the raw Get_CellContents call.
-func (self View) Get_CellContents(Node *systemmmc.Node, Column int32, CellContents *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CellContents(Node, Column, CellContents)))
+func (self View) Get_CellContents(Node *systemmmc.Node, Column int32) (foundation.BSTR, error) {
+	var _CellContents foundation.BSTR
+	_hr := self.Raw.Get_CellContents(Node, Column, &_CellContents)
+	return _CellContents, win32.HRESULTError(int32(_hr))
 }
 
 // ExportList wraps the raw ExportList call.
@@ -2141,8 +2297,10 @@ func (self View) ExportList(File foundation.BSTR, exportoptions systemmmc.Export
 }
 
 // Get_ListViewMode wraps the raw Get_ListViewMode call.
-func (self View) Get_ListViewMode(Mode *systemmmc.ListViewMode) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ListViewMode(Mode)))
+func (self View) Get_ListViewMode() (systemmmc.ListViewMode, error) {
+	var _Mode systemmmc.ListViewMode
+	_hr := self.Raw.Get_ListViewMode(&_Mode)
+	return _Mode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ListViewMode wraps the raw Put_ListViewMode call.
@@ -2151,8 +2309,10 @@ func (self View) Put_ListViewMode(mode systemmmc.ListViewMode) error {
 }
 
 // Get_ControlObject wraps the raw Get_ControlObject call.
-func (self View) Get_ControlObject(Control **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ControlObject(Control)))
+func (self View) Get_ControlObject() (*systemcom.IDispatch, error) {
+	var _Control *systemcom.IDispatch
+	_hr := self.Raw.Get_ControlObject(&_Control)
+	return _Control, win32.HRESULTError(int32(_hr))
 }
 
 // Views is an idiomatic wrapper over the raw COM interface System.Mmc.Views with error-returning methods.
@@ -2167,13 +2327,17 @@ func WrapViews(raw *systemmmc.Views) Views {
 }
 
 // Item wraps the raw Item call.
-func (self Views) Item(Index int32, View **systemmmc.View) error {
-	return win32.HRESULTError(int32(self.Raw.Item(Index, View)))
+func (self Views) Item(Index int32) (*systemmmc.View, error) {
+	var _View *systemmmc.View
+	_hr := self.Raw.Item(Index, &_View)
+	return _View, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self Views) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self Views) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -2182,8 +2346,10 @@ func (self Views) Add(Node *systemmmc.Node, viewOptions systemmmc.ViewOptions) e
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self Views) Get__NewEnum(retval **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(retval)))
+func (self Views) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_retval)
+	return _retval, win32.HRESULTError(int32(_hr))
 }
 
 // EventConnector is an idiomatic wrapper over the raw COM interface System.Mmc._EventConnector with error-returning methods.

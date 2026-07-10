@@ -660,38 +660,52 @@ func WrapITsSbClientConnection(raw *systemremotedesktop.ITsSbClientConnection) I
 }
 
 // Get_UserName wraps the raw Get_UserName call.
-func (self ITsSbClientConnection) Get_UserName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserName(pVal)))
+func (self ITsSbClientConnection) Get_UserName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_UserName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Domain wraps the raw Get_Domain call.
-func (self ITsSbClientConnection) Get_Domain(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Domain(pVal)))
+func (self ITsSbClientConnection) Get_Domain() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_Domain(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InitialProgram wraps the raw Get_InitialProgram call.
-func (self ITsSbClientConnection) Get_InitialProgram(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InitialProgram(pVal)))
+func (self ITsSbClientConnection) Get_InitialProgram() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_InitialProgram(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LoadBalanceResult wraps the raw Get_LoadBalanceResult call.
-func (self ITsSbClientConnection) Get_LoadBalanceResult(ppVal **systemremotedesktop.ITsSbLoadBalanceResult) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LoadBalanceResult(ppVal)))
+func (self ITsSbClientConnection) Get_LoadBalanceResult() (*systemremotedesktop.ITsSbLoadBalanceResult, error) {
+	var _ppVal *systemremotedesktop.ITsSbLoadBalanceResult
+	_hr := self.Raw.Get_LoadBalanceResult(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FarmName wraps the raw Get_FarmName call.
-func (self ITsSbClientConnection) Get_FarmName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FarmName(pVal)))
+func (self ITsSbClientConnection) Get_FarmName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_FarmName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // GetContext wraps the raw GetContext call.
-func (self ITsSbClientConnection) GetContext(contextId foundation.BSTR, context *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetContext(contextId, context)))
+func (self ITsSbClientConnection) GetContext(contextId foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _context systemvariant.VARIANT
+	_hr := self.Raw.GetContext(contextId, &_context)
+	return _context, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Environment wraps the raw Get_Environment call.
-func (self ITsSbClientConnection) Get_Environment(ppEnvironment **systemremotedesktop.ITsSbEnvironment) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Environment(ppEnvironment)))
+func (self ITsSbClientConnection) Get_Environment() (*systemremotedesktop.ITsSbEnvironment, error) {
+	var _ppEnvironment *systemremotedesktop.ITsSbEnvironment
+	_hr := self.Raw.Get_Environment(&_ppEnvironment)
+	return _ppEnvironment, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ConnectionError wraps the raw Get_ConnectionError call.
@@ -700,28 +714,38 @@ func (self ITsSbClientConnection) Get_ConnectionError() error {
 }
 
 // Get_SamUserAccount wraps the raw Get_SamUserAccount call.
-func (self ITsSbClientConnection) Get_SamUserAccount(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SamUserAccount(pVal)))
+func (self ITsSbClientConnection) Get_SamUserAccount() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_SamUserAccount(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClientConnectionPropertySet wraps the raw Get_ClientConnectionPropertySet call.
-func (self ITsSbClientConnection) Get_ClientConnectionPropertySet(ppPropertySet **systemremotedesktop.ITsSbClientConnectionPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientConnectionPropertySet(ppPropertySet)))
+func (self ITsSbClientConnection) Get_ClientConnectionPropertySet() (*systemremotedesktop.ITsSbClientConnectionPropertySet, error) {
+	var _ppPropertySet *systemremotedesktop.ITsSbClientConnectionPropertySet
+	_hr := self.Raw.Get_ClientConnectionPropertySet(&_ppPropertySet)
+	return _ppPropertySet, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsFirstAssignment wraps the raw Get_IsFirstAssignment call.
-func (self ITsSbClientConnection) Get_IsFirstAssignment(ppVal *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsFirstAssignment(ppVal)))
+func (self ITsSbClientConnection) Get_IsFirstAssignment() (foundation.BOOL, error) {
+	var _ppVal foundation.BOOL
+	_hr := self.Raw.Get_IsFirstAssignment(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RdFarmType wraps the raw Get_RdFarmType call.
-func (self ITsSbClientConnection) Get_RdFarmType(pRdFarmType *systemremotedesktop.RD_FARM_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RdFarmType(pRdFarmType)))
+func (self ITsSbClientConnection) Get_RdFarmType() (systemremotedesktop.RD_FARM_TYPE, error) {
+	var _pRdFarmType systemremotedesktop.RD_FARM_TYPE
+	_hr := self.Raw.Get_RdFarmType(&_pRdFarmType)
+	return _pRdFarmType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserSidString wraps the raw Get_UserSidString call.
-func (self ITsSbClientConnection) Get_UserSidString(pszUserSidString **int8) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserSidString(pszUserSidString)))
+func (self ITsSbClientConnection) Get_UserSidString() (*int8, error) {
+	var _pszUserSidString *int8
+	_hr := self.Raw.Get_UserSidString(&_pszUserSidString)
+	return _pszUserSidString, win32.HRESULTError(int32(_hr))
 }
 
 // GetDisconnectedSession wraps the raw GetDisconnectedSession call.
@@ -752,18 +776,24 @@ func WrapITsSbEnvironment(raw *systemremotedesktop.ITsSbEnvironment) ITsSbEnviro
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self ITsSbEnvironment) Get_Name(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pVal)))
+func (self ITsSbEnvironment) Get_Name() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ServerWeight wraps the raw Get_ServerWeight call.
-func (self ITsSbEnvironment) Get_ServerWeight(pVal *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServerWeight(pVal)))
+func (self ITsSbEnvironment) Get_ServerWeight() (uint32, error) {
+	var _pVal uint32
+	_hr := self.Raw.Get_ServerWeight(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EnvironmentPropertySet wraps the raw Get_EnvironmentPropertySet call.
-func (self ITsSbEnvironment) Get_EnvironmentPropertySet(ppPropertySet **systemremotedesktop.ITsSbEnvironmentPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnvironmentPropertySet(ppPropertySet)))
+func (self ITsSbEnvironment) Get_EnvironmentPropertySet() (*systemremotedesktop.ITsSbEnvironmentPropertySet, error) {
+	var _ppPropertySet *systemremotedesktop.ITsSbEnvironmentPropertySet
+	_hr := self.Raw.Get_EnvironmentPropertySet(&_ppPropertySet)
+	return _ppPropertySet, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EnvironmentPropertySet wraps the raw Put_EnvironmentPropertySet call.
@@ -799,8 +829,10 @@ func (self ITsSbFilterPluginStore) SaveProperties(pPropertySet *systemremotedesk
 }
 
 // EnumerateProperties wraps the raw EnumerateProperties call.
-func (self ITsSbFilterPluginStore) EnumerateProperties(ppPropertySet **systemremotedesktop.ITsSbPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateProperties(ppPropertySet)))
+func (self ITsSbFilterPluginStore) EnumerateProperties() (*systemremotedesktop.ITsSbPropertySet, error) {
+	var _ppPropertySet *systemremotedesktop.ITsSbPropertySet
+	_hr := self.Raw.EnumerateProperties(&_ppPropertySet)
+	return _ppPropertySet, win32.HRESULTError(int32(_hr))
 }
 
 // DeleteProperties wraps the raw DeleteProperties call.
@@ -887,8 +919,10 @@ func WrapITsSbLoadBalanceResult(raw *systemremotedesktop.ITsSbLoadBalanceResult)
 }
 
 // Get_TargetName wraps the raw Get_TargetName call.
-func (self ITsSbLoadBalanceResult) Get_TargetName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetName(pVal)))
+func (self ITsSbLoadBalanceResult) Get_TargetName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_TargetName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // ITsSbLoadBalancing is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbLoadBalancing with error-returning methods.
@@ -1079,8 +1113,10 @@ func (self ITsSbProvider) CreateSessionObject(TargetName foundation.BSTR, UserNa
 }
 
 // CreatePluginPropertySet wraps the raw CreatePluginPropertySet call.
-func (self ITsSbProvider) CreatePluginPropertySet(ppPropertySet **systemremotedesktop.ITsSbPluginPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.CreatePluginPropertySet(ppPropertySet)))
+func (self ITsSbProvider) CreatePluginPropertySet() (*systemremotedesktop.ITsSbPluginPropertySet, error) {
+	var _ppPropertySet *systemremotedesktop.ITsSbPluginPropertySet
+	_hr := self.Raw.CreatePluginPropertySet(&_ppPropertySet)
+	return _ppPropertySet, win32.HRESULTError(int32(_hr))
 }
 
 // CreateTargetPropertySetObject wraps the raw CreateTargetPropertySetObject call.
@@ -1445,13 +1481,17 @@ func WrapITsSbSession(raw *systemremotedesktop.ITsSbSession) ITsSbSession {
 }
 
 // Get_SessionId wraps the raw Get_SessionId call.
-func (self ITsSbSession) Get_SessionId(pVal *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SessionId(pVal)))
+func (self ITsSbSession) Get_SessionId() (uint32, error) {
+	var _pVal uint32
+	_hr := self.Raw.Get_SessionId(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TargetName wraps the raw Get_TargetName call.
-func (self ITsSbSession) Get_TargetName(targetName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetName(targetName)))
+func (self ITsSbSession) Get_TargetName() (foundation.BSTR, error) {
+	var _targetName foundation.BSTR
+	_hr := self.Raw.Get_TargetName(&_targetName)
+	return _targetName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TargetName wraps the raw Put_TargetName call.
@@ -1460,18 +1500,24 @@ func (self ITsSbSession) Put_TargetName(targetName foundation.BSTR) error {
 }
 
 // Get_Username wraps the raw Get_Username call.
-func (self ITsSbSession) Get_Username(userName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Username(userName)))
+func (self ITsSbSession) Get_Username() (foundation.BSTR, error) {
+	var _userName foundation.BSTR
+	_hr := self.Raw.Get_Username(&_userName)
+	return _userName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Domain wraps the raw Get_Domain call.
-func (self ITsSbSession) Get_Domain(domain *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Domain(domain)))
+func (self ITsSbSession) Get_Domain() (foundation.BSTR, error) {
+	var _domain foundation.BSTR
+	_hr := self.Raw.Get_Domain(&_domain)
+	return _domain, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self ITsSbSession) Get_State(pState *systemremotedesktop.TSSESSION_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(pState)))
+func (self ITsSbSession) Get_State() (systemremotedesktop.TSSESSION_STATE, error) {
+	var _pState systemremotedesktop.TSSESSION_STATE
+	_hr := self.Raw.Get_State(&_pState)
+	return _pState, win32.HRESULTError(int32(_hr))
 }
 
 // Put_State wraps the raw Put_State call.
@@ -1480,18 +1526,24 @@ func (self ITsSbSession) Put_State(State systemremotedesktop.TSSESSION_STATE) er
 }
 
 // Get_CreateTime wraps the raw Get_CreateTime call.
-func (self ITsSbSession) Get_CreateTime(pTime *foundation.FILETIME) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CreateTime(pTime)))
+func (self ITsSbSession) Get_CreateTime() (foundation.FILETIME, error) {
+	var _pTime foundation.FILETIME
+	_hr := self.Raw.Get_CreateTime(&_pTime)
+	return _pTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DisconnectTime wraps the raw Get_DisconnectTime call.
-func (self ITsSbSession) Get_DisconnectTime(pTime *foundation.FILETIME) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DisconnectTime(pTime)))
+func (self ITsSbSession) Get_DisconnectTime() (foundation.FILETIME, error) {
+	var _pTime foundation.FILETIME
+	_hr := self.Raw.Get_DisconnectTime(&_pTime)
+	return _pTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InitialProgram wraps the raw Get_InitialProgram call.
-func (self ITsSbSession) Get_InitialProgram(app *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InitialProgram(app)))
+func (self ITsSbSession) Get_InitialProgram() (foundation.BSTR, error) {
+	var _app foundation.BSTR
+	_hr := self.Raw.Get_InitialProgram(&_app)
+	return _app, win32.HRESULTError(int32(_hr))
 }
 
 // Put_InitialProgram wraps the raw Put_InitialProgram call.
@@ -1500,13 +1552,17 @@ func (self ITsSbSession) Put_InitialProgram(Application foundation.BSTR) error {
 }
 
 // Get_ClientDisplay wraps the raw Get_ClientDisplay call.
-func (self ITsSbSession) Get_ClientDisplay(pClientDisplay *systemremotedesktop.CLIENT_DISPLAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientDisplay(pClientDisplay)))
+func (self ITsSbSession) Get_ClientDisplay() (systemremotedesktop.CLIENT_DISPLAY, error) {
+	var _pClientDisplay systemremotedesktop.CLIENT_DISPLAY
+	_hr := self.Raw.Get_ClientDisplay(&_pClientDisplay)
+	return _pClientDisplay, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProtocolType wraps the raw Get_ProtocolType call.
-func (self ITsSbSession) Get_ProtocolType(pVal *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProtocolType(pVal)))
+func (self ITsSbSession) Get_ProtocolType() (uint32, error) {
+	var _pVal uint32
+	_hr := self.Raw.Get_ProtocolType(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ProtocolType wraps the raw Put_ProtocolType call.
@@ -1526,8 +1582,10 @@ func WrapITsSbTarget(raw *systemremotedesktop.ITsSbTarget) ITsSbTarget {
 }
 
 // Get_TargetName wraps the raw Get_TargetName call.
-func (self ITsSbTarget) Get_TargetName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetName(pVal)))
+func (self ITsSbTarget) Get_TargetName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_TargetName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TargetName wraps the raw Put_TargetName call.
@@ -1536,8 +1594,10 @@ func (self ITsSbTarget) Put_TargetName(Val foundation.BSTR) error {
 }
 
 // Get_FarmName wraps the raw Get_FarmName call.
-func (self ITsSbTarget) Get_FarmName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FarmName(pVal)))
+func (self ITsSbTarget) Get_FarmName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_FarmName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FarmName wraps the raw Put_FarmName call.
@@ -1546,8 +1606,10 @@ func (self ITsSbTarget) Put_FarmName(Val foundation.BSTR) error {
 }
 
 // Get_TargetFQDN wraps the raw Get_TargetFQDN call.
-func (self ITsSbTarget) Get_TargetFQDN(TargetFqdnName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetFQDN(TargetFqdnName)))
+func (self ITsSbTarget) Get_TargetFQDN() (foundation.BSTR, error) {
+	var _TargetFqdnName foundation.BSTR
+	_hr := self.Raw.Get_TargetFQDN(&_TargetFqdnName)
+	return _TargetFqdnName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TargetFQDN wraps the raw Put_TargetFQDN call.
@@ -1556,8 +1618,10 @@ func (self ITsSbTarget) Put_TargetFQDN(Val foundation.BSTR) error {
 }
 
 // Get_TargetNetbios wraps the raw Get_TargetNetbios call.
-func (self ITsSbTarget) Get_TargetNetbios(TargetNetbiosName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetNetbios(TargetNetbiosName)))
+func (self ITsSbTarget) Get_TargetNetbios() (foundation.BSTR, error) {
+	var _TargetNetbiosName foundation.BSTR
+	_hr := self.Raw.Get_TargetNetbios(&_TargetNetbiosName)
+	return _TargetNetbiosName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TargetNetbios wraps the raw Put_TargetNetbios call.
@@ -1576,8 +1640,10 @@ func (self ITsSbTarget) Put_IpAddresses(SOCKADDR *systemremotedesktop.TSSD_Conne
 }
 
 // Get_TargetState wraps the raw Get_TargetState call.
-func (self ITsSbTarget) Get_TargetState(pState *systemremotedesktop.TARGET_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetState(pState)))
+func (self ITsSbTarget) Get_TargetState() (systemremotedesktop.TARGET_STATE, error) {
+	var _pState systemremotedesktop.TARGET_STATE
+	_hr := self.Raw.Get_TargetState(&_pState)
+	return _pState, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TargetState wraps the raw Put_TargetState call.
@@ -1586,8 +1652,10 @@ func (self ITsSbTarget) Put_TargetState(State systemremotedesktop.TARGET_STATE) 
 }
 
 // Get_TargetPropertySet wraps the raw Get_TargetPropertySet call.
-func (self ITsSbTarget) Get_TargetPropertySet(ppPropertySet **systemremotedesktop.ITsSbTargetPropertySet) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetPropertySet(ppPropertySet)))
+func (self ITsSbTarget) Get_TargetPropertySet() (*systemremotedesktop.ITsSbTargetPropertySet, error) {
+	var _ppPropertySet *systemremotedesktop.ITsSbTargetPropertySet
+	_hr := self.Raw.Get_TargetPropertySet(&_ppPropertySet)
+	return _ppPropertySet, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TargetPropertySet wraps the raw Put_TargetPropertySet call.
@@ -1596,8 +1664,10 @@ func (self ITsSbTarget) Put_TargetPropertySet(pVal *systemremotedesktop.ITsSbTar
 }
 
 // Get_EnvironmentName wraps the raw Get_EnvironmentName call.
-func (self ITsSbTarget) Get_EnvironmentName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnvironmentName(pVal)))
+func (self ITsSbTarget) Get_EnvironmentName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_EnvironmentName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EnvironmentName wraps the raw Put_EnvironmentName call.
@@ -1606,18 +1676,24 @@ func (self ITsSbTarget) Put_EnvironmentName(Val foundation.BSTR) error {
 }
 
 // Get_NumSessions wraps the raw Get_NumSessions call.
-func (self ITsSbTarget) Get_NumSessions(pNumSessions *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NumSessions(pNumSessions)))
+func (self ITsSbTarget) Get_NumSessions() (uint32, error) {
+	var _pNumSessions uint32
+	_hr := self.Raw.Get_NumSessions(&_pNumSessions)
+	return _pNumSessions, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NumPendingConnections wraps the raw Get_NumPendingConnections call.
-func (self ITsSbTarget) Get_NumPendingConnections(pNumPendingConnections *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NumPendingConnections(pNumPendingConnections)))
+func (self ITsSbTarget) Get_NumPendingConnections() (uint32, error) {
+	var _pNumPendingConnections uint32
+	_hr := self.Raw.Get_NumPendingConnections(&_pNumPendingConnections)
+	return _pNumPendingConnections, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TargetLoad wraps the raw Get_TargetLoad call.
-func (self ITsSbTarget) Get_TargetLoad(pTargetLoad *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetLoad(pTargetLoad)))
+func (self ITsSbTarget) Get_TargetLoad() (uint32, error) {
+	var _pTargetLoad uint32
+	_hr := self.Raw.Get_TargetLoad(&_pTargetLoad)
+	return _pTargetLoad, win32.HRESULTError(int32(_hr))
 }
 
 // ITsSbTargetPropertySet is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbTargetPropertySet with error-returning methods.
@@ -1643,48 +1719,66 @@ func WrapITsSbTaskInfo(raw *systemremotedesktop.ITsSbTaskInfo) ITsSbTaskInfo {
 }
 
 // Get_TargetId wraps the raw Get_TargetId call.
-func (self ITsSbTaskInfo) Get_TargetId(pName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TargetId(pName)))
+func (self ITsSbTaskInfo) Get_TargetId() (foundation.BSTR, error) {
+	var _pName foundation.BSTR
+	_hr := self.Raw.Get_TargetId(&_pName)
+	return _pName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StartTime wraps the raw Get_StartTime call.
-func (self ITsSbTaskInfo) Get_StartTime(pStartTime *foundation.FILETIME) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StartTime(pStartTime)))
+func (self ITsSbTaskInfo) Get_StartTime() (foundation.FILETIME, error) {
+	var _pStartTime foundation.FILETIME
+	_hr := self.Raw.Get_StartTime(&_pStartTime)
+	return _pStartTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EndTime wraps the raw Get_EndTime call.
-func (self ITsSbTaskInfo) Get_EndTime(pEndTime *foundation.FILETIME) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EndTime(pEndTime)))
+func (self ITsSbTaskInfo) Get_EndTime() (foundation.FILETIME, error) {
+	var _pEndTime foundation.FILETIME
+	_hr := self.Raw.Get_EndTime(&_pEndTime)
+	return _pEndTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Deadline wraps the raw Get_Deadline call.
-func (self ITsSbTaskInfo) Get_Deadline(pDeadline *foundation.FILETIME) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Deadline(pDeadline)))
+func (self ITsSbTaskInfo) Get_Deadline() (foundation.FILETIME, error) {
+	var _pDeadline foundation.FILETIME
+	_hr := self.Raw.Get_Deadline(&_pDeadline)
+	return _pDeadline, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Identifier wraps the raw Get_Identifier call.
-func (self ITsSbTaskInfo) Get_Identifier(pIdentifier *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Identifier(pIdentifier)))
+func (self ITsSbTaskInfo) Get_Identifier() (foundation.BSTR, error) {
+	var _pIdentifier foundation.BSTR
+	_hr := self.Raw.Get_Identifier(&_pIdentifier)
+	return _pIdentifier, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Label wraps the raw Get_Label call.
-func (self ITsSbTaskInfo) Get_Label(pLabel *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Label(pLabel)))
+func (self ITsSbTaskInfo) Get_Label() (foundation.BSTR, error) {
+	var _pLabel foundation.BSTR
+	_hr := self.Raw.Get_Label(&_pLabel)
+	return _pLabel, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Context wraps the raw Get_Context call.
-func (self ITsSbTaskInfo) Get_Context(pContext **systemcom.SAFEARRAY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Context(pContext)))
+func (self ITsSbTaskInfo) Get_Context() (*systemcom.SAFEARRAY, error) {
+	var _pContext *systemcom.SAFEARRAY
+	_hr := self.Raw.Get_Context(&_pContext)
+	return _pContext, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Plugin wraps the raw Get_Plugin call.
-func (self ITsSbTaskInfo) Get_Plugin(pPlugin *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Plugin(pPlugin)))
+func (self ITsSbTaskInfo) Get_Plugin() (foundation.BSTR, error) {
+	var _pPlugin foundation.BSTR
+	_hr := self.Raw.Get_Plugin(&_pPlugin)
+	return _pPlugin, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Status wraps the raw Get_Status call.
-func (self ITsSbTaskInfo) Get_Status(pStatus *systemremotedesktop.RDV_TASK_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Status(pStatus)))
+func (self ITsSbTaskInfo) Get_Status() (systemremotedesktop.RDV_TASK_STATUS, error) {
+	var _pStatus systemremotedesktop.RDV_TASK_STATUS
+	_hr := self.Raw.Get_Status(&_pStatus)
+	return _pStatus, win32.HRESULTError(int32(_hr))
 }
 
 // ITsSbTaskPlugin is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.ITsSbTaskPlugin with error-returning methods.
@@ -1825,8 +1919,10 @@ func WrapIWRdsGraphicsChannelManager(raw *systemremotedesktop.IWRdsGraphicsChann
 }
 
 // CreateChannel wraps the raw CreateChannel call.
-func (self IWRdsGraphicsChannelManager) CreateChannel(pszChannelName *byte, channelType systemremotedesktop.WRdsGraphicsChannelType, ppVirtualChannel **systemremotedesktop.IWRdsGraphicsChannel) error {
-	return win32.HRESULTError(int32(self.Raw.CreateChannel(pszChannelName, channelType, ppVirtualChannel)))
+func (self IWRdsGraphicsChannelManager) CreateChannel(pszChannelName *byte, channelType systemremotedesktop.WRdsGraphicsChannelType) (*systemremotedesktop.IWRdsGraphicsChannel, error) {
+	var _ppVirtualChannel *systemremotedesktop.IWRdsGraphicsChannel
+	_hr := self.Raw.CreateChannel(pszChannelName, channelType, &_ppVirtualChannel)
+	return _ppVirtualChannel, win32.HRESULTError(int32(_hr))
 }
 
 // IWRdsProtocolConnection is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWRdsProtocolConnection with error-returning methods.
@@ -2923,8 +3019,10 @@ func (self IWorkspace) StartRemoteApplication(bstrWorkspaceId foundation.BSTR, p
 }
 
 // GetProcessId wraps the raw GetProcessId call.
-func (self IWorkspace) GetProcessId(pulProcessId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetProcessId(pulProcessId)))
+func (self IWorkspace) GetProcessId() (uint32, error) {
+	var _pulProcessId uint32
+	_hr := self.Raw.GetProcessId(&_pulProcessId)
+	return _pulProcessId, win32.HRESULTError(int32(_hr))
 }
 
 // IWorkspace2 is an idiomatic wrapper over the raw COM interface System.RemoteDesktop.IWorkspace2 with error-returning methods.
@@ -3034,8 +3132,10 @@ func (self IWorkspaceReportMessage) RegisterErrorLogMessage(bstrMessage foundati
 }
 
 // IsErrorMessageRegistered wraps the raw IsErrorMessageRegistered call.
-func (self IWorkspaceReportMessage) IsErrorMessageRegistered(bstrWkspId foundation.BSTR, dwErrorType uint32, bstrErrorMessageType foundation.BSTR, dwErrorCode uint32, pfErrorExist *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsErrorMessageRegistered(bstrWkspId, dwErrorType, bstrErrorMessageType, dwErrorCode, pfErrorExist)))
+func (self IWorkspaceReportMessage) IsErrorMessageRegistered(bstrWkspId foundation.BSTR, dwErrorType uint32, bstrErrorMessageType foundation.BSTR, dwErrorCode uint32) (foundation.VARIANT_BOOL, error) {
+	var _pfErrorExist foundation.VARIANT_BOOL
+	_hr := self.Raw.IsErrorMessageRegistered(bstrWkspId, dwErrorType, bstrErrorMessageType, dwErrorCode, &_pfErrorExist)
+	return _pfErrorExist, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterErrorEvent wraps the raw RegisterErrorEvent call.
@@ -3101,13 +3201,17 @@ func (self IWorkspaceScriptable) StartWorkspace(bstrWorkspaceId foundation.BSTR,
 }
 
 // IsWorkspaceCredentialSpecified wraps the raw IsWorkspaceCredentialSpecified call.
-func (self IWorkspaceScriptable) IsWorkspaceCredentialSpecified(bstrWorkspaceId foundation.BSTR, bCountUnauthenticatedCredentials foundation.VARIANT_BOOL, pbCredExist *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsWorkspaceCredentialSpecified(bstrWorkspaceId, bCountUnauthenticatedCredentials, pbCredExist)))
+func (self IWorkspaceScriptable) IsWorkspaceCredentialSpecified(bstrWorkspaceId foundation.BSTR, bCountUnauthenticatedCredentials foundation.VARIANT_BOOL) (foundation.VARIANT_BOOL, error) {
+	var _pbCredExist foundation.VARIANT_BOOL
+	_hr := self.Raw.IsWorkspaceCredentialSpecified(bstrWorkspaceId, bCountUnauthenticatedCredentials, &_pbCredExist)
+	return _pbCredExist, win32.HRESULTError(int32(_hr))
 }
 
 // IsWorkspaceSSOEnabled wraps the raw IsWorkspaceSSOEnabled call.
-func (self IWorkspaceScriptable) IsWorkspaceSSOEnabled(pbSSOEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsWorkspaceSSOEnabled(pbSSOEnabled)))
+func (self IWorkspaceScriptable) IsWorkspaceSSOEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pbSSOEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.IsWorkspaceSSOEnabled(&_pbSSOEnabled)
+	return _pbSSOEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // ClearWorkspaceCredential wraps the raw ClearWorkspaceCredential call.
@@ -3186,13 +3290,17 @@ func (self ItsPubPlugin) GetCacheLastUpdateTime(lastUpdateTime *uint64) error {
 }
 
 // Get_pluginName wraps the raw Get_pluginName call.
-func (self ItsPubPlugin) Get_pluginName(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_pluginName(pVal)))
+func (self ItsPubPlugin) Get_pluginName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_pluginName(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get_pluginVersion wraps the raw Get_pluginVersion call.
-func (self ItsPubPlugin) Get_pluginVersion(pVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_pluginVersion(pVal)))
+func (self ItsPubPlugin) Get_pluginVersion() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	_hr := self.Raw.Get_pluginVersion(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // ResolveResource wraps the raw ResolveResource call.

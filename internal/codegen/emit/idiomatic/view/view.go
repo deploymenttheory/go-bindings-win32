@@ -23,6 +23,9 @@ type FunctionModel struct {
 	Shape int
 	// RetExpr converts the raw result to the idiomatic return (Shape uses it).
 	RetExpr string
+	// ReturnValues are elevated [out,retval] locals returned before the
+	// natural return (FuncRetVal* shapes only).
+	ReturnValues []string
 }
 
 // InterfaceModel is an idiomatic COM wrapper: a struct holding the raw
@@ -58,9 +61,13 @@ type InterfaceMethodModel struct {
 	Preamble  []string
 	// RawArgs are the arguments passed to the raw method call.
 	RawArgs []string
-	// Shape: FuncErrorOnly (HRESULT→error) or FuncPassthrough (other).
-	Shape   int
-	RetExpr string
+	// Shape: FuncErrorOnly (HRESULT→error), FuncRetValError (elevated
+	// [out,retval] values + error), or FuncPassthrough (other).
+	Shape int
+	// ReturnValues are the elevated out-param locals returned before the
+	// error (FuncRetValError only).
+	ReturnValues []string
+	RetExpr      string
 }
 
 // Function body shapes.
@@ -73,4 +80,16 @@ const (
 	FuncValueError = 2
 	// FuncBoolResult: raw returns BOOL value (no error); `return <RawCall> != 0`.
 	FuncBoolResult = 3
+	// FuncRetValError: HRESULT call with elevated [out,retval] returns:
+	// preamble declares the out locals, the call fills them, then
+	// `return <values...>, win32.HRESULTError(...)`.
+	FuncRetValError = 4
+	// FuncRetValRawError: raw call returns error directly (BOOL+SetLastError
+	// or HRESULT already lowered); `return <values...>, <RawCall>`.
+	FuncRetValRawError = 5
+	// FuncRetValHRESULT: raw call returns HRESULT; wrap to error.
+	// `return <values...>, win32.HRESULTError(int32(<RawCall>))`.
+	FuncRetValHRESULT = 6
+	// FuncRetValVoid: raw call is void; call it, then `return <values...>`.
+	FuncRetValVoid = 7
 )

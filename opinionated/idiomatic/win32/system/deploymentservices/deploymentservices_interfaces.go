@@ -24,8 +24,10 @@ func WrapIWdsTransportCacheable(raw *systemdeploymentservices.IWdsTransportCache
 }
 
 // Get_Dirty wraps the raw Get_Dirty call.
-func (self IWdsTransportCacheable) Get_Dirty(pbDirty *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Dirty(pbDirty)))
+func (self IWdsTransportCacheable) Get_Dirty() (foundation.VARIANT_BOOL, error) {
+	var _pbDirty foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Dirty(&_pbDirty)
+	return _pbDirty, win32.HRESULTError(int32(_hr))
 }
 
 // Discard wraps the raw Discard call.
@@ -55,58 +57,80 @@ func WrapIWdsTransportClient(raw *systemdeploymentservices.IWdsTransportClient) 
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IWdsTransportClient) Get_Session(ppWdsTransportSession **systemdeploymentservices.IWdsTransportSession) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppWdsTransportSession)))
+func (self IWdsTransportClient) Get_Session() (*systemdeploymentservices.IWdsTransportSession, error) {
+	var _ppWdsTransportSession *systemdeploymentservices.IWdsTransportSession
+	_hr := self.Raw.Get_Session(&_ppWdsTransportSession)
+	return _ppWdsTransportSession, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IWdsTransportClient) Get_Id(pulId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(pulId)))
+func (self IWdsTransportClient) Get_Id() (uint32, error) {
+	var _pulId uint32
+	_hr := self.Raw.Get_Id(&_pulId)
+	return _pulId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IWdsTransportClient) Get_Name(pbszName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbszName)))
+func (self IWdsTransportClient) Get_Name() (foundation.BSTR, error) {
+	var _pbszName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbszName)
+	return _pbszName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MacAddress wraps the raw Get_MacAddress call.
-func (self IWdsTransportClient) Get_MacAddress(pbszMacAddress *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MacAddress(pbszMacAddress)))
+func (self IWdsTransportClient) Get_MacAddress() (foundation.BSTR, error) {
+	var _pbszMacAddress foundation.BSTR
+	_hr := self.Raw.Get_MacAddress(&_pbszMacAddress)
+	return _pbszMacAddress, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IpAddress wraps the raw Get_IpAddress call.
-func (self IWdsTransportClient) Get_IpAddress(pbszIpAddress *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IpAddress(pbszIpAddress)))
+func (self IWdsTransportClient) Get_IpAddress() (foundation.BSTR, error) {
+	var _pbszIpAddress foundation.BSTR
+	_hr := self.Raw.Get_IpAddress(&_pbszIpAddress)
+	return _pbszIpAddress, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PercentCompletion wraps the raw Get_PercentCompletion call.
-func (self IWdsTransportClient) Get_PercentCompletion(pulPercentCompletion *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PercentCompletion(pulPercentCompletion)))
+func (self IWdsTransportClient) Get_PercentCompletion() (uint32, error) {
+	var _pulPercentCompletion uint32
+	_hr := self.Raw.Get_PercentCompletion(&_pulPercentCompletion)
+	return _pulPercentCompletion, win32.HRESULTError(int32(_hr))
 }
 
 // Get_JoinDuration wraps the raw Get_JoinDuration call.
-func (self IWdsTransportClient) Get_JoinDuration(pulJoinDuration *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_JoinDuration(pulJoinDuration)))
+func (self IWdsTransportClient) Get_JoinDuration() (uint32, error) {
+	var _pulJoinDuration uint32
+	_hr := self.Raw.Get_JoinDuration(&_pulJoinDuration)
+	return _pulJoinDuration, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CpuUtilization wraps the raw Get_CpuUtilization call.
-func (self IWdsTransportClient) Get_CpuUtilization(pulCpuUtilization *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CpuUtilization(pulCpuUtilization)))
+func (self IWdsTransportClient) Get_CpuUtilization() (uint32, error) {
+	var _pulCpuUtilization uint32
+	_hr := self.Raw.Get_CpuUtilization(&_pulCpuUtilization)
+	return _pulCpuUtilization, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MemoryUtilization wraps the raw Get_MemoryUtilization call.
-func (self IWdsTransportClient) Get_MemoryUtilization(pulMemoryUtilization *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MemoryUtilization(pulMemoryUtilization)))
+func (self IWdsTransportClient) Get_MemoryUtilization() (uint32, error) {
+	var _pulMemoryUtilization uint32
+	_hr := self.Raw.Get_MemoryUtilization(&_pulMemoryUtilization)
+	return _pulMemoryUtilization, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetworkUtilization wraps the raw Get_NetworkUtilization call.
-func (self IWdsTransportClient) Get_NetworkUtilization(pulNetworkUtilization *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkUtilization(pulNetworkUtilization)))
+func (self IWdsTransportClient) Get_NetworkUtilization() (uint32, error) {
+	var _pulNetworkUtilization uint32
+	_hr := self.Raw.Get_NetworkUtilization(&_pulNetworkUtilization)
+	return _pulNetworkUtilization, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserIdentity wraps the raw Get_UserIdentity call.
-func (self IWdsTransportClient) Get_UserIdentity(pbszUserIdentity *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserIdentity(pbszUserIdentity)))
+func (self IWdsTransportClient) Get_UserIdentity() (foundation.BSTR, error) {
+	var _pbszUserIdentity foundation.BSTR
+	_hr := self.Raw.Get_UserIdentity(&_pbszUserIdentity)
+	return _pbszUserIdentity, win32.HRESULTError(int32(_hr))
 }
 
 // Disconnect wraps the raw Disconnect call.
@@ -126,18 +150,24 @@ func WrapIWdsTransportCollection(raw *systemdeploymentservices.IWdsTransportColl
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IWdsTransportCollection) Get_Count(pulCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(pulCount)))
+func (self IWdsTransportCollection) Get_Count() (uint32, error) {
+	var _pulCount uint32
+	_hr := self.Raw.Get_Count(&_pulCount)
+	return _pulCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IWdsTransportCollection) Get_Item(ulIndex uint32, ppVal **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(ulIndex, ppVal)))
+func (self IWdsTransportCollection) Get_Item(ulIndex uint32) (*systemcom.IDispatch, error) {
+	var _ppVal *systemcom.IDispatch
+	_hr := self.Raw.Get_Item(ulIndex, &_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IWdsTransportCollection) Get__NewEnum(ppVal **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppVal)))
+func (self IWdsTransportCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppVal *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppVal)
+	return _ppVal, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportConfigurationManager is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportConfigurationManager with error-returning methods.
@@ -152,18 +182,24 @@ func WrapIWdsTransportConfigurationManager(raw *systemdeploymentservices.IWdsTra
 }
 
 // Get_ServicePolicy wraps the raw Get_ServicePolicy call.
-func (self IWdsTransportConfigurationManager) Get_ServicePolicy(ppWdsTransportServicePolicy **systemdeploymentservices.IWdsTransportServicePolicy) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ServicePolicy(ppWdsTransportServicePolicy)))
+func (self IWdsTransportConfigurationManager) Get_ServicePolicy() (*systemdeploymentservices.IWdsTransportServicePolicy, error) {
+	var _ppWdsTransportServicePolicy *systemdeploymentservices.IWdsTransportServicePolicy
+	_hr := self.Raw.Get_ServicePolicy(&_ppWdsTransportServicePolicy)
+	return _ppWdsTransportServicePolicy, win32.HRESULTError(int32(_hr))
 }
 
 // Get_DiagnosticsPolicy wraps the raw Get_DiagnosticsPolicy call.
-func (self IWdsTransportConfigurationManager) Get_DiagnosticsPolicy(ppWdsTransportDiagnosticsPolicy **systemdeploymentservices.IWdsTransportDiagnosticsPolicy) error {
-	return win32.HRESULTError(int32(self.Raw.Get_DiagnosticsPolicy(ppWdsTransportDiagnosticsPolicy)))
+func (self IWdsTransportConfigurationManager) Get_DiagnosticsPolicy() (*systemdeploymentservices.IWdsTransportDiagnosticsPolicy, error) {
+	var _ppWdsTransportDiagnosticsPolicy *systemdeploymentservices.IWdsTransportDiagnosticsPolicy
+	_hr := self.Raw.Get_DiagnosticsPolicy(&_ppWdsTransportDiagnosticsPolicy)
+	return _ppWdsTransportDiagnosticsPolicy, win32.HRESULTError(int32(_hr))
 }
 
 // Get_WdsTransportServicesRunning wraps the raw Get_WdsTransportServicesRunning call.
-func (self IWdsTransportConfigurationManager) Get_WdsTransportServicesRunning(bRealtimeStatus foundation.VARIANT_BOOL, pbServicesRunning *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WdsTransportServicesRunning(bRealtimeStatus, pbServicesRunning)))
+func (self IWdsTransportConfigurationManager) Get_WdsTransportServicesRunning(bRealtimeStatus foundation.VARIANT_BOOL) (foundation.VARIANT_BOOL, error) {
+	var _pbServicesRunning foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_WdsTransportServicesRunning(bRealtimeStatus, &_pbServicesRunning)
+	return _pbServicesRunning, win32.HRESULTError(int32(_hr))
 }
 
 // EnableWdsTransportServices wraps the raw EnableWdsTransportServices call.
@@ -208,8 +244,10 @@ func WrapIWdsTransportConfigurationManager2(raw *systemdeploymentservices.IWdsTr
 }
 
 // Get_MulticastSessionPolicy wraps the raw Get_MulticastSessionPolicy call.
-func (self IWdsTransportConfigurationManager2) Get_MulticastSessionPolicy(ppWdsTransportMulticastSessionPolicy **systemdeploymentservices.IWdsTransportMulticastSessionPolicy) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MulticastSessionPolicy(ppWdsTransportMulticastSessionPolicy)))
+func (self IWdsTransportConfigurationManager2) Get_MulticastSessionPolicy() (*systemdeploymentservices.IWdsTransportMulticastSessionPolicy, error) {
+	var _ppWdsTransportMulticastSessionPolicy *systemdeploymentservices.IWdsTransportMulticastSessionPolicy
+	_hr := self.Raw.Get_MulticastSessionPolicy(&_ppWdsTransportMulticastSessionPolicy)
+	return _ppWdsTransportMulticastSessionPolicy, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportContent is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportContent with error-returning methods.
@@ -224,23 +262,31 @@ func WrapIWdsTransportContent(raw *systemdeploymentservices.IWdsTransportContent
 }
 
 // Get_Namespace wraps the raw Get_Namespace call.
-func (self IWdsTransportContent) Get_Namespace(ppWdsTransportNamespace **systemdeploymentservices.IWdsTransportNamespace) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Namespace(ppWdsTransportNamespace)))
+func (self IWdsTransportContent) Get_Namespace() (*systemdeploymentservices.IWdsTransportNamespace, error) {
+	var _ppWdsTransportNamespace *systemdeploymentservices.IWdsTransportNamespace
+	_hr := self.Raw.Get_Namespace(&_ppWdsTransportNamespace)
+	return _ppWdsTransportNamespace, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IWdsTransportContent) Get_Id(pulId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(pulId)))
+func (self IWdsTransportContent) Get_Id() (uint32, error) {
+	var _pulId uint32
+	_hr := self.Raw.Get_Id(&_pulId)
+	return _pulId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IWdsTransportContent) Get_Name(pbszName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbszName)))
+func (self IWdsTransportContent) Get_Name() (foundation.BSTR, error) {
+	var _pbszName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbszName)
+	return _pbszName, win32.HRESULTError(int32(_hr))
 }
 
 // RetrieveSessions wraps the raw RetrieveSessions call.
-func (self IWdsTransportContent) RetrieveSessions(ppWdsTransportSessions **systemdeploymentservices.IWdsTransportCollection) error {
-	return win32.HRESULTError(int32(self.Raw.RetrieveSessions(ppWdsTransportSessions)))
+func (self IWdsTransportContent) RetrieveSessions() (*systemdeploymentservices.IWdsTransportCollection, error) {
+	var _ppWdsTransportSessions *systemdeploymentservices.IWdsTransportCollection
+	_hr := self.Raw.RetrieveSessions(&_ppWdsTransportSessions)
+	return _ppWdsTransportSessions, win32.HRESULTError(int32(_hr))
 }
 
 // Terminate wraps the raw Terminate call.
@@ -260,23 +306,31 @@ func WrapIWdsTransportContentProvider(raw *systemdeploymentservices.IWdsTranspor
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IWdsTransportContentProvider) Get_Name(pbszName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbszName)))
+func (self IWdsTransportContentProvider) Get_Name() (foundation.BSTR, error) {
+	var _pbszName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbszName)
+	return _pbszName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IWdsTransportContentProvider) Get_Description(pbszDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pbszDescription)))
+func (self IWdsTransportContentProvider) Get_Description() (foundation.BSTR, error) {
+	var _pbszDescription foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pbszDescription)
+	return _pbszDescription, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FilePath wraps the raw Get_FilePath call.
-func (self IWdsTransportContentProvider) Get_FilePath(pbszFilePath *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FilePath(pbszFilePath)))
+func (self IWdsTransportContentProvider) Get_FilePath() (foundation.BSTR, error) {
+	var _pbszFilePath foundation.BSTR
+	_hr := self.Raw.Get_FilePath(&_pbszFilePath)
+	return _pbszFilePath, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InitializationRoutine wraps the raw Get_InitializationRoutine call.
-func (self IWdsTransportContentProvider) Get_InitializationRoutine(pbszInitializationRoutine *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InitializationRoutine(pbszInitializationRoutine)))
+func (self IWdsTransportContentProvider) Get_InitializationRoutine() (foundation.BSTR, error) {
+	var _pbszInitializationRoutine foundation.BSTR
+	_hr := self.Raw.Get_InitializationRoutine(&_pbszInitializationRoutine)
+	return _pbszInitializationRoutine, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportDiagnosticsPolicy is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportDiagnosticsPolicy with error-returning methods.
@@ -291,8 +345,10 @@ func WrapIWdsTransportDiagnosticsPolicy(raw *systemdeploymentservices.IWdsTransp
 }
 
 // Get_Enabled wraps the raw Get_Enabled call.
-func (self IWdsTransportDiagnosticsPolicy) Get_Enabled(pbEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Enabled(pbEnabled)))
+func (self IWdsTransportDiagnosticsPolicy) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pbEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Enabled(&_pbEnabled)
+	return _pbEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Enabled wraps the raw Put_Enabled call.
@@ -301,8 +357,10 @@ func (self IWdsTransportDiagnosticsPolicy) Put_Enabled(bEnabled foundation.VARIA
 }
 
 // Get_Components wraps the raw Get_Components call.
-func (self IWdsTransportDiagnosticsPolicy) Get_Components(pulComponents *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Components(pulComponents)))
+func (self IWdsTransportDiagnosticsPolicy) Get_Components() (uint32, error) {
+	var _pulComponents uint32
+	_hr := self.Raw.Get_Components(&_pulComponents)
+	return _pulComponents, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Components wraps the raw Put_Components call.
@@ -322,8 +380,10 @@ func WrapIWdsTransportManager(raw *systemdeploymentservices.IWdsTransportManager
 }
 
 // GetWdsTransportServer wraps the raw GetWdsTransportServer call.
-func (self IWdsTransportManager) GetWdsTransportServer(bszServerName foundation.BSTR, ppWdsTransportServer **systemdeploymentservices.IWdsTransportServer) error {
-	return win32.HRESULTError(int32(self.Raw.GetWdsTransportServer(bszServerName, ppWdsTransportServer)))
+func (self IWdsTransportManager) GetWdsTransportServer(bszServerName foundation.BSTR) (*systemdeploymentservices.IWdsTransportServer, error) {
+	var _ppWdsTransportServer *systemdeploymentservices.IWdsTransportServer
+	_hr := self.Raw.GetWdsTransportServer(bszServerName, &_ppWdsTransportServer)
+	return _ppWdsTransportServer, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportMulticastSessionPolicy is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportMulticastSessionPolicy with error-returning methods.
@@ -338,8 +398,10 @@ func WrapIWdsTransportMulticastSessionPolicy(raw *systemdeploymentservices.IWdsT
 }
 
 // Get_SlowClientHandling wraps the raw Get_SlowClientHandling call.
-func (self IWdsTransportMulticastSessionPolicy) Get_SlowClientHandling(pSlowClientHandling *systemdeploymentservices.WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SlowClientHandling(pSlowClientHandling)))
+func (self IWdsTransportMulticastSessionPolicy) Get_SlowClientHandling() (systemdeploymentservices.WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE, error) {
+	var _pSlowClientHandling systemdeploymentservices.WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE
+	_hr := self.Raw.Get_SlowClientHandling(&_pSlowClientHandling)
+	return _pSlowClientHandling, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SlowClientHandling wraps the raw Put_SlowClientHandling call.
@@ -348,8 +410,10 @@ func (self IWdsTransportMulticastSessionPolicy) Put_SlowClientHandling(SlowClien
 }
 
 // Get_AutoDisconnectThreshold wraps the raw Get_AutoDisconnectThreshold call.
-func (self IWdsTransportMulticastSessionPolicy) Get_AutoDisconnectThreshold(pulThreshold *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AutoDisconnectThreshold(pulThreshold)))
+func (self IWdsTransportMulticastSessionPolicy) Get_AutoDisconnectThreshold() (uint32, error) {
+	var _pulThreshold uint32
+	_hr := self.Raw.Get_AutoDisconnectThreshold(&_pulThreshold)
+	return _pulThreshold, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AutoDisconnectThreshold wraps the raw Put_AutoDisconnectThreshold call.
@@ -358,8 +422,10 @@ func (self IWdsTransportMulticastSessionPolicy) Put_AutoDisconnectThreshold(ulTh
 }
 
 // Get_MultistreamStreamCount wraps the raw Get_MultistreamStreamCount call.
-func (self IWdsTransportMulticastSessionPolicy) Get_MultistreamStreamCount(pulStreamCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MultistreamStreamCount(pulStreamCount)))
+func (self IWdsTransportMulticastSessionPolicy) Get_MultistreamStreamCount() (uint32, error) {
+	var _pulStreamCount uint32
+	_hr := self.Raw.Get_MultistreamStreamCount(&_pulStreamCount)
+	return _pulStreamCount, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MultistreamStreamCount wraps the raw Put_MultistreamStreamCount call.
@@ -368,8 +434,10 @@ func (self IWdsTransportMulticastSessionPolicy) Put_MultistreamStreamCount(ulStr
 }
 
 // Get_SlowClientFallback wraps the raw Get_SlowClientFallback call.
-func (self IWdsTransportMulticastSessionPolicy) Get_SlowClientFallback(pbClientFallback *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SlowClientFallback(pbClientFallback)))
+func (self IWdsTransportMulticastSessionPolicy) Get_SlowClientFallback() (foundation.VARIANT_BOOL, error) {
+	var _pbClientFallback foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SlowClientFallback(&_pbClientFallback)
+	return _pbClientFallback, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SlowClientFallback wraps the raw Put_SlowClientFallback call.
@@ -389,18 +457,24 @@ func WrapIWdsTransportNamespace(raw *systemdeploymentservices.IWdsTransportNames
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IWdsTransportNamespace) Get_Type(pType *systemdeploymentservices.WDSTRANSPORT_NAMESPACE_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(pType)))
+func (self IWdsTransportNamespace) Get_Type() (systemdeploymentservices.WDSTRANSPORT_NAMESPACE_TYPE, error) {
+	var _pType systemdeploymentservices.WDSTRANSPORT_NAMESPACE_TYPE
+	_hr := self.Raw.Get_Type(&_pType)
+	return _pType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IWdsTransportNamespace) Get_Id(pulId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(pulId)))
+func (self IWdsTransportNamespace) Get_Id() (uint32, error) {
+	var _pulId uint32
+	_hr := self.Raw.Get_Id(&_pulId)
+	return _pulId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IWdsTransportNamespace) Get_Name(pbszName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbszName)))
+func (self IWdsTransportNamespace) Get_Name() (foundation.BSTR, error) {
+	var _pbszName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbszName)
+	return _pbszName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -409,8 +483,10 @@ func (self IWdsTransportNamespace) Put_Name(bszName foundation.BSTR) error {
 }
 
 // Get_FriendlyName wraps the raw Get_FriendlyName call.
-func (self IWdsTransportNamespace) Get_FriendlyName(pbszFriendlyName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FriendlyName(pbszFriendlyName)))
+func (self IWdsTransportNamespace) Get_FriendlyName() (foundation.BSTR, error) {
+	var _pbszFriendlyName foundation.BSTR
+	_hr := self.Raw.Get_FriendlyName(&_pbszFriendlyName)
+	return _pbszFriendlyName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FriendlyName wraps the raw Put_FriendlyName call.
@@ -419,8 +495,10 @@ func (self IWdsTransportNamespace) Put_FriendlyName(bszFriendlyName foundation.B
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IWdsTransportNamespace) Get_Description(pbszDescription *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pbszDescription)))
+func (self IWdsTransportNamespace) Get_Description() (foundation.BSTR, error) {
+	var _pbszDescription foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pbszDescription)
+	return _pbszDescription, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -429,8 +507,10 @@ func (self IWdsTransportNamespace) Put_Description(bszDescription foundation.BST
 }
 
 // Get_ContentProvider wraps the raw Get_ContentProvider call.
-func (self IWdsTransportNamespace) Get_ContentProvider(pbszContentProvider *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ContentProvider(pbszContentProvider)))
+func (self IWdsTransportNamespace) Get_ContentProvider() (foundation.BSTR, error) {
+	var _pbszContentProvider foundation.BSTR
+	_hr := self.Raw.Get_ContentProvider(&_pbszContentProvider)
+	return _pbszContentProvider, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ContentProvider wraps the raw Put_ContentProvider call.
@@ -439,8 +519,10 @@ func (self IWdsTransportNamespace) Put_ContentProvider(bszContentProvider founda
 }
 
 // Get_Configuration wraps the raw Get_Configuration call.
-func (self IWdsTransportNamespace) Get_Configuration(pbszConfiguration *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Configuration(pbszConfiguration)))
+func (self IWdsTransportNamespace) Get_Configuration() (foundation.BSTR, error) {
+	var _pbszConfiguration foundation.BSTR
+	_hr := self.Raw.Get_Configuration(&_pbszConfiguration)
+	return _pbszConfiguration, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Configuration wraps the raw Put_Configuration call.
@@ -449,23 +531,31 @@ func (self IWdsTransportNamespace) Put_Configuration(bszConfiguration foundation
 }
 
 // Get_Registered wraps the raw Get_Registered call.
-func (self IWdsTransportNamespace) Get_Registered(pbRegistered *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Registered(pbRegistered)))
+func (self IWdsTransportNamespace) Get_Registered() (foundation.VARIANT_BOOL, error) {
+	var _pbRegistered foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Registered(&_pbRegistered)
+	return _pbRegistered, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Tombstoned wraps the raw Get_Tombstoned call.
-func (self IWdsTransportNamespace) Get_Tombstoned(pbTombstoned *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Tombstoned(pbTombstoned)))
+func (self IWdsTransportNamespace) Get_Tombstoned() (foundation.VARIANT_BOOL, error) {
+	var _pbTombstoned foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Tombstoned(&_pbTombstoned)
+	return _pbTombstoned, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TombstoneTime wraps the raw Get_TombstoneTime call.
-func (self IWdsTransportNamespace) Get_TombstoneTime(pTombstoneTime *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TombstoneTime(pTombstoneTime)))
+func (self IWdsTransportNamespace) Get_TombstoneTime() (float64, error) {
+	var _pTombstoneTime float64
+	_hr := self.Raw.Get_TombstoneTime(&_pTombstoneTime)
+	return _pTombstoneTime, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TransmissionStarted wraps the raw Get_TransmissionStarted call.
-func (self IWdsTransportNamespace) Get_TransmissionStarted(pbTransmissionStarted *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TransmissionStarted(pbTransmissionStarted)))
+func (self IWdsTransportNamespace) Get_TransmissionStarted() (foundation.VARIANT_BOOL, error) {
+	var _pbTransmissionStarted foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_TransmissionStarted(&_pbTransmissionStarted)
+	return _pbTransmissionStarted, win32.HRESULTError(int32(_hr))
 }
 
 // Register wraps the raw Register call.
@@ -479,8 +569,10 @@ func (self IWdsTransportNamespace) Deregister(bTerminateSessions foundation.VARI
 }
 
 // Clone wraps the raw Clone call.
-func (self IWdsTransportNamespace) Clone(ppWdsTransportNamespaceClone **systemdeploymentservices.IWdsTransportNamespace) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppWdsTransportNamespaceClone)))
+func (self IWdsTransportNamespace) Clone() (*systemdeploymentservices.IWdsTransportNamespace, error) {
+	var _ppWdsTransportNamespaceClone *systemdeploymentservices.IWdsTransportNamespace
+	_hr := self.Raw.Clone(&_ppWdsTransportNamespaceClone)
+	return _ppWdsTransportNamespaceClone, win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -489,8 +581,10 @@ func (self IWdsTransportNamespace) Refresh() error {
 }
 
 // RetrieveContents wraps the raw RetrieveContents call.
-func (self IWdsTransportNamespace) RetrieveContents(ppWdsTransportContents **systemdeploymentservices.IWdsTransportCollection) error {
-	return win32.HRESULTError(int32(self.Raw.RetrieveContents(ppWdsTransportContents)))
+func (self IWdsTransportNamespace) RetrieveContents() (*systemdeploymentservices.IWdsTransportCollection, error) {
+	var _ppWdsTransportContents *systemdeploymentservices.IWdsTransportCollection
+	_hr := self.Raw.RetrieveContents(&_ppWdsTransportContents)
+	return _ppWdsTransportContents, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportNamespaceAutoCast is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportNamespaceAutoCast with error-returning methods.
@@ -516,18 +610,24 @@ func WrapIWdsTransportNamespaceManager(raw *systemdeploymentservices.IWdsTranspo
 }
 
 // CreateNamespace wraps the raw CreateNamespace call.
-func (self IWdsTransportNamespaceManager) CreateNamespace(NamespaceType systemdeploymentservices.WDSTRANSPORT_NAMESPACE_TYPE, bszNamespaceName foundation.BSTR, bszContentProvider foundation.BSTR, bszConfiguration foundation.BSTR, ppWdsTransportNamespace **systemdeploymentservices.IWdsTransportNamespace) error {
-	return win32.HRESULTError(int32(self.Raw.CreateNamespace(NamespaceType, bszNamespaceName, bszContentProvider, bszConfiguration, ppWdsTransportNamespace)))
+func (self IWdsTransportNamespaceManager) CreateNamespace(NamespaceType systemdeploymentservices.WDSTRANSPORT_NAMESPACE_TYPE, bszNamespaceName foundation.BSTR, bszContentProvider foundation.BSTR, bszConfiguration foundation.BSTR) (*systemdeploymentservices.IWdsTransportNamespace, error) {
+	var _ppWdsTransportNamespace *systemdeploymentservices.IWdsTransportNamespace
+	_hr := self.Raw.CreateNamespace(NamespaceType, bszNamespaceName, bszContentProvider, bszConfiguration, &_ppWdsTransportNamespace)
+	return _ppWdsTransportNamespace, win32.HRESULTError(int32(_hr))
 }
 
 // RetrieveNamespace wraps the raw RetrieveNamespace call.
-func (self IWdsTransportNamespaceManager) RetrieveNamespace(bszNamespaceName foundation.BSTR, ppWdsTransportNamespace **systemdeploymentservices.IWdsTransportNamespace) error {
-	return win32.HRESULTError(int32(self.Raw.RetrieveNamespace(bszNamespaceName, ppWdsTransportNamespace)))
+func (self IWdsTransportNamespaceManager) RetrieveNamespace(bszNamespaceName foundation.BSTR) (*systemdeploymentservices.IWdsTransportNamespace, error) {
+	var _ppWdsTransportNamespace *systemdeploymentservices.IWdsTransportNamespace
+	_hr := self.Raw.RetrieveNamespace(bszNamespaceName, &_ppWdsTransportNamespace)
+	return _ppWdsTransportNamespace, win32.HRESULTError(int32(_hr))
 }
 
 // RetrieveNamespaces wraps the raw RetrieveNamespaces call.
-func (self IWdsTransportNamespaceManager) RetrieveNamespaces(bszContentProvider foundation.BSTR, bszNamespaceName foundation.BSTR, bIncludeTombstones foundation.VARIANT_BOOL, ppWdsTransportNamespaces **systemdeploymentservices.IWdsTransportCollection) error {
-	return win32.HRESULTError(int32(self.Raw.RetrieveNamespaces(bszContentProvider, bszNamespaceName, bIncludeTombstones, ppWdsTransportNamespaces)))
+func (self IWdsTransportNamespaceManager) RetrieveNamespaces(bszContentProvider foundation.BSTR, bszNamespaceName foundation.BSTR, bIncludeTombstones foundation.VARIANT_BOOL) (*systemdeploymentservices.IWdsTransportCollection, error) {
+	var _ppWdsTransportNamespaces *systemdeploymentservices.IWdsTransportCollection
+	_hr := self.Raw.RetrieveNamespaces(bszContentProvider, bszNamespaceName, bIncludeTombstones, &_ppWdsTransportNamespaces)
+	return _ppWdsTransportNamespaces, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportNamespaceScheduledCast is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportNamespaceScheduledCast with error-returning methods.
@@ -558,8 +658,10 @@ func WrapIWdsTransportNamespaceScheduledCastAutoStart(raw *systemdeploymentservi
 }
 
 // Get_MinimumClients wraps the raw Get_MinimumClients call.
-func (self IWdsTransportNamespaceScheduledCastAutoStart) Get_MinimumClients(pulMinimumClients *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MinimumClients(pulMinimumClients)))
+func (self IWdsTransportNamespaceScheduledCastAutoStart) Get_MinimumClients() (uint32, error) {
+	var _pulMinimumClients uint32
+	_hr := self.Raw.Get_MinimumClients(&_pulMinimumClients)
+	return _pulMinimumClients, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MinimumClients wraps the raw Put_MinimumClients call.
@@ -568,8 +670,10 @@ func (self IWdsTransportNamespaceScheduledCastAutoStart) Put_MinimumClients(ulMi
 }
 
 // Get_StartTime wraps the raw Get_StartTime call.
-func (self IWdsTransportNamespaceScheduledCastAutoStart) Get_StartTime(pStartTime *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StartTime(pStartTime)))
+func (self IWdsTransportNamespaceScheduledCastAutoStart) Get_StartTime() (float64, error) {
+	var _pStartTime float64
+	_hr := self.Raw.Get_StartTime(&_pStartTime)
+	return _pStartTime, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportNamespaceScheduledCastManualStart is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportNamespaceScheduledCastManualStart with error-returning methods.
@@ -595,23 +699,31 @@ func WrapIWdsTransportServer(raw *systemdeploymentservices.IWdsTransportServer) 
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IWdsTransportServer) Get_Name(pbszName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbszName)))
+func (self IWdsTransportServer) Get_Name() (foundation.BSTR, error) {
+	var _pbszName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbszName)
+	return _pbszName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SetupManager wraps the raw Get_SetupManager call.
-func (self IWdsTransportServer) Get_SetupManager(ppWdsTransportSetupManager **systemdeploymentservices.IWdsTransportSetupManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SetupManager(ppWdsTransportSetupManager)))
+func (self IWdsTransportServer) Get_SetupManager() (*systemdeploymentservices.IWdsTransportSetupManager, error) {
+	var _ppWdsTransportSetupManager *systemdeploymentservices.IWdsTransportSetupManager
+	_hr := self.Raw.Get_SetupManager(&_ppWdsTransportSetupManager)
+	return _ppWdsTransportSetupManager, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ConfigurationManager wraps the raw Get_ConfigurationManager call.
-func (self IWdsTransportServer) Get_ConfigurationManager(ppWdsTransportConfigurationManager **systemdeploymentservices.IWdsTransportConfigurationManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ConfigurationManager(ppWdsTransportConfigurationManager)))
+func (self IWdsTransportServer) Get_ConfigurationManager() (*systemdeploymentservices.IWdsTransportConfigurationManager, error) {
+	var _ppWdsTransportConfigurationManager *systemdeploymentservices.IWdsTransportConfigurationManager
+	_hr := self.Raw.Get_ConfigurationManager(&_ppWdsTransportConfigurationManager)
+	return _ppWdsTransportConfigurationManager, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NamespaceManager wraps the raw Get_NamespaceManager call.
-func (self IWdsTransportServer) Get_NamespaceManager(ppWdsTransportNamespaceManager **systemdeploymentservices.IWdsTransportNamespaceManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NamespaceManager(ppWdsTransportNamespaceManager)))
+func (self IWdsTransportServer) Get_NamespaceManager() (*systemdeploymentservices.IWdsTransportNamespaceManager, error) {
+	var _ppWdsTransportNamespaceManager *systemdeploymentservices.IWdsTransportNamespaceManager
+	_hr := self.Raw.Get_NamespaceManager(&_ppWdsTransportNamespaceManager)
+	return _ppWdsTransportNamespaceManager, win32.HRESULTError(int32(_hr))
 }
 
 // DisconnectClient wraps the raw DisconnectClient call.
@@ -631,8 +743,10 @@ func WrapIWdsTransportServer2(raw *systemdeploymentservices.IWdsTransportServer2
 }
 
 // Get_TftpManager wraps the raw Get_TftpManager call.
-func (self IWdsTransportServer2) Get_TftpManager(ppWdsTransportTftpManager **systemdeploymentservices.IWdsTransportTftpManager) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TftpManager(ppWdsTransportTftpManager)))
+func (self IWdsTransportServer2) Get_TftpManager() (*systemdeploymentservices.IWdsTransportTftpManager, error) {
+	var _ppWdsTransportTftpManager *systemdeploymentservices.IWdsTransportTftpManager
+	_hr := self.Raw.Get_TftpManager(&_ppWdsTransportTftpManager)
+	return _ppWdsTransportTftpManager, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportServicePolicy is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportServicePolicy with error-returning methods.
@@ -647,8 +761,10 @@ func WrapIWdsTransportServicePolicy(raw *systemdeploymentservices.IWdsTransportS
 }
 
 // Get_IpAddressSource wraps the raw Get_IpAddressSource call.
-func (self IWdsTransportServicePolicy) Get_IpAddressSource(AddressType systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_TYPE, pSourceType *systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IpAddressSource(AddressType, pSourceType)))
+func (self IWdsTransportServicePolicy) Get_IpAddressSource(AddressType systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_TYPE) (systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE, error) {
+	var _pSourceType systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE
+	_hr := self.Raw.Get_IpAddressSource(AddressType, &_pSourceType)
+	return _pSourceType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_IpAddressSource wraps the raw Put_IpAddressSource call.
@@ -657,8 +773,10 @@ func (self IWdsTransportServicePolicy) Put_IpAddressSource(AddressType systemdep
 }
 
 // Get_StartIpAddress wraps the raw Get_StartIpAddress call.
-func (self IWdsTransportServicePolicy) Get_StartIpAddress(AddressType systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_TYPE, pbszStartIpAddress *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StartIpAddress(AddressType, pbszStartIpAddress)))
+func (self IWdsTransportServicePolicy) Get_StartIpAddress(AddressType systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_TYPE) (foundation.BSTR, error) {
+	var _pbszStartIpAddress foundation.BSTR
+	_hr := self.Raw.Get_StartIpAddress(AddressType, &_pbszStartIpAddress)
+	return _pbszStartIpAddress, win32.HRESULTError(int32(_hr))
 }
 
 // Put_StartIpAddress wraps the raw Put_StartIpAddress call.
@@ -667,8 +785,10 @@ func (self IWdsTransportServicePolicy) Put_StartIpAddress(AddressType systemdepl
 }
 
 // Get_EndIpAddress wraps the raw Get_EndIpAddress call.
-func (self IWdsTransportServicePolicy) Get_EndIpAddress(AddressType systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_TYPE, pbszEndIpAddress *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EndIpAddress(AddressType, pbszEndIpAddress)))
+func (self IWdsTransportServicePolicy) Get_EndIpAddress(AddressType systemdeploymentservices.WDSTRANSPORT_IP_ADDRESS_TYPE) (foundation.BSTR, error) {
+	var _pbszEndIpAddress foundation.BSTR
+	_hr := self.Raw.Get_EndIpAddress(AddressType, &_pbszEndIpAddress)
+	return _pbszEndIpAddress, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EndIpAddress wraps the raw Put_EndIpAddress call.
@@ -677,8 +797,10 @@ func (self IWdsTransportServicePolicy) Put_EndIpAddress(AddressType systemdeploy
 }
 
 // Get_StartPort wraps the raw Get_StartPort call.
-func (self IWdsTransportServicePolicy) Get_StartPort(pulStartPort *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StartPort(pulStartPort)))
+func (self IWdsTransportServicePolicy) Get_StartPort() (uint32, error) {
+	var _pulStartPort uint32
+	_hr := self.Raw.Get_StartPort(&_pulStartPort)
+	return _pulStartPort, win32.HRESULTError(int32(_hr))
 }
 
 // Put_StartPort wraps the raw Put_StartPort call.
@@ -687,8 +809,10 @@ func (self IWdsTransportServicePolicy) Put_StartPort(ulStartPort uint32) error {
 }
 
 // Get_EndPort wraps the raw Get_EndPort call.
-func (self IWdsTransportServicePolicy) Get_EndPort(pulEndPort *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EndPort(pulEndPort)))
+func (self IWdsTransportServicePolicy) Get_EndPort() (uint32, error) {
+	var _pulEndPort uint32
+	_hr := self.Raw.Get_EndPort(&_pulEndPort)
+	return _pulEndPort, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EndPort wraps the raw Put_EndPort call.
@@ -697,8 +821,10 @@ func (self IWdsTransportServicePolicy) Put_EndPort(ulEndPort uint32) error {
 }
 
 // Get_NetworkProfile wraps the raw Get_NetworkProfile call.
-func (self IWdsTransportServicePolicy) Get_NetworkProfile(pProfileType *systemdeploymentservices.WDSTRANSPORT_NETWORK_PROFILE_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkProfile(pProfileType)))
+func (self IWdsTransportServicePolicy) Get_NetworkProfile() (systemdeploymentservices.WDSTRANSPORT_NETWORK_PROFILE_TYPE, error) {
+	var _pProfileType systemdeploymentservices.WDSTRANSPORT_NETWORK_PROFILE_TYPE
+	_hr := self.Raw.Get_NetworkProfile(&_pProfileType)
+	return _pProfileType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_NetworkProfile wraps the raw Put_NetworkProfile call.
@@ -718,8 +844,10 @@ func WrapIWdsTransportServicePolicy2(raw *systemdeploymentservices.IWdsTransport
 }
 
 // Get_UdpPortPolicy wraps the raw Get_UdpPortPolicy call.
-func (self IWdsTransportServicePolicy2) Get_UdpPortPolicy(pUdpPortPolicy *systemdeploymentservices.WDSTRANSPORT_UDP_PORT_POLICY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UdpPortPolicy(pUdpPortPolicy)))
+func (self IWdsTransportServicePolicy2) Get_UdpPortPolicy() (systemdeploymentservices.WDSTRANSPORT_UDP_PORT_POLICY, error) {
+	var _pUdpPortPolicy systemdeploymentservices.WDSTRANSPORT_UDP_PORT_POLICY
+	_hr := self.Raw.Get_UdpPortPolicy(&_pUdpPortPolicy)
+	return _pUdpPortPolicy, win32.HRESULTError(int32(_hr))
 }
 
 // Put_UdpPortPolicy wraps the raw Put_UdpPortPolicy call.
@@ -728,8 +856,10 @@ func (self IWdsTransportServicePolicy2) Put_UdpPortPolicy(UdpPortPolicy systemde
 }
 
 // Get_TftpMaximumBlockSize wraps the raw Get_TftpMaximumBlockSize call.
-func (self IWdsTransportServicePolicy2) Get_TftpMaximumBlockSize(pulTftpMaximumBlockSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TftpMaximumBlockSize(pulTftpMaximumBlockSize)))
+func (self IWdsTransportServicePolicy2) Get_TftpMaximumBlockSize() (uint32, error) {
+	var _pulTftpMaximumBlockSize uint32
+	_hr := self.Raw.Get_TftpMaximumBlockSize(&_pulTftpMaximumBlockSize)
+	return _pulTftpMaximumBlockSize, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TftpMaximumBlockSize wraps the raw Put_TftpMaximumBlockSize call.
@@ -738,8 +868,10 @@ func (self IWdsTransportServicePolicy2) Put_TftpMaximumBlockSize(ulTftpMaximumBl
 }
 
 // Get_EnableTftpVariableWindowExtension wraps the raw Get_EnableTftpVariableWindowExtension call.
-func (self IWdsTransportServicePolicy2) Get_EnableTftpVariableWindowExtension(pbEnableTftpVariableWindowExtension *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnableTftpVariableWindowExtension(pbEnableTftpVariableWindowExtension)))
+func (self IWdsTransportServicePolicy2) Get_EnableTftpVariableWindowExtension() (foundation.VARIANT_BOOL, error) {
+	var _pbEnableTftpVariableWindowExtension foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_EnableTftpVariableWindowExtension(&_pbEnableTftpVariableWindowExtension)
+	return _pbEnableTftpVariableWindowExtension, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EnableTftpVariableWindowExtension wraps the raw Put_EnableTftpVariableWindowExtension call.
@@ -759,38 +891,52 @@ func WrapIWdsTransportSession(raw *systemdeploymentservices.IWdsTransportSession
 }
 
 // Get_Content wraps the raw Get_Content call.
-func (self IWdsTransportSession) Get_Content(ppWdsTransportContent **systemdeploymentservices.IWdsTransportContent) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Content(ppWdsTransportContent)))
+func (self IWdsTransportSession) Get_Content() (*systemdeploymentservices.IWdsTransportContent, error) {
+	var _ppWdsTransportContent *systemdeploymentservices.IWdsTransportContent
+	_hr := self.Raw.Get_Content(&_ppWdsTransportContent)
+	return _ppWdsTransportContent, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Id wraps the raw Get_Id call.
-func (self IWdsTransportSession) Get_Id(pulId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Id(pulId)))
+func (self IWdsTransportSession) Get_Id() (uint32, error) {
+	var _pulId uint32
+	_hr := self.Raw.Get_Id(&_pulId)
+	return _pulId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetworkInterfaceName wraps the raw Get_NetworkInterfaceName call.
-func (self IWdsTransportSession) Get_NetworkInterfaceName(pbszNetworkInterfaceName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkInterfaceName(pbszNetworkInterfaceName)))
+func (self IWdsTransportSession) Get_NetworkInterfaceName() (foundation.BSTR, error) {
+	var _pbszNetworkInterfaceName foundation.BSTR
+	_hr := self.Raw.Get_NetworkInterfaceName(&_pbszNetworkInterfaceName)
+	return _pbszNetworkInterfaceName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetworkInterfaceAddress wraps the raw Get_NetworkInterfaceAddress call.
-func (self IWdsTransportSession) Get_NetworkInterfaceAddress(pbszNetworkInterfaceAddress *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkInterfaceAddress(pbszNetworkInterfaceAddress)))
+func (self IWdsTransportSession) Get_NetworkInterfaceAddress() (foundation.BSTR, error) {
+	var _pbszNetworkInterfaceAddress foundation.BSTR
+	_hr := self.Raw.Get_NetworkInterfaceAddress(&_pbszNetworkInterfaceAddress)
+	return _pbszNetworkInterfaceAddress, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TransferRate wraps the raw Get_TransferRate call.
-func (self IWdsTransportSession) Get_TransferRate(pulTransferRate *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TransferRate(pulTransferRate)))
+func (self IWdsTransportSession) Get_TransferRate() (uint32, error) {
+	var _pulTransferRate uint32
+	_hr := self.Raw.Get_TransferRate(&_pulTransferRate)
+	return _pulTransferRate, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MasterClientId wraps the raw Get_MasterClientId call.
-func (self IWdsTransportSession) Get_MasterClientId(pulMasterClientId *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MasterClientId(pulMasterClientId)))
+func (self IWdsTransportSession) Get_MasterClientId() (uint32, error) {
+	var _pulMasterClientId uint32
+	_hr := self.Raw.Get_MasterClientId(&_pulMasterClientId)
+	return _pulMasterClientId, win32.HRESULTError(int32(_hr))
 }
 
 // RetrieveClients wraps the raw RetrieveClients call.
-func (self IWdsTransportSession) RetrieveClients(ppWdsTransportClients **systemdeploymentservices.IWdsTransportCollection) error {
-	return win32.HRESULTError(int32(self.Raw.RetrieveClients(ppWdsTransportClients)))
+func (self IWdsTransportSession) RetrieveClients() (*systemdeploymentservices.IWdsTransportCollection, error) {
+	var _ppWdsTransportClients *systemdeploymentservices.IWdsTransportCollection
+	_hr := self.Raw.RetrieveClients(&_ppWdsTransportClients)
+	return _ppWdsTransportClients, win32.HRESULTError(int32(_hr))
 }
 
 // Terminate wraps the raw Terminate call.
@@ -810,18 +956,24 @@ func WrapIWdsTransportSetupManager(raw *systemdeploymentservices.IWdsTransportSe
 }
 
 // Get_Version wraps the raw Get_Version call.
-func (self IWdsTransportSetupManager) Get_Version(pullVersion *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Version(pullVersion)))
+func (self IWdsTransportSetupManager) Get_Version() (uint64, error) {
+	var _pullVersion uint64
+	_hr := self.Raw.Get_Version(&_pullVersion)
+	return _pullVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InstalledFeatures wraps the raw Get_InstalledFeatures call.
-func (self IWdsTransportSetupManager) Get_InstalledFeatures(pulInstalledFeatures *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InstalledFeatures(pulInstalledFeatures)))
+func (self IWdsTransportSetupManager) Get_InstalledFeatures() (uint32, error) {
+	var _pulInstalledFeatures uint32
+	_hr := self.Raw.Get_InstalledFeatures(&_pulInstalledFeatures)
+	return _pulInstalledFeatures, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Protocols wraps the raw Get_Protocols call.
-func (self IWdsTransportSetupManager) Get_Protocols(pulProtocols *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Protocols(pulProtocols)))
+func (self IWdsTransportSetupManager) Get_Protocols() (uint32, error) {
+	var _pulProtocols uint32
+	_hr := self.Raw.Get_Protocols(&_pulProtocols)
+	return _pulProtocols, win32.HRESULTError(int32(_hr))
 }
 
 // RegisterContentProvider wraps the raw RegisterContentProvider call.
@@ -846,13 +998,17 @@ func WrapIWdsTransportSetupManager2(raw *systemdeploymentservices.IWdsTransportS
 }
 
 // Get_TftpCapabilities wraps the raw Get_TftpCapabilities call.
-func (self IWdsTransportSetupManager2) Get_TftpCapabilities(pulTftpCapabilities *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TftpCapabilities(pulTftpCapabilities)))
+func (self IWdsTransportSetupManager2) Get_TftpCapabilities() (uint32, error) {
+	var _pulTftpCapabilities uint32
+	_hr := self.Raw.Get_TftpCapabilities(&_pulTftpCapabilities)
+	return _pulTftpCapabilities, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ContentProviders wraps the raw Get_ContentProviders call.
-func (self IWdsTransportSetupManager2) Get_ContentProviders(ppProviderCollection **systemdeploymentservices.IWdsTransportCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ContentProviders(ppProviderCollection)))
+func (self IWdsTransportSetupManager2) Get_ContentProviders() (*systemdeploymentservices.IWdsTransportCollection, error) {
+	var _ppProviderCollection *systemdeploymentservices.IWdsTransportCollection
+	_hr := self.Raw.Get_ContentProviders(&_ppProviderCollection)
+	return _ppProviderCollection, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportTftpClient is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportTftpClient with error-returning methods.
@@ -867,38 +1023,52 @@ func WrapIWdsTransportTftpClient(raw *systemdeploymentservices.IWdsTransportTftp
 }
 
 // Get_FileName wraps the raw Get_FileName call.
-func (self IWdsTransportTftpClient) Get_FileName(pbszFileName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FileName(pbszFileName)))
+func (self IWdsTransportTftpClient) Get_FileName() (foundation.BSTR, error) {
+	var _pbszFileName foundation.BSTR
+	_hr := self.Raw.Get_FileName(&_pbszFileName)
+	return _pbszFileName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IpAddress wraps the raw Get_IpAddress call.
-func (self IWdsTransportTftpClient) Get_IpAddress(pbszIpAddress *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IpAddress(pbszIpAddress)))
+func (self IWdsTransportTftpClient) Get_IpAddress() (foundation.BSTR, error) {
+	var _pbszIpAddress foundation.BSTR
+	_hr := self.Raw.Get_IpAddress(&_pbszIpAddress)
+	return _pbszIpAddress, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Timeout wraps the raw Get_Timeout call.
-func (self IWdsTransportTftpClient) Get_Timeout(pulTimeout *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Timeout(pulTimeout)))
+func (self IWdsTransportTftpClient) Get_Timeout() (uint32, error) {
+	var _pulTimeout uint32
+	_hr := self.Raw.Get_Timeout(&_pulTimeout)
+	return _pulTimeout, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentFileOffset wraps the raw Get_CurrentFileOffset call.
-func (self IWdsTransportTftpClient) Get_CurrentFileOffset(pul64CurrentOffset *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentFileOffset(pul64CurrentOffset)))
+func (self IWdsTransportTftpClient) Get_CurrentFileOffset() (uint64, error) {
+	var _pul64CurrentOffset uint64
+	_hr := self.Raw.Get_CurrentFileOffset(&_pul64CurrentOffset)
+	return _pul64CurrentOffset, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FileSize wraps the raw Get_FileSize call.
-func (self IWdsTransportTftpClient) Get_FileSize(pul64FileSize *uint64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FileSize(pul64FileSize)))
+func (self IWdsTransportTftpClient) Get_FileSize() (uint64, error) {
+	var _pul64FileSize uint64
+	_hr := self.Raw.Get_FileSize(&_pul64FileSize)
+	return _pul64FileSize, win32.HRESULTError(int32(_hr))
 }
 
 // Get_BlockSize wraps the raw Get_BlockSize call.
-func (self IWdsTransportTftpClient) Get_BlockSize(pulBlockSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_BlockSize(pulBlockSize)))
+func (self IWdsTransportTftpClient) Get_BlockSize() (uint32, error) {
+	var _pulBlockSize uint32
+	_hr := self.Raw.Get_BlockSize(&_pulBlockSize)
+	return _pulBlockSize, win32.HRESULTError(int32(_hr))
 }
 
 // Get_WindowSize wraps the raw Get_WindowSize call.
-func (self IWdsTransportTftpClient) Get_WindowSize(pulWindowSize *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WindowSize(pulWindowSize)))
+func (self IWdsTransportTftpClient) Get_WindowSize() (uint32, error) {
+	var _pulWindowSize uint32
+	_hr := self.Raw.Get_WindowSize(&_pulWindowSize)
+	return _pulWindowSize, win32.HRESULTError(int32(_hr))
 }
 
 // IWdsTransportTftpManager is an idiomatic wrapper over the raw COM interface System.DeploymentServices.IWdsTransportTftpManager with error-returning methods.
@@ -913,6 +1083,8 @@ func WrapIWdsTransportTftpManager(raw *systemdeploymentservices.IWdsTransportTft
 }
 
 // RetrieveTftpClients wraps the raw RetrieveTftpClients call.
-func (self IWdsTransportTftpManager) RetrieveTftpClients(ppWdsTransportTftpClients **systemdeploymentservices.IWdsTransportCollection) error {
-	return win32.HRESULTError(int32(self.Raw.RetrieveTftpClients(ppWdsTransportTftpClients)))
+func (self IWdsTransportTftpManager) RetrieveTftpClients() (*systemdeploymentservices.IWdsTransportCollection, error) {
+	var _ppWdsTransportTftpClients *systemdeploymentservices.IWdsTransportCollection
+	_hr := self.Raw.RetrieveTftpClients(&_ppWdsTransportTftpClients)
+	return _ppWdsTransportTftpClients, win32.HRESULTError(int32(_hr))
 }

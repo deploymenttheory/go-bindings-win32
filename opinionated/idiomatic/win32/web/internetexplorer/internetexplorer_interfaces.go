@@ -444,18 +444,24 @@ func WrapIHTMLPersistData(raw *webinternetexplorer.IHTMLPersistData) IHTMLPersis
 }
 
 // Save wraps the raw Save call.
-func (self IHTMLPersistData) Save(pUnk *systemcom.IUnknown, lType int32, fContinueBroacast *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Save(pUnk, lType, fContinueBroacast)))
+func (self IHTMLPersistData) Save(pUnk *systemcom.IUnknown, lType int32) (foundation.VARIANT_BOOL, error) {
+	var _fContinueBroacast foundation.VARIANT_BOOL
+	_hr := self.Raw.Save(pUnk, lType, &_fContinueBroacast)
+	return _fContinueBroacast, win32.HRESULTError(int32(_hr))
 }
 
 // Load wraps the raw Load call.
-func (self IHTMLPersistData) Load(pUnk *systemcom.IUnknown, lType int32, fDoDefault *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Load(pUnk, lType, fDoDefault)))
+func (self IHTMLPersistData) Load(pUnk *systemcom.IUnknown, lType int32) (foundation.VARIANT_BOOL, error) {
+	var _fDoDefault foundation.VARIANT_BOOL
+	_hr := self.Raw.Load(pUnk, lType, &_fDoDefault)
+	return _fDoDefault, win32.HRESULTError(int32(_hr))
 }
 
 // QueryType wraps the raw QueryType call.
-func (self IHTMLPersistData) QueryType(lType int32, pfSupportsType *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.QueryType(lType, pfSupportsType)))
+func (self IHTMLPersistData) QueryType(lType int32) (foundation.VARIANT_BOOL, error) {
+	var _pfSupportsType foundation.VARIANT_BOOL
+	_hr := self.Raw.QueryType(lType, &_pfSupportsType)
+	return _pfSupportsType, win32.HRESULTError(int32(_hr))
 }
 
 // IHTMLPersistDataOM is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IHTMLPersistDataOM with error-returning methods.
@@ -470,13 +476,17 @@ func WrapIHTMLPersistDataOM(raw *webinternetexplorer.IHTMLPersistDataOM) IHTMLPe
 }
 
 // Get_XMLDocument wraps the raw Get_XMLDocument call.
-func (self IHTMLPersistDataOM) Get_XMLDocument(p **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_XMLDocument(p)))
+func (self IHTMLPersistDataOM) Get_XMLDocument() (*systemcom.IDispatch, error) {
+	var _p *systemcom.IDispatch
+	_hr := self.Raw.Get_XMLDocument(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // GetAttribute wraps the raw GetAttribute call.
-func (self IHTMLPersistDataOM) GetAttribute(name foundation.BSTR, pValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttribute(name, pValue)))
+func (self IHTMLPersistDataOM) GetAttribute(name foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pValue systemvariant.VARIANT
+	_hr := self.Raw.GetAttribute(name, &_pValue)
+	return _pValue, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttribute wraps the raw RemoveAttribute call.
@@ -496,8 +506,10 @@ func WrapIHTMLUserDataOM(raw *webinternetexplorer.IHTMLUserDataOM) IHTMLUserData
 }
 
 // Get_XMLDocument wraps the raw Get_XMLDocument call.
-func (self IHTMLUserDataOM) Get_XMLDocument(p **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_XMLDocument(p)))
+func (self IHTMLUserDataOM) Get_XMLDocument() (*systemcom.IDispatch, error) {
+	var _p *systemcom.IDispatch
+	_hr := self.Raw.Get_XMLDocument(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Save wraps the raw Save call.
@@ -511,8 +523,10 @@ func (self IHTMLUserDataOM) Load(strName foundation.BSTR) error {
 }
 
 // GetAttribute wraps the raw GetAttribute call.
-func (self IHTMLUserDataOM) GetAttribute(name foundation.BSTR, pValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetAttribute(name, pValue)))
+func (self IHTMLUserDataOM) GetAttribute(name foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pValue systemvariant.VARIANT
+	_hr := self.Raw.GetAttribute(name, &_pValue)
+	return _pValue, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveAttribute wraps the raw RemoveAttribute call.
@@ -526,8 +540,10 @@ func (self IHTMLUserDataOM) Put_expires(bstr foundation.BSTR) error {
 }
 
 // Get_expires wraps the raw Get_expires call.
-func (self IHTMLUserDataOM) Get_expires(pbstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_expires(pbstr)))
+func (self IHTMLUserDataOM) Get_expires() (foundation.BSTR, error) {
+	var _pbstr foundation.BSTR
+	_hr := self.Raw.Get_expires(&_pbstr)
+	return _pbstr, win32.HRESULTError(int32(_hr))
 }
 
 // IHeaderFooter is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IHeaderFooter with error-returning methods.
@@ -542,13 +558,17 @@ func WrapIHeaderFooter(raw *webinternetexplorer.IHeaderFooter) IHeaderFooter {
 }
 
 // Get_htmlHead wraps the raw Get_htmlHead call.
-func (self IHeaderFooter) Get_htmlHead(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_htmlHead(p)))
+func (self IHeaderFooter) Get_htmlHead() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_htmlHead(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Get_htmlFoot wraps the raw Get_htmlFoot call.
-func (self IHeaderFooter) Get_htmlFoot(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_htmlFoot(p)))
+func (self IHeaderFooter) Get_htmlFoot() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_htmlFoot(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_textHead wraps the raw Put_textHead call.
@@ -557,8 +577,10 @@ func (self IHeaderFooter) Put_textHead(v foundation.BSTR) error {
 }
 
 // Get_textHead wraps the raw Get_textHead call.
-func (self IHeaderFooter) Get_textHead(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_textHead(p)))
+func (self IHeaderFooter) Get_textHead() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_textHead(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_textFoot wraps the raw Put_textFoot call.
@@ -567,8 +589,10 @@ func (self IHeaderFooter) Put_textFoot(v foundation.BSTR) error {
 }
 
 // Get_textFoot wraps the raw Get_textFoot call.
-func (self IHeaderFooter) Get_textFoot(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_textFoot(p)))
+func (self IHeaderFooter) Get_textFoot() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_textFoot(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_page wraps the raw Put_page call.
@@ -577,8 +601,10 @@ func (self IHeaderFooter) Put_page(v uint32) error {
 }
 
 // Get_page wraps the raw Get_page call.
-func (self IHeaderFooter) Get_page(p *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_page(p)))
+func (self IHeaderFooter) Get_page() (uint32, error) {
+	var _p uint32
+	_hr := self.Raw.Get_page(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_pageTotal wraps the raw Put_pageTotal call.
@@ -587,8 +613,10 @@ func (self IHeaderFooter) Put_pageTotal(v uint32) error {
 }
 
 // Get_pageTotal wraps the raw Get_pageTotal call.
-func (self IHeaderFooter) Get_pageTotal(p *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_pageTotal(p)))
+func (self IHeaderFooter) Get_pageTotal() (uint32, error) {
+	var _p uint32
+	_hr := self.Raw.Get_pageTotal(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_URL wraps the raw Put_URL call.
@@ -597,8 +625,10 @@ func (self IHeaderFooter) Put_URL(v foundation.BSTR) error {
 }
 
 // Get_URL wraps the raw Get_URL call.
-func (self IHeaderFooter) Get_URL(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_URL(p)))
+func (self IHeaderFooter) Get_URL() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_URL(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_title wraps the raw Put_title call.
@@ -607,8 +637,10 @@ func (self IHeaderFooter) Put_title(v foundation.BSTR) error {
 }
 
 // Get_title wraps the raw Get_title call.
-func (self IHeaderFooter) Get_title(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_title(p)))
+func (self IHeaderFooter) Get_title() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_title(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_dateShort wraps the raw Put_dateShort call.
@@ -617,8 +649,10 @@ func (self IHeaderFooter) Put_dateShort(v foundation.BSTR) error {
 }
 
 // Get_dateShort wraps the raw Get_dateShort call.
-func (self IHeaderFooter) Get_dateShort(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_dateShort(p)))
+func (self IHeaderFooter) Get_dateShort() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_dateShort(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_dateLong wraps the raw Put_dateLong call.
@@ -627,8 +661,10 @@ func (self IHeaderFooter) Put_dateLong(v foundation.BSTR) error {
 }
 
 // Get_dateLong wraps the raw Get_dateLong call.
-func (self IHeaderFooter) Get_dateLong(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_dateLong(p)))
+func (self IHeaderFooter) Get_dateLong() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_dateLong(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_timeShort wraps the raw Put_timeShort call.
@@ -637,8 +673,10 @@ func (self IHeaderFooter) Put_timeShort(v foundation.BSTR) error {
 }
 
 // Get_timeShort wraps the raw Get_timeShort call.
-func (self IHeaderFooter) Get_timeShort(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_timeShort(p)))
+func (self IHeaderFooter) Get_timeShort() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_timeShort(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_timeLong wraps the raw Put_timeLong call.
@@ -647,8 +685,10 @@ func (self IHeaderFooter) Put_timeLong(v foundation.BSTR) error {
 }
 
 // Get_timeLong wraps the raw Get_timeLong call.
-func (self IHeaderFooter) Get_timeLong(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_timeLong(p)))
+func (self IHeaderFooter) Get_timeLong() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_timeLong(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // IHeaderFooter2 is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IHeaderFooter2 with error-returning methods.
@@ -668,8 +708,10 @@ func (self IHeaderFooter2) Put_font(v foundation.BSTR) error {
 }
 
 // Get_font wraps the raw Get_font call.
-func (self IHeaderFooter2) Get_font(p *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_font(p)))
+func (self IHeaderFooter2) Get_font() (foundation.BSTR, error) {
+	var _p foundation.BSTR
+	_hr := self.Raw.Get_font(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // IHomePage is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IHomePage with error-returning methods.
@@ -694,8 +736,10 @@ func (self IHomePage) SetHomePage(bstrURL foundation.BSTR) error {
 }
 
 // IsHomePage wraps the raw IsHomePage call.
-func (self IHomePage) IsHomePage(bstrURL foundation.BSTR, p *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsHomePage(bstrURL, p)))
+func (self IHomePage) IsHomePage(bstrURL foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _p foundation.VARIANT_BOOL
+	_hr := self.Raw.IsHomePage(bstrURL, &_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // IHomePageSetting is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IHomePageSetting with error-returning methods.
@@ -867,8 +911,10 @@ func WrapIIntelliForms(raw *webinternetexplorer.IIntelliForms) IIntelliForms {
 }
 
 // Get_enabled wraps the raw Get_enabled call.
-func (self IIntelliForms) Get_enabled(pVal *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_enabled(pVal)))
+func (self IIntelliForms) Get_enabled() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_enabled(&_pVal)
+	return _pVal, win32.HRESULTError(int32(_hr))
 }
 
 // Put_enabled wraps the raw Put_enabled call.
@@ -926,13 +972,17 @@ func (self ILayoutRect) Put_nextRect(bstrElementId foundation.BSTR) error {
 }
 
 // Get_nextRect wraps the raw Get_nextRect call.
-func (self ILayoutRect) Get_nextRect(pbstrElementId *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_nextRect(pbstrElementId)))
+func (self ILayoutRect) Get_nextRect() (foundation.BSTR, error) {
+	var _pbstrElementId foundation.BSTR
+	_hr := self.Raw.Get_nextRect(&_pbstrElementId)
+	return _pbstrElementId, win32.HRESULTError(int32(_hr))
 }
 
 // Get_contentSrc wraps the raw Get_contentSrc call.
-func (self ILayoutRect) Get_contentSrc(pvarContentSrc *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_contentSrc(pvarContentSrc)))
+func (self ILayoutRect) Get_contentSrc() (systemvariant.VARIANT, error) {
+	var _pvarContentSrc systemvariant.VARIANT
+	_hr := self.Raw.Get_contentSrc(&_pvarContentSrc)
+	return _pvarContentSrc, win32.HRESULTError(int32(_hr))
 }
 
 // Put_honorPageBreaks wraps the raw Put_honorPageBreaks call.
@@ -941,8 +991,10 @@ func (self ILayoutRect) Put_honorPageBreaks(v foundation.VARIANT_BOOL) error {
 }
 
 // Get_honorPageBreaks wraps the raw Get_honorPageBreaks call.
-func (self ILayoutRect) Get_honorPageBreaks(p *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_honorPageBreaks(p)))
+func (self ILayoutRect) Get_honorPageBreaks() (foundation.VARIANT_BOOL, error) {
+	var _p foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_honorPageBreaks(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_honorPageRules wraps the raw Put_honorPageRules call.
@@ -951,8 +1003,10 @@ func (self ILayoutRect) Put_honorPageRules(v foundation.VARIANT_BOOL) error {
 }
 
 // Get_honorPageRules wraps the raw Get_honorPageRules call.
-func (self ILayoutRect) Get_honorPageRules(p *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_honorPageRules(p)))
+func (self ILayoutRect) Get_honorPageRules() (foundation.VARIANT_BOOL, error) {
+	var _p foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_honorPageRules(&_p)
+	return _p, win32.HRESULTError(int32(_hr))
 }
 
 // Put_nextRectElement wraps the raw Put_nextRectElement call.
@@ -961,13 +1015,17 @@ func (self ILayoutRect) Put_nextRectElement(pElem *systemcom.IDispatch) error {
 }
 
 // Get_nextRectElement wraps the raw Get_nextRectElement call.
-func (self ILayoutRect) Get_nextRectElement(ppElem **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_nextRectElement(ppElem)))
+func (self ILayoutRect) Get_nextRectElement() (*systemcom.IDispatch, error) {
+	var _ppElem *systemcom.IDispatch
+	_hr := self.Raw.Get_nextRectElement(&_ppElem)
+	return _ppElem, win32.HRESULTError(int32(_hr))
 }
 
 // Get_contentDocument wraps the raw Get_contentDocument call.
-func (self ILayoutRect) Get_contentDocument(pDoc **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_contentDocument(pDoc)))
+func (self ILayoutRect) Get_contentDocument() (*systemcom.IDispatch, error) {
+	var _pDoc *systemcom.IDispatch
+	_hr := self.Raw.Get_contentDocument(&_pDoc)
+	return _pDoc, win32.HRESULTError(int32(_hr))
 }
 
 // IMapMIMEToCLSID is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.IMapMIMEToCLSID with error-returning methods.
@@ -2113,8 +2171,10 @@ func WrapIWebBrowserEventsService(raw *webinternetexplorer.IWebBrowserEventsServ
 }
 
 // FireBeforeNavigate2Event wraps the raw FireBeforeNavigate2Event call.
-func (self IWebBrowserEventsService) FireBeforeNavigate2Event(pfCancel *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.FireBeforeNavigate2Event(pfCancel)))
+func (self IWebBrowserEventsService) FireBeforeNavigate2Event() (foundation.VARIANT_BOOL, error) {
+	var _pfCancel foundation.VARIANT_BOOL
+	_hr := self.Raw.FireBeforeNavigate2Event(&_pfCancel)
+	return _pfCancel, win32.HRESULTError(int32(_hr))
 }
 
 // FireNavigateComplete2Event wraps the raw FireNavigateComplete2Event call.
@@ -2149,8 +2209,10 @@ func WrapIWebBrowserEventsUrlService(raw *webinternetexplorer.IWebBrowserEventsU
 }
 
 // GetUrlForEvents wraps the raw GetUrlForEvents call.
-func (self IWebBrowserEventsUrlService) GetUrlForEvents(pUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetUrlForEvents(pUrl)))
+func (self IWebBrowserEventsUrlService) GetUrlForEvents() (foundation.BSTR, error) {
+	var _pUrl foundation.BSTR
+	_hr := self.Raw.GetUrlForEvents(&_pUrl)
+	return _pUrl, win32.HRESULTError(int32(_hr))
 }
 
 // Iwfolders is an idiomatic wrapper over the raw COM interface Web.InternetExplorer.Iwfolders with error-returning methods.
@@ -2165,13 +2227,17 @@ func WrapIwfolders(raw *webinternetexplorer.Iwfolders) Iwfolders {
 }
 
 // Navigate wraps the raw Navigate call.
-func (self Iwfolders) Navigate(bstrUrl foundation.BSTR, pbstrRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Navigate(bstrUrl, pbstrRetVal)))
+func (self Iwfolders) Navigate(bstrUrl foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrRetVal foundation.BSTR
+	_hr := self.Raw.Navigate(bstrUrl, &_pbstrRetVal)
+	return _pbstrRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // NavigateFrame wraps the raw NavigateFrame call.
-func (self Iwfolders) NavigateFrame(bstrUrl foundation.BSTR, bstrTargetFrame foundation.BSTR, pbstrRetVal *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.NavigateFrame(bstrUrl, bstrTargetFrame, pbstrRetVal)))
+func (self Iwfolders) NavigateFrame(bstrUrl foundation.BSTR, bstrTargetFrame foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrRetVal foundation.BSTR
+	_hr := self.Raw.NavigateFrame(bstrUrl, bstrTargetFrame, &_pbstrRetVal)
+	return _pbstrRetVal, win32.HRESULTError(int32(_hr))
 }
 
 // NavigateNoSite wraps the raw NavigateNoSite call.

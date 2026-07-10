@@ -28,39 +28,49 @@ func WrapIFunctionDiscovery(raw *devicesfunctiondiscovery.IFunctionDiscovery) IF
 }
 
 // GetInstanceCollection wraps the raw GetInstanceCollection call.
-func (self IFunctionDiscovery) GetInstanceCollection(pszCategory string, pszSubCategory string, fIncludeAllSubCategories bool, ppIFunctionInstanceCollection **devicesfunctiondiscovery.IFunctionInstanceCollection) error {
+func (self IFunctionDiscovery) GetInstanceCollection(pszCategory string, pszSubCategory string, fIncludeAllSubCategories bool) (*devicesfunctiondiscovery.IFunctionInstanceCollection, error) {
 	_pszCategory := win32.UTF16Ptr(pszCategory)
 	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
 	_fIncludeAllSubCategories := foundation.BOOL(win32.Bool32(fIncludeAllSubCategories))
-	return win32.HRESULTError(int32(self.Raw.GetInstanceCollection(foundation.PWSTR(_pszCategory), foundation.PWSTR(_pszSubCategory), _fIncludeAllSubCategories, ppIFunctionInstanceCollection)))
+	var _ppIFunctionInstanceCollection *devicesfunctiondiscovery.IFunctionInstanceCollection
+	_hr := self.Raw.GetInstanceCollection(foundation.PWSTR(_pszCategory), foundation.PWSTR(_pszSubCategory), _fIncludeAllSubCategories, &_ppIFunctionInstanceCollection)
+	return _ppIFunctionInstanceCollection, win32.HRESULTError(int32(_hr))
 }
 
 // GetInstance wraps the raw GetInstance call.
-func (self IFunctionDiscovery) GetInstance(pszFunctionInstanceIdentity string, ppIFunctionInstance **devicesfunctiondiscovery.IFunctionInstance) error {
+func (self IFunctionDiscovery) GetInstance(pszFunctionInstanceIdentity string) (*devicesfunctiondiscovery.IFunctionInstance, error) {
 	_pszFunctionInstanceIdentity := win32.UTF16Ptr(pszFunctionInstanceIdentity)
-	return win32.HRESULTError(int32(self.Raw.GetInstance(foundation.PWSTR(_pszFunctionInstanceIdentity), ppIFunctionInstance)))
+	var _ppIFunctionInstance *devicesfunctiondiscovery.IFunctionInstance
+	_hr := self.Raw.GetInstance(foundation.PWSTR(_pszFunctionInstanceIdentity), &_ppIFunctionInstance)
+	return _ppIFunctionInstance, win32.HRESULTError(int32(_hr))
 }
 
 // CreateInstanceCollectionQuery wraps the raw CreateInstanceCollectionQuery call.
-func (self IFunctionDiscovery) CreateInstanceCollectionQuery(pszCategory string, pszSubCategory string, fIncludeAllSubCategories bool, pIFunctionDiscoveryNotification *devicesfunctiondiscovery.IFunctionDiscoveryNotification, pfdqcQueryContext *uint64, ppIFunctionInstanceCollectionQuery **devicesfunctiondiscovery.IFunctionInstanceCollectionQuery) error {
+func (self IFunctionDiscovery) CreateInstanceCollectionQuery(pszCategory string, pszSubCategory string, fIncludeAllSubCategories bool, pIFunctionDiscoveryNotification *devicesfunctiondiscovery.IFunctionDiscoveryNotification, pfdqcQueryContext *uint64) (*devicesfunctiondiscovery.IFunctionInstanceCollectionQuery, error) {
 	_pszCategory := win32.UTF16Ptr(pszCategory)
 	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
 	_fIncludeAllSubCategories := foundation.BOOL(win32.Bool32(fIncludeAllSubCategories))
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceCollectionQuery(foundation.PWSTR(_pszCategory), foundation.PWSTR(_pszSubCategory), _fIncludeAllSubCategories, pIFunctionDiscoveryNotification, pfdqcQueryContext, ppIFunctionInstanceCollectionQuery)))
+	var _ppIFunctionInstanceCollectionQuery *devicesfunctiondiscovery.IFunctionInstanceCollectionQuery
+	_hr := self.Raw.CreateInstanceCollectionQuery(foundation.PWSTR(_pszCategory), foundation.PWSTR(_pszSubCategory), _fIncludeAllSubCategories, pIFunctionDiscoveryNotification, pfdqcQueryContext, &_ppIFunctionInstanceCollectionQuery)
+	return _ppIFunctionInstanceCollectionQuery, win32.HRESULTError(int32(_hr))
 }
 
 // CreateInstanceQuery wraps the raw CreateInstanceQuery call.
-func (self IFunctionDiscovery) CreateInstanceQuery(pszFunctionInstanceIdentity string, pIFunctionDiscoveryNotification *devicesfunctiondiscovery.IFunctionDiscoveryNotification, pfdqcQueryContext *uint64, ppIFunctionInstanceQuery **devicesfunctiondiscovery.IFunctionInstanceQuery) error {
+func (self IFunctionDiscovery) CreateInstanceQuery(pszFunctionInstanceIdentity string, pIFunctionDiscoveryNotification *devicesfunctiondiscovery.IFunctionDiscoveryNotification, pfdqcQueryContext *uint64) (*devicesfunctiondiscovery.IFunctionInstanceQuery, error) {
 	_pszFunctionInstanceIdentity := win32.UTF16Ptr(pszFunctionInstanceIdentity)
-	return win32.HRESULTError(int32(self.Raw.CreateInstanceQuery(foundation.PWSTR(_pszFunctionInstanceIdentity), pIFunctionDiscoveryNotification, pfdqcQueryContext, ppIFunctionInstanceQuery)))
+	var _ppIFunctionInstanceQuery *devicesfunctiondiscovery.IFunctionInstanceQuery
+	_hr := self.Raw.CreateInstanceQuery(foundation.PWSTR(_pszFunctionInstanceIdentity), pIFunctionDiscoveryNotification, pfdqcQueryContext, &_ppIFunctionInstanceQuery)
+	return _ppIFunctionInstanceQuery, win32.HRESULTError(int32(_hr))
 }
 
 // AddInstance wraps the raw AddInstance call.
-func (self IFunctionDiscovery) AddInstance(enumSystemVisibility devicesfunctiondiscovery.SystemVisibilityFlags, pszCategory string, pszSubCategory string, pszCategoryIdentity string, ppIFunctionInstance **devicesfunctiondiscovery.IFunctionInstance) error {
+func (self IFunctionDiscovery) AddInstance(enumSystemVisibility devicesfunctiondiscovery.SystemVisibilityFlags, pszCategory string, pszSubCategory string, pszCategoryIdentity string) (*devicesfunctiondiscovery.IFunctionInstance, error) {
 	_pszCategory := win32.UTF16Ptr(pszCategory)
 	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
 	_pszCategoryIdentity := win32.UTF16Ptr(pszCategoryIdentity)
-	return win32.HRESULTError(int32(self.Raw.AddInstance(enumSystemVisibility, foundation.PWSTR(_pszCategory), foundation.PWSTR(_pszSubCategory), foundation.PWSTR(_pszCategoryIdentity), ppIFunctionInstance)))
+	var _ppIFunctionInstance *devicesfunctiondiscovery.IFunctionInstance
+	_hr := self.Raw.AddInstance(enumSystemVisibility, foundation.PWSTR(_pszCategory), foundation.PWSTR(_pszSubCategory), foundation.PWSTR(_pszCategoryIdentity), &_ppIFunctionInstance)
+	return _ppIFunctionInstance, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveInstance wraps the raw RemoveInstance call.
@@ -237,18 +247,24 @@ func WrapIFunctionInstance(raw *devicesfunctiondiscovery.IFunctionInstance) IFun
 }
 
 // GetID wraps the raw GetID call.
-func (self IFunctionInstance) GetID(ppszCoMemIdentity **uint16) error {
-	return win32.HRESULTError(int32(self.Raw.GetID(ppszCoMemIdentity)))
+func (self IFunctionInstance) GetID() (*uint16, error) {
+	var _ppszCoMemIdentity *uint16
+	_hr := self.Raw.GetID(&_ppszCoMemIdentity)
+	return _ppszCoMemIdentity, win32.HRESULTError(int32(_hr))
 }
 
 // GetProviderInstanceID wraps the raw GetProviderInstanceID call.
-func (self IFunctionInstance) GetProviderInstanceID(ppszCoMemProviderInstanceIdentity **uint16) error {
-	return win32.HRESULTError(int32(self.Raw.GetProviderInstanceID(ppszCoMemProviderInstanceIdentity)))
+func (self IFunctionInstance) GetProviderInstanceID() (*uint16, error) {
+	var _ppszCoMemProviderInstanceIdentity *uint16
+	_hr := self.Raw.GetProviderInstanceID(&_ppszCoMemProviderInstanceIdentity)
+	return _ppszCoMemProviderInstanceIdentity, win32.HRESULTError(int32(_hr))
 }
 
 // OpenPropertyStore wraps the raw OpenPropertyStore call.
-func (self IFunctionInstance) OpenPropertyStore(dwStgAccess systemcom.STGM, ppIPropertyStore **uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.OpenPropertyStore(dwStgAccess, ppIPropertyStore)))
+func (self IFunctionInstance) OpenPropertyStore(dwStgAccess systemcom.STGM) (*uishellpropertiessystem.IPropertyStore, error) {
+	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
+	_hr := self.Raw.OpenPropertyStore(dwStgAccess, &_ppIPropertyStore)
+	return _ppIPropertyStore, win32.HRESULTError(int32(_hr))
 }
 
 // GetCategory wraps the raw GetCategory call.
@@ -268,19 +284,25 @@ func WrapIFunctionInstanceCollection(raw *devicesfunctiondiscovery.IFunctionInst
 }
 
 // GetCount wraps the raw GetCount call.
-func (self IFunctionInstanceCollection) GetCount(pdwCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetCount(pdwCount)))
+func (self IFunctionInstanceCollection) GetCount() (uint32, error) {
+	var _pdwCount uint32
+	_hr := self.Raw.GetCount(&_pdwCount)
+	return _pdwCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get wraps the raw Get call.
-func (self IFunctionInstanceCollection) Get(pszInstanceIdentity string, pdwIndex *uint32, ppIFunctionInstance **devicesfunctiondiscovery.IFunctionInstance) error {
+func (self IFunctionInstanceCollection) Get(pszInstanceIdentity string, pdwIndex *uint32) (*devicesfunctiondiscovery.IFunctionInstance, error) {
 	_pszInstanceIdentity := win32.UTF16Ptr(pszInstanceIdentity)
-	return win32.HRESULTError(int32(self.Raw.Get(foundation.PWSTR(_pszInstanceIdentity), pdwIndex, ppIFunctionInstance)))
+	var _ppIFunctionInstance *devicesfunctiondiscovery.IFunctionInstance
+	_hr := self.Raw.Get(foundation.PWSTR(_pszInstanceIdentity), pdwIndex, &_ppIFunctionInstance)
+	return _ppIFunctionInstance, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IFunctionInstanceCollection) Item(dwIndex uint32, ppIFunctionInstance **devicesfunctiondiscovery.IFunctionInstance) error {
-	return win32.HRESULTError(int32(self.Raw.Item(dwIndex, ppIFunctionInstance)))
+func (self IFunctionInstanceCollection) Item(dwIndex uint32) (*devicesfunctiondiscovery.IFunctionInstance, error) {
+	var _ppIFunctionInstance *devicesfunctiondiscovery.IFunctionInstance
+	_hr := self.Raw.Item(dwIndex, &_ppIFunctionInstance)
+	return _ppIFunctionInstance, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -289,8 +311,10 @@ func (self IFunctionInstanceCollection) Add(pIFunctionInstance *devicesfunctiond
 }
 
 // Remove wraps the raw Remove call.
-func (self IFunctionInstanceCollection) Remove(dwIndex uint32, ppIFunctionInstance **devicesfunctiondiscovery.IFunctionInstance) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(dwIndex, ppIFunctionInstance)))
+func (self IFunctionInstanceCollection) Remove(dwIndex uint32) (*devicesfunctiondiscovery.IFunctionInstance, error) {
+	var _ppIFunctionInstance *devicesfunctiondiscovery.IFunctionInstance
+	_hr := self.Raw.Remove(dwIndex, &_ppIFunctionInstance)
+	return _ppIFunctionInstance, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.
@@ -343,8 +367,10 @@ func WrapIFunctionInstanceQuery(raw *devicesfunctiondiscovery.IFunctionInstanceQ
 }
 
 // Execute wraps the raw Execute call.
-func (self IFunctionInstanceQuery) Execute(ppIFunctionInstance **devicesfunctiondiscovery.IFunctionInstance) error {
-	return win32.HRESULTError(int32(self.Raw.Execute(ppIFunctionInstance)))
+func (self IFunctionInstanceQuery) Execute() (*devicesfunctiondiscovery.IFunctionInstance, error) {
+	var _ppIFunctionInstance *devicesfunctiondiscovery.IFunctionInstance
+	_hr := self.Raw.Execute(&_ppIFunctionInstance)
+	return _ppIFunctionInstance, win32.HRESULTError(int32(_hr))
 }
 
 // IPNPXAssociation is an idiomatic wrapper over the raw COM interface Devices.FunctionDiscovery.IPNPXAssociation with error-returning methods.
@@ -417,19 +443,25 @@ func WrapIPropertyStoreCollection(raw *devicesfunctiondiscovery.IPropertyStoreCo
 }
 
 // GetCount wraps the raw GetCount call.
-func (self IPropertyStoreCollection) GetCount(pdwCount *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetCount(pdwCount)))
+func (self IPropertyStoreCollection) GetCount() (uint32, error) {
+	var _pdwCount uint32
+	_hr := self.Raw.GetCount(&_pdwCount)
+	return _pdwCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get wraps the raw Get call.
-func (self IPropertyStoreCollection) Get(pszInstanceIdentity string, pdwIndex *uint32, ppIPropertyStore **uishellpropertiessystem.IPropertyStore) error {
+func (self IPropertyStoreCollection) Get(pszInstanceIdentity string, pdwIndex *uint32) (*uishellpropertiessystem.IPropertyStore, error) {
 	_pszInstanceIdentity := win32.UTF16Ptr(pszInstanceIdentity)
-	return win32.HRESULTError(int32(self.Raw.Get(foundation.PWSTR(_pszInstanceIdentity), pdwIndex, ppIPropertyStore)))
+	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
+	_hr := self.Raw.Get(foundation.PWSTR(_pszInstanceIdentity), pdwIndex, &_ppIPropertyStore)
+	return _ppIPropertyStore, win32.HRESULTError(int32(_hr))
 }
 
 // Item wraps the raw Item call.
-func (self IPropertyStoreCollection) Item(dwIndex uint32, ppIPropertyStore **uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.Item(dwIndex, ppIPropertyStore)))
+func (self IPropertyStoreCollection) Item(dwIndex uint32) (*uishellpropertiessystem.IPropertyStore, error) {
+	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
+	_hr := self.Raw.Item(dwIndex, &_ppIPropertyStore)
+	return _ppIPropertyStore, win32.HRESULTError(int32(_hr))
 }
 
 // Add wraps the raw Add call.
@@ -438,8 +470,10 @@ func (self IPropertyStoreCollection) Add(pIPropertyStore *uishellpropertiessyste
 }
 
 // Remove wraps the raw Remove call.
-func (self IPropertyStoreCollection) Remove(dwIndex uint32, pIPropertyStore **uishellpropertiessystem.IPropertyStore) error {
-	return win32.HRESULTError(int32(self.Raw.Remove(dwIndex, pIPropertyStore)))
+func (self IPropertyStoreCollection) Remove(dwIndex uint32) (*uishellpropertiessystem.IPropertyStore, error) {
+	var _pIPropertyStore *uishellpropertiessystem.IPropertyStore
+	_hr := self.Raw.Remove(dwIndex, &_pIPropertyStore)
+	return _pIPropertyStore, win32.HRESULTError(int32(_hr))
 }
 
 // Delete wraps the raw Delete call.

@@ -64,13 +64,17 @@ func WrapDFConstraint(raw *uishell.DFConstraint) DFConstraint {
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self DFConstraint) Get_Name(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbs)))
+func (self DFConstraint) Get_Name() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self DFConstraint) Get_Value(pv *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(pv)))
+func (self DFConstraint) Get_Value() (systemvariant.VARIANT, error) {
+	var _pv systemvariant.VARIANT
+	_hr := self.Raw.Get_Value(&_pv)
+	return _pv, win32.HRESULTError(int32(_hr))
 }
 
 // DShellFolderViewEvents is an idiomatic wrapper over the raw COM interface UI.Shell.DShellFolderViewEvents with error-returning methods.
@@ -140,33 +144,45 @@ func WrapFolder(raw *uishell.Folder) Folder {
 }
 
 // Get_Title wraps the raw Get_Title call.
-func (self Folder) Get_Title(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Title(pbs)))
+func (self Folder) Get_Title() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Title(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self Folder) Get_Application(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(ppid)))
+func (self Folder) Get_Application() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Application(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self Folder) Get_Parent(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppid)))
+func (self Folder) Get_Parent() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ParentFolder wraps the raw Get_ParentFolder call.
-func (self Folder) Get_ParentFolder(ppsf **uishell.Folder) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ParentFolder(ppsf)))
+func (self Folder) Get_ParentFolder() (*uishell.Folder, error) {
+	var _ppsf *uishell.Folder
+	_hr := self.Raw.Get_ParentFolder(&_ppsf)
+	return _ppsf, win32.HRESULTError(int32(_hr))
 }
 
 // Items wraps the raw Items call.
-func (self Folder) Items(ppid **uishell.FolderItems) error {
-	return win32.HRESULTError(int32(self.Raw.Items(ppid)))
+func (self Folder) Items() (*uishell.FolderItems, error) {
+	var _ppid *uishell.FolderItems
+	_hr := self.Raw.Items(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // ParseName wraps the raw ParseName call.
-func (self Folder) ParseName(bName foundation.BSTR, ppid **uishell.FolderItem) error {
-	return win32.HRESULTError(int32(self.Raw.ParseName(bName, ppid)))
+func (self Folder) ParseName(bName foundation.BSTR) (*uishell.FolderItem, error) {
+	var _ppid *uishell.FolderItem
+	_hr := self.Raw.ParseName(bName, &_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Folder2 is an idiomatic wrapper over the raw COM interface UI.Shell.Folder2 with error-returning methods.
@@ -181,13 +197,17 @@ func WrapFolder2(raw *uishell.Folder2) Folder2 {
 }
 
 // Get_Self wraps the raw Get_Self call.
-func (self Folder2) Get_Self(ppfi **uishell.FolderItem) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Self(ppfi)))
+func (self Folder2) Get_Self() (*uishell.FolderItem, error) {
+	var _ppfi *uishell.FolderItem
+	_hr := self.Raw.Get_Self(&_ppfi)
+	return _ppfi, win32.HRESULTError(int32(_hr))
 }
 
 // Get_OfflineStatus wraps the raw Get_OfflineStatus call.
-func (self Folder2) Get_OfflineStatus(pul *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OfflineStatus(pul)))
+func (self Folder2) Get_OfflineStatus() (int32, error) {
+	var _pul int32
+	_hr := self.Raw.Get_OfflineStatus(&_pul)
+	return _pul, win32.HRESULTError(int32(_hr))
 }
 
 // Synchronize wraps the raw Synchronize call.
@@ -196,8 +216,10 @@ func (self Folder2) Synchronize() error {
 }
 
 // Get_HaveToShowWebViewBarricade wraps the raw Get_HaveToShowWebViewBarricade call.
-func (self Folder2) Get_HaveToShowWebViewBarricade(pbHaveToShowWebViewBarricade *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HaveToShowWebViewBarricade(pbHaveToShowWebViewBarricade)))
+func (self Folder2) Get_HaveToShowWebViewBarricade() (foundation.VARIANT_BOOL, error) {
+	var _pbHaveToShowWebViewBarricade foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_HaveToShowWebViewBarricade(&_pbHaveToShowWebViewBarricade)
+	return _pbHaveToShowWebViewBarricade, win32.HRESULTError(int32(_hr))
 }
 
 // DismissedWebViewBarricade wraps the raw DismissedWebViewBarricade call.
@@ -217,8 +239,10 @@ func WrapFolder3(raw *uishell.Folder3) Folder3 {
 }
 
 // Get_ShowWebViewBarricade wraps the raw Get_ShowWebViewBarricade call.
-func (self Folder3) Get_ShowWebViewBarricade(pbShowWebViewBarricade *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ShowWebViewBarricade(pbShowWebViewBarricade)))
+func (self Folder3) Get_ShowWebViewBarricade() (foundation.VARIANT_BOOL, error) {
+	var _pbShowWebViewBarricade foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ShowWebViewBarricade(&_pbShowWebViewBarricade)
+	return _pbShowWebViewBarricade, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ShowWebViewBarricade wraps the raw Put_ShowWebViewBarricade call.
@@ -238,18 +262,24 @@ func WrapFolderItem(raw *uishell.FolderItem) FolderItem {
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self FolderItem) Get_Application(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(ppid)))
+func (self FolderItem) Get_Application() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Application(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self FolderItem) Get_Parent(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppid)))
+func (self FolderItem) Get_Parent() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self FolderItem) Get_Name(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbs)))
+func (self FolderItem) Get_Name() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -258,58 +288,80 @@ func (self FolderItem) Put_Name(bs foundation.BSTR) error {
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self FolderItem) Get_Path(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(pbs)))
+func (self FolderItem) Get_Path() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Path(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Get_GetLink wraps the raw Get_GetLink call.
-func (self FolderItem) Get_GetLink(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GetLink(ppid)))
+func (self FolderItem) Get_GetLink() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_GetLink(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_GetFolder wraps the raw Get_GetFolder call.
-func (self FolderItem) Get_GetFolder(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GetFolder(ppid)))
+func (self FolderItem) Get_GetFolder() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_GetFolder(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsLink wraps the raw Get_IsLink call.
-func (self FolderItem) Get_IsLink(pb *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsLink(pb)))
+func (self FolderItem) Get_IsLink() (foundation.VARIANT_BOOL, error) {
+	var _pb foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsLink(&_pb)
+	return _pb, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsFolder wraps the raw Get_IsFolder call.
-func (self FolderItem) Get_IsFolder(pb *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsFolder(pb)))
+func (self FolderItem) Get_IsFolder() (foundation.VARIANT_BOOL, error) {
+	var _pb foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsFolder(&_pb)
+	return _pb, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsFileSystem wraps the raw Get_IsFileSystem call.
-func (self FolderItem) Get_IsFileSystem(pb *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsFileSystem(pb)))
+func (self FolderItem) Get_IsFileSystem() (foundation.VARIANT_BOOL, error) {
+	var _pb foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsFileSystem(&_pb)
+	return _pb, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsBrowsable wraps the raw Get_IsBrowsable call.
-func (self FolderItem) Get_IsBrowsable(pb *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsBrowsable(pb)))
+func (self FolderItem) Get_IsBrowsable() (foundation.VARIANT_BOOL, error) {
+	var _pb foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsBrowsable(&_pb)
+	return _pb, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ModifyDate wraps the raw Get_ModifyDate call.
-func (self FolderItem) Get_ModifyDate(pdt *float64) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ModifyDate(pdt)))
+func (self FolderItem) Get_ModifyDate() (float64, error) {
+	var _pdt float64
+	_hr := self.Raw.Get_ModifyDate(&_pdt)
+	return _pdt, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Size wraps the raw Get_Size call.
-func (self FolderItem) Get_Size(pul *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Size(pul)))
+func (self FolderItem) Get_Size() (int32, error) {
+	var _pul int32
+	_hr := self.Raw.Get_Size(&_pul)
+	return _pul, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self FolderItem) Get_Type(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(pbs)))
+func (self FolderItem) Get_Type() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Type(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Verbs wraps the raw Verbs call.
-func (self FolderItem) Verbs(ppfic **uishell.FolderItemVerbs) error {
-	return win32.HRESULTError(int32(self.Raw.Verbs(ppfic)))
+func (self FolderItem) Verbs() (*uishell.FolderItemVerbs, error) {
+	var _ppfic *uishell.FolderItemVerbs
+	_hr := self.Raw.Verbs(&_ppfic)
+	return _ppfic, win32.HRESULTError(int32(_hr))
 }
 
 // FolderItem2 is an idiomatic wrapper over the raw COM interface UI.Shell.FolderItem2 with error-returning methods.
@@ -324,8 +376,10 @@ func WrapFolderItem2(raw *uishell.FolderItem2) FolderItem2 {
 }
 
 // ExtendedProperty wraps the raw ExtendedProperty call.
-func (self FolderItem2) ExtendedProperty(bstrPropName foundation.BSTR, pvRet *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.ExtendedProperty(bstrPropName, pvRet)))
+func (self FolderItem2) ExtendedProperty(bstrPropName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pvRet systemvariant.VARIANT
+	_hr := self.Raw.ExtendedProperty(bstrPropName, &_pvRet)
+	return _pvRet, win32.HRESULTError(int32(_hr))
 }
 
 // FolderItemVerb is an idiomatic wrapper over the raw COM interface UI.Shell.FolderItemVerb with error-returning methods.
@@ -340,18 +394,24 @@ func WrapFolderItemVerb(raw *uishell.FolderItemVerb) FolderItemVerb {
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self FolderItemVerb) Get_Application(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(ppid)))
+func (self FolderItemVerb) Get_Application() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Application(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self FolderItemVerb) Get_Parent(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppid)))
+func (self FolderItemVerb) Get_Parent() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self FolderItemVerb) Get_Name(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbs)))
+func (self FolderItemVerb) Get_Name() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // DoIt wraps the raw DoIt call.
@@ -371,23 +431,31 @@ func WrapFolderItemVerbs(raw *uishell.FolderItemVerbs) FolderItemVerbs {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self FolderItemVerbs) Get_Count(plCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(plCount)))
+func (self FolderItemVerbs) Get_Count() (int32, error) {
+	var _plCount int32
+	_hr := self.Raw.Get_Count(&_plCount)
+	return _plCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self FolderItemVerbs) Get_Application(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(ppid)))
+func (self FolderItemVerbs) Get_Application() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Application(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self FolderItemVerbs) Get_Parent(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppid)))
+func (self FolderItemVerbs) Get_Parent() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // NewEnum wraps the raw NewEnum call.
-func (self FolderItemVerbs) NewEnum(ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.NewEnum(ppunk)))
+func (self FolderItemVerbs) NewEnum() (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.NewEnum(&_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // FolderItems is an idiomatic wrapper over the raw COM interface UI.Shell.FolderItems with error-returning methods.
@@ -402,23 +470,31 @@ func WrapFolderItems(raw *uishell.FolderItems) FolderItems {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self FolderItems) Get_Count(plCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(plCount)))
+func (self FolderItems) Get_Count() (int32, error) {
+	var _plCount int32
+	_hr := self.Raw.Get_Count(&_plCount)
+	return _plCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self FolderItems) Get_Application(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(ppid)))
+func (self FolderItems) Get_Application() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Application(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self FolderItems) Get_Parent(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppid)))
+func (self FolderItems) Get_Parent() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // NewEnum wraps the raw NewEnum call.
-func (self FolderItems) NewEnum(ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.NewEnum(ppunk)))
+func (self FolderItems) NewEnum() (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.NewEnum(&_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // FolderItems2 is an idiomatic wrapper over the raw COM interface UI.Shell.FolderItems2 with error-returning methods.
@@ -449,8 +525,10 @@ func (self FolderItems3) Filter(grfFlags int32, bstrFileSpec foundation.BSTR) er
 }
 
 // Get_Verbs wraps the raw Get_Verbs call.
-func (self FolderItems3) Get_Verbs(ppfic **uishell.FolderItemVerbs) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Verbs(ppfic)))
+func (self FolderItems3) Get_Verbs() (*uishell.FolderItemVerbs, error) {
+	var _ppfic *uishell.FolderItemVerbs
+	_hr := self.Raw.Get_Verbs(&_ppfic)
+	return _ppfic, win32.HRESULTError(int32(_hr))
 }
 
 // IACList is an idiomatic wrapper over the raw COM interface UI.Shell.IACList with error-returning methods.
@@ -5138,18 +5216,24 @@ func (self IFileSearchBand) SetSearchParameters(pbstrSearchID *foundation.BSTR, 
 }
 
 // Get_SearchID wraps the raw Get_SearchID call.
-func (self IFileSearchBand) Get_SearchID(pbstrSearchID *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SearchID(pbstrSearchID)))
+func (self IFileSearchBand) Get_SearchID() (foundation.BSTR, error) {
+	var _pbstrSearchID foundation.BSTR
+	_hr := self.Raw.Get_SearchID(&_pbstrSearchID)
+	return _pbstrSearchID, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Scope wraps the raw Get_Scope call.
-func (self IFileSearchBand) Get_Scope(pvarScope *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Scope(pvarScope)))
+func (self IFileSearchBand) Get_Scope() (systemvariant.VARIANT, error) {
+	var _pvarScope systemvariant.VARIANT
+	_hr := self.Raw.Get_Scope(&_pvarScope)
+	return _pvarScope, win32.HRESULTError(int32(_hr))
 }
 
 // Get_QueryFile wraps the raw Get_QueryFile call.
-func (self IFileSearchBand) Get_QueryFile(pvarFile *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_QueryFile(pvarFile)))
+func (self IFileSearchBand) Get_QueryFile() (systemvariant.VARIANT, error) {
+	var _pvarFile systemvariant.VARIANT
+	_hr := self.Raw.Get_QueryFile(&_pvarFile)
+	return _pvarFile, win32.HRESULTError(int32(_hr))
 }
 
 // IFileSyncMergeHandler is an idiomatic wrapper over the raw COM interface UI.Shell.IFileSyncMergeHandler with error-returning methods.
@@ -5164,10 +5248,12 @@ func WrapIFileSyncMergeHandler(raw *uishell.IFileSyncMergeHandler) IFileSyncMerg
 }
 
 // Merge wraps the raw Merge call.
-func (self IFileSyncMergeHandler) Merge(localFilePath string, serverFilePath string, updateStatus *uishell.MERGE_UPDATE_STATUS) error {
+func (self IFileSyncMergeHandler) Merge(localFilePath string, serverFilePath string) (uishell.MERGE_UPDATE_STATUS, error) {
 	_localFilePath := win32.UTF16Ptr(localFilePath)
 	_serverFilePath := win32.UTF16Ptr(serverFilePath)
-	return win32.HRESULTError(int32(self.Raw.Merge(foundation.PWSTR(_localFilePath), foundation.PWSTR(_serverFilePath), updateStatus)))
+	var _updateStatus uishell.MERGE_UPDATE_STATUS
+	_hr := self.Raw.Merge(foundation.PWSTR(_localFilePath), foundation.PWSTR(_serverFilePath), &_updateStatus)
+	return _updateStatus, win32.HRESULTError(int32(_hr))
 }
 
 // ShowResolveConflictUIAsync wraps the raw ShowResolveConflictUIAsync call.
@@ -7317,8 +7403,10 @@ func WrapINewWDEvents(raw *uishell.INewWDEvents) INewWDEvents {
 }
 
 // PassportAuthenticate wraps the raw PassportAuthenticate call.
-func (self INewWDEvents) PassportAuthenticate(bstrSignInUrl foundation.BSTR, pvfAuthenitcated *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.PassportAuthenticate(bstrSignInUrl, pvfAuthenitcated)))
+func (self INewWDEvents) PassportAuthenticate(bstrSignInUrl foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _pvfAuthenitcated foundation.VARIANT_BOOL
+	_hr := self.Raw.PassportAuthenticate(bstrSignInUrl, &_pvfAuthenitcated)
+	return _pvfAuthenitcated, win32.HRESULTError(int32(_hr))
 }
 
 // INewWindowManager is an idiomatic wrapper over the raw COM interface UI.Shell.INewWindowManager with error-returning methods.
@@ -8510,48 +8598,66 @@ func (self IScriptErrorList) RetreatError() error {
 }
 
 // CanAdvanceError wraps the raw CanAdvanceError call.
-func (self IScriptErrorList) CanAdvanceError(pfCanAdvance *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CanAdvanceError(pfCanAdvance)))
+func (self IScriptErrorList) CanAdvanceError() (foundation.BOOL, error) {
+	var _pfCanAdvance foundation.BOOL
+	_hr := self.Raw.CanAdvanceError(&_pfCanAdvance)
+	return _pfCanAdvance, win32.HRESULTError(int32(_hr))
 }
 
 // CanRetreatError wraps the raw CanRetreatError call.
-func (self IScriptErrorList) CanRetreatError(pfCanRetreat *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CanRetreatError(pfCanRetreat)))
+func (self IScriptErrorList) CanRetreatError() (foundation.BOOL, error) {
+	var _pfCanRetreat foundation.BOOL
+	_hr := self.Raw.CanRetreatError(&_pfCanRetreat)
+	return _pfCanRetreat, win32.HRESULTError(int32(_hr))
 }
 
 // GetErrorLine wraps the raw GetErrorLine call.
-func (self IScriptErrorList) GetErrorLine(plLine *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetErrorLine(plLine)))
+func (self IScriptErrorList) GetErrorLine() (int32, error) {
+	var _plLine int32
+	_hr := self.Raw.GetErrorLine(&_plLine)
+	return _plLine, win32.HRESULTError(int32(_hr))
 }
 
 // GetErrorChar wraps the raw GetErrorChar call.
-func (self IScriptErrorList) GetErrorChar(plChar *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetErrorChar(plChar)))
+func (self IScriptErrorList) GetErrorChar() (int32, error) {
+	var _plChar int32
+	_hr := self.Raw.GetErrorChar(&_plChar)
+	return _plChar, win32.HRESULTError(int32(_hr))
 }
 
 // GetErrorCode wraps the raw GetErrorCode call.
-func (self IScriptErrorList) GetErrorCode(plCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetErrorCode(plCode)))
+func (self IScriptErrorList) GetErrorCode() (int32, error) {
+	var _plCode int32
+	_hr := self.Raw.GetErrorCode(&_plCode)
+	return _plCode, win32.HRESULTError(int32(_hr))
 }
 
 // GetErrorMsg wraps the raw GetErrorMsg call.
-func (self IScriptErrorList) GetErrorMsg(pstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetErrorMsg(pstr)))
+func (self IScriptErrorList) GetErrorMsg() (foundation.BSTR, error) {
+	var _pstr foundation.BSTR
+	_hr := self.Raw.GetErrorMsg(&_pstr)
+	return _pstr, win32.HRESULTError(int32(_hr))
 }
 
 // GetErrorUrl wraps the raw GetErrorUrl call.
-func (self IScriptErrorList) GetErrorUrl(pstr *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetErrorUrl(pstr)))
+func (self IScriptErrorList) GetErrorUrl() (foundation.BSTR, error) {
+	var _pstr foundation.BSTR
+	_hr := self.Raw.GetErrorUrl(&_pstr)
+	return _pstr, win32.HRESULTError(int32(_hr))
 }
 
 // GetAlwaysShowLockState wraps the raw GetAlwaysShowLockState call.
-func (self IScriptErrorList) GetAlwaysShowLockState(pfAlwaysShowLocked *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetAlwaysShowLockState(pfAlwaysShowLocked)))
+func (self IScriptErrorList) GetAlwaysShowLockState() (foundation.BOOL, error) {
+	var _pfAlwaysShowLocked foundation.BOOL
+	_hr := self.Raw.GetAlwaysShowLockState(&_pfAlwaysShowLocked)
+	return _pfAlwaysShowLocked, win32.HRESULTError(int32(_hr))
 }
 
 // GetDetailsPaneOpen wraps the raw GetDetailsPaneOpen call.
-func (self IScriptErrorList) GetDetailsPaneOpen(pfDetailsPaneOpen *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetDetailsPaneOpen(pfDetailsPaneOpen)))
+func (self IScriptErrorList) GetDetailsPaneOpen() (foundation.BOOL, error) {
+	var _pfDetailsPaneOpen foundation.BOOL
+	_hr := self.Raw.GetDetailsPaneOpen(&_pfDetailsPaneOpen)
+	return _pfDetailsPaneOpen, win32.HRESULTError(int32(_hr))
 }
 
 // SetDetailsPaneOpen wraps the raw SetDetailsPaneOpen call.
@@ -8561,8 +8667,10 @@ func (self IScriptErrorList) SetDetailsPaneOpen(fDetailsPaneOpen bool) error {
 }
 
 // GetPerErrorDisplay wraps the raw GetPerErrorDisplay call.
-func (self IScriptErrorList) GetPerErrorDisplay(pfPerErrorDisplay *foundation.BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetPerErrorDisplay(pfPerErrorDisplay)))
+func (self IScriptErrorList) GetPerErrorDisplay() (foundation.BOOL, error) {
+	var _pfPerErrorDisplay foundation.BOOL
+	_hr := self.Raw.GetPerErrorDisplay(&_pfPerErrorDisplay)
+	return _pfPerErrorDisplay, win32.HRESULTError(int32(_hr))
 }
 
 // SetPerErrorDisplay wraps the raw SetPerErrorDisplay call.
@@ -8930,18 +9038,24 @@ func WrapIShellDispatch(raw *uishell.IShellDispatch) IShellDispatch {
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self IShellDispatch) Get_Application(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(ppid)))
+func (self IShellDispatch) Get_Application() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Application(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IShellDispatch) Get_Parent(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppid)))
+func (self IShellDispatch) Get_Parent() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Windows wraps the raw Windows call.
-func (self IShellDispatch) Windows(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Windows(ppid)))
+func (self IShellDispatch) Windows() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Windows(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // MinimizeAll wraps the raw MinimizeAll call.
@@ -9036,8 +9150,10 @@ func WrapIShellDispatch2(raw *uishell.IShellDispatch2) IShellDispatch2 {
 }
 
 // IsRestricted wraps the raw IsRestricted call.
-func (self IShellDispatch2) IsRestricted(Group foundation.BSTR, Restriction foundation.BSTR, plRestrictValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.IsRestricted(Group, Restriction, plRestrictValue)))
+func (self IShellDispatch2) IsRestricted(Group foundation.BSTR, Restriction foundation.BSTR) (int32, error) {
+	var _plRestrictValue int32
+	_hr := self.Raw.IsRestricted(Group, Restriction, &_plRestrictValue)
+	return _plRestrictValue, win32.HRESULTError(int32(_hr))
 }
 
 // FindPrinter wraps the raw FindPrinter call.
@@ -9046,18 +9162,24 @@ func (self IShellDispatch2) FindPrinter(name foundation.BSTR, location foundatio
 }
 
 // GetSystemInformation wraps the raw GetSystemInformation call.
-func (self IShellDispatch2) GetSystemInformation(name foundation.BSTR, pv *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetSystemInformation(name, pv)))
+func (self IShellDispatch2) GetSystemInformation(name foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pv systemvariant.VARIANT
+	_hr := self.Raw.GetSystemInformation(name, &_pv)
+	return _pv, win32.HRESULTError(int32(_hr))
 }
 
 // IsServiceRunning wraps the raw IsServiceRunning call.
-func (self IShellDispatch2) IsServiceRunning(ServiceName foundation.BSTR, pRunning *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.IsServiceRunning(ServiceName, pRunning)))
+func (self IShellDispatch2) IsServiceRunning(ServiceName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pRunning systemvariant.VARIANT
+	_hr := self.Raw.IsServiceRunning(ServiceName, &_pRunning)
+	return _pRunning, win32.HRESULTError(int32(_hr))
 }
 
 // CanStartStopService wraps the raw CanStartStopService call.
-func (self IShellDispatch2) CanStartStopService(ServiceName foundation.BSTR, pCanStartStop *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.CanStartStopService(ServiceName, pCanStartStop)))
+func (self IShellDispatch2) CanStartStopService(ServiceName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pCanStartStop systemvariant.VARIANT
+	_hr := self.Raw.CanStartStopService(ServiceName, &_pCanStartStop)
+	return _pCanStartStop, win32.HRESULTError(int32(_hr))
 }
 
 // IShellDispatch3 is an idiomatic wrapper over the raw COM interface UI.Shell.IShellDispatch3 with error-returning methods.
@@ -9093,13 +9215,17 @@ func (self IShellDispatch4) ToggleDesktop() error {
 }
 
 // ExplorerPolicy wraps the raw ExplorerPolicy call.
-func (self IShellDispatch4) ExplorerPolicy(bstrPolicyName foundation.BSTR, pValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.ExplorerPolicy(bstrPolicyName, pValue)))
+func (self IShellDispatch4) ExplorerPolicy(bstrPolicyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pValue systemvariant.VARIANT
+	_hr := self.Raw.ExplorerPolicy(bstrPolicyName, &_pValue)
+	return _pValue, win32.HRESULTError(int32(_hr))
 }
 
 // GetSetting wraps the raw GetSetting call.
-func (self IShellDispatch4) GetSetting(lSetting int32, pResult *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetSetting(lSetting, pResult)))
+func (self IShellDispatch4) GetSetting(lSetting int32) (foundation.VARIANT_BOOL, error) {
+	var _pResult foundation.VARIANT_BOOL
+	_hr := self.Raw.GetSetting(lSetting, &_pResult)
+	return _pResult, win32.HRESULTError(int32(_hr))
 }
 
 // IShellDispatch5 is an idiomatic wrapper over the raw COM interface UI.Shell.IShellDispatch5 with error-returning methods.
@@ -9207,18 +9333,24 @@ func (self IShellFavoritesNameSpace) MoveSelectionTo() error {
 }
 
 // Get_SubscriptionsEnabled wraps the raw Get_SubscriptionsEnabled call.
-func (self IShellFavoritesNameSpace) Get_SubscriptionsEnabled(pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubscriptionsEnabled(pBool)))
+func (self IShellFavoritesNameSpace) Get_SubscriptionsEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_SubscriptionsEnabled(&_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // CreateSubscriptionForSelection wraps the raw CreateSubscriptionForSelection call.
-func (self IShellFavoritesNameSpace) CreateSubscriptionForSelection(pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSubscriptionForSelection(pBool)))
+func (self IShellFavoritesNameSpace) CreateSubscriptionForSelection() (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.CreateSubscriptionForSelection(&_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // DeleteSubscriptionForSelection wraps the raw DeleteSubscriptionForSelection call.
-func (self IShellFavoritesNameSpace) DeleteSubscriptionForSelection(pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.DeleteSubscriptionForSelection(pBool)))
+func (self IShellFavoritesNameSpace) DeleteSubscriptionForSelection() (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.DeleteSubscriptionForSelection(&_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // SetRoot wraps the raw SetRoot call.
@@ -9542,28 +9674,38 @@ func WrapIShellFolderViewDual(raw *uishell.IShellFolderViewDual) IShellFolderVie
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self IShellFolderViewDual) Get_Application(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(ppid)))
+func (self IShellFolderViewDual) Get_Application() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Application(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IShellFolderViewDual) Get_Parent(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppid)))
+func (self IShellFolderViewDual) Get_Parent() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Folder wraps the raw Get_Folder call.
-func (self IShellFolderViewDual) Get_Folder(ppid **uishell.Folder) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Folder(ppid)))
+func (self IShellFolderViewDual) Get_Folder() (*uishell.Folder, error) {
+	var _ppid *uishell.Folder
+	_hr := self.Raw.Get_Folder(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // SelectedItems wraps the raw SelectedItems call.
-func (self IShellFolderViewDual) SelectedItems(ppid **uishell.FolderItems) error {
-	return win32.HRESULTError(int32(self.Raw.SelectedItems(ppid)))
+func (self IShellFolderViewDual) SelectedItems() (*uishell.FolderItems, error) {
+	var _ppid *uishell.FolderItems
+	_hr := self.Raw.SelectedItems(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FocusedItem wraps the raw Get_FocusedItem call.
-func (self IShellFolderViewDual) Get_FocusedItem(ppid **uishell.FolderItem) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FocusedItem(ppid)))
+func (self IShellFolderViewDual) Get_FocusedItem() (*uishell.FolderItem, error) {
+	var _ppid *uishell.FolderItem
+	_hr := self.Raw.Get_FocusedItem(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // SelectItem wraps the raw SelectItem call.
@@ -9572,13 +9714,17 @@ func (self IShellFolderViewDual) SelectItem(pvfi *systemvariant.VARIANT, dwFlags
 }
 
 // Get_Script wraps the raw Get_Script call.
-func (self IShellFolderViewDual) Get_Script(ppDisp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Script(ppDisp)))
+func (self IShellFolderViewDual) Get_Script() (*systemcom.IDispatch, error) {
+	var _ppDisp *systemcom.IDispatch
+	_hr := self.Raw.Get_Script(&_ppDisp)
+	return _ppDisp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ViewOptions wraps the raw Get_ViewOptions call.
-func (self IShellFolderViewDual) Get_ViewOptions(plViewOptions *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ViewOptions(plViewOptions)))
+func (self IShellFolderViewDual) Get_ViewOptions() (int32, error) {
+	var _plViewOptions int32
+	_hr := self.Raw.Get_ViewOptions(&_plViewOptions)
+	return _plViewOptions, win32.HRESULTError(int32(_hr))
 }
 
 // IShellFolderViewDual2 is an idiomatic wrapper over the raw COM interface UI.Shell.IShellFolderViewDual2 with error-returning methods.
@@ -9593,8 +9739,10 @@ func WrapIShellFolderViewDual2(raw *uishell.IShellFolderViewDual2) IShellFolderV
 }
 
 // Get_CurrentViewMode wraps the raw Get_CurrentViewMode call.
-func (self IShellFolderViewDual2) Get_CurrentViewMode(pViewMode *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentViewMode(pViewMode)))
+func (self IShellFolderViewDual2) Get_CurrentViewMode() (uint32, error) {
+	var _pViewMode uint32
+	_hr := self.Raw.Get_CurrentViewMode(&_pViewMode)
+	return _pViewMode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_CurrentViewMode wraps the raw Put_CurrentViewMode call.
@@ -9619,8 +9767,10 @@ func WrapIShellFolderViewDual3(raw *uishell.IShellFolderViewDual3) IShellFolderV
 }
 
 // Get_GroupBy wraps the raw Get_GroupBy call.
-func (self IShellFolderViewDual3) Get_GroupBy(pbstrGroupBy *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_GroupBy(pbstrGroupBy)))
+func (self IShellFolderViewDual3) Get_GroupBy() (foundation.BSTR, error) {
+	var _pbstrGroupBy foundation.BSTR
+	_hr := self.Raw.Get_GroupBy(&_pbstrGroupBy)
+	return _pbstrGroupBy, win32.HRESULTError(int32(_hr))
 }
 
 // Put_GroupBy wraps the raw Put_GroupBy call.
@@ -9629,8 +9779,10 @@ func (self IShellFolderViewDual3) Put_GroupBy(bstrGroupBy foundation.BSTR) error
 }
 
 // Get_FolderFlags wraps the raw Get_FolderFlags call.
-func (self IShellFolderViewDual3) Get_FolderFlags(pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FolderFlags(pdwFlags)))
+func (self IShellFolderViewDual3) Get_FolderFlags() (uint32, error) {
+	var _pdwFlags uint32
+	_hr := self.Raw.Get_FolderFlags(&_pdwFlags)
+	return _pdwFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FolderFlags wraps the raw Put_FolderFlags call.
@@ -9639,8 +9791,10 @@ func (self IShellFolderViewDual3) Put_FolderFlags(dwFlags uint32) error {
 }
 
 // Get_SortColumns wraps the raw Get_SortColumns call.
-func (self IShellFolderViewDual3) Get_SortColumns(pbstrSortColumns *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SortColumns(pbstrSortColumns)))
+func (self IShellFolderViewDual3) Get_SortColumns() (foundation.BSTR, error) {
+	var _pbstrSortColumns foundation.BSTR
+	_hr := self.Raw.Get_SortColumns(&_pbstrSortColumns)
+	return _pbstrSortColumns, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SortColumns wraps the raw Put_SortColumns call.
@@ -9654,8 +9808,10 @@ func (self IShellFolderViewDual3) Put_IconSize(iIconSize int32) error {
 }
 
 // Get_IconSize wraps the raw Get_IconSize call.
-func (self IShellFolderViewDual3) Get_IconSize(piIconSize *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IconSize(piIconSize)))
+func (self IShellFolderViewDual3) Get_IconSize() (int32, error) {
+	var _piIconSize int32
+	_hr := self.Raw.Get_IconSize(&_piIconSize)
+	return _piIconSize, win32.HRESULTError(int32(_hr))
 }
 
 // FilterView wraps the raw FilterView call.
@@ -10476,8 +10632,10 @@ func WrapIShellLinkDual(raw *uishell.IShellLinkDual) IShellLinkDual {
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self IShellLinkDual) Get_Path(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(pbs)))
+func (self IShellLinkDual) Get_Path() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Path(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Path wraps the raw Put_Path call.
@@ -10486,8 +10644,10 @@ func (self IShellLinkDual) Put_Path(bs foundation.BSTR) error {
 }
 
 // Get_Description wraps the raw Get_Description call.
-func (self IShellLinkDual) Get_Description(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Description(pbs)))
+func (self IShellLinkDual) Get_Description() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Description(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Description wraps the raw Put_Description call.
@@ -10496,8 +10656,10 @@ func (self IShellLinkDual) Put_Description(bs foundation.BSTR) error {
 }
 
 // Get_WorkingDirectory wraps the raw Get_WorkingDirectory call.
-func (self IShellLinkDual) Get_WorkingDirectory(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WorkingDirectory(pbs)))
+func (self IShellLinkDual) Get_WorkingDirectory() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_WorkingDirectory(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_WorkingDirectory wraps the raw Put_WorkingDirectory call.
@@ -10506,8 +10668,10 @@ func (self IShellLinkDual) Put_WorkingDirectory(bs foundation.BSTR) error {
 }
 
 // Get_Arguments wraps the raw Get_Arguments call.
-func (self IShellLinkDual) Get_Arguments(pbs *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Arguments(pbs)))
+func (self IShellLinkDual) Get_Arguments() (foundation.BSTR, error) {
+	var _pbs foundation.BSTR
+	_hr := self.Raw.Get_Arguments(&_pbs)
+	return _pbs, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Arguments wraps the raw Put_Arguments call.
@@ -10516,8 +10680,10 @@ func (self IShellLinkDual) Put_Arguments(bs foundation.BSTR) error {
 }
 
 // Get_Hotkey wraps the raw Get_Hotkey call.
-func (self IShellLinkDual) Get_Hotkey(piHK *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Hotkey(piHK)))
+func (self IShellLinkDual) Get_Hotkey() (int32, error) {
+	var _piHK int32
+	_hr := self.Raw.Get_Hotkey(&_piHK)
+	return _piHK, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Hotkey wraps the raw Put_Hotkey call.
@@ -10526,8 +10692,10 @@ func (self IShellLinkDual) Put_Hotkey(iHK int32) error {
 }
 
 // Get_ShowCommand wraps the raw Get_ShowCommand call.
-func (self IShellLinkDual) Get_ShowCommand(piShowCommand *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ShowCommand(piShowCommand)))
+func (self IShellLinkDual) Get_ShowCommand() (int32, error) {
+	var _piShowCommand int32
+	_hr := self.Raw.Get_ShowCommand(&_piShowCommand)
+	return _piShowCommand, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ShowCommand wraps the raw Put_ShowCommand call.
@@ -10541,8 +10709,10 @@ func (self IShellLinkDual) Resolve(fFlags int32) error {
 }
 
 // GetIconLocation wraps the raw GetIconLocation call.
-func (self IShellLinkDual) GetIconLocation(pbs *foundation.BSTR, piIcon *int32) error {
-	return win32.HRESULTError(int32(self.Raw.GetIconLocation(pbs, piIcon)))
+func (self IShellLinkDual) GetIconLocation(pbs *foundation.BSTR) (int32, error) {
+	var _piIcon int32
+	_hr := self.Raw.GetIconLocation(pbs, &_piIcon)
+	return _piIcon, win32.HRESULTError(int32(_hr))
 }
 
 // SetIconLocation wraps the raw SetIconLocation call.
@@ -10562,8 +10732,10 @@ func WrapIShellLinkDual2(raw *uishell.IShellLinkDual2) IShellLinkDual2 {
 }
 
 // Get_Target wraps the raw Get_Target call.
-func (self IShellLinkDual2) Get_Target(ppfi **uishell.FolderItem) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Target(ppfi)))
+func (self IShellLinkDual2) Get_Target() (*uishell.FolderItem, error) {
+	var _ppfi *uishell.FolderItem
+	_hr := self.Raw.Get_Target(&_ppfi)
+	return _ppfi, win32.HRESULTError(int32(_hr))
 }
 
 // IShellLinkW is an idiomatic wrapper over the raw COM interface UI.Shell.IShellLinkW with error-returning methods.
@@ -10757,8 +10929,10 @@ func WrapIShellNameSpace(raw *uishell.IShellNameSpace) IShellNameSpace {
 }
 
 // Get_EnumOptions wraps the raw Get_EnumOptions call.
-func (self IShellNameSpace) Get_EnumOptions(pgrfEnumFlags *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EnumOptions(pgrfEnumFlags)))
+func (self IShellNameSpace) Get_EnumOptions() (int32, error) {
+	var _pgrfEnumFlags int32
+	_hr := self.Raw.Get_EnumOptions(&_pgrfEnumFlags)
+	return _pgrfEnumFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_EnumOptions wraps the raw Put_EnumOptions call.
@@ -10767,8 +10941,10 @@ func (self IShellNameSpace) Put_EnumOptions(lVal int32) error {
 }
 
 // Get_SelectedItem wraps the raw Get_SelectedItem call.
-func (self IShellNameSpace) Get_SelectedItem(pItem **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SelectedItem(pItem)))
+func (self IShellNameSpace) Get_SelectedItem() (*systemcom.IDispatch, error) {
+	var _pItem *systemcom.IDispatch
+	_hr := self.Raw.Get_SelectedItem(&_pItem)
+	return _pItem, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SelectedItem wraps the raw Put_SelectedItem call.
@@ -10777,13 +10953,17 @@ func (self IShellNameSpace) Put_SelectedItem(pItem *systemcom.IDispatch) error {
 }
 
 // Get_Root wraps the raw Get_Root call.
-func (self IShellNameSpace) Get_Root(pvar *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Root(pvar)))
+func (self IShellNameSpace) Get_Root() (systemvariant.VARIANT, error) {
+	var _pvar systemvariant.VARIANT
+	_hr := self.Raw.Get_Root(&_pvar)
+	return _pvar, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Depth wraps the raw Get_Depth call.
-func (self IShellNameSpace) Get_Depth(piDepth *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Depth(piDepth)))
+func (self IShellNameSpace) Get_Depth() (int32, error) {
+	var _piDepth int32
+	_hr := self.Raw.Get_Depth(&_piDepth)
+	return _piDepth, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Depth wraps the raw Put_Depth call.
@@ -10792,8 +10972,10 @@ func (self IShellNameSpace) Put_Depth(iDepth int32) error {
 }
 
 // Get_Mode wraps the raw Get_Mode call.
-func (self IShellNameSpace) Get_Mode(puMode *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Mode(puMode)))
+func (self IShellNameSpace) Get_Mode() (uint32, error) {
+	var _puMode uint32
+	_hr := self.Raw.Get_Mode(&_puMode)
+	return _puMode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Mode wraps the raw Put_Mode call.
@@ -10802,8 +10984,10 @@ func (self IShellNameSpace) Put_Mode(uMode uint32) error {
 }
 
 // Get_Flags wraps the raw Get_Flags call.
-func (self IShellNameSpace) Get_Flags(pdwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Flags(pdwFlags)))
+func (self IShellNameSpace) Get_Flags() (uint32, error) {
+	var _pdwFlags uint32
+	_hr := self.Raw.Get_Flags(&_pdwFlags)
+	return _pdwFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Flags wraps the raw Put_Flags call.
@@ -10817,13 +11001,17 @@ func (self IShellNameSpace) Put_TVFlags(dwFlags uint32) error {
 }
 
 // Get_TVFlags wraps the raw Get_TVFlags call.
-func (self IShellNameSpace) Get_TVFlags(dwFlags *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TVFlags(dwFlags)))
+func (self IShellNameSpace) Get_TVFlags() (uint32, error) {
+	var _dwFlags uint32
+	_hr := self.Raw.Get_TVFlags(&_dwFlags)
+	return _dwFlags, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Columns wraps the raw Get_Columns call.
-func (self IShellNameSpace) Get_Columns(bstrColumns *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Columns(bstrColumns)))
+func (self IShellNameSpace) Get_Columns() (foundation.BSTR, error) {
+	var _bstrColumns foundation.BSTR
+	_hr := self.Raw.Get_Columns(&_bstrColumns)
+	return _bstrColumns, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Columns wraps the raw Put_Columns call.
@@ -10832,8 +11020,10 @@ func (self IShellNameSpace) Put_Columns(bstrColumns foundation.BSTR) error {
 }
 
 // Get_CountViewTypes wraps the raw Get_CountViewTypes call.
-func (self IShellNameSpace) Get_CountViewTypes(piTypes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CountViewTypes(piTypes)))
+func (self IShellNameSpace) Get_CountViewTypes() (int32, error) {
+	var _piTypes int32
+	_hr := self.Raw.Get_CountViewTypes(&_piTypes)
+	return _piTypes, win32.HRESULTError(int32(_hr))
 }
 
 // SetViewType wraps the raw SetViewType call.
@@ -10842,8 +11032,10 @@ func (self IShellNameSpace) SetViewType(iType int32) error {
 }
 
 // SelectedItems wraps the raw SelectedItems call.
-func (self IShellNameSpace) SelectedItems(ppid **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.SelectedItems(ppid)))
+func (self IShellNameSpace) SelectedItems() (*systemcom.IDispatch, error) {
+	var _ppid *systemcom.IDispatch
+	_hr := self.Raw.SelectedItems(&_ppid)
+	return _ppid, win32.HRESULTError(int32(_hr))
 }
 
 // UnselectAll wraps the raw UnselectAll call.
@@ -10979,8 +11171,10 @@ func (self IShellUIHelper) AddDesktopComponent(URL foundation.BSTR, Type foundat
 }
 
 // IsSubscribed wraps the raw IsSubscribed call.
-func (self IShellUIHelper) IsSubscribed(URL foundation.BSTR, pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSubscribed(URL, pBool)))
+func (self IShellUIHelper) IsSubscribed(URL foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.IsSubscribed(URL, &_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // NavigateAndFind wraps the raw NavigateAndFind call.
@@ -11009,8 +11203,10 @@ func (self IShellUIHelper) AutoCompleteAttach(Reserved *systemvariant.VARIANT) e
 }
 
 // ShowBrowserUI wraps the raw ShowBrowserUI call.
-func (self IShellUIHelper) ShowBrowserUI(bstrName foundation.BSTR, pvarIn *systemvariant.VARIANT, pvarOut *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.ShowBrowserUI(bstrName, pvarIn, pvarOut)))
+func (self IShellUIHelper) ShowBrowserUI(bstrName foundation.BSTR, pvarIn *systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	var _pvarOut systemvariant.VARIANT
+	_hr := self.Raw.ShowBrowserUI(bstrName, pvarIn, &_pvarOut)
+	return _pvarOut, win32.HRESULTError(int32(_hr))
 }
 
 // IShellUIHelper2 is an idiomatic wrapper over the raw COM interface UI.Shell.IShellUIHelper2 with error-returning methods.
@@ -11045,18 +11241,24 @@ func (self IShellUIHelper2) CustomizeSettings(fSQM foundation.VARIANT_BOOL, fPhi
 }
 
 // SqmEnabled wraps the raw SqmEnabled call.
-func (self IShellUIHelper2) SqmEnabled(pfEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.SqmEnabled(pfEnabled)))
+func (self IShellUIHelper2) SqmEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.SqmEnabled(&_pfEnabled)
+	return _pfEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // PhishingEnabled wraps the raw PhishingEnabled call.
-func (self IShellUIHelper2) PhishingEnabled(pfEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.PhishingEnabled(pfEnabled)))
+func (self IShellUIHelper2) PhishingEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.PhishingEnabled(&_pfEnabled)
+	return _pfEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // BrandImageUri wraps the raw BrandImageUri call.
-func (self IShellUIHelper2) BrandImageUri(pbstrUri *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.BrandImageUri(pbstrUri)))
+func (self IShellUIHelper2) BrandImageUri() (foundation.BSTR, error) {
+	var _pbstrUri foundation.BSTR
+	_hr := self.Raw.BrandImageUri(&_pbstrUri)
+	return _pbstrUri, win32.HRESULTError(int32(_hr))
 }
 
 // SkipTabsWelcome wraps the raw SkipTabsWelcome call.
@@ -11075,18 +11277,24 @@ func (self IShellUIHelper2) CustomizeClearType(fSet foundation.VARIANT_BOOL) err
 }
 
 // IsSearchProviderInstalled wraps the raw IsSearchProviderInstalled call.
-func (self IShellUIHelper2) IsSearchProviderInstalled(URL foundation.BSTR, pdwResult *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.IsSearchProviderInstalled(URL, pdwResult)))
+func (self IShellUIHelper2) IsSearchProviderInstalled(URL foundation.BSTR) (uint32, error) {
+	var _pdwResult uint32
+	_hr := self.Raw.IsSearchProviderInstalled(URL, &_pdwResult)
+	return _pdwResult, win32.HRESULTError(int32(_hr))
 }
 
 // IsSearchMigrated wraps the raw IsSearchMigrated call.
-func (self IShellUIHelper2) IsSearchMigrated(pfMigrated *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSearchMigrated(pfMigrated)))
+func (self IShellUIHelper2) IsSearchMigrated() (foundation.VARIANT_BOOL, error) {
+	var _pfMigrated foundation.VARIANT_BOOL
+	_hr := self.Raw.IsSearchMigrated(&_pfMigrated)
+	return _pfMigrated, win32.HRESULTError(int32(_hr))
 }
 
 // DefaultSearchProvider wraps the raw DefaultSearchProvider call.
-func (self IShellUIHelper2) DefaultSearchProvider(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.DefaultSearchProvider(pbstrName)))
+func (self IShellUIHelper2) DefaultSearchProvider() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.DefaultSearchProvider(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // RunOnceRequiredSettingsComplete wraps the raw RunOnceRequiredSettingsComplete call.
@@ -11095,13 +11303,17 @@ func (self IShellUIHelper2) RunOnceRequiredSettingsComplete(fComplete foundation
 }
 
 // RunOnceHasShown wraps the raw RunOnceHasShown call.
-func (self IShellUIHelper2) RunOnceHasShown(pfShown *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.RunOnceHasShown(pfShown)))
+func (self IShellUIHelper2) RunOnceHasShown() (foundation.VARIANT_BOOL, error) {
+	var _pfShown foundation.VARIANT_BOOL
+	_hr := self.Raw.RunOnceHasShown(&_pfShown)
+	return _pfShown, win32.HRESULTError(int32(_hr))
 }
 
 // SearchGuideUrl wraps the raw SearchGuideUrl call.
-func (self IShellUIHelper2) SearchGuideUrl(pbstrUrl *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.SearchGuideUrl(pbstrUrl)))
+func (self IShellUIHelper2) SearchGuideUrl() (foundation.BSTR, error) {
+	var _pbstrUrl foundation.BSTR
+	_hr := self.Raw.SearchGuideUrl(&_pbstrUrl)
+	return _pbstrUrl, win32.HRESULTError(int32(_hr))
 }
 
 // IShellUIHelper3 is an idiomatic wrapper over the raw COM interface UI.Shell.IShellUIHelper3 with error-returning methods.
@@ -11121,13 +11333,17 @@ func (self IShellUIHelper3) AddService(URL foundation.BSTR) error {
 }
 
 // IsServiceInstalled wraps the raw IsServiceInstalled call.
-func (self IShellUIHelper3) IsServiceInstalled(URL foundation.BSTR, Verb foundation.BSTR, pdwResult *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.IsServiceInstalled(URL, Verb, pdwResult)))
+func (self IShellUIHelper3) IsServiceInstalled(URL foundation.BSTR, Verb foundation.BSTR) (uint32, error) {
+	var _pdwResult uint32
+	_hr := self.Raw.IsServiceInstalled(URL, Verb, &_pdwResult)
+	return _pdwResult, win32.HRESULTError(int32(_hr))
 }
 
 // InPrivateFilteringEnabled wraps the raw InPrivateFilteringEnabled call.
-func (self IShellUIHelper3) InPrivateFilteringEnabled(pfEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.InPrivateFilteringEnabled(pfEnabled)))
+func (self IShellUIHelper3) InPrivateFilteringEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.InPrivateFilteringEnabled(&_pfEnabled)
+	return _pfEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // AddToFavoritesBar wraps the raw AddToFavoritesBar call.
@@ -11156,8 +11372,10 @@ func (self IShellUIHelper3) ContentDiscoveryReset() error {
 }
 
 // IsSuggestedSitesEnabled wraps the raw IsSuggestedSitesEnabled call.
-func (self IShellUIHelper3) IsSuggestedSitesEnabled(pfEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSuggestedSitesEnabled(pfEnabled)))
+func (self IShellUIHelper3) IsSuggestedSitesEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.IsSuggestedSitesEnabled(&_pfEnabled)
+	return _pfEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // EnableSuggestedSites wraps the raw EnableSuggestedSites call.
@@ -11192,8 +11410,10 @@ func WrapIShellUIHelper4(raw *uishell.IShellUIHelper4) IShellUIHelper4 {
 }
 
 // MsIsSiteMode wraps the raw MsIsSiteMode call.
-func (self IShellUIHelper4) MsIsSiteMode(pfSiteMode *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MsIsSiteMode(pfSiteMode)))
+func (self IShellUIHelper4) MsIsSiteMode() (foundation.VARIANT_BOOL, error) {
+	var _pfSiteMode foundation.VARIANT_BOOL
+	_hr := self.Raw.MsIsSiteMode(&_pfSiteMode)
+	return _pfSiteMode, win32.HRESULTError(int32(_hr))
 }
 
 // MsSiteModeShowThumbBar wraps the raw MsSiteModeShowThumbBar call.
@@ -11202,8 +11422,10 @@ func (self IShellUIHelper4) MsSiteModeShowThumbBar() error {
 }
 
 // MsSiteModeAddThumbBarButton wraps the raw MsSiteModeAddThumbBarButton call.
-func (self IShellUIHelper4) MsSiteModeAddThumbBarButton(bstrIconURL foundation.BSTR, bstrTooltip foundation.BSTR, pvarButtonID *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.MsSiteModeAddThumbBarButton(bstrIconURL, bstrTooltip, pvarButtonID)))
+func (self IShellUIHelper4) MsSiteModeAddThumbBarButton(bstrIconURL foundation.BSTR, bstrTooltip foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pvarButtonID systemvariant.VARIANT
+	_hr := self.Raw.MsSiteModeAddThumbBarButton(bstrIconURL, bstrTooltip, &_pvarButtonID)
+	return _pvarButtonID, win32.HRESULTError(int32(_hr))
 }
 
 // MsSiteModeSetIconOverlay wraps the raw MsSiteModeSetIconOverlay call.
@@ -11247,8 +11469,10 @@ func (self IShellUIHelper4) MsSiteModeActivate() error {
 }
 
 // MsIsSiteModeFirstRun wraps the raw MsIsSiteModeFirstRun call.
-func (self IShellUIHelper4) MsIsSiteModeFirstRun(fPreserveState foundation.VARIANT_BOOL, puiFirstRun *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.MsIsSiteModeFirstRun(fPreserveState, puiFirstRun)))
+func (self IShellUIHelper4) MsIsSiteModeFirstRun(fPreserveState foundation.VARIANT_BOOL) (systemvariant.VARIANT, error) {
+	var _puiFirstRun systemvariant.VARIANT
+	_hr := self.Raw.MsIsSiteModeFirstRun(fPreserveState, &_puiFirstRun)
+	return _puiFirstRun, win32.HRESULTError(int32(_hr))
 }
 
 // MsAddTrackingProtectionList wraps the raw MsAddTrackingProtectionList call.
@@ -11257,13 +11481,17 @@ func (self IShellUIHelper4) MsAddTrackingProtectionList(URL foundation.BSTR, bst
 }
 
 // MsTrackingProtectionEnabled wraps the raw MsTrackingProtectionEnabled call.
-func (self IShellUIHelper4) MsTrackingProtectionEnabled(pfEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MsTrackingProtectionEnabled(pfEnabled)))
+func (self IShellUIHelper4) MsTrackingProtectionEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.MsTrackingProtectionEnabled(&_pfEnabled)
+	return _pfEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // MsActiveXFilteringEnabled wraps the raw MsActiveXFilteringEnabled call.
-func (self IShellUIHelper4) MsActiveXFilteringEnabled(pfEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.MsActiveXFilteringEnabled(pfEnabled)))
+func (self IShellUIHelper4) MsActiveXFilteringEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.MsActiveXFilteringEnabled(&_pfEnabled)
+	return _pfEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // IShellUIHelper5 is an idiomatic wrapper over the raw COM interface UI.Shell.IShellUIHelper5 with error-returning methods.
@@ -11278,8 +11506,10 @@ func WrapIShellUIHelper5(raw *uishell.IShellUIHelper5) IShellUIHelper5 {
 }
 
 // MsProvisionNetworks wraps the raw MsProvisionNetworks call.
-func (self IShellUIHelper5) MsProvisionNetworks(bstrProvisioningXml foundation.BSTR, puiResult *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.MsProvisionNetworks(bstrProvisioningXml, puiResult)))
+func (self IShellUIHelper5) MsProvisionNetworks(bstrProvisioningXml foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _puiResult systemvariant.VARIANT
+	_hr := self.Raw.MsProvisionNetworks(bstrProvisioningXml, &_puiResult)
+	return _puiResult, win32.HRESULTError(int32(_hr))
 }
 
 // MsReportSafeUrl wraps the raw MsReportSafeUrl call.
@@ -11339,8 +11569,10 @@ func (self IShellUIHelper6) MsEnableTileNotificationQueue(fChange foundation.VAR
 }
 
 // MsPinnedSiteState wraps the raw MsPinnedSiteState call.
-func (self IShellUIHelper6) MsPinnedSiteState(pvarSiteState *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.MsPinnedSiteState(pvarSiteState)))
+func (self IShellUIHelper6) MsPinnedSiteState() (systemvariant.VARIANT, error) {
+	var _pvarSiteState systemvariant.VARIANT
+	_hr := self.Raw.MsPinnedSiteState(&_pvarSiteState)
+	return _pvarSiteState, win32.HRESULTError(int32(_hr))
 }
 
 // MsEnableTileNotificationQueueForSquare150x150 wraps the raw MsEnableTileNotificationQueueForSquare150x150 call.
@@ -11390,8 +11622,10 @@ func (self IShellUIHelper7) SetExperimentalFlag(bstrFlagString foundation.BSTR, 
 }
 
 // GetExperimentalFlag wraps the raw GetExperimentalFlag call.
-func (self IShellUIHelper7) GetExperimentalFlag(bstrFlagString foundation.BSTR, vfFlag *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetExperimentalFlag(bstrFlagString, vfFlag)))
+func (self IShellUIHelper7) GetExperimentalFlag(bstrFlagString foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _vfFlag foundation.VARIANT_BOOL
+	_hr := self.Raw.GetExperimentalFlag(bstrFlagString, &_vfFlag)
+	return _vfFlag, win32.HRESULTError(int32(_hr))
 }
 
 // SetExperimentalValue wraps the raw SetExperimentalValue call.
@@ -11400,8 +11634,10 @@ func (self IShellUIHelper7) SetExperimentalValue(bstrValueString foundation.BSTR
 }
 
 // GetExperimentalValue wraps the raw GetExperimentalValue call.
-func (self IShellUIHelper7) GetExperimentalValue(bstrValueString foundation.BSTR, pdwValue *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetExperimentalValue(bstrValueString, pdwValue)))
+func (self IShellUIHelper7) GetExperimentalValue(bstrValueString foundation.BSTR) (uint32, error) {
+	var _pdwValue uint32
+	_hr := self.Raw.GetExperimentalValue(bstrValueString, &_pdwValue)
+	return _pdwValue, win32.HRESULTError(int32(_hr))
 }
 
 // ResetAllExperimentalFlagsAndValues wraps the raw ResetAllExperimentalFlagsAndValues call.
@@ -11410,8 +11646,10 @@ func (self IShellUIHelper7) ResetAllExperimentalFlagsAndValues() error {
 }
 
 // GetNeedIEAutoLaunchFlag wraps the raw GetNeedIEAutoLaunchFlag call.
-func (self IShellUIHelper7) GetNeedIEAutoLaunchFlag(bstrUrl foundation.BSTR, flag *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.GetNeedIEAutoLaunchFlag(bstrUrl, flag)))
+func (self IShellUIHelper7) GetNeedIEAutoLaunchFlag(bstrUrl foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _flag foundation.VARIANT_BOOL
+	_hr := self.Raw.GetNeedIEAutoLaunchFlag(bstrUrl, &_flag)
+	return _flag, win32.HRESULTError(int32(_hr))
 }
 
 // SetNeedIEAutoLaunchFlag wraps the raw SetNeedIEAutoLaunchFlag call.
@@ -11420,8 +11658,10 @@ func (self IShellUIHelper7) SetNeedIEAutoLaunchFlag(bstrUrl foundation.BSTR, fla
 }
 
 // HasNeedIEAutoLaunchFlag wraps the raw HasNeedIEAutoLaunchFlag call.
-func (self IShellUIHelper7) HasNeedIEAutoLaunchFlag(bstrUrl foundation.BSTR, exists *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.HasNeedIEAutoLaunchFlag(bstrUrl, exists)))
+func (self IShellUIHelper7) HasNeedIEAutoLaunchFlag(bstrUrl foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _exists foundation.VARIANT_BOOL
+	_hr := self.Raw.HasNeedIEAutoLaunchFlag(bstrUrl, &_exists)
+	return _exists, win32.HRESULTError(int32(_hr))
 }
 
 // LaunchIE wraps the raw LaunchIE call.
@@ -11441,23 +11681,31 @@ func WrapIShellUIHelper8(raw *uishell.IShellUIHelper8) IShellUIHelper8 {
 }
 
 // GetCVListData wraps the raw GetCVListData call.
-func (self IShellUIHelper8) GetCVListData(pbstrResult *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetCVListData(pbstrResult)))
+func (self IShellUIHelper8) GetCVListData() (foundation.BSTR, error) {
+	var _pbstrResult foundation.BSTR
+	_hr := self.Raw.GetCVListData(&_pbstrResult)
+	return _pbstrResult, win32.HRESULTError(int32(_hr))
 }
 
 // GetCVListLocalData wraps the raw GetCVListLocalData call.
-func (self IShellUIHelper8) GetCVListLocalData(pbstrResult *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetCVListLocalData(pbstrResult)))
+func (self IShellUIHelper8) GetCVListLocalData() (foundation.BSTR, error) {
+	var _pbstrResult foundation.BSTR
+	_hr := self.Raw.GetCVListLocalData(&_pbstrResult)
+	return _pbstrResult, win32.HRESULTError(int32(_hr))
 }
 
 // GetEMIEListData wraps the raw GetEMIEListData call.
-func (self IShellUIHelper8) GetEMIEListData(pbstrResult *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetEMIEListData(pbstrResult)))
+func (self IShellUIHelper8) GetEMIEListData() (foundation.BSTR, error) {
+	var _pbstrResult foundation.BSTR
+	_hr := self.Raw.GetEMIEListData(&_pbstrResult)
+	return _pbstrResult, win32.HRESULTError(int32(_hr))
 }
 
 // GetEMIEListLocalData wraps the raw GetEMIEListLocalData call.
-func (self IShellUIHelper8) GetEMIEListLocalData(pbstrResult *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetEMIEListLocalData(pbstrResult)))
+func (self IShellUIHelper8) GetEMIEListLocalData() (foundation.BSTR, error) {
+	var _pbstrResult foundation.BSTR
+	_hr := self.Raw.GetEMIEListLocalData(&_pbstrResult)
+	return _pbstrResult, win32.HRESULTError(int32(_hr))
 }
 
 // OpenFavoritesPane wraps the raw OpenFavoritesPane call.
@@ -11487,8 +11735,10 @@ func WrapIShellUIHelper9(raw *uishell.IShellUIHelper9) IShellUIHelper9 {
 }
 
 // GetOSSku wraps the raw GetOSSku call.
-func (self IShellUIHelper9) GetOSSku(pdwResult *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetOSSku(pdwResult)))
+func (self IShellUIHelper9) GetOSSku() (uint32, error) {
+	var _pdwResult uint32
+	_hr := self.Raw.GetOSSku(&_pdwResult)
+	return _pdwResult, win32.HRESULTError(int32(_hr))
 }
 
 // IShellView is an idiomatic wrapper over the raw COM interface UI.Shell.IShellView with error-returning methods.
@@ -11617,13 +11867,17 @@ func WrapIShellWindows(raw *uishell.IShellWindows) IShellWindows {
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IShellWindows) Get_Count(Count *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(Count)))
+func (self IShellWindows) Get_Count() (int32, error) {
+	var _Count int32
+	_hr := self.Raw.Get_Count(&_Count)
+	return _Count, win32.HRESULTError(int32(_hr))
 }
 
 // NewEnum wraps the raw NewEnum call.
-func (self IShellWindows) NewEnum(ppunk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.NewEnum(ppunk)))
+func (self IShellWindows) NewEnum() (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	_hr := self.Raw.NewEnum(&_ppunk)
+	return _ppunk, win32.HRESULTError(int32(_hr))
 }
 
 // Register wraps the raw Register call.
@@ -11652,8 +11906,10 @@ func (self IShellWindows) OnActivated(lCookie int32, fActive foundation.VARIANT_
 }
 
 // FindWindowSW wraps the raw FindWindowSW call.
-func (self IShellWindows) FindWindowSW(pvarLoc *systemvariant.VARIANT, pvarLocRoot *systemvariant.VARIANT, swClass uishell.ShellWindowTypeConstants, phwnd *int32, swfwOptions uishell.ShellWindowFindWindowOptions, ppdispOut **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.FindWindowSW(pvarLoc, pvarLocRoot, swClass, phwnd, swfwOptions, ppdispOut)))
+func (self IShellWindows) FindWindowSW(pvarLoc *systemvariant.VARIANT, pvarLocRoot *systemvariant.VARIANT, swClass uishell.ShellWindowTypeConstants, phwnd *int32, swfwOptions uishell.ShellWindowFindWindowOptions) (*systemcom.IDispatch, error) {
+	var _ppdispOut *systemcom.IDispatch
+	_hr := self.Raw.FindWindowSW(pvarLoc, pvarLocRoot, swClass, phwnd, swfwOptions, &_ppdispOut)
+	return _ppdispOut, win32.HRESULTError(int32(_hr))
 }
 
 // OnCreated wraps the raw OnCreated call.
@@ -13992,38 +14248,52 @@ func (self IWebBrowser) Stop() error {
 }
 
 // Get_Application wraps the raw Get_Application call.
-func (self IWebBrowser) Get_Application(ppDisp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Application(ppDisp)))
+func (self IWebBrowser) Get_Application() (*systemcom.IDispatch, error) {
+	var _ppDisp *systemcom.IDispatch
+	_hr := self.Raw.Get_Application(&_ppDisp)
+	return _ppDisp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Parent wraps the raw Get_Parent call.
-func (self IWebBrowser) Get_Parent(ppDisp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Parent(ppDisp)))
+func (self IWebBrowser) Get_Parent() (*systemcom.IDispatch, error) {
+	var _ppDisp *systemcom.IDispatch
+	_hr := self.Raw.Get_Parent(&_ppDisp)
+	return _ppDisp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Container wraps the raw Get_Container call.
-func (self IWebBrowser) Get_Container(ppDisp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Container(ppDisp)))
+func (self IWebBrowser) Get_Container() (*systemcom.IDispatch, error) {
+	var _ppDisp *systemcom.IDispatch
+	_hr := self.Raw.Get_Container(&_ppDisp)
+	return _ppDisp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Document wraps the raw Get_Document call.
-func (self IWebBrowser) Get_Document(ppDisp **systemcom.IDispatch) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Document(ppDisp)))
+func (self IWebBrowser) Get_Document() (*systemcom.IDispatch, error) {
+	var _ppDisp *systemcom.IDispatch
+	_hr := self.Raw.Get_Document(&_ppDisp)
+	return _ppDisp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_TopLevelContainer wraps the raw Get_TopLevelContainer call.
-func (self IWebBrowser) Get_TopLevelContainer(pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TopLevelContainer(pBool)))
+func (self IWebBrowser) Get_TopLevelContainer() (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_TopLevelContainer(&_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IWebBrowser) Get_Type(Type *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(Type)))
+func (self IWebBrowser) Get_Type() (foundation.BSTR, error) {
+	var _Type foundation.BSTR
+	_hr := self.Raw.Get_Type(&_Type)
+	return _Type, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Left wraps the raw Get_Left call.
-func (self IWebBrowser) Get_Left(pl *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Left(pl)))
+func (self IWebBrowser) Get_Left() (int32, error) {
+	var _pl int32
+	_hr := self.Raw.Get_Left(&_pl)
+	return _pl, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Left wraps the raw Put_Left call.
@@ -14032,8 +14302,10 @@ func (self IWebBrowser) Put_Left(Left int32) error {
 }
 
 // Get_Top wraps the raw Get_Top call.
-func (self IWebBrowser) Get_Top(pl *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Top(pl)))
+func (self IWebBrowser) Get_Top() (int32, error) {
+	var _pl int32
+	_hr := self.Raw.Get_Top(&_pl)
+	return _pl, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Top wraps the raw Put_Top call.
@@ -14042,8 +14314,10 @@ func (self IWebBrowser) Put_Top(Top int32) error {
 }
 
 // Get_Width wraps the raw Get_Width call.
-func (self IWebBrowser) Get_Width(pl *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Width(pl)))
+func (self IWebBrowser) Get_Width() (int32, error) {
+	var _pl int32
+	_hr := self.Raw.Get_Width(&_pl)
+	return _pl, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Width wraps the raw Put_Width call.
@@ -14052,8 +14326,10 @@ func (self IWebBrowser) Put_Width(Width int32) error {
 }
 
 // Get_Height wraps the raw Get_Height call.
-func (self IWebBrowser) Get_Height(pl *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Height(pl)))
+func (self IWebBrowser) Get_Height() (int32, error) {
+	var _pl int32
+	_hr := self.Raw.Get_Height(&_pl)
+	return _pl, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Height wraps the raw Put_Height call.
@@ -14062,18 +14338,24 @@ func (self IWebBrowser) Put_Height(Height int32) error {
 }
 
 // Get_LocationName wraps the raw Get_LocationName call.
-func (self IWebBrowser) Get_LocationName(LocationName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocationName(LocationName)))
+func (self IWebBrowser) Get_LocationName() (foundation.BSTR, error) {
+	var _LocationName foundation.BSTR
+	_hr := self.Raw.Get_LocationName(&_LocationName)
+	return _LocationName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocationURL wraps the raw Get_LocationURL call.
-func (self IWebBrowser) Get_LocationURL(LocationURL *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocationURL(LocationURL)))
+func (self IWebBrowser) Get_LocationURL() (foundation.BSTR, error) {
+	var _LocationURL foundation.BSTR
+	_hr := self.Raw.Get_LocationURL(&_LocationURL)
+	return _LocationURL, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Busy wraps the raw Get_Busy call.
-func (self IWebBrowser) Get_Busy(pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Busy(pBool)))
+func (self IWebBrowser) Get_Busy() (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Busy(&_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // IWebBrowser2 is an idiomatic wrapper over the raw COM interface UI.Shell.IWebBrowser2 with error-returning methods.
@@ -14093,8 +14375,10 @@ func (self IWebBrowser2) Navigate2(URL *systemvariant.VARIANT, Flags *systemvari
 }
 
 // QueryStatusWB wraps the raw QueryStatusWB call.
-func (self IWebBrowser2) QueryStatusWB(cmdID systemole.OLECMDID, pcmdf *systemole.OLECMDF) error {
-	return win32.HRESULTError(int32(self.Raw.QueryStatusWB(cmdID, pcmdf)))
+func (self IWebBrowser2) QueryStatusWB(cmdID systemole.OLECMDID) (systemole.OLECMDF, error) {
+	var _pcmdf systemole.OLECMDF
+	_hr := self.Raw.QueryStatusWB(cmdID, &_pcmdf)
+	return _pcmdf, win32.HRESULTError(int32(_hr))
 }
 
 // ExecWB wraps the raw ExecWB call.
@@ -14108,13 +14392,17 @@ func (self IWebBrowser2) ShowBrowserBar(pvaClsid *systemvariant.VARIANT, pvarSho
 }
 
 // Get_ReadyState wraps the raw Get_ReadyState call.
-func (self IWebBrowser2) Get_ReadyState(plReadyState *systemole.READYSTATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReadyState(plReadyState)))
+func (self IWebBrowser2) Get_ReadyState() (systemole.READYSTATE, error) {
+	var _plReadyState systemole.READYSTATE
+	_hr := self.Raw.Get_ReadyState(&_plReadyState)
+	return _plReadyState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Offline wraps the raw Get_Offline call.
-func (self IWebBrowser2) Get_Offline(pbOffline *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Offline(pbOffline)))
+func (self IWebBrowser2) Get_Offline() (foundation.VARIANT_BOOL, error) {
+	var _pbOffline foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Offline(&_pbOffline)
+	return _pbOffline, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Offline wraps the raw Put_Offline call.
@@ -14123,8 +14411,10 @@ func (self IWebBrowser2) Put_Offline(bOffline foundation.VARIANT_BOOL) error {
 }
 
 // Get_Silent wraps the raw Get_Silent call.
-func (self IWebBrowser2) Get_Silent(pbSilent *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Silent(pbSilent)))
+func (self IWebBrowser2) Get_Silent() (foundation.VARIANT_BOOL, error) {
+	var _pbSilent foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Silent(&_pbSilent)
+	return _pbSilent, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Silent wraps the raw Put_Silent call.
@@ -14133,8 +14423,10 @@ func (self IWebBrowser2) Put_Silent(bSilent foundation.VARIANT_BOOL) error {
 }
 
 // Get_RegisterAsBrowser wraps the raw Get_RegisterAsBrowser call.
-func (self IWebBrowser2) Get_RegisterAsBrowser(pbRegister *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RegisterAsBrowser(pbRegister)))
+func (self IWebBrowser2) Get_RegisterAsBrowser() (foundation.VARIANT_BOOL, error) {
+	var _pbRegister foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RegisterAsBrowser(&_pbRegister)
+	return _pbRegister, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RegisterAsBrowser wraps the raw Put_RegisterAsBrowser call.
@@ -14143,8 +14435,10 @@ func (self IWebBrowser2) Put_RegisterAsBrowser(bRegister foundation.VARIANT_BOOL
 }
 
 // Get_RegisterAsDropTarget wraps the raw Get_RegisterAsDropTarget call.
-func (self IWebBrowser2) Get_RegisterAsDropTarget(pbRegister *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RegisterAsDropTarget(pbRegister)))
+func (self IWebBrowser2) Get_RegisterAsDropTarget() (foundation.VARIANT_BOOL, error) {
+	var _pbRegister foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_RegisterAsDropTarget(&_pbRegister)
+	return _pbRegister, win32.HRESULTError(int32(_hr))
 }
 
 // Put_RegisterAsDropTarget wraps the raw Put_RegisterAsDropTarget call.
@@ -14153,8 +14447,10 @@ func (self IWebBrowser2) Put_RegisterAsDropTarget(bRegister foundation.VARIANT_B
 }
 
 // Get_TheaterMode wraps the raw Get_TheaterMode call.
-func (self IWebBrowser2) Get_TheaterMode(pbRegister *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TheaterMode(pbRegister)))
+func (self IWebBrowser2) Get_TheaterMode() (foundation.VARIANT_BOOL, error) {
+	var _pbRegister foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_TheaterMode(&_pbRegister)
+	return _pbRegister, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TheaterMode wraps the raw Put_TheaterMode call.
@@ -14163,8 +14459,10 @@ func (self IWebBrowser2) Put_TheaterMode(bRegister foundation.VARIANT_BOOL) erro
 }
 
 // Get_AddressBar wraps the raw Get_AddressBar call.
-func (self IWebBrowser2) Get_AddressBar(Value *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AddressBar(Value)))
+func (self IWebBrowser2) Get_AddressBar() (foundation.VARIANT_BOOL, error) {
+	var _Value foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AddressBar(&_Value)
+	return _Value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AddressBar wraps the raw Put_AddressBar call.
@@ -14173,8 +14471,10 @@ func (self IWebBrowser2) Put_AddressBar(Value foundation.VARIANT_BOOL) error {
 }
 
 // Get_Resizable wraps the raw Get_Resizable call.
-func (self IWebBrowser2) Get_Resizable(Value *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Resizable(Value)))
+func (self IWebBrowser2) Get_Resizable() (foundation.VARIANT_BOOL, error) {
+	var _Value foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Resizable(&_Value)
+	return _Value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Resizable wraps the raw Put_Resizable call.
@@ -14204,33 +14504,45 @@ func (self IWebBrowserApp) ClientToWindow(pcx *int32, pcy *int32) error {
 }
 
 // GetProperty wraps the raw GetProperty call.
-func (self IWebBrowserApp) GetProperty(Property foundation.BSTR, pvtValue *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.GetProperty(Property, pvtValue)))
+func (self IWebBrowserApp) GetProperty(Property foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pvtValue systemvariant.VARIANT
+	_hr := self.Raw.GetProperty(Property, &_pvtValue)
+	return _pvtValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IWebBrowserApp) Get_Name(Name *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(Name)))
+func (self IWebBrowserApp) Get_Name() (foundation.BSTR, error) {
+	var _Name foundation.BSTR
+	_hr := self.Raw.Get_Name(&_Name)
+	return _Name, win32.HRESULTError(int32(_hr))
 }
 
 // Get_HWND wraps the raw Get_HWND call.
-func (self IWebBrowserApp) Get_HWND(pHWND *foundation.SHANDLE_PTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_HWND(pHWND)))
+func (self IWebBrowserApp) Get_HWND() (foundation.SHANDLE_PTR, error) {
+	var _pHWND foundation.SHANDLE_PTR
+	_hr := self.Raw.Get_HWND(&_pHWND)
+	return _pHWND, win32.HRESULTError(int32(_hr))
 }
 
 // Get_FullName wraps the raw Get_FullName call.
-func (self IWebBrowserApp) Get_FullName(FullName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FullName(FullName)))
+func (self IWebBrowserApp) Get_FullName() (foundation.BSTR, error) {
+	var _FullName foundation.BSTR
+	_hr := self.Raw.Get_FullName(&_FullName)
+	return _FullName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Path wraps the raw Get_Path call.
-func (self IWebBrowserApp) Get_Path(Path *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Path(Path)))
+func (self IWebBrowserApp) Get_Path() (foundation.BSTR, error) {
+	var _Path foundation.BSTR
+	_hr := self.Raw.Get_Path(&_Path)
+	return _Path, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Visible wraps the raw Get_Visible call.
-func (self IWebBrowserApp) Get_Visible(pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Visible(pBool)))
+func (self IWebBrowserApp) Get_Visible() (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Visible(&_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Visible wraps the raw Put_Visible call.
@@ -14239,8 +14551,10 @@ func (self IWebBrowserApp) Put_Visible(Value foundation.VARIANT_BOOL) error {
 }
 
 // Get_StatusBar wraps the raw Get_StatusBar call.
-func (self IWebBrowserApp) Get_StatusBar(pBool *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusBar(pBool)))
+func (self IWebBrowserApp) Get_StatusBar() (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_StatusBar(&_pBool)
+	return _pBool, win32.HRESULTError(int32(_hr))
 }
 
 // Put_StatusBar wraps the raw Put_StatusBar call.
@@ -14249,8 +14563,10 @@ func (self IWebBrowserApp) Put_StatusBar(Value foundation.VARIANT_BOOL) error {
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IWebBrowserApp) Get_StatusText(StatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(StatusText)))
+func (self IWebBrowserApp) Get_StatusText() (foundation.BSTR, error) {
+	var _StatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_StatusText)
+	return _StatusText, win32.HRESULTError(int32(_hr))
 }
 
 // Put_StatusText wraps the raw Put_StatusText call.
@@ -14259,8 +14575,10 @@ func (self IWebBrowserApp) Put_StatusText(StatusText foundation.BSTR) error {
 }
 
 // Get_ToolBar wraps the raw Get_ToolBar call.
-func (self IWebBrowserApp) Get_ToolBar(Value *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ToolBar(Value)))
+func (self IWebBrowserApp) Get_ToolBar() (int32, error) {
+	var _Value int32
+	_hr := self.Raw.Get_ToolBar(&_Value)
+	return _Value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ToolBar wraps the raw Put_ToolBar call.
@@ -14269,8 +14587,10 @@ func (self IWebBrowserApp) Put_ToolBar(Value int32) error {
 }
 
 // Get_MenuBar wraps the raw Get_MenuBar call.
-func (self IWebBrowserApp) Get_MenuBar(Value *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MenuBar(Value)))
+func (self IWebBrowserApp) Get_MenuBar() (foundation.VARIANT_BOOL, error) {
+	var _Value foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MenuBar(&_Value)
+	return _Value, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MenuBar wraps the raw Put_MenuBar call.
@@ -14279,8 +14599,10 @@ func (self IWebBrowserApp) Put_MenuBar(Value foundation.VARIANT_BOOL) error {
 }
 
 // Get_FullScreen wraps the raw Get_FullScreen call.
-func (self IWebBrowserApp) Get_FullScreen(pbFullScreen *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_FullScreen(pbFullScreen)))
+func (self IWebBrowserApp) Get_FullScreen() (foundation.VARIANT_BOOL, error) {
+	var _pbFullScreen foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_FullScreen(&_pbFullScreen)
+	return _pbFullScreen, win32.HRESULTError(int32(_hr))
 }
 
 // Put_FullScreen wraps the raw Put_FullScreen call.
@@ -14343,8 +14665,10 @@ func (self IWebWizardHost) Put_Caption(bstrCaption foundation.BSTR) error {
 }
 
 // Get_Caption wraps the raw Get_Caption call.
-func (self IWebWizardHost) Get_Caption(pbstrCaption *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Caption(pbstrCaption)))
+func (self IWebWizardHost) Get_Caption() (foundation.BSTR, error) {
+	var _pbstrCaption foundation.BSTR
+	_hr := self.Raw.Get_Caption(&_pbstrCaption)
+	return _pbstrCaption, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Property wraps the raw Put_Property call.
@@ -14353,8 +14677,10 @@ func (self IWebWizardHost) Put_Property(bstrPropertyName foundation.BSTR, pvProp
 }
 
 // Get_Property wraps the raw Get_Property call.
-func (self IWebWizardHost) Get_Property(bstrPropertyName foundation.BSTR, pvProperty *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Property(bstrPropertyName, pvProperty)))
+func (self IWebWizardHost) Get_Property(bstrPropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pvProperty systemvariant.VARIANT
+	_hr := self.Raw.Get_Property(bstrPropertyName, &_pvProperty)
+	return _pvProperty, win32.HRESULTError(int32(_hr))
 }
 
 // SetWizardButtons wraps the raw SetWizardButtons call.
@@ -14379,8 +14705,10 @@ func WrapIWebWizardHost2(raw *uishell.IWebWizardHost2) IWebWizardHost2 {
 }
 
 // SignString wraps the raw SignString call.
-func (self IWebWizardHost2) SignString(value foundation.BSTR, signedValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.SignString(value, signedValue)))
+func (self IWebWizardHost2) SignString(value foundation.BSTR) (foundation.BSTR, error) {
+	var _signedValue foundation.BSTR
+	_hr := self.Raw.SignString(value, &_signedValue)
+	return _signedValue, win32.HRESULTError(int32(_hr))
 }
 
 // IWizardExtension is an idiomatic wrapper over the raw COM interface UI.Shell.IWizardExtension with error-returning methods.

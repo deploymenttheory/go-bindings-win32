@@ -806,8 +806,10 @@ func (self IWICDdsDecoder) GetParameters(pParameters *graphicsimaging.WICDdsPara
 }
 
 // GetFrame wraps the raw GetFrame call.
-func (self IWICDdsDecoder) GetFrame(arrayIndex uint32, mipLevel uint32, sliceIndex uint32, ppIBitmapFrame **graphicsimaging.IWICBitmapFrameDecode) error {
-	return win32.HRESULTError(int32(self.Raw.GetFrame(arrayIndex, mipLevel, sliceIndex, ppIBitmapFrame)))
+func (self IWICDdsDecoder) GetFrame(arrayIndex uint32, mipLevel uint32, sliceIndex uint32) (*graphicsimaging.IWICBitmapFrameDecode, error) {
+	var _ppIBitmapFrame *graphicsimaging.IWICBitmapFrameDecode
+	_hr := self.Raw.GetFrame(arrayIndex, mipLevel, sliceIndex, &_ppIBitmapFrame)
+	return _ppIBitmapFrame, win32.HRESULTError(int32(_hr))
 }
 
 // IWICDdsEncoder is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICDdsEncoder with error-returning methods.
@@ -1026,8 +1028,10 @@ func (self IWICDisplayAdaptationControl) DoesSupportChangingMaxLuminance(pguidDs
 }
 
 // GetDisplayMaxLuminance wraps the raw GetDisplayMaxLuminance call.
-func (self IWICDisplayAdaptationControl) GetDisplayMaxLuminance(pfLuminanceInNits *float32) error {
-	return win32.HRESULTError(int32(self.Raw.GetDisplayMaxLuminance(pfLuminanceInNits)))
+func (self IWICDisplayAdaptationControl) GetDisplayMaxLuminance() (float32, error) {
+	var _pfLuminanceInNits float32
+	_hr := self.Raw.GetDisplayMaxLuminance(&_pfLuminanceInNits)
+	return _pfLuminanceInNits, win32.HRESULTError(int32(_hr))
 }
 
 // IWICDisplayAdaptationControl2 is an idiomatic wrapper over the raw COM interface Graphics.Imaging.IWICDisplayAdaptationControl2 with error-returning methods.
@@ -1042,8 +1046,10 @@ func WrapIWICDisplayAdaptationControl2(raw *graphicsimaging.IWICDisplayAdaptatio
 }
 
 // GetSdrWhiteLevel wraps the raw GetSdrWhiteLevel call.
-func (self IWICDisplayAdaptationControl2) GetSdrWhiteLevel(pfWhiteLevelInNits *float32) error {
-	return win32.HRESULTError(int32(self.Raw.GetSdrWhiteLevel(pfWhiteLevelInNits)))
+func (self IWICDisplayAdaptationControl2) GetSdrWhiteLevel() (float32, error) {
+	var _pfWhiteLevelInNits float32
+	_hr := self.Raw.GetSdrWhiteLevel(&_pfWhiteLevelInNits)
+	return _pfWhiteLevelInNits, win32.HRESULTError(int32(_hr))
 }
 
 // SetToneMappingMode wraps the raw SetToneMappingMode call.
@@ -1052,8 +1058,10 @@ func (self IWICDisplayAdaptationControl2) SetToneMappingMode(mode graphicsimagin
 }
 
 // GetToneMappingMode wraps the raw GetToneMappingMode call.
-func (self IWICDisplayAdaptationControl2) GetToneMappingMode(mode *graphicsimaging.WICBitmapToneMappingMode) error {
-	return win32.HRESULTError(int32(self.Raw.GetToneMappingMode(mode)))
+func (self IWICDisplayAdaptationControl2) GetToneMappingMode() (graphicsimaging.WICBitmapToneMappingMode, error) {
+	var _mode graphicsimaging.WICBitmapToneMappingMode
+	_hr := self.Raw.GetToneMappingMode(&_mode)
+	return _mode, win32.HRESULTError(int32(_hr))
 }
 
 // DoesSupportToneMappingMode wraps the raw DoesSupportToneMappingMode call.
@@ -1162,19 +1170,25 @@ func WrapIWICImagingFactory(raw *graphicsimaging.IWICImagingFactory) IWICImaging
 }
 
 // CreateDecoderFromFilename wraps the raw CreateDecoderFromFilename call.
-func (self IWICImagingFactory) CreateDecoderFromFilename(wzFilename string, pguidVendor *win32.GUID, dwDesiredAccess foundation.GENERIC_ACCESS_RIGHTS, metadataOptions graphicsimaging.WICDecodeOptions, ppIDecoder **graphicsimaging.IWICBitmapDecoder) error {
+func (self IWICImagingFactory) CreateDecoderFromFilename(wzFilename string, pguidVendor *win32.GUID, dwDesiredAccess foundation.GENERIC_ACCESS_RIGHTS, metadataOptions graphicsimaging.WICDecodeOptions) (*graphicsimaging.IWICBitmapDecoder, error) {
 	_wzFilename := win32.UTF16Ptr(wzFilename)
-	return win32.HRESULTError(int32(self.Raw.CreateDecoderFromFilename(foundation.PWSTR(_wzFilename), pguidVendor, dwDesiredAccess, metadataOptions, ppIDecoder)))
+	var _ppIDecoder *graphicsimaging.IWICBitmapDecoder
+	_hr := self.Raw.CreateDecoderFromFilename(foundation.PWSTR(_wzFilename), pguidVendor, dwDesiredAccess, metadataOptions, &_ppIDecoder)
+	return _ppIDecoder, win32.HRESULTError(int32(_hr))
 }
 
 // CreateDecoderFromStream wraps the raw CreateDecoderFromStream call.
-func (self IWICImagingFactory) CreateDecoderFromStream(pIStream *systemcom.IStream, pguidVendor *win32.GUID, metadataOptions graphicsimaging.WICDecodeOptions, ppIDecoder **graphicsimaging.IWICBitmapDecoder) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDecoderFromStream(pIStream, pguidVendor, metadataOptions, ppIDecoder)))
+func (self IWICImagingFactory) CreateDecoderFromStream(pIStream *systemcom.IStream, pguidVendor *win32.GUID, metadataOptions graphicsimaging.WICDecodeOptions) (*graphicsimaging.IWICBitmapDecoder, error) {
+	var _ppIDecoder *graphicsimaging.IWICBitmapDecoder
+	_hr := self.Raw.CreateDecoderFromStream(pIStream, pguidVendor, metadataOptions, &_ppIDecoder)
+	return _ppIDecoder, win32.HRESULTError(int32(_hr))
 }
 
 // CreateDecoderFromFileHandle wraps the raw CreateDecoderFromFileHandle call.
-func (self IWICImagingFactory) CreateDecoderFromFileHandle(hFile uintptr, pguidVendor *win32.GUID, metadataOptions graphicsimaging.WICDecodeOptions, ppIDecoder **graphicsimaging.IWICBitmapDecoder) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDecoderFromFileHandle(hFile, pguidVendor, metadataOptions, ppIDecoder)))
+func (self IWICImagingFactory) CreateDecoderFromFileHandle(hFile uintptr, pguidVendor *win32.GUID, metadataOptions graphicsimaging.WICDecodeOptions) (*graphicsimaging.IWICBitmapDecoder, error) {
+	var _ppIDecoder *graphicsimaging.IWICBitmapDecoder
+	_hr := self.Raw.CreateDecoderFromFileHandle(hFile, pguidVendor, metadataOptions, &_ppIDecoder)
+	return _ppIDecoder, win32.HRESULTError(int32(_hr))
 }
 
 // CreateComponentInfo wraps the raw CreateComponentInfo call.
@@ -1183,13 +1197,17 @@ func (self IWICImagingFactory) CreateComponentInfo(clsidComponent *win32.GUID, p
 }
 
 // CreateDecoder wraps the raw CreateDecoder call.
-func (self IWICImagingFactory) CreateDecoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, ppIDecoder **graphicsimaging.IWICBitmapDecoder) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDecoder(guidContainerFormat, pguidVendor, ppIDecoder)))
+func (self IWICImagingFactory) CreateDecoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID) (*graphicsimaging.IWICBitmapDecoder, error) {
+	var _ppIDecoder *graphicsimaging.IWICBitmapDecoder
+	_hr := self.Raw.CreateDecoder(guidContainerFormat, pguidVendor, &_ppIDecoder)
+	return _ppIDecoder, win32.HRESULTError(int32(_hr))
 }
 
 // CreateEncoder wraps the raw CreateEncoder call.
-func (self IWICImagingFactory) CreateEncoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, ppIEncoder **graphicsimaging.IWICBitmapEncoder) error {
-	return win32.HRESULTError(int32(self.Raw.CreateEncoder(guidContainerFormat, pguidVendor, ppIEncoder)))
+func (self IWICImagingFactory) CreateEncoder(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID) (*graphicsimaging.IWICBitmapEncoder, error) {
+	var _ppIEncoder *graphicsimaging.IWICBitmapEncoder
+	_hr := self.Raw.CreateEncoder(guidContainerFormat, pguidVendor, &_ppIEncoder)
+	return _ppIEncoder, win32.HRESULTError(int32(_hr))
 }
 
 // CreatePalette wraps the raw CreatePalette call.
@@ -1889,13 +1907,17 @@ func WrapIWICProgressiveLevelControl(raw *graphicsimaging.IWICProgressiveLevelCo
 }
 
 // GetLevelCount wraps the raw GetLevelCount call.
-func (self IWICProgressiveLevelControl) GetLevelCount(pcLevels *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetLevelCount(pcLevels)))
+func (self IWICProgressiveLevelControl) GetLevelCount() (uint32, error) {
+	var _pcLevels uint32
+	_hr := self.Raw.GetLevelCount(&_pcLevels)
+	return _pcLevels, win32.HRESULTError(int32(_hr))
 }
 
 // GetCurrentLevel wraps the raw GetCurrentLevel call.
-func (self IWICProgressiveLevelControl) GetCurrentLevel(pnLevel *uint32) error {
-	return win32.HRESULTError(int32(self.Raw.GetCurrentLevel(pnLevel)))
+func (self IWICProgressiveLevelControl) GetCurrentLevel() (uint32, error) {
+	var _pnLevel uint32
+	_hr := self.Raw.GetCurrentLevel(&_pnLevel)
+	return _pnLevel, win32.HRESULTError(int32(_hr))
 }
 
 // SetCurrentLevel wraps the raw SetCurrentLevel call.

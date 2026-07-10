@@ -69,13 +69,17 @@ func WrapIRTCBuddy(raw *systemrealtimecommunications.IRTCBuddy) IRTCBuddy {
 }
 
 // Get_Status wraps the raw Get_Status call.
-func (self IRTCBuddy) Get_Status(penStatus *systemrealtimecommunications.RTC_PRESENCE_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Status(penStatus)))
+func (self IRTCBuddy) Get_Status() (systemrealtimecommunications.RTC_PRESENCE_STATUS, error) {
+	var _penStatus systemrealtimecommunications.RTC_PRESENCE_STATUS
+	_hr := self.Raw.Get_Status(&_penStatus)
+	return _penStatus, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Notes wraps the raw Get_Notes call.
-func (self IRTCBuddy) Get_Notes(pbstrNotes *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Notes(pbstrNotes)))
+func (self IRTCBuddy) Get_Notes() (foundation.BSTR, error) {
+	var _pbstrNotes foundation.BSTR
+	_hr := self.Raw.Get_Notes(&_pbstrNotes)
+	return _pbstrNotes, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCBuddy2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCBuddy2 with error-returning methods.
@@ -90,8 +94,10 @@ func WrapIRTCBuddy2(raw *systemrealtimecommunications.IRTCBuddy2) IRTCBuddy2 {
 }
 
 // Get_Profile wraps the raw Get_Profile call.
-func (self IRTCBuddy2) Get_Profile(ppProfile **systemrealtimecommunications.IRTCProfile2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profile(ppProfile)))
+func (self IRTCBuddy2) Get_Profile() (*systemrealtimecommunications.IRTCProfile2, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile2
+	_hr := self.Raw.Get_Profile(&_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // Refresh wraps the raw Refresh call.
@@ -100,33 +106,45 @@ func (self IRTCBuddy2) Refresh() error {
 }
 
 // EnumerateGroups wraps the raw EnumerateGroups call.
-func (self IRTCBuddy2) EnumerateGroups(ppEnum **systemrealtimecommunications.IRTCEnumGroups) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateGroups(ppEnum)))
+func (self IRTCBuddy2) EnumerateGroups() (*systemrealtimecommunications.IRTCEnumGroups, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumGroups
+	_hr := self.Raw.EnumerateGroups(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Groups wraps the raw Get_Groups call.
-func (self IRTCBuddy2) Get_Groups(ppCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Groups(ppCollection)))
+func (self IRTCBuddy2) Get_Groups() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_Groups(&_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PresenceProperty wraps the raw Get_PresenceProperty call.
-func (self IRTCBuddy2) Get_PresenceProperty(enProperty systemrealtimecommunications.RTC_PRESENCE_PROPERTY, pbstrProperty *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PresenceProperty(enProperty, pbstrProperty)))
+func (self IRTCBuddy2) Get_PresenceProperty(enProperty systemrealtimecommunications.RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
+	var _pbstrProperty foundation.BSTR
+	_hr := self.Raw.Get_PresenceProperty(enProperty, &_pbstrProperty)
+	return _pbstrProperty, win32.HRESULTError(int32(_hr))
 }
 
 // EnumeratePresenceDevices wraps the raw EnumeratePresenceDevices call.
-func (self IRTCBuddy2) EnumeratePresenceDevices(ppEnumDevices **systemrealtimecommunications.IRTCEnumPresenceDevices) error {
-	return win32.HRESULTError(int32(self.Raw.EnumeratePresenceDevices(ppEnumDevices)))
+func (self IRTCBuddy2) EnumeratePresenceDevices() (*systemrealtimecommunications.IRTCEnumPresenceDevices, error) {
+	var _ppEnumDevices *systemrealtimecommunications.IRTCEnumPresenceDevices
+	_hr := self.Raw.EnumeratePresenceDevices(&_ppEnumDevices)
+	return _ppEnumDevices, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PresenceDevices wraps the raw Get_PresenceDevices call.
-func (self IRTCBuddy2) Get_PresenceDevices(ppDevicesCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PresenceDevices(ppDevicesCollection)))
+func (self IRTCBuddy2) Get_PresenceDevices() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppDevicesCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_PresenceDevices(&_ppDevicesCollection)
+	return _ppDevicesCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SubscriptionType wraps the raw Get_SubscriptionType call.
-func (self IRTCBuddy2) Get_SubscriptionType(penSubscriptionType *systemrealtimecommunications.RTC_BUDDY_SUBSCRIPTION_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SubscriptionType(penSubscriptionType)))
+func (self IRTCBuddy2) Get_SubscriptionType() (systemrealtimecommunications.RTC_BUDDY_SUBSCRIPTION_TYPE, error) {
+	var _penSubscriptionType systemrealtimecommunications.RTC_BUDDY_SUBSCRIPTION_TYPE
+	_hr := self.Raw.Get_SubscriptionType(&_penSubscriptionType)
+	return _penSubscriptionType, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCBuddyEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCBuddyEvent with error-returning methods.
@@ -141,8 +159,10 @@ func WrapIRTCBuddyEvent(raw *systemrealtimecommunications.IRTCBuddyEvent) IRTCBu
 }
 
 // Get_Buddy wraps the raw Get_Buddy call.
-func (self IRTCBuddyEvent) Get_Buddy(ppBuddy **systemrealtimecommunications.IRTCBuddy) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Buddy(ppBuddy)))
+func (self IRTCBuddyEvent) Get_Buddy() (*systemrealtimecommunications.IRTCBuddy, error) {
+	var _ppBuddy *systemrealtimecommunications.IRTCBuddy
+	_hr := self.Raw.Get_Buddy(&_ppBuddy)
+	return _ppBuddy, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCBuddyEvent2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCBuddyEvent2 with error-returning methods.
@@ -157,18 +177,24 @@ func WrapIRTCBuddyEvent2(raw *systemrealtimecommunications.IRTCBuddyEvent2) IRTC
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IRTCBuddyEvent2) Get_EventType(pEventType *systemrealtimecommunications.RTC_BUDDY_EVENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(pEventType)))
+func (self IRTCBuddyEvent2) Get_EventType() (systemrealtimecommunications.RTC_BUDDY_EVENT_TYPE, error) {
+	var _pEventType systemrealtimecommunications.RTC_BUDDY_EVENT_TYPE
+	_hr := self.Raw.Get_EventType(&_pEventType)
+	return _pEventType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCBuddyEvent2) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCBuddyEvent2) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCBuddyEvent2) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCBuddyEvent2) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCBuddyGroup is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCBuddyGroup with error-returning methods.
@@ -183,8 +209,10 @@ func WrapIRTCBuddyGroup(raw *systemrealtimecommunications.IRTCBuddyGroup) IRTCBu
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IRTCBuddyGroup) Get_Name(pbstrGroupName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbstrGroupName)))
+func (self IRTCBuddyGroup) Get_Name() (foundation.BSTR, error) {
+	var _pbstrGroupName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbstrGroupName)
+	return _pbstrGroupName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -203,18 +231,24 @@ func (self IRTCBuddyGroup) RemoveBuddy(pBuddy *systemrealtimecommunications.IRTC
 }
 
 // EnumerateBuddies wraps the raw EnumerateBuddies call.
-func (self IRTCBuddyGroup) EnumerateBuddies(ppEnum **systemrealtimecommunications.IRTCEnumBuddies) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateBuddies(ppEnum)))
+func (self IRTCBuddyGroup) EnumerateBuddies() (*systemrealtimecommunications.IRTCEnumBuddies, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumBuddies
+	_hr := self.Raw.EnumerateBuddies(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Buddies wraps the raw Get_Buddies call.
-func (self IRTCBuddyGroup) Get_Buddies(ppCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Buddies(ppCollection)))
+func (self IRTCBuddyGroup) Get_Buddies() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_Buddies(&_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Data wraps the raw Get_Data call.
-func (self IRTCBuddyGroup) Get_Data(pbstrData *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Data(pbstrData)))
+func (self IRTCBuddyGroup) Get_Data() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	_hr := self.Raw.Get_Data(&_pbstrData)
+	return _pbstrData, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Data wraps the raw Put_Data call.
@@ -223,8 +257,10 @@ func (self IRTCBuddyGroup) Put_Data(bstrData foundation.BSTR) error {
 }
 
 // Get_Profile wraps the raw Get_Profile call.
-func (self IRTCBuddyGroup) Get_Profile(ppProfile **systemrealtimecommunications.IRTCProfile2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profile(ppProfile)))
+func (self IRTCBuddyGroup) Get_Profile() (*systemrealtimecommunications.IRTCProfile2, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile2
+	_hr := self.Raw.Get_Profile(&_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCBuddyGroupEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCBuddyGroupEvent with error-returning methods.
@@ -239,23 +275,31 @@ func WrapIRTCBuddyGroupEvent(raw *systemrealtimecommunications.IRTCBuddyGroupEve
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IRTCBuddyGroupEvent) Get_EventType(pEventType *systemrealtimecommunications.RTC_GROUP_EVENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(pEventType)))
+func (self IRTCBuddyGroupEvent) Get_EventType() (systemrealtimecommunications.RTC_GROUP_EVENT_TYPE, error) {
+	var _pEventType systemrealtimecommunications.RTC_GROUP_EVENT_TYPE
+	_hr := self.Raw.Get_EventType(&_pEventType)
+	return _pEventType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Group wraps the raw Get_Group call.
-func (self IRTCBuddyGroupEvent) Get_Group(ppGroup **systemrealtimecommunications.IRTCBuddyGroup) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Group(ppGroup)))
+func (self IRTCBuddyGroupEvent) Get_Group() (*systemrealtimecommunications.IRTCBuddyGroup, error) {
+	var _ppGroup *systemrealtimecommunications.IRTCBuddyGroup
+	_hr := self.Raw.Get_Group(&_ppGroup)
+	return _ppGroup, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Buddy wraps the raw Get_Buddy call.
-func (self IRTCBuddyGroupEvent) Get_Buddy(ppBuddy **systemrealtimecommunications.IRTCBuddy2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Buddy(ppBuddy)))
+func (self IRTCBuddyGroupEvent) Get_Buddy() (*systemrealtimecommunications.IRTCBuddy2, error) {
+	var _ppBuddy *systemrealtimecommunications.IRTCBuddy2
+	_hr := self.Raw.Get_Buddy(&_ppBuddy)
+	return _ppBuddy, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCBuddyGroupEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCBuddyGroupEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCClient is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCClient with error-returning methods.
@@ -290,8 +334,10 @@ func (self IRTCClient) Put_EventFilter(lFilter int32) error {
 }
 
 // Get_EventFilter wraps the raw Get_EventFilter call.
-func (self IRTCClient) Get_EventFilter(plFilter *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventFilter(plFilter)))
+func (self IRTCClient) Get_EventFilter() (int32, error) {
+	var _plFilter int32
+	_hr := self.Raw.Get_EventFilter(&_plFilter)
+	return _plFilter, win32.HRESULTError(int32(_hr))
 }
 
 // SetPreferredMediaTypes wraps the raw SetPreferredMediaTypes call.
@@ -300,18 +346,24 @@ func (self IRTCClient) SetPreferredMediaTypes(lMediaTypes int32, fPersistent fou
 }
 
 // Get_PreferredMediaTypes wraps the raw Get_PreferredMediaTypes call.
-func (self IRTCClient) Get_PreferredMediaTypes(plMediaTypes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredMediaTypes(plMediaTypes)))
+func (self IRTCClient) Get_PreferredMediaTypes() (int32, error) {
+	var _plMediaTypes int32
+	_hr := self.Raw.Get_PreferredMediaTypes(&_plMediaTypes)
+	return _plMediaTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MediaCapabilities wraps the raw Get_MediaCapabilities call.
-func (self IRTCClient) Get_MediaCapabilities(plMediaTypes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MediaCapabilities(plMediaTypes)))
+func (self IRTCClient) Get_MediaCapabilities() (int32, error) {
+	var _plMediaTypes int32
+	_hr := self.Raw.Get_MediaCapabilities(&_plMediaTypes)
+	return _plMediaTypes, win32.HRESULTError(int32(_hr))
 }
 
 // CreateSession wraps the raw CreateSession call.
-func (self IRTCClient) CreateSession(enType systemrealtimecommunications.RTC_SESSION_TYPE, bstrLocalPhoneURI foundation.BSTR, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32, ppSession **systemrealtimecommunications.IRTCSession) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSession(enType, bstrLocalPhoneURI, pProfile, lFlags, ppSession)))
+func (self IRTCClient) CreateSession(enType systemrealtimecommunications.RTC_SESSION_TYPE, bstrLocalPhoneURI foundation.BSTR, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32) (*systemrealtimecommunications.IRTCSession, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession
+	_hr := self.Raw.CreateSession(enType, bstrLocalPhoneURI, pProfile, lFlags, &_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ListenForIncomingSessions wraps the raw Put_ListenForIncomingSessions call.
@@ -320,13 +372,17 @@ func (self IRTCClient) Put_ListenForIncomingSessions(enListen systemrealtimecomm
 }
 
 // Get_ListenForIncomingSessions wraps the raw Get_ListenForIncomingSessions call.
-func (self IRTCClient) Get_ListenForIncomingSessions(penListen *systemrealtimecommunications.RTC_LISTEN_MODE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ListenForIncomingSessions(penListen)))
+func (self IRTCClient) Get_ListenForIncomingSessions() (systemrealtimecommunications.RTC_LISTEN_MODE, error) {
+	var _penListen systemrealtimecommunications.RTC_LISTEN_MODE
+	_hr := self.Raw.Get_ListenForIncomingSessions(&_penListen)
+	return _penListen, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetworkAddresses wraps the raw Get_NetworkAddresses call.
-func (self IRTCClient) Get_NetworkAddresses(fTCP foundation.VARIANT_BOOL, fExternal foundation.VARIANT_BOOL, pvAddresses *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkAddresses(fTCP, fExternal, pvAddresses)))
+func (self IRTCClient) Get_NetworkAddresses(fTCP foundation.VARIANT_BOOL, fExternal foundation.VARIANT_BOOL) (systemvariant.VARIANT, error) {
+	var _pvAddresses systemvariant.VARIANT
+	_hr := self.Raw.Get_NetworkAddresses(fTCP, fExternal, &_pvAddresses)
+	return _pvAddresses, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Volume wraps the raw Put_Volume call.
@@ -335,8 +391,10 @@ func (self IRTCClient) Put_Volume(enDevice systemrealtimecommunications.RTC_AUDI
 }
 
 // Get_Volume wraps the raw Get_Volume call.
-func (self IRTCClient) Get_Volume(enDevice systemrealtimecommunications.RTC_AUDIO_DEVICE, plVolume *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Volume(enDevice, plVolume)))
+func (self IRTCClient) Get_Volume(enDevice systemrealtimecommunications.RTC_AUDIO_DEVICE) (int32, error) {
+	var _plVolume int32
+	_hr := self.Raw.Get_Volume(enDevice, &_plVolume)
+	return _plVolume, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AudioMuted wraps the raw Put_AudioMuted call.
@@ -345,13 +403,17 @@ func (self IRTCClient) Put_AudioMuted(enDevice systemrealtimecommunications.RTC_
 }
 
 // Get_AudioMuted wraps the raw Get_AudioMuted call.
-func (self IRTCClient) Get_AudioMuted(enDevice systemrealtimecommunications.RTC_AUDIO_DEVICE, pfMuted *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AudioMuted(enDevice, pfMuted)))
+func (self IRTCClient) Get_AudioMuted(enDevice systemrealtimecommunications.RTC_AUDIO_DEVICE) (foundation.VARIANT_BOOL, error) {
+	var _pfMuted foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_AudioMuted(enDevice, &_pfMuted)
+	return _pfMuted, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IVideoWindow wraps the raw Get_IVideoWindow call.
-func (self IRTCClient) Get_IVideoWindow(enDevice systemrealtimecommunications.RTC_VIDEO_DEVICE, ppIVideoWindow **mediadirectshow.IVideoWindow) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IVideoWindow(enDevice, ppIVideoWindow)))
+func (self IRTCClient) Get_IVideoWindow(enDevice systemrealtimecommunications.RTC_VIDEO_DEVICE) (*mediadirectshow.IVideoWindow, error) {
+	var _ppIVideoWindow *mediadirectshow.IVideoWindow
+	_hr := self.Raw.Get_IVideoWindow(enDevice, &_ppIVideoWindow)
+	return _ppIVideoWindow, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PreferredAudioDevice wraps the raw Put_PreferredAudioDevice call.
@@ -360,8 +422,10 @@ func (self IRTCClient) Put_PreferredAudioDevice(enDevice systemrealtimecommunica
 }
 
 // Get_PreferredAudioDevice wraps the raw Get_PreferredAudioDevice call.
-func (self IRTCClient) Get_PreferredAudioDevice(enDevice systemrealtimecommunications.RTC_AUDIO_DEVICE, pbstrDeviceName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredAudioDevice(enDevice, pbstrDeviceName)))
+func (self IRTCClient) Get_PreferredAudioDevice(enDevice systemrealtimecommunications.RTC_AUDIO_DEVICE) (foundation.BSTR, error) {
+	var _pbstrDeviceName foundation.BSTR
+	_hr := self.Raw.Get_PreferredAudioDevice(enDevice, &_pbstrDeviceName)
+	return _pbstrDeviceName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PreferredVolume wraps the raw Put_PreferredVolume call.
@@ -370,8 +434,10 @@ func (self IRTCClient) Put_PreferredVolume(enDevice systemrealtimecommunications
 }
 
 // Get_PreferredVolume wraps the raw Get_PreferredVolume call.
-func (self IRTCClient) Get_PreferredVolume(enDevice systemrealtimecommunications.RTC_AUDIO_DEVICE, plVolume *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredVolume(enDevice, plVolume)))
+func (self IRTCClient) Get_PreferredVolume(enDevice systemrealtimecommunications.RTC_AUDIO_DEVICE) (int32, error) {
+	var _plVolume int32
+	_hr := self.Raw.Get_PreferredVolume(enDevice, &_plVolume)
+	return _plVolume, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PreferredAEC wraps the raw Put_PreferredAEC call.
@@ -380,8 +446,10 @@ func (self IRTCClient) Put_PreferredAEC(bEnable foundation.VARIANT_BOOL) error {
 }
 
 // Get_PreferredAEC wraps the raw Get_PreferredAEC call.
-func (self IRTCClient) Get_PreferredAEC(pbEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredAEC(pbEnabled)))
+func (self IRTCClient) Get_PreferredAEC() (foundation.VARIANT_BOOL, error) {
+	var _pbEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_PreferredAEC(&_pbEnabled)
+	return _pbEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PreferredVideoDevice wraps the raw Put_PreferredVideoDevice call.
@@ -390,13 +458,17 @@ func (self IRTCClient) Put_PreferredVideoDevice(bstrDeviceName foundation.BSTR) 
 }
 
 // Get_PreferredVideoDevice wraps the raw Get_PreferredVideoDevice call.
-func (self IRTCClient) Get_PreferredVideoDevice(pbstrDeviceName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredVideoDevice(pbstrDeviceName)))
+func (self IRTCClient) Get_PreferredVideoDevice() (foundation.BSTR, error) {
+	var _pbstrDeviceName foundation.BSTR
+	_hr := self.Raw.Get_PreferredVideoDevice(&_pbstrDeviceName)
+	return _pbstrDeviceName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ActiveMedia wraps the raw Get_ActiveMedia call.
-func (self IRTCClient) Get_ActiveMedia(plMediaType *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ActiveMedia(plMediaType)))
+func (self IRTCClient) Get_ActiveMedia() (int32, error) {
+	var _plMediaType int32
+	_hr := self.Raw.Get_ActiveMedia(&_plMediaType)
+	return _plMediaType, win32.HRESULTError(int32(_hr))
 }
 
 // Put_MaxBitrate wraps the raw Put_MaxBitrate call.
@@ -405,8 +477,10 @@ func (self IRTCClient) Put_MaxBitrate(lMaxBitrate int32) error {
 }
 
 // Get_MaxBitrate wraps the raw Get_MaxBitrate call.
-func (self IRTCClient) Get_MaxBitrate(plMaxBitrate *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MaxBitrate(plMaxBitrate)))
+func (self IRTCClient) Get_MaxBitrate() (int32, error) {
+	var _plMaxBitrate int32
+	_hr := self.Raw.Get_MaxBitrate(&_plMaxBitrate)
+	return _plMaxBitrate, win32.HRESULTError(int32(_hr))
 }
 
 // Put_TemporalSpatialTradeOff wraps the raw Put_TemporalSpatialTradeOff call.
@@ -415,13 +489,17 @@ func (self IRTCClient) Put_TemporalSpatialTradeOff(lValue int32) error {
 }
 
 // Get_TemporalSpatialTradeOff wraps the raw Get_TemporalSpatialTradeOff call.
-func (self IRTCClient) Get_TemporalSpatialTradeOff(plValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_TemporalSpatialTradeOff(plValue)))
+func (self IRTCClient) Get_TemporalSpatialTradeOff() (int32, error) {
+	var _plValue int32
+	_hr := self.Raw.Get_TemporalSpatialTradeOff(&_plValue)
+	return _plValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_NetworkQuality wraps the raw Get_NetworkQuality call.
-func (self IRTCClient) Get_NetworkQuality(plNetworkQuality *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_NetworkQuality(plNetworkQuality)))
+func (self IRTCClient) Get_NetworkQuality() (int32, error) {
+	var _plNetworkQuality int32
+	_hr := self.Raw.Get_NetworkQuality(&_plNetworkQuality)
+	return _plNetworkQuality, win32.HRESULTError(int32(_hr))
 }
 
 // StartT120Applet wraps the raw StartT120Applet call.
@@ -435,13 +513,17 @@ func (self IRTCClient) StopT120Applets() error {
 }
 
 // Get_IsT120AppletRunning wraps the raw Get_IsT120AppletRunning call.
-func (self IRTCClient) Get_IsT120AppletRunning(enApplet systemrealtimecommunications.RTC_T120_APPLET, pfRunning *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsT120AppletRunning(enApplet, pfRunning)))
+func (self IRTCClient) Get_IsT120AppletRunning(enApplet systemrealtimecommunications.RTC_T120_APPLET) (foundation.VARIANT_BOOL, error) {
+	var _pfRunning foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsT120AppletRunning(enApplet, &_pfRunning)
+	return _pfRunning, win32.HRESULTError(int32(_hr))
 }
 
 // Get_LocalUserURI wraps the raw Get_LocalUserURI call.
-func (self IRTCClient) Get_LocalUserURI(pbstrUserURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalUserURI(pbstrUserURI)))
+func (self IRTCClient) Get_LocalUserURI() (foundation.BSTR, error) {
+	var _pbstrUserURI foundation.BSTR
+	_hr := self.Raw.Get_LocalUserURI(&_pbstrUserURI)
+	return _pbstrUserURI, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalUserURI wraps the raw Put_LocalUserURI call.
@@ -450,8 +532,10 @@ func (self IRTCClient) Put_LocalUserURI(bstrUserURI foundation.BSTR) error {
 }
 
 // Get_LocalUserName wraps the raw Get_LocalUserName call.
-func (self IRTCClient) Get_LocalUserName(pbstrUserName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_LocalUserName(pbstrUserName)))
+func (self IRTCClient) Get_LocalUserName() (foundation.BSTR, error) {
+	var _pbstrUserName foundation.BSTR
+	_hr := self.Raw.Get_LocalUserName(&_pbstrUserName)
+	return _pbstrUserName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_LocalUserName wraps the raw Put_LocalUserName call.
@@ -475,8 +559,10 @@ func (self IRTCClient) InvokeTuningWizard(hwndParent uintptr) error {
 }
 
 // Get_IsTuned wraps the raw Get_IsTuned call.
-func (self IRTCClient) Get_IsTuned(pfTuned *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsTuned(pfTuned)))
+func (self IRTCClient) Get_IsTuned() (foundation.VARIANT_BOOL, error) {
+	var _pfTuned foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsTuned(&_pfTuned)
+	return _pfTuned, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCClient2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCClient2 with error-returning methods.
@@ -496,8 +582,10 @@ func (self IRTCClient2) Put_AnswerMode(enType systemrealtimecommunications.RTC_S
 }
 
 // Get_AnswerMode wraps the raw Get_AnswerMode call.
-func (self IRTCClient2) Get_AnswerMode(enType systemrealtimecommunications.RTC_SESSION_TYPE, penMode *systemrealtimecommunications.RTC_ANSWER_MODE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AnswerMode(enType, penMode)))
+func (self IRTCClient2) Get_AnswerMode(enType systemrealtimecommunications.RTC_SESSION_TYPE) (systemrealtimecommunications.RTC_ANSWER_MODE, error) {
+	var _penMode systemrealtimecommunications.RTC_ANSWER_MODE
+	_hr := self.Raw.Get_AnswerMode(enType, &_penMode)
+	return _penMode, win32.HRESULTError(int32(_hr))
 }
 
 // InvokeTuningWizardEx wraps the raw InvokeTuningWizardEx call.
@@ -506,8 +594,10 @@ func (self IRTCClient2) InvokeTuningWizardEx(hwndParent uintptr, fAllowAudio fou
 }
 
 // Get_Version wraps the raw Get_Version call.
-func (self IRTCClient2) Get_Version(plVersion *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Version(plVersion)))
+func (self IRTCClient2) Get_Version() (int32, error) {
+	var _plVersion int32
+	_hr := self.Raw.Get_Version(&_plVersion)
+	return _plVersion, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ClientName wraps the raw Put_ClientName call.
@@ -526,8 +616,10 @@ func (self IRTCClient2) InitializeEx(lFlags int32) error {
 }
 
 // CreateSessionWithDescription wraps the raw CreateSessionWithDescription call.
-func (self IRTCClient2) CreateSessionWithDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32, ppSession2 **systemrealtimecommunications.IRTCSession2) error {
-	return win32.HRESULTError(int32(self.Raw.CreateSessionWithDescription(bstrContentType, bstrSessionDescription, pProfile, lFlags, ppSession2)))
+func (self IRTCClient2) CreateSessionWithDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32) (*systemrealtimecommunications.IRTCSession2, error) {
+	var _ppSession2 *systemrealtimecommunications.IRTCSession2
+	_hr := self.Raw.CreateSessionWithDescription(bstrContentType, bstrSessionDescription, pProfile, lFlags, &_ppSession2)
+	return _ppSession2, win32.HRESULTError(int32(_hr))
 }
 
 // SetSessionDescriptionManager wraps the raw SetSessionDescriptionManager call.
@@ -541,8 +633,10 @@ func (self IRTCClient2) Put_PreferredSecurityLevel(enSecurityType systemrealtime
 }
 
 // Get_PreferredSecurityLevel wraps the raw Get_PreferredSecurityLevel call.
-func (self IRTCClient2) Get_PreferredSecurityLevel(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE, penSecurityLevel *systemrealtimecommunications.RTC_SECURITY_LEVEL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredSecurityLevel(enSecurityType, penSecurityLevel)))
+func (self IRTCClient2) Get_PreferredSecurityLevel(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE) (systemrealtimecommunications.RTC_SECURITY_LEVEL, error) {
+	var _penSecurityLevel systemrealtimecommunications.RTC_SECURITY_LEVEL
+	_hr := self.Raw.Get_PreferredSecurityLevel(enSecurityType, &_penSecurityLevel)
+	return _penSecurityLevel, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowedPorts wraps the raw Put_AllowedPorts call.
@@ -551,8 +645,10 @@ func (self IRTCClient2) Put_AllowedPorts(lTransport int32, enListenMode systemre
 }
 
 // Get_AllowedPorts wraps the raw Get_AllowedPorts call.
-func (self IRTCClient2) Get_AllowedPorts(lTransport int32, penListenMode *systemrealtimecommunications.RTC_LISTEN_MODE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowedPorts(lTransport, penListenMode)))
+func (self IRTCClient2) Get_AllowedPorts(lTransport int32) (systemrealtimecommunications.RTC_LISTEN_MODE, error) {
+	var _penListenMode systemrealtimecommunications.RTC_LISTEN_MODE
+	_hr := self.Raw.Get_AllowedPorts(lTransport, &_penListenMode)
+	return _penListenMode, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCClientEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCClientEvent with error-returning methods.
@@ -567,13 +663,17 @@ func WrapIRTCClientEvent(raw *systemrealtimecommunications.IRTCClientEvent) IRTC
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IRTCClientEvent) Get_EventType(penEventType *systemrealtimecommunications.RTC_CLIENT_EVENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(penEventType)))
+func (self IRTCClientEvent) Get_EventType() (systemrealtimecommunications.RTC_CLIENT_EVENT_TYPE, error) {
+	var _penEventType systemrealtimecommunications.RTC_CLIENT_EVENT_TYPE
+	_hr := self.Raw.Get_EventType(&_penEventType)
+	return _penEventType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Client wraps the raw Get_Client call.
-func (self IRTCClientEvent) Get_Client(ppClient **systemrealtimecommunications.IRTCClient) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Client(ppClient)))
+func (self IRTCClientEvent) Get_Client() (*systemrealtimecommunications.IRTCClient, error) {
+	var _ppClient *systemrealtimecommunications.IRTCClient
+	_hr := self.Raw.Get_Client(&_ppClient)
+	return _ppClient, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCClientPortManagement is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCClientPortManagement with error-returning methods.
@@ -614,23 +714,31 @@ func WrapIRTCClientPresence(raw *systemrealtimecommunications.IRTCClientPresence
 }
 
 // EnumerateBuddies wraps the raw EnumerateBuddies call.
-func (self IRTCClientPresence) EnumerateBuddies(ppEnum **systemrealtimecommunications.IRTCEnumBuddies) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateBuddies(ppEnum)))
+func (self IRTCClientPresence) EnumerateBuddies() (*systemrealtimecommunications.IRTCEnumBuddies, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumBuddies
+	_hr := self.Raw.EnumerateBuddies(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Buddies wraps the raw Get_Buddies call.
-func (self IRTCClientPresence) Get_Buddies(ppCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Buddies(ppCollection)))
+func (self IRTCClientPresence) Get_Buddies() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_Buddies(&_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Buddy wraps the raw Get_Buddy call.
-func (self IRTCClientPresence) Get_Buddy(bstrPresentityURI foundation.BSTR, ppBuddy **systemrealtimecommunications.IRTCBuddy) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Buddy(bstrPresentityURI, ppBuddy)))
+func (self IRTCClientPresence) Get_Buddy(bstrPresentityURI foundation.BSTR) (*systemrealtimecommunications.IRTCBuddy, error) {
+	var _ppBuddy *systemrealtimecommunications.IRTCBuddy
+	_hr := self.Raw.Get_Buddy(bstrPresentityURI, &_ppBuddy)
+	return _ppBuddy, win32.HRESULTError(int32(_hr))
 }
 
 // AddBuddy wraps the raw AddBuddy call.
-func (self IRTCClientPresence) AddBuddy(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32, ppBuddy **systemrealtimecommunications.IRTCBuddy) error {
-	return win32.HRESULTError(int32(self.Raw.AddBuddy(bstrPresentityURI, bstrUserName, bstrData, fPersistent, pProfile, lFlags, ppBuddy)))
+func (self IRTCClientPresence) AddBuddy(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32) (*systemrealtimecommunications.IRTCBuddy, error) {
+	var _ppBuddy *systemrealtimecommunications.IRTCBuddy
+	_hr := self.Raw.AddBuddy(bstrPresentityURI, bstrUserName, bstrData, fPersistent, pProfile, lFlags, &_ppBuddy)
+	return _ppBuddy, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveBuddy wraps the raw RemoveBuddy call.
@@ -639,23 +747,31 @@ func (self IRTCClientPresence) RemoveBuddy(pBuddy *systemrealtimecommunications.
 }
 
 // EnumerateWatchers wraps the raw EnumerateWatchers call.
-func (self IRTCClientPresence) EnumerateWatchers(ppEnum **systemrealtimecommunications.IRTCEnumWatchers) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateWatchers(ppEnum)))
+func (self IRTCClientPresence) EnumerateWatchers() (*systemrealtimecommunications.IRTCEnumWatchers, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumWatchers
+	_hr := self.Raw.EnumerateWatchers(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Watchers wraps the raw Get_Watchers call.
-func (self IRTCClientPresence) Get_Watchers(ppCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Watchers(ppCollection)))
+func (self IRTCClientPresence) Get_Watchers() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_Watchers(&_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Watcher wraps the raw Get_Watcher call.
-func (self IRTCClientPresence) Get_Watcher(bstrPresentityURI foundation.BSTR, ppWatcher **systemrealtimecommunications.IRTCWatcher) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Watcher(bstrPresentityURI, ppWatcher)))
+func (self IRTCClientPresence) Get_Watcher(bstrPresentityURI foundation.BSTR) (*systemrealtimecommunications.IRTCWatcher, error) {
+	var _ppWatcher *systemrealtimecommunications.IRTCWatcher
+	_hr := self.Raw.Get_Watcher(bstrPresentityURI, &_ppWatcher)
+	return _ppWatcher, win32.HRESULTError(int32(_hr))
 }
 
 // AddWatcher wraps the raw AddWatcher call.
-func (self IRTCClientPresence) AddWatcher(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fBlocked foundation.VARIANT_BOOL, fPersistent foundation.VARIANT_BOOL, ppWatcher **systemrealtimecommunications.IRTCWatcher) error {
-	return win32.HRESULTError(int32(self.Raw.AddWatcher(bstrPresentityURI, bstrUserName, bstrData, fBlocked, fPersistent, ppWatcher)))
+func (self IRTCClientPresence) AddWatcher(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fBlocked foundation.VARIANT_BOOL, fPersistent foundation.VARIANT_BOOL) (*systemrealtimecommunications.IRTCWatcher, error) {
+	var _ppWatcher *systemrealtimecommunications.IRTCWatcher
+	_hr := self.Raw.AddWatcher(bstrPresentityURI, bstrUserName, bstrData, fBlocked, fPersistent, &_ppWatcher)
+	return _ppWatcher, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveWatcher wraps the raw RemoveWatcher call.
@@ -669,8 +785,10 @@ func (self IRTCClientPresence) SetLocalPresenceInfo(enStatus systemrealtimecommu
 }
 
 // Get_OfferWatcherMode wraps the raw Get_OfferWatcherMode call.
-func (self IRTCClientPresence) Get_OfferWatcherMode(penMode *systemrealtimecommunications.RTC_OFFER_WATCHER_MODE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_OfferWatcherMode(penMode)))
+func (self IRTCClientPresence) Get_OfferWatcherMode() (systemrealtimecommunications.RTC_OFFER_WATCHER_MODE, error) {
+	var _penMode systemrealtimecommunications.RTC_OFFER_WATCHER_MODE
+	_hr := self.Raw.Get_OfferWatcherMode(&_penMode)
+	return _penMode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_OfferWatcherMode wraps the raw Put_OfferWatcherMode call.
@@ -679,8 +797,10 @@ func (self IRTCClientPresence) Put_OfferWatcherMode(enMode systemrealtimecommuni
 }
 
 // Get_PrivacyMode wraps the raw Get_PrivacyMode call.
-func (self IRTCClientPresence) Get_PrivacyMode(penMode *systemrealtimecommunications.RTC_PRIVACY_MODE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PrivacyMode(penMode)))
+func (self IRTCClientPresence) Get_PrivacyMode() (systemrealtimecommunications.RTC_PRIVACY_MODE, error) {
+	var _penMode systemrealtimecommunications.RTC_PRIVACY_MODE
+	_hr := self.Raw.Get_PrivacyMode(&_penMode)
+	return _penMode, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PrivacyMode wraps the raw Put_PrivacyMode call.
@@ -705,8 +825,10 @@ func (self IRTCClientPresence2) DisablePresence() error {
 }
 
 // AddGroup wraps the raw AddGroup call.
-func (self IRTCClientPresence2) AddGroup(bstrGroupName foundation.BSTR, bstrData foundation.BSTR, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32, ppGroup **systemrealtimecommunications.IRTCBuddyGroup) error {
-	return win32.HRESULTError(int32(self.Raw.AddGroup(bstrGroupName, bstrData, pProfile, lFlags, ppGroup)))
+func (self IRTCClientPresence2) AddGroup(bstrGroupName foundation.BSTR, bstrData foundation.BSTR, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32) (*systemrealtimecommunications.IRTCBuddyGroup, error) {
+	var _ppGroup *systemrealtimecommunications.IRTCBuddyGroup
+	_hr := self.Raw.AddGroup(bstrGroupName, bstrData, pProfile, lFlags, &_ppGroup)
+	return _ppGroup, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveGroup wraps the raw RemoveGroup call.
@@ -715,28 +837,38 @@ func (self IRTCClientPresence2) RemoveGroup(pGroup *systemrealtimecommunications
 }
 
 // EnumerateGroups wraps the raw EnumerateGroups call.
-func (self IRTCClientPresence2) EnumerateGroups(ppEnum **systemrealtimecommunications.IRTCEnumGroups) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateGroups(ppEnum)))
+func (self IRTCClientPresence2) EnumerateGroups() (*systemrealtimecommunications.IRTCEnumGroups, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumGroups
+	_hr := self.Raw.EnumerateGroups(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Groups wraps the raw Get_Groups call.
-func (self IRTCClientPresence2) Get_Groups(ppCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Groups(ppCollection)))
+func (self IRTCClientPresence2) Get_Groups() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_Groups(&_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Group wraps the raw Get_Group call.
-func (self IRTCClientPresence2) Get_Group(bstrGroupName foundation.BSTR, ppGroup **systemrealtimecommunications.IRTCBuddyGroup) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Group(bstrGroupName, ppGroup)))
+func (self IRTCClientPresence2) Get_Group(bstrGroupName foundation.BSTR) (*systemrealtimecommunications.IRTCBuddyGroup, error) {
+	var _ppGroup *systemrealtimecommunications.IRTCBuddyGroup
+	_hr := self.Raw.Get_Group(bstrGroupName, &_ppGroup)
+	return _ppGroup, win32.HRESULTError(int32(_hr))
 }
 
 // AddWatcherEx wraps the raw AddWatcherEx call.
-func (self IRTCClientPresence2) AddWatcherEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, enState systemrealtimecommunications.RTC_WATCHER_STATE, fPersistent foundation.VARIANT_BOOL, enScope systemrealtimecommunications.RTC_ACE_SCOPE, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32, ppWatcher **systemrealtimecommunications.IRTCWatcher2) error {
-	return win32.HRESULTError(int32(self.Raw.AddWatcherEx(bstrPresentityURI, bstrUserName, bstrData, enState, fPersistent, enScope, pProfile, lFlags, ppWatcher)))
+func (self IRTCClientPresence2) AddWatcherEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, enState systemrealtimecommunications.RTC_WATCHER_STATE, fPersistent foundation.VARIANT_BOOL, enScope systemrealtimecommunications.RTC_ACE_SCOPE, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32) (*systemrealtimecommunications.IRTCWatcher2, error) {
+	var _ppWatcher *systemrealtimecommunications.IRTCWatcher2
+	_hr := self.Raw.AddWatcherEx(bstrPresentityURI, bstrUserName, bstrData, enState, fPersistent, enScope, pProfile, lFlags, &_ppWatcher)
+	return _ppWatcher, win32.HRESULTError(int32(_hr))
 }
 
 // Get_WatcherEx wraps the raw Get_WatcherEx call.
-func (self IRTCClientPresence2) Get_WatcherEx(enMode systemrealtimecommunications.RTC_WATCHER_MATCH_MODE, bstrPresentityURI foundation.BSTR, ppWatcher **systemrealtimecommunications.IRTCWatcher2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_WatcherEx(enMode, bstrPresentityURI, ppWatcher)))
+func (self IRTCClientPresence2) Get_WatcherEx(enMode systemrealtimecommunications.RTC_WATCHER_MATCH_MODE, bstrPresentityURI foundation.BSTR) (*systemrealtimecommunications.IRTCWatcher2, error) {
+	var _ppWatcher *systemrealtimecommunications.IRTCWatcher2
+	_hr := self.Raw.Get_WatcherEx(enMode, bstrPresentityURI, &_ppWatcher)
+	return _ppWatcher, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PresenceProperty wraps the raw Put_PresenceProperty call.
@@ -745,8 +877,10 @@ func (self IRTCClientPresence2) Put_PresenceProperty(enProperty systemrealtimeco
 }
 
 // Get_PresenceProperty wraps the raw Get_PresenceProperty call.
-func (self IRTCClientPresence2) Get_PresenceProperty(enProperty systemrealtimecommunications.RTC_PRESENCE_PROPERTY, pbstrProperty *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PresenceProperty(enProperty, pbstrProperty)))
+func (self IRTCClientPresence2) Get_PresenceProperty(enProperty systemrealtimecommunications.RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
+	var _pbstrProperty foundation.BSTR
+	_hr := self.Raw.Get_PresenceProperty(enProperty, &_pbstrProperty)
+	return _pbstrProperty, win32.HRESULTError(int32(_hr))
 }
 
 // SetPresenceData wraps the raw SetPresenceData call.
@@ -765,8 +899,10 @@ func (self IRTCClientPresence2) GetLocalPresenceInfo(penStatus *systemrealtimeco
 }
 
 // AddBuddyEx wraps the raw AddBuddyEx call.
-func (self IRTCClientPresence2) AddBuddyEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, enSubscriptionType systemrealtimecommunications.RTC_BUDDY_SUBSCRIPTION_TYPE, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32, ppBuddy **systemrealtimecommunications.IRTCBuddy2) error {
-	return win32.HRESULTError(int32(self.Raw.AddBuddyEx(bstrPresentityURI, bstrUserName, bstrData, fPersistent, enSubscriptionType, pProfile, lFlags, ppBuddy)))
+func (self IRTCClientPresence2) AddBuddyEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, enSubscriptionType systemrealtimecommunications.RTC_BUDDY_SUBSCRIPTION_TYPE, pProfile *systemrealtimecommunications.IRTCProfile, lFlags int32) (*systemrealtimecommunications.IRTCBuddy2, error) {
+	var _ppBuddy *systemrealtimecommunications.IRTCBuddy2
+	_hr := self.Raw.AddBuddyEx(bstrPresentityURI, bstrUserName, bstrData, fPersistent, enSubscriptionType, pProfile, lFlags, &_ppBuddy)
+	return _ppBuddy, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCClientProvisioning is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCClientProvisioning with error-returning methods.
@@ -781,8 +917,10 @@ func WrapIRTCClientProvisioning(raw *systemrealtimecommunications.IRTCClientProv
 }
 
 // CreateProfile wraps the raw CreateProfile call.
-func (self IRTCClientProvisioning) CreateProfile(bstrProfileXML foundation.BSTR, ppProfile **systemrealtimecommunications.IRTCProfile) error {
-	return win32.HRESULTError(int32(self.Raw.CreateProfile(bstrProfileXML, ppProfile)))
+func (self IRTCClientProvisioning) CreateProfile(bstrProfileXML foundation.BSTR) (*systemrealtimecommunications.IRTCProfile, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile
+	_hr := self.Raw.CreateProfile(bstrProfileXML, &_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // EnableProfile wraps the raw EnableProfile call.
@@ -796,13 +934,17 @@ func (self IRTCClientProvisioning) DisableProfile(pProfile *systemrealtimecommun
 }
 
 // EnumerateProfiles wraps the raw EnumerateProfiles call.
-func (self IRTCClientProvisioning) EnumerateProfiles(ppEnum **systemrealtimecommunications.IRTCEnumProfiles) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateProfiles(ppEnum)))
+func (self IRTCClientProvisioning) EnumerateProfiles() (*systemrealtimecommunications.IRTCEnumProfiles, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumProfiles
+	_hr := self.Raw.EnumerateProfiles(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Profiles wraps the raw Get_Profiles call.
-func (self IRTCClientProvisioning) Get_Profiles(ppCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profiles(ppCollection)))
+func (self IRTCClientProvisioning) Get_Profiles() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_Profiles(&_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // GetProfile wraps the raw GetProfile call.
@@ -811,8 +953,10 @@ func (self IRTCClientProvisioning) GetProfile(bstrUserAccount foundation.BSTR, b
 }
 
 // Get_SessionCapabilities wraps the raw Get_SessionCapabilities call.
-func (self IRTCClientProvisioning) Get_SessionCapabilities(plSupportedSessions *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SessionCapabilities(plSupportedSessions)))
+func (self IRTCClientProvisioning) Get_SessionCapabilities() (int32, error) {
+	var _plSupportedSessions int32
+	_hr := self.Raw.Get_SessionCapabilities(&_plSupportedSessions)
+	return _plSupportedSessions, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCClientProvisioning2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCClientProvisioning2 with error-returning methods.
@@ -843,18 +987,24 @@ func WrapIRTCCollection(raw *systemrealtimecommunications.IRTCCollection) IRTCCo
 }
 
 // Get_Count wraps the raw Get_Count call.
-func (self IRTCCollection) Get_Count(lCount *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Count(lCount)))
+func (self IRTCCollection) Get_Count() (int32, error) {
+	var _lCount int32
+	_hr := self.Raw.Get_Count(&_lCount)
+	return _lCount, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Item wraps the raw Get_Item call.
-func (self IRTCCollection) Get_Item(Index int32, pVariant *systemvariant.VARIANT) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Item(Index, pVariant)))
+func (self IRTCCollection) Get_Item(Index int32) (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	_hr := self.Raw.Get_Item(Index, &_pVariant)
+	return _pVariant, win32.HRESULTError(int32(_hr))
 }
 
 // Get__NewEnum wraps the raw Get__NewEnum call.
-func (self IRTCCollection) Get__NewEnum(ppNewEnum **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.Get__NewEnum(ppNewEnum)))
+func (self IRTCCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppNewEnum *systemcom.IUnknown
+	_hr := self.Raw.Get__NewEnum(&_ppNewEnum)
+	return _ppNewEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCDispatchEventNotification is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCDispatchEventNotification with error-returning methods.
@@ -895,8 +1045,10 @@ func (self IRTCEnumBuddies) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IRTCEnumBuddies) Clone(ppEnum **systemrealtimecommunications.IRTCEnumBuddies) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnum)))
+func (self IRTCEnumBuddies) Clone() (*systemrealtimecommunications.IRTCEnumBuddies, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumBuddies
+	_hr := self.Raw.Clone(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCEnumGroups is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCEnumGroups with error-returning methods.
@@ -926,8 +1078,10 @@ func (self IRTCEnumGroups) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IRTCEnumGroups) Clone(ppEnum **systemrealtimecommunications.IRTCEnumGroups) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnum)))
+func (self IRTCEnumGroups) Clone() (*systemrealtimecommunications.IRTCEnumGroups, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumGroups
+	_hr := self.Raw.Clone(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCEnumParticipants is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCEnumParticipants with error-returning methods.
@@ -957,8 +1111,10 @@ func (self IRTCEnumParticipants) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IRTCEnumParticipants) Clone(ppEnum **systemrealtimecommunications.IRTCEnumParticipants) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnum)))
+func (self IRTCEnumParticipants) Clone() (*systemrealtimecommunications.IRTCEnumParticipants, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumParticipants
+	_hr := self.Raw.Clone(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCEnumPresenceDevices is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCEnumPresenceDevices with error-returning methods.
@@ -988,8 +1144,10 @@ func (self IRTCEnumPresenceDevices) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IRTCEnumPresenceDevices) Clone(ppEnum **systemrealtimecommunications.IRTCEnumPresenceDevices) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnum)))
+func (self IRTCEnumPresenceDevices) Clone() (*systemrealtimecommunications.IRTCEnumPresenceDevices, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumPresenceDevices
+	_hr := self.Raw.Clone(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCEnumProfiles is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCEnumProfiles with error-returning methods.
@@ -1019,8 +1177,10 @@ func (self IRTCEnumProfiles) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IRTCEnumProfiles) Clone(ppEnum **systemrealtimecommunications.IRTCEnumProfiles) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnum)))
+func (self IRTCEnumProfiles) Clone() (*systemrealtimecommunications.IRTCEnumProfiles, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumProfiles
+	_hr := self.Raw.Clone(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCEnumUserSearchResults is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCEnumUserSearchResults with error-returning methods.
@@ -1050,8 +1210,10 @@ func (self IRTCEnumUserSearchResults) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IRTCEnumUserSearchResults) Clone(ppEnum **systemrealtimecommunications.IRTCEnumUserSearchResults) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnum)))
+func (self IRTCEnumUserSearchResults) Clone() (*systemrealtimecommunications.IRTCEnumUserSearchResults, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumUserSearchResults
+	_hr := self.Raw.Clone(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCEnumWatchers is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCEnumWatchers with error-returning methods.
@@ -1081,8 +1243,10 @@ func (self IRTCEnumWatchers) Skip(celt uint32) error {
 }
 
 // Clone wraps the raw Clone call.
-func (self IRTCEnumWatchers) Clone(ppEnum **systemrealtimecommunications.IRTCEnumWatchers) error {
-	return win32.HRESULTError(int32(self.Raw.Clone(ppEnum)))
+func (self IRTCEnumWatchers) Clone() (*systemrealtimecommunications.IRTCEnumWatchers, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumWatchers
+	_hr := self.Raw.Clone(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCEventNotification is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCEventNotification with error-returning methods.
@@ -1113,23 +1277,31 @@ func WrapIRTCInfoEvent(raw *systemrealtimecommunications.IRTCInfoEvent) IRTCInfo
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCInfoEvent) Get_Session(ppSession **systemrealtimecommunications.IRTCSession2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession)))
+func (self IRTCInfoEvent) Get_Session() (*systemrealtimecommunications.IRTCSession2, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession2
+	_hr := self.Raw.Get_Session(&_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Participant wraps the raw Get_Participant call.
-func (self IRTCInfoEvent) Get_Participant(ppParticipant **systemrealtimecommunications.IRTCParticipant) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Participant(ppParticipant)))
+func (self IRTCInfoEvent) Get_Participant() (*systemrealtimecommunications.IRTCParticipant, error) {
+	var _ppParticipant *systemrealtimecommunications.IRTCParticipant
+	_hr := self.Raw.Get_Participant(&_ppParticipant)
+	return _ppParticipant, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Info wraps the raw Get_Info call.
-func (self IRTCInfoEvent) Get_Info(pbstrInfo *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Info(pbstrInfo)))
+func (self IRTCInfoEvent) Get_Info() (foundation.BSTR, error) {
+	var _pbstrInfo foundation.BSTR
+	_hr := self.Raw.Get_Info(&_pbstrInfo)
+	return _pbstrInfo, win32.HRESULTError(int32(_hr))
 }
 
 // Get_InfoHeader wraps the raw Get_InfoHeader call.
-func (self IRTCInfoEvent) Get_InfoHeader(pbstrInfoHeader *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_InfoHeader(pbstrInfoHeader)))
+func (self IRTCInfoEvent) Get_InfoHeader() (foundation.BSTR, error) {
+	var _pbstrInfoHeader foundation.BSTR
+	_hr := self.Raw.Get_InfoHeader(&_pbstrInfoHeader)
+	return _pbstrInfoHeader, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCIntensityEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCIntensityEvent with error-returning methods.
@@ -1144,23 +1316,31 @@ func WrapIRTCIntensityEvent(raw *systemrealtimecommunications.IRTCIntensityEvent
 }
 
 // Get_Level wraps the raw Get_Level call.
-func (self IRTCIntensityEvent) Get_Level(plLevel *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Level(plLevel)))
+func (self IRTCIntensityEvent) Get_Level() (int32, error) {
+	var _plLevel int32
+	_hr := self.Raw.Get_Level(&_plLevel)
+	return _plLevel, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Min wraps the raw Get_Min call.
-func (self IRTCIntensityEvent) Get_Min(plMin *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Min(plMin)))
+func (self IRTCIntensityEvent) Get_Min() (int32, error) {
+	var _plMin int32
+	_hr := self.Raw.Get_Min(&_plMin)
+	return _plMin, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Max wraps the raw Get_Max call.
-func (self IRTCIntensityEvent) Get_Max(plMax *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Max(plMax)))
+func (self IRTCIntensityEvent) Get_Max() (int32, error) {
+	var _plMax int32
+	_hr := self.Raw.Get_Max(&_plMax)
+	return _plMax, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Direction wraps the raw Get_Direction call.
-func (self IRTCIntensityEvent) Get_Direction(penDirection *systemrealtimecommunications.RTC_AUDIO_DEVICE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Direction(penDirection)))
+func (self IRTCIntensityEvent) Get_Direction() (systemrealtimecommunications.RTC_AUDIO_DEVICE, error) {
+	var _penDirection systemrealtimecommunications.RTC_AUDIO_DEVICE
+	_hr := self.Raw.Get_Direction(&_penDirection)
+	return _penDirection, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCMediaEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCMediaEvent with error-returning methods.
@@ -1175,18 +1355,24 @@ func WrapIRTCMediaEvent(raw *systemrealtimecommunications.IRTCMediaEvent) IRTCMe
 }
 
 // Get_MediaType wraps the raw Get_MediaType call.
-func (self IRTCMediaEvent) Get_MediaType(pMediaType *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MediaType(pMediaType)))
+func (self IRTCMediaEvent) Get_MediaType() (int32, error) {
+	var _pMediaType int32
+	_hr := self.Raw.Get_MediaType(&_pMediaType)
+	return _pMediaType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IRTCMediaEvent) Get_EventType(penEventType *systemrealtimecommunications.RTC_MEDIA_EVENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(penEventType)))
+func (self IRTCMediaEvent) Get_EventType() (systemrealtimecommunications.RTC_MEDIA_EVENT_TYPE, error) {
+	var _penEventType systemrealtimecommunications.RTC_MEDIA_EVENT_TYPE
+	_hr := self.Raw.Get_EventType(&_penEventType)
+	return _penEventType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EventReason wraps the raw Get_EventReason call.
-func (self IRTCMediaEvent) Get_EventReason(penEventReason *systemrealtimecommunications.RTC_MEDIA_EVENT_REASON) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventReason(penEventReason)))
+func (self IRTCMediaEvent) Get_EventReason() (systemrealtimecommunications.RTC_MEDIA_EVENT_REASON, error) {
+	var _penEventReason systemrealtimecommunications.RTC_MEDIA_EVENT_REASON
+	_hr := self.Raw.Get_EventReason(&_penEventReason)
+	return _penEventReason, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCMediaRequestEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCMediaRequestEvent with error-returning methods.
@@ -1201,18 +1387,24 @@ func WrapIRTCMediaRequestEvent(raw *systemrealtimecommunications.IRTCMediaReques
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCMediaRequestEvent) Get_Session(ppSession **systemrealtimecommunications.IRTCSession2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession)))
+func (self IRTCMediaRequestEvent) Get_Session() (*systemrealtimecommunications.IRTCSession2, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession2
+	_hr := self.Raw.Get_Session(&_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProposedMedia wraps the raw Get_ProposedMedia call.
-func (self IRTCMediaRequestEvent) Get_ProposedMedia(plMediaTypes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProposedMedia(plMediaTypes)))
+func (self IRTCMediaRequestEvent) Get_ProposedMedia() (int32, error) {
+	var _plMediaTypes int32
+	_hr := self.Raw.Get_ProposedMedia(&_plMediaTypes)
+	return _plMediaTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CurrentMedia wraps the raw Get_CurrentMedia call.
-func (self IRTCMediaRequestEvent) Get_CurrentMedia(plMediaTypes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CurrentMedia(plMediaTypes)))
+func (self IRTCMediaRequestEvent) Get_CurrentMedia() (int32, error) {
+	var _plMediaTypes int32
+	_hr := self.Raw.Get_CurrentMedia(&_plMediaTypes)
+	return _plMediaTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Accept wraps the raw Accept call.
@@ -1221,8 +1413,10 @@ func (self IRTCMediaRequestEvent) Accept(lMediaTypes int32) error {
 }
 
 // Get_RemotePreferredSecurityLevel wraps the raw Get_RemotePreferredSecurityLevel call.
-func (self IRTCMediaRequestEvent) Get_RemotePreferredSecurityLevel(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE, penSecurityLevel *systemrealtimecommunications.RTC_SECURITY_LEVEL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemotePreferredSecurityLevel(enSecurityType, penSecurityLevel)))
+func (self IRTCMediaRequestEvent) Get_RemotePreferredSecurityLevel(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE) (systemrealtimecommunications.RTC_SECURITY_LEVEL, error) {
+	var _penSecurityLevel systemrealtimecommunications.RTC_SECURITY_LEVEL
+	_hr := self.Raw.Get_RemotePreferredSecurityLevel(enSecurityType, &_penSecurityLevel)
+	return _penSecurityLevel, win32.HRESULTError(int32(_hr))
 }
 
 // Reject wraps the raw Reject call.
@@ -1231,8 +1425,10 @@ func (self IRTCMediaRequestEvent) Reject() error {
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCMediaRequestEvent) Get_State(pState *systemrealtimecommunications.RTC_REINVITE_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(pState)))
+func (self IRTCMediaRequestEvent) Get_State() (systemrealtimecommunications.RTC_REINVITE_STATE, error) {
+	var _pState systemrealtimecommunications.RTC_REINVITE_STATE
+	_hr := self.Raw.Get_State(&_pState)
+	return _pState, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCMessagingEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCMessagingEvent with error-returning methods.
@@ -1247,33 +1443,45 @@ func WrapIRTCMessagingEvent(raw *systemrealtimecommunications.IRTCMessagingEvent
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCMessagingEvent) Get_Session(ppSession **systemrealtimecommunications.IRTCSession) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession)))
+func (self IRTCMessagingEvent) Get_Session() (*systemrealtimecommunications.IRTCSession, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession
+	_hr := self.Raw.Get_Session(&_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Participant wraps the raw Get_Participant call.
-func (self IRTCMessagingEvent) Get_Participant(ppParticipant **systemrealtimecommunications.IRTCParticipant) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Participant(ppParticipant)))
+func (self IRTCMessagingEvent) Get_Participant() (*systemrealtimecommunications.IRTCParticipant, error) {
+	var _ppParticipant *systemrealtimecommunications.IRTCParticipant
+	_hr := self.Raw.Get_Participant(&_ppParticipant)
+	return _ppParticipant, win32.HRESULTError(int32(_hr))
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IRTCMessagingEvent) Get_EventType(penEventType *systemrealtimecommunications.RTC_MESSAGING_EVENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(penEventType)))
+func (self IRTCMessagingEvent) Get_EventType() (systemrealtimecommunications.RTC_MESSAGING_EVENT_TYPE, error) {
+	var _penEventType systemrealtimecommunications.RTC_MESSAGING_EVENT_TYPE
+	_hr := self.Raw.Get_EventType(&_penEventType)
+	return _penEventType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Message wraps the raw Get_Message call.
-func (self IRTCMessagingEvent) Get_Message(pbstrMessage *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Message(pbstrMessage)))
+func (self IRTCMessagingEvent) Get_Message() (foundation.BSTR, error) {
+	var _pbstrMessage foundation.BSTR
+	_hr := self.Raw.Get_Message(&_pbstrMessage)
+	return _pbstrMessage, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MessageHeader wraps the raw Get_MessageHeader call.
-func (self IRTCMessagingEvent) Get_MessageHeader(pbstrMessageHeader *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MessageHeader(pbstrMessageHeader)))
+func (self IRTCMessagingEvent) Get_MessageHeader() (foundation.BSTR, error) {
+	var _pbstrMessageHeader foundation.BSTR
+	_hr := self.Raw.Get_MessageHeader(&_pbstrMessageHeader)
+	return _pbstrMessageHeader, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserStatus wraps the raw Get_UserStatus call.
-func (self IRTCMessagingEvent) Get_UserStatus(penUserStatus *systemrealtimecommunications.RTC_MESSAGING_USER_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserStatus(penUserStatus)))
+func (self IRTCMessagingEvent) Get_UserStatus() (systemrealtimecommunications.RTC_MESSAGING_USER_STATUS, error) {
+	var _penUserStatus systemrealtimecommunications.RTC_MESSAGING_USER_STATUS
+	_hr := self.Raw.Get_UserStatus(&_penUserStatus)
+	return _penUserStatus, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCParticipant is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCParticipant with error-returning methods.
@@ -1288,28 +1496,38 @@ func WrapIRTCParticipant(raw *systemrealtimecommunications.IRTCParticipant) IRTC
 }
 
 // Get_UserURI wraps the raw Get_UserURI call.
-func (self IRTCParticipant) Get_UserURI(pbstrUserURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserURI(pbstrUserURI)))
+func (self IRTCParticipant) Get_UserURI() (foundation.BSTR, error) {
+	var _pbstrUserURI foundation.BSTR
+	_hr := self.Raw.Get_UserURI(&_pbstrUserURI)
+	return _pbstrUserURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IRTCParticipant) Get_Name(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbstrName)))
+func (self IRTCParticipant) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Removable wraps the raw Get_Removable call.
-func (self IRTCParticipant) Get_Removable(pfRemovable *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Removable(pfRemovable)))
+func (self IRTCParticipant) Get_Removable() (foundation.VARIANT_BOOL, error) {
+	var _pfRemovable foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Removable(&_pfRemovable)
+	return _pfRemovable, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCParticipant) Get_State(penState *systemrealtimecommunications.RTC_PARTICIPANT_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(penState)))
+func (self IRTCParticipant) Get_State() (systemrealtimecommunications.RTC_PARTICIPANT_STATE, error) {
+	var _penState systemrealtimecommunications.RTC_PARTICIPANT_STATE
+	_hr := self.Raw.Get_State(&_penState)
+	return _penState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCParticipant) Get_Session(ppSession **systemrealtimecommunications.IRTCSession) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession)))
+func (self IRTCParticipant) Get_Session() (*systemrealtimecommunications.IRTCSession, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession
+	_hr := self.Raw.Get_Session(&_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCParticipantStateChangeEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCParticipantStateChangeEvent with error-returning methods.
@@ -1324,18 +1542,24 @@ func WrapIRTCParticipantStateChangeEvent(raw *systemrealtimecommunications.IRTCP
 }
 
 // Get_Participant wraps the raw Get_Participant call.
-func (self IRTCParticipantStateChangeEvent) Get_Participant(ppParticipant **systemrealtimecommunications.IRTCParticipant) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Participant(ppParticipant)))
+func (self IRTCParticipantStateChangeEvent) Get_Participant() (*systemrealtimecommunications.IRTCParticipant, error) {
+	var _ppParticipant *systemrealtimecommunications.IRTCParticipant
+	_hr := self.Raw.Get_Participant(&_ppParticipant)
+	return _ppParticipant, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCParticipantStateChangeEvent) Get_State(penState *systemrealtimecommunications.RTC_PARTICIPANT_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(penState)))
+func (self IRTCParticipantStateChangeEvent) Get_State() (systemrealtimecommunications.RTC_PARTICIPANT_STATE, error) {
+	var _penState systemrealtimecommunications.RTC_PARTICIPANT_STATE
+	_hr := self.Raw.Get_State(&_penState)
+	return _penState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCParticipantStateChangeEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCParticipantStateChangeEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCPortManager is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCPortManager with error-returning methods.
@@ -1376,8 +1600,10 @@ func WrapIRTCPresenceContact(raw *systemrealtimecommunications.IRTCPresenceConta
 }
 
 // Get_PresentityURI wraps the raw Get_PresentityURI call.
-func (self IRTCPresenceContact) Get_PresentityURI(pbstrPresentityURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PresentityURI(pbstrPresentityURI)))
+func (self IRTCPresenceContact) Get_PresentityURI() (foundation.BSTR, error) {
+	var _pbstrPresentityURI foundation.BSTR
+	_hr := self.Raw.Get_PresentityURI(&_pbstrPresentityURI)
+	return _pbstrPresentityURI, win32.HRESULTError(int32(_hr))
 }
 
 // Put_PresentityURI wraps the raw Put_PresentityURI call.
@@ -1386,8 +1612,10 @@ func (self IRTCPresenceContact) Put_PresentityURI(bstrPresentityURI foundation.B
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IRTCPresenceContact) Get_Name(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbstrName)))
+func (self IRTCPresenceContact) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Name wraps the raw Put_Name call.
@@ -1396,8 +1624,10 @@ func (self IRTCPresenceContact) Put_Name(bstrName foundation.BSTR) error {
 }
 
 // Get_Data wraps the raw Get_Data call.
-func (self IRTCPresenceContact) Get_Data(pbstrData *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Data(pbstrData)))
+func (self IRTCPresenceContact) Get_Data() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	_hr := self.Raw.Get_Data(&_pbstrData)
+	return _pbstrData, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Data wraps the raw Put_Data call.
@@ -1406,8 +1636,10 @@ func (self IRTCPresenceContact) Put_Data(bstrData foundation.BSTR) error {
 }
 
 // Get_Persistent wraps the raw Get_Persistent call.
-func (self IRTCPresenceContact) Get_Persistent(pfPersistent *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Persistent(pfPersistent)))
+func (self IRTCPresenceContact) Get_Persistent() (foundation.VARIANT_BOOL, error) {
+	var _pfPersistent foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_Persistent(&_pfPersistent)
+	return _pfPersistent, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Persistent wraps the raw Put_Persistent call.
@@ -1427,13 +1659,17 @@ func WrapIRTCPresenceDataEvent(raw *systemrealtimecommunications.IRTCPresenceDat
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCPresenceDataEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCPresenceDataEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCPresenceDataEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCPresenceDataEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // GetPresenceData wraps the raw GetPresenceData call.
@@ -1453,18 +1689,24 @@ func WrapIRTCPresenceDevice(raw *systemrealtimecommunications.IRTCPresenceDevice
 }
 
 // Get_Status wraps the raw Get_Status call.
-func (self IRTCPresenceDevice) Get_Status(penStatus *systemrealtimecommunications.RTC_PRESENCE_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Status(penStatus)))
+func (self IRTCPresenceDevice) Get_Status() (systemrealtimecommunications.RTC_PRESENCE_STATUS, error) {
+	var _penStatus systemrealtimecommunications.RTC_PRESENCE_STATUS
+	_hr := self.Raw.Get_Status(&_penStatus)
+	return _penStatus, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Notes wraps the raw Get_Notes call.
-func (self IRTCPresenceDevice) Get_Notes(pbstrNotes *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Notes(pbstrNotes)))
+func (self IRTCPresenceDevice) Get_Notes() (foundation.BSTR, error) {
+	var _pbstrNotes foundation.BSTR
+	_hr := self.Raw.Get_Notes(&_pbstrNotes)
+	return _pbstrNotes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PresenceProperty wraps the raw Get_PresenceProperty call.
-func (self IRTCPresenceDevice) Get_PresenceProperty(enProperty systemrealtimecommunications.RTC_PRESENCE_PROPERTY, pbstrProperty *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PresenceProperty(enProperty, pbstrProperty)))
+func (self IRTCPresenceDevice) Get_PresenceProperty(enProperty systemrealtimecommunications.RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
+	var _pbstrProperty foundation.BSTR
+	_hr := self.Raw.Get_PresenceProperty(enProperty, &_pbstrProperty)
+	return _pbstrProperty, win32.HRESULTError(int32(_hr))
 }
 
 // GetPresenceData wraps the raw GetPresenceData call.
@@ -1484,23 +1726,31 @@ func WrapIRTCPresencePropertyEvent(raw *systemrealtimecommunications.IRTCPresenc
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCPresencePropertyEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCPresencePropertyEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCPresencePropertyEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCPresencePropertyEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // Get_PresenceProperty wraps the raw Get_PresenceProperty call.
-func (self IRTCPresencePropertyEvent) Get_PresenceProperty(penPresProp *systemrealtimecommunications.RTC_PRESENCE_PROPERTY) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PresenceProperty(penPresProp)))
+func (self IRTCPresencePropertyEvent) Get_PresenceProperty() (systemrealtimecommunications.RTC_PRESENCE_PROPERTY, error) {
+	var _penPresProp systemrealtimecommunications.RTC_PRESENCE_PROPERTY
+	_hr := self.Raw.Get_PresenceProperty(&_penPresProp)
+	return _penPresProp, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IRTCPresencePropertyEvent) Get_Value(pbstrValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(pbstrValue)))
+func (self IRTCPresencePropertyEvent) Get_Value() (foundation.BSTR, error) {
+	var _pbstrValue foundation.BSTR
+	_hr := self.Raw.Get_Value(&_pbstrValue)
+	return _pbstrValue, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCPresenceStatusEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCPresenceStatusEvent with error-returning methods.
@@ -1515,13 +1765,17 @@ func WrapIRTCPresenceStatusEvent(raw *systemrealtimecommunications.IRTCPresenceS
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCPresenceStatusEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCPresenceStatusEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCPresenceStatusEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCPresenceStatusEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // GetLocalPresenceInfo wraps the raw GetLocalPresenceInfo call.
@@ -1541,78 +1795,108 @@ func WrapIRTCProfile(raw *systemrealtimecommunications.IRTCProfile) IRTCProfile 
 }
 
 // Get_Key wraps the raw Get_Key call.
-func (self IRTCProfile) Get_Key(pbstrKey *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Key(pbstrKey)))
+func (self IRTCProfile) Get_Key() (foundation.BSTR, error) {
+	var _pbstrKey foundation.BSTR
+	_hr := self.Raw.Get_Key(&_pbstrKey)
+	return _pbstrKey, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Name wraps the raw Get_Name call.
-func (self IRTCProfile) Get_Name(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Name(pbstrName)))
+func (self IRTCProfile) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.Get_Name(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_XML wraps the raw Get_XML call.
-func (self IRTCProfile) Get_XML(pbstrXML *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_XML(pbstrXML)))
+func (self IRTCProfile) Get_XML() (foundation.BSTR, error) {
+	var _pbstrXML foundation.BSTR
+	_hr := self.Raw.Get_XML(&_pbstrXML)
+	return _pbstrXML, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProviderName wraps the raw Get_ProviderName call.
-func (self IRTCProfile) Get_ProviderName(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProviderName(pbstrName)))
+func (self IRTCProfile) Get_ProviderName() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.Get_ProviderName(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProviderURI wraps the raw Get_ProviderURI call.
-func (self IRTCProfile) Get_ProviderURI(enURI systemrealtimecommunications.RTC_PROVIDER_URI, pbstrURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProviderURI(enURI, pbstrURI)))
+func (self IRTCProfile) Get_ProviderURI(enURI systemrealtimecommunications.RTC_PROVIDER_URI) (foundation.BSTR, error) {
+	var _pbstrURI foundation.BSTR
+	_hr := self.Raw.Get_ProviderURI(enURI, &_pbstrURI)
+	return _pbstrURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ProviderData wraps the raw Get_ProviderData call.
-func (self IRTCProfile) Get_ProviderData(pbstrData *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ProviderData(pbstrData)))
+func (self IRTCProfile) Get_ProviderData() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	_hr := self.Raw.Get_ProviderData(&_pbstrData)
+	return _pbstrData, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClientName wraps the raw Get_ClientName call.
-func (self IRTCProfile) Get_ClientName(pbstrName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientName(pbstrName)))
+func (self IRTCProfile) Get_ClientName() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	_hr := self.Raw.Get_ClientName(&_pbstrName)
+	return _pbstrName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClientBanner wraps the raw Get_ClientBanner call.
-func (self IRTCProfile) Get_ClientBanner(pfBanner *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientBanner(pfBanner)))
+func (self IRTCProfile) Get_ClientBanner() (foundation.VARIANT_BOOL, error) {
+	var _pfBanner foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_ClientBanner(&_pfBanner)
+	return _pfBanner, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClientMinVer wraps the raw Get_ClientMinVer call.
-func (self IRTCProfile) Get_ClientMinVer(pbstrMinVer *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientMinVer(pbstrMinVer)))
+func (self IRTCProfile) Get_ClientMinVer() (foundation.BSTR, error) {
+	var _pbstrMinVer foundation.BSTR
+	_hr := self.Raw.Get_ClientMinVer(&_pbstrMinVer)
+	return _pbstrMinVer, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClientCurVer wraps the raw Get_ClientCurVer call.
-func (self IRTCProfile) Get_ClientCurVer(pbstrCurVer *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientCurVer(pbstrCurVer)))
+func (self IRTCProfile) Get_ClientCurVer() (foundation.BSTR, error) {
+	var _pbstrCurVer foundation.BSTR
+	_hr := self.Raw.Get_ClientCurVer(&_pbstrCurVer)
+	return _pbstrCurVer, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClientUpdateURI wraps the raw Get_ClientUpdateURI call.
-func (self IRTCProfile) Get_ClientUpdateURI(pbstrUpdateURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientUpdateURI(pbstrUpdateURI)))
+func (self IRTCProfile) Get_ClientUpdateURI() (foundation.BSTR, error) {
+	var _pbstrUpdateURI foundation.BSTR
+	_hr := self.Raw.Get_ClientUpdateURI(&_pbstrUpdateURI)
+	return _pbstrUpdateURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ClientData wraps the raw Get_ClientData call.
-func (self IRTCProfile) Get_ClientData(pbstrData *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ClientData(pbstrData)))
+func (self IRTCProfile) Get_ClientData() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	_hr := self.Raw.Get_ClientData(&_pbstrData)
+	return _pbstrData, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserURI wraps the raw Get_UserURI call.
-func (self IRTCProfile) Get_UserURI(pbstrUserURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserURI(pbstrUserURI)))
+func (self IRTCProfile) Get_UserURI() (foundation.BSTR, error) {
+	var _pbstrUserURI foundation.BSTR
+	_hr := self.Raw.Get_UserURI(&_pbstrUserURI)
+	return _pbstrUserURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserName wraps the raw Get_UserName call.
-func (self IRTCProfile) Get_UserName(pbstrUserName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserName(pbstrUserName)))
+func (self IRTCProfile) Get_UserName() (foundation.BSTR, error) {
+	var _pbstrUserName foundation.BSTR
+	_hr := self.Raw.Get_UserName(&_pbstrUserName)
+	return _pbstrUserName, win32.HRESULTError(int32(_hr))
 }
 
 // Get_UserAccount wraps the raw Get_UserAccount call.
-func (self IRTCProfile) Get_UserAccount(pbstrUserAccount *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_UserAccount(pbstrUserAccount)))
+func (self IRTCProfile) Get_UserAccount() (foundation.BSTR, error) {
+	var _pbstrUserAccount foundation.BSTR
+	_hr := self.Raw.Get_UserAccount(&_pbstrUserAccount)
+	return _pbstrUserAccount, win32.HRESULTError(int32(_hr))
 }
 
 // SetCredentials wraps the raw SetCredentials call.
@@ -1621,13 +1905,17 @@ func (self IRTCProfile) SetCredentials(bstrUserURI foundation.BSTR, bstrUserAcco
 }
 
 // Get_SessionCapabilities wraps the raw Get_SessionCapabilities call.
-func (self IRTCProfile) Get_SessionCapabilities(plSupportedSessions *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SessionCapabilities(plSupportedSessions)))
+func (self IRTCProfile) Get_SessionCapabilities() (int32, error) {
+	var _plSupportedSessions int32
+	_hr := self.Raw.Get_SessionCapabilities(&_plSupportedSessions)
+	return _plSupportedSessions, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCProfile) Get_State(penState *systemrealtimecommunications.RTC_REGISTRATION_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(penState)))
+func (self IRTCProfile) Get_State() (systemrealtimecommunications.RTC_REGISTRATION_STATE, error) {
+	var _penState systemrealtimecommunications.RTC_REGISTRATION_STATE
+	_hr := self.Raw.Get_State(&_penState)
+	return _penState, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCProfile2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCProfile2 with error-returning methods.
@@ -1642,8 +1930,10 @@ func WrapIRTCProfile2(raw *systemrealtimecommunications.IRTCProfile2) IRTCProfil
 }
 
 // Get_Realm wraps the raw Get_Realm call.
-func (self IRTCProfile2) Get_Realm(pbstrRealm *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Realm(pbstrRealm)))
+func (self IRTCProfile2) Get_Realm() (foundation.BSTR, error) {
+	var _pbstrRealm foundation.BSTR
+	_hr := self.Raw.Get_Realm(&_pbstrRealm)
+	return _pbstrRealm, win32.HRESULTError(int32(_hr))
 }
 
 // Put_Realm wraps the raw Put_Realm call.
@@ -1652,8 +1942,10 @@ func (self IRTCProfile2) Put_Realm(bstrRealm foundation.BSTR) error {
 }
 
 // Get_AllowedAuth wraps the raw Get_AllowedAuth call.
-func (self IRTCProfile2) Get_AllowedAuth(plAllowedAuth *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_AllowedAuth(plAllowedAuth)))
+func (self IRTCProfile2) Get_AllowedAuth() (int32, error) {
+	var _plAllowedAuth int32
+	_hr := self.Raw.Get_AllowedAuth(&_plAllowedAuth)
+	return _plAllowedAuth, win32.HRESULTError(int32(_hr))
 }
 
 // Put_AllowedAuth wraps the raw Put_AllowedAuth call.
@@ -1673,18 +1965,24 @@ func WrapIRTCProfileEvent(raw *systemrealtimecommunications.IRTCProfileEvent) IR
 }
 
 // Get_Profile wraps the raw Get_Profile call.
-func (self IRTCProfileEvent) Get_Profile(ppProfile **systemrealtimecommunications.IRTCProfile) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profile(ppProfile)))
+func (self IRTCProfileEvent) Get_Profile() (*systemrealtimecommunications.IRTCProfile, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile
+	_hr := self.Raw.Get_Profile(&_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Cookie wraps the raw Get_Cookie call.
-func (self IRTCProfileEvent) Get_Cookie(plCookie *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Cookie(plCookie)))
+func (self IRTCProfileEvent) Get_Cookie() (uintptr, error) {
+	var _plCookie uintptr
+	_hr := self.Raw.Get_Cookie(&_plCookie)
+	return _plCookie, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCProfileEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCProfileEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCProfileEvent2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCProfileEvent2 with error-returning methods.
@@ -1699,8 +1997,10 @@ func WrapIRTCProfileEvent2(raw *systemrealtimecommunications.IRTCProfileEvent2) 
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IRTCProfileEvent2) Get_EventType(pEventType *systemrealtimecommunications.RTC_PROFILE_EVENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(pEventType)))
+func (self IRTCProfileEvent2) Get_EventType() (systemrealtimecommunications.RTC_PROFILE_EVENT_TYPE, error) {
+	var _pEventType systemrealtimecommunications.RTC_PROFILE_EVENT_TYPE
+	_hr := self.Raw.Get_EventType(&_pEventType)
+	return _pEventType, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCReInviteEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCReInviteEvent with error-returning methods.
@@ -1715,8 +2015,10 @@ func WrapIRTCReInviteEvent(raw *systemrealtimecommunications.IRTCReInviteEvent) 
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCReInviteEvent) Get_Session(ppSession2 **systemrealtimecommunications.IRTCSession2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession2)))
+func (self IRTCReInviteEvent) Get_Session() (*systemrealtimecommunications.IRTCSession2, error) {
+	var _ppSession2 *systemrealtimecommunications.IRTCSession2
+	_hr := self.Raw.Get_Session(&_ppSession2)
+	return _ppSession2, win32.HRESULTError(int32(_hr))
 }
 
 // Accept wraps the raw Accept call.
@@ -1730,8 +2032,10 @@ func (self IRTCReInviteEvent) Reject() error {
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCReInviteEvent) Get_State(pState *systemrealtimecommunications.RTC_REINVITE_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(pState)))
+func (self IRTCReInviteEvent) Get_State() (systemrealtimecommunications.RTC_REINVITE_STATE, error) {
+	var _pState systemrealtimecommunications.RTC_REINVITE_STATE
+	_hr := self.Raw.Get_State(&_pState)
+	return _pState, win32.HRESULTError(int32(_hr))
 }
 
 // GetRemoteSessionDescription wraps the raw GetRemoteSessionDescription call.
@@ -1751,23 +2055,31 @@ func WrapIRTCRegistrationStateChangeEvent(raw *systemrealtimecommunications.IRTC
 }
 
 // Get_Profile wraps the raw Get_Profile call.
-func (self IRTCRegistrationStateChangeEvent) Get_Profile(ppProfile **systemrealtimecommunications.IRTCProfile) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profile(ppProfile)))
+func (self IRTCRegistrationStateChangeEvent) Get_Profile() (*systemrealtimecommunications.IRTCProfile, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile
+	_hr := self.Raw.Get_Profile(&_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCRegistrationStateChangeEvent) Get_State(penState *systemrealtimecommunications.RTC_REGISTRATION_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(penState)))
+func (self IRTCRegistrationStateChangeEvent) Get_State() (systemrealtimecommunications.RTC_REGISTRATION_STATE, error) {
+	var _penState systemrealtimecommunications.RTC_REGISTRATION_STATE
+	_hr := self.Raw.Get_State(&_penState)
+	return _penState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCRegistrationStateChangeEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCRegistrationStateChangeEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCRegistrationStateChangeEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCRegistrationStateChangeEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCRoamingEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCRoamingEvent with error-returning methods.
@@ -1782,23 +2094,31 @@ func WrapIRTCRoamingEvent(raw *systemrealtimecommunications.IRTCRoamingEvent) IR
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IRTCRoamingEvent) Get_EventType(pEventType *systemrealtimecommunications.RTC_ROAMING_EVENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(pEventType)))
+func (self IRTCRoamingEvent) Get_EventType() (systemrealtimecommunications.RTC_ROAMING_EVENT_TYPE, error) {
+	var _pEventType systemrealtimecommunications.RTC_ROAMING_EVENT_TYPE
+	_hr := self.Raw.Get_EventType(&_pEventType)
+	return _pEventType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Profile wraps the raw Get_Profile call.
-func (self IRTCRoamingEvent) Get_Profile(ppProfile **systemrealtimecommunications.IRTCProfile2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profile(ppProfile)))
+func (self IRTCRoamingEvent) Get_Profile() (*systemrealtimecommunications.IRTCProfile2, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile2
+	_hr := self.Raw.Get_Profile(&_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCRoamingEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCRoamingEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCRoamingEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCRoamingEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCSession is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCSession with error-returning methods.
@@ -1813,28 +2133,38 @@ func WrapIRTCSession(raw *systemrealtimecommunications.IRTCSession) IRTCSession 
 }
 
 // Get_Client wraps the raw Get_Client call.
-func (self IRTCSession) Get_Client(ppClient **systemrealtimecommunications.IRTCClient) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Client(ppClient)))
+func (self IRTCSession) Get_Client() (*systemrealtimecommunications.IRTCClient, error) {
+	var _ppClient *systemrealtimecommunications.IRTCClient
+	_hr := self.Raw.Get_Client(&_ppClient)
+	return _ppClient, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCSession) Get_State(penState *systemrealtimecommunications.RTC_SESSION_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(penState)))
+func (self IRTCSession) Get_State() (systemrealtimecommunications.RTC_SESSION_STATE, error) {
+	var _penState systemrealtimecommunications.RTC_SESSION_STATE
+	_hr := self.Raw.Get_State(&_penState)
+	return _penState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Type wraps the raw Get_Type call.
-func (self IRTCSession) Get_Type(penType *systemrealtimecommunications.RTC_SESSION_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Type(penType)))
+func (self IRTCSession) Get_Type() (systemrealtimecommunications.RTC_SESSION_TYPE, error) {
+	var _penType systemrealtimecommunications.RTC_SESSION_TYPE
+	_hr := self.Raw.Get_Type(&_penType)
+	return _penType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Profile wraps the raw Get_Profile call.
-func (self IRTCSession) Get_Profile(ppProfile **systemrealtimecommunications.IRTCProfile) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profile(ppProfile)))
+func (self IRTCSession) Get_Profile() (*systemrealtimecommunications.IRTCProfile, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile
+	_hr := self.Raw.Get_Profile(&_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Participants wraps the raw Get_Participants call.
-func (self IRTCSession) Get_Participants(ppCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Participants(ppCollection)))
+func (self IRTCSession) Get_Participants() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_Participants(&_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Answer wraps the raw Answer call.
@@ -1853,8 +2183,10 @@ func (self IRTCSession) Redirect(enType systemrealtimecommunications.RTC_SESSION
 }
 
 // AddParticipant wraps the raw AddParticipant call.
-func (self IRTCSession) AddParticipant(bstrAddress foundation.BSTR, bstrName foundation.BSTR, ppParticipant **systemrealtimecommunications.IRTCParticipant) error {
-	return win32.HRESULTError(int32(self.Raw.AddParticipant(bstrAddress, bstrName, ppParticipant)))
+func (self IRTCSession) AddParticipant(bstrAddress foundation.BSTR, bstrName foundation.BSTR) (*systemrealtimecommunications.IRTCParticipant, error) {
+	var _ppParticipant *systemrealtimecommunications.IRTCParticipant
+	_hr := self.Raw.AddParticipant(bstrAddress, bstrName, &_ppParticipant)
+	return _ppParticipant, win32.HRESULTError(int32(_hr))
 }
 
 // RemoveParticipant wraps the raw RemoveParticipant call.
@@ -1863,23 +2195,31 @@ func (self IRTCSession) RemoveParticipant(pParticipant *systemrealtimecommunicat
 }
 
 // EnumerateParticipants wraps the raw EnumerateParticipants call.
-func (self IRTCSession) EnumerateParticipants(ppEnum **systemrealtimecommunications.IRTCEnumParticipants) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateParticipants(ppEnum)))
+func (self IRTCSession) EnumerateParticipants() (*systemrealtimecommunications.IRTCEnumParticipants, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumParticipants
+	_hr := self.Raw.EnumerateParticipants(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_CanAddParticipants wraps the raw Get_CanAddParticipants call.
-func (self IRTCSession) Get_CanAddParticipants(pfCanAdd *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_CanAddParticipants(pfCanAdd)))
+func (self IRTCSession) Get_CanAddParticipants() (foundation.VARIANT_BOOL, error) {
+	var _pfCanAdd foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_CanAddParticipants(&_pfCanAdd)
+	return _pfCanAdd, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RedirectedUserURI wraps the raw Get_RedirectedUserURI call.
-func (self IRTCSession) Get_RedirectedUserURI(pbstrUserURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RedirectedUserURI(pbstrUserURI)))
+func (self IRTCSession) Get_RedirectedUserURI() (foundation.BSTR, error) {
+	var _pbstrUserURI foundation.BSTR
+	_hr := self.Raw.Get_RedirectedUserURI(&_pbstrUserURI)
+	return _pbstrUserURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RedirectedUserName wraps the raw Get_RedirectedUserName call.
-func (self IRTCSession) Get_RedirectedUserName(pbstrUserName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RedirectedUserName(pbstrUserName)))
+func (self IRTCSession) Get_RedirectedUserName() (foundation.BSTR, error) {
+	var _pbstrUserName foundation.BSTR
+	_hr := self.Raw.Get_RedirectedUserName(&_pbstrUserName)
+	return _pbstrUserName, win32.HRESULTError(int32(_hr))
 }
 
 // NextRedirectedUser wraps the raw NextRedirectedUser call.
@@ -1934,13 +2274,17 @@ func (self IRTCSession2) Put_PreferredSecurityLevel(enSecurityType systemrealtim
 }
 
 // Get_PreferredSecurityLevel wraps the raw Get_PreferredSecurityLevel call.
-func (self IRTCSession2) Get_PreferredSecurityLevel(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE, penSecurityLevel *systemrealtimecommunications.RTC_SECURITY_LEVEL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_PreferredSecurityLevel(enSecurityType, penSecurityLevel)))
+func (self IRTCSession2) Get_PreferredSecurityLevel(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE) (systemrealtimecommunications.RTC_SECURITY_LEVEL, error) {
+	var _penSecurityLevel systemrealtimecommunications.RTC_SECURITY_LEVEL
+	_hr := self.Raw.Get_PreferredSecurityLevel(enSecurityType, &_penSecurityLevel)
+	return _penSecurityLevel, win32.HRESULTError(int32(_hr))
 }
 
 // IsSecurityEnabled wraps the raw IsSecurityEnabled call.
-func (self IRTCSession2) IsSecurityEnabled(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE, pfSecurityEnabled *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.IsSecurityEnabled(enSecurityType, pfSecurityEnabled)))
+func (self IRTCSession2) IsSecurityEnabled(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE) (foundation.VARIANT_BOOL, error) {
+	var _pfSecurityEnabled foundation.VARIANT_BOOL
+	_hr := self.Raw.IsSecurityEnabled(enSecurityType, &_pfSecurityEnabled)
+	return _pfSecurityEnabled, win32.HRESULTError(int32(_hr))
 }
 
 // AnswerWithSessionDescription wraps the raw AnswerWithSessionDescription call.
@@ -1990,8 +2334,10 @@ func (self IRTCSessionCallControl) Put_ReferredByURI(bstrReferredByURI foundatio
 }
 
 // Get_ReferredByURI wraps the raw Get_ReferredByURI call.
-func (self IRTCSessionCallControl) Get_ReferredByURI(pbstrReferredByURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReferredByURI(pbstrReferredByURI)))
+func (self IRTCSessionCallControl) Get_ReferredByURI() (foundation.BSTR, error) {
+	var _pbstrReferredByURI foundation.BSTR
+	_hr := self.Raw.Get_ReferredByURI(&_pbstrReferredByURI)
+	return _pbstrReferredByURI, win32.HRESULTError(int32(_hr))
 }
 
 // Put_ReferCookie wraps the raw Put_ReferCookie call.
@@ -2000,13 +2346,17 @@ func (self IRTCSessionCallControl) Put_ReferCookie(bstrReferCookie foundation.BS
 }
 
 // Get_ReferCookie wraps the raw Get_ReferCookie call.
-func (self IRTCSessionCallControl) Get_ReferCookie(pbstrReferCookie *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReferCookie(pbstrReferCookie)))
+func (self IRTCSessionCallControl) Get_ReferCookie() (foundation.BSTR, error) {
+	var _pbstrReferCookie foundation.BSTR
+	_hr := self.Raw.Get_ReferCookie(&_pbstrReferCookie)
+	return _pbstrReferCookie, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsReferred wraps the raw Get_IsReferred call.
-func (self IRTCSessionCallControl) Get_IsReferred(pfIsReferred *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsReferred(pfIsReferred)))
+func (self IRTCSessionCallControl) Get_IsReferred() (foundation.VARIANT_BOOL, error) {
+	var _pfIsReferred foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsReferred(&_pfIsReferred)
+	return _pfIsReferred, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCSessionDescriptionManager is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCSessionDescriptionManager with error-returning methods.
@@ -2037,23 +2387,31 @@ func WrapIRTCSessionOperationCompleteEvent(raw *systemrealtimecommunications.IRT
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCSessionOperationCompleteEvent) Get_Session(ppSession **systemrealtimecommunications.IRTCSession) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession)))
+func (self IRTCSessionOperationCompleteEvent) Get_Session() (*systemrealtimecommunications.IRTCSession, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession
+	_hr := self.Raw.Get_Session(&_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Cookie wraps the raw Get_Cookie call.
-func (self IRTCSessionOperationCompleteEvent) Get_Cookie(plCookie *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Cookie(plCookie)))
+func (self IRTCSessionOperationCompleteEvent) Get_Cookie() (uintptr, error) {
+	var _plCookie uintptr
+	_hr := self.Raw.Get_Cookie(&_plCookie)
+	return _plCookie, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCSessionOperationCompleteEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCSessionOperationCompleteEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCSessionOperationCompleteEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCSessionOperationCompleteEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCSessionOperationCompleteEvent2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCSessionOperationCompleteEvent2 with error-returning methods.
@@ -2068,8 +2426,10 @@ func WrapIRTCSessionOperationCompleteEvent2(raw *systemrealtimecommunications.IR
 }
 
 // Get_Participant wraps the raw Get_Participant call.
-func (self IRTCSessionOperationCompleteEvent2) Get_Participant(ppParticipant **systemrealtimecommunications.IRTCParticipant) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Participant(ppParticipant)))
+func (self IRTCSessionOperationCompleteEvent2) Get_Participant() (*systemrealtimecommunications.IRTCParticipant, error) {
+	var _ppParticipant *systemrealtimecommunications.IRTCParticipant
+	_hr := self.Raw.Get_Participant(&_ppParticipant)
+	return _ppParticipant, win32.HRESULTError(int32(_hr))
 }
 
 // GetRemoteSessionDescription wraps the raw GetRemoteSessionDescription call.
@@ -2105,23 +2465,31 @@ func WrapIRTCSessionReferStatusEvent(raw *systemrealtimecommunications.IRTCSessi
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCSessionReferStatusEvent) Get_Session(ppSession **systemrealtimecommunications.IRTCSession2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession)))
+func (self IRTCSessionReferStatusEvent) Get_Session() (*systemrealtimecommunications.IRTCSession2, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession2
+	_hr := self.Raw.Get_Session(&_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReferStatus wraps the raw Get_ReferStatus call.
-func (self IRTCSessionReferStatusEvent) Get_ReferStatus(penReferStatus *systemrealtimecommunications.RTC_SESSION_REFER_STATUS) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReferStatus(penReferStatus)))
+func (self IRTCSessionReferStatusEvent) Get_ReferStatus() (systemrealtimecommunications.RTC_SESSION_REFER_STATUS, error) {
+	var _penReferStatus systemrealtimecommunications.RTC_SESSION_REFER_STATUS
+	_hr := self.Raw.Get_ReferStatus(&_penReferStatus)
+	return _penReferStatus, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCSessionReferStatusEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCSessionReferStatusEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCSessionReferStatusEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCSessionReferStatusEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCSessionReferredEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCSessionReferredEvent with error-returning methods.
@@ -2136,23 +2504,31 @@ func WrapIRTCSessionReferredEvent(raw *systemrealtimecommunications.IRTCSessionR
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCSessionReferredEvent) Get_Session(ppSession **systemrealtimecommunications.IRTCSession2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession)))
+func (self IRTCSessionReferredEvent) Get_Session() (*systemrealtimecommunications.IRTCSession2, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession2
+	_hr := self.Raw.Get_Session(&_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReferredByURI wraps the raw Get_ReferredByURI call.
-func (self IRTCSessionReferredEvent) Get_ReferredByURI(pbstrReferredByURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReferredByURI(pbstrReferredByURI)))
+func (self IRTCSessionReferredEvent) Get_ReferredByURI() (foundation.BSTR, error) {
+	var _pbstrReferredByURI foundation.BSTR
+	_hr := self.Raw.Get_ReferredByURI(&_pbstrReferredByURI)
+	return _pbstrReferredByURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReferToURI wraps the raw Get_ReferToURI call.
-func (self IRTCSessionReferredEvent) Get_ReferToURI(pbstrReferoURI *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReferToURI(pbstrReferoURI)))
+func (self IRTCSessionReferredEvent) Get_ReferToURI() (foundation.BSTR, error) {
+	var _pbstrReferoURI foundation.BSTR
+	_hr := self.Raw.Get_ReferToURI(&_pbstrReferoURI)
+	return _pbstrReferoURI, win32.HRESULTError(int32(_hr))
 }
 
 // Get_ReferCookie wraps the raw Get_ReferCookie call.
-func (self IRTCSessionReferredEvent) Get_ReferCookie(pbstrReferCookie *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_ReferCookie(pbstrReferCookie)))
+func (self IRTCSessionReferredEvent) Get_ReferCookie() (foundation.BSTR, error) {
+	var _pbstrReferCookie foundation.BSTR
+	_hr := self.Raw.Get_ReferCookie(&_pbstrReferCookie)
+	return _pbstrReferCookie, win32.HRESULTError(int32(_hr))
 }
 
 // Accept wraps the raw Accept call.
@@ -2182,23 +2558,31 @@ func WrapIRTCSessionStateChangeEvent(raw *systemrealtimecommunications.IRTCSessi
 }
 
 // Get_Session wraps the raw Get_Session call.
-func (self IRTCSessionStateChangeEvent) Get_Session(ppSession **systemrealtimecommunications.IRTCSession) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Session(ppSession)))
+func (self IRTCSessionStateChangeEvent) Get_Session() (*systemrealtimecommunications.IRTCSession, error) {
+	var _ppSession *systemrealtimecommunications.IRTCSession
+	_hr := self.Raw.Get_Session(&_ppSession)
+	return _ppSession, win32.HRESULTError(int32(_hr))
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCSessionStateChangeEvent) Get_State(penState *systemrealtimecommunications.RTC_SESSION_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(penState)))
+func (self IRTCSessionStateChangeEvent) Get_State() (systemrealtimecommunications.RTC_SESSION_STATE, error) {
+	var _penState systemrealtimecommunications.RTC_SESSION_STATE
+	_hr := self.Raw.Get_State(&_penState)
+	return _penState, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCSessionStateChangeEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCSessionStateChangeEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusText wraps the raw Get_StatusText call.
-func (self IRTCSessionStateChangeEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusText(pbstrStatusText)))
+func (self IRTCSessionStateChangeEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	_hr := self.Raw.Get_StatusText(&_pbstrStatusText)
+	return _pbstrStatusText, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCSessionStateChangeEvent2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCSessionStateChangeEvent2 with error-returning methods.
@@ -2213,18 +2597,24 @@ func WrapIRTCSessionStateChangeEvent2(raw *systemrealtimecommunications.IRTCSess
 }
 
 // Get_MediaTypes wraps the raw Get_MediaTypes call.
-func (self IRTCSessionStateChangeEvent2) Get_MediaTypes(pMediaTypes *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MediaTypes(pMediaTypes)))
+func (self IRTCSessionStateChangeEvent2) Get_MediaTypes() (int32, error) {
+	var _pMediaTypes int32
+	_hr := self.Raw.Get_MediaTypes(&_pMediaTypes)
+	return _pMediaTypes, win32.HRESULTError(int32(_hr))
 }
 
 // Get_RemotePreferredSecurityLevel wraps the raw Get_RemotePreferredSecurityLevel call.
-func (self IRTCSessionStateChangeEvent2) Get_RemotePreferredSecurityLevel(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE, penSecurityLevel *systemrealtimecommunications.RTC_SECURITY_LEVEL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_RemotePreferredSecurityLevel(enSecurityType, penSecurityLevel)))
+func (self IRTCSessionStateChangeEvent2) Get_RemotePreferredSecurityLevel(enSecurityType systemrealtimecommunications.RTC_SECURITY_TYPE) (systemrealtimecommunications.RTC_SECURITY_LEVEL, error) {
+	var _penSecurityLevel systemrealtimecommunications.RTC_SECURITY_LEVEL
+	_hr := self.Raw.Get_RemotePreferredSecurityLevel(enSecurityType, &_penSecurityLevel)
+	return _penSecurityLevel, win32.HRESULTError(int32(_hr))
 }
 
 // Get_IsForked wraps the raw Get_IsForked call.
-func (self IRTCSessionStateChangeEvent2) Get_IsForked(pfIsForked *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_IsForked(pfIsForked)))
+func (self IRTCSessionStateChangeEvent2) Get_IsForked() (foundation.VARIANT_BOOL, error) {
+	var _pfIsForked foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_IsForked(&_pfIsForked)
+	return _pfIsForked, win32.HRESULTError(int32(_hr))
 }
 
 // GetRemoteSessionDescription wraps the raw GetRemoteSessionDescription call.
@@ -2244,8 +2634,10 @@ func WrapIRTCUserSearch(raw *systemrealtimecommunications.IRTCUserSearch) IRTCUs
 }
 
 // CreateQuery wraps the raw CreateQuery call.
-func (self IRTCUserSearch) CreateQuery(ppQuery **systemrealtimecommunications.IRTCUserSearchQuery) error {
-	return win32.HRESULTError(int32(self.Raw.CreateQuery(ppQuery)))
+func (self IRTCUserSearch) CreateQuery() (*systemrealtimecommunications.IRTCUserSearchQuery, error) {
+	var _ppQuery *systemrealtimecommunications.IRTCUserSearchQuery
+	_hr := self.Raw.CreateQuery(&_ppQuery)
+	return _ppQuery, win32.HRESULTError(int32(_hr))
 }
 
 // ExecuteSearch wraps the raw ExecuteSearch call.
@@ -2270,13 +2662,17 @@ func (self IRTCUserSearchQuery) Put_SearchTerm(bstrName foundation.BSTR, bstrVal
 }
 
 // Get_SearchTerm wraps the raw Get_SearchTerm call.
-func (self IRTCUserSearchQuery) Get_SearchTerm(bstrName foundation.BSTR, pbstrValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SearchTerm(bstrName, pbstrValue)))
+func (self IRTCUserSearchQuery) Get_SearchTerm(bstrName foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrValue foundation.BSTR
+	_hr := self.Raw.Get_SearchTerm(bstrName, &_pbstrValue)
+	return _pbstrValue, win32.HRESULTError(int32(_hr))
 }
 
 // Get_SearchTerms wraps the raw Get_SearchTerms call.
-func (self IRTCUserSearchQuery) Get_SearchTerms(pbstrNames *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SearchTerms(pbstrNames)))
+func (self IRTCUserSearchQuery) Get_SearchTerms() (foundation.BSTR, error) {
+	var _pbstrNames foundation.BSTR
+	_hr := self.Raw.Get_SearchTerms(&_pbstrNames)
+	return _pbstrNames, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SearchPreference wraps the raw Put_SearchPreference call.
@@ -2285,8 +2681,10 @@ func (self IRTCUserSearchQuery) Put_SearchPreference(enPreference systemrealtime
 }
 
 // Get_SearchPreference wraps the raw Get_SearchPreference call.
-func (self IRTCUserSearchQuery) Get_SearchPreference(enPreference systemrealtimecommunications.RTC_USER_SEARCH_PREFERENCE, plValue *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SearchPreference(enPreference, plValue)))
+func (self IRTCUserSearchQuery) Get_SearchPreference(enPreference systemrealtimecommunications.RTC_USER_SEARCH_PREFERENCE) (int32, error) {
+	var _plValue int32
+	_hr := self.Raw.Get_SearchPreference(enPreference, &_plValue)
+	return _plValue, win32.HRESULTError(int32(_hr))
 }
 
 // Put_SearchDomain wraps the raw Put_SearchDomain call.
@@ -2295,8 +2693,10 @@ func (self IRTCUserSearchQuery) Put_SearchDomain(bstrDomain foundation.BSTR) err
 }
 
 // Get_SearchDomain wraps the raw Get_SearchDomain call.
-func (self IRTCUserSearchQuery) Get_SearchDomain(pbstrDomain *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_SearchDomain(pbstrDomain)))
+func (self IRTCUserSearchQuery) Get_SearchDomain() (foundation.BSTR, error) {
+	var _pbstrDomain foundation.BSTR
+	_hr := self.Raw.Get_SearchDomain(&_pbstrDomain)
+	return _pbstrDomain, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCUserSearchResult is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCUserSearchResult with error-returning methods.
@@ -2311,8 +2711,10 @@ func WrapIRTCUserSearchResult(raw *systemrealtimecommunications.IRTCUserSearchRe
 }
 
 // Get_Value wraps the raw Get_Value call.
-func (self IRTCUserSearchResult) Get_Value(enColumn systemrealtimecommunications.RTC_USER_SEARCH_COLUMN, pbstrValue *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Value(enColumn, pbstrValue)))
+func (self IRTCUserSearchResult) Get_Value(enColumn systemrealtimecommunications.RTC_USER_SEARCH_COLUMN) (foundation.BSTR, error) {
+	var _pbstrValue foundation.BSTR
+	_hr := self.Raw.Get_Value(enColumn, &_pbstrValue)
+	return _pbstrValue, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCUserSearchResultsEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCUserSearchResultsEvent with error-returning methods.
@@ -2327,38 +2729,52 @@ func WrapIRTCUserSearchResultsEvent(raw *systemrealtimecommunications.IRTCUserSe
 }
 
 // EnumerateResults wraps the raw EnumerateResults call.
-func (self IRTCUserSearchResultsEvent) EnumerateResults(ppEnum **systemrealtimecommunications.IRTCEnumUserSearchResults) error {
-	return win32.HRESULTError(int32(self.Raw.EnumerateResults(ppEnum)))
+func (self IRTCUserSearchResultsEvent) EnumerateResults() (*systemrealtimecommunications.IRTCEnumUserSearchResults, error) {
+	var _ppEnum *systemrealtimecommunications.IRTCEnumUserSearchResults
+	_hr := self.Raw.EnumerateResults(&_ppEnum)
+	return _ppEnum, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Results wraps the raw Get_Results call.
-func (self IRTCUserSearchResultsEvent) Get_Results(ppCollection **systemrealtimecommunications.IRTCCollection) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Results(ppCollection)))
+func (self IRTCUserSearchResultsEvent) Get_Results() (*systemrealtimecommunications.IRTCCollection, error) {
+	var _ppCollection *systemrealtimecommunications.IRTCCollection
+	_hr := self.Raw.Get_Results(&_ppCollection)
+	return _ppCollection, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Profile wraps the raw Get_Profile call.
-func (self IRTCUserSearchResultsEvent) Get_Profile(ppProfile **systemrealtimecommunications.IRTCProfile2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profile(ppProfile)))
+func (self IRTCUserSearchResultsEvent) Get_Profile() (*systemrealtimecommunications.IRTCProfile2, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile2
+	_hr := self.Raw.Get_Profile(&_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Query wraps the raw Get_Query call.
-func (self IRTCUserSearchResultsEvent) Get_Query(ppQuery **systemrealtimecommunications.IRTCUserSearchQuery) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Query(ppQuery)))
+func (self IRTCUserSearchResultsEvent) Get_Query() (*systemrealtimecommunications.IRTCUserSearchQuery, error) {
+	var _ppQuery *systemrealtimecommunications.IRTCUserSearchQuery
+	_hr := self.Raw.Get_Query(&_ppQuery)
+	return _ppQuery, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Cookie wraps the raw Get_Cookie call.
-func (self IRTCUserSearchResultsEvent) Get_Cookie(plCookie *uintptr) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Cookie(plCookie)))
+func (self IRTCUserSearchResultsEvent) Get_Cookie() (uintptr, error) {
+	var _plCookie uintptr
+	_hr := self.Raw.Get_Cookie(&_plCookie)
+	return _plCookie, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCUserSearchResultsEvent) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCUserSearchResultsEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // Get_MoreAvailable wraps the raw Get_MoreAvailable call.
-func (self IRTCUserSearchResultsEvent) Get_MoreAvailable(pfMoreAvailable *foundation.VARIANT_BOOL) error {
-	return win32.HRESULTError(int32(self.Raw.Get_MoreAvailable(pfMoreAvailable)))
+func (self IRTCUserSearchResultsEvent) Get_MoreAvailable() (foundation.VARIANT_BOOL, error) {
+	var _pfMoreAvailable foundation.VARIANT_BOOL
+	_hr := self.Raw.Get_MoreAvailable(&_pfMoreAvailable)
+	return _pfMoreAvailable, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCWatcher is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCWatcher with error-returning methods.
@@ -2373,8 +2789,10 @@ func WrapIRTCWatcher(raw *systemrealtimecommunications.IRTCWatcher) IRTCWatcher 
 }
 
 // Get_State wraps the raw Get_State call.
-func (self IRTCWatcher) Get_State(penState *systemrealtimecommunications.RTC_WATCHER_STATE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_State(penState)))
+func (self IRTCWatcher) Get_State() (systemrealtimecommunications.RTC_WATCHER_STATE, error) {
+	var _penState systemrealtimecommunications.RTC_WATCHER_STATE
+	_hr := self.Raw.Get_State(&_penState)
+	return _penState, win32.HRESULTError(int32(_hr))
 }
 
 // Put_State wraps the raw Put_State call.
@@ -2394,13 +2812,17 @@ func WrapIRTCWatcher2(raw *systemrealtimecommunications.IRTCWatcher2) IRTCWatche
 }
 
 // Get_Profile wraps the raw Get_Profile call.
-func (self IRTCWatcher2) Get_Profile(ppProfile **systemrealtimecommunications.IRTCProfile2) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Profile(ppProfile)))
+func (self IRTCWatcher2) Get_Profile() (*systemrealtimecommunications.IRTCProfile2, error) {
+	var _ppProfile *systemrealtimecommunications.IRTCProfile2
+	_hr := self.Raw.Get_Profile(&_ppProfile)
+	return _ppProfile, win32.HRESULTError(int32(_hr))
 }
 
 // Get_Scope wraps the raw Get_Scope call.
-func (self IRTCWatcher2) Get_Scope(penScope *systemrealtimecommunications.RTC_ACE_SCOPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Scope(penScope)))
+func (self IRTCWatcher2) Get_Scope() (systemrealtimecommunications.RTC_ACE_SCOPE, error) {
+	var _penScope systemrealtimecommunications.RTC_ACE_SCOPE
+	_hr := self.Raw.Get_Scope(&_penScope)
+	return _penScope, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCWatcherEvent is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCWatcherEvent with error-returning methods.
@@ -2415,8 +2837,10 @@ func WrapIRTCWatcherEvent(raw *systemrealtimecommunications.IRTCWatcherEvent) IR
 }
 
 // Get_Watcher wraps the raw Get_Watcher call.
-func (self IRTCWatcherEvent) Get_Watcher(ppWatcher **systemrealtimecommunications.IRTCWatcher) error {
-	return win32.HRESULTError(int32(self.Raw.Get_Watcher(ppWatcher)))
+func (self IRTCWatcherEvent) Get_Watcher() (*systemrealtimecommunications.IRTCWatcher, error) {
+	var _ppWatcher *systemrealtimecommunications.IRTCWatcher
+	_hr := self.Raw.Get_Watcher(&_ppWatcher)
+	return _ppWatcher, win32.HRESULTError(int32(_hr))
 }
 
 // IRTCWatcherEvent2 is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.IRTCWatcherEvent2 with error-returning methods.
@@ -2431,13 +2855,17 @@ func WrapIRTCWatcherEvent2(raw *systemrealtimecommunications.IRTCWatcherEvent2) 
 }
 
 // Get_EventType wraps the raw Get_EventType call.
-func (self IRTCWatcherEvent2) Get_EventType(pEventType *systemrealtimecommunications.RTC_WATCHER_EVENT_TYPE) error {
-	return win32.HRESULTError(int32(self.Raw.Get_EventType(pEventType)))
+func (self IRTCWatcherEvent2) Get_EventType() (systemrealtimecommunications.RTC_WATCHER_EVENT_TYPE, error) {
+	var _pEventType systemrealtimecommunications.RTC_WATCHER_EVENT_TYPE
+	_hr := self.Raw.Get_EventType(&_pEventType)
+	return _pEventType, win32.HRESULTError(int32(_hr))
 }
 
 // Get_StatusCode wraps the raw Get_StatusCode call.
-func (self IRTCWatcherEvent2) Get_StatusCode(plStatusCode *int32) error {
-	return win32.HRESULTError(int32(self.Raw.Get_StatusCode(plStatusCode)))
+func (self IRTCWatcherEvent2) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	_hr := self.Raw.Get_StatusCode(&_plStatusCode)
+	return _plStatusCode, win32.HRESULTError(int32(_hr))
 }
 
 // ITransportSettingsInternal is an idiomatic wrapper over the raw COM interface System.RealTimeCommunications.ITransportSettingsInternal with error-returning methods.

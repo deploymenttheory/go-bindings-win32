@@ -23,13 +23,17 @@ func WrapIHolographicCameraInterop(raw *systemwinrtholographic.IHolographicCamer
 }
 
 // CreateDirect3D12BackBufferResource wraps the raw CreateDirect3D12BackBufferResource call.
-func (self IHolographicCameraInterop) CreateDirect3D12BackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, ppCreatedTexture2DResource **graphicsdirect3d12.ID3D12Resource) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDirect3D12BackBufferResource(pDevice, pTexture2DDesc, ppCreatedTexture2DResource)))
+func (self IHolographicCameraInterop) CreateDirect3D12BackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (*graphicsdirect3d12.ID3D12Resource, error) {
+	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
+	_hr := self.Raw.CreateDirect3D12BackBufferResource(pDevice, pTexture2DDesc, &_ppCreatedTexture2DResource)
+	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(_hr))
 }
 
 // CreateDirect3D12HardwareProtectedBackBufferResource wraps the raw CreateDirect3D12HardwareProtectedBackBufferResource call.
-func (self IHolographicCameraInterop) CreateDirect3D12HardwareProtectedBackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, ppCreatedTexture2DResource **graphicsdirect3d12.ID3D12Resource) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDirect3D12HardwareProtectedBackBufferResource(pDevice, pTexture2DDesc, pProtectedResourceSession, ppCreatedTexture2DResource)))
+func (self IHolographicCameraInterop) CreateDirect3D12HardwareProtectedBackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) (*graphicsdirect3d12.ID3D12Resource, error) {
+	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
+	_hr := self.Raw.CreateDirect3D12HardwareProtectedBackBufferResource(pDevice, pTexture2DDesc, pProtectedResourceSession, &_ppCreatedTexture2DResource)
+	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(_hr))
 }
 
 // AcquireDirect3D12BufferResource wraps the raw AcquireDirect3D12BufferResource call.
@@ -80,13 +84,17 @@ func WrapIHolographicQuadLayerInterop(raw *systemwinrtholographic.IHolographicQu
 }
 
 // CreateDirect3D12ContentBufferResource wraps the raw CreateDirect3D12ContentBufferResource call.
-func (self IHolographicQuadLayerInterop) CreateDirect3D12ContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, ppTexture2DResource **graphicsdirect3d12.ID3D12Resource) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDirect3D12ContentBufferResource(pDevice, pTexture2DDesc, ppTexture2DResource)))
+func (self IHolographicQuadLayerInterop) CreateDirect3D12ContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (*graphicsdirect3d12.ID3D12Resource, error) {
+	var _ppTexture2DResource *graphicsdirect3d12.ID3D12Resource
+	_hr := self.Raw.CreateDirect3D12ContentBufferResource(pDevice, pTexture2DDesc, &_ppTexture2DResource)
+	return _ppTexture2DResource, win32.HRESULTError(int32(_hr))
 }
 
 // CreateDirect3D12HardwareProtectedContentBufferResource wraps the raw CreateDirect3D12HardwareProtectedContentBufferResource call.
-func (self IHolographicQuadLayerInterop) CreateDirect3D12HardwareProtectedContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, ppCreatedTexture2DResource **graphicsdirect3d12.ID3D12Resource) error {
-	return win32.HRESULTError(int32(self.Raw.CreateDirect3D12HardwareProtectedContentBufferResource(pDevice, pTexture2DDesc, pProtectedResourceSession, ppCreatedTexture2DResource)))
+func (self IHolographicQuadLayerInterop) CreateDirect3D12HardwareProtectedContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) (*graphicsdirect3d12.ID3D12Resource, error) {
+	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
+	_hr := self.Raw.CreateDirect3D12HardwareProtectedContentBufferResource(pDevice, pTexture2DDesc, pProtectedResourceSession, &_ppCreatedTexture2DResource)
+	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(_hr))
 }
 
 // AcquireDirect3D12BufferResource wraps the raw AcquireDirect3D12BufferResource call.

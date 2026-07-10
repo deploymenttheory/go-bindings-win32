@@ -22,6 +22,9 @@ func (self {{$.TypeName}}) {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{
 {{- end}}
 {{- if eq .Shape 1}}
 	return win32.HRESULTError(int32(self.Raw.{{.RawGoName}}({{join .RawArgs ", "}})))
+{{- else if eq .Shape 4}}
+	_hr := self.Raw.{{.RawGoName}}({{join .RawArgs ", "}})
+	return {{range .ReturnValues}}{{.}}, {{end}}win32.HRESULTError(int32(_hr))
 {{- else}}
 	{{if .ReturnSig}}return {{end}}self.Raw.{{.RawGoName}}({{join .RawArgs ", "}})
 {{- end}}

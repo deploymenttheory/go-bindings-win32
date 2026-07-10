@@ -76,13 +76,17 @@ func (self IBITSExtensionSetup) DisableBITSUploads() error {
 }
 
 // GetCleanupTaskName wraps the raw GetCleanupTaskName call.
-func (self IBITSExtensionSetup) GetCleanupTaskName(pTaskName *foundation.BSTR) error {
-	return win32.HRESULTError(int32(self.Raw.GetCleanupTaskName(pTaskName)))
+func (self IBITSExtensionSetup) GetCleanupTaskName() (foundation.BSTR, error) {
+	var _pTaskName foundation.BSTR
+	_hr := self.Raw.GetCleanupTaskName(&_pTaskName)
+	return _pTaskName, win32.HRESULTError(int32(_hr))
 }
 
 // GetCleanupTask wraps the raw GetCleanupTask call.
-func (self IBITSExtensionSetup) GetCleanupTask(riid *win32.GUID, ppUnk **systemcom.IUnknown) error {
-	return win32.HRESULTError(int32(self.Raw.GetCleanupTask(riid, ppUnk)))
+func (self IBITSExtensionSetup) GetCleanupTask(riid *win32.GUID) (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	_hr := self.Raw.GetCleanupTask(riid, &_ppUnk)
+	return _ppUnk, win32.HRESULTError(int32(_hr))
 }
 
 // IBITSExtensionSetupFactory is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBITSExtensionSetupFactory with error-returning methods.
@@ -97,8 +101,10 @@ func WrapIBITSExtensionSetupFactory(raw *networkingbackgroundintelligenttransfer
 }
 
 // GetObject wraps the raw GetObject call.
-func (self IBITSExtensionSetupFactory) GetObject(Path foundation.BSTR, ppExtensionSetup **networkingbackgroundintelligenttransferservice.IBITSExtensionSetup) error {
-	return win32.HRESULTError(int32(self.Raw.GetObject(Path, ppExtensionSetup)))
+func (self IBITSExtensionSetupFactory) GetObject(Path foundation.BSTR) (*networkingbackgroundintelligenttransferservice.IBITSExtensionSetup, error) {
+	var _ppExtensionSetup *networkingbackgroundintelligenttransferservice.IBITSExtensionSetup
+	_hr := self.Raw.GetObject(Path, &_ppExtensionSetup)
+	return _ppExtensionSetup, win32.HRESULTError(int32(_hr))
 }
 
 // IBackgroundCopyCallback is an idiomatic wrapper over the raw COM interface Networking.BackgroundIntelligentTransferService.IBackgroundCopyCallback with error-returning methods.

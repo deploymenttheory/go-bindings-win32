@@ -27,6 +27,17 @@ type Registry struct {
 	DelegateIndex map[string]*win32meta.FuncPointer
 	// InterfaceIndex maps "Api.Name" → the COM interface definition.
 	InterfaceIndex map[string]*win32meta.ComInterface
+
+	// FunctionOwner maps a function name → its owning namespace and
+	// definition. Names that appear in more than one namespace map to a nil
+	// definition (ambiguous; callers skip these).
+	FunctionOwner map[string]FunctionRef
+}
+
+// FunctionRef locates a function by namespace and definition.
+type FunctionRef struct {
+	Namespace string
+	Function  *win32meta.Function
 }
 
 // qualified builds the "Api.Name" index key.
@@ -49,9 +60,20 @@ func LoadAll(dir string) (*Registry, error) {
 		StructIndex:    map[string]*win32meta.Struct{},
 		DelegateIndex:  map[string]*win32meta.FuncPointer{},
 		InterfaceIndex: map[string]*win32meta.ComInterface{},
+		FunctionOwner:  map[string]FunctionRef{},
 	}
 	for _, meta := range namespaces {
 		registry.ByNamespace[meta.Namespace] = meta
+		for i := range meta.Functions {
+			function := &meta.Functions[i]
+			if existing, seen := registry.FunctionOwner[function.Name]; seen {
+				if existing.Namespace != meta.Namespace {
+					registry.FunctionOwner[function.Name] = FunctionRef{} // ambiguous
+				}
+				continue
+			}
+			registry.FunctionOwner[function.Name] = FunctionRef{Namespace: meta.Namespace, Function: function}
+		}
 		for name := range meta.Typedefs {
 			typedef := meta.Typedefs[name]
 			registry.TypedefIndex[qualified(meta.Namespace, name)] = &typedef

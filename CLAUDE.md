@@ -148,6 +148,17 @@ ergonomic wrapper per improvable function:
   `CountParamIndex`) collapse into a single `[]T` (count derived from `len`
   at the call site). Applies only to typed-pointer arrays with a unique,
   input-only integer count; shared/out counts stay raw. (~600 wrappers)
+- an `[out,retval]` param is elevated out of the signature into a Go return
+  value (`Get_X() (T, error)`). For flat functions only when the raw return
+  is a clean status (HRESULT / BOOL+SetLastError / void); for COM methods
+  whenever the return is HRESULT. (~8,600 COM methods + flat functions)
+
+**Handle RAII** (`<pkg>_handles.go`): each `[RAIIFree]` handle typedef gets a
+`Close<Handle>(h) error` helper that calls the closer (looked up via the
+registry's function-owner index, possibly cross-namespace) and normalizes
+its return to `error`. Emitted only when the closer is unambiguous, was
+emitted by the raw tier, takes exactly the handle, and has a normalizable
+return; otherwise skipped with a diagnostic (~107 closers).
 
 Functions with nothing to improve are skipped (no pointless alias). Types
 resolve with `Context.QualifyOwn = true` so even same-namespace raw types are

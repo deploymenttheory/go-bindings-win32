@@ -84,7 +84,11 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 	functionImports := typemap.ImportSet{}
 	interfaceModels := g.buildInterfaceModels(meta, interfaceImports)
 	functionModels := g.buildFunctionModels(meta, functionImports)
-	if len(functionModels) == 0 && len(interfaceModels) == 0 {
+	// Handle closers claim names after interfaces and functions so a
+	// Close<Handle> helper can never shadow one of them.
+	handleImports := typemap.ImportSet{}
+	handleBody := g.buildHandleClosers(meta, handleImports)
+	if len(functionModels) == 0 && len(interfaceModels) == 0 && handleBody == "" {
 		return false, nil
 	}
 
@@ -112,6 +116,12 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) (bool, error) {
 			body.WriteString(block)
 		}
 		if err := g.writeFile(packageDir, packageName+"_functions.go", packageName, functionImports, body.String()); err != nil {
+			return false, err
+		}
+	}
+
+	if handleBody != "" {
+		if err := g.writeFile(packageDir, packageName+"_handles.go", packageName, handleImports, handleBody); err != nil {
 			return false, err
 		}
 	}

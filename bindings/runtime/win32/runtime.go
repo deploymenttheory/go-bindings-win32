@@ -68,6 +68,15 @@ func Bool32(v bool) int32 {
 	return 0
 }
 
+// BoolErr converts a Win32 BOOL result (no GetLastError) into an error: nil
+// when non-zero (success), a generic failure error when zero.
+func BoolErr(b int32) error {
+	if b != 0 {
+		return nil
+	}
+	return windows.ERROR_INVALID_FUNCTION
+}
+
 // Succeeded reports whether an HRESULT indicates success (top bit clear).
 // Generated COM methods return raw HRESULT values (as the typed
 // foundation.HRESULT); pass them here as int32.

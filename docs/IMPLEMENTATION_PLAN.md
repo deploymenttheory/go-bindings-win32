@@ -22,11 +22,11 @@
 > live-tested. **M5 (arch)**: generated files are tagged
 > `windows && (amd64 || arm64)` — verified to cross-compile for both; 386 is
 > excluded. The generator (M0–M5) is feature-complete for the raw + idiomatic
-> Win32 surface. **M6 (deeper ergonomics)** has begun: array-pointer + input
-> count parameter pairs now collapse into Go slices (~600 wrappers, count
-> derived from `len`), live-tested via `WaitForMultipleObjects`. Further M6
-> candidates: out-param elevation to return values, handle RAII from
-> `[RAIIFree]`. See CLAUDE.md for the as-built architecture.
+> Win32 surface. **M6 (deeper ergonomics) is implemented**: array+count →
+> Go slices (~600 wrappers), `[out,retval]` elevation to return values
+> (~8,600 COM methods + flat functions), and handle RAII — `Close<Handle>`
+> helpers from `[RAIIFree]` (~107 closers) — all live-tested. See CLAUDE.md
+> for the as-built architecture.
 
 Generate idiomatic Go bindings for the entire Win32 API from Microsoft's
 `win32metadata`, mirroring the architecture of the sibling

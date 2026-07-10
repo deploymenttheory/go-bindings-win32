@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build & test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Build
+        run: go build ./...
+
+      # Generated syscall wrappers trip vet's unsafe.Pointer heuristic by
+      # design; vet everything hand-written instead.
+      - name: Vet (non-generated packages)
+        run: go vet ./cmd/... ./internal/... ./acceptance/ ./bindings/runtime/...
+
+      - name: Unit tests (winmd reader + ingest)
+        run: go test ./internal/...
+
+      - name: Acceptance tests (live Win32 calls + ABI layout gate)
+        run: go test ./acceptance/
+
+  regen:
+    name: Regeneration determinism gate
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Ingest committed winmd
+        run: go run ./cmd/generate ingest
+
+      - name: Validate metadata
+        run: go run ./cmd/generate validate
+
+      - name: Regenerate bindings + ABI test
+        run: go run ./cmd/generate abitest
+
+      - name: Diagnostics ratchet
+        run: go run ./cmd/generate bindings --diagnostics-baseline metadata/diagnostics-baseline.json
+
+      - name: Generated output must match the committed tree
+        shell: bash
+        run: |
+          git add -N bindings acceptance
+          git diff --exit-code --stat -- bindings acceptance

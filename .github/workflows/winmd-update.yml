@@ -1,0 +1,87 @@
+name: winmd update
+
+# Watches NuGet for new Microsoft.Windows.SDK.Win32Metadata releases. When
+# one appears: download it, re-ingest, regenerate everything, and open a PR
+# whose body carries the semantic API diff between the old and new metadata.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Ingest the currently committed winmd (diff baseline)
+        run: go run ./cmd/generate ingest --out old-metadata
+
+      - name: Fetch the latest winmd from NuGet
+        id: fetch
+        shell: bash
+        run: |
+          go run ./cmd/generate fetch-metadata | tee fetch.log
+          if git diff --quiet -- metadata/winmd; then
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "updated=true" >> "$GITHUB_OUTPUT"
+            echo "version=$(python -c "import json;print(json.load(open('metadata/winmd/PROVENANCE.json'))['version'])")" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Re-ingest the new winmd
+        if: steps.fetch.outputs.updated == 'true'
+        run: go run ./cmd/generate ingest
+
+      - name: Validate the new metadata
+        if: steps.fetch.outputs.updated == 'true'
+        run: go run ./cmd/generate validate
+
+      - name: Semantic API diff for the PR body
+        if: steps.fetch.outputs.updated == 'true'
+        shell: bash
+        run: |
+          {
+            echo "Automated update to Microsoft.Windows.SDK.Win32Metadata ${{ steps.fetch.outputs.version }}."
+            echo
+            go run ./cmd/generate diff --old old-metadata --new metadata/win32 | head -c 60000
+          } > pr-body.md
+
+      - name: Regenerate bindings + ABI test
+        if: steps.fetch.outputs.updated == 'true'
+        run: go run ./cmd/generate abitest
+
+      - name: Rewrite the diagnostics baseline (reviewed via this PR)
+        if: steps.fetch.outputs.updated == 'true'
+        run: go run ./cmd/generate bindings --diagnostics metadata/diagnostics-baseline.json
+
+      - name: Build and test the regenerated tree
+        if: steps.fetch.outputs.updated == 'true'
+        run: |
+          go build ./...
+          go test ./internal/... ./acceptance/
+
+      - name: Open pull request
+        if: steps.fetch.outputs.updated == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/winmd-update
+          commit-message: "chore(metadata): update winmd to ${{ steps.fetch.outputs.version }}"
+          title: "chore(metadata): update winmd to ${{ steps.fetch.outputs.version }}"
+          body-path: pr-body.md
+          add-paths: |
+            metadata/winmd/
+            metadata/diagnostics-baseline.json
+            bindings/
+            acceptance/abi_generated_test.go
+          delete-branch: true

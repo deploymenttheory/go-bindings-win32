@@ -1,0 +1,49 @@
+{{define "dll"}}var (
+{{- range .}}
+	{{.VarName}} = win32.NewDLL("{{.FileName}}")
+{{- end}}
+)
+
+var (
+{{- range .}}
+{{- $dll := .VarName}}
+{{- range .Procs}}
+	{{.VarName}} = {{$dll}}.NewProc("{{.ExportName}}")
+{{- end}}
+{{- end}}
+)
+
+{{end}}
+
+{{define "function"}}
+{{- range .CommentLines}}// {{.}}
+{{end -}}
+func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
+{{- if eq .ReturnKind 0}}
+	syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+{{- else if eq .ReturnKind 1}}
+	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+{{- else if eq .ReturnKind 2}}
+	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	ret := {{.RetExpr}}
+	if {{join .FailureChecks " || "}} {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+{{- else if eq .ReturnKind 3}}
+	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	return {{.RetExpr}}
+{{- else if eq .ReturnKind 4}}
+	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	if e1 != 0 {
+		return {{.RetExpr}}, e1
+	}
+	return {{.RetExpr}}, nil
+{{- end}}
+}
+
+{{end}}

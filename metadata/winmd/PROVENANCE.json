@@ -1,0 +1,8 @@
+{
+  "package": "Microsoft.Windows.SDK.Win32Metadata",
+  "version": "71.0.14-preview",
+  "source": "https://api.nuget.org/v3-flatcontainer/microsoft.windows.sdk.win32metadata/71.0.14-preview/microsoft.windows.sdk.win32metadata.71.0.14-preview.nupkg",
+  "file": "Windows.Win32.winmd",
+  "sha256": "b64ee4818a7ed9f9d135038d58c51bd08369184d4d5ed428f20e9de55df8121d",
+  "fetched": "2026-07-10"
+}

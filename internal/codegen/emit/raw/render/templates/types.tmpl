@@ -1,0 +1,50 @@
+{{define "enum"}}
+{{- if .DocURL}}// {{.TypeName}}: {{.DocURL}}
+{{end -}}
+type {{.TypeName}} {{.BaseType}}
+
+{{if .Members}}const (
+{{- range .Members}}
+	{{.Name}} {{$.TypeName}} = {{.Value}}
+{{- end}}
+)
+
+{{end}}{{end}}
+
+{{define "struct"}}
+{{- if .DocURL}}// {{.TypeName}}: {{.DocURL}}
+{{end -}}
+{{- if .IsUnionBlob}}// {{.TypeName}} is a C union; the raw tier exposes its correctly sized
+// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+{{end -}}
+type {{.TypeName}} struct {
+{{- range .Fields}}
+	{{.Name}} {{.GoType}}
+{{- end}}
+}
+
+{{end}}
+
+{{define "typedef"}}
+{{- if .DocURL}}// {{.TypeName}}: {{.DocURL}}
+{{end -}}
+{{- if .FreeFunc}}// Release with {{.FreeFunc}}.
+{{end -}}
+{{- if .InvalidValues}}// Invalid values: {{join .InvalidValues ", "}}.
+{{end -}}
+type {{.TypeName}} {{.Backing}}
+
+{{end}}
+
+{{define "constant"}}{{if .IsVar}}var {{.Name}} {{.GoType}} = {{.Literal}}
+{{else}}const {{.Name}} {{.GoType}} = {{.Literal}}
+{{end}}{{end}}
+
+{{define "delegate"}}
+{{- if .DocURL}}// {{.TypeName}}: {{.DocURL}}
+{{end -}}
+// {{.TypeName}} is a callback pointer: create one with NewCallback (package
+// syscall) using the shape {{.Signature}}.
+type {{.TypeName}} uintptr
+
+{{end}}

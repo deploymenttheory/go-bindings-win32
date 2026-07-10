@@ -48,3 +48,6 @@ __pycache__/
 *.exe
 *.dylib
 *.so
+# Derived IR cache: regenerate with `go run ./cmd/generate/ ingest` from the
+# committed metadata/winmd/Windows.Win32.winmd (122MB of JSON, 4s to rebuild).
+metadata/win32/

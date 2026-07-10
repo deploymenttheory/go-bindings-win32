@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	idiowin "github.com/deploymenttheory/go-bindings-win32/internal/codegen/emit/idiomatic"
 	rawwin "github.com/deploymenttheory/go-bindings-win32/internal/codegen/emit/raw"
 	"github.com/deploymenttheory/go-bindings-win32/internal/codegen/pipeline"
 	"github.com/deploymenttheory/go-bindings-win32/internal/diagnostics"
@@ -36,6 +37,8 @@ func main() {
 		err = runIngest(os.Args[2:])
 	case "bindings":
 		err = runBindings(os.Args[2:])
+	case "idiomatic":
+		err = runIdiomatic(os.Args[2:])
 	case "abitest":
 		err = runABITest(os.Args[2:])
 	case "validate":
@@ -61,6 +64,7 @@ commands:
   fetch-metadata  download the latest winmd from NuGet into metadata/winmd
   ingest          project the winmd into per-namespace .w32meta.json files
   bindings        emit raw Go bindings from the .w32meta.json metadata
+  idiomatic       emit the idiomatic wrapper tier over the raw bindings
   abitest         generate the ABI layout acceptance test
   validate        structural integrity checks over the metadata
   diff            semantic API diff between two metadata trees
@@ -192,6 +196,42 @@ func runBindings(args []string) error {
 
 // modulePath is this module's import path root.
 const modulePath = "github.com/deploymenttheory/go-bindings-win32"
+
+// runIdiomatic emits the idiomatic tier. It first runs the raw emitter (into
+// a scratch dir it discards) to learn which functions were emitted and to
+// share the mapper's degradation decisions, then emits the wrappers.
+func runIdiomatic(args []string) error {
+	flags := flag.NewFlagSet("idiomatic", flag.ExitOnError)
+	metadataDir := flags.String("metadata", filepath.Join("metadata", "win32"), "directory of .w32meta.json files")
+	rawDir := flags.String("raw", filepath.Join("bindings", "win32"), "raw bindings root (probed for emitted functions)")
+	outDir := flags.String("out", filepath.Join("opinionated", "idiomatic", "win32"), "output root")
+	verbose := flags.Bool("v", false, "print diagnostics")
+	if err := flags.Parse(args); err != nil {
+		return err
+	}
+	registry, err := pipeline.LoadAll(*metadataDir)
+	if err != nil {
+		return err
+	}
+	// Probe the raw tier: emit it to discover the emitted-function set and
+	// populate the shared mapper, writing to the real raw dir (idempotent).
+	rawGen := rawwin.New(registry, modulePath, *rawDir)
+	if _, err := rawGen.EmitAll(nil); err != nil {
+		return err
+	}
+	idioGen := idiowin.New(registry, rawGen.Mapper(), rawGen.EmittedFunctions(), modulePath, *outDir)
+	written, err := idioGen.EmitAll()
+	if err != nil {
+		return err
+	}
+	if *verbose {
+		for _, diagnostic := range idioGen.Diagnostics {
+			fmt.Fprintln(os.Stderr, "diagnostic:", diagnostic)
+		}
+	}
+	fmt.Printf("emitted %d idiomatic packages → %s (%d diagnostics)\n", written, *outDir, len(idioGen.Diagnostics))
+	return nil
+}
 
 // runABITest regenerates all bindings (collecting expected struct layouts)
 // and writes the sampled ABI acceptance test.

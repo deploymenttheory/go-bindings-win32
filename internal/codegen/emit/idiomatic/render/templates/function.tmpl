@@ -1,0 +1,19 @@
+{{define "function"}}
+{{- range .CommentLines}}// {{.}}
+{{end -}}
+func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
+{{- range .Preamble}}
+	{{.}}
+{{- end}}
+{{- if eq .Shape 0}}
+	{{if .ReturnSig}}return {{end}}{{.RawCall}}
+{{- else if eq .Shape 1}}
+	return {{.RawCall}}
+{{- else if eq .Shape 2}}
+	{{.RetExpr}}
+{{- else if eq .Shape 3}}
+	return {{.RawCall}} != 0
+{{- end}}
+}
+
+{{end}}

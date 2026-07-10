@@ -15,8 +15,12 @@
 > wrappers (43,656 methods) with base-chain embedding, absolute slot
 > numbering, and IID constants; a live acceptance test drives IStream
 > end-to-end (create/write/seek/read/QueryInterface/Release).
-> Remaining: M4 idiomatic tier, M5 arch build tags (amd64-only today).
-> See CLAUDE.md for the as-built architecture.
+> **M4 (idiomatic tier) is implemented** for free functions: ~8,200 ergonomic
+> wrappers across 208 packages under `opinionated/idiomatic/win32/` — Go
+> strings for PWSTR, bool for BOOL, HRESULT→error, reserved-param elision,
+> `-W` de-suffixing — with live acceptance tests. COM ergonomics and M5 arch
+> build tags (amd64-only today) remain. See CLAUDE.md for the as-built
+> architecture.
 
 Generate idiomatic Go bindings for the entire Win32 API from Microsoft's
 `win32metadata`, mirroring the architecture of the sibling

@@ -60,6 +60,14 @@ func LastError(errno Errno) error {
 	return windows.ERROR_INVALID_PARAMETER
 }
 
+// Bool32 converts a Go bool to the Win32 BOOL word (1/0).
+func Bool32(v bool) int32 {
+	if v {
+		return 1
+	}
+	return 0
+}
+
 // Succeeded reports whether an HRESULT indicates success (top bit clear).
 // Generated COM methods return raw HRESULT values (as the typed
 // foundation.HRESULT); pass them here as int32.

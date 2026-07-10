@@ -34,6 +34,9 @@ go run ./cmd/generate/ bindings --namespace System.Threading
 # Verbose diagnostics (degradations, skips, cycle breaks)
 go run ./cmd/generate/ bindings -v
 
+# Emit the idiomatic wrapper tier (opinionated/idiomatic/win32/) over the raw bindings
+go run ./cmd/generate/ idiomatic
+
 # Regenerate bindings AND the ABI layout acceptance test (acceptance/abi_generated_test.go)
 go run ./cmd/generate/ abitest
 
@@ -127,6 +130,27 @@ Function shapes (view.ReturnKind):
 - other + SetLastError → `(T, error)` where err is the advisory GetLastError
 - no SetLastError → bare `T`
 
+### Idiomatic tier (`opinionated/idiomatic/win32/`, pkg per namespace)
+
+`internal/codegen/emit/idiomatic/` (pkg `idiowin`) is a second view→render
+leaf that wraps the raw tier — hermetic (only calls the raw packages).
+`generate idiomatic` first runs the raw emitter to learn the emitted-function
+set and share the mapper's exact degradation decisions (so a wrapper's
+resolved types always match the raw function it calls), then emits one
+ergonomic wrapper per improvable function:
+
+- input `PWSTR`/`PCWSTR` → Go `string` (UTF-16 at the boundary)
+- input `BOOL` → Go `bool`; plain `BOOL` return → `bool`
+- `HRESULT` return (no SetLastError) → `error`
+- `[Reserved]` params elided (passed as the raw type's zero)
+- `-W` functions de-suffixed when the bare name is free
+
+Functions with nothing to improve are skipped (no pointless alias). Types
+resolve with `Context.QualifyOwn = true` so even same-namespace raw types are
+package-qualified. Selection mirrors the raw tier exactly (metadata order,
+first amd64 entry per name) so signatures always align. COM ergonomics are a
+later increment; v1 covers free functions (~8,200 wrappers, 208 packages).
+
 ### Name rules (`internal/codegen/naming/`)
 
 - Everything package-level is exported via `naming.Export` (`select` →
@@ -160,7 +184,8 @@ DO-NOT-EDIT header are never touched.
 
 - `ci.yml` — build, vet (non-generated packages only: generated syscall
   wrappers trip vet's unsafe.Pointer heuristic by design), unit + acceptance
-  tests, then the regeneration gate: ingest → validate → abitest → ratchet →
+  tests, then the regeneration gate: ingest → validate → abitest → idiomatic
+  → ratchet →
   `git diff --exit-code` over `bindings/` + `acceptance/`.
 - `winmd-update.yml` — weekly + manual: `fetch-metadata` checks NuGet; on a
   new version it re-ingests, regenerates, rewrites the baseline, and opens a

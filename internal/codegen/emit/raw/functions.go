@@ -35,6 +35,10 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 		}
 		model.GoName = goName
 		model.ProcVar = "proc" + goName
+		if g.emittedFunctions[meta.Namespace] == nil {
+			g.emittedFunctions[meta.Namespace] = map[string]bool{}
+		}
+		g.emittedFunctions[meta.Namespace][goName] = true
 		functions = append(functions, model)
 		exportName := function.Name
 		if function.EntryPoint != "" {

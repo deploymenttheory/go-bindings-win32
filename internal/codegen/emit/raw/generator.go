@@ -38,8 +38,22 @@ type Generator struct {
 	// files from earlier runs can be pruned afterwards.
 	writtenFiles map[string]bool
 
+	// emittedFunctions records which function wrappers each namespace
+	// actually emitted (namespace → exported Go name), consumed by the
+	// idiomatic tier so it never wraps a skipped function.
+	emittedFunctions map[string]map[string]bool
+
 	// Diagnostics collects all degradations and skips (ratchet input).
 	Diagnostics []string
+}
+
+// Mapper exposes the type mapper (blocked edges, skip set) so the idiomatic
+// tier resolves types with identical degradation decisions.
+func (g *Generator) Mapper() *typemap.Mapper { return g.mapper }
+
+// EmittedFunctions returns namespace → set of emitted function Go names.
+func (g *Generator) EmittedFunctions() map[string]map[string]bool {
+	return g.emittedFunctions
 }
 
 // New builds a Generator. Import cycles among namespaces are computed up
@@ -65,6 +79,7 @@ func (g *Generator) EmitAll(filter map[string]bool) (int, error) {
 	// pass will skip; keep only real-pass records.
 	g.abiRecords = map[string]ABIRecord{}
 	g.writtenFiles = map[string]bool{}
+	g.emittedFunctions = map[string]map[string]bool{}
 	emitted := map[string]bool{}
 	pending := make([]string, 0, len(g.registry.Namespaces))
 	if len(filter) > 0 {

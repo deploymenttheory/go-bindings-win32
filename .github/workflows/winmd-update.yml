@@ -61,6 +61,10 @@ jobs:
         if: steps.fetch.outputs.updated == 'true'
         run: go run ./cmd/generate abitest
 
+      - name: Regenerate idiomatic tier
+        if: steps.fetch.outputs.updated == 'true'
+        run: go run ./cmd/generate idiomatic
+
       - name: Rewrite the diagnostics baseline (reviewed via this PR)
         if: steps.fetch.outputs.updated == 'true'
         run: go run ./cmd/generate bindings --diagnostics metadata/diagnostics-baseline.json
@@ -83,5 +87,6 @@ jobs:
             metadata/winmd/
             metadata/diagnostics-baseline.json
             bindings/
+            opinionated/
             acceptance/abi_generated_test.go
           delete-branch: true

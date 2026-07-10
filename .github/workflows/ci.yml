@@ -29,6 +29,9 @@ jobs:
       - name: Vet (non-generated packages)
         run: go vet ./cmd/... ./internal/... ./acceptance/ ./bindings/runtime/...
 
+      - name: Build idiomatic tier
+        run: go build ./opinionated/...
+
       - name: Unit tests (winmd reader + ingest)
         run: go test ./internal/...
 
@@ -55,11 +58,14 @@ jobs:
       - name: Regenerate bindings + ABI test
         run: go run ./cmd/generate abitest
 
+      - name: Regenerate idiomatic tier
+        run: go run ./cmd/generate idiomatic
+
       - name: Diagnostics ratchet
         run: go run ./cmd/generate bindings --diagnostics-baseline metadata/diagnostics-baseline.json
 
       - name: Generated output must match the committed tree
         shell: bash
         run: |
-          git add -N bindings acceptance
-          git diff --exit-code --stat -- bindings acceptance
+          git add -N bindings opinionated acceptance
+          git diff --exit-code --stat -- bindings opinionated acceptance
